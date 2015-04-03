@@ -10,6 +10,9 @@ cdef class CSRSparseMatrix:
   """
   Compressed Sparse Row Format matrix.
 
+  Note:
+    This matrix can **not** be modified.
+
   """
   cdef:
     public int nrow  # number of rows

@@ -6,6 +6,9 @@ ll_mat extension.
 
 from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
 
+cdef int LL_MAT_DEFAULT_SIZE_HINT = 40
+cdef double LL_MAT_INCREASE_FACTOR = 1.5
+
 cdef class LLSparseMatrix:
   """
   Linked-List Format matrix.
@@ -17,22 +20,27 @@ cdef class LLSparseMatrix:
     public int nrow  # number of rows
     public int ncol  # number of columns
     public int nnz  # number of values stored
-    public int symmetric  # true if symmetric matrix
+    public bint is_symmetric  # true if symmetric matrix
 
     int     size_hint
-    int     store_zeros  # whether to store zero values
-    int     nalloc  # allocated size of value and index arrays
+    bint    store_zeros
+    public int     nalloc  # allocated size of value and index arrays
     int     free  # index to first element in free chain
     double *val  # pointer to array of values
     int    *col  # pointer to array of indices
     int    *link  # pointer to array of indices
     int    *root  # pointer to array of indices
 
-  def __cinit__(self, int nrow, int ncol, int size_hint, int store_zeros=0):
+  def __cinit__(self, int nrow, int ncol, int size_hint=LL_MAT_DEFAULT_SIZE_HINT, bint store_zeros=False):
     self.nrow = nrow
     self.ncol = ncol
     self.nnz = 0
-    self.size_hint = max(1, size_hint)
+
+    self.is_symmetric = False
+
+    if size_hint < 1:
+      raise ValueError('size_hint (%d) must be >= 1' % size_hint)
+    self.size_hint = size_hint
     self.store_zeros = store_zeros
 
     val = <double *> PyMem_Malloc(self.size_hint * sizeof(double))
@@ -55,6 +63,9 @@ cdef class LLSparseMatrix:
       raise MemoryError()
     self.root = root
 
+    self.nalloc = self.size_hint
+    self.free = -1
+
     cdef int i
     for i in xrange(nrow):
       root[i] = -1
@@ -69,11 +80,133 @@ cdef class LLSparseMatrix:
     s = "CySparseMatrix of size %d by %d with %d values" % (self.nrow, self.ncol, self.nnz)
     return s
 
+
+  ######################################################################################################################
+  # Get/Set items
+  ######################################################################################################################
   def __setitem__(self, tuple key, double value):
-    cdef int row = key[0]
-    cdef int col = key[1]
+    cdef int i = key[0]
+    cdef int j = key[1]
+
+
+    cdef void *temp
+    cdef int k, new_elem, last, col
+
+    cdef int nalloc_new
+
+    if self.is_symmetric and i < j:
+      raise IndexError("write operation to upper triangle of symmetric matrix")
+
+    if i < 0 or i >= self.nrow or j < 0 or j >= self.ncol:
+      raise IndexError("indices out of range")
+
+    # Find element to be set (or removed)
+    col = last = -1
+    k = self.root[i]
+    while k != -1:
+      col = self.col[k]
+      if col >= j:
+        break
+      last = k
+      k = self.link[k]
+
+
+
+    if value != 0.0 or self.store_zeros:
+      if col == j:
+        # element already exist
+        self.val[k] = value
+      else:
+        # new element
+        # find location for new element
+        if self.free != -1:
+          # use element from the free chain
+          new_elem = self.free
+          self.free = self.link[new_elem]
+
+        else:
+          # append new element to the end
+          new_elem = self.nnz
+
+          # test if there is space for a new element
+          if self.nnz == self.nalloc:
+            # we have to reallocate some space
+            #cdef int nalloc_new
+
+            # increase size of col, val and link arrays
+            nalloc_new = <int>(<double>LL_MAT_INCREASE_FACTOR * self.nalloc) + 1
+
+            temp = <int *> PyMem_Realloc(self.col, nalloc_new * sizeof(int))
+            if not temp:
+              raise MemoryError()
+            self.col = <int*>temp
+
+            temp = <int *> PyMem_Realloc(self.link, nalloc_new * sizeof(int))
+            if not temp:
+              raise MemoryError()
+            self.link = <int *>temp
+
+            temp = <double *> PyMem_Realloc(self.val, nalloc_new * sizeof(double))
+            if not temp:
+              raise MemoryError()
+            self.val = <double *>temp
+
+            self.nalloc = nalloc_new
+
+        self.val[new_elem] = value
+        self.col[new_elem] = j
+        self.link[new_elem] = k
+
+        if last == -1:
+          self.root[i] = new_elem
+        else:
+          self.link[last] = new_elem
+
+        self.nnz += 1
+
+    else:
+      # value == 0.0
+      if col == j:
+        # relink row i
+        if last == -1:
+          self.root[i] = self.link[k]
+        else:
+          self.link[last] = self.link[k]
+        # add element to free list
+        self.link[k] = self.free
+        self.free = k
+
+        self.nnz -= 1
+
+
 
   def __getitem__(self, tuple key):
-    print "Requesting element at (%d,%d)" % (key[0], key[1])
+    #print "Requesting element at (%d,%d)" % (key[0], key[1])
+    cdef int i = key[0]
+    cdef int j = key[1]
+
+    cdef int k, t
+
+    if i < 0 or i >= self.nrow or j < 0 or j >= self.ncol:
+      raise IndexError("indices out of range")
+
+    if self.is_symmetric and i < j:
+      t = i; i = j; j = t
+
+    k = self.root[i]
+
+    while k != -1:
+      if self.col[k] == j:
+        return self.val[k]
+      k = self.link[k]
+
     return 0.0
 
+  ######################################################################################################################
+  # Matrix conversions
+  ######################################################################################################################
+  def to_csr(self):
+    pass
+
+  def to_csc(self):
+    pass
