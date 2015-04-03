@@ -12,7 +12,6 @@ print matrix[0,4]
 print matrix[2,2]
 
 print matrix.nnz
-print matrix.nalloc
 
 try:
   matrix[100, 1000, 1] = -45343
@@ -32,19 +31,21 @@ except IndexError as e:
 
 
 print matrix.nnz
-print matrix.nalloc
 
 matrix[1,1] = 9
 matrix[2,2] = 10
 matrix[3,3] = 11
 
 print matrix.nnz
-print matrix.nalloc
 
 matrix[1,4] = 24323
 matrix[2,4] = -876387263872
 
 print matrix.nnz
-print matrix.nalloc
+
+print '=' * 80
+print "element: " + str(matrix[4, 4])
+
+print matrix[4, 4, 4]
 
 

@@ -17,19 +17,19 @@ cdef class LLSparseMatrix:
     Despite the name, this matrix doesn't use any linked list.
   """
   cdef:
-    public int nrow  # number of rows
-    public int ncol  # number of columns
-    public int nnz  # number of values stored
+    public int nrow   # number of rows
+    public int ncol   # number of columns
+    public int nnz    # number of values stored
     public bint is_symmetric  # true if symmetric matrix
 
     int     size_hint
     bint    store_zeros
-    public int     nalloc  # allocated size of value and index arrays
-    int     free  # index to first element in free chain
-    double *val  # pointer to array of values
-    int    *col  # pointer to array of indices
-    int    *link  # pointer to array of indices
-    int    *root  # pointer to array of indices
+    int     nalloc    # allocated size of value and index arrays
+    int     free      # index to first element in free chain
+    double *val       # pointer to array of values
+    int    *col       # pointer to array of indices
+    int    *link      # pointer to array of indices
+    int    *root      # pointer to array of indices
 
   def __cinit__(self, int nrow, int ncol, int size_hint=LL_MAT_DEFAULT_SIZE_HINT, bint store_zeros=False):
     self.nrow = nrow
@@ -77,28 +77,47 @@ cdef class LLSparseMatrix:
     PyMem_Free(self.root)
 
   def __repr__(self):
-    s = "CySparseMatrix of size %d by %d with %d values" % (self.nrow, self.ncol, self.nnz)
+    s = "LLSparseMatrix of size %d by %d with %d values" % (self.nrow, self.ncol, self.nnz)
     return s
 
 
   ######################################################################################################################
   # Get/Set items
   ######################################################################################################################
-  def __setitem__(self, tuple key, double value):
+  def _assert_well_formed_indexed_tuple(self, tuple key):
+    """
+    Assert the tuple given to find an item in the matrix is well formed.
+
+    Args:
+      key: A ``tuple`` ``(row, col)``.
+
+    Raises:
+      An ``IndexError`` if the ``key`` argument is not well formed.
+
+    """
+    if len(key) != 2:
+      raise IndexError('Index tuple must be of length 2 (not %d)' % len(key))
+
     cdef int i = key[0]
     cdef int j = key[1]
 
+    if i < 0 or i >= self.nrow or j < 0 or j >= self.ncol:
+      raise IndexError('indices out of range')
+
+
+  def __setitem__(self, tuple key, double value):
+    self._assert_well_formed_indexed_tuple(key)
+
+    cdef int i = key[0]
+    cdef int j = key[1]
+
+    if self.is_symmetric and i < j:
+      raise IndexError('write operation to upper triangle of symmetric matrix')
 
     cdef void *temp
     cdef int k, new_elem, last, col
 
     cdef int nalloc_new
-
-    if self.is_symmetric and i < j:
-      raise IndexError("write operation to upper triangle of symmetric matrix")
-
-    if i < 0 or i >= self.nrow or j < 0 or j >= self.ncol:
-      raise IndexError("indices out of range")
 
     # Find element to be set (or removed)
     col = last = -1
@@ -109,8 +128,6 @@ cdef class LLSparseMatrix:
         break
       last = k
       k = self.link[k]
-
-
 
     if value != 0.0 or self.store_zeros:
       if col == j:
@@ -178,17 +195,13 @@ cdef class LLSparseMatrix:
 
         self.nnz -= 1
 
-
-
   def __getitem__(self, tuple key):
-    #print "Requesting element at (%d,%d)" % (key[0], key[1])
+    self._assert_well_formed_indexed_tuple(key)
+
     cdef int i = key[0]
     cdef int j = key[1]
 
     cdef int k, t
-
-    if i < 0 or i >= self.nrow or j < 0 or j >= self.ncol:
-      raise IndexError("indices out of range")
 
     if self.is_symmetric and i < j:
       t = i; i = j; j = t
