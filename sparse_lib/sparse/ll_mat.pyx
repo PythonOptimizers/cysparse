@@ -275,7 +275,8 @@ cdef class LLSparseMatrix:
       for i in xrange(self.nrow):
         for j in xrange(self.ncol):
           val = mat[(i*self.ncol)+j]
-          print('%9.*f ' % (6, val), file=OUT, end='')
+          #print('%9.*f ' % (6, val), file=OUT, end='')
+          print('{0:9.6f} '.format(val), end='')
         print()
 
       PyMem_Free(mat)
