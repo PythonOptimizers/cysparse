@@ -6,8 +6,8 @@ ll_mat extension.
 
 from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
 
-cdef int LL_MAT_DEFAULT_SIZE_HINT = 40
-cdef double LL_MAT_INCREASE_FACTOR = 1.5
+cdef int LL_MAT_DEFAULT_SIZE_HINT = 40        # allocated size by default
+cdef double LL_MAT_INCREASE_FACTOR = 1.5      # reallocating factor if size is not enough, must be > 1
 
 cdef class LLSparseMatrix:
   """
@@ -16,6 +16,9 @@ cdef class LLSparseMatrix:
   Note:
     Despite the name, this matrix doesn't use any linked list.
   """
+  ######################################################################################################################
+  # Init/Free
+  ######################################################################################################################
   cdef:
     public int nrow   # number of rows
     public int ncol   # number of columns
@@ -75,11 +78,6 @@ cdef class LLSparseMatrix:
     PyMem_Free(self.col)
     PyMem_Free(self.link)
     PyMem_Free(self.root)
-
-  def __repr__(self):
-    s = "LLSparseMatrix of size %d by %d with %d values" % (self.nrow, self.ncol, self.nnz)
-    return s
-
 
   ######################################################################################################################
   # Get/Set items
@@ -148,9 +146,8 @@ cdef class LLSparseMatrix:
           # test if there is space for a new element
           if self.nnz == self.nalloc:
             # we have to reallocate some space
-            #cdef int nalloc_new
-
             # increase size of col, val and link arrays
+            assert LL_MAT_INCREASE_FACTOR > 1.0
             nalloc_new = <int>(<double>LL_MAT_INCREASE_FACTOR * self.nalloc) + 1
 
             temp = <int *> PyMem_Realloc(self.col, nalloc_new * sizeof(int))
@@ -223,3 +220,56 @@ cdef class LLSparseMatrix:
 
   def to_csc(self):
     pass
+
+  ######################################################################################################################
+  # String representations
+  ######################################################################################################################
+  def __repr__(self):
+    s = "LLSparseMatrix of size %d by %d with %d values" % (self.nrow, self.ncol, self.nnz)
+    return s
+
+
+########################################################################################################################
+# Factory methods
+########################################################################################################################
+def make_ll_sparse_matrix(**kwargs):
+  cdef int nrow = kwargs.get('nrow', -1)
+  cdef int ncol = kwargs.get('ncol', -1)
+  cdef int size_hint = kwargs.get('size_hint', LL_MAT_DEFAULT_SIZE_HINT)
+  matrix = kwargs.get('matrix', None)
+
+  # CASE 1
+  if matrix is None and nrow != -1 and ncol != -1:
+    return LLSparseMatrix(nrow=nrow, ncol=ncol, size_hint=size_hint)
+
+  # CASE 2
+  cdef double[:, :] matrix_view
+  cdef int i, j
+  cdef double value
+
+  if matrix is not None:
+    if len(matrix.shape) != 2:
+      raise IndexError('Matrix must be of dimension 2 (not %d)' % len(matrix.shape))
+
+    matrix_view = matrix
+
+    if nrow != -1:
+      if nrow != matrix.shape[0]:
+        raise IndexError('nrow (%d) doesn\'t match matrix row count' % nrow)
+
+    if ncol != -1:
+      if ncol != matrix.shape[1]:
+        raise IndexError('ncol (%d) doesn\'t match matrix col count' % ncol)
+
+    nrow = matrix.shape[0]
+    ncol = matrix.shape[1]
+
+    ll_mat = LLSparseMatrix(nrow=nrow, ncol=ncol, size_hint=size_hint)
+
+    for i in xrange(nrow):
+      for j in xrange(ncol):
+        value = matrix_view[i, j]
+        if value != 0.0:
+          ll_mat[i, j] = value
+
+    return ll_mat

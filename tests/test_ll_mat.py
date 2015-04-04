@@ -1,4 +1,4 @@
-from sparse_lib.sparse.ll_mat import LLSparseMatrix
+from sparse_lib.sparse.ll_mat import LLSparseMatrix, make_ll_sparse_matrix
 
 #class LLPySparseMatrix(LLCySparseMatrix):
 #  pass
@@ -46,6 +46,18 @@ print matrix.nnz
 print '=' * 80
 print "element: " + str(matrix[4, 4])
 
-print matrix[4, 4, 4]
+print matrix[4, 3]
+
+ll_mat = make_ll_sparse_matrix(nrow=3, ncol=3, size_hint=4)
+print ll_mat
+
+
+import numpy as np
+
+np_array = np.arange(24, dtype=np.dtype('d')).reshape((4,6))
+ll_mat2 = make_ll_sparse_matrix(matrix=np_array)
+
+print ll_mat2
+
 
 
