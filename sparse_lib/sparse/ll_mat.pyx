@@ -3,11 +3,15 @@ ll_mat extension.
 
 
 """
+from __future__ import print_function
 
 from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
 
+
 cdef int LL_MAT_DEFAULT_SIZE_HINT = 40        # allocated size by default
 cdef double LL_MAT_INCREASE_FACTOR = 1.5      # reallocating factor if size is not enough, must be > 1
+cdef int LL_MAT_PPRINT_ROW_THRESH = 500       # row threshold for choosing print format
+cdef int LL_MAT_PPRINT_COL_THRESH = 20        # column threshold for choosing print format
 
 cdef class LLSparseMatrix:
   """
@@ -228,11 +232,66 @@ cdef class LLSparseMatrix:
     s = "LLSparseMatrix of size %d by %d with %d values" % (self.nrow, self.ncol, self.nnz)
     return s
 
+  def print_to(self, OUT):
+    """
+    Print content of matrix to output stream.
+
+    Args:
+      OUT: Output stream: anything that supports
+    """
+    # TODO: adapt to any numbers... and allow for additional parameters to contral the output
+    cdef int i, k, first = 1;
+    symmetric_str = None
+
+    if self.is_symmetric:
+      symmetric_str = 'symmetric'
+    else:
+      symmetric_str = 'general'
+
+    cdef double *mat
+    cdef int j
+    cdef double val
+
+    if self.nrow <= LL_MAT_PPRINT_COL_THRESH and self.ncol <= LL_MAT_PPRINT_ROW_THRESH:
+
+
+      # create linear vector presentation
+      # TODO: put in a method of its own
+      mat = <double *> PyMem_Malloc(self.nrow * self.ncol * sizeof(double))
+
+      if not mat:
+        raise MemoryError()
+
+      for i in xrange(self.nrow):
+        for j in xrange(self.ncol):
+          mat[i* self.ncol + j] = 0.0
+        k = self.root[i]
+        while k != -1:
+          mat[(i*self.ncol)+self.col[k]] = self.val[k]
+          k = self.link[k]
+
+      print('LLSparseMatrix (%s, [%d,%d]):' % (symmetric_str, self.nrow, self.ncol), file=OUT)
+
+      for i in xrange(self.nrow):
+        for j in xrange(self.ncol):
+          val = mat[(i*self.ncol)+j]
+          print('%9.*f ' % (6, val), file=OUT, end='')
+        print()
+
+      PyMem_Free(mat)
+
 
 ########################################################################################################################
 # Factory methods
 ########################################################################################################################
 def make_ll_sparse_matrix(**kwargs):
+  """
+  TEMPORARY function...
+
+  Args:
+
+
+  """
   cdef int nrow = kwargs.get('nrow', -1)
   cdef int ncol = kwargs.get('ncol', -1)
   cdef int size_hint = kwargs.get('size_hint', LL_MAT_DEFAULT_SIZE_HINT)

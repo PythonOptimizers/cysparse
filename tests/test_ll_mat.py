@@ -59,5 +59,10 @@ ll_mat2 = make_ll_sparse_matrix(matrix=np_array)
 
 print ll_mat2
 
+print "?" * 80
+
+import sys
+ll_mat2.print_to(sys.stdout)
+
 
 
