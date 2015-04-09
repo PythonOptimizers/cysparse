@@ -1,4 +1,4 @@
-from sparse_lib.sparse.csc_mat import CSRSparseMatrix
+from sparse_lib.sparse.csr_mat import CSRSparseMatrix
 
 import unittest
 
@@ -6,13 +6,15 @@ import unittest
 class CSRSparseMatrixSimpleTestCase(unittest.TestCase):
     def setUp(self):
         self.n = 10
-        self.A = spmatrix.ll_mat(self.n, self.n)
-        self.S = spmatrix.ll_mat_sym(self.n)
+        self.A = CSRSparseMatrix(self.n, self.n)
+        print self.A
 
     def testCreate(self):
-        self.failUnless(self.A.shape == (self.n, self.n))
+        self.failUnless( (self.A.nrow, self.A.ncol) == (self.n, self.n))
         self.failUnless(self.A.nnz == 0)
-        self.failUnless(not self.A.issym)
-        self.failUnless(self.S.shape == (self.n, self.n))
-        self.failUnless(self.S.nnz == 0)
-        self.failUnless(self.S.issym)
+        self.failUnless(not self.A.is_symmetric)
+
+
+if __name__ == '__main__':
+    unittest.main()
+

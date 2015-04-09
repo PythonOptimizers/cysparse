@@ -5,7 +5,20 @@ ll_mat extension.
 """
 from __future__ import print_function
 
+from sparse_lib.sparse.csr_mat cimport CSRSparseMatrix, MakeCSRSparseMatrix
+
+#from sparse_lib.sparse.vec cimport ArrayWrapper
+# Import the Python-level symbols of numpy
+import numpy as np
+
+# Import the C-level symbols of numpy
+cimport numpy as cnp
+
+
 from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
+from libc.stdlib cimport malloc,free
+#from cython cimport view as cview
+from cpython cimport PyObject, Py_INCREF
 
 
 cdef int LL_MAT_DEFAULT_SIZE_HINT = 40        # allocated size by default
@@ -20,9 +33,9 @@ cdef class LLSparseMatrix:
     Note:
     Despite the name, this matrix doesn't use any linked list.
     """
-    ######################################################################################################################
+    ####################################################################################################################
     # Init/Free
-    ######################################################################################################################
+    ####################################################################################################################
     cdef:
         public int nrow   # number of rows
         public int ncol   # number of columns
@@ -84,9 +97,9 @@ cdef class LLSparseMatrix:
         PyMem_Free(self.link)
         PyMem_Free(self.root)
 
-    ######################################################################################################################
+    ####################################################################################################################
     # Get/Set items
-    ######################################################################################################################
+    ####################################################################################################################
     def _assert_well_formed_indexed_tuple(self, tuple key):
         """
         Assert the tuple given to find an item in the matrix is well formed.
@@ -217,20 +230,69 @@ cdef class LLSparseMatrix:
 
         return 0.0
 
-    ######################################################################################################################
+    ####################################################################################################################
     # Matrix conversions
-    ######################################################################################################################
+    ####################################################################################################################
     def to_csr(self):
-        pass
+        """
+        Create a corresponding CSRSparseMatrix.
+
+        Warning:
+            Memory **must** be freed by the caller!
+            Column indices are **not** necessarily sorted!
+        """
+
+        cdef int * ind = <int *> PyMem_Malloc((self.nrow + 1) * sizeof(int))
+        if not ind:
+            raise MemoryError()
+
+        cdef int * col =  <int*> PyMem_Malloc(self.nnz * sizeof(int))
+        if not col:
+            raise MemoryError()
+
+        cdef double * val = <double *> PyMem_Malloc(self.nnz * sizeof(double))
+        if not val:
+            raise MemoryError()
+
+        cdef int ind_col_index = 0  # current col index in col and val
+        ind[ind_col_index] = 0
+
+        cdef int i
+        cdef int k
+
+        # indices are NOT sorted for each row
+        for i in xrange(self.nrow):
+            k = self.root[i]
+
+            while k != -1:
+                col[ind_col_index] = self.col[k]
+                val[ind_col_index] = self.val[k]
+
+                ind_col_index += 1
+                k = self.link[k]
+
+            ind[i+1] = ind_col_index
+
+        csr_mat = MakeCSRSparseMatrix(nrow=self.nrow, ncol=self.ncol, nnz=self.nnz, ind=ind, col=col, val=val)
+
+        #set_col(csr_mat, col)
+
+        #csr_mat.ind = ind.data
+        #csr_mat.col = col
+        #csr_mat.val = val
+
+        #csr_mat.ok_status = True
+
+        return csr_mat
 
     def to_csc(self):
         pass
 
-    ######################################################################################################################
+    ####################################################################################################################
     # String representations
-    ######################################################################################################################
+    ####################################################################################################################
     def __repr__(self):
-        s = "LLSparseMatrix of size %d by %d with %d values" % (self.nrow, self.ncol, self.nnz)
+        s = "LLSparseMatrix of size %d by %d with %d non zero values" % (self.nrow, self.ncol, self.nnz)
         return s
 
     def print_to(self, OUT):
@@ -238,9 +300,9 @@ cdef class LLSparseMatrix:
         Print content of matrix to output stream.
 
         Args:
-            OUT: Output stream: anything that supports
+            OUT: Output stream that print (Python3) can print to.
         """
-        # TODO: adapt to any numbers... and allow for additional parameters to contral the output
+        # TODO: adapt to any numbers... and allow for additional parameters to control the output
         cdef int i, k, first = 1;
         symmetric_str = None
 
@@ -249,13 +311,16 @@ cdef class LLSparseMatrix:
         else:
             symmetric_str = 'general'
 
+        print('LLSparseMatrix (%s, [%d,%d]):' % (symmetric_str, self.nrow, self.ncol), file=OUT)
+
         cdef double *mat
         cdef int j
         cdef double val
 
+        if not self.nnz:
+            return
+
         if self.nrow <= LL_MAT_PPRINT_COL_THRESH and self.ncol <= LL_MAT_PPRINT_ROW_THRESH:
-
-
             # create linear vector presentation
             # TODO: put in a method of its own
             mat = <double *> PyMem_Malloc(self.nrow * self.ncol * sizeof(double))
@@ -270,8 +335,6 @@ cdef class LLSparseMatrix:
                 while k != -1:
                     mat[(i*self.ncol)+self.col[k]] = self.val[k]
                     k = self.link[k]
-
-            print('LLSparseMatrix (%s, [%d,%d]):' % (symmetric_str, self.nrow, self.ncol), file=OUT)
 
             for i in xrange(self.nrow):
                 for j in xrange(self.ncol):

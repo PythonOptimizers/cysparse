@@ -64,5 +64,47 @@ import sys
 
 ll_mat2.print_to(sys.stdout)
 
+print '&' * 80
+csr_mat = ll_mat2.to_csr()
+
+
+print csr_mat
+
+csr_mat.print_to(sys.stdout)
+
+csr_mat.set_col(3, 32)
+csr_mat.set_col(2, 6)
+csr_mat.set_col(1, 99)
+
+csr_mat.set_col(3, 32)
+csr_mat.set_col(6, 32)
+
+csr_mat.set_col(19, 32)
+
+#csr_mat.set_col(3, 32)
+#csr_mat.set_col(3, 32)
+#csr_mat.set_col(3, 32)
+#csr_mat.set_col(3, 32)
+
+
+
+
+
+
+status_ok, error_msg = csr_mat.is_well_constructed()
+if status_ok:
+    print "OK"
+
+if csr_mat.are_column_indices_sorted():
+    print "column indices are sorted!!!"
+
+
+csr_mat.debug_print()
+
+
+csr_mat.order_column_indices()
+
+
+csr_mat.debug_print()
 
 
