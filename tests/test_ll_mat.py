@@ -107,4 +107,8 @@ csr_mat.order_column_indices()
 
 csr_mat.debug_print()
 
+print "shape is "
+print csr_mat.shape
+
+
 

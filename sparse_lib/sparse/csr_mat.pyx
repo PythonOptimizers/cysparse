@@ -56,10 +56,12 @@ cdef class CSRSparseMatrix(ImmutableSparseMatrix):
     # Init/Free
     ####################################################################################################################
     def __cinit__(self, int nrow, int ncol, int nnz):
-        self.nrow = nrow
-        self.ncol = ncol
-        self.nnz = nnz
+        #self.nrow = nrow
+        #self.ncol = ncol
+        #self.nnz = nnz
 
+
+        print("toot: %d" % self.nrow)
         self.__status_ok = False
 
         #val = <double *> PyMem_Malloc(self.nnz * sizeof(double))
@@ -295,7 +297,7 @@ cdef MakeCSRSparseMatrix(int nrow, int ncol, int nnz, int * ind, int * col, doub
         val  (double *): C-array with values.
         order_column_indices (boolean): If ``True``, order in place C-array ``col``.
     """
-    csr_mat = CSRSparseMatrix(nrow, ncol, nnz)
+    csr_mat = CSRSparseMatrix(nrow=nrow, ncol=ncol, nnz=nnz)
 
     csr_mat.val = val
     csr_mat.ind = ind

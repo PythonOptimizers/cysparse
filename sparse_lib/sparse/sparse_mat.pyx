@@ -2,15 +2,43 @@
 
 cdef class SparseMatrix:
 
-    def __cinit__(self, *args, **kwargs):
-        pass
+    def __cinit__(self, **kwargs):
+        """
 
+        Warning:
+            Only use named arguments!
+        """
+        self.nrow = kwargs.get('nrow', -1)
+        self.ncol = kwargs.get('ncol', -1)
+        self.nnz = kwargs.get('nnz', -1)
+
+    property shape:
+
+        def __get__(self):
+            self.shape = (self.nrow, self.ncol)
+            return self.shape
+
+        def __set__(self, value):
+            raise AttributeError('Attribute shape is read-only')
+
+        def __del__(self):
+            raise AttributeError('Attribute shape is read-only')
 
 cdef class MutableSparseMatrix(SparseMatrix):
-    def __cinit__(self, *args, **kwargs):
+    def __cinit__(self, **kwargs):
+        """
+
+        Warning:
+            Only use named arguments!
+
+        """
         pass
 
-
 cdef class ImmutableSparseMatrix(SparseMatrix):
-    def __cinit__(self, *args, **kwargs):
+    def __cinit__(self, **kwargs):
+        """
+
+        Warning:
+            Only use named arguments!
+        """
         pass
