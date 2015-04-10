@@ -146,7 +146,8 @@ cdef class CSRSparseMatrix(ImmutableSparseMatrix):
             # do the test
             self.__col_indices_sorted_test_done = True
             # test each row
-            for i in xrange(self.nrow):
+            #for i in xrange(self.nrow):
+            for i from 0 <= i < self.nrow:
                 col_index = self.ind[i]
                 col_index_stop = self.ind[i+1] - 1
 
@@ -236,8 +237,10 @@ cdef class CSRSparseMatrix(ImmutableSparseMatrix):
             if not mat:
                 raise MemoryError()
 
-            for i in xrange(self.nrow):
-                for j in xrange(self.ncol):
+            #for i in xrange(self.nrow):
+            for i from 0 <= i < self.nrow:
+                #for j in xrange(self.ncol):
+                for j from 0 <= j < self.ncol:
                     mat[i* self.ncol + j] = 0.0
 
                 k = self.ind[i]
@@ -247,8 +250,10 @@ cdef class CSRSparseMatrix(ImmutableSparseMatrix):
 
 
 
-            for i in xrange(self.nrow):
-                for j in xrange(self.ncol):
+            #for i in xrange(self.nrow):
+            for i from 0 <= i < self.nrow:
+                #for j in xrange(self.ncol):
+                for j from 0 <= j < self.ncol:
                     val = mat[(i*self.ncol)+j]
                     #print('%9.*f ' % (6, val), file=OUT, end='')
                     print('{0:9.6f} '.format(val), end='')
@@ -265,17 +270,20 @@ cdef class CSRSparseMatrix(ImmutableSparseMatrix):
     def debug_print(self):
         cdef int i
         print("ind:")
-        for i in xrange(self.nrow + 1):
+        #for i in xrange(self.nrow + 1):
+        for i from 0 <= i < self.nrow + 1:
             print(self.ind[i], end=' ', sep=' ')
         print()
 
         print("col:")
-        for i in xrange(self.nnz):
+        #for i in xrange(self.nnz):
+        for i from 0 <= i < self.nnz:
             print(self.col[i], end=' ', sep=' ')
         print()
 
         print("val:")
-        for i in xrange(self.nnz):
+        #for i in xrange(self.nnz):
+        for i from 0 <= i < self.nnz:
             print(self.val[i], end=' == ', sep=' == ')
         print()
 

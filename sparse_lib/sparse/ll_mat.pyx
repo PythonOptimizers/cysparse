@@ -89,7 +89,8 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         self.free = -1
 
         cdef int i
-        for i in xrange(nrow):
+        #for i in xrange(nrow):
+        for i from 0 <= i < nrow:
             root[i] = -1
 
     def __dealloc__(self):
@@ -262,7 +263,8 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         cdef int k
 
         # indices are NOT sorted for each row
-        for i in xrange(self.nrow):
+        for i from 0 <= i < self.nrow:
+        #for i in xrange(self.nrow):
             k = self.root[i]
 
             while k != -1:
@@ -329,16 +331,20 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
             if not mat:
                 raise MemoryError()
 
-            for i in xrange(self.nrow):
-                for j in xrange(self.ncol):
+            #for i in xrange(self.nrow):
+            for i from 0 <= i < self.nrow:
+                #for j in xrange(self.ncol):
+                for j from 0 <= j < self.ncol:
                     mat[i* self.ncol + j] = 0.0
                 k = self.root[i]
                 while k != -1:
                     mat[(i*self.ncol)+self.col[k]] = self.val[k]
                     k = self.link[k]
 
-            for i in xrange(self.nrow):
-                for j in xrange(self.ncol):
+            #for i in xrange(self.nrow):
+            for i from 0 <= i < self.nrow:
+                #for j in xrange(self.ncol):
+                for j from 0 <= j < self.ncol:
                     val = mat[(i*self.ncol)+j]
                     #print('%9.*f ' % (6, val), file=OUT, end='')
                     print('{0:9.6f} '.format(val), end='')
@@ -391,8 +397,10 @@ def MakeLLSparseMatrix(**kwargs):
 
         ll_mat = LLSparseMatrix(nrow=nrow, ncol=ncol, size_hint=size_hint)
 
-        for i in xrange(nrow):
-            for j in xrange(ncol):
+        #for i in xrange(nrow):
+        for i from 0 <= i < nrow:
+            #for j in xrange(ncol):
+            for j from 0 <= j < ncol:
                 value = matrix_view[i, j]
                 if value != 0.0:
                     ll_mat[i, j] = value
