@@ -276,7 +276,7 @@ cdef class CSRSparseMatrix:
 ########################################################################################################################
 # Factory methods
 ########################################################################################################################
-cdef MakeCSRSparseMatrix(int nrow, int ncol, int nnz, int * ind, int * col, double * val, order_column_indices=False):
+cdef MakeCSRSparseMatrix(int nrow, int ncol, int nnz, int * ind, int * col, double * val):
     """
     Construct a CSRSparseMatrix object.
 
@@ -297,7 +297,7 @@ cdef MakeCSRSparseMatrix(int nrow, int ncol, int nnz, int * ind, int * col, doub
 
     csr_mat.__status_ok = True
 
-    if order_column_indices:
-        csr_mat.order_column_indices()
+    #if order_column_indices:
+    #    csr_mat.order_column_indices()
 
     return csr_mat
