@@ -448,24 +448,25 @@ struct __pyx_obj_10sparse_lib_6sparse_10sparse_mat_SparseMatrix {
   int ncol;
   int nnz;
   int is_symmetric;
+  int store_zeros;
   PyObject *shape;
 };
 
 
-/* "sparse_lib/sparse/sparse_mat.pxd":13
+/* "sparse_lib/sparse/sparse_mat.pxd":14
  *         object shape     # for compatibility with numpy, array, etc.
  * 
  * cdef class MutableSparseMatrix(SparseMatrix):             # <<<<<<<<<<<<<<
  *     cdef:
- *         int test
+ *         int size_hint
  */
 struct __pyx_obj_10sparse_lib_6sparse_10sparse_mat_MutableSparseMatrix {
   struct __pyx_obj_10sparse_lib_6sparse_10sparse_mat_SparseMatrix __pyx_base;
-  int test;
+  int size_hint;
 };
 
 
-/* "sparse_lib/sparse/sparse_mat.pxd":18
+/* "sparse_lib/sparse/sparse_mat.pxd":19
  * 
  * 
  * cdef class ImmutableSparseMatrix(SparseMatrix):             # <<<<<<<<<<<<<<
@@ -627,6 +628,8 @@ static PyObject *__pyx_pf_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_3nnz_
 static int __pyx_pf_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_3nnz_2__set__(struct __pyx_obj_10sparse_lib_6sparse_10sparse_mat_SparseMatrix *__pyx_v_self, PyObject *__pyx_v_value); /* proto */
 static PyObject *__pyx_pf_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_12is_symmetric___get__(struct __pyx_obj_10sparse_lib_6sparse_10sparse_mat_SparseMatrix *__pyx_v_self); /* proto */
 static int __pyx_pf_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_12is_symmetric_2__set__(struct __pyx_obj_10sparse_lib_6sparse_10sparse_mat_SparseMatrix *__pyx_v_self, PyObject *__pyx_v_value); /* proto */
+static PyObject *__pyx_pf_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_11store_zeros___get__(struct __pyx_obj_10sparse_lib_6sparse_10sparse_mat_SparseMatrix *__pyx_v_self); /* proto */
+static int __pyx_pf_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_11store_zeros_2__set__(struct __pyx_obj_10sparse_lib_6sparse_10sparse_mat_SparseMatrix *__pyx_v_self, PyObject *__pyx_v_value); /* proto */
 static int __pyx_pf_10sparse_lib_6sparse_10sparse_mat_19MutableSparseMatrix___cinit__(CYTHON_UNUSED struct __pyx_obj_10sparse_lib_6sparse_10sparse_mat_MutableSparseMatrix *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v_kwargs); /* proto */
 static int __pyx_pf_10sparse_lib_6sparse_10sparse_mat_21ImmutableSparseMatrix___cinit__(CYTHON_UNUSED struct __pyx_obj_10sparse_lib_6sparse_10sparse_mat_ImmutableSparseMatrix *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v_kwargs); /* proto */
 static PyObject *__pyx_tp_new_10sparse_lib_6sparse_10sparse_mat_SparseMatrix(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
@@ -722,7 +725,7 @@ static int __pyx_pf_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix___cinit__(s
  *         self.ncol = kwargs.get('ncol', -1)
  *         self.nnz = kwargs.get('nnz', -1)             # <<<<<<<<<<<<<<
  * 
- *     property shape:
+ *     # for compatibility with numpy, array, etc
  */
   __pyx_t_1 = __Pyx_PyDict_GetItemDefault(__pyx_v_kwargs, __pyx_n_s_nnz, __pyx_int_neg_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
@@ -751,8 +754,8 @@ static int __pyx_pf_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix___cinit__(s
 }
 
 /* "sparse_lib/sparse/sparse_mat.pyx":17
+ *     # for compatibility with numpy, array, etc
  *     property shape:
- * 
  *         def __get__(self):             # <<<<<<<<<<<<<<
  *             self.shape = (self.nrow, self.ncol)
  *             return self.shape
@@ -783,7 +786,7 @@ static PyObject *__pyx_pf_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_5shap
   __Pyx_RefNannySetupContext("__get__", 0);
 
   /* "sparse_lib/sparse/sparse_mat.pyx":18
- * 
+ *     property shape:
  *         def __get__(self):
  *             self.shape = (self.nrow, self.ncol)             # <<<<<<<<<<<<<<
  *             return self.shape
@@ -820,8 +823,8 @@ static PyObject *__pyx_pf_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_5shap
   goto __pyx_L0;
 
   /* "sparse_lib/sparse/sparse_mat.pyx":17
+ *     # for compatibility with numpy, array, etc
  *     property shape:
- * 
  *         def __get__(self):             # <<<<<<<<<<<<<<
  *             self.shape = (self.nrow, self.ncol)
  *             return self.shape
@@ -1210,8 +1213,8 @@ static int __pyx_pf_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_3nnz_2__set
  *         public int nnz   # number of values stored
  * 
  *         public bint is_symmetric  # true if symmetric matrix             # <<<<<<<<<<<<<<
+ *         public bint store_zeros
  * 
- *         object shape     # for compatibility with numpy, array, etc.
  */
 
 /* Python wrapper */
@@ -1282,6 +1285,88 @@ static int __pyx_pf_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_12is_symmet
   goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_AddTraceback("sparse_lib.sparse.sparse_mat.SparseMatrix.is_symmetric.__set__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = -1;
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "sparse_lib/sparse/sparse_mat.pxd":10
+ * 
+ *         public bint is_symmetric  # true if symmetric matrix
+ *         public bint store_zeros             # <<<<<<<<<<<<<<
+ * 
+ *         object shape     # for compatibility with numpy, array, etc.
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_11store_zeros_1__get__(PyObject *__pyx_v_self); /*proto*/
+static PyObject *__pyx_pw_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_11store_zeros_1__get__(PyObject *__pyx_v_self) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__get__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_11store_zeros___get__(((struct __pyx_obj_10sparse_lib_6sparse_10sparse_mat_SparseMatrix *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_11store_zeros___get__(struct __pyx_obj_10sparse_lib_6sparse_10sparse_mat_SparseMatrix *__pyx_v_self) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__get__", 0);
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_v_self->store_zeros); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 10; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("sparse_lib.sparse.sparse_mat.SparseMatrix.store_zeros.__get__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* Python wrapper */
+static int __pyx_pw_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_11store_zeros_3__set__(PyObject *__pyx_v_self, PyObject *__pyx_v_value); /*proto*/
+static int __pyx_pw_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_11store_zeros_3__set__(PyObject *__pyx_v_self, PyObject *__pyx_v_value) {
+  int __pyx_r;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_11store_zeros_2__set__(((struct __pyx_obj_10sparse_lib_6sparse_10sparse_mat_SparseMatrix *)__pyx_v_self), ((PyObject *)__pyx_v_value));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static int __pyx_pf_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_11store_zeros_2__set__(struct __pyx_obj_10sparse_lib_6sparse_10sparse_mat_SparseMatrix *__pyx_v_self, PyObject *__pyx_v_value) {
+  int __pyx_r;
+  __Pyx_RefNannyDeclarations
+  int __pyx_t_1;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__set__", 0);
+  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_v_value); if (unlikely((__pyx_t_1 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 10; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_v_self->store_zeros = __pyx_t_1;
+
+  /* function exit code */
+  __pyx_r = 0;
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_AddTraceback("sparse_lib.sparse.sparse_mat.SparseMatrix.store_zeros.__set__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = -1;
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();
@@ -1484,6 +1569,20 @@ static int __pyx_setprop_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_is_sym
   }
 }
 
+static PyObject *__pyx_getprop_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_store_zeros(PyObject *o, CYTHON_UNUSED void *x) {
+  return __pyx_pw_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_11store_zeros_1__get__(o);
+}
+
+static int __pyx_setprop_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_store_zeros(PyObject *o, PyObject *v, CYTHON_UNUSED void *x) {
+  if (v) {
+    return __pyx_pw_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_11store_zeros_3__set__(o, v);
+  }
+  else {
+    PyErr_SetString(PyExc_NotImplementedError, "__del__");
+    return -1;
+  }
+}
+
 static PyMethodDef __pyx_methods_10sparse_lib_6sparse_10sparse_mat_SparseMatrix[] = {
   {0, 0, 0, 0}
 };
@@ -1494,6 +1593,7 @@ static struct PyGetSetDef __pyx_getsets_10sparse_lib_6sparse_10sparse_mat_Sparse
   {(char *)"ncol", __pyx_getprop_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_ncol, __pyx_setprop_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_ncol, 0, 0},
   {(char *)"nnz", __pyx_getprop_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_nnz, __pyx_setprop_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_nnz, 0, 0},
   {(char *)"is_symmetric", __pyx_getprop_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_is_symmetric, __pyx_setprop_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_is_symmetric, 0, 0},
+  {(char *)"store_zeros", __pyx_getprop_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_store_zeros, __pyx_setprop_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_store_zeros, 0, 0},
   {0, 0, 0, 0, 0}
 };
 

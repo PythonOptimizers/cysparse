@@ -5,6 +5,7 @@ ll_mat extension.
 """
 from __future__ import print_function
 
+from sparse_lib.sparse.sparse_mat cimport MutableSparseMatrix
 from sparse_lib.sparse.csr_mat cimport CSRSparseMatrix, MakeCSRSparseMatrix
 
 #from sparse_lib.sparse.vec cimport ArrayWrapper
@@ -26,7 +27,7 @@ cdef double LL_MAT_INCREASE_FACTOR = 1.5      # reallocating factor if size is n
 cdef int LL_MAT_PPRINT_ROW_THRESH = 500       # row threshold for choosing print format
 cdef int LL_MAT_PPRINT_COL_THRESH = 20        # column threshold for choosing print format
 
-cdef class LLSparseMatrix:
+cdef class LLSparseMatrix(MutableSparseMatrix):
     """
     Linked-List Format matrix.
 
@@ -37,14 +38,14 @@ cdef class LLSparseMatrix:
     # Init/Free
     ####################################################################################################################
     cdef:
-        public int nrow   # number of rows
-        public int ncol   # number of columns
-        public int nnz    # number of values stored
-        public bint is_symmetric  # true if symmetric matrix
+        #public int nrow   # number of rows
+        #public int ncol   # number of columns
+        #public int nnz    # number of values stored
+        #public bint is_symmetric  # true if symmetric matrix
 
-        int     size_hint
-        bint    store_zeros
-        int     nalloc    # allocated size of value and index arrays
+        #int     size_hint
+        #bint    store_zeros
+        #int     nalloc    # allocated size of value and index arrays
         int     free      # index to first element in free chain
         double *val       # pointer to array of values
         int    *col       # pointer to array of indices
@@ -349,7 +350,7 @@ cdef class LLSparseMatrix:
 ########################################################################################################################
 # Factory methods
 ########################################################################################################################
-def make_ll_sparse_matrix(**kwargs):
+def MakeLLSparseMatrix(**kwargs):
     """
     TEMPORARY function...
 

@@ -7,12 +7,14 @@ cdef class SparseMatrix:
         public int nnz   # number of values stored
 
         public bint is_symmetric  # true if symmetric matrix
+        public bint store_zeros
 
         object shape     # for compatibility with numpy, array, etc.
 
 cdef class MutableSparseMatrix(SparseMatrix):
     cdef:
-        int test
+        int size_hint
+        int nalloc    # allocated size of mutable 1D arrays
 
 
 cdef class ImmutableSparseMatrix(SparseMatrix):

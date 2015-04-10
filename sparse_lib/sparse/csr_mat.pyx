@@ -295,7 +295,6 @@ cdef MakeCSRSparseMatrix(int nrow, int ncol, int nnz, int * ind, int * col, doub
         ind (int *): C-array with column indices pointers.
         col  (int *): C-array with column indices.
         val  (double *): C-array with values.
-        order_column_indices (boolean): If ``True``, order in place C-array ``col``.
     """
     csr_mat = CSRSparseMatrix(nrow=nrow, ncol=ncol, nnz=nnz)
 

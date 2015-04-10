@@ -12,8 +12,8 @@ cdef class SparseMatrix:
         self.ncol = kwargs.get('ncol', -1)
         self.nnz = kwargs.get('nnz', -1)
 
+    # for compatibility with numpy, array, etc
     property shape:
-
         def __get__(self):
             self.shape = (self.nrow, self.ncol)
             return self.shape
