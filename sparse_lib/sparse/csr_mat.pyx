@@ -6,6 +6,7 @@ csr_mat extension.
 
 from __future__ import print_function
 
+
 from sparse_lib.sparse.sparse_mat cimport ImmutableSparseMatrix
 
 
