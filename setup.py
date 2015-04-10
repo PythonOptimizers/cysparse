@@ -15,7 +15,8 @@ sparse_ext_params = ext_params.copy()
 
 ext_modules = [
   Extension("sparse_lib.sparse.ll_mat", ["sparse_lib/sparse/ll_mat.pyx"], **sparse_ext_params),
-  Extension("sparse_lib.sparse.csr_mat", ["sparse_lib/sparse/csr_mat.pyx"], **sparse_ext_params),
+  Extension("sparse_lib.sparse.sparse_mat", ["sparse_lib/sparse/sparse_mat.pyx"], **sparse_ext_params),
+  Extension("sparse_lib.sparse.csr_mat", ["sparse_lib/sparse/csr_mat.pyx", "sparse_lib/sparse/sparse_mat.pyx"], **sparse_ext_params),
   #Extension("sparse_lib.sparse.vec", ["sparse_lib/sparse/vec.pyx"], **sparse_ext_params)
 ]
 

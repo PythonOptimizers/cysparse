@@ -3,7 +3,11 @@ csr_mat extension.
 
 
 """
+
 from __future__ import print_function
+
+from sparse_lib.sparse.sparse_mat cimport ImmutableSparseMatrix
+
 
 from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
 
@@ -39,7 +43,8 @@ cdef _sort(int * a, int start, int end):
         i += 1
 
 
-cdef class CSRSparseMatrix:
+cdef class CSRSparseMatrix(ImmutableSparseMatrix):
+#cdef class CSRSparseMatrix:
     """
     Compressed Sparse Row Format matrix.
 
@@ -154,9 +159,6 @@ cdef class CSRSparseMatrix:
         self.__col_indices_sorted = True
         return self.__col_indices_sorted
 
-    def order_column_indices(self):
-        return self._order_column_indices()
-
     cdef _order_column_indices(self):
         """
         Order column indices by ascending order.
@@ -188,6 +190,10 @@ cdef class CSRSparseMatrix:
                     col_index += 1
 
             i += 1
+
+    def order_column_indices(self):
+        return self._order_column_indices()
+
 
     ####################################################################################################################
     # String representations
