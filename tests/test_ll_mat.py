@@ -3,112 +3,31 @@ from sparse_lib.sparse.ll_mat import LLSparseMatrix, MakeLLSparseMatrix
 # class LLPySparseMatrix(LLCySparseMatrix):
 #  pass
 
+import sys
 
-matrix = MakeLLSparseMatrix(nrow=5, ncol=5, size_hint=1)
+matrix = MakeLLSparseMatrix(nrow=2, ncol=3, size_hint=10)
 print matrix
-matrix[1, 1] = 2
-print matrix[1, 1]
-print matrix[0, 4]
-print matrix[2, 2]
+matrix[0, 0] = 1
+matrix[0, 2] = 3.6
+matrix[1, 1] = 1
+matrix[1, 2] = -2
 
-print matrix.nnz
+matrix.print_to(sys.stdout)
 
-try:
-    matrix[100, 1000, 1] = -45343
-except IndexError as e:
-    print "value of error: %s" % e
+matrix2 = MakeLLSparseMatrix(nrow=3, ncol=2, size_hint=10)
 
-try:
-    matrix[100, 1000] = -45343
-except IndexError as e:
-    print "value of error: %s" % e
+matrix2[0, 0] = 1
+matrix2[1, 1] = 1
 
-try:
-    matrix[4, 4] = -45343
-except IndexError as e:
-    print "value of error: %s" % e
+matrix2[2, 1] += 9
 
-print matrix.nnz
+matrix2.print_to(sys.stdout)
 
-matrix[1, 1] = 9
-matrix[2, 2] = 10
-matrix[3, 3] = 11
+print "=" * 80
+C = matrix * matrix2
 
-print matrix.nnz
-
-matrix[1, 4] = 24323
-matrix[2, 4] = -876387263872
-
-print matrix.nnz
-
-print '=' * 80
-print "element: " + str(matrix[4, 4])
-
-print matrix[4, 3]
-
-ll_mat = MakeLLSparseMatrix(nrow=3, ncol=3, size_hint=4)
-print ll_mat
-
-import numpy as np
-
-np_array = np.arange(24, dtype=np.dtype('d')).reshape((4, 6))
-ll_mat2 = MakeLLSparseMatrix(matrix=np_array)
-
-print ll_mat2
-
-print "?" * 80
-
-ll_mat2[0, 0] = 3453.34098309384039840934
+print C
 
 import sys
 
-ll_mat2.print_to(sys.stdout)
-
-print '&' * 80
-csr_mat = ll_mat2.to_csr()
-
-
-print csr_mat
-
-csr_mat.print_to(sys.stdout)
-
-csr_mat.set_col(3, 32)
-csr_mat.set_col(2, 6)
-csr_mat.set_col(1, 99)
-
-csr_mat.set_col(3, 32)
-csr_mat.set_col(6, 32)
-
-csr_mat.set_col(19, 32)
-
-#csr_mat.set_col(3, 32)
-#csr_mat.set_col(3, 32)
-#csr_mat.set_col(3, 32)
-#csr_mat.set_col(3, 32)
-
-
-
-
-
-
-status_ok, error_msg = csr_mat.is_well_constructed()
-if status_ok:
-    print "OK"
-
-if csr_mat.are_column_indices_sorted():
-    print "column indices are sorted!!!"
-
-
-csr_mat.debug_print()
-
-
-csr_mat.order_column_indices()
-
-
-csr_mat.debug_print()
-
-print "shape is "
-print csr_mat.shape
-
-
-
+C.print_to(sys.stdout)

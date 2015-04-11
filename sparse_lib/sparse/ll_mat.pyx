@@ -27,15 +27,16 @@ cdef double LL_MAT_INCREASE_FACTOR = 1.5      # reallocating factor if size is n
 cdef int LL_MAT_PPRINT_ROW_THRESH = 500       # row threshold for choosing print format
 cdef int LL_MAT_PPRINT_COL_THRESH = 20        # column threshold for choosing print format
 
+
 cdef class LLSparseMatrix(MutableSparseMatrix):
     """
     Linked-List Format matrix.
 
     Note:
-    Despite the name, this matrix doesn't use any linked list.
+        Despite the name, this matrix doesn't use any linked list.
     """
     ####################################################################################################################
-    # Init/Free
+    # Init/Free/Memory
     ####################################################################################################################
     cdef:
         #public int nrow   # number of rows
@@ -53,16 +54,16 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         int    *root      # pointer to array of indices
 
     def __cinit__(self, int nrow, int ncol, int size_hint=LL_MAT_DEFAULT_SIZE_HINT, bint store_zeros=False):
-        self.nrow = nrow
-        self.ncol = ncol
-        self.nnz = 0
+        #self.nrow = nrow
+        #self.ncol = ncol
+        #self.nnz = 0
 
-        self.is_symmetric = False
+        #self.is_symmetric = False
 
         if size_hint < 1:
             raise ValueError('size_hint (%d) must be >= 1' % size_hint)
 
-        self.size_hint = size_hint
+        #self.size_hint = size_hint
         self.store_zeros = store_zeros
 
         val = <double *> PyMem_Malloc(self.size_hint * sizeof(double))
@@ -98,6 +99,33 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         PyMem_Free(self.col)
         PyMem_Free(self.link)
         PyMem_Free(self.root)
+
+    cdef _realloc(self):
+        cdef:
+            void *temp
+            int nalloc_new
+
+        # we have to reallocate some space
+        # increase size of col, val and link arrays
+        assert LL_MAT_INCREASE_FACTOR > 1.0
+        nalloc_new = <int>(<double>LL_MAT_INCREASE_FACTOR * self.nalloc) + 1
+
+        temp = <int *> PyMem_Realloc(self.col, nalloc_new * sizeof(int))
+        if not temp:
+            raise MemoryError()
+        self.col = <int*>temp
+
+        temp = <int *> PyMem_Realloc(self.link, nalloc_new * sizeof(int))
+        if not temp:
+            raise MemoryError()
+        self.link = <int *>temp
+
+        temp = <double *> PyMem_Realloc(self.val, nalloc_new * sizeof(double))
+        if not temp:
+            raise MemoryError()
+        self.val = <double *>temp
+
+        self.nalloc = nalloc_new
 
     ####################################################################################################################
     # Get/Set items
@@ -292,6 +320,15 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         pass
 
     ####################################################################################################################
+    # Multiplication
+    ####################################################################################################################
+    def __mul__(self, LLSparseMatrix B):
+        #cdef LLSparseMatrix C = self.matrix_multiply(B)
+        print("call to multiply!")
+        return multiply_two_ll_mat(self, B)
+        #cdef C_nrow
+
+    ####################################################################################################################
     # String representations
     ####################################################################################################################
     def __repr__(self):
@@ -406,3 +443,148 @@ def MakeLLSparseMatrix(**kwargs):
                     ll_mat[i, j] = value
 
         return ll_mat
+
+########################################################################################################################
+# Multiplication functions
+########################################################################################################################
+cdef multiply_two_ll_mat(LLSparseMatrix A, LLSparseMatrix B):
+    """
+    Multiply two :class:`LLSparseMatrix` ``A * B``.
+
+    Args:
+        A:
+        B:
+
+    Returns:
+        A :class:``LLSparseMatrix`` ``C = A * B``.
+
+    Raises:
+        ``NotImplemented``: When matrix ``A`` or ``B`` is symmetric.
+        ``RuntimeError`` if some error occurred during the computation.
+    """
+    # test dimensions
+    cdef int A_nrow = A.nrow
+    cdef int A_ncol = A.ncol
+
+    cdef int B_nrow = B.nrow
+    cdef int B_ncol = B.ncol
+
+    if A_ncol != B_nrow:
+        raise IndexError("matrix dimensions must agree")
+
+    cdef int C_nrow = A_nrow
+    cdef int C_ncol = B_ncol
+
+    cdef bint store_zeros = A.store_zeros and B.store_zeros
+    cdef int size_hint = A.size_hint
+
+    C = LLSparseMatrix(nrow=C_nrow, ncol=C_ncol, size_hint=size_hint, store_zeros=store_zeros)
+
+
+    # CASES
+    if not A.is_symmetric and not B.is_symmetric:
+        pass
+    else:
+        raise NotImplemented("Multiplication with symmetric matrices is not implemented yet")
+
+    # NON OPTIMIZED MULTIPLICATION
+    cdef:
+        double valA
+        int iA, jA, kA, kB
+
+    for iA from 0 <= iA < A_nrow:
+        kA = A.root[iA]
+
+        while kA != -1:
+            valA = A.val[kA]
+            jA = A.col[kA]
+            kA = A.link[kA]
+
+            # add jA-th row of B to iA-th row of C
+            kB = B.root[jA]
+            while kB != -1:
+                ret = update_ll_mat_item_add(C, iA, B.col[kB], valA*B.val[kB])
+                if not ret:
+                    raise RuntimeError('Multiplication aborted')
+                kB = B.link[kB]
+    return C
+
+cdef bint update_ll_mat_item_add(LLSparseMatrix A, int i, int j, double x):
+    """
+    Update-add matrix entry: ``A[i,j] += x``
+
+    Args:
+        A: Matrix to update.
+        i, j: Coordinates of item to update.
+        x (double): Value to add to item to update ``A[i, j]``.
+
+    Returns:
+        True if element was correctly updated, False otherwise.
+    """
+    cdef:
+        int k, new_elem, col, last
+
+    if A.is_symmetric and i < j:
+        raise IndexError("write operation to upper triangle of symmetric matrix")
+
+    if not A.store_zeros and x == 0.0:
+        return True
+
+    # Find element to be updated
+    col = last = -1
+    k = A.root[i]
+    while k != -1:
+        col = A.col[k]
+        if col >= j:
+            break
+        last = k
+        k = A.link[k]
+
+
+    if col == j:
+        # element already exists: compute updated value
+        x += A.val[k]
+
+        if A.store_zeros and x == 0.0:
+            #  the updated element is zero and must be removed
+
+            # relink row i
+            if last == -1:
+                A.root[i] = A.link[k]
+            else:
+                A.link[last] = A.link[k]
+
+            # add element to free list
+            A.link[k] = A.free
+            A.free = k
+
+            A.nnz -= 1
+        else:
+            A.val[k] = x
+    else:
+        # new item
+        if A.free != -1:
+            # use element from the free chain
+            new_elem = A.free
+            A.free = A.link[new_elem]
+        else:
+            # append new element to the end
+            new_elem = A.nnz
+
+            # test if there is space for a new element
+            if A.nnz == A.nalloc:
+                A._realloc()
+
+
+        A.val[new_elem] = x
+        A.col[new_elem] = j
+        A.link[new_elem] = k
+        if last == -1:
+            A.root[i] = new_elem
+        else:
+            A.link[last] = new_elem
+        A.nnz += 1
+
+    return True
+
+

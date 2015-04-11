@@ -1,4 +1,5 @@
 
+cdef int MUTABLE_SPARSE_MAT_DEFAULT_SIZE_HINT = 40        # allocated size by default
 
 cdef class SparseMatrix:
 
@@ -10,7 +11,7 @@ cdef class SparseMatrix:
         """
         self.nrow = kwargs.get('nrow', -1)
         self.ncol = kwargs.get('ncol', -1)
-        self.nnz = kwargs.get('nnz', -1)
+        self.nnz = kwargs.get('nnz', 0)
 
     # for compatibility with numpy, array, etc
     property shape:
@@ -32,7 +33,8 @@ cdef class MutableSparseMatrix(SparseMatrix):
             Only use named arguments!
 
         """
-        pass
+        self.size_hint = kwargs.get('size_hint', MUTABLE_SPARSE_MAT_DEFAULT_SIZE_HINT)
+        print("size hint = %d" % self.size_hint )
 
 cdef class ImmutableSparseMatrix(SparseMatrix):
     def __cinit__(self, **kwargs):
