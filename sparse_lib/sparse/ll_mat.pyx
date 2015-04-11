@@ -8,17 +8,15 @@ from __future__ import print_function
 from sparse_lib.sparse.sparse_mat cimport MutableSparseMatrix
 from sparse_lib.sparse.csr_mat cimport CSRSparseMatrix, MakeCSRSparseMatrix
 
-#from sparse_lib.sparse.vec cimport ArrayWrapper
 # Import the Python-level symbols of numpy
-import numpy as np
+#import numpy as np
 
 # Import the C-level symbols of numpy
-cimport numpy as cnp
+#cimport numpy as cnp
 
 
 from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
 from libc.stdlib cimport malloc,free
-#from cython cimport view as cview
 from cpython cimport PyObject, Py_INCREF
 
 
@@ -33,38 +31,22 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
     Linked-List Format matrix.
 
     Note:
-        Despite the name, this matrix doesn't use any linked list.
+        Despite its name, this matrix doesn't use any linked list.
     """
     ####################################################################################################################
     # Init/Free/Memory
     ####################################################################################################################
     cdef:
-        #public int nrow   # number of rows
-        #public int ncol   # number of columns
-        #public int nnz    # number of values stored
-        #public bint is_symmetric  # true if symmetric matrix
-
-        #int     size_hint
-        #bint    store_zeros
-        #int     nalloc    # allocated size of value and index arrays
         int     free      # index to first element in free chain
         double *val       # pointer to array of values
-        int    *col       # pointer to array of indices
-        int    *link      # pointer to array of indices
-        int    *root      # pointer to array of indices
+        int    *col       # pointer to array of indices, see doc
+        int    *link      # pointer to array of indices, see doc
+        int    *root      # pointer to array of indices, see doc
 
     def __cinit__(self, int nrow, int ncol, int size_hint=LL_MAT_DEFAULT_SIZE_HINT, bint store_zeros=False):
-        #self.nrow = nrow
-        #self.ncol = ncol
-        #self.nnz = 0
-
-        #self.is_symmetric = False
 
         if size_hint < 1:
             raise ValueError('size_hint (%d) must be >= 1' % size_hint)
-
-        #self.size_hint = size_hint
-        self.store_zeros = store_zeros
 
         val = <double *> PyMem_Malloc(self.size_hint * sizeof(double))
         if not val:
@@ -90,7 +72,6 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         self.free = -1
 
         cdef int i
-        #for i in xrange(nrow):
         for i from 0 <= i < nrow:
             root[i] = -1
 
@@ -101,6 +82,7 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         PyMem_Free(self.root)
 
     cdef _realloc(self):
+        # TODO: use this method whenever possible
         cdef:
             void *temp
             int nalloc_new
@@ -158,7 +140,7 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         cdef int j = key[1]
 
         if self.is_symmetric and i < j:
-          raise IndexError('write operation to upper triangle of symmetric matrix')
+            raise IndexError('write operation to upper triangle of symmetric matrix')
 
         cdef void *temp
         cdef int k, new_elem, last, col
@@ -194,26 +176,7 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
                 # test if there is space for a new element
                 if self.nnz == self.nalloc:
                     # we have to reallocate some space
-                    # increase size of col, val and link arrays
-                    assert LL_MAT_INCREASE_FACTOR > 1.0
-                    nalloc_new = <int>(<double>LL_MAT_INCREASE_FACTOR * self.nalloc) + 1
-
-                    temp = <int *> PyMem_Realloc(self.col, nalloc_new * sizeof(int))
-                    if not temp:
-                        raise MemoryError()
-                    self.col = <int*>temp
-
-                    temp = <int *> PyMem_Realloc(self.link, nalloc_new * sizeof(int))
-                    if not temp:
-                        raise MemoryError()
-                    self.link = <int *>temp
-
-                    temp = <double *> PyMem_Realloc(self.val, nalloc_new * sizeof(double))
-                    if not temp:
-                        raise MemoryError()
-                    self.val = <double *>temp
-
-                    self.nalloc = nalloc_new
+                    self._realloc()
 
                 self.val[new_elem] = value
                 self.col[new_elem] = j
@@ -306,14 +269,6 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
 
         csr_mat = MakeCSRSparseMatrix(nrow=self.nrow, ncol=self.ncol, nnz=self.nnz, ind=ind, col=col, val=val)
 
-        #set_col(csr_mat, col)
-
-        #csr_mat.ind = ind.data
-        #csr_mat.col = col
-        #csr_mat.val = val
-
-        #csr_mat.ok_status = True
-
         return csr_mat
 
     def to_csc(self):
@@ -323,10 +278,7 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
     # Multiplication
     ####################################################################################################################
     def __mul__(self, LLSparseMatrix B):
-        #cdef LLSparseMatrix C = self.matrix_multiply(B)
-        print("call to multiply!")
         return multiply_two_ll_mat(self, B)
-        #cdef C_nrow
 
     ####################################################################################################################
     # String representations

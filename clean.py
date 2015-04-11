@@ -10,12 +10,10 @@ files_exts = ['.c', '.so']
 
 def scandirs(path):
     for root, dirs, files in os.walk(path):
-        print "root: ", root
         if any(root.endswith(name) for name in directories_to_skip):
             continue
         for currentFile in files:
             #print "processing file: " + currentFile
-            #exts=('.png', '.jpg')
             if any(currentFile.lower().endswith(ext) for ext in files_exts):
                 os.remove(os.path.join(root, currentFile))
 

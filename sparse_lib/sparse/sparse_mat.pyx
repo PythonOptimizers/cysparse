@@ -13,6 +13,9 @@ cdef class SparseMatrix:
         self.ncol = kwargs.get('ncol', -1)
         self.nnz = kwargs.get('nnz', 0)
 
+        self.is_symmetric = kwargs.get('is_symmetric', False)
+        self.store_zeros = kwargs.get('store_zeros', False)
+
     # for compatibility with numpy, array, etc
     property shape:
         def __get__(self):

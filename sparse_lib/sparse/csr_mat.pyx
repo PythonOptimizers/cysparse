@@ -6,9 +6,7 @@ csr_mat extension.
 
 from __future__ import print_function
 
-
 from sparse_lib.sparse.sparse_mat cimport ImmutableSparseMatrix
-
 
 from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
 
@@ -45,7 +43,6 @@ cdef _sort(int * a, int start, int end):
 
 
 cdef class CSRSparseMatrix(ImmutableSparseMatrix):
-#cdef class CSRSparseMatrix:
     """
     Compressed Sparse Row Format matrix.
 
@@ -57,34 +54,9 @@ cdef class CSRSparseMatrix(ImmutableSparseMatrix):
     # Init/Free
     ####################################################################################################################
     def __cinit__(self, int nrow, int ncol, int nnz):
-        #self.nrow = nrow
-        #self.ncol = ncol
-        #self.nnz = nnz
-
-
-        print("toot: %d" % self.nrow)
         self.__status_ok = False
 
-        #val = <double *> PyMem_Malloc(self.nnz * sizeof(double))
-        #if not val:
-        #    raise MemoryError()
-        #self.val = val
-
-        #for i in xrange(self.nrow + 1):
-        #    self.val[i] = val[i]
-
-        #col = <int *> PyMem_Malloc(self.nnz * sizeof(int))
-        #if not col:
-        #    raise MemoryError()
-        #self.col = col
-
-        #ind = <int *> PyMem_Malloc((self.nrow + 1) * sizeof(int))
-        #if not ind:
-        #    raise MemoryError()
-        #self.ind = ind
-
     def __dealloc__(self):
-        #pass
         PyMem_Free(self.val)
         PyMem_Free(self.col)
         PyMem_Free(self.ind)
@@ -146,7 +118,6 @@ cdef class CSRSparseMatrix(ImmutableSparseMatrix):
             # do the test
             self.__col_indices_sorted_test_done = True
             # test each row
-            #for i in xrange(self.nrow):
             for i from 0 <= i < self.nrow:
                 col_index = self.ind[i]
                 col_index_stop = self.ind[i+1] - 1
@@ -222,12 +193,8 @@ cdef class CSRSparseMatrix(ImmutableSparseMatrix):
 
         print('CSRSparseMatrix ([%d,%d]):' % (self.nrow, self.ncol), file=OUT)
 
-        #if not self.nnz or not self.ok_status:
-        #    return
-
-        #print(self.ind[0])
-
-        #return
+        if not self.nnz or not self.__status_ok:
+            return
 
         if self.nrow <= CSR_MAT_PPRINT_COL_THRESH and self.ncol <= CSR_MAT_PPRINT_ROW_THRESH:
             # create linear vector presentation
@@ -237,9 +204,7 @@ cdef class CSRSparseMatrix(ImmutableSparseMatrix):
             if not mat:
                 raise MemoryError()
 
-            #for i in xrange(self.nrow):
             for i from 0 <= i < self.nrow:
-                #for j in xrange(self.ncol):
                 for j from 0 <= j < self.ncol:
                     mat[i* self.ncol + j] = 0.0
 
@@ -248,11 +213,7 @@ cdef class CSRSparseMatrix(ImmutableSparseMatrix):
                     mat[(i*self.ncol)+self.col[k]] = self.val[k]
                     k += 1
 
-
-
-            #for i in xrange(self.nrow):
             for i from 0 <= i < self.nrow:
-                #for j in xrange(self.ncol):
                 for j from 0 <= j < self.ncol:
                     val = mat[(i*self.ncol)+j]
                     #print('%9.*f ' % (6, val), file=OUT, end='')
@@ -270,19 +231,16 @@ cdef class CSRSparseMatrix(ImmutableSparseMatrix):
     def debug_print(self):
         cdef int i
         print("ind:")
-        #for i in xrange(self.nrow + 1):
         for i from 0 <= i < self.nrow + 1:
             print(self.ind[i], end=' ', sep=' ')
         print()
 
         print("col:")
-        #for i in xrange(self.nnz):
         for i from 0 <= i < self.nnz:
             print(self.col[i], end=' ', sep=' ')
         print()
 
         print("val:")
-        #for i in xrange(self.nnz):
         for i from 0 <= i < self.nnz:
             print(self.val[i], end=' == ', sep=' == ')
         print()
@@ -312,8 +270,5 @@ cdef MakeCSRSparseMatrix(int nrow, int ncol, int nnz, int * ind, int * col, doub
     csr_mat.col = col
 
     csr_mat.__status_ok = True
-
-    #if order_column_indices:
-    #    csr_mat.order_column_indices()
 
     return csr_mat
