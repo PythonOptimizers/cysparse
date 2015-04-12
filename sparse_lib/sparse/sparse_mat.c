@@ -450,11 +450,12 @@ struct __pyx_obj_10sparse_lib_6sparse_10sparse_mat_SparseMatrix {
   int is_symmetric;
   int store_zeros;
   PyObject *shape;
+  PyObject *T;
 };
 
 
-/* "sparse_lib/sparse/sparse_mat.pxd":14
- *         object shape     # for compatibility with numpy, array, etc.
+/* "sparse_lib/sparse/sparse_mat.pxd":16
+ *         object T         # for the transposed matrix
  * 
  * cdef class MutableSparseMatrix(SparseMatrix):             # <<<<<<<<<<<<<<
  *     cdef:
@@ -467,7 +468,7 @@ struct __pyx_obj_10sparse_lib_6sparse_10sparse_mat_MutableSparseMatrix {
 };
 
 
-/* "sparse_lib/sparse/sparse_mat.pxd":20
+/* "sparse_lib/sparse/sparse_mat.pxd":22
  * 
  * 
  * cdef class ImmutableSparseMatrix(SparseMatrix):             # <<<<<<<<<<<<<<
@@ -599,14 +600,6 @@ static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *);
 
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value);
 
-static int __Pyx_Print(PyObject*, PyObject *, int);
-#if CYTHON_COMPILING_IN_PYPY || PY_MAJOR_VERSION >= 3
-static PyObject* __pyx_print = 0;
-static PyObject* __pyx_print_kwargs = 0;
-#endif
-
-static int __Pyx_PrintOne(PyObject* stream, PyObject *o);
-
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value);
 
 static CYTHON_INLINE long __Pyx_PyInt_As_long(PyObject *);
@@ -626,10 +619,14 @@ int __pyx_module_is_main_sparse_lib__sparse__sparse_mat = 0;
 
 /* Implementation of 'sparse_lib.sparse.sparse_mat' */
 static PyObject *__pyx_builtin_AttributeError;
+static PyObject *__pyx_builtin_NotImplemented;
 static int __pyx_pf_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix___cinit__(struct __pyx_obj_10sparse_lib_6sparse_10sparse_mat_SparseMatrix *__pyx_v_self, PyObject *__pyx_v_kwargs); /* proto */
 static PyObject *__pyx_pf_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_5shape___get__(struct __pyx_obj_10sparse_lib_6sparse_10sparse_mat_SparseMatrix *__pyx_v_self); /* proto */
 static int __pyx_pf_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_5shape_2__set__(CYTHON_UNUSED struct __pyx_obj_10sparse_lib_6sparse_10sparse_mat_SparseMatrix *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v_value); /* proto */
 static int __pyx_pf_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_5shape_4__del__(CYTHON_UNUSED struct __pyx_obj_10sparse_lib_6sparse_10sparse_mat_SparseMatrix *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_1T___get__(CYTHON_UNUSED struct __pyx_obj_10sparse_lib_6sparse_10sparse_mat_SparseMatrix *__pyx_v_self); /* proto */
+static int __pyx_pf_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_1T_2__set__(CYTHON_UNUSED struct __pyx_obj_10sparse_lib_6sparse_10sparse_mat_SparseMatrix *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v_value); /* proto */
+static int __pyx_pf_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_1T_4__del__(CYTHON_UNUSED struct __pyx_obj_10sparse_lib_6sparse_10sparse_mat_SparseMatrix *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_4nrow___get__(struct __pyx_obj_10sparse_lib_6sparse_10sparse_mat_SparseMatrix *__pyx_v_self); /* proto */
 static int __pyx_pf_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_4nrow_2__set__(struct __pyx_obj_10sparse_lib_6sparse_10sparse_mat_SparseMatrix *__pyx_v_self, PyObject *__pyx_v_value); /* proto */
 static PyObject *__pyx_pf_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_4ncol___get__(struct __pyx_obj_10sparse_lib_6sparse_10sparse_mat_SparseMatrix *__pyx_v_self); /* proto */
@@ -645,40 +642,39 @@ static int __pyx_pf_10sparse_lib_6sparse_10sparse_mat_21ImmutableSparseMatrix___
 static PyObject *__pyx_tp_new_10sparse_lib_6sparse_10sparse_mat_SparseMatrix(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_10sparse_lib_6sparse_10sparse_mat_MutableSparseMatrix(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_10sparse_lib_6sparse_10sparse_mat_ImmutableSparseMatrix(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
-static char __pyx_k_end[] = "end";
 static char __pyx_k_get[] = "get";
 static char __pyx_k_nnz[] = "nnz";
-static char __pyx_k_file[] = "file";
 static char __pyx_k_main[] = "__main__";
 static char __pyx_k_ncol[] = "ncol";
 static char __pyx_k_nrow[] = "nrow";
 static char __pyx_k_test[] = "__test__";
-static char __pyx_k_print[] = "print";
 static char __pyx_k_size_hint[] = "size_hint";
-static char __pyx_k_size_hint_d[] = "size hint = %d";
 static char __pyx_k_store_zeros[] = "store_zeros";
 static char __pyx_k_is_symmetric[] = "is_symmetric";
 static char __pyx_k_AttributeError[] = "AttributeError";
+static char __pyx_k_NotImplemented[] = "NotImplemented";
 static char __pyx_k_Attribute_shape_is_read_only[] = "Attribute shape is read-only";
+static char __pyx_k_Not_implemented_in_base_class[] = "Not implemented in base class";
 static PyObject *__pyx_n_s_AttributeError;
 static PyObject *__pyx_kp_s_Attribute_shape_is_read_only;
-static PyObject *__pyx_n_s_end;
-static PyObject *__pyx_n_s_file;
+static PyObject *__pyx_n_s_NotImplemented;
+static PyObject *__pyx_kp_s_Not_implemented_in_base_class;
 static PyObject *__pyx_n_s_get;
 static PyObject *__pyx_n_s_is_symmetric;
 static PyObject *__pyx_n_s_main;
 static PyObject *__pyx_n_s_ncol;
 static PyObject *__pyx_n_s_nnz;
 static PyObject *__pyx_n_s_nrow;
-static PyObject *__pyx_n_s_print;
 static PyObject *__pyx_n_s_size_hint;
-static PyObject *__pyx_kp_s_size_hint_d;
 static PyObject *__pyx_n_s_store_zeros;
 static PyObject *__pyx_n_s_test;
 static PyObject *__pyx_int_0;
 static PyObject *__pyx_int_neg_1;
 static PyObject *__pyx_tuple_;
 static PyObject *__pyx_tuple__2;
+static PyObject *__pyx_tuple__3;
+static PyObject *__pyx_tuple__4;
+static PyObject *__pyx_tuple__5;
 
 /* "sparse_lib/sparse/sparse_mat.pyx":6
  * cdef class SparseMatrix:
@@ -990,7 +986,7 @@ static int __pyx_pf_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_5shape_4__d
  *         def __del__(self):
  *             raise AttributeError('Attribute shape is read-only')             # <<<<<<<<<<<<<<
  * 
- * cdef class MutableSparseMatrix(SparseMatrix):
+ *     property T:
  */
   __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_AttributeError, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 29; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
@@ -1010,6 +1006,187 @@ static int __pyx_pf_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_5shape_4__d
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_AddTraceback("sparse_lib.sparse.sparse_mat.SparseMatrix.shape.__del__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = -1;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "sparse_lib/sparse/sparse_mat.pyx":32
+ * 
+ *     property T:
+ *         def __get__(self):             # <<<<<<<<<<<<<<
+ *             raise NotImplemented("Not implemented in base class")
+ * 
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_1T_1__get__(PyObject *__pyx_v_self); /*proto*/
+static PyObject *__pyx_pw_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_1T_1__get__(PyObject *__pyx_v_self) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__get__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_1T___get__(((struct __pyx_obj_10sparse_lib_6sparse_10sparse_mat_SparseMatrix *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_1T___get__(CYTHON_UNUSED struct __pyx_obj_10sparse_lib_6sparse_10sparse_mat_SparseMatrix *__pyx_v_self) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__get__", 0);
+
+  /* "sparse_lib/sparse/sparse_mat.pyx":33
+ *     property T:
+ *         def __get__(self):
+ *             raise NotImplemented("Not implemented in base class")             # <<<<<<<<<<<<<<
+ * 
+ *         def __set__(self, value):
+ */
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_NotImplemented, __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 33; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_Raise(__pyx_t_1, 0, 0, 0);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  {__pyx_filename = __pyx_f[0]; __pyx_lineno = 33; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+
+  /* "sparse_lib/sparse/sparse_mat.pyx":32
+ * 
+ *     property T:
+ *         def __get__(self):             # <<<<<<<<<<<<<<
+ *             raise NotImplemented("Not implemented in base class")
+ * 
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("sparse_lib.sparse.sparse_mat.SparseMatrix.T.__get__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "sparse_lib/sparse/sparse_mat.pyx":35
+ *             raise NotImplemented("Not implemented in base class")
+ * 
+ *         def __set__(self, value):             # <<<<<<<<<<<<<<
+ *             raise NotImplemented("Not implemented in base class")
+ * 
+ */
+
+/* Python wrapper */
+static int __pyx_pw_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_1T_3__set__(PyObject *__pyx_v_self, PyObject *__pyx_v_value); /*proto*/
+static int __pyx_pw_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_1T_3__set__(PyObject *__pyx_v_self, PyObject *__pyx_v_value) {
+  int __pyx_r;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_1T_2__set__(((struct __pyx_obj_10sparse_lib_6sparse_10sparse_mat_SparseMatrix *)__pyx_v_self), ((PyObject *)__pyx_v_value));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static int __pyx_pf_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_1T_2__set__(CYTHON_UNUSED struct __pyx_obj_10sparse_lib_6sparse_10sparse_mat_SparseMatrix *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v_value) {
+  int __pyx_r;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__set__", 0);
+
+  /* "sparse_lib/sparse/sparse_mat.pyx":36
+ * 
+ *         def __set__(self, value):
+ *             raise NotImplemented("Not implemented in base class")             # <<<<<<<<<<<<<<
+ * 
+ *         def __del__(self):
+ */
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_NotImplemented, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 36; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_Raise(__pyx_t_1, 0, 0, 0);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  {__pyx_filename = __pyx_f[0]; __pyx_lineno = 36; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+
+  /* "sparse_lib/sparse/sparse_mat.pyx":35
+ *             raise NotImplemented("Not implemented in base class")
+ * 
+ *         def __set__(self, value):             # <<<<<<<<<<<<<<
+ *             raise NotImplemented("Not implemented in base class")
+ * 
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("sparse_lib.sparse.sparse_mat.SparseMatrix.T.__set__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = -1;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "sparse_lib/sparse/sparse_mat.pyx":38
+ *             raise NotImplemented("Not implemented in base class")
+ * 
+ *         def __del__(self):             # <<<<<<<<<<<<<<
+ *             raise NotImplemented("Not implemented in base class")
+ * 
+ */
+
+/* Python wrapper */
+static int __pyx_pw_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_1T_5__del__(PyObject *__pyx_v_self); /*proto*/
+static int __pyx_pw_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_1T_5__del__(PyObject *__pyx_v_self) {
+  int __pyx_r;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__del__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_1T_4__del__(((struct __pyx_obj_10sparse_lib_6sparse_10sparse_mat_SparseMatrix *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static int __pyx_pf_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_1T_4__del__(CYTHON_UNUSED struct __pyx_obj_10sparse_lib_6sparse_10sparse_mat_SparseMatrix *__pyx_v_self) {
+  int __pyx_r;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__del__", 0);
+
+  /* "sparse_lib/sparse/sparse_mat.pyx":39
+ * 
+ *         def __del__(self):
+ *             raise NotImplemented("Not implemented in base class")             # <<<<<<<<<<<<<<
+ * 
+ * cdef class MutableSparseMatrix(SparseMatrix):
+ */
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_NotImplemented, __pyx_tuple__5, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 39; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_Raise(__pyx_t_1, 0, 0, 0);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  {__pyx_filename = __pyx_f[0]; __pyx_lineno = 39; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+
+  /* "sparse_lib/sparse/sparse_mat.pyx":38
+ *             raise NotImplemented("Not implemented in base class")
+ * 
+ *         def __del__(self):             # <<<<<<<<<<<<<<
+ *             raise NotImplemented("Not implemented in base class")
+ * 
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("sparse_lib.sparse.sparse_mat.SparseMatrix.T.__del__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = -1;
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
@@ -1425,7 +1602,7 @@ static int __pyx_pf_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_11store_zer
   return __pyx_r;
 }
 
-/* "sparse_lib/sparse/sparse_mat.pyx":32
+/* "sparse_lib/sparse/sparse_mat.pyx":42
  * 
  * cdef class MutableSparseMatrix(SparseMatrix):
  *     def __cinit__(self, **kwargs):             # <<<<<<<<<<<<<<
@@ -1465,38 +1642,23 @@ static int __pyx_pf_10sparse_lib_6sparse_10sparse_mat_19MutableSparseMatrix___ci
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__cinit__", 0);
 
-  /* "sparse_lib/sparse/sparse_mat.pyx":39
+  /* "sparse_lib/sparse/sparse_mat.pyx":49
  * 
  *         """
  *         self.size_hint = kwargs.get('size_hint', MUTABLE_SPARSE_MAT_DEFAULT_SIZE_HINT)             # <<<<<<<<<<<<<<
- *         print("size hint = %d" % self.size_hint )
+ * 
  * 
  */
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_10sparse_lib_6sparse_10sparse_mat_MUTABLE_SPARSE_MAT_DEFAULT_SIZE_HINT); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 39; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_10sparse_lib_6sparse_10sparse_mat_MUTABLE_SPARSE_MAT_DEFAULT_SIZE_HINT); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 49; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyDict_GetItemDefault(__pyx_v_kwargs, __pyx_n_s_size_hint, __pyx_t_1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 39; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyDict_GetItemDefault(__pyx_v_kwargs, __pyx_n_s_size_hint, __pyx_t_1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 49; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_3 = __Pyx_PyInt_As_int(__pyx_t_2); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 39; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyInt_As_int(__pyx_t_2); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 49; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_self->size_hint = __pyx_t_3;
 
-  /* "sparse_lib/sparse/sparse_mat.pyx":40
- *         """
- *         self.size_hint = kwargs.get('size_hint', MUTABLE_SPARSE_MAT_DEFAULT_SIZE_HINT)
- *         print("size hint = %d" % self.size_hint )             # <<<<<<<<<<<<<<
- * 
- * cdef class ImmutableSparseMatrix(SparseMatrix):
- */
-  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_self->size_hint); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 40; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyString_Format(__pyx_kp_s_size_hint_d, __pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 40; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (__Pyx_PrintOne(0, __pyx_t_1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 40; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-
-  /* "sparse_lib/sparse/sparse_mat.pyx":32
+  /* "sparse_lib/sparse/sparse_mat.pyx":42
  * 
  * cdef class MutableSparseMatrix(SparseMatrix):
  *     def __cinit__(self, **kwargs):             # <<<<<<<<<<<<<<
@@ -1517,7 +1679,7 @@ static int __pyx_pf_10sparse_lib_6sparse_10sparse_mat_19MutableSparseMatrix___ci
   return __pyx_r;
 }
 
-/* "sparse_lib/sparse/sparse_mat.pyx":43
+/* "sparse_lib/sparse/sparse_mat.pyx":53
  * 
  * cdef class ImmutableSparseMatrix(SparseMatrix):
  *     def __cinit__(self, **kwargs):             # <<<<<<<<<<<<<<
@@ -1568,6 +1730,7 @@ static PyObject *__pyx_tp_new_10sparse_lib_6sparse_10sparse_mat_SparseMatrix(PyT
   if (unlikely(!o)) return 0;
   p = ((struct __pyx_obj_10sparse_lib_6sparse_10sparse_mat_SparseMatrix *)o);
   p->shape = Py_None; Py_INCREF(Py_None);
+  p->T = Py_None; Py_INCREF(Py_None);
   if (unlikely(__pyx_pw_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_1__cinit__(o, a, k) < 0)) {
     Py_DECREF(o); o = 0;
   }
@@ -1583,6 +1746,7 @@ static void __pyx_tp_dealloc_10sparse_lib_6sparse_10sparse_mat_SparseMatrix(PyOb
   #endif
   PyObject_GC_UnTrack(o);
   Py_CLEAR(p->shape);
+  Py_CLEAR(p->T);
   (*Py_TYPE(o)->tp_free)(o);
 }
 
@@ -1592,6 +1756,9 @@ static int __pyx_tp_traverse_10sparse_lib_6sparse_10sparse_mat_SparseMatrix(PyOb
   if (p->shape) {
     e = (*v)(p->shape, a); if (e) return e;
   }
+  if (p->T) {
+    e = (*v)(p->T, a); if (e) return e;
+  }
   return 0;
 }
 
@@ -1600,6 +1767,9 @@ static int __pyx_tp_clear_10sparse_lib_6sparse_10sparse_mat_SparseMatrix(PyObjec
   struct __pyx_obj_10sparse_lib_6sparse_10sparse_mat_SparseMatrix *p = (struct __pyx_obj_10sparse_lib_6sparse_10sparse_mat_SparseMatrix *)o;
   tmp = ((PyObject*)p->shape);
   p->shape = Py_None; Py_INCREF(Py_None);
+  Py_XDECREF(tmp);
+  tmp = ((PyObject*)p->T);
+  p->T = Py_None; Py_INCREF(Py_None);
   Py_XDECREF(tmp);
   return 0;
 }
@@ -1614,6 +1784,19 @@ static int __pyx_setprop_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_shape(
   }
   else {
     return __pyx_pw_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_5shape_5__del__(o);
+  }
+}
+
+static PyObject *__pyx_getprop_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_T(PyObject *o, CYTHON_UNUSED void *x) {
+  return __pyx_pw_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_1T_1__get__(o);
+}
+
+static int __pyx_setprop_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_T(PyObject *o, PyObject *v, CYTHON_UNUSED void *x) {
+  if (v) {
+    return __pyx_pw_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_1T_3__set__(o, v);
+  }
+  else {
+    return __pyx_pw_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_1T_5__del__(o);
   }
 }
 
@@ -1693,6 +1876,7 @@ static PyMethodDef __pyx_methods_10sparse_lib_6sparse_10sparse_mat_SparseMatrix[
 
 static struct PyGetSetDef __pyx_getsets_10sparse_lib_6sparse_10sparse_mat_SparseMatrix[] = {
   {(char *)"shape", __pyx_getprop_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_shape, __pyx_setprop_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_shape, 0, 0},
+  {(char *)"T", __pyx_getprop_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_T, __pyx_setprop_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_T, 0, 0},
   {(char *)"nrow", __pyx_getprop_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_nrow, __pyx_setprop_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_nrow, 0, 0},
   {(char *)"ncol", __pyx_getprop_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_ncol, __pyx_setprop_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_ncol, 0, 0},
   {(char *)"nnz", __pyx_getprop_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_nnz, __pyx_setprop_10sparse_lib_6sparse_10sparse_mat_12SparseMatrix_nnz, 0, 0},
@@ -1923,23 +2107,22 @@ static struct PyModuleDef __pyx_moduledef = {
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_AttributeError, __pyx_k_AttributeError, sizeof(__pyx_k_AttributeError), 0, 0, 1, 1},
   {&__pyx_kp_s_Attribute_shape_is_read_only, __pyx_k_Attribute_shape_is_read_only, sizeof(__pyx_k_Attribute_shape_is_read_only), 0, 0, 1, 0},
-  {&__pyx_n_s_end, __pyx_k_end, sizeof(__pyx_k_end), 0, 0, 1, 1},
-  {&__pyx_n_s_file, __pyx_k_file, sizeof(__pyx_k_file), 0, 0, 1, 1},
+  {&__pyx_n_s_NotImplemented, __pyx_k_NotImplemented, sizeof(__pyx_k_NotImplemented), 0, 0, 1, 1},
+  {&__pyx_kp_s_Not_implemented_in_base_class, __pyx_k_Not_implemented_in_base_class, sizeof(__pyx_k_Not_implemented_in_base_class), 0, 0, 1, 0},
   {&__pyx_n_s_get, __pyx_k_get, sizeof(__pyx_k_get), 0, 0, 1, 1},
   {&__pyx_n_s_is_symmetric, __pyx_k_is_symmetric, sizeof(__pyx_k_is_symmetric), 0, 0, 1, 1},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
   {&__pyx_n_s_ncol, __pyx_k_ncol, sizeof(__pyx_k_ncol), 0, 0, 1, 1},
   {&__pyx_n_s_nnz, __pyx_k_nnz, sizeof(__pyx_k_nnz), 0, 0, 1, 1},
   {&__pyx_n_s_nrow, __pyx_k_nrow, sizeof(__pyx_k_nrow), 0, 0, 1, 1},
-  {&__pyx_n_s_print, __pyx_k_print, sizeof(__pyx_k_print), 0, 0, 1, 1},
   {&__pyx_n_s_size_hint, __pyx_k_size_hint, sizeof(__pyx_k_size_hint), 0, 0, 1, 1},
-  {&__pyx_kp_s_size_hint_d, __pyx_k_size_hint_d, sizeof(__pyx_k_size_hint_d), 0, 0, 1, 0},
   {&__pyx_n_s_store_zeros, __pyx_k_store_zeros, sizeof(__pyx_k_store_zeros), 0, 0, 1, 1},
   {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
   {0, 0, 0, 0, 0, 0, 0}
 };
 static int __Pyx_InitCachedBuiltins(void) {
   __pyx_builtin_AttributeError = __Pyx_GetBuiltinName(__pyx_n_s_AttributeError); if (!__pyx_builtin_AttributeError) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 26; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_builtin_NotImplemented = __Pyx_GetBuiltinName(__pyx_n_s_NotImplemented); if (!__pyx_builtin_NotImplemented) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 33; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -1965,11 +2148,44 @@ static int __Pyx_InitCachedConstants(void) {
  *         def __del__(self):
  *             raise AttributeError('Attribute shape is read-only')             # <<<<<<<<<<<<<<
  * 
- * cdef class MutableSparseMatrix(SparseMatrix):
+ *     property T:
  */
   __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_s_Attribute_shape_is_read_only); if (unlikely(!__pyx_tuple__2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 29; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
+
+  /* "sparse_lib/sparse/sparse_mat.pyx":33
+ *     property T:
+ *         def __get__(self):
+ *             raise NotImplemented("Not implemented in base class")             # <<<<<<<<<<<<<<
+ * 
+ *         def __set__(self, value):
+ */
+  __pyx_tuple__3 = PyTuple_Pack(1, __pyx_kp_s_Not_implemented_in_base_class); if (unlikely(!__pyx_tuple__3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 33; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__3);
+  __Pyx_GIVEREF(__pyx_tuple__3);
+
+  /* "sparse_lib/sparse/sparse_mat.pyx":36
+ * 
+ *         def __set__(self, value):
+ *             raise NotImplemented("Not implemented in base class")             # <<<<<<<<<<<<<<
+ * 
+ *         def __del__(self):
+ */
+  __pyx_tuple__4 = PyTuple_Pack(1, __pyx_kp_s_Not_implemented_in_base_class); if (unlikely(!__pyx_tuple__4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 36; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__4);
+  __Pyx_GIVEREF(__pyx_tuple__4);
+
+  /* "sparse_lib/sparse/sparse_mat.pyx":39
+ * 
+ *         def __del__(self):
+ *             raise NotImplemented("Not implemented in base class")             # <<<<<<<<<<<<<<
+ * 
+ * cdef class MutableSparseMatrix(SparseMatrix):
+ */
+  __pyx_tuple__5 = PyTuple_Pack(1, __pyx_kp_s_Not_implemented_in_base_class); if (unlikely(!__pyx_tuple__5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 39; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__5);
+  __Pyx_GIVEREF(__pyx_tuple__5);
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -2071,14 +2287,14 @@ PyMODINIT_FUNC PyInit_sparse_mat(void)
   if (PyObject_SetAttrString(__pyx_m, "SparseMatrix", (PyObject *)&__pyx_type_10sparse_lib_6sparse_10sparse_mat_SparseMatrix) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 4; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_ptype_10sparse_lib_6sparse_10sparse_mat_SparseMatrix = &__pyx_type_10sparse_lib_6sparse_10sparse_mat_SparseMatrix;
   __pyx_type_10sparse_lib_6sparse_10sparse_mat_MutableSparseMatrix.tp_base = __pyx_ptype_10sparse_lib_6sparse_10sparse_mat_SparseMatrix;
-  if (PyType_Ready(&__pyx_type_10sparse_lib_6sparse_10sparse_mat_MutableSparseMatrix) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 31; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyType_Ready(&__pyx_type_10sparse_lib_6sparse_10sparse_mat_MutableSparseMatrix) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 41; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_type_10sparse_lib_6sparse_10sparse_mat_MutableSparseMatrix.tp_print = 0;
-  if (PyObject_SetAttrString(__pyx_m, "MutableSparseMatrix", (PyObject *)&__pyx_type_10sparse_lib_6sparse_10sparse_mat_MutableSparseMatrix) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 31; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyObject_SetAttrString(__pyx_m, "MutableSparseMatrix", (PyObject *)&__pyx_type_10sparse_lib_6sparse_10sparse_mat_MutableSparseMatrix) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 41; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_ptype_10sparse_lib_6sparse_10sparse_mat_MutableSparseMatrix = &__pyx_type_10sparse_lib_6sparse_10sparse_mat_MutableSparseMatrix;
   __pyx_type_10sparse_lib_6sparse_10sparse_mat_ImmutableSparseMatrix.tp_base = __pyx_ptype_10sparse_lib_6sparse_10sparse_mat_SparseMatrix;
-  if (PyType_Ready(&__pyx_type_10sparse_lib_6sparse_10sparse_mat_ImmutableSparseMatrix) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 42; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyType_Ready(&__pyx_type_10sparse_lib_6sparse_10sparse_mat_ImmutableSparseMatrix) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 52; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_type_10sparse_lib_6sparse_10sparse_mat_ImmutableSparseMatrix.tp_print = 0;
-  if (PyObject_SetAttrString(__pyx_m, "ImmutableSparseMatrix", (PyObject *)&__pyx_type_10sparse_lib_6sparse_10sparse_mat_ImmutableSparseMatrix) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 42; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyObject_SetAttrString(__pyx_m, "ImmutableSparseMatrix", (PyObject *)&__pyx_type_10sparse_lib_6sparse_10sparse_mat_ImmutableSparseMatrix) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 52; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_ptype_10sparse_lib_6sparse_10sparse_mat_ImmutableSparseMatrix = &__pyx_type_10sparse_lib_6sparse_10sparse_mat_ImmutableSparseMatrix;
   /*--- Type import code ---*/
   /*--- Variable import code ---*/
@@ -2093,7 +2309,7 @@ PyMODINIT_FUNC PyInit_sparse_mat(void)
  */
   __pyx_v_10sparse_lib_6sparse_10sparse_mat_MUTABLE_SPARSE_MAT_DEFAULT_SIZE_HINT = 40;
 
-  /* "sparse_lib/sparse/sparse_mat.pyx":43
+  /* "sparse_lib/sparse/sparse_mat.pyx":53
  * 
  * cdef class ImmutableSparseMatrix(SparseMatrix):
  *     def __cinit__(self, **kwargs):             # <<<<<<<<<<<<<<
@@ -2755,147 +2971,6 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value) {
                                      little, !is_unsigned);
     }
 }
-
-#if !CYTHON_COMPILING_IN_PYPY && PY_MAJOR_VERSION < 3
-static PyObject *__Pyx_GetStdout(void) {
-    PyObject *f = PySys_GetObject((char *)"stdout");
-    if (!f) {
-        PyErr_SetString(PyExc_RuntimeError, "lost sys.stdout");
-    }
-    return f;
-}
-static int __Pyx_Print(PyObject* f, PyObject *arg_tuple, int newline) {
-    int i;
-    if (!f) {
-        if (!(f = __Pyx_GetStdout()))
-            return -1;
-    }
-    Py_INCREF(f);
-    for (i=0; i < PyTuple_GET_SIZE(arg_tuple); i++) {
-        PyObject* v;
-        if (PyFile_SoftSpace(f, 1)) {
-            if (PyFile_WriteString(" ", f) < 0)
-                goto error;
-        }
-        v = PyTuple_GET_ITEM(arg_tuple, i);
-        if (PyFile_WriteObject(v, f, Py_PRINT_RAW) < 0)
-            goto error;
-        if (PyString_Check(v)) {
-            char *s = PyString_AsString(v);
-            Py_ssize_t len = PyString_Size(v);
-            if (len > 0) {
-                switch (s[len-1]) {
-                    case ' ': break;
-                    case '\f': case '\r': case '\n': case '\t': case '\v':
-                        PyFile_SoftSpace(f, 0);
-                        break;
-                    default:  break;
-                }
-            }
-        }
-    }
-    if (newline) {
-        if (PyFile_WriteString("\n", f) < 0)
-            goto error;
-        PyFile_SoftSpace(f, 0);
-    }
-    Py_DECREF(f);
-    return 0;
-error:
-    Py_DECREF(f);
-    return -1;
-}
-#else
-static int __Pyx_Print(PyObject* stream, PyObject *arg_tuple, int newline) {
-    PyObject* kwargs = 0;
-    PyObject* result = 0;
-    PyObject* end_string;
-    if (unlikely(!__pyx_print)) {
-        __pyx_print = PyObject_GetAttr(__pyx_b, __pyx_n_s_print);
-        if (!__pyx_print)
-            return -1;
-    }
-    if (stream) {
-        kwargs = PyDict_New();
-        if (unlikely(!kwargs))
-            return -1;
-        if (unlikely(PyDict_SetItem(kwargs, __pyx_n_s_file, stream) < 0))
-            goto bad;
-        if (!newline) {
-            end_string = PyUnicode_FromStringAndSize(" ", 1);
-            if (unlikely(!end_string))
-                goto bad;
-            if (PyDict_SetItem(kwargs, __pyx_n_s_end, end_string) < 0) {
-                Py_DECREF(end_string);
-                goto bad;
-            }
-            Py_DECREF(end_string);
-        }
-    } else if (!newline) {
-        if (unlikely(!__pyx_print_kwargs)) {
-            __pyx_print_kwargs = PyDict_New();
-            if (unlikely(!__pyx_print_kwargs))
-                return -1;
-            end_string = PyUnicode_FromStringAndSize(" ", 1);
-            if (unlikely(!end_string))
-                return -1;
-            if (PyDict_SetItem(__pyx_print_kwargs, __pyx_n_s_end, end_string) < 0) {
-                Py_DECREF(end_string);
-                return -1;
-            }
-            Py_DECREF(end_string);
-        }
-        kwargs = __pyx_print_kwargs;
-    }
-    result = PyObject_Call(__pyx_print, arg_tuple, kwargs);
-    if (unlikely(kwargs) && (kwargs != __pyx_print_kwargs))
-        Py_DECREF(kwargs);
-    if (!result)
-        return -1;
-    Py_DECREF(result);
-    return 0;
-bad:
-    if (kwargs != __pyx_print_kwargs)
-        Py_XDECREF(kwargs);
-    return -1;
-}
-#endif
-
-#if !CYTHON_COMPILING_IN_PYPY && PY_MAJOR_VERSION < 3
-static int __Pyx_PrintOne(PyObject* f, PyObject *o) {
-    if (!f) {
-        if (!(f = __Pyx_GetStdout()))
-            return -1;
-    }
-    Py_INCREF(f);
-    if (PyFile_SoftSpace(f, 0)) {
-        if (PyFile_WriteString(" ", f) < 0)
-            goto error;
-    }
-    if (PyFile_WriteObject(o, f, Py_PRINT_RAW) < 0)
-        goto error;
-    if (PyFile_WriteString("\n", f) < 0)
-        goto error;
-    Py_DECREF(f);
-    return 0;
-error:
-    Py_DECREF(f);
-    return -1;
-    /* the line below is just to avoid C compiler
-     * warnings about unused functions */
-    return __Pyx_Print(f, NULL, 0);
-}
-#else
-static int __Pyx_PrintOne(PyObject* stream, PyObject *o) {
-    int res;
-    PyObject* arg_tuple = PyTuple_Pack(1, o);
-    if (unlikely(!arg_tuple))
-        return -1;
-    res = __Pyx_Print(stream, arg_tuple, 1);
-    Py_DECREF(arg_tuple);
-    return res;
-}
-#endif
 
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value) {
     const long neg_one = (long) -1, const_zero = 0;

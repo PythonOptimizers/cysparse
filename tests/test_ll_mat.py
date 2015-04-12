@@ -40,3 +40,17 @@ np_array = np.arange(3).astype(np.float64)
 dd = matrix * np_array
 
 print dd
+
+print "(" * 80
+
+matrix_T = matrix.T
+
+print matrix_T
+
+matrix_T.print_to(sys.stdout)
+
+np_array2 = np.arange(2).astype(np.float64)
+
+res = matrix.T * np_array2
+
+print res

@@ -28,6 +28,16 @@ cdef class SparseMatrix:
         def __del__(self):
             raise AttributeError('Attribute shape is read-only')
 
+    property T:
+        def __get__(self):
+            raise NotImplemented("Not implemented in base class")
+
+        def __set__(self, value):
+            raise NotImplemented("Not implemented in base class")
+
+        def __del__(self):
+            raise NotImplemented("Not implemented in base class")
+
 cdef class MutableSparseMatrix(SparseMatrix):
     def __cinit__(self, **kwargs):
         """
@@ -37,7 +47,7 @@ cdef class MutableSparseMatrix(SparseMatrix):
 
         """
         self.size_hint = kwargs.get('size_hint', MUTABLE_SPARSE_MAT_DEFAULT_SIZE_HINT)
-        print("size hint = %d" % self.size_hint )
+
 
 cdef class ImmutableSparseMatrix(SparseMatrix):
     def __cinit__(self, **kwargs):

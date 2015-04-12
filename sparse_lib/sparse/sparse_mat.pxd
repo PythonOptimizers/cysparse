@@ -11,6 +11,8 @@ cdef class SparseMatrix:
 
         object shape     # for compatibility with numpy, array, etc.
 
+        object T         # for the transposed matrix
+
 cdef class MutableSparseMatrix(SparseMatrix):
     cdef:
         int size_hint

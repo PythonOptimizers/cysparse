@@ -229,6 +229,16 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
 
         return 0.0
 
+    property T:
+        def __get__(self):
+            return transposed_ll_mat(self)
+
+        def __set__(self, value):
+            raise AttributeError("Transposed matrix is read-only")
+
+        def __del__(self):
+            raise AttributeError("Transposed matrix is read-only")
+
     ####################################################################################################################
     # Matrix conversions
     ####################################################################################################################
@@ -479,6 +489,7 @@ cdef LLSparseMatrix multiply_two_ll_mat(LLSparseMatrix A, LLSparseMatrix B):
                 kB = B.link[kB]
     return C
 
+
 cdef multiply_ll_mat_with_numpy_ndarray(LLSparseMatrix A, cnp.ndarray[cnp.double_t, ndim=2] B):
     raise NotImplemented("Multiplication with numpy ndarray of dim 2 not implemented yet")
 
@@ -534,6 +545,52 @@ cdef cnp.ndarray[cnp.double_t, ndim=1] multiply_ll_mat_with_numpy_vector(LLSpars
 
 
     return c
+
+
+cdef LLSparseMatrix transposed_ll_mat(LLSparseMatrix A):
+    """
+    Compute transposed matrix.
+
+    Args:
+        A: A :class:`LLSparseMatrix` :math:`A`.
+
+    Note:
+        The transposed matrix uses the same amount of internal memory as the
+
+    Returns:
+        The corresponding transposed :math:`A^t` :class:`LLSparseMatrix`.
+    """
+    if A.is_symmetric:
+        raise NotImplemented("Transposed is not implemented yet for symmetric matrices")
+
+    cdef:
+        int A_nrow = A.nrow
+        int A_ncol = A.ncol
+
+        int At_nrow = A.ncol
+        int At_ncol = A.nrow
+
+        int At_nalloc = A.nalloc
+
+        int i, k
+        double val
+
+    cdef LLSparseMatrix transposed_A = LLSparseMatrix(nrow =At_nrow, ncol=At_ncol, size_hint=At_nalloc)
+
+    for i from 0 <= i < A_nrow:
+        k = A.root[i]
+
+        while k != -1:
+            val = A.val[k]
+            j = A.col[k]
+            k = A.link[k]
+
+            transposed_A[j, i] = val
+
+
+    return transposed_A
+
+
 
 
 cdef bint update_ll_mat_item_add(LLSparseMatrix A, int i, int j, double x):
