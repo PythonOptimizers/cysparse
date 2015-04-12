@@ -31,3 +31,12 @@ print C
 import sys
 
 C.print_to(sys.stdout)
+
+print "$" * 80
+
+import numpy as np
+np_array = np.arange(3).astype(np.float64)
+
+dd = matrix * np_array
+
+print dd

@@ -9,10 +9,10 @@ from sparse_lib.sparse.sparse_mat cimport MutableSparseMatrix
 from sparse_lib.sparse.csr_mat cimport CSRSparseMatrix, MakeCSRSparseMatrix
 
 # Import the Python-level symbols of numpy
-#import numpy as np
+import numpy as np
 
 # Import the C-level symbols of numpy
-#cimport numpy as cnp
+cimport numpy as cnp
 
 
 from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
@@ -82,7 +82,13 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         PyMem_Free(self.root)
 
     cdef _realloc(self):
-        # TODO: use this method whenever possible
+        """
+        Realloc space for the 1D arrays.
+
+        Warning:
+            1D arrays can only be expanded with this method.
+
+        """
         cdef:
             void *temp
             int nalloc_new
@@ -130,7 +136,7 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         cdef int j = key[1]
 
         if i < 0 or i >= self.nrow or j < 0 or j >= self.ncol:
-            raise IndexError('indices out of range')
+            raise IndexError('Indices out of range')
 
 
     def __setitem__(self, tuple key, double value):
@@ -140,7 +146,7 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         cdef int j = key[1]
 
         if self.is_symmetric and i < j:
-            raise IndexError('write operation to upper triangle of symmetric matrix')
+            raise IndexError('Write operation to upper triangle of symmetric matrix')
 
         cdef void *temp
         cdef int k, new_elem, last, col
@@ -277,8 +283,22 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
     ####################################################################################################################
     # Multiplication
     ####################################################################################################################
-    def __mul__(self, LLSparseMatrix B):
-        return multiply_two_ll_mat(self, B)
+    def __mul__(self, B):
+        # CASES
+        if isinstance(B, LLSparseMatrix):
+            return multiply_two_ll_mat(self, B)
+        elif isinstance(B, np.ndarray):
+            # test type
+            assert B.dtype == np.float64, "Multiplication only allowed with an array of C-doubles (numpy float64)!"
+
+            if B.ndim == 2:
+                return multiply_ll_mat_with_numpy_ndarray(self, B)
+            elif B.ndim == 1:
+                return multiply_ll_mat_with_numpy_vector(self, B)
+            else:
+                raise IndexError("Matrix dimensions must agree")
+        else:
+            raise NotImplemented("Multiplication with this kind of object not implemented yet...")
 
     ####################################################################################################################
     # String representations
@@ -399,16 +419,16 @@ def MakeLLSparseMatrix(**kwargs):
 ########################################################################################################################
 # Multiplication functions
 ########################################################################################################################
-cdef multiply_two_ll_mat(LLSparseMatrix A, LLSparseMatrix B):
+cdef LLSparseMatrix multiply_two_ll_mat(LLSparseMatrix A, LLSparseMatrix B):
     """
-    Multiply two :class:`LLSparseMatrix` ``A * B``.
+    Multiply two :class:`LLSparseMatrix` ``A`` and ``B``.
 
     Args:
-        A:
-        B:
+        A: A :class:``LLSparseMatrix`` ``A``.
+        B: A :class:``LLSparseMatrix`` ``B``.
 
     Returns:
-        A :class:``LLSparseMatrix`` ``C = A * B``.
+        A **new** :class:``LLSparseMatrix`` ``C = A * B``.
 
     Raises:
         ``NotImplemented``: When matrix ``A`` or ``B`` is symmetric.
@@ -422,7 +442,7 @@ cdef multiply_two_ll_mat(LLSparseMatrix A, LLSparseMatrix B):
     cdef int B_ncol = B.ncol
 
     if A_ncol != B_nrow:
-        raise IndexError("matrix dimensions must agree")
+        raise IndexError("Matrix dimensions must agree ([%d, %d] * [%d, %d])" % (A_nrow, A_ncol, B_nrow, B_ncol))
 
     cdef int C_nrow = A_nrow
     cdef int C_ncol = B_ncol
@@ -455,11 +475,66 @@ cdef multiply_two_ll_mat(LLSparseMatrix A, LLSparseMatrix B):
             # add jA-th row of B to iA-th row of C
             kB = B.root[jA]
             while kB != -1:
-                ret = update_ll_mat_item_add(C, iA, B.col[kB], valA*B.val[kB])
-                if not ret:
-                    raise RuntimeError('Multiplication aborted')
+                update_ll_mat_item_add(C, iA, B.col[kB], valA*B.val[kB])
                 kB = B.link[kB]
     return C
+
+cdef multiply_ll_mat_with_numpy_ndarray(LLSparseMatrix A, cnp.ndarray[cnp.double_t, ndim=2] B):
+    raise NotImplemented("Multiplication with numpy ndarray of dim 2 not implemented yet")
+
+cdef cnp.ndarray[cnp.double_t, ndim=1] multiply_ll_mat_with_numpy_vector(LLSparseMatrix A, cnp.ndarray[cnp.double_t, ndim=1] b):
+    """
+    Multiply a :class:`LLSparseMatrix` ``A`` with a numpy vector ``b``.
+
+    Args
+        A: A :class:`LLSparseMatrix`.
+        b: A numpy.ndarray of dimension 1 (a vector).
+
+    Returns:
+        ``c = A * b``: a **new** numpy.ndarray of dimension 1.
+
+    Raises:
+        IndexError if dimensions don't match.
+
+    """
+    cdef int A_nrow = A.nrow
+    cdef int A_ncol = A.ncol
+
+    # test dimensions
+    if A_ncol != b.size:
+        raise IndexError("Dimensions must agree ([%d,%d] * [%d, %d])" % (A_nrow, A_ncol, b.size, 1))
+
+    # direct access to vector b
+    cdef double * b_data = <double *> b.data
+
+    # array c = A * b
+    cdef cnp.ndarray[cnp.double_t, ndim=1] c = np.empty(A_nrow, dtype=np.float64)
+    cdef double * c_data = <double *> c.data
+
+    cdef:
+        int i, j
+        int k
+
+        double val
+        double val_c
+
+    for i from 0 <= i < A_nrow:
+        k = A.root[i]
+
+        val_c = 0.0
+
+        while k != -1:
+            val = A.val[k]
+            j = A.col[k]
+            k = A.link[k]
+
+            val_c += val * b_data[j]
+
+        c_data[i] = val_c
+
+
+    return c
+
 
 cdef bint update_ll_mat_item_add(LLSparseMatrix A, int i, int j, double x):
     """
@@ -471,13 +546,16 @@ cdef bint update_ll_mat_item_add(LLSparseMatrix A, int i, int j, double x):
         x (double): Value to add to item to update ``A[i, j]``.
 
     Returns:
-        True if element was correctly updated, False otherwise.
+        True.
+
+    Raises:
+        ``IndexError`` when writing to lower triangle of a symmetric matrix.
     """
     cdef:
         int k, new_elem, col, last
 
     if A.is_symmetric and i < j:
-        raise IndexError("write operation to upper triangle of symmetric matrix")
+        raise IndexError("Write operation to lower triangle of symmetric matrix (only fill in upper triangle for symmetric matrices)")
 
     if not A.store_zeros and x == 0.0:
         return True
@@ -491,7 +569,6 @@ cdef bint update_ll_mat_item_add(LLSparseMatrix A, int i, int j, double x):
             break
         last = k
         k = A.link[k]
-
 
     if col == j:
         # element already exists: compute updated value
@@ -526,7 +603,6 @@ cdef bint update_ll_mat_item_add(LLSparseMatrix A, int i, int j, double x):
             # test if there is space for a new element
             if A.nnz == A.nalloc:
                 A._realloc()
-
 
         A.val[new_elem] = x
         A.col[new_elem] = j
