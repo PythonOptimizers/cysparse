@@ -8,16 +8,24 @@ from __future__ import print_function
 from sparse_lib.sparse.sparse_mat cimport MutableSparseMatrix
 from sparse_lib.sparse.csr_mat cimport CSRSparseMatrix, MakeCSRSparseMatrix
 
+
+
 # Import the Python-level symbols of numpy
 import numpy as np
 
 # Import the C-level symbols of numpy
 cimport numpy as cnp
 
+cnp.import_array()
 
 from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
 from libc.stdlib cimport malloc,free
 from cpython cimport PyObject, Py_INCREF
+
+# TODO: use more internal CPython code
+cdef extern from "Python.h":
+    # *** Types ***
+    int PyInt_Check(PyObject *o)
 
 
 cdef int LL_MAT_DEFAULT_SIZE_HINT = 40        # allocated size by default
@@ -25,6 +33,12 @@ cdef double LL_MAT_INCREASE_FACTOR = 1.5      # reallocating factor if size is n
 cdef int LL_MAT_PPRINT_ROW_THRESH = 500       # row threshold for choosing print format
 cdef int LL_MAT_PPRINT_COL_THRESH = 20        # column threshold for choosing print format
 
+#include 'll_mat_slices.pxi'
+
+# forward declaration
+cdef class LLSparseMatrix(MutableSparseMatrix)
+
+from sparse_lib.sparse.ll_mat_view cimport LLSparseMatrixView, MakeLLSparseMatrixView
 
 cdef class LLSparseMatrix(MutableSparseMatrix):
     """
@@ -36,12 +50,12 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
     ####################################################################################################################
     # Init/Free/Memory
     ####################################################################################################################
-    cdef:
-        int     free      # index to first element in free chain
-        double *val       # pointer to array of values
-        int    *col       # pointer to array of indices, see doc
-        int    *link      # pointer to array of indices, see doc
-        int    *root      # pointer to array of indices, see doc
+    #cdef:
+    #    int     free      # index to first element in free chain
+    #    double *val       # pointer to array of values
+    #    int    *col       # pointer to array of indices, see doc
+    #    int    *link      # pointer to array of indices, see doc
+    #    int    *root      # pointer to array of indices, see doc
 
     def __cinit__(self, int nrow, int ncol, int size_hint=LL_MAT_DEFAULT_SIZE_HINT, bint store_zeros=False):
 
@@ -118,29 +132,38 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
     ####################################################################################################################
     # Get/Set items
     ####################################################################################################################
-    def _assert_well_formed_indexed_tuple(self, tuple key):
+    def _assert_length_tuple_is_2(self, tuple key):
         """
-        Assert the tuple given to find an item in the matrix is well formed.
-
-        Args:
-          key: A ``tuple`` ``(row, col)``.
+        Assert that length of tuple is 2.
 
         Raises:
-          An ``IndexError`` if the ``key`` argument is not well formed.
-
+            ``IndexError`` if the length of tuple is **not** 2.
         """
         if len(key) != 2:
             raise IndexError('Index tuple must be of length 2 (not %d)' % len(key))
 
+    def _assert_indexed_tuple_is_within_bounds(self, tuple key):
+        """
+        Assert that both integers in the tuple ``key = (i, j)`` are within bounds.
+
+        Raises:
+            ``IndexError`` if one of the index is out of bound.
+        """
         cdef int i = key[0]
         cdef int j = key[1]
 
         if i < 0 or i >= self.nrow or j < 0 or j >= self.ncol:
             raise IndexError('Indices out of range')
 
-
     def __setitem__(self, tuple key, double value):
-        self._assert_well_formed_indexed_tuple(key)
+        self._assert_length_tuple_is_2(key)
+
+        # test for direct access (i.e. both elements are integers)
+        if not PyInt_Check(<PyObject *>key[0]) or not PyInt_Check(<PyObject *>key[0]):
+            raise NotImplemented("Assignment with non integer indices is not implemented yet")
+
+        # both element of the tuple **are** integers
+        self._assert_indexed_tuple_is_within_bounds(key)
 
         cdef int i = key[0]
         cdef int j = key[1]
@@ -210,7 +233,30 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
             self.nnz -= 1
 
     def __getitem__(self, tuple key):
-        self._assert_well_formed_indexed_tuple(key)
+        """
+        Return ``ll_mat[...]``.
+
+        Args:
+          key = (i,j): Must be a couple of values. Values can be:
+                 * integers;
+                 * lists;
+                 * numpy arrays
+
+        Returns:
+            If ``i`` and ``j`` are both integers, return corresponding value ``ll_mat[i, j]``, otherwise
+            return the corresponding :class:`LLSparseMatrixView`.
+        """
+        self._assert_length_tuple_is_2(key)
+
+        cdef LLSparseMatrixView view
+
+        # test for direct access (i.e. both elements are integers)
+        if not PyInt_Check(<PyObject *>key[0]) or not PyInt_Check(<PyObject *>key[0]):
+            view =  MakeLLSparseMatrixView(self, <PyObject *>key[0], <PyObject *>key[1])
+            return view
+
+        # both element of the tuple **are** integers
+        self._assert_indexed_tuple_is_within_bounds(key)
 
         cdef int i = key[0]
         cdef int j = key[1]
@@ -325,7 +371,7 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
             OUT: Output stream that print (Python3) can print to.
         """
         # TODO: adapt to any numbers... and allow for additional parameters to control the output
-        cdef int i, k, first = 1;
+        cdef int i, k, first = 1
         symmetric_str = None
 
         if self.is_symmetric:
@@ -560,6 +606,7 @@ cdef LLSparseMatrix transposed_ll_mat(LLSparseMatrix A):
     Returns:
         The corresponding transposed :math:`A^t` :class:`LLSparseMatrix`.
     """
+    # TODO: optimized to pure Cython code
     if A.is_symmetric:
         raise NotImplemented("Transposed is not implemented yet for symmetric matrices")
 

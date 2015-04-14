@@ -54,3 +54,19 @@ np_array2 = np.arange(2).astype(np.float64)
 res = matrix.T * np_array2
 
 print res
+
+print "*" * 80
+
+ti = matrix[0:11:1, 0:3:3]
+
+print type(ti)
+
+print "!" * 89
+
+l = [0, 1]
+
+print l
+print type(l)
+gg = matrix[l, 0:3]
+
+print type(gg)

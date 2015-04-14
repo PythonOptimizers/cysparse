@@ -7,6 +7,7 @@ class CSRSparseMatrixSimpleTestCase(unittest.TestCase):
     def setUp(self):
         self.n = 10
         self.A = CSRSparseMatrix(self.n, self.n)
+
         print self.A
 
     def testCreate(self):
