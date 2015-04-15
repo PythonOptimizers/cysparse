@@ -49,7 +49,7 @@ class LLSparseMatrixViewCreateTestCase(LLSparseMatrixViewBaseTestCase):
     ####################################################################################################################
     def testCreateFromSlicesWithSuccess(self):
         """
-        We use both index elements to be slices. The use here is permitted.
+        We use both index elements to be slices. All the operations here are permitted.
 
         """
         # empty slices

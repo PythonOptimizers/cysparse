@@ -71,6 +71,7 @@ cdef class LLSparseMatrixView:
 
     property nnz:
         # we only count once the non zero elements
+        # TODO: take symmetry into account
         def __get__(self):
             if not self.__counted_nnz:
                 # we have to count the nnz

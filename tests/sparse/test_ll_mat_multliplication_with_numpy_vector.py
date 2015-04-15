@@ -33,7 +33,6 @@ class LLSparseMatrixMultiplicationWithNumpyVectorBaseTestCase(unittest.TestCase)
         self.b_strided = np.array([0.0, -32, 1, 89]).astype(np.float64)[::2] # non C-contiguous
 
 
-
 class LLSparseMatrixMultiplicationWithNumpyVectorBasicTestCase(LLSparseMatrixMultiplicationWithNumpyVectorBaseTestCase):
     def test_both_ll_mat_are_equal(self):
         self.failUnless(ll_mats_are_equals(self.A, self.A_sym))

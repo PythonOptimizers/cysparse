@@ -799,13 +799,13 @@ cdef bint update_ll_mat_item_add(LLSparseMatrix A, int i, int j, double x):
         True.
 
     Raises:
-        ``IndexError`` when writing to lower triangle of a symmetric matrix.
+        ``IndexError`` when non writing to lower triangle of a symmetric matrix.
     """
     cdef:
         int k, new_elem, col, last
 
     if A.is_symmetric and i < j:
-        raise IndexError("Write operation to lower triangle of symmetric matrix (only fill in upper triangle for symmetric matrices)")
+        raise IndexError("Write operation to upper triangle of symmetric matrix not allowed")
 
     if not A.store_zeros and x == 0.0:
         return True
