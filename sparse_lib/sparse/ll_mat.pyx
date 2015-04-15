@@ -619,6 +619,8 @@ cdef cnp.ndarray[cnp.double_t, ndim=1] multiply_ll_mat_with_numpy_vector(LLSpars
     cdef int A_nrow = A.nrow
     cdef int A_ncol = A.ncol
 
+    temp = cnp.NPY_DOUBLE
+
     # test dimensions
     if A_ncol != b.size:
         raise IndexError("Dimensions must agree ([%d,%d] * [%d, %d])" % (A_nrow, A_ncol, b.size, 1))

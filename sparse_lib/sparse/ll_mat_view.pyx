@@ -13,6 +13,8 @@ cnp.import_array()
 
 import numpy as np
 
+ctypedef cnp.int_t DTYPE_t
+
 cdef extern from "Python.h":
     # *** Types ***
     Py_ssize_t PY_SSIZE_T_MAX
@@ -229,6 +231,7 @@ cdef int * create_c_array_indices_from_python_object(int max_length, PyObject * 
         We partially test:
             * if elements inside the index objects are integers: this is done for list but **not** for numpy arrays...
     """
+    # TODO: test for strides in numpy arrays!!!
     cdef int ret
     cdef Py_ssize_t start, stop, step, length, index
 
@@ -302,11 +305,15 @@ cdef int * create_c_array_indices_from_python_object(int max_length, PyObject * 
             raise MemoryError()
 
         # TODO: remove or control this is not DANGEROUS
+        # This is dangerous if array is NOT C-contiguous!!!
         array_data = <int* > PyArray_DATA(<PyArrayObject *> obj)
 
         # test type of array elements
         # TODO: I don't know how to find out what the type of elements is!!!!
         #py_array_descr = PyArray_DTYPE(<PyArrayObject*> obj)
+
+        #if py_array_descr.type_num != np.int:
+        #    raise ValueError("Index object must contain integers")
 
         # we cannot copy the C-array directly as we must test each element
         for i from 0 <= i < length:

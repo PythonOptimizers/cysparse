@@ -158,10 +158,10 @@ class LLSparseMatrixViewCreateTestCase(LLSparseMatrixViewBaseTestCase):
 
         """
         with self.assertRaises(IndexError):
-            ll_mat_view = self.A[np.array([0, 1, self.A.nrow]), np.array([3])]  # Index out of bound
+            ll_mat_view = self.A[np.array([0, 1, self.A.nrow], dtype=np.int), np.array([3])]  # Index out of bound
             ll_mat_view = self.A[[3], [0, -1]] # Index out of bound
 
-            ll_mat_view = self.A[np.array([[0,1], [02]]), np.array([3])] # wrong dimension of first array
+            ll_mat_view = self.A[np.array([[0,1], [0,2]]), np.array([3])] # wrong dimension of first array
 
     ####################################################################################################################
     # MIX: EVERYTHING TOGETHER
