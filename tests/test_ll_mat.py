@@ -35,8 +35,8 @@ C.print_to(sys.stdout)
 print "$" * 80
 
 import numpy as np
-np_array = np.arange(3).astype(np.float64)
-
+#np_array = np.arange(3).astype(np.float64)
+np_array = np.arange(10).astype(np.float64)[::2]
 dd = matrix * np_array
 
 print dd
