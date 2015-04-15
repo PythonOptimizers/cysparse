@@ -70,3 +70,9 @@ print type(l)
 gg = matrix[l, 0:3]
 
 print type(gg)
+
+print "8" * 80
+matrix.compress()
+
+print matrix[0,0]
+print matrix[0, 2]

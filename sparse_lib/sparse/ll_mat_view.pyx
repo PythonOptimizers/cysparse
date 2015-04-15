@@ -293,7 +293,7 @@ cdef int * create_c_array_indices_from_python_object(int max_length, PyObject * 
     elif PyArray_Check(obj):
         array_dim = <int> PyArray_NDIM(<PyArrayObject *>obj)
         if array_dim != 1:
-            raise IndexError("Numpy array must be of dimension 1")
+            raise IndexError("Numpy array must have only one dimension")
 
         length = <Py_ssize_t> PyArray_DIM(<PyArrayObject *>obj, 0)
 

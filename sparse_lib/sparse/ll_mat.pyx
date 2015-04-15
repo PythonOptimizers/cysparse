@@ -95,22 +95,17 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         PyMem_Free(self.link)
         PyMem_Free(self.root)
 
-    cdef _realloc(self):
+    cdef _realloc(self, int nalloc_new):
         """
-        Realloc space for the 1D arrays.
+        Realloc space for the internal arrays.
 
-        Warning:
-            1D arrays can only be expanded with this method.
+        Note:
+            Internal arrays can be expanded or shrunk.
 
         """
         cdef:
             void *temp
-            int nalloc_new
-
-        # we have to reallocate some space
-        # increase size of col, val and link arrays
-        assert LL_MAT_INCREASE_FACTOR > 1.0
-        nalloc_new = <int>(<double>LL_MAT_INCREASE_FACTOR * self.nalloc) + 1
+            #int nalloc_new
 
         temp = <int *> PyMem_Realloc(self.col, nalloc_new * sizeof(int))
         if not temp:
@@ -128,6 +123,70 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         self.val = <double *>temp
 
         self.nalloc = nalloc_new
+
+    cdef _realloc_expand(self):
+        """
+        Realloc space for internal arrays.
+
+        Note:
+            We use ``LL_MAT_INCREASE_FACTOR`` as expanding factor.
+        """
+        assert LL_MAT_INCREASE_FACTOR > 1.0
+        cdef int real_new_alloc = <int>(<double>LL_MAT_INCREASE_FACTOR * self.nalloc) + 1
+
+        return self._realloc(real_new_alloc)
+
+    def compress(self):
+        """
+        Shrink matrix to its minimal size.
+        """
+        cdef:
+            #double *val;
+            #int *col, *link;
+            int i, k, k_next, k_last, k_new, nalloc_new;
+
+        nalloc_new = self.nnz  # new size for val, col and link arrays
+
+
+        # remove entries with k >= nalloc_new from free list
+        k_last = -1
+        k = self.free
+        while k != -1:
+            k_next =  self.link[k]
+            if k >= nalloc_new:
+                if k_last == -1:
+                    self.free = k_next
+                else:
+                    self.link[k_last] = k_next
+            else:
+                k_last = k
+                k = k_next
+
+        # reposition matrix entries with k >= nalloc_new
+        for i from 0 <= i < self.nrow:
+            k_last = -1
+            k = self.root[i]
+            while k != -1:
+                if k >= nalloc_new:
+                    k_new = self.free
+                    if k_last == -1:
+                        self.root[i] = k_new
+                    else:
+                        self.link[k_last] = k_new
+                    self.free = self.link[k_new]
+                    self.val[k_new] = self.val[k]
+                    self.col[k_new] = self.col[k]
+                    self.link[k_new] = self.link[k]
+                    k_last = k_new
+                else:
+                    k_last = k
+
+                k = self.link[k]
+
+        # shrink arrays
+        self._realloc(nalloc_new)
+
+        return
 
     ####################################################################################################################
     # Get/Set items
@@ -205,7 +264,7 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
                 # test if there is space for a new element
                 if self.nnz == self.nalloc:
                     # we have to reallocate some space
-                    self._realloc()
+                    self._realloc_expand()
 
                 self.val[new_elem] = value
                 self.col[new_elem] = j
@@ -706,7 +765,7 @@ cdef bint update_ll_mat_item_add(LLSparseMatrix A, int i, int j, double x):
 
             # test if there is space for a new element
             if A.nnz == A.nalloc:
-                A._realloc()
+                A._realloc_expand()
 
         A.val[new_elem] = x
         A.col[new_elem] = j

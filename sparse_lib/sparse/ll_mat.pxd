@@ -2,6 +2,8 @@ from sparse_lib.sparse.sparse_mat cimport MutableSparseMatrix
 
 cimport numpy as cnp
 
+
+
 cdef class LLSparseMatrix(MutableSparseMatrix):
     """
     Linked-List Format matrix.
@@ -19,7 +21,8 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         int    *link      # pointer to array of indices, see doc
         int    *root      # pointer to array of indices, see doc
 
-    cdef _realloc(self)
+    cdef _realloc(self, int nalloc_new)
+    cdef _realloc_expand(self)
 
 cdef LLSparseMatrix multiply_two_ll_mat(LLSparseMatrix A, LLSparseMatrix B)
 
