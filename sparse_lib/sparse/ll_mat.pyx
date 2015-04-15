@@ -57,7 +57,7 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
     #    int    *link      # pointer to array of indices, see doc
     #    int    *root      # pointer to array of indices, see doc
 
-    def __cinit__(self, int nrow, int ncol, int size_hint=LL_MAT_DEFAULT_SIZE_HINT, bint store_zeros=False):
+    def __cinit__(self, int nrow, int ncol, int size_hint=LL_MAT_DEFAULT_SIZE_HINT, bint is_symmetric=False, bint store_zeros=False):
 
         if size_hint < 1:
             raise ValueError('size_hint (%d) must be >= 1' % size_hint)
@@ -228,7 +228,7 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         cdef int j = key[1]
 
         if self.is_symmetric and i < j:
-            raise IndexError('Write operation to upper triangle of symmetric matrix')
+            raise IndexError('Write operation to upper triangle of symmetric matrix not allowed')
 
         cdef void *temp
         cdef int k, new_elem, last, col
@@ -320,6 +320,19 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         cdef int i = key[0]
         cdef int j = key[1]
 
+        return self.at(i, j)
+
+    cdef at(self, int i, int j):
+        """
+        Direct access to element ``(i, j)``.
+
+        Warning:
+            There is not out of bounds test.
+
+        See:
+            :meth:`safe_at`.
+
+        """
         cdef int k, t
 
         if self.is_symmetric and i < j:
@@ -333,6 +346,19 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
             k = self.link[k]
 
         return 0.0
+
+    cdef safe_at(self, int i, int j):
+        """
+        Direct access to element ``(i, j)`` but with check for out of bounds indices.
+
+        Raises:
+            IndexError: if one index is out of bound.
+        """
+        if not 0 <= i < self.nrow or not 0 <= j < self.ncol:
+            raise IndexError("Index out of bounds")
+
+        return self.at(i, j)
+
 
     property T:
         def __get__(self):
@@ -409,7 +435,7 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
             if B.ndim == 2:
                 return multiply_ll_mat_with_numpy_ndarray(self, B)
             elif B.ndim == 1:
-                return multiply_ll_mat_with_numpy_vector(self, B)
+                return multiply_ll_mat_with_numpy_vector2(self, B)
             else:
                 raise IndexError("Matrix dimensions must agree")
         else:
@@ -619,7 +645,7 @@ cdef cnp.ndarray[cnp.double_t, ndim=1] multiply_ll_mat_with_numpy_vector(LLSpars
     cdef int A_nrow = A.nrow
     cdef int A_ncol = A.ncol
 
-    temp = cnp.NPY_DOUBLE
+    #temp = cnp.NPY_DOUBLE
 
     # test dimensions
     if A_ncol != b.size:
@@ -656,6 +682,62 @@ cdef cnp.ndarray[cnp.double_t, ndim=1] multiply_ll_mat_with_numpy_vector(LLSpars
 
     return c
 
+
+cdef cnp.ndarray[cnp.double_t, ndim=1, mode='c'] multiply_ll_mat_with_numpy_vector2(LLSparseMatrix A, cnp.ndarray[cnp.double_t, ndim=1] b):
+    """
+    Multiply a :class:`LLSparseMatrix` ``A`` with a numpy vector ``b``.
+
+    Args
+        A: A :class:`LLSparseMatrix`.
+        b: A numpy.ndarray of dimension 1 (a vector).
+
+    Returns:
+        ``c = A * b``: a **new** numpy.ndarray of dimension 1.
+
+    Raises:
+        IndexError if dimensions don't match.
+
+    Note:
+        This version is more general as it takes into account strides in the numpy arrays and if the :class:`LLSparseMatrix`
+        is symmetric or not.
+
+    """
+    # TODO: test, test, test!!!
+    cdef int A_nrow = A.nrow
+    cdef int A_ncol = A.ncol
+
+    cdef size_t sd = sizeof(double)
+
+    # test dimensions
+    if A_ncol != b.size:
+        raise IndexError("Dimensions must agree ([%d,%d] * [%d, %d])" % (A_nrow, A_ncol, b.size, 1))
+
+    # direct access to vector b
+    cdef double * b_data = <double *> b.data
+
+    # array c = A * b
+    cdef cnp.ndarray[cnp.double_t, ndim=1] c = np.empty(A_nrow, dtype=np.float64)
+    cdef double * c_data = <double *> c.data
+
+    # test if b vector is C-contiguous or not
+    if cnp.PyArray_ISCONTIGUOUS(b):
+        if A.is_symmetric:
+            multiply_sym_ll_mat_with_numpy_vector_kernel(A_nrow, b_data, c_data, A.val, A.col, A.link, A.root)
+        else:
+            multiply_ll_mat_with_numpy_vector_kernel(A_nrow, b_data, c_data, A.val, A.col, A.link, A.root)
+    else:
+        if A.is_symmetric:
+            multiply_sym_ll_mat_with_strided_numpy_vector_kernel(A.nrow,
+                                                                 b_data, b.strides[0] / sd,
+                                                                 c_data, c.strides[0] / sd,
+                                                                 A.val, A.col, A.link, A.root)
+        else:
+            multiply_ll_mat_with_strided_numpy_vector_kernel(A.nrow,
+                                                             b_data, b.strides[0] / sd,
+                                                             c_data, c.strides[0] / sd,
+                                                             A.val, A.col, A.link, A.root)
+
+    return c
 
 cdef LLSparseMatrix transposed_ll_mat(LLSparseMatrix A):
     """
@@ -784,3 +866,163 @@ cdef bint update_ll_mat_item_add(LLSparseMatrix A, int i, int j, double x):
     return True
 
 
+########################################################################################################################
+# Matrix - vector multiplication kernels
+########################################################################################################################
+# C-contiguous, no symmetric
+cdef void multiply_ll_mat_with_numpy_vector_kernel(int m, double *x, double *y,
+         double *val, int *col, int *link, int *root):
+    """
+    Compute ``y = A * x``.
+
+    ``A`` is a :class:`LLSparseMatrix` and ``x`` and ``y`` are one dimensional numpy arrays.
+    In this kernel function, we only use the corresponding C-arrays.
+
+    Warning:
+        This version consider the arrays as C-contiguous (**without** strides).
+
+    Args:
+        m: Number of rows of the matrix ``A``.
+        x: C-contiguous C-array corresponding to vector ``x``.
+        y: C-contiguous C-array corresponding to vector ``y``.
+        val: C-contiguous C-array corresponding to vector ``A.val``.
+        col: C-contiguous C-array corresponding to vector ``A.col``.
+        link: C-contiguous C-array corresponding to vector ``A.link``.
+        root: C-contiguous C-array corresponding to vector ``A.root``.
+    """
+    cdef:
+        double s
+        int i, k
+
+    for i from 0 <= i < m:
+        s = 0.0
+        k = root[i]
+
+        while k != -1:
+          s += val[k] * x[col[k]]
+          k = link[k]
+
+        y[i] = s
+
+# C-contiguous, symmetric
+cdef void multiply_sym_ll_mat_with_numpy_vector_kernel(int m, double *x, double *y,
+             double *val, int *col, int *link, int *root):
+    """
+    Compute ``y = A * x``.
+
+    ``A`` is a **symmetric** :class:`LLSparseMatrix` and ``x`` and ``y`` are one dimensional numpy arrays.
+    In this kernel function, we only use the corresponding C-arrays.
+
+    Warning:
+        This version consider the arrays as C-contiguous (**without** strides).
+
+    Args:
+        m: Number of rows of the matrix ``A``.
+        x: C-contiguous C-array corresponding to vector ``x``.
+        y: C-contiguous C-array corresponding to vector ``y``.
+        val: C-contiguous C-array corresponding to vector ``A.val``.
+        col: C-contiguous C-array corresponding to vector ``A.col``.
+        link: C-contiguous C-array corresponding to vector ``A.link``.
+        root: C-contiguous C-array corresponding to vector ``A.root``.
+    """
+    cdef:
+        double s, v, xi
+        int i, j, k
+
+    for i from 0 <= i < m:
+        xi = x[i]
+        s = 0.0
+        k = root[i]
+
+        while k != -1:
+            j = col[k]
+            v = val[k]
+            s += v * x[j]
+            if i != j:
+                y[j] += v * xi
+            k = link[k]
+
+        y[i] = s
+
+# Non C-contiguous, non symmetric
+cdef void multiply_ll_mat_with_strided_numpy_vector_kernel(int m,
+            double *x, int incx,
+            double *y, int incy,
+            double *val, int *col, int *link, int *root):
+    """
+    Compute ``y = A * x``.
+
+    ``A`` is :class:`LLSparseMatrix` and ``x`` and ``y`` are one dimensional **non** C-contiguous numpy arrays.
+    In this kernel function, we only use the corresponding C-arrays.
+
+    Warning:
+        This version consider *both* numpy arrays as **non** C-contiguous (**with** strides).
+
+    Args:
+        m: Number of rows of the matrix ``A``.
+        x: C-contiguous C-array corresponding to vector ``x``.
+        incx: Stride for array ``x``.
+        y: C-contiguous C-array corresponding to vector ``y``.
+        incy: Stride for array ``y``.
+        val: C-contiguous C-array corresponding to vector ``A.val``.
+        col: C-contiguous C-array corresponding to vector ``A.col``.
+        link: C-contiguous C-array corresponding to vector ``A.link``.
+        root: C-contiguous C-array corresponding to vector ``A.root``.
+    """
+    cdef:
+        double s
+        int i, k
+
+    for i from 0 <= i < m:
+        s = 0.0
+        k = root[i]
+
+        while k != -1:
+            s += val[k] * x[col[k]*incx]
+            k = link[k]
+
+        y[i*incy] = s
+
+# Non C-contiguous, non symmetric
+cdef void multiply_sym_ll_mat_with_strided_numpy_vector_kernel(int m,
+                double *x, int incx,
+                double *y, int incy,
+                double *val, int *col, int *link, int *root):
+    """
+    Compute ``y = A * x``.
+
+    ``A`` is a **symmetric** :class:`LLSparseMatrix` and ``x`` and ``y`` are one dimensional **non** C-contiguous numpy arrays.
+    In this kernel function, we only use the corresponding C-arrays.
+
+    Warning:
+        This version consider *both* numpy arrays as **non** C-contiguous (**with** strides).
+
+    Args:
+        m: Number of rows of the matrix ``A``.
+        x: C-contiguous C-array corresponding to vector ``x``.
+        incx: Stride for array ``x``.
+        y: C-contiguous C-array corresponding to vector ``y``.
+        incy: Stride for array ``y``.
+        val: C-contiguous C-array corresponding to vector ``A.val``.
+        col: C-contiguous C-array corresponding to vector ``A.col``.
+        link: C-contiguous C-array corresponding to vector ``A.link``.
+        root: C-contiguous C-array corresponding to vector ``A.root``.
+    """
+    cdef:
+        double s, v, xi
+        int i, j, k
+
+    for i from 0 <= i < m:
+        xi = x[i*incx]
+        s = 0.0
+        k = root[i]
+
+        while k != -1:
+            j = col[k]
+            v = val[k]
+            s += v * x[j*incx]
+            if i != j:
+                y[j*incy] += v * xi
+            k = link[k]
+
+        y[i*incy] = s

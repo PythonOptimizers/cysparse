@@ -24,6 +24,9 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
     cdef _realloc(self, int nalloc_new)
     cdef _realloc_expand(self)
 
+    cdef at(self, int i, int j)
+    cdef safe_at(self, int i, int j)
+
 cdef LLSparseMatrix multiply_two_ll_mat(LLSparseMatrix A, LLSparseMatrix B)
 
 cdef multiply_ll_mat_with_numpy_ndarray(LLSparseMatrix A, cnp.ndarray[cnp.double_t, ndim=2] B)
