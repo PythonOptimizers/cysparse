@@ -59,7 +59,11 @@ cdef class LLSparseMatrixView:
     def __getitem__(self, tuple):
         raise NotImplemented("This operation is not allowed for LLSparseMatrixView")
 
-    def copy(self, compress=True):
+    def copy(self):
+        # TODO: change this! Return a LLSparseMatrixView!
+        return self.matrix_copy()
+
+    def matrix_copy(self, compress=True):
         """
         Create a new :class:`LLSparseMatrix` from the view and return it.
 
