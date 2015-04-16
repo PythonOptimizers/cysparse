@@ -76,3 +76,13 @@ matrix.compress()
 
 print matrix[0,0]
 print matrix[0, 2]
+
+print "?" * 80
+
+print matrix.keys()
+print matrix.values()
+print matrix.items()
+
+print "=" * 80
+
+matrix[0:11:1, 0:3:3] = list()

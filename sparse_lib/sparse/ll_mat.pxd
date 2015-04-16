@@ -2,7 +2,7 @@ from sparse_lib.sparse.sparse_mat cimport MutableSparseMatrix
 
 cimport numpy as cnp
 
-
+from cpython cimport PyObject
 
 cdef class LLSparseMatrix(MutableSparseMatrix):
     """
@@ -24,8 +24,19 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
     cdef _realloc(self, int nalloc_new)
     cdef _realloc_expand(self)
 
+    ####################################################################################################################
+    # SET/GET
+    ####################################################################################################################
+    cdef put(self, int i, int j, double value)
+    cdef safe_put(self, int i, int j, double value)
+
     cdef at(self, int i, int j)
     cdef safe_at(self, int i, int j)
+
+    cdef object _keys(self)
+    cdef object _values(self)
+    cdef object _items(self)
+
 
 cdef LLSparseMatrix multiply_two_ll_mat(LLSparseMatrix A, LLSparseMatrix B)
 

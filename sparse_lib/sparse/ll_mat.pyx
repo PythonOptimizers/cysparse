@@ -35,6 +35,12 @@ cdef int LL_MAT_PPRINT_COL_THRESH = 20        # column threshold for choosing pr
 
 #include 'll_mat_slices.pxi'
 
+cdef extern from "Python.h":
+    PyObject* Py_BuildValue(char *format, ...)
+    PyObject* PyList_New(Py_ssize_t len)
+    void PyList_SET_ITEM(PyObject *list, Py_ssize_t i, PyObject *o)
+    PyObject* PyFloat_FromDouble(double v)
+
 # forward declaration
 cdef class LLSparseMatrix(MutableSparseMatrix)
 
@@ -189,51 +195,25 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         return
 
     ####################################################################################################################
-    # Get/Set items
+    # Set/Get items
     ####################################################################################################################
-    def _assert_length_tuple_is_2(self, tuple key):
+    ####################################################################################################################
+    #                                            *** SET ***
+    cdef put(self, int i, int j, double value):
         """
-        Assert that length of tuple is 2.
+        Set ``A[i, j] = value`` directly.
 
-        Raises:
-            ``IndexError`` if the length of tuple is **not** 2.
+        Warning:
+            No out of bound check.
+
+        See:
+            :meth:`safe_put`.
+
         """
-        if len(key) != 2:
-            raise IndexError('Index tuple must be of length 2 (not %d)' % len(key))
-
-    def _assert_indexed_tuple_is_within_bounds(self, tuple key):
-        """
-        Assert that both integers in the tuple ``key = (i, j)`` are within bounds.
-
-        Raises:
-            ``IndexError`` if one of the index is out of bound.
-        """
-        cdef int i = key[0]
-        cdef int j = key[1]
-
-        if i < 0 or i >= self.nrow or j < 0 or j >= self.ncol:
-            raise IndexError('Indices out of range')
-
-    def __setitem__(self, tuple key, double value):
-        self._assert_length_tuple_is_2(key)
-
-        # test for direct access (i.e. both elements are integers)
-        if not PyInt_Check(<PyObject *>key[0]) or not PyInt_Check(<PyObject *>key[0]):
-            raise NotImplemented("Assignment with non integer indices is not implemented yet")
-
-        # both element of the tuple **are** integers
-        self._assert_indexed_tuple_is_within_bounds(key)
-
-        cdef int i = key[0]
-        cdef int j = key[1]
-
         if self.is_symmetric and i < j:
             raise IndexError('Write operation to upper triangle of symmetric matrix not allowed')
 
-        cdef void *temp
         cdef int k, new_elem, last, col
-
-        cdef int nalloc_new
 
         # Find element to be set (or removed)
         col = last = -1
@@ -291,37 +271,57 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
 
             self.nnz -= 1
 
-    def __getitem__(self, tuple key):
+    cdef safe_put(self, int i, int j, double value):
         """
-        Return ``ll_mat[...]``.
+        Set ``A[i, j] = value`` directly.
 
-        Args:
-          key = (i,j): Must be a couple of values. Values can be:
-                 * integers;
-                 * lists;
-                 * numpy arrays
-
-        Returns:
-            If ``i`` and ``j`` are both integers, return corresponding value ``ll_mat[i, j]``, otherwise
-            return the corresponding :class:`LLSparseMatrixView`.
+        Raises:
+            IndexError: when index out of bound.
         """
-        self._assert_length_tuple_is_2(key)
+        if i < 0 or i >= self.nrow or j < 0 or j >= self.ncol:
+            raise IndexError('Indices out of range')
+
+        self.put(i, j, value)
+
+    def assign(self, LLSparseMatrixView view, obj):
+        # TODO: test validity of view... timestamp? hash?
+        # how to test if view is still valid? Does the matrix A still exist? did it change meanwhile?
+
+        # test if view correspond...
+        assert self == view.A
+
+        print("assignment might be possible")
+
+    def __setitem__(self, tuple key, value):
+        """
+        A[i, j] = value
+
+        Raises:
+            IndexError: when index out of bound.
+
+        """
+        # TODO: allow index objects
+        if len(key) != 2:
+            raise IndexError('Index tuple must be of length 2 (not %d)' % len(key))
 
         cdef LLSparseMatrixView view
 
         # test for direct access (i.e. both elements are integers)
         if not PyInt_Check(<PyObject *>key[0]) or not PyInt_Check(<PyObject *>key[0]):
-            view =  MakeLLSparseMatrixView(self, <PyObject *>key[0], <PyObject *>key[1])
-            return view
+            # TODO: don't create temp object???
+            view = MakeLLSparseMatrixView(self, <PyObject *>key[0], <PyObject *>key[1])
+            self.assign(view, value)
 
-        # both element of the tuple **are** integers
-        self._assert_indexed_tuple_is_within_bounds(key)
+            del view
+            return
 
         cdef int i = key[0]
         cdef int j = key[1]
 
-        return self.at(i, j)
+        self.safe_put(i, j, <double> value)
 
+    ####################################################################################################################
+    #                                            *** GET ***
     cdef at(self, int i, int j):
         """
         Direct access to element ``(i, j)``.
@@ -352,14 +352,162 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         Direct access to element ``(i, j)`` but with check for out of bounds indices.
 
         Raises:
-            IndexError: if one index is out of bound.
+            IndexError: when index out of bound.
+
         """
         if not 0 <= i < self.nrow or not 0 <= j < self.ncol:
             raise IndexError("Index out of bounds")
 
         return self.at(i, j)
 
+    def __getitem__(self, tuple key):
+        """
+        Return ``ll_mat[...]``.
 
+        Args:
+          key = (i,j): Must be a couple of values. Values can be:
+                 * integers;
+                 * slices;
+                 * lists;
+                 * numpy arrays
+
+        Raises:
+            IndexError: when index out of bound.
+
+        Returns:
+            If ``i`` and ``j`` are both integers, return corresponding value ``ll_mat[i, j]``, otherwise
+            return a corresponding :class:`LLSparseMatrixView` view on the matrix.
+        """
+        if len(key) != 2:
+            raise IndexError('Index tuple must be of length 2 (not %d)' % len(key))
+
+        cdef LLSparseMatrixView view
+
+        # test for direct access (i.e. both elements are integers)
+        if not PyInt_Check(<PyObject *>key[0]) or not PyInt_Check(<PyObject *>key[0]):
+            view =  MakeLLSparseMatrixView(self, <PyObject *>key[0], <PyObject *>key[1])
+            return view
+
+        cdef int i = key[0]
+        cdef int j = key[1]
+
+        return self.safe_at(i, j)
+
+    ####################################################################################################################
+    #                                            *** GET LIST ***
+    cdef object _keys(self):
+        """
+        Return a list of tuples (i,j) of non-zero matrix entries.
+
+
+        """
+        cdef:
+            #list list_container
+            PyObject *list_p # the list that will hold the keys
+            int i, j, k
+            int pos = 0    # position in list
+
+        if not self.is_symmetric:
+
+            # create list
+            list_p = PyList_New(self.nnz)
+            if list_p == NULL:
+                raise MemoryError()
+
+            for i from 0 <= i < self.nrow:
+                k = self.root[i]
+                while k != -1:
+                    j = self.col[k]
+                    PyList_SET_ITEM(list_p, pos, Py_BuildValue("ii", i, j))
+                    pos += 1
+                    k = self.link[k]
+        else:
+            raise NotImplemented("keys() is not (yet) implemented for symmetrical LLSparseMatrix")
+
+        return <object> list_p
+
+    def keys(self):
+        """
+        Return a list of tuples ``(i,j)`` of non-zero matrix entries.
+
+        Warning:
+            This method might leak memory...
+        """
+        # TODO: do we have to INCREF and DECREF???
+        cdef list list_ = self._keys()
+        return list_
+
+    cdef object _values(self):
+        cdef:
+            PyObject *list_p   # the list that will hold the values
+            int i, k
+            int pos = 0        # position in list
+
+        if not self.is_symmetric:
+            list_p = PyList_New(self.nnz)
+            if list_p == NULL:
+                raise MemoryError()
+
+            for i from 0<= i < self.nrow:
+                k = self.root[i]
+                while k != -1:
+                    PyList_SET_ITEM(list_p, pos, PyFloat_FromDouble(self.val[k]))
+                    pos += 1
+                    k = self.link[k]
+        else:
+            raise NotImplemented("values() not (yet) implemented for symmetrical LLSparseMatrix")
+
+        return <object> list_p
+
+    def values(self):
+        """
+        Return a list of the non-zero matrix entries as floats.
+
+        Warning:
+            This method might leak memory...
+        """
+        # TODO: do we have to INCREF and DECREF???
+        cdef list list_ = self._values()
+        return list_
+
+    cdef object _items(self):
+        cdef:
+            PyObject *list_p;     # the list that will hold the values
+            int i, j, k
+            int pos = 0         # position in list
+            double val
+
+        list_p = PyList_New(self.nnz)
+        if list_p == NULL:
+            raise MemoryError()
+
+        for i from 0 <= i < self.nrow:
+            k = self.root[i]
+            while k != -1:
+                j = self.col[k]
+                val = self.val[k]
+                PyList_SET_ITEM(list_p, pos, Py_BuildValue("((ii)d)", i, j, val))
+                pos += 1
+
+                k = self.link[k]
+
+        return <object> list_p
+
+    def items(self):
+        """
+        Return a list of tuples (indices, value) of the non-zero matrix entries' keys and values.
+
+        The indices are themselves tuples (i,j) of row\n\
+        and column values.
+
+        Warning:
+            This method might leak memory...
+        """
+        cdef list list_ = self._items()
+        return list_
+
+    ####################################################################################################################
+    #                                            *** PROPERTIES ***
     property T:
         def __get__(self):
             return transposed_ll_mat(self)
@@ -514,6 +662,8 @@ def MakeLLSparseMatrix(**kwargs):
 
 
     """
+    # TODO: rewrite function!!!
+    # TODO: add symmetrical case
     cdef int nrow = kwargs.get('nrow', -1)
     cdef int ncol = kwargs.get('ncol', -1)
     cdef int size_hint = kwargs.get('size_hint', LL_MAT_DEFAULT_SIZE_HINT)
@@ -529,6 +679,7 @@ def MakeLLSparseMatrix(**kwargs):
     cdef double value
 
     if matrix is not None:
+        # TODO: direct access into the numpy array
         if len(matrix.shape) != 2:
             raise IndexError('Matrix must be of dimension 2 (not %d)' % len(matrix.shape))
 
@@ -565,13 +716,14 @@ cdef LLSparseMatrix multiply_two_ll_mat(LLSparseMatrix A, LLSparseMatrix B):
     Multiply two :class:`LLSparseMatrix` ``A`` and ``B``.
 
     Args:
-        A: A :class:``LLSparseMatrix`` ``A``.
-        B: A :class:``LLSparseMatrix`` ``B``.
+        A: An :class:``LLSparseMatrix`` ``A``.
+        B: An :class:``LLSparseMatrix`` ``B``.
 
     Returns:
         A **new** :class:``LLSparseMatrix`` ``C = A * B``.
 
     Raises:
+        ``IndexError`` if matrix dimension don't agree.
         ``NotImplemented``: When matrix ``A`` or ``B`` is symmetric.
         ``RuntimeError`` if some error occurred during the computation.
     """
@@ -752,7 +904,7 @@ cdef LLSparseMatrix transposed_ll_mat(LLSparseMatrix A):
     Returns:
         The corresponding transposed :math:`A^t` :class:`LLSparseMatrix`.
     """
-    # TODO: optimized to pure Cython code
+    # TODO: optimize to pure Cython code
     if A.is_symmetric:
         raise NotImplemented("Transposed is not implemented yet for symmetric matrices")
 
