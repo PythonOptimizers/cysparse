@@ -7,6 +7,7 @@ from __future__ import print_function
 
 from sparse_lib.sparse.sparse_mat cimport MutableSparseMatrix
 from sparse_lib.sparse.csr_mat cimport CSRSparseMatrix, MakeCSRSparseMatrix
+from sparse_lib.utils.equality cimport values_are_equal
 
 
 
@@ -203,6 +204,8 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         """
         Set ``A[i, j] = value`` directly.
 
+        Note:
+            Store zero elements **only** if ``store_zeros`` is ``True``.
         Warning:
             No out of bound check.
 
@@ -210,6 +213,7 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
             :meth:`safe_put`.
 
         """
+        # TODO: adapt test x != 0.0 to !values_are_equal(x, 0.0)
         if self.is_symmetric and i < j:
             raise IndexError('Write operation to upper triangle of symmetric matrix not allowed')
 
@@ -225,7 +229,8 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
             last = k
             k = self.link[k]
 
-        if value != 0.0 or self.store_zeros:
+        #if value != 0.0 or self.store_zeros:
+        if not values_are_equal(value, 0.0) or self.store_zeros:
             if col == j:
                 # element already exist
                 self.val[k] = value
@@ -283,14 +288,20 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
 
         self.put(i, j, value)
 
-    def assign(self, LLSparseMatrixView view, obj):
+    cdef assign(self, LLSparseMatrixView view, object obj):
         # TODO: test validity of view... timestamp? hash?
-        # how to test if view is still valid? Does the matrix A still exist? did it change meanwhile?
+        # TODO: how to test if view is still valid? Does the matrix A still exist? did it change meanwhile?
 
         # test if view correspond...
         assert self == view.A
 
-        print("assignment might be possible")
+        #print("assignment might be possible")
+
+
+        update_ll_mat_matrix_from_c_arrays_indices_assign(self, view.row_indices, view.nrow,
+                                                       view.col_indices, view.ncol, obj)
+
+
 
     def __setitem__(self, tuple key, value):
         """
@@ -308,7 +319,7 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
 
         # test for direct access (i.e. both elements are integers)
         if not PyInt_Check(<PyObject *>key[0]) or not PyInt_Check(<PyObject *>key[0]):
-            # TODO: don't create temp object???
+            # TODO: don't create temp object
             view = MakeLLSparseMatrixView(self, <PyObject *>key[0], <PyObject *>key[1])
             self.assign(view, value)
 
@@ -375,8 +386,8 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
             IndexError: when index out of bound.
 
         Returns:
-            If ``i`` and ``j`` are both integers, return corresponding value ``ll_mat[i, j]``, otherwise
-            return a corresponding :class:`LLSparseMatrixView` view on the matrix.
+            If ``i`` and ``j`` are both integers, returns corresponding value ``ll_mat[i, j]``, otherwise
+            returns a corresponding :class:`LLSparseMatrixView` view on the matrix.
         """
         if len(key) != 2:
             raise IndexError('Index tuple must be of length 2 (not %d)' % len(key))
@@ -727,6 +738,7 @@ cdef LLSparseMatrix multiply_two_ll_mat(LLSparseMatrix A, LLSparseMatrix B):
         ``NotImplemented``: When matrix ``A`` or ``B`` is symmetric.
         ``RuntimeError`` if some error occurred during the computation.
     """
+    # TODO: LLSparseMatrix * A, LLSparseMatrix * B ...
     # test dimensions
     cdef int A_nrow = A.nrow
     cdef int A_ncol = A.ncol
@@ -891,6 +903,10 @@ cdef cnp.ndarray[cnp.double_t, ndim=1, mode='c'] multiply_ll_mat_with_numpy_vect
 
     return c
 
+
+########################################################################################################################
+# Common matrix operations
+########################################################################################################################
 cdef LLSparseMatrix transposed_ll_mat(LLSparseMatrix A):
     """
     Compute transposed matrix.
@@ -936,7 +952,29 @@ cdef LLSparseMatrix transposed_ll_mat(LLSparseMatrix A):
     return transposed_A
 
 
+########################################################################################################################
+# Assignments
+########################################################################################################################
+cdef int PyLLSparseMatrix_Check(object obj):
+    return isinstance(obj, LLSparseMatrix)
 
+cdef update_ll_mat_matrix_from_c_arrays_indices_assign(LLSparseMatrix A, int * index_i, Py_ssize_t index_i_length,
+                                                       int * index_j, Py_ssize_t index_j_length, object obj):
+    cdef:
+        Py_ssize_t i
+        Py_ssize_t j
+
+    # TODO: use internal arrays like triplet (i, j, val)?
+    if PyLLSparseMatrix_Check(obj):
+        #ll_mat =  obj
+        for i from 0 <= i < index_i_length:
+            for j from 0 <= j < index_j_length:
+                A.put(index_i[i], index_j[j], obj[i, j])
+
+    else:
+        for i from 0 <= i < index_i_length:
+            for j from 0 <= j < index_j_length:
+                A.put(index_i[i], index_j[j], <double> obj[tuple(i, j)]) # not really optimized...
 
 cdef bint update_ll_mat_item_add(LLSparseMatrix A, int i, int j, double x):
     """

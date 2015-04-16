@@ -85,4 +85,12 @@ print matrix.items()
 
 print "=" * 80
 
-matrix[0:11:1, 0:3:3] = list()
+matrix.print_to(sys.stdout)
+matrix_c = MakeLLSparseMatrix(nrow=2, ncol=2, size_hint=10)
+matrix_c[0, 0] = 1
+matrix_c[0, 1] = 1
+matrix_c[1, 0] = 1
+matrix_c[1, 1] = 1
+matrix[0:2, 1:3] = matrix_c
+
+matrix.print_to(sys.stdout)

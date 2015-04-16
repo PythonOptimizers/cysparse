@@ -1,4 +1,5 @@
 from sparse_lib.sparse.sparse_mat cimport MutableSparseMatrix
+from sparse_lib.sparse.ll_mat_view cimport LLSparseMatrixView
 
 cimport numpy as cnp
 
@@ -29,6 +30,7 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
     ####################################################################################################################
     cdef put(self, int i, int j, double value)
     cdef safe_put(self, int i, int j, double value)
+    cdef assign(self, LLSparseMatrixView view, obj)
 
     cdef at(self, int i, int j)
     cdef safe_at(self, int i, int j)
@@ -45,5 +47,8 @@ cdef multiply_ll_mat_with_numpy_ndarray(LLSparseMatrix A, cnp.ndarray[cnp.double
 cdef cnp.ndarray[cnp.double_t, ndim=1] multiply_ll_mat_with_numpy_vector(LLSparseMatrix A, cnp.ndarray[cnp.double_t, ndim=1, mode="c"] b)
 
 cdef LLSparseMatrix transposed_ll_mat(LLSparseMatrix A)
+
+cdef update_ll_mat_matrix_from_c_arrays_indices_assign(LLSparseMatrix A, int * index_i, Py_ssize_t index_i_length,
+                                                       int * index_j, Py_ssize_t index_j_length, object obj)
 
 cdef bint update_ll_mat_item_add(LLSparseMatrix A, int i, int j, double x)
