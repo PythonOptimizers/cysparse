@@ -5,7 +5,7 @@ import shutil
 directories = ['build']
 directories_to_skip = ['.git', '.idea', 'tests', 'benchmarks', 'doc']
 
-files_exts = ['.c', '.so']
+files_exts = ['.c', '.so', '.pyc']
 
 
 def scandirs(path):

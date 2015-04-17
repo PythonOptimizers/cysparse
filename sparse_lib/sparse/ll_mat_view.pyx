@@ -1,9 +1,14 @@
+"""
+Lightweight object to view a :class:`LLSparseMatrix`.
 
+
+"""
 
 # forward declaration
 cdef class LLSparseMatrixView
 
 from sparse_lib.sparse.ll_mat cimport LLSparseMatrix
+from sparse_lib.utils.equality cimport values_are_equal
 
 from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
 from cpython cimport PyObject
@@ -54,21 +59,23 @@ cdef class LLSparseMatrixView:
         assert self.__status_ok, "Create an LLSparseMatrixView only with the factory function MakeLLSparseMatrixView()"
 
     def __setitem__(self, tuple key, value):
+        # TODO: direct access to the matrix
         raise NotImplemented("This operation is not allowed for LLSparseMatrixView")
 
     def __getitem__(self, tuple):
+        # TODO: return another view
         raise NotImplemented("This operation is not allowed for LLSparseMatrixView")
 
-    def copy(self):
-        # TODO: change this! Return a LLSparseMatrixView!
-        return self.matrix_copy()
-
-    def matrix_copy(self, compress=True):
+    def copy(self, compress=True):
         """
         Create a new :class:`LLSparseMatrix` from the view and return it.
 
         Args:
             compress: If ``True``, we use the minimum size for the matrix.
+
+        Note:
+            It doesn't make sense to construct a copy of a view as the view cannot be altered. It's only the viewed
+            matrix that is altered, **not** a view to it. So, in a sense, a `LLSparseMatrixView` object is immutable.
 
         """
         self.assert_status_ok()
@@ -81,12 +88,14 @@ cdef class LLSparseMatrixView:
         else:
             size_hint = min(self.nrow * self.ncol, self.A.nalloc)
 
-        cdef LLSparseMatrix A_copy = LLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=size_hint)
+        cdef LLSparseMatrix A_copy = LLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=size_hint, store_zeros=self.store_zeros)
 
         cdef:
             int i
             int row_index
 
+        # TODO: is this the right thing to do (about store_zeros)?
+        # TODO: take values immediately with at(i, j)...
         if self.store_zeros:
             for i from 0 <= i < self.nrow:
                 row_index = self.row_indices[i]
@@ -98,10 +107,27 @@ cdef class LLSparseMatrixView:
                 row_index = self.row_indices[i]
                 for j from 0 <= j < self.ncol:
                     val = self.A[row_index, self.col_indices[j]]
-                    if val != 0.0:
+                    if not values_are_equal(val, 0.0):
                         A_copy[i, j] = self.A[row_index, self.col_indices[j]]
 
         return A_copy
+
+
+    ####################################################################################################################
+    # Multiplication
+    ####################################################################################################################
+    def __mul__(self, B):
+        # TODO: optimize all this: this implementation is horrible!
+        # TODO: find common code to refactor to apply the DRY principle
+        return self.copy() * B  # <-- Both (A either LLSparseMatrix or LLSparseMatrixView) A * B should be implemented with the same common function
+
+        ## CASES
+        #if isinstance(B, LLSparseMatrix):
+        #    return self.copy() * B
+
+        #elif isinstance(B, np.ndarray):
+        #    return self.copy() * B
+
 
     cdef int count_nnz(self):
         """
