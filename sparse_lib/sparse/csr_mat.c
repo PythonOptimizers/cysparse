@@ -486,8 +486,8 @@ struct __pyx_obj_10sparse_lib_6sparse_10sparse_mat_ImmutableSparseMatrix {
  * from sparse_lib.sparse.sparse_mat cimport ImmutableSparseMatrix
  * 
  * cdef class CSRSparseMatrix(ImmutableSparseMatrix):             # <<<<<<<<<<<<<<
- * #cdef class CSRSparseMatrix:
  *     """
+ *     Compressed Sparse Row Format matrix.
  */
 struct __pyx_obj_10sparse_lib_6sparse_7csr_mat_CSRSparseMatrix {
   struct __pyx_obj_10sparse_lib_6sparse_10sparse_mat_ImmutableSparseMatrix __pyx_base;
@@ -741,12 +741,12 @@ static char __pyx_k_format[] = "format";
 static char __pyx_k_pyx_vtable[] = "__pyx_vtable__";
 static char __pyx_k_MemoryError[] = "MemoryError";
 static char __pyx_k_start_d_end_d[] = "start= %d, end = %d";
-static char __pyx_k_csr_mat_extension[] = "\ncsr_mat extension.\n\n\n";
 static char __pyx_k_CSRSparseMatrix_d_d[] = "CSRSparseMatrix ([%d,%d]):";
 static char __pyx_k_NotImplementedError[] = "NotImplementedError";
 static char __pyx_k_is_well_constructed[] = "is_well_constructed";
 static char __pyx_k_are_column_indices_sorted[] = "are_column_indices_sorted";
 static char __pyx_k_Matrix_too_big_to_print_out[] = "Matrix too big to print out";
+static char __pyx_k_Condensed_Sparse_Row_CSR_Format[] = "\nCondensed Sparse Row (CSR) Format Matrices.\n\n\n";
 static char __pyx_k_CSRSparseMatrix_must_be_instanti[] = "CSRSparseMatrix must be instantiated by a factory method!";
 static char __pyx_k_CSRSparseMatrix_of_size_d_by_d_w[] = "CSRSparseMatrix of size %d by %d with %d non zero values";
 static PyObject *__pyx_kp_s_;
@@ -2963,7 +2963,7 @@ static struct PyModuleDef __pyx_moduledef = {
     PyModuleDef_HEAD_INIT,
   #endif
     "csr_mat",
-    __pyx_k_csr_mat_extension, /* m_doc */
+    __pyx_k_Condensed_Sparse_Row_CSR_Format, /* m_doc */
     -1, /* m_size */
     __pyx_methods /* m_methods */,
     NULL, /* m_reload */
@@ -3119,7 +3119,7 @@ PyMODINIT_FUNC PyInit_csr_mat(void)
   #endif
   /*--- Module creation code ---*/
   #if PY_MAJOR_VERSION < 3
-  __pyx_m = Py_InitModule4("csr_mat", __pyx_methods, __pyx_k_csr_mat_extension, 0, PYTHON_API_VERSION); Py_XINCREF(__pyx_m);
+  __pyx_m = Py_InitModule4("csr_mat", __pyx_methods, __pyx_k_Condensed_Sparse_Row_CSR_Format, 0, PYTHON_API_VERSION); Py_XINCREF(__pyx_m);
   #else
   __pyx_m = PyModule_Create(&__pyx_moduledef);
   #endif
@@ -3192,7 +3192,7 @@ PyMODINIT_FUNC PyInit_csr_mat(void)
 
   /* "sparse_lib/sparse/csr_mat.pyx":1
  * """             # <<<<<<<<<<<<<<
- * csr_mat extension.
+ * Condensed Sparse Row (CSR) Format Matrices.
  * 
  */
   __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}

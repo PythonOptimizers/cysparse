@@ -1,5 +1,5 @@
 """
-csr_mat extension.
+Condensed Sparse Row (CSR) Format Matrices.
 
 
 """

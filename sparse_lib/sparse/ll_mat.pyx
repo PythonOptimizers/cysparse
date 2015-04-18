@@ -6,7 +6,8 @@ ll_mat extension.
 from __future__ import print_function
 
 from sparse_lib.sparse.sparse_mat cimport MutableSparseMatrix
-from sparse_lib.sparse.csr_mat cimport CSRSparseMatrix, MakeCSRSparseMatrix
+from sparse_lib.sparse.csr_mat cimport MakeCSRSparseMatrix
+from sparse_lib.sparse.csc_mat cimport MakeCSCSparseMatrix
 from sparse_lib.utils.equality cimport values_are_equal
 
 
@@ -20,7 +21,8 @@ cimport numpy as cnp
 cnp.import_array()
 
 from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
-from libc.stdlib cimport malloc,free
+from libc.stdlib cimport malloc,free, calloc
+from libc.string cimport memcpy
 from cpython cimport PyObject, Py_INCREF
 
 # TODO: use more internal CPython code
@@ -560,7 +562,6 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
 
         # indices are NOT sorted for each row
         for i from 0 <= i < self.nrow:
-        #for i in xrange(self.nrow):
             k = self.root[i]
 
             while k != -1:
@@ -577,6 +578,79 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         return csr_mat
 
     def to_csc(self):
+        """
+        Create a corresponding CSCSparseMatrix.
+
+        Warning:
+            Memory **must** be freed by the caller!
+            Column indices are **not** necessarily sorted!
+        """
+        cdef int * ind = <int *> PyMem_Malloc((self.ncol + 1) * sizeof(int))
+        if not ind:
+            raise MemoryError()
+
+        cdef int * row = <int *> PyMem_Malloc(self.nnz * sizeof(int))
+        if not row:
+            raise MemoryError()
+
+        cdef double * val = <double *> PyMem_Malloc(self.nnz * sizeof(double))
+        if not val:
+            raise MemoryError()
+
+
+        cdef:
+            int i, k
+
+
+        # start by collecting the number of rows for each column
+        # this is to create the ind vector but not only...
+        cdef int * col_indexes = <int *> calloc(self.ncol + 1, sizeof(int))
+        if not ind:
+            raise MemoryError()
+
+        col_indexes[0] = 0
+
+        for i from 0 <= i < self.nrow:
+            k = self.root[i]
+            while k != -1:
+                col_indexes[self.col[k] + 1] += 1
+                k = self.link[k]
+
+        # ind
+        for i from 1 <= i <= self.ncol:
+            col_indexes[i] = col_indexes[i - 1] + col_indexes[i]
+
+        memcpy(ind, col_indexes, (self.ncol + 1) * sizeof(int) )
+        assert ind[self.ncol] == self.nnz
+
+        # row and val
+        # we have ind: we know exactly where to put the row indices for each column
+        # we use col_indexes to get the next index in row and val
+        for i from 0 <= i < self.nrow:
+            k = self.root[i]
+            while k != -1:
+                col_index = col_indexes[self.col[k]]
+                row[col_index] = i
+                val[col_index] = self.val[k]
+                col_indexes[self.col[k]] += 1 # update index in row and val
+
+                k = self.link[k]
+
+
+        free(col_indexes)
+
+        csc_mat = MakeCSCSparseMatrix(nrow=self.nrow, ncol=self.ncol, nnz=self.nnz, ind=ind, row=row, val=val)
+
+        return csc_mat
+
+    def to_csb(self):
+        """
+        Create a corresponding CSBSparseMatrix.
+
+        Warning:
+            Memory **must** be freed by the caller!
+            Column indices are **not** necessarily sorted!
+        """
         pass
 
     ####################################################################################################################

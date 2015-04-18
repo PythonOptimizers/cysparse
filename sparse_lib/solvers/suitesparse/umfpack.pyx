@@ -1,17 +1,10 @@
 from sparse_lib.sparse.ll_mat cimport LLSparseMatrix
 
-cdef extern from "suitesparse/umfpack.h":
+import sys
+
+cdef extern from "umfpack.h":
 
     char * UMFPACK_DATE
-
-    # OPAQUE UMFPACK OBJECTS
-    cdef struct Symbolic:
-        pass
-    ctypedef Symbolic * symbolic_t
-
-    cdef struct Numeric:
-        pass
-    ctypedef Numeric * numeric_t
 
     cdef enum:
         UMFPACK_CONTROL, UMFPACK_INFO
@@ -88,26 +81,31 @@ cdef extern from "suitesparse/umfpack.h":
 
     int umfpack_di_symbolic(int n_row, int n_col,
                             int * Ap, int * Ai, double * Ax,
-                            symbolic_t * symbolic,
+                            void ** symbolic,
                             double * control, double * info)
 
     int umfpack_di_numeric(int * Ap, int * Ai, double * Ax,
-                           symbolic_t symbolic,
-                           numeric_t * numeric,
+                           void * symbolic,
+                           void ** numeric,
                            double * control, double * info)
 
-    void umfpack_di_free_symbolic(symbolic_t * symbolic)
-    void umfpack_di_free_numeric(numeric_t * numeric)
+    void umfpack_di_free_symbolic(void ** symbolic)
+    void umfpack_di_free_numeric(void ** numeric)
     void umfpack_di_defaults(double * control)
 
     int umfpack_di_get_lunz(int * lnz, int * unz, int * n_row, int * n_col,
-                            int * nz_udiag, numeric_t numeric)
+                            int * nz_udiag, void * numeric)
 
     int umfpack_di_get_numeric(int * Lp, int * Lj, double * Lx, double * Lz,
                                int * Up, int * Ui, double * Ux, double * Uz,
                                int * P, int * Q, double * Dx, double * Dz,
                                int * do_recip, double * Rs,
-                               numeric_t numeric)
+                               void * numeric)
+
+    void umfpack_di_report_control(double *)
+    void umfpack_di_report_info(double *, double *)
+    void umfpack_di_report_symbolic(void *, double *)
+    void umfpack_di_report_numeric(void *, double *)
 
 
 def umfpack_version():
@@ -181,16 +179,26 @@ def test_umfpack_result(status, msg, raise_error=True, print_on_screen=True):
 
 
 cdef class UmfpackSolver:
+    """
+    Umfpack Solver from SuiteSparse.
+
+    This version **only** deals with ``LLSparseMatrix`` objects.
+
+    We follow the common use of Umfpack. In particular, we use the same names for the methods of this
+    class as their corresponding counter-parts in Umfpack.
+    """
     UMFPACK_VERSION = "%s.%s.%s (%s)" % (UMFPACK_MAIN_VERSION,
                                      UMFPACK_SUB_VERSION,
                                      UMFPACK_SUBSUB_VERSION,
                                      UMFPACK_DATE)
+
     def __cinit__(self, LLSparseMatrix A):
         self.A = A
         self.nrow = A.nrow
         self.ncol = A.ncol
 
-        self.csc  = self.A.to_csc()
+        # TODO: type csc in pxd file
+        self.csc_mat  = self.A.to_csc()
 
         #cdef double * val = self.val
         #cdef int * col = <int *> self.col
@@ -224,42 +232,111 @@ cdef class UmfpackSolver:
     ####################################################################################################################
     # PRIMARY ROUTINES
     ####################################################################################################################
-    cdef create_symbolic(self, recompute=False):
+    cdef int _create_symbolic(self):
 
         if self.symbolic_computed:
-            if not recompute:
-                pass
-            else:
-                self.free_symbolic()
+            self.free_symbolic()
 
-        #cdef double* info = <double>self.info.data
-        #cdef double * control = self.control.data
-        #cdef symbolic_t symbolic = self.symbolic
+        cdef int * ind = <int *> self.csc_mat.ind
+        cdef int * row = <int *> self.csc_mat.row
+        cdef double * val = <double *> self.csc_mat.val
 
 
+        cdef int status= umfpack_di_symbolic(self.nrow, self.ncol, ind, row, val, &self.symbolic, self.control, self.info)
 
-        #status= umfpack_di_symbolic(self.nrow, self.ncol, ind, col, val, &self.symbolic, &self.control, &self.info)
+        self.symbolic_computed = True
 
-        #if status != UMFPACK_OK:
-        #    self.free_symbolic()
-        #    test_umfpack_result(status, "create_symbolic()")
-        #else:
-        #   self.symbolic_computed = True
+        return status
 
-    # def create_numeric(self, recompute=False):
-    #
-    #     if self.numeric is not None:
-    #         if not recompute:
-    #             pass
-    #         else:
-    #             self.free_numeric()
-    #
-    #     self.create_symbolic()
-    #
-    #     status, self.numeric = self.UMFPACK_ROUTINES['numeric'](self.ind, self.col, self.val, self.symbolic, self.control, self.info)
-    #
-    #     if status != UMFPACK_OK:
-    #         self.numeric = None
-    #         test_umfpack_result(status, "create_numeric()")
 
+    def create_symbolic(self, recompute=False):
+        if not recompute and self.symbolic_computed:
+            return
+
+        cdef int status = self._create_symbolic()
+
+        if status != UMFPACK_OK:
+            self.free_symbolic()
+            test_umfpack_result(status, "create_symbolic")
+
+    cdef int _create_numeric(self):
+
+        if self.numeric_computed:
+            self.free_numeric()
+
+        cdef int * ind = <int *> self.csc_mat.ind
+        cdef int * row = <int *> self.csc_mat.row
+        cdef double * val = <double *> self.csc_mat.val
+
+        cdef int status =  umfpack_di_numeric(ind, row, val,
+                           self.symbolic,
+                           &self.numeric,
+                           self.control, self.info)
+
+        self.numeric_computed = True
+
+        return status
+
+    def create_numeric(self, recompute=False):
+
+        if not recompute and self.numeric_computed:
+            return
+
+        cdef int status = self._create_numeric()
+
+        if status != UMFPACK_OK:
+            self.free_numeric()
+            test_umfpack_result(status, "create_numeric")
+
+
+    ####################################################################################################################
+    # REPORTING ROUTINES
+    ####################################################################################################################
+    def set_verbosity(self, level):
+        """
+        Set UMFPACK verbosity level.
+
+        Args:
+            level (int): Verbosity level (default: 1).
+        """
+        self.control[UMFPACK_PRL] = level
+
+    def get_verbosity(self):
+        """
+        Return UMFPACK verbosity level.
+
+        Returns:
+            verbosity_level (int): The verbosity level set.
+        """
+        return self.control[UMFPACK_PRL]
+
+    def report_control(self):
+        """
+        Print control values.
+        """
+        umfpack_di_report_control(self.control)
+
+    def report_info(self):
+         """
+         Print all status information.
+
+         Use **after** calling :meth:`create_symbolic()`, :meth:`create_numeric()`, :meth:`factorize()` or :meth:`solve()`.
+         """
+         umfpack_di_report_info(self.control, self.info)
+
+    def report_symbolic(self):
+         """
+         Print information about the opaque ``symbolic`` object.
+         """
+         if not self.symbolic_computed:
+             print "No opaque symbolic object has been computed"
+             return
+
+         umfpack_di_report_symbolic(self.symbolic, self.control)
+
+    def report_numeric(self):
+         """
+         Print information about the opaque ``numeric`` object.
+         """
+         umfpack_di_report_numeric(self.numeric, self.control)
 

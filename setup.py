@@ -39,6 +39,9 @@ numpy_include = np.get_include()
 suitesparse_include_dirs = get_path_option(cysparse_config, 'SUITESPARSE', 'include_dirs')
 suitesparse_library_dirs = get_path_option(cysparse_config, 'SUITESPARSE', 'library_dirs')
 
+print "TOTO:"
+print suitesparse_include_dirs
+
 ########################################################################################################################
 # EXTENSIONS
 ########################################################################################################################
@@ -57,6 +60,7 @@ sparse_ext = [
   Extension("sparse_lib.sparse.ll_mat", ["sparse_lib/sparse/ll_mat.pxd", "sparse_lib/sparse/ll_mat.pyx"], **sparse_ext_params),
   Extension("sparse_lib.sparse.sparse_mat", ["sparse_lib/sparse/sparse_mat.pxd", "sparse_lib/sparse/sparse_mat.pyx"], **sparse_ext_params),
   Extension("sparse_lib.sparse.csr_mat", ["sparse_lib/sparse/csr_mat.pxd", "sparse_lib/sparse/csr_mat.pyx"], **sparse_ext_params),
+  Extension("sparse_lib.sparse.csc_mat", ["sparse_lib/sparse/csc_mat.pxd", "sparse_lib/sparse/csc_mat.pyx"], **sparse_ext_params),
   Extension("sparse_lib.sparse.ll_mat_view", ["sparse_lib/sparse/ll_mat_view.pxd", "sparse_lib/sparse/ll_mat_view.pyx"], **sparse_ext_params),
   Extension("sparse_lib.utils.equality", ["sparse_lib/utils/equality.pxd", "sparse_lib/utils/equality.pyx"], **sparse_ext_params),
   #Extension("sparse.ll_vec", ["sparse_lib/sparse/ll_vec.pyx"], **sparse_ext_params)
@@ -66,6 +70,7 @@ sparse_ext = [
 #                                                *** umfpack ***
 umfpack_ext_params = ext_params.copy()
 umfpack_ext_params['include_dirs'].extend(suitesparse_include_dirs)
+#umfpack_ext_params['include_dirs'] = suitesparse_include_dirs
 umfpack_ext_params['library_dirs'] = suitesparse_library_dirs
 umfpack_ext_params['libraries'] = ['umfpack', 'amd']
 
@@ -80,7 +85,7 @@ umfpack_ext = [
 ########################################################################################################################
 # SETUP
 ########################################################################################################################
-ext_modules = sparse_ext + umfpack_ext
+ext_modules = sparse_ext  + umfpack_ext
 
 
 setup(name=  'SparseLib',

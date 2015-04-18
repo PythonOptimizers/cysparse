@@ -1,17 +1,10 @@
 from sparse_lib.sparse.ll_mat cimport LLSparseMatrix
+from sparse_lib.sparse.csc_mat cimport CSCSparseMatrix
 
-cdef extern from "suitesparse/umfpack.h":
+cdef extern from "umfpack.h":
     cdef enum:
         UMFPACK_CONTROL, UMFPACK_INFO
 
-    # OPAQUE UMFPACK OBJECTS
-    cdef struct Symbolic:
-        pass
-    ctypedef Symbolic * symbolic_t
-
-    cdef struct Numeric:
-        pass
-    ctypedef Numeric * numeric_t
 
 
 cdef class UmfpackSolver:
@@ -22,19 +15,22 @@ cdef class UmfpackSolver:
         int ncol
 
         # Matrix A in CSC format
-        cdef double * val
-        cdef int * col
-        cdef int * ind
+        #double * val
+        #int * col
+        #int * ind
+        CSCSparseMatrix csc_mat
 
         # UMFPACK opaque objects
-        symbolic_t symbolic
+        void * symbolic
         bint symbolic_computed
 
-        numeric_t numeric
+        void * numeric
         bint numeric_computed
 
         # Control and Info arrays
         public double info[UMFPACK_INFO]
         public double control[UMFPACK_CONTROL]
 
-    cdef create_symbolic(self, recompute=?)
+    cdef int _create_symbolic(self)
+    cdef int _create_numeric(self)
+

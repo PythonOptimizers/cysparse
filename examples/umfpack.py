@@ -19,3 +19,7 @@ solver.create_numeric()
 solver.report_control()
 
 solver.report_info()
+
+solver.report_symbolic()
+
+solver.report_numeric()
