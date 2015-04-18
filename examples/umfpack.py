@@ -12,3 +12,10 @@ matrix[1, 2] = -2
 solver = umfpack.UmfpackSolver(matrix)
 
 print solver.UMFPACK_VERSION
+
+solver.create_symbolic()
+solver.create_numeric()
+
+solver.report_control()
+
+solver.report_info()
