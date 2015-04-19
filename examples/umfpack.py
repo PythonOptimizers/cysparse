@@ -39,3 +39,13 @@ print A * sol
 print "&" * 80
 
 print solver.get_lunz()
+
+(L, U, P, Q, D, do_recip, R) = solver.get_LU()
+
+print L
+print U
+print P
+print Q
+print D
+print do_recip
+print R

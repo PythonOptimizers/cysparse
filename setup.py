@@ -39,9 +39,6 @@ numpy_include = np.get_include()
 suitesparse_include_dirs = get_path_option(cysparse_config, 'SUITESPARSE', 'include_dirs')
 suitesparse_library_dirs = get_path_option(cysparse_config, 'SUITESPARSE', 'library_dirs')
 
-print "TOTO:"
-print suitesparse_include_dirs
-
 ########################################################################################################################
 # EXTENSIONS
 ########################################################################################################################

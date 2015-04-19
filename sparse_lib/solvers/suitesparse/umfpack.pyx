@@ -1,4 +1,9 @@
 from sparse_lib.sparse.ll_mat cimport LLSparseMatrix
+from sparse_lib.sparse.csr_mat cimport CSRSparseMatrix, MakeCSRSparseMatrix
+from sparse_lib.sparse.csc_mat cimport CSCSparseMatrix, MakeCSCSparseMatrix
+
+
+from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
 
 import numpy as np
 cimport numpy as cnp
@@ -101,9 +106,9 @@ cdef extern from "umfpack.h":
     int umfpack_di_get_lunz(int * lnz, int * unz, int * n_row, int * n_col,
                             int * nz_udiag, void * numeric)
 
-    int umfpack_di_get_numeric(int * Lp, int * Lj, double * Lx, double * Lz,
-                               int * Up, int * Ui, double * Ux, double * Uz,
-                               int * P, int * Q, double * Dx, double * Dz,
+    int umfpack_di_get_numeric(int * Lp, int * Lj, double * Lx,
+                               int * Up, int * Ui, double * Ux,
+                               int * P, int * Q, double * Dx,
                                int * do_recip, double * Rs,
                                void * numeric)
 
@@ -409,6 +414,92 @@ cdef class UmfpackSolver:
             test_umfpack_result(status, "get_lunz()")
 
         return (lnz, unz, n_row, n_col, nz_udiag)
+
+    def get_LU(self):
+        """
+        Return LU factorisation objects. If needed, the LU factorisation is triggered.
+
+        Returns:
+            (L, U, P, Q, D, do_recip, R)
+
+        """
+        # TODO: use properties?? we can only get matrices, not set them...
+        self.create_numeric()
+
+        cdef:
+            int lnz
+            int unz
+            int n_row
+            int n_col
+            int nz_udiag
+
+            int _do_recip
+
+        (lnz, unz, n_row, n_col, nz_udiag) = self.get_lunz()
+
+        # L CSR matrix
+        cdef int * Lp = <int *> PyMem_Malloc((n_row + 1) * sizeof(int))
+        if not Lp:
+            raise MemoryError()
+
+        cdef int * Lj = <int *> PyMem_Malloc(lnz * sizeof(int))
+        if not Lj:
+            raise MemoryError()
+
+        cdef double * Lx = <double *> PyMem_Malloc(lnz * sizeof(double))
+        if not Lx:
+            raise MemoryError()
+
+        # U CSC matrix
+        cdef int * Up = <int *> PyMem_Malloc((n_col + 1) * sizeof(int))
+        if not Up:
+            raise MemoryError()
+
+        cdef int * Ui = <int *> PyMem_Malloc(unz * sizeof(int))
+        if not Ui:
+            raise MemoryError()
+
+        cdef double * Ux = <double *> PyMem_Malloc(unz * sizeof(double))
+        if not Ux:
+            raise MemoryError()
+
+        cdef cnp.ndarray[cnp.int_t, ndim=1, mode='c'] P
+        cdef cnp.ndarray[cnp.int_t, ndim=1, mode='c'] Q
+        cdef cnp.ndarray[cnp.double_t, ndim=1, mode='c'] D
+        cdef cnp.ndarray[cnp.double_t, ndim=1, mode='c'] R
+
+        cdef cnp.npy_intp *dims_n_row = [n_row]
+        cdef cnp.npy_intp *dims_n_col = [n_col]
+        #cdef cnp.ndarray[cnp.int_t, ndim=1] result = \
+        cdef cnp.npy_intp *dims_min = [min(n_row, n_col)]
+
+        P = cnp.PyArray_EMPTY(1, dims_n_row, cnp.NPY_INTP, 0)
+        Q = cnp.PyArray_EMPTY(1, dims_n_col, cnp.NPY_INTP, 0)
+
+        D = cnp.PyArray_EMPTY(1, dims_min, cnp .NPY_DOUBLE, 0)
+
+        R = cnp.PyArray_EMPTY(1, dims_n_row, cnp .NPY_DOUBLE, 0)
+
+
+        cdef int status =umfpack_di_get_numeric(Lp, Lj, Lx,
+                               Up, Ui, Ux,
+                               <int *> P.data, <int *> Q.data, <double *> D.data,
+                               &_do_recip, <double *> R.data,
+                               self.numeric)
+
+        if status != UMFPACK_OK:
+            test_umfpack_result(status, "get_LU()")
+
+        cdef bint do_recip = _do_recip
+
+        cdef CSRSparseMatrix L
+        cdef CSCSparseMatrix U
+
+        cdef int size = min(n_row,n_col)
+        L = MakeCSRSparseMatrix(nrow=size, ncol=size, nnz=lnz, ind=Lp, col=Lj, val=Lx)
+        U = MakeCSCSparseMatrix(nrow=size, ncol=size, nnz=unz, ind=Up, row=Ui, val=Ux)
+
+        return (L, U, P, Q, D, do_recip, R)
 
     ####################################################################################################################
     # REPORTING ROUTINES

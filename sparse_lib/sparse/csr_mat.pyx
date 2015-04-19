@@ -263,6 +263,8 @@ cdef MakeCSRSparseMatrix(int nrow, int ncol, int nnz, int * ind, int * col, doub
         col  (int *): C-array with column indices.
         val  (double *): C-array with values.
     """
+
+
     csr_mat = CSRSparseMatrix(nrow=nrow, ncol=ncol, nnz=nnz)
 
     csr_mat.val = val
