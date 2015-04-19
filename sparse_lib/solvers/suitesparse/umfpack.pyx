@@ -1,6 +1,9 @@
 from sparse_lib.sparse.ll_mat cimport LLSparseMatrix
 
-import sys
+import numpy as np
+cimport numpy as cnp
+
+cnp.import_array()
 
 cdef extern from "umfpack.h":
 
@@ -93,6 +96,8 @@ cdef extern from "umfpack.h":
     void umfpack_di_free_numeric(void ** numeric)
     void umfpack_di_defaults(double * control)
 
+    int umfpack_di_solve(int umfpack_sys, int * Ap, int * Ai, double * Ax, double * x, double * b, void * numeric, double * control, double * info)
+
     int umfpack_di_get_lunz(int * lnz, int * unz, int * n_row, int * n_col,
                             int * nz_udiag, void * numeric)
 
@@ -120,22 +125,22 @@ def umfpack_detailed_version():
                                          UMFPACK_DATE)
     return version_string
 
-UMFPACK_SYS_LIST = [
-        'UMFPACK_A',
-        'UMFPACK_At',
-        'UMFPACK_Aat',
-        'UMFPACK_Pt_L',
-        'UMFPACK_L',
-        'UMFPACK_Lt_P',
-        'UMFPACK_Lat_P',
-        'UMFPACK_Lt',
-        'UMFPACK_U_Qt',
-        'UMFPACK_U',
-        'UMFPACK_Q_Ut',
-        'UMFPACK_Q_Uat',
-        'UMFPACK_Ut',
-        'UMFPACK_Uat'
-    ]
+UMFPACK_SYS_DICT = {
+        'UMFPACK_A'     : UMFPACK_A,
+        'UMFPACK_At'    : UMFPACK_At,
+        'UMFPACK_Aat'   : UMFPACK_Aat,
+        'UMFPACK_Pt_L'  : UMFPACK_Pt_L,
+        'UMFPACK_L'     : UMFPACK_L,
+        'UMFPACK_Lt_P'  : UMFPACK_Lt_P,
+        'UMFPACK_Lat_P' : UMFPACK_Lat_P,
+        'UMFPACK_Lt'    : UMFPACK_Lt,
+        'UMFPACK_U_Qt'  : UMFPACK_U_Qt,
+        'UMFPACK_U'     : UMFPACK_U,
+        'UMFPACK_Q_Ut'  : UMFPACK_Q_Ut,
+        'UMFPACK_Q_Uat' : UMFPACK_Q_Uat,
+        'UMFPACK_Ut'    : UMFPACK_Ut,
+        'UMFPACK_Uat'   : UMFPACK_Uat
+    }
 
 UMFPACK_ERROR_CODE_DICT = {
         UMFPACK_OK: 'UMFPACK_OK',
@@ -197,6 +202,8 @@ cdef class UmfpackSolver:
         self.nrow = A.nrow
         self.ncol = A.ncol
 
+        assert self.nrow == self.ncol, "Only square matrices are handled in UMFPACK"
+
         # TODO: type csc in pxd file
         self.csc_mat  = self.A.to_csc()
 
@@ -257,7 +264,7 @@ cdef class UmfpackSolver:
 
         if status != UMFPACK_OK:
             self.free_symbolic()
-            test_umfpack_result(status, "create_symbolic")
+            test_umfpack_result(status, "create_symbolic()")
 
     cdef int _create_numeric(self):
 
@@ -286,8 +293,122 @@ cdef class UmfpackSolver:
 
         if status != UMFPACK_OK:
             self.free_numeric()
-            test_umfpack_result(status, "create_numeric")
+            test_umfpack_result(status, "create_numeric()")
 
+
+    def solve(self, cnp.ndarray[cnp.double_t, ndim=1, mode="c"] b, umfpack_sys='UMFPACK_A', irsteps=2):
+        """
+        Solve the linear system  ``A x = b``.
+
+        Args:
+           b: a Numpy vector of appropriate dimension.
+           umfpack_sys: specifies the type of system being solved:
+
+                    +-------------------+--------------------------------------+
+                    |``"UMFPACK_A"``    | :math:`\mathbf{A} x = b` (default)   |
+                    +-------------------+--------------------------------------+
+                    |``"UMFPACK_At"``   | :math:`\mathbf{A}^T x = b`           |
+                    +-------------------+--------------------------------------+
+                    |``"UMFPACK_Pt_L"`` | :math:`\mathbf{P}^T \mathbf{L} x = b`|
+                    +-------------------+--------------------------------------+
+                    |``"UMFPACK_L"``    | :math:`\mathbf{L} x = b`             |
+                    +-------------------+--------------------------------------+
+                    |``"UMFPACK_Lt_P"`` | :math:`\mathbf{L}^T \mathbf{P} x = b`|
+                    +-------------------+--------------------------------------+
+                    |``"UMFPACK_Lt"``   | :math:`\mathbf{L}^T x = b`           |
+                    +-------------------+--------------------------------------+
+                    |``"UMFPACK_U_Qt"`` | :math:`\mathbf{U} \mathbf{Q}^T x = b`|
+                    +-------------------+--------------------------------------+
+                    |``"UMFPACK_U"``    | :math:`\mathbf{U} x = b`             |
+                    +-------------------+--------------------------------------+
+                    |``"UMFPACK_Q_Ut"`` | :math:`\mathbf{Q} \mathbf{U}^T x = b`|
+                    +-------------------+--------------------------------------+
+                    |``"UMFPACK_Ut"``   | :math:`\mathbf{U}^T x = b`           |
+                    +-------------------+--------------------------------------+
+
+           irsteps: number of iterative refinement steps to attempt. Default: 2
+
+        Returns:
+            ``sol``: The solution of ``A*x=b`` if everything went well.
+
+        Raises:
+            AttributeError: When vector ``b`` doesn't have a ``shape`` attribute.
+            AssertionError: When vector ``b`` doesn't have the right first dimension.
+            RuntimeError: Whenever ``UMFPACK`` returned status is not ``UMFPACK_OK`` and is an error.
+
+        Notes:
+            The opaque objects ``symbolic`` and ``numeric`` are automatically created if necessary.
+
+            You can ask for a report of what happened by calling :meth:`report_info()`.
+        """
+        #TODO: add other umfpack_sys arguments to the docstring.
+        # test argument b
+        cdef cnp.npy_intp * shape_b
+        try:
+            shape_b = b.shape
+        except:
+            raise AttributeError("argument b must implement attribute 'shape'")
+        dim_b = shape_b[0]
+        assert dim_b == self.nrow, "array dimensions must agree"
+
+        if umfpack_sys not in UMFPACK_SYS_DICT.keys():
+            raise ValueError('umfpack_sys must be in' % UMFPACK_SYS_DICT.keys())
+
+        self.control[UMFPACK_IRSTEP] = irsteps
+
+        self.create_symbolic()
+        self.create_numeric()
+
+        cdef cnp.ndarray[cnp.double_t, ndim=1, mode='c'] sol = np.empty(self.ncol, dtype=np.double)
+
+        cdef int * ind = <int *> self.csc_mat.ind
+        cdef int * row = <int *> self.csc_mat.row
+        cdef double * val = <double *> self.csc_mat.val
+
+        cdef int status =  umfpack_di_solve(UMFPACK_SYS_DICT[umfpack_sys], ind, row, val, <double*> sol.data, <double *> b.data, self.numeric, self.control, self.info)
+
+        if status != UMFPACK_OK:
+            test_umfpack_result(status, "solve()")
+
+        return sol
+
+    ####################################################################################################################
+    # LU ROUTINES
+    ####################################################################################################################
+    def get_lunz(self):
+        """
+        Determine the size and number of non zeros in the LU factors held by the opaque ``Numeric`` object.
+
+        Returns:
+            (lnz, unz, n_row, n_col, nz_udiag):
+
+            lnz: The number of nonzeros in ``L``, including the diagonal (which is all one's)
+            unz: The number of nonzeros in ``U``, including the diagonal.
+            n_row, n_col: The order of the ``L`` and ``U`` matrices. ``L`` is ``n_row`` -by- ``min(n_row,n_col)``
+                and ``U`` is ``min(n_row,n_col)`` -by- ``n_col``.
+            nz_udiag: The number of numerically nonzero values on the diagonal of ``U``. The
+                matrix is singular if ``nz_diag < min(n_row,n_col)``. A ``divide-by-zero``
+                will occur if ``nz_diag < n_row == n_col`` when solving a sparse system
+                involving the matrix ``U`` in ``solve()``.
+
+        Raises:
+            RuntimeError: When ``UMFPACK`` return status is not ``UMFPACK_OK`` and is an error.
+        """
+        self.create_numeric()
+
+        cdef:
+            int lnz
+            int unz
+            int n_row
+            int n_col
+            int nz_udiag
+
+        cdef status = umfpack_di_get_lunz(&lnz, &unz, &n_row, &n_col, &nz_udiag, self.numeric)
+
+        if status != UMFPACK_OK:
+            test_umfpack_result(status, "get_lunz()")
+
+        return (lnz, unz, n_row, n_col, nz_udiag)
 
     ####################################################################################################################
     # REPORTING ROUTINES

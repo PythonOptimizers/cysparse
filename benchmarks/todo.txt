@@ -3,4 +3,4 @@ Benchmarks:
 compare to:
   - PySparse
   - Scipy sparse matrices
-  - utilisation BLAS 
+  - with the use of BLAS via Tokyo

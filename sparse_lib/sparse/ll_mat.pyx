@@ -215,7 +215,6 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
             :meth:`safe_put`.
 
         """
-        # TODO: adapt test x != 0.0 to !values_are_equal(x, 0.0)
         if self.is_symmetric and i < j:
             raise IndexError('Write operation to upper triangle of symmetric matrix not allowed')
 
@@ -303,7 +302,19 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         update_ll_mat_matrix_from_c_arrays_indices_assign(self, view.row_indices, view.nrow,
                                                        view.col_indices, view.ncol, obj)
 
+    def put_triplet(self,  list val, list index_i, list index_j):
+        cdef index_i_length = len(index_i)
+        cdef index_j_length = len(index_j)
+        cdef val_length = len(val)
 
+        assert index_j_length == index_j_length == val_length, "All lists must be of equal length"
+
+
+
+        cdef Py_ssize_t i
+
+        for i from 0 <= i < index_i_length:
+            self.safe_put(index_i[i], index_j[i], val[i])
 
     def __setitem__(self, tuple key, value):
         """
@@ -750,12 +761,27 @@ def MakeLLSparseMatrix(**kwargs):
     # TODO: add symmetrical case
     cdef int nrow = kwargs.get('nrow', -1)
     cdef int ncol = kwargs.get('ncol', -1)
+    cdef int size = kwargs.get('size', -1)
     cdef int size_hint = kwargs.get('size_hint', LL_MAT_DEFAULT_SIZE_HINT)
     matrix = kwargs.get('matrix', None)
 
     # CASE 1
-    if matrix is None and nrow != -1 and ncol != -1:
-        return LLSparseMatrix(nrow=nrow, ncol=ncol, size_hint=size_hint)
+    if matrix is None:
+        if nrow != -1 and ncol != -1:
+            if size != -1:
+                assert nrow == ncol == size, "Mismatch between nrow, ncol and size"
+            return LLSparseMatrix(nrow=nrow, ncol=ncol, size_hint=size_hint)
+        elif nrow != -1 and ncol == -1:
+            if size != -1:
+                assert size == nrow, "Mismatch between nrow and size"
+            return LLSparseMatrix(nrow=nrow, ncol=nrow, size_hint=size_hint)
+        elif nrow == -1 and ncol != -1:
+            if size != -1:
+                assert ncol == size, "Mismatch between ncol and size"
+            return LLSparseMatrix(nrow=ncol, ncol=ncol, size_hint=size_hint)
+        else:
+            assert size != -1, "No size given"
+            return LLSparseMatrix(nrow=size, ncol=size, size_hint=size_hint)
 
     # CASE 2
     cdef double[:, :] matrix_view
@@ -764,6 +790,7 @@ def MakeLLSparseMatrix(**kwargs):
 
     if matrix is not None:
         # TODO: direct access into the numpy array
+        # TODO: skip views... ?
         if len(matrix.shape) != 2:
             raise IndexError('Matrix must be of dimension 2 (not %d)' % len(matrix.shape))
 
