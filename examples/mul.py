@@ -23,3 +23,4 @@ print "*" * 80
 
 RC = R * C
 print RC
+RC.print_to(sys.stdout)

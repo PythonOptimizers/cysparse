@@ -1,6 +1,28 @@
 
 cdef int MUTABLE_SPARSE_MAT_DEFAULT_SIZE_HINT = 40        # allocated size by default
 
+class NonZeros():
+    """
+    Context manager to use methods with flag ``store_zeros`` to ``False``.
+
+    The initial value is restored upon completion.
+
+    Use like this:
+
+        >>>with NonZeros(A):
+        >>>    ...
+    """
+    def __init__(self, SparseMatrix A):
+        self.A = A
+        self.store_zeros = False
+
+    def __enter__(self):
+        self.store_zeros = self.A.store_zeros
+        self.A.store_zeros = False
+
+    def __exit__(self, type, value, traceback):
+        self.A.store_zeros = self.store_zeros
+
 cdef class SparseMatrix:
 
     def __cinit__(self, **kwargs):
@@ -37,6 +59,19 @@ cdef class SparseMatrix:
 
         def __del__(self):
             raise NotImplemented("Not implemented in base class")
+
+    ####################################################################################################################
+    # MEMORY INFO
+    ####################################################################################################################
+    def memory_virtual(self):
+        cdef int memory = self.nrow * self.ncol * sizeof(double)
+        return memory
+
+    def memory_real(self):
+        raise NotImplemented('Method not implemented for this type of matrix, please report')
+
+    def memory_element(self):
+        return sizeof(double)
 
 cdef class MutableSparseMatrix(SparseMatrix):
     def __cinit__(self, **kwargs):

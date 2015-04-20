@@ -393,14 +393,19 @@ cdef LLSparseMatrix multiply_csr_mat_by_csc_mat(CSRSparseMatrix A, CSCSparseMatr
         int i, j, k
         int sum
 
-    for i from 0 <= i < A.nrow:
-        for j from 0 <= j < A.ncol:
+    # don't keep zeros, no matter what
+    cdef bint old_store_zeros = store_zeros
+    C.store_zeros = 0
+
+    for i from 0 <= i < C_nrow:
+        for j from 0 <= j < C_ncol:
             sum = 0
 
-            for k from 0 <= k < A.ncol:
-                sum += A[i, k] * B[k, j]
+            for k from 0 <= k < A_ncol:
+                sum += (A[i, k] * B[k, j])
 
             C.put(i, j, sum)
 
+    C.store_zeros = old_store_zeros
 
     return C

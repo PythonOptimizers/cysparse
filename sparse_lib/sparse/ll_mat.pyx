@@ -197,6 +197,27 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
 
         return
 
+
+    def memory_real(self):
+        """
+        Return the real amount of memory used internally for the matrix.
+
+        Returns:
+            The exact number of bits used to store the matrix.
+        """
+        cdef int total_memory = 0
+
+        # root
+        total_memory += self.nrow * sizeof(int)
+        # col
+        total_memory += self.nalloc * sizeof(int)
+        # link
+        total_memory += self.nalloc * sizeof(int)
+        # val
+        total_memory += self.nalloc * sizeof(double)
+
+        return total_memory
+
     ####################################################################################################################
     # Set/Get items
     ####################################################################################################################
@@ -208,6 +229,7 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
 
         Note:
             Store zero elements **only** if ``store_zeros`` is ``True``.
+
         Warning:
             No out of bound check.
 
@@ -266,21 +288,21 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
 
                 self.nnz += 1
 
-        # TODO: what is the meaning of this code???
-        # else:
-        #     # value == 0.0
-        #     if col == j:
-        #         # relink row i
-        #         if last == -1:
-        #             self.root[i] = self.link[k]
-        #         else:
-        #             self.link[last] = self.link[k]
-        #
-        #     # add element to free list
-        #     self.link[k] = self.free
-        #     self.free = k
-        #
-        #     self.nnz -= 1
+        else:
+            # value == 0.0: if element exists but we don't store zero elements
+            # we need to "zeroify" this element
+            if col == j:
+                # relink row i
+                if last == -1:
+                    self.root[i] = self.link[k]
+                else:
+                    self.link[last] = self.link[k]
+
+                # add element to free list
+                self.link[k] = self.free
+                self.free = k
+
+                self.nnz -= 1
 
     cdef safe_put(self, int i, int j, double value):
         """
@@ -768,25 +790,37 @@ def MakeLLSparseMatrix(**kwargs):
     cdef int ncol = kwargs.get('ncol', -1)
     cdef int size = kwargs.get('size', -1)
     cdef int size_hint = kwargs.get('size_hint', LL_MAT_DEFAULT_SIZE_HINT)
+    cdef bint store_zeros = kwargs.get('store_zeros', False)
+    cdef bint is_symmetric = kwargs.get('is_symmetrix', False)
+
     matrix = kwargs.get('matrix', None)
+
+    cdef int real_nrow
+    cdef int real_ncol
 
     # CASE 1
     if matrix is None:
         if nrow != -1 and ncol != -1:
             if size != -1:
                 assert nrow == ncol == size, "Mismatch between nrow, ncol and size"
-            return LLSparseMatrix(nrow=nrow, ncol=ncol, size_hint=size_hint)
+            real_nrow = nrow
+            real_ncol = ncol
         elif nrow != -1 and ncol == -1:
             if size != -1:
                 assert size == nrow, "Mismatch between nrow and size"
-            return LLSparseMatrix(nrow=nrow, ncol=nrow, size_hint=size_hint)
+            real_nrow = nrow
+            real_ncol = nrow
         elif nrow == -1 and ncol != -1:
             if size != -1:
                 assert ncol == size, "Mismatch between ncol and size"
-            return LLSparseMatrix(nrow=ncol, ncol=ncol, size_hint=size_hint)
+            real_nrow = ncol
+            real_ncol = ncol
         else:
             assert size != -1, "No size given"
-            return LLSparseMatrix(nrow=size, ncol=size, size_hint=size_hint)
+            real_nrow = size
+            real_ncol = size
+
+        return LLSparseMatrix(nrow=real_nrow, ncol=real_ncol, size_hint=size_hint, store_zeros=store_zeros, is_symmetric=is_symmetric)
 
     # CASE 2
     cdef double[:, :] matrix_view
