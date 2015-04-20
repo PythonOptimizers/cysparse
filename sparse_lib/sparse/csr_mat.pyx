@@ -6,7 +6,9 @@ Condensed Sparse Row (CSR) Format Matrices.
 
 from __future__ import print_function
 
-from sparse_lib.sparse.sparse_mat cimport ImmutableSparseMatrix
+from sparse_lib.sparse.sparse_mat cimport ImmutableSparseMatrix, MutableSparseMatrix
+from sparse_lib.sparse.ll_mat cimport LLSparseMatrix
+from sparse_lib.sparse.csc_mat cimport CSCSparseMatrix
 
 from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
 
@@ -171,6 +173,87 @@ cdef class CSRSparseMatrix(ImmutableSparseMatrix):
 
 
     ####################################################################################################################
+    # Set/Get items
+    ####################################################################################################################
+    ####################################################################################################################
+    #                                            *** SET ***
+    def __setitem__(self, tuple key, value):
+        raise SyntaxError("Assign individual elements is not allowed")
+
+    #                                            *** GET ***
+    cdef at(self, int i, int j):
+        """
+        Direct access to element ``(i, j)``.
+
+        Warning:
+            There is not out of bounds test.
+
+        See:
+            :meth:`safe_at`.
+
+        """
+        cdef int k
+
+        if self.is_symmetric:
+            raise NotImplemented("Access to csr_mat(i, j) not (yet) implemented")
+
+        # TODO: column indices are NOT necessarily sorted... what do we do about it?
+        for k from self.ind[i] <= k < self.ind[i+1]:
+            if j == self.col[k]:
+                return self.val[k]
+
+        return 0.0
+
+    cdef safe_at(self, int i, int j):
+        """
+        Return element ``(i, j)`` but with check for out of bounds indices.
+
+        Raises:
+            IndexError: when index out of bound.
+
+        """
+        if not 0 <= i < self.nrow or not 0 <= j < self.ncol:
+            raise IndexError("Index out of bounds")
+
+        return self.at(i, j)
+
+    def __getitem__(self, tuple key):
+        """
+        Return ``csr_mat[i, j]``.
+
+        Args:
+          key = (i,j): Must be a couple of integers.
+
+        Raises:
+            IndexError: when index out of bound.
+
+        Returns:
+            ``csr_mat[i, j]``.
+        """
+        if len(key) != 2:
+            raise IndexError('Index tuple must be of length 2 (not %d)' % len(key))
+
+        cdef int i = key[0]
+        cdef int j = key[1]
+
+        return self.safe_at(i, j)
+
+    ####################################################################################################################
+    # Multiplication
+    ####################################################################################################################
+    def __mul__(self, other):
+
+        # test if implemented
+        if isinstance(other, (MutableSparseMatrix, ImmutableSparseMatrix)):
+            pass
+        else:
+            raise NotImplemented("Multiplication not (yet) allowed")
+
+        # CASES
+        if isinstance(other, CSCSparseMatrix):
+            return multiply_csr_mat_by_csc_mat(self, other)
+
+    ####################################################################################################################
     # String representations
     ####################################################################################################################
     def __repr__(self):
@@ -274,3 +357,50 @@ cdef MakeCSRSparseMatrix(int nrow, int ncol, int nnz, int * ind, int * col, doub
     csr_mat.__status_ok = True
 
     return csr_mat
+
+########################################################################################################################
+# Multiplication functions
+########################################################################################################################
+cdef LLSparseMatrix multiply_csr_mat_by_csc_mat(CSRSparseMatrix A, CSCSparseMatrix B):
+    # test dimensions
+    cdef int A_nrow = A.nrow
+    cdef int A_ncol = A.ncol
+
+    cdef int B_nrow = B.nrow
+    cdef int B_ncol = B.ncol
+
+    if A_ncol != B_nrow:
+        raise IndexError("Matrix dimensions must agree ([%d, %d] * [%d, %d])" % (A_nrow, A_ncol, B_nrow, B_ncol))
+
+    cdef int C_nrow = A_nrow
+    cdef int C_ncol = B_ncol
+
+    cdef bint store_zeros = A.store_zeros and B.store_zeros
+    # TODO: what strategy to implement?
+    cdef int size_hint = A.nnz
+
+    C = LLSparseMatrix(nrow=C_nrow, ncol=C_ncol, size_hint=size_hint, store_zeros=store_zeros)
+
+    # CASES
+    if not A.is_symmetric and not B.is_symmetric:
+        pass
+    else:
+        raise NotImplemented("Multiplication with symmetric matrices is not implemented yet")
+
+    # NON OPTIMIZED MULTIPLICATION
+    # TODO: what do we do? Column indices are NOT necessarily sorted...
+    cdef:
+        int i, j, k
+        int sum
+
+    for i from 0 <= i < A.nrow:
+        for j from 0 <= j < A.ncol:
+            sum = 0
+
+            for k from 0 <= k < A.ncol:
+                sum += A[i, k] * B[k, j]
+
+            C.put(i, j, sum)
+
+
+    return C

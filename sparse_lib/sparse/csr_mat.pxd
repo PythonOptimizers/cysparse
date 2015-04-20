@@ -1,6 +1,8 @@
 
 
 from sparse_lib.sparse.sparse_mat cimport ImmutableSparseMatrix
+from sparse_lib.sparse.ll_mat cimport LLSparseMatrix
+from sparse_lib.sparse.csc_mat cimport CSCSparseMatrix
 
 cdef class CSRSparseMatrix(ImmutableSparseMatrix):
     """
@@ -24,5 +26,10 @@ cdef class CSRSparseMatrix(ImmutableSparseMatrix):
         int __first_row_not_ordered # first row that is not ordered
 
     cdef _order_column_indices(self)
+    cdef at(self, int i, int j)
+    cdef safe_at(self, int i, int j)
 
 cdef MakeCSRSparseMatrix(int nrow, int ncol, int nnz, int * ind, int * col, double * val)
+
+cdef LLSparseMatrix multiply_csr_mat_by_csc_mat(CSRSparseMatrix A, CSCSparseMatrix B)
+

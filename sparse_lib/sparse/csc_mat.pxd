@@ -24,4 +24,7 @@ cdef class CSCSparseMatrix(ImmutableSparseMatrix):
         bint __col_indices_sorted  # are the column indices sorted in ascending order?
         int __first_row_not_ordered # first row that is not ordered
 
+    cdef at(self, int i, int j)
+    cdef safe_at(self, int i, int j)
+
 cdef MakeCSCSparseMatrix(int nrow, int ncol, int nnz, int * ind, int * row, double * val)

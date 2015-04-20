@@ -209,19 +209,14 @@ cdef class UmfpackSolver:
 
         assert self.nrow == self.ncol, "Only square matrices are handled in UMFPACK"
 
-        # TODO: type csc in pxd file
         self.csc_mat  = self.A.to_csc()
-
-        #cdef double * val = self.val
-        #cdef int * col = <int *> self.col
-        #cdef int * ind = <int *> self.ind
 
         self.symbolic_computed = False
         self.numeric_computed = False
 
         # set default parameters for control
         umfpack_di_defaults(<double *>&self.control)
-        self.control[UMFPACK_PRL] = 3
+        self.set_verbosity(3)
 
     ####################################################################################################################
     # FREE MEMORY
@@ -421,6 +416,22 @@ cdef class UmfpackSolver:
 
         Returns:
             (L, U, P, Q, D, do_recip, R)
+
+            The original matrix A is factorized into
+
+                L U = P R A Q
+
+            where:
+             - L is unit lower triangular,
+             - U is upper triangular,
+             - P and Q are permutation matrices,
+             - R is a row-scaling diagonal matrix such that
+
+                  * the i-th row of A has been divided by R[i] if do_recip = True,
+                  * the i-th row of A has been multiplied by R[i] if do_recip = False.
+
+            L and U are returned as CSRSparseMatrix and CSCSparseMatrix sparse matrices respectively.
+            P, Q and R are returned as NumPy arrays.
 
         """
         # TODO: use properties?? we can only get matrices, not set them...

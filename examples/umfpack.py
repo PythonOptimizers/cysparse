@@ -49,3 +49,13 @@ print Q
 print D
 print do_recip
 print R
+
+print "*" * 80
+print "L * U: "
+LU = L * U
+
+
+print "heheh"
+print LU
+import sys
+LU.print_to(sys.stdout)

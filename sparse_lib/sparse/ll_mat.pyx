@@ -225,13 +225,16 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         k = self.root[i]
         while k != -1:
             col = self.col[k]
+            # TODO: check this
+            # TODO: this is ONLY valid if col indices are SORTED... is this always the case???
             if col >= j:
                 break
             last = k
             k = self.link[k]
 
-        #if value != 0.0 or self.store_zeros:
-        if not values_are_equal(value, 0.0) or self.store_zeros:
+        # Store value
+        #if value != 0.0 or self.store_zeros
+        if self.store_zeros or not values_are_equal(value, 0.0):
             if col == j:
                 # element already exist
                 self.val[k] = value
@@ -262,20 +265,22 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
                     self.link[last] = new_elem
 
                 self.nnz += 1
-        else:
-            # value == 0.0
-            if col == j:
-                # relink row i
-                if last == -1:
-                    self.root[i] = self.link[k]
-                else:
-                    self.link[last] = self.link[k]
 
-            # add element to free list
-            self.link[k] = self.free
-            self.free = k
-
-            self.nnz -= 1
+        # TODO: what is the meaning of this code???
+        # else:
+        #     # value == 0.0
+        #     if col == j:
+        #         # relink row i
+        #         if last == -1:
+        #             self.root[i] = self.link[k]
+        #         else:
+        #             self.link[last] = self.link[k]
+        #
+        #     # add element to free list
+        #     self.link[k] = self.free
+        #     self.free = k
+        #
+        #     self.nnz -= 1
 
     cdef safe_put(self, int i, int j, double value):
         """
@@ -347,7 +352,7 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
     #                                            *** GET ***
     cdef at(self, int i, int j):
         """
-        Direct access to element ``(i, j)``.
+        Return element ``(i, j)``.
 
         Warning:
             There is not out of bounds test.
@@ -372,7 +377,7 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
 
     cdef safe_at(self, int i, int j):
         """
-        Direct access to element ``(i, j)`` but with check for out of bounds indices.
+        Return element ``(i, j)`` but with check for out of bounds indices.
 
         Raises:
             IndexError: when index out of bound.
