@@ -391,7 +391,7 @@ cdef LLSparseMatrix multiply_csr_mat_by_csc_mat(CSRSparseMatrix A, CSCSparseMatr
     # TODO: what do we do? Column indices are NOT necessarily sorted...
     cdef:
         int i, j, k
-        int sum
+        double sum
 
     # don't keep zeros, no matter what
     cdef bint old_store_zeros = store_zeros
@@ -399,7 +399,7 @@ cdef LLSparseMatrix multiply_csr_mat_by_csc_mat(CSRSparseMatrix A, CSCSparseMatr
 
     for i from 0 <= i < C_nrow:
         for j from 0 <= j < C_ncol:
-            sum = 0
+            sum = 0.0
 
             for k from 0 <= k < A_ncol:
                 sum += (A[i, k] * B[k, j])

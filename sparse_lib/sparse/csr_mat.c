@@ -4151,7 +4151,7 @@ static struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *__pyx_f_10s
   int __pyx_v_i;
   int __pyx_v_j;
   int __pyx_v_k;
-  int __pyx_v_sum;
+  double __pyx_v_sum;
   int __pyx_v_old_store_zeros;
   struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -4165,7 +4165,7 @@ static struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *__pyx_f_10s
   int __pyx_t_8;
   int __pyx_t_9;
   int __pyx_t_10;
-  int __pyx_t_11;
+  double __pyx_t_11;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -4402,7 +4402,7 @@ static struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *__pyx_f_10s
  * 
  *     for i from 0 <= i < C_nrow:             # <<<<<<<<<<<<<<
  *         for j from 0 <= j < C_ncol:
- *             sum = 0
+ *             sum = 0.0
  */
   __pyx_t_1 = __pyx_v_C_nrow;
   for (__pyx_v_i = 0; __pyx_v_i < __pyx_t_1; __pyx_v_i++) {
@@ -4411,7 +4411,7 @@ static struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *__pyx_f_10s
  * 
  *     for i from 0 <= i < C_nrow:
  *         for j from 0 <= j < C_ncol:             # <<<<<<<<<<<<<<
- *             sum = 0
+ *             sum = 0.0
  * 
  */
     __pyx_t_9 = __pyx_v_C_ncol;
@@ -4420,14 +4420,14 @@ static struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *__pyx_f_10s
       /* "sparse_lib/sparse/csr_mat.pyx":402
  *     for i from 0 <= i < C_nrow:
  *         for j from 0 <= j < C_ncol:
- *             sum = 0             # <<<<<<<<<<<<<<
+ *             sum = 0.0             # <<<<<<<<<<<<<<
  * 
  *             for k from 0 <= k < A_ncol:
  */
-      __pyx_v_sum = 0;
+      __pyx_v_sum = 0.0;
 
       /* "sparse_lib/sparse/csr_mat.pyx":404
- *             sum = 0
+ *             sum = 0.0
  * 
  *             for k from 0 <= k < A_ncol:             # <<<<<<<<<<<<<<
  *                 sum += (A[i, k] * B[k, j])
@@ -4443,7 +4443,7 @@ static struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *__pyx_f_10s
  * 
  *             C.put(i, j, sum)
  */
-        __pyx_t_7 = __Pyx_PyInt_From_int(__pyx_v_sum); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 405; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_7 = PyFloat_FromDouble(__pyx_v_sum); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 405; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_7);
         __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_i); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 405; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_6);
@@ -4483,7 +4483,7 @@ static struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *__pyx_f_10s
         __Pyx_GOTREF(__pyx_t_6);
         __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-        __pyx_t_11 = __Pyx_PyInt_As_int(__pyx_t_6); if (unlikely((__pyx_t_11 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 405; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_11 = __pyx_PyFloat_AsDouble(__pyx_t_6); if (unlikely((__pyx_t_11 == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 405; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
         __pyx_v_sum = __pyx_t_11;
       }

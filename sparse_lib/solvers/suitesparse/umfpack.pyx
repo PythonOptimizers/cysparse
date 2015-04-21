@@ -410,7 +410,7 @@ cdef class UmfpackSolver:
 
         return (lnz, unz, n_row, n_col, nz_udiag)
 
-    def get_LU(self):
+    def get_LU(self, get_L=True, get_U=True, get_P=True, get_Q=True, get_D=True, get_R=True):
         """
         Return LU factorisation objects. If needed, the LU factorisation is triggered.
 
@@ -435,6 +435,8 @@ cdef class UmfpackSolver:
 
         """
         # TODO: use properties?? we can only get matrices, not set them...
+        # TODO: implement the use of L=True, U=True, P=True, Q=True, D=True, R=True
+        # i.e. allow to return only parts of the arguments and not necessarily all of them...
         self.create_numeric()
 
         cdef:

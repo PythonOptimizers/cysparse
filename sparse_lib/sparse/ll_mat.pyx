@@ -8,8 +8,8 @@ from __future__ import print_function
 from sparse_lib.sparse.sparse_mat cimport MutableSparseMatrix
 from sparse_lib.sparse.csr_mat cimport MakeCSRSparseMatrix
 from sparse_lib.sparse.csc_mat cimport MakeCSCSparseMatrix
-from sparse_lib.utils.equality cimport values_are_equal
-
+#from sparse_lib.utils.equality cimport values_are_equal
+from sparse_lib.sparse.IO.mm cimport MakeLLSparseMatrixFromMMFile
 
 
 # Import the Python-level symbols of numpy
@@ -256,7 +256,7 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
 
         # Store value
         #if value != 0.0 or self.store_zeros
-        if self.store_zeros or not values_are_equal(value, 0.0):
+        if self.store_zeros or value != 0.0: #not values_are_equal(value, 0.0):
             if col == j:
                 # element already exist
                 self.val[k] = value
@@ -795,11 +795,13 @@ def MakeLLSparseMatrix(**kwargs):
 
     matrix = kwargs.get('matrix', None)
 
+    mm_filename = kwargs.get('mm_filename', None)
+
     cdef int real_nrow
     cdef int real_ncol
 
     # CASE 1
-    if matrix is None:
+    if matrix is None and mm_filename is None:
         if nrow != -1 and ncol != -1:
             if size != -1:
                 assert nrow == ncol == size, "Mismatch between nrow, ncol and size"
@@ -827,7 +829,7 @@ def MakeLLSparseMatrix(**kwargs):
     cdef int i, j
     cdef double value
 
-    if matrix is not None:
+    if matrix is not None and mm_filename is None:
         # TODO: direct access into the numpy array
         # TODO: skip views... ?
         if len(matrix.shape) != 2:
@@ -857,6 +859,9 @@ def MakeLLSparseMatrix(**kwargs):
                     ll_mat[i, j] = value
 
         return ll_mat
+
+    if mm_filename is not None:
+        return MakeLLSparseMatrixFromMMFile(mm_filename)
 
 ########################################################################################################################
 # Multiplication functions
