@@ -1,6 +1,12 @@
-.. introduction_to_cy_sparse
+.. introduction_to_cy_sparse:
 
 ==========================
 Introduction to CySparse
 ==========================
+
+:program:`PySparse` legacy
+============================
+
+License
+========
 

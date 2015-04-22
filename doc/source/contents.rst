@@ -11,7 +11,11 @@ CySparse documentation
 .. toctree::
    :maxdepth: 2
 
-   Introduction <introduction>
+   introduction
+   sparse_matrix_formats
+   sparse_mat_hierarchy
+   ll_mat
+   cysparse_cython_users
    
 ..   #Sparse Matrix Formats <formats>
    #Low-Level Sparse Matrix Types <spmatrix>
