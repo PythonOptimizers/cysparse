@@ -12,22 +12,29 @@ from sparse_lib.utils.equality cimport values_are_equal
 
 from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
 from cpython cimport PyObject
+from python_ref cimport Py_INCREF, Py_DECREF
 
 cimport numpy as cnp
 cnp.import_array()
 
 import numpy as np
 
+cdef extern from "Python.h":
+    # *** Types ***
+    int PyInt_Check(PyObject *o)
+
+
 include "object_index.pxi"
 
 cdef class LLSparseMatrixView:
     def __cinit__(self, LLSparseMatrix A, int nrow, int ncol):
-        self.nrow = nrow
-        self.ncol = ncol
+        self.nrow = nrow  # number of rows of the view
+        self.ncol = ncol  # number of columns of the view
 
         self.is_empty = True
 
         self.A = A
+        Py_INCREF(self.A)  # increase ref to object to avoid the user deleting it explicitly or implicitly
 
         self.is_symmetric = A.is_symmetric
         self.store_zeros = A.store_zeros
@@ -55,12 +62,39 @@ cdef class LLSparseMatrixView:
         PyMem_Free(self.row_indices)
         PyMem_Free(self.col_indices)
 
+        Py_DECREF(self.A) # release ref
+
     cdef assert_status_ok(self):
         assert self.__status_ok, "Create an LLSparseMatrixView only with the factory function MakeLLSparseMatrixView()"
 
+
+    cdef put(self, int i, int j, double value):
+        self.A.put(self.row_indices[i], self.col_indices[j], value)
+
+    cdef safe_put(self, int i, int j, double value):
+        """
+        Set ``A_view[i, j] = value`` directly.
+
+        Raises:
+            IndexError: when index out of bound.
+        """
+        if i < 0 or i >= self.nrow or j < 0 or j >= self.ncol:
+            raise IndexError('Indices out of range')
+
+        self.put(i, j, value)
+
     def __setitem__(self, tuple key, value):
-        # TODO: direct access to the matrix
-        raise NotImplemented("This operation is not allowed for LLSparseMatrixView")
+        if len(key) != 2:
+            raise IndexError('Index tuple must be of length 2 (not %d)' % len(key))
+        # test for direct access (i.e. both elements are integers)
+        if not PyInt_Check(<PyObject *>key[0]) or not PyInt_Check(<PyObject *>key[0]):
+            raise NotImplemented("This operation is not allowed for LLSparseMatrixView")
+
+        cdef int i = key[0]
+        cdef int j = key[1]
+
+        self.safe_put(i, j, <double> value)
+
 
     def __getitem__(self, tuple):
         # TODO: return another view
@@ -112,6 +146,12 @@ cdef class LLSparseMatrixView:
 
         return A_copy
 
+    def get_matrix(self):
+        """
+        Return pointer to original matrix ``A``.
+        :return:
+        """
+        return self.A
 
     ####################################################################################################################
     # Multiplication

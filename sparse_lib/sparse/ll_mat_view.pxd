@@ -30,6 +30,8 @@ cdef class LLSparseMatrixView:
 
     cdef int count_nnz(self)
     cdef assert_status_ok(self)
+    cdef put(self, int i, int j, double value)
+    cdef safe_put(self, int i, int j, double value)
 
 cdef LLSparseMatrixView MakeLLSparseMatrixView(LLSparseMatrix A, PyObject* obj1, PyObject* obj2)
 

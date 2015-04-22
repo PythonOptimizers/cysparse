@@ -17,6 +17,9 @@ class LLSparseMatrixViewBaseTestCase(unittest.TestCase):
         self.A[3, 2] = -1
 
 
+########################################################################################################################
+# CREATION
+########################################################################################################################
 class LLSparseMatrixViewCreateTestCase(LLSparseMatrixViewBaseTestCase):
     """
     We test ``LLSparseMatrixView`` **creation**.
@@ -176,6 +179,9 @@ class LLSparseMatrixViewCreateTestCase(LLSparseMatrixViewBaseTestCase):
         self.failUnless(ll_mat_view.ncol == 2)
 
 
+########################################################################################################################
+# COPY
+########################################################################################################################
 class LLSparseMatrixViewCopyTestCase(LLSparseMatrixViewBaseTestCase):
     """
     We test ``LLSparseMatrixView`` ``copy()`` method. This method returns a corresponding :class:`LLSparseMatrix`.
@@ -196,6 +202,55 @@ class LLSparseMatrixViewCopyTestCase(LLSparseMatrixViewBaseTestCase):
         for i in xrange(self.A.nrow):
             for j in xrange(self.A.ncol):
                 self.failUnless(ll_mat[i, j] == self.A[i, j])
+
+########################################################################################################################
+# REFERENCES
+########################################################################################################################
+class LLSparseMatrixViewReferenceTestCase(LLSparseMatrixViewBaseTestCase):
+    """
+    Test if base matrix is really deleted or not.
+
+    Note:
+        I (Nikolaj) did some other tests to check if an :class:`LLSparseMatrix` object really gets deleted or not.
+        I don't know how to test the existence of Python objects only using Python.
+        A :class:`LLSparseMatrix` object asked to be deleted is indeed deleted whenever all of its views are deleted.
+    """
+    def setUp(self):
+        super(LLSparseMatrixViewReferenceTestCase, self).setUp()
+
+    def testExplicitDeletingOfMatrix(self):
+        """
+        User deletes explicitly base :class:`LLSparseMatrix`.
+        """
+        ll_mat_view = self.A[0:2, 0:3:2]
+
+        del self.A
+
+        A = ll_mat_view.get_matrix()
+        self.failUnless(A[0, 0] == 89.9)
+        ll_mat_view[0, 0] = 2.9
+        self.failUnless(A[0, 0] == 2.9)
+
+    def testImplicitDeletingOfMatrix(self):
+        """
+        Implicit delete.
+
+        """
+        def create_view():
+            A = LLSparseMatrix(nrow=3, ncol=4, size_hint=10)
+            A[0, 0] = 89.9
+            A[1, 0] = -43434.9897
+            A[2, 2] = -1
+
+            A_view = A[0:2, 0:3:2]
+
+            return A_view
+
+        ll_mat_view = create_view()
+        A = ll_mat_view.get_matrix()
+        self.failUnless(A[0, 0] == 89.9)
+        ll_mat_view[0, 0] = 2.9
+        self.failUnless(A[0, 0] == 2.9)
 
 
 if __name__ == '__main__':
