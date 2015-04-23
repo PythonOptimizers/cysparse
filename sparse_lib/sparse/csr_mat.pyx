@@ -6,24 +6,26 @@ Condensed Sparse Row (CSR) Format Matrices.
 
 from __future__ import print_function
 
+from sparse_lib.cysparse_types cimport *
+
 from sparse_lib.sparse.sparse_mat cimport ImmutableSparseMatrix, MutableSparseMatrix
 from sparse_lib.sparse.ll_mat cimport LLSparseMatrix
 from sparse_lib.sparse.csc_mat cimport CSCSparseMatrix
 
 from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
 
-cdef int CSR_MAT_PPRINT_ROW_THRESH = 500       # row threshold for choosing print format
-cdef int CSR_MAT_PPRINT_COL_THRESH = 20        # column threshold for choosing print format
+cdef INT_t CSR_MAT_PPRINT_ROW_THRESH = 500       # row threshold for choosing print format
+cdef INT_t CSR_MAT_PPRINT_COL_THRESH = 20        # column threshold for choosing print format
 
 
-cdef _sort(int * a, int start, int end):
+cdef _sort(INT_t * a, INT_t start, INT_t end):
     """
     Sort array a between start and end - 1 (i.e. end **not** included).
 
 
     """
     # TODO: put this is a new file and test
-    cdef int i, j, value;
+    cdef INT_t i, j, value;
 
     print ("start= %d, end = %d" % (start, end))
     i = start
@@ -55,7 +57,7 @@ cdef class CSRSparseMatrix(ImmutableSparseMatrix):
     ####################################################################################################################
     # Init/Free
     ####################################################################################################################
-    def __cinit__(self, int nrow, int ncol, int nnz):
+    def __cinit__(self, INT_t nrow, INT_t ncol, INT_t nnz):
         self.__status_ok = False
 
     def __dealloc__(self):
@@ -110,9 +112,9 @@ cdef class CSRSparseMatrix(ImmutableSparseMatrix):
 
 
         """
-        cdef int i
-        cdef int col_index
-        cdef int col_index_stop
+        cdef INT_t i
+        cdef INT_t col_index
+        cdef INT_t col_index_stop
 
         if self.__col_indices_sorted_test_done:
             return self.__col_indices_sorted
@@ -146,10 +148,10 @@ cdef class CSRSparseMatrix(ImmutableSparseMatrix):
         if self.are_column_indices_sorted():
             return
 
-        cdef int i = self.__first_row_not_ordered
-        cdef int col_index
-        cdef int col_index_start
-        cdef int col_index_stop
+        cdef INT_t i = self.__first_row_not_ordered
+        cdef INT_t col_index
+        cdef INT_t col_index_start
+        cdef INT_t col_index_stop
 
         while i < self.nrow:
             col_index = self.ind[i]
@@ -181,7 +183,7 @@ cdef class CSRSparseMatrix(ImmutableSparseMatrix):
         raise SyntaxError("Assign individual elements is not allowed")
 
     #                                            *** GET ***
-    cdef at(self, int i, int j):
+    cdef at(self, INT_t i, INT_t j):
         """
         Direct access to element ``(i, j)``.
 
@@ -192,7 +194,7 @@ cdef class CSRSparseMatrix(ImmutableSparseMatrix):
             :meth:`safe_at`.
 
         """
-        cdef int k
+        cdef INT_t k
 
         if self.is_symmetric:
             raise NotImplemented("Access to csr_mat(i, j) not (yet) implemented")
@@ -204,7 +206,7 @@ cdef class CSRSparseMatrix(ImmutableSparseMatrix):
 
         return 0.0
 
-    cdef safe_at(self, int i, int j):
+    cdef safe_at(self, INT_t i, INT_t j):
         """
         Return element ``(i, j)`` but with check for out of bounds indices.
 
@@ -233,8 +235,8 @@ cdef class CSRSparseMatrix(ImmutableSparseMatrix):
         if len(key) != 2:
             raise IndexError('Index tuple must be of length 2 (not %d)' % len(key))
 
-        cdef int i = key[0]
-        cdef int j = key[1]
+        cdef INT_t i = key[0]
+        cdef INT_t j = key[1]
 
         return self.safe_at(i, j)
 
@@ -268,10 +270,10 @@ cdef class CSRSparseMatrix(ImmutableSparseMatrix):
             OUT: Output stream that print (Python3) can print to.
         """
         # TODO: adapt to any numbers... and allow for additional parameters to control the output
-        cdef int i, k, first = 1;
+        cdef INT_t i, k, first = 1;
 
         cdef double *mat
-        cdef int j
+        cdef INT_t j
         cdef double val
 
         print('CSRSparseMatrix ([%d,%d]):' % (self.nrow, self.ncol), file=OUT)
@@ -312,7 +314,7 @@ cdef class CSRSparseMatrix(ImmutableSparseMatrix):
     # DEBUG
     ####################################################################################################################
     def debug_print(self):
-        cdef int i
+        cdef INT_t i
         print("ind:")
         for i from 0 <= i < self.nrow + 1:
             print(self.ind[i], end=' ', sep=' ')
@@ -328,22 +330,22 @@ cdef class CSRSparseMatrix(ImmutableSparseMatrix):
             print(self.val[i], end=' == ', sep=' == ')
         print()
 
-    def set_col(self, int i, int val):
+    def set_col(self, INT_t i, INT_t val):
         self.col[i] = val
 
 ########################################################################################################################
 # Factory methods
 ########################################################################################################################
-cdef MakeCSRSparseMatrix(int nrow, int ncol, int nnz, int * ind, int * col, double * val):
+cdef MakeCSRSparseMatrix(INT_t nrow, INT_t ncol, INT_t nnz, INT_t * ind, INT_t * col, double * val):
     """
     Construct a CSRSparseMatrix object.
 
     Args:
-        nrow (int): Number of rows.
-        ncol (int): Number of columns.
-        nnz (int): Number of non-zeros.
-        ind (int *): C-array with column indices pointers.
-        col  (int *): C-array with column indices.
+        nrow (INT_t): Number of rows.
+        ncol (INT_t): Number of columns.
+        nnz (INT_t): Number of non-zeros.
+        ind (INT_t *): C-array with column indices pointers.
+        col  (INT_t *): C-array with column indices.
         val  (double *): C-array with values.
     """
 
@@ -363,21 +365,21 @@ cdef MakeCSRSparseMatrix(int nrow, int ncol, int nnz, int * ind, int * col, doub
 ########################################################################################################################
 cdef LLSparseMatrix multiply_csr_mat_by_csc_mat(CSRSparseMatrix A, CSCSparseMatrix B):
     # test dimensions
-    cdef int A_nrow = A.nrow
-    cdef int A_ncol = A.ncol
+    cdef INT_t A_nrow = A.nrow
+    cdef INT_t A_ncol = A.ncol
 
-    cdef int B_nrow = B.nrow
-    cdef int B_ncol = B.ncol
+    cdef INT_t B_nrow = B.nrow
+    cdef INT_t B_ncol = B.ncol
 
     if A_ncol != B_nrow:
         raise IndexError("Matrix dimensions must agree ([%d, %d] * [%d, %d])" % (A_nrow, A_ncol, B_nrow, B_ncol))
 
-    cdef int C_nrow = A_nrow
-    cdef int C_ncol = B_ncol
+    cdef INT_t C_nrow = A_nrow
+    cdef INT_t C_ncol = B_ncol
 
     cdef bint store_zeros = A.store_zeros and B.store_zeros
     # TODO: what strategy to implement?
-    cdef int size_hint = A.nnz
+    cdef INT_t size_hint = A.nnz
 
     C = LLSparseMatrix(nrow=C_nrow, ncol=C_ncol, size_hint=size_hint, store_zeros=store_zeros)
 
@@ -390,7 +392,7 @@ cdef LLSparseMatrix multiply_csr_mat_by_csc_mat(CSRSparseMatrix A, CSCSparseMatr
     # NON OPTIMIZED MULTIPLICATION
     # TODO: what do we do? Column indices are NOT necessarily sorted...
     cdef:
-        int i, j, k
+        INT_t i, j, k
         double sum
 
     # don't keep zeros, no matter what

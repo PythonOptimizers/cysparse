@@ -244,6 +244,7 @@ class __Pyx_FakeReference {
 #include <math.h>
 #define __PYX_HAVE__sparse_lib__sparse__ll_mat_view
 #define __PYX_HAVE_API__sparse_lib__sparse__ll_mat_view
+#include "limits.h"
 #include "string.h"
 #include "stdio.h"
 #include "stdlib.h"
@@ -464,6 +465,87 @@ static const char *__pyx_f[] = {
   "sparse_lib/sparse/ll_mat.pxd",
 };
 
+/* "sparse_lib/cysparse_types.pxd":42
+ *     COMPLEX128_T = 7
+ * 
+ * ctypedef int INT32_t             # <<<<<<<<<<<<<<
+ * ctypedef unsigned int UINT32_t
+ * ctypedef long INT64_t
+ */
+typedef int __pyx_t_10sparse_lib_14cysparse_types_INT32_t;
+
+/* "sparse_lib/cysparse_types.pxd":43
+ * 
+ * ctypedef int INT32_t
+ * ctypedef unsigned int UINT32_t             # <<<<<<<<<<<<<<
+ * ctypedef long INT64_t
+ * ctypedef unsigned long UINT64_t
+ */
+typedef unsigned int __pyx_t_10sparse_lib_14cysparse_types_UINT32_t;
+
+/* "sparse_lib/cysparse_types.pxd":44
+ * ctypedef int INT32_t
+ * ctypedef unsigned int UINT32_t
+ * ctypedef long INT64_t             # <<<<<<<<<<<<<<
+ * ctypedef unsigned long UINT64_t
+ * 
+ */
+typedef long __pyx_t_10sparse_lib_14cysparse_types_INT64_t;
+
+/* "sparse_lib/cysparse_types.pxd":45
+ * ctypedef unsigned int UINT32_t
+ * ctypedef long INT64_t
+ * ctypedef unsigned long UINT64_t             # <<<<<<<<<<<<<<
+ * 
+ * ctypedef float FLOAT32_t
+ */
+typedef unsigned long __pyx_t_10sparse_lib_14cysparse_types_UINT64_t;
+
+/* "sparse_lib/cysparse_types.pxd":47
+ * ctypedef unsigned long UINT64_t
+ * 
+ * ctypedef float FLOAT32_t             # <<<<<<<<<<<<<<
+ * ctypedef double FLOAT64_t
+ * 
+ */
+typedef float __pyx_t_10sparse_lib_14cysparse_types_FLOAT32_t;
+
+/* "sparse_lib/cysparse_types.pxd":48
+ * 
+ * ctypedef float FLOAT32_t
+ * ctypedef double FLOAT64_t             # <<<<<<<<<<<<<<
+ * 
+ * # we don't use neither the CPython nor the Python complex type
+ */
+typedef double __pyx_t_10sparse_lib_14cysparse_types_FLOAT64_t;
+
+/* "sparse_lib/cysparse_types.pxd":79
+ *         INT_T = INT64_T
+ * ELSE:
+ *     ctypedef UINT32_t SIZE_t             # <<<<<<<<<<<<<<
+ *     ctypedef INT32_t INT_t
+ * 
+ */
+typedef __pyx_t_10sparse_lib_14cysparse_types_UINT32_t __pyx_t_10sparse_lib_14cysparse_types_SIZE_t;
+
+/* "sparse_lib/cysparse_types.pxd":80
+ * ELSE:
+ *     ctypedef UINT32_t SIZE_t
+ *     ctypedef INT32_t INT_t             # <<<<<<<<<<<<<<
+ * 
+ *     cdef enum:
+ */
+typedef __pyx_t_10sparse_lib_14cysparse_types_INT32_t __pyx_t_10sparse_lib_14cysparse_types_INT_t;
+
+/* "sparse_lib/cysparse_types.pxd":87
+ * 
+ * IF USE_DOUBLE_PRECISION:
+ *     ctypedef FLOAT64_t FLOAT_t             # <<<<<<<<<<<<<<
+ *     ctypedef COMPLEX128_t COMPLEX_t
+ * 
+ */
+typedef __pyx_t_10sparse_lib_14cysparse_types_FLOAT64_t __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t;
+
 /* "../local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":726
  * # in Cython to enable them only on the right systems.
  * 
@@ -679,6 +761,145 @@ struct __pyx_obj_10sparse_lib_6sparse_10sparse_mat_MutableSparseMatrix;
 struct __pyx_obj_10sparse_lib_6sparse_10sparse_mat_ImmutableSparseMatrix;
 struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix;
 struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView;
+struct __pyx_t_10sparse_lib_14cysparse_types_complex64_t;
+struct __pyx_t_10sparse_lib_14cysparse_types_complex128_t;
+
+/* "sparse_lib/cysparse_types.pxd":32
+ * #################################################################################################
+ * 
+ * cdef enum:             # <<<<<<<<<<<<<<
+ *     INT32_T = 0
+ *     UINT32_T = 1
+ */
+enum  {
+  __pyx_e_10sparse_lib_14cysparse_types_INT32_T = 0,
+  __pyx_e_10sparse_lib_14cysparse_types_UINT32_T = 1,
+  __pyx_e_10sparse_lib_14cysparse_types_INT64_T = 2,
+  __pyx_e_10sparse_lib_14cysparse_types_UINT64_T = 3,
+  __pyx_e_10sparse_lib_14cysparse_types_FLOAT32_T = 4,
+  __pyx_e_10sparse_lib_14cysparse_types_FLOAT64_T = 5,
+  __pyx_e_10sparse_lib_14cysparse_types_COMPLEX64_T = 6,
+  __pyx_e_10sparse_lib_14cysparse_types_COMPLEX128_T = 7
+};
+
+/* "sparse_lib/cysparse_types.pxd":82
+ *     ctypedef INT32_t INT_t
+ * 
+ *     cdef enum:             # <<<<<<<<<<<<<<
+ *         SIZE_T = UINT32_T
+ *         INT_T = INT32_T
+ */
+enum  {
+
+  /* "sparse_lib/cysparse_types.pxd":84
+ *     cdef enum:
+ *         SIZE_T = UINT32_T
+ *         INT_T = INT32_T             # <<<<<<<<<<<<<<
+ * 
+ * IF USE_DOUBLE_PRECISION:
+ */
+  __pyx_e_10sparse_lib_14cysparse_types_SIZE_T = __pyx_e_10sparse_lib_14cysparse_types_UINT32_T,
+  __pyx_e_10sparse_lib_14cysparse_types_INT_T = __pyx_e_10sparse_lib_14cysparse_types_INT32_T
+};
+
+/* "sparse_lib/cysparse_types.pxd":90
+ *     ctypedef COMPLEX128_t COMPLEX_t
+ * 
+ *     cdef enum:             # <<<<<<<<<<<<<<
+ *         FLOAT_T = FLOAT64_T
+ *         COMPLEX_T = COMPLEX128_T
+ */
+enum  {
+
+  /* "sparse_lib/cysparse_types.pxd":92
+ *     cdef enum:
+ *         FLOAT_T = FLOAT64_T
+ *         COMPLEX_T = COMPLEX128_T             # <<<<<<<<<<<<<<
+ * ELSE:
+ *     ctypedef FLOAT32_t FLOAT_t
+ */
+  __pyx_e_10sparse_lib_14cysparse_types_FLOAT_T = __pyx_e_10sparse_lib_14cysparse_types_FLOAT64_T,
+  __pyx_e_10sparse_lib_14cysparse_types_COMPLEX_T = __pyx_e_10sparse_lib_14cysparse_types_COMPLEX128_T
+};
+
+/* "sparse_lib/cysparse_types.pxd":111
+ * 
+ * # in bits
+ * cdef enum:             # <<<<<<<<<<<<<<
+ *     INT32_t_BIT = sizeof(INT32_t) * CHAR_BIT
+ *     UINT32_t_BIT = sizeof(INT32_t) * CHAR_BIT
+ */
+enum  {
+
+  /* "sparse_lib/cysparse_types.pxd":124
+ *     FLOAT_t_BIT = sizeof(FLOAT_t) * CHAR_BIT
+ *     SIZE_t_BIT = sizeof(SIZE_t) * CHAR_BIT
+ *     COMPLEX_t_BIT = sizeof(FLOAT_t) * 2 * CHAR_BIT             # <<<<<<<<<<<<<<
+ */
+  __pyx_e_10sparse_lib_14cysparse_types_INT32_t_BIT = ((sizeof(__pyx_t_10sparse_lib_14cysparse_types_INT32_t)) * CHAR_BIT),
+  __pyx_e_10sparse_lib_14cysparse_types_UINT32_t_BIT = ((sizeof(__pyx_t_10sparse_lib_14cysparse_types_INT32_t)) * CHAR_BIT),
+  __pyx_e_10sparse_lib_14cysparse_types_INT64_t_BIT = ((sizeof(__pyx_t_10sparse_lib_14cysparse_types_INT64_t)) * CHAR_BIT),
+  __pyx_e_10sparse_lib_14cysparse_types_UINT64_t_BIT = ((sizeof(__pyx_t_10sparse_lib_14cysparse_types_UINT64_t)) * CHAR_BIT),
+  __pyx_e_10sparse_lib_14cysparse_types_FLOAT32_t_BIT = ((sizeof(__pyx_t_10sparse_lib_14cysparse_types_FLOAT32_t)) * CHAR_BIT),
+  __pyx_e_10sparse_lib_14cysparse_types_FLOAT64_t_BIT = ((sizeof(__pyx_t_10sparse_lib_14cysparse_types_FLOAT64_t)) * CHAR_BIT),
+  __pyx_e_10sparse_lib_14cysparse_types_COMPLEX64_t_BIT = (((sizeof(__pyx_t_10sparse_lib_14cysparse_types_FLOAT32_t)) * 2) * CHAR_BIT),
+  __pyx_e_10sparse_lib_14cysparse_types_COMPLEX128_t_BIT = (((sizeof(__pyx_t_10sparse_lib_14cysparse_types_FLOAT64_t)) * 2) * CHAR_BIT),
+  __pyx_e_10sparse_lib_14cysparse_types_INT_t_BIT = ((sizeof(__pyx_t_10sparse_lib_14cysparse_types_INT_t)) * CHAR_BIT),
+  __pyx_e_10sparse_lib_14cysparse_types_FLOAT_t_BIT = ((sizeof(__pyx_t_10sparse_lib_14cysparse_types_FLOAT_t)) * CHAR_BIT),
+  __pyx_e_10sparse_lib_14cysparse_types_SIZE_t_BIT = ((sizeof(__pyx_t_10sparse_lib_14cysparse_types_SIZE_t)) * CHAR_BIT),
+  __pyx_e_10sparse_lib_14cysparse_types_COMPLEX_t_BIT = (((sizeof(__pyx_t_10sparse_lib_14cysparse_types_FLOAT_t)) * 2) * CHAR_BIT)
+};
+
+/* "sparse_lib/cysparse_types.pxd":51
+ * 
+ * # we don't use neither the CPython nor the Python complex type
+ * cdef struct complex64_t:             # <<<<<<<<<<<<<<
+ *     FLOAT32_t real
+ *     FLOAT32_t imag
+ */
+struct __pyx_t_10sparse_lib_14cysparse_types_complex64_t {
+  __pyx_t_10sparse_lib_14cysparse_types_FLOAT32_t real;
+  __pyx_t_10sparse_lib_14cysparse_types_FLOAT32_t imag;
+};
+
+/* "sparse_lib/cysparse_types.pxd":55
+ *     FLOAT32_t imag
+ * 
+ * cdef struct complex128_t:             # <<<<<<<<<<<<<<
+ *     FLOAT64_t real
+ *     FLOAT64_t imag
+ */
+struct __pyx_t_10sparse_lib_14cysparse_types_complex128_t {
+  __pyx_t_10sparse_lib_14cysparse_types_FLOAT64_t real;
+  __pyx_t_10sparse_lib_14cysparse_types_FLOAT64_t imag;
+};
+
+/* "sparse_lib/cysparse_types.pxd":59
+ *     FLOAT64_t imag
+ * 
+ * ctypedef complex64_t COMPLEX64_t             # <<<<<<<<<<<<<<
+ * ctypedef complex128_t COMPLEX128_t
+ * 
+ */
+typedef struct __pyx_t_10sparse_lib_14cysparse_types_complex64_t __pyx_t_10sparse_lib_14cysparse_types_COMPLEX64_t;
+
+/* "sparse_lib/cysparse_types.pxd":60
+ * 
+ * ctypedef complex64_t COMPLEX64_t
+ * ctypedef complex128_t COMPLEX128_t             # <<<<<<<<<<<<<<
+ * 
+ * #################################################################################################
+ */
+typedef struct __pyx_t_10sparse_lib_14cysparse_types_complex128_t __pyx_t_10sparse_lib_14cysparse_types_COMPLEX128_t;
+
+/* "sparse_lib/cysparse_types.pxd":88
+ * IF USE_DOUBLE_PRECISION:
+ *     ctypedef FLOAT64_t FLOAT_t
+ *     ctypedef COMPLEX128_t COMPLEX_t             # <<<<<<<<<<<<<<
+ * 
+ *     cdef enum:
+ */
+typedef __pyx_t_10sparse_lib_14cysparse_types_COMPLEX128_t __pyx_t_10sparse_lib_14cysparse_types_COMPLEX_t;
 
 /* "../local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":765
  * ctypedef npy_longdouble longdouble_t
@@ -762,7 +983,7 @@ struct __pyx_obj_10sparse_lib_6sparse_10sparse_mat_ImmutableSparseMatrix {
 };
 
 
-/* "sparse_lib/sparse/ll_mat.pxd":8
+/* "sparse_lib/sparse/ll_mat.pxd":10
  * from cpython cimport PyObject
  * 
  * cdef class LLSparseMatrix(MutableSparseMatrix):             # <<<<<<<<<<<<<<
@@ -772,15 +993,15 @@ struct __pyx_obj_10sparse_lib_6sparse_10sparse_mat_ImmutableSparseMatrix {
 struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix {
   struct __pyx_obj_10sparse_lib_6sparse_10sparse_mat_MutableSparseMatrix __pyx_base;
   struct __pyx_vtabstruct_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *__pyx_vtab;
-  int free;
+  __pyx_t_10sparse_lib_14cysparse_types_INT_t free;
   double *val;
-  int *col;
-  int *link;
-  int *root;
+  __pyx_t_10sparse_lib_14cysparse_types_INT_t *col;
+  __pyx_t_10sparse_lib_14cysparse_types_INT_t *link;
+  __pyx_t_10sparse_lib_14cysparse_types_INT_t *root;
 };
 
 
-/* "sparse_lib/sparse/ll_mat_view.pxd":3
+/* "sparse_lib/sparse/ll_mat_view.pxd":4
  * 
  * # forward declaration
  * cdef class LLSparseMatrixView             # <<<<<<<<<<<<<<
@@ -790,23 +1011,23 @@ struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix {
 struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView {
   PyObject_HEAD
   struct __pyx_vtabstruct_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *__pyx_vtab;
-  int nrow;
-  int ncol;
+  __pyx_t_10sparse_lib_14cysparse_types_INT_t nrow;
+  __pyx_t_10sparse_lib_14cysparse_types_INT_t ncol;
   int is_empty;
-  int *row_indices;
-  int *col_indices;
+  __pyx_t_10sparse_lib_14cysparse_types_INT_t *row_indices;
+  __pyx_t_10sparse_lib_14cysparse_types_INT_t *col_indices;
   struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *A;
   int __pyx___status_ok;
   int is_symmetric;
   int store_zeros;
   PyObject *nnz;
   int __pyx___counted_nnz;
-  int _nnz;
+  __pyx_t_10sparse_lib_14cysparse_types_INT_t _nnz;
 };
 
 
 
-/* "sparse_lib/sparse/ll_mat.pxd":8
+/* "sparse_lib/sparse/ll_mat.pxd":10
  * from cpython cimport PyObject
  * 
  * cdef class LLSparseMatrix(MutableSparseMatrix):             # <<<<<<<<<<<<<<
@@ -815,13 +1036,13 @@ struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView {
  */
 
 struct __pyx_vtabstruct_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix {
-  PyObject *(*_realloc)(struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *, int);
+  PyObject *(*_realloc)(struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *, __pyx_t_10sparse_lib_14cysparse_types_INT_t);
   PyObject *(*_realloc_expand)(struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *);
-  PyObject *(*put)(struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *, int, int, double);
-  PyObject *(*safe_put)(struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *, int, int, double);
+  PyObject *(*put)(struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *, __pyx_t_10sparse_lib_14cysparse_types_INT_t, __pyx_t_10sparse_lib_14cysparse_types_INT_t, double);
+  PyObject *(*safe_put)(struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *, __pyx_t_10sparse_lib_14cysparse_types_INT_t, __pyx_t_10sparse_lib_14cysparse_types_INT_t, double);
   PyObject *(*assign)(struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *, struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *, PyObject *);
-  PyObject *(*at)(struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *, int, int);
-  PyObject *(*safe_at)(struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *, int, int);
+  PyObject *(*at)(struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *, __pyx_t_10sparse_lib_14cysparse_types_INT_t, __pyx_t_10sparse_lib_14cysparse_types_INT_t);
+  PyObject *(*safe_at)(struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *, __pyx_t_10sparse_lib_14cysparse_types_INT_t, __pyx_t_10sparse_lib_14cysparse_types_INT_t);
   PyObject *(*_keys)(struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *);
   PyObject *(*_values)(struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *);
   PyObject *(*_items)(struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *);
@@ -829,21 +1050,21 @@ struct __pyx_vtabstruct_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix {
 static struct __pyx_vtabstruct_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *__pyx_vtabptr_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix;
 
 
-/* "sparse_lib/sparse/ll_mat_view.pyx":29
+/* "sparse_lib/sparse/ll_mat_view.pyx":30
  * include "object_index.pxi"
  * 
  * cdef class LLSparseMatrixView:             # <<<<<<<<<<<<<<
- *     def __cinit__(self, LLSparseMatrix A, int nrow, int ncol):
+ *     def __cinit__(self, LLSparseMatrix A, INT_t nrow, INT_t ncol):
  *         self.nrow = nrow  # number of rows of the view
  */
 
 struct __pyx_vtabstruct_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView {
-  int (*_count_nnz)(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *);
+  __pyx_t_10sparse_lib_14cysparse_types_INT_t (*_count_nnz)(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *);
   PyObject *(*assert_status_ok)(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *);
-  PyObject *(*at)(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *, int, int);
-  PyObject *(*safe_at)(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *, int, int);
-  PyObject *(*put)(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *, int, int, double);
-  PyObject *(*safe_put)(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *, int, int, double);
+  PyObject *(*at)(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *, __pyx_t_10sparse_lib_14cysparse_types_INT_t, __pyx_t_10sparse_lib_14cysparse_types_INT_t);
+  PyObject *(*safe_at)(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *, __pyx_t_10sparse_lib_14cysparse_types_INT_t, __pyx_t_10sparse_lib_14cysparse_types_INT_t);
+  PyObject *(*put)(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *, __pyx_t_10sparse_lib_14cysparse_types_INT_t, __pyx_t_10sparse_lib_14cysparse_types_INT_t, double);
+  PyObject *(*safe_put)(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *, __pyx_t_10sparse_lib_14cysparse_types_INT_t, __pyx_t_10sparse_lib_14cysparse_types_INT_t, double);
 };
 static struct __pyx_vtabstruct_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *__pyx_vtabptr_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView;
 
@@ -1165,11 +1386,13 @@ static int __Pyx_ImportFunction(PyObject *module, const char *funcname, void (**
 static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 
 static PyObject *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_assert_status_ok(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *__pyx_v_self); /* proto*/
-static PyObject *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_put(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *__pyx_v_self, int __pyx_v_i, int __pyx_v_j, double __pyx_v_value); /* proto*/
-static PyObject *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_safe_put(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *__pyx_v_self, int __pyx_v_i, int __pyx_v_j, double __pyx_v_value); /* proto*/
-static PyObject *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_at(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *__pyx_v_self, int __pyx_v_i, int __pyx_v_j); /* proto*/
-static PyObject *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_safe_at(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *__pyx_v_self, int __pyx_v_i, int __pyx_v_j); /* proto*/
-static int __pyx_f_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView__count_nnz(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *__pyx_v_self); /* proto*/
+static PyObject *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_put(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *__pyx_v_self, __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_i, __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_j, double __pyx_v_value); /* proto*/
+static PyObject *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_safe_put(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *__pyx_v_self, __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_i, __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_j, double __pyx_v_value); /* proto*/
+static PyObject *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_at(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *__pyx_v_self, __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_i, __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_j); /* proto*/
+static PyObject *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_safe_at(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *__pyx_v_self, __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_i, __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_j); /* proto*/
+static __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_f_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView__count_nnz(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *__pyx_v_self); /* proto*/
+
+/* Module declarations from 'sparse_lib.cysparse_types' */
 
 /* Module declarations from 'sparse_lib.sparse.sparse_mat' */
 static PyTypeObject *__pyx_ptype_10sparse_lib_6sparse_10sparse_mat_SparseMatrix = 0;
@@ -1282,7 +1505,7 @@ static int (*__pyx_f_10sparse_lib_5utils_8equality_values_are_equal)(double, dou
 /* Module declarations from 'sparse_lib.sparse.ll_mat_view' */
 static PyTypeObject *__pyx_ptype_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView = 0;
 static struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_MakeLLSparseMatrixViewFromView(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *, PyObject *, PyObject *); /*proto*/
-static int *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_create_c_array_indices_from_python_object(int, PyObject *, int *); /*proto*/
+static __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_create_c_array_indices_from_python_object(__pyx_t_10sparse_lib_14cysparse_types_INT_t, PyObject *, __pyx_t_10sparse_lib_14cysparse_types_INT_t *); /*proto*/
 #define __Pyx_MODULE_NAME "sparse_lib.sparse.ll_mat_view"
 int __pyx_module_is_main_sparse_lib__sparse__ll_mat_view = 0;
 
@@ -1294,7 +1517,7 @@ static PyObject *__pyx_builtin_ValueError;
 static PyObject *__pyx_builtin_TypeError;
 static PyObject *__pyx_builtin_NotImplemented;
 static PyObject *__pyx_builtin_range;
-static int __pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView___cinit__(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *__pyx_v_self, struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *__pyx_v_A, int __pyx_v_nrow, int __pyx_v_ncol); /* proto */
+static int __pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView___cinit__(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *__pyx_v_self, struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *__pyx_v_A, __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_nrow, __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_ncol); /* proto */
 static PyObject *__pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_3nnz___get__(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *__pyx_v_self); /* proto */
 static int __pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_3nnz_2__set__(CYTHON_UNUSED struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v_value); /* proto */
 static int __pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_3nnz_4__del__(CYTHON_UNUSED struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *__pyx_v_self); /* proto */
@@ -1430,28 +1653,28 @@ static PyObject *__pyx_tuple__12;
 static PyObject *__pyx_tuple__13;
 static PyObject *__pyx_tuple__14;
 
-/* "sparse_lib/sparse/object_index.pxi":57
+/* "sparse_lib/sparse/object_index.pxi":59
  * 
  * 
- * cdef int * create_c_array_indices_from_python_object(int max_length, PyObject * obj, int * number_of_elements) except NULL:             # <<<<<<<<<<<<<<
+ * cdef INT_t * create_c_array_indices_from_python_object(INT_t max_length, PyObject * obj, INT_t * number_of_elements) except NULL:             # <<<<<<<<<<<<<<
  *     """
  *     Creates and returns a C-array with the indices corresponding to an index object.
  */
 
-static int *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_create_c_array_indices_from_python_object(int __pyx_v_max_length, PyObject *__pyx_v_obj, int *__pyx_v_number_of_elements) {
-  int __pyx_v_ret;
+static __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_create_c_array_indices_from_python_object(__pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_max_length, PyObject *__pyx_v_obj, __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_v_number_of_elements) {
+  __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_ret;
   Py_ssize_t __pyx_v_start;
   Py_ssize_t __pyx_v_stop;
   Py_ssize_t __pyx_v_step;
   Py_ssize_t __pyx_v_length;
   Py_ssize_t __pyx_v_index;
-  int __pyx_v_i;
-  int __pyx_v_j;
-  int *__pyx_v_indices;
+  __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_i;
+  __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_j;
+  __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_v_indices;
   PyObject *__pyx_v_val;
-  int __pyx_v_array_dim;
-  int *__pyx_v_array_data;
-  int *__pyx_r;
+  __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_array_dim;
+  __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_v_array_data;
+  __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_r;
   __Pyx_RefNannyDeclarations
   int __pyx_t_1;
   int __pyx_t_2;
@@ -1465,46 +1688,46 @@ static int *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_create_c_array_indices_fr
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("create_c_array_indices_from_python_object", 0);
 
-  /* "sparse_lib/sparse/object_index.pxi":99
+  /* "sparse_lib/sparse/object_index.pxi":101
  *     ####################################################################################################################
  *     #                                            *** Integer ***
  *     if PyInt_Check(obj):             # <<<<<<<<<<<<<<
  *         # TODO: change this!
- *         i = <int> PyInt_AS_LONG(obj)
+ *         i = <INT_t> PyInt_AS_LONG(obj)
  */
   __pyx_t_1 = (PyInt_Check(__pyx_v_obj) != 0);
   if (__pyx_t_1) {
 
-    /* "sparse_lib/sparse/object_index.pxi":101
+    /* "sparse_lib/sparse/object_index.pxi":103
  *     if PyInt_Check(obj):
  *         # TODO: change this!
- *         i = <int> PyInt_AS_LONG(obj)             # <<<<<<<<<<<<<<
+ *         i = <INT_t> PyInt_AS_LONG(obj)             # <<<<<<<<<<<<<<
  *         length = 1
- *         indices = <int *> PyMem_Malloc(length * sizeof(int))
+ *         indices = <INT_t *> PyMem_Malloc(length * sizeof(INT_t))
  */
-    __pyx_v_i = ((int)PyInt_AS_LONG(__pyx_v_obj));
+    __pyx_v_i = ((__pyx_t_10sparse_lib_14cysparse_types_INT_t)PyInt_AS_LONG(__pyx_v_obj));
 
-    /* "sparse_lib/sparse/object_index.pxi":102
+    /* "sparse_lib/sparse/object_index.pxi":104
  *         # TODO: change this!
- *         i = <int> PyInt_AS_LONG(obj)
+ *         i = <INT_t> PyInt_AS_LONG(obj)
  *         length = 1             # <<<<<<<<<<<<<<
- *         indices = <int *> PyMem_Malloc(length * sizeof(int))
+ *         indices = <INT_t *> PyMem_Malloc(length * sizeof(INT_t))
  *         if not indices:
  */
     __pyx_v_length = 1;
 
-    /* "sparse_lib/sparse/object_index.pxi":103
- *         i = <int> PyInt_AS_LONG(obj)
+    /* "sparse_lib/sparse/object_index.pxi":105
+ *         i = <INT_t> PyInt_AS_LONG(obj)
  *         length = 1
- *         indices = <int *> PyMem_Malloc(length * sizeof(int))             # <<<<<<<<<<<<<<
+ *         indices = <INT_t *> PyMem_Malloc(length * sizeof(INT_t))             # <<<<<<<<<<<<<<
  *         if not indices:
  *             raise MemoryError()
  */
-    __pyx_v_indices = ((int *)PyMem_Malloc((__pyx_v_length * (sizeof(int)))));
+    __pyx_v_indices = ((__pyx_t_10sparse_lib_14cysparse_types_INT_t *)PyMem_Malloc((__pyx_v_length * (sizeof(__pyx_t_10sparse_lib_14cysparse_types_INT_t)))));
 
-    /* "sparse_lib/sparse/object_index.pxi":104
+    /* "sparse_lib/sparse/object_index.pxi":106
  *         length = 1
- *         indices = <int *> PyMem_Malloc(length * sizeof(int))
+ *         indices = <INT_t *> PyMem_Malloc(length * sizeof(INT_t))
  *         if not indices:             # <<<<<<<<<<<<<<
  *             raise MemoryError()
  * 
@@ -1512,17 +1735,17 @@ static int *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_create_c_array_indices_fr
     __pyx_t_1 = ((!(__pyx_v_indices != 0)) != 0);
     if (__pyx_t_1) {
 
-      /* "sparse_lib/sparse/object_index.pxi":105
- *         indices = <int *> PyMem_Malloc(length * sizeof(int))
+      /* "sparse_lib/sparse/object_index.pxi":107
+ *         indices = <INT_t *> PyMem_Malloc(length * sizeof(INT_t))
  *         if not indices:
  *             raise MemoryError()             # <<<<<<<<<<<<<<
  * 
  *         indices[0] = i
  */
-      PyErr_NoMemory(); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 105; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      PyErr_NoMemory(); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 107; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
 
-    /* "sparse_lib/sparse/object_index.pxi":107
+    /* "sparse_lib/sparse/object_index.pxi":109
  *             raise MemoryError()
  * 
  *         indices[0] = i             # <<<<<<<<<<<<<<
@@ -1533,7 +1756,7 @@ static int *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_create_c_array_indices_fr
     goto __pyx_L3;
   }
 
-  /* "sparse_lib/sparse/object_index.pxi":110
+  /* "sparse_lib/sparse/object_index.pxi":112
  * 
  *     #                                            *** Slice ***
  *     elif PySlice_Check(obj):             # <<<<<<<<<<<<<<
@@ -1543,17 +1766,17 @@ static int *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_create_c_array_indices_fr
   __pyx_t_1 = (PySlice_Check(__pyx_v_obj) != 0);
   if (__pyx_t_1) {
 
-    /* "sparse_lib/sparse/object_index.pxi":112
+    /* "sparse_lib/sparse/object_index.pxi":114
  *     elif PySlice_Check(obj):
  *         # slice
  *         ret = PySlice_GetIndicesEx(<PySliceObject*>obj, max_length, &start, &stop, &step, &length)             # <<<<<<<<<<<<<<
  *         if ret:
  *             raise RuntimeError("Slice could not be translated")
  */
-    __pyx_t_2 = PySlice_GetIndicesEx(((PySliceObject *)__pyx_v_obj), __pyx_v_max_length, (&__pyx_v_start), (&__pyx_v_stop), (&__pyx_v_step), (&__pyx_v_length)); if (unlikely(__pyx_t_2 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 112; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = PySlice_GetIndicesEx(((PySliceObject *)__pyx_v_obj), __pyx_v_max_length, (&__pyx_v_start), (&__pyx_v_stop), (&__pyx_v_step), (&__pyx_v_length)); if (unlikely(__pyx_t_2 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 114; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __pyx_v_ret = __pyx_t_2;
 
-    /* "sparse_lib/sparse/object_index.pxi":113
+    /* "sparse_lib/sparse/object_index.pxi":115
  *         # slice
  *         ret = PySlice_GetIndicesEx(<PySliceObject*>obj, max_length, &start, &stop, &step, &length)
  *         if ret:             # <<<<<<<<<<<<<<
@@ -1563,32 +1786,32 @@ static int *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_create_c_array_indices_fr
     __pyx_t_1 = (__pyx_v_ret != 0);
     if (__pyx_t_1) {
 
-      /* "sparse_lib/sparse/object_index.pxi":114
+      /* "sparse_lib/sparse/object_index.pxi":116
  *         ret = PySlice_GetIndicesEx(<PySliceObject*>obj, max_length, &start, &stop, &step, &length)
  *         if ret:
  *             raise RuntimeError("Slice could not be translated")             # <<<<<<<<<<<<<<
  * 
  *         #print "start, stop, step, length = (%d, %d, %d, %d)" % (start, stop, step, length)
  */
-      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_RuntimeError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 114; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_RuntimeError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 116; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_Raise(__pyx_t_3, 0, 0, 0);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 114; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 116; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
 
-    /* "sparse_lib/sparse/object_index.pxi":118
+    /* "sparse_lib/sparse/object_index.pxi":120
  *         #print "start, stop, step, length = (%d, %d, %d, %d)" % (start, stop, step, length)
  * 
- *         indices = <int *> PyMem_Malloc(length * sizeof(int))             # <<<<<<<<<<<<<<
+ *         indices = <INT_t *> PyMem_Malloc(length * sizeof(INT_t))             # <<<<<<<<<<<<<<
  *         if not indices:
  *             raise MemoryError()
  */
-    __pyx_v_indices = ((int *)PyMem_Malloc((__pyx_v_length * (sizeof(int)))));
+    __pyx_v_indices = ((__pyx_t_10sparse_lib_14cysparse_types_INT_t *)PyMem_Malloc((__pyx_v_length * (sizeof(__pyx_t_10sparse_lib_14cysparse_types_INT_t)))));
 
-    /* "sparse_lib/sparse/object_index.pxi":119
+    /* "sparse_lib/sparse/object_index.pxi":121
  * 
- *         indices = <int *> PyMem_Malloc(length * sizeof(int))
+ *         indices = <INT_t *> PyMem_Malloc(length * sizeof(INT_t))
  *         if not indices:             # <<<<<<<<<<<<<<
  *             raise MemoryError()
  * 
@@ -1596,17 +1819,17 @@ static int *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_create_c_array_indices_fr
     __pyx_t_1 = ((!(__pyx_v_indices != 0)) != 0);
     if (__pyx_t_1) {
 
-      /* "sparse_lib/sparse/object_index.pxi":120
- *         indices = <int *> PyMem_Malloc(length * sizeof(int))
+      /* "sparse_lib/sparse/object_index.pxi":122
+ *         indices = <INT_t *> PyMem_Malloc(length * sizeof(INT_t))
  *         if not indices:
  *             raise MemoryError()             # <<<<<<<<<<<<<<
  * 
  *         # populate indices
  */
-      PyErr_NoMemory(); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 120; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      PyErr_NoMemory(); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 122; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
 
-    /* "sparse_lib/sparse/object_index.pxi":123
+    /* "sparse_lib/sparse/object_index.pxi":125
  * 
  *         # populate indices
  *         i = start             # <<<<<<<<<<<<<<
@@ -1615,7 +1838,7 @@ static int *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_create_c_array_indices_fr
  */
     __pyx_v_i = __pyx_v_start;
 
-    /* "sparse_lib/sparse/object_index.pxi":124
+    /* "sparse_lib/sparse/object_index.pxi":126
  *         # populate indices
  *         i = start
  *         for j from 0 <= j < length:             # <<<<<<<<<<<<<<
@@ -1625,7 +1848,7 @@ static int *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_create_c_array_indices_fr
     __pyx_t_4 = __pyx_v_length;
     for (__pyx_v_j = 0; __pyx_v_j < __pyx_t_4; __pyx_v_j++) {
 
-      /* "sparse_lib/sparse/object_index.pxi":125
+      /* "sparse_lib/sparse/object_index.pxi":127
  *         i = start
  *         for j from 0 <= j < length:
  *             indices[j] = i             # <<<<<<<<<<<<<<
@@ -1634,7 +1857,7 @@ static int *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_create_c_array_indices_fr
  */
       (__pyx_v_indices[__pyx_v_j]) = __pyx_v_i;
 
-      /* "sparse_lib/sparse/object_index.pxi":126
+      /* "sparse_lib/sparse/object_index.pxi":128
  *         for j from 0 <= j < length:
  *             indices[j] = i
  *             i += step             # <<<<<<<<<<<<<<
@@ -1646,37 +1869,37 @@ static int *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_create_c_array_indices_fr
     goto __pyx_L3;
   }
 
-  /* "sparse_lib/sparse/object_index.pxi":129
+  /* "sparse_lib/sparse/object_index.pxi":131
  * 
  *     #                                            *** List ***
  *     elif PyList_Check(obj):             # <<<<<<<<<<<<<<
  *         length = PyList_Size(obj)
- *         indices = <int *> PyMem_Malloc(length * sizeof(int))
+ *         indices = <INT_t *> PyMem_Malloc(length * sizeof(INT_t))
  */
   __pyx_t_1 = (PyList_Check(__pyx_v_obj) != 0);
   if (__pyx_t_1) {
 
-    /* "sparse_lib/sparse/object_index.pxi":130
+    /* "sparse_lib/sparse/object_index.pxi":132
  *     #                                            *** List ***
  *     elif PyList_Check(obj):
  *         length = PyList_Size(obj)             # <<<<<<<<<<<<<<
- *         indices = <int *> PyMem_Malloc(length * sizeof(int))
+ *         indices = <INT_t *> PyMem_Malloc(length * sizeof(INT_t))
  *         if not indices:
  */
     __pyx_v_length = PyList_Size(__pyx_v_obj);
 
-    /* "sparse_lib/sparse/object_index.pxi":131
+    /* "sparse_lib/sparse/object_index.pxi":133
  *     elif PyList_Check(obj):
  *         length = PyList_Size(obj)
- *         indices = <int *> PyMem_Malloc(length * sizeof(int))             # <<<<<<<<<<<<<<
+ *         indices = <INT_t *> PyMem_Malloc(length * sizeof(INT_t))             # <<<<<<<<<<<<<<
  *         if not indices:
  *             raise MemoryError()
  */
-    __pyx_v_indices = ((int *)PyMem_Malloc((__pyx_v_length * (sizeof(int)))));
+    __pyx_v_indices = ((__pyx_t_10sparse_lib_14cysparse_types_INT_t *)PyMem_Malloc((__pyx_v_length * (sizeof(__pyx_t_10sparse_lib_14cysparse_types_INT_t)))));
 
-    /* "sparse_lib/sparse/object_index.pxi":132
+    /* "sparse_lib/sparse/object_index.pxi":134
  *         length = PyList_Size(obj)
- *         indices = <int *> PyMem_Malloc(length * sizeof(int))
+ *         indices = <INT_t *> PyMem_Malloc(length * sizeof(INT_t))
  *         if not indices:             # <<<<<<<<<<<<<<
  *             raise MemoryError()
  * 
@@ -1684,17 +1907,17 @@ static int *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_create_c_array_indices_fr
     __pyx_t_1 = ((!(__pyx_v_indices != 0)) != 0);
     if (__pyx_t_1) {
 
-      /* "sparse_lib/sparse/object_index.pxi":133
- *         indices = <int *> PyMem_Malloc(length * sizeof(int))
+      /* "sparse_lib/sparse/object_index.pxi":135
+ *         indices = <INT_t *> PyMem_Malloc(length * sizeof(INT_t))
  *         if not indices:
  *             raise MemoryError()             # <<<<<<<<<<<<<<
  * 
  *         for i from 0 <= i < length:
  */
-      PyErr_NoMemory(); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 133; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      PyErr_NoMemory(); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 135; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
 
-    /* "sparse_lib/sparse/object_index.pxi":135
+    /* "sparse_lib/sparse/object_index.pxi":137
  *             raise MemoryError()
  * 
  *         for i from 0 <= i < length:             # <<<<<<<<<<<<<<
@@ -1704,7 +1927,7 @@ static int *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_create_c_array_indices_fr
     __pyx_t_4 = __pyx_v_length;
     for (__pyx_v_i = 0; __pyx_v_i < __pyx_t_4; __pyx_v_i++) {
 
-      /* "sparse_lib/sparse/object_index.pxi":136
+      /* "sparse_lib/sparse/object_index.pxi":138
  * 
  *         for i from 0 <= i < length:
  *             val = PyList_GetItem(obj, <Py_ssize_t>i)             # <<<<<<<<<<<<<<
@@ -1713,7 +1936,7 @@ static int *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_create_c_array_indices_fr
  */
       __pyx_v_val = PyList_GetItem(__pyx_v_obj, ((Py_ssize_t)__pyx_v_i));
 
-      /* "sparse_lib/sparse/object_index.pxi":137
+      /* "sparse_lib/sparse/object_index.pxi":139
  *         for i from 0 <= i < length:
  *             val = PyList_GetItem(obj, <Py_ssize_t>i)
  *             if PyInt_Check(val):             # <<<<<<<<<<<<<<
@@ -1723,7 +1946,7 @@ static int *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_create_c_array_indices_fr
       __pyx_t_1 = (PyInt_Check(__pyx_v_val) != 0);
       if (__pyx_t_1) {
 
-        /* "sparse_lib/sparse/object_index.pxi":138
+        /* "sparse_lib/sparse/object_index.pxi":140
  *             val = PyList_GetItem(obj, <Py_ssize_t>i)
  *             if PyInt_Check(val):
  *                 index = PyInt_AS_LONG(val)             # <<<<<<<<<<<<<<
@@ -1732,12 +1955,12 @@ static int *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_create_c_array_indices_fr
  */
         __pyx_v_index = PyInt_AS_LONG(__pyx_v_val);
 
-        /* "sparse_lib/sparse/object_index.pxi":140
+        /* "sparse_lib/sparse/object_index.pxi":142
  *                 index = PyInt_AS_LONG(val)
  *                 # test if index is valid
  *                 if not (0 <= index < max_length):             # <<<<<<<<<<<<<<
  *                     raise IndexError("Index %d out of bounds [%d, %d[" % (<long>index, 0, max_length))
- *                 indices[i] = <int> index
+ *                 indices[i] = <INT_t> index
  */
         __pyx_t_1 = (0 <= __pyx_v_index);
         if (__pyx_t_1) {
@@ -1746,18 +1969,18 @@ static int *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_create_c_array_indices_fr
         __pyx_t_5 = ((!(__pyx_t_1 != 0)) != 0);
         if (__pyx_t_5) {
 
-          /* "sparse_lib/sparse/object_index.pxi":141
+          /* "sparse_lib/sparse/object_index.pxi":143
  *                 # test if index is valid
  *                 if not (0 <= index < max_length):
  *                     raise IndexError("Index %d out of bounds [%d, %d[" % (<long>index, 0, max_length))             # <<<<<<<<<<<<<<
- *                 indices[i] = <int> index
+ *                 indices[i] = <INT_t> index
  *             else:
  */
-          __pyx_t_3 = __Pyx_PyInt_From_long(((long)__pyx_v_index)); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 141; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_3 = __Pyx_PyInt_From_long(((long)__pyx_v_index)); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 143; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_3);
-          __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_max_length); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 141; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_max_length); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 143; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_6);
-          __pyx_t_7 = PyTuple_New(3); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 141; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_7 = PyTuple_New(3); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 143; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_7);
           PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_3);
           __Pyx_GIVEREF(__pyx_t_3);
@@ -1768,36 +1991,36 @@ static int *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_create_c_array_indices_fr
           __Pyx_GIVEREF(__pyx_t_6);
           __pyx_t_3 = 0;
           __pyx_t_6 = 0;
-          __pyx_t_6 = __Pyx_PyString_Format(__pyx_kp_s_Index_d_out_of_bounds_d_d, __pyx_t_7); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 141; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_6 = __Pyx_PyString_Format(__pyx_kp_s_Index_d_out_of_bounds_d_d, __pyx_t_7); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 143; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_6);
           __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-          __pyx_t_7 = PyTuple_New(1); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 141; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_7 = PyTuple_New(1); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 143; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_7);
           PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_6);
           __Pyx_GIVEREF(__pyx_t_6);
           __pyx_t_6 = 0;
-          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_t_7, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 141; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_t_7, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 143; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_6);
           __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
           __Pyx_Raise(__pyx_t_6, 0, 0, 0);
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 141; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 143; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         }
 
-        /* "sparse_lib/sparse/object_index.pxi":142
+        /* "sparse_lib/sparse/object_index.pxi":144
  *                 if not (0 <= index < max_length):
  *                     raise IndexError("Index %d out of bounds [%d, %d[" % (<long>index, 0, max_length))
- *                 indices[i] = <int> index             # <<<<<<<<<<<<<<
+ *                 indices[i] = <INT_t> index             # <<<<<<<<<<<<<<
  *             else:
  *                 PyMem_Free(indices)
  */
-        (__pyx_v_indices[__pyx_v_i]) = ((int)__pyx_v_index);
+        (__pyx_v_indices[__pyx_v_i]) = ((__pyx_t_10sparse_lib_14cysparse_types_INT_t)__pyx_v_index);
         goto __pyx_L12;
       }
       /*else*/ {
 
-        /* "sparse_lib/sparse/object_index.pxi":144
- *                 indices[i] = <int> index
+        /* "sparse_lib/sparse/object_index.pxi":146
+ *                 indices[i] = <INT_t> index
  *             else:
  *                 PyMem_Free(indices)             # <<<<<<<<<<<<<<
  *                 raise ValueError("List must only contain integers")
@@ -1805,46 +2028,46 @@ static int *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_create_c_array_indices_fr
  */
         PyMem_Free(__pyx_v_indices);
 
-        /* "sparse_lib/sparse/object_index.pxi":145
+        /* "sparse_lib/sparse/object_index.pxi":147
  *             else:
  *                 PyMem_Free(indices)
  *                 raise ValueError("List must only contain integers")             # <<<<<<<<<<<<<<
  * 
  *     #                                            *** numpy array ***
  */
-        __pyx_t_6 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 145; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_6 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 147; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_6);
         __Pyx_Raise(__pyx_t_6, 0, 0, 0);
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 145; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 147; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
       __pyx_L12:;
     }
     goto __pyx_L3;
   }
 
-  /* "sparse_lib/sparse/object_index.pxi":148
+  /* "sparse_lib/sparse/object_index.pxi":150
  * 
  *     #                                            *** numpy array ***
  *     elif PyArray_Check(obj):             # <<<<<<<<<<<<<<
- *         array_dim = <int> PyArray_NDIM(<PyArrayObject *>obj)
+ *         array_dim = <INT_t> PyArray_NDIM(<PyArrayObject *>obj)
  *         if array_dim != 1:
  */
   __pyx_t_5 = (PyArray_Check(__pyx_v_obj) != 0);
   if (__pyx_t_5) {
 
-    /* "sparse_lib/sparse/object_index.pxi":149
+    /* "sparse_lib/sparse/object_index.pxi":151
  *     #                                            *** numpy array ***
  *     elif PyArray_Check(obj):
- *         array_dim = <int> PyArray_NDIM(<PyArrayObject *>obj)             # <<<<<<<<<<<<<<
+ *         array_dim = <INT_t> PyArray_NDIM(<PyArrayObject *>obj)             # <<<<<<<<<<<<<<
  *         if array_dim != 1:
  *             raise IndexError("Numpy array must have only one dimension")
  */
-    __pyx_v_array_dim = ((int)PyArray_NDIM(((PyArrayObject *)__pyx_v_obj)));
+    __pyx_v_array_dim = ((__pyx_t_10sparse_lib_14cysparse_types_INT_t)PyArray_NDIM(((PyArrayObject *)__pyx_v_obj)));
 
-    /* "sparse_lib/sparse/object_index.pxi":150
+    /* "sparse_lib/sparse/object_index.pxi":152
  *     elif PyArray_Check(obj):
- *         array_dim = <int> PyArray_NDIM(<PyArrayObject *>obj)
+ *         array_dim = <INT_t> PyArray_NDIM(<PyArrayObject *>obj)
  *         if array_dim != 1:             # <<<<<<<<<<<<<<
  *             raise IndexError("Numpy array must have only one dimension")
  * 
@@ -1852,41 +2075,41 @@ static int *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_create_c_array_indices_fr
     __pyx_t_5 = ((__pyx_v_array_dim != 1) != 0);
     if (__pyx_t_5) {
 
-      /* "sparse_lib/sparse/object_index.pxi":151
- *         array_dim = <int> PyArray_NDIM(<PyArrayObject *>obj)
+      /* "sparse_lib/sparse/object_index.pxi":153
+ *         array_dim = <INT_t> PyArray_NDIM(<PyArrayObject *>obj)
  *         if array_dim != 1:
  *             raise IndexError("Numpy array must have only one dimension")             # <<<<<<<<<<<<<<
  * 
  *         length = <Py_ssize_t> PyArray_DIM(<PyArrayObject *>obj, 0)
  */
-      __pyx_t_6 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 151; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_6 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 153; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_Raise(__pyx_t_6, 0, 0, 0);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 151; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 153; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
 
-    /* "sparse_lib/sparse/object_index.pxi":153
+    /* "sparse_lib/sparse/object_index.pxi":155
  *             raise IndexError("Numpy array must have only one dimension")
  * 
  *         length = <Py_ssize_t> PyArray_DIM(<PyArrayObject *>obj, 0)             # <<<<<<<<<<<<<<
  * 
- *         indices = <int *> PyMem_Malloc(length * sizeof(int))
+ *         indices = <INT_t *> PyMem_Malloc(length * sizeof(INT_t))
  */
     __pyx_v_length = ((Py_ssize_t)PyArray_DIM(((PyArrayObject *)__pyx_v_obj), 0));
 
-    /* "sparse_lib/sparse/object_index.pxi":155
+    /* "sparse_lib/sparse/object_index.pxi":157
  *         length = <Py_ssize_t> PyArray_DIM(<PyArrayObject *>obj, 0)
  * 
- *         indices = <int *> PyMem_Malloc(length * sizeof(int))             # <<<<<<<<<<<<<<
+ *         indices = <INT_t *> PyMem_Malloc(length * sizeof(INT_t))             # <<<<<<<<<<<<<<
  *         if not indices:
  *             raise MemoryError()
  */
-    __pyx_v_indices = ((int *)PyMem_Malloc((__pyx_v_length * (sizeof(int)))));
+    __pyx_v_indices = ((__pyx_t_10sparse_lib_14cysparse_types_INT_t *)PyMem_Malloc((__pyx_v_length * (sizeof(__pyx_t_10sparse_lib_14cysparse_types_INT_t)))));
 
-    /* "sparse_lib/sparse/object_index.pxi":156
+    /* "sparse_lib/sparse/object_index.pxi":158
  * 
- *         indices = <int *> PyMem_Malloc(length * sizeof(int))
+ *         indices = <INT_t *> PyMem_Malloc(length * sizeof(INT_t))
  *         if not indices:             # <<<<<<<<<<<<<<
  *             raise MemoryError()
  * 
@@ -1894,47 +2117,47 @@ static int *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_create_c_array_indices_fr
     __pyx_t_5 = ((!(__pyx_v_indices != 0)) != 0);
     if (__pyx_t_5) {
 
-      /* "sparse_lib/sparse/object_index.pxi":157
- *         indices = <int *> PyMem_Malloc(length * sizeof(int))
+      /* "sparse_lib/sparse/object_index.pxi":159
+ *         indices = <INT_t *> PyMem_Malloc(length * sizeof(INT_t))
  *         if not indices:
  *             raise MemoryError()             # <<<<<<<<<<<<<<
  * 
  *         # TODO: remove or control this is not DANGEROUS
  */
-      PyErr_NoMemory(); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 157; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      PyErr_NoMemory(); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 159; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
 
-    /* "sparse_lib/sparse/object_index.pxi":161
+    /* "sparse_lib/sparse/object_index.pxi":163
  *         # TODO: remove or control this is not DANGEROUS
  *         # This is dangerous if array is NOT C-contiguous!!!
- *         array_data = <int* > PyArray_DATA(<PyArrayObject *> obj)             # <<<<<<<<<<<<<<
+ *         array_data = <INT_t* > PyArray_DATA(<PyArrayObject *> obj)             # <<<<<<<<<<<<<<
  * 
  *         # test type of array elements
  */
-    __pyx_v_array_data = ((int *)PyArray_DATA(((PyArrayObject *)__pyx_v_obj)));
+    __pyx_v_array_data = ((__pyx_t_10sparse_lib_14cysparse_types_INT_t *)PyArray_DATA(((PyArrayObject *)__pyx_v_obj)));
 
-    /* "sparse_lib/sparse/object_index.pxi":171
+    /* "sparse_lib/sparse/object_index.pxi":173
  * 
  *         # we cannot copy the C-array directly as we must test each element
  *         for i from 0 <= i < length:             # <<<<<<<<<<<<<<
- *             index = <int> array_data[i]
+ *             index = <INT_t> array_data[i]
  *             if not (0 <= index < max_length):
  */
     __pyx_t_4 = __pyx_v_length;
     for (__pyx_v_i = 0; __pyx_v_i < __pyx_t_4; __pyx_v_i++) {
 
-      /* "sparse_lib/sparse/object_index.pxi":172
+      /* "sparse_lib/sparse/object_index.pxi":174
  *         # we cannot copy the C-array directly as we must test each element
  *         for i from 0 <= i < length:
- *             index = <int> array_data[i]             # <<<<<<<<<<<<<<
+ *             index = <INT_t> array_data[i]             # <<<<<<<<<<<<<<
  *             if not (0 <= index < max_length):
  *                 raise IndexError("Index %d out of bounds [%d, %d[" % (<long>index, 0, max_length))
  */
-      __pyx_v_index = ((int)(__pyx_v_array_data[__pyx_v_i]));
+      __pyx_v_index = ((__pyx_t_10sparse_lib_14cysparse_types_INT_t)(__pyx_v_array_data[__pyx_v_i]));
 
-      /* "sparse_lib/sparse/object_index.pxi":173
+      /* "sparse_lib/sparse/object_index.pxi":175
  *         for i from 0 <= i < length:
- *             index = <int> array_data[i]
+ *             index = <INT_t> array_data[i]
  *             if not (0 <= index < max_length):             # <<<<<<<<<<<<<<
  *                 raise IndexError("Index %d out of bounds [%d, %d[" % (<long>index, 0, max_length))
  *             indices[i] = array_data[i]
@@ -1946,18 +2169,18 @@ static int *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_create_c_array_indices_fr
       __pyx_t_1 = ((!(__pyx_t_5 != 0)) != 0);
       if (__pyx_t_1) {
 
-        /* "sparse_lib/sparse/object_index.pxi":174
- *             index = <int> array_data[i]
+        /* "sparse_lib/sparse/object_index.pxi":176
+ *             index = <INT_t> array_data[i]
  *             if not (0 <= index < max_length):
  *                 raise IndexError("Index %d out of bounds [%d, %d[" % (<long>index, 0, max_length))             # <<<<<<<<<<<<<<
  *             indices[i] = array_data[i]
  * 
  */
-        __pyx_t_6 = __Pyx_PyInt_From_long(((long)__pyx_v_index)); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 174; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_6 = __Pyx_PyInt_From_long(((long)__pyx_v_index)); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 176; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_6);
-        __pyx_t_7 = __Pyx_PyInt_From_int(__pyx_v_max_length); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 174; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_7 = __Pyx_PyInt_From_int(__pyx_v_max_length); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 176; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_7);
-        __pyx_t_3 = PyTuple_New(3); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 174; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_3 = PyTuple_New(3); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 176; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_3);
         PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_6);
         __Pyx_GIVEREF(__pyx_t_6);
@@ -1968,23 +2191,23 @@ static int *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_create_c_array_indices_fr
         __Pyx_GIVEREF(__pyx_t_7);
         __pyx_t_6 = 0;
         __pyx_t_7 = 0;
-        __pyx_t_7 = __Pyx_PyString_Format(__pyx_kp_s_Index_d_out_of_bounds_d_d, __pyx_t_3); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 174; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_7 = __Pyx_PyString_Format(__pyx_kp_s_Index_d_out_of_bounds_d_d, __pyx_t_3); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 176; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_7);
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-        __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 174; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 176; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_3);
         PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_7);
         __Pyx_GIVEREF(__pyx_t_7);
         __pyx_t_7 = 0;
-        __pyx_t_7 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_t_3, NULL); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 174; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_7 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_t_3, NULL); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 176; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_7);
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
         __Pyx_Raise(__pyx_t_7, 0, 0, 0);
         __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 174; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 176; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
 
-      /* "sparse_lib/sparse/object_index.pxi":175
+      /* "sparse_lib/sparse/object_index.pxi":177
  *             if not (0 <= index < max_length):
  *                 raise IndexError("Index %d out of bounds [%d, %d[" % (<long>index, 0, max_length))
  *             indices[i] = array_data[i]             # <<<<<<<<<<<<<<
@@ -1997,42 +2220,42 @@ static int *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_create_c_array_indices_fr
   }
   /*else*/ {
 
-    /* "sparse_lib/sparse/object_index.pxi":178
+    /* "sparse_lib/sparse/object_index.pxi":180
  * 
  *     else:
  *         raise TypeError("Index object is not recognized to create a LLSparseMatrixView")             # <<<<<<<<<<<<<<
  * 
- *     number_of_elements[0] = <int> length
+ *     number_of_elements[0] = <INT_t> length
  */
-    __pyx_t_7 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 178; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_7 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 180; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_Raise(__pyx_t_7, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 178; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 180; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __pyx_L3:;
 
-  /* "sparse_lib/sparse/object_index.pxi":180
+  /* "sparse_lib/sparse/object_index.pxi":182
  *         raise TypeError("Index object is not recognized to create a LLSparseMatrixView")
  * 
- *     number_of_elements[0] = <int> length             # <<<<<<<<<<<<<<
+ *     number_of_elements[0] = <INT_t> length             # <<<<<<<<<<<<<<
  * 
  *     return indices
  */
-  (__pyx_v_number_of_elements[0]) = ((int)__pyx_v_length);
+  (__pyx_v_number_of_elements[0]) = ((__pyx_t_10sparse_lib_14cysparse_types_INT_t)__pyx_v_length);
 
-  /* "sparse_lib/sparse/object_index.pxi":182
- *     number_of_elements[0] = <int> length
+  /* "sparse_lib/sparse/object_index.pxi":184
+ *     number_of_elements[0] = <INT_t> length
  * 
  *     return indices             # <<<<<<<<<<<<<<
  */
   __pyx_r = __pyx_v_indices;
   goto __pyx_L0;
 
-  /* "sparse_lib/sparse/object_index.pxi":57
+  /* "sparse_lib/sparse/object_index.pxi":59
  * 
  * 
- * cdef int * create_c_array_indices_from_python_object(int max_length, PyObject * obj, int * number_of_elements) except NULL:             # <<<<<<<<<<<<<<
+ * cdef INT_t * create_c_array_indices_from_python_object(INT_t max_length, PyObject * obj, INT_t * number_of_elements) except NULL:             # <<<<<<<<<<<<<<
  *     """
  *     Creates and returns a C-array with the indices corresponding to an index object.
  */
@@ -2049,10 +2272,10 @@ static int *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_create_c_array_indices_fr
   return __pyx_r;
 }
 
-/* "sparse_lib/sparse/ll_mat_view.pyx":30
+/* "sparse_lib/sparse/ll_mat_view.pyx":31
  * 
  * cdef class LLSparseMatrixView:
- *     def __cinit__(self, LLSparseMatrix A, int nrow, int ncol):             # <<<<<<<<<<<<<<
+ *     def __cinit__(self, LLSparseMatrix A, INT_t nrow, INT_t ncol):             # <<<<<<<<<<<<<<
  *         self.nrow = nrow  # number of rows of the view
  *         self.ncol = ncol  # number of columns of the view
  */
@@ -2061,8 +2284,8 @@ static int *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_create_c_array_indices_fr
 static int __pyx_pw_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_1__cinit__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
 static int __pyx_pw_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_1__cinit__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *__pyx_v_A = 0;
-  int __pyx_v_nrow;
-  int __pyx_v_ncol;
+  __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_nrow;
+  __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_ncol;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -2090,16 +2313,16 @@ static int __pyx_pw_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_1__c
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_nrow)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 3, 3, 1); {__pyx_filename = __pyx_f[1]; __pyx_lineno = 30; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 3, 3, 1); {__pyx_filename = __pyx_f[1]; __pyx_lineno = 31; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  2:
         if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_ncol)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 3, 3, 2); {__pyx_filename = __pyx_f[1]; __pyx_lineno = 30; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 3, 3, 2); {__pyx_filename = __pyx_f[1]; __pyx_lineno = 31; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__cinit__") < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 30; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__cinit__") < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 31; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
@@ -2109,18 +2332,18 @@ static int __pyx_pw_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_1__c
       values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
     }
     __pyx_v_A = ((struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *)values[0]);
-    __pyx_v_nrow = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_nrow == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 30; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
-    __pyx_v_ncol = __Pyx_PyInt_As_int(values[2]); if (unlikely((__pyx_v_ncol == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 30; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_nrow = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_nrow == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 31; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_ncol = __Pyx_PyInt_As_int(values[2]); if (unlikely((__pyx_v_ncol == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 31; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[1]; __pyx_lineno = 30; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[1]; __pyx_lineno = 31; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("sparse_lib.sparse.ll_mat_view.LLSparseMatrixView.__cinit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return -1;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_A), __pyx_ptype_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix, 1, "A", 0))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 30; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_A), __pyx_ptype_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix, 1, "A", 0))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 31; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_r = __pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView___cinit__(((struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *)__pyx_v_self), __pyx_v_A, __pyx_v_nrow, __pyx_v_ncol);
 
   /* function exit code */
@@ -2132,24 +2355,24 @@ static int __pyx_pw_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_1__c
   return __pyx_r;
 }
 
-static int __pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView___cinit__(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *__pyx_v_self, struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *__pyx_v_A, int __pyx_v_nrow, int __pyx_v_ncol) {
+static int __pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView___cinit__(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *__pyx_v_self, struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *__pyx_v_A, __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_nrow, __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_ncol) {
   int __pyx_r;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   int __pyx_t_2;
   __Pyx_RefNannySetupContext("__cinit__", 0);
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":31
+  /* "sparse_lib/sparse/ll_mat_view.pyx":32
  * cdef class LLSparseMatrixView:
- *     def __cinit__(self, LLSparseMatrix A, int nrow, int ncol):
+ *     def __cinit__(self, LLSparseMatrix A, INT_t nrow, INT_t ncol):
  *         self.nrow = nrow  # number of rows of the view             # <<<<<<<<<<<<<<
  *         self.ncol = ncol  # number of columns of the view
  * 
  */
   __pyx_v_self->nrow = __pyx_v_nrow;
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":32
- *     def __cinit__(self, LLSparseMatrix A, int nrow, int ncol):
+  /* "sparse_lib/sparse/ll_mat_view.pyx":33
+ *     def __cinit__(self, LLSparseMatrix A, INT_t nrow, INT_t ncol):
  *         self.nrow = nrow  # number of rows of the view
  *         self.ncol = ncol  # number of columns of the view             # <<<<<<<<<<<<<<
  * 
@@ -2157,7 +2380,7 @@ static int __pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView___ci
  */
   __pyx_v_self->ncol = __pyx_v_ncol;
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":34
+  /* "sparse_lib/sparse/ll_mat_view.pyx":35
  *         self.ncol = ncol  # number of columns of the view
  * 
  *         self.is_empty = True             # <<<<<<<<<<<<<<
@@ -2166,7 +2389,7 @@ static int __pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView___ci
  */
   __pyx_v_self->is_empty = 1;
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":36
+  /* "sparse_lib/sparse/ll_mat_view.pyx":37
  *         self.is_empty = True
  * 
  *         self.A = A             # <<<<<<<<<<<<<<
@@ -2179,7 +2402,7 @@ static int __pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView___ci
   __Pyx_DECREF(((PyObject *)__pyx_v_self->A));
   __pyx_v_self->A = __pyx_v_A;
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":37
+  /* "sparse_lib/sparse/ll_mat_view.pyx":38
  * 
  *         self.A = A
  *         Py_INCREF(self.A)  # increase ref to object to avoid the user deleting it explicitly or implicitly             # <<<<<<<<<<<<<<
@@ -2191,7 +2414,7 @@ static int __pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView___ci
   Py_INCREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":39
+  /* "sparse_lib/sparse/ll_mat_view.pyx":40
  *         Py_INCREF(self.A)  # increase ref to object to avoid the user deleting it explicitly or implicitly
  * 
  *         self.is_symmetric = A.is_symmetric             # <<<<<<<<<<<<<<
@@ -2201,7 +2424,7 @@ static int __pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView___ci
   __pyx_t_2 = __pyx_v_A->__pyx_base.__pyx_base.is_symmetric;
   __pyx_v_self->is_symmetric = __pyx_t_2;
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":40
+  /* "sparse_lib/sparse/ll_mat_view.pyx":41
  * 
  *         self.is_symmetric = A.is_symmetric
  *         self.store_zeros = A.store_zeros             # <<<<<<<<<<<<<<
@@ -2211,7 +2434,7 @@ static int __pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView___ci
   __pyx_t_2 = __pyx_v_A->__pyx_base.__pyx_base.store_zeros;
   __pyx_v_self->store_zeros = __pyx_t_2;
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":42
+  /* "sparse_lib/sparse/ll_mat_view.pyx":43
  *         self.store_zeros = A.store_zeros
  * 
  *         self.__status_ok = False             # <<<<<<<<<<<<<<
@@ -2220,7 +2443,7 @@ static int __pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView___ci
  */
   __pyx_v_self->__pyx___status_ok = 0;
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":43
+  /* "sparse_lib/sparse/ll_mat_view.pyx":44
  * 
  *         self.__status_ok = False
  *         self.__counted_nnz = False             # <<<<<<<<<<<<<<
@@ -2229,7 +2452,7 @@ static int __pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView___ci
  */
   __pyx_v_self->__pyx___counted_nnz = 0;
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":44
+  /* "sparse_lib/sparse/ll_mat_view.pyx":45
  *         self.__status_ok = False
  *         self.__counted_nnz = False
  *         self._nnz = 0             # <<<<<<<<<<<<<<
@@ -2238,10 +2461,10 @@ static int __pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView___ci
  */
   __pyx_v_self->_nnz = 0;
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":30
+  /* "sparse_lib/sparse/ll_mat_view.pyx":31
  * 
  * cdef class LLSparseMatrixView:
- *     def __cinit__(self, LLSparseMatrix A, int nrow, int ncol):             # <<<<<<<<<<<<<<
+ *     def __cinit__(self, LLSparseMatrix A, INT_t nrow, INT_t ncol):             # <<<<<<<<<<<<<<
  *         self.nrow = nrow  # number of rows of the view
  *         self.ncol = ncol  # number of columns of the view
  */
@@ -2252,7 +2475,7 @@ static int __pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView___ci
   return __pyx_r;
 }
 
-/* "sparse_lib/sparse/ll_mat_view.pyx":48
+/* "sparse_lib/sparse/ll_mat_view.pyx":49
  *     property nnz:
  *         # we only count once the non zero elements
  *         def __get__(self):             # <<<<<<<<<<<<<<
@@ -2280,13 +2503,13 @@ static PyObject *__pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixVie
   PyObject *__pyx_t_2 = NULL;
   PyObject *__pyx_t_3 = NULL;
   PyObject *__pyx_t_4 = NULL;
-  int __pyx_t_5;
+  __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_t_5;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":49
+  /* "sparse_lib/sparse/ll_mat_view.pyx":50
  *         # we only count once the non zero elements
  *         def __get__(self):
  *             if not self.__counted_nnz:             # <<<<<<<<<<<<<<
@@ -2296,14 +2519,14 @@ static PyObject *__pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixVie
   __pyx_t_1 = ((!(__pyx_v_self->__pyx___counted_nnz != 0)) != 0);
   if (__pyx_t_1) {
 
-    /* "sparse_lib/sparse/ll_mat_view.pyx":51
+    /* "sparse_lib/sparse/ll_mat_view.pyx":52
  *             if not self.__counted_nnz:
  *                 # we have to count the nnz
  *                 self._nnz = self.count_nnz()             # <<<<<<<<<<<<<<
  *                 self.__counted_nnz = True
  * 
  */
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_count_nnz); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 51; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_count_nnz); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 52; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_t_4 = NULL;
     if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_3))) {
@@ -2316,18 +2539,18 @@ static PyObject *__pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixVie
       }
     }
     if (__pyx_t_4) {
-      __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_4); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 51; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_4); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 52; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     } else {
-      __pyx_t_2 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 51; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 52; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_5 = __Pyx_PyInt_As_int(__pyx_t_2); if (unlikely((__pyx_t_5 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 51; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = __Pyx_PyInt_As_int(__pyx_t_2); if (unlikely((__pyx_t_5 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 52; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_v_self->_nnz = __pyx_t_5;
 
-    /* "sparse_lib/sparse/ll_mat_view.pyx":52
+    /* "sparse_lib/sparse/ll_mat_view.pyx":53
  *                 # we have to count the nnz
  *                 self._nnz = self.count_nnz()
  *                 self.__counted_nnz = True             # <<<<<<<<<<<<<<
@@ -2339,7 +2562,7 @@ static PyObject *__pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixVie
   }
   __pyx_L3:;
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":56
+  /* "sparse_lib/sparse/ll_mat_view.pyx":57
  * 
  * 
  *             return self._nnz             # <<<<<<<<<<<<<<
@@ -2347,13 +2570,13 @@ static PyObject *__pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixVie
  *         def __set__(self, value):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_self->_nnz); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 56; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_self->_nnz); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 57; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":48
+  /* "sparse_lib/sparse/ll_mat_view.pyx":49
  *     property nnz:
  *         # we only count once the non zero elements
  *         def __get__(self):             # <<<<<<<<<<<<<<
@@ -2374,7 +2597,7 @@ static PyObject *__pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixVie
   return __pyx_r;
 }
 
-/* "sparse_lib/sparse/ll_mat_view.pyx":58
+/* "sparse_lib/sparse/ll_mat_view.pyx":59
  *             return self._nnz
  * 
  *         def __set__(self, value):             # <<<<<<<<<<<<<<
@@ -2404,20 +2627,20 @@ static int __pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_3nnz
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__set__", 0);
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":59
+  /* "sparse_lib/sparse/ll_mat_view.pyx":60
  * 
  *         def __set__(self, value):
  *             raise NotImplemented("nnz is read-only")             # <<<<<<<<<<<<<<
  * 
  *         def __del__(self):
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_NotImplemented, __pyx_tuple__5, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 59; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_NotImplemented, __pyx_tuple__5, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 60; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  {__pyx_filename = __pyx_f[1]; __pyx_lineno = 59; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  {__pyx_filename = __pyx_f[1]; __pyx_lineno = 60; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":58
+  /* "sparse_lib/sparse/ll_mat_view.pyx":59
  *             return self._nnz
  * 
  *         def __set__(self, value):             # <<<<<<<<<<<<<<
@@ -2434,7 +2657,7 @@ static int __pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_3nnz
   return __pyx_r;
 }
 
-/* "sparse_lib/sparse/ll_mat_view.pyx":61
+/* "sparse_lib/sparse/ll_mat_view.pyx":62
  *             raise NotImplemented("nnz is read-only")
  * 
  *         def __del__(self):             # <<<<<<<<<<<<<<
@@ -2464,20 +2687,20 @@ static int __pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_3nnz
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__del__", 0);
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":62
+  /* "sparse_lib/sparse/ll_mat_view.pyx":63
  * 
  *         def __del__(self):
  *             raise NotImplemented("nnz is read-only")             # <<<<<<<<<<<<<<
  * 
  *     def __dealloc__(self):
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_NotImplemented, __pyx_tuple__6, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 62; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_NotImplemented, __pyx_tuple__6, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 63; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  {__pyx_filename = __pyx_f[1]; __pyx_lineno = 62; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  {__pyx_filename = __pyx_f[1]; __pyx_lineno = 63; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":61
+  /* "sparse_lib/sparse/ll_mat_view.pyx":62
  *             raise NotImplemented("nnz is read-only")
  * 
  *         def __del__(self):             # <<<<<<<<<<<<<<
@@ -2494,7 +2717,7 @@ static int __pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_3nnz
   return __pyx_r;
 }
 
-/* "sparse_lib/sparse/ll_mat_view.pyx":64
+/* "sparse_lib/sparse/ll_mat_view.pyx":65
  *             raise NotImplemented("nnz is read-only")
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
@@ -2518,7 +2741,7 @@ static void __pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_2__
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("__dealloc__", 0);
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":65
+  /* "sparse_lib/sparse/ll_mat_view.pyx":66
  * 
  *     def __dealloc__(self):
  *         PyMem_Free(self.row_indices)             # <<<<<<<<<<<<<<
@@ -2527,7 +2750,7 @@ static void __pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_2__
  */
   PyMem_Free(__pyx_v_self->row_indices);
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":66
+  /* "sparse_lib/sparse/ll_mat_view.pyx":67
  *     def __dealloc__(self):
  *         PyMem_Free(self.row_indices)
  *         PyMem_Free(self.col_indices)             # <<<<<<<<<<<<<<
@@ -2536,7 +2759,7 @@ static void __pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_2__
  */
   PyMem_Free(__pyx_v_self->col_indices);
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":68
+  /* "sparse_lib/sparse/ll_mat_view.pyx":69
  *         PyMem_Free(self.col_indices)
  * 
  *         Py_DECREF(self.A) # release ref             # <<<<<<<<<<<<<<
@@ -2548,7 +2771,7 @@ static void __pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_2__
   Py_DECREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":64
+  /* "sparse_lib/sparse/ll_mat_view.pyx":65
  *             raise NotImplemented("nnz is read-only")
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
@@ -2560,7 +2783,7 @@ static void __pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_2__
   __Pyx_RefNannyFinishContext();
 }
 
-/* "sparse_lib/sparse/ll_mat_view.pyx":70
+/* "sparse_lib/sparse/ll_mat_view.pyx":71
  *         Py_DECREF(self.A) # release ref
  * 
  *     cdef assert_status_ok(self):             # <<<<<<<<<<<<<<
@@ -2576,7 +2799,7 @@ static PyObject *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("assert_status_ok", 0);
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":71
+  /* "sparse_lib/sparse/ll_mat_view.pyx":72
  * 
  *     cdef assert_status_ok(self):
  *         assert self.__status_ok, "Create an LLSparseMatrixView only with the factory function MakeLLSparseMatrixView()"             # <<<<<<<<<<<<<<
@@ -2587,12 +2810,12 @@ static PyObject *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView
   if (unlikely(!Py_OptimizeFlag)) {
     if (unlikely(!(__pyx_v_self->__pyx___status_ok != 0))) {
       PyErr_SetObject(PyExc_AssertionError, __pyx_kp_s_Create_an_LLSparseMatrixView_onl);
-      {__pyx_filename = __pyx_f[1]; __pyx_lineno = 71; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[1]; __pyx_lineno = 72; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
   }
   #endif
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":70
+  /* "sparse_lib/sparse/ll_mat_view.pyx":71
  *         Py_DECREF(self.A) # release ref
  * 
  *     cdef assert_status_ok(self):             # <<<<<<<<<<<<<<
@@ -2612,15 +2835,15 @@ static PyObject *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView
   return __pyx_r;
 }
 
-/* "sparse_lib/sparse/ll_mat_view.pyx":78
+/* "sparse_lib/sparse/ll_mat_view.pyx":79
  *     ####################################################################################################################
  *     #                                            *** SET ***
- *     cdef put(self, int i, int j, double value):             # <<<<<<<<<<<<<<
+ *     cdef put(self, INT_t i, INT_t j, double value):             # <<<<<<<<<<<<<<
  *         self.A.put(self.row_indices[i], self.col_indices[j], value)
  * 
  */
 
-static PyObject *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_put(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *__pyx_v_self, int __pyx_v_i, int __pyx_v_j, double __pyx_v_value) {
+static PyObject *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_put(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *__pyx_v_self, __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_i, __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_j, double __pyx_v_value) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -2629,21 +2852,21 @@ static PyObject *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("put", 0);
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":79
+  /* "sparse_lib/sparse/ll_mat_view.pyx":80
  *     #                                            *** SET ***
- *     cdef put(self, int i, int j, double value):
+ *     cdef put(self, INT_t i, INT_t j, double value):
  *         self.A.put(self.row_indices[i], self.col_indices[j], value)             # <<<<<<<<<<<<<<
  * 
- *     cdef safe_put(self, int i, int j, double value):
+ *     cdef safe_put(self, INT_t i, INT_t j, double value):
  */
-  __pyx_t_1 = ((struct __pyx_vtabstruct_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *)__pyx_v_self->A->__pyx_vtab)->put(__pyx_v_self->A, (__pyx_v_self->row_indices[__pyx_v_i]), (__pyx_v_self->col_indices[__pyx_v_j]), __pyx_v_value); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 79; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = ((struct __pyx_vtabstruct_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *)__pyx_v_self->A->__pyx_vtab)->put(__pyx_v_self->A, (__pyx_v_self->row_indices[__pyx_v_i]), (__pyx_v_self->col_indices[__pyx_v_j]), __pyx_v_value); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 80; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":78
+  /* "sparse_lib/sparse/ll_mat_view.pyx":79
  *     ####################################################################################################################
  *     #                                            *** SET ***
- *     cdef put(self, int i, int j, double value):             # <<<<<<<<<<<<<<
+ *     cdef put(self, INT_t i, INT_t j, double value):             # <<<<<<<<<<<<<<
  *         self.A.put(self.row_indices[i], self.col_indices[j], value)
  * 
  */
@@ -2661,15 +2884,15 @@ static PyObject *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView
   return __pyx_r;
 }
 
-/* "sparse_lib/sparse/ll_mat_view.pyx":81
+/* "sparse_lib/sparse/ll_mat_view.pyx":82
  *         self.A.put(self.row_indices[i], self.col_indices[j], value)
  * 
- *     cdef safe_put(self, int i, int j, double value):             # <<<<<<<<<<<<<<
+ *     cdef safe_put(self, INT_t i, INT_t j, double value):             # <<<<<<<<<<<<<<
  *         """
  *         Set ``A_view[i, j] = value`` directly.
  */
 
-static PyObject *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_safe_put(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *__pyx_v_self, int __pyx_v_i, int __pyx_v_j, double __pyx_v_value) {
+static PyObject *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_safe_put(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *__pyx_v_self, __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_i, __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_j, double __pyx_v_value) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   int __pyx_t_1;
@@ -2680,7 +2903,7 @@ static PyObject *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("safe_put", 0);
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":88
+  /* "sparse_lib/sparse/ll_mat_view.pyx":89
  *             IndexError: when index out of bound.
  *         """
  *         if i < 0 or i >= self.nrow or j < 0 or j >= self.ncol:             # <<<<<<<<<<<<<<
@@ -2710,35 +2933,35 @@ static PyObject *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_1) {
 
-    /* "sparse_lib/sparse/ll_mat_view.pyx":89
+    /* "sparse_lib/sparse/ll_mat_view.pyx":90
  *         """
  *         if i < 0 or i >= self.nrow or j < 0 or j >= self.ncol:
  *             raise IndexError('Indices out of range')             # <<<<<<<<<<<<<<
  * 
  *         self.put(i, j, value)
  */
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 89; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 90; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 89; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 90; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":91
+  /* "sparse_lib/sparse/ll_mat_view.pyx":92
  *             raise IndexError('Indices out of range')
  * 
  *         self.put(i, j, value)             # <<<<<<<<<<<<<<
  * 
  *     def __setitem__(self, tuple key, value):
  */
-  __pyx_t_3 = ((struct __pyx_vtabstruct_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *)__pyx_v_self->__pyx_vtab)->put(__pyx_v_self, __pyx_v_i, __pyx_v_j, __pyx_v_value); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 91; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = ((struct __pyx_vtabstruct_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *)__pyx_v_self->__pyx_vtab)->put(__pyx_v_self, __pyx_v_i, __pyx_v_j, __pyx_v_value); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 92; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":81
+  /* "sparse_lib/sparse/ll_mat_view.pyx":82
  *         self.A.put(self.row_indices[i], self.col_indices[j], value)
  * 
- *     cdef safe_put(self, int i, int j, double value):             # <<<<<<<<<<<<<<
+ *     cdef safe_put(self, INT_t i, INT_t j, double value):             # <<<<<<<<<<<<<<
  *         """
  *         Set ``A_view[i, j] = value`` directly.
  */
@@ -2756,7 +2979,7 @@ static PyObject *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView
   return __pyx_r;
 }
 
-/* "sparse_lib/sparse/ll_mat_view.pyx":93
+/* "sparse_lib/sparse/ll_mat_view.pyx":94
  *         self.put(i, j, value)
  * 
  *     def __setitem__(self, tuple key, value):             # <<<<<<<<<<<<<<
@@ -2773,7 +2996,7 @@ static int __pyx_pw_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_5__s
   int __pyx_r;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__setitem__ (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_key), (&PyTuple_Type), 1, "key", 1))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 93; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_key), (&PyTuple_Type), 1, "key", 1))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 94; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_r = __pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_4__setitem__(((struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *)__pyx_v_self), ((PyObject*)__pyx_v_key), ((PyObject *)__pyx_v_value));
 
   /* function exit code */
@@ -2787,8 +3010,8 @@ static int __pyx_pw_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_5__s
 
 static int __pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_4__setitem__(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *__pyx_v_self, PyObject *__pyx_v_key, PyObject *__pyx_v_value) {
   struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *__pyx_v_view = NULL;
-  int __pyx_v_i;
-  int __pyx_v_j;
+  __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_i;
+  __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_j;
   int __pyx_r;
   __Pyx_RefNannyDeclarations
   Py_ssize_t __pyx_t_1;
@@ -2797,14 +3020,14 @@ static int __pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_4__s
   PyObject *__pyx_t_4 = NULL;
   int __pyx_t_5;
   PyObject *__pyx_t_6 = NULL;
-  int __pyx_t_7;
+  __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_t_7;
   double __pyx_t_8;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__setitem__", 0);
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":94
+  /* "sparse_lib/sparse/ll_mat_view.pyx":95
  * 
  *     def __setitem__(self, tuple key, value):
  *         if len(key) != 2:             # <<<<<<<<<<<<<<
@@ -2813,13 +3036,13 @@ static int __pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_4__s
  */
   if (unlikely(__pyx_v_key == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
-    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 94; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 95; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = PyTuple_GET_SIZE(__pyx_v_key); if (unlikely(__pyx_t_1 == -1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 94; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyTuple_GET_SIZE(__pyx_v_key); if (unlikely(__pyx_t_1 == -1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 95; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_t_2 = ((__pyx_t_1 != 2) != 0);
   if (__pyx_t_2) {
 
-    /* "sparse_lib/sparse/ll_mat_view.pyx":95
+    /* "sparse_lib/sparse/ll_mat_view.pyx":96
  *     def __setitem__(self, tuple key, value):
  *         if len(key) != 2:
  *             raise IndexError('Index tuple must be of length 2 (not %d)' % len(key))             # <<<<<<<<<<<<<<
@@ -2828,28 +3051,28 @@ static int __pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_4__s
  */
     if (unlikely(__pyx_v_key == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
-      {__pyx_filename = __pyx_f[1]; __pyx_lineno = 95; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[1]; __pyx_lineno = 96; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_t_1 = PyTuple_GET_SIZE(__pyx_v_key); if (unlikely(__pyx_t_1 == -1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 95; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __pyx_t_3 = PyInt_FromSsize_t(__pyx_t_1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 95; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyTuple_GET_SIZE(__pyx_v_key); if (unlikely(__pyx_t_1 == -1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 96; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = PyInt_FromSsize_t(__pyx_t_1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 96; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_4 = __Pyx_PyString_Format(__pyx_kp_s_Index_tuple_must_be_of_length_2, __pyx_t_3); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 95; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyString_Format(__pyx_kp_s_Index_tuple_must_be_of_length_2, __pyx_t_3); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 96; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 95; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 96; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_4);
     __Pyx_GIVEREF(__pyx_t_4);
     __pyx_t_4 = 0;
-    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_t_3, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 95; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_t_3, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 96; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_Raise(__pyx_t_4, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 95; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 96; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":97
+  /* "sparse_lib/sparse/ll_mat_view.pyx":98
  *             raise IndexError('Index tuple must be of length 2 (not %d)' % len(key))
  *         # test for direct access (i.e. both elements are integers)
  *         if not PyInt_Check(<PyObject *>key[0]) or not PyInt_Check(<PyObject *>key[0]):             # <<<<<<<<<<<<<<
@@ -2858,9 +3081,9 @@ static int __pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_4__s
  */
   if (unlikely(__pyx_v_key == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 97; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 98; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_4 = __Pyx_GetItemInt_Tuple(__pyx_v_key, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 97; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_4 = __Pyx_GetItemInt_Tuple(__pyx_v_key, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 98; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_t_5 = ((!(PyInt_Check(((PyObject *)__pyx_t_4)) != 0)) != 0);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -2871,9 +3094,9 @@ static int __pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_4__s
   }
   if (unlikely(__pyx_v_key == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 97; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 98; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_4 = __Pyx_GetItemInt_Tuple(__pyx_v_key, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 97; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_4 = __Pyx_GetItemInt_Tuple(__pyx_v_key, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 98; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_t_5 = ((!(PyInt_Check(((PyObject *)__pyx_t_4)) != 0)) != 0);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -2881,7 +3104,7 @@ static int __pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_4__s
   __pyx_L5_bool_binop_done:;
   if (__pyx_t_2) {
 
-    /* "sparse_lib/sparse/ll_mat_view.pyx":99
+    /* "sparse_lib/sparse/ll_mat_view.pyx":100
  *         if not PyInt_Check(<PyObject *>key[0]) or not PyInt_Check(<PyObject *>key[0]):
  *             # TODO: don't create temp object
  *             view = MakeLLSparseMatrixViewFromView(self, <PyObject *>key[0], <PyObject *>key[1])             # <<<<<<<<<<<<<<
@@ -2890,35 +3113,35 @@ static int __pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_4__s
  */
     if (unlikely(__pyx_v_key == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[1]; __pyx_lineno = 99; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[1]; __pyx_lineno = 100; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_t_4 = __Pyx_GetItemInt_Tuple(__pyx_v_key, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 99; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_4 = __Pyx_GetItemInt_Tuple(__pyx_v_key, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 100; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_4);
     if (unlikely(__pyx_v_key == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[1]; __pyx_lineno = 99; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[1]; __pyx_lineno = 100; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_t_3 = __Pyx_GetItemInt_Tuple(__pyx_v_key, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 99; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_3 = __Pyx_GetItemInt_Tuple(__pyx_v_key, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 100; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_6 = ((PyObject *)__pyx_f_10sparse_lib_6sparse_11ll_mat_view_MakeLLSparseMatrixViewFromView(__pyx_v_self, ((PyObject *)__pyx_t_4), ((PyObject *)__pyx_t_3))); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 99; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_6 = ((PyObject *)__pyx_f_10sparse_lib_6sparse_11ll_mat_view_MakeLLSparseMatrixViewFromView(__pyx_v_self, ((PyObject *)__pyx_t_4), ((PyObject *)__pyx_t_3))); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 100; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __pyx_v_view = ((struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *)__pyx_t_6);
     __pyx_t_6 = 0;
 
-    /* "sparse_lib/sparse/ll_mat_view.pyx":100
+    /* "sparse_lib/sparse/ll_mat_view.pyx":101
  *             # TODO: don't create temp object
  *             view = MakeLLSparseMatrixViewFromView(self, <PyObject *>key[0], <PyObject *>key[1])
  *             self.A.assign(view, value)             # <<<<<<<<<<<<<<
  * 
  *             del view
  */
-    __pyx_t_6 = ((struct __pyx_vtabstruct_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *)__pyx_v_self->A->__pyx_vtab)->assign(__pyx_v_self->A, __pyx_v_view, __pyx_v_value); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 100; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_6 = ((struct __pyx_vtabstruct_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *)__pyx_v_self->A->__pyx_vtab)->assign(__pyx_v_self->A, __pyx_v_view, __pyx_v_value); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 101; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-    /* "sparse_lib/sparse/ll_mat_view.pyx":102
+    /* "sparse_lib/sparse/ll_mat_view.pyx":103
  *             self.A.assign(view, value)
  * 
  *             del view             # <<<<<<<<<<<<<<
@@ -2928,64 +3151,64 @@ static int __pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_4__s
     __Pyx_DECREF(((PyObject *)__pyx_v_view));
     __pyx_v_view = NULL;
 
-    /* "sparse_lib/sparse/ll_mat_view.pyx":103
+    /* "sparse_lib/sparse/ll_mat_view.pyx":104
  * 
  *             del view
  *             return             # <<<<<<<<<<<<<<
  * 
- *         cdef int i = key[0]
+ *         cdef INT_t i = key[0]
  */
     __pyx_r = 0;
     goto __pyx_L0;
   }
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":105
+  /* "sparse_lib/sparse/ll_mat_view.pyx":106
  *             return
  * 
- *         cdef int i = key[0]             # <<<<<<<<<<<<<<
- *         cdef int j = key[1]
+ *         cdef INT_t i = key[0]             # <<<<<<<<<<<<<<
+ *         cdef INT_t j = key[1]
  * 
- */
-  if (unlikely(__pyx_v_key == Py_None)) {
-    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 105; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  }
-  __pyx_t_6 = __Pyx_GetItemInt_Tuple(__pyx_v_key, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_6 == NULL)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 105; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-  __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_7 = __Pyx_PyInt_As_int(__pyx_t_6); if (unlikely((__pyx_t_7 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 105; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_v_i = __pyx_t_7;
-
-  /* "sparse_lib/sparse/ll_mat_view.pyx":106
- * 
- *         cdef int i = key[0]
- *         cdef int j = key[1]             # <<<<<<<<<<<<<<
- * 
- *         self.safe_put(i, j, <double> value)
  */
   if (unlikely(__pyx_v_key == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
     {__pyx_filename = __pyx_f[1]; __pyx_lineno = 106; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_6 = __Pyx_GetItemInt_Tuple(__pyx_v_key, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_6 == NULL)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 106; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_6 = __Pyx_GetItemInt_Tuple(__pyx_v_key, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_6 == NULL)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 106; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_6);
   __pyx_t_7 = __Pyx_PyInt_As_int(__pyx_t_6); if (unlikely((__pyx_t_7 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 106; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+  __pyx_v_i = __pyx_t_7;
+
+  /* "sparse_lib/sparse/ll_mat_view.pyx":107
+ * 
+ *         cdef INT_t i = key[0]
+ *         cdef INT_t j = key[1]             # <<<<<<<<<<<<<<
+ * 
+ *         self.safe_put(i, j, <double> value)
+ */
+  if (unlikely(__pyx_v_key == Py_None)) {
+    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 107; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  }
+  __pyx_t_6 = __Pyx_GetItemInt_Tuple(__pyx_v_key, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_6 == NULL)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 107; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __Pyx_GOTREF(__pyx_t_6);
+  __pyx_t_7 = __Pyx_PyInt_As_int(__pyx_t_6); if (unlikely((__pyx_t_7 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 107; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __pyx_v_j = __pyx_t_7;
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":108
- *         cdef int j = key[1]
+  /* "sparse_lib/sparse/ll_mat_view.pyx":109
+ *         cdef INT_t j = key[1]
  * 
  *         self.safe_put(i, j, <double> value)             # <<<<<<<<<<<<<<
  * 
  *     ####################################################################################################################
  */
-  __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_v_value); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 108; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_6 = ((struct __pyx_vtabstruct_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *)__pyx_v_self->__pyx_vtab)->safe_put(__pyx_v_self, __pyx_v_i, __pyx_v_j, ((double)__pyx_t_8)); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 108; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_v_value); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 109; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_6 = ((struct __pyx_vtabstruct_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *)__pyx_v_self->__pyx_vtab)->safe_put(__pyx_v_self, __pyx_v_i, __pyx_v_j, ((double)__pyx_t_8)); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 109; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":93
+  /* "sparse_lib/sparse/ll_mat_view.pyx":94
  *         self.put(i, j, value)
  * 
  *     def __setitem__(self, tuple key, value):             # <<<<<<<<<<<<<<
@@ -3008,15 +3231,15 @@ static int __pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_4__s
   return __pyx_r;
 }
 
-/* "sparse_lib/sparse/ll_mat_view.pyx":112
+/* "sparse_lib/sparse/ll_mat_view.pyx":113
  *     ####################################################################################################################
  *     #                                            *** GET ***
- *     cdef at(self, int i, int j):             # <<<<<<<<<<<<<<
+ *     cdef at(self, INT_t i, INT_t j):             # <<<<<<<<<<<<<<
  *         """
  *         Return element ``(i, j)``.
  */
 
-static PyObject *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_at(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *__pyx_v_self, int __pyx_v_i, int __pyx_v_j) {
+static PyObject *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_at(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *__pyx_v_self, __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_i, __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_j) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -3025,24 +3248,24 @@ static PyObject *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("at", 0);
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":125
- *         cdef int k, t
+  /* "sparse_lib/sparse/ll_mat_view.pyx":126
+ *         cdef INT_t k, t
  * 
  *         return self.A.safe_at(self.row_indices[i], self.col_indices[j])             # <<<<<<<<<<<<<<
  * 
- *     cdef safe_at(self, int i, int j):
+ *     cdef safe_at(self, INT_t i, INT_t j):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((struct __pyx_vtabstruct_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *)__pyx_v_self->A->__pyx_vtab)->safe_at(__pyx_v_self->A, (__pyx_v_self->row_indices[__pyx_v_i]), (__pyx_v_self->col_indices[__pyx_v_j])); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 125; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = ((struct __pyx_vtabstruct_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *)__pyx_v_self->A->__pyx_vtab)->safe_at(__pyx_v_self->A, (__pyx_v_self->row_indices[__pyx_v_i]), (__pyx_v_self->col_indices[__pyx_v_j])); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 126; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":112
+  /* "sparse_lib/sparse/ll_mat_view.pyx":113
  *     ####################################################################################################################
  *     #                                            *** GET ***
- *     cdef at(self, int i, int j):             # <<<<<<<<<<<<<<
+ *     cdef at(self, INT_t i, INT_t j):             # <<<<<<<<<<<<<<
  *         """
  *         Return element ``(i, j)``.
  */
@@ -3058,15 +3281,15 @@ static PyObject *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView
   return __pyx_r;
 }
 
-/* "sparse_lib/sparse/ll_mat_view.pyx":127
+/* "sparse_lib/sparse/ll_mat_view.pyx":128
  *         return self.A.safe_at(self.row_indices[i], self.col_indices[j])
  * 
- *     cdef safe_at(self, int i, int j):             # <<<<<<<<<<<<<<
+ *     cdef safe_at(self, INT_t i, INT_t j):             # <<<<<<<<<<<<<<
  *         """
  *         Return element ``(i, j)`` but with check for out of bounds indices.
  */
 
-static PyObject *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_safe_at(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *__pyx_v_self, int __pyx_v_i, int __pyx_v_j) {
+static PyObject *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_safe_at(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *__pyx_v_self, __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_i, __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_j) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   int __pyx_t_1;
@@ -3078,7 +3301,7 @@ static PyObject *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("safe_at", 0);
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":135
+  /* "sparse_lib/sparse/ll_mat_view.pyx":136
  * 
  *         """
  *         if not 0 <= i < self.nrow or not 0 <= j < self.ncol:             # <<<<<<<<<<<<<<
@@ -3104,21 +3327,21 @@ static PyObject *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_1) {
 
-    /* "sparse_lib/sparse/ll_mat_view.pyx":136
+    /* "sparse_lib/sparse/ll_mat_view.pyx":137
  *         """
  *         if not 0 <= i < self.nrow or not 0 <= j < self.ncol:
  *             raise IndexError("Index out of bounds")             # <<<<<<<<<<<<<<
  * 
  *         return self.at(i, j)
  */
-    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_tuple__8, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 136; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_tuple__8, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 137; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_Raise(__pyx_t_4, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 136; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 137; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":138
+  /* "sparse_lib/sparse/ll_mat_view.pyx":139
  *             raise IndexError("Index out of bounds")
  * 
  *         return self.at(i, j)             # <<<<<<<<<<<<<<
@@ -3126,16 +3349,16 @@ static PyObject *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView
  *     def __getitem__(self, tuple key):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_4 = ((struct __pyx_vtabstruct_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *)__pyx_v_self->__pyx_vtab)->at(__pyx_v_self, __pyx_v_i, __pyx_v_j); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 138; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = ((struct __pyx_vtabstruct_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *)__pyx_v_self->__pyx_vtab)->at(__pyx_v_self, __pyx_v_i, __pyx_v_j); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 139; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_r = __pyx_t_4;
   __pyx_t_4 = 0;
   goto __pyx_L0;
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":127
+  /* "sparse_lib/sparse/ll_mat_view.pyx":128
  *         return self.A.safe_at(self.row_indices[i], self.col_indices[j])
  * 
- *     cdef safe_at(self, int i, int j):             # <<<<<<<<<<<<<<
+ *     cdef safe_at(self, INT_t i, INT_t j):             # <<<<<<<<<<<<<<
  *         """
  *         Return element ``(i, j)`` but with check for out of bounds indices.
  */
@@ -3151,7 +3374,7 @@ static PyObject *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView
   return __pyx_r;
 }
 
-/* "sparse_lib/sparse/ll_mat_view.pyx":140
+/* "sparse_lib/sparse/ll_mat_view.pyx":141
  *         return self.at(i, j)
  * 
  *     def __getitem__(self, tuple key):             # <<<<<<<<<<<<<<
@@ -3168,7 +3391,7 @@ static PyObject *__pyx_pw_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixVie
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__getitem__ (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_key), (&PyTuple_Type), 1, "key", 1))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 140; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_key), (&PyTuple_Type), 1, "key", 1))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 141; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_r = __pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_6__getitem__(((struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *)__pyx_v_self), ((PyObject*)__pyx_v_key));
 
   /* function exit code */
@@ -3181,8 +3404,8 @@ static PyObject *__pyx_pw_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixVie
 }
 
 static PyObject *__pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_6__getitem__(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *__pyx_v_self, PyObject *__pyx_v_key) {
-  int __pyx_v_i;
-  int __pyx_v_j;
+  __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_i;
+  __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_j;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   Py_ssize_t __pyx_t_1;
@@ -3191,13 +3414,13 @@ static PyObject *__pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixVie
   PyObject *__pyx_t_4 = NULL;
   int __pyx_t_5;
   PyObject *__pyx_t_6 = NULL;
-  int __pyx_t_7;
+  __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_t_7;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__getitem__", 0);
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":141
+  /* "sparse_lib/sparse/ll_mat_view.pyx":142
  * 
  *     def __getitem__(self, tuple key):
  *         if len(key) != 2:             # <<<<<<<<<<<<<<
@@ -3206,13 +3429,13 @@ static PyObject *__pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixVie
  */
   if (unlikely(__pyx_v_key == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
-    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 141; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 142; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = PyTuple_GET_SIZE(__pyx_v_key); if (unlikely(__pyx_t_1 == -1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 141; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyTuple_GET_SIZE(__pyx_v_key); if (unlikely(__pyx_t_1 == -1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 142; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_t_2 = ((__pyx_t_1 != 2) != 0);
   if (__pyx_t_2) {
 
-    /* "sparse_lib/sparse/ll_mat_view.pyx":142
+    /* "sparse_lib/sparse/ll_mat_view.pyx":143
  *     def __getitem__(self, tuple key):
  *         if len(key) != 2:
  *             raise IndexError('Index tuple must be of length 2 (not %d)' % len(key))             # <<<<<<<<<<<<<<
@@ -3221,28 +3444,28 @@ static PyObject *__pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixVie
  */
     if (unlikely(__pyx_v_key == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
-      {__pyx_filename = __pyx_f[1]; __pyx_lineno = 142; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[1]; __pyx_lineno = 143; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_t_1 = PyTuple_GET_SIZE(__pyx_v_key); if (unlikely(__pyx_t_1 == -1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 142; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __pyx_t_3 = PyInt_FromSsize_t(__pyx_t_1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 142; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyTuple_GET_SIZE(__pyx_v_key); if (unlikely(__pyx_t_1 == -1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 143; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = PyInt_FromSsize_t(__pyx_t_1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 143; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_4 = __Pyx_PyString_Format(__pyx_kp_s_Index_tuple_must_be_of_length_2, __pyx_t_3); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 142; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyString_Format(__pyx_kp_s_Index_tuple_must_be_of_length_2, __pyx_t_3); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 143; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 142; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 143; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_4);
     __Pyx_GIVEREF(__pyx_t_4);
     __pyx_t_4 = 0;
-    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_t_3, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 142; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_t_3, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 143; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_Raise(__pyx_t_4, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 142; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 143; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":144
+  /* "sparse_lib/sparse/ll_mat_view.pyx":145
  *             raise IndexError('Index tuple must be of length 2 (not %d)' % len(key))
  * 
  *         if not PyInt_Check(<PyObject *>key[0]) or not PyInt_Check(<PyObject *>key[1]):             # <<<<<<<<<<<<<<
@@ -3251,9 +3474,9 @@ static PyObject *__pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixVie
  */
   if (unlikely(__pyx_v_key == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 144; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 145; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_4 = __Pyx_GetItemInt_Tuple(__pyx_v_key, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 144; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_4 = __Pyx_GetItemInt_Tuple(__pyx_v_key, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 145; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_t_5 = ((!(PyInt_Check(((PyObject *)__pyx_t_4)) != 0)) != 0);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -3264,9 +3487,9 @@ static PyObject *__pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixVie
   }
   if (unlikely(__pyx_v_key == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 144; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 145; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_4 = __Pyx_GetItemInt_Tuple(__pyx_v_key, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 144; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_4 = __Pyx_GetItemInt_Tuple(__pyx_v_key, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 145; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_t_5 = ((!(PyInt_Check(((PyObject *)__pyx_t_4)) != 0)) != 0);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -3274,27 +3497,27 @@ static PyObject *__pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixVie
   __pyx_L5_bool_binop_done:;
   if (__pyx_t_2) {
 
-    /* "sparse_lib/sparse/ll_mat_view.pyx":145
+    /* "sparse_lib/sparse/ll_mat_view.pyx":146
  * 
  *         if not PyInt_Check(<PyObject *>key[0]) or not PyInt_Check(<PyObject *>key[1]):
  *             return MakeLLSparseMatrixViewFromView(self, <PyObject *>key[0], <PyObject *>key[1])             # <<<<<<<<<<<<<<
  * 
- *         cdef int i = key[0]
+ *         cdef INT_t i = key[0]
  */
     __Pyx_XDECREF(__pyx_r);
     if (unlikely(__pyx_v_key == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[1]; __pyx_lineno = 145; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[1]; __pyx_lineno = 146; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_t_4 = __Pyx_GetItemInt_Tuple(__pyx_v_key, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 145; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_4 = __Pyx_GetItemInt_Tuple(__pyx_v_key, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 146; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_4);
     if (unlikely(__pyx_v_key == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[1]; __pyx_lineno = 145; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[1]; __pyx_lineno = 146; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_t_3 = __Pyx_GetItemInt_Tuple(__pyx_v_key, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 145; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_3 = __Pyx_GetItemInt_Tuple(__pyx_v_key, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 146; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_6 = ((PyObject *)__pyx_f_10sparse_lib_6sparse_11ll_mat_view_MakeLLSparseMatrixViewFromView(__pyx_v_self, ((PyObject *)__pyx_t_4), ((PyObject *)__pyx_t_3))); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 145; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_6 = ((PyObject *)__pyx_f_10sparse_lib_6sparse_11ll_mat_view_MakeLLSparseMatrixViewFromView(__pyx_v_self, ((PyObject *)__pyx_t_4), ((PyObject *)__pyx_t_3))); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 146; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -3303,55 +3526,55 @@ static PyObject *__pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixVie
     goto __pyx_L0;
   }
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":147
+  /* "sparse_lib/sparse/ll_mat_view.pyx":148
  *             return MakeLLSparseMatrixViewFromView(self, <PyObject *>key[0], <PyObject *>key[1])
  * 
- *         cdef int i = key[0]             # <<<<<<<<<<<<<<
- *         cdef int j = key[1]
+ *         cdef INT_t i = key[0]             # <<<<<<<<<<<<<<
+ *         cdef INT_t j = key[1]
  * 
- */
-  if (unlikely(__pyx_v_key == Py_None)) {
-    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 147; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  }
-  __pyx_t_6 = __Pyx_GetItemInt_Tuple(__pyx_v_key, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_6 == NULL)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 147; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-  __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_7 = __Pyx_PyInt_As_int(__pyx_t_6); if (unlikely((__pyx_t_7 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 147; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_v_i = __pyx_t_7;
-
-  /* "sparse_lib/sparse/ll_mat_view.pyx":148
- * 
- *         cdef int i = key[0]
- *         cdef int j = key[1]             # <<<<<<<<<<<<<<
- * 
- *         return self.safe_at(i, j)
  */
   if (unlikely(__pyx_v_key == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
     {__pyx_filename = __pyx_f[1]; __pyx_lineno = 148; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_6 = __Pyx_GetItemInt_Tuple(__pyx_v_key, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_6 == NULL)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 148; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_6 = __Pyx_GetItemInt_Tuple(__pyx_v_key, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_6 == NULL)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 148; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_6);
   __pyx_t_7 = __Pyx_PyInt_As_int(__pyx_t_6); if (unlikely((__pyx_t_7 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 148; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+  __pyx_v_i = __pyx_t_7;
+
+  /* "sparse_lib/sparse/ll_mat_view.pyx":149
+ * 
+ *         cdef INT_t i = key[0]
+ *         cdef INT_t j = key[1]             # <<<<<<<<<<<<<<
+ * 
+ *         return self.safe_at(i, j)
+ */
+  if (unlikely(__pyx_v_key == Py_None)) {
+    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 149; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  }
+  __pyx_t_6 = __Pyx_GetItemInt_Tuple(__pyx_v_key, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_6 == NULL)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 149; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __Pyx_GOTREF(__pyx_t_6);
+  __pyx_t_7 = __Pyx_PyInt_As_int(__pyx_t_6); if (unlikely((__pyx_t_7 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 149; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __pyx_v_j = __pyx_t_7;
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":150
- *         cdef int j = key[1]
+  /* "sparse_lib/sparse/ll_mat_view.pyx":151
+ *         cdef INT_t j = key[1]
  * 
  *         return self.safe_at(i, j)             # <<<<<<<<<<<<<<
  * 
  *     ####################################################################################################################
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_6 = ((struct __pyx_vtabstruct_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *)__pyx_v_self->__pyx_vtab)->safe_at(__pyx_v_self, __pyx_v_i, __pyx_v_j); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 150; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_6 = ((struct __pyx_vtabstruct_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *)__pyx_v_self->__pyx_vtab)->safe_at(__pyx_v_self, __pyx_v_i, __pyx_v_j); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 151; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_6);
   __pyx_r = __pyx_t_6;
   __pyx_t_6 = 0;
   goto __pyx_L0;
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":140
+  /* "sparse_lib/sparse/ll_mat_view.pyx":141
  *         return self.at(i, j)
  * 
  *     def __getitem__(self, tuple key):             # <<<<<<<<<<<<<<
@@ -3372,7 +3595,7 @@ static PyObject *__pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixVie
   return __pyx_r;
 }
 
-/* "sparse_lib/sparse/ll_mat_view.pyx":154
+/* "sparse_lib/sparse/ll_mat_view.pyx":155
  *     ####################################################################################################################
  *     #                                            *** COPY ***
  *     def copy(self, compress=True):             # <<<<<<<<<<<<<<
@@ -3412,7 +3635,7 @@ static PyObject *__pyx_pw_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixVie
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "copy") < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 154; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "copy") < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 155; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -3425,7 +3648,7 @@ static PyObject *__pyx_pw_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixVie
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("copy", 0, 0, 1, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[1]; __pyx_lineno = 154; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("copy", 0, 0, 1, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[1]; __pyx_lineno = 155; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("sparse_lib.sparse.ll_mat_view.LLSparseMatrixView.copy", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -3439,11 +3662,11 @@ static PyObject *__pyx_pw_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixVie
 }
 
 static PyObject *__pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_8copy(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *__pyx_v_self, PyObject *__pyx_v_compress) {
-  int __pyx_v_size_hint;
+  __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_size_hint;
   double __pyx_v_val;
   struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *__pyx_v_A_copy = 0;
-  int __pyx_v_i;
-  int __pyx_v_row_index;
+  __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_i;
+  __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_row_index;
   long __pyx_v_j;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -3451,45 +3674,47 @@ static PyObject *__pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixVie
   int __pyx_t_2;
   PyObject *__pyx_t_3 = NULL;
   PyObject *__pyx_t_4 = NULL;
-  int __pyx_t_5;
+  __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_t_5;
   int __pyx_t_6;
   int __pyx_t_7;
-  PyObject *__pyx_t_8 = NULL;
-  double __pyx_t_9;
+  int __pyx_t_8;
+  __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_t_9;
+  PyObject *__pyx_t_10 = NULL;
+  double __pyx_t_11;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("copy", 0);
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":166
+  /* "sparse_lib/sparse/ll_mat_view.pyx":167
  * 
  *         """
  *         self.assert_status_ok()             # <<<<<<<<<<<<<<
  * 
- *         cdef int size_hint
+ *         cdef INT_t size_hint
  */
-  __pyx_t_1 = ((struct __pyx_vtabstruct_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *)__pyx_v_self->__pyx_vtab)->assert_status_ok(__pyx_v_self); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 166; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = ((struct __pyx_vtabstruct_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *)__pyx_v_self->__pyx_vtab)->assert_status_ok(__pyx_v_self); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 167; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":171
+  /* "sparse_lib/sparse/ll_mat_view.pyx":172
  *         cdef double val
  * 
  *         if compress:             # <<<<<<<<<<<<<<
  *             size_hint = self.count_nnz()
  *         else:
  */
-  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_v_compress); if (unlikely(__pyx_t_2 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 171; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_v_compress); if (unlikely(__pyx_t_2 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 172; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   if (__pyx_t_2) {
 
-    /* "sparse_lib/sparse/ll_mat_view.pyx":172
+    /* "sparse_lib/sparse/ll_mat_view.pyx":173
  * 
  *         if compress:
  *             size_hint = self.count_nnz()             # <<<<<<<<<<<<<<
  *         else:
  *             size_hint = min(self.nrow * self.ncol, self.A.nalloc)
  */
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_count_nnz); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 172; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_count_nnz); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 173; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_t_4 = NULL;
     if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_3))) {
@@ -3502,70 +3727,70 @@ static PyObject *__pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixVie
       }
     }
     if (__pyx_t_4) {
-      __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_4); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 172; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_4); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 173; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     } else {
-      __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 172; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 173; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_5 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_5 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 172; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_5 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 173; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_v_size_hint = __pyx_t_5;
     goto __pyx_L3;
   }
   /*else*/ {
 
-    /* "sparse_lib/sparse/ll_mat_view.pyx":174
+    /* "sparse_lib/sparse/ll_mat_view.pyx":175
  *             size_hint = self.count_nnz()
  *         else:
  *             size_hint = min(self.nrow * self.ncol, self.A.nalloc)             # <<<<<<<<<<<<<<
  * 
  *         cdef LLSparseMatrix A_copy = LLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=size_hint, store_zeros=self.store_zeros)
  */
-    __pyx_t_5 = __pyx_v_self->A->__pyx_base.nalloc;
-    __pyx_t_6 = (__pyx_v_self->nrow * __pyx_v_self->ncol);
-    if (((__pyx_t_5 < __pyx_t_6) != 0)) {
-      __pyx_t_7 = __pyx_t_5;
+    __pyx_t_6 = __pyx_v_self->A->__pyx_base.nalloc;
+    __pyx_t_7 = (__pyx_v_self->nrow * __pyx_v_self->ncol);
+    if (((__pyx_t_6 < __pyx_t_7) != 0)) {
+      __pyx_t_8 = __pyx_t_6;
     } else {
-      __pyx_t_7 = __pyx_t_6;
+      __pyx_t_8 = __pyx_t_7;
     }
-    __pyx_v_size_hint = __pyx_t_7;
+    __pyx_v_size_hint = __pyx_t_8;
   }
   __pyx_L3:;
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":176
+  /* "sparse_lib/sparse/ll_mat_view.pyx":177
  *             size_hint = min(self.nrow * self.ncol, self.A.nalloc)
  * 
  *         cdef LLSparseMatrix A_copy = LLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=size_hint, store_zeros=self.store_zeros)             # <<<<<<<<<<<<<<
  * 
  *         cdef:
  */
-  __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 176; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 177; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_self->nrow); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 176; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_self->nrow); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 177; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_nrow, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 176; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_nrow, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 177; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_self->ncol); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 176; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_self->ncol); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 177; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_ncol, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 176; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_ncol, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 177; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_size_hint); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 176; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_size_hint); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 177; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_size_hint, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 176; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_size_hint, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 177; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyBool_FromLong(__pyx_v_self->store_zeros); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 176; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyBool_FromLong(__pyx_v_self->store_zeros); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 177; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_store_zeros, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 176; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_store_zeros, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 177; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)((PyObject*)__pyx_ptype_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix)), __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 176; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)((PyObject*)__pyx_ptype_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix)), __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 177; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_A_copy = ((struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *)__pyx_t_3);
   __pyx_t_3 = 0;
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":184
+  /* "sparse_lib/sparse/ll_mat_view.pyx":185
  *         # TODO: is this the right thing to do (about store_zeros)?
  *         # TODO: take values immediately with at(i, j)...
  *         if self.store_zeros:             # <<<<<<<<<<<<<<
@@ -3575,17 +3800,17 @@ static PyObject *__pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixVie
   __pyx_t_2 = (__pyx_v_self->store_zeros != 0);
   if (__pyx_t_2) {
 
-    /* "sparse_lib/sparse/ll_mat_view.pyx":185
+    /* "sparse_lib/sparse/ll_mat_view.pyx":186
  *         # TODO: take values immediately with at(i, j)...
  *         if self.store_zeros:
  *             for i from 0 <= i < self.nrow:             # <<<<<<<<<<<<<<
  *                 row_index = self.row_indices[i]
  *                 for j from 0 <= j < self.ncol:
  */
-    __pyx_t_7 = __pyx_v_self->nrow;
-    for (__pyx_v_i = 0; __pyx_v_i < __pyx_t_7; __pyx_v_i++) {
+    __pyx_t_5 = __pyx_v_self->nrow;
+    for (__pyx_v_i = 0; __pyx_v_i < __pyx_t_5; __pyx_v_i++) {
 
-      /* "sparse_lib/sparse/ll_mat_view.pyx":186
+      /* "sparse_lib/sparse/ll_mat_view.pyx":187
  *         if self.store_zeros:
  *             for i from 0 <= i < self.nrow:
  *                 row_index = self.row_indices[i]             # <<<<<<<<<<<<<<
@@ -3594,28 +3819,28 @@ static PyObject *__pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixVie
  */
       __pyx_v_row_index = (__pyx_v_self->row_indices[__pyx_v_i]);
 
-      /* "sparse_lib/sparse/ll_mat_view.pyx":187
+      /* "sparse_lib/sparse/ll_mat_view.pyx":188
  *             for i from 0 <= i < self.nrow:
  *                 row_index = self.row_indices[i]
  *                 for j from 0 <= j < self.ncol:             # <<<<<<<<<<<<<<
  *                     A_copy[i, j] = self.A[row_index, self.col_indices[j]]
  * 
  */
-      __pyx_t_5 = __pyx_v_self->ncol;
-      for (__pyx_v_j = 0; __pyx_v_j < __pyx_t_5; __pyx_v_j++) {
+      __pyx_t_9 = __pyx_v_self->ncol;
+      for (__pyx_v_j = 0; __pyx_v_j < __pyx_t_9; __pyx_v_j++) {
 
-        /* "sparse_lib/sparse/ll_mat_view.pyx":188
+        /* "sparse_lib/sparse/ll_mat_view.pyx":189
  *                 row_index = self.row_indices[i]
  *                 for j from 0 <= j < self.ncol:
  *                     A_copy[i, j] = self.A[row_index, self.col_indices[j]]             # <<<<<<<<<<<<<<
  * 
  *         else:
  */
-        __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_row_index); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 188; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_row_index); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 189; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_3);
-        __pyx_t_1 = __Pyx_PyInt_From_int((__pyx_v_self->col_indices[__pyx_v_j])); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 188; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_1 = __Pyx_PyInt_From_int((__pyx_v_self->col_indices[__pyx_v_j])); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 189; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_1);
-        __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 188; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 189; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_4);
         PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_3);
         __Pyx_GIVEREF(__pyx_t_3);
@@ -3623,23 +3848,23 @@ static PyObject *__pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixVie
         __Pyx_GIVEREF(__pyx_t_1);
         __pyx_t_3 = 0;
         __pyx_t_1 = 0;
-        __pyx_t_1 = PyObject_GetItem(((PyObject *)__pyx_v_self->A), __pyx_t_4); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 188; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+        __pyx_t_1 = PyObject_GetItem(((PyObject *)__pyx_v_self->A), __pyx_t_4); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 189; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-        __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_i); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 188; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_i); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 189; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_4);
-        __pyx_t_3 = __Pyx_PyInt_From_long(__pyx_v_j); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 188; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_3 = __Pyx_PyInt_From_long(__pyx_v_j); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 189; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_3);
-        __pyx_t_8 = PyTuple_New(2); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 188; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __Pyx_GOTREF(__pyx_t_8);
-        PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_4);
+        __pyx_t_10 = PyTuple_New(2); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 189; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_10);
+        PyTuple_SET_ITEM(__pyx_t_10, 0, __pyx_t_4);
         __Pyx_GIVEREF(__pyx_t_4);
-        PyTuple_SET_ITEM(__pyx_t_8, 1, __pyx_t_3);
+        PyTuple_SET_ITEM(__pyx_t_10, 1, __pyx_t_3);
         __Pyx_GIVEREF(__pyx_t_3);
         __pyx_t_4 = 0;
         __pyx_t_3 = 0;
-        if (unlikely(PyObject_SetItem(((PyObject *)__pyx_v_A_copy), __pyx_t_8, __pyx_t_1) < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 188; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+        if (unlikely(PyObject_SetItem(((PyObject *)__pyx_v_A_copy), __pyx_t_10, __pyx_t_1) < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 189; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       }
     }
@@ -3647,17 +3872,17 @@ static PyObject *__pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixVie
   }
   /*else*/ {
 
-    /* "sparse_lib/sparse/ll_mat_view.pyx":191
+    /* "sparse_lib/sparse/ll_mat_view.pyx":192
  * 
  *         else:
  *             for i from 0 <= i < self.nrow:             # <<<<<<<<<<<<<<
  *                 row_index = self.row_indices[i]
  *                 for j from 0 <= j < self.ncol:
  */
-    __pyx_t_7 = __pyx_v_self->nrow;
-    for (__pyx_v_i = 0; __pyx_v_i < __pyx_t_7; __pyx_v_i++) {
+    __pyx_t_5 = __pyx_v_self->nrow;
+    for (__pyx_v_i = 0; __pyx_v_i < __pyx_t_5; __pyx_v_i++) {
 
-      /* "sparse_lib/sparse/ll_mat_view.pyx":192
+      /* "sparse_lib/sparse/ll_mat_view.pyx":193
  *         else:
  *             for i from 0 <= i < self.nrow:
  *                 row_index = self.row_indices[i]             # <<<<<<<<<<<<<<
@@ -3666,43 +3891,43 @@ static PyObject *__pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixVie
  */
       __pyx_v_row_index = (__pyx_v_self->row_indices[__pyx_v_i]);
 
-      /* "sparse_lib/sparse/ll_mat_view.pyx":193
+      /* "sparse_lib/sparse/ll_mat_view.pyx":194
  *             for i from 0 <= i < self.nrow:
  *                 row_index = self.row_indices[i]
  *                 for j from 0 <= j < self.ncol:             # <<<<<<<<<<<<<<
  *                     val = self.A[row_index, self.col_indices[j]]
  *                     if not values_are_equal(val, 0.0):
  */
-      __pyx_t_5 = __pyx_v_self->ncol;
-      for (__pyx_v_j = 0; __pyx_v_j < __pyx_t_5; __pyx_v_j++) {
+      __pyx_t_9 = __pyx_v_self->ncol;
+      for (__pyx_v_j = 0; __pyx_v_j < __pyx_t_9; __pyx_v_j++) {
 
-        /* "sparse_lib/sparse/ll_mat_view.pyx":194
+        /* "sparse_lib/sparse/ll_mat_view.pyx":195
  *                 row_index = self.row_indices[i]
  *                 for j from 0 <= j < self.ncol:
  *                     val = self.A[row_index, self.col_indices[j]]             # <<<<<<<<<<<<<<
  *                     if not values_are_equal(val, 0.0):
  *                         A_copy[i, j] = self.A[row_index, self.col_indices[j]]
  */
-        __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_row_index); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 194; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_row_index); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 195; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_1);
-        __pyx_t_8 = __Pyx_PyInt_From_int((__pyx_v_self->col_indices[__pyx_v_j])); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 194; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __Pyx_GOTREF(__pyx_t_8);
-        __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 194; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_10 = __Pyx_PyInt_From_int((__pyx_v_self->col_indices[__pyx_v_j])); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 195; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_10);
+        __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 195; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_3);
         PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1);
         __Pyx_GIVEREF(__pyx_t_1);
-        PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_8);
-        __Pyx_GIVEREF(__pyx_t_8);
+        PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_10);
+        __Pyx_GIVEREF(__pyx_t_10);
         __pyx_t_1 = 0;
-        __pyx_t_8 = 0;
-        __pyx_t_8 = PyObject_GetItem(((PyObject *)__pyx_v_self->A), __pyx_t_3); if (unlikely(__pyx_t_8 == NULL)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 194; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-        __Pyx_GOTREF(__pyx_t_8);
+        __pyx_t_10 = 0;
+        __pyx_t_10 = PyObject_GetItem(((PyObject *)__pyx_v_self->A), __pyx_t_3); if (unlikely(__pyx_t_10 == NULL)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 195; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+        __Pyx_GOTREF(__pyx_t_10);
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-        __pyx_t_9 = __pyx_PyFloat_AsDouble(__pyx_t_8); if (unlikely((__pyx_t_9 == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 194; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-        __pyx_v_val = __pyx_t_9;
+        __pyx_t_11 = __pyx_PyFloat_AsDouble(__pyx_t_10); if (unlikely((__pyx_t_11 == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 195; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
+        __pyx_v_val = __pyx_t_11;
 
-        /* "sparse_lib/sparse/ll_mat_view.pyx":195
+        /* "sparse_lib/sparse/ll_mat_view.pyx":196
  *                 for j from 0 <= j < self.ncol:
  *                     val = self.A[row_index, self.col_indices[j]]
  *                     if not values_are_equal(val, 0.0):             # <<<<<<<<<<<<<<
@@ -3712,41 +3937,41 @@ static PyObject *__pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixVie
         __pyx_t_2 = ((!(__pyx_f_10sparse_lib_5utils_8equality_values_are_equal(__pyx_v_val, 0.0, 0) != 0)) != 0);
         if (__pyx_t_2) {
 
-          /* "sparse_lib/sparse/ll_mat_view.pyx":196
+          /* "sparse_lib/sparse/ll_mat_view.pyx":197
  *                     val = self.A[row_index, self.col_indices[j]]
  *                     if not values_are_equal(val, 0.0):
  *                         A_copy[i, j] = self.A[row_index, self.col_indices[j]]             # <<<<<<<<<<<<<<
  * 
  *         return A_copy
  */
-          __pyx_t_8 = __Pyx_PyInt_From_int(__pyx_v_row_index); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 196; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          __Pyx_GOTREF(__pyx_t_8);
-          __pyx_t_3 = __Pyx_PyInt_From_int((__pyx_v_self->col_indices[__pyx_v_j])); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 196; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_10 = __Pyx_PyInt_From_int(__pyx_v_row_index); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 197; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __Pyx_GOTREF(__pyx_t_10);
+          __pyx_t_3 = __Pyx_PyInt_From_int((__pyx_v_self->col_indices[__pyx_v_j])); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 197; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_3);
-          __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 196; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 197; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_1);
-          PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_8);
-          __Pyx_GIVEREF(__pyx_t_8);
+          PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_10);
+          __Pyx_GIVEREF(__pyx_t_10);
           PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_t_3);
           __Pyx_GIVEREF(__pyx_t_3);
-          __pyx_t_8 = 0;
+          __pyx_t_10 = 0;
           __pyx_t_3 = 0;
-          __pyx_t_3 = PyObject_GetItem(((PyObject *)__pyx_v_self->A), __pyx_t_1); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 196; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+          __pyx_t_3 = PyObject_GetItem(((PyObject *)__pyx_v_self->A), __pyx_t_1); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 197; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
           __Pyx_GOTREF(__pyx_t_3);
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-          __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_i); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 196; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_i); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 197; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_1);
-          __pyx_t_8 = __Pyx_PyInt_From_long(__pyx_v_j); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 196; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          __Pyx_GOTREF(__pyx_t_8);
-          __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 196; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_10 = __Pyx_PyInt_From_long(__pyx_v_j); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 197; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __Pyx_GOTREF(__pyx_t_10);
+          __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 197; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_4);
           PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_1);
           __Pyx_GIVEREF(__pyx_t_1);
-          PyTuple_SET_ITEM(__pyx_t_4, 1, __pyx_t_8);
-          __Pyx_GIVEREF(__pyx_t_8);
+          PyTuple_SET_ITEM(__pyx_t_4, 1, __pyx_t_10);
+          __Pyx_GIVEREF(__pyx_t_10);
           __pyx_t_1 = 0;
-          __pyx_t_8 = 0;
-          if (unlikely(PyObject_SetItem(((PyObject *)__pyx_v_A_copy), __pyx_t_4, __pyx_t_3) < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 196; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_10 = 0;
+          if (unlikely(PyObject_SetItem(((PyObject *)__pyx_v_A_copy), __pyx_t_4, __pyx_t_3) < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 197; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
           goto __pyx_L13;
@@ -3757,7 +3982,7 @@ static PyObject *__pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixVie
   }
   __pyx_L4:;
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":198
+  /* "sparse_lib/sparse/ll_mat_view.pyx":199
  *                         A_copy[i, j] = self.A[row_index, self.col_indices[j]]
  * 
  *         return A_copy             # <<<<<<<<<<<<<<
@@ -3769,7 +3994,7 @@ static PyObject *__pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixVie
   __pyx_r = ((PyObject *)__pyx_v_A_copy);
   goto __pyx_L0;
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":154
+  /* "sparse_lib/sparse/ll_mat_view.pyx":155
  *     ####################################################################################################################
  *     #                                            *** COPY ***
  *     def copy(self, compress=True):             # <<<<<<<<<<<<<<
@@ -3782,7 +4007,7 @@ static PyObject *__pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixVie
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_4);
-  __Pyx_XDECREF(__pyx_t_8);
+  __Pyx_XDECREF(__pyx_t_10);
   __Pyx_AddTraceback("sparse_lib.sparse.ll_mat_view.LLSparseMatrixView.copy", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
@@ -3792,7 +4017,7 @@ static PyObject *__pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixVie
   return __pyx_r;
 }
 
-/* "sparse_lib/sparse/ll_mat_view.pyx":202
+/* "sparse_lib/sparse/ll_mat_view.pyx":203
  *     ####################################################################################################################
  *     #                                            *** elements ***
  *     def get_matrix(self):             # <<<<<<<<<<<<<<
@@ -3819,7 +4044,7 @@ static PyObject *__pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixVie
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("get_matrix", 0);
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":206
+  /* "sparse_lib/sparse/ll_mat_view.pyx":207
  *         Return pointer to original matrix ``A``.
  *         """
  *         return self.A             # <<<<<<<<<<<<<<
@@ -3831,7 +4056,7 @@ static PyObject *__pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixVie
   __pyx_r = ((PyObject *)__pyx_v_self->A);
   goto __pyx_L0;
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":202
+  /* "sparse_lib/sparse/ll_mat_view.pyx":203
  *     ####################################################################################################################
  *     #                                            *** elements ***
  *     def get_matrix(self):             # <<<<<<<<<<<<<<
@@ -3846,7 +4071,7 @@ static PyObject *__pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixVie
   return __pyx_r;
 }
 
-/* "sparse_lib/sparse/ll_mat_view.pyx":211
+/* "sparse_lib/sparse/ll_mat_view.pyx":212
  *     # Multiplication
  *     ####################################################################################################################
  *     def __mul__(self, B):             # <<<<<<<<<<<<<<
@@ -3878,7 +4103,7 @@ static PyObject *__pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixVie
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__mul__", 0);
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":214
+  /* "sparse_lib/sparse/ll_mat_view.pyx":215
  *         # TODO: optimize all this: this implementation is horrible!
  *         # TODO: find common code to refactor to apply the DRY principle
  *         return self.copy() * B  # <-- Both (A either LLSparseMatrix or LLSparseMatrixView) A * B should be implemented with the same common function             # <<<<<<<<<<<<<<
@@ -3886,7 +4111,7 @@ static PyObject *__pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixVie
  *         ## CASES
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_copy); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 214; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_copy); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 215; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_2))) {
@@ -3899,21 +4124,21 @@ static PyObject *__pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixVie
     }
   }
   if (__pyx_t_3) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 214; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 215; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   } else {
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 214; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 215; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyNumber_Multiply(__pyx_t_1, __pyx_v_B); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 214; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyNumber_Multiply(__pyx_t_1, __pyx_v_B); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 215; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":211
+  /* "sparse_lib/sparse/ll_mat_view.pyx":212
  *     # Multiplication
  *     ####################################################################################################################
  *     def __mul__(self, B):             # <<<<<<<<<<<<<<
@@ -3934,7 +4159,7 @@ static PyObject *__pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixVie
   return __pyx_r;
 }
 
-/* "sparse_lib/sparse/ll_mat_view.pyx":223
+/* "sparse_lib/sparse/ll_mat_view.pyx":224
  *         #    return self.copy() * B
  * 
  *     def count_nnz(self):             # <<<<<<<<<<<<<<
@@ -3965,7 +4190,7 @@ static PyObject *__pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixVie
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("count_nnz", 0);
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":224
+  /* "sparse_lib/sparse/ll_mat_view.pyx":225
  * 
  *     def count_nnz(self):
  *         if not self.__counted_nnz:             # <<<<<<<<<<<<<<
@@ -3975,7 +4200,7 @@ static PyObject *__pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixVie
   __pyx_t_1 = ((!(__pyx_v_self->__pyx___counted_nnz != 0)) != 0);
   if (__pyx_t_1) {
 
-    /* "sparse_lib/sparse/ll_mat_view.pyx":225
+    /* "sparse_lib/sparse/ll_mat_view.pyx":226
  *     def count_nnz(self):
  *         if not self.__counted_nnz:
  *             self._nnz = self._count_nnz()             # <<<<<<<<<<<<<<
@@ -3984,7 +4209,7 @@ static PyObject *__pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixVie
  */
     __pyx_v_self->_nnz = ((struct __pyx_vtabstruct_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *)__pyx_v_self->__pyx_vtab)->_count_nnz(__pyx_v_self);
 
-    /* "sparse_lib/sparse/ll_mat_view.pyx":226
+    /* "sparse_lib/sparse/ll_mat_view.pyx":227
  *         if not self.__counted_nnz:
  *             self._nnz = self._count_nnz()
  *             self.__counted_nnz = True             # <<<<<<<<<<<<<<
@@ -3996,21 +4221,21 @@ static PyObject *__pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixVie
   }
   __pyx_L3:;
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":228
+  /* "sparse_lib/sparse/ll_mat_view.pyx":229
  *             self.__counted_nnz = True
  * 
  *         return self._nnz             # <<<<<<<<<<<<<<
  * 
- *     cdef int _count_nnz(self):
+ *     cdef INT_t _count_nnz(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_self->_nnz); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 228; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_self->_nnz); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 229; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":223
+  /* "sparse_lib/sparse/ll_mat_view.pyx":224
  *         #    return self.copy() * B
  * 
  *     def count_nnz(self):             # <<<<<<<<<<<<<<
@@ -4029,25 +4254,25 @@ static PyObject *__pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixVie
   return __pyx_r;
 }
 
-/* "sparse_lib/sparse/ll_mat_view.pyx":230
+/* "sparse_lib/sparse/ll_mat_view.pyx":231
  *         return self._nnz
  * 
- *     cdef int _count_nnz(self):             # <<<<<<<<<<<<<<
+ *     cdef INT_t _count_nnz(self):             # <<<<<<<<<<<<<<
  *         """
  *         Count number of non zeros elements.
  */
 
-static int __pyx_f_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView__count_nnz(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *__pyx_v_self) {
-  int __pyx_v_i;
-  int __pyx_v_j;
-  int __pyx_v_row_index;
-  int __pyx_v_nnz;
-  int __pyx_r;
+static __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_f_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView__count_nnz(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *__pyx_v_self) {
+  __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_i;
+  __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_j;
+  __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_row_index;
+  __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_nnz;
+  __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_r;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   int __pyx_t_2;
-  int __pyx_t_3;
-  int __pyx_t_4;
+  __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_t_3;
+  __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_t_4;
   PyObject *__pyx_t_5 = NULL;
   PyObject *__pyx_t_6 = NULL;
   int __pyx_lineno = 0;
@@ -4055,28 +4280,28 @@ static int __pyx_f_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView__coun
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("_count_nnz", 0);
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":238
+  /* "sparse_lib/sparse/ll_mat_view.pyx":239
  *             returns the ``size = nrow * ncol``.
  *         """
  *         self.assert_status_ok()             # <<<<<<<<<<<<<<
  * 
  *         cdef:
  */
-  __pyx_t_1 = ((struct __pyx_vtabstruct_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *)__pyx_v_self->__pyx_vtab)->assert_status_ok(__pyx_v_self); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 238; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = ((struct __pyx_vtabstruct_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *)__pyx_v_self->__pyx_vtab)->assert_status_ok(__pyx_v_self); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 239; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":242
+  /* "sparse_lib/sparse/ll_mat_view.pyx":243
  *         cdef:
- *             int i, j, row_index
- *             int nnz = 0             # <<<<<<<<<<<<<<
+ *             INT_t i, j, row_index
+ *             INT_t nnz = 0             # <<<<<<<<<<<<<<
  * 
  *         if self.store_zeros:
  */
   __pyx_v_nnz = 0;
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":244
- *             int nnz = 0
+  /* "sparse_lib/sparse/ll_mat_view.pyx":245
+ *             INT_t nnz = 0
  * 
  *         if self.store_zeros:             # <<<<<<<<<<<<<<
  *             nnz = self.nrow * self.ncol
@@ -4085,7 +4310,7 @@ static int __pyx_f_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView__coun
   __pyx_t_2 = (__pyx_v_self->store_zeros != 0);
   if (__pyx_t_2) {
 
-    /* "sparse_lib/sparse/ll_mat_view.pyx":245
+    /* "sparse_lib/sparse/ll_mat_view.pyx":246
  * 
  *         if self.store_zeros:
  *             nnz = self.nrow * self.ncol             # <<<<<<<<<<<<<<
@@ -4097,7 +4322,7 @@ static int __pyx_f_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView__coun
   }
   /*else*/ {
 
-    /* "sparse_lib/sparse/ll_mat_view.pyx":247
+    /* "sparse_lib/sparse/ll_mat_view.pyx":248
  *             nnz = self.nrow * self.ncol
  *         else:
  *             for i from 0 <= i < self.nrow:             # <<<<<<<<<<<<<<
@@ -4107,7 +4332,7 @@ static int __pyx_f_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView__coun
     __pyx_t_3 = __pyx_v_self->nrow;
     for (__pyx_v_i = 0; __pyx_v_i < __pyx_t_3; __pyx_v_i++) {
 
-      /* "sparse_lib/sparse/ll_mat_view.pyx":248
+      /* "sparse_lib/sparse/ll_mat_view.pyx":249
  *         else:
  *             for i from 0 <= i < self.nrow:
  *                 row_index = self.row_indices[i]             # <<<<<<<<<<<<<<
@@ -4116,7 +4341,7 @@ static int __pyx_f_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView__coun
  */
       __pyx_v_row_index = (__pyx_v_self->row_indices[__pyx_v_i]);
 
-      /* "sparse_lib/sparse/ll_mat_view.pyx":249
+      /* "sparse_lib/sparse/ll_mat_view.pyx":250
  *             for i from 0 <= i < self.nrow:
  *                 row_index = self.row_indices[i]
  *                 for j from 0 <= j < self.ncol:             # <<<<<<<<<<<<<<
@@ -4126,18 +4351,18 @@ static int __pyx_f_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView__coun
       __pyx_t_4 = __pyx_v_self->ncol;
       for (__pyx_v_j = 0; __pyx_v_j < __pyx_t_4; __pyx_v_j++) {
 
-        /* "sparse_lib/sparse/ll_mat_view.pyx":250
+        /* "sparse_lib/sparse/ll_mat_view.pyx":251
  *                 row_index = self.row_indices[i]
  *                 for j from 0 <= j < self.ncol:
  *                     if self.A[row_index, self.col_indices[j]] != 0.0:             # <<<<<<<<<<<<<<
  *                         nnz += 1
  * 
  */
-        __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_row_index); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 250; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_row_index); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 251; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_1);
-        __pyx_t_5 = __Pyx_PyInt_From_int((__pyx_v_self->col_indices[__pyx_v_j])); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 250; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_5 = __Pyx_PyInt_From_int((__pyx_v_self->col_indices[__pyx_v_j])); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 251; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_5);
-        __pyx_t_6 = PyTuple_New(2); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 250; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_6 = PyTuple_New(2); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 251; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_6);
         PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_1);
         __Pyx_GIVEREF(__pyx_t_1);
@@ -4145,16 +4370,16 @@ static int __pyx_f_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView__coun
         __Pyx_GIVEREF(__pyx_t_5);
         __pyx_t_1 = 0;
         __pyx_t_5 = 0;
-        __pyx_t_5 = PyObject_GetItem(((PyObject *)__pyx_v_self->A), __pyx_t_6); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 250; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+        __pyx_t_5 = PyObject_GetItem(((PyObject *)__pyx_v_self->A), __pyx_t_6); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 251; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
         __Pyx_GOTREF(__pyx_t_5);
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-        __pyx_t_6 = PyObject_RichCompare(__pyx_t_5, __pyx_float_0_0, Py_NE); __Pyx_XGOTREF(__pyx_t_6); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 250; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_6 = PyObject_RichCompare(__pyx_t_5, __pyx_float_0_0, Py_NE); __Pyx_XGOTREF(__pyx_t_6); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 251; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-        __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_6); if (unlikely(__pyx_t_2 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 250; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_6); if (unlikely(__pyx_t_2 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 251; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
         if (__pyx_t_2) {
 
-          /* "sparse_lib/sparse/ll_mat_view.pyx":251
+          /* "sparse_lib/sparse/ll_mat_view.pyx":252
  *                 for j from 0 <= j < self.ncol:
  *                     if self.A[row_index, self.col_indices[j]] != 0.0:
  *                         nnz += 1             # <<<<<<<<<<<<<<
@@ -4170,7 +4395,7 @@ static int __pyx_f_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView__coun
   }
   __pyx_L3:;
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":253
+  /* "sparse_lib/sparse/ll_mat_view.pyx":254
  *                         nnz += 1
  * 
  *         return nnz             # <<<<<<<<<<<<<<
@@ -4180,10 +4405,10 @@ static int __pyx_f_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView__coun
   __pyx_r = __pyx_v_nnz;
   goto __pyx_L0;
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":230
+  /* "sparse_lib/sparse/ll_mat_view.pyx":231
  *         return self._nnz
  * 
- *     cdef int _count_nnz(self):             # <<<<<<<<<<<<<<
+ *     cdef INT_t _count_nnz(self):             # <<<<<<<<<<<<<<
  *         """
  *         Count number of non zeros elements.
  */
@@ -4200,7 +4425,7 @@ static int __pyx_f_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView__coun
   return __pyx_r;
 }
 
-/* "sparse_lib/sparse/ll_mat_view.pyx":258
+/* "sparse_lib/sparse/ll_mat_view.pyx":259
  *     # String representations
  *     ####################################################################################################################
  *     def __repr__(self):             # <<<<<<<<<<<<<<
@@ -4233,18 +4458,18 @@ static PyObject *__pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixVie
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__repr__", 0);
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":259
+  /* "sparse_lib/sparse/ll_mat_view.pyx":260
  *     ####################################################################################################################
  *     def __repr__(self):
  *         s = "LLSparseMatrixView of size %d by %d with %d non zero values" % (self.nrow, self.ncol, self.nnz)             # <<<<<<<<<<<<<<
  *         return s
  * 
  */
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->nrow); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 259; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->nrow); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 260; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_self->ncol); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 259; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_self->ncol); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 260; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyTuple_New(3); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 259; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = PyTuple_New(3); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 260; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_1);
@@ -4255,13 +4480,13 @@ static PyObject *__pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixVie
   __Pyx_GIVEREF(__pyx_v_self->nnz);
   __pyx_t_1 = 0;
   __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyString_Format(__pyx_kp_s_LLSparseMatrixView_of_size_d_by, __pyx_t_3); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 259; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyString_Format(__pyx_kp_s_LLSparseMatrixView_of_size_d_by, __pyx_t_3); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 260; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_v_s = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":260
+  /* "sparse_lib/sparse/ll_mat_view.pyx":261
  *     def __repr__(self):
  *         s = "LLSparseMatrixView of size %d by %d with %d non zero values" % (self.nrow, self.ncol, self.nnz)
  *         return s             # <<<<<<<<<<<<<<
@@ -4273,7 +4498,7 @@ static PyObject *__pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixVie
   __pyx_r = __pyx_v_s;
   goto __pyx_L0;
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":258
+  /* "sparse_lib/sparse/ll_mat_view.pyx":259
  *     # String representations
  *     ####################################################################################################################
  *     def __repr__(self):             # <<<<<<<<<<<<<<
@@ -4295,11 +4520,11 @@ static PyObject *__pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixVie
   return __pyx_r;
 }
 
-/* "sparse_lib/sparse/ll_mat_view.pxd":12
+/* "sparse_lib/sparse/ll_mat_view.pxd":13
  * cdef class LLSparseMatrixView:
  *     cdef:
- *         public int nrow    # number of rows of the collected view             # <<<<<<<<<<<<<<
- *         public int ncol    # number of columns of the collected view
+ *         public INT_t nrow    # number of rows of the collected view             # <<<<<<<<<<<<<<
+ *         public INT_t ncol    # number of columns of the collected view
  * 
  */
 
@@ -4325,7 +4550,7 @@ static PyObject *__pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixVie
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->nrow); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[2]; __pyx_lineno = 12; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->nrow); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[2]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -4358,12 +4583,12 @@ static int __pyx_pw_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_4nro
 static int __pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_4nrow_2__set__(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *__pyx_v_self, PyObject *__pyx_v_value) {
   int __pyx_r;
   __Pyx_RefNannyDeclarations
-  int __pyx_t_1;
+  __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_t_1;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__set__", 0);
-  __pyx_t_1 = __Pyx_PyInt_As_int(__pyx_v_value); if (unlikely((__pyx_t_1 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[2]; __pyx_lineno = 12; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyInt_As_int(__pyx_v_value); if (unlikely((__pyx_t_1 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[2]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_v_self->nrow = __pyx_t_1;
 
   /* function exit code */
@@ -4377,10 +4602,10 @@ static int __pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_4nro
   return __pyx_r;
 }
 
-/* "sparse_lib/sparse/ll_mat_view.pxd":13
+/* "sparse_lib/sparse/ll_mat_view.pxd":14
  *     cdef:
- *         public int nrow    # number of rows of the collected view
- *         public int ncol    # number of columns of the collected view             # <<<<<<<<<<<<<<
+ *         public INT_t nrow    # number of rows of the collected view
+ *         public INT_t ncol    # number of columns of the collected view             # <<<<<<<<<<<<<<
  * 
  *         public bint is_empty  # view is empty, probably constructed with bad index objects
  */
@@ -4407,7 +4632,7 @@ static PyObject *__pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixVie
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->ncol); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[2]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->ncol); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[2]; __pyx_lineno = 14; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -4440,12 +4665,12 @@ static int __pyx_pw_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_4nco
 static int __pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_4ncol_2__set__(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *__pyx_v_self, PyObject *__pyx_v_value) {
   int __pyx_r;
   __Pyx_RefNannyDeclarations
-  int __pyx_t_1;
+  __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_t_1;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__set__", 0);
-  __pyx_t_1 = __Pyx_PyInt_As_int(__pyx_v_value); if (unlikely((__pyx_t_1 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[2]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyInt_As_int(__pyx_v_value); if (unlikely((__pyx_t_1 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[2]; __pyx_lineno = 14; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_v_self->ncol = __pyx_t_1;
 
   /* function exit code */
@@ -4459,12 +4684,12 @@ static int __pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_4nco
   return __pyx_r;
 }
 
-/* "sparse_lib/sparse/ll_mat_view.pxd":15
- *         public int ncol    # number of columns of the collected view
+/* "sparse_lib/sparse/ll_mat_view.pxd":16
+ *         public INT_t ncol    # number of columns of the collected view
  * 
  *         public bint is_empty  # view is empty, probably constructed with bad index objects             # <<<<<<<<<<<<<<
  * 
- *         int * row_indices  # collected row indices
+ *         INT_t * row_indices  # collected row indices
  */
 
 /* Python wrapper */
@@ -4489,7 +4714,7 @@ static PyObject *__pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixVie
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_v_self->is_empty); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[2]; __pyx_lineno = 15; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_v_self->is_empty); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[2]; __pyx_lineno = 16; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -4527,7 +4752,7 @@ static int __pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_8is_
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__set__", 0);
-  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_v_value); if (unlikely((__pyx_t_1 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[2]; __pyx_lineno = 15; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_v_value); if (unlikely((__pyx_t_1 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[2]; __pyx_lineno = 16; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_v_self->is_empty = __pyx_t_1;
 
   /* function exit code */
@@ -4541,7 +4766,7 @@ static int __pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_8is_
   return __pyx_r;
 }
 
-/* "sparse_lib/sparse/ll_mat_view.pxd":24
+/* "sparse_lib/sparse/ll_mat_view.pxd":25
  *         bint __status_ok
  * 
  *         public bint is_symmetric             # <<<<<<<<<<<<<<
@@ -4571,7 +4796,7 @@ static PyObject *__pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixVie
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_v_self->is_symmetric); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[2]; __pyx_lineno = 24; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_v_self->is_symmetric); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[2]; __pyx_lineno = 25; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -4609,7 +4834,7 @@ static int __pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_12is
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__set__", 0);
-  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_v_value); if (unlikely((__pyx_t_1 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[2]; __pyx_lineno = 24; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_v_value); if (unlikely((__pyx_t_1 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[2]; __pyx_lineno = 25; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_v_self->is_symmetric = __pyx_t_1;
 
   /* function exit code */
@@ -4623,7 +4848,7 @@ static int __pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_12is
   return __pyx_r;
 }
 
-/* "sparse_lib/sparse/ll_mat_view.pxd":25
+/* "sparse_lib/sparse/ll_mat_view.pxd":26
  * 
  *         public bint is_symmetric
  *         public bint store_zeros             # <<<<<<<<<<<<<<
@@ -4653,7 +4878,7 @@ static PyObject *__pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixVie
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_v_self->store_zeros); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[2]; __pyx_lineno = 25; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_v_self->store_zeros); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[2]; __pyx_lineno = 26; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -4691,7 +4916,7 @@ static int __pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_11st
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__set__", 0);
-  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_v_value); if (unlikely((__pyx_t_1 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[2]; __pyx_lineno = 25; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_v_value); if (unlikely((__pyx_t_1 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[2]; __pyx_lineno = 26; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_v_self->store_zeros = __pyx_t_1;
 
   /* function exit code */
@@ -4705,7 +4930,7 @@ static int __pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_11st
   return __pyx_r;
 }
 
-/* "sparse_lib/sparse/ll_mat_view.pyx":264
+/* "sparse_lib/sparse/ll_mat_view.pyx":265
  * 
  * 
  * cdef LLSparseMatrixView MakeLLSparseMatrixView(LLSparseMatrix A, PyObject* obj1, PyObject* obj2):             # <<<<<<<<<<<<<<
@@ -4714,17 +4939,17 @@ static int __pyx_pf_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_11st
  */
 
 static struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_MakeLLSparseMatrixView(struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *__pyx_v_A, PyObject *__pyx_v_obj1, PyObject *__pyx_v_obj2) {
-  int __pyx_v_nrow;
-  int *__pyx_v_row_indices;
-  int __pyx_v_ncol;
-  int *__pyx_v_col_indices;
-  int __pyx_v_A_nrow;
-  int __pyx_v_A_ncol;
+  __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_nrow;
+  __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_v_row_indices;
+  __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_ncol;
+  __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_v_col_indices;
+  __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_A_nrow;
+  __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_A_ncol;
   struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *__pyx_v_view = 0;
   struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   int __pyx_t_1;
-  int *__pyx_t_2;
+  __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_t_2;
   PyObject *__pyx_t_3 = NULL;
   PyObject *__pyx_t_4 = NULL;
   PyObject *__pyx_t_5 = NULL;
@@ -4735,58 +4960,58 @@ static struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("MakeLLSparseMatrixView", 0);
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":300
- *         int ncol
- *         int * col_indices
- *         int A_nrow = A.nrow             # <<<<<<<<<<<<<<
- *         int A_ncol = A.ncol
+  /* "sparse_lib/sparse/ll_mat_view.pyx":301
+ *         INT_t ncol
+ *         INT_t * col_indices
+ *         INT_t A_nrow = A.nrow             # <<<<<<<<<<<<<<
+ *         INT_t A_ncol = A.ncol
  * 
  */
   __pyx_t_1 = __pyx_v_A->__pyx_base.__pyx_base.nrow;
   __pyx_v_A_nrow = __pyx_t_1;
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":301
- *         int * col_indices
- *         int A_nrow = A.nrow
- *         int A_ncol = A.ncol             # <<<<<<<<<<<<<<
+  /* "sparse_lib/sparse/ll_mat_view.pyx":302
+ *         INT_t * col_indices
+ *         INT_t A_nrow = A.nrow
+ *         INT_t A_ncol = A.ncol             # <<<<<<<<<<<<<<
  * 
  *     row_indices = create_c_array_indices_from_python_object(A_nrow, obj1, &nrow)
  */
   __pyx_t_1 = __pyx_v_A->__pyx_base.__pyx_base.ncol;
   __pyx_v_A_ncol = __pyx_t_1;
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":303
- *         int A_ncol = A.ncol
+  /* "sparse_lib/sparse/ll_mat_view.pyx":304
+ *         INT_t A_ncol = A.ncol
  * 
  *     row_indices = create_c_array_indices_from_python_object(A_nrow, obj1, &nrow)             # <<<<<<<<<<<<<<
  *     col_indices = create_c_array_indices_from_python_object(A_ncol, obj2, &ncol)
  * 
  */
-  __pyx_t_2 = __pyx_f_10sparse_lib_6sparse_11ll_mat_view_create_c_array_indices_from_python_object(__pyx_v_A_nrow, __pyx_v_obj1, (&__pyx_v_nrow)); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 303; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __pyx_f_10sparse_lib_6sparse_11ll_mat_view_create_c_array_indices_from_python_object(__pyx_v_A_nrow, __pyx_v_obj1, (&__pyx_v_nrow)); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 304; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_v_row_indices = __pyx_t_2;
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":304
+  /* "sparse_lib/sparse/ll_mat_view.pyx":305
  * 
  *     row_indices = create_c_array_indices_from_python_object(A_nrow, obj1, &nrow)
  *     col_indices = create_c_array_indices_from_python_object(A_ncol, obj2, &ncol)             # <<<<<<<<<<<<<<
  * 
  *     cdef LLSparseMatrixView view = LLSparseMatrixView(A, nrow, ncol)
  */
-  __pyx_t_2 = __pyx_f_10sparse_lib_6sparse_11ll_mat_view_create_c_array_indices_from_python_object(__pyx_v_A_ncol, __pyx_v_obj2, (&__pyx_v_ncol)); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 304; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __pyx_f_10sparse_lib_6sparse_11ll_mat_view_create_c_array_indices_from_python_object(__pyx_v_A_ncol, __pyx_v_obj2, (&__pyx_v_ncol)); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 305; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_v_col_indices = __pyx_t_2;
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":306
+  /* "sparse_lib/sparse/ll_mat_view.pyx":307
  *     col_indices = create_c_array_indices_from_python_object(A_ncol, obj2, &ncol)
  * 
  *     cdef LLSparseMatrixView view = LLSparseMatrixView(A, nrow, ncol)             # <<<<<<<<<<<<<<
  *     view.row_indices = row_indices
  *     view.col_indices = col_indices
  */
-  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_nrow); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 306; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_nrow); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 307; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_ncol); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 306; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_ncol); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 307; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = PyTuple_New(3); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 306; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = PyTuple_New(3); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 307; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_INCREF(((PyObject *)__pyx_v_A));
   PyTuple_SET_ITEM(__pyx_t_5, 0, ((PyObject *)__pyx_v_A));
@@ -4797,13 +5022,13 @@ static struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *_
   __Pyx_GIVEREF(__pyx_t_4);
   __pyx_t_3 = 0;
   __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_PyObject_Call(((PyObject *)((PyObject*)__pyx_ptype_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView)), __pyx_t_5, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 306; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyObject_Call(((PyObject *)((PyObject*)__pyx_ptype_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView)), __pyx_t_5, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 307; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_v_view = ((struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *)__pyx_t_4);
   __pyx_t_4 = 0;
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":307
+  /* "sparse_lib/sparse/ll_mat_view.pyx":308
  * 
  *     cdef LLSparseMatrixView view = LLSparseMatrixView(A, nrow, ncol)
  *     view.row_indices = row_indices             # <<<<<<<<<<<<<<
@@ -4812,7 +5037,7 @@ static struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *_
  */
   __pyx_v_view->row_indices = __pyx_v_row_indices;
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":308
+  /* "sparse_lib/sparse/ll_mat_view.pyx":309
  *     cdef LLSparseMatrixView view = LLSparseMatrixView(A, nrow, ncol)
  *     view.row_indices = row_indices
  *     view.col_indices = col_indices             # <<<<<<<<<<<<<<
@@ -4821,7 +5046,7 @@ static struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *_
  */
   __pyx_v_view->col_indices = __pyx_v_col_indices;
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":310
+  /* "sparse_lib/sparse/ll_mat_view.pyx":311
  *     view.col_indices = col_indices
  * 
  *     if nrow == 0 or ncol == 0:             # <<<<<<<<<<<<<<
@@ -4839,7 +5064,7 @@ static struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *_
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_6) {
 
-    /* "sparse_lib/sparse/ll_mat_view.pyx":311
+    /* "sparse_lib/sparse/ll_mat_view.pyx":312
  * 
  *     if nrow == 0 or ncol == 0:
  *         view.is_empty = True             # <<<<<<<<<<<<<<
@@ -4851,7 +5076,7 @@ static struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *_
   }
   /*else*/ {
 
-    /* "sparse_lib/sparse/ll_mat_view.pyx":313
+    /* "sparse_lib/sparse/ll_mat_view.pyx":314
  *         view.is_empty = True
  *     else:
  *         view.is_empty = False             # <<<<<<<<<<<<<<
@@ -4862,7 +5087,7 @@ static struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *_
   }
   __pyx_L3:;
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":315
+  /* "sparse_lib/sparse/ll_mat_view.pyx":316
  *         view.is_empty = False
  * 
  *     view.__status_ok = True             # <<<<<<<<<<<<<<
@@ -4871,7 +5096,7 @@ static struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *_
  */
   __pyx_v_view->__pyx___status_ok = 1;
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":317
+  /* "sparse_lib/sparse/ll_mat_view.pyx":318
  *     view.__status_ok = True
  * 
  *     return view             # <<<<<<<<<<<<<<
@@ -4883,7 +5108,7 @@ static struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *_
   __pyx_r = __pyx_v_view;
   goto __pyx_L0;
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":264
+  /* "sparse_lib/sparse/ll_mat_view.pyx":265
  * 
  * 
  * cdef LLSparseMatrixView MakeLLSparseMatrixView(LLSparseMatrix A, PyObject* obj1, PyObject* obj2):             # <<<<<<<<<<<<<<
@@ -4905,7 +5130,7 @@ static struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *_
   return __pyx_r;
 }
 
-/* "sparse_lib/sparse/ll_mat_view.pyx":320
+/* "sparse_lib/sparse/ll_mat_view.pyx":321
  * 
  * 
  * cdef LLSparseMatrixView MakeLLSparseMatrixViewFromView(LLSparseMatrixView A, PyObject* obj1, PyObject* obj2):             # <<<<<<<<<<<<<<
@@ -4914,21 +5139,21 @@ static struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *_
  */
 
 static struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_MakeLLSparseMatrixViewFromView(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *__pyx_v_A, PyObject *__pyx_v_obj1, PyObject *__pyx_v_obj2) {
-  int __pyx_v_nrow;
-  int *__pyx_v_row_indices;
-  int __pyx_v_ncol;
-  int *__pyx_v_col_indices;
-  int __pyx_v_A_nrow;
-  int __pyx_v_A_ncol;
-  int __pyx_v_i;
-  int __pyx_v_j;
+  __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_nrow;
+  __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_v_row_indices;
+  __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_ncol;
+  __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_v_col_indices;
+  __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_A_nrow;
+  __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_A_ncol;
+  __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_i;
+  __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_j;
   struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *__pyx_v_view = 0;
-  int *__pyx_v_real_row_indices;
-  int *__pyx_v_real_col_indices;
+  __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_v_real_row_indices;
+  __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_v_real_col_indices;
   struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
-  int __pyx_t_1;
-  int *__pyx_t_2;
+  __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_t_1;
+  __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_t_2;
   PyObject *__pyx_t_3 = NULL;
   PyObject *__pyx_t_4 = NULL;
   PyObject *__pyx_t_5 = NULL;
@@ -4939,58 +5164,58 @@ static struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("MakeLLSparseMatrixViewFromView", 0);
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":356
- *         int ncol
- *         int * col_indices
- *         int A_nrow = A.nrow             # <<<<<<<<<<<<<<
- *         int A_ncol = A.ncol
- *         int i, j
+  /* "sparse_lib/sparse/ll_mat_view.pyx":357
+ *         INT_t ncol
+ *         INT_t * col_indices
+ *         INT_t A_nrow = A.nrow             # <<<<<<<<<<<<<<
+ *         INT_t A_ncol = A.ncol
+ *         INT_t i, j
  */
   __pyx_t_1 = __pyx_v_A->nrow;
   __pyx_v_A_nrow = __pyx_t_1;
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":357
- *         int * col_indices
- *         int A_nrow = A.nrow
- *         int A_ncol = A.ncol             # <<<<<<<<<<<<<<
- *         int i, j
+  /* "sparse_lib/sparse/ll_mat_view.pyx":358
+ *         INT_t * col_indices
+ *         INT_t A_nrow = A.nrow
+ *         INT_t A_ncol = A.ncol             # <<<<<<<<<<<<<<
+ *         INT_t i, j
  * 
  */
   __pyx_t_1 = __pyx_v_A->ncol;
   __pyx_v_A_ncol = __pyx_t_1;
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":360
- *         int i, j
+  /* "sparse_lib/sparse/ll_mat_view.pyx":361
+ *         INT_t i, j
  * 
  *     row_indices = create_c_array_indices_from_python_object(A_nrow, obj1, &nrow)             # <<<<<<<<<<<<<<
  *     col_indices = create_c_array_indices_from_python_object(A_ncol, obj2, &ncol)
  * 
  */
-  __pyx_t_2 = __pyx_f_10sparse_lib_6sparse_11ll_mat_view_create_c_array_indices_from_python_object(__pyx_v_A_nrow, __pyx_v_obj1, (&__pyx_v_nrow)); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 360; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __pyx_f_10sparse_lib_6sparse_11ll_mat_view_create_c_array_indices_from_python_object(__pyx_v_A_nrow, __pyx_v_obj1, (&__pyx_v_nrow)); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 361; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_v_row_indices = __pyx_t_2;
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":361
+  /* "sparse_lib/sparse/ll_mat_view.pyx":362
  * 
  *     row_indices = create_c_array_indices_from_python_object(A_nrow, obj1, &nrow)
  *     col_indices = create_c_array_indices_from_python_object(A_ncol, obj2, &ncol)             # <<<<<<<<<<<<<<
  * 
  *     cdef LLSparseMatrixView view = LLSparseMatrixView(A.A, nrow, ncol)
  */
-  __pyx_t_2 = __pyx_f_10sparse_lib_6sparse_11ll_mat_view_create_c_array_indices_from_python_object(__pyx_v_A_ncol, __pyx_v_obj2, (&__pyx_v_ncol)); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 361; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __pyx_f_10sparse_lib_6sparse_11ll_mat_view_create_c_array_indices_from_python_object(__pyx_v_A_ncol, __pyx_v_obj2, (&__pyx_v_ncol)); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 362; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_v_col_indices = __pyx_t_2;
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":363
+  /* "sparse_lib/sparse/ll_mat_view.pyx":364
  *     col_indices = create_c_array_indices_from_python_object(A_ncol, obj2, &ncol)
  * 
  *     cdef LLSparseMatrixView view = LLSparseMatrixView(A.A, nrow, ncol)             # <<<<<<<<<<<<<<
  * 
  *     # construct arrays with adapted indices
  */
-  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_nrow); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 363; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_nrow); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 364; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_ncol); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 363; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_ncol); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 364; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = PyTuple_New(3); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 363; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = PyTuple_New(3); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 364; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_INCREF(((PyObject *)__pyx_v_A->A));
   PyTuple_SET_ITEM(__pyx_t_5, 0, ((PyObject *)__pyx_v_A->A));
@@ -5001,24 +5226,24 @@ static struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *_
   __Pyx_GIVEREF(__pyx_t_4);
   __pyx_t_3 = 0;
   __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_PyObject_Call(((PyObject *)((PyObject*)__pyx_ptype_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView)), __pyx_t_5, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 363; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyObject_Call(((PyObject *)((PyObject*)__pyx_ptype_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView)), __pyx_t_5, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 364; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_v_view = ((struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *)__pyx_t_4);
   __pyx_t_4 = 0;
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":369
- *     cdef int * real_col_indices
+  /* "sparse_lib/sparse/ll_mat_view.pyx":370
+ *     cdef INT_t * real_col_indices
  * 
- *     real_row_indices = <int *> PyMem_Malloc(nrow * sizeof(int))             # <<<<<<<<<<<<<<
+ *     real_row_indices = <INT_t *> PyMem_Malloc(nrow * sizeof(INT_t))             # <<<<<<<<<<<<<<
  *     if not real_row_indices:
  *         raise MemoryError()
  */
-  __pyx_v_real_row_indices = ((int *)PyMem_Malloc((__pyx_v_nrow * (sizeof(int)))));
+  __pyx_v_real_row_indices = ((__pyx_t_10sparse_lib_14cysparse_types_INT_t *)PyMem_Malloc((__pyx_v_nrow * (sizeof(__pyx_t_10sparse_lib_14cysparse_types_INT_t)))));
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":370
+  /* "sparse_lib/sparse/ll_mat_view.pyx":371
  * 
- *     real_row_indices = <int *> PyMem_Malloc(nrow * sizeof(int))
+ *     real_row_indices = <INT_t *> PyMem_Malloc(nrow * sizeof(INT_t))
  *     if not real_row_indices:             # <<<<<<<<<<<<<<
  *         raise MemoryError()
  * 
@@ -5026,28 +5251,28 @@ static struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *_
   __pyx_t_6 = ((!(__pyx_v_real_row_indices != 0)) != 0);
   if (__pyx_t_6) {
 
-    /* "sparse_lib/sparse/ll_mat_view.pyx":371
- *     real_row_indices = <int *> PyMem_Malloc(nrow * sizeof(int))
+    /* "sparse_lib/sparse/ll_mat_view.pyx":372
+ *     real_row_indices = <INT_t *> PyMem_Malloc(nrow * sizeof(INT_t))
  *     if not real_row_indices:
  *         raise MemoryError()             # <<<<<<<<<<<<<<
  * 
- *     real_col_indices = <int *> PyMem_Malloc(ncol * sizeof(int))
+ *     real_col_indices = <INT_t *> PyMem_Malloc(ncol * sizeof(INT_t))
  */
-    PyErr_NoMemory(); {__pyx_filename = __pyx_f[1]; __pyx_lineno = 371; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    PyErr_NoMemory(); {__pyx_filename = __pyx_f[1]; __pyx_lineno = 372; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":373
+  /* "sparse_lib/sparse/ll_mat_view.pyx":374
  *         raise MemoryError()
  * 
- *     real_col_indices = <int *> PyMem_Malloc(ncol * sizeof(int))             # <<<<<<<<<<<<<<
+ *     real_col_indices = <INT_t *> PyMem_Malloc(ncol * sizeof(INT_t))             # <<<<<<<<<<<<<<
  *     if not real_col_indices:
  *         raise MemoryError()
  */
-  __pyx_v_real_col_indices = ((int *)PyMem_Malloc((__pyx_v_ncol * (sizeof(int)))));
+  __pyx_v_real_col_indices = ((__pyx_t_10sparse_lib_14cysparse_types_INT_t *)PyMem_Malloc((__pyx_v_ncol * (sizeof(__pyx_t_10sparse_lib_14cysparse_types_INT_t)))));
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":374
+  /* "sparse_lib/sparse/ll_mat_view.pyx":375
  * 
- *     real_col_indices = <int *> PyMem_Malloc(ncol * sizeof(int))
+ *     real_col_indices = <INT_t *> PyMem_Malloc(ncol * sizeof(INT_t))
  *     if not real_col_indices:             # <<<<<<<<<<<<<<
  *         raise MemoryError()
  * 
@@ -5055,17 +5280,17 @@ static struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *_
   __pyx_t_6 = ((!(__pyx_v_real_col_indices != 0)) != 0);
   if (__pyx_t_6) {
 
-    /* "sparse_lib/sparse/ll_mat_view.pyx":375
- *     real_col_indices = <int *> PyMem_Malloc(ncol * sizeof(int))
+    /* "sparse_lib/sparse/ll_mat_view.pyx":376
+ *     real_col_indices = <INT_t *> PyMem_Malloc(ncol * sizeof(INT_t))
  *     if not real_col_indices:
  *         raise MemoryError()             # <<<<<<<<<<<<<<
  * 
  *     for i from 0 <= i < nrow:
  */
-    PyErr_NoMemory(); {__pyx_filename = __pyx_f[1]; __pyx_lineno = 375; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    PyErr_NoMemory(); {__pyx_filename = __pyx_f[1]; __pyx_lineno = 376; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":377
+  /* "sparse_lib/sparse/ll_mat_view.pyx":378
  *         raise MemoryError()
  * 
  *     for i from 0 <= i < nrow:             # <<<<<<<<<<<<<<
@@ -5075,7 +5300,7 @@ static struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *_
   __pyx_t_1 = __pyx_v_nrow;
   for (__pyx_v_i = 0; __pyx_v_i < __pyx_t_1; __pyx_v_i++) {
 
-    /* "sparse_lib/sparse/ll_mat_view.pyx":378
+    /* "sparse_lib/sparse/ll_mat_view.pyx":379
  * 
  *     for i from 0 <= i < nrow:
  *         real_row_indices[i] = A.row_indices[row_indices[i]]             # <<<<<<<<<<<<<<
@@ -5085,7 +5310,7 @@ static struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *_
     (__pyx_v_real_row_indices[__pyx_v_i]) = (__pyx_v_A->row_indices[(__pyx_v_row_indices[__pyx_v_i])]);
   }
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":380
+  /* "sparse_lib/sparse/ll_mat_view.pyx":381
  *         real_row_indices[i] = A.row_indices[row_indices[i]]
  * 
  *     for j from 0 <= j < ncol:             # <<<<<<<<<<<<<<
@@ -5095,7 +5320,7 @@ static struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *_
   __pyx_t_1 = __pyx_v_ncol;
   for (__pyx_v_j = 0; __pyx_v_j < __pyx_t_1; __pyx_v_j++) {
 
-    /* "sparse_lib/sparse/ll_mat_view.pyx":381
+    /* "sparse_lib/sparse/ll_mat_view.pyx":382
  * 
  *     for j from 0 <= j < ncol:
  *         real_col_indices[j] = A.col_indices[col_indices[j]]             # <<<<<<<<<<<<<<
@@ -5105,7 +5330,7 @@ static struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *_
     (__pyx_v_real_col_indices[__pyx_v_j]) = (__pyx_v_A->col_indices[(__pyx_v_col_indices[__pyx_v_j])]);
   }
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":383
+  /* "sparse_lib/sparse/ll_mat_view.pyx":384
  *         real_col_indices[j] = A.col_indices[col_indices[j]]
  * 
  *     view.row_indices = real_row_indices             # <<<<<<<<<<<<<<
@@ -5114,7 +5339,7 @@ static struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *_
  */
   __pyx_v_view->row_indices = __pyx_v_real_row_indices;
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":384
+  /* "sparse_lib/sparse/ll_mat_view.pyx":385
  * 
  *     view.row_indices = real_row_indices
  *     view.col_indices = real_col_indices             # <<<<<<<<<<<<<<
@@ -5123,7 +5348,7 @@ static struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *_
  */
   __pyx_v_view->col_indices = __pyx_v_real_col_indices;
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":387
+  /* "sparse_lib/sparse/ll_mat_view.pyx":388
  * 
  *     # free non used arrays
  *     PyMem_Free(row_indices)             # <<<<<<<<<<<<<<
@@ -5132,7 +5357,7 @@ static struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *_
  */
   PyMem_Free(__pyx_v_row_indices);
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":388
+  /* "sparse_lib/sparse/ll_mat_view.pyx":389
  *     # free non used arrays
  *     PyMem_Free(row_indices)
  *     PyMem_Free(col_indices)             # <<<<<<<<<<<<<<
@@ -5141,7 +5366,7 @@ static struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *_
  */
   PyMem_Free(__pyx_v_col_indices);
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":390
+  /* "sparse_lib/sparse/ll_mat_view.pyx":391
  *     PyMem_Free(col_indices)
  * 
  *     if nrow == 0 or ncol == 0:             # <<<<<<<<<<<<<<
@@ -5159,7 +5384,7 @@ static struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *_
   __pyx_L10_bool_binop_done:;
   if (__pyx_t_6) {
 
-    /* "sparse_lib/sparse/ll_mat_view.pyx":391
+    /* "sparse_lib/sparse/ll_mat_view.pyx":392
  * 
  *     if nrow == 0 or ncol == 0:
  *         view.is_empty = True             # <<<<<<<<<<<<<<
@@ -5171,7 +5396,7 @@ static struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *_
   }
   /*else*/ {
 
-    /* "sparse_lib/sparse/ll_mat_view.pyx":393
+    /* "sparse_lib/sparse/ll_mat_view.pyx":394
  *         view.is_empty = True
  *     else:
  *         view.is_empty = False             # <<<<<<<<<<<<<<
@@ -5182,7 +5407,7 @@ static struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *_
   }
   __pyx_L9:;
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":395
+  /* "sparse_lib/sparse/ll_mat_view.pyx":396
  *         view.is_empty = False
  * 
  *     view.__status_ok = True             # <<<<<<<<<<<<<<
@@ -5191,7 +5416,7 @@ static struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *_
  */
   __pyx_v_view->__pyx___status_ok = 1;
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":397
+  /* "sparse_lib/sparse/ll_mat_view.pyx":398
  *     view.__status_ok = True
  * 
  *     return view             # <<<<<<<<<<<<<<
@@ -5201,7 +5426,7 @@ static struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *_
   __pyx_r = __pyx_v_view;
   goto __pyx_L0;
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":320
+  /* "sparse_lib/sparse/ll_mat_view.pyx":321
  * 
  * 
  * cdef LLSparseMatrixView MakeLLSparseMatrixViewFromView(LLSparseMatrixView A, PyObject* obj1, PyObject* obj2):             # <<<<<<<<<<<<<<
@@ -7610,12 +7835,12 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, 0, 0, 0, 0, 0, 0}
 };
 static int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_MemoryError = __Pyx_GetBuiltinName(__pyx_n_s_MemoryError); if (!__pyx_builtin_MemoryError) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 105; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_builtin_RuntimeError = __Pyx_GetBuiltinName(__pyx_n_s_RuntimeError); if (!__pyx_builtin_RuntimeError) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 114; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_builtin_IndexError = __Pyx_GetBuiltinName(__pyx_n_s_IndexError); if (!__pyx_builtin_IndexError) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 141; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 145; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 178; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_builtin_NotImplemented = __Pyx_GetBuiltinName(__pyx_n_s_NotImplemented); if (!__pyx_builtin_NotImplemented) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 59; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_builtin_MemoryError = __Pyx_GetBuiltinName(__pyx_n_s_MemoryError); if (!__pyx_builtin_MemoryError) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 107; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_builtin_RuntimeError = __Pyx_GetBuiltinName(__pyx_n_s_RuntimeError); if (!__pyx_builtin_RuntimeError) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 116; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_builtin_IndexError = __Pyx_GetBuiltinName(__pyx_n_s_IndexError); if (!__pyx_builtin_IndexError) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 143; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 147; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 180; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_builtin_NotImplemented = __Pyx_GetBuiltinName(__pyx_n_s_NotImplemented); if (!__pyx_builtin_NotImplemented) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 60; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) {__pyx_filename = __pyx_f[3]; __pyx_lineno = 231; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   return 0;
   __pyx_L1_error:;
@@ -7626,91 +7851,91 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "sparse_lib/sparse/object_index.pxi":114
+  /* "sparse_lib/sparse/object_index.pxi":116
  *         ret = PySlice_GetIndicesEx(<PySliceObject*>obj, max_length, &start, &stop, &step, &length)
  *         if ret:
  *             raise RuntimeError("Slice could not be translated")             # <<<<<<<<<<<<<<
  * 
  *         #print "start, stop, step, length = (%d, %d, %d, %d)" % (start, stop, step, length)
  */
-  __pyx_tuple_ = PyTuple_Pack(1, __pyx_kp_s_Slice_could_not_be_translated); if (unlikely(!__pyx_tuple_)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 114; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple_ = PyTuple_Pack(1, __pyx_kp_s_Slice_could_not_be_translated); if (unlikely(!__pyx_tuple_)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 116; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple_);
   __Pyx_GIVEREF(__pyx_tuple_);
 
-  /* "sparse_lib/sparse/object_index.pxi":145
+  /* "sparse_lib/sparse/object_index.pxi":147
  *             else:
  *                 PyMem_Free(indices)
  *                 raise ValueError("List must only contain integers")             # <<<<<<<<<<<<<<
  * 
  *     #                                            *** numpy array ***
  */
-  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_s_List_must_only_contain_integers); if (unlikely(!__pyx_tuple__2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 145; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_s_List_must_only_contain_integers); if (unlikely(!__pyx_tuple__2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 147; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
 
-  /* "sparse_lib/sparse/object_index.pxi":151
- *         array_dim = <int> PyArray_NDIM(<PyArrayObject *>obj)
+  /* "sparse_lib/sparse/object_index.pxi":153
+ *         array_dim = <INT_t> PyArray_NDIM(<PyArrayObject *>obj)
  *         if array_dim != 1:
  *             raise IndexError("Numpy array must have only one dimension")             # <<<<<<<<<<<<<<
  * 
  *         length = <Py_ssize_t> PyArray_DIM(<PyArrayObject *>obj, 0)
  */
-  __pyx_tuple__3 = PyTuple_Pack(1, __pyx_kp_s_Numpy_array_must_have_only_one_d); if (unlikely(!__pyx_tuple__3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 151; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__3 = PyTuple_Pack(1, __pyx_kp_s_Numpy_array_must_have_only_one_d); if (unlikely(!__pyx_tuple__3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 153; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__3);
   __Pyx_GIVEREF(__pyx_tuple__3);
 
-  /* "sparse_lib/sparse/object_index.pxi":178
+  /* "sparse_lib/sparse/object_index.pxi":180
  * 
  *     else:
  *         raise TypeError("Index object is not recognized to create a LLSparseMatrixView")             # <<<<<<<<<<<<<<
  * 
- *     number_of_elements[0] = <int> length
+ *     number_of_elements[0] = <INT_t> length
  */
-  __pyx_tuple__4 = PyTuple_Pack(1, __pyx_kp_s_Index_object_is_not_recognized_t); if (unlikely(!__pyx_tuple__4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 178; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__4 = PyTuple_Pack(1, __pyx_kp_s_Index_object_is_not_recognized_t); if (unlikely(!__pyx_tuple__4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 180; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__4);
   __Pyx_GIVEREF(__pyx_tuple__4);
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":59
+  /* "sparse_lib/sparse/ll_mat_view.pyx":60
  * 
  *         def __set__(self, value):
  *             raise NotImplemented("nnz is read-only")             # <<<<<<<<<<<<<<
  * 
  *         def __del__(self):
  */
-  __pyx_tuple__5 = PyTuple_Pack(1, __pyx_kp_s_nnz_is_read_only); if (unlikely(!__pyx_tuple__5)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 59; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__5 = PyTuple_Pack(1, __pyx_kp_s_nnz_is_read_only); if (unlikely(!__pyx_tuple__5)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 60; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__5);
   __Pyx_GIVEREF(__pyx_tuple__5);
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":62
+  /* "sparse_lib/sparse/ll_mat_view.pyx":63
  * 
  *         def __del__(self):
  *             raise NotImplemented("nnz is read-only")             # <<<<<<<<<<<<<<
  * 
  *     def __dealloc__(self):
  */
-  __pyx_tuple__6 = PyTuple_Pack(1, __pyx_kp_s_nnz_is_read_only); if (unlikely(!__pyx_tuple__6)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 62; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__6 = PyTuple_Pack(1, __pyx_kp_s_nnz_is_read_only); if (unlikely(!__pyx_tuple__6)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 63; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__6);
   __Pyx_GIVEREF(__pyx_tuple__6);
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":89
+  /* "sparse_lib/sparse/ll_mat_view.pyx":90
  *         """
  *         if i < 0 or i >= self.nrow or j < 0 or j >= self.ncol:
  *             raise IndexError('Indices out of range')             # <<<<<<<<<<<<<<
  * 
  *         self.put(i, j, value)
  */
-  __pyx_tuple__7 = PyTuple_Pack(1, __pyx_kp_s_Indices_out_of_range); if (unlikely(!__pyx_tuple__7)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 89; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__7 = PyTuple_Pack(1, __pyx_kp_s_Indices_out_of_range); if (unlikely(!__pyx_tuple__7)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 90; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__7);
   __Pyx_GIVEREF(__pyx_tuple__7);
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":136
+  /* "sparse_lib/sparse/ll_mat_view.pyx":137
  *         """
  *         if not 0 <= i < self.nrow or not 0 <= j < self.ncol:
  *             raise IndexError("Index out of bounds")             # <<<<<<<<<<<<<<
  * 
  *         return self.at(i, j)
  */
-  __pyx_tuple__8 = PyTuple_Pack(1, __pyx_kp_s_Index_out_of_bounds); if (unlikely(!__pyx_tuple__8)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 136; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__8 = PyTuple_Pack(1, __pyx_kp_s_Index_out_of_bounds); if (unlikely(!__pyx_tuple__8)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 137; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__8);
   __Pyx_GIVEREF(__pyx_tuple__8);
 
@@ -7877,19 +8102,19 @@ PyMODINIT_FUNC PyInit_ll_mat_view(void)
   /*--- Function export code ---*/
   if (__Pyx_ExportFunction("MakeLLSparseMatrixView", (void (*)(void))__pyx_f_10sparse_lib_6sparse_11ll_mat_view_MakeLLSparseMatrixView, "struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *(struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *, PyObject *, PyObject *)") < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   if (__Pyx_ExportFunction("MakeLLSparseMatrixViewFromView", (void (*)(void))__pyx_f_10sparse_lib_6sparse_11ll_mat_view_MakeLLSparseMatrixViewFromView, "struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *, PyObject *, PyObject *)") < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (__Pyx_ExportFunction("create_c_array_indices_from_python_object", (void (*)(void))__pyx_f_10sparse_lib_6sparse_11ll_mat_view_create_c_array_indices_from_python_object, "int *(int, PyObject *, int *)") < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_ExportFunction("create_c_array_indices_from_python_object", (void (*)(void))__pyx_f_10sparse_lib_6sparse_11ll_mat_view_create_c_array_indices_from_python_object, "__pyx_t_10sparse_lib_14cysparse_types_INT_t *(__pyx_t_10sparse_lib_14cysparse_types_INT_t, PyObject *, __pyx_t_10sparse_lib_14cysparse_types_INT_t *)") < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   /*--- Type init code ---*/
   __pyx_vtabptr_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView = &__pyx_vtable_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView;
-  __pyx_vtable_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView._count_nnz = (int (*)(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *))__pyx_f_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView__count_nnz;
+  __pyx_vtable_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView._count_nnz = (__pyx_t_10sparse_lib_14cysparse_types_INT_t (*)(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *))__pyx_f_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView__count_nnz;
   __pyx_vtable_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView.assert_status_ok = (PyObject *(*)(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *))__pyx_f_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_assert_status_ok;
-  __pyx_vtable_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView.at = (PyObject *(*)(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *, int, int))__pyx_f_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_at;
-  __pyx_vtable_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView.safe_at = (PyObject *(*)(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *, int, int))__pyx_f_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_safe_at;
-  __pyx_vtable_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView.put = (PyObject *(*)(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *, int, int, double))__pyx_f_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_put;
-  __pyx_vtable_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView.safe_put = (PyObject *(*)(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *, int, int, double))__pyx_f_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_safe_put;
-  if (PyType_Ready(&__pyx_type_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 29; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_vtable_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView.at = (PyObject *(*)(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *, __pyx_t_10sparse_lib_14cysparse_types_INT_t, __pyx_t_10sparse_lib_14cysparse_types_INT_t))__pyx_f_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_at;
+  __pyx_vtable_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView.safe_at = (PyObject *(*)(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *, __pyx_t_10sparse_lib_14cysparse_types_INT_t, __pyx_t_10sparse_lib_14cysparse_types_INT_t))__pyx_f_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_safe_at;
+  __pyx_vtable_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView.put = (PyObject *(*)(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *, __pyx_t_10sparse_lib_14cysparse_types_INT_t, __pyx_t_10sparse_lib_14cysparse_types_INT_t, double))__pyx_f_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_put;
+  __pyx_vtable_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView.safe_put = (PyObject *(*)(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *, __pyx_t_10sparse_lib_14cysparse_types_INT_t, __pyx_t_10sparse_lib_14cysparse_types_INT_t, double))__pyx_f_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView_safe_put;
+  if (PyType_Ready(&__pyx_type_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 30; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_type_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView.tp_print = 0;
-  if (__Pyx_SetVtable(__pyx_type_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView.tp_dict, __pyx_vtabptr_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 29; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (PyObject_SetAttrString(__pyx_m, "LLSparseMatrixView", (PyObject *)&__pyx_type_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 29; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_SetVtable(__pyx_type_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView.tp_dict, __pyx_vtabptr_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 30; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyObject_SetAttrString(__pyx_m, "LLSparseMatrixView", (PyObject *)&__pyx_type_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 30; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_ptype_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView = &__pyx_type_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView;
   /*--- Type import code ---*/
   __pyx_ptype_10sparse_lib_6sparse_10sparse_mat_SparseMatrix = __Pyx_ImportType("sparse_lib.sparse.sparse_mat", "SparseMatrix", sizeof(struct __pyx_obj_10sparse_lib_6sparse_10sparse_mat_SparseMatrix), 1); if (unlikely(!__pyx_ptype_10sparse_lib_6sparse_10sparse_mat_SparseMatrix)) {__pyx_filename = __pyx_f[4]; __pyx_lineno = 3; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -7909,8 +8134,8 @@ PyMODINIT_FUNC PyInit_ll_mat_view(void)
   __pyx_ptype_5numpy_ufunc = __Pyx_ImportType("numpy", "ufunc", sizeof(PyUFuncObject), 0); if (unlikely(!__pyx_ptype_5numpy_ufunc)) {__pyx_filename = __pyx_f[3]; __pyx_lineno = 864; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_ptype_7cpython_4bool_bool = __Pyx_ImportType(__Pyx_BUILTIN_MODULE_NAME, "bool", sizeof(PyBoolObject), 0); if (unlikely(!__pyx_ptype_7cpython_4bool_bool)) {__pyx_filename = __pyx_f[6]; __pyx_lineno = 8; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_ptype_7cpython_7complex_complex = __Pyx_ImportType(__Pyx_BUILTIN_MODULE_NAME, "complex", sizeof(PyComplexObject), 0); if (unlikely(!__pyx_ptype_7cpython_7complex_complex)) {__pyx_filename = __pyx_f[7]; __pyx_lineno = 15; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_ptype_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix = __Pyx_ImportType("sparse_lib.sparse.ll_mat", "LLSparseMatrix", sizeof(struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix), 1); if (unlikely(!__pyx_ptype_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix)) {__pyx_filename = __pyx_f[8]; __pyx_lineno = 8; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_vtabptr_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix = (struct __pyx_vtabstruct_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix*)__Pyx_GetVtable(__pyx_ptype_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix->tp_dict); if (unlikely(!__pyx_vtabptr_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix)) {__pyx_filename = __pyx_f[8]; __pyx_lineno = 8; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_ptype_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix = __Pyx_ImportType("sparse_lib.sparse.ll_mat", "LLSparseMatrix", sizeof(struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix), 1); if (unlikely(!__pyx_ptype_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix)) {__pyx_filename = __pyx_f[8]; __pyx_lineno = 10; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_vtabptr_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix = (struct __pyx_vtabstruct_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix*)__Pyx_GetVtable(__pyx_ptype_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix->tp_dict); if (unlikely(!__pyx_vtabptr_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix)) {__pyx_filename = __pyx_f[8]; __pyx_lineno = 10; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   /*--- Variable import code ---*/
   /*--- Function import code ---*/
   __pyx_t_1 = __Pyx_ImportModule("sparse_lib.utils.equality"); if (!__pyx_t_1) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -7918,7 +8143,7 @@ PyMODINIT_FUNC PyInit_ll_mat_view(void)
   Py_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   /*--- Execution code ---*/
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":18
+  /* "sparse_lib/sparse/ll_mat_view.pyx":19
  * 
  * cimport numpy as cnp
  * cnp.import_array()             # <<<<<<<<<<<<<<
@@ -7927,16 +8152,16 @@ PyMODINIT_FUNC PyInit_ll_mat_view(void)
  */
   import_array();
 
-  /* "sparse_lib/sparse/ll_mat_view.pyx":20
+  /* "sparse_lib/sparse/ll_mat_view.pyx":21
  * cnp.import_array()
  * 
  * import numpy as np             # <<<<<<<<<<<<<<
  * 
  * cdef extern from "Python.h":
  */
-  __pyx_t_2 = __Pyx_Import(__pyx_n_s_numpy, 0, -1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 20; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_Import(__pyx_n_s_numpy, 0, -1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 21; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_np, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 20; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_np, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 21; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "sparse_lib/sparse/ll_mat_view.pyx":1

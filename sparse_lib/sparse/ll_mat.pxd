@@ -1,3 +1,5 @@
+from sparse_lib.cysparse_types cimport *
+
 from sparse_lib.sparse.sparse_mat cimport MutableSparseMatrix
 from sparse_lib.sparse.ll_mat_view cimport LLSparseMatrixView
 
@@ -16,24 +18,24 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
     # Init/Free/Memory
     ####################################################################################################################
     cdef:
-        int     free      # index to first element in free chain
+        INT_t     free      # index to first element in free chain
         double *val       # pointer to array of values
-        int    *col       # pointer to array of indices, see doc
-        int    *link      # pointer to array of indices, see doc
-        int    *root      # pointer to array of indices, see doc
+        INT_t    *col       # pointer to array of indices, see doc
+        INT_t    *link      # pointer to array of indices, see doc
+        INT_t    *root      # pointer to array of indices, see doc
 
-    cdef _realloc(self, int nalloc_new)
+    cdef _realloc(self, INT_t nalloc_new)
     cdef _realloc_expand(self)
 
     ####################################################################################################################
     # SET/GET
     ####################################################################################################################
-    cdef put(self, int i, int j, double value)
-    cdef safe_put(self, int i, int j, double value)
+    cdef put(self, INT_t i, INT_t j, double value)
+    cdef safe_put(self, INT_t i, INT_t j, double value)
     cdef assign(self, LLSparseMatrixView view, obj)
 
-    cdef at(self, int i, int j)
-    cdef safe_at(self, int i, int j)
+    cdef at(self, INT_t i, INT_t j)
+    cdef safe_at(self, INT_t i, INT_t j)
 
     cdef object _keys(self)
     cdef object _values(self)
@@ -48,7 +50,7 @@ cdef cnp.ndarray[cnp.double_t, ndim=1] multiply_ll_mat_with_numpy_vector(LLSpars
 
 cdef LLSparseMatrix transposed_ll_mat(LLSparseMatrix A)
 
-cdef update_ll_mat_matrix_from_c_arrays_indices_assign(LLSparseMatrix A, int * index_i, Py_ssize_t index_i_length,
-                                                       int * index_j, Py_ssize_t index_j_length, object obj)
+cdef update_ll_mat_matrix_from_c_arrays_indices_assign(LLSparseMatrix A, INT_t * index_i, Py_ssize_t index_i_length,
+                                                       INT_t * index_j, Py_ssize_t index_j_length, object obj)
 
-cdef bint update_ll_mat_item_add(LLSparseMatrix A, int i, int j, double x)
+cdef bint update_ll_mat_item_add(LLSparseMatrix A, INT_t i, INT_t j, double x)

@@ -3,6 +3,7 @@ Lightweight object to view a :class:`LLSparseMatrix`.
 
 
 """
+from sparse_lib.cysparse_types cimport *
 
 # forward declaration
 cdef class LLSparseMatrixView
@@ -27,7 +28,7 @@ cdef extern from "Python.h":
 include "object_index.pxi"
 
 cdef class LLSparseMatrixView:
-    def __cinit__(self, LLSparseMatrix A, int nrow, int ncol):
+    def __cinit__(self, LLSparseMatrix A, INT_t nrow, INT_t ncol):
         self.nrow = nrow  # number of rows of the view
         self.ncol = ncol  # number of columns of the view
 
@@ -75,10 +76,10 @@ cdef class LLSparseMatrixView:
     ####################################################################################################################
     ####################################################################################################################
     #                                            *** SET ***
-    cdef put(self, int i, int j, double value):
+    cdef put(self, INT_t i, INT_t j, double value):
         self.A.put(self.row_indices[i], self.col_indices[j], value)
 
-    cdef safe_put(self, int i, int j, double value):
+    cdef safe_put(self, INT_t i, INT_t j, double value):
         """
         Set ``A_view[i, j] = value`` directly.
 
@@ -102,14 +103,14 @@ cdef class LLSparseMatrixView:
             del view
             return
 
-        cdef int i = key[0]
-        cdef int j = key[1]
+        cdef INT_t i = key[0]
+        cdef INT_t j = key[1]
 
         self.safe_put(i, j, <double> value)
 
     ####################################################################################################################
     #                                            *** GET ***
-    cdef at(self, int i, int j):
+    cdef at(self, INT_t i, INT_t j):
         """
         Return element ``(i, j)``.
 
@@ -120,11 +121,11 @@ cdef class LLSparseMatrixView:
             :meth:`safe_at`.
 
         """
-        cdef int k, t
+        cdef INT_t k, t
 
         return self.A.safe_at(self.row_indices[i], self.col_indices[j])
 
-    cdef safe_at(self, int i, int j):
+    cdef safe_at(self, INT_t i, INT_t j):
         """
         Return element ``(i, j)`` but with check for out of bounds indices.
 
@@ -144,8 +145,8 @@ cdef class LLSparseMatrixView:
         if not PyInt_Check(<PyObject *>key[0]) or not PyInt_Check(<PyObject *>key[1]):
             return MakeLLSparseMatrixViewFromView(self, <PyObject *>key[0], <PyObject *>key[1])
 
-        cdef int i = key[0]
-        cdef int j = key[1]
+        cdef INT_t i = key[0]
+        cdef INT_t j = key[1]
 
         return self.safe_at(i, j)
 
@@ -165,7 +166,7 @@ cdef class LLSparseMatrixView:
         """
         self.assert_status_ok()
 
-        cdef int size_hint
+        cdef INT_t size_hint
         cdef double val
 
         if compress:
@@ -176,8 +177,8 @@ cdef class LLSparseMatrixView:
         cdef LLSparseMatrix A_copy = LLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=size_hint, store_zeros=self.store_zeros)
 
         cdef:
-            int i
-            int row_index
+            INT_t i
+            INT_t row_index
 
         # TODO: is this the right thing to do (about store_zeros)?
         # TODO: take values immediately with at(i, j)...
@@ -227,7 +228,7 @@ cdef class LLSparseMatrixView:
 
         return self._nnz
 
-    cdef int _count_nnz(self):
+    cdef INT_t _count_nnz(self):
         """
         Count number of non zeros elements.
 
@@ -238,8 +239,8 @@ cdef class LLSparseMatrixView:
         self.assert_status_ok()
 
         cdef:
-            int i, j, row_index
-            int nnz = 0
+            INT_t i, j, row_index
+            INT_t nnz = 0
 
         if self.store_zeros:
             nnz = self.nrow * self.ncol
@@ -293,12 +294,12 @@ cdef LLSparseMatrixView MakeLLSparseMatrixView(LLSparseMatrix A, PyObject* obj1,
 
     """
     cdef:
-        int nrow
-        int * row_indices,
-        int ncol
-        int * col_indices
-        int A_nrow = A.nrow
-        int A_ncol = A.ncol
+        INT_t nrow
+        INT_t * row_indices,
+        INT_t ncol
+        INT_t * col_indices
+        INT_t A_nrow = A.nrow
+        INT_t A_ncol = A.ncol
 
     row_indices = create_c_array_indices_from_python_object(A_nrow, obj1, &nrow)
     col_indices = create_c_array_indices_from_python_object(A_ncol, obj2, &ncol)
@@ -349,13 +350,13 @@ cdef LLSparseMatrixView MakeLLSparseMatrixViewFromView(LLSparseMatrixView A, PyO
 
     """
     cdef:
-        int nrow
-        int * row_indices,
-        int ncol
-        int * col_indices
-        int A_nrow = A.nrow
-        int A_ncol = A.ncol
-        int i, j
+        INT_t nrow
+        INT_t * row_indices,
+        INT_t ncol
+        INT_t * col_indices
+        INT_t A_nrow = A.nrow
+        INT_t A_ncol = A.ncol
+        INT_t i, j
 
     row_indices = create_c_array_indices_from_python_object(A_nrow, obj1, &nrow)
     col_indices = create_c_array_indices_from_python_object(A_ncol, obj2, &ncol)
@@ -363,14 +364,14 @@ cdef LLSparseMatrixView MakeLLSparseMatrixViewFromView(LLSparseMatrixView A, PyO
     cdef LLSparseMatrixView view = LLSparseMatrixView(A.A, nrow, ncol)
 
     # construct arrays with adapted indices
-    cdef int * real_row_indices
-    cdef int * real_col_indices
+    cdef INT_t * real_row_indices
+    cdef INT_t * real_col_indices
 
-    real_row_indices = <int *> PyMem_Malloc(nrow * sizeof(int))
+    real_row_indices = <INT_t *> PyMem_Malloc(nrow * sizeof(INT_t))
     if not real_row_indices:
         raise MemoryError()
 
-    real_col_indices = <int *> PyMem_Malloc(ncol * sizeof(int))
+    real_col_indices = <INT_t *> PyMem_Malloc(ncol * sizeof(INT_t))
     if not real_col_indices:
         raise MemoryError()
 
