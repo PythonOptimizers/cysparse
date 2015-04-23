@@ -28,12 +28,17 @@ cdef class LLSparseMatrixView:
         bint __counted_nnz  # did we already count the number of nnz?
         int _nnz     # number of non zeros
 
-    cdef int count_nnz(self)
+    cdef int _count_nnz(self)
     cdef assert_status_ok(self)
+    cdef at(self, int i, int j)
+    cdef safe_at(self, int i, int j)
     cdef put(self, int i, int j, double value)
     cdef safe_put(self, int i, int j, double value)
 
 cdef LLSparseMatrixView MakeLLSparseMatrixView(LLSparseMatrix A, PyObject* obj1, PyObject* obj2)
+
+cdef LLSparseMatrixView MakeLLSparseMatrixViewFromView(LLSparseMatrixView A, PyObject* obj1, PyObject* obj2)
+
 
 cdef int * create_c_array_indices_from_python_object(int length, PyObject * obj, int * number_of_elements) except NULL
 

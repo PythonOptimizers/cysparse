@@ -248,7 +248,6 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         while k != -1:
             col = self.col[k]
             # TODO: check this
-            # TODO: this is ONLY valid if col indices are SORTED... is this always the case???
             if col >= j:
                 break
             last = k
@@ -317,14 +316,8 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         self.put(i, j, value)
 
     cdef assign(self, LLSparseMatrixView view, object obj):
-        # TODO: test validity of view... timestamp? hash?
-        # TODO: how to test if view is still valid? Does the matrix A still exist? did it change meanwhile?
-
         # test if view correspond...
         assert self == view.A
-
-        #print("assignment might be possible")
-
 
         update_ll_mat_matrix_from_c_arrays_indices_assign(self, view.row_indices, view.nrow,
                                                        view.col_indices, view.ncol, obj)
@@ -335,8 +328,6 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         cdef val_length = len(val)
 
         assert index_j_length == index_j_length == val_length, "All lists must be of equal length"
-
-
 
         cdef Py_ssize_t i
 
@@ -357,7 +348,7 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         cdef LLSparseMatrixView view
 
         # test for direct access (i.e. both elements are integers)
-        if not PyInt_Check(<PyObject *>key[0]) or not PyInt_Check(<PyObject *>key[0]):
+        if not PyInt_Check(<PyObject *>key[0]) or not PyInt_Check(<PyObject *>key[1]):
             # TODO: don't create temp object
             view = MakeLLSparseMatrixView(self, <PyObject *>key[0], <PyObject *>key[1])
             self.assign(view, value)
@@ -434,7 +425,7 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         cdef LLSparseMatrixView view
 
         # test for direct access (i.e. both elements are integers)
-        if not PyInt_Check(<PyObject *>key[0]) or not PyInt_Check(<PyObject *>key[0]):
+        if not PyInt_Check(<PyObject *>key[0]) or not PyInt_Check(<PyObject *>key[1]):
             view =  MakeLLSparseMatrixView(self, <PyObject *>key[0], <PyObject *>key[1])
             return view
 

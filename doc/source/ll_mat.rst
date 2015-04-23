@@ -37,6 +37,22 @@ The :class:`LLSparseMatrixView` class
 Views of views
 --------------
 
+It is possible to have views of... views as the following code illustrates:
+
+..  code-block:: python 
+
+    A = MakeLLSparseMatrix(...)
+    A_view1 = A[..., ...]
+    A_view2 = A_view1[..., ...]
+
+The second :class:`LLSparseMatrixView` is **not** a view on a view but a direct view on the original matrix ``A``. The only difference between the two objects ``A_view1`` and ``A_view2`` is that 
+the indices given in the ``[..., ...]`` in ``A_view1[..., ...]`` refer to indices of ``A_view1`` **not** the original matrix ``A``.
+
+An example will clarify this:
+
+..  code-block:: python
+
+    pass
 
 References to the base :class:`LLSparseMatrix`
 ----------------------------------------------

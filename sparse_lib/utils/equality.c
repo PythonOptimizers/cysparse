@@ -814,8 +814,12 @@ struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix {
  */
 
 struct __pyx_vtabstruct_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView {
-  int (*count_nnz)(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *);
+  int (*_count_nnz)(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *);
   PyObject *(*assert_status_ok)(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *);
+  PyObject *(*at)(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *, int, int);
+  PyObject *(*safe_at)(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *, int, int);
+  PyObject *(*put)(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *, int, int, double);
+  PyObject *(*safe_put)(struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *, int, int, double);
 };
 static struct __pyx_vtabstruct_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *__pyx_vtabptr_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView;
 
@@ -1302,8 +1306,8 @@ static PyObject *__pyx_tuple__6;
  * cdef SPARSE_LIB_PRECISION = 0.0001
  * 
  * cpdef bint values_are_equal(double x, double y):             # <<<<<<<<<<<<<<
+ *     # TODO: get rid of this function
  *     return abs(x - y) < SPARSE_LIB_PRECISION
- * 
  */
 
 static PyObject *__pyx_pw_10sparse_lib_5utils_8equality_1values_are_equal(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
@@ -1318,18 +1322,18 @@ static int __pyx_f_10sparse_lib_5utils_8equality_values_are_equal(double __pyx_v
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("values_are_equal", 0);
 
-  /* "sparse_lib/utils/equality.pyx":6
- * 
+  /* "sparse_lib/utils/equality.pyx":7
  * cpdef bint values_are_equal(double x, double y):
+ *     # TODO: get rid of this function
  *     return abs(x - y) < SPARSE_LIB_PRECISION             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_t_1 = PyFloat_FromDouble(fabs((__pyx_v_x - __pyx_v_y))); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 6; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyFloat_FromDouble(fabs((__pyx_v_x - __pyx_v_y))); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 7; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, __pyx_v_10sparse_lib_5utils_8equality_SPARSE_LIB_PRECISION, Py_LT); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 6; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, __pyx_v_10sparse_lib_5utils_8equality_SPARSE_LIB_PRECISION, Py_LT); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 7; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 6; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 7; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_r = __pyx_t_3;
   goto __pyx_L0;
@@ -1338,8 +1342,8 @@ static int __pyx_f_10sparse_lib_5utils_8equality_values_are_equal(double __pyx_v
  * cdef SPARSE_LIB_PRECISION = 0.0001
  * 
  * cpdef bint values_are_equal(double x, double y):             # <<<<<<<<<<<<<<
+ *     # TODO: get rid of this function
  *     return abs(x - y) < SPARSE_LIB_PRECISION
- * 
  */
 
   /* function exit code */
@@ -1440,7 +1444,7 @@ static PyObject *__pyx_pf_10sparse_lib_5utils_8equality_values_are_equal(CYTHON_
   return __pyx_r;
 }
 
-/* "sparse_lib/utils/equality.pyx":9
+/* "sparse_lib/utils/equality.pyx":10
  * 
  * 
  * cpdef bint ll_mats_are_equals(LLSparseMatrix A, LLSparseMatrix B):             # <<<<<<<<<<<<<<
@@ -1468,7 +1472,7 @@ static int __pyx_f_10sparse_lib_5utils_8equality_ll_mats_are_equals(struct __pyx
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("ll_mats_are_equals", 0);
 
-  /* "sparse_lib/utils/equality.pyx":24
+  /* "sparse_lib/utils/equality.pyx":25
  *     """
  *     # test for dimensions
  *     if A.nrow != B.nrow or A.ncol != B.ncol:             # <<<<<<<<<<<<<<
@@ -1486,7 +1490,7 @@ static int __pyx_f_10sparse_lib_5utils_8equality_ll_mats_are_equals(struct __pyx
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_1) {
 
-    /* "sparse_lib/utils/equality.pyx":25
+    /* "sparse_lib/utils/equality.pyx":26
  *     # test for dimensions
  *     if A.nrow != B.nrow or A.ncol != B.ncol:
  *         return 0             # <<<<<<<<<<<<<<
@@ -1497,31 +1501,31 @@ static int __pyx_f_10sparse_lib_5utils_8equality_ll_mats_are_equals(struct __pyx
     goto __pyx_L0;
   }
 
-  /* "sparse_lib/utils/equality.pyx":27
+  /* "sparse_lib/utils/equality.pyx":28
  *         return 0
  * 
  *     cdef nrow = A.nrow             # <<<<<<<<<<<<<<
  *     cdef ncol = A.ncol
  *     cdef int i, j
  */
-  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_A->__pyx_base.__pyx_base.nrow); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 27; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_A->__pyx_base.__pyx_base.nrow); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 28; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_v_nrow = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "sparse_lib/utils/equality.pyx":28
+  /* "sparse_lib/utils/equality.pyx":29
  * 
  *     cdef nrow = A.nrow
  *     cdef ncol = A.ncol             # <<<<<<<<<<<<<<
  *     cdef int i, j
  * 
  */
-  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_A->__pyx_base.__pyx_base.ncol); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 28; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_A->__pyx_base.__pyx_base.ncol); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 29; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_v_ncol = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "sparse_lib/utils/equality.pyx":32
+  /* "sparse_lib/utils/equality.pyx":33
  * 
  *     # test elements
  *     if not A.store_zeros and not B.store_zeros and not A.is_symmetric and not B.is_symmetric:             # <<<<<<<<<<<<<<
@@ -1551,7 +1555,7 @@ static int __pyx_f_10sparse_lib_5utils_8equality_ll_mats_are_equals(struct __pyx
   __pyx_L7_bool_binop_done:;
   if (__pyx_t_1) {
 
-    /* "sparse_lib/utils/equality.pyx":33
+    /* "sparse_lib/utils/equality.pyx":34
  *     # test elements
  *     if not A.store_zeros and not B.store_zeros and not A.is_symmetric and not B.is_symmetric:
  *         if A.nnz != B.nnz:             # <<<<<<<<<<<<<<
@@ -1561,7 +1565,7 @@ static int __pyx_f_10sparse_lib_5utils_8equality_ll_mats_are_equals(struct __pyx
     __pyx_t_1 = ((__pyx_v_A->__pyx_base.__pyx_base.nnz != __pyx_v_B->__pyx_base.__pyx_base.nnz) != 0);
     if (__pyx_t_1) {
 
-      /* "sparse_lib/utils/equality.pyx":34
+      /* "sparse_lib/utils/equality.pyx":35
  *     if not A.store_zeros and not B.store_zeros and not A.is_symmetric and not B.is_symmetric:
  *         if A.nnz != B.nnz:
  *             return 0             # <<<<<<<<<<<<<<
@@ -1575,45 +1579,45 @@ static int __pyx_f_10sparse_lib_5utils_8equality_ll_mats_are_equals(struct __pyx
   }
   __pyx_L6:;
 
-  /* "sparse_lib/utils/equality.pyx":36
+  /* "sparse_lib/utils/equality.pyx":37
  *             return 0
  * 
  *     for i from 0 <= i < nrow:             # <<<<<<<<<<<<<<
  *         for j from 0 <= j < ncol:
  *             if not values_are_equal(A.at(i, j), B.at(i, j)):
  */
-  __pyx_t_4 = __Pyx_PyInt_As_int(__pyx_v_nrow); if (unlikely((__pyx_t_4 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 36; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyInt_As_int(__pyx_v_nrow); if (unlikely((__pyx_t_4 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 37; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   for (__pyx_v_i = 0; __pyx_v_i < __pyx_t_4; __pyx_v_i++) {
 
-    /* "sparse_lib/utils/equality.pyx":37
+    /* "sparse_lib/utils/equality.pyx":38
  * 
  *     for i from 0 <= i < nrow:
  *         for j from 0 <= j < ncol:             # <<<<<<<<<<<<<<
  *             if not values_are_equal(A.at(i, j), B.at(i, j)):
  *                 return 0
  */
-    __pyx_t_5 = __Pyx_PyInt_As_int(__pyx_v_ncol); if (unlikely((__pyx_t_5 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 37; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = __Pyx_PyInt_As_int(__pyx_v_ncol); if (unlikely((__pyx_t_5 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 38; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     for (__pyx_v_j = 0; __pyx_v_j < __pyx_t_5; __pyx_v_j++) {
 
-      /* "sparse_lib/utils/equality.pyx":38
+      /* "sparse_lib/utils/equality.pyx":39
  *     for i from 0 <= i < nrow:
  *         for j from 0 <= j < ncol:
  *             if not values_are_equal(A.at(i, j), B.at(i, j)):             # <<<<<<<<<<<<<<
  *                 return 0
  * 
  */
-      __pyx_t_3 = ((struct __pyx_vtabstruct_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *)__pyx_v_A->__pyx_vtab)->at(__pyx_v_A, __pyx_v_i, __pyx_v_j); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 38; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_3 = ((struct __pyx_vtabstruct_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *)__pyx_v_A->__pyx_vtab)->at(__pyx_v_A, __pyx_v_i, __pyx_v_j); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 39; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_3);
-      __pyx_t_6 = __pyx_PyFloat_AsDouble(__pyx_t_3); if (unlikely((__pyx_t_6 == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 38; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_6 = __pyx_PyFloat_AsDouble(__pyx_t_3); if (unlikely((__pyx_t_6 == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 39; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __pyx_t_3 = ((struct __pyx_vtabstruct_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *)__pyx_v_B->__pyx_vtab)->at(__pyx_v_B, __pyx_v_i, __pyx_v_j); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 38; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_3 = ((struct __pyx_vtabstruct_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *)__pyx_v_B->__pyx_vtab)->at(__pyx_v_B, __pyx_v_i, __pyx_v_j); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 39; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_3);
-      __pyx_t_7 = __pyx_PyFloat_AsDouble(__pyx_t_3); if (unlikely((__pyx_t_7 == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 38; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_7 = __pyx_PyFloat_AsDouble(__pyx_t_3); if (unlikely((__pyx_t_7 == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 39; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __pyx_t_1 = ((!(__pyx_f_10sparse_lib_5utils_8equality_values_are_equal(__pyx_t_6, __pyx_t_7, 0) != 0)) != 0);
       if (__pyx_t_1) {
 
-        /* "sparse_lib/utils/equality.pyx":39
+        /* "sparse_lib/utils/equality.pyx":40
  *         for j from 0 <= j < ncol:
  *             if not values_are_equal(A.at(i, j), B.at(i, j)):
  *                 return 0             # <<<<<<<<<<<<<<
@@ -1626,7 +1630,7 @@ static int __pyx_f_10sparse_lib_5utils_8equality_ll_mats_are_equals(struct __pyx
     }
   }
 
-  /* "sparse_lib/utils/equality.pyx":41
+  /* "sparse_lib/utils/equality.pyx":42
  *                 return 0
  * 
  *     return 1             # <<<<<<<<<<<<<<
@@ -1636,7 +1640,7 @@ static int __pyx_f_10sparse_lib_5utils_8equality_ll_mats_are_equals(struct __pyx
   __pyx_r = 1;
   goto __pyx_L0;
 
-  /* "sparse_lib/utils/equality.pyx":9
+  /* "sparse_lib/utils/equality.pyx":10
  * 
  * 
  * cpdef bint ll_mats_are_equals(LLSparseMatrix A, LLSparseMatrix B):             # <<<<<<<<<<<<<<
@@ -1688,11 +1692,11 @@ static PyObject *__pyx_pw_10sparse_lib_5utils_8equality_3ll_mats_are_equals(PyOb
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_B)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("ll_mats_are_equals", 1, 2, 2, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("ll_mats_are_equals", 1, 2, 2, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 10; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "ll_mats_are_equals") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "ll_mats_are_equals") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 10; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -1705,14 +1709,14 @@ static PyObject *__pyx_pw_10sparse_lib_5utils_8equality_3ll_mats_are_equals(PyOb
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("ll_mats_are_equals", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("ll_mats_are_equals", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 10; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("sparse_lib.utils.equality.ll_mats_are_equals", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_A), __pyx_ptype_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix, 1, "A", 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_B), __pyx_ptype_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix, 1, "B", 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_A), __pyx_ptype_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix, 1, "A", 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 10; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_B), __pyx_ptype_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix, 1, "B", 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 10; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_r = __pyx_pf_10sparse_lib_5utils_8equality_2ll_mats_are_equals(__pyx_self, __pyx_v_A, __pyx_v_B);
 
   /* function exit code */
@@ -1733,7 +1737,7 @@ static PyObject *__pyx_pf_10sparse_lib_5utils_8equality_2ll_mats_are_equals(CYTH
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("ll_mats_are_equals", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_f_10sparse_lib_5utils_8equality_ll_mats_are_equals(__pyx_v_A, __pyx_v_B, 0)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_f_10sparse_lib_5utils_8equality_ll_mats_are_equals(__pyx_v_A, __pyx_v_B, 0)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 10; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;

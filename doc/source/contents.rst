@@ -12,6 +12,7 @@ CySparse documentation
    :maxdepth: 2
 
    introduction
+   installation
    sparse_matrix_formats
    sparse_mat_hierarchy
    ll_mat

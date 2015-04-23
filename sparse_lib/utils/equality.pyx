@@ -3,6 +3,7 @@ from sparse_lib.sparse.ll_mat cimport LLSparseMatrix
 cdef SPARSE_LIB_PRECISION = 0.0001
 
 cpdef bint values_are_equal(double x, double y):
+    # TODO: get rid of this function
     return abs(x - y) < SPARSE_LIB_PRECISION
 
 

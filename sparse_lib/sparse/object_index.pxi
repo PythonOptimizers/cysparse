@@ -97,6 +97,7 @@ cdef int * create_c_array_indices_from_python_object(int max_length, PyObject * 
     ####################################################################################################################
     #                                            *** Integer ***
     if PyInt_Check(obj):
+        # TODO: change this!
         i = <int> PyInt_AS_LONG(obj)
         length = 1
         indices = <int *> PyMem_Malloc(length * sizeof(int))

@@ -41,6 +41,7 @@ cdef class LLSparseMatrixView:
 
         self.__status_ok = False
         self.__counted_nnz = False
+        self._nnz = 0
 
     property nnz:
         # we only count once the non zero elements
@@ -49,6 +50,9 @@ cdef class LLSparseMatrixView:
             if not self.__counted_nnz:
                 # we have to count the nnz
                 self._nnz = self.count_nnz()
+                self.__counted_nnz = True
+
+
 
             return self._nnz
 
@@ -67,7 +71,11 @@ cdef class LLSparseMatrixView:
     cdef assert_status_ok(self):
         assert self.__status_ok, "Create an LLSparseMatrixView only with the factory function MakeLLSparseMatrixView()"
 
-
+    ####################################################################################################################
+    # Set/Get items
+    ####################################################################################################################
+    ####################################################################################################################
+    #                                            *** SET ***
     cdef put(self, int i, int j, double value):
         self.A.put(self.row_indices[i], self.col_indices[j], value)
 
@@ -88,18 +96,62 @@ cdef class LLSparseMatrixView:
             raise IndexError('Index tuple must be of length 2 (not %d)' % len(key))
         # test for direct access (i.e. both elements are integers)
         if not PyInt_Check(<PyObject *>key[0]) or not PyInt_Check(<PyObject *>key[0]):
-            raise NotImplemented("This operation is not allowed for LLSparseMatrixView")
+            # TODO: don't create temp object
+            view = MakeLLSparseMatrixViewFromView(self, <PyObject *>key[0], <PyObject *>key[1])
+            self.A.assign(view, value)
+
+            del view
+            return
 
         cdef int i = key[0]
         cdef int j = key[1]
 
         self.safe_put(i, j, <double> value)
 
+    ####################################################################################################################
+    #                                            *** GET ***
+    cdef at(self, int i, int j):
+        """
+        Return element ``(i, j)``.
 
-    def __getitem__(self, tuple):
-        # TODO: return another view
-        raise NotImplemented("This operation is not allowed for LLSparseMatrixView")
+        Warning:
+            There is not out of bounds test.
 
+        See:
+            :meth:`safe_at`.
+
+        """
+        cdef int k, t
+
+        return self.A.safe_at(self.row_indices[i], self.col_indices[j])
+
+    cdef safe_at(self, int i, int j):
+        """
+        Return element ``(i, j)`` but with check for out of bounds indices.
+
+        Raises:
+            IndexError: when index out of bound.
+
+        """
+        if not 0 <= i < self.nrow or not 0 <= j < self.ncol:
+            raise IndexError("Index out of bounds")
+
+        return self.at(i, j)
+
+    def __getitem__(self, tuple key):
+        if len(key) != 2:
+            raise IndexError('Index tuple must be of length 2 (not %d)' % len(key))
+
+        if not PyInt_Check(<PyObject *>key[0]) or not PyInt_Check(<PyObject *>key[1]):
+            return MakeLLSparseMatrixViewFromView(self, <PyObject *>key[0], <PyObject *>key[1])
+
+        cdef int i = key[0]
+        cdef int j = key[1]
+
+        return self.safe_at(i, j)
+
+    ####################################################################################################################
+    #                                            *** COPY ***
     def copy(self, compress=True):
         """
         Create a new :class:`LLSparseMatrix` from the view and return it.
@@ -146,10 +198,11 @@ cdef class LLSparseMatrixView:
 
         return A_copy
 
+    ####################################################################################################################
+    #                                            *** elements ***
     def get_matrix(self):
         """
         Return pointer to original matrix ``A``.
-        :return:
         """
         return self.A
 
@@ -168,8 +221,14 @@ cdef class LLSparseMatrixView:
         #elif isinstance(B, np.ndarray):
         #    return self.copy() * B
 
+    def count_nnz(self):
+        if not self.__counted_nnz:
+            self._nnz = self._count_nnz()
+            self.__counted_nnz = True
 
-    cdef int count_nnz(self):
+        return self._nnz
+
+    cdef int _count_nnz(self):
         """
         Count number of non zeros elements.
 
@@ -193,6 +252,14 @@ cdef class LLSparseMatrixView:
                         nnz += 1
 
         return nnz
+
+    ####################################################################################################################
+    # String representations
+    ####################################################################################################################
+    def __repr__(self):
+        s = "LLSparseMatrixView of size %d by %d with %d non zero values" % (self.nrow, self.ncol, self.nnz)
+        return s
+
 
 
 cdef LLSparseMatrixView MakeLLSparseMatrixView(LLSparseMatrix A, PyObject* obj1, PyObject* obj2):
@@ -223,7 +290,7 @@ cdef LLSparseMatrixView MakeLLSparseMatrixView(LLSparseMatrix A, PyObject* obj1,
         A corresponding :class:`LLSparseMatrixView`. This view can be empty with the wrong index objects.
 
     Warning:
-        This should be the only way to create a view to a :class:`LLSparseMatrix`.
+        Use only factory functions to create a view to a :class:`LLSparseMatrix`.
 
     """
     cdef:
@@ -251,3 +318,81 @@ cdef LLSparseMatrixView MakeLLSparseMatrixView(LLSparseMatrix A, PyObject* obj1,
     return view
 
 
+cdef LLSparseMatrixView MakeLLSparseMatrixViewFromView(LLSparseMatrixView A, PyObject* obj1, PyObject* obj2):
+    """
+    Factory function to create a new :class:`LLSparseMatrixView` for a :class:`LLSparseMatrixView`.
+
+    Two index objects must be provided. Such objects can be:
+        - an integer;
+        - a list;
+        - a slice;
+        - a numpy array.
+
+    Args:
+        A: A :class:`LLSparseMatrixView` to be *viewed*.
+        obj1: First index object.
+        obj2: Second index object.
+
+    Raises:
+        IndexError:
+            - a variable in the index object is out of bound;
+            - the dimension of a numpy array is not 1;
+        RuntimeError:
+            - a slice can not be interpreted;
+        MemoryError:
+            - there is not enough memory to translate an index object into a C-array of indices.
+
+    Returns:
+        A corresponding :class:`LLSparseMatrixView`. This view can be empty with the wrong index objects.
+
+    Warning:
+        Use only factory functions to create a view to a :class:`LLSparseMatrixView`.
+
+    """
+    cdef:
+        int nrow
+        int * row_indices,
+        int ncol
+        int * col_indices
+        int A_nrow = A.nrow
+        int A_ncol = A.ncol
+        int i, j
+
+    row_indices = create_c_array_indices_from_python_object(A_nrow, obj1, &nrow)
+    col_indices = create_c_array_indices_from_python_object(A_ncol, obj2, &ncol)
+
+    cdef LLSparseMatrixView view = LLSparseMatrixView(A.A, nrow, ncol)
+
+    # construct arrays with adapted indices
+    cdef int * real_row_indices
+    cdef int * real_col_indices
+
+    real_row_indices = <int *> PyMem_Malloc(nrow * sizeof(int))
+    if not real_row_indices:
+        raise MemoryError()
+
+    real_col_indices = <int *> PyMem_Malloc(ncol * sizeof(int))
+    if not real_col_indices:
+        raise MemoryError()
+
+    for i from 0 <= i < nrow:
+        real_row_indices[i] = A.row_indices[row_indices[i]]
+
+    for j from 0 <= j < ncol:
+        real_col_indices[j] = A.col_indices[col_indices[j]]
+
+    view.row_indices = real_row_indices
+    view.col_indices = real_col_indices
+
+    # free non used arrays
+    PyMem_Free(row_indices)
+    PyMem_Free(col_indices)
+
+    if nrow == 0 or ncol == 0:
+        view.is_empty = True
+    else:
+        view.is_empty = False
+
+    view.__status_ok = True
+
+    return view
