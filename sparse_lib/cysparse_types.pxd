@@ -122,3 +122,4 @@ cdef enum:
     FLOAT_t_BIT = sizeof(FLOAT_t) * CHAR_BIT
     SIZE_t_BIT = sizeof(SIZE_t) * CHAR_BIT
     COMPLEX_t_BIT = sizeof(FLOAT_t) * 2 * CHAR_BIT
+
