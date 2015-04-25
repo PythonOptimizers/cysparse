@@ -31,6 +31,10 @@ from cpython cimport PyObject, Py_INCREF
 cdef extern from "Python.h":
     # *** Types ***
     int PyInt_Check(PyObject *o)
+    int PyComplex_Check(PyObject * o)
+    double PyComplex_RealAsDouble(PyObject *op)
+    double PyComplex_ImagAsDouble(PyObject *op)
+
 
 
 cdef INT_t LL_MAT_DEFAULT_SIZE_HINT = 40        # allocated size by default
@@ -244,9 +248,9 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
     ####################################################################################################################
     ####################################################################################################################
     #                                            *** SET ***
-    cdef put(self, INT_t i, INT_t j, FLOAT_t value):
+    cdef put(self, INT_t i, INT_t j, FLOAT_t value, FLOAT_t imaginary = 0.0):
         """
-        Set ``A[i, j] = value`` directly.
+        Set :math:`A[i, j] = \textrm{value}` or :math:`A[i, j] = \textrm{complex}` directly.
 
         Note:
             Store zero elements **only** if ``store_zeros`` is ``True``.
@@ -275,11 +279,12 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
             k = self.link[k]
 
         # Store value
-        #if value != 0.0 or self.store_zeros
-        if self.store_zeros or value != 0.0: #not values_are_equal(value, 0.0):
+        if self.store_zeros or (value != 0.0 or imaginary != 0.0):
             if col == j:
                 # element already exist
                 self.val[k] = value
+                if self.is_complex:
+                    self.ival[k] = imaginary
             else:
                 # new element
                 # find location for new element
@@ -298,6 +303,8 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
                     self._realloc_expand()
 
                 self.val[new_elem] = value
+                if self.is_complex:
+                    self.ival[new_elem] = imaginary
                 self.col[new_elem] = j
                 self.link[new_elem] = k
 
@@ -309,7 +316,8 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
                 self.nnz += 1
 
         else:
-            # value == 0.0: if element exists but we don't store zero elements
+            # value == 0.0 and imaginary == 0.0:
+            # if element exists but we don't store zero elements
             # we need to "zeroify" this element
             if col == j:
                 # relink row i
@@ -325,7 +333,7 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
                 self.nnz -= 1
 
 
-    cdef safe_put(self, INT_t i, INT_t j, FLOAT_t value):
+    cdef safe_put(self, INT_t i, INT_t j, FLOAT_t value, FLOAT_t imaginary = 0.0):
         """
         Set ``A[i, j] = value`` directly.
 
@@ -335,7 +343,7 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         if i < 0 or i >= self.nrow or j < 0 or j >= self.ncol:
             raise IndexError('Indices out of range')
 
-        self.put(i, j, value)
+        self.put(i, j, value, imaginary)
 
     cdef assign(self, LLSparseMatrixView view, object obj):
         # test if view correspond...
@@ -352,9 +360,16 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         assert index_j_length == index_j_length == val_length, "All lists must be of equal length"
 
         cdef Py_ssize_t i
+        cdef PyObject * elem
 
-        for i from 0 <= i < index_i_length:
-            self.safe_put(index_i[i], index_j[i], val[i])
+        if self.is_complex:
+            for i from 0 <= i < index_i_length:
+                elem = <PyObject *> val[i]
+                assert PyComplex_Check(elem), "Complex matrix takes only complex elements"
+                self.safe_put(index_i[i], index_j[i], <FLOAT_t>PyComplex_RealAsDouble(elem), <FLOAT_t>PyComplex_ImagAsDouble(elem))
+        else:
+            for i from 0 <= i < index_i_length:
+                self.safe_put(index_i[i], index_j[i], val[i])
 
     def __setitem__(self, tuple key, value):
         """
@@ -380,6 +395,12 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
 
         cdef INT_t i = key[0]
         cdef INT_t j = key[1]
+
+        if self.is_complex:
+            elem = <PyObject *> value
+            assert PyComplex_Check(elem), "Complex matrix takes only complex ellements"
+            self.safe_put(i, j, <FLOAT_t>PyComplex_RealAsDouble(elem), <FLOAT_t>PyComplex_ImagAsDouble(elem))
+
 
         self.safe_put(i, j, <FLOAT_t> value)
 

@@ -31,8 +31,8 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
     ####################################################################################################################
     # SET/GET
     ####################################################################################################################
-    cdef put(self, INT_t i, INT_t j, FLOAT_t value)
-    cdef safe_put(self, INT_t i, INT_t j, FLOAT_t value)
+    cdef put(self, INT_t i, INT_t j, FLOAT_t value, FLOAT_t imaginary=?)
+    cdef safe_put(self, INT_t i, INT_t j, FLOAT_t value, FLOAT_t imaginary=?)
     cdef assign(self, LLSparseMatrixView view, obj)
 
     cdef at(self, INT_t i, INT_t j)
