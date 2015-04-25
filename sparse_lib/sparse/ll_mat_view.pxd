@@ -1,3 +1,4 @@
+from sparse_lib.cysparse_types cimport *
 
 # forward declaration
 cdef class LLSparseMatrixView
@@ -9,13 +10,13 @@ from cpython cimport PyObject
 
 cdef class LLSparseMatrixView:
     cdef:
-        public int nrow    # number of rows of the collected view
-        public int ncol    # number of columns of the collected view
+        public INT_t nrow    # number of rows of the collected view
+        public INT_t ncol    # number of columns of the collected view
 
         public bint is_empty  # view is empty, probably constructed with bad index objects
 
-        int * row_indices  # collected row indices
-        int * col_indices  # collected col indices
+        INT_t * row_indices  # collected row indices
+        INT_t * col_indices  # collected col indices
 
         LLSparseMatrix A
 
@@ -26,19 +27,19 @@ cdef class LLSparseMatrixView:
 
         object nnz   # number of non zeros elements of the collected view
         bint __counted_nnz  # did we already count the number of nnz?
-        int _nnz     # number of non zeros
+        INT_t _nnz     # number of non zeros
 
-    cdef int _count_nnz(self)
+    cdef INT_t _count_nnz(self)
     cdef assert_status_ok(self)
-    cdef at(self, int i, int j)
-    cdef safe_at(self, int i, int j)
-    cdef put(self, int i, int j, double value)
-    cdef safe_put(self, int i, int j, double value)
+    cdef at(self, INT_t i, INT_t j)
+    cdef safe_at(self, INT_t i, INT_t j)
+    cdef put(self, INT_t i, INT_t j, double value)
+    cdef safe_put(self, INT_t i, INT_t j, double value)
 
 cdef LLSparseMatrixView MakeLLSparseMatrixView(LLSparseMatrix A, PyObject* obj1, PyObject* obj2)
 
 cdef LLSparseMatrixView MakeLLSparseMatrixViewFromView(LLSparseMatrixView A, PyObject* obj1, PyObject* obj2)
 
 
-cdef int * create_c_array_indices_from_python_object(int length, PyObject * obj, int * number_of_elements) except NULL
+cdef INT_t * create_c_array_indices_from_python_object(INT_t length, PyObject * obj, INT_t * number_of_elements) except NULL
 

@@ -1,13 +1,14 @@
-
+from sparse_lib.cysparse_types cimport *
 
 cdef class SparseMatrix:
     cdef:
-        public int nrow  # number of rows
-        public int ncol  # number of columns
-        public int nnz   # number of values stored
+        public INT_t nrow  # number of rows
+        public INT_t ncol  # number of columns
+        public INT_t nnz   # number of values stored
 
-        public bint is_symmetric  # true if symmetric matrix
-        public bint store_zeros
+        public bint is_symmetric  # True if symmetric matrix
+        public bint store_zeros   # True if 0.0 is to be stored explicitly
+        public bint is_complex    # True if values are complex
 
         object shape     # for compatibility with numpy, array, etc.
 
@@ -15,10 +16,10 @@ cdef class SparseMatrix:
 
 cdef class MutableSparseMatrix(SparseMatrix):
     cdef:
-        int size_hint
-        int nalloc    # allocated size of mutable 1D arrays
+        INT_t size_hint
+        INT_t nalloc    # allocated size of mutable 1D arrays
 
 
 cdef class ImmutableSparseMatrix(SparseMatrix):
     cdef:
-        int test2
+        INT_t test2

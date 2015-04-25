@@ -50,16 +50,35 @@ ext_params['extra_compile_args'] = ["-O2"]
 ext_params['extra_link_args'] = []
 
 ########################################################################################################################
+#                                                *** base ***
+base_ext_params = ext_params.copy()
+base_ext = [
+    Extension(name="sparse_lib.cysparse_types",
+              sources=["sparse_lib/cysparse_types.pxd", "sparse_lib/cysparse_types.pyx"]),
+]
+
+########################################################################################################################
 #                                                *** sparse ***
 sparse_ext_params = ext_params.copy()
 
 sparse_ext = [
-  Extension("sparse_lib.sparse.ll_mat", ["sparse_lib/sparse/ll_mat.pxd", "sparse_lib/sparse/ll_mat.pyx"], **sparse_ext_params),
-  Extension("sparse_lib.sparse.sparse_mat", ["sparse_lib/sparse/sparse_mat.pxd", "sparse_lib/sparse/sparse_mat.pyx"], **sparse_ext_params),
-  Extension("sparse_lib.sparse.csr_mat", ["sparse_lib/sparse/csr_mat.pxd", "sparse_lib/sparse/csr_mat.pyx"], **sparse_ext_params),
-  Extension("sparse_lib.sparse.csc_mat", ["sparse_lib/sparse/csc_mat.pxd", "sparse_lib/sparse/csc_mat.pyx"], **sparse_ext_params),
-  Extension("sparse_lib.sparse.ll_mat_view", ["sparse_lib.sparse.object_index.pxi","sparse_lib/sparse/ll_mat_view.pxd", "sparse_lib/sparse/ll_mat_view.pyx"], **sparse_ext_params),
-  Extension("sparse_lib.sparse.IO.mm", ["sparse_lib/sparse/IO/mm_read_file.pxi", "sparse_lib/sparse/IO/mm.pxd", "sparse_lib/sparse/IO/mm.pyx"], **sparse_ext_params),
+  Extension(name="sparse_lib.sparse.ll_mat",
+            sources=["sparse_lib/sparse/ll_mat.pxd", "sparse_lib/sparse/ll_mat.pyx"], **sparse_ext_params),
+  Extension(name="sparse_lib.sparse.sparse_mat",
+            sources=["sparse_lib/sparse/sparse_mat.pxd", "sparse_lib/sparse/sparse_mat.pyx"], **sparse_ext_params),
+  Extension(name="sparse_lib.sparse.csr_mat",
+            sources=["sparse_lib/sparse/csr_mat.pxd", "sparse_lib/sparse/csr_mat.pyx"], **sparse_ext_params),
+  Extension(name="sparse_lib.sparse.csc_mat",
+            sources=["sparse_lib/sparse/csc_mat.pxd", "sparse_lib/sparse/csc_mat.pyx"], **sparse_ext_params),
+  Extension(name="sparse_lib.sparse.ll_mat_view",
+            sources=["sparse_lib.sparse.object_index.pxi",
+                     "sparse_lib/sparse/ll_mat_view.pxd",
+                     "sparse_lib/sparse/ll_mat_view.pyx"], **sparse_ext_params),
+  Extension(name="sparse_lib.sparse.IO.mm",
+            sources=["sparse_lib/sparse/IO/mm_read_file.pxi",
+                     "sparse_lib/sparse/IO/mm_read_file2.pxi",
+                     "sparse_lib/sparse/IO/mm.pxd",
+                     "sparse_lib/sparse/IO/mm.pyx"], **sparse_ext_params),
   #Extension("sparse.ll_vec", ["sparse_lib/sparse/ll_vec.pyx"], **sparse_ext_params)
 ]
 
@@ -78,17 +97,16 @@ umfpack_ext_params['library_dirs'] = suitesparse_library_dirs
 umfpack_ext_params['libraries'] = ['umfpack', 'amd']
 
 umfpack_ext = [
-    Extension("sparse_lib.solvers.suitesparse.umfpack",
-              ['sparse_lib/solvers/suitesparse/umfpack.pxd',
-               'sparse_lib/solvers/suitesparse/umfpack.pyx'],
-              **umfpack_ext_params)
+    Extension(name="sparse_lib.solvers.suitesparse.umfpack",
+              sources=['sparse_lib/solvers/suitesparse/umfpack.pxd',
+                       'sparse_lib/solvers/suitesparse/umfpack.pyx'], **umfpack_ext_params)
     ]
 
 
 ########################################################################################################################
 # SETUP
 ########################################################################################################################
-ext_modules = sparse_ext  + utils_ext + umfpack_ext
+ext_modules = base_ext + sparse_ext  + utils_ext + umfpack_ext
 
 
 setup(name=  'SparseLib',

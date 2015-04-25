@@ -5,13 +5,15 @@ Condensed Sparse Column (CSC) Format Matrices.
 """
 from __future__ import print_function
 
+from sparse_lib.cysparse_types cimport *
+
 from sparse_lib.sparse.sparse_mat cimport ImmutableSparseMatrix
 
 
 from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
 
-cdef int CSC_MAT_PPRINT_ROW_THRESH = 500       # row threshold for choosing print format
-cdef int CSC_MAT_PPRINT_COL_THRESH = 20        # column threshold for choosing print format
+cdef INT_t CSC_MAT_PPRINT_ROW_THRESH = 500       # row threshold for choosing print format
+cdef INT_t CSC_MAT_PPRINT_COL_THRESH = 20        # column threshold for choosing print format
 
 
 cdef class CSCSparseMatrix(ImmutableSparseMatrix):
@@ -24,7 +26,7 @@ cdef class CSCSparseMatrix(ImmutableSparseMatrix):
     """
 
 
-    def __cinit__(self, int nrow, int ncol, int nnz):
+    def __cinit__(self, INT_t nrow, INT_t ncol, INT_t nnz):
         self.__status_ok = False
 
 
@@ -43,7 +45,7 @@ cdef class CSCSparseMatrix(ImmutableSparseMatrix):
         raise SyntaxError("Assign individual elements is not allowed")
 
     #                                            *** GET ***
-    cdef at(self, int i, int j):
+    cdef at(self, INT_t i, INT_t j):
         """
         Direct access to element ``(i, j)``.
 
@@ -54,7 +56,7 @@ cdef class CSCSparseMatrix(ImmutableSparseMatrix):
             :meth:`safe_at`.
 
         """
-        cdef int k
+        cdef INT_t k
 
         if self.is_symmetric:
             raise NotImplemented("Access to csr_mat(i, j) not (yet) implemented")
@@ -66,7 +68,7 @@ cdef class CSCSparseMatrix(ImmutableSparseMatrix):
 
         return 0.0
 
-    cdef safe_at(self, int i, int j):
+    cdef safe_at(self, INT_t i, INT_t j):
         """
         Return element ``(i, j)`` but with check for out of bounds indices.
 
@@ -95,8 +97,8 @@ cdef class CSCSparseMatrix(ImmutableSparseMatrix):
         if len(key) != 2:
             raise IndexError('Index tuple must be of length 2 (not %d)' % len(key))
 
-        cdef int i = key[0]
-        cdef int j = key[1]
+        cdef INT_t i = key[0]
+        cdef INT_t j = key[1]
 
         return self.safe_at(i, j)
 
@@ -115,10 +117,10 @@ cdef class CSCSparseMatrix(ImmutableSparseMatrix):
             OUT: Output stream that print (Python3) can print to.
         """
         # TODO: adapt to any numbers... and allow for additional parameters to control the output
-        cdef int i, k, first = 1;
+        cdef INT_t i, k, first = 1;
 
         cdef double *mat
-        cdef int j
+        cdef INT_t j
         cdef double val
 
         print('CSCSparseMatrix ([%d,%d]):' % (self.nrow, self.ncol), file=OUT)
@@ -159,7 +161,7 @@ cdef class CSCSparseMatrix(ImmutableSparseMatrix):
     # DEBUG
     ####################################################################################################################
     def debug_print(self):
-        cdef int i
+        cdef INT_t i
         print("ind:")
         for i from 0 <= i < self.ncol + 1:
             print(self.ind[i], end=' ', sep=' ')
@@ -175,7 +177,7 @@ cdef class CSCSparseMatrix(ImmutableSparseMatrix):
             print(self.val[i], end=' == ', sep=' == ')
         print()
 
-    def set_row(self, int i, int val):
+    def set_row(self, INT_t i, INT_t val):
         self.row[i] = val
 
 
@@ -184,16 +186,16 @@ cdef class CSCSparseMatrix(ImmutableSparseMatrix):
 ########################################################################################################################
 # Factory methods
 ########################################################################################################################
-cdef MakeCSCSparseMatrix(int nrow, int ncol, int nnz, int * ind, int * row, double * val):
+cdef MakeCSCSparseMatrix(INT_t nrow, INT_t ncol, INT_t nnz, INT_t * ind, INT_t * row, double * val):
     """
     Construct a CSCSparseMatrix object.
 
     Args:
-        nrow (int): Number of rows.
-        ncol (int): Number of columns.
-        nnz (int): Number of non-zeros.
-        ind (int *): C-array with column indices pointers.
-        row  (int *): C-array with row indices.
+        nrow (INT_t): Number of rows.
+        ncol (INT_t): Number of columns.
+        nnz (INT_t): Number of non-zeros.
+        ind (INT_t *): C-array with column indices pointers.
+        row  (INT_t *): C-array with row indices.
         val  (double *): C-array with values.
     """
     csc_mat = CSCSparseMatrix(nrow=nrow, ncol=ncol, nnz=nnz)

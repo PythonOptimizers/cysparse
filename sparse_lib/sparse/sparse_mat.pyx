@@ -1,5 +1,6 @@
+from sparse_lib.cysparse_types cimport *
 
-cdef int MUTABLE_SPARSE_MAT_DEFAULT_SIZE_HINT = 40        # allocated size by default
+cdef INT_t MUTABLE_SPARSE_MAT_DEFAULT_SIZE_HINT = 40        # allocated size by default
 
 class NonZeros():
     """
@@ -37,6 +38,7 @@ cdef class SparseMatrix:
 
         self.is_symmetric = kwargs.get('is_symmetric', False)
         self.store_zeros = kwargs.get('store_zeros', False)
+        self.is_complex = kwargs.get('is_complex', False)
 
     # for compatibility with numpy, array, etc
     property shape:
@@ -64,7 +66,7 @@ cdef class SparseMatrix:
     # MEMORY INFO
     ####################################################################################################################
     def memory_virtual(self):
-        cdef int memory = self.nrow * self.ncol * sizeof(double)
+        cdef INT_t memory = self.nrow * self.ncol * sizeof(double)
         return memory
 
     def memory_real(self):

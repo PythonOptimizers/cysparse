@@ -5,6 +5,8 @@ ll_mat extension.
 """
 from __future__ import print_function
 
+from sparse_lib.cysparse_types cimport *
+
 from sparse_lib.sparse.sparse_mat cimport MutableSparseMatrix
 from sparse_lib.sparse.csr_mat cimport MakeCSRSparseMatrix
 from sparse_lib.sparse.csc_mat cimport MakeCSCSparseMatrix
@@ -31,10 +33,10 @@ cdef extern from "Python.h":
     int PyInt_Check(PyObject *o)
 
 
-cdef int LL_MAT_DEFAULT_SIZE_HINT = 40        # allocated size by default
-cdef double LL_MAT_INCREASE_FACTOR = 1.5      # reallocating factor if size is not enough, must be > 1
-cdef int LL_MAT_PPRINT_ROW_THRESH = 500       # row threshold for choosing print format
-cdef int LL_MAT_PPRINT_COL_THRESH = 20        # column threshold for choosing print format
+cdef INT_t LL_MAT_DEFAULT_SIZE_HINT = 40        # allocated size by default
+cdef FLOAT_t LL_MAT_INCREASE_FACTOR = 1.5      # reallocating factor if size is not enough, must be > 1
+cdef INT_t LL_MAT_PPRINT_ROW_THRESH = 500       # row threshold for choosing print format
+cdef INT_t LL_MAT_PPRINT_COL_THRESH = 20        # column threshold for choosing print format
 
 #include 'll_mat_slices.pxi'
 
@@ -60,33 +62,40 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
     # Init/Free/Memory
     ####################################################################################################################
     #cdef:
-    #    int     free      # index to first element in free chain
-    #    double *val       # pointer to array of values
-    #    int    *col       # pointer to array of indices, see doc
-    #    int    *link      # pointer to array of indices, see doc
-    #    int    *root      # pointer to array of indices, see doc
+    #    INT_t     free      # index to first element in free chain
+    #    FLOAT_t  *val       # pointer to array of real values
+    #    FLOAT_t  *ival      # pointer to array of imaginary values
+    #    INT_t    *col       # pointer to array of indices, see doc
+    #    INT_t    *link      # pointer to array of indices, see doc
+    #    INT_t    *root      # pointer to array of indices, see doc
 
-    def __cinit__(self, int nrow, int ncol, int size_hint=LL_MAT_DEFAULT_SIZE_HINT, bint is_symmetric=False, bint store_zeros=False):
+    def __cinit__(self, INT_t nrow, INT_t ncol, INT_t size_hint=LL_MAT_DEFAULT_SIZE_HINT, bint is_symmetric=False, bint store_zeros=False, is_complex=False):
 
         if size_hint < 1:
             raise ValueError('size_hint (%d) must be >= 1' % size_hint)
 
-        val = <double *> PyMem_Malloc(self.size_hint * sizeof(double))
+        val = <FLOAT_t *> PyMem_Malloc(self.size_hint * sizeof(FLOAT_t))
         if not val:
             raise MemoryError()
         self.val = val
 
-        col = <int *> PyMem_Malloc(self.size_hint * sizeof(int))
+        if self.is_complex:
+            ival = <FLOAT_t *> PyMem_Malloc(self.size_hint * sizeof(FLOAT_t))
+            if not ival:
+                raise MemoryError()
+            self.ival = ival
+
+        col = <INT_t *> PyMem_Malloc(self.size_hint * sizeof(INT_t))
         if not col:
             raise MemoryError()
         self.col = col
 
-        link = <int *> PyMem_Malloc(self.size_hint * sizeof(int))
+        link = <INT_t *> PyMem_Malloc(self.size_hint * sizeof(INT_t))
         if not link:
             raise MemoryError()
         self.link = link
 
-        root = <int *> PyMem_Malloc(self.nrow * sizeof(int))
+        root = <INT_t *> PyMem_Malloc(self.nrow * sizeof(INT_t))
         if not root:
             raise MemoryError()
         self.root = root
@@ -94,17 +103,19 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         self.nalloc = self.size_hint
         self.free = -1
 
-        cdef int i
+        cdef INT_t i
         for i from 0 <= i < nrow:
             root[i] = -1
 
     def __dealloc__(self):
         PyMem_Free(self.val)
+        if self.is_complex:
+            PyMem_Free(self.ival)
         PyMem_Free(self.col)
         PyMem_Free(self.link)
         PyMem_Free(self.root)
 
-    cdef _realloc(self, int nalloc_new):
+    cdef _realloc(self, INT_t nalloc_new):
         """
         Realloc space for the internal arrays.
 
@@ -114,22 +125,28 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         """
         cdef:
             void *temp
-            #int nalloc_new
+            #INT_t nalloc_new
 
-        temp = <int *> PyMem_Realloc(self.col, nalloc_new * sizeof(int))
+        temp = <INT_t *> PyMem_Realloc(self.col, nalloc_new * sizeof(INT_t))
         if not temp:
             raise MemoryError()
-        self.col = <int*>temp
+        self.col = <INT_t*>temp
 
-        temp = <int *> PyMem_Realloc(self.link, nalloc_new * sizeof(int))
+        temp = <INT_t *> PyMem_Realloc(self.link, nalloc_new * sizeof(INT_t))
         if not temp:
             raise MemoryError()
-        self.link = <int *>temp
+        self.link = <INT_t *>temp
 
-        temp = <double *> PyMem_Realloc(self.val, nalloc_new * sizeof(double))
+        temp = <FLOAT_t *> PyMem_Realloc(self.val, nalloc_new * sizeof(FLOAT_t))
         if not temp:
             raise MemoryError()
-        self.val = <double *>temp
+        self.val = <FLOAT_t *>temp
+
+        if self.is_complex:
+            temp = <FLOAT_t *> PyMem_Realloc(self.ival, nalloc_new * sizeof(FLOAT_t))
+            if not temp:
+                raise MemoryError()
+            self.ival = <FLOAT_t *>temp
 
         self.nalloc = nalloc_new
 
@@ -141,7 +158,7 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
             We use ``LL_MAT_INCREASE_FACTOR`` as expanding factor.
         """
         assert LL_MAT_INCREASE_FACTOR > 1.0
-        cdef int real_new_alloc = <int>(<double>LL_MAT_INCREASE_FACTOR * self.nalloc) + 1
+        cdef INT_t real_new_alloc = <INT_t>(<FLOAT_t>LL_MAT_INCREASE_FACTOR * self.nalloc) + 1
 
         return self._realloc(real_new_alloc)
 
@@ -150,9 +167,9 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         Shrink matrix to its minimal size.
         """
         cdef:
-            #double *val;
-            #int *col, *link;
-            int i, k, k_next, k_last, k_new, nalloc_new;
+            #FLOAT_t *val;
+            #INT_t *col, *link;
+            INT_t i, k, k_next, k_last, k_new, nalloc_new;
 
         nalloc_new = self.nnz  # new size for val, col and link arrays
 
@@ -205,16 +222,20 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         Returns:
             The exact number of bits used to store the matrix.
         """
-        cdef int total_memory = 0
+        cdef INT_t total_memory = 0
 
         # root
-        total_memory += self.nrow * sizeof(int)
+        total_memory += self.nrow * sizeof(INT_t)
         # col
-        total_memory += self.nalloc * sizeof(int)
+        total_memory += self.nalloc * sizeof(INT_t)
         # link
-        total_memory += self.nalloc * sizeof(int)
+        total_memory += self.nalloc * sizeof(INT_t)
         # val
-        total_memory += self.nalloc * sizeof(double)
+        total_memory += self.nalloc * sizeof(FLOAT_t)
+
+        if self.is_complex:
+            # ival
+            total_memory += self.nalloc * sizeof(FLOAT_t)
 
         return total_memory
 
@@ -223,7 +244,7 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
     ####################################################################################################################
     ####################################################################################################################
     #                                            *** SET ***
-    cdef put(self, int i, int j, double value):
+    cdef put(self, INT_t i, INT_t j, FLOAT_t value):
         """
         Set ``A[i, j] = value`` directly.
 
@@ -240,7 +261,7 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         if self.is_symmetric and i < j:
             raise IndexError('Write operation to upper triangle of symmetric matrix not allowed')
 
-        cdef int k, new_elem, last, col
+        cdef INT_t k, new_elem, last, col
 
         # Find element to be set (or removed)
         col = last = -1
@@ -303,7 +324,8 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
 
                 self.nnz -= 1
 
-    cdef safe_put(self, int i, int j, double value):
+
+    cdef safe_put(self, INT_t i, INT_t j, FLOAT_t value):
         """
         Set ``A[i, j] = value`` directly.
 
@@ -356,14 +378,14 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
             del view
             return
 
-        cdef int i = key[0]
-        cdef int j = key[1]
+        cdef INT_t i = key[0]
+        cdef INT_t j = key[1]
 
-        self.safe_put(i, j, <double> value)
+        self.safe_put(i, j, <FLOAT_t> value)
 
     ####################################################################################################################
     #                                            *** GET ***
-    cdef at(self, int i, int j):
+    cdef at(self, INT_t i, INT_t j):
         """
         Return element ``(i, j)``.
 
@@ -374,7 +396,7 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
             :meth:`safe_at`.
 
         """
-        cdef int k, t
+        cdef INT_t k, t
 
         if self.is_symmetric and i < j:
             t = i; i = j; j = t
@@ -388,7 +410,7 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
 
         return 0.0
 
-    cdef safe_at(self, int i, int j):
+    cdef safe_at(self, INT_t i, INT_t j):
         """
         Return element ``(i, j)`` but with check for out of bounds indices.
 
@@ -429,8 +451,8 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
             view =  MakeLLSparseMatrixView(self, <PyObject *>key[0], <PyObject *>key[1])
             return view
 
-        cdef int i = key[0]
-        cdef int j = key[1]
+        cdef INT_t i = key[0]
+        cdef INT_t j = key[1]
 
         return self.safe_at(i, j)
 
@@ -445,8 +467,8 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         cdef:
             #list list_container
             PyObject *list_p # the list that will hold the keys
-            int i, j, k
-            int pos = 0    # position in list
+            INT_t i, j, k
+            INT_t pos = 0    # position in list
 
         if not self.is_symmetric:
 
@@ -481,8 +503,8 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
     cdef object _values(self):
         cdef:
             PyObject *list_p   # the list that will hold the values
-            int i, k
-            int pos = 0        # position in list
+            INT_t i, k
+            INT_t pos = 0        # position in list
 
         if not self.is_symmetric:
             list_p = PyList_New(self.nnz)
@@ -514,9 +536,9 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
     cdef object _items(self):
         cdef:
             PyObject *list_p;     # the list that will hold the values
-            int i, j, k
-            int pos = 0         # position in list
-            double val
+            INT_t i, j, k
+            INT_t pos = 0         # position in list
+            FLOAT_t val
 
         list_p = PyList_New(self.nnz)
         if list_p == NULL:
@@ -571,23 +593,23 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
             Column indices are **not** necessarily sorted!
         """
 
-        cdef int * ind = <int *> PyMem_Malloc((self.nrow + 1) * sizeof(int))
+        cdef INT_t * ind = <INT_t *> PyMem_Malloc((self.nrow + 1) * sizeof(INT_t))
         if not ind:
             raise MemoryError()
 
-        cdef int * col =  <int*> PyMem_Malloc(self.nnz * sizeof(int))
+        cdef INT_t * col =  <INT_t*> PyMem_Malloc(self.nnz * sizeof(INT_t))
         if not col:
             raise MemoryError()
 
-        cdef double * val = <double *> PyMem_Malloc(self.nnz * sizeof(double))
+        cdef FLOAT_t * val = <FLOAT_t *> PyMem_Malloc(self.nnz * sizeof(FLOAT_t))
         if not val:
             raise MemoryError()
 
-        cdef int ind_col_index = 0  # current col index in col and val
+        cdef INT_t ind_col_index = 0  # current col index in col and val
         ind[ind_col_index] = 0
 
-        cdef int i
-        cdef int k
+        cdef INT_t i
+        cdef INT_t k
 
         # indices are NOT sorted for each row
         for i from 0 <= i < self.nrow:
@@ -614,26 +636,26 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
             Memory **must** be freed by the caller!
             Column indices are **not** necessarily sorted!
         """
-        cdef int * ind = <int *> PyMem_Malloc((self.ncol + 1) * sizeof(int))
+        cdef INT_t * ind = <INT_t *> PyMem_Malloc((self.ncol + 1) * sizeof(INT_t))
         if not ind:
             raise MemoryError()
 
-        cdef int * row = <int *> PyMem_Malloc(self.nnz * sizeof(int))
+        cdef INT_t * row = <INT_t *> PyMem_Malloc(self.nnz * sizeof(INT_t))
         if not row:
             raise MemoryError()
 
-        cdef double * val = <double *> PyMem_Malloc(self.nnz * sizeof(double))
+        cdef FLOAT_t * val = <FLOAT_t *> PyMem_Malloc(self.nnz * sizeof(FLOAT_t))
         if not val:
             raise MemoryError()
 
 
         cdef:
-            int i, k
+            INT_t i, k
 
 
         # start by collecting the number of rows for each column
         # this is to create the ind vector but not only...
-        cdef int * col_indexes = <int *> calloc(self.ncol + 1, sizeof(int))
+        cdef INT_t * col_indexes = <INT_t *> calloc(self.ncol + 1, sizeof(INT_t))
         if not ind:
             raise MemoryError()
 
@@ -649,7 +671,7 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         for i from 1 <= i <= self.ncol:
             col_indexes[i] = col_indexes[i - 1] + col_indexes[i]
 
-        memcpy(ind, col_indexes, (self.ncol + 1) * sizeof(int) )
+        memcpy(ind, col_indexes, (self.ncol + 1) * sizeof(INT_t) )
         assert ind[self.ncol] == self.nnz
 
         # row and val
@@ -717,7 +739,7 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
             OUT: Output stream that print (Python3) can print to.
         """
         # TODO: adapt to any numbers... and allow for additional parameters to control the output
-        cdef int i, k, first = 1
+        cdef INT_t i, k, first = 1
         symmetric_str = None
 
         if self.is_symmetric:
@@ -727,9 +749,9 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
 
         print('LLSparseMatrix (%s, [%d,%d]):' % (symmetric_str, self.nrow, self.ncol), file=OUT)
 
-        cdef double *mat
-        cdef int j
-        cdef double val
+        cdef FLOAT_t *mat
+        cdef INT_t j
+        cdef FLOAT_t val
 
         if not self.nnz:
             return
@@ -737,7 +759,7 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         if self.nrow <= LL_MAT_PPRINT_COL_THRESH and self.ncol <= LL_MAT_PPRINT_ROW_THRESH:
             # create linear vector presentation
             # TODO: put in a method of its own
-            mat = <double *> PyMem_Malloc(self.nrow * self.ncol * sizeof(double))
+            mat = <FLOAT_t *> PyMem_Malloc(self.nrow * self.ncol * sizeof(FLOAT_t))
 
             if not mat:
                 raise MemoryError()
@@ -777,19 +799,20 @@ def MakeLLSparseMatrix(**kwargs):
     """
     # TODO: rewrite function!!!
     # TODO: add symmetrical case
-    cdef int nrow = kwargs.get('nrow', -1)
-    cdef int ncol = kwargs.get('ncol', -1)
-    cdef int size = kwargs.get('size', -1)
-    cdef int size_hint = kwargs.get('size_hint', LL_MAT_DEFAULT_SIZE_HINT)
+    cdef INT_t nrow = kwargs.get('nrow', -1)
+    cdef INT_t ncol = kwargs.get('ncol', -1)
+    cdef INT_t size = kwargs.get('size', -1)
+    cdef INT_t size_hint = kwargs.get('size_hint', LL_MAT_DEFAULT_SIZE_HINT)
     cdef bint store_zeros = kwargs.get('store_zeros', False)
-    cdef bint is_symmetric = kwargs.get('is_symmetrix', False)
+    cdef bint is_symmetric = kwargs.get('is_symmetric', False)
+    cdef bint is_complex = kwargs.get('is_complex', False)
 
     matrix = kwargs.get('matrix', None)
 
     mm_filename = kwargs.get('mm_filename', None)
 
-    cdef int real_nrow
-    cdef int real_ncol
+    cdef INT_t real_nrow
+    cdef INT_t real_ncol
 
     # CASE 1
     if matrix is None and mm_filename is None:
@@ -813,16 +836,17 @@ def MakeLLSparseMatrix(**kwargs):
             real_nrow = size
             real_ncol = size
 
-        return LLSparseMatrix(nrow=real_nrow, ncol=real_ncol, size_hint=size_hint, store_zeros=store_zeros, is_symmetric=is_symmetric)
+        return LLSparseMatrix(nrow=real_nrow, ncol=real_ncol, size_hint=size_hint, store_zeros=store_zeros, is_symmetric=is_symmetric, is_complex=is_complex)
 
     # CASE 2
-    cdef double[:, :] matrix_view
-    cdef int i, j
-    cdef double value
+    cdef FLOAT_t[:, :] matrix_view
+    cdef INT_t i, j
+    cdef FLOAT_t value
 
     if matrix is not None and mm_filename is None:
         # TODO: direct access into the numpy array
         # TODO: skip views... ?
+        # TODO: take into account the complex case!
         if len(matrix.shape) != 2:
             raise IndexError('Matrix must be of dimension 2 (not %d)' % len(matrix.shape))
 
@@ -838,6 +862,7 @@ def MakeLLSparseMatrix(**kwargs):
 
         nrow = matrix.shape[0]
         ncol = matrix.shape[1]
+
 
         ll_mat = LLSparseMatrix(nrow=nrow, ncol=ncol, size_hint=size_hint)
 
@@ -875,20 +900,20 @@ cdef LLSparseMatrix multiply_two_ll_mat(LLSparseMatrix A, LLSparseMatrix B):
     """
     # TODO: LLSparseMatrix * A, LLSparseMatrix * B ...
     # test dimensions
-    cdef int A_nrow = A.nrow
-    cdef int A_ncol = A.ncol
+    cdef INT_t A_nrow = A.nrow
+    cdef INT_t A_ncol = A.ncol
 
-    cdef int B_nrow = B.nrow
-    cdef int B_ncol = B.ncol
+    cdef INT_t B_nrow = B.nrow
+    cdef INT_t B_ncol = B.ncol
 
     if A_ncol != B_nrow:
         raise IndexError("Matrix dimensions must agree ([%d, %d] * [%d, %d])" % (A_nrow, A_ncol, B_nrow, B_ncol))
 
-    cdef int C_nrow = A_nrow
-    cdef int C_ncol = B_ncol
+    cdef INT_t C_nrow = A_nrow
+    cdef INT_t C_ncol = B_ncol
 
     cdef bint store_zeros = A.store_zeros and B.store_zeros
-    cdef int size_hint = A.size_hint
+    cdef INT_t size_hint = A.size_hint
 
     C = LLSparseMatrix(nrow=C_nrow, ncol=C_ncol, size_hint=size_hint, store_zeros=store_zeros)
 
@@ -901,8 +926,8 @@ cdef LLSparseMatrix multiply_two_ll_mat(LLSparseMatrix A, LLSparseMatrix B):
 
     # NON OPTIMIZED MULTIPLICATION
     cdef:
-        double valA
-        int iA, jA, kA, kB
+        FLOAT_t valA
+        INT_t iA, jA, kA, kB
 
     for iA from 0 <= iA < A_nrow:
         kA = A.root[iA]
@@ -941,8 +966,8 @@ cdef cnp.ndarray[cnp.double_t, ndim=1] multiply_ll_mat_with_numpy_vector(LLSpars
     # TODO: take strides into account!
     # test if numpy array is c-contiguous
 
-    cdef int A_nrow = A.nrow
-    cdef int A_ncol = A.ncol
+    cdef INT_t A_nrow = A.nrow
+    cdef INT_t A_ncol = A.ncol
 
     #temp = cnp.NPY_DOUBLE
 
@@ -951,18 +976,18 @@ cdef cnp.ndarray[cnp.double_t, ndim=1] multiply_ll_mat_with_numpy_vector(LLSpars
         raise IndexError("Dimensions must agree ([%d,%d] * [%d, %d])" % (A_nrow, A_ncol, b.size, 1))
 
     # direct access to vector b
-    cdef double * b_data = <double *> b.data
+    cdef FLOAT_t * b_data = <FLOAT_t *> b.data
 
     # array c = A * b
     cdef cnp.ndarray[cnp.double_t, ndim=1] c = np.empty(A_nrow, dtype=np.float64)
-    cdef double * c_data = <double *> c.data
+    cdef FLOAT_t * c_data = <FLOAT_t *> c.data
 
     cdef:
-        int i, j
-        int k
+        INT_t i, j
+        INT_t k
 
-        double val
-        double val_c
+        FLOAT_t val
+        FLOAT_t val_c
 
     for i from 0 <= i < A_nrow:
         k = A.root[i]
@@ -1002,21 +1027,21 @@ cdef cnp.ndarray[cnp.double_t, ndim=1, mode='c'] multiply_ll_mat_with_numpy_vect
 
     """
     # TODO: test, test, test!!!
-    cdef int A_nrow = A.nrow
-    cdef int A_ncol = A.ncol
+    cdef INT_t A_nrow = A.nrow
+    cdef INT_t A_ncol = A.ncol
 
-    cdef size_t sd = sizeof(double)
+    cdef size_t sd = sizeof(FLOAT_t)
 
     # test dimensions
     if A_ncol != b.size:
         raise IndexError("Dimensions must agree ([%d,%d] * [%d, %d])" % (A_nrow, A_ncol, b.size, 1))
 
     # direct access to vector b
-    cdef double * b_data = <double *> b.data
+    cdef FLOAT_t * b_data = <FLOAT_t *> b.data
 
     # array c = A * b
     cdef cnp.ndarray[cnp.double_t, ndim=1] c = np.empty(A_nrow, dtype=np.float64)
-    cdef double * c_data = <double *> c.data
+    cdef FLOAT_t * c_data = <FLOAT_t *> c.data
 
     # test if b vector is C-contiguous or not
     if cnp.PyArray_ISCONTIGUOUS(b):
@@ -1060,16 +1085,16 @@ cdef LLSparseMatrix transposed_ll_mat(LLSparseMatrix A):
         raise NotImplemented("Transposed is not implemented yet for symmetric matrices")
 
     cdef:
-        int A_nrow = A.nrow
-        int A_ncol = A.ncol
+        INT_t A_nrow = A.nrow
+        INT_t A_ncol = A.ncol
 
-        int At_nrow = A.ncol
-        int At_ncol = A.nrow
+        INT_t At_nrow = A.ncol
+        INT_t At_ncol = A.nrow
 
-        int At_nalloc = A.nalloc
+        INT_t At_nalloc = A.nalloc
 
-        int i, k
-        double val
+        INT_t i, k
+        FLOAT_t val
 
     cdef LLSparseMatrix transposed_A = LLSparseMatrix(nrow =At_nrow, ncol=At_ncol, size_hint=At_nalloc)
 
@@ -1090,19 +1115,19 @@ cdef LLSparseMatrix transposed_ll_mat(LLSparseMatrix A):
 ########################################################################################################################
 # Assignments
 ########################################################################################################################
-cdef int PyLLSparseMatrix_Check(object obj):
+cdef INT_t PyLLSparseMatrix_Check(object obj):
     return isinstance(obj, LLSparseMatrix)
 
-cdef update_ll_mat_matrix_from_c_arrays_indices_assign(LLSparseMatrix A, int * index_i, Py_ssize_t index_i_length,
-                                                       int * index_j, Py_ssize_t index_j_length, object obj):
+cdef update_ll_mat_matrix_from_c_arrays_indices_assign(LLSparseMatrix A, INT_t * index_i, Py_ssize_t index_i_length,
+                                                       INT_t * index_j, Py_ssize_t index_j_length, object obj):
     """
     Update-assign (sub-)matrix: A[..., ...] = obj.
 
     Args:
         A: An :class:`LLSparseMatrix` object.
-        index_i: C-arrays with ``int`` indices.
+        index_i: C-arrays with ``INT_t`` indices.
         index_i_length: Length of ``index_i``.
-        index_j: C-arrays with ``int`` indices.
+        index_j: C-arrays with ``INT_t`` indices.
         index_j_length: Length of ``index_j``.
         obj: Any Python object that implements ``__getitem__()`` and accepts a ``tuple`` ``(i, j)``.
 
@@ -1124,16 +1149,16 @@ cdef update_ll_mat_matrix_from_c_arrays_indices_assign(LLSparseMatrix A, int * i
     else:
         for i from 0 <= i < index_i_length:
             for j from 0 <= j < index_j_length:
-                A.put(index_i[i], index_j[j], <double> obj[tuple(i, j)]) # not really optimized...
+                A.put(index_i[i], index_j[j], <FLOAT_t> obj[tuple(i, j)]) # not really optimized...
 
-cdef bint update_ll_mat_item_add(LLSparseMatrix A, int i, int j, double x):
+cdef bint update_ll_mat_item_add(LLSparseMatrix A, INT_t i, INT_t j, FLOAT_t x):
     """
     Update-add matrix entry: ``A[i,j] += x``
 
     Args:
         A: Matrix to update.
         i, j: Coordinates of item to update.
-        x (double): Value to add to item to update ``A[i, j]``.
+        x (FLOAT_t): Value to add to item to update ``A[i, j]``.
 
     Returns:
         True.
@@ -1142,7 +1167,7 @@ cdef bint update_ll_mat_item_add(LLSparseMatrix A, int i, int j, double x):
         ``IndexError`` when non writing to lower triangle of a symmetric matrix.
     """
     cdef:
-        int k, new_elem, col, last
+        INT_t k, new_elem, col, last
 
     if A.is_symmetric and i < j:
         raise IndexError("Write operation to upper triangle of symmetric matrix not allowed")
@@ -1210,8 +1235,8 @@ cdef bint update_ll_mat_item_add(LLSparseMatrix A, int i, int j, double x):
 # Matrix - vector multiplication kernels
 ########################################################################################################################
 # C-contiguous, no symmetric
-cdef void multiply_ll_mat_with_numpy_vector_kernel(int m, double *x, double *y,
-         double *val, int *col, int *link, int *root):
+cdef void multiply_ll_mat_with_numpy_vector_kernel(INT_t m, FLOAT_t *x, FLOAT_t *y,
+         FLOAT_t *val, INT_t *col, INT_t *link, INT_t *root):
     """
     Compute ``y = A * x``.
 
@@ -1231,8 +1256,8 @@ cdef void multiply_ll_mat_with_numpy_vector_kernel(int m, double *x, double *y,
         root: C-contiguous C-array corresponding to vector ``A.root``.
     """
     cdef:
-        double s
-        int i, k
+        FLOAT_t s
+        INT_t i, k
 
     for i from 0 <= i < m:
         s = 0.0
@@ -1245,8 +1270,8 @@ cdef void multiply_ll_mat_with_numpy_vector_kernel(int m, double *x, double *y,
         y[i] = s
 
 # C-contiguous, symmetric
-cdef void multiply_sym_ll_mat_with_numpy_vector_kernel(int m, double *x, double *y,
-             double *val, int *col, int *link, int *root):
+cdef void multiply_sym_ll_mat_with_numpy_vector_kernel(INT_t m, FLOAT_t *x, FLOAT_t *y,
+             FLOAT_t *val, INT_t *col, INT_t *link, INT_t *root):
     """
     Compute ``y = A * x``.
 
@@ -1266,8 +1291,8 @@ cdef void multiply_sym_ll_mat_with_numpy_vector_kernel(int m, double *x, double 
         root: C-contiguous C-array corresponding to vector ``A.root``.
     """
     cdef:
-        double s, v, xi
-        int i, j, k
+        FLOAT_t s, v, xi
+        INT_t i, j, k
 
     for i from 0 <= i < m:
         xi = x[i]
@@ -1285,10 +1310,10 @@ cdef void multiply_sym_ll_mat_with_numpy_vector_kernel(int m, double *x, double 
         y[i] = s
 
 # Non C-contiguous, non symmetric
-cdef void multiply_ll_mat_with_strided_numpy_vector_kernel(int m,
-            double *x, int incx,
-            double *y, int incy,
-            double *val, int *col, int *link, int *root):
+cdef void multiply_ll_mat_with_strided_numpy_vector_kernel(INT_t m,
+            FLOAT_t *x, INT_t incx,
+            FLOAT_t *y, INT_t incy,
+            FLOAT_t *val, INT_t *col, INT_t *link, INT_t *root):
     """
     Compute ``y = A * x``.
 
@@ -1310,8 +1335,8 @@ cdef void multiply_ll_mat_with_strided_numpy_vector_kernel(int m,
         root: C-contiguous C-array corresponding to vector ``A.root``.
     """
     cdef:
-        double s
-        int i, k
+        FLOAT_t s
+        INT_t i, k
 
     for i from 0 <= i < m:
         s = 0.0
@@ -1324,10 +1349,10 @@ cdef void multiply_ll_mat_with_strided_numpy_vector_kernel(int m,
         y[i*incy] = s
 
 # Non C-contiguous, non symmetric
-cdef void multiply_sym_ll_mat_with_strided_numpy_vector_kernel(int m,
-                double *x, int incx,
-                double *y, int incy,
-                double *val, int *col, int *link, int *root):
+cdef void multiply_sym_ll_mat_with_strided_numpy_vector_kernel(INT_t m,
+                FLOAT_t *x, INT_t incx,
+                FLOAT_t *y, INT_t incy,
+                FLOAT_t *val, INT_t *col, INT_t *link, INT_t *root):
     """
     Compute ``y = A * x``.
 
@@ -1349,8 +1374,8 @@ cdef void multiply_sym_ll_mat_with_strided_numpy_vector_kernel(int m,
         root: C-contiguous C-array corresponding to vector ``A.root``.
     """
     cdef:
-        double s, v, xi
-        int i, j, k
+        FLOAT_t s, v, xi
+        INT_t i, j, k
 
     for i from 0 <= i < m:
         xi = x[i*incx]

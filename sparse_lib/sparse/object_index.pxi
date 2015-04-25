@@ -15,6 +15,8 @@ Indices can be given in **any** order or **repeated**.
 Numpy arrays can be strided or not.
 """
 
+from sparse_lib.cysparse_types cimport *
+
 cdef extern from "Python.h":
     # *** Types ***
     Py_ssize_t PY_SSIZE_T_MAX
@@ -54,7 +56,7 @@ cdef extern from "numpy/arrayobject.h":
     PyArray_Descr *PyArray_DTYPE(PyArrayObject* arr)
 
 
-cdef int * create_c_array_indices_from_python_object(int max_length, PyObject * obj, int * number_of_elements) except NULL:
+cdef INT_t * create_c_array_indices_from_python_object(INT_t max_length, PyObject * obj, INT_t * number_of_elements) except NULL:
     """
     Creates and returns a C-array with the indices corresponding to an index object.
 
@@ -81,15 +83,15 @@ cdef int * create_c_array_indices_from_python_object(int max_length, PyObject * 
             * if elements inside the index objects are integers: this is done for list but **not** (yet) for numpy arrays.
     """
     # TODO: test for strides in numpy arrays!!!
-    cdef int ret
+    cdef INT_t ret
     cdef Py_ssize_t start, stop, step, length, index
 
-    cdef int i, j
-    cdef int * indices
+    cdef INT_t i, j
+    cdef INT_t * indices
     cdef PyObject *val
 
-    cdef int array_dim
-    cdef int * array_data
+    cdef INT_t array_dim
+    cdef INT_t * array_data
     cdef PyArray_Descr * py_array_descr
 
     ####################################################################################################################
@@ -98,9 +100,9 @@ cdef int * create_c_array_indices_from_python_object(int max_length, PyObject * 
     #                                            *** Integer ***
     if PyInt_Check(obj):
         # TODO: change this!
-        i = <int> PyInt_AS_LONG(obj)
+        i = <INT_t> PyInt_AS_LONG(obj)
         length = 1
-        indices = <int *> PyMem_Malloc(length * sizeof(int))
+        indices = <INT_t *> PyMem_Malloc(length * sizeof(INT_t))
         if not indices:
             raise MemoryError()
 
@@ -115,7 +117,7 @@ cdef int * create_c_array_indices_from_python_object(int max_length, PyObject * 
 
         #print "start, stop, step, length = (%d, %d, %d, %d)" % (start, stop, step, length)
 
-        indices = <int *> PyMem_Malloc(length * sizeof(int))
+        indices = <INT_t *> PyMem_Malloc(length * sizeof(INT_t))
         if not indices:
             raise MemoryError()
 
@@ -128,7 +130,7 @@ cdef int * create_c_array_indices_from_python_object(int max_length, PyObject * 
     #                                            *** List ***
     elif PyList_Check(obj):
         length = PyList_Size(obj)
-        indices = <int *> PyMem_Malloc(length * sizeof(int))
+        indices = <INT_t *> PyMem_Malloc(length * sizeof(INT_t))
         if not indices:
             raise MemoryError()
 
@@ -139,26 +141,26 @@ cdef int * create_c_array_indices_from_python_object(int max_length, PyObject * 
                 # test if index is valid
                 if not (0 <= index < max_length):
                     raise IndexError("Index %d out of bounds [%d, %d[" % (<long>index, 0, max_length))
-                indices[i] = <int> index
+                indices[i] = <INT_t> index
             else:
                 PyMem_Free(indices)
                 raise ValueError("List must only contain integers")
 
     #                                            *** numpy array ***
     elif PyArray_Check(obj):
-        array_dim = <int> PyArray_NDIM(<PyArrayObject *>obj)
+        array_dim = <INT_t> PyArray_NDIM(<PyArrayObject *>obj)
         if array_dim != 1:
             raise IndexError("Numpy array must have only one dimension")
 
         length = <Py_ssize_t> PyArray_DIM(<PyArrayObject *>obj, 0)
 
-        indices = <int *> PyMem_Malloc(length * sizeof(int))
+        indices = <INT_t *> PyMem_Malloc(length * sizeof(INT_t))
         if not indices:
             raise MemoryError()
 
         # TODO: remove or control this is not DANGEROUS
         # This is dangerous if array is NOT C-contiguous!!!
-        array_data = <int* > PyArray_DATA(<PyArrayObject *> obj)
+        array_data = <INT_t* > PyArray_DATA(<PyArrayObject *> obj)
 
         # test type of array elements
         # TODO: I don't know how to find out what the type of elements is!!!!
@@ -169,7 +171,7 @@ cdef int * create_c_array_indices_from_python_object(int max_length, PyObject * 
 
         # we cannot copy the C-array directly as we must test each element
         for i from 0 <= i < length:
-            index = <int> array_data[i]
+            index = <INT_t> array_data[i]
             if not (0 <= index < max_length):
                 raise IndexError("Index %d out of bounds [%d, %d[" % (<long>index, 0, max_length))
             indices[i] = array_data[i]
@@ -177,6 +179,6 @@ cdef int * create_c_array_indices_from_python_object(int max_length, PyObject * 
     else:
         raise TypeError("Index object is not recognized to create a LLSparseMatrixView")
 
-    number_of_elements[0] = <int> length
+    number_of_elements[0] = <INT_t> length
 
     return indices

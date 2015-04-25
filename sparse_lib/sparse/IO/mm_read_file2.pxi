@@ -51,8 +51,11 @@ cdef int mm_read_banner(FILE *f, MM_typecode *matcode):
 
     # convert to lower case
     p = mtx
-    while (p != '\0''):
-        
+    i = 0
+    while (p != '\0'):p
+        p[i] = tolower(p[i])
+
+        i += 1
     #for (p=mtx; *p!='\0'; *p=tolower(*p),p++);  /* convert to lower case */
     # for (p=crd; *p!='\0'; *p=tolower(*p),p++);
     # for (p=data_type; *p!='\0'; *p=tolower(*p),p++);
