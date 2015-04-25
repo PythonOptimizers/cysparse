@@ -1,7 +1,8 @@
 """
 ll_mat extension.
 
-
+{{COMPLEX: NO}}
+{{GENERIC TYPES: NO}}
 """
 from __future__ import print_function
 
@@ -34,7 +35,7 @@ cdef extern from "Python.h":
     int PyComplex_Check(PyObject * o)
     double PyComplex_RealAsDouble(PyObject *op)
     double PyComplex_ImagAsDouble(PyObject *op)
-
+    PyObject* PyComplex_FromDoubles(double real, double imag)
 
 
 cdef INT_t LL_MAT_DEFAULT_SIZE_HINT = 40        # allocated size by default
@@ -73,10 +74,15 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
     #    INT_t    *link      # pointer to array of indices, see doc
     #    INT_t    *root      # pointer to array of indices, see doc
 
-    def __cinit__(self, INT_t nrow, INT_t ncol, INT_t size_hint=LL_MAT_DEFAULT_SIZE_HINT, bint is_symmetric=False, bint store_zeros=False, is_complex=False):
-
+    def __cinit__(self, INT_t nrow, INT_t ncol, SIZE_t size_hint=LL_MAT_DEFAULT_SIZE_HINT, bint is_symmetric=False, bint store_zeros=False, is_complex=False):
+        """
+        {{COMPLEX: YES}}
+        {{GENERIC TYPES: YES}}
+        """
         if size_hint < 1:
             raise ValueError('size_hint (%d) must be >= 1' % size_hint)
+
+        self.type_name = "LLSparseMatrix"
 
         val = <FLOAT_t *> PyMem_Malloc(self.size_hint * sizeof(FLOAT_t))
         if not val:
@@ -112,6 +118,10 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
             root[i] = -1
 
     def __dealloc__(self):
+        """
+        {{COMPLEX: YES}}
+        {{GENERIC TYPES: YES}}
+        """
         PyMem_Free(self.val)
         if self.is_complex:
             PyMem_Free(self.ival)
@@ -126,10 +136,11 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         Note:
             Internal arrays can be expanded or shrunk.
 
+        {{COMPLEX: YES}}
+        {{GENERIC TYPES: YES}}
         """
         cdef:
             void *temp
-            #INT_t nalloc_new
 
         temp = <INT_t *> PyMem_Realloc(self.col, nalloc_new * sizeof(INT_t))
         if not temp:
@@ -160,6 +171,9 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
 
         Note:
             We use ``LL_MAT_INCREASE_FACTOR`` as expanding factor.
+
+        {{COMPLEX: YES}}
+        {{GENERIC TYPES: YES}}
         """
         assert LL_MAT_INCREASE_FACTOR > 1.0
         cdef INT_t real_new_alloc = <INT_t>(<FLOAT_t>LL_MAT_INCREASE_FACTOR * self.nalloc) + 1
@@ -169,14 +183,14 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
     def compress(self):
         """
         Shrink matrix to its minimal size.
+
+        {{COMPLEX: YES}}
+        {{GENERIC TYPES: YES}}
         """
         cdef:
-            #FLOAT_t *val;
-            #INT_t *col, *link;
             INT_t i, k, k_next, k_last, k_new, nalloc_new;
 
         nalloc_new = self.nnz  # new size for val, col and link arrays
-
 
         # remove entries with k >= nalloc_new from free list
         k_last = -1
@@ -205,6 +219,8 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
                         self.link[k_last] = k_new
                     self.free = self.link[k_new]
                     self.val[k_new] = self.val[k]
+                    if self.is_complex:
+                        self.ival[k] = self.ival[k]
                     self.col[k_new] = self.col[k]
                     self.link[k_new] = self.link[k]
                     k_last = k_new
@@ -224,7 +240,11 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         Return the real amount of memory used internally for the matrix.
 
         Returns:
-            The exact number of bits used to store the matrix.
+            The exact number of bits used to store the matrix (but not the object in itself, only the internal memory
+            needed to store the matrix).
+
+        {{COMPLEX: YES}}
+        {{GENERIC TYPES: YES}}
         """
         cdef INT_t total_memory = 0
 
@@ -261,6 +281,8 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         See:
             :meth:`safe_put`.
 
+        {{COMPLEX: YES}}
+        {{GENERIC TYPES: YES}}
         """
         if self.is_symmetric and i < j:
             raise IndexError('Write operation to upper triangle of symmetric matrix not allowed')
@@ -305,6 +327,7 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
                 self.val[new_elem] = value
                 if self.is_complex:
                     self.ival[new_elem] = imaginary
+
                 self.col[new_elem] = j
                 self.link[new_elem] = k
 
@@ -339,6 +362,9 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
 
         Raises:
             IndexError: when index out of bound.
+
+        {{COMPLEX: YES}}
+        {{GENERIC TYPES: YES}}
         """
         if i < 0 or i >= self.nrow or j < 0 or j >= self.ncol:
             raise IndexError('Indices out of range')
@@ -346,16 +372,33 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         self.put(i, j, value, imaginary)
 
     cdef assign(self, LLSparseMatrixView view, object obj):
+        """
+        Set ``A[..., ...] = value`` directly.
+
+
+        {{COMPLEX: NO}}
+        {{GENERIC TYPES: YES}}
+        """
         # test if view correspond...
         assert self == view.A
+
+        if self.is_complex:
+            raise NotImplemented("This operation is not (yet) implemented for complex matrices")
 
         update_ll_mat_matrix_from_c_arrays_indices_assign(self, view.row_indices, view.nrow,
                                                        view.col_indices, view.ncol, obj)
 
     def put_triplet(self,  list val, list index_i, list index_j):
-        cdef index_i_length = len(index_i)
-        cdef index_j_length = len(index_j)
-        cdef val_length = len(val)
+        """
+        Assign triplet :math:`\{(i, j, \textrm{val})\}` values to the matrix..
+
+
+        {{COMPLEX: YES}}
+        {{GENERIC TYPES: YES}}
+        """
+        cdef Py_ssize_t index_i_length = len(index_i)
+        cdef Py_ssize_t index_j_length = len(index_j)
+        cdef Py_ssize_t val_length = len(val)
 
         assert index_j_length == index_j_length == val_length, "All lists must be of equal length"
 
@@ -378,6 +421,8 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         Raises:
             IndexError: when index out of bound.
 
+        {{COMPLEX: YES}}
+        {{GENERIC TYPES: YES}}
         """
         if len(key) != 2:
             raise IndexError('Index tuple must be of length 2 (not %d)' % len(key))
@@ -401,8 +446,8 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
             assert PyComplex_Check(elem), "Complex matrix takes only complex ellements"
             self.safe_put(i, j, <FLOAT_t>PyComplex_RealAsDouble(elem), <FLOAT_t>PyComplex_ImagAsDouble(elem))
 
-
-        self.safe_put(i, j, <FLOAT_t> value)
+        else:
+            self.safe_put(i, j, <FLOAT_t> value)
 
     ####################################################################################################################
     #                                            *** GET ***
@@ -416,6 +461,8 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         See:
             :meth:`safe_at`.
 
+        {{COMPLEX: YES}}
+        {{GENERIC TYPES: YES}}
         """
         cdef INT_t k, t
 
@@ -425,8 +472,12 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         k = self.root[i]
 
         while k != -1:
+            # TODO: check this: we go over all elements in row i: is it really necessary?
             if self.col[k] == j:
-                return self.val[k]
+                if self.is_complex:
+                    return <object>PyComplex_FromDoubles(self.val[k], self.ival[k])
+                else:
+                    return self.val[k]
             k = self.link[k]
 
         return 0.0
@@ -438,6 +489,8 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         Raises:
             IndexError: when index out of bound.
 
+        {{COMPLEX: YES}}
+        {{GENERIC TYPES: YES}}
         """
         if not 0 <= i < self.nrow or not 0 <= j < self.ncol:
             raise IndexError("Index out of bounds")
@@ -461,6 +514,9 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         Returns:
             If ``i`` and ``j`` are both integers, returns corresponding value ``ll_mat[i, j]``, otherwise
             returns a corresponding :class:`LLSparseMatrixView` view on the matrix.
+
+        {{COMPLEX: YES}}
+        {{GENERIC TYPES: YES}}
         """
         if len(key) != 2:
             raise IndexError('Index tuple must be of length 2 (not %d)' % len(key))
@@ -484,6 +540,8 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         Return a list of tuples (i,j) of non-zero matrix entries.
 
 
+        {{COMPLEX: YES}}
+        {{GENERIC TYPES: YES}}
         """
         cdef:
             #list list_container
@@ -514,14 +572,24 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         """
         Return a list of tuples ``(i,j)`` of non-zero matrix entries.
 
+        Note:
+            If ``store_zeros`` is ``True``, we zeros elements might have been stored and are returned.
+
         Warning:
             This method might leak memory...
+
+        {{COMPLEX: YES}}
+        {{GENERIC TYPES: YES}}
         """
         # TODO: do we have to INCREF and DECREF???
         cdef list list_ = self._keys()
         return list_
 
     cdef object _values(self):
+        """
+        {{COMPLEX: YES}}
+        {{GENERIC TYPES: YES}}
+        """
         cdef:
             PyObject *list_p   # the list that will hold the values
             INT_t i, k
@@ -535,7 +603,10 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
             for i from 0<= i < self.nrow:
                 k = self.root[i]
                 while k != -1:
-                    PyList_SET_ITEM(list_p, pos, PyFloat_FromDouble(self.val[k]))
+                    if self.is_complex:
+                        PyList_SET_ITEM(list_p, pos, PyComplex_FromDoubles(self.val[k], self.ival[k]))
+                    else:
+                        PyList_SET_ITEM(list_p, pos, PyFloat_FromDouble(self.val[k]))
                     pos += 1
                     k = self.link[k]
         else:
@@ -545,21 +616,32 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
 
     def values(self):
         """
-        Return a list of the non-zero matrix entries as floats.
+        Return a list of the non-zero matrix entries as floats or complex if matrix is complex.
+
+        Note:
+            If ``store_zeros`` is ``True``, we zeros elements might have been stored and are returned.
 
         Warning:
             This method might leak memory...
+
+        {{COMPLEX: YES}}
+        {{GENERIC TYPES: YES}}
         """
         # TODO: do we have to INCREF and DECREF???
         cdef list list_ = self._values()
         return list_
 
     cdef object _items(self):
+        """
+        {{COMPLEX: YES}}
+        {{GENERIC TYPES: YES}}
+        """
         cdef:
             PyObject *list_p;     # the list that will hold the values
             INT_t i, j, k
             INT_t pos = 0         # position in list
             FLOAT_t val
+            FLOAT_t ival
 
         list_p = PyList_New(self.nnz)
         if list_p == NULL:
@@ -570,7 +652,11 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
             while k != -1:
                 j = self.col[k]
                 val = self.val[k]
-                PyList_SET_ITEM(list_p, pos, Py_BuildValue("((ii)d)", i, j, val))
+                if self.is_complex:
+                    ival = self.ival[k]
+                    PyList_SET_ITEM(list_p, pos, Py_BuildValue("((ii)O)", i, j, PyComplex_FromDoubles(val, ival)))
+                else:
+                    PyList_SET_ITEM(list_p, pos, Py_BuildValue("((ii)d)", i, j, val))
                 pos += 1
 
                 k = self.link[k]
@@ -581,11 +667,16 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         """
         Return a list of tuples (indices, value) of the non-zero matrix entries' keys and values.
 
-        The indices are themselves tuples (i,j) of row\n\
-        and column values.
+        The indices are themselves tuples (i,j) of row and column values.
+
+        Note:
+            If ``store_zeros`` is ``True``, we zeros elements might have been stored and are returned.
 
         Warning:
             This method might leak memory...
+
+        {{COMPLEX: YES}}
+        {{GENERIC TYPES: YES}}
         """
         cdef list list_ = self._items()
         return list_
@@ -593,7 +684,13 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
     ####################################################################################################################
     #                                            *** PROPERTIES ***
     property T:
+        """
+        {{COMPLEX: NO}}
+        {{GENERIC TYPES: YES}}
+        """
         def __get__(self):
+            if self.is_complex:
+                raise NotImplemented("This operation is not (yet) implemented for complex matrices")
             return transposed_ll_mat(self)
 
         def __set__(self, value):
@@ -612,8 +709,12 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         Warning:
             Memory **must** be freed by the caller!
             Column indices are **not** necessarily sorted!
-        """
 
+        {{COMPLEX: NO}}
+        {{GENERIC TYPES: YES}}
+        """
+        if self.is_complex:
+            raise NotImplemented("This operation is not (yet) implemented for complex matrices")
         cdef INT_t * ind = <INT_t *> PyMem_Malloc((self.nrow + 1) * sizeof(INT_t))
         if not ind:
             raise MemoryError()
@@ -656,7 +757,13 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         Warning:
             Memory **must** be freed by the caller!
             Column indices are **not** necessarily sorted!
+
+        {{COMPLEX: NO}}
+        {{GENERIC TYPES: YES}}
         """
+        if self.is_complex:
+            raise NotImplemented("This operation is not (yet) implemented for complex matrices")
+
         cdef INT_t * ind = <INT_t *> PyMem_Malloc((self.ncol + 1) * sizeof(INT_t))
         if not ind:
             raise MemoryError()
@@ -722,13 +829,24 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         Warning:
             Memory **must** be freed by the caller!
             Column indices are **not** necessarily sorted!
+
+        {{COMPLEX: NO}}
+        {{GENERIC TYPES: NO}}
         """
-        pass
+        raise NotImplemented("This operation is not (yet) implemented")
 
     ####################################################################################################################
     # Multiplication
     ####################################################################################################################
     def __mul__(self, B):
+        """
+
+        {{COMPLEX: NO}}
+        {{GENERIC TYPES: YES}}
+        """
+        if self.is_complex:
+            raise NotImplemented("This operation is not (yet) implemented for complex matrices")
+
         # CASES
         if isinstance(B, LLSparseMatrix):
             return multiply_two_ll_mat(self, B)
@@ -748,10 +866,6 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
     ####################################################################################################################
     # String representations
     ####################################################################################################################
-    def __repr__(self):
-        s = "LLSparseMatrix of size %d by %d with %d non zero values" % (self.nrow, self.ncol, self.nnz)
-        return s
-
     def print_to(self, OUT):
         """
         Print content of matrix to output stream.
@@ -761,14 +875,8 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         """
         # TODO: adapt to any numbers... and allow for additional parameters to control the output
         cdef INT_t i, k, first = 1
-        symmetric_str = None
 
-        if self.is_symmetric:
-            symmetric_str = 'symmetric'
-        else:
-            symmetric_str = 'general'
-
-        print('LLSparseMatrix (%s, [%d,%d]):' % (symmetric_str, self.nrow, self.ncol), file=OUT)
+        print(self._matrix_description_before_printing(), file=OUT)
 
         cdef FLOAT_t *mat
         cdef INT_t j

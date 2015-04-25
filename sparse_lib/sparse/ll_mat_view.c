@@ -937,6 +937,32 @@ typedef npy_clongdouble __pyx_t_5numpy_clongdouble_t;
  * cdef inline object PyArray_MultiIterNew1(a):
  */
 typedef npy_cdouble __pyx_t_5numpy_complex_t;
+struct __pyx_opt_args_10sparse_lib_6sparse_6ll_mat_14LLSparseMatrix_put;
+struct __pyx_opt_args_10sparse_lib_6sparse_6ll_mat_14LLSparseMatrix_safe_put;
+
+/* "sparse_lib/sparse/ll_mat.pxd":39
+ *     # SET/GET
+ *     ####################################################################################################################
+ *     cdef put(self, INT_t i, INT_t j, FLOAT_t value, FLOAT_t imaginary=?)             # <<<<<<<<<<<<<<
+ *     cdef safe_put(self, INT_t i, INT_t j, FLOAT_t value, FLOAT_t imaginary=?)
+ *     cdef assign(self, LLSparseMatrixView view, obj)
+ */
+struct __pyx_opt_args_10sparse_lib_6sparse_6ll_mat_14LLSparseMatrix_put {
+  int __pyx_n;
+  __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t imaginary;
+};
+
+/* "sparse_lib/sparse/ll_mat.pxd":40
+ *     ####################################################################################################################
+ *     cdef put(self, INT_t i, INT_t j, FLOAT_t value, FLOAT_t imaginary=?)
+ *     cdef safe_put(self, INT_t i, INT_t j, FLOAT_t value, FLOAT_t imaginary=?)             # <<<<<<<<<<<<<<
+ *     cdef assign(self, LLSparseMatrixView view, obj)
+ * 
+ */
+struct __pyx_opt_args_10sparse_lib_6sparse_6ll_mat_14LLSparseMatrix_safe_put {
+  int __pyx_n;
+  __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t imaginary;
+};
 
 /* "sparse_lib/sparse/sparse_mat.pxd":3
  * from sparse_lib.cysparse_types cimport *
@@ -953,12 +979,13 @@ struct __pyx_obj_10sparse_lib_6sparse_10sparse_mat_SparseMatrix {
   int is_symmetric;
   int store_zeros;
   int is_complex;
+  char *type_name;
   PyObject *shape;
   PyObject *T;
 };
 
 
-/* "sparse_lib/sparse/sparse_mat.pxd":17
+/* "sparse_lib/sparse/sparse_mat.pxd":19
  *         object T         # for the transposed matrix
  * 
  * cdef class MutableSparseMatrix(SparseMatrix):             # <<<<<<<<<<<<<<
@@ -972,7 +999,7 @@ struct __pyx_obj_10sparse_lib_6sparse_10sparse_mat_MutableSparseMatrix {
 };
 
 
-/* "sparse_lib/sparse/sparse_mat.pxd":23
+/* "sparse_lib/sparse/sparse_mat.pxd":25
  * 
  * 
  * cdef class ImmutableSparseMatrix(SparseMatrix):             # <<<<<<<<<<<<<<
@@ -985,7 +1012,7 @@ struct __pyx_obj_10sparse_lib_6sparse_10sparse_mat_ImmutableSparseMatrix {
 };
 
 
-/* "sparse_lib/sparse/ll_mat.pxd":10
+/* "sparse_lib/sparse/ll_mat.pxd":15
  * from cpython cimport PyObject
  * 
  * cdef class LLSparseMatrix(MutableSparseMatrix):             # <<<<<<<<<<<<<<
@@ -997,7 +1024,7 @@ struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix {
   struct __pyx_vtabstruct_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *__pyx_vtab;
   __pyx_t_10sparse_lib_14cysparse_types_INT_t free;
   __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t *val;
-  __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t *zval;
+  __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t *ival;
   __pyx_t_10sparse_lib_14cysparse_types_INT_t *col;
   __pyx_t_10sparse_lib_14cysparse_types_INT_t *link;
   __pyx_t_10sparse_lib_14cysparse_types_INT_t *root;
@@ -1030,7 +1057,7 @@ struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView {
 
 
 
-/* "sparse_lib/sparse/ll_mat.pxd":10
+/* "sparse_lib/sparse/ll_mat.pxd":15
  * from cpython cimport PyObject
  * 
  * cdef class LLSparseMatrix(MutableSparseMatrix):             # <<<<<<<<<<<<<<
@@ -1041,8 +1068,8 @@ struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView {
 struct __pyx_vtabstruct_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix {
   PyObject *(*_realloc)(struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *, __pyx_t_10sparse_lib_14cysparse_types_INT_t);
   PyObject *(*_realloc_expand)(struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *);
-  PyObject *(*put)(struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *, __pyx_t_10sparse_lib_14cysparse_types_INT_t, __pyx_t_10sparse_lib_14cysparse_types_INT_t, __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t);
-  PyObject *(*safe_put)(struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *, __pyx_t_10sparse_lib_14cysparse_types_INT_t, __pyx_t_10sparse_lib_14cysparse_types_INT_t, __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t);
+  PyObject *(*put)(struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *, __pyx_t_10sparse_lib_14cysparse_types_INT_t, __pyx_t_10sparse_lib_14cysparse_types_INT_t, __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t, struct __pyx_opt_args_10sparse_lib_6sparse_6ll_mat_14LLSparseMatrix_put *__pyx_optional_args);
+  PyObject *(*safe_put)(struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *, __pyx_t_10sparse_lib_14cysparse_types_INT_t, __pyx_t_10sparse_lib_14cysparse_types_INT_t, __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t, struct __pyx_opt_args_10sparse_lib_6sparse_6ll_mat_14LLSparseMatrix_safe_put *__pyx_optional_args);
   PyObject *(*assign)(struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *, struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *, PyObject *);
   PyObject *(*at)(struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *, __pyx_t_10sparse_lib_14cysparse_types_INT_t, __pyx_t_10sparse_lib_14cysparse_types_INT_t);
   PyObject *(*safe_at)(struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *, __pyx_t_10sparse_lib_14cysparse_types_INT_t, __pyx_t_10sparse_lib_14cysparse_types_INT_t);
@@ -2866,7 +2893,7 @@ static PyObject *__pyx_f_10sparse_lib_6sparse_11ll_mat_view_18LLSparseMatrixView
  * 
  *     cdef safe_put(self, INT_t i, INT_t j, double value):
  */
-  __pyx_t_1 = ((struct __pyx_vtabstruct_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *)__pyx_v_self->A->__pyx_vtab)->put(__pyx_v_self->A, (__pyx_v_self->row_indices[__pyx_v_i]), (__pyx_v_self->col_indices[__pyx_v_j]), __pyx_v_value); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 78; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = ((struct __pyx_vtabstruct_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *)__pyx_v_self->A->__pyx_vtab)->put(__pyx_v_self->A, (__pyx_v_self->row_indices[__pyx_v_i]), (__pyx_v_self->col_indices[__pyx_v_j]), __pyx_v_value, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 78; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
@@ -8125,8 +8152,8 @@ PyMODINIT_FUNC PyInit_ll_mat_view(void)
   __pyx_ptype_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView = &__pyx_type_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView;
   /*--- Type import code ---*/
   __pyx_ptype_10sparse_lib_6sparse_10sparse_mat_SparseMatrix = __Pyx_ImportType("sparse_lib.sparse.sparse_mat", "SparseMatrix", sizeof(struct __pyx_obj_10sparse_lib_6sparse_10sparse_mat_SparseMatrix), 1); if (unlikely(!__pyx_ptype_10sparse_lib_6sparse_10sparse_mat_SparseMatrix)) {__pyx_filename = __pyx_f[4]; __pyx_lineno = 3; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_ptype_10sparse_lib_6sparse_10sparse_mat_MutableSparseMatrix = __Pyx_ImportType("sparse_lib.sparse.sparse_mat", "MutableSparseMatrix", sizeof(struct __pyx_obj_10sparse_lib_6sparse_10sparse_mat_MutableSparseMatrix), 1); if (unlikely(!__pyx_ptype_10sparse_lib_6sparse_10sparse_mat_MutableSparseMatrix)) {__pyx_filename = __pyx_f[4]; __pyx_lineno = 17; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_ptype_10sparse_lib_6sparse_10sparse_mat_ImmutableSparseMatrix = __Pyx_ImportType("sparse_lib.sparse.sparse_mat", "ImmutableSparseMatrix", sizeof(struct __pyx_obj_10sparse_lib_6sparse_10sparse_mat_ImmutableSparseMatrix), 1); if (unlikely(!__pyx_ptype_10sparse_lib_6sparse_10sparse_mat_ImmutableSparseMatrix)) {__pyx_filename = __pyx_f[4]; __pyx_lineno = 23; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_ptype_10sparse_lib_6sparse_10sparse_mat_MutableSparseMatrix = __Pyx_ImportType("sparse_lib.sparse.sparse_mat", "MutableSparseMatrix", sizeof(struct __pyx_obj_10sparse_lib_6sparse_10sparse_mat_MutableSparseMatrix), 1); if (unlikely(!__pyx_ptype_10sparse_lib_6sparse_10sparse_mat_MutableSparseMatrix)) {__pyx_filename = __pyx_f[4]; __pyx_lineno = 19; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_ptype_10sparse_lib_6sparse_10sparse_mat_ImmutableSparseMatrix = __Pyx_ImportType("sparse_lib.sparse.sparse_mat", "ImmutableSparseMatrix", sizeof(struct __pyx_obj_10sparse_lib_6sparse_10sparse_mat_ImmutableSparseMatrix), 1); if (unlikely(!__pyx_ptype_10sparse_lib_6sparse_10sparse_mat_ImmutableSparseMatrix)) {__pyx_filename = __pyx_f[4]; __pyx_lineno = 25; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_ptype_7cpython_4type_type = __Pyx_ImportType(__Pyx_BUILTIN_MODULE_NAME, "type", 
   #if CYTHON_COMPILING_IN_PYPY
   sizeof(PyTypeObject),
@@ -8141,8 +8168,8 @@ PyMODINIT_FUNC PyInit_ll_mat_view(void)
   __pyx_ptype_5numpy_ufunc = __Pyx_ImportType("numpy", "ufunc", sizeof(PyUFuncObject), 0); if (unlikely(!__pyx_ptype_5numpy_ufunc)) {__pyx_filename = __pyx_f[3]; __pyx_lineno = 864; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_ptype_7cpython_4bool_bool = __Pyx_ImportType(__Pyx_BUILTIN_MODULE_NAME, "bool", sizeof(PyBoolObject), 0); if (unlikely(!__pyx_ptype_7cpython_4bool_bool)) {__pyx_filename = __pyx_f[6]; __pyx_lineno = 8; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_ptype_7cpython_7complex_complex = __Pyx_ImportType(__Pyx_BUILTIN_MODULE_NAME, "complex", sizeof(PyComplexObject), 0); if (unlikely(!__pyx_ptype_7cpython_7complex_complex)) {__pyx_filename = __pyx_f[7]; __pyx_lineno = 15; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_ptype_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix = __Pyx_ImportType("sparse_lib.sparse.ll_mat", "LLSparseMatrix", sizeof(struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix), 1); if (unlikely(!__pyx_ptype_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix)) {__pyx_filename = __pyx_f[8]; __pyx_lineno = 10; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_vtabptr_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix = (struct __pyx_vtabstruct_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix*)__Pyx_GetVtable(__pyx_ptype_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix->tp_dict); if (unlikely(!__pyx_vtabptr_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix)) {__pyx_filename = __pyx_f[8]; __pyx_lineno = 10; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_ptype_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix = __Pyx_ImportType("sparse_lib.sparse.ll_mat", "LLSparseMatrix", sizeof(struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix), 1); if (unlikely(!__pyx_ptype_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix)) {__pyx_filename = __pyx_f[8]; __pyx_lineno = 15; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_vtabptr_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix = (struct __pyx_vtabstruct_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix*)__Pyx_GetVtable(__pyx_ptype_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix->tp_dict); if (unlikely(!__pyx_vtabptr_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix)) {__pyx_filename = __pyx_f[8]; __pyx_lineno = 15; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   /*--- Variable import code ---*/
   /*--- Function import code ---*/
   __pyx_t_1 = __Pyx_ImportModule("sparse_lib.utils.equality"); if (!__pyx_t_1) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}

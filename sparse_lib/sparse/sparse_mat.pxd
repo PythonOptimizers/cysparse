@@ -10,6 +10,8 @@ cdef class SparseMatrix:
         public bint store_zeros   # True if 0.0 is to be stored explicitly
         public bint is_complex    # True if values are complex
 
+        public char * type_name
+
         object shape     # for compatibility with numpy, array, etc.
 
         object T         # for the transposed matrix

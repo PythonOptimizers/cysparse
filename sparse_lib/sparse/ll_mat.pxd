@@ -1,3 +1,8 @@
+"""
+{{COMPLEX: YES}}
+{{GENERIC TYPES: YES}}
+"""
+
 from sparse_lib.cysparse_types cimport *
 
 from sparse_lib.sparse.sparse_mat cimport MutableSparseMatrix
