@@ -25,7 +25,7 @@ cdef extern from "Python.h":
     int PyInt_Check(PyObject *o)
 
 
-include "object_index.pxi"
+include "indices/object_index.pxi"
 
 cdef class LLSparseMatrixView:
     def __cinit__(self, LLSparseMatrix A, INT_t nrow, INT_t ncol):

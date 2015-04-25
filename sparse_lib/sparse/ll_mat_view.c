@@ -454,7 +454,7 @@ static const char *__pyx_filename;
 
 
 static const char *__pyx_f[] = {
-  "sparse_lib/sparse/object_index.pxi",
+  "sparse_lib/sparse/indices/object_index.pxi",
   "sparse_lib/sparse/ll_mat_view.pyx",
   "sparse_lib/sparse/ll_mat_view.pxd",
   "__init__.pxd",
@@ -1081,7 +1081,7 @@ static struct __pyx_vtabstruct_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *__py
 
 
 /* "sparse_lib/sparse/ll_mat_view.pyx":30
- * include "object_index.pxi"
+ * include "indices/object_index.pxi"
  * 
  * cdef class LLSparseMatrixView:             # <<<<<<<<<<<<<<
  *     def __cinit__(self, LLSparseMatrix A, INT_t nrow, INT_t ncol):
@@ -1687,7 +1687,7 @@ static PyObject *__pyx_tuple__12;
 static PyObject *__pyx_tuple__13;
 static PyObject *__pyx_tuple__14;
 
-/* "sparse_lib/sparse/object_index.pxi":59
+/* "sparse_lib/sparse/indices/object_index.pxi":59
  * 
  * 
  * cdef INT_t * create_c_array_indices_from_python_object(INT_t max_length, PyObject * obj, INT_t * number_of_elements) except NULL:             # <<<<<<<<<<<<<<
@@ -1722,7 +1722,7 @@ static __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_f_10sparse_lib_6sparse
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("create_c_array_indices_from_python_object", 0);
 
-  /* "sparse_lib/sparse/object_index.pxi":101
+  /* "sparse_lib/sparse/indices/object_index.pxi":101
  *     ####################################################################################################################
  *     #                                            *** Integer ***
  *     if PyInt_Check(obj):             # <<<<<<<<<<<<<<
@@ -1732,7 +1732,7 @@ static __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_f_10sparse_lib_6sparse
   __pyx_t_1 = (PyInt_Check(__pyx_v_obj) != 0);
   if (__pyx_t_1) {
 
-    /* "sparse_lib/sparse/object_index.pxi":103
+    /* "sparse_lib/sparse/indices/object_index.pxi":103
  *     if PyInt_Check(obj):
  *         # TODO: change this!
  *         i = <INT_t> PyInt_AS_LONG(obj)             # <<<<<<<<<<<<<<
@@ -1741,7 +1741,7 @@ static __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_f_10sparse_lib_6sparse
  */
     __pyx_v_i = ((__pyx_t_10sparse_lib_14cysparse_types_INT_t)PyInt_AS_LONG(__pyx_v_obj));
 
-    /* "sparse_lib/sparse/object_index.pxi":104
+    /* "sparse_lib/sparse/indices/object_index.pxi":104
  *         # TODO: change this!
  *         i = <INT_t> PyInt_AS_LONG(obj)
  *         length = 1             # <<<<<<<<<<<<<<
@@ -1750,7 +1750,7 @@ static __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_f_10sparse_lib_6sparse
  */
     __pyx_v_length = 1;
 
-    /* "sparse_lib/sparse/object_index.pxi":105
+    /* "sparse_lib/sparse/indices/object_index.pxi":105
  *         i = <INT_t> PyInt_AS_LONG(obj)
  *         length = 1
  *         indices = <INT_t *> PyMem_Malloc(length * sizeof(INT_t))             # <<<<<<<<<<<<<<
@@ -1759,7 +1759,7 @@ static __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_f_10sparse_lib_6sparse
  */
     __pyx_v_indices = ((__pyx_t_10sparse_lib_14cysparse_types_INT_t *)PyMem_Malloc((__pyx_v_length * (sizeof(__pyx_t_10sparse_lib_14cysparse_types_INT_t)))));
 
-    /* "sparse_lib/sparse/object_index.pxi":106
+    /* "sparse_lib/sparse/indices/object_index.pxi":106
  *         length = 1
  *         indices = <INT_t *> PyMem_Malloc(length * sizeof(INT_t))
  *         if not indices:             # <<<<<<<<<<<<<<
@@ -1769,7 +1769,7 @@ static __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_f_10sparse_lib_6sparse
     __pyx_t_1 = ((!(__pyx_v_indices != 0)) != 0);
     if (__pyx_t_1) {
 
-      /* "sparse_lib/sparse/object_index.pxi":107
+      /* "sparse_lib/sparse/indices/object_index.pxi":107
  *         indices = <INT_t *> PyMem_Malloc(length * sizeof(INT_t))
  *         if not indices:
  *             raise MemoryError()             # <<<<<<<<<<<<<<
@@ -1779,7 +1779,7 @@ static __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_f_10sparse_lib_6sparse
       PyErr_NoMemory(); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 107; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
 
-    /* "sparse_lib/sparse/object_index.pxi":109
+    /* "sparse_lib/sparse/indices/object_index.pxi":109
  *             raise MemoryError()
  * 
  *         indices[0] = i             # <<<<<<<<<<<<<<
@@ -1790,7 +1790,7 @@ static __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_f_10sparse_lib_6sparse
     goto __pyx_L3;
   }
 
-  /* "sparse_lib/sparse/object_index.pxi":112
+  /* "sparse_lib/sparse/indices/object_index.pxi":112
  * 
  *     #                                            *** Slice ***
  *     elif PySlice_Check(obj):             # <<<<<<<<<<<<<<
@@ -1800,7 +1800,7 @@ static __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_f_10sparse_lib_6sparse
   __pyx_t_1 = (PySlice_Check(__pyx_v_obj) != 0);
   if (__pyx_t_1) {
 
-    /* "sparse_lib/sparse/object_index.pxi":114
+    /* "sparse_lib/sparse/indices/object_index.pxi":114
  *     elif PySlice_Check(obj):
  *         # slice
  *         ret = PySlice_GetIndicesEx(<PySliceObject*>obj, max_length, &start, &stop, &step, &length)             # <<<<<<<<<<<<<<
@@ -1810,7 +1810,7 @@ static __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_f_10sparse_lib_6sparse
     __pyx_t_2 = PySlice_GetIndicesEx(((PySliceObject *)__pyx_v_obj), __pyx_v_max_length, (&__pyx_v_start), (&__pyx_v_stop), (&__pyx_v_step), (&__pyx_v_length)); if (unlikely(__pyx_t_2 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 114; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __pyx_v_ret = __pyx_t_2;
 
-    /* "sparse_lib/sparse/object_index.pxi":115
+    /* "sparse_lib/sparse/indices/object_index.pxi":115
  *         # slice
  *         ret = PySlice_GetIndicesEx(<PySliceObject*>obj, max_length, &start, &stop, &step, &length)
  *         if ret:             # <<<<<<<<<<<<<<
@@ -1820,7 +1820,7 @@ static __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_f_10sparse_lib_6sparse
     __pyx_t_1 = (__pyx_v_ret != 0);
     if (__pyx_t_1) {
 
-      /* "sparse_lib/sparse/object_index.pxi":116
+      /* "sparse_lib/sparse/indices/object_index.pxi":116
  *         ret = PySlice_GetIndicesEx(<PySliceObject*>obj, max_length, &start, &stop, &step, &length)
  *         if ret:
  *             raise RuntimeError("Slice could not be translated")             # <<<<<<<<<<<<<<
@@ -1834,7 +1834,7 @@ static __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_f_10sparse_lib_6sparse
       {__pyx_filename = __pyx_f[0]; __pyx_lineno = 116; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
 
-    /* "sparse_lib/sparse/object_index.pxi":120
+    /* "sparse_lib/sparse/indices/object_index.pxi":120
  *         #print "start, stop, step, length = (%d, %d, %d, %d)" % (start, stop, step, length)
  * 
  *         indices = <INT_t *> PyMem_Malloc(length * sizeof(INT_t))             # <<<<<<<<<<<<<<
@@ -1843,7 +1843,7 @@ static __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_f_10sparse_lib_6sparse
  */
     __pyx_v_indices = ((__pyx_t_10sparse_lib_14cysparse_types_INT_t *)PyMem_Malloc((__pyx_v_length * (sizeof(__pyx_t_10sparse_lib_14cysparse_types_INT_t)))));
 
-    /* "sparse_lib/sparse/object_index.pxi":121
+    /* "sparse_lib/sparse/indices/object_index.pxi":121
  * 
  *         indices = <INT_t *> PyMem_Malloc(length * sizeof(INT_t))
  *         if not indices:             # <<<<<<<<<<<<<<
@@ -1853,7 +1853,7 @@ static __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_f_10sparse_lib_6sparse
     __pyx_t_1 = ((!(__pyx_v_indices != 0)) != 0);
     if (__pyx_t_1) {
 
-      /* "sparse_lib/sparse/object_index.pxi":122
+      /* "sparse_lib/sparse/indices/object_index.pxi":122
  *         indices = <INT_t *> PyMem_Malloc(length * sizeof(INT_t))
  *         if not indices:
  *             raise MemoryError()             # <<<<<<<<<<<<<<
@@ -1863,7 +1863,7 @@ static __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_f_10sparse_lib_6sparse
       PyErr_NoMemory(); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 122; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
 
-    /* "sparse_lib/sparse/object_index.pxi":125
+    /* "sparse_lib/sparse/indices/object_index.pxi":125
  * 
  *         # populate indices
  *         i = start             # <<<<<<<<<<<<<<
@@ -1872,7 +1872,7 @@ static __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_f_10sparse_lib_6sparse
  */
     __pyx_v_i = __pyx_v_start;
 
-    /* "sparse_lib/sparse/object_index.pxi":126
+    /* "sparse_lib/sparse/indices/object_index.pxi":126
  *         # populate indices
  *         i = start
  *         for j from 0 <= j < length:             # <<<<<<<<<<<<<<
@@ -1882,7 +1882,7 @@ static __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_f_10sparse_lib_6sparse
     __pyx_t_4 = __pyx_v_length;
     for (__pyx_v_j = 0; __pyx_v_j < __pyx_t_4; __pyx_v_j++) {
 
-      /* "sparse_lib/sparse/object_index.pxi":127
+      /* "sparse_lib/sparse/indices/object_index.pxi":127
  *         i = start
  *         for j from 0 <= j < length:
  *             indices[j] = i             # <<<<<<<<<<<<<<
@@ -1891,7 +1891,7 @@ static __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_f_10sparse_lib_6sparse
  */
       (__pyx_v_indices[__pyx_v_j]) = __pyx_v_i;
 
-      /* "sparse_lib/sparse/object_index.pxi":128
+      /* "sparse_lib/sparse/indices/object_index.pxi":128
  *         for j from 0 <= j < length:
  *             indices[j] = i
  *             i += step             # <<<<<<<<<<<<<<
@@ -1903,7 +1903,7 @@ static __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_f_10sparse_lib_6sparse
     goto __pyx_L3;
   }
 
-  /* "sparse_lib/sparse/object_index.pxi":131
+  /* "sparse_lib/sparse/indices/object_index.pxi":131
  * 
  *     #                                            *** List ***
  *     elif PyList_Check(obj):             # <<<<<<<<<<<<<<
@@ -1913,7 +1913,7 @@ static __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_f_10sparse_lib_6sparse
   __pyx_t_1 = (PyList_Check(__pyx_v_obj) != 0);
   if (__pyx_t_1) {
 
-    /* "sparse_lib/sparse/object_index.pxi":132
+    /* "sparse_lib/sparse/indices/object_index.pxi":132
  *     #                                            *** List ***
  *     elif PyList_Check(obj):
  *         length = PyList_Size(obj)             # <<<<<<<<<<<<<<
@@ -1922,7 +1922,7 @@ static __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_f_10sparse_lib_6sparse
  */
     __pyx_v_length = PyList_Size(__pyx_v_obj);
 
-    /* "sparse_lib/sparse/object_index.pxi":133
+    /* "sparse_lib/sparse/indices/object_index.pxi":133
  *     elif PyList_Check(obj):
  *         length = PyList_Size(obj)
  *         indices = <INT_t *> PyMem_Malloc(length * sizeof(INT_t))             # <<<<<<<<<<<<<<
@@ -1931,7 +1931,7 @@ static __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_f_10sparse_lib_6sparse
  */
     __pyx_v_indices = ((__pyx_t_10sparse_lib_14cysparse_types_INT_t *)PyMem_Malloc((__pyx_v_length * (sizeof(__pyx_t_10sparse_lib_14cysparse_types_INT_t)))));
 
-    /* "sparse_lib/sparse/object_index.pxi":134
+    /* "sparse_lib/sparse/indices/object_index.pxi":134
  *         length = PyList_Size(obj)
  *         indices = <INT_t *> PyMem_Malloc(length * sizeof(INT_t))
  *         if not indices:             # <<<<<<<<<<<<<<
@@ -1941,7 +1941,7 @@ static __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_f_10sparse_lib_6sparse
     __pyx_t_1 = ((!(__pyx_v_indices != 0)) != 0);
     if (__pyx_t_1) {
 
-      /* "sparse_lib/sparse/object_index.pxi":135
+      /* "sparse_lib/sparse/indices/object_index.pxi":135
  *         indices = <INT_t *> PyMem_Malloc(length * sizeof(INT_t))
  *         if not indices:
  *             raise MemoryError()             # <<<<<<<<<<<<<<
@@ -1951,7 +1951,7 @@ static __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_f_10sparse_lib_6sparse
       PyErr_NoMemory(); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 135; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
 
-    /* "sparse_lib/sparse/object_index.pxi":137
+    /* "sparse_lib/sparse/indices/object_index.pxi":137
  *             raise MemoryError()
  * 
  *         for i from 0 <= i < length:             # <<<<<<<<<<<<<<
@@ -1961,7 +1961,7 @@ static __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_f_10sparse_lib_6sparse
     __pyx_t_4 = __pyx_v_length;
     for (__pyx_v_i = 0; __pyx_v_i < __pyx_t_4; __pyx_v_i++) {
 
-      /* "sparse_lib/sparse/object_index.pxi":138
+      /* "sparse_lib/sparse/indices/object_index.pxi":138
  * 
  *         for i from 0 <= i < length:
  *             val = PyList_GetItem(obj, <Py_ssize_t>i)             # <<<<<<<<<<<<<<
@@ -1970,7 +1970,7 @@ static __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_f_10sparse_lib_6sparse
  */
       __pyx_v_val = PyList_GetItem(__pyx_v_obj, ((Py_ssize_t)__pyx_v_i));
 
-      /* "sparse_lib/sparse/object_index.pxi":139
+      /* "sparse_lib/sparse/indices/object_index.pxi":139
  *         for i from 0 <= i < length:
  *             val = PyList_GetItem(obj, <Py_ssize_t>i)
  *             if PyInt_Check(val):             # <<<<<<<<<<<<<<
@@ -1980,7 +1980,7 @@ static __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_f_10sparse_lib_6sparse
       __pyx_t_1 = (PyInt_Check(__pyx_v_val) != 0);
       if (__pyx_t_1) {
 
-        /* "sparse_lib/sparse/object_index.pxi":140
+        /* "sparse_lib/sparse/indices/object_index.pxi":140
  *             val = PyList_GetItem(obj, <Py_ssize_t>i)
  *             if PyInt_Check(val):
  *                 index = PyInt_AS_LONG(val)             # <<<<<<<<<<<<<<
@@ -1989,7 +1989,7 @@ static __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_f_10sparse_lib_6sparse
  */
         __pyx_v_index = PyInt_AS_LONG(__pyx_v_val);
 
-        /* "sparse_lib/sparse/object_index.pxi":142
+        /* "sparse_lib/sparse/indices/object_index.pxi":142
  *                 index = PyInt_AS_LONG(val)
  *                 # test if index is valid
  *                 if not (0 <= index < max_length):             # <<<<<<<<<<<<<<
@@ -2003,7 +2003,7 @@ static __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_f_10sparse_lib_6sparse
         __pyx_t_5 = ((!(__pyx_t_1 != 0)) != 0);
         if (__pyx_t_5) {
 
-          /* "sparse_lib/sparse/object_index.pxi":143
+          /* "sparse_lib/sparse/indices/object_index.pxi":143
  *                 # test if index is valid
  *                 if not (0 <= index < max_length):
  *                     raise IndexError("Index %d out of bounds [%d, %d[" % (<long>index, 0, max_length))             # <<<<<<<<<<<<<<
@@ -2041,7 +2041,7 @@ static __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_f_10sparse_lib_6sparse
           {__pyx_filename = __pyx_f[0]; __pyx_lineno = 143; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         }
 
-        /* "sparse_lib/sparse/object_index.pxi":144
+        /* "sparse_lib/sparse/indices/object_index.pxi":144
  *                 if not (0 <= index < max_length):
  *                     raise IndexError("Index %d out of bounds [%d, %d[" % (<long>index, 0, max_length))
  *                 indices[i] = <INT_t> index             # <<<<<<<<<<<<<<
@@ -2053,7 +2053,7 @@ static __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_f_10sparse_lib_6sparse
       }
       /*else*/ {
 
-        /* "sparse_lib/sparse/object_index.pxi":146
+        /* "sparse_lib/sparse/indices/object_index.pxi":146
  *                 indices[i] = <INT_t> index
  *             else:
  *                 PyMem_Free(indices)             # <<<<<<<<<<<<<<
@@ -2062,7 +2062,7 @@ static __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_f_10sparse_lib_6sparse
  */
         PyMem_Free(__pyx_v_indices);
 
-        /* "sparse_lib/sparse/object_index.pxi":147
+        /* "sparse_lib/sparse/indices/object_index.pxi":147
  *             else:
  *                 PyMem_Free(indices)
  *                 raise ValueError("List must only contain integers")             # <<<<<<<<<<<<<<
@@ -2080,7 +2080,7 @@ static __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_f_10sparse_lib_6sparse
     goto __pyx_L3;
   }
 
-  /* "sparse_lib/sparse/object_index.pxi":150
+  /* "sparse_lib/sparse/indices/object_index.pxi":150
  * 
  *     #                                            *** numpy array ***
  *     elif PyArray_Check(obj):             # <<<<<<<<<<<<<<
@@ -2090,7 +2090,7 @@ static __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_f_10sparse_lib_6sparse
   __pyx_t_5 = (PyArray_Check(__pyx_v_obj) != 0);
   if (__pyx_t_5) {
 
-    /* "sparse_lib/sparse/object_index.pxi":151
+    /* "sparse_lib/sparse/indices/object_index.pxi":151
  *     #                                            *** numpy array ***
  *     elif PyArray_Check(obj):
  *         array_dim = <INT_t> PyArray_NDIM(<PyArrayObject *>obj)             # <<<<<<<<<<<<<<
@@ -2099,7 +2099,7 @@ static __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_f_10sparse_lib_6sparse
  */
     __pyx_v_array_dim = ((__pyx_t_10sparse_lib_14cysparse_types_INT_t)PyArray_NDIM(((PyArrayObject *)__pyx_v_obj)));
 
-    /* "sparse_lib/sparse/object_index.pxi":152
+    /* "sparse_lib/sparse/indices/object_index.pxi":152
  *     elif PyArray_Check(obj):
  *         array_dim = <INT_t> PyArray_NDIM(<PyArrayObject *>obj)
  *         if array_dim != 1:             # <<<<<<<<<<<<<<
@@ -2109,7 +2109,7 @@ static __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_f_10sparse_lib_6sparse
     __pyx_t_5 = ((__pyx_v_array_dim != 1) != 0);
     if (__pyx_t_5) {
 
-      /* "sparse_lib/sparse/object_index.pxi":153
+      /* "sparse_lib/sparse/indices/object_index.pxi":153
  *         array_dim = <INT_t> PyArray_NDIM(<PyArrayObject *>obj)
  *         if array_dim != 1:
  *             raise IndexError("Numpy array must have only one dimension")             # <<<<<<<<<<<<<<
@@ -2123,7 +2123,7 @@ static __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_f_10sparse_lib_6sparse
       {__pyx_filename = __pyx_f[0]; __pyx_lineno = 153; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
 
-    /* "sparse_lib/sparse/object_index.pxi":155
+    /* "sparse_lib/sparse/indices/object_index.pxi":155
  *             raise IndexError("Numpy array must have only one dimension")
  * 
  *         length = <Py_ssize_t> PyArray_DIM(<PyArrayObject *>obj, 0)             # <<<<<<<<<<<<<<
@@ -2132,7 +2132,7 @@ static __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_f_10sparse_lib_6sparse
  */
     __pyx_v_length = ((Py_ssize_t)PyArray_DIM(((PyArrayObject *)__pyx_v_obj), 0));
 
-    /* "sparse_lib/sparse/object_index.pxi":157
+    /* "sparse_lib/sparse/indices/object_index.pxi":157
  *         length = <Py_ssize_t> PyArray_DIM(<PyArrayObject *>obj, 0)
  * 
  *         indices = <INT_t *> PyMem_Malloc(length * sizeof(INT_t))             # <<<<<<<<<<<<<<
@@ -2141,7 +2141,7 @@ static __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_f_10sparse_lib_6sparse
  */
     __pyx_v_indices = ((__pyx_t_10sparse_lib_14cysparse_types_INT_t *)PyMem_Malloc((__pyx_v_length * (sizeof(__pyx_t_10sparse_lib_14cysparse_types_INT_t)))));
 
-    /* "sparse_lib/sparse/object_index.pxi":158
+    /* "sparse_lib/sparse/indices/object_index.pxi":158
  * 
  *         indices = <INT_t *> PyMem_Malloc(length * sizeof(INT_t))
  *         if not indices:             # <<<<<<<<<<<<<<
@@ -2151,7 +2151,7 @@ static __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_f_10sparse_lib_6sparse
     __pyx_t_5 = ((!(__pyx_v_indices != 0)) != 0);
     if (__pyx_t_5) {
 
-      /* "sparse_lib/sparse/object_index.pxi":159
+      /* "sparse_lib/sparse/indices/object_index.pxi":159
  *         indices = <INT_t *> PyMem_Malloc(length * sizeof(INT_t))
  *         if not indices:
  *             raise MemoryError()             # <<<<<<<<<<<<<<
@@ -2161,7 +2161,7 @@ static __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_f_10sparse_lib_6sparse
       PyErr_NoMemory(); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 159; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
 
-    /* "sparse_lib/sparse/object_index.pxi":163
+    /* "sparse_lib/sparse/indices/object_index.pxi":163
  *         # TODO: remove or control this is not DANGEROUS
  *         # This is dangerous if array is NOT C-contiguous!!!
  *         array_data = <INT_t* > PyArray_DATA(<PyArrayObject *> obj)             # <<<<<<<<<<<<<<
@@ -2170,7 +2170,7 @@ static __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_f_10sparse_lib_6sparse
  */
     __pyx_v_array_data = ((__pyx_t_10sparse_lib_14cysparse_types_INT_t *)PyArray_DATA(((PyArrayObject *)__pyx_v_obj)));
 
-    /* "sparse_lib/sparse/object_index.pxi":173
+    /* "sparse_lib/sparse/indices/object_index.pxi":173
  * 
  *         # we cannot copy the C-array directly as we must test each element
  *         for i from 0 <= i < length:             # <<<<<<<<<<<<<<
@@ -2180,7 +2180,7 @@ static __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_f_10sparse_lib_6sparse
     __pyx_t_4 = __pyx_v_length;
     for (__pyx_v_i = 0; __pyx_v_i < __pyx_t_4; __pyx_v_i++) {
 
-      /* "sparse_lib/sparse/object_index.pxi":174
+      /* "sparse_lib/sparse/indices/object_index.pxi":174
  *         # we cannot copy the C-array directly as we must test each element
  *         for i from 0 <= i < length:
  *             index = <INT_t> array_data[i]             # <<<<<<<<<<<<<<
@@ -2189,7 +2189,7 @@ static __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_f_10sparse_lib_6sparse
  */
       __pyx_v_index = ((__pyx_t_10sparse_lib_14cysparse_types_INT_t)(__pyx_v_array_data[__pyx_v_i]));
 
-      /* "sparse_lib/sparse/object_index.pxi":175
+      /* "sparse_lib/sparse/indices/object_index.pxi":175
  *         for i from 0 <= i < length:
  *             index = <INT_t> array_data[i]
  *             if not (0 <= index < max_length):             # <<<<<<<<<<<<<<
@@ -2203,7 +2203,7 @@ static __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_f_10sparse_lib_6sparse
       __pyx_t_1 = ((!(__pyx_t_5 != 0)) != 0);
       if (__pyx_t_1) {
 
-        /* "sparse_lib/sparse/object_index.pxi":176
+        /* "sparse_lib/sparse/indices/object_index.pxi":176
  *             index = <INT_t> array_data[i]
  *             if not (0 <= index < max_length):
  *                 raise IndexError("Index %d out of bounds [%d, %d[" % (<long>index, 0, max_length))             # <<<<<<<<<<<<<<
@@ -2241,7 +2241,7 @@ static __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_f_10sparse_lib_6sparse
         {__pyx_filename = __pyx_f[0]; __pyx_lineno = 176; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
 
-      /* "sparse_lib/sparse/object_index.pxi":177
+      /* "sparse_lib/sparse/indices/object_index.pxi":177
  *             if not (0 <= index < max_length):
  *                 raise IndexError("Index %d out of bounds [%d, %d[" % (<long>index, 0, max_length))
  *             indices[i] = array_data[i]             # <<<<<<<<<<<<<<
@@ -2254,7 +2254,7 @@ static __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_f_10sparse_lib_6sparse
   }
   /*else*/ {
 
-    /* "sparse_lib/sparse/object_index.pxi":180
+    /* "sparse_lib/sparse/indices/object_index.pxi":180
  * 
  *     else:
  *         raise TypeError("Index object is not recognized to create a LLSparseMatrixView")             # <<<<<<<<<<<<<<
@@ -2269,7 +2269,7 @@ static __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_f_10sparse_lib_6sparse
   }
   __pyx_L3:;
 
-  /* "sparse_lib/sparse/object_index.pxi":182
+  /* "sparse_lib/sparse/indices/object_index.pxi":182
  *         raise TypeError("Index object is not recognized to create a LLSparseMatrixView")
  * 
  *     number_of_elements[0] = <INT_t> length             # <<<<<<<<<<<<<<
@@ -2278,7 +2278,7 @@ static __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_f_10sparse_lib_6sparse
  */
   (__pyx_v_number_of_elements[0]) = ((__pyx_t_10sparse_lib_14cysparse_types_INT_t)__pyx_v_length);
 
-  /* "sparse_lib/sparse/object_index.pxi":184
+  /* "sparse_lib/sparse/indices/object_index.pxi":184
  *     number_of_elements[0] = <INT_t> length
  * 
  *     return indices             # <<<<<<<<<<<<<<
@@ -2286,7 +2286,7 @@ static __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_f_10sparse_lib_6sparse
   __pyx_r = __pyx_v_indices;
   goto __pyx_L0;
 
-  /* "sparse_lib/sparse/object_index.pxi":59
+  /* "sparse_lib/sparse/indices/object_index.pxi":59
  * 
  * 
  * cdef INT_t * create_c_array_indices_from_python_object(INT_t max_length, PyObject * obj, INT_t * number_of_elements) except NULL:             # <<<<<<<<<<<<<<
@@ -7885,7 +7885,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "sparse_lib/sparse/object_index.pxi":116
+  /* "sparse_lib/sparse/indices/object_index.pxi":116
  *         ret = PySlice_GetIndicesEx(<PySliceObject*>obj, max_length, &start, &stop, &step, &length)
  *         if ret:
  *             raise RuntimeError("Slice could not be translated")             # <<<<<<<<<<<<<<
@@ -7896,7 +7896,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple_);
   __Pyx_GIVEREF(__pyx_tuple_);
 
-  /* "sparse_lib/sparse/object_index.pxi":147
+  /* "sparse_lib/sparse/indices/object_index.pxi":147
  *             else:
  *                 PyMem_Free(indices)
  *                 raise ValueError("List must only contain integers")             # <<<<<<<<<<<<<<
@@ -7907,7 +7907,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
 
-  /* "sparse_lib/sparse/object_index.pxi":153
+  /* "sparse_lib/sparse/indices/object_index.pxi":153
  *         array_dim = <INT_t> PyArray_NDIM(<PyArrayObject *>obj)
  *         if array_dim != 1:
  *             raise IndexError("Numpy array must have only one dimension")             # <<<<<<<<<<<<<<
@@ -7918,7 +7918,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__3);
   __Pyx_GIVEREF(__pyx_tuple__3);
 
-  /* "sparse_lib/sparse/object_index.pxi":180
+  /* "sparse_lib/sparse/indices/object_index.pxi":180
  * 
  *     else:
  *         raise TypeError("Index object is not recognized to create a LLSparseMatrixView")             # <<<<<<<<<<<<<<
