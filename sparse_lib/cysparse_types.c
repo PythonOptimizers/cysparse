@@ -2326,7 +2326,7 @@ PyMODINIT_FUNC PyInit_cysparse_types(void)
   /* "sparse_lib/cysparse_types.pyx":12
  * 
  * # BASIC_TYPES['type] = (Nbr of bits, enum value)
- * BASIC_TYPES['INT32_t'] = (INT32_t_BIT, INT32_T, int)             # <<<<<<<<<<<<<<
+ * BASIC_TYPES['INT32_t'] = (INT32_t_BIT, INT32_T)             # <<<<<<<<<<<<<<
  * BASIC_TYPES['UINT32_t'] = (UINT32_t_BIT, UINT32_T)
  * BASIC_TYPES['INT64_t'] = (INT64_t_BIT, INT64_T)
  */
@@ -2334,15 +2334,12 @@ PyMODINIT_FUNC PyInit_cysparse_types(void)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_e_10sparse_lib_25sparse_lib_dot_cysparse_types_INT32_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 12; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = PyTuple_New(3); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 12; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 12; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_1);
-  __Pyx_INCREF(((PyObject *)((PyObject*)(&PyInt_Type))));
-  PyTuple_SET_ITEM(__pyx_t_3, 2, ((PyObject *)((PyObject*)(&PyInt_Type))));
-  __Pyx_GIVEREF(((PyObject *)((PyObject*)(&PyInt_Type))));
   __pyx_t_2 = 0;
   __pyx_t_1 = 0;
   __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_BASIC_TYPES); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 12; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -2353,7 +2350,7 @@ PyMODINIT_FUNC PyInit_cysparse_types(void)
 
   /* "sparse_lib/cysparse_types.pyx":13
  * # BASIC_TYPES['type] = (Nbr of bits, enum value)
- * BASIC_TYPES['INT32_t'] = (INT32_t_BIT, INT32_T, int)
+ * BASIC_TYPES['INT32_t'] = (INT32_t_BIT, INT32_T)
  * BASIC_TYPES['UINT32_t'] = (UINT32_t_BIT, UINT32_T)             # <<<<<<<<<<<<<<
  * BASIC_TYPES['INT64_t'] = (INT64_t_BIT, INT64_T)
  * BASIC_TYPES['INT64_t'] = (INT64_t_BIT, INT64_T)
@@ -2377,7 +2374,7 @@ PyMODINIT_FUNC PyInit_cysparse_types(void)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "sparse_lib/cysparse_types.pyx":14
- * BASIC_TYPES['INT32_t'] = (INT32_t_BIT, INT32_T, int)
+ * BASIC_TYPES['INT32_t'] = (INT32_t_BIT, INT32_T)
  * BASIC_TYPES['UINT32_t'] = (UINT32_t_BIT, UINT32_T)
  * BASIC_TYPES['INT64_t'] = (INT64_t_BIT, INT64_T)             # <<<<<<<<<<<<<<
  * BASIC_TYPES['INT64_t'] = (INT64_t_BIT, INT64_T)

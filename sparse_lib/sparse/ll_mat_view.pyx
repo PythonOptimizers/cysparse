@@ -52,8 +52,6 @@ cdef class LLSparseMatrixView:
                 self._nnz = self.count_nnz()
                 self.__counted_nnz = True
 
-
-
             return self._nnz
 
         def __set__(self, value):
@@ -166,7 +164,7 @@ cdef class LLSparseMatrixView:
         """
         self.assert_status_ok()
 
-        cdef INT_t size_hint
+        cdef SIZE_t size_hint
         cdef double val
 
         if compress:
