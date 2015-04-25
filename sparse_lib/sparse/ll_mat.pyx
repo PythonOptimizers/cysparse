@@ -739,7 +739,7 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         if self.nrow <= LL_MAT_PPRINT_COL_THRESH and self.ncol <= LL_MAT_PPRINT_ROW_THRESH:
             # create linear vector presentation
             # TODO: put in a method of its own
-            mat = <double *> PyMem_Malloc(self.nrow * self.ncol * sizeof(double))
+            mat = <FLOAT_t *> PyMem_Malloc(self.nrow * self.ncol * sizeof(FLOAT_t))
 
             if not mat:
                 raise MemoryError()
@@ -818,9 +818,9 @@ def MakeLLSparseMatrix(**kwargs):
         return LLSparseMatrix(nrow=real_nrow, ncol=real_ncol, size_hint=size_hint, store_zeros=store_zeros, is_symmetric=is_symmetric)
 
     # CASE 2
-    cdef double[:, :] matrix_view
+    cdef FLOAT_t[:, :] matrix_view
     cdef INT_t i, j
-    cdef double value
+    cdef FLOAT_t value
 
     if matrix is not None and mm_filename is None:
         # TODO: direct access into the numpy array
@@ -903,7 +903,7 @@ cdef LLSparseMatrix multiply_two_ll_mat(LLSparseMatrix A, LLSparseMatrix B):
 
     # NON OPTIMIZED MULTIPLICATION
     cdef:
-        double valA
+        FLOAT_t valA
         INT_t iA, jA, kA, kB
 
     for iA from 0 <= iA < A_nrow:
@@ -953,18 +953,18 @@ cdef cnp.ndarray[cnp.double_t, ndim=1] multiply_ll_mat_with_numpy_vector(LLSpars
         raise IndexError("Dimensions must agree ([%d,%d] * [%d, %d])" % (A_nrow, A_ncol, b.size, 1))
 
     # direct access to vector b
-    cdef double * b_data = <double *> b.data
+    cdef FLOAT_t * b_data = <FLOAT_t *> b.data
 
     # array c = A * b
     cdef cnp.ndarray[cnp.double_t, ndim=1] c = np.empty(A_nrow, dtype=np.float64)
-    cdef double * c_data = <double *> c.data
+    cdef FLOAT_t * c_data = <FLOAT_t *> c.data
 
     cdef:
         INT_t i, j
         INT_t k
 
-        double val
-        double val_c
+        FLOAT_t val
+        FLOAT_t val_c
 
     for i from 0 <= i < A_nrow:
         k = A.root[i]
@@ -1007,18 +1007,18 @@ cdef cnp.ndarray[cnp.double_t, ndim=1, mode='c'] multiply_ll_mat_with_numpy_vect
     cdef INT_t A_nrow = A.nrow
     cdef INT_t A_ncol = A.ncol
 
-    cdef size_t sd = sizeof(double)
+    cdef size_t sd = sizeof(FLOAT_t)
 
     # test dimensions
     if A_ncol != b.size:
         raise IndexError("Dimensions must agree ([%d,%d] * [%d, %d])" % (A_nrow, A_ncol, b.size, 1))
 
     # direct access to vector b
-    cdef double * b_data = <double *> b.data
+    cdef FLOAT_t * b_data = <FLOAT_t *> b.data
 
     # array c = A * b
     cdef cnp.ndarray[cnp.double_t, ndim=1] c = np.empty(A_nrow, dtype=np.float64)
-    cdef double * c_data = <double *> c.data
+    cdef FLOAT_t * c_data = <FLOAT_t *> c.data
 
     # test if b vector is C-contiguous or not
     if cnp.PyArray_ISCONTIGUOUS(b):
@@ -1071,7 +1071,7 @@ cdef LLSparseMatrix transposed_ll_mat(LLSparseMatrix A):
         INT_t At_nalloc = A.nalloc
 
         INT_t i, k
-        double val
+        FLOAT_t val
 
     cdef LLSparseMatrix transposed_A = LLSparseMatrix(nrow =At_nrow, ncol=At_ncol, size_hint=At_nalloc)
 
@@ -1126,16 +1126,16 @@ cdef update_ll_mat_matrix_from_c_arrays_indices_assign(LLSparseMatrix A, INT_t *
     else:
         for i from 0 <= i < index_i_length:
             for j from 0 <= j < index_j_length:
-                A.put(index_i[i], index_j[j], <double> obj[tuple(i, j)]) # not really optimized...
+                A.put(index_i[i], index_j[j], <FLOAT_t> obj[tuple(i, j)]) # not really optimized...
 
-cdef bint update_ll_mat_item_add(LLSparseMatrix A, INT_t i, INT_t j, double x):
+cdef bint update_ll_mat_item_add(LLSparseMatrix A, INT_t i, INT_t j, FLOAT_t x):
     """
     Update-add matrix entry: ``A[i,j] += x``
 
     Args:
         A: Matrix to update.
         i, j: Coordinates of item to update.
-        x (double): Value to add to item to update ``A[i, j]``.
+        x (FLOAT_t): Value to add to item to update ``A[i, j]``.
 
     Returns:
         True.
@@ -1212,8 +1212,8 @@ cdef bint update_ll_mat_item_add(LLSparseMatrix A, INT_t i, INT_t j, double x):
 # Matrix - vector multiplication kernels
 ########################################################################################################################
 # C-contiguous, no symmetric
-cdef void multiply_ll_mat_with_numpy_vector_kernel(INT_t m, double *x, double *y,
-         double *val, INT_t *col, INT_t *link, INT_t *root):
+cdef void multiply_ll_mat_with_numpy_vector_kernel(INT_t m, FLOAT_t *x, FLOAT_t *y,
+         FLOAT_t *val, INT_t *col, INT_t *link, INT_t *root):
     """
     Compute ``y = A * x``.
 
@@ -1233,7 +1233,7 @@ cdef void multiply_ll_mat_with_numpy_vector_kernel(INT_t m, double *x, double *y
         root: C-contiguous C-array corresponding to vector ``A.root``.
     """
     cdef:
-        double s
+        FLOAT_t s
         INT_t i, k
 
     for i from 0 <= i < m:
@@ -1247,8 +1247,8 @@ cdef void multiply_ll_mat_with_numpy_vector_kernel(INT_t m, double *x, double *y
         y[i] = s
 
 # C-contiguous, symmetric
-cdef void multiply_sym_ll_mat_with_numpy_vector_kernel(INT_t m, double *x, double *y,
-             double *val, INT_t *col, INT_t *link, INT_t *root):
+cdef void multiply_sym_ll_mat_with_numpy_vector_kernel(INT_t m, FLOAT_t *x, FLOAT_t *y,
+             FLOAT_t *val, INT_t *col, INT_t *link, INT_t *root):
     """
     Compute ``y = A * x``.
 
@@ -1268,7 +1268,7 @@ cdef void multiply_sym_ll_mat_with_numpy_vector_kernel(INT_t m, double *x, doubl
         root: C-contiguous C-array corresponding to vector ``A.root``.
     """
     cdef:
-        double s, v, xi
+        FLOAT_t s, v, xi
         INT_t i, j, k
 
     for i from 0 <= i < m:
@@ -1288,9 +1288,9 @@ cdef void multiply_sym_ll_mat_with_numpy_vector_kernel(INT_t m, double *x, doubl
 
 # Non C-contiguous, non symmetric
 cdef void multiply_ll_mat_with_strided_numpy_vector_kernel(INT_t m,
-            double *x, INT_t incx,
-            double *y, INT_t incy,
-            double *val, INT_t *col, INT_t *link, INT_t *root):
+            FLOAT_t *x, INT_t incx,
+            FLOAT_t *y, INT_t incy,
+            FLOAT_t *val, INT_t *col, INT_t *link, INT_t *root):
     """
     Compute ``y = A * x``.
 
@@ -1312,7 +1312,7 @@ cdef void multiply_ll_mat_with_strided_numpy_vector_kernel(INT_t m,
         root: C-contiguous C-array corresponding to vector ``A.root``.
     """
     cdef:
-        double s
+        FLOAT_t s
         INT_t i, k
 
     for i from 0 <= i < m:
@@ -1327,9 +1327,9 @@ cdef void multiply_ll_mat_with_strided_numpy_vector_kernel(INT_t m,
 
 # Non C-contiguous, non symmetric
 cdef void multiply_sym_ll_mat_with_strided_numpy_vector_kernel(INT_t m,
-                double *x, INT_t incx,
-                double *y, INT_t incy,
-                double *val, INT_t *col, INT_t *link, INT_t *root):
+                FLOAT_t *x, INT_t incx,
+                FLOAT_t *y, INT_t incy,
+                FLOAT_t *val, INT_t *col, INT_t *link, INT_t *root):
     """
     Compute ``y = A * x``.
 
@@ -1351,7 +1351,7 @@ cdef void multiply_sym_ll_mat_with_strided_numpy_vector_kernel(INT_t m,
         root: C-contiguous C-array corresponding to vector ``A.root``.
     """
     cdef:
-        double s, v, xi
+        FLOAT_t s, v, xi
         INT_t i, j, k
 
     for i from 0 <= i < m:

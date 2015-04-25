@@ -19,7 +19,8 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
     ####################################################################################################################
     cdef:
         INT_t     free      # index to first element in free chain
-        double   *val       # pointer to array of values
+        FLOAT_t   *val       # pointer to array of values
+
         INT_t    *col       # pointer to array of indices, see doc
         INT_t    *link      # pointer to array of indices, see doc
         INT_t    *root      # pointer to array of indices, see doc
@@ -30,8 +31,8 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
     ####################################################################################################################
     # SET/GET
     ####################################################################################################################
-    cdef put(self, INT_t i, INT_t j, double value)
-    cdef safe_put(self, INT_t i, INT_t j, double value)
+    cdef put(self, INT_t i, INT_t j, FLOAT_t value)
+    cdef safe_put(self, INT_t i, INT_t j, FLOAT_t value)
     cdef assign(self, LLSparseMatrixView view, obj)
 
     cdef at(self, INT_t i, INT_t j)
@@ -53,4 +54,4 @@ cdef LLSparseMatrix transposed_ll_mat(LLSparseMatrix A)
 cdef update_ll_mat_matrix_from_c_arrays_indices_assign(LLSparseMatrix A, INT_t * index_i, Py_ssize_t index_i_length,
                                                        INT_t * index_j, Py_ssize_t index_j_length, object obj)
 
-cdef bint update_ll_mat_item_add(LLSparseMatrix A, INT_t i, INT_t j, double x)
+cdef bint update_ll_mat_item_add(LLSparseMatrix A, INT_t i, INT_t j, FLOAT_t x)

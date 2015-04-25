@@ -1191,7 +1191,7 @@ struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix {
   struct __pyx_obj_10sparse_lib_6sparse_10sparse_mat_MutableSparseMatrix __pyx_base;
   struct __pyx_vtabstruct_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *__pyx_vtab;
   __pyx_t_10sparse_lib_14cysparse_types_INT_t free;
-  double *val;
+  __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t *val;
   __pyx_t_10sparse_lib_14cysparse_types_INT_t *col;
   __pyx_t_10sparse_lib_14cysparse_types_INT_t *link;
   __pyx_t_10sparse_lib_14cysparse_types_INT_t *root;
@@ -1336,8 +1336,8 @@ static struct __pyx_vtabstruct_10sparse_lib_6sparse_7csr_mat_CSRSparseMatrix *__
 struct __pyx_vtabstruct_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix {
   PyObject *(*_realloc)(struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *, __pyx_t_10sparse_lib_14cysparse_types_INT_t);
   PyObject *(*_realloc_expand)(struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *);
-  PyObject *(*put)(struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *, __pyx_t_10sparse_lib_14cysparse_types_INT_t, __pyx_t_10sparse_lib_14cysparse_types_INT_t, double);
-  PyObject *(*safe_put)(struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *, __pyx_t_10sparse_lib_14cysparse_types_INT_t, __pyx_t_10sparse_lib_14cysparse_types_INT_t, double);
+  PyObject *(*put)(struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *, __pyx_t_10sparse_lib_14cysparse_types_INT_t, __pyx_t_10sparse_lib_14cysparse_types_INT_t, __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t);
+  PyObject *(*safe_put)(struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *, __pyx_t_10sparse_lib_14cysparse_types_INT_t, __pyx_t_10sparse_lib_14cysparse_types_INT_t, __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t);
   PyObject *(*assign)(struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *, struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *, PyObject *);
   PyObject *(*at)(struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *, __pyx_t_10sparse_lib_14cysparse_types_INT_t, __pyx_t_10sparse_lib_14cysparse_types_INT_t);
   PyObject *(*safe_at)(struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *, __pyx_t_10sparse_lib_14cysparse_types_INT_t, __pyx_t_10sparse_lib_14cysparse_types_INT_t);
@@ -1870,7 +1870,7 @@ static int __Pyx_ValidateAndInit_memviewslice(
                 __Pyx_memviewslice *memviewslice,
                 PyObject *original_obj);
 
-static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_dsds_double(PyObject *);
+static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_dsds_nn___pyx_t_10sparse_lib_14cysparse_types_FLOAT_t(PyObject *);
 
 static int __Pyx_check_binary_version(void);
 
@@ -2048,13 +2048,13 @@ static struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *__pyx_f_10s
 static PyObject *__pyx_f_10sparse_lib_6sparse_6ll_mat_multiply_ll_mat_with_numpy_ndarray(struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *, PyArrayObject *); /*proto*/
 static struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *__pyx_f_10sparse_lib_6sparse_6ll_mat_transposed_ll_mat(struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *); /*proto*/
 static PyObject *__pyx_f_10sparse_lib_6sparse_6ll_mat_update_ll_mat_matrix_from_c_arrays_indices_assign(struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *, __pyx_t_10sparse_lib_14cysparse_types_INT_t *, Py_ssize_t, __pyx_t_10sparse_lib_14cysparse_types_INT_t *, Py_ssize_t, PyObject *); /*proto*/
-static int __pyx_f_10sparse_lib_6sparse_6ll_mat_update_ll_mat_item_add(struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *, __pyx_t_10sparse_lib_14cysparse_types_INT_t, __pyx_t_10sparse_lib_14cysparse_types_INT_t, double); /*proto*/
+static int __pyx_f_10sparse_lib_6sparse_6ll_mat_update_ll_mat_item_add(struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *, __pyx_t_10sparse_lib_14cysparse_types_INT_t, __pyx_t_10sparse_lib_14cysparse_types_INT_t, __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t); /*proto*/
 static PyArrayObject *__pyx_f_10sparse_lib_6sparse_6ll_mat_multiply_ll_mat_with_numpy_vector2(struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *, PyArrayObject *); /*proto*/
 static __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_f_10sparse_lib_6sparse_6ll_mat_PyLLSparseMatrix_Check(PyObject *); /*proto*/
-static void __pyx_f_10sparse_lib_6sparse_6ll_mat_multiply_ll_mat_with_numpy_vector_kernel(__pyx_t_10sparse_lib_14cysparse_types_INT_t, double *, double *, double *, __pyx_t_10sparse_lib_14cysparse_types_INT_t *, __pyx_t_10sparse_lib_14cysparse_types_INT_t *, __pyx_t_10sparse_lib_14cysparse_types_INT_t *); /*proto*/
-static void __pyx_f_10sparse_lib_6sparse_6ll_mat_multiply_sym_ll_mat_with_numpy_vector_kernel(__pyx_t_10sparse_lib_14cysparse_types_INT_t, double *, double *, double *, __pyx_t_10sparse_lib_14cysparse_types_INT_t *, __pyx_t_10sparse_lib_14cysparse_types_INT_t *, __pyx_t_10sparse_lib_14cysparse_types_INT_t *); /*proto*/
-static void __pyx_f_10sparse_lib_6sparse_6ll_mat_multiply_ll_mat_with_strided_numpy_vector_kernel(__pyx_t_10sparse_lib_14cysparse_types_INT_t, double *, __pyx_t_10sparse_lib_14cysparse_types_INT_t, double *, __pyx_t_10sparse_lib_14cysparse_types_INT_t, double *, __pyx_t_10sparse_lib_14cysparse_types_INT_t *, __pyx_t_10sparse_lib_14cysparse_types_INT_t *, __pyx_t_10sparse_lib_14cysparse_types_INT_t *); /*proto*/
-static void __pyx_f_10sparse_lib_6sparse_6ll_mat_multiply_sym_ll_mat_with_strided_numpy_vector_kernel(__pyx_t_10sparse_lib_14cysparse_types_INT_t, double *, __pyx_t_10sparse_lib_14cysparse_types_INT_t, double *, __pyx_t_10sparse_lib_14cysparse_types_INT_t, double *, __pyx_t_10sparse_lib_14cysparse_types_INT_t *, __pyx_t_10sparse_lib_14cysparse_types_INT_t *, __pyx_t_10sparse_lib_14cysparse_types_INT_t *); /*proto*/
+static void __pyx_f_10sparse_lib_6sparse_6ll_mat_multiply_ll_mat_with_numpy_vector_kernel(__pyx_t_10sparse_lib_14cysparse_types_INT_t, __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t *, __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t *, __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t *, __pyx_t_10sparse_lib_14cysparse_types_INT_t *, __pyx_t_10sparse_lib_14cysparse_types_INT_t *, __pyx_t_10sparse_lib_14cysparse_types_INT_t *); /*proto*/
+static void __pyx_f_10sparse_lib_6sparse_6ll_mat_multiply_sym_ll_mat_with_numpy_vector_kernel(__pyx_t_10sparse_lib_14cysparse_types_INT_t, __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t *, __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t *, __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t *, __pyx_t_10sparse_lib_14cysparse_types_INT_t *, __pyx_t_10sparse_lib_14cysparse_types_INT_t *, __pyx_t_10sparse_lib_14cysparse_types_INT_t *); /*proto*/
+static void __pyx_f_10sparse_lib_6sparse_6ll_mat_multiply_ll_mat_with_strided_numpy_vector_kernel(__pyx_t_10sparse_lib_14cysparse_types_INT_t, __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t *, __pyx_t_10sparse_lib_14cysparse_types_INT_t, __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t *, __pyx_t_10sparse_lib_14cysparse_types_INT_t, __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t *, __pyx_t_10sparse_lib_14cysparse_types_INT_t *, __pyx_t_10sparse_lib_14cysparse_types_INT_t *, __pyx_t_10sparse_lib_14cysparse_types_INT_t *); /*proto*/
+static void __pyx_f_10sparse_lib_6sparse_6ll_mat_multiply_sym_ll_mat_with_strided_numpy_vector_kernel(__pyx_t_10sparse_lib_14cysparse_types_INT_t, __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t *, __pyx_t_10sparse_lib_14cysparse_types_INT_t, __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t *, __pyx_t_10sparse_lib_14cysparse_types_INT_t, __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t *, __pyx_t_10sparse_lib_14cysparse_types_INT_t *, __pyx_t_10sparse_lib_14cysparse_types_INT_t *, __pyx_t_10sparse_lib_14cysparse_types_INT_t *); /*proto*/
 static struct __pyx_array_obj *__pyx_array_new(PyObject *, Py_ssize_t, char *, char *, char *); /*proto*/
 static void *__pyx_align_pointer(void *, size_t); /*proto*/
 static PyObject *__pyx_memoryview_new(PyObject *, int, int, __Pyx_TypeInfo *); /*proto*/
@@ -2088,7 +2088,7 @@ static void __pyx_memoryview_refcount_objects_in_slice(char *, Py_ssize_t *, Py_
 static void __pyx_memoryview_slice_assign_scalar(__Pyx_memviewslice *, int, size_t, void *, int); /*proto*/
 static void __pyx_memoryview__slice_assign_scalar(char *, Py_ssize_t *, Py_ssize_t *, int, size_t, void *); /*proto*/
 static __Pyx_TypeInfo __Pyx_TypeInfo_nn___pyx_t_5numpy_double_t = { "double_t", NULL, sizeof(__pyx_t_5numpy_double_t), { 0 }, 0, 'R', 0, 0 };
-static __Pyx_TypeInfo __Pyx_TypeInfo_double = { "double", NULL, sizeof(double), { 0 }, 0, 'R', 0, 0 };
+static __Pyx_TypeInfo __Pyx_TypeInfo_nn___pyx_t_10sparse_lib_14cysparse_types_FLOAT_t = { "FLOAT_t", NULL, sizeof(__pyx_t_10sparse_lib_14cysparse_types_FLOAT_t), { 0 }, 0, 'R', 0, 0 };
 #define __Pyx_MODULE_NAME "sparse_lib.sparse.ll_mat"
 int __pyx_module_is_main_sparse_lib__sparse__ll_mat = 0;
 
@@ -4319,7 +4319,7 @@ static PyObject *__pyx_pf_10sparse_lib_6sparse_6ll_mat_14LLSparseMatrix_8put_tri
   int __pyx_t_3;
   __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_t_4;
   __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_t_5;
-  double __pyx_t_6;
+  __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t __pyx_t_6;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -7344,14 +7344,14 @@ static PyObject *__pyx_pf_10sparse_lib_6sparse_6ll_mat_14LLSparseMatrix_30print_
     /* "sparse_lib/sparse/ll_mat.pyx":742
  *             # create linear vector presentation
  *             # TODO: put in a method of its own
- *             mat = <double *> PyMem_Malloc(self.nrow * self.ncol * sizeof(double))             # <<<<<<<<<<<<<<
+ *             mat = <FLOAT_t *> PyMem_Malloc(self.nrow * self.ncol * sizeof(FLOAT_t))             # <<<<<<<<<<<<<<
  * 
  *             if not mat:
  */
-    __pyx_v_mat = ((double *)PyMem_Malloc(((__pyx_v_self->__pyx_base.__pyx_base.nrow * __pyx_v_self->__pyx_base.__pyx_base.ncol) * (sizeof(double)))));
+    __pyx_v_mat = ((__pyx_t_10sparse_lib_14cysparse_types_FLOAT_t *)PyMem_Malloc(((__pyx_v_self->__pyx_base.__pyx_base.nrow * __pyx_v_self->__pyx_base.__pyx_base.ncol) * (sizeof(__pyx_t_10sparse_lib_14cysparse_types_FLOAT_t)))));
 
     /* "sparse_lib/sparse/ll_mat.pyx":744
- *             mat = <double *> PyMem_Malloc(self.nrow * self.ncol * sizeof(double))
+ *             mat = <FLOAT_t *> PyMem_Malloc(self.nrow * self.ncol * sizeof(FLOAT_t))
  * 
  *             if not mat:             # <<<<<<<<<<<<<<
  *                 raise MemoryError()
@@ -7616,7 +7616,7 @@ static PyObject *__pyx_pf_10sparse_lib_6sparse_6ll_mat_MakeLLSparseMatrix(CYTHON
   __Pyx_memviewslice __pyx_v_matrix_view = { 0, 0, { 0 }, { 0 }, { 0 } };
   __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_i;
   __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_j;
-  double __pyx_v_value;
+  __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t __pyx_v_value;
   struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *__pyx_v_ll_mat = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -8046,7 +8046,7 @@ static PyObject *__pyx_pf_10sparse_lib_6sparse_6ll_mat_MakeLLSparseMatrix(CYTHON
   }
 
   /* "sparse_lib/sparse/ll_mat.pyx":825
- *     cdef double value
+ *     cdef FLOAT_t value
  * 
  *     if matrix is not None and mm_filename is None:             # <<<<<<<<<<<<<<
  *         # TODO: direct access into the numpy array
@@ -8115,7 +8115,7 @@ static PyObject *__pyx_pf_10sparse_lib_6sparse_6ll_mat_MakeLLSparseMatrix(CYTHON
  * 
  *         if nrow != -1:
  */
-    __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_dsds_double(__pyx_v_matrix);
+    __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_dsds_nn___pyx_t_10sparse_lib_14cysparse_types_FLOAT_t(__pyx_v_matrix);
     if (unlikely(!__pyx_t_8.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 831; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __pyx_v_matrix_view = __pyx_t_8;
     __pyx_t_8.memview = NULL;
@@ -8340,7 +8340,7 @@ static PyObject *__pyx_pf_10sparse_lib_6sparse_6ll_mat_MakeLLSparseMatrix(CYTHON
           __Pyx_RaiseBufferIndexError(__pyx_t_13);
           {__pyx_filename = __pyx_f[0]; __pyx_lineno = 850; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         }
-        __pyx_v_value = (*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_matrix_view.data + __pyx_t_11 * __pyx_v_matrix_view.strides[0]) ) + __pyx_t_12 * __pyx_v_matrix_view.strides[1]) )));
+        __pyx_v_value = (*((__pyx_t_10sparse_lib_14cysparse_types_FLOAT_t *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_matrix_view.data + __pyx_t_11 * __pyx_v_matrix_view.strides[0]) ) + __pyx_t_12 * __pyx_v_matrix_view.strides[1]) )));
 
         /* "sparse_lib/sparse/ll_mat.pyx":851
  *             for j from 0 <= j < ncol:
@@ -8469,7 +8469,7 @@ static struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *__pyx_f_10s
   int __pyx_v_store_zeros;
   __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_size_hint;
   struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *__pyx_v_C = NULL;
-  double __pyx_v_valA;
+  __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t __pyx_v_valA;
   __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_iA;
   __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_jA;
   __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_kA;
@@ -8907,14 +8907,14 @@ static PyObject *__pyx_f_10sparse_lib_6sparse_6ll_mat_multiply_ll_mat_with_numpy
 static PyArrayObject *__pyx_f_10sparse_lib_6sparse_6ll_mat_multiply_ll_mat_with_numpy_vector(struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *__pyx_v_A, PyArrayObject *__pyx_v_b) {
   __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_A_nrow;
   __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_A_ncol;
-  double *__pyx_v_b_data;
+  __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t *__pyx_v_b_data;
   PyArrayObject *__pyx_v_c = 0;
-  double *__pyx_v_c_data;
+  __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t *__pyx_v_c_data;
   __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_i;
   __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_j;
   __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_k;
-  double __pyx_v_val;
-  double __pyx_v_val_c;
+  __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t __pyx_v_val;
+  __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t __pyx_v_val_c;
   __Pyx_LocalBuf_ND __pyx_pybuffernd_b;
   __Pyx_Buffer __pyx_pybuffer_b;
   __Pyx_LocalBuf_ND __pyx_pybuffernd_c;
@@ -9031,17 +9031,17 @@ static PyArrayObject *__pyx_f_10sparse_lib_6sparse_6ll_mat_multiply_ll_mat_with_
   /* "sparse_lib/sparse/ll_mat.pyx":956
  * 
  *     # direct access to vector b
- *     cdef double * b_data = <double *> b.data             # <<<<<<<<<<<<<<
+ *     cdef FLOAT_t * b_data = <FLOAT_t *> b.data             # <<<<<<<<<<<<<<
  * 
  *     # array c = A * b
  */
-  __pyx_v_b_data = ((double *)__pyx_v_b->data);
+  __pyx_v_b_data = ((__pyx_t_10sparse_lib_14cysparse_types_FLOAT_t *)__pyx_v_b->data);
 
   /* "sparse_lib/sparse/ll_mat.pyx":959
  * 
  *     # array c = A * b
  *     cdef cnp.ndarray[cnp.double_t, ndim=1] c = np.empty(A_nrow, dtype=np.float64)             # <<<<<<<<<<<<<<
- *     cdef double * c_data = <double *> c.data
+ *     cdef FLOAT_t * c_data = <FLOAT_t *> c.data
  * 
  */
   __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 959; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -9087,14 +9087,14 @@ static PyArrayObject *__pyx_f_10sparse_lib_6sparse_6ll_mat_multiply_ll_mat_with_
   /* "sparse_lib/sparse/ll_mat.pyx":960
  *     # array c = A * b
  *     cdef cnp.ndarray[cnp.double_t, ndim=1] c = np.empty(A_nrow, dtype=np.float64)
- *     cdef double * c_data = <double *> c.data             # <<<<<<<<<<<<<<
+ *     cdef FLOAT_t * c_data = <FLOAT_t *> c.data             # <<<<<<<<<<<<<<
  * 
  *     cdef:
  */
-  __pyx_v_c_data = ((double *)__pyx_v_c->data);
+  __pyx_v_c_data = ((__pyx_t_10sparse_lib_14cysparse_types_FLOAT_t *)__pyx_v_c->data);
 
   /* "sparse_lib/sparse/ll_mat.pyx":969
- *         double val_c
+ *         FLOAT_t val_c
  * 
  *     for i from 0 <= i < A_nrow:             # <<<<<<<<<<<<<<
  *         k = A.root[i]
@@ -9236,9 +9236,9 @@ static PyArrayObject *__pyx_f_10sparse_lib_6sparse_6ll_mat_multiply_ll_mat_with_
   __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_A_nrow;
   __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_A_ncol;
   size_t __pyx_v_sd;
-  double *__pyx_v_b_data;
+  __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t *__pyx_v_b_data;
   PyArrayObject *__pyx_v_c = 0;
-  double *__pyx_v_c_data;
+  __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t *__pyx_v_c_data;
   __Pyx_LocalBuf_ND __pyx_pybuffernd_b;
   __Pyx_Buffer __pyx_pybuffer_b;
   __Pyx_LocalBuf_ND __pyx_pybuffernd_c;
@@ -9286,7 +9286,7 @@ static PyArrayObject *__pyx_f_10sparse_lib_6sparse_6ll_mat_multiply_ll_mat_with_
  *     cdef INT_t A_nrow = A.nrow
  *     cdef INT_t A_ncol = A.ncol             # <<<<<<<<<<<<<<
  * 
- *     cdef size_t sd = sizeof(double)
+ *     cdef size_t sd = sizeof(FLOAT_t)
  */
   __pyx_t_1 = __pyx_v_A->__pyx_base.__pyx_base.ncol;
   __pyx_v_A_ncol = __pyx_t_1;
@@ -9294,11 +9294,11 @@ static PyArrayObject *__pyx_f_10sparse_lib_6sparse_6ll_mat_multiply_ll_mat_with_
   /* "sparse_lib/sparse/ll_mat.pyx":1010
  *     cdef INT_t A_ncol = A.ncol
  * 
- *     cdef size_t sd = sizeof(double)             # <<<<<<<<<<<<<<
+ *     cdef size_t sd = sizeof(FLOAT_t)             # <<<<<<<<<<<<<<
  * 
  *     # test dimensions
  */
-  __pyx_v_sd = (sizeof(double));
+  __pyx_v_sd = (sizeof(__pyx_t_10sparse_lib_14cysparse_types_FLOAT_t));
 
   /* "sparse_lib/sparse/ll_mat.pyx":1013
  * 
@@ -9364,17 +9364,17 @@ static PyArrayObject *__pyx_f_10sparse_lib_6sparse_6ll_mat_multiply_ll_mat_with_
   /* "sparse_lib/sparse/ll_mat.pyx":1017
  * 
  *     # direct access to vector b
- *     cdef double * b_data = <double *> b.data             # <<<<<<<<<<<<<<
+ *     cdef FLOAT_t * b_data = <FLOAT_t *> b.data             # <<<<<<<<<<<<<<
  * 
  *     # array c = A * b
  */
-  __pyx_v_b_data = ((double *)__pyx_v_b->data);
+  __pyx_v_b_data = ((__pyx_t_10sparse_lib_14cysparse_types_FLOAT_t *)__pyx_v_b->data);
 
   /* "sparse_lib/sparse/ll_mat.pyx":1020
  * 
  *     # array c = A * b
  *     cdef cnp.ndarray[cnp.double_t, ndim=1] c = np.empty(A_nrow, dtype=np.float64)             # <<<<<<<<<<<<<<
- *     cdef double * c_data = <double *> c.data
+ *     cdef FLOAT_t * c_data = <FLOAT_t *> c.data
  * 
  */
   __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1020; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -9420,11 +9420,11 @@ static PyArrayObject *__pyx_f_10sparse_lib_6sparse_6ll_mat_multiply_ll_mat_with_
   /* "sparse_lib/sparse/ll_mat.pyx":1021
  *     # array c = A * b
  *     cdef cnp.ndarray[cnp.double_t, ndim=1] c = np.empty(A_nrow, dtype=np.float64)
- *     cdef double * c_data = <double *> c.data             # <<<<<<<<<<<<<<
+ *     cdef FLOAT_t * c_data = <FLOAT_t *> c.data             # <<<<<<<<<<<<<<
  * 
  *     # test if b vector is C-contiguous or not
  */
-  __pyx_v_c_data = ((double *)__pyx_v_c->data);
+  __pyx_v_c_data = ((__pyx_t_10sparse_lib_14cysparse_types_FLOAT_t *)__pyx_v_c->data);
 
   /* "sparse_lib/sparse/ll_mat.pyx":1024
  * 
@@ -9640,7 +9640,7 @@ static struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *__pyx_f_10s
   __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_At_nalloc;
   __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_i;
   __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_k;
-  double __pyx_v_val;
+  __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t __pyx_v_val;
   struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *__pyx_v_transposed_A = 0;
   __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_j;
   struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *__pyx_r = NULL;
@@ -9731,7 +9731,7 @@ static struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *__pyx_f_10s
   __pyx_v_At_nalloc = __pyx_t_3;
 
   /* "sparse_lib/sparse/ll_mat.pyx":1076
- *         double val
+ *         FLOAT_t val
  * 
  *     cdef LLSparseMatrix transposed_A = LLSparseMatrix(nrow =At_nrow, ncol=At_ncol, size_hint=At_nalloc)             # <<<<<<<<<<<<<<
  * 
@@ -9934,7 +9934,7 @@ static PyObject *__pyx_f_10sparse_lib_6sparse_6ll_mat_update_ll_mat_matrix_from_
   PyObject *__pyx_t_4 = NULL;
   PyObject *__pyx_t_5 = NULL;
   PyObject *__pyx_t_6 = NULL;
-  double __pyx_t_7;
+  __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t __pyx_t_7;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -10008,7 +10008,7 @@ static PyObject *__pyx_f_10sparse_lib_6sparse_6ll_mat_update_ll_mat_matrix_from_
  *     else:
  *         for i from 0 <= i < index_i_length:             # <<<<<<<<<<<<<<
  *             for j from 0 <= j < index_j_length:
- *                 A.put(index_i[i], index_j[j], <double> obj[tuple(i, j)]) # not really optimized...
+ *                 A.put(index_i[i], index_j[j], <FLOAT_t> obj[tuple(i, j)]) # not really optimized...
  */
     __pyx_t_2 = __pyx_v_index_i_length;
     for (__pyx_v_i = 0; __pyx_v_i < __pyx_t_2; __pyx_v_i++) {
@@ -10017,7 +10017,7 @@ static PyObject *__pyx_f_10sparse_lib_6sparse_6ll_mat_update_ll_mat_matrix_from_
  *     else:
  *         for i from 0 <= i < index_i_length:
  *             for j from 0 <= j < index_j_length:             # <<<<<<<<<<<<<<
- *                 A.put(index_i[i], index_j[j], <double> obj[tuple(i, j)]) # not really optimized...
+ *                 A.put(index_i[i], index_j[j], <FLOAT_t> obj[tuple(i, j)]) # not really optimized...
  * 
  */
       __pyx_t_3 = __pyx_v_index_j_length;
@@ -10026,9 +10026,9 @@ static PyObject *__pyx_f_10sparse_lib_6sparse_6ll_mat_update_ll_mat_matrix_from_
         /* "sparse_lib/sparse/ll_mat.pyx":1129
  *         for i from 0 <= i < index_i_length:
  *             for j from 0 <= j < index_j_length:
- *                 A.put(index_i[i], index_j[j], <double> obj[tuple(i, j)]) # not really optimized...             # <<<<<<<<<<<<<<
+ *                 A.put(index_i[i], index_j[j], <FLOAT_t> obj[tuple(i, j)]) # not really optimized...             # <<<<<<<<<<<<<<
  * 
- * cdef bint update_ll_mat_item_add(LLSparseMatrix A, INT_t i, INT_t j, double x):
+ * cdef bint update_ll_mat_item_add(LLSparseMatrix A, INT_t i, INT_t j, FLOAT_t x):
  */
         __pyx_t_5 = PyInt_FromSsize_t(__pyx_v_i); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1129; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_5);
@@ -10050,7 +10050,7 @@ static PyObject *__pyx_f_10sparse_lib_6sparse_6ll_mat_update_ll_mat_matrix_from_
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
         __pyx_t_7 = __pyx_PyFloat_AsDouble(__pyx_t_4); if (unlikely((__pyx_t_7 == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1129; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-        __pyx_t_4 = ((struct __pyx_vtabstruct_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *)__pyx_v_A->__pyx_vtab)->put(__pyx_v_A, (__pyx_v_index_i[__pyx_v_i]), (__pyx_v_index_j[__pyx_v_j]), ((double)__pyx_t_7)); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1129; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_4 = ((struct __pyx_vtabstruct_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *)__pyx_v_A->__pyx_vtab)->put(__pyx_v_A, (__pyx_v_index_i[__pyx_v_i]), (__pyx_v_index_j[__pyx_v_j]), ((__pyx_t_10sparse_lib_14cysparse_types_FLOAT_t)__pyx_t_7)); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1129; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_4);
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       }
@@ -10082,14 +10082,14 @@ static PyObject *__pyx_f_10sparse_lib_6sparse_6ll_mat_update_ll_mat_matrix_from_
 }
 
 /* "sparse_lib/sparse/ll_mat.pyx":1131
- *                 A.put(index_i[i], index_j[j], <double> obj[tuple(i, j)]) # not really optimized...
+ *                 A.put(index_i[i], index_j[j], <FLOAT_t> obj[tuple(i, j)]) # not really optimized...
  * 
- * cdef bint update_ll_mat_item_add(LLSparseMatrix A, INT_t i, INT_t j, double x):             # <<<<<<<<<<<<<<
+ * cdef bint update_ll_mat_item_add(LLSparseMatrix A, INT_t i, INT_t j, FLOAT_t x):             # <<<<<<<<<<<<<<
  *     """
  *     Update-add matrix entry: ``A[i,j] += x``
  */
 
-static int __pyx_f_10sparse_lib_6sparse_6ll_mat_update_ll_mat_item_add(struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *__pyx_v_A, __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_i, __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_j, double __pyx_v_x) {
+static int __pyx_f_10sparse_lib_6sparse_6ll_mat_update_ll_mat_item_add(struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *__pyx_v_A, __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_i, __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_j, __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t __pyx_v_x) {
   __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_k;
   __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_new_elem;
   __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_col;
@@ -10510,9 +10510,9 @@ static int __pyx_f_10sparse_lib_6sparse_6ll_mat_update_ll_mat_item_add(struct __
   goto __pyx_L0;
 
   /* "sparse_lib/sparse/ll_mat.pyx":1131
- *                 A.put(index_i[i], index_j[j], <double> obj[tuple(i, j)]) # not really optimized...
+ *                 A.put(index_i[i], index_j[j], <FLOAT_t> obj[tuple(i, j)]) # not really optimized...
  * 
- * cdef bint update_ll_mat_item_add(LLSparseMatrix A, INT_t i, INT_t j, double x):             # <<<<<<<<<<<<<<
+ * cdef bint update_ll_mat_item_add(LLSparseMatrix A, INT_t i, INT_t j, FLOAT_t x):             # <<<<<<<<<<<<<<
  *     """
  *     Update-add matrix entry: ``A[i,j] += x``
  */
@@ -10530,13 +10530,13 @@ static int __pyx_f_10sparse_lib_6sparse_6ll_mat_update_ll_mat_item_add(struct __
 /* "sparse_lib/sparse/ll_mat.pyx":1215
  * ########################################################################################################################
  * # C-contiguous, no symmetric
- * cdef void multiply_ll_mat_with_numpy_vector_kernel(INT_t m, double *x, double *y,             # <<<<<<<<<<<<<<
- *          double *val, INT_t *col, INT_t *link, INT_t *root):
+ * cdef void multiply_ll_mat_with_numpy_vector_kernel(INT_t m, FLOAT_t *x, FLOAT_t *y,             # <<<<<<<<<<<<<<
+ *          FLOAT_t *val, INT_t *col, INT_t *link, INT_t *root):
  *     """
  */
 
-static void __pyx_f_10sparse_lib_6sparse_6ll_mat_multiply_ll_mat_with_numpy_vector_kernel(__pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_m, double *__pyx_v_x, double *__pyx_v_y, double *__pyx_v_val, __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_v_col, __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_v_link, __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_v_root) {
-  double __pyx_v_s;
+static void __pyx_f_10sparse_lib_6sparse_6ll_mat_multiply_ll_mat_with_numpy_vector_kernel(__pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_m, __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t *__pyx_v_x, __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t *__pyx_v_y, __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t *__pyx_v_val, __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_v_col, __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_v_link, __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_v_root) {
+  __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t __pyx_v_s;
   __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_i;
   __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_k;
   __Pyx_RefNannyDeclarations
@@ -10615,8 +10615,8 @@ static void __pyx_f_10sparse_lib_6sparse_6ll_mat_multiply_ll_mat_with_numpy_vect
   /* "sparse_lib/sparse/ll_mat.pyx":1215
  * ########################################################################################################################
  * # C-contiguous, no symmetric
- * cdef void multiply_ll_mat_with_numpy_vector_kernel(INT_t m, double *x, double *y,             # <<<<<<<<<<<<<<
- *          double *val, INT_t *col, INT_t *link, INT_t *root):
+ * cdef void multiply_ll_mat_with_numpy_vector_kernel(INT_t m, FLOAT_t *x, FLOAT_t *y,             # <<<<<<<<<<<<<<
+ *          FLOAT_t *val, INT_t *col, INT_t *link, INT_t *root):
  *     """
  */
 
@@ -10627,15 +10627,15 @@ static void __pyx_f_10sparse_lib_6sparse_6ll_mat_multiply_ll_mat_with_numpy_vect
 /* "sparse_lib/sparse/ll_mat.pyx":1250
  * 
  * # C-contiguous, symmetric
- * cdef void multiply_sym_ll_mat_with_numpy_vector_kernel(INT_t m, double *x, double *y,             # <<<<<<<<<<<<<<
- *              double *val, INT_t *col, INT_t *link, INT_t *root):
+ * cdef void multiply_sym_ll_mat_with_numpy_vector_kernel(INT_t m, FLOAT_t *x, FLOAT_t *y,             # <<<<<<<<<<<<<<
+ *              FLOAT_t *val, INT_t *col, INT_t *link, INT_t *root):
  *     """
  */
 
-static void __pyx_f_10sparse_lib_6sparse_6ll_mat_multiply_sym_ll_mat_with_numpy_vector_kernel(__pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_m, double *__pyx_v_x, double *__pyx_v_y, double *__pyx_v_val, __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_v_col, __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_v_link, __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_v_root) {
-  double __pyx_v_s;
-  double __pyx_v_v;
-  double __pyx_v_xi;
+static void __pyx_f_10sparse_lib_6sparse_6ll_mat_multiply_sym_ll_mat_with_numpy_vector_kernel(__pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_m, __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t *__pyx_v_x, __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t *__pyx_v_y, __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t *__pyx_v_val, __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_v_col, __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_v_link, __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_v_root) {
+  __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t __pyx_v_s;
+  __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t __pyx_v_v;
+  __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t __pyx_v_xi;
   __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_i;
   __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_j;
   __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_k;
@@ -10766,8 +10766,8 @@ static void __pyx_f_10sparse_lib_6sparse_6ll_mat_multiply_sym_ll_mat_with_numpy_
   /* "sparse_lib/sparse/ll_mat.pyx":1250
  * 
  * # C-contiguous, symmetric
- * cdef void multiply_sym_ll_mat_with_numpy_vector_kernel(INT_t m, double *x, double *y,             # <<<<<<<<<<<<<<
- *              double *val, INT_t *col, INT_t *link, INT_t *root):
+ * cdef void multiply_sym_ll_mat_with_numpy_vector_kernel(INT_t m, FLOAT_t *x, FLOAT_t *y,             # <<<<<<<<<<<<<<
+ *              FLOAT_t *val, INT_t *col, INT_t *link, INT_t *root):
  *     """
  */
 
@@ -10779,12 +10779,12 @@ static void __pyx_f_10sparse_lib_6sparse_6ll_mat_multiply_sym_ll_mat_with_numpy_
  * 
  * # Non C-contiguous, non symmetric
  * cdef void multiply_ll_mat_with_strided_numpy_vector_kernel(INT_t m,             # <<<<<<<<<<<<<<
- *             double *x, INT_t incx,
- *             double *y, INT_t incy,
+ *             FLOAT_t *x, INT_t incx,
+ *             FLOAT_t *y, INT_t incy,
  */
 
-static void __pyx_f_10sparse_lib_6sparse_6ll_mat_multiply_ll_mat_with_strided_numpy_vector_kernel(__pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_m, double *__pyx_v_x, __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_incx, double *__pyx_v_y, __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_incy, double *__pyx_v_val, __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_v_col, __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_v_link, __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_v_root) {
-  double __pyx_v_s;
+static void __pyx_f_10sparse_lib_6sparse_6ll_mat_multiply_ll_mat_with_strided_numpy_vector_kernel(__pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_m, __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t *__pyx_v_x, __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_incx, __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t *__pyx_v_y, __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_incy, __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t *__pyx_v_val, __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_v_col, __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_v_link, __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_v_root) {
+  __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t __pyx_v_s;
   __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_i;
   __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_k;
   __Pyx_RefNannyDeclarations
@@ -10864,8 +10864,8 @@ static void __pyx_f_10sparse_lib_6sparse_6ll_mat_multiply_ll_mat_with_strided_nu
  * 
  * # Non C-contiguous, non symmetric
  * cdef void multiply_ll_mat_with_strided_numpy_vector_kernel(INT_t m,             # <<<<<<<<<<<<<<
- *             double *x, INT_t incx,
- *             double *y, INT_t incy,
+ *             FLOAT_t *x, INT_t incx,
+ *             FLOAT_t *y, INT_t incy,
  */
 
   /* function exit code */
@@ -10876,14 +10876,14 @@ static void __pyx_f_10sparse_lib_6sparse_6ll_mat_multiply_ll_mat_with_strided_nu
  * 
  * # Non C-contiguous, non symmetric
  * cdef void multiply_sym_ll_mat_with_strided_numpy_vector_kernel(INT_t m,             # <<<<<<<<<<<<<<
- *                 double *x, INT_t incx,
- *                 double *y, INT_t incy,
+ *                 FLOAT_t *x, INT_t incx,
+ *                 FLOAT_t *y, INT_t incy,
  */
 
-static void __pyx_f_10sparse_lib_6sparse_6ll_mat_multiply_sym_ll_mat_with_strided_numpy_vector_kernel(__pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_m, double *__pyx_v_x, __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_incx, double *__pyx_v_y, __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_incy, double *__pyx_v_val, __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_v_col, __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_v_link, __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_v_root) {
-  double __pyx_v_s;
-  double __pyx_v_v;
-  double __pyx_v_xi;
+static void __pyx_f_10sparse_lib_6sparse_6ll_mat_multiply_sym_ll_mat_with_strided_numpy_vector_kernel(__pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_m, __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t *__pyx_v_x, __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_incx, __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t *__pyx_v_y, __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_incy, __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t *__pyx_v_val, __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_v_col, __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_v_link, __pyx_t_10sparse_lib_14cysparse_types_INT_t *__pyx_v_root) {
+  __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t __pyx_v_s;
+  __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t __pyx_v_v;
+  __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t __pyx_v_xi;
   __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_i;
   __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_j;
   __pyx_t_10sparse_lib_14cysparse_types_INT_t __pyx_v_k;
@@ -11013,8 +11013,8 @@ static void __pyx_f_10sparse_lib_6sparse_6ll_mat_multiply_sym_ll_mat_with_stride
  * 
  * # Non C-contiguous, non symmetric
  * cdef void multiply_sym_ll_mat_with_strided_numpy_vector_kernel(INT_t m,             # <<<<<<<<<<<<<<
- *                 double *x, INT_t incx,
- *                 double *y, INT_t incy,
+ *                 FLOAT_t *x, INT_t incx,
+ *                 FLOAT_t *y, INT_t incy,
  */
 
   /* function exit code */
@@ -25242,14 +25242,14 @@ PyMODINIT_FUNC PyInit_ll_mat(void)
   if (__Pyx_ExportFunction("multiply_ll_mat_with_numpy_vector", (void (*)(void))__pyx_f_10sparse_lib_6sparse_6ll_mat_multiply_ll_mat_with_numpy_vector, "PyArrayObject *(struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *, PyArrayObject *)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   if (__Pyx_ExportFunction("transposed_ll_mat", (void (*)(void))__pyx_f_10sparse_lib_6sparse_6ll_mat_transposed_ll_mat, "struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *(struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   if (__Pyx_ExportFunction("update_ll_mat_matrix_from_c_arrays_indices_assign", (void (*)(void))__pyx_f_10sparse_lib_6sparse_6ll_mat_update_ll_mat_matrix_from_c_arrays_indices_assign, "PyObject *(struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *, __pyx_t_10sparse_lib_14cysparse_types_INT_t *, Py_ssize_t, __pyx_t_10sparse_lib_14cysparse_types_INT_t *, Py_ssize_t, PyObject *)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (__Pyx_ExportFunction("update_ll_mat_item_add", (void (*)(void))__pyx_f_10sparse_lib_6sparse_6ll_mat_update_ll_mat_item_add, "int (struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *, __pyx_t_10sparse_lib_14cysparse_types_INT_t, __pyx_t_10sparse_lib_14cysparse_types_INT_t, double)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_ExportFunction("update_ll_mat_item_add", (void (*)(void))__pyx_f_10sparse_lib_6sparse_6ll_mat_update_ll_mat_item_add, "int (struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *, __pyx_t_10sparse_lib_14cysparse_types_INT_t, __pyx_t_10sparse_lib_14cysparse_types_INT_t, __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   /*--- Type init code ---*/
   __pyx_ptype_10sparse_lib_6sparse_10sparse_mat_MutableSparseMatrix = __Pyx_ImportType("sparse_lib.sparse.sparse_mat", "MutableSparseMatrix", sizeof(struct __pyx_obj_10sparse_lib_6sparse_10sparse_mat_MutableSparseMatrix), 1); if (unlikely(!__pyx_ptype_10sparse_lib_6sparse_10sparse_mat_MutableSparseMatrix)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_vtabptr_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix = &__pyx_vtable_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix;
   __pyx_vtable_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix._realloc = (PyObject *(*)(struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *, __pyx_t_10sparse_lib_14cysparse_types_INT_t))__pyx_f_10sparse_lib_6sparse_6ll_mat_14LLSparseMatrix__realloc;
   __pyx_vtable_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix._realloc_expand = (PyObject *(*)(struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *))__pyx_f_10sparse_lib_6sparse_6ll_mat_14LLSparseMatrix__realloc_expand;
-  __pyx_vtable_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix.put = (PyObject *(*)(struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *, __pyx_t_10sparse_lib_14cysparse_types_INT_t, __pyx_t_10sparse_lib_14cysparse_types_INT_t, double))__pyx_f_10sparse_lib_6sparse_6ll_mat_14LLSparseMatrix_put;
-  __pyx_vtable_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix.safe_put = (PyObject *(*)(struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *, __pyx_t_10sparse_lib_14cysparse_types_INT_t, __pyx_t_10sparse_lib_14cysparse_types_INT_t, double))__pyx_f_10sparse_lib_6sparse_6ll_mat_14LLSparseMatrix_safe_put;
+  __pyx_vtable_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix.put = (PyObject *(*)(struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *, __pyx_t_10sparse_lib_14cysparse_types_INT_t, __pyx_t_10sparse_lib_14cysparse_types_INT_t, __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t))__pyx_f_10sparse_lib_6sparse_6ll_mat_14LLSparseMatrix_put;
+  __pyx_vtable_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix.safe_put = (PyObject *(*)(struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *, __pyx_t_10sparse_lib_14cysparse_types_INT_t, __pyx_t_10sparse_lib_14cysparse_types_INT_t, __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t))__pyx_f_10sparse_lib_6sparse_6ll_mat_14LLSparseMatrix_safe_put;
   __pyx_vtable_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix.assign = (PyObject *(*)(struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *, struct __pyx_obj_10sparse_lib_6sparse_11ll_mat_view_LLSparseMatrixView *, PyObject *))__pyx_f_10sparse_lib_6sparse_6ll_mat_14LLSparseMatrix_assign;
   __pyx_vtable_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix.at = (PyObject *(*)(struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *, __pyx_t_10sparse_lib_14cysparse_types_INT_t, __pyx_t_10sparse_lib_14cysparse_types_INT_t))__pyx_f_10sparse_lib_6sparse_6ll_mat_14LLSparseMatrix_at;
   __pyx_vtable_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix.safe_at = (PyObject *(*)(struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *, __pyx_t_10sparse_lib_14cysparse_types_INT_t, __pyx_t_10sparse_lib_14cysparse_types_INT_t))__pyx_f_10sparse_lib_6sparse_6ll_mat_14LLSparseMatrix_safe_at;
@@ -28508,7 +28508,7 @@ no_fail:
     return retval;
 }
 
-static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_dsds_double(PyObject *obj) {
+static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_dsds_nn___pyx_t_10sparse_lib_14cysparse_types_FLOAT_t(PyObject *obj) {
     __Pyx_memviewslice result = { 0, 0, { 0 }, { 0 }, { 0 } };
     __Pyx_BufFmt_StackElem stack[1];
     int axes_specs[] = { (__Pyx_MEMVIEW_DIRECT | __Pyx_MEMVIEW_STRIDED), (__Pyx_MEMVIEW_DIRECT | __Pyx_MEMVIEW_STRIDED) };
@@ -28519,7 +28519,7 @@ static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_dsds_d
     }
     retcode = __Pyx_ValidateAndInit_memviewslice(axes_specs, 0,
                                                  PyBUF_RECORDS, 2,
-                                                 &__Pyx_TypeInfo_double, stack,
+                                                 &__Pyx_TypeInfo_nn___pyx_t_10sparse_lib_14cysparse_types_FLOAT_t, stack,
                                                  &result, obj);
     if (unlikely(retcode == -1))
         goto __pyx_fail;
