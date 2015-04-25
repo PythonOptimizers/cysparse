@@ -6,8 +6,9 @@ cdef class SparseMatrix:
         public INT_t ncol  # number of columns
         public INT_t nnz   # number of values stored
 
-        public bint is_symmetric  # true if symmetric matrix
-        public bint store_zeros
+        public bint is_symmetric  # True if symmetric matrix
+        public bint store_zeros   # True if 0.0 is to be stored explicitly
+        public bint is_complex    # True if values are complex
 
         object shape     # for compatibility with numpy, array, etc.
 

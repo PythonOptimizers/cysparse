@@ -19,8 +19,8 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
     ####################################################################################################################
     cdef:
         INT_t     free      # index to first element in free chain
-        FLOAT_t   *val       # pointer to array of values
-
+        FLOAT_t  *val       # pointer to array of real values
+        FLOAT_t  *ival      # pointer to array of imaginary values
         INT_t    *col       # pointer to array of indices, see doc
         INT_t    *link      # pointer to array of indices, see doc
         INT_t    *root      # pointer to array of indices, see doc

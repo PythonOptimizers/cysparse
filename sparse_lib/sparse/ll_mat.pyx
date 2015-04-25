@@ -34,7 +34,7 @@ cdef extern from "Python.h":
 
 
 cdef INT_t LL_MAT_DEFAULT_SIZE_HINT = 40        # allocated size by default
-cdef double LL_MAT_INCREASE_FACTOR = 1.5      # reallocating factor if size is not enough, must be > 1
+cdef FLOAT_t LL_MAT_INCREASE_FACTOR = 1.5      # reallocating factor if size is not enough, must be > 1
 cdef INT_t LL_MAT_PPRINT_ROW_THRESH = 500       # row threshold for choosing print format
 cdef INT_t LL_MAT_PPRINT_COL_THRESH = 20        # column threshold for choosing print format
 
@@ -63,20 +63,27 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
     ####################################################################################################################
     #cdef:
     #    INT_t     free      # index to first element in free chain
-    #    double *val       # pointer to array of values
+    #    FLOAT_t  *val       # pointer to array of real values
+    #    FLOAT_t  *ival      # pointer to array of imaginary values
     #    INT_t    *col       # pointer to array of indices, see doc
     #    INT_t    *link      # pointer to array of indices, see doc
     #    INT_t    *root      # pointer to array of indices, see doc
 
-    def __cinit__(self, INT_t nrow, INT_t ncol, INT_t size_hint=LL_MAT_DEFAULT_SIZE_HINT, bint is_symmetric=False, bint store_zeros=False):
+    def __cinit__(self, INT_t nrow, INT_t ncol, INT_t size_hint=LL_MAT_DEFAULT_SIZE_HINT, bint is_symmetric=False, bint store_zeros=False, is_complex=False):
 
         if size_hint < 1:
             raise ValueError('size_hint (%d) must be >= 1' % size_hint)
 
-        val = <double *> PyMem_Malloc(self.size_hint * sizeof(double))
+        val = <FLOAT_t *> PyMem_Malloc(self.size_hint * sizeof(FLOAT_t))
         if not val:
             raise MemoryError()
         self.val = val
+
+        if self.is_complex:
+            ival = <FLOAT_t *> PyMem_Malloc(self.size_hint * sizeof(FLOAT_t))
+            if not ival:
+                raise MemoryError()
+            self.ival = ival
 
         col = <INT_t *> PyMem_Malloc(self.size_hint * sizeof(INT_t))
         if not col:
@@ -102,6 +109,8 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
 
     def __dealloc__(self):
         PyMem_Free(self.val)
+        if self.is_complex:
+            PyMem_Free(self.ival)
         PyMem_Free(self.col)
         PyMem_Free(self.link)
         PyMem_Free(self.root)
@@ -128,10 +137,16 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
             raise MemoryError()
         self.link = <INT_t *>temp
 
-        temp = <double *> PyMem_Realloc(self.val, nalloc_new * sizeof(double))
+        temp = <FLOAT_t *> PyMem_Realloc(self.val, nalloc_new * sizeof(FLOAT_t))
         if not temp:
             raise MemoryError()
-        self.val = <double *>temp
+        self.val = <FLOAT_t *>temp
+
+        if self.is_complex:
+            temp = <FLOAT_t *> PyMem_Realloc(self.ival, nalloc_new * sizeof(FLOAT_t))
+            if not temp:
+                raise MemoryError()
+            self.ival = <FLOAT_t *>temp
 
         self.nalloc = nalloc_new
 
@@ -143,7 +158,7 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
             We use ``LL_MAT_INCREASE_FACTOR`` as expanding factor.
         """
         assert LL_MAT_INCREASE_FACTOR > 1.0
-        cdef INT_t real_new_alloc = <INT_t>(<double>LL_MAT_INCREASE_FACTOR * self.nalloc) + 1
+        cdef INT_t real_new_alloc = <INT_t>(<FLOAT_t>LL_MAT_INCREASE_FACTOR * self.nalloc) + 1
 
         return self._realloc(real_new_alloc)
 
@@ -152,7 +167,7 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         Shrink matrix to its minimal size.
         """
         cdef:
-            #double *val;
+            #FLOAT_t *val;
             #INT_t *col, *link;
             INT_t i, k, k_next, k_last, k_new, nalloc_new;
 
@@ -216,7 +231,11 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         # link
         total_memory += self.nalloc * sizeof(INT_t)
         # val
-        total_memory += self.nalloc * sizeof(double)
+        total_memory += self.nalloc * sizeof(FLOAT_t)
+
+        if self.is_complex:
+            # ival
+            total_memory += self.nalloc * sizeof(FLOAT_t)
 
         return total_memory
 
@@ -225,7 +244,7 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
     ####################################################################################################################
     ####################################################################################################################
     #                                            *** SET ***
-    cdef put(self, INT_t i, INT_t j, double value):
+    cdef put(self, INT_t i, INT_t j, FLOAT_t value):
         """
         Set ``A[i, j] = value`` directly.
 
@@ -305,7 +324,8 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
 
                 self.nnz -= 1
 
-    cdef safe_put(self, INT_t i, INT_t j, double value):
+
+    cdef safe_put(self, INT_t i, INT_t j, FLOAT_t value):
         """
         Set ``A[i, j] = value`` directly.
 
@@ -361,7 +381,7 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         cdef INT_t i = key[0]
         cdef INT_t j = key[1]
 
-        self.safe_put(i, j, <double> value)
+        self.safe_put(i, j, <FLOAT_t> value)
 
     ####################################################################################################################
     #                                            *** GET ***
@@ -518,7 +538,7 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
             PyObject *list_p;     # the list that will hold the values
             INT_t i, j, k
             INT_t pos = 0         # position in list
-            double val
+            FLOAT_t val
 
         list_p = PyList_New(self.nnz)
         if list_p == NULL:
@@ -581,7 +601,7 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         if not col:
             raise MemoryError()
 
-        cdef double * val = <double *> PyMem_Malloc(self.nnz * sizeof(double))
+        cdef FLOAT_t * val = <FLOAT_t *> PyMem_Malloc(self.nnz * sizeof(FLOAT_t))
         if not val:
             raise MemoryError()
 
@@ -624,7 +644,7 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         if not row:
             raise MemoryError()
 
-        cdef double * val = <double *> PyMem_Malloc(self.nnz * sizeof(double))
+        cdef FLOAT_t * val = <FLOAT_t *> PyMem_Malloc(self.nnz * sizeof(FLOAT_t))
         if not val:
             raise MemoryError()
 
@@ -729,9 +749,9 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
 
         print('LLSparseMatrix (%s, [%d,%d]):' % (symmetric_str, self.nrow, self.ncol), file=OUT)
 
-        cdef double *mat
+        cdef FLOAT_t *mat
         cdef INT_t j
-        cdef double val
+        cdef FLOAT_t val
 
         if not self.nnz:
             return
@@ -784,7 +804,8 @@ def MakeLLSparseMatrix(**kwargs):
     cdef INT_t size = kwargs.get('size', -1)
     cdef INT_t size_hint = kwargs.get('size_hint', LL_MAT_DEFAULT_SIZE_HINT)
     cdef bint store_zeros = kwargs.get('store_zeros', False)
-    cdef bint is_symmetric = kwargs.get('is_symmetrix', False)
+    cdef bint is_symmetric = kwargs.get('is_symmetric', False)
+    cdef bint is_complex = kwargs.get('is_complex', False)
 
     matrix = kwargs.get('matrix', None)
 
@@ -815,7 +836,7 @@ def MakeLLSparseMatrix(**kwargs):
             real_nrow = size
             real_ncol = size
 
-        return LLSparseMatrix(nrow=real_nrow, ncol=real_ncol, size_hint=size_hint, store_zeros=store_zeros, is_symmetric=is_symmetric)
+        return LLSparseMatrix(nrow=real_nrow, ncol=real_ncol, size_hint=size_hint, store_zeros=store_zeros, is_symmetric=is_symmetric, is_complex=is_complex)
 
     # CASE 2
     cdef FLOAT_t[:, :] matrix_view
@@ -825,6 +846,7 @@ def MakeLLSparseMatrix(**kwargs):
     if matrix is not None and mm_filename is None:
         # TODO: direct access into the numpy array
         # TODO: skip views... ?
+        # TODO: take into account the complex case!
         if len(matrix.shape) != 2:
             raise IndexError('Matrix must be of dimension 2 (not %d)' % len(matrix.shape))
 
@@ -840,6 +862,7 @@ def MakeLLSparseMatrix(**kwargs):
 
         nrow = matrix.shape[0]
         ncol = matrix.shape[1]
+
 
         ll_mat = LLSparseMatrix(nrow=nrow, ncol=ncol, size_hint=size_hint)
 

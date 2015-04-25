@@ -38,6 +38,7 @@ cdef class SparseMatrix:
 
         self.is_symmetric = kwargs.get('is_symmetric', False)
         self.store_zeros = kwargs.get('store_zeros', False)
+        self.is_complex = kwargs.get('is_complex', False)
 
     # for compatibility with numpy, array, etc
     property shape:
