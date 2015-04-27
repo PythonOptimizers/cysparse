@@ -12,7 +12,7 @@ from sparse_lib.sparse.sparse_mat cimport MutableSparseMatrix
 from sparse_lib.sparse.csr_mat cimport MakeCSRSparseMatrix
 from sparse_lib.sparse.csc_mat cimport MakeCSCSparseMatrix
 #from sparse_lib.utils.equality cimport values_are_equal
-from sparse_lib.sparse.IO.mm cimport MakeLLSparseMatrixFromMMFile
+from sparse_lib.sparse.IO.mm cimport MakeLLSparseMatrixFromMMFile, MakeLLSparseMatrixFromMMFile2
 
 
 # Import the Python-level symbols of numpy
@@ -1063,7 +1063,7 @@ def MakeLLSparseMatrix(**kwargs):
         return ll_mat
 
     if mm_filename is not None:
-        return MakeLLSparseMatrixFromMMFile(mm_filename)
+        return MakeLLSparseMatrixFromMMFile2(mm_filename)
 
 
 

@@ -108,7 +108,7 @@ class MatrixMarketMatrix:
             return (self.values,self.irow,self.jcol)
         return (self.irow,self.jcol)
 
-cdef LLSparseMatrix MakeLLSparseMatrixFromMMFile(char * filename):
+cdef LLSparseMatrix MakeLLSparseMatrixFromMMFile(str filename):
     """
 
     :param filename:

@@ -14,6 +14,7 @@ CySparse documentation
    introduction
    installation
    sparse_matrix_formats
+   io_formats
    sparse_mat_hierarchy
    ll_mat
    cysparse_cython_users
