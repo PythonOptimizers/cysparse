@@ -4,7 +4,7 @@ from libc.stdio cimport *
 from libc.string cimport *
 from cpython.unicode cimport *
 
-cdef LLSparseMatrix MakeLLSparseMatrixFromMMFile2(str filename, bint store_zeros=False, bint test_bounds=False):
+cdef LLSparseMatrix MakeLLSparseMatrixFromMMFile2(str mm_filename, bint store_zeros=False, bint test_bounds=True):
     """
 
     """
@@ -32,7 +32,7 @@ cdef LLSparseMatrix MakeLLSparseMatrixFromMMFile2(str filename, bint store_zeros
 
     cdef LLSparseMatrix A
 
-    with open(filename, 'r') as f:
+    with open(mm_filename, 'r') as f:
         # read banner
         line = f.readline()
         token_list = line.split()

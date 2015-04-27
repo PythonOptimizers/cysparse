@@ -968,8 +968,8 @@ struct __pyx_opt_args_10sparse_lib_6sparse_2IO_2mm_MakeLLSparseMatrixFromMMFile2
 
 /* "sparse_lib/sparse/IO/mm.pxd":5
  * 
- * cdef LLSparseMatrix MakeLLSparseMatrixFromMMFile(str filename)
- * cdef LLSparseMatrix MakeLLSparseMatrixFromMMFile2(str filename, bint store_zeros=?, bint test_bounds=?)             # <<<<<<<<<<<<<<
+ * cdef LLSparseMatrix MakeLLSparseMatrixFromMMFile(str mm_filename)
+ * cdef LLSparseMatrix MakeLLSparseMatrixFromMMFile2(str mm_filename, bint store_zeros=?, bint test_bounds=?)             # <<<<<<<<<<<<<<
  */
 struct __pyx_opt_args_10sparse_lib_6sparse_2IO_2mm_MakeLLSparseMatrixFromMMFile2 {
   int __pyx_n;
@@ -3877,7 +3877,7 @@ static PyObject *__pyx_pf_10sparse_lib_6sparse_2IO_2mm_18MatrixMarketMatrix_6fin
  *             return (self.values,self.irow,self.jcol)
  *         return (self.irow,self.jcol)             # <<<<<<<<<<<<<<
  * 
- * cdef LLSparseMatrix MakeLLSparseMatrixFromMMFile(str filename):
+ * cdef LLSparseMatrix MakeLLSparseMatrixFromMMFile(str mm_filename):
  */
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_irow); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 109; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -3921,12 +3921,12 @@ static PyObject *__pyx_pf_10sparse_lib_6sparse_2IO_2mm_18MatrixMarketMatrix_6fin
 /* "sparse_lib/sparse/IO/mm_read_file.pxi":111
  *         return (self.irow,self.jcol)
  * 
- * cdef LLSparseMatrix MakeLLSparseMatrixFromMMFile(str filename):             # <<<<<<<<<<<<<<
+ * cdef LLSparseMatrix MakeLLSparseMatrixFromMMFile(str mm_filename):             # <<<<<<<<<<<<<<
  *     """
  * 
  */
 
-static struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *__pyx_f_10sparse_lib_6sparse_2IO_2mm_MakeLLSparseMatrixFromMMFile(PyObject *__pyx_v_filename) {
+static struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *__pyx_f_10sparse_lib_6sparse_2IO_2mm_MakeLLSparseMatrixFromMMFile(PyObject *__pyx_v_mm_filename) {
   PyObject *__pyx_v_mm = NULL;
   PyObject *__pyx_v_result = NULL;
   struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *__pyx_v_A = 0;
@@ -3956,7 +3956,7 @@ static struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *__pyx_f_10s
   /* "sparse_lib/sparse/IO/mm_read_file.pxi":127
  *     #fclose(p)
  * 
- *     mm = MatrixMarketMatrix(filename)             # <<<<<<<<<<<<<<
+ *     mm = MatrixMarketMatrix(mm_filename)             # <<<<<<<<<<<<<<
  *     result = mm.find()
  *     if len(result) != 3:
  */
@@ -3973,15 +3973,15 @@ static struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *__pyx_f_10s
     }
   }
   if (!__pyx_t_3) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_filename); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 127; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_mm_filename); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 127; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
   } else {
     __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 127; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_3); __Pyx_GIVEREF(__pyx_t_3); __pyx_t_3 = NULL;
-    __Pyx_INCREF(__pyx_v_filename);
-    PyTuple_SET_ITEM(__pyx_t_4, 0+1, __pyx_v_filename);
-    __Pyx_GIVEREF(__pyx_v_filename);
+    __Pyx_INCREF(__pyx_v_mm_filename);
+    PyTuple_SET_ITEM(__pyx_t_4, 0+1, __pyx_v_mm_filename);
+    __Pyx_GIVEREF(__pyx_v_mm_filename);
     __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 127; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -3992,7 +3992,7 @@ static struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *__pyx_f_10s
 
   /* "sparse_lib/sparse/IO/mm_read_file.pxi":128
  * 
- *     mm = MatrixMarketMatrix(filename)
+ *     mm = MatrixMarketMatrix(mm_filename)
  *     result = mm.find()             # <<<<<<<<<<<<<<
  *     if len(result) != 3:
  *         raise NotImplementedError("Cannot read that type of Matrix Market file")
@@ -4021,7 +4021,7 @@ static struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *__pyx_f_10s
   __pyx_t_1 = 0;
 
   /* "sparse_lib/sparse/IO/mm_read_file.pxi":129
- *     mm = MatrixMarketMatrix(filename)
+ *     mm = MatrixMarketMatrix(mm_filename)
  *     result = mm.find()
  *     if len(result) != 3:             # <<<<<<<<<<<<<<
  *         raise NotImplementedError("Cannot read that type of Matrix Market file")
@@ -4223,7 +4223,7 @@ static struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *__pyx_f_10s
   /* "sparse_lib/sparse/IO/mm_read_file.pxi":111
  *         return (self.irow,self.jcol)
  * 
- * cdef LLSparseMatrix MakeLLSparseMatrixFromMMFile(str filename):             # <<<<<<<<<<<<<<
+ * cdef LLSparseMatrix MakeLLSparseMatrixFromMMFile(str mm_filename):             # <<<<<<<<<<<<<<
  *     """
  * 
  */
@@ -4253,14 +4253,14 @@ static struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *__pyx_f_10s
 /* "sparse_lib/sparse/IO/mm_read_file2.pxi":7
  * from cpython.unicode cimport *
  * 
- * cdef LLSparseMatrix MakeLLSparseMatrixFromMMFile2(str filename, bint store_zeros=False, bint test_bounds=False):             # <<<<<<<<<<<<<<
+ * cdef LLSparseMatrix MakeLLSparseMatrixFromMMFile2(str mm_filename, bint store_zeros=False, bint test_bounds=True):             # <<<<<<<<<<<<<<
  *     """
  * 
  */
 
-static struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *__pyx_f_10sparse_lib_6sparse_2IO_2mm_MakeLLSparseMatrixFromMMFile2(PyObject *__pyx_v_filename, struct __pyx_opt_args_10sparse_lib_6sparse_2IO_2mm_MakeLLSparseMatrixFromMMFile2 *__pyx_optional_args) {
+static struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *__pyx_f_10sparse_lib_6sparse_2IO_2mm_MakeLLSparseMatrixFromMMFile2(PyObject *__pyx_v_mm_filename, struct __pyx_opt_args_10sparse_lib_6sparse_2IO_2mm_MakeLLSparseMatrixFromMMFile2 *__pyx_optional_args) {
   int __pyx_v_store_zeros = ((int)0);
-  int __pyx_v_test_bounds = ((int)0);
+  int __pyx_v_test_bounds = ((int)1);
   PyObject *__pyx_v_line = 0;
   PyObject *__pyx_v_token_list = 0;
   PyObject *__pyx_v_token = 0;
@@ -4441,16 +4441,16 @@ static struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *__pyx_f_10s
   /* "sparse_lib/sparse/IO/mm_read_file2.pxi":35
  *     cdef LLSparseMatrix A
  * 
- *     with open(filename, 'r') as f:             # <<<<<<<<<<<<<<
+ *     with open(mm_filename, 'r') as f:             # <<<<<<<<<<<<<<
  *         # read banner
  *         line = f.readline()
  */
   /*with:*/ {
     __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 35; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __Pyx_INCREF(__pyx_v_filename);
-    PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_v_filename);
-    __Pyx_GIVEREF(__pyx_v_filename);
+    __Pyx_INCREF(__pyx_v_mm_filename);
+    PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_v_mm_filename);
+    __Pyx_GIVEREF(__pyx_v_mm_filename);
     __Pyx_INCREF(__pyx_n_s_r);
     PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_n_s_r);
     __Pyx_GIVEREF(__pyx_n_s_r);
@@ -4493,7 +4493,7 @@ static struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *__pyx_f_10s
           __pyx_t_4 = 0;
 
           /* "sparse_lib/sparse/IO/mm_read_file2.pxi":37
- *     with open(filename, 'r') as f:
+ *     with open(mm_filename, 'r') as f:
  *         # read banner
  *         line = f.readline()             # <<<<<<<<<<<<<<
  *         token_list = line.split()
@@ -6194,7 +6194,7 @@ static struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *__pyx_f_10s
         /* "sparse_lib/sparse/IO/mm_read_file2.pxi":35
  *     cdef LLSparseMatrix A
  * 
- *     with open(filename, 'r') as f:             # <<<<<<<<<<<<<<
+ *     with open(mm_filename, 'r') as f:             # <<<<<<<<<<<<<<
  *         # read banner
  *         line = f.readline()
  */
@@ -6278,7 +6278,7 @@ static struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *__pyx_f_10s
   /* "sparse_lib/sparse/IO/mm_read_file2.pxi":7
  * from cpython.unicode cimport *
  * 
- * cdef LLSparseMatrix MakeLLSparseMatrixFromMMFile2(str filename, bint store_zeros=False, bint test_bounds=False):             # <<<<<<<<<<<<<<
+ * cdef LLSparseMatrix MakeLLSparseMatrixFromMMFile2(str mm_filename, bint store_zeros=False, bint test_bounds=True):             # <<<<<<<<<<<<<<
  *     """
  * 
  */
@@ -8538,7 +8538,7 @@ static int __Pyx_InitCachedConstants(void) {
   /* "sparse_lib/sparse/IO/mm_read_file2.pxi":35
  *     cdef LLSparseMatrix A
  * 
- *     with open(filename, 'r') as f:             # <<<<<<<<<<<<<<
+ *     with open(mm_filename, 'r') as f:             # <<<<<<<<<<<<<<
  *         # read banner
  *         line = f.readline()
  */

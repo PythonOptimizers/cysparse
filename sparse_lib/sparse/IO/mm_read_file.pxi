@@ -108,7 +108,7 @@ class MatrixMarketMatrix:
             return (self.values,self.irow,self.jcol)
         return (self.irow,self.jcol)
 
-cdef LLSparseMatrix MakeLLSparseMatrixFromMMFile(str filename):
+cdef LLSparseMatrix MakeLLSparseMatrixFromMMFile(str mm_filename):
     """
 
     :param filename:
@@ -124,7 +124,7 @@ cdef LLSparseMatrix MakeLLSparseMatrixFromMMFile(str filename):
 
     #fclose(p)
 
-    mm = MatrixMarketMatrix(filename)
+    mm = MatrixMarketMatrix(mm_filename)
     result = mm.find()
     if len(result) != 3:
         raise NotImplementedError("Cannot read that type of Matrix Market file")

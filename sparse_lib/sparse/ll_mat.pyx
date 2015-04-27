@@ -992,6 +992,7 @@ def MakeLLSparseMatrix(**kwargs):
     cdef bint store_zeros = kwargs.get('store_zeros', False)
     cdef bint is_symmetric = kwargs.get('is_symmetric', False)
     cdef bint is_complex = kwargs.get('is_complex', False)
+    cdef bint test_bounds = kwargs.get('test_bounds', True)
 
     matrix = kwargs.get('matrix', None)
 
@@ -1063,7 +1064,7 @@ def MakeLLSparseMatrix(**kwargs):
         return ll_mat
 
     if mm_filename is not None:
-        return MakeLLSparseMatrixFromMMFile2(mm_filename)
+        return MakeLLSparseMatrixFromMMFile2(mm_filename=mm_filename, store_zeros=store_zeros, test_bounds=test_bounds)
 
 
 
