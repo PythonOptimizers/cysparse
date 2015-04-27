@@ -29,3 +29,5 @@ cdef enum:
 
 include "mm_read_file.pxi"
 include "mm_read_file2.pxi"
+
+include "mm_write_file.pxi"

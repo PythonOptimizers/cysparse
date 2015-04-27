@@ -970,6 +970,8 @@ struct __pyx_opt_args_10sparse_lib_6sparse_2IO_2mm_MakeLLSparseMatrixFromMMFile2
  * 
  * cdef LLSparseMatrix MakeLLSparseMatrixFromMMFile(str mm_filename)
  * cdef LLSparseMatrix MakeLLSparseMatrixFromMMFile2(str mm_filename, bint store_zeros=?, bint test_bounds=?)             # <<<<<<<<<<<<<<
+ * 
+ * cdef MakeMMFileFromSparseMatrix(str mm_filename, LLSparseMatrix A)
  */
 struct __pyx_opt_args_10sparse_lib_6sparse_2IO_2mm_MakeLLSparseMatrixFromMMFile2 {
   int __pyx_n;
@@ -6308,6 +6310,25 @@ static struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *__pyx_f_10s
   return __pyx_r;
 }
 
+/* "sparse_lib/sparse/IO/mm_write_file.pxi":9
+ * 
+ * 
+ * cdef MakeMMFileFromSparseMatrix(str mm_filename, LLSparseMatrix A):             # <<<<<<<<<<<<<<
+ *     pass
+ */
+
+static PyObject *__pyx_f_10sparse_lib_6sparse_2IO_2mm_MakeMMFileFromSparseMatrix(CYTHON_UNUSED PyObject *__pyx_v_mm_filename, CYTHON_UNUSED struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *__pyx_v_A) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("MakeMMFileFromSparseMatrix", 0);
+
+  /* function exit code */
+  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
 /* "../local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":197
  *         # experimental exception made for __getbuffer__ and __releasebuffer__
  *         # -- the details of this may change.
@@ -8770,6 +8791,7 @@ PyMODINIT_FUNC PyInit_mm(void)
   /*--- Function export code ---*/
   if (__Pyx_ExportFunction("MakeLLSparseMatrixFromMMFile", (void (*)(void))__pyx_f_10sparse_lib_6sparse_2IO_2mm_MakeLLSparseMatrixFromMMFile, "struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *(PyObject *)") < 0) {__pyx_filename = __pyx_f[3]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   if (__Pyx_ExportFunction("MakeLLSparseMatrixFromMMFile2", (void (*)(void))__pyx_f_10sparse_lib_6sparse_2IO_2mm_MakeLLSparseMatrixFromMMFile2, "struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *(PyObject *, struct __pyx_opt_args_10sparse_lib_6sparse_2IO_2mm_MakeLLSparseMatrixFromMMFile2 *__pyx_optional_args)") < 0) {__pyx_filename = __pyx_f[3]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_ExportFunction("MakeMMFileFromSparseMatrix", (void (*)(void))__pyx_f_10sparse_lib_6sparse_2IO_2mm_MakeMMFileFromSparseMatrix, "PyObject *(PyObject *, struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *)") < 0) {__pyx_filename = __pyx_f[3]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   /*--- Type init code ---*/
   /*--- Type import code ---*/
   __pyx_ptype_10sparse_lib_6sparse_10sparse_mat_SparseMatrix = __Pyx_ImportType("sparse_lib.sparse.sparse_mat", "SparseMatrix", sizeof(struct __pyx_obj_10sparse_lib_6sparse_10sparse_mat_SparseMatrix), 1); if (unlikely(!__pyx_ptype_10sparse_lib_6sparse_10sparse_mat_SparseMatrix)) {__pyx_filename = __pyx_f[4]; __pyx_lineno = 3; __pyx_clineno = __LINE__; goto __pyx_L1_error;}

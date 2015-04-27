@@ -9,10 +9,10 @@ from __future__ import print_function
 from sparse_lib.cysparse_types cimport *
 
 from sparse_lib.sparse.sparse_mat cimport MutableSparseMatrix
-from sparse_lib.sparse.csr_mat cimport MakeCSRSparseMatrix
+from sparse_lib.sparse.csr_mat cimport MakeCSRSparseMatrix, MakeCSRComplexSparseMatrix
 from sparse_lib.sparse.csc_mat cimport MakeCSCSparseMatrix
 #from sparse_lib.utils.equality cimport values_are_equal
-from sparse_lib.sparse.IO.mm cimport MakeLLSparseMatrixFromMMFile, MakeLLSparseMatrixFromMMFile2
+from sparse_lib.sparse.IO.mm cimport MakeLLSparseMatrixFromMMFile2, MakeMMFileFromSparseMatrix
 
 
 # Import the Python-level symbols of numpy
@@ -707,9 +707,6 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         {{COMPLEX: NO}}
         {{GENERIC TYPES: YES}}
         """
-        if self.is_complex:
-            raise NotImplemented("This operation is not (yet) implemented for complex matrices")
-
         cdef INT_t * ind = <INT_t *> PyMem_Malloc((self.nrow + 1) * sizeof(INT_t))
         if not ind:
             raise MemoryError()
@@ -721,6 +718,12 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         cdef FLOAT_t * val = <FLOAT_t *> PyMem_Malloc(self.nnz * sizeof(FLOAT_t))
         if not val:
             raise MemoryError()
+
+        cdef FLOAT_t * ival
+        if self.is_complex:
+            ival = <FLOAT_t *> PyMem_Malloc(self.nnz * sizeof(FLOAT_t))
+            if not ival:
+                raise MemoryError()
 
         cdef INT_t ind_col_index = 0  # current col index in col and val
         ind[ind_col_index] = 0
@@ -735,13 +738,18 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
             while k != -1:
                 col[ind_col_index] = self.col[k]
                 val[ind_col_index] = self.val[k]
+                if self.is_complex:
+                    ival[ind_col_index] = self.ival[k]
 
                 ind_col_index += 1
                 k = self.link[k]
 
             ind[i+1] = ind_col_index
 
-        csr_mat = MakeCSRSparseMatrix(nrow=self.nrow, ncol=self.ncol, nnz=self.nnz, ind=ind, col=col, val=val)
+        if self.is_complex:
+            csr_mat = MakeCSRComplexSparseMatrix(nrow=self.nrow, ncol=self.ncol, nnz=self.nnz, ind=ind, col=col, val=val, ival=ival)
+        else:
+            csr_mat = MakeCSRSparseMatrix(nrow=self.nrow, ncol=self.ncol, nnz=self.nnz, ind=ind, col=col, val=val)
 
         return csr_mat
 
@@ -909,10 +917,11 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
                         ival = mat[i* 2 * self.ncol + j*2 + 1]
                         #print('%9.*f ' % (6, val), file=OUT, end='')
                         print('({0:9.6f} {1:9.6f}) '.format(val, ival), end='', file=OUT)
-                    print()
+                    print(file=OUT)
 
                 PyMem_Free(mat)
-
+            else:
+                print('Matrix too big to print out', file=OUT)
         else:
             if self.nrow <= LL_MAT_PPRINT_COL_THRESH and self.ncol <= LL_MAT_PPRINT_ROW_THRESH:
                 # create linear vector presentation
@@ -941,9 +950,17 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
                         val = mat[(i*self.ncol)+j]
                         #print('%9.*f ' % (6, val), file=OUT, end='')
                         print('{0:9.6f} '.format(val), end='', file=OUT)
-                    print()
+                    print(file=OUT)
 
                 PyMem_Free(mat)
+
+            else:
+                print('Matrix too big to print out', file=OUT)
+
+    def save_to(self, filename, format):
+        if format == "MM":
+            MakeMMFileFromSparseMatrix(mm_filename=filename, A=self)
+
 
 
 include "ll_mat_details/ll_mat_multiplication.pxi"

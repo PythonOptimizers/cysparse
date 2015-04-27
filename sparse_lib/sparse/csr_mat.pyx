@@ -13,10 +13,18 @@ from sparse_lib.sparse.ll_mat cimport LLSparseMatrix
 from sparse_lib.sparse.csc_mat cimport CSCSparseMatrix
 
 from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
+from cpython cimport PyObject
+
+cdef extern from "Python.h":
+    # *** Types ***
+    int PyInt_Check(PyObject *o)
+
 
 cdef INT_t CSR_MAT_PPRINT_ROW_THRESH = 500       # row threshold for choosing print format
 cdef INT_t CSR_MAT_PPRINT_COL_THRESH = 20        # column threshold for choosing print format
 
+cdef INT_t CSR_MAT_COMPLEX_PPRINT_ROW_THRESH = 500       # row threshold for choosing print format
+cdef INT_t CSR_MAT_COMPLEX_PPRINT_COL_THRESH = 10        # column threshold for choosing print format
 
 cdef _sort(INT_t * a, INT_t start, INT_t end):
     """
@@ -57,11 +65,15 @@ cdef class CSRSparseMatrix(ImmutableSparseMatrix):
     ####################################################################################################################
     # Init/Free
     ####################################################################################################################
-    def __cinit__(self, INT_t nrow, INT_t ncol, INT_t nnz):
+    def __cinit__(self, **kwargs):
+
+        self.type_name = "CSRSparseMatrix"
         self.__status_ok = False
 
     def __dealloc__(self):
         PyMem_Free(self.val)
+        if self.is_complex:
+            PyMem_Free(self.ival)
         PyMem_Free(self.col)
         PyMem_Free(self.ind)
 
@@ -108,7 +120,7 @@ cdef class CSRSparseMatrix(ImmutableSparseMatrix):
     ####################################################################################################################
     def are_column_indices_sorted(self):
         """
-        Tell if column indices are sorted in augmenting order.
+        Tell if column indices are sorted in augmenting order (ordered).
 
 
         """
@@ -134,6 +146,7 @@ cdef class CSRSparseMatrix(ImmutableSparseMatrix):
                         return self.__col_indices_sorted
                     col_index += 1
 
+        # column indices are ordered
         self.__first_row_not_ordered = self.nrow
         self.__col_indices_sorted = True
         return self.__col_indices_sorted
@@ -171,7 +184,21 @@ cdef class CSRSparseMatrix(ImmutableSparseMatrix):
             i += 1
 
     def order_column_indices(self):
+        """
+        Forces column indices to be ordered.
+        """
         return self._order_column_indices()
+
+    cdef _set_column_indices_ordered_is_true(self):
+        """
+        If you construct a CSR matrix and you know that its column indices **are** ordered, confirm it by calling this method.
+
+        Warning:
+            Be sure to know what you are doing because there is no control and we assume that the column indices are indeed sorted for
+            almost all operations.
+        """
+        self.__col_indices_sorted_test_done = True
+        self.__col_indices_sorted = True
 
 
     ####################################################################################################################
@@ -197,12 +224,20 @@ cdef class CSRSparseMatrix(ImmutableSparseMatrix):
         cdef INT_t k
 
         if self.is_symmetric:
-            raise NotImplemented("Access to csr_mat(i, j) not (yet) implemented")
+            raise NotImplemented("Access to csr_mat(i, j) not (yet) implemented for symmetric matrices")
 
-        # TODO: column indices are NOT necessarily sorted... what do we do about it?
-        for k from self.ind[i] <= k < self.ind[i+1]:
-            if j == self.col[k]:
-                return self.val[k]
+        # TODO: TEST!!!
+        if self. __col_indices_sorted:
+            for k from self.ind[i] <= k < self.ind[i+1]:
+                if j == self.col[k]:
+                    return self.val[k]
+                elif j > self.col[k]:
+                    break
+
+        else:
+            for k from self.ind[i] <= k < self.ind[i+1]:
+                if j == self.col[k]:
+                    return self.val[k]
 
         return 0.0
 
@@ -235,6 +270,9 @@ cdef class CSRSparseMatrix(ImmutableSparseMatrix):
         if len(key) != 2:
             raise IndexError('Index tuple must be of length 2 (not %d)' % len(key))
 
+        if not PyInt_Check(<PyObject *>key[0]) or not PyInt_Check(<PyObject *>key[1]):
+            raise IndexError("Only integer indices are allowed")
+
         cdef INT_t i = key[0]
         cdef INT_t j = key[1]
 
@@ -254,6 +292,8 @@ cdef class CSRSparseMatrix(ImmutableSparseMatrix):
         # CASES
         if isinstance(other, CSCSparseMatrix):
             return multiply_csr_mat_by_csc_mat(self, other)
+        else:
+            raise NotImplemented("Multiplication not (yet) allowed")
 
     ####################################################################################################################
     # String representations
@@ -276,39 +316,73 @@ cdef class CSRSparseMatrix(ImmutableSparseMatrix):
         cdef INT_t j
         cdef double val
 
-        print('CSRSparseMatrix ([%d,%d]):' % (self.nrow, self.ncol), file=OUT)
+        print(self._matrix_description_before_printing(), file=OUT)
+        #print('CSRSparseMatrix ([%d,%d]):' % (self.nrow, self.ncol), file=OUT)
 
         if not self.nnz or not self.__status_ok:
             return
 
-        if self.nrow <= CSR_MAT_PPRINT_COL_THRESH and self.ncol <= CSR_MAT_PPRINT_ROW_THRESH:
-            # create linear vector presentation
-            # TODO: put in a method of its own
-            mat = <double *> PyMem_Malloc(self.nrow * self.ncol * sizeof(double))
+        if self.is_complex:
+            if self.nrow <= CSR_MAT_COMPLEX_PPRINT_COL_THRESH and self.ncol <= CSR_MAT_COMPLEX_PPRINT_ROW_THRESH:
+                # create linear vector presentation
+                # TODO: put in a method of its own
+                mat = <FLOAT_t *> PyMem_Malloc(self.nrow * self.ncol * sizeof(FLOAT_t) * 2)
 
-            if not mat:
-                raise MemoryError()
+                if not mat:
+                    raise MemoryError()
 
-            for i from 0 <= i < self.nrow:
-                for j from 0 <= j < self.ncol:
-                    mat[i* self.ncol + j] = 0.0
+                for i from 0 <= i < self.nrow:
+                    for j from 0 <= j < self.ncol:
+                        mat[(i* 2 * self.ncol) + (2*j)] = 0.0
+                        mat[(i* 2 *self.ncol) + (2*j) + 1] = 0.0
 
-                k = self.ind[i]
-                while k < self.ind[i+1]:
-                    mat[(i*self.ncol)+self.col[k]] = self.val[k]
-                    k += 1
+                    k = self.ind[i]
+                    while k < self.ind[i+1]:
+                        mat[i* 2 * self.ncol + self.col[k] * 2] = self.val[k]
+                        mat[i* 2 * self.ncol + self.col[k] * 2 + 1] = self.ival[k]
+                        k += 1
 
-            for i from 0 <= i < self.nrow:
-                for j from 0 <= j < self.ncol:
-                    val = mat[(i*self.ncol)+j]
-                    #print('%9.*f ' % (6, val), file=OUT, end='')
-                    print('{0:9.6f} '.format(val), end='')
-                print()
+                for i from 0 <= i < self.nrow:
+                    for j from 0 <= j < self.ncol:
+                        val = mat[i* 2 * self.ncol + j*2]
+                        ival = mat[i* 2 * self.ncol + j*2 + 1]
+                        #print('%9.*f ' % (6, val), file=OUT, end='')
+                        print('({0:9.6f} {1:9.6f}) '.format(val, ival), end='', file=OUT)
+                    print(file=OUT)
 
-            PyMem_Free(mat)
-
+                PyMem_Free(mat)
+            else:
+                print('Matrix too big to print out', file=OUT)
         else:
-            print('Matrix too big to print out', file=OUT)
+
+            if self.nrow <= CSR_MAT_PPRINT_COL_THRESH and self.ncol <= CSR_MAT_PPRINT_ROW_THRESH:
+                # create linear vector presentation
+                # TODO: put in a method of its own
+                mat = <double *> PyMem_Malloc(self.nrow * self.ncol * sizeof(double))
+
+                if not mat:
+                    raise MemoryError()
+
+                for i from 0 <= i < self.nrow:
+                    for j from 0 <= j < self.ncol:
+                        mat[i* self.ncol + j] = 0.0
+
+                    k = self.ind[i]
+                    while k < self.ind[i+1]:
+                        mat[(i*self.ncol)+self.col[k]] = self.val[k]
+                        k += 1
+
+                for i from 0 <= i < self.nrow:
+                    for j from 0 <= j < self.ncol:
+                        val = mat[(i*self.ncol)+j]
+                        #print('%9.*f ' % (6, val), file=OUT, end='')
+                        print('{0:9.6f} '.format(val), end='')
+                    print(file=OUT)
+
+                PyMem_Free(mat)
+
+            else:
+                print('Matrix too big to print out', file=OUT)
 
     ####################################################################################################################
     # DEBUG
@@ -329,6 +403,11 @@ cdef class CSRSparseMatrix(ImmutableSparseMatrix):
         for i from 0 <= i < self.nnz:
             print(self.val[i], end=' == ', sep=' == ')
         print()
+
+        if self.is_complex:
+            for i from 0 <= i < self.nnz:
+                print(self.ival[i], end=' == ', sep=' == ')
+            print()
 
     def set_col(self, INT_t i, INT_t val):
         self.col[i] = val
@@ -360,10 +439,27 @@ cdef MakeCSRSparseMatrix(INT_t nrow, INT_t ncol, INT_t nnz, INT_t * ind, INT_t *
 
     return csr_mat
 
+cdef MakeCSRComplexSparseMatrix(INT_t nrow, INT_t ncol, INT_t nnz, INT_t * ind, INT_t * col, double * val, double * ival):
+
+    csr_mat = CSRSparseMatrix(nrow=nrow, ncol=ncol, nnz=nnz, is_complex=True)
+
+    csr_mat.val = val
+    csr_mat.ival = ival
+    csr_mat.ind = ind
+    csr_mat.col = col
+
+    csr_mat.__status_ok = True
+
+    return csr_mat
+
 ########################################################################################################################
 # Multiplication functions
 ########################################################################################################################
 cdef LLSparseMatrix multiply_csr_mat_by_csc_mat(CSRSparseMatrix A, CSCSparseMatrix B):
+    if A.is_complex or B.is_complex:
+        raise NotImplemented("This operation is not (yet) implemented for complex matrices")
+
+    # TODO: take into account if matrix A or B has its column indices ordered or not...
     # test dimensions
     cdef INT_t A_nrow = A.nrow
     cdef INT_t A_ncol = A.ncol

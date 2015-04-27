@@ -17,6 +17,7 @@ cdef class CSRSparseMatrix(ImmutableSparseMatrix):
     ####################################################################################################################
     cdef:
         double *    val		 # pointer to array of values
+        double *    ival     # pointer to array of imaginary values
         INT_t *       col		 # pointer to array of indices
         INT_t *       ind		 # pointer to array of indices
 
@@ -26,10 +27,12 @@ cdef class CSRSparseMatrix(ImmutableSparseMatrix):
         INT_t __first_row_not_ordered # first row that is not ordered
 
     cdef _order_column_indices(self)
+    cdef _set_column_indices_ordered_is_true(self)
     cdef at(self, INT_t i, INT_t j)
     cdef safe_at(self, INT_t i, INT_t j)
 
 cdef MakeCSRSparseMatrix(INT_t nrow, INT_t ncol, INT_t nnz, INT_t * ind, INT_t * col, double * val)
+cdef MakeCSRComplexSparseMatrix(INT_t nrow, INT_t ncol, INT_t nnz, INT_t * ind, INT_t * col, double * val, double * ival)
 
 cdef LLSparseMatrix multiply_csr_mat_by_csc_mat(CSRSparseMatrix A, CSCSparseMatrix B)
 

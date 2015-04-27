@@ -22,3 +22,10 @@ matrix.print_to(sys.stdout)
 
 for elem in matrix.values():
     print elem
+
+print "*" * 80
+
+A = matrix.to_csr()
+
+print A
+A.print_to(sys.stdout)

@@ -8,7 +8,7 @@ cdef LLSparseMatrix MakeLLSparseMatrixFromMMFile2(str mm_filename, bint store_ze
     """
 
     """
-    # TODO: this version is painly slow...
+    # TODO: this version is painstakingly slow...
     cdef:
         str line
         list token_list
