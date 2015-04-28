@@ -9,7 +9,6 @@ cdef extern from "umfpack.h":
         UMFPACK_CONTROL, UMFPACK_INFO
 
 
-
 cdef class UmfpackSolver:
     cdef:
         LLSparseMatrix A
@@ -17,10 +16,11 @@ cdef class UmfpackSolver:
         SIZE_t nrow
         SIZE_t ncol
 
+        public bint is_complex
+
+        str family
+
         # Matrix A in CSC format
-        #double * val
-        #int * col
-        #int * ind
         CSCSparseMatrix csc_mat
 
         # UMFPACK opaque objects

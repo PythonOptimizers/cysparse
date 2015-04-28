@@ -1139,7 +1139,7 @@ struct __pyx_obj_10sparse_lib_6sparse_7csr_mat_CSRSparseMatrix {
 };
 
 
-/* "sparse_lib/solvers/suitesparse/umfpack.pxd":13
+/* "sparse_lib/solvers/suitesparse/umfpack.pxd":12
  * 
  * 
  * cdef class UmfpackSolver:             # <<<<<<<<<<<<<<
@@ -1152,6 +1152,8 @@ struct __pyx_obj_10sparse_lib_7solvers_11suitesparse_7umfpack_UmfpackSolver {
   struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *A;
   __pyx_t_10sparse_lib_14cysparse_types_SIZE_t nrow;
   __pyx_t_10sparse_lib_14cysparse_types_SIZE_t ncol;
+  int is_complex;
+  PyObject *family;
   struct __pyx_obj_10sparse_lib_6sparse_7csc_mat_CSCSparseMatrix *csc_mat;
   void *symbolic;
   int symbolic_computed;
@@ -1237,7 +1239,7 @@ struct __pyx_vtabstruct_10sparse_lib_6sparse_7csr_mat_CSRSparseMatrix {
 static struct __pyx_vtabstruct_10sparse_lib_6sparse_7csr_mat_CSRSparseMatrix *__pyx_vtabptr_10sparse_lib_6sparse_7csr_mat_CSRSparseMatrix;
 
 
-/* "sparse_lib/solvers/suitesparse/umfpack.pyx":194
+/* "sparse_lib/solvers/suitesparse/umfpack.pyx":226
  * 
  * 
  * cdef class UmfpackSolver:             # <<<<<<<<<<<<<<
@@ -1763,6 +1765,8 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
 static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_26report_info(struct __pyx_obj_10sparse_lib_7solvers_11suitesparse_7umfpack_UmfpackSolver *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_28report_symbolic(struct __pyx_obj_10sparse_lib_7solvers_11suitesparse_7umfpack_UmfpackSolver *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_30report_numeric(struct __pyx_obj_10sparse_lib_7solvers_11suitesparse_7umfpack_UmfpackSolver *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_10is_complex___get__(struct __pyx_obj_10sparse_lib_7solvers_11suitesparse_7umfpack_UmfpackSolver *__pyx_v_self); /* proto */
+static int __pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_10is_complex_2__set__(struct __pyx_obj_10sparse_lib_7solvers_11suitesparse_7umfpack_UmfpackSolver *__pyx_v_self, PyObject *__pyx_v_value); /* proto */
 static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_4info___get__(struct __pyx_obj_10sparse_lib_7solvers_11suitesparse_7umfpack_UmfpackSolver *__pyx_v_self); /* proto */
 static int __pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_4info_2__set__(struct __pyx_obj_10sparse_lib_7solvers_11suitesparse_7umfpack_UmfpackSolver *__pyx_v_self, PyObject *__pyx_v_value); /* proto */
 static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_7control___get__(struct __pyx_obj_10sparse_lib_7solvers_11suitesparse_7umfpack_UmfpackSolver *__pyx_v_self); /* proto */
@@ -1785,6 +1789,7 @@ static char __pyx_k_h[] = "h";
 static char __pyx_k_i[] = "i";
 static char __pyx_k_l[] = "l";
 static char __pyx_k_q[] = "q";
+static char __pyx_k_z[] = "z";
 static char __pyx_k_Zd[] = "Zd";
 static char __pyx_k_Zf[] = "Zf";
 static char __pyx_k_Zg[] = "Zg";
@@ -1889,6 +1894,7 @@ static char __pyx_k_UMFPACK_ERROR_invalid_permutatio[] = "UMFPACK_ERROR_invalid_
 static char __pyx_k_UMFPACK_WARNING_determinant_over[] = "UMFPACK_WARNING_determinant_overflow";
 static char __pyx_k_UMFPACK_WARNING_determinant_unde[] = "UMFPACK_WARNING_determinant_underflow";
 static char __pyx_k_UMFPACK_library_not_yet_interfac[] = "UMFPACK library not (yet) interfaced with INT64 (long)";
+static char __pyx_k_UMFPACK_only_deals_with_double_p[] = "UMFPACK only deals with double precision (FLOAT64)";
 static char __pyx_k_ndarray_is_not_Fortran_contiguou[] = "ndarray is not Fortran contiguous";
 static char __pyx_k_not_enough_values_found_during_a[] = "not enough values found during array assignment, expected %zd, got %zd";
 static char __pyx_k_sparse_lib_solvers_suitesparse_u[] = "sparse_lib.solvers.suitesparse.umfpack";
@@ -1941,6 +1947,7 @@ static PyObject *__pyx_n_s_UMFPACK_WARNING_determinant_over;
 static PyObject *__pyx_n_s_UMFPACK_WARNING_determinant_unde;
 static PyObject *__pyx_n_s_UMFPACK_WARNING_singular_matrix;
 static PyObject *__pyx_kp_s_UMFPACK_library_not_yet_interfac;
+static PyObject *__pyx_kp_s_UMFPACK_only_deals_with_double_p;
 static PyObject *__pyx_kp_s_UMFPACK_version_s;
 static PyObject *__pyx_n_s_ValueError;
 static PyObject *__pyx_n_s_aborted;
@@ -1950,6 +1957,7 @@ static PyObject *__pyx_kp_s_create_numeric;
 static PyObject *__pyx_n_s_create_numeric_2;
 static PyObject *__pyx_kp_s_create_symbolic;
 static PyObject *__pyx_n_s_create_symbolic_2;
+static PyObject *__pyx_n_s_d;
 static PyObject *__pyx_n_s_double;
 static PyObject *__pyx_n_s_dtype;
 static PyObject *__pyx_n_s_empty;
@@ -1969,9 +1977,11 @@ static PyObject *__pyx_n_s_get_U;
 static PyObject *__pyx_kp_s_get_lunz;
 static PyObject *__pyx_n_s_get_lunz_2;
 static PyObject *__pyx_kp_s_home_nikolaj_Documents_WORK_Dom;
+static PyObject *__pyx_n_s_i;
 static PyObject *__pyx_n_s_import;
 static PyObject *__pyx_n_s_irsteps;
 static PyObject *__pyx_n_s_keys;
+static PyObject *__pyx_n_s_l;
 static PyObject *__pyx_n_s_main;
 static PyObject *__pyx_n_s_msg;
 static PyObject *__pyx_kp_u_ndarray_is_not_C_contiguous;
@@ -2000,6 +2010,7 @@ static PyObject *__pyx_n_s_umfpack_version;
 static PyObject *__pyx_kp_u_unknown_dtype_code_in_numpy_pxd;
 static PyObject *__pyx_n_s_version_string;
 static PyObject *__pyx_n_s_warning;
+static PyObject *__pyx_n_s_z;
 static PyObject *__pyx_int_0;
 static PyObject *__pyx_int_2;
 static PyObject *__pyx_int_3;
@@ -2019,8 +2030,8 @@ static PyObject *__pyx_codeobj__11;
 static PyObject *__pyx_codeobj__13;
 static PyObject *__pyx_codeobj__15;
 
-/* "sparse_lib/solvers/suitesparse/umfpack.pyx":124
- * 
+/* "sparse_lib/solvers/suitesparse/umfpack.pyx":156
+ *     void umfpack_zi_report_numeric(void *, double *)
  * 
  * def umfpack_version():             # <<<<<<<<<<<<<<
  *     version_string = "UMFPACK version %s" % UMFPACK_VERSION
@@ -2052,22 +2063,22 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_umfpack_v
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("umfpack_version", 0);
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":125
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":157
  * 
  * def umfpack_version():
  *     version_string = "UMFPACK version %s" % UMFPACK_VERSION             # <<<<<<<<<<<<<<
  * 
  *     return version_string
  */
-  __pyx_t_1 = __Pyx_PyInt_From_int(UMFPACK_VERSION); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 125; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyInt_From_int(UMFPACK_VERSION); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 157; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyString_Format(__pyx_kp_s_UMFPACK_version_s, __pyx_t_1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 125; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyString_Format(__pyx_kp_s_UMFPACK_version_s, __pyx_t_1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 157; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_version_string = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":127
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":159
  *     version_string = "UMFPACK version %s" % UMFPACK_VERSION
  * 
  *     return version_string             # <<<<<<<<<<<<<<
@@ -2079,8 +2090,8 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_umfpack_v
   __pyx_r = __pyx_v_version_string;
   goto __pyx_L0;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":124
- * 
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":156
+ *     void umfpack_zi_report_numeric(void *, double *)
  * 
  * def umfpack_version():             # <<<<<<<<<<<<<<
  *     version_string = "UMFPACK version %s" % UMFPACK_VERSION
@@ -2100,7 +2111,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_umfpack_v
   return __pyx_r;
 }
 
-/* "sparse_lib/solvers/suitesparse/umfpack.pyx":129
+/* "sparse_lib/solvers/suitesparse/umfpack.pyx":161
  *     return version_string
  * 
  * def umfpack_detailed_version():             # <<<<<<<<<<<<<<
@@ -2136,54 +2147,54 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_2umfpack_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("umfpack_detailed_version", 0);
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":130
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":162
  * 
  * def umfpack_detailed_version():
  *     version_string = "%s.%s.%s (%s)" % (UMFPACK_MAIN_VERSION,             # <<<<<<<<<<<<<<
  *                                          UMFPACK_SUB_VERSION,
  *                                          UMFPACK_SUBSUB_VERSION,
  */
-  __pyx_t_1 = __Pyx_PyInt_From_int(UMFPACK_MAIN_VERSION); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 130; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyInt_From_int(UMFPACK_MAIN_VERSION); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 162; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":131
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":163
  * def umfpack_detailed_version():
  *     version_string = "%s.%s.%s (%s)" % (UMFPACK_MAIN_VERSION,
  *                                          UMFPACK_SUB_VERSION,             # <<<<<<<<<<<<<<
  *                                          UMFPACK_SUBSUB_VERSION,
  *                                          UMFPACK_DATE)
  */
-  __pyx_t_2 = __Pyx_PyInt_From_int(UMFPACK_SUB_VERSION); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 131; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyInt_From_int(UMFPACK_SUB_VERSION); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 163; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":132
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":164
  *     version_string = "%s.%s.%s (%s)" % (UMFPACK_MAIN_VERSION,
  *                                          UMFPACK_SUB_VERSION,
  *                                          UMFPACK_SUBSUB_VERSION,             # <<<<<<<<<<<<<<
  *                                          UMFPACK_DATE)
  *     return version_string
  */
-  __pyx_t_3 = __Pyx_PyInt_From_int(UMFPACK_SUBSUB_VERSION); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 132; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyInt_From_int(UMFPACK_SUBSUB_VERSION); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 164; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":133
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":165
  *                                          UMFPACK_SUB_VERSION,
  *                                          UMFPACK_SUBSUB_VERSION,
  *                                          UMFPACK_DATE)             # <<<<<<<<<<<<<<
  *     return version_string
  * 
  */
-  __pyx_t_4 = __Pyx_PyBytes_FromString(UMFPACK_DATE); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 133; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyBytes_FromString(UMFPACK_DATE); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 165; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":130
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":162
  * 
  * def umfpack_detailed_version():
  *     version_string = "%s.%s.%s (%s)" % (UMFPACK_MAIN_VERSION,             # <<<<<<<<<<<<<<
  *                                          UMFPACK_SUB_VERSION,
  *                                          UMFPACK_SUBSUB_VERSION,
  */
-  __pyx_t_5 = PyTuple_New(4); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 130; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = PyTuple_New(4); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 162; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_1);
@@ -2197,13 +2208,13 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_2umfpack_
   __pyx_t_2 = 0;
   __pyx_t_3 = 0;
   __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_PyString_Format(__pyx_kp_s_s_s_s_s, __pyx_t_5); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 130; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyString_Format(__pyx_kp_s_s_s_s_s, __pyx_t_5); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 162; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_v_version_string = ((PyObject*)__pyx_t_4);
   __pyx_t_4 = 0;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":134
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":166
  *                                          UMFPACK_SUBSUB_VERSION,
  *                                          UMFPACK_DATE)
  *     return version_string             # <<<<<<<<<<<<<<
@@ -2215,7 +2226,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_2umfpack_
   __pyx_r = __pyx_v_version_string;
   goto __pyx_L0;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":129
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":161
  *     return version_string
  * 
  * def umfpack_detailed_version():             # <<<<<<<<<<<<<<
@@ -2239,7 +2250,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_2umfpack_
   return __pyx_r;
 }
 
-/* "sparse_lib/solvers/suitesparse/umfpack.pyx":171
+/* "sparse_lib/solvers/suitesparse/umfpack.pyx":203
  * }
  * 
  * def test_umfpack_result(status, msg, raise_error=True, print_on_screen=True):             # <<<<<<<<<<<<<<
@@ -2286,7 +2297,7 @@ static PyObject *__pyx_pw_10sparse_lib_7solvers_11suitesparse_7umfpack_5test_umf
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_msg)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("test_umfpack_result", 0, 2, 4, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 171; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("test_umfpack_result", 0, 2, 4, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 203; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  2:
         if (kw_args > 0) {
@@ -2300,7 +2311,7 @@ static PyObject *__pyx_pw_10sparse_lib_7solvers_11suitesparse_7umfpack_5test_umf
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "test_umfpack_result") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 171; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "test_umfpack_result") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 203; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -2319,7 +2330,7 @@ static PyObject *__pyx_pw_10sparse_lib_7solvers_11suitesparse_7umfpack_5test_umf
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("test_umfpack_result", 0, 2, 4, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 171; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("test_umfpack_result", 0, 2, 4, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 203; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("sparse_lib.solvers.suitesparse.umfpack.test_umfpack_result", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -2344,54 +2355,54 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_4test_umf
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("test_umfpack_result", 0);
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":186
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":218
  *     """
  * 
  *     if status != UMFPACK_OK:             # <<<<<<<<<<<<<<
  * 
  *         if status < 0 and raise_error:
  */
-  __pyx_t_1 = __Pyx_PyInt_From_int(UMFPACK_OK); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 186; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyInt_From_int(UMFPACK_OK); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 218; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyObject_RichCompare(__pyx_v_status, __pyx_t_1, Py_NE); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 186; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyObject_RichCompare(__pyx_v_status, __pyx_t_1, Py_NE); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 218; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 186; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 218; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_3) {
 
-    /* "sparse_lib/solvers/suitesparse/umfpack.pyx":188
+    /* "sparse_lib/solvers/suitesparse/umfpack.pyx":220
  *     if status != UMFPACK_OK:
  * 
  *         if status < 0 and raise_error:             # <<<<<<<<<<<<<<
  *             raise RuntimeError("%s %s: %s" % (msg, "aborted", UMFPACK_ERROR_CODE_DICT[status]))
  *         elif status > 0 and print_on_screen:
  */
-    __pyx_t_2 = PyObject_RichCompare(__pyx_v_status, __pyx_int_0, Py_LT); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 188; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 188; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = PyObject_RichCompare(__pyx_v_status, __pyx_int_0, Py_LT); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 220; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 220; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     if (__pyx_t_4) {
     } else {
       __pyx_t_3 = __pyx_t_4;
       goto __pyx_L5_bool_binop_done;
     }
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_v_raise_error); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 188; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_v_raise_error); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 220; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __pyx_t_3 = __pyx_t_4;
     __pyx_L5_bool_binop_done:;
     if (__pyx_t_3) {
 
-      /* "sparse_lib/solvers/suitesparse/umfpack.pyx":189
+      /* "sparse_lib/solvers/suitesparse/umfpack.pyx":221
  * 
  *         if status < 0 and raise_error:
  *             raise RuntimeError("%s %s: %s" % (msg, "aborted", UMFPACK_ERROR_CODE_DICT[status]))             # <<<<<<<<<<<<<<
  *         elif status > 0 and print_on_screen:
  *             print "%s %s: %s" % (msg, "warning", UMFPACK_ERROR_CODE_DICT[status])
  */
-      __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_UMFPACK_ERROR_CODE_DICT); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 189; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_UMFPACK_ERROR_CODE_DICT); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 221; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_1 = PyObject_GetItem(__pyx_t_2, __pyx_v_status); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 189; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+      __pyx_t_1 = PyObject_GetItem(__pyx_t_2, __pyx_v_status); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 221; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-      __pyx_t_2 = PyTuple_New(3); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 189; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = PyTuple_New(3); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 221; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_INCREF(__pyx_v_msg);
       PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_v_msg);
@@ -2402,55 +2413,55 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_4test_umf
       PyTuple_SET_ITEM(__pyx_t_2, 2, __pyx_t_1);
       __Pyx_GIVEREF(__pyx_t_1);
       __pyx_t_1 = 0;
-      __pyx_t_1 = __Pyx_PyString_Format(__pyx_kp_s_s_s_s, __pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 189; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = __Pyx_PyString_Format(__pyx_kp_s_s_s_s, __pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 221; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-      __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 189; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 221; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
       PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1);
       __Pyx_GIVEREF(__pyx_t_1);
       __pyx_t_1 = 0;
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_RuntimeError, __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 189; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_RuntimeError, __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 221; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_Raise(__pyx_t_1, 0, 0, 0);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 189; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 221; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
 
-    /* "sparse_lib/solvers/suitesparse/umfpack.pyx":190
+    /* "sparse_lib/solvers/suitesparse/umfpack.pyx":222
  *         if status < 0 and raise_error:
  *             raise RuntimeError("%s %s: %s" % (msg, "aborted", UMFPACK_ERROR_CODE_DICT[status]))
  *         elif status > 0 and print_on_screen:             # <<<<<<<<<<<<<<
  *             print "%s %s: %s" % (msg, "warning", UMFPACK_ERROR_CODE_DICT[status])
  * 
  */
-    __pyx_t_1 = PyObject_RichCompare(__pyx_v_status, __pyx_int_0, Py_GT); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 190; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 190; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyObject_RichCompare(__pyx_v_status, __pyx_int_0, Py_GT); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 222; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 222; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_4) {
     } else {
       __pyx_t_3 = __pyx_t_4;
       goto __pyx_L7_bool_binop_done;
     }
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_v_print_on_screen); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 190; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_v_print_on_screen); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 222; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __pyx_t_3 = __pyx_t_4;
     __pyx_L7_bool_binop_done:;
     if (__pyx_t_3) {
 
-      /* "sparse_lib/solvers/suitesparse/umfpack.pyx":191
+      /* "sparse_lib/solvers/suitesparse/umfpack.pyx":223
  *             raise RuntimeError("%s %s: %s" % (msg, "aborted", UMFPACK_ERROR_CODE_DICT[status]))
  *         elif status > 0 and print_on_screen:
  *             print "%s %s: %s" % (msg, "warning", UMFPACK_ERROR_CODE_DICT[status])             # <<<<<<<<<<<<<<
  * 
  * 
  */
-      __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_UMFPACK_ERROR_CODE_DICT); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 191; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_UMFPACK_ERROR_CODE_DICT); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 223; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_2 = PyObject_GetItem(__pyx_t_1, __pyx_v_status); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 191; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+      __pyx_t_2 = PyObject_GetItem(__pyx_t_1, __pyx_v_status); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 223; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 191; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 223; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_INCREF(__pyx_v_msg);
       PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_v_msg);
@@ -2461,10 +2472,10 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_4test_umf
       PyTuple_SET_ITEM(__pyx_t_1, 2, __pyx_t_2);
       __Pyx_GIVEREF(__pyx_t_2);
       __pyx_t_2 = 0;
-      __pyx_t_2 = __Pyx_PyString_Format(__pyx_kp_s_s_s_s, __pyx_t_1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 191; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = __Pyx_PyString_Format(__pyx_kp_s_s_s_s, __pyx_t_1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 223; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      if (__Pyx_PrintOne(0, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 191; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (__Pyx_PrintOne(0, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 223; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       goto __pyx_L4;
     }
@@ -2473,7 +2484,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_4test_umf
   }
   __pyx_L3:;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":171
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":203
  * }
  * 
  * def test_umfpack_result(status, msg, raise_error=True, print_on_screen=True):             # <<<<<<<<<<<<<<
@@ -2495,12 +2506,12 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_4test_umf
   return __pyx_r;
 }
 
-/* "sparse_lib/solvers/suitesparse/umfpack.pyx":208
- *                                      UMFPACK_DATE)
+/* "sparse_lib/solvers/suitesparse/umfpack.pyx":241
+ * 
  * 
  *     def __cinit__(self, LLSparseMatrix A):             # <<<<<<<<<<<<<<
- *         self.A = A
- *         self.nrow = A.nrow
+ *         """
+ *         {{COMPLEX: YES}}
  */
 
 /* Python wrapper */
@@ -2531,7 +2542,7 @@ static int __pyx_pw_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__cinit__") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 208; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__cinit__") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 241; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 1) {
       goto __pyx_L5_argtuple_error;
@@ -2542,13 +2553,13 @@ static int __pyx_pw_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 1, 1, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 208; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 1, 1, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 241; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("sparse_lib.solvers.suitesparse.umfpack.UmfpackSolver.__cinit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return -1;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_A), __pyx_ptype_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix, 1, "A", 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 208; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_A), __pyx_ptype_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix, 1, "A", 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 241; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_r = __pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver___cinit__(((struct __pyx_obj_10sparse_lib_7solvers_11suitesparse_7umfpack_UmfpackSolver *)__pyx_v_self), __pyx_v_A);
 
   /* function exit code */
@@ -2573,9 +2584,9 @@ static int __pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__cinit__", 0);
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":209
- * 
- *     def __cinit__(self, LLSparseMatrix A):
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":246
+ *         {{GENERIC: YES}}
+ *         """
  *         self.A = A             # <<<<<<<<<<<<<<
  *         self.nrow = A.nrow
  *         self.ncol = A.ncol
@@ -2586,8 +2597,8 @@ static int __pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver
   __Pyx_DECREF(((PyObject *)__pyx_v_self->A));
   __pyx_v_self->A = __pyx_v_A;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":210
- *     def __cinit__(self, LLSparseMatrix A):
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":247
+ *         """
  *         self.A = A
  *         self.nrow = A.nrow             # <<<<<<<<<<<<<<
  *         self.ncol = A.ncol
@@ -2596,7 +2607,7 @@ static int __pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver
   __pyx_t_1 = __pyx_v_A->__pyx_base.__pyx_base.nrow;
   __pyx_v_self->nrow = __pyx_t_1;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":211
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":248
  *         self.A = A
  *         self.nrow = A.nrow
  *         self.ncol = A.ncol             # <<<<<<<<<<<<<<
@@ -2606,25 +2617,137 @@ static int __pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver
   __pyx_t_1 = __pyx_v_A->__pyx_base.__pyx_base.ncol;
   __pyx_v_self->ncol = __pyx_t_1;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":213
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":250
  *         self.ncol = A.ncol
  * 
  *         assert self.nrow == self.ncol, "Only square matrices are handled in UMFPACK"             # <<<<<<<<<<<<<<
+ *         assert FLOAT_T == FLOAT64_T, "UMFPACK only deals with double precision (FLOAT64)"
  * 
- *         if INT_T == INT64_T:
  */
   #ifndef CYTHON_WITHOUT_ASSERTIONS
   if (unlikely(!Py_OptimizeFlag)) {
     if (unlikely(!((__pyx_v_self->nrow == __pyx_v_self->ncol) != 0))) {
       PyErr_SetObject(PyExc_AssertionError, __pyx_kp_s_Only_square_matrices_are_handled);
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 213; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 250; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
   }
   #endif
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":215
- *         assert self.nrow == self.ncol, "Only square matrices are handled in UMFPACK"
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":251
  * 
+ *         assert self.nrow == self.ncol, "Only square matrices are handled in UMFPACK"
+ *         assert FLOAT_T == FLOAT64_T, "UMFPACK only deals with double precision (FLOAT64)"             # <<<<<<<<<<<<<<
+ * 
+ *         self.is_complex = A.is_complex
+ */
+  #ifndef CYTHON_WITHOUT_ASSERTIONS
+  if (unlikely(!Py_OptimizeFlag)) {
+    if (unlikely(!((__pyx_e_10sparse_lib_14cysparse_types_FLOAT_T == __pyx_e_10sparse_lib_14cysparse_types_FLOAT64_T) != 0))) {
+      PyErr_SetObject(PyExc_AssertionError, __pyx_kp_s_UMFPACK_only_deals_with_double_p);
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 251; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    }
+  }
+  #endif
+
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":253
+ *         assert FLOAT_T == FLOAT64_T, "UMFPACK only deals with double precision (FLOAT64)"
+ * 
+ *         self.is_complex = A.is_complex             # <<<<<<<<<<<<<<
+ * 
+ *         # fix UMFPACK family
+ */
+  __pyx_t_2 = __pyx_v_A->__pyx_base.__pyx_base.is_complex;
+  __pyx_v_self->is_complex = __pyx_t_2;
+
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":256
+ * 
+ *         # fix UMFPACK family
+ *         if self.is_complex:             # <<<<<<<<<<<<<<
+ *             self.family = 'z'
+ *         else:
+ */
+  __pyx_t_2 = (__pyx_v_self->is_complex != 0);
+  if (__pyx_t_2) {
+
+    /* "sparse_lib/solvers/suitesparse/umfpack.pyx":257
+ *         # fix UMFPACK family
+ *         if self.is_complex:
+ *             self.family = 'z'             # <<<<<<<<<<<<<<
+ *         else:
+ *             self.family = 'd'
+ */
+    __Pyx_INCREF(__pyx_n_s_z);
+    __Pyx_GIVEREF(__pyx_n_s_z);
+    __Pyx_GOTREF(__pyx_v_self->family);
+    __Pyx_DECREF(__pyx_v_self->family);
+    __pyx_v_self->family = __pyx_n_s_z;
+    goto __pyx_L3;
+  }
+  /*else*/ {
+
+    /* "sparse_lib/solvers/suitesparse/umfpack.pyx":259
+ *             self.family = 'z'
+ *         else:
+ *             self.family = 'd'             # <<<<<<<<<<<<<<
+ * 
+ *         if INT_T == INT64_T:
+ */
+    __Pyx_INCREF(__pyx_n_s_d);
+    __Pyx_GIVEREF(__pyx_n_s_d);
+    __Pyx_GOTREF(__pyx_v_self->family);
+    __Pyx_DECREF(__pyx_v_self->family);
+    __pyx_v_self->family = __pyx_n_s_d;
+  }
+  __pyx_L3:;
+
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":261
+ *             self.family = 'd'
+ * 
+ *         if INT_T == INT64_T:             # <<<<<<<<<<<<<<
+ *             self.family += 'l'
+ *         else:
+ */
+  __pyx_t_2 = ((__pyx_e_10sparse_lib_14cysparse_types_INT_T == __pyx_e_10sparse_lib_14cysparse_types_INT64_T) != 0);
+  if (__pyx_t_2) {
+
+    /* "sparse_lib/solvers/suitesparse/umfpack.pyx":262
+ * 
+ *         if INT_T == INT64_T:
+ *             self.family += 'l'             # <<<<<<<<<<<<<<
+ *         else:
+ *             self.family += 'i'
+ */
+    __pyx_t_3 = PyNumber_InPlaceAdd(__pyx_v_self->family, __pyx_n_s_l); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 262; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_GIVEREF(__pyx_t_3);
+    __Pyx_GOTREF(__pyx_v_self->family);
+    __Pyx_DECREF(__pyx_v_self->family);
+    __pyx_v_self->family = ((PyObject*)__pyx_t_3);
+    __pyx_t_3 = 0;
+    goto __pyx_L4;
+  }
+  /*else*/ {
+
+    /* "sparse_lib/solvers/suitesparse/umfpack.pyx":264
+ *             self.family += 'l'
+ *         else:
+ *             self.family += 'i'             # <<<<<<<<<<<<<<
+ * 
+ *         # TODO: implement both cases!
+ */
+    __pyx_t_3 = PyNumber_InPlaceAdd(__pyx_v_self->family, __pyx_n_s_i); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 264; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_GIVEREF(__pyx_t_3);
+    __Pyx_GOTREF(__pyx_v_self->family);
+    __Pyx_DECREF(__pyx_v_self->family);
+    __pyx_v_self->family = ((PyObject*)__pyx_t_3);
+    __pyx_t_3 = 0;
+  }
+  __pyx_L4:;
+
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":267
+ * 
+ *         # TODO: implement both cases!
  *         if INT_T == INT64_T:             # <<<<<<<<<<<<<<
  *             raise NotImplemented("UMFPACK library not (yet) interfaced with INT64 (long)")
  * 
@@ -2632,21 +2755,21 @@ static int __pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver
   __pyx_t_2 = ((__pyx_e_10sparse_lib_14cysparse_types_INT_T == __pyx_e_10sparse_lib_14cysparse_types_INT64_T) != 0);
   if (__pyx_t_2) {
 
-    /* "sparse_lib/solvers/suitesparse/umfpack.pyx":216
- * 
+    /* "sparse_lib/solvers/suitesparse/umfpack.pyx":268
+ *         # TODO: implement both cases!
  *         if INT_T == INT64_T:
  *             raise NotImplemented("UMFPACK library not (yet) interfaced with INT64 (long)")             # <<<<<<<<<<<<<<
  * 
  *         if A.is_complex:
  */
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_NotImplemented, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 216; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_NotImplemented, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 268; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 216; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 268; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":218
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":270
  *             raise NotImplemented("UMFPACK library not (yet) interfaced with INT64 (long)")
  * 
  *         if A.is_complex:             # <<<<<<<<<<<<<<
@@ -2656,28 +2779,28 @@ static int __pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver
   __pyx_t_2 = (__pyx_v_A->__pyx_base.__pyx_base.is_complex != 0);
   if (__pyx_t_2) {
 
-    /* "sparse_lib/solvers/suitesparse/umfpack.pyx":219
+    /* "sparse_lib/solvers/suitesparse/umfpack.pyx":271
  * 
  *         if A.is_complex:
  *             raise NotImplemented("Complex version of UMFPACK not (yet) implemented")             # <<<<<<<<<<<<<<
  * 
  *         self.csc_mat  = self.A.to_csc()
  */
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_NotImplemented, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 219; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_NotImplemented, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 271; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 219; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 271; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":221
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":273
  *             raise NotImplemented("Complex version of UMFPACK not (yet) implemented")
  * 
  *         self.csc_mat  = self.A.to_csc()             # <<<<<<<<<<<<<<
  * 
  *         self.symbolic_computed = False
  */
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self->A), __pyx_n_s_to_csc); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 221; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self->A), __pyx_n_s_to_csc); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 273; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_t_5 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_4))) {
@@ -2690,21 +2813,21 @@ static int __pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver
     }
   }
   if (__pyx_t_5) {
-    __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_5); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 221; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_5); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 273; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   } else {
-    __pyx_t_3 = __Pyx_PyObject_CallNoArg(__pyx_t_4); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 221; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_CallNoArg(__pyx_t_4); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 273; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (!(likely(((__pyx_t_3) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_3, __pyx_ptype_10sparse_lib_6sparse_7csc_mat_CSCSparseMatrix))))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 221; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (!(likely(((__pyx_t_3) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_3, __pyx_ptype_10sparse_lib_6sparse_7csc_mat_CSCSparseMatrix))))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 273; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GIVEREF(__pyx_t_3);
   __Pyx_GOTREF(__pyx_v_self->csc_mat);
   __Pyx_DECREF(((PyObject *)__pyx_v_self->csc_mat));
   __pyx_v_self->csc_mat = ((struct __pyx_obj_10sparse_lib_6sparse_7csc_mat_CSCSparseMatrix *)__pyx_t_3);
   __pyx_t_3 = 0;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":223
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":275
  *         self.csc_mat  = self.A.to_csc()
  * 
  *         self.symbolic_computed = False             # <<<<<<<<<<<<<<
@@ -2713,7 +2836,7 @@ static int __pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver
  */
   __pyx_v_self->symbolic_computed = 0;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":224
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":276
  * 
  *         self.symbolic_computed = False
  *         self.numeric_computed = False             # <<<<<<<<<<<<<<
@@ -2722,7 +2845,7 @@ static int __pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver
  */
   __pyx_v_self->numeric_computed = 0;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":227
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":279
  * 
  *         # set default parameters for control
  *         umfpack_di_defaults(<double *>&self.control)             # <<<<<<<<<<<<<<
@@ -2731,26 +2854,26 @@ static int __pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver
  */
   umfpack_di_defaults(((double *)(&__pyx_v_self->control)));
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":228
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":280
  *         # set default parameters for control
  *         umfpack_di_defaults(<double *>&self.control)
  *         self.set_verbosity(3)             # <<<<<<<<<<<<<<
  * 
  *     ####################################################################################################################
  */
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_set_verbosity); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 228; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_set_verbosity); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 280; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 228; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 280; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":208
- *                                      UMFPACK_DATE)
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":241
+ * 
  * 
  *     def __cinit__(self, LLSparseMatrix A):             # <<<<<<<<<<<<<<
- *         self.A = A
- *         self.nrow = A.nrow
+ *         """
+ *         {{COMPLEX: YES}}
  */
 
   /* function exit code */
@@ -2767,12 +2890,12 @@ static int __pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver
   return __pyx_r;
 }
 
-/* "sparse_lib/solvers/suitesparse/umfpack.pyx":233
+/* "sparse_lib/solvers/suitesparse/umfpack.pyx":285
  *     # FREE MEMORY
  *     ####################################################################################################################
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
- *         self.free()
- * 
+ *         """
+ *         {{COMPLEX: YES}}
  */
 
 /* Python wrapper */
@@ -2796,14 +2919,14 @@ static void __pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolve
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__dealloc__", 0);
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":234
- *     ####################################################################################################################
- *     def __dealloc__(self):
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":290
+ *         {{GENERIC: YES}}
+ *         """
  *         self.free()             # <<<<<<<<<<<<<<
  * 
  *     def free_symbolic(self):
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_free); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 234; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_free); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 290; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_2))) {
@@ -2816,21 +2939,21 @@ static void __pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolve
     }
   }
   if (__pyx_t_3) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 234; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 290; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   } else {
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 234; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 290; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":233
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":285
  *     # FREE MEMORY
  *     ####################################################################################################################
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
- *         self.free()
- * 
+ *         """
+ *         {{COMPLEX: YES}}
  */
 
   /* function exit code */
@@ -2844,16 +2967,17 @@ static void __pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolve
   __Pyx_RefNannyFinishContext();
 }
 
-/* "sparse_lib/solvers/suitesparse/umfpack.pyx":236
+/* "sparse_lib/solvers/suitesparse/umfpack.pyx":292
  *         self.free()
  * 
  *     def free_symbolic(self):             # <<<<<<<<<<<<<<
- *         if self.symbolic_computed:
- *             umfpack_di_free_symbolic(&self.symbolic)
+ *         """
+ *         {{COMPLEX: YES}}
  */
 
 /* Python wrapper */
 static PyObject *__pyx_pw_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_5free_symbolic(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static char __pyx_doc_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_4free_symbolic[] = "\n        {{COMPLEX: YES}}\n        {{GENERIC: YES}}\n        ";
 static PyObject *__pyx_pw_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_5free_symbolic(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
@@ -2871,9 +2995,9 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   int __pyx_t_1;
   __Pyx_RefNannySetupContext("free_symbolic", 0);
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":237
- * 
- *     def free_symbolic(self):
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":297
+ *         {{GENERIC: YES}}
+ *         """
  *         if self.symbolic_computed:             # <<<<<<<<<<<<<<
  *             umfpack_di_free_symbolic(&self.symbolic)
  * 
@@ -2881,8 +3005,8 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   __pyx_t_1 = (__pyx_v_self->symbolic_computed != 0);
   if (__pyx_t_1) {
 
-    /* "sparse_lib/solvers/suitesparse/umfpack.pyx":238
- *     def free_symbolic(self):
+    /* "sparse_lib/solvers/suitesparse/umfpack.pyx":298
+ *         """
  *         if self.symbolic_computed:
  *             umfpack_di_free_symbolic(&self.symbolic)             # <<<<<<<<<<<<<<
  * 
@@ -2893,12 +3017,12 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   }
   __pyx_L3:;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":236
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":292
  *         self.free()
  * 
  *     def free_symbolic(self):             # <<<<<<<<<<<<<<
- *         if self.symbolic_computed:
- *             umfpack_di_free_symbolic(&self.symbolic)
+ *         """
+ *         {{COMPLEX: YES}}
  */
 
   /* function exit code */
@@ -2908,16 +3032,17 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   return __pyx_r;
 }
 
-/* "sparse_lib/solvers/suitesparse/umfpack.pyx":240
+/* "sparse_lib/solvers/suitesparse/umfpack.pyx":300
  *             umfpack_di_free_symbolic(&self.symbolic)
  * 
  *     def free_numeric(self):             # <<<<<<<<<<<<<<
- *         if self.numeric_computed:
- *             umfpack_di_free_numeric(&self.numeric)
+ *         """
+ *         {{COMPLEX: YES}}
  */
 
 /* Python wrapper */
 static PyObject *__pyx_pw_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_7free_numeric(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static char __pyx_doc_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_6free_numeric[] = "\n        {{COMPLEX: YES}}\n        {{GENERIC: YES}}\n        ";
 static PyObject *__pyx_pw_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_7free_numeric(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
@@ -2935,9 +3060,9 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   int __pyx_t_1;
   __Pyx_RefNannySetupContext("free_numeric", 0);
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":241
- * 
- *     def free_numeric(self):
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":305
+ *         {{GENERIC: YES}}
+ *         """
  *         if self.numeric_computed:             # <<<<<<<<<<<<<<
  *             umfpack_di_free_numeric(&self.numeric)
  * 
@@ -2945,8 +3070,8 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   __pyx_t_1 = (__pyx_v_self->numeric_computed != 0);
   if (__pyx_t_1) {
 
-    /* "sparse_lib/solvers/suitesparse/umfpack.pyx":242
- *     def free_numeric(self):
+    /* "sparse_lib/solvers/suitesparse/umfpack.pyx":306
+ *         """
  *         if self.numeric_computed:
  *             umfpack_di_free_numeric(&self.numeric)             # <<<<<<<<<<<<<<
  * 
@@ -2957,12 +3082,12 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   }
   __pyx_L3:;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":240
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":300
  *             umfpack_di_free_symbolic(&self.symbolic)
  * 
  *     def free_numeric(self):             # <<<<<<<<<<<<<<
- *         if self.numeric_computed:
- *             umfpack_di_free_numeric(&self.numeric)
+ *         """
+ *         {{COMPLEX: YES}}
  */
 
   /* function exit code */
@@ -2972,16 +3097,17 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   return __pyx_r;
 }
 
-/* "sparse_lib/solvers/suitesparse/umfpack.pyx":244
+/* "sparse_lib/solvers/suitesparse/umfpack.pyx":308
  *             umfpack_di_free_numeric(&self.numeric)
  * 
  *     def free(self):             # <<<<<<<<<<<<<<
- *         self.free_numeric()
- *         self.free_symbolic()
+ *         """
+ *         {{COMPLEX: YES}}
  */
 
 /* Python wrapper */
 static PyObject *__pyx_pw_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_9free(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static char __pyx_doc_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_8free[] = "\n        {{COMPLEX: YES}}\n        {{GENERIC: YES}}\n        ";
 static PyObject *__pyx_pw_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_9free(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
@@ -3004,14 +3130,14 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("free", 0);
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":245
- * 
- *     def free(self):
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":313
+ *         {{GENERIC: YES}}
+ *         """
  *         self.free_numeric()             # <<<<<<<<<<<<<<
  *         self.free_symbolic()
  * 
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_free_numeric); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 245; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_free_numeric); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 313; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_2))) {
@@ -3024,23 +3150,23 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
     }
   }
   if (__pyx_t_3) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 245; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 313; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   } else {
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 245; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 313; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":246
- *     def free(self):
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":314
+ *         """
  *         self.free_numeric()
  *         self.free_symbolic()             # <<<<<<<<<<<<<<
  * 
  *     ####################################################################################################################
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_free_symbolic); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 246; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_free_symbolic); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 314; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_2))) {
@@ -3053,21 +3179,21 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
     }
   }
   if (__pyx_t_3) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 246; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 314; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   } else {
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 246; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 314; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":244
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":308
  *             umfpack_di_free_numeric(&self.numeric)
  * 
  *     def free(self):             # <<<<<<<<<<<<<<
- *         self.free_numeric()
- *         self.free_symbolic()
+ *         """
+ *         {{COMPLEX: YES}}
  */
 
   /* function exit code */
@@ -3085,18 +3211,19 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   return __pyx_r;
 }
 
-/* "sparse_lib/solvers/suitesparse/umfpack.pyx":251
+/* "sparse_lib/solvers/suitesparse/umfpack.pyx":319
  *     # PRIMARY ROUTINES
  *     ####################################################################################################################
  *     cdef int _create_symbolic(self):             # <<<<<<<<<<<<<<
- * 
- *         if self.symbolic_computed:
+ *         """
+ *         {{COMPLEX: NO}}
  */
 
 static int __pyx_f_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver__create_symbolic(struct __pyx_obj_10sparse_lib_7solvers_11suitesparse_7umfpack_UmfpackSolver *__pyx_v_self) {
   int *__pyx_v_ind;
   int *__pyx_v_row;
   double *__pyx_v_val;
+  double *__pyx_v_ival;
   int __pyx_v_status;
   int __pyx_r;
   __Pyx_RefNannyDeclarations
@@ -3109,8 +3236,8 @@ static int __pyx_f_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("_create_symbolic", 0);
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":253
- *     cdef int _create_symbolic(self):
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":325
+ *         """
  * 
  *         if self.symbolic_computed:             # <<<<<<<<<<<<<<
  *             self.free_symbolic()
@@ -3119,14 +3246,14 @@ static int __pyx_f_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_
   __pyx_t_1 = (__pyx_v_self->symbolic_computed != 0);
   if (__pyx_t_1) {
 
-    /* "sparse_lib/solvers/suitesparse/umfpack.pyx":254
+    /* "sparse_lib/solvers/suitesparse/umfpack.pyx":326
  * 
  *         if self.symbolic_computed:
  *             self.free_symbolic()             # <<<<<<<<<<<<<<
  * 
  *         cdef int * ind = <int *> self.csc_mat.ind
  */
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_free_symbolic); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 254; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_free_symbolic); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 326; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_t_4 = NULL;
     if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_3))) {
@@ -3139,10 +3266,10 @@ static int __pyx_f_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_
       }
     }
     if (__pyx_t_4) {
-      __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_4); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 254; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_4); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 326; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     } else {
-      __pyx_t_2 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 254; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 326; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -3151,7 +3278,7 @@ static int __pyx_f_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_
   }
   __pyx_L3:;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":256
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":328
  *             self.free_symbolic()
  * 
  *         cdef int * ind = <int *> self.csc_mat.ind             # <<<<<<<<<<<<<<
@@ -3160,35 +3287,59 @@ static int __pyx_f_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_
  */
   __pyx_v_ind = ((int *)__pyx_v_self->csc_mat->ind);
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":257
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":329
  * 
  *         cdef int * ind = <int *> self.csc_mat.ind
  *         cdef int * row = <int *> self.csc_mat.row             # <<<<<<<<<<<<<<
  *         cdef double * val = <double *> self.csc_mat.val
- * 
+ *         cdef double * ival
  */
   __pyx_v_row = ((int *)__pyx_v_self->csc_mat->row);
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":258
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":330
  *         cdef int * ind = <int *> self.csc_mat.ind
  *         cdef int * row = <int *> self.csc_mat.row
  *         cdef double * val = <double *> self.csc_mat.val             # <<<<<<<<<<<<<<
- * 
+ *         cdef double * ival
  * 
  */
   __pyx_v_val = ((double *)__pyx_v_self->csc_mat->val);
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":261
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":335
+ *         cdef int status
  * 
- * 
- *         cdef int status= umfpack_di_symbolic(self.nrow, self.ncol, ind, row, val, &self.symbolic, self.control, self.info)             # <<<<<<<<<<<<<<
+ *         if self.is_complex:             # <<<<<<<<<<<<<<
+ *             # TODO: add complex type for CSC
+ *             #ival = <double *> self.csc_mat.ival
+ */
+  __pyx_t_1 = (__pyx_v_self->is_complex != 0);
+  if (__pyx_t_1) {
+
+    /* "sparse_lib/solvers/suitesparse/umfpack.pyx":338
+ *             # TODO: add complex type for CSC
+ *             #ival = <double *> self.csc_mat.ival
+ *             status= umfpack_zi_symbolic(self.nrow, self.ncol, ind, row, val, ival, &self.symbolic, self.control, self.info)             # <<<<<<<<<<<<<<
+ *         else:
+ *             status= umfpack_di_symbolic(self.nrow, self.ncol, ind, row, val, &self.symbolic, self.control, self.info)
+ */
+    __pyx_v_status = umfpack_zi_symbolic(__pyx_v_self->nrow, __pyx_v_self->ncol, __pyx_v_ind, __pyx_v_row, __pyx_v_val, __pyx_v_ival, (&__pyx_v_self->symbolic), __pyx_v_self->control, __pyx_v_self->info);
+    goto __pyx_L4;
+  }
+  /*else*/ {
+
+    /* "sparse_lib/solvers/suitesparse/umfpack.pyx":340
+ *             status= umfpack_zi_symbolic(self.nrow, self.ncol, ind, row, val, ival, &self.symbolic, self.control, self.info)
+ *         else:
+ *             status= umfpack_di_symbolic(self.nrow, self.ncol, ind, row, val, &self.symbolic, self.control, self.info)             # <<<<<<<<<<<<<<
  * 
  *         self.symbolic_computed = True
  */
-  __pyx_v_status = umfpack_di_symbolic(__pyx_v_self->nrow, __pyx_v_self->ncol, __pyx_v_ind, __pyx_v_row, __pyx_v_val, (&__pyx_v_self->symbolic), __pyx_v_self->control, __pyx_v_self->info);
+    __pyx_v_status = umfpack_di_symbolic(__pyx_v_self->nrow, __pyx_v_self->ncol, __pyx_v_ind, __pyx_v_row, __pyx_v_val, (&__pyx_v_self->symbolic), __pyx_v_self->control, __pyx_v_self->info);
+  }
+  __pyx_L4:;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":263
- *         cdef int status= umfpack_di_symbolic(self.nrow, self.ncol, ind, row, val, &self.symbolic, self.control, self.info)
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":342
+ *             status= umfpack_di_symbolic(self.nrow, self.ncol, ind, row, val, &self.symbolic, self.control, self.info)
  * 
  *         self.symbolic_computed = True             # <<<<<<<<<<<<<<
  * 
@@ -3196,7 +3347,7 @@ static int __pyx_f_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_
  */
   __pyx_v_self->symbolic_computed = 1;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":265
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":344
  *         self.symbolic_computed = True
  * 
  *         return status             # <<<<<<<<<<<<<<
@@ -3206,12 +3357,12 @@ static int __pyx_f_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_
   __pyx_r = __pyx_v_status;
   goto __pyx_L0;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":251
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":319
  *     # PRIMARY ROUTINES
  *     ####################################################################################################################
  *     cdef int _create_symbolic(self):             # <<<<<<<<<<<<<<
- * 
- *         if self.symbolic_computed:
+ *         """
+ *         {{COMPLEX: NO}}
  */
 
   /* function exit code */
@@ -3226,16 +3377,17 @@ static int __pyx_f_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_
   return __pyx_r;
 }
 
-/* "sparse_lib/solvers/suitesparse/umfpack.pyx":268
+/* "sparse_lib/solvers/suitesparse/umfpack.pyx":347
  * 
  * 
  *     def create_symbolic(self, recompute=False):             # <<<<<<<<<<<<<<
- *         if not recompute and self.symbolic_computed:
- *             return
+ *         """
+ *         {{COMPLEX: NO}}
  */
 
 /* Python wrapper */
 static PyObject *__pyx_pw_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_11create_symbolic(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_10create_symbolic[] = "\n        {{COMPLEX: NO}}\n        {{GENERIC: NO}}\n        ";
 static PyObject *__pyx_pw_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_11create_symbolic(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_recompute = 0;
   int __pyx_lineno = 0;
@@ -3265,7 +3417,7 @@ static PyObject *__pyx_pw_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "create_symbolic") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 268; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "create_symbolic") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 347; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -3278,7 +3430,7 @@ static PyObject *__pyx_pw_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("create_symbolic", 0, 0, 1, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 268; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("create_symbolic", 0, 0, 1, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 347; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("sparse_lib.solvers.suitesparse.umfpack.UmfpackSolver.create_symbolic", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -3309,14 +3461,14 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("create_symbolic", 0);
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":269
- * 
- *     def create_symbolic(self, recompute=False):
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":352
+ *         {{GENERIC: NO}}
+ *         """
  *         if not recompute and self.symbolic_computed:             # <<<<<<<<<<<<<<
  *             return
  * 
  */
-  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_v_recompute); if (unlikely(__pyx_t_2 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 269; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_v_recompute); if (unlikely(__pyx_t_2 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 352; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_t_3 = ((!__pyx_t_2) != 0);
   if (__pyx_t_3) {
   } else {
@@ -3328,8 +3480,8 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_1) {
 
-    /* "sparse_lib/solvers/suitesparse/umfpack.pyx":270
- *     def create_symbolic(self, recompute=False):
+    /* "sparse_lib/solvers/suitesparse/umfpack.pyx":353
+ *         """
  *         if not recompute and self.symbolic_computed:
  *             return             # <<<<<<<<<<<<<<
  * 
@@ -3340,7 +3492,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
     goto __pyx_L0;
   }
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":272
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":355
  *             return
  * 
  *         cdef int status = self._create_symbolic()             # <<<<<<<<<<<<<<
@@ -3349,7 +3501,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
  */
   __pyx_v_status = ((struct __pyx_vtabstruct_10sparse_lib_7solvers_11suitesparse_7umfpack_UmfpackSolver *)__pyx_v_self->__pyx_vtab)->_create_symbolic(__pyx_v_self);
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":274
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":357
  *         cdef int status = self._create_symbolic()
  * 
  *         if status != UMFPACK_OK:             # <<<<<<<<<<<<<<
@@ -3359,14 +3511,14 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   __pyx_t_1 = ((__pyx_v_status != UMFPACK_OK) != 0);
   if (__pyx_t_1) {
 
-    /* "sparse_lib/solvers/suitesparse/umfpack.pyx":275
+    /* "sparse_lib/solvers/suitesparse/umfpack.pyx":358
  * 
  *         if status != UMFPACK_OK:
  *             self.free_symbolic()             # <<<<<<<<<<<<<<
  *             test_umfpack_result(status, "create_symbolic()")
  * 
  */
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_free_symbolic); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 275; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_free_symbolic); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 358; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
     __pyx_t_6 = NULL;
     if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_5))) {
@@ -3379,25 +3531,25 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
       }
     }
     if (__pyx_t_6) {
-      __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_6); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 275; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_6); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 358; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     } else {
-      __pyx_t_4 = __Pyx_PyObject_CallNoArg(__pyx_t_5); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 275; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_4 = __Pyx_PyObject_CallNoArg(__pyx_t_5); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 358; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-    /* "sparse_lib/solvers/suitesparse/umfpack.pyx":276
+    /* "sparse_lib/solvers/suitesparse/umfpack.pyx":359
  *         if status != UMFPACK_OK:
  *             self.free_symbolic()
  *             test_umfpack_result(status, "create_symbolic()")             # <<<<<<<<<<<<<<
  * 
  *     cdef int _create_numeric(self):
  */
-    __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_test_umfpack_result); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 276; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_test_umfpack_result); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 359; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_status); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 276; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_status); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 359; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_6);
     __pyx_t_7 = NULL;
     __pyx_t_8 = 0;
@@ -3411,7 +3563,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
         __pyx_t_8 = 1;
       }
     }
-    __pyx_t_9 = PyTuple_New(2+__pyx_t_8); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 276; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_9 = PyTuple_New(2+__pyx_t_8); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 359; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_9);
     if (__pyx_t_7) {
       PyTuple_SET_ITEM(__pyx_t_9, 0, __pyx_t_7); __Pyx_GIVEREF(__pyx_t_7); __pyx_t_7 = NULL;
@@ -3422,7 +3574,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
     PyTuple_SET_ITEM(__pyx_t_9, 1+__pyx_t_8, __pyx_kp_s_create_symbolic);
     __Pyx_GIVEREF(__pyx_kp_s_create_symbolic);
     __pyx_t_6 = 0;
-    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_9, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 276; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_9, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 359; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -3431,12 +3583,12 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   }
   __pyx_L6:;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":268
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":347
  * 
  * 
  *     def create_symbolic(self, recompute=False):             # <<<<<<<<<<<<<<
- *         if not recompute and self.symbolic_computed:
- *             return
+ *         """
+ *         {{COMPLEX: NO}}
  */
 
   /* function exit code */
@@ -3456,12 +3608,12 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   return __pyx_r;
 }
 
-/* "sparse_lib/solvers/suitesparse/umfpack.pyx":278
+/* "sparse_lib/solvers/suitesparse/umfpack.pyx":361
  *             test_umfpack_result(status, "create_symbolic()")
  * 
  *     cdef int _create_numeric(self):             # <<<<<<<<<<<<<<
- * 
- *         if self.numeric_computed:
+ *         """
+ *         {{COMPLEX: NO}}
  */
 
 static int __pyx_f_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver__create_numeric(struct __pyx_obj_10sparse_lib_7solvers_11suitesparse_7umfpack_UmfpackSolver *__pyx_v_self) {
@@ -3480,8 +3632,8 @@ static int __pyx_f_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("_create_numeric", 0);
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":280
- *     cdef int _create_numeric(self):
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":367
+ *         """
  * 
  *         if self.numeric_computed:             # <<<<<<<<<<<<<<
  *             self.free_numeric()
@@ -3490,14 +3642,14 @@ static int __pyx_f_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_
   __pyx_t_1 = (__pyx_v_self->numeric_computed != 0);
   if (__pyx_t_1) {
 
-    /* "sparse_lib/solvers/suitesparse/umfpack.pyx":281
+    /* "sparse_lib/solvers/suitesparse/umfpack.pyx":368
  * 
  *         if self.numeric_computed:
  *             self.free_numeric()             # <<<<<<<<<<<<<<
  * 
  *         cdef int * ind = <int *> self.csc_mat.ind
  */
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_free_numeric); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 281; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_free_numeric); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 368; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_t_4 = NULL;
     if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_3))) {
@@ -3510,10 +3662,10 @@ static int __pyx_f_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_
       }
     }
     if (__pyx_t_4) {
-      __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_4); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 281; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_4); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 368; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     } else {
-      __pyx_t_2 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 281; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 368; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -3522,7 +3674,7 @@ static int __pyx_f_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_
   }
   __pyx_L3:;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":283
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":370
  *             self.free_numeric()
  * 
  *         cdef int * ind = <int *> self.csc_mat.ind             # <<<<<<<<<<<<<<
@@ -3531,7 +3683,7 @@ static int __pyx_f_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_
  */
   __pyx_v_ind = ((int *)__pyx_v_self->csc_mat->ind);
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":284
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":371
  * 
  *         cdef int * ind = <int *> self.csc_mat.ind
  *         cdef int * row = <int *> self.csc_mat.row             # <<<<<<<<<<<<<<
@@ -3540,7 +3692,7 @@ static int __pyx_f_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_
  */
   __pyx_v_row = ((int *)__pyx_v_self->csc_mat->row);
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":285
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":372
  *         cdef int * ind = <int *> self.csc_mat.ind
  *         cdef int * row = <int *> self.csc_mat.row
  *         cdef double * val = <double *> self.csc_mat.val             # <<<<<<<<<<<<<<
@@ -3549,7 +3701,7 @@ static int __pyx_f_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_
  */
   __pyx_v_val = ((double *)__pyx_v_self->csc_mat->val);
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":287
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":374
  *         cdef double * val = <double *> self.csc_mat.val
  * 
  *         cdef int status =  umfpack_di_numeric(ind, row, val,             # <<<<<<<<<<<<<<
@@ -3558,7 +3710,7 @@ static int __pyx_f_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_
  */
   __pyx_v_status = umfpack_di_numeric(__pyx_v_ind, __pyx_v_row, __pyx_v_val, __pyx_v_self->symbolic, (&__pyx_v_self->numeric), __pyx_v_self->control, __pyx_v_self->info);
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":292
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":379
  *                            self.control, self.info)
  * 
  *         self.numeric_computed = True             # <<<<<<<<<<<<<<
@@ -3567,7 +3719,7 @@ static int __pyx_f_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_
  */
   __pyx_v_self->numeric_computed = 1;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":294
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":381
  *         self.numeric_computed = True
  * 
  *         return status             # <<<<<<<<<<<<<<
@@ -3577,12 +3729,12 @@ static int __pyx_f_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_
   __pyx_r = __pyx_v_status;
   goto __pyx_L0;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":278
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":361
  *             test_umfpack_result(status, "create_symbolic()")
  * 
  *     cdef int _create_numeric(self):             # <<<<<<<<<<<<<<
- * 
- *         if self.numeric_computed:
+ *         """
+ *         {{COMPLEX: NO}}
  */
 
   /* function exit code */
@@ -3597,16 +3749,17 @@ static int __pyx_f_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_
   return __pyx_r;
 }
 
-/* "sparse_lib/solvers/suitesparse/umfpack.pyx":296
+/* "sparse_lib/solvers/suitesparse/umfpack.pyx":383
  *         return status
  * 
  *     def create_numeric(self, recompute=False):             # <<<<<<<<<<<<<<
- * 
- *         if not recompute and self.numeric_computed:
+ *         """
+ *         {{COMPLEX: NO}}
  */
 
 /* Python wrapper */
 static PyObject *__pyx_pw_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_13create_numeric(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_12create_numeric[] = "\n        {{COMPLEX: NO}}\n        {{GENERIC: NO}}\n        ";
 static PyObject *__pyx_pw_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_13create_numeric(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_recompute = 0;
   int __pyx_lineno = 0;
@@ -3636,7 +3789,7 @@ static PyObject *__pyx_pw_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "create_numeric") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 296; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "create_numeric") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 383; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -3649,7 +3802,7 @@ static PyObject *__pyx_pw_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("create_numeric", 0, 0, 1, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 296; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("create_numeric", 0, 0, 1, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 383; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("sparse_lib.solvers.suitesparse.umfpack.UmfpackSolver.create_numeric", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -3680,14 +3833,14 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("create_numeric", 0);
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":298
- *     def create_numeric(self, recompute=False):
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":389
+ *         """
  * 
  *         if not recompute and self.numeric_computed:             # <<<<<<<<<<<<<<
  *             return
  * 
  */
-  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_v_recompute); if (unlikely(__pyx_t_2 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 298; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_v_recompute); if (unlikely(__pyx_t_2 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 389; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_t_3 = ((!__pyx_t_2) != 0);
   if (__pyx_t_3) {
   } else {
@@ -3699,7 +3852,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_1) {
 
-    /* "sparse_lib/solvers/suitesparse/umfpack.pyx":299
+    /* "sparse_lib/solvers/suitesparse/umfpack.pyx":390
  * 
  *         if not recompute and self.numeric_computed:
  *             return             # <<<<<<<<<<<<<<
@@ -3711,7 +3864,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
     goto __pyx_L0;
   }
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":301
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":392
  *             return
  * 
  *         cdef int status = self._create_numeric()             # <<<<<<<<<<<<<<
@@ -3720,7 +3873,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
  */
   __pyx_v_status = ((struct __pyx_vtabstruct_10sparse_lib_7solvers_11suitesparse_7umfpack_UmfpackSolver *)__pyx_v_self->__pyx_vtab)->_create_numeric(__pyx_v_self);
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":303
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":394
  *         cdef int status = self._create_numeric()
  * 
  *         if status != UMFPACK_OK:             # <<<<<<<<<<<<<<
@@ -3730,14 +3883,14 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   __pyx_t_1 = ((__pyx_v_status != UMFPACK_OK) != 0);
   if (__pyx_t_1) {
 
-    /* "sparse_lib/solvers/suitesparse/umfpack.pyx":304
+    /* "sparse_lib/solvers/suitesparse/umfpack.pyx":395
  * 
  *         if status != UMFPACK_OK:
  *             self.free_numeric()             # <<<<<<<<<<<<<<
  *             test_umfpack_result(status, "create_numeric()")
  * 
  */
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_free_numeric); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 304; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_free_numeric); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 395; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
     __pyx_t_6 = NULL;
     if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_5))) {
@@ -3750,25 +3903,25 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
       }
     }
     if (__pyx_t_6) {
-      __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_6); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 304; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_6); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 395; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     } else {
-      __pyx_t_4 = __Pyx_PyObject_CallNoArg(__pyx_t_5); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 304; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_4 = __Pyx_PyObject_CallNoArg(__pyx_t_5); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 395; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-    /* "sparse_lib/solvers/suitesparse/umfpack.pyx":305
+    /* "sparse_lib/solvers/suitesparse/umfpack.pyx":396
  *         if status != UMFPACK_OK:
  *             self.free_numeric()
  *             test_umfpack_result(status, "create_numeric()")             # <<<<<<<<<<<<<<
  * 
  * 
  */
-    __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_test_umfpack_result); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 305; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_test_umfpack_result); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 396; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_status); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 305; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_status); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 396; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_6);
     __pyx_t_7 = NULL;
     __pyx_t_8 = 0;
@@ -3782,7 +3935,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
         __pyx_t_8 = 1;
       }
     }
-    __pyx_t_9 = PyTuple_New(2+__pyx_t_8); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 305; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_9 = PyTuple_New(2+__pyx_t_8); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 396; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_9);
     if (__pyx_t_7) {
       PyTuple_SET_ITEM(__pyx_t_9, 0, __pyx_t_7); __Pyx_GIVEREF(__pyx_t_7); __pyx_t_7 = NULL;
@@ -3793,7 +3946,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
     PyTuple_SET_ITEM(__pyx_t_9, 1+__pyx_t_8, __pyx_kp_s_create_numeric);
     __Pyx_GIVEREF(__pyx_kp_s_create_numeric);
     __pyx_t_6 = 0;
-    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_9, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 305; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_9, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 396; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -3802,12 +3955,12 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   }
   __pyx_L6:;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":296
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":383
  *         return status
  * 
  *     def create_numeric(self, recompute=False):             # <<<<<<<<<<<<<<
- * 
- *         if not recompute and self.numeric_computed:
+ *         """
+ *         {{COMPLEX: NO}}
  */
 
   /* function exit code */
@@ -3827,7 +3980,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   return __pyx_r;
 }
 
-/* "sparse_lib/solvers/suitesparse/umfpack.pyx":308
+/* "sparse_lib/solvers/suitesparse/umfpack.pyx":399
  * 
  * 
  *     def solve(self, cnp.ndarray[cnp.double_t, ndim=1, mode="c"] b, umfpack_sys='UMFPACK_A', irsteps=2):             # <<<<<<<<<<<<<<
@@ -3837,7 +3990,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
 
 /* Python wrapper */
 static PyObject *__pyx_pw_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_15solve(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_14solve[] = "\n        Solve the linear system  ``A x = b``.\n\n        Args:\n           b: a Numpy vector of appropriate dimension.\n           umfpack_sys: specifies the type of system being solved:\n\n                    +-------------------+--------------------------------------+\n                    |``\"UMFPACK_A\"``    | :math:`\\mathbf{A} x = b` (default)   |\n                    +-------------------+--------------------------------------+\n                    |``\"UMFPACK_At\"``   | :math:`\\mathbf{A}^T x = b`           |\n                    +-------------------+--------------------------------------+\n                    |``\"UMFPACK_Pt_L\"`` | :math:`\\mathbf{P}^T \\mathbf{L} x = b`|\n                    +-------------------+--------------------------------------+\n                    |``\"UMFPACK_L\"``    | :math:`\\mathbf{L} x = b`             |\n                    +-------------------+--------------------------------------+\n                    |``\"UMFPACK_Lt_P\"`` | :math:`\\mathbf{L}^T \\mathbf{P} x = b`|\n                    +-------------------+--------------------------------------+\n                    |``\"UMFPACK_Lt\"``   | :math:`\\mathbf{L}^T x = b`           |\n                    +-------------------+--------------------------------------+\n                    |``\"UMFPACK_U_Qt\"`` | :math:`\\mathbf{U} \\mathbf{Q}^T x = b`|\n                    +-------------------+--------------------------------------+\n                    |``\"UMFPACK_U\"``    | :math:`\\mathbf{U} x = b`             |\n                    +-------------------+--------------------------------------+\n                    |``\"UMFPACK_Q_Ut\"`` | :math:`\\mathbf{Q} \\mathbf{U}^T x = b`|\n                    +-------------------+--------------------------------------+\n                    |``\"UMFPACK_Ut\"``   | :math:`\\mathbf{U}^T x = b`           |\n                    +-------------------+--------------------------------------+\n\n           irsteps: number of iterative refinement"" steps to attempt. Default: 2\n\n        Returns:\n            ``sol``: The solution of ``A*x=b`` if everything went well.\n\n        Raises:\n            AttributeError: When vector ``b`` doesn't have a ``shape`` attribute.\n            AssertionError: When vector ``b`` doesn't have the right first dimension.\n            RuntimeError: Whenever ``UMFPACK`` returned status is not ``UMFPACK_OK`` and is an error.\n\n        Notes:\n            The opaque objects ``symbolic`` and ``numeric`` are automatically created if necessary.\n\n            You can ask for a report of what happened by calling :meth:`report_info()`.\n        ";
+static char __pyx_doc_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_14solve[] = "\n        Solve the linear system  ``A x = b``.\n\n        Args:\n           b: a Numpy vector of appropriate dimension.\n           umfpack_sys: specifies the type of system being solved:\n\n                    +-------------------+--------------------------------------+\n                    |``\"UMFPACK_A\"``    | :math:`\\mathbf{A} x = b` (default)   |\n                    +-------------------+--------------------------------------+\n                    |``\"UMFPACK_At\"``   | :math:`\\mathbf{A}^T x = b`           |\n                    +-------------------+--------------------------------------+\n                    |``\"UMFPACK_Pt_L\"`` | :math:`\\mathbf{P}^T \\mathbf{L} x = b`|\n                    +-------------------+--------------------------------------+\n                    |``\"UMFPACK_L\"``    | :math:`\\mathbf{L} x = b`             |\n                    +-------------------+--------------------------------------+\n                    |``\"UMFPACK_Lt_P\"`` | :math:`\\mathbf{L}^T \\mathbf{P} x = b`|\n                    +-------------------+--------------------------------------+\n                    |``\"UMFPACK_Lt\"``   | :math:`\\mathbf{L}^T x = b`           |\n                    +-------------------+--------------------------------------+\n                    |``\"UMFPACK_U_Qt\"`` | :math:`\\mathbf{U} \\mathbf{Q}^T x = b`|\n                    +-------------------+--------------------------------------+\n                    |``\"UMFPACK_U\"``    | :math:`\\mathbf{U} x = b`             |\n                    +-------------------+--------------------------------------+\n                    |``\"UMFPACK_Q_Ut\"`` | :math:`\\mathbf{Q} \\mathbf{U}^T x = b`|\n                    +-------------------+--------------------------------------+\n                    |``\"UMFPACK_Ut\"``   | :math:`\\mathbf{U}^T x = b`           |\n                    +-------------------+--------------------------------------+\n\n           irsteps: number of iterative refinement"" steps to attempt. Default: 2\n\n        Returns:\n            ``sol``: The solution of ``A*x=b`` if everything went well.\n\n        Raises:\n            AttributeError: When vector ``b`` doesn't have a ``shape`` attribute.\n            AssertionError: When vector ``b`` doesn't have the right first dimension.\n            RuntimeError: Whenever ``UMFPACK`` returned status is not ``UMFPACK_OK`` and is an error.\n\n        Notes:\n            The opaque objects ``symbolic`` and ``numeric`` are automatically created if necessary.\n\n            You can ask for a report of what happened by calling :meth:`report_info()`.\n\n        {{COMPLEX: NO}}\n        {{GENERIC: NO}}\n        ";
 static PyObject *__pyx_pw_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_15solve(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyArrayObject *__pyx_v_b = 0;
   PyObject *__pyx_v_umfpack_sys = 0;
@@ -3880,7 +4033,7 @@ static PyObject *__pyx_pw_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "solve") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 308; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "solve") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 399; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -3897,13 +4050,13 @@ static PyObject *__pyx_pw_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("solve", 0, 1, 3, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 308; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("solve", 0, 1, 3, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 399; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("sparse_lib.solvers.suitesparse.umfpack.UmfpackSolver.solve", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_b), __pyx_ptype_5numpy_ndarray, 1, "b", 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 308; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_b), __pyx_ptype_5numpy_ndarray, 1, "b", 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 399; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_r = __pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_14solve(((struct __pyx_obj_10sparse_lib_7solvers_11suitesparse_7umfpack_UmfpackSolver *)__pyx_v_self), __pyx_v_b, __pyx_v_umfpack_sys, __pyx_v_irsteps);
 
   /* function exit code */
@@ -3958,11 +4111,11 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   __pyx_pybuffernd_b.rcbuffer = &__pyx_pybuffer_b;
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
-    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_b.rcbuffer->pybuffer, (PyObject*)__pyx_v_b, &__Pyx_TypeInfo_nn___pyx_t_5numpy_double_t, PyBUF_FORMAT| PyBUF_C_CONTIGUOUS, 1, 0, __pyx_stack) == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 308; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_b.rcbuffer->pybuffer, (PyObject*)__pyx_v_b, &__Pyx_TypeInfo_nn___pyx_t_5numpy_double_t, PyBUF_FORMAT| PyBUF_C_CONTIGUOUS, 1, 0, __pyx_stack) == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 399; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __pyx_pybuffernd_b.diminfo[0].strides = __pyx_pybuffernd_b.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_b.diminfo[0].shape = __pyx_pybuffernd_b.rcbuffer->pybuffer.shape[0];
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":356
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":450
  *         # test argument b
  *         cdef cnp.npy_intp * shape_b
  *         try:             # <<<<<<<<<<<<<<
@@ -3973,7 +4126,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
     if (__pyx_t_1||__pyx_t_2||__pyx_t_3); else {/*mark used*/};
     /*try:*/ {
 
-      /* "sparse_lib/solvers/suitesparse/umfpack.pyx":357
+      /* "sparse_lib/solvers/suitesparse/umfpack.pyx":451
  *         cdef cnp.npy_intp * shape_b
  *         try:
  *             shape_b = b.shape             # <<<<<<<<<<<<<<
@@ -3985,7 +4138,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
     }
   }
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":360
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":454
  *         except:
  *             raise AttributeError("argument b must implement attribute 'shape'")
  *         dim_b = shape_b[0]             # <<<<<<<<<<<<<<
@@ -3994,7 +4147,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
  */
   __pyx_v_dim_b = (__pyx_v_shape_b[0]);
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":361
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":455
  *             raise AttributeError("argument b must implement attribute 'shape'")
  *         dim_b = shape_b[0]
  *         assert dim_b == self.nrow, "array dimensions must agree"             # <<<<<<<<<<<<<<
@@ -4005,21 +4158,21 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   if (unlikely(!Py_OptimizeFlag)) {
     if (unlikely(!((__pyx_v_dim_b == __pyx_v_self->nrow) != 0))) {
       PyErr_SetObject(PyExc_AssertionError, __pyx_kp_s_array_dimensions_must_agree);
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 361; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 455; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
   }
   #endif
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":363
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":457
  *         assert dim_b == self.nrow, "array dimensions must agree"
  * 
  *         if umfpack_sys not in UMFPACK_SYS_DICT.keys():             # <<<<<<<<<<<<<<
  *             raise ValueError('umfpack_sys must be in' % UMFPACK_SYS_DICT.keys())
  * 
  */
-  __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_UMFPACK_SYS_DICT); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 363; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_UMFPACK_SYS_DICT); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 457; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_keys); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 363; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_keys); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 457; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __pyx_t_6 = NULL;
@@ -4033,28 +4186,28 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
     }
   }
   if (__pyx_t_6) {
-    __pyx_t_5 = __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_t_6); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 363; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_t_6); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 457; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   } else {
-    __pyx_t_5 = __Pyx_PyObject_CallNoArg(__pyx_t_7); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 363; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = __Pyx_PyObject_CallNoArg(__pyx_t_7); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 457; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_8 = (__Pyx_PySequence_Contains(__pyx_v_umfpack_sys, __pyx_t_5, Py_NE)); if (unlikely(__pyx_t_8 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 363; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_8 = (__Pyx_PySequence_Contains(__pyx_v_umfpack_sys, __pyx_t_5, Py_NE)); if (unlikely(__pyx_t_8 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 457; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_t_9 = (__pyx_t_8 != 0);
   if (__pyx_t_9) {
 
-    /* "sparse_lib/solvers/suitesparse/umfpack.pyx":364
+    /* "sparse_lib/solvers/suitesparse/umfpack.pyx":458
  * 
  *         if umfpack_sys not in UMFPACK_SYS_DICT.keys():
  *             raise ValueError('umfpack_sys must be in' % UMFPACK_SYS_DICT.keys())             # <<<<<<<<<<<<<<
  * 
  *         self.control[UMFPACK_IRSTEP] = irsteps
  */
-    __pyx_t_7 = __Pyx_GetModuleGlobalName(__pyx_n_s_UMFPACK_SYS_DICT); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 364; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_7 = __Pyx_GetModuleGlobalName(__pyx_n_s_UMFPACK_SYS_DICT); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 458; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_7);
-    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_n_s_keys); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 364; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_n_s_keys); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 458; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __pyx_t_7 = NULL;
@@ -4068,47 +4221,47 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
       }
     }
     if (__pyx_t_7) {
-      __pyx_t_5 = __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_7); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 364; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_5 = __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_7); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 458; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     } else {
-      __pyx_t_5 = __Pyx_PyObject_CallNoArg(__pyx_t_6); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 364; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_5 = __Pyx_PyObject_CallNoArg(__pyx_t_6); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 458; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_6 = __Pyx_PyString_Format(__pyx_kp_s_umfpack_sys_must_be_in, __pyx_t_5); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 364; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_6 = __Pyx_PyString_Format(__pyx_kp_s_umfpack_sys_must_be_in, __pyx_t_5); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 458; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 364; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 458; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
     PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_6);
     __Pyx_GIVEREF(__pyx_t_6);
     __pyx_t_6 = 0;
-    __pyx_t_6 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_t_5, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 364; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_6 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_t_5, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 458; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_Raise(__pyx_t_6, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 364; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 458; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":366
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":460
  *             raise ValueError('umfpack_sys must be in' % UMFPACK_SYS_DICT.keys())
  * 
  *         self.control[UMFPACK_IRSTEP] = irsteps             # <<<<<<<<<<<<<<
  * 
  *         self.create_symbolic()
  */
-  __pyx_t_10 = __pyx_PyFloat_AsDouble(__pyx_v_irsteps); if (unlikely((__pyx_t_10 == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 366; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_10 = __pyx_PyFloat_AsDouble(__pyx_v_irsteps); if (unlikely((__pyx_t_10 == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 460; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   (__pyx_v_self->control[UMFPACK_IRSTEP]) = __pyx_t_10;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":368
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":462
  *         self.control[UMFPACK_IRSTEP] = irsteps
  * 
  *         self.create_symbolic()             # <<<<<<<<<<<<<<
  *         self.create_numeric()
  * 
  */
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_create_symbolic_2); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 368; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_create_symbolic_2); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 462; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_7 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_5))) {
@@ -4121,23 +4274,23 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
     }
   }
   if (__pyx_t_7) {
-    __pyx_t_6 = __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_7); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 368; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_6 = __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_7); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 462; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   } else {
-    __pyx_t_6 = __Pyx_PyObject_CallNoArg(__pyx_t_5); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 368; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_6 = __Pyx_PyObject_CallNoArg(__pyx_t_5); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 462; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":369
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":463
  * 
  *         self.create_symbolic()
  *         self.create_numeric()             # <<<<<<<<<<<<<<
  * 
  *         cdef cnp.ndarray[cnp.double_t, ndim=1, mode='c'] sol = np.empty(self.ncol, dtype=np.double)
  */
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_create_numeric_2); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 369; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_create_numeric_2); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 463; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_7 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_5))) {
@@ -4150,55 +4303,55 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
     }
   }
   if (__pyx_t_7) {
-    __pyx_t_6 = __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_7); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 369; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_6 = __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_7); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 463; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   } else {
-    __pyx_t_6 = __Pyx_PyObject_CallNoArg(__pyx_t_5); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 369; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_6 = __Pyx_PyObject_CallNoArg(__pyx_t_5); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 463; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":371
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":465
  *         self.create_numeric()
  * 
  *         cdef cnp.ndarray[cnp.double_t, ndim=1, mode='c'] sol = np.empty(self.ncol, dtype=np.double)             # <<<<<<<<<<<<<<
  * 
  *         cdef int * ind = <int *> self.csc_mat.ind
  */
-  __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 371; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 465; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_empty); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 371; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_empty); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 465; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = __Pyx_PyInt_From_unsigned_int(__pyx_v_self->ncol); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 371; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_6 = __Pyx_PyInt_From_unsigned_int(__pyx_v_self->ncol); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 465; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_7 = PyTuple_New(1); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 371; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = PyTuple_New(1); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 465; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
   PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_6);
   __Pyx_GIVEREF(__pyx_t_6);
   __pyx_t_6 = 0;
-  __pyx_t_6 = PyDict_New(); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 371; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_6 = PyDict_New(); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 465; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 371; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 465; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_11);
-  __pyx_t_12 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_double); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 371; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_12 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_double); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 465; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_12);
   __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_dtype, __pyx_t_12) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 371; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_dtype, __pyx_t_12) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 465; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-  __pyx_t_12 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_7, __pyx_t_6); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 371; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_12 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_7, __pyx_t_6); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 465; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_12);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (!(likely(((__pyx_t_12) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_12, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 371; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (!(likely(((__pyx_t_12) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_12, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 465; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_t_13 = ((PyArrayObject *)__pyx_t_12);
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
     if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_sol.rcbuffer->pybuffer, (PyObject*)__pyx_t_13, &__Pyx_TypeInfo_nn___pyx_t_5numpy_double_t, PyBUF_FORMAT| PyBUF_C_CONTIGUOUS, 1, 0, __pyx_stack) == -1)) {
       __pyx_v_sol = ((PyArrayObject *)Py_None); __Pyx_INCREF(Py_None); __pyx_pybuffernd_sol.rcbuffer->pybuffer.buf = NULL;
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 371; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 465; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     } else {__pyx_pybuffernd_sol.diminfo[0].strides = __pyx_pybuffernd_sol.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_sol.diminfo[0].shape = __pyx_pybuffernd_sol.rcbuffer->pybuffer.shape[0];
     }
   }
@@ -4206,7 +4359,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   __pyx_v_sol = ((PyArrayObject *)__pyx_t_12);
   __pyx_t_12 = 0;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":373
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":467
  *         cdef cnp.ndarray[cnp.double_t, ndim=1, mode='c'] sol = np.empty(self.ncol, dtype=np.double)
  * 
  *         cdef int * ind = <int *> self.csc_mat.ind             # <<<<<<<<<<<<<<
@@ -4215,7 +4368,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
  */
   __pyx_v_ind = ((int *)__pyx_v_self->csc_mat->ind);
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":374
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":468
  * 
  *         cdef int * ind = <int *> self.csc_mat.ind
  *         cdef int * row = <int *> self.csc_mat.row             # <<<<<<<<<<<<<<
@@ -4224,7 +4377,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
  */
   __pyx_v_row = ((int *)__pyx_v_self->csc_mat->row);
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":375
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":469
  *         cdef int * ind = <int *> self.csc_mat.ind
  *         cdef int * row = <int *> self.csc_mat.row
  *         cdef double * val = <double *> self.csc_mat.val             # <<<<<<<<<<<<<<
@@ -4233,23 +4386,23 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
  */
   __pyx_v_val = ((double *)__pyx_v_self->csc_mat->val);
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":377
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":471
  *         cdef double * val = <double *> self.csc_mat.val
  * 
  *         cdef int status =  umfpack_di_solve(UMFPACK_SYS_DICT[umfpack_sys], ind, row, val, <double*> cnp.PyArray_DATA(sol), <double *> cnp.PyArray_DATA(b), self.numeric, self.control, self.info)             # <<<<<<<<<<<<<<
  * 
  *         if status != UMFPACK_OK:
  */
-  __pyx_t_12 = __Pyx_GetModuleGlobalName(__pyx_n_s_UMFPACK_SYS_DICT); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 377; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_12 = __Pyx_GetModuleGlobalName(__pyx_n_s_UMFPACK_SYS_DICT); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 471; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_12);
-  __pyx_t_6 = PyObject_GetItem(__pyx_t_12, __pyx_v_umfpack_sys); if (unlikely(__pyx_t_6 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 377; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_6 = PyObject_GetItem(__pyx_t_12, __pyx_v_umfpack_sys); if (unlikely(__pyx_t_6 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 471; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-  __pyx_t_14 = __Pyx_PyInt_As_int(__pyx_t_6); if (unlikely((__pyx_t_14 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 377; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_14 = __Pyx_PyInt_As_int(__pyx_t_6); if (unlikely((__pyx_t_14 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 471; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __pyx_v_status = umfpack_di_solve(__pyx_t_14, __pyx_v_ind, __pyx_v_row, __pyx_v_val, ((double *)PyArray_DATA(((PyArrayObject *)__pyx_v_sol))), ((double *)PyArray_DATA(((PyArrayObject *)__pyx_v_b))), __pyx_v_self->numeric, __pyx_v_self->control, __pyx_v_self->info);
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":379
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":473
  *         cdef int status =  umfpack_di_solve(UMFPACK_SYS_DICT[umfpack_sys], ind, row, val, <double*> cnp.PyArray_DATA(sol), <double *> cnp.PyArray_DATA(b), self.numeric, self.control, self.info)
  * 
  *         if status != UMFPACK_OK:             # <<<<<<<<<<<<<<
@@ -4259,16 +4412,16 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   __pyx_t_9 = ((__pyx_v_status != UMFPACK_OK) != 0);
   if (__pyx_t_9) {
 
-    /* "sparse_lib/solvers/suitesparse/umfpack.pyx":380
+    /* "sparse_lib/solvers/suitesparse/umfpack.pyx":474
  * 
  *         if status != UMFPACK_OK:
  *             test_umfpack_result(status, "solve()")             # <<<<<<<<<<<<<<
  * 
  *         return sol
  */
-    __pyx_t_12 = __Pyx_GetModuleGlobalName(__pyx_n_s_test_umfpack_result); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 380; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_12 = __Pyx_GetModuleGlobalName(__pyx_n_s_test_umfpack_result); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 474; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_12);
-    __pyx_t_7 = __Pyx_PyInt_From_int(__pyx_v_status); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 380; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_7 = __Pyx_PyInt_From_int(__pyx_v_status); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 474; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_7);
     __pyx_t_5 = NULL;
     __pyx_t_15 = 0;
@@ -4282,7 +4435,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
         __pyx_t_15 = 1;
       }
     }
-    __pyx_t_11 = PyTuple_New(2+__pyx_t_15); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 380; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_11 = PyTuple_New(2+__pyx_t_15); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 474; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_11);
     if (__pyx_t_5) {
       PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_t_5); __Pyx_GIVEREF(__pyx_t_5); __pyx_t_5 = NULL;
@@ -4293,7 +4446,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
     PyTuple_SET_ITEM(__pyx_t_11, 1+__pyx_t_15, __pyx_kp_s_solve);
     __Pyx_GIVEREF(__pyx_kp_s_solve);
     __pyx_t_7 = 0;
-    __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_12, __pyx_t_11, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 380; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_12, __pyx_t_11, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 474; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
     __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
@@ -4302,7 +4455,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   }
   __pyx_L12:;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":382
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":476
  *             test_umfpack_result(status, "solve()")
  * 
  *         return sol             # <<<<<<<<<<<<<<
@@ -4314,7 +4467,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   __pyx_r = ((PyObject *)__pyx_v_sol);
   goto __pyx_L0;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":308
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":399
  * 
  * 
  *     def solve(self, cnp.ndarray[cnp.double_t, ndim=1, mode="c"] b, umfpack_sys='UMFPACK_A', irsteps=2):             # <<<<<<<<<<<<<<
@@ -4347,7 +4500,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   return __pyx_r;
 }
 
-/* "sparse_lib/solvers/suitesparse/umfpack.pyx":387
+/* "sparse_lib/solvers/suitesparse/umfpack.pyx":481
  *     # LU ROUTINES
  *     ####################################################################################################################
  *     def get_lunz(self):             # <<<<<<<<<<<<<<
@@ -4357,7 +4510,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
 
 /* Python wrapper */
 static PyObject *__pyx_pw_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_17get_lunz(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static char __pyx_doc_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_16get_lunz[] = "\n        Determine the size and number of non zeros in the LU factors held by the opaque ``Numeric`` object.\n\n        Returns:\n            (lnz, unz, n_row, n_col, nz_udiag):\n\n            lnz: The number of nonzeros in ``L``, including the diagonal (which is all one's)\n            unz: The number of nonzeros in ``U``, including the diagonal.\n            n_row, n_col: The order of the ``L`` and ``U`` matrices. ``L`` is ``n_row`` -by- ``min(n_row,n_col)``\n                and ``U`` is ``min(n_row,n_col)`` -by- ``n_col``.\n            nz_udiag: The number of numerically nonzero values on the diagonal of ``U``. The\n                matrix is singular if ``nz_diag < min(n_row,n_col)``. A ``divide-by-zero``\n                will occur if ``nz_diag < n_row == n_col`` when solving a sparse system\n                involving the matrix ``U`` in ``solve()``.\n\n        Raises:\n            RuntimeError: When ``UMFPACK`` return status is not ``UMFPACK_OK`` and is an error.\n        ";
+static char __pyx_doc_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_16get_lunz[] = "\n        Determine the size and number of non zeros in the LU factors held by the opaque ``Numeric`` object.\n\n        Returns:\n            (lnz, unz, n_row, n_col, nz_udiag):\n\n            lnz: The number of nonzeros in ``L``, including the diagonal (which is all one's)\n            unz: The number of nonzeros in ``U``, including the diagonal.\n            n_row, n_col: The order of the ``L`` and ``U`` matrices. ``L`` is ``n_row`` -by- ``min(n_row,n_col)``\n                and ``U`` is ``min(n_row,n_col)`` -by- ``n_col``.\n            nz_udiag: The number of numerically nonzero values on the diagonal of ``U``. The\n                matrix is singular if ``nz_diag < min(n_row,n_col)``. A ``divide-by-zero``\n                will occur if ``nz_diag < n_row == n_col`` when solving a sparse system\n                involving the matrix ``U`` in ``solve()``.\n\n        Raises:\n            RuntimeError: When ``UMFPACK`` return status is not ``UMFPACK_OK`` and is an error.\n\n        {{COMPLEX: NO}}\n        {{GENERIC: NO}}\n        ";
 static PyObject *__pyx_pw_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_17get_lunz(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
@@ -4391,14 +4544,14 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_lunz", 0);
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":406
- *             RuntimeError: When ``UMFPACK`` return status is not ``UMFPACK_OK`` and is an error.
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":503
+ *         {{GENERIC: NO}}
  *         """
  *         self.create_numeric()             # <<<<<<<<<<<<<<
  * 
  *         cdef:
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_create_numeric_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 406; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_create_numeric_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 503; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_2))) {
@@ -4411,50 +4564,50 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
     }
   }
   if (__pyx_t_3) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 406; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 503; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   } else {
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 406; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 503; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":415
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":512
  *             int nz_udiag
  * 
  *         cdef status = umfpack_di_get_lunz(&lnz, &unz, &n_row, &n_col, &nz_udiag, self.numeric)             # <<<<<<<<<<<<<<
  * 
  *         if status != UMFPACK_OK:
  */
-  __pyx_t_1 = __Pyx_PyInt_From_int(umfpack_di_get_lunz((&__pyx_v_lnz), (&__pyx_v_unz), (&__pyx_v_n_row), (&__pyx_v_n_col), (&__pyx_v_nz_udiag), __pyx_v_self->numeric)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 415; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyInt_From_int(umfpack_di_get_lunz((&__pyx_v_lnz), (&__pyx_v_unz), (&__pyx_v_n_row), (&__pyx_v_n_col), (&__pyx_v_nz_udiag), __pyx_v_self->numeric)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 512; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_status = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":417
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":514
  *         cdef status = umfpack_di_get_lunz(&lnz, &unz, &n_row, &n_col, &nz_udiag, self.numeric)
  * 
  *         if status != UMFPACK_OK:             # <<<<<<<<<<<<<<
  *             test_umfpack_result(status, "get_lunz()")
  * 
  */
-  __pyx_t_1 = __Pyx_PyInt_From_int(UMFPACK_OK); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 417; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyInt_From_int(UMFPACK_OK); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 514; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyObject_RichCompare(__pyx_v_status, __pyx_t_1, Py_NE); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 417; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyObject_RichCompare(__pyx_v_status, __pyx_t_1, Py_NE); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 514; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 417; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 514; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_4) {
 
-    /* "sparse_lib/solvers/suitesparse/umfpack.pyx":418
+    /* "sparse_lib/solvers/suitesparse/umfpack.pyx":515
  * 
  *         if status != UMFPACK_OK:
  *             test_umfpack_result(status, "get_lunz()")             # <<<<<<<<<<<<<<
  * 
  *         return (lnz, unz, n_row, n_col, nz_udiag)
  */
-    __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_test_umfpack_result); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 418; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_test_umfpack_result); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 515; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_t_3 = NULL;
     __pyx_t_5 = 0;
@@ -4468,7 +4621,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
         __pyx_t_5 = 1;
       }
     }
-    __pyx_t_6 = PyTuple_New(2+__pyx_t_5); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 418; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_6 = PyTuple_New(2+__pyx_t_5); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 515; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_6);
     if (__pyx_t_3) {
       PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_3); __Pyx_GIVEREF(__pyx_t_3); __pyx_t_3 = NULL;
@@ -4479,7 +4632,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
     __Pyx_INCREF(__pyx_kp_s_get_lunz);
     PyTuple_SET_ITEM(__pyx_t_6, 1+__pyx_t_5, __pyx_kp_s_get_lunz);
     __Pyx_GIVEREF(__pyx_kp_s_get_lunz);
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_6, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 418; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_6, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 515; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -4488,7 +4641,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   }
   __pyx_L3:;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":420
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":517
  *             test_umfpack_result(status, "get_lunz()")
  * 
  *         return (lnz, unz, n_row, n_col, nz_udiag)             # <<<<<<<<<<<<<<
@@ -4496,17 +4649,17 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
  *     def get_LU(self, get_L=True, get_U=True, get_P=True, get_Q=True, get_D=True, get_R=True):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_lnz); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 420; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_lnz); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 517; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_unz); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 420; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_unz); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 517; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_n_row); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 420; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_n_row); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 517; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_n_col); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 420; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_n_col); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 517; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_7 = __Pyx_PyInt_From_int(__pyx_v_nz_udiag); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 420; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = __Pyx_PyInt_From_int(__pyx_v_nz_udiag); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 517; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_8 = PyTuple_New(5); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 420; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_8 = PyTuple_New(5); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 517; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_8);
   PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_2);
@@ -4527,7 +4680,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   __pyx_t_8 = 0;
   goto __pyx_L0;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":387
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":481
  *     # LU ROUTINES
  *     ####################################################################################################################
  *     def get_lunz(self):             # <<<<<<<<<<<<<<
@@ -4552,7 +4705,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   return __pyx_r;
 }
 
-/* "sparse_lib/solvers/suitesparse/umfpack.pyx":422
+/* "sparse_lib/solvers/suitesparse/umfpack.pyx":519
  *         return (lnz, unz, n_row, n_col, nz_udiag)
  * 
  *     def get_LU(self, get_L=True, get_U=True, get_P=True, get_Q=True, get_D=True, get_R=True):             # <<<<<<<<<<<<<<
@@ -4562,7 +4715,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
 
 /* Python wrapper */
 static PyObject *__pyx_pw_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_19get_LU(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_18get_LU[] = "\n        Return LU factorisation objects. If needed, the LU factorisation is triggered.\n\n        Returns:\n            (L, U, P, Q, D, do_recip, R)\n\n            The original matrix A is factorized into\n\n                L U = P R A Q\n\n            where:\n             - L is unit lower triangular,\n             - U is upper triangular,\n             - P and Q are permutation matrices,\n             - R is a row-scaling diagonal matrix such that\n\n                  * the i-th row of A has been divided by R[i] if do_recip = True,\n                  * the i-th row of A has been multiplied by R[i] if do_recip = False.\n\n            L and U are returned as CSRSparseMatrix and CSCSparseMatrix sparse matrices respectively.\n            P, Q and R are returned as NumPy arrays.\n\n        ";
+static char __pyx_doc_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_18get_LU[] = "\n        Return LU factorisation objects. If needed, the LU factorisation is triggered.\n\n        Returns:\n            (L, U, P, Q, D, do_recip, R)\n\n            The original matrix A is factorized into\n\n                L U = P R A Q\n\n            where:\n             - L is unit lower triangular,\n             - U is upper triangular,\n             - P and Q are permutation matrices,\n             - R is a row-scaling diagonal matrix such that\n\n                  * the i-th row of A has been divided by R[i] if do_recip = True,\n                  * the i-th row of A has been multiplied by R[i] if do_recip = False.\n\n            L and U are returned as CSRSparseMatrix and CSCSparseMatrix sparse matrices respectively.\n            P, Q and R are returned as NumPy arrays.\n\n\n        {{COMPLEX: NO}}\n        {{GENERIC: NO}}\n        ";
 static PyObject *__pyx_pw_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_19get_LU(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   CYTHON_UNUSED PyObject *__pyx_v_get_L = 0;
   CYTHON_UNUSED PyObject *__pyx_v_get_U = 0;
@@ -4632,7 +4785,7 @@ static PyObject *__pyx_pw_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "get_LU") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 422; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "get_LU") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 519; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -4655,7 +4808,7 @@ static PyObject *__pyx_pw_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("get_LU", 0, 0, 6, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 422; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("get_LU", 0, 0, 6, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 519; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("sparse_lib.solvers.suitesparse.umfpack.UmfpackSolver.get_LU", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -4749,14 +4902,14 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   __pyx_pybuffernd_R.data = NULL;
   __pyx_pybuffernd_R.rcbuffer = &__pyx_pybuffer_R;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":449
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":549
  *         # TODO: implement the use of L=True, U=True, P=True, Q=True, D=True, R=True
  *         # i.e. allow to return only parts of the arguments and not necessarily all of them...
  *         self.create_numeric()             # <<<<<<<<<<<<<<
  * 
  *         cdef:
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_create_numeric_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 449; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_create_numeric_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 549; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_2))) {
@@ -4769,23 +4922,23 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
     }
   }
   if (__pyx_t_3) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 449; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 549; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   } else {
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 449; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 549; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":460
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":560
  *             int _do_recip
  * 
  *         (lnz, unz, n_row, n_col, nz_udiag) = self.get_lunz()             # <<<<<<<<<<<<<<
  * 
  *         # L CSR matrix
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_get_lunz_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 460; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_get_lunz_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 560; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_2))) {
@@ -4798,10 +4951,10 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
     }
   }
   if (__pyx_t_3) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 460; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 560; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   } else {
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 460; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 560; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -4815,7 +4968,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
     if (unlikely(size != 5)) {
       if (size > 5) __Pyx_RaiseTooManyValuesError(5);
       else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 460; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 560; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
     #if CYTHON_COMPILING_IN_CPYTHON
     if (likely(PyTuple_CheckExact(sequence))) {
@@ -4841,7 +4994,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
       Py_ssize_t i;
       PyObject** temps[5] = {&__pyx_t_2,&__pyx_t_3,&__pyx_t_4,&__pyx_t_5,&__pyx_t_6};
       for (i=0; i < 5; i++) {
-        PyObject* item = PySequence_ITEM(sequence, i); if (unlikely(!item)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 460; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        PyObject* item = PySequence_ITEM(sequence, i); if (unlikely(!item)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 560; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(item);
         *(temps[i]) = item;
       }
@@ -4851,7 +5004,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   } else {
     Py_ssize_t index = -1;
     PyObject** temps[5] = {&__pyx_t_2,&__pyx_t_3,&__pyx_t_4,&__pyx_t_5,&__pyx_t_6};
-    __pyx_t_7 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 460; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_7 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 560; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_t_8 = Py_TYPE(__pyx_t_7)->tp_iternext;
@@ -4860,7 +5013,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
       __Pyx_GOTREF(item);
       *(temps[index]) = item;
     }
-    if (__Pyx_IternextUnpackEndCheck(__pyx_t_8(__pyx_t_7), 5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 460; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (__Pyx_IternextUnpackEndCheck(__pyx_t_8(__pyx_t_7), 5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 560; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __pyx_t_8 = NULL;
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     goto __pyx_L4_unpacking_done;
@@ -4868,18 +5021,18 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __pyx_t_8 = NULL;
     if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 460; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 560; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __pyx_L4_unpacking_done:;
   }
-  __pyx_t_9 = __Pyx_PyInt_As_int(__pyx_t_2); if (unlikely((__pyx_t_9 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 460; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_9 = __Pyx_PyInt_As_int(__pyx_t_2); if (unlikely((__pyx_t_9 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 560; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_10 = __Pyx_PyInt_As_int(__pyx_t_3); if (unlikely((__pyx_t_10 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 460; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_10 = __Pyx_PyInt_As_int(__pyx_t_3); if (unlikely((__pyx_t_10 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 560; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_11 = __Pyx_PyInt_As_int(__pyx_t_4); if (unlikely((__pyx_t_11 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 460; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_11 = __Pyx_PyInt_As_int(__pyx_t_4); if (unlikely((__pyx_t_11 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 560; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_12 = __Pyx_PyInt_As_int(__pyx_t_5); if (unlikely((__pyx_t_12 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 460; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_12 = __Pyx_PyInt_As_int(__pyx_t_5); if (unlikely((__pyx_t_12 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 560; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_13 = __Pyx_PyInt_As_int(__pyx_t_6); if (unlikely((__pyx_t_13 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 460; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_13 = __Pyx_PyInt_As_int(__pyx_t_6); if (unlikely((__pyx_t_13 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 560; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __pyx_v_lnz = __pyx_t_9;
   __pyx_v_unz = __pyx_t_10;
@@ -4887,7 +5040,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   __pyx_v_n_col = __pyx_t_12;
   __pyx_v_nz_udiag = __pyx_t_13;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":463
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":563
  * 
  *         # L CSR matrix
  *         cdef int * Lp = <int *> PyMem_Malloc((n_row + 1) * sizeof(int))             # <<<<<<<<<<<<<<
@@ -4896,7 +5049,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
  */
   __pyx_v_Lp = ((int *)PyMem_Malloc(((__pyx_v_n_row + 1) * (sizeof(int)))));
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":464
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":564
  *         # L CSR matrix
  *         cdef int * Lp = <int *> PyMem_Malloc((n_row + 1) * sizeof(int))
  *         if not Lp:             # <<<<<<<<<<<<<<
@@ -4906,17 +5059,17 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   __pyx_t_14 = ((!(__pyx_v_Lp != 0)) != 0);
   if (__pyx_t_14) {
 
-    /* "sparse_lib/solvers/suitesparse/umfpack.pyx":465
+    /* "sparse_lib/solvers/suitesparse/umfpack.pyx":565
  *         cdef int * Lp = <int *> PyMem_Malloc((n_row + 1) * sizeof(int))
  *         if not Lp:
  *             raise MemoryError()             # <<<<<<<<<<<<<<
  * 
  *         cdef int * Lj = <int *> PyMem_Malloc(lnz * sizeof(int))
  */
-    PyErr_NoMemory(); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 465; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    PyErr_NoMemory(); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 565; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":467
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":567
  *             raise MemoryError()
  * 
  *         cdef int * Lj = <int *> PyMem_Malloc(lnz * sizeof(int))             # <<<<<<<<<<<<<<
@@ -4925,7 +5078,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
  */
   __pyx_v_Lj = ((int *)PyMem_Malloc((__pyx_v_lnz * (sizeof(int)))));
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":468
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":568
  * 
  *         cdef int * Lj = <int *> PyMem_Malloc(lnz * sizeof(int))
  *         if not Lj:             # <<<<<<<<<<<<<<
@@ -4935,17 +5088,17 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   __pyx_t_14 = ((!(__pyx_v_Lj != 0)) != 0);
   if (__pyx_t_14) {
 
-    /* "sparse_lib/solvers/suitesparse/umfpack.pyx":469
+    /* "sparse_lib/solvers/suitesparse/umfpack.pyx":569
  *         cdef int * Lj = <int *> PyMem_Malloc(lnz * sizeof(int))
  *         if not Lj:
  *             raise MemoryError()             # <<<<<<<<<<<<<<
  * 
  *         cdef double * Lx = <double *> PyMem_Malloc(lnz * sizeof(double))
  */
-    PyErr_NoMemory(); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 469; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    PyErr_NoMemory(); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 569; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":471
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":571
  *             raise MemoryError()
  * 
  *         cdef double * Lx = <double *> PyMem_Malloc(lnz * sizeof(double))             # <<<<<<<<<<<<<<
@@ -4954,7 +5107,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
  */
   __pyx_v_Lx = ((double *)PyMem_Malloc((__pyx_v_lnz * (sizeof(double)))));
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":472
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":572
  * 
  *         cdef double * Lx = <double *> PyMem_Malloc(lnz * sizeof(double))
  *         if not Lx:             # <<<<<<<<<<<<<<
@@ -4964,17 +5117,17 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   __pyx_t_14 = ((!(__pyx_v_Lx != 0)) != 0);
   if (__pyx_t_14) {
 
-    /* "sparse_lib/solvers/suitesparse/umfpack.pyx":473
+    /* "sparse_lib/solvers/suitesparse/umfpack.pyx":573
  *         cdef double * Lx = <double *> PyMem_Malloc(lnz * sizeof(double))
  *         if not Lx:
  *             raise MemoryError()             # <<<<<<<<<<<<<<
  * 
  *         # U CSC matrix
  */
-    PyErr_NoMemory(); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 473; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    PyErr_NoMemory(); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 573; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":476
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":576
  * 
  *         # U CSC matrix
  *         cdef int * Up = <int *> PyMem_Malloc((n_col + 1) * sizeof(int))             # <<<<<<<<<<<<<<
@@ -4983,7 +5136,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
  */
   __pyx_v_Up = ((int *)PyMem_Malloc(((__pyx_v_n_col + 1) * (sizeof(int)))));
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":477
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":577
  *         # U CSC matrix
  *         cdef int * Up = <int *> PyMem_Malloc((n_col + 1) * sizeof(int))
  *         if not Up:             # <<<<<<<<<<<<<<
@@ -4993,17 +5146,17 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   __pyx_t_14 = ((!(__pyx_v_Up != 0)) != 0);
   if (__pyx_t_14) {
 
-    /* "sparse_lib/solvers/suitesparse/umfpack.pyx":478
+    /* "sparse_lib/solvers/suitesparse/umfpack.pyx":578
  *         cdef int * Up = <int *> PyMem_Malloc((n_col + 1) * sizeof(int))
  *         if not Up:
  *             raise MemoryError()             # <<<<<<<<<<<<<<
  * 
  *         cdef int * Ui = <int *> PyMem_Malloc(unz * sizeof(int))
  */
-    PyErr_NoMemory(); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 478; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    PyErr_NoMemory(); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 578; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":480
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":580
  *             raise MemoryError()
  * 
  *         cdef int * Ui = <int *> PyMem_Malloc(unz * sizeof(int))             # <<<<<<<<<<<<<<
@@ -5012,7 +5165,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
  */
   __pyx_v_Ui = ((int *)PyMem_Malloc((__pyx_v_unz * (sizeof(int)))));
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":481
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":581
  * 
  *         cdef int * Ui = <int *> PyMem_Malloc(unz * sizeof(int))
  *         if not Ui:             # <<<<<<<<<<<<<<
@@ -5022,17 +5175,17 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   __pyx_t_14 = ((!(__pyx_v_Ui != 0)) != 0);
   if (__pyx_t_14) {
 
-    /* "sparse_lib/solvers/suitesparse/umfpack.pyx":482
+    /* "sparse_lib/solvers/suitesparse/umfpack.pyx":582
  *         cdef int * Ui = <int *> PyMem_Malloc(unz * sizeof(int))
  *         if not Ui:
  *             raise MemoryError()             # <<<<<<<<<<<<<<
  * 
  *         cdef double * Ux = <double *> PyMem_Malloc(unz * sizeof(double))
  */
-    PyErr_NoMemory(); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 482; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    PyErr_NoMemory(); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 582; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":484
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":584
  *             raise MemoryError()
  * 
  *         cdef double * Ux = <double *> PyMem_Malloc(unz * sizeof(double))             # <<<<<<<<<<<<<<
@@ -5041,7 +5194,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
  */
   __pyx_v_Ux = ((double *)PyMem_Malloc((__pyx_v_unz * (sizeof(double)))));
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":485
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":585
  * 
  *         cdef double * Ux = <double *> PyMem_Malloc(unz * sizeof(double))
  *         if not Ux:             # <<<<<<<<<<<<<<
@@ -5051,17 +5204,17 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   __pyx_t_14 = ((!(__pyx_v_Ux != 0)) != 0);
   if (__pyx_t_14) {
 
-    /* "sparse_lib/solvers/suitesparse/umfpack.pyx":486
+    /* "sparse_lib/solvers/suitesparse/umfpack.pyx":586
  *         cdef double * Ux = <double *> PyMem_Malloc(unz * sizeof(double))
  *         if not Ux:
  *             raise MemoryError()             # <<<<<<<<<<<<<<
  * 
  *         cdef cnp.ndarray[cnp.int_t, ndim=1, mode='c'] P
  */
-    PyErr_NoMemory(); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 486; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    PyErr_NoMemory(); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 586; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":493
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":593
  *         cdef cnp.ndarray[cnp.double_t, ndim=1, mode='c'] R
  * 
  *         cdef cnp.npy_intp *dims_n_row = [n_row]             # <<<<<<<<<<<<<<
@@ -5071,7 +5224,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   __pyx_t_15[0] = __pyx_v_n_row;
   __pyx_v_dims_n_row = __pyx_t_15;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":494
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":594
  * 
  *         cdef cnp.npy_intp *dims_n_row = [n_row]
  *         cdef cnp.npy_intp *dims_n_col = [n_col]             # <<<<<<<<<<<<<<
@@ -5081,7 +5234,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   __pyx_t_16[0] = __pyx_v_n_col;
   __pyx_v_dims_n_col = __pyx_t_16;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":496
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":596
  *         cdef cnp.npy_intp *dims_n_col = [n_col]
  *         #cdef cnp.ndarray[cnp.int_t, ndim=1] result = \
  *         cdef cnp.npy_intp *dims_min = [min(n_row, n_col)]             # <<<<<<<<<<<<<<
@@ -5098,16 +5251,16 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   __pyx_t_17[0] = __pyx_t_11;
   __pyx_v_dims_min = __pyx_t_17;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":498
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":598
  *         cdef cnp.npy_intp *dims_min = [min(n_row, n_col)]
  * 
  *         P = cnp.PyArray_EMPTY(1, dims_n_row, cnp.NPY_INTP, 0)             # <<<<<<<<<<<<<<
  *         Q = cnp.PyArray_EMPTY(1, dims_n_col, cnp.NPY_INTP, 0)
  * 
  */
-  __pyx_t_1 = PyArray_EMPTY(1, __pyx_v_dims_n_row, NPY_INTP, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 498; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyArray_EMPTY(1, __pyx_v_dims_n_row, NPY_INTP, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 598; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 498; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 598; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_t_18 = ((PyArrayObject *)__pyx_t_1);
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
@@ -5123,22 +5276,22 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
       }
     }
     __pyx_pybuffernd_P.diminfo[0].strides = __pyx_pybuffernd_P.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_P.diminfo[0].shape = __pyx_pybuffernd_P.rcbuffer->pybuffer.shape[0];
-    if (unlikely(__pyx_t_11 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 498; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (unlikely(__pyx_t_11 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 598; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __pyx_t_18 = 0;
   __pyx_v_P = ((PyArrayObject *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":499
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":599
  * 
  *         P = cnp.PyArray_EMPTY(1, dims_n_row, cnp.NPY_INTP, 0)
  *         Q = cnp.PyArray_EMPTY(1, dims_n_col, cnp.NPY_INTP, 0)             # <<<<<<<<<<<<<<
  * 
  *         D = cnp.PyArray_EMPTY(1, dims_min, cnp .NPY_DOUBLE, 0)
  */
-  __pyx_t_1 = PyArray_EMPTY(1, __pyx_v_dims_n_col, NPY_INTP, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 499; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyArray_EMPTY(1, __pyx_v_dims_n_col, NPY_INTP, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 599; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 499; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 599; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_t_22 = ((PyArrayObject *)__pyx_t_1);
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
@@ -5154,22 +5307,22 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
       }
     }
     __pyx_pybuffernd_Q.diminfo[0].strides = __pyx_pybuffernd_Q.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_Q.diminfo[0].shape = __pyx_pybuffernd_Q.rcbuffer->pybuffer.shape[0];
-    if (unlikely(__pyx_t_11 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 499; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (unlikely(__pyx_t_11 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 599; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __pyx_t_22 = 0;
   __pyx_v_Q = ((PyArrayObject *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":501
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":601
  *         Q = cnp.PyArray_EMPTY(1, dims_n_col, cnp.NPY_INTP, 0)
  * 
  *         D = cnp.PyArray_EMPTY(1, dims_min, cnp .NPY_DOUBLE, 0)             # <<<<<<<<<<<<<<
  * 
  *         R = cnp.PyArray_EMPTY(1, dims_n_row, cnp .NPY_DOUBLE, 0)
  */
-  __pyx_t_1 = PyArray_EMPTY(1, __pyx_v_dims_min, NPY_DOUBLE, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 501; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyArray_EMPTY(1, __pyx_v_dims_min, NPY_DOUBLE, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 601; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 501; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 601; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_t_23 = ((PyArrayObject *)__pyx_t_1);
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
@@ -5185,22 +5338,22 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
       }
     }
     __pyx_pybuffernd_D.diminfo[0].strides = __pyx_pybuffernd_D.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_D.diminfo[0].shape = __pyx_pybuffernd_D.rcbuffer->pybuffer.shape[0];
-    if (unlikely(__pyx_t_11 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 501; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (unlikely(__pyx_t_11 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 601; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __pyx_t_23 = 0;
   __pyx_v_D = ((PyArrayObject *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":503
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":603
  *         D = cnp.PyArray_EMPTY(1, dims_min, cnp .NPY_DOUBLE, 0)
  * 
  *         R = cnp.PyArray_EMPTY(1, dims_n_row, cnp .NPY_DOUBLE, 0)             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_t_1 = PyArray_EMPTY(1, __pyx_v_dims_n_row, NPY_DOUBLE, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 503; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyArray_EMPTY(1, __pyx_v_dims_n_row, NPY_DOUBLE, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 603; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 503; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 603; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_t_24 = ((PyArrayObject *)__pyx_t_1);
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
@@ -5216,13 +5369,13 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
       }
     }
     __pyx_pybuffernd_R.diminfo[0].strides = __pyx_pybuffernd_R.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_R.diminfo[0].shape = __pyx_pybuffernd_R.rcbuffer->pybuffer.shape[0];
-    if (unlikely(__pyx_t_11 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 503; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (unlikely(__pyx_t_11 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 603; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __pyx_t_24 = 0;
   __pyx_v_R = ((PyArrayObject *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":506
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":606
  * 
  * 
  *         cdef int status =umfpack_di_get_numeric(Lp, Lj, Lx,             # <<<<<<<<<<<<<<
@@ -5231,7 +5384,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
  */
   __pyx_v_status = umfpack_di_get_numeric(__pyx_v_Lp, __pyx_v_Lj, __pyx_v_Lx, __pyx_v_Up, __pyx_v_Ui, __pyx_v_Ux, ((int *)PyArray_DATA(((PyArrayObject *)__pyx_v_P))), ((int *)PyArray_DATA(((PyArrayObject *)__pyx_v_Q))), ((double *)PyArray_DATA(((PyArrayObject *)__pyx_v_D))), (&__pyx_v__do_recip), ((double *)PyArray_DATA(((PyArrayObject *)__pyx_v_R))), __pyx_v_self->numeric);
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":512
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":612
  *                                self.numeric)
  * 
  *         if status != UMFPACK_OK:             # <<<<<<<<<<<<<<
@@ -5241,16 +5394,16 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   __pyx_t_14 = ((__pyx_v_status != UMFPACK_OK) != 0);
   if (__pyx_t_14) {
 
-    /* "sparse_lib/solvers/suitesparse/umfpack.pyx":513
+    /* "sparse_lib/solvers/suitesparse/umfpack.pyx":613
  * 
  *         if status != UMFPACK_OK:
  *             test_umfpack_result(status, "get_LU()")             # <<<<<<<<<<<<<<
  * 
  *         cdef bint do_recip = _do_recip
  */
-    __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_test_umfpack_result); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 513; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_test_umfpack_result); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 613; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_5 = __Pyx_PyInt_From_int(__pyx_v_status); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 513; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = __Pyx_PyInt_From_int(__pyx_v_status); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 613; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
     __pyx_t_4 = NULL;
     __pyx_t_25 = 0;
@@ -5264,7 +5417,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
         __pyx_t_25 = 1;
       }
     }
-    __pyx_t_3 = PyTuple_New(2+__pyx_t_25); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 513; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = PyTuple_New(2+__pyx_t_25); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 613; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     if (__pyx_t_4) {
       PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_4); __Pyx_GIVEREF(__pyx_t_4); __pyx_t_4 = NULL;
@@ -5275,7 +5428,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
     PyTuple_SET_ITEM(__pyx_t_3, 1+__pyx_t_25, __pyx_kp_s_get_LU);
     __Pyx_GIVEREF(__pyx_kp_s_get_LU);
     __pyx_t_5 = 0;
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_3, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 513; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_3, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 613; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -5284,7 +5437,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   }
   __pyx_L11:;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":515
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":615
  *             test_umfpack_result(status, "get_LU()")
  * 
  *         cdef bint do_recip = _do_recip             # <<<<<<<<<<<<<<
@@ -5293,7 +5446,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
  */
   __pyx_v_do_recip = __pyx_v__do_recip;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":520
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":620
  *         cdef CSCSparseMatrix U
  * 
  *         cdef int size = min(n_row,n_col)             # <<<<<<<<<<<<<<
@@ -5309,33 +5462,33 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   }
   __pyx_v_size = __pyx_t_12;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":521
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":621
  * 
  *         cdef int size = min(n_row,n_col)
  *         L = MakeCSRSparseMatrix(nrow=size, ncol=size, nnz=lnz, ind=Lp, col=Lj, val=Lx)             # <<<<<<<<<<<<<<
  *         U = MakeCSCSparseMatrix(nrow=size, ncol=size, nnz=unz, ind=Up, row=Ui, val=Ux)
  * 
  */
-  __pyx_t_1 = __pyx_f_10sparse_lib_6sparse_7csr_mat_MakeCSRSparseMatrix(__pyx_v_size, __pyx_v_size, __pyx_v_lnz, __pyx_v_Lp, __pyx_v_Lj, __pyx_v_Lx); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 521; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_10sparse_lib_6sparse_7csr_mat_MakeCSRSparseMatrix(__pyx_v_size, __pyx_v_size, __pyx_v_lnz, __pyx_v_Lp, __pyx_v_Lj, __pyx_v_Lx); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 621; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_10sparse_lib_6sparse_7csr_mat_CSRSparseMatrix))))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 521; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_10sparse_lib_6sparse_7csr_mat_CSRSparseMatrix))))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 621; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_v_L = ((struct __pyx_obj_10sparse_lib_6sparse_7csr_mat_CSRSparseMatrix *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":522
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":622
  *         cdef int size = min(n_row,n_col)
  *         L = MakeCSRSparseMatrix(nrow=size, ncol=size, nnz=lnz, ind=Lp, col=Lj, val=Lx)
  *         U = MakeCSCSparseMatrix(nrow=size, ncol=size, nnz=unz, ind=Up, row=Ui, val=Ux)             # <<<<<<<<<<<<<<
  * 
  *         return (L, U, P, Q, D, do_recip, R)
  */
-  __pyx_t_1 = __pyx_f_10sparse_lib_6sparse_7csc_mat_MakeCSCSparseMatrix(__pyx_v_size, __pyx_v_size, __pyx_v_unz, __pyx_v_Up, __pyx_v_Ui, __pyx_v_Ux); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 522; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_10sparse_lib_6sparse_7csc_mat_MakeCSCSparseMatrix(__pyx_v_size, __pyx_v_size, __pyx_v_unz, __pyx_v_Up, __pyx_v_Ui, __pyx_v_Ux); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 622; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_10sparse_lib_6sparse_7csc_mat_CSCSparseMatrix))))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 522; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_10sparse_lib_6sparse_7csc_mat_CSCSparseMatrix))))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 622; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_v_U = ((struct __pyx_obj_10sparse_lib_6sparse_7csc_mat_CSCSparseMatrix *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":524
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":624
  *         U = MakeCSCSparseMatrix(nrow=size, ncol=size, nnz=unz, ind=Up, row=Ui, val=Ux)
  * 
  *         return (L, U, P, Q, D, do_recip, R)             # <<<<<<<<<<<<<<
@@ -5343,9 +5496,9 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
  *     ####################################################################################################################
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_v_do_recip); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 524; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_v_do_recip); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 624; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_6 = PyTuple_New(7); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 524; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_6 = PyTuple_New(7); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 624; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_INCREF(((PyObject *)__pyx_v_L));
   PyTuple_SET_ITEM(__pyx_t_6, 0, ((PyObject *)__pyx_v_L));
@@ -5372,7 +5525,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   __pyx_t_6 = 0;
   goto __pyx_L0;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":422
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":519
  *         return (lnz, unz, n_row, n_col, nz_udiag)
  * 
  *     def get_LU(self, get_L=True, get_U=True, get_P=True, get_Q=True, get_D=True, get_R=True):             # <<<<<<<<<<<<<<
@@ -5416,7 +5569,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   return __pyx_r;
 }
 
-/* "sparse_lib/solvers/suitesparse/umfpack.pyx":529
+/* "sparse_lib/solvers/suitesparse/umfpack.pyx":629
  *     # REPORTING ROUTINES
  *     ####################################################################################################################
  *     def set_verbosity(self, level):             # <<<<<<<<<<<<<<
@@ -5426,7 +5579,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
 
 /* Python wrapper */
 static PyObject *__pyx_pw_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_21set_verbosity(PyObject *__pyx_v_self, PyObject *__pyx_v_level); /*proto*/
-static char __pyx_doc_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_20set_verbosity[] = "\n        Set UMFPACK verbosity level.\n\n        Args:\n            level (int): Verbosity level (default: 1).\n        ";
+static char __pyx_doc_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_20set_verbosity[] = "\n        Set UMFPACK verbosity level.\n\n        Args:\n            level (int): Verbosity level (default: 1).\n\n\n        {{COMPLEX: YES}}\n        {{GENERIC: YES}}\n        ";
 static PyObject *__pyx_pw_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_21set_verbosity(PyObject *__pyx_v_self, PyObject *__pyx_v_level) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
@@ -5447,17 +5600,17 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("set_verbosity", 0);
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":536
- *             level (int): Verbosity level (default: 1).
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":640
+ *         {{GENERIC: YES}}
  *         """
  *         self.control[UMFPACK_PRL] = level             # <<<<<<<<<<<<<<
  * 
  *     def get_verbosity(self):
  */
-  __pyx_t_1 = __pyx_PyFloat_AsDouble(__pyx_v_level); if (unlikely((__pyx_t_1 == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 536; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_PyFloat_AsDouble(__pyx_v_level); if (unlikely((__pyx_t_1 == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 640; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   (__pyx_v_self->control[UMFPACK_PRL]) = __pyx_t_1;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":529
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":629
  *     # REPORTING ROUTINES
  *     ####################################################################################################################
  *     def set_verbosity(self, level):             # <<<<<<<<<<<<<<
@@ -5477,7 +5630,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   return __pyx_r;
 }
 
-/* "sparse_lib/solvers/suitesparse/umfpack.pyx":538
+/* "sparse_lib/solvers/suitesparse/umfpack.pyx":642
  *         self.control[UMFPACK_PRL] = level
  * 
  *     def get_verbosity(self):             # <<<<<<<<<<<<<<
@@ -5487,7 +5640,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
 
 /* Python wrapper */
 static PyObject *__pyx_pw_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_23get_verbosity(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static char __pyx_doc_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_22get_verbosity[] = "\n        Return UMFPACK verbosity level.\n\n        Returns:\n            verbosity_level (int): The verbosity level set.\n        ";
+static char __pyx_doc_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_22get_verbosity[] = "\n        Return UMFPACK verbosity level.\n\n        Returns:\n            verbosity_level (int): The verbosity level set.\n\n        {{COMPLEX: YES}}\n        {{GENERIC: YES}}\n        ";
 static PyObject *__pyx_pw_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_23get_verbosity(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
@@ -5508,21 +5661,21 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_verbosity", 0);
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":545
- *             verbosity_level (int): The verbosity level set.
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":652
+ *         {{GENERIC: YES}}
  *         """
  *         return self.control[UMFPACK_PRL]             # <<<<<<<<<<<<<<
  * 
  *     def report_control(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble((__pyx_v_self->control[UMFPACK_PRL])); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 545; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyFloat_FromDouble((__pyx_v_self->control[UMFPACK_PRL])); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 652; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":538
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":642
  *         self.control[UMFPACK_PRL] = level
  * 
  *     def get_verbosity(self):             # <<<<<<<<<<<<<<
@@ -5541,7 +5694,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   return __pyx_r;
 }
 
-/* "sparse_lib/solvers/suitesparse/umfpack.pyx":547
+/* "sparse_lib/solvers/suitesparse/umfpack.pyx":654
  *         return self.control[UMFPACK_PRL]
  * 
  *     def report_control(self):             # <<<<<<<<<<<<<<
@@ -5551,7 +5704,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
 
 /* Python wrapper */
 static PyObject *__pyx_pw_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_25report_control(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static char __pyx_doc_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_24report_control[] = "\n        Print control values.\n        ";
+static char __pyx_doc_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_24report_control[] = "\n        Print control values.\n\n        {{COMPLEX: NO}}\n        {{GENERIC: YES}}\n        ";
 static PyObject *__pyx_pw_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_25report_control(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
@@ -5568,8 +5721,8 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("report_control", 0);
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":551
- *         Print control values.
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":661
+ *         {{GENERIC: YES}}
  *         """
  *         umfpack_di_report_control(self.control)             # <<<<<<<<<<<<<<
  * 
@@ -5577,7 +5730,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
  */
   umfpack_di_report_control(__pyx_v_self->control);
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":547
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":654
  *         return self.control[UMFPACK_PRL]
  * 
  *     def report_control(self):             # <<<<<<<<<<<<<<
@@ -5592,7 +5745,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   return __pyx_r;
 }
 
-/* "sparse_lib/solvers/suitesparse/umfpack.pyx":553
+/* "sparse_lib/solvers/suitesparse/umfpack.pyx":663
  *         umfpack_di_report_control(self.control)
  * 
  *     def report_info(self):             # <<<<<<<<<<<<<<
@@ -5602,7 +5755,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
 
 /* Python wrapper */
 static PyObject *__pyx_pw_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_27report_info(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static char __pyx_doc_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_26report_info[] = "\n         Print all status information.\n\n         Use **after** calling :meth:`create_symbolic()`, :meth:`create_numeric()`, :meth:`factorize()` or :meth:`solve()`.\n         ";
+static char __pyx_doc_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_26report_info[] = "\n         Print all status information.\n\n         Use **after** calling :meth:`create_symbolic()`, :meth:`create_numeric()`, :meth:`factorize()` or :meth:`solve()`.\n\n         {{COMPLEX: NO}}\n         {{GENERIC: YES}}\n         ";
 static PyObject *__pyx_pw_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_27report_info(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
@@ -5619,8 +5772,8 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("report_info", 0);
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":559
- *          Use **after** calling :meth:`create_symbolic()`, :meth:`create_numeric()`, :meth:`factorize()` or :meth:`solve()`.
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":672
+ *          {{GENERIC: YES}}
  *          """
  *          umfpack_di_report_info(self.control, self.info)             # <<<<<<<<<<<<<<
  * 
@@ -5628,7 +5781,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
  */
   umfpack_di_report_info(__pyx_v_self->control, __pyx_v_self->info);
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":553
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":663
  *         umfpack_di_report_control(self.control)
  * 
  *     def report_info(self):             # <<<<<<<<<<<<<<
@@ -5643,7 +5796,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   return __pyx_r;
 }
 
-/* "sparse_lib/solvers/suitesparse/umfpack.pyx":561
+/* "sparse_lib/solvers/suitesparse/umfpack.pyx":674
  *          umfpack_di_report_info(self.control, self.info)
  * 
  *     def report_symbolic(self):             # <<<<<<<<<<<<<<
@@ -5653,7 +5806,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
 
 /* Python wrapper */
 static PyObject *__pyx_pw_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_29report_symbolic(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static char __pyx_doc_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_28report_symbolic[] = "\n         Print information about the opaque ``symbolic`` object.\n         ";
+static char __pyx_doc_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_28report_symbolic[] = "\n         Print information about the opaque ``symbolic`` object.\n\n         {{COMPLEX: NO}}\n         {{GENERIC: YES}}\n         ";
 static PyObject *__pyx_pw_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_29report_symbolic(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
@@ -5674,8 +5827,8 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("report_symbolic", 0);
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":565
- *          Print information about the opaque ``symbolic`` object.
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":681
+ *          {{GENERIC: YES}}
  *          """
  *          if not self.symbolic_computed:             # <<<<<<<<<<<<<<
  *              print "No opaque symbolic object has been computed"
@@ -5684,16 +5837,16 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   __pyx_t_1 = ((!(__pyx_v_self->symbolic_computed != 0)) != 0);
   if (__pyx_t_1) {
 
-    /* "sparse_lib/solvers/suitesparse/umfpack.pyx":566
+    /* "sparse_lib/solvers/suitesparse/umfpack.pyx":682
  *          """
  *          if not self.symbolic_computed:
  *              print "No opaque symbolic object has been computed"             # <<<<<<<<<<<<<<
  *              return
  * 
  */
-    if (__Pyx_PrintOne(0, __pyx_kp_s_No_opaque_symbolic_object_has_be) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 566; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (__Pyx_PrintOne(0, __pyx_kp_s_No_opaque_symbolic_object_has_be) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 682; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-    /* "sparse_lib/solvers/suitesparse/umfpack.pyx":567
+    /* "sparse_lib/solvers/suitesparse/umfpack.pyx":683
  *          if not self.symbolic_computed:
  *              print "No opaque symbolic object has been computed"
  *              return             # <<<<<<<<<<<<<<
@@ -5705,7 +5858,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
     goto __pyx_L0;
   }
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":569
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":685
  *              return
  * 
  *          umfpack_di_report_symbolic(self.symbolic, self.control)             # <<<<<<<<<<<<<<
@@ -5714,7 +5867,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
  */
   umfpack_di_report_symbolic(__pyx_v_self->symbolic, __pyx_v_self->control);
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":561
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":674
  *          umfpack_di_report_info(self.control, self.info)
  * 
  *     def report_symbolic(self):             # <<<<<<<<<<<<<<
@@ -5734,7 +5887,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   return __pyx_r;
 }
 
-/* "sparse_lib/solvers/suitesparse/umfpack.pyx":571
+/* "sparse_lib/solvers/suitesparse/umfpack.pyx":687
  *          umfpack_di_report_symbolic(self.symbolic, self.control)
  * 
  *     def report_numeric(self):             # <<<<<<<<<<<<<<
@@ -5744,7 +5897,7 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
 
 /* Python wrapper */
 static PyObject *__pyx_pw_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_31report_numeric(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static char __pyx_doc_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_30report_numeric[] = "\n         Print information about the opaque ``numeric`` object.\n         ";
+static char __pyx_doc_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_30report_numeric[] = "\n         Print information about the opaque ``numeric`` object.\n\n         {{COMPLEX: NO}}\n         {{GENERIC: YES}}\n         ";
 static PyObject *__pyx_pw_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_31report_numeric(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
@@ -5761,15 +5914,15 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("report_numeric", 0);
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":575
- *          Print information about the opaque ``numeric`` object.
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":694
+ *          {{GENERIC: YES}}
  *          """
  *          umfpack_di_report_numeric(self.numeric, self.control)             # <<<<<<<<<<<<<<
  * 
  */
   umfpack_di_report_numeric(__pyx_v_self->numeric, __pyx_v_self->control);
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":571
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":687
  *          umfpack_di_report_symbolic(self.symbolic, self.control)
  * 
  *     def report_numeric(self):             # <<<<<<<<<<<<<<
@@ -5780,6 +5933,88 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   /* function exit code */
   __pyx_r = Py_None; __Pyx_INCREF(Py_None);
   __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "sparse_lib/solvers/suitesparse/umfpack.pxd":19
+ *         SIZE_t ncol
+ * 
+ *         public bint is_complex             # <<<<<<<<<<<<<<
+ * 
+ *         str family
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_10is_complex_1__get__(PyObject *__pyx_v_self); /*proto*/
+static PyObject *__pyx_pw_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_10is_complex_1__get__(PyObject *__pyx_v_self) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__get__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_10is_complex___get__(((struct __pyx_obj_10sparse_lib_7solvers_11suitesparse_7umfpack_UmfpackSolver *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_10is_complex___get__(struct __pyx_obj_10sparse_lib_7solvers_11suitesparse_7umfpack_UmfpackSolver *__pyx_v_self) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__get__", 0);
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_v_self->is_complex); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 19; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("sparse_lib.solvers.suitesparse.umfpack.UmfpackSolver.is_complex.__get__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* Python wrapper */
+static int __pyx_pw_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_10is_complex_3__set__(PyObject *__pyx_v_self, PyObject *__pyx_v_value); /*proto*/
+static int __pyx_pw_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_10is_complex_3__set__(PyObject *__pyx_v_self, PyObject *__pyx_v_value) {
+  int __pyx_r;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_10is_complex_2__set__(((struct __pyx_obj_10sparse_lib_7solvers_11suitesparse_7umfpack_UmfpackSolver *)__pyx_v_self), ((PyObject *)__pyx_v_value));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static int __pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_10is_complex_2__set__(struct __pyx_obj_10sparse_lib_7solvers_11suitesparse_7umfpack_UmfpackSolver *__pyx_v_self, PyObject *__pyx_v_value) {
+  int __pyx_r;
+  __Pyx_RefNannyDeclarations
+  int __pyx_t_1;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__set__", 0);
+  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_v_value); if (unlikely((__pyx_t_1 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 19; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_v_self->is_complex = __pyx_t_1;
+
+  /* function exit code */
+  __pyx_r = 0;
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_AddTraceback("sparse_lib.solvers.suitesparse.umfpack.UmfpackSolver.is_complex.__set__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = -1;
+  __pyx_L0:;
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
@@ -8473,6 +8708,7 @@ static PyObject *__pyx_tp_new_10sparse_lib_7solvers_11suitesparse_7umfpack_Umfpa
   p = ((struct __pyx_obj_10sparse_lib_7solvers_11suitesparse_7umfpack_UmfpackSolver *)o);
   p->__pyx_vtab = __pyx_vtabptr_10sparse_lib_7solvers_11suitesparse_7umfpack_UmfpackSolver;
   p->A = ((struct __pyx_obj_10sparse_lib_6sparse_6ll_mat_LLSparseMatrix *)Py_None); Py_INCREF(Py_None);
+  p->family = ((PyObject*)Py_None); Py_INCREF(Py_None);
   p->csc_mat = ((struct __pyx_obj_10sparse_lib_6sparse_7csc_mat_CSCSparseMatrix *)Py_None); Py_INCREF(Py_None);
   if (unlikely(__pyx_pw_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_1__cinit__(o, a, k) < 0)) {
     Py_DECREF(o); o = 0;
@@ -8497,6 +8733,7 @@ static void __pyx_tp_dealloc_10sparse_lib_7solvers_11suitesparse_7umfpack_Umfpac
     PyErr_Restore(etype, eval, etb);
   }
   Py_CLEAR(p->A);
+  Py_CLEAR(p->family);
   Py_CLEAR(p->csc_mat);
   (*Py_TYPE(o)->tp_free)(o);
 }
@@ -8523,6 +8760,20 @@ static int __pyx_tp_clear_10sparse_lib_7solvers_11suitesparse_7umfpack_UmfpackSo
   p->csc_mat = ((struct __pyx_obj_10sparse_lib_6sparse_7csc_mat_CSCSparseMatrix *)Py_None); Py_INCREF(Py_None);
   Py_XDECREF(tmp);
   return 0;
+}
+
+static PyObject *__pyx_getprop_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_is_complex(PyObject *o, CYTHON_UNUSED void *x) {
+  return __pyx_pw_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_10is_complex_1__get__(o);
+}
+
+static int __pyx_setprop_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_is_complex(PyObject *o, PyObject *v, CYTHON_UNUSED void *x) {
+  if (v) {
+    return __pyx_pw_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_10is_complex_3__set__(o, v);
+  }
+  else {
+    PyErr_SetString(PyExc_NotImplementedError, "__del__");
+    return -1;
+  }
 }
 
 static PyObject *__pyx_getprop_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_info(PyObject *o, CYTHON_UNUSED void *x) {
@@ -8554,11 +8805,11 @@ static int __pyx_setprop_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackS
 }
 
 static PyMethodDef __pyx_methods_10sparse_lib_7solvers_11suitesparse_7umfpack_UmfpackSolver[] = {
-  {"free_symbolic", (PyCFunction)__pyx_pw_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_5free_symbolic, METH_NOARGS, 0},
-  {"free_numeric", (PyCFunction)__pyx_pw_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_7free_numeric, METH_NOARGS, 0},
-  {"free", (PyCFunction)__pyx_pw_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_9free, METH_NOARGS, 0},
-  {"create_symbolic", (PyCFunction)__pyx_pw_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_11create_symbolic, METH_VARARGS|METH_KEYWORDS, 0},
-  {"create_numeric", (PyCFunction)__pyx_pw_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_13create_numeric, METH_VARARGS|METH_KEYWORDS, 0},
+  {"free_symbolic", (PyCFunction)__pyx_pw_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_5free_symbolic, METH_NOARGS, __pyx_doc_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_4free_symbolic},
+  {"free_numeric", (PyCFunction)__pyx_pw_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_7free_numeric, METH_NOARGS, __pyx_doc_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_6free_numeric},
+  {"free", (PyCFunction)__pyx_pw_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_9free, METH_NOARGS, __pyx_doc_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_8free},
+  {"create_symbolic", (PyCFunction)__pyx_pw_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_11create_symbolic, METH_VARARGS|METH_KEYWORDS, __pyx_doc_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_10create_symbolic},
+  {"create_numeric", (PyCFunction)__pyx_pw_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_13create_numeric, METH_VARARGS|METH_KEYWORDS, __pyx_doc_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_12create_numeric},
   {"solve", (PyCFunction)__pyx_pw_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_15solve, METH_VARARGS|METH_KEYWORDS, __pyx_doc_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_14solve},
   {"get_lunz", (PyCFunction)__pyx_pw_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_17get_lunz, METH_NOARGS, __pyx_doc_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_16get_lunz},
   {"get_LU", (PyCFunction)__pyx_pw_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_19get_LU, METH_VARARGS|METH_KEYWORDS, __pyx_doc_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_18get_LU},
@@ -8572,6 +8823,7 @@ static PyMethodDef __pyx_methods_10sparse_lib_7solvers_11suitesparse_7umfpack_Um
 };
 
 static struct PyGetSetDef __pyx_getsets_10sparse_lib_7solvers_11suitesparse_7umfpack_UmfpackSolver[] = {
+  {(char *)"is_complex", __pyx_getprop_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_is_complex, __pyx_setprop_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_is_complex, 0, 0},
   {(char *)"info", __pyx_getprop_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_info, __pyx_setprop_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_info, 0, 0},
   {(char *)"control", __pyx_getprop_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_control, __pyx_setprop_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver_control, 0, 0},
   {0, 0, 0, 0, 0}
@@ -8704,6 +8956,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_UMFPACK_WARNING_determinant_unde, __pyx_k_UMFPACK_WARNING_determinant_unde, sizeof(__pyx_k_UMFPACK_WARNING_determinant_unde), 0, 0, 1, 1},
   {&__pyx_n_s_UMFPACK_WARNING_singular_matrix, __pyx_k_UMFPACK_WARNING_singular_matrix, sizeof(__pyx_k_UMFPACK_WARNING_singular_matrix), 0, 0, 1, 1},
   {&__pyx_kp_s_UMFPACK_library_not_yet_interfac, __pyx_k_UMFPACK_library_not_yet_interfac, sizeof(__pyx_k_UMFPACK_library_not_yet_interfac), 0, 0, 1, 0},
+  {&__pyx_kp_s_UMFPACK_only_deals_with_double_p, __pyx_k_UMFPACK_only_deals_with_double_p, sizeof(__pyx_k_UMFPACK_only_deals_with_double_p), 0, 0, 1, 0},
   {&__pyx_kp_s_UMFPACK_version_s, __pyx_k_UMFPACK_version_s, sizeof(__pyx_k_UMFPACK_version_s), 0, 0, 1, 0},
   {&__pyx_n_s_ValueError, __pyx_k_ValueError, sizeof(__pyx_k_ValueError), 0, 0, 1, 1},
   {&__pyx_n_s_aborted, __pyx_k_aborted, sizeof(__pyx_k_aborted), 0, 0, 1, 1},
@@ -8713,6 +8966,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_create_numeric_2, __pyx_k_create_numeric_2, sizeof(__pyx_k_create_numeric_2), 0, 0, 1, 1},
   {&__pyx_kp_s_create_symbolic, __pyx_k_create_symbolic, sizeof(__pyx_k_create_symbolic), 0, 0, 1, 0},
   {&__pyx_n_s_create_symbolic_2, __pyx_k_create_symbolic_2, sizeof(__pyx_k_create_symbolic_2), 0, 0, 1, 1},
+  {&__pyx_n_s_d, __pyx_k_d, sizeof(__pyx_k_d), 0, 0, 1, 1},
   {&__pyx_n_s_double, __pyx_k_double, sizeof(__pyx_k_double), 0, 0, 1, 1},
   {&__pyx_n_s_dtype, __pyx_k_dtype, sizeof(__pyx_k_dtype), 0, 0, 1, 1},
   {&__pyx_n_s_empty, __pyx_k_empty, sizeof(__pyx_k_empty), 0, 0, 1, 1},
@@ -8732,9 +8986,11 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_get_lunz, __pyx_k_get_lunz, sizeof(__pyx_k_get_lunz), 0, 0, 1, 0},
   {&__pyx_n_s_get_lunz_2, __pyx_k_get_lunz_2, sizeof(__pyx_k_get_lunz_2), 0, 0, 1, 1},
   {&__pyx_kp_s_home_nikolaj_Documents_WORK_Dom, __pyx_k_home_nikolaj_Documents_WORK_Dom, sizeof(__pyx_k_home_nikolaj_Documents_WORK_Dom), 0, 0, 1, 0},
+  {&__pyx_n_s_i, __pyx_k_i, sizeof(__pyx_k_i), 0, 0, 1, 1},
   {&__pyx_n_s_import, __pyx_k_import, sizeof(__pyx_k_import), 0, 0, 1, 1},
   {&__pyx_n_s_irsteps, __pyx_k_irsteps, sizeof(__pyx_k_irsteps), 0, 0, 1, 1},
   {&__pyx_n_s_keys, __pyx_k_keys, sizeof(__pyx_k_keys), 0, 0, 1, 1},
+  {&__pyx_n_s_l, __pyx_k_l, sizeof(__pyx_k_l), 0, 0, 1, 1},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
   {&__pyx_n_s_msg, __pyx_k_msg, sizeof(__pyx_k_msg), 0, 0, 1, 1},
   {&__pyx_kp_u_ndarray_is_not_C_contiguous, __pyx_k_ndarray_is_not_C_contiguous, sizeof(__pyx_k_ndarray_is_not_C_contiguous), 0, 1, 0, 0},
@@ -8763,14 +9019,15 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_u_unknown_dtype_code_in_numpy_pxd, __pyx_k_unknown_dtype_code_in_numpy_pxd, sizeof(__pyx_k_unknown_dtype_code_in_numpy_pxd), 0, 1, 0, 0},
   {&__pyx_n_s_version_string, __pyx_k_version_string, sizeof(__pyx_k_version_string), 0, 0, 1, 1},
   {&__pyx_n_s_warning, __pyx_k_warning, sizeof(__pyx_k_warning), 0, 0, 1, 1},
+  {&__pyx_n_s_z, __pyx_k_z, sizeof(__pyx_k_z), 0, 0, 1, 1},
   {0, 0, 0, 0, 0, 0, 0}
 };
 static int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_RuntimeError = __Pyx_GetBuiltinName(__pyx_n_s_RuntimeError); if (!__pyx_builtin_RuntimeError) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 189; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_builtin_NotImplemented = __Pyx_GetBuiltinName(__pyx_n_s_NotImplemented); if (!__pyx_builtin_NotImplemented) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 216; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_builtin_AttributeError = __Pyx_GetBuiltinName(__pyx_n_s_AttributeError); if (!__pyx_builtin_AttributeError) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 359; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 364; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_builtin_MemoryError = __Pyx_GetBuiltinName(__pyx_n_s_MemoryError); if (!__pyx_builtin_MemoryError) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 465; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_builtin_RuntimeError = __Pyx_GetBuiltinName(__pyx_n_s_RuntimeError); if (!__pyx_builtin_RuntimeError) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 221; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_builtin_NotImplemented = __Pyx_GetBuiltinName(__pyx_n_s_NotImplemented); if (!__pyx_builtin_NotImplemented) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 268; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_builtin_AttributeError = __Pyx_GetBuiltinName(__pyx_n_s_AttributeError); if (!__pyx_builtin_AttributeError) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 453; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 458; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_builtin_MemoryError = __Pyx_GetBuiltinName(__pyx_n_s_MemoryError); if (!__pyx_builtin_MemoryError) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 565; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) {__pyx_filename = __pyx_f[2]; __pyx_lineno = 231; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) {__pyx_filename = __pyx_f[3]; __pyx_lineno = 46; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_builtin_OverflowError = __Pyx_GetBuiltinName(__pyx_n_s_OverflowError); if (!__pyx_builtin_OverflowError) {__pyx_filename = __pyx_f[3]; __pyx_lineno = 46; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -8785,36 +9042,36 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":216
- * 
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":268
+ *         # TODO: implement both cases!
  *         if INT_T == INT64_T:
  *             raise NotImplemented("UMFPACK library not (yet) interfaced with INT64 (long)")             # <<<<<<<<<<<<<<
  * 
  *         if A.is_complex:
  */
-  __pyx_tuple_ = PyTuple_Pack(1, __pyx_kp_s_UMFPACK_library_not_yet_interfac); if (unlikely(!__pyx_tuple_)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 216; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple_ = PyTuple_Pack(1, __pyx_kp_s_UMFPACK_library_not_yet_interfac); if (unlikely(!__pyx_tuple_)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 268; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple_);
   __Pyx_GIVEREF(__pyx_tuple_);
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":219
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":271
  * 
  *         if A.is_complex:
  *             raise NotImplemented("Complex version of UMFPACK not (yet) implemented")             # <<<<<<<<<<<<<<
  * 
  *         self.csc_mat  = self.A.to_csc()
  */
-  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_s_Complex_version_of_UMFPACK_not_y); if (unlikely(!__pyx_tuple__2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 219; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_s_Complex_version_of_UMFPACK_not_y); if (unlikely(!__pyx_tuple__2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 271; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":228
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":280
  *         # set default parameters for control
  *         umfpack_di_defaults(<double *>&self.control)
  *         self.set_verbosity(3)             # <<<<<<<<<<<<<<
  * 
  *     ####################################################################################################################
  */
-  __pyx_tuple__3 = PyTuple_Pack(1, __pyx_int_3); if (unlikely(!__pyx_tuple__3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 228; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__3 = PyTuple_Pack(1, __pyx_int_3); if (unlikely(!__pyx_tuple__3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 280; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__3);
   __Pyx_GIVEREF(__pyx_tuple__3);
 
@@ -8884,41 +9141,41 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__9);
   __Pyx_GIVEREF(__pyx_tuple__9);
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":124
- * 
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":156
+ *     void umfpack_zi_report_numeric(void *, double *)
  * 
  * def umfpack_version():             # <<<<<<<<<<<<<<
  *     version_string = "UMFPACK version %s" % UMFPACK_VERSION
  * 
  */
-  __pyx_tuple__10 = PyTuple_Pack(1, __pyx_n_s_version_string); if (unlikely(!__pyx_tuple__10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 124; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__10 = PyTuple_Pack(1, __pyx_n_s_version_string); if (unlikely(!__pyx_tuple__10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 156; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__10);
   __Pyx_GIVEREF(__pyx_tuple__10);
-  __pyx_codeobj__11 = (PyObject*)__Pyx_PyCode_New(0, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__10, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_nikolaj_Documents_WORK_Dom, __pyx_n_s_umfpack_version, 124, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 124; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__11 = (PyObject*)__Pyx_PyCode_New(0, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__10, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_nikolaj_Documents_WORK_Dom, __pyx_n_s_umfpack_version, 156, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 156; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":129
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":161
  *     return version_string
  * 
  * def umfpack_detailed_version():             # <<<<<<<<<<<<<<
  *     version_string = "%s.%s.%s (%s)" % (UMFPACK_MAIN_VERSION,
  *                                          UMFPACK_SUB_VERSION,
  */
-  __pyx_tuple__12 = PyTuple_Pack(1, __pyx_n_s_version_string); if (unlikely(!__pyx_tuple__12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 129; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__12 = PyTuple_Pack(1, __pyx_n_s_version_string); if (unlikely(!__pyx_tuple__12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 161; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__12);
   __Pyx_GIVEREF(__pyx_tuple__12);
-  __pyx_codeobj__13 = (PyObject*)__Pyx_PyCode_New(0, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__12, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_nikolaj_Documents_WORK_Dom, __pyx_n_s_umfpack_detailed_version, 129, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 129; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__13 = (PyObject*)__Pyx_PyCode_New(0, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__12, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_nikolaj_Documents_WORK_Dom, __pyx_n_s_umfpack_detailed_version, 161, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 161; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":171
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":203
  * }
  * 
  * def test_umfpack_result(status, msg, raise_error=True, print_on_screen=True):             # <<<<<<<<<<<<<<
  *     """
  *     Test returned status from UMFPACK routines.
  */
-  __pyx_tuple__14 = PyTuple_Pack(4, __pyx_n_s_status, __pyx_n_s_msg, __pyx_n_s_raise_error, __pyx_n_s_print_on_screen); if (unlikely(!__pyx_tuple__14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 171; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__14 = PyTuple_Pack(4, __pyx_n_s_status, __pyx_n_s_msg, __pyx_n_s_raise_error, __pyx_n_s_print_on_screen); if (unlikely(!__pyx_tuple__14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 203; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__14);
   __Pyx_GIVEREF(__pyx_tuple__14);
-  __pyx_codeobj__15 = (PyObject*)__Pyx_PyCode_New(4, 0, 4, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__14, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_nikolaj_Documents_WORK_Dom, __pyx_n_s_test_umfpack_result, 171, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__15)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 171; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__15 = (PyObject*)__Pyx_PyCode_New(4, 0, 4, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__14, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_nikolaj_Documents_WORK_Dom, __pyx_n_s_test_umfpack_result, 203, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__15)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 203; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -9025,10 +9282,10 @@ PyMODINIT_FUNC PyInit_umfpack(void)
   __pyx_vtabptr_10sparse_lib_7solvers_11suitesparse_7umfpack_UmfpackSolver = &__pyx_vtable_10sparse_lib_7solvers_11suitesparse_7umfpack_UmfpackSolver;
   __pyx_vtable_10sparse_lib_7solvers_11suitesparse_7umfpack_UmfpackSolver._create_symbolic = (int (*)(struct __pyx_obj_10sparse_lib_7solvers_11suitesparse_7umfpack_UmfpackSolver *))__pyx_f_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver__create_symbolic;
   __pyx_vtable_10sparse_lib_7solvers_11suitesparse_7umfpack_UmfpackSolver._create_numeric = (int (*)(struct __pyx_obj_10sparse_lib_7solvers_11suitesparse_7umfpack_UmfpackSolver *))__pyx_f_10sparse_lib_7solvers_11suitesparse_7umfpack_13UmfpackSolver__create_numeric;
-  if (PyType_Ready(&__pyx_type_10sparse_lib_7solvers_11suitesparse_7umfpack_UmfpackSolver) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 194; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyType_Ready(&__pyx_type_10sparse_lib_7solvers_11suitesparse_7umfpack_UmfpackSolver) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 226; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_type_10sparse_lib_7solvers_11suitesparse_7umfpack_UmfpackSolver.tp_print = 0;
-  if (__Pyx_SetVtable(__pyx_type_10sparse_lib_7solvers_11suitesparse_7umfpack_UmfpackSolver.tp_dict, __pyx_vtabptr_10sparse_lib_7solvers_11suitesparse_7umfpack_UmfpackSolver) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 194; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (PyObject_SetAttrString(__pyx_m, "UmfpackSolver", (PyObject *)&__pyx_type_10sparse_lib_7solvers_11suitesparse_7umfpack_UmfpackSolver) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 194; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_SetVtable(__pyx_type_10sparse_lib_7solvers_11suitesparse_7umfpack_UmfpackSolver.tp_dict, __pyx_vtabptr_10sparse_lib_7solvers_11suitesparse_7umfpack_UmfpackSolver) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 226; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyObject_SetAttrString(__pyx_m, "UmfpackSolver", (PyObject *)&__pyx_type_10sparse_lib_7solvers_11suitesparse_7umfpack_UmfpackSolver) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 226; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_ptype_10sparse_lib_7solvers_11suitesparse_7umfpack_UmfpackSolver = &__pyx_type_10sparse_lib_7solvers_11suitesparse_7umfpack_UmfpackSolver;
   /*--- Type import code ---*/
   __pyx_ptype_10sparse_lib_6sparse_10sparse_mat_SparseMatrix = __Pyx_ImportType("sparse_lib.sparse.sparse_mat", "SparseMatrix", sizeof(struct __pyx_obj_10sparse_lib_6sparse_10sparse_mat_SparseMatrix), 1); if (unlikely(!__pyx_ptype_10sparse_lib_6sparse_10sparse_mat_SparseMatrix)) {__pyx_filename = __pyx_f[4]; __pyx_lineno = 3; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -9087,462 +9344,462 @@ PyMODINIT_FUNC PyInit_umfpack(void)
  */
   import_array();
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":124
- * 
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":156
+ *     void umfpack_zi_report_numeric(void *, double *)
  * 
  * def umfpack_version():             # <<<<<<<<<<<<<<
  *     version_string = "UMFPACK version %s" % UMFPACK_VERSION
  * 
  */
-  __pyx_t_3 = PyCFunction_NewEx(&__pyx_mdef_10sparse_lib_7solvers_11suitesparse_7umfpack_1umfpack_version, NULL, __pyx_n_s_sparse_lib_solvers_suitesparse_u); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 124; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = PyCFunction_NewEx(&__pyx_mdef_10sparse_lib_7solvers_11suitesparse_7umfpack_1umfpack_version, NULL, __pyx_n_s_sparse_lib_solvers_suitesparse_u); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 156; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_umfpack_version, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 124; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_umfpack_version, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 156; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":129
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":161
  *     return version_string
  * 
  * def umfpack_detailed_version():             # <<<<<<<<<<<<<<
  *     version_string = "%s.%s.%s (%s)" % (UMFPACK_MAIN_VERSION,
  *                                          UMFPACK_SUB_VERSION,
  */
-  __pyx_t_3 = PyCFunction_NewEx(&__pyx_mdef_10sparse_lib_7solvers_11suitesparse_7umfpack_3umfpack_detailed_version, NULL, __pyx_n_s_sparse_lib_solvers_suitesparse_u); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 129; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = PyCFunction_NewEx(&__pyx_mdef_10sparse_lib_7solvers_11suitesparse_7umfpack_3umfpack_detailed_version, NULL, __pyx_n_s_sparse_lib_solvers_suitesparse_u); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 161; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_umfpack_detailed_version, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 129; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_umfpack_detailed_version, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 161; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":136
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":168
  *     return version_string
  * 
  * UMFPACK_SYS_DICT = {             # <<<<<<<<<<<<<<
  *         'UMFPACK_A'     : UMFPACK_A,
  *         'UMFPACK_At'    : UMFPACK_At,
  */
-  __pyx_t_3 = PyDict_New(); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 136; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = PyDict_New(); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 168; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":137
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":169
  * 
  * UMFPACK_SYS_DICT = {
  *         'UMFPACK_A'     : UMFPACK_A,             # <<<<<<<<<<<<<<
  *         'UMFPACK_At'    : UMFPACK_At,
  *         'UMFPACK_Aat'   : UMFPACK_Aat,
  */
-  __pyx_t_4 = __Pyx_PyInt_From_int(UMFPACK_A); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 137; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyInt_From_int(UMFPACK_A); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 169; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_UMFPACK_A, __pyx_t_4) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 136; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_UMFPACK_A, __pyx_t_4) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 168; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":138
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":170
  * UMFPACK_SYS_DICT = {
  *         'UMFPACK_A'     : UMFPACK_A,
  *         'UMFPACK_At'    : UMFPACK_At,             # <<<<<<<<<<<<<<
  *         'UMFPACK_Aat'   : UMFPACK_Aat,
  *         'UMFPACK_Pt_L'  : UMFPACK_Pt_L,
  */
-  __pyx_t_4 = __Pyx_PyInt_From_int(UMFPACK_At); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 138; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyInt_From_int(UMFPACK_At); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 170; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_UMFPACK_At, __pyx_t_4) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 136; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_UMFPACK_At, __pyx_t_4) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 168; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":139
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":171
  *         'UMFPACK_A'     : UMFPACK_A,
  *         'UMFPACK_At'    : UMFPACK_At,
  *         'UMFPACK_Aat'   : UMFPACK_Aat,             # <<<<<<<<<<<<<<
  *         'UMFPACK_Pt_L'  : UMFPACK_Pt_L,
  *         'UMFPACK_L'     : UMFPACK_L,
  */
-  __pyx_t_4 = __Pyx_PyInt_From_int(UMFPACK_Aat); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 139; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyInt_From_int(UMFPACK_Aat); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 171; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_UMFPACK_Aat, __pyx_t_4) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 136; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_UMFPACK_Aat, __pyx_t_4) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 168; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":140
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":172
  *         'UMFPACK_At'    : UMFPACK_At,
  *         'UMFPACK_Aat'   : UMFPACK_Aat,
  *         'UMFPACK_Pt_L'  : UMFPACK_Pt_L,             # <<<<<<<<<<<<<<
  *         'UMFPACK_L'     : UMFPACK_L,
  *         'UMFPACK_Lt_P'  : UMFPACK_Lt_P,
  */
-  __pyx_t_4 = __Pyx_PyInt_From_int(UMFPACK_Pt_L); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 140; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyInt_From_int(UMFPACK_Pt_L); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 172; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_UMFPACK_Pt_L, __pyx_t_4) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 136; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_UMFPACK_Pt_L, __pyx_t_4) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 168; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":141
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":173
  *         'UMFPACK_Aat'   : UMFPACK_Aat,
  *         'UMFPACK_Pt_L'  : UMFPACK_Pt_L,
  *         'UMFPACK_L'     : UMFPACK_L,             # <<<<<<<<<<<<<<
  *         'UMFPACK_Lt_P'  : UMFPACK_Lt_P,
  *         'UMFPACK_Lat_P' : UMFPACK_Lat_P,
  */
-  __pyx_t_4 = __Pyx_PyInt_From_int(UMFPACK_L); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 141; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyInt_From_int(UMFPACK_L); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 173; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_UMFPACK_L, __pyx_t_4) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 136; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_UMFPACK_L, __pyx_t_4) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 168; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":142
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":174
  *         'UMFPACK_Pt_L'  : UMFPACK_Pt_L,
  *         'UMFPACK_L'     : UMFPACK_L,
  *         'UMFPACK_Lt_P'  : UMFPACK_Lt_P,             # <<<<<<<<<<<<<<
  *         'UMFPACK_Lat_P' : UMFPACK_Lat_P,
  *         'UMFPACK_Lt'    : UMFPACK_Lt,
  */
-  __pyx_t_4 = __Pyx_PyInt_From_int(UMFPACK_Lt_P); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 142; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyInt_From_int(UMFPACK_Lt_P); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 174; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_UMFPACK_Lt_P, __pyx_t_4) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 136; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_UMFPACK_Lt_P, __pyx_t_4) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 168; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":143
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":175
  *         'UMFPACK_L'     : UMFPACK_L,
  *         'UMFPACK_Lt_P'  : UMFPACK_Lt_P,
  *         'UMFPACK_Lat_P' : UMFPACK_Lat_P,             # <<<<<<<<<<<<<<
  *         'UMFPACK_Lt'    : UMFPACK_Lt,
  *         'UMFPACK_U_Qt'  : UMFPACK_U_Qt,
  */
-  __pyx_t_4 = __Pyx_PyInt_From_int(UMFPACK_Lat_P); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 143; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyInt_From_int(UMFPACK_Lat_P); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 175; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_UMFPACK_Lat_P, __pyx_t_4) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 136; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_UMFPACK_Lat_P, __pyx_t_4) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 168; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":144
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":176
  *         'UMFPACK_Lt_P'  : UMFPACK_Lt_P,
  *         'UMFPACK_Lat_P' : UMFPACK_Lat_P,
  *         'UMFPACK_Lt'    : UMFPACK_Lt,             # <<<<<<<<<<<<<<
  *         'UMFPACK_U_Qt'  : UMFPACK_U_Qt,
  *         'UMFPACK_U'     : UMFPACK_U,
  */
-  __pyx_t_4 = __Pyx_PyInt_From_int(UMFPACK_Lt); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 144; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyInt_From_int(UMFPACK_Lt); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 176; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_UMFPACK_Lt, __pyx_t_4) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 136; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_UMFPACK_Lt, __pyx_t_4) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 168; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":145
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":177
  *         'UMFPACK_Lat_P' : UMFPACK_Lat_P,
  *         'UMFPACK_Lt'    : UMFPACK_Lt,
  *         'UMFPACK_U_Qt'  : UMFPACK_U_Qt,             # <<<<<<<<<<<<<<
  *         'UMFPACK_U'     : UMFPACK_U,
  *         'UMFPACK_Q_Ut'  : UMFPACK_Q_Ut,
  */
-  __pyx_t_4 = __Pyx_PyInt_From_int(UMFPACK_U_Qt); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 145; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyInt_From_int(UMFPACK_U_Qt); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 177; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_UMFPACK_U_Qt, __pyx_t_4) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 136; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_UMFPACK_U_Qt, __pyx_t_4) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 168; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":146
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":178
  *         'UMFPACK_Lt'    : UMFPACK_Lt,
  *         'UMFPACK_U_Qt'  : UMFPACK_U_Qt,
  *         'UMFPACK_U'     : UMFPACK_U,             # <<<<<<<<<<<<<<
  *         'UMFPACK_Q_Ut'  : UMFPACK_Q_Ut,
  *         'UMFPACK_Q_Uat' : UMFPACK_Q_Uat,
  */
-  __pyx_t_4 = __Pyx_PyInt_From_int(UMFPACK_U); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 146; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyInt_From_int(UMFPACK_U); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 178; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_UMFPACK_U, __pyx_t_4) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 136; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_UMFPACK_U, __pyx_t_4) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 168; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":147
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":179
  *         'UMFPACK_U_Qt'  : UMFPACK_U_Qt,
  *         'UMFPACK_U'     : UMFPACK_U,
  *         'UMFPACK_Q_Ut'  : UMFPACK_Q_Ut,             # <<<<<<<<<<<<<<
  *         'UMFPACK_Q_Uat' : UMFPACK_Q_Uat,
  *         'UMFPACK_Ut'    : UMFPACK_Ut,
  */
-  __pyx_t_4 = __Pyx_PyInt_From_int(UMFPACK_Q_Ut); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 147; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyInt_From_int(UMFPACK_Q_Ut); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 179; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_UMFPACK_Q_Ut, __pyx_t_4) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 136; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_UMFPACK_Q_Ut, __pyx_t_4) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 168; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":148
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":180
  *         'UMFPACK_U'     : UMFPACK_U,
  *         'UMFPACK_Q_Ut'  : UMFPACK_Q_Ut,
  *         'UMFPACK_Q_Uat' : UMFPACK_Q_Uat,             # <<<<<<<<<<<<<<
  *         'UMFPACK_Ut'    : UMFPACK_Ut,
  *         'UMFPACK_Uat'   : UMFPACK_Uat
  */
-  __pyx_t_4 = __Pyx_PyInt_From_int(UMFPACK_Q_Uat); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 148; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyInt_From_int(UMFPACK_Q_Uat); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 180; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_UMFPACK_Q_Uat, __pyx_t_4) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 136; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_UMFPACK_Q_Uat, __pyx_t_4) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 168; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":149
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":181
  *         'UMFPACK_Q_Ut'  : UMFPACK_Q_Ut,
  *         'UMFPACK_Q_Uat' : UMFPACK_Q_Uat,
  *         'UMFPACK_Ut'    : UMFPACK_Ut,             # <<<<<<<<<<<<<<
  *         'UMFPACK_Uat'   : UMFPACK_Uat
  *     }
  */
-  __pyx_t_4 = __Pyx_PyInt_From_int(UMFPACK_Ut); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 149; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyInt_From_int(UMFPACK_Ut); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 181; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_UMFPACK_Ut, __pyx_t_4) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 136; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_UMFPACK_Ut, __pyx_t_4) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 168; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":151
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":183
  *         'UMFPACK_Ut'    : UMFPACK_Ut,
  *         'UMFPACK_Uat'   : UMFPACK_Uat
  *     }             # <<<<<<<<<<<<<<
  * 
  * UMFPACK_ERROR_CODE_DICT = {
  */
-  __pyx_t_4 = __Pyx_PyInt_From_int(UMFPACK_Uat); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 151; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyInt_From_int(UMFPACK_Uat); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 183; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_UMFPACK_Uat, __pyx_t_4) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 136; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_UMFPACK_Uat, __pyx_t_4) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 168; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_UMFPACK_SYS_DICT, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 136; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_UMFPACK_SYS_DICT, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 168; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":153
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":185
  *     }
  * 
  * UMFPACK_ERROR_CODE_DICT = {             # <<<<<<<<<<<<<<
  *         UMFPACK_OK: 'UMFPACK_OK',
  *         UMFPACK_WARNING_singular_matrix: 'UMFPACK_WARNING_singular_matrix',
  */
-  __pyx_t_3 = PyDict_New(); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 153; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = PyDict_New(); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 185; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":154
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":186
  * 
  * UMFPACK_ERROR_CODE_DICT = {
  *         UMFPACK_OK: 'UMFPACK_OK',             # <<<<<<<<<<<<<<
  *         UMFPACK_WARNING_singular_matrix: 'UMFPACK_WARNING_singular_matrix',
  *         UMFPACK_WARNING_determinant_underflow: 'UMFPACK_WARNING_determinant_underflow',
  */
-  __pyx_t_4 = __Pyx_PyInt_From_int(UMFPACK_OK); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 154; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyInt_From_int(UMFPACK_OK); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 186; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_t_4, __pyx_n_s_UMFPACK_OK) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 153; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_3, __pyx_t_4, __pyx_n_s_UMFPACK_OK) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 185; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":155
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":187
  * UMFPACK_ERROR_CODE_DICT = {
  *         UMFPACK_OK: 'UMFPACK_OK',
  *         UMFPACK_WARNING_singular_matrix: 'UMFPACK_WARNING_singular_matrix',             # <<<<<<<<<<<<<<
  *         UMFPACK_WARNING_determinant_underflow: 'UMFPACK_WARNING_determinant_underflow',
  *         UMFPACK_WARNING_determinant_overflow: 'UMFPACK_WARNING_determinant_overflow',
  */
-  __pyx_t_4 = __Pyx_PyInt_From_int(UMFPACK_WARNING_singular_matrix); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 155; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyInt_From_int(UMFPACK_WARNING_singular_matrix); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 187; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_t_4, __pyx_n_s_UMFPACK_WARNING_singular_matrix) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 153; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_3, __pyx_t_4, __pyx_n_s_UMFPACK_WARNING_singular_matrix) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 185; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":156
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":188
  *         UMFPACK_OK: 'UMFPACK_OK',
  *         UMFPACK_WARNING_singular_matrix: 'UMFPACK_WARNING_singular_matrix',
  *         UMFPACK_WARNING_determinant_underflow: 'UMFPACK_WARNING_determinant_underflow',             # <<<<<<<<<<<<<<
  *         UMFPACK_WARNING_determinant_overflow: 'UMFPACK_WARNING_determinant_overflow',
  *         UMFPACK_ERROR_out_of_memory: 'UMFPACK_ERROR_out_of_memory',
  */
-  __pyx_t_4 = __Pyx_PyInt_From_int(UMFPACK_WARNING_determinant_underflow); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 156; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyInt_From_int(UMFPACK_WARNING_determinant_underflow); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 188; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_t_4, __pyx_n_s_UMFPACK_WARNING_determinant_unde) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 153; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_3, __pyx_t_4, __pyx_n_s_UMFPACK_WARNING_determinant_unde) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 185; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":157
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":189
  *         UMFPACK_WARNING_singular_matrix: 'UMFPACK_WARNING_singular_matrix',
  *         UMFPACK_WARNING_determinant_underflow: 'UMFPACK_WARNING_determinant_underflow',
  *         UMFPACK_WARNING_determinant_overflow: 'UMFPACK_WARNING_determinant_overflow',             # <<<<<<<<<<<<<<
  *         UMFPACK_ERROR_out_of_memory: 'UMFPACK_ERROR_out_of_memory',
  *         UMFPACK_ERROR_invalid_Numeric_object: 'UMFPACK_ERROR_invalid_Numeric_object',
  */
-  __pyx_t_4 = __Pyx_PyInt_From_int(UMFPACK_WARNING_determinant_overflow); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 157; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyInt_From_int(UMFPACK_WARNING_determinant_overflow); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 189; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_t_4, __pyx_n_s_UMFPACK_WARNING_determinant_over) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 153; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_3, __pyx_t_4, __pyx_n_s_UMFPACK_WARNING_determinant_over) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 185; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":158
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":190
  *         UMFPACK_WARNING_determinant_underflow: 'UMFPACK_WARNING_determinant_underflow',
  *         UMFPACK_WARNING_determinant_overflow: 'UMFPACK_WARNING_determinant_overflow',
  *         UMFPACK_ERROR_out_of_memory: 'UMFPACK_ERROR_out_of_memory',             # <<<<<<<<<<<<<<
  *         UMFPACK_ERROR_invalid_Numeric_object: 'UMFPACK_ERROR_invalid_Numeric_object',
  *         UMFPACK_ERROR_invalid_Symbolic_object: 'UMFPACK_ERROR_invalid_Symbolic_object',
  */
-  __pyx_t_4 = __Pyx_PyInt_From_int(UMFPACK_ERROR_out_of_memory); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 158; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyInt_From_int(UMFPACK_ERROR_out_of_memory); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 190; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_t_4, __pyx_n_s_UMFPACK_ERROR_out_of_memory) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 153; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_3, __pyx_t_4, __pyx_n_s_UMFPACK_ERROR_out_of_memory) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 185; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":159
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":191
  *         UMFPACK_WARNING_determinant_overflow: 'UMFPACK_WARNING_determinant_overflow',
  *         UMFPACK_ERROR_out_of_memory: 'UMFPACK_ERROR_out_of_memory',
  *         UMFPACK_ERROR_invalid_Numeric_object: 'UMFPACK_ERROR_invalid_Numeric_object',             # <<<<<<<<<<<<<<
  *         UMFPACK_ERROR_invalid_Symbolic_object: 'UMFPACK_ERROR_invalid_Symbolic_object',
  *         UMFPACK_ERROR_argument_missing: 'UMFPACK_ERROR_argument_missing',
  */
-  __pyx_t_4 = __Pyx_PyInt_From_int(UMFPACK_ERROR_invalid_Numeric_object); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 159; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyInt_From_int(UMFPACK_ERROR_invalid_Numeric_object); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 191; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_t_4, __pyx_n_s_UMFPACK_ERROR_invalid_Numeric_ob) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 153; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_3, __pyx_t_4, __pyx_n_s_UMFPACK_ERROR_invalid_Numeric_ob) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 185; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":160
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":192
  *         UMFPACK_ERROR_out_of_memory: 'UMFPACK_ERROR_out_of_memory',
  *         UMFPACK_ERROR_invalid_Numeric_object: 'UMFPACK_ERROR_invalid_Numeric_object',
  *         UMFPACK_ERROR_invalid_Symbolic_object: 'UMFPACK_ERROR_invalid_Symbolic_object',             # <<<<<<<<<<<<<<
  *         UMFPACK_ERROR_argument_missing: 'UMFPACK_ERROR_argument_missing',
  *         UMFPACK_ERROR_n_nonpositive: 'UMFPACK_ERROR_n_nonpositive',
  */
-  __pyx_t_4 = __Pyx_PyInt_From_int(UMFPACK_ERROR_invalid_Symbolic_object); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 160; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyInt_From_int(UMFPACK_ERROR_invalid_Symbolic_object); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 192; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_t_4, __pyx_n_s_UMFPACK_ERROR_invalid_Symbolic_o) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 153; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_3, __pyx_t_4, __pyx_n_s_UMFPACK_ERROR_invalid_Symbolic_o) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 185; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":161
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":193
  *         UMFPACK_ERROR_invalid_Numeric_object: 'UMFPACK_ERROR_invalid_Numeric_object',
  *         UMFPACK_ERROR_invalid_Symbolic_object: 'UMFPACK_ERROR_invalid_Symbolic_object',
  *         UMFPACK_ERROR_argument_missing: 'UMFPACK_ERROR_argument_missing',             # <<<<<<<<<<<<<<
  *         UMFPACK_ERROR_n_nonpositive: 'UMFPACK_ERROR_n_nonpositive',
  *         UMFPACK_ERROR_invalid_matrix: 'UMFPACK_ERROR_invalid_matrix',
  */
-  __pyx_t_4 = __Pyx_PyInt_From_int(UMFPACK_ERROR_argument_missing); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 161; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyInt_From_int(UMFPACK_ERROR_argument_missing); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 193; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_t_4, __pyx_n_s_UMFPACK_ERROR_argument_missing) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 153; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_3, __pyx_t_4, __pyx_n_s_UMFPACK_ERROR_argument_missing) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 185; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":162
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":194
  *         UMFPACK_ERROR_invalid_Symbolic_object: 'UMFPACK_ERROR_invalid_Symbolic_object',
  *         UMFPACK_ERROR_argument_missing: 'UMFPACK_ERROR_argument_missing',
  *         UMFPACK_ERROR_n_nonpositive: 'UMFPACK_ERROR_n_nonpositive',             # <<<<<<<<<<<<<<
  *         UMFPACK_ERROR_invalid_matrix: 'UMFPACK_ERROR_invalid_matrix',
  *         UMFPACK_ERROR_different_pattern: 'UMFPACK_ERROR_different_pattern',
  */
-  __pyx_t_4 = __Pyx_PyInt_From_int(UMFPACK_ERROR_n_nonpositive); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 162; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyInt_From_int(UMFPACK_ERROR_n_nonpositive); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 194; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_t_4, __pyx_n_s_UMFPACK_ERROR_n_nonpositive) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 153; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_3, __pyx_t_4, __pyx_n_s_UMFPACK_ERROR_n_nonpositive) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 185; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":163
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":195
  *         UMFPACK_ERROR_argument_missing: 'UMFPACK_ERROR_argument_missing',
  *         UMFPACK_ERROR_n_nonpositive: 'UMFPACK_ERROR_n_nonpositive',
  *         UMFPACK_ERROR_invalid_matrix: 'UMFPACK_ERROR_invalid_matrix',             # <<<<<<<<<<<<<<
  *         UMFPACK_ERROR_different_pattern: 'UMFPACK_ERROR_different_pattern',
  *         UMFPACK_ERROR_invalid_system: 'UMFPACK_ERROR_invalid_system',
  */
-  __pyx_t_4 = __Pyx_PyInt_From_int(UMFPACK_ERROR_invalid_matrix); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 163; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyInt_From_int(UMFPACK_ERROR_invalid_matrix); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 195; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_t_4, __pyx_n_s_UMFPACK_ERROR_invalid_matrix) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 153; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_3, __pyx_t_4, __pyx_n_s_UMFPACK_ERROR_invalid_matrix) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 185; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":164
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":196
  *         UMFPACK_ERROR_n_nonpositive: 'UMFPACK_ERROR_n_nonpositive',
  *         UMFPACK_ERROR_invalid_matrix: 'UMFPACK_ERROR_invalid_matrix',
  *         UMFPACK_ERROR_different_pattern: 'UMFPACK_ERROR_different_pattern',             # <<<<<<<<<<<<<<
  *         UMFPACK_ERROR_invalid_system: 'UMFPACK_ERROR_invalid_system',
  *         UMFPACK_ERROR_invalid_permutation: 'UMFPACK_ERROR_invalid_permutation',
  */
-  __pyx_t_4 = __Pyx_PyInt_From_int(UMFPACK_ERROR_different_pattern); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 164; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyInt_From_int(UMFPACK_ERROR_different_pattern); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 196; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_t_4, __pyx_n_s_UMFPACK_ERROR_different_pattern) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 153; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_3, __pyx_t_4, __pyx_n_s_UMFPACK_ERROR_different_pattern) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 185; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":165
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":197
  *         UMFPACK_ERROR_invalid_matrix: 'UMFPACK_ERROR_invalid_matrix',
  *         UMFPACK_ERROR_different_pattern: 'UMFPACK_ERROR_different_pattern',
  *         UMFPACK_ERROR_invalid_system: 'UMFPACK_ERROR_invalid_system',             # <<<<<<<<<<<<<<
  *         UMFPACK_ERROR_invalid_permutation: 'UMFPACK_ERROR_invalid_permutation',
  *         UMFPACK_ERROR_internal_error: 'UMFPACK_ERROR_internal_error',
  */
-  __pyx_t_4 = __Pyx_PyInt_From_int(UMFPACK_ERROR_invalid_system); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 165; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyInt_From_int(UMFPACK_ERROR_invalid_system); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 197; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_t_4, __pyx_n_s_UMFPACK_ERROR_invalid_system) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 153; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_3, __pyx_t_4, __pyx_n_s_UMFPACK_ERROR_invalid_system) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 185; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":166
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":198
  *         UMFPACK_ERROR_different_pattern: 'UMFPACK_ERROR_different_pattern',
  *         UMFPACK_ERROR_invalid_system: 'UMFPACK_ERROR_invalid_system',
  *         UMFPACK_ERROR_invalid_permutation: 'UMFPACK_ERROR_invalid_permutation',             # <<<<<<<<<<<<<<
  *         UMFPACK_ERROR_internal_error: 'UMFPACK_ERROR_internal_error',
  *         UMFPACK_ERROR_file_IO: 'UMFPACK_ERROR_file_IO'
  */
-  __pyx_t_4 = __Pyx_PyInt_From_int(UMFPACK_ERROR_invalid_permutation); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 166; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyInt_From_int(UMFPACK_ERROR_invalid_permutation); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 198; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_t_4, __pyx_n_s_UMFPACK_ERROR_invalid_permutatio) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 153; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_3, __pyx_t_4, __pyx_n_s_UMFPACK_ERROR_invalid_permutatio) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 185; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":167
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":199
  *         UMFPACK_ERROR_invalid_system: 'UMFPACK_ERROR_invalid_system',
  *         UMFPACK_ERROR_invalid_permutation: 'UMFPACK_ERROR_invalid_permutation',
  *         UMFPACK_ERROR_internal_error: 'UMFPACK_ERROR_internal_error',             # <<<<<<<<<<<<<<
  *         UMFPACK_ERROR_file_IO: 'UMFPACK_ERROR_file_IO'
  * }
  */
-  __pyx_t_4 = __Pyx_PyInt_From_int(UMFPACK_ERROR_internal_error); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 167; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyInt_From_int(UMFPACK_ERROR_internal_error); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 199; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_t_4, __pyx_n_s_UMFPACK_ERROR_internal_error) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 153; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_3, __pyx_t_4, __pyx_n_s_UMFPACK_ERROR_internal_error) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 185; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":168
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":200
  *         UMFPACK_ERROR_invalid_permutation: 'UMFPACK_ERROR_invalid_permutation',
  *         UMFPACK_ERROR_internal_error: 'UMFPACK_ERROR_internal_error',
  *         UMFPACK_ERROR_file_IO: 'UMFPACK_ERROR_file_IO'             # <<<<<<<<<<<<<<
  * }
  * 
  */
-  __pyx_t_4 = __Pyx_PyInt_From_int(UMFPACK_ERROR_file_IO); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 168; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyInt_From_int(UMFPACK_ERROR_file_IO); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 200; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_t_4, __pyx_n_s_UMFPACK_ERROR_file_IO) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 153; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_3, __pyx_t_4, __pyx_n_s_UMFPACK_ERROR_file_IO) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 185; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_UMFPACK_ERROR_CODE_DICT, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 153; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_UMFPACK_ERROR_CODE_DICT, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 185; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":171
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":203
  * }
  * 
  * def test_umfpack_result(status, msg, raise_error=True, print_on_screen=True):             # <<<<<<<<<<<<<<
  *     """
  *     Test returned status from UMFPACK routines.
  */
-  __pyx_t_3 = PyCFunction_NewEx(&__pyx_mdef_10sparse_lib_7solvers_11suitesparse_7umfpack_5test_umfpack_result, NULL, __pyx_n_s_sparse_lib_solvers_suitesparse_u); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 171; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = PyCFunction_NewEx(&__pyx_mdef_10sparse_lib_7solvers_11suitesparse_7umfpack_5test_umfpack_result, NULL, __pyx_n_s_sparse_lib_solvers_suitesparse_u); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 203; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test_umfpack_result, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 171; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test_umfpack_result, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 203; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":203
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":235
  *     class as their corresponding counter-parts in Umfpack.
  *     """
  *     UMFPACK_VERSION = "%s.%s.%s (%s)" % (UMFPACK_MAIN_VERSION,             # <<<<<<<<<<<<<<
  *                                      UMFPACK_SUB_VERSION,
  *                                      UMFPACK_SUBSUB_VERSION,
  */
-  __pyx_t_3 = __Pyx_PyInt_From_int(UMFPACK_MAIN_VERSION); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 203; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyInt_From_int(UMFPACK_MAIN_VERSION); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 235; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":204
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":236
  *     """
  *     UMFPACK_VERSION = "%s.%s.%s (%s)" % (UMFPACK_MAIN_VERSION,
  *                                      UMFPACK_SUB_VERSION,             # <<<<<<<<<<<<<<
  *                                      UMFPACK_SUBSUB_VERSION,
  *                                      UMFPACK_DATE)
  */
-  __pyx_t_4 = __Pyx_PyInt_From_int(UMFPACK_SUB_VERSION); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 204; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyInt_From_int(UMFPACK_SUB_VERSION); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 236; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":205
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":237
  *     UMFPACK_VERSION = "%s.%s.%s (%s)" % (UMFPACK_MAIN_VERSION,
  *                                      UMFPACK_SUB_VERSION,
  *                                      UMFPACK_SUBSUB_VERSION,             # <<<<<<<<<<<<<<
  *                                      UMFPACK_DATE)
  * 
  */
-  __pyx_t_5 = __Pyx_PyInt_From_int(UMFPACK_SUBSUB_VERSION); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 205; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_PyInt_From_int(UMFPACK_SUBSUB_VERSION); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 237; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":206
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":238
  *                                      UMFPACK_SUB_VERSION,
  *                                      UMFPACK_SUBSUB_VERSION,
  *                                      UMFPACK_DATE)             # <<<<<<<<<<<<<<
  * 
- *     def __cinit__(self, LLSparseMatrix A):
+ * 
  */
-  __pyx_t_6 = __Pyx_PyBytes_FromString(UMFPACK_DATE); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 206; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_6 = __Pyx_PyBytes_FromString(UMFPACK_DATE); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 238; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_6);
 
-  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":203
+  /* "sparse_lib/solvers/suitesparse/umfpack.pyx":235
  *     class as their corresponding counter-parts in Umfpack.
  *     """
  *     UMFPACK_VERSION = "%s.%s.%s (%s)" % (UMFPACK_MAIN_VERSION,             # <<<<<<<<<<<<<<
  *                                      UMFPACK_SUB_VERSION,
  *                                      UMFPACK_SUBSUB_VERSION,
  */
-  __pyx_t_7 = PyTuple_New(4); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 203; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = PyTuple_New(4); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 235; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
   PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_3);
@@ -9556,10 +9813,10 @@ PyMODINIT_FUNC PyInit_umfpack(void)
   __pyx_t_4 = 0;
   __pyx_t_5 = 0;
   __pyx_t_6 = 0;
-  __pyx_t_6 = __Pyx_PyString_Format(__pyx_kp_s_s_s_s_s, __pyx_t_7); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 203; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_6 = __Pyx_PyString_Format(__pyx_kp_s_s_s_s_s, __pyx_t_7); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 235; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  if (PyDict_SetItem((PyObject *)__pyx_ptype_10sparse_lib_7solvers_11suitesparse_7umfpack_UmfpackSolver->tp_dict, __pyx_n_s_UMFPACK_VERSION, __pyx_t_6) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 203; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_10sparse_lib_7solvers_11suitesparse_7umfpack_UmfpackSolver->tp_dict, __pyx_n_s_UMFPACK_VERSION, __pyx_t_6) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 235; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   PyType_Modified(__pyx_ptype_10sparse_lib_7solvers_11suitesparse_7umfpack_UmfpackSolver);
 

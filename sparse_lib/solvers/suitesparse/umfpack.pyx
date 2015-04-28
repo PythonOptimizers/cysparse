@@ -88,7 +88,7 @@ cdef extern from "umfpack.h":
         UMFPACK_Uat
 
     ####################################################################################################################
-    # DI VERSION:  real double precision, int integers.
+    # DI VERSION:  real double precision, int integers
     ####################################################################################################################
     int umfpack_di_symbolic(int n_row, int n_col,
                             int * Ap, int * Ai, double * Ax,
@@ -120,6 +120,38 @@ cdef extern from "umfpack.h":
     void umfpack_di_report_symbolic(void *, double *)
     void umfpack_di_report_numeric(void *, double *)
 
+    ####################################################################################################################
+    # ZI VERSION:   complex double precision, int integers
+    ####################################################################################################################
+    int umfpack_zi_symbolic(int n_row, int n_col,
+                            int * Ap, int * Ai, double * Ax, double * Az,
+                            void ** symbolic,
+                            double * control, double * info)
+
+    int umfpack_zi_numeric(int * Ap, int * Ai, double * Ax, double * Az,
+                           void * symbolic,
+                           void ** numeric,
+                           double * control, double * info)
+
+    void umfpack_zi_free_symbolic(void ** symbolic)
+    void umfpack_zi_free_numeric(void ** numeric)
+    void umfpack_zi_defaults(double * control)
+
+    int umfpack_zi_solve(int umfpack_sys, int * Ap, int * Ai, double * Ax,  double * Az, double * x, double * b, void * numeric, double * control, double * info)
+
+    int umfpack_zi_get_lunz(int * lnz, int * unz, int * n_row, int * n_col,
+                            int * nz_udiag, void * numeric)
+
+    int umfpack_zi_get_numeric(int * Lp, int * Lj, double * Lx,
+                               int * Up, int * Ui, double * Ux,
+                               int * P, int * Q, double * Dx,
+                               int * do_recip, double * Rs,
+                               void * numeric)
+
+    void umfpack_zi_report_control(double *)
+    void umfpack_zi_report_info(double *, double *)
+    void umfpack_zi_report_symbolic(void *, double *)
+    void umfpack_zi_report_numeric(void *, double *)
 
 def umfpack_version():
     version_string = "UMFPACK version %s" % UMFPACK_VERSION
@@ -205,12 +237,31 @@ cdef class UmfpackSolver:
                                      UMFPACK_SUBSUB_VERSION,
                                      UMFPACK_DATE)
 
+
     def __cinit__(self, LLSparseMatrix A):
+        """
+        {{COMPLEX: YES}}
+        {{GENERIC: YES}}
+        """
         self.A = A
         self.nrow = A.nrow
         self.ncol = A.ncol
 
         assert self.nrow == self.ncol, "Only square matrices are handled in UMFPACK"
+        assert FLOAT_T == FLOAT64_T, "UMFPACK only deals with double precision (FLOAT64)"
+
+        self.is_complex = A.is_complex
+
+        # fix UMFPACK family
+        if self.is_complex:
+            self.family = 'z'
+        else:
+            self.family = 'd'
+
+        if INT_T == INT64_T:
+            self.family += 'l'
+        else:
+            self.family += 'i'
 
         # TODO: implement both cases!
         if INT_T == INT64_T:
@@ -232,17 +283,33 @@ cdef class UmfpackSolver:
     # FREE MEMORY
     ####################################################################################################################
     def __dealloc__(self):
+        """
+        {{COMPLEX: YES}}
+        {{GENERIC: YES}}
+        """
         self.free()
 
     def free_symbolic(self):
+        """
+        {{COMPLEX: YES}}
+        {{GENERIC: YES}}
+        """
         if self.symbolic_computed:
             umfpack_di_free_symbolic(&self.symbolic)
 
     def free_numeric(self):
+        """
+        {{COMPLEX: YES}}
+        {{GENERIC: YES}}
+        """
         if self.numeric_computed:
             umfpack_di_free_numeric(&self.numeric)
 
     def free(self):
+        """
+        {{COMPLEX: YES}}
+        {{GENERIC: YES}}
+        """
         self.free_numeric()
         self.free_symbolic()
 
@@ -250,6 +317,10 @@ cdef class UmfpackSolver:
     # PRIMARY ROUTINES
     ####################################################################################################################
     cdef int _create_symbolic(self):
+        """
+        {{COMPLEX: NO}}
+        {{GENERIC: NO}}
+        """
 
         if self.symbolic_computed:
             self.free_symbolic()
@@ -257,9 +328,16 @@ cdef class UmfpackSolver:
         cdef int * ind = <int *> self.csc_mat.ind
         cdef int * row = <int *> self.csc_mat.row
         cdef double * val = <double *> self.csc_mat.val
+        cdef double * ival
 
+        cdef int status
 
-        cdef int status= umfpack_di_symbolic(self.nrow, self.ncol, ind, row, val, &self.symbolic, self.control, self.info)
+        if self.is_complex:
+            # TODO: add complex type for CSC
+            #ival = <double *> self.csc_mat.ival
+            status= umfpack_zi_symbolic(self.nrow, self.ncol, ind, row, val, ival, &self.symbolic, self.control, self.info)
+        else:
+            status= umfpack_di_symbolic(self.nrow, self.ncol, ind, row, val, &self.symbolic, self.control, self.info)
 
         self.symbolic_computed = True
 
@@ -267,6 +345,10 @@ cdef class UmfpackSolver:
 
 
     def create_symbolic(self, recompute=False):
+        """
+        {{COMPLEX: NO}}
+        {{GENERIC: NO}}
+        """
         if not recompute and self.symbolic_computed:
             return
 
@@ -277,6 +359,10 @@ cdef class UmfpackSolver:
             test_umfpack_result(status, "create_symbolic()")
 
     cdef int _create_numeric(self):
+        """
+        {{COMPLEX: NO}}
+        {{GENERIC: NO}}
+        """
 
         if self.numeric_computed:
             self.free_numeric()
@@ -295,6 +381,10 @@ cdef class UmfpackSolver:
         return status
 
     def create_numeric(self, recompute=False):
+        """
+        {{COMPLEX: NO}}
+        {{GENERIC: NO}}
+        """
 
         if not recompute and self.numeric_computed:
             return
@@ -350,6 +440,9 @@ cdef class UmfpackSolver:
             The opaque objects ``symbolic`` and ``numeric`` are automatically created if necessary.
 
             You can ask for a report of what happened by calling :meth:`report_info()`.
+
+        {{COMPLEX: NO}}
+        {{GENERIC: NO}}
         """
         #TODO: add other umfpack_sys arguments to the docstring.
         # test argument b
@@ -403,6 +496,9 @@ cdef class UmfpackSolver:
 
         Raises:
             RuntimeError: When ``UMFPACK`` return status is not ``UMFPACK_OK`` and is an error.
+
+        {{COMPLEX: NO}}
+        {{GENERIC: NO}}
         """
         self.create_numeric()
 
@@ -443,6 +539,9 @@ cdef class UmfpackSolver:
             L and U are returned as CSRSparseMatrix and CSCSparseMatrix sparse matrices respectively.
             P, Q and R are returned as NumPy arrays.
 
+
+        {{COMPLEX: NO}}
+        {{GENERIC: NO}}
         """
         # TODO: use properties?? we can only get matrices, not set them...
         # TODO: implement the use of L=True, U=True, P=True, Q=True, D=True, R=True
@@ -533,6 +632,10 @@ cdef class UmfpackSolver:
 
         Args:
             level (int): Verbosity level (default: 1).
+
+
+        {{COMPLEX: YES}}
+        {{GENERIC: YES}}
         """
         self.control[UMFPACK_PRL] = level
 
@@ -542,12 +645,18 @@ cdef class UmfpackSolver:
 
         Returns:
             verbosity_level (int): The verbosity level set.
+
+        {{COMPLEX: YES}}
+        {{GENERIC: YES}}
         """
         return self.control[UMFPACK_PRL]
 
     def report_control(self):
         """
         Print control values.
+
+        {{COMPLEX: NO}}
+        {{GENERIC: YES}}
         """
         umfpack_di_report_control(self.control)
 
@@ -556,12 +665,18 @@ cdef class UmfpackSolver:
          Print all status information.
 
          Use **after** calling :meth:`create_symbolic()`, :meth:`create_numeric()`, :meth:`factorize()` or :meth:`solve()`.
+
+         {{COMPLEX: NO}}
+         {{GENERIC: YES}}
          """
          umfpack_di_report_info(self.control, self.info)
 
     def report_symbolic(self):
          """
          Print information about the opaque ``symbolic`` object.
+
+         {{COMPLEX: NO}}
+         {{GENERIC: YES}}
          """
          if not self.symbolic_computed:
              print "No opaque symbolic object has been computed"
@@ -572,6 +687,9 @@ cdef class UmfpackSolver:
     def report_numeric(self):
          """
          Print information about the opaque ``numeric`` object.
+
+         {{COMPLEX: NO}}
+         {{GENERIC: YES}}
          """
          umfpack_di_report_numeric(self.numeric, self.control)
 
