@@ -29,3 +29,5 @@ A = matrix.to_csr()
 
 print A
 A.print_to(sys.stdout)
+
+matrix.save_to("togolo.mtx", "MM")

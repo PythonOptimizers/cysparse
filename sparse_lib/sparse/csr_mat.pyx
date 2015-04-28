@@ -35,7 +35,6 @@ cdef _sort(INT_t * a, INT_t start, INT_t end):
     # TODO: put this is a new file and test
     cdef INT_t i, j, value;
 
-    print ("start= %d, end = %d" % (start, end))
     i = start
 
     while i < end:

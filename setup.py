@@ -77,6 +77,7 @@ sparse_ext = [
   Extension(name="sparse_lib.sparse.IO.mm",
             sources=["sparse_lib/sparse/IO/mm_read_file.pxi",
                      "sparse_lib/sparse/IO/mm_read_file2.pxi",
+                     "sparse_lib/sparse/IO/mm_write_file.pxi",
                      "sparse_lib/sparse/IO/mm.pxd",
                      "sparse_lib/sparse/IO/mm.pyx"], **sparse_ext_params),
   #Extension("sparse.ll_vec", ["sparse_lib/sparse/ll_vec.pyx"], **sparse_ext_params)

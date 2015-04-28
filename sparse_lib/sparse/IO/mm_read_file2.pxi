@@ -53,10 +53,12 @@ cdef LLSparseMatrix MakeLLSparseMatrixFromMMFile2(str mm_filename, bint store_ze
         if token not in sparse_dense_list:
             raise IOError('Matrix format not recognized as Matrix Market format: third token in the Matrix Market banner is not in "%s"' % sparse_dense_list)
 
+        # TODO: test when matrix is NOT sparse??? what to do?
         if token == MM_ARRAY_STR:
             sparse = False
         else:
             sparse = True
+
 
         # DATA TYPE
         token = token_list[3].lower()
