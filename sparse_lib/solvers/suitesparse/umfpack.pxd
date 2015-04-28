@@ -1,5 +1,8 @@
+from sparse_lib.cysparse_types cimport *
+
 from sparse_lib.sparse.ll_mat cimport LLSparseMatrix
 from sparse_lib.sparse.csc_mat cimport CSCSparseMatrix
+
 
 cdef extern from "umfpack.h":
     cdef enum:
@@ -11,8 +14,8 @@ cdef class UmfpackSolver:
     cdef:
         LLSparseMatrix A
 
-        int nrow
-        int ncol
+        SIZE_t nrow
+        SIZE_t ncol
 
         # Matrix A in CSC format
         #double * val

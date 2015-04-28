@@ -1,7 +1,8 @@
+from sparse_lib.cysparse_types cimport *
+
 from sparse_lib.sparse.ll_mat cimport LLSparseMatrix
 from sparse_lib.sparse.csr_mat cimport CSRSparseMatrix, MakeCSRSparseMatrix
 from sparse_lib.sparse.csc_mat cimport CSCSparseMatrix, MakeCSCSparseMatrix
-
 
 from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
 
@@ -86,7 +87,9 @@ cdef extern from "umfpack.h":
         UMFPACK_Ut
         UMFPACK_Uat
 
-
+    ####################################################################################################################
+    # DI VERSION:  real double precision, int integers.
+    ####################################################################################################################
     int umfpack_di_symbolic(int n_row, int n_col,
                             int * Ap, int * Ai, double * Ax,
                             void ** symbolic,
@@ -208,6 +211,13 @@ cdef class UmfpackSolver:
         self.ncol = A.ncol
 
         assert self.nrow == self.ncol, "Only square matrices are handled in UMFPACK"
+
+        # TODO: implement both cases!
+        if INT_T == INT64_T:
+            raise NotImplemented("UMFPACK library not (yet) interfaced with INT64 (long)")
+
+        if A.is_complex:
+            raise NotImplemented("Complex version of UMFPACK not (yet) implemented")
 
         self.csc_mat  = self.A.to_csc()
 
