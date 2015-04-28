@@ -365,7 +365,7 @@ cdef class UmfpackSolver:
         cdef int * row = <int *> self.csc_mat.row
         cdef double * val = <double *> self.csc_mat.val
 
-        cdef int status =  umfpack_di_solve(UMFPACK_SYS_DICT[umfpack_sys], ind, row, val, <double*> sol.data, <double *> b.data, self.numeric, self.control, self.info)
+        cdef int status =  umfpack_di_solve(UMFPACK_SYS_DICT[umfpack_sys], ind, row, val, <double*> cnp.PyArray_DATA(sol), <double *> cnp.PyArray_DATA(b), self.numeric, self.control, self.info)
 
         if status != UMFPACK_OK:
             test_umfpack_result(status, "solve()")
@@ -496,8 +496,8 @@ cdef class UmfpackSolver:
 
         cdef int status =umfpack_di_get_numeric(Lp, Lj, Lx,
                                Up, Ui, Ux,
-                               <int *> P.data, <int *> Q.data, <double *> D.data,
-                               &_do_recip, <double *> R.data,
+                               <int *> cnp.PyArray_DATA(P), <int *> cnp.PyArray_DATA(Q), <double *> cnp.PyArray_DATA(D),
+                               &_do_recip, <double *> cnp.PyArray_DATA(R),
                                self.numeric)
 
         if status != UMFPACK_OK:

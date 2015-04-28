@@ -63,7 +63,13 @@ sparse_ext_params = ext_params.copy()
 
 sparse_ext = [
   Extension(name="sparse_lib.sparse.ll_mat",
-            sources=["sparse_lib/sparse/ll_mat.pxd", "sparse_lib/sparse/ll_mat.pyx"], **sparse_ext_params),
+            sources=["sparse_lib/sparse/ll_mat_details/ll_mat_multiplication.pxi",
+                     "sparse_lib/sparse/ll_mat_details/ll_mat_assignment.pxi",
+                     "sparse_lib/sparse/ll_mat_details/ll_mat_real_assignment_kernels.pxi",
+                     "sparse_lib/sparse/ll_mat_details/ll_mat_real_multiplication_kernels.pxi",
+                     "sparse_lib/sparse/ll_mat_details/ll_mat_transpose.pxi",
+                     "sparse_lib/sparse/ll_mat.pxd",
+                     "sparse_lib/sparse/ll_mat.pyx"], **sparse_ext_params),
   Extension(name="sparse_lib.sparse.sparse_mat",
             sources=["sparse_lib/sparse/sparse_mat.pxd", "sparse_lib/sparse/sparse_mat.pyx"], **sparse_ext_params),
   Extension(name="sparse_lib.sparse.csr_mat",

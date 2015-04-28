@@ -1,5 +1,4 @@
 
-
 ########################################################################################################################
 # Multiplication functions
 ########################################################################################################################
@@ -96,11 +95,13 @@ cdef cnp.ndarray[cnp.double_t, ndim=1] multiply_ll_mat_with_numpy_vector(LLSpars
         raise IndexError("Dimensions must agree ([%d,%d] * [%d, %d])" % (A_nrow, A_ncol, b.size, 1))
 
     # direct access to vector b
-    cdef FLOAT_t * b_data = <FLOAT_t *> b.data
+    #cdef FLOAT_t * b_data = <FLOAT_t *> b.data
+    cdef FLOAT_t * b_data = <FLOAT_t *> cnp.PyArray_DATA(b)
 
     # array c = A * b
     cdef cnp.ndarray[cnp.double_t, ndim=1] c = np.empty(A_nrow, dtype=np.float64)
-    cdef FLOAT_t * c_data = <FLOAT_t *> c.data
+    #cdef FLOAT_t * c_data = <FLOAT_t *> c.data
+    cdef FLOAT_t * c_data = <FLOAT_t *> cnp.PyArray_DATA(c)
 
     cdef:
         INT_t i, j
@@ -157,11 +158,16 @@ cdef cnp.ndarray[cnp.double_t, ndim=1, mode='c'] multiply_ll_mat_with_numpy_vect
         raise IndexError("Dimensions must agree ([%d,%d] * [%d, %d])" % (A_nrow, A_ncol, b.size, 1))
 
     # direct access to vector b
-    cdef FLOAT_t * b_data = <FLOAT_t *> b.data
+    #cdef FLOAT_t * b_data = <FLOAT_t *> b.data
+
+    cdef FLOAT_t * b_data = <FLOAT_t *> cnp.PyArray_DATA(b)
+
 
     # array c = A * b
     cdef cnp.ndarray[cnp.double_t, ndim=1] c = np.empty(A_nrow, dtype=np.float64)
-    cdef FLOAT_t * c_data = <FLOAT_t *> c.data
+    #cdef FLOAT_t * c_data = <FLOAT_t *> c.data
+    cdef FLOAT_t * c_data = <FLOAT_t *> cnp.PyArray_DATA(c)
+
 
     # test if b vector is C-contiguous or not
     if cnp.PyArray_ISCONTIGUOUS(b):

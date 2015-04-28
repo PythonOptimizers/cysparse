@@ -4169,14 +4169,14 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
  *         cdef int * row = <int *> self.csc_mat.row
  *         cdef double * val = <double *> self.csc_mat.val             # <<<<<<<<<<<<<<
  * 
- *         cdef int status =  umfpack_di_solve(UMFPACK_SYS_DICT[umfpack_sys], ind, row, val, <double*> sol.data, <double *> b.data, self.numeric, self.control, self.info)
+ *         cdef int status =  umfpack_di_solve(UMFPACK_SYS_DICT[umfpack_sys], ind, row, val, <double*> cnp.PyArray_DATA(sol), <double *> cnp.PyArray_DATA(b), self.numeric, self.control, self.info)
  */
   __pyx_v_val = ((double *)__pyx_v_self->csc_mat->val);
 
   /* "sparse_lib/solvers/suitesparse/umfpack.pyx":368
  *         cdef double * val = <double *> self.csc_mat.val
  * 
- *         cdef int status =  umfpack_di_solve(UMFPACK_SYS_DICT[umfpack_sys], ind, row, val, <double*> sol.data, <double *> b.data, self.numeric, self.control, self.info)             # <<<<<<<<<<<<<<
+ *         cdef int status =  umfpack_di_solve(UMFPACK_SYS_DICT[umfpack_sys], ind, row, val, <double*> cnp.PyArray_DATA(sol), <double *> cnp.PyArray_DATA(b), self.numeric, self.control, self.info)             # <<<<<<<<<<<<<<
  * 
  *         if status != UMFPACK_OK:
  */
@@ -4187,10 +4187,10 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
   __pyx_t_14 = __Pyx_PyInt_As_int(__pyx_t_6); if (unlikely((__pyx_t_14 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 368; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_v_status = umfpack_di_solve(__pyx_t_14, __pyx_v_ind, __pyx_v_row, __pyx_v_val, ((double *)__pyx_v_sol->data), ((double *)__pyx_v_b->data), __pyx_v_self->numeric, __pyx_v_self->control, __pyx_v_self->info);
+  __pyx_v_status = umfpack_di_solve(__pyx_t_14, __pyx_v_ind, __pyx_v_row, __pyx_v_val, ((double *)PyArray_DATA(((PyArrayObject *)__pyx_v_sol))), ((double *)PyArray_DATA(((PyArrayObject *)__pyx_v_b))), __pyx_v_self->numeric, __pyx_v_self->control, __pyx_v_self->info);
 
   /* "sparse_lib/solvers/suitesparse/umfpack.pyx":370
- *         cdef int status =  umfpack_di_solve(UMFPACK_SYS_DICT[umfpack_sys], ind, row, val, <double*> sol.data, <double *> b.data, self.numeric, self.control, self.info)
+ *         cdef int status =  umfpack_di_solve(UMFPACK_SYS_DICT[umfpack_sys], ind, row, val, <double*> cnp.PyArray_DATA(sol), <double *> cnp.PyArray_DATA(b), self.numeric, self.control, self.info)
  * 
  *         if status != UMFPACK_OK:             # <<<<<<<<<<<<<<
  *             test_umfpack_result(status, "solve()")
@@ -5167,9 +5167,9 @@ static PyObject *__pyx_pf_10sparse_lib_7solvers_11suitesparse_7umfpack_13Umfpack
  * 
  *         cdef int status =umfpack_di_get_numeric(Lp, Lj, Lx,             # <<<<<<<<<<<<<<
  *                                Up, Ui, Ux,
- *                                <int *> P.data, <int *> Q.data, <double *> D.data,
+ *                                <int *> cnp.PyArray_DATA(P), <int *> cnp.PyArray_DATA(Q), <double *> cnp.PyArray_DATA(D),
  */
-  __pyx_v_status = umfpack_di_get_numeric(__pyx_v_Lp, __pyx_v_Lj, __pyx_v_Lx, __pyx_v_Up, __pyx_v_Ui, __pyx_v_Ux, ((int *)__pyx_v_P->data), ((int *)__pyx_v_Q->data), ((double *)__pyx_v_D->data), (&__pyx_v__do_recip), ((double *)__pyx_v_R->data), __pyx_v_self->numeric);
+  __pyx_v_status = umfpack_di_get_numeric(__pyx_v_Lp, __pyx_v_Lj, __pyx_v_Lx, __pyx_v_Up, __pyx_v_Ui, __pyx_v_Ux, ((int *)PyArray_DATA(((PyArrayObject *)__pyx_v_P))), ((int *)PyArray_DATA(((PyArrayObject *)__pyx_v_Q))), ((double *)PyArray_DATA(((PyArrayObject *)__pyx_v_D))), (&__pyx_v__do_recip), ((double *)PyArray_DATA(((PyArrayObject *)__pyx_v_R))), __pyx_v_self->numeric);
 
   /* "sparse_lib/solvers/suitesparse/umfpack.pyx":503
  *                                self.numeric)
