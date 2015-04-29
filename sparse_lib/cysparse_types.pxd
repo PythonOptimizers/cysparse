@@ -27,6 +27,7 @@ DEF USE_DOUBLE_PRECISION = 1
 # COMPLEX64_t
 # COMPLEX128_t
 #
+# DO NOT CHANGE THIS
 #################################################################################################
 
 cdef enum:
@@ -66,6 +67,8 @@ ctypedef complex128_t COMPLEX128_t
 # INT_t: integers in general
 # FLOAT_t: real fixed precision
 # COMPLEX_t: complex fixed precision
+#
+# CHANGE THIS IF YOU REALLY KNOW WHAT YOU ARE DOING
 #
 #################################################################################################
 IF USE_HUGE_MATRIX == 1:

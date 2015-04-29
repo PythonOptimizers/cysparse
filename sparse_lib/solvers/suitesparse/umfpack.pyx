@@ -11,9 +11,13 @@ cimport numpy as cnp
 
 cnp.import_array()
 
+# test if we can use UMFPACK
+assert FLOAT_T == FLOAT64_T, "UMFPACK only deals with double precision (FLOAT64)"
+
 cdef extern from "umfpack.h":
 
     char * UMFPACK_DATE
+    ctypedef long SuiteSparse_long
 
     cdef enum:
         UMFPACK_CONTROL, UMFPACK_INFO
@@ -121,6 +125,39 @@ cdef extern from "umfpack.h":
     void umfpack_di_report_numeric(void *, double *)
 
     ####################################################################################################################
+    # DL VERSION:   real double precision, SuiteSparse long integers
+    ####################################################################################################################
+    SuiteSparse_long umfpack_dl_symbolic(SuiteSparse_long n_row, SuiteSparse_long n_col,
+                            SuiteSparse_long * Ap, SuiteSparse_long * Ai, double * Ax,
+                            void ** symbolic,
+                            double * control, double * info)
+
+    SuiteSparse_long umfpack_dl_numeric(SuiteSparse_long * Ap, SuiteSparse_long * Ai, double * Ax,
+                           void * symbolic,
+                           void ** numeric,
+                           double * control, double * info)
+
+    void umfpack_dl_free_symbolic(void ** symbolic)
+    void umfpack_dl_free_numeric(void ** numeric)
+    void umfpack_dl_defaults(double * control)
+
+    SuiteSparse_long umfpack_dl_solve(SuiteSparse_long umfpack_sys, SuiteSparse_long * Ap, SuiteSparse_long * Ai, double * Ax, double * x, double * b, void * numeric, double * control, double * info)
+
+    SuiteSparse_long umfpack_dl_get_lunz(SuiteSparse_long * lnz, SuiteSparse_long * unz, SuiteSparse_long * n_row, SuiteSparse_long * n_col,
+                            SuiteSparse_long * nz_udiag, void * numeric)
+
+    SuiteSparse_long umfpack_dl_get_numeric(SuiteSparse_long * Lp, SuiteSparse_long * Lj, double * Lx,
+                               SuiteSparse_long * Up, SuiteSparse_long * Ui, double * Ux,
+                               SuiteSparse_long * P, SuiteSparse_long * Q, double * Dx,
+                               SuiteSparse_long * do_recip, double * Rs,
+                               void * numeric)
+
+    void umfpack_dl_report_control(double *)
+    void umfpack_dl_report_info(double *, double *)
+    void umfpack_dl_report_symbolic(void *, double *)
+    void umfpack_dl_report_numeric(void *, double *)
+
+    ####################################################################################################################
     # ZI VERSION:   complex double precision, int integers
     ####################################################################################################################
     int umfpack_zi_symbolic(int n_row, int n_col,
@@ -152,6 +189,39 @@ cdef extern from "umfpack.h":
     void umfpack_zi_report_info(double *, double *)
     void umfpack_zi_report_symbolic(void *, double *)
     void umfpack_zi_report_numeric(void *, double *)
+
+    ####################################################################################################################
+    # ZL VERSION:   complex double precision, SuiteSparse long integers
+    ####################################################################################################################
+    SuiteSparse_long umfpack_zl_symbolic(SuiteSparse_long n_row, SuiteSparse_long n_col,
+                            SuiteSparse_long * Ap, SuiteSparse_long * Ai, double * Ax, double * Az,
+                            void ** symbolic,
+                            double * control, double * info)
+
+    SuiteSparse_long umfpack_zl_numeric(SuiteSparse_long * Ap, SuiteSparse_long * Ai, double * Ax, double * Az,
+                           void * symbolic,
+                           void ** numeric,
+                           double * control, double * info)
+
+    void umfpack_zl_free_symbolic(void ** symbolic)
+    void umfpack_zl_free_numeric(void ** numeric)
+    void umfpack_zl_defaults(double * control)
+
+    SuiteSparse_long umfpack_zl_solve(SuiteSparse_long umfpack_sys, SuiteSparse_long * Ap, SuiteSparse_long * Ai, double * Ax,  double * Az, double * x, double * b, void * numeric, double * control, double * info)
+
+    SuiteSparse_long umfpack_zl_get_lunz(SuiteSparse_long * lnz, SuiteSparse_long * unz, SuiteSparse_long * n_row, SuiteSparse_long * n_col,
+                            SuiteSparse_long * nz_udiag, void * numeric)
+
+    SuiteSparse_long umfpack_zl_get_numeric(SuiteSparse_long * Lp, SuiteSparse_long * Lj, double * Lx,
+                               SuiteSparse_long * Up, SuiteSparse_long * Ui, double * Ux,
+                               SuiteSparse_long * P, SuiteSparse_long * Q, double * Dx,
+                               SuiteSparse_long * do_recip, double * Rs,
+                               void * numeric)
+
+    void umfpack_zl_report_control(double *)
+    void umfpack_zl_report_info(double *, double *)
+    void umfpack_zl_report_symbolic(void *, double *)
+    void umfpack_zl_report_numeric(void *, double *)
 
 def umfpack_version():
     version_string = "UMFPACK version %s" % UMFPACK_VERSION
@@ -248,11 +318,10 @@ cdef class UmfpackSolver:
         self.ncol = A.ncol
 
         assert self.nrow == self.ncol, "Only square matrices are handled in UMFPACK"
-        assert FLOAT_T == FLOAT64_T, "UMFPACK only deals with double precision (FLOAT64)"
 
         self.is_complex = A.is_complex
 
-        # fix UMFPACK family
+        # fix UMFPACK family: 'di', 'dl', 'zi' or 'zl'
         if self.is_complex:
             self.family = 'z'
         else:
@@ -260,8 +329,10 @@ cdef class UmfpackSolver:
 
         if INT_T == INT64_T:
             self.family += 'l'
-        else:
+        elif INT_T == INT32_T:
             self.family += 'i'
+        else:
+            raise TypeError("UMFPACK only works with INT32 or INT64 for matrix indices")
 
         # TODO: implement both cases!
         if INT_T == INT64_T:
@@ -325,8 +396,8 @@ cdef class UmfpackSolver:
         if self.symbolic_computed:
             self.free_symbolic()
 
-        cdef int * ind = <int *> self.csc_mat.ind
-        cdef int * row = <int *> self.csc_mat.row
+        cdef INT_t * ind = <INT_t *> self.csc_mat.ind
+        cdef INT_t * row = <INT_t *> self.csc_mat.row
         cdef double * val = <double *> self.csc_mat.val
         cdef double * ival
 
@@ -655,41 +726,77 @@ cdef class UmfpackSolver:
         """
         Print control values.
 
-        {{COMPLEX: NO}}
+        {{COMPLEX: YES}}
         {{GENERIC: YES}}
         """
-        umfpack_di_report_control(self.control)
+        if self.is_complex:
+            if INT_T == INT64_T:
+                umfpack_zl_report_control(self.control)
+            else:
+                umfpack_zi_report_control(self.control)
+        else:
+            if INT_T == INT64_T:
+                umfpack_dl_report_control(self.control)
+            else:
+                umfpack_di_report_control(self.control)
 
     def report_info(self):
-         """
-         Print all status information.
+        """
+        Print all status information.
 
-         Use **after** calling :meth:`create_symbolic()`, :meth:`create_numeric()`, :meth:`factorize()` or :meth:`solve()`.
+        Use **after** calling :meth:`create_symbolic()`, :meth:`create_numeric()`, :meth:`factorize()` or :meth:`solve()`.
 
-         {{COMPLEX: NO}}
-         {{GENERIC: YES}}
-         """
-         umfpack_di_report_info(self.control, self.info)
+        {{COMPLEX: YES}}
+        {{GENERIC: YES}}
+        """
+        if self.is_complex:
+            if INT_T == INT64_T:
+                umfpack_zl_report_info(self.control, self.info)
+            else:
+                umfpack_zi_report_info(self.control, self.info)
+        else:
+            if INT_T == INT64_T:
+                umfpack_dl_report_info(self.control, self.info)
+            else:
+                umfpack_di_report_info(self.control, self.info)
 
     def report_symbolic(self):
-         """
-         Print information about the opaque ``symbolic`` object.
+        """
+        Print information about the opaque ``symbolic`` object.
 
-         {{COMPLEX: NO}}
-         {{GENERIC: YES}}
-         """
-         if not self.symbolic_computed:
-             print "No opaque symbolic object has been computed"
-             return
+        {{COMPLEX: YES}}
+        {{GENERIC: YES}}
+        """
+        if not self.symbolic_computed:
+            print "No opaque symbolic object has been computed"
+            return
 
-         umfpack_di_report_symbolic(self.symbolic, self.control)
+        if self.is_complex:
+            if INT_T == INT64_T:
+                umfpack_zl_report_symbolic(self.symbolic, self.control)
+            else:
+                umfpack_zi_report_symbolic(self.symbolic, self.control)
+        else:
+            if INT_T == INT64_T:
+                umfpack_dl_report_symbolic(self.symbolic, self.control)
+            else:
+                umfpack_di_report_symbolic(self.symbolic, self.control)
 
     def report_numeric(self):
-         """
-         Print information about the opaque ``numeric`` object.
+        """
+        Print information about the opaque ``numeric`` object.
 
-         {{COMPLEX: NO}}
-         {{GENERIC: YES}}
-         """
-         umfpack_di_report_numeric(self.numeric, self.control)
+        {{COMPLEX: YES}}
+        {{GENERIC: YES}}
+        """
+        if self.is_complex:
+            if INT_T == INT64_T:
+                umfpack_zl_report_numeric(self.numeric, self.control)
+            else:
+                umfpack_zi_report_numeric(self.numeric, self.control)
+        else:
+            if INT_T == INT64_T:
+                umfpack_dl_report_numeric(self.numeric, self.control)
+            else:
+                umfpack_di_report_numeric(self.numeric, self.control)
 
