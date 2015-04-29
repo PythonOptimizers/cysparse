@@ -169,7 +169,7 @@ cdef INT_t * create_c_array_indices_from_python_object(INT_t max_length, PyObjec
         #if py_array_descr.type_num != np.int:
         #    raise ValueError("Index object must contain integers")
 
-        # we cannot copy the C-array directly as we must test each element
+        # we cannot matrix_copy the C-array directly as we must test each element
         for i from 0 <= i < length:
             index = <INT_t> array_data[i]
             if not (0 <= index < max_length):

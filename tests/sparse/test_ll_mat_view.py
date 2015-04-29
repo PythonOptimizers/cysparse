@@ -184,7 +184,7 @@ class LLSparseMatrixViewCreateTestCase(LLSparseMatrixViewBaseTestCase):
 ########################################################################################################################
 class LLSparseMatrixViewCopyTestCase(LLSparseMatrixViewBaseTestCase):
     """
-    We test ``LLSparseMatrixView`` ``copy()`` method. This method returns a corresponding :class:`LLSparseMatrix`.
+    We test ``LLSparseMatrixView`` ``matrix_copy()`` method. This method returns a corresponding :class:`LLSparseMatrix`.
     """
     def setUp(self):
         super(LLSparseMatrixViewCopyTestCase, self).setUp()

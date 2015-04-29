@@ -29,7 +29,8 @@ cdef extern from "Python.h":
 include "indices/object_index.pxi"
 
 cdef class LLSparseMatrixView:
-    def __cinit__(self, LLSparseMatrix A, INT_t nrow, INT_t ncol):
+    def __cinit__(self,control_object, LLSparseMatrix A, INT_t nrow, INT_t ncol):
+        assert control_object == unexposed_value, "LLSparseMatrixView must be instantiated with a factory method"
         self.nrow = nrow  # number of rows of the view
         self.ncol = ncol  # number of columns of the view
 
@@ -147,7 +148,7 @@ cdef class LLSparseMatrixView:
 
     ####################################################################################################################
     #                                            *** COPY ***
-    def copy(self, compress=True):
+    def matrix_copy(self, compress=True):
         """
         Create a new :class:`LLSparseMatrix` from the view and return it.
 
@@ -155,7 +156,7 @@ cdef class LLSparseMatrixView:
             compress: If ``True``, we use the minimum size for the matrix.
 
         Note:
-            It doesn't make sense to construct a copy of a view as the view cannot be altered. It's only the viewed
+            It doesn't make sense to construct a matrix_copy of a view as the view cannot be altered. It's only the viewed
             matrix that is altered, **not** a view to it. So, in a sense, a `LLSparseMatrixView` object is immutable.
 
         """
@@ -191,6 +192,13 @@ cdef class LLSparseMatrixView:
 
         return A_copy
 
+    def copy(self):
+        """
+        Create a new :class:`LLSparseMatrixView` from this object.
+
+        """
+        raise NotImplemented("copy() method not (yet) implemented")
+
     ####################################################################################################################
     #                                            *** elements ***
     def get_matrix(self):
@@ -205,14 +213,14 @@ cdef class LLSparseMatrixView:
     def __mul__(self, B):
         # TODO: optimize all this: this implementation is horrible!
         # TODO: find common code to refactor to apply the DRY principle
-        return self.copy() * B  # <-- Both (A either LLSparseMatrix or LLSparseMatrixView) A * B should be implemented with the same common function
+        return self.matrix_copy() * B  # <-- Both (A either LLSparseMatrix or LLSparseMatrixView) A * B should be implemented with the same common function
 
         ## CASES
         #if isinstance(B, LLSparseMatrix):
-        #    return self.copy() * B
+        #    return self.matrix_copy() * B
 
         #elif isinstance(B, np.ndarray):
-        #    return self.copy() * B
+        #    return self.matrix_copy() * B
 
     def count_nnz(self):
         if not self.__counted_nnz:
@@ -295,7 +303,7 @@ cdef LLSparseMatrixView MakeLLSparseMatrixView(LLSparseMatrix A, PyObject* obj1,
     row_indices = create_c_array_indices_from_python_object(A_nrow, obj1, &nrow)
     col_indices = create_c_array_indices_from_python_object(A_ncol, obj2, &ncol)
 
-    cdef LLSparseMatrixView view = LLSparseMatrixView(A, nrow, ncol)
+    cdef LLSparseMatrixView view = LLSparseMatrixView(unexposed_value, A, nrow, ncol)
     view.row_indices = row_indices
     view.col_indices = col_indices
 
@@ -350,7 +358,7 @@ cdef LLSparseMatrixView MakeLLSparseMatrixViewFromView(LLSparseMatrixView A, PyO
     row_indices = create_c_array_indices_from_python_object(A_nrow, obj1, &nrow)
     col_indices = create_c_array_indices_from_python_object(A_ncol, obj2, &ncol)
 
-    cdef LLSparseMatrixView view = LLSparseMatrixView(A.A, nrow, ncol)
+    cdef LLSparseMatrixView view = LLSparseMatrixView(unexposed_value, A.A, nrow, ncol)
 
     # construct arrays with adapted indices
     cdef INT_t * real_row_indices
