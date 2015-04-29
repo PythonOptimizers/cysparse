@@ -1,4 +1,4 @@
-.. ll_mat:
+.. _ll_mat:
 
 ==========================================================
 :class:`LLSparseMatrix` and :class:`LLSparseMatrixView`
