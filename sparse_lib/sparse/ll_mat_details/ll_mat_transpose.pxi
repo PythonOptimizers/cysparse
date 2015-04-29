@@ -27,7 +27,7 @@ cdef LLSparseMatrix transposed_ll_mat(LLSparseMatrix A):
         INT_t i, k
         FLOAT_t val
 
-    cdef LLSparseMatrix transposed_A = LLSparseMatrix(nrow =At_nrow, ncol=At_ncol, size_hint=At_nalloc)
+    cdef LLSparseMatrix transposed_A = MakeLLSparseMatrix(nrow =At_nrow, ncol=At_ncol, size_hint=At_nalloc)
 
     for i from 0 <= i < A_nrow:
         k = A.root[i]

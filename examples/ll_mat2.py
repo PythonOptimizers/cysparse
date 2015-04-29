@@ -86,15 +86,6 @@ csr_mat.set_col(19, 32)
 #csr_mat.set_col(3, 32)
 #csr_mat.set_col(3, 32)
 
-
-
-
-
-
-status_ok, error_msg = csr_mat.is_well_constructed()
-if status_ok:
-    print "OK"
-
 if csr_mat.are_column_indices_sorted():
     print "column indices are sorted!!!"
 

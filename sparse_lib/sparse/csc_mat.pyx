@@ -7,7 +7,7 @@ from __future__ import print_function
 
 from sparse_lib.cysparse_types cimport *
 
-from sparse_lib.sparse.sparse_mat cimport ImmutableSparseMatrix
+from sparse_lib.sparse.sparse_mat cimport ImmutableSparseMatrix, unexposed_value
 
 
 from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
@@ -26,13 +26,13 @@ cdef class CSCSparseMatrix(ImmutableSparseMatrix):
     """
 
 
-    def __cinit__(self, INT_t nrow, INT_t ncol, INT_t nnz):
-        self.__status_ok = False
-
-
+    def __cinit__(self,  **kwargs):
+        self.type_name = "CSCSparseMatrix"
 
     def __dealloc__(self):
         PyMem_Free(self.val)
+        if self.is_complex:
+            PyMem_Free(self.ival)
         PyMem_Free(self.row)
         PyMem_Free(self.ind)
 
@@ -125,7 +125,7 @@ cdef class CSCSparseMatrix(ImmutableSparseMatrix):
 
         print('CSCSparseMatrix ([%d,%d]):' % (self.nrow, self.ncol), file=OUT)
 
-        if not self.nnz or not self.__status_ok:
+        if not self.nnz:
             return
 
         if self.nrow <= CSC_MAT_PPRINT_COL_THRESH and self.ncol <= CSC_MAT_PPRINT_ROW_THRESH:
@@ -186,7 +186,7 @@ cdef class CSCSparseMatrix(ImmutableSparseMatrix):
 ########################################################################################################################
 # Factory methods
 ########################################################################################################################
-cdef MakeCSCSparseMatrix(INT_t nrow, INT_t ncol, INT_t nnz, INT_t * ind, INT_t * row, double * val):
+cdef MakeCSCSparseMatrix(INT_t nrow, INT_t ncol, INT_t nnz, INT_t * ind, INT_t * row, FLOAT_t * val):
     """
     Construct a CSCSparseMatrix object.
 
@@ -198,12 +198,20 @@ cdef MakeCSCSparseMatrix(INT_t nrow, INT_t ncol, INT_t nnz, INT_t * ind, INT_t *
         row  (INT_t *): C-array with row indices.
         val  (double *): C-array with values.
     """
-    csc_mat = CSCSparseMatrix(nrow=nrow, ncol=ncol, nnz=nnz)
+    csc_mat = CSCSparseMatrix(control_object=unexposed_value, nrow=nrow, ncol=ncol, nnz=nnz)
 
     csc_mat.val = val
     csc_mat.ind = ind
     csc_mat.row = row
 
-    csc_mat.__status_ok = True
+    return csc_mat
+
+cdef MakeCSCComplexSparseMatrix(INT_t nrow, INT_t ncol, INT_t nnz, INT_t * ind, INT_t * row, FLOAT_t * val, FLOAT_t * ival):
+    csc_mat = CSCSparseMatrix(control_object=unexposed_value, nrow=nrow, ncol=ncol, nnz=nnz)
+
+    csc_mat.val = val
+    csc_mat.ival = ival
+    csc_mat.ind = ind
+    csc_mat.row = row
 
     return csc_mat

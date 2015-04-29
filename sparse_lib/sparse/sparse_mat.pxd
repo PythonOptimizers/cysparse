@@ -1,5 +1,9 @@
 from sparse_lib.cysparse_types cimport *
 
+# Use of a "real" factory method, following Robert Bradshaw's suggestion
+# https://groups.google.com/forum/#!topic/cython-users/0UHuLqheoq0
+cdef unexposed_value
+
 cdef class SparseMatrix:
     cdef:
         public INT_t nrow  # number of rows

@@ -47,6 +47,7 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
     cdef object _values(self)
     cdef object _items(self)
 
+
 cdef bint PyLLSparseMatrix_Check(object obj)
 cdef LLSparseMatrix multiply_two_ll_mat(LLSparseMatrix A, LLSparseMatrix B)
 

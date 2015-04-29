@@ -8,12 +8,14 @@ from __future__ import print_function
 
 from sparse_lib.cysparse_types cimport *
 
-from sparse_lib.sparse.sparse_mat cimport ImmutableSparseMatrix, MutableSparseMatrix
+from sparse_lib.sparse.sparse_mat cimport ImmutableSparseMatrix, MutableSparseMatrix, unexposed_value
 from sparse_lib.sparse.ll_mat cimport LLSparseMatrix
 from sparse_lib.sparse.csc_mat cimport CSCSparseMatrix
 
 from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
 from cpython cimport PyObject
+
+
 
 cdef extern from "Python.h":
     # *** Types ***
@@ -67,7 +69,6 @@ cdef class CSRSparseMatrix(ImmutableSparseMatrix):
     def __cinit__(self, **kwargs):
 
         self.type_name = "CSRSparseMatrix"
-        self.__status_ok = False
 
     def __dealloc__(self):
         PyMem_Free(self.val)
@@ -76,43 +77,6 @@ cdef class CSRSparseMatrix(ImmutableSparseMatrix):
         PyMem_Free(self.col)
         PyMem_Free(self.ind)
 
-    ####################################################################################################################
-    # Control
-    ####################################################################################################################
-    def is_well_constructed(self):
-        """
-        Tell if object is well constructed, i.e. if it was instantiated by a factory method.
-
-        This method **doesn't** test if the matrix is coherent, only if its memory was properly initialized with a
-        factory method.
-
-        Returns:
-            ``(status, error_msg)``:
-
-        """
-        error_msg = None
-        well_constructed_ok = True
-
-        if not self.__status_ok:
-            error_msg = "CSRSparseMatrix must be instantiated by a factory method!"
-            well_constructed_ok = self.__status_ok
-
-        return well_constructed_ok, error_msg
-
-    def raise_error_if_not_well_constructed(self):
-        """
-        Raises an error if method :meth:`is_well_constructed()` doesn't return ``True``.
-
-        See:
-            :meth:`is_well_constructed`.
-
-        Raises:
-            NotImplementedError: If the private attribute ``__status_ok`` is not ``True``.
-        """
-        status_ok, error_msg = self.is_well_constructed()
-
-        if not status_ok:
-            raise NotImplementedError(error_msg)
 
     ####################################################################################################################
     # Column indices ordering
@@ -318,7 +282,7 @@ cdef class CSRSparseMatrix(ImmutableSparseMatrix):
         print(self._matrix_description_before_printing(), file=OUT)
         #print('CSRSparseMatrix ([%d,%d]):' % (self.nrow, self.ncol), file=OUT)
 
-        if not self.nnz or not self.__status_ok:
+        if not self.nnz:
             return
 
         if self.is_complex:
@@ -414,7 +378,7 @@ cdef class CSRSparseMatrix(ImmutableSparseMatrix):
 ########################################################################################################################
 # Factory methods
 ########################################################################################################################
-cdef MakeCSRSparseMatrix(INT_t nrow, INT_t ncol, INT_t nnz, INT_t * ind, INT_t * col, double * val):
+cdef MakeCSRSparseMatrix(INT_t nrow, INT_t ncol, INT_t nnz, INT_t * ind, INT_t * col, FLOAT_t * val):
     """
     Construct a CSRSparseMatrix object.
 
@@ -428,26 +392,22 @@ cdef MakeCSRSparseMatrix(INT_t nrow, INT_t ncol, INT_t nnz, INT_t * ind, INT_t *
     """
 
 
-    csr_mat = CSRSparseMatrix(nrow=nrow, ncol=ncol, nnz=nnz)
+    csr_mat = CSRSparseMatrix(control_object=unexposed_value, nrow=nrow, ncol=ncol, nnz=nnz)
 
     csr_mat.val = val
     csr_mat.ind = ind
     csr_mat.col = col
 
-    csr_mat.__status_ok = True
-
     return csr_mat
 
-cdef MakeCSRComplexSparseMatrix(INT_t nrow, INT_t ncol, INT_t nnz, INT_t * ind, INT_t * col, double * val, double * ival):
+cdef MakeCSRComplexSparseMatrix(INT_t nrow, INT_t ncol, INT_t nnz, INT_t * ind, INT_t * col, FLOAT_t * val, FLOAT_t * ival):
 
-    csr_mat = CSRSparseMatrix(nrow=nrow, ncol=ncol, nnz=nnz, is_complex=True)
+    csr_mat = CSRSparseMatrix(control_object=unexposed_value, nrow=nrow, ncol=ncol, nnz=nnz, is_complex=True)
 
     csr_mat.val = val
     csr_mat.ival = ival
     csr_mat.ind = ind
     csr_mat.col = col
-
-    csr_mat.__status_ok = True
 
     return csr_mat
 
@@ -455,6 +415,7 @@ cdef MakeCSRComplexSparseMatrix(INT_t nrow, INT_t ncol, INT_t nnz, INT_t * ind, 
 # Multiplication functions
 ########################################################################################################################
 cdef LLSparseMatrix multiply_csr_mat_by_csc_mat(CSRSparseMatrix A, CSCSparseMatrix B):
+
     if A.is_complex or B.is_complex:
         raise NotImplemented("This operation is not (yet) implemented for complex matrices")
 
@@ -476,7 +437,8 @@ cdef LLSparseMatrix multiply_csr_mat_by_csc_mat(CSRSparseMatrix A, CSCSparseMatr
     # TODO: what strategy to implement?
     cdef INT_t size_hint = A.nnz
 
-    C = LLSparseMatrix(nrow=C_nrow, ncol=C_ncol, size_hint=size_hint, store_zeros=store_zeros)
+    # TODO: maybe use MakeLLSparseMatrix and fix circular dependencies...
+    C = LLSparseMatrix(control_object=unexposed_value, nrow=C_nrow, ncol=C_ncol, size_hint=size_hint, store_zeros=store_zeros)
 
     # CASES
     if not A.is_symmetric and not B.is_symmetric:

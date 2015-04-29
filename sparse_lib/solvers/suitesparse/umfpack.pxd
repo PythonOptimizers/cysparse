@@ -18,7 +18,7 @@ cdef class UmfpackSolver:
 
         public bint is_complex
 
-        str family
+        public str family
 
         # Matrix A in CSC format
         CSCSparseMatrix csc_mat

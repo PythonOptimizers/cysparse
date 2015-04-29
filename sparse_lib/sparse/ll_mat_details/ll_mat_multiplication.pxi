@@ -35,7 +35,7 @@ cdef LLSparseMatrix multiply_two_ll_mat(LLSparseMatrix A, LLSparseMatrix B):
     cdef bint store_zeros = A.store_zeros and B.store_zeros
     cdef INT_t size_hint = A.size_hint
 
-    C = LLSparseMatrix(nrow=C_nrow, ncol=C_ncol, size_hint=size_hint, store_zeros=store_zeros)
+    C = MakeLLSparseMatrix(nrow=C_nrow, ncol=C_ncol, size_hint=size_hint, store_zeros=store_zeros)
 
 
     # CASES

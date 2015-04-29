@@ -16,12 +16,12 @@ cdef class CSRSparseMatrix(ImmutableSparseMatrix):
     # Init/Free
     ####################################################################################################################
     cdef:
-        double *    val		 # pointer to array of values
-        double *    ival     # pointer to array of imaginary values
+        FLOAT_t *    val		 # pointer to array of values
+        FLOAT_t *    ival        # pointer to array of imaginary values
         INT_t *       col		 # pointer to array of indices
         INT_t *       ind		 # pointer to array of indices
 
-        bint __status_ok     # do we have a completed CSR Matrix?
+
         bint __col_indices_sorted_test_done  # we only test this once
         bint __col_indices_sorted  # are the column indices sorted in ascending order?
         INT_t __first_row_not_ordered # first row that is not ordered
@@ -31,8 +31,8 @@ cdef class CSRSparseMatrix(ImmutableSparseMatrix):
     cdef at(self, INT_t i, INT_t j)
     cdef safe_at(self, INT_t i, INT_t j)
 
-cdef MakeCSRSparseMatrix(INT_t nrow, INT_t ncol, INT_t nnz, INT_t * ind, INT_t * col, double * val)
-cdef MakeCSRComplexSparseMatrix(INT_t nrow, INT_t ncol, INT_t nnz, INT_t * ind, INT_t * col, double * val, double * ival)
+cdef MakeCSRSparseMatrix(INT_t nrow, INT_t ncol, INT_t nnz, INT_t * ind, INT_t * col, FLOAT_t * val)
+cdef MakeCSRComplexSparseMatrix(INT_t nrow, INT_t ncol, INT_t nnz, INT_t * ind, INT_t * col, FLOAT_t * val, FLOAT_t * ival)
 
 cdef LLSparseMatrix multiply_csr_mat_by_csc_mat(CSRSparseMatrix A, CSCSparseMatrix B)
 

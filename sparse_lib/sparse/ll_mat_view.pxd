@@ -20,8 +20,6 @@ cdef class LLSparseMatrixView:
 
         LLSparseMatrix A
 
-        bint __status_ok
-
         public bint is_symmetric
         public bint store_zeros
 
@@ -30,7 +28,6 @@ cdef class LLSparseMatrixView:
         INT_t _nnz     # number of non zeros
 
     cdef INT_t _count_nnz(self)
-    cdef assert_status_ok(self)
     cdef at(self, INT_t i, INT_t j)
     cdef safe_at(self, INT_t i, INT_t j)
     cdef put(self, INT_t i, INT_t j, double value)

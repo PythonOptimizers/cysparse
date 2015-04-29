@@ -1,3 +1,4 @@
+from sparse_lib.sparse.sparse_mat cimport unexposed_value
 from sparse_lib.sparse.ll_mat cimport LLSparseMatrix
 
 from libc.stdio cimport *
@@ -92,7 +93,7 @@ cdef LLSparseMatrix MakeLLSparseMatrixFromMMFile2(str mm_filename, bint store_ze
         if data_type == PATTERN:
             raise IOError('Matrix Market format not supported for PATTERN')
 
-        A = LLSparseMatrix(nrow=nrow, ncol=ncol, size_hint=nnz, is_symmetric=is_symmetric, is_complex=is_complex, store_zeros=store_zeros)
+        A = LLSparseMatrix(control_object=unexposed_value, nrow=nrow, ncol=ncol, size_hint=nnz, is_symmetric=is_symmetric, is_complex=is_complex, store_zeros=store_zeros)
 
 
         line = f.readline()

@@ -8,6 +8,7 @@ from sparse_lib.cysparse_types cimport *
 # forward declaration
 cdef class LLSparseMatrixView
 
+from sparse_lib.sparse.sparse_mat cimport unexposed_value
 from sparse_lib.sparse.ll_mat cimport LLSparseMatrix
 from sparse_lib.utils.equality cimport values_are_equal
 
@@ -40,7 +41,6 @@ cdef class LLSparseMatrixView:
         self.is_symmetric = A.is_symmetric
         self.store_zeros = A.store_zeros
 
-        self.__status_ok = False
         self.__counted_nnz = False
         self._nnz = 0
 
@@ -65,9 +65,6 @@ cdef class LLSparseMatrixView:
         PyMem_Free(self.col_indices)
 
         Py_DECREF(self.A) # release ref
-
-    cdef assert_status_ok(self):
-        assert self.__status_ok, "Create an LLSparseMatrixView only with the factory function MakeLLSparseMatrixView()"
 
     ####################################################################################################################
     # Set/Get items
@@ -162,8 +159,6 @@ cdef class LLSparseMatrixView:
             matrix that is altered, **not** a view to it. So, in a sense, a `LLSparseMatrixView` object is immutable.
 
         """
-        self.assert_status_ok()
-
         cdef SIZE_t size_hint
         cdef double val
 
@@ -172,7 +167,7 @@ cdef class LLSparseMatrixView:
         else:
             size_hint = min(self.nrow * self.ncol, self.A.nalloc)
 
-        cdef LLSparseMatrix A_copy = LLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=size_hint, store_zeros=self.store_zeros)
+        cdef LLSparseMatrix A_copy = LLSparseMatrix(control_object=unexposed_value, nrow=self.nrow, ncol=self.ncol, size_hint=size_hint, store_zeros=self.store_zeros)
 
         cdef:
             INT_t i
@@ -234,8 +229,6 @@ cdef class LLSparseMatrixView:
             The number of non zeros elements if the corresponding :class:`LLSparseMatrix` doesn't store zeros, otherwise
             returns the ``size = nrow * ncol``.
         """
-        self.assert_status_ok()
-
         cdef:
             INT_t i, j, row_index
             INT_t nnz = 0
@@ -310,8 +303,6 @@ cdef LLSparseMatrixView MakeLLSparseMatrixView(LLSparseMatrix A, PyObject* obj1,
         view.is_empty = True
     else:
         view.is_empty = False
-
-    view.__status_ok = True
 
     return view
 
@@ -390,7 +381,5 @@ cdef LLSparseMatrixView MakeLLSparseMatrixViewFromView(LLSparseMatrixView A, PyO
         view.is_empty = True
     else:
         view.is_empty = False
-
-    view.__status_ok = True
 
     return view

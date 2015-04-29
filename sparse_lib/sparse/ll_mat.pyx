@@ -8,7 +8,8 @@ from __future__ import print_function
 
 from sparse_lib.cysparse_types cimport *
 
-from sparse_lib.sparse.sparse_mat cimport MutableSparseMatrix
+
+from sparse_lib.sparse.sparse_mat cimport MutableSparseMatrix, unexposed_value
 from sparse_lib.sparse.csr_mat cimport MakeCSRSparseMatrix, MakeCSRComplexSparseMatrix
 from sparse_lib.sparse.csc_mat cimport MakeCSCSparseMatrix
 #from sparse_lib.utils.equality cimport values_are_equal
@@ -68,14 +69,13 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
     ####################################################################################################################
     # Init/Free/Memory
     ####################################################################################################################
-    def __cinit__(self, INT_t nrow, INT_t ncol, SIZE_t size_hint=LL_MAT_DEFAULT_SIZE_HINT,
-                  bint is_symmetric=False, bint store_zeros=False, is_complex=False):
+    def __cinit__(self,  **kwargs):
         """
         {{COMPLEX: YES}}
         {{GENERIC TYPES: YES}}
         """
-        if size_hint < 1:
-            raise ValueError('size_hint (%d) must be >= 1' % size_hint)
+        if self.size_hint < 1:
+            raise ValueError('size_hint (%d) must be >= 1' % self.size_hint)
 
         self.type_name = "LLSparseMatrix"
 
@@ -109,7 +109,7 @@ cdef class LLSparseMatrix(MutableSparseMatrix):
         self.free = -1
 
         cdef INT_t i
-        for i from 0 <= i < nrow:
+        for i from 0 <= i < self.nrow:
             root[i] = -1
 
     def __dealloc__(self):
@@ -1040,7 +1040,7 @@ def MakeLLSparseMatrix(**kwargs):
             real_nrow = size
             real_ncol = size
 
-        return LLSparseMatrix(nrow=real_nrow, ncol=real_ncol, size_hint=size_hint, store_zeros=store_zeros, is_symmetric=is_symmetric, is_complex=is_complex)
+        return LLSparseMatrix(control_object=unexposed_value, nrow=real_nrow, ncol=real_ncol, size_hint=size_hint, store_zeros=store_zeros, is_symmetric=is_symmetric, is_complex=is_complex)
 
     # CASE 2
     cdef FLOAT_t[:, :] matrix_view
@@ -1068,7 +1068,7 @@ def MakeLLSparseMatrix(**kwargs):
         ncol = matrix.shape[1]
 
 
-        ll_mat = LLSparseMatrix(nrow=nrow, ncol=ncol, size_hint=size_hint)
+        ll_mat = LLSparseMatrix(control_object=unexposed_value, nrow=nrow, ncol=ncol, size_hint=size_hint)
 
         #for i in xrange(nrow):
         for i from 0 <= i < nrow:

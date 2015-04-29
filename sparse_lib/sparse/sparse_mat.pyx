@@ -2,6 +2,8 @@ from sparse_lib.cysparse_types cimport *
 
 cdef INT_t MUTABLE_SPARSE_MAT_DEFAULT_SIZE_HINT = 40        # allocated size by default
 
+unexposed_value = object()
+
 class NonZeros():
     """
     Context manager to use methods with flag ``store_zeros`` to ``False``.
@@ -35,6 +37,10 @@ cdef class SparseMatrix:
         Warning:
             Only use named arguments!
         """
+        assert unexposed_value == kwargs.get('control_object', None), "Matrix must be instantiated with a factory method"
+
+        self.type_name = "Not defined"
+
         self.nrow = kwargs.get('nrow', -1)
         self.ncol = kwargs.get('ncol', -1)
         self.nnz = kwargs.get('nnz', 0)
@@ -60,10 +66,10 @@ cdef class SparseMatrix:
             raise NotImplemented("Not implemented in base class")
 
         def __set__(self, value):
-            raise NotImplemented("Not implemented in base class")
+            raise AttributeError('Attribute T (transposed) is read-only')
 
         def __del__(self):
-            raise NotImplemented("Not implemented in base class")
+            raise AttributeError('Attribute T (transposed) is read-only')
 
     ####################################################################################################################
     # MEMORY INFO
