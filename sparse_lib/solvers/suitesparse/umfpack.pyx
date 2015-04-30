@@ -1,5 +1,7 @@
 from sparse_lib.cysparse_types cimport *
 
+assert FLOAT_T == FLOAT64_T, "UMFPACK only deals with double precision (FLOAT64)"
+
 from sparse_lib.sparse.ll_mat cimport LLSparseMatrix
 from sparse_lib.sparse.csr_mat cimport CSRSparseMatrix, MakeCSRSparseMatrix
 from sparse_lib.sparse.csc_mat cimport CSCSparseMatrix, MakeCSCSparseMatrix
@@ -9,7 +11,9 @@ from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
 import numpy as np
 cimport numpy as cnp
 
+
 cnp.import_array()
+
 
 cdef extern from "umfpack.h":
 
@@ -316,7 +320,7 @@ cdef class UmfpackSolver:
 
         # test if we can use UMFPACK
         assert self.nrow == self.ncol, "Only square matrices are handled in UMFPACK"
-        assert FLOAT_T == FLOAT64_T, "UMFPACK only deals with double precision (FLOAT64)"
+
 
 
         self.is_complex = A.is_complex
