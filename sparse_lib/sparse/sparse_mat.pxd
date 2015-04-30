@@ -14,7 +14,8 @@ cdef class SparseMatrix:
         public bint store_zeros   # True if 0.0 is to be stored explicitly
         public bint is_complex    # True if values are complex
 
-        public char * type_name
+        public char * type_name   # Name of matrix type
+        public int element_type   # Type of elements stored in the matrix
 
         object shape     # for compatibility with numpy, array, etc.
 

@@ -96,13 +96,13 @@ IF USE_DOUBLE_PRECISION:
 ELSE:
     ctypedef FLOAT32_t FLOAT_t
     ctypedef COMPLEX64_t COMPLEX_t
-    
+
     cdef enum:
         FLOAT_T = FLOAT32_T
         COMPLEX_T = COMPLEX64_T
-    
 
-    
+
+
 #################################################################################################
 #                                 *** BASIC TYPES SIZES ***
 #################################################################################################

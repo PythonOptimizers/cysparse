@@ -11,9 +11,6 @@ cimport numpy as cnp
 
 cnp.import_array()
 
-# test if we can use UMFPACK
-assert FLOAT_T == FLOAT64_T, "UMFPACK only deals with double precision (FLOAT64)"
-
 cdef extern from "umfpack.h":
 
     char * UMFPACK_DATE
@@ -317,7 +314,10 @@ cdef class UmfpackSolver:
         self.nrow = A.nrow
         self.ncol = A.ncol
 
+        # test if we can use UMFPACK
         assert self.nrow == self.ncol, "Only square matrices are handled in UMFPACK"
+        assert FLOAT_T == FLOAT64_T, "UMFPACK only deals with double precision (FLOAT64)"
+
 
         self.is_complex = A.is_complex
 
