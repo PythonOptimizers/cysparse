@@ -9,6 +9,8 @@ A = MakeLLSparseMatrix(size=4)
 
 A.put_triplet([1.0, 2.0, 6.0, 3.0, 5.0, 4.0], [0, 1, 1, 2, 3, 3], [0, 1, 2, 2, 0, 3])
 
+A.print_to(sys.stdout)
+
 solver = umfpack.UmfpackSolver(A)
 
 print solver.UMFPACK_VERSION
@@ -43,6 +45,7 @@ print "&" * 80
 print solver.get_lunz()
 
 (L, U, P, Q, D, do_recip, R) = solver.get_LU()
+
 
 print L
 L.print_to(sys.stdout)

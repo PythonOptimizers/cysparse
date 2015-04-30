@@ -608,8 +608,8 @@ cdef class UmfpackSolver:
              - P and Q are permutation matrices,
              - R is a row-scaling diagonal matrix such that
 
-                  * the i-th row of A has been divided by R[i] if do_recip = True,
-                  * the i-th row of A has been multiplied by R[i] if do_recip = False.
+                  * the i-th row of A has been multiplied by R[i] if do_recip = True,
+                  * the i-th row of A has been divided by R[i] if do_recip = False.
 
             L and U are returned as CSRSparseMatrix and CSCSparseMatrix sparse matrices respectively.
             P, Q and R are returned as NumPy arrays.
@@ -660,22 +660,27 @@ cdef class UmfpackSolver:
         if not Ux:
             raise MemoryError()
 
-        cdef cnp.ndarray[cnp.int_t, ndim=1, mode='c'] P
-        cdef cnp.ndarray[cnp.int_t, ndim=1, mode='c'] Q
-        cdef cnp.ndarray[cnp.double_t, ndim=1, mode='c'] D
-        cdef cnp.ndarray[cnp.double_t, ndim=1, mode='c'] R
-
+        # TODO: see what type of int exactly to pass
         cdef cnp.npy_intp *dims_n_row = [n_row]
         cdef cnp.npy_intp *dims_n_col = [n_col]
-        #cdef cnp.ndarray[cnp.int_t, ndim=1] result = \
+
         cdef cnp.npy_intp *dims_min = [min(n_row, n_col)]
 
-        P = cnp.PyArray_EMPTY(1, dims_n_row, cnp.NPY_INTP, 0)
-        Q = cnp.PyArray_EMPTY(1, dims_n_col, cnp.NPY_INTP, 0)
+        #cdef cnp.ndarray[cnp.int_t, ndim=1, mode='c'] P
+        cdef cnp.ndarray[int, ndim=1, mode='c'] P
 
-        D = cnp.PyArray_EMPTY(1, dims_min, cnp .NPY_DOUBLE, 0)
+        P = cnp.PyArray_EMPTY(1, dims_n_row, cnp.NPY_INT32, 0)
 
-        R = cnp.PyArray_EMPTY(1, dims_n_row, cnp .NPY_DOUBLE, 0)
+        #cdef cnp.ndarray[cnp.int_t, ndim=1, mode='c'] Q
+        cdef cnp.ndarray[int, ndim=1, mode='c'] Q
+        Q = cnp.PyArray_EMPTY(1, dims_n_col, cnp.NPY_INT32, 0)
+
+        cdef cnp.ndarray[cnp.double_t, ndim=1, mode='c'] D
+        D = cnp.PyArray_EMPTY(1, dims_min, cnp.NPY_DOUBLE, 0)
+
+        cdef cnp.ndarray[cnp.double_t, ndim=1, mode='c'] R
+        R = cnp.PyArray_EMPTY(1, dims_n_row, cnp.NPY_DOUBLE, 0)
+
 
 
         cdef int status =umfpack_di_get_numeric(Lp, Lj, Lx,
