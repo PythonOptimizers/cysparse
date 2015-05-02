@@ -1,5 +1,5 @@
-from sparse_lib.sparse.ll_mat import LLSparseMatrix
-from sparse_lib.sparse.ll_mat_view import LLSparseMatrixView
+from cysparse.sparse.ll_mat import LLSparseMatrix
+from cysparse.sparse.ll_mat_view import LLSparseMatrixView
 
 import unittest
 

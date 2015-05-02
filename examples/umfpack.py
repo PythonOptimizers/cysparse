@@ -1,5 +1,5 @@
-from sparse_lib.sparse.ll_mat import MakeLLSparseMatrix
-import sparse_lib.solvers.suitesparse.umfpack as umfpack
+from cysparse.sparse.ll_mat import MakeLLSparseMatrix
+import cysparse.solvers.suitesparse.umfpack as umfpack
 
 import sys
 

@@ -1,4 +1,4 @@
-from sparse_lib.sparse.csr_mat import CSRSparseMatrix
+from cysparse.sparse.csr_mat import CSRSparseMatrix
 
 import unittest
 
