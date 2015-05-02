@@ -12,7 +12,7 @@ from sparse_lib.cysparse_types cimport *
 from sparse_lib.sparse.sparse_mat cimport MutableSparseMatrix, unexposed_value
 from sparse_lib.sparse.csr_mat cimport MakeCSRSparseMatrix, MakeCSRComplexSparseMatrix
 from sparse_lib.sparse.csc_mat cimport MakeCSCSparseMatrix
-#from sparse_lib.utils.equality cimport values_are_equal
+#from cysparse.utils.equality cimport values_are_equal
 from sparse_lib.sparse.IO.mm cimport MakeLLSparseMatrixFromMMFile2, MakeMMFileFromSparseMatrix
 
 
