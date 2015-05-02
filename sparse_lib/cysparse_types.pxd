@@ -87,20 +87,19 @@ ELSE:
         INT_T = INT32_T
 
 IF USE_DOUBLE_PRECISION:
-    ctypedef FLOAT64_t FLOAT_t
-    ctypedef COMPLEX128_t COMPLEX_t
-    
-    cdef enum:
-        FLOAT_T = FLOAT64_T
-        COMPLEX_T = COMPLEX128_T
+   ctypedef FLOAT64_t FLOAT_t
+   ctypedef COMPLEX128_t COMPLEX_t
+
+   cdef enum:
+       FLOAT_T = FLOAT64_T
+       COMPLEX_T = COMPLEX128_T
 ELSE:
-    ctypedef FLOAT32_t FLOAT_t
-    ctypedef COMPLEX64_t COMPLEX_t
+   ctypedef FLOAT32_t FLOAT_t
+   ctypedef COMPLEX64_t COMPLEX_t
 
-    cdef enum:
-        FLOAT_T = FLOAT32_T
-        COMPLEX_T = COMPLEX64_T
-
+   cdef enum:
+       FLOAT_T = FLOAT32_T
+       COMPLEX_T = COMPLEX64_T
 
 
 #################################################################################################
@@ -120,9 +119,9 @@ cdef enum:
     FLOAT64_t_BIT = sizeof(FLOAT64_t) * CHAR_BIT
     COMPLEX64_t_BIT = sizeof(FLOAT32_t) * 2 * CHAR_BIT
     COMPLEX128_t_BIT = sizeof(FLOAT64_t) * 2 * CHAR_BIT
-    
-    INT_t_BIT = sizeof(INT_t) * CHAR_BIT
-    FLOAT_t_BIT = sizeof(FLOAT_t) * CHAR_BIT
-    SIZE_t_BIT = sizeof(SIZE_t) * CHAR_BIT
-    COMPLEX_t_BIT = sizeof(FLOAT_t) * 2 * CHAR_BIT
 
+    INT_t_BIT = sizeof(INT_t) * CHAR_BIT
+    SIZE_t_BIT = sizeof(SIZE_t) * CHAR_BIT
+
+    COMPLEX_t_BIT = sizeof(FLOAT_t) * 2 * CHAR_BIT
+    FLOAT_t_BIT = sizeof(FLOAT_t) * CHAR_BIT

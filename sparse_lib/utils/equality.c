@@ -539,8 +539,8 @@ typedef __pyx_t_10sparse_lib_14cysparse_types_INT32_t __pyx_t_10sparse_lib_14cys
 /* "sparse_lib/cysparse_types.pxd":90
  * 
  * IF USE_DOUBLE_PRECISION:
- *     ctypedef FLOAT64_t FLOAT_t             # <<<<<<<<<<<<<<
- *     ctypedef COMPLEX128_t COMPLEX_t
+ *    ctypedef FLOAT64_t FLOAT_t             # <<<<<<<<<<<<<<
+ *    ctypedef COMPLEX128_t COMPLEX_t
  * 
  */
 typedef __pyx_t_10sparse_lib_14cysparse_types_FLOAT64_t __pyx_t_10sparse_lib_14cysparse_types_FLOAT_t;
@@ -802,26 +802,26 @@ enum  {
 };
 
 /* "sparse_lib/cysparse_types.pxd":93
- *     ctypedef COMPLEX128_t COMPLEX_t
+ *    ctypedef COMPLEX128_t COMPLEX_t
  * 
- *     cdef enum:             # <<<<<<<<<<<<<<
- *         FLOAT_T = FLOAT64_T
- *         COMPLEX_T = COMPLEX128_T
+ *    cdef enum:             # <<<<<<<<<<<<<<
+ *        FLOAT_T = FLOAT64_T
+ *        COMPLEX_T = COMPLEX128_T
  */
 enum  {
 
   /* "sparse_lib/cysparse_types.pxd":95
- *     cdef enum:
- *         FLOAT_T = FLOAT64_T
- *         COMPLEX_T = COMPLEX128_T             # <<<<<<<<<<<<<<
+ *    cdef enum:
+ *        FLOAT_T = FLOAT64_T
+ *        COMPLEX_T = COMPLEX128_T             # <<<<<<<<<<<<<<
  * ELSE:
- *     ctypedef FLOAT32_t FLOAT_t
+ *    ctypedef FLOAT32_t FLOAT_t
  */
   __pyx_e_10sparse_lib_14cysparse_types_FLOAT_T = __pyx_e_10sparse_lib_14cysparse_types_FLOAT64_T,
   __pyx_e_10sparse_lib_14cysparse_types_COMPLEX_T = __pyx_e_10sparse_lib_14cysparse_types_COMPLEX128_T
 };
 
-/* "sparse_lib/cysparse_types.pxd":114
+/* "sparse_lib/cysparse_types.pxd":113
  * 
  * # in bits
  * cdef enum:             # <<<<<<<<<<<<<<
@@ -831,10 +831,9 @@ enum  {
 enum  {
 
   /* "sparse_lib/cysparse_types.pxd":127
- *     FLOAT_t_BIT = sizeof(FLOAT_t) * CHAR_BIT
- *     SIZE_t_BIT = sizeof(SIZE_t) * CHAR_BIT
- *     COMPLEX_t_BIT = sizeof(FLOAT_t) * 2 * CHAR_BIT             # <<<<<<<<<<<<<<
  * 
+ *     COMPLEX_t_BIT = sizeof(FLOAT_t) * 2 * CHAR_BIT
+ *     FLOAT_t_BIT = sizeof(FLOAT_t) * CHAR_BIT             # <<<<<<<<<<<<<<
  */
   __pyx_e_10sparse_lib_14cysparse_types_INT32_t_BIT = ((sizeof(__pyx_t_10sparse_lib_14cysparse_types_INT32_t)) * CHAR_BIT),
   __pyx_e_10sparse_lib_14cysparse_types_UINT32_t_BIT = ((sizeof(__pyx_t_10sparse_lib_14cysparse_types_INT32_t)) * CHAR_BIT),
@@ -845,9 +844,9 @@ enum  {
   __pyx_e_10sparse_lib_14cysparse_types_COMPLEX64_t_BIT = (((sizeof(__pyx_t_10sparse_lib_14cysparse_types_FLOAT32_t)) * 2) * CHAR_BIT),
   __pyx_e_10sparse_lib_14cysparse_types_COMPLEX128_t_BIT = (((sizeof(__pyx_t_10sparse_lib_14cysparse_types_FLOAT64_t)) * 2) * CHAR_BIT),
   __pyx_e_10sparse_lib_14cysparse_types_INT_t_BIT = ((sizeof(__pyx_t_10sparse_lib_14cysparse_types_INT_t)) * CHAR_BIT),
-  __pyx_e_10sparse_lib_14cysparse_types_FLOAT_t_BIT = ((sizeof(__pyx_t_10sparse_lib_14cysparse_types_FLOAT_t)) * CHAR_BIT),
   __pyx_e_10sparse_lib_14cysparse_types_SIZE_t_BIT = ((sizeof(__pyx_t_10sparse_lib_14cysparse_types_SIZE_t)) * CHAR_BIT),
-  __pyx_e_10sparse_lib_14cysparse_types_COMPLEX_t_BIT = (((sizeof(__pyx_t_10sparse_lib_14cysparse_types_FLOAT_t)) * 2) * CHAR_BIT)
+  __pyx_e_10sparse_lib_14cysparse_types_COMPLEX_t_BIT = (((sizeof(__pyx_t_10sparse_lib_14cysparse_types_FLOAT_t)) * 2) * CHAR_BIT),
+  __pyx_e_10sparse_lib_14cysparse_types_FLOAT_t_BIT = ((sizeof(__pyx_t_10sparse_lib_14cysparse_types_FLOAT_t)) * CHAR_BIT)
 };
 
 /* "sparse_lib/cysparse_types.pxd":52
@@ -894,10 +893,10 @@ typedef struct __pyx_t_10sparse_lib_14cysparse_types_complex128_t __pyx_t_10spar
 
 /* "sparse_lib/cysparse_types.pxd":91
  * IF USE_DOUBLE_PRECISION:
- *     ctypedef FLOAT64_t FLOAT_t
- *     ctypedef COMPLEX128_t COMPLEX_t             # <<<<<<<<<<<<<<
+ *    ctypedef FLOAT64_t FLOAT_t
+ *    ctypedef COMPLEX128_t COMPLEX_t             # <<<<<<<<<<<<<<
  * 
- *     cdef enum:
+ *    cdef enum:
  */
 typedef __pyx_t_10sparse_lib_14cysparse_types_COMPLEX128_t __pyx_t_10sparse_lib_14cysparse_types_COMPLEX_t;
 
