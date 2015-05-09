@@ -27,3 +27,8 @@ The start of the banner ``%%MatrixMarket matrix`` is mandatory. We detail the ot
 
 
 ..  warning:: Matrix Market matrices are **always** 1-based, i.e. the index of the first element of a matrix is ``(1, 1)`` not ``(0, 0)``.
+
+Binary formats
+================
+
+

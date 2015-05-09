@@ -11,6 +11,9 @@ Automatic
 ------------
 
 Manual
+--------
+
+
 Different modes
 ==================
 

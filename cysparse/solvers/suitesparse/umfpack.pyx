@@ -460,6 +460,7 @@ cdef class UmfpackSolver:
         {{COMPLEX: NO}}
         {{GENERIC: NO}}
         """
+        self.create_symbolic()
 
         if not recompute and self.numeric_computed:
             return

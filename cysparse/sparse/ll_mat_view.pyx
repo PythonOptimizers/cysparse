@@ -51,6 +51,7 @@ cdef class LLSparseMatrixView:
             if not self.__counted_nnz:
                 # we have to count the nnz
                 self._nnz = self.count_nnz()
+                print self._nnz
                 self.__counted_nnz = True
 
             return self._nnz
@@ -256,7 +257,15 @@ cdef class LLSparseMatrixView:
     # String representations
     ####################################################################################################################
     def __repr__(self):
-        s = "LLSparseMatrixView of size %d by %d with %d non zero values" % (self.nrow, self.ncol, self.nnz)
+
+        # we have to trigger this by ourselves as Cython propreties can **not** be called internally
+        # TODO: put this is a function by itself
+        if not self.__counted_nnz:
+            # we have to count the nnz
+            self._nnz = self.count_nnz()
+            self.__counted_nnz = True
+
+        s = "LLSparseMatrixView of size %d by %d with %d non zero values" % (self.nrow, self.ncol, self._nnz)
         return s
 
 
