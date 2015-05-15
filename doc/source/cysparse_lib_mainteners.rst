@@ -81,6 +81,15 @@ To keep the generation of code source files as simple as possible, we follow som
   ``.pyx``                      ``.cpx``                      Implementation files.
   ``.pxi``                      ``.cpi``                      Text files to insert verbatim.
   ============================= ============================= ==================================
+  
+  For python files:
+  
+  ============================= ============================= ==================================
+  :program:`Python`             :program:`CySparse` template  File type
+  ============================= ============================= ==================================
+  ``.py``                       ``.cpy``                      Python module files.
+  ============================= ============================= ==================================
+  
 
 - Any *template* directory must **only** contain the template files and the generated files. This is because
   all files with the right extension are considered as templates and all the other files are considered as generated 
