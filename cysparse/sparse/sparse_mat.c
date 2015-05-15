@@ -894,7 +894,7 @@ static char __pyx_k_Attribute_shape_is_read_only[] = "Attribute shape is read-on
 static char __pyx_k_Not_implemented_in_base_class[] = "Not implemented in base class";
 static char __pyx_k_Context_manager_to_use_methods[] = "\n    Context manager to use methods with flag ``store_zeros`` to ``False``.\n\n    The initial value is restored upon completion.\n\n    Use like this:\n\n        >>>with NonZeros(A):\n        >>>    ...\n    ";
 static char __pyx_k_MUTABLE_SPARSE_MAT_DEFAULT_SIZE[] = "MUTABLE_SPARSE_MAT_DEFAULT_SIZE_HINT";
-static char __pyx_k_home_nikolaj_Documents_WORK_Dom[] = "/home/nikolaj/Documents/WORK/Dominique/PROJECT/domisparse_virtual_env/try2/cysparse/cysparse/sparse/sparse_mat.pyx";
+static char __pyx_k_home_nikolaj_Documents_WORK_Dom[] = "/home/nikolaj/Documents/WORK/Dominique/PROJECT/domisparse_virtual_env/try1/cysparse/cysparse/sparse/sparse_mat.pyx";
 static char __pyx_k_Attribute_T_transposed_is_read_o[] = "Attribute T (transposed) is read-only";
 static char __pyx_k_Matrix_must_be_instantiated_with[] = "Matrix must be instantiated with a factory method";
 static PyObject *__pyx_n_s_A;

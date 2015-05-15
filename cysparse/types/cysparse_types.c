@@ -742,7 +742,7 @@ static char __pyx_k_report_basic_types[] = "report_basic_types";
 static char __pyx_k_REVERSED_BASIC_TYPES[] = "_REVERSED_BASIC_TYPES";
 static char __pyx_k_Basic_types_in_CySparse[] = "Basic types in CySparse:";
 static char __pyx_k_cysparse_types_cysparse_types[] = "cysparse.types.cysparse_types";
-static char __pyx_k_home_nikolaj_Documents_WORK_Dom[] = "/home/nikolaj/Documents/WORK/Dominique/PROJECT/domisparse_virtual_env/try2/cysparse/cysparse/types/cysparse_types.pyx";
+static char __pyx_k_home_nikolaj_Documents_WORK_Dom[] = "/home/nikolaj/Documents/WORK/Dominique/PROJECT/domisparse_virtual_env/try1/cysparse/cysparse/types/cysparse_types.pyx";
 static PyObject *__pyx_kp_s_12_10d_bits_d;
 static PyObject *__pyx_n_s_BASIC_TYPES;
 static PyObject *__pyx_kp_s_Basic_types_in_CySparse;
