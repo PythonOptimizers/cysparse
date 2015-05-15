@@ -77,12 +77,6 @@ cdef class LLSparseMatrix_INT32_t_INT32_t(MutableSparseMatrix_INT32_t_INT32_t):
                 raise MemoryError()
             self.val = val
 
-            if self.is_complex:
-                ival = <INT32_t *> PyMem_Malloc(self.size_hint * sizeof(INT32_t))
-                if not ival:
-                    raise MemoryError()
-                self.ival = ival
-
             col = <INT32_t *> PyMem_Malloc(self.size_hint * sizeof(INT32_t))
             if not col:
                 raise MemoryError()
@@ -108,8 +102,6 @@ cdef class LLSparseMatrix_INT32_t_INT32_t(MutableSparseMatrix_INT32_t_INT32_t):
         """
         """
         PyMem_Free(self.val)
-        if self.is_complex:
-            PyMem_Free(self.ival)
         PyMem_Free(self.col)
         PyMem_Free(self.link)
         PyMem_Free(self.root)
@@ -139,12 +131,6 @@ cdef class LLSparseMatrix_INT32_t_INT32_t(MutableSparseMatrix_INT32_t_INT32_t):
         if not temp:
             raise MemoryError()
         self.val = <INT32_t *>temp
-
-        if self.is_complex:
-            temp = <INT32_t *> PyMem_Realloc(self.ival, nalloc_new * sizeof(INT32_t))
-            if not temp:
-                raise MemoryError()
-            self.ival = <INT32_t *>temp
 
         self.nalloc = nalloc_new
 
@@ -200,8 +186,6 @@ cdef class LLSparseMatrix_INT32_t_INT32_t(MutableSparseMatrix_INT32_t_INT32_t):
                         self.link[k_last] = k_new
                     self.free = self.link[k_new]
                     self.val[k_new] = self.val[k]
-                    if self.is_complex:
-                        self.ival[k] = self.ival[k]
                     self.col[k_new] = self.col[k]
                     self.link[k_new] = self.link[k]
                     k_last = k_new
@@ -235,10 +219,6 @@ cdef class LLSparseMatrix_INT32_t_INT32_t(MutableSparseMatrix_INT32_t_INT32_t):
         total_memory += self.nalloc * sizeof(INT32_t)
         # val
         total_memory += self.nalloc * sizeof(INT32_t)
-
-        if self.is_complex:
-            # ival
-            total_memory += self.nalloc * sizeof(INT32_t)
 
         return total_memory
 

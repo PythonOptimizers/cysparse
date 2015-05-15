@@ -19,8 +19,7 @@ cdef class LLSparseMatrix_@index@_@type@(MutableSparseMatrix_@index@_@type@):
     ####################################################################################################################
     cdef:
         @index@  free      # index to first element in free chain
-        @type@  *val       # pointer to array of real values
-        @type@  *ival      # pointer to array of imaginary values
+        @type@  *val       # pointer to array of values
         @index@ *col       # pointer to array of indices, see doc
         @index@ *link      # pointer to array of indices, see doc
         @index@ *root      # pointer to array of indices, see doc

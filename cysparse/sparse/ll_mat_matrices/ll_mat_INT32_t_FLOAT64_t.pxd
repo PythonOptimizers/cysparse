@@ -19,8 +19,7 @@ cdef class LLSparseMatrix_INT32_t_FLOAT64_t(MutableSparseMatrix_INT32_t_FLOAT64_
     ####################################################################################################################
     cdef:
         INT32_t  free      # index to first element in free chain
-        FLOAT64_t  *val       # pointer to array of real values
-        FLOAT64_t  *ival      # pointer to array of imaginary values
+        FLOAT64_t  *val       # pointer to array of values
         INT32_t *col       # pointer to array of indices, see doc
         INT32_t *link      # pointer to array of indices, see doc
         INT32_t *root      # pointer to array of indices, see doc

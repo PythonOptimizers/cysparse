@@ -145,7 +145,8 @@ def generate_template_files(logger, template_filenames, template_environment, co
         code_filename = base_filename_without_extension + '%s' % ext
         code_filename_path = os.path.join(path, code_filename)
 
-        if os.stat(filename).st_mtime - os.stat(code_filename_path).st_mtime > 1:
+        # test if file is non existing or needs to be regenerated
+        if not os.path.isfile(code_filename_path) or os.stat(filename).st_mtime - os.stat(code_filename_path).st_mtime > 1:
 
             with open(code_filename_path, 'w') as f:
                 logger.info('   Generating file %s' % code_filename_path)

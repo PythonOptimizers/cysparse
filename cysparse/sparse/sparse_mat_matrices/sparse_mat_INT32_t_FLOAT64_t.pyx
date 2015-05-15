@@ -30,10 +30,7 @@ cdef class SparseMatrix_INT32_t_FLOAT64_t(SparseMatrix):
 
 
         """
-        if self.is_complex:
-            return FLOAT64_t_BIT * self.nrow * self.ncol * 2
-        else:
-            return FLOAT64_t_BIT * self.nrow * self.ncol
+        return FLOAT64_t_BIT * self.nrow * self.ncol
 
     def memory_real(self):
         raise NotImplemented('Method not implemented for this type of matrix, please report')
@@ -44,10 +41,7 @@ cdef class SparseMatrix_INT32_t_FLOAT64_t(SparseMatrix):
 
 
         """
-        if self.is_complex:
-            return FLOAT64_t_BIT * 2
-        else:
-            return FLOAT64_t_BIT
+        return FLOAT64_t_BIT
 
     def attributes_short_string(self):
         s = "of size %d by %d with %d non zero values" % (self.nrow, self.ncol, self.nnz)
@@ -61,19 +55,13 @@ cdef class SparseMatrix_INT32_t_FLOAT64_t(SparseMatrix):
         else:
             symmetric_string = 'general'
 
-        type_string = None
-        if self.is_complex:
-            type_string = "complex"
-        else:
-            type_string = "real"
-
         store_zeros_string = None
         if self.store_zeros:
             store_zeros_string = "store_zeros"
         else:
             store_zeros_string = "no_zeros"
 
-        s = "%s [%s, %s, %s]" % (self.attributes_short_string(), symmetric_string, type_string, store_zeros_string)
+        s = "%s [%s, %s]" % (self.attributes_short_string(), symmetric_string, store_zeros_string)
 
         return s
 
@@ -84,19 +72,13 @@ cdef class SparseMatrix_INT32_t_FLOAT64_t(SparseMatrix):
         else:
             symmetric_string = 'G'
 
-        type_string = None
-        if self.is_complex:
-            type_string = "C"
-        else:
-            type_string = "R"
-
         store_zeros_string = None
         if self.store_zeros:
             store_zeros_string = "SZ"
         else:
             store_zeros_string = "NZ"
 
-        s= "(%s, %s, %s, [%d, %d])" % (symmetric_string, type_string, store_zeros_string, self.nrow, self.ncol)
+        s= "(%s, %s, [%d, %d])" % (symmetric_string, store_zeros_string, self.nrow, self.ncol)
 
         return s
 

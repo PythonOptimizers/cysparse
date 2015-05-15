@@ -11,7 +11,6 @@ cdef class SparseMatrix:
        
         public bint is_symmetric  # True if symmetric matrix
         public bint store_zeros   # True if 0.0 is to be stored explicitly
-        public bint is_complex    # True if values are complex
 
         bint is_mutable           # True if mutable
 
