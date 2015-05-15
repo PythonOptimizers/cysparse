@@ -125,6 +125,17 @@ def render_template(template_filename, template_environment, context):
 
 
 def generate_template_files(logger, template_filenames, template_environment, context, ext):
+    """
+    Generate template file **if** the source file is more recent than the generated file.
+
+    Args:
+        logger:
+        template_filenames:
+        template_environment:
+        context:
+        ext:
+
+    """
     for filename in template_filenames:
         logger.info("Parsing file '%s'" % filename)
         path, base_filename = os.path.split(filename)
@@ -323,7 +334,9 @@ if __name__ == "__main__":
                         
         else:
             logger.info("Generate code files")
+            ###############################
             # SparseMatrix
+            ###############################
             # sparse_matrix_@index@_@type@.pxd and sparse_matrix_@index@_@type@.pyx
             generate_following_type_and_index(logger, SPARSE_MATRIX_DECLARATION_FILES, GENERAL_ENVIRONMENT, ELEMENT_TYPES, INDEX_TYPES, '.pxd')
             generate_following_type_and_index(logger, SPARSE_MATRIX_DEFINITION_FILES, GENERAL_ENVIRONMENT, ELEMENT_TYPES, INDEX_TYPES, '.pyx')
@@ -333,7 +346,9 @@ if __name__ == "__main__":
             #tabu['INT32_t'] = {}
             #tabu['INT32_t']['INT64_t'] = False
 
+            ###############################
             # LLSparseMatrix
+            ###############################
             # ll_mat.pyx
             generate_template_files(logger, [LL_SPARSE_MATRIX_BASE_FILE], GENERAL_ENVIRONMENT, GENERAL_CONTEXT, '.pyx')
 

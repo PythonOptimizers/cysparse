@@ -116,3 +116,6 @@ def NewLLSparseMatrix(**kwargs):
     #                                            CASE 1: from another matrix
     if matrix is not None:
         raise NotImplementedError("Cannot create a LLSparseMatrix from another matrix (yet)")
+
+    if from_filename:
+        raise NotImplementedError("Cannot create a LLSparseMatrix from a file (yet)")
