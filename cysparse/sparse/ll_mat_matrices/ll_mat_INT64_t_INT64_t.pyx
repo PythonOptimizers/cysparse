@@ -141,11 +141,9 @@ cdef class LLSparseMatrix_INT64_t_INT64_t(MutableSparseMatrix_INT64_t_INT64_t):
         Note:
             We use ``LL_MAT_INCREASE_FACTOR`` as expanding factor.
 
-        
-        
         """
         assert LL_MAT_INCREASE_FACTOR > 1.0
-        cdef INT64_t real_new_alloc = <INT64_t>(<INT64_t>LL_MAT_INCREASE_FACTOR * self.nalloc) + 1
+        cdef INT64_t real_new_alloc = <INT64_t>(<FLOAT64_t>LL_MAT_INCREASE_FACTOR * self.nalloc) + 1
 
         return self._realloc(real_new_alloc)
 
@@ -222,5 +220,134 @@ cdef class LLSparseMatrix_INT64_t_INT64_t(MutableSparseMatrix_INT64_t_INT64_t):
 
         return total_memory
 
-#cdef NewLLSparseMatrix_INT64_t_INT64_t(INT64_t * val, INT64_t *root, INT64_t *link, INT64_t *col, INT64_t * ival):
-#        pass
+    ####################################################################################################################
+    # Set/Get individual elements
+    ####################################################################################################################
+    ####################################################################################################################
+    #                                            *** SET ***
+    cdef put(self, INT64_t i, INT64_t j, INT64_t value):
+        """
+        Set :math:`A[i, j] = \textrm{value}` directly.
+
+        Note:
+            Store zero elements **only** if ``store_zeros`` is ``True``.
+
+        Warning:
+            No out of bound check.
+
+        See:
+            :meth:`safe_put`.
+
+
+        """
+        if self.is_symmetric and i < j:
+            raise IndexError('Write operation to upper triangle of symmetric matrix not allowed')
+
+        cdef INT64_t k, new_elem, last, col
+
+        # Find element to be set (or removed)
+        col = last = -1
+        k = self.root[i]
+        while k != -1:
+            col = self.col[k]
+            # TODO: check this
+            if col >= j:
+                break
+            last = k
+            k = self.link[k]
+
+        # Store value
+        if self.store_zeros or value != 0.0:
+            if col == j:
+                # element already exist
+                self.val[k] = value
+            else:
+                # new element
+                # find location for new element
+                if self.free != -1:
+                    # use element from the free chain
+                    new_elem = self.free
+                    self.free = self.link[new_elem]
+
+                else:
+                    # append new element to the end
+                    new_elem = self.nnz
+
+                # test if there is space for a new element
+                if self.nnz == self.nalloc:
+                    # we have to reallocate some space
+                    self._realloc_expand()
+
+                self.val[new_elem] = value
+
+                self.col[new_elem] = j
+                self.link[new_elem] = k
+
+                if last == -1:
+                    self.root[i] = new_elem
+                else:
+                    self.link[last] = new_elem
+
+                self.nnz += 1
+
+        else:
+            # value == 0.0:
+            # if element exists but we don't store zero elements
+            # we need to "zeroify" this element
+            if col == j:
+                # relink row i
+                if last == -1:
+                    self.root[i] = self.link[k]
+                else:
+                    self.link[last] = self.link[k]
+
+                # add element to free list
+                self.link[k] = self.free
+                self.free = k
+
+                self.nnz -= 1
+
+
+    cdef safe_put(self, INT64_t i, INT64_t j, INT64_t value):
+        """
+        Set ``A[i, j] = value`` directly.
+
+        Raises:
+            IndexError: when index out of bound.
+
+        """
+        if i < 0 or i >= self.nrow or j < 0 or j >= self.ncol:
+            raise IndexError('Indices out of range')
+
+        self.put(i, j, value)
+
+    ####################################################################################################################
+    # __setitem/__getitem__
+    ####################################################################################################################
+    def __setitem__(self, tuple key, value):
+        """
+        A[i, j] = value
+
+        Raises:
+            IndexError: when index out of bound.
+
+
+        """
+        if len(key) != 2:
+            raise IndexError('Index tuple must be of length 2 (not %d)' % len(key))
+
+        #cdef LLSparseMatrixView view
+
+        ## test for direct access (i.e. both elements are integers)
+        #if not PyInt_Check(<PyObject *>key[0]) or not PyInt_Check(<PyObject *>key[1]):
+        #    # TODO: don't create temp object
+        #    view = MakeLLSparseMatrixView(self, <PyObject *>key[0], <PyObject *>key[1])
+        #    self.assign(view, value)
+
+        #    del view
+        #    return
+
+        cdef INT64_t i = key[0]
+        cdef INT64_t j = key[1]
+
+        self.safe_put(i, j, value)

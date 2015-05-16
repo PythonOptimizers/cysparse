@@ -60,6 +60,8 @@ base_ext_params = ext_params.copy()
 base_ext = [
     Extension(name="cysparse.types.cysparse_types",
               sources=["cysparse/types/cysparse_types.pxd", "cysparse/types/cysparse_types.pyx"]),
+    Extension(name="cysparse.types.cysparse_numpy_types",
+              sources=["cysparse/types/cysparse_numpy_types.pxd", "cysparse/types/cysparse_numpy_types.pyx"]),
     ]
 
 ########################################################################################################################

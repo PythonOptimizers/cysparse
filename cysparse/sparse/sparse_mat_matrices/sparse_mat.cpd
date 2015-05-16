@@ -11,7 +11,7 @@ cdef class SparseMatrix_@index@_@type@(SparseMatrix):
 
 cdef class MutableSparseMatrix_@index@_@type@(SparseMatrix_@index@_@type@):
     cdef:
-        public @index@ size_hint # hint to allocate the size of mutable 1D arrays at creation
+        @index@ size_hint # hint to allocate the size of mutable 1D arrays at creation
         @index@ nalloc    # allocated size of mutable 1D arrays
 
 cdef class ImmutableSparseMatrix_@index@_@type@(SparseMatrix_@index@_@type@):

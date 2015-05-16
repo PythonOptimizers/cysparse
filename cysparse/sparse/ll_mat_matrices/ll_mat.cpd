@@ -30,8 +30,8 @@ cdef class LLSparseMatrix_@index@_@type@(MutableSparseMatrix_@index@_@type@):
     ####################################################################################################################
     # SET/GET
     ####################################################################################################################
-    #cdef put(self, @index@ i, @index@ j, @type@ value, @type@ imaginary=?)
-    #cdef safe_put(self, @index@ i, @index@ j, @type@ value, @type@ imaginary=?)
+    cdef put(self, @index@ i, @index@ j, @type@ value)
+    cdef safe_put(self, @index@ i, @index@ j, @type@ value)
     #cdef assign(self, LLSparseMatrixView view, obj)
 
     #cdef at(self, @index@ i, @index@ j)

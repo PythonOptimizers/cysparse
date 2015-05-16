@@ -30,8 +30,8 @@ cdef class LLSparseMatrix_INT64_t_INT32_t(MutableSparseMatrix_INT64_t_INT32_t):
     ####################################################################################################################
     # SET/GET
     ####################################################################################################################
-    #cdef put(self, INT64_t i, INT64_t j, INT32_t value, INT32_t imaginary=?)
-    #cdef safe_put(self, INT64_t i, INT64_t j, INT32_t value, INT32_t imaginary=?)
+    cdef put(self, INT64_t i, INT64_t j, INT32_t value)
+    cdef safe_put(self, INT64_t i, INT64_t j, INT32_t value)
     #cdef assign(self, LLSparseMatrixView view, obj)
 
     #cdef at(self, INT64_t i, INT64_t j)

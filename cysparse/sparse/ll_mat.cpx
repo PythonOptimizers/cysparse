@@ -26,14 +26,11 @@ def NewLLSparseMatrix(**kwargs):
     size = kwargs.get('size', -1)
     size_hint = kwargs.get('size_hint', LL_MAT_DEFAULT_SIZE_HINT)
 
-    itype_str = kwargs.get('itype', 'INT32_t')
-    dtype_str = kwargs.get('dtype', 'FLOAT64_t')
+    itype = kwargs.get('itype', INT32_T)
+    dtype = kwargs.get('dtype', FLOAT64_T)
 
-    assert itype_str in BASIC_TYPES, "itype string '%s' not recognized" % itype_str
-    assert dtype_str in BASIC_TYPES, "dtype string '%s' not recognized" % dtype_str
-
-    itype = BASIC_TYPES[itype_str][1]
-    dtype = BASIC_TYPES[dtype_str][1]
+    assert itype in BASIC_TYPES, "itype not recognized"
+    assert dtype in BASIC_TYPES, "dtype not recognized"
 
     assert itype in [
      {%- for index_name in index_list -%}
@@ -112,9 +109,10 @@ def NewLLSparseMatrix(**kwargs):
     {% endfor %}
 {% endfor %}
 
-    #                                            CASE 1: from another matrix
+    #                                            CASE 2: from another matrix
     if matrix is not None:
         raise NotImplementedError("Cannot create a LLSparseMatrix from another matrix (yet)")
 
+    #                                            CASE 3: from a file
     if from_filename:
         raise NotImplementedError("Cannot create a LLSparseMatrix from a file (yet)")

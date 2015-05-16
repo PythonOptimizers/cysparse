@@ -72,7 +72,7 @@ def type2enum(type_name):
 # COMMON STUFF
 #################################################################################################
 # TODO: grab this from cysparse_types.pxd or at least from a one common file
-ELEMENT_TYPES = ['INT32_t', 'INT64_t', 'FLOAT32_t', 'FLOAT64_t']
+ELEMENT_TYPES = ['INT32_t', 'INT64_t', 'FLOAT32_t', 'FLOAT64_t', 'COMPLEX64_t', 'COMPLEX128_t']
 INDEX_TYPES = ['INT32_t', 'INT64_t']
 
 # when coding
@@ -94,7 +94,7 @@ GENERAL_ENVIRONMENT = Environment(
 GENERAL_ENVIRONMENT.filters['type2enum'] = type2enum
 
 
-def clean_action_files(logger, directory, file_list=None):
+def clean_cython_files(logger, directory, file_list=None):
     """
 
     :param logger:
@@ -244,7 +244,9 @@ SETUP_PY_FILE = os.path.join(PATH, 'setup.py')
 
 ### SparseMatrix
 
-SPARSE_MATRIX_TEMPLATE_DIR = os.path.join(PATH, 'cysparse', 'sparse', 'sparse_mat_matrices')
+SPARSE_DIR = os.path.join(PATH, 'cysparse', 'sparse')
+
+SPARSE_MATRIX_TEMPLATE_DIR = os.path.join(SPARSE_DIR, 'sparse_mat_matrices')
 
 SPARSE_MATRIX_INCLUDE_FILES = glob.glob(os.path.join(SPARSE_MATRIX_TEMPLATE_DIR, '*.cpi'))
 SPARSE_MATRIX_DECLARATION_FILES = glob.glob(os.path.join(SPARSE_MATRIX_TEMPLATE_DIR, '*.cpd'))
@@ -253,9 +255,9 @@ SPARSE_MATRIX_DEFINITION_FILES = glob.glob(os.path.join(SPARSE_MATRIX_TEMPLATE_D
 
 ### LLSparseMatrix
 
-LL_SPARSE_MATRIX_BASE_FILE = os.path.join(PATH, 'cysparse', 'sparse', 'll_mat.cpx')
+LL_SPARSE_MATRIX_BASE_FILE = os.path.join(SPARSE_DIR, 'll_mat.cpx')
 
-LL_SPARSE_MATRIX_TEMPLATE_DIR = os.path.join(PATH, 'cysparse', 'sparse', 'll_mat_matrices')
+LL_SPARSE_MATRIX_TEMPLATE_DIR = os.path.join(SPARSE_DIR, 'll_mat_matrices')
 
 LL_SPARSE_MATRIX_INCLUDE_FILES = glob.glob(os.path.join(LL_SPARSE_MATRIX_TEMPLATE_DIR, '*.cpi'))
 LL_SPARSE_MATRIX_DECLARATION_FILES = glob.glob(os.path.join(LL_SPARSE_MATRIX_TEMPLATE_DIR, '*.cpd'))
@@ -320,7 +322,7 @@ if __name__ == "__main__":
         logger.info("Act for setup file")
 
         if arg_options.clean:
-            clean_action_files(logger, PATH, [SETUP_PY_FILE])
+            clean_cython_files(logger, PATH, [SETUP_PY_FILE])
         else:
             generate_template_files(logger, [SETUP_FILE], GENERAL_ENVIRONMENT, GENERAL_CONTEXT, '.py')
 
@@ -330,8 +332,9 @@ if __name__ == "__main__":
         
         if arg_options.clean:
             logger.info("Clean generated files")
-            clean_action_files(logger, SPARSE_MATRIX_TEMPLATE_DIR)
-            clean_action_files(logger, LL_SPARSE_MATRIX_TEMPLATE_DIR)
+            clean_cython_files(logger, SPARSE_MATRIX_TEMPLATE_DIR)
+            clean_cython_files(logger, LL_SPARSE_MATRIX_TEMPLATE_DIR)
+            clean_cython_files(logger, SPARSE_DIR, [LL_SPARSE_MATRIX_BASE_FILE[:-4] + '.pyx'])
                         
         else:
             logger.info("Generate code files")

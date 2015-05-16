@@ -17,6 +17,10 @@ from cysparse.sparse.ll_mat_matrices.ll_mat_INT32_t_FLOAT32_t cimport LLSparseMa
     
 from cysparse.sparse.ll_mat_matrices.ll_mat_INT32_t_FLOAT64_t cimport LLSparseMatrix_INT32_t_FLOAT64_t
     
+from cysparse.sparse.ll_mat_matrices.ll_mat_INT32_t_COMPLEX64_t cimport LLSparseMatrix_INT32_t_COMPLEX64_t
+    
+from cysparse.sparse.ll_mat_matrices.ll_mat_INT32_t_COMPLEX128_t cimport LLSparseMatrix_INT32_t_COMPLEX128_t
+    
 
     
 from cysparse.sparse.ll_mat_matrices.ll_mat_INT64_t_INT32_t cimport LLSparseMatrix_INT64_t_INT32_t
@@ -26,6 +30,10 @@ from cysparse.sparse.ll_mat_matrices.ll_mat_INT64_t_INT64_t cimport LLSparseMatr
 from cysparse.sparse.ll_mat_matrices.ll_mat_INT64_t_FLOAT32_t cimport LLSparseMatrix_INT64_t_FLOAT32_t
     
 from cysparse.sparse.ll_mat_matrices.ll_mat_INT64_t_FLOAT64_t cimport LLSparseMatrix_INT64_t_FLOAT64_t
+    
+from cysparse.sparse.ll_mat_matrices.ll_mat_INT64_t_COMPLEX64_t cimport LLSparseMatrix_INT64_t_COMPLEX64_t
+    
+from cysparse.sparse.ll_mat_matrices.ll_mat_INT64_t_COMPLEX128_t cimport LLSparseMatrix_INT64_t_COMPLEX128_t
     
 
 
@@ -42,17 +50,14 @@ def NewLLSparseMatrix(**kwargs):
     size = kwargs.get('size', -1)
     size_hint = kwargs.get('size_hint', LL_MAT_DEFAULT_SIZE_HINT)
 
-    itype_str = kwargs.get('itype', 'INT32_t')
-    dtype_str = kwargs.get('dtype', 'FLOAT64_t')
+    itype = kwargs.get('itype', INT32_T)
+    dtype = kwargs.get('dtype', FLOAT64_T)
 
-    assert itype_str in BASIC_TYPES, "itype string '%s' not recognized" % itype_str
-    assert dtype_str in BASIC_TYPES, "dtype string '%s' not recognized" % dtype_str
-
-    itype = BASIC_TYPES[itype_str][1]
-    dtype = BASIC_TYPES[dtype_str][1]
+    assert itype in BASIC_TYPES, "itype not recognized"
+    assert dtype in BASIC_TYPES, "dtype not recognized"
 
     assert itype in [INT32_T,INT64_T], "itype is not accepted as index type"
-    assert dtype in [INT32_T,INT64_T,FLOAT32_T,FLOAT64_T], "dtype is not accepted as type for a matrix element"
+    assert dtype in [INT32_T,INT64_T,FLOAT32_T,FLOAT64_T,COMPLEX64_T,COMPLEX128_T], "dtype is not accepted as type for a matrix element"
 
     cdef bint store_zeros = kwargs.get('store_zeros', False)
     cdef bint is_symmetric = kwargs.get('is_symmetric', False)
@@ -123,6 +128,16 @@ def NewLLSparseMatrix(**kwargs):
         
                 return LLSparseMatrix_INT32_t_FLOAT64_t(control_object=unexposed_value, nrow=real_nrow, ncol=real_ncol, size_hint=size_hint, store_zeros=store_zeros, is_symmetric=is_symmetric)
     
+        
+            elif dtype == COMPLEX64_T:
+        
+                return LLSparseMatrix_INT32_t_COMPLEX64_t(control_object=unexposed_value, nrow=real_nrow, ncol=real_ncol, size_hint=size_hint, store_zeros=store_zeros, is_symmetric=is_symmetric)
+    
+        
+            elif dtype == COMPLEX128_T:
+        
+                return LLSparseMatrix_INT32_t_COMPLEX128_t(control_object=unexposed_value, nrow=real_nrow, ncol=real_ncol, size_hint=size_hint, store_zeros=store_zeros, is_symmetric=is_symmetric)
+    
 
     
         elif itype == INT64_T:
@@ -148,11 +163,22 @@ def NewLLSparseMatrix(**kwargs):
         
                 return LLSparseMatrix_INT64_t_FLOAT64_t(control_object=unexposed_value, nrow=real_nrow, ncol=real_ncol, size_hint=size_hint, store_zeros=store_zeros, is_symmetric=is_symmetric)
     
+        
+            elif dtype == COMPLEX64_T:
+        
+                return LLSparseMatrix_INT64_t_COMPLEX64_t(control_object=unexposed_value, nrow=real_nrow, ncol=real_ncol, size_hint=size_hint, store_zeros=store_zeros, is_symmetric=is_symmetric)
+    
+        
+            elif dtype == COMPLEX128_T:
+        
+                return LLSparseMatrix_INT64_t_COMPLEX128_t(control_object=unexposed_value, nrow=real_nrow, ncol=real_ncol, size_hint=size_hint, store_zeros=store_zeros, is_symmetric=is_symmetric)
+    
 
 
-    #                                            CASE 1: from another matrix
+    #                                            CASE 2: from another matrix
     if matrix is not None:
         raise NotImplementedError("Cannot create a LLSparseMatrix from another matrix (yet)")
 
+    #                                            CASE 3: from a file
     if from_filename:
         raise NotImplementedError("Cannot create a LLSparseMatrix from a file (yet)")

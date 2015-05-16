@@ -7,6 +7,7 @@
 # - XXX_T : an enum constant
 # - XXX_t_BIT : numbers of bits for this type
 
+cimport numpy as cnp
 
 #################################################################################################
 #                                 *** BASIC ABSOLUTE TYPES ***
@@ -17,17 +18,21 @@
 # UINT64_t
 # FLOAT32_t
 # FLOAT64_t
+# COMPLEX64_t
+# COMPLEX128_t
 #
 # DO NOT CHANGE THIS
 #################################################################################################
 
-cdef enum CySparseType:
+cpdef enum CySparseType:
     INT32_T = 0
     UINT32_T = 1
     INT64_T = 2
     UINT64_T = 3
     FLOAT32_T = 4
     FLOAT64_T = 5
+    COMPLEX64_T = 6
+    COMPLEX128_T = 7
 
 ctypedef int INT32_t
 ctypedef unsigned int UINT32_t
@@ -36,6 +41,9 @@ ctypedef unsigned long UINT64_t
 
 ctypedef float FLOAT32_t
 ctypedef double FLOAT64_t
+
+ctypedef cnp.complex64_t COMPLEX64_t
+ctypedef cnp.complex128_t COMPLEX128_t
 
 
 #################################################################################################
@@ -53,6 +61,8 @@ cdef enum CySparseTypeBitSize:
     UINT64_t_BIT = sizeof(UINT64_t) * CHAR_BIT
     FLOAT32_t_BIT = sizeof(FLOAT32_t) * CHAR_BIT
     FLOAT64_t_BIT = sizeof(FLOAT64_t) * CHAR_BIT
+    COMPLEX64_t_BIT = sizeof(COMPLEX64_t) * CHAR_BIT
+    COMPLEX128_t_BIT = sizeof(COMPLEX128_t) * CHAR_BIT
 
 #################################################################################################
 #                                 *** SPARSE MATRIX TYPES ***

@@ -11,7 +11,7 @@ cdef class SparseMatrix_INT64_t_INT64_t(SparseMatrix):
 
 cdef class MutableSparseMatrix_INT64_t_INT64_t(SparseMatrix_INT64_t_INT64_t):
     cdef:
-        public INT64_t size_hint # hint to allocate the size of mutable 1D arrays at creation
+        INT64_t size_hint # hint to allocate the size of mutable 1D arrays at creation
         INT64_t nalloc    # allocated size of mutable 1D arrays
 
 cdef class ImmutableSparseMatrix_INT64_t_INT64_t(SparseMatrix_INT64_t_INT64_t):

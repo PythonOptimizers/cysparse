@@ -60,6 +60,8 @@ base_ext_params = ext_params.copy()
 base_ext = [
     Extension(name="cysparse.types.cysparse_types",
               sources=["cysparse/types/cysparse_types.pxd", "cysparse/types/cysparse_types.pyx"]),
+    Extension(name="cysparse.types.cysparse_numpy_types",
+              sources=["cysparse/types/cysparse_numpy_types.pxd", "cysparse/types/cysparse_numpy_types.pyx"]),
     ]
 
 ########################################################################################################################
@@ -135,6 +137,16 @@ new_sparse_ext = [
                      "cysparse/sparse/sparse_mat_matrices/sparse_mat_INT32_t_FLOAT64_t.pyx"],
             **sparse_ext_params),
     
+  Extension(name="cysparse.sparse.sparse_mat_matrices.sparse_mat_INT32_t_COMPLEX64_t",
+            sources=["cysparse/sparse/sparse_mat_matrices/sparse_mat_INT32_t_COMPLEX64_t.pxd",
+                     "cysparse/sparse/sparse_mat_matrices/sparse_mat_INT32_t_COMPLEX64_t.pyx"],
+            **sparse_ext_params),
+    
+  Extension(name="cysparse.sparse.sparse_mat_matrices.sparse_mat_INT32_t_COMPLEX128_t",
+            sources=["cysparse/sparse/sparse_mat_matrices/sparse_mat_INT32_t_COMPLEX128_t.pxd",
+                     "cysparse/sparse/sparse_mat_matrices/sparse_mat_INT32_t_COMPLEX128_t.pyx"],
+            **sparse_ext_params),
+    
 
     
   Extension(name="cysparse.sparse.sparse_mat_matrices.sparse_mat_INT64_t_INT32_t",
@@ -155,6 +167,16 @@ new_sparse_ext = [
   Extension(name="cysparse.sparse.sparse_mat_matrices.sparse_mat_INT64_t_FLOAT64_t",
             sources=["cysparse/sparse/sparse_mat_matrices/sparse_mat_INT64_t_FLOAT64_t.pxd",
                      "cysparse/sparse/sparse_mat_matrices/sparse_mat_INT64_t_FLOAT64_t.pyx"],
+            **sparse_ext_params),
+    
+  Extension(name="cysparse.sparse.sparse_mat_matrices.sparse_mat_INT64_t_COMPLEX64_t",
+            sources=["cysparse/sparse/sparse_mat_matrices/sparse_mat_INT64_t_COMPLEX64_t.pxd",
+                     "cysparse/sparse/sparse_mat_matrices/sparse_mat_INT64_t_COMPLEX64_t.pyx"],
+            **sparse_ext_params),
+    
+  Extension(name="cysparse.sparse.sparse_mat_matrices.sparse_mat_INT64_t_COMPLEX128_t",
+            sources=["cysparse/sparse/sparse_mat_matrices/sparse_mat_INT64_t_COMPLEX128_t.pxd",
+                     "cysparse/sparse/sparse_mat_matrices/sparse_mat_INT64_t_COMPLEX128_t.pyx"],
             **sparse_ext_params),
     
 
@@ -190,6 +212,16 @@ new_sparse_ext = [
                      "cysparse/sparse/ll_mat_matrices/ll_mat_INT32_t_FLOAT64_t.pyx"],
             **sparse_ext_params),
   
+  Extension(name="cysparse.sparse.ll_mat_matrices.ll_mat_INT32_t_COMPLEX64_t",
+            sources=["cysparse/sparse/ll_mat_matrices/ll_mat_INT32_t_COMPLEX64_t.pxd",
+                     "cysparse/sparse/ll_mat_matrices/ll_mat_INT32_t_COMPLEX64_t.pyx"],
+            **sparse_ext_params),
+  
+  Extension(name="cysparse.sparse.ll_mat_matrices.ll_mat_INT32_t_COMPLEX128_t",
+            sources=["cysparse/sparse/ll_mat_matrices/ll_mat_INT32_t_COMPLEX128_t.pxd",
+                     "cysparse/sparse/ll_mat_matrices/ll_mat_INT32_t_COMPLEX128_t.pyx"],
+            **sparse_ext_params),
+  
 
   
   Extension(name="cysparse.sparse.ll_mat_matrices.ll_mat_INT64_t_INT32_t",
@@ -210,6 +242,16 @@ new_sparse_ext = [
   Extension(name="cysparse.sparse.ll_mat_matrices.ll_mat_INT64_t_FLOAT64_t",
             sources=["cysparse/sparse/ll_mat_matrices/ll_mat_INT64_t_FLOAT64_t.pxd",
                      "cysparse/sparse/ll_mat_matrices/ll_mat_INT64_t_FLOAT64_t.pyx"],
+            **sparse_ext_params),
+  
+  Extension(name="cysparse.sparse.ll_mat_matrices.ll_mat_INT64_t_COMPLEX64_t",
+            sources=["cysparse/sparse/ll_mat_matrices/ll_mat_INT64_t_COMPLEX64_t.pxd",
+                     "cysparse/sparse/ll_mat_matrices/ll_mat_INT64_t_COMPLEX64_t.pyx"],
+            **sparse_ext_params),
+  
+  Extension(name="cysparse.sparse.ll_mat_matrices.ll_mat_INT64_t_COMPLEX128_t",
+            sources=["cysparse/sparse/ll_mat_matrices/ll_mat_INT64_t_COMPLEX128_t.pxd",
+                     "cysparse/sparse/ll_mat_matrices/ll_mat_INT64_t_COMPLEX128_t.pyx"],
             **sparse_ext_params),
   
 

@@ -26,13 +26,20 @@ cdef class SparseMatrix_INT32_t_FLOAT32_t(SparseMatrix):
     ####################################################################################################################
     def memory_virtual(self):
         """
-        Return memory needed if implementation would have kept **all** elements, not only the non zeros ones.
+        Return memory (in bits) needed if implementation would have kept **all** elements, not only the non zeros ones.
 
-
+        Note:
+            This method only returns the internal memory used for the C-arrays, **not** the whole object.
         """
         return FLOAT32_t_BIT * self.nrow * self.ncol
 
     def memory_real(self):
+        """
+        Real memory used internally.
+
+        Note:
+            This method only returns the internal memory used for the C-arrays, **not** the whole object.
+        """
         raise NotImplemented('Method not implemented for this type of matrix, please report')
 
     def memory_element(self):
@@ -44,6 +51,9 @@ cdef class SparseMatrix_INT32_t_FLOAT32_t(SparseMatrix):
         return FLOAT32_t_BIT
 
     def attributes_short_string(self):
+        """
+
+        """
         s = "of size %d by %d with %d non zero values" % (self.nrow, self.ncol, self.nnz)
         return s
 

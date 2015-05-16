@@ -30,8 +30,8 @@ cdef class LLSparseMatrix_INT64_t_FLOAT64_t(MutableSparseMatrix_INT64_t_FLOAT64_
     ####################################################################################################################
     # SET/GET
     ####################################################################################################################
-    #cdef put(self, INT64_t i, INT64_t j, FLOAT64_t value, FLOAT64_t imaginary=?)
-    #cdef safe_put(self, INT64_t i, INT64_t j, FLOAT64_t value, FLOAT64_t imaginary=?)
+    cdef put(self, INT64_t i, INT64_t j, FLOAT64_t value)
+    cdef safe_put(self, INT64_t i, INT64_t j, FLOAT64_t value)
     #cdef assign(self, LLSparseMatrixView view, obj)
 
     #cdef at(self, INT64_t i, INT64_t j)
