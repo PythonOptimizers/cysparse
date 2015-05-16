@@ -1,6 +1,7 @@
 from __future__ import print_function
 
 from cysparse.types.cysparse_types cimport *
+
 from cysparse.sparse.ll_mat cimport LL_MAT_INCREASE_FACTOR
 
 from cysparse.sparse.sparse_mat cimport unexposed_value
@@ -34,12 +35,19 @@ cdef extern from "Python.h":
     double PyComplex_ImagAsDouble(PyObject *op)
     PyObject* PyComplex_FromDoubles(double real, double imag)
 
+
 cdef extern from "Python.h":
     PyObject* Py_BuildValue(char *format, ...)
     PyObject* PyList_New(Py_ssize_t len)
     void PyList_SET_ITEM(PyObject *list, Py_ssize_t i, PyObject *o)
     PyObject* PyFloat_FromDouble(double v)
+    Py_complex PyComplex_AsCComplex(PyObject *op)
 
+cdef extern from "complex.h":
+    float crealf(float complex z)
+    float cimagf(float complex z)
+    double creal(double complex z)
+    double cimag(double complex z)
 
 cdef class LLSparseMatrix_INT32_t_COMPLEX64_t(MutableSparseMatrix_INT32_t_COMPLEX64_t):
     """
@@ -322,6 +330,49 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX64_t(MutableSparseMatrix_INT32_t_COMPLE
         self.put(i, j, value)
 
     ####################################################################################################################
+    #                                            *** GET ***
+    cdef COMPLEX64_t at(self, INT32_t i, INT32_t j):
+        """
+        Return element ``(i, j)``.
+
+        Warning:
+            There is not out of bounds test.
+
+        See:
+            :meth:`safe_at`.
+
+
+        """
+        cdef INT32_t k, t
+
+        if self.is_symmetric and i < j:
+            t = i; i = j; j = t
+
+        k = self.root[i]
+
+        while k != -1:
+            # TODO: check this: we go over all elements in row i: is it really necessary?
+            if self.col[k] == j:
+                return self.val[k]
+            k = self.link[k]
+
+        return 0
+
+    cdef COMPLEX64_t safe_at(self, INT32_t i, INT32_t j):
+        """
+        Return element ``(i, j)`` but with check for out of bounds indices.
+
+        Raises:
+            IndexError: when index out of bound.
+
+
+        """
+        if not 0 <= i < self.nrow or not 0 <= j < self.ncol:
+            raise IndexError("Index out of bounds")
+
+        return self.at(i, j)
+
+    ####################################################################################################################
     # __setitem/__getitem__
     ####################################################################################################################
     def __setitem__(self, tuple key, value):
@@ -351,3 +402,125 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX64_t(MutableSparseMatrix_INT32_t_COMPLE
         cdef INT32_t j = key[1]
 
         self.safe_put(i, j, value)
+
+    def __getitem__(self, tuple key):
+        """
+        Return ``ll_mat[...]``.
+
+        Args:
+          key = (i,j): Must be a couple of values. Values can be:
+                 * integers;
+                 * slices;
+                 * lists;
+                 * numpy arrays
+
+        Raises:
+            IndexError: when index out of bound.
+
+        Returns:
+            If ``i`` and ``j`` are both integers, returns corresponding value ``ll_mat[i, j]``, otherwise
+            returns a corresponding :class:`LLSparseMatrixView` view on the matrix.
+
+
+        """
+        if len(key) != 2:
+            raise IndexError('Index tuple must be of length 2 (not %d)' % len(key))
+
+        #cdef LLSparseMatrixView view
+
+        ## test for direct access (i.e. both elements are integers)
+        #if not PyInt_Check(<PyObject *>key[0]) or not PyInt_Check(<PyObject *>key[1]):
+        #    view =  MakeLLSparseMatrixView(self, <PyObject *>key[0], <PyObject *>key[1])
+        #    return view
+
+        cdef INT32_t i = key[0]
+        cdef INT32_t j = key[1]
+
+        return self.safe_at(i, j)
+
+    ####################################################################################################################
+    # Set/Get list of elements
+    ####################################################################################################################
+    ####################################################################################################################
+    #                                            *** SET ***
+    def put_triplet(self, list index_i, list index_j, list val):
+        """
+        Assign triplet :math:`\{(i, j, \textrm{val})\}` values to the matrix..
+
+
+        """
+        cdef Py_ssize_t index_i_length = len(index_i)
+        cdef Py_ssize_t index_j_length = len(index_j)
+        cdef Py_ssize_t val_length = len(val)
+
+        assert index_j_length == index_j_length == val_length, "All lists must be of equal length"
+
+        cdef Py_ssize_t i
+        cdef PyObject * elem
+
+        for i from 0 <= i < index_i_length:
+            self.safe_put(index_i[i], index_j[i], val[i])
+
+    ####################################################################################################################
+    #                                            *** GET ***
+    cpdef object keys(self):
+        """
+        Return a list of tuples (i,j) of non-zero matrix entries.
+
+
+        """
+        cdef:
+            #list list_container
+            PyObject *list_p # the list that will hold the keys
+            INT32_t i, j, k
+            Py_ssize_t pos = 0    # position in list
+
+        if not self.is_symmetric:
+
+            # create list
+            list_p = PyList_New(self.nnz)
+            if list_p == NULL:
+                raise MemoryError()
+
+            for i from 0 <= i < self.nrow:
+                k = self.root[i]
+                while k != -1:
+                    j = self.col[k]
+                    PyList_SET_ITEM(list_p, pos, Py_BuildValue("ii", i, j))
+                    pos += 1
+                    k = self.link[k]
+        else:
+            raise NotImplemented("keys() is not (yet) implemented for symmetrical LLSparseMatrix")
+
+        return <object> list_p
+
+    cpdef object values(self):
+        """
+        Return a list of the non-zero matrix entries.
+        """
+        cdef:
+            PyObject *list_p   # the list that will hold the values
+            INT32_t i, k
+            Py_ssize_t pos = 0        # position in list
+
+        if not self.is_symmetric:
+            list_p = PyList_New(self.nnz)
+            if list_p == NULL:
+                raise MemoryError()
+
+            # EXPLICIT TYPE TESTS
+
+            for i from 0<= i < self.nrow:
+                k = self.root[i]
+                while k != -1:
+
+                    PyList_SET_ITEM(list_p, pos, PyComplex_FromDoubles(crealf(self.val[k]) , cimagf(self.val[k])))  # how to do this more efficiently?
+
+
+                    pos += 1
+                    k = self.link[k]
+
+        else:
+            raise NotImplementedError("values() not (yet) implemented for symmetrical LLSparseMatrix")
+
+        return <object> list_p

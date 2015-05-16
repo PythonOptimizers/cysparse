@@ -54,7 +54,7 @@ cdef class SparseMatrix_INT64_t_COMPLEX128_t(SparseMatrix):
         """
 
         """
-        s = "of size %d by %d with %d non zero values" % (self.nrow, self.ncol, self.nnz)
+        s = "of dim %d by %d with %d non zero values" % (self.nrow, self.ncol, self.nnz)
         return s
 
     def attributes_long_string(self):
@@ -113,6 +113,7 @@ cdef class MutableSparseMatrix_INT64_t_COMPLEX128_t(SparseMatrix_INT64_t_COMPLEX
         """
         self.size_hint = kwargs.get('size_hint', MUTABLE_SPARSE_MAT_DEFAULT_SIZE_HINT)
         self.nalloc = 0
+        self.is_mutable = True
 
 
 ########################################################################################################################
@@ -125,4 +126,4 @@ cdef class ImmutableSparseMatrix_INT64_t_COMPLEX128_t(SparseMatrix_INT64_t_COMPL
         Warning:
             Only use named arguments!
         """
-        pass
+        self.is_mutable = False

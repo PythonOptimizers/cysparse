@@ -34,11 +34,11 @@ cdef class LLSparseMatrix_INT32_t_INT32_t(MutableSparseMatrix_INT32_t_INT32_t):
     cdef safe_put(self, INT32_t i, INT32_t j, INT32_t value)
     #cdef assign(self, LLSparseMatrixView view, obj)
 
-    #cdef at(self, INT32_t i, INT32_t j)
-    #cdef safe_at(self, INT32_t i, INT32_t j)
+    cdef INT32_t at(self, INT32_t i, INT32_t j)
+    cdef INT32_t safe_at(self, INT32_t i, INT32_t j)
 
-    #cdef object _keys(self)
-    #cdef object _values(self)
+    cpdef object keys(self)
+    cpdef object values(self)
     #cdef object _items(self)
 
 #cdef NewLLSparseMatrix_INT32_t_INT32_t(INT32_t * val, INT32_t *root, INT32_t *link, INT32_t *col, INT32_t * ival)

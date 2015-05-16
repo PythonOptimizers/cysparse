@@ -34,11 +34,11 @@ cdef class LLSparseMatrix_INT64_t_FLOAT32_t(MutableSparseMatrix_INT64_t_FLOAT32_
     cdef safe_put(self, INT64_t i, INT64_t j, FLOAT32_t value)
     #cdef assign(self, LLSparseMatrixView view, obj)
 
-    #cdef at(self, INT64_t i, INT64_t j)
-    #cdef safe_at(self, INT64_t i, INT64_t j)
+    cdef FLOAT32_t at(self, INT64_t i, INT64_t j)
+    cdef FLOAT32_t safe_at(self, INT64_t i, INT64_t j)
 
-    #cdef object _keys(self)
-    #cdef object _values(self)
+    cpdef object keys(self)
+    cpdef object values(self)
     #cdef object _items(self)
 
 #cdef NewLLSparseMatrix_INT64_t_FLOAT32_t(FLOAT32_t * val, INT64_t *root, INT64_t *link, INT64_t *col, FLOAT32_t * ival)

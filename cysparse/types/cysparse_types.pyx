@@ -23,7 +23,7 @@ BASIC_TYPES_STR['COMPLEX128_t'] = (cp_types.COMPLEX128_t_BIT, cp_types.COMPLEX12
 BASIC_TYPES = {v[1]: (k, v[0]) for k, v in BASIC_TYPES_STR.items()}
 
 ELEMENT_TYPES = BASIC_TYPES.keys()
-INDEX_TYPES = [cp_types.INT32_T, cp_types.INT64_T]
+INDEX_TYPES = [cp_types.COMPLEX64_T, cp_types.COMPLEX128_T]
 
 
 ########################################################################################################################

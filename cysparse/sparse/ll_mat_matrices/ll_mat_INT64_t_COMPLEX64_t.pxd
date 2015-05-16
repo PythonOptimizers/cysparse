@@ -34,11 +34,11 @@ cdef class LLSparseMatrix_INT64_t_COMPLEX64_t(MutableSparseMatrix_INT64_t_COMPLE
     cdef safe_put(self, INT64_t i, INT64_t j, COMPLEX64_t value)
     #cdef assign(self, LLSparseMatrixView view, obj)
 
-    #cdef at(self, INT64_t i, INT64_t j)
-    #cdef safe_at(self, INT64_t i, INT64_t j)
+    cdef COMPLEX64_t at(self, INT64_t i, INT64_t j)
+    cdef COMPLEX64_t safe_at(self, INT64_t i, INT64_t j)
 
-    #cdef object _keys(self)
-    #cdef object _values(self)
+    cpdef object keys(self)
+    cpdef object values(self)
     #cdef object _items(self)
 
 #cdef NewLLSparseMatrix_INT64_t_COMPLEX64_t(COMPLEX64_t * val, INT64_t *root, INT64_t *link, INT64_t *col, COMPLEX64_t * ival)

@@ -34,11 +34,11 @@ cdef class LLSparseMatrix_@index@_@type@(MutableSparseMatrix_@index@_@type@):
     cdef safe_put(self, @index@ i, @index@ j, @type@ value)
     #cdef assign(self, LLSparseMatrixView view, obj)
 
-    #cdef at(self, @index@ i, @index@ j)
-    #cdef safe_at(self, @index@ i, @index@ j)
+    cdef @type@ at(self, @index@ i, @index@ j)
+    cdef @type@ safe_at(self, @index@ i, @index@ j)
 
-    #cdef object _keys(self)
-    #cdef object _values(self)
+    cpdef object keys(self)
+    cpdef object values(self)
     #cdef object _items(self)
 
 #cdef NewLLSparseMatrix_@index@_@type@(@type@ * val, @index@ *root, @index@ *link, @index@ *col, @type@ * ival)
