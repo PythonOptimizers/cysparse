@@ -1,5 +1,5 @@
-from sparse_lib.sparse.ll_mat import MakeLLSparseMatrix
-import sparse_lib.solvers.suitesparse.umfpack as umfpack
+from cysparse.sparse.ll_mat import MakeLLSparseMatrix
+import cysparse.solvers.suitesparse.umfpack as umfpack
 
 import sys
 
@@ -8,6 +8,8 @@ import numpy
 A = MakeLLSparseMatrix(size=4)
 
 A.put_triplet([1.0, 2.0, 6.0, 3.0, 5.0, 4.0], [0, 1, 1, 2, 3, 3], [0, 1, 2, 2, 0, 3])
+
+A.print_to(sys.stdout)
 
 solver = umfpack.UmfpackSolver(A)
 
@@ -43,6 +45,7 @@ print "&" * 80
 print solver.get_lunz()
 
 (L, U, P, Q, D, do_recip, R) = solver.get_LU()
+
 
 print L
 L.print_to(sys.stdout)

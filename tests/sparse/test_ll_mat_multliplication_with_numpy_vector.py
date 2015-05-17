@@ -4,8 +4,8 @@ Tests of ``c = A * b`` with ``A`` a :class:`LLSparseMatrix` and ``b`` and ``c`` 
 ``A`` can be symmetric or not and ``b`` and ``c`` can be strided or not (C-contiguous or not).
 """
 
-from sparse_lib.sparse.ll_mat import LLSparseMatrix
-from sparse_lib.utils.equality import ll_mats_are_equals
+from cysparse.sparse.ll_mat import LLSparseMatrix
+from cysparse.utils.equality import ll_mats_are_equals
 import unittest
 
 import numpy as np

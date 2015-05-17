@@ -2,8 +2,8 @@
 Test the :class:`NonZeros` context manager.
 """
 
-from sparse_lib.sparse.ll_mat import MakeLLSparseMatrix
-from sparse_lib.sparse.sparse_mat import NonZeros
+from cysparse.sparse.ll_mat import MakeLLSparseMatrix
+from cysparse.sparse.sparse_mat import NonZeros
 
 import unittest
 

@@ -14,9 +14,11 @@ CySparse documentation
    introduction
    installation
    sparse_matrix_formats
+   io_formats
    sparse_mat_hierarchy
    ll_mat
    cysparse_cython_users
+   cysparse_lib_mainteners
    
 ..   #Sparse Matrix Formats <formats>
    #Low-Level Sparse Matrix Types <spmatrix>

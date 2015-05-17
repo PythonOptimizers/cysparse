@@ -1,5 +1,5 @@
-from sparse_lib.sparse.ll_mat import LLSparseMatrix
-from sparse_lib.sparse.ll_mat_view import LLSparseMatrixView
+from cysparse.sparse.ll_mat import LLSparseMatrix
+from cysparse.sparse.ll_mat_view import LLSparseMatrixView
 
 import unittest
 
@@ -184,7 +184,7 @@ class LLSparseMatrixViewCreateTestCase(LLSparseMatrixViewBaseTestCase):
 ########################################################################################################################
 class LLSparseMatrixViewCopyTestCase(LLSparseMatrixViewBaseTestCase):
     """
-    We test ``LLSparseMatrixView`` ``copy()`` method. This method returns a corresponding :class:`LLSparseMatrix`.
+    We test ``LLSparseMatrixView`` ``matrix_copy()`` method. This method returns a corresponding :class:`LLSparseMatrix`.
     """
     def setUp(self):
         super(LLSparseMatrixViewCopyTestCase, self).setUp()

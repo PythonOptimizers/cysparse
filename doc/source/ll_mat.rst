@@ -1,4 +1,4 @@
-.. ll_mat:
+.. _ll_mat:
 
 ==========================================================
 :class:`LLSparseMatrix` and :class:`LLSparseMatrixView`
@@ -29,7 +29,7 @@ The :class:`LLSparseMatrixView` class
 
     There are basically two reasons to use a view instead of a matrix:
     
-    - efficiency: no copy is made and the :class:`LLSparseMatrixView` is a light object. TO BE COMPLETED
+    - efficiency: no matrix_copy is made and the :class:`LLSparseMatrixView` is a light object. TO BE COMPLETED
     
     - really fancy indexing: if you need a new matrix constructed by **any** combinations of rows and columns, including 
       index repetitions. TO BE COMPLETED.

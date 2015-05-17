@@ -1,4 +1,4 @@
-from sparse_lib.sparse.ll_mat import MakeLLSparseMatrix
+from cysparse.sparse.ll_mat import MakeLLSparseMatrix
 
 import sys
 

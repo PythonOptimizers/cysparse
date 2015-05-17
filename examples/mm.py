@@ -1,9 +1,14 @@
-from sparse_lib.sparse.ll_mat import MakeLLSparseMatrix
+from cysparse.sparse.ll_mat import MakeLLSparseMatrix
 
 import sys
 
-A = MakeLLSparseMatrix(mm_filename="simple_matrix.mm")
+if __name__ == "__main__":
+    filename = sys.argv[1]
 
-print type(A)
+    C = MakeLLSparseMatrix(mm_filename=filename)
 
-A.print_to(sys.stdout)
+    print C
+    C.print_to(sys.stdout)
+
+    print "Virtual memory: " + str(C.memory_virtual())
+    print "Real memory: " + str(C.memory_real())

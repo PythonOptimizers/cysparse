@@ -1,0 +1,118 @@
+
+from cysparse.sparse.ll_mat cimport LL_MAT_DEFAULT_SIZE_HINT
+from cysparse.sparse.sparse_mat cimport unexposed_value
+
+from cysparse.types.cysparse_types import BASIC_TYPES
+
+LL_MAT_INCREASE_FACTOR = 1.5
+LL_MAT_DEFAULT_SIZE_HINT = 40
+
+{% for index_type in index_list %}
+    {% for element_type in type_list %}
+from cysparse.sparse.ll_mat_matrices.ll_mat_@index_type@_@element_type@ cimport LLSparseMatrix_@index_type@_@element_type@
+    {% endfor %}
+{% endfor %}
+
+def NewLLSparseMatrix(**kwargs):
+    """
+    Factory method to create an LLSparseMatrix.
+    """
+    ####################################################################################################################
+    #                                            *** Get arguments ***
+    ####################################################################################################################
+    # General specifications
+    nrow = kwargs.get('nrow', -1)
+    ncol = kwargs.get('ncol', -1)
+    size = kwargs.get('size', -1)
+    size_hint = kwargs.get('size_hint', LL_MAT_DEFAULT_SIZE_HINT)
+
+    itype = kwargs.get('itype', INT32_T)
+    dtype = kwargs.get('dtype', FLOAT64_T)
+
+    assert itype in BASIC_TYPES, "itype not recognized"
+    assert dtype in BASIC_TYPES, "dtype not recognized"
+
+    assert itype in [
+     {%- for index_name in index_list -%}
+       @index_name|type2enum@
+       {%- if index_name != index_list|last -%}
+       ,
+       {%- endif -%}
+     {%- endfor -%}
+     ], "itype is not accepted as index type"
+    assert dtype in [
+     {%- for type_name in type_list -%}
+       @type_name|type2enum@
+       {%- if type_name != type_list|last -%}
+       ,
+       {%- endif -%}
+     {%- endfor -%}
+     ], "dtype is not accepted as type for a matrix element"
+
+    cdef bint store_zeros = kwargs.get('store_zeros', False)
+    cdef bint is_symmetric = kwargs.get('is_symmetric', False)
+    cdef bint test_bounds = kwargs.get('test_bounds', True)
+
+    # From matrices
+    matrix = kwargs.get('matrix', None)
+
+    # From file names
+    from_filename = False
+    mm_filename = kwargs.get('mm_filename', None)
+    if mm_filename is not None:
+        from_filename = True
+
+    if matrix is not None or from_filename:
+        assert (matrix is not None) != (from_filename), "Cannot use a matrix and a file to create a LLSparseMatrix"
+
+    ####################################################################################################################
+    #                                            *** Case dispatch ***
+    ####################################################################################################################
+    real_nrow = -1
+    real_ncol = -1
+
+    #                                            CASE 1: from specifications
+    if matrix is None and mm_filename is None:
+        if nrow != -1 and ncol != -1:
+            if size != -1:
+                assert nrow == ncol == size, "Mismatch between nrow, ncol and size"
+            real_nrow = nrow
+            real_ncol = ncol
+        elif nrow != -1 and ncol == -1:
+            if size != -1:
+                assert size == nrow, "Mismatch between nrow and size"
+            real_nrow = nrow
+            real_ncol = nrow
+        elif nrow == -1 and ncol != -1:
+            if size != -1:
+                assert ncol == size, "Mismatch between ncol and size"
+            real_nrow = ncol
+            real_ncol = ncol
+        else:
+            assert size != -1, "No size given"
+            real_nrow = size
+            real_ncol = size
+
+{% for index_type in index_list %}
+    {% if index_type == index_list |first %}
+        if itype == @index_type|type2enum@:
+    {% else %}
+        elif itype == @index_type|type2enum@:
+    {% endif %}
+    {% for element_type in type_list %}
+        {% if element_type == type_list |first %}
+            if dtype == @element_type|type2enum@:
+        {% else %}
+            elif dtype == @element_type|type2enum@:
+        {% endif %}
+                return LLSparseMatrix_@index_type@_@element_type@(control_object=unexposed_value, nrow=real_nrow, ncol=real_ncol, size_hint=size_hint, store_zeros=store_zeros, is_symmetric=is_symmetric)
+    {% endfor %}
+{% endfor %}
+
+    #                                            CASE 2: from another matrix
+    if matrix is not None:
+        raise NotImplementedError("Cannot create a LLSparseMatrix from another matrix (yet)")
+
+    #                                            CASE 3: from a file
+    if from_filename:
+        raise NotImplementedError("Cannot create a LLSparseMatrix from a file (yet)")
