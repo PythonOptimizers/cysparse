@@ -1,4 +1,4 @@
-from cysparse.cysparse_types cimport *
+from cysparse.types.cysparse_types cimport *
 
 from cysparse.sparse.ll_mat cimport LLSparseMatrix
 from cysparse.sparse.csc_mat cimport CSCSparseMatrix

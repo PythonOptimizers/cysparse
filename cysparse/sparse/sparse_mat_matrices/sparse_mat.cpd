@@ -1,0 +1,19 @@
+from cysparse.types.cysparse_types cimport *
+from cysparse.sparse.sparse_mat cimport SparseMatrix
+
+
+cdef class SparseMatrix_@index@_@type@(SparseMatrix):
+    cdef:
+        public @index@ nrow  # number of rows
+        public @index@ ncol  # number of columns
+        public @index@ nnz   # number of values stored
+
+
+cdef class MutableSparseMatrix_@index@_@type@(SparseMatrix_@index@_@type@):
+    cdef:
+        @index@ size_hint # hint to allocate the size of mutable 1D arrays at creation
+        @index@ nalloc    # allocated size of mutable 1D arrays
+
+cdef class ImmutableSparseMatrix_@index@_@type@(SparseMatrix_@index@_@type@):
+    cdef:
+        @index@ test2
