@@ -39,6 +39,7 @@ cdef class LLSparseMatrix_INT32_t_FLOAT64_t(MutableSparseMatrix_INT32_t_FLOAT64_
 
     cpdef object keys(self)
     cpdef object values(self)
-    #cdef object _items(self)
+    cpdef object items(self)
+    cpdef find(self)
 
 #cdef NewLLSparseMatrix_INT32_t_FLOAT64_t(FLOAT64_t * val, INT32_t *root, INT32_t *link, INT32_t *col, FLOAT64_t * ival)

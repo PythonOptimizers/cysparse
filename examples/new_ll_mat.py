@@ -35,6 +35,8 @@ print l1
 
 print l1.keys()
 print l1.values()
+print l1.items()
+print l1.find()
 
 print l1[2, 2]
 print l1[0, 0]
@@ -45,10 +47,15 @@ print l2[2, 2]
 print l2[0, 0]
 print l2.keys()
 print l2.values()
+print l2.items()
+print l2.find()
 
 l3[2,2] = 67.0+5.0j
+l3[0,1] = 4.5-7.5j
 print l3[0,0]
 print l3[2, 2]
 print l3
 print l3.keys()
 print l3.values()
+print l3.items()
+print l3.find()

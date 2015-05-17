@@ -26,6 +26,7 @@ from libc.stdlib cimport malloc,free, calloc
 from libc.string cimport memcpy
 from cpython cimport PyObject, Py_INCREF
 
+
 # TODO: use more internal CPython code
 cdef extern from "Python.h":
     # *** Types ***
@@ -216,7 +217,6 @@ cdef class LLSparseMatrix_@index@_@type@(MutableSparseMatrix_@index@_@type@):
         """
         cdef @index@ total_memory = 0
 
-        print( "alleluia: " + str(self.nalloc))
         # root
         total_memory += self.nrow * sizeof(@index@)
         # col
@@ -540,3 +540,115 @@ YOU HAVE TO DEFINE OR CAST YOUR NEW UNRECOGNIZED TYPE
             raise NotImplementedError("values() not (yet) implemented for symmetrical LLSparseMatrix")
 
         return <object> list_p
+
+
+    cpdef object items(self):
+        """
+        Return a list of tuples (indices, value) of the non-zero matrix entries' keys and values.
+
+        The indices are themselves tuples (i,j) of row and column values.
+
+        """
+        cdef:
+            PyObject *list_p;     # the list that will hold the values
+            @index@ i, j, k
+            Py_ssize_t pos = 0         # position in list
+            @type@ val
+
+        list_p = PyList_New(self.nnz)
+        if list_p == NULL:
+            raise MemoryError()
+
+        # EXPLICIT TYPE TESTS
+
+        for i from 0 <= i < self.nrow:
+            k = self.root[i]
+            while k != -1:
+                j = self.col[k]
+                val = self.val[k]
+{% if type == 'INT32_t' %}
+                PyList_SET_ITEM(list_p, pos, Py_BuildValue("((ii)i)", i, j, self.val[k]))
+{% elif type == 'INT64_t' %}
+                PyList_SET_ITEM(list_p, pos, Py_BuildValue("((ii)l)", i, j, self.val[k]))
+{% elif type == 'UINT32_t' %}
+                PyList_SET_ITEM(list_p, pos, Py_BuildValue("((ii)I)", i, j, self.val[k]))
+{% elif type == 'UINT64_t' %}
+                PyList_SET_ITEM(list_p, pos, Py_BuildValue("((ii)k)", i, j, self.val[k]))
+{% elif type == 'FLOAT32_t' %}
+                PyList_SET_ITEM(list_p, pos, Py_BuildValue("((ii)f)", i, j, self.val[k]))
+{% elif type == 'FLOAT64_t' %}
+                PyList_SET_ITEM(list_p, pos, Py_BuildValue("((ii)d)", i, j, self.val[k]))
+{% elif type == 'COMPLEX64_t' %}
+                PyList_SET_ITEM(list_p, pos, Py_BuildValue("((ii)O)", i, j, PyComplex_FromDoubles(crealf(self.val[k]) , cimagf(self.val[k]))))
+{% elif type == 'COMPLEX128_t' %}
+                PyList_SET_ITEM(list_p, pos, Py_BuildValue("((ii)O)", i, j, PyComplex_FromDoubles(creal(self.val[k]) , cimag(self.val[k]))))
+{% else %}
+YOU HAVE TO DEFINE OR CAST YOUR NEW UNRECOGNIZED TYPE
+{% endif %}
+
+                pos += 1
+
+                k = self.link[k]
+
+        return <object> list_p
+
+    cpdef find(self):
+        """
+        Return 3 NumPy arrays with the non-zero matrix entries: i-rows, j-cols, vals.
+        """
+        cdef cnp.npy_intp dmat[1]
+        dmat[0] = <cnp.npy_intp> self.nnz
+
+        # EXPLICIT TYPE TESTS
+
+        cdef:
+
+{% if index == 'INT32_t' %}
+            cnp.ndarray[cnp.int32_t, ndim=1] a_row = cnp.PyArray_SimpleNew( 1, dmat, cnp.NPY_INT32)
+            cnp.ndarray[cnp.int32_t, ndim=1] a_col = cnp.PyArray_SimpleNew( 1, dmat, cnp.NPY_INT32)
+{% elif index == 'INT64_t' %}
+            cnp.ndarray[cnp.int64_t, ndim=1] a_row = cnp.PyArray_SimpleNew( 1, dmat, cnp.NPY_INT64)
+            cnp.ndarray[cnp.int64_t, ndim=1] a_col = cnp.PyArray_SimpleNew( 1, dmat, cnp.NPY_INT64)
+{% else %}
+YOU HAVE TO DEFINE WHAT HAPPENS WITH YOUR NEW INDEX TYPE
+{% endif %}
+
+{% if type == 'INT32_t' %}
+            cnp.ndarray[cnp.int32_t, ndim=1] a_val = cnp.PyArray_SimpleNew( 1, dmat, cnp.NPY_INT32)
+{% elif type == 'INT64_t' %}
+            cnp.ndarray[cnp.int64_t, ndim=1] a_val = cnp.PyArray_SimpleNew( 1, dmat, cnp.NPY_INT64)
+{% elif type == 'UINT32_t' %}
+            cnp.ndarray[cnp.uint32_t, ndim=1] a_val  = cnp.PyArray_SimpleNew( 1, dmat, cnp.NPY_UINT32)
+{% elif type == 'UINT64_t' %}
+            cnp.ndarray[cnp.uint64_t, ndim=1] a_val  = cnp.PyArray_SimpleNew( 1, dmat, cnp.NPY_UINT64)
+{% elif type == 'FLOAT32_t' %}
+            cnp.ndarray[cnp.float32_t, ndim=1] a_val  = cnp.PyArray_SimpleNew( 1, dmat, cnp.NPY_FLOAT32)
+{% elif type == 'FLOAT64_t' %}
+            cnp.ndarray[cnp.float64_t, ndim=1] a_val  = cnp.PyArray_SimpleNew( 1, dmat, cnp.NPY_FLOAT64)
+{% elif type == 'COMPLEX64_t' %}
+            cnp.ndarray[cnp.complex64_t, ndim=1] a_val = cnp.PyArray_SimpleNew( 1, dmat, cnp.NPY_COMPLEX64)
+{% elif type == 'COMPLEX128_t' %}
+            cnp.ndarray[cnp.complex128_t, ndim=1] a_val = cnp.PyArray_SimpleNew( 1, dmat, cnp.NPY_COMPLEX128)
+{% else %}
+YOU HAVE TO DEFINE OR CAST YOUR NEW UNRECOGNIZED TYPE
+{% endif %}
+
+            @index@   *pi, *pj;   # Intermediate pointers to matrix data
+            @type@    *pv;
+            @index@   i, k, elem;
+
+        pi = <@index@ *> cnp.PyArray_DATA(a_row)
+        pj = <@index@ *> cnp.PyArray_DATA(a_col)
+        pv = <@type@ *> cnp.PyArray_DATA(a_val)
+
+        elem = 0
+        for i from 0 <= i < self.nrow:
+            k = self.root[i]
+            while k != -1:
+                pi[ elem ] = i
+                pj[ elem ] = self.col[k]
+                pv[ elem ] = self.val[k]
+                k = self.link[k]
+                elem += 1
+
+        return (a_row, a_col, a_val)

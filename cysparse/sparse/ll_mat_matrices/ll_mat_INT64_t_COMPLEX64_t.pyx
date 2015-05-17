@@ -26,6 +26,7 @@ from libc.stdlib cimport malloc,free, calloc
 from libc.string cimport memcpy
 from cpython cimport PyObject, Py_INCREF
 
+
 # TODO: use more internal CPython code
 cdef extern from "Python.h":
     # *** Types ***
@@ -216,7 +217,6 @@ cdef class LLSparseMatrix_INT64_t_COMPLEX64_t(MutableSparseMatrix_INT64_t_COMPLE
         """
         cdef INT64_t total_memory = 0
 
-        print( "alleluia: " + str(self.nalloc))
         # root
         total_memory += self.nrow * sizeof(INT64_t)
         # col
@@ -524,3 +524,78 @@ cdef class LLSparseMatrix_INT64_t_COMPLEX64_t(MutableSparseMatrix_INT64_t_COMPLE
             raise NotImplementedError("values() not (yet) implemented for symmetrical LLSparseMatrix")
 
         return <object> list_p
+
+
+    cpdef object items(self):
+        """
+        Return a list of tuples (indices, value) of the non-zero matrix entries' keys and values.
+
+        The indices are themselves tuples (i,j) of row and column values.
+
+        """
+        cdef:
+            PyObject *list_p;     # the list that will hold the values
+            INT64_t i, j, k
+            Py_ssize_t pos = 0         # position in list
+            COMPLEX64_t val
+
+        list_p = PyList_New(self.nnz)
+        if list_p == NULL:
+            raise MemoryError()
+
+        # EXPLICIT TYPE TESTS
+
+        for i from 0 <= i < self.nrow:
+            k = self.root[i]
+            while k != -1:
+                j = self.col[k]
+                val = self.val[k]
+
+                PyList_SET_ITEM(list_p, pos, Py_BuildValue("((ii)O)", i, j, PyComplex_FromDoubles(crealf(self.val[k]) , cimagf(self.val[k]))))
+
+
+                pos += 1
+
+                k = self.link[k]
+
+        return <object> list_p
+
+    cpdef find(self):
+        """
+        Return 3 NumPy arrays with the non-zero matrix entries: i-rows, j-cols, vals.
+        """
+        cdef cnp.npy_intp dmat[1]
+        dmat[0] = <cnp.npy_intp> self.nnz
+
+        # EXPLICIT TYPE TESTS
+
+        cdef:
+
+
+            cnp.ndarray[cnp.int64_t, ndim=1] a_row = cnp.PyArray_SimpleNew( 1, dmat, cnp.NPY_INT64)
+            cnp.ndarray[cnp.int64_t, ndim=1] a_col = cnp.PyArray_SimpleNew( 1, dmat, cnp.NPY_INT64)
+
+
+
+            cnp.ndarray[cnp.complex64_t, ndim=1] a_val = cnp.PyArray_SimpleNew( 1, dmat, cnp.NPY_COMPLEX64)
+
+
+            INT64_t   *pi, *pj;   # Intermediate pointers to matrix data
+            COMPLEX64_t    *pv;
+            INT64_t   i, k, elem;
+
+        pi = <INT64_t *> cnp.PyArray_DATA(a_row)
+        pj = <INT64_t *> cnp.PyArray_DATA(a_col)
+        pv = <COMPLEX64_t *> cnp.PyArray_DATA(a_val)
+
+        elem = 0
+        for i from 0 <= i < self.nrow:
+            k = self.root[i]
+            while k != -1:
+                pi[ elem ] = i
+                pj[ elem ] = self.col[k]
+                pv[ elem ] = self.val[k]
+                k = self.link[k]
+                elem += 1
+
+        return (a_row, a_col, a_val)

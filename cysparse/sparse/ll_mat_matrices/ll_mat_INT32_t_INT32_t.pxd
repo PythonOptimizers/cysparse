@@ -39,6 +39,7 @@ cdef class LLSparseMatrix_INT32_t_INT32_t(MutableSparseMatrix_INT32_t_INT32_t):
 
     cpdef object keys(self)
     cpdef object values(self)
-    #cdef object _items(self)
+    cpdef object items(self)
+    cpdef find(self)
 
 #cdef NewLLSparseMatrix_INT32_t_INT32_t(INT32_t * val, INT32_t *root, INT32_t *link, INT32_t *col, INT32_t * ival)
