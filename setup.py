@@ -58,17 +58,49 @@ ext_params['extra_link_args'] = []
 #                                                *** types ***
 base_ext_params = ext_params.copy()
 base_ext = [
+<<<<<<< HEAD
+    Extension(name="cysparse.cysparse_types",
+              sources=["cysparse/cysparse_types.pxd", "cysparse/cysparse_types.pyx"]),
+]
+=======
     Extension(name="cysparse.types.cysparse_types",
               sources=["cysparse/types/cysparse_types.pxd", "cysparse/types/cysparse_types.pyx"]),
     Extension(name="cysparse.types.cysparse_numpy_types",
               sources=["cysparse/types/cysparse_numpy_types.pxd", "cysparse/types/cysparse_numpy_types.pyx"]),
     ]
+>>>>>>> master
 
 ########################################################################################################################
 #                                                *** sparse ***
 sparse_ext_params = ext_params.copy()
 
 sparse_ext = [
+<<<<<<< HEAD
+  Extension(name="cysparse.sparse.ll_mat",
+            sources=["cysparse/sparse/ll_mat_details/ll_mat_multiplication.pxi",
+                     "cysparse/sparse/ll_mat_details/ll_mat_assignment.pxi",
+                     "cysparse/sparse/ll_mat_details/ll_mat_real_assignment_kernels.pxi",
+                     "cysparse/sparse/ll_mat_details/ll_mat_real_multiplication_kernels.pxi",
+                     "cysparse/sparse/ll_mat_details/ll_mat_transpose.pxi",
+                     "cysparse/sparse/ll_mat.pxd",
+                     "cysparse/sparse/ll_mat.pyx"], **sparse_ext_params),
+  Extension(name="cysparse.sparse.sparse_mat",
+            sources=["cysparse/sparse/sparse_mat.pxd", "cysparse/sparse/sparse_mat.pyx"], **sparse_ext_params),
+  Extension(name="cysparse.sparse.csr_mat",
+            sources=["cysparse/sparse/csr_mat.pxd", "cysparse/sparse/csr_mat.pyx"], **sparse_ext_params),
+  Extension(name="cysparse.sparse.csc_mat",
+            sources=["cysparse/sparse/csc_mat.pxd", "cysparse/sparse/csc_mat.pyx"], **sparse_ext_params),
+  Extension(name="cysparse.sparse.ll_mat_view",
+            sources=["cysparse.sparse.object_index.pxi",
+                     "cysparse/sparse/ll_mat_view.pxd",
+                     "cysparse/sparse/ll_mat_view.pyx"], **sparse_ext_params),
+  Extension(name="cysparse.sparse.IO.mm",
+            sources=["cysparse/sparse/IO/mm_read_file.pxi",
+                     "cysparse/sparse/IO/mm_read_file2.pxi",
+                     "cysparse/sparse/IO/mm_write_file.pxi",
+                     "cysparse/sparse/IO/mm.pxd",
+                     "cysparse/sparse/IO/mm.pyx"], **sparse_ext_params),
+=======
   #Extension(name="cysparse.sparse.ll_mat",
   #          sources=["cysparse/sparse/ll_mat_details/ll_mat_multiplication.pxi",
   #                   "cysparse/sparse/ll_mat_details/ll_mat_assignment.pxi",
@@ -93,6 +125,7 @@ sparse_ext = [
   #                   "cysparse/sparse/IO/mm_write_file.pxi",
   #                   "cysparse/sparse/IO/mm.pxd",
   #                   "cysparse/sparse/IO/mm.pyx"], **sparse_ext_params),
+>>>>>>> master
   #Extension("sparse.ll_vec", ["cysparse/sparse/ll_vec.pyx"], **sparse_ext_params)
 ]
 
@@ -305,6 +338,13 @@ setup(name=  'SparseLib',
   ext_modules = ext_modules,
   package_dir = {"cysparse": "cysparse"},
   packages=['cysparse',
+<<<<<<< HEAD
+            'cysparse.sparse',
+            'cysparse.utils',
+            'cysparse.solvers',
+            'cysparse.solvers.suitesparse',
+            'cysparse.sparse.IO'
+=======
             'cysparse.types',
             'cysparse.sparse',
             'cysparse.sparse.sparse_mat_matrices',
@@ -313,6 +353,7 @@ setup(name=  'SparseLib',
             #'cysparse.solvers',
             #'cysparse.solvers.suitesparse',
             #'cysparse.sparse.IO'
+>>>>>>> master
             ]
 
 )

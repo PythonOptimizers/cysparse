@@ -34,9 +34,15 @@ All compile parameters can be defined in the file :file:`CySparse/CySparse/cyspa
 Parameters:
     
 * ``USE_HUGE_MATRIX``: Setting it to 1 allows the use of ``long`` indices for the matrices, otherwise simple ``int`` indices are used [#internal_python_size_type]_.
+<<<<<<< HEAD
+* ``USE_DOUBLE_PRECISION``: Setting it to 1 triggers the use of ``double`` values insides the matrices, otherwise ``float`` values are stored.
+
+Depending on your platform this might or migth not be relevant to you. We **strongly** suggest you to keep ``USE_DOUBLE_PRECISION`` to 1 and only change this parameter should you have memory problems
+=======
 * ``USE_DOUBLE_PRECISION``: Setting it to 1 triers the use of ``double`` values insides the matrices, otherwise ``float`` values are stored.
 
 Depending on your platform this might or migth not be relevant to you. We **strongly** suest you to keep ``USE_DOUBLE_PRECISION`` to 1 and only change this parameter should you have memory problems
+>>>>>>> master
 because you use huge matrices. When using single precision, some parts of the library will not work. For instance, the ``SuiteSparse`` interface will not be enabled.
 
 
