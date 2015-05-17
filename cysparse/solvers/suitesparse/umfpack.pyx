@@ -1,16 +1,6 @@
-<<<<<<< HEAD:cysparse/solvers/suitesparse/umfpack.pyx
-from cysparse.cysparse_types cimport *
-
-assert FLOAT_T == FLOAT64_T, "UMFPACK only deals with double precision (FLOAT64)"
-
-from cysparse.sparse.ll_mat cimport LLSparseMatrix
-from cysparse.sparse.csr_mat cimport CSRSparseMatrix, MakeCSRSparseMatrix
-from cysparse.sparse.csc_mat cimport CSCSparseMatrix, MakeCSCSparseMatrix
-=======
 from cysparse.types.cysparse_types cimport *
 
 assert FLOAT_T == FLOAT64_T, "UMFPACK only deals with double precision (FLOAT64)"
->>>>>>> master:cysparse/solvers/suitesparse/umfpack.pyx
 
 from cysparse.sparse.ll_mat cimport LLSparseMatrix
 from cysparse.sparse.csr_mat cimport CSRSparseMatrix, MakeCSRSparseMatrix
@@ -468,10 +458,6 @@ cdef class UmfpackSolver:
         {{COMPLEX: NO}}
         {{GENERIC: NO}}
         """
-<<<<<<< HEAD:cysparse/solvers/suitesparse/umfpack.pyx
-        self.create_symbolic()
-=======
->>>>>>> master:cysparse/solvers/suitesparse/umfpack.pyx
 
         if not recompute and self.numeric_computed:
             return
@@ -680,15 +666,9 @@ cdef class UmfpackSolver:
 
         #cdef cnp.ndarray[cnp.int_t, ndim=1, mode='c'] P
         cdef cnp.ndarray[int, ndim=1, mode='c'] P
-<<<<<<< HEAD:cysparse/solvers/suitesparse/umfpack.pyx
 
         P = cnp.PyArray_EMPTY(1, dims_n_row, cnp.NPY_INT32, 0)
 
-=======
-
-        P = cnp.PyArray_EMPTY(1, dims_n_row, cnp.NPY_INT32, 0)
-
->>>>>>> master:cysparse/solvers/suitesparse/umfpack.pyx
         #cdef cnp.ndarray[cnp.int_t, ndim=1, mode='c'] Q
         cdef cnp.ndarray[int, ndim=1, mode='c'] Q
         Q = cnp.PyArray_EMPTY(1, dims_n_col, cnp.NPY_INT32, 0)
