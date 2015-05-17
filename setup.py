@@ -1,5 +1,9 @@
 #!/usr/bin/env python
 
+# THIS FILE (setup.py) IS AUTOMATICALLY GENERATED
+# Generate it with
+# python generate_code -s
+
 from distutils.core import setup
 from distutils.extension import Extension
 from Cython.Distutils import build_ext
@@ -51,18 +55,27 @@ ext_params['extra_compile_args'] = ["-O2"]
 ext_params['extra_link_args'] = []
 
 ########################################################################################################################
-#                                                *** base ***
+#                                                *** types ***
 base_ext_params = ext_params.copy()
 base_ext = [
+<<<<<<< HEAD
     Extension(name="cysparse.cysparse_types",
               sources=["cysparse/cysparse_types.pxd", "cysparse/cysparse_types.pyx"]),
 ]
+=======
+    Extension(name="cysparse.types.cysparse_types",
+              sources=["cysparse/types/cysparse_types.pxd", "cysparse/types/cysparse_types.pyx"]),
+    Extension(name="cysparse.types.cysparse_numpy_types",
+              sources=["cysparse/types/cysparse_numpy_types.pxd", "cysparse/types/cysparse_numpy_types.pyx"]),
+    ]
+>>>>>>> master
 
 ########################################################################################################################
 #                                                *** sparse ***
 sparse_ext_params = ext_params.copy()
 
 sparse_ext = [
+<<<<<<< HEAD
   Extension(name="cysparse.sparse.ll_mat",
             sources=["cysparse/sparse/ll_mat_details/ll_mat_multiplication.pxi",
                      "cysparse/sparse/ll_mat_details/ll_mat_assignment.pxi",
@@ -87,9 +100,211 @@ sparse_ext = [
                      "cysparse/sparse/IO/mm_write_file.pxi",
                      "cysparse/sparse/IO/mm.pxd",
                      "cysparse/sparse/IO/mm.pyx"], **sparse_ext_params),
+=======
+  #Extension(name="cysparse.sparse.ll_mat",
+  #          sources=["cysparse/sparse/ll_mat_details/ll_mat_multiplication.pxi",
+  #                   "cysparse/sparse/ll_mat_details/ll_mat_assignment.pxi",
+  #                   "cysparse/sparse/ll_mat_details/ll_mat_real_assignment_kernels.pxi",
+  #                   "cysparse/sparse/ll_mat_details/ll_mat_real_multiplication_kernels.pxi",
+  #                   "cysparse/sparse/ll_mat_details/ll_mat_transpose.pxi",
+  #                   "cysparse/sparse/ll_mat.pxd",
+  #                   "cysparse/sparse/ll_mat.pyx"], **sparse_ext_params),
+  #Extension(name="cysparse.sparse.sparse_mat",
+  #          sources=["cysparse/sparse/sparse_mat.pxd", "cysparse/sparse/sparse_mat.pyx"], **sparse_ext_params),
+  #Extension(name="cysparse.sparse.csr_mat",
+  #          sources=["cysparse/sparse/csr_mat.pxd", "cysparse/sparse/csr_mat.pyx"], **sparse_ext_params),
+  #Extension(name="cysparse.sparse.csc_mat",
+  #          sources=["cysparse/sparse/csc_mat.pxd", "cysparse/sparse/csc_mat.pyx"], **sparse_ext_params),
+  #Extension(name="cysparse.sparse.ll_mat_view",
+  #          sources=["cysparse.sparse.object_index.pxi",
+  #                   "cysparse/sparse/ll_mat_view.pxd",
+  #                   "cysparse/sparse/ll_mat_view.pyx"], **sparse_ext_params),
+  #Extension(name="cysparse.sparse.IO.mm",
+  #          sources=["cysparse/sparse/IO/mm_read_file.pxi",
+  #                   "cysparse/sparse/IO/mm_read_file2.pxi",
+  #                   "cysparse/sparse/IO/mm_write_file.pxi",
+  #                   "cysparse/sparse/IO/mm.pxd",
+  #                   "cysparse/sparse/IO/mm.pyx"], **sparse_ext_params),
+>>>>>>> master
   #Extension("sparse.ll_vec", ["cysparse/sparse/ll_vec.pyx"], **sparse_ext_params)
 ]
 
+########################################################################################################################
+#                                                *** NEW sparse ***
+
+new_sparse_ext = [
+  ######################
+  # ### Sparse ###
+  ######################
+
+  Extension(name="cysparse.sparse.sparse_utils.generate_indices_INT32_t",
+            sources=["cysparse/sparse/sparse_utils/generate_indices_INT32_t.pxd",
+                     "cysparse/sparse/sparse_utils/generate_indices_INT32_t.pyx"],
+            **sparse_ext_params),
+
+  Extension(name="cysparse.sparse.sparse_utils.generate_indices_INT64_t",
+            sources=["cysparse/sparse/sparse_utils/generate_indices_INT64_t.pxd",
+                     "cysparse/sparse/sparse_utils/generate_indices_INT64_t.pyx"],
+            **sparse_ext_params),
+
+  #Extension(name="cysparse.sparse.ll_mat",
+  #          sources=["cysparse/sparse/ll_mat_details/ll_mat_multiplication.pxi",
+  #                   "cysparse/sparse/ll_mat_details/ll_mat_assignment.pxi",
+  #                   "cysparse/sparse/ll_mat_details/ll_mat_real_assignment_kernels.pxi",
+  #                   "cysparse/sparse/ll_mat_details/ll_mat_real_multiplication_kernels.pxi",
+  #                   "cysparse/sparse/ll_mat_details/ll_mat_transpose.pxi",
+  #                   "cysparse/sparse/ll_mat.pxd",
+  #                   "cysparse/sparse/ll_mat.pyx"], **sparse_ext_params),
+  ######################
+  # ### SparseMatrix ###
+  ######################
+  Extension(name="cysparse.sparse.sparse_mat",
+            sources=["cysparse/sparse/sparse_mat.pxd",
+                     "cysparse/sparse/sparse_mat.pyx"],
+            **sparse_ext_params),
+
+    
+  Extension(name="cysparse.sparse.sparse_mat_matrices.sparse_mat_INT32_t_INT32_t",
+            sources=["cysparse/sparse/sparse_mat_matrices/sparse_mat_INT32_t_INT32_t.pxd",
+                     "cysparse/sparse/sparse_mat_matrices/sparse_mat_INT32_t_INT32_t.pyx"],
+            **sparse_ext_params),
+    
+  Extension(name="cysparse.sparse.sparse_mat_matrices.sparse_mat_INT32_t_INT64_t",
+            sources=["cysparse/sparse/sparse_mat_matrices/sparse_mat_INT32_t_INT64_t.pxd",
+                     "cysparse/sparse/sparse_mat_matrices/sparse_mat_INT32_t_INT64_t.pyx"],
+            **sparse_ext_params),
+    
+  Extension(name="cysparse.sparse.sparse_mat_matrices.sparse_mat_INT32_t_FLOAT32_t",
+            sources=["cysparse/sparse/sparse_mat_matrices/sparse_mat_INT32_t_FLOAT32_t.pxd",
+                     "cysparse/sparse/sparse_mat_matrices/sparse_mat_INT32_t_FLOAT32_t.pyx"],
+            **sparse_ext_params),
+    
+  Extension(name="cysparse.sparse.sparse_mat_matrices.sparse_mat_INT32_t_FLOAT64_t",
+            sources=["cysparse/sparse/sparse_mat_matrices/sparse_mat_INT32_t_FLOAT64_t.pxd",
+                     "cysparse/sparse/sparse_mat_matrices/sparse_mat_INT32_t_FLOAT64_t.pyx"],
+            **sparse_ext_params),
+    
+  Extension(name="cysparse.sparse.sparse_mat_matrices.sparse_mat_INT32_t_COMPLEX64_t",
+            sources=["cysparse/sparse/sparse_mat_matrices/sparse_mat_INT32_t_COMPLEX64_t.pxd",
+                     "cysparse/sparse/sparse_mat_matrices/sparse_mat_INT32_t_COMPLEX64_t.pyx"],
+            **sparse_ext_params),
+    
+  Extension(name="cysparse.sparse.sparse_mat_matrices.sparse_mat_INT32_t_COMPLEX128_t",
+            sources=["cysparse/sparse/sparse_mat_matrices/sparse_mat_INT32_t_COMPLEX128_t.pxd",
+                     "cysparse/sparse/sparse_mat_matrices/sparse_mat_INT32_t_COMPLEX128_t.pyx"],
+            **sparse_ext_params),
+    
+
+    
+  Extension(name="cysparse.sparse.sparse_mat_matrices.sparse_mat_INT64_t_INT32_t",
+            sources=["cysparse/sparse/sparse_mat_matrices/sparse_mat_INT64_t_INT32_t.pxd",
+                     "cysparse/sparse/sparse_mat_matrices/sparse_mat_INT64_t_INT32_t.pyx"],
+            **sparse_ext_params),
+    
+  Extension(name="cysparse.sparse.sparse_mat_matrices.sparse_mat_INT64_t_INT64_t",
+            sources=["cysparse/sparse/sparse_mat_matrices/sparse_mat_INT64_t_INT64_t.pxd",
+                     "cysparse/sparse/sparse_mat_matrices/sparse_mat_INT64_t_INT64_t.pyx"],
+            **sparse_ext_params),
+    
+  Extension(name="cysparse.sparse.sparse_mat_matrices.sparse_mat_INT64_t_FLOAT32_t",
+            sources=["cysparse/sparse/sparse_mat_matrices/sparse_mat_INT64_t_FLOAT32_t.pxd",
+                     "cysparse/sparse/sparse_mat_matrices/sparse_mat_INT64_t_FLOAT32_t.pyx"],
+            **sparse_ext_params),
+    
+  Extension(name="cysparse.sparse.sparse_mat_matrices.sparse_mat_INT64_t_FLOAT64_t",
+            sources=["cysparse/sparse/sparse_mat_matrices/sparse_mat_INT64_t_FLOAT64_t.pxd",
+                     "cysparse/sparse/sparse_mat_matrices/sparse_mat_INT64_t_FLOAT64_t.pyx"],
+            **sparse_ext_params),
+    
+  Extension(name="cysparse.sparse.sparse_mat_matrices.sparse_mat_INT64_t_COMPLEX64_t",
+            sources=["cysparse/sparse/sparse_mat_matrices/sparse_mat_INT64_t_COMPLEX64_t.pxd",
+                     "cysparse/sparse/sparse_mat_matrices/sparse_mat_INT64_t_COMPLEX64_t.pyx"],
+            **sparse_ext_params),
+    
+  Extension(name="cysparse.sparse.sparse_mat_matrices.sparse_mat_INT64_t_COMPLEX128_t",
+            sources=["cysparse/sparse/sparse_mat_matrices/sparse_mat_INT64_t_COMPLEX128_t.pxd",
+                     "cysparse/sparse/sparse_mat_matrices/sparse_mat_INT64_t_COMPLEX128_t.pyx"],
+            **sparse_ext_params),
+    
+
+
+  ######################
+  # ### LLSparseMatrix ###
+  ######################
+  Extension(name="cysparse.sparse.ll_mat",
+            sources=["cysparse/sparse/ll_mat.pxd",
+                     "cysparse/sparse/ll_mat.pyx"],
+            **sparse_ext_params),
+
+# TODO: add the possibility to **not** use tabu combinations...
+
+  
+  Extension(name="cysparse.sparse.ll_mat_matrices.ll_mat_INT32_t_INT32_t",
+            sources=["cysparse/sparse/ll_mat_matrices/ll_mat_INT32_t_INT32_t.pxd",
+                     "cysparse/sparse/ll_mat_matrices/ll_mat_INT32_t_INT32_t.pyx"],
+            **sparse_ext_params),
+  
+  Extension(name="cysparse.sparse.ll_mat_matrices.ll_mat_INT32_t_INT64_t",
+            sources=["cysparse/sparse/ll_mat_matrices/ll_mat_INT32_t_INT64_t.pxd",
+                     "cysparse/sparse/ll_mat_matrices/ll_mat_INT32_t_INT64_t.pyx"],
+            **sparse_ext_params),
+  
+  Extension(name="cysparse.sparse.ll_mat_matrices.ll_mat_INT32_t_FLOAT32_t",
+            sources=["cysparse/sparse/ll_mat_matrices/ll_mat_INT32_t_FLOAT32_t.pxd",
+                     "cysparse/sparse/ll_mat_matrices/ll_mat_INT32_t_FLOAT32_t.pyx"],
+            **sparse_ext_params),
+  
+  Extension(name="cysparse.sparse.ll_mat_matrices.ll_mat_INT32_t_FLOAT64_t",
+            sources=["cysparse/sparse/ll_mat_matrices/ll_mat_INT32_t_FLOAT64_t.pxd",
+                     "cysparse/sparse/ll_mat_matrices/ll_mat_INT32_t_FLOAT64_t.pyx"],
+            **sparse_ext_params),
+  
+  Extension(name="cysparse.sparse.ll_mat_matrices.ll_mat_INT32_t_COMPLEX64_t",
+            sources=["cysparse/sparse/ll_mat_matrices/ll_mat_INT32_t_COMPLEX64_t.pxd",
+                     "cysparse/sparse/ll_mat_matrices/ll_mat_INT32_t_COMPLEX64_t.pyx"],
+            **sparse_ext_params),
+  
+  Extension(name="cysparse.sparse.ll_mat_matrices.ll_mat_INT32_t_COMPLEX128_t",
+            sources=["cysparse/sparse/ll_mat_matrices/ll_mat_INT32_t_COMPLEX128_t.pxd",
+                     "cysparse/sparse/ll_mat_matrices/ll_mat_INT32_t_COMPLEX128_t.pyx"],
+            **sparse_ext_params),
+  
+
+  
+  Extension(name="cysparse.sparse.ll_mat_matrices.ll_mat_INT64_t_INT32_t",
+            sources=["cysparse/sparse/ll_mat_matrices/ll_mat_INT64_t_INT32_t.pxd",
+                     "cysparse/sparse/ll_mat_matrices/ll_mat_INT64_t_INT32_t.pyx"],
+            **sparse_ext_params),
+  
+  Extension(name="cysparse.sparse.ll_mat_matrices.ll_mat_INT64_t_INT64_t",
+            sources=["cysparse/sparse/ll_mat_matrices/ll_mat_INT64_t_INT64_t.pxd",
+                     "cysparse/sparse/ll_mat_matrices/ll_mat_INT64_t_INT64_t.pyx"],
+            **sparse_ext_params),
+  
+  Extension(name="cysparse.sparse.ll_mat_matrices.ll_mat_INT64_t_FLOAT32_t",
+            sources=["cysparse/sparse/ll_mat_matrices/ll_mat_INT64_t_FLOAT32_t.pxd",
+                     "cysparse/sparse/ll_mat_matrices/ll_mat_INT64_t_FLOAT32_t.pyx"],
+            **sparse_ext_params),
+  
+  Extension(name="cysparse.sparse.ll_mat_matrices.ll_mat_INT64_t_FLOAT64_t",
+            sources=["cysparse/sparse/ll_mat_matrices/ll_mat_INT64_t_FLOAT64_t.pxd",
+                     "cysparse/sparse/ll_mat_matrices/ll_mat_INT64_t_FLOAT64_t.pyx"],
+            **sparse_ext_params),
+  
+  Extension(name="cysparse.sparse.ll_mat_matrices.ll_mat_INT64_t_COMPLEX64_t",
+            sources=["cysparse/sparse/ll_mat_matrices/ll_mat_INT64_t_COMPLEX64_t.pxd",
+                     "cysparse/sparse/ll_mat_matrices/ll_mat_INT64_t_COMPLEX64_t.pyx"],
+            **sparse_ext_params),
+  
+  Extension(name="cysparse.sparse.ll_mat_matrices.ll_mat_INT64_t_COMPLEX128_t",
+            sources=["cysparse/sparse/ll_mat_matrices/ll_mat_INT64_t_COMPLEX128_t.pxd",
+                     "cysparse/sparse/ll_mat_matrices/ll_mat_INT64_t_COMPLEX128_t.pyx"],
+            **sparse_ext_params),
+  
+
+
+
+]
 ########################################################################################################################
 #                                                *** utils ***
 utils_ext = [
@@ -114,7 +329,7 @@ umfpack_ext = [
 ########################################################################################################################
 # SETUP
 ########################################################################################################################
-ext_modules = base_ext + sparse_ext  + utils_ext + umfpack_ext
+ext_modules = base_ext +  new_sparse_ext # + utils_ext + umfpack_ext
 
 
 setup(name=  'SparseLib',
@@ -123,11 +338,22 @@ setup(name=  'SparseLib',
   ext_modules = ext_modules,
   package_dir = {"cysparse": "cysparse"},
   packages=['cysparse',
+<<<<<<< HEAD
             'cysparse.sparse',
             'cysparse.utils',
             'cysparse.solvers',
             'cysparse.solvers.suitesparse',
             'cysparse.sparse.IO'
+=======
+            'cysparse.types',
+            'cysparse.sparse',
+            'cysparse.sparse.sparse_mat_matrices',
+            'cysparse.sparse.ll_mat_matrices',
+            'cysparse.utils',
+            #'cysparse.solvers',
+            #'cysparse.solvers.suitesparse',
+            #'cysparse.sparse.IO'
+>>>>>>> master
             ]
 
 )

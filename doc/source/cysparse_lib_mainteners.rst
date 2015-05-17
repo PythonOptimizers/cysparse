@@ -1,12 +1,24 @@
 ..  cysparse_for_library_mainteners:
 
+<<<<<<< HEAD
 ==========================================
 :program:`CySparse` for library mainteners
 ==========================================
+=======
+============================================
+:program:`CySparse` for library maintainers
+============================================
+
+..  warning:: TO REWRITE COMPLETELY
+
+The main difficulty to maintain the :program:`CySparse` library is to understand and master the automatic generation of code from templated source code. We use the template engine :program:`Jinja2` and some hard coded 
+conventions. 
+>>>>>>> master
 
 Meta-programming aka code generation
 =====================================
 
+<<<<<<< HEAD
 We choose to generate some code by automatic generation. :program:`Python`, :program:`Cython` or :program:`C` are quite limited
 when it comes to use generic types. Because we want to write this library in :program:`Cython`, we decided to generate automatically 
 different files for different types used.
@@ -52,13 +64,92 @@ that should be publicly accessible like this:
     z.imag = ...
     
 Both fields **must** be of the exact same type. :program:`Python` offers such a ``struct`` but :program:`Cython` and :program:`C++` don't. Their versions of complex is a little bit different and even though it shares some similarities, you **cannot** access the fields ``real`` and ``imag`` directly. These types are thus **not** compatible with our implementation. We have defined our own complex type. See XXX.
+=======
+:program:`CySparse` allows the use of different types at run time and most typed classes comes in different typed flavours. This feature comes with a price. Because we wanted to write the library completely 
+in :program:`Cython`, we decided to go for the explicit template route, i.e. templated source code is written and explicit names are used in the generated :program:`Cython` code.
+This automatic generation process ask for some rigour and takes some time to master. If you follow the next conventions stricly, you should be fine. If you don't follow them then probably the code won't even compile or 
+if it does you might generate difficult to find bugs. Trust me on this one.
+
+..  warning:: Follow the conventions stricly to write templated source code.
+
+Justifications
+-----------------
+
+Following conventions is not always easy, especially if you don't understand them. In this sub-section we try to convince you or at least we try to explain and justify some choices I (Nikolaj) made.
+
+These conventions were made with the following purpose in mind:
+
+- respect the DRY (Don't Repear Yourself) principle;
+- if the conventions are not followed, the code shouldn't compile;
+- prefer static dispatch instead of dynamic dispatch;
+- use typed variables whenever possible;
+- keep the code simple whenever it doesn't sacrifice to efficiency even if the solutions are not Pythonesque;
+
+Respect the DRY principle
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Don't write the same code twice. This means of course than whenever you can factorize some common code, you should do so but in our case, because we lack the notion of *templates* (like :program:`C++` templates), we 
+**have** to repeat ourselves and rewrite the classes with different types. This is the main reason to use a template engine and templated code.  
+
+If the conventions are not respected, the code shouldn't compile
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To enforce the use of the conventions, we try to enforce them by the compiler (whether the :program:`C`, the :program:`Cython` or :program:`Python` compiler). Often, you'll find that templated code have guards to ensure that 
+types are recognized and otherwise to generate garbish that won't compile.
+
+The name convention is written explicitely: if you don't respect it, you won't be able to use the :program:`generate_code.py` script. This is on purpose.
+
+Prefer static dispatch instead of dynamic dispatch
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Even if :program:`Python` is a dynamic language, efficient :program:`Cython` code **needs** typing. This typing can be done dynamically with long and tedious ``if/then`` combinations or we can let the compiler 
+do the dispatch in our place at compile time whenever possible. This is the main reason why there are as many ``LLSparseMatrixView`` classes as there are ``LLSparseMatrix`` classes. Strictly speaking, we don't need 
+more ``LLSparseMatrixView`` classes than the number of index types but then you need to dynamically dispatch some operations like the creation of a corresponding ``
+
+
+
+Our hope is to keep a nice balance between the difficulty of coding and the easiness to maintain the code. When generating automatically code, these two don't necessarily go hand in hand. 
+
+If you find some code that doesn't follow these conventions, report it or even better change it!
+
+Types
+------
+
+
+
+Basic types
+^^^^^^^^^^^^^^^
+
+We use the following basic types:
+
+==============================  ==============================
+:program:`CySparse`             C99 types
+==============================  ==============================
+``INT32_t``                     ``int``
+``UINT32_t``                    ``unsigned int``
+``INT64_t``                     ``long``
+``UINT64_t``                    ``unsigned long``
+``FLOAT32_t``                   ``float``
+``FLOAT64_t``                   ``double``
+``COMPLEX64_t``                 ``float complex``
+``COMPLEX128_t``                ``double complex``
+==============================  ==============================
+
+
+
+>>>>>>> master
 
 
 Add (or remove) a new type
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+<<<<<<< HEAD
 Automatic
 ------------
+=======
+Automatic generation
+------------------------
+>>>>>>> master
 
 **All** generated files can be generated by invoking a **single** script: 
 

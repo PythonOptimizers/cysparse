@@ -67,9 +67,9 @@ l = [0, 1]
 
 print l
 print type(l)
-gg = matrix[l, 0:3]
+ = matrix[l, 0:3]
 
-print type(gg)
+print type()
 
 print "8" * 80
 matrix.compress()

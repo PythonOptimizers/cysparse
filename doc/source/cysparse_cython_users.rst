@@ -21,7 +21,11 @@ the protection mechanism for the creation of classes yourself:
     
     LLSparseMatrix ll_mat = LLSparseMatrix(control_object=unexposed_value, ...)
 
+<<<<<<< HEAD
 By adding ``control_object=unexposed_value`` as argument, the ``ll_mat`` assertion in the ``__cinit__()`` constructor will be not be triggered. Be carreful though as you are fully responsible 
+=======
+By adding ``control_object=unexposed_value`` as argument, the ``ll_mat`` assertion in the ``__cinit__()`` constructor will be not be triered. Be carreful though as you are fully responsible 
+>>>>>>> master
 for the creation of the matrix.
  
 Accessing matrix elements
