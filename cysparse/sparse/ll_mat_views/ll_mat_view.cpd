@@ -30,14 +30,18 @@ cdef class LLSparseMatrixView_@index@_@type@:
         bint __counted_nnz  # did we already count the number of nnz?
         @index@ _nnz     # number of non zeros
 
-    #cdef @index@ _count_nnz(self)
-    #cdef at(self, @index@ i, @index@ j)
-    #cdef safe_at(self, @index@ i, @index@ j)
-    #cdef put(self, @index@ i, @index@ j, @type@ value)
-    #cdef safe_put(self, @index@ i, @index@ j, @type@ value)
+    ####################################################################################################################
+    # SET/GET
+    ####################################################################################################################
+    cdef put(self, @index@ i, @index@ j, @type@ value)
+    cdef safe_put(self, @index@ i, @index@ j, @type@ value)
+    #cdef assign(self, LLSparseMatrixView view, obj)
+
+    cdef @type@ at(self, @index@ i, @index@ j)
+    cdef @type@ safe_at(self, @index@ i, @index@ j)
 
 cdef LLSparseMatrixView_@index@_@type@ MakeLLSparseMatrixView_@index@_@type@(LLSparseMatrix_@index@_@type@ A, PyObject* obj1, PyObject* obj2)
 
-#cdef LLSparseMatrixView_@index@_@type@ MakeLLSparseMatrixViewFromView_@index@_@type@(LLSparseMatrixView_@index@_@type@ A, PyObject* obj1, PyObject* obj2)
+cdef LLSparseMatrixView_@index@_@type@ MakeLLSparseMatrixViewFromView_@index@_@type@(LLSparseMatrixView_@index@_@type@ A, PyObject* obj1, PyObject* obj2)
 
 

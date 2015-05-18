@@ -235,6 +235,7 @@ cdef class LLSparseMatrix_INT32_t_FLOAT32_t(MutableSparseMatrix_INT32_t_FLOAT32_
     ####################################################################################################################
     # CREATE SUB-MATRICES
     ####################################################################################################################
+    # TODO: to be done
     cdef create_submatrix(self, PyObject* obj1, PyObject* obj2):
         cdef:
             INT32_t nrow
@@ -245,6 +246,22 @@ cdef class LLSparseMatrix_INT32_t_FLOAT32_t(MutableSparseMatrix_INT32_t_FLOAT32_
 
         row_indices = create_c_array_indices_from_python_object_INT32_t(self.nrow, obj1, &nrow)
         col_indices = create_c_array_indices_from_python_object_INT32_t(self.ncol, obj2, &ncol)
+
+    ####################################################################################################################
+    # COUNTING ELEMENTS
+    ####################################################################################################################
+    # TODO: to be done
+    cdef count_nnz_from_indices(self, INT32_t * row_indices,INT32_t row_indices_length, INT32_t * col_indices, INT32_t col_indices_length):
+        """
+        Counts the nnz specified by row and column indices.
+
+        Note:
+            A row or column index can be repeated and indices are **not** supposed to be sorted.
+
+        Warning:
+            This method is costly, use with care.
+        """
+        pass
 
     ####################################################################################################################
     # Set/Get individual elements

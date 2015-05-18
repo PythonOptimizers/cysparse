@@ -30,13 +30,17 @@ cdef class LLSparseMatrixView_INT32_t_FLOAT64_t:
         bint __counted_nnz  # did we already count the number of nnz?
         INT32_t _nnz     # number of non zeros
 
-    #cdef INT32_t _count_nnz(self)
-    #cdef at(self, INT32_t i, INT32_t j)
-    #cdef safe_at(self, INT32_t i, INT32_t j)
-    #cdef put(self, INT32_t i, INT32_t j, FLOAT64_t value)
-    #cdef safe_put(self, INT32_t i, INT32_t j, FLOAT64_t value)
+    ####################################################################################################################
+    # SET/GET
+    ####################################################################################################################
+    cdef put(self, INT32_t i, INT32_t j, FLOAT64_t value)
+    cdef safe_put(self, INT32_t i, INT32_t j, FLOAT64_t value)
+    #cdef assign(self, LLSparseMatrixView view, obj)
+
+    cdef FLOAT64_t at(self, INT32_t i, INT32_t j)
+    cdef FLOAT64_t safe_at(self, INT32_t i, INT32_t j)
 
 cdef LLSparseMatrixView_INT32_t_FLOAT64_t MakeLLSparseMatrixView_INT32_t_FLOAT64_t(LLSparseMatrix_INT32_t_FLOAT64_t A, PyObject* obj1, PyObject* obj2)
 
-#cdef LLSparseMatrixView_INT32_t_FLOAT64_t MakeLLSparseMatrixViewFromView_INT32_t_FLOAT64_t(LLSparseMatrixView_INT32_t_FLOAT64_t A, PyObject* obj1, PyObject* obj2)
+cdef LLSparseMatrixView_INT32_t_FLOAT64_t MakeLLSparseMatrixViewFromView_INT32_t_FLOAT64_t(LLSparseMatrixView_INT32_t_FLOAT64_t A, PyObject* obj1, PyObject* obj2)
 

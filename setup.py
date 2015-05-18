@@ -114,6 +114,75 @@ new_sparse_ext = [
                      "cysparse/sparse/sparse_utils/generate_indices_INT64_t.pyx"],
             **sparse_ext_params),
 
+
+
+    
+  Extension(name="cysparse.sparse.sparse_utils.find_INT32_t",
+            sources=["cysparse/sparse/sparse_utils/find_INT32_t_INT32_t.pxd",
+                     "cysparse/sparse/sparse_utils/find_INT32_t_INT32_t.pyx"],
+            **sparse_ext_params),
+    
+  Extension(name="cysparse.sparse.sparse_utils.find_INT32_t",
+            sources=["cysparse/sparse/sparse_utils/find_INT32_t_INT64_t.pxd",
+                     "cysparse/sparse/sparse_utils/find_INT32_t_INT64_t.pyx"],
+            **sparse_ext_params),
+    
+  Extension(name="cysparse.sparse.sparse_utils.find_INT32_t",
+            sources=["cysparse/sparse/sparse_utils/find_INT32_t_FLOAT32_t.pxd",
+                     "cysparse/sparse/sparse_utils/find_INT32_t_FLOAT32_t.pyx"],
+            **sparse_ext_params),
+    
+  Extension(name="cysparse.sparse.sparse_utils.find_INT32_t",
+            sources=["cysparse/sparse/sparse_utils/find_INT32_t_FLOAT64_t.pxd",
+                     "cysparse/sparse/sparse_utils/find_INT32_t_FLOAT64_t.pyx"],
+            **sparse_ext_params),
+    
+  Extension(name="cysparse.sparse.sparse_utils.find_INT32_t",
+            sources=["cysparse/sparse/sparse_utils/find_INT32_t_COMPLEX64_t.pxd",
+                     "cysparse/sparse/sparse_utils/find_INT32_t_COMPLEX64_t.pyx"],
+            **sparse_ext_params),
+    
+  Extension(name="cysparse.sparse.sparse_utils.find_INT32_t",
+            sources=["cysparse/sparse/sparse_utils/find_INT32_t_COMPLEX128_t.pxd",
+                     "cysparse/sparse/sparse_utils/find_INT32_t_COMPLEX128_t.pyx"],
+            **sparse_ext_params),
+    
+
+    
+  Extension(name="cysparse.sparse.sparse_utils.find_INT64_t",
+            sources=["cysparse/sparse/sparse_utils/find_INT64_t_INT32_t.pxd",
+                     "cysparse/sparse/sparse_utils/find_INT64_t_INT32_t.pyx"],
+            **sparse_ext_params),
+    
+  Extension(name="cysparse.sparse.sparse_utils.find_INT64_t",
+            sources=["cysparse/sparse/sparse_utils/find_INT64_t_INT64_t.pxd",
+                     "cysparse/sparse/sparse_utils/find_INT64_t_INT64_t.pyx"],
+            **sparse_ext_params),
+    
+  Extension(name="cysparse.sparse.sparse_utils.find_INT64_t",
+            sources=["cysparse/sparse/sparse_utils/find_INT64_t_FLOAT32_t.pxd",
+                     "cysparse/sparse/sparse_utils/find_INT64_t_FLOAT32_t.pyx"],
+            **sparse_ext_params),
+    
+  Extension(name="cysparse.sparse.sparse_utils.find_INT64_t",
+            sources=["cysparse/sparse/sparse_utils/find_INT64_t_FLOAT64_t.pxd",
+                     "cysparse/sparse/sparse_utils/find_INT64_t_FLOAT64_t.pyx"],
+            **sparse_ext_params),
+    
+  Extension(name="cysparse.sparse.sparse_utils.find_INT64_t",
+            sources=["cysparse/sparse/sparse_utils/find_INT64_t_COMPLEX64_t.pxd",
+                     "cysparse/sparse/sparse_utils/find_INT64_t_COMPLEX64_t.pyx"],
+            **sparse_ext_params),
+    
+  Extension(name="cysparse.sparse.sparse_utils.find_INT64_t",
+            sources=["cysparse/sparse/sparse_utils/find_INT64_t_COMPLEX128_t.pxd",
+                     "cysparse/sparse/sparse_utils/find_INT64_t_COMPLEX128_t.pyx"],
+            **sparse_ext_params),
+    
+
+
+
+
   #Extension(name="cysparse.sparse.ll_mat",
   #          sources=["cysparse/sparse/ll_mat_details/ll_mat_multiplication.pxi",
   #                   "cysparse/sparse/ll_mat_details/ll_mat_assignment.pxi",

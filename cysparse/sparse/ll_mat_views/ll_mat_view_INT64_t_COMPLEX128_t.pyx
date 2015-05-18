@@ -53,6 +53,54 @@ cdef class LLSparseMatrixView_INT64_t_COMPLEX128_t:
         Py_DECREF(self.A) # release ref
 
     ####################################################################################################################
+    # Set/Get individual elements
+    ####################################################################################################################
+    ####################################################################################################################
+    #                                            *** SET ***
+    cdef put(self, INT64_t i, INT64_t j, COMPLEX128_t value):
+        self.A.put(self.row_indices[i], self.col_indices[j], value)
+
+    cdef safe_put(self, INT64_t i, INT64_t j, COMPLEX128_t value):
+        """
+        Set ``A_view[i, j] = value`` directly.
+
+        Raises:
+            IndexError: when index out of bound.
+        """
+        if i < 0 or i >= self.nrow or j < 0 or j >= self.ncol:
+            raise IndexError('Indices out of range')
+
+        self.put(i, j, value)
+
+    ####################################################################################################################
+    #                                            *** GET ***
+    cdef COMPLEX128_t at(self, INT64_t i, INT64_t j):
+        """
+        Return element ``(i, j)``.
+
+        Warning:
+            There is not out of bounds test.
+
+        See:
+            :meth:`safe_at`.
+
+        """
+        return self.A.safe_at(self.row_indices[i], self.col_indices[j])
+
+    cdef COMPLEX128_t safe_at(self, INT64_t i, INT64_t j):
+        """
+        Return element ``(i, j)`` but with check for out of bounds indices.
+
+        Raises:
+            IndexError: when index out of bound.
+
+        """
+        if not 0 <= i < self.nrow or not 0 <= j < self.ncol:
+            raise IndexError("Index out of bounds")
+
+        return self.at(i, j)
+
+    ####################################################################################################################
     # OUTPUT STRINGS
     ####################################################################################################################
     def attributes_short_string(self):
@@ -150,6 +198,84 @@ cdef LLSparseMatrixView_INT64_t_COMPLEX128_t MakeLLSparseMatrixView_INT64_t_COMP
     cdef LLSparseMatrixView_INT64_t_COMPLEX128_t view = LLSparseMatrixView_INT64_t_COMPLEX128_t(unexposed_value, A, nrow, ncol)
     view.row_indices = row_indices
     view.col_indices = col_indices
+
+    if nrow == 0 or ncol == 0:
+        view.is_empty = True
+    else:
+        view.is_empty = False
+
+    return view
+
+
+cdef LLSparseMatrixView_INT64_t_COMPLEX128_t MakeLLSparseMatrixViewFromView_INT64_t_COMPLEX128_t(LLSparseMatrixView_INT64_t_COMPLEX128_t A, PyObject* obj1, PyObject* obj2):
+    """
+    Factory function to create a new :class:`LLSparseMatrixView_INT64_t_COMPLEX128_t` for a :class:`LLSparseMatrixView_INT64_t_COMPLEX128_t`.
+
+    Two index objects must be provided. Such objects can be:
+        - an integer;
+        - a list;
+        - a slice;
+        - a numpy array.
+
+    Args:
+        A: A :class:`LLSparseMatrixView_INT64_t_COMPLEX128_t` to be *viewed*.
+        obj1: First index object.
+        obj2: Second index object.
+
+    Raises:
+        IndexError:
+            - a variable in the index object is out of bound;
+            - the dimension of a numpy array is not 1;
+        RuntimeError:
+            - a slice can not be interpreted;
+        MemoryError:
+            - there is not enough memory to translate an index object into a C-array of indices.
+
+    Returns:
+        A corresponding :class:`LLSparseMatrixView_INT64_t_COMPLEX128_t`. This view can be empty with the wrong index objects.
+
+    Warning:
+        Use only factory functions to create a view to a :class:`LLSparseMatrixView_INT64_t_COMPLEX128_t`.
+
+    """
+    cdef:
+        INT64_t nrow
+        INT64_t * row_indices,
+        INT64_t ncol
+        INT64_t * col_indices
+        INT64_t A_nrow = A.nrow
+        INT64_t A_ncol = A.ncol
+        INT64_t i, j
+
+    row_indices = create_c_array_indices_from_python_object_INT64_t(A_nrow, obj1, &nrow)
+    col_indices = create_c_array_indices_from_python_object_INT64_t(A_ncol, obj2, &ncol)
+
+    cdef LLSparseMatrixView_INT64_t_COMPLEX128_t view = LLSparseMatrixView_INT64_t_COMPLEX128_t(unexposed_value, A.A, nrow, ncol)
+
+    # construct arrays with adapted indices
+    cdef INT64_t * real_row_indices
+    cdef INT64_t * real_col_indices
+
+    real_row_indices = <INT64_t *> PyMem_Malloc(nrow * sizeof(INT64_t))
+    if not real_row_indices:
+        raise MemoryError()
+
+    real_col_indices = <INT64_t *> PyMem_Malloc(ncol * sizeof(INT64_t))
+    if not real_col_indices:
+        raise MemoryError()
+
+    for i from 0 <= i < nrow:
+        real_row_indices[i] = A.row_indices[row_indices[i]]
+
+    for j from 0 <= j < ncol:
+        real_col_indices[j] = A.col_indices[col_indices[j]]
+
+    view.row_indices = real_row_indices
+    view.col_indices = real_col_indices
+
+    # free non used arrays
+    PyMem_Free(row_indices)
+    PyMem_Free(col_indices)
 
     if nrow == 0 or ncol == 0:
         view.is_empty = True

@@ -34,6 +34,11 @@ cdef class LLSparseMatrix_@index@_@type@(MutableSparseMatrix_@index@_@type@):
     cdef create_submatrix(self, PyObject* obj1, PyObject* obj2)
 
     ####################################################################################################################
+    # COUNTING ELEMENTS
+    ####################################################################################################################
+    cdef count_nnz_from_indices(self, @index@ * row_indices,@index@ row_indices_length, @index@ * col_indices, @index@ col_indices_length)
+
+    ####################################################################################################################
     # SET/GET
     ####################################################################################################################
     cdef put(self, @index@ i, @index@ j, @type@ value)

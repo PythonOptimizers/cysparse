@@ -34,6 +34,11 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX128_t(MutableSparseMatrix_INT32_t_COMPL
     cdef create_submatrix(self, PyObject* obj1, PyObject* obj2)
 
     ####################################################################################################################
+    # COUNTING ELEMENTS
+    ####################################################################################################################
+    cdef count_nnz_from_indices(self, INT32_t * row_indices,INT32_t row_indices_length, INT32_t * col_indices, INT32_t col_indices_length)
+
+    ####################################################################################################################
     # SET/GET
     ####################################################################################################################
     cdef put(self, INT32_t i, INT32_t j, COMPLEX128_t value)

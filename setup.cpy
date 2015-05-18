@@ -109,6 +109,18 @@ new_sparse_ext = [
                      "cysparse/sparse/sparse_utils/generate_indices_@index_type@.pyx"],
             **sparse_ext_params),
 {% endfor %}
+
+{% for index_type in index_list %}
+    {% for element_type in type_list %}
+  Extension(name="cysparse.sparse.sparse_utils.find_@index_type@",
+            sources=["cysparse/sparse/sparse_utils/find_@index_type@_@element_type@.pxd",
+                     "cysparse/sparse/sparse_utils/find_@index_type@_@element_type@.pyx"],
+            **sparse_ext_params),
+    {% endfor %}
+{% endfor %}
+
+
+
   #Extension(name="cysparse.sparse.ll_mat",
   #          sources=["cysparse/sparse/ll_mat_details/ll_mat_multiplication.pxi",
   #                   "cysparse/sparse/ll_mat_details/ll_mat_assignment.pxi",
