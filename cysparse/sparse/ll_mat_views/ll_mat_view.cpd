@@ -1,2 +1,43 @@
 from cysparse.types.cysparse_types cimport *
 
+# forward declaration
+cdef class LLSparseMatrixView_@index@_@type@
+
+from cysparse.sparse.ll_mat_matrices.ll_mat_@index@_@type@ cimport LLSparseMatrix_@index@_@type@
+
+from cpython cimport PyObject
+
+
+cdef class LLSparseMatrixView_@index@_@type@:
+    cdef:
+        public @index@ nrow    # number of rows of the collected view
+        public @index@ ncol    # number of columns of the collected view
+
+        public bint is_empty  # view is empty, probably constructed with bad index objects
+
+        public char * type_name   # Name of matrix view type
+        public char * type        # Type of matrix view
+
+        @index@ * row_indices  # collected row indices
+        @index@ * col_indices  # collected col indices
+
+        LLSparseMatrix_@index@_@type@ A
+
+        public bint is_symmetric
+        public bint store_zeros
+
+        object nnz   # number of non zeros elements of the collected view
+        bint __counted_nnz  # did we already count the number of nnz?
+        @index@ _nnz     # number of non zeros
+
+    #cdef @index@ _count_nnz(self)
+    #cdef at(self, @index@ i, @index@ j)
+    #cdef safe_at(self, @index@ i, @index@ j)
+    #cdef put(self, @index@ i, @index@ j, @type@ value)
+    #cdef safe_put(self, @index@ i, @index@ j, @type@ value)
+
+cdef LLSparseMatrixView_@index@_@type@ MakeLLSparseMatrixView_@index@_@type@(LLSparseMatrix_@index@_@type@ A, PyObject* obj1, PyObject* obj2)
+
+#cdef LLSparseMatrixView_@index@_@type@ MakeLLSparseMatrixViewFromView_@index@_@type@(LLSparseMatrixView_@index@_@type@ A, PyObject* obj1, PyObject* obj2)
+
+

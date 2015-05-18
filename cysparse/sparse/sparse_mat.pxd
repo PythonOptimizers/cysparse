@@ -15,6 +15,7 @@ cdef class SparseMatrix:
         bint is_mutable           # True if mutable
 
         public char * type_name   # Name of matrix type
+        public char * type        # Type of matrix
         CPType cp_type            # Internal types of the matrix
 
         object shape     # for compatibility with numpy, array, etc.

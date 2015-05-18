@@ -906,6 +906,7 @@ struct __pyx_obj_8cysparse_6sparse_10sparse_mat_SparseMatrix {
   int store_zeros;
   int is_mutable;
   char *type_name;
+  char *type;
   struct __pyx_t_8cysparse_5types_14cysparse_types_CPType cp_type;
   PyObject *shape;
   PyObject *T;

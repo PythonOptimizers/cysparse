@@ -151,6 +151,18 @@ new_sparse_ext = [
   {% endfor %}
 {% endfor %}
 
+  ######################
+  # ### LLSparseMatrixView ###
+  ######################
+
+{% for index_type in index_list %}
+  {% for element_type in type_list %}
+  Extension(name="cysparse.sparse.ll_mat_views.ll_mat_view_@index_type@_@element_type@",
+            sources=["cysparse/sparse/ll_mat_views/ll_mat_view_@index_type@_@element_type@.pxd",
+                     "cysparse/sparse/ll_mat_views/ll_mat_view_@index_type@_@element_type@.pyx"],
+            **sparse_ext_params),
+  {% endfor %}
+{% endfor %}
 
 ]
 ########################################################################################################################
@@ -188,8 +200,10 @@ setup(name=  'SparseLib',
   packages=['cysparse',
             'cysparse.types',
             'cysparse.sparse',
+            'cysparse.sparse.sparse_utils',
             'cysparse.sparse.sparse_mat_matrices',
             'cysparse.sparse.ll_mat_matrices',
+            'cysparse.sparse.ll_mat_views',
             'cysparse.utils',
             #'cysparse.solvers',
             #'cysparse.solvers.suitesparse',

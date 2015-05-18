@@ -265,7 +265,12 @@ LL_SPARSE_MATRIX_DEFINITION_FILES = glob.glob(os.path.join(LL_SPARSE_MATRIX_TEMP
 
 ### CSBSparseMatrix
 
+### LLSparseMatrixView
+LL_SPARSE_MATRIX_VIEW_TEMPLATE_DIR = os.path.join(SPARSE_DIR, 'll_mat_views')
 
+LL_SPARSE_MATRIX_VIEW_INCLUDE_FILES = glob.glob(os.path.join(LL_SPARSE_MATRIX_VIEW_TEMPLATE_DIR, '*.cpi'))
+LL_SPARSE_MATRIX_VIEW_DECLARATION_FILES = glob.glob(os.path.join(LL_SPARSE_MATRIX_VIEW_TEMPLATE_DIR, '*.cpd'))
+LL_SPARSE_MATRIX_VIEW_DEFINITION_FILES = glob.glob(os.path.join(LL_SPARSE_MATRIX_VIEW_TEMPLATE_DIR, '*.cpx'))
 
 #################################################################################################
 # MAIN
@@ -340,6 +345,7 @@ if __name__ == "__main__":
             # Sparse
             ###############################
             ### include_utils
+            # generate_indices_@index@.pxd and generate_indices_@index@.pyx
             generate_following_only_index(logger, SPARSE_SPARSE_UTILS_DECLARATION_FILES, GENERAL_ENVIRONMENT, INDEX_TYPES, '.pxd')
             generate_following_only_index(logger, SPARSE_SPARSE_UTILS_DEFINITION_FILES, GENERAL_ENVIRONMENT, INDEX_TYPES, '.pyx')
 
@@ -364,6 +370,13 @@ if __name__ == "__main__":
             # ll_mat_@index@_@type@.pxd and ll_mat_@index@_@type@.pyx
             generate_following_type_and_index(logger, LL_SPARSE_MATRIX_DECLARATION_FILES, GENERAL_ENVIRONMENT, ELEMENT_TYPES, INDEX_TYPES, '.pxd')
             generate_following_type_and_index(logger, LL_SPARSE_MATRIX_DEFINITION_FILES, GENERAL_ENVIRONMENT, ELEMENT_TYPES, INDEX_TYPES, '.pyx')
+
+            ###############################
+            # LLSparseMatrixView
+            ###############################
+            # ll_mat_view_@index@_@type@.pxd and ll_mat_view_@index@_@type@.pyx
+            generate_following_type_and_index(logger, LL_SPARSE_MATRIX_VIEW_DECLARATION_FILES, GENERAL_ENVIRONMENT, ELEMENT_TYPES, INDEX_TYPES, '.pxd')
+            generate_following_type_and_index(logger, LL_SPARSE_MATRIX_VIEW_DEFINITION_FILES, GENERAL_ENVIRONMENT, ELEMENT_TYPES, INDEX_TYPES, '.pyx')
 
     if not action:
         logger.warning("No action proceeded...")

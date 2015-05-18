@@ -12,6 +12,8 @@ from cysparse.sparse.ll_mat_matrices.ll_mat_INT32_t_INT64_t cimport LLSparseMatr
 #from cysparse.utils.equality cimport values_are_equal
 #from cysparse.sparse.IO.mm cimport MakeLLSparseMatrixFromMMFile2, MakeMMFileFromSparseMatrix
 
+from cysparse.sparse.sparse_utils.generate_indices_INT32_t cimport create_c_array_indices_from_python_object_INT32_t
+
 # Import the Python-level symbols of numpy
 import numpy as np
 
@@ -49,6 +51,8 @@ cdef extern from "complex.h":
     double creal(double complex z)
     double cimag(double complex z)
 
+from cysparse.sparse.ll_mat_views.ll_mat_view_INT32_t_INT64_t cimport LLSparseMatrixView_INT32_t_INT64_t, MakeLLSparseMatrixView_INT32_t_INT64_t
+
 cdef class LLSparseMatrix_INT32_t_INT64_t(MutableSparseMatrix_INT32_t_INT64_t):
     """
     Linked-List Format matrix.
@@ -69,6 +73,7 @@ cdef class LLSparseMatrix_INT32_t_INT64_t(MutableSparseMatrix_INT32_t_INT64_t):
         if self.size_hint < 1:
             raise ValueError('size_hint (%d) must be >= 1' % self.size_hint)
 
+        self.type = "LLSparseMatrix"
         self.type_name = "LLSparseMatrix [INT32_t, INT64_t]"
 
         # This is particular to the LLSparseMatrix type
@@ -231,7 +236,15 @@ cdef class LLSparseMatrix_INT32_t_INT64_t(MutableSparseMatrix_INT32_t_INT64_t):
     # CREATE SUB-MATRICES
     ####################################################################################################################
     cdef create_submatrix(self, PyObject* obj1, PyObject* obj2):
-        pass
+        cdef:
+            INT32_t nrow
+            INT32_t * row_indices,
+            INT32_t ncol
+            INT32_t * col_indices
+            INT32_t i, j
+
+        row_indices = create_c_array_indices_from_python_object_INT32_t(self.nrow, obj1, &nrow)
+        col_indices = create_c_array_indices_from_python_object_INT32_t(self.ncol, obj2, &ncol)
 
     ####################################################################################################################
     # Set/Get individual elements
@@ -431,12 +444,12 @@ cdef class LLSparseMatrix_INT32_t_INT64_t(MutableSparseMatrix_INT32_t_INT64_t):
         if len(key) != 2:
             raise IndexError('Index tuple must be of length 2 (not %d)' % len(key))
 
-        #cdef LLSparseMatrixView view
+        cdef LLSparseMatrixView_INT32_t_INT64_t view
 
-        ## test for direct access (i.e. both elements are integers)
-        #if not PyInt_Check(<PyObject *>key[0]) or not PyInt_Check(<PyObject *>key[1]):
-        #    view =  MakeLLSparseMatrixView(self, <PyObject *>key[0], <PyObject *>key[1])
-        #    return view
+        # test for direct access (i.e. both elements are integers)
+        if not PyInt_Check(<PyObject *>key[0]) or not PyInt_Check(<PyObject *>key[1]):
+            view =  MakeLLSparseMatrixView_INT32_t_INT64_t(self, <PyObject *>key[0], <PyObject *>key[1])
+            return view
 
         cdef INT32_t i = key[0]
         cdef INT32_t j = key[1]
