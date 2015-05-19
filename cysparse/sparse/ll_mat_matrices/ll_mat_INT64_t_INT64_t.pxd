@@ -42,11 +42,13 @@ cdef class LLSparseMatrix_INT64_t_INT64_t(MutableSparseMatrix_INT64_t_INT64_t):
     # SET/GET
     ####################################################################################################################
     cdef put(self, INT64_t i, INT64_t j, INT64_t value)
-    cdef safe_put(self, INT64_t i, INT64_t j, INT64_t value)
+    cdef int safe_put(self, INT64_t i, INT64_t j, INT64_t value) except -1
     cdef assign(self, LLSparseMatrixView_INT64_t_INT64_t view, obj)
 
+    # EXPLICIT TYPE TESTS
     cdef INT64_t at(self, INT64_t i, INT64_t j)
-    cdef INT64_t safe_at(self, INT64_t i, INT64_t j)
+
+    cdef INT64_t safe_at(self, INT64_t i, INT64_t j) except? 1
 
     cpdef object keys(self)
     cpdef object values(self)

@@ -2724,7 +2724,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_12ll_mat_views_29ll_mat_view_INT64_t
   /* "cysparse/sparse/ll_mat_views/ll_mat_view_INT64_t_FLOAT64_t.pyx":154
  *         """
  *         # This is completely arbitrary
- *         cdef INT64_t size_hint = min(<INT64_t>(self.nrow * self.ncol)/4, self.A.nalloc)             # <<<<<<<<<<<<<<
+ *         cdef INT64_t size_hint = min(<INT64_t>(self.nrow * self.ncol)/4, self.A.nalloc) + 1             # <<<<<<<<<<<<<<
  * 
  *         cdef LLSparseMatrix_INT64_t_FLOAT64_t A_copy = LLSparseMatrix_INT64_t_FLOAT64_t(control_object=unexposed_value,
  */
@@ -2735,10 +2735,10 @@ static PyObject *__pyx_pf_8cysparse_6sparse_12ll_mat_views_29ll_mat_view_INT64_t
   } else {
     __pyx_t_3 = __pyx_t_2;
   }
-  __pyx_v_size_hint = __pyx_t_3;
+  __pyx_v_size_hint = (__pyx_t_3 + 1);
 
   /* "cysparse/sparse/ll_mat_views/ll_mat_view_INT64_t_FLOAT64_t.pyx":156
- *         cdef INT64_t size_hint = min(<INT64_t>(self.nrow * self.ncol)/4, self.A.nalloc)
+ *         cdef INT64_t size_hint = min(<INT64_t>(self.nrow * self.ncol)/4, self.A.nalloc) + 1
  * 
  *         cdef LLSparseMatrix_INT64_t_FLOAT64_t A_copy = LLSparseMatrix_INT64_t_FLOAT64_t(control_object=unexposed_value,             # <<<<<<<<<<<<<<
  *                                                                                   nrow=self.nrow,
@@ -2803,7 +2803,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_12ll_mat_views_29ll_mat_view_INT64_t
   if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_is_symmetric, Py_False) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 156; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "cysparse/sparse/ll_mat_views/ll_mat_view_INT64_t_FLOAT64_t.pyx":156
- *         cdef INT64_t size_hint = min(<INT64_t>(self.nrow * self.ncol)/4, self.A.nalloc)
+ *         cdef INT64_t size_hint = min(<INT64_t>(self.nrow * self.ncol)/4, self.A.nalloc) + 1
  * 
  *         cdef LLSparseMatrix_INT64_t_FLOAT64_t A_copy = LLSparseMatrix_INT64_t_FLOAT64_t(control_object=unexposed_value,             # <<<<<<<<<<<<<<
  *                                                                                   nrow=self.nrow,

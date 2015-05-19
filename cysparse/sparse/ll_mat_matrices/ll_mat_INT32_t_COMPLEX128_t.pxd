@@ -42,11 +42,13 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX128_t(MutableSparseMatrix_INT32_t_COMPL
     # SET/GET
     ####################################################################################################################
     cdef put(self, INT32_t i, INT32_t j, COMPLEX128_t value)
-    cdef safe_put(self, INT32_t i, INT32_t j, COMPLEX128_t value)
+    cdef int safe_put(self, INT32_t i, INT32_t j, COMPLEX128_t value) except -1
     cdef assign(self, LLSparseMatrixView_INT32_t_COMPLEX128_t view, obj)
 
+    # EXPLICIT TYPE TESTS
     cdef COMPLEX128_t at(self, INT32_t i, INT32_t j)
-    cdef COMPLEX128_t safe_at(self, INT32_t i, INT32_t j)
+
+    cdef COMPLEX128_t safe_at(self, INT32_t i, INT32_t j) except *
 
     cpdef object keys(self)
     cpdef object values(self)

@@ -42,12 +42,17 @@ cdef class LLSparseMatrix_@index@_@type@(MutableSparseMatrix_@index@_@type@):
     # SET/GET
     ####################################################################################################################
     cdef put(self, @index@ i, @index@ j, @type@ value)
-    cdef safe_put(self, @index@ i, @index@ j, @type@ value)
+    cdef int safe_put(self, @index@ i, @index@ j, @type@ value) except -1
     cdef assign(self, LLSparseMatrixView_@index@_@type@ view, obj)
 
+    # EXPLICIT TYPE TESTS
     cdef @type@ at(self, @index@ i, @index@ j)
-    cdef @type@ safe_at(self, @index@ i, @index@ j)
-
+{% if type == 'COMPLEX64_t' or type == 'COMPLEX128_t' %}
+    # this is needed as for the complex type, Cython's compiler crashes...
+    cdef @type@ safe_at(self, @index@ i, @index@ j) except *
+{% else %}
+    cdef @type@ safe_at(self, @index@ i, @index@ j) except? 1
+{% endif %}
     cpdef object keys(self)
     cpdef object values(self)
     cpdef object items(self)

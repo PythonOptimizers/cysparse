@@ -151,7 +151,7 @@ cdef class LLSparseMatrixView_@index@_@type@:
 
         """
         # This is completely arbitrary
-        cdef @index@ size_hint = min(<@index@>(self.nrow * self.ncol)/4, self.A.nalloc)
+        cdef @index@ size_hint = min(<@index@>(self.nrow * self.ncol)/4, self.A.nalloc) + 1
 
         cdef LLSparseMatrix_@index@_@type@ A_copy = LLSparseMatrix_@index@_@type@(control_object=unexposed_value,
                                                                                   nrow=self.nrow,

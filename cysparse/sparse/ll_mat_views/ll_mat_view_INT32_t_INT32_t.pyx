@@ -151,7 +151,7 @@ cdef class LLSparseMatrixView_INT32_t_INT32_t:
 
         """
         # This is completely arbitrary
-        cdef INT32_t size_hint = min(<INT32_t>(self.nrow * self.ncol)/4, self.A.nalloc)
+        cdef INT32_t size_hint = min(<INT32_t>(self.nrow * self.ncol)/4, self.A.nalloc) + 1
 
         cdef LLSparseMatrix_INT32_t_INT32_t A_copy = LLSparseMatrix_INT32_t_INT32_t(control_object=unexposed_value,
                                                                                   nrow=self.nrow,

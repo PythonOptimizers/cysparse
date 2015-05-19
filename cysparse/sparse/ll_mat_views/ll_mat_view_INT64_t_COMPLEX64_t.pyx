@@ -151,7 +151,7 @@ cdef class LLSparseMatrixView_INT64_t_COMPLEX64_t:
 
         """
         # This is completely arbitrary
-        cdef INT64_t size_hint = min(<INT64_t>(self.nrow * self.ncol)/4, self.A.nalloc)
+        cdef INT64_t size_hint = min(<INT64_t>(self.nrow * self.ncol)/4, self.A.nalloc) + 1
 
         cdef LLSparseMatrix_INT64_t_COMPLEX64_t A_copy = LLSparseMatrix_INT64_t_COMPLEX64_t(control_object=unexposed_value,
                                                                                   nrow=self.nrow,

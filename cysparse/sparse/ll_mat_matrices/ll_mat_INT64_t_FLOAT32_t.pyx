@@ -412,7 +412,7 @@ cdef class LLSparseMatrix_INT64_t_FLOAT32_t(MutableSparseMatrix_INT64_t_FLOAT32_
                 self.nnz -= 1
 
 
-    cdef safe_put(self, INT64_t i, INT64_t j, FLOAT32_t value):
+    cdef int safe_put(self, INT64_t i, INT64_t j, FLOAT32_t value)  except -1:
         """
         Set ``A[i, j] = value`` directly.
 
@@ -420,10 +420,14 @@ cdef class LLSparseMatrix_INT64_t_FLOAT32_t(MutableSparseMatrix_INT64_t_FLOAT32_
             IndexError: when index out of bound.
 
         """
+
         if i < 0 or i >= self.nrow or j < 0 or j >= self.ncol:
             raise IndexError('Indices out of range')
+            return -1
 
         self.put(i, j, value)
+
+        return 1
 
     ####################################################################################################################
     #                                            *** GET ***
@@ -454,7 +458,10 @@ cdef class LLSparseMatrix_INT64_t_FLOAT32_t(MutableSparseMatrix_INT64_t_FLOAT32_
 
         return 0
 
-    cdef FLOAT32_t safe_at(self, INT64_t i, INT64_t j):
+    # EXPLICIT TYPE TESTS
+
+    cdef FLOAT32_t safe_at(self, INT64_t i, INT64_t j) except? 1:
+
         """
         Return element ``(i, j)`` but with check for out of bounds indices.
 
