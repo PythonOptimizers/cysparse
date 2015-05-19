@@ -101,6 +101,21 @@ cdef class LLSparseMatrixView_INT32_t_FLOAT32_t:
         return self.at(i, j)
 
     ####################################################################################################################
+    # __setitem/__getitem__
+    ####################################################################################################################
+    def __getitem__(self, tuple key):
+        if len(key) != 2:
+            raise IndexError('Index tuple must be of length 2 (not %d)' % len(key))
+
+        if not PyInt_Check(<PyObject *>key[0]) or not PyInt_Check(<PyObject *>key[1]):
+            return MakeLLSparseMatrixViewFromView_INT32_t_FLOAT32_t(self, <PyObject *>key[0], <PyObject *>key[1])
+
+        cdef INT32_t i = key[0]
+        cdef INT32_t j = key[1]
+
+        return self.safe_at(i, j)
+
+    ####################################################################################################################
     # OUTPUT STRINGS
     ####################################################################################################################
     def attributes_short_string(self):
