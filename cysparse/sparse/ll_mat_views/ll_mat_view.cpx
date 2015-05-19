@@ -150,7 +150,8 @@ cdef class LLSparseMatrixView_@index@_@type@:
             Because we don't know what submatrix is taken, the returned matrix **cannot** by symmetric.
 
         """
-        cdef @index@ size_hint = min(self.nrow * self.ncol, self.A.nalloc)
+        # This is completely arbitrary
+        cdef @index@ size_hint = min(<@index@>(self.nrow * self.ncol)/4, self.A.nalloc)
 
         cdef LLSparseMatrix_@index@_@type@ A_copy = LLSparseMatrix_@index@_@type@(control_object=unexposed_value,
                                                                                   nrow=self.nrow,
@@ -172,6 +173,37 @@ cdef class LLSparseMatrixView_@index@_@type@:
             A_copy.compress()
 
         return A_copy
+
+    def copy(self):
+        """
+        Create a new :class:`LLSparseMatrixView_@index@_@type@` from this object.
+
+        """
+        cdef:
+            @index@ nrow
+            @index@ * row_indices,
+            @index@ ncol
+            @index@ * col_indices
+
+        row_indices = <@index@ *> PyMem_Malloc(self.nrow * sizeof(@index@))
+        col_indices = <@index@ *> PyMem_Malloc(self.ncol * sizeof(@index@))
+
+        cdef LLSparseMatrixView_@index@_@type@ view = LLSparseMatrixView_@index@_@type@(unexposed_value, self.A, self.nrow, self.ncol)
+
+        for i from 0 <= i < self.nrow:
+            row_indices[i] = self.row_indices[i]
+
+        for j from 0 <= j < self.ncol:
+            col_indices[j] = self.col_indices[j]
+
+        view.row_indices = row_indices
+        view.col_indices = col_indices
+
+        view.is_empty = self.is_empty
+        view.__counted_nnz = self.__counted_nnz
+        view._nnz = self._nnz
+
+        return view
 
     ####################################################################################################################
     # OUTPUT STRINGS
@@ -272,6 +304,7 @@ cdef LLSparseMatrixView_@index@_@type@ MakeLLSparseMatrixView_@index@_@type@(LLS
     col_indices = create_c_array_indices_from_python_object_@index@(A_ncol, obj2, &ncol)
 
     cdef LLSparseMatrixView_@index@_@type@ view = LLSparseMatrixView_@index@_@type@(unexposed_value, A, nrow, ncol)
+
     view.row_indices = row_indices
     view.col_indices = col_indices
 

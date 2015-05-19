@@ -150,7 +150,8 @@ cdef class LLSparseMatrixView_INT64_t_FLOAT64_t:
             Because we don't know what submatrix is taken, the returned matrix **cannot** by symmetric.
 
         """
-        cdef INT64_t size_hint = min(self.nrow * self.ncol, self.A.nalloc)
+        # This is completely arbitrary
+        cdef INT64_t size_hint = min(<INT64_t>(self.nrow * self.ncol)/4, self.A.nalloc)
 
         cdef LLSparseMatrix_INT64_t_FLOAT64_t A_copy = LLSparseMatrix_INT64_t_FLOAT64_t(control_object=unexposed_value,
                                                                                   nrow=self.nrow,
@@ -172,6 +173,37 @@ cdef class LLSparseMatrixView_INT64_t_FLOAT64_t:
             A_copy.compress()
 
         return A_copy
+
+    def copy(self):
+        """
+        Create a new :class:`LLSparseMatrixView_INT64_t_FLOAT64_t` from this object.
+
+        """
+        cdef:
+            INT64_t nrow
+            INT64_t * row_indices,
+            INT64_t ncol
+            INT64_t * col_indices
+
+        row_indices = <INT64_t *> PyMem_Malloc(self.nrow * sizeof(INT64_t))
+        col_indices = <INT64_t *> PyMem_Malloc(self.ncol * sizeof(INT64_t))
+
+        cdef LLSparseMatrixView_INT64_t_FLOAT64_t view = LLSparseMatrixView_INT64_t_FLOAT64_t(unexposed_value, self.A, self.nrow, self.ncol)
+
+        for i from 0 <= i < self.nrow:
+            row_indices[i] = self.row_indices[i]
+
+        for j from 0 <= j < self.ncol:
+            col_indices[j] = self.col_indices[j]
+
+        view.row_indices = row_indices
+        view.col_indices = col_indices
+
+        view.is_empty = self.is_empty
+        view.__counted_nnz = self.__counted_nnz
+        view._nnz = self._nnz
+
+        return view
 
     ####################################################################################################################
     # OUTPUT STRINGS
@@ -272,6 +304,7 @@ cdef LLSparseMatrixView_INT64_t_FLOAT64_t MakeLLSparseMatrixView_INT64_t_FLOAT64
     col_indices = create_c_array_indices_from_python_object_INT64_t(A_ncol, obj2, &ncol)
 
     cdef LLSparseMatrixView_INT64_t_FLOAT64_t view = LLSparseMatrixView_INT64_t_FLOAT64_t(unexposed_value, A, nrow, ncol)
+
     view.row_indices = row_indices
     view.col_indices = col_indices
 
