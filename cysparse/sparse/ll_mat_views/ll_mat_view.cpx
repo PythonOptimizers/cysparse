@@ -168,6 +168,9 @@ cdef class LLSparseMatrixView_@index@_@type@:
         s = "%s %s" % (self.type_name, self.attributes_long_string())
         return s
 
+########################################################################################################################
+# Factory methods
+########################################################################################################################
 cdef LLSparseMatrixView_@index@_@type@ MakeLLSparseMatrixView_@index@_@type@(LLSparseMatrix_@index@_@type@ A, PyObject* obj1, PyObject* obj2):
     """
     Factory function to create a new :class:`LLSparseMatrixView_@index@_@type@` for a :class:`LLSparseMatrix_@index@_@type@`.

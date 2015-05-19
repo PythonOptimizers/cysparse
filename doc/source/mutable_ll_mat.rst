@@ -1,13 +1,18 @@
 .. _ll_mat:
 
-==========================================================
-:class:`LLSparseMatrix` and :class:`LLSparseMatrixView`
-==========================================================
+=================================================================================================
+Mutable matrices: :class:`LLSparseMatrix` and :class:`LLSparseMatrixView`
+=================================================================================================
 
 
 
 The :class:`LLSparseMatrix` class
 ==================================
+
+The *mutable* :class:`LLSparseMatrix` class is the base class to **construct** and **populate** a matrix. With it you can easily add or delete elements, rows, columns, assign sub-matrices, etc. Once your matrix is constructed, 
+you create a new *optimized* and *immutable* matrix from it. You can choose between CSR, CSC and CSB. Each has its strength and weaknesses and we cover them in depth in their respective sections.
+
+..  warning:: The ``LLSparseMatrix`` class is **not** optimized for matrix operations!
 
 Creation
 ----------

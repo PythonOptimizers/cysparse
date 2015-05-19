@@ -58,7 +58,7 @@ cdef class LLSparseMatrix_@index@_@type@(MutableSparseMatrix_@index@_@type@):
     Linked-List Format matrix.
 
     Note:
-        Despite its name, this matrix doesn't use any linked list.
+        Despite its name, this matrix doesn't use any linked list, only C-arrays.
     """
     ####################################################################################################################
     # Init/Free/Memory

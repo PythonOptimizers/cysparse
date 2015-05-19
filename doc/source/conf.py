@@ -56,8 +56,8 @@ source_suffix = '.rst'
 master_doc = 'contents'
 
 # General information about the project.
-project = u'SparseLib'
-copyright = u'2015, Dominique Orban and Nikolaj van Omme'
+project = u'CySparse'
+copyright = u'2015, Dominique Orban, Sylvain Arreckx and Nikolaj van Omme'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
