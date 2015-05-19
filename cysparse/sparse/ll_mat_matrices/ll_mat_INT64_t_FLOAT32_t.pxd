@@ -1,7 +1,7 @@
 from cysparse.types.cysparse_types cimport *
 
 from cysparse.sparse.sparse_mat_matrices.sparse_mat_INT64_t_FLOAT32_t cimport MutableSparseMatrix_INT64_t_FLOAT32_t
-#from cysparse.sparse.ll_mat_view cimport LLSparseMatrixView
+from cysparse.sparse.ll_mat_views.ll_mat_view_INT64_t_FLOAT32_t cimport LLSparseMatrixView_INT64_t_FLOAT32_t
 
 cimport numpy as cnp
 
@@ -43,7 +43,7 @@ cdef class LLSparseMatrix_INT64_t_FLOAT32_t(MutableSparseMatrix_INT64_t_FLOAT32_
     ####################################################################################################################
     cdef put(self, INT64_t i, INT64_t j, FLOAT32_t value)
     cdef safe_put(self, INT64_t i, INT64_t j, FLOAT32_t value)
-    #cdef assign(self, LLSparseMatrixView view, obj)
+    cdef assign(self, LLSparseMatrixView_INT64_t_FLOAT32_t view, obj)
 
     cdef FLOAT32_t at(self, INT64_t i, INT64_t j)
     cdef FLOAT32_t safe_at(self, INT64_t i, INT64_t j)

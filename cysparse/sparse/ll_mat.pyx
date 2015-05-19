@@ -4,6 +4,11 @@ from cysparse.sparse.sparse_mat cimport unexposed_value
 
 from cysparse.types.cysparse_types import BASIC_TYPES
 
+from cysparse.sparse.sparse_mat cimport SparseMatrix
+
+from cython cimport isinstance
+
+
 LL_MAT_INCREASE_FACTOR = 1.5
 LL_MAT_DEFAULT_SIZE_HINT = 40
 
@@ -37,6 +42,26 @@ from cysparse.sparse.ll_mat_matrices.ll_mat_INT64_t_COMPLEX128_t cimport LLSpars
     
 
 
+
+########################################################################################################################
+# Common matrix operations
+########################################################################################################################
+cpdef bint PyLLSparseMatrix_Check(object obj):
+    """
+    Test if ``obj`` is a :class:`LLSparseMatrix`.
+
+    """
+    cdef:
+        bint is_ll_sparse_matrix = False
+
+    if isinstance(obj, SparseMatrix):
+        is_ll_sparse_matrix = obj.type == 'LLSparseMatrix'
+
+    return is_ll_sparse_matrix
+
+########################################################################################################################
+# Factory methods
+########################################################################################################################
 def NewLLSparseMatrix(**kwargs):
     """
     Factory method to create an LLSparseMatrix.

@@ -5,8 +5,10 @@ from cysparse.types.cysparse_types cimport *
 from cysparse.sparse.ll_mat cimport LL_MAT_INCREASE_FACTOR
 
 from cysparse.sparse.sparse_mat cimport unexposed_value
+from cysparse.sparse.ll_mat cimport PyLLSparseMatrix_Check
 from cysparse.sparse.sparse_mat_matrices.sparse_mat_INT64_t_COMPLEX128_t cimport MutableSparseMatrix_INT64_t_COMPLEX128_t
 from cysparse.sparse.ll_mat_matrices.ll_mat_INT64_t_COMPLEX128_t cimport LLSparseMatrix_INT64_t_COMPLEX128_t
+from cysparse.sparse.ll_mat_views.ll_mat_view_INT64_t_COMPLEX128_t cimport LLSparseMatrixView_INT64_t_COMPLEX128_t
 #from cysparse.sparse.csr_mat cimport MakeCSRSparseMatrix, MakeCSRComplexSparseMatrix
 #from cysparse.sparse.csc_mat cimport MakeCSCSparseMatrix
 #from cysparse.utils.equality cimport values_are_equal
@@ -58,7 +60,7 @@ cdef class LLSparseMatrix_INT64_t_COMPLEX128_t(MutableSparseMatrix_INT64_t_COMPL
     Linked-List Format matrix.
 
     Note:
-        Despite its name, this matrix doesn't use any linked list.
+        Despite its name, this matrix doesn't use any linked list, only C-arrays.
     """
     ####################################################################################################################
     # Init/Free/Memory
@@ -233,8 +235,10 @@ cdef class LLSparseMatrix_INT64_t_COMPLEX128_t(MutableSparseMatrix_INT64_t_COMPL
         return total_memory
 
     ####################################################################################################################
-    # CREATE SUB-MATRICES
+    # SUB-MATRICES
     ####################################################################################################################
+    ####################################################################################################################
+    #                                            ### CREATE ###
     # TODO: to be done
     cdef create_submatrix(self, PyObject* obj1, PyObject* obj2):
         cdef:
@@ -246,6 +250,63 @@ cdef class LLSparseMatrix_INT64_t_COMPLEX128_t(MutableSparseMatrix_INT64_t_COMPL
 
         row_indices = create_c_array_indices_from_python_object_INT64_t(self.nrow, obj1, &nrow)
         col_indices = create_c_array_indices_from_python_object_INT64_t(self.ncol, obj2, &ncol)
+
+    ####################################################################################################################
+    #                                            ### ASSIGN ###
+    cdef assign(self, LLSparseMatrixView_INT64_t_COMPLEX128_t view, object obj):
+        """
+        Set ``A[..., ...] = obj`` directly.
+
+        Args:
+            view: An ``LLSparseMatrixView_INT64_t_COMPLEX128_t`` that points to this matrix (``self``).
+            obj: Any Python object that implements ``__getitem__()`` and accepts a ``tuple`` ``(i, j)``.
+
+        Note:
+            This assignment is done as if ``A[i, j] = val`` was done explicitely. In particular if ``store_zeros``
+            is ``True`` and ``obj`` contains zeros, they will be explicitely added.
+
+        Warning:
+            There are not test whatsoever.
+        """
+        # test if view correspond...
+        assert self == view.A, "LLSparseMatrixView should correspond to LLSparseMatrix!"
+
+        # TODO: refine this method. It is too generic to do any optimization at all...
+
+        # VIEW
+        cdef:
+            INT64_t * row_indices = view.row_indices
+            INT64_t nrow = view.nrow
+            INT64_t * col_indices = view.col_indices
+            INT64_t ncol = view.ncol
+
+        cdef:
+            INT64_t i, j
+
+        if self.is_symmetric:
+            if PyLLSparseMatrix_Check(obj):
+                # obj is LLSparseMatrix
+                for i from 0 <= i < nrow:
+                    for j from 0 <= j <= i:
+                        self.put(row_indices[i], col_indices[j], obj.at(i, j))
+
+            else:
+                for i from 0 <= i < nrow:
+                    for j from 0 <= j <= i:
+                        self.put(row_indices[i], col_indices[j], <COMPLEX128_t> obj[tuple(i, j)])
+
+        else:   # self.is_symmetric == False
+
+            if PyLLSparseMatrix_Check(obj):
+                # obj is LLSparseMatrix
+                for i from 0 <= i < nrow:
+                    for j from 0 <= j < ncol:
+                        self.put(row_indices[i], col_indices[j], obj.at(i, j))
+
+            else:
+                for i from 0 <= i < nrow:
+                    for j from 0 <= j < ncol:
+                        self.put(row_indices[i], col_indices[j], <COMPLEX128_t> obj[tuple(i, j)])
 
     ####################################################################################################################
     # COUNTING ELEMENTS

@@ -115,6 +115,64 @@ cdef class LLSparseMatrixView_INT32_t_COMPLEX64_t:
 
         return self.safe_at(i, j)
 
+    def __setitem__(self, tuple key, value):
+        if len(key) != 2:
+            raise IndexError('Index tuple must be of length 2 (not %d)' % len(key))
+        # test for direct access (i.e. both elements are integers)
+        if not PyInt_Check(<PyObject *>key[0]) or not PyInt_Check(<PyObject *>key[0]):
+            # TODO: don't create temp object
+            view = MakeLLSparseMatrixViewFromView_INT32_t_COMPLEX64_t(self, <PyObject *>key[0], <PyObject *>key[1])
+            self.A.assign(view, value)
+
+            del view
+            return
+
+        cdef INT32_t i = key[0]
+        cdef INT32_t j = key[1]
+
+        self.safe_put(i, j, <COMPLEX64_t> value)
+
+    ####################################################################################################################
+    # COPY
+    ####################################################################################################################
+    def matrix_copy(self, compress=True):
+        """
+        Create a new :class:`LLSparseMatrix_INT32_t_COMPLEX64_t` from the view and return it.
+
+        Args:
+            compress: If ``True``, we use the minimum size for the matrix.
+
+        Note:
+            Because we lost sight of zero elements added in the viewed :class:`LLSparseMatrix_INT32_t_COMPLEX64_t`,
+            the returned matrix has its ``store_zeros`` attribute set
+            to ``False`` and no zero is copied.
+
+            Because we don't know what submatrix is taken, the returned matrix **cannot** by symmetric.
+
+        """
+        cdef INT32_t size_hint = min(self.nrow * self.ncol, self.A.nalloc)
+
+        cdef LLSparseMatrix_INT32_t_COMPLEX64_t A_copy = LLSparseMatrix_INT32_t_COMPLEX64_t(control_object=unexposed_value,
+                                                                                  nrow=self.nrow,
+                                                                                  ncol=self.ncol,
+                                                                                  size_hint=size_hint,
+                                                                                  store_zeros=False,
+                                                                                  is_symmetric=False)
+
+        cdef:
+            INT32_t i, j
+            INT32_t row_index
+
+        for i from 0 <= i < self.nrow:
+            row_index = self.row_indices[i]
+            for j from 0 <= j < self.ncol:
+                A_copy[i, j] = self.A[row_index, self.col_indices[j]]
+
+        if compress:
+            A_copy.compress()
+
+        return A_copy
+
     ####################################################################################################################
     # OUTPUT STRINGS
     ####################################################################################################################
@@ -168,6 +226,9 @@ cdef class LLSparseMatrixView_INT32_t_COMPLEX64_t:
         s = "%s %s" % (self.type_name, self.attributes_long_string())
         return s
 
+########################################################################################################################
+# Factory methods
+########################################################################################################################
 cdef LLSparseMatrixView_INT32_t_COMPLEX64_t MakeLLSparseMatrixView_INT32_t_COMPLEX64_t(LLSparseMatrix_INT32_t_COMPLEX64_t A, PyObject* obj1, PyObject* obj2):
     """
     Factory function to create a new :class:`LLSparseMatrixView_INT32_t_COMPLEX64_t` for a :class:`LLSparseMatrix_INT32_t_COMPLEX64_t`.

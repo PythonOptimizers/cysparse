@@ -14,3 +14,5 @@ cdef FLOAT32_t LL_MAT_INCREASE_FACTOR
 
 cdef INT32_t LL_MAT_DEFAULT_SIZE_HINT
 
+cpdef bint PyLLSparseMatrix_Check(object obj)
+
