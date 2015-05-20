@@ -103,14 +103,18 @@ cdef INT64_t * create_c_array_indices_from_python_object_INT64_t(INT64_t max_len
     ####################################################################################################################
     #                                            *** Integer ***
     if PyInt_Check(obj):
-        # TODO: change this!
-        i = <INT64_t> PyInt_AS_LONG(obj)
+        i = PyInt_AS_LONG(obj)
+        # test if index is valid
+        if not (0 <= i < max_length):
+            raise IndexError("Index %d out of bounds [%d, %d[" % (i, 0, max_length))
+            return NULL
+
         length = 1
         indices = <INT64_t *> PyMem_Malloc(length * sizeof(INT64_t))
         if not indices:
             raise MemoryError()
 
-        indices[0] = i
+        indices[0] = <INT64_t> i
 
     #                                            *** Slice ***
     elif PySlice_Check(obj):
@@ -145,6 +149,7 @@ cdef INT64_t * create_c_array_indices_from_python_object_INT64_t(INT64_t max_len
                 # test if index is valid
                 if not (0 <= index < max_length):
                     raise IndexError("Index %d out of bounds [%d, %d[" % (<long>index, 0, max_length))
+                    return NULL
                 indices[i] = <INT64_t> index
             else:
                 PyMem_Free(indices)
@@ -177,7 +182,8 @@ cdef INT64_t * create_c_array_indices_from_python_object_INT64_t(INT64_t max_len
         for i from 0 <= i < length:
             index = <INT64_t> array_data[i]
             if not (0 <= index < max_length):
-                raise IndexError("Index %d out of bounds [%d, %d[" % (<long>index, 0, max_length))
+                raise IndexError("Index %d out of bounds [%d, %d[" % (index, 0, max_length))
+                return NULL
             indices[i] = array_data[i]
 
     else:

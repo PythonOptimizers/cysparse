@@ -474,8 +474,8 @@ cdef class LLSparseMatrix_@index@_@type@(MutableSparseMatrix_@index@_@type@):
         """
         if not 0 <= i < self.nrow or not 0 <= j < self.ncol:
             raise IndexError("Index out of bounds")
-{% if type == 'COMPLEX64_t' or type == 'COMPLEX128_t' %}
-            return <@type@> 1.0
+{% if type != 'COMPLEX64_t' and type != 'COMPLEX128_t' %}
+            return 1
 {% endif %}
         return self.at(i, j)
 
@@ -759,3 +759,4 @@ YOU HAVE TO DEFINE OR CAST YOUR NEW UNRECOGNIZED TYPE
                 elem += 1
 
         return (a_row, a_col, a_val)
+

@@ -34,11 +34,17 @@ cdef class LLSparseMatrixView_@index@_@type@:
     # SET/GET
     ####################################################################################################################
     cdef put(self, @index@ i, @index@ j, @type@ value)
-    cdef safe_put(self, @index@ i, @index@ j, @type@ value)
+    cdef int safe_put(self, @index@ i, @index@ j, @type@ value)  except -1
     #cdef assign(self, LLSparseMatrixView view, obj)
 
     cdef @type@ at(self, @index@ i, @index@ j)
-    cdef @type@ safe_at(self, @index@ i, @index@ j)
+    # EXPLICIT TYPE TESTS
+{% if type == 'COMPLEX64_t' or type == 'COMPLEX128_t' %}
+    # this is needed as for the complex type, Cython's compiler crashes...
+    cdef @type@ safe_at(self, @index@ i, @index@ j) except *
+{% else %}
+    cdef @type@ safe_at(self, @index@ i, @index@ j) except? 1
+{% endif %}
 
 cdef LLSparseMatrixView_@index@_@type@ MakeLLSparseMatrixView_@index@_@type@(LLSparseMatrix_@index@_@type@ A, PyObject* obj1, PyObject* obj2)
 

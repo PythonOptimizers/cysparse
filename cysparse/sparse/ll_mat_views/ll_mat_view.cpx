@@ -60,7 +60,7 @@ cdef class LLSparseMatrixView_@index@_@type@:
     cdef put(self, @index@ i, @index@ j, @type@ value):
         self.A.put(self.row_indices[i], self.col_indices[j], value)
 
-    cdef safe_put(self, @index@ i, @index@ j, @type@ value):
+    cdef int safe_put(self, @index@ i, @index@ j, @type@ value) except -1:
         """
         Set ``A_view[i, j] = value`` directly.
 
@@ -69,8 +69,10 @@ cdef class LLSparseMatrixView_@index@_@type@:
         """
         if i < 0 or i >= self.nrow or j < 0 or j >= self.ncol:
             raise IndexError('Indices out of range')
+            return -1
 
         self.put(i, j, value)
+        return 1
 
     ####################################################################################################################
     #                                            *** GET ***
@@ -87,7 +89,12 @@ cdef class LLSparseMatrixView_@index@_@type@:
         """
         return self.A.safe_at(self.row_indices[i], self.col_indices[j])
 
-    cdef @type@ safe_at(self, @index@ i, @index@ j):
+    # EXPLICIT TYPE TESTS
+{% if type == 'COMPLEX64_t' or type == 'COMPLEX128_t' %}
+    cdef @type@ safe_at(self, @index@ i, @index@ j) except *:
+{% else %}
+    cdef @type@ safe_at(self, @index@ i, @index@ j) except? 1:
+{% endif %}
         """
         Return element ``(i, j)`` but with check for out of bounds indices.
 
@@ -97,6 +104,9 @@ cdef class LLSparseMatrixView_@index@_@type@:
         """
         if not 0 <= i < self.nrow or not 0 <= j < self.ncol:
             raise IndexError("Index out of bounds")
+{% if type != 'COMPLEX64_t' and type != 'COMPLEX128_t' %}
+            return 1
+{% endif %}
 
         return self.at(i, j)
 
@@ -167,7 +177,7 @@ cdef class LLSparseMatrixView_@index@_@type@:
         for i from 0 <= i < self.nrow:
             row_index = self.row_indices[i]
             for j from 0 <= j < self.ncol:
-                A_copy[i, j] = self.A[row_index, self.col_indices[j]]
+                A_copy.put(i, j, self.A[row_index, self.col_indices[j]])
 
         if compress:
             A_copy.compress()

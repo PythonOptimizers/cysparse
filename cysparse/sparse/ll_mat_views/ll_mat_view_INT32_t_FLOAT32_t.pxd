@@ -34,11 +34,14 @@ cdef class LLSparseMatrixView_INT32_t_FLOAT32_t:
     # SET/GET
     ####################################################################################################################
     cdef put(self, INT32_t i, INT32_t j, FLOAT32_t value)
-    cdef safe_put(self, INT32_t i, INT32_t j, FLOAT32_t value)
+    cdef int safe_put(self, INT32_t i, INT32_t j, FLOAT32_t value)  except -1
     #cdef assign(self, LLSparseMatrixView view, obj)
 
     cdef FLOAT32_t at(self, INT32_t i, INT32_t j)
-    cdef FLOAT32_t safe_at(self, INT32_t i, INT32_t j)
+    # EXPLICIT TYPE TESTS
+
+    cdef FLOAT32_t safe_at(self, INT32_t i, INT32_t j) except? 1
+
 
 cdef LLSparseMatrixView_INT32_t_FLOAT32_t MakeLLSparseMatrixView_INT32_t_FLOAT32_t(LLSparseMatrix_INT32_t_FLOAT32_t A, PyObject* obj1, PyObject* obj2)
 

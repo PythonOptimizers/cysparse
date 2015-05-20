@@ -48,6 +48,7 @@ cdef class LLSparseMatrix_INT64_t_COMPLEX128_t(MutableSparseMatrix_INT64_t_COMPL
     # EXPLICIT TYPE TESTS
     cdef COMPLEX128_t at(self, INT64_t i, INT64_t j)
 
+    # this is needed as for the complex type, Cython's compiler crashes...
     cdef COMPLEX128_t safe_at(self, INT64_t i, INT64_t j) except *
 
     cpdef object keys(self)

@@ -473,8 +473,6 @@ cdef class LLSparseMatrix_INT64_t_COMPLEX64_t(MutableSparseMatrix_INT64_t_COMPLE
         if not 0 <= i < self.nrow or not 0 <= j < self.ncol:
             raise IndexError("Index out of bounds")
 
-            return <COMPLEX64_t> 1.0
-
         return self.at(i, j)
 
     ####################################################################################################################

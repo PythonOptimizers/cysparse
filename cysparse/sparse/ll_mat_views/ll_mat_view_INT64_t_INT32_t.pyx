@@ -60,7 +60,7 @@ cdef class LLSparseMatrixView_INT64_t_INT32_t:
     cdef put(self, INT64_t i, INT64_t j, INT32_t value):
         self.A.put(self.row_indices[i], self.col_indices[j], value)
 
-    cdef safe_put(self, INT64_t i, INT64_t j, INT32_t value):
+    cdef int safe_put(self, INT64_t i, INT64_t j, INT32_t value) except -1:
         """
         Set ``A_view[i, j] = value`` directly.
 
@@ -69,8 +69,10 @@ cdef class LLSparseMatrixView_INT64_t_INT32_t:
         """
         if i < 0 or i >= self.nrow or j < 0 or j >= self.ncol:
             raise IndexError('Indices out of range')
+            return -1
 
         self.put(i, j, value)
+        return 1
 
     ####################################################################################################################
     #                                            *** GET ***
@@ -87,7 +89,10 @@ cdef class LLSparseMatrixView_INT64_t_INT32_t:
         """
         return self.A.safe_at(self.row_indices[i], self.col_indices[j])
 
-    cdef INT32_t safe_at(self, INT64_t i, INT64_t j):
+    # EXPLICIT TYPE TESTS
+
+    cdef INT32_t safe_at(self, INT64_t i, INT64_t j) except? 1:
+
         """
         Return element ``(i, j)`` but with check for out of bounds indices.
 
@@ -97,6 +102,9 @@ cdef class LLSparseMatrixView_INT64_t_INT32_t:
         """
         if not 0 <= i < self.nrow or not 0 <= j < self.ncol:
             raise IndexError("Index out of bounds")
+
+            return 1
+
 
         return self.at(i, j)
 
@@ -167,7 +175,7 @@ cdef class LLSparseMatrixView_INT64_t_INT32_t:
         for i from 0 <= i < self.nrow:
             row_index = self.row_indices[i]
             for j from 0 <= j < self.ncol:
-                A_copy[i, j] = self.A[row_index, self.col_indices[j]]
+                A_copy.put(i, j, self.A[row_index, self.col_indices[j]])
 
         if compress:
             A_copy.compress()
