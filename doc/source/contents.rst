@@ -14,10 +14,11 @@ CySparse documentation
    introduction
    installation
    sparse_matrix_formats
-   io_formats
+   types
    sparse_mat_hierarchy
    mutable_ll_mat
    immutable_mat
+   io_formats
    cysparse_cython_users
    cysparse_lib_mainteners
    faq

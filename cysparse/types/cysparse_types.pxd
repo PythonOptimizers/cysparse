@@ -63,12 +63,6 @@ ctypedef double FLOAT64_t
 ctypedef float complex COMPLEX64_t
 ctypedef double complex COMPLEX128_t
 
-# elements that behave like integers
-INTEGER_ELEMENT_TYPES = [INT32_T, UINT32_T, INT64_T, UINT64_T]
-# elements that behave like floats
-FLOAT_ELEMENT_TYPES = [FLOAT32_T, FLOAT64_T]
-# elements that behave like complex numbers (we only consider complex floats)
-COMPLEX_ELEMENT_TYPES = [COMPLEX64_T, COMPLEX128_T]
 
 #################################################################################################
 #                                 *** BASIC TYPES SIZES ***
@@ -94,3 +88,8 @@ cdef enum CySparseTypeBitSize:
 cdef struct CPType:
     CySparseType dtype
     CySparseType itype
+
+########################################################################################################################
+# Functions
+########################################################################################################################
+cpdef int result_type(CySparseType type1, CySparseType type2) except -1
