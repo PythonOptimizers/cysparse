@@ -21,6 +21,19 @@ Even if :program:`CySparse` is inspired from :program:`PySparse`, there are nota
 
 - :program:`CySparse` allow the use of matrices with different types of indices and elements at run time (see ...);
 - :program:`CySparse` uses matrix views - a very light object - that represent parts of a matrix without the need to copy elements (see...);
+- they define similar but also different matrix classes: 
+
+  =========================================   ======================================================   ============================================
+  Matrix type                                 :program:`PySparse`                                      :program:`CySparse` 
+  =========================================   ======================================================   ============================================
+  Linked-List Format                          ``ll_mat``, ``ll_mat_sym``, ``PysparseMatrix``           ``LLSparseMatrix``
+  Compressed Sparse Row Format                ``csr_mat``                                              ``CSRSparseMatrix``
+  Compressed Sparse Column Format             -                                                        ``CSCSparseMatrix``
+  Sparse Skyline Format                       ``sss_mat``                                              -
+  Compressed Sparse Row and Column Format     -                                                        ``CSBSparseMatrix``
+  =========================================   ======================================================   ============================================
+    
+ 
 
 
 

@@ -665,22 +665,27 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_GetAttrStr(PyObject* obj, PyObject
 
 static PyObject *__Pyx_GetBuiltinName(PyObject *name);
 
+static void __Pyx_RaiseArgtupleInvalid(const char* func_name, int exact,
+    Py_ssize_t num_min, Py_ssize_t num_max, Py_ssize_t num_found);
+
 static void __Pyx_RaiseDoubleKeywordsError(const char* func_name, PyObject* kw_name);
 
 static int __Pyx_ParseOptionalKeywords(PyObject *kwds, PyObject **argnames[], \
     PyObject *kwds2, PyObject *values[], Py_ssize_t num_pos_args, \
     const char* function_name);
 
-static void __Pyx_RaiseArgtupleInvalid(const char* func_name, int exact,
-    Py_ssize_t num_min, Py_ssize_t num_max, Py_ssize_t num_found);
+static CYTHON_INLINE PyObject *__Pyx_GetModuleGlobalName(PyObject *name);
+
+static CYTHON_INLINE int __Pyx_PySequence_Contains(PyObject* item, PyObject* seq, int eq) {
+    int result = PySequence_Contains(seq, item);
+    return unlikely(result < 0) ? result : (result == (eq == Py_EQ));
+}
 
 #if CYTHON_COMPILING_IN_CPYTHON
 static CYTHON_INLINE PyObject* __Pyx_PyObject_Call(PyObject *func, PyObject *arg, PyObject *kw);
 #else
 #define __Pyx_PyObject_Call(func, arg, kw) PyObject_Call(func, arg, kw)
 #endif
-
-static CYTHON_INLINE PyObject *__Pyx_GetModuleGlobalName(PyObject *name);
 
 #if CYTHON_COMPILING_IN_CPYTHON
 static CYTHON_INLINE PyObject* __Pyx_PyObject_CallMethO(PyObject *func, PyObject *arg);
@@ -859,7 +864,8 @@ int __pyx_module_is_main_cysparse__types__cysparse_types = 0;
 
 /* Implementation of 'cysparse.types.cysparse_types' */
 static PyObject *__pyx_builtin_print;
-static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_report_basic_types(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_OUT); /* proto */
+static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_is_subtype(CYTHON_UNUSED PyObject *__pyx_self, enum __pyx_t_8cysparse_5types_14cysparse_types_CySparseType __pyx_v_type1, enum __pyx_t_8cysparse_5types_14cysparse_types_CySparseType __pyx_v_type2); /* proto */
+static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_2report_basic_types(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_OUT); /* proto */
 static char __pyx_k_OUT[] = "OUT";
 static char __pyx_k_key[] = "key";
 static char __pyx_k_sys[] = "sys";
@@ -870,15 +876,19 @@ static char __pyx_k_main[] = "__main__";
 static char __pyx_k_test[] = "__test__";
 static char __pyx_k_items[] = "items";
 static char __pyx_k_print[] = "print";
+static char __pyx_k_type1[] = "type1";
+static char __pyx_k_type2[] = "type2";
 static char __pyx_k_format[] = "format";
 static char __pyx_k_import[] = "__import__";
 static char __pyx_k_stdout[] = "stdout";
 static char __pyx_k_INT32_t[] = "INT32_t";
 static char __pyx_k_INT64_t[] = "INT64_t";
+static char __pyx_k_subtype[] = "subtype";
 static char __pyx_k_UINT32_t[] = "UINT32_t";
 static char __pyx_k_UINT64_t[] = "UINT64_t";
 static char __pyx_k_FLOAT32_t[] = "FLOAT32_t";
 static char __pyx_k_FLOAT64_t[] = "FLOAT64_t";
+static char __pyx_k_is_subtype[] = "is_subtype";
 static char __pyx_k_BASIC_TYPES[] = "BASIC_TYPES";
 static char __pyx_k_COMPLEX64_t[] = "COMPLEX64_t";
 static char __pyx_k_INDEX_TYPES[] = "INDEX_TYPES";
@@ -889,6 +899,7 @@ static char __pyx_k_12_10d_bits_d[] = "{:12}: {:10d} bits ({:d})";
 static char __pyx_k_ELEMENT_TYPES[] = "ELEMENT_TYPES";
 static char __pyx_k_BASIC_TYPES_STR[] = "BASIC_TYPES_STR";
 static char __pyx_k_report_basic_types[] = "report_basic_types";
+static char __pyx_k_Type_s_not_recognized[] = "Type(s) not recognized";
 static char __pyx_k_Basic_types_in_CySparse[] = "Basic types in CySparse:";
 static char __pyx_k_cysparse_types_cysparse_types[] = "cysparse.types.cysparse_types";
 static char __pyx_k_home_nikolaj_Documents_WORK_Dom[] = "/home/nikolaj/Documents/WORK/Dominique/PROJECT/domisparse_virtual_env/try1/cysparse/cysparse/types/cysparse_types.pyx";
@@ -906,6 +917,7 @@ static PyObject *__pyx_n_s_INT32_t;
 static PyObject *__pyx_n_s_INT64_t;
 static PyObject *__pyx_n_s_OUT;
 static PyObject *__pyx_n_s_OrderedDict;
+static PyObject *__pyx_kp_s_Type_s_not_recognized;
 static PyObject *__pyx_n_s_UINT32_t;
 static PyObject *__pyx_n_s_UINT64_t;
 static PyObject *__pyx_n_s_collections;
@@ -914,6 +926,7 @@ static PyObject *__pyx_n_s_file;
 static PyObject *__pyx_n_s_format;
 static PyObject *__pyx_kp_s_home_nikolaj_Documents_WORK_Dom;
 static PyObject *__pyx_n_s_import;
+static PyObject *__pyx_n_s_is_subtype;
 static PyObject *__pyx_n_s_item;
 static PyObject *__pyx_n_s_items;
 static PyObject *__pyx_n_s_key;
@@ -922,14 +935,385 @@ static PyObject *__pyx_n_s_main;
 static PyObject *__pyx_n_s_print;
 static PyObject *__pyx_n_s_report_basic_types;
 static PyObject *__pyx_n_s_stdout;
+static PyObject *__pyx_n_s_subtype;
 static PyObject *__pyx_n_s_sys;
 static PyObject *__pyx_n_s_test;
+static PyObject *__pyx_n_s_type1;
+static PyObject *__pyx_n_s_type2;
 static PyObject *__pyx_k_;
 static PyObject *__pyx_tuple__2;
 static PyObject *__pyx_tuple__3;
+static PyObject *__pyx_tuple__5;
 static PyObject *__pyx_codeobj__4;
+static PyObject *__pyx_codeobj__6;
 
-/* "cysparse/types/cysparse_types.pyx":36
+/* "cysparse/types/cysparse_types.pyx":32
+ * # TESTS
+ * ########################################################################################################################
+ * def is_subtype(CySparseType type1, CySparseType type2):             # <<<<<<<<<<<<<<
+ *     """
+ *     Tells if ``type1`` is a sub-type of ``type2`` for basic types.
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_8cysparse_5types_14cysparse_types_1is_subtype(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_8cysparse_5types_14cysparse_types_is_subtype[] = "\n    Tells if ``type1`` is a sub-type of ``type2`` for basic types.\n\n    Returns:\n        ``True`` if `type1`` is a sub-type of ``type2``, ``False`` otherwise.\n\n    Args:\n        type1: A ``CySparseType``.\n        type2: Another ``CySparseType``.\n\n    Note:\n        Integers are **not** considered as a subtype of real numbers. Real numbers are considered as a subtype of\n        complex numbers.\n    ";
+static PyMethodDef __pyx_mdef_8cysparse_5types_14cysparse_types_1is_subtype = {"is_subtype", (PyCFunction)__pyx_pw_8cysparse_5types_14cysparse_types_1is_subtype, METH_VARARGS|METH_KEYWORDS, __pyx_doc_8cysparse_5types_14cysparse_types_is_subtype};
+static PyObject *__pyx_pw_8cysparse_5types_14cysparse_types_1is_subtype(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  enum __pyx_t_8cysparse_5types_14cysparse_types_CySparseType __pyx_v_type1;
+  enum __pyx_t_8cysparse_5types_14cysparse_types_CySparseType __pyx_v_type2;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("is_subtype (wrapper)", 0);
+  {
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_type1,&__pyx_n_s_type2,0};
+    PyObject* values[2] = {0,0};
+    if (unlikely(__pyx_kwds)) {
+      Py_ssize_t kw_args;
+      const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
+      switch (pos_args) {
+        case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      kw_args = PyDict_Size(__pyx_kwds);
+      switch (pos_args) {
+        case  0:
+        if (likely((values[0] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_type1)) != 0)) kw_args--;
+        else goto __pyx_L5_argtuple_error;
+        case  1:
+        if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_type2)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("is_subtype", 1, 2, 2, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 32; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        }
+      }
+      if (unlikely(kw_args > 0)) {
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "is_subtype") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 32; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+      }
+    } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+      values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+    }
+    __pyx_v_type1 = ((enum __pyx_t_8cysparse_5types_14cysparse_types_CySparseType)PyInt_AsLong(values[0])); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 32; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_type2 = ((enum __pyx_t_8cysparse_5types_14cysparse_types_CySparseType)PyInt_AsLong(values[1])); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 32; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  }
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("is_subtype", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 32; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __pyx_L3_error:;
+  __Pyx_AddTraceback("cysparse.types.cysparse_types.is_subtype", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_8cysparse_5types_14cysparse_types_is_subtype(__pyx_self, __pyx_v_type1, __pyx_v_type2);
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_is_subtype(CYTHON_UNUSED PyObject *__pyx_self, enum __pyx_t_8cysparse_5types_14cysparse_types_CySparseType __pyx_v_type1, enum __pyx_t_8cysparse_5types_14cysparse_types_CySparseType __pyx_v_type2) {
+  int __pyx_v_subtype;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  int __pyx_t_1;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  int __pyx_t_4;
+  int __pyx_t_5;
+  enum __pyx_t_8cysparse_5types_14cysparse_types_CySparseType __pyx_t_6;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("is_subtype", 0);
+
+  /* "cysparse/types/cysparse_types.pyx":47
+ *         complex numbers.
+ *     """
+ *     subtype = False             # <<<<<<<<<<<<<<
+ * 
+ *     assert type1 in BASIC_TYPES and type2 in BASIC_TYPES, "Type(s) not recognized"
+ */
+  __pyx_v_subtype = 0;
+
+  /* "cysparse/types/cysparse_types.pyx":49
+ *     subtype = False
+ * 
+ *     assert type1 in BASIC_TYPES and type2 in BASIC_TYPES, "Type(s) not recognized"             # <<<<<<<<<<<<<<
+ * 
+ *     if type1 == type2:
+ */
+  #ifndef CYTHON_WITHOUT_ASSERTIONS
+  if (unlikely(!Py_OptimizeFlag)) {
+    __pyx_t_2 = PyInt_FromLong(__pyx_v_type1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 49; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_2);
+    __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_BASIC_TYPES); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 49; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_3);
+    __pyx_t_4 = (__Pyx_PySequence_Contains(__pyx_t_2, __pyx_t_3, Py_EQ)); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 49; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __pyx_t_5 = (__pyx_t_4 != 0);
+    if (__pyx_t_5) {
+    } else {
+      __pyx_t_1 = __pyx_t_5;
+      goto __pyx_L3_bool_binop_done;
+    }
+    __pyx_t_3 = PyInt_FromLong(__pyx_v_type2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 49; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_3);
+    __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_BASIC_TYPES); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 49; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_2);
+    __pyx_t_5 = (__Pyx_PySequence_Contains(__pyx_t_3, __pyx_t_2, Py_EQ)); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 49; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __pyx_t_4 = (__pyx_t_5 != 0);
+    __pyx_t_1 = __pyx_t_4;
+    __pyx_L3_bool_binop_done:;
+    if (unlikely(!__pyx_t_1)) {
+      PyErr_SetObject(PyExc_AssertionError, __pyx_kp_s_Type_s_not_recognized);
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 49; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    }
+  }
+  #endif
+
+  /* "cysparse/types/cysparse_types.pyx":51
+ *     assert type1 in BASIC_TYPES and type2 in BASIC_TYPES, "Type(s) not recognized"
+ * 
+ *     if type1 == type2:             # <<<<<<<<<<<<<<
+ *         subtype = True
+ *     elif type2 == cp_types.INT64_T:
+ */
+  __pyx_t_1 = ((__pyx_v_type1 == __pyx_v_type2) != 0);
+  if (__pyx_t_1) {
+
+    /* "cysparse/types/cysparse_types.pyx":52
+ * 
+ *     if type1 == type2:
+ *         subtype = True             # <<<<<<<<<<<<<<
+ *     elif type2 == cp_types.INT64_T:
+ *         if type1 in [cp_types.UINT32_T, cp_types.INT32_T]:
+ */
+    __pyx_v_subtype = 1;
+    goto __pyx_L5;
+  }
+
+  /* "cysparse/types/cysparse_types.pyx":53
+ *     if type1 == type2:
+ *         subtype = True
+ *     elif type2 == cp_types.INT64_T:             # <<<<<<<<<<<<<<
+ *         if type1 in [cp_types.UINT32_T, cp_types.INT32_T]:
+ *             subtype = True
+ */
+  __pyx_t_1 = ((__pyx_v_type2 == __pyx_e_8cysparse_5types_14cysparse_types_INT64_T) != 0);
+  if (__pyx_t_1) {
+
+    /* "cysparse/types/cysparse_types.pyx":54
+ *         subtype = True
+ *     elif type2 == cp_types.INT64_T:
+ *         if type1 in [cp_types.UINT32_T, cp_types.INT32_T]:             # <<<<<<<<<<<<<<
+ *             subtype = True
+ *     elif type2 == cp_types.UINT64_T:
+ */
+    switch (__pyx_v_type1) {
+      case __pyx_e_8cysparse_5types_14cysparse_types_UINT32_T:
+      case __pyx_e_8cysparse_5types_14cysparse_types_INT32_T:
+
+      /* "cysparse/types/cysparse_types.pyx":55
+ *     elif type2 == cp_types.INT64_T:
+ *         if type1 in [cp_types.UINT32_T, cp_types.INT32_T]:
+ *             subtype = True             # <<<<<<<<<<<<<<
+ *     elif type2 == cp_types.UINT64_T:
+ *         if type1 in [cp_types.UINT32_T]:
+ */
+      __pyx_v_subtype = 1;
+      break;
+      default: break;
+    }
+    goto __pyx_L5;
+  }
+
+  /* "cysparse/types/cysparse_types.pyx":56
+ *         if type1 in [cp_types.UINT32_T, cp_types.INT32_T]:
+ *             subtype = True
+ *     elif type2 == cp_types.UINT64_T:             # <<<<<<<<<<<<<<
+ *         if type1 in [cp_types.UINT32_T]:
+ *             subtype = True
+ */
+  __pyx_t_1 = ((__pyx_v_type2 == __pyx_e_8cysparse_5types_14cysparse_types_UINT64_T) != 0);
+  if (__pyx_t_1) {
+
+    /* "cysparse/types/cysparse_types.pyx":57
+ *             subtype = True
+ *     elif type2 == cp_types.UINT64_T:
+ *         if type1 in [cp_types.UINT32_T]:             # <<<<<<<<<<<<<<
+ *             subtype = True
+ *     elif type2 == cp_types.FLOAT64_T:
+ */
+    __pyx_t_6 = __pyx_v_type1;
+    __pyx_t_1 = (((__pyx_t_6 == __pyx_e_8cysparse_5types_14cysparse_types_UINT32_T) != 0) != 0);
+    if (__pyx_t_1) {
+
+      /* "cysparse/types/cysparse_types.pyx":58
+ *     elif type2 == cp_types.UINT64_T:
+ *         if type1 in [cp_types.UINT32_T]:
+ *             subtype = True             # <<<<<<<<<<<<<<
+ *     elif type2 == cp_types.FLOAT64_T:
+ *         if type1 in [cp_types.FLOAT32_T]:
+ */
+      __pyx_v_subtype = 1;
+      goto __pyx_L6;
+    }
+    __pyx_L6:;
+    goto __pyx_L5;
+  }
+
+  /* "cysparse/types/cysparse_types.pyx":59
+ *         if type1 in [cp_types.UINT32_T]:
+ *             subtype = True
+ *     elif type2 == cp_types.FLOAT64_T:             # <<<<<<<<<<<<<<
+ *         if type1 in [cp_types.FLOAT32_T]:
+ *             return True
+ */
+  __pyx_t_1 = ((__pyx_v_type2 == __pyx_e_8cysparse_5types_14cysparse_types_FLOAT64_T) != 0);
+  if (__pyx_t_1) {
+
+    /* "cysparse/types/cysparse_types.pyx":60
+ *             subtype = True
+ *     elif type2 == cp_types.FLOAT64_T:
+ *         if type1 in [cp_types.FLOAT32_T]:             # <<<<<<<<<<<<<<
+ *             return True
+ *     elif type2 == cp_types.COMPLEX64_T:
+ */
+    __pyx_t_6 = __pyx_v_type1;
+    __pyx_t_1 = (((__pyx_t_6 == __pyx_e_8cysparse_5types_14cysparse_types_FLOAT32_T) != 0) != 0);
+    if (__pyx_t_1) {
+
+      /* "cysparse/types/cysparse_types.pyx":61
+ *     elif type2 == cp_types.FLOAT64_T:
+ *         if type1 in [cp_types.FLOAT32_T]:
+ *             return True             # <<<<<<<<<<<<<<
+ *     elif type2 == cp_types.COMPLEX64_T:
+ *         if type1 in [cp_types.FLOAT32_T]:
+ */
+      __Pyx_XDECREF(__pyx_r);
+      __Pyx_INCREF(Py_True);
+      __pyx_r = Py_True;
+      goto __pyx_L0;
+    }
+    goto __pyx_L5;
+  }
+
+  /* "cysparse/types/cysparse_types.pyx":62
+ *         if type1 in [cp_types.FLOAT32_T]:
+ *             return True
+ *     elif type2 == cp_types.COMPLEX64_T:             # <<<<<<<<<<<<<<
+ *         if type1 in [cp_types.FLOAT32_T]:
+ *             subtype = True
+ */
+  __pyx_t_1 = ((__pyx_v_type2 == __pyx_e_8cysparse_5types_14cysparse_types_COMPLEX64_T) != 0);
+  if (__pyx_t_1) {
+
+    /* "cysparse/types/cysparse_types.pyx":63
+ *             return True
+ *     elif type2 == cp_types.COMPLEX64_T:
+ *         if type1 in [cp_types.FLOAT32_T]:             # <<<<<<<<<<<<<<
+ *             subtype = True
+ *     elif type2 == cp_types.COMPLEX128_T:
+ */
+    __pyx_t_6 = __pyx_v_type1;
+    __pyx_t_1 = (((__pyx_t_6 == __pyx_e_8cysparse_5types_14cysparse_types_FLOAT32_T) != 0) != 0);
+    if (__pyx_t_1) {
+
+      /* "cysparse/types/cysparse_types.pyx":64
+ *     elif type2 == cp_types.COMPLEX64_T:
+ *         if type1 in [cp_types.FLOAT32_T]:
+ *             subtype = True             # <<<<<<<<<<<<<<
+ *     elif type2 == cp_types.COMPLEX128_T:
+ *         if type1 in [cp_types.FLOAT64_T, cp_types.COMPLEX64_T]:
+ */
+      __pyx_v_subtype = 1;
+      goto __pyx_L8;
+    }
+    __pyx_L8:;
+    goto __pyx_L5;
+  }
+
+  /* "cysparse/types/cysparse_types.pyx":65
+ *         if type1 in [cp_types.FLOAT32_T]:
+ *             subtype = True
+ *     elif type2 == cp_types.COMPLEX128_T:             # <<<<<<<<<<<<<<
+ *         if type1 in [cp_types.FLOAT64_T, cp_types.COMPLEX64_T]:
+ *             subtype = True
+ */
+  __pyx_t_1 = ((__pyx_v_type2 == __pyx_e_8cysparse_5types_14cysparse_types_COMPLEX128_T) != 0);
+  if (__pyx_t_1) {
+
+    /* "cysparse/types/cysparse_types.pyx":66
+ *             subtype = True
+ *     elif type2 == cp_types.COMPLEX128_T:
+ *         if type1 in [cp_types.FLOAT64_T, cp_types.COMPLEX64_T]:             # <<<<<<<<<<<<<<
+ *             subtype = True
+ * 
+ */
+    switch (__pyx_v_type1) {
+      case __pyx_e_8cysparse_5types_14cysparse_types_FLOAT64_T:
+      case __pyx_e_8cysparse_5types_14cysparse_types_COMPLEX64_T:
+
+      /* "cysparse/types/cysparse_types.pyx":67
+ *     elif type2 == cp_types.COMPLEX128_T:
+ *         if type1 in [cp_types.FLOAT64_T, cp_types.COMPLEX64_T]:
+ *             subtype = True             # <<<<<<<<<<<<<<
+ * 
+ *     return subtype
+ */
+      __pyx_v_subtype = 1;
+      break;
+      default: break;
+    }
+    goto __pyx_L5;
+  }
+  __pyx_L5:;
+
+  /* "cysparse/types/cysparse_types.pyx":69
+ *             subtype = True
+ * 
+ *     return subtype             # <<<<<<<<<<<<<<
+ * 
+ * ########################################################################################################################
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_2 = __Pyx_PyBool_FromLong(__pyx_v_subtype); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 69; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_r = __pyx_t_2;
+  __pyx_t_2 = 0;
+  goto __pyx_L0;
+
+  /* "cysparse/types/cysparse_types.pyx":32
+ * # TESTS
+ * ########################################################################################################################
+ * def is_subtype(CySparseType type1, CySparseType type2):             # <<<<<<<<<<<<<<
+ *     """
+ *     Tells if ``type1`` is a sub-type of ``type2`` for basic types.
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_AddTraceback("cysparse.types.cysparse_types.is_subtype", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "cysparse/types/cysparse_types.pyx":74
  * # REPORT
  * ########################################################################################################################
  * def report_basic_types(OUT=sys.stdout):             # <<<<<<<<<<<<<<
@@ -938,9 +1322,9 @@ static PyObject *__pyx_codeobj__4;
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_8cysparse_5types_14cysparse_types_1report_basic_types(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyMethodDef __pyx_mdef_8cysparse_5types_14cysparse_types_1report_basic_types = {"report_basic_types", (PyCFunction)__pyx_pw_8cysparse_5types_14cysparse_types_1report_basic_types, METH_VARARGS|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_8cysparse_5types_14cysparse_types_1report_basic_types(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_8cysparse_5types_14cysparse_types_3report_basic_types(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyMethodDef __pyx_mdef_8cysparse_5types_14cysparse_types_3report_basic_types = {"report_basic_types", (PyCFunction)__pyx_pw_8cysparse_5types_14cysparse_types_3report_basic_types, METH_VARARGS|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_8cysparse_5types_14cysparse_types_3report_basic_types(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_OUT = 0;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
@@ -969,7 +1353,7 @@ static PyObject *__pyx_pw_8cysparse_5types_14cysparse_types_1report_basic_types(
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "report_basic_types") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 36; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "report_basic_types") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 74; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -982,20 +1366,20 @@ static PyObject *__pyx_pw_8cysparse_5types_14cysparse_types_1report_basic_types(
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("report_basic_types", 0, 0, 1, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 36; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("report_basic_types", 0, 0, 1, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 74; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("cysparse.types.cysparse_types.report_basic_types", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_8cysparse_5types_14cysparse_types_report_basic_types(__pyx_self, __pyx_v_OUT);
+  __pyx_r = __pyx_pf_8cysparse_5types_14cysparse_types_2report_basic_types(__pyx_self, __pyx_v_OUT);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_report_basic_types(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_OUT) {
+static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_2report_basic_types(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_OUT) {
   PyObject *__pyx_v_key = NULL;
   PyObject *__pyx_v_item = NULL;
   PyObject *__pyx_r = NULL;
@@ -1016,46 +1400,46 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_report_basic_types(C
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("report_basic_types", 0);
 
-  /* "cysparse/types/cysparse_types.pyx":37
+  /* "cysparse/types/cysparse_types.pyx":75
  * ########################################################################################################################
  * def report_basic_types(OUT=sys.stdout):
  *     print('Basic types in CySparse:', file=OUT)             # <<<<<<<<<<<<<<
  *     print(file=OUT)
  *     for key, item in BASIC_TYPES_STR.items():
  */
-  __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 37; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 75; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_file, __pyx_v_OUT) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 37; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__2, __pyx_t_1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 37; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_file, __pyx_v_OUT) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 75; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__2, __pyx_t_1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 75; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "cysparse/types/cysparse_types.pyx":38
+  /* "cysparse/types/cysparse_types.pyx":76
  * def report_basic_types(OUT=sys.stdout):
  *     print('Basic types in CySparse:', file=OUT)
  *     print(file=OUT)             # <<<<<<<<<<<<<<
  *     for key, item in BASIC_TYPES_STR.items():
  *         print('{:12}: {:10d} bits ({:d})'.format(key, item[0], item[1]), file=OUT)
  */
-  __pyx_t_2 = PyDict_New(); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 38; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyDict_New(); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 76; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_file, __pyx_v_OUT) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 38; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 38; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_file, __pyx_v_OUT) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 76; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 76; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "cysparse/types/cysparse_types.pyx":39
+  /* "cysparse/types/cysparse_types.pyx":77
  *     print('Basic types in CySparse:', file=OUT)
  *     print(file=OUT)
  *     for key, item in BASIC_TYPES_STR.items():             # <<<<<<<<<<<<<<
  *         print('{:12}: {:10d} bits ({:d})'.format(key, item[0], item[1]), file=OUT)
  * 
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_BASIC_TYPES_STR); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 39; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_BASIC_TYPES_STR); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 77; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_items); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 39; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_items); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 77; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -1069,10 +1453,10 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_report_basic_types(C
     }
   }
   if (__pyx_t_2) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 39; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 77; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   } else {
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 39; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 77; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -1080,9 +1464,9 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_report_basic_types(C
     __pyx_t_3 = __pyx_t_1; __Pyx_INCREF(__pyx_t_3); __pyx_t_4 = 0;
     __pyx_t_5 = NULL;
   } else {
-    __pyx_t_4 = -1; __pyx_t_3 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 39; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = -1; __pyx_t_3 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 77; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_5 = Py_TYPE(__pyx_t_3)->tp_iternext; if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 39; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = Py_TYPE(__pyx_t_3)->tp_iternext; if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 77; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   for (;;) {
@@ -1090,16 +1474,16 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_report_basic_types(C
       if (likely(PyList_CheckExact(__pyx_t_3))) {
         if (__pyx_t_4 >= PyList_GET_SIZE(__pyx_t_3)) break;
         #if CYTHON_COMPILING_IN_CPYTHON
-        __pyx_t_1 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_4); __Pyx_INCREF(__pyx_t_1); __pyx_t_4++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 39; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_1 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_4); __Pyx_INCREF(__pyx_t_1); __pyx_t_4++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 77; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         #else
-        __pyx_t_1 = PySequence_ITEM(__pyx_t_3, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 39; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_1 = PySequence_ITEM(__pyx_t_3, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 77; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         #endif
       } else {
         if (__pyx_t_4 >= PyTuple_GET_SIZE(__pyx_t_3)) break;
         #if CYTHON_COMPILING_IN_CPYTHON
-        __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_3, __pyx_t_4); __Pyx_INCREF(__pyx_t_1); __pyx_t_4++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 39; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_3, __pyx_t_4); __Pyx_INCREF(__pyx_t_1); __pyx_t_4++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 77; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         #else
-        __pyx_t_1 = PySequence_ITEM(__pyx_t_3, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 39; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_1 = PySequence_ITEM(__pyx_t_3, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 77; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         #endif
       }
     } else {
@@ -1108,7 +1492,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_report_basic_types(C
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(exc_type == PyExc_StopIteration || PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else {__pyx_filename = __pyx_f[0]; __pyx_lineno = 39; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          else {__pyx_filename = __pyx_f[0]; __pyx_lineno = 77; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         }
         break;
       }
@@ -1124,7 +1508,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_report_basic_types(C
       if (unlikely(size != 2)) {
         if (size > 2) __Pyx_RaiseTooManyValuesError(2);
         else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 39; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 77; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
       #if CYTHON_COMPILING_IN_CPYTHON
       if (likely(PyTuple_CheckExact(sequence))) {
@@ -1137,15 +1521,15 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_report_basic_types(C
       __Pyx_INCREF(__pyx_t_2);
       __Pyx_INCREF(__pyx_t_6);
       #else
-      __pyx_t_2 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 39; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 77; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_6 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 39; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_6 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 77; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_6);
       #endif
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     } else {
       Py_ssize_t index = -1;
-      __pyx_t_7 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 39; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_7 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 77; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __pyx_t_8 = Py_TYPE(__pyx_t_7)->tp_iternext;
@@ -1153,7 +1537,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_report_basic_types(C
       __Pyx_GOTREF(__pyx_t_2);
       index = 1; __pyx_t_6 = __pyx_t_8(__pyx_t_7); if (unlikely(!__pyx_t_6)) goto __pyx_L5_unpacking_failed;
       __Pyx_GOTREF(__pyx_t_6);
-      if (__Pyx_IternextUnpackEndCheck(__pyx_t_8(__pyx_t_7), 2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 39; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (__Pyx_IternextUnpackEndCheck(__pyx_t_8(__pyx_t_7), 2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 77; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __pyx_t_8 = NULL;
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
       goto __pyx_L6_unpacking_done;
@@ -1161,7 +1545,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_report_basic_types(C
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
       __pyx_t_8 = NULL;
       if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 39; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 77; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __pyx_L6_unpacking_done:;
     }
     __Pyx_XDECREF_SET(__pyx_v_key, __pyx_t_2);
@@ -1169,18 +1553,18 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_report_basic_types(C
     __Pyx_XDECREF_SET(__pyx_v_item, __pyx_t_6);
     __pyx_t_6 = 0;
 
-    /* "cysparse/types/cysparse_types.pyx":40
+    /* "cysparse/types/cysparse_types.pyx":78
  *     print(file=OUT)
  *     for key, item in BASIC_TYPES_STR.items():
  *         print('{:12}: {:10d} bits ({:d})'.format(key, item[0], item[1]), file=OUT)             # <<<<<<<<<<<<<<
  * 
  * 
  */
-    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_kp_s_12_10d_bits_d, __pyx_n_s_format); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 40; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_kp_s_12_10d_bits_d, __pyx_n_s_format); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 78; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_2 = __Pyx_GetItemInt(__pyx_v_item, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 40; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_2 = __Pyx_GetItemInt(__pyx_v_item, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 78; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_7 = __Pyx_GetItemInt(__pyx_v_item, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_7 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 40; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_7 = __Pyx_GetItemInt(__pyx_v_item, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_7 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 78; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_7);
     __pyx_t_9 = NULL;
     __pyx_t_10 = 0;
@@ -1194,7 +1578,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_report_basic_types(C
         __pyx_t_10 = 1;
       }
     }
-    __pyx_t_11 = PyTuple_New(3+__pyx_t_10); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 40; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_11 = PyTuple_New(3+__pyx_t_10); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 78; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_11);
     if (__pyx_t_9) {
       PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_t_9); __Pyx_GIVEREF(__pyx_t_9); __pyx_t_9 = NULL;
@@ -1208,25 +1592,25 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_report_basic_types(C
     __Pyx_GIVEREF(__pyx_t_7);
     __pyx_t_2 = 0;
     __pyx_t_7 = 0;
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_11, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 40; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_11, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 78; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_6 = PyTuple_New(1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 40; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_6 = PyTuple_New(1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 78; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_6);
     PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_1);
     __Pyx_GIVEREF(__pyx_t_1);
     __pyx_t_1 = 0;
-    __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 40; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 78; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_file, __pyx_v_OUT) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 40; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __pyx_t_11 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_t_6, __pyx_t_1); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 40; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_file, __pyx_v_OUT) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 78; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_11 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_t_6, __pyx_t_1); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 78; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_11);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
 
-    /* "cysparse/types/cysparse_types.pyx":39
+    /* "cysparse/types/cysparse_types.pyx":77
  *     print('Basic types in CySparse:', file=OUT)
  *     print(file=OUT)
  *     for key, item in BASIC_TYPES_STR.items():             # <<<<<<<<<<<<<<
@@ -1236,7 +1620,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_report_basic_types(C
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "cysparse/types/cysparse_types.pyx":36
+  /* "cysparse/types/cysparse_types.pyx":74
  * # REPORT
  * ########################################################################################################################
  * def report_basic_types(OUT=sys.stdout):             # <<<<<<<<<<<<<<
@@ -1302,6 +1686,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_INT64_t, __pyx_k_INT64_t, sizeof(__pyx_k_INT64_t), 0, 0, 1, 1},
   {&__pyx_n_s_OUT, __pyx_k_OUT, sizeof(__pyx_k_OUT), 0, 0, 1, 1},
   {&__pyx_n_s_OrderedDict, __pyx_k_OrderedDict, sizeof(__pyx_k_OrderedDict), 0, 0, 1, 1},
+  {&__pyx_kp_s_Type_s_not_recognized, __pyx_k_Type_s_not_recognized, sizeof(__pyx_k_Type_s_not_recognized), 0, 0, 1, 0},
   {&__pyx_n_s_UINT32_t, __pyx_k_UINT32_t, sizeof(__pyx_k_UINT32_t), 0, 0, 1, 1},
   {&__pyx_n_s_UINT64_t, __pyx_k_UINT64_t, sizeof(__pyx_k_UINT64_t), 0, 0, 1, 1},
   {&__pyx_n_s_collections, __pyx_k_collections, sizeof(__pyx_k_collections), 0, 0, 1, 1},
@@ -1310,6 +1695,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_format, __pyx_k_format, sizeof(__pyx_k_format), 0, 0, 1, 1},
   {&__pyx_kp_s_home_nikolaj_Documents_WORK_Dom, __pyx_k_home_nikolaj_Documents_WORK_Dom, sizeof(__pyx_k_home_nikolaj_Documents_WORK_Dom), 0, 0, 1, 0},
   {&__pyx_n_s_import, __pyx_k_import, sizeof(__pyx_k_import), 0, 0, 1, 1},
+  {&__pyx_n_s_is_subtype, __pyx_k_is_subtype, sizeof(__pyx_k_is_subtype), 0, 0, 1, 1},
   {&__pyx_n_s_item, __pyx_k_item, sizeof(__pyx_k_item), 0, 0, 1, 1},
   {&__pyx_n_s_items, __pyx_k_items, sizeof(__pyx_k_items), 0, 0, 1, 1},
   {&__pyx_n_s_key, __pyx_k_key, sizeof(__pyx_k_key), 0, 0, 1, 1},
@@ -1318,12 +1704,15 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_print, __pyx_k_print, sizeof(__pyx_k_print), 0, 0, 1, 1},
   {&__pyx_n_s_report_basic_types, __pyx_k_report_basic_types, sizeof(__pyx_k_report_basic_types), 0, 0, 1, 1},
   {&__pyx_n_s_stdout, __pyx_k_stdout, sizeof(__pyx_k_stdout), 0, 0, 1, 1},
+  {&__pyx_n_s_subtype, __pyx_k_subtype, sizeof(__pyx_k_subtype), 0, 0, 1, 1},
   {&__pyx_n_s_sys, __pyx_k_sys, sizeof(__pyx_k_sys), 0, 0, 1, 1},
   {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
+  {&__pyx_n_s_type1, __pyx_k_type1, sizeof(__pyx_k_type1), 0, 0, 1, 1},
+  {&__pyx_n_s_type2, __pyx_k_type2, sizeof(__pyx_k_type2), 0, 0, 1, 1},
   {0, 0, 0, 0, 0, 0, 0}
 };
 static int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_print = __Pyx_GetBuiltinName(__pyx_n_s_print); if (!__pyx_builtin_print) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 37; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_builtin_print = __Pyx_GetBuiltinName(__pyx_n_s_print); if (!__pyx_builtin_print) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 75; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -1333,28 +1722,40 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "cysparse/types/cysparse_types.pyx":37
+  /* "cysparse/types/cysparse_types.pyx":75
  * ########################################################################################################################
  * def report_basic_types(OUT=sys.stdout):
  *     print('Basic types in CySparse:', file=OUT)             # <<<<<<<<<<<<<<
  *     print(file=OUT)
  *     for key, item in BASIC_TYPES_STR.items():
  */
-  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_s_Basic_types_in_CySparse); if (unlikely(!__pyx_tuple__2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 37; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_s_Basic_types_in_CySparse); if (unlikely(!__pyx_tuple__2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 75; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
 
-  /* "cysparse/types/cysparse_types.pyx":36
+  /* "cysparse/types/cysparse_types.pyx":32
+ * # TESTS
+ * ########################################################################################################################
+ * def is_subtype(CySparseType type1, CySparseType type2):             # <<<<<<<<<<<<<<
+ *     """
+ *     Tells if ``type1`` is a sub-type of ``type2`` for basic types.
+ */
+  __pyx_tuple__3 = PyTuple_Pack(3, __pyx_n_s_type1, __pyx_n_s_type2, __pyx_n_s_subtype); if (unlikely(!__pyx_tuple__3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 32; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__3);
+  __Pyx_GIVEREF(__pyx_tuple__3);
+  __pyx_codeobj__4 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__3, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_nikolaj_Documents_WORK_Dom, __pyx_n_s_is_subtype, 32, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 32; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+
+  /* "cysparse/types/cysparse_types.pyx":74
  * # REPORT
  * ########################################################################################################################
  * def report_basic_types(OUT=sys.stdout):             # <<<<<<<<<<<<<<
  *     print('Basic types in CySparse:', file=OUT)
  *     print(file=OUT)
  */
-  __pyx_tuple__3 = PyTuple_Pack(3, __pyx_n_s_OUT, __pyx_n_s_key, __pyx_n_s_item); if (unlikely(!__pyx_tuple__3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 36; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__3);
-  __Pyx_GIVEREF(__pyx_tuple__3);
-  __pyx_codeobj__4 = (PyObject*)__Pyx_PyCode_New(1, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__3, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_nikolaj_Documents_WORK_Dom, __pyx_n_s_report_basic_types, 36, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 36; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__5 = PyTuple_Pack(3, __pyx_n_s_OUT, __pyx_n_s_key, __pyx_n_s_item); if (unlikely(!__pyx_tuple__5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 74; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__5);
+  __Pyx_GIVEREF(__pyx_tuple__5);
+  __pyx_codeobj__6 = (PyObject*)__Pyx_PyCode_New(1, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__5, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_nikolaj_Documents_WORK_Dom, __pyx_n_s_report_basic_types, 74, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 74; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -1936,24 +2337,36 @@ PyMODINIT_FUNC PyInit_cysparse_types(void)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_INDEX_TYPES, __pyx_t_4) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 26; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "cysparse/types/cysparse_types.pyx":36
+  /* "cysparse/types/cysparse_types.pyx":32
+ * # TESTS
+ * ########################################################################################################################
+ * def is_subtype(CySparseType type1, CySparseType type2):             # <<<<<<<<<<<<<<
+ *     """
+ *     Tells if ``type1`` is a sub-type of ``type2`` for basic types.
+ */
+  __pyx_t_4 = PyCFunction_NewEx(&__pyx_mdef_8cysparse_5types_14cysparse_types_1is_subtype, NULL, __pyx_n_s_cysparse_types_cysparse_types); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 32; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_4);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_is_subtype, __pyx_t_4) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 32; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+
+  /* "cysparse/types/cysparse_types.pyx":74
  * # REPORT
  * ########################################################################################################################
  * def report_basic_types(OUT=sys.stdout):             # <<<<<<<<<<<<<<
  *     print('Basic types in CySparse:', file=OUT)
  *     print(file=OUT)
  */
-  __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 36; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 74; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_stdout); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 36; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_stdout); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 74; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_k_ = __pyx_t_3;
   __Pyx_GIVEREF(__pyx_t_3);
   __pyx_t_3 = 0;
-  __pyx_t_3 = PyCFunction_NewEx(&__pyx_mdef_8cysparse_5types_14cysparse_types_1report_basic_types, NULL, __pyx_n_s_cysparse_types_cysparse_types); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 36; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = PyCFunction_NewEx(&__pyx_mdef_8cysparse_5types_14cysparse_types_3report_basic_types, NULL, __pyx_n_s_cysparse_types_cysparse_types); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 74; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_report_basic_types, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 36; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_report_basic_types, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 74; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
   /* "cysparse/types/cysparse_types.pyx":1
@@ -2061,6 +2474,31 @@ static PyObject *__Pyx_GetBuiltinName(PyObject *name) {
 #endif
     }
     return result;
+}
+
+static void __Pyx_RaiseArgtupleInvalid(
+    const char* func_name,
+    int exact,
+    Py_ssize_t num_min,
+    Py_ssize_t num_max,
+    Py_ssize_t num_found)
+{
+    Py_ssize_t num_expected;
+    const char *more_or_less;
+    if (num_found < num_min) {
+        num_expected = num_min;
+        more_or_less = "at least";
+    } else {
+        num_expected = num_max;
+        more_or_less = "at most";
+    }
+    if (exact) {
+        more_or_less = "exactly";
+    }
+    PyErr_Format(PyExc_TypeError,
+                 "%.200s() takes %.8s %" CYTHON_FORMAT_SSIZE_T "d positional argument%.1s (%" CYTHON_FORMAT_SSIZE_T "d given)",
+                 func_name, more_or_less, num_expected,
+                 (num_expected == 1) ? "" : "s", num_found);
 }
 
 static void __Pyx_RaiseDoubleKeywordsError(
@@ -2177,29 +2615,21 @@ bad:
     return -1;
 }
 
-static void __Pyx_RaiseArgtupleInvalid(
-    const char* func_name,
-    int exact,
-    Py_ssize_t num_min,
-    Py_ssize_t num_max,
-    Py_ssize_t num_found)
-{
-    Py_ssize_t num_expected;
-    const char *more_or_less;
-    if (num_found < num_min) {
-        num_expected = num_min;
-        more_or_less = "at least";
+static CYTHON_INLINE PyObject *__Pyx_GetModuleGlobalName(PyObject *name) {
+    PyObject *result;
+#if CYTHON_COMPILING_IN_CPYTHON
+    result = PyDict_GetItem(__pyx_d, name);
+    if (likely(result)) {
+        Py_INCREF(result);
     } else {
-        num_expected = num_max;
-        more_or_less = "at most";
+#else
+    result = PyObject_GetItem(__pyx_d, name);
+    if (!result) {
+        PyErr_Clear();
+#endif
+        result = __Pyx_GetBuiltinName(name);
     }
-    if (exact) {
-        more_or_less = "exactly";
-    }
-    PyErr_Format(PyExc_TypeError,
-                 "%.200s() takes %.8s %" CYTHON_FORMAT_SSIZE_T "d positional argument%.1s (%" CYTHON_FORMAT_SSIZE_T "d given)",
-                 func_name, more_or_less, num_expected,
-                 (num_expected == 1) ? "" : "s", num_found);
+    return result;
 }
 
 #if CYTHON_COMPILING_IN_CPYTHON
@@ -2220,23 +2650,6 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_Call(PyObject *func, PyObject *arg
     return result;
 }
 #endif
-
-static CYTHON_INLINE PyObject *__Pyx_GetModuleGlobalName(PyObject *name) {
-    PyObject *result;
-#if CYTHON_COMPILING_IN_CPYTHON
-    result = PyDict_GetItem(__pyx_d, name);
-    if (likely(result)) {
-        Py_INCREF(result);
-    } else {
-#else
-    result = PyObject_GetItem(__pyx_d, name);
-    if (!result) {
-        PyErr_Clear();
-#endif
-        result = __Pyx_GetBuiltinName(name);
-    }
-    return result;
-}
 
 #if CYTHON_COMPILING_IN_CPYTHON
 static CYTHON_INLINE PyObject* __Pyx_PyObject_CallMethO(PyObject *func, PyObject *arg) {

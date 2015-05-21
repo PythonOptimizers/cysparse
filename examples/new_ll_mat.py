@@ -1,5 +1,6 @@
 from cysparse.sparse.ll_mat import *
 import cysparse.types.cysparse_types as types
+import numpy as np
 
 l1 = NewLLSparseMatrix(nrow=300, ncol=700, size_hint=400)
 print l1
@@ -14,6 +15,8 @@ l1.compress()              # shrink the matrix as much as possible
 print l1.memory_real()
 
 l1[2, 2] = 45000000000000000000000  # huge number
+l1[27, 47] = np.inf
+
 l1.put_triplet([1,1], [1, 2], [5.6, 6.7])  # i, j, val
 print l1
 

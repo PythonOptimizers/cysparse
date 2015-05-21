@@ -29,6 +29,44 @@ INDEX_TYPES = [cp_types.COMPLEX64_T, cp_types.COMPLEX128_T]
 ########################################################################################################################
 # TESTS
 ########################################################################################################################
+def is_subtype(CySparseType type1, CySparseType type2):
+    """
+    Tells if ``type1`` is a sub-type of ``type2`` for basic types.
+
+    Returns:
+        ``True`` if `type1`` is a sub-type of ``type2``, ``False`` otherwise.
+
+    Args:
+        type1: A ``CySparseType``.
+        type2: Another ``CySparseType``.
+
+    Note:
+        Integers are **not** considered as a subtype of real numbers. Real numbers are considered as a subtype of
+        complex numbers.
+    """
+    subtype = False
+
+    assert type1 in BASIC_TYPES and type2 in BASIC_TYPES, "Type(s) not recognized"
+
+    if type1 == type2:
+        subtype = True
+    elif type2 == cp_types.INT64_T:
+        if type1 in [cp_types.UINT32_T, cp_types.INT32_T]:
+            subtype = True
+    elif type2 == cp_types.UINT64_T:
+        if type1 in [cp_types.UINT32_T]:
+            subtype = True
+    elif type2 == cp_types.FLOAT64_T:
+        if type1 in [cp_types.FLOAT32_T]:
+            return True
+    elif type2 == cp_types.COMPLEX64_T:
+        if type1 in [cp_types.FLOAT32_T]:
+            subtype = True
+    elif type2 == cp_types.COMPLEX128_T:
+        if type1 in [cp_types.FLOAT64_T, cp_types.COMPLEX64_T]:
+            subtype = True
+
+    return subtype
 
 ########################################################################################################################
 # REPORT

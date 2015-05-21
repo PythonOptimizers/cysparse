@@ -264,6 +264,10 @@ LL_SPARSE_MATRIX_INCLUDE_FILES = glob.glob(os.path.join(LL_SPARSE_MATRIX_TEMPLAT
 LL_SPARSE_MATRIX_DECLARATION_FILES = glob.glob(os.path.join(LL_SPARSE_MATRIX_TEMPLATE_DIR, '*.cpd'))
 LL_SPARSE_MATRIX_DEFINITION_FILES = glob.glob(os.path.join(LL_SPARSE_MATRIX_TEMPLATE_DIR, '*.cpx'))
 
+### LLSparseMatrix kernel
+LL_SPARSE_MATRIX_KERNEL_TEMPLATE_DIR = os.path.join(LL_SPARSE_MATRIX_TEMPLATE_DIR, 'll_mat_kernel')
+LL_SPARSE_MATRIX_KERNEL_INCLUDE_FILES = glob.glob(os.path.join(LL_SPARSE_MATRIX_KERNEL_TEMPLATE_DIR, '*.cpi'))
+
 ### CSRSparseMatrix
 
 ### CSCSparseMatrix
@@ -338,10 +342,17 @@ if __name__ == "__main__":
 
         if arg_options.clean:
             logger.info("Clean generated files")
+            # Sparse
             clean_cython_files(logger, SPARSE_SPARSE_UTILS_TEMPLATE_DIR)
+            # SparseMatrix
             clean_cython_files(logger, SPARSE_MATRIX_TEMPLATE_DIR)
+            # LLSparseMatrix
             clean_cython_files(logger, LL_SPARSE_MATRIX_TEMPLATE_DIR)
             clean_cython_files(logger, SPARSE_DIR, [LL_SPARSE_MATRIX_BASE_FILE[:-4] + '.pyx'])
+            # LLSparseMatrix kernel
+            clean_cython_files(logger, LL_SPARSE_MATRIX_KERNEL_TEMPLATE_DIR)
+            # LLSparseMatrixView
+            clean_cython_files(logger, LL_SPARSE_MATRIX_VIEW_TEMPLATE_DIR)
 
         else:
             logger.info("Generate code files")
@@ -378,6 +389,10 @@ if __name__ == "__main__":
             # ll_mat_@index@_@type@.pxd and ll_mat_@index@_@type@.pyx
             generate_following_type_and_index(logger, LL_SPARSE_MATRIX_DECLARATION_FILES, GENERAL_ENVIRONMENT, ELEMENT_TYPES, INDEX_TYPES, '.pxd')
             generate_following_type_and_index(logger, LL_SPARSE_MATRIX_DEFINITION_FILES, GENERAL_ENVIRONMENT, ELEMENT_TYPES, INDEX_TYPES, '.pyx')
+
+            # kernel
+            # ll_mat_assignment_kernel.cpi
+            generate_following_type_and_index(logger, LL_SPARSE_MATRIX_KERNEL_INCLUDE_FILES, GENERAL_ENVIRONMENT, ELEMENT_TYPES, INDEX_TYPES, '.pxi')
 
             ###############################
             # LLSparseMatrixView

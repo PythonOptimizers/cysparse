@@ -1,0 +1,68 @@
+"""
+Several helper routines for multiplication with/by a ``LLSparseMatrix`` matrix.
+"""
+
+########################################################################################################################
+# Multiplication functions
+########################################################################################################################
+cdef LLSparseMatrix multiply_two_ll_mat_@index@_@type@(LLSparseMatrix_@index@_@type@ A, LLSparseMatrix_@index@_@type@ B):
+    """
+    Multiply two :class:`LLSparseMatrix` ``A`` and ``B``.
+
+    Args:
+        A: An :class:``LLSparseMatrix_@index@_@type@`` ``A``.
+        B: An :class:``LLSparseMatrix_@index@_@type@`` ``B``.
+
+    Returns:
+        A **new** :class:``LLSparseMatrix_@index@_@type@`` ``C = A * B``.
+
+    Raises:
+        ``IndexError`` if matrix dimension don't agree.
+        ``NotImplemented``: When matrix ``A`` or ``B`` is symmetric.
+        ``RuntimeError`` if some error occurred during the computation.
+    """
+    # TODO: LLSparseMatrix * A, LLSparseMatrix * B ...
+    # test dimensions
+    cdef INT_t A_nrow = A.nrow
+    cdef INT_t A_ncol = A.ncol
+
+    cdef INT_t B_nrow = B.nrow
+    cdef INT_t B_ncol = B.ncol
+
+    if A_ncol != B_nrow:
+        raise IndexError("Matrix dimensions must agree ([%d, %d] * [%d, %d])" % (A_nrow, A_ncol, B_nrow, B_ncol))
+
+    cdef INT_t C_nrow = A_nrow
+    cdef INT_t C_ncol = B_ncol
+
+    cdef bint store_zeros = A.store_zeros and B.store_zeros
+    cdef INT_t size_hint = A.size_hint
+
+    C = MakeLLSparseMatrix(nrow=C_nrow, ncol=C_ncol, size_hint=size_hint, store_zeros=store_zeros)
+
+
+    # CASES
+    if not A.is_symmetric and not B.is_symmetric:
+        pass
+    else:
+        raise NotImplemented("Multiplication with symmetric matrices is not implemented yet")
+
+    # NON OPTIMIZED MULTIPLICATION
+    cdef:
+        FLOAT_t valA
+        INT_t iA, jA, kA, kB
+
+    for iA from 0 <= iA < A_nrow:
+        kA = A.root[iA]
+
+        while kA != -1:
+            valA = A.val[kA]
+            jA = A.col[kA]
+            kA = A.link[kA]
+
+            # add jA-th row of B to iA-th row of C
+            kB = B.root[jA]
+            while kB != -1:
+                update_ll_mat_item_add(C, iA, B.col[kB], valA*B.val[kB])
+                kB = B.link[kB]
+    return C
