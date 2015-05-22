@@ -1,4 +1,7 @@
 import cysparse.types.cysparse_types as types
+import cysparse.types.cysparse_numpy_types as np_types
+
+import numpy as np
 
 type1 = types.UINT32_T
 type2 = types.INT32_T
@@ -44,3 +47,14 @@ print "=" * 80
 
 for type1 in types.ELEMENT_TYPES:
     print "self.failUnless(is_element_type(%s) == %s)" % (types.type_to_string(type1), types.is_element_type(type1))
+
+print "=" * 80
+
+
+print "Numpy types"
+
+a = np.ndarray([2, 4, 5.8])
+
+print types.type_to_string(np_types.numpy_to_cysparse_type(a.dtype))
+
+
