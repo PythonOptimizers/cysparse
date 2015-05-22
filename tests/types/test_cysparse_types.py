@@ -56,7 +56,7 @@ class CySparseTypesIsSubTypeTest(CySparseTypesBaseTestCase):
         self.failUnless(is_subtype(FLOAT32_T, FLOAT32_T) == True)
         self.failUnless(is_subtype(FLOAT32_T, FLOAT64_T) == True)
         self.failUnless(is_subtype(FLOAT32_T, COMPLEX64_T) == True)
-        self.failUnless(is_subtype(FLOAT32_T, COMPLEX128_T) == False)
+        self.failUnless(is_subtype(FLOAT32_T, COMPLEX128_T) == True)
         self.failUnless(is_subtype(FLOAT64_T, INT32_T) == False)
         self.failUnless(is_subtype(FLOAT64_T, UINT32_T) == False)
         self.failUnless(is_subtype(FLOAT64_T, INT64_T) == False)

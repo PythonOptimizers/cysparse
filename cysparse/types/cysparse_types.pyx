@@ -5,28 +5,26 @@ cimport cysparse.types.cysparse_types as cp_types
 from collections import OrderedDict
 import sys
 
-
-
-BASIC_TYPES_STR = OrderedDict()
+BASIC_TYPES_STR_DICT = OrderedDict()
 
 # BASIC_TYPES_STR['type_str] = (Nbr of bits, enum value)
-BASIC_TYPES_STR['INT32_t'] = (cp_types.INT32_t_BIT, cp_types.INT32_T)
-BASIC_TYPES_STR['UINT32_t'] = (cp_types.UINT32_t_BIT, cp_types.UINT32_T)
-BASIC_TYPES_STR['INT64_t'] = (cp_types.INT64_t_BIT, cp_types.INT64_T)
-BASIC_TYPES_STR['UINT64_t'] = (cp_types.UINT64_t_BIT, cp_types.UINT64_T)
-BASIC_TYPES_STR['FLOAT32_t'] = (cp_types.FLOAT32_t_BIT, cp_types.FLOAT32_T)
-BASIC_TYPES_STR['FLOAT64_t'] = (cp_types.FLOAT64_t_BIT, cp_types.FLOAT64_T)
-BASIC_TYPES_STR['COMPLEX64_t'] = (cp_types.COMPLEX64_t_BIT, cp_types.COMPLEX64_T)
-BASIC_TYPES_STR['COMPLEX128_t'] = (cp_types.COMPLEX128_t_BIT, cp_types.COMPLEX128_T)
+BASIC_TYPES_STR_DICT['INT32_t'] = (cp_types.INT32_t_BIT, cp_types.INT32_T)
+BASIC_TYPES_STR_DICT['UINT32_t'] = (cp_types.UINT32_t_BIT, cp_types.UINT32_T)
+BASIC_TYPES_STR_DICT['INT64_t'] = (cp_types.INT64_t_BIT, cp_types.INT64_T)
+BASIC_TYPES_STR_DICT['UINT64_t'] = (cp_types.UINT64_t_BIT, cp_types.UINT64_T)
+BASIC_TYPES_STR_DICT['FLOAT32_t'] = (cp_types.FLOAT32_t_BIT, cp_types.FLOAT32_T)
+BASIC_TYPES_STR_DICT['FLOAT64_t'] = (cp_types.FLOAT64_t_BIT, cp_types.FLOAT64_T)
+BASIC_TYPES_STR_DICT['COMPLEX64_t'] = (cp_types.COMPLEX64_t_BIT, cp_types.COMPLEX64_T)
+BASIC_TYPES_STR_DICT['COMPLEX128_t'] = (cp_types.COMPLEX128_t_BIT, cp_types.COMPLEX128_T)
 
 # construct inverse dict
-# BASIC_TYPES[enum value] = (type string, nbr of bits)
-BASIC_TYPES = {v[1]: (k, v[0]) for k, v in BASIC_TYPES_STR.items()}
+# BASIC_TYPES_DICT[enum value] = (type string, nbr of bits)
+BASIC_TYPES_DICT = {v[1]: (k, v[0]) for k, v in BASIC_TYPES_STR_DICT.items()}
 
 # Type classification
 # elements in general
-ELEMENT_TYPES = BASIC_TYPES.keys()
-INDEX_TYPES = [INT32_T, UINT32_T]
+ELEMENT_TYPES = BASIC_TYPES_DICT.keys()
+INDEX_TYPES = [INT32_T, INT64_T]
 
 # elements that behave like integers
 INTEGER_ELEMENT_TYPES = [INT32_T, UINT32_T, INT64_T, UINT64_T]
@@ -57,7 +55,7 @@ def is_subtype(cp_types.CySparseType type1, cp_types.CySparseType type2):
         Integers are **not** considered as a subtype of real numbers. Real numbers are considered as a subtype of
         complex numbers.
     """
-    assert type1 in BASIC_TYPES and type2 in BASIC_TYPES, "Type(s) not recognized"
+    assert type1 in BASIC_TYPES_DICT and type2 in BASIC_TYPES_DICT, "Type(s) not recognized"
 
     subtype = False
 
@@ -169,7 +167,7 @@ cpdef int result_type(cp_types.CySparseType type1, cp_types.CySparseType type2) 
         This function depends heavily on the explicit definition of basic types. You cannot add or remove a basic type
         **without** changing this function!
     """
-    assert type1 in BASIC_TYPES and type2 in BASIC_TYPES, "Type(s) not recognized"
+    assert type1 in BASIC_TYPES_DICT and type2 in BASIC_TYPES_DICT, "Type(s) not recognized"
 
     if type1 == type2:
         return type1
@@ -236,14 +234,14 @@ cpdef int result_type(cp_types.CySparseType type1, cp_types.CySparseType type2) 
 # I/O String/type conversions
 ########################################################################################################################
 def type_to_string(cp_types.CySparseType type1):
-    assert type1 in BASIC_TYPES, "Type not recognized"
+    assert type1 in BASIC_TYPES_DICT, "Type not recognized"
 
-    return BASIC_TYPES[type1][0]
+    return BASIC_TYPES_DICT[type1][0]
 
 def string_to_type(str type_string1):
-    assert type_string1 in BASIC_TYPES_STR, "String type not recognized"
+    assert type_string1 in BASIC_TYPES_STR_DICT, "String type not recognized"
 
-    return BASIC_TYPES_STR[type_string1][1]
+    return BASIC_TYPES_STR_DICT[type_string1][1]
 
 
 ########################################################################################################################
@@ -252,7 +250,7 @@ def string_to_type(str type_string1):
 def report_basic_types(OUT=sys.stdout):
     print('Basic types in CySparse:', file=OUT)
     print(file=OUT)
-    for key, item in BASIC_TYPES_STR.items():
+    for key, item in BASIC_TYPES_STR_DICT.items():
         print('{:12}: {:10d} bits ({:d})'.format(key, item[0], item[1]), file=OUT)
 
 

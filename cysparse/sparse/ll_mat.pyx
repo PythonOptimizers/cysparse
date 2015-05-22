@@ -2,7 +2,7 @@
 from cysparse.sparse.ll_mat cimport LL_MAT_DEFAULT_SIZE_HINT
 from cysparse.sparse.sparse_mat cimport unexposed_value
 
-from cysparse.types.cysparse_types import BASIC_TYPES
+from cysparse.types.cysparse_types import INDEX_TYPES, ELEMENT_TYPES
 
 from cysparse.sparse.sparse_mat cimport SparseMatrix
 
@@ -78,8 +78,8 @@ def NewLLSparseMatrix(**kwargs):
     itype = kwargs.get('itype', INT32_T)
     dtype = kwargs.get('dtype', FLOAT64_T)
 
-    assert itype in BASIC_TYPES, "itype not recognized"
-    assert dtype in BASIC_TYPES, "dtype not recognized"
+    assert itype in INDEX_TYPES, "itype not recognized"
+    assert dtype in ELEMENT_TYPES, "dtype not recognized"
 
     assert itype in [INT32_T,INT64_T], "itype is not accepted as index type"
     assert dtype in [INT32_T,INT64_T,FLOAT32_T,FLOAT64_T,COMPLEX64_T,COMPLEX128_T], "dtype is not accepted as type for a matrix element"
