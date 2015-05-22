@@ -1,14 +1,21 @@
 from __future__ import print_function
 
+########################################################################################################################
+# CySparse cimport/import
+########################################################################################################################
 from cysparse.types.cysparse_types cimport *
 
 from cysparse.sparse.ll_mat cimport LL_MAT_INCREASE_FACTOR
 
 from cysparse.sparse.sparse_mat cimport unexposed_value
+from cysparse.types.cysparse_numpy_types import are_mixed_types_compatible, cysparse_to_numpy_type
 from cysparse.sparse.ll_mat cimport PyLLSparseMatrix_Check
 from cysparse.sparse.sparse_mat_matrices.sparse_mat_@index@_@type@ cimport MutableSparseMatrix_@index@_@type@
 from cysparse.sparse.ll_mat_matrices.ll_mat_@index@_@type@ cimport LLSparseMatrix_@index@_@type@
 from cysparse.sparse.ll_mat_views.ll_mat_view_@index@_@type@ cimport LLSparseMatrixView_@index@_@type@
+
+
+
 #from cysparse.sparse.csr_mat cimport MakeCSRSparseMatrix, MakeCSRComplexSparseMatrix
 #from cysparse.sparse.csc_mat cimport MakeCSCSparseMatrix
 #from cysparse.utils.equality cimport values_are_equal
@@ -16,6 +23,18 @@ from cysparse.sparse.ll_mat_views.ll_mat_view_@index@_@type@ cimport LLSparseMat
 
 from cysparse.sparse.sparse_utils.generate_indices_@index@ cimport create_c_array_indices_from_python_object_@index@
 
+########################################################################################################################
+# CySparse include
+########################################################################################################################
+# pxi files should come last (except for circular dependencies)
+include "ll_mat_kernel/ll_mat_assignment_kernel_@index@_@type@.pxi"
+include "ll_mat_kernel/ll_mat_multiplication_by_numpy_vector_kernel_@index@_@type@.pxi"
+include "ll_mat_helpers/ll_mat_multiplication_@index@_@type@.pxi"
+
+
+########################################################################################################################
+# Cython, NumPy import/cimport
+########################################################################################################################
 # Import the Python-level symbols of numpy
 import numpy as np
 
@@ -29,7 +48,9 @@ from libc.stdlib cimport malloc,free, calloc
 from libc.string cimport memcpy
 from cpython cimport PyObject, Py_INCREF
 
-
+########################################################################################################################
+# External code include
+########################################################################################################################
 # TODO: use more internal CPython code
 cdef extern from "Python.h":
     # *** Types ***
@@ -53,8 +74,15 @@ cdef extern from "complex.h":
     double creal(double complex z)
     double cimag(double complex z)
 
+########################################################################################################################
+# CySparse cimport/import to avoid circular dependencies
+########################################################################################################################
 from cysparse.sparse.ll_mat_views.ll_mat_view_@index@_@type@ cimport LLSparseMatrixView_@index@_@type@, MakeLLSparseMatrixView_@index@_@type@
 
+
+########################################################################################################################
+# CLASS LLSparseMatrix
+########################################################################################################################
 cdef class LLSparseMatrix_@index@_@type@(MutableSparseMatrix_@index@_@type@):
     """
     Linked-List Format matrix.
@@ -241,6 +269,7 @@ cdef class LLSparseMatrix_@index@_@type@(MutableSparseMatrix_@index@_@type@):
     #                                            ### CREATE ###
     # TODO: to be done
     cdef create_submatrix(self, PyObject* obj1, PyObject* obj2):
+        raise NotImplemented("Not implemented yet...")
         cdef:
             @index@ nrow
             @index@ * row_indices,
@@ -322,7 +351,7 @@ cdef class LLSparseMatrix_@index@_@type@(MutableSparseMatrix_@index@_@type@):
         Warning:
             This method is costly, use with care.
         """
-        pass
+        raise NotImplemented("Not implemented yet...")
 
     ####################################################################################################################
     # Set/Get individual elements
@@ -760,3 +789,29 @@ YOU HAVE TO DEFINE OR CAST YOUR NEW UNRECOGNIZED TYPE
 
         return (a_row, a_col, a_val)
 
+
+    ####################################################################################################################
+    # Multiplication
+    ####################################################################################################################
+    def __mul__(self, B):
+        """
+
+        """
+        # CASES
+        if PyLLSparseMatrix_Check(B):
+            #return multiply_two_ll_mat(self, B)
+            raise NotImplementedError("Multiplication with this kind of object not implemented yet...")
+        elif cnp.PyArray_Check(B):
+            # test type
+            assert are_mixed_types_compatible(@type|type2enum@, B.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(@type|type2enum@)
+            #assert B.dtype == np.float64, "Multiplication only allowed with an array of C-doubles (numpy float64)!"
+
+            if B.ndim == 2:
+                #return multiply_ll_mat_with_numpy_ndarray(self, B)
+                raise NotImplementedError("Multiplication with this kind of object not implemented yet...")
+            elif B.ndim == 1:
+                return multiply_ll_mat_with_numpy_vector_@index@_@type@(self, B)
+            else:
+                raise IndexError("Matrix dimensions must agree")
+        else:
+            raise NotImplementedError("Multiplication with this kind of object not implemented yet...")

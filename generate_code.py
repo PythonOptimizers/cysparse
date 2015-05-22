@@ -67,6 +67,19 @@ def type2enum(type_name):
 
     return enum_name
 
+def cysparse_type_to_numpy_c_type(cysparse_type):
+    """
+    Transform a :program:`CySparse` enum type into the corresponding :program:`NumPy` C-type.
+
+    For instance:
+
+        INT32_T -> cnp.int32_t
+
+    Args:
+        cysparse_type:
+
+    """
+    return cysparse_type.lower()
 
 #################################################################################################
 # COMMON STUFF
@@ -92,6 +105,7 @@ GENERAL_ENVIRONMENT = Environment(
     variable_end_string='@')
 
 GENERAL_ENVIRONMENT.filters['type2enum'] = type2enum
+GENERAL_ENVIRONMENT.filters['cysparse_type_to_numpy_c_type'] = cysparse_type_to_numpy_c_type
 
 
 def clean_cython_files(logger, directory, file_list=None):
@@ -268,6 +282,11 @@ LL_SPARSE_MATRIX_DEFINITION_FILES = glob.glob(os.path.join(LL_SPARSE_MATRIX_TEMP
 LL_SPARSE_MATRIX_KERNEL_TEMPLATE_DIR = os.path.join(LL_SPARSE_MATRIX_TEMPLATE_DIR, 'll_mat_kernel')
 LL_SPARSE_MATRIX_KERNEL_INCLUDE_FILES = glob.glob(os.path.join(LL_SPARSE_MATRIX_KERNEL_TEMPLATE_DIR, '*.cpi'))
 
+### LLSparseMatrix helpers
+LL_SPARSE_MATRIX_HELPERS_TEMPLATE_DIR = os.path.join(LL_SPARSE_MATRIX_TEMPLATE_DIR, 'll_mat_helpers')
+LL_SPARSE_MATRIX_HELPERS_INCLUDE_FILES = glob.glob(os.path.join(LL_SPARSE_MATRIX_HELPERS_TEMPLATE_DIR, '*.cpi'))
+
+
 ### CSRSparseMatrix
 
 ### CSCSparseMatrix
@@ -351,6 +370,8 @@ if __name__ == "__main__":
             clean_cython_files(logger, SPARSE_DIR, [LL_SPARSE_MATRIX_BASE_FILE[:-4] + '.pyx'])
             # LLSparseMatrix kernel
             clean_cython_files(logger, LL_SPARSE_MATRIX_KERNEL_TEMPLATE_DIR)
+            # LLSparseMatrix helpers
+            clean_cython_files(logger, LL_SPARSE_MATRIX_HELPERS_TEMPLATE_DIR)
             # LLSparseMatrixView
             clean_cython_files(logger, LL_SPARSE_MATRIX_VIEW_TEMPLATE_DIR)
 
@@ -393,6 +414,9 @@ if __name__ == "__main__":
             # kernel
             # ll_mat_assignment_kernel.cpi
             generate_following_type_and_index(logger, LL_SPARSE_MATRIX_KERNEL_INCLUDE_FILES, GENERAL_ENVIRONMENT, ELEMENT_TYPES, INDEX_TYPES, '.pxi')
+
+            # helpers
+            generate_following_type_and_index(logger, LL_SPARSE_MATRIX_HELPERS_INCLUDE_FILES, GENERAL_ENVIRONMENT, ELEMENT_TYPES, INDEX_TYPES, '.pxi')
 
             ###############################
             # LLSparseMatrixView

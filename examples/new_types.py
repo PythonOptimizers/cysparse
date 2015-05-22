@@ -53,8 +53,13 @@ print "=" * 80
 
 print "Numpy types"
 
-a = np.ndarray([2, 4, 5.8])
+a = np.array([2, 4, 5.8])
+print a
 
 print types.type_to_string(np_types.numpy_to_cysparse_type(a.dtype))
+
+b = np.array([2, 4, 5.8], dtype=np_types.cysparse_to_numpy_type(types.UINT32_T))
+print b
+print b.dtype
 
 

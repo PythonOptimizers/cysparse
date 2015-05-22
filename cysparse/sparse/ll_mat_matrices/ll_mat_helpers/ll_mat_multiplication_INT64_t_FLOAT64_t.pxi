@@ -9,16 +9,16 @@ Several helper routines for multiplication with/by a ``LLSparseMatrix`` matrix.
 ###################################################
 # LLSparseMatrix by LLSparseMatrix
 ###################################################
-cdef LLSparseMatrix_@index@_@type@ multiply_two_ll_mat_@index@_@type@(LLSparseMatrix_@index@_@type@ A, LLSparseMatrix_@index@_@type@ B):
+cdef LLSparseMatrix_INT64_t_FLOAT64_t multiply_two_ll_mat_INT64_t_FLOAT64_t(LLSparseMatrix_INT64_t_FLOAT64_t A, LLSparseMatrix_INT64_t_FLOAT64_t B):
     """
-    Multiply two :class:`LLSparseMatrix_@index@_@type@` ``A`` and ``B``.
+    Multiply two :class:`LLSparseMatrix_INT64_t_FLOAT64_t` ``A`` and ``B``.
 
     Args:
-        A: An :class:``LLSparseMatrix_@index@_@type@`` ``A``.
-        B: An :class:``LLSparseMatrix_@index@_@type@`` ``B``.
+        A: An :class:``LLSparseMatrix_INT64_t_FLOAT64_t`` ``A``.
+        B: An :class:``LLSparseMatrix_INT64_t_FLOAT64_t`` ``B``.
 
     Returns:
-        A **new** :class:``LLSparseMatrix_@index@_@type@`` ``C = A * B``.
+        A **new** :class:``LLSparseMatrix_INT64_t_FLOAT64_t`` ``C = A * B``.
 
     Raises:
         ``IndexError`` if matrix dimension don't agree.
@@ -27,22 +27,22 @@ cdef LLSparseMatrix_@index@_@type@ multiply_two_ll_mat_@index@_@type@(LLSparseMa
     """
     # TODO: LLSparseMatrix * A, LLSparseMatrix * B ...
     # test dimensions
-    cdef @index@ A_nrow = A.nrow
-    cdef @index@ A_ncol = A.ncol
+    cdef INT64_t A_nrow = A.nrow
+    cdef INT64_t A_ncol = A.ncol
 
-    cdef @index@ B_nrow = B.nrow
-    cdef @index@ B_ncol = B.ncol
+    cdef INT64_t B_nrow = B.nrow
+    cdef INT64_t B_ncol = B.ncol
 
     if A_ncol != B_nrow:
         raise IndexError("Matrix dimensions must agree ([%d, %d] * [%d, %d])" % (A_nrow, A_ncol, B_nrow, B_ncol))
 
-    cdef @index@ C_nrow = A_nrow
-    cdef @index@ C_ncol = B_ncol
+    cdef INT64_t C_nrow = A_nrow
+    cdef INT64_t C_ncol = B_ncol
 
     cdef bint store_zeros = A.store_zeros and B.store_zeros
-    cdef @index@ size_hint = A.size_hint
+    cdef INT64_t size_hint = A.size_hint
 
-    C = LLSparseMatrix_@index@_@type@(control_object=unexposed_value, nrow=C_nrow, ncol=C_ncol, size_hint=size_hint, store_zeros=store_zeros)
+    C = LLSparseMatrix_INT64_t_FLOAT64_t(control_object=unexposed_value, nrow=C_nrow, ncol=C_ncol, size_hint=size_hint, store_zeros=store_zeros)
 
 
     # CASES
@@ -53,8 +53,8 @@ cdef LLSparseMatrix_@index@_@type@ multiply_two_ll_mat_@index@_@type@(LLSparseMa
 
     # NON OPTIMIZED MULTIPLICATION
     cdef:
-        @type@ valA
-        @index@ iA, jA, kA, kB
+        FLOAT64_t valA
+        INT64_t iA, jA, kA, kB
 
     for iA from 0 <= iA < A_nrow:
         kA = A.root[iA]
@@ -67,7 +67,7 @@ cdef LLSparseMatrix_@index@_@type@ multiply_two_ll_mat_@index@_@type@(LLSparseMa
             # add jA-th row of B to iA-th row of C
             kB = B.root[jA]
             while kB != -1:
-                update_ll_mat_item_add_@index@_@type@(C, iA, B.col[kB], valA*B.val[kB])
+                update_ll_mat_item_add_INT64_t_FLOAT64_t(C, iA, B.col[kB], valA*B.val[kB])
                 kB = B.link[kB]
     return C
 
@@ -75,7 +75,7 @@ cdef LLSparseMatrix_@index@_@type@ multiply_two_ll_mat_@index@_@type@(LLSparseMa
 ###################################################
 # LLSparseMatrix by Numpy vector
 ###################################################
-cdef cnp.ndarray[cnp.@type|cysparse_type_to_numpy_c_type@, ndim=1, mode='c'] multiply_ll_mat_with_numpy_vector_@index@_@type@(LLSparseMatrix_@index@_@type@ A, cnp.ndarray[cnp.@type|cysparse_type_to_numpy_c_type@, ndim=1] b):
+cdef cnp.ndarray[cnp.float64_t, ndim=1, mode='c'] multiply_ll_mat_with_numpy_vector_INT64_t_FLOAT64_t(LLSparseMatrix_INT64_t_FLOAT64_t A, cnp.ndarray[cnp.float64_t, ndim=1] b):
     """
     Multiply a :class:`LLSparseMatrix` ``A`` with a numpy vector ``b``.
 
@@ -95,41 +95,41 @@ cdef cnp.ndarray[cnp.@type|cysparse_type_to_numpy_c_type@, ndim=1, mode='c'] mul
 
     """
     # TODO: test, test, test!!!
-    cdef @index@ A_nrow = A.nrow
-    cdef @index@ A_ncol = A.ncol
+    cdef INT64_t A_nrow = A.nrow
+    cdef INT64_t A_ncol = A.ncol
 
-    cdef size_t sd = sizeof(@type@)
+    cdef size_t sd = sizeof(FLOAT64_t)
 
     # test dimensions
     if A_ncol != b.size:
         raise IndexError("Dimensions must agree ([%d,%d] * [%d, %d])" % (A_nrow, A_ncol, b.size, 1))
 
     # direct access to vector b
-    #cdef @type@ * b_data = <@type@ *> b.data
+    #cdef FLOAT64_t * b_data = <FLOAT64_t *> b.data
 
-    cdef @type@ * b_data = <@type@ *> cnp.PyArray_DATA(b)
+    cdef FLOAT64_t * b_data = <FLOAT64_t *> cnp.PyArray_DATA(b)
 
 
     # array c = A * b
     cdef cnp.ndarray[cnp.double_t, ndim=1] c = np.empty(A_nrow, dtype=np.float64)
-    #cdef @type@ * c_data = <@type@ *> c.data
-    cdef @type@ * c_data = <@type@ *> cnp.PyArray_DATA(c)
+    #cdef FLOAT64_t * c_data = <FLOAT64_t *> c.data
+    cdef FLOAT64_t * c_data = <FLOAT64_t *> cnp.PyArray_DATA(c)
 
 
     # test if b vector is C-contiguous or not
     if cnp.PyArray_ISCONTIGUOUS(b):
         if A.is_symmetric:
-            multiply_sym_ll_mat_with_numpy_vector_kernel_@index@_@type@(A_nrow, b_data, c_data, A.val, A.col, A.link, A.root)
+            multiply_sym_ll_mat_with_numpy_vector_kernel_INT64_t_FLOAT64_t(A_nrow, b_data, c_data, A.val, A.col, A.link, A.root)
         else:
-            multiply_ll_mat_with_numpy_vector_kernel_@index@_@type@(A_nrow, b_data, c_data, A.val, A.col, A.link, A.root)
+            multiply_ll_mat_with_numpy_vector_kernel_INT64_t_FLOAT64_t(A_nrow, b_data, c_data, A.val, A.col, A.link, A.root)
     else:
         if A.is_symmetric:
-            multiply_sym_ll_mat_with_strided_numpy_vector_kernel_@index@_@type@(A.nrow,
+            multiply_sym_ll_mat_with_strided_numpy_vector_kernel_INT64_t_FLOAT64_t(A.nrow,
                                                                  b_data, b.strides[0] / sd,
                                                                  c_data, c.strides[0] / sd,
                                                                  A.val, A.col, A.link, A.root)
         else:
-            multiply_ll_mat_with_strided_numpy_vector_kernel_@index@_@type@(A.nrow,
+            multiply_ll_mat_with_strided_numpy_vector_kernel_INT64_t_FLOAT64_t(A.nrow,
                                                              b_data, b.strides[0] / sd,
                                                              c_data, c.strides[0] / sd,
                                                              A.val, A.col, A.link, A.root)

@@ -1,14 +1,21 @@
 from __future__ import print_function
 
+########################################################################################################################
+# CySparse cimport/import
+########################################################################################################################
 from cysparse.types.cysparse_types cimport *
 
 from cysparse.sparse.ll_mat cimport LL_MAT_INCREASE_FACTOR
 
 from cysparse.sparse.sparse_mat cimport unexposed_value
+from cysparse.types.cysparse_numpy_types import are_mixed_types_compatible, cysparse_to_numpy_type
 from cysparse.sparse.ll_mat cimport PyLLSparseMatrix_Check
 from cysparse.sparse.sparse_mat_matrices.sparse_mat_INT64_t_COMPLEX64_t cimport MutableSparseMatrix_INT64_t_COMPLEX64_t
 from cysparse.sparse.ll_mat_matrices.ll_mat_INT64_t_COMPLEX64_t cimport LLSparseMatrix_INT64_t_COMPLEX64_t
 from cysparse.sparse.ll_mat_views.ll_mat_view_INT64_t_COMPLEX64_t cimport LLSparseMatrixView_INT64_t_COMPLEX64_t
+
+
+
 #from cysparse.sparse.csr_mat cimport MakeCSRSparseMatrix, MakeCSRComplexSparseMatrix
 #from cysparse.sparse.csc_mat cimport MakeCSCSparseMatrix
 #from cysparse.utils.equality cimport values_are_equal
@@ -16,6 +23,18 @@ from cysparse.sparse.ll_mat_views.ll_mat_view_INT64_t_COMPLEX64_t cimport LLSpar
 
 from cysparse.sparse.sparse_utils.generate_indices_INT64_t cimport create_c_array_indices_from_python_object_INT64_t
 
+########################################################################################################################
+# CySparse include
+########################################################################################################################
+# pxi files should come last (except for circular dependencies)
+include "ll_mat_kernel/ll_mat_assignment_kernel_INT64_t_COMPLEX64_t.pxi"
+include "ll_mat_kernel/ll_mat_multiplication_by_numpy_vector_kernel_INT64_t_COMPLEX64_t.pxi"
+include "ll_mat_helpers/ll_mat_multiplication_INT64_t_COMPLEX64_t.pxi"
+
+
+########################################################################################################################
+# Cython, NumPy import/cimport
+########################################################################################################################
 # Import the Python-level symbols of numpy
 import numpy as np
 
@@ -29,7 +48,9 @@ from libc.stdlib cimport malloc,free, calloc
 from libc.string cimport memcpy
 from cpython cimport PyObject, Py_INCREF
 
-
+########################################################################################################################
+# External code include
+########################################################################################################################
 # TODO: use more internal CPython code
 cdef extern from "Python.h":
     # *** Types ***
@@ -53,8 +74,15 @@ cdef extern from "complex.h":
     double creal(double complex z)
     double cimag(double complex z)
 
+########################################################################################################################
+# CySparse cimport/import to avoid circular dependencies
+########################################################################################################################
 from cysparse.sparse.ll_mat_views.ll_mat_view_INT64_t_COMPLEX64_t cimport LLSparseMatrixView_INT64_t_COMPLEX64_t, MakeLLSparseMatrixView_INT64_t_COMPLEX64_t
 
+
+########################################################################################################################
+# CLASS LLSparseMatrix
+########################################################################################################################
 cdef class LLSparseMatrix_INT64_t_COMPLEX64_t(MutableSparseMatrix_INT64_t_COMPLEX64_t):
     """
     Linked-List Format matrix.
@@ -241,6 +269,7 @@ cdef class LLSparseMatrix_INT64_t_COMPLEX64_t(MutableSparseMatrix_INT64_t_COMPLE
     #                                            ### CREATE ###
     # TODO: to be done
     cdef create_submatrix(self, PyObject* obj1, PyObject* obj2):
+        raise NotImplemented("Not implemented yet...")
         cdef:
             INT64_t nrow
             INT64_t * row_indices,
@@ -322,7 +351,7 @@ cdef class LLSparseMatrix_INT64_t_COMPLEX64_t(MutableSparseMatrix_INT64_t_COMPLE
         Warning:
             This method is costly, use with care.
         """
-        pass
+        raise NotImplemented("Not implemented yet...")
 
     ####################################################################################################################
     # Set/Get individual elements
@@ -702,3 +731,30 @@ cdef class LLSparseMatrix_INT64_t_COMPLEX64_t(MutableSparseMatrix_INT64_t_COMPLE
                 elem += 1
 
         return (a_row, a_col, a_val)
+
+
+    ####################################################################################################################
+    # Multiplication
+    ####################################################################################################################
+    def __mul__(self, B):
+        """
+
+        """
+        # CASES
+        if PyLLSparseMatrix_Check(B):
+            #return multiply_two_ll_mat(self, B)
+            raise NotImplementedError("Multiplication with this kind of object not implemented yet...")
+        elif cnp.PyArray_Check(B):
+            # test type
+            assert are_mixed_types_compatible(COMPLEX64_T, B.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(COMPLEX64_T)
+            #assert B.dtype == np.float64, "Multiplication only allowed with an array of C-doubles (numpy float64)!"
+
+            if B.ndim == 2:
+                #return multiply_ll_mat_with_numpy_ndarray(self, B)
+                raise NotImplementedError("Multiplication with this kind of object not implemented yet...")
+            elif B.ndim == 1:
+                return multiply_ll_mat_with_numpy_vector_INT64_t_COMPLEX64_t(self, B)
+            else:
+                raise IndexError("Matrix dimensions must agree")
+        else:
+            raise NotImplementedError("Multiplication with this kind of object not implemented yet...")
