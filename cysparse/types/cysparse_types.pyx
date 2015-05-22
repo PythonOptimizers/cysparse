@@ -24,6 +24,10 @@ BASIC_TYPES_STR['COMPLEX128_t'] = (cp_types.COMPLEX128_t_BIT, cp_types.COMPLEX12
 BASIC_TYPES = {v[1]: (k, v[0]) for k, v in BASIC_TYPES_STR.items()}
 
 # Type classification
+# elements in general
+ELEMENT_TYPES = BASIC_TYPES.keys()
+INDEX_TYPES = [INT32_T, UINT32_T]
+
 # elements that behave like integers
 INTEGER_ELEMENT_TYPES = [INT32_T, UINT32_T, INT64_T, UINT64_T]
 UNSIGNED_INTEGER_ELEMENT_TYPES = [UINT32_T, UINT64_T]
@@ -33,10 +37,6 @@ SIGNED_INTEGER_ELEMENT_TYPES = [type1 for type1 in INTEGER_ELEMENT_TYPES if type
 REAL_ELEMENT_TYPES = [FLOAT32_T, FLOAT64_T]
 # elements that behave like complex numbers (we only consider complex floats)
 COMPLEX_ELEMENT_TYPES = [COMPLEX64_T, COMPLEX128_T]
-
-ELEMENT_TYPES = BASIC_TYPES.keys()
-INDEX_TYPES = [INT32_T, UINT32_T]
-
 
 ########################################################################################################################
 # TESTS
@@ -76,13 +76,13 @@ def is_subtype(cp_types.CySparseType type1, cp_types.CySparseType type2):
         if type1 in [cp_types.FLOAT32_T]:
             subtype = True
     elif type2 == cp_types.COMPLEX128_T:
-        if type1 in [cp_types.FLOAT64_T, cp_types.COMPLEX64_T]:
+        if type1 in [cp_types.FLOAT32_T, cp_types.FLOAT64_T, cp_types.COMPLEX64_T]:
             subtype = True
 
     return subtype
 
 
-def is_integer(cp_types.CySparseType type1):
+def is_integer_type(cp_types.CySparseType type1):
     """
     Return if type is integer.
 
@@ -92,8 +92,25 @@ def is_integer(cp_types.CySparseType type1):
     """
     return type1 in INTEGER_ELEMENT_TYPES
 
+def is_signed_integer_type(cp_types.CySparseType type1):
+    """
+    Tell if type is signed integer type.
 
-def is_real(cp_types.CySparseType type1):
+    Args:
+        type1:
+    """
+    return type1 in SIGNED_INTEGER_ELEMENT_TYPES
+
+def is_unsigned_integer_type(cp_types.CySparseType type1):
+    """
+    Tell if type is unsigned integer type.
+
+    Args:
+        type1:
+    """
+    return type1 in UNSIGNED_INTEGER_ELEMENT_TYPES
+
+def is_real_type(cp_types.CySparseType type1):
     """
     Tell if type is a real.
 
@@ -104,7 +121,7 @@ def is_real(cp_types.CySparseType type1):
     return type1 in REAL_ELEMENT_TYPES
 
 
-def is_complex(cp_types.CySparseType type1):
+def is_complex_type(cp_types.CySparseType type1):
     """
     Tell if type is complex.
 
@@ -114,6 +131,24 @@ def is_complex(cp_types.CySparseType type1):
     """
     return type1 in COMPLEX_ELEMENT_TYPES
 
+def is_index_type(cp_types.CySparseType type1):
+    """
+    Tell if type is indexable.
+
+    Args:
+        type1:
+    """
+    return type1 in INDEX_TYPES
+
+def is_element_type(cp_types.CySparseType type1):
+    """
+    Tell if type can be used for matrix elements.
+
+    Args:
+        type1:
+
+    """
+    return type1 in ELEMENT_TYPES
 
 # EXPLICIT TYPE TESTS
 cpdef int result_type(cp_types.CySparseType type1, cp_types.CySparseType type2) except -1:
@@ -124,6 +159,15 @@ cpdef int result_type(cp_types.CySparseType type1, cp_types.CySparseType type2) 
         type1:
         type2:
 
+    Returns:
+        Resulting type.
+
+    Raises:
+        ``TypeError`` whenever both types are **not** compatible.
+
+    Warning:
+        This function depends heavily on the explicit definition of basic types. You cannot add or remove a basic type
+        **without** changing this function!
     """
     assert type1 in BASIC_TYPES and type2 in BASIC_TYPES, "Type(s) not recognized"
 
@@ -136,7 +180,56 @@ cpdef int result_type(cp_types.CySparseType type1, cp_types.CySparseType type2) 
     min_type = min(type1, type2)
     max_type = max(type1, type2)
 
-    return max_type
+    result_type = max_type
+
+    # CASE 1: same family type (integers, real or complex)
+    if is_integer_type(min_type) and is_integer_type(max_type):
+        if (is_signed_integer_type(min_type) and is_signed_integer_type(max_type)) or (is_unsigned_integer_type(min_type) and is_unsigned_integer_type(max_type)):
+            result_type= max_type
+
+        elif min_type == cp_types.INT32_T:
+            if max_type in [cp_types.UINT32_T, cp_types.INT64_T]:
+                result_type = cp_types.INT64_T
+            elif max_type in [cp_types.UINT64_T]:
+                raise TypeError("%s and %s are incompatible" % (type_to_string(min_type), type_to_string(max_type)))
+            else:
+                raise TypeError("Shouldn't happen. CODE 1. Please report.")
+        elif min_type == cp_types.UINT32_T:
+            if max_type in [cp_types.INT64_T]:
+                result_type = cp_types.INT64_T
+            elif max_type in [cp_types.UINT64_T]:
+                result_type = cp_types.UINT64_T
+            else:
+                raise TypeError("Shouldn't happen. CODE 2. Please report.")
+        elif min_type == cp_types.INT64_T:
+            if max_type in [cp_types.UINT64_T]:
+                raise TypeError("%s and %s are incompatible" % (type_to_string(min_type), type_to_string(max_type)))
+            else:
+                raise TypeError("Shouldn't happen. CODE 3. Please report.")
+        else:
+            raise TypeError("Shouldn't happen. CODE 4. Please report.")
+    elif is_real_type(min_type) and is_integer_type(max_type):
+        result_type = max_type
+    elif is_complex_type(min_type) and is_complex_type(max_type):
+        result_type = max_type
+
+    # CASE 2: different family types
+    # we use the default behavior of min_type/max_type and only consider the exceptions to this default behavior
+    elif is_integer_type(min_type):
+        if is_real_type(max_type):
+            if min_type in [cp_types.INT64_T, cp_types.UINT64_T]:
+                result_type = cp_types.FLOAT64_T
+        elif is_complex_type(max_type):
+            if min_type in [cp_types.INT64_T, cp_types.UINT64_T]:
+                result_type = cp_types.COMPLEX128_T
+    elif is_real_type(min_type):
+        if is_complex_type(max_type):
+            if min_type == cp_types.FLOAT64_T and max_type == cp_types.COMPLEX64_T:
+                result_type = cp_types.COMPLEX128_T
+    else:
+        raise TypeError("Shouldn't happen. CODE 7. Please report.")
+
+    return result_type
 
 
 ########################################################################################################################
