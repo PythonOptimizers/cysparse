@@ -12,6 +12,9 @@ from cython cimport isinstance
 LL_MAT_INCREASE_FACTOR = 1.5
 LL_MAT_DEFAULT_SIZE_HINT = 40
 
+LL_MAT_PPRINT_COL_THRESH = 20
+LL_MAT_PPRINT_ROW_THRESH = 40
+
 {% for index_type in index_list %}
     {% for element_type in type_list %}
 from cysparse.sparse.ll_mat_matrices.ll_mat_@index_type@_@element_type@ cimport LLSparseMatrix_@index_type@_@element_type@

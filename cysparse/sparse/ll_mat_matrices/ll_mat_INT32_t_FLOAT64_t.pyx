@@ -9,7 +9,7 @@ from cysparse.sparse.ll_mat cimport LL_MAT_INCREASE_FACTOR
 
 from cysparse.sparse.sparse_mat cimport unexposed_value
 from cysparse.types.cysparse_numpy_types import are_mixed_types_compatible, cysparse_to_numpy_type
-from cysparse.sparse.ll_mat cimport PyLLSparseMatrix_Check
+from cysparse.sparse.ll_mat cimport PyLLSparseMatrix_Check, LL_MAT_PPRINT_COL_THRESH, LL_MAT_PPRINT_ROW_THRESH
 from cysparse.sparse.sparse_mat_matrices.sparse_mat_INT32_t_FLOAT64_t cimport MutableSparseMatrix_INT32_t_FLOAT64_t
 from cysparse.sparse.ll_mat_matrices.ll_mat_INT32_t_FLOAT64_t cimport LLSparseMatrix_INT32_t_FLOAT64_t
 from cysparse.sparse.ll_mat_views.ll_mat_view_INT32_t_FLOAT64_t cimport LLSparseMatrixView_INT32_t_FLOAT64_t
@@ -760,3 +760,60 @@ cdef class LLSparseMatrix_INT32_t_FLOAT64_t(MutableSparseMatrix_INT32_t_FLOAT64_
                 raise IndexError("Matrix dimensions must agree")
         else:
             raise NotImplementedError("Multiplication with this kind of object not implemented yet...")
+
+    ####################################################################################################################
+    # String representations
+    ####################################################################################################################
+    def print_to(self, OUT):
+        """
+        Print content of matrix to output stream.
+
+        Args:
+            OUT: Output stream that print (Python3) can print to.
+
+        """
+        # TODO: adapt to any numbers... and allow for additional parameters to control the output
+        # TODO: don't create temporary matrix
+        cdef INT32_t i, k, first = 1
+
+        print(self._matrix_description_before_printing(), file=OUT)
+
+        cdef FLOAT64_t *mat
+        cdef INT32_t j
+        cdef FLOAT64_t val, ival
+
+        if not self.nnz:
+            return
+
+        if self.nrow <= LL_MAT_PPRINT_COL_THRESH and self.ncol <= LL_MAT_PPRINT_ROW_THRESH:
+            # create linear vector presentation
+
+            mat = <FLOAT64_t *> PyMem_Malloc(self.nrow * self.ncol * sizeof(FLOAT64_t))
+
+            if not mat:
+                raise MemoryError()
+
+            for i from 0 <= i < self.nrow:
+                for j from 0 <= j < self.ncol:
+                    # EXPLICIT TYPE TESTS
+
+                    mat[i* self.ncol + j] = 0.0
+
+                k = self.root[i]
+                while k != -1:
+                    mat[(i*self.ncol)+self.col[k]] = self.val[k]
+                    k = self.link[k]
+
+            # EXPLICIT TYPE TESTS
+            for i from 0 <= i < self.nrow:
+                for j from 0 <= j < self.ncol:
+                    val = mat[(i*self.ncol)+j]
+
+                    print('{0:9.6f} '.format(val), end='', file=OUT)
+
+                print(file=OUT)
+
+            PyMem_Free(mat)
+
+        else:
+            print('Matrix too big to print out', file=OUT)

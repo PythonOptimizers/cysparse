@@ -95,12 +95,16 @@ def cysparse_type_to_numpy_type(cysparse_type):
     """
     return cysparse_type.lower()[:-2]
 
+
 #################################################################################################
 # COMMON STUFF
 #################################################################################################
 # TODO: grab this from cysparse_types.pxd or at least from a one common file
 ELEMENT_TYPES = ['INT32_t', 'INT64_t', 'FLOAT32_t', 'FLOAT64_t', 'COMPLEX64_t', 'COMPLEX128_t']
 INDEX_TYPES = ['INT32_t', 'INT64_t']
+INTEGER_ELEMENT_TYPES = ['INT32_t', 'INT64_t']
+REAL_ELEMENT_TYPES = ['FLOAT32_t', 'FLOAT64_t']
+COMPLEX_ELEMENT_TYPES = ['COMPLEX64_t', 'COMPLEX128_t']
 
 # when coding
 #ELEMENT_TYPES = ['FLOAT64_t']
@@ -108,7 +112,10 @@ INDEX_TYPES = ['INT32_t', 'INT64_t']
 
 GENERAL_CONTEXT = {
                     'type_list': ELEMENT_TYPES,
-                    'index_list' : INDEX_TYPES
+                    'index_list' : INDEX_TYPES,
+                    'integer_list' : INTEGER_ELEMENT_TYPES,
+                    'real_list' : REAL_ELEMENT_TYPES,
+                    'complex_list' : COMPLEX_ELEMENT_TYPES
                 }
 
 GENERAL_ENVIRONMENT = Environment(
@@ -183,7 +190,8 @@ def generate_template_files(logger, template_filenames, template_environment, co
         else:
             logger.info('   Source didn\'t change')
 
-def generate_following_only_index(logger, template_filenames, template_environment, index_types, ext):
+
+def generate_following_only_index(logger, template_filenames, template_environment, template_context, index_types, ext):
     """
     Generate Cython code.
 
@@ -200,14 +208,18 @@ def generate_following_only_index(logger, template_filenames, template_environme
     for filename in template_filenames:
 
         for index_name in index_types:
+
             context = {
                 'index' : index_name,
                 'index_list' : INDEX_TYPES
             }
 
+            context.update(template_context)
+
             generate_template_files(logger, template_filenames, template_environment, context, '_%s%s' % (index_name, ext))
 
-def generate_following_type_and_index(logger, template_filenames, template_environment, element_types, index_types, ext, tabu_combination=None):
+
+def generate_following_type_and_index(logger, template_filenames, template_environment, template_context, element_types, index_types, ext, tabu_combination=None):
     """
     Generate Cython code.
 
@@ -244,6 +256,9 @@ def generate_following_type_and_index(logger, template_filenames, template_envir
                     'type_list': ELEMENT_TYPES,
                     'index_list' : INDEX_TYPES
                 }
+
+                context.update(template_context)
+
                 generate_template_files(logger, template_filenames, template_environment, context, '_%s_%s%s' % (index_name, type_name, ext))
 
 #################################################################################################
@@ -398,18 +413,18 @@ if __name__ == "__main__":
             ###############################
             ### include_utils
             # generate_indices_@index@.pxd and generate_indices_@index@.pyx
-            generate_following_only_index(logger, SPARSE_SPARSE_UTILS_GENERATE_INDICES_DECLARATION_FILES, GENERAL_ENVIRONMENT, INDEX_TYPES, '.pxd')
-            generate_following_only_index(logger, SPARSE_SPARSE_UTILS_GENERATE_INDICES_DEFINITION_FILES, GENERAL_ENVIRONMENT, INDEX_TYPES, '.pyx')
+            generate_following_only_index(logger, SPARSE_SPARSE_UTILS_GENERATE_INDICES_DECLARATION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, INDEX_TYPES, '.pxd')
+            generate_following_only_index(logger, SPARSE_SPARSE_UTILS_GENERATE_INDICES_DEFINITION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, INDEX_TYPES, '.pyx')
 
-            generate_following_type_and_index(logger, SPARSE_SPARSE_UTILS_FIND_DECLARATION_FILES, GENERAL_ENVIRONMENT, ELEMENT_TYPES, INDEX_TYPES, '.pxd')
-            generate_following_type_and_index(logger, SPARSE_SPARSE_UTILS_FIND_DEFINITION_FILES, GENERAL_ENVIRONMENT, ELEMENT_TYPES, INDEX_TYPES, '.pyx')
+            generate_following_type_and_index(logger, SPARSE_SPARSE_UTILS_FIND_DECLARATION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, ELEMENT_TYPES, INDEX_TYPES, '.pxd')
+            generate_following_type_and_index(logger, SPARSE_SPARSE_UTILS_FIND_DEFINITION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, ELEMENT_TYPES, INDEX_TYPES, '.pyx')
 
             ###############################
             # SparseMatrix
             ###############################
             # sparse_matrix_@index@_@type@.pxd and sparse_matrix_@index@_@type@.pyx
-            generate_following_type_and_index(logger, SPARSE_MATRIX_DECLARATION_FILES, GENERAL_ENVIRONMENT, ELEMENT_TYPES, INDEX_TYPES, '.pxd')
-            generate_following_type_and_index(logger, SPARSE_MATRIX_DEFINITION_FILES, GENERAL_ENVIRONMENT, ELEMENT_TYPES, INDEX_TYPES, '.pyx')
+            generate_following_type_and_index(logger, SPARSE_MATRIX_DECLARATION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, ELEMENT_TYPES, INDEX_TYPES, '.pxd')
+            generate_following_type_and_index(logger, SPARSE_MATRIX_DEFINITION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, ELEMENT_TYPES, INDEX_TYPES, '.pyx')
 
             # TODO: add the possibility to use tabu in for loops in Jinja2 (i.e. inside a template file)....
             #tabu = {}
@@ -423,22 +438,22 @@ if __name__ == "__main__":
             generate_template_files(logger, [LL_SPARSE_MATRIX_BASE_FILE], GENERAL_ENVIRONMENT, GENERAL_CONTEXT, '.pyx')
 
             # ll_mat_@index@_@type@.pxd and ll_mat_@index@_@type@.pyx
-            generate_following_type_and_index(logger, LL_SPARSE_MATRIX_DECLARATION_FILES, GENERAL_ENVIRONMENT, ELEMENT_TYPES, INDEX_TYPES, '.pxd')
-            generate_following_type_and_index(logger, LL_SPARSE_MATRIX_DEFINITION_FILES, GENERAL_ENVIRONMENT, ELEMENT_TYPES, INDEX_TYPES, '.pyx')
+            generate_following_type_and_index(logger, LL_SPARSE_MATRIX_DECLARATION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, ELEMENT_TYPES, INDEX_TYPES, '.pxd')
+            generate_following_type_and_index(logger, LL_SPARSE_MATRIX_DEFINITION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, ELEMENT_TYPES, INDEX_TYPES, '.pyx')
 
             # kernel
             # ll_mat_assignment_kernel.cpi
-            generate_following_type_and_index(logger, LL_SPARSE_MATRIX_KERNEL_INCLUDE_FILES, GENERAL_ENVIRONMENT, ELEMENT_TYPES, INDEX_TYPES, '.pxi')
+            generate_following_type_and_index(logger, LL_SPARSE_MATRIX_KERNEL_INCLUDE_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, ELEMENT_TYPES, INDEX_TYPES, '.pxi')
 
             # helpers
-            generate_following_type_and_index(logger, LL_SPARSE_MATRIX_HELPERS_INCLUDE_FILES, GENERAL_ENVIRONMENT, ELEMENT_TYPES, INDEX_TYPES, '.pxi')
+            generate_following_type_and_index(logger, LL_SPARSE_MATRIX_HELPERS_INCLUDE_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, ELEMENT_TYPES, INDEX_TYPES, '.pxi')
 
             ###############################
             # LLSparseMatrixView
             ###############################
             # ll_mat_view_@index@_@type@.pxd and ll_mat_view_@index@_@type@.pyx
-            generate_following_type_and_index(logger, LL_SPARSE_MATRIX_VIEW_DECLARATION_FILES, GENERAL_ENVIRONMENT, ELEMENT_TYPES, INDEX_TYPES, '.pxd')
-            generate_following_type_and_index(logger, LL_SPARSE_MATRIX_VIEW_DEFINITION_FILES, GENERAL_ENVIRONMENT, ELEMENT_TYPES, INDEX_TYPES, '.pyx')
+            generate_following_type_and_index(logger, LL_SPARSE_MATRIX_VIEW_DECLARATION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, ELEMENT_TYPES, INDEX_TYPES, '.pxd')
+            generate_following_type_and_index(logger, LL_SPARSE_MATRIX_VIEW_DEFINITION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, ELEMENT_TYPES, INDEX_TYPES, '.pyx')
 
     if not action:
         logger.warning("No action proceeded...")

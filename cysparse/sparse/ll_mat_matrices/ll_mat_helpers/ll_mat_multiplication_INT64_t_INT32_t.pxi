@@ -111,6 +111,7 @@ cdef cnp.ndarray[cnp.int32_t, ndim=1, mode='c'] multiply_ll_mat_with_numpy_vecto
 
 
     # array c = A * b
+    # TODO: check if we can not use static version of empty (cnp.empty instead of np.empty)
     cdef cnp.ndarray[cnp.int32_t, ndim=1] c = np.empty(A_nrow, dtype=np.int32)
     #cdef INT32_t * c_data = <INT32_t *> c.data
     cdef INT32_t * c_data = <INT32_t *> cnp.PyArray_DATA(c)

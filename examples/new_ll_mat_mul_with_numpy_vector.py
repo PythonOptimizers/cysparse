@@ -15,5 +15,16 @@ c = l1 * a
 
 print c
 
-d = l1 * l1
+print "+" * 80
+
+l2 = NewLLSparseMatrix(nrow=3, ncol=4, size_hint=9, dtype=types.COMPLEX128_T, itype=types.INT64_T)
+
+l2.put_triplet([1,1], [1,2], [34.77+99j, 43.4657])
+
+b = np.array([1+1j, 1+1j, 1+1j, 1+1j], dtype=np.complex128)
+
+c = l2 * b
+
+print c
+
 

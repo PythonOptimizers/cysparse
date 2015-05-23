@@ -111,6 +111,7 @@ cdef cnp.ndarray[cnp.complex64_t, ndim=1, mode='c'] multiply_ll_mat_with_numpy_v
 
 
     # array c = A * b
+    # TODO: check if we can not use static version of empty (cnp.empty instead of np.empty)
     cdef cnp.ndarray[cnp.complex64_t, ndim=1] c = np.empty(A_nrow, dtype=np.complex64)
     #cdef COMPLEX64_t * c_data = <COMPLEX64_t *> c.data
     cdef COMPLEX64_t * c_data = <COMPLEX64_t *> cnp.PyArray_DATA(c)
