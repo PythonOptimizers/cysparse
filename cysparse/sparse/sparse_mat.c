@@ -550,7 +550,7 @@ enum __pyx_t_8cysparse_5types_14cysparse_types_CySparseType {
   __pyx_e_8cysparse_5types_14cysparse_types_COMPLEX128_T = 7
 };
 
-/* "cysparse/types/cysparse_types.pxd":81
+/* "cysparse/types/cysparse_types.pxd":74
  * 
  * # in bits
  * cdef enum CySparseTypeBitSize:             # <<<<<<<<<<<<<<
@@ -559,7 +559,7 @@ enum __pyx_t_8cysparse_5types_14cysparse_types_CySparseType {
  */
 enum __pyx_t_8cysparse_5types_14cysparse_types_CySparseTypeBitSize {
 
-  /* "cysparse/types/cysparse_types.pxd":89
+  /* "cysparse/types/cysparse_types.pxd":82
  *     FLOAT64_t_BIT = sizeof(FLOAT64_t) * CHAR_BIT
  *     COMPLEX64_t_BIT = sizeof(COMPLEX64_t) * CHAR_BIT
  *     COMPLEX128_t_BIT = sizeof(COMPLEX128_t) * CHAR_BIT             # <<<<<<<<<<<<<<
@@ -576,7 +576,7 @@ enum __pyx_t_8cysparse_5types_14cysparse_types_CySparseTypeBitSize {
   __pyx_e_8cysparse_5types_14cysparse_types_COMPLEX128_t_BIT = ((sizeof(__pyx_t_double_complex)) * CHAR_BIT)
 };
 
-/* "cysparse/types/cysparse_types.pxd":94
+/* "cysparse/types/cysparse_types.pxd":87
  * #                                 *** SPARSE MATRIX TYPES ***
  * #################################################################################################
  * cdef struct CPType:             # <<<<<<<<<<<<<<
@@ -972,7 +972,7 @@ int __pyx_module_is_main_cysparse__sparse__sparse_mat = 0;
 /* Implementation of 'cysparse.sparse.sparse_mat' */
 static PyObject *__pyx_builtin_object;
 static PyObject *__pyx_builtin_AttributeError;
-static PyObject *__pyx_builtin_NotImplemented;
+static PyObject *__pyx_builtin_NotImplementedError;
 static PyObject *__pyx_pf_8cysparse_6sparse_10sparse_mat_8NonZeros___init__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, struct __pyx_obj_8cysparse_6sparse_10sparse_mat_SparseMatrix *__pyx_v_A); /* proto */
 static PyObject *__pyx_pf_8cysparse_6sparse_10sparse_mat_8NonZeros_2__enter__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_8cysparse_6sparse_10sparse_mat_8NonZeros_4__exit__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v_type, CYTHON_UNUSED PyObject *__pyx_v_value, CYTHON_UNUSED PyObject *__pyx_v_traceback); /* proto */
@@ -1025,12 +1025,12 @@ static char __pyx_k_Not_defined[] = "Not defined";
 static char __pyx_k_store_zeros[] = "store_zeros";
 static char __pyx_k_is_symmetric[] = "is_symmetric";
 static char __pyx_k_AttributeError[] = "AttributeError";
-static char __pyx_k_NotImplemented[] = "NotImplemented";
 static char __pyx_k_control_object[] = "control_object";
 static char __pyx_k_NonZeros___exit[] = "NonZeros.__exit__";
 static char __pyx_k_NonZeros___init[] = "NonZeros.__init__";
 static char __pyx_k_unexposed_value[] = "unexposed_value";
 static char __pyx_k_NonZeros___enter[] = "NonZeros.__enter__";
+static char __pyx_k_NotImplementedError[] = "NotImplementedError";
 static char __pyx_k_cysparse_sparse_sparse_mat[] = "cysparse.sparse.sparse_mat";
 static char __pyx_k_Attribute_shape_is_read_only[] = "Attribute shape is read-only";
 static char __pyx_k_Not_implemented_in_base_class[] = "Not implemented in base class";
@@ -1050,7 +1050,7 @@ static PyObject *__pyx_n_s_NonZeros;
 static PyObject *__pyx_n_s_NonZeros___enter;
 static PyObject *__pyx_n_s_NonZeros___exit;
 static PyObject *__pyx_n_s_NonZeros___init;
-static PyObject *__pyx_n_s_NotImplemented;
+static PyObject *__pyx_n_s_NotImplementedError;
 static PyObject *__pyx_kp_s_Not_implemented_in_base_class;
 static PyObject *__pyx_n_s_control_object;
 static PyObject *__pyx_n_s_cysparse_sparse_sparse_mat;
@@ -1805,7 +1805,7 @@ static int __pyx_pf_8cysparse_6sparse_10sparse_mat_12SparseMatrix_5shape_4__del_
  * 
  *     property T:
  *         def __get__(self):             # <<<<<<<<<<<<<<
- *             raise NotImplemented("Not implemented in base class")
+ *             raise NotImplementedError("Not implemented in base class")
  * 
  */
 
@@ -1834,11 +1834,11 @@ static PyObject *__pyx_pf_8cysparse_6sparse_10sparse_mat_12SparseMatrix_1T___get
   /* "cysparse/sparse/sparse_mat.pyx":64
  *     property T:
  *         def __get__(self):
- *             raise NotImplemented("Not implemented in base class")             # <<<<<<<<<<<<<<
+ *             raise NotImplementedError("Not implemented in base class")             # <<<<<<<<<<<<<<
  * 
  *         def __set__(self, value):
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_NotImplemented, __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 64; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_NotImplementedError, __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 64; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -1848,7 +1848,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_10sparse_mat_12SparseMatrix_1T___get
  * 
  *     property T:
  *         def __get__(self):             # <<<<<<<<<<<<<<
- *             raise NotImplemented("Not implemented in base class")
+ *             raise NotImplementedError("Not implemented in base class")
  * 
  */
 
@@ -1863,7 +1863,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_10sparse_mat_12SparseMatrix_1T___get
 }
 
 /* "cysparse/sparse/sparse_mat.pyx":66
- *             raise NotImplemented("Not implemented in base class")
+ *             raise NotImplementedError("Not implemented in base class")
  * 
  *         def __set__(self, value):             # <<<<<<<<<<<<<<
  *             raise AttributeError('Attribute T (transposed) is read-only')
@@ -1906,7 +1906,7 @@ static int __pyx_pf_8cysparse_6sparse_10sparse_mat_12SparseMatrix_1T_2__set__(CY
   {__pyx_filename = __pyx_f[0]; __pyx_lineno = 67; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "cysparse/sparse/sparse_mat.pyx":66
- *             raise NotImplemented("Not implemented in base class")
+ *             raise NotImplementedError("Not implemented in base class")
  * 
  *         def __set__(self, value):             # <<<<<<<<<<<<<<
  *             raise AttributeError('Attribute T (transposed) is read-only')
@@ -2816,7 +2816,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_NonZeros___enter, __pyx_k_NonZeros___enter, sizeof(__pyx_k_NonZeros___enter), 0, 0, 1, 1},
   {&__pyx_n_s_NonZeros___exit, __pyx_k_NonZeros___exit, sizeof(__pyx_k_NonZeros___exit), 0, 0, 1, 1},
   {&__pyx_n_s_NonZeros___init, __pyx_k_NonZeros___init, sizeof(__pyx_k_NonZeros___init), 0, 0, 1, 1},
-  {&__pyx_n_s_NotImplemented, __pyx_k_NotImplemented, sizeof(__pyx_k_NotImplemented), 0, 0, 1, 1},
+  {&__pyx_n_s_NotImplementedError, __pyx_k_NotImplementedError, sizeof(__pyx_k_NotImplementedError), 0, 0, 1, 1},
   {&__pyx_kp_s_Not_implemented_in_base_class, __pyx_k_Not_implemented_in_base_class, sizeof(__pyx_k_Not_implemented_in_base_class), 0, 0, 1, 0},
   {&__pyx_n_s_control_object, __pyx_k_control_object, sizeof(__pyx_k_control_object), 0, 0, 1, 1},
   {&__pyx_n_s_cysparse_sparse_sparse_mat, __pyx_k_cysparse_sparse_sparse_mat, sizeof(__pyx_k_cysparse_sparse_sparse_mat), 0, 0, 1, 1},
@@ -2852,7 +2852,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
 static int __Pyx_InitCachedBuiltins(void) {
   __pyx_builtin_object = __Pyx_GetBuiltinName(__pyx_n_s_object); if (!__pyx_builtin_object) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 5; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_builtin_AttributeError = __Pyx_GetBuiltinName(__pyx_n_s_AttributeError); if (!__pyx_builtin_AttributeError) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 57; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_builtin_NotImplemented = __Pyx_GetBuiltinName(__pyx_n_s_NotImplemented); if (!__pyx_builtin_NotImplemented) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 64; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_builtin_NotImplementedError = __Pyx_GetBuiltinName(__pyx_n_s_NotImplementedError); if (!__pyx_builtin_NotImplementedError) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 64; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -2887,7 +2887,7 @@ static int __Pyx_InitCachedConstants(void) {
   /* "cysparse/sparse/sparse_mat.pyx":64
  *     property T:
  *         def __get__(self):
- *             raise NotImplemented("Not implemented in base class")             # <<<<<<<<<<<<<<
+ *             raise NotImplementedError("Not implemented in base class")             # <<<<<<<<<<<<<<
  * 
  *         def __set__(self, value):
  */

@@ -338,10 +338,10 @@ cdef class UmfpackSolver:
 
         # TODO: implement both cases!
         if INT_T == INT64_T:
-            raise NotImplemented("UMFPACK library not (yet) interfaced with INT64 (long)")
+            raise NotImplementedError("UMFPACK library not (yet) interfaced with INT64 (long)")
 
         if A.is_complex:
-            raise NotImplemented("Complex version of UMFPACK not (yet) implemented")
+            raise NotImplementedError("Complex version of UMFPACK not (yet) implemented")
 
         self.csc_mat  = self.A.to_csc()
 

@@ -61,7 +61,7 @@ cdef class SparseMatrix:
 
     property T:
         def __get__(self):
-            raise NotImplemented("Not implemented in base class")
+            raise NotImplementedError("Not implemented in base class")
 
         def __set__(self, value):
             raise AttributeError('Attribute T (transposed) is read-only')

@@ -158,7 +158,11 @@ new_sparse_ext = [
   {% for element_type in type_list %}
   Extension(name="cysparse.sparse.ll_mat_matrices.ll_mat_@index_type@_@element_type@",
             sources=["cysparse/sparse/ll_mat_matrices/ll_mat_@index_type@_@element_type@.pxd",
-                     "cysparse/sparse/ll_mat_matrices/ll_mat_@index_type@_@element_type@.pyx"],
+                     "cysparse/sparse/ll_mat_matrices/ll_mat_@index_type@_@element_type@.pyx",
+                     "cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_@index_type@_@element_type@.pxi",
+                     "cysparse/sparse/ll_mat_matrices/ll_mat_kernel/ll_mat_assignment_kernel_@index_type@_@element_type@.pxi",
+                     "cysparse/sparse/ll_mat_matrices/ll_mat_kernel/ll_mat_multiplication_by_numpy_vector_kernel_@index_type@_@element_type@.pxi"
+                     ],
             **sparse_ext_params),
   {% endfor %}
 {% endfor %}

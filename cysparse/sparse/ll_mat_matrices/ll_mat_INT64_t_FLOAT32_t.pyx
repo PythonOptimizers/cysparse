@@ -269,7 +269,7 @@ cdef class LLSparseMatrix_INT64_t_FLOAT32_t(MutableSparseMatrix_INT64_t_FLOAT32_
     #                                            ### CREATE ###
     # TODO: to be done
     cdef create_submatrix(self, PyObject* obj1, PyObject* obj2):
-        raise NotImplemented("Not implemented yet...")
+        raise NotImplementedError("Not implemented yet...")
         cdef:
             INT64_t nrow
             INT64_t * row_indices,
@@ -351,7 +351,7 @@ cdef class LLSparseMatrix_INT64_t_FLOAT32_t(MutableSparseMatrix_INT64_t_FLOAT32_
         Warning:
             This method is costly, use with care.
         """
-        raise NotImplemented("Not implemented yet...")
+        raise NotImplementedError("Not implemented yet...")
 
     ####################################################################################################################
     # Set/Get individual elements
@@ -624,7 +624,7 @@ cdef class LLSparseMatrix_INT64_t_FLOAT32_t(MutableSparseMatrix_INT64_t_FLOAT32_
                     pos += 1
                     k = self.link[k]
         else:
-            raise NotImplemented("keys() is not (yet) implemented for symmetrical LLSparseMatrix")
+            raise NotImplementedError("keys() is not (yet) implemented for symmetrical LLSparseMatrix")
 
         return <object> list_p
 

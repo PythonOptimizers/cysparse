@@ -1,0 +1,29 @@
+from cysparse.sparse.ll_mat import NewLLSparseMatrix
+from cysparse.types.cysparse_types import INT64_T
+import numpy as np
+
+n = 500000000
+size_hint = 200000
+
+A = NewLLSparseMatrix(size=n, size_hint=size_hint, dtype=INT64_T)
+
+for i in xrange(size_hint):
+    A[i, i] = i
+    A[i+2, i* 2] = 10 * i
+
+# refill
+
+for i in xrange(size_hint/100):
+    for j in xrange(size_hint/100):
+        A[i, j] = i
+
+b = np.arange(0, n, dtype=np.int64)
+#c = np.empty(n, dtype=np.float64)
+
+c = A * b
+
+print c
+
+print c[1]
+print c[4578]
+print c[3463463]

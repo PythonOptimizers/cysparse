@@ -40,7 +40,7 @@ cdef class SparseMatrix_INT32_t_FLOAT64_t(SparseMatrix):
         Note:
             This method only returns the internal memory used for the C-arrays, **not** the whole object.
         """
-        raise NotImplemented('Method not implemented for this type of matrix, please report')
+        raise NotImplementedError('Method not implemented for this type of matrix, please report')
 
     def memory_element(self):
         """

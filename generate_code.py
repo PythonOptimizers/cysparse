@@ -73,13 +73,27 @@ def cysparse_type_to_numpy_c_type(cysparse_type):
 
     For instance:
 
-        INT32_T -> cnp.int32_t
+        INT32_T -> int32_t
 
     Args:
         cysparse_type:
 
     """
     return cysparse_type.lower()
+
+def cysparse_type_to_numpy_type(cysparse_type):
+    """
+    Transform a :program:`CySparse` enum type into the corresponding :program:`NumPy` type.
+
+    For instance:
+
+        INT32_T -> int32
+
+    Args:
+        cysparse_type:
+
+    """
+    return cysparse_type.lower()[:-2]
 
 #################################################################################################
 # COMMON STUFF
@@ -106,6 +120,7 @@ GENERAL_ENVIRONMENT = Environment(
 
 GENERAL_ENVIRONMENT.filters['type2enum'] = type2enum
 GENERAL_ENVIRONMENT.filters['cysparse_type_to_numpy_c_type'] = cysparse_type_to_numpy_c_type
+GENERAL_ENVIRONMENT.filters['cysparse_type_to_numpy_type'] = cysparse_type_to_numpy_type
 
 
 def clean_cython_files(logger, directory, file_list=None):

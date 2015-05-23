@@ -551,7 +551,7 @@ enum __pyx_t_8cysparse_5types_14cysparse_types_CySparseType {
   __pyx_e_8cysparse_5types_14cysparse_types_COMPLEX128_T = 7
 };
 
-/* "cysparse/types/cysparse_types.pxd":81
+/* "cysparse/types/cysparse_types.pxd":74
  * 
  * # in bits
  * cdef enum CySparseTypeBitSize:             # <<<<<<<<<<<<<<
@@ -560,7 +560,7 @@ enum __pyx_t_8cysparse_5types_14cysparse_types_CySparseType {
  */
 enum __pyx_t_8cysparse_5types_14cysparse_types_CySparseTypeBitSize {
 
-  /* "cysparse/types/cysparse_types.pxd":89
+  /* "cysparse/types/cysparse_types.pxd":82
  *     FLOAT64_t_BIT = sizeof(FLOAT64_t) * CHAR_BIT
  *     COMPLEX64_t_BIT = sizeof(COMPLEX64_t) * CHAR_BIT
  *     COMPLEX128_t_BIT = sizeof(COMPLEX128_t) * CHAR_BIT             # <<<<<<<<<<<<<<
@@ -577,7 +577,7 @@ enum __pyx_t_8cysparse_5types_14cysparse_types_CySparseTypeBitSize {
   __pyx_e_8cysparse_5types_14cysparse_types_COMPLEX128_t_BIT = ((sizeof(__pyx_t_double_complex)) * CHAR_BIT)
 };
 
-/* "cysparse/types/cysparse_types.pxd":94
+/* "cysparse/types/cysparse_types.pxd":87
  * #                                 *** SPARSE MATRIX TYPES ***
  * #################################################################################################
  * cdef struct CPType:             # <<<<<<<<<<<<<<
@@ -926,7 +926,7 @@ static PyTypeObject *__pyx_ptype_8cysparse_6sparse_19sparse_mat_matrices_31spars
 int __pyx_module_is_main_cysparse__sparse__sparse_mat_matrices__sparse_mat_INT64_t_COMPLEX128_t = 0;
 
 /* Implementation of 'cysparse.sparse.sparse_mat_matrices.sparse_mat_INT64_t_COMPLEX128_t' */
-static PyObject *__pyx_builtin_NotImplemented;
+static PyObject *__pyx_builtin_NotImplementedError;
 static int __pyx_pf_8cysparse_6sparse_19sparse_mat_matrices_31sparse_mat_INT64_t_COMPLEX128_t_33SparseMatrix_INT64_t_COMPLEX128_t___cinit__(struct __pyx_obj_8cysparse_6sparse_19sparse_mat_matrices_31sparse_mat_INT64_t_COMPLEX128_t_SparseMatrix_INT64_t_COMPLEX128_t *__pyx_v_self, PyObject *__pyx_v_kwargs); /* proto */
 static PyObject *__pyx_pf_8cysparse_6sparse_19sparse_mat_matrices_31sparse_mat_INT64_t_COMPLEX128_t_33SparseMatrix_INT64_t_COMPLEX128_t_2memory_virtual(struct __pyx_obj_8cysparse_6sparse_19sparse_mat_matrices_31sparse_mat_INT64_t_COMPLEX128_t_SparseMatrix_INT64_t_COMPLEX128_t *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_8cysparse_6sparse_19sparse_mat_matrices_31sparse_mat_INT64_t_COMPLEX128_t_33SparseMatrix_INT64_t_COMPLEX128_t_4memory_real(CYTHON_UNUSED struct __pyx_obj_8cysparse_6sparse_19sparse_mat_matrices_31sparse_mat_INT64_t_COMPLEX128_t_SparseMatrix_INT64_t_COMPLEX128_t *__pyx_v_self); /* proto */
@@ -965,8 +965,8 @@ static char __pyx_k_no_zeros[] = "no_zeros";
 static char __pyx_k_size_hint[] = "size_hint";
 static char __pyx_k_symmetric[] = "symmetric";
 static char __pyx_k_store_zeros[] = "store_zeros";
-static char __pyx_k_NotImplemented[] = "NotImplemented";
 static char __pyx_k_control_object[] = "control_object";
+static char __pyx_k_NotImplementedError[] = "NotImplementedError";
 static char __pyx_k_SparseMatrix_INT64_t[] = "SparseMatrix_INT64_t";
 static char __pyx_k_attributes_condensed[] = "attributes_condensed";
 static char __pyx_k_attributes_long_string[] = "attributes_long_string";
@@ -978,7 +978,7 @@ static PyObject *__pyx_n_s_G;
 static PyObject *__pyx_kp_s_Matrix_must_be_instantiated_with;
 static PyObject *__pyx_kp_s_Method_not_implemented_for_this;
 static PyObject *__pyx_n_s_NZ;
-static PyObject *__pyx_n_s_NotImplemented;
+static PyObject *__pyx_n_s_NotImplementedError;
 static PyObject *__pyx_n_s_S;
 static PyObject *__pyx_n_s_SZ;
 static PyObject *__pyx_n_s_attributes_condensed;
@@ -1234,11 +1234,11 @@ static PyObject *__pyx_pf_8cysparse_6sparse_19sparse_mat_matrices_31sparse_mat_I
   /* "cysparse/sparse/sparse_mat_matrices/sparse_mat_INT64_t_COMPLEX128_t.pyx":43
  *             This method only returns the internal memory used for the C-arrays, **not** the whole object.
  *         """
- *         raise NotImplemented('Method not implemented for this type of matrix, please report')             # <<<<<<<<<<<<<<
+ *         raise NotImplementedError('Method not implemented for this type of matrix, please report')             # <<<<<<<<<<<<<<
  * 
  *     def memory_element(self):
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_NotImplemented, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 43; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_NotImplementedError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 43; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -1263,7 +1263,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_19sparse_mat_matrices_31sparse_mat_I
 }
 
 /* "cysparse/sparse/sparse_mat_matrices/sparse_mat_INT64_t_COMPLEX128_t.pyx":45
- *         raise NotImplemented('Method not implemented for this type of matrix, please report')
+ *         raise NotImplementedError('Method not implemented for this type of matrix, please report')
  * 
  *     def memory_element(self):             # <<<<<<<<<<<<<<
  *         """
@@ -1308,7 +1308,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_19sparse_mat_matrices_31sparse_mat_I
   goto __pyx_L0;
 
   /* "cysparse/sparse/sparse_mat_matrices/sparse_mat_INT64_t_COMPLEX128_t.pyx":45
- *         raise NotImplemented('Method not implemented for this type of matrix, please report')
+ *         raise NotImplementedError('Method not implemented for this type of matrix, please report')
  * 
  *     def memory_element(self):             # <<<<<<<<<<<<<<
  *         """
@@ -2768,7 +2768,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_Matrix_must_be_instantiated_with, __pyx_k_Matrix_must_be_instantiated_with, sizeof(__pyx_k_Matrix_must_be_instantiated_with), 0, 0, 1, 0},
   {&__pyx_kp_s_Method_not_implemented_for_this, __pyx_k_Method_not_implemented_for_this, sizeof(__pyx_k_Method_not_implemented_for_this), 0, 0, 1, 0},
   {&__pyx_n_s_NZ, __pyx_k_NZ, sizeof(__pyx_k_NZ), 0, 0, 1, 1},
-  {&__pyx_n_s_NotImplemented, __pyx_k_NotImplemented, sizeof(__pyx_k_NotImplemented), 0, 0, 1, 1},
+  {&__pyx_n_s_NotImplementedError, __pyx_k_NotImplementedError, sizeof(__pyx_k_NotImplementedError), 0, 0, 1, 1},
   {&__pyx_n_s_S, __pyx_k_S, sizeof(__pyx_k_S), 0, 0, 1, 1},
   {&__pyx_n_s_SZ, __pyx_k_SZ, sizeof(__pyx_k_SZ), 0, 0, 1, 1},
   {&__pyx_n_s_attributes_condensed, __pyx_k_attributes_condensed, sizeof(__pyx_k_attributes_condensed), 0, 0, 1, 1},
@@ -2793,7 +2793,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, 0, 0, 0, 0, 0, 0}
 };
 static int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_NotImplemented = __Pyx_GetBuiltinName(__pyx_n_s_NotImplemented); if (!__pyx_builtin_NotImplemented) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 43; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_builtin_NotImplementedError = __Pyx_GetBuiltinName(__pyx_n_s_NotImplementedError); if (!__pyx_builtin_NotImplementedError) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 43; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -2806,7 +2806,7 @@ static int __Pyx_InitCachedConstants(void) {
   /* "cysparse/sparse/sparse_mat_matrices/sparse_mat_INT64_t_COMPLEX128_t.pyx":43
  *             This method only returns the internal memory used for the C-arrays, **not** the whole object.
  *         """
- *         raise NotImplemented('Method not implemented for this type of matrix, please report')             # <<<<<<<<<<<<<<
+ *         raise NotImplementedError('Method not implemented for this type of matrix, please report')             # <<<<<<<<<<<<<<
  * 
  *     def memory_element(self):
  */

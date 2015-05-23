@@ -22,7 +22,7 @@ cdef LLSparseMatrix_INT64_t_INT32_t multiply_two_ll_mat_INT64_t_INT32_t(LLSparse
 
     Raises:
         ``IndexError`` if matrix dimension don't agree.
-        ``NotImplemented``: When matrix ``A`` or ``B`` is symmetric.
+        ``NotImplementedError``: When matrix ``A`` or ``B`` is symmetric.
         ``RuntimeError`` if some error occurred during the computation.
     """
     # TODO: LLSparseMatrix * A, LLSparseMatrix * B ...
@@ -49,7 +49,7 @@ cdef LLSparseMatrix_INT64_t_INT32_t multiply_two_ll_mat_INT64_t_INT32_t(LLSparse
     if not A.is_symmetric and not B.is_symmetric:
         pass
     else:
-        raise NotImplemented("Multiplication with symmetric matrices is not implemented yet")
+        raise NotImplementedError("Multiplication with symmetric matrices is not implemented yet")
 
     # NON OPTIMIZED MULTIPLICATION
     cdef:
@@ -111,7 +111,7 @@ cdef cnp.ndarray[cnp.int32_t, ndim=1, mode='c'] multiply_ll_mat_with_numpy_vecto
 
 
     # array c = A * b
-    cdef cnp.ndarray[cnp.double_t, ndim=1] c = np.empty(A_nrow, dtype=np.float64)
+    cdef cnp.ndarray[cnp.int32_t, ndim=1] c = np.empty(A_nrow, dtype=np.int32)
     #cdef INT32_t * c_data = <INT32_t *> c.data
     cdef INT32_t * c_data = <INT32_t *> cnp.PyArray_DATA(c)
 

@@ -22,7 +22,7 @@ cdef LLSparseMatrix_INT32_t_COMPLEX128_t multiply_two_ll_mat_INT32_t_COMPLEX128_
 
     Raises:
         ``IndexError`` if matrix dimension don't agree.
-        ``NotImplemented``: When matrix ``A`` or ``B`` is symmetric.
+        ``NotImplementedError``: When matrix ``A`` or ``B`` is symmetric.
         ``RuntimeError`` if some error occurred during the computation.
     """
     # TODO: LLSparseMatrix * A, LLSparseMatrix * B ...
@@ -49,7 +49,7 @@ cdef LLSparseMatrix_INT32_t_COMPLEX128_t multiply_two_ll_mat_INT32_t_COMPLEX128_
     if not A.is_symmetric and not B.is_symmetric:
         pass
     else:
-        raise NotImplemented("Multiplication with symmetric matrices is not implemented yet")
+        raise NotImplementedError("Multiplication with symmetric matrices is not implemented yet")
 
     # NON OPTIMIZED MULTIPLICATION
     cdef:
@@ -111,7 +111,7 @@ cdef cnp.ndarray[cnp.complex128_t, ndim=1, mode='c'] multiply_ll_mat_with_numpy_
 
 
     # array c = A * b
-    cdef cnp.ndarray[cnp.double_t, ndim=1] c = np.empty(A_nrow, dtype=np.float64)
+    cdef cnp.ndarray[cnp.complex128_t, ndim=1] c = np.empty(A_nrow, dtype=np.complex128)
     #cdef COMPLEX128_t * c_data = <COMPLEX128_t *> c.data
     cdef COMPLEX128_t * c_data = <COMPLEX128_t *> cnp.PyArray_DATA(c)
 
