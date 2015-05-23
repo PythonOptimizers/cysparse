@@ -738,14 +738,31 @@ cdef class LLSparseMatrix_INT32_t_INT64_t(MutableSparseMatrix_INT32_t_INT64_t):
     ####################################################################################################################
     # Multiplication
     ####################################################################################################################
+    def matvec(self, B):
+        """
+        Return :math:`A * b`.
+        """
+        return multiply_ll_mat_with_numpy_vector_INT32_t_INT64_t(self, B)
+
+    def matvec_transp(self, B):
+        """
+        Return :math:`A^t * b`.
+        """
+        return multiply_transposed_ll_mat_with_numpy_vector_INT32_t_INT64_t(self, B)
+
     def __mul__(self, B):
         """
+        Classical matrix multiplication.
 
+        Cases:
+
+        - ``C = A * B`` where `B` is an ``LLSparseMatrix`` matrix. ``C`` is an ``LLSparseMatrix`` of same type.
+        - ``C = A * B`` where ``B`` is an :program:`NumPy` matrix. ``C`` is a dense :program:`NumPy` matrix.
         """
         # CASES
         if PyLLSparseMatrix_Check(B):
-            #return multiply_two_ll_mat(self, B)
-            raise NotImplementedError("Multiplication with this kind of object not implemented yet...")
+            return multiply_two_ll_mat_INT32_t_INT64_t(self, B)
+            #raise NotImplementedError("Multiplication with this kind of object not implemented yet...")
         elif cnp.PyArray_Check(B):
             # test type
             assert are_mixed_types_compatible(INT64_T, B.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(INT64_T)
@@ -755,11 +772,14 @@ cdef class LLSparseMatrix_INT32_t_INT64_t(MutableSparseMatrix_INT32_t_INT64_t):
                 #return multiply_ll_mat_with_numpy_ndarray(self, B)
                 raise NotImplementedError("Multiplication with this kind of object not implemented yet...")
             elif B.ndim == 1:
-                return multiply_ll_mat_with_numpy_vector_INT32_t_INT64_t(self, B)
+                return self.matvec(B)
             else:
                 raise IndexError("Matrix dimensions must agree")
         else:
             raise NotImplementedError("Multiplication with this kind of object not implemented yet...")
+
+    #def __rmul__(self, B):
+
 
     ####################################################################################################################
     # String representations

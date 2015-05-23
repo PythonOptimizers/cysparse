@@ -38,6 +38,20 @@ cpdef bint PyLLSparseMatrix_Check(object obj):
 
     return is_ll_sparse_matrix
 
+def matvec(A, b):
+    """
+    Return :math:`A * b`.
+    """
+    # TODO: test input arguments?
+    return A.matvec(b)
+
+def matvec_transp(A, b):
+    """
+    Return :math:`A^t*b`.
+    """
+    # TODO: test input arguments?
+    return A.matvec_transp(b)
+
 ########################################################################################################################
 # Factory methods
 ########################################################################################################################
