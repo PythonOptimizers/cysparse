@@ -16,7 +16,7 @@ print l1.memory_real()     # memory used internally for the C-arrays
 l1.compress()              # shrink the matrix as much as possible
 print l1.memory_real()
 
-l1[2, 2] = 450000000000  # huge number
+l1[2, 2] = 450000000000000000000  # huge number
 l1[9, 9] = np.inf
 l1[0, 0] = np.nan
 
@@ -33,6 +33,8 @@ print l1.items()           # ((i,j), val)
 
 # returns 3 NumPy arrays with **corresponding** types!
 print l1.find()
+
+l1[4, 5] = 98374983.093843483
 
 l1.print_to(sys.stdout)
 

@@ -764,7 +764,7 @@ cdef class LLSparseMatrix_INT32_t_INT64_t(MutableSparseMatrix_INT32_t_INT64_t):
     ####################################################################################################################
     # String representations
     ####################################################################################################################
-    def print_to(self, OUT):
+    def print_to(self, OUT, width=9, print_big_matrices=False):
         """
         Print content of matrix to output stream.
 
@@ -785,7 +785,7 @@ cdef class LLSparseMatrix_INT32_t_INT64_t(MutableSparseMatrix_INT32_t_INT64_t):
         if not self.nnz:
             return
 
-        if self.nrow <= LL_MAT_PPRINT_COL_THRESH and self.ncol <= LL_MAT_PPRINT_ROW_THRESH:
+        if print_big_matrices or (self.nrow <= LL_MAT_PPRINT_COL_THRESH and self.ncol <= LL_MAT_PPRINT_ROW_THRESH):
             # create linear vector presentation
 
             mat = <INT64_t *> PyMem_Malloc(self.nrow * self.ncol * sizeof(INT64_t))
@@ -809,7 +809,7 @@ cdef class LLSparseMatrix_INT32_t_INT64_t(MutableSparseMatrix_INT32_t_INT64_t):
                 for j from 0 <= j < self.ncol:
                     val = mat[(i*self.ncol)+j]
 
-                    print('{0:9.6f} '.format(val), end='', file=OUT)
+                    print('{:{width}.6f} '.format(val, width=width), end='', file=OUT)
 
                 print(file=OUT)
 

@@ -819,7 +819,7 @@ YOU HAVE TO DEFINE OR CAST YOUR NEW UNRECOGNIZED TYPE
     ####################################################################################################################
     # String representations
     ####################################################################################################################
-    def print_to(self, OUT):
+    def print_to(self, OUT, width=9, print_big_matrices=False):
         """
         Print content of matrix to output stream.
 
@@ -840,7 +840,7 @@ YOU HAVE TO DEFINE OR CAST YOUR NEW UNRECOGNIZED TYPE
         if not self.nnz:
             return
 
-        if self.nrow <= LL_MAT_PPRINT_COL_THRESH and self.ncol <= LL_MAT_PPRINT_ROW_THRESH:
+        if print_big_matrices or (self.nrow <= LL_MAT_PPRINT_COL_THRESH and self.ncol <= LL_MAT_PPRINT_ROW_THRESH):
             # create linear vector presentation
 
             mat = <@type@ *> PyMem_Malloc(self.nrow * self.ncol * sizeof(@type@))
@@ -868,9 +868,9 @@ YOU HAVE TO DEFINE OR CAST YOUR NEW UNRECOGNIZED TYPE
                 for j from 0 <= j < self.ncol:
                     val = mat[(i*self.ncol)+j]
 {% if type not in INTEGER_ELEMENT_TYPES %}
-                    print('{0:9.6f} '.format(val), end='', file=OUT)
+                    print('{:{width}.6f} '.format(val, width=width), end='', file=OUT)
 {% else %}
-                    print('{0:9d} '.format(val), end='', file=OUT)
+                    print('{0:{width}d} '.format(val, width=width), end='', file=OUT)
 {% endif %}
                 print(file=OUT)
 
