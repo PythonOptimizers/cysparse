@@ -36,6 +36,13 @@ REAL_ELEMENT_TYPES = [FLOAT32_T, FLOAT64_T]
 # elements that behave like complex numbers (we only consider complex floats)
 COMPLEX_ELEMENT_TYPES = [COMPLEX64_T, COMPLEX128_T]
 
+cdef extern from "math.h":
+    float INFINITY
+    float NAN
+
+inf = INFINITY
+nan = NAN
+
 ########################################################################################################################
 # TESTS
 ########################################################################################################################

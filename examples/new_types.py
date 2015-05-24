@@ -1,5 +1,6 @@
 import cysparse.types.cysparse_types as types
 import cysparse.types.cysparse_numpy_types as np_types
+import cysparse.sparse.ll_mat as ll_mat
 
 import numpy as np
 
@@ -62,4 +63,47 @@ b = np.array([2, 4, 5.8], dtype=np_types.cysparse_to_numpy_type(types.UINT32_T))
 print b
 print b.dtype
 
+print "=" * 80
 
+
+print types.inf
+
+print types.inf == np.inf
+print types.nan
+print types.nan + types.inf
+print types.inf - types.inf
+
+A = ll_mat.NewLLSparseMatrix(size=4, dtype=types.COMPLEX128_T)
+
+A[0,0] = 3
+A[1,0] = types.inf
+
+import sys
+A.print_to(sys.stdout)
+
+print "=" * 80
+
+B = ll_mat.NewLLSparseMatrix(size=2, dtype=types.FLOAT32_T)
+
+B[0, 0] = 232
+B[0, 1] = 1.3
+B[1, 1] = 2**138
+B[1, 0] = types.nan
+
+print 2**137
+B.print_to(sys.stdout)
+
+print "=" * 80
+
+B = ll_mat.NewLLSparseMatrix(size=2, dtype=types.INT64_T)
+
+B[0, 0] = 232
+B[0, 1] = 1.3
+B[1, 1] = -0.89
+
+
+B.print_to(sys.stdout)
+
+C = B * B
+
+C.print_to(sys.stdout)

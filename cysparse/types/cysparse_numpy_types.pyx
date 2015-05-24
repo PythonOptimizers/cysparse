@@ -1,6 +1,11 @@
 cimport cysparse.types.cysparse_types as cp_types
 cimport numpy as cnp
+#from numpy.math cimport INFINITY
 import numpy as np
+
+#INFINITY = np.inf
+
+
 
 CYSPARSE_TYPES_TO_NUMPY_DICT = dict()
 
