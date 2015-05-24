@@ -159,11 +159,11 @@ Automatic generation scripts
 
 ..  raw:: html
 
-    <h3>Footnotes</3>
+    <h4>Footnotes</h4>
     
 ..  [#typed_variables] Use your intelligence and knowledge of :program:`Cython`. Know when it makes a difference to type a variable.
 
-..  [#use_C99_quick_justification] we use :program:`C99` for its superiority compared to :program:`ANSI C`. Among others:
+..  [#use_C99_quick_justification] we use :program:`C99` for its superiority compared to :program:`ANSI C` (:program:`C89` or :program:`C90` which is the same). Among others:
     
         - the INFINITY and NAN macros;
         - its complex types;
