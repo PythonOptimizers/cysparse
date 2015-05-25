@@ -383,7 +383,7 @@ cdef class LLSparseMatrix_INT64_t_COMPLEX128_t(MutableSparseMatrix_INT64_t_COMPL
         k = self.root[i]
         while k != -1:
             col = self.col[k]
-            # TODO: check this
+            # See maintenance doc
             if col >= j:
                 break
             last = k
@@ -467,6 +467,9 @@ cdef class LLSparseMatrix_INT64_t_COMPLEX128_t(MutableSparseMatrix_INT64_t_COMPL
         Warning:
             There is not out of bounds test.
 
+        Note:
+            We suppose that the elements of a row are **ordered** by ascending column indices.
+
         See:
             :meth:`safe_at`.
 
@@ -480,11 +483,18 @@ cdef class LLSparseMatrix_INT64_t_COMPLEX128_t(MutableSparseMatrix_INT64_t_COMPL
         k = self.root[i]
 
         while k != -1:
-            # TODO: check this: we go over all elements in row i: is it really necessary?
-            if self.col[k] == j:
-                return self.val[k]
-            k = self.link[k]
+            # version **whitout** order
+            #if self.col[k] == j:
+            #    return self.val[k]
+            #k = self.link[k]
 
+            # version **with** order
+            if self.col[k] >= j:
+                if self.col[k] == j:
+                    return self.val[k]
+                break
+
+        # TODO: test if this return is casted like it should, especially for complex numbers...
         return 0
 
     # EXPLICIT TYPE TESTS
@@ -764,7 +774,6 @@ cdef class LLSparseMatrix_INT64_t_COMPLEX128_t(MutableSparseMatrix_INT64_t_COMPL
         elif cnp.PyArray_Check(B):
             # test type
             assert are_mixed_types_compatible(COMPLEX128_T, B.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(COMPLEX128_T)
-            #assert B.dtype == np.float64, "Multiplication only allowed with an array of C-doubles (numpy float64)!"
 
             if B.ndim == 2:
                 #return multiply_ll_mat_with_numpy_ndarray(self, B)

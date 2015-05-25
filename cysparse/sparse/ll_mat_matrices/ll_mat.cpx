@@ -383,7 +383,7 @@ cdef class LLSparseMatrix_@index@_@type@(MutableSparseMatrix_@index@_@type@):
         k = self.root[i]
         while k != -1:
             col = self.col[k]
-            # TODO: check this
+            # See maintenance doc
             if col >= j:
                 break
             last = k
@@ -467,6 +467,9 @@ cdef class LLSparseMatrix_@index@_@type@(MutableSparseMatrix_@index@_@type@):
         Warning:
             There is not out of bounds test.
 
+        Note:
+            We suppose that the elements of a row are **ordered** by ascending column indices.
+
         See:
             :meth:`safe_at`.
 
@@ -480,11 +483,18 @@ cdef class LLSparseMatrix_@index@_@type@(MutableSparseMatrix_@index@_@type@):
         k = self.root[i]
 
         while k != -1:
-            # TODO: check this: we go over all elements in row i: is it really necessary?
-            if self.col[k] == j:
-                return self.val[k]
-            k = self.link[k]
+            # version **whitout** order
+            #if self.col[k] == j:
+            #    return self.val[k]
+            #k = self.link[k]
 
+            # version **with** order
+            if self.col[k] >= j:
+                if self.col[k] == j:
+                    return self.val[k]
+                break
+
+        # TODO: test if this return is casted like it should, especially for complex numbers...
         return 0
 
     # EXPLICIT TYPE TESTS
