@@ -1,8 +1,10 @@
 from cysparse.types.cysparse_types cimport *
+from cysparse.sparse.t_mat cimport TransposedSparseMatrix
 
 cdef INT32_t MUTABLE_SPARSE_MAT_DEFAULT_SIZE_HINT = 40        # allocated size by default
 
 unexposed_value = object()
+
 
 class NonZeros():
     """
@@ -61,7 +63,9 @@ cdef class SparseMatrix:
 
     property T:
         def __get__(self):
-            raise NotImplementedError("Not implemented in base class")
+            #raise NotImplementedError("Not implemented in base class")
+            # create proxy
+            return TransposedSparseMatrix(self)
 
         def __set__(self, value):
             raise AttributeError('Attribute T (transposed) is read-only')

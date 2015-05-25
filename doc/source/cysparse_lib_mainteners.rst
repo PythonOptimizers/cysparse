@@ -73,7 +73,7 @@ Types
 Basic types
 ^^^^^^^^^^^^^^^
 
-For different reasons [#use_C99_quick_justification]_
+For different reasons [#use_C99_quick_justification]_ (???)
 
 We use the following basic types:
 
@@ -169,4 +169,4 @@ Automatic generation scripts
         - its complex types;
         - inline functions;
         
-..  [#signed_vs_unsigned_integers] We don't want to enter into the debate unsigned vs signed integers. Accept this as a fact. Beside, you can change it if you want to.
+..  [#signed_vs_unsigned_integers] We don't want to enter into the debate unsigned vs signed integers. Accept this as a fact. Beside, we use internally negative indices.

@@ -457,6 +457,13 @@ new_sparse_ext = [
   
 
 
+  ######################
+  # ### TransposedSparseMatrix ###
+  ######################
+  Extension(name="cysparse.sparse.t_mat",
+            sources=["cysparse/sparse/t_mat.pxd",
+                     "cysparse/sparse/t_mat.pyx"],
+            **sparse_ext_params),
 ]
 ########################################################################################################################
 #                                                *** utils ***

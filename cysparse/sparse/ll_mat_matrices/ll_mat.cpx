@@ -812,7 +812,7 @@ YOU HAVE TO DEFINE OR CAST YOUR NEW UNRECOGNIZED TYPE
         Cases:
 
         - ``C = A * B`` where `B` is an ``LLSparseMatrix`` matrix. ``C`` is an ``LLSparseMatrix`` of same type.
-        - ``C = A * B`` where ``B`` is an :program:`NumPy` matrix. ``C`` is a dense :program:`NumPy` matrix.
+        - ``C = A * B`` where ``B`` is an :program:`NumPy` matrix. ``C`` is a dense :program:`NumPy` matrix. (not yet implemented).
         """
         # CASES
         if PyLLSparseMatrix_Check(B):
@@ -821,7 +821,6 @@ YOU HAVE TO DEFINE OR CAST YOUR NEW UNRECOGNIZED TYPE
         elif cnp.PyArray_Check(B):
             # test type
             assert are_mixed_types_compatible(@type|type2enum@, B.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(@type|type2enum@)
-            #assert B.dtype == np.float64, "Multiplication only allowed with an array of C-doubles (numpy float64)!"
 
             if B.ndim == 2:
                 #return multiply_ll_mat_with_numpy_ndarray(self, B)

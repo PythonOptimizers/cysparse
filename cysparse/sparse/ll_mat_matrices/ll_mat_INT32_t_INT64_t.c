@@ -8359,7 +8359,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT32_t_I
 
 /* Python wrapper */
 static PyObject *__pyx_pw_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT32_t_INT64_t_30LLSparseMatrix_INT32_t_INT64_t_27__mul__(PyObject *__pyx_v_self, PyObject *__pyx_v_B); /*proto*/
-static char __pyx_doc_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT32_t_INT64_t_30LLSparseMatrix_INT32_t_INT64_t_26__mul__[] = "\n        Classical matrix multiplication.\n\n        Cases:\n\n        - ``C = A * B`` where `B` is an ``LLSparseMatrix`` matrix. ``C`` is an ``LLSparseMatrix`` of same type.\n        - ``C = A * B`` where ``B`` is an :program:`NumPy` matrix. ``C`` is a dense :program:`NumPy` matrix.\n        ";
+static char __pyx_doc_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT32_t_INT64_t_30LLSparseMatrix_INT32_t_INT64_t_26__mul__[] = "\n        Classical matrix multiplication.\n\n        Cases:\n\n        - ``C = A * B`` where `B` is an ``LLSparseMatrix`` matrix. ``C`` is an ``LLSparseMatrix`` of same type.\n        - ``C = A * B`` where ``B`` is an :program:`NumPy` matrix. ``C`` is a dense :program:`NumPy` matrix. (not yet implemented).\n        ";
 #if CYTHON_COMPILING_IN_CPYTHON
 struct wrapperbase __pyx_wrapperbase_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT32_t_INT64_t_30LLSparseMatrix_INT32_t_INT64_t_26__mul__;
 #endif

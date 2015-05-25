@@ -1,6 +1,7 @@
 from cysparse.types.cysparse_types cimport *
+from cysparse.sparse.t_mat cimport TransposedSparseMatrix
 
-# Use of a "real" factory method, following Robert Bradshaw's suestion
+# Use of a "real" factory method, following Robert Bradshaw's suggestion
 # https://groups.google.com/forum/#!topic/cython-users/0UHuLqheoq0
 cdef unexposed_value
 
@@ -20,5 +21,5 @@ cdef class SparseMatrix:
 
         object shape     # for compatibility with numpy, array, etc.
 
-        object T         # for the transposed matrix
+        object T         # proxy to the transposed matrix
 
