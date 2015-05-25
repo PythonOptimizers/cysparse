@@ -14,8 +14,10 @@ BASIC_TYPES_STR_DICT['INT64_t'] = (cp_types.INT64_t_BIT, cp_types.INT64_T)
 BASIC_TYPES_STR_DICT['UINT64_t'] = (cp_types.UINT64_t_BIT, cp_types.UINT64_T)
 BASIC_TYPES_STR_DICT['FLOAT32_t'] = (cp_types.FLOAT32_t_BIT, cp_types.FLOAT32_T)
 BASIC_TYPES_STR_DICT['FLOAT64_t'] = (cp_types.FLOAT64_t_BIT, cp_types.FLOAT64_T)
+BASIC_TYPES_STR_DICT['FLOAT128_t'] = (cp_types.FLOAT128_t_BIT, cp_types.FLOAT128_T)
 BASIC_TYPES_STR_DICT['COMPLEX64_t'] = (cp_types.COMPLEX64_t_BIT, cp_types.COMPLEX64_T)
 BASIC_TYPES_STR_DICT['COMPLEX128_t'] = (cp_types.COMPLEX128_t_BIT, cp_types.COMPLEX128_T)
+BASIC_TYPES_STR_DICT['COMPLEX256_t'] = (cp_types.COMPLEX128_t_BIT, cp_types.COMPLEX256_T)
 
 # construct inverse dict
 # BASIC_TYPES_DICT[enum value] = (type string, nbr of bits)
@@ -32,9 +34,9 @@ UNSIGNED_INTEGER_ELEMENT_TYPES = [UINT32_T, UINT64_T]
 SIGNED_INTEGER_ELEMENT_TYPES = [type1 for type1 in INTEGER_ELEMENT_TYPES if type1 not in UNSIGNED_INTEGER_ELEMENT_TYPES]
 
 # elements that behave like real numbers (floats)
-REAL_ELEMENT_TYPES = [FLOAT32_T, FLOAT64_T]
+REAL_ELEMENT_TYPES = [FLOAT32_T, FLOAT64_T, FLOAT128_T]
 # elements that behave like complex numbers (we only consider complex floats)
-COMPLEX_ELEMENT_TYPES = [COMPLEX64_T, COMPLEX128_T]
+COMPLEX_ELEMENT_TYPES = [COMPLEX64_T, COMPLEX128_T, COMPLEX256_T]
 
 cdef extern from "math.h":
     float INFINITY

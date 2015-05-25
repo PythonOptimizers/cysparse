@@ -67,19 +67,35 @@ def type2enum(type_name):
 
     return enum_name
 
+# OLD VERSION
+# def cysparse_type_to_numpy_c_type(cysparse_type):
+#     """
+#     Transform a :program:`CySparse` enum type into the corresponding :program:`NumPy` C-type.
+#
+#     For instance:
+#
+#         INT32_T -> int32_t
+#
+#     Args:
+#         cysparse_type:
+#
+#     """
+#     return cysparse_type.lower()
+
+# NEW VERSION
 def cysparse_type_to_numpy_c_type(cysparse_type):
     """
     Transform a :program:`CySparse` enum type into the corresponding :program:`NumPy` C-type.
 
     For instance:
 
-        INT32_T -> int32_t
+        INT32_T -> npy_int32
 
     Args:
         cysparse_type:
 
     """
-    return cysparse_type.lower()
+    return 'npy_' + str(cysparse_type.lower()[:-2])
 
 def cysparse_type_to_numpy_type(cysparse_type):
     """
@@ -100,11 +116,11 @@ def cysparse_type_to_numpy_type(cysparse_type):
 # COMMON STUFF
 #################################################################################################
 # TODO: grab this from cysparse_types.pxd or at least from a one common file
-ELEMENT_TYPES = ['INT32_t', 'INT64_t', 'FLOAT32_t', 'FLOAT64_t', 'COMPLEX64_t', 'COMPLEX128_t']
+ELEMENT_TYPES = ['INT32_t', 'INT64_t', 'FLOAT32_t', 'FLOAT64_t', 'FLOAT128_t', 'COMPLEX64_t', 'COMPLEX128_t', 'COMPLEX256_t']
 INDEX_TYPES = ['INT32_t', 'INT64_t']
 INTEGER_ELEMENT_TYPES = ['INT32_t', 'INT64_t']
-REAL_ELEMENT_TYPES = ['FLOAT32_t', 'FLOAT64_t']
-COMPLEX_ELEMENT_TYPES = ['COMPLEX64_t', 'COMPLEX128_t']
+REAL_ELEMENT_TYPES = ['FLOAT32_t', 'FLOAT64_t', 'FLOAT128_t']
+COMPLEX_ELEMENT_TYPES = ['COMPLEX64_t', 'COMPLEX128_t', 'COMPLEX256_t']
 
 # when coding
 #ELEMENT_TYPES = ['FLOAT64_t']

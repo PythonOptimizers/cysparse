@@ -8,6 +8,8 @@ cdef extern from "complex.h":
     float cimagf(float complex z)
     double creal(double complex z)
     double cimag(double complex z)
+    long double creall(long double complex z)
+    long double cimagl(long double complex z)
 
 
 cdef INT32_t compare_complex_COMPLEX64_t(COMPLEX64_t a, COMPLEX64_t b):

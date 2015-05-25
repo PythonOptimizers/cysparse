@@ -82,8 +82,10 @@ cdef enum CySparseTypeBitSize:
     UINT64_t_BIT = sizeof(UINT64_t) * CHAR_BIT
     FLOAT32_t_BIT = sizeof(FLOAT32_t) * CHAR_BIT
     FLOAT64_t_BIT = sizeof(FLOAT64_t) * CHAR_BIT
+    FLOAT128_t_BIT = sizeof(FLOAT128_t) * CHAR_BIT
     COMPLEX64_t_BIT = sizeof(COMPLEX64_t) * CHAR_BIT
     COMPLEX128_t_BIT = sizeof(COMPLEX128_t) * CHAR_BIT
+    COMPLEX256_t_BIT = sizeof(COMPLEX256_t) * CHAR_BIT
 
 #################################################################################################
 #                                 *** SPARSE MATRIX TYPES ***

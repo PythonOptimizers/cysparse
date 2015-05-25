@@ -78,7 +78,7 @@ cdef LLSparseMatrix_INT64_t_FLOAT64_t multiply_two_ll_mat_INT64_t_FLOAT64_t(LLSp
 ######################
 # A * b
 ######################
-cdef cnp.ndarray[cnp.float64_t, ndim=1, mode='c'] multiply_ll_mat_with_numpy_vector_INT64_t_FLOAT64_t(LLSparseMatrix_INT64_t_FLOAT64_t A, cnp.ndarray[cnp.float64_t, ndim=1] b):
+cdef cnp.ndarray[cnp.npy_float64, ndim=1, mode='c'] multiply_ll_mat_with_numpy_vector_INT64_t_FLOAT64_t(LLSparseMatrix_INT64_t_FLOAT64_t A, cnp.ndarray[cnp.npy_float64, ndim=1] b):
     """
     Multiply a :class:`LLSparseMatrix` ``A`` with a numpy vector ``b``.
 
@@ -112,7 +112,8 @@ cdef cnp.ndarray[cnp.float64_t, ndim=1, mode='c'] multiply_ll_mat_with_numpy_vec
 
     # array c = A * b
     # TODO: check if we can not use static version of empty (cnp.empty instead of np.empty)
-    cdef cnp.ndarray[cnp.float64_t, ndim=1] c = np.empty(A_nrow, dtype=np.float64)
+
+    cdef cnp.ndarray[cnp.npy_float64, ndim=1] c = np.empty(A_nrow, dtype=np.float64)
     cdef FLOAT64_t * c_data = <FLOAT64_t *> cnp.PyArray_DATA(c)
 
     # test if b vector is C-contiguous or not
@@ -138,7 +139,7 @@ cdef cnp.ndarray[cnp.float64_t, ndim=1, mode='c'] multiply_ll_mat_with_numpy_vec
 ######################
 # A^t * b
 ######################
-cdef cnp.ndarray[cnp.float64_t, ndim=1, mode='c'] multiply_transposed_ll_mat_with_numpy_vector_INT64_t_FLOAT64_t(LLSparseMatrix_INT64_t_FLOAT64_t A, cnp.ndarray[cnp.float64_t, ndim=1] b):
+cdef cnp.ndarray[cnp.npy_float64, ndim=1, mode='c'] multiply_transposed_ll_mat_with_numpy_vector_INT64_t_FLOAT64_t(LLSparseMatrix_INT64_t_FLOAT64_t A, cnp.ndarray[cnp.npy_float64, ndim=1] b):
     """
     Multiply a transposed :class:`LLSparseMatrix` ``A`` with a numpy vector ``b``.
 
@@ -172,7 +173,7 @@ cdef cnp.ndarray[cnp.float64_t, ndim=1, mode='c'] multiply_transposed_ll_mat_wit
 
     # array c = A^t * b
     # TODO: check if we can not use static version of empty (cnp.empty instead of np.empty)
-    cdef cnp.ndarray[cnp.float64_t, ndim=1] c = np.empty(A_ncol, dtype=np.float64)
+    cdef cnp.ndarray[cnp.npy_float64, ndim=1] c = np.empty(A_ncol, dtype=np.float64)
     cdef FLOAT64_t * c_data = <FLOAT64_t *> cnp.PyArray_DATA(c)
 
     # test if b vector is C-contiguous or not

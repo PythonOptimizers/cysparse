@@ -90,7 +90,7 @@ cdef class LLSparseMatrixView_@index@_@type@:
         return self.A.safe_at(self.row_indices[i], self.col_indices[j])
 
     # EXPLICIT TYPE TESTS
-{% if type == 'COMPLEX64_t' or type == 'COMPLEX128_t' %}
+{% if type in complex_list %}
     cdef @type@ safe_at(self, @index@ i, @index@ j) except *:
 {% else %}
     cdef @type@ safe_at(self, @index@ i, @index@ j) except? 1:
@@ -104,7 +104,7 @@ cdef class LLSparseMatrixView_@index@_@type@:
         """
         if not 0 <= i < self.nrow or not 0 <= j < self.ncol:
             raise IndexError("Index out of bounds")
-{% if type != 'COMPLEX64_t' and type != 'COMPLEX128_t' %}
+{% if type not in complex_list %}
             return 1
 {% endif %}
 

@@ -47,7 +47,7 @@ cdef class LLSparseMatrix_@index@_@type@(MutableSparseMatrix_@index@_@type@):
 
     # EXPLICIT TYPE TESTS
     cdef @type@ at(self, @index@ i, @index@ j)
-{% if type == 'COMPLEX64_t' or type == 'COMPLEX128_t' %}
+{% if type in complex_list %}
     # this is needed as for the complex type, Cython's compiler crashes...
     cdef @type@ safe_at(self, @index@ i, @index@ j) except *
 {% else %}

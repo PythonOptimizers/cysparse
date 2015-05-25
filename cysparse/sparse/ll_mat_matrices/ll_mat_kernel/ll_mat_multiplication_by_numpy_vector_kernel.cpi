@@ -53,7 +53,7 @@ cdef void multiply_ll_mat_with_numpy_vector_kernel_@index@_@type@(@index@ m, @ty
         @index@ i, k
 
     for i from 0 <= i < m:
-{% if type != 'COMPLEX64_t' and type != 'COMPLEX128_t' %}
+{% if type not in complex_list %}
         s = <@type@>0.0
 {% else %}
         s = <@type@>(0.0+0.0j)
@@ -95,7 +95,7 @@ cdef void multiply_sym_ll_mat_with_numpy_vector_kernel_@index@_@type@(@index@ m,
 
     for i from 0 <= i < m:
         xi = x[i]
-{% if type != 'COMPLEX64_t' and type != 'COMPLEX128_t' %}
+{% if type not in complex_list %}
         s = <@type@>0.0
 {% else %}
         s = <@type@>(0.0+0.0j)
@@ -144,7 +144,7 @@ cdef void multiply_ll_mat_with_strided_numpy_vector_kernel_@index@_@type@(@index
         @index@ i, k
 
     for i from 0 <= i < m:
-{% if type != 'COMPLEX64_t' and type != 'COMPLEX128_t' %}
+{% if type not in complex_list %}
         s = <@type@>0.0
 {% else %}
         s = <@type@>(0.0+0.0j)
@@ -190,7 +190,7 @@ cdef void multiply_sym_ll_mat_with_strided_numpy_vector_kernel_@index@_@type@(@i
 
     for i from 0 <= i < m:
         xi = x[i*incx]
-{% if type != 'COMPLEX64_t' and type != 'COMPLEX128_t' %}
+{% if type not in complex_list %}
         s = <@type@>0.0
 {% else %}
         s = <@type@>(0.0+0.0j)
@@ -240,7 +240,7 @@ cdef void multiply_tranposed_ll_mat_with_numpy_vector_kernel_@index@_@type@(@ind
         @index@ i, k
 
     for i from 0 <= i < n:
-{% if type != 'COMPLEX64_t' and type != 'COMPLEX128_t' %}
+{% if type not in complex_list %}
         y[i] = <@type@>0.0
 {% else %}
         y[i] = <@type@>(0.0+0.0j)
@@ -284,7 +284,7 @@ cdef void multiply_tranposed_ll_mat_with_with_strided_numpy_vector_kernel_@index
         @index@ i, k
 
     for i from 0 <= i < n:
-{% if type != 'COMPLEX64_t' and type != 'COMPLEX128_t' %}
+{% if type not in complex_list %}
         y[i*incy] = <@type@>0.0
 {% else %}
         y[i*incy] = <@type@>(0.0+0.0j)

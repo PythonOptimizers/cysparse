@@ -851,7 +851,7 @@ static PyObject *__pyx_kp_s_Lower_bound_must_be_smaller_than;
 static PyObject *__pyx_n_s_main;
 static PyObject *__pyx_n_s_test;
 
-/* "cysparse/sparse/sparse_utils/find_INT64_t_FLOAT64_t.pyx":15
+/* "cysparse/sparse/sparse_utils/find_INT64_t_FLOAT64_t.pyx":17
  * 
  * # EXPLICIT TYPE TESTS
  * cdef INT64_t find_bisec_INT64_t_FLOAT64_t(FLOAT64_t element, FLOAT64_t * array, INT64_t lb, INT64_t ub)  except -1:             # <<<<<<<<<<<<<<
@@ -873,7 +873,7 @@ static __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_f_8cysparse_6spar
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("find_bisec_INT64_t_FLOAT64_t", 0);
 
-  /* "cysparse/sparse/sparse_utils/find_INT64_t_FLOAT64_t.pyx":29
+  /* "cysparse/sparse/sparse_utils/find_INT64_t_FLOAT64_t.pyx":31
  * 
  *     """
  *     assert lb < ub, "Lower bound must be smaller than upper bound"             # <<<<<<<<<<<<<<
@@ -884,12 +884,12 @@ static __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_f_8cysparse_6spar
   if (unlikely(!Py_OptimizeFlag)) {
     if (unlikely(!((__pyx_v_lb < __pyx_v_ub) != 0))) {
       PyErr_SetObject(PyExc_AssertionError, __pyx_kp_s_Lower_bound_must_be_smaller_than);
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 29; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 31; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
   }
   #endif
 
-  /* "cysparse/sparse/sparse_utils/find_INT64_t_FLOAT64_t.pyx":34
+  /* "cysparse/sparse/sparse_utils/find_INT64_t_FLOAT64_t.pyx":36
  *         INT64_t lb_, ub_, middle_, index, i
  * 
  *     index = -1             # <<<<<<<<<<<<<<
@@ -898,7 +898,7 @@ static __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_f_8cysparse_6spar
  */
   __pyx_v_index = -1;
 
-  /* "cysparse/sparse/sparse_utils/find_INT64_t_FLOAT64_t.pyx":35
+  /* "cysparse/sparse/sparse_utils/find_INT64_t_FLOAT64_t.pyx":37
  * 
  *     index = -1
  *     lb_ = lb             # <<<<<<<<<<<<<<
@@ -907,7 +907,7 @@ static __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_f_8cysparse_6spar
  */
   __pyx_v_lb_ = __pyx_v_lb;
 
-  /* "cysparse/sparse/sparse_utils/find_INT64_t_FLOAT64_t.pyx":36
+  /* "cysparse/sparse/sparse_utils/find_INT64_t_FLOAT64_t.pyx":38
  *     index = -1
  *     lb_ = lb
  *     ub_ = ub             # <<<<<<<<<<<<<<
@@ -916,7 +916,7 @@ static __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_f_8cysparse_6spar
  */
   __pyx_v_ub_ = __pyx_v_ub;
 
-  /* "cysparse/sparse/sparse_utils/find_INT64_t_FLOAT64_t.pyx":41
+  /* "cysparse/sparse/sparse_utils/find_INT64_t_FLOAT64_t.pyx":43
  * 
  * 
  *     while index == -1:             # <<<<<<<<<<<<<<
@@ -927,7 +927,7 @@ static __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_f_8cysparse_6spar
     __pyx_t_1 = ((__pyx_v_index == -1) != 0);
     if (!__pyx_t_1) break;
 
-    /* "cysparse/sparse/sparse_utils/find_INT64_t_FLOAT64_t.pyx":42
+    /* "cysparse/sparse/sparse_utils/find_INT64_t_FLOAT64_t.pyx":44
  * 
  *     while index == -1:
  *         middle_ = <INT64_t> floor((lb_ + ub_) / 2)             # <<<<<<<<<<<<<<
@@ -936,7 +936,7 @@ static __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_f_8cysparse_6spar
  */
     __pyx_v_middle_ = ((__pyx_t_8cysparse_5types_14cysparse_types_INT64_t)floor(__Pyx_div_long((__pyx_v_lb_ + __pyx_v_ub_), 2)));
 
-    /* "cysparse/sparse/sparse_utils/find_INT64_t_FLOAT64_t.pyx":44
+    /* "cysparse/sparse/sparse_utils/find_INT64_t_FLOAT64_t.pyx":46
  *         middle_ = <INT64_t> floor((lb_ + ub_) / 2)
  * 
  *         if array[middle_] > element:             # <<<<<<<<<<<<<<
@@ -946,7 +946,7 @@ static __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_f_8cysparse_6spar
     __pyx_t_1 = (((__pyx_v_array[__pyx_v_middle_]) > __pyx_v_element) != 0);
     if (__pyx_t_1) {
 
-      /* "cysparse/sparse/sparse_utils/find_INT64_t_FLOAT64_t.pyx":45
+      /* "cysparse/sparse/sparse_utils/find_INT64_t_FLOAT64_t.pyx":47
  * 
  *         if array[middle_] > element:
  *             ub_ = middle_             # <<<<<<<<<<<<<<
@@ -957,7 +957,7 @@ static __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_f_8cysparse_6spar
       goto __pyx_L5;
     }
 
-    /* "cysparse/sparse/sparse_utils/find_INT64_t_FLOAT64_t.pyx":46
+    /* "cysparse/sparse/sparse_utils/find_INT64_t_FLOAT64_t.pyx":48
  *         if array[middle_] > element:
  *             ub_ = middle_
  *         elif array[middle_] < element:             # <<<<<<<<<<<<<<
@@ -967,7 +967,7 @@ static __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_f_8cysparse_6spar
     __pyx_t_1 = (((__pyx_v_array[__pyx_v_middle_]) < __pyx_v_element) != 0);
     if (__pyx_t_1) {
 
-      /* "cysparse/sparse/sparse_utils/find_INT64_t_FLOAT64_t.pyx":47
+      /* "cysparse/sparse/sparse_utils/find_INT64_t_FLOAT64_t.pyx":49
  *             ub_ = middle_
  *         elif array[middle_] < element:
  *             lb_ = middle_             # <<<<<<<<<<<<<<
@@ -979,7 +979,7 @@ static __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_f_8cysparse_6spar
     }
     /*else*/ {
 
-      /* "cysparse/sparse/sparse_utils/find_INT64_t_FLOAT64_t.pyx":49
+      /* "cysparse/sparse/sparse_utils/find_INT64_t_FLOAT64_t.pyx":51
  *             lb_ = middle_
  *         else:
  *             index = middle_             # <<<<<<<<<<<<<<
@@ -991,7 +991,7 @@ static __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_f_8cysparse_6spar
     __pyx_L5:;
   }
 
-  /* "cysparse/sparse/sparse_utils/find_INT64_t_FLOAT64_t.pyx":52
+  /* "cysparse/sparse/sparse_utils/find_INT64_t_FLOAT64_t.pyx":54
  * 
  *     # test if element found is the first one
  *     if index != -1:             # <<<<<<<<<<<<<<
@@ -1001,7 +1001,7 @@ static __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_f_8cysparse_6spar
   __pyx_t_1 = ((__pyx_v_index != -1) != 0);
   if (__pyx_t_1) {
 
-    /* "cysparse/sparse/sparse_utils/find_INT64_t_FLOAT64_t.pyx":53
+    /* "cysparse/sparse/sparse_utils/find_INT64_t_FLOAT64_t.pyx":55
  *     # test if element found is the first one
  *     if index != -1:
  *         while index > lb and array[index] == element:             # <<<<<<<<<<<<<<
@@ -1020,7 +1020,7 @@ static __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_f_8cysparse_6spar
       __pyx_L9_bool_binop_done:;
       if (!__pyx_t_1) break;
 
-      /* "cysparse/sparse/sparse_utils/find_INT64_t_FLOAT64_t.pyx":54
+      /* "cysparse/sparse/sparse_utils/find_INT64_t_FLOAT64_t.pyx":56
  *     if index != -1:
  *         while index > lb and array[index] == element:
  *             index -= 1             # <<<<<<<<<<<<<<
@@ -1033,7 +1033,7 @@ static __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_f_8cysparse_6spar
   }
   __pyx_L6:;
 
-  /* "cysparse/sparse/sparse_utils/find_INT64_t_FLOAT64_t.pyx":57
+  /* "cysparse/sparse/sparse_utils/find_INT64_t_FLOAT64_t.pyx":59
  * 
  * 
  *     return index             # <<<<<<<<<<<<<<
@@ -1043,7 +1043,7 @@ static __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_f_8cysparse_6spar
   __pyx_r = __pyx_v_index;
   goto __pyx_L0;
 
-  /* "cysparse/sparse/sparse_utils/find_INT64_t_FLOAT64_t.pyx":15
+  /* "cysparse/sparse/sparse_utils/find_INT64_t_FLOAT64_t.pyx":17
  * 
  * # EXPLICIT TYPE TESTS
  * cdef INT64_t find_bisec_INT64_t_FLOAT64_t(FLOAT64_t element, FLOAT64_t * array, INT64_t lb, INT64_t ub)  except -1:             # <<<<<<<<<<<<<<
@@ -1060,7 +1060,7 @@ static __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_f_8cysparse_6spar
   return __pyx_r;
 }
 
-/* "cysparse/sparse/sparse_utils/find_INT64_t_FLOAT64_t.pyx":59
+/* "cysparse/sparse/sparse_utils/find_INT64_t_FLOAT64_t.pyx":61
  *     return index
  * 
  * cdef INT64_t find_linear_INT64_t_FLOAT64_t(FLOAT64_t element, FLOAT64_t * array, INT64_t lb, INT64_t ub) except -1:             # <<<<<<<<<<<<<<
@@ -1079,7 +1079,7 @@ static __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_f_8cysparse_6spar
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("find_linear_INT64_t_FLOAT64_t", 0);
 
-  /* "cysparse/sparse/sparse_utils/find_INT64_t_FLOAT64_t.pyx":73
+  /* "cysparse/sparse/sparse_utils/find_INT64_t_FLOAT64_t.pyx":75
  * 
  *     """
  *     assert lb < ub, "Lower bound must be smaller than upper bound"             # <<<<<<<<<<<<<<
@@ -1090,12 +1090,12 @@ static __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_f_8cysparse_6spar
   if (unlikely(!Py_OptimizeFlag)) {
     if (unlikely(!((__pyx_v_lb < __pyx_v_ub) != 0))) {
       PyErr_SetObject(PyExc_AssertionError, __pyx_kp_s_Lower_bound_must_be_smaller_than);
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 73; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 75; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
   }
   #endif
 
-  /* "cysparse/sparse/sparse_utils/find_INT64_t_FLOAT64_t.pyx":78
+  /* "cysparse/sparse/sparse_utils/find_INT64_t_FLOAT64_t.pyx":80
  *         INT64_t index
  * 
  *     for index from lb <= index < ub:             # <<<<<<<<<<<<<<
@@ -1105,7 +1105,7 @@ static __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_f_8cysparse_6spar
   __pyx_t_1 = __pyx_v_ub;
   for (__pyx_v_index = __pyx_v_lb; __pyx_v_index < __pyx_t_1; __pyx_v_index++) {
 
-    /* "cysparse/sparse/sparse_utils/find_INT64_t_FLOAT64_t.pyx":79
+    /* "cysparse/sparse/sparse_utils/find_INT64_t_FLOAT64_t.pyx":81
  * 
  *     for index from lb <= index < ub:
  *         if array[index] == element:             # <<<<<<<<<<<<<<
@@ -1115,7 +1115,7 @@ static __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_f_8cysparse_6spar
     __pyx_t_2 = (((__pyx_v_array[__pyx_v_index]) == __pyx_v_element) != 0);
     if (__pyx_t_2) {
 
-      /* "cysparse/sparse/sparse_utils/find_INT64_t_FLOAT64_t.pyx":80
+      /* "cysparse/sparse/sparse_utils/find_INT64_t_FLOAT64_t.pyx":82
  *     for index from lb <= index < ub:
  *         if array[index] == element:
  *             break             # <<<<<<<<<<<<<<
@@ -1127,7 +1127,7 @@ static __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_f_8cysparse_6spar
   }
   __pyx_L4_break:;
 
-  /* "cysparse/sparse/sparse_utils/find_INT64_t_FLOAT64_t.pyx":82
+  /* "cysparse/sparse/sparse_utils/find_INT64_t_FLOAT64_t.pyx":84
  *             break
  * 
  *     return index             # <<<<<<<<<<<<<<
@@ -1135,7 +1135,7 @@ static __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_f_8cysparse_6spar
   __pyx_r = __pyx_v_index;
   goto __pyx_L0;
 
-  /* "cysparse/sparse/sparse_utils/find_INT64_t_FLOAT64_t.pyx":59
+  /* "cysparse/sparse/sparse_utils/find_INT64_t_FLOAT64_t.pyx":61
  *     return index
  * 
  * cdef INT64_t find_linear_INT64_t_FLOAT64_t(FLOAT64_t element, FLOAT64_t * array, INT64_t lb, INT64_t ub) except -1:             # <<<<<<<<<<<<<<

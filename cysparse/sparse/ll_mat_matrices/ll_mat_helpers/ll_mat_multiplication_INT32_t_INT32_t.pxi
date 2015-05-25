@@ -78,7 +78,7 @@ cdef LLSparseMatrix_INT32_t_INT32_t multiply_two_ll_mat_INT32_t_INT32_t(LLSparse
 ######################
 # A * b
 ######################
-cdef cnp.ndarray[cnp.int32_t, ndim=1, mode='c'] multiply_ll_mat_with_numpy_vector_INT32_t_INT32_t(LLSparseMatrix_INT32_t_INT32_t A, cnp.ndarray[cnp.int32_t, ndim=1] b):
+cdef cnp.ndarray[cnp.npy_int32, ndim=1, mode='c'] multiply_ll_mat_with_numpy_vector_INT32_t_INT32_t(LLSparseMatrix_INT32_t_INT32_t A, cnp.ndarray[cnp.npy_int32, ndim=1] b):
     """
     Multiply a :class:`LLSparseMatrix` ``A`` with a numpy vector ``b``.
 
@@ -112,7 +112,8 @@ cdef cnp.ndarray[cnp.int32_t, ndim=1, mode='c'] multiply_ll_mat_with_numpy_vecto
 
     # array c = A * b
     # TODO: check if we can not use static version of empty (cnp.empty instead of np.empty)
-    cdef cnp.ndarray[cnp.int32_t, ndim=1] c = np.empty(A_nrow, dtype=np.int32)
+
+    cdef cnp.ndarray[cnp.npy_int32, ndim=1] c = np.empty(A_nrow, dtype=np.int32)
     cdef INT32_t * c_data = <INT32_t *> cnp.PyArray_DATA(c)
 
     # test if b vector is C-contiguous or not
@@ -138,7 +139,7 @@ cdef cnp.ndarray[cnp.int32_t, ndim=1, mode='c'] multiply_ll_mat_with_numpy_vecto
 ######################
 # A^t * b
 ######################
-cdef cnp.ndarray[cnp.int32_t, ndim=1, mode='c'] multiply_transposed_ll_mat_with_numpy_vector_INT32_t_INT32_t(LLSparseMatrix_INT32_t_INT32_t A, cnp.ndarray[cnp.int32_t, ndim=1] b):
+cdef cnp.ndarray[cnp.npy_int32, ndim=1, mode='c'] multiply_transposed_ll_mat_with_numpy_vector_INT32_t_INT32_t(LLSparseMatrix_INT32_t_INT32_t A, cnp.ndarray[cnp.npy_int32, ndim=1] b):
     """
     Multiply a transposed :class:`LLSparseMatrix` ``A`` with a numpy vector ``b``.
 
@@ -172,7 +173,7 @@ cdef cnp.ndarray[cnp.int32_t, ndim=1, mode='c'] multiply_transposed_ll_mat_with_
 
     # array c = A^t * b
     # TODO: check if we can not use static version of empty (cnp.empty instead of np.empty)
-    cdef cnp.ndarray[cnp.int32_t, ndim=1] c = np.empty(A_ncol, dtype=np.int32)
+    cdef cnp.ndarray[cnp.npy_int32, ndim=1] c = np.empty(A_ncol, dtype=np.int32)
     cdef INT32_t * c_data = <INT32_t *> cnp.PyArray_DATA(c)
 
     # test if b vector is C-contiguous or not
