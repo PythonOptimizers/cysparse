@@ -78,12 +78,18 @@ def is_subtype(cp_types.CySparseType type1, cp_types.CySparseType type2):
             subtype = True
     elif type2 == cp_types.FLOAT64_T:
         if type1 in [cp_types.FLOAT32_T]:
-            return True
+            subtype = True
+    elif type2 == cp_types.FLOAT128_T:
+        if type1 in [cp_types.FLOAT32_T, cp_types.FLOAT64_T]:
+            subtype = True
     elif type2 == cp_types.COMPLEX64_T:
         if type1 in [cp_types.FLOAT32_T]:
             subtype = True
     elif type2 == cp_types.COMPLEX128_T:
         if type1 in [cp_types.FLOAT32_T, cp_types.FLOAT64_T, cp_types.COMPLEX64_T]:
+            subtype = True
+    elif type2 == cp_types.COMPLEX256_T:
+        if type1 in [cp_types.FLOAT32_T, cp_types.FLOAT64_T, cp_types.FLOAT128_T, cp_types.COMPLEX64_T, cp_types.COMPLEX128_T]:
             subtype = True
 
     return subtype
@@ -182,30 +188,30 @@ cpdef int result_type(cp_types.CySparseType type1, cp_types.CySparseType type2) 
         return type1
 
     cdef:
-        cp_types.CySparseType result_type, min_type, max_type
+        cp_types.CySparseType r_type, min_type, max_type
 
     min_type = min(type1, type2)
     max_type = max(type1, type2)
 
-    result_type = max_type
+    r_type = max_type
 
     # CASE 1: same family type (integers, real or complex)
     if is_integer_type(min_type) and is_integer_type(max_type):
         if (is_signed_integer_type(min_type) and is_signed_integer_type(max_type)) or (is_unsigned_integer_type(min_type) and is_unsigned_integer_type(max_type)):
-            result_type= max_type
+            r_type= max_type
 
         elif min_type == cp_types.INT32_T:
             if max_type in [cp_types.UINT32_T, cp_types.INT64_T]:
-                result_type = cp_types.INT64_T
+                r_type = cp_types.INT64_T
             elif max_type in [cp_types.UINT64_T]:
                 raise TypeError("%s and %s are incompatible" % (type_to_string(min_type), type_to_string(max_type)))
             else:
                 raise TypeError("Shouldn't happen. CODE 1. Please report.")
         elif min_type == cp_types.UINT32_T:
             if max_type in [cp_types.INT64_T]:
-                result_type = cp_types.INT64_T
+                r_type = cp_types.INT64_T
             elif max_type in [cp_types.UINT64_T]:
-                result_type = cp_types.UINT64_T
+                r_type = cp_types.UINT64_T
             else:
                 raise TypeError("Shouldn't happen. CODE 2. Please report.")
         elif min_type == cp_types.INT64_T:
@@ -216,27 +222,34 @@ cpdef int result_type(cp_types.CySparseType type1, cp_types.CySparseType type2) 
         else:
             raise TypeError("Shouldn't happen. CODE 4. Please report.")
     elif is_real_type(min_type) and is_integer_type(max_type):
-        result_type = max_type
+        r_type = max_type
     elif is_complex_type(min_type) and is_complex_type(max_type):
-        result_type = max_type
+        r_type = max_type
 
     # CASE 2: different family types
     # we use the default behavior of min_type/max_type and only consider the exceptions to this default behavior
     elif is_integer_type(min_type):
         if is_real_type(max_type):
             if min_type in [cp_types.INT64_T, cp_types.UINT64_T]:
-                result_type = cp_types.FLOAT64_T
+                r_type = <cp_types.CySparseType> result_type(cp_types.FLOAT64_T, max_type)
         elif is_complex_type(max_type):
             if min_type in [cp_types.INT64_T, cp_types.UINT64_T]:
-                result_type = cp_types.COMPLEX128_T
+                r_type = <cp_types.CySparseType> result_type(cp_types.COMPLEX128_T, max_type)
     elif is_real_type(min_type):
         if is_complex_type(max_type):
-            if min_type == cp_types.FLOAT64_T and max_type == cp_types.COMPLEX64_T:
-                result_type = cp_types.COMPLEX128_T
+            if min_type == cp_types.FLOAT64_T:
+                r_type = <cp_types.CySparseType> result_type(cp_types.COMPLEX128_T, max_type)
+            elif min_type == cp_types.FLOAT128_T:
+                r_type = cp_types.COMPLEX256_T
+            else:
+                TypeError("Shouldn't happen. CODE 5. Please report.")
+    elif is_complex_type(min_type):
+        # both types are complex, max is OK
+        pass
     else:
         raise TypeError("Shouldn't happen. CODE 7. Please report.")
 
-    return result_type
+    return r_type
 
 
 ########################################################################################################################
