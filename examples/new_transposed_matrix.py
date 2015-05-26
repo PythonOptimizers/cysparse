@@ -17,8 +17,15 @@ a = np.array([1,1,1], dtype=np.float64)
 
 print "=" * 80
 
-c = l1.T.T.T.T.T * a
+T = l1.T
+
+
+F = l1.T.T.T.T.T
+print F.dtype
+
+c = F * a
 print c
+
 
 print "=" * 80
 

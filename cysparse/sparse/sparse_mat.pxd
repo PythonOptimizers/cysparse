@@ -22,7 +22,7 @@ cdef class SparseMatrix:
         TransposedSparseMatrix __transposed_proxy_matrix  # transposed matrix proxy
         bint __transposed_proxy_matrix_generated
 
-        object shape     # for compatibility with numpy, array, etc.
+        object shape     # for compatibility with numpy, PyKrylov, etc.
 
         object T         # proxy to the transposed matrix
 

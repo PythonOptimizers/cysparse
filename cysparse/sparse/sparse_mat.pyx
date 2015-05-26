@@ -51,7 +51,7 @@ cdef class SparseMatrix:
 
         self.__transposed_proxy_matrix_generated = False
 
-    # for compatibility with numpy, array, etc
+    # for compatibility with numpy, PyKrylov, etc
     property shape:
         def __get__(self):
             self.shape = (self.nrow, self.ncol)
@@ -78,6 +78,20 @@ cdef class SparseMatrix:
 
         def __del__(self):
             raise AttributeError('Attribute T (transposed) is read-only')
+
+    ####################################################################################################################
+    # Basic common methods
+    ####################################################################################################################
+    # Multiplication
+    def matvec(self, B):
+        raise NotImplementedError("Operation not implemented (yet). Please report.")
+
+    def matvec_transp(self, B):
+        raise NotImplementedError("Operation not implemented (yet). Please report.")
+
+    # Copy
+    def copy(self):
+        raise NotImplementedError("Operation not implemented (yet). Please report.")
 
 ########################################################################################################################
 # BASE MUTABLE MATRIX CLASS
