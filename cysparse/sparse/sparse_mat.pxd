@@ -19,6 +19,9 @@ cdef class SparseMatrix:
         public char * type        # Type of matrix
         CPType cp_type            # Internal types of the matrix
 
+        TransposedSparseMatrix __transposed_proxy_matrix  # transposed matrix proxy
+        bint __transposed_proxy_matrix_generated
+
         object shape     # for compatibility with numpy, array, etc.
 
         object T         # proxy to the transposed matrix

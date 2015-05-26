@@ -495,6 +495,8 @@ cdef class LLSparseMatrix_INT64_t_FLOAT32_t(MutableSparseMatrix_INT64_t_FLOAT32_
                 if self.col[k] == j:
                     return self.val[k]
                 break
+                
+            k = self.link[k]
 
         # TODO: test if this return is casted like it should, especially for complex numbers...
         return 0

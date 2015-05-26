@@ -864,6 +864,7 @@ typedef npy_cdouble __pyx_t_5numpy_complex_t;
 struct __pyx_obj_8cysparse_6sparse_5t_mat_TransposedSparseMatrix {
   PyObject_HEAD
   struct __pyx_obj_8cysparse_6sparse_10sparse_mat_SparseMatrix *A;
+  PyObject *T;
 };
 
 
@@ -882,6 +883,8 @@ struct __pyx_obj_8cysparse_6sparse_10sparse_mat_SparseMatrix {
   char *type_name;
   char *type;
   struct __pyx_t_8cysparse_5types_14cysparse_types_CPType cp_type;
+  struct __pyx_obj_8cysparse_6sparse_5t_mat_TransposedSparseMatrix *__pyx___transposed_proxy_matrix;
+  int __pyx___transposed_proxy_matrix_generated;
   PyObject *shape;
   PyObject *T;
 };

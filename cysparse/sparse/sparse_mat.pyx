@@ -49,6 +49,8 @@ cdef class SparseMatrix:
         self.store_zeros = kwargs.get('store_zeros', False)
         self.is_mutable = False
 
+        self.__transposed_proxy_matrix_generated = False
+
     # for compatibility with numpy, array, etc
     property shape:
         def __get__(self):
@@ -64,8 +66,12 @@ cdef class SparseMatrix:
     property T:
         def __get__(self):
             #raise NotImplementedError("Not implemented in base class")
-            # create proxy
-            return TransposedSparseMatrix(self)
+            if not self.__transposed_proxy_matrix_generated:
+                # create proxy
+                self.__transposed_proxy_matrix = TransposedSparseMatrix(self)
+                self.__transposed_proxy_matrix_generated = True
+
+            return self.__transposed_proxy_matrix
 
         def __set__(self, value):
             raise AttributeError('Attribute T (transposed) is read-only')

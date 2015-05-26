@@ -496,6 +496,8 @@ cdef class LLSparseMatrix_@index@_@type@(MutableSparseMatrix_@index@_@type@):
                     return self.val[k]
                 break
 
+            k = self.link[k]
+
         # TODO: test if this return is casted like it should, especially for complex numbers...
         return 0
 

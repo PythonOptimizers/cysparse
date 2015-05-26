@@ -19,3 +19,5 @@ cdef class TransposedSparseMatrix:
     cdef:
         public SparseMatrix A
 
+        object T         # ref to the original matrix
+
