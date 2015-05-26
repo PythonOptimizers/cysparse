@@ -1,96 +1,100 @@
-from cysparse.sparse.ll_mat import LLSparseMatrix, MakeLLSparseMatrix
-
-# class LLPySparseMatrix(LLCySparseMatrix):
-#  pass
-
-import sys
-
-matrix = MakeLLSparseMatrix(nrow=2, ncol=3, size_hint=10)
-print matrix
-matrix[0, 0] = 1
-matrix[0, 2] = 3.6
-matrix[1, 1] = 1
-matrix[1, 2] = -2
-
-matrix.print_to(sys.stdout)
-
-matrix2 = MakeLLSparseMatrix(nrow=3, ncol=2, size_hint=10)
-
-matrix2[0, 0] = 1
-matrix2[1, 1] = 1
-
-matrix2[2, 1] += 9
-
-matrix2.print_to(sys.stdout)
-
-print "=" * 80
-C = matrix * matrix2
-
-print C
-
-import sys
-
-C.print_to(sys.stdout)
-
-print "$" * 80
-
+from cysparse.sparse.ll_mat import *
+import cysparse.types.cysparse_types as types
 import numpy as np
-np_array = np.arange(3).astype(np.float64)
-#np_array = np.arange(10).astype(np.float64)[::2]
-dd = matrix * np_array
 
-print dd
+import sys
 
-print "(" * 80
+l1 = NewLLSparseMatrix(nrow=10, ncol=10, size_hint=40)
+print l1
+print type(l1)             # lots of classes are used internally...
 
-matrix_T = matrix.T
+# all memories given in bits
+print l1.memory_element()  # memory for one element
+print l1.memory_virtual()  # memory needed if a dense matrix was used
+print l1.memory_real()     # memory used internally for the C-arrays
 
-print matrix_T
+l1.compress()              # shrink the matrix as much as possible
+print l1.memory_real()
 
-matrix_T.print_to(sys.stdout)
+l1[2, 2] = 450000000000000000000  # huge number
+l1[9, 9] = np.inf
+l1[0, 0] = np.nan
 
-np_array2 = np.arange(2).astype(np.float64)
+l1.put_triplet([1,1], [1, 2], [5.6, 6.7])  # i, j, val
+print l1
 
-res = matrix.T * np_array2
+print l1[2, 2]
+print l1[0, 0]             # was not assigned -> 0.0 by default
 
-print res
+# like a dict
+print l1.keys()            # (i, j)
+print l1.values()          # val
+print l1.items()           # ((i,j), val)
 
-print "*" * 80
+# returns 3 NumPy arrays with **corresponding** types!
+print l1.find()
 
-ti = matrix[0:11:1, 0:3:3]
+l1[4, 5] = 98374983.093843483
 
-print type(ti)
+l1.print_to(sys.stdout)
 
-print "!" * 89
+########################################################################################################################
+print "=" * 80
+l2 = NewLLSparseMatrix(size=10, dtype=types.INT32_T, itype=types.INT32_T)
+print l2
 
-l = [0, 1]
+try:
+    l2[2, 2] = 45000000000000000000000
+except OverflowError:
+    print "Value way to big to be stored in such matrix..."
+    l2[2, 2] = 45000000
 
-print l
-print type(l)
- = matrix[l, 0:3]
+l2[5, 6] = 3.9              # we take the integer part, i.e. 3
 
-print type()
+print l2[2, 2]
+print l2[0, 0]              # was not assigned -> 0 by default
 
-print "8" * 80
-matrix.compress()
+print l2.keys()
+print l2.values()
+print l2.items()
 
-print matrix[0,0]
-print matrix[0, 2]
+print l2.find()
+l2.print_to(sys.stdout)
+########################################################################################################################
+print "=" * 80
+l3 = NewLLSparseMatrix(size=4, itype=types.INT64_T, dtype=types.COMPLEX128_T, store_zeros=True)
+print l3
 
-print "?" * 80
+l3[2,2] = 67.0+5.0j
+l3[0,1] = 4.5-7.5j
+l3[3,2] = 0+0j               # zero **is** stored
+print l3[0,0]                # not assigned -> 0+0j by default
+print l3[2, 2]
 
-print matrix.keys()
-print matrix.values()
-print matrix.items()
+l3.put_triplet([1,1], [1, 2], [5.6+1j, 6.7-7.8j])  # i, j, val
+l3[0,0] = np.nan + np.nan * 1j
+print l3
 
+
+print "This is not a number: " + str(l3[0,0])
+
+print l3.keys()
+print l3.values()
+print l3.items()
+
+print l3.find()
+l3.print_to(sys.stdout)
+########################################################################################################################
 print "=" * 80
 
-matrix.print_to(sys.stdout)
-matrix_c = MakeLLSparseMatrix(nrow=2, ncol=2, size_hint=10)
-matrix_c[0, 0] = 1
-matrix_c[0, 1] = 1
-matrix_c[1, 0] = 1
-matrix_c[1, 1] = 1
-matrix[0:2, 1:3] = matrix_c
+l3_view = l3[0:2, 0]
+print l3_view
 
-matrix.print_to(sys.stdout)
+l3_view_view = l3_view[0:1, 0]
+print l3_view_view
+print l3_view_view.is_empty
+
+########################################################################################################################
+print "=" * 80
+l3_bis = l3_view_view.matrix_copy()
+print l3_bis
