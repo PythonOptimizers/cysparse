@@ -7,7 +7,7 @@ Syntactic sugar: we want to use the following code: ``A.T * b`` to compute :math
 # forward declaration
 cdef class TransposedSparseMatrix
 
-from cysparse.sparse.sparse_mat cimport SparseMatrix
+from cysparse.sparse.s_mat cimport SparseMatrix
 from cysparse.types.cysparse_types cimport CPType
 
 cdef class TransposedSparseMatrix:

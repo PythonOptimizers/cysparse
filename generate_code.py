@@ -305,9 +305,7 @@ SPARSE_SPARSE_UTILS_FIND_DEFINITION_FILES = [os.path.join(SPARSE_SPARSE_UTILS_TE
 
 ### SparseMatrix
 
-
-
-SPARSE_MATRIX_TEMPLATE_DIR = os.path.join(SPARSE_DIR, 'sparse_mat_matrices')
+SPARSE_MATRIX_TEMPLATE_DIR = os.path.join(SPARSE_DIR, 's_mat_matrices')
 
 SPARSE_MATRIX_INCLUDE_FILES = glob.glob(os.path.join(SPARSE_MATRIX_TEMPLATE_DIR, '*.cpi'))
 SPARSE_MATRIX_DECLARATION_FILES = glob.glob(os.path.join(SPARSE_MATRIX_TEMPLATE_DIR, '*.cpd'))

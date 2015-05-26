@@ -8,7 +8,7 @@ from cysparse.types.cysparse_types cimport *
 # forward declaration
 cdef class LLSparseMatrixView_@index@_@type@
 
-from cysparse.sparse.sparse_mat cimport unexposed_value
+from cysparse.sparse.s_mat cimport unexposed_value
 from cysparse.sparse.ll_mat_matrices.ll_mat_@index@_@type@ cimport LLSparseMatrix_@index@_@type@
 from cysparse.sparse.sparse_utils.generate_indices_@index@ cimport create_c_array_indices_from_python_object_@index@
 

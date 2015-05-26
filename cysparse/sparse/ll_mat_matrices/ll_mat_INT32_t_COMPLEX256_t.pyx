@@ -7,10 +7,10 @@ from cysparse.types.cysparse_types cimport *
 
 from cysparse.sparse.ll_mat cimport LL_MAT_INCREASE_FACTOR
 
-from cysparse.sparse.sparse_mat cimport unexposed_value
+from cysparse.sparse.s_mat cimport unexposed_value
 from cysparse.types.cysparse_numpy_types import are_mixed_types_compatible, cysparse_to_numpy_type
 from cysparse.sparse.ll_mat cimport PyLLSparseMatrix_Check, LL_MAT_PPRINT_COL_THRESH, LL_MAT_PPRINT_ROW_THRESH
-from cysparse.sparse.sparse_mat_matrices.sparse_mat_INT32_t_COMPLEX256_t cimport MutableSparseMatrix_INT32_t_COMPLEX256_t
+from cysparse.sparse.s_mat_matrices.s_mat_INT32_t_COMPLEX256_t cimport MutableSparseMatrix_INT32_t_COMPLEX256_t
 from cysparse.sparse.ll_mat_matrices.ll_mat_INT32_t_COMPLEX256_t cimport LLSparseMatrix_INT32_t_COMPLEX256_t
 from cysparse.sparse.ll_mat_views.ll_mat_view_INT32_t_COMPLEX256_t cimport LLSparseMatrixView_INT32_t_COMPLEX256_t
 
@@ -495,7 +495,7 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX256_t(MutableSparseMatrix_INT32_t_COMPL
                 if self.col[k] == j:
                     return self.val[k]
                 break
-                
+
             k = self.link[k]
 
         # TODO: test if this return is casted like it should, especially for complex numbers...

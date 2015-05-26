@@ -132,15 +132,15 @@ new_sparse_ext = [
   ######################
   # ### SparseMatrix ###
   ######################
-  Extension(name="cysparse.sparse.sparse_mat",
-            sources=["cysparse/sparse/sparse_mat.pxd",
-                     "cysparse/sparse/sparse_mat.pyx"],
+  Extension(name="cysparse.sparse.s_mat",
+            sources=["cysparse/sparse/s_mat.pxd",
+                     "cysparse/sparse/s_mat.pyx"],
             **sparse_ext_params),
 {% for index_type in index_list %}
     {% for element_type in type_list %}
-  Extension(name="cysparse.sparse.sparse_mat_matrices.sparse_mat_@index_type@_@element_type@",
-            sources=["cysparse/sparse/sparse_mat_matrices/sparse_mat_@index_type@_@element_type@.pxd",
-                     "cysparse/sparse/sparse_mat_matrices/sparse_mat_@index_type@_@element_type@.pyx"],
+  Extension(name="cysparse.sparse.s_mat_matrices.s_mat_@index_type@_@element_type@",
+            sources=["cysparse/sparse/s_mat_matrices/s_mat_@index_type@_@element_type@.pxd",
+                     "cysparse/sparse/s_mat_matrices/s_mat_@index_type@_@element_type@.pyx"],
             **sparse_ext_params),
     {% endfor %}
 {% endfor %}
@@ -224,7 +224,7 @@ setup(name=  'SparseLib',
             'cysparse.types',
             'cysparse.sparse',
             'cysparse.sparse.sparse_utils',
-            'cysparse.sparse.sparse_mat_matrices',
+            'cysparse.sparse.s_mat_matrices',
             'cysparse.sparse.ll_mat_matrices',
             'cysparse.sparse.ll_mat_views',
             'cysparse.utils',

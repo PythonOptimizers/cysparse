@@ -1,10 +1,10 @@
 
 from cysparse.sparse.ll_mat cimport LL_MAT_DEFAULT_SIZE_HINT
-from cysparse.sparse.sparse_mat cimport unexposed_value
+from cysparse.sparse.s_mat cimport unexposed_value
 
 from cysparse.types.cysparse_types import INDEX_TYPES, ELEMENT_TYPES
 
-from cysparse.sparse.sparse_mat cimport SparseMatrix
+from cysparse.sparse.s_mat cimport SparseMatrix
 
 from cython cimport isinstance
 
