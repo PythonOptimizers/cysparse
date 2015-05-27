@@ -791,6 +791,38 @@ cdef class LLSparseMatrix_INT32_t_INT64_t(MutableSparseMatrix_INT32_t_INT64_t):
 
     #def __rmul__(self, B):
 
+    ####################################################################################################################
+    # Scaling
+    ####################################################################################################################
+    def col_scale(self, cnp.ndarray[cnp.npy_int64, ndim=1] v):
+        """
+        Scale the i:sup:`th` column of A by ``v[i]`` in place for ``i=0, ..., ncol-1``
+
+        Args:
+            v:
+        """
+        # TODO: maybe accept something else than only an numpy array?
+        # TODO: test for non contiguous arrays...
+        # TODO: benchmark.. we don't use the same approach than PySparse at all
+
+        # test dimensions
+        if self.ncol != v.size:
+            raise IndexError("Dimensions must agree ([%d,%d] and [%d, %d])" % (self.nrow, self.ncol, v.size, 1))
+
+        cdef:
+            INT32_t k, i
+
+        # direct access to vector b
+        cdef INT64_t * v_data = <INT64_t *> cnp.PyArray_DATA(v)
+
+        for i from 0 <= i < self.nrow:
+            k = self.root[i]
+            while k != -1:
+
+                self.val[k] *= v_data[self.col[k]]
+
+                k = self.link[k]
+
 
     ####################################################################################################################
     # String representations
