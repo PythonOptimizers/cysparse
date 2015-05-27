@@ -32,10 +32,11 @@ def construct_sparse_matrix(A, n, nbr_elements):
         A[i % n, (2 * i + 1) % n] = i / 3
 
 
-def retrieve_all_elements(A, n, x):
+def retrieve_all_elements(A, n):
     for i in xrange(n):
         for j in xrange(n):
-            x.append(A[i, j])
+            x = A[n-1, n-1]
+
 
 ########################################################################################################################
 # Benchmark
@@ -43,14 +44,14 @@ def retrieve_all_elements(A, n, x):
 class LLMatSimpleElementRetrievalBenchmark(benchmark.Benchmark):
 
 
-    label = "Simple element retrieval with 1000 elements and size = 10,000"
+    label = "Simple element retrieval with 100 elements and size = 1,000"
     each = 10
 
 
     def setUp(self):
 
-        self.nbr_elements = 10
-        self.size = 100
+        self.nbr_elements = 100
+        self.size = 1000
 
         self.A_c = NewLLSparseMatrix(size=self.size, size_hint=self.nbr_elements, dtype=FLOAT64_T)
         construct_sparse_matrix(self.A_c, self.size, self.nbr_elements)
@@ -63,19 +64,12 @@ class LLMatSimpleElementRetrievalBenchmark(benchmark.Benchmark):
         #self.A_s = lil_matrix((self.size, self.size), dtype=np.float64) # how do we reserve space in advance?
         #construct_sparse_matrix(self.A_s, self.size, self.nbr_elements)
 
-    def tearDown(self):
-        size = len(self.x_c)
-
-        assert len(self.x_p) == size
-        for i in xrange(size):
-            assert self.x_c[i] == self.x_p[i]
-
     def test_pysparse(self):
-        retrieve_all_elements(self.A_p, self.size, self.x_p)
+        retrieve_all_elements(self.A_p, self.size)
         return
 
     def test_cysparse(self):
-        retrieve_all_elements(self.A_c, self.size, self.x_c)
+        retrieve_all_elements(self.A_c, self.size)
         return
 
     #def test_scipy_sparse(self):
