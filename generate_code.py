@@ -255,23 +255,25 @@ def generate_following_type_and_index(logger, template_filenames, template_envir
     Note:
         A file is created for each element **and** index types.
     """
+    context = {
+        'type_list': ELEMENT_TYPES,
+        'index_list' : INDEX_TYPES
+    }
+
     for filename in template_filenames:
 
         for type_name in element_types:
             for index_name in index_types:
                 if tabu_combination is not None:
                     try:
-                        if not tabu_combination[type_name][index_name]:
+                        if tabu_combination[type_name][index_name]:
                             continue
                     except:
                         pass
 
-                context = {
-                    'type'  : type_name,
-                    'index' : index_name,
-                    'type_list': ELEMENT_TYPES,
-                    'index_list' : INDEX_TYPES
-                }
+                # update context
+                context['type'] = type_name
+                context['index'] = index_name
 
                 context.update(template_context)
 
@@ -329,6 +331,10 @@ LL_SPARSE_MATRIX_KERNEL_INCLUDE_FILES = glob.glob(os.path.join(LL_SPARSE_MATRIX_
 ### LLSparseMatrix helpers
 LL_SPARSE_MATRIX_HELPERS_TEMPLATE_DIR = os.path.join(LL_SPARSE_MATRIX_TEMPLATE_DIR, 'll_mat_helpers')
 LL_SPARSE_MATRIX_HELPERS_INCLUDE_FILES = glob.glob(os.path.join(LL_SPARSE_MATRIX_HELPERS_TEMPLATE_DIR, '*.cpi'))
+
+### LLSparseMatrix IO
+LL_SPARSE_MATRIX_IO_TEMPLATE_DIR = os.path.join(LL_SPARSE_MATRIX_TEMPLATE_DIR, 'll_mat_IO')
+LL_SPARSE_MATRIX_IO_INCLUDE_FILES = glob.glob(os.path.join(LL_SPARSE_MATRIX_IO_TEMPLATE_DIR, '*.cpi'))
 
 
 ### CSRSparseMatrix
@@ -416,6 +422,8 @@ if __name__ == "__main__":
             clean_cython_files(logger, LL_SPARSE_MATRIX_KERNEL_TEMPLATE_DIR)
             # LLSparseMatrix helpers
             clean_cython_files(logger, LL_SPARSE_MATRIX_HELPERS_TEMPLATE_DIR)
+            # LLSparseMatrix IO
+            clean_cython_files(logger, LL_SPARSE_MATRIX_IO_TEMPLATE_DIR)
             # LLSparseMatrixView
             clean_cython_files(logger, LL_SPARSE_MATRIX_VIEW_TEMPLATE_DIR)
 
@@ -443,7 +451,7 @@ if __name__ == "__main__":
             # TODO: add the possibility to use tabu in for loops in Jinja2 (i.e. inside a template file)....
             #tabu = {}
             #tabu['INT32_t'] = {}
-            #tabu['INT32_t']['INT64_t'] = False
+            #tabu['INT32_t']['INT64_t'] = True
 
             ###############################
             # LLSparseMatrix
@@ -461,6 +469,9 @@ if __name__ == "__main__":
 
             # helpers
             generate_following_type_and_index(logger, LL_SPARSE_MATRIX_HELPERS_INCLUDE_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, ELEMENT_TYPES, INDEX_TYPES, '.pxi')
+
+            # LLSparseMatrix IO
+            generate_following_type_and_index(logger, LL_SPARSE_MATRIX_IO_INCLUDE_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, ELEMENT_TYPES, INDEX_TYPES, '.pxi')
 
             ###############################
             # LLSparseMatrixView

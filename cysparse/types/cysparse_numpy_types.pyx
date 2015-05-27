@@ -15,8 +15,10 @@ CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.INT64_T] = np.int64
 CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.UINT64_T] = np.uint64
 CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.FLOAT32_T] = np.float32
 CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.FLOAT64_T] = np.float64
+CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.FLOAT128_T] = np.float128
 CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.COMPLEX64_T] = np.complex64
 CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.COMPLEX128_T] = np.complex128
+CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.COMPLEX256_T] = np.complex256
 
 def numpy_to_cysparse_type(numpy_type):
     """
@@ -45,10 +47,14 @@ def numpy_to_cysparse_type(numpy_type):
         return cp_types.FLOAT32_T
     elif numpy_type == np.float64:
         return cp_types.FLOAT64_T
+    elif numpy_type == np.float128:
+        return cp_types.FLOAT128_T
     elif numpy_type == np.complex64:
         return cp_types.COMPLEX64_T
     elif numpy_type == np.complex128:
         return cp_types.COMPLEX128_T
+    elif numpy_type == np.complex256:
+        return cp_types.COMPLEX256_T
     else:
         raise TypeError("Not a NumPy compatible type")
 

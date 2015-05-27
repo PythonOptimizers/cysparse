@@ -1234,11 +1234,13 @@ static char __pyx_k_uint32[] = "uint32";
 static char __pyx_k_uint64[] = "uint64";
 static char __pyx_k_float32[] = "float32";
 static char __pyx_k_float64[] = "float64";
+static char __pyx_k_float128[] = "float128";
 static char __pyx_k_issctype[] = "issctype";
 static char __pyx_k_TypeError[] = "TypeError";
 static char __pyx_k_complex64[] = "complex64";
 static char __pyx_k_ValueError[] = "ValueError";
 static char __pyx_k_complex128[] = "complex128";
+static char __pyx_k_complex256[] = "complex256";
 static char __pyx_k_numpy_type[] = "numpy_type";
 static char __pyx_k_RuntimeError[] = "RuntimeError";
 static char __pyx_k_cysparse_type[] = "cysparse_type";
@@ -1268,10 +1270,12 @@ static PyObject *__pyx_n_s_TypeError;
 static PyObject *__pyx_n_s_ValueError;
 static PyObject *__pyx_n_s_are_mixed_types_compatible;
 static PyObject *__pyx_n_s_complex128;
+static PyObject *__pyx_n_s_complex256;
 static PyObject *__pyx_n_s_complex64;
 static PyObject *__pyx_n_s_cysparse_to_numpy_type;
 static PyObject *__pyx_n_s_cysparse_type;
 static PyObject *__pyx_n_s_cysparse_types_cysparse_numpy_ty;
+static PyObject *__pyx_n_s_float128;
 static PyObject *__pyx_n_s_float32;
 static PyObject *__pyx_n_s_float64;
 static PyObject *__pyx_kp_s_home_nikolaj_Documents_WORK_Dom;
@@ -1309,8 +1313,8 @@ static PyObject *__pyx_codeobj__12;
 static PyObject *__pyx_codeobj__14;
 static PyObject *__pyx_codeobj__16;
 
-/* "cysparse/types/cysparse_numpy_types.pyx":21
- * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.COMPLEX128_T] = np.complex128
+/* "cysparse/types/cysparse_numpy_types.pyx":23
+ * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.COMPLEX256_T] = np.complex256
  * 
  * def numpy_to_cysparse_type(numpy_type):             # <<<<<<<<<<<<<<
  *     """
@@ -1346,16 +1350,16 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_numpy_to_cyspa
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("numpy_to_cysparse_type", 0);
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":31
+  /* "cysparse/types/cysparse_numpy_types.pyx":33
  *     """
  * 
  *     if not np.issctype(numpy_type):             # <<<<<<<<<<<<<<
  *         raise TypeError("Not a NumPy type")
  * 
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 31; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 33; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_issctype); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 31; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_issctype); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 33; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -1369,82 +1373,49 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_numpy_to_cyspa
     }
   }
   if (!__pyx_t_2) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_numpy_type); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 31; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_numpy_type); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 33; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
   } else {
-    __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 31; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 33; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_2); __Pyx_GIVEREF(__pyx_t_2); __pyx_t_2 = NULL;
     __Pyx_INCREF(__pyx_v_numpy_type);
     PyTuple_SET_ITEM(__pyx_t_4, 0+1, __pyx_v_numpy_type);
     __Pyx_GIVEREF(__pyx_v_numpy_type);
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 31; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 33; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 31; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 33; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_6 = ((!__pyx_t_5) != 0);
   if (__pyx_t_6) {
 
-    /* "cysparse/types/cysparse_numpy_types.pyx":32
+    /* "cysparse/types/cysparse_numpy_types.pyx":34
  * 
  *     if not np.issctype(numpy_type):
  *         raise TypeError("Not a NumPy type")             # <<<<<<<<<<<<<<
  * 
  *     # we use the == operator defined by NumPy
  */
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 32; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 34; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 32; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 34; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":36
+  /* "cysparse/types/cysparse_numpy_types.pyx":38
  *     # we use the == operator defined by NumPy
  *     # this also allows the test of dtype for ndarrays
  *     if numpy_type == np.int32:             # <<<<<<<<<<<<<<
  *         return cp_types.INT32_T
  *     elif numpy_type == np.uint32:
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 36; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_int32); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 36; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyObject_RichCompare(__pyx_v_numpy_type, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 36; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_6 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 36; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (__pyx_t_6) {
-
-    /* "cysparse/types/cysparse_numpy_types.pyx":37
- *     # this also allows the test of dtype for ndarrays
- *     if numpy_type == np.int32:
- *         return cp_types.INT32_T             # <<<<<<<<<<<<<<
- *     elif numpy_type == np.uint32:
- *         return cp_types.UINT32_T
- */
-    __Pyx_XDECREF(__pyx_r);
-    __pyx_t_1 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_INT32_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 37; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_GOTREF(__pyx_t_1);
-    __pyx_r = __pyx_t_1;
-    __pyx_t_1 = 0;
-    goto __pyx_L0;
-  }
-
-  /* "cysparse/types/cysparse_numpy_types.pyx":38
- *     if numpy_type == np.int32:
- *         return cp_types.INT32_T
- *     elif numpy_type == np.uint32:             # <<<<<<<<<<<<<<
- *         return cp_types.UINT32_T
- *     elif numpy_type == np.int64:
- */
   __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 38; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_uint32); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 38; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_int32); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 38; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_1 = PyObject_RichCompare(__pyx_v_numpy_type, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 38; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -1454,14 +1425,14 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_numpy_to_cyspa
   if (__pyx_t_6) {
 
     /* "cysparse/types/cysparse_numpy_types.pyx":39
- *         return cp_types.INT32_T
+ *     # this also allows the test of dtype for ndarrays
+ *     if numpy_type == np.int32:
+ *         return cp_types.INT32_T             # <<<<<<<<<<<<<<
  *     elif numpy_type == np.uint32:
- *         return cp_types.UINT32_T             # <<<<<<<<<<<<<<
- *     elif numpy_type == np.int64:
- *         return cp_types.INT64_T
+ *         return cp_types.UINT32_T
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_1 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_UINT32_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 39; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_INT32_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 39; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_r = __pyx_t_1;
     __pyx_t_1 = 0;
@@ -1469,15 +1440,15 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_numpy_to_cyspa
   }
 
   /* "cysparse/types/cysparse_numpy_types.pyx":40
- *     elif numpy_type == np.uint32:
+ *     if numpy_type == np.int32:
+ *         return cp_types.INT32_T
+ *     elif numpy_type == np.uint32:             # <<<<<<<<<<<<<<
  *         return cp_types.UINT32_T
- *     elif numpy_type == np.int64:             # <<<<<<<<<<<<<<
- *         return cp_types.INT64_T
- *     elif numpy_type == np.uint64:
+ *     elif numpy_type == np.int64:
  */
   __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 40; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_int64); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 40; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_uint32); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 40; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_1 = PyObject_RichCompare(__pyx_v_numpy_type, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 40; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -1487,14 +1458,14 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_numpy_to_cyspa
   if (__pyx_t_6) {
 
     /* "cysparse/types/cysparse_numpy_types.pyx":41
- *         return cp_types.UINT32_T
+ *         return cp_types.INT32_T
+ *     elif numpy_type == np.uint32:
+ *         return cp_types.UINT32_T             # <<<<<<<<<<<<<<
  *     elif numpy_type == np.int64:
- *         return cp_types.INT64_T             # <<<<<<<<<<<<<<
- *     elif numpy_type == np.uint64:
- *         return cp_types.UINT64_T
+ *         return cp_types.INT64_T
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_1 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_INT64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 41; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_UINT32_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 41; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_r = __pyx_t_1;
     __pyx_t_1 = 0;
@@ -1502,15 +1473,15 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_numpy_to_cyspa
   }
 
   /* "cysparse/types/cysparse_numpy_types.pyx":42
- *     elif numpy_type == np.int64:
+ *     elif numpy_type == np.uint32:
+ *         return cp_types.UINT32_T
+ *     elif numpy_type == np.int64:             # <<<<<<<<<<<<<<
  *         return cp_types.INT64_T
- *     elif numpy_type == np.uint64:             # <<<<<<<<<<<<<<
- *         return cp_types.UINT64_T
- *     elif numpy_type == np.float32:
+ *     elif numpy_type == np.uint64:
  */
   __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 42; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_uint64); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 42; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_int64); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 42; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_1 = PyObject_RichCompare(__pyx_v_numpy_type, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 42; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -1520,14 +1491,14 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_numpy_to_cyspa
   if (__pyx_t_6) {
 
     /* "cysparse/types/cysparse_numpy_types.pyx":43
- *         return cp_types.INT64_T
+ *         return cp_types.UINT32_T
+ *     elif numpy_type == np.int64:
+ *         return cp_types.INT64_T             # <<<<<<<<<<<<<<
  *     elif numpy_type == np.uint64:
- *         return cp_types.UINT64_T             # <<<<<<<<<<<<<<
- *     elif numpy_type == np.float32:
- *         return cp_types.FLOAT32_T
+ *         return cp_types.UINT64_T
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_1 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_UINT64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 43; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_INT64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 43; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_r = __pyx_t_1;
     __pyx_t_1 = 0;
@@ -1535,15 +1506,15 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_numpy_to_cyspa
   }
 
   /* "cysparse/types/cysparse_numpy_types.pyx":44
- *     elif numpy_type == np.uint64:
+ *     elif numpy_type == np.int64:
+ *         return cp_types.INT64_T
+ *     elif numpy_type == np.uint64:             # <<<<<<<<<<<<<<
  *         return cp_types.UINT64_T
- *     elif numpy_type == np.float32:             # <<<<<<<<<<<<<<
- *         return cp_types.FLOAT32_T
- *     elif numpy_type == np.float64:
+ *     elif numpy_type == np.float32:
  */
   __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 44; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_float32); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 44; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_uint64); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 44; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_1 = PyObject_RichCompare(__pyx_v_numpy_type, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 44; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -1553,14 +1524,14 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_numpy_to_cyspa
   if (__pyx_t_6) {
 
     /* "cysparse/types/cysparse_numpy_types.pyx":45
- *         return cp_types.UINT64_T
+ *         return cp_types.INT64_T
+ *     elif numpy_type == np.uint64:
+ *         return cp_types.UINT64_T             # <<<<<<<<<<<<<<
  *     elif numpy_type == np.float32:
- *         return cp_types.FLOAT32_T             # <<<<<<<<<<<<<<
- *     elif numpy_type == np.float64:
- *         return cp_types.FLOAT64_T
+ *         return cp_types.FLOAT32_T
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_1 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_FLOAT32_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 45; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_UINT64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 45; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_r = __pyx_t_1;
     __pyx_t_1 = 0;
@@ -1568,15 +1539,15 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_numpy_to_cyspa
   }
 
   /* "cysparse/types/cysparse_numpy_types.pyx":46
- *     elif numpy_type == np.float32:
+ *     elif numpy_type == np.uint64:
+ *         return cp_types.UINT64_T
+ *     elif numpy_type == np.float32:             # <<<<<<<<<<<<<<
  *         return cp_types.FLOAT32_T
- *     elif numpy_type == np.float64:             # <<<<<<<<<<<<<<
- *         return cp_types.FLOAT64_T
- *     elif numpy_type == np.complex64:
+ *     elif numpy_type == np.float64:
  */
   __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 46; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_float64); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 46; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_float32); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 46; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_1 = PyObject_RichCompare(__pyx_v_numpy_type, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 46; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -1586,14 +1557,14 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_numpy_to_cyspa
   if (__pyx_t_6) {
 
     /* "cysparse/types/cysparse_numpy_types.pyx":47
- *         return cp_types.FLOAT32_T
+ *         return cp_types.UINT64_T
+ *     elif numpy_type == np.float32:
+ *         return cp_types.FLOAT32_T             # <<<<<<<<<<<<<<
  *     elif numpy_type == np.float64:
- *         return cp_types.FLOAT64_T             # <<<<<<<<<<<<<<
- *     elif numpy_type == np.complex64:
- *         return cp_types.COMPLEX64_T
+ *         return cp_types.FLOAT64_T
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_1 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_FLOAT64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 47; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_FLOAT32_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 47; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_r = __pyx_t_1;
     __pyx_t_1 = 0;
@@ -1601,15 +1572,15 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_numpy_to_cyspa
   }
 
   /* "cysparse/types/cysparse_numpy_types.pyx":48
- *     elif numpy_type == np.float64:
+ *     elif numpy_type == np.float32:
+ *         return cp_types.FLOAT32_T
+ *     elif numpy_type == np.float64:             # <<<<<<<<<<<<<<
  *         return cp_types.FLOAT64_T
- *     elif numpy_type == np.complex64:             # <<<<<<<<<<<<<<
- *         return cp_types.COMPLEX64_T
- *     elif numpy_type == np.complex128:
+ *     elif numpy_type == np.float128:
  */
   __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 48; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_complex64); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 48; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_float64); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 48; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_1 = PyObject_RichCompare(__pyx_v_numpy_type, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 48; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -1619,14 +1590,14 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_numpy_to_cyspa
   if (__pyx_t_6) {
 
     /* "cysparse/types/cysparse_numpy_types.pyx":49
- *         return cp_types.FLOAT64_T
- *     elif numpy_type == np.complex64:
- *         return cp_types.COMPLEX64_T             # <<<<<<<<<<<<<<
- *     elif numpy_type == np.complex128:
- *         return cp_types.COMPLEX128_T
+ *         return cp_types.FLOAT32_T
+ *     elif numpy_type == np.float64:
+ *         return cp_types.FLOAT64_T             # <<<<<<<<<<<<<<
+ *     elif numpy_type == np.float128:
+ *         return cp_types.FLOAT128_T
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_1 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_COMPLEX64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 49; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_FLOAT64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 49; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_r = __pyx_t_1;
     __pyx_t_1 = 0;
@@ -1634,15 +1605,15 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_numpy_to_cyspa
   }
 
   /* "cysparse/types/cysparse_numpy_types.pyx":50
+ *     elif numpy_type == np.float64:
+ *         return cp_types.FLOAT64_T
+ *     elif numpy_type == np.float128:             # <<<<<<<<<<<<<<
+ *         return cp_types.FLOAT128_T
  *     elif numpy_type == np.complex64:
- *         return cp_types.COMPLEX64_T
- *     elif numpy_type == np.complex128:             # <<<<<<<<<<<<<<
- *         return cp_types.COMPLEX128_T
- *     else:
  */
   __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 50; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_complex128); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 50; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_float128); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 50; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_1 = PyObject_RichCompare(__pyx_v_numpy_type, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 50; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -1652,14 +1623,113 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_numpy_to_cyspa
   if (__pyx_t_6) {
 
     /* "cysparse/types/cysparse_numpy_types.pyx":51
+ *         return cp_types.FLOAT64_T
+ *     elif numpy_type == np.float128:
+ *         return cp_types.FLOAT128_T             # <<<<<<<<<<<<<<
+ *     elif numpy_type == np.complex64:
+ *         return cp_types.COMPLEX64_T
+ */
+    __Pyx_XDECREF(__pyx_r);
+    __pyx_t_1 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_FLOAT128_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 51; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_r = __pyx_t_1;
+    __pyx_t_1 = 0;
+    goto __pyx_L0;
+  }
+
+  /* "cysparse/types/cysparse_numpy_types.pyx":52
+ *     elif numpy_type == np.float128:
+ *         return cp_types.FLOAT128_T
+ *     elif numpy_type == np.complex64:             # <<<<<<<<<<<<<<
+ *         return cp_types.COMPLEX64_T
+ *     elif numpy_type == np.complex128:
+ */
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 52; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_complex64); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 52; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = PyObject_RichCompare(__pyx_v_numpy_type, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 52; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_6 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 52; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  if (__pyx_t_6) {
+
+    /* "cysparse/types/cysparse_numpy_types.pyx":53
+ *         return cp_types.FLOAT128_T
+ *     elif numpy_type == np.complex64:
+ *         return cp_types.COMPLEX64_T             # <<<<<<<<<<<<<<
+ *     elif numpy_type == np.complex128:
+ *         return cp_types.COMPLEX128_T
+ */
+    __Pyx_XDECREF(__pyx_r);
+    __pyx_t_1 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_COMPLEX64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 53; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_r = __pyx_t_1;
+    __pyx_t_1 = 0;
+    goto __pyx_L0;
+  }
+
+  /* "cysparse/types/cysparse_numpy_types.pyx":54
+ *     elif numpy_type == np.complex64:
+ *         return cp_types.COMPLEX64_T
+ *     elif numpy_type == np.complex128:             # <<<<<<<<<<<<<<
+ *         return cp_types.COMPLEX128_T
+ *     elif numpy_type == np.complex256:
+ */
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 54; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_complex128); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 54; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = PyObject_RichCompare(__pyx_v_numpy_type, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 54; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_6 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 54; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  if (__pyx_t_6) {
+
+    /* "cysparse/types/cysparse_numpy_types.pyx":55
  *         return cp_types.COMPLEX64_T
  *     elif numpy_type == np.complex128:
  *         return cp_types.COMPLEX128_T             # <<<<<<<<<<<<<<
+ *     elif numpy_type == np.complex256:
+ *         return cp_types.COMPLEX256_T
+ */
+    __Pyx_XDECREF(__pyx_r);
+    __pyx_t_1 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_COMPLEX128_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 55; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_r = __pyx_t_1;
+    __pyx_t_1 = 0;
+    goto __pyx_L0;
+  }
+
+  /* "cysparse/types/cysparse_numpy_types.pyx":56
+ *     elif numpy_type == np.complex128:
+ *         return cp_types.COMPLEX128_T
+ *     elif numpy_type == np.complex256:             # <<<<<<<<<<<<<<
+ *         return cp_types.COMPLEX256_T
+ *     else:
+ */
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 56; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_complex256); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 56; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = PyObject_RichCompare(__pyx_v_numpy_type, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 56; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_6 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 56; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  if (__pyx_t_6) {
+
+    /* "cysparse/types/cysparse_numpy_types.pyx":57
+ *         return cp_types.COMPLEX128_T
+ *     elif numpy_type == np.complex256:
+ *         return cp_types.COMPLEX256_T             # <<<<<<<<<<<<<<
  *     else:
  *         raise TypeError("Not a NumPy compatible type")
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_1 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_COMPLEX128_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 51; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_COMPLEX256_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 57; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_r = __pyx_t_1;
     __pyx_t_1 = 0;
@@ -1667,22 +1737,22 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_numpy_to_cyspa
   }
   /*else*/ {
 
-    /* "cysparse/types/cysparse_numpy_types.pyx":53
- *         return cp_types.COMPLEX128_T
+    /* "cysparse/types/cysparse_numpy_types.pyx":59
+ *         return cp_types.COMPLEX256_T
  *     else:
  *         raise TypeError("Not a NumPy compatible type")             # <<<<<<<<<<<<<<
  * 
  * def is_numpy_type_compatible(numpy_type):
  */
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 53; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 59; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 53; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 59; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":21
- * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.COMPLEX128_T] = np.complex128
+  /* "cysparse/types/cysparse_numpy_types.pyx":23
+ * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.COMPLEX256_T] = np.complex256
  * 
  * def numpy_to_cysparse_type(numpy_type):             # <<<<<<<<<<<<<<
  *     """
@@ -1703,7 +1773,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_numpy_to_cyspa
   return __pyx_r;
 }
 
-/* "cysparse/types/cysparse_numpy_types.pyx":55
+/* "cysparse/types/cysparse_numpy_types.pyx":61
  *         raise TypeError("Not a NumPy compatible type")
  * 
  * def is_numpy_type_compatible(numpy_type):             # <<<<<<<<<<<<<<
@@ -1742,7 +1812,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_2is_numpy_type
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("is_numpy_type_compatible", 0);
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":63
+  /* "cysparse/types/cysparse_numpy_types.pyx":69
  * 
  *     """
  *     try:             # <<<<<<<<<<<<<<
@@ -1756,14 +1826,14 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_2is_numpy_type
     __Pyx_XGOTREF(__pyx_t_3);
     /*try:*/ {
 
-      /* "cysparse/types/cysparse_numpy_types.pyx":64
+      /* "cysparse/types/cysparse_numpy_types.pyx":70
  *     """
  *     try:
  *         numpy_to_cysparse_type(numpy_type)             # <<<<<<<<<<<<<<
  *         return True
  *     except TypeError:
  */
-      __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_numpy_to_cysparse_type); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 64; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+      __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_numpy_to_cysparse_type); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 70; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       __Pyx_GOTREF(__pyx_t_5);
       __pyx_t_6 = NULL;
       if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_5))) {
@@ -1776,23 +1846,23 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_2is_numpy_type
         }
       }
       if (!__pyx_t_6) {
-        __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_v_numpy_type); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 64; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_v_numpy_type); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 70; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         __Pyx_GOTREF(__pyx_t_4);
       } else {
-        __pyx_t_7 = PyTuple_New(1+1); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 64; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        __pyx_t_7 = PyTuple_New(1+1); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 70; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         __Pyx_GOTREF(__pyx_t_7);
         PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_6); __Pyx_GIVEREF(__pyx_t_6); __pyx_t_6 = NULL;
         __Pyx_INCREF(__pyx_v_numpy_type);
         PyTuple_SET_ITEM(__pyx_t_7, 0+1, __pyx_v_numpy_type);
         __Pyx_GIVEREF(__pyx_v_numpy_type);
-        __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_7, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 64; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_7, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 70; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         __Pyx_GOTREF(__pyx_t_4);
         __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
       }
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-      /* "cysparse/types/cysparse_numpy_types.pyx":65
+      /* "cysparse/types/cysparse_numpy_types.pyx":71
  *     try:
  *         numpy_to_cysparse_type(numpy_type)
  *         return True             # <<<<<<<<<<<<<<
@@ -1810,7 +1880,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_2is_numpy_type
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-    /* "cysparse/types/cysparse_numpy_types.pyx":66
+    /* "cysparse/types/cysparse_numpy_types.pyx":72
  *         numpy_to_cysparse_type(numpy_type)
  *         return True
  *     except TypeError:             # <<<<<<<<<<<<<<
@@ -1820,12 +1890,12 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_2is_numpy_type
     __pyx_t_8 = PyErr_ExceptionMatches(__pyx_builtin_TypeError);
     if (__pyx_t_8) {
       __Pyx_AddTraceback("cysparse.types.cysparse_numpy_types.is_numpy_type_compatible", __pyx_clineno, __pyx_lineno, __pyx_filename);
-      if (__Pyx_GetException(&__pyx_t_4, &__pyx_t_5, &__pyx_t_7) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 66; __pyx_clineno = __LINE__; goto __pyx_L5_except_error;}
+      if (__Pyx_GetException(&__pyx_t_4, &__pyx_t_5, &__pyx_t_7) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 72; __pyx_clineno = __LINE__; goto __pyx_L5_except_error;}
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_GOTREF(__pyx_t_7);
 
-      /* "cysparse/types/cysparse_numpy_types.pyx":67
+      /* "cysparse/types/cysparse_numpy_types.pyx":73
  *         return True
  *     except TypeError:
  *         return False             # <<<<<<<<<<<<<<
@@ -1861,7 +1931,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_2is_numpy_type
     goto __pyx_L0;
   }
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":55
+  /* "cysparse/types/cysparse_numpy_types.pyx":61
  *         raise TypeError("Not a NumPy compatible type")
  * 
  * def is_numpy_type_compatible(numpy_type):             # <<<<<<<<<<<<<<
@@ -1883,7 +1953,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_2is_numpy_type
   return __pyx_r;
 }
 
-/* "cysparse/types/cysparse_numpy_types.pyx":69
+/* "cysparse/types/cysparse_numpy_types.pyx":75
  *         return False
  * 
  * def cysparse_to_numpy_type(cp_types.CySparseType cysparse_type):             # <<<<<<<<<<<<<<
@@ -1904,7 +1974,7 @@ static PyObject *__pyx_pw_8cysparse_5types_20cysparse_numpy_types_5cysparse_to_n
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("cysparse_to_numpy_type (wrapper)", 0);
   assert(__pyx_arg_cysparse_type); {
-    __pyx_v_cysparse_type = ((enum __pyx_t_8cysparse_5types_14cysparse_types_CySparseType)PyInt_AsLong(__pyx_arg_cysparse_type)); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 69; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_cysparse_type = ((enum __pyx_t_8cysparse_5types_14cysparse_types_CySparseType)PyInt_AsLong(__pyx_arg_cysparse_type)); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 75; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -1930,7 +2000,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_4cysparse_to_n
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("cysparse_to_numpy_type", 0);
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":79
+  /* "cysparse/types/cysparse_numpy_types.pyx":85
  *     """
  *     # the test on the argument's type is done by Cython
  *     return CYSPARSE_TYPES_TO_NUMPY_DICT[cysparse_type]             # <<<<<<<<<<<<<<
@@ -1938,11 +2008,11 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_4cysparse_to_n
  * def are_mixed_types_compatible(cp_types.CySparseType cysparse_type, numpy_type):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_CYSPARSE_TYPES_TO_NUMPY_DICT); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 79; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_CYSPARSE_TYPES_TO_NUMPY_DICT); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 85; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyInt_FromLong(__pyx_v_cysparse_type); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 79; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyInt_FromLong(__pyx_v_cysparse_type); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 85; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyObject_GetItem(__pyx_t_1, __pyx_t_2); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 79; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_3 = PyObject_GetItem(__pyx_t_1, __pyx_t_2); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 85; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -1950,7 +2020,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_4cysparse_to_n
   __pyx_t_3 = 0;
   goto __pyx_L0;
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":69
+  /* "cysparse/types/cysparse_numpy_types.pyx":75
  *         return False
  * 
  * def cysparse_to_numpy_type(cp_types.CySparseType cysparse_type):             # <<<<<<<<<<<<<<
@@ -1971,7 +2041,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_4cysparse_to_n
   return __pyx_r;
 }
 
-/* "cysparse/types/cysparse_numpy_types.pyx":81
+/* "cysparse/types/cysparse_numpy_types.pyx":87
  *     return CYSPARSE_TYPES_TO_NUMPY_DICT[cysparse_type]
  * 
  * def are_mixed_types_compatible(cp_types.CySparseType cysparse_type, numpy_type):             # <<<<<<<<<<<<<<
@@ -2012,11 +2082,11 @@ static PyObject *__pyx_pw_8cysparse_5types_20cysparse_numpy_types_7are_mixed_typ
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_numpy_type)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("are_mixed_types_compatible", 1, 2, 2, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 81; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("are_mixed_types_compatible", 1, 2, 2, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 87; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "are_mixed_types_compatible") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 81; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "are_mixed_types_compatible") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 87; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -2024,12 +2094,12 @@ static PyObject *__pyx_pw_8cysparse_5types_20cysparse_numpy_types_7are_mixed_typ
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
-    __pyx_v_cysparse_type = ((enum __pyx_t_8cysparse_5types_14cysparse_types_CySparseType)PyInt_AsLong(values[0])); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 81; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_cysparse_type = ((enum __pyx_t_8cysparse_5types_14cysparse_types_CySparseType)PyInt_AsLong(values[0])); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 87; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
     __pyx_v_numpy_type = values[1];
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("are_mixed_types_compatible", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 81; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("are_mixed_types_compatible", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 87; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("cysparse.types.cysparse_numpy_types.are_mixed_types_compatible", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -2055,15 +2125,15 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_6are_mixed_typ
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("are_mixed_types_compatible", 0);
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":90
+  /* "cysparse/types/cysparse_numpy_types.pyx":96
  * 
  *     """
  *     return cysparse_to_numpy_type(cysparse_type) == numpy_type             # <<<<<<<<<<<<<<
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_cysparse_to_numpy_type); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 90; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_cysparse_to_numpy_type); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 96; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyInt_FromLong(__pyx_v_cysparse_type); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 90; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = PyInt_FromLong(__pyx_v_cysparse_type); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 96; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_4 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_2))) {
@@ -2076,28 +2146,28 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_6are_mixed_typ
     }
   }
   if (!__pyx_t_4) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 90; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 96; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_GOTREF(__pyx_t_1);
   } else {
-    __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 90; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 96; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
     PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_4); __Pyx_GIVEREF(__pyx_t_4); __pyx_t_4 = NULL;
     PyTuple_SET_ITEM(__pyx_t_5, 0+1, __pyx_t_3);
     __Pyx_GIVEREF(__pyx_t_3);
     __pyx_t_3 = 0;
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 90; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 96; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, __pyx_v_numpy_type, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 90; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, __pyx_v_numpy_type, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 96; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":81
+  /* "cysparse/types/cysparse_numpy_types.pyx":87
  *     return CYSPARSE_TYPES_TO_NUMPY_DICT[cysparse_type]
  * 
  * def are_mixed_types_compatible(cp_types.CySparseType cysparse_type, numpy_type):             # <<<<<<<<<<<<<<
@@ -4156,10 +4226,12 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_ValueError, __pyx_k_ValueError, sizeof(__pyx_k_ValueError), 0, 0, 1, 1},
   {&__pyx_n_s_are_mixed_types_compatible, __pyx_k_are_mixed_types_compatible, sizeof(__pyx_k_are_mixed_types_compatible), 0, 0, 1, 1},
   {&__pyx_n_s_complex128, __pyx_k_complex128, sizeof(__pyx_k_complex128), 0, 0, 1, 1},
+  {&__pyx_n_s_complex256, __pyx_k_complex256, sizeof(__pyx_k_complex256), 0, 0, 1, 1},
   {&__pyx_n_s_complex64, __pyx_k_complex64, sizeof(__pyx_k_complex64), 0, 0, 1, 1},
   {&__pyx_n_s_cysparse_to_numpy_type, __pyx_k_cysparse_to_numpy_type, sizeof(__pyx_k_cysparse_to_numpy_type), 0, 0, 1, 1},
   {&__pyx_n_s_cysparse_type, __pyx_k_cysparse_type, sizeof(__pyx_k_cysparse_type), 0, 0, 1, 1},
   {&__pyx_n_s_cysparse_types_cysparse_numpy_ty, __pyx_k_cysparse_types_cysparse_numpy_ty, sizeof(__pyx_k_cysparse_types_cysparse_numpy_ty), 0, 0, 1, 1},
+  {&__pyx_n_s_float128, __pyx_k_float128, sizeof(__pyx_k_float128), 0, 0, 1, 1},
   {&__pyx_n_s_float32, __pyx_k_float32, sizeof(__pyx_k_float32), 0, 0, 1, 1},
   {&__pyx_n_s_float64, __pyx_k_float64, sizeof(__pyx_k_float64), 0, 0, 1, 1},
   {&__pyx_kp_s_home_nikolaj_Documents_WORK_Dom, __pyx_k_home_nikolaj_Documents_WORK_Dom, sizeof(__pyx_k_home_nikolaj_Documents_WORK_Dom), 0, 0, 1, 0},
@@ -4183,7 +4255,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, 0, 0, 0, 0, 0, 0}
 };
 static int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 32; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 34; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 218; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 231; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_builtin_RuntimeError = __Pyx_GetBuiltinName(__pyx_n_s_RuntimeError); if (!__pyx_builtin_RuntimeError) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 802; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -4196,25 +4268,25 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":32
+  /* "cysparse/types/cysparse_numpy_types.pyx":34
  * 
  *     if not np.issctype(numpy_type):
  *         raise TypeError("Not a NumPy type")             # <<<<<<<<<<<<<<
  * 
  *     # we use the == operator defined by NumPy
  */
-  __pyx_tuple_ = PyTuple_Pack(1, __pyx_kp_s_Not_a_NumPy_type); if (unlikely(!__pyx_tuple_)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 32; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple_ = PyTuple_Pack(1, __pyx_kp_s_Not_a_NumPy_type); if (unlikely(!__pyx_tuple_)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 34; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple_);
   __Pyx_GIVEREF(__pyx_tuple_);
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":53
- *         return cp_types.COMPLEX128_T
+  /* "cysparse/types/cysparse_numpy_types.pyx":59
+ *         return cp_types.COMPLEX256_T
  *     else:
  *         raise TypeError("Not a NumPy compatible type")             # <<<<<<<<<<<<<<
  * 
  * def is_numpy_type_compatible(numpy_type):
  */
-  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_s_Not_a_NumPy_compatible_type); if (unlikely(!__pyx_tuple__2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 53; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_s_Not_a_NumPy_compatible_type); if (unlikely(!__pyx_tuple__2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 59; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
 
@@ -4284,53 +4356,53 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__8);
   __Pyx_GIVEREF(__pyx_tuple__8);
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":21
- * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.COMPLEX128_T] = np.complex128
+  /* "cysparse/types/cysparse_numpy_types.pyx":23
+ * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.COMPLEX256_T] = np.complex256
  * 
  * def numpy_to_cysparse_type(numpy_type):             # <<<<<<<<<<<<<<
  *     """
  *     Return the corresponding :program:`CySparse` type when the :program:`NumPy` type is compatible.
  */
-  __pyx_tuple__9 = PyTuple_Pack(1, __pyx_n_s_numpy_type); if (unlikely(!__pyx_tuple__9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 21; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__9 = PyTuple_Pack(1, __pyx_n_s_numpy_type); if (unlikely(!__pyx_tuple__9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 23; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__9);
   __Pyx_GIVEREF(__pyx_tuple__9);
-  __pyx_codeobj__10 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__9, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_nikolaj_Documents_WORK_Dom, __pyx_n_s_numpy_to_cysparse_type, 21, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 21; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__10 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__9, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_nikolaj_Documents_WORK_Dom, __pyx_n_s_numpy_to_cysparse_type, 23, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 23; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":55
+  /* "cysparse/types/cysparse_numpy_types.pyx":61
  *         raise TypeError("Not a NumPy compatible type")
  * 
  * def is_numpy_type_compatible(numpy_type):             # <<<<<<<<<<<<<<
  *     """
  *     Test if a :program:`NumPy` type is compatible with :program:`CySparse`.
  */
-  __pyx_tuple__11 = PyTuple_Pack(1, __pyx_n_s_numpy_type); if (unlikely(!__pyx_tuple__11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 55; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__11 = PyTuple_Pack(1, __pyx_n_s_numpy_type); if (unlikely(!__pyx_tuple__11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 61; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__11);
   __Pyx_GIVEREF(__pyx_tuple__11);
-  __pyx_codeobj__12 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__11, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_nikolaj_Documents_WORK_Dom, __pyx_n_s_is_numpy_type_compatible, 55, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 55; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__12 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__11, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_nikolaj_Documents_WORK_Dom, __pyx_n_s_is_numpy_type_compatible, 61, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 61; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":69
+  /* "cysparse/types/cysparse_numpy_types.pyx":75
  *         return False
  * 
  * def cysparse_to_numpy_type(cp_types.CySparseType cysparse_type):             # <<<<<<<<<<<<<<
  *     """
  *     Return the corresponding compatible :program:`NumPy` type.
  */
-  __pyx_tuple__13 = PyTuple_Pack(2, __pyx_n_s_cysparse_type, __pyx_n_s_cysparse_type); if (unlikely(!__pyx_tuple__13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 69; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__13 = PyTuple_Pack(2, __pyx_n_s_cysparse_type, __pyx_n_s_cysparse_type); if (unlikely(!__pyx_tuple__13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 75; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__13);
   __Pyx_GIVEREF(__pyx_tuple__13);
-  __pyx_codeobj__14 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__13, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_nikolaj_Documents_WORK_Dom, __pyx_n_s_cysparse_to_numpy_type, 69, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 69; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__14 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__13, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_nikolaj_Documents_WORK_Dom, __pyx_n_s_cysparse_to_numpy_type, 75, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 75; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":81
+  /* "cysparse/types/cysparse_numpy_types.pyx":87
  *     return CYSPARSE_TYPES_TO_NUMPY_DICT[cysparse_type]
  * 
  * def are_mixed_types_compatible(cp_types.CySparseType cysparse_type, numpy_type):             # <<<<<<<<<<<<<<
  *     """
  *     Test if two types are compatible.
  */
-  __pyx_tuple__15 = PyTuple_Pack(2, __pyx_n_s_cysparse_type, __pyx_n_s_numpy_type); if (unlikely(!__pyx_tuple__15)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 81; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__15 = PyTuple_Pack(2, __pyx_n_s_cysparse_type, __pyx_n_s_numpy_type); if (unlikely(!__pyx_tuple__15)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 87; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__15);
   __Pyx_GIVEREF(__pyx_tuple__15);
-  __pyx_codeobj__16 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__15, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_nikolaj_Documents_WORK_Dom, __pyx_n_s_are_mixed_types_compatible, 81, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__16)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 81; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__16 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__15, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_nikolaj_Documents_WORK_Dom, __pyx_n_s_are_mixed_types_compatible, 87, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__16)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 87; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -4557,7 +4629,7 @@ PyMODINIT_FUNC PyInit_cysparse_numpy_types(void)
  * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.UINT64_T] = np.uint64
  * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.FLOAT32_T] = np.float32             # <<<<<<<<<<<<<<
  * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.FLOAT64_T] = np.float64
- * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.COMPLEX64_T] = np.complex64
+ * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.FLOAT128_T] = np.float128
  */
   __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 16; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
@@ -4577,8 +4649,8 @@ PyMODINIT_FUNC PyInit_cysparse_numpy_types(void)
  * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.UINT64_T] = np.uint64
  * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.FLOAT32_T] = np.float32
  * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.FLOAT64_T] = np.float64             # <<<<<<<<<<<<<<
+ * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.FLOAT128_T] = np.float128
  * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.COMPLEX64_T] = np.complex64
- * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.COMPLEX128_T] = np.complex128
  */
   __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 17; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
@@ -4597,18 +4669,18 @@ PyMODINIT_FUNC PyInit_cysparse_numpy_types(void)
   /* "cysparse/types/cysparse_numpy_types.pyx":18
  * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.FLOAT32_T] = np.float32
  * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.FLOAT64_T] = np.float64
- * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.COMPLEX64_T] = np.complex64             # <<<<<<<<<<<<<<
+ * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.FLOAT128_T] = np.float128             # <<<<<<<<<<<<<<
+ * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.COMPLEX64_T] = np.complex64
  * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.COMPLEX128_T] = np.complex128
- * 
  */
   __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 18; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_complex64); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 18; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_float128); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 18; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_CYSPARSE_TYPES_TO_NUMPY_DICT); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 18; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_COMPLEX64_T); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 18; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_FLOAT128_T); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 18; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   if (unlikely(PyObject_SetItem(__pyx_t_1, __pyx_t_3, __pyx_t_2) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 18; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -4617,82 +4689,124 @@ PyMODINIT_FUNC PyInit_cysparse_numpy_types(void)
 
   /* "cysparse/types/cysparse_numpy_types.pyx":19
  * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.FLOAT64_T] = np.float64
- * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.COMPLEX64_T] = np.complex64
- * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.COMPLEX128_T] = np.complex128             # <<<<<<<<<<<<<<
- * 
- * def numpy_to_cysparse_type(numpy_type):
+ * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.FLOAT128_T] = np.float128
+ * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.COMPLEX64_T] = np.complex64             # <<<<<<<<<<<<<<
+ * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.COMPLEX128_T] = np.complex128
+ * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.COMPLEX256_T] = np.complex256
  */
   __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 19; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_complex128); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 19; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_complex64); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 19; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_CYSPARSE_TYPES_TO_NUMPY_DICT); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 19; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_COMPLEX128_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 19; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_COMPLEX64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 19; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   if (unlikely(PyObject_SetItem(__pyx_t_2, __pyx_t_1, __pyx_t_3) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 19; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
+  /* "cysparse/types/cysparse_numpy_types.pyx":20
+ * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.FLOAT128_T] = np.float128
+ * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.COMPLEX64_T] = np.complex64
+ * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.COMPLEX128_T] = np.complex128             # <<<<<<<<<<<<<<
+ * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.COMPLEX256_T] = np.complex256
+ * 
+ */
+  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 20; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_complex128); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 20; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_CYSPARSE_TYPES_TO_NUMPY_DICT); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 20; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_2 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_COMPLEX128_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 20; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  if (unlikely(PyObject_SetItem(__pyx_t_3, __pyx_t_2, __pyx_t_1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 20; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
   /* "cysparse/types/cysparse_numpy_types.pyx":21
+ * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.COMPLEX64_T] = np.complex64
  * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.COMPLEX128_T] = np.complex128
+ * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.COMPLEX256_T] = np.complex256             # <<<<<<<<<<<<<<
+ * 
+ * def numpy_to_cysparse_type(numpy_type):
+ */
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 21; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_complex256); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 21; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_CYSPARSE_TYPES_TO_NUMPY_DICT); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 21; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_3 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_COMPLEX256_T); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 21; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_3);
+  if (unlikely(PyObject_SetItem(__pyx_t_1, __pyx_t_3, __pyx_t_2) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 21; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "cysparse/types/cysparse_numpy_types.pyx":23
+ * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.COMPLEX256_T] = np.complex256
  * 
  * def numpy_to_cysparse_type(numpy_type):             # <<<<<<<<<<<<<<
  *     """
  *     Return the corresponding :program:`CySparse` type when the :program:`NumPy` type is compatible.
  */
-  __pyx_t_3 = PyCFunction_NewEx(&__pyx_mdef_8cysparse_5types_20cysparse_numpy_types_1numpy_to_cysparse_type, NULL, __pyx_n_s_cysparse_types_cysparse_numpy_ty); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 21; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_numpy_to_cysparse_type, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 21; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_8cysparse_5types_20cysparse_numpy_types_1numpy_to_cysparse_type, NULL, __pyx_n_s_cysparse_types_cysparse_numpy_ty); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 23; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_numpy_to_cysparse_type, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 23; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":55
+  /* "cysparse/types/cysparse_numpy_types.pyx":61
  *         raise TypeError("Not a NumPy compatible type")
  * 
  * def is_numpy_type_compatible(numpy_type):             # <<<<<<<<<<<<<<
  *     """
  *     Test if a :program:`NumPy` type is compatible with :program:`CySparse`.
  */
-  __pyx_t_3 = PyCFunction_NewEx(&__pyx_mdef_8cysparse_5types_20cysparse_numpy_types_3is_numpy_type_compatible, NULL, __pyx_n_s_cysparse_types_cysparse_numpy_ty); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 55; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_is_numpy_type_compatible, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 55; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_8cysparse_5types_20cysparse_numpy_types_3is_numpy_type_compatible, NULL, __pyx_n_s_cysparse_types_cysparse_numpy_ty); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 61; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_is_numpy_type_compatible, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 61; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":69
+  /* "cysparse/types/cysparse_numpy_types.pyx":75
  *         return False
  * 
  * def cysparse_to_numpy_type(cp_types.CySparseType cysparse_type):             # <<<<<<<<<<<<<<
  *     """
  *     Return the corresponding compatible :program:`NumPy` type.
  */
-  __pyx_t_3 = PyCFunction_NewEx(&__pyx_mdef_8cysparse_5types_20cysparse_numpy_types_5cysparse_to_numpy_type, NULL, __pyx_n_s_cysparse_types_cysparse_numpy_ty); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 69; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_cysparse_to_numpy_type, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 69; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_8cysparse_5types_20cysparse_numpy_types_5cysparse_to_numpy_type, NULL, __pyx_n_s_cysparse_types_cysparse_numpy_ty); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 75; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_cysparse_to_numpy_type, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 75; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":81
+  /* "cysparse/types/cysparse_numpy_types.pyx":87
  *     return CYSPARSE_TYPES_TO_NUMPY_DICT[cysparse_type]
  * 
  * def are_mixed_types_compatible(cp_types.CySparseType cysparse_type, numpy_type):             # <<<<<<<<<<<<<<
  *     """
  *     Test if two types are compatible.
  */
-  __pyx_t_3 = PyCFunction_NewEx(&__pyx_mdef_8cysparse_5types_20cysparse_numpy_types_7are_mixed_types_compatible, NULL, __pyx_n_s_cysparse_types_cysparse_numpy_ty); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 81; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_are_mixed_types_compatible, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 81; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_8cysparse_5types_20cysparse_numpy_types_7are_mixed_types_compatible, NULL, __pyx_n_s_cysparse_types_cysparse_numpy_ty); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 87; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_are_mixed_types_compatible, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 87; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "cysparse/types/cysparse_numpy_types.pyx":1
  * cimport cysparse.types.cysparse_types as cp_types             # <<<<<<<<<<<<<<
  * cimport numpy as cnp
  * #from numpy.math cimport INFINITY
  */
-  __pyx_t_3 = PyDict_New(); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_2 = PyDict_New(); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "../local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":979
  *      arr.base = baseptr
