@@ -22,9 +22,6 @@ cdef class TransposedSparseMatrix:
         self.A = A
         Py_INCREF(self.A)  # increase ref to object to avoid the user deleting it explicitly or implicitly
 
-        self.__cp_type = self.A.cp_type
-        #self.__cp_type.dtype = self.A.cp_type.dtype
-        #self.__cp_type.itype = self.A.cp_type.itype
 
     property nrow:
         def __get__(self):
@@ -48,7 +45,7 @@ cdef class TransposedSparseMatrix:
 
     property dtype:
         def __get__(self):
-            return self.__cp_type.dtype
+            return self.A.cp_type.dtype
 
         def __set__(self, value):
             raise AttributeError('Attribute dtype is read-only')
@@ -58,7 +55,7 @@ cdef class TransposedSparseMatrix:
 
     property itype:
         def __get__(self):
-            return self.__cp_type.itype
+            return self.A.cp_type.itype
 
         def __set__(self, value):
             raise AttributeError('Attribute itype is read-only')

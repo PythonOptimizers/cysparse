@@ -905,7 +905,6 @@ struct __pyx_obj_8cysparse_6sparse_5t_mat_TransposedSparseMatrix {
   PyObject *ncol;
   PyObject *dtype;
   PyObject *itype;
-  struct __pyx_t_8cysparse_5types_14cysparse_types_CPType __pyx___cp_type;
   PyObject *shape;
   PyObject *T;
 };
@@ -930,6 +929,8 @@ struct __pyx_obj_8cysparse_6sparse_5s_mat_SparseMatrix {
   int __pyx___transposed_proxy_matrix_generated;
   PyObject *shape;
   PyObject *T;
+  PyObject *dtype;
+  PyObject *itype;
 };
 
 

@@ -25,8 +25,6 @@ cdef class TransposedSparseMatrix:
         object dtype
         object itype
 
-        CPType __cp_type # private CPType, only accessible in Cython
-
         object shape     # for compatibility with numpy, PyKrylov, etc.
 
         object T         # ref to the original matrix

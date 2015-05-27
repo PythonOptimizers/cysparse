@@ -54,8 +54,7 @@ cdef class SparseMatrix:
     # for compatibility with numpy, PyKrylov, etc
     property shape:
         def __get__(self):
-            self.shape = (self.nrow, self.ncol)
-            return self.shape
+            return (self.nrow, self.ncol)
 
         def __set__(self, value):
             raise AttributeError('Attribute shape is read-only')
@@ -63,9 +62,28 @@ cdef class SparseMatrix:
         def __del__(self):
             raise AttributeError('Attribute shape is read-only')
 
+    property dtype:
+        def __get__(self):
+            return self.cp_type.dtype
+
+        def __set__(self, value):
+            raise AttributeError('Attribute dtype is read-only')
+
+        def __del__(self):
+            raise AttributeError('Attribute dtype is read-only')
+
+    property itype:
+        def __get__(self):
+            return self.cp_type.itype
+
+        def __set__(self, value):
+            raise AttributeError('Attribute itype is read-only')
+
+        def __del__(self):
+            raise AttributeError('Attribute itype is read-only')
+
     property T:
         def __get__(self):
-            #raise NotImplementedError("Not implemented in base class")
             if not self.__transposed_proxy_matrix_generated:
                 # create proxy
                 self.__transposed_proxy_matrix = TransposedSparseMatrix(self)

@@ -16,7 +16,6 @@ l1.print_to(sys.stdout)
 a = np.array([1,1,1], dtype=np.float64)
 
 print "=" * 80
-
 T = l1.T
 
 

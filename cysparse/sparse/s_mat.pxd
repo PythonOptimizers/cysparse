@@ -26,3 +26,5 @@ cdef class SparseMatrix:
 
         object T         # proxy to the transposed matrix
 
+        object dtype
+        object itype
