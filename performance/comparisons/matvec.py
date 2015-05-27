@@ -5,7 +5,7 @@ We compare the libraries:
 
 - :program:`PySparse`;
 - :program:`CySparse` and
-- :program:`Scipy.sparse`
+- :program:`SciPy.sparse`
 
 
 """
@@ -45,6 +45,7 @@ def construct_pysparse_matrix(n, nbr_elements):
 
     return A
 
+
 def construct_scipy_sparse_matrix(n, nbr_elements):
     A = lil_matrix((n, n), dtype=np.float64)
 
@@ -52,11 +53,11 @@ def construct_scipy_sparse_matrix(n, nbr_elements):
         A[i % n, (2 * i + 1) % n] = i / 3
 
     return A
+
+
 ########################################################################################################################
 # Benchmark
 ########################################################################################################################
-
-
 class LLMatMatVecBenchmark(benchmark.Benchmark):
 
 
@@ -158,4 +159,4 @@ class LLMatMatVecBenchmark_4(LLMatMatVecBenchmark):
         self.v = np.arange(0, self.size, dtype=np.float64)
 
 if __name__ == '__main__':
-    benchmark.main(format="markdown", numberFormat="%.4g") # each is a variable in the above classes
+    benchmark.main(format="markdown", numberFormat="%.4g")

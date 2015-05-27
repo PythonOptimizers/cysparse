@@ -31,8 +31,14 @@ this means that the chain of free elements is empty.
 
 Then chain can be traversed by following the ``link`` array:
 
-..  image:: images/ll_mat_link.*
-    :width: 400 pt
+.. figure:: images/ll_mat_link.*
+    :width: 400pt
+    :align: center
+    :alt: alternate text
+
+    Chains in an ``LLSparseMatrix`` matrix
+
+
 
 Two chains are depicted in the picture. First, the chain with free elements. These are elements that where removed. The ``free`` pointer points to the first element of this chain and ``link[free]`` if :math:`f_0` which points to 
 the second element in this chain. Whenever a new elements is added, it will take the place of this first element.
@@ -85,7 +91,30 @@ This means that looking for an element ``A[i, k]``, one can simply use:
         k = self.link[k]
 
 
+Insertion of a new element in more details
+---------------------------------------------
 
+The next figure represent the internal state of a ``LLSparseMatrix``:
+
+.. figure:: images/ll_mat_link_swap_left.*
+    :width: 300pt
+    :align: center
+    :alt: alternate text
+
+    **Before** insertion of element :math:`(j, v, k)` in a ``LLSparseMatrix`` matrix
+    
+We have :math:`j_1 < j_2` and :math:`k_1` points to element :math:`k_2`. Let's say we want to insert an new element :math:`(j, v, k)` with column index :math:`j` such that :math:`j_1 <  j < j_2`.
+To preserve the ordering, we have to insert this element **between** the elements :math:`k_1` and :math:`k_2` as shown on the following figure:
+
+
+.. figure:: images/ll_mat_link_swap_right.*
+    :width: 300pt
+    :align: center
+    :alt: alternate text
+
+    **After** insertion of element :math:`(j, v, k)` in a ``LLSparseMatrix`` matrix
+
+The element :math:`(j, v, k)` was inserted in place of the first free element pointed by ``free`` and :math:`k_1` now points to this element. Notice also that now, ``free`` points to the next free element :math:`f_1`.
 
 Meta-programming aka code generation
 =====================================
