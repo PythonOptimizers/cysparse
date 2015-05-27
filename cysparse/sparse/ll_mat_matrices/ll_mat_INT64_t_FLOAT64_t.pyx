@@ -795,7 +795,7 @@ cdef class LLSparseMatrix_INT64_t_FLOAT64_t(MutableSparseMatrix_INT64_t_FLOAT64_
     ####################################################################################################################
     # String representations
     ####################################################################################################################
-    def print_to(self, OUT, width=9, print_big_matrices=False):
+    def print_to(self, OUT, width=9, print_big_matrices=False, transposed=False):
         """
         Print content of matrix to output stream.
 

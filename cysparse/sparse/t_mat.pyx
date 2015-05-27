@@ -127,3 +127,5 @@ cdef class TransposedSparseMatrix:
         #return self.A.create_submatrix()
         pass
 
+    def print_to(self, OUT):
+        return self.A.print_to(OUT, transposed=True)
