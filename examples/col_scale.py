@@ -30,3 +30,15 @@ v = np.arange(0, 10, dtype=np.float64)
 l1.col_scale(v)
 
 l1.print_to(sys.stdout)
+
+########################################################################################################################
+print "=" * 80
+
+v = np.arange(0, 100, dtype=np.float64)
+
+for i in xrange(10):
+    v[i * 10] = i
+
+l1.col_scale(v[::10])
+
+l1.print_to(sys.stdout)

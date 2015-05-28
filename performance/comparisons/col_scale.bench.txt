@@ -1,0 +1,35 @@
+# Benchmark Report
+
+## Simple col_scale with 100 elements and size = 1,000
+
+    name | rank | runs |      mean |     stdev | baseline
+---------|------|------|-----------|-----------|---------
+cysparse |    1 |   10 | 4.411e-06 | 4.102e-06 |        1
+pysparse |    2 |   10 | 6.843e-06 | 1.833e-06 |    1.551
+
+## Simple col_scale with 1000 elements and size = 10,000
+
+    name | rank | runs |      mean |     stdev | baseline
+---------|------|------|-----------|-----------|---------
+cysparse |    1 |   10 | 1.454e-05 | 9.926e-07 |        1
+pysparse |    2 |   10 | 4.506e-05 | 4.207e-06 |    3.098
+
+## Simple col_scale with 10000 elements and size = 100,000
+
+    name | rank | runs |      mean |     stdev | baseline
+---------|------|------|-----------|-----------|---------
+cysparse |    1 |   10 | 0.0001252 | 2.914e-06 |        1
+pysparse |    2 |   10 | 0.0004472 | 6.503e-05 |    3.572
+
+## Simple col_scale with 80,000 elements and size = 100,000
+
+    name | rank | runs |      mean |     stdev | baseline
+---------|------|------|-----------|-----------|---------
+cysparse |    1 |   10 | 0.0001695 | 1.044e-05 |        1
+pysparse |    2 |   10 | 0.0007428 | 3.136e-05 |    4.383
+
+Total runs: 80 run in arbitrary order
+Python version: 2.7.5+
+System: x86_64 Linux 3.11.0-12-generic
+Version: benchmark v0.1.5
+Date: 2015-05-28 15:17:33

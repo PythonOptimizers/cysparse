@@ -814,17 +814,30 @@ cdef class LLSparseMatrix_INT64_t_COMPLEX64_t(MutableSparseMatrix_INT64_t_COMPLE
         cdef:
             INT64_t k, i
 
-        # direct access to vector b
+        # strides
+        cdef size_t sd = sizeof(COMPLEX64_t)
+        cdef INT64_t incx
+
+        # direct access to vector v
         cdef COMPLEX64_t * v_data = <COMPLEX64_t *> cnp.PyArray_DATA(v)
 
-        for i from 0 <= i < self.nrow:
-            k = self.root[i]
-            while k != -1:
+        # test if v vector is C-contiguous or not
+        if cnp.PyArray_ISCONTIGUOUS(v):
+            for i from 0 <= i < self.nrow:
+                k = self.root[i]
+                while k != -1:
+                    self.val[k] *= v_data[self.col[k]]
 
-                self.val[k] *= v_data[self.col[k]]
+                    k = self.link[k]
 
-                k = self.link[k]
+        else:
+            incx = v.strides[0] / sd
+            for i from 0 <= i < self.nrow:
+                k = self.root[i]
+                while k != -1:
+                    self.val[k] *= v_data[self.col[k]*incx]
 
+                    k = self.link[k]
 
     ####################################################################################################################
     # String representations
