@@ -98,3 +98,4 @@ cdef struct CPType:
 # Functions
 ########################################################################################################################
 cpdef int result_type(CySparseType type1, CySparseType type2) except -1
+cpdef int result_real_sum_type(CySparseType type1)

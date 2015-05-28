@@ -58,6 +58,11 @@ cdef class LLSparseMatrix_@index@_@type@(MutableSparseMatrix_@index@_@type@):
     cpdef object items(self)
     cpdef find(self)
 
-
+    ####################################################################################################################
+    # Norms
+    ####################################################################################################################
+    cdef _norm_inf(self)
+    cdef _norm_one(self)
+    cdef _norm_frob(self)
 
 #cdef @index@ * create_c_array_indices_from_python_object_@index@(@index@ max_length, PyObject * obj, @index@ * number_of_elements) except NULL

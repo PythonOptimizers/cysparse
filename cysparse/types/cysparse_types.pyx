@@ -163,6 +163,10 @@ def is_element_type(cp_types.CySparseType type1):
     """
     return type1 in ELEMENT_TYPES
 
+########################################################################################################################
+# CASTS
+########################################################################################################################
+
 # EXPLICIT TYPE TESTS
 cpdef int result_type(cp_types.CySparseType type1, cp_types.CySparseType type2) except -1:
     """
@@ -251,6 +255,32 @@ cpdef int result_type(cp_types.CySparseType type1, cp_types.CySparseType type2) 
 
     return r_type
 
+
+cpdef int result_real_sum_type(cp_types.CySparseType type1):
+    """
+    Returns the best *real* type for a **real** sum for a given type.
+
+    Args:
+        type1:
+
+    """
+    cdef:
+        cp_types.CySparseType r_type
+
+    if type1 in [cp_types.INT32_T, cp_types.UINT32_T, cp_types.INT64_T, cp_types.UINT64_T]:
+        r_type = cp_types.FLOAT64_T
+    elif type1 in [cp_types.FLOAT32_T, cp_types.FLOAT64_T]:
+        r_type = cp_types.FLOAT64_T
+    elif type1 in [cp_types.FLOAT128_T]:
+        r_type = cp_types.FLOAT128_T
+    elif type1 in [cp_types.COMPLEX64_T, cp_types.COMPLEX128_T]:
+        r_type = cp_types.FLOAT64_T
+    elif type1 in [cp_types.COMPLEX256_T]:
+        r_type = cp_types.FLOAT128_T
+    else:
+        raise TypeError("Not a recognized type")
+
+    return r_type
 
 ########################################################################################################################
 # I/O String/type conversions

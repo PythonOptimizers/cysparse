@@ -193,8 +193,10 @@ We use the following basic types:
 ``UINT64_t``                    ``unsigned long``
 ``FLOAT32_t``                   ``float``
 ``FLOAT64_t``                   ``double``
+``FLOAT128_t``                  ``long double``
 ``COMPLEX64_t``                 ``float complex``
 ``COMPLEX128_t``                ``double complex``
+``COMPLEX256_t``                ``long double complex``
 ==============================  ==============================
 
 

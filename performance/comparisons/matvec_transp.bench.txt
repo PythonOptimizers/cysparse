@@ -1,0 +1,39 @@
+# Benchmark Report
+
+## A^t * b with 100 elements and size = 1,000
+
+     name | rank | runs |      mean |     stdev | baseline
+----------|------|------|-----------|-----------|---------
+ pysparse |    1 |  100 | 6.478e-06 | 1.255e-06 |        1
+cysparse2 |    2 |  100 | 8.054e-06 | 1.187e-06 |    1.243
+ cysparse |    3 |  100 | 9.637e-06 | 2.506e-06 |    1.488
+
+## A^t * b with 1,000 elements and size = 10,000
+
+     name | rank | runs |      mean |     stdev | baseline
+----------|------|------|-----------|-----------|---------
+ pysparse |    1 |  100 | 2.312e-05 | 3.462e-06 |        1
+cysparse2 |    2 |  100 | 2.478e-05 | 2.566e-06 |    1.071
+ cysparse |    3 |  100 |  2.64e-05 | 9.534e-07 |    1.142
+
+## A^t * b with 10,000 elements and size = 100,000
+
+     name | rank | runs |      mean |     stdev | baseline
+----------|------|------|-----------|-----------|---------
+ pysparse |    1 |  100 | 0.0001127 | 3.481e-05 |        1
+ cysparse |    2 |  100 | 0.0001174 | 4.744e-05 |    1.042
+cysparse2 |    3 |  100 | 0.0001217 | 5.222e-05 |     1.08
+
+## A^t * b with 80,000 elements and size = 100,000
+
+     name | rank | runs |      mean |     stdev | baseline
+----------|------|------|-----------|-----------|---------
+ cysparse |    1 |  100 | 0.0001888 | 1.501e-05 |        1
+ pysparse |    2 |  100 |   0.00019 | 2.162e-05 |    1.006
+cysparse2 |    3 |  100 |   0.00019 | 3.177e-05 |    1.006
+
+Total runs: 1200 run in arbitrary order
+Python version: 2.7.5+
+System: x86_64 Linux 3.11.0-12-generic
+Version: benchmark v0.1.5
+Date: 2015-05-28 17:18:41

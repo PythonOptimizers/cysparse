@@ -71,10 +71,26 @@ cdef extern from "Python.h":
 cdef extern from "complex.h":
     float crealf(float complex z)
     float cimagf(float complex z)
+
     double creal(double complex z)
     double cimag(double complex z)
+
     long double creall(long double complex z)
     long double cimagl(long double complex z)
+
+    double cabs(double complex)
+    float cabsf(float complex)
+    long double cabsl(long double complex)
+
+cdef extern from 'math.h':
+    double fabs  (double x)
+    float fabsf (float x)
+    long double fabsl (long double x)
+
+    double sqrt (double x)
+    float sqrtf (float x)
+    long double sqrtl (long double x)
+
 
 ########################################################################################################################
 # CySparse cimport/import to avoid circular dependencies
@@ -860,6 +876,7 @@ cdef class LLSparseMatrix_INT64_t_FLOAT128_t(MutableSparseMatrix_INT64_t_FLOAT12
         cdef INT64_t incx
 
         # direct access to vector v
+        # TODO: it could be worth to copy the array in case of stride...
         cdef FLOAT128_t * v_data = <FLOAT128_t *> cnp.PyArray_DATA(v)
 
         # test if v vector is C-contiguous or not
@@ -884,6 +901,132 @@ cdef class LLSparseMatrix_INT64_t_FLOAT128_t(MutableSparseMatrix_INT64_t_FLOAT12
                     self.val[k] *= val
 
                     k = self.link[k]
+
+    ####################################################################################################################
+    # Norms
+    ####################################################################################################################
+    def norm(self, norm_name):
+        """
+        Computes a norm of the matrix.
+
+        Args:
+            norm_name: Can be '1', 'inf',
+        """
+        if norm_name == 'inf': # ||A||_\infty
+            return self._norm_inf()
+        elif norm_name == '1': # ||A||_1
+            return self._norm_one()
+        elif norm_name == 'frob': # Frobenius norm
+            return self._norm_frob()
+        else:
+            raise NotImplementedError("This type ('%s') of norm is not implemented (yet?)" % norm_name)
+
+    cdef _norm_one(self):
+        """
+        Computes :math:`||A||_1`.
+
+        Warning:
+            Only works if the matrix is **not** symmetric!
+
+        """
+        assert not self.is_symmetric, "Not implemented for symmetric matrices"
+
+        cdef:
+            FLOAT128_t max_col_sum
+            INT64_t i, k
+
+        # create temp array for column results
+        cdef FLOAT128_t * col_sum = <FLOAT128_t *> calloc(self.ncol, sizeof(FLOAT128_t))
+
+        # compute sum of columns
+        for i from 0<= i < self.nrow:
+            k = self.root[i]
+
+            # EXPLICIT TYPE TESTS
+            while k != -1:
+
+                col_sum[self.col[k]] += fabsl(self.val[k])
+
+                k = self.link[k]
+
+        # compute max of all column sums
+        max_col_sum = <FLOAT128_t> 0.0
+
+        for i from 0 <= i < self.ncol:
+            if col_sum[i] > max_col_sum:
+                max_col_sum = col_sum[i]
+
+        free(col_sum)
+
+        return max_col_sum
+
+    cdef _norm_inf(self):
+        """
+        Computes :math:`||A||_\infty`.
+
+        Warning:
+            Only works if the matrix is **not** symmetric!
+        """
+        assert not self.is_symmetric, "Not implemented for symmetric matrices"
+
+        cdef:
+            FLOAT128_t max_row_sum, row_sum
+            INT64_t i, k
+
+        max_row_sum = <FLOAT128_t> 0.0
+
+        for i from 0<= i < self.nrow:
+            k = self.root[i]
+
+            row_sum = <FLOAT128_t> 0.0
+
+            # EXPLICIT TYPE TESTS
+            while k != -1:
+
+                row_sum += fabsl(self.val[k])
+
+                k = self.link[k]
+
+            if row_sum > max_row_sum:
+                max_row_sum = row_sum
+
+        return max_row_sum
+
+    cdef _norm_frob(self):
+        """
+        Computes the Frobenius norm.
+
+
+        """
+        cdef:
+            FLOAT128_t norm_sum, norm
+            INT64_t i, k
+            FLOAT128_t abs_val, abs_val_square
+
+        norm_sum = <FLOAT128_t> 0.0
+
+        for i from 0<= i < self.nrow:
+            k = self.root[i]
+
+            # EXPLICIT TYPE TESTS
+            while k != -1:
+
+                abs_val = fabsl(self.val[k])
+
+
+                abs_val_square = abs_val * abs_val
+                norm_sum += abs_val_square
+                if self.is_symmetric and i != self.col[k]:
+                    norm_sum += abs_val_square
+
+                k = self.link[k]
+
+
+        norm = sqrtl(norm_sum)
+
+
+        return norm
+
 
     ####################################################################################################################
     # String representations

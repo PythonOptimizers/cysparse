@@ -1,0 +1,35 @@
+# Benchmark Report
+
+## Frobenius norm with 100 elements and size = 1,000 for a symmetrical matrix
+
+    name | rank | runs |      mean |     stdev | baseline
+---------|------|------|-----------|-----------|---------
+cysparse |    1 |  100 |     2e-06 | 5.985e-07 |        1
+pysparse |    2 |  100 | 2.258e-06 | 6.298e-07 |    1.129
+
+## Frobenius norm with 1,000 elements and size = 10,000 for a symmetrical matrix
+
+    name | rank | runs |      mean |     stdev | baseline
+---------|------|------|-----------|-----------|---------
+cysparse |    1 |  100 | 1.296e-05 | 4.309e-07 |        1
+pysparse |    2 |  100 | 2.415e-05 | 0.0001057 |    1.863
+
+## Frobenius norm with 10,000 elements and size = 100,000 for a symmetrical matrix
+
+    name | rank | runs |      mean |     stdev | baseline
+---------|------|------|-----------|-----------|---------
+cysparse |    1 |  100 | 0.0001219 | 3.315e-06 |        1
+pysparse |    2 |  100 | 0.0001236 | 2.942e-06 |    1.014
+
+## Frobenius norm with 80,000 elements and size = 100,000 for a symmetrical matrix
+
+    name | rank | runs |      mean |     stdev | baseline
+---------|------|------|-----------|-----------|---------
+pysparse |    1 |  100 | 0.0001494 | 4.654e-06 |        1
+cysparse |    2 |  100 | 0.0001496 | 4.518e-06 |    1.001
+
+Total runs: 800 run in arbitrary order
+Python version: 2.7.5+
+System: x86_64 Linux 3.11.0-12-generic
+Version: benchmark v0.1.5
+Date: 2015-05-28 21:40:43

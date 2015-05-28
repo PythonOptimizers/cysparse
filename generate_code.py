@@ -112,6 +112,37 @@ def cysparse_type_to_numpy_type(cysparse_type):
     return cysparse_type.lower()[:-2]
 
 
+def cysparse_type_to_real_sum_cysparse_type(cysparse_type):
+    """
+    Returns the best *real* type for a **real** sum for a given type.
+
+    For instance:
+
+        INT32_t -> FLOAT64_t
+    Args:
+        cysparse_type:
+
+    """
+
+    r_type = None
+
+    if cysparse_type in ['INT32_t', 'UINT32_t', 'INT64_t', 'UINT64_t']:
+        r_type = 'FLOAT64_t'
+    elif cysparse_type in ['FLOAT32_t', 'FLOAT64_t']:
+        r_type = 'FLOAT64_t'
+    elif cysparse_type in ['FLOAT128_t']:
+        r_type = 'FLOAT128_t'
+    elif cysparse_type in ['COMPLEX64_t', 'COMPLEX128_t']:
+        r_type = 'FLOAT64_t'
+    elif cysparse_type in ['COMPLEX256_t']:
+        r_type = 'FLOAT128_t'
+    else:
+        raise TypeError("Not a recognized type")
+
+    assert r_type in ['FLOAT64_t', 'FLOAT128_t']
+
+    return r_type
+
 #################################################################################################
 # COMMON STUFF
 #################################################################################################
@@ -144,6 +175,7 @@ GENERAL_ENVIRONMENT = Environment(
 GENERAL_ENVIRONMENT.filters['type2enum'] = type2enum
 GENERAL_ENVIRONMENT.filters['cysparse_type_to_numpy_c_type'] = cysparse_type_to_numpy_c_type
 GENERAL_ENVIRONMENT.filters['cysparse_type_to_numpy_type'] = cysparse_type_to_numpy_type
+GENERAL_ENVIRONMENT.filters['cysparse_type_to_real_sum_cysparse_type'] = cysparse_type_to_real_sum_cysparse_type
 
 
 def clean_cython_files(logger, directory, file_list=None):

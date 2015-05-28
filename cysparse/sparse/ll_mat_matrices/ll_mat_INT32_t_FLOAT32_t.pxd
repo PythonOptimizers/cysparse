@@ -55,6 +55,11 @@ cdef class LLSparseMatrix_INT32_t_FLOAT32_t(MutableSparseMatrix_INT32_t_FLOAT32_
     cpdef object items(self)
     cpdef find(self)
 
-
+    ####################################################################################################################
+    # Norms
+    ####################################################################################################################
+    cdef _norm_inf(self)
+    cdef _norm_one(self)
+    cdef _norm_frob(self)
 
 #cdef INT32_t * create_c_array_indices_from_python_object_INT32_t(INT32_t max_length, PyObject * obj, INT32_t * number_of_elements) except NULL
