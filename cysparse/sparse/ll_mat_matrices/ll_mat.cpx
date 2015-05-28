@@ -875,7 +875,6 @@ YOU HAVE TO DEFINE OR CAST YOUR NEW UNRECOGNIZED TYPE
             v:
         """
         # TODO: maybe accept something else than only an numpy array?
-        # TODO: test for non contiguous arrays...
         # TODO: benchmark.. we don't use the same approach than PySparse at all
 
         # test dimensions
@@ -907,6 +906,54 @@ YOU HAVE TO DEFINE OR CAST YOUR NEW UNRECOGNIZED TYPE
                 k = self.root[i]
                 while k != -1:
                     self.val[k] *= v_data[self.col[k]*incx]
+
+                    k = self.link[k]
+
+    def row_scale(self, cnp.ndarray[cnp.@type|cysparse_type_to_numpy_c_type@, ndim=1] v):
+        """
+        Scale the i:sup:`th` row of A by ``v[i]`` in place for ``i=0, ..., nrow-1``
+
+        Args:
+            v:
+        """
+        # TODO: maybe accept something else than only an numpy array?
+
+        # test dimensions
+        if self.nrow != v.size:
+            raise IndexError("Dimensions must agree ([%d,%d] and [%d, %d])" % (self.nrow, self.ncol, v.size, 1))
+
+        cdef:
+            @index@ k, i
+            @type@ val
+
+        # strides
+        cdef size_t sd = sizeof(@type@)
+        cdef @index@ incx
+
+        # direct access to vector v
+        # TODO: it could be worth to copy the array in case of stride...
+        cdef @type@ * v_data = <@type@ *> cnp.PyArray_DATA(v)
+
+        # test if v vector is C-contiguous or not
+        if cnp.PyArray_ISCONTIGUOUS(v):
+
+            for i from 0 <= i < self.nrow:
+                k = self.root[i]
+                val = v_data[i]
+
+                while k != -1:
+                    self.val[k] *= val
+
+                    k = self.link[k]
+
+        else:
+            incx = v.strides[0] / sd
+            for i from 0 <= i < self.nrow:
+                k = self.root[i]
+                val = v_data[i * incx]
+
+                while k != -1:
+                    self.val[k] *= val
 
                     k = self.link[k]
 

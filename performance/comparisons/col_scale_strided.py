@@ -36,7 +36,7 @@ def construct_sparse_matrix(A, n, nbr_elements):
 class LLMatColScaleStridedBenchmark(benchmark.Benchmark):
 
 
-    label = "Simple col_scale with 100 elements and size = 1,000 and a strided NumPy vector"
+    label = "Simple col_scale with 100 elements and size = 1,000 and a strided NumPy vector (stride = 10)"
     each = 10
 
 

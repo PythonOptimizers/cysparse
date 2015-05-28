@@ -802,7 +802,6 @@ cdef class LLSparseMatrix_INT32_t_INT64_t(MutableSparseMatrix_INT32_t_INT64_t):
             v:
         """
         # TODO: maybe accept something else than only an numpy array?
-        # TODO: test for non contiguous arrays...
         # TODO: benchmark.. we don't use the same approach than PySparse at all
 
         # test dimensions
@@ -834,6 +833,53 @@ cdef class LLSparseMatrix_INT32_t_INT64_t(MutableSparseMatrix_INT32_t_INT64_t):
                 k = self.root[i]
                 while k != -1:
                     self.val[k] *= v_data[self.col[k]*incx]
+
+                    k = self.link[k]
+
+    def row_scale(self, cnp.ndarray[cnp.npy_int64, ndim=1] v):
+        """
+        Scale the i:sup:`th` row of A by ``v[i]`` in place for ``i=0, ..., nrow-1``
+
+        Args:
+            v:
+        """
+        # TODO: maybe accept something else than only an numpy array?
+
+        # test dimensions
+        if self.nrow != v.size:
+            raise IndexError("Dimensions must agree ([%d,%d] and [%d, %d])" % (self.nrow, self.ncol, v.size, 1))
+
+        cdef:
+            INT32_t k, i
+            INT64_t val
+
+        # strides
+        cdef size_t sd = sizeof(INT64_t)
+        cdef INT32_t incx
+
+        # direct access to vector v
+        cdef INT64_t * v_data = <INT64_t *> cnp.PyArray_DATA(v)
+
+        # test if v vector is C-contiguous or not
+        if cnp.PyArray_ISCONTIGUOUS(v):
+
+            for i from 0 <= i < self.nrow:
+                k = self.root[i]
+                val = v_data[i]
+
+                while k != -1:
+                    self.val[k] *= val
+
+                    k = self.link[k]
+
+        else:
+            incx = v.strides[0] / sd
+            for i from 0 <= i < self.nrow:
+                k = self.root[i]
+                val = v_data[i * incx]
+
+                while k != -1:
+                    self.val[k] *= val
 
                     k = self.link[k]
 
