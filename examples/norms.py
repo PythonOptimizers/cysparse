@@ -36,3 +36,20 @@ print "=" * 80
 print "inf norm = " + str(l1.norm('inf'))
 print "1 norm = " + str(l1.norm('1'))
 print "frob norm = " + str(l1.norm('frob'))
+
+########################################################################################################################
+print "=" * 80
+
+l2 = NewLLSparseMatrix(nrow=3, ncol=4, size_hint=10, is_symmetric=True)
+l2.put_triplet([0, 1, 1, 2, 2], [0, 0, 1, 0, 1], [1, 2, 3, 4, 5]) # i, j, val
+
+l2_norm_1_sym = l2.norm('1')
+print l2_norm_1_sym
+
+l2.generalize()
+
+l2_norm_1 = l2.norm('1')
+print l2_norm_1
+
+assert l2_norm_1_sym == l2_norm_1
+

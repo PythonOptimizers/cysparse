@@ -839,7 +839,7 @@ cdef class LLSparseMatrix_INT32_t_FLOAT128_t(MutableSparseMatrix_INT32_t_FLOAT12
         """
         # TODO: add tests and error messages
         self.scale(B)
-        return self 
+        return self
 
     ####################################################################################################################
     # Scaling
@@ -983,8 +983,6 @@ cdef class LLSparseMatrix_INT32_t_FLOAT128_t(MutableSparseMatrix_INT32_t_FLOAT12
             Only works if the matrix is **not** symmetric!
 
         """
-        assert not self.is_symmetric, "Not implemented for symmetric matrices"
-
         cdef:
             FLOAT128_t max_col_sum
             INT32_t i, k
@@ -992,16 +990,35 @@ cdef class LLSparseMatrix_INT32_t_FLOAT128_t(MutableSparseMatrix_INT32_t_FLOAT12
         # create temp array for column results
         cdef FLOAT128_t * col_sum = <FLOAT128_t *> calloc(self.ncol, sizeof(FLOAT128_t))
 
-        # compute sum of columns
-        for i from 0<= i < self.nrow:
-            k = self.root[i]
+        if self.is_symmetric:
 
-            # EXPLICIT TYPE TESTS
-            while k != -1:
+            # compute sum of columns
+            for i from 0<= i < self.nrow:
+                k = self.root[i]
 
-                col_sum[self.col[k]] += fabsl(self.val[k])
+                # EXPLICIT TYPE TESTS
+                while k != -1:
 
-                k = self.link[k]
+                    if self.col[k] != i:
+                        col_sum[self.col[k]] += fabsl(self.val[k])
+                        col_sum[i] += fabsl(self.val[k])
+                    else:
+                        col_sum[i] += fabsl(self.val[k])
+
+                    k = self.link[k]
+
+        else:  # not symmetric
+
+            # compute sum of columns
+            for i from 0<= i < self.nrow:
+                k = self.root[i]
+
+                # EXPLICIT TYPE TESTS
+                while k != -1:
+
+                    col_sum[self.col[k]] += fabsl(self.val[k])
+
+                    k = self.link[k]
 
         # compute max of all column sums
         max_col_sum = <FLOAT128_t> 0.0
