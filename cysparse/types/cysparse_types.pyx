@@ -251,7 +251,7 @@ cpdef int result_type(cp_types.CySparseType type1, cp_types.CySparseType type2) 
         # both types are complex, max is OK
         pass
     else:
-        raise TypeError("Shouldn't happen. CODE 7. Please report.")
+        raise TypeError("Shouldn't happen. CODE 6. Please report.")
 
     return r_type
 

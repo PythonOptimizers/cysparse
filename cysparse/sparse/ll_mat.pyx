@@ -2,11 +2,15 @@
 from cysparse.sparse.ll_mat cimport LL_MAT_DEFAULT_SIZE_HINT
 from cysparse.sparse.s_mat cimport unexposed_value
 
-from cysparse.types.cysparse_types import INDEX_TYPES, ELEMENT_TYPES
+from cysparse.types.cysparse_types import *
 
 from cysparse.sparse.s_mat cimport SparseMatrix
 
 from cython cimport isinstance
+from libc.stdio cimport *
+from libc.string cimport *
+from cpython.unicode cimport *
+from libc.stdlib cimport * 
 
 
 LL_MAT_INCREASE_FACTOR = 1.5
@@ -53,6 +57,53 @@ from cysparse.sparse.ll_mat_matrices.ll_mat_INT64_t_COMPLEX256_t cimport LLSpars
     
 
 
+########################################################################################################################
+# Matrix Market
+########################################################################################################################
+cdef:
+    str MM_MATRIX_MARKET_BANNER_STR = "%%MatrixMarket"
+    str MM_MTX_STR = "matrix"
+    str MM_ARRAY_STR = "array"
+    str MM_COORDINATE_STR = "coordinate"
+    str MM_COMPLEX_STR = "complex"
+    str MM_REAL_STR = "real"
+    str MM_INT_STR = "integer"
+    str MM_PATTERN_STR = "pattern"
+    str MM_GENERAL_STR = "general"
+    str MM_SYMM_STR = "symmetric"
+    str MM_HERM_STR = "hermitian"
+    str MM_SKEW_STR = "skew"
+
+
+cdef enum:
+    MM_COMPLEX  = 0
+    MM_REAL     = 1
+    MM_INTEGER  = 2
+    MM_PATTERN  = 3
+
+cdef enum:
+    MM_GENERAL   = 11
+    MM_HERMITIAN = 12
+    MM_SYMMETRIC = 13
+    MM_SKEW      = 14
+
+
+    
+include "ll_mat_matrices/ll_mat_IO/ll_mat_mm_INT32_t_INT64_t.pxi"
+    
+include "ll_mat_matrices/ll_mat_IO/ll_mat_mm_INT32_t_FLOAT64_t.pxi"
+    
+include "ll_mat_matrices/ll_mat_IO/ll_mat_mm_INT32_t_COMPLEX128_t.pxi"
+    
+
+    
+include "ll_mat_matrices/ll_mat_IO/ll_mat_mm_INT64_t_INT64_t.pxi"
+    
+include "ll_mat_matrices/ll_mat_IO/ll_mat_mm_INT64_t_FLOAT64_t.pxi"
+    
+include "ll_mat_matrices/ll_mat_IO/ll_mat_mm_INT64_t_COMPLEX128_t.pxi"
+    
+
 
 ########################################################################################################################
 # Common matrix operations
@@ -89,7 +140,7 @@ def matvec_transp(A, b):
 ########################################################################################################################
 def NewLLSparseMatrix(**kwargs):
     """
-    Factory method to create an LLSparseMatrix.
+    Factory method to create an ``LLSparseMatrix``.
     """
     ####################################################################################################################
     #                                            *** Get arguments ***
@@ -251,4 +302,62 @@ def NewLLSparseMatrix(**kwargs):
 
     #                                            CASE 3: from a file
     if from_filename:
-        raise NotImplementedError("Cannot create a LLSparseMatrix from a file (yet)")
+        if mm_filename is not None:
+            # Matrix Market format
+
+            assert itype in [INT32_T,INT64_T], "itype is not accepted as index type for a matrix from a Matrix Market file"
+
+            assert dtype in [INT64_T,FLOAT64_T,COMPLEX128_T], "dtype is not accepted as type for a matrix from a Matrix Market file"
+
+
+    
+            if itype == INT32_T:
+    
+    
+        
+                if dtype == INT64_T:
+        
+                    return MakeLLSparseMatrixFromMMFile_INT32_t_INT64_t(mm_filename=mm_filename, store_zeros=store_zeros, test_bounds=test_bounds)
+    
+        
+                elif dtype == FLOAT64_T:
+        
+                    return MakeLLSparseMatrixFromMMFile_INT32_t_FLOAT64_t(mm_filename=mm_filename, store_zeros=store_zeros, test_bounds=test_bounds)
+    
+        
+                elif dtype == COMPLEX128_T:
+        
+                    return MakeLLSparseMatrixFromMMFile_INT32_t_COMPLEX128_t(mm_filename=mm_filename, store_zeros=store_zeros, test_bounds=test_bounds)
+    
+
+    
+            elif itype == INT64_T:
+    
+    
+        
+                if dtype == INT64_T:
+        
+                    return MakeLLSparseMatrixFromMMFile_INT64_t_INT64_t(mm_filename=mm_filename, store_zeros=store_zeros, test_bounds=test_bounds)
+    
+        
+                elif dtype == FLOAT64_T:
+        
+                    return MakeLLSparseMatrixFromMMFile_INT64_t_FLOAT64_t(mm_filename=mm_filename, store_zeros=store_zeros, test_bounds=test_bounds)
+    
+        
+                elif dtype == COMPLEX128_T:
+        
+                    return MakeLLSparseMatrixFromMMFile_INT64_t_COMPLEX128_t(mm_filename=mm_filename, store_zeros=store_zeros, test_bounds=test_bounds)
+    
+
+
+
+
+
+def NewLLSparseMatrixFromMMFile(filename):
+    """
+    Factory method to create an ``LLSparseMatrix`` from a ``Matrix Market`` file.
+
+    Return the minimalistic ``LLSparseMatrix`` possible.
+    """
+    pass

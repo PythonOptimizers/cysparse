@@ -305,6 +305,32 @@ cdef class LLSparseMatrix_INT32_t_INT64_t(MutableSparseMatrix_INT32_t_INT64_t):
         return total_memory
 
     ####################################################################################################################
+    # SORTING
+    ####################################################################################################################
+    cdef bint is_sorted(self):
+        """
+        Tell if matrix is sorted, i.e. if its column indices are sorted row by row as it is supposed to be.
+        """
+        cdef INT32_t k, i, last_index
+
+        for i from 0 <= i < self.nrow:
+            # column index of first element in row i
+            k = self.root[i]
+            if k != -1:
+                last_index = self.col[k]
+                k = self.link[k]
+
+            # compare column indices
+            while k != -1:
+                if self.col[k] <= last_index:
+                    return False  # column indices are not sorted!
+
+                last_index = self.col[k]
+                k = self.link[k]
+
+        return True  # not bad column index detected
+
+    ####################################################################################################################
     # SUB-MATRICES
     ####################################################################################################################
     ####################################################################################################################

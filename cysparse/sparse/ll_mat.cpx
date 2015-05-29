@@ -2,11 +2,15 @@
 from cysparse.sparse.ll_mat cimport LL_MAT_DEFAULT_SIZE_HINT
 from cysparse.sparse.s_mat cimport unexposed_value
 
-from cysparse.types.cysparse_types import INDEX_TYPES, ELEMENT_TYPES
+from cysparse.types.cysparse_types import *
 
 from cysparse.sparse.s_mat cimport SparseMatrix
 
 from cython cimport isinstance
+from libc.stdio cimport *
+from libc.string cimport *
+from cpython.unicode cimport *
+from libc.stdlib cimport *
 
 
 LL_MAT_INCREASE_FACTOR = 1.5
@@ -21,6 +25,41 @@ from cysparse.sparse.ll_mat_matrices.ll_mat_@index_type@_@element_type@ cimport 
     {% endfor %}
 {% endfor %}
 
+########################################################################################################################
+# Matrix Market
+########################################################################################################################
+cdef:
+    str MM_MATRIX_MARKET_BANNER_STR = "%%MatrixMarket"
+    str MM_MTX_STR = "matrix"
+    str MM_ARRAY_STR = "array"
+    str MM_COORDINATE_STR = "coordinate"
+    str MM_COMPLEX_STR = "complex"
+    str MM_REAL_STR = "real"
+    str MM_INT_STR = "integer"
+    str MM_PATTERN_STR = "pattern"
+    str MM_GENERAL_STR = "general"
+    str MM_SYMM_STR = "symmetric"
+    str MM_HERM_STR = "hermitian"
+    str MM_SKEW_STR = "skew"
+
+
+cdef enum:
+    MM_COMPLEX  = 0
+    MM_REAL     = 1
+    MM_INTEGER  = 2
+    MM_PATTERN  = 3
+
+cdef enum:
+    MM_GENERAL   = 11
+    MM_HERMITIAN = 12
+    MM_SYMMETRIC = 13
+    MM_SKEW      = 14
+
+{% for index_type in mm_index_list %}
+    {% for element_type in mm_type_list %}
+include "ll_mat_matrices/ll_mat_IO/ll_mat_mm_@index_type@_@element_type@.pxi"
+    {% endfor %}
+{% endfor %}
 
 ########################################################################################################################
 # Common matrix operations
@@ -57,7 +96,7 @@ def matvec_transp(A, b):
 ########################################################################################################################
 def NewLLSparseMatrix(**kwargs):
     """
-    Factory method to create an LLSparseMatrix.
+    Factory method to create an ``LLSparseMatrix``.
     """
     ####################################################################################################################
     #                                            *** Get arguments ***
@@ -157,4 +196,50 @@ def NewLLSparseMatrix(**kwargs):
 
     #                                            CASE 3: from a file
     if from_filename:
-        raise NotImplementedError("Cannot create a LLSparseMatrix from a file (yet)")
+        if mm_filename is not None:
+            # Matrix Market format
+
+            assert itype in [
+             {%- for index_name in mm_index_list -%}
+               @index_name|type2enum@
+               {%- if index_name != mm_index_list|last -%}
+               ,
+               {%- endif -%}
+             {%- endfor -%}
+             ], "itype is not accepted as index type for a matrix from a Matrix Market file"
+
+            assert dtype in [
+             {%- for type_name in mm_type_list -%}
+               @type_name|type2enum@
+               {%- if type_name != mm_type_list|last -%}
+               ,
+               {%- endif -%}
+             {%- endfor -%}
+             ], "dtype is not accepted as type for a matrix from a Matrix Market file"
+
+{% for index_type in mm_index_list %}
+    {% if index_type == mm_index_list |first %}
+            if itype == @index_type|type2enum@:
+    {% else %}
+            elif itype == @index_type|type2enum@:
+    {% endif %}
+    {% for element_type in mm_type_list %}
+        {% if element_type == mm_type_list |first %}
+                if dtype == @element_type|type2enum@:
+        {% else %}
+                elif dtype == @element_type|type2enum@:
+        {% endif %}
+                    return MakeLLSparseMatrixFromMMFile_@index_type@_@element_type@(mm_filename=mm_filename, store_zeros=store_zeros, test_bounds=test_bounds)
+    {% endfor %}
+{% endfor %}
+
+
+
+
+def NewLLSparseMatrixFromMMFile(filename):
+    """
+    Factory method to create an ``LLSparseMatrix`` from a ``Matrix Market`` file.
+
+    Return the minimalistic ``LLSparseMatrix`` possible.
+    """
+    pass

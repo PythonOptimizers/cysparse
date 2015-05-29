@@ -1041,7 +1041,7 @@ static char __pyx_k_Shouldn_t_happen_CODE_2_Please_r[] = "Shouldn't happen. CODE
 static char __pyx_k_Shouldn_t_happen_CODE_3_Please_r[] = "Shouldn't happen. CODE 3. Please report.";
 static char __pyx_k_Shouldn_t_happen_CODE_4_Please_r[] = "Shouldn't happen. CODE 4. Please report.";
 static char __pyx_k_Shouldn_t_happen_CODE_5_Please_r[] = "Shouldn't happen. CODE 5. Please report.";
-static char __pyx_k_Shouldn_t_happen_CODE_7_Please_r[] = "Shouldn't happen. CODE 7. Please report.";
+static char __pyx_k_Shouldn_t_happen_CODE_6_Please_r[] = "Shouldn't happen. CODE 6. Please report.";
 static PyObject *__pyx_kp_s_12_10d_bits_d;
 static PyObject *__pyx_n_s_BASIC_TYPES_DICT;
 static PyObject *__pyx_n_s_BASIC_TYPES_STR_DICT;
@@ -1068,7 +1068,7 @@ static PyObject *__pyx_kp_s_Shouldn_t_happen_CODE_2_Please_r;
 static PyObject *__pyx_kp_s_Shouldn_t_happen_CODE_3_Please_r;
 static PyObject *__pyx_kp_s_Shouldn_t_happen_CODE_4_Please_r;
 static PyObject *__pyx_kp_s_Shouldn_t_happen_CODE_5_Please_r;
-static PyObject *__pyx_kp_s_Shouldn_t_happen_CODE_7_Please_r;
+static PyObject *__pyx_kp_s_Shouldn_t_happen_CODE_6_Please_r;
 static PyObject *__pyx_kp_s_String_type_not_recognized;
 static PyObject *__pyx_n_s_TypeError;
 static PyObject *__pyx_kp_s_Type_not_recognized;
@@ -3509,7 +3509,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
     /* "cysparse/types/cysparse_types.pyx":254
  *         pass
  *     else:
- *         raise TypeError("Shouldn't happen. CODE 7. Please report.")             # <<<<<<<<<<<<<<
+ *         raise TypeError("Shouldn't happen. CODE 6. Please report.")             # <<<<<<<<<<<<<<
  * 
  *     return r_type
  */
@@ -3522,7 +3522,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
   __pyx_L6:;
 
   /* "cysparse/types/cysparse_types.pyx":256
- *         raise TypeError("Shouldn't happen. CODE 7. Please report.")
+ *         raise TypeError("Shouldn't happen. CODE 6. Please report.")
  * 
  *     return r_type             # <<<<<<<<<<<<<<
  * 
@@ -4471,7 +4471,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_Shouldn_t_happen_CODE_3_Please_r, __pyx_k_Shouldn_t_happen_CODE_3_Please_r, sizeof(__pyx_k_Shouldn_t_happen_CODE_3_Please_r), 0, 0, 1, 0},
   {&__pyx_kp_s_Shouldn_t_happen_CODE_4_Please_r, __pyx_k_Shouldn_t_happen_CODE_4_Please_r, sizeof(__pyx_k_Shouldn_t_happen_CODE_4_Please_r), 0, 0, 1, 0},
   {&__pyx_kp_s_Shouldn_t_happen_CODE_5_Please_r, __pyx_k_Shouldn_t_happen_CODE_5_Please_r, sizeof(__pyx_k_Shouldn_t_happen_CODE_5_Please_r), 0, 0, 1, 0},
-  {&__pyx_kp_s_Shouldn_t_happen_CODE_7_Please_r, __pyx_k_Shouldn_t_happen_CODE_7_Please_r, sizeof(__pyx_k_Shouldn_t_happen_CODE_7_Please_r), 0, 0, 1, 0},
+  {&__pyx_kp_s_Shouldn_t_happen_CODE_6_Please_r, __pyx_k_Shouldn_t_happen_CODE_6_Please_r, sizeof(__pyx_k_Shouldn_t_happen_CODE_6_Please_r), 0, 0, 1, 0},
   {&__pyx_kp_s_String_type_not_recognized, __pyx_k_String_type_not_recognized, sizeof(__pyx_k_String_type_not_recognized), 0, 0, 1, 0},
   {&__pyx_n_s_TypeError, __pyx_k_TypeError, sizeof(__pyx_k_TypeError), 0, 0, 1, 1},
   {&__pyx_kp_s_Type_not_recognized, __pyx_k_Type_not_recognized, sizeof(__pyx_k_Type_not_recognized), 0, 0, 1, 0},
@@ -4584,11 +4584,11 @@ static int __Pyx_InitCachedConstants(void) {
   /* "cysparse/types/cysparse_types.pyx":254
  *         pass
  *     else:
- *         raise TypeError("Shouldn't happen. CODE 7. Please report.")             # <<<<<<<<<<<<<<
+ *         raise TypeError("Shouldn't happen. CODE 6. Please report.")             # <<<<<<<<<<<<<<
  * 
  *     return r_type
  */
-  __pyx_tuple__6 = PyTuple_Pack(1, __pyx_kp_s_Shouldn_t_happen_CODE_7_Please_r); if (unlikely(!__pyx_tuple__6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 254; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__6 = PyTuple_Pack(1, __pyx_kp_s_Shouldn_t_happen_CODE_6_Please_r); if (unlikely(!__pyx_tuple__6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 254; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__6);
   __Pyx_GIVEREF(__pyx_tuple__6);
 

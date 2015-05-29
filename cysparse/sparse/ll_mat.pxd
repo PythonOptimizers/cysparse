@@ -1,6 +1,5 @@
 """
 Main entry to create ``LLSparseMatrix`` matrices.
-
 Warning:
     ``LLSparseMatrix`` matrices can **only** be constructed through a *factory* function, **not** by direct
     instantiation.
@@ -18,4 +17,3 @@ cdef INT32_t LL_MAT_PPRINT_COL_THRESH
 cdef INT32_t LL_MAT_PPRINT_ROW_THRESH
 
 cpdef bint PyLLSparseMatrix_Check(object obj)
-
