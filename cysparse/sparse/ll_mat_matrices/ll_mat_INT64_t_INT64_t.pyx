@@ -258,6 +258,30 @@ cdef class LLSparseMatrix_INT64_t_INT64_t(MutableSparseMatrix_INT64_t_INT64_t):
 
         return
 
+    def generalize(self):
+        """
+        Convert matrix from symmetric to non-symmetric form (in-place).
+        """
+        cdef:
+            INT64_t k, i, j
+
+        if self.is_symmetric:
+
+            self.is_symmetric = False  # to allow writing in upper triangle
+            
+            for i from 0 <= i < self.nrow:
+                k = self.root[i]
+                while k != -1:
+                    j = self.col[k]
+
+                    if i > j:
+                        self.put(j, i, self.val[k])
+
+                    k = self.link[k]
+
+
+
+
     def memory_real(self):
         """
         Return the real amount of memory used internally for the matrix.
@@ -908,7 +932,10 @@ cdef class LLSparseMatrix_INT64_t_INT64_t(MutableSparseMatrix_INT64_t_INT64_t):
         Computes a norm of the matrix.
 
         Args:
-            norm_name: Can be '1', 'inf',
+            norm_name: Can be '1', 'inf' or 'frob'.
+
+        Note:
+            **All** norms have been thoroughly tested for ``dtype == FLOAT64_T`` and ``itype == INT32_T``.
         """
         if norm_name == 'inf': # ||A||_\infty
             return self._norm_inf()
