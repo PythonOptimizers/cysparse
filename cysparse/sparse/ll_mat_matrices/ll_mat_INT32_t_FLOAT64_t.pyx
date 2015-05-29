@@ -268,7 +268,7 @@ cdef class LLSparseMatrix_INT32_t_FLOAT64_t(MutableSparseMatrix_INT32_t_FLOAT64_
         if self.is_symmetric:
 
             self.is_symmetric = False  # to allow writing in upper triangle
-            
+
             for i from 0 <= i < self.nrow:
                 k = self.root[i]
                 while k != -1:
@@ -831,9 +831,36 @@ cdef class LLSparseMatrix_INT32_t_FLOAT64_t(MutableSparseMatrix_INT32_t_FLOAT64_
 
     #def __rmul__(self, B):
 
+    def __imul__(self, B):
+        """
+        Classical in place multiplication ``A *= B``.
+        """
+        # TODO: add tests and error messages
+        self.scale(B)
+        return self 
+
     ####################################################################################################################
     # Scaling
     ####################################################################################################################
+    def scale(self, FLOAT64_t sigma):
+        """
+        Scale each element in the matrix by the constant ``sigma``.
+
+        Args:
+            sigma:
+        """
+        cdef:
+            INT32_t k, i
+
+        for i from 0 <= i < self.nrow:
+            k = self.root[i]
+
+            while k != -1:
+
+                self.val[k] *= sigma
+
+                k = self.link[k]
+
     def col_scale(self, cnp.ndarray[cnp.npy_float64, ndim=1] v):
         """
         Scale the i:sup:`th` column of A by ``v[i]`` in place for ``i=0, ..., ncol-1``

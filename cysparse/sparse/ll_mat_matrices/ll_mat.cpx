@@ -904,9 +904,36 @@ YOU HAVE TO DEFINE OR CAST YOUR NEW UNRECOGNIZED TYPE
 
     #def __rmul__(self, B):
 
+    def __imul__(self, B):
+        """
+        Classical in place multiplication ``A *= B``.
+        """
+        # TODO: add tests and error messages
+        self.scale(B)
+        return self
+
     ####################################################################################################################
     # Scaling
     ####################################################################################################################
+    def scale(self, @type@ sigma):
+        """
+        Scale each element in the matrix by the constant ``sigma``.
+
+        Args:
+            sigma:
+        """
+        cdef:
+            @index@ k, i
+
+        for i from 0 <= i < self.nrow:
+            k = self.root[i]
+
+            while k != -1:
+
+                self.val[k] *= sigma
+
+                k = self.link[k]
+
     def col_scale(self, cnp.ndarray[cnp.@type|cysparse_type_to_numpy_c_type@, ndim=1] v):
         """
         Scale the i:sup:`th` column of A by ``v[i]`` in place for ``i=0, ..., ncol-1``
