@@ -3,13 +3,15 @@ from cysparse.sparse.ll_mat cimport LL_MAT_DEFAULT_SIZE_HINT
 from cysparse.sparse.s_mat cimport unexposed_value
 
 from cysparse.types.cysparse_types import *
+from cysparse.types.cysparse_types cimport *
+
 
 from cysparse.sparse.s_mat cimport SparseMatrix
 
 from cython cimport isinstance
 from libc.stdio cimport *
 from libc.string cimport *
-from cpython.unicode cimport * 
+from cpython.unicode cimport *
 from libc.stdlib cimport *
 
 
@@ -87,6 +89,53 @@ cdef enum:
     MM_SYMMETRIC = 13
     MM_SKEW      = 14
 
+def get_mm_matrix_dimension_specifications(mm_filename):
+    """
+    Return n, m, nnz from a Matrix Market file.
+
+    Note:
+        This is done very "stupidly": we seek the first line of real data (blank lines and comment lines are disregarded)
+        and try to read ``n, m, nnz``.
+
+    Raises:
+        ``IOError``: if we cannot read ``n, m, nnz`` on the first line of real data.
+    """
+    with open(mm_filename, 'r') as f:
+        for line in f:
+            # avoid empty lines
+            if line.rstrip():
+                # avoid comment lines
+                if not line.startswith('%'):
+                    # first line that is not an empty or comment line
+                    tokens = line.split()
+                    if len(tokens) != 3:
+                        raise IOError('Matrix Market file not recognized: first data line should contain n, m, nnz')
+                    else:
+                        return long(tokens[0]), long(tokens[1]), float(tokens[2])
+
+    raise IOError('Matrix Market file not recognized: first data line should contain n, m, nnz')
+
+def get_mm_matrix_type_specifications(mm_filename):
+    """
+    Return 4-tuple (strings) given in the Matrix Market banner.
+
+    Raises:
+        ``IOError`` if first line doesn't contain the banner or if the banner is not recognized.
+    """
+    with open(mm_filename, 'r') as f:
+        # read banner
+        line = f.readline()
+        token_list = line.split()
+
+        if len(token_list) != 5:
+            raise IOError('Matrix format not recognized as Matrix Market format: not the right number of tokens in the Matrix Market banner')
+
+        # MATRIX MARKET BANNER START
+        if token_list[0] != MM_MATRIX_MARKET_BANNER_STR:
+            raise IOError('Matrix format not recognized as Matrix Market format: zeroth token in the Matrix Market banner is not "%s"' % MM_MATRIX_MARKET_BANNER_STR)
+
+    return token_list[1:]
+
 
     
 include "ll_mat_matrices/ll_mat_IO/ll_mat_mm_INT32_t_INT64_t.pxi"
@@ -103,6 +152,7 @@ include "ll_mat_matrices/ll_mat_IO/ll_mat_mm_INT64_t_FLOAT64_t.pxi"
     
 include "ll_mat_matrices/ll_mat_IO/ll_mat_mm_INT64_t_COMPLEX128_t.pxi"
     
+
 
 
 ########################################################################################################################
@@ -354,10 +404,83 @@ def NewLLSparseMatrix(**kwargs):
 
 
 
-def NewLLSparseMatrixFromMMFile(filename):
+def NewLLSparseMatrixFromMMFile(filename, store_zeros=False, test_bounds=True):
     """
     Factory method to create an ``LLSparseMatrix`` from a ``Matrix Market`` file.
 
-    Return the minimalistic ``LLSparseMatrix`` possible.
+    Return the minimal ``LLSparseMatrix`` possible to hold the matrix.
+
+    Raises:
+        ``TypeError`` whenever the types for indices and elements of the matrix can not be recognized.
     """
-    pass
+
+    # Get matrix information
+    matrix_object, matrix_type, data_type, storage_format = get_mm_matrix_type_specifications(filename)
+    n, m, nnz = get_mm_matrix_dimension_specifications(filename)
+
+    print n, m, nnz
+    print matrix_object, matrix_type, data_type, storage_format
+
+    # Define itype
+    cdef CySparseType n_type = min_type(n,[INT32_T,INT64_T])
+
+    cdef CySparseType m_type = min_type(n,[INT32_T,INT64_T])
+
+    cdef CySparseType itype = <CySparseType> result_type(n_type, m_type)
+
+    #Define dtype
+    cdef CySparseType dtype
+    if data_type == MM_COMPLEX_STR:
+        dtype = COMPLEX128_T
+    elif data_type == MM_REAL_STR:
+        dtype = FLOAT64_T
+    elif data_type == MM_INT_STR:
+        dtype = INT64_T
+    else:
+        raise TypeError('Element type of matrix is not recognized')
+
+    # launch right factory method
+
+    
+    if itype == INT32_T:
+    
+        
+        if dtype == INT64_T:
+        
+            return MakeLLSparseMatrixFromMMFile_INT32_t_INT64_t(mm_filename=filename, store_zeros=store_zeros, test_bounds=test_bounds)
+    
+        
+        elif dtype == FLOAT64_T:
+        
+            return MakeLLSparseMatrixFromMMFile_INT32_t_FLOAT64_t(mm_filename=filename, store_zeros=store_zeros, test_bounds=test_bounds)
+    
+        
+        elif dtype == COMPLEX128_T:
+        
+            return MakeLLSparseMatrixFromMMFile_INT32_t_COMPLEX128_t(mm_filename=filename, store_zeros=store_zeros, test_bounds=test_bounds)
+    
+    
+
+    
+    elif itype == INT64_T:
+    
+        
+        if dtype == INT64_T:
+        
+            return MakeLLSparseMatrixFromMMFile_INT64_t_INT64_t(mm_filename=filename, store_zeros=store_zeros, test_bounds=test_bounds)
+    
+        
+        elif dtype == FLOAT64_T:
+        
+            return MakeLLSparseMatrixFromMMFile_INT64_t_FLOAT64_t(mm_filename=filename, store_zeros=store_zeros, test_bounds=test_bounds)
+    
+        
+        elif dtype == COMPLEX128_T:
+        
+            return MakeLLSparseMatrixFromMMFile_INT64_t_COMPLEX128_t(mm_filename=filename, store_zeros=store_zeros, test_bounds=test_bounds)
+    
+    
+
+    else:
+        raise TypeError('itype not recognized')
+

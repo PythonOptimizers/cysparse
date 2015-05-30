@@ -25,6 +25,7 @@ BASIC_TYPES_DICT = {v[1]: (k, v[0]) for k, v in BASIC_TYPES_STR_DICT.items()}
 
 # Type classification
 # elements in general
+BASIC_TYPES = BASIC_TYPES_DICT.keys()
 ELEMENT_TYPES = BASIC_TYPES_DICT.keys()
 INDEX_TYPES = [INT32_T, INT64_T]
 
@@ -177,7 +178,7 @@ cpdef int result_type(cp_types.CySparseType type1, cp_types.CySparseType type2) 
         type2:
 
     Returns:
-        Resulting type.
+        Resulting type. The return is ``int`` to be compatible with ``Python``.
 
     Raises:
         ``TypeError`` whenever both types are **not** compatible.
@@ -305,4 +306,51 @@ def report_basic_types(OUT=sys.stdout):
     for key, item in BASIC_TYPES_STR_DICT.items():
         print('{:12}: {:10d} bits ({:d})'.format(key, item[0], item[1]), file=OUT)
 
+########################################################################################################################
+# Tests on numbers
+########################################################################################################################
+# EXPLICIT TYPE TESTS
+def min_type(n, type_list):
+    """
+    Return the minimal type that can `n` can be casted into from a list of types.
+
+    Note:
+        We suppose that the list is sorted by ascending types.
+
+    Raises:
+        ``TypeError`` if no type can be used to cast `n` or if one element in the type list is not recognized as a
+        ``CySparseType``.
+
+    Args:
+        n: Python number to cast.
+        type_list: List of *types*, aka ``CySparseType`` ``enum``\s.
+
+    Warning:
+        This function is **slow**.
+    """
+    if not (set(type_list) <= set(BASIC_TYPES)):
+        raise TypeError('Som type(s) are not recognized as basic CySparseType')
+
+    cdef:
+        cp_types.UINT32_t var_uint32_t
+        cp_types.INT32_t var_int32_t
+
+    print ("type of n: " + str(type(n)))
+    for type_el in type_list:
+        if type_el == cp_types.UINT32_T:
+            try:
+                var_uint32_t = <cp_types.UINT32_t> n
+                return cp_types.UINT32_T
+            except:
+                pass
+        elif type_el == cp_types.INT32_T:
+            print("here we go")
+            try:
+                var_int32_t = <cp_types.INT32_t> n
+                print("we did it!")
+                return cp_types.INT32_T
+            except:
+                pass
+
+    raise TypeError('No type was found to cast number')
 

@@ -5,10 +5,12 @@ import cysparse.types.cysparse_types as types
 
 import sys
 
-if __name__ == "__main__":
 
-    l1 = NewLLSparseMatrix(mm_filename='togolo.mtx', dtype=types.COMPLEX128_T, test_bounds=True)
+l1 = NewLLSparseMatrix(mm_filename='togolo.mtx', dtype=types.COMPLEX128_T, test_bounds=True)
 
+l1.print_to(sys.stdout)
 
-    l1.print_to(sys.stdout)
+print '=' * 80
 
+l2 = NewLLSparseMatrixFromMMFile('togolo.mtx')
+l2.print_to(sys.stdout)

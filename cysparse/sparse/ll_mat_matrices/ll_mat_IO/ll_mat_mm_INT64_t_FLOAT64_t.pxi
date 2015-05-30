@@ -6,7 +6,6 @@ See http://math.nist.gov/MatrixMarket/ .
 """
 
 
-
 cdef LLSparseMatrix_INT64_t_FLOAT64_t MakeLLSparseMatrixFromMMFile_INT64_t_FLOAT64_t(str mm_filename, bint store_zeros=False, bint test_bounds=True):
     cdef:
         str line
@@ -56,12 +55,14 @@ cdef LLSparseMatrix_INT64_t_FLOAT64_t MakeLLSparseMatrixFromMMFile_INT64_t_FLOAT
         if token not in sparse_dense_list:
             raise IOError('Matrix format not recognized as Matrix Market format: third token in the Matrix Market banner is not in "%s"' % sparse_dense_list)
 
-        # TODO: test when matrix is NOT sparse??? what to do?
+        # TODO: test if matrix is sparse or not
         if token == MM_ARRAY_STR:
             sparse = False
         else:
             sparse = True
 
+        if not sparse:
+            raise IOError('CySparse only read sparse matrices')
 
         # DATA TYPE
         token = token_list[3].lower()
