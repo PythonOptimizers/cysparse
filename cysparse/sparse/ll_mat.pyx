@@ -9,8 +9,8 @@ from cysparse.sparse.s_mat cimport SparseMatrix
 from cython cimport isinstance
 from libc.stdio cimport *
 from libc.string cimport *
-from cpython.unicode cimport *
-from libc.stdlib cimport * 
+from cpython.unicode cimport * 
+from libc.stdlib cimport *
 
 
 LL_MAT_INCREASE_FACTOR = 1.5

@@ -30,11 +30,11 @@ cdef LLSparseMatrix_INT32_t_COMPLEX128_t MakeLLSparseMatrixFromMMFile_INT32_t_CO
         dict storage_scheme_dict = {MM_GENERAL_STR : MM_GENERAL, MM_SYMM_STR : MM_SYMMETRIC, MM_HERM_STR : MM_HERMITIAN, MM_SKEW_STR : MM_SKEW}
 
         COMPLEX128_t z, w
+        FLOAT64_t real_part, imag_part
 
     cdef LLSparseMatrix_INT32_t_COMPLEX128_t A
 
     with open(mm_filename, 'r') as f:
-        print "je ne sais pas"
 
         # read banner
         line = f.readline()
@@ -106,25 +106,33 @@ cdef LLSparseMatrix_INT32_t_COMPLEX128_t MakeLLSparseMatrixFromMMFile_INT32_t_CO
                 token_list = line.split()
 
 
-                z.real = <FLOAT64_t> atof(token_list[2])
-                z.imag = <FLOAT64_t> atof(token_list[3])
+                # BUG !!! in Cython ??
+                # I have no idea why we have to use temp variables...
+                real_part =  <FLOAT64_t> atof(token_list[2])
+                imag_part =  <FLOAT64_t> atof(token_list[3])
+                z.real = real_part
+                z.imag = imag_part
                 A.safe_put(atoi(token_list[0])-1, atoi(token_list[1]) - 1, z)
 
                 line = f.readline()
 
         else: # don't test bounds
-            print "in the else"
             while line:
-                print "reading line in the else"
                 nnz_read += 1
                 token_list = line.split()
 
 
-                print token_list[3]
-                w.real = <FLOAT64_t> atof(token_list[2])
-                w.imag = <FLOAT64_t> atof(token_list[3])
+                real_part =  <FLOAT64_t> atof(token_list[2])
+                imag_part =  <FLOAT64_t> atof(token_list[3])
+
+                w.imag = imag_part
+                w.real = real_part
+
+                # BUG !!! in Cython ??
+                # Next commented lines compile but give a segfault...
+                #w.real = <FLOAT64_t> atof(token_list[2])
+                #w.imag = <FLOAT64_t> atof(token_list[3])
                 A.put(atoi(token_list[0])-1, atoi(token_list[1]) - 1, w)
-                #pass
 
                 line = f.readline()
 

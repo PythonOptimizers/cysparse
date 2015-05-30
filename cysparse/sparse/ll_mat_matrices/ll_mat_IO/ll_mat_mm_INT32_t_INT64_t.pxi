@@ -30,11 +30,11 @@ cdef LLSparseMatrix_INT32_t_INT64_t MakeLLSparseMatrixFromMMFile_INT32_t_INT64_t
         dict storage_scheme_dict = {MM_GENERAL_STR : MM_GENERAL, MM_SYMM_STR : MM_SYMMETRIC, MM_HERM_STR : MM_HERMITIAN, MM_SKEW_STR : MM_SKEW}
 
         COMPLEX128_t z, w
+        FLOAT64_t real_part, imag_part
 
     cdef LLSparseMatrix_INT32_t_INT64_t A
 
     with open(mm_filename, 'r') as f:
-        print "je ne sais pas"
 
         # read banner
         line = f.readline()
@@ -105,18 +105,14 @@ cdef LLSparseMatrix_INT32_t_INT64_t MakeLLSparseMatrixFromMMFile_INT32_t_INT64_t
                 nnz_read += 1
                 token_list = line.split()
 
-
                 A.safe_put(atoi(token_list[0])-1, atoi(token_list[1]) - 1, <INT64_t>atoi(token_list[2]))
 
                 line = f.readline()
 
         else: # don't test bounds
-            print "in the else"
             while line:
-                print "reading line in the else"
                 nnz_read += 1
                 token_list = line.split()
-
 
                 A.put(atoi(token_list[0])-1, atoi(token_list[1]) - 1, <INT64_t>atoi(token_list[2]))
 
