@@ -46,14 +46,11 @@ def make_parser():
     parser = argparse.ArgumentParser(description='%s: a Cython code generator for the CySparse library.' % os.path.basename(sys.argv[0]))
     parser.add_argument("-l", "--log_level", help="Log level while processing actions.", required=False, default='INFO')
     parser.add_argument("-a", "--all", help="Create all action files.", action='store_true', required=False)
-    #parser.add_argument('project_file', nargs='?', default=None, help="Project file: *.cdp or *.txt (import).")
-    #parser.add_argument("-a", "--action", help="Batch version (no GUI). ACTION must be either '%s' or '%s' and "
-    #                                           "requires a project file (*.cdp), like so: -a %s project_file.cdp." % (ACTION_DOCSTRING, ACTION_DOCUMENTATION, ACTION_DOCSTRING),  required=False)
+
     parser.add_argument("-m", "--matrices", help="Create sparse matrices.", action='store_true', required=False)
     parser.add_argument("-s", "--setup", help="Create setup file.", action='store_true', required=False)
+    parser.add_argument("-t", "--types", help="Create generic types.", action='store_true', required=False)
     parser.add_argument("-c", "--clean", help="Clean action files.", action='store_true', required=False)
-    #parser.add_argument("-w", "--wxptyhon_version", help="wxPython version to use. Use it at your own risk!", required=False, default=None)
-    #parser.add_argument("-i", "--info", help="Returns some system info and exit.", action='store_true', required=False)
 
     return parser
 
@@ -323,6 +320,12 @@ def generate_following_type_and_index(logger, template_filenames, template_envir
 SETUP_FILE = os.path.join(PATH, 'setup.cpy')
 SETUP_PY_FILE = os.path.join(PATH, 'setup.py')
 
+#################################################################################################
+# GENERIC TYPES
+#################################################################################################
+TYPES_DIR = os.path.join(PATH, 'cysparse', 'types')
+
+TYPES_GENERIC_TYPES_DEFINITION_FILE = os.path.join(TYPES_DIR, 'cysparse_generic_types.cpx')
 
 #################################################################################################
 # SPARSE
@@ -442,6 +445,20 @@ if __name__ == "__main__":
             clean_cython_files(logger, PATH, [SETUP_PY_FILE])
         else:
             generate_template_files(logger, [SETUP_FILE], GENERAL_ENVIRONMENT, GENERAL_CONTEXT, '.py')
+
+    if arg_options.types or arg_options.all:
+        action = True
+        logger.info("Act for generic types")
+
+        if arg_options.clean:
+            clean_cython_files(logger, SPARSE_DIR, [TYPES_GENERIC_TYPES_DEFINITION_FILE[:-4] + '.pyx'])
+            
+        else:
+            ###############################
+            # Types
+            ###############################
+            # generic types
+            generate_template_files(logger, [TYPES_GENERIC_TYPES_DEFINITION_FILE], GENERAL_ENVIRONMENT, GENERAL_CONTEXT, '.pyx')
 
     if arg_options.matrices or arg_options.all:
         action = True

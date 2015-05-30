@@ -1,6 +1,7 @@
 from __future__ import print_function
 
 cimport cysparse.types.cysparse_types as cp_types
+cimport cython
 
 from collections import OrderedDict
 import sys
@@ -310,7 +311,13 @@ def report_basic_types(OUT=sys.stdout):
 # Tests on numbers
 ########################################################################################################################
 # EXPLICIT TYPE TESTS
+
 def min_type(n, type_list):
+    return _min_type(n, type_list)
+
+cdef test_uint32_t()
+@cython.overflowcheck(True)
+cdef _min_type(n, type_list):
     """
     Return the minimal type that can `n` can be casted into from a list of types.
 
@@ -339,16 +346,20 @@ def min_type(n, type_list):
     for type_el in type_list:
         if type_el == cp_types.UINT32_T:
             try:
-                var_uint32_t = <cp_types.UINT32_t> n
-                return cp_types.UINT32_T
+                var_uint32_t = n
+                n = n -1
+                n = n + 1
+                return type_el
             except:
                 pass
         elif type_el == cp_types.INT32_T:
             print("here we go")
             try:
-                var_int32_t = <cp_types.INT32_t> n
+                var_int32_t = n
+                n = n -1
+                n = n + 1
                 print("we did it!")
-                return cp_types.INT32_T
+                return type_el
             except:
                 pass
 
