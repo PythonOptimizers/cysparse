@@ -74,6 +74,41 @@ cdef extern from "limits.h":
     enum:
         CHAR_BIT
 
+# COMMENTED CODE DOESN'T WORK !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# already defined in libc.float
+# cdef extern from "float.h":
+#     enum:  FLT_MAX
+#     enum:  DBL_MAX
+#     enum: LDBL_MAX
+#
+#     enum:  FLT_MIN
+#     enum:  DBL_MIN
+#     enum: LDBL_MIN
+
+# already defined in libc.limits
+# cdef extern from "limits.h":
+#     enum:    INT_MIN
+#     enum:    INT_MAX
+#     enum:   UINT_MAX
+#
+#     enum:   LONG_MIN
+#     enum:   LONG_MAX
+#     enum:  ULONG_MAX
+#
+#     enum:  LLONG_MIN
+#     enum:  LLONG_MAX
+#     enum: ULLONG_MAX
+
+# C99 compliant
+cdef extern from "stdint.h":
+    enum:
+        INT32_MIN
+        INT32_MAX
+        UINT32_MAX
+        INT64_MIN
+        INT64_MAX
+        UINT64_MAX
+
 # in bits
 cdef enum CySparseTypeBitSize:
     INT32_t_BIT = sizeof(INT32_t) * CHAR_BIT
@@ -99,4 +134,5 @@ cdef struct CPType:
 ########################################################################################################################
 cpdef int result_type(CySparseType type1, CySparseType type2) except -1
 cpdef int result_real_sum_type(CySparseType type1)
-cdef _min_type(n, type_list)
+
+cdef CySparseType min_type2(n, type_list)  except UINT32_T

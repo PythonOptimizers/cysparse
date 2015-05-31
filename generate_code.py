@@ -144,6 +144,7 @@ def cysparse_type_to_real_sum_cysparse_type(cysparse_type):
 # COMMON STUFF
 #################################################################################################
 # TODO: grab this from cysparse_types.pxd or at least from a one common file
+BASIC_TYPES = ['INT32_t', 'UINT32_t', 'INT64_t', 'UINT64_t', 'FLOAT32_t', 'FLOAT64_t', 'FLOAT128_t', 'COMPLEX64_t', 'COMPLEX128_t', 'COMPLEX256_t']
 ELEMENT_TYPES = ['INT32_t', 'INT64_t', 'FLOAT32_t', 'FLOAT64_t', 'FLOAT128_t', 'COMPLEX64_t', 'COMPLEX128_t', 'COMPLEX256_t']
 INDEX_TYPES = ['INT32_t', 'INT64_t']
 INTEGER_ELEMENT_TYPES = ['INT32_t', 'INT64_t']
@@ -159,6 +160,7 @@ ELEMENT_MM_TYPES = ['INT64_t', 'FLOAT64_t', 'COMPLEX128_t']
 
 
 GENERAL_CONTEXT = {
+                    'basic_type_list' : BASIC_TYPES,
                     'type_list': ELEMENT_TYPES,
                     'index_list' : INDEX_TYPES,
                     'integer_list' : INTEGER_ELEMENT_TYPES,
@@ -325,6 +327,7 @@ SETUP_PY_FILE = os.path.join(PATH, 'setup.py')
 #################################################################################################
 TYPES_DIR = os.path.join(PATH, 'cysparse', 'types')
 
+TYPES_GENERIC_TYPES_DECLARATION_FILE = os.path.join(TYPES_DIR, 'cysparse_generic_types.cpd')
 TYPES_GENERIC_TYPES_DEFINITION_FILE = os.path.join(TYPES_DIR, 'cysparse_generic_types.cpx')
 
 #################################################################################################
@@ -451,13 +454,15 @@ if __name__ == "__main__":
         logger.info("Act for generic types")
 
         if arg_options.clean:
+            clean_cython_files(logger, SPARSE_DIR, [TYPES_GENERIC_TYPES_DECLARATION_FILE[:-4] + '.pxd'])
             clean_cython_files(logger, SPARSE_DIR, [TYPES_GENERIC_TYPES_DEFINITION_FILE[:-4] + '.pyx'])
-            
+
         else:
             ###############################
             # Types
             ###############################
             # generic types
+            generate_template_files(logger, [TYPES_GENERIC_TYPES_DECLARATION_FILE], GENERAL_ENVIRONMENT, GENERAL_CONTEXT, '.pxd')
             generate_template_files(logger, [TYPES_GENERIC_TYPES_DEFINITION_FILE], GENERAL_ENVIRONMENT, GENERAL_CONTEXT, '.pyx')
 
     if arg_options.matrices or arg_options.all:

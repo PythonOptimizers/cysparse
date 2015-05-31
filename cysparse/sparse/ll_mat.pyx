@@ -4,7 +4,9 @@ from cysparse.sparse.s_mat cimport unexposed_value
 
 from cysparse.types.cysparse_types import *
 from cysparse.types.cysparse_types cimport *
+from cysparse.types.cysparse_types cimport min_type2
 
+#from cysparse.types.cysparse_generic_types cimport min_type
 
 from cysparse.sparse.s_mat cimport SparseMatrix
 
@@ -418,13 +420,10 @@ def NewLLSparseMatrixFromMMFile(filename, store_zeros=False, test_bounds=True):
     matrix_object, matrix_type, data_type, storage_format = get_mm_matrix_type_specifications(filename)
     n, m, nnz = get_mm_matrix_dimension_specifications(filename)
 
-    print n, m, nnz
-    print matrix_object, matrix_type, data_type, storage_format
-
     # Define itype
-    cdef CySparseType n_type = min_type(n,[INT32_T,INT64_T])
+    cdef CySparseType n_type = min_type2(n,[INT32_T,INT64_T])
 
-    cdef CySparseType m_type = min_type(n,[INT32_T,INT64_T])
+    cdef CySparseType m_type = min_type2(m,[INT32_T,INT64_T])
 
     cdef CySparseType itype = <CySparseType> result_type(n_type, m_type)
 

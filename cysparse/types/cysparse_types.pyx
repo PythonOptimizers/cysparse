@@ -1,7 +1,10 @@
 from __future__ import print_function
 
 cimport cysparse.types.cysparse_types as cp_types
+
 cimport cython
+from libc.float cimport FLT_MAX, DBL_MAX, LDBL_MAX, FLT_MIN, DBL_MIN, LDBL_MIN
+from libc.limits cimport INT_MIN, INT_MAX, UINT_MAX, LONG_MIN, LONG_MAX, ULONG_MAX, LLONG_MIN, LLONG_MAX, ULLONG_MAX
 
 from collections import OrderedDict
 import sys
@@ -166,7 +169,7 @@ def is_element_type(cp_types.CySparseType type1):
     return type1 in ELEMENT_TYPES
 
 ########################################################################################################################
-# CASTS
+# TYPE CASTS
 ########################################################################################################################
 
 # EXPLICIT TYPE TESTS
@@ -307,61 +310,25 @@ def report_basic_types(OUT=sys.stdout):
     for key, item in BASIC_TYPES_STR_DICT.items():
         print('{:12}: {:10d} bits ({:d})'.format(key, item[0], item[1]), file=OUT)
 
-########################################################################################################################
-# Tests on numbers
-########################################################################################################################
-# EXPLICIT TYPE TESTS
-
-def min_type(n, type_list):
-    return _min_type(n, type_list)
-
-cdef test_uint32_t()
-@cython.overflowcheck(True)
-cdef _min_type(n, type_list):
-    """
-    Return the minimal type that can `n` can be casted into from a list of types.
-
-    Note:
-        We suppose that the list is sorted by ascending types.
-
-    Raises:
-        ``TypeError`` if no type can be used to cast `n` or if one element in the type list is not recognized as a
-        ``CySparseType``.
-
-    Args:
-        n: Python number to cast.
-        type_list: List of *types*, aka ``CySparseType`` ``enum``\s.
-
-    Warning:
-        This function is **slow**.
-    """
-    if not (set(type_list) <= set(BASIC_TYPES)):
-        raise TypeError('Som type(s) are not recognized as basic CySparseType')
-
-    cdef:
-        cp_types.UINT32_t var_uint32_t
-        cp_types.INT32_t var_int32_t
-
-    print ("type of n: " + str(type(n)))
+cdef CySparseType min_type2(n, type_list) except cp_types.UINT32_T:
     for type_el in type_list:
         if type_el == cp_types.UINT32_T:
-            try:
-                var_uint32_t = n
-                n = n -1
-                n = n + 1
-                return type_el
-            except:
-                pass
+            if 0 <= n <= cp_types.UINT32_MAX:
+                return <cp_types.CySparseType> type_el
         elif type_el == cp_types.INT32_T:
-            print("here we go")
-            try:
-                var_int32_t = n
-                n = n -1
-                n = n + 1
-                print("we did it!")
-                return type_el
-            except:
-                pass
+            if cp_types.INT32_MIN <= n <= cp_types.INT32_MAX:
+                return <cp_types.CySparseType> type_el
+        elif type_el == cp_types.UINT64_T:
+            if 0 <= n <= cp_types.UINT64_MAX:
+                return <cp_types.CySparseType> type_el
+        elif type_el == cp_types.INT64_T:
+            print(cp_types.INT64_MIN)
+            print(n)
+            print(cp_types.INT64_MAX)
+            if cp_types.INT64_MIN <= n <= cp_types.INT64_MAX:
+                return <cp_types.CySparseType> type_el
+        #elif type_el == cp_types.FLOAT32_T:
+        #    if FLT_MIN <= n <= FLT_MAX:
+        #        return <cp_types.CySparseType> type_el
 
     raise TypeError('No type was found to cast number')
-

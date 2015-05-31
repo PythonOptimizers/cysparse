@@ -51,8 +51,9 @@ include_dirs = [numpy_include, '.']
 
 ext_params = {}
 ext_params['include_dirs'] = include_dirs
-ext_params['extra_compile_args'] = ["-O2"]
+ext_params['extra_compile_args'] = ["-O2", '-std=c99']
 ext_params['extra_link_args'] = []
+
 
 ########################################################################################################################
 #                                                *** types ***
@@ -62,6 +63,8 @@ base_ext = [
               sources=["cysparse/types/cysparse_types.pxd", "cysparse/types/cysparse_types.pyx"]),
     Extension(name="cysparse.types.cysparse_numpy_types",
               sources=["cysparse/types/cysparse_numpy_types.pxd", "cysparse/types/cysparse_numpy_types.pyx"]),
+    Extension(name="cysparse.types.cysparse_generic_types",
+              sources=["cysparse/types/cysparse_generic_types.pxd", "cysparse/types/cysparse_generic_types.pyx"]),
     ]
 
 ########################################################################################################################

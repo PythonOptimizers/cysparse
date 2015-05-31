@@ -1,0 +1,74 @@
+"""
+Several generic functions on types.
+"""
+from cysparse.types.cysparse_types cimport *
+from cysparse.types.cysparse_types import *
+
+########################################################################################################################
+# Tests on numbers
+########################################################################################################################
+# EXPLICIT TYPE TESTS
+{% for type_name in basic_type_list %}
+cdef test_cast_to_@type_name@(@type_name@ n):
+    """
+    Little function to test if casting is possible or not thanks to Cython overflow check.
+
+    In itself, this function doesn't do anything but if the arguement is not accepted, Cython throws at runtime an ``OverflowError``.
+
+    Args:
+        n (@type_name@): Number to cast.
+
+    Raises:
+        ``OverflowError`` is casting is **not** possible.
+
+    Note:
+        This is a meta function. Don't use it unless you really know what you are doing.
+    """
+    cdef @type_name@ n_ = n
+{% endfor %}
+
+# EXPLICIT TYPE TESTS
+cdef min_type(n, type_list):
+    """
+    Return the minimal type that can `n` can be casted into from a list of types.
+
+    Note:
+        We suppose that the list is sorted by ascending types.
+
+    Raises:
+        ``TypeError`` if no type can be used to cast `n` or if one element in the type list is not recognized as a
+        ``CySparseType``.
+
+    Args:
+        n: Python number to cast.
+        type_list: List of *types*, aka ``CySparseType`` ``enum``\s.
+
+    Warning:
+        This function is **slow**.
+    """
+    if not (set(type_list) <= set(BASIC_TYPES)):
+        raise TypeError('Som type(s) are not recognized as basic CySparseType')
+
+    for type_el in type_list:
+{% for type_name in basic_type_list %}
+    {% if type_name == basic_type_list|first %}
+        if type_el == @type_name|type2enum@:
+            try:
+                test_cast_to_@type_name@(n)
+                return @type_name|type2enum@
+            except:
+                pass
+    {% else %}
+        elif type_el == @type_name|type2enum@:
+            try:
+                test_cast_to_@type_name@(n)
+                return @type_name|type2enum@
+            except:
+                pass
+    {% endif %}
+{% endfor %}
+
+    raise TypeError('No type was found to cast number')
+
+
+

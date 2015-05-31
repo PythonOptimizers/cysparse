@@ -1,0 +1,7 @@
+from cysparse.types.cysparse_types cimport *
+
+{% for type_name in basic_type_list %}
+cdef test_cast_to_@type_name@(@type_name@ n)
+{% endfor %}
+
+cdef min_type(n, type_list)
