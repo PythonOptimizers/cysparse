@@ -34,10 +34,8 @@ def construct_sparse_matrix(A, n, nbr_elements):
 ########################################################################################################################
 class LLMatInfiniteNormBenchmark(benchmark.Benchmark):
 
-
     label = "Infinite norm with 100 elements and size = 1,000"
     each = 100
-
 
     def setUp(self):
 
@@ -54,7 +52,6 @@ class LLMatInfiniteNormBenchmark(benchmark.Benchmark):
         assert self.p_norm_inf == self.c_norm_inf
             #assert self.w_c[i] == self.w_s[i]
 
-
     def test_pysparse(self):
         self.p_norm_inf = self.A_p.norm('inf')
         return
@@ -63,12 +60,11 @@ class LLMatInfiniteNormBenchmark(benchmark.Benchmark):
         self.c_norm_inf = self.A_c.norm('inf')
         return
 
-class LLMatInfiniteNormBenchmark_1(LLMatInfiniteNormBenchmark):
 
+class LLMatInfiniteNormBenchmark_1(LLMatInfiniteNormBenchmark):
 
     label = "Infinite norm with 1000 elements and size = 10,000"
     each = 100
-
 
     def setUp(self):
 
@@ -81,12 +77,11 @@ class LLMatInfiniteNormBenchmark_1(LLMatInfiniteNormBenchmark):
         self.A_p = spmatrix.ll_mat(self.size, self.size, self.nbr_elements)
         construct_sparse_matrix(self.A_p, self.size, self.nbr_elements)
 
-class LLMatInfiniteNormBenchmark_2(LLMatInfiniteNormBenchmark):
 
+class LLMatInfiniteNormBenchmark_2(LLMatInfiniteNormBenchmark):
 
     label = "Infinite norm with 10,000 elements and size = 100,000"
     each = 100
-
 
     def setUp(self):
 
@@ -99,12 +94,11 @@ class LLMatInfiniteNormBenchmark_2(LLMatInfiniteNormBenchmark):
         self.A_p = spmatrix.ll_mat(self.size, self.size, self.nbr_elements)
         construct_sparse_matrix(self.A_p, self.size, self.nbr_elements)
 
-class LLMatInfiniteNormBenchmark_3(LLMatInfiniteNormBenchmark):
 
+class LLMatInfiniteNormBenchmark_3(LLMatInfiniteNormBenchmark):
 
     label = "Infinite norm with 80,000 elements and size = 100,000"
     each = 100
-
 
     def setUp(self):
 
@@ -116,6 +110,7 @@ class LLMatInfiniteNormBenchmark_3(LLMatInfiniteNormBenchmark):
 
         self.A_p = spmatrix.ll_mat(self.size, self.size, self.nbr_elements)
         construct_sparse_matrix(self.A_p, self.size, self.nbr_elements)
+
 
 if __name__ == '__main__':
     benchmark.main(format="markdown", numberFormat="%.4g")

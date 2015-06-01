@@ -1163,6 +1163,7 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX128_t(MutableSparseMatrix_INT32_t_COMPL
             OUT: Output stream that print (Python3) can print to.
 
         """
+        # EXPLICIT TYPE TESTS
         # TODO: adapt to any numbers... and allow for additional parameters to control the output
         # TODO: don't create temporary matrix
         cdef INT32_t i, k, first = 1
@@ -1184,18 +1185,20 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX128_t(MutableSparseMatrix_INT32_t_COMPL
             if not mat:
                 raise MemoryError()
 
+            # CREATION OF TEMP MATRIX
             for i from 0 <= i < self.nrow:
                 for j from 0 <= j < self.ncol:
-                    # EXPLICIT TYPE TESTS
 
                     mat[i* self.ncol + j] = 0.0 + 0.0j
 
                 k = self.root[i]
                 while k != -1:
                     mat[(i*self.ncol)+self.col[k]] = self.val[k]
+                    if self.is_symmetric:
+                        mat[(self.col[k]*self.ncol)+i] = self.val[k]
                     k = self.link[k]
 
-            # EXPLICIT TYPE TESTS
+            # PRINTING OF TEMP MATRIX
             for i from 0 <= i < self.nrow:
                 for j from 0 <= j < self.ncol:
                     val = mat[(i*self.ncol)+j]

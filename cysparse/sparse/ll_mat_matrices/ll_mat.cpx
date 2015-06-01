@@ -1332,6 +1332,7 @@ YOU HAVE TO CAST YOUR NEW TYPE HERE
             OUT: Output stream that print (Python3) can print to.
 
         """
+        # EXPLICIT TYPE TESTS
         # TODO: adapt to any numbers... and allow for additional parameters to control the output
         # TODO: don't create temporary matrix
         cdef @index@ i, k, first = 1
@@ -1353,9 +1354,9 @@ YOU HAVE TO CAST YOUR NEW TYPE HERE
             if not mat:
                 raise MemoryError()
 
+            # CREATION OF TEMP MATRIX
             for i from 0 <= i < self.nrow:
                 for j from 0 <= j < self.ncol:
-                    # EXPLICIT TYPE TESTS
 {% if type in integer_list %}
                     mat[i* self.ncol + j] = 0
 {% elif type in complex_list %}
@@ -1366,9 +1367,11 @@ YOU HAVE TO CAST YOUR NEW TYPE HERE
                 k = self.root[i]
                 while k != -1:
                     mat[(i*self.ncol)+self.col[k]] = self.val[k]
+                    if self.is_symmetric:
+                        mat[(self.col[k]*self.ncol)+i] = self.val[k]
                     k = self.link[k]
 
-            # EXPLICIT TYPE TESTS
+            # PRINTING OF TEMP MATRIX
             for i from 0 <= i < self.nrow:
                 for j from 0 <= j < self.ncol:
                     val = mat[(i*self.ncol)+j]

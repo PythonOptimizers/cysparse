@@ -4,7 +4,7 @@ import numpy as np
 
 import sys
 
-l1 = NewLLSparseMatrix(nrow=10, ncol=10, size_hint=40)
+l1 = NewLLSparseMatrix(nrow=4, ncol=4, size_hint=10, is_symmetric=True)
 print l1
 print type(l1)             # lots of classes are used internally...
 
@@ -17,25 +17,31 @@ l1.compress()              # shrink the matrix as much as possible
 print l1.memory_real()
 
 l1[2, 2] = 4
-#l1[9, 9] = np.inf
-#l1[0, 0] = np.nan
+#l1[1, 1] = np.inf
+#l1[2, 2] = np.nan
 
-l1.put_triplet([1,1], [1, 2], [5.6, 6.7])  # i, j, val
-print l1
+l1.put_triplet([1,2], [1, 1], [5.6, 6.7])  # i, j, val
+for i in range(4):
+    l1[i, 0] = i *2 / 3
 
-print l1[2, 2]
-print l1[0, 0]             # was not assigned -> 0.0 by default
-
-l1[4, 5] = 98374983.093843483
+l1[3, 3] = 2.7
 
 l1.print_to(sys.stdout)
 
 ########################################################################################################################
 print "=" * 80
 
+print "Symmetric matrix:"
 print "inf norm = " + str(l1.norm('inf'))
 print "1 norm = " + str(l1.norm('1'))
 print "frob norm = " + str(l1.norm('frob'))
+print '*' * 30
+print "Non symmetric version:"
+l1.generalize()
+print "inf norm = " + str(l1.norm('inf'))
+print "1 norm = " + str(l1.norm('1'))
+print "frob norm = " + str(l1.norm('frob'))
+
 
 ########################################################################################################################
 print "=" * 80
