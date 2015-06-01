@@ -7,29 +7,70 @@
 Installation
 ==============
 
-Automatic
-------------
+The installation can be done in a few simple steps:
 
-Manual
---------
+1. Clone the repository;
+2. Install the dependencies;
+3. Generate the source code:
+
+   Some parts of the library source code have to be generated. We use a script:
+
+   ..  code-block:: bash
+
+       python generate_code.py -a
+        
+   The switch ``-a`` stands for ``--all`` and generates the entire library. If you need help, try the ``-h`` switch.
+    
+4. Compile and install the library:
+
+   Use the traditionnal:
+
+   ..  code-block:: bash
+
+       python setup.py install
+
+
+
 
 
 
 Depencies
 ============
 
+All :program:`Python` dependencies are described in the :file:`requirements.txt` files. You can easily install them all with:
+
+..  code-block:: bash
+
+    pip install -r requirements.txt
+
+or a similar command. Other dependencies need some manual installation. Read further.
+
+
 :program:`CySparse`
 ---------------------
+
+- :program:`Cython`
+- :program:`Jinja2`
+- argparse
+- fortranformat
+- :program:`SuiteSparse` (for the moment, it not possible to install :program:`CySparse` **without** :program:`SuiteSparse`)
 
 Documentation
 -----------------
 
+- :program:`Sphinx`
+- sphinx-bootstrap-theme
+
 Unit testing
 ------------
 
+- :program:`PySparse`
 
 Performance testing
 ----------------------
+
+- :program:`PySparse`
+- benchmark.py (https://github.com/optimizers/benchmark.py)
 
 Inconveniences
 ==============
@@ -47,7 +88,7 @@ all the .c files) [#cython_try_recompiling]_.
 See Robert Bradshaw's `answer <https://groups.google.com/forum/?hl=en#!topic/cython-users/cOAVM0whJkY>`_. 
 See also `enhancements distutils_preprocessing <https://github.com/cython/cython/wiki/enhancements-distutils_preprocessing>`_.
 
-**If** you modify the templated code, some dependencies might be missing (and this is a **bug** you can report) in the (generated) ``setup.py`` file and require manual intervention, i.e. recompilation. The easiest way to go is to recompile everything from scratch. First delete the generated files:
+**If** you modify the templated code, some dependencies might be missing in the (generated) ``setup.py`` file and require manual intervention, i.e. recompilation. The easiest way to go is to recompile everything from scratch [#missing_dependencies_generated_templates]_. First delete the generated files:
 
 ..  code-block:: bash
 
@@ -65,7 +106,10 @@ This will delete **all** :program:`C` ``.c`` files. You can then recompile the l
 
 ..  raw:: html
 
-    <h4>Footnote</h4>
+    <h4>Footnotes</h4>
     
 
 ..  [#cython_try_recompiling] The problem is interdependencies between source files that are not catched at compile time. Whenever :program:`Cython` can catch them at runtime, it throws this ``ValueError``.
+
+..  [#missing_dependencies_generated_templates] Interdependencies between generated templates are **not** monitored. Instead of recompiling everything from scratch, you can also simply delete the corresponding :program:`Cython` generated files. This will spare you some compilation time.
+     

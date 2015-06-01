@@ -17,13 +17,14 @@ l1.compress()              # shrink the matrix as much as possible
 print l1.memory_real()
 
 l1[2, 2] = 4
-#l1[1, 1] = np.inf
-#l1[2, 2] = np.nan
+
 
 l1.put_triplet([1,2], [1, 1], [5.6, 6.7])  # i, j, val
 for i in range(4):
     l1[i, 0] = i *2 / 3 + 1.5
 
+l1[1, 1] = np.inf
+l1[2, 2] = np.nan
 l1[3, 3] = 2.7
 
 l1.print_to(sys.stdout)

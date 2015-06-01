@@ -62,7 +62,7 @@ print l2.find()
 l2.print_to(sys.stdout)
 ########################################################################################################################
 print "=" * 80
-l3 = NewLLSparseMatrix(size=4, itype=types.INT64_T, dtype=types.COMPLEX128_T, store_zeros=True)
+l3 = NewLLSparseMatrix(size=4, itype=types.INT64_T, dtype=types.COMPLEX256_T, store_zeros=True)
 print l3
 
 l3[2,2] = 67.0+5.0j
@@ -96,4 +96,5 @@ print l3_view_view.is_empty
 
 ########################################################################################################################
 print "=" * 80
+
 
