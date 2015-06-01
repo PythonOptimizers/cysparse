@@ -63,6 +63,8 @@ cdef class LLSparseMatrix_@index@_@type@(MutableSparseMatrix_@index@_@type@):
     cpdef object items(self)
     cpdef find(self)
 
+    cpdef take_triplet(self, id1, id2, cnp.ndarray[cnp.@type|cysparse_type_to_numpy_c_type@, ndim=1] b)
+
     ####################################################################################################################
     # Norms
     ####################################################################################################################

@@ -1,5 +1,5 @@
 """
-This file compares different implementations of ``row_scale``, i.e. scale the i:sup:`th` row of A by ``v[i]`` in place for ``i=0, ..., nrow-1``.
+This file compares different implementations of ``put``.
 
 We compare the libraries:
 
@@ -30,10 +30,10 @@ def construct_sparse_matrix(A, n, nbr_elements):
 ########################################################################################################################
 # Benchmark
 ########################################################################################################################
-class LLMatRowScaleBenchmark(benchmark.Benchmark):
+class LLMatTakeTripletBenchmark(benchmark.Benchmark):
 
 
-    label = "Simple row_scale with 100 elements and size = 1,000"
+    label = "Simple take_triplet with 100 elements, size = 1,000 and take_size = 1,000"
     each = 100
 
 
@@ -41,6 +41,9 @@ class LLMatRowScaleBenchmark(benchmark.Benchmark):
 
         self.nbr_elements = 100
         self.size = 1000
+        self.take_size = 1000
+
+        assert self.take_size <= self.size
 
         self.A_c = NewLLSparseMatrix(size=self.size, size_hint=self.nbr_elements, dtype=FLOAT64_T)
         construct_sparse_matrix(self.A_c, self.size, self.nbr_elements)
@@ -48,33 +51,38 @@ class LLMatRowScaleBenchmark(benchmark.Benchmark):
         self.A_p = spmatrix.ll_mat(self.size, self.size, self.nbr_elements)
         construct_sparse_matrix(self.A_p, self.size, self.nbr_elements)
 
-        self.v = np.arange(0, self.size, dtype=np.float64)
+        self.id1 = np.arange(0, self.take_size, dtype=np.int32)
+        self.id2 = np.full(self.take_size, 37, dtype=np.int32)
 
-    #def tearDown(self):
-    #    for i in xrange(self.size):
-    #        for j in xrange(self.size):
-    #            assert self.A_c[i,j] == self.A_p[i,j]
+        self.b_c = np.empty((self.take_size,),dtype=np.float64)
+        self.b_p = np.empty((self.take_size,),dtype=np.float64)
+
+    def tearDown(self):
+        for i in xrange(self.take_size):
+            assert self.b_c[i] == self.b_p[i]
 
     def test_pysparse(self):
-        self.A_p.row_scale(self.v)
+        self.A_p.take(self.b_p, self.id1, self.id2)
         return
 
     def test_cysparse(self):
-        self.A_c.row_scale(self.v)
+        self.A_c.take_triplet(self.id1, self.id2, self.b_c)
         return
 
+class LLMatTakeTripletBenchmark_1(LLMatTakeTripletBenchmark):
 
-class LLMatRowScaleBenchmark_1(LLMatRowScaleBenchmark):
 
-
-    label = "Simple row_scale with 1000 elements and size = 10,000"
-    each = 10
+    label = "Simple take_triplet with 1000 elements, size = 10,000 and take_size = 10,000"
+    each = 100
 
 
     def setUp(self):
 
         self.nbr_elements = 1000
         self.size = 10000
+        self.take_size = 10000
+
+        assert self.take_size <= self.size
 
         self.A_c = NewLLSparseMatrix(size=self.size, size_hint=self.nbr_elements, dtype=FLOAT64_T)
         construct_sparse_matrix(self.A_c, self.size, self.nbr_elements)
@@ -82,20 +90,27 @@ class LLMatRowScaleBenchmark_1(LLMatRowScaleBenchmark):
         self.A_p = spmatrix.ll_mat(self.size, self.size, self.nbr_elements)
         construct_sparse_matrix(self.A_p, self.size, self.nbr_elements)
 
-        self.v = np.arange(0, self.size, dtype=np.float64)
+        self.id1 = np.arange(0, self.take_size, dtype=np.int32)
+        self.id2 = np.full(self.take_size, 37, dtype=np.int32)
+
+        self.b_c = np.empty((self.take_size,),dtype=np.float64)
+        self.b_p = np.empty((self.take_size,),dtype=np.float64)
 
 
-class LLMatRowScaleBenchmark_2(LLMatRowScaleBenchmark):
+class LLMatTakeTripletBenchmark_2(LLMatTakeTripletBenchmark):
 
 
-    label = "Simple row_scale with 10,000 elements and size = 100,000"
-    each = 10
+    label = "Simple take_triplet with 10000 elements, size = 100,000 and take_size = 100,000"
+    each = 100
 
 
     def setUp(self):
 
         self.nbr_elements = 10000
         self.size = 100000
+        self.take_size = 100000
+
+        assert self.take_size <= self.size
 
         self.A_c = NewLLSparseMatrix(size=self.size, size_hint=self.nbr_elements, dtype=FLOAT64_T)
         construct_sparse_matrix(self.A_c, self.size, self.nbr_elements)
@@ -103,28 +118,11 @@ class LLMatRowScaleBenchmark_2(LLMatRowScaleBenchmark):
         self.A_p = spmatrix.ll_mat(self.size, self.size, self.nbr_elements)
         construct_sparse_matrix(self.A_p, self.size, self.nbr_elements)
 
-        self.v = np.arange(0, self.size, dtype=np.float64)
+        self.id1 = np.arange(0, self.take_size, dtype=np.int32)
+        self.id2 = np.full(self.take_size, 37, dtype=np.int32)
 
-
-class LLMatRowScaleBenchmark_3(LLMatRowScaleBenchmark):
-
-
-    label = "Simple row_scale with 80,000 elements and size = 100,000"
-    each = 10
-
-
-    def setUp(self):
-
-        self.nbr_elements = 80000
-        self.size = 100000
-
-        self.A_c = NewLLSparseMatrix(size=self.size, size_hint=self.nbr_elements, dtype=FLOAT64_T)
-        construct_sparse_matrix(self.A_c, self.size, self.nbr_elements)
-
-        self.A_p = spmatrix.ll_mat(self.size, self.size, self.nbr_elements)
-        construct_sparse_matrix(self.A_p, self.size, self.nbr_elements)
-
-        self.v = np.arange(0, self.size, dtype=np.float64)
+        self.b_c = np.empty((self.take_size,),dtype=np.float64)
+        self.b_p = np.empty((self.take_size,),dtype=np.float64)
 
 if __name__ == '__main__':
     benchmark.main(format="markdown", numberFormat="%.4g")

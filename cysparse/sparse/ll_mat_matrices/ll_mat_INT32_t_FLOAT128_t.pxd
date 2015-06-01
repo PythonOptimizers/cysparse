@@ -60,6 +60,8 @@ cdef class LLSparseMatrix_INT32_t_FLOAT128_t(MutableSparseMatrix_INT32_t_FLOAT12
     cpdef object items(self)
     cpdef find(self)
 
+    cpdef take_triplet(self, id1, id2, cnp.ndarray[cnp.npy_float128, ndim=1] b)
+
     ####################################################################################################################
     # Norms
     ####################################################################################################################

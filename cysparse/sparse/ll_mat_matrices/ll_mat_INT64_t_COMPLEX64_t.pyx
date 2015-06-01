@@ -65,6 +65,11 @@ cdef extern from "Python.h":
     PyObject* Py_BuildValue(char *format, ...)
     PyObject* PyList_New(Py_ssize_t len)
     void PyList_SET_ITEM(PyObject *list, Py_ssize_t i, PyObject *o)
+    PyObject* PyList_GET_ITEM(PyObject *list, Py_ssize_t i)
+    int PyList_Check(PyObject *p)
+    Py_ssize_t PyList_Size(PyObject *list)
+
+    long PyInt_AS_LONG(PyObject *io)
     PyObject* PyFloat_FromDouble(double v)
     Py_complex PyComplex_AsCComplex(PyObject *op)
 
@@ -663,6 +668,7 @@ cdef class LLSparseMatrix_INT64_t_COMPLEX64_t(MutableSparseMatrix_INT64_t_COMPLE
 
 
         """
+        # TODO: to be completely rewritten
         cdef Py_ssize_t index_i_length = len(index_i)
         cdef Py_ssize_t index_j_length = len(index_j)
         cdef Py_ssize_t val_length = len(val)
@@ -677,6 +683,108 @@ cdef class LLSparseMatrix_INT64_t_COMPLEX64_t(MutableSparseMatrix_INT64_t_COMPLE
 
     ####################################################################################################################
     #                                            *** GET ***
+    cpdef take_triplet(self, id1, id2, cnp.ndarray[cnp.npy_complex64, ndim=1] b):
+        """
+        Grab values and populate b with it.
+
+        This operation is equivalent to
+
+            for i in range(len(b)):
+                b[i] = A[id1[i],id2[i]]
+
+        Args:
+            id1, id2: List or :program:`NumPy` arrays with indices. Both **must** be of the same type. In case of :program:`NumPy` arrays, they must
+                contain elements of type INT64_t.
+            b: :program:`NumpY` array to fill with the values.
+
+        Raises:
+            ``TypeError`` is both arguments to give indices are not of the same type (``list`` or :program:`NumPy` arrays) or if
+            one of the argument is not a ``list`` or a :program:`NumPy` array.
+
+            ``IndexError`` whenever length don't match.
+
+            A supplementary condition holds when :program:`NumPy` arrays are used to give the indices:
+
+            - the indices arrays **must** be C-contiguous and
+            - index elements **must** be of same type than the ``itype`` of the matrix.
+
+            In both cases, a ``TypeError`` is raised.
+
+        Note:
+            This method is not as rich as its :program:`PySparse` equivalent but at the same time accept ``list``\s for the indices.
+
+        """
+        cdef:
+            Py_ssize_t id1_list_length, id2_list_length, i_list # in case we have lists
+            INT64_t id1_array_length, id2_array_length, i_array  # in case we have numpy arrays
+
+        # direct access to NumPy vector b
+        cdef COMPLEX64_t * b_data
+
+        # if indices arrays are given by NumPy arrays
+        cdef INT64_t * id1_data
+        cdef INT64_t * id2_data
+
+        # stride size if any
+        cdef size_t sd = sizeof(COMPLEX64_t)
+        cdef INT64_t incx = b.strides[0] / sd
+
+        # test arguments
+        if PyList_Check(<PyObject *>id1) and PyList_Check(<PyObject *>id2):
+            id1_list_length = PyList_Size(<PyObject *>id1)
+            id2_list_length = PyList_Size(<PyObject *>id2)
+            if id1_list_length != id2_list_length:
+                raise IndexError('Both indices lists must be of same size')
+
+            if b.size != id1_list_length:
+                raise IndexError('NumPy array must be of the same size than the indices lists')
+
+            # direct access to vector b
+            b_data = <COMPLEX64_t *> cnp.PyArray_DATA(b)
+
+            if cnp.PyArray_ISCONTIGUOUS(b):
+                # fill vector
+                for i_list from 0 <= i_list < id1_list_length:
+                    b_data[i_list] = self.safe_at(PyInt_AS_LONG(PyList_GET_ITEM(<PyObject *>id1, i_list)), PyInt_AS_LONG(PyList_GET_ITEM(<PyObject *>id2, i_list)))
+            else:  # non contiguous array
+                # fill vector
+                for i_list from 0 <= i_list < id1_list_length:
+                    b_data[i_list*incx] = self.safe_at(PyInt_AS_LONG(PyList_GET_ITEM(<PyObject *>id1, i_list)), PyInt_AS_LONG(PyList_GET_ITEM(<PyObject *>id2, i_list)))
+
+        elif cnp.PyArray_Check(id1) and cnp.PyArray_Check(id2):
+            id1_array_length = id1.size
+            id2_array_length = id2.size
+            if id1_array_length != id2_array_length:
+                raise IndexError('Both indices lists must be of same size')
+
+            if b.size != id1_array_length:
+                raise IndexError('NumPy array must be of the same size than the indices lists')
+
+            if not cnp.PyArray_ISCONTIGUOUS(id1) or not cnp.PyArray_ISCONTIGUOUS(id2):
+                raise TypeError('Both NumPy indices arrays must be C-contiguous')
+
+            if not are_mixed_types_compatible(INT64_T, id1.dtype) or not are_mixed_types_compatible(INT64_T, id2.dtype):
+                raise TypeError('Both NumPy indices arrays must contain elements of the right index type (%s)' % cysparse_to_numpy_type(INT64_T))
+
+            # direct access to vector b
+            b_data = <COMPLEX64_t *> cnp.PyArray_DATA(b)
+
+            # direct access to indices arrays
+            id1_data = <INT64_t *> cnp.PyArray_DATA(id1)
+            id2_data = <INT64_t *> cnp.PyArray_DATA(id2)
+
+            if cnp.PyArray_ISCONTIGUOUS(b):
+                # fill vector
+                for i_array from 0 <= i_array < id1_array_length:
+                    b_data[i_array] = self.safe_at(id1_data[i_array], id2_data[i_array])
+            else:  # non contiguous array
+                # fill vector
+                for i_array from 0 <= i_array < id1_array_length:
+                    b_data[i_list*incx] = self.safe_at(id1_data[i_array], id2_data[i_array])
+
+        else:
+            raise TypeError('Both arguments with indices must be of the same type (list or NumPy arrays)')
+
     cpdef object keys(self):
         """
         Return a list of tuples (i,j) of non-zero matrix entries.
@@ -700,6 +808,7 @@ cdef class LLSparseMatrix_INT64_t_COMPLEX64_t(MutableSparseMatrix_INT64_t_COMPLE
                 k = self.root[i]
                 while k != -1:
                     j = self.col[k]
+                    # only valid because we use a **new** list, see C API
                     PyList_SET_ITEM(list_p, pos, Py_BuildValue("ii", i, j))
                     pos += 1
                     k = self.link[k]
