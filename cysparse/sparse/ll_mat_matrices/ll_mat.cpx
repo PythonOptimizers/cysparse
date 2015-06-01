@@ -1086,6 +1086,8 @@ YOU HAVE TO DEFINE OR CAST YOUR NEW UNRECOGNIZED TYPE
 
         # create temp array for column results
         cdef @type|cysparse_type_to_real_sum_cysparse_type@ * col_sum = <@type|cysparse_type_to_real_sum_cysparse_type@ *> calloc(self.ncol, sizeof(@type|cysparse_type_to_real_sum_cysparse_type@))
+        if not col_sum:
+            raise MemoryError()
 
         if self.is_symmetric:
 

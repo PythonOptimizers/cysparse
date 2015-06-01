@@ -74,41 +74,6 @@ cdef extern from "limits.h":
     enum:
         CHAR_BIT
 
-# COMMENTED CODE DOESN'T WORK !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-# already defined in libc.float
-# cdef extern from "float.h":
-#     enum:  FLT_MAX
-#     enum:  DBL_MAX
-#     enum: LDBL_MAX
-#
-#     enum:  FLT_MIN
-#     enum:  DBL_MIN
-#     enum: LDBL_MIN
-
-# already defined in libc.limits
-# cdef extern from "limits.h":
-#     enum:    INT_MIN
-#     enum:    INT_MAX
-#     enum:   UINT_MAX
-#
-#     enum:   LONG_MIN
-#     enum:   LONG_MAX
-#     enum:  ULONG_MAX
-#
-#     enum:  LLONG_MIN
-#     enum:  LLONG_MAX
-#     enum: ULLONG_MAX
-
-# C99 compliant
-cdef extern from "stdint.h":
-    enum:
-        INT32_MIN
-        INT32_MAX
-        UINT32_MAX
-        INT64_MIN
-        INT64_MAX
-        UINT64_MAX
-
 # in bits
 cdef enum CySparseTypeBitSize:
     INT32_t_BIT = sizeof(INT32_t) * CHAR_BIT
@@ -129,10 +94,35 @@ cdef struct CPType:
     CySparseType dtype
     CySparseType itype
 
+#################################################################################################
+#                                 *** BASIC TYPES LIMITS ***
+#################################################################################################
+
+# Warning: **don't** use the Cython version as they store the values inside an anonymous enum and thus cast everything
+# before you even have a chance to grab the constants...
+# TODO: is this system proof?
+cdef extern from "stdint.h":
+    cdef INT32_t INT32_MIN
+    cdef INT32_t INT32_MAX
+    cdef UINT32_t UINT32_MAX
+    cdef INT64_t INT64_MIN
+    cdef INT64_t INT64_MAX
+    cdef UINT64_t UINT64_MAX
+
+cdef extern from 'float.h':
+    cdef FLOAT32_t FLT_MAX
+    cdef FLOAT32_t FLT_MIN
+
+    cdef FLOAT64_t DBL_MIN
+    cdef FLOAT64_t DBL_MAX
+
+    cdef FLOAT128_t LDBL_MIN
+    cdef FLOAT128_t LDBL_MAX
+
 ########################################################################################################################
 # Functions
 ########################################################################################################################
 cpdef int result_type(CySparseType type1, CySparseType type2) except -1
 cpdef int result_real_sum_type(CySparseType type1)
 
-cdef CySparseType min_type2(n, type_list)  except UINT32_T
+cpdef CySparseType min_integer_type(n, type_list) except? UINT64_T

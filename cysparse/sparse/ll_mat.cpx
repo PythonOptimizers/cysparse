@@ -4,7 +4,7 @@ from cysparse.sparse.s_mat cimport unexposed_value
 
 from cysparse.types.cysparse_types import *
 from cysparse.types.cysparse_types cimport *
-from cysparse.types.cysparse_types cimport min_type2
+from cysparse.types.cysparse_types cimport min_integer_type
 
 #from cysparse.types.cysparse_generic_types cimport min_type
 
@@ -303,7 +303,7 @@ def NewLLSparseMatrixFromMMFile(filename, store_zeros=False, test_bounds=True):
     n, m, nnz = get_mm_matrix_dimension_specifications(filename)
 
     # Define itype
-    cdef CySparseType n_type = min_type2(n,[
+    cdef CySparseType n_type = min_integer_type(n,[
      {%- for index_name in index_list -%}
        @index_name|type2enum@
        {%- if index_name != index_list|last -%}
@@ -312,7 +312,7 @@ def NewLLSparseMatrixFromMMFile(filename, store_zeros=False, test_bounds=True):
      {%- endfor -%}
      ])
 
-    cdef CySparseType m_type = min_type2(m,[
+    cdef CySparseType m_type = min_integer_type(m,[
      {%- for index_name in index_list -%}
        @index_name|type2enum@
        {%- if index_name != index_list|last -%}

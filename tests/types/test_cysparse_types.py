@@ -1,5 +1,7 @@
 """
 Test CySparse's basic types.
+
+We **only** test 64bits and 32bits architectures.
 """
 
 from cysparse.types.cysparse_types import *
@@ -321,6 +323,54 @@ class CySparseTypesComparingBasicTypesTest(CySparseTypesBaseTestCase):
             result_type(UINT64_T, INT32_T)
             result_type(UINT64_T, INT64_T)
 
+
+class CySparseTypesNumberCastingBasicTypesTest(CySparseTypesBaseTestCase):
+    """
+    Test the resulting type corresponding to a number.
+    """
+    def setUp(self):
+        import platform
+        bits, linkage = platform.architecture()
+        if bits == '64bit':
+            self.unsigned_int32_n = 2**32 - 1
+            self.unsigned_int64_n = 2**64 - 1
+
+            self.signed_int32_n = 2**31-1
+            self.signed_negative_int32_n = - 2**31 + 1
+
+            self.signed_int64_n = 2**63-1
+            self.signed_negative_int64_n = - 2**63 + 1
+
+        elif bits == '32bit':
+            self.unsigned_int32_n = 2**16 - 1
+            self.unsigned_int64_n = 2**32 - 1
+
+            self.signed_int32_n = 2**15-1
+            self.signed_negative_int32_n = - 2**15 + 1
+
+            self.signed_int64_n = 2**31-1
+            self.signed_negative_int64_n = - 2**31 + 1
+
+        self.big_integer = inf
+
+    def test_minimal_unsigned_integer_type_for_a_number(self):
+        self.failUnless(min_integer_type(self.unsigned_int32_n, UNSIGNED_INTEGER_ELEMENT_TYPES) == UINT32_T)
+        self.failUnless(min_integer_type(self.unsigned_int64_n, UNSIGNED_INTEGER_ELEMENT_TYPES) == UINT64_T)
+
+    def test_overflow_unsigned_integer_type_for_a_number(self):
+        with self.assertRaises(TypeError):
+            min_integer_type(self.big_integer, UNSIGNED_INTEGER_ELEMENT_TYPES)
+
+    def test_minimal_signed_integer_type_for_a_number(self):
+        self.failUnless(min_integer_type(self.signed_int32_n, SIGNED_INTEGER_ELEMENT_TYPES) == INT32_T)
+        self.failUnless(min_integer_type(self.signed_int64_n, SIGNED_INTEGER_ELEMENT_TYPES) == INT64_T)
+
+        self.failUnless(min_integer_type(self.signed_negative_int32_n, SIGNED_INTEGER_ELEMENT_TYPES) == INT32_T)
+        self.failUnless(min_integer_type(self.signed_negative_int64_n, SIGNED_INTEGER_ELEMENT_TYPES) == INT64_T)
+
+    def test_overflow_signed_integer_type_for_a_number(self):
+        with self.assertRaises(TypeError):
+            min_integer_type(self.big_integer, UNSIGNED_INTEGER_ELEMENT_TYPES)
 
 if __name__ == '__main__':
     unittest.main()

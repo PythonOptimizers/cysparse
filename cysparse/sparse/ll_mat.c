@@ -246,6 +246,7 @@ class __Pyx_FakeReference {
 #define __PYX_HAVE_API__cysparse__sparse__ll_mat
 #include "limits.h"
 #include "stdint.h"
+#include "float.h"
 #include "string.h"
 #include "stdio.h"
 #include "stdlib.h"
@@ -906,7 +907,7 @@ enum __pyx_t_8cysparse_5types_14cysparse_types_CySparseType {
   __pyx_e_8cysparse_5types_14cysparse_types_COMPLEX256_T = 9
 };
 
-/* "cysparse/types/cysparse_types.pxd":113
+/* "cysparse/types/cysparse_types.pxd":78
  * 
  * # in bits
  * cdef enum CySparseTypeBitSize:             # <<<<<<<<<<<<<<
@@ -915,7 +916,7 @@ enum __pyx_t_8cysparse_5types_14cysparse_types_CySparseType {
  */
 enum __pyx_t_8cysparse_5types_14cysparse_types_CySparseTypeBitSize {
 
-  /* "cysparse/types/cysparse_types.pxd":123
+  /* "cysparse/types/cysparse_types.pxd":88
  *     COMPLEX64_t_BIT = sizeof(COMPLEX64_t) * CHAR_BIT
  *     COMPLEX128_t_BIT = sizeof(COMPLEX128_t) * CHAR_BIT
  *     COMPLEX256_t_BIT = sizeof(COMPLEX256_t) * CHAR_BIT             # <<<<<<<<<<<<<<
@@ -934,7 +935,7 @@ enum __pyx_t_8cysparse_5types_14cysparse_types_CySparseTypeBitSize {
   __pyx_e_8cysparse_5types_14cysparse_types_COMPLEX256_t_BIT = ((sizeof(__pyx_t_long_double_complex)) * CHAR_BIT)
 };
 
-/* "cysparse/types/cysparse_types.pxd":128
+/* "cysparse/types/cysparse_types.pxd":93
  * #                                 *** SPARSE MATRIX TYPES ***
  * #################################################################################################
  * cdef struct CPType:             # <<<<<<<<<<<<<<
@@ -3680,7 +3681,7 @@ static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 
 /* Module declarations from 'cysparse.types.cysparse_types' */
 static int (*__pyx_f_8cysparse_5types_14cysparse_types_result_type)(enum __pyx_t_8cysparse_5types_14cysparse_types_CySparseType, enum __pyx_t_8cysparse_5types_14cysparse_types_CySparseType, int __pyx_skip_dispatch); /*proto*/
-static enum __pyx_t_8cysparse_5types_14cysparse_types_CySparseType (*__pyx_f_8cysparse_5types_14cysparse_types_min_type2)(PyObject *, PyObject *); /*proto*/
+static enum __pyx_t_8cysparse_5types_14cysparse_types_CySparseType (*__pyx_f_8cysparse_5types_14cysparse_types_min_integer_type)(PyObject *, PyObject *, int __pyx_skip_dispatch); /*proto*/
 
 /* Module declarations from 'cysparse.sparse.t_mat' */
 static PyTypeObject *__pyx_ptype_8cysparse_6sparse_5t_mat_TransposedSparseMatrix = 0;
@@ -16671,9 +16672,9 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_12NewLLSparseMatrixFromMMFil
   /* "cysparse/sparse/ll_mat.pyx":424
  * 
  *     # Define itype
- *     cdef CySparseType n_type = min_type2(n,[INT32_T,INT64_T])             # <<<<<<<<<<<<<<
+ *     cdef CySparseType n_type = min_integer_type(n,[INT32_T,INT64_T])             # <<<<<<<<<<<<<<
  * 
- *     cdef CySparseType m_type = min_type2(m,[INT32_T,INT64_T])
+ *     cdef CySparseType m_type = min_integer_type(m,[INT32_T,INT64_T])
  */
   __pyx_t_1 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_INT32_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 424; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
@@ -16687,14 +16688,14 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_12NewLLSparseMatrixFromMMFil
   __Pyx_GIVEREF(__pyx_t_3);
   __pyx_t_1 = 0;
   __pyx_t_3 = 0;
-  __pyx_t_8 = __pyx_f_8cysparse_5types_14cysparse_types_min_type2(__pyx_v_n, __pyx_t_4); if (unlikely(__pyx_t_8 == __pyx_e_8cysparse_5types_14cysparse_types_UINT32_T)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 424; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_8 = __pyx_f_8cysparse_5types_14cysparse_types_min_integer_type(__pyx_v_n, __pyx_t_4, 0); if (unlikely(__pyx_t_8 == __pyx_e_8cysparse_5types_14cysparse_types_UINT64_T && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 424; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_v_n_type = __pyx_t_8;
 
   /* "cysparse/sparse/ll_mat.pyx":426
- *     cdef CySparseType n_type = min_type2(n,[INT32_T,INT64_T])
+ *     cdef CySparseType n_type = min_integer_type(n,[INT32_T,INT64_T])
  * 
- *     cdef CySparseType m_type = min_type2(m,[INT32_T,INT64_T])             # <<<<<<<<<<<<<<
+ *     cdef CySparseType m_type = min_integer_type(m,[INT32_T,INT64_T])             # <<<<<<<<<<<<<<
  * 
  *     cdef CySparseType itype = <CySparseType> result_type(n_type, m_type)
  */
@@ -16710,12 +16711,12 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_12NewLLSparseMatrixFromMMFil
   __Pyx_GIVEREF(__pyx_t_3);
   __pyx_t_4 = 0;
   __pyx_t_3 = 0;
-  __pyx_t_8 = __pyx_f_8cysparse_5types_14cysparse_types_min_type2(__pyx_v_m, __pyx_t_1); if (unlikely(__pyx_t_8 == __pyx_e_8cysparse_5types_14cysparse_types_UINT32_T)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 426; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_8 = __pyx_f_8cysparse_5types_14cysparse_types_min_integer_type(__pyx_v_m, __pyx_t_1, 0); if (unlikely(__pyx_t_8 == __pyx_e_8cysparse_5types_14cysparse_types_UINT64_T && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 426; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_m_type = __pyx_t_8;
 
   /* "cysparse/sparse/ll_mat.pyx":428
- *     cdef CySparseType m_type = min_type2(m,[INT32_T,INT64_T])
+ *     cdef CySparseType m_type = min_integer_type(m,[INT32_T,INT64_T])
  * 
  *     cdef CySparseType itype = <CySparseType> result_type(n_type, m_type)             # <<<<<<<<<<<<<<
  * 
@@ -19145,6 +19146,12 @@ static int __pyx_import_star_set(PyObject *o, PyObject* py_name, char *name) {
   else if (__Pyx_StrEq(name, "LL_MAT_PPRINT_ROW_THRESH")) {
     __pyx_v_8cysparse_6sparse_6ll_mat_LL_MAT_PPRINT_ROW_THRESH = __Pyx_PyInt_As_int(o); if ((__pyx_v_8cysparse_6sparse_6ll_mat_LL_MAT_PPRINT_ROW_THRESH == (int)-1) && PyErr_Occurred()) {__pyx_filename = __pyx_f[8]; __pyx_lineno = 17; __pyx_clineno = __LINE__; goto __pyx_L2_error;};
   }
+  else if (__Pyx_StrEq(name, "MM_SKEW_STR")) {
+    if (!(likely(PyString_CheckExact(o))||((o) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(o)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 79; __pyx_clineno = __LINE__; goto __pyx_L2_error;};
+    Py_INCREF(o);
+    Py_DECREF(__pyx_v_8cysparse_6sparse_6ll_mat_MM_SKEW_STR);
+    __pyx_v_8cysparse_6sparse_6ll_mat_MM_SKEW_STR = ((PyObject*)o);
+  }
   else if (__Pyx_StrEq(name, "MM_COMPLEX_STR")) {
     if (!(likely(PyString_CheckExact(o))||((o) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(o)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 72; __pyx_clineno = __LINE__; goto __pyx_L2_error;};
     Py_INCREF(o);
@@ -19180,6 +19187,12 @@ static int __pyx_import_star_set(PyObject *o, PyObject* py_name, char *name) {
     Py_DECREF(__pyx_v_8cysparse_6sparse_6ll_mat_MM_ARRAY_STR);
     __pyx_v_8cysparse_6sparse_6ll_mat_MM_ARRAY_STR = ((PyObject*)o);
   }
+  else if (__Pyx_StrEq(name, "MM_MTX_STR")) {
+    if (!(likely(PyString_CheckExact(o))||((o) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(o)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 69; __pyx_clineno = __LINE__; goto __pyx_L2_error;};
+    Py_INCREF(o);
+    Py_DECREF(__pyx_v_8cysparse_6sparse_6ll_mat_MM_MTX_STR);
+    __pyx_v_8cysparse_6sparse_6ll_mat_MM_MTX_STR = ((PyObject*)o);
+  }
   else if (__Pyx_StrEq(name, "MM_HERM_STR")) {
     if (!(likely(PyString_CheckExact(o))||((o) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(o)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 78; __pyx_clineno = __LINE__; goto __pyx_L2_error;};
     Py_INCREF(o);
@@ -19194,18 +19207,6 @@ static int __pyx_import_star_set(PyObject *o, PyObject* py_name, char *name) {
     Py_INCREF(o);
     Py_DECREF(__pyx_v_8cysparse_6sparse_6ll_mat_MM_REAL_STR);
     __pyx_v_8cysparse_6sparse_6ll_mat_MM_REAL_STR = ((PyObject*)o);
-  }
-  else if (__Pyx_StrEq(name, "MM_MTX_STR")) {
-    if (!(likely(PyString_CheckExact(o))||((o) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(o)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 69; __pyx_clineno = __LINE__; goto __pyx_L2_error;};
-    Py_INCREF(o);
-    Py_DECREF(__pyx_v_8cysparse_6sparse_6ll_mat_MM_MTX_STR);
-    __pyx_v_8cysparse_6sparse_6ll_mat_MM_MTX_STR = ((PyObject*)o);
-  }
-  else if (__Pyx_StrEq(name, "MM_SKEW_STR")) {
-    if (!(likely(PyString_CheckExact(o))||((o) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(o)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 79; __pyx_clineno = __LINE__; goto __pyx_L2_error;};
-    Py_INCREF(o);
-    Py_DECREF(__pyx_v_8cysparse_6sparse_6ll_mat_MM_SKEW_STR);
-    __pyx_v_8cysparse_6sparse_6ll_mat_MM_SKEW_STR = ((PyObject*)o);
   }
   else if (__Pyx_StrEq(name, "MM_MATRIX_MARKET_BANNER_STR")) {
     if (!(likely(PyString_CheckExact(o))||((o) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(o)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 68; __pyx_clineno = __LINE__; goto __pyx_L2_error;};
@@ -20334,7 +20335,7 @@ PyMODINIT_FUNC PyInit_ll_mat(void)
   /*--- Function import code ---*/
   __pyx_t_2 = __Pyx_ImportModule("cysparse.types.cysparse_types"); if (!__pyx_t_2) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 2; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   if (__Pyx_ImportFunction(__pyx_t_2, "result_type", (void (**)(void))&__pyx_f_8cysparse_5types_14cysparse_types_result_type, "int (enum __pyx_t_8cysparse_5types_14cysparse_types_CySparseType, enum __pyx_t_8cysparse_5types_14cysparse_types_CySparseType, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 2; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (__Pyx_ImportFunction(__pyx_t_2, "min_type2", (void (**)(void))&__pyx_f_8cysparse_5types_14cysparse_types_min_type2, "enum __pyx_t_8cysparse_5types_14cysparse_types_CySparseType (PyObject *, PyObject *)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 2; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_ImportFunction(__pyx_t_2, "min_integer_type", (void (**)(void))&__pyx_f_8cysparse_5types_14cysparse_types_min_integer_type, "enum __pyx_t_8cysparse_5types_14cysparse_types_CySparseType (PyObject *, PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 2; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   Py_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   /*--- Execution code ---*/
 
@@ -20343,7 +20344,7 @@ PyMODINIT_FUNC PyInit_ll_mat(void)
  * 
  * from cysparse.types.cysparse_types import *             # <<<<<<<<<<<<<<
  * from cysparse.types.cysparse_types cimport *
- * from cysparse.types.cysparse_types cimport min_type2
+ * from cysparse.types.cysparse_types cimport min_integer_type
  */
   __pyx_t_3 = PyList_New(1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 5; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);

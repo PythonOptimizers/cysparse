@@ -1015,6 +1015,8 @@ cdef class LLSparseMatrix_INT64_t_FLOAT128_t(MutableSparseMatrix_INT64_t_FLOAT12
 
         # create temp array for column results
         cdef FLOAT128_t * col_sum = <FLOAT128_t *> calloc(self.ncol, sizeof(FLOAT128_t))
+        if not col_sum:
+            raise MemoryError()
 
         if self.is_symmetric:
 

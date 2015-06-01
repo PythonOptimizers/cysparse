@@ -3,29 +3,39 @@ from __future__ import print_function
 cimport cysparse.types.cysparse_types as cp_types
 
 cimport cython
-from libc.float cimport FLT_MAX, DBL_MAX, LDBL_MAX, FLT_MIN, DBL_MIN, LDBL_MIN
-from libc.limits cimport INT_MIN, INT_MAX, UINT_MAX, LONG_MIN, LONG_MAX, ULONG_MAX, LLONG_MIN, LLONG_MAX, ULLONG_MAX
 
 from collections import OrderedDict
 import sys
 
+# export limits in Python for integer types only
+
+INT32_t_MIN  = cp_types.INT32_MIN
+INT32_t_MAX  = cp_types.INT32_MAX
+UINT32_t_MAX = cp_types.UINT32_MAX
+INT64_t_MIN  = cp_types.INT64_MIN
+INT64_t_MAX  = cp_types.INT64_MAX
+UINT64_t_MAX = cp_types.UINT64_MAX
+
+
 BASIC_TYPES_STR_DICT = OrderedDict()
 
-# BASIC_TYPES_STR['type_str] = (Nbr of bits, enum value)
-BASIC_TYPES_STR_DICT['INT32_t'] = (cp_types.INT32_t_BIT, cp_types.INT32_T)
-BASIC_TYPES_STR_DICT['UINT32_t'] = (cp_types.UINT32_t_BIT, cp_types.UINT32_T)
-BASIC_TYPES_STR_DICT['INT64_t'] = (cp_types.INT64_t_BIT, cp_types.INT64_T)
-BASIC_TYPES_STR_DICT['UINT64_t'] = (cp_types.UINT64_t_BIT, cp_types.UINT64_T)
-BASIC_TYPES_STR_DICT['FLOAT32_t'] = (cp_types.FLOAT32_t_BIT, cp_types.FLOAT32_T)
-BASIC_TYPES_STR_DICT['FLOAT64_t'] = (cp_types.FLOAT64_t_BIT, cp_types.FLOAT64_T)
-BASIC_TYPES_STR_DICT['FLOAT128_t'] = (cp_types.FLOAT128_t_BIT, cp_types.FLOAT128_T)
-BASIC_TYPES_STR_DICT['COMPLEX64_t'] = (cp_types.COMPLEX64_t_BIT, cp_types.COMPLEX64_T)
-BASIC_TYPES_STR_DICT['COMPLEX128_t'] = (cp_types.COMPLEX128_t_BIT, cp_types.COMPLEX128_T)
-BASIC_TYPES_STR_DICT['COMPLEX256_t'] = (cp_types.COMPLEX128_t_BIT, cp_types.COMPLEX256_T)
+# BASIC_TYPES_STR['type_str] = (Nbr of bits, enum value, min value, max value)
+# For real types: min value is the minimum representable floating-point number, max value the maximum representable floating-point number.
+# For complex types: min value and max value correspond to the real types min/max values for real and imaginary parts.
+BASIC_TYPES_STR_DICT['INT32_t'] = (cp_types.INT32_t_BIT, cp_types.INT32_T, cp_types.INT32_MIN, cp_types.INT32_MAX)
+BASIC_TYPES_STR_DICT['UINT32_t'] = (cp_types.UINT32_t_BIT, cp_types.UINT32_T, 0, cp_types.UINT32_MAX)
+BASIC_TYPES_STR_DICT['INT64_t'] = (cp_types.INT64_t_BIT, cp_types.INT64_T, cp_types.INT64_MIN, cp_types.INT64_MAX)
+BASIC_TYPES_STR_DICT['UINT64_t'] = (cp_types.UINT64_t_BIT, cp_types.UINT64_T, 0, cp_types.UINT64_MAX)
+BASIC_TYPES_STR_DICT['FLOAT32_t'] = (cp_types.FLOAT32_t_BIT, cp_types.FLOAT32_T, cp_types.FLT_MIN, cp_types.FLT_MAX)
+BASIC_TYPES_STR_DICT['FLOAT64_t'] = (cp_types.FLOAT64_t_BIT, cp_types.FLOAT64_T, cp_types.DBL_MIN, cp_types.DBL_MAX)
+BASIC_TYPES_STR_DICT['FLOAT128_t'] = (cp_types.FLOAT128_t_BIT, cp_types.FLOAT128_T, cp_types.LDBL_MIN, cp_types.LDBL_MAX)
+BASIC_TYPES_STR_DICT['COMPLEX64_t'] = (cp_types.COMPLEX64_t_BIT, cp_types.COMPLEX64_T, cp_types.FLT_MIN, cp_types.FLT_MAX)
+BASIC_TYPES_STR_DICT['COMPLEX128_t'] = (cp_types.COMPLEX128_t_BIT, cp_types.COMPLEX128_T, cp_types.DBL_MIN, cp_types.DBL_MAX)
+BASIC_TYPES_STR_DICT['COMPLEX256_t'] = (cp_types.COMPLEX256_t_BIT, cp_types.COMPLEX256_T, cp_types.LDBL_MIN, cp_types.LDBL_MAX)
 
 # construct inverse dict
-# BASIC_TYPES_DICT[enum value] = (type string, nbr of bits)
-BASIC_TYPES_DICT = {v[1]: (k, v[0]) for k, v in BASIC_TYPES_STR_DICT.items()}
+# BASIC_TYPES_DICT[enum value] = (type string, nbr of bits, min value, max value)
+BASIC_TYPES_DICT = {v[1]: (k, v[0], v[2], v[3]) for k, v in BASIC_TYPES_STR_DICT.items()}
 
 # Type classification
 # elements in general
@@ -308,27 +318,53 @@ def report_basic_types(OUT=sys.stdout):
     print('Basic types in CySparse:', file=OUT)
     print(file=OUT)
     for key, item in BASIC_TYPES_STR_DICT.items():
-        print('{:12}: {:10d} bits ({:d})'.format(key, item[0], item[1]), file=OUT)
+        print('{:12}: {:10d} bits ({:d})'.format(key, item[0], item[1]), file=OUT, end='')
+        if BASIC_TYPES_STR_DICT[key][1] in INTEGER_ELEMENT_TYPES:
+            print(" (min, max) = (", file=OUT, end='')
+            print(item[2], file=OUT, end='')
+            print(',', file=OUT, end='')
+            print(item[3], file=OUT, end='')
+            print(')', file=OUT)
+        elif BASIC_TYPES_STR_DICT[key][1] in REAL_ELEMENT_TYPES:
+            print(" (min precision, max precision) = (", file=OUT, end='')
+            print(item[2], file=OUT, end='')
+            print(',', file=OUT, end='')
+            print(item[3], file=OUT, end='')
+            print(')', file=OUT)
+        elif BASIC_TYPES_STR_DICT[key][1] in COMPLEX_ELEMENT_TYPES:
+            print(" (min precision real/imag, max precision real/imag) = (", file=OUT, end='')
+            print(item[2], file=OUT, end='')
+            print(',', file=OUT, end='')
+            print(item[3], file=OUT, end='')
+            print(')', file=OUT)
 
-cdef CySparseType min_type2(n, type_list) except cp_types.UINT32_T:
+########################################################################################################################
+# NUMBER CASTS
+########################################################################################################################
+cpdef CySparseType min_integer_type(n, type_list) except? cp_types.UINT64_T:
+    """
+    Return the minimal type that can `n` can be casted into from a list of integer types.
+
+    Note:
+        We suppose that the list is sorted by ascending types.
+
+    Raises:
+        ``TypeError`` if no type can be used to cast `n` or if one element in the type list is not recognized as a
+        ``CySparseType`` for an integer type.
+
+    Args:
+        n: Python number to cast.
+        type_list: List of *types*, aka ``CySparseType`` ``enum``\s.
+
+    Warning:
+        This function is **slow**. There is no test on the ``n`` argument.
+    """
     for type_el in type_list:
-        if type_el == cp_types.UINT32_T:
-            if 0 <= n <= cp_types.UINT32_MAX:
+        if type_el in INTEGER_ELEMENT_TYPES:
+            if BASIC_TYPES_DICT[type_el][2] <= n <= BASIC_TYPES_DICT[type_el][3]:
                 return <cp_types.CySparseType> type_el
-        elif type_el == cp_types.INT32_T:
-            if cp_types.INT32_MIN <= n <= cp_types.INT32_MAX:
-                return <cp_types.CySparseType> type_el
-        elif type_el == cp_types.UINT64_T:
-            if 0 <= n <= cp_types.UINT64_MAX:
-                return <cp_types.CySparseType> type_el
-        elif type_el == cp_types.INT64_T:
-            print(cp_types.INT64_MIN)
-            print(n)
-            print(cp_types.INT64_MAX)
-            if cp_types.INT64_MIN <= n <= cp_types.INT64_MAX:
-                return <cp_types.CySparseType> type_el
-        #elif type_el == cp_types.FLOAT32_T:
-        #    if FLT_MIN <= n <= FLT_MAX:
-        #        return <cp_types.CySparseType> type_el
+        else:
+            raise TypeError('Type is not an integer type')
 
     raise TypeError('No type was found to cast number')
+

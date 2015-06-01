@@ -246,6 +246,7 @@ class __Pyx_FakeReference {
 #define __PYX_HAVE_API__cysparse__types__cysparse_generic_types
 #include "limits.h"
 #include "stdint.h"
+#include "float.h"
 #ifdef _OPENMP
 #include <omp.h>
 #endif /* _OPENMP */
@@ -568,7 +569,7 @@ enum __pyx_t_8cysparse_5types_14cysparse_types_CySparseType {
   __pyx_e_8cysparse_5types_14cysparse_types_COMPLEX256_T = 9
 };
 
-/* "cysparse/types/cysparse_types.pxd":113
+/* "cysparse/types/cysparse_types.pxd":78
  * 
  * # in bits
  * cdef enum CySparseTypeBitSize:             # <<<<<<<<<<<<<<
@@ -577,7 +578,7 @@ enum __pyx_t_8cysparse_5types_14cysparse_types_CySparseType {
  */
 enum __pyx_t_8cysparse_5types_14cysparse_types_CySparseTypeBitSize {
 
-  /* "cysparse/types/cysparse_types.pxd":123
+  /* "cysparse/types/cysparse_types.pxd":88
  *     COMPLEX64_t_BIT = sizeof(COMPLEX64_t) * CHAR_BIT
  *     COMPLEX128_t_BIT = sizeof(COMPLEX128_t) * CHAR_BIT
  *     COMPLEX256_t_BIT = sizeof(COMPLEX256_t) * CHAR_BIT             # <<<<<<<<<<<<<<
@@ -596,7 +597,7 @@ enum __pyx_t_8cysparse_5types_14cysparse_types_CySparseTypeBitSize {
   __pyx_e_8cysparse_5types_14cysparse_types_COMPLEX256_t_BIT = ((sizeof(__pyx_t_long_double_complex)) * CHAR_BIT)
 };
 
-/* "cysparse/types/cysparse_types.pxd":128
+/* "cysparse/types/cysparse_types.pxd":93
  * #                                 *** SPARSE MATRIX TYPES ***
  * #################################################################################################
  * cdef struct CPType:             # <<<<<<<<<<<<<<
@@ -925,7 +926,7 @@ static PyObject *__pyx_n_s_test;
 static PyObject *__pyx_tuple_;
 static PyObject *__pyx_tuple__2;
 
-/* "cysparse/types/cysparse_generic_types.pyx":12
+/* "cysparse/types/cysparse_generic_types.pyx":19
  * # EXPLICIT TYPE TESTS
  * 
  * cdef test_cast_to_INT32_t(INT32_t n):             # <<<<<<<<<<<<<<
@@ -939,7 +940,7 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_test_cast_to_
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("test_cast_to_INT32_t", 0);
 
-  /* "cysparse/types/cysparse_generic_types.pyx":27
+  /* "cysparse/types/cysparse_generic_types.pyx":34
  *         This is a meta function. Don't use it unless you really know what you are doing.
  *     """
  *     cdef INT32_t n_ = n             # <<<<<<<<<<<<<<
@@ -948,7 +949,7 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_test_cast_to_
  */
   __pyx_v_n_ = __pyx_v_n;
 
-  /* "cysparse/types/cysparse_generic_types.pyx":12
+  /* "cysparse/types/cysparse_generic_types.pyx":19
  * # EXPLICIT TYPE TESTS
  * 
  * cdef test_cast_to_INT32_t(INT32_t n):             # <<<<<<<<<<<<<<
@@ -963,7 +964,7 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_test_cast_to_
   return __pyx_r;
 }
 
-/* "cysparse/types/cysparse_generic_types.pyx":29
+/* "cysparse/types/cysparse_generic_types.pyx":36
  *     cdef INT32_t n_ = n
  * 
  * cdef test_cast_to_UINT32_t(UINT32_t n):             # <<<<<<<<<<<<<<
@@ -977,7 +978,7 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_test_cast_to_
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("test_cast_to_UINT32_t", 0);
 
-  /* "cysparse/types/cysparse_generic_types.pyx":44
+  /* "cysparse/types/cysparse_generic_types.pyx":51
  *         This is a meta function. Don't use it unless you really know what you are doing.
  *     """
  *     cdef UINT32_t n_ = n             # <<<<<<<<<<<<<<
@@ -986,7 +987,7 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_test_cast_to_
  */
   __pyx_v_n_ = __pyx_v_n;
 
-  /* "cysparse/types/cysparse_generic_types.pyx":29
+  /* "cysparse/types/cysparse_generic_types.pyx":36
  *     cdef INT32_t n_ = n
  * 
  * cdef test_cast_to_UINT32_t(UINT32_t n):             # <<<<<<<<<<<<<<
@@ -1001,7 +1002,7 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_test_cast_to_
   return __pyx_r;
 }
 
-/* "cysparse/types/cysparse_generic_types.pyx":46
+/* "cysparse/types/cysparse_generic_types.pyx":53
  *     cdef UINT32_t n_ = n
  * 
  * cdef test_cast_to_INT64_t(INT64_t n):             # <<<<<<<<<<<<<<
@@ -1015,7 +1016,7 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_test_cast_to_
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("test_cast_to_INT64_t", 0);
 
-  /* "cysparse/types/cysparse_generic_types.pyx":61
+  /* "cysparse/types/cysparse_generic_types.pyx":68
  *         This is a meta function. Don't use it unless you really know what you are doing.
  *     """
  *     cdef INT64_t n_ = n             # <<<<<<<<<<<<<<
@@ -1024,7 +1025,7 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_test_cast_to_
  */
   __pyx_v_n_ = __pyx_v_n;
 
-  /* "cysparse/types/cysparse_generic_types.pyx":46
+  /* "cysparse/types/cysparse_generic_types.pyx":53
  *     cdef UINT32_t n_ = n
  * 
  * cdef test_cast_to_INT64_t(INT64_t n):             # <<<<<<<<<<<<<<
@@ -1039,7 +1040,7 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_test_cast_to_
   return __pyx_r;
 }
 
-/* "cysparse/types/cysparse_generic_types.pyx":63
+/* "cysparse/types/cysparse_generic_types.pyx":70
  *     cdef INT64_t n_ = n
  * 
  * cdef test_cast_to_UINT64_t(UINT64_t n):             # <<<<<<<<<<<<<<
@@ -1053,7 +1054,7 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_test_cast_to_
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("test_cast_to_UINT64_t", 0);
 
-  /* "cysparse/types/cysparse_generic_types.pyx":78
+  /* "cysparse/types/cysparse_generic_types.pyx":85
  *         This is a meta function. Don't use it unless you really know what you are doing.
  *     """
  *     cdef UINT64_t n_ = n             # <<<<<<<<<<<<<<
@@ -1062,7 +1063,7 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_test_cast_to_
  */
   __pyx_v_n_ = __pyx_v_n;
 
-  /* "cysparse/types/cysparse_generic_types.pyx":63
+  /* "cysparse/types/cysparse_generic_types.pyx":70
  *     cdef INT64_t n_ = n
  * 
  * cdef test_cast_to_UINT64_t(UINT64_t n):             # <<<<<<<<<<<<<<
@@ -1077,7 +1078,7 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_test_cast_to_
   return __pyx_r;
 }
 
-/* "cysparse/types/cysparse_generic_types.pyx":80
+/* "cysparse/types/cysparse_generic_types.pyx":87
  *     cdef UINT64_t n_ = n
  * 
  * cdef test_cast_to_FLOAT32_t(FLOAT32_t n):             # <<<<<<<<<<<<<<
@@ -1091,7 +1092,7 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_test_cast_to_
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("test_cast_to_FLOAT32_t", 0);
 
-  /* "cysparse/types/cysparse_generic_types.pyx":95
+  /* "cysparse/types/cysparse_generic_types.pyx":102
  *         This is a meta function. Don't use it unless you really know what you are doing.
  *     """
  *     cdef FLOAT32_t n_ = n             # <<<<<<<<<<<<<<
@@ -1100,7 +1101,7 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_test_cast_to_
  */
   __pyx_v_n_ = __pyx_v_n;
 
-  /* "cysparse/types/cysparse_generic_types.pyx":80
+  /* "cysparse/types/cysparse_generic_types.pyx":87
  *     cdef UINT64_t n_ = n
  * 
  * cdef test_cast_to_FLOAT32_t(FLOAT32_t n):             # <<<<<<<<<<<<<<
@@ -1115,7 +1116,7 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_test_cast_to_
   return __pyx_r;
 }
 
-/* "cysparse/types/cysparse_generic_types.pyx":97
+/* "cysparse/types/cysparse_generic_types.pyx":104
  *     cdef FLOAT32_t n_ = n
  * 
  * cdef test_cast_to_FLOAT64_t(FLOAT64_t n):             # <<<<<<<<<<<<<<
@@ -1129,7 +1130,7 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_test_cast_to_
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("test_cast_to_FLOAT64_t", 0);
 
-  /* "cysparse/types/cysparse_generic_types.pyx":112
+  /* "cysparse/types/cysparse_generic_types.pyx":119
  *         This is a meta function. Don't use it unless you really know what you are doing.
  *     """
  *     cdef FLOAT64_t n_ = n             # <<<<<<<<<<<<<<
@@ -1138,7 +1139,7 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_test_cast_to_
  */
   __pyx_v_n_ = __pyx_v_n;
 
-  /* "cysparse/types/cysparse_generic_types.pyx":97
+  /* "cysparse/types/cysparse_generic_types.pyx":104
  *     cdef FLOAT32_t n_ = n
  * 
  * cdef test_cast_to_FLOAT64_t(FLOAT64_t n):             # <<<<<<<<<<<<<<
@@ -1153,7 +1154,7 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_test_cast_to_
   return __pyx_r;
 }
 
-/* "cysparse/types/cysparse_generic_types.pyx":114
+/* "cysparse/types/cysparse_generic_types.pyx":121
  *     cdef FLOAT64_t n_ = n
  * 
  * cdef test_cast_to_FLOAT128_t(FLOAT128_t n):             # <<<<<<<<<<<<<<
@@ -1167,7 +1168,7 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_test_cast_to_
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("test_cast_to_FLOAT128_t", 0);
 
-  /* "cysparse/types/cysparse_generic_types.pyx":129
+  /* "cysparse/types/cysparse_generic_types.pyx":136
  *         This is a meta function. Don't use it unless you really know what you are doing.
  *     """
  *     cdef FLOAT128_t n_ = n             # <<<<<<<<<<<<<<
@@ -1176,7 +1177,7 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_test_cast_to_
  */
   __pyx_v_n_ = __pyx_v_n;
 
-  /* "cysparse/types/cysparse_generic_types.pyx":114
+  /* "cysparse/types/cysparse_generic_types.pyx":121
  *     cdef FLOAT64_t n_ = n
  * 
  * cdef test_cast_to_FLOAT128_t(FLOAT128_t n):             # <<<<<<<<<<<<<<
@@ -1191,7 +1192,7 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_test_cast_to_
   return __pyx_r;
 }
 
-/* "cysparse/types/cysparse_generic_types.pyx":131
+/* "cysparse/types/cysparse_generic_types.pyx":138
  *     cdef FLOAT128_t n_ = n
  * 
  * cdef test_cast_to_COMPLEX64_t(COMPLEX64_t n):             # <<<<<<<<<<<<<<
@@ -1205,7 +1206,7 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_test_cast_to_
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("test_cast_to_COMPLEX64_t", 0);
 
-  /* "cysparse/types/cysparse_generic_types.pyx":146
+  /* "cysparse/types/cysparse_generic_types.pyx":153
  *         This is a meta function. Don't use it unless you really know what you are doing.
  *     """
  *     cdef COMPLEX64_t n_ = n             # <<<<<<<<<<<<<<
@@ -1214,7 +1215,7 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_test_cast_to_
  */
   __pyx_v_n_ = __pyx_v_n;
 
-  /* "cysparse/types/cysparse_generic_types.pyx":131
+  /* "cysparse/types/cysparse_generic_types.pyx":138
  *     cdef FLOAT128_t n_ = n
  * 
  * cdef test_cast_to_COMPLEX64_t(COMPLEX64_t n):             # <<<<<<<<<<<<<<
@@ -1229,7 +1230,7 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_test_cast_to_
   return __pyx_r;
 }
 
-/* "cysparse/types/cysparse_generic_types.pyx":148
+/* "cysparse/types/cysparse_generic_types.pyx":155
  *     cdef COMPLEX64_t n_ = n
  * 
  * cdef test_cast_to_COMPLEX128_t(COMPLEX128_t n):             # <<<<<<<<<<<<<<
@@ -1243,7 +1244,7 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_test_cast_to_
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("test_cast_to_COMPLEX128_t", 0);
 
-  /* "cysparse/types/cysparse_generic_types.pyx":163
+  /* "cysparse/types/cysparse_generic_types.pyx":170
  *         This is a meta function. Don't use it unless you really know what you are doing.
  *     """
  *     cdef COMPLEX128_t n_ = n             # <<<<<<<<<<<<<<
@@ -1252,7 +1253,7 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_test_cast_to_
  */
   __pyx_v_n_ = __pyx_v_n;
 
-  /* "cysparse/types/cysparse_generic_types.pyx":148
+  /* "cysparse/types/cysparse_generic_types.pyx":155
  *     cdef COMPLEX64_t n_ = n
  * 
  * cdef test_cast_to_COMPLEX128_t(COMPLEX128_t n):             # <<<<<<<<<<<<<<
@@ -1267,7 +1268,7 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_test_cast_to_
   return __pyx_r;
 }
 
-/* "cysparse/types/cysparse_generic_types.pyx":165
+/* "cysparse/types/cysparse_generic_types.pyx":172
  *     cdef COMPLEX128_t n_ = n
  * 
  * cdef test_cast_to_COMPLEX256_t(COMPLEX256_t n):             # <<<<<<<<<<<<<<
@@ -1281,7 +1282,7 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_test_cast_to_
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("test_cast_to_COMPLEX256_t", 0);
 
-  /* "cysparse/types/cysparse_generic_types.pyx":180
+  /* "cysparse/types/cysparse_generic_types.pyx":187
  *         This is a meta function. Don't use it unless you really know what you are doing.
  *     """
  *     cdef COMPLEX256_t n_ = n             # <<<<<<<<<<<<<<
@@ -1290,7 +1291,7 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_test_cast_to_
  */
   __pyx_v_n_ = __pyx_v_n;
 
-  /* "cysparse/types/cysparse_generic_types.pyx":165
+  /* "cysparse/types/cysparse_generic_types.pyx":172
  *     cdef COMPLEX128_t n_ = n
  * 
  * cdef test_cast_to_COMPLEX256_t(COMPLEX256_t n):             # <<<<<<<<<<<<<<
@@ -1305,7 +1306,7 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_test_cast_to_
   return __pyx_r;
 }
 
-/* "cysparse/types/cysparse_generic_types.pyx":184
+/* "cysparse/types/cysparse_generic_types.pyx":191
  * 
  * # EXPLICIT TYPE TESTS
  * cdef min_type(n, type_list):             # <<<<<<<<<<<<<<
@@ -1342,43 +1343,43 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_min_type(PyOb
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("min_type", 0);
 
-  /* "cysparse/types/cysparse_generic_types.pyx":202
+  /* "cysparse/types/cysparse_generic_types.pyx":209
  *         This function is **slow**.
  *     """
  *     if not (set(type_list) <= set(BASIC_TYPES)):             # <<<<<<<<<<<<<<
  *         raise TypeError('Som type(s) are not recognized as basic CySparseType')
  * 
  */
-  __pyx_t_1 = PySet_New(__pyx_v_type_list); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 202; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PySet_New(__pyx_v_type_list); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 209; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_BASIC_TYPES); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 202; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_BASIC_TYPES); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 209; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PySet_New(__pyx_t_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 202; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = PySet_New(__pyx_t_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 209; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, __pyx_t_3, Py_LE); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 202; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, __pyx_t_3, Py_LE); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 209; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 202; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 209; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_5 = ((!__pyx_t_4) != 0);
   if (__pyx_t_5) {
 
-    /* "cysparse/types/cysparse_generic_types.pyx":203
+    /* "cysparse/types/cysparse_generic_types.pyx":210
  *     """
  *     if not (set(type_list) <= set(BASIC_TYPES)):
  *         raise TypeError('Som type(s) are not recognized as basic CySparseType')             # <<<<<<<<<<<<<<
  * 
  *     for type_el in type_list:
  */
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 203; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 210; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 203; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 210; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
 
-  /* "cysparse/types/cysparse_generic_types.pyx":205
+  /* "cysparse/types/cysparse_generic_types.pyx":212
  *         raise TypeError('Som type(s) are not recognized as basic CySparseType')
  * 
  *     for type_el in type_list:             # <<<<<<<<<<<<<<
@@ -1389,25 +1390,25 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_min_type(PyOb
     __pyx_t_2 = __pyx_v_type_list; __Pyx_INCREF(__pyx_t_2); __pyx_t_6 = 0;
     __pyx_t_7 = NULL;
   } else {
-    __pyx_t_6 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_v_type_list); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 205; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_6 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_v_type_list); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 212; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_7 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 205; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_7 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 212; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   for (;;) {
     if (likely(!__pyx_t_7)) {
       if (likely(PyList_CheckExact(__pyx_t_2))) {
         if (__pyx_t_6 >= PyList_GET_SIZE(__pyx_t_2)) break;
         #if CYTHON_COMPILING_IN_CPYTHON
-        __pyx_t_3 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_6); __Pyx_INCREF(__pyx_t_3); __pyx_t_6++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 205; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_3 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_6); __Pyx_INCREF(__pyx_t_3); __pyx_t_6++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 212; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         #else
-        __pyx_t_3 = PySequence_ITEM(__pyx_t_2, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 205; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_3 = PySequence_ITEM(__pyx_t_2, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 212; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         #endif
       } else {
         if (__pyx_t_6 >= PyTuple_GET_SIZE(__pyx_t_2)) break;
         #if CYTHON_COMPILING_IN_CPYTHON
-        __pyx_t_3 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_6); __Pyx_INCREF(__pyx_t_3); __pyx_t_6++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 205; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_3 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_6); __Pyx_INCREF(__pyx_t_3); __pyx_t_6++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 212; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         #else
-        __pyx_t_3 = PySequence_ITEM(__pyx_t_2, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 205; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_3 = PySequence_ITEM(__pyx_t_2, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 212; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         #endif
       }
     } else {
@@ -1416,7 +1417,7 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_min_type(PyOb
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(exc_type == PyExc_StopIteration || PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else {__pyx_filename = __pyx_f[0]; __pyx_lineno = 205; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          else {__pyx_filename = __pyx_f[0]; __pyx_lineno = 212; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         }
         break;
       }
@@ -1425,22 +1426,22 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_min_type(PyOb
     __Pyx_XDECREF_SET(__pyx_v_type_el, __pyx_t_3);
     __pyx_t_3 = 0;
 
-    /* "cysparse/types/cysparse_generic_types.pyx":208
+    /* "cysparse/types/cysparse_generic_types.pyx":215
  * 
  * 
  *         if type_el == INT32_T:             # <<<<<<<<<<<<<<
  *             try:
  *                 test_cast_to_INT32_t(n)
  */
-    __pyx_t_3 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_INT32_T); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 208; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_INT32_T); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 215; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_1 = PyObject_RichCompare(__pyx_v_type_el, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 208; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyObject_RichCompare(__pyx_v_type_el, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 215; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 208; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 215; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_5) {
 
-      /* "cysparse/types/cysparse_generic_types.pyx":209
+      /* "cysparse/types/cysparse_generic_types.pyx":216
  * 
  *         if type_el == INT32_T:
  *             try:             # <<<<<<<<<<<<<<
@@ -1454,19 +1455,19 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_min_type(PyOb
         __Pyx_XGOTREF(__pyx_t_10);
         /*try:*/ {
 
-          /* "cysparse/types/cysparse_generic_types.pyx":210
+          /* "cysparse/types/cysparse_generic_types.pyx":217
  *         if type_el == INT32_T:
  *             try:
  *                 test_cast_to_INT32_t(n)             # <<<<<<<<<<<<<<
  *                 return INT32_T
  *             except:
  */
-          __pyx_t_11 = __Pyx_PyInt_As_int(__pyx_v_n); if (unlikely((__pyx_t_11 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 210; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
-          __pyx_t_1 = __pyx_f_8cysparse_5types_22cysparse_generic_types_test_cast_to_INT32_t(__pyx_t_11); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 210; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_11 = __Pyx_PyInt_As_int(__pyx_v_n); if (unlikely((__pyx_t_11 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 217; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_1 = __pyx_f_8cysparse_5types_22cysparse_generic_types_test_cast_to_INT32_t(__pyx_t_11); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 217; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-          /* "cysparse/types/cysparse_generic_types.pyx":211
+          /* "cysparse/types/cysparse_generic_types.pyx":218
  *             try:
  *                 test_cast_to_INT32_t(n)
  *                 return INT32_T             # <<<<<<<<<<<<<<
@@ -1474,7 +1475,7 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_min_type(PyOb
  *                 pass
  */
           __Pyx_XDECREF(__pyx_r);
-          __pyx_t_1 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_INT32_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 211; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_1 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_INT32_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 218; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_1);
           __pyx_r = __pyx_t_1;
           __pyx_t_1 = 0;
@@ -1485,7 +1486,7 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_min_type(PyOb
         __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
         __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-        /* "cysparse/types/cysparse_generic_types.pyx":212
+        /* "cysparse/types/cysparse_generic_types.pyx":219
  *                 test_cast_to_INT32_t(n)
  *                 return INT32_T
  *             except:             # <<<<<<<<<<<<<<
@@ -1511,22 +1512,22 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_min_type(PyOb
       goto __pyx_L6;
     }
 
-    /* "cysparse/types/cysparse_generic_types.pyx":217
+    /* "cysparse/types/cysparse_generic_types.pyx":224
  * 
  * 
  *         elif type_el == UINT32_T:             # <<<<<<<<<<<<<<
  *             try:
  *                 test_cast_to_UINT32_t(n)
  */
-    __pyx_t_1 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_UINT32_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 217; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_UINT32_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 224; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = PyObject_RichCompare(__pyx_v_type_el, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 217; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = PyObject_RichCompare(__pyx_v_type_el, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 224; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 217; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 224; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     if (__pyx_t_5) {
 
-      /* "cysparse/types/cysparse_generic_types.pyx":218
+      /* "cysparse/types/cysparse_generic_types.pyx":225
  * 
  *         elif type_el == UINT32_T:
  *             try:             # <<<<<<<<<<<<<<
@@ -1540,19 +1541,19 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_min_type(PyOb
         __Pyx_XGOTREF(__pyx_t_8);
         /*try:*/ {
 
-          /* "cysparse/types/cysparse_generic_types.pyx":219
+          /* "cysparse/types/cysparse_generic_types.pyx":226
  *         elif type_el == UINT32_T:
  *             try:
  *                 test_cast_to_UINT32_t(n)             # <<<<<<<<<<<<<<
  *                 return UINT32_T
  *             except:
  */
-          __pyx_t_12 = __Pyx_PyInt_As_unsigned_int(__pyx_v_n); if (unlikely((__pyx_t_12 == (unsigned int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 219; __pyx_clineno = __LINE__; goto __pyx_L15_error;}
-          __pyx_t_3 = __pyx_f_8cysparse_5types_22cysparse_generic_types_test_cast_to_UINT32_t(__pyx_t_12); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 219; __pyx_clineno = __LINE__; goto __pyx_L15_error;}
+          __pyx_t_12 = __Pyx_PyInt_As_unsigned_int(__pyx_v_n); if (unlikely((__pyx_t_12 == (unsigned int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 226; __pyx_clineno = __LINE__; goto __pyx_L15_error;}
+          __pyx_t_3 = __pyx_f_8cysparse_5types_22cysparse_generic_types_test_cast_to_UINT32_t(__pyx_t_12); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 226; __pyx_clineno = __LINE__; goto __pyx_L15_error;}
           __Pyx_GOTREF(__pyx_t_3);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-          /* "cysparse/types/cysparse_generic_types.pyx":220
+          /* "cysparse/types/cysparse_generic_types.pyx":227
  *             try:
  *                 test_cast_to_UINT32_t(n)
  *                 return UINT32_T             # <<<<<<<<<<<<<<
@@ -1560,7 +1561,7 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_min_type(PyOb
  *                 pass
  */
           __Pyx_XDECREF(__pyx_r);
-          __pyx_t_3 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_UINT32_T); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 220; __pyx_clineno = __LINE__; goto __pyx_L15_error;}
+          __pyx_t_3 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_UINT32_T); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 227; __pyx_clineno = __LINE__; goto __pyx_L15_error;}
           __Pyx_GOTREF(__pyx_t_3);
           __pyx_r = __pyx_t_3;
           __pyx_t_3 = 0;
@@ -1571,7 +1572,7 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_min_type(PyOb
         __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
         __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-        /* "cysparse/types/cysparse_generic_types.pyx":221
+        /* "cysparse/types/cysparse_generic_types.pyx":228
  *                 test_cast_to_UINT32_t(n)
  *                 return UINT32_T
  *             except:             # <<<<<<<<<<<<<<
@@ -1597,22 +1598,22 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_min_type(PyOb
       goto __pyx_L6;
     }
 
-    /* "cysparse/types/cysparse_generic_types.pyx":226
+    /* "cysparse/types/cysparse_generic_types.pyx":233
  * 
  * 
  *         elif type_el == INT64_T:             # <<<<<<<<<<<<<<
  *             try:
  *                 test_cast_to_INT64_t(n)
  */
-    __pyx_t_3 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_INT64_T); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 226; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_INT64_T); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 233; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_1 = PyObject_RichCompare(__pyx_v_type_el, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 226; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyObject_RichCompare(__pyx_v_type_el, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 233; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 226; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 233; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_5) {
 
-      /* "cysparse/types/cysparse_generic_types.pyx":227
+      /* "cysparse/types/cysparse_generic_types.pyx":234
  * 
  *         elif type_el == INT64_T:
  *             try:             # <<<<<<<<<<<<<<
@@ -1626,19 +1627,19 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_min_type(PyOb
         __Pyx_XGOTREF(__pyx_t_10);
         /*try:*/ {
 
-          /* "cysparse/types/cysparse_generic_types.pyx":228
+          /* "cysparse/types/cysparse_generic_types.pyx":235
  *         elif type_el == INT64_T:
  *             try:
  *                 test_cast_to_INT64_t(n)             # <<<<<<<<<<<<<<
  *                 return INT64_T
  *             except:
  */
-          __pyx_t_13 = __Pyx_PyInt_As_long(__pyx_v_n); if (unlikely((__pyx_t_13 == (long)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 228; __pyx_clineno = __LINE__; goto __pyx_L23_error;}
-          __pyx_t_1 = __pyx_f_8cysparse_5types_22cysparse_generic_types_test_cast_to_INT64_t(__pyx_t_13); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 228; __pyx_clineno = __LINE__; goto __pyx_L23_error;}
+          __pyx_t_13 = __Pyx_PyInt_As_long(__pyx_v_n); if (unlikely((__pyx_t_13 == (long)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 235; __pyx_clineno = __LINE__; goto __pyx_L23_error;}
+          __pyx_t_1 = __pyx_f_8cysparse_5types_22cysparse_generic_types_test_cast_to_INT64_t(__pyx_t_13); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 235; __pyx_clineno = __LINE__; goto __pyx_L23_error;}
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-          /* "cysparse/types/cysparse_generic_types.pyx":229
+          /* "cysparse/types/cysparse_generic_types.pyx":236
  *             try:
  *                 test_cast_to_INT64_t(n)
  *                 return INT64_T             # <<<<<<<<<<<<<<
@@ -1646,7 +1647,7 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_min_type(PyOb
  *                 pass
  */
           __Pyx_XDECREF(__pyx_r);
-          __pyx_t_1 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_INT64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 229; __pyx_clineno = __LINE__; goto __pyx_L23_error;}
+          __pyx_t_1 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_INT64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 236; __pyx_clineno = __LINE__; goto __pyx_L23_error;}
           __Pyx_GOTREF(__pyx_t_1);
           __pyx_r = __pyx_t_1;
           __pyx_t_1 = 0;
@@ -1657,7 +1658,7 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_min_type(PyOb
         __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
         __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-        /* "cysparse/types/cysparse_generic_types.pyx":230
+        /* "cysparse/types/cysparse_generic_types.pyx":237
  *                 test_cast_to_INT64_t(n)
  *                 return INT64_T
  *             except:             # <<<<<<<<<<<<<<
@@ -1683,22 +1684,22 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_min_type(PyOb
       goto __pyx_L6;
     }
 
-    /* "cysparse/types/cysparse_generic_types.pyx":235
+    /* "cysparse/types/cysparse_generic_types.pyx":242
  * 
  * 
  *         elif type_el == UINT64_T:             # <<<<<<<<<<<<<<
  *             try:
  *                 test_cast_to_UINT64_t(n)
  */
-    __pyx_t_1 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_UINT64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 235; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_UINT64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 242; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = PyObject_RichCompare(__pyx_v_type_el, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 235; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = PyObject_RichCompare(__pyx_v_type_el, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 242; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 235; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 242; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     if (__pyx_t_5) {
 
-      /* "cysparse/types/cysparse_generic_types.pyx":236
+      /* "cysparse/types/cysparse_generic_types.pyx":243
  * 
  *         elif type_el == UINT64_T:
  *             try:             # <<<<<<<<<<<<<<
@@ -1712,19 +1713,19 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_min_type(PyOb
         __Pyx_XGOTREF(__pyx_t_8);
         /*try:*/ {
 
-          /* "cysparse/types/cysparse_generic_types.pyx":237
+          /* "cysparse/types/cysparse_generic_types.pyx":244
  *         elif type_el == UINT64_T:
  *             try:
  *                 test_cast_to_UINT64_t(n)             # <<<<<<<<<<<<<<
  *                 return UINT64_T
  *             except:
  */
-          __pyx_t_14 = __Pyx_PyInt_As_unsigned_long(__pyx_v_n); if (unlikely((__pyx_t_14 == (unsigned long)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 237; __pyx_clineno = __LINE__; goto __pyx_L31_error;}
-          __pyx_t_3 = __pyx_f_8cysparse_5types_22cysparse_generic_types_test_cast_to_UINT64_t(__pyx_t_14); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 237; __pyx_clineno = __LINE__; goto __pyx_L31_error;}
+          __pyx_t_14 = __Pyx_PyInt_As_unsigned_long(__pyx_v_n); if (unlikely((__pyx_t_14 == (unsigned long)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 244; __pyx_clineno = __LINE__; goto __pyx_L31_error;}
+          __pyx_t_3 = __pyx_f_8cysparse_5types_22cysparse_generic_types_test_cast_to_UINT64_t(__pyx_t_14); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 244; __pyx_clineno = __LINE__; goto __pyx_L31_error;}
           __Pyx_GOTREF(__pyx_t_3);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-          /* "cysparse/types/cysparse_generic_types.pyx":238
+          /* "cysparse/types/cysparse_generic_types.pyx":245
  *             try:
  *                 test_cast_to_UINT64_t(n)
  *                 return UINT64_T             # <<<<<<<<<<<<<<
@@ -1732,7 +1733,7 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_min_type(PyOb
  *                 pass
  */
           __Pyx_XDECREF(__pyx_r);
-          __pyx_t_3 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_UINT64_T); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 238; __pyx_clineno = __LINE__; goto __pyx_L31_error;}
+          __pyx_t_3 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_UINT64_T); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 245; __pyx_clineno = __LINE__; goto __pyx_L31_error;}
           __Pyx_GOTREF(__pyx_t_3);
           __pyx_r = __pyx_t_3;
           __pyx_t_3 = 0;
@@ -1743,7 +1744,7 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_min_type(PyOb
         __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
         __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-        /* "cysparse/types/cysparse_generic_types.pyx":239
+        /* "cysparse/types/cysparse_generic_types.pyx":246
  *                 test_cast_to_UINT64_t(n)
  *                 return UINT64_T
  *             except:             # <<<<<<<<<<<<<<
@@ -1769,22 +1770,22 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_min_type(PyOb
       goto __pyx_L6;
     }
 
-    /* "cysparse/types/cysparse_generic_types.pyx":244
+    /* "cysparse/types/cysparse_generic_types.pyx":251
  * 
  * 
  *         elif type_el == FLOAT32_T:             # <<<<<<<<<<<<<<
  *             try:
  *                 test_cast_to_FLOAT32_t(n)
  */
-    __pyx_t_3 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_FLOAT32_T); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 244; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_FLOAT32_T); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 251; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_1 = PyObject_RichCompare(__pyx_v_type_el, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 244; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyObject_RichCompare(__pyx_v_type_el, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 251; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 244; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 251; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_5) {
 
-      /* "cysparse/types/cysparse_generic_types.pyx":245
+      /* "cysparse/types/cysparse_generic_types.pyx":252
  * 
  *         elif type_el == FLOAT32_T:
  *             try:             # <<<<<<<<<<<<<<
@@ -1798,19 +1799,19 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_min_type(PyOb
         __Pyx_XGOTREF(__pyx_t_10);
         /*try:*/ {
 
-          /* "cysparse/types/cysparse_generic_types.pyx":246
+          /* "cysparse/types/cysparse_generic_types.pyx":253
  *         elif type_el == FLOAT32_T:
  *             try:
  *                 test_cast_to_FLOAT32_t(n)             # <<<<<<<<<<<<<<
  *                 return FLOAT32_T
  *             except:
  */
-          __pyx_t_15 = __pyx_PyFloat_AsFloat(__pyx_v_n); if (unlikely((__pyx_t_15 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 246; __pyx_clineno = __LINE__; goto __pyx_L39_error;}
-          __pyx_t_1 = __pyx_f_8cysparse_5types_22cysparse_generic_types_test_cast_to_FLOAT32_t(__pyx_t_15); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 246; __pyx_clineno = __LINE__; goto __pyx_L39_error;}
+          __pyx_t_15 = __pyx_PyFloat_AsFloat(__pyx_v_n); if (unlikely((__pyx_t_15 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 253; __pyx_clineno = __LINE__; goto __pyx_L39_error;}
+          __pyx_t_1 = __pyx_f_8cysparse_5types_22cysparse_generic_types_test_cast_to_FLOAT32_t(__pyx_t_15); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 253; __pyx_clineno = __LINE__; goto __pyx_L39_error;}
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-          /* "cysparse/types/cysparse_generic_types.pyx":247
+          /* "cysparse/types/cysparse_generic_types.pyx":254
  *             try:
  *                 test_cast_to_FLOAT32_t(n)
  *                 return FLOAT32_T             # <<<<<<<<<<<<<<
@@ -1818,7 +1819,7 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_min_type(PyOb
  *                 pass
  */
           __Pyx_XDECREF(__pyx_r);
-          __pyx_t_1 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_FLOAT32_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 247; __pyx_clineno = __LINE__; goto __pyx_L39_error;}
+          __pyx_t_1 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_FLOAT32_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 254; __pyx_clineno = __LINE__; goto __pyx_L39_error;}
           __Pyx_GOTREF(__pyx_t_1);
           __pyx_r = __pyx_t_1;
           __pyx_t_1 = 0;
@@ -1829,7 +1830,7 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_min_type(PyOb
         __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
         __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-        /* "cysparse/types/cysparse_generic_types.pyx":248
+        /* "cysparse/types/cysparse_generic_types.pyx":255
  *                 test_cast_to_FLOAT32_t(n)
  *                 return FLOAT32_T
  *             except:             # <<<<<<<<<<<<<<
@@ -1855,22 +1856,22 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_min_type(PyOb
       goto __pyx_L6;
     }
 
-    /* "cysparse/types/cysparse_generic_types.pyx":253
+    /* "cysparse/types/cysparse_generic_types.pyx":260
  * 
  * 
  *         elif type_el == FLOAT64_T:             # <<<<<<<<<<<<<<
  *             try:
  *                 test_cast_to_FLOAT64_t(n)
  */
-    __pyx_t_1 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_FLOAT64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 253; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_FLOAT64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 260; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = PyObject_RichCompare(__pyx_v_type_el, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 253; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = PyObject_RichCompare(__pyx_v_type_el, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 260; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 253; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 260; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     if (__pyx_t_5) {
 
-      /* "cysparse/types/cysparse_generic_types.pyx":254
+      /* "cysparse/types/cysparse_generic_types.pyx":261
  * 
  *         elif type_el == FLOAT64_T:
  *             try:             # <<<<<<<<<<<<<<
@@ -1884,19 +1885,19 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_min_type(PyOb
         __Pyx_XGOTREF(__pyx_t_8);
         /*try:*/ {
 
-          /* "cysparse/types/cysparse_generic_types.pyx":255
+          /* "cysparse/types/cysparse_generic_types.pyx":262
  *         elif type_el == FLOAT64_T:
  *             try:
  *                 test_cast_to_FLOAT64_t(n)             # <<<<<<<<<<<<<<
  *                 return FLOAT64_T
  *             except:
  */
-          __pyx_t_16 = __pyx_PyFloat_AsDouble(__pyx_v_n); if (unlikely((__pyx_t_16 == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 255; __pyx_clineno = __LINE__; goto __pyx_L47_error;}
-          __pyx_t_3 = __pyx_f_8cysparse_5types_22cysparse_generic_types_test_cast_to_FLOAT64_t(__pyx_t_16); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 255; __pyx_clineno = __LINE__; goto __pyx_L47_error;}
+          __pyx_t_16 = __pyx_PyFloat_AsDouble(__pyx_v_n); if (unlikely((__pyx_t_16 == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 262; __pyx_clineno = __LINE__; goto __pyx_L47_error;}
+          __pyx_t_3 = __pyx_f_8cysparse_5types_22cysparse_generic_types_test_cast_to_FLOAT64_t(__pyx_t_16); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 262; __pyx_clineno = __LINE__; goto __pyx_L47_error;}
           __Pyx_GOTREF(__pyx_t_3);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-          /* "cysparse/types/cysparse_generic_types.pyx":256
+          /* "cysparse/types/cysparse_generic_types.pyx":263
  *             try:
  *                 test_cast_to_FLOAT64_t(n)
  *                 return FLOAT64_T             # <<<<<<<<<<<<<<
@@ -1904,7 +1905,7 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_min_type(PyOb
  *                 pass
  */
           __Pyx_XDECREF(__pyx_r);
-          __pyx_t_3 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_FLOAT64_T); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 256; __pyx_clineno = __LINE__; goto __pyx_L47_error;}
+          __pyx_t_3 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_FLOAT64_T); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 263; __pyx_clineno = __LINE__; goto __pyx_L47_error;}
           __Pyx_GOTREF(__pyx_t_3);
           __pyx_r = __pyx_t_3;
           __pyx_t_3 = 0;
@@ -1915,7 +1916,7 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_min_type(PyOb
         __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
         __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-        /* "cysparse/types/cysparse_generic_types.pyx":257
+        /* "cysparse/types/cysparse_generic_types.pyx":264
  *                 test_cast_to_FLOAT64_t(n)
  *                 return FLOAT64_T
  *             except:             # <<<<<<<<<<<<<<
@@ -1941,22 +1942,22 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_min_type(PyOb
       goto __pyx_L6;
     }
 
-    /* "cysparse/types/cysparse_generic_types.pyx":262
+    /* "cysparse/types/cysparse_generic_types.pyx":269
  * 
  * 
  *         elif type_el == FLOAT128_T:             # <<<<<<<<<<<<<<
  *             try:
  *                 test_cast_to_FLOAT128_t(n)
  */
-    __pyx_t_3 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_FLOAT128_T); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 262; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_FLOAT128_T); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 269; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_1 = PyObject_RichCompare(__pyx_v_type_el, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 262; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyObject_RichCompare(__pyx_v_type_el, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 269; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 262; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 269; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_5) {
 
-      /* "cysparse/types/cysparse_generic_types.pyx":263
+      /* "cysparse/types/cysparse_generic_types.pyx":270
  * 
  *         elif type_el == FLOAT128_T:
  *             try:             # <<<<<<<<<<<<<<
@@ -1970,19 +1971,19 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_min_type(PyOb
         __Pyx_XGOTREF(__pyx_t_10);
         /*try:*/ {
 
-          /* "cysparse/types/cysparse_generic_types.pyx":264
+          /* "cysparse/types/cysparse_generic_types.pyx":271
  *         elif type_el == FLOAT128_T:
  *             try:
  *                 test_cast_to_FLOAT128_t(n)             # <<<<<<<<<<<<<<
  *                 return FLOAT128_T
  *             except:
  */
-          __pyx_t_17 = __pyx_PyFloat_AsDouble(__pyx_v_n); if (unlikely((__pyx_t_17 == (long double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 264; __pyx_clineno = __LINE__; goto __pyx_L55_error;}
-          __pyx_t_1 = __pyx_f_8cysparse_5types_22cysparse_generic_types_test_cast_to_FLOAT128_t(__pyx_t_17); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 264; __pyx_clineno = __LINE__; goto __pyx_L55_error;}
+          __pyx_t_17 = __pyx_PyFloat_AsDouble(__pyx_v_n); if (unlikely((__pyx_t_17 == (long double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 271; __pyx_clineno = __LINE__; goto __pyx_L55_error;}
+          __pyx_t_1 = __pyx_f_8cysparse_5types_22cysparse_generic_types_test_cast_to_FLOAT128_t(__pyx_t_17); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 271; __pyx_clineno = __LINE__; goto __pyx_L55_error;}
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-          /* "cysparse/types/cysparse_generic_types.pyx":265
+          /* "cysparse/types/cysparse_generic_types.pyx":272
  *             try:
  *                 test_cast_to_FLOAT128_t(n)
  *                 return FLOAT128_T             # <<<<<<<<<<<<<<
@@ -1990,7 +1991,7 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_min_type(PyOb
  *                 pass
  */
           __Pyx_XDECREF(__pyx_r);
-          __pyx_t_1 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_FLOAT128_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 265; __pyx_clineno = __LINE__; goto __pyx_L55_error;}
+          __pyx_t_1 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_FLOAT128_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 272; __pyx_clineno = __LINE__; goto __pyx_L55_error;}
           __Pyx_GOTREF(__pyx_t_1);
           __pyx_r = __pyx_t_1;
           __pyx_t_1 = 0;
@@ -2001,7 +2002,7 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_min_type(PyOb
         __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
         __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-        /* "cysparse/types/cysparse_generic_types.pyx":266
+        /* "cysparse/types/cysparse_generic_types.pyx":273
  *                 test_cast_to_FLOAT128_t(n)
  *                 return FLOAT128_T
  *             except:             # <<<<<<<<<<<<<<
@@ -2027,22 +2028,22 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_min_type(PyOb
       goto __pyx_L6;
     }
 
-    /* "cysparse/types/cysparse_generic_types.pyx":271
+    /* "cysparse/types/cysparse_generic_types.pyx":278
  * 
  * 
  *         elif type_el == COMPLEX64_T:             # <<<<<<<<<<<<<<
  *             try:
  *                 test_cast_to_COMPLEX64_t(n)
  */
-    __pyx_t_1 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_COMPLEX64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 271; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_COMPLEX64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 278; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = PyObject_RichCompare(__pyx_v_type_el, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 271; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = PyObject_RichCompare(__pyx_v_type_el, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 278; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 271; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 278; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     if (__pyx_t_5) {
 
-      /* "cysparse/types/cysparse_generic_types.pyx":272
+      /* "cysparse/types/cysparse_generic_types.pyx":279
  * 
  *         elif type_el == COMPLEX64_T:
  *             try:             # <<<<<<<<<<<<<<
@@ -2056,19 +2057,19 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_min_type(PyOb
         __Pyx_XGOTREF(__pyx_t_8);
         /*try:*/ {
 
-          /* "cysparse/types/cysparse_generic_types.pyx":273
+          /* "cysparse/types/cysparse_generic_types.pyx":280
  *         elif type_el == COMPLEX64_T:
  *             try:
  *                 test_cast_to_COMPLEX64_t(n)             # <<<<<<<<<<<<<<
  *                 return COMPLEX64_T
  *             except:
  */
-          __pyx_t_18 = __Pyx_PyComplex_As___pyx_t_float_complex(__pyx_v_n); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 273; __pyx_clineno = __LINE__; goto __pyx_L63_error;}
-          __pyx_t_3 = __pyx_f_8cysparse_5types_22cysparse_generic_types_test_cast_to_COMPLEX64_t(__pyx_t_18); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 273; __pyx_clineno = __LINE__; goto __pyx_L63_error;}
+          __pyx_t_18 = __Pyx_PyComplex_As___pyx_t_float_complex(__pyx_v_n); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 280; __pyx_clineno = __LINE__; goto __pyx_L63_error;}
+          __pyx_t_3 = __pyx_f_8cysparse_5types_22cysparse_generic_types_test_cast_to_COMPLEX64_t(__pyx_t_18); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 280; __pyx_clineno = __LINE__; goto __pyx_L63_error;}
           __Pyx_GOTREF(__pyx_t_3);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-          /* "cysparse/types/cysparse_generic_types.pyx":274
+          /* "cysparse/types/cysparse_generic_types.pyx":281
  *             try:
  *                 test_cast_to_COMPLEX64_t(n)
  *                 return COMPLEX64_T             # <<<<<<<<<<<<<<
@@ -2076,7 +2077,7 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_min_type(PyOb
  *                 pass
  */
           __Pyx_XDECREF(__pyx_r);
-          __pyx_t_3 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_COMPLEX64_T); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 274; __pyx_clineno = __LINE__; goto __pyx_L63_error;}
+          __pyx_t_3 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_COMPLEX64_T); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 281; __pyx_clineno = __LINE__; goto __pyx_L63_error;}
           __Pyx_GOTREF(__pyx_t_3);
           __pyx_r = __pyx_t_3;
           __pyx_t_3 = 0;
@@ -2087,7 +2088,7 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_min_type(PyOb
         __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
         __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-        /* "cysparse/types/cysparse_generic_types.pyx":275
+        /* "cysparse/types/cysparse_generic_types.pyx":282
  *                 test_cast_to_COMPLEX64_t(n)
  *                 return COMPLEX64_T
  *             except:             # <<<<<<<<<<<<<<
@@ -2113,22 +2114,22 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_min_type(PyOb
       goto __pyx_L6;
     }
 
-    /* "cysparse/types/cysparse_generic_types.pyx":280
+    /* "cysparse/types/cysparse_generic_types.pyx":287
  * 
  * 
  *         elif type_el == COMPLEX128_T:             # <<<<<<<<<<<<<<
  *             try:
  *                 test_cast_to_COMPLEX128_t(n)
  */
-    __pyx_t_3 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_COMPLEX128_T); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 280; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_COMPLEX128_T); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 287; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_1 = PyObject_RichCompare(__pyx_v_type_el, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 280; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyObject_RichCompare(__pyx_v_type_el, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 287; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 280; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 287; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_5) {
 
-      /* "cysparse/types/cysparse_generic_types.pyx":281
+      /* "cysparse/types/cysparse_generic_types.pyx":288
  * 
  *         elif type_el == COMPLEX128_T:
  *             try:             # <<<<<<<<<<<<<<
@@ -2142,19 +2143,19 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_min_type(PyOb
         __Pyx_XGOTREF(__pyx_t_10);
         /*try:*/ {
 
-          /* "cysparse/types/cysparse_generic_types.pyx":282
+          /* "cysparse/types/cysparse_generic_types.pyx":289
  *         elif type_el == COMPLEX128_T:
  *             try:
  *                 test_cast_to_COMPLEX128_t(n)             # <<<<<<<<<<<<<<
  *                 return COMPLEX128_T
  *             except:
  */
-          __pyx_t_19 = __Pyx_PyComplex_As___pyx_t_double_complex(__pyx_v_n); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 282; __pyx_clineno = __LINE__; goto __pyx_L71_error;}
-          __pyx_t_1 = __pyx_f_8cysparse_5types_22cysparse_generic_types_test_cast_to_COMPLEX128_t(__pyx_t_19); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 282; __pyx_clineno = __LINE__; goto __pyx_L71_error;}
+          __pyx_t_19 = __Pyx_PyComplex_As___pyx_t_double_complex(__pyx_v_n); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 289; __pyx_clineno = __LINE__; goto __pyx_L71_error;}
+          __pyx_t_1 = __pyx_f_8cysparse_5types_22cysparse_generic_types_test_cast_to_COMPLEX128_t(__pyx_t_19); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 289; __pyx_clineno = __LINE__; goto __pyx_L71_error;}
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-          /* "cysparse/types/cysparse_generic_types.pyx":283
+          /* "cysparse/types/cysparse_generic_types.pyx":290
  *             try:
  *                 test_cast_to_COMPLEX128_t(n)
  *                 return COMPLEX128_T             # <<<<<<<<<<<<<<
@@ -2162,7 +2163,7 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_min_type(PyOb
  *                 pass
  */
           __Pyx_XDECREF(__pyx_r);
-          __pyx_t_1 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_COMPLEX128_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 283; __pyx_clineno = __LINE__; goto __pyx_L71_error;}
+          __pyx_t_1 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_COMPLEX128_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 290; __pyx_clineno = __LINE__; goto __pyx_L71_error;}
           __Pyx_GOTREF(__pyx_t_1);
           __pyx_r = __pyx_t_1;
           __pyx_t_1 = 0;
@@ -2173,7 +2174,7 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_min_type(PyOb
         __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
         __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-        /* "cysparse/types/cysparse_generic_types.pyx":284
+        /* "cysparse/types/cysparse_generic_types.pyx":291
  *                 test_cast_to_COMPLEX128_t(n)
  *                 return COMPLEX128_T
  *             except:             # <<<<<<<<<<<<<<
@@ -2199,22 +2200,22 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_min_type(PyOb
       goto __pyx_L6;
     }
 
-    /* "cysparse/types/cysparse_generic_types.pyx":289
+    /* "cysparse/types/cysparse_generic_types.pyx":296
  * 
  * 
  *         elif type_el == COMPLEX256_T:             # <<<<<<<<<<<<<<
  *             try:
  *                 test_cast_to_COMPLEX256_t(n)
  */
-    __pyx_t_1 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_COMPLEX256_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 289; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_COMPLEX256_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 296; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = PyObject_RichCompare(__pyx_v_type_el, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 289; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = PyObject_RichCompare(__pyx_v_type_el, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 296; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 289; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 296; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     if (__pyx_t_5) {
 
-      /* "cysparse/types/cysparse_generic_types.pyx":290
+      /* "cysparse/types/cysparse_generic_types.pyx":297
  * 
  *         elif type_el == COMPLEX256_T:
  *             try:             # <<<<<<<<<<<<<<
@@ -2228,19 +2229,19 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_min_type(PyOb
         __Pyx_XGOTREF(__pyx_t_8);
         /*try:*/ {
 
-          /* "cysparse/types/cysparse_generic_types.pyx":291
+          /* "cysparse/types/cysparse_generic_types.pyx":298
  *         elif type_el == COMPLEX256_T:
  *             try:
  *                 test_cast_to_COMPLEX256_t(n)             # <<<<<<<<<<<<<<
  *                 return COMPLEX256_T
  *             except:
  */
-          __pyx_t_20 = __Pyx_PyComplex_As___pyx_t_long_double_complex(__pyx_v_n); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 291; __pyx_clineno = __LINE__; goto __pyx_L79_error;}
-          __pyx_t_3 = __pyx_f_8cysparse_5types_22cysparse_generic_types_test_cast_to_COMPLEX256_t(__pyx_t_20); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 291; __pyx_clineno = __LINE__; goto __pyx_L79_error;}
+          __pyx_t_20 = __Pyx_PyComplex_As___pyx_t_long_double_complex(__pyx_v_n); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 298; __pyx_clineno = __LINE__; goto __pyx_L79_error;}
+          __pyx_t_3 = __pyx_f_8cysparse_5types_22cysparse_generic_types_test_cast_to_COMPLEX256_t(__pyx_t_20); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 298; __pyx_clineno = __LINE__; goto __pyx_L79_error;}
           __Pyx_GOTREF(__pyx_t_3);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-          /* "cysparse/types/cysparse_generic_types.pyx":292
+          /* "cysparse/types/cysparse_generic_types.pyx":299
  *             try:
  *                 test_cast_to_COMPLEX256_t(n)
  *                 return COMPLEX256_T             # <<<<<<<<<<<<<<
@@ -2248,7 +2249,7 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_min_type(PyOb
  *                 pass
  */
           __Pyx_XDECREF(__pyx_r);
-          __pyx_t_3 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_COMPLEX256_T); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 292; __pyx_clineno = __LINE__; goto __pyx_L79_error;}
+          __pyx_t_3 = PyInt_FromLong(__pyx_e_8cysparse_5types_14cysparse_types_COMPLEX256_T); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 299; __pyx_clineno = __LINE__; goto __pyx_L79_error;}
           __Pyx_GOTREF(__pyx_t_3);
           __pyx_r = __pyx_t_3;
           __pyx_t_3 = 0;
@@ -2259,7 +2260,7 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_min_type(PyOb
         __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
         __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-        /* "cysparse/types/cysparse_generic_types.pyx":293
+        /* "cysparse/types/cysparse_generic_types.pyx":300
  *                 test_cast_to_COMPLEX256_t(n)
  *                 return COMPLEX256_T
  *             except:             # <<<<<<<<<<<<<<
@@ -2286,7 +2287,7 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_min_type(PyOb
     }
     __pyx_L6:;
 
-    /* "cysparse/types/cysparse_generic_types.pyx":205
+    /* "cysparse/types/cysparse_generic_types.pyx":212
  *         raise TypeError('Som type(s) are not recognized as basic CySparseType')
  * 
  *     for type_el in type_list:             # <<<<<<<<<<<<<<
@@ -2296,20 +2297,20 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_min_type(PyOb
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "cysparse/types/cysparse_generic_types.pyx":298
+  /* "cysparse/types/cysparse_generic_types.pyx":305
  * 
  * 
  *     raise TypeError('No type was found to cast number')             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 298; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 305; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_Raise(__pyx_t_2, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  {__pyx_filename = __pyx_f[0]; __pyx_lineno = 298; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  {__pyx_filename = __pyx_f[0]; __pyx_lineno = 305; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "cysparse/types/cysparse_generic_types.pyx":184
+  /* "cysparse/types/cysparse_generic_types.pyx":191
  * 
  * # EXPLICIT TYPE TESTS
  * cdef min_type(n, type_list):             # <<<<<<<<<<<<<<
@@ -2516,7 +2517,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, 0, 0, 0, 0, 0, 0}
 };
 static int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 203; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 210; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -2526,25 +2527,25 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "cysparse/types/cysparse_generic_types.pyx":203
+  /* "cysparse/types/cysparse_generic_types.pyx":210
  *     """
  *     if not (set(type_list) <= set(BASIC_TYPES)):
  *         raise TypeError('Som type(s) are not recognized as basic CySparseType')             # <<<<<<<<<<<<<<
  * 
  *     for type_el in type_list:
  */
-  __pyx_tuple_ = PyTuple_Pack(1, __pyx_kp_s_Som_type_s_are_not_recognized_as); if (unlikely(!__pyx_tuple_)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 203; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple_ = PyTuple_Pack(1, __pyx_kp_s_Som_type_s_are_not_recognized_as); if (unlikely(!__pyx_tuple_)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 210; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple_);
   __Pyx_GIVEREF(__pyx_tuple_);
 
-  /* "cysparse/types/cysparse_generic_types.pyx":298
+  /* "cysparse/types/cysparse_generic_types.pyx":305
  * 
  * 
  *     raise TypeError('No type was found to cast number')             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_s_No_type_was_found_to_cast_number); if (unlikely(!__pyx_tuple__2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 298; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_s_No_type_was_found_to_cast_number); if (unlikely(!__pyx_tuple__2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 305; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
   __Pyx_RefNannyFinishContext();
@@ -2658,22 +2659,22 @@ PyMODINIT_FUNC PyInit_cysparse_generic_types(void)
   /*--- Function import code ---*/
   /*--- Execution code ---*/
 
-  /* "cysparse/types/cysparse_generic_types.pyx":5
- * """
+  /* "cysparse/types/cysparse_generic_types.pyx":12
+ * 
  * from cysparse.types.cysparse_types cimport *
  * from cysparse.types.cysparse_types import *             # <<<<<<<<<<<<<<
  * 
  * ########################################################################################################################
  */
-  __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 5; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 12; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_n_s__3);
   PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s__3);
   __Pyx_GIVEREF(__pyx_n_s__3);
-  __pyx_t_2 = __Pyx_Import(__pyx_n_s_cysparse_types_cysparse_types, __pyx_t_1, -1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 5; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_Import(__pyx_n_s_cysparse_types_cysparse_types, __pyx_t_1, -1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 12; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (__pyx_import_star(__pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 5; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  if (__pyx_import_star(__pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 12; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "cysparse/types/cysparse_generic_types.pyx":1
