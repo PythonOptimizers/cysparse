@@ -2,12 +2,11 @@
 
 Python/Cython library to replace PySparse.
 
-Due to a nice complete git crash disaster, I have deleted the develop and multi_types branches
-the hard way... 
+This is the multi-types version (last single type version: ce86f8476166f63d0af72e38a477a761aecf4a7c).
 
-The master branch contains now the multi-types version only.
+## Implementation of PySparse
 
-You **CANNOT** use the old version of CySparse except if you dig and clone commit ce86f8476166f63d0af72e38a477a761aecf4a7c .
+[PySparse](https://github.com/Funartech/cysparse/wiki/PySparse)
 
 ## Benchmarks
 
