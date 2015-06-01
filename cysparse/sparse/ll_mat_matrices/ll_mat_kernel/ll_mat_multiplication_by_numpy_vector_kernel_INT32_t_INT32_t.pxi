@@ -247,7 +247,7 @@ cdef void multiply_tranposed_ll_mat_with_numpy_vector_kernel_INT32_t_INT32_t(INT
 ###########################################
 # Non C-contiguous, no symmetric
 ###########################################
-cdef void multiply_tranposed_ll_mat_with_with_strided_numpy_vector_kernel_INT32_t_INT32_t(INT32_t m, INT32_t n, INT32_t *x, INT32_t incx, INT32_t *y, INT32_t incy,
+cdef void multiply_tranposed_ll_mat_with_strided_numpy_vector_kernel_INT32_t_INT32_t(INT32_t m, INT32_t n, INT32_t *x, INT32_t incx, INT32_t *y, INT32_t incy,
          INT32_t *val, INT32_t *col, INT32_t *link, INT32_t *root):
     """
     Compute :math:`y = A^t * x`.

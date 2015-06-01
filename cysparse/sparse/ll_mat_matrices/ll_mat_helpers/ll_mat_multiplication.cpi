@@ -190,9 +190,9 @@ cdef cnp.ndarray[cnp.@type|cysparse_type_to_numpy_c_type@, ndim=1, mode='c'] mul
                                                                  c_data, c.strides[0] / sd,
                                                                  A.val, A.col, A.link, A.root)
         else:
-            multiply_tranposed_ll_mat_with_with_strided_numpy_vector_kernel_@index@_@type@(A_nrow, A_ncol,
-                                                                                           b_data, b.strides[0] / sd,
-                                                                                           c_data, c.strides[0] / sd,
-                                                                                           A.val, A.col, A.link, A.root)
+            multiply_tranposed_ll_mat_with_strided_numpy_vector_kernel_@index@_@type@(A_nrow, A_ncol,
+                                                                                      b_data, b.strides[0] / sd,
+                                                                                      c_data, c.strides[0] / sd,
+                                                                                      A.val, A.col, A.link, A.root)
 
     return c

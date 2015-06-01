@@ -247,7 +247,7 @@ cdef void multiply_tranposed_ll_mat_with_numpy_vector_kernel_INT64_t_COMPLEX256_
 ###########################################
 # Non C-contiguous, no symmetric
 ###########################################
-cdef void multiply_tranposed_ll_mat_with_with_strided_numpy_vector_kernel_INT64_t_COMPLEX256_t(INT64_t m, INT64_t n, COMPLEX256_t *x, INT64_t incx, COMPLEX256_t *y, INT64_t incy,
+cdef void multiply_tranposed_ll_mat_with_strided_numpy_vector_kernel_INT64_t_COMPLEX256_t(INT64_t m, INT64_t n, COMPLEX256_t *x, INT64_t incx, COMPLEX256_t *y, INT64_t incy,
          COMPLEX256_t *val, INT64_t *col, INT64_t *link, INT64_t *root):
     """
     Compute :math:`y = A^t * x`.

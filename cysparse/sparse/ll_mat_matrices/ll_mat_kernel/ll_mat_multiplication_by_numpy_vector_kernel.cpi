@@ -257,7 +257,7 @@ cdef void multiply_tranposed_ll_mat_with_numpy_vector_kernel_@index@_@type@(@ind
 ###########################################
 # Non C-contiguous, no symmetric
 ###########################################
-cdef void multiply_tranposed_ll_mat_with_with_strided_numpy_vector_kernel_@index@_@type@(@index@ m, @index@ n, @type@ *x, @index@ incx, @type@ *y, @index@ incy,
+cdef void multiply_tranposed_ll_mat_with_strided_numpy_vector_kernel_@index@_@type@(@index@ m, @index@ n, @type@ *x, @index@ incx, @type@ *y, @index@ incy,
          @type@ *val, @index@ *col, @index@ *link, @index@ *root):
     """
     Compute :math:`y = A^t * x`.

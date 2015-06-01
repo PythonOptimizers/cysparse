@@ -1647,7 +1647,7 @@ static void __pyx_f_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT32_t_COMPLEX
 static void __pyx_f_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT32_t_COMPLEX64_t_multiply_ll_mat_with_strided_numpy_vector_kernel_INT32_t_COMPLEX64_t(__pyx_t_8cysparse_5types_14cysparse_types_INT32_t, __pyx_t_float_complex *, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t, __pyx_t_float_complex *, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t, __pyx_t_float_complex *, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *); /*proto*/
 static void __pyx_f_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT32_t_COMPLEX64_t_multiply_sym_ll_mat_with_strided_numpy_vector_kernel_INT32_t_COMPLEX64_t(__pyx_t_8cysparse_5types_14cysparse_types_INT32_t, __pyx_t_float_complex *, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t, __pyx_t_float_complex *, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t, __pyx_t_float_complex *, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *); /*proto*/
 static void __pyx_f_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT32_t_COMPLEX64_t_multiply_tranposed_ll_mat_with_numpy_vector_kernel_INT32_t_COMPLEX64_t(__pyx_t_8cysparse_5types_14cysparse_types_INT32_t, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t, __pyx_t_float_complex *, __pyx_t_float_complex *, __pyx_t_float_complex *, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *); /*proto*/
-static void __pyx_f_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT32_t_COMPLEX64_t_multiply_tranposed_ll_mat_with_with_strided_numpy_vector_kernel_INT32_t_COMPLEX64_t(__pyx_t_8cysparse_5types_14cysparse_types_INT32_t, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t, __pyx_t_float_complex *, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t, __pyx_t_float_complex *, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t, __pyx_t_float_complex *, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *); /*proto*/
+static void __pyx_f_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT32_t_COMPLEX64_t_multiply_tranposed_ll_mat_with_strided_numpy_vector_kernel_INT32_t_COMPLEX64_t(__pyx_t_8cysparse_5types_14cysparse_types_INT32_t, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t, __pyx_t_float_complex *, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t, __pyx_t_float_complex *, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t, __pyx_t_float_complex *, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *); /*proto*/
 static struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT32_t_COMPLEX64_t_LLSparseMatrix_INT32_t_COMPLEX64_t *__pyx_f_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT32_t_COMPLEX64_t_multiply_two_ll_mat_INT32_t_COMPLEX64_t(struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT32_t_COMPLEX64_t_LLSparseMatrix_INT32_t_COMPLEX64_t *, struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT32_t_COMPLEX64_t_LLSparseMatrix_INT32_t_COMPLEX64_t *); /*proto*/
 static PyArrayObject *__pyx_f_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT32_t_COMPLEX64_t_multiply_ll_mat_with_numpy_vector_INT32_t_COMPLEX64_t(struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT32_t_COMPLEX64_t_LLSparseMatrix_INT32_t_COMPLEX64_t *, PyArrayObject *); /*proto*/
 static PyArrayObject *__pyx_f_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT32_t_COMPLEX64_t_multiply_transposed_ll_mat_with_numpy_vector_INT32_t_COMPLEX64_t(struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT32_t_COMPLEX64_t_LLSparseMatrix_INT32_t_COMPLEX64_t *, PyArrayObject *); /*proto*/
@@ -2954,12 +2954,12 @@ static void __pyx_f_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT32_t_COMPLEX
 /* "cysparse/sparse/ll_mat_matrices/ll_mat_kernel/ll_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX64_t.pxi":250
  * # Non C-contiguous, no symmetric
  * ###########################################
- * cdef void multiply_tranposed_ll_mat_with_with_strided_numpy_vector_kernel_INT32_t_COMPLEX64_t(INT32_t m, INT32_t n, COMPLEX64_t *x, INT32_t incx, COMPLEX64_t *y, INT32_t incy,             # <<<<<<<<<<<<<<
+ * cdef void multiply_tranposed_ll_mat_with_strided_numpy_vector_kernel_INT32_t_COMPLEX64_t(INT32_t m, INT32_t n, COMPLEX64_t *x, INT32_t incx, COMPLEX64_t *y, INT32_t incy,             # <<<<<<<<<<<<<<
  *          COMPLEX64_t *val, INT32_t *col, INT32_t *link, INT32_t *root):
  *     """
  */
 
-static void __pyx_f_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT32_t_COMPLEX64_t_multiply_tranposed_ll_mat_with_with_strided_numpy_vector_kernel_INT32_t_COMPLEX64_t(__pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_m, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_n, __pyx_t_float_complex *__pyx_v_x, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_incx, __pyx_t_float_complex *__pyx_v_y, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_incy, __pyx_t_float_complex *__pyx_v_val, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *__pyx_v_col, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *__pyx_v_link, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *__pyx_v_root) {
+static void __pyx_f_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT32_t_COMPLEX64_t_multiply_tranposed_ll_mat_with_strided_numpy_vector_kernel_INT32_t_COMPLEX64_t(__pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_m, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_n, __pyx_t_float_complex *__pyx_v_x, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_incx, __pyx_t_float_complex *__pyx_v_y, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_incy, __pyx_t_float_complex *__pyx_v_val, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *__pyx_v_col, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *__pyx_v_link, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *__pyx_v_root) {
   __pyx_t_float_complex __pyx_v_xi;
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_i;
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_k;
@@ -2968,7 +2968,7 @@ static void __pyx_f_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT32_t_COMPLEX
   __pyx_t_double_complex __pyx_t_2;
   int __pyx_t_3;
   int __pyx_t_4;
-  __Pyx_RefNannySetupContext("multiply_tranposed_ll_mat_with_with_strided_numpy_vector_kernel_INT32_t_COMPLEX64_t", 0);
+  __Pyx_RefNannySetupContext("multiply_tranposed_ll_mat_with_strided_numpy_vector_kernel_INT32_t_COMPLEX64_t", 0);
 
   /* "cysparse/sparse/ll_mat_matrices/ll_mat_kernel/ll_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX64_t.pxi":276
  *         INT32_t i, k
@@ -3051,7 +3051,7 @@ static void __pyx_f_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT32_t_COMPLEX
   /* "cysparse/sparse/ll_mat_matrices/ll_mat_kernel/ll_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX64_t.pxi":250
  * # Non C-contiguous, no symmetric
  * ###########################################
- * cdef void multiply_tranposed_ll_mat_with_with_strided_numpy_vector_kernel_INT32_t_COMPLEX64_t(INT32_t m, INT32_t n, COMPLEX64_t *x, INT32_t incx, COMPLEX64_t *y, INT32_t incy,             # <<<<<<<<<<<<<<
+ * cdef void multiply_tranposed_ll_mat_with_strided_numpy_vector_kernel_INT32_t_COMPLEX64_t(INT32_t m, INT32_t n, COMPLEX64_t *x, INT32_t incx, COMPLEX64_t *y, INT32_t incy,             # <<<<<<<<<<<<<<
  *          COMPLEX64_t *val, INT32_t *col, INT32_t *link, INT32_t *root):
  *     """
  */
@@ -4149,10 +4149,10 @@ static PyArrayObject *__pyx_f_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT32
 
       /* "cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_COMPLEX64_t.pxi":194
  *         else:
- *             multiply_tranposed_ll_mat_with_with_strided_numpy_vector_kernel_INT32_t_COMPLEX64_t(A_nrow, A_ncol,
- *                                                                                            b_data, b.strides[0] / sd,             # <<<<<<<<<<<<<<
- *                                                                                            c_data, c.strides[0] / sd,
- *                                                                                            A.val, A.col, A.link, A.root)
+ *             multiply_tranposed_ll_mat_with_strided_numpy_vector_kernel_INT32_t_COMPLEX64_t(A_nrow, A_ncol,
+ *                                                                                       b_data, b.strides[0] / sd,             # <<<<<<<<<<<<<<
+ *                                                                                       c_data, c.strides[0] / sd,
+ *                                                                                       A.val, A.col, A.link, A.root)
  */
       if (unlikely(__pyx_v_sd == 0)) {
         #ifdef WITH_THREAD
@@ -4166,10 +4166,10 @@ static PyArrayObject *__pyx_f_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT32
       }
 
       /* "cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_COMPLEX64_t.pxi":195
- *             multiply_tranposed_ll_mat_with_with_strided_numpy_vector_kernel_INT32_t_COMPLEX64_t(A_nrow, A_ncol,
- *                                                                                            b_data, b.strides[0] / sd,
- *                                                                                            c_data, c.strides[0] / sd,             # <<<<<<<<<<<<<<
- *                                                                                            A.val, A.col, A.link, A.root)
+ *             multiply_tranposed_ll_mat_with_strided_numpy_vector_kernel_INT32_t_COMPLEX64_t(A_nrow, A_ncol,
+ *                                                                                       b_data, b.strides[0] / sd,
+ *                                                                                       c_data, c.strides[0] / sd,             # <<<<<<<<<<<<<<
+ *                                                                                       A.val, A.col, A.link, A.root)
  * 
  */
       if (unlikely(__pyx_v_sd == 0)) {
@@ -4186,18 +4186,18 @@ static PyArrayObject *__pyx_f_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT32
       /* "cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_COMPLEX64_t.pxi":193
  *                                                                  A.val, A.col, A.link, A.root)
  *         else:
- *             multiply_tranposed_ll_mat_with_with_strided_numpy_vector_kernel_INT32_t_COMPLEX64_t(A_nrow, A_ncol,             # <<<<<<<<<<<<<<
- *                                                                                            b_data, b.strides[0] / sd,
- *                                                                                            c_data, c.strides[0] / sd,
+ *             multiply_tranposed_ll_mat_with_strided_numpy_vector_kernel_INT32_t_COMPLEX64_t(A_nrow, A_ncol,             # <<<<<<<<<<<<<<
+ *                                                                                       b_data, b.strides[0] / sd,
+ *                                                                                       c_data, c.strides[0] / sd,
  */
-      __pyx_f_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT32_t_COMPLEX64_t_multiply_tranposed_ll_mat_with_with_strided_numpy_vector_kernel_INT32_t_COMPLEX64_t(__pyx_v_A_nrow, __pyx_v_A_ncol, __pyx_v_b_data, ((__pyx_v_b->strides[0]) / __pyx_v_sd), __pyx_v_c_data, ((__pyx_v_c->strides[0]) / __pyx_v_sd), __pyx_v_A->val, __pyx_v_A->col, __pyx_v_A->link, __pyx_v_A->root);
+      __pyx_f_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT32_t_COMPLEX64_t_multiply_tranposed_ll_mat_with_strided_numpy_vector_kernel_INT32_t_COMPLEX64_t(__pyx_v_A_nrow, __pyx_v_A_ncol, __pyx_v_b_data, ((__pyx_v_b->strides[0]) / __pyx_v_sd), __pyx_v_c_data, ((__pyx_v_c->strides[0]) / __pyx_v_sd), __pyx_v_A->val, __pyx_v_A->col, __pyx_v_A->link, __pyx_v_A->root);
     }
     __pyx_L6:;
   }
   __pyx_L4:;
 
   /* "cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_COMPLEX64_t.pxi":198
- *                                                                                            A.val, A.col, A.link, A.root)
+ *                                                                                       A.val, A.col, A.link, A.root)
  * 
  *     return c             # <<<<<<<<<<<<<<
  */
