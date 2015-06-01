@@ -51,7 +51,6 @@ class LLMatInfiniteNormBenchmark(benchmark.Benchmark):
         construct_sparse_matrix(self.A_p, self.size, self.nbr_elements)
 
     def tearDown(self):
-
         assert self.p_norm_inf == self.c_norm_inf
             #assert self.w_c[i] == self.w_s[i]
 

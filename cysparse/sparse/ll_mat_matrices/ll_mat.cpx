@@ -1100,45 +1100,31 @@ YOU HAVE TO DEFINE OR CAST YOUR NEW UNRECOGNIZED TYPE
 {% if type in integer_list %}
                     if self.col[k] != i:
                         col_sum[self.col[k]] +=  fabs(<FLOAT64_t>self.val[k])
-                        col_sum[i] +=  fabs(<FLOAT64_t>self.val[k])
-                    else:
-                        col_sum[i] +=  fabs(<FLOAT64_t>self.val[k])
+                    col_sum[i] +=  fabs(<FLOAT64_t>self.val[k])
 {% elif type == 'FLOAT32_t' %}
                     if self.col[k] != i:
                         col_sum[self.col[k]] += fabsf(self.val[k])
-                        col_sum[i] += fabsf(self.val[k])
-                    else:
-                        col_sum[i] += fabsf(self.val[k])
+                    col_sum[i] += fabsf(self.val[k])
 {% elif type == 'FLOAT64_t' %}
                     if self.col[k] != i:
                         col_sum[self.col[k]] += fabs(self.val[k])
-                        col_sum[i] += fabs(self.val[k])
-                    else:
-                        col_sum[i] += fabs(self.val[k])
+                    col_sum[i] += fabs(self.val[k])
 {% elif type == 'FLOAT128_t' %}
                     if self.col[k] != i:
                         col_sum[self.col[k]] += fabsl(self.val[k])
-                        col_sum[i] += fabsl(self.val[k])
-                    else:
-                        col_sum[i] += fabsl(self.val[k])
+                    col_sum[i] += fabsl(self.val[k])
 {% elif type == 'COMPLEX64_t' %}
                     if self.col[k] != i:
                         col_sum[self.col[k]] += cabsf(self.val[k])
-                        col_sum[i] += cabsf(self.val[k])
-                    else:
-                        col_sum[i] += cabsf(self.val[k])
+                    col_sum[i] += cabsf(self.val[k])
 {% elif type == 'COMPLEX128_t' %}
                     if self.col[k] != i:
                         col_sum[self.col[k]] += cabs(self.val[k])
-                        col_sum[i] += cabs(self.val[k])
-                    else:
-                        col_sum[i] += cabs(self.val[k])
+                    col_sum[i] += cabs(self.val[k])
 {% elif type == 'COMPLEX256_t' %}
                     if self.col[k] != i:
                         col_sum[self.col[k]] += cabsl(self.val[k])
-                        col_sum[i] += cabsl(self.val[k])
-                    else:
-                        col_sum[i] += cabsl(self.val[k])
+                    col_sum[i] += cabsl(self.val[k])
 {% else %}
 YOU HAVE TO CAST YOUR NEW TYPE HERE
 {% endif %}
@@ -1186,45 +1172,98 @@ YOU HAVE TO CAST YOUR NEW TYPE HERE
         """
         Computes :math:`||A||_\infty`.
 
-        Warning:
-            Only works if the matrix is **not** symmetric!
         """
-        assert not self.is_symmetric, "Not implemented for symmetric matrices"
-
         cdef:
             @type|cysparse_type_to_real_sum_cysparse_type@ max_row_sum, row_sum
             @index@ i, k
 
+        # for symmetric case
+        cdef @type|cysparse_type_to_real_sum_cysparse_type@ * row_sum_array
+
         max_row_sum = <@type|cysparse_type_to_real_sum_cysparse_type@> 0.0
 
-        for i from 0<= i < self.nrow:
-            k = self.root[i]
+        if not self.is_symmetric:
+            for i from 0<= i < self.nrow:
+                k = self.root[i]
 
-            row_sum = <@type|cysparse_type_to_real_sum_cysparse_type@> 0.0
+                row_sum = <@type|cysparse_type_to_real_sum_cysparse_type@> 0.0
 
-            # EXPLICIT TYPE TESTS
-            while k != -1:
+                # EXPLICIT TYPE TESTS
+                while k != -1:
 {% if type in integer_list %}
-                row_sum += fabs(<FLOAT64_t>self.val[k])
+                    row_sum += fabs(<FLOAT64_t>self.val[k])
 {% elif type == 'FLOAT32_t' %}
-                row_sum += fabsf(self.val[k])
+                    row_sum += fabsf(self.val[k])
 {% elif type == 'FLOAT64_t' %}
-                row_sum += fabs(self.val[k])
+                    row_sum += fabs(self.val[k])
 {% elif type == 'FLOAT128_t' %}
-                row_sum += fabsl(self.val[k])
+                    row_sum += fabsl(self.val[k])
 {% elif type == 'COMPLEX64_t' %}
-                row_sum += cabsf(self.val[k])
+                    row_sum += cabsf(self.val[k])
 {% elif type == 'COMPLEX128_t' %}
-                row_sum += cabs(self.val[k])
+                    row_sum += cabs(self.val[k])
 {% elif type == 'COMPLEX256_t' %}
-                row_sum += cabsl(self.val[k])
+                    row_sum += cabsl(self.val[k])
 {% else %}
 YOU HAVE TO CAST YOUR NEW TYPE HERE
 {% endif %}
-                k = self.link[k]
+                    k = self.link[k]
 
-            if row_sum > max_row_sum:
-                max_row_sum = row_sum
+                if row_sum > max_row_sum:
+                    max_row_sum = row_sum
+
+        else:  # matrix is symmetric
+
+            # create temp array for column results
+            row_sum_array = <@type|cysparse_type_to_real_sum_cysparse_type@ *> calloc(self.nrow, sizeof(@type|cysparse_type_to_real_sum_cysparse_type@))
+
+            if not row_sum_array:
+                raise MemoryError()
+
+            for i from 0<= i < self.nrow:
+                k = self.root[i]
+
+                # EXPLICIT TYPE TESTS
+                while k != -1:
+{% if type in integer_list %}
+                    if self.col[k] != i:
+                        row_sum_array[self.col[k]] += fabs(<FLOAT64_t>self.val[k])
+                    row_sum_array[i] += fabs(<FLOAT64_t>self.val[k])
+{% elif type == 'FLOAT32_t' %}
+                    if self.col[k] != i:
+                        row_sum_array[self.col[k]] += fabsf(self.val[k])
+                    row_sum_array[i] += fabsf(self.val[k])
+{% elif type == 'FLOAT64_t' %}
+                    if self.col[k] != i:
+                        row_sum_array[self.col[k]] += fabs(self.val[k])
+                    row_sum_array[i] += fabs(self.val[k])
+{% elif type == 'FLOAT128_t' %}
+                    if self.col[k] != i:
+                        row_sum_array[self.col[k]] += fabsl(self.val[k])
+                    row_sum_array[i] += fabsl(self.val[k])
+{% elif type == 'COMPLEX64_t' %}
+                    if self.col[k] != i:
+                        row_sum_array[self.col[k]] += cabsf(self.val[k])
+                    row_sum_array[i] += cabsf(self.val[k])
+{% elif type == 'COMPLEX128_t' %}
+                    if self.col[k] != i:
+                        row_sum_array[self.col[k]] += cabs(self.val[k])
+                    row_sum_array[i] += cabs(self.val[k])
+{% elif type == 'COMPLEX256_t' %}
+                    if self.col[k] != i:
+                        row_sum_array[self.col[k]] += cabsl(self.val[k])
+                    row_sum_array[i] += cabsl(self.val[k])
+{% else %}
+YOU HAVE TO CAST YOUR NEW TYPE HERE
+{% endif %}
+                    k = self.link[k]
+
+            # compute max of all row sums
+            for i from 0 <= i < self.nrow:
+                if row_sum_array[i] > max_row_sum:
+                    max_row_sum = row_sum_array[i]
+
+            free(row_sum_array)
 
         return max_row_sum
 

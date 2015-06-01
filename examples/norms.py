@@ -44,12 +44,19 @@ l2 = NewLLSparseMatrix(nrow=3, ncol=4, size_hint=10, is_symmetric=True)
 l2.put_triplet([0, 1, 1, 2, 2], [0, 0, 1, 0, 1], [1, 2, 3, 4, 5]) # i, j, val
 
 l2_norm_1_sym = l2.norm('1')
+l2_norm_inf_sym = l2.norm('inf')
 print l2_norm_1_sym
+print l2_norm_inf_sym
 
 l2.generalize()
 
 l2_norm_1 = l2.norm('1')
+l2_norm_inf = l2.norm('inf')
 print l2_norm_1
+print l2_norm_inf
 
 assert l2_norm_1_sym == l2_norm_1
+assert l2_norm_inf_sym == l2_norm_inf
 
+########################################################################################################################
+print "=" * 80

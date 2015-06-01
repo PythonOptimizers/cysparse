@@ -1029,9 +1029,7 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX64_t(MutableSparseMatrix_INT32_t_COMPLE
 
                     if self.col[k] != i:
                         col_sum[self.col[k]] += cabsf(self.val[k])
-                        col_sum[i] += cabsf(self.val[k])
-                    else:
-                        col_sum[i] += cabsf(self.val[k])
+                    col_sum[i] += cabsf(self.val[k])
 
                     k = self.link[k]
 
@@ -1063,31 +1061,58 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX64_t(MutableSparseMatrix_INT32_t_COMPLE
         """
         Computes :math:`||A||_\infty`.
 
-        Warning:
-            Only works if the matrix is **not** symmetric!
         """
-        assert not self.is_symmetric, "Not implemented for symmetric matrices"
-
         cdef:
             FLOAT64_t max_row_sum, row_sum
             INT32_t i, k
 
+        # for symmetric case
+        cdef FLOAT64_t * row_sum_array
+
         max_row_sum = <FLOAT64_t> 0.0
 
-        for i from 0<= i < self.nrow:
-            k = self.root[i]
+        if not self.is_symmetric:
+            for i from 0<= i < self.nrow:
+                k = self.root[i]
 
-            row_sum = <FLOAT64_t> 0.0
+                row_sum = <FLOAT64_t> 0.0
 
-            # EXPLICIT TYPE TESTS
-            while k != -1:
+                # EXPLICIT TYPE TESTS
+                while k != -1:
 
-                row_sum += cabsf(self.val[k])
+                    row_sum += cabsf(self.val[k])
 
-                k = self.link[k]
+                    k = self.link[k]
 
-            if row_sum > max_row_sum:
-                max_row_sum = row_sum
+                if row_sum > max_row_sum:
+                    max_row_sum = row_sum
+
+        else:  # matrix is symmetric
+
+            # create temp array for column results
+            row_sum_array = <FLOAT64_t *> calloc(self.nrow, sizeof(FLOAT64_t))
+
+            if not row_sum_array:
+                raise MemoryError()
+
+            for i from 0<= i < self.nrow:
+                k = self.root[i]
+
+                # EXPLICIT TYPE TESTS
+                while k != -1:
+
+                    if self.col[k] != i:
+                        row_sum_array[self.col[k]] += cabsf(self.val[k])
+                    row_sum_array[i] += cabsf(self.val[k])
+
+                    k = self.link[k]
+
+            # compute max of all row sums
+            for i from 0 <= i < self.nrow:
+                if row_sum_array[i] > max_row_sum:
+                    max_row_sum = row_sum_array[i]
+
+            free(row_sum_array)
 
         return max_row_sum
 
