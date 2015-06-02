@@ -1,6 +1,7 @@
 from cysparse.types.cysparse_types cimport *
 
 from cysparse.sparse.s_mat_matrices.s_mat_INT64_t_COMPLEX128_t cimport MutableSparseMatrix_INT64_t_COMPLEX128_t
+from cysparse.sparse.ll_mat_matrices.ll_mat_INT64_t_COMPLEX128_t cimport LLSparseMatrix_INT64_t_COMPLEX128_t
 from cysparse.sparse.ll_mat_views.ll_mat_view_INT64_t_COMPLEX128_t cimport LLSparseMatrixView_INT64_t_COMPLEX128_t
 
 cimport numpy as cnp

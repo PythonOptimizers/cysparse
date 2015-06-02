@@ -4,6 +4,7 @@ from __future__ import print_function
 # CySparse cimport/import
 ########################################################################################################################
 from cysparse.types.cysparse_types cimport *
+from cysparse.types.cysparse_types import type_to_string
 
 from cysparse.sparse.ll_mat cimport LL_MAT_INCREASE_FACTOR
 
@@ -712,6 +713,7 @@ cdef class LLSparseMatrix_INT64_t_INT64_t(MutableSparseMatrix_INT64_t_INT64_t):
             This method is not as rich as its :program:`PySparse` equivalent but at the same time accept ``list``\s for the indices.
 
         """
+        # TODO: test, test, test!!!
         cdef:
             Py_ssize_t id1_list_length, id2_list_length, i_list # in case we have lists
             INT64_t id1_array_length, id2_array_length, i_array  # in case we have numpy arrays
@@ -920,6 +922,54 @@ cdef class LLSparseMatrix_INT64_t_INT64_t(MutableSparseMatrix_INT64_t_INT64_t):
                 elem += 1
 
         return (a_row, a_col, a_val)
+
+    ####################################################################################################################
+    # Addition
+    ####################################################################################################################
+    def shift(self, sigma, LLSparseMatrix_INT64_t_INT64_t B):
+
+        if self.nrow != B.nrow or self.ncol != B.ncol:
+            raise IndexError('Matrix shapes do not match')
+
+        if not is_scalar(sigma):
+            raise TypeError('sigma must be a scalar')
+
+        cdef:
+            INT64_t casted_sigma, v
+            INT64_t k, i, j
+
+        try:
+            casted_sigma = <INT64_t> sigma
+        except:
+            raise TypeError('Factor sigma is not compatible with the dtype (%d) of this matrix' % type_to_string(self.dtype))
+
+        if self.is_symmetric == B.is_symmetric:
+            # both matrices are symmetric or are not symmetric
+            for i from 0 <= i < B.nrow:
+                k = B.root[i]
+
+                while k != -1:
+                    update_ll_mat_item_add_INT64_t_INT64_t(self, i, B.col[k], casted_sigma * B.val[k])
+                    k = B.link[k]
+
+        elif B.is_symmetric:
+            # self is not symmetric
+            for i from 0 <= i < B.nrow:
+                k = B.root[i]
+
+                while k != -1:
+                    j = B.col[k]
+                    v = casted_sigma * B.val[k]
+                    update_ll_mat_item_add_INT64_t_INT64_t(self, i, j, v)
+                    if i != j:
+                        update_ll_mat_item_add_INT64_t_INT64_t(self, j, i, v)
+                    k = B.link[k]
+        else:
+            # B is not symmetric but self is symmetric
+            # doesn't make sense...
+            raise TypeError('Cannot shift symmetric matrix by non-symmetric matrix')
+
+
 
 
     ####################################################################################################################
