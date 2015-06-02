@@ -97,6 +97,8 @@ cdef extern from 'math.h':
     float sqrtf (float x)
     long double sqrtl (long double x)
 
+cdef extern from "stdlib.h":
+    void *memcpy(void *dst, void *src, long n)
 
 ########################################################################################################################
 # CySparse cimport/import to avoid circular dependencies
@@ -264,6 +266,58 @@ cdef class LLSparseMatrix_INT64_t_INT32_t(MutableSparseMatrix_INT64_t_INT32_t):
 
         return
 
+    def copy(self):
+        """
+        Return a (deep) copy of itself.
+
+        Warning:
+            Because we use memcpy and thus copy memory internally, we have to be careful
+        """
+        # Warning: Because we use memcpy and thus copy memory internally, we have to be careful to always update this method
+        # whenever the LLSparseMatrix class changes...
+
+        cdef LLSparseMatrix_INT64_t_INT32_t self_copy
+
+        # we copy manually the C-arrays
+        self_copy = LLSparseMatrix_INT64_t_INT32_t(control_object=unexposed_value, no_memory=True, nrow=self.nrow, ncol=self.ncol, size_hint=self.size_hint, store_zeros=self.store_zeros, is_symmetric=self.is_symmetric)
+
+        # copy C-arrays
+        cdef:
+            INT32_t * val
+            INT64_t * col
+            INT64_t * link
+            INT64_t * root
+
+        val = <INT32_t *> PyMem_Malloc(self.nalloc * sizeof(INT32_t))
+        if not val:
+            raise MemoryError()
+        memcpy(val, self.val, self.nalloc * sizeof(INT32_t))
+        self_copy.val = val
+
+        col = <INT64_t *> PyMem_Malloc(self.nalloc * sizeof(INT64_t))
+        if not col:
+            raise MemoryError()
+        memcpy(col, self.col, self.nalloc * sizeof(INT64_t))
+        self_copy.col = col
+
+        link = <INT64_t *> PyMem_Malloc(self.nalloc * sizeof(INT64_t))
+        if not link:
+            raise MemoryError()
+        memcpy(link, self.link, self.nalloc * sizeof(INT64_t))
+        self_copy.link = link
+
+        root = <INT64_t *> PyMem_Malloc(self.nrow * sizeof(INT64_t))
+        if not root:
+            raise MemoryError()
+        memcpy(root, self.root, self.nrow * sizeof(INT64_t))
+        self_copy.root = root
+
+        self_copy.nalloc = self.nalloc
+        self_copy.free = self.free
+        self_copy.nnz = self.nnz
+
+        return self_copy
+
     def generalize(self):
         """
         Convert matrix from symmetric to non-symmetric form (in-place).
@@ -284,9 +338,6 @@ cdef class LLSparseMatrix_INT64_t_INT32_t(MutableSparseMatrix_INT64_t_INT32_t):
                         self.put(j, i, self.val[k])
 
                     k = self.link[k]
-
-
-
 
     def memory_real(self):
         """

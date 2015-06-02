@@ -18,7 +18,7 @@ cdef class SparseMatrix_INT32_t_FLOAT128_t(SparseMatrix):
 
         self.nrow = kwargs.get('nrow', -1)
         self.ncol = kwargs.get('ncol', -1)
-        self.nnz = kwargs.get('nnz', 0)
+        #self.nnz = kwargs.get('nnz', 0)
 
 
     ####################################################################################################################

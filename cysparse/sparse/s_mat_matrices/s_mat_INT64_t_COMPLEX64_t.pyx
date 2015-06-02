@@ -18,7 +18,7 @@ cdef class SparseMatrix_INT64_t_COMPLEX64_t(SparseMatrix):
 
         self.nrow = kwargs.get('nrow', -1)
         self.ncol = kwargs.get('ncol', -1)
-        self.nnz = kwargs.get('nnz', 0)
+        #self.nnz = kwargs.get('nnz', 0)
 
 
     ####################################################################################################################
