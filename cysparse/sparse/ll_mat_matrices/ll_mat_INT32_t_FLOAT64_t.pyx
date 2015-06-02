@@ -712,6 +712,7 @@ cdef class LLSparseMatrix_INT32_t_FLOAT64_t(MutableSparseMatrix_INT32_t_FLOAT64_
             This method is not as rich as its :program:`PySparse` equivalent but at the same time accept ``list``\s for the indices.
 
         """
+        # TODO: test, test, test!!!
         cdef:
             Py_ssize_t id1_list_length, id2_list_length, i_list # in case we have lists
             INT32_t id1_array_length, id2_array_length, i_array  # in case we have numpy arrays
@@ -920,6 +921,13 @@ cdef class LLSparseMatrix_INT32_t_FLOAT64_t(MutableSparseMatrix_INT32_t_FLOAT64_
                 elem += 1
 
         return (a_row, a_col, a_val)
+
+    ####################################################################################################################
+    # Addition
+    ####################################################################################################################
+    def shift(self, sigma, B):
+        if not PyLLSparseMatrix_Check(B):
+            raise NotImplementedError('Shift can only be applied on another LLSparseMatrix')
 
 
     ####################################################################################################################

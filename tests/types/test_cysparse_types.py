@@ -372,5 +372,43 @@ class CySparseTypesNumberCastingBasicTypesTest(CySparseTypesBaseTestCase):
         with self.assertRaises(TypeError):
             min_integer_type(self.big_integer, UNSIGNED_INTEGER_ELEMENT_TYPES)
 
+
+class CySparseTypesNumberTestsTypesTest(CySparseTypesBaseTestCase):
+    """
+    Test numbers for type.
+    """
+    def setUp(self):
+
+        self.an_int = 344
+        self.a_real = 44.888
+        self.a_complex = 45+54j
+        self.a_list = [4, 5 , 6]
+        self.a_string = "string"
+
+    def test_is_python_number(self):
+        self.failUnless(is_python_number(self.an_int))
+        self.failUnless(is_python_number(self.a_real))
+        self.failUnless(is_python_number(self.a_complex))
+
+        self.failUnless(not is_python_number(self.a_list))
+        self.failUnless(not is_python_number(self.a_string))
+
+    def test_is_cysparse_number(self):
+        self.failUnless(is_cysparse_number(self.an_int))
+        self.failUnless(is_cysparse_number(self.a_real))
+        self.failUnless(is_cysparse_number(self.a_complex))
+
+        self.failUnless(not is_cysparse_number(self.a_list))
+        self.failUnless(not is_cysparse_number(self.a_string))
+
+    def test_is_scalar(self):
+        self.failUnless(is_scalar(self.an_int))
+        self.failUnless(is_scalar(self.a_real))
+        self.failUnless(is_scalar(self.a_complex))
+
+        self.failUnless(not is_scalar(self.a_list))
+        self.failUnless(not is_scalar(self.a_string))
+
+
 if __name__ == '__main__':
     unittest.main()

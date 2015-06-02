@@ -17,6 +17,7 @@ For each type XXX_t, there is a corresponding:
 Although we use NumPy compatible types, this will is not and should not be dependent on NumPy.
 
 """
+from cpython cimport PyObject
 
 #################################################################################################
 #                                 *** BASIC ABSOLUTE TYPES ***
@@ -124,5 +125,9 @@ cdef extern from 'float.h':
 ########################################################################################################################
 cpdef int result_type(CySparseType type1, CySparseType type2) except -1
 cpdef int result_real_sum_type(CySparseType type1)
+
+cpdef is_python_number(object obj)
+cpdef is_cysparse_number(obj)
+cpdef is_scalar(obj)
 
 cpdef CySparseType min_integer_type(n, type_list) except? UINT64_T

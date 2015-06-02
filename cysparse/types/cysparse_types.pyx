@@ -7,6 +7,16 @@ cimport cython
 from collections import OrderedDict
 import sys
 
+from cpython cimport PyObject
+
+cdef extern from "Python.h":
+    # *** Types ***
+    int PyInt_Check(PyObject *o)
+    int PyFloat_Check(PyObject *o)
+    int PyComplex_Check(PyObject * o)
+    int PyLong_Check(PyObject * o)
+    int PyBool_Check(PyObject * o)
+
 # export limits in Python for integer types only
 
 INT32_t_MIN  = cp_types.INT32_MIN
@@ -61,7 +71,7 @@ inf = INFINITY
 nan = NAN
 
 ########################################################################################################################
-# TESTS
+# TESTS ON TYPES
 ########################################################################################################################
 # EXPLICIT TYPE TESTS
 def is_subtype(cp_types.CySparseType type1, cp_types.CySparseType type2):
@@ -177,6 +187,35 @@ def is_element_type(cp_types.CySparseType type1):
 
     """
     return type1 in ELEMENT_TYPES
+
+########################################################################################################################
+# TESTS ON NUMBERS
+########################################################################################################################
+cpdef is_python_number(object obj):
+    return PyInt_Check(<PyObject *>obj) or PyFloat_Check(<PyObject *>obj) or PyComplex_Check(<PyObject *>obj) or PyLong_Check(<PyObject *>obj) or PyBool_Check(<PyObject *>obj)
+
+cpdef is_cysparse_number(obj):
+    cdef:
+        FLOAT128_t real_var
+        COMPLEX256_t complex_var
+
+    try:
+        real_var = <FLOAT128_t> obj
+        return True
+    except:
+        pass
+
+    try:
+        complex_var = <COMPLEX256_t> obj
+        return True
+    except:
+        pass
+
+    return False
+
+cpdef is_scalar(obj):
+    return is_python_number(obj) or is_cysparse_number(obj)
+
 
 ########################################################################################################################
 # TYPE CASTS

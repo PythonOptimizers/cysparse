@@ -20,12 +20,37 @@ Creation
 Population
 -----------
 
+
+
 Accessing elements
 -------------------
 
+Elements can be accessed individually or by batch, i.e. several elements can be accessed at the same time and stored in a container.
+
+Individual access
+^^^^^^^^^^^^^^^^^^
+
+You can use the common ``[]`` operator:
+
+..  code-block:: python
+
+    L = NewLLSparseMatrix(...)
+    
+    e = L[i, j]
+
+where ``i`` and ``j`` are integer indices. At all time, bounds are checked and an ``IndexError`` is raised if an index is out of bound. :program:`Cython` users can access the elements **whithout** bound checking if desired.
+
+Notice that if one of the argument you pass to the ``[]`` operator is **not** an integer, you'll get an ``LLSparseMatrixView`` (see :ref:`ll_sparse_matrix_view`).
+
+..  warning:: If one of the argument you pass to the ``[]`` operator is **not** an integer, you'll get an ``LLSparseMatrixView``
+
+Batch access
+^^^^^^^^^^^^^
+
+Basically, you can take a submatrix (and store its elements in a ``NumPy`` two dimensionnal array or another ``LLSparseMatrix`` or get a view to it, see :ref:`ll_sparse_matrix_view` ) or a list of elements
 
 
-
+..  _ll_sparse_matrix_view:
 
 The :class:`LLSparseMatrixView` class
 =======================================
