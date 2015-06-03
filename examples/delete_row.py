@@ -39,11 +39,13 @@ l1[4, 5] = 98374983.093843483
 l1.print_to(sys.stdout)
 
 ########################################################################################################################
-print '*' * 80
+print "=" * 80
 
-l2 = l1.copy()
+mask = np.zeros((10,), dtype=np.int8)
+print mask.size
+mask[4] = 1
+mask[9] = 0
 
-l2.print_to(sys.stdout)
+l1.delete_rows_with_mask(mask)
 
-print l2.dtype
-print l2.itype
+l1.print_to(sys.stdout)

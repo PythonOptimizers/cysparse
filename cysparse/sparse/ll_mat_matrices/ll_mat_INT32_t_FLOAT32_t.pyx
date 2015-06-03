@@ -339,6 +339,120 @@ cdef class LLSparseMatrix_INT32_t_FLOAT32_t(MutableSparseMatrix_INT32_t_FLOAT32_
 
                     k = self.link[k]
 
+    def delete_rows(self, B):
+        """
+        Delete rows.
+
+        Args:
+            B: List or :program:`NumPy` array with indices of the rows to be deleted.
+        """
+        # TODO: to be written...
+
+        raise NotImplementedError('Not yet implemented')
+
+        cdef:
+            Py_ssize_t B_list_length, i_list
+
+        if PyList_Check(<PyObject *>B):
+            B_list_length = PyList_Size(<PyObject *>B)
+
+            for i_list from 0 <= i_list < B_list_length:
+                pass
+
+
+
+        elif cnp.PyArray_Check(B):
+            pass
+        else:
+            raise NotImplementedError('Argument must be a list or a NumPy array with indices of rows to delete')
+
+    def delete_rows_with_mask(self, cnp.ndarray[dtype=cnp.npy_int8, ndim=1] maskArray):
+        """
+        Delete rows according to a mask ``maskArray``.
+
+        If ``maskArray[i] == False``, we delete row ``i``.
+
+        Args:
+            maskArray: :program:`NumPy` array with elements corresponding to the rows, i.e. the array must be at least as long as there are
+                rows in the matrix.
+
+        Warning:
+            We use ``int8`` as element type for the mask.
+        """
+        # Warning: we use int8 instead of bool. There are too many problems with the bool type...
+
+        if self.is_symmetric:
+            raise NotImplementedError('This method is not allowed for symmetric matrices')
+
+        if maskArray.size < self.nrow:
+            raise IndexError('Mask array must be at least as long as the number of rows in this matrix')
+
+        # Delete the rows to be cancelled by rearranging the row
+        # array. After having done so, newdim is the new matrix dim.
+        cdef:
+            INT32_t row, act
+            INT32_t newm = 0
+            INT32_t newnnz = self.nnz
+
+        cdef:
+            signed char * maskArray_data = <signed char *> cnp.PyArray_DATA(maskArray)
+            INT32_t maskArray_stride = <INT32_t> maskArray.strides[0]
+
+        for row from 0<= row < self.nrow:
+
+            if maskArray_data[row * maskArray_stride]: # This row has to be kept
+                self.root[newm] = self.root[row]
+                newm += 1
+            else:  #  row let out; update free list
+                act = self.root[row]
+                if act != -1:
+                    newnnz -= 1
+                    while self.link[act] != -1: #  Walk to the end of the list
+                        act = self.link[act]
+                        newnnz -= 1
+
+                    self.link[act] = self.free  # Attach end of row to free list
+                    self.free = self.root[row] # Start free list where row began
+
+
+        # Set the new values
+        self.nrow = newm
+        self.nnz = newnnz
+
+    def clear_submatrix(self, INT32_t start_i, INT32_t stop_i, INT32_t start_j, INT32_t stop_j):
+        """
+        Remove all non zero entries in ``A[start_i:stop_i, start_j: stop_j]``.
+
+        """
+        cdef:
+            INT32_t i, j, k, next, last
+
+        assert start_i < stop_i
+        assert start_j < stop_j
+
+        for i from start_i <= i < stop_i:
+            last = -1
+            k = self.root[i]
+            while k != -1:
+                j = self.col[k]
+                next = self.link[k]
+                if start_j <= j < stop_j:
+                    # remove element
+                    if last == -1:
+                        self.root[i] = next
+                    else:
+                        self.link[last] = next
+                    # add element to free list
+                    self.link[k] = self.free
+                    self.free = k
+                    self.nnz -= 1
+                else:
+                    last = k
+
+                k = next
+
+
+
     def memory_real(self):
         """
         Return the real amount of memory used internally for the matrix.

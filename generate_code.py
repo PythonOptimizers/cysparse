@@ -49,7 +49,8 @@ def make_parser():
 
     parser.add_argument("-m", "--matrices", help="Create sparse matrices.", action='store_true', required=False)
     parser.add_argument("-s", "--setup", help="Create setup file.", action='store_true', required=False)
-    parser.add_argument("-t", "--types", help="Create generic types.", action='store_true', required=False)
+    parser.add_argument("-g", "--generic_types", help="Create generic types.", action='store_true', required=False)
+    parser.add_argument("-t", "--tests", help="Create generic types.", action='store_true', required=False)
     parser.add_argument("-c", "--clean", help="Clean action files.", action='store_true', required=False)
 
     return parser
@@ -449,7 +450,7 @@ if __name__ == "__main__":
         else:
             generate_template_files(logger, [SETUP_FILE], GENERAL_ENVIRONMENT, GENERAL_CONTEXT, '.py')
 
-    if arg_options.types or arg_options.all:
+    if arg_options.generic_types or arg_options.all:
         action = True
         logger.info("Act for generic types")
 
