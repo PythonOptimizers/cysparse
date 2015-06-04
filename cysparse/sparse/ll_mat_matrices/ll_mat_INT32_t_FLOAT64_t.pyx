@@ -15,12 +15,10 @@ from cysparse.sparse.s_mat_matrices.s_mat_INT32_t_FLOAT64_t cimport MutableSpars
 from cysparse.sparse.ll_mat_matrices.ll_mat_INT32_t_FLOAT64_t cimport LLSparseMatrix_INT32_t_FLOAT64_t
 from cysparse.sparse.ll_mat_views.ll_mat_view_INT32_t_FLOAT64_t cimport LLSparseMatrixView_INT32_t_FLOAT64_t
 
+from cysparse.sparse.csr_mat_matrices.csr_mat_INT32_t_FLOAT64_t cimport MakeCSRSparseMatrix_INT32_t_FLOAT64_t
 
-
-#from cysparse.sparse.csr_mat cimport MakeCSRSparseMatrix, MakeCSRComplexSparseMatrix
 #from cysparse.sparse.csc_mat cimport MakeCSCSparseMatrix
 #from cysparse.utils.equality cimport values_are_equal
-#from cysparse.sparse.IO.mm cimport MakeLLSparseMatrixFromMMFile2, MakeMMFileFromSparseMatrix
 
 from cysparse.sparse.sparse_utils.generate_indices_INT32_t cimport create_c_array_indices_from_python_object_INT32_t
 
@@ -451,8 +449,6 @@ cdef class LLSparseMatrix_INT32_t_FLOAT64_t(MutableSparseMatrix_INT32_t_FLOAT64_
 
                 k = next
 
-
-
     def memory_real(self):
         """
         Return the real amount of memory used internally for the matrix.
@@ -500,6 +496,53 @@ cdef class LLSparseMatrix_INT32_t_FLOAT64_t(MutableSparseMatrix_INT32_t_FLOAT64_
                 k = self.link[k]
 
         return True  # not bad column index detected
+
+    ####################################################################################################################
+    # Matrix conversions
+    ####################################################################################################################
+    def to_csr(self):
+        """
+        Create a corresponding CSRSparseMatrix.
+
+        Warning:
+            Memory **must** be freed by the caller!
+            Column indices are **not** necessarily sorted!
+
+        """
+        cdef INT32_t * ind = <INT32_t *> PyMem_Malloc((self.nrow + 1) * sizeof(INT32_t))
+        if not ind:
+            raise MemoryError()
+
+        cdef INT32_t * col =  <INT32_t*> PyMem_Malloc(self.nnz * sizeof(INT32_t))
+        if not col:
+            raise MemoryError()
+
+        cdef FLOAT64_t * val = <FLOAT64_t *> PyMem_Malloc(self.nnz * sizeof(FLOAT64_t))
+        if not val:
+            raise MemoryError()
+
+        cdef INT32_t ind_col_index = 0  # current col index in col and val
+        ind[ind_col_index] = 0
+
+        cdef INT32_t i
+        cdef INT32_t k
+
+        # indices are NOT sorted for each row
+        for i from 0 <= i < self.nrow:
+            k = self.root[i]
+
+            while k != -1:
+                col[ind_col_index] = self.col[k]
+                val[ind_col_index] = self.val[k]
+
+                ind_col_index += 1
+                k = self.link[k]
+
+            ind[i+1] = ind_col_index
+
+        csr_mat = MakeCSRSparseMatrix_INT32_t_FLOAT64_t(nrow=self.nrow, ncol=self.ncol, nnz=self.nnz, ind=ind, col=col, val=val)
+
+        return csr_mat
 
     ####################################################################################################################
     # SUB-MATRICES

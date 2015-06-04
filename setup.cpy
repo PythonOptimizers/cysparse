@@ -171,6 +171,20 @@ new_sparse_ext = [
 {% endfor %}
 
   ######################
+  # ### CSRSparseMatrix ###
+  ######################
+{% for index_type in index_list %}
+  {% for element_type in type_list %}
+  Extension(name="cysparse.sparse.csr_mat_matrices.csr_mat_@index_type@_@element_type@",
+            sources=["cysparse/sparse/csr_mat_matrices/csr_mat_@index_type@_@element_type@.pxd",
+                     "cysparse/sparse/csr_mat_matrices/csr_mat_@index_type@_@element_type@.pyx",
+                     ],
+            **sparse_ext_params),
+  {% endfor %}
+{% endfor %}
+
+
+  ######################
   # ### LLSparseMatrixView ###
   ######################
 
@@ -229,6 +243,7 @@ setup(name=  'SparseLib',
             'cysparse.sparse.sparse_utils',
             'cysparse.sparse.s_mat_matrices',
             'cysparse.sparse.ll_mat_matrices',
+            'cysparse.sparse.csr_mat_matrices',
             'cysparse.sparse.ll_mat_views',
             'cysparse.utils',
             #'cysparse.solvers',

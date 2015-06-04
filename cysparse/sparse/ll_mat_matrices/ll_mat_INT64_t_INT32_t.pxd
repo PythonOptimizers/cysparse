@@ -13,7 +13,7 @@ cdef class LLSparseMatrix_INT64_t_INT32_t(MutableSparseMatrix_INT64_t_INT32_t):
     Linked-List Format matrix.
 
     Note:
-        Despite its name, this matrix doesn't use any linked list.
+        The linked list is made of two C-arrays (``link`` and ``root``).
     """
     ####################################################################################################################
     # Init/Free/Memory

@@ -383,6 +383,9 @@ LL_SPARSE_MATRIX_IO_INCLUDE_FILES = glob.glob(os.path.join(LL_SPARSE_MATRIX_IO_T
 
 
 ### CSRSparseMatrix
+CSR_SPARSE_MATRIX_TEMPLATE_DIR = os.path.join(SPARSE_DIR, 'csr_mat_matrices')
+CSR_SPARSE_MATRIX_DECLARATION_FILES = glob.glob(os.path.join(CSR_SPARSE_MATRIX_TEMPLATE_DIR, '*.cpd'))
+CSR_SPARSE_MATRIX_DEFINITION_FILES = glob.glob(os.path.join(CSR_SPARSE_MATRIX_TEMPLATE_DIR, '*.cpx'))
 
 ### CSCSparseMatrix
 
@@ -485,6 +488,10 @@ if __name__ == "__main__":
             clean_cython_files(logger, LL_SPARSE_MATRIX_HELPERS_TEMPLATE_DIR)
             # LLSparseMatrix IO
             clean_cython_files(logger, LL_SPARSE_MATRIX_IO_TEMPLATE_DIR)
+
+            # CSRSparseMatrix
+            clean_cython_files(logger, CSR_SPARSE_MATRIX_TEMPLATE_DIR)
+
             # LLSparseMatrixView
             clean_cython_files(logger, LL_SPARSE_MATRIX_VIEW_TEMPLATE_DIR)
 
@@ -533,6 +540,13 @@ if __name__ == "__main__":
 
             # LLSparseMatrix IO
             generate_following_type_and_index(logger, LL_SPARSE_MATRIX_IO_INCLUDE_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, ELEMENT_MM_TYPES, INDEX_TYPES, '.pxi')
+
+            ###############################
+            # CSRSparseMatrixView
+            ###############################
+            # csr_mat_@index@_@type@.pxd and csr_mat_@index@_@type@.pyx
+            generate_following_type_and_index(logger, CSR_SPARSE_MATRIX_DECLARATION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, ELEMENT_TYPES, INDEX_TYPES, '.pxd')
+            generate_following_type_and_index(logger, CSR_SPARSE_MATRIX_DEFINITION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, ELEMENT_TYPES, INDEX_TYPES, '.pyx')
 
             ###############################
             # LLSparseMatrixView
