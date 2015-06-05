@@ -40,9 +40,15 @@ cysparse_config.read('cysparse.cfg')
 
 numpy_include = np.get_include()
 
+# SUITESPARSE
+use_suitesparse = cysparse_config.get('SUITESPARSE', 'use_suitesparse')
+
+print use_suitesparse
+
 # find user defined directories
-suitesparse_include_dirs = get_path_option(cysparse_config, 'SUITESPARSE', 'include_dirs')
-suitesparse_library_dirs = get_path_option(cysparse_config, 'SUITESPARSE', 'library_dirs')
+if use_suitesparse:
+    suitesparse_include_dirs = get_path_option(cysparse_config, 'SUITESPARSE', 'include_dirs')
+    suitesparse_library_dirs = get_path_option(cysparse_config, 'SUITESPARSE', 'library_dirs')
 
 ########################################################################################################################
 # EXTENSIONS
@@ -782,31 +788,24 @@ utils_ext = [
 
 ########################################################################################################################
 #                                                *** umfpack ***
-umfpack_ext_params = ext_params.copy()
-umfpack_ext_params['include_dirs'].extend(suitesparse_include_dirs)
-#umfpack_ext_params['include_dirs'] = suitesparse_include_dirs
-umfpack_ext_params['library_dirs'] = suitesparse_library_dirs
-umfpack_ext_params['libraries'] = ['umfpack', 'amd']
+if use_suitesparse:
+    umfpack_ext_params = ext_params.copy()
+    umfpack_ext_params['include_dirs'].extend(suitesparse_include_dirs)
+    #umfpack_ext_params['include_dirs'] = suitesparse_include_dirs
+    umfpack_ext_params['library_dirs'] = suitesparse_library_dirs
+    umfpack_ext_params['libraries'] = ['umfpack', 'amd']
 
-umfpack_ext = [
-    Extension(name="cysparse.solvers.suitesparse.umfpack",
-              sources=['cysparse/solvers/suitesparse/umfpack.pxd',
-                       'cysparse/solvers/suitesparse/umfpack.pyx'], **umfpack_ext_params)
-    ]
+    umfpack_ext = [
+        Extension(name="cysparse.solvers.suitesparse.umfpack",
+                  sources=['cysparse/solvers/suitesparse/umfpack.pxd',
+                           'cysparse/solvers/suitesparse/umfpack.pyx'], **umfpack_ext_params)
+        ]
 
 
 ########################################################################################################################
 # SETUP
 ########################################################################################################################
-ext_modules = base_ext +  new_sparse_ext # + utils_ext + umfpack_ext
-
-
-setup(name=  'SparseLib',
-  #ext_package='cysparse', <- doesn't work with pxd files...
-  cmdclass = {'build_ext': build_ext},
-  ext_modules = ext_modules,
-  package_dir = {"cysparse": "cysparse"},
-  packages=['cysparse',
+packages_list = ['cysparse',
             'cysparse.types',
             'cysparse.sparse',
             'cysparse.sparse.sparse_utils',
@@ -820,5 +819,18 @@ setup(name=  'SparseLib',
             #'cysparse.solvers.suitesparse',
             #'cysparse.sparse.IO'
             ]
+if use_suitesparse:
+    ext_modules = base_ext +  new_sparse_ext # + utils_ext + umfpack_ext
+    # add suitsparse package
+
+else:
+    ext_modules = base_ext +  new_sparse_ext # + utils_ext
+
+setup(name=  'SparseLib',
+  #ext_package='cysparse', <- doesn't work with pxd files...
+  cmdclass = {'build_ext': build_ext},
+  ext_modules = ext_modules,
+  package_dir = {"cysparse": "cysparse"},
+  packages=packages_list
 
 )
