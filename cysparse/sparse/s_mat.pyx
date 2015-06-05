@@ -111,29 +111,3 @@ cdef class SparseMatrix:
     def copy(self):
         raise NotImplementedError("Operation not implemented (yet). Please report.")
 
-########################################################################################################################
-# BASE MUTABLE MATRIX CLASS
-########################################################################################################################
-cdef class MutableSparseMatrix(SparseMatrix):
-    def __cinit__(self, **kwargs):
-        """
-
-        Warning:
-            Only use named arguments!
-
-        """
-        self.size_hint = kwargs.get('size_hint', MUTABLE_SPARSE_MAT_DEFAULT_SIZE_HINT)
-        self.nalloc = 0
-
-
-########################################################################################################################
-# BASE IMMUTABLE MATRIX CLASS
-########################################################################################################################
-cdef class ImmutableSparseMatrix(SparseMatrix):
-    def __cinit__(self, **kwargs):
-        """
-
-        Warning:
-            Only use named arguments!
-        """
-        pass

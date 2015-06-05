@@ -42,5 +42,18 @@ l1.print_to(sys.stdout)
 print "=" * 80
 
 csr = l1.to_csr()
+print l1.nnz
+print csr.nnz
+csr.print_to(sys.stdout)
 
 print type(csr)
+
+########################################################################################################################
+print "=" * 80
+
+csc = l1.to_csc()
+print l1.nnz
+print csc.nnz
+csc.print_to(sys.stdout)
+
+print type(csc)

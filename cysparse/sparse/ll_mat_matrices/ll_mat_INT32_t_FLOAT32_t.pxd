@@ -54,7 +54,7 @@ cdef class LLSparseMatrix_INT32_t_FLOAT32_t(MutableSparseMatrix_INT32_t_FLOAT32_
     # EXPLICIT TYPE TESTS
     cdef FLOAT32_t at(self, INT32_t i, INT32_t j)
 
-    cdef FLOAT32_t safe_at(self, INT32_t i, INT32_t j) except? 1
+    cdef FLOAT32_t safe_at(self, INT32_t i, INT32_t j) except? 2
 
     cpdef object keys(self)
     cpdef object values(self)

@@ -54,7 +54,7 @@ cdef class LLSparseMatrix_INT64_t_INT64_t(MutableSparseMatrix_INT64_t_INT64_t):
     # EXPLICIT TYPE TESTS
     cdef INT64_t at(self, INT64_t i, INT64_t j)
 
-    cdef INT64_t safe_at(self, INT64_t i, INT64_t j) except? 1
+    cdef INT64_t safe_at(self, INT64_t i, INT64_t j) except? 2
 
     cpdef object keys(self)
     cpdef object values(self)

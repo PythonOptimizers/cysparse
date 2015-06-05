@@ -28,3 +28,5 @@ cdef class SparseMatrix:
 
         object dtype
         object itype
+
+

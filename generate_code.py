@@ -157,7 +157,7 @@ INDEX_MM_TYPES = ['INT32_t', 'INT64_t']
 ELEMENT_MM_TYPES = ['INT64_t', 'FLOAT64_t', 'COMPLEX128_t']
 
 # when coding
-#ELEMENT_TYPES = ['FLOAT64_t']
+ELEMENT_TYPES = ['FLOAT64_t']
 
 
 GENERAL_CONTEXT = {
@@ -388,6 +388,9 @@ CSR_SPARSE_MATRIX_DECLARATION_FILES = glob.glob(os.path.join(CSR_SPARSE_MATRIX_T
 CSR_SPARSE_MATRIX_DEFINITION_FILES = glob.glob(os.path.join(CSR_SPARSE_MATRIX_TEMPLATE_DIR, '*.cpx'))
 
 ### CSCSparseMatrix
+CSC_SPARSE_MATRIX_TEMPLATE_DIR = os.path.join(SPARSE_DIR, 'csc_mat_matrices')
+CSC_SPARSE_MATRIX_DECLARATION_FILES = glob.glob(os.path.join(CSC_SPARSE_MATRIX_TEMPLATE_DIR, '*.cpd'))
+CSC_SPARSE_MATRIX_DEFINITION_FILES = glob.glob(os.path.join(CSC_SPARSE_MATRIX_TEMPLATE_DIR, '*.cpx'))
 
 ### CSBSparseMatrix
 
@@ -492,6 +495,9 @@ if __name__ == "__main__":
             # CSRSparseMatrix
             clean_cython_files(logger, CSR_SPARSE_MATRIX_TEMPLATE_DIR)
 
+            # CSCSparseMatrix
+            clean_cython_files(logger, CSC_SPARSE_MATRIX_TEMPLATE_DIR)
+
             # LLSparseMatrixView
             clean_cython_files(logger, LL_SPARSE_MATRIX_VIEW_TEMPLATE_DIR)
 
@@ -547,6 +553,14 @@ if __name__ == "__main__":
             # csr_mat_@index@_@type@.pxd and csr_mat_@index@_@type@.pyx
             generate_following_type_and_index(logger, CSR_SPARSE_MATRIX_DECLARATION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, ELEMENT_TYPES, INDEX_TYPES, '.pxd')
             generate_following_type_and_index(logger, CSR_SPARSE_MATRIX_DEFINITION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, ELEMENT_TYPES, INDEX_TYPES, '.pyx')
+
+            ###############################
+            # CSCSparseMatrixView
+            ###############################
+            # csc_mat_@index@_@type@.pxd and csc_mat_@index@_@type@.pyx
+            generate_following_type_and_index(logger, CSC_SPARSE_MATRIX_DECLARATION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, ELEMENT_TYPES, INDEX_TYPES, '.pxd')
+            generate_following_type_and_index(logger, CSC_SPARSE_MATRIX_DEFINITION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, ELEMENT_TYPES, INDEX_TYPES, '.pyx')
+
 
             ###############################
             # LLSparseMatrixView

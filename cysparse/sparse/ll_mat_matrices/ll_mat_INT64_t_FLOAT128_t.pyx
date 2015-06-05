@@ -783,7 +783,7 @@ cdef class LLSparseMatrix_INT64_t_FLOAT128_t(MutableSparseMatrix_INT64_t_FLOAT12
 
     # EXPLICIT TYPE TESTS
 
-    cdef FLOAT128_t safe_at(self, INT64_t i, INT64_t j) except? 1:
+    cdef FLOAT128_t safe_at(self, INT64_t i, INT64_t j) except? 2:
 
         """
         Return element ``(i, j)`` but with check for out of bounds indices.

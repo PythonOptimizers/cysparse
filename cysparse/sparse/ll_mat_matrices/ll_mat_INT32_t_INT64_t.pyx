@@ -783,7 +783,7 @@ cdef class LLSparseMatrix_INT32_t_INT64_t(MutableSparseMatrix_INT32_t_INT64_t):
 
     # EXPLICIT TYPE TESTS
 
-    cdef INT64_t safe_at(self, INT32_t i, INT32_t j) except? 1:
+    cdef INT64_t safe_at(self, INT32_t i, INT32_t j) except? 2:
 
         """
         Return element ``(i, j)`` but with check for out of bounds indices.

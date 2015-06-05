@@ -783,6 +783,7 @@ cdef class LLSparseMatrix_INT64_t_COMPLEX256_t(MutableSparseMatrix_INT64_t_COMPL
 
     # EXPLICIT TYPE TESTS
 
+    # this is needed as for the complex type, Cython's compiler crashes...
     cdef COMPLEX256_t safe_at(self, INT64_t i, INT64_t j) except *:
 
         """
@@ -795,8 +796,6 @@ cdef class LLSparseMatrix_INT64_t_COMPLEX256_t(MutableSparseMatrix_INT64_t_COMPL
         """
         if not 0 <= i < self.nrow or not 0 <= j < self.ncol:
             raise IndexError("Index out of bounds")
-
-            return 1
 
         return self.at(i, j)
 

@@ -1,6 +1,8 @@
 from cysparse.types.cysparse_types cimport *
 
 from cysparse.sparse.s_mat_matrices.s_mat_@index@_@type@ cimport ImmutableSparseMatrix_@index@_@type@
+from cysparse.sparse.ll_mat_matrices.ll_mat_@index@_@type@ cimport LLSparseMatrix_@index@_@type@
+from cysparse.sparse.csc_mat_matrices.csc_mat_@index@_@type@ cimport CSCSparseMatrix_@index@_@type@
 
 cdef class CSRSparseMatrix_@index@_@type@(ImmutableSparseMatrix_@index@_@type@):
     """
@@ -22,4 +24,18 @@ cdef class CSRSparseMatrix_@index@_@type@(ImmutableSparseMatrix_@index@_@type@):
         bint __col_indices_sorted            # are the column indices sorted in ascending order?
         @index@ __first_row_not_ordered      # first row that is not ordered
 
+
+    cdef _order_column_indices(self)
+    cdef _set_column_indices_ordered_is_true(self)
+    cdef at(self, @index@ i, @index@ j)
+    # EXPLICIT TYPE TESTS
+{% if type in complex_list %}
+    # this is needed as for the complex type, Cython's compiler crashes...
+    cdef @type@ safe_at(self, @index@ i, @index@ j) except *
+{% else %}
+    cdef @type@ safe_at(self, @index@ i, @index@ j) except? 2
+{% endif %}
+
 cdef MakeCSRSparseMatrix_@index@_@type@(@index@ nrow, @index@ ncol, @index@ nnz, @index@ * ind, @index@ * col, @type@ * val)
+
+cdef LLSparseMatrix_@index@_@type@ multiply_csr_mat_by_csc_mat_@index@_@type@(CSRSparseMatrix_@index@_@type@ A, CSCSparseMatrix_@index@_@type@ B)
