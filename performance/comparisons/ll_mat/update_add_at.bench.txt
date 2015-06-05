@@ -1,0 +1,35 @@
+# Benchmark Report
+
+## Simple update_add_at with 100 elements and size = 1,000 and 100 elements to add
+
+    name | rank | runs |      mean |     stdev | baseline
+---------|------|------|-----------|-----------|---------
+cysparse |    1 |   10 | 5.198e-06 | 4.501e-06 |        1
+pysparse |    2 |   10 | 5.484e-06 | 4.369e-06 |    1.055
+
+## Simple update_add_at with 1,000 elements and size = 10,000 and 1,000 elements to add
+
+    name | rank | runs |      mean |     stdev | baseline
+---------|------|------|-----------|-----------|---------
+cysparse |    1 |   10 | 9.632e-06 | 1.364e-06 |        1
+pysparse |    2 |   10 | 1.276e-05 | 1.753e-06 |    1.324
+
+## Simple update_add_at with 10,000 elements and size = 100,000 and 10,000 elements to add
+
+    name | rank | runs |      mean |     stdev | baseline
+---------|------|------|-----------|-----------|---------
+cysparse |    1 |   10 | 5.937e-05 | 8.411e-07 |        1
+pysparse |    2 |   10 | 9.146e-05 | 1.738e-05 |    1.541
+
+## Simple update_add_at with 80,000 elements and size = 100,000 and 50,000 elements to add
+
+    name | rank | runs |      mean |     stdev | baseline
+---------|------|------|-----------|-----------|---------
+cysparse |    1 |   10 | 0.0001785 | 1.046e-05 |        1
+pysparse |    2 |   10 | 0.0003847 | 2.751e-05 |    2.155
+
+Total runs: 80 run in arbitrary order
+Python version: 2.7.5+
+System: x86_64 Linux 3.11.0-12-generic
+Version: benchmark v0.1.5
+Date: 2015-06-05 16:41:05

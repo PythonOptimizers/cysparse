@@ -24,5 +24,32 @@ cdef update_add_at_with_numpy_arrays@index@_@type@(LLSparseMatrix_@index@_@type@
         for i in range(len(val)):
             A[id1[i],id2[i]] += val[i]
 
+    Warning:
+        Index arrays **must** be C-contiguous.
+
+        There is not of out of bounds test.
     """
-    pass
+    # test dimensions
+    cdef Py_ssize_t array_size = id1.size
+    cdef @index@ i
+
+    if array_size != id2.size or array_size != val.size:
+        raise IndexError("Arrays dimensions must agree")
+
+    # strided val?
+    cdef size_t sd = sizeof(@type@)
+    cdef @index@ incx = <@index@> val.strides[0] / sd
+
+    # direct access to arrays
+    cdef @type@ * val_data = <@type@ *> cnp.PyArray_DATA(val)
+    cdef @index@ * id1_data = <@index@ *> cnp.PyArray_DATA(id1)
+    cdef @index@ * id2_data = <@index@ *> cnp.PyArray_DATA(id2)
+
+    if cnp.PyArray_ISCONTIGUOUS(val):
+        for i from 0<= i < array_size:
+            update_ll_mat_item_add_@index@_@type@(A, id1_data[i], id2_data[i], val_data[i])
+    else:
+        # val is not C-contiguous
+        for i from 0<= i < array_size:
+            update_ll_mat_item_add_@index@_@type@(A, id1_data[i], id2_data[i], val_data[i * incx])
+

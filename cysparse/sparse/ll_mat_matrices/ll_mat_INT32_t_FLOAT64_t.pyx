@@ -1257,6 +1257,20 @@ cdef class LLSparseMatrix_INT32_t_FLOAT64_t(MutableSparseMatrix_INT32_t_FLOAT64_
             raise TypeError('Cannot shift symmetric matrix by non-symmetric matrix')
 
 
+    def update_add_at(self, id1, id2, val):
+        """
+        Update of matrix in place by a vector.
+
+        This operation is equivalent to
+
+        ..  code-block:: python
+
+            for i in range(len(val)):
+                A[id1[i],id2[i]] += val[i]
+
+        See :meth:`update_add_at_with_numpy_arraysINT32_t_FLOAT64_t`.
+        """
+        return update_add_at_with_numpy_arraysINT32_t_FLOAT64_t(self, id1, id2, val)
 
 
     ####################################################################################################################
