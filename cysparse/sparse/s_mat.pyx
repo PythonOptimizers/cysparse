@@ -100,6 +100,13 @@ cdef class SparseMatrix:
     ####################################################################################################################
     # Basic common methods
     ####################################################################################################################
+    def diag(self):
+        """
+        Return diagonal in a :program:`NumPy` array.
+
+        """
+        raise NotImplementedError("Operation not implemented (yet). Please report.")
+
     # Multiplication
     def matvec(self, B):
         raise NotImplementedError("Operation not implemented (yet). Please report.")

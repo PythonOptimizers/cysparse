@@ -17,6 +17,8 @@ from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
 cdef int CSC_MAT_PPRINT_ROW_THRESH = 500       # row threshold for choosing print format
 cdef int CSC_MAT_PPRINT_COL_THRESH = 20        # column threshold for choosing print format
 
+cimport numpy as cnp
+import numpy as np
 
 cdef class CSCSparseMatrix_INT64_t_FLOAT128_t(ImmutableSparseMatrix_INT64_t_FLOAT128_t):
     """
@@ -104,6 +106,36 @@ cdef class CSCSparseMatrix_INT64_t_FLOAT128_t(ImmutableSparseMatrix_INT64_t_FLOA
         cdef INT64_t j = key[1]
 
         return self.safe_at(i, j)
+
+    ####################################################################################################################
+    # Common operations
+    ####################################################################################################################
+    def diag(self):
+        """
+        Return diagonal in a :program:`NumPy` array.
+        """
+        # TODO: write version when indices are sorted
+
+        cdef INT64_t diag_size = min(self.nrow, self.ncol)
+        cdef cnp.ndarray[cnp.npy_float128, ndim=1, mode='c'] diagonal = np.zeros(diag_size, dtype=np.float128)
+
+        # direct access to NumPy array
+        cdef FLOAT128_t * diagonal_data = <FLOAT128_t *> cnp.PyArray_DATA(diagonal)
+
+        cdef INT64_t j, k
+
+        for j from 0 <= j < self.ncol:
+
+            k = self.ind[j]
+
+            while k < self.ind[j+1]:
+                if self.row[k] == j:
+                    # we have found the diagonal element
+                    diagonal_data[j] = self.val[k]
+
+                k += 1
+                
+        return diagonal
 
     ####################################################################################################################
     # String representations

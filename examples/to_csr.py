@@ -57,3 +57,5 @@ print csc.nnz
 csc.print_to(sys.stdout)
 
 print type(csc)
+
+print csc.diag()

@@ -43,8 +43,6 @@ numpy_include = np.get_include()
 # SUITESPARSE
 use_suitesparse = cysparse_config.get('SUITESPARSE', 'use_suitesparse')
 
-print use_suitesparse
-
 # find user defined directories
 if use_suitesparse:
     suitesparse_include_dirs = get_path_option(cysparse_config, 'SUITESPARSE', 'include_dirs')
