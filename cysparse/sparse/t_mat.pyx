@@ -1,5 +1,7 @@
 from cysparse.sparse.s_mat cimport SparseMatrix
 from cysparse.types.cysparse_numpy_types import are_mixed_types_compatible, cysparse_to_numpy_type
+from cysparse.sparse.ll_mat cimport PyLLSparseMatrix_Check
+
 cimport numpy as cnp
 
 cnp.import_array()
@@ -108,12 +110,13 @@ cdef class TransposedSparseMatrix:
             assert are_mixed_types_compatible(self.dtype, B.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(self.dtype)
 
             if B.ndim == 2:
-                #return multiply_ll_mat_with_numpy_ndarray(self, B)
-                raise NotImplementedError("Multiplication with this kind of object not implemented yet...")
+                return self.A.matdot(B)
             elif B.ndim == 1:
                 return self.A.matvec_transp(B)
             else:
                 raise IndexError("Matrix dimensions must agree")
+        elif PyLLSparseMatrix_Check(B):
+            return self.A.matdot(B)
         else:
             raise NotImplementedError("Multiplication with this kind of object not implemented yet...")
 

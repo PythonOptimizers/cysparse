@@ -71,6 +71,71 @@ cdef LLSparseMatrix_INT32_t_FLOAT64_t multiply_two_ll_mat_INT32_t_FLOAT64_t(LLSp
                 kB = B.link[kB]
     return C
 
+###################################################
+# Transposed LLSparseMatrix by LLSparseMatrix
+###################################################
+cdef LLSparseMatrix_INT32_t_FLOAT64_t multiply_transposed_ll_mat_by_ll_mat_INT32_t_FLOAT64_t(LLSparseMatrix_INT32_t_FLOAT64_t A, LLSparseMatrix_INT32_t_FLOAT64_t B):
+    """
+    Multiply two :class:`LLSparseMatrix_INT32_t_FLOAT64_t` ``A`` and ``B``: :math:`A^t * B`.
+
+    Args:
+        A: An :class:``LLSparseMatrix_INT32_t_FLOAT64_t`` ``A``.
+        B: An :class:``LLSparseMatrix_INT32_t_FLOAT64_t`` ``B``.
+
+    Returns:
+        A **new** :class:``LLSparseMatrix_INT32_t_FLOAT64_t`` ``C = A^t * B``.
+
+    Raises:
+        ``IndexError`` if matrix dimension don't agree.
+        ``NotImplementedError``: When matrix ``A`` or ``B`` is symmetric.
+        ``RuntimeError`` if some error occurred during the computation.
+    """
+    # test dimensions
+    cdef INT32_t A_nrow = A.nrow
+    cdef INT32_t A_ncol = A.ncol
+
+    cdef INT32_t B_nrow = B.nrow
+    cdef INT32_t B_ncol = B.ncol
+
+    if A_nrow != B_nrow:
+        raise IndexError("Matrix dimensions must agree ([%d, %d]^t * [%d, %d])" % (A_nrow, A_ncol, B_nrow, B_ncol))
+
+    cdef INT32_t C_nrow = A_ncol
+    cdef INT32_t C_ncol = B_ncol
+
+    cdef bint store_zeros = A.store_zeros and B.store_zeros
+    # TODO: is this a good idea?
+    cdef INT32_t size_hint = min(A.nnz, B.nnz)
+
+    C = LLSparseMatrix_INT32_t_FLOAT64_t(control_object=unexposed_value, nrow=C_nrow, ncol=C_ncol, size_hint=size_hint, store_zeros=store_zeros)
+
+    # CASES
+    if not A.is_symmetric and not B.is_symmetric:
+        # we only deal with non symmetric matrices
+        pass
+    else:
+        raise NotImplementedError("Multiplication with symmetric matrices is not implemented yet")
+
+    cdef:
+        FLOAT64_t valA
+        INT32_t iA, kA, iC, kB, ret
+
+    for iA from 0<= iA < A_nrow:
+        kA = A.root[iA]
+
+        while kA != -1:
+            valA = A.val[kA]
+            iC = A.col[kA]
+
+            kB = B.root[iA]
+            while kB != -1:
+                update_ll_mat_item_add_INT32_t_FLOAT64_t(C, iC, B.col[kB], valA*B.val[kB])
+
+                kB = B.link[kB]
+
+            kA = A.link[kA]
+
+    return C
 
 ###################################################
 # LLSparseMatrix by Numpy vector

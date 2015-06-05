@@ -1,0 +1,39 @@
+# Benchmark Report
+
+## Simple matdot (A^t * B) with 100 elements and size = 1,000
+
+     name | rank | runs |      mean |     stdev | baseline
+----------|------|------|-----------|-----------|---------
+ pysparse |    1 |   10 | 6.914e-06 |  1.32e-06 |        1
+ cysparse |    2 |   10 | 9.632e-06 | 1.287e-06 |    1.393
+cysparse2 |    3 |   10 |  1.04e-05 | 5.162e-06 |    1.503
+
+## Simple matdot (A^t * B) with 1,000 elements and size = 10,000
+
+     name | rank | runs |      mean |     stdev | baseline
+----------|------|------|-----------|-----------|---------
+cysparse2 |    1 |   10 | 4.194e-05 | 4.985e-06 |        1
+ pysparse |    2 |   10 | 4.284e-05 | 9.134e-07 |    1.022
+ cysparse |    3 |   10 |  5.19e-05 | 6.617e-06 |    1.238
+
+## Simple matdot (A^t * B) with 10,000 elements and size = 100,000
+
+     name | rank | runs |      mean |     stdev | baseline
+----------|------|------|-----------|-----------|---------
+cysparse2 |    1 |   10 | 0.0003506 | 3.285e-05 |        1
+ pysparse |    2 |   10 | 0.0004322 | 5.732e-05 |    1.233
+ cysparse |    3 |   10 | 0.0004739 |  7.76e-05 |    1.352
+
+## Simple matdot (A^t * B) with 80,000 elements and size = 100,000
+
+     name | rank | runs |      mean |     stdev | baseline
+----------|------|------|-----------|-----------|---------
+cysparse2 |    1 |   10 | 0.0008992 | 6.331e-05 |        1
+ cysparse |    2 |   10 | 0.0009177 | 7.786e-05 |    1.021
+ pysparse |    3 |   10 | 0.0009855 | 0.0001483 |    1.096
+
+Total runs: 120 run in arbitrary order
+Python version: 2.7.5+
+System: x86_64 Linux 3.11.0-12-generic
+Version: benchmark v0.1.5
+Date: 2015-06-05 15:09:38

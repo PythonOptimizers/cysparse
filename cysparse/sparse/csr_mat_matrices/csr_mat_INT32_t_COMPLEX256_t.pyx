@@ -356,8 +356,6 @@ cdef MakeCSRSparseMatrix_INT32_t_COMPLEX256_t(INT32_t nrow, INT32_t ncol, INT32_
         val  (COMPLEX256_t *): C-array with values.
     """
 
-    print("MakeCSRSparseMatrix_INT32_t_COMPLEX256_t: nnz = %d" % nnz)
-
     csr_mat = CSRSparseMatrix_INT32_t_COMPLEX256_t(control_object=unexposed_value, nrow=nrow, ncol=ncol, nnz=nnz)
 
     csr_mat.val = val

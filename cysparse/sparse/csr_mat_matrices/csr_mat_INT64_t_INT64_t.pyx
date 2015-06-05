@@ -355,8 +355,6 @@ cdef MakeCSRSparseMatrix_INT64_t_INT64_t(INT64_t nrow, INT64_t ncol, INT64_t nnz
         val  (INT64_t *): C-array with values.
     """
 
-    print("MakeCSRSparseMatrix_INT64_t_INT64_t: nnz = %d" % nnz)
-
     csr_mat = CSRSparseMatrix_INT64_t_INT64_t(control_object=unexposed_value, nrow=nrow, ncol=ncol, nnz=nnz)
 
     csr_mat.val = val

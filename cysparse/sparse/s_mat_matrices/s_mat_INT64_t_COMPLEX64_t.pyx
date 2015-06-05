@@ -14,11 +14,11 @@ cdef class SparseMatrix_INT64_t_COMPLEX64_t(SparseMatrix):
         """
         assert unexposed_value == kwargs.get('control_object', None), "Matrix must be instantiated with a factory method"
 
-        self.type_name = "SparseMatrix_INT64_t"
+        self.type_name = "SparseMatrix"
 
         self.nrow = kwargs.get('nrow', -1)
         self.ncol = kwargs.get('ncol', -1)
-        #self.nnz = kwargs.get('nnz', 0)
+        self.nnz = kwargs.get('nnz', 0)
 
 
     ####################################################################################################################

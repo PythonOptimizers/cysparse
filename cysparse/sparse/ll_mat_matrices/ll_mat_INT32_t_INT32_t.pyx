@@ -16,9 +16,7 @@ from cysparse.sparse.ll_mat_matrices.ll_mat_INT32_t_INT32_t cimport LLSparseMatr
 from cysparse.sparse.ll_mat_views.ll_mat_view_INT32_t_INT32_t cimport LLSparseMatrixView_INT32_t_INT32_t
 
 from cysparse.sparse.csr_mat_matrices.csr_mat_INT32_t_INT32_t cimport MakeCSRSparseMatrix_INT32_t_INT32_t
-
-#from cysparse.sparse.csc_mat cimport MakeCSCSparseMatrix
-#from cysparse.utils.equality cimport values_are_equal
+from cysparse.sparse.csc_mat_matrices.csc_mat_INT32_t_INT32_t cimport MakeCSCSparseMatrix_INT32_t_INT32_t
 
 from cysparse.sparse.sparse_utils.generate_indices_INT32_t cimport create_c_array_indices_from_python_object_INT32_t
 
@@ -543,6 +541,86 @@ cdef class LLSparseMatrix_INT32_t_INT32_t(MutableSparseMatrix_INT32_t_INT32_t):
         csr_mat = MakeCSRSparseMatrix_INT32_t_INT32_t(nrow=self.nrow, ncol=self.ncol, nnz=self.nnz, ind=ind, col=col, val=val)
 
         return csr_mat
+
+
+    def to_csc(self):
+        """
+        Create a corresponding CSCSparseMatrix.
+
+        Warning:
+            Memory **must** be freed by the caller!
+            Column indices are **not** necessarily sorted!
+
+        """
+        cdef INT32_t * ind = <INT32_t *> PyMem_Malloc((self.ncol + 1) * sizeof(INT32_t))
+        if not ind:
+            raise MemoryError()
+
+        cdef INT32_t * row = <INT32_t *> PyMem_Malloc(self.nnz * sizeof(INT32_t))
+        if not row:
+            raise MemoryError()
+
+        cdef INT32_t * val = <INT32_t *> PyMem_Malloc(self.nnz * sizeof(INT32_t))
+        if not val:
+            raise MemoryError()
+
+
+        cdef:
+            INT32_t i, k
+
+
+        # start by collecting the number of rows for each column
+        # this is to create the ind vector but not only...
+        cdef INT32_t * col_indexes = <INT32_t *> calloc(self.ncol + 1, sizeof(INT32_t))
+        if not ind:
+            raise MemoryError()
+
+        col_indexes[0] = 0
+
+        for i from 0 <= i < self.nrow:
+            k = self.root[i]
+            while k != -1:
+                col_indexes[self.col[k] + 1] += 1
+                k = self.link[k]
+
+        # ind
+        for i from 1 <= i <= self.ncol:
+            col_indexes[i] = col_indexes[i - 1] + col_indexes[i]
+
+        memcpy(ind, col_indexes, (self.ncol + 1) * sizeof(INT32_t) )
+        assert ind[self.ncol] == self.nnz
+
+        # row and val
+        # we have ind: we know exactly where to put the row indices for each column
+        # we use col_indexes to get the next index in row and val
+        for i from 0 <= i < self.nrow:
+            k = self.root[i]
+            while k != -1:
+                col_index = col_indexes[self.col[k]]
+                row[col_index] = i
+                val[col_index] = self.val[k]
+                col_indexes[self.col[k]] += 1 # update index in row and val
+
+                k = self.link[k]
+
+
+        free(col_indexes)
+
+        csc_mat = MakeCSCSparseMatrix_INT32_t_INT32_t(nrow=self.nrow, ncol=self.ncol, nnz=self.nnz, ind=ind, row=row, val=val)
+
+        return csc_mat
+
+    def to_csb(self):
+        """
+        Create a corresponding CSBSparseMatrix.
+
+        Warning:
+            Memory **must** be freed by the caller!
+            Column indices are **not** necessarily sorted!
+
+        """
+        raise NotImplemented("This operation is not (yet) implemented")
+
 
     ####################################################################################################################
     # SUB-MATRICES
@@ -1195,16 +1273,16 @@ cdef class LLSparseMatrix_INT32_t_INT32_t(MutableSparseMatrix_INT32_t_INT32_t):
         """
         return multiply_transposed_ll_mat_with_numpy_vector_INT32_t_INT32_t(self, B)
 
-    def __mul__(self, B):
+    def matdot(self, B):
         """
-        Classical matrix multiplication.
+        Return :math:`A*B`.
 
         Cases:
 
         - ``C = A * B`` where `B` is an ``LLSparseMatrix`` matrix. ``C`` is an ``LLSparseMatrix`` of same type.
         - ``C = A * B`` where ``B`` is an :program:`NumPy` matrix. ``C`` is a dense :program:`NumPy` matrix. (not yet implemented).
         """
-        # CASES
+                # CASES
         if PyLLSparseMatrix_Check(B):
             return multiply_two_ll_mat_INT32_t_INT32_t(self, B)
             #raise NotImplementedError("Multiplication with this kind of object not implemented yet...")
@@ -1221,6 +1299,24 @@ cdef class LLSparseMatrix_INT32_t_INT32_t(MutableSparseMatrix_INT32_t_INT32_t):
                 raise IndexError("Matrix dimensions must agree")
         else:
             raise NotImplementedError("Multiplication with this kind of object not implemented yet...")
+
+    def matdot_transp(self, B):
+        """
+        Return :math:`A^t * B`.
+        """
+        if PyLLSparseMatrix_Check(B):
+            return multiply_transposed_ll_mat_by_ll_mat_INT32_t_INT32_t(self, B)
+        elif cnp.PyArray_Check(B):
+            raise NotImplementedError("Multiplication with this kind of object not implemented yet...")
+        else:
+            raise NotImplementedError("Multiplication with this kind of object not implemented yet...")
+
+    def __mul__(self, B):
+        """
+        Return :math:`A * B`. See :meth:`matdot`.
+
+        """
+        return self.matdot(B)
 
     #def __rmul__(self, B):
 

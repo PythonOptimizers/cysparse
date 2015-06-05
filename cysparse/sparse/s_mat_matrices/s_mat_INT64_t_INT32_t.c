@@ -1133,6 +1133,7 @@ static char __pyx_k_S[] = "S";
 static char __pyx_k_NZ[] = "NZ";
 static char __pyx_k_SZ[] = "SZ";
 static char __pyx_k_get[] = "get";
+static char __pyx_k_nnz[] = "nnz";
 static char __pyx_k_s_s[] = "%s %s";
 static char __pyx_k_main[] = "__main__";
 static char __pyx_k_ncol[] = "ncol";
@@ -1145,9 +1146,9 @@ static char __pyx_k_no_zeros[] = "no_zeros";
 static char __pyx_k_size_hint[] = "size_hint";
 static char __pyx_k_symmetric[] = "symmetric";
 static char __pyx_k_store_zeros[] = "store_zeros";
+static char __pyx_k_SparseMatrix[] = "SparseMatrix";
 static char __pyx_k_control_object[] = "control_object";
 static char __pyx_k_NotImplementedError[] = "NotImplementedError";
-static char __pyx_k_SparseMatrix_INT64_t[] = "SparseMatrix_INT64_t";
 static char __pyx_k_attributes_condensed[] = "attributes_condensed";
 static char __pyx_k_attributes_long_string[] = "attributes_long_string";
 static char __pyx_k_attributes_short_string[] = "attributes_short_string";
@@ -1169,6 +1170,7 @@ static PyObject *__pyx_n_s_general;
 static PyObject *__pyx_n_s_get;
 static PyObject *__pyx_n_s_main;
 static PyObject *__pyx_n_s_ncol;
+static PyObject *__pyx_n_s_nnz;
 static PyObject *__pyx_n_s_no_zeros;
 static PyObject *__pyx_n_s_nrow;
 static PyObject *__pyx_kp_s_of_dim_d_by_d_with_d_non_zero_va;
@@ -1179,6 +1181,7 @@ static PyObject *__pyx_n_s_size_hint;
 static PyObject *__pyx_n_s_store_zeros;
 static PyObject *__pyx_n_s_symmetric;
 static PyObject *__pyx_n_s_test;
+static PyObject *__pyx_int_0;
 static PyObject *__pyx_int_neg_1;
 static PyObject *__pyx_tuple_;
 
@@ -1228,7 +1231,7 @@ static int __pyx_pf_8cysparse_6sparse_14s_mat_matrices_21s_mat_INT64_t_INT32_t_2
  *         """
  *         assert unexposed_value == kwargs.get('control_object', None), "Matrix must be instantiated with a factory method"             # <<<<<<<<<<<<<<
  * 
- *         self.type_name = "SparseMatrix_INT64_t"
+ *         self.type_name = "SparseMatrix"
  */
   #ifndef CYTHON_WITHOUT_ASSERTIONS
   if (unlikely(!Py_OptimizeFlag)) {
@@ -1248,18 +1251,18 @@ static int __pyx_pf_8cysparse_6sparse_14s_mat_matrices_21s_mat_INT64_t_INT32_t_2
   /* "cysparse/sparse/s_mat_matrices/s_mat_INT64_t_INT32_t.pyx":17
  *         assert unexposed_value == kwargs.get('control_object', None), "Matrix must be instantiated with a factory method"
  * 
- *         self.type_name = "SparseMatrix_INT64_t"             # <<<<<<<<<<<<<<
+ *         self.type_name = "SparseMatrix"             # <<<<<<<<<<<<<<
  * 
  *         self.nrow = kwargs.get('nrow', -1)
  */
-  __pyx_v_self->__pyx_base.type_name = __pyx_k_SparseMatrix_INT64_t;
+  __pyx_v_self->__pyx_base.type_name = __pyx_k_SparseMatrix;
 
   /* "cysparse/sparse/s_mat_matrices/s_mat_INT64_t_INT32_t.pyx":19
- *         self.type_name = "SparseMatrix_INT64_t"
+ *         self.type_name = "SparseMatrix"
  * 
  *         self.nrow = kwargs.get('nrow', -1)             # <<<<<<<<<<<<<<
  *         self.ncol = kwargs.get('ncol', -1)
- *         #self.nnz = kwargs.get('nnz', 0)
+ *         self.nnz = kwargs.get('nnz', 0)
  */
   __pyx_t_2 = __Pyx_PyDict_GetItemDefault(__pyx_v_kwargs, __pyx_n_s_nrow, __pyx_int_neg_1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 19; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
@@ -1271,7 +1274,7 @@ static int __pyx_pf_8cysparse_6sparse_14s_mat_matrices_21s_mat_INT64_t_INT32_t_2
  * 
  *         self.nrow = kwargs.get('nrow', -1)
  *         self.ncol = kwargs.get('ncol', -1)             # <<<<<<<<<<<<<<
- *         #self.nnz = kwargs.get('nnz', 0)
+ *         self.nnz = kwargs.get('nnz', 0)
  * 
  */
   __pyx_t_2 = __Pyx_PyDict_GetItemDefault(__pyx_v_kwargs, __pyx_n_s_ncol, __pyx_int_neg_1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 20; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -1279,6 +1282,19 @@ static int __pyx_pf_8cysparse_6sparse_14s_mat_matrices_21s_mat_INT64_t_INT32_t_2
   __pyx_t_4 = __Pyx_PyInt_As_long(__pyx_t_2); if (unlikely((__pyx_t_4 == (long)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 20; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_self->ncol = __pyx_t_4;
+
+  /* "cysparse/sparse/s_mat_matrices/s_mat_INT64_t_INT32_t.pyx":21
+ *         self.nrow = kwargs.get('nrow', -1)
+ *         self.ncol = kwargs.get('ncol', -1)
+ *         self.nnz = kwargs.get('nnz', 0)             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+  __pyx_t_2 = __Pyx_PyDict_GetItemDefault(__pyx_v_kwargs, __pyx_n_s_nnz, __pyx_int_0); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 21; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_4 = __Pyx_PyInt_As_long(__pyx_t_2); if (unlikely((__pyx_t_4 == (long)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 21; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_v_self->nnz = __pyx_t_4;
 
   /* "cysparse/sparse/s_mat_matrices/s_mat_INT64_t_INT32_t.pyx":9
  * cdef class SparseMatrix_INT64_t_INT32_t(SparseMatrix):
@@ -2944,6 +2960,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_get, __pyx_k_get, sizeof(__pyx_k_get), 0, 0, 1, 1},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
   {&__pyx_n_s_ncol, __pyx_k_ncol, sizeof(__pyx_k_ncol), 0, 0, 1, 1},
+  {&__pyx_n_s_nnz, __pyx_k_nnz, sizeof(__pyx_k_nnz), 0, 0, 1, 1},
   {&__pyx_n_s_no_zeros, __pyx_k_no_zeros, sizeof(__pyx_k_no_zeros), 0, 0, 1, 1},
   {&__pyx_n_s_nrow, __pyx_k_nrow, sizeof(__pyx_k_nrow), 0, 0, 1, 1},
   {&__pyx_kp_s_of_dim_d_by_d_with_d_non_zero_va, __pyx_k_of_dim_d_by_d_with_d_non_zero_va, sizeof(__pyx_k_of_dim_d_by_d_with_d_non_zero_va), 0, 0, 1, 0},
@@ -2986,6 +3003,7 @@ static int __Pyx_InitCachedConstants(void) {
 
 static int __Pyx_InitGlobals(void) {
   if (__Pyx_InitStrings(__pyx_string_tab) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_int_0 = PyInt_FromLong(0); if (unlikely(!__pyx_int_0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_int_neg_1 = PyInt_FromLong(-1); if (unlikely(!__pyx_int_neg_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   return 0;
   __pyx_L1_error:;

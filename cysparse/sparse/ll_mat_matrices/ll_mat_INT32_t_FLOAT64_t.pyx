@@ -622,10 +622,6 @@ cdef class LLSparseMatrix_INT32_t_FLOAT64_t(MutableSparseMatrix_INT32_t_FLOAT64_
         raise NotImplemented("This operation is not (yet) implemented")
 
 
-
-
-
-
     ####################################################################################################################
     # SUB-MATRICES
     ####################################################################################################################
@@ -1277,16 +1273,16 @@ cdef class LLSparseMatrix_INT32_t_FLOAT64_t(MutableSparseMatrix_INT32_t_FLOAT64_
         """
         return multiply_transposed_ll_mat_with_numpy_vector_INT32_t_FLOAT64_t(self, B)
 
-    def __mul__(self, B):
+    def matdot(self, B):
         """
-        Classical matrix multiplication.
+        Return :math:`A*B`.
 
         Cases:
 
         - ``C = A * B`` where `B` is an ``LLSparseMatrix`` matrix. ``C`` is an ``LLSparseMatrix`` of same type.
         - ``C = A * B`` where ``B`` is an :program:`NumPy` matrix. ``C`` is a dense :program:`NumPy` matrix. (not yet implemented).
         """
-        # CASES
+                # CASES
         if PyLLSparseMatrix_Check(B):
             return multiply_two_ll_mat_INT32_t_FLOAT64_t(self, B)
             #raise NotImplementedError("Multiplication with this kind of object not implemented yet...")
@@ -1303,6 +1299,24 @@ cdef class LLSparseMatrix_INT32_t_FLOAT64_t(MutableSparseMatrix_INT32_t_FLOAT64_
                 raise IndexError("Matrix dimensions must agree")
         else:
             raise NotImplementedError("Multiplication with this kind of object not implemented yet...")
+
+    def matdot_transp(self, B):
+        """
+        Return :math:`A^t * B`.
+        """
+        if PyLLSparseMatrix_Check(B):
+            return multiply_transposed_ll_mat_by_ll_mat_INT32_t_FLOAT64_t(self, B)
+        elif cnp.PyArray_Check(B):
+            raise NotImplementedError("Multiplication with this kind of object not implemented yet...")
+        else:
+            raise NotImplementedError("Multiplication with this kind of object not implemented yet...")
+
+    def __mul__(self, B):
+        """
+        Return :math:`A * B`. See :meth:`matdot`.
+
+        """
+        return self.matdot(B)
 
     #def __rmul__(self, B):
 
