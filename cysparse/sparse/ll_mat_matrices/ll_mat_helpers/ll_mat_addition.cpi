@@ -1,0 +1,28 @@
+"""
+Several helper routines for addition with/by a ``LLSparseMatrix`` matrix.
+"""
+
+########################################################################################################################
+# Addition functions
+########################################################################################################################
+
+###################################################
+# LLSparseMatrix by LLSparseMatrix
+###################################################
+
+cdef update_add_at_with_numpy_arrays@index@_@type@(LLSparseMatrix_@index@_@type@ A,
+                                                   cnp.ndarray[cnp.@index|cysparse_type_to_numpy_c_type@, ndim=1, mode='c'] id1,
+                                                   cnp.ndarray[cnp.@index|cysparse_type_to_numpy_c_type@, ndim=1, mode='c'] id2,
+                                                   cnp.ndarray[cnp.@type|cysparse_type_to_numpy_c_type@, ndim=1] val):
+    """
+    Update of matrix in place by a vector.
+
+    This operation is equivalent to
+
+    ..  code-block:: python
+
+        for i in range(len(val)):
+            A[id1[i],id2[i]] += val[i]
+
+    """
+    pass

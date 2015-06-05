@@ -4,8 +4,6 @@
 # Kept here for future reuse.
 ########################################################################################################################
 
-raise NotImplementedError("Don't use this extension!!!!")
-
 """
 Several generic functions on types.
 """

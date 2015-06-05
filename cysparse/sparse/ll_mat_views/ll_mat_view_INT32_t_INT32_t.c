@@ -2163,7 +2163,7 @@ static __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_f_8cysparse_6spar
  * 
  *     # EXPLICIT TYPE TESTS
  */
-  __pyx_t_1 = ((struct __pyx_vtabstruct_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT32_t_INT32_t_LLSparseMatrix_INT32_t_INT32_t *)__pyx_v_self->A->__pyx_vtab)->safe_at(__pyx_v_self->A, (__pyx_v_self->row_indices[__pyx_v_i]), (__pyx_v_self->col_indices[__pyx_v_j])); if (unlikely(__pyx_t_1 == 1 && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 90; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = ((struct __pyx_vtabstruct_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT32_t_INT32_t_LLSparseMatrix_INT32_t_INT32_t *)__pyx_v_self->A->__pyx_vtab)->safe_at(__pyx_v_self->A, (__pyx_v_self->row_indices[__pyx_v_i]), (__pyx_v_self->col_indices[__pyx_v_j])); if (unlikely(__pyx_t_1 == 2 && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 90; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_r = __pyx_t_1;
   goto __pyx_L0;
 

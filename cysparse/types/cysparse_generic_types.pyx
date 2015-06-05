@@ -1,13 +1,12 @@
-"""
-Several generic functions on types.
-"""
-
 ########################################################################################################################
 # Doesn't work!!!!
 #
 # Kept here for future reuse.
 ########################################################################################################################
 
+"""
+Several generic functions on types.
+"""
 from cysparse.types.cysparse_types cimport *
 from cysparse.types.cysparse_types import *
 

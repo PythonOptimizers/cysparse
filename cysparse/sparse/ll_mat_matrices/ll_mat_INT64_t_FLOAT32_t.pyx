@@ -27,6 +27,7 @@ from cysparse.sparse.sparse_utils.generate_indices_INT64_t cimport create_c_arra
 include "ll_mat_kernel/ll_mat_assignment_kernel_INT64_t_FLOAT32_t.pxi"
 include "ll_mat_kernel/ll_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT32_t.pxi"
 include "ll_mat_helpers/ll_mat_multiplication_INT64_t_FLOAT32_t.pxi"
+include "ll_mat_helpers/ll_mat_addition_INT64_t_FLOAT32_t.pxi"
 
 
 ########################################################################################################################

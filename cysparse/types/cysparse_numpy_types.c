@@ -244,10 +244,12 @@ class __Pyx_FakeReference {
 #include <math.h>
 #define __PYX_HAVE__cysparse__types__cysparse_numpy_types
 #define __PYX_HAVE_API__cysparse__types__cysparse_numpy_types
-#include "limits.h"
-#include "stdint.h"
 #include "string.h"
 #include "stdio.h"
+#include "pythread.h"
+#include "limits.h"
+#include "stdint.h"
+#include "float.h"
 #include "stdlib.h"
 #include "numpy/arrayobject.h"
 #include "numpy/ufuncobject.h"
@@ -457,9 +459,11 @@ static const char *__pyx_f[] = {
   "cysparse/types/cysparse_numpy_types.pyx",
   "__init__.pxd",
   "type.pxd",
+  "bool.pxd",
+  "complex.pxd",
 };
 
-/* "cysparse/types/cysparse_types.pxd":57
+/* "cysparse/types/cysparse_types.pxd":58
  *     COMPLEX256_T = 9
  * 
  * ctypedef int INT32_t             # <<<<<<<<<<<<<<
@@ -468,7 +472,7 @@ static const char *__pyx_f[] = {
  */
 typedef int __pyx_t_8cysparse_5types_14cysparse_types_INT32_t;
 
-/* "cysparse/types/cysparse_types.pxd":58
+/* "cysparse/types/cysparse_types.pxd":59
  * 
  * ctypedef int INT32_t
  * ctypedef unsigned int UINT32_t             # <<<<<<<<<<<<<<
@@ -477,7 +481,7 @@ typedef int __pyx_t_8cysparse_5types_14cysparse_types_INT32_t;
  */
 typedef unsigned int __pyx_t_8cysparse_5types_14cysparse_types_UINT32_t;
 
-/* "cysparse/types/cysparse_types.pxd":59
+/* "cysparse/types/cysparse_types.pxd":60
  * ctypedef int INT32_t
  * ctypedef unsigned int UINT32_t
  * ctypedef long INT64_t             # <<<<<<<<<<<<<<
@@ -486,7 +490,7 @@ typedef unsigned int __pyx_t_8cysparse_5types_14cysparse_types_UINT32_t;
  */
 typedef long __pyx_t_8cysparse_5types_14cysparse_types_INT64_t;
 
-/* "cysparse/types/cysparse_types.pxd":60
+/* "cysparse/types/cysparse_types.pxd":61
  * ctypedef unsigned int UINT32_t
  * ctypedef long INT64_t
  * ctypedef unsigned long UINT64_t             # <<<<<<<<<<<<<<
@@ -495,7 +499,7 @@ typedef long __pyx_t_8cysparse_5types_14cysparse_types_INT64_t;
  */
 typedef unsigned long __pyx_t_8cysparse_5types_14cysparse_types_UINT64_t;
 
-/* "cysparse/types/cysparse_types.pxd":62
+/* "cysparse/types/cysparse_types.pxd":63
  * ctypedef unsigned long UINT64_t
  * 
  * ctypedef float FLOAT32_t             # <<<<<<<<<<<<<<
@@ -504,7 +508,7 @@ typedef unsigned long __pyx_t_8cysparse_5types_14cysparse_types_UINT64_t;
  */
 typedef float __pyx_t_8cysparse_5types_14cysparse_types_FLOAT32_t;
 
-/* "cysparse/types/cysparse_types.pxd":63
+/* "cysparse/types/cysparse_types.pxd":64
  * 
  * ctypedef float FLOAT32_t
  * ctypedef double FLOAT64_t             # <<<<<<<<<<<<<<
@@ -513,7 +517,7 @@ typedef float __pyx_t_8cysparse_5types_14cysparse_types_FLOAT32_t;
  */
 typedef double __pyx_t_8cysparse_5types_14cysparse_types_FLOAT64_t;
 
-/* "cysparse/types/cysparse_types.pxd":64
+/* "cysparse/types/cysparse_types.pxd":65
  * ctypedef float FLOAT32_t
  * ctypedef double FLOAT64_t
  * ctypedef long double FLOAT128_t             # <<<<<<<<<<<<<<
@@ -744,7 +748,7 @@ typedef npy_longdouble __pyx_t_5numpy_longdouble_t;
 /*--- Type declarations ---*/
 struct __pyx_t_8cysparse_5types_14cysparse_types_CPType;
 
-/* "cysparse/types/cysparse_types.pxd":45
+/* "cysparse/types/cysparse_types.pxd":46
  * #################################################################################################
  * 
  * cpdef enum CySparseType:             # <<<<<<<<<<<<<<
@@ -764,7 +768,7 @@ enum __pyx_t_8cysparse_5types_14cysparse_types_CySparseType {
   __pyx_e_8cysparse_5types_14cysparse_types_COMPLEX256_T = 9
 };
 
-/* "cysparse/types/cysparse_types.pxd":113
+/* "cysparse/types/cysparse_types.pxd":79
  * 
  * # in bits
  * cdef enum CySparseTypeBitSize:             # <<<<<<<<<<<<<<
@@ -773,7 +777,7 @@ enum __pyx_t_8cysparse_5types_14cysparse_types_CySparseType {
  */
 enum __pyx_t_8cysparse_5types_14cysparse_types_CySparseTypeBitSize {
 
-  /* "cysparse/types/cysparse_types.pxd":123
+  /* "cysparse/types/cysparse_types.pxd":89
  *     COMPLEX64_t_BIT = sizeof(COMPLEX64_t) * CHAR_BIT
  *     COMPLEX128_t_BIT = sizeof(COMPLEX128_t) * CHAR_BIT
  *     COMPLEX256_t_BIT = sizeof(COMPLEX256_t) * CHAR_BIT             # <<<<<<<<<<<<<<
@@ -792,7 +796,7 @@ enum __pyx_t_8cysparse_5types_14cysparse_types_CySparseTypeBitSize {
   __pyx_e_8cysparse_5types_14cysparse_types_COMPLEX256_t_BIT = ((sizeof(__pyx_t_long_double_complex)) * CHAR_BIT)
 };
 
-/* "cysparse/types/cysparse_types.pxd":128
+/* "cysparse/types/cysparse_types.pxd":94
  * #                                 *** SPARSE MATRIX TYPES ***
  * #################################################################################################
  * cdef struct CPType:             # <<<<<<<<<<<<<<
@@ -1162,11 +1166,19 @@ static PyTypeObject *__Pyx_ImportType(const char *module_name, const char *class
 static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 
 
-/* Module declarations from 'cysparse.types.cysparse_types' */
-
-/* Module declarations from 'cpython.buffer' */
+/* Module declarations from 'cpython.version' */
 
 /* Module declarations from 'cpython.ref' */
+
+/* Module declarations from 'cpython.exc' */
+
+/* Module declarations from 'cpython.module' */
+
+/* Module declarations from 'cpython.mem' */
+
+/* Module declarations from 'cpython.tuple' */
+
+/* Module declarations from 'cpython.list' */
 
 /* Module declarations from 'libc.string' */
 
@@ -1174,10 +1186,70 @@ static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 
 /* Module declarations from 'cpython.object' */
 
+/* Module declarations from 'cpython.sequence' */
+
+/* Module declarations from 'cpython.mapping' */
+
+/* Module declarations from 'cpython.iterator' */
+
 /* Module declarations from '__builtin__' */
 
 /* Module declarations from 'cpython.type' */
 static PyTypeObject *__pyx_ptype_7cpython_4type_type = 0;
+
+/* Module declarations from 'cpython.number' */
+
+/* Module declarations from 'cpython.int' */
+
+/* Module declarations from '__builtin__' */
+
+/* Module declarations from 'cpython.bool' */
+static PyTypeObject *__pyx_ptype_7cpython_4bool_bool = 0;
+
+/* Module declarations from 'cpython.long' */
+
+/* Module declarations from 'cpython.float' */
+
+/* Module declarations from '__builtin__' */
+
+/* Module declarations from 'cpython.complex' */
+static PyTypeObject *__pyx_ptype_7cpython_7complex_complex = 0;
+
+/* Module declarations from 'cpython.string' */
+
+/* Module declarations from 'cpython.unicode' */
+
+/* Module declarations from 'cpython.dict' */
+
+/* Module declarations from 'cpython.instance' */
+
+/* Module declarations from 'cpython.function' */
+
+/* Module declarations from 'cpython.method' */
+
+/* Module declarations from 'cpython.weakref' */
+
+/* Module declarations from 'cpython.getargs' */
+
+/* Module declarations from 'cpython.pythread' */
+
+/* Module declarations from 'cpython.pystate' */
+
+/* Module declarations from 'cpython.cobject' */
+
+/* Module declarations from 'cpython.oldbuffer' */
+
+/* Module declarations from 'cpython.set' */
+
+/* Module declarations from 'cpython.buffer' */
+
+/* Module declarations from 'cpython.bytes' */
+
+/* Module declarations from 'cpython.pycapsule' */
+
+/* Module declarations from 'cpython' */
+
+/* Module declarations from 'cysparse.types.cysparse_types' */
 
 /* Module declarations from 'libc.stdlib' */
 
@@ -4508,6 +4580,8 @@ PyMODINIT_FUNC PyInit_cysparse_numpy_types(void)
   sizeof(PyHeapTypeObject),
   #endif
   0); if (unlikely(!__pyx_ptype_7cpython_4type_type)) {__pyx_filename = __pyx_f[2]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_ptype_7cpython_4bool_bool = __Pyx_ImportType(__Pyx_BUILTIN_MODULE_NAME, "bool", sizeof(PyBoolObject), 0); if (unlikely(!__pyx_ptype_7cpython_4bool_bool)) {__pyx_filename = __pyx_f[3]; __pyx_lineno = 8; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_ptype_7cpython_7complex_complex = __Pyx_ImportType(__Pyx_BUILTIN_MODULE_NAME, "complex", sizeof(PyComplexObject), 0); if (unlikely(!__pyx_ptype_7cpython_7complex_complex)) {__pyx_filename = __pyx_f[4]; __pyx_lineno = 15; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_ptype_5numpy_dtype = __Pyx_ImportType("numpy", "dtype", sizeof(PyArray_Descr), 0); if (unlikely(!__pyx_ptype_5numpy_dtype)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 155; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_ptype_5numpy_flatiter = __Pyx_ImportType("numpy", "flatiter", sizeof(PyArrayIterObject), 0); if (unlikely(!__pyx_ptype_5numpy_flatiter)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 168; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_ptype_5numpy_broadcast = __Pyx_ImportType("numpy", "broadcast", sizeof(PyArrayMultiIterObject), 0); if (unlikely(!__pyx_ptype_5numpy_broadcast)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 172; __pyx_clineno = __LINE__; goto __pyx_L1_error;}

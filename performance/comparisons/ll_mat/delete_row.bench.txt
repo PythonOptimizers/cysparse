@@ -1,0 +1,35 @@
+# Benchmark Report
+
+## Simple delete_rows with 100 elements, size = 1,000 and 100 row to delete
+
+    name | rank | runs |      mean |     stdev | baseline
+---------|------|------|-----------|-----------|---------
+pysparse |    1 |    2 | 4.947e-05 | 6.238e-06 |        1
+cysparse |    2 |    2 | 6.509e-05 | 1.989e-05 |    1.316
+
+## Simple delete_rows with 1,000 elements, size = 10,000 and 1,000 row to delete
+
+    name | rank | runs |      mean |     stdev | baseline
+---------|------|------|-----------|-----------|---------
+cysparse |    1 |    2 | 0.0004081 | 1.517e-06 |        1
+pysparse |    2 |    2 | 0.0004171 | 8.598e-06 |    1.022
+
+## Simple delete_rows with 10,000 elements, size = 100,000 and 10,000 row to delete
+
+    name | rank | runs |     mean |     stdev | baseline
+---------|------|------|----------|-----------|---------
+cysparse |    1 |    2 |    0.004 | 3.169e-05 |        1
+pysparse |    2 |    2 | 0.004241 |   2.9e-05 |     1.06
+
+## Simple delete_rows with 80,000 elements, size = 100,000 and 50,000 row to delete
+
+    name | rank | runs |    mean |     stdev | baseline
+---------|------|------|---------|-----------|---------
+pysparse |    1 |    2 | 0.01519 | 0.0003373 |        1
+cysparse |    2 |    2 |  0.0175 |  0.003849 |    1.153
+
+Total runs: 16 run in arbitrary order
+Python version: 2.7.5+
+System: x86_64 Linux 3.11.0-12-generic
+Version: benchmark v0.1.5
+Date: 2015-06-05 15:59:47
