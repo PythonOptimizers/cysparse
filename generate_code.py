@@ -50,7 +50,7 @@ def make_parser():
     parser.add_argument("-m", "--matrices", help="Create sparse matrices.", action='store_true', required=False)
     parser.add_argument("-s", "--setup", help="Create setup file.", action='store_true', required=False)
     parser.add_argument("-g", "--generic_types", help="Create generic types.", action='store_true', required=False)
-    parser.add_argument("-t", "--tests", help="Create generic types.", action='store_true', required=False)
+    parser.add_argument("-t", "--tests", help="Create generic tests.", action='store_true', required=False)
     parser.add_argument("-c", "--clean", help="Clean action files.", action='store_true', required=False)
 
     return parser
@@ -80,6 +80,7 @@ def type2enum(type_name):
 #     """
 #     return cysparse_type.lower()
 
+
 # NEW VERSION
 def cysparse_type_to_numpy_c_type(cysparse_type):
     """
@@ -95,6 +96,7 @@ def cysparse_type_to_numpy_c_type(cysparse_type):
     """
     return 'npy_' + str(cysparse_type.lower()[:-2])
 
+
 def cysparse_type_to_numpy_type(cysparse_type):
     """
     Transform a :program:`CySparse` enum type into the corresponding :program:`NumPy` type.
@@ -108,6 +110,20 @@ def cysparse_type_to_numpy_type(cysparse_type):
 
     """
     return cysparse_type.lower()[:-2]
+
+
+def cysparse_type_to_numpy_enum_type(cysparse_type):
+    """
+    Transform a :program:`Cysparse` enum type into the corresponding :program:`NumPy` enum.
+
+    For instance:
+
+        FLOAT64_T -> NPY_DOUBLE or NPY_FLOAT64
+
+    Args:
+        cysparse_type:
+    """
+    return 'NPY_' + cysparse_type.upper()[:-2]
 
 
 def cysparse_type_to_real_sum_cysparse_type(cysparse_type):
@@ -157,7 +173,7 @@ INDEX_MM_TYPES = ['INT32_t', 'INT64_t']
 ELEMENT_MM_TYPES = ['INT64_t', 'FLOAT64_t', 'COMPLEX128_t']
 
 # when coding
-#ELEMENT_TYPES = ['FLOAT64_t']
+ELEMENT_TYPES = ['FLOAT64_t']
 
 
 GENERAL_CONTEXT = {
@@ -182,6 +198,7 @@ GENERAL_ENVIRONMENT.filters['type2enum'] = type2enum
 GENERAL_ENVIRONMENT.filters['cysparse_type_to_numpy_c_type'] = cysparse_type_to_numpy_c_type
 GENERAL_ENVIRONMENT.filters['cysparse_type_to_numpy_type'] = cysparse_type_to_numpy_type
 GENERAL_ENVIRONMENT.filters['cysparse_type_to_real_sum_cysparse_type'] = cysparse_type_to_real_sum_cysparse_type
+GENERAL_ENVIRONMENT.filters['cysparse_type_to_numpy_enum_type'] = cysparse_type_to_numpy_enum_type
 
 
 def clean_cython_files(logger, directory, file_list=None):

@@ -13,12 +13,15 @@ from cysparse.sparse.s_mat_matrices.s_mat_INT32_t_FLOAT64_t cimport ImmutableSpa
 from cysparse.sparse.ll_mat_matrices.ll_mat_INT32_t_FLOAT64_t cimport LLSparseMatrix_INT32_t_FLOAT64_t
 
 from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
+from python_ref cimport Py_INCREF, Py_DECREF
 
 cdef int CSC_MAT_PPRINT_ROW_THRESH = 500       # row threshold for choosing print format
 cdef int CSC_MAT_PPRINT_COL_THRESH = 20        # column threshold for choosing print format
 
 cimport numpy as cnp
 import numpy as np
+
+cnp.import_array()
 
 cdef class CSCSparseMatrix_INT32_t_FLOAT64_t(ImmutableSparseMatrix_INT32_t_FLOAT64_t):
     """
@@ -115,6 +118,7 @@ cdef class CSCSparseMatrix_INT32_t_FLOAT64_t(ImmutableSparseMatrix_INT32_t_FLOAT
         Return diagonal in a :program:`NumPy` array.
         """
         # TODO: write version when indices are sorted
+        # TODO: refactor: act only on C-array? This would give the possibility to export NumPy array or C-array pointer
 
         cdef INT32_t diag_size = min(self.nrow, self.ncol)
         cdef cnp.ndarray[cnp.npy_float64, ndim=1, mode='c'] diagonal = np.zeros(diag_size, dtype=np.float64)
@@ -134,7 +138,7 @@ cdef class CSCSparseMatrix_INT32_t_FLOAT64_t(ImmutableSparseMatrix_INT32_t_FLOAT
                     diagonal_data[j] = self.val[k]
 
                 k += 1
-                
+
         return diagonal
 
     ####################################################################################################################
@@ -193,6 +197,59 @@ cdef class CSCSparseMatrix_INT32_t_FLOAT64_t(ImmutableSparseMatrix_INT32_t_FLOAT
 
         else:
             print('Matrix too big to print out', file=OUT)
+
+    ####################################################################################################################
+    # Access to internals as resquested by Sylvain
+    #
+    # This is temporary and shouldn't be released!!!!
+    #
+    ####################################################################################################################
+    def get_c_pointers(self):
+        """
+        Return C pointers to internal arrays.
+
+        Returns:
+            Triple `(ind, row, val)`.
+
+        Warning:
+            The returned values can only be used by C-extensions.
+        """
+        cdef:
+            PyObject * ind_obj = <PyObject *> self.ind
+            PyObject * row_obj = <PyObject *> self.row
+            PyObject * val_obj = <PyObject *> self.val
+
+        Py_INCREF(<object>ind_obj)
+        Py_INCREF(<object>row_obj)
+        Py_INCREF(<object>val_obj)
+
+        return <object>ind_obj, <object>row_obj, <object>val_obj
+
+    def get_numpy_arrays(self):
+        """
+        Return :program:`NumPy` arrays equivalent to internal C-arrays.
+
+        Note:
+            No copy is made, i.e. the :program:`NumPy` arrays have direct access to the internal C-arrays. Change the
+            former and you change the latter (which shouldn't happen unless you **really** know what you are doing).
+        """
+        cdef:
+            cnp.npy_intp dim[1]
+
+        # ind
+        dim[0] = self.ncol + 1
+        ind_numpy_array = cnp.PyArray_SimpleNewFromData(1, dim, cnp.NPY_INT32, <INT32_t *>self.ind)
+
+        # row
+        dim[0] = self.nnz
+        row_numpy_array = cnp.PyArray_SimpleNewFromData(1, dim, cnp.NPY_INT32, <INT32_t *>self.row)
+
+        # val
+        dim[0] = self.nnz
+        val_numpy_array = cnp.PyArray_SimpleNewFromData(1, dim, cnp.NPY_FLOAT64, <FLOAT64_t *>self.val)
+
+
+        return ind_numpy_array, row_numpy_array, val_numpy_array
 
     ####################################################################################################################
     # DEBUG

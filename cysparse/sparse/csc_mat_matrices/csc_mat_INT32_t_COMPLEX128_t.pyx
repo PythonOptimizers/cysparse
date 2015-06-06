@@ -116,6 +116,7 @@ cdef class CSCSparseMatrix_INT32_t_COMPLEX128_t(ImmutableSparseMatrix_INT32_t_CO
         Return diagonal in a :program:`NumPy` array.
         """
         # TODO: write version when indices are sorted
+        # TODO: refactor: act only on C-array? This would give the possibility to export NumPy array or C-array pointer
 
         cdef INT32_t diag_size = min(self.nrow, self.ncol)
         cdef cnp.ndarray[cnp.npy_complex128, ndim=1, mode='c'] diagonal = np.zeros(diag_size, dtype=np.complex128)
@@ -135,7 +136,7 @@ cdef class CSCSparseMatrix_INT32_t_COMPLEX128_t(ImmutableSparseMatrix_INT32_t_CO
                     diagonal_data[j] = self.val[k]
 
                 k += 1
-                
+
         return diagonal
 
     ####################################################################################################################
@@ -194,6 +195,45 @@ cdef class CSCSparseMatrix_INT32_t_COMPLEX128_t(ImmutableSparseMatrix_INT32_t_CO
 
         else:
             print('Matrix too big to print out', file=OUT)
+
+    ####################################################################################################################
+    # Access to internals as resquested by Sylvain
+    #
+    # This is temporary and shouldn't be released!!!!
+    #
+    ####################################################################################################################
+    def get_c_pointers(self):
+        """
+        Return C pointers to internal arrays.
+
+        Returns:
+            Triple `(ind, row, val)`.
+
+        Warning:
+            The returned values can only be used by C-extensions.
+        """
+        #return tuple(<object>self.ind, <object>self.row, <object>self.val)
+        pass
+
+    def get_numpy_arrays(self):
+        """
+        Return :program:`NumPy` arrays equivalent to internal C-arrays.
+
+        Note:
+            No copy is made, i.e. the :program:`NumPy` arrays have direct access to the internal C-arrays. Change the
+            former and you change the latter (which shouldn't happen unless you **really** know what you are doing).
+        """
+        cdef:
+            cnp.npy_intp dim[1]
+
+        # ind
+        dim[0] = 2
+
+        cdef INT32_t * ind_array = <INT32_t * > self.ind
+
+        ind_numpy_array = cnp.PyArray_SimpleNewFromData(1, dim, cnp.NPY_INT32, ind_array)
+
+        return ind_numpy_array
 
     ####################################################################################################################
     # DEBUG

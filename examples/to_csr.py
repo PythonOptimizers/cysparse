@@ -59,3 +59,14 @@ csc.print_to(sys.stdout)
 print type(csc)
 
 print csc.diag()
+
+ww =  csc.get_numpy_arrays()
+
+print ww
+
+csc.debug_print()
+
+########################################################################################################################
+print "=" * 80
+
+csc.get_c_pointers()
