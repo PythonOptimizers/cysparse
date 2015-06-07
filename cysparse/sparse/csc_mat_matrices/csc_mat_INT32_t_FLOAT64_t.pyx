@@ -219,10 +219,6 @@ cdef class CSCSparseMatrix_INT32_t_FLOAT64_t(ImmutableSparseMatrix_INT32_t_FLOAT
             PyObject * row_obj = <PyObject *> self.row
             PyObject * val_obj = <PyObject *> self.val
 
-        Py_INCREF(<object>ind_obj)
-        Py_INCREF(<object>row_obj)
-        Py_INCREF(<object>val_obj)
-
         return <object>ind_obj, <object>row_obj, <object>val_obj
 
     def get_numpy_arrays(self):

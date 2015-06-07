@@ -153,3 +153,4 @@ YOU MUST CAST YOUR TYPE HERE
             raise IOError('Matrix Market file contains %d data lines instead of %d' % (nnz_read, nnz))
 
     return A
+

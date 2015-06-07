@@ -13,12 +13,15 @@ from cysparse.sparse.s_mat_matrices.s_mat_INT32_t_COMPLEX64_t cimport ImmutableS
 from cysparse.sparse.ll_mat_matrices.ll_mat_INT32_t_COMPLEX64_t cimport LLSparseMatrix_INT32_t_COMPLEX64_t
 
 from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
+from python_ref cimport Py_INCREF, Py_DECREF
 
 cdef int CSC_MAT_PPRINT_ROW_THRESH = 500       # row threshold for choosing print format
 cdef int CSC_MAT_PPRINT_COL_THRESH = 20        # column threshold for choosing print format
 
 cimport numpy as cnp
 import numpy as np
+
+cnp.import_array()
 
 cdef class CSCSparseMatrix_INT32_t_COMPLEX64_t(ImmutableSparseMatrix_INT32_t_COMPLEX64_t):
     """
@@ -212,8 +215,12 @@ cdef class CSCSparseMatrix_INT32_t_COMPLEX64_t(ImmutableSparseMatrix_INT32_t_COM
         Warning:
             The returned values can only be used by C-extensions.
         """
-        #return tuple(<object>self.ind, <object>self.row, <object>self.val)
-        pass
+        cdef:
+            PyObject * ind_obj = <PyObject *> self.ind
+            PyObject * row_obj = <PyObject *> self.row
+            PyObject * val_obj = <PyObject *> self.val
+
+        return <object>ind_obj, <object>row_obj, <object>val_obj
 
     def get_numpy_arrays(self):
         """
@@ -227,13 +234,19 @@ cdef class CSCSparseMatrix_INT32_t_COMPLEX64_t(ImmutableSparseMatrix_INT32_t_COM
             cnp.npy_intp dim[1]
 
         # ind
-        dim[0] = 2
+        dim[0] = self.ncol + 1
+        ind_numpy_array = cnp.PyArray_SimpleNewFromData(1, dim, cnp.NPY_INT32, <INT32_t *>self.ind)
 
-        cdef INT32_t * ind_array = <INT32_t * > self.ind
+        # row
+        dim[0] = self.nnz
+        row_numpy_array = cnp.PyArray_SimpleNewFromData(1, dim, cnp.NPY_INT32, <INT32_t *>self.row)
 
-        ind_numpy_array = cnp.PyArray_SimpleNewFromData(1, dim, cnp.NPY_INT32, ind_array)
+        # val
+        dim[0] = self.nnz
+        val_numpy_array = cnp.PyArray_SimpleNewFromData(1, dim, cnp.NPY_COMPLEX64, <COMPLEX64_t *>self.val)
 
-        return ind_numpy_array
+
+        return ind_numpy_array, row_numpy_array, val_numpy_array
 
     ####################################################################################################################
     # DEBUG

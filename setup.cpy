@@ -11,8 +11,32 @@ from Cython.Distutils import build_ext
 import numpy as np
 
 import ConfigParser
+import io
+import os
+import re
 
+####################################################################s####################################################
+# HELPERS
+########################################################################################################################
 
+# Versioning: from https://packaging.python.org/en/latest/single_source_version.html#single-sourcing-the-version
+# (see also https://github.com/pypa/pip)
+def read(*names, **kwargs):
+    with io.open(
+        os.path.join(os.path.dirname(__file__), *names),
+        encoding=kwargs.get("encoding", "utf8")
+    ) as fp:
+        return fp.read()
+
+def find_version(*file_paths):
+    version_file = read(*file_paths)
+    version_match = re.search(r"^__version__ = ['\"]([^'\"]*)['\"]",
+                              version_file, re.M)
+    if version_match:
+        return version_match.group(1)
+    raise RuntimeError("Unable to find version string.")
+
+# Grab paths
 def get_path_option(config, section, option):
     """
     Get path(s) from an option in a section of a ``ConfigParser``.
@@ -267,7 +291,8 @@ if use_suitesparse:
 else:
     ext_modules = base_ext +  new_sparse_ext # + utils_ext
 
-setup(name=  'SparseLib',
+setup(name=  'CySparse',
+  version=find_version('cysparse', '__init__.py'),
   #ext_package='cysparse', <- doesn't work with pxd files...
   cmdclass = {'build_ext': build_ext},
   ext_modules = ext_modules,
