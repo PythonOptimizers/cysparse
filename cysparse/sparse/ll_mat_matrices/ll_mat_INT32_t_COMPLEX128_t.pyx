@@ -111,7 +111,7 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX128_t(MutableSparseMatrix_INT32_t_COMPL
     Linked-List Format matrix.
 
     Note:
-        Despite its name, this matrix doesn't use any linked list, only C-arrays.
+        The linked list is made of two C-arrays (``link`` and ``root``).
     """
     ####################################################################################################################
     # Init/Free/Memory
@@ -145,16 +145,22 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX128_t(MutableSparseMatrix_INT32_t_COMPL
 
             col = <INT32_t *> PyMem_Malloc(self.size_hint * sizeof(INT32_t))
             if not col:
+                PyMem_Free(self.val)
                 raise MemoryError()
             self.col = col
 
             link = <INT32_t *> PyMem_Malloc(self.size_hint * sizeof(INT32_t))
             if not link:
+                PyMem_Free(self.val)
+                PyMem_Free(self.col)
                 raise MemoryError()
             self.link = link
 
             root = <INT32_t *> PyMem_Malloc(self.nrow * sizeof(INT32_t))
             if not root:
+                PyMem_Free(self.val)
+                PyMem_Free(self.col)
+                PyMem_Free(self.link)
                 raise MemoryError()
             self.root = root
 

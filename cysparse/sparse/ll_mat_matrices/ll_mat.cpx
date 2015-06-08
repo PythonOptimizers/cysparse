@@ -111,7 +111,7 @@ cdef class LLSparseMatrix_@index@_@type@(MutableSparseMatrix_@index@_@type@):
     Linked-List Format matrix.
 
     Note:
-        Despite its name, this matrix doesn't use any linked list, only C-arrays.
+        The linked list is made of two C-arrays (``link`` and ``root``).
     """
     ####################################################################################################################
     # Init/Free/Memory
@@ -145,16 +145,22 @@ cdef class LLSparseMatrix_@index@_@type@(MutableSparseMatrix_@index@_@type@):
 
             col = <@index@ *> PyMem_Malloc(self.size_hint * sizeof(@index@))
             if not col:
+                PyMem_Free(self.val)
                 raise MemoryError()
             self.col = col
 
             link = <@index@ *> PyMem_Malloc(self.size_hint * sizeof(@index@))
             if not link:
+                PyMem_Free(self.val)
+                PyMem_Free(self.col)
                 raise MemoryError()
             self.link = link
 
             root = <@index@ *> PyMem_Malloc(self.nrow * sizeof(@index@))
             if not root:
+                PyMem_Free(self.val)
+                PyMem_Free(self.col)
+                PyMem_Free(self.link)
                 raise MemoryError()
             self.root = root
 

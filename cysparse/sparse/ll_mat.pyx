@@ -16,6 +16,7 @@ from libc.string cimport *
 from cpython.unicode cimport *
 from libc.stdlib cimport *
 
+from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
 
 LL_MAT_INCREASE_FACTOR = 1.5
 LL_MAT_DEFAULT_SIZE_HINT = 40
@@ -437,7 +438,7 @@ def NewLLSparseMatrixFromMMFile(filename, store_zeros=False, test_bounds=True):
         dtype = INT64_T
     else:
         raise TypeError('Element type of matrix is not recognized')
-
+ 
     # launch right factory method
 
     
