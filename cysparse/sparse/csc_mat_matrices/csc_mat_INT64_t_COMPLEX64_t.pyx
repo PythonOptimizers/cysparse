@@ -61,15 +61,31 @@ cdef class CSCSparseMatrix_INT64_t_COMPLEX64_t(ImmutableSparseMatrix_INT64_t_COM
             :meth:`safe_at`.
 
         """
-        cdef INT64_t k
+        cdef:
+            INT64_t k
+            # for symmetric case
+            INT64_t real_i
+            INT64_t real_j
 
         if self.is_symmetric:
-            raise NotImplemented("Access to csr_mat(i, j) not (yet) implemented")
+            # TODO: column indices are NOT necessarily sorted... what do we do about it?
+            #raise NotImplementedError("Access to csc_mat(i, j) not (yet) implemented")
+            if i < j:
+                real_i = j
+                real_j = i
+            else:
+                real_i = i
+                real_j = j
 
-        # TODO: column indices are NOT necessarily sorted... what do we do about it?
-        for k from self.ind[j] <= k < self.ind[j+1]:
-            if i == self.row[k]:
-                return self.val[k]
+            for k from self.ind[real_j] <= k < self.ind[real_j+1]:
+                if real_i == self.row[k]:
+                    return self.val[k]
+
+        else:  # not symmetric
+            # TODO: column indices are NOT necessarily sorted... what do we do about it?
+            for k from self.ind[j] <= k < self.ind[j+1]:
+                if i == self.row[k]:
+                    return self.val[k]
 
         return 0.0
 
@@ -176,20 +192,24 @@ cdef class CSCSparseMatrix_INT64_t_COMPLEX64_t(ImmutableSparseMatrix_INT64_t_COM
             if not mat:
                 raise MemoryError()
 
-            for j from 0 <= j < self.ncol:
-                for i from 0 <= i < self.nrow:
+            for i from 0 <= i < self.nrow:
+                for j from 0 <= j < self.ncol:
 
-                    mat[j* self.nrow + i] = 0.0 + 0.0j
+                    mat[i* self.nrow + j] = 0.0 + 0.0j
 
 
-                k = self.ind[j]
-                while k < self.ind[j+1]:
-                    mat[(j*self.nrow)+self.row[k]] = self.val[k]
-                    k += 1
+                    # BUG: this is non sense as it is computed for every different i
+                    # TODO: rewrite this completely
+                    k = self.ind[j]
+                    while k < self.ind[j+1]:
+                        mat[(self.row[k]*self.nrow)+j] = self.val[k]
+                        if self.is_symmetric:
+                            mat[(j*self.nrow)+ self.row[k]] = self.val[k]
+                        k += 1
 
             for i from 0 <= i < self.nrow:
                 for j from 0 <= j < self.ncol:
-                    val = mat[(j*self.nrow)+i]
+                    val = mat[(i*self.nrow)+j]
                     #print('%9.*f ' % (6, val), file=OUT, end='')
                     print('{0:9.6f} '.format(val), end='')
                 print()
@@ -277,7 +297,7 @@ cdef class CSCSparseMatrix_INT64_t_COMPLEX64_t(ImmutableSparseMatrix_INT64_t_COM
 ########################################################################################################################
 # Factory methods
 ########################################################################################################################
-cdef MakeCSCSparseMatrix_INT64_t_COMPLEX64_t(INT64_t nrow, INT64_t ncol, INT64_t nnz, INT64_t * ind, INT64_t * row, COMPLEX64_t * val):
+cdef MakeCSCSparseMatrix_INT64_t_COMPLEX64_t(INT64_t nrow, INT64_t ncol, INT64_t nnz, INT64_t * ind, INT64_t * row, COMPLEX64_t * val, bint is_symmetric):
     """
     Construct a CSCSparseMatrix object.
 
@@ -289,7 +309,7 @@ cdef MakeCSCSparseMatrix_INT64_t_COMPLEX64_t(INT64_t nrow, INT64_t ncol, INT64_t
         row  (INT64_t *): C-array with row indices.
         val  (COMPLEX64_t *): C-array with values.
     """
-    csc_mat = CSCSparseMatrix_INT64_t_COMPLEX64_t(control_object=unexposed_value, nrow=nrow, ncol=ncol, nnz=nnz)
+    csc_mat = CSCSparseMatrix_INT64_t_COMPLEX64_t(control_object=unexposed_value, nrow=nrow, ncol=ncol, nnz=nnz, is_symmetric=is_symmetric)
 
     csc_mat.val = val
     csc_mat.ind = ind

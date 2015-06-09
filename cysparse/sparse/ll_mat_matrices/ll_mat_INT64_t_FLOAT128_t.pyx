@@ -613,7 +613,8 @@ cdef class LLSparseMatrix_INT64_t_FLOAT128_t(MutableSparseMatrix_INT64_t_FLOAT12
 
         free(col_indexes)
 
-        csc_mat = MakeCSCSparseMatrix_INT64_t_FLOAT128_t(nrow=self.nrow, ncol=self.ncol, nnz=self.nnz, ind=ind, row=row, val=val)
+        csc_mat = MakeCSCSparseMatrix_INT64_t_FLOAT128_t(nrow=self.nrow, ncol=self.ncol, nnz=self.nnz, ind=ind, row=row, val=val, is_symmetric=self.is_symmetric)
+        csc_mat.is_symmetric = self.is_symmetric
 
         return csc_mat
 

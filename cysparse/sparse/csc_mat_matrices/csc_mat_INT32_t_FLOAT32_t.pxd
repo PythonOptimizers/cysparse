@@ -30,4 +30,4 @@ cdef class CSCSparseMatrix_INT32_t_FLOAT32_t(ImmutableSparseMatrix_INT32_t_FLOAT
     cdef FLOAT32_t safe_at(self, INT32_t i, INT32_t j) except? 2
 
 
-cdef MakeCSCSparseMatrix_INT32_t_FLOAT32_t(INT32_t nrow, INT32_t ncol, INT32_t nnz, INT32_t * ind, INT32_t * row, FLOAT32_t * val)
+cdef MakeCSCSparseMatrix_INT32_t_FLOAT32_t(INT32_t nrow, INT32_t ncol, INT32_t nnz, INT32_t * ind, INT32_t * row, FLOAT32_t * val, bint is_symmetric)

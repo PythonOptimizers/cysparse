@@ -438,7 +438,7 @@ def NewLLSparseMatrixFromMMFile(filename, store_zeros=False, test_bounds=True):
         dtype = INT64_T
     else:
         raise TypeError('Element type of matrix is not recognized')
- 
+
     # launch right factory method
 
     

@@ -31,4 +31,4 @@ cdef class CSCSparseMatrix_INT32_t_COMPLEX256_t(ImmutableSparseMatrix_INT32_t_CO
     cdef COMPLEX256_t safe_at(self, INT32_t i, INT32_t j) except *
 
 
-cdef MakeCSCSparseMatrix_INT32_t_COMPLEX256_t(INT32_t nrow, INT32_t ncol, INT32_t nnz, INT32_t * ind, INT32_t * row, COMPLEX256_t * val)
+cdef MakeCSCSparseMatrix_INT32_t_COMPLEX256_t(INT32_t nrow, INT32_t ncol, INT32_t nnz, INT32_t * ind, INT32_t * row, COMPLEX256_t * val, bint is_symmetric)
