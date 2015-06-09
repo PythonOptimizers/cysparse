@@ -16,12 +16,40 @@
 import os
 import sys
 import glob
+import fnmatch
 
 import argparse
 import logging
 
 
 from jinja2 import Environment, FileSystemLoader
+
+
+#################################################################################################
+# HELPERS
+##################################################################################################
+def find_files(directory, pattern, recursively=True, complete_filename=True):
+    """
+    Return a list of files with or without base directories, recursively or not.
+
+    Args:
+        directory: base directory to start the search.
+        pattern: fnmatch pattern for filenames.
+        complete_filename: return complete filename or not?
+        recursively: do we recurse or not?
+    """
+
+    for root, dirs, files in os.walk(directory):
+        for basename in files:
+            if fnmatch.fnmatch(basename, pattern):
+                if complete_filename:
+                    filename = os.path.join(root, basename)
+                else:
+                    filename = basename
+                yield filename
+        if not recursively:
+            break
+
 
 #################################################################################################
 # INIT
@@ -61,6 +89,17 @@ def make_parser():
 # JINJA2 FILTERS
 #################################################################################################
 def type2enum(type_name):
+    """
+    Transform a real :program:`CySparse` type into the equivalent :program:`CySparse` enum type.
+
+    For instance:
+
+        INT32_t -> INT32_T
+
+    Args:
+        cysparse_type:
+
+    """
     enum_name = type_name[:-1]
     enum_name = enum_name + type_name[-1].upper()
 
@@ -420,6 +459,14 @@ LL_SPARSE_MATRIX_VIEW_DECLARATION_FILES = glob.glob(os.path.join(LL_SPARSE_MATRI
 LL_SPARSE_MATRIX_VIEW_DEFINITION_FILES = glob.glob(os.path.join(LL_SPARSE_MATRIX_VIEW_TEMPLATE_DIR, '*.cpx'))
 
 #################################################################################################
+# TESTS
+#################################################################################################
+TESTS_TEMPLATE_DIR = os.path.join(PATH, 'tests')
+
+TESTS_CSC_SPARSE_MATRIX_GENERIC_TEST_DIR = os.path.join(TESTS_TEMPLATE_DIR, 'cysparse', 'sparse', 'csc_mat_matrices', 'generic')
+TESTS_CSC_SPARSE_MATRIX_GENERIC_TEST_FILES = glob.glob(os.path.join(TESTS_CSC_SPARSE_MATRIX_GENERIC_TEST_DIR, '*.cpy'))
+
+#################################################################################################
 # MAIN
 #################################################################################################
 if __name__ == "__main__":
@@ -586,6 +633,20 @@ if __name__ == "__main__":
             # ll_mat_view_@index@_@type@.pxd and ll_mat_view_@index@_@type@.pyx
             generate_following_type_and_index(logger, LL_SPARSE_MATRIX_VIEW_DECLARATION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, ELEMENT_TYPES, INDEX_TYPES, '.pxd')
             generate_following_type_and_index(logger, LL_SPARSE_MATRIX_VIEW_DEFINITION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, ELEMENT_TYPES, INDEX_TYPES, '.pyx')
+
+    if arg_options.tests or arg_options.all:
+        action = True
+        logger.info("Act for generic tests")
+
+        if arg_options.clean:
+            clean_cython_files(logger, TESTS_CSC_SPARSE_MATRIX_GENERIC_TEST_DIR , find_files(TESTS_CSC_SPARSE_MATRIX_GENERIC_TEST_DIR, '*.py', False, True))
+
+        else:
+            ###############################
+            # Types
+            ###############################
+            # generic types
+            generate_template_files(logger, TESTS_CSC_SPARSE_MATRIX_GENERIC_TEST_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, '.py')
 
     if not action:
         logger.warning("No action proceeded...")

@@ -614,7 +614,6 @@ cdef class LLSparseMatrix_INT32_t_INT64_t(MutableSparseMatrix_INT32_t_INT64_t):
         free(col_indexes)
 
         csc_mat = MakeCSCSparseMatrix_INT32_t_INT64_t(nrow=self.nrow, ncol=self.ncol, nnz=self.nnz, ind=ind, row=row, val=val, is_symmetric=self.is_symmetric)
-        csc_mat.is_symmetric = self.is_symmetric
 
         return csc_mat
 

@@ -24,6 +24,9 @@ def construct_sym_sparse_matrix(A, n, nbr_elements):
             A[p, k] = i / 3
 
 
+########################################################################################################################
+# Tests
+########################################################################################################################
 class CySparseLLSparseMatrixNormsBaseTestCase(unittest.TestCase):
     def setUp(self):
         pass
