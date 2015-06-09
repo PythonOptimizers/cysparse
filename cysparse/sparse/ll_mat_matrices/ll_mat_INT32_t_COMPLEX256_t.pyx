@@ -558,6 +558,8 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX256_t(MutableSparseMatrix_INT32_t_COMPL
             Memory **must** be freed by the caller!
             Column indices are **not** necessarily sorted!
 
+        Note:
+            This code also works to create *symmetric* :class:`CSCSparseMatrix` matrices.
         """
         cdef INT32_t * ind = <INT32_t *> PyMem_Malloc((self.ncol + 1) * sizeof(INT32_t))
         if not ind:

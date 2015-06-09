@@ -140,10 +140,18 @@ new_sparse_ext = [
             sources=["cysparse/sparse/sparse_utils/generate_indices_INT32_t.pxd",
                      "cysparse/sparse/sparse_utils/generate_indices_INT32_t.pyx"],
             **sparse_ext_params),
+  Extension(name="cysparse.sparse.sparse_utils.sort_indices_INT32_t",
+            sources=["cysparse/sparse/sparse_utils/sort_indices_INT32_t.pxd",
+                     "cysparse/sparse/sparse_utils/sort_indices_INT32_t.pyx"],
+            **sparse_ext_params),
 
   Extension(name="cysparse.sparse.sparse_utils.generate_indices_INT64_t",
             sources=["cysparse/sparse/sparse_utils/generate_indices_INT64_t.pxd",
                      "cysparse/sparse/sparse_utils/generate_indices_INT64_t.pyx"],
+            **sparse_ext_params),
+  Extension(name="cysparse.sparse.sparse_utils.sort_indices_INT64_t",
+            sources=["cysparse/sparse/sparse_utils/sort_indices_INT64_t.pxd",
+                     "cysparse/sparse/sparse_utils/sort_indices_INT64_t.pyx"],
             **sparse_ext_params),
 
 

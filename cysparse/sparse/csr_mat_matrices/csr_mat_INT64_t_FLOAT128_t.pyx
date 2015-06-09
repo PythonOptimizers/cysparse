@@ -12,6 +12,8 @@ from cysparse.sparse.s_mat_matrices.s_mat_INT64_t_FLOAT128_t cimport ImmutableSp
 from cysparse.sparse.ll_mat_matrices.ll_mat_INT64_t_FLOAT128_t cimport LLSparseMatrix_INT64_t_FLOAT128_t
 from cysparse.sparse.csc_mat_matrices.csc_mat_INT64_t_FLOAT128_t cimport CSCSparseMatrix_INT64_t_FLOAT128_t
 
+from cysparse.sparse.sparse_utils.sort_indices_INT64_t cimport sort_array_INT64_t
+
 from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
 from cpython cimport PyObject
 
@@ -22,31 +24,7 @@ cdef extern from "Python.h":
     # *** Types ***
     int PyInt_Check(PyObject *o)
 
-cdef _sort(INT64_t * a, INT64_t start, INT64_t end):
-    """
-    Sort array a between start and end - 1 (i.e. end **not** included).
 
-
-    """
-    # TODO: put this is a new file and test
-    cdef INT64_t i, j, value;
-
-    i = start
-
-    while i < end:
-
-        value = a[i]
-        j = i - 1
-        while j >= start and a[j] > value:
-            # shift
-            a[j+1] = a[j]
-
-            j -= 1
-
-        # place key at right place
-        a[j+1] = value
-
-        i += 1
 
 cdef class CSRSparseMatrix_INT64_t_FLOAT128_t(ImmutableSparseMatrix_INT64_t_FLOAT128_t):
     """
@@ -129,7 +107,7 @@ cdef class CSRSparseMatrix_INT64_t_FLOAT128_t(ImmutableSparseMatrix_INT64_t_FLOA
                 if self.col[col_index] > self.col[col_index + 1]:
                     # sort
                     # TODO: maybe use the column index for optimization?
-                    _sort(self.col, col_index_start, col_index_stop)
+                    sort_array_INT64_t(self.col, col_index_start, col_index_stop)
                     break
                 else:
                     col_index += 1

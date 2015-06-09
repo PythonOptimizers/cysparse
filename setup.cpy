@@ -140,6 +140,10 @@ new_sparse_ext = [
             sources=["cysparse/sparse/sparse_utils/generate_indices_@index_type@.pxd",
                      "cysparse/sparse/sparse_utils/generate_indices_@index_type@.pyx"],
             **sparse_ext_params),
+  Extension(name="cysparse.sparse.sparse_utils.sort_indices_@index_type@",
+            sources=["cysparse/sparse/sparse_utils/sort_indices_@index_type@.pxd",
+                     "cysparse/sparse/sparse_utils/sort_indices_@index_type@.pyx"],
+            **sparse_ext_params),
 {% endfor %}
 
 {% for index_type in index_list %}

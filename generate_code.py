@@ -402,6 +402,9 @@ SPARSE_SPARSE_UTILS_GENERATE_INDICES_DEFINITION_FILES = [os.path.join(SPARSE_SPA
 SPARSE_SPARSE_UTILS_FIND_DECLARATION_FILES = [os.path.join(SPARSE_SPARSE_UTILS_TEMPLATE_DIR, 'find.cpd')]
 SPARSE_SPARSE_UTILS_FIND_DEFINITION_FILES = [os.path.join(SPARSE_SPARSE_UTILS_TEMPLATE_DIR, 'find.cpx')]
 
+SPARSE_SPARSE_UTILS_SORT_INDICES_DECLARATION_FILES = [os.path.join(SPARSE_SPARSE_UTILS_TEMPLATE_DIR, 'sort_indices.cpd')]
+SPARSE_SPARSE_UTILS_SORT_INDICES_DEFINITION_FILES = [os.path.join(SPARSE_SPARSE_UTILS_TEMPLATE_DIR, 'sort_indices.cpx')]
+
 
 #################################################################################################
 # SPARSE MATRICES
@@ -577,6 +580,11 @@ if __name__ == "__main__":
             generate_following_only_index(logger, SPARSE_SPARSE_UTILS_GENERATE_INDICES_DECLARATION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, INDEX_TYPES, '.pxd')
             generate_following_only_index(logger, SPARSE_SPARSE_UTILS_GENERATE_INDICES_DEFINITION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, INDEX_TYPES, '.pyx')
 
+            # sort_indices_@index@.pxd and sort_indices_@index@.pyx
+            generate_following_only_index(logger, SPARSE_SPARSE_UTILS_SORT_INDICES_DECLARATION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, INDEX_TYPES, '.pxd')
+            generate_following_only_index(logger, SPARSE_SPARSE_UTILS_SORT_INDICES_DEFINITION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, INDEX_TYPES, '.pyx')
+
+            # find_@index@_@type@.pxd and find_@index@_@type@.pyx
             generate_following_type_and_index(logger, SPARSE_SPARSE_UTILS_FIND_DECLARATION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, ELEMENT_TYPES, INDEX_TYPES, '.pxd')
             generate_following_type_and_index(logger, SPARSE_SPARSE_UTILS_FIND_DEFINITION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, ELEMENT_TYPES, INDEX_TYPES, '.pyx')
 
