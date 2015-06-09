@@ -614,7 +614,6 @@ cdef class LLSparseMatrix_@index@_@type@(MutableSparseMatrix_@index@_@type@):
         free(col_indexes)
 
         csc_mat = MakeCSCSparseMatrix_@index@_@type@(nrow=self.nrow, ncol=self.ncol, nnz=self.nnz, ind=ind, row=row, val=val, is_symmetric=self.is_symmetric)
-        csc_mat.is_symmetric = self.is_symmetric
 
         return csc_mat
 
