@@ -174,7 +174,6 @@ cdef class CSCSparseMatrix_@index@_@type@(ImmutableSparseMatrix_@index@_@type@):
 
         return diagonal
 
-
     ####################################################################################################################
     # Multiplication
     ####################################################################################################################
@@ -190,6 +189,21 @@ cdef class CSCSparseMatrix_@index@_@type@(ImmutableSparseMatrix_@index@_@type@):
         """
         return multiply_transposed_csc_mat_with_numpy_vector_@index@_@type@(self, B)
 
+    def matdot(self, B):
+        raise NotImplementedError("Multiplication with this kind of object not allowed")
+
+    def matdot_transp(self, B):
+        raise NotImplementedError("Multiplication with this kind of object not allowed")
+
+    def __mul__(self, B):
+        """
+        Return :math:`A * B`.
+
+        """
+        if cnp.PyArray_Check(B) and B.ndim == 1:
+            return self.matvec(B)
+
+        return self.matdot(B)
 
     ####################################################################################################################
     # String representations

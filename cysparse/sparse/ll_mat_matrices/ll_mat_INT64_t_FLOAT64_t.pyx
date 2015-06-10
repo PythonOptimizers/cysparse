@@ -1302,14 +1302,12 @@ cdef class LLSparseMatrix_INT64_t_FLOAT64_t(MutableSparseMatrix_INT64_t_FLOAT64_
 
         Cases:
 
-        - ``C = A * B`` where `B` is an ``LLSparseMatrix`` matrix. ``C`` is an ``LLSparseMatrix`` of same type.
+        - ``C = A * B`` where `B` is an ``LLSparseMatrix`` matrix. ``C`` is an ``LLSparseMatrix`` of same ``dtype``.
         - ``C = A * B`` where ``B`` is an :program:`NumPy` matrix. ``C`` is a dense :program:`NumPy` matrix. (not yet implemented).
         """
-        # TODO: refactor and put this in helpers...
         # CASES
         if PyLLSparseMatrix_Check(B):
             return multiply_two_ll_mat_INT64_t_FLOAT64_t(self, B)
-            #raise NotImplementedError("Multiplication with this kind of object not implemented yet...")
         elif cnp.PyArray_Check(B):
             # test type
             assert are_mixed_types_compatible(FLOAT64_T, B.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(FLOAT64_T)
@@ -1317,12 +1315,10 @@ cdef class LLSparseMatrix_INT64_t_FLOAT64_t(MutableSparseMatrix_INT64_t_FLOAT64_
             if B.ndim == 2:
                 #return multiply_ll_mat_with_numpy_ndarray(self, B)
                 raise NotImplementedError("Multiplication with this kind of object not implemented yet...")
-            elif B.ndim == 1:
-                return self.matvec(B)
             else:
                 raise IndexError("Matrix dimensions must agree")
         else:
-            raise NotImplementedError("Multiplication with this kind of object not implemented yet...")
+            raise NotImplementedError("Multiplication with this kind of object not allowed")
 
     def matdot_transp(self, B):
         """
@@ -1333,13 +1329,16 @@ cdef class LLSparseMatrix_INT64_t_FLOAT64_t(MutableSparseMatrix_INT64_t_FLOAT64_
         elif cnp.PyArray_Check(B):
             raise NotImplementedError("Multiplication with this kind of object not implemented yet...")
         else:
-            raise NotImplementedError("Multiplication with this kind of object not implemented yet...")
+            raise NotImplementedError("Multiplication with this kind of object not allowed")
 
     def __mul__(self, B):
         """
-        Return :math:`A * B`. See :meth:`matdot`.
+        Return :math:`A * B`.
 
         """
+        if cnp.PyArray_Check(B) and B.ndim == 1:
+            return self.matvec(B)
+
         return self.matdot(B)
 
     #def __rmul__(self, B):
@@ -1357,7 +1356,7 @@ cdef class LLSparseMatrix_INT64_t_FLOAT64_t(MutableSparseMatrix_INT64_t_FLOAT64_
     ####################################################################################################################
     def scale(self, FLOAT64_t sigma):
         """
-        Scale each element in the matrix by the constant ``sigma``.
+        Scale each element in the matrix by the constant ``sigma`` in place.
 
         Args:
             sigma:

@@ -171,7 +171,6 @@ cdef class CSCSparseMatrix_INT32_t_FLOAT32_t(ImmutableSparseMatrix_INT32_t_FLOAT
 
         return diagonal
 
-
     ####################################################################################################################
     # Multiplication
     ####################################################################################################################
@@ -187,6 +186,21 @@ cdef class CSCSparseMatrix_INT32_t_FLOAT32_t(ImmutableSparseMatrix_INT32_t_FLOAT
         """
         return multiply_transposed_csc_mat_with_numpy_vector_INT32_t_FLOAT32_t(self, B)
 
+    def matdot(self, B):
+        raise NotImplementedError("Multiplication with this kind of object not allowed")
+
+    def matdot_transp(self, B):
+        raise NotImplementedError("Multiplication with this kind of object not allowed")
+
+    def __mul__(self, B):
+        """
+        Return :math:`A * B`.
+
+        """
+        if cnp.PyArray_Check(B) and B.ndim == 1:
+            return self.matvec(B)
+
+        return self.matdot(B)
 
     ####################################################################################################################
     # String representations

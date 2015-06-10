@@ -109,12 +109,52 @@ cdef class SparseMatrix:
 
     # Multiplication
     def matvec(self, B):
+        """
+        Return ``A * B`` with ``B`` a :program:`NumPy` vector.
+
+        Args:
+            B: A :program:`NumPy` vector.
+
+        """
         raise NotImplementedError("Operation not implemented (yet). Please report.")
 
     def matvec_transp(self, B):
+        """
+        Return ``A^t * B`` with ``B`` a :program:`NumPy` vector.
+
+        Args:
+            B: A :program:`NumPy` vector.
+
+        """
+
         raise NotImplementedError("Operation not implemented (yet). Please report.")
+
+    def matdot(self, B):
+        """
+        Return ``A * B``.
+
+        Args:
+            B:
+
+        """
+        raise NotImplementedError("Operation not implemented (yet). Please report.")
+
+    def matdot_transp(self, B):
+        """
+        Return ``A^t * B``.
+
+        Args:
+            B:
+
+        """
+        raise NotImplementedError("Operation not implemented (yet). Please report.")
+
 
     # Copy
     def copy(self):
+        """
+        Return a **deep** copy of itself.
+
+        """
         raise NotImplementedError("Operation not implemented (yet). Please report.")
 
