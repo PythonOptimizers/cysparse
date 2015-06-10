@@ -106,22 +106,22 @@ cdef cnp.ndarray[cnp.npy_float128, ndim=1, mode='c'] multiply_transposed_csr_mat
     cdef FLOAT128_t * c_data = <FLOAT128_t *> cnp.PyArray_DATA(c)
 
     # test if b vector is C-contiguous or not
-    #if cnp.PyArray_ISCONTIGUOUS(b):
-    #    if A.is_symmetric:
-    #        multiply_sym_csr_mat_with_numpy_vector_kernel_INT64_t_FLOAT128_t(A_nrow, A_ncol, b_data, c_data, A.val, A.col, A.ind)
-    #    else:
-    #        multiply_tranposed_csr_mat_with_numpy_vector_kernel_INT64_t_FLOAT128_t(A_nrow, A_ncol, b_data, c_data,
-    #     A.val, A.col, A.ind)
-    #else:
-    #    if A.is_symmetric:
-    #        multiply_sym_csr_mat_with_strided_numpy_vector_kernel_INT64_t_FLOAT128_t(A.nrow, A_ncol,
-    #                                                             b_data, b.strides[0] / sd,
-    #                                                             c_data, c.strides[0] / sd,
-    #                                                             A.val, A.col, A.ind)
-    #    else:
-    #        multiply_tranposed_csr_mat_with_strided_numpy_vector_kernel_INT64_t_FLOAT128_t(A_nrow, A_ncol,
-    #                                                                                  b_data, b.strides[0] / sd,
-    #                                                                                  c_data, c.strides[0] / sd,
-    #                                                                                  A.val, A.col, A.ind)
+    if cnp.PyArray_ISCONTIGUOUS(b):
+        if A.is_symmetric:
+            multiply_sym_csr_mat_with_numpy_vector_kernel_INT64_t_FLOAT128_t(A_nrow, b_data, c_data, A.val, A.col, A.ind)
+        else:
+            multiply_tranposed_csr_mat_with_numpy_vector_kernel_INT64_t_FLOAT128_t(A_nrow, A_ncol, b_data, c_data,
+         A.val, A.col, A.ind)
+    else:
+        if A.is_symmetric:
+            multiply_sym_csr_mat_with_strided_numpy_vector_kernel_INT64_t_FLOAT128_t(A.nrow,
+                                                                 b_data, b.strides[0] / sd,
+                                                                 c_data, c.strides[0] / sd,
+                                                                 A.val, A.col, A.ind)
+        else:
+            multiply_tranposed_csr_mat_with_strided_numpy_vector_kernel_INT64_t_FLOAT128_t(A_nrow, A_ncol,
+                                                                                      b_data, b.strides[0] / sd,
+                                                                                      c_data, c.strides[0] / sd,
+                                                                                      A.val, A.col, A.ind)
 
     return c
