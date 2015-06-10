@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 """
-This file tests the **transposed** multiplication of an :class:`CSRSparseMatrix` matricix with a :program:`NumPy` vector.
+This file tests the **transposed** multiplication of an :class:`CSRSparseMatrix` matrix with a :program:`NumPy` vector.
 
 We test **all** types and the symmetric and general cases. We also test strided vectors.
 We only use the real parts of complex numbers.

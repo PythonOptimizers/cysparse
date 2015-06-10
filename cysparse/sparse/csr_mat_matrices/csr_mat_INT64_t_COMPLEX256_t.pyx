@@ -392,6 +392,7 @@ cdef MakeCSRSparseMatrix_INT64_t_COMPLEX256_t(INT64_t nrow, INT64_t ncol, INT64_
         ind (INT64_t *): C-array with column indices pointers.
         col  (INT64_t *): C-array with column indices.
         val  (COMPLEX256_t *): C-array with values.
+        is_symmetric (boolean): Is matrix symmetrix or not?
     """
 
     csr_mat = CSRSparseMatrix_INT64_t_COMPLEX256_t(control_object=unexposed_value, nrow=nrow, ncol=ncol, nnz=nnz, is_symmetric=is_symmetric)
@@ -405,6 +406,7 @@ cdef MakeCSRSparseMatrix_INT64_t_COMPLEX256_t(INT64_t nrow, INT64_t ncol, INT64_
 ########################################################################################################################
 # Multiplication functions
 ########################################################################################################################
+# TODO: put in helpers...
 cdef LLSparseMatrix_INT64_t_COMPLEX256_t multiply_csr_mat_by_csc_mat_INT64_t_COMPLEX256_t(CSRSparseMatrix_INT64_t_COMPLEX256_t A, CSCSparseMatrix_INT64_t_COMPLEX256_t B):
 
     if A.is_complex or B.is_complex:

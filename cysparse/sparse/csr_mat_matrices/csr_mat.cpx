@@ -400,6 +400,7 @@ cdef MakeCSRSparseMatrix_@index@_@type@(@index@ nrow, @index@ ncol, @index@ nnz,
         ind (@index@ *): C-array with column indices pointers.
         col  (@index@ *): C-array with column indices.
         val  (@type@ *): C-array with values.
+        is_symmetric (boolean): Is matrix symmetrix or not?
     """
 
     csr_mat = CSRSparseMatrix_@index@_@type@(control_object=unexposed_value, nrow=nrow, ncol=ncol, nnz=nnz, is_symmetric=is_symmetric)
@@ -413,6 +414,7 @@ cdef MakeCSRSparseMatrix_@index@_@type@(@index@ nrow, @index@ ncol, @index@ nnz,
 ########################################################################################################################
 # Multiplication functions
 ########################################################################################################################
+# TODO: put in helpers...
 cdef LLSparseMatrix_@index@_@type@ multiply_csr_mat_by_csc_mat_@index@_@type@(CSRSparseMatrix_@index@_@type@ A, CSCSparseMatrix_@index@_@type@ B):
 
     if A.is_complex or B.is_complex:

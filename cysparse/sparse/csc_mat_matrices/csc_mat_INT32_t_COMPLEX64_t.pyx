@@ -81,6 +81,7 @@ cdef class CSCSparseMatrix_INT32_t_COMPLEX64_t(ImmutableSparseMatrix_INT32_t_COM
             INT32_t real_i
             INT32_t real_j
 
+        # code is duplicated for optimization
         if self.is_symmetric:
             # TODO: column indices are NOT necessarily sorted... what do we do about it?
             if i < j:
