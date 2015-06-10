@@ -137,7 +137,7 @@ class CySparseCSRCreationFromLLSparseMatrixTestCase(CySparseCSRCreationBaseTestC
 
     def test_elements_one_by_one(self):
         """
-        We test if both :class:`LLSparseMatrix` and corresponding :class:`CSRSparseMatrix` are equal, element by elmeent.
+        We test if both :class:`LLSparseMatrix` and corresponding :class:`CSRSparseMatrix` are equal, element by element.
         """
 
   

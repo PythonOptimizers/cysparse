@@ -50,17 +50,17 @@ cdef cnp.ndarray[cnp.npy_float32, ndim=1, mode='c'] multiply_csr_mat_with_numpy_
             multiply_sym_csr_mat_with_numpy_vector_kernel_INT32_t_FLOAT32_t(A_nrow, b_data, c_data, A.val, A.col, A.ind)
         else:
             multiply_csr_mat_with_numpy_vector_kernel_INT32_t_FLOAT32_t(A_nrow, b_data, c_data, A.val, A.col, A.ind)
-    #else:
-    #    if A.is_symmetric:
-    #        multiply_sym_csr_mat_with_strided_numpy_vector_kernel_INT32_t_FLOAT32_t(A.nrow, A.ncol,
-    #                                                             b_data, b.strides[0] / sd,
-    #                                                             c_data, c.strides[0] / sd,
-    #                                                             A.val, A.col, A.ind)
-    #    else:
-    #        multiply_csr_mat_with_strided_numpy_vector_kernel_INT32_t_FLOAT32_t(A.nrow, A.ncol,
-    #                                                         b_data, b.strides[0] / sd,
-    #                                                         c_data, c.strides[0] / sd,
-    #                                                         A.val, A.col, A.ind)
+    else:
+        if A.is_symmetric:
+            multiply_sym_csr_mat_with_strided_numpy_vector_kernel_INT32_t_FLOAT32_t(A.nrow,
+                                                                 b_data, b.strides[0] / sd,
+                                                                 c_data, c.strides[0] / sd,
+                                                                 A.val, A.col, A.ind)
+        else:
+            multiply_csr_mat_with_strided_numpy_vector_kernel_INT32_t_FLOAT32_t(A.nrow,
+                                                             b_data, b.strides[0] / sd,
+                                                             c_data, c.strides[0] / sd,
+                                                             A.val, A.col, A.ind)
 
     return c
 

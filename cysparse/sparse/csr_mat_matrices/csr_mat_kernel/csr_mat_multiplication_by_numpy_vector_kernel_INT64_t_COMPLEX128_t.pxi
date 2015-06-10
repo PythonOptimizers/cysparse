@@ -99,3 +99,85 @@ cdef void multiply_sym_csr_mat_with_numpy_vector_kernel_INT64_t_COMPLEX128_t(INT
             y[i] += val[k] * x[j]
             if i != j:
                 y[j] += val[k] * x[i]
+
+###########################################
+# Non C-contiguous, non symmetric
+###########################################
+cdef void multiply_csr_mat_with_strided_numpy_vector_kernel_INT64_t_COMPLEX128_t(INT64_t m,
+            COMPLEX128_t *x, INT64_t incx,
+            COMPLEX128_t *y, INT64_t incy,
+            COMPLEX128_t *val, INT64_t *col, INT64_t *ind):
+    """
+    Compute ``y = A * x``.
+
+    ``A`` is :class:`CSRSparseMatrix` and ``x`` and ``y`` are one dimensional **non** C-contiguous numpy arrays.
+    In this kernel function, we only use the corresponding C-arrays.
+
+    Warning:
+        This version consider *both* numpy arrays as **non** C-contiguous (**with** strides).
+
+    Args:
+        m: Number of rows of the matrix ``A``.
+        x: C-contiguous C-array corresponding to vector ``x``.
+        incx: Stride for array ``x``.
+        y: C-contiguous C-array corresponding to vector ``y``.
+        incy: Stride for array ``y``.
+        val: C-contiguous C-array corresponding to vector ``A.val``.
+        col: C-contiguous C-array corresponding to vector ``A.col``.
+        ind: C-contiguous C-array corresponding to vector ``A.ind``.
+    """
+    cdef:
+        COMPLEX128_t s
+        INT64_t i, j, k
+
+    for i from 0 <= i < m:
+
+        s = <COMPLEX128_t>(0.0+0.0j)
+
+        for k from ind[i] <= k < ind[i+1]:
+            s += val[k] * x[col[k] * incx]
+
+        y[i* incy] = s
+
+
+###########################################
+# Non C-contiguous, symmetric
+###########################################
+cdef void multiply_sym_csr_mat_with_strided_numpy_vector_kernel_INT64_t_COMPLEX128_t(INT64_t m,
+                COMPLEX128_t *x, INT64_t incx,
+                COMPLEX128_t *y, INT64_t incy,
+                COMPLEX128_t *val, INT64_t *col, INT64_t *ind):
+    """
+    Compute ``y = A * x``.
+
+    ``A`` is a **symmetric** :class:`CSRSparseMatrix` and ``x`` and ``y`` are one dimensional **non** C-contiguous numpy arrays.
+    In this kernel function, we only use the corresponding C-arrays.
+
+    Warning:
+        This version consider *both* numpy arrays as **non** C-contiguous (**with** strides).
+
+    Args:
+        m: Number of rows of the matrix ``A``.
+        x: C-contiguous C-array corresponding to vector ``x``.
+        incx: Stride for array ``x``.
+        y: C-contiguous C-array corresponding to vector ``y``.
+        incy: Stride for array ``y``.
+        val: C-contiguous C-array corresponding to vector ``A.val``.
+        col: C-contiguous C-array corresponding to vector ``A.col``.
+        ind: C-contiguous C-array corresponding to vector ``A.ind``.
+    """
+    cdef:
+        INT64_t i, j, k
+
+    # init numpy array
+    for i from 0 <= i < m:
+
+        y[i] = <COMPLEX128_t>(0.0+0.0j)
+
+
+    for i from 0 <= i < m:
+        for k from ind[i] <= k < ind[i+1]:
+            j = col[k]
+            y[i * incy] += val[k] * x[j * incx]
+            if i != j:
+                y[j * incy] += val[k] * x[i * incx]

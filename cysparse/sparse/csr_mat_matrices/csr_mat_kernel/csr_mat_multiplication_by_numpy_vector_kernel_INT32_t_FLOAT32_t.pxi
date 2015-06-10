@@ -99,3 +99,85 @@ cdef void multiply_sym_csr_mat_with_numpy_vector_kernel_INT32_t_FLOAT32_t(INT32_
             y[i] += val[k] * x[j]
             if i != j:
                 y[j] += val[k] * x[i]
+
+###########################################
+# Non C-contiguous, non symmetric
+###########################################
+cdef void multiply_csr_mat_with_strided_numpy_vector_kernel_INT32_t_FLOAT32_t(INT32_t m,
+            FLOAT32_t *x, INT32_t incx,
+            FLOAT32_t *y, INT32_t incy,
+            FLOAT32_t *val, INT32_t *col, INT32_t *ind):
+    """
+    Compute ``y = A * x``.
+
+    ``A`` is :class:`CSRSparseMatrix` and ``x`` and ``y`` are one dimensional **non** C-contiguous numpy arrays.
+    In this kernel function, we only use the corresponding C-arrays.
+
+    Warning:
+        This version consider *both* numpy arrays as **non** C-contiguous (**with** strides).
+
+    Args:
+        m: Number of rows of the matrix ``A``.
+        x: C-contiguous C-array corresponding to vector ``x``.
+        incx: Stride for array ``x``.
+        y: C-contiguous C-array corresponding to vector ``y``.
+        incy: Stride for array ``y``.
+        val: C-contiguous C-array corresponding to vector ``A.val``.
+        col: C-contiguous C-array corresponding to vector ``A.col``.
+        ind: C-contiguous C-array corresponding to vector ``A.ind``.
+    """
+    cdef:
+        FLOAT32_t s
+        INT32_t i, j, k
+
+    for i from 0 <= i < m:
+
+        s = <FLOAT32_t>0.0
+
+        for k from ind[i] <= k < ind[i+1]:
+            s += val[k] * x[col[k] * incx]
+
+        y[i* incy] = s
+
+
+###########################################
+# Non C-contiguous, symmetric
+###########################################
+cdef void multiply_sym_csr_mat_with_strided_numpy_vector_kernel_INT32_t_FLOAT32_t(INT32_t m,
+                FLOAT32_t *x, INT32_t incx,
+                FLOAT32_t *y, INT32_t incy,
+                FLOAT32_t *val, INT32_t *col, INT32_t *ind):
+    """
+    Compute ``y = A * x``.
+
+    ``A`` is a **symmetric** :class:`CSRSparseMatrix` and ``x`` and ``y`` are one dimensional **non** C-contiguous numpy arrays.
+    In this kernel function, we only use the corresponding C-arrays.
+
+    Warning:
+        This version consider *both* numpy arrays as **non** C-contiguous (**with** strides).
+
+    Args:
+        m: Number of rows of the matrix ``A``.
+        x: C-contiguous C-array corresponding to vector ``x``.
+        incx: Stride for array ``x``.
+        y: C-contiguous C-array corresponding to vector ``y``.
+        incy: Stride for array ``y``.
+        val: C-contiguous C-array corresponding to vector ``A.val``.
+        col: C-contiguous C-array corresponding to vector ``A.col``.
+        ind: C-contiguous C-array corresponding to vector ``A.ind``.
+    """
+    cdef:
+        INT32_t i, j, k
+
+    # init numpy array
+    for i from 0 <= i < m:
+
+        y[i] = <FLOAT32_t>0.0
+
+
+    for i from 0 <= i < m:
+        for k from ind[i] <= k < ind[i+1]:
+            j = col[k]
+            y[i * incy] += val[k] * x[j * incx]
+            if i != j:
+                y[j * incy] += val[k] * x[i * incx]
