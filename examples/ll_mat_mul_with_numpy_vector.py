@@ -3,11 +3,11 @@ import cysparse.types.cysparse_types as types
 import numpy as np
 import sys
 
-l1 = NewLLSparseMatrix(nrow=3, ncol=3, size_hint=4)
+l1 = NewLLSparseMatrix(nrow=3, ncol=3, size_hint=4, is_symmetric=True)
 print l1
 print type(l1)
 
-l1.put_triplet([1,1], [1, 2], [5.6, 6.7])
+l1.put_triplet([2,1], [1, 1], [5.6, 6.7])
 l1.print_to(sys.stdout)
 
 l1_csc = l1.to_csc()

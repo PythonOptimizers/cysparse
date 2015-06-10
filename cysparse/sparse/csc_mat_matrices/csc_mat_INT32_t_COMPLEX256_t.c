@@ -1203,6 +1203,10 @@ static CYTHON_INLINE PyObject *__Pyx_GetModuleGlobalName(PyObject *name);
 
 static CYTHON_INLINE int __Pyx_TypeTest(PyObject *obj, PyTypeObject *type);
 
+#ifndef __PYX_FORCE_INIT_THREADS
+  #define __PYX_FORCE_INIT_THREADS 0
+#endif
+
 static void __Pyx_RaiseArgtupleInvalid(const char* func_name, int exact,
     Py_ssize_t num_min, Py_ssize_t num_max, Py_ssize_t num_found);
 
@@ -1628,7 +1632,12 @@ static PyTypeObject *__pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_IN
 static PyTypeObject *__pyx_ptype_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX256_t_CSCSparseMatrix_INT32_t_COMPLEX256_t = 0;
 static int __pyx_v_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX256_t_CSC_MAT_PPRINT_ROW_THRESH;
 static int __pyx_v_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX256_t_CSC_MAT_PPRINT_COL_THRESH;
-static void __pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX256_t_multiply_csc_mat_with_numpy_vector_kernel_INT32_t_COMPLEX256_t(__pyx_t_8cysparse_5types_14cysparse_types_INT32_t, __pyx_t_long_double_complex *, __pyx_t_long_double_complex *, __pyx_t_long_double_complex *, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *); /*proto*/
+static void __pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX256_t_multiply_csc_mat_with_numpy_vector_kernel_INT32_t_COMPLEX256_t(__pyx_t_8cysparse_5types_14cysparse_types_INT32_t, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t, __pyx_t_long_double_complex *, __pyx_t_long_double_complex *, __pyx_t_long_double_complex *, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *); /*proto*/
+static void __pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX256_t_multiply_sym_csc_mat_with_numpy_vector_kernel_INT32_t_COMPLEX256_t(__pyx_t_8cysparse_5types_14cysparse_types_INT32_t, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t, __pyx_t_long_double_complex *, __pyx_t_long_double_complex *, __pyx_t_long_double_complex *, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *); /*proto*/
+static void __pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX256_t_multiply_csc_mat_with_strided_numpy_vector_kernel_INT32_t_COMPLEX256_t(__pyx_t_8cysparse_5types_14cysparse_types_INT32_t, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t, __pyx_t_long_double_complex *, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t, __pyx_t_long_double_complex *, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t, __pyx_t_long_double_complex *, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *); /*proto*/
+static void __pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX256_t_multiply_sym_csc_mat_with_strided_numpy_vector_kernel_INT32_t_COMPLEX256_t(__pyx_t_8cysparse_5types_14cysparse_types_INT32_t, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t, __pyx_t_long_double_complex *, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t, __pyx_t_long_double_complex *, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t, __pyx_t_long_double_complex *, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *); /*proto*/
+static void __pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX256_t_multiply_tranposed_csc_mat_with_numpy_vector_kernel_INT32_t_COMPLEX256_t(__pyx_t_8cysparse_5types_14cysparse_types_INT32_t, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t, __pyx_t_long_double_complex *, __pyx_t_long_double_complex *, __pyx_t_long_double_complex *, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *); /*proto*/
+static void __pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX256_t_multiply_tranposed_csc_mat_with_strided_numpy_vector_kernel_INT32_t_COMPLEX256_t(__pyx_t_8cysparse_5types_14cysparse_types_INT32_t, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t, __pyx_t_long_double_complex *, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t, __pyx_t_long_double_complex *, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t, __pyx_t_long_double_complex *, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *); /*proto*/
 static PyArrayObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX256_t_multiply_csc_mat_with_numpy_vector_INT32_t_COMPLEX256_t(struct __pyx_obj_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX256_t_CSCSparseMatrix_INT32_t_COMPLEX256_t *, PyArrayObject *); /*proto*/
 static __Pyx_TypeInfo __Pyx_TypeInfo_double = { "double", NULL, sizeof(double), { 0 }, 0, 'R', 0, 0 };
 static __Pyx_StructField __Pyx_StructFields_nn_npy_complex256[] = {
@@ -1798,12 +1807,12 @@ static PyObject *__pyx_tuple__15;
 /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX256_t.pxi":11
  * # C-contiguous, no symmetric
  * ###########################################
- * cdef void multiply_csc_mat_with_numpy_vector_kernel_INT32_t_COMPLEX256_t(INT32_t n, COMPLEX256_t *x, COMPLEX256_t *y,             # <<<<<<<<<<<<<<
+ * cdef void multiply_csc_mat_with_numpy_vector_kernel_INT32_t_COMPLEX256_t(INT32_t m, INT32_t n, COMPLEX256_t *x, COMPLEX256_t *y,             # <<<<<<<<<<<<<<
  *          COMPLEX256_t *val, INT32_t *row, INT32_t *ind):
  *     """
  */
 
-static void __pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX256_t_multiply_csc_mat_with_numpy_vector_kernel_INT32_t_COMPLEX256_t(__pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_n, __pyx_t_long_double_complex *__pyx_v_x, __pyx_t_long_double_complex *__pyx_v_y, __pyx_t_long_double_complex *__pyx_v_val, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *__pyx_v_row, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *__pyx_v_ind) {
+static void __pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX256_t_multiply_csc_mat_with_numpy_vector_kernel_INT32_t_COMPLEX256_t(__pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_m, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_n, __pyx_t_long_double_complex *__pyx_v_x, __pyx_t_long_double_complex *__pyx_v_y, __pyx_t_long_double_complex *__pyx_v_val, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *__pyx_v_row, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *__pyx_v_ind) {
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_i;
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_j;
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_k;
@@ -1817,22 +1826,22 @@ static void __pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPL
   /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX256_t.pxi":35
  * 
  *     # init numpy array
- *     for j from 0 <= j < n:             # <<<<<<<<<<<<<<
+ *     for i from 0 <= i < m:             # <<<<<<<<<<<<<<
  * 
- *         y[j] = <COMPLEX256_t>(0.0+0.0j)
+ *         y[i] = <COMPLEX256_t>(0.0+0.0j)
  */
-  __pyx_t_1 = __pyx_v_n;
-  for (__pyx_v_j = 0; __pyx_v_j < __pyx_t_1; __pyx_v_j++) {
+  __pyx_t_1 = __pyx_v_m;
+  for (__pyx_v_i = 0; __pyx_v_i < __pyx_t_1; __pyx_v_i++) {
 
     /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX256_t.pxi":37
- *     for j from 0 <= j < n:
+ *     for i from 0 <= i < m:
  * 
- *         y[j] = <COMPLEX256_t>(0.0+0.0j)             # <<<<<<<<<<<<<<
+ *         y[i] = <COMPLEX256_t>(0.0+0.0j)             # <<<<<<<<<<<<<<
  * 
  * 
  */
     __pyx_t_2 = __Pyx_c_sum(__pyx_t_double_complex_from_parts(0.0, 0), __pyx_t_double_complex_from_parts(0, 0.0));
-    (__pyx_v_y[__pyx_v_j]) = __pyx_t_long_double_complex_from_parts(((long double)__Pyx_CREAL(__pyx_t_2)), ((long double)__Pyx_CIMAG(__pyx_t_2)));
+    (__pyx_v_y[__pyx_v_i]) = __pyx_t_long_double_complex_from_parts(((long double)__Pyx_CREAL(__pyx_t_2)), ((long double)__Pyx_CIMAG(__pyx_t_2)));
   }
 
   /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX256_t.pxi":41
@@ -1860,6 +1869,7 @@ static void __pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPL
  *         for k from ind[j]<= k < ind[j+1]:
  *             i = row[k]             # <<<<<<<<<<<<<<
  *             y[i] += val[k] * x[i]
+ * 
  */
       __pyx_v_i = (__pyx_v_row[__pyx_v_k]);
 
@@ -1867,6 +1877,8 @@ static void __pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPL
  *         for k from ind[j]<= k < ind[j+1]:
  *             i = row[k]
  *             y[i] += val[k] * x[i]             # <<<<<<<<<<<<<<
+ * 
+ * 
  */
       __pyx_t_4 = __pyx_v_i;
       (__pyx_v_y[__pyx_t_4]) = __Pyx_c_suml((__pyx_v_y[__pyx_t_4]), __Pyx_c_prodl((__pyx_v_val[__pyx_v_k]), (__pyx_v_x[__pyx_v_i])));
@@ -1876,7 +1888,492 @@ static void __pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPL
   /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX256_t.pxi":11
  * # C-contiguous, no symmetric
  * ###########################################
- * cdef void multiply_csc_mat_with_numpy_vector_kernel_INT32_t_COMPLEX256_t(INT32_t n, COMPLEX256_t *x, COMPLEX256_t *y,             # <<<<<<<<<<<<<<
+ * cdef void multiply_csc_mat_with_numpy_vector_kernel_INT32_t_COMPLEX256_t(INT32_t m, INT32_t n, COMPLEX256_t *x, COMPLEX256_t *y,             # <<<<<<<<<<<<<<
+ *          COMPLEX256_t *val, INT32_t *row, INT32_t *ind):
+ *     """
+ */
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+}
+
+/* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX256_t.pxi":50
+ * # C-contiguous, symmetric
+ * ###########################################
+ * cdef void multiply_sym_csc_mat_with_numpy_vector_kernel_INT32_t_COMPLEX256_t(INT32_t m, INT32_t n, COMPLEX256_t *x, COMPLEX256_t *y,             # <<<<<<<<<<<<<<
+ *              COMPLEX256_t *val, INT32_t *row, INT32_t *ind):
+ *     """
+ */
+
+static void __pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX256_t_multiply_sym_csc_mat_with_numpy_vector_kernel_INT32_t_COMPLEX256_t(__pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_m, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_n, __pyx_t_long_double_complex *__pyx_v_x, __pyx_t_long_double_complex *__pyx_v_y, __pyx_t_long_double_complex *__pyx_v_val, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *__pyx_v_row, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *__pyx_v_ind) {
+  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_i;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_j;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_k;
+  __Pyx_RefNannyDeclarations
+  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_t_1;
+  __pyx_t_double_complex __pyx_t_2;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_t_3;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_t_4;
+  int __pyx_t_5;
+  __Pyx_RefNannySetupContext("multiply_sym_csc_mat_with_numpy_vector_kernel_INT32_t_COMPLEX256_t", 0);
+
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX256_t.pxi":74
+ * 
+ *     # init numpy array
+ *     for i from 0 <= i < m:             # <<<<<<<<<<<<<<
+ * 
+ *         y[i] = <COMPLEX256_t>(0.0+0.0j)
+ */
+  __pyx_t_1 = __pyx_v_m;
+  for (__pyx_v_i = 0; __pyx_v_i < __pyx_t_1; __pyx_v_i++) {
+
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX256_t.pxi":76
+ *     for i from 0 <= i < m:
+ * 
+ *         y[i] = <COMPLEX256_t>(0.0+0.0j)             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+    __pyx_t_2 = __Pyx_c_sum(__pyx_t_double_complex_from_parts(0.0, 0), __pyx_t_double_complex_from_parts(0, 0.0));
+    (__pyx_v_y[__pyx_v_i]) = __pyx_t_long_double_complex_from_parts(((long double)__Pyx_CREAL(__pyx_t_2)), ((long double)__Pyx_CIMAG(__pyx_t_2)));
+  }
+
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX256_t.pxi":80
+ * 
+ *     # multiplication, column-wise...
+ *     for j from 0 <= j < n:             # <<<<<<<<<<<<<<
+ *         for k from ind[j]<= k < ind[j+1]:
+ *             i = row[k]
+ */
+  __pyx_t_1 = __pyx_v_n;
+  for (__pyx_v_j = 0; __pyx_v_j < __pyx_t_1; __pyx_v_j++) {
+
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX256_t.pxi":81
+ *     # multiplication, column-wise...
+ *     for j from 0 <= j < n:
+ *         for k from ind[j]<= k < ind[j+1]:             # <<<<<<<<<<<<<<
+ *             i = row[k]
+ *             y[i] += val[k] * x[i]
+ */
+    __pyx_t_3 = (__pyx_v_ind[(__pyx_v_j + 1)]);
+    for (__pyx_v_k = (__pyx_v_ind[__pyx_v_j]); __pyx_v_k < __pyx_t_3; __pyx_v_k++) {
+
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX256_t.pxi":82
+ *     for j from 0 <= j < n:
+ *         for k from ind[j]<= k < ind[j+1]:
+ *             i = row[k]             # <<<<<<<<<<<<<<
+ *             y[i] += val[k] * x[i]
+ *             if j != i:
+ */
+      __pyx_v_i = (__pyx_v_row[__pyx_v_k]);
+
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX256_t.pxi":83
+ *         for k from ind[j]<= k < ind[j+1]:
+ *             i = row[k]
+ *             y[i] += val[k] * x[i]             # <<<<<<<<<<<<<<
+ *             if j != i:
+ *                 y[j] += val[k] * x[j]
+ */
+      __pyx_t_4 = __pyx_v_i;
+      (__pyx_v_y[__pyx_t_4]) = __Pyx_c_suml((__pyx_v_y[__pyx_t_4]), __Pyx_c_prodl((__pyx_v_val[__pyx_v_k]), (__pyx_v_x[__pyx_v_i])));
+
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX256_t.pxi":84
+ *             i = row[k]
+ *             y[i] += val[k] * x[i]
+ *             if j != i:             # <<<<<<<<<<<<<<
+ *                 y[j] += val[k] * x[j]
+ * 
+ */
+      __pyx_t_5 = ((__pyx_v_j != __pyx_v_i) != 0);
+      if (__pyx_t_5) {
+
+        /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX256_t.pxi":85
+ *             y[i] += val[k] * x[i]
+ *             if j != i:
+ *                 y[j] += val[k] * x[j]             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+        __pyx_t_4 = __pyx_v_j;
+        (__pyx_v_y[__pyx_t_4]) = __Pyx_c_suml((__pyx_v_y[__pyx_t_4]), __Pyx_c_prodl((__pyx_v_val[__pyx_v_k]), (__pyx_v_x[__pyx_v_j])));
+        goto __pyx_L9;
+      }
+      __pyx_L9:;
+    }
+  }
+
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX256_t.pxi":50
+ * # C-contiguous, symmetric
+ * ###########################################
+ * cdef void multiply_sym_csc_mat_with_numpy_vector_kernel_INT32_t_COMPLEX256_t(INT32_t m, INT32_t n, COMPLEX256_t *x, COMPLEX256_t *y,             # <<<<<<<<<<<<<<
+ *              COMPLEX256_t *val, INT32_t *row, INT32_t *ind):
+ *     """
+ */
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+}
+
+/* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX256_t.pxi":91
+ * # Non C-contiguous, non symmetric
+ * ###########################################
+ * cdef void multiply_csc_mat_with_strided_numpy_vector_kernel_INT32_t_COMPLEX256_t(INT32_t m, INT32_t n,             # <<<<<<<<<<<<<<
+ *             COMPLEX256_t *x, INT32_t incx,
+ *             COMPLEX256_t *y, INT32_t incy,
+ */
+
+static void __pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX256_t_multiply_csc_mat_with_strided_numpy_vector_kernel_INT32_t_COMPLEX256_t(__pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_m, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_n, __pyx_t_long_double_complex *__pyx_v_x, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_incx, __pyx_t_long_double_complex *__pyx_v_y, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_incy, __pyx_t_long_double_complex *__pyx_v_val, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *__pyx_v_row, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *__pyx_v_ind) {
+  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_i;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_j;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_k;
+  __Pyx_RefNannyDeclarations
+  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_t_1;
+  __pyx_t_double_complex __pyx_t_2;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_t_3;
+  int __pyx_t_4;
+  __Pyx_RefNannySetupContext("multiply_csc_mat_with_strided_numpy_vector_kernel_INT32_t_COMPLEX256_t", 0);
+
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX256_t.pxi":119
+ * 
+ *     # init numpy array
+ *     for i from 0 <= i < m:             # <<<<<<<<<<<<<<
+ * 
+ *         y[i * incy] = <COMPLEX256_t>(0.0+0.0j)
+ */
+  __pyx_t_1 = __pyx_v_m;
+  for (__pyx_v_i = 0; __pyx_v_i < __pyx_t_1; __pyx_v_i++) {
+
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX256_t.pxi":121
+ *     for i from 0 <= i < m:
+ * 
+ *         y[i * incy] = <COMPLEX256_t>(0.0+0.0j)             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+    __pyx_t_2 = __Pyx_c_sum(__pyx_t_double_complex_from_parts(0.0, 0), __pyx_t_double_complex_from_parts(0, 0.0));
+    (__pyx_v_y[(__pyx_v_i * __pyx_v_incy)]) = __pyx_t_long_double_complex_from_parts(((long double)__Pyx_CREAL(__pyx_t_2)), ((long double)__Pyx_CIMAG(__pyx_t_2)));
+  }
+
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX256_t.pxi":125
+ * 
+ *     # multiplication, column-wise...
+ *     for j from 0 <= j < n:             # <<<<<<<<<<<<<<
+ *         for k from ind[j]<= k < ind[j+1]:
+ *             i = row[k]
+ */
+  __pyx_t_1 = __pyx_v_n;
+  for (__pyx_v_j = 0; __pyx_v_j < __pyx_t_1; __pyx_v_j++) {
+
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX256_t.pxi":126
+ *     # multiplication, column-wise...
+ *     for j from 0 <= j < n:
+ *         for k from ind[j]<= k < ind[j+1]:             # <<<<<<<<<<<<<<
+ *             i = row[k]
+ *             y[i * incy] += val[k] * x[i * incx]
+ */
+    __pyx_t_3 = (__pyx_v_ind[(__pyx_v_j + 1)]);
+    for (__pyx_v_k = (__pyx_v_ind[__pyx_v_j]); __pyx_v_k < __pyx_t_3; __pyx_v_k++) {
+
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX256_t.pxi":127
+ *     for j from 0 <= j < n:
+ *         for k from ind[j]<= k < ind[j+1]:
+ *             i = row[k]             # <<<<<<<<<<<<<<
+ *             y[i * incy] += val[k] * x[i * incx]
+ * 
+ */
+      __pyx_v_i = (__pyx_v_row[__pyx_v_k]);
+
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX256_t.pxi":128
+ *         for k from ind[j]<= k < ind[j+1]:
+ *             i = row[k]
+ *             y[i * incy] += val[k] * x[i * incx]             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+      __pyx_t_4 = (__pyx_v_i * __pyx_v_incy);
+      (__pyx_v_y[__pyx_t_4]) = __Pyx_c_suml((__pyx_v_y[__pyx_t_4]), __Pyx_c_prodl((__pyx_v_val[__pyx_v_k]), (__pyx_v_x[(__pyx_v_i * __pyx_v_incx)])));
+    }
+  }
+
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX256_t.pxi":91
+ * # Non C-contiguous, non symmetric
+ * ###########################################
+ * cdef void multiply_csc_mat_with_strided_numpy_vector_kernel_INT32_t_COMPLEX256_t(INT32_t m, INT32_t n,             # <<<<<<<<<<<<<<
+ *             COMPLEX256_t *x, INT32_t incx,
+ *             COMPLEX256_t *y, INT32_t incy,
+ */
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+}
+
+/* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX256_t.pxi":134
+ * # Non C-contiguous, symmetric
+ * ###########################################
+ * cdef void multiply_sym_csc_mat_with_strided_numpy_vector_kernel_INT32_t_COMPLEX256_t(INT32_t m, INT32_t n,             # <<<<<<<<<<<<<<
+ *                 COMPLEX256_t *x, INT32_t incx,
+ *                 COMPLEX256_t *y, INT32_t incy,
+ */
+
+static void __pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX256_t_multiply_sym_csc_mat_with_strided_numpy_vector_kernel_INT32_t_COMPLEX256_t(__pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_m, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_n, __pyx_t_long_double_complex *__pyx_v_x, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_incx, __pyx_t_long_double_complex *__pyx_v_y, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_incy, __pyx_t_long_double_complex *__pyx_v_val, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *__pyx_v_row, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *__pyx_v_ind) {
+  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_i;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_j;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_k;
+  __Pyx_RefNannyDeclarations
+  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_t_1;
+  __pyx_t_double_complex __pyx_t_2;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_t_3;
+  int __pyx_t_4;
+  int __pyx_t_5;
+  __Pyx_RefNannySetupContext("multiply_sym_csc_mat_with_strided_numpy_vector_kernel_INT32_t_COMPLEX256_t", 0);
+
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX256_t.pxi":162
+ * 
+ *     # init numpy array
+ *     for i from 0 <= i < m:             # <<<<<<<<<<<<<<
+ * 
+ *         y[i * incy] = <COMPLEX256_t>(0.0+0.0j)
+ */
+  __pyx_t_1 = __pyx_v_m;
+  for (__pyx_v_i = 0; __pyx_v_i < __pyx_t_1; __pyx_v_i++) {
+
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX256_t.pxi":164
+ *     for i from 0 <= i < m:
+ * 
+ *         y[i * incy] = <COMPLEX256_t>(0.0+0.0j)             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+    __pyx_t_2 = __Pyx_c_sum(__pyx_t_double_complex_from_parts(0.0, 0), __pyx_t_double_complex_from_parts(0, 0.0));
+    (__pyx_v_y[(__pyx_v_i * __pyx_v_incy)]) = __pyx_t_long_double_complex_from_parts(((long double)__Pyx_CREAL(__pyx_t_2)), ((long double)__Pyx_CIMAG(__pyx_t_2)));
+  }
+
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX256_t.pxi":168
+ * 
+ *     # multiplication, column-wise...
+ *     for j from 0 <= j < n:             # <<<<<<<<<<<<<<
+ *         for k from ind[j]<= k < ind[j+1]:
+ *             i = row[k]
+ */
+  __pyx_t_1 = __pyx_v_n;
+  for (__pyx_v_j = 0; __pyx_v_j < __pyx_t_1; __pyx_v_j++) {
+
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX256_t.pxi":169
+ *     # multiplication, column-wise...
+ *     for j from 0 <= j < n:
+ *         for k from ind[j]<= k < ind[j+1]:             # <<<<<<<<<<<<<<
+ *             i = row[k]
+ *             y[i * incy] += val[k] * x[i * incx]
+ */
+    __pyx_t_3 = (__pyx_v_ind[(__pyx_v_j + 1)]);
+    for (__pyx_v_k = (__pyx_v_ind[__pyx_v_j]); __pyx_v_k < __pyx_t_3; __pyx_v_k++) {
+
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX256_t.pxi":170
+ *     for j from 0 <= j < n:
+ *         for k from ind[j]<= k < ind[j+1]:
+ *             i = row[k]             # <<<<<<<<<<<<<<
+ *             y[i * incy] += val[k] * x[i * incx]
+ *             if j != i:
+ */
+      __pyx_v_i = (__pyx_v_row[__pyx_v_k]);
+
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX256_t.pxi":171
+ *         for k from ind[j]<= k < ind[j+1]:
+ *             i = row[k]
+ *             y[i * incy] += val[k] * x[i * incx]             # <<<<<<<<<<<<<<
+ *             if j != i:
+ *                 y[j * incy] += val[k] * x[j * incx]
+ */
+      __pyx_t_4 = (__pyx_v_i * __pyx_v_incy);
+      (__pyx_v_y[__pyx_t_4]) = __Pyx_c_suml((__pyx_v_y[__pyx_t_4]), __Pyx_c_prodl((__pyx_v_val[__pyx_v_k]), (__pyx_v_x[(__pyx_v_i * __pyx_v_incx)])));
+
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX256_t.pxi":172
+ *             i = row[k]
+ *             y[i * incy] += val[k] * x[i * incx]
+ *             if j != i:             # <<<<<<<<<<<<<<
+ *                 y[j * incy] += val[k] * x[j * incx]
+ * 
+ */
+      __pyx_t_5 = ((__pyx_v_j != __pyx_v_i) != 0);
+      if (__pyx_t_5) {
+
+        /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX256_t.pxi":173
+ *             y[i * incy] += val[k] * x[i * incx]
+ *             if j != i:
+ *                 y[j * incy] += val[k] * x[j * incx]             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+        __pyx_t_4 = (__pyx_v_j * __pyx_v_incy);
+        (__pyx_v_y[__pyx_t_4]) = __Pyx_c_suml((__pyx_v_y[__pyx_t_4]), __Pyx_c_prodl((__pyx_v_val[__pyx_v_k]), (__pyx_v_x[(__pyx_v_j * __pyx_v_incx)])));
+        goto __pyx_L9;
+      }
+      __pyx_L9:;
+    }
+  }
+
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX256_t.pxi":134
+ * # Non C-contiguous, symmetric
+ * ###########################################
+ * cdef void multiply_sym_csc_mat_with_strided_numpy_vector_kernel_INT32_t_COMPLEX256_t(INT32_t m, INT32_t n,             # <<<<<<<<<<<<<<
+ *                 COMPLEX256_t *x, INT32_t incx,
+ *                 COMPLEX256_t *y, INT32_t incy,
+ */
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+}
+
+/* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX256_t.pxi":184
+ * # C-contiguous, no symmetric
+ * ###########################################
+ * cdef void multiply_tranposed_csc_mat_with_numpy_vector_kernel_INT32_t_COMPLEX256_t(INT32_t m, INT32_t n, COMPLEX256_t *x, COMPLEX256_t *y,             # <<<<<<<<<<<<<<
+ *          COMPLEX256_t *val, INT32_t *row, INT32_t *ind):
+ *     """
+ */
+
+static void __pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX256_t_multiply_tranposed_csc_mat_with_numpy_vector_kernel_INT32_t_COMPLEX256_t(CYTHON_UNUSED __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_m, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_n, __pyx_t_long_double_complex *__pyx_v_x, __pyx_t_long_double_complex *__pyx_v_y, __pyx_t_long_double_complex *__pyx_v_val, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *__pyx_v_row, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *__pyx_v_ind) {
+  __pyx_t_long_double_complex __pyx_v_s;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_j;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_k;
+  __Pyx_RefNannyDeclarations
+  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_t_1;
+  __pyx_t_double_complex __pyx_t_2;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_t_3;
+  __Pyx_RefNannySetupContext("multiply_tranposed_csc_mat_with_numpy_vector_kernel_INT32_t_COMPLEX256_t", 0);
+
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX256_t.pxi":208
+ *         INT32_t j, k
+ * 
+ *     for j from 0 <= j < n:             # <<<<<<<<<<<<<<
+ * 
+ *         s = <COMPLEX256_t>(0.0+0.0j)
+ */
+  __pyx_t_1 = __pyx_v_n;
+  for (__pyx_v_j = 0; __pyx_v_j < __pyx_t_1; __pyx_v_j++) {
+
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX256_t.pxi":210
+ *     for j from 0 <= j < n:
+ * 
+ *         s = <COMPLEX256_t>(0.0+0.0j)             # <<<<<<<<<<<<<<
+ * 
+ *         for k from ind[j]<= k < ind[j+1]:
+ */
+    __pyx_t_2 = __Pyx_c_sum(__pyx_t_double_complex_from_parts(0.0, 0), __pyx_t_double_complex_from_parts(0, 0.0));
+    __pyx_v_s = __pyx_t_long_double_complex_from_parts(((long double)__Pyx_CREAL(__pyx_t_2)), ((long double)__Pyx_CIMAG(__pyx_t_2)));
+
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX256_t.pxi":212
+ *         s = <COMPLEX256_t>(0.0+0.0j)
+ * 
+ *         for k from ind[j]<= k < ind[j+1]:             # <<<<<<<<<<<<<<
+ *             s += val[k] * x[row[k]]
+ * 
+ */
+    __pyx_t_3 = (__pyx_v_ind[(__pyx_v_j + 1)]);
+    for (__pyx_v_k = (__pyx_v_ind[__pyx_v_j]); __pyx_v_k < __pyx_t_3; __pyx_v_k++) {
+
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX256_t.pxi":213
+ * 
+ *         for k from ind[j]<= k < ind[j+1]:
+ *             s += val[k] * x[row[k]]             # <<<<<<<<<<<<<<
+ * 
+ *         y[j] = s
+ */
+      __pyx_v_s = __Pyx_c_suml(__pyx_v_s, __Pyx_c_prodl((__pyx_v_val[__pyx_v_k]), (__pyx_v_x[(__pyx_v_row[__pyx_v_k])])));
+    }
+
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX256_t.pxi":215
+ *             s += val[k] * x[row[k]]
+ * 
+ *         y[j] = s             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+    (__pyx_v_y[__pyx_v_j]) = __pyx_v_s;
+  }
+
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX256_t.pxi":184
+ * # C-contiguous, no symmetric
+ * ###########################################
+ * cdef void multiply_tranposed_csc_mat_with_numpy_vector_kernel_INT32_t_COMPLEX256_t(INT32_t m, INT32_t n, COMPLEX256_t *x, COMPLEX256_t *y,             # <<<<<<<<<<<<<<
+ *          COMPLEX256_t *val, INT32_t *row, INT32_t *ind):
+ *     """
+ */
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+}
+
+/* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX256_t.pxi":221
+ * # Non C-contiguous, no symmetric
+ * ###########################################
+ * cdef void multiply_tranposed_csc_mat_with_strided_numpy_vector_kernel_INT32_t_COMPLEX256_t(INT32_t m, INT32_t n, COMPLEX256_t *x, INT32_t incx, COMPLEX256_t *y, INT32_t incy,             # <<<<<<<<<<<<<<
+ *          COMPLEX256_t *val, INT32_t *row, INT32_t *ind):
+ *     """
+ */
+
+static void __pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX256_t_multiply_tranposed_csc_mat_with_strided_numpy_vector_kernel_INT32_t_COMPLEX256_t(CYTHON_UNUSED __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_m, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_n, __pyx_t_long_double_complex *__pyx_v_x, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_incx, __pyx_t_long_double_complex *__pyx_v_y, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_incy, __pyx_t_long_double_complex *__pyx_v_val, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *__pyx_v_row, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *__pyx_v_ind) {
+  __pyx_t_long_double_complex __pyx_v_s;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_j;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_k;
+  __Pyx_RefNannyDeclarations
+  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_t_1;
+  __pyx_t_double_complex __pyx_t_2;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_t_3;
+  __Pyx_RefNannySetupContext("multiply_tranposed_csc_mat_with_strided_numpy_vector_kernel_INT32_t_COMPLEX256_t", 0);
+
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX256_t.pxi":247
+ *         INT32_t j, k
+ * 
+ *     for j from 0 <= j < n:             # <<<<<<<<<<<<<<
+ * 
+ *         s = <COMPLEX256_t>(0.0+0.0j)
+ */
+  __pyx_t_1 = __pyx_v_n;
+  for (__pyx_v_j = 0; __pyx_v_j < __pyx_t_1; __pyx_v_j++) {
+
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX256_t.pxi":249
+ *     for j from 0 <= j < n:
+ * 
+ *         s = <COMPLEX256_t>(0.0+0.0j)             # <<<<<<<<<<<<<<
+ * 
+ *         for k from ind[j]<= k < ind[j+1]:
+ */
+    __pyx_t_2 = __Pyx_c_sum(__pyx_t_double_complex_from_parts(0.0, 0), __pyx_t_double_complex_from_parts(0, 0.0));
+    __pyx_v_s = __pyx_t_long_double_complex_from_parts(((long double)__Pyx_CREAL(__pyx_t_2)), ((long double)__Pyx_CIMAG(__pyx_t_2)));
+
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX256_t.pxi":251
+ *         s = <COMPLEX256_t>(0.0+0.0j)
+ * 
+ *         for k from ind[j]<= k < ind[j+1]:             # <<<<<<<<<<<<<<
+ *             s += val[k] * x[row[k] * incx]
+ * 
+ */
+    __pyx_t_3 = (__pyx_v_ind[(__pyx_v_j + 1)]);
+    for (__pyx_v_k = (__pyx_v_ind[__pyx_v_j]); __pyx_v_k < __pyx_t_3; __pyx_v_k++) {
+
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX256_t.pxi":252
+ * 
+ *         for k from ind[j]<= k < ind[j+1]:
+ *             s += val[k] * x[row[k] * incx]             # <<<<<<<<<<<<<<
+ * 
+ *         y[j * incy] = s
+ */
+      __pyx_v_s = __Pyx_c_suml(__pyx_v_s, __Pyx_c_prodl((__pyx_v_val[__pyx_v_k]), (__pyx_v_x[((__pyx_v_row[__pyx_v_k]) * __pyx_v_incx)])));
+    }
+
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX256_t.pxi":254
+ *             s += val[k] * x[row[k] * incx]
+ * 
+ *         y[j * incy] = s             # <<<<<<<<<<<<<<
+ */
+    (__pyx_v_y[(__pyx_v_j * __pyx_v_incy)]) = __pyx_v_s;
+  }
+
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX256_t.pxi":221
+ * # Non C-contiguous, no symmetric
+ * ###########################################
+ * cdef void multiply_tranposed_csc_mat_with_strided_numpy_vector_kernel_INT32_t_COMPLEX256_t(INT32_t m, INT32_t n, COMPLEX256_t *x, INT32_t incx, COMPLEX256_t *y, INT32_t incy,             # <<<<<<<<<<<<<<
  *          COMPLEX256_t *val, INT32_t *row, INT32_t *ind):
  *     """
  */
@@ -1896,7 +2393,7 @@ static void __pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPL
 static PyArrayObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX256_t_multiply_csc_mat_with_numpy_vector_INT32_t_COMPLEX256_t(struct __pyx_obj_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX256_t_CSCSparseMatrix_INT32_t_COMPLEX256_t *__pyx_v_A, PyArrayObject *__pyx_v_b) {
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_A_nrow;
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_A_ncol;
-  CYTHON_UNUSED size_t __pyx_v_sd;
+  size_t __pyx_v_sd;
   __pyx_t_long_double_complex *__pyx_v_b_data;
   PyArrayObject *__pyx_v_c = 0;
   __pyx_t_long_double_complex *__pyx_v_c_data;
@@ -2102,34 +2599,150 @@ static PyArrayObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT
  *     if cnp.PyArray_ISCONTIGUOUS(b):
  *         if A.is_symmetric:             # <<<<<<<<<<<<<<
  *             pass
- *             #multiply_sym_csc_mat_with_numpy_vector_kernel_INT32_t_COMPLEX256_t(A_nrow, b_data, c_data, A.val, A.row, A.ind)
+ *             multiply_sym_csc_mat_with_numpy_vector_kernel_INT32_t_COMPLEX256_t(A_nrow, A_ncol, b_data, c_data, A.val, A.row, A.ind)
  */
     __pyx_t_5 = (__pyx_v_A->__pyx_base.__pyx_base.__pyx_base.is_symmetric != 0);
     if (__pyx_t_5) {
+
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT32_t_COMPLEX256_t.pxi":52
+ *         if A.is_symmetric:
+ *             pass
+ *             multiply_sym_csc_mat_with_numpy_vector_kernel_INT32_t_COMPLEX256_t(A_nrow, A_ncol, b_data, c_data, A.val, A.row, A.ind)             # <<<<<<<<<<<<<<
+ *         else:
+ *             multiply_csc_mat_with_numpy_vector_kernel_INT32_t_COMPLEX256_t(A_nrow, A_ncol, b_data, c_data, A.val, A.row, A.ind)
+ */
+      __pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX256_t_multiply_sym_csc_mat_with_numpy_vector_kernel_INT32_t_COMPLEX256_t(__pyx_v_A_nrow, __pyx_v_A_ncol, __pyx_v_b_data, __pyx_v_c_data, __pyx_v_A->val, __pyx_v_A->row, __pyx_v_A->ind);
       goto __pyx_L5;
     }
     /*else*/ {
 
       /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT32_t_COMPLEX256_t.pxi":54
- *             #multiply_sym_csc_mat_with_numpy_vector_kernel_INT32_t_COMPLEX256_t(A_nrow, b_data, c_data, A.val, A.row, A.ind)
+ *             multiply_sym_csc_mat_with_numpy_vector_kernel_INT32_t_COMPLEX256_t(A_nrow, A_ncol, b_data, c_data, A.val, A.row, A.ind)
  *         else:
- *             multiply_csc_mat_with_numpy_vector_kernel_INT32_t_COMPLEX256_t(A_ncol, b_data, c_data, A.val, A.row, A.ind)             # <<<<<<<<<<<<<<
+ *             multiply_csc_mat_with_numpy_vector_kernel_INT32_t_COMPLEX256_t(A_nrow, A_ncol, b_data, c_data, A.val, A.row, A.ind)             # <<<<<<<<<<<<<<
  *     else:
- *         pass
+ *         if A.is_symmetric:
  */
-      __pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX256_t_multiply_csc_mat_with_numpy_vector_kernel_INT32_t_COMPLEX256_t(__pyx_v_A_ncol, __pyx_v_b_data, __pyx_v_c_data, __pyx_v_A->val, __pyx_v_A->row, __pyx_v_A->ind);
+      __pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX256_t_multiply_csc_mat_with_numpy_vector_kernel_INT32_t_COMPLEX256_t(__pyx_v_A_nrow, __pyx_v_A_ncol, __pyx_v_b_data, __pyx_v_c_data, __pyx_v_A->val, __pyx_v_A->row, __pyx_v_A->ind);
     }
     __pyx_L5:;
     goto __pyx_L4;
   }
   /*else*/ {
+
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT32_t_COMPLEX256_t.pxi":56
+ *             multiply_csc_mat_with_numpy_vector_kernel_INT32_t_COMPLEX256_t(A_nrow, A_ncol, b_data, c_data, A.val, A.row, A.ind)
+ *     else:
+ *         if A.is_symmetric:             # <<<<<<<<<<<<<<
+ *             multiply_sym_csc_mat_with_strided_numpy_vector_kernel_INT32_t_COMPLEX256_t(A.nrow, A.ncol,
+ *                                                                  b_data, b.strides[0] / sd,
+ */
+    __pyx_t_5 = (__pyx_v_A->__pyx_base.__pyx_base.__pyx_base.is_symmetric != 0);
+    if (__pyx_t_5) {
+
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT32_t_COMPLEX256_t.pxi":58
+ *         if A.is_symmetric:
+ *             multiply_sym_csc_mat_with_strided_numpy_vector_kernel_INT32_t_COMPLEX256_t(A.nrow, A.ncol,
+ *                                                                  b_data, b.strides[0] / sd,             # <<<<<<<<<<<<<<
+ *                                                                  c_data, c.strides[0] / sd,
+ *                                                                  A.val, A.row, A.ind)
+ */
+      if (unlikely(__pyx_v_sd == 0)) {
+        #ifdef WITH_THREAD
+        PyGILState_STATE __pyx_gilstate_save = PyGILState_Ensure();
+        #endif
+        PyErr_SetString(PyExc_ZeroDivisionError, "integer division or modulo by zero");
+        #ifdef WITH_THREAD
+        PyGILState_Release(__pyx_gilstate_save);
+        #endif
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 58; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      }
+
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT32_t_COMPLEX256_t.pxi":59
+ *             multiply_sym_csc_mat_with_strided_numpy_vector_kernel_INT32_t_COMPLEX256_t(A.nrow, A.ncol,
+ *                                                                  b_data, b.strides[0] / sd,
+ *                                                                  c_data, c.strides[0] / sd,             # <<<<<<<<<<<<<<
+ *                                                                  A.val, A.row, A.ind)
+ *         else:
+ */
+      if (unlikely(__pyx_v_sd == 0)) {
+        #ifdef WITH_THREAD
+        PyGILState_STATE __pyx_gilstate_save = PyGILState_Ensure();
+        #endif
+        PyErr_SetString(PyExc_ZeroDivisionError, "integer division or modulo by zero");
+        #ifdef WITH_THREAD
+        PyGILState_Release(__pyx_gilstate_save);
+        #endif
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 59; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      }
+
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT32_t_COMPLEX256_t.pxi":57
+ *     else:
+ *         if A.is_symmetric:
+ *             multiply_sym_csc_mat_with_strided_numpy_vector_kernel_INT32_t_COMPLEX256_t(A.nrow, A.ncol,             # <<<<<<<<<<<<<<
+ *                                                                  b_data, b.strides[0] / sd,
+ *                                                                  c_data, c.strides[0] / sd,
+ */
+      __pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX256_t_multiply_sym_csc_mat_with_strided_numpy_vector_kernel_INT32_t_COMPLEX256_t(__pyx_v_A->__pyx_base.__pyx_base.nrow, __pyx_v_A->__pyx_base.__pyx_base.ncol, __pyx_v_b_data, ((__pyx_v_b->strides[0]) / __pyx_v_sd), __pyx_v_c_data, ((__pyx_v_c->strides[0]) / __pyx_v_sd), __pyx_v_A->val, __pyx_v_A->row, __pyx_v_A->ind);
+      goto __pyx_L6;
+    }
+    /*else*/ {
+
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT32_t_COMPLEX256_t.pxi":63
+ *         else:
+ *             multiply_csc_mat_with_strided_numpy_vector_kernel_INT32_t_COMPLEX256_t(A.nrow, A.ncol,
+ *                                                              b_data, b.strides[0] / sd,             # <<<<<<<<<<<<<<
+ *                                                              c_data, c.strides[0] / sd,
+ *                                                              A.val, A.row, A.ind)
+ */
+      if (unlikely(__pyx_v_sd == 0)) {
+        #ifdef WITH_THREAD
+        PyGILState_STATE __pyx_gilstate_save = PyGILState_Ensure();
+        #endif
+        PyErr_SetString(PyExc_ZeroDivisionError, "integer division or modulo by zero");
+        #ifdef WITH_THREAD
+        PyGILState_Release(__pyx_gilstate_save);
+        #endif
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 63; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      }
+
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT32_t_COMPLEX256_t.pxi":64
+ *             multiply_csc_mat_with_strided_numpy_vector_kernel_INT32_t_COMPLEX256_t(A.nrow, A.ncol,
+ *                                                              b_data, b.strides[0] / sd,
+ *                                                              c_data, c.strides[0] / sd,             # <<<<<<<<<<<<<<
+ *                                                              A.val, A.row, A.ind)
+ * 
+ */
+      if (unlikely(__pyx_v_sd == 0)) {
+        #ifdef WITH_THREAD
+        PyGILState_STATE __pyx_gilstate_save = PyGILState_Ensure();
+        #endif
+        PyErr_SetString(PyExc_ZeroDivisionError, "integer division or modulo by zero");
+        #ifdef WITH_THREAD
+        PyGILState_Release(__pyx_gilstate_save);
+        #endif
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 64; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      }
+
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT32_t_COMPLEX256_t.pxi":62
+ *                                                                  A.val, A.row, A.ind)
+ *         else:
+ *             multiply_csc_mat_with_strided_numpy_vector_kernel_INT32_t_COMPLEX256_t(A.nrow, A.ncol,             # <<<<<<<<<<<<<<
+ *                                                              b_data, b.strides[0] / sd,
+ *                                                              c_data, c.strides[0] / sd,
+ */
+      __pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX256_t_multiply_csc_mat_with_strided_numpy_vector_kernel_INT32_t_COMPLEX256_t(__pyx_v_A->__pyx_base.__pyx_base.nrow, __pyx_v_A->__pyx_base.__pyx_base.ncol, __pyx_v_b_data, ((__pyx_v_b->strides[0]) / __pyx_v_sd), __pyx_v_c_data, ((__pyx_v_c->strides[0]) / __pyx_v_sd), __pyx_v_A->val, __pyx_v_A->row, __pyx_v_A->ind);
+    }
+    __pyx_L6:;
   }
   __pyx_L4:;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT32_t_COMPLEX256_t.pxi":68
- *         #                                                     A.val, A.row, A.ind)
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT32_t_COMPLEX256_t.pxi":67
+ *                                                              A.val, A.row, A.ind)
  * 
  *     return c             # <<<<<<<<<<<<<<
+ * 
+ * 
  */
   __Pyx_XDECREF(((PyObject *)__pyx_r));
   __Pyx_INCREF(((PyObject *)__pyx_v_c));
@@ -2157,6 +2770,404 @@ static PyArrayObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT
     __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_c.rcbuffer->pybuffer);
   __Pyx_ErrRestore(__pyx_type, __pyx_value, __pyx_tb);}
   __Pyx_AddTraceback("cysparse.sparse.csc_mat_matrices.csc_mat_INT32_t_COMPLEX256_t.multiply_csc_mat_with_numpy_vector_INT32_t_COMPLEX256_t", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = 0;
+  goto __pyx_L2;
+  __pyx_L0:;
+  __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_b.rcbuffer->pybuffer);
+  __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_c.rcbuffer->pybuffer);
+  __pyx_L2:;
+  __Pyx_XDECREF((PyObject *)__pyx_v_c);
+  __Pyx_XGIVEREF((PyObject *)__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT32_t_COMPLEX256_t.pxi":73
+ * # A^t * b
+ * ######################
+ * cdef cnp.ndarray[cnp.npy_complex256, ndim=1, mode='c'] multiply_transposed_csc_mat_with_numpy_vector_INT32_t_COMPLEX256_t(CSCSparseMatrix_INT32_t_COMPLEX256_t A, cnp.ndarray[cnp.npy_complex256, ndim=1] b):             # <<<<<<<<<<<<<<
+ *     """
+ *     Multiply a transposed :class:`CSCSparseMatrix` ``A`` with a numpy vector ``b``.
+ */
+
+static PyArrayObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX256_t_multiply_transposed_csc_mat_with_numpy_vector_INT32_t_COMPLEX256_t(struct __pyx_obj_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX256_t_CSCSparseMatrix_INT32_t_COMPLEX256_t *__pyx_v_A, PyArrayObject *__pyx_v_b) {
+  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_A_nrow;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_A_ncol;
+  size_t __pyx_v_sd;
+  __pyx_t_long_double_complex *__pyx_v_b_data;
+  PyArrayObject *__pyx_v_c = 0;
+  __pyx_t_long_double_complex *__pyx_v_c_data;
+  __Pyx_LocalBuf_ND __pyx_pybuffernd_b;
+  __Pyx_Buffer __pyx_pybuffer_b;
+  __Pyx_LocalBuf_ND __pyx_pybuffernd_c;
+  __Pyx_Buffer __pyx_pybuffer_c;
+  PyArrayObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_t_1;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  PyObject *__pyx_t_4 = NULL;
+  int __pyx_t_5;
+  PyObject *__pyx_t_6 = NULL;
+  PyObject *__pyx_t_7 = NULL;
+  PyArrayObject *__pyx_t_8 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("multiply_transposed_csc_mat_with_numpy_vector_INT32_t_COMPLEX256_t", 0);
+  __pyx_pybuffer_c.pybuffer.buf = NULL;
+  __pyx_pybuffer_c.refcount = 0;
+  __pyx_pybuffernd_c.data = NULL;
+  __pyx_pybuffernd_c.rcbuffer = &__pyx_pybuffer_c;
+  __pyx_pybuffer_b.pybuffer.buf = NULL;
+  __pyx_pybuffer_b.refcount = 0;
+  __pyx_pybuffernd_b.data = NULL;
+  __pyx_pybuffernd_b.rcbuffer = &__pyx_pybuffer_b;
+  {
+    __Pyx_BufFmt_StackElem __pyx_stack[2];
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_b.rcbuffer->pybuffer, (PyObject*)__pyx_v_b, &__Pyx_TypeInfo_nn_npy_complex256, PyBUF_FORMAT| PyBUF_STRIDES, 1, 0, __pyx_stack) == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 73; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  }
+  __pyx_pybuffernd_b.diminfo[0].strides = __pyx_pybuffernd_b.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_b.diminfo[0].shape = __pyx_pybuffernd_b.rcbuffer->pybuffer.shape[0];
+
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT32_t_COMPLEX256_t.pxi":93
+ *     """
+ *     # TODO: test, test, test!!!
+ *     cdef INT32_t A_nrow = A.nrow             # <<<<<<<<<<<<<<
+ *     cdef INT32_t A_ncol = A.ncol
+ * 
+ */
+  __pyx_t_1 = __pyx_v_A->__pyx_base.__pyx_base.nrow;
+  __pyx_v_A_nrow = __pyx_t_1;
+
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT32_t_COMPLEX256_t.pxi":94
+ *     # TODO: test, test, test!!!
+ *     cdef INT32_t A_nrow = A.nrow
+ *     cdef INT32_t A_ncol = A.ncol             # <<<<<<<<<<<<<<
+ * 
+ *     cdef size_t sd = sizeof(COMPLEX256_t)
+ */
+  __pyx_t_1 = __pyx_v_A->__pyx_base.__pyx_base.ncol;
+  __pyx_v_A_ncol = __pyx_t_1;
+
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT32_t_COMPLEX256_t.pxi":96
+ *     cdef INT32_t A_ncol = A.ncol
+ * 
+ *     cdef size_t sd = sizeof(COMPLEX256_t)             # <<<<<<<<<<<<<<
+ * 
+ *     # test dimensions
+ */
+  __pyx_v_sd = (sizeof(__pyx_t_long_double_complex));
+
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT32_t_COMPLEX256_t.pxi":99
+ * 
+ *     # test dimensions
+ *     if A_nrow != b.size:             # <<<<<<<<<<<<<<
+ *         raise IndexError("Dimensions must agree ([%d,%d] * [%d, %d])" % (A_ncol, A_nrow, b.size, 1))
+ * 
+ */
+  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_A_nrow); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 99; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_b), __pyx_n_s_size); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 99; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_4 = PyObject_RichCompare(__pyx_t_2, __pyx_t_3, Py_NE); __Pyx_XGOTREF(__pyx_t_4); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 99; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_4); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 99; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  if (__pyx_t_5) {
+
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT32_t_COMPLEX256_t.pxi":100
+ *     # test dimensions
+ *     if A_nrow != b.size:
+ *         raise IndexError("Dimensions must agree ([%d,%d] * [%d, %d])" % (A_ncol, A_nrow, b.size, 1))             # <<<<<<<<<<<<<<
+ * 
+ *     # direct access to vector b
+ */
+    __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_A_ncol); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 100; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_4);
+    __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_A_nrow); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 100; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_3);
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_b), __pyx_n_s_size); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 100; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_2);
+    __pyx_t_6 = PyTuple_New(4); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 100; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_6);
+    PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_4);
+    __Pyx_GIVEREF(__pyx_t_4);
+    PyTuple_SET_ITEM(__pyx_t_6, 1, __pyx_t_3);
+    __Pyx_GIVEREF(__pyx_t_3);
+    PyTuple_SET_ITEM(__pyx_t_6, 2, __pyx_t_2);
+    __Pyx_GIVEREF(__pyx_t_2);
+    __Pyx_INCREF(__pyx_int_1);
+    PyTuple_SET_ITEM(__pyx_t_6, 3, __pyx_int_1);
+    __Pyx_GIVEREF(__pyx_int_1);
+    __pyx_t_4 = 0;
+    __pyx_t_3 = 0;
+    __pyx_t_2 = 0;
+    __pyx_t_2 = __Pyx_PyString_Format(__pyx_kp_s_Dimensions_must_agree_d_d_d_d, __pyx_t_6); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 100; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    __pyx_t_6 = PyTuple_New(1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 100; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_6);
+    PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_2);
+    __Pyx_GIVEREF(__pyx_t_2);
+    __pyx_t_2 = 0;
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_t_6, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 100; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    __Pyx_Raise(__pyx_t_2, 0, 0, 0);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 100; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  }
+
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT32_t_COMPLEX256_t.pxi":103
+ * 
+ *     # direct access to vector b
+ *     cdef COMPLEX256_t * b_data = <COMPLEX256_t *> cnp.PyArray_DATA(b)             # <<<<<<<<<<<<<<
+ * 
+ *     # array c = A^t * b
+ */
+  __pyx_v_b_data = ((__pyx_t_long_double_complex *)PyArray_DATA(((PyArrayObject *)__pyx_v_b)));
+
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT32_t_COMPLEX256_t.pxi":107
+ *     # array c = A^t * b
+ *     # TODO: check if we can not use static version of empty (cnp.empty instead of np.empty)
+ *     cdef cnp.ndarray[cnp.npy_complex256, ndim=1] c = np.empty(A_ncol, dtype=np.complex256)             # <<<<<<<<<<<<<<
+ *     cdef COMPLEX256_t * c_data = <COMPLEX256_t *> cnp.PyArray_DATA(c)
+ * 
+ */
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 107; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_empty); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 107; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_6);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_A_ncol); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 107; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 107; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_3);
+  PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_2);
+  __Pyx_GIVEREF(__pyx_t_2);
+  __pyx_t_2 = 0;
+  __pyx_t_2 = PyDict_New(); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 107; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 107; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_4);
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_complex256); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 107; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_7);
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_dtype, __pyx_t_7) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 107; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+  __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_3, __pyx_t_2); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 107; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_7);
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  if (!(likely(((__pyx_t_7) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_7, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 107; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_8 = ((PyArrayObject *)__pyx_t_7);
+  {
+    __Pyx_BufFmt_StackElem __pyx_stack[2];
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_c.rcbuffer->pybuffer, (PyObject*)__pyx_t_8, &__Pyx_TypeInfo_nn_npy_complex256, PyBUF_FORMAT| PyBUF_STRIDES, 1, 0, __pyx_stack) == -1)) {
+      __pyx_v_c = ((PyArrayObject *)Py_None); __Pyx_INCREF(Py_None); __pyx_pybuffernd_c.rcbuffer->pybuffer.buf = NULL;
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 107; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    } else {__pyx_pybuffernd_c.diminfo[0].strides = __pyx_pybuffernd_c.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_c.diminfo[0].shape = __pyx_pybuffernd_c.rcbuffer->pybuffer.shape[0];
+    }
+  }
+  __pyx_t_8 = 0;
+  __pyx_v_c = ((PyArrayObject *)__pyx_t_7);
+  __pyx_t_7 = 0;
+
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT32_t_COMPLEX256_t.pxi":108
+ *     # TODO: check if we can not use static version of empty (cnp.empty instead of np.empty)
+ *     cdef cnp.ndarray[cnp.npy_complex256, ndim=1] c = np.empty(A_ncol, dtype=np.complex256)
+ *     cdef COMPLEX256_t * c_data = <COMPLEX256_t *> cnp.PyArray_DATA(c)             # <<<<<<<<<<<<<<
+ * 
+ *     # test if b vector is C-contiguous or not
+ */
+  __pyx_v_c_data = ((__pyx_t_long_double_complex *)PyArray_DATA(((PyArrayObject *)__pyx_v_c)));
+
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT32_t_COMPLEX256_t.pxi":111
+ * 
+ *     # test if b vector is C-contiguous or not
+ *     if cnp.PyArray_ISCONTIGUOUS(b):             # <<<<<<<<<<<<<<
+ *         if A.is_symmetric:
+ *             multiply_sym_csc_mat_with_numpy_vector_kernel_INT32_t_COMPLEX256_t(A_nrow, A_ncol, b_data, c_data, A.val, A.row, A.ind)
+ */
+  __pyx_t_5 = (PyArray_ISCONTIGUOUS(((PyArrayObject *)__pyx_v_b)) != 0);
+  if (__pyx_t_5) {
+
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT32_t_COMPLEX256_t.pxi":112
+ *     # test if b vector is C-contiguous or not
+ *     if cnp.PyArray_ISCONTIGUOUS(b):
+ *         if A.is_symmetric:             # <<<<<<<<<<<<<<
+ *             multiply_sym_csc_mat_with_numpy_vector_kernel_INT32_t_COMPLEX256_t(A_nrow, A_ncol, b_data, c_data, A.val, A.row, A.ind)
+ *         else:
+ */
+    __pyx_t_5 = (__pyx_v_A->__pyx_base.__pyx_base.__pyx_base.is_symmetric != 0);
+    if (__pyx_t_5) {
+
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT32_t_COMPLEX256_t.pxi":113
+ *     if cnp.PyArray_ISCONTIGUOUS(b):
+ *         if A.is_symmetric:
+ *             multiply_sym_csc_mat_with_numpy_vector_kernel_INT32_t_COMPLEX256_t(A_nrow, A_ncol, b_data, c_data, A.val, A.row, A.ind)             # <<<<<<<<<<<<<<
+ *         else:
+ *             multiply_tranposed_csc_mat_with_numpy_vector_kernel_INT32_t_COMPLEX256_t(A_nrow, A_ncol, b_data, c_data,
+ */
+      __pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX256_t_multiply_sym_csc_mat_with_numpy_vector_kernel_INT32_t_COMPLEX256_t(__pyx_v_A_nrow, __pyx_v_A_ncol, __pyx_v_b_data, __pyx_v_c_data, __pyx_v_A->val, __pyx_v_A->row, __pyx_v_A->ind);
+      goto __pyx_L5;
+    }
+    /*else*/ {
+
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT32_t_COMPLEX256_t.pxi":115
+ *             multiply_sym_csc_mat_with_numpy_vector_kernel_INT32_t_COMPLEX256_t(A_nrow, A_ncol, b_data, c_data, A.val, A.row, A.ind)
+ *         else:
+ *             multiply_tranposed_csc_mat_with_numpy_vector_kernel_INT32_t_COMPLEX256_t(A_nrow, A_ncol, b_data, c_data,             # <<<<<<<<<<<<<<
+ *          A.val, A.row, A.ind)
+ *     else:
+ */
+      __pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX256_t_multiply_tranposed_csc_mat_with_numpy_vector_kernel_INT32_t_COMPLEX256_t(__pyx_v_A_nrow, __pyx_v_A_ncol, __pyx_v_b_data, __pyx_v_c_data, __pyx_v_A->val, __pyx_v_A->row, __pyx_v_A->ind);
+    }
+    __pyx_L5:;
+    goto __pyx_L4;
+  }
+  /*else*/ {
+
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT32_t_COMPLEX256_t.pxi":118
+ *          A.val, A.row, A.ind)
+ *     else:
+ *         if A.is_symmetric:             # <<<<<<<<<<<<<<
+ *             multiply_sym_csc_mat_with_strided_numpy_vector_kernel_INT32_t_COMPLEX256_t(A.nrow, A_ncol,
+ *                                                                  b_data, b.strides[0] / sd,
+ */
+    __pyx_t_5 = (__pyx_v_A->__pyx_base.__pyx_base.__pyx_base.is_symmetric != 0);
+    if (__pyx_t_5) {
+
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT32_t_COMPLEX256_t.pxi":120
+ *         if A.is_symmetric:
+ *             multiply_sym_csc_mat_with_strided_numpy_vector_kernel_INT32_t_COMPLEX256_t(A.nrow, A_ncol,
+ *                                                                  b_data, b.strides[0] / sd,             # <<<<<<<<<<<<<<
+ *                                                                  c_data, c.strides[0] / sd,
+ *                                                                  A.val, A.row, A.ind)
+ */
+      if (unlikely(__pyx_v_sd == 0)) {
+        #ifdef WITH_THREAD
+        PyGILState_STATE __pyx_gilstate_save = PyGILState_Ensure();
+        #endif
+        PyErr_SetString(PyExc_ZeroDivisionError, "integer division or modulo by zero");
+        #ifdef WITH_THREAD
+        PyGILState_Release(__pyx_gilstate_save);
+        #endif
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 120; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      }
+
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT32_t_COMPLEX256_t.pxi":121
+ *             multiply_sym_csc_mat_with_strided_numpy_vector_kernel_INT32_t_COMPLEX256_t(A.nrow, A_ncol,
+ *                                                                  b_data, b.strides[0] / sd,
+ *                                                                  c_data, c.strides[0] / sd,             # <<<<<<<<<<<<<<
+ *                                                                  A.val, A.row, A.ind)
+ *         else:
+ */
+      if (unlikely(__pyx_v_sd == 0)) {
+        #ifdef WITH_THREAD
+        PyGILState_STATE __pyx_gilstate_save = PyGILState_Ensure();
+        #endif
+        PyErr_SetString(PyExc_ZeroDivisionError, "integer division or modulo by zero");
+        #ifdef WITH_THREAD
+        PyGILState_Release(__pyx_gilstate_save);
+        #endif
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 121; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      }
+
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT32_t_COMPLEX256_t.pxi":119
+ *     else:
+ *         if A.is_symmetric:
+ *             multiply_sym_csc_mat_with_strided_numpy_vector_kernel_INT32_t_COMPLEX256_t(A.nrow, A_ncol,             # <<<<<<<<<<<<<<
+ *                                                                  b_data, b.strides[0] / sd,
+ *                                                                  c_data, c.strides[0] / sd,
+ */
+      __pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX256_t_multiply_sym_csc_mat_with_strided_numpy_vector_kernel_INT32_t_COMPLEX256_t(__pyx_v_A->__pyx_base.__pyx_base.nrow, __pyx_v_A_ncol, __pyx_v_b_data, ((__pyx_v_b->strides[0]) / __pyx_v_sd), __pyx_v_c_data, ((__pyx_v_c->strides[0]) / __pyx_v_sd), __pyx_v_A->val, __pyx_v_A->row, __pyx_v_A->ind);
+      goto __pyx_L6;
+    }
+    /*else*/ {
+
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT32_t_COMPLEX256_t.pxi":125
+ *         else:
+ *             multiply_tranposed_csc_mat_with_strided_numpy_vector_kernel_INT32_t_COMPLEX256_t(A_nrow, A_ncol,
+ *                                                                                       b_data, b.strides[0] / sd,             # <<<<<<<<<<<<<<
+ *                                                                                       c_data, c.strides[0] / sd,
+ *                                                                                       A.val, A.row, A.ind)
+ */
+      if (unlikely(__pyx_v_sd == 0)) {
+        #ifdef WITH_THREAD
+        PyGILState_STATE __pyx_gilstate_save = PyGILState_Ensure();
+        #endif
+        PyErr_SetString(PyExc_ZeroDivisionError, "integer division or modulo by zero");
+        #ifdef WITH_THREAD
+        PyGILState_Release(__pyx_gilstate_save);
+        #endif
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 125; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      }
+
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT32_t_COMPLEX256_t.pxi":126
+ *             multiply_tranposed_csc_mat_with_strided_numpy_vector_kernel_INT32_t_COMPLEX256_t(A_nrow, A_ncol,
+ *                                                                                       b_data, b.strides[0] / sd,
+ *                                                                                       c_data, c.strides[0] / sd,             # <<<<<<<<<<<<<<
+ *                                                                                       A.val, A.row, A.ind)
+ * 
+ */
+      if (unlikely(__pyx_v_sd == 0)) {
+        #ifdef WITH_THREAD
+        PyGILState_STATE __pyx_gilstate_save = PyGILState_Ensure();
+        #endif
+        PyErr_SetString(PyExc_ZeroDivisionError, "integer division or modulo by zero");
+        #ifdef WITH_THREAD
+        PyGILState_Release(__pyx_gilstate_save);
+        #endif
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 126; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      }
+
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT32_t_COMPLEX256_t.pxi":124
+ *                                                                  A.val, A.row, A.ind)
+ *         else:
+ *             multiply_tranposed_csc_mat_with_strided_numpy_vector_kernel_INT32_t_COMPLEX256_t(A_nrow, A_ncol,             # <<<<<<<<<<<<<<
+ *                                                                                       b_data, b.strides[0] / sd,
+ *                                                                                       c_data, c.strides[0] / sd,
+ */
+      __pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX256_t_multiply_tranposed_csc_mat_with_strided_numpy_vector_kernel_INT32_t_COMPLEX256_t(__pyx_v_A_nrow, __pyx_v_A_ncol, __pyx_v_b_data, ((__pyx_v_b->strides[0]) / __pyx_v_sd), __pyx_v_c_data, ((__pyx_v_c->strides[0]) / __pyx_v_sd), __pyx_v_A->val, __pyx_v_A->row, __pyx_v_A->ind);
+    }
+    __pyx_L6:;
+  }
+  __pyx_L4:;
+
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT32_t_COMPLEX256_t.pxi":129
+ *                                                                                       A.val, A.row, A.ind)
+ * 
+ *     return c             # <<<<<<<<<<<<<<
+ */
+  __Pyx_XDECREF(((PyObject *)__pyx_r));
+  __Pyx_INCREF(((PyObject *)__pyx_v_c));
+  __pyx_r = ((PyArrayObject *)__pyx_v_c);
+  goto __pyx_L0;
+
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT32_t_COMPLEX256_t.pxi":73
+ * # A^t * b
+ * ######################
+ * cdef cnp.ndarray[cnp.npy_complex256, ndim=1, mode='c'] multiply_transposed_csc_mat_with_numpy_vector_INT32_t_COMPLEX256_t(CSCSparseMatrix_INT32_t_COMPLEX256_t A, cnp.ndarray[cnp.npy_complex256, ndim=1] b):             # <<<<<<<<<<<<<<
+ *     """
+ *     Multiply a transposed :class:`CSCSparseMatrix` ``A`` with a numpy vector ``b``.
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_XDECREF(__pyx_t_6);
+  __Pyx_XDECREF(__pyx_t_7);
+  { PyObject *__pyx_type, *__pyx_value, *__pyx_tb;
+    __Pyx_ErrFetch(&__pyx_type, &__pyx_value, &__pyx_tb);
+    __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_b.rcbuffer->pybuffer);
+    __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_c.rcbuffer->pybuffer);
+  __Pyx_ErrRestore(__pyx_type, __pyx_value, __pyx_tb);}
+  __Pyx_AddTraceback("cysparse.sparse.csc_mat_matrices.csc_mat_INT32_t_COMPLEX256_t.multiply_transposed_csc_mat_with_numpy_vector_INT32_t_COMPLEX256_t", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = 0;
   goto __pyx_L2;
   __pyx_L0:;
