@@ -463,6 +463,10 @@ CSR_SPARSE_MATRIX_DEFINITION_FILES = glob.glob(os.path.join(CSR_SPARSE_MATRIX_TE
 CSR_SPARSE_MATRIX_KERNEL_TEMPLATE_DIR = os.path.join(CSR_SPARSE_MATRIX_TEMPLATE_DIR, 'csr_mat_kernel')
 CSR_SPARSE_MATRIX_KERNEL_INCLUDE_FILES = glob.glob(os.path.join(CSR_SPARSE_MATRIX_KERNEL_TEMPLATE_DIR, '*.cpi'))
 
+### CSRSparseMatrix helpers
+CSR_SPARSE_MATRIX_HELPERS_TEMPLATE_DIR = os.path.join(CSR_SPARSE_MATRIX_TEMPLATE_DIR, 'csr_mat_helpers')
+CSR_SPARSE_MATRIX_HELPERS_INCLUDE_FILES = glob.glob(os.path.join(CSR_SPARSE_MATRIX_HELPERS_TEMPLATE_DIR, '*.cpi'))
+
 ##########################################
 ### CSCSparseMatrix
 ##########################################
@@ -473,6 +477,10 @@ CSC_SPARSE_MATRIX_DEFINITION_FILES = glob.glob(os.path.join(CSC_SPARSE_MATRIX_TE
 ### CSRSparseMatrix kernel
 CSC_SPARSE_MATRIX_KERNEL_TEMPLATE_DIR = os.path.join(CSC_SPARSE_MATRIX_TEMPLATE_DIR, 'csc_mat_kernel')
 CSC_SPARSE_MATRIX_KERNEL_INCLUDE_FILES = glob.glob(os.path.join(CSC_SPARSE_MATRIX_KERNEL_TEMPLATE_DIR, '*.cpi'))
+
+### CSCSparseMatrix helpers
+CSC_SPARSE_MATRIX_HELPERS_TEMPLATE_DIR = os.path.join(CSC_SPARSE_MATRIX_TEMPLATE_DIR, 'csc_mat_helpers')
+CSC_SPARSE_MATRIX_HELPERS_INCLUDE_FILES = glob.glob(os.path.join(CSC_SPARSE_MATRIX_HELPERS_TEMPLATE_DIR, '*.cpi'))
 
 ##########################################
 ### CSBSparseMatrix
@@ -566,8 +574,12 @@ if __name__ == "__main__":
             logger.info("Clean generated files")
             # Sparse
             clean_cython_files(logger, SPARSE_SPARSE_UTILS_TEMPLATE_DIR)
+
+
             # SparseMatrix
             clean_cython_files(logger, SPARSE_MATRIX_TEMPLATE_DIR)
+
+
             # LLSparseMatrix
             clean_cython_files(logger, LL_SPARSE_MATRIX_TEMPLATE_DIR)
             clean_cython_files(logger, SPARSE_DIR, [LL_SPARSE_MATRIX_BASE_FILE[:-4] + '.pyx'])
@@ -578,21 +590,25 @@ if __name__ == "__main__":
             # LLSparseMatrix IO
             clean_cython_files(logger, LL_SPARSE_MATRIX_IO_TEMPLATE_DIR)
 
+
             # LLSparseMatrixView
             clean_cython_files(logger, LL_SPARSE_MATRIX_VIEW_TEMPLATE_DIR)
+
 
             # CSRSparseMatrix
             clean_cython_files(logger, CSR_SPARSE_MATRIX_TEMPLATE_DIR)
             # CSRSparseMatrix kernel
             clean_cython_files(logger, CSR_SPARSE_MATRIX_KERNEL_TEMPLATE_DIR)
+            # CSRSparseMatrix helpers
+            clean_cython_files(logger, CSR_SPARSE_MATRIX_HELPERS_TEMPLATE_DIR)
 
 
             # CSCSparseMatrix
             clean_cython_files(logger, CSC_SPARSE_MATRIX_TEMPLATE_DIR)
             # CSCSparseMatrix kernel
             clean_cython_files(logger, CSC_SPARSE_MATRIX_KERNEL_TEMPLATE_DIR)
-
-
+            # CSCSparseMatrix helpers
+            clean_cython_files(logger, CSC_SPARSE_MATRIX_HELPERS_TEMPLATE_DIR)
 
         else:
             logger.info("Generate code files")
@@ -662,6 +678,8 @@ if __name__ == "__main__":
             # kernel
             generate_following_type_and_index(logger, CSR_SPARSE_MATRIX_KERNEL_INCLUDE_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, ELEMENT_TYPES, INDEX_TYPES, '.pxi')
 
+            # helpers
+            generate_following_type_and_index(logger, CSR_SPARSE_MATRIX_HELPERS_INCLUDE_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, ELEMENT_TYPES, INDEX_TYPES, '.pxi')
 
             ###############################
             # CSCSparseMatrix
@@ -673,6 +691,8 @@ if __name__ == "__main__":
             # kernel
             generate_following_type_and_index(logger, CSC_SPARSE_MATRIX_KERNEL_INCLUDE_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, ELEMENT_TYPES, INDEX_TYPES, '.pxi')
 
+            # helpers
+            generate_following_type_and_index(logger, CSC_SPARSE_MATRIX_HELPERS_INCLUDE_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, ELEMENT_TYPES, INDEX_TYPES, '.pxi')
 
     if arg_options.tests or arg_options.all:
         action = True

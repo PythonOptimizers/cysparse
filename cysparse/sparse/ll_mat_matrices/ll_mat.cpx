@@ -1377,7 +1377,8 @@ YOU HAVE TO DEFINE OR CAST YOUR NEW UNRECOGNIZED TYPE
         - ``C = A * B`` where `B` is an ``LLSparseMatrix`` matrix. ``C`` is an ``LLSparseMatrix`` of same type.
         - ``C = A * B`` where ``B`` is an :program:`NumPy` matrix. ``C`` is a dense :program:`NumPy` matrix. (not yet implemented).
         """
-                # CASES
+        # TODO: refactor and put this in helpers...
+        # CASES
         if PyLLSparseMatrix_Check(B):
             return multiply_two_ll_mat_@index@_@type@(self, B)
             #raise NotImplementedError("Multiplication with this kind of object not implemented yet...")

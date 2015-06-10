@@ -158,7 +158,7 @@ cdef cnp.ndarray[cnp.@type|cysparse_type_to_numpy_c_type@, ndim=1, mode='c'] mul
         IndexError if dimensions don't match.
 
     Note:
-        This version is more general as it takes into account strides in the numpy arrays and if the :class:`LLSparseMatrix`
+        This version is general as it takes into account strides in the numpy arrays and if the :class:`LLSparseMatrix`
         is symmetric or not.
 
     """

@@ -16,10 +16,9 @@ cdef class CSCSparseMatrix_@index@_@type@(ImmutableSparseMatrix_@index@_@type@):
     # Init/Free
     ####################################################################################################################
     cdef:
-        @type@  *val;		 # pointer to array of values
-        @type@  *ival    # pointer to array of imaginary values
-        @index@    *row;		 # pointer to array of indices
-        @index@    *ind;		 # pointer to array of indices
+        @type@     *val		 # pointer to array of values
+        @index@    *row		 # pointer to array of indices
+        @index@    *ind		 # pointer to array of indices
 
         bint __col_indices_sorted_test_done  # we only test this once
         bint __col_indices_sorted  # are the column indices sorted in ascending order?
