@@ -14,11 +14,30 @@ from cysparse.sparse.csc_mat_matrices.csc_mat_INT64_t_COMPLEX256_t cimport CSCSp
 
 from cysparse.sparse.sparse_utils.sort_indices_INT64_t cimport sort_array_INT64_t
 
+########################################################################################################################
+# Cython, NumPy import/cimport
+########################################################################################################################
 from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
 from cpython cimport PyObject
 
+cimport numpy as cnp
+import numpy as np
+
+cnp.import_array()
+
+
+# TODO: These constants will be removed soon...
 cdef int CSR_MAT_PPRINT_ROW_THRESH = 500       # row threshold for choosing print format
 cdef int CSR_MAT_PPRINT_COL_THRESH = 20        # column threshold for choosing print format
+
+########################################################################################################################
+# CySparse include
+########################################################################################################################
+# pxi files should come last (except for circular dependencies)
+
+include "csr_mat_kernel/csr_mat_multiplication_by_numpy_vector_kernel_INT64_t_COMPLEX256_t.pxi"
+include "csr_mat_helpers/csr_mat_multiplication_INT64_t_COMPLEX256_t.pxi"
+
 
 cdef extern from "Python.h":
     # *** Types ***
@@ -151,23 +170,46 @@ cdef class CSRSparseMatrix_INT64_t_COMPLEX256_t(ImmutableSparseMatrix_INT64_t_CO
             :meth:`safe_at`.
 
         """
-        cdef INT64_t k
-
-        if self.is_symmetric:
-            raise NotImplemented("Access to csr_mat(i, j) not (yet) implemented for symmetric matrices")
+        cdef:
+            INT64_t k
+            # for symmetric case
+            INT64_t real_i
+            INT64_t real_j
 
         # TODO: TEST!!!
-        if self. __col_indices_sorted:
-            for k from self.ind[i] <= k < self.ind[i+1]:
-                if j == self.col[k]:
-                    return self.val[k]
-                elif j > self.col[k]:
-                    break
+        # code duplicated for optimization
+        if self.is_symmetric:
+            if i < j:
+                real_i = j
+                real_j = i
+            else:
+                real_i = i
+                real_j = j
+
+            if self. __col_indices_sorted:
+                for k from self.ind[real_i] <= k < self.ind[real_i+1]:
+                    if real_j == self.col[k]:
+                        return self.val[k]
+                    elif real_j > self.col[k]:
+                        break
+
+            else:
+                for k from self.ind[real_i] <= k < self.ind[real_i+1]:
+                    if real_j == self.col[k]:
+                        return self.val[k]
 
         else:
-            for k from self.ind[i] <= k < self.ind[i+1]:
-                if j == self.col[k]:
-                    return self.val[k]
+            if self. __col_indices_sorted:
+                for k from self.ind[i] <= k < self.ind[i+1]:
+                    if j == self.col[k]:
+                        return self.val[k]
+                    elif j > self.col[k]:
+                        break
+
+            else:
+                for k from self.ind[i] <= k < self.ind[i+1]:
+                    if j == self.col[k]:
+                        return self.val[k]
 
         return 0.0
 
@@ -215,6 +257,24 @@ cdef class CSRSparseMatrix_INT64_t_COMPLEX256_t(ImmutableSparseMatrix_INT64_t_CO
     ####################################################################################################################
     # Multiplication
     ####################################################################################################################
+    def matvec(self, B):
+        """
+        Return :math:`A * b`.
+        """
+        return multiply_csr_mat_with_numpy_vector_INT64_t_COMPLEX256_t(self, B)
+
+    def matvec_transp(self, B):
+        """
+        Return :math:`A^t * b`.
+        """
+        return multiply_transposed_csr_mat_with_numpy_vector_INT64_t_COMPLEX256_t(self, B)
+
+    def matdot(self, B):
+        raise NotImplementedError("Multiplication with this kind of object not allowed")
+
+    def matdot_transp(self, B):
+        raise NotImplementedError("Multiplication with this kind of object not allowed")
+
     def __mul__(self, other):
 
         # test if implemented
@@ -321,7 +381,7 @@ cdef class CSRSparseMatrix_INT64_t_COMPLEX256_t(ImmutableSparseMatrix_INT64_t_CO
 ########################################################################################################################
 # Factory methods
 ########################################################################################################################
-cdef MakeCSRSparseMatrix_INT64_t_COMPLEX256_t(INT64_t nrow, INT64_t ncol, INT64_t nnz, INT64_t * ind, INT64_t * col, COMPLEX256_t * val):
+cdef MakeCSRSparseMatrix_INT64_t_COMPLEX256_t(INT64_t nrow, INT64_t ncol, INT64_t nnz, INT64_t * ind, INT64_t * col, COMPLEX256_t * val, bint is_symmetric):
     """
     Construct a CSRSparseMatrix object.
 
@@ -334,7 +394,7 @@ cdef MakeCSRSparseMatrix_INT64_t_COMPLEX256_t(INT64_t nrow, INT64_t ncol, INT64_
         val  (COMPLEX256_t *): C-array with values.
     """
 
-    csr_mat = CSRSparseMatrix_INT64_t_COMPLEX256_t(control_object=unexposed_value, nrow=nrow, ncol=ncol, nnz=nnz)
+    csr_mat = CSRSparseMatrix_INT64_t_COMPLEX256_t(control_object=unexposed_value, nrow=nrow, ncol=ncol, nnz=nnz, is_symmetric=is_symmetric)
 
     csr_mat.val = val
     csr_mat.ind = ind

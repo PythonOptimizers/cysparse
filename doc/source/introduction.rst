@@ -35,6 +35,7 @@ Even if :program:`CySparse` is inspired from :program:`PySparse`, there are nota
   =========================================   ======================================================   ============================================
     
 - :program:`CySparse` has more syntaxic sugar, like ``A * b, b * A, A.T * b`` etc. 
+- :program:`CySparse` has a *symmetric* version of **all** its matrix types.
 
 
 

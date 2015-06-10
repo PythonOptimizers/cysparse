@@ -83,7 +83,6 @@ cdef class CSCSparseMatrix_INT64_t_INT64_t(ImmutableSparseMatrix_INT64_t_INT64_t
 
         if self.is_symmetric:
             # TODO: column indices are NOT necessarily sorted... what do we do about it?
-            #raise NotImplementedError("Access to csc_mat(i, j) not (yet) implemented")
             if i < j:
                 real_i = j
                 real_j = i

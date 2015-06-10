@@ -36,6 +36,6 @@ cdef class CSRSparseMatrix_@index@_@type@(ImmutableSparseMatrix_@index@_@type@):
     cdef @type@ safe_at(self, @index@ i, @index@ j) except? 2
 {% endif %}
 
-cdef MakeCSRSparseMatrix_@index@_@type@(@index@ nrow, @index@ ncol, @index@ nnz, @index@ * ind, @index@ * col, @type@ * val)
+cdef MakeCSRSparseMatrix_@index@_@type@(@index@ nrow, @index@ ncol, @index@ nnz, @index@ * ind, @index@ * col, @type@ * val, bint is_symmetric)
 
 cdef LLSparseMatrix_@index@_@type@ multiply_csr_mat_by_csc_mat_@index@_@type@(CSRSparseMatrix_@index@_@type@ A, CSCSparseMatrix_@index@_@type@ B)

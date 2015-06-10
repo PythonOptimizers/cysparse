@@ -495,6 +495,9 @@ TESTS_TEMPLATE_DIR = os.path.join(PATH, 'tests')
 TESTS_CSC_SPARSE_MATRIX_GENERIC_TEST_DIR = os.path.join(TESTS_TEMPLATE_DIR, 'cysparse', 'sparse', 'csc_mat_matrices', 'generic')
 TESTS_CSC_SPARSE_MATRIX_GENERIC_TEST_FILES = glob.glob(os.path.join(TESTS_CSC_SPARSE_MATRIX_GENERIC_TEST_DIR, '*.cpy'))
 
+TESTS_CSR_SPARSE_MATRIX_GENERIC_TEST_DIR = os.path.join(TESTS_TEMPLATE_DIR, 'cysparse', 'sparse', 'csr_mat_matrices', 'generic')
+TESTS_CSR_SPARSE_MATRIX_GENERIC_TEST_FILES = glob.glob(os.path.join(TESTS_CSR_SPARSE_MATRIX_GENERIC_TEST_DIR, '*.cpy'))
+
 #################################################################################################
 # MAIN
 #################################################################################################
@@ -700,6 +703,7 @@ if __name__ == "__main__":
 
         if arg_options.clean:
             clean_cython_files(logger, TESTS_CSC_SPARSE_MATRIX_GENERIC_TEST_DIR , find_files(TESTS_CSC_SPARSE_MATRIX_GENERIC_TEST_DIR, '*.py', False, True))
+            clean_cython_files(logger, TESTS_CSR_SPARSE_MATRIX_GENERIC_TEST_DIR , find_files(TESTS_CSR_SPARSE_MATRIX_GENERIC_TEST_DIR, '*.py', False, True))
 
         else:
             ###############################
@@ -707,6 +711,7 @@ if __name__ == "__main__":
             ###############################
             # generic types
             generate_template_files(logger, TESTS_CSC_SPARSE_MATRIX_GENERIC_TEST_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, '.py')
+            generate_template_files(logger, TESTS_CSR_SPARSE_MATRIX_GENERIC_TEST_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, '.py')
 
     if not action:
         logger.warning("No action proceeded...")

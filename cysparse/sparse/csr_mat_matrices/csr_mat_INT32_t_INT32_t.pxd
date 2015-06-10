@@ -33,6 +33,6 @@ cdef class CSRSparseMatrix_INT32_t_INT32_t(ImmutableSparseMatrix_INT32_t_INT32_t
     cdef INT32_t safe_at(self, INT32_t i, INT32_t j) except? 2
 
 
-cdef MakeCSRSparseMatrix_INT32_t_INT32_t(INT32_t nrow, INT32_t ncol, INT32_t nnz, INT32_t * ind, INT32_t * col, INT32_t * val)
+cdef MakeCSRSparseMatrix_INT32_t_INT32_t(INT32_t nrow, INT32_t ncol, INT32_t nnz, INT32_t * ind, INT32_t * col, INT32_t * val, bint is_symmetric)
 
 cdef LLSparseMatrix_INT32_t_INT32_t multiply_csr_mat_by_csc_mat_INT32_t_INT32_t(CSRSparseMatrix_INT32_t_INT32_t A, CSCSparseMatrix_INT32_t_INT32_t B)

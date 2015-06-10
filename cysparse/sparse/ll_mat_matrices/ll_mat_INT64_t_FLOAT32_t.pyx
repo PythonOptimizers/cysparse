@@ -545,7 +545,7 @@ cdef class LLSparseMatrix_INT64_t_FLOAT32_t(MutableSparseMatrix_INT64_t_FLOAT32_
 
             ind[i+1] = ind_col_index
 
-        csr_mat = MakeCSRSparseMatrix_INT64_t_FLOAT32_t(nrow=self.nrow, ncol=self.ncol, nnz=self.nnz, ind=ind, col=col, val=val)
+        csr_mat = MakeCSRSparseMatrix_INT64_t_FLOAT32_t(nrow=self.nrow, ncol=self.ncol, nnz=self.nnz, ind=ind, col=col, val=val, is_symmetric=self.is_symmetric)
 
         return csr_mat
 
