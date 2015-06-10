@@ -2506,7 +2506,7 @@ static int __pyx_f_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT32_t_COMPLEX6
 }
 
 /* "cysparse/sparse/ll_mat_matrices/ll_mat_kernel/ll_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX64_t.pxi":31
- * # C-contiguous, no symmetric
+ * # C-contiguous, non symmetric
  * ###########################################
  * cdef void multiply_ll_mat_with_numpy_vector_kernel_INT32_t_COMPLEX64_t(INT32_t m, COMPLEX64_t *x, COMPLEX64_t *y,             # <<<<<<<<<<<<<<
  *          COMPLEX64_t *val, INT32_t *col, INT32_t *link, INT32_t *root):
@@ -2593,7 +2593,7 @@ static void __pyx_f_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT32_t_COMPLEX
   }
 
   /* "cysparse/sparse/ll_mat_matrices/ll_mat_kernel/ll_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX64_t.pxi":31
- * # C-contiguous, no symmetric
+ * # C-contiguous, non symmetric
  * ###########################################
  * cdef void multiply_ll_mat_with_numpy_vector_kernel_INT32_t_COMPLEX64_t(INT32_t m, COMPLEX64_t *x, COMPLEX64_t *y,             # <<<<<<<<<<<<<<
  *          COMPLEX64_t *val, INT32_t *col, INT32_t *link, INT32_t *root):
@@ -3010,7 +3010,7 @@ static void __pyx_f_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT32_t_COMPLEX
 }
 
 /* "cysparse/sparse/ll_mat_matrices/ll_mat_kernel/ll_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX64_t.pxi":210
- * # C-contiguous, no symmetric
+ * # C-contiguous, non symmetric
  * ###########################################
  * cdef void multiply_tranposed_ll_mat_with_numpy_vector_kernel_INT32_t_COMPLEX64_t(INT32_t m, INT32_t n, COMPLEX64_t *x, COMPLEX64_t *y,             # <<<<<<<<<<<<<<
  *          COMPLEX64_t *val, INT32_t *col, INT32_t *link, INT32_t *root):
@@ -3110,7 +3110,7 @@ static void __pyx_f_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT32_t_COMPLEX
   }
 
   /* "cysparse/sparse/ll_mat_matrices/ll_mat_kernel/ll_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX64_t.pxi":210
- * # C-contiguous, no symmetric
+ * # C-contiguous, non symmetric
  * ###########################################
  * cdef void multiply_tranposed_ll_mat_with_numpy_vector_kernel_INT32_t_COMPLEX64_t(INT32_t m, INT32_t n, COMPLEX64_t *x, COMPLEX64_t *y,             # <<<<<<<<<<<<<<
  *          COMPLEX64_t *val, INT32_t *col, INT32_t *link, INT32_t *root):
@@ -3122,7 +3122,7 @@ static void __pyx_f_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT32_t_COMPLEX
 }
 
 /* "cysparse/sparse/ll_mat_matrices/ll_mat_kernel/ll_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX64_t.pxi":250
- * # Non C-contiguous, no symmetric
+ * # Non C-contiguous, non symmetric
  * ###########################################
  * cdef void multiply_tranposed_ll_mat_with_strided_numpy_vector_kernel_INT32_t_COMPLEX64_t(INT32_t m, INT32_t n, COMPLEX64_t *x, INT32_t incx, COMPLEX64_t *y, INT32_t incy,             # <<<<<<<<<<<<<<
  *          COMPLEX64_t *val, INT32_t *col, INT32_t *link, INT32_t *root):
@@ -3219,7 +3219,7 @@ static void __pyx_f_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT32_t_COMPLEX
   }
 
   /* "cysparse/sparse/ll_mat_matrices/ll_mat_kernel/ll_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX64_t.pxi":250
- * # Non C-contiguous, no symmetric
+ * # Non C-contiguous, non symmetric
  * ###########################################
  * cdef void multiply_tranposed_ll_mat_with_strided_numpy_vector_kernel_INT32_t_COMPLEX64_t(INT32_t m, INT32_t n, COMPLEX64_t *x, INT32_t incx, COMPLEX64_t *y, INT32_t incy,             # <<<<<<<<<<<<<<
  *          COMPLEX64_t *val, INT32_t *col, INT32_t *link, INT32_t *root):

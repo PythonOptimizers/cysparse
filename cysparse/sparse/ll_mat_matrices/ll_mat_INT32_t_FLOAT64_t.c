@@ -2494,7 +2494,7 @@ static int __pyx_f_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT64_
 }
 
 /* "cysparse/sparse/ll_mat_matrices/ll_mat_kernel/ll_mat_multiplication_by_numpy_vector_kernel_INT32_t_FLOAT64_t.pxi":31
- * # C-contiguous, no symmetric
+ * # C-contiguous, non symmetric
  * ###########################################
  * cdef void multiply_ll_mat_with_numpy_vector_kernel_INT32_t_FLOAT64_t(INT32_t m, FLOAT64_t *x, FLOAT64_t *y,             # <<<<<<<<<<<<<<
  *          FLOAT64_t *val, INT32_t *col, INT32_t *link, INT32_t *root):
@@ -2579,7 +2579,7 @@ static void __pyx_f_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT64
   }
 
   /* "cysparse/sparse/ll_mat_matrices/ll_mat_kernel/ll_mat_multiplication_by_numpy_vector_kernel_INT32_t_FLOAT64_t.pxi":31
- * # C-contiguous, no symmetric
+ * # C-contiguous, non symmetric
  * ###########################################
  * cdef void multiply_ll_mat_with_numpy_vector_kernel_INT32_t_FLOAT64_t(INT32_t m, FLOAT64_t *x, FLOAT64_t *y,             # <<<<<<<<<<<<<<
  *          FLOAT64_t *val, INT32_t *col, INT32_t *link, INT32_t *root):
@@ -2990,7 +2990,7 @@ static void __pyx_f_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT64
 }
 
 /* "cysparse/sparse/ll_mat_matrices/ll_mat_kernel/ll_mat_multiplication_by_numpy_vector_kernel_INT32_t_FLOAT64_t.pxi":210
- * # C-contiguous, no symmetric
+ * # C-contiguous, non symmetric
  * ###########################################
  * cdef void multiply_tranposed_ll_mat_with_numpy_vector_kernel_INT32_t_FLOAT64_t(INT32_t m, INT32_t n, FLOAT64_t *x, FLOAT64_t *y,             # <<<<<<<<<<<<<<
  *          FLOAT64_t *val, INT32_t *col, INT32_t *link, INT32_t *root):
@@ -3088,7 +3088,7 @@ static void __pyx_f_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT64
   }
 
   /* "cysparse/sparse/ll_mat_matrices/ll_mat_kernel/ll_mat_multiplication_by_numpy_vector_kernel_INT32_t_FLOAT64_t.pxi":210
- * # C-contiguous, no symmetric
+ * # C-contiguous, non symmetric
  * ###########################################
  * cdef void multiply_tranposed_ll_mat_with_numpy_vector_kernel_INT32_t_FLOAT64_t(INT32_t m, INT32_t n, FLOAT64_t *x, FLOAT64_t *y,             # <<<<<<<<<<<<<<
  *          FLOAT64_t *val, INT32_t *col, INT32_t *link, INT32_t *root):
@@ -3100,7 +3100,7 @@ static void __pyx_f_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT64
 }
 
 /* "cysparse/sparse/ll_mat_matrices/ll_mat_kernel/ll_mat_multiplication_by_numpy_vector_kernel_INT32_t_FLOAT64_t.pxi":250
- * # Non C-contiguous, no symmetric
+ * # Non C-contiguous, non symmetric
  * ###########################################
  * cdef void multiply_tranposed_ll_mat_with_strided_numpy_vector_kernel_INT32_t_FLOAT64_t(INT32_t m, INT32_t n, FLOAT64_t *x, INT32_t incx, FLOAT64_t *y, INT32_t incy,             # <<<<<<<<<<<<<<
  *          FLOAT64_t *val, INT32_t *col, INT32_t *link, INT32_t *root):
@@ -3195,7 +3195,7 @@ static void __pyx_f_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT64
   }
 
   /* "cysparse/sparse/ll_mat_matrices/ll_mat_kernel/ll_mat_multiplication_by_numpy_vector_kernel_INT32_t_FLOAT64_t.pxi":250
- * # Non C-contiguous, no symmetric
+ * # Non C-contiguous, non symmetric
  * ###########################################
  * cdef void multiply_tranposed_ll_mat_with_strided_numpy_vector_kernel_INT32_t_FLOAT64_t(INT32_t m, INT32_t n, FLOAT64_t *x, INT32_t incx, FLOAT64_t *y, INT32_t incy,             # <<<<<<<<<<<<<<
  *          FLOAT64_t *val, INT32_t *col, INT32_t *link, INT32_t *root):

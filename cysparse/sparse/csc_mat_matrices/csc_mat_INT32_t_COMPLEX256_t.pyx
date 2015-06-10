@@ -186,8 +186,7 @@ cdef class CSCSparseMatrix_INT32_t_COMPLEX256_t(ImmutableSparseMatrix_INT32_t_CO
         """
         Return :math:`A^t * b`.
         """
-        pass
-        #return multiply_transposed_ll_mat_with_numpy_vector_INT32_t_COMPLEX256_t(self, B)
+        return multiply_transposed_csc_mat_with_numpy_vector_INT32_t_COMPLEX256_t(self, B)
 
 
     ####################################################################################################################

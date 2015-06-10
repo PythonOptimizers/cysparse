@@ -26,7 +26,7 @@ Note:
 ########################################################################################################################
 
 ###########################################
-# C-contiguous, no symmetric
+# C-contiguous, non symmetric
 ###########################################
 cdef void multiply_ll_mat_with_numpy_vector_kernel_INT32_t_INT32_t(INT32_t m, INT32_t *x, INT32_t *y,
          INT32_t *val, INT32_t *col, INT32_t *link, INT32_t *root):
@@ -205,7 +205,7 @@ cdef void multiply_sym_ll_mat_with_strided_numpy_vector_kernel_INT32_t_INT32_t(I
 ########################################################################################################################
 
 ###########################################
-# C-contiguous, no symmetric
+# C-contiguous, non symmetric
 ###########################################
 cdef void multiply_tranposed_ll_mat_with_numpy_vector_kernel_INT32_t_INT32_t(INT32_t m, INT32_t n, INT32_t *x, INT32_t *y,
          INT32_t *val, INT32_t *col, INT32_t *link, INT32_t *root):
@@ -245,7 +245,7 @@ cdef void multiply_tranposed_ll_mat_with_numpy_vector_kernel_INT32_t_INT32_t(INT
           k = link[k]
 
 ###########################################
-# Non C-contiguous, no symmetric
+# Non C-contiguous, non symmetric
 ###########################################
 cdef void multiply_tranposed_ll_mat_with_strided_numpy_vector_kernel_INT32_t_INT32_t(INT32_t m, INT32_t n, INT32_t *x, INT32_t incx, INT32_t *y, INT32_t incy,
          INT32_t *val, INT32_t *col, INT32_t *link, INT32_t *root):

@@ -1,3 +1,25 @@
+"""
+Several routines to multiply a :class:`CSCSparseMatrix` matrix with a (comming from a :program:`NumPy` vector) C-array.
+
+Covered cases:
+
+1. :math:`A * b`:
+
+- :program:`NumPy` array data C-contiguous, ``CSCSparseMatrix`` not symmetric
+- :program:`NumPy` array data C-contiguous, ``CSCSparseMatrix`` symmetric
+- :program:`NumPy` array data not C-contiguous, ``CSCSparseMatrix`` not symmetric
+- :program:`NumPy` array data not C-contiguous, ``CSCSparseMatrix`` symmetric
+
+2. :math:`A^t * b`
+
+- :program:`NumPy` array data C-contiguous, ``CSCSparseMatrix`` not symmetric
+- :program:`NumPy` array data not C-contiguous, ``CSCSparseMatrix`` not symmetric
+
+Note:
+    We only consider C-arrays with same type of elements as the type of elements in the ``CSCSparseMatrix``.
+    Even if we construct the resulting :program:`NumPy` array as C-contiguous, the functions are more general and could
+    be used with a given strided :program:`NumPy` `y` vector.
+"""
 
 
 
@@ -6,7 +28,7 @@
 ########################################################################################################################
 
 ###########################################
-# C-contiguous, no symmetric
+# C-contiguous, non symmetric
 ###########################################
 cdef void multiply_csc_mat_with_numpy_vector_kernel_INT32_t_FLOAT64_t(INT32_t m, INT32_t n, FLOAT64_t *x, FLOAT64_t *y,
          FLOAT64_t *val, INT32_t *row, INT32_t *ind):
@@ -179,7 +201,7 @@ cdef void multiply_sym_csc_mat_with_strided_numpy_vector_kernel_INT32_t_FLOAT64_
 ########################################################################################################################
 
 ###########################################
-# C-contiguous, no symmetric
+# C-contiguous, non symmetric
 ###########################################
 cdef void multiply_tranposed_csc_mat_with_numpy_vector_kernel_INT32_t_FLOAT64_t(INT32_t m, INT32_t n, FLOAT64_t *x, FLOAT64_t *y,
          FLOAT64_t *val, INT32_t *row, INT32_t *ind):
@@ -216,7 +238,7 @@ cdef void multiply_tranposed_csc_mat_with_numpy_vector_kernel_INT32_t_FLOAT64_t(
 
 
 ###########################################
-# Non C-contiguous, no symmetric
+# Non C-contiguous, non symmetric
 ###########################################
 cdef void multiply_tranposed_csc_mat_with_strided_numpy_vector_kernel_INT32_t_FLOAT64_t(INT32_t m, INT32_t n, FLOAT64_t *x, INT32_t incx, FLOAT64_t *y, INT32_t incy,
          FLOAT64_t *val, INT32_t *row, INT32_t *ind):

@@ -185,8 +185,7 @@ cdef class CSCSparseMatrix_INT64_t_INT64_t(ImmutableSparseMatrix_INT64_t_INT64_t
         """
         Return :math:`A^t * b`.
         """
-        pass
-        #return multiply_transposed_ll_mat_with_numpy_vector_INT64_t_INT64_t(self, B)
+        return multiply_transposed_csc_mat_with_numpy_vector_INT64_t_INT64_t(self, B)
 
 
     ####################################################################################################################
