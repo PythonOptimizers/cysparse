@@ -1,5 +1,5 @@
 """
-This file compares different implementations of ``put``.
+This file compares different implementations of ``take``.
 
 We compare the libraries:
 

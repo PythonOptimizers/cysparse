@@ -959,16 +959,21 @@ cdef class LLSparseMatrix_@index@_@type@(MutableSparseMatrix_@index@_@type@):
     ####################################################################################################################
     ####################################################################################################################
     #                                            *** SET ***
-    def put_triplet(self, list index_i, list index_j, list val):
+    def put_triplet(self, index_i, index_j, val):
         """
         Assign triplet :math:`\{(i, j, \textrm{val})\}` values to the matrix..
 
 
         """
         # TODO: to be completely rewritten
-        cdef Py_ssize_t index_i_length = len(index_i)
-        cdef Py_ssize_t index_j_length = len(index_j)
-        cdef Py_ssize_t val_length = len(val)
+
+        # in case of lists
+        cdef Py_ssize_t index_i_length
+        cdef Py_ssize_t index_j_length
+        cdef Py_ssize_t val_length
+
+
+
 
         assert index_j_length == index_j_length == val_length, "All lists must be of equal length"
 
