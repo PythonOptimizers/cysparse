@@ -8,7 +8,7 @@ from cysparse.types.cysparse_types import type_to_string
 
 from cysparse.sparse.ll_mat cimport LL_MAT_INCREASE_FACTOR
 
-from cysparse.sparse.s_mat cimport unexposed_value
+from cysparse.sparse.s_mat cimport unexposed_value, PySparseMatrix_Check
 from cysparse.types.cysparse_numpy_types import are_mixed_types_compatible, cysparse_to_numpy_type
 from cysparse.sparse.ll_mat cimport PyLLSparseMatrix_Check, LL_MAT_PPRINT_COL_THRESH, LL_MAT_PPRINT_ROW_THRESH
 from cysparse.sparse.s_mat_matrices.s_mat_@index@_@type@ cimport MutableSparseMatrix_@index@_@type@
@@ -682,29 +682,41 @@ cdef class LLSparseMatrix_@index@_@type@(MutableSparseMatrix_@index@_@type@):
             @index@ i, j
 
         if self.is_symmetric:
-            if PyLLSparseMatrix_Check(obj):
-                # obj is LLSparseMatrix
+            if PySparseMatrix_Check(obj):
                 for i from 0 <= i < nrow:
                     for j from 0 <= j <= i:
-                        self.put(row_indices[i], col_indices[j], obj.at(i, j))
+                        self.put(row_indices[i], col_indices[j], <@type@> obj.at(i, j))
 
-            else:
+            elif cnp.PyArray_Check(obj):
                 for i from 0 <= i < nrow:
                     for j from 0 <= j <= i:
                         self.put(row_indices[i], col_indices[j], <@type@> obj[tuple(i, j)])
 
-        else:   # self.is_symmetric == False
+            elif is_python_number(obj):
+                for i from 0 <= i < nrow:
+                    for j from 0 <= j <= i:
+                        self.put(row_indices[i], col_indices[j], <@type@> obj)
+            else:
+                raise TypeError('Not assignment allowed with that type of object')
 
-            if PyLLSparseMatrix_Check(obj):
-                # obj is LLSparseMatrix
+        else:   # general case, i.e. not symmetric
+
+            if PySparseMatrix_Check(obj):
                 for i from 0 <= i < nrow:
                     for j from 0 <= j < ncol:
-                        self.put(row_indices[i], col_indices[j], obj.at(i, j))
+                        self.put(row_indices[i], col_indices[j], <@type@> obj.at(i, j))
 
-            else:
+            elif cnp.PyArray_Check(obj):
                 for i from 0 <= i < nrow:
                     for j from 0 <= j < ncol:
                         self.put(row_indices[i], col_indices[j], <@type@> obj[tuple(i, j)])
+
+            elif is_python_number(obj):
+                for i from 0 <= i < nrow:
+                    for j from 0 <= j < ncol:
+                        self.put(row_indices[i], col_indices[j], <@type@> obj)
+            else:
+                raise TypeError('Not assignment allowed with that type of object')
 
     ####################################################################################################################
     # COUNTING ELEMENTS
@@ -903,16 +915,16 @@ cdef class LLSparseMatrix_@index@_@type@(MutableSparseMatrix_@index@_@type@):
         if len(key) != 2:
             raise IndexError('Index tuple must be of length 2 (not %d)' % len(key))
 
-        #cdef LLSparseMatrixView view
+        cdef LLSparseMatrixView_@index@_@type@ view
 
-        ## test for direct access (i.e. both elements are integers)
-        #if not PyInt_Check(<PyObject *>key[0]) or not PyInt_Check(<PyObject *>key[1]):
-        #    # TODO: don't create temp object
-        #    view = MakeLLSparseMatrixView(self, <PyObject *>key[0], <PyObject *>key[1])
-        #    self.assign(view, value)
+        # test for direct access (i.e. both elements are integers)
+        if not PyInt_Check(<PyObject *>key[0]) or not PyInt_Check(<PyObject *>key[1]):
+            # TODO: don't create temp object
+            view = MakeLLSparseMatrixView_@index@_@type@(self, <PyObject *>key[0], <PyObject *>key[1])
+            self.assign(view, value)
 
-        #    del view
-        #    return
+            del view
+            return
 
         cdef @index@ i = key[0]
         cdef @index@ j = key[1]

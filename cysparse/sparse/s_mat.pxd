@@ -7,6 +7,8 @@ cdef unexposed_value
 
 cdef INT32_t MUTABLE_SPARSE_MAT_DEFAULT_SIZE_HINT
 
+cpdef bint PySparseMatrix_Check(object obj)
+
 cdef class SparseMatrix:
     cdef:
        

@@ -27,7 +27,10 @@ class NonZeros():
 
     def __exit__(self, type, value, traceback):
         self.A.store_zeros = self.store_zeros
-        
+
+cpdef bint PySparseMatrix_Check(object obj):
+    return isinstance(obj, SparseMatrix)
+
 ########################################################################################################################
 # BASE MATRIX CLASS
 ########################################################################################################################

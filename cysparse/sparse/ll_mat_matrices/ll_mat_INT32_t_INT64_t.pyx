@@ -8,7 +8,7 @@ from cysparse.types.cysparse_types import type_to_string
 
 from cysparse.sparse.ll_mat cimport LL_MAT_INCREASE_FACTOR
 
-from cysparse.sparse.s_mat cimport unexposed_value
+from cysparse.sparse.s_mat cimport unexposed_value, PySparseMatrix_Check
 from cysparse.types.cysparse_numpy_types import are_mixed_types_compatible, cysparse_to_numpy_type
 from cysparse.sparse.ll_mat cimport PyLLSparseMatrix_Check, LL_MAT_PPRINT_COL_THRESH, LL_MAT_PPRINT_ROW_THRESH
 from cysparse.sparse.s_mat_matrices.s_mat_INT32_t_INT64_t cimport MutableSparseMatrix_INT32_t_INT64_t
@@ -682,29 +682,41 @@ cdef class LLSparseMatrix_INT32_t_INT64_t(MutableSparseMatrix_INT32_t_INT64_t):
             INT32_t i, j
 
         if self.is_symmetric:
-            if PyLLSparseMatrix_Check(obj):
-                # obj is LLSparseMatrix
+            if PySparseMatrix_Check(obj):
                 for i from 0 <= i < nrow:
                     for j from 0 <= j <= i:
-                        self.put(row_indices[i], col_indices[j], obj.at(i, j))
+                        self.put(row_indices[i], col_indices[j], <INT64_t> obj.at(i, j))
 
-            else:
+            elif cnp.PyArray_Check(obj):
                 for i from 0 <= i < nrow:
                     for j from 0 <= j <= i:
                         self.put(row_indices[i], col_indices[j], <INT64_t> obj[tuple(i, j)])
 
-        else:   # self.is_symmetric == False
+            elif is_python_number(obj):
+                for i from 0 <= i < nrow:
+                    for j from 0 <= j <= i:
+                        self.put(row_indices[i], col_indices[j], <INT64_t> obj)
+            else:
+                raise TypeError('Not assignment allowed with that type of object')
 
-            if PyLLSparseMatrix_Check(obj):
-                # obj is LLSparseMatrix
+        else:   # general case, i.e. not symmetric
+
+            if PySparseMatrix_Check(obj):
                 for i from 0 <= i < nrow:
                     for j from 0 <= j < ncol:
-                        self.put(row_indices[i], col_indices[j], obj.at(i, j))
+                        self.put(row_indices[i], col_indices[j], <INT64_t> obj.at(i, j))
 
-            else:
+            elif cnp.PyArray_Check(obj):
                 for i from 0 <= i < nrow:
                     for j from 0 <= j < ncol:
                         self.put(row_indices[i], col_indices[j], <INT64_t> obj[tuple(i, j)])
+
+            elif is_python_number(obj):
+                for i from 0 <= i < nrow:
+                    for j from 0 <= j < ncol:
+                        self.put(row_indices[i], col_indices[j], <INT64_t> obj)
+            else:
+                raise TypeError('Not assignment allowed with that type of object')
 
     ####################################################################################################################
     # COUNTING ELEMENTS
@@ -900,16 +912,16 @@ cdef class LLSparseMatrix_INT32_t_INT64_t(MutableSparseMatrix_INT32_t_INT64_t):
         if len(key) != 2:
             raise IndexError('Index tuple must be of length 2 (not %d)' % len(key))
 
-        #cdef LLSparseMatrixView view
+        cdef LLSparseMatrixView_INT32_t_INT64_t view
 
-        ## test for direct access (i.e. both elements are integers)
-        #if not PyInt_Check(<PyObject *>key[0]) or not PyInt_Check(<PyObject *>key[1]):
-        #    # TODO: don't create temp object
-        #    view = MakeLLSparseMatrixView(self, <PyObject *>key[0], <PyObject *>key[1])
-        #    self.assign(view, value)
+        # test for direct access (i.e. both elements are integers)
+        if not PyInt_Check(<PyObject *>key[0]) or not PyInt_Check(<PyObject *>key[1]):
+            # TODO: don't create temp object
+            view = MakeLLSparseMatrixView_INT32_t_INT64_t(self, <PyObject *>key[0], <PyObject *>key[1])
+            self.assign(view, value)
 
-        #    del view
-        #    return
+            del view
+            return
 
         cdef INT32_t i = key[0]
         cdef INT32_t j = key[1]
@@ -956,16 +968,21 @@ cdef class LLSparseMatrix_INT32_t_INT64_t(MutableSparseMatrix_INT32_t_INT64_t):
     ####################################################################################################################
     ####################################################################################################################
     #                                            *** SET ***
-    def put_triplet(self, list index_i, list index_j, list val):
+    def put_triplet(self, index_i, index_j, val):
         """
         Assign triplet :math:`\{(i, j, \textrm{val})\}` values to the matrix..
 
 
         """
         # TODO: to be completely rewritten
-        cdef Py_ssize_t index_i_length = len(index_i)
-        cdef Py_ssize_t index_j_length = len(index_j)
-        cdef Py_ssize_t val_length = len(val)
+
+        # in case of lists
+        cdef Py_ssize_t index_i_length
+        cdef Py_ssize_t index_j_length
+        cdef Py_ssize_t val_length
+
+
+
 
         assert index_j_length == index_j_length == val_length, "All lists must be of equal length"
 
