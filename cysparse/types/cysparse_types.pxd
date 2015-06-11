@@ -28,8 +28,10 @@ from cpython cimport PyObject
 # UINT64_t
 # FLOAT32_t
 # FLOAT64_t
+# FLOAT128_t
 # COMPLEX64_t
 # COMPLEX128_t
+# COMPLEX256_t
 #
 # DO NOT CHANGE THIS (except if you **really** know what you are doing)
 #

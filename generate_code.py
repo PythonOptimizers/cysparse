@@ -168,11 +168,12 @@ def cysparse_type_to_numpy_enum_type(cysparse_type):
 
 def cysparse_type_to_real_sum_cysparse_type(cysparse_type):
     """
-    Returns the best *real* type for a **real** sum for a given type.
+    Returns the best **real** type for a **real** sum for a given type.
 
     For instance:
 
         INT32_t -> FLOAT64_t
+
     Args:
         cysparse_type:
 
@@ -197,6 +198,31 @@ def cysparse_type_to_real_sum_cysparse_type(cysparse_type):
 
     return r_type
 
+def cysparse_real_type_from_real_cysparse_complex_type(cysparse_type):
+    """
+    Returns the **real** type for the real or imaginary part of a **real** complex type.
+
+    For instance:
+
+        COMPLEX128_t -> FLOAT64_t
+
+    Args:
+        cysparse:
+
+    """
+    r_type = None
+
+    if cysparse_type in ['COMPLEX64_t']:
+        r_type = 'FLOAT32_t'
+    elif cysparse_type in ['COMPLEX128_t']:
+        r_type = 'FLOAT64_t'
+    elif cysparse_type in ['COMPLEX256_t']:
+        r_type = 'FLOAT128_t'
+    else:
+        raise TypeError("Not a recognized complex type")
+
+    return r_type
+
 #################################################################################################
 # COMMON STUFF
 #################################################################################################
@@ -214,6 +240,7 @@ ELEMENT_MM_TYPES = ['INT64_t', 'FLOAT64_t', 'COMPLEX128_t']
 
 # when coding
 #ELEMENT_TYPES = ['FLOAT64_t']
+#ELEMENT_TYPES = ['COMPLEX256_t']
 
 
 GENERAL_CONTEXT = {
@@ -239,6 +266,7 @@ GENERAL_ENVIRONMENT.filters['cysparse_type_to_numpy_c_type'] = cysparse_type_to_
 GENERAL_ENVIRONMENT.filters['cysparse_type_to_numpy_type'] = cysparse_type_to_numpy_type
 GENERAL_ENVIRONMENT.filters['cysparse_type_to_real_sum_cysparse_type'] = cysparse_type_to_real_sum_cysparse_type
 GENERAL_ENVIRONMENT.filters['cysparse_type_to_numpy_enum_type'] = cysparse_type_to_numpy_enum_type
+GENERAL_ENVIRONMENT.filters['cysparse_real_type_from_real_cysparse_complex_type'] = cysparse_real_type_from_real_cysparse_complex_type
 
 
 def clean_cython_files(logger, directory, file_list=None):

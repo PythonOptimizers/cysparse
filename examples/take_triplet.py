@@ -54,3 +54,12 @@ id2 = np.array([2, 2 ,2], dtype=np.int32)
 
 l1.take_triplet(id1, id2, c)
 print c
+
+########################################################################################################################
+print "(" * 80
+
+A = NewLLSparseMatrix(nrow=4, ncol=3, size_hint=4, dtype=FLOAT64_T)
+
+A.put_triplet([0, 0, 0], [0, 1, 2], [34+8j, 34 ,34])
+
+A.print_to(sys.stdout)

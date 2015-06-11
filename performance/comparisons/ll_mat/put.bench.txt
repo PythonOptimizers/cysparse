@@ -1,0 +1,35 @@
+# Benchmark Report
+
+## Simple put_triplet with 100 elements, size = 1,000 and put_size = 1,000
+
+    name | rank | runs |      mean |     stdev | baseline
+---------|------|------|-----------|-----------|---------
+cysparse |    1 |  100 | 1.697e-05 | 2.913e-06 |        1
+pysparse |    2 |  100 | 2.115e-05 | 2.086e-06 |    1.247
+
+## Simple put_triplet with 1,000 elements, size = 10,000 and put_size = 10,000
+
+    name | rank | runs |      mean |     stdev | baseline
+---------|------|------|-----------|-----------|---------
+cysparse |    1 |  100 | 0.0001269 | 2.965e-05 |        1
+pysparse |    2 |  100 | 0.0001627 |  4.79e-05 |    1.283
+
+## Simple put_triplet with 10,000 elements, size = 100,000 and put_size = 100,000
+
+    name | rank | runs |     mean |     stdev | baseline
+---------|------|------|----------|-----------|---------
+cysparse |    1 |  100 | 0.000902 | 7.042e-05 |        1
+pysparse |    2 |  100 | 0.000984 | 8.545e-05 |    1.091
+
+## Simple put_triplet with 10,000 elements, size = 1,000,000 and put_size = 800,000
+
+    name | rank | runs |     mean |     stdev | baseline
+---------|------|------|----------|-----------|---------
+cysparse |    1 |  100 | 0.007443 | 0.0005273 |        1
+pysparse |    2 |  100 |  0.00808 | 0.0005878 |    1.086
+
+Total runs: 800 run in arbitrary order
+Python version: 2.7.5+
+System: x86_64 Linux 3.11.0-12-generic
+Version: benchmark v0.1.5
+Date: 2015-06-11 17:23:01

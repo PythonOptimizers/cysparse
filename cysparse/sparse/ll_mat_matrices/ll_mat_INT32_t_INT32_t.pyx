@@ -67,9 +67,13 @@ cdef extern from "Python.h":
     int PyList_Check(PyObject *p)
     Py_ssize_t PyList_Size(PyObject *list)
 
-    long PyInt_AS_LONG(PyObject *io)
+    long PyInt_AS_LONG(PyObject *op)
+    double PyFloat_AS_DOUBLE(PyObject *pyfloat)
+    double PyComplex_RealAsDouble(PyObject *op)
+    double PyComplex_ImagAsDouble(PyObject *op)
     PyObject* PyFloat_FromDouble(double v)
     Py_complex PyComplex_AsCComplex(PyObject *op)
+
 
 cdef extern from "complex.h":
     float crealf(float complex z)
@@ -968,29 +972,175 @@ cdef class LLSparseMatrix_INT32_t_INT32_t(MutableSparseMatrix_INT32_t_INT32_t):
     ####################################################################################################################
     ####################################################################################################################
     #                                            *** SET ***
-    def put_triplet(self, index_i, index_j, val):
+    def put_triplet(self, id1, id2, b):
         """
         Assign triplet :math:`\{(i, j, \textrm{val})\}` values to the matrix..
 
+        This operation is equivalent to
 
+            for i in range(len(b)):
+                A[id1[i],id2[i]] = b[i]
+        Args:
+            id1, id2: List or :program:`NumPy` arrays with indices. Both **must** be of the same type. In case of :program:`NumPy` arrays, they must
+                contain elements of type INT32_t and must be C-contiguous.
+            b: List or :program:`NumpY` array to fill with the values.
+
+        Raises:
+            ``TypeError`` is both arguments to give indices are not of the same type (``list`` or :program:`NumPy` arrays) or if
+            one of the argument is not a ``list`` or a :program:`NumPy` array. Also the ``dtype`` of the :program:`NumPy` value array must
+            correspond to the type of the matrix.
+
+            ``IndexError`` whenever length don't match.
+
+            A supplementary condition holds when :program:`NumPy` arrays are used to give the indices:
+
+            - the indices arrays **must** be C-contiguous and
+            - index elements **must** be of same type than the ``itype`` of the matrix.
+
+            In both cases, a ``TypeError`` is raised.
         """
-        # TODO: to be completely rewritten
-
-        # in case of lists
-        cdef Py_ssize_t index_i_length
-        cdef Py_ssize_t index_j_length
-        cdef Py_ssize_t val_length
+        cdef:
+            Py_ssize_t id1_list_length, id2_list_length, b_list_length, i_list # in case we have lists
+            INT32_t id1_array_length, id2_array_length, b_array_length, i_array  # in case we have numpy arrays
 
 
+        # if case of NumPy arrays
+        cdef INT32_t * id1_data
+        cdef INT32_t * id2_data
+        cdef INT32_t * b_data
+
+        # stride size if any
+        cdef size_t sd = sizeof(INT32_t)
+        cdef INT32_t b_data_incx
 
 
-        assert index_j_length == index_j_length == val_length, "All lists must be of equal length"
 
-        cdef Py_ssize_t i
-        cdef PyObject * elem
+        # test arguments
+        ################################################################################################################
+        # CASE: id1 and id2 are lists
+        ################################################################################################################
+        if PyList_Check(<PyObject *>id1) and PyList_Check(<PyObject *>id2):
+            id1_list_length = PyList_Size(<PyObject *>id1)
+            id2_list_length = PyList_Size(<PyObject *>id2)
+            if id1_list_length != id2_list_length:
+                raise IndexError('Both index lists must be of same size')
 
-        for i from 0 <= i < index_i_length:
-            self.safe_put(index_i[i], index_j[i], val[i])
+            ############################################################################################################
+            # CASE: b is a list
+            ############################################################################################################
+            if PyList_Check(<PyObject *>b):
+                b_list_length = PyList_Size(<PyObject *>b)
+                if b_list_length != id1_list_length:
+                    raise IndexError('Value list must be of same size than the index lists')
+
+                # EXPLICIT TYPE TESTS
+                for i_list from 0 <= i_list < id1_list_length:
+
+                    self.safe_put(PyInt_AS_LONG(PyList_GET_ITEM(<PyObject *>id1, i_list)), PyInt_AS_LONG(PyList_GET_ITEM(<PyObject *>id2, i_list)), <INT32_t> PyInt_AS_LONG(PyList_GET_ITEM(<PyObject *>b, i_list)))
+
+            ############################################################################################################
+            # CASE: b is an NumPy array
+            ############################################################################################################
+            elif cnp.PyArray_Check(b):
+                # check if NumPy array type is compatible
+                if not are_mixed_types_compatible(INT32_T, b.dtype):
+                    raise TypeError('Value NumPy array must contain elements of the right index type (%s)' % cysparse_to_numpy_type(INT32_T))
+
+                b_array_length = b.size
+                if b_array_length != id1_list_length:
+                    raise IndexError('Value NumPy array must be of same size than the index lists')
+
+                b_data_incx = b.strides[0] / sd
+
+                # direct access to vector b
+                b_data = <INT32_t *> cnp.PyArray_DATA(b)
+
+                if cnp.PyArray_ISCONTIGUOUS(b):
+                    for i_list from 0 <= i_list < id1_list_length:
+                        self.safe_put(PyInt_AS_LONG(PyList_GET_ITEM(<PyObject *>id1, i_list)), PyInt_AS_LONG(PyList_GET_ITEM(<PyObject *>id2, i_list)), <INT32_t> b_data[i_list])
+                else:
+                    for i_list from 0 <= i_list < id1_list_length:
+                        self.safe_put(PyInt_AS_LONG(PyList_GET_ITEM(<PyObject *>id1, i_list)), PyInt_AS_LONG(PyList_GET_ITEM(<PyObject *>id2, i_list)), <INT32_t> b_data[i_list * b_data_incx])
+
+            ############################################################################################################
+            # CASE: b is ???
+            ############################################################################################################
+            else:
+                raise TypeError('Value argument should be a list or a NumPy array')
+
+        ################################################################################################################
+        # CASE: id1 and id2 are NumPy arrays
+        ################################################################################################################
+        elif cnp.PyArray_Check(id1) and cnp.PyArray_Check(id2):
+            id1_array_length = id1.size
+            id2_array_length = id2.size
+            if id1_array_length != id2_array_length:
+                raise IndexError('Both indices lists must be of same size')
+
+            if not cnp.PyArray_ISCONTIGUOUS(id1) or not cnp.PyArray_ISCONTIGUOUS(id2):
+                raise TypeError('Both NumPy index arrays must be C-contiguous')
+
+            # direct access to indices arrays
+            id1_data = <INT32_t *> cnp.PyArray_DATA(id1)
+            id2_data = <INT32_t *> cnp.PyArray_DATA(id2)
+
+            ############################################################################################################
+            # CASE: b is a list
+            ############################################################################################################
+            if PyList_Check(<PyObject *>b):
+                b_list_length = PyList_Size(<PyObject *>b)
+                if b_list_length != id1_array_length:
+                    raise IndexError('Value list must be of same size than the index arrays')
+
+                # EXPLICIT TYPE TESTS
+                for i_list from 0 <= i_list < b_list_length:
+
+                    self.safe_put(id1_data[i_list], id2_data[i_list], <INT32_t> PyInt_AS_LONG(PyList_GET_ITEM(<PyObject *>b, i_list)))
+
+
+            ############################################################################################################
+            # CASE: b is an NumPy array
+            ############################################################################################################
+            elif cnp.PyArray_Check(b):
+                # check if NumPy array type is compatible
+                if not are_mixed_types_compatible(INT32_T, b.dtype):
+                    raise TypeError('Value NumPy array must contain elements of the right index type (%s)' % cysparse_to_numpy_type(INT32_T))
+
+                b_array_length = b.size
+                if b_array_length != id1_array_length:
+                    raise IndexError('Value NumPy array must be of same size than the NumPy index arrays')
+
+                b_data_incx = b.strides[0] / sd
+
+                # direct access to vector b
+                b_data = <INT32_t *> cnp.PyArray_DATA(b)
+
+                if cnp.PyArray_ISCONTIGUOUS(b):
+                    for i_array from 0 <= i_array < id1_array_length:
+                        self.safe_put(id1_data[i_array], id2_data[i_array], <INT32_t> b_data[i_array])
+                else:
+                    for i_array from 0 <= i_array < id1_array_length:
+                        self.safe_put(id1_data[i_array], id2_data[i_array], <INT32_t> b_data[i_array * b_data_incx])
+
+
+            ############################################################################################################
+            # CASE: b is ???
+            ############################################################################################################
+            else:
+                raise TypeError('Value argument should be a list or a NumPy array')
+
+        ################################################################################################################
+        # CASE: id1 and id2 ???
+        ################################################################################################################
+        else:
+            raise TypeError('Both arguments with indices must be of the same type (lists or NumPy arrays)')
+
+
+        #cdef Py_ssize_t i
+        #cdef PyObject * elem
+
+        #for i from 0 <= i < index_i_length:
+        #    self.safe_put(index_i[i], index_j[i], val[i])
 
     ####################################################################################################################
     #                                            *** GET ***
@@ -1042,6 +1192,9 @@ cdef class LLSparseMatrix_INT32_t_INT32_t(MutableSparseMatrix_INT32_t_INT32_t):
         cdef INT32_t incx = b.strides[0] / sd
 
         # test arguments
+        ################################################################################################################
+        # id1 and id2 are lists
+        ################################################################################################################
         if PyList_Check(<PyObject *>id1) and PyList_Check(<PyObject *>id2):
             id1_list_length = PyList_Size(<PyObject *>id1)
             id2_list_length = PyList_Size(<PyObject *>id2)
@@ -1063,6 +1216,9 @@ cdef class LLSparseMatrix_INT32_t_INT32_t(MutableSparseMatrix_INT32_t_INT32_t):
                 for i_list from 0 <= i_list < id1_list_length:
                     b_data[i_list*incx] = self.safe_at(PyInt_AS_LONG(PyList_GET_ITEM(<PyObject *>id1, i_list)), PyInt_AS_LONG(PyList_GET_ITEM(<PyObject *>id2, i_list)))
 
+        ################################################################################################################
+        # id1 and id2 are NumPy arrays
+        ################################################################################################################
         elif cnp.PyArray_Check(id1) and cnp.PyArray_Check(id2):
             id1_array_length = id1.size
             id2_array_length = id2.size
@@ -1073,7 +1229,7 @@ cdef class LLSparseMatrix_INT32_t_INT32_t(MutableSparseMatrix_INT32_t_INT32_t):
                 raise IndexError('NumPy array must be of the same size than the indices lists')
 
             if not cnp.PyArray_ISCONTIGUOUS(id1) or not cnp.PyArray_ISCONTIGUOUS(id2):
-                raise TypeError('Both NumPy indices arrays must be C-contiguous')
+                raise TypeError('Both NumPy index arrays must be C-contiguous')
 
             if not are_mixed_types_compatible(INT32_T, id1.dtype) or not are_mixed_types_compatible(INT32_T, id2.dtype):
                 raise TypeError('Both NumPy indices arrays must contain elements of the right index type (%s)' % cysparse_to_numpy_type(INT32_T))
@@ -1095,7 +1251,7 @@ cdef class LLSparseMatrix_INT32_t_INT32_t(MutableSparseMatrix_INT32_t_INT32_t):
                     b_data[i_list*incx] = self.safe_at(id1_data[i_array], id2_data[i_array])
 
         else:
-            raise TypeError('Both arguments with indices must be of the same type (list or NumPy arrays)')
+            raise TypeError('Both arguments with indices must be of the same type (lists or NumPy arrays)')
 
     cpdef object keys(self):
         """
