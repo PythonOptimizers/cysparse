@@ -196,7 +196,13 @@ cdef class LLSparseMatrixView_@index@_@type@:
             @index@ * col_indices
 
         row_indices = <@index@ *> PyMem_Malloc(self.nrow * sizeof(@index@))
+        if not row_indices:
+            raise MemoryError()
+
         col_indices = <@index@ *> PyMem_Malloc(self.ncol * sizeof(@index@))
+        if not col_indices:
+            PyMem_Free(row_indices)
+            raise MemoryError()
 
         cdef LLSparseMatrixView_@index@_@type@ view = LLSparseMatrixView_@index@_@type@(unexposed_value, self.A, self.nrow, self.ncol)
 
@@ -381,6 +387,7 @@ cdef LLSparseMatrixView_@index@_@type@ MakeLLSparseMatrixViewFromView_@index@_@t
 
     real_col_indices = <@index@ *> PyMem_Malloc(ncol * sizeof(@index@))
     if not real_col_indices:
+        PyMem_Free(real_row_indices)
         raise MemoryError()
 
     for i from 0 <= i < nrow:

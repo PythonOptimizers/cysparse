@@ -236,24 +236,22 @@ cdef class CSCSparseMatrix_INT64_t_INT64_t(ImmutableSparseMatrix_INT64_t_INT64_t
             if not mat:
                 raise MemoryError()
 
-            for i from 0 <= i < self.nrow:
-                for j from 0 <= j < self.ncol:
-
-                    mat[i* self.nrow + j] = 0
+            for j from 0 <= j < self.ncol:
+                for i from 0 <= i < self.nrow:
 
 
-                    # BUG: this is non sense as it is computed for every different i
-                    # TODO: rewrite this completely
-                    k = self.ind[j]
-                    while k < self.ind[j+1]:
-                        mat[(self.row[k]*self.nrow)+j] = self.val[k]
-                        if self.is_symmetric:
-                            mat[(j*self.nrow)+ self.row[k]] = self.val[k]
-                        k += 1
+                    mat[i* self.ncol + j] = 0
+
+
+                # TODO: rewrite this completely
+                for k from self.ind[j] <= k < self.ind[j+1]:
+                    mat[(self.row[k]*self.ncol)+j] = self.val[k]
+                    if self.is_symmetric:
+                        mat[(j*self.ncol)+ self.row[k]] = self.val[k]
 
             for i from 0 <= i < self.nrow:
                 for j from 0 <= j < self.ncol:
-                    val = mat[(i*self.nrow)+j]
+                    val = mat[(i*self.ncol)+j]
                     #print('%9.*f ' % (6, val), file=OUT, end='')
                     print('{0:9.6f} '.format(val), end='')
                 print()

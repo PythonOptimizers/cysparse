@@ -303,18 +303,24 @@ cdef class LLSparseMatrix_@index@_@type@(MutableSparseMatrix_@index@_@type@):
 
         col = <@index@ *> PyMem_Malloc(self.nalloc * sizeof(@index@))
         if not col:
+            PyMem_Free(self_copy.val)
             raise MemoryError()
         memcpy(col, self.col, self.nalloc * sizeof(@index@))
         self_copy.col = col
 
         link = <@index@ *> PyMem_Malloc(self.nalloc * sizeof(@index@))
         if not link:
+            PyMem_Free(self_copy.val)
+            PyMem_Free(self_copy.col)
             raise MemoryError()
         memcpy(link, self.link, self.nalloc * sizeof(@index@))
         self_copy.link = link
 
         root = <@index@ *> PyMem_Malloc(self.nrow * sizeof(@index@))
         if not root:
+            PyMem_Free(self_copy.val)
+            PyMem_Free(self_copy.col)
+            PyMem_Free(self_copy.link)
             raise MemoryError()
         memcpy(root, self.root, self.nrow * sizeof(@index@))
         self_copy.root = root
@@ -524,10 +530,13 @@ cdef class LLSparseMatrix_@index@_@type@(MutableSparseMatrix_@index@_@type@):
 
         cdef @index@ * col =  <@index@*> PyMem_Malloc(self.nnz * sizeof(@index@))
         if not col:
+            PyMem_Free(ind)
             raise MemoryError()
 
         cdef @type@ * val = <@type@ *> PyMem_Malloc(self.nnz * sizeof(@type@))
         if not val:
+            PyMem_Free(ind)
+            PyMem_Free(col)
             raise MemoryError()
 
         cdef @index@ ind_col_index = 0  # current col index in col and val
@@ -571,10 +580,13 @@ cdef class LLSparseMatrix_@index@_@type@(MutableSparseMatrix_@index@_@type@):
 
         cdef @index@ * row = <@index@ *> PyMem_Malloc(self.nnz * sizeof(@index@))
         if not row:
+            PyMem_Free(ind)
             raise MemoryError()
 
         cdef @type@ * val = <@type@ *> PyMem_Malloc(self.nnz * sizeof(@type@))
         if not val:
+            PyMem_Free(ind)
+            PyMem_Free(row)
             raise MemoryError()
 
 

@@ -303,18 +303,24 @@ cdef class LLSparseMatrix_INT64_t_FLOAT128_t(MutableSparseMatrix_INT64_t_FLOAT12
 
         col = <INT64_t *> PyMem_Malloc(self.nalloc * sizeof(INT64_t))
         if not col:
+            PyMem_Free(self_copy.val)
             raise MemoryError()
         memcpy(col, self.col, self.nalloc * sizeof(INT64_t))
         self_copy.col = col
 
         link = <INT64_t *> PyMem_Malloc(self.nalloc * sizeof(INT64_t))
         if not link:
+            PyMem_Free(self_copy.val)
+            PyMem_Free(self_copy.col)
             raise MemoryError()
         memcpy(link, self.link, self.nalloc * sizeof(INT64_t))
         self_copy.link = link
 
         root = <INT64_t *> PyMem_Malloc(self.nrow * sizeof(INT64_t))
         if not root:
+            PyMem_Free(self_copy.val)
+            PyMem_Free(self_copy.col)
+            PyMem_Free(self_copy.link)
             raise MemoryError()
         memcpy(root, self.root, self.nrow * sizeof(INT64_t))
         self_copy.root = root
@@ -524,10 +530,13 @@ cdef class LLSparseMatrix_INT64_t_FLOAT128_t(MutableSparseMatrix_INT64_t_FLOAT12
 
         cdef INT64_t * col =  <INT64_t*> PyMem_Malloc(self.nnz * sizeof(INT64_t))
         if not col:
+            PyMem_Free(ind)
             raise MemoryError()
 
         cdef FLOAT128_t * val = <FLOAT128_t *> PyMem_Malloc(self.nnz * sizeof(FLOAT128_t))
         if not val:
+            PyMem_Free(ind)
+            PyMem_Free(col)
             raise MemoryError()
 
         cdef INT64_t ind_col_index = 0  # current col index in col and val
@@ -571,10 +580,13 @@ cdef class LLSparseMatrix_INT64_t_FLOAT128_t(MutableSparseMatrix_INT64_t_FLOAT12
 
         cdef INT64_t * row = <INT64_t *> PyMem_Malloc(self.nnz * sizeof(INT64_t))
         if not row:
+            PyMem_Free(ind)
             raise MemoryError()
 
         cdef FLOAT128_t * val = <FLOAT128_t *> PyMem_Malloc(self.nnz * sizeof(FLOAT128_t))
         if not val:
+            PyMem_Free(ind)
+            PyMem_Free(row)
             raise MemoryError()
 
 

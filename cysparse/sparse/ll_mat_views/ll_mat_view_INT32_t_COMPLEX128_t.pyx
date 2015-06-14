@@ -192,7 +192,13 @@ cdef class LLSparseMatrixView_INT32_t_COMPLEX128_t:
             INT32_t * col_indices
 
         row_indices = <INT32_t *> PyMem_Malloc(self.nrow * sizeof(INT32_t))
+        if not row_indices:
+            raise MemoryError()
+
         col_indices = <INT32_t *> PyMem_Malloc(self.ncol * sizeof(INT32_t))
+        if not col_indices:
+            PyMem_Free(row_indices)
+            raise MemoryError()
 
         cdef LLSparseMatrixView_INT32_t_COMPLEX128_t view = LLSparseMatrixView_INT32_t_COMPLEX128_t(unexposed_value, self.A, self.nrow, self.ncol)
 
@@ -377,6 +383,7 @@ cdef LLSparseMatrixView_INT32_t_COMPLEX128_t MakeLLSparseMatrixViewFromView_INT3
 
     real_col_indices = <INT32_t *> PyMem_Malloc(ncol * sizeof(INT32_t))
     if not real_col_indices:
+        PyMem_Free(real_row_indices)
         raise MemoryError()
 
     for i from 0 <= i < nrow:

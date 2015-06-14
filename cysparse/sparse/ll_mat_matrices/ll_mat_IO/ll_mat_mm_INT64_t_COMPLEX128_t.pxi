@@ -253,27 +253,28 @@ cdef LLSparseMatrix_INT64_t_COMPLEX128_t MakeLLSparseMatrixFromMMFile2_INT64_t_C
 
         col = <INT64_t *> PyMem_Malloc(nnz * sizeof(INT64_t))
         if not col:
-            #PyMem_Free(<object>val)
+            PyMem_Free(val)
             raise MemoryError()
 
         link = <INT64_t *> PyMem_Malloc(nnz * sizeof(INT64_t))
         if not link:
-        #    #PyMem_Free(<object>val)
-        #    #PyMem_Free(<object>col)
+            PyMem_Free(val)
+            PyMem_Free(col)
             raise MemoryError()
 
         root = <INT64_t *> PyMem_Malloc(nrow * sizeof(INT64_t))
         if not root:
-        #    #PyMem_Free(<object>val)
-        #    #PyMem_Free(<object>col)
-        #    #PyMem_Free(<object>link)
+            PyMem_Free(val)
+            PyMem_Free(col)
+            PyMem_Free(link)
             raise MemoryError()
 
         end_root = <INT64_t *> PyMem_Malloc(nrow * sizeof(INT64_t))
         if not end_root:
-        #    #PyMem_Free(<object>val)
-        #    #PyMem_Free(<object>col)
-        #    #PyMem_Free(<object>link)
+            PyMem_Free(val)
+            PyMem_Free(col)
+            PyMem_Free(link)
+            PyMem_Free(root)
             raise MemoryError()
 
         for i from 0 <= i < nrow:

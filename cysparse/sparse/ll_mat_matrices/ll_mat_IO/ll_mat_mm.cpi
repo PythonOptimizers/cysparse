@@ -265,27 +265,28 @@ cdef LLSparseMatrix_@index@_@type@ MakeLLSparseMatrixFromMMFile2_@index@_@type@(
 
         col = <@index@ *> PyMem_Malloc(nnz * sizeof(@index@))
         if not col:
-            #PyMem_Free(<object>val)
+            PyMem_Free(val)
             raise MemoryError()
 
         link = <@index@ *> PyMem_Malloc(nnz * sizeof(@index@))
         if not link:
-        #    #PyMem_Free(<object>val)
-        #    #PyMem_Free(<object>col)
+            PyMem_Free(val)
+            PyMem_Free(col)
             raise MemoryError()
 
         root = <@index@ *> PyMem_Malloc(nrow * sizeof(@index@))
         if not root:
-        #    #PyMem_Free(<object>val)
-        #    #PyMem_Free(<object>col)
-        #    #PyMem_Free(<object>link)
+            PyMem_Free(val)
+            PyMem_Free(col)
+            PyMem_Free(link)
             raise MemoryError()
 
         end_root = <@index@ *> PyMem_Malloc(nrow * sizeof(@index@))
         if not end_root:
-        #    #PyMem_Free(<object>val)
-        #    #PyMem_Free(<object>col)
-        #    #PyMem_Free(<object>link)
+            PyMem_Free(val)
+            PyMem_Free(col)
+            PyMem_Free(link)
+            PyMem_Free(root)
             raise MemoryError()
 
         for i from 0 <= i < nrow:
