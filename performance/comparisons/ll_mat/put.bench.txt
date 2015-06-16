@@ -4,32 +4,36 @@
 
     name | rank | runs |      mean |     stdev | baseline
 ---------|------|------|-----------|-----------|---------
-cysparse |    1 |  100 | 1.697e-05 | 2.913e-06 |        1
-pysparse |    2 |  100 | 2.115e-05 | 2.086e-06 |    1.247
+cysparse |    1 |  100 | 1.773e-05 | 2.525e-06 |        1
+pysparse |    2 |  100 | 2.194e-05 | 2.361e-06 |    1.238
+    sppy |    3 |  100 | 4.241e-05 | 3.995e-06 |    2.392
 
 ## Simple put_triplet with 1,000 elements, size = 10,000 and put_size = 10,000
 
     name | rank | runs |      mean |     stdev | baseline
 ---------|------|------|-----------|-----------|---------
-cysparse |    1 |  100 | 0.0001269 | 2.965e-05 |        1
-pysparse |    2 |  100 | 0.0001627 |  4.79e-05 |    1.283
+cysparse |    1 |  100 | 9.987e-05 | 2.552e-05 |        1
+pysparse |    2 |  100 | 0.0001112 | 2.974e-05 |    1.113
+    sppy |    3 |  100 | 0.0002983 | 3.086e-05 |    2.987
 
 ## Simple put_triplet with 10,000 elements, size = 100,000 and put_size = 100,000
 
-    name | rank | runs |     mean |     stdev | baseline
----------|------|------|----------|-----------|---------
-cysparse |    1 |  100 | 0.000902 | 7.042e-05 |        1
-pysparse |    2 |  100 | 0.000984 | 8.545e-05 |    1.091
+    name | rank | runs |      mean |     stdev | baseline
+---------|------|------|-----------|-----------|---------
+cysparse |    1 |  100 | 0.0009241 | 0.0001075 |        1
+pysparse |    2 |  100 |  0.001002 | 4.658e-05 |    1.084
+    sppy |    3 |  100 |  0.003171 | 0.0001097 |    3.431
 
 ## Simple put_triplet with 10,000 elements, size = 1,000,000 and put_size = 800,000
 
     name | rank | runs |     mean |     stdev | baseline
 ---------|------|------|----------|-----------|---------
-cysparse |    1 |  100 | 0.007443 | 0.0005273 |        1
-pysparse |    2 |  100 |  0.00808 | 0.0005878 |    1.086
+cysparse |    1 |  100 | 0.007455 |  0.000778 |        1
+pysparse |    2 |  100 | 0.008179 | 0.0007663 |    1.097
+    sppy |    3 |  100 |   0.0278 |  0.003282 |     3.73
 
-Total runs: 800 run in arbitrary order
+Total runs: 1200 run in arbitrary order
 Python version: 2.7.5+
 System: x86_64 Linux 3.11.0-12-generic
 Version: benchmark v0.1.5
-Date: 2015-06-11 17:23:01
+Date: 2015-06-14 02:04:56

@@ -3,7 +3,8 @@ This file compares different implementations of ``put``.
 
 We compare the libraries:
 
-- :program:`PySparse` and
+- :program:`PySparse`;
+- :program:`SPPY` and
 - :program:`CySparse`.
 
 
@@ -19,6 +20,8 @@ from cysparse.types.cysparse_types import INT32_T, INT64_T, FLOAT64_T
 # PySparse
 from pysparse.sparse import spmatrix
 
+# SPPY
+from sppy import csarray
 
 ########################################################################################################################
 # Helpers
@@ -52,11 +55,16 @@ class LLMatPutTripletBenchmark(benchmark.Benchmark):
         self.A_p = spmatrix.ll_mat(self.size, self.size, self.nbr_elements)
         construct_sparse_matrix(self.A_p, self.size, self.nbr_elements)
 
+        self.A_sppy = None
+
         self.id1 = np.arange(0, self.put_size, dtype=np.int32)
         self.id2 = np.full(self.put_size, 37, dtype=np.int32)
 
         self.b = np.arange(0, self.put_size,dtype=np.float64)
 
+
+    def eachSetUp(self):
+        self.A_sppy = csarray((self.size, self.size), dtype=np.float64, storagetype='row')
 
     #def tearDown(self):
     #    for i in xrange(self.size):
@@ -70,6 +78,9 @@ class LLMatPutTripletBenchmark(benchmark.Benchmark):
     def test_cysparse(self):
         self.A_c.put_triplet(self.id1, self.id2, self.b)
         return
+
+    def test_sppy(self):
+        self.A_sppy.put(self.b, self.id1, self.id2, init=True)
 
 
 class LLMatPutTripletBenchmark_1(LLMatPutTripletBenchmark):
