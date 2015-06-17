@@ -1,5 +1,5 @@
 from cysparse.types.cysparse_types cimport *
-from cysparse.sparse.t_mat cimport TransposedSparseMatrix
+from cysparse.sparse.sparse_proxies.t_mat cimport TransposedSparseMatrix
 
 cdef INT32_t MUTABLE_SPARSE_MAT_DEFAULT_SIZE_HINT = 40        # allocated size by default
 
@@ -132,6 +132,17 @@ cdef class SparseMatrix:
 
         raise NotImplementedError("Operation not implemented (yet). Please report.")
 
+    def matvec_htransp(self, B):
+        """
+        Return ``A^h * B`` with ``B`` a :program:`NumPy` vector.
+
+        Args:
+            B: A :program:`NumPy` vector.
+
+        """
+
+        raise NotImplementedError("Operation not implemented (yet). Please report.")
+
     def matdot(self, B):
         """
         Return ``A * B``.
@@ -152,6 +163,15 @@ cdef class SparseMatrix:
         """
         raise NotImplementedError("Operation not implemented (yet). Please report.")
 
+    def matdot_htransp(self, B):
+        """
+        Return ``A^t * B``.
+
+        Args:
+            B:
+
+        """
+        raise NotImplementedError("Operation not implemented (yet). Please report.")
 
     # Copy
     def copy(self):

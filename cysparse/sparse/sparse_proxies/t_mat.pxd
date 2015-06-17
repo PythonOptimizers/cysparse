@@ -3,12 +3,10 @@ Syntactic sugar: we want to use the following code: ``A.T * b`` to compute :math
 
 ``A.T`` returns a proxy to the original matrix ``A`` that allows us to use the above notation.
 """
-
-# forward declaration
 cdef class TransposedSparseMatrix
 
-from cysparse.sparse.s_mat cimport SparseMatrix
 from cysparse.types.cysparse_types cimport CPType
+from cysparse.sparse.s_mat cimport SparseMatrix
 
 cdef class TransposedSparseMatrix:
     """
@@ -17,7 +15,11 @@ cdef class TransposedSparseMatrix:
     Warning:
         This class is **not** a real matrix.
     """
+    ####################################################################################################################
+    # COMMON CODE FROM proxy_common_pxd.txt: see #113
+    ####################################################################################################################
     cdef:
+
         public SparseMatrix A
 
         object nrow
@@ -27,5 +29,6 @@ cdef class TransposedSparseMatrix:
 
         object shape     # for compatibility with numpy, PyKrylov, etc.
 
+    cdef:
         object T         # ref to the original matrix
 

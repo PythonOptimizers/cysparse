@@ -404,7 +404,7 @@ def NewLLSparseMatrix(**kwargs):
     
 
 
- 
+
 def NewLLSparseMatrixFromMMFile(filename, store_zeros=False, test_bounds=True):
     """
     Factory method to create an ``LLSparseMatrix`` from a ``Matrix Market`` file.

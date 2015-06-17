@@ -1,0 +1,10 @@
+cdef:
+
+    public SparseMatrix A
+
+    object nrow
+    object ncol
+    object dtype
+    object itype
+
+    object shape     # for compatibility with numpy, PyKrylov, etc.

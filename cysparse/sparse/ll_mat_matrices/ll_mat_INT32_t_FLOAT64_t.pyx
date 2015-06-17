@@ -85,9 +85,13 @@ cdef extern from "complex.h":
     long double creall(long double complex z)
     long double cimagl(long double complex z)
 
-    double cabs(double complex)
-    float cabsf(float complex)
-    long double cabsl(long double complex)
+    double cabs(double complex z)
+    float cabsf(float complex z)
+    long double cabsl(long double complex z)
+
+    double complex conj(double complex z)
+    float complex  conjf (float complex z)
+    long double complex conjl (long double complex z)
 
 cdef extern from 'math.h':
     double fabs  (double x)

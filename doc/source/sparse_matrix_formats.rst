@@ -25,7 +25,7 @@ The CSR and CSC formats are complementary and can be viewed as respectively a ro
 
 These formats are well known in the community and you can find scores of documents about them on the internet.
 
-The LL sparse format  in details
+The LL sparse format in details
 =======================================
 
 This format is implemented by the :class:`LLSparseMatrix` class.
@@ -134,11 +134,26 @@ To preserve the ordering, we have to insert this element **between** the element
 
 The element :math:`(j, v, k)` was inserted in place of the first free element pointed by ``free`` and :math:`k_1` now points to this element. Notice also that now, ``free`` points to the next free element :math:`f_1`.
 
+Detailed example
+-------------------
+
+For all sparse matrix formats, we'll detail an example. Let :math:`A` be the following :math:`3 \times 4` sparse matrix:
+
+.. figure:: images/detailed_example_smatrix_formats.*
+    :width: 100pt
+    :align: center
+    :alt: alternate text
+
+    The example sparse matrix :math:`A`
+    
+Notice that this matrix is sparse with 4 non zero entries, is non symmetric and has an empty row and column.
+
+
 
 The CSR sparse format in details
 =========================================
 
-This format is implemented by the :class:`CSRSparseMatrix` class.
+This format is implemented by the :class:`CSRSparseMatrix` class. This format use a row-wise representation, as the above LL Sparse format, i.e. elements are stored row by row.
 
 
 The CSC sparse format in details

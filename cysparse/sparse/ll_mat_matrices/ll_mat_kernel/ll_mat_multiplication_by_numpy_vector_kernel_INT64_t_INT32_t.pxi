@@ -5,15 +5,24 @@ Covered cases:
 
 1. :math:`A * b`:
 
-- :program:`NumPy` array data C-contiguous, ``LLSparseMatrix`` not symmetric
-- :program:`NumPy` array data C-contiguous, ``LLSparseMatrix`` symmetric
-- :program:`NumPy` array data not C-contiguous, ``LLSparseMatrix`` not symmetric
-- :program:`NumPy` array data not C-contiguous, ``LLSparseMatrix`` symmetric
+    - :program:`NumPy` array data C-contiguous, ``LLSparseMatrix`` not symmetric
+    - :program:`NumPy` array data C-contiguous, ``LLSparseMatrix`` symmetric
+    - :program:`NumPy` array data not C-contiguous, ``LLSparseMatrix`` not symmetric
+    - :program:`NumPy` array data not C-contiguous, ``LLSparseMatrix`` symmetric
 
 2. :math:`A^t * b`
 
-- :program:`NumPy` array data C-contiguous, ``LLSparseMatrix`` not symmetric
-- :program:`NumPy` array data not C-contiguous, ``LLSparseMatrix`` not symmetric
+    - :program:`NumPy` array data C-contiguous, ``LLSparseMatrix`` not symmetric
+    - :program:`NumPy` array data not C-contiguous, ``LLSparseMatrix`` not symmetric
+
+    Other cases are **not** needed as we can use 1.
+
+3. :math:`A^h * b`: this **only** concerns complex matrices!
+
+    - :program:`NumPy` array data C-contiguous, ``LLSparseMatrix`` not symmetric
+    - :program:`NumPy` array data C-contiguous, ``LLSparseMatrix`` symmetric [NOT DONE]
+    - :program:`NumPy` array data not C-contiguous, ``LLSparseMatrix`` not symmetric
+    - :program:`NumPy` array data not C-contiguous, ``LLSparseMatrix`` symmetric [NOT DONE]
 
 Note:
     We only consider C-arrays with same type of elements as the type of elements in the ``LLSparseMatrix``.
@@ -256,7 +265,7 @@ cdef void multiply_tranposed_ll_mat_with_strided_numpy_vector_kernel_INT64_t_INT
     In this kernel function, we only use the corresponding C-arrays.
 
     Warning:
-        This version consider the arrays as C-contiguous (**without** strides).
+        This version consider the arrays as non C-contiguous (**with** strides).
 
     Args:
         m: Number of rows of the matrix ``A``.
@@ -285,3 +294,4 @@ cdef void multiply_tranposed_ll_mat_with_strided_numpy_vector_kernel_INT64_t_INT
         while k != -1:
           y[col[k]*incy] += val[k] * xi
           k = link[k]
+

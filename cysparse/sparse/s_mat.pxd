@@ -1,5 +1,8 @@
 from cysparse.types.cysparse_types cimport *
-from cysparse.sparse.t_mat cimport TransposedSparseMatrix
+
+cdef class SparseMatrix
+
+from cysparse.sparse.sparse_proxies.t_mat cimport TransposedSparseMatrix
 
 # Use of a "real" factory method, following Robert Bradshaw's suggestion
 # https://groups.google.com/forum/#!topic/cython-users/0UHuLqheoq0
