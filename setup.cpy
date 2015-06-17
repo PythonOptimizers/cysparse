@@ -166,6 +166,7 @@ new_sparse_ext = [
   #                   "cysparse/sparse/ll_mat.pxd",
   #                   "cysparse/sparse/ll_mat.pyx"], **sparse_ext_params),
 
+
   ######################
   # ### SparseMatrix ###
   ######################
@@ -243,8 +244,6 @@ new_sparse_ext = [
             **sparse_ext_params),
   {% endfor %}
 {% endfor %}
-
-
 
   ######################
   # ### TransposedSparseMatrix ###

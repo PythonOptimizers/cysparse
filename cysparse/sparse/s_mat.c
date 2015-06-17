@@ -619,12 +619,12 @@ struct __pyx_t_8cysparse_5types_14cysparse_types_CPType {
   enum __pyx_t_8cysparse_5types_14cysparse_types_CySparseType itype;
 };
 
-/* "cysparse/sparse/sparse_proxies/t_mat.pxd":6
- * ``A.T`` returns a proxy to the original matrix ``A`` that allows us to use the above notation.
- * """
- * cdef class TransposedSparseMatrix             # <<<<<<<<<<<<<<
+/* "cysparse/sparse/sparse_proxies/t_mat.pxd":10
+ * from cysparse.sparse.s_mat cimport SparseMatrix
  * 
- * from cysparse.types.cysparse_types cimport CPType
+ * cdef class TransposedSparseMatrix:             # <<<<<<<<<<<<<<
+ *     """
+ *     Proxy to the transposed of a :class:`SparseMatrix`.
  */
 struct __pyx_obj_8cysparse_6sparse_14sparse_proxies_5t_mat_TransposedSparseMatrix {
   PyObject_HEAD
@@ -4151,7 +4151,7 @@ PyMODINIT_FUNC PyInit_s_mat(void)
   0); if (unlikely(!__pyx_ptype_7cpython_4type_type)) {__pyx_filename = __pyx_f[2]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_ptype_7cpython_4bool_bool = __Pyx_ImportType(__Pyx_BUILTIN_MODULE_NAME, "bool", sizeof(PyBoolObject), 0); if (unlikely(!__pyx_ptype_7cpython_4bool_bool)) {__pyx_filename = __pyx_f[3]; __pyx_lineno = 8; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_ptype_7cpython_7complex_complex = __Pyx_ImportType(__Pyx_BUILTIN_MODULE_NAME, "complex", sizeof(PyComplexObject), 0); if (unlikely(!__pyx_ptype_7cpython_7complex_complex)) {__pyx_filename = __pyx_f[4]; __pyx_lineno = 15; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_ptype_8cysparse_6sparse_14sparse_proxies_5t_mat_TransposedSparseMatrix = __Pyx_ImportType("cysparse.sparse.sparse_proxies.t_mat", "TransposedSparseMatrix", sizeof(struct __pyx_obj_8cysparse_6sparse_14sparse_proxies_5t_mat_TransposedSparseMatrix), 1); if (unlikely(!__pyx_ptype_8cysparse_6sparse_14sparse_proxies_5t_mat_TransposedSparseMatrix)) {__pyx_filename = __pyx_f[5]; __pyx_lineno = 6; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_ptype_8cysparse_6sparse_14sparse_proxies_5t_mat_TransposedSparseMatrix = __Pyx_ImportType("cysparse.sparse.sparse_proxies.t_mat", "TransposedSparseMatrix", sizeof(struct __pyx_obj_8cysparse_6sparse_14sparse_proxies_5t_mat_TransposedSparseMatrix), 1); if (unlikely(!__pyx_ptype_8cysparse_6sparse_14sparse_proxies_5t_mat_TransposedSparseMatrix)) {__pyx_filename = __pyx_f[5]; __pyx_lineno = 10; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   /*--- Variable import code ---*/
   /*--- Function import code ---*/
   /*--- Execution code ---*/
