@@ -239,7 +239,14 @@ def NewLLSparseMatrix(**kwargs):
         {% else %}
             elif dtype == @element_type|type2enum@:
         {% endif %}
-                return LLSparseMatrix_@index_type@_@element_type@(control_object=unexposed_value, nrow=real_nrow, ncol=real_ncol, size_hint=size_hint, store_zeros=store_zeros, is_symmetric=is_symmetric)
+                return LLSparseMatrix_@index_type@_@element_type@(control_object=unexposed_value,
+                                                                  nrow=real_nrow,
+                                                                  ncol=real_ncol,
+                                                                  dtype=dtype,
+                                                                  itype=itype,
+                                                                  size_hint=size_hint,
+                                                                  store_zeros=store_zeros,
+                                                                  is_symmetric=is_symmetric)
     {% endfor %}
 {% endfor %}
 

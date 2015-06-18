@@ -14,18 +14,18 @@ can be modified while the other types of matrices are **immutable** for efficien
 
 Here is a list of existing formats and their basic use:
 
-- Linked-list format (LL): a convenient format for creating and populating
+- Linked-list format (``LL``): a convenient format for creating and populating
   a sparse matrix, whether symmetric or general.
-- Compressed sparse row format (CSR): a format designed to speed up
+- Compressed sparse row format (``CSR``): a format designed to speed up
   matrix-vector products.
-- Compressed sparse column format (CSC): a format designed to speed up
+- Compressed sparse column format (``CSC``): a format designed to speed up
   vector-matrix products. 
 
 The CSR and CSC formats are complementary and can be viewed as respectively a row- and column view of a sparse matrix.
 
 These formats are well known in the community and you can find scores of documents about them on the internet.
 
-The LL sparse format in details
+The ``LL`` sparse format in details
 =======================================
 
 This format is implemented by the :class:`LLSparseMatrix` class.
@@ -52,7 +52,7 @@ Then chain can be traversed by following the ``link`` array:
 .. figure:: images/ll_mat_link.*
     :width: 400pt
     :align: center
-    :alt: alternate text
+    
 
     Chains in an ``LLSparseMatrix`` matrix
 
@@ -85,8 +85,8 @@ To traverse the ``i``:sup:`th` row, simply use:
         k = self.link[k]
 
 
-Inside a row, elements are ordered by column order
-----------------------------------------------------
+Inside a row, elements are ordered by column order (how to run through a ``LL`` matrix)
+-------------------------------------------------------------------------------------------
 
 If the chain corresponding to row ``i`` is :math:`k_0, k_1, \ldots, k_p`, then we know that the corresponding column indices are ordered: :math:`j_0 < j_1 < \ldots < j_p`. When an element is added with the ``put(i, j, val)`` method, this new element is inserted in the right place, swapping pointers elements of ``link`` if necessary.
 
@@ -117,7 +117,7 @@ The next figure represent the internal state of a ``LLSparseMatrix``:
 .. figure:: images/ll_mat_link_swap_left.*
     :width: 300pt
     :align: center
-    :alt: alternate text
+    
 
     **Before** insertion of element :math:`(j, v, k)` in a ``LLSparseMatrix`` matrix
     
@@ -128,8 +128,7 @@ To preserve the ordering, we have to insert this element **between** the element
 .. figure:: images/ll_mat_link_swap_right.*
     :width: 300pt
     :align: center
-    :alt: alternate text
-
+    
     **After** insertion of element :math:`(j, v, k)` in a ``LLSparseMatrix`` matrix
 
 The element :math:`(j, v, k)` was inserted in place of the first free element pointed by ``free`` and :math:`k_1` now points to this element. Notice also that now, ``free`` points to the next free element :math:`f_1`.
@@ -142,7 +141,7 @@ For all sparse matrix formats, we'll detail an example. Let :math:`A` be the fol
 .. figure:: images/detailed_example_smatrix_formats.*
     :width: 100pt
     :align: center
-    :alt: alternate text
+
 
     The example sparse matrix :math:`A`
     
@@ -150,23 +149,65 @@ Notice that this matrix is sparse with 4 non zero entries, is non symmetric and 
 
 
 
-The CSR sparse format in details
+The ``CSR`` sparse format in details
 =========================================
 
-This format is implemented by the :class:`CSRSparseMatrix` class. This format use a row-wise representation, as the above LL Sparse format, i.e. elements are stored row by row.
+This format is implemented by the :class:`CSRSparseMatrix` class. This format use a row-wise representation, as the above ``LL`` Sparse format, i.e. elements are stored row by row.
+
+Detailed example
+-------------------
+
+Here are the three internal arrays for the example matrix:
+
+.. figure:: images/csr_detailed_example.* 
+    :width: 100pt
+    :align: center
+    
+    The internal arrays of a ``CSR`` matrix
+    
+One can immediatly see that the values are stored row-wise in ``col`` and ``val``: first the row ``0``, than the row ``1`` (and nothing for row ``2``). ``ind`` gives the first indices for each row: ``ind[0] == 0`` gives the start of row ``0``,
+``ind[1] == 2`` gives the start of row ``1``, etc. This means that ``ind[i+1] - ind[i]`` returns the number of elements in row ``i``.
+
+How to run through a ``CSR`` matrix
+-------------------------------------
+
+To find all triplets :math:`(i, j, k)`:
+
+..  code-block:: python
+
+    for i from 0 <= i < nrow:
+        for k from ind[i] <= k < ind[k+1]:
+            j = col[k]
+            v = val[k]
 
 
-The CSC sparse format in details
+
+The ``CSC`` sparse format in details
 ========================================
 
 This format is implemented by the :class:`CSCSparseMatrix` class.
 
-The CSC sparse matrix format is exactly the same as the CSR sparse matrix format but column-wise. Given a matrix :math:`A` and a CSR representation of this matrix is exactly the same as a CSC respresentation 
+The ``CSC`` sparse matrix format is exactly the same as the CSR sparse matrix format but column-wise. Given a matrix :math:`A` and a ``CSR`` representation of this matrix is exactly the same as a ``CSC`` respresentation 
 of the transposed matrix :math:`A^t`, i.e.
 
 ..  math::
     \textrm{CSR}(A) = \textrm{CSC}(A^t)
 
-and everything we wrote about the CSR format transposes to the CSC format by exchanging rows for columns and vice-versa.
+and everything we wrote about the ``CSR`` format transposes to the ``CSC`` format by exchanging rows for columns and vice-versa.
 
+Detailed example
+-------------------
+
+
+How to run through a ``CSC`` matrix
+-------------------------------------
+
+To find all triplets :math:`(i, j, k)`:
+
+..  code-block:: python
+
+    for j from 0 <= j < ncol:
+        for k from ind[j] <= k < ind[j+1]:
+            i = col[k]
+            v = val[k]
 

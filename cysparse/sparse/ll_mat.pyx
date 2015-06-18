@@ -265,42 +265,98 @@ def NewLLSparseMatrix(**kwargs):
         
             if dtype == INT32_T:
         
-                return LLSparseMatrix_INT32_t_INT32_t(control_object=unexposed_value, nrow=real_nrow, ncol=real_ncol, size_hint=size_hint, store_zeros=store_zeros, is_symmetric=is_symmetric)
+                return LLSparseMatrix_INT32_t_INT32_t(control_object=unexposed_value,
+                                                                  nrow=real_nrow,
+                                                                  ncol=real_ncol,
+                                                                  dtype=dtype,
+                                                                  itype=itype,
+                                                                  size_hint=size_hint,
+                                                                  store_zeros=store_zeros,
+                                                                  is_symmetric=is_symmetric)
     
         
             elif dtype == INT64_T:
         
-                return LLSparseMatrix_INT32_t_INT64_t(control_object=unexposed_value, nrow=real_nrow, ncol=real_ncol, size_hint=size_hint, store_zeros=store_zeros, is_symmetric=is_symmetric)
+                return LLSparseMatrix_INT32_t_INT64_t(control_object=unexposed_value,
+                                                                  nrow=real_nrow,
+                                                                  ncol=real_ncol,
+                                                                  dtype=dtype,
+                                                                  itype=itype,
+                                                                  size_hint=size_hint,
+                                                                  store_zeros=store_zeros,
+                                                                  is_symmetric=is_symmetric)
     
         
             elif dtype == FLOAT32_T:
         
-                return LLSparseMatrix_INT32_t_FLOAT32_t(control_object=unexposed_value, nrow=real_nrow, ncol=real_ncol, size_hint=size_hint, store_zeros=store_zeros, is_symmetric=is_symmetric)
+                return LLSparseMatrix_INT32_t_FLOAT32_t(control_object=unexposed_value,
+                                                                  nrow=real_nrow,
+                                                                  ncol=real_ncol,
+                                                                  dtype=dtype,
+                                                                  itype=itype,
+                                                                  size_hint=size_hint,
+                                                                  store_zeros=store_zeros,
+                                                                  is_symmetric=is_symmetric)
     
         
             elif dtype == FLOAT64_T:
         
-                return LLSparseMatrix_INT32_t_FLOAT64_t(control_object=unexposed_value, nrow=real_nrow, ncol=real_ncol, size_hint=size_hint, store_zeros=store_zeros, is_symmetric=is_symmetric)
+                return LLSparseMatrix_INT32_t_FLOAT64_t(control_object=unexposed_value,
+                                                                  nrow=real_nrow,
+                                                                  ncol=real_ncol,
+                                                                  dtype=dtype,
+                                                                  itype=itype,
+                                                                  size_hint=size_hint,
+                                                                  store_zeros=store_zeros,
+                                                                  is_symmetric=is_symmetric)
     
         
             elif dtype == FLOAT128_T:
         
-                return LLSparseMatrix_INT32_t_FLOAT128_t(control_object=unexposed_value, nrow=real_nrow, ncol=real_ncol, size_hint=size_hint, store_zeros=store_zeros, is_symmetric=is_symmetric)
+                return LLSparseMatrix_INT32_t_FLOAT128_t(control_object=unexposed_value,
+                                                                  nrow=real_nrow,
+                                                                  ncol=real_ncol,
+                                                                  dtype=dtype,
+                                                                  itype=itype,
+                                                                  size_hint=size_hint,
+                                                                  store_zeros=store_zeros,
+                                                                  is_symmetric=is_symmetric)
     
         
             elif dtype == COMPLEX64_T:
         
-                return LLSparseMatrix_INT32_t_COMPLEX64_t(control_object=unexposed_value, nrow=real_nrow, ncol=real_ncol, size_hint=size_hint, store_zeros=store_zeros, is_symmetric=is_symmetric)
+                return LLSparseMatrix_INT32_t_COMPLEX64_t(control_object=unexposed_value,
+                                                                  nrow=real_nrow,
+                                                                  ncol=real_ncol,
+                                                                  dtype=dtype,
+                                                                  itype=itype,
+                                                                  size_hint=size_hint,
+                                                                  store_zeros=store_zeros,
+                                                                  is_symmetric=is_symmetric)
     
         
             elif dtype == COMPLEX128_T:
         
-                return LLSparseMatrix_INT32_t_COMPLEX128_t(control_object=unexposed_value, nrow=real_nrow, ncol=real_ncol, size_hint=size_hint, store_zeros=store_zeros, is_symmetric=is_symmetric)
+                return LLSparseMatrix_INT32_t_COMPLEX128_t(control_object=unexposed_value,
+                                                                  nrow=real_nrow,
+                                                                  ncol=real_ncol,
+                                                                  dtype=dtype,
+                                                                  itype=itype,
+                                                                  size_hint=size_hint,
+                                                                  store_zeros=store_zeros,
+                                                                  is_symmetric=is_symmetric)
     
         
             elif dtype == COMPLEX256_T:
         
-                return LLSparseMatrix_INT32_t_COMPLEX256_t(control_object=unexposed_value, nrow=real_nrow, ncol=real_ncol, size_hint=size_hint, store_zeros=store_zeros, is_symmetric=is_symmetric)
+                return LLSparseMatrix_INT32_t_COMPLEX256_t(control_object=unexposed_value,
+                                                                  nrow=real_nrow,
+                                                                  ncol=real_ncol,
+                                                                  dtype=dtype,
+                                                                  itype=itype,
+                                                                  size_hint=size_hint,
+                                                                  store_zeros=store_zeros,
+                                                                  is_symmetric=is_symmetric)
     
 
     
@@ -310,42 +366,98 @@ def NewLLSparseMatrix(**kwargs):
         
             if dtype == INT32_T:
         
-                return LLSparseMatrix_INT64_t_INT32_t(control_object=unexposed_value, nrow=real_nrow, ncol=real_ncol, size_hint=size_hint, store_zeros=store_zeros, is_symmetric=is_symmetric)
+                return LLSparseMatrix_INT64_t_INT32_t(control_object=unexposed_value,
+                                                                  nrow=real_nrow,
+                                                                  ncol=real_ncol,
+                                                                  dtype=dtype,
+                                                                  itype=itype,
+                                                                  size_hint=size_hint,
+                                                                  store_zeros=store_zeros,
+                                                                  is_symmetric=is_symmetric)
     
         
             elif dtype == INT64_T:
         
-                return LLSparseMatrix_INT64_t_INT64_t(control_object=unexposed_value, nrow=real_nrow, ncol=real_ncol, size_hint=size_hint, store_zeros=store_zeros, is_symmetric=is_symmetric)
+                return LLSparseMatrix_INT64_t_INT64_t(control_object=unexposed_value,
+                                                                  nrow=real_nrow,
+                                                                  ncol=real_ncol,
+                                                                  dtype=dtype,
+                                                                  itype=itype,
+                                                                  size_hint=size_hint,
+                                                                  store_zeros=store_zeros,
+                                                                  is_symmetric=is_symmetric)
     
         
             elif dtype == FLOAT32_T:
         
-                return LLSparseMatrix_INT64_t_FLOAT32_t(control_object=unexposed_value, nrow=real_nrow, ncol=real_ncol, size_hint=size_hint, store_zeros=store_zeros, is_symmetric=is_symmetric)
+                return LLSparseMatrix_INT64_t_FLOAT32_t(control_object=unexposed_value,
+                                                                  nrow=real_nrow,
+                                                                  ncol=real_ncol,
+                                                                  dtype=dtype,
+                                                                  itype=itype,
+                                                                  size_hint=size_hint,
+                                                                  store_zeros=store_zeros,
+                                                                  is_symmetric=is_symmetric)
     
         
             elif dtype == FLOAT64_T:
         
-                return LLSparseMatrix_INT64_t_FLOAT64_t(control_object=unexposed_value, nrow=real_nrow, ncol=real_ncol, size_hint=size_hint, store_zeros=store_zeros, is_symmetric=is_symmetric)
+                return LLSparseMatrix_INT64_t_FLOAT64_t(control_object=unexposed_value,
+                                                                  nrow=real_nrow,
+                                                                  ncol=real_ncol,
+                                                                  dtype=dtype,
+                                                                  itype=itype,
+                                                                  size_hint=size_hint,
+                                                                  store_zeros=store_zeros,
+                                                                  is_symmetric=is_symmetric)
     
         
             elif dtype == FLOAT128_T:
         
-                return LLSparseMatrix_INT64_t_FLOAT128_t(control_object=unexposed_value, nrow=real_nrow, ncol=real_ncol, size_hint=size_hint, store_zeros=store_zeros, is_symmetric=is_symmetric)
+                return LLSparseMatrix_INT64_t_FLOAT128_t(control_object=unexposed_value,
+                                                                  nrow=real_nrow,
+                                                                  ncol=real_ncol,
+                                                                  dtype=dtype,
+                                                                  itype=itype,
+                                                                  size_hint=size_hint,
+                                                                  store_zeros=store_zeros,
+                                                                  is_symmetric=is_symmetric)
     
         
             elif dtype == COMPLEX64_T:
         
-                return LLSparseMatrix_INT64_t_COMPLEX64_t(control_object=unexposed_value, nrow=real_nrow, ncol=real_ncol, size_hint=size_hint, store_zeros=store_zeros, is_symmetric=is_symmetric)
+                return LLSparseMatrix_INT64_t_COMPLEX64_t(control_object=unexposed_value,
+                                                                  nrow=real_nrow,
+                                                                  ncol=real_ncol,
+                                                                  dtype=dtype,
+                                                                  itype=itype,
+                                                                  size_hint=size_hint,
+                                                                  store_zeros=store_zeros,
+                                                                  is_symmetric=is_symmetric)
     
         
             elif dtype == COMPLEX128_T:
         
-                return LLSparseMatrix_INT64_t_COMPLEX128_t(control_object=unexposed_value, nrow=real_nrow, ncol=real_ncol, size_hint=size_hint, store_zeros=store_zeros, is_symmetric=is_symmetric)
+                return LLSparseMatrix_INT64_t_COMPLEX128_t(control_object=unexposed_value,
+                                                                  nrow=real_nrow,
+                                                                  ncol=real_ncol,
+                                                                  dtype=dtype,
+                                                                  itype=itype,
+                                                                  size_hint=size_hint,
+                                                                  store_zeros=store_zeros,
+                                                                  is_symmetric=is_symmetric)
     
         
             elif dtype == COMPLEX256_T:
         
-                return LLSparseMatrix_INT64_t_COMPLEX256_t(control_object=unexposed_value, nrow=real_nrow, ncol=real_ncol, size_hint=size_hint, store_zeros=store_zeros, is_symmetric=is_symmetric)
+                return LLSparseMatrix_INT64_t_COMPLEX256_t(control_object=unexposed_value,
+                                                                  nrow=real_nrow,
+                                                                  ncol=real_ncol,
+                                                                  dtype=dtype,
+                                                                  itype=itype,
+                                                                  size_hint=size_hint,
+                                                                  store_zeros=store_zeros,
+                                                                  is_symmetric=is_symmetric)
     
 
 

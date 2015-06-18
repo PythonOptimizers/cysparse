@@ -3,6 +3,7 @@ from cysparse.types.cysparse_types cimport *
 cdef class SparseMatrix
 
 from cysparse.sparse.sparse_proxies.t_mat cimport TransposedSparseMatrix
+from cysparse.sparse.sparse_proxies.h_mat cimport ConjugateTransposedSparseMatrix
 
 # Use of a "real" factory method, following Robert Bradshaw's suggestion
 # https://groups.google.com/forum/#!topic/cython-users/0UHuLqheoq0
@@ -24,12 +25,17 @@ cdef class SparseMatrix:
         public char * type        # Type of matrix
         CPType cp_type            # Internal types of the matrix
 
+        # both are always available
+        object T         # proxy to the transposed matrix
+        object H         # proxy to the conjugate transposed matrix
+
         TransposedSparseMatrix __transposed_proxy_matrix  # transposed matrix proxy
         bint __transposed_proxy_matrix_generated
 
-        object shape     # for compatibility with numpy, PyKrylov, etc.
+        ConjugateTransposedSparseMatrix __conjugate_transposed_proxy_matrix
+        bint __conjugate_transposed_proxy_matrix_generated
 
-        object T         # proxy to the transposed matrix
+        object shape     # for compatibility with numpy, PyKrylov, etc.
 
         object dtype
         object itype

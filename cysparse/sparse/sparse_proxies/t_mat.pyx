@@ -14,7 +14,6 @@ cdef extern from "Python.h":
     int PyInt_Check(PyObject *o)
 
 
-#cdef class TransposedSparseMatrix(ProxySparseMatrix):
 cdef class TransposedSparseMatrix:
     """
     Proxy to the transposed matrix of a :class:`SparseMatrix`.
