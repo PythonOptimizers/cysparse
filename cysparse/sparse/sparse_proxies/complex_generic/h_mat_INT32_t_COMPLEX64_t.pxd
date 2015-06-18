@@ -7,7 +7,7 @@ Syntactic sugar: we want to use the following code: ``A.H * b`` to compute :math
 from cysparse.types.cysparse_types cimport CPType
 from cysparse.sparse.s_mat cimport SparseMatrix
 
-cdef class ConjugateTransposedSparseMatrix:
+cdef class ConjugateTransposedSparseMatrix_INT32_t_COMPLEX64_t:
     """
     Proxy to the conjugate transposed of a :class:`SparseMatrix`.
 
@@ -33,4 +33,3 @@ cdef class ConjugateTransposedSparseMatrix:
     ####################################################################################################################
     cdef:
         object H         # ref to the original matrix
-

@@ -447,6 +447,13 @@ SPARSE_MATRIX_INCLUDE_FILES = glob.glob(os.path.join(SPARSE_MATRIX_TEMPLATE_DIR,
 SPARSE_MATRIX_DECLARATION_FILES = glob.glob(os.path.join(SPARSE_MATRIX_TEMPLATE_DIR, '*.cpd'))
 SPARSE_MATRIX_DEFINITION_FILES = glob.glob(os.path.join(SPARSE_MATRIX_TEMPLATE_DIR, '*.cpx'))
 
+##########################################
+### ConjugateTransposedSparseMatrix
+##########################################
+SPARSE_MATRIX_PROXIES_GENERIC_TEMPLATE_DIR = os.path.join(SPARSE_DIR, 'sparse_proxies', 'complex_generic')
+
+SPARSE_MATRIX_PROXIES_GENERIC_DECLARATION_FILES = glob.glob(os.path.join(SPARSE_MATRIX_PROXIES_GENERIC_TEMPLATE_DIR, '*.cpd'))
+SPARSE_MATRIX_PROXIES_GENERIC_DEFINITION_FILES = glob.glob(os.path.join(SPARSE_MATRIX_PROXIES_GENERIC_TEMPLATE_DIR, '*.cpx'))
 
 ##########################################
 ### LLSparseMatrix
@@ -610,6 +617,8 @@ if __name__ == "__main__":
             # SparseMatrix
             clean_cython_files(logger, SPARSE_MATRIX_TEMPLATE_DIR)
 
+            # ConjugateTransposedSparseMatrix
+            clean_cython_files(logger, SPARSE_MATRIX_PROXIES_GENERIC_TEMPLATE_DIR)
 
             # LLSparseMatrix
             clean_cython_files(logger, LL_SPARSE_MATRIX_TEMPLATE_DIR)
@@ -671,6 +680,12 @@ if __name__ == "__main__":
             #tabu = {}
             #tabu['INT32_t'] = {}
             #tabu['INT32_t']['INT64_t'] = True
+
+            ###############################
+            # Sparse proxies - complex generic
+            ###############################
+            generate_following_type_and_index(logger, SPARSE_MATRIX_PROXIES_GENERIC_DECLARATION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, COMPLEX_ELEMENT_TYPES, INDEX_TYPES, '.pxd')
+            generate_following_type_and_index(logger, SPARSE_MATRIX_PROXIES_GENERIC_DEFINITION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, COMPLEX_ELEMENT_TYPES, INDEX_TYPES, '.pyx')
 
             ###############################
             # LLSparseMatrix

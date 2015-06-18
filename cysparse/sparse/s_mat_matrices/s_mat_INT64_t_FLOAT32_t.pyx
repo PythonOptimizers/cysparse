@@ -1,6 +1,8 @@
 from cysparse.types.cysparse_types cimport *
 from cysparse.sparse.s_mat cimport SparseMatrix, unexposed_value, MUTABLE_SPARSE_MAT_DEFAULT_SIZE_HINT
 
+
+
 ########################################################################################################################
 # BASE MATRIX CLASS
 ########################################################################################################################
@@ -19,6 +21,9 @@ cdef class SparseMatrix_INT64_t_FLOAT32_t(SparseMatrix):
         self.nrow = kwargs.get('nrow', -1)
         self.ncol = kwargs.get('ncol', -1)
         self.nnz = kwargs.get('nnz', 0)
+
+        self.__conjugate_transposed_proxy_matrix_generated = False
+
 
 
     ####################################################################################################################

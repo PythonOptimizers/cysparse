@@ -255,10 +255,14 @@ new_sparse_ext = [
   ######################
   # ### ConjugateTransposedSparseMatrix ###
   ######################
-  Extension(name="cysparse.sparse.sparse_proxies.h_mat",
-            sources=["cysparse/sparse/sparse_proxies/h_mat.pxd",
-                     "cysparse/sparse/sparse_proxies/h_mat.pyx"],
+{% for index_type in index_list %}
+  {% for element_type in complex_list %}
+  Extension(name="cysparse.sparse.sparse_proxies.complex_generic.h_mat_@index_type@_@element_type@",
+            sources=["cysparse/sparse/sparse_proxies/complex_generic/h_mat_@index_type@_@element_type@.pxd",
+                     "cysparse/sparse/sparse_proxies/complex_generic/h_mat_@index_type@_@element_type@.pyx"],
             **sparse_ext_params),
+  {% endfor %}
+{% endfor %}
 ]
 ########################################################################################################################
 #                                                *** utils ***
@@ -289,6 +293,7 @@ packages_list = ['cysparse',
             'cysparse.types',
             'cysparse.sparse',
             'cysparse.sparse.sparse_proxies',
+            'cysparse.sparse.sparse_proxies.complex_generic',
             'cysparse.sparse.sparse_utils',
             'cysparse.sparse.s_mat_matrices',
             'cysparse.sparse.ll_mat_matrices',

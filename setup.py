@@ -816,10 +816,41 @@ new_sparse_ext = [
   ######################
   # ### ConjugateTransposedSparseMatrix ###
   ######################
-  Extension(name="cysparse.sparse.sparse_proxies.h_mat",
-            sources=["cysparse/sparse/sparse_proxies/h_mat.pxd",
-                     "cysparse/sparse/sparse_proxies/h_mat.pyx"],
+
+  
+  Extension(name="cysparse.sparse.sparse_proxies.complex_generic.h_mat_INT32_t_COMPLEX64_t",
+            sources=["cysparse/sparse/sparse_proxies/complex_generic/h_mat_INT32_t_COMPLEX64_t.pxd",
+                     "cysparse/sparse/sparse_proxies/complex_generic/h_mat_INT32_t_COMPLEX64_t.pyx"],
             **sparse_ext_params),
+  
+  Extension(name="cysparse.sparse.sparse_proxies.complex_generic.h_mat_INT32_t_COMPLEX128_t",
+            sources=["cysparse/sparse/sparse_proxies/complex_generic/h_mat_INT32_t_COMPLEX128_t.pxd",
+                     "cysparse/sparse/sparse_proxies/complex_generic/h_mat_INT32_t_COMPLEX128_t.pyx"],
+            **sparse_ext_params),
+  
+  Extension(name="cysparse.sparse.sparse_proxies.complex_generic.h_mat_INT32_t_COMPLEX256_t",
+            sources=["cysparse/sparse/sparse_proxies/complex_generic/h_mat_INT32_t_COMPLEX256_t.pxd",
+                     "cysparse/sparse/sparse_proxies/complex_generic/h_mat_INT32_t_COMPLEX256_t.pyx"],
+            **sparse_ext_params),
+  
+
+  
+  Extension(name="cysparse.sparse.sparse_proxies.complex_generic.h_mat_INT64_t_COMPLEX64_t",
+            sources=["cysparse/sparse/sparse_proxies/complex_generic/h_mat_INT64_t_COMPLEX64_t.pxd",
+                     "cysparse/sparse/sparse_proxies/complex_generic/h_mat_INT64_t_COMPLEX64_t.pyx"],
+            **sparse_ext_params),
+  
+  Extension(name="cysparse.sparse.sparse_proxies.complex_generic.h_mat_INT64_t_COMPLEX128_t",
+            sources=["cysparse/sparse/sparse_proxies/complex_generic/h_mat_INT64_t_COMPLEX128_t.pxd",
+                     "cysparse/sparse/sparse_proxies/complex_generic/h_mat_INT64_t_COMPLEX128_t.pyx"],
+            **sparse_ext_params),
+  
+  Extension(name="cysparse.sparse.sparse_proxies.complex_generic.h_mat_INT64_t_COMPLEX256_t",
+            sources=["cysparse/sparse/sparse_proxies/complex_generic/h_mat_INT64_t_COMPLEX256_t.pxd",
+                     "cysparse/sparse/sparse_proxies/complex_generic/h_mat_INT64_t_COMPLEX256_t.pyx"],
+            **sparse_ext_params),
+  
+
 ]
 ########################################################################################################################
 #                                                *** utils ***
@@ -850,6 +881,7 @@ packages_list = ['cysparse',
             'cysparse.types',
             'cysparse.sparse',
             'cysparse.sparse.sparse_proxies',
+            'cysparse.sparse.sparse_proxies.complex_generic',
             'cysparse.sparse.sparse_utils',
             'cysparse.sparse.s_mat_matrices',
             'cysparse.sparse.ll_mat_matrices',

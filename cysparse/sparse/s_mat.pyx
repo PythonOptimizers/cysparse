@@ -2,7 +2,6 @@ from cysparse.types.cysparse_types cimport *
 from cysparse.types.cysparse_types import *
 
 from cysparse.sparse.sparse_proxies.t_mat cimport TransposedSparseMatrix
-from cysparse.sparse.sparse_proxies.h_mat cimport ConjugateTransposedSparseMatrix
 
 cdef INT32_t MUTABLE_SPARSE_MAT_DEFAULT_SIZE_HINT = 40        # allocated size by default
 
@@ -56,7 +55,6 @@ cdef class SparseMatrix:
         self.is_mutable = False
 
         self.__transposed_proxy_matrix_generated = False
-        self.__conjugate_transposed_proxy_matrix_generated = False
 
     # for compatibility with numpy, PyKrylov, etc
     property shape:
@@ -97,31 +95,6 @@ cdef class SparseMatrix:
                 self.__transposed_proxy_matrix_generated = True
 
             return self.__transposed_proxy_matrix
-
-        def __set__(self, value):
-            raise AttributeError('Attribute T (transposed) is read-only')
-
-        def __del__(self):
-            raise AttributeError('Attribute T (transposed) is read-only')
-
-    property H:
-        def __get__(self):
-            # dispatch at runtime
-            # could be down at compile time but probably too troublesome and not needed
-            if is_complex_type(self.cp_type.dtype):
-                if not self.__conjugate_transposed_proxy_matrix_generated:
-                    # create proxy
-                    self.__conjugate_transposed_proxy_matrix = ConjugateTransposedSparseMatrix(self)
-                    self.__conjugate_transposed_proxy_matrix_generated = True
-
-                return self.__conjugate_transposed_proxy_matrix
-            else:
-                if not self.__transposed_proxy_matrix_generated:
-                    # create proxy
-                    self.__transposed_proxy_matrix = TransposedSparseMatrix(self)
-                    self.__transposed_proxy_matrix_generated = True
-
-                return self.__transposed_proxy_matrix
 
         def __set__(self, value):
             raise AttributeError('Attribute T (transposed) is read-only')
