@@ -1487,6 +1487,12 @@ cdef class LLSparseMatrix_INT64_t_FLOAT128_t(MutableSparseMatrix_INT64_t_FLOAT12
         """
         return multiply_transposed_ll_mat_with_numpy_vector_INT64_t_FLOAT128_t(self, B)
 
+    def matvec_htransp(self, B):
+        """
+        Return :math:`A^h * b`.
+        """
+        return
+
     def matdot(self, B):
         """
         Return :math:`A*B`.

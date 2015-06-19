@@ -1501,6 +1501,12 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX128_t(MutableSparseMatrix_INT32_t_COMPL
         """
         return multiply_transposed_ll_mat_with_numpy_vector_INT32_t_COMPLEX128_t(self, B)
 
+    def matvec_htransp(self, B):
+        """
+        Return :math:`A^h * b`.
+        """
+        return
+
     def matdot(self, B):
         """
         Return :math:`A*B`.

@@ -1584,6 +1584,12 @@ YOU HAVE TO DEFINE OR CAST YOUR NEW UNRECOGNIZED TYPE
         """
         return multiply_transposed_ll_mat_with_numpy_vector_@index@_@type@(self, B)
 
+    def matvec_htransp(self, B):
+        """
+        Return :math:`A^h * b`.
+        """
+        return
+
     def matdot(self, B):
         """
         Return :math:`A*B`.

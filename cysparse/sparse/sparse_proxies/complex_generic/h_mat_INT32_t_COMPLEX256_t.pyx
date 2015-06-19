@@ -116,6 +116,7 @@ cdef class ConjugateTransposedSparseMatrix_INT32_t_COMPLEX256_t:
     ####################################################################################################################
     # Set/get
     ####################################################################################################################
+    # EXPLICIT TYPE TESTS
     def __getitem__(self, tuple key):
         if len(key) != 2:
             raise IndexError('Index tuple must be of length 2 (not %d)' % len(key))
@@ -123,10 +124,17 @@ cdef class ConjugateTransposedSparseMatrix_INT32_t_COMPLEX256_t:
         if not PyInt_Check(<PyObject *>key[0]) or not PyInt_Check(<PyObject *>key[1]):
             raise IndexError("Only integers are accepted as indices for a transposed matrix")
 
-        return self.A[key[1], key[0]]
+        return conjl(self.A[key[1], key[0]])
+
 
     ####################################################################################################################
     # Basic operations
     ####################################################################################################################
     def __mul__(self, B):
         raise NotImplementedError("Multiplication with this kind of object not implemented yet...")
+
+    def matvec(self, B):
+        return self.A.matvec_htransp(B)
+
+    def matvec_htransp(self, B):
+        return self.A.matvec(B)

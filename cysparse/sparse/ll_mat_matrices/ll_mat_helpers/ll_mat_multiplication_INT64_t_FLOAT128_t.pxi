@@ -206,7 +206,7 @@ cdef cnp.ndarray[cnp.npy_float128, ndim=1, mode='c'] multiply_ll_mat_with_numpy_
 ######################
 cdef cnp.ndarray[cnp.npy_float128, ndim=1, mode='c'] multiply_transposed_ll_mat_with_numpy_vector_INT64_t_FLOAT128_t(LLSparseMatrix_INT64_t_FLOAT128_t A, cnp.ndarray[cnp.npy_float128, ndim=1] b):
     """
-    Multiply a transposed :class:`LLSparseMatrix` ``A`` with a numpy vector ``b``.
+    Multiply a transposed of a :class:`LLSparseMatrix` ``A`` matrix with a numpy vector ``b``.
 
     Args
         A: A :class:`LLSparseMatrix`.
@@ -219,7 +219,7 @@ cdef cnp.ndarray[cnp.npy_float128, ndim=1, mode='c'] multiply_transposed_ll_mat_
         IndexError if dimensions don't match.
 
     Note:
-        This version is more general as it takes into account strides in the numpy arrays and if the :class:`LLSparseMatrix`
+        This version is general as it takes into account strides in the numpy arrays and if the :class:`LLSparseMatrix`
         is symmetric or not.
 
     """
@@ -261,3 +261,4 @@ cdef cnp.ndarray[cnp.npy_float128, ndim=1, mode='c'] multiply_transposed_ll_mat_
                                                                                       A.val, A.col, A.link, A.root)
 
     return c
+
