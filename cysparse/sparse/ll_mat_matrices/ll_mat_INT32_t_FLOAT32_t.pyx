@@ -1477,12 +1477,14 @@ cdef class LLSparseMatrix_INT32_t_FLOAT32_t(MutableSparseMatrix_INT32_t_FLOAT32_
         """
         Return :math:`A * b`.
         """
+        assert are_mixed_types_compatible(FLOAT32_T, B.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(FLOAT32_T)
         return multiply_ll_mat_with_numpy_vector_INT32_t_FLOAT32_t(self, B)
 
     def matvec_transp(self, B):
         """
         Return :math:`A^t * b`.
         """
+        assert are_mixed_types_compatible(FLOAT32_T, B.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(FLOAT32_T)
         return multiply_transposed_ll_mat_with_numpy_vector_INT32_t_FLOAT32_t(self, B)
 
 

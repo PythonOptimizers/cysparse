@@ -1493,12 +1493,14 @@ cdef class LLSparseMatrix_INT64_t_COMPLEX128_t(MutableSparseMatrix_INT64_t_COMPL
         """
         Return :math:`A * b`.
         """
+        assert are_mixed_types_compatible(COMPLEX128_T, B.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(COMPLEX128_T)
         return multiply_ll_mat_with_numpy_vector_INT64_t_COMPLEX128_t(self, B)
 
     def matvec_transp(self, B):
         """
         Return :math:`A^t * b`.
         """
+        assert are_mixed_types_compatible(COMPLEX128_T, B.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(COMPLEX128_T)
         return multiply_transposed_ll_mat_with_numpy_vector_INT64_t_COMPLEX128_t(self, B)
 
 

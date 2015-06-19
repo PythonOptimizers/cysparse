@@ -20,7 +20,7 @@ Covered cases:
 3. :math:`A^h * b`: this **only** concerns complex matrices!
 
     - :program:`NumPy` array data C-contiguous, ``LLSparseMatrix`` not symmetric
-    - :program:`NumPy` array data C-contiguous, ``LLSparseMatrix`` symmetric [NOT DONE]
+    - :program:`NumPy` array data C-contiguous, ``LLSparseMatrix`` symmetric
     - :program:`NumPy` array data not C-contiguous, ``LLSparseMatrix`` not symmetric
     - :program:`NumPy` array data not C-contiguous, ``LLSparseMatrix`` symmetric [NOT DONE]
 
@@ -342,6 +342,54 @@ cdef void multiply_conjugate_tranposed_ll_mat_with_numpy_vector_kernel_INT32_t_C
 
             k = link[k]
 
+
+###########################################
+# C-contiguous, symmetric
+###########################################
+cdef void multiply_conjugate_tranposed_sym_ll_mat_with_numpy_vector_kernel_INT32_t_COMPLEX128_t(INT32_t m, INT32_t n, COMPLEX128_t *x, COMPLEX128_t *y,
+         COMPLEX128_t *val, INT32_t *col, INT32_t *link, INT32_t *root):
+    """
+    Compute :math:`y = A^h * x`.
+
+    ``A`` is a :class:`LLSparseMatrix` and ``x`` and ``y`` are one dimensional numpy arrays.
+    In this kernel function, we only use the corresponding C-arrays.
+
+    Warning:
+        This version consider the arrays as C-contiguous (**without** strides).
+        This version will **only** work for complex numbers and crashes at compile time for the other types.
+
+    Args:
+        m: Number of rows of the matrix ``A``.
+        x: C-contiguous C-array corresponding to vector ``x``.
+        y: C-contiguous C-array corresponding to vector ``y``.
+        val: C-contiguous C-array corresponding to vector ``A.val``.
+        col: C-contiguous C-array corresponding to vector ``A.col``.
+        link: C-contiguous C-array corresponding to vector ``A.link``.
+        root: C-contiguous C-array corresponding to vector ``A.root``.
+    """
+    cdef:
+        COMPLEX128_t xi, v
+        INT32_t i, j, k
+
+    for i from 0 <= i < n:
+        y[i] = <COMPLEX128_t>(0.0+0.0j)
+
+    for i from 0 <= i < m:
+        xi = x[i]
+        k = root[i]
+
+        while k != -1:
+
+            j = col[k]
+            v = conj(val[k])
+            y[j] += v * xi
+            if i != j:
+                y[i] += v * x[j]
+
+
+            k = link[k]
+
+
 ###########################################
 # Non C-contiguous, non symmetric
 ###########################################
@@ -381,6 +429,53 @@ cdef void multiply_conjugate_tranposed_ll_mat_with_strided_numpy_vector_kernel_I
         while k != -1:
 
             y[col[k]*incy] += conj(val[k]) * xi
+
+
+            k = link[k]
+
+
+###########################################
+# Non C-contiguous, symmetric
+###########################################
+cdef void multiply_conjugate_tranposed_sym_ll_mat_with_strided_numpy_vector_kernel_INT32_t_COMPLEX128_t(INT32_t m, INT32_t n, COMPLEX128_t *x, INT32_t incx, COMPLEX128_t *y, INT32_t incy,
+         COMPLEX128_t *val, INT32_t *col, INT32_t *link, INT32_t *root):
+    """
+    Compute :math:`y = A^h * x`.
+
+    ``A`` is a symmetric :class:`LLSparseMatrix` and ``x`` and ``y`` are one dimensional numpy arrays.
+    In this kernel function, we only use the corresponding C-arrays.
+
+    Warning:
+        This version consider the arrays as non C-contiguous (**with** strides).
+        This version will **only** work for complex numbers and crashes at compile time for the other types.
+
+    Args:
+        m: Number of rows of the matrix ``A``.
+        x: C-contiguous C-array corresponding to vector ``x``.
+        y: C-contiguous C-array corresponding to vector ``y``.
+        val: C-contiguous C-array corresponding to vector ``A.val``.
+        col: C-contiguous C-array corresponding to vector ``A.col``.
+        link: C-contiguous C-array corresponding to vector ``A.link``.
+        root: C-contiguous C-array corresponding to vector ``A.root``.
+    """
+    cdef:
+        COMPLEX128_t xi, v
+        INT32_t i, j, k
+
+    for i from 0 <= i < n:
+        y[i * incy] = <COMPLEX128_t>(0.0+0.0j)
+
+    for i from 0 <= i < m:
+        xi = x[i * incx]
+        k = root[i]
+
+        while k != -1:
+
+            j = col[k]
+            v = conj(val[k])
+            y[j * incy] += v * xi
+            if i != j:
+                y[i * incy] += v * x[j * incx]
 
 
             k = link[k]

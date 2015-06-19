@@ -20,7 +20,7 @@ Covered cases:
 3. :math:`A^h * b`: this **only** concerns complex matrices!
 
     - :program:`NumPy` array data C-contiguous, ``LLSparseMatrix`` not symmetric
-    - :program:`NumPy` array data C-contiguous, ``LLSparseMatrix`` symmetric [NOT DONE]
+    - :program:`NumPy` array data C-contiguous, ``LLSparseMatrix`` symmetric
     - :program:`NumPy` array data not C-contiguous, ``LLSparseMatrix`` not symmetric
     - :program:`NumPy` array data not C-contiguous, ``LLSparseMatrix`` symmetric [NOT DONE]
 

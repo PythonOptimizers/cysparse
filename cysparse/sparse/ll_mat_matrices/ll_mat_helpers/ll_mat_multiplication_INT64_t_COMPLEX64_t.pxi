@@ -306,26 +306,20 @@ cdef cnp.ndarray[cnp.npy_complex64, ndim=1, mode='c'] multiply_conjugate_transpo
     # test if b vector is C-contiguous or not
     if cnp.PyArray_ISCONTIGUOUS(b):
         if A.is_symmetric:
-            #multiply_sym_ll_mat_with_numpy_vector_kernel_INT64_t_COMPLEX64_t(A_nrow, b_data, c_data, A.val, A.col, A.link, A.root)
-            raise NotImplementedError('Not yet implemented...')
+            multiply_conjugate_tranposed_sym_ll_mat_with_numpy_vector_kernel_INT64_t_COMPLEX64_t(A_nrow, A_ncol, b_data, c_data, A.val, A.col, A.link, A.root)
         else:
             multiply_conjugate_tranposed_ll_mat_with_numpy_vector_kernel_INT64_t_COMPLEX64_t(A_nrow, A_ncol, b_data, c_data,
          A.val, A.col, A.link, A.root)
     else:
         if A.is_symmetric:
-            #multiply_sym_ll_mat_with_strided_numpy_vector_kernel_INT64_t_COMPLEX64_t(A.nrow,
-            #                                                     b_data, b.strides[0] / sd,
-            #                                                     c_data, c.strides[0] / sd,
-            #                                                     A.val, A.col, A.link, A.root)
-            raise NotImplementedError('Not yet implemented...')
+            multiply_conjugate_tranposed_sym_ll_mat_with_strided_numpy_vector_kernel_INT64_t_COMPLEX64_t(A_nrow, A_ncol,
+                                                                 b_data, b.strides[0] / sd,
+                                                                 c_data, c.strides[0] / sd,
+                                                                 A.val, A.col, A.link, A.root)
         else:
             multiply_conjugate_tranposed_ll_mat_with_strided_numpy_vector_kernel_INT64_t_COMPLEX64_t(A_nrow, A_ncol,
                                                                                       b_data, b.strides[0] / sd,
                                                                                       c_data, c.strides[0] / sd,
                                                                                       A.val, A.col, A.link, A.root)
-            #multiply_tranposed_ll_mat_with_strided_numpy_vector_kernel_INT64_t_COMPLEX64_t(A_nrow, A_ncol,
-            #                                                                          b_data, b.strides[0] / sd,
-            #                                                                          c_data, c.strides[0] / sd,
-            #                                                                          A.val, A.col, A.link, A.root)
 
     return c

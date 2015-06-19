@@ -28,3 +28,17 @@ for i in xrange(3):
 b = np.array([1+1j, 1+1j], dtype=np.complex64)
 
 print H.matvec(b)
+
+########################################################################################################################
+print "=" * 80
+
+l2 = NewLLSparseMatrix(nrow=2, ncol=3, size_hint=10, dtype=COMPLEX64_T, is_symmetric=True)
+l2.put_triplet([1, 1], [0, 1], [1+1j, 1-1.0j])  # i, j, val
+
+l2.print_to(sys.stdout)
+
+H2 = l2.H
+
+print H2
+
+print H2.matvec(b)
