@@ -1681,6 +1681,12 @@ YOU HAVE TO DEFINE OR CAST YOUR NEW UNRECOGNIZED TYPE
         assert are_mixed_types_compatible(@type|type2enum@, B.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(@type|type2enum@)
         return multiply_conjugate_transposed_ll_mat_with_numpy_vector_@index@_@type@(self, B)
 
+    def matvec_conj(self, B):
+        """
+        Return :math:`conj(A) * b`.
+        """
+        assert are_mixed_types_compatible(@type|type2enum@, B.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(@type|type2enum@)
+        return multiply__conjugate_ll_mat_with_numpy_vector_@index@_@type@(self, B)
 {% endif %}
     def matdot(self, B):
         """

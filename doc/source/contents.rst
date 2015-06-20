@@ -18,6 +18,7 @@ CySparse documentation
    sparse_mat_hierarchy
    mutable_ll_mat
    immutable_mat
+   proxies
    io_formats
    cysparse_cython_users
    cysparse_lib_mainteners

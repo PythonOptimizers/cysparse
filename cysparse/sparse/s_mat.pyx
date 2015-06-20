@@ -112,7 +112,6 @@ cdef class SparseMatrix:
             B: A :program:`NumPy` vector.
 
         """
-
         raise NotImplementedError("Operation not implemented (yet). Please report.")
 
     def matvec_htransp(self, B):
@@ -123,7 +122,17 @@ cdef class SparseMatrix:
             B: A :program:`NumPy` vector.
 
         """
+        raise NotImplementedError("Operation not implemented (yet). Please report.")
 
+
+    def matvec_conj(self, B):
+        """
+        Return ``conj(A) * B`` with ``B`` a :program:`NumPy` vector.
+
+        Args:
+            B: A :program:`NumPy` vector.
+
+        """
         raise NotImplementedError("Operation not implemented (yet). Please report.")
 
     def matdot(self, B):

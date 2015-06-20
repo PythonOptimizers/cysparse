@@ -24,6 +24,13 @@ Covered cases:
     - :program:`NumPy` array data not C-contiguous, ``LLSparseMatrix`` not symmetric
     - :program:`NumPy` array data not C-contiguous, ``LLSparseMatrix`` symmetric
 
+4. :math:`\textrm{conj}(A) * b`: this **only** concerns complex matrices!
+
+    - :program:`NumPy` array data C-contiguous, ``LLSparseMatrix`` not symmetric
+    - :program:`NumPy` array data C-contiguous, ``LLSparseMatrix`` symmetric
+    - :program:`NumPy` array data not C-contiguous, ``LLSparseMatrix`` not symmetric
+    - :program:`NumPy` array data not C-contiguous, ``LLSparseMatrix`` symmetric
+
 Note:
     We only consider C-arrays with same type of elements as the type of elements in the ``LLSparseMatrix``.
     Even if we construct the resulting :program:`NumPy` array as C-contiguous, the functions are more general and could

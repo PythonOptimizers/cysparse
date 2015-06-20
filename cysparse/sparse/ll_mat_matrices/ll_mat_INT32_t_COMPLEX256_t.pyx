@@ -1562,7 +1562,7 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX256_t(MutableSparseMatrix_INT32_t_COMPL
         """
         return update_add_at_with_numpy_arraysINT32_t_COMPLEX256_t(self, id1, id2, val)
 
-
+ 
     ####################################################################################################################
     # Multiplication
     ####################################################################################################################
@@ -1588,6 +1588,12 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX256_t(MutableSparseMatrix_INT32_t_COMPL
         assert are_mixed_types_compatible(COMPLEX256_T, B.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(COMPLEX256_T)
         return multiply_conjugate_transposed_ll_mat_with_numpy_vector_INT32_t_COMPLEX256_t(self, B)
 
+    def matvec_conj(self, B):
+        """
+        Return :math:`conj(A) * b`.
+        """
+        assert are_mixed_types_compatible(COMPLEX256_T, B.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(COMPLEX256_T)
+        return multiply__conjugate_ll_mat_with_numpy_vector_INT32_t_COMPLEX256_t(self, B)
 
     def matdot(self, B):
         """

@@ -141,7 +141,13 @@ cdef class ConjugatedSparseMatrix_INT32_t_COMPLEX256_t:
         raise NotImplementedError("Multiplication with this kind of object not implemented yet...")
 
     def matvec(self, B):
-        raise NotImplementedError("Multiplication with this kind of object not implemented yet...")
+        return self.A.matvec_conj(B)
 
     def matvec_htransp(self, B):
         raise NotImplementedError("Multiplication with this kind of object not implemented yet...")
+
+    def copy(self):
+        raise NotImplementedError('This proxy is unique')
+
+    def matrix_copy(self):
+        return self.A.create_conjugate()

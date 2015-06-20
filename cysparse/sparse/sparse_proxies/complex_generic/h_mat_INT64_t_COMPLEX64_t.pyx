@@ -145,3 +145,9 @@ cdef class ConjugateTransposedSparseMatrix_INT64_t_COMPLEX64_t:
 
     def matvec_htransp(self, B):
         return self.A.matvec(B)
+
+    def copy(self):
+        raise NotImplementedError('This proxy is unique')
+
+    def matrix_copy(self):
+        return self.A.create_conjugate_transpose()
