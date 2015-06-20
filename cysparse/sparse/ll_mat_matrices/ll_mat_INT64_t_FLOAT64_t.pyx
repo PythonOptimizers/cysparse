@@ -499,28 +499,25 @@ cdef class LLSparseMatrix_INT64_t_FLOAT64_t(MutableSparseMatrix_INT64_t_FLOAT64_
         """
         cdef:
             INT64_t i, j, k
+            LLSparseMatrix_INT64_t_FLOAT64_t transpose
 
         if self.is_symmetric:
             return self.copy()
         else:
-            transposed = LLSparseMatrix_INT64_t_FLOAT64_t(control_object=unexposed_value, nrow=self.ncol, ncol=self.nrow, size_hint=self.nnz, store_zeros=self.store_zeros, is_symmetric=self.is_symmetric)
+            transpose = LLSparseMatrix_INT64_t_FLOAT64_t(control_object=unexposed_value, nrow=self.ncol, ncol=self.nrow, size_hint=self.nnz, store_zeros=self.store_zeros, is_symmetric=self.is_symmetric)
 
             for i from 0 <= i < self.nrow:
                 k = self.root[i]
                 while k != -1:
                     j = self.col[k]
 
-                    transposed.put(j, i, self.val[k])
+                    transpose.put(j, i, self.val[k])
 
                     k = self.link[k]
 
-            return transposed
+            return transpose
 
-    def create_conjugate_transpose(self):
-        raise NotImplementedError('Not yet implemented. Please report.')
 
-    def create_conjugate(self):
-        raise NotImplementedError('Not yet implemented. Please report.')
 
     ####################################################################################################################
     # SORTING

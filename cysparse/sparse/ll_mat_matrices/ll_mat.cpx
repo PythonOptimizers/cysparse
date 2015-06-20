@@ -499,28 +499,83 @@ cdef class LLSparseMatrix_@index@_@type@(MutableSparseMatrix_@index@_@type@):
         """
         cdef:
             @index@ i, j, k
+            LLSparseMatrix_@index@_@type@ transpose
 
         if self.is_symmetric:
             return self.copy()
         else:
-            transposed = LLSparseMatrix_@index@_@type@(control_object=unexposed_value, nrow=self.ncol, ncol=self.nrow, size_hint=self.nnz, store_zeros=self.store_zeros, is_symmetric=self.is_symmetric)
+            transpose = LLSparseMatrix_@index@_@type@(control_object=unexposed_value, nrow=self.ncol, ncol=self.nrow, size_hint=self.nnz, store_zeros=self.store_zeros, is_symmetric=self.is_symmetric)
 
             for i from 0 <= i < self.nrow:
                 k = self.root[i]
                 while k != -1:
                     j = self.col[k]
 
-                    transposed.put(j, i, self.val[k])
+                    transpose.put(j, i, self.val[k])
 
                     k = self.link[k]
 
-            return transposed
+            return transpose
 
+{% if type in complex_list %}
     def create_conjugate_transpose(self):
-        raise NotImplementedError('Not yet implemented. Please report.')
+        """
+        Create a new matrix that is the conjugate transposed of this one.
+        """
+        cdef:
+            @index@ i, j, k
+            LLSparseMatrix_@index@_@type@ conjugate_transpose
+
+        if self.is_symmetric:
+            return self.create_conjugate()
+
+        else:
+            conjugate_transpose = LLSparseMatrix_@index@_@type@(control_object=unexposed_value, nrow=self.ncol, ncol=self.nrow, size_hint=self.nnz, store_zeros=self.store_zeros, is_symmetric=self.is_symmetric)
+
+            for i from 0 <= i < self.nrow:
+                k = self.root[i]
+                while k != -1:
+                    j = self.col[k]
+
+{% if type == 'COMPLEX64_t' %}
+                    conjugate_transpose.put(j, i, conjf(self.val[k]))
+{% elif type == 'COMPLEX128_t' %}
+                    conjugate_transpose.put(j, i, conj(self.val[k]))
+{% elif type == 'COMPLEX256_t' %}
+                    conjugate_transpose.put(j, i, conjl(self.val[k]))
+{% else %}
+YOU HAVE TO DEFINE OR CAST YOUR NEW UNRECOGNIZED COMPLEX TYPE
+{% endif %}
+
+                    k = self.link[k]
+
+            return conjugate_transpose
 
     def create_conjugate(self):
-        raise NotImplementedError('Not yet implemented. Please report.')
+        cdef:
+            @index@ i, j, k
+            LLSparseMatrix_@index@_@type@ conjugate
+
+        conjugate = <LLSparseMatrix_@index@_@type@> self.copy()
+
+        for i from 0 <= i < conjugate.nrow:
+            k = conjugate.root[i]
+            while k != -1:
+{% if type == 'COMPLEX64_t' %}
+                conjugate.val[k] = conjf(conjugate.val[k])
+{% elif type == 'COMPLEX128_t' %}
+                conjugate.val[k] = conj(conjugate.val[k])
+{% elif type == 'COMPLEX256_t' %}
+                conjugate.val[k] = conjl(conjugate.val[k])
+{% else %}
+YOU HAVE TO DEFINE OR CAST YOUR NEW UNRECOGNIZED COMPLEX TYPE
+{% endif %}
+                k = self.link[k]
+
+        return conjugate
+
+
+{% endif %}
 
     ####################################################################################################################
     # SORTING
