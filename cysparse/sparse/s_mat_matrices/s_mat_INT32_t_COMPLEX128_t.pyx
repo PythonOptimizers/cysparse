@@ -67,6 +67,20 @@ cdef class SparseMatrix_INT32_t_COMPLEX128_t(SparseMatrix):
 
 
     ####################################################################################################################
+    # CREATE SPECIAL MATRICES
+    ####################################################################################################################
+    def create_transpose(self):
+        raise NotImplementedError('Not yet implemented. Please report.')
+
+
+    def create_conjugate_transpose(self):
+        raise NotImplementedError('Not yet implemented. Please report.')
+
+    def create_conjugate(self):
+        raise NotImplementedError('Not yet implemented. Please report.')
+
+
+    ####################################################################################################################
     # MEMORY INFO
     ####################################################################################################################
     def memory_virtual(self):

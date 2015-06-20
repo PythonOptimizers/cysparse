@@ -70,6 +70,20 @@ cdef class SparseMatrix_@index@_@type@(SparseMatrix):
 {% endif %}
 
     ####################################################################################################################
+    # CREATE SPECIAL MATRICES
+    ####################################################################################################################
+    def create_transpose(self):
+        raise NotImplementedError('Not yet implemented. Please report.')
+
+{% if type in complex_list %}
+    def create_conjugate_transpose(self):
+        raise NotImplementedError('Not yet implemented. Please report.')
+
+    def create_conjugate(self):
+        raise NotImplementedError('Not yet implemented. Please report.')
+{% endif %}
+
+    ####################################################################################################################
     # MEMORY INFO
     ####################################################################################################################
     def memory_virtual(self):

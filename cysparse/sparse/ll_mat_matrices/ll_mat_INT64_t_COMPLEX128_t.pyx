@@ -491,6 +491,38 @@ cdef class LLSparseMatrix_INT64_t_COMPLEX128_t(MutableSparseMatrix_INT64_t_COMPL
         return total_memory
 
     ####################################################################################################################
+    # CREATE SPECIAL MATRICES
+    ####################################################################################################################
+    def create_transpose(self):
+        """
+        Create a new matrix that is the transposed of this one.
+        """
+        cdef:
+            INT64_t i, j, k
+
+        if self.is_symmetric:
+            return self.copy()
+        else:
+            transposed = LLSparseMatrix_INT64_t_COMPLEX128_t(control_object=unexposed_value, nrow=self.ncol, ncol=self.nrow, size_hint=self.nnz, store_zeros=self.store_zeros, is_symmetric=self.is_symmetric)
+
+            for i from 0 <= i < self.nrow:
+                k = self.root[i]
+                while k != -1:
+                    j = self.col[k]
+
+                    transposed.put(j, i, self.val[k])
+
+                    k = self.link[k]
+
+            return transposed
+
+    def create_conjugate_transpose(self):
+        raise NotImplementedError('Not yet implemented. Please report.')
+
+    def create_conjugate(self):
+        raise NotImplementedError('Not yet implemented. Please report.')
+
+    ####################################################################################################################
     # SORTING
     ####################################################################################################################
     cdef bint is_sorted(self):
