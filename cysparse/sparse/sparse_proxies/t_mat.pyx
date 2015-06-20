@@ -97,6 +97,26 @@ cdef class TransposedSparseMatrix:
         def __del__(self):
             raise AttributeError('Attribute T (transposed) is read-only')
 
+    property H:
+        def __get__(self):
+            return self.A.conj
+
+        def __set__(self, value):
+            raise AttributeError('Attribute H (conjugate transposed) is read-only')
+
+        def __del__(self):
+            raise AttributeError('Attribute H (conjugate transposed) is read-only')
+
+    property conj:
+        def __get__(self):
+            return self.A.H
+
+        def __set__(self, value):
+            raise AttributeError('Attribute conj (conjugated) is read-only')
+
+        def __del__(self):
+            raise AttributeError('Attribute conj (conjugated) is read-only')
+
     ####################################################################################################################
     # Set/get
     ####################################################################################################################

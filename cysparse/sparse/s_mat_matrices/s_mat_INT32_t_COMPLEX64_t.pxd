@@ -3,6 +3,7 @@ from cysparse.sparse.s_mat cimport SparseMatrix
 
 
 from cysparse.sparse.sparse_proxies.complex_generic.h_mat_INT32_t_COMPLEX64_t cimport ConjugateTransposedSparseMatrix_INT32_t_COMPLEX64_t
+from cysparse.sparse.sparse_proxies.complex_generic.conj_mat_INT32_t_COMPLEX64_t cimport ConjugatedSparseMatrix_INT32_t_COMPLEX64_t
 
 
 cdef class SparseMatrix_INT32_t_COMPLEX64_t(SparseMatrix):
@@ -16,6 +17,12 @@ cdef class SparseMatrix_INT32_t_COMPLEX64_t(SparseMatrix):
 
         ConjugateTransposedSparseMatrix_INT32_t_COMPLEX64_t __conjugate_transposed_proxy_matrix
         bint __conjugate_transposed_proxy_matrix_generated
+
+        object conj         # proxy to the conjugated matrix
+
+        ConjugatedSparseMatrix_INT32_t_COMPLEX64_t __conjugated_proxy_matrix
+        bint __conjugated_proxy_matrix_generated
+
 
 
 

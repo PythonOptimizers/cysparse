@@ -102,7 +102,6 @@ cdef class ConjugateTransposedSparseMatrix_INT64_t_COMPLEX64_t:
     ####################################################################################################################
     # End of Common code
     ####################################################################################################################
-
     property H:
         def __get__(self):
             return self.A
@@ -112,6 +111,33 @@ cdef class ConjugateTransposedSparseMatrix_INT64_t_COMPLEX64_t:
 
         def __del__(self):
             raise AttributeError('Attribute H (conjugate transposed matrix) is read-only')
+
+    def A_conj(self):
+        print "hello"
+        self.__A_conj = self.A.conj
+
+        return self.__A_conj
+
+    property T:
+        def __get__(self):
+            self.A_conj()
+            return self.__A_conj
+
+        def __set__(self, value):
+            raise AttributeError('Attribute T (transposed matrix) is read-only')
+
+        def __del__(self):
+            raise AttributeError('Attribute T (transposed matrix) is read-only')
+
+    property conj:
+        def __get__(self):
+            return self.A.T
+
+        def __set__(self, value):
+            raise AttributeError('Attribute conj (conjugate transposed matrix) is read-only')
+
+        def __del__(self):
+            raise AttributeError('Attribute conj (conjugate transposed matrix) is read-only')
 
     ####################################################################################################################
     # Set/get

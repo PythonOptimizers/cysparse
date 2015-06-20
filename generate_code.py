@@ -448,9 +448,17 @@ SPARSE_MATRIX_DECLARATION_FILES = glob.glob(os.path.join(SPARSE_MATRIX_TEMPLATE_
 SPARSE_MATRIX_DEFINITION_FILES = glob.glob(os.path.join(SPARSE_MATRIX_TEMPLATE_DIR, '*.cpx'))
 
 ##########################################
+### TransposedSparseMatrix
+##########################################
+SPARSE_MATRIX_PROXIES_TEMPLATE_DIR = os.path.join(SPARSE_DIR, 'sparse_proxies')
+
+SPARSE_MATRIX_PROXIES_TRANSPOSE_DECLARATION_FILE = os.path.join(SPARSE_MATRIX_PROXIES_TEMPLATE_DIR, 't_mat.cpd')
+SPARSE_MATRIX_PROXIES_TRANSPOSE_DEFINITION_FILE = os.path.join(SPARSE_MATRIX_PROXIES_TEMPLATE_DIR, 't_mat.cpx')
+
+##########################################
 ### ConjugateTransposedSparseMatrix
 ##########################################
-SPARSE_MATRIX_PROXIES_GENERIC_TEMPLATE_DIR = os.path.join(SPARSE_DIR, 'sparse_proxies', 'complex_generic')
+SPARSE_MATRIX_PROXIES_GENERIC_TEMPLATE_DIR = os.path.join(SPARSE_MATRIX_PROXIES_TEMPLATE_DIR, 'complex_generic')
 
 SPARSE_MATRIX_PROXIES_GENERIC_DECLARATION_FILES = glob.glob(os.path.join(SPARSE_MATRIX_PROXIES_GENERIC_TEMPLATE_DIR, '*.cpd'))
 SPARSE_MATRIX_PROXIES_GENERIC_DEFINITION_FILES = glob.glob(os.path.join(SPARSE_MATRIX_PROXIES_GENERIC_TEMPLATE_DIR, '*.cpx'))
@@ -617,6 +625,10 @@ if __name__ == "__main__":
             # SparseMatrix
             clean_cython_files(logger, SPARSE_MATRIX_TEMPLATE_DIR)
 
+            # TransposedSparseMatrix
+            clean_cython_files(logger, SPARSE_MATRIX_PROXIES_TEMPLATE_DIR, [SPARSE_MATRIX_PROXIES_TRANSPOSE_DECLARATION_FILE[:-4] + '.pxd'])
+            clean_cython_files(logger, SPARSE_MATRIX_PROXIES_TEMPLATE_DIR, [SPARSE_MATRIX_PROXIES_TRANSPOSE_DEFINITION_FILE[:-4] + '.pyx'])
+
             # ConjugateTransposedSparseMatrix
             clean_cython_files(logger, SPARSE_MATRIX_PROXIES_GENERIC_TEMPLATE_DIR)
 
@@ -682,8 +694,14 @@ if __name__ == "__main__":
             #tabu['INT32_t']['INT64_t'] = True
 
             ###############################
-            # Sparse proxies - complex generic
+            # Sparse proxies
             ###############################
+            # Transpose
+            # t_mat.pxd and t_mat.pyx
+            generate_template_files(logger, [SPARSE_MATRIX_PROXIES_TRANSPOSE_DECLARATION_FILE], GENERAL_ENVIRONMENT, GENERAL_CONTEXT, '.pxd')
+            generate_template_files(logger, [SPARSE_MATRIX_PROXIES_TRANSPOSE_DEFINITION_FILE], GENERAL_ENVIRONMENT, GENERAL_CONTEXT, '.pyx')
+
+            # complex generic
             generate_following_type_and_index(logger, SPARSE_MATRIX_PROXIES_GENERIC_DECLARATION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, COMPLEX_ELEMENT_TYPES, INDEX_TYPES, '.pxd')
             generate_following_type_and_index(logger, SPARSE_MATRIX_PROXIES_GENERIC_DEFINITION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, COMPLEX_ELEMENT_TYPES, INDEX_TYPES, '.pyx')
 

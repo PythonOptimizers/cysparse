@@ -22,7 +22,7 @@ cdef class SparseMatrix_INT64_t_FLOAT32_t(SparseMatrix):
         self.ncol = kwargs.get('ncol', -1)
         self.nnz = kwargs.get('nnz', 0)
 
-        self.__conjugate_transposed_proxy_matrix_generated = False
+
 
 
 

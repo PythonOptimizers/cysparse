@@ -635,6 +635,8 @@ struct __pyx_obj_8cysparse_6sparse_14sparse_proxies_5t_mat_TransposedSparseMatri
   PyObject *itype;
   PyObject *shape;
   PyObject *T;
+  PyObject *H;
+  PyObject *conj;
 };
 
 

@@ -3,6 +3,7 @@ from cysparse.sparse.s_mat cimport SparseMatrix
 
 {% if type in complex_list %}
 from cysparse.sparse.sparse_proxies.complex_generic.h_mat_@index@_@type@ cimport ConjugateTransposedSparseMatrix_@index@_@type@
+from cysparse.sparse.sparse_proxies.complex_generic.conj_mat_@index@_@type@ cimport ConjugatedSparseMatrix_@index@_@type@
 {% endif %}
 
 cdef class SparseMatrix_@index@_@type@(SparseMatrix):
@@ -16,6 +17,12 @@ cdef class SparseMatrix_@index@_@type@(SparseMatrix):
 
         ConjugateTransposedSparseMatrix_@index@_@type@ __conjugate_transposed_proxy_matrix
         bint __conjugate_transposed_proxy_matrix_generated
+
+        object conj         # proxy to the conjugated matrix
+
+        ConjugatedSparseMatrix_@index@_@type@ __conjugated_proxy_matrix
+        bint __conjugated_proxy_matrix_generated
+
 
 {% endif %}
 

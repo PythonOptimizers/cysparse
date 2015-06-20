@@ -34,3 +34,5 @@ cdef class TransposedSparseMatrix:
     cdef:
         object T         # ref to the original matrix
 
+        object H         # ref to A.conj
+        object conj      # ref to A.H

@@ -22,12 +22,14 @@ Covered cases:
     - :program:`NumPy` array data C-contiguous, ``LLSparseMatrix`` not symmetric
     - :program:`NumPy` array data C-contiguous, ``LLSparseMatrix`` symmetric
     - :program:`NumPy` array data not C-contiguous, ``LLSparseMatrix`` not symmetric
-    - :program:`NumPy` array data not C-contiguous, ``LLSparseMatrix`` symmetric [NOT DONE]
+    - :program:`NumPy` array data not C-contiguous, ``LLSparseMatrix`` symmetric
 
 Note:
     We only consider C-arrays with same type of elements as the type of elements in the ``LLSparseMatrix``.
     Even if we construct the resulting :program:`NumPy` array as C-contiguous, the functions are more general and could
     be used with a given strided :program:`NumPy` `y` vector.
+
+    Because we only use the C-arrays, we don't necessarly need :program:`NumPy` arrays.
 """
 
 ########################################################################################################################
