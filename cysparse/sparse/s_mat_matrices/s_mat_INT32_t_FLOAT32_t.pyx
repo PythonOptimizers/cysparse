@@ -1,6 +1,7 @@
 from cysparse.types.cysparse_types cimport *
 from cysparse.sparse.s_mat cimport SparseMatrix, unexposed_value, MUTABLE_SPARSE_MAT_DEFAULT_SIZE_HINT
 
+from cysparse.sparse.sparse_proxies.t_mat cimport TransposedSparseMatrix
 
 
 ########################################################################################################################
@@ -22,6 +23,19 @@ cdef class SparseMatrix_INT32_t_FLOAT32_t(SparseMatrix):
         self.ncol = kwargs.get('ncol', -1)
         self.nnz = kwargs.get('nnz', 0)
 
+        self.__transposed_proxy_matrix_generated = False
+
+
+
+    
+    @property
+    def T(self):
+        if not self.__transposed_proxy_matrix_generated:
+            # create proxy
+            self.__transposed_proxy_matrix = TransposedSparseMatrix(self)
+            self.__transposed_proxy_matrix_generated = True
+
+        return self.__transposed_proxy_matrix
 
 
 
@@ -62,7 +76,7 @@ cdef class SparseMatrix_INT32_t_FLOAT32_t(SparseMatrix):
         """
 
         """
-        s = "of dim %d by %d with %d non zero values" % (self.nrow, self.ncol, self.nnz)
+        s = "of dim (%d, %d) with %d non zero values" % (self.nrow, self.ncol, self.nnz)
         return s
 
     def attributes_long_string(self):

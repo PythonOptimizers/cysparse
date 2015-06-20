@@ -1,6 +1,7 @@
 from cysparse.types.cysparse_types cimport *
 from cysparse.sparse.s_mat cimport SparseMatrix, unexposed_value, MUTABLE_SPARSE_MAT_DEFAULT_SIZE_HINT
 
+from cysparse.sparse.sparse_proxies.t_mat cimport TransposedSparseMatrix
 {% if type in complex_list %}
 from cysparse.sparse.sparse_proxies.complex_generic.h_mat_@index@_@type@ cimport ConjugateTransposedSparseMatrix_@index@_@type@
 from cysparse.sparse.sparse_proxies.complex_generic.conj_mat_@index@_@type@ cimport ConjugatedSparseMatrix_@index@_@type@
@@ -25,41 +26,47 @@ cdef class SparseMatrix_@index@_@type@(SparseMatrix):
         self.ncol = kwargs.get('ncol', -1)
         self.nnz = kwargs.get('nnz', 0)
 
+        self.__transposed_proxy_matrix_generated = False
+
 {% if type in complex_list %}
         self.__conjugate_transposed_proxy_matrix_generated = False
         self.__conjugated_proxy_matrix_generated = False
 {% endif %}
 
+    {% raw %}
+    @property
+    {%- endraw %}
+    def T(self):
+        if not self.__transposed_proxy_matrix_generated:
+            # create proxy
+            self.__transposed_proxy_matrix = TransposedSparseMatrix(self)
+            self.__transposed_proxy_matrix_generated = True
+
+        return self.__transposed_proxy_matrix
+
+
 {% if type in complex_list %}
-    property H:
-        def __get__(self):
-            if not self.__conjugate_transposed_proxy_matrix_generated:
-                # create proxy
-                self.__conjugate_transposed_proxy_matrix = ConjugateTransposedSparseMatrix_@index@_@type@(self)
-                self.__conjugate_transposed_proxy_matrix_generated = True
+    {% raw %}
+    @property
+    {%- endraw %}
+    def H(self):
+        if not self.__conjugate_transposed_proxy_matrix_generated:
+            # create proxy
+            self.__conjugate_transposed_proxy_matrix = ConjugateTransposedSparseMatrix_@index@_@type@(self)
+            self.__conjugate_transposed_proxy_matrix_generated = True
 
-                return self.__conjugate_transposed_proxy_matrix
+        return self.__conjugate_transposed_proxy_matrix
+    {% raw %}
+    @property
+    {%- endraw %}
+    def conj(self):
+        if not self.__conjugated_proxy_matrix_generated:
+            # create proxy
+            self.__conjugated_proxy_matrix = ConjugatedSparseMatrix_@index@_@type@(self)
+            self.__conjugated_proxy_matrix_generated = True
 
-        def __set__(self, value):
-            raise AttributeError('Attribute H (conjugate transposed) is read-only')
+        return self.__conjugated_proxy_matrix
 
-        def __del__(self):
-            raise AttributeError('Attribute H (conjugate transposed) is read-only')
-
-    property conj:
-        def __get__(self):
-            if not self.__conjugated_proxy_matrix_generated:
-                # create proxy
-                self.__conjugated_proxy_matrix = ConjugatedSparseMatrix_@index@_@type@(self)
-                self.__conjugated_proxy_matrix_generated = True
-
-                return self.__conjugated_proxy_matrix
-
-        def __set__(self, value):
-            raise AttributeError('Attribute H (conjugate transposed) is read-only')
-
-        def __del__(self):
-            raise AttributeError('Attribute H (conjugate transposed) is read-only')
 {% endif %}
 
     ####################################################################################################################
@@ -98,7 +105,7 @@ cdef class SparseMatrix_@index@_@type@(SparseMatrix):
         """
 
         """
-        s = "of dim %d by %d with %d non zero values" % (self.nrow, self.ncol, self.nnz)
+        s = "of dim (%d, %d) with %d non zero values" % (self.nrow, self.ncol, self.nnz)
         return s
 
     def attributes_long_string(self):

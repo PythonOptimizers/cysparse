@@ -12,7 +12,7 @@ l1.print_to(sys.stdout)
 
 ########################################################################################################################
 print "=" * 80
-
+print "Proxies"
 T = l1.T
 print T
 
@@ -24,7 +24,7 @@ print conj
 
 ########################################################################################################################
 print "=" * 80
-
+print "T for all proxies"
 TT = T.T
 print TT
 
@@ -33,3 +33,27 @@ print HT
 
 conjT = conj.T
 print conjT
+
+########################################################################################################################
+print "=" * 80
+print "H for all proxies"
+TH = T.H
+print TH
+
+HH = H.H
+print HH
+
+conjH = conj.H
+print conjH
+
+########################################################################################################################
+print "=" * 80
+print "conj for all proxies"
+Tconj = T.conj
+print Tconj
+
+Hconj = H.conj
+print Hconj
+
+conjconj = conj.conj
+print conjconj

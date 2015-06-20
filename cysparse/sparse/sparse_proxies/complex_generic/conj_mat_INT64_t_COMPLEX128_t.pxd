@@ -31,9 +31,9 @@ cdef class ConjugatedSparseMatrix_INT64_t_COMPLEX128_t:
     ####################################################################################################################
     # End of Common code
     ####################################################################################################################
-    cdef:
+    #cdef:
 
-        object conj      # ref to the original matrix
+    #    object conj      # ref to the original matrix
 
-        object H         # ref to A.T
-        object T         # ref to A.H
+    #    object H         # ref to A.T
+    #    object T         # ref to A.H

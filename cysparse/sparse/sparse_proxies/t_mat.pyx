@@ -1,3 +1,6 @@
+# TODO: verify if we need to generate this file
+# For the moment I (Nikolaj) 'm leaving it as it is just in case things change...
+
 from cysparse.sparse.s_mat cimport SparseMatrix
 #from cysparse.sparse.sparse_proxies cimport ProxySparseMatrix
 
@@ -83,39 +86,26 @@ cdef class TransposedSparseMatrix:
     def __dealloc__(self):
         Py_DECREF(self.A) # release ref
 
+    def __repr__(self):
+        return "Proxy to the transposed (.T) of %s" % self.A
+
     ####################################################################################################################
     # End of Common code
     ####################################################################################################################
+    
+    @property
+    def T(self):
+        return self.A
 
-    property T:
-        def __get__(self):
-            return self.A
+    
+    @property
+    def H(self):
+        return self.A.conj
 
-        def __set__(self, value):
-            raise AttributeError('Attribute T (transposed) is read-only')
-
-        def __del__(self):
-            raise AttributeError('Attribute T (transposed) is read-only')
-
-    property H:
-        def __get__(self):
-            return self.A.conj
-
-        def __set__(self, value):
-            raise AttributeError('Attribute H (conjugate transposed) is read-only')
-
-        def __del__(self):
-            raise AttributeError('Attribute H (conjugate transposed) is read-only')
-
-    property conj:
-        def __get__(self):
-            return self.A.H
-
-        def __set__(self, value):
-            raise AttributeError('Attribute conj (conjugated) is read-only')
-
-        def __del__(self):
-            raise AttributeError('Attribute conj (conjugated) is read-only')
+    
+    @property
+    def conj(self):
+        return self.A.H
 
     ####################################################################################################################
     # Set/get

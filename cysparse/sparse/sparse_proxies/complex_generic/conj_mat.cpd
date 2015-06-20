@@ -31,10 +31,10 @@ cdef class ConjugatedSparseMatrix_@index@_@type@:
     ####################################################################################################################
     # End of Common code
     ####################################################################################################################
-    cdef:
+    #cdef:
 
-        object conj      # ref to the original matrix
+    #    object conj      # ref to the original matrix
 
-        object H         # ref to A.T
-        object T         # ref to A.H
+    #    object H         # ref to A.T
+    #    object T         # ref to A.H
 

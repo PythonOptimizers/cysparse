@@ -99,38 +99,26 @@ cdef class ConjugatedSparseMatrix_INT32_t_COMPLEX128_t:
     def __dealloc__(self):
         Py_DECREF(self.A) # release ref
 
+    def __repr__(self):
+        return "Proxy to the conjugated (.conj) of %s" % self.A
+
     ####################################################################################################################
     # End of Common code
     ####################################################################################################################
-    property H:
-        def __get__(self):
-            return self.A.T
+    
+    @property
+    def H(self):
+        return self.A.T
 
-        def __set__(self, value):
-            raise AttributeError('Attribute H (conjugate transposed matrix) is read-only')
+    
+    @property
+    def T(self):
+        return self.A.H
 
-        def __del__(self):
-            raise AttributeError('Attribute H (conjugate transposed matrix) is read-only')
-
-    property T:
-        def __get__(self):
-            return self.A.H
-
-        def __set__(self, value):
-            raise AttributeError('Attribute T (transposed matrix) is read-only')
-
-        def __del__(self):
-            raise AttributeError('Attribute T (transposed matrix) is read-only')
-
-    property conj:
-        def __get__(self):
-            return self.A
-
-        def __set__(self, value):
-            raise AttributeError('Attribute conj (conjugate transposed matrix) is read-only')
-
-        def __del__(self):
-            raise AttributeError('Attribute conj (conjugate transposed matrix) is read-only')
+    
+    @property
+    def conj(self):
+        return self.A
 
     ####################################################################################################################
     # Set/get

@@ -1,6 +1,7 @@
 from cysparse.types.cysparse_types cimport *
 from cysparse.sparse.s_mat cimport SparseMatrix
 
+from cysparse.sparse.sparse_proxies.t_mat cimport TransposedSparseMatrix
 
 
 cdef class SparseMatrix_INT64_t_FLOAT64_t(SparseMatrix):
@@ -8,6 +9,10 @@ cdef class SparseMatrix_INT64_t_FLOAT64_t(SparseMatrix):
         public INT64_t nrow  # number of rows
         public INT64_t ncol  # number of columns
         public INT64_t nnz   # number of values stored
+
+        # proxy to the transposed matrix
+        TransposedSparseMatrix __transposed_proxy_matrix  # transposed matrix proxy
+        bint __transposed_proxy_matrix_generated
 
 
 

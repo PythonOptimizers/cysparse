@@ -1,8 +1,6 @@
 from cysparse.types.cysparse_types cimport *
 from cysparse.types.cysparse_types import *
 
-from cysparse.sparse.sparse_proxies.t_mat cimport TransposedSparseMatrix
-
 cdef INT32_t MUTABLE_SPARSE_MAT_DEFAULT_SIZE_HINT = 40        # allocated size by default
 
 unexposed_value = object()
@@ -54,8 +52,6 @@ cdef class SparseMatrix:
         self.store_zeros = kwargs.get('store_zeros', False)
         self.is_mutable = False
 
-        self.__transposed_proxy_matrix_generated = False
-
     # for compatibility with numpy, PyKrylov, etc
     property shape:
         def __get__(self):
@@ -86,21 +82,6 @@ cdef class SparseMatrix:
 
         def __del__(self):
             raise AttributeError('Attribute itype is read-only')
-
-    property T:
-        def __get__(self):
-            if not self.__transposed_proxy_matrix_generated:
-                # create proxy
-                self.__transposed_proxy_matrix = TransposedSparseMatrix(self)
-                self.__transposed_proxy_matrix_generated = True
-
-            return self.__transposed_proxy_matrix
-
-        def __set__(self, value):
-            raise AttributeError('Attribute T (transposed) is read-only')
-
-        def __del__(self):
-            raise AttributeError('Attribute T (transposed) is read-only')
 
     ####################################################################################################################
     # Basic common methods

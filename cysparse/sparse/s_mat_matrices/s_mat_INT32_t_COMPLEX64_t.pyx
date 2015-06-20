@@ -1,6 +1,7 @@
 from cysparse.types.cysparse_types cimport *
 from cysparse.sparse.s_mat cimport SparseMatrix, unexposed_value, MUTABLE_SPARSE_MAT_DEFAULT_SIZE_HINT
 
+from cysparse.sparse.sparse_proxies.t_mat cimport TransposedSparseMatrix
 
 from cysparse.sparse.sparse_proxies.complex_generic.h_mat_INT32_t_COMPLEX64_t cimport ConjugateTransposedSparseMatrix_INT32_t_COMPLEX64_t
 from cysparse.sparse.sparse_proxies.complex_generic.conj_mat_INT32_t_COMPLEX64_t cimport ConjugatedSparseMatrix_INT32_t_COMPLEX64_t
@@ -25,41 +26,44 @@ cdef class SparseMatrix_INT32_t_COMPLEX64_t(SparseMatrix):
         self.ncol = kwargs.get('ncol', -1)
         self.nnz = kwargs.get('nnz', 0)
 
+        self.__transposed_proxy_matrix_generated = False
+
 
         self.__conjugate_transposed_proxy_matrix_generated = False
         self.__conjugated_proxy_matrix_generated = False
 
 
+    
+    @property
+    def T(self):
+        if not self.__transposed_proxy_matrix_generated:
+            # create proxy
+            self.__transposed_proxy_matrix = TransposedSparseMatrix(self)
+            self.__transposed_proxy_matrix_generated = True
 
-    property H:
-        def __get__(self):
-            if not self.__conjugate_transposed_proxy_matrix_generated:
-                # create proxy
-                self.__conjugate_transposed_proxy_matrix = ConjugateTransposedSparseMatrix_INT32_t_COMPLEX64_t(self)
-                self.__conjugate_transposed_proxy_matrix_generated = True
+        return self.__transposed_proxy_matrix
 
-                return self.__conjugate_transposed_proxy_matrix
 
-        def __set__(self, value):
-            raise AttributeError('Attribute H (conjugate transposed) is read-only')
 
-        def __del__(self):
-            raise AttributeError('Attribute H (conjugate transposed) is read-only')
+    
+    @property
+    def H(self):
+        if not self.__conjugate_transposed_proxy_matrix_generated:
+            # create proxy
+            self.__conjugate_transposed_proxy_matrix = ConjugateTransposedSparseMatrix_INT32_t_COMPLEX64_t(self)
+            self.__conjugate_transposed_proxy_matrix_generated = True
 
-    property conj:
-        def __get__(self):
-            if not self.__conjugated_proxy_matrix_generated:
-                # create proxy
-                self.__conjugated_proxy_matrix = ConjugatedSparseMatrix_INT32_t_COMPLEX64_t(self)
-                self.__conjugated_proxy_matrix_generated = True
+        return self.__conjugate_transposed_proxy_matrix
+    
+    @property
+    def conj(self):
+        if not self.__conjugated_proxy_matrix_generated:
+            # create proxy
+            self.__conjugated_proxy_matrix = ConjugatedSparseMatrix_INT32_t_COMPLEX64_t(self)
+            self.__conjugated_proxy_matrix_generated = True
 
-                return self.__conjugated_proxy_matrix
+        return self.__conjugated_proxy_matrix
 
-        def __set__(self, value):
-            raise AttributeError('Attribute H (conjugate transposed) is read-only')
-
-        def __del__(self):
-            raise AttributeError('Attribute H (conjugate transposed) is read-only')
 
 
     ####################################################################################################################
@@ -98,7 +102,7 @@ cdef class SparseMatrix_INT32_t_COMPLEX64_t(SparseMatrix):
         """
 
         """
-        s = "of dim %d by %d with %d non zero values" % (self.nrow, self.ncol, self.nnz)
+        s = "of dim (%d, %d) with %d non zero values" % (self.nrow, self.ncol, self.nnz)
         return s
 
     def attributes_long_string(self):
