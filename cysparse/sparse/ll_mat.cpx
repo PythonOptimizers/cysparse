@@ -175,9 +175,9 @@ def NewLLSparseMatrix(**kwargs):
      {%- endfor -%}
      ], "itype is not accepted as index type"
     assert dtype in [
-     {%- for type_name in type_list -%}
-       @type_name|type2enum@
-       {%- if type_name != type_list|last -%}
+     {%- for __type_name in type_list -%}
+       @__type_name|type2enum@
+       {%- if __type_name != type_list|last -%}
        ,
        {%- endif -%}
      {%- endfor -%}
@@ -269,9 +269,9 @@ def NewLLSparseMatrix(**kwargs):
              ], "itype is not accepted as index type for a matrix from a Matrix Market file"
 
             assert dtype in [
-             {%- for type_name in mm_type_list -%}
-               @type_name|type2enum@
-               {%- if type_name != mm_type_list|last -%}
+             {%- for __type_name in mm_type_list -%}
+               @__type_name|type2enum@
+               {%- if __type_name != mm_type_list|last -%}
                ,
                {%- endif -%}
              {%- endfor -%}

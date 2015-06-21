@@ -135,7 +135,7 @@ cdef class LLSparseMatrix_@index@_@type@(MutableSparseMatrix_@index@_@type@):
             raise ValueError('size_hint (%d) must be >= 1' % self.size_hint)
 
         self.type = "LLSparseMatrix"
-        self.type_name = "LLSparseMatrix [@index@, @type@]"
+        self.__type_name = "LLSparseMatrix [@index@, @type@]"
 
         # This is particular to the LLSparseMatrix type
         # Do we allocate memory here or

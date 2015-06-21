@@ -32,7 +32,7 @@ cdef class LLSparseMatrixView_INT64_t_COMPLEX64_t:
         self.ncol = ncol  # number of columns of the view
 
         self.type = "LLSparseMatrixView"
-        self.type_name = "LLSparseMatrixView [INT64_t, COMPLEX64_t]"
+        self.__type_name = "LLSparseMatrixView [INT64_t, COMPLEX64_t]"
 
         self.is_empty = True
 
@@ -263,11 +263,11 @@ cdef class LLSparseMatrixView_INT64_t_COMPLEX64_t:
         return s
 
     def _matrix_description_before_printing(self):
-        s = "%s %s" % (self.type_name, self.attributes_condensed())
+        s = "%s %s" % (self.__type_name, self.attributes_condensed())
         return s
 
     def __repr__(self):
-        s = "%s %s" % (self.type_name, self.attributes_long_string())
+        s = "%s %s" % (self.__type_name, self.attributes_long_string())
         return s
 
 ########################################################################################################################

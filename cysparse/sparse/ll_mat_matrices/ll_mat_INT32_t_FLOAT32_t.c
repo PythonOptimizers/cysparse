@@ -911,7 +911,7 @@ struct __pyx_obj_8cysparse_6sparse_5s_mat_SparseMatrix {
   int __is_symmetric;
   int store_zeros;
   int is_mutable;
-  char *type_name;
+  char *__type_name;
   char *type;
   struct __pyx_t_8cysparse_5types_14cysparse_types_CPType cp_type;
 };
@@ -992,7 +992,7 @@ struct __pyx_obj_8cysparse_6sparse_12ll_mat_views_29ll_mat_view_INT32_t_FLOAT32_
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t nrow;
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t ncol;
   int is_empty;
-  char *type_name;
+  char *__type_name;
   char *type;
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *row_indices;
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *col_indices;
@@ -5154,7 +5154,7 @@ static int __pyx_pf_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT32
  *             raise ValueError('size_hint (%d) must be >= 1' % self.size_hint)
  * 
  *         self.type = "LLSparseMatrix"             # <<<<<<<<<<<<<<
- *         self.type_name = "LLSparseMatrix [INT32_t, FLOAT32_t]"
+ *         self.__type_name = "LLSparseMatrix [INT32_t, FLOAT32_t]"
  * 
  */
   __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.type = __pyx_k_LLSparseMatrix;
@@ -5162,11 +5162,11 @@ static int __pyx_pf_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT32
   /* "cysparse/sparse/ll_mat_matrices/ll_mat_INT32_t_FLOAT32_t.pyx":138
  * 
  *         self.type = "LLSparseMatrix"
- *         self.type_name = "LLSparseMatrix [INT32_t, FLOAT32_t]"             # <<<<<<<<<<<<<<
+ *         self.__type_name = "LLSparseMatrix [INT32_t, FLOAT32_t]"             # <<<<<<<<<<<<<<
  * 
  *         # This is particular to the LLSparseMatrix type
  */
-  __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.type_name = __pyx_k_LLSparseMatrix_INT32_t_FLOAT32_t;
+  __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__type_name = __pyx_k_LLSparseMatrix_INT32_t_FLOAT32_t;
 
   /* "cysparse/sparse/ll_mat_matrices/ll_mat_INT32_t_FLOAT32_t.pyx":143
  *         # Do we allocate memory here or

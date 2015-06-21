@@ -48,7 +48,7 @@ cdef class CSCSparseMatrix_INT32_t_FLOAT128_t(ImmutableSparseMatrix_INT32_t_FLOA
 
 
     def __cinit__(self,  **kwargs):
-        self.type_name = "CSCSparseMatrix"
+        self.__type_name = "CSCSparseMatrix"
 
     def __dealloc__(self):
         PyMem_Free(self.val)

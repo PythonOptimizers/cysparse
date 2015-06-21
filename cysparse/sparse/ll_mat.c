@@ -1212,10 +1212,10 @@ struct __pyx_opt_args_8cysparse_6sparse_6ll_mat_MakeLLSparseMatrixFromMMFile2_IN
  */
 struct __pyx_obj_8cysparse_6sparse_5s_mat_SparseMatrix {
   PyObject_HEAD
-  int __is_symmetric;
+  int __pyx___is_symmetric;
   int store_zeros;
   int is_mutable;
-  char *type_name;
+  char *__type_name;
   char *type;
   struct __pyx_t_8cysparse_5types_14cysparse_types_CPType cp_type;
 };
@@ -1296,7 +1296,7 @@ struct __pyx_obj_8cysparse_6sparse_12ll_mat_views_27ll_mat_view_INT32_t_INT32_t_
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t nrow;
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t ncol;
   int is_empty;
-  char *type_name;
+  char *__type_name;
   char *type;
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *row_indices;
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *col_indices;
@@ -1384,7 +1384,7 @@ struct __pyx_obj_8cysparse_6sparse_12ll_mat_views_27ll_mat_view_INT32_t_INT64_t_
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t nrow;
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t ncol;
   int is_empty;
-  char *type_name;
+  char *__type_name;
   char *type;
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *row_indices;
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *col_indices;
@@ -1472,7 +1472,7 @@ struct __pyx_obj_8cysparse_6sparse_12ll_mat_views_29ll_mat_view_INT32_t_FLOAT32_
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t nrow;
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t ncol;
   int is_empty;
-  char *type_name;
+  char *__type_name;
   char *type;
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *row_indices;
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *col_indices;
@@ -1560,7 +1560,7 @@ struct __pyx_obj_8cysparse_6sparse_12ll_mat_views_29ll_mat_view_INT32_t_FLOAT64_
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t nrow;
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t ncol;
   int is_empty;
-  char *type_name;
+  char *__type_name;
   char *type;
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *row_indices;
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *col_indices;
@@ -1648,7 +1648,7 @@ struct __pyx_obj_8cysparse_6sparse_12ll_mat_views_30ll_mat_view_INT32_t_FLOAT128
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t nrow;
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t ncol;
   int is_empty;
-  char *type_name;
+  char *__type_name;
   char *type;
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *row_indices;
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *col_indices;
@@ -1760,7 +1760,7 @@ struct __pyx_obj_8cysparse_6sparse_12ll_mat_views_31ll_mat_view_INT32_t_COMPLEX6
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t nrow;
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t ncol;
   int is_empty;
-  char *type_name;
+  char *__type_name;
   char *type;
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *row_indices;
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *col_indices;
@@ -1872,7 +1872,7 @@ struct __pyx_obj_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX1
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t nrow;
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t ncol;
   int is_empty;
-  char *type_name;
+  char *__type_name;
   char *type;
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *row_indices;
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *col_indices;
@@ -1984,7 +1984,7 @@ struct __pyx_obj_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX2
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t nrow;
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t ncol;
   int is_empty;
-  char *type_name;
+  char *__type_name;
   char *type;
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *row_indices;
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *col_indices;
@@ -2072,7 +2072,7 @@ struct __pyx_obj_8cysparse_6sparse_12ll_mat_views_27ll_mat_view_INT64_t_INT32_t_
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t nrow;
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t ncol;
   int is_empty;
-  char *type_name;
+  char *__type_name;
   char *type;
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t *row_indices;
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t *col_indices;
@@ -2160,7 +2160,7 @@ struct __pyx_obj_8cysparse_6sparse_12ll_mat_views_27ll_mat_view_INT64_t_INT64_t_
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t nrow;
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t ncol;
   int is_empty;
-  char *type_name;
+  char *__type_name;
   char *type;
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t *row_indices;
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t *col_indices;
@@ -2248,7 +2248,7 @@ struct __pyx_obj_8cysparse_6sparse_12ll_mat_views_29ll_mat_view_INT64_t_FLOAT32_
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t nrow;
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t ncol;
   int is_empty;
-  char *type_name;
+  char *__type_name;
   char *type;
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t *row_indices;
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t *col_indices;
@@ -2336,7 +2336,7 @@ struct __pyx_obj_8cysparse_6sparse_12ll_mat_views_29ll_mat_view_INT64_t_FLOAT64_
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t nrow;
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t ncol;
   int is_empty;
-  char *type_name;
+  char *__type_name;
   char *type;
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t *row_indices;
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t *col_indices;
@@ -2424,7 +2424,7 @@ struct __pyx_obj_8cysparse_6sparse_12ll_mat_views_30ll_mat_view_INT64_t_FLOAT128
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t nrow;
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t ncol;
   int is_empty;
-  char *type_name;
+  char *__type_name;
   char *type;
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t *row_indices;
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t *col_indices;
@@ -2536,7 +2536,7 @@ struct __pyx_obj_8cysparse_6sparse_12ll_mat_views_31ll_mat_view_INT64_t_COMPLEX6
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t nrow;
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t ncol;
   int is_empty;
-  char *type_name;
+  char *__type_name;
   char *type;
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t *row_indices;
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t *col_indices;
@@ -2648,7 +2648,7 @@ struct __pyx_obj_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT64_t_COMPLEX1
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t nrow;
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t ncol;
   int is_empty;
-  char *type_name;
+  char *__type_name;
   char *type;
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t *row_indices;
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t *col_indices;
@@ -2760,7 +2760,7 @@ struct __pyx_obj_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT64_t_COMPLEX2
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t nrow;
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t ncol;
   int is_empty;
-  char *type_name;
+  char *__type_name;
   char *type;
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t *row_indices;
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t *col_indices;

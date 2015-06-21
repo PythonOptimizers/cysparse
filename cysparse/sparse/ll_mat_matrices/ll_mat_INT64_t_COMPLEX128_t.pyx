@@ -135,7 +135,7 @@ cdef class LLSparseMatrix_INT64_t_COMPLEX128_t(MutableSparseMatrix_INT64_t_COMPL
             raise ValueError('size_hint (%d) must be >= 1' % self.size_hint)
 
         self.type = "LLSparseMatrix"
-        self.type_name = "LLSparseMatrix [INT64_t, COMPLEX128_t]"
+        self.__type_name = "LLSparseMatrix [INT64_t, COMPLEX128_t]"
 
         # This is particular to the LLSparseMatrix type
         # Do we allocate memory here or

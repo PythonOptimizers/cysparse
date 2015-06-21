@@ -14,15 +14,15 @@ from cysparse.types.cysparse_types import *
 # Tests on numbers
 ########################################################################################################################
 # EXPLICIT TYPE TESTS
-{% for type_name in basic_type_list %}
-cdef test_cast_to_@type_name@(@type_name@ n):
+{% for __type_name in basic_type_list %}
+cdef test_cast_to_@__type_name@(@__type_name@ n):
     """
     Little function to test if casting is possible or not thanks to Cython overflow check.
 
     In itself, this function doesn't do anything but if the arguement is not accepted, Cython throws at runtime an ``OverflowError``.
 
     Args:
-        n (@type_name@): Number to cast.
+        n (@__type_name@): Number to cast.
 
     Raises:
         ``OverflowError`` is casting is **not** possible.
@@ -30,7 +30,7 @@ cdef test_cast_to_@type_name@(@type_name@ n):
     Note:
         This is a meta function. Don't use it unless you really know what you are doing.
     """
-    cdef @type_name@ n_ = n
+    cdef @__type_name@ n_ = n
 {% endfor %}
 
 # EXPLICIT TYPE TESTS
@@ -56,19 +56,19 @@ cdef min_type(n, type_list):
         raise TypeError('Som type(s) are not recognized as basic CySparseType')
 
     for type_el in type_list:
-{% for type_name in basic_type_list %}
-    {% if type_name == basic_type_list|first %}
-        if type_el == @type_name|type2enum@:
+{% for __type_name in basic_type_list %}
+    {% if __type_name == basic_type_list|first %}
+        if type_el == @__type_name|type2enum@:
             try:
-                test_cast_to_@type_name@(n)
-                return @type_name|type2enum@
+                test_cast_to_@__type_name@(n)
+                return @__type_name|type2enum@
             except:
                 pass
     {% else %}
-        elif type_el == @type_name|type2enum@:
+        elif type_el == @__type_name|type2enum@:
             try:
-                test_cast_to_@type_name@(n)
-                return @type_name|type2enum@
+                test_cast_to_@__type_name@(n)
+                return @__type_name|type2enum@
             except:
                 pass
     {% endif %}

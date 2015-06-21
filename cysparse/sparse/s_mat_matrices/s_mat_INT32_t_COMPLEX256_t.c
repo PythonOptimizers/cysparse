@@ -638,7 +638,7 @@ struct __pyx_obj_8cysparse_6sparse_5s_mat_SparseMatrix {
   int __is_symmetric;
   int store_zeros;
   int is_mutable;
-  char *type_name;
+  char *__type_name;
   char *type;
   struct __pyx_t_8cysparse_5types_14cysparse_types_CPType cp_type;
 };
@@ -1284,7 +1284,7 @@ static int __pyx_pf_8cysparse_6sparse_14s_mat_matrices_26s_mat_INT32_t_COMPLEX25
  *         """
  *         assert unexposed_value == kwargs.get('control_object', None), "Matrix must be instantiated with a factory method"             # <<<<<<<<<<<<<<
  * 
- *         self.type_name = "SparseMatrix"
+ *         self.__type_name = "SparseMatrix"
  */
   #ifndef CYTHON_WITHOUT_ASSERTIONS
   if (unlikely(!Py_OptimizeFlag)) {
@@ -1304,14 +1304,14 @@ static int __pyx_pf_8cysparse_6sparse_14s_mat_matrices_26s_mat_INT32_t_COMPLEX25
   /* "cysparse/sparse/s_mat_matrices/s_mat_INT32_t_COMPLEX256_t.pyx":23
  *         assert unexposed_value == kwargs.get('control_object', None), "Matrix must be instantiated with a factory method"
  * 
- *         self.type_name = "SparseMatrix"             # <<<<<<<<<<<<<<
+ *         self.__type_name = "SparseMatrix"             # <<<<<<<<<<<<<<
  * 
  *         self.nrow = kwargs.get('nrow', -1)
  */
-  __pyx_v_self->__pyx_base.type_name = __pyx_k_SparseMatrix;
+  __pyx_v_self->__pyx_base.__type_name = __pyx_k_SparseMatrix;
 
   /* "cysparse/sparse/s_mat_matrices/s_mat_INT32_t_COMPLEX256_t.pyx":25
- *         self.type_name = "SparseMatrix"
+ *         self.__type_name = "SparseMatrix"
  * 
  *         self.nrow = kwargs.get('nrow', -1)             # <<<<<<<<<<<<<<
  *         self.ncol = kwargs.get('ncol', -1)
@@ -2594,7 +2594,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_14s_mat_matrices_26s_mat_INT32_t_COM
  *         return s
  * 
  *     def _matrix_description_before_printing(self):             # <<<<<<<<<<<<<<
- *         s = "%s %s" % (self.type_name, self.attributes_condensed())
+ *         s = "%s %s" % (self.__type_name, self.attributes_condensed())
  *         return s
  */
 
@@ -2627,11 +2627,11 @@ static PyObject *__pyx_pf_8cysparse_6sparse_14s_mat_matrices_26s_mat_INT32_t_COM
   /* "cysparse/sparse/s_mat_matrices/s_mat_INT32_t_COMPLEX256_t.pyx":158
  * 
  *     def _matrix_description_before_printing(self):
- *         s = "%s %s" % (self.type_name, self.attributes_condensed())             # <<<<<<<<<<<<<<
+ *         s = "%s %s" % (self.__type_name, self.attributes_condensed())             # <<<<<<<<<<<<<<
  *         return s
  * 
  */
-  __pyx_t_1 = __Pyx_PyBytes_FromString(__pyx_v_self->__pyx_base.type_name); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 158; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyBytes_FromString(__pyx_v_self->__pyx_base.__type_name); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 158; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_attributes_condensed); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 158; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
@@ -2669,7 +2669,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_14s_mat_matrices_26s_mat_INT32_t_COM
 
   /* "cysparse/sparse/s_mat_matrices/s_mat_INT32_t_COMPLEX256_t.pyx":159
  *     def _matrix_description_before_printing(self):
- *         s = "%s %s" % (self.type_name, self.attributes_condensed())
+ *         s = "%s %s" % (self.__type_name, self.attributes_condensed())
  *         return s             # <<<<<<<<<<<<<<
  * 
  *     def __repr__(self):
@@ -2683,7 +2683,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_14s_mat_matrices_26s_mat_INT32_t_COM
  *         return s
  * 
  *     def _matrix_description_before_printing(self):             # <<<<<<<<<<<<<<
- *         s = "%s %s" % (self.type_name, self.attributes_condensed())
+ *         s = "%s %s" % (self.__type_name, self.attributes_condensed())
  *         return s
  */
 
@@ -2706,7 +2706,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_14s_mat_matrices_26s_mat_INT32_t_COM
  *         return s
  * 
  *     def __repr__(self):             # <<<<<<<<<<<<<<
- *         s = "%s %s" % (self.type_name, self.attributes_long_string())
+ *         s = "%s %s" % (self.__type_name, self.attributes_long_string())
  *         return s
  */
 
@@ -2739,11 +2739,11 @@ static PyObject *__pyx_pf_8cysparse_6sparse_14s_mat_matrices_26s_mat_INT32_t_COM
   /* "cysparse/sparse/s_mat_matrices/s_mat_INT32_t_COMPLEX256_t.pyx":162
  * 
  *     def __repr__(self):
- *         s = "%s %s" % (self.type_name, self.attributes_long_string())             # <<<<<<<<<<<<<<
+ *         s = "%s %s" % (self.__type_name, self.attributes_long_string())             # <<<<<<<<<<<<<<
  *         return s
  * 
  */
-  __pyx_t_1 = __Pyx_PyBytes_FromString(__pyx_v_self->__pyx_base.type_name); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 162; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyBytes_FromString(__pyx_v_self->__pyx_base.__type_name); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 162; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_attributes_long_string); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 162; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
@@ -2781,7 +2781,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_14s_mat_matrices_26s_mat_INT32_t_COM
 
   /* "cysparse/sparse/s_mat_matrices/s_mat_INT32_t_COMPLEX256_t.pyx":163
  *     def __repr__(self):
- *         s = "%s %s" % (self.type_name, self.attributes_long_string())
+ *         s = "%s %s" % (self.__type_name, self.attributes_long_string())
  *         return s             # <<<<<<<<<<<<<<
  * 
  * ########################################################################################################################
@@ -2795,7 +2795,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_14s_mat_matrices_26s_mat_INT32_t_COM
  *         return s
  * 
  *     def __repr__(self):             # <<<<<<<<<<<<<<
- *         s = "%s %s" % (self.type_name, self.attributes_long_string())
+ *         s = "%s %s" % (self.__type_name, self.attributes_long_string())
  *         return s
  */
 

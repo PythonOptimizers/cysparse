@@ -909,7 +909,7 @@ struct __pyx_obj_8cysparse_6sparse_5s_mat_SparseMatrix {
   int __is_symmetric;
   int store_zeros;
   int is_mutable;
-  char *type_name;
+  char *__type_name;
   char *type;
   struct __pyx_t_8cysparse_5types_14cysparse_types_CPType cp_type;
 };
@@ -1014,7 +1014,7 @@ struct __pyx_obj_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT64_t_COMPLEX2
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t nrow;
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t ncol;
   int is_empty;
-  char *type_name;
+  char *__type_name;
   char *type;
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t *row_indices;
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t *col_indices;
@@ -3230,7 +3230,7 @@ static PyArrayObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT
  * 
  * 
  *     def __cinit__(self,  **kwargs):             # <<<<<<<<<<<<<<
- *         self.type_name = "CSCSparseMatrix"
+ *         self.__type_name = "CSCSparseMatrix"
  * 
  */
 
@@ -3263,17 +3263,17 @@ static int __pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT64_t_COMPL
   /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT64_t_COMPLEX256_t.pyx":51
  * 
  *     def __cinit__(self,  **kwargs):
- *         self.type_name = "CSCSparseMatrix"             # <<<<<<<<<<<<<<
+ *         self.__type_name = "CSCSparseMatrix"             # <<<<<<<<<<<<<<
  * 
  *     def __dealloc__(self):
  */
-  __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.type_name = __pyx_k_CSCSparseMatrix;
+  __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__type_name = __pyx_k_CSCSparseMatrix;
 
   /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT64_t_COMPLEX256_t.pyx":50
  * 
  * 
  *     def __cinit__(self,  **kwargs):             # <<<<<<<<<<<<<<
- *         self.type_name = "CSCSparseMatrix"
+ *         self.__type_name = "CSCSparseMatrix"
  * 
  */
 
@@ -3284,7 +3284,7 @@ static int __pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT64_t_COMPL
 }
 
 /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT64_t_COMPLEX256_t.pyx":53
- *         self.type_name = "CSCSparseMatrix"
+ *         self.__type_name = "CSCSparseMatrix"
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
  *         PyMem_Free(self.val)
@@ -3334,7 +3334,7 @@ static void __pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT64_t_COMP
   PyMem_Free(__pyx_v_self->ind);
 
   /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT64_t_COMPLEX256_t.pyx":53
- *         self.type_name = "CSCSparseMatrix"
+ *         self.__type_name = "CSCSparseMatrix"
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
  *         PyMem_Free(self.val)

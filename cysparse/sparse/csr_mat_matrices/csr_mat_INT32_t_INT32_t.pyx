@@ -58,7 +58,7 @@ cdef class CSRSparseMatrix_INT32_t_INT32_t(ImmutableSparseMatrix_INT32_t_INT32_t
     ####################################################################################################################
     def __cinit__(self, **kwargs):
 
-        self.type_name = "CSRSparseMatrix"
+        self.__type_name = "CSRSparseMatrix"
 
     def __dealloc__(self):
         PyMem_Free(self.val)

@@ -88,7 +88,7 @@ def make_parser():
 #################################################################################################
 # JINJA2 FILTERS
 #################################################################################################
-def type2enum(type_name):
+def type2enum(__type_name):
     """
     Transform a real :program:`CySparse` type into the equivalent :program:`CySparse` enum type.
 
@@ -100,8 +100,8 @@ def type2enum(type_name):
         cysparse_type:
 
     """
-    enum_name = type_name[:-1]
-    enum_name = enum_name + type_name[-1].upper()
+    enum_name = __type_name[:-1]
+    enum_name = enum_name + __type_name[-1].upper()
 
     return enum_name
 
@@ -385,22 +385,22 @@ def generate_following_type_and_index(logger, template_filenames, template_envir
 
     for filename in template_filenames:
 
-        for type_name in element_types:
+        for __type_name in element_types:
             for index_name in index_types:
                 if tabu_combination is not None:
                     try:
-                        if tabu_combination[type_name][index_name]:
+                        if tabu_combination[__type_name][index_name]:
                             continue
                     except:
                         pass
 
                 # update context
-                context['type'] = type_name
+                context['type'] = __type_name
                 context['index'] = index_name
 
                 context.update(template_context)
 
-                generate_template_files(logger, template_filenames, template_environment, context, '_%s_%s%s' % (index_name, type_name, ext))
+                generate_template_files(logger, template_filenames, template_environment, context, '_%s_%s%s' % (index_name, __type_name, ext))
 
 #################################################################################################
 # SETUP FILE

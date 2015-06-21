@@ -20,7 +20,7 @@ cdef class SparseMatrix_INT32_t_COMPLEX128_t(SparseMatrix):
         """
         assert unexposed_value == kwargs.get('control_object', None), "Matrix must be instantiated with a factory method"
 
-        self.type_name = "SparseMatrix"
+        self.__type_name = "SparseMatrix"
 
         self.nrow = kwargs.get('nrow', -1)
         self.ncol = kwargs.get('ncol', -1)
@@ -155,11 +155,11 @@ cdef class SparseMatrix_INT32_t_COMPLEX128_t(SparseMatrix):
         return s
 
     def _matrix_description_before_printing(self):
-        s = "%s %s" % (self.type_name, self.attributes_condensed())
+        s = "%s %s" % (self.__type_name, self.attributes_condensed())
         return s
 
     def __repr__(self):
-        s = "%s %s" % (self.type_name, self.attributes_long_string())
+        s = "%s %s" % (self.__type_name, self.attributes_long_string())
         return s
 
 ########################################################################################################################
