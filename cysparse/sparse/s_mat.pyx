@@ -29,18 +29,41 @@ class NonZeros():
         self.A.store_zeros = self.store_zeros
 
 cpdef bint PySparseMatrix_Check(object obj):
+    """
+    Test if ``obj`` is a ``SparseMatrix`` or not.
+
+    Args:
+        obj: Whatever.
+
+    Return:
+        ``True`` if ``obj`` is a ``SparseMatrix`` object or inherited from it.
+    """
     return isinstance(obj, SparseMatrix)
 
 ########################################################################################################################
 # BASE MATRIX CLASS
 ########################################################################################################################
 cdef class SparseMatrix:
+    """
+    Main base class for sparse matrices.
 
+    Notes:
+        This class has been (somewhat arbitrarily) divided in two:
+
+            - this part is minimalistic and generic and doesn't require the types to be known at compile time and
+            - s_mat_matrices/s_mat.* (with * in place of 'cpd' or 'cpx') to deal with specifics of types at compile time.
+
+        For instance, we have transferred some definitions into s_mat_matrices/s_mat.* (for instance ``nnz``,
+        ``ncol``, ``nrow``) because we also define the mutable/immutable versions of sparse matrices. The only rule
+        is to keep everything coherent but basically this class and s_mat_matrices/s_mat.* define the same class. Use your judgement.
+
+        This class is also used to break circular dependencies.
+    """
     def __cinit__(self, **kwargs):
         """
 
         Warning:
-            Only use named arguments!
+            Only use named arguments! This is on purpose!
         """
         assert unexposed_value == kwargs.get('control_object', None), "Matrix must be instantiated with a factory method"
 
@@ -53,48 +76,52 @@ cdef class SparseMatrix:
         self.is_mutable = False
 
     # for compatibility with numpy, PyKrylov, etc
-    property shape:
-        def __get__(self):
-            return (self.nrow, self.ncol)
+    @property
+    def shape(self):
+        return (self.nrow, self.ncol)
 
-        def __set__(self, value):
-            raise AttributeError('Attribute shape is read-only')
+    @property
+    def dtype(self):
+        return self.cp_type.dtype
 
-        def __del__(self):
-            raise AttributeError('Attribute shape is read-only')
-
-    property dtype:
-        def __get__(self):
-            return self.cp_type.dtype
-
-        def __set__(self, value):
-            raise AttributeError('Attribute dtype is read-only')
-
-        def __del__(self):
-            raise AttributeError('Attribute dtype is read-only')
-
-    property itype:
-        def __get__(self):
-            return self.cp_type.itype
-
-        def __set__(self, value):
-            raise AttributeError('Attribute itype is read-only')
-
-        def __del__(self):
-            raise AttributeError('Attribute itype is read-only')
+    @property
+    def itype(self):
+        return self.cp_type.itype
 
     ####################################################################################################################
     # Basic common methods
     ####################################################################################################################
+    # All methods raise NotImplementedError. We could have provided a common method that would have been refined in
+    # the respective children classes but we preferred to force an optimized version for all classes inheriting from
+    # this class, i.e. if it works, it is optimized for that particular class, if not, it must be implemented if needed.
+
     #########################
     # Sub matrices
     #########################
+        # Copy
+    def copy(self):
+        """
+        Return a **deep** copy of itself.
+
+        """
+        raise NotImplementedError("Operation not implemented (yet). Please report.")
+
     def diag(self):
         """
         Return diagonal in a :program:`NumPy` array.
 
         """
         raise NotImplementedError("Operation not implemented (yet). Please report.")
+
+    def full(self):
+        """
+        Return an :program:`NumPy` dense array.
+        """
+        raise NotImplementedError("Operation not implemented (yet). Please report.")
+
+    # Alias
+    def to_array(self):
+        return self.full()
 
     #########################
     # Multiplication with vectors
@@ -195,14 +222,4 @@ cdef class SparseMatrix:
 
         raise NotImplementedError("Operation not implemented (yet). Please report.")
 
-    #########################
-    # Memory
-    #########################
-    # Copy
-    def copy(self):
-        """
-        Return a **deep** copy of itself.
-
-        """
-        raise NotImplementedError("Operation not implemented (yet). Please report.")
 

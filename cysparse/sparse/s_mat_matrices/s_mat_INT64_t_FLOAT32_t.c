@@ -637,9 +637,6 @@ struct __pyx_obj_8cysparse_6sparse_5s_mat_SparseMatrix {
   char *type_name;
   char *type;
   struct __pyx_t_8cysparse_5types_14cysparse_types_CPType cp_type;
-  PyObject *shape;
-  PyObject *dtype;
-  PyObject *itype;
 };
 
 
@@ -2836,6 +2833,9 @@ static void __pyx_tp_dealloc_8cysparse_6sparse_14s_mat_matrices_23s_mat_INT64_t_
   #endif
   PyObject_GC_UnTrack(o);
   Py_CLEAR(p->__pyx___transposed_proxy_matrix);
+  #if CYTHON_COMPILING_IN_CPYTHON
+  if (PyType_IS_GC(Py_TYPE(o)->tp_base))
+  #endif
   PyObject_GC_Track(o);
   if (likely(__pyx_ptype_8cysparse_6sparse_5s_mat_SparseMatrix)) __pyx_ptype_8cysparse_6sparse_5s_mat_SparseMatrix->tp_dealloc(o); else __Pyx_call_next_tp_dealloc(o, __pyx_tp_dealloc_8cysparse_6sparse_14s_mat_matrices_23s_mat_INT64_t_FLOAT32_t_SparseMatrix_INT64_t_FLOAT32_t);
 }

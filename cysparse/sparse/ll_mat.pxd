@@ -1,5 +1,8 @@
 """
 Main entry to create ``LLSparseMatrix`` matrices.
+
+Basically, we define all factory methods to create ``LLSparseMatrix`` objects.
+
 Warning:
     ``LLSparseMatrix`` matrices can **only** be constructed through a *factory* function, **not** by direct
     instantiation.

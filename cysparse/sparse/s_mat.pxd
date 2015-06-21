@@ -1,3 +1,9 @@
+"""
+Main entry point for ``SparseMatrix`` objects.
+
+See also s_mat_matrices/s_mat.* .
+
+"""
 from cysparse.types.cysparse_types cimport *
 
 cdef class SparseMatrix
@@ -22,9 +28,5 @@ cdef class SparseMatrix:
         public char * type        # Type of matrix
         CPType cp_type            # Internal types of the matrix
 
-        object shape     # for compatibility with numpy, PyKrylov, etc.
-
-        object dtype
-        object itype
 
 

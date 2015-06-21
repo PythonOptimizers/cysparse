@@ -864,9 +864,6 @@ struct __pyx_obj_8cysparse_6sparse_5s_mat_SparseMatrix {
   char *type_name;
   char *type;
   struct __pyx_t_8cysparse_5types_14cysparse_types_CPType cp_type;
-  PyObject *shape;
-  PyObject *dtype;
-  PyObject *itype;
 };
 
 

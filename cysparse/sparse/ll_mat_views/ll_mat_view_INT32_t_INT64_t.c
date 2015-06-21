@@ -871,13 +871,10 @@ struct __pyx_obj_8cysparse_6sparse_5s_mat_SparseMatrix {
   char *type_name;
   char *type;
   struct __pyx_t_8cysparse_5types_14cysparse_types_CPType cp_type;
-  PyObject *shape;
-  PyObject *dtype;
-  PyObject *itype;
 };
 
 
-/* "cysparse/sparse/sparse_proxies/t_mat.pxd":10
+/* "cysparse/sparse/sparse_proxies/t_mat.pxd":13
  * from cysparse.sparse.s_mat cimport SparseMatrix
  * 
  * cdef class TransposedSparseMatrix:             # <<<<<<<<<<<<<<
@@ -7695,7 +7692,7 @@ PyMODINIT_FUNC PyInit_ll_mat_view_INT32_t_INT64_t(void)
   __pyx_ptype_7cpython_4bool_bool = __Pyx_ImportType(__Pyx_BUILTIN_MODULE_NAME, "bool", sizeof(PyBoolObject), 0); if (unlikely(!__pyx_ptype_7cpython_4bool_bool)) {__pyx_filename = __pyx_f[4]; __pyx_lineno = 8; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_ptype_7cpython_7complex_complex = __Pyx_ImportType(__Pyx_BUILTIN_MODULE_NAME, "complex", sizeof(PyComplexObject), 0); if (unlikely(!__pyx_ptype_7cpython_7complex_complex)) {__pyx_filename = __pyx_f[5]; __pyx_lineno = 15; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_ptype_8cysparse_6sparse_5s_mat_SparseMatrix = __Pyx_ImportType("cysparse.sparse.s_mat", "SparseMatrix", sizeof(struct __pyx_obj_8cysparse_6sparse_5s_mat_SparseMatrix), 1); if (unlikely(!__pyx_ptype_8cysparse_6sparse_5s_mat_SparseMatrix)) {__pyx_filename = __pyx_f[6]; __pyx_lineno = 3; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_ptype_8cysparse_6sparse_14sparse_proxies_5t_mat_TransposedSparseMatrix = __Pyx_ImportType("cysparse.sparse.sparse_proxies.t_mat", "TransposedSparseMatrix", sizeof(struct __pyx_obj_8cysparse_6sparse_14sparse_proxies_5t_mat_TransposedSparseMatrix), 1); if (unlikely(!__pyx_ptype_8cysparse_6sparse_14sparse_proxies_5t_mat_TransposedSparseMatrix)) {__pyx_filename = __pyx_f[7]; __pyx_lineno = 10; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_ptype_8cysparse_6sparse_14sparse_proxies_5t_mat_TransposedSparseMatrix = __Pyx_ImportType("cysparse.sparse.sparse_proxies.t_mat", "TransposedSparseMatrix", sizeof(struct __pyx_obj_8cysparse_6sparse_14sparse_proxies_5t_mat_TransposedSparseMatrix), 1); if (unlikely(!__pyx_ptype_8cysparse_6sparse_14sparse_proxies_5t_mat_TransposedSparseMatrix)) {__pyx_filename = __pyx_f[7]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_ptype_8cysparse_6sparse_14s_mat_matrices_21s_mat_INT32_t_INT64_t_SparseMatrix_INT32_t_INT64_t = __Pyx_ImportType("cysparse.sparse.s_mat_matrices.s_mat_INT32_t_INT64_t", "SparseMatrix_INT32_t_INT64_t", sizeof(struct __pyx_obj_8cysparse_6sparse_14s_mat_matrices_21s_mat_INT32_t_INT64_t_SparseMatrix_INT32_t_INT64_t), 1); if (unlikely(!__pyx_ptype_8cysparse_6sparse_14s_mat_matrices_21s_mat_INT32_t_INT64_t_SparseMatrix_INT32_t_INT64_t)) {__pyx_filename = __pyx_f[8]; __pyx_lineno = 7; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_ptype_8cysparse_6sparse_14s_mat_matrices_21s_mat_INT32_t_INT64_t_MutableSparseMatrix_INT32_t_INT64_t = __Pyx_ImportType("cysparse.sparse.s_mat_matrices.s_mat_INT32_t_INT64_t", "MutableSparseMatrix_INT32_t_INT64_t", sizeof(struct __pyx_obj_8cysparse_6sparse_14s_mat_matrices_21s_mat_INT32_t_INT64_t_MutableSparseMatrix_INT32_t_INT64_t), 1); if (unlikely(!__pyx_ptype_8cysparse_6sparse_14s_mat_matrices_21s_mat_INT32_t_INT64_t_MutableSparseMatrix_INT32_t_INT64_t)) {__pyx_filename = __pyx_f[8]; __pyx_lineno = 19; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_ptype_8cysparse_6sparse_14s_mat_matrices_21s_mat_INT32_t_INT64_t_ImmutableSparseMatrix_INT32_t_INT64_t = __Pyx_ImportType("cysparse.sparse.s_mat_matrices.s_mat_INT32_t_INT64_t", "ImmutableSparseMatrix_INT32_t_INT64_t", sizeof(struct __pyx_obj_8cysparse_6sparse_14s_mat_matrices_21s_mat_INT32_t_INT64_t_ImmutableSparseMatrix_INT32_t_INT64_t), 1); if (unlikely(!__pyx_ptype_8cysparse_6sparse_14s_mat_matrices_21s_mat_INT32_t_INT64_t_ImmutableSparseMatrix_INT32_t_INT64_t)) {__pyx_filename = __pyx_f[8]; __pyx_lineno = 24; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
