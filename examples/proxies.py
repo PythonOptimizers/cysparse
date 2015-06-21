@@ -99,3 +99,11 @@ print Hconj.matvec(b2)
 conjconj = conj.conj
 print conjconj
 print conjconj.matvec(b3)
+
+
+########################################################################################################################
+print "=" * 80
+
+l2 = NewLLSparseMatrix(nrow=3, ncol=2)
+
+l2.matvec_htransp(b2)

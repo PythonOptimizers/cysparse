@@ -86,6 +86,9 @@ cdef class SparseMatrix:
     ####################################################################################################################
     # Basic common methods
     ####################################################################################################################
+    #########################
+    # Sub matrices
+    #########################
     def diag(self):
         """
         Return diagonal in a :program:`NumPy` array.
@@ -93,7 +96,9 @@ cdef class SparseMatrix:
         """
         raise NotImplementedError("Operation not implemented (yet). Please report.")
 
-    # Multiplication
+    #########################
+    # Multiplication with vectors
+    #########################
     def matvec(self, B):
         """
         Return ``A * B`` with ``B`` a :program:`NumPy` vector.
@@ -122,6 +127,9 @@ cdef class SparseMatrix:
             B: A :program:`NumPy` vector.
 
         """
+        if not is_complex_type(self.cp_type.dtype):
+            raise TypeError("This operation is only valid for complex matrices")
+
         raise NotImplementedError("Operation not implemented (yet). Please report.")
 
 
@@ -133,8 +141,14 @@ cdef class SparseMatrix:
             B: A :program:`NumPy` vector.
 
         """
+        if not is_complex_type(self.cp_type.dtype):
+            raise TypeError("This operation is only valid for complex matrices")
+
         raise NotImplementedError("Operation not implemented (yet). Please report.")
 
+    #########################
+    # Multiplication with 2d matrices
+    #########################
     def matdot(self, B):
         """
         Return ``A * B``.
@@ -157,14 +171,33 @@ cdef class SparseMatrix:
 
     def matdot_htransp(self, B):
         """
-        Return ``A^t * B``.
+        Return ``A^h * B``.
 
         Args:
             B:
 
         """
+        if not is_complex_type(self.cp_type.dtype):
+            raise TypeError("This operation is only valid for complex matrices")
+
         raise NotImplementedError("Operation not implemented (yet). Please report.")
 
+    def matdot_conj(self, B):
+        """
+        Return ``conj(A) * B``.
+
+        Args:
+            B:
+
+        """
+        if not is_complex_type(self.cp_type.dtype):
+            raise TypeError("This operation is only valid for complex matrices")
+
+        raise NotImplementedError("Operation not implemented (yet). Please report.")
+
+    #########################
+    # Memory
+    #########################
     # Copy
     def copy(self):
         """

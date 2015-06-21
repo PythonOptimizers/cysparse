@@ -1,7 +1,19 @@
 """
 Several helper routines for multiplication with/by a ``LLSparseMatrix`` matrix.
 
-Implemented:
+Covered cases:
+
+1. LLSparseMatrix by another two dimensional matrix:
+
+    - LLSparseMatrix by LLSparseMatrix;
+    - Transposed LLSparseMatrix by LLSparseMatrix;
+
+2. LLSparseMatrix by Numpy vector
+
+    - A * b;
+    - A^t * b;
+    - A^h * b;
+    - conj(A) * b
 
 
 """
