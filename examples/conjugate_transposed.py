@@ -33,7 +33,7 @@ print H.matvec(b)
 ########################################################################################################################
 print "=" * 80
 
-l2 = NewLLSparseMatrix(nrow=2, ncol=3, size_hint=10, dtype=COMPLEX64_T, is_symmetric=True)
+l2 = NewLLSparseMatrix(nrow=2, ncol=3, size_hint=10, dtype=COMPLEX64_T, __is_symmetric=True)
 l2.put_triplet([1, 1], [0, 1], [1+1j, 1-1.0j])  # i, j, val
 
 l2.print_to(sys.stdout)
@@ -64,7 +64,7 @@ print H3.matvec(c[::2])
 ########################################################################################################################
 print "=" * 80
 
-l4 = NewLLSparseMatrix(nrow=2, ncol=3, size_hint=10, dtype=COMPLEX256_T, is_symmetric=True)
+l4 = NewLLSparseMatrix(nrow=2, ncol=3, size_hint=10, dtype=COMPLEX256_T, __is_symmetric=True)
 l4.put_triplet([1, 1], [0, 1], [1+1j, 1-1.0j])  # i, j, val
 
 l4.print_to(sys.stdout)

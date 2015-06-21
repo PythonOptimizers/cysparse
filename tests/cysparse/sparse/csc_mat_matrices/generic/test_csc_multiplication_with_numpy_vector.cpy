@@ -88,7 +88,7 @@ class CySparseSymCSCMultiplicationWithANumpyVectorTestCase(CySparseCSCMultiplica
 {% for index_type in index_list %}
   {% set outerloop = loop %}
   {% for element_type in type_list %}
-        self.l_@outerloop.index@_@loop.index@ = NewLLSparseMatrix(is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=@index_type|type2enum@, dtype=@element_type|type2enum@)
+        self.l_@outerloop.index@_@loop.index@ = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=@index_type|type2enum@, dtype=@element_type|type2enum@)
         construct_sym_sparse_matrix(self.l_@outerloop.index@_@loop.index@, self.size, self.nbr_of_elements)
 
         self.l_@outerloop.index@_@loop.index@_csc = self.l_@outerloop.index@_@loop.index@.to_csc()
@@ -166,7 +166,7 @@ class CySparseSymCSCMultiplicationWithAStridedNumpyVectorTestCase(CySparseCSCMul
 {% for index_type in index_list %}
   {% set outerloop = loop %}
   {% for element_type in type_list %}
-        self.l_@outerloop.index@_@loop.index@ = NewLLSparseMatrix(is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=@index_type|type2enum@, dtype=@element_type|type2enum@)
+        self.l_@outerloop.index@_@loop.index@ = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=@index_type|type2enum@, dtype=@element_type|type2enum@)
         construct_sym_sparse_matrix(self.l_@outerloop.index@_@loop.index@, self.size, self.nbr_of_elements)
 
         self.l_@outerloop.index@_@loop.index@_csc = self.l_@outerloop.index@_@loop.index@.to_csc()

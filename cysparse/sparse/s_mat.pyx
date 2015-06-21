@@ -44,21 +44,7 @@ cpdef bint PySparseMatrix_Check(object obj):
 # BASE MATRIX CLASS
 ########################################################################################################################
 cdef class SparseMatrix:
-    """
-    Main base class for sparse matrices.
 
-    Notes:
-        This class has been (somewhat arbitrarily) divided in two:
-
-            - this part is minimalistic and generic and doesn't require the types to be known at compile time and
-            - s_mat_matrices/s_mat.* (with * in place of 'cpd' or 'cpx') to deal with specifics of types at compile time.
-
-        For instance, we have transferred some definitions into s_mat_matrices/s_mat.* (for instance ``nnz``,
-        ``ncol``, ``nrow``) because we also define the mutable/immutable versions of sparse matrices. The only rule
-        is to keep everything coherent but basically this class and s_mat_matrices/s_mat.* define the same class. Use your judgement.
-
-        This class is also used to break circular dependencies.
-    """
     def __cinit__(self, **kwargs):
         """
 
@@ -71,7 +57,7 @@ cdef class SparseMatrix:
         self.cp_type.itype = kwargs.get('itype', INT32_T)
         self.cp_type.dtype = kwargs.get('dtype', FLOAT64_T)
 
-        self.is_symmetric = kwargs.get('is_symmetric', False)
+        self.__is_symmetric = kwargs.get('__is_symmetric', False)
         self.store_zeros = kwargs.get('store_zeros', False)
         self.is_mutable = False
 
@@ -87,6 +73,10 @@ cdef class SparseMatrix:
     @property
     def itype(self):
         return self.cp_type.itype
+
+    @property
+    def is_symmetric(self):
+        return self.__is_symmetric
 
     ####################################################################################################################
     # Basic common methods

@@ -82,7 +82,7 @@ cdef class CSCSparseMatrix_INT32_t_COMPLEX128_t(ImmutableSparseMatrix_INT32_t_CO
             INT32_t real_j
 
         # code is duplicated for optimization
-        if self.is_symmetric:
+        if self.__is_symmetric:
             # TODO: column indices are NOT necessarily sorted... what do we do about it?
             if i < j:
                 real_i = j
@@ -247,7 +247,7 @@ cdef class CSCSparseMatrix_INT32_t_COMPLEX128_t(ImmutableSparseMatrix_INT32_t_CO
                 # TODO: rewrite this completely
                 for k from self.ind[j] <= k < self.ind[j+1]:
                     mat[(self.row[k]*self.ncol)+j] = self.val[k]
-                    if self.is_symmetric:
+                    if self.__is_symmetric:
                         mat[(j*self.ncol)+ self.row[k]] = self.val[k]
 
             for i from 0 <= i < self.nrow:
@@ -340,7 +340,7 @@ cdef class CSCSparseMatrix_INT32_t_COMPLEX128_t(ImmutableSparseMatrix_INT32_t_CO
 ########################################################################################################################
 # Factory methods
 ########################################################################################################################
-cdef MakeCSCSparseMatrix_INT32_t_COMPLEX128_t(INT32_t nrow, INT32_t ncol, INT32_t nnz, INT32_t * ind, INT32_t * row, COMPLEX128_t * val, bint is_symmetric):
+cdef MakeCSCSparseMatrix_INT32_t_COMPLEX128_t(INT32_t nrow, INT32_t ncol, INT32_t nnz, INT32_t * ind, INT32_t * row, COMPLEX128_t * val, bint __is_symmetric):
     """
     Construct a CSCSparseMatrix object.
 
@@ -352,7 +352,7 @@ cdef MakeCSCSparseMatrix_INT32_t_COMPLEX128_t(INT32_t nrow, INT32_t ncol, INT32_
         row  (INT32_t *): C-array with row indices.
         val  (COMPLEX128_t *): C-array with values.
     """
-    csc_mat = CSCSparseMatrix_INT32_t_COMPLEX128_t(control_object=unexposed_value, nrow=nrow, ncol=ncol, nnz=nnz, is_symmetric=is_symmetric)
+    csc_mat = CSCSparseMatrix_INT32_t_COMPLEX128_t(control_object=unexposed_value, nrow=nrow, ncol=ncol, nnz=nnz, __is_symmetric=__is_symmetric)
 
     csc_mat.val = val
     csc_mat.ind = ind

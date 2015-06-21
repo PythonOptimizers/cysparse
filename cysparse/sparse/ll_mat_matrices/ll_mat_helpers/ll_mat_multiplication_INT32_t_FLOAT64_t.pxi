@@ -62,7 +62,7 @@ cdef LLSparseMatrix_INT32_t_FLOAT64_t multiply_two_ll_mat_INT32_t_FLOAT64_t(LLSp
 
 
     # CASES
-    if not A.is_symmetric and not B.is_symmetric:
+    if not A.__is_symmetric and not B.__is_symmetric:
         pass
     else:
         raise NotImplementedError("Multiplication with symmetric matrices is not implemented yet")
@@ -126,7 +126,7 @@ cdef LLSparseMatrix_INT32_t_FLOAT64_t multiply_transposed_ll_mat_by_ll_mat_INT32
     C = LLSparseMatrix_INT32_t_FLOAT64_t(control_object=unexposed_value, nrow=C_nrow, ncol=C_ncol, size_hint=size_hint, store_zeros=store_zeros)
 
     # CASES
-    if not A.is_symmetric and not B.is_symmetric:
+    if not A.__is_symmetric and not B.__is_symmetric:
         # we only deal with non symmetric matrices
         pass
     else:
@@ -199,12 +199,12 @@ cdef cnp.ndarray[cnp.npy_float64, ndim=1, mode='c'] multiply_ll_mat_with_numpy_v
 
     # test if b vector is C-contiguous or not
     if cnp.PyArray_ISCONTIGUOUS(b):
-        if A.is_symmetric:
+        if A.__is_symmetric:
             multiply_sym_ll_mat_with_numpy_vector_kernel_INT32_t_FLOAT64_t(A_nrow, b_data, c_data, A.val, A.col, A.link, A.root)
         else:
             multiply_ll_mat_with_numpy_vector_kernel_INT32_t_FLOAT64_t(A_nrow, b_data, c_data, A.val, A.col, A.link, A.root)
     else:
-        if A.is_symmetric:
+        if A.__is_symmetric:
             multiply_sym_ll_mat_with_strided_numpy_vector_kernel_INT32_t_FLOAT64_t(A.nrow,
                                                                  b_data, b.strides[0] / sd,
                                                                  c_data, c.strides[0] / sd,
@@ -259,13 +259,13 @@ cdef cnp.ndarray[cnp.npy_float64, ndim=1, mode='c'] multiply_transposed_ll_mat_w
 
     # test if b vector is C-contiguous or not
     if cnp.PyArray_ISCONTIGUOUS(b):
-        if A.is_symmetric:
+        if A.__is_symmetric:
             multiply_sym_ll_mat_with_numpy_vector_kernel_INT32_t_FLOAT64_t(A_nrow, b_data, c_data, A.val, A.col, A.link, A.root)
         else:
             multiply_tranposed_ll_mat_with_numpy_vector_kernel_INT32_t_FLOAT64_t(A_nrow, A_ncol, b_data, c_data,
          A.val, A.col, A.link, A.root)
     else:
-        if A.is_symmetric:
+        if A.__is_symmetric:
             multiply_sym_ll_mat_with_strided_numpy_vector_kernel_INT32_t_FLOAT64_t(A.nrow,
                                                                  b_data, b.strides[0] / sd,
                                                                  c_data, c.strides[0] / sd,

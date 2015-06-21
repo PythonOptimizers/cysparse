@@ -23,7 +23,7 @@ cdef class LLSparseMatrixView_INT64_t_COMPLEX64_t:
 
         LLSparseMatrix_INT64_t_COMPLEX64_t A
 
-        public bint is_symmetric
+        public bint __is_symmetric
         public bint store_zeros
 
         object nnz   # number of non zeros elements of the collected view

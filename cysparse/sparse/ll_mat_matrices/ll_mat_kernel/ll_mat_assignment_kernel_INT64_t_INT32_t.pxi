@@ -20,7 +20,7 @@ cdef bint update_ll_mat_item_add_INT64_t_INT32_t(LLSparseMatrix_INT64_t_INT32_t 
     cdef:
         INT64_t k, new_elem, col, last
 
-    if A.is_symmetric and i < j:
+    if A.__is_symmetric and i < j:
         raise IndexError("Write operation to upper triangle of symmetric matrix not allowed")
 
     if not A.store_zeros and x == 0.0:

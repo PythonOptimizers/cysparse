@@ -213,45 +213,45 @@ class CySparseCSCCreationFromLLSparseMatrixTestCase(CySparseCSCCreationBaseTestC
 
     def test_symmetric_attribute(self):
         """
-        We test if the ``is_symmetric`` attribute is the same for both matrices.
+        We test if the ``__is_symmetric`` attribute is the same for both matrices.
         """
 
   
   
-        self.failUnless(self.l_1_1.is_symmetric == self.l_1_1_csc.is_symmetric == False)
+        self.failUnless(self.l_1_1.__is_symmetric == self.l_1_1_csc.__is_symmetric == False)
   
-        self.failUnless(self.l_1_2.is_symmetric == self.l_1_2_csc.is_symmetric == False)
+        self.failUnless(self.l_1_2.__is_symmetric == self.l_1_2_csc.__is_symmetric == False)
   
-        self.failUnless(self.l_1_3.is_symmetric == self.l_1_3_csc.is_symmetric == False)
+        self.failUnless(self.l_1_3.__is_symmetric == self.l_1_3_csc.__is_symmetric == False)
   
-        self.failUnless(self.l_1_4.is_symmetric == self.l_1_4_csc.is_symmetric == False)
+        self.failUnless(self.l_1_4.__is_symmetric == self.l_1_4_csc.__is_symmetric == False)
   
-        self.failUnless(self.l_1_5.is_symmetric == self.l_1_5_csc.is_symmetric == False)
+        self.failUnless(self.l_1_5.__is_symmetric == self.l_1_5_csc.__is_symmetric == False)
   
-        self.failUnless(self.l_1_6.is_symmetric == self.l_1_6_csc.is_symmetric == False)
+        self.failUnless(self.l_1_6.__is_symmetric == self.l_1_6_csc.__is_symmetric == False)
   
-        self.failUnless(self.l_1_7.is_symmetric == self.l_1_7_csc.is_symmetric == False)
+        self.failUnless(self.l_1_7.__is_symmetric == self.l_1_7_csc.__is_symmetric == False)
   
-        self.failUnless(self.l_1_8.is_symmetric == self.l_1_8_csc.is_symmetric == False)
+        self.failUnless(self.l_1_8.__is_symmetric == self.l_1_8_csc.__is_symmetric == False)
   
 
   
   
-        self.failUnless(self.l_2_1.is_symmetric == self.l_2_1_csc.is_symmetric == False)
+        self.failUnless(self.l_2_1.__is_symmetric == self.l_2_1_csc.__is_symmetric == False)
   
-        self.failUnless(self.l_2_2.is_symmetric == self.l_2_2_csc.is_symmetric == False)
+        self.failUnless(self.l_2_2.__is_symmetric == self.l_2_2_csc.__is_symmetric == False)
   
-        self.failUnless(self.l_2_3.is_symmetric == self.l_2_3_csc.is_symmetric == False)
+        self.failUnless(self.l_2_3.__is_symmetric == self.l_2_3_csc.__is_symmetric == False)
   
-        self.failUnless(self.l_2_4.is_symmetric == self.l_2_4_csc.is_symmetric == False)
+        self.failUnless(self.l_2_4.__is_symmetric == self.l_2_4_csc.__is_symmetric == False)
   
-        self.failUnless(self.l_2_5.is_symmetric == self.l_2_5_csc.is_symmetric == False)
+        self.failUnless(self.l_2_5.__is_symmetric == self.l_2_5_csc.__is_symmetric == False)
   
-        self.failUnless(self.l_2_6.is_symmetric == self.l_2_6_csc.is_symmetric == False)
+        self.failUnless(self.l_2_6.__is_symmetric == self.l_2_6_csc.__is_symmetric == False)
   
-        self.failUnless(self.l_2_7.is_symmetric == self.l_2_7_csc.is_symmetric == False)
+        self.failUnless(self.l_2_7.__is_symmetric == self.l_2_7_csc.__is_symmetric == False)
   
-        self.failUnless(self.l_2_8.is_symmetric == self.l_2_8_csc.is_symmetric == False)
+        self.failUnless(self.l_2_8.__is_symmetric == self.l_2_8_csc.__is_symmetric == False)
   
 
 
@@ -263,42 +263,42 @@ class CySparseCSCCreationFromSymmetricLLSparseMatrixTestCase(CySparseCSCCreation
 
   
   
-        self.l_1_1 = NewLLSparseMatrix(is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=INT32_T)
+        self.l_1_1 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=INT32_T)
         construct_sym_sparse_matrix(self.l_1_1, self.size, self.nbr_of_elements)
 
         self.l_1_1_csc = self.l_1_1.to_csc()
   
-        self.l_1_2 = NewLLSparseMatrix(is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=INT64_T)
+        self.l_1_2 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=INT64_T)
         construct_sym_sparse_matrix(self.l_1_2, self.size, self.nbr_of_elements)
 
         self.l_1_2_csc = self.l_1_2.to_csc()
   
-        self.l_1_3 = NewLLSparseMatrix(is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=FLOAT32_T)
+        self.l_1_3 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=FLOAT32_T)
         construct_sym_sparse_matrix(self.l_1_3, self.size, self.nbr_of_elements)
 
         self.l_1_3_csc = self.l_1_3.to_csc()
   
-        self.l_1_4 = NewLLSparseMatrix(is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=FLOAT64_T)
+        self.l_1_4 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=FLOAT64_T)
         construct_sym_sparse_matrix(self.l_1_4, self.size, self.nbr_of_elements)
 
         self.l_1_4_csc = self.l_1_4.to_csc()
   
-        self.l_1_5 = NewLLSparseMatrix(is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=FLOAT128_T)
+        self.l_1_5 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=FLOAT128_T)
         construct_sym_sparse_matrix(self.l_1_5, self.size, self.nbr_of_elements)
 
         self.l_1_5_csc = self.l_1_5.to_csc()
   
-        self.l_1_6 = NewLLSparseMatrix(is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=COMPLEX64_T)
+        self.l_1_6 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=COMPLEX64_T)
         construct_sym_sparse_matrix(self.l_1_6, self.size, self.nbr_of_elements)
 
         self.l_1_6_csc = self.l_1_6.to_csc()
   
-        self.l_1_7 = NewLLSparseMatrix(is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=COMPLEX128_T)
+        self.l_1_7 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=COMPLEX128_T)
         construct_sym_sparse_matrix(self.l_1_7, self.size, self.nbr_of_elements)
 
         self.l_1_7_csc = self.l_1_7.to_csc()
   
-        self.l_1_8 = NewLLSparseMatrix(is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=COMPLEX256_T)
+        self.l_1_8 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=COMPLEX256_T)
         construct_sym_sparse_matrix(self.l_1_8, self.size, self.nbr_of_elements)
 
         self.l_1_8_csc = self.l_1_8.to_csc()
@@ -306,42 +306,42 @@ class CySparseCSCCreationFromSymmetricLLSparseMatrixTestCase(CySparseCSCCreation
 
   
   
-        self.l_2_1 = NewLLSparseMatrix(is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=INT32_T)
+        self.l_2_1 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=INT32_T)
         construct_sym_sparse_matrix(self.l_2_1, self.size, self.nbr_of_elements)
 
         self.l_2_1_csc = self.l_2_1.to_csc()
   
-        self.l_2_2 = NewLLSparseMatrix(is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=INT64_T)
+        self.l_2_2 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=INT64_T)
         construct_sym_sparse_matrix(self.l_2_2, self.size, self.nbr_of_elements)
 
         self.l_2_2_csc = self.l_2_2.to_csc()
   
-        self.l_2_3 = NewLLSparseMatrix(is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=FLOAT32_T)
+        self.l_2_3 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=FLOAT32_T)
         construct_sym_sparse_matrix(self.l_2_3, self.size, self.nbr_of_elements)
 
         self.l_2_3_csc = self.l_2_3.to_csc()
   
-        self.l_2_4 = NewLLSparseMatrix(is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=FLOAT64_T)
+        self.l_2_4 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=FLOAT64_T)
         construct_sym_sparse_matrix(self.l_2_4, self.size, self.nbr_of_elements)
 
         self.l_2_4_csc = self.l_2_4.to_csc()
   
-        self.l_2_5 = NewLLSparseMatrix(is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=FLOAT128_T)
+        self.l_2_5 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=FLOAT128_T)
         construct_sym_sparse_matrix(self.l_2_5, self.size, self.nbr_of_elements)
 
         self.l_2_5_csc = self.l_2_5.to_csc()
   
-        self.l_2_6 = NewLLSparseMatrix(is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=COMPLEX64_T)
+        self.l_2_6 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=COMPLEX64_T)
         construct_sym_sparse_matrix(self.l_2_6, self.size, self.nbr_of_elements)
 
         self.l_2_6_csc = self.l_2_6.to_csc()
   
-        self.l_2_7 = NewLLSparseMatrix(is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=COMPLEX128_T)
+        self.l_2_7 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=COMPLEX128_T)
         construct_sym_sparse_matrix(self.l_2_7, self.size, self.nbr_of_elements)
 
         self.l_2_7_csc = self.l_2_7.to_csc()
   
-        self.l_2_8 = NewLLSparseMatrix(is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=COMPLEX256_T)
+        self.l_2_8 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=COMPLEX256_T)
         construct_sym_sparse_matrix(self.l_2_8, self.size, self.nbr_of_elements)
 
         self.l_2_8_csc = self.l_2_8.to_csc()
@@ -426,45 +426,45 @@ class CySparseCSCCreationFromSymmetricLLSparseMatrixTestCase(CySparseCSCCreation
 
     def test_symmetric_attribute(self):
         """
-        We test if the ``is_symmetric`` attribute is the same for both matrices.
+        We test if the ``__is_symmetric`` attribute is the same for both matrices.
         """
 
   
   
-        self.failUnless(self.l_1_1.is_symmetric == self.l_1_1_csc.is_symmetric == True)
+        self.failUnless(self.l_1_1.__is_symmetric == self.l_1_1_csc.__is_symmetric == True)
   
-        self.failUnless(self.l_1_2.is_symmetric == self.l_1_2_csc.is_symmetric == True)
+        self.failUnless(self.l_1_2.__is_symmetric == self.l_1_2_csc.__is_symmetric == True)
   
-        self.failUnless(self.l_1_3.is_symmetric == self.l_1_3_csc.is_symmetric == True)
+        self.failUnless(self.l_1_3.__is_symmetric == self.l_1_3_csc.__is_symmetric == True)
   
-        self.failUnless(self.l_1_4.is_symmetric == self.l_1_4_csc.is_symmetric == True)
+        self.failUnless(self.l_1_4.__is_symmetric == self.l_1_4_csc.__is_symmetric == True)
   
-        self.failUnless(self.l_1_5.is_symmetric == self.l_1_5_csc.is_symmetric == True)
+        self.failUnless(self.l_1_5.__is_symmetric == self.l_1_5_csc.__is_symmetric == True)
   
-        self.failUnless(self.l_1_6.is_symmetric == self.l_1_6_csc.is_symmetric == True)
+        self.failUnless(self.l_1_6.__is_symmetric == self.l_1_6_csc.__is_symmetric == True)
   
-        self.failUnless(self.l_1_7.is_symmetric == self.l_1_7_csc.is_symmetric == True)
+        self.failUnless(self.l_1_7.__is_symmetric == self.l_1_7_csc.__is_symmetric == True)
   
-        self.failUnless(self.l_1_8.is_symmetric == self.l_1_8_csc.is_symmetric == True)
+        self.failUnless(self.l_1_8.__is_symmetric == self.l_1_8_csc.__is_symmetric == True)
   
 
   
   
-        self.failUnless(self.l_2_1.is_symmetric == self.l_2_1_csc.is_symmetric == True)
+        self.failUnless(self.l_2_1.__is_symmetric == self.l_2_1_csc.__is_symmetric == True)
   
-        self.failUnless(self.l_2_2.is_symmetric == self.l_2_2_csc.is_symmetric == True)
+        self.failUnless(self.l_2_2.__is_symmetric == self.l_2_2_csc.__is_symmetric == True)
   
-        self.failUnless(self.l_2_3.is_symmetric == self.l_2_3_csc.is_symmetric == True)
+        self.failUnless(self.l_2_3.__is_symmetric == self.l_2_3_csc.__is_symmetric == True)
   
-        self.failUnless(self.l_2_4.is_symmetric == self.l_2_4_csc.is_symmetric == True)
+        self.failUnless(self.l_2_4.__is_symmetric == self.l_2_4_csc.__is_symmetric == True)
   
-        self.failUnless(self.l_2_5.is_symmetric == self.l_2_5_csc.is_symmetric == True)
+        self.failUnless(self.l_2_5.__is_symmetric == self.l_2_5_csc.__is_symmetric == True)
   
-        self.failUnless(self.l_2_6.is_symmetric == self.l_2_6_csc.is_symmetric == True)
+        self.failUnless(self.l_2_6.__is_symmetric == self.l_2_6_csc.__is_symmetric == True)
   
-        self.failUnless(self.l_2_7.is_symmetric == self.l_2_7_csc.is_symmetric == True)
+        self.failUnless(self.l_2_7.__is_symmetric == self.l_2_7_csc.__is_symmetric == True)
   
-        self.failUnless(self.l_2_8.is_symmetric == self.l_2_8_csc.is_symmetric == True)
+        self.failUnless(self.l_2_8.__is_symmetric == self.l_2_8_csc.__is_symmetric == True)
   
 
 

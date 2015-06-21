@@ -860,7 +860,7 @@ typedef npy_clongdouble __pyx_t_5numpy_clongdouble_t;
  */
 typedef npy_cdouble __pyx_t_5numpy_complex_t;
 
-/* "cysparse/sparse/s_mat.pxd":3
+/* "cysparse/sparse/s_mat.pxd":9
  * from cysparse.types.cysparse_types cimport *
  * 
  * cdef class SparseMatrix             # <<<<<<<<<<<<<<
@@ -869,7 +869,7 @@ typedef npy_cdouble __pyx_t_5numpy_complex_t;
  */
 struct __pyx_obj_8cysparse_6sparse_5s_mat_SparseMatrix {
   PyObject_HEAD
-  int is_symmetric;
+  int __is_symmetric;
   int store_zeros;
   int is_mutable;
   char *type_name;
@@ -1000,7 +1000,7 @@ struct __pyx_obj_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX1
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *row_indices;
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *col_indices;
   struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32_t_COMPLEX128_t_LLSparseMatrix_INT32_t_COMPLEX128_t *A;
-  int is_symmetric;
+  int __is_symmetric;
   int store_zeros;
   PyObject *nnz;
   int __pyx___counted_nnz;
@@ -1586,8 +1586,8 @@ static PyObject *__pyx_pf_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t
 static int __pyx_pf_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_39LLSparseMatrixView_INT32_t_COMPLEX128_t_9type_name_2__set__(struct __pyx_obj_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_LLSparseMatrixView_INT32_t_COMPLEX128_t *__pyx_v_self, PyObject *__pyx_v_value); /* proto */
 static PyObject *__pyx_pf_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_39LLSparseMatrixView_INT32_t_COMPLEX128_t_4type___get__(struct __pyx_obj_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_LLSparseMatrixView_INT32_t_COMPLEX128_t *__pyx_v_self); /* proto */
 static int __pyx_pf_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_39LLSparseMatrixView_INT32_t_COMPLEX128_t_4type_2__set__(struct __pyx_obj_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_LLSparseMatrixView_INT32_t_COMPLEX128_t *__pyx_v_self, PyObject *__pyx_v_value); /* proto */
-static PyObject *__pyx_pf_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_39LLSparseMatrixView_INT32_t_COMPLEX128_t_12is_symmetric___get__(struct __pyx_obj_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_LLSparseMatrixView_INT32_t_COMPLEX128_t *__pyx_v_self); /* proto */
-static int __pyx_pf_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_39LLSparseMatrixView_INT32_t_COMPLEX128_t_12is_symmetric_2__set__(struct __pyx_obj_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_LLSparseMatrixView_INT32_t_COMPLEX128_t *__pyx_v_self, PyObject *__pyx_v_value); /* proto */
+static PyObject *__pyx_pf_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_39LLSparseMatrixView_INT32_t_COMPLEX128_t_14__is_symmetric___get__(struct __pyx_obj_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_LLSparseMatrixView_INT32_t_COMPLEX128_t *__pyx_v_self); /* proto */
+static int __pyx_pf_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_39LLSparseMatrixView_INT32_t_COMPLEX128_t_14__is_symmetric_2__set__(struct __pyx_obj_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_LLSparseMatrixView_INT32_t_COMPLEX128_t *__pyx_v_self, PyObject *__pyx_v_value); /* proto */
 static PyObject *__pyx_pf_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_39LLSparseMatrixView_INT32_t_COMPLEX128_t_11store_zeros___get__(struct __pyx_obj_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_LLSparseMatrixView_INT32_t_COMPLEX128_t *__pyx_v_self); /* proto */
 static int __pyx_pf_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_39LLSparseMatrixView_INT32_t_COMPLEX128_t_11store_zeros_2__set__(struct __pyx_obj_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_LLSparseMatrixView_INT32_t_COMPLEX128_t *__pyx_v_self, PyObject *__pyx_v_value); /* proto */
 static int __pyx_pf_5numpy_7ndarray___getbuffer__(PyArrayObject *__pyx_v_self, Py_buffer *__pyx_v_info, int __pyx_v_flags); /* proto */
@@ -1637,7 +1637,7 @@ static char __pyx_k_pyx_vtable[] = "__pyx_vtable__";
 static char __pyx_k_MemoryError[] = "MemoryError";
 static char __pyx_k_store_zeros[] = "store_zeros";
 static char __pyx_k_RuntimeError[] = "RuntimeError";
-static char __pyx_k_is_symmetric[] = "is_symmetric";
+static char __pyx_k_is_symmetric[] = "__is_symmetric";
 static char __pyx_k_of_dim_d_by_d[] = "of dim %d by %d";
 static char __pyx_k_control_object[] = "control_object";
 static char __pyx_k_LLSparseMatrixView[] = "LLSparseMatrixView";
@@ -1892,7 +1892,7 @@ static int __pyx_pf_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPL
  *         self.A = A
  *         Py_INCREF(self.A)  # increase ref to object to avoid the user deleting it explicitly or implicitly             # <<<<<<<<<<<<<<
  * 
- *         self.is_symmetric = A.is_symmetric
+ *         self.__is_symmetric = A.__is_symmetric
  */
   __pyx_t_1 = ((PyObject *)__pyx_v_self->A);
   __Pyx_INCREF(__pyx_t_1);
@@ -1902,16 +1902,16 @@ static int __pyx_pf_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPL
   /* "cysparse/sparse/ll_mat_views/ll_mat_view_INT32_t_COMPLEX128_t.pyx":42
  *         Py_INCREF(self.A)  # increase ref to object to avoid the user deleting it explicitly or implicitly
  * 
- *         self.is_symmetric = A.is_symmetric             # <<<<<<<<<<<<<<
+ *         self.__is_symmetric = A.__is_symmetric             # <<<<<<<<<<<<<<
  *         self.store_zeros = A.store_zeros
  * 
  */
-  __pyx_t_2 = __pyx_v_A->__pyx_base.__pyx_base.__pyx_base.is_symmetric;
-  __pyx_v_self->is_symmetric = __pyx_t_2;
+  __pyx_t_2 = __pyx_v_A->__pyx_base.__pyx_base.__pyx_base.__is_symmetric;
+  __pyx_v_self->__is_symmetric = __pyx_t_2;
 
   /* "cysparse/sparse/ll_mat_views/ll_mat_view_INT32_t_COMPLEX128_t.pyx":43
  * 
- *         self.is_symmetric = A.is_symmetric
+ *         self.__is_symmetric = A.__is_symmetric
  *         self.store_zeros = A.store_zeros             # <<<<<<<<<<<<<<
  * 
  *         self.__counted_nnz = False
@@ -2925,7 +2925,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t
  *                                                                                   ncol=self.ncol,
  *                                                                                   size_hint=size_hint,             # <<<<<<<<<<<<<<
  *                                                                                   store_zeros=False,
- *                                                                                   is_symmetric=False)
+ *                                                                                   __is_symmetric=False)
  */
   __pyx_t_5 = __Pyx_PyInt_From_int(__pyx_v_size_hint); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 165; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
@@ -2936,7 +2936,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t
  *                                                                                   ncol=self.ncol,
  *                                                                                   size_hint=size_hint,
  *                                                                                   store_zeros=False,             # <<<<<<<<<<<<<<
- *                                                                                   is_symmetric=False)
+ *                                                                                   __is_symmetric=False)
  * 
  */
   if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_store_zeros, Py_False) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 162; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -2944,7 +2944,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t
   /* "cysparse/sparse/ll_mat_views/ll_mat_view_INT32_t_COMPLEX128_t.pyx":167
  *                                                                                   size_hint=size_hint,
  *                                                                                   store_zeros=False,
- *                                                                                   is_symmetric=False)             # <<<<<<<<<<<<<<
+ *                                                                                   __is_symmetric=False)             # <<<<<<<<<<<<<<
  * 
  *         cdef:
  */
@@ -3491,7 +3491,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t
  *     def attributes_long_string(self):
  * 
  *         symmetric_string = None             # <<<<<<<<<<<<<<
- *         if self.is_symmetric:
+ *         if self.__is_symmetric:
  *             symmetric_string = 'symmetric'
  */
   __Pyx_INCREF(Py_None);
@@ -3500,16 +3500,16 @@ static PyObject *__pyx_pf_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t
   /* "cysparse/sparse/ll_mat_views/ll_mat_view_INT32_t_COMPLEX128_t.pyx":233
  * 
  *         symmetric_string = None
- *         if self.is_symmetric:             # <<<<<<<<<<<<<<
+ *         if self.__is_symmetric:             # <<<<<<<<<<<<<<
  *             symmetric_string = 'symmetric'
  *         else:
  */
-  __pyx_t_1 = (__pyx_v_self->is_symmetric != 0);
+  __pyx_t_1 = (__pyx_v_self->__is_symmetric != 0);
   if (__pyx_t_1) {
 
     /* "cysparse/sparse/ll_mat_views/ll_mat_view_INT32_t_COMPLEX128_t.pyx":234
  *         symmetric_string = None
- *         if self.is_symmetric:
+ *         if self.__is_symmetric:
  *             symmetric_string = 'symmetric'             # <<<<<<<<<<<<<<
  *         else:
  *             symmetric_string = 'general'
@@ -3662,7 +3662,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t
  * 
  *     def attributes_condensed(self):             # <<<<<<<<<<<<<<
  *         symmetric_string = None
- *         if self.is_symmetric:
+ *         if self.__is_symmetric:
  */
 
 /* Python wrapper */
@@ -3697,7 +3697,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t
  * 
  *     def attributes_condensed(self):
  *         symmetric_string = None             # <<<<<<<<<<<<<<
- *         if self.is_symmetric:
+ *         if self.__is_symmetric:
  *             symmetric_string = 'S'
  */
   __Pyx_INCREF(Py_None);
@@ -3706,16 +3706,16 @@ static PyObject *__pyx_pf_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t
   /* "cysparse/sparse/ll_mat_views/ll_mat_view_INT32_t_COMPLEX128_t.pyx":250
  *     def attributes_condensed(self):
  *         symmetric_string = None
- *         if self.is_symmetric:             # <<<<<<<<<<<<<<
+ *         if self.__is_symmetric:             # <<<<<<<<<<<<<<
  *             symmetric_string = 'S'
  *         else:
  */
-  __pyx_t_1 = (__pyx_v_self->is_symmetric != 0);
+  __pyx_t_1 = (__pyx_v_self->__is_symmetric != 0);
   if (__pyx_t_1) {
 
     /* "cysparse/sparse/ll_mat_views/ll_mat_view_INT32_t_COMPLEX128_t.pyx":251
  *         symmetric_string = None
- *         if self.is_symmetric:
+ *         if self.__is_symmetric:
  *             symmetric_string = 'S'             # <<<<<<<<<<<<<<
  *         else:
  *             symmetric_string = 'G'
@@ -3831,7 +3831,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t
  * 
  *     def attributes_condensed(self):             # <<<<<<<<<<<<<<
  *         symmetric_string = None
- *         if self.is_symmetric:
+ *         if self.__is_symmetric:
  */
 
   /* function exit code */
@@ -4487,25 +4487,25 @@ static int __pyx_pf_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPL
 /* "cysparse/sparse/ll_mat_views/ll_mat_view_INT32_t_COMPLEX128_t.pxd":26
  *         LLSparseMatrix_INT32_t_COMPLEX128_t A
  * 
- *         public bint is_symmetric             # <<<<<<<<<<<<<<
+ *         public bint __is_symmetric             # <<<<<<<<<<<<<<
  *         public bint store_zeros
  * 
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_39LLSparseMatrixView_INT32_t_COMPLEX128_t_12is_symmetric_1__get__(PyObject *__pyx_v_self); /*proto*/
-static PyObject *__pyx_pw_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_39LLSparseMatrixView_INT32_t_COMPLEX128_t_12is_symmetric_1__get__(PyObject *__pyx_v_self) {
+static PyObject *__pyx_pw_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_39LLSparseMatrixView_INT32_t_COMPLEX128_t_14__is_symmetric_1__get__(PyObject *__pyx_v_self); /*proto*/
+static PyObject *__pyx_pw_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_39LLSparseMatrixView_INT32_t_COMPLEX128_t_14__is_symmetric_1__get__(PyObject *__pyx_v_self) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__get__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_39LLSparseMatrixView_INT32_t_COMPLEX128_t_12is_symmetric___get__(((struct __pyx_obj_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_LLSparseMatrixView_INT32_t_COMPLEX128_t *)__pyx_v_self));
+  __pyx_r = __pyx_pf_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_39LLSparseMatrixView_INT32_t_COMPLEX128_t_14__is_symmetric___get__(((struct __pyx_obj_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_LLSparseMatrixView_INT32_t_COMPLEX128_t *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_39LLSparseMatrixView_INT32_t_COMPLEX128_t_12is_symmetric___get__(struct __pyx_obj_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_LLSparseMatrixView_INT32_t_COMPLEX128_t *__pyx_v_self) {
+static PyObject *__pyx_pf_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_39LLSparseMatrixView_INT32_t_COMPLEX128_t_14__is_symmetric___get__(struct __pyx_obj_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_LLSparseMatrixView_INT32_t_COMPLEX128_t *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -4514,7 +4514,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_v_self->is_symmetric); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 26; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_v_self->__is_symmetric); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 26; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -4523,7 +4523,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("cysparse.sparse.ll_mat_views.ll_mat_view_INT32_t_COMPLEX128_t.LLSparseMatrixView_INT32_t_COMPLEX128_t.is_symmetric.__get__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("cysparse.sparse.ll_mat_views.ll_mat_view_INT32_t_COMPLEX128_t.LLSparseMatrixView_INT32_t_COMPLEX128_t.__is_symmetric.__get__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -4532,19 +4532,19 @@ static PyObject *__pyx_pf_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t
 }
 
 /* Python wrapper */
-static int __pyx_pw_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_39LLSparseMatrixView_INT32_t_COMPLEX128_t_12is_symmetric_3__set__(PyObject *__pyx_v_self, PyObject *__pyx_v_value); /*proto*/
-static int __pyx_pw_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_39LLSparseMatrixView_INT32_t_COMPLEX128_t_12is_symmetric_3__set__(PyObject *__pyx_v_self, PyObject *__pyx_v_value) {
+static int __pyx_pw_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_39LLSparseMatrixView_INT32_t_COMPLEX128_t_14__is_symmetric_3__set__(PyObject *__pyx_v_self, PyObject *__pyx_v_value); /*proto*/
+static int __pyx_pw_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_39LLSparseMatrixView_INT32_t_COMPLEX128_t_14__is_symmetric_3__set__(PyObject *__pyx_v_self, PyObject *__pyx_v_value) {
   int __pyx_r;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_39LLSparseMatrixView_INT32_t_COMPLEX128_t_12is_symmetric_2__set__(((struct __pyx_obj_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_LLSparseMatrixView_INT32_t_COMPLEX128_t *)__pyx_v_self), ((PyObject *)__pyx_v_value));
+  __pyx_r = __pyx_pf_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_39LLSparseMatrixView_INT32_t_COMPLEX128_t_14__is_symmetric_2__set__(((struct __pyx_obj_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_LLSparseMatrixView_INT32_t_COMPLEX128_t *)__pyx_v_self), ((PyObject *)__pyx_v_value));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static int __pyx_pf_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_39LLSparseMatrixView_INT32_t_COMPLEX128_t_12is_symmetric_2__set__(struct __pyx_obj_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_LLSparseMatrixView_INT32_t_COMPLEX128_t *__pyx_v_self, PyObject *__pyx_v_value) {
+static int __pyx_pf_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_39LLSparseMatrixView_INT32_t_COMPLEX128_t_14__is_symmetric_2__set__(struct __pyx_obj_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_LLSparseMatrixView_INT32_t_COMPLEX128_t *__pyx_v_self, PyObject *__pyx_v_value) {
   int __pyx_r;
   __Pyx_RefNannyDeclarations
   int __pyx_t_1;
@@ -4553,13 +4553,13 @@ static int __pyx_pf_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPL
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__set__", 0);
   __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_v_value); if (unlikely((__pyx_t_1 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 26; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_v_self->is_symmetric = __pyx_t_1;
+  __pyx_v_self->__is_symmetric = __pyx_t_1;
 
   /* function exit code */
   __pyx_r = 0;
   goto __pyx_L0;
   __pyx_L1_error:;
-  __Pyx_AddTraceback("cysparse.sparse.ll_mat_views.ll_mat_view_INT32_t_COMPLEX128_t.LLSparseMatrixView_INT32_t_COMPLEX128_t.is_symmetric.__set__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("cysparse.sparse.ll_mat_views.ll_mat_view_INT32_t_COMPLEX128_t.LLSparseMatrixView_INT32_t_COMPLEX128_t.__is_symmetric.__set__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = -1;
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();
@@ -4568,7 +4568,7 @@ static int __pyx_pf_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPL
 
 /* "cysparse/sparse/ll_mat_views/ll_mat_view_INT32_t_COMPLEX128_t.pxd":27
  * 
- *         public bint is_symmetric
+ *         public bint __is_symmetric
  *         public bint store_zeros             # <<<<<<<<<<<<<<
  * 
  *         object nnz   # number of non zeros elements of the collected view
@@ -7318,13 +7318,13 @@ static int __pyx_setprop_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_
   }
 }
 
-static PyObject *__pyx_getprop_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_39LLSparseMatrixView_INT32_t_COMPLEX128_t_is_symmetric(PyObject *o, CYTHON_UNUSED void *x) {
-  return __pyx_pw_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_39LLSparseMatrixView_INT32_t_COMPLEX128_t_12is_symmetric_1__get__(o);
+static PyObject *__pyx_getprop_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_39LLSparseMatrixView_INT32_t_COMPLEX128_t___is_symmetric(PyObject *o, CYTHON_UNUSED void *x) {
+  return __pyx_pw_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_39LLSparseMatrixView_INT32_t_COMPLEX128_t_14__is_symmetric_1__get__(o);
 }
 
-static int __pyx_setprop_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_39LLSparseMatrixView_INT32_t_COMPLEX128_t_is_symmetric(PyObject *o, PyObject *v, CYTHON_UNUSED void *x) {
+static int __pyx_setprop_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_39LLSparseMatrixView_INT32_t_COMPLEX128_t___is_symmetric(PyObject *o, PyObject *v, CYTHON_UNUSED void *x) {
   if (v) {
-    return __pyx_pw_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_39LLSparseMatrixView_INT32_t_COMPLEX128_t_12is_symmetric_3__set__(o, v);
+    return __pyx_pw_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_39LLSparseMatrixView_INT32_t_COMPLEX128_t_14__is_symmetric_3__set__(o, v);
   }
   else {
     PyErr_SetString(PyExc_NotImplementedError, "__del__");
@@ -7362,7 +7362,7 @@ static struct PyGetSetDef __pyx_getsets_8cysparse_6sparse_12ll_mat_views_32ll_ma
   {(char *)"is_empty", __pyx_getprop_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_39LLSparseMatrixView_INT32_t_COMPLEX128_t_is_empty, __pyx_setprop_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_39LLSparseMatrixView_INT32_t_COMPLEX128_t_is_empty, 0, 0},
   {(char *)"type_name", __pyx_getprop_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_39LLSparseMatrixView_INT32_t_COMPLEX128_t_type_name, __pyx_setprop_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_39LLSparseMatrixView_INT32_t_COMPLEX128_t_type_name, 0, 0},
   {(char *)"type", __pyx_getprop_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_39LLSparseMatrixView_INT32_t_COMPLEX128_t_type, __pyx_setprop_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_39LLSparseMatrixView_INT32_t_COMPLEX128_t_type, 0, 0},
-  {(char *)"is_symmetric", __pyx_getprop_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_39LLSparseMatrixView_INT32_t_COMPLEX128_t_is_symmetric, __pyx_setprop_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_39LLSparseMatrixView_INT32_t_COMPLEX128_t_is_symmetric, 0, 0},
+  {(char *)"__is_symmetric", __pyx_getprop_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_39LLSparseMatrixView_INT32_t_COMPLEX128_t___is_symmetric, __pyx_setprop_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_39LLSparseMatrixView_INT32_t_COMPLEX128_t___is_symmetric, 0, 0},
   {(char *)"store_zeros", __pyx_getprop_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_39LLSparseMatrixView_INT32_t_COMPLEX128_t_store_zeros, __pyx_setprop_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_39LLSparseMatrixView_INT32_t_COMPLEX128_t_store_zeros, 0, 0},
   {0, 0, 0, 0, 0}
 };
@@ -7731,7 +7731,7 @@ PyMODINIT_FUNC PyInit_ll_mat_view_INT32_t_COMPLEX128_t(void)
   0); if (unlikely(!__pyx_ptype_7cpython_4type_type)) {__pyx_filename = __pyx_f[3]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_ptype_7cpython_4bool_bool = __Pyx_ImportType(__Pyx_BUILTIN_MODULE_NAME, "bool", sizeof(PyBoolObject), 0); if (unlikely(!__pyx_ptype_7cpython_4bool_bool)) {__pyx_filename = __pyx_f[4]; __pyx_lineno = 8; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_ptype_7cpython_7complex_complex = __Pyx_ImportType(__Pyx_BUILTIN_MODULE_NAME, "complex", sizeof(PyComplexObject), 0); if (unlikely(!__pyx_ptype_7cpython_7complex_complex)) {__pyx_filename = __pyx_f[5]; __pyx_lineno = 15; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_ptype_8cysparse_6sparse_5s_mat_SparseMatrix = __Pyx_ImportType("cysparse.sparse.s_mat", "SparseMatrix", sizeof(struct __pyx_obj_8cysparse_6sparse_5s_mat_SparseMatrix), 1); if (unlikely(!__pyx_ptype_8cysparse_6sparse_5s_mat_SparseMatrix)) {__pyx_filename = __pyx_f[6]; __pyx_lineno = 3; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_ptype_8cysparse_6sparse_5s_mat_SparseMatrix = __Pyx_ImportType("cysparse.sparse.s_mat", "SparseMatrix", sizeof(struct __pyx_obj_8cysparse_6sparse_5s_mat_SparseMatrix), 1); if (unlikely(!__pyx_ptype_8cysparse_6sparse_5s_mat_SparseMatrix)) {__pyx_filename = __pyx_f[6]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_ptype_8cysparse_6sparse_14sparse_proxies_5t_mat_TransposedSparseMatrix = __Pyx_ImportType("cysparse.sparse.sparse_proxies.t_mat", "TransposedSparseMatrix", sizeof(struct __pyx_obj_8cysparse_6sparse_14sparse_proxies_5t_mat_TransposedSparseMatrix), 1); if (unlikely(!__pyx_ptype_8cysparse_6sparse_14sparse_proxies_5t_mat_TransposedSparseMatrix)) {__pyx_filename = __pyx_f[7]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_ptype_8cysparse_6sparse_14sparse_proxies_15complex_generic_26h_mat_INT32_t_COMPLEX128_t_ConjugateTransposedSparseMatrix_INT32_t_COMPLEX128_t = __Pyx_ImportType("cysparse.sparse.sparse_proxies.complex_generic.h_mat_INT32_t_COMPLEX128_t", "ConjugateTransposedSparseMatrix_INT32_t_COMPLEX128_t", sizeof(struct __pyx_obj_8cysparse_6sparse_14sparse_proxies_15complex_generic_26h_mat_INT32_t_COMPLEX128_t_ConjugateTransposedSparseMatrix_INT32_t_COMPLEX128_t), 1); if (unlikely(!__pyx_ptype_8cysparse_6sparse_14sparse_proxies_15complex_generic_26h_mat_INT32_t_COMPLEX128_t_ConjugateTransposedSparseMatrix_INT32_t_COMPLEX128_t)) {__pyx_filename = __pyx_f[8]; __pyx_lineno = 10; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_ptype_8cysparse_6sparse_14sparse_proxies_15complex_generic_29conj_mat_INT32_t_COMPLEX128_t_ConjugatedSparseMatrix_INT32_t_COMPLEX128_t = __Pyx_ImportType("cysparse.sparse.sparse_proxies.complex_generic.conj_mat_INT32_t_COMPLEX128_t", "ConjugatedSparseMatrix_INT32_t_COMPLEX128_t", sizeof(struct __pyx_obj_8cysparse_6sparse_14sparse_proxies_15complex_generic_29conj_mat_INT32_t_COMPLEX128_t_ConjugatedSparseMatrix_INT32_t_COMPLEX128_t), 1); if (unlikely(!__pyx_ptype_8cysparse_6sparse_14sparse_proxies_15complex_generic_29conj_mat_INT32_t_COMPLEX128_t_ConjugatedSparseMatrix_INT32_t_COMPLEX128_t)) {__pyx_filename = __pyx_f[9]; __pyx_lineno = 10; __pyx_clineno = __LINE__; goto __pyx_L1_error;}

@@ -178,7 +178,7 @@ cdef class CSRSparseMatrix_INT64_t_FLOAT64_t(ImmutableSparseMatrix_INT64_t_FLOAT
 
         # TODO: TEST!!!
         # code duplicated for optimization
-        if self.is_symmetric:
+        if self.__is_symmetric:
             if i < j:
                 real_i = j
                 real_j = i
@@ -380,7 +380,7 @@ cdef class CSRSparseMatrix_INT64_t_FLOAT64_t(ImmutableSparseMatrix_INT64_t_FLOAT
 ########################################################################################################################
 # Factory methods
 ########################################################################################################################
-cdef MakeCSRSparseMatrix_INT64_t_FLOAT64_t(INT64_t nrow, INT64_t ncol, INT64_t nnz, INT64_t * ind, INT64_t * col, FLOAT64_t * val, bint is_symmetric):
+cdef MakeCSRSparseMatrix_INT64_t_FLOAT64_t(INT64_t nrow, INT64_t ncol, INT64_t nnz, INT64_t * ind, INT64_t * col, FLOAT64_t * val, bint __is_symmetric):
     """
     Construct a CSRSparseMatrix object.
 
@@ -391,10 +391,10 @@ cdef MakeCSRSparseMatrix_INT64_t_FLOAT64_t(INT64_t nrow, INT64_t ncol, INT64_t n
         ind (INT64_t *): C-array with column indices pointers.
         col  (INT64_t *): C-array with column indices.
         val  (FLOAT64_t *): C-array with values.
-        is_symmetric (boolean): Is matrix symmetrix or not?
+        __is_symmetric (boolean): Is matrix symmetrix or not?
     """
 
-    csr_mat = CSRSparseMatrix_INT64_t_FLOAT64_t(control_object=unexposed_value, nrow=nrow, ncol=ncol, nnz=nnz, is_symmetric=is_symmetric)
+    csr_mat = CSRSparseMatrix_INT64_t_FLOAT64_t(control_object=unexposed_value, nrow=nrow, ncol=ncol, nnz=nnz, __is_symmetric=__is_symmetric)
 
     csr_mat.val = val
     csr_mat.ind = ind
@@ -433,7 +433,7 @@ cdef LLSparseMatrix_INT64_t_FLOAT64_t multiply_csr_mat_by_csc_mat_INT64_t_FLOAT6
     C = LLSparseMatrix_INT64_t_FLOAT64_t(control_object=unexposed_value, nrow=C_nrow, ncol=C_ncol, size_hint=size_hint, store_zeros=store_zeros)
 
     # CASES
-    if not A.is_symmetric and not B.is_symmetric:
+    if not A.__is_symmetric and not B.__is_symmetric:
         pass
     else:
         raise NotImplemented("Multiplication with symmetric matrices is not implemented yet")

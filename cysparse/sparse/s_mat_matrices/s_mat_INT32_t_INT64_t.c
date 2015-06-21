@@ -622,7 +622,7 @@ struct __pyx_t_8cysparse_5types_14cysparse_types_CPType {
   enum __pyx_t_8cysparse_5types_14cysparse_types_CySparseType itype;
 };
 
-/* "cysparse/sparse/s_mat.pxd":3
+/* "cysparse/sparse/s_mat.pxd":9
  * from cysparse.types.cysparse_types cimport *
  * 
  * cdef class SparseMatrix             # <<<<<<<<<<<<<<
@@ -631,7 +631,7 @@ struct __pyx_t_8cysparse_5types_14cysparse_types_CPType {
  */
 struct __pyx_obj_8cysparse_6sparse_5s_mat_SparseMatrix {
   PyObject_HEAD
-  int is_symmetric;
+  int __is_symmetric;
   int store_zeros;
   int is_mutable;
   char *type_name;
@@ -1833,7 +1833,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_14s_mat_matrices_21s_mat_INT32_t_INT
  *     def attributes_long_string(self):
  * 
  *         symmetric_string = None             # <<<<<<<<<<<<<<
- *         if self.is_symmetric:
+ *         if self.__is_symmetric:
  *             symmetric_string = 'symmetric'
  */
   __Pyx_INCREF(Py_None);
@@ -1842,16 +1842,16 @@ static PyObject *__pyx_pf_8cysparse_6sparse_14s_mat_matrices_21s_mat_INT32_t_INT
   /* "cysparse/sparse/s_mat_matrices/s_mat_INT32_t_INT64_t.pyx":93
  * 
  *         symmetric_string = None
- *         if self.is_symmetric:             # <<<<<<<<<<<<<<
+ *         if self.__is_symmetric:             # <<<<<<<<<<<<<<
  *             symmetric_string = 'symmetric'
  *         else:
  */
-  __pyx_t_1 = (__pyx_v_self->__pyx_base.is_symmetric != 0);
+  __pyx_t_1 = (__pyx_v_self->__pyx_base.__is_symmetric != 0);
   if (__pyx_t_1) {
 
     /* "cysparse/sparse/s_mat_matrices/s_mat_INT32_t_INT64_t.pyx":94
  *         symmetric_string = None
- *         if self.is_symmetric:
+ *         if self.__is_symmetric:
  *             symmetric_string = 'symmetric'             # <<<<<<<<<<<<<<
  *         else:
  *             symmetric_string = 'general'
@@ -2004,7 +2004,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_14s_mat_matrices_21s_mat_INT32_t_INT
  * 
  *     def attributes_condensed(self):             # <<<<<<<<<<<<<<
  *         symmetric_string = None
- *         if self.is_symmetric:
+ *         if self.__is_symmetric:
  */
 
 /* Python wrapper */
@@ -2039,7 +2039,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_14s_mat_matrices_21s_mat_INT32_t_INT
  * 
  *     def attributes_condensed(self):
  *         symmetric_string = None             # <<<<<<<<<<<<<<
- *         if self.is_symmetric:
+ *         if self.__is_symmetric:
  *             symmetric_string = 'S'
  */
   __Pyx_INCREF(Py_None);
@@ -2048,16 +2048,16 @@ static PyObject *__pyx_pf_8cysparse_6sparse_14s_mat_matrices_21s_mat_INT32_t_INT
   /* "cysparse/sparse/s_mat_matrices/s_mat_INT32_t_INT64_t.pyx":110
  *     def attributes_condensed(self):
  *         symmetric_string = None
- *         if self.is_symmetric:             # <<<<<<<<<<<<<<
+ *         if self.__is_symmetric:             # <<<<<<<<<<<<<<
  *             symmetric_string = 'S'
  *         else:
  */
-  __pyx_t_1 = (__pyx_v_self->__pyx_base.is_symmetric != 0);
+  __pyx_t_1 = (__pyx_v_self->__pyx_base.__is_symmetric != 0);
   if (__pyx_t_1) {
 
     /* "cysparse/sparse/s_mat_matrices/s_mat_INT32_t_INT64_t.pyx":111
  *         symmetric_string = None
- *         if self.is_symmetric:
+ *         if self.__is_symmetric:
  *             symmetric_string = 'S'             # <<<<<<<<<<<<<<
  *         else:
  *             symmetric_string = 'G'
@@ -2173,7 +2173,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_14s_mat_matrices_21s_mat_INT32_t_INT
  * 
  *     def attributes_condensed(self):             # <<<<<<<<<<<<<<
  *         symmetric_string = None
- *         if self.is_symmetric:
+ *         if self.__is_symmetric:
  */
 
   /* function exit code */

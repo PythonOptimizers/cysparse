@@ -82,7 +82,7 @@ cdef class CSCSparseMatrix_INT64_t_FLOAT64_t(ImmutableSparseMatrix_INT64_t_FLOAT
             INT64_t real_j
 
         # code is duplicated for optimization
-        if self.is_symmetric:
+        if self.__is_symmetric:
             # TODO: column indices are NOT necessarily sorted... what do we do about it?
             if i < j:
                 real_i = j
@@ -246,7 +246,7 @@ cdef class CSCSparseMatrix_INT64_t_FLOAT64_t(ImmutableSparseMatrix_INT64_t_FLOAT
                 # TODO: rewrite this completely
                 for k from self.ind[j] <= k < self.ind[j+1]:
                     mat[(self.row[k]*self.ncol)+j] = self.val[k]
-                    if self.is_symmetric:
+                    if self.__is_symmetric:
                         mat[(j*self.ncol)+ self.row[k]] = self.val[k]
 
             for i from 0 <= i < self.nrow:
@@ -339,7 +339,7 @@ cdef class CSCSparseMatrix_INT64_t_FLOAT64_t(ImmutableSparseMatrix_INT64_t_FLOAT
 ########################################################################################################################
 # Factory methods
 ########################################################################################################################
-cdef MakeCSCSparseMatrix_INT64_t_FLOAT64_t(INT64_t nrow, INT64_t ncol, INT64_t nnz, INT64_t * ind, INT64_t * row, FLOAT64_t * val, bint is_symmetric):
+cdef MakeCSCSparseMatrix_INT64_t_FLOAT64_t(INT64_t nrow, INT64_t ncol, INT64_t nnz, INT64_t * ind, INT64_t * row, FLOAT64_t * val, bint __is_symmetric):
     """
     Construct a CSCSparseMatrix object.
 
@@ -351,7 +351,7 @@ cdef MakeCSCSparseMatrix_INT64_t_FLOAT64_t(INT64_t nrow, INT64_t ncol, INT64_t n
         row  (INT64_t *): C-array with row indices.
         val  (FLOAT64_t *): C-array with values.
     """
-    csc_mat = CSCSparseMatrix_INT64_t_FLOAT64_t(control_object=unexposed_value, nrow=nrow, ncol=ncol, nnz=nnz, is_symmetric=is_symmetric)
+    csc_mat = CSCSparseMatrix_INT64_t_FLOAT64_t(control_object=unexposed_value, nrow=nrow, ncol=ncol, nnz=nnz, __is_symmetric=__is_symmetric)
 
     csc_mat.val = val
     csc_mat.ind = ind

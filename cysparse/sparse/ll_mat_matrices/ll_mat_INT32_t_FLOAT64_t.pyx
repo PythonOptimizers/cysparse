@@ -290,7 +290,7 @@ cdef class LLSparseMatrix_INT32_t_FLOAT64_t(MutableSparseMatrix_INT32_t_FLOAT64_
         cdef LLSparseMatrix_INT32_t_FLOAT64_t self_copy
 
         # we copy manually the C-arrays
-        self_copy = LLSparseMatrix_INT32_t_FLOAT64_t(control_object=unexposed_value, no_memory=True, nrow=self.nrow, ncol=self.ncol, size_hint=self.size_hint, store_zeros=self.store_zeros, is_symmetric=self.is_symmetric)
+        self_copy = LLSparseMatrix_INT32_t_FLOAT64_t(control_object=unexposed_value, no_memory=True, nrow=self.nrow, ncol=self.ncol, size_hint=self.size_hint, store_zeros=self.store_zeros, __is_symmetric=self.__is_symmetric)
 
         # copy C-arrays
         cdef:
@@ -342,9 +342,9 @@ cdef class LLSparseMatrix_INT32_t_FLOAT64_t(MutableSparseMatrix_INT32_t_FLOAT64_
         cdef:
             INT32_t k, i, j
 
-        if self.is_symmetric:
+        if self.__is_symmetric:
 
-            self.is_symmetric = False  # to allow writing in upper triangle
+            self.__is_symmetric = False  # to allow writing in upper triangle
 
             for i from 0 <= i < self.nrow:
                 k = self.root[i]
@@ -398,7 +398,7 @@ cdef class LLSparseMatrix_INT32_t_FLOAT64_t(MutableSparseMatrix_INT32_t_FLOAT64_
         """
         # Warning: we use int8 instead of bool. There are too many problems with the bool type...
 
-        if self.is_symmetric:
+        if self.__is_symmetric:
             raise NotImplementedError('This method is not allowed for symmetric matrices')
 
         if maskArray.size < self.nrow:
@@ -501,10 +501,10 @@ cdef class LLSparseMatrix_INT32_t_FLOAT64_t(MutableSparseMatrix_INT32_t_FLOAT64_
             INT32_t i, j, k
             LLSparseMatrix_INT32_t_FLOAT64_t transpose
 
-        if self.is_symmetric:
+        if self.__is_symmetric:
             return self.copy()
         else:
-            transpose = LLSparseMatrix_INT32_t_FLOAT64_t(control_object=unexposed_value, nrow=self.ncol, ncol=self.nrow, size_hint=self.nnz, store_zeros=self.store_zeros, is_symmetric=self.is_symmetric)
+            transpose = LLSparseMatrix_INT32_t_FLOAT64_t(control_object=unexposed_value, nrow=self.ncol, ncol=self.nrow, size_hint=self.nnz, store_zeros=self.store_zeros, __is_symmetric=self.__is_symmetric)
 
             for i from 0 <= i < self.nrow:
                 k = self.root[i]
@@ -591,7 +591,7 @@ cdef class LLSparseMatrix_INT32_t_FLOAT64_t(MutableSparseMatrix_INT32_t_FLOAT64_
 
             ind[i+1] = ind_col_index
 
-        csr_mat = MakeCSRSparseMatrix_INT32_t_FLOAT64_t(nrow=self.nrow, ncol=self.ncol, nnz=self.nnz, ind=ind, col=col, val=val, is_symmetric=self.is_symmetric)
+        csr_mat = MakeCSRSparseMatrix_INT32_t_FLOAT64_t(nrow=self.nrow, ncol=self.ncol, nnz=self.nnz, ind=ind, col=col, val=val, __is_symmetric=self.__is_symmetric)
 
         return csr_mat
 
@@ -664,7 +664,7 @@ cdef class LLSparseMatrix_INT32_t_FLOAT64_t(MutableSparseMatrix_INT32_t_FLOAT64_
 
         free(col_indexes)
 
-        csc_mat = MakeCSCSparseMatrix_INT32_t_FLOAT64_t(nrow=self.nrow, ncol=self.ncol, nnz=self.nnz, ind=ind, row=row, val=val, is_symmetric=self.is_symmetric)
+        csc_mat = MakeCSCSparseMatrix_INT32_t_FLOAT64_t(nrow=self.nrow, ncol=self.ncol, nnz=self.nnz, ind=ind, row=row, val=val, __is_symmetric=self.__is_symmetric)
 
         return csc_mat
 
@@ -730,7 +730,7 @@ cdef class LLSparseMatrix_INT32_t_FLOAT64_t(MutableSparseMatrix_INT32_t_FLOAT64_
         cdef:
             INT32_t i, j
 
-        if self.is_symmetric:
+        if self.__is_symmetric:
             if PySparseMatrix_Check(obj):
                 for i from 0 <= i < nrow:
                     for j from 0 <= j <= i:
@@ -803,7 +803,7 @@ cdef class LLSparseMatrix_INT32_t_FLOAT64_t(MutableSparseMatrix_INT32_t_FLOAT64_
 
 
         """
-        if self.is_symmetric and i < j:
+        if self.__is_symmetric and i < j:
             raise IndexError('Write operation to upper triangle of symmetric matrix not allowed')
 
         cdef INT32_t k, new_elem, last, col
@@ -907,7 +907,7 @@ cdef class LLSparseMatrix_INT32_t_FLOAT64_t(MutableSparseMatrix_INT32_t_FLOAT64_
         """
         cdef INT32_t k, t
 
-        if self.is_symmetric and i < j:
+        if self.__is_symmetric and i < j:
             t = i; i = j; j = t
 
         k = self.root[i]
@@ -1310,7 +1310,7 @@ cdef class LLSparseMatrix_INT32_t_FLOAT64_t(MutableSparseMatrix_INT32_t_FLOAT64_
             INT32_t i, j, k
             Py_ssize_t pos = 0    # position in list
 
-        if not self.is_symmetric:
+        if not self.__is_symmetric:
 
             # create list
             list_p = PyList_New(self.nnz)
@@ -1339,7 +1339,7 @@ cdef class LLSparseMatrix_INT32_t_FLOAT64_t(MutableSparseMatrix_INT32_t_FLOAT64_
             INT32_t i, k
             Py_ssize_t pos = 0        # position in list
 
-        if not self.is_symmetric:
+        if not self.__is_symmetric:
             list_p = PyList_New(self.nnz)
             if list_p == NULL:
                 raise MemoryError()
@@ -1456,7 +1456,7 @@ cdef class LLSparseMatrix_INT32_t_FLOAT64_t(MutableSparseMatrix_INT32_t_FLOAT64_
         except:
             raise TypeError('Factor sigma is not compatible with the dtype (%d) of this matrix' % type_to_string(self.dtype))
 
-        if self.is_symmetric == B.is_symmetric:
+        if self.__is_symmetric == B.__is_symmetric:
             # both matrices are symmetric or are not symmetric
             for i from 0 <= i < B.nrow:
                 k = B.root[i]
@@ -1465,7 +1465,7 @@ cdef class LLSparseMatrix_INT32_t_FLOAT64_t(MutableSparseMatrix_INT32_t_FLOAT64_
                     update_ll_mat_item_add_INT32_t_FLOAT64_t(self, i, B.col[k], casted_sigma * B.val[k])
                     k = B.link[k]
 
-        elif B.is_symmetric:
+        elif B.__is_symmetric:
             # self is not symmetric
             for i from 0 <= i < B.nrow:
                 k = B.root[i]
@@ -1723,7 +1723,7 @@ cdef class LLSparseMatrix_INT32_t_FLOAT64_t(MutableSparseMatrix_INT32_t_FLOAT64_
         if not col_sum:
             raise MemoryError()
 
-        if self.is_symmetric:
+        if self.__is_symmetric:
 
             # compute sum of columns
             for i from 0<= i < self.nrow:
@@ -1776,7 +1776,7 @@ cdef class LLSparseMatrix_INT32_t_FLOAT64_t(MutableSparseMatrix_INT32_t_FLOAT64_
 
         max_row_sum = <FLOAT64_t> 0.0
 
-        if not self.is_symmetric:
+        if not self.__is_symmetric:
             for i from 0<= i < self.nrow:
                 k = self.root[i]
 
@@ -1845,7 +1845,7 @@ cdef class LLSparseMatrix_INT32_t_FLOAT64_t(MutableSparseMatrix_INT32_t_FLOAT64_
 
                 abs_val_square = abs_val * abs_val
                 norm_sum += abs_val_square
-                if self.is_symmetric and i != self.col[k]:
+                if self.__is_symmetric and i != self.col[k]:
                     norm_sum += abs_val_square
 
                 k = self.link[k]
@@ -1899,7 +1899,7 @@ cdef class LLSparseMatrix_INT32_t_FLOAT64_t(MutableSparseMatrix_INT32_t_FLOAT64_
                 k = self.root[i]
                 while k != -1:
                     mat[(i*self.ncol)+self.col[k]] = self.val[k]
-                    if self.is_symmetric:
+                    if self.__is_symmetric:
                         mat[(self.col[k]*self.ncol)+i] = self.val[k]
                     k = self.link[k]
 

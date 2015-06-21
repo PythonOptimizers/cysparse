@@ -3,7 +3,7 @@ import cysparse.types.cysparse_types as types
 import numpy as np
 import sys
 
-l1 = NewLLSparseMatrix(nrow=3, ncol=3, size_hint=4, is_symmetric=True)
+l1 = NewLLSparseMatrix(nrow=3, ncol=3, size_hint=4, __is_symmetric=True)
 print l1
 print type(l1)
 

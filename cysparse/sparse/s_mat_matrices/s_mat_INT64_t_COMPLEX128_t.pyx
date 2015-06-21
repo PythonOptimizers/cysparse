@@ -122,7 +122,7 @@ cdef class SparseMatrix_INT64_t_COMPLEX128_t(SparseMatrix):
     def attributes_long_string(self):
 
         symmetric_string = None
-        if self.is_symmetric:
+        if self.__is_symmetric:
             symmetric_string = 'symmetric'
         else:
             symmetric_string = 'general'
@@ -139,7 +139,7 @@ cdef class SparseMatrix_INT64_t_COMPLEX128_t(SparseMatrix):
 
     def attributes_condensed(self):
         symmetric_string = None
-        if self.is_symmetric:
+        if self.__is_symmetric:
             symmetric_string = 'S'
         else:
             symmetric_string = 'G'

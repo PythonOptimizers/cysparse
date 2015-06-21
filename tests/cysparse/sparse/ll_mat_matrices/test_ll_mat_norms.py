@@ -40,7 +40,7 @@ class CySparseSymmetricLLSparseMatrixNormsTestCase(CySparseLLSparseMatrixNormsBa
         self.nbr_elements = 100
         self.size = 1000
 
-        self.A_c = NewLLSparseMatrix(size=self.size, size_hint=self.nbr_elements, dtype=FLOAT64_T, is_symmetric=True)
+        self.A_c = NewLLSparseMatrix(size=self.size, size_hint=self.nbr_elements, dtype=FLOAT64_T, __is_symmetric=True)
         self.A_p = spmatrix.ll_mat_sym(self.size, self.size, self.nbr_elements)
 
         for i in xrange(self.nbr_elements):

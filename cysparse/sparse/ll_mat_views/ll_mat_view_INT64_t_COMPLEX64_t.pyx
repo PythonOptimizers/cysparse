@@ -39,7 +39,7 @@ cdef class LLSparseMatrixView_INT64_t_COMPLEX64_t:
         self.A = A
         Py_INCREF(self.A)  # increase ref to object to avoid the user deleting it explicitly or implicitly
 
-        self.is_symmetric = A.is_symmetric
+        self.__is_symmetric = A.__is_symmetric
         self.store_zeros = A.store_zeros
 
         self.__counted_nnz = False
@@ -164,7 +164,7 @@ cdef class LLSparseMatrixView_INT64_t_COMPLEX64_t:
                                                                                   ncol=self.ncol,
                                                                                   size_hint=size_hint,
                                                                                   store_zeros=False,
-                                                                                  is_symmetric=False)
+                                                                                  __is_symmetric=False)
 
         cdef:
             INT64_t i, j
@@ -230,7 +230,7 @@ cdef class LLSparseMatrixView_INT64_t_COMPLEX64_t:
     def attributes_long_string(self):
 
         symmetric_string = None
-        if self.is_symmetric:
+        if self.__is_symmetric:
             symmetric_string = 'symmetric'
         else:
             symmetric_string = 'general'
@@ -247,7 +247,7 @@ cdef class LLSparseMatrixView_INT64_t_COMPLEX64_t:
 
     def attributes_condensed(self):
         symmetric_string = None
-        if self.is_symmetric:
+        if self.__is_symmetric:
             symmetric_string = 'S'
         else:
             symmetric_string = 'G'

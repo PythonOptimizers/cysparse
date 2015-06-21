@@ -214,7 +214,7 @@ def NewLLSparseMatrix(**kwargs):
     assert dtype in [INT32_T,INT64_T,FLOAT32_T,FLOAT64_T,FLOAT128_T,COMPLEX64_T,COMPLEX128_T,COMPLEX256_T], "dtype is not accepted as type for a matrix element"
 
     cdef bint store_zeros = kwargs.get('store_zeros', False)
-    cdef bint is_symmetric = kwargs.get('is_symmetric', False)
+    cdef bint __is_symmetric = kwargs.get('__is_symmetric', False)
     cdef bint test_bounds = kwargs.get('test_bounds', True)
 
     # From matrices
@@ -272,7 +272,7 @@ def NewLLSparseMatrix(**kwargs):
                                                                   itype=itype,
                                                                   size_hint=size_hint,
                                                                   store_zeros=store_zeros,
-                                                                  is_symmetric=is_symmetric)
+                                                                  __is_symmetric=__is_symmetric)
     
         
             elif dtype == INT64_T:
@@ -284,7 +284,7 @@ def NewLLSparseMatrix(**kwargs):
                                                                   itype=itype,
                                                                   size_hint=size_hint,
                                                                   store_zeros=store_zeros,
-                                                                  is_symmetric=is_symmetric)
+                                                                  __is_symmetric=__is_symmetric)
     
         
             elif dtype == FLOAT32_T:
@@ -296,7 +296,7 @@ def NewLLSparseMatrix(**kwargs):
                                                                   itype=itype,
                                                                   size_hint=size_hint,
                                                                   store_zeros=store_zeros,
-                                                                  is_symmetric=is_symmetric)
+                                                                  __is_symmetric=__is_symmetric)
     
         
             elif dtype == FLOAT64_T:
@@ -308,7 +308,7 @@ def NewLLSparseMatrix(**kwargs):
                                                                   itype=itype,
                                                                   size_hint=size_hint,
                                                                   store_zeros=store_zeros,
-                                                                  is_symmetric=is_symmetric)
+                                                                  __is_symmetric=__is_symmetric)
     
         
             elif dtype == FLOAT128_T:
@@ -320,7 +320,7 @@ def NewLLSparseMatrix(**kwargs):
                                                                   itype=itype,
                                                                   size_hint=size_hint,
                                                                   store_zeros=store_zeros,
-                                                                  is_symmetric=is_symmetric)
+                                                                  __is_symmetric=__is_symmetric)
     
         
             elif dtype == COMPLEX64_T:
@@ -332,7 +332,7 @@ def NewLLSparseMatrix(**kwargs):
                                                                   itype=itype,
                                                                   size_hint=size_hint,
                                                                   store_zeros=store_zeros,
-                                                                  is_symmetric=is_symmetric)
+                                                                  __is_symmetric=__is_symmetric)
     
         
             elif dtype == COMPLEX128_T:
@@ -344,7 +344,7 @@ def NewLLSparseMatrix(**kwargs):
                                                                   itype=itype,
                                                                   size_hint=size_hint,
                                                                   store_zeros=store_zeros,
-                                                                  is_symmetric=is_symmetric)
+                                                                  __is_symmetric=__is_symmetric)
     
         
             elif dtype == COMPLEX256_T:
@@ -356,7 +356,7 @@ def NewLLSparseMatrix(**kwargs):
                                                                   itype=itype,
                                                                   size_hint=size_hint,
                                                                   store_zeros=store_zeros,
-                                                                  is_symmetric=is_symmetric)
+                                                                  __is_symmetric=__is_symmetric)
     
 
     
@@ -373,7 +373,7 @@ def NewLLSparseMatrix(**kwargs):
                                                                   itype=itype,
                                                                   size_hint=size_hint,
                                                                   store_zeros=store_zeros,
-                                                                  is_symmetric=is_symmetric)
+                                                                  __is_symmetric=__is_symmetric)
     
         
             elif dtype == INT64_T:
@@ -385,7 +385,7 @@ def NewLLSparseMatrix(**kwargs):
                                                                   itype=itype,
                                                                   size_hint=size_hint,
                                                                   store_zeros=store_zeros,
-                                                                  is_symmetric=is_symmetric)
+                                                                  __is_symmetric=__is_symmetric)
     
         
             elif dtype == FLOAT32_T:
@@ -397,7 +397,7 @@ def NewLLSparseMatrix(**kwargs):
                                                                   itype=itype,
                                                                   size_hint=size_hint,
                                                                   store_zeros=store_zeros,
-                                                                  is_symmetric=is_symmetric)
+                                                                  __is_symmetric=__is_symmetric)
     
         
             elif dtype == FLOAT64_T:
@@ -409,7 +409,7 @@ def NewLLSparseMatrix(**kwargs):
                                                                   itype=itype,
                                                                   size_hint=size_hint,
                                                                   store_zeros=store_zeros,
-                                                                  is_symmetric=is_symmetric)
+                                                                  __is_symmetric=__is_symmetric)
     
         
             elif dtype == FLOAT128_T:
@@ -421,7 +421,7 @@ def NewLLSparseMatrix(**kwargs):
                                                                   itype=itype,
                                                                   size_hint=size_hint,
                                                                   store_zeros=store_zeros,
-                                                                  is_symmetric=is_symmetric)
+                                                                  __is_symmetric=__is_symmetric)
     
         
             elif dtype == COMPLEX64_T:
@@ -433,7 +433,7 @@ def NewLLSparseMatrix(**kwargs):
                                                                   itype=itype,
                                                                   size_hint=size_hint,
                                                                   store_zeros=store_zeros,
-                                                                  is_symmetric=is_symmetric)
+                                                                  __is_symmetric=__is_symmetric)
     
         
             elif dtype == COMPLEX128_T:
@@ -445,7 +445,7 @@ def NewLLSparseMatrix(**kwargs):
                                                                   itype=itype,
                                                                   size_hint=size_hint,
                                                                   store_zeros=store_zeros,
-                                                                  is_symmetric=is_symmetric)
+                                                                  __is_symmetric=__is_symmetric)
     
         
             elif dtype == COMPLEX256_T:
@@ -457,7 +457,7 @@ def NewLLSparseMatrix(**kwargs):
                                                                   itype=itype,
                                                                   size_hint=size_hint,
                                                                   store_zeros=store_zeros,
-                                                                  is_symmetric=is_symmetric)
+                                                                  __is_symmetric=__is_symmetric)
     
 
 

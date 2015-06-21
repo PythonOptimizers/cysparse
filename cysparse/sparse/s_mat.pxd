@@ -17,10 +17,25 @@ cdef INT32_t MUTABLE_SPARSE_MAT_DEFAULT_SIZE_HINT
 cpdef bint PySparseMatrix_Check(object obj)
 
 cdef class SparseMatrix:
+    """
+    Main base class for sparse matrices.
+
+    Notes:
+        This class has been (somewhat arbitrarily) divided in two:
+
+            - this part is minimalistic and generic and doesn't require the types to be known at compile time and
+            - s_mat_matrices/s_mat.* (with * in place of 'cpd' or 'cpx') to deal with specifics of types at compile time.
+
+        For instance, we have transferred some definitions into s_mat_matrices/s_mat.* (for instance ``nnz``,
+        ``ncol``, ``nrow``) because we also define the mutable/immutable versions of sparse matrices. The only rule
+        is to keep everything coherent but basically this class and s_mat_matrices/s_mat.* define the same class. Use your judgement.
+
+        This class is also used to break circular dependencies.
+    """
     cdef:
        
-        public bint is_symmetric  # True if symmetric matrix
-        public bint store_zeros   # True if 0.0 is to be stored explicitly
+        bint __is_symmetric  # True if symmetric matrix
+        public bint store_zeros   # True if 0.0 is to be stored explicitly, this can be changed by the user at any time
 
         bint is_mutable           # True if mutable
 

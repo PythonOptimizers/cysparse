@@ -4,7 +4,7 @@ import numpy as np
 
 import sys
 
-l1 = NewLLSparseMatrix(nrow=4, ncol=4, size_hint=10, is_symmetric=True)
+l1 = NewLLSparseMatrix(nrow=4, ncol=4, size_hint=10, __is_symmetric=True)
 print l1
 print type(l1)             # lots of classes are used internally...
 
@@ -47,7 +47,7 @@ print "frob norm = " + str(l1.norm('frob'))
 ########################################################################################################################
 print "=" * 80
 
-l2 = NewLLSparseMatrix(nrow=3, ncol=4, size_hint=10, is_symmetric=True)
+l2 = NewLLSparseMatrix(nrow=3, ncol=4, size_hint=10, __is_symmetric=True)
 l2.put_triplet([0, 1, 1, 2, 2], [0, 0, 1, 0, 1], [1, 2, 3, 4, 5]) # i, j, val
 
 l2_norm_1_sym = l2.norm('1')
