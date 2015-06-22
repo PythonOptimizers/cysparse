@@ -617,12 +617,12 @@ struct __pyx_t_8cysparse_5types_14cysparse_types_CPType {
   enum __pyx_t_8cysparse_5types_14cysparse_types_CySparseType itype;
 };
 
-/* "cysparse/sparse/s_mat.pxd":9
- * from cysparse.types.cysparse_types cimport *
+/* "cysparse/sparse/s_mat.pxd":20
+ * cpdef bint PySparseMatrix_Check(object obj)
  * 
- * cdef class SparseMatrix             # <<<<<<<<<<<<<<
- * 
- * # Use of a "real" factory method, following Robert Bradshaw's suggestion
+ * cdef class SparseMatrix:             # <<<<<<<<<<<<<<
+ *     """
+ *     Main base class for sparse matrices.
  */
 struct __pyx_obj_8cysparse_6sparse_5s_mat_SparseMatrix {
   PyObject_HEAD

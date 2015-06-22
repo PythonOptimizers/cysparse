@@ -6,7 +6,7 @@ See also s_mat_matrices/s_mat.* .
 """
 from cysparse.types.cysparse_types cimport *
 
-cdef class SparseMatrix
+#cdef class SparseMatrix
 
 # Use of a "real" factory method, following Robert Bradshaw's suggestion
 # https://groups.google.com/forum/#!topic/cython-users/0UHuLqheoq0
@@ -34,6 +34,7 @@ cdef class SparseMatrix:
         This class is also used to break circular dependencies.
     """
     cdef:
+        # attributes that have a corresponding Python property start with '__'
         bint __is_symmetric       # True if symmetric matrix
         bint __store_zeros        # True if 0.0 is to be stored explicitly
 
