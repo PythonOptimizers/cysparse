@@ -904,10 +904,10 @@ typedef npy_cdouble __pyx_t_5numpy_complex_t;
  */
 struct __pyx_obj_8cysparse_6sparse_5s_mat_SparseMatrix {
   PyObject_HEAD
-  int __is_symmetric;
+  int __pyx___is_symmetric;
   int store_zeros;
-  int is_mutable;
-  char *__type_name;
+  int __pyx___is_mutable;
+  char *__pyx___type_name;
   char *type;
   struct __pyx_t_8cysparse_5types_14cysparse_types_CPType cp_type;
 };
@@ -2639,7 +2639,7 @@ static PyArrayObject *__pyx_f_8cysparse_6sparse_16csr_mat_matrices_25csr_mat_INT
  *             pass
  *             multiply_sym_csr_mat_with_numpy_vector_kernel_INT32_t_FLOAT32_t(A_nrow, b_data, c_data, A.val, A.col, A.ind)
  */
-    __pyx_t_5 = (__pyx_v_A->__pyx_base.__pyx_base.__pyx_base.__is_symmetric != 0);
+    __pyx_t_5 = (__pyx_v_A->__pyx_base.__pyx_base.__pyx_base.__pyx___is_symmetric != 0);
     if (__pyx_t_5) {
 
       /* "cysparse/sparse/csr_mat_matrices/csr_mat_helpers/csr_mat_multiplication_INT32_t_FLOAT32_t.pxi":50
@@ -2675,7 +2675,7 @@ static PyArrayObject *__pyx_f_8cysparse_6sparse_16csr_mat_matrices_25csr_mat_INT
  *             multiply_sym_csr_mat_with_strided_numpy_vector_kernel_INT32_t_FLOAT32_t(A.nrow,
  *                                                                  b_data, b.strides[0] / sd,
  */
-    __pyx_t_5 = (__pyx_v_A->__pyx_base.__pyx_base.__pyx_base.__is_symmetric != 0);
+    __pyx_t_5 = (__pyx_v_A->__pyx_base.__pyx_base.__pyx_base.__pyx___is_symmetric != 0);
     if (__pyx_t_5) {
 
       /* "cysparse/sparse/csr_mat_matrices/csr_mat_helpers/csr_mat_multiplication_INT32_t_FLOAT32_t.pxi":56
@@ -3039,7 +3039,7 @@ static PyArrayObject *__pyx_f_8cysparse_6sparse_16csr_mat_matrices_25csr_mat_INT
  *             multiply_sym_csr_mat_with_numpy_vector_kernel_INT32_t_FLOAT32_t(A_nrow, b_data, c_data, A.val, A.col, A.ind)
  *         else:
  */
-    __pyx_t_5 = (__pyx_v_A->__pyx_base.__pyx_base.__pyx_base.__is_symmetric != 0);
+    __pyx_t_5 = (__pyx_v_A->__pyx_base.__pyx_base.__pyx_base.__pyx___is_symmetric != 0);
     if (__pyx_t_5) {
 
       /* "cysparse/sparse/csr_mat_matrices/csr_mat_helpers/csr_mat_multiplication_INT32_t_FLOAT32_t.pxi":111
@@ -3075,7 +3075,7 @@ static PyArrayObject *__pyx_f_8cysparse_6sparse_16csr_mat_matrices_25csr_mat_INT
  *             multiply_sym_csr_mat_with_strided_numpy_vector_kernel_INT32_t_FLOAT32_t(A.nrow,
  *                                                                  b_data, b.strides[0] / sd,
  */
-    __pyx_t_5 = (__pyx_v_A->__pyx_base.__pyx_base.__pyx_base.__is_symmetric != 0);
+    __pyx_t_5 = (__pyx_v_A->__pyx_base.__pyx_base.__pyx_base.__pyx___is_symmetric != 0);
     if (__pyx_t_5) {
 
       /* "cysparse/sparse/csr_mat_matrices/csr_mat_helpers/csr_mat_multiplication_INT32_t_FLOAT32_t.pxi":118
@@ -3259,7 +3259,7 @@ static int __pyx_pf_8cysparse_6sparse_16csr_mat_matrices_25csr_mat_INT32_t_FLOAT
  * 
  *     def __dealloc__(self):
  */
-  __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__type_name = __pyx_k_CSRSparseMatrix;
+  __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___type_name = __pyx_k_CSRSparseMatrix;
 
   /* "cysparse/sparse/csr_mat_matrices/csr_mat_INT32_t_FLOAT32_t.pyx":59
  *     # Init/Free
@@ -3965,7 +3965,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csr_mat_matrices_25csr_mat_INT32_t_
  *             if i < j:
  *                 real_i = j
  */
-  __pyx_t_1 = (__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__is_symmetric != 0);
+  __pyx_t_1 = (__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___is_symmetric != 0);
   if (__pyx_t_1) {
 
     /* "cysparse/sparse/csr_mat_matrices/csr_mat_INT32_t_FLOAT32_t.pyx":182
@@ -6264,13 +6264,13 @@ static struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLO
  *         pass
  *     else:
  */
-  __pyx_t_3 = ((!(__pyx_v_A->__pyx_base.__pyx_base.__pyx_base.__is_symmetric != 0)) != 0);
+  __pyx_t_3 = ((!(__pyx_v_A->__pyx_base.__pyx_base.__pyx_base.__pyx___is_symmetric != 0)) != 0);
   if (__pyx_t_3) {
   } else {
     __pyx_t_1 = __pyx_t_3;
     goto __pyx_L10_bool_binop_done;
   }
-  __pyx_t_3 = ((!(__pyx_v_B->__pyx_base.__pyx_base.__pyx_base.__is_symmetric != 0)) != 0);
+  __pyx_t_3 = ((!(__pyx_v_B->__pyx_base.__pyx_base.__pyx_base.__pyx___is_symmetric != 0)) != 0);
   __pyx_t_1 = __pyx_t_3;
   __pyx_L10_bool_binop_done:;
   if (__pyx_t_1) {

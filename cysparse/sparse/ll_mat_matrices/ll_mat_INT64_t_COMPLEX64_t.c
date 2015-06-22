@@ -914,8 +914,8 @@ struct __pyx_obj_8cysparse_6sparse_5s_mat_SparseMatrix {
   PyObject_HEAD
   int __pyx___is_symmetric;
   int store_zeros;
-  int is_mutable;
-  char *__type_name;
+  int __pyx___is_mutable;
+  char *__pyx___type_name;
   char *type;
   struct __pyx_t_8cysparse_5types_14cysparse_types_CPType cp_type;
 };
@@ -7079,7 +7079,7 @@ static int __pyx_pf_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT64_t_COMPLEX
  * 
  *         # This is particular to the LLSparseMatrix type
  */
-  __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__type_name = __pyx_k_LLSparseMatrix_INT64_t_COMPLEX64;
+  __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___type_name = __pyx_k_LLSparseMatrix_INT64_t_COMPLEX64;
 
   /* "cysparse/sparse/ll_mat_matrices/ll_mat_INT64_t_COMPLEX64_t.pyx":143
  *         # Do we allocate memory here or

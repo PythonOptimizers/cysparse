@@ -912,10 +912,10 @@ typedef npy_cdouble __pyx_t_5numpy_complex_t;
  */
 struct __pyx_obj_8cysparse_6sparse_5s_mat_SparseMatrix {
   PyObject_HEAD
-  int __is_symmetric;
+  int __pyx___is_symmetric;
   int store_zeros;
-  int is_mutable;
-  char *__type_name;
+  int __pyx___is_mutable;
+  char *__pyx___type_name;
   char *type;
   struct __pyx_t_8cysparse_5types_14cysparse_types_CPType cp_type;
 };
@@ -2167,7 +2167,7 @@ static int __pyx_f_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32_t_COMPLEX2
  *         raise IndexError("Write operation to upper triangle of symmetric matrix not allowed")
  * 
  */
-  __pyx_t_2 = (__pyx_v_A->__pyx_base.__pyx_base.__pyx_base.__is_symmetric != 0);
+  __pyx_t_2 = (__pyx_v_A->__pyx_base.__pyx_base.__pyx_base.__pyx___is_symmetric != 0);
   if (__pyx_t_2) {
   } else {
     __pyx_t_1 = __pyx_t_2;
@@ -4564,13 +4564,13 @@ static struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32_t_COM
  *         pass
  *     else:
  */
-  __pyx_t_8 = ((!(__pyx_v_A->__pyx_base.__pyx_base.__pyx_base.__is_symmetric != 0)) != 0);
+  __pyx_t_8 = ((!(__pyx_v_A->__pyx_base.__pyx_base.__pyx_base.__pyx___is_symmetric != 0)) != 0);
   if (__pyx_t_8) {
   } else {
     __pyx_t_2 = __pyx_t_8;
     goto __pyx_L7_bool_binop_done;
   }
-  __pyx_t_8 = ((!(__pyx_v_B->__pyx_base.__pyx_base.__pyx_base.__is_symmetric != 0)) != 0);
+  __pyx_t_8 = ((!(__pyx_v_B->__pyx_base.__pyx_base.__pyx_base.__pyx___is_symmetric != 0)) != 0);
   __pyx_t_2 = __pyx_t_8;
   __pyx_L7_bool_binop_done:;
   if (__pyx_t_2) {
@@ -4953,13 +4953,13 @@ static struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32_t_COM
  *         # we only deal with non symmetric matrices
  *         pass
  */
-  __pyx_t_8 = ((!(__pyx_v_A->__pyx_base.__pyx_base.__pyx_base.__is_symmetric != 0)) != 0);
+  __pyx_t_8 = ((!(__pyx_v_A->__pyx_base.__pyx_base.__pyx_base.__pyx___is_symmetric != 0)) != 0);
   if (__pyx_t_8) {
   } else {
     __pyx_t_2 = __pyx_t_8;
     goto __pyx_L7_bool_binop_done;
   }
-  __pyx_t_8 = ((!(__pyx_v_B->__pyx_base.__pyx_base.__pyx_base.__is_symmetric != 0)) != 0);
+  __pyx_t_8 = ((!(__pyx_v_B->__pyx_base.__pyx_base.__pyx_base.__pyx___is_symmetric != 0)) != 0);
   __pyx_t_2 = __pyx_t_8;
   __pyx_L7_bool_binop_done:;
   if (__pyx_t_2) {
@@ -5335,7 +5335,7 @@ static PyArrayObject *__pyx_f_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32
  *             multiply_sym_ll_mat_with_numpy_vector_kernel_INT32_t_COMPLEX256_t(A_nrow, b_data, c_data, A.val, A.col, A.link, A.root)
  *         else:
  */
-    __pyx_t_5 = (__pyx_v_A->__pyx_base.__pyx_base.__pyx_base.__is_symmetric != 0);
+    __pyx_t_5 = (__pyx_v_A->__pyx_base.__pyx_base.__pyx_base.__pyx___is_symmetric != 0);
     if (__pyx_t_5) {
 
       /* "cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_COMPLEX256_t.pxi":203
@@ -5371,7 +5371,7 @@ static PyArrayObject *__pyx_f_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32
  *             multiply_sym_ll_mat_with_strided_numpy_vector_kernel_INT32_t_COMPLEX256_t(A.nrow,
  *                                                                  b_data, b.strides[0] / sd,
  */
-    __pyx_t_5 = (__pyx_v_A->__pyx_base.__pyx_base.__pyx_base.__is_symmetric != 0);
+    __pyx_t_5 = (__pyx_v_A->__pyx_base.__pyx_base.__pyx_base.__pyx___is_symmetric != 0);
     if (__pyx_t_5) {
 
       /* "cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_COMPLEX256_t.pxi":209
@@ -5735,7 +5735,7 @@ static PyArrayObject *__pyx_f_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32
  *             multiply_sym_ll_mat_with_numpy_vector_kernel_INT32_t_COMPLEX256_t(A_nrow, b_data, c_data, A.val, A.col, A.link, A.root)
  *         else:
  */
-    __pyx_t_5 = (__pyx_v_A->__pyx_base.__pyx_base.__pyx_base.__is_symmetric != 0);
+    __pyx_t_5 = (__pyx_v_A->__pyx_base.__pyx_base.__pyx_base.__pyx___is_symmetric != 0);
     if (__pyx_t_5) {
 
       /* "cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_COMPLEX256_t.pxi":263
@@ -5771,7 +5771,7 @@ static PyArrayObject *__pyx_f_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32
  *             multiply_sym_ll_mat_with_strided_numpy_vector_kernel_INT32_t_COMPLEX256_t(A.nrow,
  *                                                                  b_data, b.strides[0] / sd,
  */
-    __pyx_t_5 = (__pyx_v_A->__pyx_base.__pyx_base.__pyx_base.__is_symmetric != 0);
+    __pyx_t_5 = (__pyx_v_A->__pyx_base.__pyx_base.__pyx_base.__pyx___is_symmetric != 0);
     if (__pyx_t_5) {
 
       /* "cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_COMPLEX256_t.pxi":270
@@ -6135,7 +6135,7 @@ static PyArrayObject *__pyx_f_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32
  *             multiply_conjugate_tranposed_sym_ll_mat_with_numpy_vector_kernel_INT32_t_COMPLEX256_t(A_nrow, A_ncol, b_data, c_data, A.val, A.col, A.link, A.root)
  *         else:
  */
-    __pyx_t_5 = (__pyx_v_A->__pyx_base.__pyx_base.__pyx_base.__is_symmetric != 0);
+    __pyx_t_5 = (__pyx_v_A->__pyx_base.__pyx_base.__pyx_base.__pyx___is_symmetric != 0);
     if (__pyx_t_5) {
 
       /* "cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_COMPLEX256_t.pxi":325
@@ -6171,7 +6171,7 @@ static PyArrayObject *__pyx_f_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32
  *             multiply_conjugate_tranposed_sym_ll_mat_with_strided_numpy_vector_kernel_INT32_t_COMPLEX256_t(A_nrow, A_ncol,
  *                                                                  b_data, b.strides[0] / sd,
  */
-    __pyx_t_5 = (__pyx_v_A->__pyx_base.__pyx_base.__pyx_base.__is_symmetric != 0);
+    __pyx_t_5 = (__pyx_v_A->__pyx_base.__pyx_base.__pyx_base.__pyx___is_symmetric != 0);
     if (__pyx_t_5) {
 
       /* "cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_COMPLEX256_t.pxi":332
@@ -6535,7 +6535,7 @@ static PyArrayObject *__pyx_f_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32
  *             multiply_conjugate_sym_ll_mat_with_numpy_vector_kernel_INT32_t_COMPLEX256_t(A_nrow, b_data, c_data, A.val, A.col, A.link, A.root)
  *         else:
  */
-    __pyx_t_5 = (__pyx_v_A->__pyx_base.__pyx_base.__pyx_base.__is_symmetric != 0);
+    __pyx_t_5 = (__pyx_v_A->__pyx_base.__pyx_base.__pyx_base.__pyx___is_symmetric != 0);
     if (__pyx_t_5) {
 
       /* "cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_COMPLEX256_t.pxi":387
@@ -6571,7 +6571,7 @@ static PyArrayObject *__pyx_f_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32
  *             multiply_conjugate_sym_ll_mat_with_strided_numpy_vector_kernel_INT32_t_COMPLEX256_t(A.nrow,
  *                                                                  b_data, b.strides[0] / sd,
  */
-    __pyx_t_5 = (__pyx_v_A->__pyx_base.__pyx_base.__pyx_base.__is_symmetric != 0);
+    __pyx_t_5 = (__pyx_v_A->__pyx_base.__pyx_base.__pyx_base.__pyx___is_symmetric != 0);
     if (__pyx_t_5) {
 
       /* "cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_COMPLEX256_t.pxi":393
@@ -7078,7 +7078,7 @@ static int __pyx_pf_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32_t_COMPLEX
  * 
  *         # This is particular to the LLSparseMatrix type
  */
-  __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__type_name = __pyx_k_LLSparseMatrix_INT32_t_COMPLEX25;
+  __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___type_name = __pyx_k_LLSparseMatrix_INT32_t_COMPLEX25;
 
   /* "cysparse/sparse/ll_mat_matrices/ll_mat_INT32_t_COMPLEX256_t.pyx":143
  *         # Do we allocate memory here or
@@ -8106,7 +8106,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32_t_C
   __Pyx_GOTREF(__pyx_t_2);
   if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_store_zeros, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[2]; __pyx_lineno = 293; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyBool_FromLong(__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__is_symmetric); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[2]; __pyx_lineno = 293; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyBool_FromLong(__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___is_symmetric); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[2]; __pyx_lineno = 293; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_is_symmetric, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[2]; __pyx_lineno = 293; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -8464,7 +8464,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32_t_C
  * 
  *             self.__is_symmetric = False  # to allow writing in upper triangle
  */
-  __pyx_t_1 = (__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__is_symmetric != 0);
+  __pyx_t_1 = (__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___is_symmetric != 0);
   if (__pyx_t_1) {
 
     /* "cysparse/sparse/ll_mat_matrices/ll_mat_INT32_t_COMPLEX256_t.pyx":347
@@ -8474,7 +8474,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32_t_C
  * 
  *             for i from 0 <= i < self.nrow:
  */
-    __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__is_symmetric = 0;
+    __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___is_symmetric = 0;
 
     /* "cysparse/sparse/ll_mat_matrices/ll_mat_INT32_t_COMPLEX256_t.pyx":349
  *             self.__is_symmetric = False  # to allow writing in upper triangle
@@ -8704,7 +8704,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32_t_C
  *             raise NotImplementedError('This method is not allowed for symmetric matrices')
  * 
  */
-  __pyx_t_1 = (__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__is_symmetric != 0);
+  __pyx_t_1 = (__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___is_symmetric != 0);
   if (__pyx_t_1) {
 
     /* "cysparse/sparse/ll_mat_matrices/ll_mat_INT32_t_COMPLEX256_t.pyx":402
@@ -9432,7 +9432,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32_t_C
  *             return self.copy()
  *         else:
  */
-  __pyx_t_1 = (__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__is_symmetric != 0);
+  __pyx_t_1 = (__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___is_symmetric != 0);
   if (__pyx_t_1) {
 
     /* "cysparse/sparse/ll_mat_matrices/ll_mat_INT32_t_COMPLEX256_t.pyx":505
@@ -9495,7 +9495,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32_t_C
     __Pyx_GOTREF(__pyx_t_3);
     if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_store_zeros, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[2]; __pyx_lineno = 507; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_PyBool_FromLong(__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__is_symmetric); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[2]; __pyx_lineno = 507; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyBool_FromLong(__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___is_symmetric); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[2]; __pyx_lineno = 507; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_is_symmetric, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[2]; __pyx_lineno = 507; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -9647,7 +9647,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32_t_C
  *             return self.create_conjugate()
  * 
  */
-  __pyx_t_1 = (__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__is_symmetric != 0);
+  __pyx_t_1 = (__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___is_symmetric != 0);
   if (__pyx_t_1) {
 
     /* "cysparse/sparse/ll_mat_matrices/ll_mat_INT32_t_COMPLEX256_t.pyx":530
@@ -9710,7 +9710,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32_t_C
     __Pyx_GOTREF(__pyx_t_3);
     if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_store_zeros, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[2]; __pyx_lineno = 533; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_PyBool_FromLong(__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__is_symmetric); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[2]; __pyx_lineno = 533; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyBool_FromLong(__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___is_symmetric); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[2]; __pyx_lineno = 533; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_is_symmetric, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[2]; __pyx_lineno = 533; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -10370,7 +10370,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32_t_C
  * 
  *         return csr_mat
  */
-  __pyx_t_3 = __pyx_f_8cysparse_6sparse_16csr_mat_matrices_28csr_mat_INT32_t_COMPLEX256_t_MakeCSRSparseMatrix_INT32_t_COMPLEX256_t(__pyx_v_self->__pyx_base.__pyx_base.nrow, __pyx_v_self->__pyx_base.__pyx_base.ncol, __pyx_v_self->__pyx_base.__pyx_base.nnz, __pyx_v_ind, __pyx_v_col, __pyx_v_val, __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__is_symmetric); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[2]; __pyx_lineno = 640; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __pyx_f_8cysparse_6sparse_16csr_mat_matrices_28csr_mat_INT32_t_COMPLEX256_t_MakeCSRSparseMatrix_INT32_t_COMPLEX256_t(__pyx_v_self->__pyx_base.__pyx_base.nrow, __pyx_v_self->__pyx_base.__pyx_base.ncol, __pyx_v_self->__pyx_base.__pyx_base.nnz, __pyx_v_ind, __pyx_v_col, __pyx_v_val, __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___is_symmetric); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[2]; __pyx_lineno = 640; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_v_csr_mat = __pyx_t_3;
   __pyx_t_3 = 0;
@@ -10792,7 +10792,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32_t_C
  * 
  *         return csc_mat
  */
-  __pyx_t_5 = __pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX256_t_MakeCSCSparseMatrix_INT32_t_COMPLEX256_t(__pyx_v_self->__pyx_base.__pyx_base.nrow, __pyx_v_self->__pyx_base.__pyx_base.ncol, __pyx_v_self->__pyx_base.__pyx_base.nnz, __pyx_v_ind, __pyx_v_row, __pyx_v_val, __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__is_symmetric); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[2]; __pyx_lineno = 713; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX256_t_MakeCSCSparseMatrix_INT32_t_COMPLEX256_t(__pyx_v_self->__pyx_base.__pyx_base.nrow, __pyx_v_self->__pyx_base.__pyx_base.ncol, __pyx_v_self->__pyx_base.__pyx_base.nnz, __pyx_v_ind, __pyx_v_row, __pyx_v_val, __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___is_symmetric); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[2]; __pyx_lineno = 713; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_v_csc_mat = __pyx_t_5;
   __pyx_t_5 = 0;
@@ -11039,7 +11039,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32_t_CO
  *             if PySparseMatrix_Check(obj):
  *                 for i from 0 <= i < nrow:
  */
-  __pyx_t_2 = (__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__is_symmetric != 0);
+  __pyx_t_2 = (__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___is_symmetric != 0);
   if (__pyx_t_2) {
 
     /* "cysparse/sparse/ll_mat_matrices/ll_mat_INT32_t_COMPLEX256_t.pyx":780
@@ -11572,7 +11572,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32_t_CO
  *             raise IndexError('Write operation to upper triangle of symmetric matrix not allowed')
  * 
  */
-  __pyx_t_2 = (__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__is_symmetric != 0);
+  __pyx_t_2 = (__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___is_symmetric != 0);
   if (__pyx_t_2) {
   } else {
     __pyx_t_1 = __pyx_t_2;
@@ -12081,7 +12081,7 @@ static __pyx_t_long_double_complex __pyx_f_8cysparse_6sparse_15ll_mat_matrices_2
  *             t = i; i = j; j = t
  * 
  */
-  __pyx_t_2 = (__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__is_symmetric != 0);
+  __pyx_t_2 = (__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___is_symmetric != 0);
   if (__pyx_t_2) {
   } else {
     __pyx_t_1 = __pyx_t_2;
@@ -14772,7 +14772,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32_t_CO
  * 
  *             # create list
  */
-  __pyx_t_5 = ((!(__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__is_symmetric != 0)) != 0);
+  __pyx_t_5 = ((!(__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___is_symmetric != 0)) != 0);
   if (__pyx_t_5) {
 
     /* "cysparse/sparse/ll_mat_matrices/ll_mat_INT32_t_COMPLEX256_t.pyx":1378
@@ -15041,7 +15041,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32_t_CO
  *             list_p = PyList_New(self.nnz)
  *             if list_p == NULL:
  */
-  __pyx_t_5 = ((!(__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__is_symmetric != 0)) != 0);
+  __pyx_t_5 = ((!(__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___is_symmetric != 0)) != 0);
   if (__pyx_t_5) {
 
     /* "cysparse/sparse/ll_mat_matrices/ll_mat_INT32_t_COMPLEX256_t.pyx":1405
@@ -16129,7 +16129,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32_t_C
  *             # both matrices are symmetric or are not symmetric
  *             for i from 0 <= i < B.nrow:
  */
-  __pyx_t_2 = ((__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__is_symmetric == __pyx_v_B->__pyx_base.__pyx_base.__pyx_base.__is_symmetric) != 0);
+  __pyx_t_2 = ((__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___is_symmetric == __pyx_v_B->__pyx_base.__pyx_base.__pyx_base.__pyx___is_symmetric) != 0);
   if (__pyx_t_2) {
 
     /* "cysparse/sparse/ll_mat_matrices/ll_mat_INT32_t_COMPLEX256_t.pyx":1525
@@ -16191,7 +16191,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32_t_C
  *             # self is not symmetric
  *             for i from 0 <= i < B.nrow:
  */
-  __pyx_t_2 = (__pyx_v_B->__pyx_base.__pyx_base.__pyx_base.__is_symmetric != 0);
+  __pyx_t_2 = (__pyx_v_B->__pyx_base.__pyx_base.__pyx_base.__pyx___is_symmetric != 0);
   if (__pyx_t_2) {
 
     /* "cysparse/sparse/ll_mat_matrices/ll_mat_INT32_t_COMPLEX256_t.pyx":1534
@@ -18686,7 +18686,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32_t_CO
  * 
  *             # compute sum of columns
  */
-  __pyx_t_1 = (__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__is_symmetric != 0);
+  __pyx_t_1 = (__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___is_symmetric != 0);
   if (__pyx_t_1) {
 
     /* "cysparse/sparse/ll_mat_matrices/ll_mat_INT32_t_COMPLEX256_t.pyx":1807
@@ -18944,7 +18944,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32_t_CO
  *             for i from 0<= i < self.nrow:
  *                 k = self.root[i]
  */
-  __pyx_t_1 = ((!(__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__is_symmetric != 0)) != 0);
+  __pyx_t_1 = ((!(__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___is_symmetric != 0)) != 0);
   if (__pyx_t_1) {
 
     /* "cysparse/sparse/ll_mat_matrices/ll_mat_INT32_t_COMPLEX256_t.pyx":1858
@@ -19310,7 +19310,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32_t_CO
  *                     norm_sum += abs_val_square
  * 
  */
-      __pyx_t_3 = (__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__is_symmetric != 0);
+      __pyx_t_3 = (__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___is_symmetric != 0);
       if (__pyx_t_3) {
       } else {
         __pyx_t_2 = __pyx_t_3;
@@ -19694,7 +19694,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32_t_C
  *                         mat[(self.col[k]*self.ncol)+i] = self.val[k]
  *                     k = self.link[k]
  */
-        __pyx_t_4 = (__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__is_symmetric != 0);
+        __pyx_t_4 = (__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___is_symmetric != 0);
         if (__pyx_t_4) {
 
           /* "cysparse/sparse/ll_mat_matrices/ll_mat_INT32_t_COMPLEX256_t.pyx":1981

@@ -2438,7 +2438,7 @@ static PyMethodDef __pyx_methods[] = {
 };
 
 static int __pyx_import_star_set(PyObject *o, PyObject* py_name, char *name) {
-  static const char* internal___type_names[] = {
+  static const char* internal_type_names[] = {
     "COMPLEX128_t",
     "COMPLEX256_t",
     "COMPLEX64_t",
@@ -2455,13 +2455,13 @@ static int __pyx_import_star_set(PyObject *o, PyObject* py_name, char *name) {
     "UINT64_t",
     0
   };
-  const char** __type_name = internal___type_names;
-  while (*__type_name) {
-    if (__Pyx_StrEq(name, *__type_name)) {
+  const char** type_name = internal_type_names;
+  while (*type_name) {
+    if (__Pyx_StrEq(name, *type_name)) {
       PyErr_Format(PyExc_TypeError, "Cannot overwrite C type %s", name);
       goto bad;
     }
-    __type_name++;
+    type_name++;
   }
   if (0);
   else {

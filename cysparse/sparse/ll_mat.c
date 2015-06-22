@@ -1214,8 +1214,8 @@ struct __pyx_obj_8cysparse_6sparse_5s_mat_SparseMatrix {
   PyObject_HEAD
   int __pyx___is_symmetric;
   int store_zeros;
-  int is_mutable;
-  char *__type_name;
+  int __pyx___is_mutable;
+  char *__pyx___type_name;
   char *type;
   struct __pyx_t_8cysparse_5types_14cysparse_types_CPType cp_type;
 };

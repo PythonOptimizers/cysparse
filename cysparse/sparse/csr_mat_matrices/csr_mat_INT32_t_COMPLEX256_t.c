@@ -910,8 +910,8 @@ struct __pyx_obj_8cysparse_6sparse_5s_mat_SparseMatrix {
   PyObject_HEAD
   int __pyx___is_symmetric;
   int store_zeros;
-  int is_mutable;
-  char *__type_name;
+  int __pyx___is_mutable;
+  char *__pyx___type_name;
   char *type;
   struct __pyx_t_8cysparse_5types_14cysparse_types_CPType cp_type;
 };
@@ -3317,7 +3317,7 @@ static int __pyx_pf_8cysparse_6sparse_16csr_mat_matrices_28csr_mat_INT32_t_COMPL
  * 
  *     def __dealloc__(self):
  */
-  __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__type_name = __pyx_k_CSRSparseMatrix;
+  __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___type_name = __pyx_k_CSRSparseMatrix;
 
   /* "cysparse/sparse/csr_mat_matrices/csr_mat_INT32_t_COMPLEX256_t.pyx":59
  *     # Init/Free

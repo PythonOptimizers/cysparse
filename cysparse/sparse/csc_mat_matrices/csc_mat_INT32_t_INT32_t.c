@@ -902,10 +902,10 @@ typedef npy_cdouble __pyx_t_5numpy_complex_t;
  */
 struct __pyx_obj_8cysparse_6sparse_5s_mat_SparseMatrix {
   PyObject_HEAD
-  int __is_symmetric;
+  int __pyx___is_symmetric;
   int store_zeros;
-  int is_mutable;
-  char *__type_name;
+  int __pyx___is_mutable;
+  char *__pyx___type_name;
   char *type;
   struct __pyx_t_8cysparse_5types_14cysparse_types_CPType cp_type;
 };
@@ -2589,7 +2589,7 @@ static PyArrayObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_23csc_mat_INT
  *             pass
  *             multiply_sym_csc_mat_with_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, A_ncol, b_data, c_data, A.val, A.row, A.ind)
  */
-    __pyx_t_5 = (__pyx_v_A->__pyx_base.__pyx_base.__pyx_base.__is_symmetric != 0);
+    __pyx_t_5 = (__pyx_v_A->__pyx_base.__pyx_base.__pyx_base.__pyx___is_symmetric != 0);
     if (__pyx_t_5) {
 
       /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT32_t_INT32_t.pxi":52
@@ -2625,7 +2625,7 @@ static PyArrayObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_23csc_mat_INT
  *             multiply_sym_csc_mat_with_strided_numpy_vector_kernel_INT32_t_INT32_t(A.nrow, A.ncol,
  *                                                                  b_data, b.strides[0] / sd,
  */
-    __pyx_t_5 = (__pyx_v_A->__pyx_base.__pyx_base.__pyx_base.__is_symmetric != 0);
+    __pyx_t_5 = (__pyx_v_A->__pyx_base.__pyx_base.__pyx_base.__pyx___is_symmetric != 0);
     if (__pyx_t_5) {
 
       /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT32_t_INT32_t.pxi":58
@@ -2989,7 +2989,7 @@ static PyArrayObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_23csc_mat_INT
  *             multiply_sym_csc_mat_with_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, A_ncol, b_data, c_data, A.val, A.row, A.ind)
  *         else:
  */
-    __pyx_t_5 = (__pyx_v_A->__pyx_base.__pyx_base.__pyx_base.__is_symmetric != 0);
+    __pyx_t_5 = (__pyx_v_A->__pyx_base.__pyx_base.__pyx_base.__pyx___is_symmetric != 0);
     if (__pyx_t_5) {
 
       /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT32_t_INT32_t.pxi":113
@@ -3025,7 +3025,7 @@ static PyArrayObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_23csc_mat_INT
  *             multiply_sym_csc_mat_with_strided_numpy_vector_kernel_INT32_t_INT32_t(A.nrow, A_ncol,
  *                                                                  b_data, b.strides[0] / sd,
  */
-    __pyx_t_5 = (__pyx_v_A->__pyx_base.__pyx_base.__pyx_base.__is_symmetric != 0);
+    __pyx_t_5 = (__pyx_v_A->__pyx_base.__pyx_base.__pyx_base.__pyx___is_symmetric != 0);
     if (__pyx_t_5) {
 
       /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT32_t_INT32_t.pxi":120
@@ -3209,7 +3209,7 @@ static int __pyx_pf_8cysparse_6sparse_16csc_mat_matrices_23csc_mat_INT32_t_INT32
  * 
  *     def __dealloc__(self):
  */
-  __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__type_name = __pyx_k_CSCSparseMatrix;
+  __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___type_name = __pyx_k_CSCSparseMatrix;
 
   /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_INT32_t.pyx":50
  * 
@@ -3384,7 +3384,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_23csc_mat_INT32_t_
  *             # TODO: column indices are NOT necessarily sorted... what do we do about it?
  *             if i < j:
  */
-  __pyx_t_1 = (__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__is_symmetric != 0);
+  __pyx_t_1 = (__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___is_symmetric != 0);
   if (__pyx_t_1) {
 
     /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_INT32_t.pyx":87
@@ -4759,7 +4759,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_23csc_mat_INT32_t
  *                         mat[(j*self.ncol)+ self.row[k]] = self.val[k]
  * 
  */
-        __pyx_t_4 = (__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__is_symmetric != 0);
+        __pyx_t_4 = (__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___is_symmetric != 0);
         if (__pyx_t_4) {
 
           /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_INT32_t.pyx":250
