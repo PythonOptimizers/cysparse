@@ -107,11 +107,11 @@ cdef LLSparseMatrix_@index@_@type@ multiply_transposed_ll_mat_by_ll_mat_@index@_
         ``RuntimeError`` if some error occurred during the computation.
     """
     # test dimensions
-    cdef @index@ A_nrow = A.nrow
-    cdef @index@ A_ncol = A.ncol
+    cdef @index@ A_nrow = A.__nrow
+    cdef @index@ A_ncol = A.__ncol
 
-    cdef @index@ B_nrow = B.nrow
-    cdef @index@ B_ncol = B.ncol
+    cdef @index@ B_nrow = B.__nrow
+    cdef @index@ B_ncol = B.__ncol
 
     if A_nrow != B_nrow:
         raise IndexError("Matrix dimensions must agree ([%d, %d]^t * [%d, %d])" % (A_nrow, A_ncol, B_nrow, B_ncol))
@@ -121,7 +121,7 @@ cdef LLSparseMatrix_@index@_@type@ multiply_transposed_ll_mat_by_ll_mat_@index@_
 
     cdef bint store_zeros = A.store_zeros and B.store_zeros
     # TODO: is this a good idea?
-    cdef @index@ size_hint = min(A.nnz, B.nnz)
+    cdef @index@ size_hint = min(A.__nnz, B.__nnz)
 
     C = LLSparseMatrix_@index@_@type@(control_object=unexposed_value, nrow=C_nrow, ncol=C_ncol, size_hint=size_hint, store_zeros=store_zeros)
 
@@ -179,8 +179,8 @@ cdef cnp.ndarray[cnp.@type|cysparse_type_to_numpy_c_type@, ndim=1, mode='c'] mul
 
     """
     # TODO: test, test, test!!!
-    cdef @index@ A_nrow = A.nrow
-    cdef @index@ A_ncol = A.ncol
+    cdef @index@ A_nrow = A.__nrow
+    cdef @index@ A_ncol = A.__ncol
 
     cdef size_t sd = sizeof(@type@)
 
@@ -240,8 +240,8 @@ cdef cnp.ndarray[cnp.@type|cysparse_type_to_numpy_c_type@, ndim=1, mode='c'] mul
 
     """
     # TODO: test, test, test!!!
-    cdef @index@ A_nrow = A.nrow
-    cdef @index@ A_ncol = A.ncol
+    cdef @index@ A_nrow = A.__nrow
+    cdef @index@ A_ncol = A.__ncol
 
     cdef size_t sd = sizeof(@type@)
 
@@ -302,8 +302,8 @@ cdef cnp.ndarray[cnp.@type|cysparse_type_to_numpy_c_type@, ndim=1, mode='c'] mul
 
     """
     # TODO: test, test, test!!!
-    cdef @index@ A_nrow = A.nrow
-    cdef @index@ A_ncol = A.ncol
+    cdef @index@ A_nrow = A.__nrow
+    cdef @index@ A_ncol = A.__ncol
 
     cdef size_t sd = sizeof(@type@)
 
@@ -363,8 +363,8 @@ cdef cnp.ndarray[cnp.@type|cysparse_type_to_numpy_c_type@, ndim=1, mode='c'] mul
 
     """
     # TODO: test, test, test!!!
-    cdef @index@ A_nrow = A.nrow
-    cdef @index@ A_ncol = A.ncol
+    cdef @index@ A_nrow = A.__nrow
+    cdef @index@ A_ncol = A.__ncol
 
     cdef size_t sd = sizeof(@type@)
 

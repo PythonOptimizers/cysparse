@@ -164,7 +164,7 @@ cdef class LLSparseMatrix_INT32_t_FLOAT128_t(MutableSparseMatrix_INT32_t_FLOAT12
                 raise MemoryError()
             self.link = link
 
-            root = <INT32_t *> PyMem_Malloc(self.nrow * sizeof(INT32_t))
+            root = <INT32_t *> PyMem_Malloc(self.__nrow * sizeof(INT32_t))
             if not root:
                 PyMem_Free(self.val)
                 PyMem_Free(self.col)
@@ -175,7 +175,7 @@ cdef class LLSparseMatrix_INT32_t_FLOAT128_t(MutableSparseMatrix_INT32_t_FLOAT12
             self.nalloc = self.size_hint
             self.free = -1
 
-            for i from 0 <= i < self.nrow:
+            for i from 0 <= i < self.__nrow:
                 root[i] = -1
 
     def __dealloc__(self):
@@ -235,7 +235,7 @@ cdef class LLSparseMatrix_INT32_t_FLOAT128_t(MutableSparseMatrix_INT32_t_FLOAT12
         cdef:
             INT32_t i, k, k_next, k_last, k_new, nalloc_new;
 
-        nalloc_new = self.nnz  # new size for val, col and link arrays
+        nalloc_new = self.__nnz  # new size for val, col and link arrays
 
         # remove entries with k >= nalloc_new from free list
         k_last = -1
@@ -252,7 +252,7 @@ cdef class LLSparseMatrix_INT32_t_FLOAT128_t(MutableSparseMatrix_INT32_t_FLOAT12
                 k = k_next
 
         # reposition matrix entries with k >= nalloc_new
-        for i from 0 <= i < self.nrow:
+        for i from 0 <= i < self.__nrow:
             k_last = -1
             k = self.root[i]
             while k != -1:
@@ -290,7 +290,7 @@ cdef class LLSparseMatrix_INT32_t_FLOAT128_t(MutableSparseMatrix_INT32_t_FLOAT12
         cdef LLSparseMatrix_INT32_t_FLOAT128_t self_copy
 
         # we copy manually the C-arrays
-        self_copy = LLSparseMatrix_INT32_t_FLOAT128_t(control_object=unexposed_value, no_memory=True, nrow=self.nrow, ncol=self.ncol, size_hint=self.size_hint, store_zeros=self.__store_zeros, __is_symmetric=self.__is_symmetric)
+        self_copy = LLSparseMatrix_INT32_t_FLOAT128_t(control_object=unexposed_value, no_memory=True, nrow=self.__nrow, ncol=self.__ncol, size_hint=self.size_hint, store_zeros=self.__store_zeros, __is_symmetric=self.__is_symmetric)
 
         # copy C-arrays
         cdef:
@@ -320,18 +320,18 @@ cdef class LLSparseMatrix_INT32_t_FLOAT128_t(MutableSparseMatrix_INT32_t_FLOAT12
         memcpy(link, self.link, self.nalloc * sizeof(INT32_t))
         self_copy.link = link
 
-        root = <INT32_t *> PyMem_Malloc(self.nrow * sizeof(INT32_t))
+        root = <INT32_t *> PyMem_Malloc(self.__nrow * sizeof(INT32_t))
         if not root:
             PyMem_Free(self_copy.val)
             PyMem_Free(self_copy.col)
             PyMem_Free(self_copy.link)
             raise MemoryError()
-        memcpy(root, self.root, self.nrow * sizeof(INT32_t))
+        memcpy(root, self.root, self.__nrow * sizeof(INT32_t))
         self_copy.root = root
 
         self_copy.nalloc = self.nalloc
         self_copy.free = self.free
-        self_copy.__nnz = self.nnz
+        self_copy.__nnz = self.__nnz
 
         return self_copy
 
@@ -346,7 +346,7 @@ cdef class LLSparseMatrix_INT32_t_FLOAT128_t(MutableSparseMatrix_INT32_t_FLOAT12
 
             self.__is_symmetric = False  # to allow writing in upper triangle
 
-            for i from 0 <= i < self.nrow:
+            for i from 0 <= i < self.__nrow:
                 k = self.root[i]
                 while k != -1:
                     j = self.col[k]
@@ -401,7 +401,7 @@ cdef class LLSparseMatrix_INT32_t_FLOAT128_t(MutableSparseMatrix_INT32_t_FLOAT12
         if self.__is_symmetric:
             raise NotImplementedError('This method is not allowed for symmetric matrices')
 
-        if maskArray.size < self.nrow:
+        if maskArray.size < self.__nrow:
             raise IndexError('Mask array must be at least as long as the number of rows in this matrix')
 
         # Delete the rows to be cancelled by rearranging the row
@@ -409,13 +409,13 @@ cdef class LLSparseMatrix_INT32_t_FLOAT128_t(MutableSparseMatrix_INT32_t_FLOAT12
         cdef:
             INT32_t row, act
             INT32_t newm = 0
-            INT32_t newnnz = self.nnz
+            INT32_t newnnz = self.__nnz
 
         cdef:
             signed char * maskArray_data = <signed char *> cnp.PyArray_DATA(maskArray)
             INT32_t maskArray_stride = <INT32_t> maskArray.strides[0]
 
-        for row from 0<= row < self.nrow:
+        for row from 0<= row < self.__nrow:
 
             if maskArray_data[row * maskArray_stride]: # This row has to be kept
                 self.root[newm] = self.root[row]
@@ -480,7 +480,7 @@ cdef class LLSparseMatrix_INT32_t_FLOAT128_t(MutableSparseMatrix_INT32_t_FLOAT12
         cdef INT32_t total_memory = 0
 
         # root
-        total_memory += self.nrow * sizeof(INT32_t)
+        total_memory += self.__nrow * sizeof(INT32_t)
         # col
         total_memory += self.nalloc * sizeof(INT32_t)
         # link
@@ -504,9 +504,9 @@ cdef class LLSparseMatrix_INT32_t_FLOAT128_t(MutableSparseMatrix_INT32_t_FLOAT12
         if self.__is_symmetric:
             return self.copy()
         else:
-            transpose = LLSparseMatrix_INT32_t_FLOAT128_t(control_object=unexposed_value, nrow=self.ncol, ncol=self.nrow, size_hint=self.nnz, store_zeros=self.__store_zeros, __is_symmetric=self.__is_symmetric)
+            transpose = LLSparseMatrix_INT32_t_FLOAT128_t(control_object=unexposed_value, nrow=self.__ncol, ncol=self.__nrow, size_hint=self.nnz, store_zeros=self.__store_zeros, __is_symmetric=self.__is_symmetric)
 
-            for i from 0 <= i < self.nrow:
+            for i from 0 <= i < self.__nrow:
                 k = self.root[i]
                 while k != -1:
                     j = self.col[k]
@@ -528,7 +528,7 @@ cdef class LLSparseMatrix_INT32_t_FLOAT128_t(MutableSparseMatrix_INT32_t_FLOAT12
         """
         cdef INT32_t k, i, last_index
 
-        for i from 0 <= i < self.nrow:
+        for i from 0 <= i < self.__nrow:
             # column index of first element in row i
             k = self.root[i]
             if k != -1:
@@ -557,7 +557,7 @@ cdef class LLSparseMatrix_INT32_t_FLOAT128_t(MutableSparseMatrix_INT32_t_FLOAT12
             Column indices are **not** necessarily sorted!
 
         """
-        cdef INT32_t * ind = <INT32_t *> PyMem_Malloc((self.nrow + 1) * sizeof(INT32_t))
+        cdef INT32_t * ind = <INT32_t *> PyMem_Malloc((self.__nrow + 1) * sizeof(INT32_t))
         if not ind:
             raise MemoryError()
 
@@ -579,7 +579,7 @@ cdef class LLSparseMatrix_INT32_t_FLOAT128_t(MutableSparseMatrix_INT32_t_FLOAT12
         cdef INT32_t k
 
         # indices are NOT sorted for each row
-        for i from 0 <= i < self.nrow:
+        for i from 0 <= i < self.__nrow:
             k = self.root[i]
 
             while k != -1:
@@ -591,7 +591,7 @@ cdef class LLSparseMatrix_INT32_t_FLOAT128_t(MutableSparseMatrix_INT32_t_FLOAT12
 
             ind[i+1] = ind_col_index
 
-        csr_mat = MakeCSRSparseMatrix_INT32_t_FLOAT128_t(nrow=self.nrow, ncol=self.ncol, nnz=self.nnz, ind=ind, col=col, val=val, __is_symmetric=self.__is_symmetric)
+        csr_mat = MakeCSRSparseMatrix_INT32_t_FLOAT128_t(nrow=self.__nrow, ncol=self.__ncol, nnz=self.nnz, ind=ind, col=col, val=val, __is_symmetric=self.__is_symmetric)
 
         return csr_mat
 
@@ -607,7 +607,7 @@ cdef class LLSparseMatrix_INT32_t_FLOAT128_t(MutableSparseMatrix_INT32_t_FLOAT12
         Note:
             This code also works to create *symmetric* :class:`CSCSparseMatrix` matrices.
         """
-        cdef INT32_t * ind = <INT32_t *> PyMem_Malloc((self.ncol + 1) * sizeof(INT32_t))
+        cdef INT32_t * ind = <INT32_t *> PyMem_Malloc((self.__ncol + 1) * sizeof(INT32_t))
         if not ind:
             raise MemoryError()
 
@@ -629,29 +629,29 @@ cdef class LLSparseMatrix_INT32_t_FLOAT128_t(MutableSparseMatrix_INT32_t_FLOAT12
 
         # start by collecting the number of rows for each column
         # this is to create the ind vector but not only...
-        cdef INT32_t * col_indexes = <INT32_t *> calloc(self.ncol + 1, sizeof(INT32_t))
+        cdef INT32_t * col_indexes = <INT32_t *> calloc(self.__ncol + 1, sizeof(INT32_t))
         if not ind:
             raise MemoryError()
 
         col_indexes[0] = 0
 
-        for i from 0 <= i < self.nrow:
+        for i from 0 <= i < self.__nrow:
             k = self.root[i]
             while k != -1:
                 col_indexes[self.col[k] + 1] += 1
                 k = self.link[k]
 
         # ind
-        for i from 1 <= i <= self.ncol:
+        for i from 1 <= i <= self.__ncol:
             col_indexes[i] = col_indexes[i - 1] + col_indexes[i]
 
-        memcpy(ind, col_indexes, (self.ncol + 1) * sizeof(INT32_t) )
-        assert ind[self.ncol] == self.nnz
+        memcpy(ind, col_indexes, (self.__ncol + 1) * sizeof(INT32_t) )
+        assert ind[self.__ncol] == self.nnz
 
         # row and val
         # we have ind: we know exactly where to put the row indices for each column
         # we use col_indexes to get the next index in row and val
-        for i from 0 <= i < self.nrow:
+        for i from 0 <= i < self.__nrow:
             k = self.root[i]
             while k != -1:
                 col_index = col_indexes[self.col[k]]
@@ -664,7 +664,7 @@ cdef class LLSparseMatrix_INT32_t_FLOAT128_t(MutableSparseMatrix_INT32_t_FLOAT12
 
         free(col_indexes)
 
-        csc_mat = MakeCSCSparseMatrix_INT32_t_FLOAT128_t(nrow=self.nrow, ncol=self.ncol, nnz=self.nnz, ind=ind, row=row, val=val, __is_symmetric=self.__is_symmetric)
+        csc_mat = MakeCSCSparseMatrix_INT32_t_FLOAT128_t(nrow=self.__nrow, ncol=self.__ncol, nnz=self.nnz, ind=ind, row=row, val=val, __is_symmetric=self.__is_symmetric)
 
         return csc_mat
 
@@ -695,8 +695,8 @@ cdef class LLSparseMatrix_INT32_t_FLOAT128_t(MutableSparseMatrix_INT32_t_FLOAT12
             INT32_t * col_indices
             INT32_t i, j
 
-        row_indices = create_c_array_indices_from_python_object_INT32_t(self.nrow, obj1, &nrow)
-        col_indices = create_c_array_indices_from_python_object_INT32_t(self.ncol, obj2, &ncol)
+        row_indices = create_c_array_indices_from_python_object_INT32_t(self.__nrow, obj1, &nrow)
+        col_indices = create_c_array_indices_from_python_object_INT32_t(self.__ncol, obj2, &ncol)
 
     ####################################################################################################################
     #                                            ### ASSIGN ###
@@ -834,10 +834,10 @@ cdef class LLSparseMatrix_INT32_t_FLOAT128_t(MutableSparseMatrix_INT32_t_FLOAT12
 
                 else:
                     # append new element to the end
-                    new_elem = self.nnz
+                    new_elem = self.__nnz
 
                 # test if there is space for a new element
-                if self.nnz == self.nalloc:
+                if self.__nnz == self.nalloc:
                     # we have to reallocate some space
                     self._realloc_expand()
 
@@ -880,7 +880,7 @@ cdef class LLSparseMatrix_INT32_t_FLOAT128_t(MutableSparseMatrix_INT32_t_FLOAT12
 
         """
 
-        if i < 0 or i >= self.nrow or j < 0 or j >= self.ncol:
+        if i < 0 or i >= self.__nrow or j < 0 or j >= self.__ncol:
             raise IndexError('Indices out of range')
             return -1
 
@@ -941,7 +941,7 @@ cdef class LLSparseMatrix_INT32_t_FLOAT128_t(MutableSparseMatrix_INT32_t_FLOAT12
 
 
         """
-        if not 0 <= i < self.nrow or not 0 <= j < self.ncol:
+        if not 0 <= i < self.__nrow or not 0 <= j < self.__ncol:
             raise IndexError("Index out of bounds")
 
         return self.at(i, j)
@@ -1313,11 +1313,11 @@ cdef class LLSparseMatrix_INT32_t_FLOAT128_t(MutableSparseMatrix_INT32_t_FLOAT12
         if not self.__is_symmetric:
 
             # create list
-            list_p = PyList_New(self.nnz)
+            list_p = PyList_New(self.__nnz)
             if list_p == NULL:
                 raise MemoryError()
 
-            for i from 0 <= i < self.nrow:
+            for i from 0 <= i < self.__nrow:
                 k = self.root[i]
                 while k != -1:
                     j = self.col[k]
@@ -1340,13 +1340,13 @@ cdef class LLSparseMatrix_INT32_t_FLOAT128_t(MutableSparseMatrix_INT32_t_FLOAT12
             Py_ssize_t pos = 0        # position in list
 
         if not self.__is_symmetric:
-            list_p = PyList_New(self.nnz)
+            list_p = PyList_New(self.__nnz)
             if list_p == NULL:
                 raise MemoryError()
 
             # EXPLICIT TYPE TESTS
 
-            for i from 0<= i < self.nrow:
+            for i from 0<= i < self.__nrow:
                 k = self.root[i]
                 while k != -1:
 
@@ -1376,13 +1376,13 @@ cdef class LLSparseMatrix_INT32_t_FLOAT128_t(MutableSparseMatrix_INT32_t_FLOAT12
             Py_ssize_t pos = 0         # position in list
             FLOAT128_t val
 
-        list_p = PyList_New(self.nnz)
+        list_p = PyList_New(self.__nnz)
         if list_p == NULL:
             raise MemoryError()
 
         # EXPLICIT TYPE TESTS
 
-        for i from 0 <= i < self.nrow:
+        for i from 0 <= i < self.__nrow:
             k = self.root[i]
             while k != -1:
                 j = self.col[k]
@@ -1403,7 +1403,7 @@ cdef class LLSparseMatrix_INT32_t_FLOAT128_t(MutableSparseMatrix_INT32_t_FLOAT12
         Return 3 NumPy arrays with the non-zero matrix entries: i-rows, j-cols, vals.
         """
         cdef cnp.npy_intp dmat[1]
-        dmat[0] = <cnp.npy_intp> self.nnz
+        dmat[0] = <cnp.npy_intp> self.__nnz
 
         # EXPLICIT TYPE TESTS
 
@@ -1427,7 +1427,7 @@ cdef class LLSparseMatrix_INT32_t_FLOAT128_t(MutableSparseMatrix_INT32_t_FLOAT12
         pv = <FLOAT128_t *> cnp.PyArray_DATA(a_val)
 
         elem = 0
-        for i from 0 <= i < self.nrow:
+        for i from 0 <= i < self.__nrow:
             k = self.root[i]
             while k != -1:
                 pi[ elem ] = i
@@ -1443,7 +1443,7 @@ cdef class LLSparseMatrix_INT32_t_FLOAT128_t(MutableSparseMatrix_INT32_t_FLOAT12
     ####################################################################################################################
     def shift(self, sigma, LLSparseMatrix_INT32_t_FLOAT128_t B):
 
-        if self.nrow != B.nrow or self.ncol != B.ncol:
+        if self.__nrow != B.nrow or self.__ncol != B.ncol:
             raise IndexError('Matrix shapes do not match')
 
         if not is_scalar(sigma):
@@ -1587,7 +1587,7 @@ cdef class LLSparseMatrix_INT32_t_FLOAT128_t(MutableSparseMatrix_INT32_t_FLOAT12
         cdef:
             INT32_t k, i
 
-        for i from 0 <= i < self.nrow:
+        for i from 0 <= i < self.__nrow:
             k = self.root[i]
 
             while k != -1:
@@ -1607,8 +1607,8 @@ cdef class LLSparseMatrix_INT32_t_FLOAT128_t(MutableSparseMatrix_INT32_t_FLOAT12
         # TODO: benchmark.. we don't use the same approach than PySparse at all
 
         # test dimensions
-        if self.ncol != v.size:
-            raise IndexError("Dimensions must agree ([%d,%d] and [%d, %d])" % (self.nrow, self.ncol, v.size, 1))
+        if self.__ncol != v.size:
+            raise IndexError("Dimensions must agree ([%d,%d] and [%d, %d])" % (self.__nrow, self.__ncol, v.size, 1))
 
         cdef:
             INT32_t k, i
@@ -1622,7 +1622,7 @@ cdef class LLSparseMatrix_INT32_t_FLOAT128_t(MutableSparseMatrix_INT32_t_FLOAT12
 
         # test if v vector is C-contiguous or not
         if cnp.PyArray_ISCONTIGUOUS(v):
-            for i from 0 <= i < self.nrow:
+            for i from 0 <= i < self.__nrow:
                 k = self.root[i]
                 while k != -1:
                     self.val[k] *= v_data[self.col[k]]
@@ -1631,7 +1631,7 @@ cdef class LLSparseMatrix_INT32_t_FLOAT128_t(MutableSparseMatrix_INT32_t_FLOAT12
 
         else:
             incx = v.strides[0] / sd
-            for i from 0 <= i < self.nrow:
+            for i from 0 <= i < self.__nrow:
                 k = self.root[i]
                 while k != -1:
                     self.val[k] *= v_data[self.col[k]*incx]
@@ -1648,8 +1648,8 @@ cdef class LLSparseMatrix_INT32_t_FLOAT128_t(MutableSparseMatrix_INT32_t_FLOAT12
         # TODO: maybe accept something else than only an numpy array?
 
         # test dimensions
-        if self.nrow != v.size:
-            raise IndexError("Dimensions must agree ([%d,%d] and [%d, %d])" % (self.nrow, self.ncol, v.size, 1))
+        if self.__nrow != v.size:
+            raise IndexError("Dimensions must agree ([%d,%d] and [%d, %d])" % (self.__nrow, self.__ncol, v.size, 1))
 
         cdef:
             INT32_t k, i
@@ -1666,7 +1666,7 @@ cdef class LLSparseMatrix_INT32_t_FLOAT128_t(MutableSparseMatrix_INT32_t_FLOAT12
         # test if v vector is C-contiguous or not
         if cnp.PyArray_ISCONTIGUOUS(v):
 
-            for i from 0 <= i < self.nrow:
+            for i from 0 <= i < self.__nrow:
                 k = self.root[i]
                 val = v_data[i]
 
@@ -1677,7 +1677,7 @@ cdef class LLSparseMatrix_INT32_t_FLOAT128_t(MutableSparseMatrix_INT32_t_FLOAT12
 
         else:
             incx = v.strides[0] / sd
-            for i from 0 <= i < self.nrow:
+            for i from 0 <= i < self.__nrow:
                 k = self.root[i]
                 val = v_data[i * incx]
 
@@ -1721,14 +1721,14 @@ cdef class LLSparseMatrix_INT32_t_FLOAT128_t(MutableSparseMatrix_INT32_t_FLOAT12
             INT32_t i, k
 
         # create temp array for column results
-        cdef FLOAT128_t * col_sum = <FLOAT128_t *> calloc(self.ncol, sizeof(FLOAT128_t))
+        cdef FLOAT128_t * col_sum = <FLOAT128_t *> calloc(self.__ncol, sizeof(FLOAT128_t))
         if not col_sum:
             raise MemoryError()
 
         if self.__is_symmetric:
 
             # compute sum of columns
-            for i from 0<= i < self.nrow:
+            for i from 0<= i < self.__nrow:
                 k = self.root[i]
 
                 # EXPLICIT TYPE TESTS
@@ -1743,7 +1743,7 @@ cdef class LLSparseMatrix_INT32_t_FLOAT128_t(MutableSparseMatrix_INT32_t_FLOAT12
         else:  # not symmetric
 
             # compute sum of columns
-            for i from 0<= i < self.nrow:
+            for i from 0<= i < self.__nrow:
                 k = self.root[i]
 
                 # EXPLICIT TYPE TESTS
@@ -1756,7 +1756,7 @@ cdef class LLSparseMatrix_INT32_t_FLOAT128_t(MutableSparseMatrix_INT32_t_FLOAT12
         # compute max of all column sums
         max_col_sum = <FLOAT128_t> 0.0
 
-        for i from 0 <= i < self.ncol:
+        for i from 0 <= i < self.__ncol:
             if col_sum[i] > max_col_sum:
                 max_col_sum = col_sum[i]
 
@@ -1779,7 +1779,7 @@ cdef class LLSparseMatrix_INT32_t_FLOAT128_t(MutableSparseMatrix_INT32_t_FLOAT12
         max_row_sum = <FLOAT128_t> 0.0
 
         if not self.__is_symmetric:
-            for i from 0<= i < self.nrow:
+            for i from 0<= i < self.__nrow:
                 k = self.root[i]
 
                 row_sum = <FLOAT128_t> 0.0
@@ -1797,12 +1797,12 @@ cdef class LLSparseMatrix_INT32_t_FLOAT128_t(MutableSparseMatrix_INT32_t_FLOAT12
         else:  # matrix is symmetric
 
             # create temp array for column results
-            row_sum_array = <FLOAT128_t *> calloc(self.nrow, sizeof(FLOAT128_t))
+            row_sum_array = <FLOAT128_t *> calloc(self.__nrow, sizeof(FLOAT128_t))
 
             if not row_sum_array:
                 raise MemoryError()
 
-            for i from 0<= i < self.nrow:
+            for i from 0<= i < self.__nrow:
                 k = self.root[i]
 
                 # EXPLICIT TYPE TESTS
@@ -1815,7 +1815,7 @@ cdef class LLSparseMatrix_INT32_t_FLOAT128_t(MutableSparseMatrix_INT32_t_FLOAT12
                     k = self.link[k]
 
             # compute max of all row sums
-            for i from 0 <= i < self.nrow:
+            for i from 0 <= i < self.__nrow:
                 if row_sum_array[i] > max_row_sum:
                     max_row_sum = row_sum_array[i]
 
@@ -1836,7 +1836,7 @@ cdef class LLSparseMatrix_INT32_t_FLOAT128_t(MutableSparseMatrix_INT32_t_FLOAT12
 
         norm_sum = <FLOAT128_t> 0.0
 
-        for i from 0<= i < self.nrow:
+        for i from 0<= i < self.__nrow:
             k = self.root[i]
 
             # EXPLICIT TYPE TESTS
@@ -1881,34 +1881,34 @@ cdef class LLSparseMatrix_INT32_t_FLOAT128_t(MutableSparseMatrix_INT32_t_FLOAT12
         cdef INT32_t j
         cdef FLOAT128_t val, ival
 
-        if not self.nnz:
+        if not self.__nnz:
             return
 
-        if print_big_matrices or (self.nrow <= LL_MAT_PPRINT_COL_THRESH and self.ncol <= LL_MAT_PPRINT_ROW_THRESH):
+        if print_big_matrices or (self.__nrow <= LL_MAT_PPRINT_COL_THRESH and self.__ncol <= LL_MAT_PPRINT_ROW_THRESH):
             # create linear vector presentation
 
-            mat = <FLOAT128_t *> PyMem_Malloc(self.nrow * self.ncol * sizeof(FLOAT128_t))
+            mat = <FLOAT128_t *> PyMem_Malloc(self.__nrow * self.__ncol * sizeof(FLOAT128_t))
 
             if not mat:
                 raise MemoryError()
 
             # CREATION OF TEMP MATRIX
-            for i from 0 <= i < self.nrow:
-                for j from 0 <= j < self.ncol:
+            for i from 0 <= i < self.__nrow:
+                for j from 0 <= j < self.__ncol:
 
-                    mat[i* self.ncol + j] = 0.0
+                    mat[i* self.__ncol + j] = 0.0
 
                 k = self.root[i]
                 while k != -1:
-                    mat[(i*self.ncol)+self.col[k]] = self.val[k]
+                    mat[(i*self.__ncol)+self.col[k]] = self.val[k]
                     if self.__is_symmetric:
-                        mat[(self.col[k]*self.ncol)+i] = self.val[k]
+                        mat[(self.col[k]*self.__ncol)+i] = self.val[k]
                     k = self.link[k]
 
             # PRINTING OF TEMP MATRIX
-            for i from 0 <= i < self.nrow:
-                for j from 0 <= j < self.ncol:
-                    val = mat[(i*self.ncol)+j]
+            for i from 0 <= i < self.__nrow:
+                for j from 0 <= j < self.__ncol:
+                    val = mat[(i*self.__ncol)+j]
 
                     print('{:{width}.6f} '.format(val, width=width), end='', file=OUT)
 

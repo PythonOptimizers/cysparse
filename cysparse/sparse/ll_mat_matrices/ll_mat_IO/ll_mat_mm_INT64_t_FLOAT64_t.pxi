@@ -275,8 +275,8 @@ cdef LLSparseMatrix_INT64_t_FLOAT64_t MakeLLSparseMatrixFromMMFile2_INT64_t_FLOA
             i = atoi(token_list[0])-1
             j = atoi(token_list[1]) - 1
 
-            print "i = %d" % i
-            print "j = %d" % j
+            #print "i = %d" % i
+            #print "j = %d" % j
 
             if test_bounds:
                 if not (0 <= i < nrow):
@@ -315,7 +315,7 @@ cdef LLSparseMatrix_INT64_t_FLOAT64_t MakeLLSparseMatrixFromMMFile2_INT64_t_FLOA
         A.link = link
         A.root = root
         A.free = -1
-        A.nnz = nnz
+        A.__nnz = nnz
         A.nalloc = nnz
 
 

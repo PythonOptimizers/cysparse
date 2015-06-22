@@ -118,7 +118,7 @@ cdef class SparseMatrix_INT32_t_COMPLEX256_t(SparseMatrix):
         Note:
             This method only returns the internal memory used for the C-arrays, **not** the whole object.
         """
-        return COMPLEX256_t_BIT * self.nrow * self.ncol
+        return COMPLEX256_t_BIT * self.__nrow * self.__ncol
 
     def memory_real(self):
         """
@@ -144,7 +144,7 @@ cdef class SparseMatrix_INT32_t_COMPLEX256_t(SparseMatrix):
         """
 
         """
-        s = "of dim (%d, %d) with %d non zero values" % (self.nrow, self.ncol, self.nnz)
+        s = "of dim (%d, %d) with %d non zero values" % (self.__nrow, self.__ncol, self.__nnz)
         return s
 
     def attributes_long_string(self):
@@ -178,7 +178,7 @@ cdef class SparseMatrix_INT32_t_COMPLEX256_t(SparseMatrix):
         else:
             store_zeros_string = "NZ"
 
-        s= "(%s, %s, [%d, %d])" % (symmetric_string, store_zeros_string, self.nrow, self.ncol)
+        s= "(%s, %s, [%d, %d])" % (symmetric_string, store_zeros_string, self.__nrow, self.__ncol)
 
         return s
 

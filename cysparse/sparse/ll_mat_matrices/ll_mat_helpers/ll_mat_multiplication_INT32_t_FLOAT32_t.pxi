@@ -107,11 +107,11 @@ cdef LLSparseMatrix_INT32_t_FLOAT32_t multiply_transposed_ll_mat_by_ll_mat_INT32
         ``RuntimeError`` if some error occurred during the computation.
     """
     # test dimensions
-    cdef INT32_t A_nrow = A.nrow
-    cdef INT32_t A_ncol = A.ncol
+    cdef INT32_t A_nrow = A.__nrow
+    cdef INT32_t A_ncol = A.__ncol
 
-    cdef INT32_t B_nrow = B.nrow
-    cdef INT32_t B_ncol = B.ncol
+    cdef INT32_t B_nrow = B.__nrow
+    cdef INT32_t B_ncol = B.__ncol
 
     if A_nrow != B_nrow:
         raise IndexError("Matrix dimensions must agree ([%d, %d]^t * [%d, %d])" % (A_nrow, A_ncol, B_nrow, B_ncol))
@@ -121,7 +121,7 @@ cdef LLSparseMatrix_INT32_t_FLOAT32_t multiply_transposed_ll_mat_by_ll_mat_INT32
 
     cdef bint store_zeros = A.store_zeros and B.store_zeros
     # TODO: is this a good idea?
-    cdef INT32_t size_hint = min(A.nnz, B.nnz)
+    cdef INT32_t size_hint = min(A.__nnz, B.__nnz)
 
     C = LLSparseMatrix_INT32_t_FLOAT32_t(control_object=unexposed_value, nrow=C_nrow, ncol=C_ncol, size_hint=size_hint, store_zeros=store_zeros)
 
@@ -179,8 +179,8 @@ cdef cnp.ndarray[cnp.npy_float32, ndim=1, mode='c'] multiply_ll_mat_with_numpy_v
 
     """
     # TODO: test, test, test!!!
-    cdef INT32_t A_nrow = A.nrow
-    cdef INT32_t A_ncol = A.ncol
+    cdef INT32_t A_nrow = A.__nrow
+    cdef INT32_t A_ncol = A.__ncol
 
     cdef size_t sd = sizeof(FLOAT32_t)
 
@@ -240,8 +240,8 @@ cdef cnp.ndarray[cnp.npy_float32, ndim=1, mode='c'] multiply_transposed_ll_mat_w
 
     """
     # TODO: test, test, test!!!
-    cdef INT32_t A_nrow = A.nrow
-    cdef INT32_t A_ncol = A.ncol
+    cdef INT32_t A_nrow = A.__nrow
+    cdef INT32_t A_ncol = A.__ncol
 
     cdef size_t sd = sizeof(FLOAT32_t)
 
