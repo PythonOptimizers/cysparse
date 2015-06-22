@@ -34,12 +34,12 @@ cdef class SparseMatrix:
     """
     cdef:
        
-        bint __is_symmetric  # True if symmetric matrix
-        public bint store_zeros   # True if 0.0 is to be stored explicitly, this can be changed by the user at any time
+        bint __is_symmetric       # True if symmetric matrix
+        public bint store_zeros   # True if 0.0 is to be stored explicitly
 
-        bint is_mutable           # True if mutable
+        bint __is_mutable         # True if mutable
 
-        char * __type_name   # Name of matrix type
+        char * __type_name        # Name of matrix type
         public char * type        # Type of matrix
         CPType cp_type            # Internal types of the matrix
 

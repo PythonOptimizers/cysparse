@@ -143,7 +143,7 @@ cdef class MutableSparseMatrix_INT64_t_INT32_t(SparseMatrix_INT64_t_INT32_t):
         """
         self.size_hint = kwargs.get('size_hint', MUTABLE_SPARSE_MAT_DEFAULT_SIZE_HINT)
         self.nalloc = 0
-        self.is_mutable = True
+        self.__is_mutable = True
 
 
 ########################################################################################################################
@@ -156,4 +156,4 @@ cdef class ImmutableSparseMatrix_INT64_t_INT32_t(SparseMatrix_INT64_t_INT32_t):
         Warning:
             Only use named arguments!
         """
-        self.is_mutable = False
+        self.__is_mutable = False

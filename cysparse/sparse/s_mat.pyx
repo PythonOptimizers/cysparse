@@ -59,7 +59,7 @@ cdef class SparseMatrix:
 
         self.__is_symmetric = kwargs.get('__is_symmetric', False)
         self.store_zeros = kwargs.get('store_zeros', False)
-        self.is_mutable = False
+        self.__is_mutable = False
 
     # for compatibility with numpy, PyKrylov, etc
     @property
@@ -77,6 +77,10 @@ cdef class SparseMatrix:
     @property
     def is_symmetric(self):
         return self.__is_symmetric
+
+    @property
+    def is_mutable(self):
+        return self.__is_mutable
 
     ####################################################################################################################
     # Basic common methods
