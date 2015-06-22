@@ -504,7 +504,7 @@ cdef class LLSparseMatrix_INT64_t_FLOAT32_t(MutableSparseMatrix_INT64_t_FLOAT32_
         if self.__is_symmetric:
             return self.copy()
         else:
-            transpose = LLSparseMatrix_INT64_t_FLOAT32_t(control_object=unexposed_value, nrow=self.__ncol, ncol=self.__nrow, size_hint=self.nnz, store_zeros=self.__store_zeros, __is_symmetric=self.__is_symmetric)
+            transpose = LLSparseMatrix_INT64_t_FLOAT32_t(control_object=unexposed_value, nrow=self.__ncol, ncol=self.__nrow, size_hint=self.__nnz, store_zeros=self.__store_zeros, __is_symmetric=self.__is_symmetric)
 
             for i from 0 <= i < self.__nrow:
                 k = self.root[i]
@@ -561,12 +561,12 @@ cdef class LLSparseMatrix_INT64_t_FLOAT32_t(MutableSparseMatrix_INT64_t_FLOAT32_
         if not ind:
             raise MemoryError()
 
-        cdef INT64_t * col =  <INT64_t*> PyMem_Malloc(self.nnz * sizeof(INT64_t))
+        cdef INT64_t * col =  <INT64_t*> PyMem_Malloc(self.__nnz * sizeof(INT64_t))
         if not col:
             PyMem_Free(ind)
             raise MemoryError()
 
-        cdef FLOAT32_t * val = <FLOAT32_t *> PyMem_Malloc(self.nnz * sizeof(FLOAT32_t))
+        cdef FLOAT32_t * val = <FLOAT32_t *> PyMem_Malloc(self.__nnz * sizeof(FLOAT32_t))
         if not val:
             PyMem_Free(ind)
             PyMem_Free(col)
@@ -591,7 +591,7 @@ cdef class LLSparseMatrix_INT64_t_FLOAT32_t(MutableSparseMatrix_INT64_t_FLOAT32_
 
             ind[i+1] = ind_col_index
 
-        csr_mat = MakeCSRSparseMatrix_INT64_t_FLOAT32_t(nrow=self.__nrow, ncol=self.__ncol, nnz=self.nnz, ind=ind, col=col, val=val, __is_symmetric=self.__is_symmetric)
+        csr_mat = MakeCSRSparseMatrix_INT64_t_FLOAT32_t(nrow=self.__nrow, ncol=self.__ncol, nnz=self.__nnz, ind=ind, col=col, val=val, __is_symmetric=self.__is_symmetric)
 
         return csr_mat
 
@@ -611,12 +611,12 @@ cdef class LLSparseMatrix_INT64_t_FLOAT32_t(MutableSparseMatrix_INT64_t_FLOAT32_
         if not ind:
             raise MemoryError()
 
-        cdef INT64_t * row = <INT64_t *> PyMem_Malloc(self.nnz * sizeof(INT64_t))
+        cdef INT64_t * row = <INT64_t *> PyMem_Malloc(self.__nnz * sizeof(INT64_t))
         if not row:
             PyMem_Free(ind)
             raise MemoryError()
 
-        cdef FLOAT32_t * val = <FLOAT32_t *> PyMem_Malloc(self.nnz * sizeof(FLOAT32_t))
+        cdef FLOAT32_t * val = <FLOAT32_t *> PyMem_Malloc(self.__nnz * sizeof(FLOAT32_t))
         if not val:
             PyMem_Free(ind)
             PyMem_Free(row)
@@ -646,7 +646,7 @@ cdef class LLSparseMatrix_INT64_t_FLOAT32_t(MutableSparseMatrix_INT64_t_FLOAT32_
             col_indexes[i] = col_indexes[i - 1] + col_indexes[i]
 
         memcpy(ind, col_indexes, (self.__ncol + 1) * sizeof(INT64_t) )
-        assert ind[self.__ncol] == self.nnz
+        assert ind[self.__ncol] == self.__nnz
 
         # row and val
         # we have ind: we know exactly where to put the row indices for each column
@@ -664,7 +664,7 @@ cdef class LLSparseMatrix_INT64_t_FLOAT32_t(MutableSparseMatrix_INT64_t_FLOAT32_
 
         free(col_indexes)
 
-        csc_mat = MakeCSCSparseMatrix_INT64_t_FLOAT32_t(nrow=self.__nrow, ncol=self.__ncol, nnz=self.nnz, ind=ind, row=row, val=val, __is_symmetric=self.__is_symmetric)
+        csc_mat = MakeCSCSparseMatrix_INT64_t_FLOAT32_t(nrow=self.__nrow, ncol=self.__ncol, nnz=self.__nnz, ind=ind, row=row, val=val, __is_symmetric=self.__is_symmetric)
 
         return csc_mat
 
@@ -1441,7 +1441,7 @@ cdef class LLSparseMatrix_INT64_t_FLOAT32_t(MutableSparseMatrix_INT64_t_FLOAT32_
     ####################################################################################################################
     def shift(self, sigma, LLSparseMatrix_INT64_t_FLOAT32_t B):
 
-        if self.__nrow != B.nrow or self.__ncol != B.ncol:
+        if self.__nrow != B.__nrow or self.__ncol != B.__ncol:
             raise IndexError('Matrix shapes do not match')
 
         if not is_scalar(sigma):
@@ -1458,7 +1458,7 @@ cdef class LLSparseMatrix_INT64_t_FLOAT32_t(MutableSparseMatrix_INT64_t_FLOAT32_
 
         if self.__is_symmetric == B.__is_symmetric:
             # both matrices are symmetric or are not symmetric
-            for i from 0 <= i < B.nrow:
+            for i from 0 <= i < B.__nrow:
                 k = B.root[i]
 
                 while k != -1:
@@ -1467,7 +1467,7 @@ cdef class LLSparseMatrix_INT64_t_FLOAT32_t(MutableSparseMatrix_INT64_t_FLOAT32_
 
         elif B.__is_symmetric:
             # self is not symmetric
-            for i from 0 <= i < B.nrow:
+            for i from 0 <= i < B.__nrow:
                 k = B.root[i]
 
                 while k != -1:
@@ -1489,14 +1489,14 @@ cdef class LLSparseMatrix_INT64_t_FLOAT32_t(MutableSparseMatrix_INT64_t_FLOAT32_
 
         This operation is equivalent to
 
-        ..  code-block:: python
+        ..  code-block:: python 
 
             for i in range(len(val)):
                 A[id1[i],id2[i]] += val[i]
 
-        See :meth:`update_add_at_with_numpy_arraysINT64_t_FLOAT32_t`.
+        See :meth:`update_add_at_with_numpy_arrays_INT64_t_FLOAT32_t`.
         """
-        return update_add_at_with_numpy_arraysINT64_t_FLOAT32_t(self, id1, id2, val)
+        return update_add_at_with_numpy_arrays_INT64_t_FLOAT32_t(self, id1, id2, val)
 
 
     ####################################################################################################################

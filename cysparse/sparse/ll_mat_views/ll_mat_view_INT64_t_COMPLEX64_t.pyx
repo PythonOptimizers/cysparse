@@ -10,7 +10,7 @@ cdef class LLSparseMatrixView_INT64_t_COMPLEX64_t
 
 from cysparse.sparse.s_mat cimport unexposed_value
 from cysparse.sparse.ll_mat_matrices.ll_mat_INT64_t_COMPLEX64_t cimport LLSparseMatrix_INT64_t_COMPLEX64_t
-from cysparse.sparse.sparse_utils.generate_indices_INT64_t cimport create_c_array_indices_from_python_object_INT64_t
+from cysparse.sparse.sparse_utils.generic.generate_indices_INT64_t cimport create_c_array_indices_from_python_object_INT64_t
 
 from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
 from cpython cimport PyObject
@@ -309,8 +309,8 @@ cdef LLSparseMatrixView_INT64_t_COMPLEX64_t MakeLLSparseMatrixView_INT64_t_COMPL
         INT64_t * row_indices,
         INT64_t ncol
         INT64_t * col_indices
-        INT64_t A_nrow = A.nrow
-        INT64_t A_ncol = A.ncol
+        INT64_t A_nrow = A.__nrow
+        INT64_t A_ncol = A.__ncol
 
     row_indices = create_c_array_indices_from_python_object_INT64_t(A_nrow, obj1, &nrow)
     col_indices = create_c_array_indices_from_python_object_INT64_t(A_ncol, obj2, &ncol)
@@ -364,8 +364,8 @@ cdef LLSparseMatrixView_INT64_t_COMPLEX64_t MakeLLSparseMatrixViewFromView_INT64
         INT64_t * row_indices,
         INT64_t ncol
         INT64_t * col_indices
-        INT64_t A_nrow = A.nrow
-        INT64_t A_ncol = A.ncol
+        INT64_t A_nrow = A.__nrow
+        INT64_t A_ncol = A.__ncol
         INT64_t i, j
 
     row_indices = create_c_array_indices_from_python_object_INT64_t(A_nrow, obj1, &nrow)

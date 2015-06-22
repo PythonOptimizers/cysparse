@@ -23,7 +23,7 @@ cdef bint update_ll_mat_item_add_INT32_t_INT32_t(LLSparseMatrix_INT32_t_INT32_t 
     if A.__is_symmetric and i < j:
         raise IndexError("Write operation to upper triangle of symmetric matrix not allowed")
 
-    if not A.store_zeros and x == 0.0:
+    if not A.__store_zeros and x == 0.0:
         return True
 
     # Find element to be updated
@@ -40,7 +40,7 @@ cdef bint update_ll_mat_item_add_INT32_t_INT32_t(LLSparseMatrix_INT32_t_INT32_t 
         # element already exists: compute updated value
         x += A.val[k]
 
-        if A.store_zeros and x == 0.0:
+        if A.__store_zeros and x == 0.0:
             #  the updated element is zero and must be removed
 
             # relink row i
@@ -64,7 +64,7 @@ cdef bint update_ll_mat_item_add_INT32_t_INT32_t(LLSparseMatrix_INT32_t_INT32_t 
             A.free = A.link[new_elem]
         else:
             # append new element to the end
-            new_elem = A.nnz
+            new_elem = A.__nnz
 
             # test if there is space for a new element
             if A.__nnz == A.nalloc:

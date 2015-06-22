@@ -10,7 +10,7 @@ Several helper routines for addition with/by a ``LLSparseMatrix`` matrix.
 # LLSparseMatrix by LLSparseMatrix
 ###################################################
 
-cdef update_add_at_with_numpy_arraysINT64_t_FLOAT64_t(LLSparseMatrix_INT64_t_FLOAT64_t A,
+cdef update_add_at_with_numpy_arrays_INT64_t_FLOAT64_t(LLSparseMatrix_INT64_t_FLOAT64_t A,
                                                    cnp.ndarray[cnp.npy_int64, ndim=1, mode='c'] id1,
                                                    cnp.ndarray[cnp.npy_int64, ndim=1, mode='c'] id2,
                                                    cnp.ndarray[cnp.npy_float64, ndim=1] val):

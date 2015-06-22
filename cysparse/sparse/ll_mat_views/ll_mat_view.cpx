@@ -10,7 +10,7 @@ cdef class LLSparseMatrixView_@index@_@type@
 
 from cysparse.sparse.s_mat cimport unexposed_value
 from cysparse.sparse.ll_mat_matrices.ll_mat_@index@_@type@ cimport LLSparseMatrix_@index@_@type@
-from cysparse.sparse.sparse_utils.generate_indices_@index@ cimport create_c_array_indices_from_python_object_@index@
+from cysparse.sparse.sparse_utils.generic.generate_indices_@index@ cimport create_c_array_indices_from_python_object_@index@
 
 from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
 from cpython cimport PyObject
@@ -313,8 +313,8 @@ cdef LLSparseMatrixView_@index@_@type@ MakeLLSparseMatrixView_@index@_@type@(LLS
         @index@ * row_indices,
         @index@ ncol
         @index@ * col_indices
-        @index@ A_nrow = A.nrow
-        @index@ A_ncol = A.ncol
+        @index@ A_nrow = A.__nrow
+        @index@ A_ncol = A.__ncol
 
     row_indices = create_c_array_indices_from_python_object_@index@(A_nrow, obj1, &nrow)
     col_indices = create_c_array_indices_from_python_object_@index@(A_ncol, obj2, &ncol)
@@ -368,8 +368,8 @@ cdef LLSparseMatrixView_@index@_@type@ MakeLLSparseMatrixViewFromView_@index@_@t
         @index@ * row_indices,
         @index@ ncol
         @index@ * col_indices
-        @index@ A_nrow = A.nrow
-        @index@ A_ncol = A.ncol
+        @index@ A_nrow = A.__nrow
+        @index@ A_ncol = A.__ncol
         @index@ i, j
 
     row_indices = create_c_array_indices_from_python_object_@index@(A_nrow, obj1, &nrow)

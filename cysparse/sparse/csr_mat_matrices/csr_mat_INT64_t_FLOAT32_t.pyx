@@ -12,7 +12,7 @@ from cysparse.sparse.s_mat_matrices.s_mat_INT64_t_FLOAT32_t cimport ImmutableSpa
 from cysparse.sparse.ll_mat_matrices.ll_mat_INT64_t_FLOAT32_t cimport LLSparseMatrix_INT64_t_FLOAT32_t
 from cysparse.sparse.csc_mat_matrices.csc_mat_INT64_t_FLOAT32_t cimport CSCSparseMatrix_INT64_t_FLOAT32_t
 
-from cysparse.sparse.sparse_utils.sort_indices_INT64_t cimport sort_array_INT64_t
+from cysparse.sparse.sparse_utils.generic.sort_indices_INT64_t cimport sort_array_INT64_t
 
 ########################################################################################################################
 # Cython, NumPy import/cimport
