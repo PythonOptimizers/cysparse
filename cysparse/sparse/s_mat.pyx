@@ -78,10 +78,6 @@ cdef class SparseMatrix:
     def is_symmetric(self):
         return self.__is_symmetric
 
-    @property
-    def type_name(self):
-        return self.__type_name
-
     ####################################################################################################################
     # Basic common methods
     ####################################################################################################################
