@@ -15,6 +15,7 @@ CySparse documentation
    installation
    sparse_matrix_formats
    types
+   cysparse_basics
    sparse_mat_hierarchy
    mutable_ll_mat
    immutable_mat
