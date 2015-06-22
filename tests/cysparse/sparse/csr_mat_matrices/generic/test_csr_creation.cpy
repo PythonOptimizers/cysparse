@@ -72,12 +72,12 @@ class CySparseCSRCreationFromLLSparseMatrixTestCase(CySparseCSRCreationBaseTestC
 
     def test_symmetric_attribute(self):
         """
-        We test if the ``__is_symmetric`` attribute is the same for both matrices.
+        We test if the ``is_symmetric`` attribute is the same for both matrices.
         """
 {% for index_type in index_list %}
   {% set outerloop = loop %}
   {% for element_type in type_list %}
-        self.failUnless(self.l_@outerloop.index@_@loop.index@.__is_symmetric == self.l_@outerloop.index@_@loop.index@_csr.__is_symmetric == False)
+        self.failUnless(self.l_@outerloop.index@_@loop.index@.is_symmetric == self.l_@outerloop.index@_@loop.index@_csr.is_symmetric == False)
   {% endfor %}
 {% endfor %}
 
@@ -89,7 +89,7 @@ class CySparseCSRCreationFromSymmetricLLSparseMatrixTestCase(CySparseCSRCreation
 {% for index_type in index_list %}
   {% set outerloop = loop %}
   {% for element_type in type_list %}
-        self.l_@outerloop.index@_@loop.index@ = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=@index_type|type2enum@, dtype=@element_type|type2enum@)
+        self.l_@outerloop.index@_@loop.index@ = NewLLSparseMatrix(is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=@index_type|type2enum@, dtype=@element_type|type2enum@)
         construct_sym_sparse_matrix(self.l_@outerloop.index@_@loop.index@, self.size, self.nbr_of_elements)
 
         self.l_@outerloop.index@_@loop.index@_csr = self.l_@outerloop.index@_@loop.index@.to_csr()
@@ -111,12 +111,12 @@ class CySparseCSRCreationFromSymmetricLLSparseMatrixTestCase(CySparseCSRCreation
 
     def test_symmetric_attribute(self):
         """
-        We test if the ``__is_symmetric`` attribute is the same for both matrices.
+        We test if the ``is_symmetric`` attribute is the same for both matrices.
         """
 {% for index_type in index_list %}
   {% set outerloop = loop %}
   {% for element_type in type_list %}
-        self.failUnless(self.l_@outerloop.index@_@loop.index@.__is_symmetric == self.l_@outerloop.index@_@loop.index@_csr.__is_symmetric == True)
+        self.failUnless(self.l_@outerloop.index@_@loop.index@.is_symmetric == self.l_@outerloop.index@_@loop.index@_csr.is_symmetric == True)
   {% endfor %}
 {% endfor %}
 

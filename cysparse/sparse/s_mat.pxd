@@ -34,14 +34,13 @@ cdef class SparseMatrix:
         This class is also used to break circular dependencies.
     """
     cdef:
-       
         bint __is_symmetric       # True if symmetric matrix
         bint __store_zeros        # True if 0.0 is to be stored explicitly
 
         bint __is_mutable         # True if mutable
 
         char * __type_name        # Name of matrix type
-        public char * type        # Type of matrix
+        char * __type             # Type of matrix
         CPType cp_type            # Internal types of the matrix
 
 
