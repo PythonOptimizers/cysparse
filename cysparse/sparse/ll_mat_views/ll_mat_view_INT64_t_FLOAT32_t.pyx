@@ -39,8 +39,8 @@ cdef class LLSparseMatrixView_INT64_t_FLOAT32_t:
         self.A = A
         Py_INCREF(self.A)  # increase ref to object to avoid the user deleting it explicitly or implicitly
 
-        self.__is_symmetric = A.__is_symmetric
-        self.store_zeros = A.store_zeros
+        self.__is_symmetric = A.is_symmetric
+        self.__store_zeros = A.store_zeros
 
         self.__counted_nnz = False
         self._nnz = 0
@@ -238,7 +238,7 @@ cdef class LLSparseMatrixView_INT64_t_FLOAT32_t:
             symmetric_string = 'general'
 
         store_zeros_string = None
-        if self.store_zeros:
+        if self.__store_zeros:
             store_zeros_string = "store_zeros"
         else:
             store_zeros_string = "no_zeros"
@@ -255,7 +255,7 @@ cdef class LLSparseMatrixView_INT64_t_FLOAT32_t:
             symmetric_string = 'G'
 
         store_zeros_string = None
-        if self.store_zeros:
+        if self.__store_zeros:
             store_zeros_string = "SZ"
         else:
             store_zeros_string = "NZ"

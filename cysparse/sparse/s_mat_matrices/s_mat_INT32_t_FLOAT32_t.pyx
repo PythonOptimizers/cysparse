@@ -96,7 +96,7 @@ cdef class SparseMatrix_INT32_t_FLOAT32_t(SparseMatrix):
             symmetric_string = 'general'
 
         store_zeros_string = None
-        if self.store_zeros:
+        if self.__store_zeros:
             store_zeros_string = "store_zeros"
         else:
             store_zeros_string = "no_zeros"
@@ -113,7 +113,7 @@ cdef class SparseMatrix_INT32_t_FLOAT32_t(SparseMatrix):
             symmetric_string = 'G'
 
         store_zeros_string = None
-        if self.store_zeros:
+        if self.__store_zeros:
             store_zeros_string = "SZ"
         else:
             store_zeros_string = "NZ"

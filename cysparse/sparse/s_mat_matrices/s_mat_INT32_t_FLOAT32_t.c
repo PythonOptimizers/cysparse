@@ -632,7 +632,7 @@ struct __pyx_t_8cysparse_5types_14cysparse_types_CPType {
 struct __pyx_obj_8cysparse_6sparse_5s_mat_SparseMatrix {
   PyObject_HEAD
   int __pyx___is_symmetric;
-  int store_zeros;
+  int __pyx___store_zeros;
   int __pyx___is_mutable;
   char *__pyx___type_name;
   char *type;
@@ -1878,7 +1878,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_14s_mat_matrices_23s_mat_INT32_t_FLO
  *             symmetric_string = 'general'
  * 
  *         store_zeros_string = None             # <<<<<<<<<<<<<<
- *         if self.store_zeros:
+ *         if self.__store_zeros:
  *             store_zeros_string = "store_zeros"
  */
   __Pyx_INCREF(Py_None);
@@ -1887,16 +1887,16 @@ static PyObject *__pyx_pf_8cysparse_6sparse_14s_mat_matrices_23s_mat_INT32_t_FLO
   /* "cysparse/sparse/s_mat_matrices/s_mat_INT32_t_FLOAT32_t.pyx":99
  * 
  *         store_zeros_string = None
- *         if self.store_zeros:             # <<<<<<<<<<<<<<
+ *         if self.__store_zeros:             # <<<<<<<<<<<<<<
  *             store_zeros_string = "store_zeros"
  *         else:
  */
-  __pyx_t_1 = (__pyx_v_self->__pyx_base.store_zeros != 0);
+  __pyx_t_1 = (__pyx_v_self->__pyx_base.__pyx___store_zeros != 0);
   if (__pyx_t_1) {
 
     /* "cysparse/sparse/s_mat_matrices/s_mat_INT32_t_FLOAT32_t.pyx":100
  *         store_zeros_string = None
- *         if self.store_zeros:
+ *         if self.__store_zeros:
  *             store_zeros_string = "store_zeros"             # <<<<<<<<<<<<<<
  *         else:
  *             store_zeros_string = "no_zeros"
@@ -2084,7 +2084,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_14s_mat_matrices_23s_mat_INT32_t_FLO
  *             symmetric_string = 'G'
  * 
  *         store_zeros_string = None             # <<<<<<<<<<<<<<
- *         if self.store_zeros:
+ *         if self.__store_zeros:
  *             store_zeros_string = "SZ"
  */
   __Pyx_INCREF(Py_None);
@@ -2093,16 +2093,16 @@ static PyObject *__pyx_pf_8cysparse_6sparse_14s_mat_matrices_23s_mat_INT32_t_FLO
   /* "cysparse/sparse/s_mat_matrices/s_mat_INT32_t_FLOAT32_t.pyx":116
  * 
  *         store_zeros_string = None
- *         if self.store_zeros:             # <<<<<<<<<<<<<<
+ *         if self.__store_zeros:             # <<<<<<<<<<<<<<
  *             store_zeros_string = "SZ"
  *         else:
  */
-  __pyx_t_1 = (__pyx_v_self->__pyx_base.store_zeros != 0);
+  __pyx_t_1 = (__pyx_v_self->__pyx_base.__pyx___store_zeros != 0);
   if (__pyx_t_1) {
 
     /* "cysparse/sparse/s_mat_matrices/s_mat_INT32_t_FLOAT32_t.pyx":117
  *         store_zeros_string = None
- *         if self.store_zeros:
+ *         if self.__store_zeros:
  *             store_zeros_string = "SZ"             # <<<<<<<<<<<<<<
  *         else:
  *             store_zeros_string = "NZ"

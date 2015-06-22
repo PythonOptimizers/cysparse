@@ -290,7 +290,7 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX256_t(MutableSparseMatrix_INT32_t_COMPL
         cdef LLSparseMatrix_INT32_t_COMPLEX256_t self_copy
 
         # we copy manually the C-arrays
-        self_copy = LLSparseMatrix_INT32_t_COMPLEX256_t(control_object=unexposed_value, no_memory=True, nrow=self.nrow, ncol=self.ncol, size_hint=self.size_hint, store_zeros=self.store_zeros, __is_symmetric=self.__is_symmetric)
+        self_copy = LLSparseMatrix_INT32_t_COMPLEX256_t(control_object=unexposed_value, no_memory=True, nrow=self.nrow, ncol=self.ncol, size_hint=self.size_hint, store_zeros=self.__store_zeros, __is_symmetric=self.__is_symmetric)
 
         # copy C-arrays
         cdef:
@@ -504,7 +504,7 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX256_t(MutableSparseMatrix_INT32_t_COMPL
         if self.__is_symmetric:
             return self.copy()
         else:
-            transpose = LLSparseMatrix_INT32_t_COMPLEX256_t(control_object=unexposed_value, nrow=self.ncol, ncol=self.nrow, size_hint=self.nnz, store_zeros=self.store_zeros, __is_symmetric=self.__is_symmetric)
+            transpose = LLSparseMatrix_INT32_t_COMPLEX256_t(control_object=unexposed_value, nrow=self.ncol, ncol=self.nrow, size_hint=self.nnz, store_zeros=self.__store_zeros, __is_symmetric=self.__is_symmetric)
 
             for i from 0 <= i < self.nrow:
                 k = self.root[i]
@@ -530,7 +530,7 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX256_t(MutableSparseMatrix_INT32_t_COMPL
             return self.create_conjugate()
 
         else:
-            conjugate_transpose = LLSparseMatrix_INT32_t_COMPLEX256_t(control_object=unexposed_value, nrow=self.ncol, ncol=self.nrow, size_hint=self.nnz, store_zeros=self.store_zeros, __is_symmetric=self.__is_symmetric)
+            conjugate_transpose = LLSparseMatrix_INT32_t_COMPLEX256_t(control_object=unexposed_value, nrow=self.ncol, ncol=self.nrow, size_hint=self.nnz, store_zeros=self.__store_zeros, __is_symmetric=self.__is_symmetric)
 
             for i from 0 <= i < self.nrow:
                 k = self.root[i]
@@ -866,7 +866,7 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX256_t(MutableSparseMatrix_INT32_t_COMPL
             k = self.link[k]
 
         # Store value
-        if self.store_zeros or value != 0.0:
+        if self.__store_zeros or value != 0.0:
             if col == j:
                 # element already exist
                 self.val[k] = value

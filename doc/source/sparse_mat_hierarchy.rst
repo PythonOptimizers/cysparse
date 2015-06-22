@@ -12,10 +12,26 @@ The :class:`SparseMatrix` class
 =================================
 
 
+
+
+The :class:`MutableSparseMatrix` class
+=======================================
+
+The :class:`ImmutableSparseMatrix` class
+=========================================
+
+
+How to create a matrix?
+========================
+
+
+Sparse matrices all come from a ``LLSparseMatrix``
+------------------------------------------------------
+
 ..  _matrices_must_be_instantiated_by_a_factory_method:
 
-Matrices must be instantiated by a factory method
---------------------------------------------------
+``LLSparseMatrix`` matrices must be instantiated by a factory method
+---------------------------------------------------------------------------
 
 Matrices **must** be instantiated by one of the factory methods. Although we talk about factory *methods*, we mean factory *functions*.
 For instance, to create a (specialized) :class:`LLSparseMatrix` (see :ref:`ll_mat`), use the following code:
@@ -39,12 +55,8 @@ you'll get the following error:
 ..  code-block:: bash
 
     AssertionError: Matrix must be instantiated with a factory method
-
-The :class:`MutableSparseMatrix` class
-=======================================
-
-The :class:`ImmutableSparseMatrix` class
-=========================================
+    
+..  warning::  An ``LLSparseMatrix`` can **only** be instantiated through a factory method.
 
 
 ..  raw:: html

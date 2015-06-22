@@ -6,6 +6,17 @@ cdef INT32_t MUTABLE_SPARSE_MAT_DEFAULT_SIZE_HINT = 40        # allocated size b
 unexposed_value = object()
 
 
+cdef __set_store_zeros_attribute(SparseMatrix A, bint store_zeros):
+    """
+    Access private  ``__store_zeros`` attribute and change it.
+
+    Args:
+        A: ``SparseMatrix``.
+        store_zeros: Boolean value to set the attribute to.
+
+    """
+    A.__store_zeros = store_zeros
+
 class NonZeros():
     """
     Context manager to use methods with flag ``store_zeros`` to ``False``.
@@ -19,14 +30,14 @@ class NonZeros():
     """
     def __init__(self, SparseMatrix A):
         self.A = A
-        self.store_zeros = False
+        self.__store_zeros = False
 
     def __enter__(self):
-        self.store_zeros = self.A.store_zeros
-        self.A.store_zeros = False
+        self.__store_zeros = self.A.store_zeros
+        __set_store_zeros_attribute(self.A, False)
 
     def __exit__(self, type, value, traceback):
-        self.A.store_zeros = self.store_zeros
+        __set_store_zeros_attribute(self.A, self.__store_zeros)
 
 cpdef bint PySparseMatrix_Check(object obj):
     """
@@ -58,7 +69,7 @@ cdef class SparseMatrix:
         self.cp_type.dtype = kwargs.get('dtype', FLOAT64_T)
 
         self.__is_symmetric = kwargs.get('__is_symmetric', False)
-        self.store_zeros = kwargs.get('store_zeros', False)
+        self.__store_zeros = kwargs.get('store_zeros', False)
         self.__is_mutable = False
 
     # for compatibility with numpy, PyKrylov, etc
@@ -81,6 +92,10 @@ cdef class SparseMatrix:
     @property
     def is_mutable(self):
         return self.__is_mutable
+
+    @property
+    def store_zeros(self):
+        return self.__store_zeros
 
     ####################################################################################################################
     # Basic common methods
