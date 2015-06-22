@@ -18,7 +18,7 @@ from cysparse.sparse.ll_mat_views.ll_mat_view_INT32_t_FLOAT32_t cimport LLSparse
 from cysparse.sparse.csr_mat_matrices.csr_mat_INT32_t_FLOAT32_t cimport MakeCSRSparseMatrix_INT32_t_FLOAT32_t
 from cysparse.sparse.csc_mat_matrices.csc_mat_INT32_t_FLOAT32_t cimport MakeCSCSparseMatrix_INT32_t_FLOAT32_t
 
-from cysparse.sparse.sparse_utils.generate_indices_INT32_t cimport create_c_array_indices_from_python_object_INT32_t
+from cysparse.sparse.sparse_utils.generic.generate_indices_INT32_t cimport create_c_array_indices_from_python_object_INT32_t
 
 ########################################################################################################################
 # CySparse include
@@ -134,7 +134,7 @@ cdef class LLSparseMatrix_INT32_t_FLOAT32_t(MutableSparseMatrix_INT32_t_FLOAT32_
         if self.size_hint < 1:
             raise ValueError('size_hint (%d) must be >= 1' % self.size_hint)
 
-        self.type = "LLSparseMatrix"
+        self.__type = "LLSparseMatrix"
         self.__type_name = "LLSparseMatrix [INT32_t, FLOAT32_t]"
 
         # This is particular to the LLSparseMatrix type
@@ -331,7 +331,7 @@ cdef class LLSparseMatrix_INT32_t_FLOAT32_t(MutableSparseMatrix_INT32_t_FLOAT32_
 
         self_copy.nalloc = self.nalloc
         self_copy.free = self.free
-        self_copy.nnz = self.nnz
+        self_copy.__nnz = self.nnz
 
         return self_copy
 
@@ -433,8 +433,8 @@ cdef class LLSparseMatrix_INT32_t_FLOAT32_t(MutableSparseMatrix_INT32_t_FLOAT32_
 
 
         # Set the new values
-        self.nrow = newm
-        self.nnz = newnnz
+        self.__nrow = newm
+        self.__nnz = newnnz
 
     def clear_submatrix(self, INT32_t start_i, INT32_t stop_i, INT32_t start_j, INT32_t stop_j):
         """
@@ -462,7 +462,7 @@ cdef class LLSparseMatrix_INT32_t_FLOAT32_t(MutableSparseMatrix_INT32_t_FLOAT32_
                     # add element to free list
                     self.link[k] = self.free
                     self.free = k
-                    self.nnz -= 1
+                    self.__nnz -= 1
                 else:
                     last = k
 
@@ -851,7 +851,7 @@ cdef class LLSparseMatrix_INT32_t_FLOAT32_t(MutableSparseMatrix_INT32_t_FLOAT32_
                 else:
                     self.link[last] = new_elem
 
-                self.nnz += 1
+                self.__nnz += 1
 
         else:
             # value == 0.0:
@@ -868,7 +868,7 @@ cdef class LLSparseMatrix_INT32_t_FLOAT32_t(MutableSparseMatrix_INT32_t_FLOAT32_
                 self.link[k] = self.free
                 self.free = k
 
-                self.nnz -= 1
+                self.__nnz -= 1
 
 
     cdef int safe_put(self, INT32_t i, INT32_t j, FLOAT32_t value)  except -1:

@@ -53,7 +53,7 @@ cdef bint update_ll_mat_item_add_INT64_t_COMPLEX128_t(LLSparseMatrix_INT64_t_COM
             A.link[k] = A.free
             A.free = k
 
-            A.nnz -= 1
+            A.__nnz -= 1
         else:
             A.val[k] = x
     else:
@@ -67,7 +67,7 @@ cdef bint update_ll_mat_item_add_INT64_t_COMPLEX128_t(LLSparseMatrix_INT64_t_COM
             new_elem = A.nnz
 
             # test if there is space for a new element
-            if A.nnz == A.nalloc:
+            if A.__nnz == A.nalloc:
                 A._realloc_expand()
 
         A.val[new_elem] = x
@@ -77,6 +77,6 @@ cdef bint update_ll_mat_item_add_INT64_t_COMPLEX128_t(LLSparseMatrix_INT64_t_COM
             A.root[i] = new_elem
         else:
             A.link[last] = new_elem
-        A.nnz += 1
+        A.__nnz += 1
 
     return True

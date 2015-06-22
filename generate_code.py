@@ -422,7 +422,7 @@ TYPES_GENERIC_TYPES_DEFINITION_FILE = os.path.join(TYPES_DIR, 'cysparse_generic_
 SPARSE_DIR = os.path.join(PATH, 'cysparse', 'sparse')
 
 ### sparse_utils
-SPARSE_SPARSE_UTILS_TEMPLATE_DIR = os.path.join(SPARSE_DIR, 'sparse_utils')
+SPARSE_SPARSE_UTILS_TEMPLATE_DIR = os.path.join(SPARSE_DIR, 'sparse_utils', 'generic')
 
 SPARSE_SPARSE_UTILS_GENERATE_INDICES_DECLARATION_FILES = [os.path.join(SPARSE_SPARSE_UTILS_TEMPLATE_DIR, 'generate_indices.cpd')]
 SPARSE_SPARSE_UTILS_GENERATE_INDICES_DEFINITION_FILES = [os.path.join(SPARSE_SPARSE_UTILS_TEMPLATE_DIR, 'generate_indices.cpx')]

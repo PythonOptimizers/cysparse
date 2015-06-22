@@ -136,21 +136,21 @@ new_sparse_ext = [
   # ### Sparse ###
   ######################
 {% for index_type in index_list %}
-  Extension(name="cysparse.sparse.sparse_utils.generate_indices_@index_type@",
-            sources=["cysparse/sparse/sparse_utils/generate_indices_@index_type@.pxd",
-                     "cysparse/sparse/sparse_utils/generate_indices_@index_type@.pyx"],
+  Extension(name="cysparse.sparse.sparse_utils.generic.generate_indices_@index_type@",
+            sources=["cysparse/sparse/sparse_utils/generic/generate_indices_@index_type@.pxd",
+                     "cysparse/sparse/sparse_utils/generic/generate_indices_@index_type@.pyx"],
             **sparse_ext_params),
-  Extension(name="cysparse.sparse.sparse_utils.sort_indices_@index_type@",
-            sources=["cysparse/sparse/sparse_utils/sort_indices_@index_type@.pxd",
-                     "cysparse/sparse/sparse_utils/sort_indices_@index_type@.pyx"],
+  Extension(name="cysparse.sparse.sparse_utils.generic.sort_indices_@index_type@",
+            sources=["cysparse/sparse/sparse_utils/generic/sort_indices_@index_type@.pxd",
+                     "cysparse/sparse/sparse_utils/generic/sort_indices_@index_type@.pyx"],
             **sparse_ext_params),
 {% endfor %}
 
 {% for index_type in index_list %}
     {% for element_type in type_list %}
-  Extension(name="cysparse.sparse.sparse_utils.find_@index_type@",
-            sources=["cysparse/sparse/sparse_utils/find_@index_type@_@element_type@.pxd",
-                     "cysparse/sparse/sparse_utils/find_@index_type@_@element_type@.pyx"],
+  Extension(name="cysparse.sparse.sparse_utils.generic.find_@index_type@",
+            sources=["cysparse/sparse/sparse_utils/generic/find_@index_type@_@element_type@.pxd",
+                     "cysparse/sparse/sparse_utils/generic/find_@index_type@_@element_type@.pyx"],
             **sparse_ext_params),
     {% endfor %}
 {% endfor %}
@@ -307,6 +307,7 @@ packages_list = ['cysparse',
             'cysparse.sparse.sparse_proxies',
             'cysparse.sparse.sparse_proxies.complex_generic',
             'cysparse.sparse.sparse_utils',
+            'cysparse.sparse.sparse_utils.generic',
             'cysparse.sparse.s_mat_matrices',
             'cysparse.sparse.ll_mat_matrices',
             'cysparse.sparse.csr_mat_matrices',

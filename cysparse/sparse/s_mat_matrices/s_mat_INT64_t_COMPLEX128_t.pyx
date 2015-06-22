@@ -22,9 +22,12 @@ cdef class SparseMatrix_INT64_t_COMPLEX128_t(SparseMatrix):
 
         self.__type_name = "SparseMatrix"
 
-        self.nrow = kwargs.get('nrow', -1)
-        self.ncol = kwargs.get('ncol', -1)
-        self.nnz = kwargs.get('nnz', 0)
+        self.__nrow = kwargs.get('nrow', -1)
+        self.__ncol = kwargs.get('ncol', -1)
+        self.__nnz = kwargs.get('nnz', 0)
+
+        self.__nargin = self.__ncol
+        self.__nargout = self.__nrow
 
         self.__transposed_proxy_matrix_generated = False
 
@@ -32,6 +35,31 @@ cdef class SparseMatrix_INT64_t_COMPLEX128_t(SparseMatrix):
         self.__conjugate_transposed_proxy_matrix_generated = False
         self.__conjugated_proxy_matrix_generated = False
 
+
+    
+    @property
+    def nrow(self):
+        return self.__nrow
+
+    
+    @property
+    def ncol(self):
+        return self.__ncol
+
+    
+    @property
+    def nnz(self):
+        return self.__nnz
+
+    
+    @property
+    def nargin(self):
+        return self.__nargin
+
+    
+    @property
+    def nargout(self):
+        return self.__nargout
 
     
     @property

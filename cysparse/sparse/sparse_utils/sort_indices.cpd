@@ -1,4 +1,0 @@
-from cysparse.types.cysparse_types cimport *
-
-
-cdef sort_array_@index@(@index@ * a, @index@ start, @index@ end)

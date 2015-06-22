@@ -9,9 +9,12 @@ from cysparse.sparse.sparse_proxies.complex_generic.conj_mat_INT32_t_COMPLEX256_
 
 cdef class SparseMatrix_INT32_t_COMPLEX256_t(SparseMatrix):
     cdef:
-        public INT32_t nrow  # number of rows
-        public INT32_t ncol  # number of columns
-        public INT32_t nnz   # number of values stored
+        INT32_t __nrow  # number of rows
+        INT32_t __ncol  # number of columns
+        INT32_t __nnz   # number of values stored
+
+        INT32_t __nargin  # size of the input vector in A * b
+        INT32_t __nargout # size of the output vector in y = A * b
 
         # proxy to the transposed matrix
         TransposedSparseMatrix __transposed_proxy_matrix  # transposed matrix proxy

@@ -9,9 +9,12 @@ from cysparse.sparse.sparse_proxies.complex_generic.conj_mat_@index@_@type@ cimp
 
 cdef class SparseMatrix_@index@_@type@(SparseMatrix):
     cdef:
-        public @index@ nrow  # number of rows
-        public @index@ ncol  # number of columns
-        public @index@ nnz   # number of values stored
+        @index@ __nrow  # number of rows
+        @index@ __ncol  # number of columns
+        @index@ __nnz   # number of values stored
+
+        @index@ __nargin  # size of the input vector in A * b
+        @index@ __nargout # size of the output vector in y = A * b
 
         # proxy to the transposed matrix
         TransposedSparseMatrix __transposed_proxy_matrix  # transposed matrix proxy
