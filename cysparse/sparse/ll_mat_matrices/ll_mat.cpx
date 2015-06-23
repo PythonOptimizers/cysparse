@@ -72,6 +72,7 @@ cdef extern from "Python.h":
     double PyComplex_RealAsDouble(PyObject *op)
     double PyComplex_ImagAsDouble(PyObject *op)
     PyObject* PyFloat_FromDouble(double v)
+    double PyFloat_AsDouble(PyObject *pyfloat)
     Py_complex PyComplex_AsCComplex(PyObject *op)
 
 
@@ -1149,7 +1150,7 @@ YOU HAVE TO DEFINE OR CAST YOUR NEW UNRECOGNIZED COMPLEX TYPE
 {% if type in integer_list %}
                     self.safe_put(PyInt_AS_LONG(PyList_GET_ITEM(<PyObject *>id1, i_list)), PyInt_AS_LONG(PyList_GET_ITEM(<PyObject *>id2, i_list)), <@type@> PyInt_AS_LONG(PyList_GET_ITEM(<PyObject *>b, i_list)))
 {% elif type in real_list %}
-                    self.safe_put(PyInt_AS_LONG(PyList_GET_ITEM(<PyObject *>id1, i_list)), PyInt_AS_LONG(PyList_GET_ITEM(<PyObject *>id2, i_list)), <@type@> PyFloat_AS_DOUBLE(PyList_GET_ITEM(<PyObject *>b, i_list)))
+                    self.safe_put(PyInt_AS_LONG(PyList_GET_ITEM(<PyObject *>id1, i_list)), PyInt_AS_LONG(PyList_GET_ITEM(<PyObject *>id2, i_list)), <@type@> PyFloat_AsDouble(PyList_GET_ITEM(<PyObject *>b, i_list)))
 {% elif type in complex_list %}
                     # TODO: is this really what needs to be done?
                     z_obj = PyList_GET_ITEM(<PyObject *>b, i_list)
@@ -1646,7 +1647,7 @@ YOU HAVE TO DEFINE OR CAST YOUR NEW UNRECOGNIZED TYPE
 
         This operation is equivalent to
 
-        ..  code-block:: python 
+        ..  code-block:: python
 
             for i in range(len(val)):
                 A[id1[i],id2[i]] += val[i]
@@ -1705,8 +1706,7 @@ YOU HAVE TO DEFINE OR CAST YOUR NEW UNRECOGNIZED TYPE
             assert are_mixed_types_compatible(@type|type2enum@, B.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(@type|type2enum@)
 
             if B.ndim == 2:
-                #return multiply_ll_mat_with_numpy_ndarray(self, B)
-                raise NotImplementedError("Multiplication with this kind of object not implemented yet...")
+                return multiply_ll_mat_with_numpy_ndarray_@type@(self, B)
             else:
                 raise IndexError("Matrix dimensions must agree")
         else:

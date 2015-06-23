@@ -153,6 +153,75 @@ cdef LLSparseMatrix_INT64_t_INT32_t multiply_transposed_ll_mat_by_ll_mat_INT64_t
 
     return C
 
+
+###################################################
+# LLSparseMatrix by a full NumPy matrix
+###################################################
+cdef cnp.ndarray[cnp.npy_int32, ndim=2] multiply_ll_mat_with_numpy_ndarray_INT32_t(LLSparseMatrix_INT64_t_INT32_t A, cnp.ndarray[cnp.npy_int32, ndim=2] B):
+    """
+    Multiply a :class:`LLSparseMatrix_INT64_t_INT32_t` ``A`` with a dense :program:`NumPy` ``B``.
+
+    Args:
+        A: An :class:``LLSparseMatrix_INT64_t_INT32_t`` ``A``.
+        B: An :program:`NumPy` ``B``.
+
+    Returns:
+        A **new** :program:`NumPy` ``C = A * B``.
+
+    Raises:
+        ``IndexError`` if matrix dimension don't agree.
+        ``NotImplementedError``: When matrix ``A`` is symmetric.
+        ``RuntimeError`` if some error occurred during the computation.
+    """
+    # test dimensions
+    cdef INT64_t A_nrow = A.__nrow
+    cdef INT64_t A_ncol = A.__ncol
+
+    cdef INT64_t B_nrow, B_ncol
+    B_nrow = B.shape[0]
+    B_ncol = B.shape[1]
+
+    if A_ncol != B_nrow:
+        raise IndexError("Matrix dimensions must agree ([%d, %d] * [%d, %d])" % (A_nrow, A_ncol, B_nrow, B_ncol))
+
+    cdef INT64_t C_nrow = A_nrow
+    cdef INT64_t C_ncol = B_ncol
+
+    cdef bint store_zeros = A.__store_zeros
+    cdef INT64_t size_hint = A.size_hint
+
+    cdef cnp.ndarray[cnp.npy_int32, ndim=2] C = np.zeros((C_nrow,C_ncol), dtype=np.int32)
+
+    # memory views
+    cdef INT32_t [:, :] B_memory_view = B
+    cdef INT32_t [:, :] C_memory_view = C
+
+    # CASES
+    if not A.__is_symmetric:
+        pass
+    else:
+        raise NotImplementedError("Multiplication with symmetric matrices is not implemented yet")
+
+    # NON OPTIMIZED MULTIPLICATION
+    cdef:
+        INT32_t valA
+        INT64_t iA, jA, jB
+
+    for iA from 0 <= iA < A_nrow:
+        kA = A.root[iA]
+
+        while kA != -1:
+            valA = A.val[kA]
+            jA = A.col[kA]
+
+
+            for jB from 0 <= jB < B_ncol:
+                C_memory_view[iA, jB] += valA * B_memory_view[jA, jB]
+
+            kA = A.link[kA]
+
+    return C
+
 ########################################################################################################################
 # LLSparseMatrix by Numpy vector
 ########################################################################################################################

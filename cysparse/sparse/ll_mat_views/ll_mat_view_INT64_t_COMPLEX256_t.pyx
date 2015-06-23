@@ -364,8 +364,8 @@ cdef LLSparseMatrixView_INT64_t_COMPLEX256_t MakeLLSparseMatrixViewFromView_INT6
         INT64_t * row_indices,
         INT64_t ncol
         INT64_t * col_indices
-        INT64_t A_nrow = A.__nrow
-        INT64_t A_ncol = A.__ncol
+        INT64_t A_nrow = A.nrow
+        INT64_t A_ncol = A.ncol
         INT64_t i, j
 
     row_indices = create_c_array_indices_from_python_object_INT64_t(A_nrow, obj1, &nrow)

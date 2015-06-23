@@ -72,6 +72,7 @@ cdef extern from "Python.h":
     double PyComplex_RealAsDouble(PyObject *op)
     double PyComplex_ImagAsDouble(PyObject *op)
     PyObject* PyFloat_FromDouble(double v)
+    double PyFloat_AsDouble(PyObject *pyfloat)
     Py_complex PyComplex_AsCComplex(PyObject *op)
 
 
@@ -1081,7 +1082,7 @@ cdef class LLSparseMatrix_INT64_t_FLOAT32_t(MutableSparseMatrix_INT64_t_FLOAT32_
                 # EXPLICIT TYPE TESTS
                 for i_list from 0 <= i_list < id1_list_length:
 
-                    self.safe_put(PyInt_AS_LONG(PyList_GET_ITEM(<PyObject *>id1, i_list)), PyInt_AS_LONG(PyList_GET_ITEM(<PyObject *>id2, i_list)), <FLOAT32_t> PyFloat_AS_DOUBLE(PyList_GET_ITEM(<PyObject *>b, i_list)))
+                    self.safe_put(PyInt_AS_LONG(PyList_GET_ITEM(<PyObject *>id1, i_list)), PyInt_AS_LONG(PyList_GET_ITEM(<PyObject *>id2, i_list)), <FLOAT32_t> PyFloat_AsDouble(PyList_GET_ITEM(<PyObject *>b, i_list)))
 
             ############################################################################################################
             # CASE: b is an NumPy array
@@ -1489,7 +1490,7 @@ cdef class LLSparseMatrix_INT64_t_FLOAT32_t(MutableSparseMatrix_INT64_t_FLOAT32_
 
         This operation is equivalent to
 
-        ..  code-block:: python 
+        ..  code-block:: python
 
             for i in range(len(val)):
                 A[id1[i],id2[i]] += val[i]
@@ -1534,8 +1535,7 @@ cdef class LLSparseMatrix_INT64_t_FLOAT32_t(MutableSparseMatrix_INT64_t_FLOAT32_
             assert are_mixed_types_compatible(FLOAT32_T, B.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(FLOAT32_T)
 
             if B.ndim == 2:
-                #return multiply_ll_mat_with_numpy_ndarray(self, B)
-                raise NotImplementedError("Multiplication with this kind of object not implemented yet...")
+                return multiply_ll_mat_with_numpy_ndarray_FLOAT32_t(self, B)
             else:
                 raise IndexError("Matrix dimensions must agree")
         else:

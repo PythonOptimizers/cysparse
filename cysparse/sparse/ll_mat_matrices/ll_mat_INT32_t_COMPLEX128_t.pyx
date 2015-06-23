@@ -72,6 +72,7 @@ cdef extern from "Python.h":
     double PyComplex_RealAsDouble(PyObject *op)
     double PyComplex_ImagAsDouble(PyObject *op)
     PyObject* PyFloat_FromDouble(double v)
+    double PyFloat_AsDouble(PyObject *pyfloat)
     Py_complex PyComplex_AsCComplex(PyObject *op)
 
 
@@ -1551,7 +1552,7 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX128_t(MutableSparseMatrix_INT32_t_COMPL
 
         This operation is equivalent to
 
-        ..  code-block:: python 
+        ..  code-block:: python
 
             for i in range(len(val)):
                 A[id1[i],id2[i]] += val[i]
@@ -1610,8 +1611,7 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX128_t(MutableSparseMatrix_INT32_t_COMPL
             assert are_mixed_types_compatible(COMPLEX128_T, B.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(COMPLEX128_T)
 
             if B.ndim == 2:
-                #return multiply_ll_mat_with_numpy_ndarray(self, B)
-                raise NotImplementedError("Multiplication with this kind of object not implemented yet...")
+                return multiply_ll_mat_with_numpy_ndarray_COMPLEX128_t(self, B)
             else:
                 raise IndexError("Matrix dimensions must agree")
         else:
