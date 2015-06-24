@@ -27,6 +27,23 @@ cnp.import_array()
 cdef int CSC_MAT_PPRINT_ROW_THRESH = 500       # row threshold for choosing print format
 cdef int CSC_MAT_PPRINT_COL_THRESH = 20        # column threshold for choosing print format
 
+cdef extern from "complex.h":
+    float crealf(float complex z)
+    float cimagf(float complex z)
+
+    double creal(double complex z)
+    double cimag(double complex z)
+
+    long double creall(long double complex z)
+    long double cimagl(long double complex z)
+
+    double cabs(double complex z)
+    float cabsf(float complex z)
+    long double cabsl(long double complex z)
+
+    double complex conj(double complex z)
+    float complex  conjf (float complex z)
+    long double complex conjl (long double complex z)
 
 ########################################################################################################################
 # CySparse include
@@ -176,17 +193,19 @@ cdef class CSCSparseMatrix_INT64_t_INT64_t(ImmutableSparseMatrix_INT64_t_INT64_t
     ####################################################################################################################
     # Multiplication
     ####################################################################################################################
-    def matvec(self, B):
+    def matvec(self, b):
         """
         Return :math:`A * b`.
         """
-        return multiply_csc_mat_with_numpy_vector_INT64_t_INT64_t(self, B)
+        return multiply_csc_mat_with_numpy_vector_INT64_t_INT64_t(self, b)
 
-    def matvec_transp(self, B):
+    def matvec_transp(self, b):
         """
         Return :math:`A^t * b`.
         """
-        return multiply_transposed_csc_mat_with_numpy_vector_INT64_t_INT64_t(self, B)
+        return multiply_transposed_csc_mat_with_numpy_vector_INT64_t_INT64_t(self, b)
+
+
 
     def matdot(self, B):
         raise NotImplementedError("Multiplication with this kind of object not allowed")
@@ -266,7 +285,7 @@ cdef class CSCSparseMatrix_INT64_t_INT64_t(ImmutableSparseMatrix_INT64_t_INT64_t
     ####################################################################################################################
     # Access to internals as resquested by Sylvain
     #
-    # This is temporary and shouldn't be released!!!!
+    # This is temporary and shouldn't be released!!!! 
     #
     ####################################################################################################################
     def get_c_pointers(self):

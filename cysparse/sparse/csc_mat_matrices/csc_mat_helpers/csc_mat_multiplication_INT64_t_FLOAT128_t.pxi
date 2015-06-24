@@ -127,3 +127,4 @@ cdef cnp.ndarray[cnp.npy_float128, ndim=1, mode='c'] multiply_transposed_csc_mat
                                                                                       A.val, A.row, A.ind)
 
     return c
+

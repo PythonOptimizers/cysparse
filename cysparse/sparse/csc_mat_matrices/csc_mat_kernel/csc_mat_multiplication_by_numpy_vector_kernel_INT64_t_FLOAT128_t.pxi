@@ -15,6 +15,13 @@ Covered cases:
 - :program:`NumPy` array data C-contiguous, ``CSCSparseMatrix`` not symmetric
 - :program:`NumPy` array data not C-contiguous, ``CSCSparseMatrix`` not symmetric
 
+3. :math:`A^h * b`
+
+- :program:`NumPy` array data C-contiguous, ``CSCSparseMatrix`` not symmetric
+- :program:`NumPy` array data C-contiguous, ``CSCSparseMatrix`` symmetric
+- :program:`NumPy` array data not C-contiguous, ``CSCSparseMatrix`` not symmetric
+- :program:`NumPy` array data not C-contiguous, ``CSCSparseMatrix`` symmetric
+
 Note:
     We only consider C-arrays with same type of elements as the type of elements in the ``CSCSparseMatrix``.
     Even if we construct the resulting :program:`NumPy` array as C-contiguous, the functions are more general and could
@@ -249,7 +256,7 @@ cdef void multiply_tranposed_csc_mat_with_strided_numpy_vector_kernel_INT64_t_FL
     In this kernel function, we only use the corresponding C-arrays.
 
     Warning:
-        This version consider the arrays as C-contiguous (**without** strides).
+        This version consider the arrays as non C-contiguous (**with** strides).
 
     Args:
         m: Number of rows of the matrix ``A``.
@@ -274,3 +281,4 @@ cdef void multiply_tranposed_csc_mat_with_strided_numpy_vector_kernel_INT64_t_FL
             s += val[k] * x[row[k] * incx]
 
         y[j * incy] = s
+
