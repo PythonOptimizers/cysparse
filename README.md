@@ -11,7 +11,7 @@ You might experience some (stupid) bugs or slower code.
 
 ## Want to follow the implementation of CySparse?
 
-See Wiki for details!
+See [Wiki](https://github.com/Funartech/cysparse/wiki) for details!
 
 ## Release history
 
