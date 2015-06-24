@@ -208,6 +208,6 @@ To find all triplets :math:`(i, j, k)`:
 
     for j from 0 <= j < ncol:
         for k from ind[j] <= k < ind[j+1]:
-            i = col[k]
+            i = row[k]
             v = val[k]
 

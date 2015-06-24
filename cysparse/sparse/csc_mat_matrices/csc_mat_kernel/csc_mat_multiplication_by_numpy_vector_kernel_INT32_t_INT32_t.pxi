@@ -22,6 +22,13 @@ Covered cases:
 - :program:`NumPy` array data not C-contiguous, ``CSCSparseMatrix`` not symmetric
 - :program:`NumPy` array data not C-contiguous, ``CSCSparseMatrix`` symmetric
 
+4. :math:`\textrm{con}(A) * b`
+
+- :program:`NumPy` array data C-contiguous, ``CSCSparseMatrix`` not symmetric
+- :program:`NumPy` array data C-contiguous, ``CSCSparseMatrix`` symmetric
+- :program:`NumPy` array data not C-contiguous, ``CSCSparseMatrix`` not symmetric
+- :program:`NumPy` array data not C-contiguous, ``CSCSparseMatrix`` symmetric
+
 Note:
     We only consider C-arrays with same type of elements as the type of elements in the ``CSCSparseMatrix``.
     Even if we construct the resulting :program:`NumPy` array as C-contiguous, the functions are more general and could
@@ -70,7 +77,7 @@ cdef void multiply_csc_mat_with_numpy_vector_kernel_INT32_t_INT32_t(INT32_t m, I
     for j from 0 <= j < n:
         for k from ind[j]<= k < ind[j+1]:
             i = row[k]
-            y[i] += val[k] * x[i]
+            y[i] += val[k] * x[j]
 
 
 ###########################################
@@ -109,9 +116,9 @@ cdef void multiply_sym_csc_mat_with_numpy_vector_kernel_INT32_t_INT32_t(INT32_t 
     for j from 0 <= j < n:
         for k from ind[j]<= k < ind[j+1]:
             i = row[k]
-            y[i] += val[k] * x[i]
+            y[i] += val[k] * x[j]
             if j != i:
-                y[j] += val[k] * x[j]
+                y[j] += val[k] * x[i]
 
 
 ###########################################
@@ -154,7 +161,7 @@ cdef void multiply_csc_mat_with_strided_numpy_vector_kernel_INT32_t_INT32_t(INT3
     for j from 0 <= j < n:
         for k from ind[j]<= k < ind[j+1]:
             i = row[k]
-            y[i * incy] += val[k] * x[i * incx]
+            y[i * incy] += val[k] * x[j * incx]
 
 
 ###########################################
@@ -197,9 +204,9 @@ cdef void multiply_sym_csc_mat_with_strided_numpy_vector_kernel_INT32_t_INT32_t(
     for j from 0 <= j < n:
         for k from ind[j]<= k < ind[j+1]:
             i = row[k]
-            y[i * incy] += val[k] * x[i * incx]
+            y[i * incy] += val[k] * x[j * incx]
             if j != i:
-                y[j * incy] += val[k] * x[j * incx]
+                y[j * incy] += val[k] * x[i * incx]
 
 
 
@@ -281,4 +288,5 @@ cdef void multiply_tranposed_csc_mat_with_strided_numpy_vector_kernel_INT32_t_IN
             s += val[k] * x[row[k] * incx]
 
         y[j * incy] = s
+
 

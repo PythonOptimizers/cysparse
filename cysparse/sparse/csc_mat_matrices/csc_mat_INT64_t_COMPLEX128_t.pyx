@@ -207,11 +207,17 @@ cdef class CSCSparseMatrix_INT64_t_COMPLEX128_t(ImmutableSparseMatrix_INT64_t_CO
         return multiply_transposed_csc_mat_with_numpy_vector_INT64_t_COMPLEX128_t(self, b)
 
 
-    def matvec_htransp(self, b):
+    def matvec_htransp(self, b): 
         """
         Return :math:`A^h * b`.
         """
         return multiply_conjugate_transposed_csc_mat_with_numpy_vector_INT64_t_COMPLEX128_t(self, b)
+
+    def matvec_conj(self, b):
+        """
+        Return :math:`\textrm{conj}(A) * b`.
+        """
+        return multiply_conjugated_csc_mat_with_numpy_vector_INT64_t_COMPLEX128_t(self, b)
 
 
     def matdot(self, B):
@@ -292,7 +298,7 @@ cdef class CSCSparseMatrix_INT64_t_COMPLEX128_t(ImmutableSparseMatrix_INT64_t_CO
     ####################################################################################################################
     # Access to internals as resquested by Sylvain
     #
-    # This is temporary and shouldn't be released!!!! 
+    # This is temporary and shouldn't be released!!!!
     #
     ####################################################################################################################
     def get_c_pointers(self):

@@ -285,7 +285,7 @@ cdef class CSCSparseMatrix_INT64_t_FLOAT128_t(ImmutableSparseMatrix_INT64_t_FLOA
     ####################################################################################################################
     # Access to internals as resquested by Sylvain
     #
-    # This is temporary and shouldn't be released!!!! 
+    # This is temporary and shouldn't be released!!!!
     #
     ####################################################################################################################
     def get_c_pointers(self):

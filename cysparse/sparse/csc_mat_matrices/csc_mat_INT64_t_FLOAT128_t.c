@@ -1816,7 +1816,7 @@ static PyObject *__pyx_tuple__15;
 static PyObject *__pyx_tuple__16;
 static PyObject *__pyx_tuple__17;
 
-/* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":40
+/* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":47
  * # C-contiguous, non symmetric
  * ###########################################
  * cdef void multiply_csc_mat_with_numpy_vector_kernel_INT64_t_FLOAT128_t(INT64_t m, INT64_t n, FLOAT128_t *x, FLOAT128_t *y,             # <<<<<<<<<<<<<<
@@ -1834,7 +1834,7 @@ static void __pyx_f_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT64_t_FLOAT
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_t_3;
   __Pyx_RefNannySetupContext("multiply_csc_mat_with_numpy_vector_kernel_INT64_t_FLOAT128_t", 0);
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":64
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":71
  * 
  *     # init numpy array
  *     for i from 0 <= i < m:             # <<<<<<<<<<<<<<
@@ -1844,7 +1844,7 @@ static void __pyx_f_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT64_t_FLOAT
   __pyx_t_1 = __pyx_v_m;
   for (__pyx_v_i = 0; __pyx_v_i < __pyx_t_1; __pyx_v_i++) {
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":66
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":73
  *     for i from 0 <= i < m:
  * 
  *         y[i] = <FLOAT128_t>0.0             # <<<<<<<<<<<<<<
@@ -1854,7 +1854,7 @@ static void __pyx_f_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT64_t_FLOAT
     (__pyx_v_y[__pyx_v_i]) = ((__pyx_t_8cysparse_5types_14cysparse_types_FLOAT128_t)0.0);
   }
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":70
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":77
  * 
  *     # multiplication, column-wise...
  *     for j from 0 <= j < n:             # <<<<<<<<<<<<<<
@@ -1864,38 +1864,38 @@ static void __pyx_f_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT64_t_FLOAT
   __pyx_t_1 = __pyx_v_n;
   for (__pyx_v_j = 0; __pyx_v_j < __pyx_t_1; __pyx_v_j++) {
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":71
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":78
  *     # multiplication, column-wise...
  *     for j from 0 <= j < n:
  *         for k from ind[j]<= k < ind[j+1]:             # <<<<<<<<<<<<<<
  *             i = row[k]
- *             y[i] += val[k] * x[i]
+ *             y[i] += val[k] * x[j]
  */
     __pyx_t_2 = (__pyx_v_ind[(__pyx_v_j + 1)]);
     for (__pyx_v_k = (__pyx_v_ind[__pyx_v_j]); __pyx_v_k < __pyx_t_2; __pyx_v_k++) {
 
-      /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":72
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":79
  *     for j from 0 <= j < n:
  *         for k from ind[j]<= k < ind[j+1]:
  *             i = row[k]             # <<<<<<<<<<<<<<
- *             y[i] += val[k] * x[i]
+ *             y[i] += val[k] * x[j]
  * 
  */
       __pyx_v_i = (__pyx_v_row[__pyx_v_k]);
 
-      /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":73
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":80
  *         for k from ind[j]<= k < ind[j+1]:
  *             i = row[k]
- *             y[i] += val[k] * x[i]             # <<<<<<<<<<<<<<
+ *             y[i] += val[k] * x[j]             # <<<<<<<<<<<<<<
  * 
  * 
  */
       __pyx_t_3 = __pyx_v_i;
-      (__pyx_v_y[__pyx_t_3]) = ((__pyx_v_y[__pyx_t_3]) + ((__pyx_v_val[__pyx_v_k]) * (__pyx_v_x[__pyx_v_i])));
+      (__pyx_v_y[__pyx_t_3]) = ((__pyx_v_y[__pyx_t_3]) + ((__pyx_v_val[__pyx_v_k]) * (__pyx_v_x[__pyx_v_j])));
     }
   }
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":40
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":47
  * # C-contiguous, non symmetric
  * ###########################################
  * cdef void multiply_csc_mat_with_numpy_vector_kernel_INT64_t_FLOAT128_t(INT64_t m, INT64_t n, FLOAT128_t *x, FLOAT128_t *y,             # <<<<<<<<<<<<<<
@@ -1907,7 +1907,7 @@ static void __pyx_f_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT64_t_FLOAT
   __Pyx_RefNannyFinishContext();
 }
 
-/* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":79
+/* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":86
  * # C-contiguous, symmetric
  * ###########################################
  * cdef void multiply_sym_csc_mat_with_numpy_vector_kernel_INT64_t_FLOAT128_t(INT64_t m, INT64_t n, FLOAT128_t *x, FLOAT128_t *y,             # <<<<<<<<<<<<<<
@@ -1926,7 +1926,7 @@ static void __pyx_f_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT64_t_FLOAT
   int __pyx_t_4;
   __Pyx_RefNannySetupContext("multiply_sym_csc_mat_with_numpy_vector_kernel_INT64_t_FLOAT128_t", 0);
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":103
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":110
  * 
  *     # init numpy array
  *     for i from 0 <= i < m:             # <<<<<<<<<<<<<<
@@ -1936,7 +1936,7 @@ static void __pyx_f_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT64_t_FLOAT
   __pyx_t_1 = __pyx_v_m;
   for (__pyx_v_i = 0; __pyx_v_i < __pyx_t_1; __pyx_v_i++) {
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":105
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":112
  *     for i from 0 <= i < m:
  * 
  *         y[i] = <FLOAT128_t>0.0             # <<<<<<<<<<<<<<
@@ -1946,7 +1946,7 @@ static void __pyx_f_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT64_t_FLOAT
     (__pyx_v_y[__pyx_v_i]) = ((__pyx_t_8cysparse_5types_14cysparse_types_FLOAT128_t)0.0);
   }
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":109
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":116
  * 
  *     # multiplication, column-wise...
  *     for j from 0 <= j < n:             # <<<<<<<<<<<<<<
@@ -1956,61 +1956,61 @@ static void __pyx_f_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT64_t_FLOAT
   __pyx_t_1 = __pyx_v_n;
   for (__pyx_v_j = 0; __pyx_v_j < __pyx_t_1; __pyx_v_j++) {
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":110
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":117
  *     # multiplication, column-wise...
  *     for j from 0 <= j < n:
  *         for k from ind[j]<= k < ind[j+1]:             # <<<<<<<<<<<<<<
  *             i = row[k]
- *             y[i] += val[k] * x[i]
+ *             y[i] += val[k] * x[j]
  */
     __pyx_t_2 = (__pyx_v_ind[(__pyx_v_j + 1)]);
     for (__pyx_v_k = (__pyx_v_ind[__pyx_v_j]); __pyx_v_k < __pyx_t_2; __pyx_v_k++) {
 
-      /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":111
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":118
  *     for j from 0 <= j < n:
  *         for k from ind[j]<= k < ind[j+1]:
  *             i = row[k]             # <<<<<<<<<<<<<<
- *             y[i] += val[k] * x[i]
+ *             y[i] += val[k] * x[j]
  *             if j != i:
  */
       __pyx_v_i = (__pyx_v_row[__pyx_v_k]);
 
-      /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":112
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":119
  *         for k from ind[j]<= k < ind[j+1]:
  *             i = row[k]
- *             y[i] += val[k] * x[i]             # <<<<<<<<<<<<<<
+ *             y[i] += val[k] * x[j]             # <<<<<<<<<<<<<<
  *             if j != i:
- *                 y[j] += val[k] * x[j]
+ *                 y[j] += val[k] * x[i]
  */
       __pyx_t_3 = __pyx_v_i;
-      (__pyx_v_y[__pyx_t_3]) = ((__pyx_v_y[__pyx_t_3]) + ((__pyx_v_val[__pyx_v_k]) * (__pyx_v_x[__pyx_v_i])));
+      (__pyx_v_y[__pyx_t_3]) = ((__pyx_v_y[__pyx_t_3]) + ((__pyx_v_val[__pyx_v_k]) * (__pyx_v_x[__pyx_v_j])));
 
-      /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":113
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":120
  *             i = row[k]
- *             y[i] += val[k] * x[i]
+ *             y[i] += val[k] * x[j]
  *             if j != i:             # <<<<<<<<<<<<<<
- *                 y[j] += val[k] * x[j]
+ *                 y[j] += val[k] * x[i]
  * 
  */
       __pyx_t_4 = ((__pyx_v_j != __pyx_v_i) != 0);
       if (__pyx_t_4) {
 
-        /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":114
- *             y[i] += val[k] * x[i]
+        /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":121
+ *             y[i] += val[k] * x[j]
  *             if j != i:
- *                 y[j] += val[k] * x[j]             # <<<<<<<<<<<<<<
+ *                 y[j] += val[k] * x[i]             # <<<<<<<<<<<<<<
  * 
  * 
  */
         __pyx_t_3 = __pyx_v_j;
-        (__pyx_v_y[__pyx_t_3]) = ((__pyx_v_y[__pyx_t_3]) + ((__pyx_v_val[__pyx_v_k]) * (__pyx_v_x[__pyx_v_j])));
+        (__pyx_v_y[__pyx_t_3]) = ((__pyx_v_y[__pyx_t_3]) + ((__pyx_v_val[__pyx_v_k]) * (__pyx_v_x[__pyx_v_i])));
         goto __pyx_L9;
       }
       __pyx_L9:;
     }
   }
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":79
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":86
  * # C-contiguous, symmetric
  * ###########################################
  * cdef void multiply_sym_csc_mat_with_numpy_vector_kernel_INT64_t_FLOAT128_t(INT64_t m, INT64_t n, FLOAT128_t *x, FLOAT128_t *y,             # <<<<<<<<<<<<<<
@@ -2022,7 +2022,7 @@ static void __pyx_f_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT64_t_FLOAT
   __Pyx_RefNannyFinishContext();
 }
 
-/* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":120
+/* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":127
  * # Non C-contiguous, non symmetric
  * ###########################################
  * cdef void multiply_csc_mat_with_strided_numpy_vector_kernel_INT64_t_FLOAT128_t(INT64_t m, INT64_t n,             # <<<<<<<<<<<<<<
@@ -2040,7 +2040,7 @@ static void __pyx_f_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT64_t_FLOAT
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_t_3;
   __Pyx_RefNannySetupContext("multiply_csc_mat_with_strided_numpy_vector_kernel_INT64_t_FLOAT128_t", 0);
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":148
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":155
  * 
  *     # init numpy array
  *     for i from 0 <= i < m:             # <<<<<<<<<<<<<<
@@ -2050,7 +2050,7 @@ static void __pyx_f_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT64_t_FLOAT
   __pyx_t_1 = __pyx_v_m;
   for (__pyx_v_i = 0; __pyx_v_i < __pyx_t_1; __pyx_v_i++) {
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":150
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":157
  *     for i from 0 <= i < m:
  * 
  *         y[i * incy] = <FLOAT128_t>0.0             # <<<<<<<<<<<<<<
@@ -2060,7 +2060,7 @@ static void __pyx_f_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT64_t_FLOAT
     (__pyx_v_y[(__pyx_v_i * __pyx_v_incy)]) = ((__pyx_t_8cysparse_5types_14cysparse_types_FLOAT128_t)0.0);
   }
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":154
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":161
  * 
  *     # multiplication, column-wise...
  *     for j from 0 <= j < n:             # <<<<<<<<<<<<<<
@@ -2070,38 +2070,38 @@ static void __pyx_f_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT64_t_FLOAT
   __pyx_t_1 = __pyx_v_n;
   for (__pyx_v_j = 0; __pyx_v_j < __pyx_t_1; __pyx_v_j++) {
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":155
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":162
  *     # multiplication, column-wise...
  *     for j from 0 <= j < n:
  *         for k from ind[j]<= k < ind[j+1]:             # <<<<<<<<<<<<<<
  *             i = row[k]
- *             y[i * incy] += val[k] * x[i * incx]
+ *             y[i * incy] += val[k] * x[j * incx]
  */
     __pyx_t_2 = (__pyx_v_ind[(__pyx_v_j + 1)]);
     for (__pyx_v_k = (__pyx_v_ind[__pyx_v_j]); __pyx_v_k < __pyx_t_2; __pyx_v_k++) {
 
-      /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":156
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":163
  *     for j from 0 <= j < n:
  *         for k from ind[j]<= k < ind[j+1]:
  *             i = row[k]             # <<<<<<<<<<<<<<
- *             y[i * incy] += val[k] * x[i * incx]
+ *             y[i * incy] += val[k] * x[j * incx]
  * 
  */
       __pyx_v_i = (__pyx_v_row[__pyx_v_k]);
 
-      /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":157
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":164
  *         for k from ind[j]<= k < ind[j+1]:
  *             i = row[k]
- *             y[i * incy] += val[k] * x[i * incx]             # <<<<<<<<<<<<<<
+ *             y[i * incy] += val[k] * x[j * incx]             # <<<<<<<<<<<<<<
  * 
  * 
  */
       __pyx_t_3 = (__pyx_v_i * __pyx_v_incy);
-      (__pyx_v_y[__pyx_t_3]) = ((__pyx_v_y[__pyx_t_3]) + ((__pyx_v_val[__pyx_v_k]) * (__pyx_v_x[(__pyx_v_i * __pyx_v_incx)])));
+      (__pyx_v_y[__pyx_t_3]) = ((__pyx_v_y[__pyx_t_3]) + ((__pyx_v_val[__pyx_v_k]) * (__pyx_v_x[(__pyx_v_j * __pyx_v_incx)])));
     }
   }
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":120
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":127
  * # Non C-contiguous, non symmetric
  * ###########################################
  * cdef void multiply_csc_mat_with_strided_numpy_vector_kernel_INT64_t_FLOAT128_t(INT64_t m, INT64_t n,             # <<<<<<<<<<<<<<
@@ -2113,7 +2113,7 @@ static void __pyx_f_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT64_t_FLOAT
   __Pyx_RefNannyFinishContext();
 }
 
-/* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":163
+/* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":170
  * # Non C-contiguous, symmetric
  * ###########################################
  * cdef void multiply_sym_csc_mat_with_strided_numpy_vector_kernel_INT64_t_FLOAT128_t(INT64_t m, INT64_t n,             # <<<<<<<<<<<<<<
@@ -2132,7 +2132,7 @@ static void __pyx_f_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT64_t_FLOAT
   int __pyx_t_4;
   __Pyx_RefNannySetupContext("multiply_sym_csc_mat_with_strided_numpy_vector_kernel_INT64_t_FLOAT128_t", 0);
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":191
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":198
  * 
  *     # init numpy array
  *     for i from 0 <= i < m:             # <<<<<<<<<<<<<<
@@ -2142,7 +2142,7 @@ static void __pyx_f_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT64_t_FLOAT
   __pyx_t_1 = __pyx_v_m;
   for (__pyx_v_i = 0; __pyx_v_i < __pyx_t_1; __pyx_v_i++) {
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":193
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":200
  *     for i from 0 <= i < m:
  * 
  *         y[i * incy] = <FLOAT128_t>0.0             # <<<<<<<<<<<<<<
@@ -2152,7 +2152,7 @@ static void __pyx_f_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT64_t_FLOAT
     (__pyx_v_y[(__pyx_v_i * __pyx_v_incy)]) = ((__pyx_t_8cysparse_5types_14cysparse_types_FLOAT128_t)0.0);
   }
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":197
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":204
  * 
  *     # multiplication, column-wise...
  *     for j from 0 <= j < n:             # <<<<<<<<<<<<<<
@@ -2162,61 +2162,61 @@ static void __pyx_f_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT64_t_FLOAT
   __pyx_t_1 = __pyx_v_n;
   for (__pyx_v_j = 0; __pyx_v_j < __pyx_t_1; __pyx_v_j++) {
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":198
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":205
  *     # multiplication, column-wise...
  *     for j from 0 <= j < n:
  *         for k from ind[j]<= k < ind[j+1]:             # <<<<<<<<<<<<<<
  *             i = row[k]
- *             y[i * incy] += val[k] * x[i * incx]
+ *             y[i * incy] += val[k] * x[j * incx]
  */
     __pyx_t_2 = (__pyx_v_ind[(__pyx_v_j + 1)]);
     for (__pyx_v_k = (__pyx_v_ind[__pyx_v_j]); __pyx_v_k < __pyx_t_2; __pyx_v_k++) {
 
-      /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":199
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":206
  *     for j from 0 <= j < n:
  *         for k from ind[j]<= k < ind[j+1]:
  *             i = row[k]             # <<<<<<<<<<<<<<
- *             y[i * incy] += val[k] * x[i * incx]
+ *             y[i * incy] += val[k] * x[j * incx]
  *             if j != i:
  */
       __pyx_v_i = (__pyx_v_row[__pyx_v_k]);
 
-      /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":200
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":207
  *         for k from ind[j]<= k < ind[j+1]:
  *             i = row[k]
- *             y[i * incy] += val[k] * x[i * incx]             # <<<<<<<<<<<<<<
+ *             y[i * incy] += val[k] * x[j * incx]             # <<<<<<<<<<<<<<
  *             if j != i:
- *                 y[j * incy] += val[k] * x[j * incx]
+ *                 y[j * incy] += val[k] * x[i * incx]
  */
       __pyx_t_3 = (__pyx_v_i * __pyx_v_incy);
-      (__pyx_v_y[__pyx_t_3]) = ((__pyx_v_y[__pyx_t_3]) + ((__pyx_v_val[__pyx_v_k]) * (__pyx_v_x[(__pyx_v_i * __pyx_v_incx)])));
+      (__pyx_v_y[__pyx_t_3]) = ((__pyx_v_y[__pyx_t_3]) + ((__pyx_v_val[__pyx_v_k]) * (__pyx_v_x[(__pyx_v_j * __pyx_v_incx)])));
 
-      /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":201
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":208
  *             i = row[k]
- *             y[i * incy] += val[k] * x[i * incx]
+ *             y[i * incy] += val[k] * x[j * incx]
  *             if j != i:             # <<<<<<<<<<<<<<
- *                 y[j * incy] += val[k] * x[j * incx]
+ *                 y[j * incy] += val[k] * x[i * incx]
  * 
  */
       __pyx_t_4 = ((__pyx_v_j != __pyx_v_i) != 0);
       if (__pyx_t_4) {
 
-        /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":202
- *             y[i * incy] += val[k] * x[i * incx]
+        /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":209
+ *             y[i * incy] += val[k] * x[j * incx]
  *             if j != i:
- *                 y[j * incy] += val[k] * x[j * incx]             # <<<<<<<<<<<<<<
+ *                 y[j * incy] += val[k] * x[i * incx]             # <<<<<<<<<<<<<<
  * 
  * 
  */
         __pyx_t_3 = (__pyx_v_j * __pyx_v_incy);
-        (__pyx_v_y[__pyx_t_3]) = ((__pyx_v_y[__pyx_t_3]) + ((__pyx_v_val[__pyx_v_k]) * (__pyx_v_x[(__pyx_v_j * __pyx_v_incx)])));
+        (__pyx_v_y[__pyx_t_3]) = ((__pyx_v_y[__pyx_t_3]) + ((__pyx_v_val[__pyx_v_k]) * (__pyx_v_x[(__pyx_v_i * __pyx_v_incx)])));
         goto __pyx_L9;
       }
       __pyx_L9:;
     }
   }
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":163
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":170
  * # Non C-contiguous, symmetric
  * ###########################################
  * cdef void multiply_sym_csc_mat_with_strided_numpy_vector_kernel_INT64_t_FLOAT128_t(INT64_t m, INT64_t n,             # <<<<<<<<<<<<<<
@@ -2228,7 +2228,7 @@ static void __pyx_f_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT64_t_FLOAT
   __Pyx_RefNannyFinishContext();
 }
 
-/* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":213
+/* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":220
  * # C-contiguous, non symmetric
  * ###########################################
  * cdef void multiply_tranposed_csc_mat_with_numpy_vector_kernel_INT64_t_FLOAT128_t(INT64_t m, INT64_t n, FLOAT128_t *x, FLOAT128_t *y,             # <<<<<<<<<<<<<<
@@ -2245,7 +2245,7 @@ static void __pyx_f_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT64_t_FLOAT
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_t_2;
   __Pyx_RefNannySetupContext("multiply_tranposed_csc_mat_with_numpy_vector_kernel_INT64_t_FLOAT128_t", 0);
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":237
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":244
  *         INT64_t j, k
  * 
  *     for j from 0 <= j < n:             # <<<<<<<<<<<<<<
@@ -2255,7 +2255,7 @@ static void __pyx_f_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT64_t_FLOAT
   __pyx_t_1 = __pyx_v_n;
   for (__pyx_v_j = 0; __pyx_v_j < __pyx_t_1; __pyx_v_j++) {
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":239
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":246
  *     for j from 0 <= j < n:
  * 
  *         s = <FLOAT128_t>0.0             # <<<<<<<<<<<<<<
@@ -2264,7 +2264,7 @@ static void __pyx_f_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT64_t_FLOAT
  */
     __pyx_v_s = ((__pyx_t_8cysparse_5types_14cysparse_types_FLOAT128_t)0.0);
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":241
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":248
  *         s = <FLOAT128_t>0.0
  * 
  *         for k from ind[j]<= k < ind[j+1]:             # <<<<<<<<<<<<<<
@@ -2274,7 +2274,7 @@ static void __pyx_f_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT64_t_FLOAT
     __pyx_t_2 = (__pyx_v_ind[(__pyx_v_j + 1)]);
     for (__pyx_v_k = (__pyx_v_ind[__pyx_v_j]); __pyx_v_k < __pyx_t_2; __pyx_v_k++) {
 
-      /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":242
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":249
  * 
  *         for k from ind[j]<= k < ind[j+1]:
  *             s += val[k] * x[row[k]]             # <<<<<<<<<<<<<<
@@ -2284,7 +2284,7 @@ static void __pyx_f_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT64_t_FLOAT
       __pyx_v_s = (__pyx_v_s + ((__pyx_v_val[__pyx_v_k]) * (__pyx_v_x[(__pyx_v_row[__pyx_v_k])])));
     }
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":244
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":251
  *             s += val[k] * x[row[k]]
  * 
  *         y[j] = s             # <<<<<<<<<<<<<<
@@ -2294,7 +2294,7 @@ static void __pyx_f_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT64_t_FLOAT
     (__pyx_v_y[__pyx_v_j]) = __pyx_v_s;
   }
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":213
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":220
  * # C-contiguous, non symmetric
  * ###########################################
  * cdef void multiply_tranposed_csc_mat_with_numpy_vector_kernel_INT64_t_FLOAT128_t(INT64_t m, INT64_t n, FLOAT128_t *x, FLOAT128_t *y,             # <<<<<<<<<<<<<<
@@ -2306,7 +2306,7 @@ static void __pyx_f_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT64_t_FLOAT
   __Pyx_RefNannyFinishContext();
 }
 
-/* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":250
+/* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":257
  * # Non C-contiguous, non symmetric
  * ###########################################
  * cdef void multiply_tranposed_csc_mat_with_strided_numpy_vector_kernel_INT64_t_FLOAT128_t(INT64_t m, INT64_t n, FLOAT128_t *x, INT64_t incx, FLOAT128_t *y, INT64_t incy,             # <<<<<<<<<<<<<<
@@ -2323,7 +2323,7 @@ static void __pyx_f_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT64_t_FLOAT
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_t_2;
   __Pyx_RefNannySetupContext("multiply_tranposed_csc_mat_with_strided_numpy_vector_kernel_INT64_t_FLOAT128_t", 0);
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":276
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":283
  *         INT64_t j, k
  * 
  *     for j from 0 <= j < n:             # <<<<<<<<<<<<<<
@@ -2333,7 +2333,7 @@ static void __pyx_f_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT64_t_FLOAT
   __pyx_t_1 = __pyx_v_n;
   for (__pyx_v_j = 0; __pyx_v_j < __pyx_t_1; __pyx_v_j++) {
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":278
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":285
  *     for j from 0 <= j < n:
  * 
  *         s = <FLOAT128_t>0.0             # <<<<<<<<<<<<<<
@@ -2342,7 +2342,7 @@ static void __pyx_f_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT64_t_FLOAT
  */
     __pyx_v_s = ((__pyx_t_8cysparse_5types_14cysparse_types_FLOAT128_t)0.0);
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":280
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":287
  *         s = <FLOAT128_t>0.0
  * 
  *         for k from ind[j]<= k < ind[j+1]:             # <<<<<<<<<<<<<<
@@ -2352,7 +2352,7 @@ static void __pyx_f_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT64_t_FLOAT
     __pyx_t_2 = (__pyx_v_ind[(__pyx_v_j + 1)]);
     for (__pyx_v_k = (__pyx_v_ind[__pyx_v_j]); __pyx_v_k < __pyx_t_2; __pyx_v_k++) {
 
-      /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":281
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":288
  * 
  *         for k from ind[j]<= k < ind[j+1]:
  *             s += val[k] * x[row[k] * incx]             # <<<<<<<<<<<<<<
@@ -2362,16 +2362,17 @@ static void __pyx_f_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT64_t_FLOAT
       __pyx_v_s = (__pyx_v_s + ((__pyx_v_val[__pyx_v_k]) * (__pyx_v_x[((__pyx_v_row[__pyx_v_k]) * __pyx_v_incx)])));
     }
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":283
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":290
  *             s += val[k] * x[row[k] * incx]
  * 
  *         y[j * incy] = s             # <<<<<<<<<<<<<<
+ * 
  * 
  */
     (__pyx_v_y[(__pyx_v_j * __pyx_v_incy)]) = __pyx_v_s;
   }
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":250
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi":257
  * # Non C-contiguous, non symmetric
  * ###########################################
  * cdef void multiply_tranposed_csc_mat_with_strided_numpy_vector_kernel_INT64_t_FLOAT128_t(INT64_t m, INT64_t n, FLOAT128_t *x, INT64_t incx, FLOAT128_t *y, INT64_t incy,             # <<<<<<<<<<<<<<
