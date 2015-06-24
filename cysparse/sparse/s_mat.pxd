@@ -35,14 +35,17 @@ cdef class SparseMatrix:
     """
     cdef:
         # attributes that have a corresponding Python property start with '__'
-        bint __is_symmetric       # True if symmetric matrix
-        bint __store_zeros        # True if 0.0 is to be stored explicitly
+        bint __is_symmetric           # True if symmetric matrix
+        bint __store_zeros            # True if 0.0 is to be stored explicitly
 
-        bint __is_mutable         # True if mutable
+        bint __is_mutable             # True if mutable
 
-        char * __type_name        # Name of matrix type
-        char * __type             # Type of matrix
-        CPType cp_type            # Internal types of the matrix
+        str __type_name               # Name of matrix type
+        str __type                    # Type of matrix
+        # the next attribute doesn't have a corresponding Python property by we keep names coherent
+        str __index_and_type          # [@index@, @type@]
+
+        CPType cp_type                # Internal types of the matrix
 
 
 

@@ -7,6 +7,7 @@ Covered cases:
 
     - LLSparseMatrix by LLSparseMatrix;
     - Transposed LLSparseMatrix by LLSparseMatrix;
+    - LLSparseMatrix by NumPy array;
 
 2. LLSparseMatrix by Numpy vector
 
@@ -187,8 +188,83 @@ cdef cnp.ndarray[cnp.npy_int64, ndim=2] multiply_ll_mat_with_numpy_ndarray_INT64
     cdef INT32_t C_nrow = A_nrow
     cdef INT32_t C_ncol = B_ncol
 
-    cdef bint store_zeros = A.__store_zeros
-    cdef INT32_t size_hint = A.size_hint
+    cdef cnp.ndarray[cnp.npy_int64, ndim=2] C = np.zeros((C_nrow,C_ncol), dtype=np.int64)
+
+    # memory views
+    cdef INT64_t [:, :] B_memory_view = B
+    cdef INT64_t [:, :] C_memory_view = C
+
+    # NON OPTIMIZED MULTIPLICATION
+    # memory views are not really optimized either...
+    cdef:
+        INT64_t valA
+        INT32_t iA, jA, kA, jB
+
+    # CASES
+    if not A.__is_symmetric:
+        for iA from 0 <= iA < A_nrow:
+            kA = A.root[iA]
+
+            while kA != -1:
+                valA = A.val[kA]
+                jA = A.col[kA]
+
+                for jB from 0 <= jB < B_ncol:
+                    C_memory_view[iA, jB] += valA * B_memory_view[jA, jB]
+
+                kA = A.link[kA]
+    else:
+        for iA from 0 <= iA < A_nrow:
+            kA = A.root[iA]
+
+            while kA != -1:
+                valA = A.val[kA]
+                jA = A.col[kA]
+
+                for jB from 0 <= jB < B_ncol:
+                    C_memory_view[iA, jB] += valA * B_memory_view[jA, jB]
+
+                if jA != iA:
+                    for jB from 0 <= jB < B_ncol:
+                        C_memory_view[jA, jB] += valA * B_memory_view[iA, jB]
+
+                kA = A.link[kA]
+
+    return C
+
+
+###################################################
+# Transposed LLSparseMatrix by a full NumPy matrix
+###################################################
+cdef cnp.ndarray[cnp.npy_int64, ndim=2] multiply_transposed_ll_mat_with_numpy_ndarray_INT64_t(LLSparseMatrix_INT32_t_INT64_t A, cnp.ndarray[cnp.npy_int64, ndim=2] B):
+    """
+    Multiply a transposed :class:`LLSparseMatrix_INT32_t_INT64_t` ``A`` with a dense :program:`NumPy` ``B``.
+
+    Args:
+        A: An :class:``LLSparseMatrix_INT32_t_INT64_t`` ``A``.
+        B: An :program:`NumPy` ``B``.
+
+    Returns:
+        A **new** :program:`NumPy` ``C = A^t * B``.
+
+    Raises:
+        ``IndexError`` if matrix dimension don't agree.
+        ``NotImplementedError``: When matrix ``A`` is symmetric.
+        ``RuntimeError`` if some error occurred during the computation.
+    """
+    # test dimensions
+    cdef INT32_t A_nrow = A.__nrow
+    cdef INT32_t A_ncol = A.__ncol
+
+    cdef INT32_t B_nrow, B_ncol
+    B_nrow = B.shape[0]
+    B_ncol = B.shape[1]
+
+    if A_nrow != B_nrow:
+        raise IndexError("Matrix dimensions must agree ([%d, %d]^t * [%d, %d])" % (A_nrow, A_ncol, B_nrow, B_ncol))
+
+    cdef INT32_t C_nrow = A_ncol
+    cdef INT32_t C_ncol = B_ncol
 
     cdef cnp.ndarray[cnp.npy_int64, ndim=2] C = np.zeros((C_nrow,C_ncol), dtype=np.int64)
 
@@ -196,29 +272,43 @@ cdef cnp.ndarray[cnp.npy_int64, ndim=2] multiply_ll_mat_with_numpy_ndarray_INT64
     cdef INT64_t [:, :] B_memory_view = B
     cdef INT64_t [:, :] C_memory_view = C
 
-    # CASES
-    if not A.__is_symmetric:
-        pass
-    else:
-        raise NotImplementedError("Multiplication with symmetric matrices is not implemented yet")
-
     # NON OPTIMIZED MULTIPLICATION
+    # memory views are not really optimized either...
     cdef:
         INT64_t valA
-        INT32_t iA, jA, jB
+        INT32_t iA, jA, kA, jB
 
-    for iA from 0 <= iA < A_nrow:
-        kA = A.root[iA]
+    # CASES
+    if not A.__is_symmetric:
+        for iA from 0 <= iA < A_nrow:
+            kA = A.root[iA]
 
-        while kA != -1:
-            valA = A.val[kA]
-            jA = A.col[kA]
+            while kA != -1:
+                valA = A.val[kA]
+                jA = A.col[kA]
 
+                for jB from 0 <= jB < B_ncol:
+                    C_memory_view[jA, jB] += valA * B_memory_view[iA, jB]
 
-            for jB from 0 <= jB < B_ncol:
-                C_memory_view[iA, jB] += valA * B_memory_view[jA, jB]
+                kA = A.link[kA]
+    else:
+        # TODO: maybe uncomment following line for maitenance?
+        # return multiply_ll_mat_with_numpy_ndarray_INT64_t(A, B) # works of course but it is the same here
+        for iA from 0 <= iA < A_nrow:
+            kA = A.root[iA]
 
-            kA = A.link[kA]
+            while kA != -1:
+                valA = A.val[kA]
+                jA = A.col[kA]
+
+                for jB from 0 <= jB < B_ncol:
+                    C_memory_view[jA, jB] += valA * B_memory_view[iA, jB]
+
+                if jA != iA:
+                    for jB from 0 <= jB < B_ncol:
+                        C_memory_view[iA, jB] += valA * B_memory_view[jA, jB]
+
+                kA = A.link[kA]
 
     return C
 

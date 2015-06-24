@@ -118,9 +118,9 @@ cdef void multiply_csr_mat_with_strided_numpy_vector_kernel_INT32_t_FLOAT64_t(IN
 
     Args:
         m: Number of rows of the matrix ``A``.
-        x: C-contiguous C-array corresponding to vector ``x``.
+        x: (non necessarily C-contiguous) C-array corresponding to vector ``x``.
         incx: Stride for array ``x``.
-        y: C-contiguous C-array corresponding to vector ``y``.
+        y: (non necessarily C-contiguous) C-array corresponding to vector ``y``.
         incy: Stride for array ``y``.
         val: C-contiguous C-array corresponding to vector ``A.val``.
         col: C-contiguous C-array corresponding to vector ``A.col``.
@@ -158,9 +158,9 @@ cdef void multiply_sym_csr_mat_with_strided_numpy_vector_kernel_INT32_t_FLOAT64_
 
     Args:
         m: Number of rows of the matrix ``A``.
-        x: C-contiguous C-array corresponding to vector ``x``.
+        x: (non necessarily C-contiguous) C-array corresponding to vector ``x``.
         incx: Stride for array ``x``.
-        y: C-contiguous C-array corresponding to vector ``y``.
+        y: (non necessarily C-contiguous) C-array corresponding to vector ``y``.
         incy: Stride for array ``y``.
         val: C-contiguous C-array corresponding to vector ``A.val``.
         col: C-contiguous C-array corresponding to vector ``A.col``.
@@ -221,7 +221,7 @@ cdef void multiply_tranposed_csr_mat_with_numpy_vector_kernel_INT32_t_FLOAT64_t(
 
     for i from 0 <= i < m:
         for k from ind[i]<= k < ind[i+1]:
-            y[col[k]] += val[k] * x[col[k]]
+            y[col[k]] += val[k] * x[i]
 
 
 
@@ -242,9 +242,9 @@ cdef void multiply_tranposed_csr_mat_with_strided_numpy_vector_kernel_INT32_t_FL
     Args:
         m: Number of rows of the matrix ``A``.
         n: Number of columns of the matrix ``A``.
-        x: C-contiguous C-array corresponding to vector ``x``.
+        x: (non necessarily C-contiguous) C-array corresponding to vector ``x``.
         incx: Stride for array ``x``.
-        y: C-contiguous C-array corresponding to vector ``y``.
+        y: (non necessarily C-contiguous) C-array corresponding to vector ``y``.
         incy: Stride for array ``y``.
         val: C-contiguous C-array corresponding to vector ``A.val``.
         col: C-contiguous C-array corresponding to vector ``A.col``.
@@ -262,5 +262,5 @@ cdef void multiply_tranposed_csr_mat_with_strided_numpy_vector_kernel_INT32_t_FL
 
     for i from 0 <= i < m:
         for k from ind[i]<= k < ind[i+1]:
-            y[col[k] * incy] += val[k] * x[col[k] * incx]
+            y[col[k] * incy] += val[k] * x[i * incx]
 

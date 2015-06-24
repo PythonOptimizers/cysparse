@@ -65,8 +65,12 @@ cdef class SparseMatrix:
         assert unexposed_value == kwargs.get('control_object', None), "Matrix must be instantiated with a factory method"
 
         self.__type_name = "Not defined"
-        self.cp_type.itype = kwargs.get('itype', INT32_T)
-        self.cp_type.dtype = kwargs.get('dtype', FLOAT64_T)
+        self.__type = "Not defined"
+        self.__index_and_type = "[not defined, not defined]"
+
+        # This is overwritten in inheriting classes
+        #self.cp_type.itype = kwargs.get('itype', INT32_T)
+        #self.cp_type.dtype = kwargs.get('dtype', FLOAT64_T)
 
         self.__is_symmetric = kwargs.get('__is_symmetric', False)
         self.__store_zeros = kwargs.get('store_zeros', False)

@@ -176,7 +176,7 @@ To find all triplets :math:`(i, j, k)`:
 ..  code-block:: python
 
     for i from 0 <= i < nrow:
-        for k from ind[i] <= k < ind[k+1]:
+        for k from ind[i] <= k < ind[i+1]:
             j = col[k]
             v = val[k]
 

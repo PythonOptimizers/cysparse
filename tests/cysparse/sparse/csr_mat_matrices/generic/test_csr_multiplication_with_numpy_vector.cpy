@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 """
-This file tests the multiplication of an :class:`CSRSparseMatrix` matricix with a :program:`NumPy` vector.
+This file tests the multiplication of an :class:`CSRSparseMatrix` matrix with a :program:`NumPy` vector.
 
 We test **all** types and the symmetric and general cases. We also test strided vectors.
 We only use the real parts of complex numbers.
@@ -30,11 +30,17 @@ def construct_sym_sparse_matrix(A, n, nbr_elements):
         else:
             A[p, k] = i / 3
 
-def construct_sparse_matrix(A, m, n, nbr_elements):
-    for i in xrange(nbr_elements):
-        k = i % n
-        p = (i % 2 + 1) % m
-        A[p, k] = i / 3
+def construct_dense_matrix(A, m, n, nbr_elements):
+    i = 0
+    j = -1
+    for k in xrange(nbr_elements):
+        j = j + 1
+        if j % n == 0:
+            i = i + 1
+            if i >= m:
+                break
+
+        A[i, j] = (i + j) / 3
 
 ########################################################################################################################
 # Tests
@@ -56,7 +62,7 @@ class CySparseCSRMultiplicationWithANumpyVectorTestCase(CySparseCSRMultiplicatio
   {% set outerloop = loop %}
   {% for element_type in type_list %}
         self.l_@outerloop.index@_@loop.index@ = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=@index_type|type2enum@, dtype=@element_type|type2enum@)
-        construct_sparse_matrix(self.l_@outerloop.index@_@loop.index@, self.nrow, self.ncol, self.nbr_of_elements)
+        construct_dense_matrix(self.l_@outerloop.index@_@loop.index@, self.nrow, self.ncol, self.nbr_of_elements)
 
         self.l_@outerloop.index@_@loop.index@_csr = self.l_@outerloop.index@_@loop.index@.to_csr()
   {% endfor %}

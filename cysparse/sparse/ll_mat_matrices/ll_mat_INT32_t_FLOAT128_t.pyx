@@ -136,7 +136,7 @@ cdef class LLSparseMatrix_INT32_t_FLOAT128_t(MutableSparseMatrix_INT32_t_FLOAT12
             raise ValueError('size_hint (%d) must be >= 1' % self.size_hint)
 
         self.__type = "LLSparseMatrix"
-        self.__type_name = "LLSparseMatrix [INT32_t, FLOAT128_t]"
+        self.__type_name = "LLSparseMatrix %s" % self.__index_and_type
 
         # This is particular to the LLSparseMatrix type
         # Do we allocate memory here or
@@ -1548,9 +1548,12 @@ cdef class LLSparseMatrix_INT32_t_FLOAT128_t(MutableSparseMatrix_INT32_t_FLOAT12
         Return :math:`A^t * B`.
         """
         if PyLLSparseMatrix_Check(B):
+            assert self.dtype == B.dtype, 'Element types must match'
+            assert self.itype == B.itype, 'Index types must match'
             return multiply_transposed_ll_mat_by_ll_mat_INT32_t_FLOAT128_t(self, B)
         elif cnp.PyArray_Check(B):
-            raise NotImplementedError("Multiplication with this kind of object not implemented yet...")
+            assert are_mixed_types_compatible(FLOAT128_T, B.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(FLOAT128_T)
+            return multiply_transposed_ll_mat_with_numpy_ndarray_FLOAT128_t(self, B)
         else:
             raise NotImplementedError("Multiplication with this kind of object not allowed")
 

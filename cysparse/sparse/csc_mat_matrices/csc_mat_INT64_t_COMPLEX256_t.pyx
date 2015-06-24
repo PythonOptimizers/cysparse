@@ -48,7 +48,9 @@ cdef class CSCSparseMatrix_INT64_t_COMPLEX256_t(ImmutableSparseMatrix_INT64_t_CO
 
 
     def __cinit__(self,  **kwargs):
-        self.__type_name = "CSCSparseMatrix"
+
+        self.__type = "CSCSparseMatrix"
+        self.__type_name = "CSCSparseMatrix %s" % self.__index_and_type
 
     def __dealloc__(self):
         PyMem_Free(self.val)

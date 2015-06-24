@@ -7,6 +7,7 @@ Condensed Sparse Row (CSR) Format Matrices.
 from __future__ import print_function
 
 from cysparse.sparse.s_mat cimport unexposed_value
+from cysparse.types.cysparse_numpy_types import *
 
 from cysparse.sparse.s_mat_matrices.s_mat_INT64_t_FLOAT128_t cimport ImmutableSparseMatrix_INT64_t_FLOAT128_t, MutableSparseMatrix_INT64_t_FLOAT128_t
 from cysparse.sparse.ll_mat_matrices.ll_mat_INT64_t_FLOAT128_t cimport LLSparseMatrix_INT64_t_FLOAT128_t
@@ -19,6 +20,7 @@ from cysparse.sparse.sparse_utils.generic.sort_indices_INT64_t cimport sort_arra
 ########################################################################################################################
 from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
 from cpython cimport PyObject
+from libc.stdlib cimport malloc,free, calloc
 
 cimport numpy as cnp
 import numpy as np
@@ -29,6 +31,24 @@ cnp.import_array()
 # TODO: These constants will be removed soon...
 cdef int CSR_MAT_PPRINT_ROW_THRESH = 500       # row threshold for choosing print format
 cdef int CSR_MAT_PPRINT_COL_THRESH = 20        # column threshold for choosing print format
+
+cdef extern from "complex.h":
+    float crealf(float complex z)
+    float cimagf(float complex z)
+
+    double creal(double complex z)
+    double cimag(double complex z)
+
+    long double creall(long double complex z)
+    long double cimagl(long double complex z)
+
+    double cabs(double complex z)
+    float cabsf(float complex z)
+    long double cabsl(long double complex z)
+
+    double complex conj(double complex z)
+    float complex  conjf (float complex z)
+    long double complex conjl (long double complex z)
 
 ########################################################################################################################
 # CySparse include
@@ -58,7 +78,8 @@ cdef class CSRSparseMatrix_INT64_t_FLOAT128_t(ImmutableSparseMatrix_INT64_t_FLOA
     ####################################################################################################################
     def __cinit__(self, **kwargs):
 
-        self.__type_name = "CSRSparseMatrix"
+        self.__type = "CSRSparseMatrix"
+        self.__type_name = "CSRSparseMatrix %s" % self.__index_and_type
 
     def __dealloc__(self):
         PyMem_Free(self.val)
@@ -256,17 +277,24 @@ cdef class CSRSparseMatrix_INT64_t_FLOAT128_t(ImmutableSparseMatrix_INT64_t_FLOA
     ####################################################################################################################
     # Multiplication
     ####################################################################################################################
-    def matvec(self, B):
+    def matvec(self, b):
         """
         Return :math:`A * b`.
         """
-        return multiply_csr_mat_with_numpy_vector_INT64_t_FLOAT128_t(self, B)
+        return multiply_csr_mat_with_numpy_vector_INT64_t_FLOAT128_t(self, b)
 
-    def matvec_transp(self, B):
+    def matvec_transp(self, b):
         """
         Return :math:`A^t * b`.
         """
-        return multiply_transposed_csr_mat_with_numpy_vector_INT64_t_FLOAT128_t(self, B)
+        return multiply_transposed_csr_mat_with_numpy_vector_INT64_t_FLOAT128_t(self, b)
+
+    def matvec_htransp(self, b):
+        """
+        Return :math:`A^h * b`.
+        """
+        assert are_mixed_types_compatible(FLOAT128_T, b.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(FLOAT128_T)
+        return multiply_conjugate_transposed_csr_mat_with_numpy_vector_INT64_t_FLOAT128_t(self, b)
 
     def matdot(self, B):
         raise NotImplementedError("Multiplication with this kind of object not allowed")

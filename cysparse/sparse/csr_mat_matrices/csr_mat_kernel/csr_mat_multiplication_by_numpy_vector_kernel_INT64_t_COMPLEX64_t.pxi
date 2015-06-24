@@ -118,9 +118,9 @@ cdef void multiply_csr_mat_with_strided_numpy_vector_kernel_INT64_t_COMPLEX64_t(
 
     Args:
         m: Number of rows of the matrix ``A``.
-        x: C-contiguous C-array corresponding to vector ``x``.
+        x: (non necessarily C-contiguous) C-array corresponding to vector ``x``.
         incx: Stride for array ``x``.
-        y: C-contiguous C-array corresponding to vector ``y``.
+        y: (non necessarily C-contiguous) C-array corresponding to vector ``y``.
         incy: Stride for array ``y``.
         val: C-contiguous C-array corresponding to vector ``A.val``.
         col: C-contiguous C-array corresponding to vector ``A.col``.
@@ -158,9 +158,9 @@ cdef void multiply_sym_csr_mat_with_strided_numpy_vector_kernel_INT64_t_COMPLEX6
 
     Args:
         m: Number of rows of the matrix ``A``.
-        x: C-contiguous C-array corresponding to vector ``x``.
+        x: (non necessarily C-contiguous) C-array corresponding to vector ``x``.
         incx: Stride for array ``x``.
-        y: C-contiguous C-array corresponding to vector ``y``.
+        y: (non necessarily C-contiguous) C-array corresponding to vector ``y``.
         incy: Stride for array ``y``.
         val: C-contiguous C-array corresponding to vector ``A.val``.
         col: C-contiguous C-array corresponding to vector ``A.col``.
@@ -221,7 +221,7 @@ cdef void multiply_tranposed_csr_mat_with_numpy_vector_kernel_INT64_t_COMPLEX64_
 
     for i from 0 <= i < m:
         for k from ind[i]<= k < ind[i+1]:
-            y[col[k]] += val[k] * x[col[k]]
+            y[col[k]] += val[k] * x[i]
 
 
 
@@ -242,9 +242,9 @@ cdef void multiply_tranposed_csr_mat_with_strided_numpy_vector_kernel_INT64_t_CO
     Args:
         m: Number of rows of the matrix ``A``.
         n: Number of columns of the matrix ``A``.
-        x: C-contiguous C-array corresponding to vector ``x``.
+        x: (non necessarily C-contiguous) C-array corresponding to vector ``x``.
         incx: Stride for array ``x``.
-        y: C-contiguous C-array corresponding to vector ``y``.
+        y: (non necessarily C-contiguous) C-array corresponding to vector ``y``.
         incy: Stride for array ``y``.
         val: C-contiguous C-array corresponding to vector ``A.val``.
         col: C-contiguous C-array corresponding to vector ``A.col``.
@@ -262,5 +262,179 @@ cdef void multiply_tranposed_csr_mat_with_strided_numpy_vector_kernel_INT64_t_CO
 
     for i from 0 <= i < m:
         for k from ind[i]<= k < ind[i+1]:
-            y[col[k] * incy] += val[k] * x[col[k] * incx]
+            y[col[k] * incy] += val[k] * x[i * incx]
+
+
+########################################################################################################################
+# A^h * b
+########################################################################################################################
+
+###########################################
+# C-contiguous, non symmetric
+###########################################
+cdef void multiply_conjugate_transposed_csr_mat_with_numpy_vector_kernel_INT64_t_COMPLEX64_t(INT64_t m, INT64_t n, COMPLEX64_t *x, COMPLEX64_t *y,
+         COMPLEX64_t *val, INT64_t *col, INT64_t *ind):
+    """
+    Compute :math:`y = A^h * x`.
+
+    ``A`` is a :class:`CSRSparseMatrix` and ``x`` and ``y`` are one dimensional numpy arrays.
+    In this kernel function, we only use the corresponding C-arrays.
+
+    Warning:
+        This version consider the arrays as C-contiguous (**without** strides).
+        This version will **only** work for complex numbers and crashes at compile time for the other types.
+
+    Args:
+        m: Number of rows of the matrix ``A``.
+        n: Number of columns of the matrix ``A``.
+        x: C-contiguous C-array corresponding to vector ``x``.
+        y: C-contiguous C-array corresponding to vector ``y``.
+        val: C-contiguous C-array corresponding to vector ``A.val``.
+        col: C-contiguous C-array corresponding to vector ``A.col``.
+        ind: C-contiguous C-array corresponding to vector ``A.ind``.
+    """
+    cdef:
+        INT64_t i, j, k
+
+    # init numpy array
+    for j from 0 <= j < n:
+        y[j] = <COMPLEX64_t>(0.0+0.0j)
+
+    for i from 0 <= i < m:
+        for k from ind[i]<= k < ind[i+1]:
+
+            y[col[k]] += conjf(val[k]) * x[i]
+
+
+
+###########################################
+# C-contiguous, symmetric
+###########################################
+cdef void multiply_conjugate_transposed_sym_csr_mat_with_numpy_vector_kernel_INT64_t_COMPLEX64_t(INT64_t m, INT64_t n, COMPLEX64_t *x, COMPLEX64_t *y,
+         COMPLEX64_t *val, INT64_t *col, INT64_t *ind):
+    """
+    Compute :math:`y = A^h * x`.
+
+    ``A`` is a **symmetric** :class:`CSRSparseMatrix` and ``x`` and ``y`` are one dimensional numpy arrays.
+    In this kernel function, we only use the corresponding C-arrays.
+
+    Warning:
+        This version consider the arrays as C-contiguous (**without** strides).
+        This version will **only** work for complex numbers and crashes at compile time for the other types.
+
+    Args:
+        m: Number of rows of the matrix ``A``.
+        n: Number of columns of the matrix ``A``.
+        x: C-contiguous C-array corresponding to vector ``x``.
+        y: C-contiguous C-array corresponding to vector ``y``.
+        val: C-contiguous C-array corresponding to vector ``A.val``.
+        col: C-contiguous C-array corresponding to vector ``A.col``.
+        ind: C-contiguous C-array corresponding to vector ``A.ind``.
+    """
+    cdef:
+        INT64_t i, j, k
+        COMPLEX64_t v
+
+    # init numpy array
+    for j from 0 <= j < n:
+        y[j] = <COMPLEX64_t>(0.0+0.0j)
+
+    for i from 0 <= i < m:
+        for k from ind[i]<= k < ind[i+1]:
+
+            v = conjf(val[k])
+
+            j = col[k]
+
+            y[j] += v * x[i]
+            if j != i:
+                y[i] += v * x[j]
+
+###########################################
+# Non C-contiguous, non symmetric
+###########################################
+cdef void multiply_conjugate_tranposed_csr_mat_with_strided_numpy_vector_kernel_INT64_t_COMPLEX64_t(INT64_t m, INT64_t n, COMPLEX64_t *x, INT64_t incx, COMPLEX64_t *y, INT64_t incy,
+         COMPLEX64_t *val, INT64_t *col, INT64_t *ind):
+    """
+    Compute :math:`y = A^h * x`.
+
+    ``A`` is a :class:`CSRSparseMatrix` and ``x`` and ``y`` are one dimensional numpy arrays.
+    In this kernel function, we only use the corresponding C-arrays.
+
+    Warning:
+        This version consider the arrays as non C-contiguous (**with** strides).
+
+    Args:
+        m: Number of rows of the matrix ``A``.
+        n: Number of columns of the matrix ``A``.
+        x: (non necessarily C-contiguous) C-array corresponding to vector ``x``.
+        incx: Stride for array ``x``.
+        y: (non necessarily C-contiguous) C-array corresponding to vector ``y``.
+        incy: Stride for array ``y``.
+        val: C-contiguous C-array corresponding to vector ``A.val``.
+        col: C-contiguous C-array corresponding to vector ``A.col``.
+        ind: C-contiguous C-array corresponding to vector ``A.ind``.
+    """
+    cdef:
+        INT64_t i, j, k
+
+    # init numpy array
+    for j from 0 <= j < n:
+        y[j * incy] = <COMPLEX64_t>(0.0+0.0j)
+
+
+    for i from 0 <= i < m:
+        for k from ind[i]<= k < ind[i+1]:
+
+            y[col[k] * incy] += conjf(val[k]) * x[i * incx]
+
+
+
+###########################################
+# non C-contiguous, symmetric
+###########################################
+cdef void multiply_conjugate_transposed_sym_csr_mat_with_strided_numpy_vector_kernel_INT64_t_COMPLEX64_t(INT64_t m, INT64_t n, COMPLEX64_t *x, INT64_t incx, COMPLEX64_t *y, INT64_t incy,
+         COMPLEX64_t *val, INT64_t *col, INT64_t *ind):
+    """
+    Compute :math:`y = A^h * x`.
+
+    ``A`` is a **symmetric** :class:`CSRSparseMatrix` and ``x`` and ``y`` are one dimensional numpy arrays.
+    In this kernel function, we only use the corresponding C-arrays.
+
+    Warning:
+        This version consider the arrays as non C-contiguous (**with** strides).
+        This version will **only** work for complex numbers and crashes at compile time for the other types.
+
+    Args:
+        m: Number of rows of the matrix ``A``.
+        n: Number of columns of the matrix ``A``.
+        x: C-contiguous C-array corresponding to vector ``x``.
+        incx: Stride for array ``x``.
+        y: C-contiguous C-array corresponding to vector ``y``.
+        incy: Stride for array ``y``.
+        val: C-contiguous C-array corresponding to vector ``A.val``.
+        col: C-contiguous C-array corresponding to vector ``A.col``.
+        ind: C-contiguous C-array corresponding to vector ``A.ind``.
+    """
+    cdef:
+        INT64_t i, j, k
+        COMPLEX64_t v
+
+    # init numpy array
+    for j from 0 <= j < n:
+        y[j * incy] = <COMPLEX64_t>(0.0+0.0j)
+
+    for i from 0 <= i < m:
+        for k from ind[i]<= k < ind[i+1]:
+
+            v = conjf(val[k])
+
+            j = col[k]
+
+            y[j * incy] += v * x[i * incx]
+            if j != i:
+                y[i * incy] += v * x[j * incx]
+
+
+
 

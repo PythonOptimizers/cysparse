@@ -1,6 +1,7 @@
 # TODO: verify if we need to generate this file
 # For the moment I (Nikolaj) 'm leaving it as it is just in case things change...
 
+from cysparse.types.cysparse_types import *
 from cysparse.sparse.s_mat cimport SparseMatrix
 #from cysparse.sparse.sparse_proxies cimport ProxySparseMatrix
 
@@ -146,6 +147,16 @@ cdef class TransposedSparseMatrix:
 
     def matvec_transp(self, B):
         return self.A.matvec(B)
+
+    def matvec_htransp(self, B):
+        if not is_complex_type(self.A.cp_type.dtype):
+            raise TypeError("This operation is only valid for complex matrices")
+        return self.A.matvec_conj(B)
+
+    def matvec_conj(self, B):
+        if not is_complex_type(self.A.cp_type.dtype):
+            raise TypeError("This operation is only valid for complex matrices")
+        return self.A.matvec_htransp(B)
 
     def copy(self):
         raise NotImplementedError('This proxy is unique')

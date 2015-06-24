@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 """
-This file tests the multiplication of an :class:`CSRSparseMatrix` matricix with a :program:`NumPy` vector.
+This file tests the multiplication of an :class:`CSRSparseMatrix` matrix with a :program:`NumPy` vector.
 
 We test **all** types and the symmetric and general cases. We also test strided vectors.
 We only use the real parts of complex numbers.
@@ -30,11 +30,17 @@ def construct_sym_sparse_matrix(A, n, nbr_elements):
         else:
             A[p, k] = i / 3
 
-def construct_sparse_matrix(A, m, n, nbr_elements):
-    for i in xrange(nbr_elements):
-        k = i % n
-        p = (i % 2 + 1) % m
-        A[p, k] = i / 3
+def construct_dense_matrix(A, m, n, nbr_elements):
+    i = 0
+    j = -1
+    for k in xrange(nbr_elements):
+        j = j + 1
+        if j % n == 0:
+            i = i + 1
+            if i >= m:
+                break
+
+        A[i, j] = (i + j) / 3
 
 ########################################################################################################################
 # Tests
@@ -56,42 +62,42 @@ class CySparseCSRMultiplicationWithANumpyVectorTestCase(CySparseCSRMultiplicatio
   
   
         self.l_1_1 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=INT32_T)
-        construct_sparse_matrix(self.l_1_1, self.nrow, self.ncol, self.nbr_of_elements)
+        construct_dense_matrix(self.l_1_1, self.nrow, self.ncol, self.nbr_of_elements)
 
         self.l_1_1_csr = self.l_1_1.to_csr()
   
         self.l_1_2 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=INT64_T)
-        construct_sparse_matrix(self.l_1_2, self.nrow, self.ncol, self.nbr_of_elements)
+        construct_dense_matrix(self.l_1_2, self.nrow, self.ncol, self.nbr_of_elements)
 
         self.l_1_2_csr = self.l_1_2.to_csr()
   
         self.l_1_3 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=FLOAT32_T)
-        construct_sparse_matrix(self.l_1_3, self.nrow, self.ncol, self.nbr_of_elements)
+        construct_dense_matrix(self.l_1_3, self.nrow, self.ncol, self.nbr_of_elements)
 
         self.l_1_3_csr = self.l_1_3.to_csr()
   
         self.l_1_4 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=FLOAT64_T)
-        construct_sparse_matrix(self.l_1_4, self.nrow, self.ncol, self.nbr_of_elements)
+        construct_dense_matrix(self.l_1_4, self.nrow, self.ncol, self.nbr_of_elements)
 
         self.l_1_4_csr = self.l_1_4.to_csr()
   
         self.l_1_5 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=FLOAT128_T)
-        construct_sparse_matrix(self.l_1_5, self.nrow, self.ncol, self.nbr_of_elements)
+        construct_dense_matrix(self.l_1_5, self.nrow, self.ncol, self.nbr_of_elements)
 
         self.l_1_5_csr = self.l_1_5.to_csr()
   
         self.l_1_6 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=COMPLEX64_T)
-        construct_sparse_matrix(self.l_1_6, self.nrow, self.ncol, self.nbr_of_elements)
+        construct_dense_matrix(self.l_1_6, self.nrow, self.ncol, self.nbr_of_elements)
 
         self.l_1_6_csr = self.l_1_6.to_csr()
   
         self.l_1_7 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=COMPLEX128_T)
-        construct_sparse_matrix(self.l_1_7, self.nrow, self.ncol, self.nbr_of_elements)
+        construct_dense_matrix(self.l_1_7, self.nrow, self.ncol, self.nbr_of_elements)
 
         self.l_1_7_csr = self.l_1_7.to_csr()
   
         self.l_1_8 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=COMPLEX256_T)
-        construct_sparse_matrix(self.l_1_8, self.nrow, self.ncol, self.nbr_of_elements)
+        construct_dense_matrix(self.l_1_8, self.nrow, self.ncol, self.nbr_of_elements)
 
         self.l_1_8_csr = self.l_1_8.to_csr()
   
@@ -99,42 +105,42 @@ class CySparseCSRMultiplicationWithANumpyVectorTestCase(CySparseCSRMultiplicatio
   
   
         self.l_2_1 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=INT32_T)
-        construct_sparse_matrix(self.l_2_1, self.nrow, self.ncol, self.nbr_of_elements)
+        construct_dense_matrix(self.l_2_1, self.nrow, self.ncol, self.nbr_of_elements)
 
         self.l_2_1_csr = self.l_2_1.to_csr()
   
         self.l_2_2 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=INT64_T)
-        construct_sparse_matrix(self.l_2_2, self.nrow, self.ncol, self.nbr_of_elements)
+        construct_dense_matrix(self.l_2_2, self.nrow, self.ncol, self.nbr_of_elements)
 
         self.l_2_2_csr = self.l_2_2.to_csr()
   
         self.l_2_3 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=FLOAT32_T)
-        construct_sparse_matrix(self.l_2_3, self.nrow, self.ncol, self.nbr_of_elements)
+        construct_dense_matrix(self.l_2_3, self.nrow, self.ncol, self.nbr_of_elements)
 
         self.l_2_3_csr = self.l_2_3.to_csr()
   
         self.l_2_4 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=FLOAT64_T)
-        construct_sparse_matrix(self.l_2_4, self.nrow, self.ncol, self.nbr_of_elements)
+        construct_dense_matrix(self.l_2_4, self.nrow, self.ncol, self.nbr_of_elements)
 
         self.l_2_4_csr = self.l_2_4.to_csr()
   
         self.l_2_5 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=FLOAT128_T)
-        construct_sparse_matrix(self.l_2_5, self.nrow, self.ncol, self.nbr_of_elements)
+        construct_dense_matrix(self.l_2_5, self.nrow, self.ncol, self.nbr_of_elements)
 
         self.l_2_5_csr = self.l_2_5.to_csr()
   
         self.l_2_6 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=COMPLEX64_T)
-        construct_sparse_matrix(self.l_2_6, self.nrow, self.ncol, self.nbr_of_elements)
+        construct_dense_matrix(self.l_2_6, self.nrow, self.ncol, self.nbr_of_elements)
 
         self.l_2_6_csr = self.l_2_6.to_csr()
   
         self.l_2_7 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=COMPLEX128_T)
-        construct_sparse_matrix(self.l_2_7, self.nrow, self.ncol, self.nbr_of_elements)
+        construct_dense_matrix(self.l_2_7, self.nrow, self.ncol, self.nbr_of_elements)
 
         self.l_2_7_csr = self.l_2_7.to_csr()
   
         self.l_2_8 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=COMPLEX256_T)
-        construct_sparse_matrix(self.l_2_8, self.nrow, self.ncol, self.nbr_of_elements)
+        construct_dense_matrix(self.l_2_8, self.nrow, self.ncol, self.nbr_of_elements)
 
         self.l_2_8_csr = self.l_2_8.to_csr()
   
