@@ -285,7 +285,7 @@ cdef class CSRSparseMatrix_INT64_t_FLOAT128_t(ImmutableSparseMatrix_INT64_t_FLOA
 
     def matvec_transp(self, b):
         """
-        Return :math:`A^t * b`.
+        Return :math:`A^t * b`. 
         """
         return multiply_transposed_csr_mat_with_numpy_vector_INT64_t_FLOAT128_t(self, b)
 
@@ -295,6 +295,13 @@ cdef class CSRSparseMatrix_INT64_t_FLOAT128_t(ImmutableSparseMatrix_INT64_t_FLOA
         """
         assert are_mixed_types_compatible(FLOAT128_T, b.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(FLOAT128_T)
         return multiply_conjugate_transposed_csr_mat_with_numpy_vector_INT64_t_FLOAT128_t(self, b)
+
+    def matvec_conj(self, b):
+        """
+        Return :math:`\textrm{conj}(A) * b`.
+        """
+        assert are_mixed_types_compatible(FLOAT128_T, b.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(FLOAT128_T)
+        return multiply_conjugated_csr_mat_with_numpy_vector_INT64_t_FLOAT128_t(self, b)
 
     def matdot(self, B):
         raise NotImplementedError("Multiplication with this kind of object not allowed")

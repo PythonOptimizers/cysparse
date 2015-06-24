@@ -15,6 +15,20 @@ Covered cases:
 - :program:`NumPy` array data C-contiguous, ``CSRSparseMatrix`` not symmetric
 - :program:`NumPy` array data not C-contiguous, ``CSRSparseMatrix`` not symmetric
 
+3. :math:`A^h * b`
+
+- :program:`NumPy` array data C-contiguous, ``CSRSparseMatrix`` not symmetric
+- :program:`NumPy` array data C-contiguous, ``CSRSparseMatrix`` symmetric
+- :program:`NumPy` array data not C-contiguous, ``CSRSparseMatrix`` not symmetric
+- :program:`NumPy` array data not C-contiguous, ``CSRSparseMatrix`` symmetric
+
+4. :math:`\textrm{conj}(A) * b`
+
+- :program:`NumPy` array data C-contiguous, ``CSRSparseMatrix`` not symmetric
+- :program:`NumPy` array data C-contiguous, ``CSRSparseMatrix`` symmetric
+- :program:`NumPy` array data not C-contiguous, ``CSRSparseMatrix`` not symmetric
+- :program:`NumPy` array data not C-contiguous, ``CSRSparseMatrix`` symmetric
+
 Note:
     We only consider C-arrays with same type of elements as the type of elements in the ``CSRSparseMatrix``.
     Even if we construct the resulting :program:`NumPy` array as C-contiguous, the functions are more general and could
