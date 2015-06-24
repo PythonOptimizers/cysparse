@@ -9,13 +9,9 @@ This is the multi-types version (last single type version: ce86f8476166f63d0af72
 I'm in the process of replacing Cython properties by Python properties. This will take some time to settle down...
 You might experience some (stupid) bugs or slower code.
 
-## Implementation of PySparse
+## Want to follow the implementation of CySparse?
 
-[PySparse](https://github.com/Funartech/cysparse/wiki/PySparse)
-
-## Benchmarks
-
-[Comparisons](https://github.com/Funartech/cysparse/wiki/Comparisons)
+See Wiki for details!
 
 ## Release history
 
