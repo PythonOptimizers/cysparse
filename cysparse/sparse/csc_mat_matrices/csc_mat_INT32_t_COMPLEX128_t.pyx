@@ -207,7 +207,7 @@ cdef class CSCSparseMatrix_INT32_t_COMPLEX128_t(ImmutableSparseMatrix_INT32_t_CO
         return multiply_transposed_csc_mat_with_numpy_vector_INT32_t_COMPLEX128_t(self, b)
 
 
-    def matvec_htransp(self, b): 
+    def matvec_htransp(self, b):
         """
         Return :math:`A^h * b`.
         """

@@ -486,6 +486,10 @@ LL_SPARSE_MATRIX_HELPERS_INCLUDE_FILES = glob.glob(os.path.join(LL_SPARSE_MATRIX
 LL_SPARSE_MATRIX_IO_TEMPLATE_DIR = os.path.join(LL_SPARSE_MATRIX_TEMPLATE_DIR, 'll_mat_IO')
 LL_SPARSE_MATRIX_IO_INCLUDE_FILES = glob.glob(os.path.join(LL_SPARSE_MATRIX_IO_TEMPLATE_DIR, '*.cpi'))
 
+### LLSparseMatrix construcors
+LL_SPARSE_MATRIX_CONSTRUCTORS_TEMPLATE_DIR = os.path.join(LL_SPARSE_MATRIX_TEMPLATE_DIR, 'll_mat_constructors')
+LL_SPARSE_MATRIX_CONSTRUCTORS_INCLUDE_FILES = glob.glob(os.path.join(LL_SPARSE_MATRIX_CONSTRUCTORS_TEMPLATE_DIR, '*.cpi'))
+
 ##########################################
 ### LLSparseMatrixView
 ##########################################
@@ -641,6 +645,8 @@ if __name__ == "__main__":
             clean_cython_files(logger, LL_SPARSE_MATRIX_HELPERS_TEMPLATE_DIR)
             # LLSparseMatrix IO
             clean_cython_files(logger, LL_SPARSE_MATRIX_IO_TEMPLATE_DIR)
+            # LLSparseMatrix constructors
+            clean_cython_files(logger, LL_SPARSE_MATRIX_CONSTRUCTORS_TEMPLATE_DIR)
 
 
             # LLSparseMatrixView
@@ -724,6 +730,9 @@ if __name__ == "__main__":
 
             # LLSparseMatrix IO
             generate_following_type_and_index(logger, LL_SPARSE_MATRIX_IO_INCLUDE_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, ELEMENT_MM_TYPES, INDEX_TYPES, '.pxi')
+
+            # LLSparseMatrix Constructors
+            generate_following_type_and_index(logger, LL_SPARSE_MATRIX_CONSTRUCTORS_INCLUDE_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, ELEMENT_TYPES, INDEX_TYPES, '.pxi')
 
             ###############################
             # LLSparseMatrixView

@@ -31,6 +31,16 @@ from cysparse.sparse.ll_mat_matrices.ll_mat_@index_type@_@element_type@ cimport 
 {% endfor %}
 
 ########################################################################################################################
+# CySparse include
+########################################################################################################################
+# pxi files should come last (except for circular dependencies)
+{% for index_type in index_list %}
+    {% for element_type in type_list %}
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_@index_type@_@element_type@.pxi"
+    {% endfor %}
+{% endfor %}
+
+########################################################################################################################
 # Matrix Market
 ########################################################################################################################
 cdef:
@@ -145,11 +155,13 @@ def matvec_transp(A, b):
     return A.matvec_transp(b)
 
 ########################################################################################################################
-# Factory methods
+# General factory methods
 ########################################################################################################################
 def NewLLSparseMatrix(**kwargs):
     """
-    Factory method to create an ``LLSparseMatrix``.
+    Factory method to create an empty ``LLSparseMatrix``.
+
+    Internal arrays can be preallocated to avoid reallocation.
     """
     ####################################################################################################################
     #                                            *** Get arguments ***
@@ -367,4 +379,55 @@ def NewLLSparseMatrixFromMMFile(filename, store_zeros=False, test_bounds=True):
     else:
         raise TypeError('itype not recognized')
 
+
+########################################################################################################################
+# Special factory methods
+########################################################################################################################
+def NewLLSparseMatrixArrowhead(**kwargs):
+    """
+    """
+    element = kwargs.pop('element', None)
+
+    ll_mat = NewLLSparseMatrix(**kwargs)
+
+    itype = ll_mat.itype
+    dtype = ll_mat.dtype
+
+    # create 1.0 element if needed
+    if element is None:
+        if is_integer_type(dtype):
+            element = 1
+        elif is_real_type(dtype):
+            element = 1.0
+        elif is_complex_type(dtype):
+            element = 1.0 + 0.0j
+        else:
+            raise TypeError('dtype not recognized')
+
+    # launch right "constructor" method
+{% for index_type in index_list %}
+    {% if index_type == index_list |first %}
+    if itype == @index_type|type2enum@:
+    {% for element_type in type_list %}
+        {% if element_type == type_list |first %}
+        if dtype == @element_type|type2enum@:
+        {% else %}
+        elif dtype == @element_type|type2enum@:
+        {% endif %}
+            return MakeLLSparseMatrixArrowHead_@index_type@_@element_type@(ll_mat, element)
+    {% endfor %}
+    {% else %}
+    elif itype == @index_type|type2enum@:
+    {% for element_type in type_list %}
+        {% if element_type == type_list |first %}
+        if dtype == @element_type|type2enum@:
+        {% else %}
+        elif dtype == @element_type|type2enum@:
+        {% endif %}
+            return MakeLLSparseMatrixArrowHead_@index_type@_@element_type@(ll_mat, element)
+    {% endfor %}
+    {% endif %}
+{% endfor %}
+    else:
+        raise TypeError('itype not recognized')
 

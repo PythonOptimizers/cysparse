@@ -1,0 +1,14 @@
+
+
+cdef LLSparseMatrix_@index@_@type@ MakeLLSparseMatrixArrowHead_@index@_@type@(LLSparseMatrix_@index@_@type@ A, @type@ element):
+    """
+    Populate an ``LLSparseMatrix_@index@_@type@ with a first row, first column and diagonal with a given number.
+
+    See https://en.wikipedia.org/wiki/Arrowhead_matrix.
+
+    Note:
+        We don't expect the matrix to be square.
+    """
+
+    return A
+

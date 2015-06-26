@@ -63,6 +63,48 @@ from cysparse.sparse.ll_mat_matrices.ll_mat_INT64_t_COMPLEX256_t cimport LLSpars
 
 
 ########################################################################################################################
+# CySparse include
+########################################################################################################################
+# pxi files should come last (except for circular dependencies)
+
+    
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT32_t_INT32_t.pxi"
+    
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT32_t_INT64_t.pxi"
+    
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT32_t_FLOAT32_t.pxi"
+    
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT32_t_FLOAT64_t.pxi"
+    
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT32_t_FLOAT128_t.pxi"
+    
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT32_t_COMPLEX64_t.pxi"
+    
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT32_t_COMPLEX128_t.pxi"
+    
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT32_t_COMPLEX256_t.pxi"
+    
+
+    
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT64_t_INT32_t.pxi"
+    
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT64_t_INT64_t.pxi"
+    
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT64_t_FLOAT32_t.pxi"
+    
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT64_t_FLOAT64_t.pxi"
+    
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT64_t_FLOAT128_t.pxi"
+    
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT64_t_COMPLEX64_t.pxi"
+    
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT64_t_COMPLEX128_t.pxi"
+    
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT64_t_COMPLEX256_t.pxi"
+    
+
+
+########################################################################################################################
 # Matrix Market
 ########################################################################################################################
 cdef:
@@ -189,11 +231,13 @@ def matvec_transp(A, b):
     return A.matvec_transp(b)
 
 ########################################################################################################################
-# Factory methods
+# General factory methods
 ########################################################################################################################
 def NewLLSparseMatrix(**kwargs):
     """
-    Factory method to create an ``LLSparseMatrix``.
+    Factory method to create an empty ``LLSparseMatrix``.
+
+    Internal arrays can be preallocated to avoid reallocation.
     """
     ####################################################################################################################
     #                                            *** Get arguments ***
@@ -594,3 +638,122 @@ def NewLLSparseMatrixFromMMFile(filename, store_zeros=False, test_bounds=True):
     else:
         raise TypeError('itype not recognized')
 
+
+########################################################################################################################
+# Special factory methods
+########################################################################################################################
+def NewLLSparseMatrixArrowhead(**kwargs):
+    """
+    """
+    element = kwargs.pop('element', None)
+
+    ll_mat = NewLLSparseMatrix(**kwargs)
+
+    itype = ll_mat.itype
+    dtype = ll_mat.dtype
+
+    # create 1.0 element if needed
+    if element is None:
+        if is_integer_type(dtype):
+            element = 1
+        elif is_real_type(dtype):
+            element = 1.0
+        elif is_complex_type(dtype):
+            element = 1.0 + 0.0j
+        else:
+            raise TypeError('dtype not recognized')
+
+    # launch right "constructor" method
+
+    
+    if itype == INT32_T:
+    
+        
+        if dtype == INT32_T:
+        
+            return MakeLLSparseMatrixArrowHead_INT32_t_INT32_t(ll_mat, element)
+    
+        
+        elif dtype == INT64_T:
+        
+            return MakeLLSparseMatrixArrowHead_INT32_t_INT64_t(ll_mat, element)
+    
+        
+        elif dtype == FLOAT32_T:
+        
+            return MakeLLSparseMatrixArrowHead_INT32_t_FLOAT32_t(ll_mat, element)
+    
+        
+        elif dtype == FLOAT64_T:
+        
+            return MakeLLSparseMatrixArrowHead_INT32_t_FLOAT64_t(ll_mat, element)
+    
+        
+        elif dtype == FLOAT128_T:
+        
+            return MakeLLSparseMatrixArrowHead_INT32_t_FLOAT128_t(ll_mat, element)
+    
+        
+        elif dtype == COMPLEX64_T:
+        
+            return MakeLLSparseMatrixArrowHead_INT32_t_COMPLEX64_t(ll_mat, element)
+    
+        
+        elif dtype == COMPLEX128_T:
+        
+            return MakeLLSparseMatrixArrowHead_INT32_t_COMPLEX128_t(ll_mat, element)
+    
+        
+        elif dtype == COMPLEX256_T:
+        
+            return MakeLLSparseMatrixArrowHead_INT32_t_COMPLEX256_t(ll_mat, element)
+    
+    
+
+    
+    elif itype == INT64_T:
+    
+        
+        if dtype == INT32_T:
+        
+            return MakeLLSparseMatrixArrowHead_INT64_t_INT32_t(ll_mat, element)
+    
+        
+        elif dtype == INT64_T:
+        
+            return MakeLLSparseMatrixArrowHead_INT64_t_INT64_t(ll_mat, element)
+    
+        
+        elif dtype == FLOAT32_T:
+        
+            return MakeLLSparseMatrixArrowHead_INT64_t_FLOAT32_t(ll_mat, element)
+    
+        
+        elif dtype == FLOAT64_T:
+        
+            return MakeLLSparseMatrixArrowHead_INT64_t_FLOAT64_t(ll_mat, element)
+    
+        
+        elif dtype == FLOAT128_T:
+        
+            return MakeLLSparseMatrixArrowHead_INT64_t_FLOAT128_t(ll_mat, element)
+    
+        
+        elif dtype == COMPLEX64_T:
+        
+            return MakeLLSparseMatrixArrowHead_INT64_t_COMPLEX64_t(ll_mat, element)
+    
+        
+        elif dtype == COMPLEX128_T:
+        
+            return MakeLLSparseMatrixArrowHead_INT64_t_COMPLEX128_t(ll_mat, element)
+    
+        
+        elif dtype == COMPLEX256_T:
+        
+            return MakeLLSparseMatrixArrowHead_INT64_t_COMPLEX256_t(ll_mat, element)
+    
+    
+
+    else:
+        raise TypeError('itype not recognized')
