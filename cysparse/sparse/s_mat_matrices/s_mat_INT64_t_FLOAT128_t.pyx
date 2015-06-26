@@ -176,6 +176,11 @@ cdef class MutableSparseMatrix_INT64_t_FLOAT128_t(SparseMatrix_INT64_t_FLOAT128_
 
         """
         self.size_hint = kwargs.get('size_hint', MUTABLE_SPARSE_MAT_DEFAULT_SIZE_HINT)
+
+        # test to bound memory allocation
+        if self.size_hint > self.nrow * self.ncol:
+            self.size_hint = self.nrow *  self.ncol
+
         self.nalloc = 0
         self.__is_mutable = True
 

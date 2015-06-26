@@ -1,6 +1,6 @@
 
 
-cdef LLSparseMatrix_INT32_t_INT64_t MakeLLSparseMatrixArrowHead_INT32_t_INT64_t(LLSparseMatrix_INT32_t_INT64_t A, INT64_t element):
+cdef LLSparseMatrix_INT32_t_INT64_t MakeArrowHeadLLSparseMatrix_INT32_t_INT64_t(LLSparseMatrix_INT32_t_INT64_t A, INT64_t element):
     """
     Populate an ``LLSparseMatrix_INT32_t_INT64_t with a first row, first column and diagonal with a given number.
 
@@ -9,5 +9,17 @@ cdef LLSparseMatrix_INT32_t_INT64_t MakeLLSparseMatrixArrowHead_INT32_t_INT64_t(
     Note:
         We don't expect the matrix to be square.
     """
+    cdef:
+        INT32_t i, j, A_nrow, A_ncol
+
+    A_nrow, A_ncol = A.shape
+
+    # NON OPTIMIZED code
+    for i from 0 <= i < A_nrow:
+        A.put(i, 0, element)
+        for j from 0 <= j < A_ncol:
+            A.put(0, j, element)
+            if i == j:
+                A.put(i, j, element)
 
     return A

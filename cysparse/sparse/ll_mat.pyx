@@ -69,38 +69,54 @@ from cysparse.sparse.ll_mat_matrices.ll_mat_INT64_t_COMPLEX256_t cimport LLSpars
 
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT32_t_INT32_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT32_t_INT32_t.pxi"
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT32_t_INT64_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT32_t_INT64_t.pxi"
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT32_t_FLOAT32_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT32_t_FLOAT32_t.pxi"
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT32_t_FLOAT64_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT32_t_FLOAT64_t.pxi"
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT32_t_FLOAT128_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT32_t_FLOAT128_t.pxi"
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT32_t_COMPLEX64_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT32_t_COMPLEX64_t.pxi"
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT32_t_COMPLEX128_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT32_t_COMPLEX128_t.pxi"
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT32_t_COMPLEX256_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT32_t_COMPLEX256_t.pxi"
     
 
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT64_t_INT32_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT64_t_INT32_t.pxi"
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT64_t_INT64_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT64_t_INT64_t.pxi"
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT64_t_FLOAT32_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT64_t_FLOAT32_t.pxi"
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT64_t_FLOAT64_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT64_t_FLOAT64_t.pxi"
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT64_t_FLOAT128_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT64_t_FLOAT128_t.pxi"
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT64_t_COMPLEX64_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT64_t_COMPLEX64_t.pxi"
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT64_t_COMPLEX128_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT64_t_COMPLEX128_t.pxi"
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT64_t_COMPLEX256_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT64_t_COMPLEX256_t.pxi"
     
 
 
@@ -642,8 +658,11 @@ def NewLLSparseMatrixFromMMFile(filename, store_zeros=False, test_bounds=True):
 ########################################################################################################################
 # Special factory methods
 ########################################################################################################################
-def NewLLSparseMatrixArrowhead(**kwargs):
+def NewArrowheadLLSparseMatrix(**kwargs):
     """
+
+    Note:
+        Input arguments are **not** tested.
     """
     element = kwargs.pop('element', None)
 
@@ -671,42 +690,42 @@ def NewLLSparseMatrixArrowhead(**kwargs):
         
         if dtype == INT32_T:
         
-            return MakeLLSparseMatrixArrowHead_INT32_t_INT32_t(ll_mat, element)
+            return MakeArrowHeadLLSparseMatrix_INT32_t_INT32_t(ll_mat, element)
     
         
         elif dtype == INT64_T:
         
-            return MakeLLSparseMatrixArrowHead_INT32_t_INT64_t(ll_mat, element)
+            return MakeArrowHeadLLSparseMatrix_INT32_t_INT64_t(ll_mat, element)
     
         
         elif dtype == FLOAT32_T:
         
-            return MakeLLSparseMatrixArrowHead_INT32_t_FLOAT32_t(ll_mat, element)
+            return MakeArrowHeadLLSparseMatrix_INT32_t_FLOAT32_t(ll_mat, element)
     
         
         elif dtype == FLOAT64_T:
         
-            return MakeLLSparseMatrixArrowHead_INT32_t_FLOAT64_t(ll_mat, element)
+            return MakeArrowHeadLLSparseMatrix_INT32_t_FLOAT64_t(ll_mat, element)
     
         
         elif dtype == FLOAT128_T:
         
-            return MakeLLSparseMatrixArrowHead_INT32_t_FLOAT128_t(ll_mat, element)
+            return MakeArrowHeadLLSparseMatrix_INT32_t_FLOAT128_t(ll_mat, element)
     
         
         elif dtype == COMPLEX64_T:
         
-            return MakeLLSparseMatrixArrowHead_INT32_t_COMPLEX64_t(ll_mat, element)
+            return MakeArrowHeadLLSparseMatrix_INT32_t_COMPLEX64_t(ll_mat, element)
     
         
         elif dtype == COMPLEX128_T:
         
-            return MakeLLSparseMatrixArrowHead_INT32_t_COMPLEX128_t(ll_mat, element)
+            return MakeArrowHeadLLSparseMatrix_INT32_t_COMPLEX128_t(ll_mat, element)
     
         
         elif dtype == COMPLEX256_T:
         
-            return MakeLLSparseMatrixArrowHead_INT32_t_COMPLEX256_t(ll_mat, element)
+            return MakeArrowHeadLLSparseMatrix_INT32_t_COMPLEX256_t(ll_mat, element)
     
     
 
@@ -716,42 +735,187 @@ def NewLLSparseMatrixArrowhead(**kwargs):
         
         if dtype == INT32_T:
         
-            return MakeLLSparseMatrixArrowHead_INT64_t_INT32_t(ll_mat, element)
+            return MakeArrowHeadLLSparseMatrix_INT64_t_INT32_t(ll_mat, element)
     
         
         elif dtype == INT64_T:
         
-            return MakeLLSparseMatrixArrowHead_INT64_t_INT64_t(ll_mat, element)
+            return MakeArrowHeadLLSparseMatrix_INT64_t_INT64_t(ll_mat, element)
     
         
         elif dtype == FLOAT32_T:
         
-            return MakeLLSparseMatrixArrowHead_INT64_t_FLOAT32_t(ll_mat, element)
+            return MakeArrowHeadLLSparseMatrix_INT64_t_FLOAT32_t(ll_mat, element)
     
         
         elif dtype == FLOAT64_T:
         
-            return MakeLLSparseMatrixArrowHead_INT64_t_FLOAT64_t(ll_mat, element)
+            return MakeArrowHeadLLSparseMatrix_INT64_t_FLOAT64_t(ll_mat, element)
     
         
         elif dtype == FLOAT128_T:
         
-            return MakeLLSparseMatrixArrowHead_INT64_t_FLOAT128_t(ll_mat, element)
+            return MakeArrowHeadLLSparseMatrix_INT64_t_FLOAT128_t(ll_mat, element)
     
         
         elif dtype == COMPLEX64_T:
         
-            return MakeLLSparseMatrixArrowHead_INT64_t_COMPLEX64_t(ll_mat, element)
+            return MakeArrowHeadLLSparseMatrix_INT64_t_COMPLEX64_t(ll_mat, element)
     
         
         elif dtype == COMPLEX128_T:
         
-            return MakeLLSparseMatrixArrowHead_INT64_t_COMPLEX128_t(ll_mat, element)
+            return MakeArrowHeadLLSparseMatrix_INT64_t_COMPLEX128_t(ll_mat, element)
     
         
         elif dtype == COMPLEX256_T:
         
-            return MakeLLSparseMatrixArrowHead_INT64_t_COMPLEX256_t(ll_mat, element)
+            return MakeArrowHeadLLSparseMatrix_INT64_t_COMPLEX256_t(ll_mat, element)
+    
+    
+
+    else:
+        raise TypeError('itype not recognized')
+
+
+
+def NewLinearFillLLSparseMatrix(**kwargs):
+    """
+
+    Note:
+        Input arguments are **not** tested.
+    """
+    first_element = kwargs.pop('first_element', None)
+    step = kwargs.pop('step', None)
+    row_wise = kwargs.pop('row_wise', True)
+
+    size = kwargs.get('size', None)
+    if size is None:
+        nrow = kwargs.get('nrow', None)
+        if nrow is None:
+            raise TypeError('We need a size to construct the matrix')
+        ncol = kwargs.get('ncol', None)
+        if ncol is None:
+            raise TypeError('We need a size to construct the matrix')
+    else:
+        nrow = ncol = size
+
+    kwargs['size_hint'] = nrow * ncol
+
+    ll_mat = NewLLSparseMatrix(**kwargs)
+
+    itype = ll_mat.itype
+    dtype = ll_mat.dtype
+
+    # create 1.0 first element and step if needed
+    if first_element is None or step is None:
+        if is_integer_type(dtype):
+            if first_element is None:
+                first_element = 1
+            if step is None:
+                step = 1
+        elif is_real_type(dtype):
+            if first_element is None:
+                first_element = 1.0
+            if step is None:
+                step = 1.0
+        elif is_complex_type(dtype):
+            if first_element is None:
+                first_element = 1.0 + 1.0j
+            if step is None:
+                step = 1.0 + 0.0j
+        else:
+            raise TypeError('dtype not recognized')
+
+    # launch right "constructor" method
+
+    
+    if itype == INT32_T:
+    
+        
+        if dtype == INT32_T:
+        
+            return MakeLinearFillLLSparseMatrix_INT32_t_INT32_t(ll_mat, first_element, step, row_wise)
+    
+        
+        elif dtype == INT64_T:
+        
+            return MakeLinearFillLLSparseMatrix_INT32_t_INT64_t(ll_mat, first_element, step, row_wise)
+    
+        
+        elif dtype == FLOAT32_T:
+        
+            return MakeLinearFillLLSparseMatrix_INT32_t_FLOAT32_t(ll_mat, first_element, step, row_wise)
+    
+        
+        elif dtype == FLOAT64_T:
+        
+            return MakeLinearFillLLSparseMatrix_INT32_t_FLOAT64_t(ll_mat, first_element, step, row_wise)
+    
+        
+        elif dtype == FLOAT128_T:
+        
+            return MakeLinearFillLLSparseMatrix_INT32_t_FLOAT128_t(ll_mat, first_element, step, row_wise)
+    
+        
+        elif dtype == COMPLEX64_T:
+        
+            return MakeLinearFillLLSparseMatrix_INT32_t_COMPLEX64_t(ll_mat, first_element, step, row_wise)
+    
+        
+        elif dtype == COMPLEX128_T:
+        
+            return MakeLinearFillLLSparseMatrix_INT32_t_COMPLEX128_t(ll_mat, first_element, step, row_wise)
+    
+        
+        elif dtype == COMPLEX256_T:
+        
+            return MakeLinearFillLLSparseMatrix_INT32_t_COMPLEX256_t(ll_mat, first_element, step, row_wise)
+    
+    
+
+    
+    elif itype == INT64_T:
+    
+        
+        if dtype == INT32_T:
+        
+            return MakeLinearFillLLSparseMatrix_INT64_t_INT32_t(ll_mat, first_element, step, row_wise)
+    
+        
+        elif dtype == INT64_T:
+        
+            return MakeLinearFillLLSparseMatrix_INT64_t_INT64_t(ll_mat, first_element, step, row_wise)
+    
+        
+        elif dtype == FLOAT32_T:
+        
+            return MakeLinearFillLLSparseMatrix_INT64_t_FLOAT32_t(ll_mat, first_element, step, row_wise)
+    
+        
+        elif dtype == FLOAT64_T:
+        
+            return MakeLinearFillLLSparseMatrix_INT64_t_FLOAT64_t(ll_mat, first_element, step, row_wise)
+    
+        
+        elif dtype == FLOAT128_T:
+        
+            return MakeLinearFillLLSparseMatrix_INT64_t_FLOAT128_t(ll_mat, first_element, step, row_wise)
+    
+        
+        elif dtype == COMPLEX64_T:
+        
+            return MakeLinearFillLLSparseMatrix_INT64_t_COMPLEX64_t(ll_mat, first_element, step, row_wise)
+    
+        
+        elif dtype == COMPLEX128_T:
+        
+            return MakeLinearFillLLSparseMatrix_INT64_t_COMPLEX128_t(ll_mat, first_element, step, row_wise)
+    
+        
+        elif dtype == COMPLEX256_T:
+        
+            return MakeLinearFillLLSparseMatrix_INT64_t_COMPLEX256_t(ll_mat, first_element, step, row_wise)
     
     
 

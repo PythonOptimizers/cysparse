@@ -1,6 +1,6 @@
 
 
-cdef LLSparseMatrix_INT64_t_COMPLEX256_t MakeLLSparseMatrixArrowHead_INT64_t_COMPLEX256_t(LLSparseMatrix_INT64_t_COMPLEX256_t A, COMPLEX256_t element):
+cdef LLSparseMatrix_INT64_t_COMPLEX256_t MakeArrowHeadLLSparseMatrix_INT64_t_COMPLEX256_t(LLSparseMatrix_INT64_t_COMPLEX256_t A, COMPLEX256_t element):
     """
     Populate an ``LLSparseMatrix_INT64_t_COMPLEX256_t with a first row, first column and diagonal with a given number.
 
@@ -9,5 +9,17 @@ cdef LLSparseMatrix_INT64_t_COMPLEX256_t MakeLLSparseMatrixArrowHead_INT64_t_COM
     Note:
         We don't expect the matrix to be square.
     """
+    cdef:
+        INT64_t i, j, A_nrow, A_ncol
+
+    A_nrow, A_ncol = A.shape
+
+    # NON OPTIMIZED code
+    for i from 0 <= i < A_nrow:
+        A.put(i, 0, element)
+        for j from 0 <= j < A_ncol:
+            A.put(0, j, element)
+            if i == j:
+                A.put(i, j, element)
 
     return A
