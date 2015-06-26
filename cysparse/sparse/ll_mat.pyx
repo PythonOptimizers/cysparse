@@ -821,7 +821,7 @@ def NewLinearFillLLSparseMatrix(**kwargs):
                 step = 1.0
         elif is_complex_type(dtype):
             if first_element is None:
-                first_element = 1.0 + 1.0j
+                first_element = 1.0 + 0.0j
             if step is None:
                 step = 1.0 + 0.0j
         else:

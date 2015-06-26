@@ -38371,7 +38371,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_16NewLinearFillLLSparseMatri
  *                 step = 1.0
  *         elif is_complex_type(dtype):             # <<<<<<<<<<<<<<
  *             if first_element is None:
- *                 first_element = 1.0 + 1.0j
+ *                 first_element = 1.0 + 0.0j
  */
     __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_is_complex_type); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 822; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
@@ -38408,7 +38408,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_16NewLinearFillLLSparseMatri
  *                 step = 1.0
  *         elif is_complex_type(dtype):
  *             if first_element is None:             # <<<<<<<<<<<<<<
- *                 first_element = 1.0 + 1.0j
+ *                 first_element = 1.0 + 0.0j
  *             if step is None:
  */
       __pyx_t_4 = (__pyx_v_first_element == Py_None);
@@ -38418,11 +38418,11 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_16NewLinearFillLLSparseMatri
         /* "cysparse/sparse/ll_mat.pyx":824
  *         elif is_complex_type(dtype):
  *             if first_element is None:
- *                 first_element = 1.0 + 1.0j             # <<<<<<<<<<<<<<
+ *                 first_element = 1.0 + 0.0j             # <<<<<<<<<<<<<<
  *             if step is None:
  *                 step = 1.0 + 0.0j
  */
-        __pyx_t_8 = __Pyx_c_sum(__pyx_t_double_complex_from_parts(1.0, 0), __pyx_t_double_complex_from_parts(0, 1.0));
+        __pyx_t_8 = __Pyx_c_sum(__pyx_t_double_complex_from_parts(1.0, 0), __pyx_t_double_complex_from_parts(0, 0.0));
         __pyx_t_5 = __pyx_PyComplex_FromComplex(__pyx_t_8); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 824; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_5);
         __Pyx_DECREF_SET(__pyx_v_first_element, __pyx_t_5);
@@ -38433,7 +38433,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_16NewLinearFillLLSparseMatri
 
       /* "cysparse/sparse/ll_mat.pyx":825
  *             if first_element is None:
- *                 first_element = 1.0 + 1.0j
+ *                 first_element = 1.0 + 0.0j
  *             if step is None:             # <<<<<<<<<<<<<<
  *                 step = 1.0 + 0.0j
  *         else:
@@ -38443,7 +38443,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_16NewLinearFillLLSparseMatri
       if (__pyx_t_4) {
 
         /* "cysparse/sparse/ll_mat.pyx":826
- *                 first_element = 1.0 + 1.0j
+ *                 first_element = 1.0 + 0.0j
  *             if step is None:
  *                 step = 1.0 + 0.0j             # <<<<<<<<<<<<<<
  *         else:

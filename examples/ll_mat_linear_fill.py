@@ -4,6 +4,6 @@ import numpy as np
 
 import sys
 
-A = NewLinearFillLLSparseMatrix(nrow=3, ncol=4, first_element=3.8+2.3j, step=-5+9.8j, dtype=types.COMPLEX256_T, row_wise=False)
+A = NewLinearFillLLSparseMatrix(nrow=3, ncol=4, dtype=types.COMPLEX256_T, row_wise=False)
 
 A.print_to(sys.stdout)

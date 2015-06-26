@@ -110,7 +110,6 @@ cdef cnp.ndarray[cnp.npy_float128, ndim=1, mode='c'] multiply_transposed_csr_mat
         if A.__is_symmetric:
             multiply_sym_csr_mat_with_numpy_vector_kernel_INT64_t_FLOAT128_t(A_nrow, b_data, c_data, A.val, A.col, A.ind)
         else:
-            print("Contiguous non symmetric")
             multiply_tranposed_csr_mat_with_numpy_vector_kernel_INT64_t_FLOAT128_t(A_nrow, A_ncol, b_data, c_data,
          A.val, A.col, A.ind)
     else:
