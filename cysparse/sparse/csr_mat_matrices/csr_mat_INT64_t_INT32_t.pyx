@@ -306,6 +306,58 @@ cdef class CSRSparseMatrix_INT64_t_INT32_t(ImmutableSparseMatrix_INT64_t_INT32_t
 
         return (a_row, a_col, a_val)
 
+    def diag(self, k = 0):
+        """
+        Return the :math:`k^\textrm{th}` diagonal.
+
+        """
+        if not (-self.__nrow + 1 <= k <= self.__ncol -1):
+            raise IndexError("Wrong diagonal number (%d <= k <= %d)" % (-self.__nrow + 1, self.__ncol -1))
+
+        cdef INT64_t diag_size
+
+        if k == 0:
+            diag_size = min(self.__nrow, self.__ncol)
+        elif k > 0:
+            diag_size = min(self.__nrow, self.__ncol - k)
+        else:
+            diag_size = min(self.__nrow+k, self.__ncol)
+
+        assert diag_size > 0, "Something is wrong with the diagonal size"
+
+        # create NumPy array
+        cdef cnp.npy_intp dmat[1]
+        dmat[0] = <cnp.npy_intp> diag_size
+
+        cdef:
+            cnp.ndarray[cnp.npy_int32, ndim=1] diag = cnp.PyArray_SimpleNew( 1, dmat, cnp.NPY_INT32)
+            INT32_t    *pv
+            INT64_t   i, k_
+
+        pv = <INT32_t *> cnp.PyArray_DATA(diag)
+
+        # init NumPy array
+        for i from 0 <= i < diag_size:
+
+            pv[i] = 0
+
+
+        if k >= 0:
+            for i from 0 <= i < self.__nrow:
+                for k_ from self.ind[i] <= k_ < self.ind[i+1]:
+                    if i + k == self.col[k_]:
+                        pv[i] = self.val[k_]
+
+        else:  #  k < 0
+            for i from 0 <= i < self.__nrow:
+                for k_ from self.ind[i] <= k_ < self.ind[i+1]:
+                    j = self.col[k_]
+                    if i + k == j:
+                        pv[j] = self.val[k_]
+
+        return diag
+
+
     ####################################################################################################################
     # Multiplication
     ####################################################################################################################

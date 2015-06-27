@@ -196,33 +196,59 @@ cdef class CSCSparseMatrix_INT64_t_INT64_t(ImmutableSparseMatrix_INT64_t_INT64_t
     ####################################################################################################################
     # Common operations
     ####################################################################################################################
-    def diag(self):
+    def diag(self, k = 0):
         """
-        Return diagonal in a :program:`NumPy` array.
+        Return the :math:`k^\textrm{th}` diagonal.
+
         """
-        # TODO: write version when indices are sorted
-        # TODO: refactor: act only on C-array? This would give the possibility to export NumPy array or C-array pointer
+        if not (-self.__nrow + 1 <= k <= self.__ncol -1):
+            raise IndexError("Wrong diagonal number (%d <= k <= %d)" % (-self.__nrow + 1, self.__ncol -1))
 
-        cdef INT64_t diag_size = min(self.nrow, self.ncol)
-        cdef cnp.ndarray[cnp.npy_int64, ndim=1, mode='c'] diagonal = np.zeros(diag_size, dtype=np.int64)
+        cdef INT64_t diag_size
 
-        # direct access to NumPy array
-        cdef INT64_t * diagonal_data = <INT64_t *> cnp.PyArray_DATA(diagonal)
+        if k == 0:
+            diag_size = min(self.__nrow, self.__ncol)
+        elif k > 0:
+            diag_size = min(self.__nrow, self.__ncol - k)
+        else:
+            diag_size = min(self.__nrow+k, self.__ncol)
 
-        cdef INT64_t j, k
+        assert diag_size > 0, "Something is wrong with the diagonal size"
 
-        for j from 0 <= j < self.ncol:
+        # create NumPy array
+        cdef cnp.npy_intp dmat[1]
+        dmat[0] = <cnp.npy_intp> diag_size
 
-            k = self.ind[j]
+        cdef:
+            cnp.ndarray[cnp.npy_int64, ndim=1] diag = cnp.PyArray_SimpleNew( 1, dmat, cnp.NPY_INT64)
+            INT64_t    *pv
+            INT64_t   i, j, k_
 
-            while k < self.ind[j+1]:
-                if self.row[k] == j:
-                    # we have found the diagonal element
-                    diagonal_data[j] = self.val[k]
+        pv = <INT64_t *> cnp.PyArray_DATA(diag)
 
-                k += 1
+        # init NumPy array
+        for i from 0 <= i < diag_size:
 
-        return diagonal
+            pv[i] = 0
+
+
+        if k >= 0:
+            for j from 0 <= j < self.__ncol:
+                for k_ from self.ind[j] <= k_ < self.ind[j+1]:
+                    i = self.row[k_]
+                    if i + k == j:
+                        pv[i] = self.val[k_]
+
+        else:  #  k < 0
+            for j from 0 <= j < self.__ncol:
+                for k_ from self.ind[j] <= k_ < self.ind[j+1]:
+                    i = self.row[k_]
+                    if i + k == j:
+                        pv[j] = self.val[k_]
+
+        return diag
+
+
 
     ####################################################################################################################
     # Multiplication

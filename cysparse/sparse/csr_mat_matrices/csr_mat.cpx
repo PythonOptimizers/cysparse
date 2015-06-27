@@ -309,6 +309,64 @@ cdef class CSRSparseMatrix_@index@_@type@(ImmutableSparseMatrix_@index@_@type@):
 
         return (a_row, a_col, a_val)
 
+    def diag(self, k = 0):
+        """
+        Return the :math:`k^\textrm{th}` diagonal.
+
+        """
+        if not (-self.__nrow + 1 <= k <= self.__ncol -1):
+            raise IndexError("Wrong diagonal number (%d <= k <= %d)" % (-self.__nrow + 1, self.__ncol -1))
+
+        cdef @index@ diag_size
+
+        if k == 0:
+            diag_size = min(self.__nrow, self.__ncol)
+        elif k > 0:
+            diag_size = min(self.__nrow, self.__ncol - k)
+        else:
+            diag_size = min(self.__nrow+k, self.__ncol)
+
+        assert diag_size > 0, "Something is wrong with the diagonal size"
+
+        # create NumPy array
+        cdef cnp.npy_intp dmat[1]
+        dmat[0] = <cnp.npy_intp> diag_size
+
+        cdef:
+            cnp.ndarray[cnp.@type|cysparse_type_to_numpy_c_type@, ndim=1] diag = cnp.PyArray_SimpleNew( 1, dmat, cnp.@type|cysparse_type_to_numpy_enum_type@)
+            @type@    *pv
+            @index@   i, k_
+
+        pv = <@type@ *> cnp.PyArray_DATA(diag)
+
+        # init NumPy array
+        for i from 0 <= i < diag_size:
+{% if type in integer_list %}
+            pv[i] = 0
+{% elif type in real_list %}
+            pv[i] = 0.0
+{% elif type in complex_list %}
+            pv[i] = 0.0 + 0.0j
+{% else %}
+YOU HAVE TO EXPLICITY CAST YOUR TYPE
+{% endif %}
+
+        if k >= 0:
+            for i from 0 <= i < self.__nrow:
+                for k_ from self.ind[i] <= k_ < self.ind[i+1]:
+                    if i + k == self.col[k_]:
+                        pv[i] = self.val[k_]
+
+        else:  #  k < 0
+            for i from 0 <= i < self.__nrow:
+                for k_ from self.ind[i] <= k_ < self.ind[i+1]:
+                    j = self.col[k_]
+                    if i + k == j:
+                        pv[j] = self.val[k_]
+
+        return diag
+
+
     ####################################################################################################################
     # Multiplication
     ####################################################################################################################
