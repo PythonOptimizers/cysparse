@@ -1569,7 +1569,8 @@ YOU HAVE TO DEFINE OR CAST YOUR NEW UNRECOGNIZED TYPE
         Return the :math:`k^\textrm{th}` diagonal.
 
         """
-        assert -self.__nrow + 1 <= k <= self.__ncol -1, "Wrong diagonal number (%d <= k <= %d)" % (-self.__nrow + 1, self.__ncol -1)
+        if not (-self.__nrow + 1 <= k <= self.__ncol -1):
+            raise IndexError("Wrong diagonal number (%d <= k <= %d)" % (-self.__nrow + 1, self.__ncol -1))
 
         cdef @index@ diag_size
 

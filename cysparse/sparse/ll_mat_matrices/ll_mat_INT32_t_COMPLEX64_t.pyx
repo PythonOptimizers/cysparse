@@ -1499,7 +1499,8 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX64_t(MutableSparseMatrix_INT32_t_COMPLE
         Return the :math:`k^\textrm{th}` diagonal.
 
         """
-        assert -self.__nrow + 1 <= k <= self.__ncol -1, "Wrong diagonal number (%d <= k <= %d)" % (-self.__nrow + 1, self.__ncol -1)
+        if not (-self.__nrow + 1 <= k <= self.__ncol -1):
+            raise IndexError("Wrong diagonal number (%d <= k <= %d)" % (-self.__nrow + 1, self.__ncol -1))
 
         cdef INT32_t diag_size
 

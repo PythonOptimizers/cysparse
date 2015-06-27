@@ -7,6 +7,36 @@ from cysparse.sparse.sparse_proxies.complex_generic.h_mat_INT64_t_COMPLEX256_t c
 from cysparse.sparse.sparse_proxies.complex_generic.conj_mat_INT64_t_COMPLEX256_t cimport ConjugatedSparseMatrix_INT64_t_COMPLEX256_t
 
 
+from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
+
+cdef extern from "Python.h":
+    # *** Types ***
+    Py_ssize_t PY_SSIZE_T_MAX
+    int PyInt_Check(PyObject *o)
+    long PyInt_AS_LONG(PyObject *io)
+
+    # *** Slices ***
+    ctypedef struct PySliceObject:
+        pass
+
+    # Cython's version doesn't work for all versions...
+    int PySlice_GetIndicesEx(
+        PySliceObject* s, Py_ssize_t length,
+        Py_ssize_t *start, Py_ssize_t *stop, Py_ssize_t *step,
+        Py_ssize_t *slicelength) except -1
+
+    int PySlice_Check(PyObject *ob)
+
+    # *** List ***
+    int PyList_Check(PyObject *p)
+    PyObject* PyList_GetItem(PyObject *list, Py_ssize_t index)
+    Py_ssize_t PyList_Size(PyObject *list)
+
+    PyObject* Py_BuildValue(char *format, ...)
+    PyObject* PyList_New(Py_ssize_t len)
+    void PyList_SET_ITEM(PyObject *list, Py_ssize_t i, PyObject *o)
+    PyObject* PyList_GET_ITEM(PyObject *list, Py_ssize_t i)
+
 ########################################################################################################################
 # BASE MATRIX CLASS
 ########################################################################################################################
@@ -99,6 +129,88 @@ cdef class SparseMatrix_INT64_t_COMPLEX256_t(SparseMatrix):
         return self.__conjugated_proxy_matrix
 
 
+    ####################################################################################################################
+    # Set/Get list of elements
+    ####################################################################################################################
+    ####################################################################################################################
+    #                                            *** SET ***
+    ####################################################################################################################
+    #                                            *** GET ***
+    def diags(self, diag_coeff):
+        """
+        Return a list wiht :program:`NumPy` arrays containings asked diagonals.
+
+        Args:
+            diag_coeff: Can be a list or a slice.
+
+        Raises:
+            - ``RuntimeError`` if slice is illformed;
+            - ``TypeError`` if argument is not a ``list`` or ``slice``;
+            - ``MemoryError`` if there is not enough memory for internal calculations;
+            - ``ValueError`` if the list contains something else than integer indices;
+            - ``AssertionError`` if internal calculations go wrong (should not happen...);
+            - ``IndexError`` if the diagonals coefficients are out of bound.
+
+        Note:
+            Diagonal coefficients greater than ``n-1`` as disregarded when using a slice.
+        """
+        cdef INT64_t ret
+        cdef Py_ssize_t start, stop, step, length, index, max_length
+
+        cdef INT64_t i, j
+        cdef INT64_t * indices
+        cdef PyObject *val
+
+        cdef PyObject * obj = <PyObject *> diag_coeff
+
+        # normally, with slices, it is common in Python to chop off...
+        # Here we only chop off from above, not below...
+        # -m + 1 <= k <= n -1   : only k <= n - 1 will be satified (greater indices are disregarded)
+        # but nothing is done if k < -m + 1
+        max_length = self.__ncol
+
+        # grab diag coefficients
+        if PySlice_Check(obj):
+            # slice
+            ret = PySlice_GetIndicesEx(<PySliceObject*>obj, max_length, &start, &stop, &step, &length)
+            if ret:
+                raise RuntimeError("Slice could not be translated")
+
+            #print "start, stop, step, length = (%d, %d, %d, %d)" % (start, stop, step, length)
+
+            indices = <INT64_t *> PyMem_Malloc(length * sizeof(INT64_t))
+            if not indices:
+                raise MemoryError()
+
+            # populate indices
+            i = start
+            for j from 0 <= j < length:
+                indices[j] = i
+                i += step
+
+        elif PyList_Check(obj):
+            length = PyList_Size(obj)
+            indices = <INT64_t *> PyMem_Malloc(length * sizeof(INT64_t))
+            if not indices:
+                raise MemoryError()
+
+            for i from 0 <= i < length:
+                val = PyList_GetItem(obj, <Py_ssize_t>i)
+                if PyInt_Check(val):
+                    index = PyInt_AS_LONG(val)
+                    indices[i] = <INT64_t> index
+                else:
+                    PyMem_Free(indices)
+                    raise ValueError("List must only contain integers")
+        else:
+            raise TypeError("Index object is not recognized (list or slice)")
+
+        diagonals = list()
+
+        for i from 0 <= i < length:
+            diagonals.append(self.diag(indices[i]))
+
+        return diagonals
 
     ####################################################################################################################
     # CREATE SPECIAL MATRICES

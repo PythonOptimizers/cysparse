@@ -21,3 +21,7 @@ print
 print "Negative diagonals:"
 for k in xrange(-1, -m, -1):
     print k, ': ', A.diag(k)
+
+print "*" * 80
+print A.diags(slice(2, 5, 2))
+
