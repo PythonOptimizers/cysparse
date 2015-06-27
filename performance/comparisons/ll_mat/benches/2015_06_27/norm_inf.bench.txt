@@ -1,0 +1,35 @@
+# Benchmark Report
+
+## Infinite norm with 100 elements and size = 1,000
+
+    name | rank | runs |      mean |     stdev | baseline
+---------|------|------|-----------|-----------|---------
+cysparse |    1 |  100 | 1.972e-06 | 5.193e-07 |        1
+pysparse |    2 |  100 | 2.365e-06 | 7.186e-07 |      1.2
+
+## Infinite norm with 1000 elements and size = 10,000
+
+    name | rank | runs |      mean |     stdev | baseline
+---------|------|------|-----------|-----------|---------
+cysparse |    1 |  100 | 1.256e-05 | 5.408e-07 |        1
+pysparse |    2 |  100 | 1.298e-05 | 3.255e-07 |    1.033
+
+## Infinite norm with 10,000 elements and size = 100,000
+
+    name | rank | runs |      mean |     stdev | baseline
+---------|------|------|-----------|-----------|---------
+pysparse |    1 |  100 | 0.0001026 |  1.44e-05 |        1
+cysparse |    2 |  100 | 0.0001063 | 1.428e-05 |    1.037
+
+## Infinite norm with 80,000 elements and size = 100,000
+
+    name | rank | runs |      mean |     stdev | baseline
+---------|------|------|-----------|-----------|---------
+cysparse |    1 |  100 | 0.0001254 | 4.354e-06 |        1
+pysparse |    2 |  100 | 0.0001255 | 4.034e-06 |        1
+
+Total runs: 800 run in arbitrary order
+Python version: 2.7.5+
+System: x86_64 Linux 3.11.0-12-generic
+Version: benchmark v0.1.5
+Date: 2015-06-27 12:36:34

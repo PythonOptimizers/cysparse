@@ -1,0 +1,35 @@
+# Benchmark Report
+
+## to_csr() with 100 elements and size = 1,000
+
+    name | rank | runs |      mean |     stdev | baseline
+---------|------|------|-----------|-----------|---------
+pysparse |    1 |  100 | 1.986e-06 | 5.475e-07 |        1
+cysparse |    2 |  100 | 3.085e-06 | 1.026e-06 |    1.553
+
+## to_csr() with 1,000 elements and size = 10,000
+
+    name | rank | runs |      mean |     stdev | baseline
+---------|------|------|-----------|-----------|---------
+cysparse |    1 |  100 | 9.985e-06 | 1.942e-06 |        1
+pysparse |    2 |  100 | 1.107e-05 | 1.152e-06 |    1.108
+
+## to_csr() with 10,000 elements and size = 100,000
+
+    name | rank | runs |      mean |     stdev | baseline
+---------|------|------|-----------|-----------|---------
+cysparse |    1 |  100 | 0.0001024 | 4.429e-05 |        1
+pysparse |    2 |  100 | 0.0001338 | 4.945e-05 |    1.307
+
+## to_csr() with 80,000 elements and size = 100,000
+
+    name | rank | runs |      mean |     stdev | baseline
+---------|------|------|-----------|-----------|---------
+cysparse |    1 |  100 | 0.0001835 | 3.663e-05 |        1
+pysparse |    2 |  100 | 0.0002123 | 5.517e-05 |    1.157
+
+Total runs: 800 run in arbitrary order
+Python version: 2.7.5+
+System: x86_64 Linux 3.11.0-12-generic
+Version: benchmark v0.1.5
+Date: 2015-06-27 12:36:34

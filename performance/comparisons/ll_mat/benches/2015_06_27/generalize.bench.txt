@@ -1,0 +1,35 @@
+# Benchmark Report
+
+## Generalize norm with 100 elements and size = 1,000 for a symmetrical matrix
+
+    name | rank | runs |      mean |     stdev | baseline
+---------|------|------|-----------|-----------|---------
+cysparse |    1 |  100 | 7.129e-07 | 4.653e-07 |        1
+pysparse |    2 |  100 | 8.202e-07 | 1.208e-06 |    1.151
+
+## Generalize norm with 1,000 elements and size = 10,000 for a symmetrical matrix
+
+    name | rank | runs |      mean |     stdev | baseline
+---------|------|------|-----------|-----------|---------
+cysparse |    1 |  100 | 6.938e-07 | 4.817e-07 |        1
+pysparse |    2 |  100 | 6.268e-06 | 5.382e-05 |    9.034
+
+## Generalize norm with 10,000 elements and size = 100,000 for a symmetrical matrix
+
+    name | rank | runs |      mean |    stdev |  baseline
+---------|------|------|-----------|----------|----------
+cysparse |    1 |  100 | 4.768e-08 | 2.49e-07 |         1
+pysparse |    2 |  100 |  0.000479 | 0.004789 | 1.005e+04
+
+## Generalize norm with 80,000 elements and size = 100,000 for a symmetrical matrix
+
+    name | rank | runs |      mean |     stdev |  baseline
+---------|------|------|-----------|-----------|----------
+cysparse |    1 |  100 | 2.074e-07 | 5.482e-07 |         1
+pysparse |    2 |  100 |   0.03024 |    0.3024 | 1.458e+05
+
+Total runs: 800 run in arbitrary order
+Python version: 2.7.5+
+System: x86_64 Linux 3.11.0-12-generic
+Version: benchmark v0.1.5
+Date: 2015-06-27 12:37:46

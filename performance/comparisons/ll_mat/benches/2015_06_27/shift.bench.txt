@@ -1,0 +1,35 @@
+# Benchmark Report
+
+## Simple shift with 100 elements and size = 1,000 (sigma = 10.47)
+
+    name | rank | runs |      mean |     stdev | baseline
+---------|------|------|-----------|-----------|---------
+cysparse |    1 |  100 | 3.109e-06 | 7.539e-07 |        1
+pysparse |    2 |  100 | 3.669e-06 | 5.839e-07 |     1.18
+
+## Simple shift with 1,000 elements and size = 10,000 (sigma = 10.47)
+
+    name | rank | runs |      mean |     stdev | baseline
+---------|------|------|-----------|-----------|---------
+cysparse |    1 |  100 | 2.168e-05 | 6.116e-07 |        1
+pysparse |    2 |  100 | 2.582e-05 |  2.15e-06 |    1.191
+
+## Simple shift with 10,000 elements and size = 100,000 (sigma = 10.47)
+
+    name | rank | runs |      mean |     stdev | baseline
+---------|------|------|-----------|-----------|---------
+cysparse |    1 |  100 | 0.0001395 | 3.013e-05 |        1
+pysparse |    2 |  100 | 0.0001733 | 3.486e-05 |    1.242
+
+## Simple shift with 80,000 elements and size = 100,000 (sigma = 10.47)
+
+    name | rank | runs |      mean |     stdev | baseline
+---------|------|------|-----------|-----------|---------
+cysparse |    1 |  100 | 0.0006384 | 2.595e-05 |        1
+pysparse |    2 |  100 | 0.0007046 | 1.543e-05 |    1.104
+
+Total runs: 800 run in arbitrary order
+Python version: 2.7.5+
+System: x86_64 Linux 3.11.0-12-generic
+Version: benchmark v0.1.5
+Date: 2015-06-27 12:36:34

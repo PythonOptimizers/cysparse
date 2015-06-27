@@ -161,6 +161,16 @@ Automatic generation scripts
 
     python generate_code.py
 
+Conventions
+=====================================
+
+Names
+--------
+
+Types
+--------
+
+**All** classes are typed and *almost* all algorithms used specialized typed variables. Many algorithm are specialized for **one** type of variable. This allows to have optimized algorithms but at the detriment of being able to mix types. For instance, most of the methods of sparse matrices only works for **one** ``dtype`` and **one** ``itype``. 
 
 ..  raw:: html
 

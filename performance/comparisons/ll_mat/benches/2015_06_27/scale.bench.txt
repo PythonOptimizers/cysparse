@@ -1,0 +1,39 @@
+# Benchmark Report
+
+## Simple scale with 100 elements and size = 1,000 (sigma = 10.47)
+
+     name | rank | runs |      mean |     stdev | baseline
+----------|------|------|-----------|-----------|---------
+ cysparse |    1 |  100 | 1.729e-06 | 4.985e-07 |        1
+cysparse2 |    2 |  100 | 2.041e-06 | 3.985e-07 |    1.181
+ pysparse |    3 |  100 | 2.172e-06 | 4.595e-07 |    1.257
+
+## Simple scale with 1,000 elements and size = 10,000 (sigma = 10.47)
+
+     name | rank | runs |      mean |     stdev | baseline
+----------|------|------|-----------|-----------|---------
+ cysparse |    1 |  100 | 1.208e-05 | 3.998e-07 |        1
+cysparse2 |    2 |  100 |  1.24e-05 | 5.043e-07 |    1.027
+ pysparse |    3 |  100 | 1.299e-05 | 3.658e-07 |    1.076
+
+## Simple scale with 10,000 elements and size = 100,000 (sigma = 10.47)
+
+     name | rank | runs |      mean |     stdev | baseline
+----------|------|------|-----------|-----------|---------
+ cysparse |    1 |  100 | 8.177e-05 | 2.657e-05 |        1
+cysparse2 |    2 |  100 | 8.537e-05 | 2.737e-05 |    1.044
+ pysparse |    3 |  100 | 8.932e-05 | 2.888e-05 |    1.092
+
+## Simple scale with 80,000 elements and size = 100,000 (sigma = 10.47)
+
+     name | rank | runs |      mean |     stdev | baseline
+----------|------|------|-----------|-----------|---------
+ cysparse |    1 |  100 | 0.0001129 | 4.104e-06 |        1
+cysparse2 |    2 |  100 | 0.0001136 | 4.085e-06 |    1.006
+ pysparse |    3 |  100 | 0.0001256 | 4.088e-06 |    1.113
+
+Total runs: 1200 run in arbitrary order
+Python version: 2.7.5+
+System: x86_64 Linux 3.11.0-12-generic
+Version: benchmark v0.1.5
+Date: 2015-06-27 12:37:47

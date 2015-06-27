@@ -1,0 +1,35 @@
+# Benchmark Report
+
+## Copy matrix with 100 elements and size = 1,000
+
+    name | rank | runs |      mean |     stdev | baseline
+---------|------|------|-----------|-----------|---------
+pysparse |    1 |  100 | 5.884e-06 |  5.74e-07 |        1
+cysparse |    2 |  100 | 7.036e-06 | 9.854e-07 |    1.196
+
+## Copy matrix with 1,000 elements and size = 10,000
+
+    name | rank | runs |      mean |     stdev | baseline
+---------|------|------|-----------|-----------|---------
+cysparse |    1 |  100 | 1.088e-05 | 3.298e-06 |        1
+pysparse |    2 |  100 | 4.239e-05 | 2.506e-06 |    3.897
+
+## Copy matrix with 10,000 elements and size = 100,000
+
+    name | rank | runs |      mean |     stdev | baseline
+---------|------|------|-----------|-----------|---------
+cysparse |    1 |  100 | 5.931e-05 | 4.005e-05 |        1
+pysparse |    2 |  100 | 0.0002786 | 6.062e-05 |    4.698
+
+## Copy matrix with 80,000 elements and size = 100,000
+
+    name | rank | runs |      mean |     stdev | baseline
+---------|------|------|-----------|-----------|---------
+cysparse |    1 |  100 | 0.0002357 | 9.426e-05 |        1
+pysparse |    2 |  100 |  0.000923 | 7.629e-05 |    3.916
+
+Total runs: 800 run in arbitrary order
+Python version: 2.7.5+
+System: x86_64 Linux 3.11.0-12-generic
+Version: benchmark v0.1.5
+Date: 2015-06-27 12:37:40
