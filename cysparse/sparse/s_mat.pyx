@@ -105,6 +105,10 @@ cdef class SparseMatrix:
     def type(self):
         return self.__type
 
+    @property
+    def type_name(self):
+        return self.__type_name
+
     ####################################################################################################################
     # Basic common methods
     ####################################################################################################################
@@ -115,7 +119,7 @@ cdef class SparseMatrix:
     #########################
     # Sub matrices
     #########################
-        # Copy
+    # Copy
     def copy(self):
         """
         Return a **deep** copy of itself.
@@ -123,10 +127,19 @@ cdef class SparseMatrix:
         """
         raise NotImplementedError("Operation not implemented (yet). Please report.")
 
-    def diag(self):
+    def diag(self, n = 0):
         """
         Return diagonal in a :program:`NumPy` array.
 
+        """
+        raise NotImplementedError("Operation not implemented (yet). Please report.")
+
+    def diags(self, diag_coeff):
+        """
+        Return a list of diagonals with coefficients in ``diag_coeff``.
+
+        Args:
+            diag_coeff: List or slice of diagonals coefficients.
         """
         raise NotImplementedError("Operation not implemented (yet). Please report.")
 

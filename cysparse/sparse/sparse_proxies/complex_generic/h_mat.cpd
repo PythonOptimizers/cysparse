@@ -31,10 +31,4 @@ cdef class ConjugateTransposedSparseMatrix_@index@_@type@:
     ####################################################################################################################
     # End of Common code
     ####################################################################################################################
-    #cdef:
-    #    object H         # ref to the original matrix
-
-    #    object T         # ref to A.conj
-
-    #    object conj      # ref to A.T
 

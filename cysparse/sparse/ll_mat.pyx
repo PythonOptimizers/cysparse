@@ -660,6 +660,7 @@ def NewLLSparseMatrixFromMMFile(filename, store_zeros=False, test_bounds=True):
 ########################################################################################################################
 def NewArrowheadLLSparseMatrix(**kwargs):
     """
+    See ``MakeArrowHeadLLSparseMatrix``.
 
     Note:
         Input arguments are **not** tested.
@@ -781,6 +782,7 @@ def NewArrowheadLLSparseMatrix(**kwargs):
 
 def NewLinearFillLLSparseMatrix(**kwargs):
     """
+    See ``MakeLinearFillLLSparseMatrix``.
 
     Note:
         Input arguments are **not** tested.
