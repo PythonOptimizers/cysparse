@@ -274,6 +274,38 @@ cdef class CSRSparseMatrix_INT64_t_INT32_t(ImmutableSparseMatrix_INT64_t_INT32_t
 
         return self.safe_at(i, j)
 
+    def find(self):
+        """
+        Return 3 NumPy arrays with the non-zero matrix entries: i-rows, j-cols, vals.
+        """
+        cdef cnp.npy_intp dmat[1]
+        dmat[0] = <cnp.npy_intp> self.__nnz
+
+        # EXPLICIT TYPE TESTS
+
+        cdef:
+            cnp.ndarray[cnp.npy_int64, ndim=1] a_row = cnp.PyArray_SimpleNew( 1, dmat, cnp.NPY_INT64)
+            cnp.ndarray[cnp.npy_int64, ndim=1] a_col = cnp.PyArray_SimpleNew( 1, dmat, cnp.NPY_INT64)
+            cnp.ndarray[cnp.npy_int32, ndim=1] a_val = cnp.PyArray_SimpleNew( 1, dmat, cnp.NPY_INT32)
+
+            INT64_t   *pi, *pj   # Intermediate pointers to matrix data
+            INT32_t    *pv
+            INT64_t   i, k, elem
+
+        pi = <INT64_t *> cnp.PyArray_DATA(a_row)
+        pj = <INT64_t *> cnp.PyArray_DATA(a_col)
+        pv = <INT32_t *> cnp.PyArray_DATA(a_val)
+
+        elem = 0
+        for i from 0 <= i < self.__nrow:
+            for k from self.ind[i] <= k < self.ind[i+1]:
+                pi[ elem ] = i
+                pj[ elem ] = self.col[k]
+                pv[ elem ] = self.val[k]
+                elem += 1
+
+        return (a_row, a_col, a_val)
+
     ####################################################################################################################
     # Multiplication
     ####################################################################################################################

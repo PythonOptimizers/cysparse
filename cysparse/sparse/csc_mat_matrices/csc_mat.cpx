@@ -16,7 +16,6 @@ from cysparse.sparse.ll_mat_matrices.ll_mat_@index@_@type@ cimport LLSparseMatri
 # Cython, NumPy import/cimport
 ########################################################################################################################
 from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
-from python_ref cimport Py_INCREF, Py_DECREF
 
 cimport numpy as cnp
 import numpy as np
@@ -161,6 +160,41 @@ cdef class CSCSparseMatrix_@index@_@type@(ImmutableSparseMatrix_@index@_@type@):
         cdef @index@ j = key[1]
 
         return self.safe_at(i, j)
+
+    def find(self):
+        """
+        Return 3 NumPy arrays with the non-zero matrix entries: i-rows, j-cols, vals.
+        """
+        pass
+        cdef cnp.npy_intp dmat[1]
+        dmat[0] = <cnp.npy_intp> self.__nnz
+
+        # EXPLICIT TYPE TESTS
+
+        cdef:
+            cnp.ndarray[cnp.@index|cysparse_type_to_numpy_c_type@, ndim=1] a_row = cnp.PyArray_SimpleNew( 1, dmat, cnp.@index|cysparse_type_to_numpy_enum_type@)
+            cnp.ndarray[cnp.@index|cysparse_type_to_numpy_c_type@, ndim=1] a_col = cnp.PyArray_SimpleNew( 1, dmat, cnp.@index|cysparse_type_to_numpy_enum_type@)
+            cnp.ndarray[cnp.@type|cysparse_type_to_numpy_c_type@, ndim=1] a_val = cnp.PyArray_SimpleNew( 1, dmat, cnp.@type|cysparse_type_to_numpy_enum_type@)
+
+            @index@   *pi
+            @index@   *pj
+            @type@    *pv
+            @index@   j, k, elem
+
+        pi = <@index@ *> cnp.PyArray_DATA(a_row)
+        pj = <@index@ *> cnp.PyArray_DATA(a_col)
+        pv = <@type@ *> cnp.PyArray_DATA(a_val)
+
+        elem = 0
+        for j from 0 <= j < self.__ncol:
+            for k from self.ind[j] <= k < self.ind[j+1]:
+                pi[ elem ] = self.row[j]
+                pj[ elem ] = j
+                pv[ elem ] = self.val[k]
+                elem += 1
+
+        return (a_row, a_col, a_val)
+
 
     ####################################################################################################################
     # Common operations

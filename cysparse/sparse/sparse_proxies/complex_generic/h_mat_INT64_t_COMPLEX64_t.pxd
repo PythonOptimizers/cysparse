@@ -31,9 +31,3 @@ cdef class ConjugateTransposedSparseMatrix_INT64_t_COMPLEX64_t:
     ####################################################################################################################
     # End of Common code
     ####################################################################################################################
-    #cdef:
-    #    object H         # ref to the original matrix
-
-    #    object T         # ref to A.conj
-
-    #    object conj      # ref to A.T

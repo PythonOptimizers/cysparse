@@ -1459,7 +1459,7 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX64_t(MutableSparseMatrix_INT32_t_COMPLE
 
         return <object> list_p
 
-    cpdef find(self):
+    def find(self):
         """
         Return 3 NumPy arrays with the non-zero matrix entries: i-rows, j-cols, vals.
         """
@@ -1469,19 +1469,13 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX64_t(MutableSparseMatrix_INT32_t_COMPLE
         # EXPLICIT TYPE TESTS
 
         cdef:
+            cnp.ndarray[cnp.npy_int32, ndim=1] a_row = cnp.PyArray_SimpleNew( 1, dmat, cnp.NPY_INT32)
+            cnp.ndarray[cnp.npy_int32, ndim=1] a_col = cnp.PyArray_SimpleNew( 1, dmat, cnp.NPY_INT32)
+            cnp.ndarray[cnp.npy_complex64, ndim=1] a_val = cnp.PyArray_SimpleNew( 1, dmat, cnp.NPY_COMPLEX64)
 
-
-            cnp.ndarray[cnp.int32_t, ndim=1] a_row = cnp.PyArray_SimpleNew( 1, dmat, cnp.NPY_INT32)
-            cnp.ndarray[cnp.int32_t, ndim=1] a_col = cnp.PyArray_SimpleNew( 1, dmat, cnp.NPY_INT32)
-
-
-
-            cnp.ndarray[cnp.complex64_t, ndim=1] a_val = cnp.PyArray_SimpleNew( 1, dmat, cnp.NPY_COMPLEX64)
-
-
-            INT32_t   *pi, *pj;   # Intermediate pointers to matrix data
-            COMPLEX64_t    *pv;
-            INT32_t   i, k, elem;
+            INT32_t   *pi, *pj   # Intermediate pointers to matrix data
+            COMPLEX64_t    *pv
+            INT32_t   i, k, elem
 
         pi = <INT32_t *> cnp.PyArray_DATA(a_row)
         pj = <INT32_t *> cnp.PyArray_DATA(a_col)
@@ -1498,6 +1492,61 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX64_t(MutableSparseMatrix_INT32_t_COMPLE
                 elem += 1
 
         return (a_row, a_col, a_val)
+
+
+    def diag(self, k = 0):
+        """
+        Return the :math:`k^\textrm{th}` diagonal.
+
+        """
+        assert -self.__nrow + 1 <= k <= self.__ncol -1, "Wrong diagonal number (%d <= k <= %d)" % (-self.__nrow + 1, self.__ncol -1)
+
+        cdef INT32_t diag_size
+
+        if k == 0:
+            diag_size = min(self.__nrow, self.__ncol)
+        elif k > 0:
+            diag_size = min(self.__nrow, self.__ncol - k)
+        else:
+            diag_size = min(self.__nrow+k, self.__ncol)
+
+        assert diag_size > 0, "Something is wrong with the diagonal size"
+
+        # create NumPy array
+        cdef cnp.npy_intp dmat[1]
+        dmat[0] = <cnp.npy_intp> diag_size
+
+        cdef:
+            cnp.ndarray[cnp.npy_complex64, ndim=1] diag = cnp.PyArray_SimpleNew( 1, dmat, cnp.NPY_COMPLEX64)
+            COMPLEX64_t    *pv
+            INT32_t   i, k_
+
+        pv = <COMPLEX64_t *> cnp.PyArray_DATA(diag)
+
+        # init NumPy array
+        for i from 0 <= i < diag_size:
+
+            pv[i] = 0.0 + 0.0j
+
+
+        if k >= 0:
+            for i from 0 <= i < self.__nrow:
+                k_ = self.root[i]
+                while k_ != -1:
+                    if i + k == self.col[k_]:
+                        pv[i] = self.val[k_]
+                    k_ = self.link[k_]
+
+        else:  #  k < 0
+            for i from 0 <= i < self.__nrow:
+                k_ = self.root[i]
+                while k_ != -1:
+                    j = self.col[k_]
+                    if i + k == j:
+                        pv[j] = self.val[k_]
+                    k_ = self.link[k_]
+
+        return diag
 
     ####################################################################################################################
     # Addition

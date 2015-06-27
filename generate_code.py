@@ -106,7 +106,7 @@ def type2enum(__type_name):
     return enum_name
 
 # OLD VERSION
-# def cysparse_type_to_numpy_c_type(cysparse_type):
+# def cysparse_type_to_numpy_c_type_with_t(cysparse_type):
 #     """
 #     Transform a :program:`CySparse` enum type into the corresponding :program:`NumPy` C-type.
 #

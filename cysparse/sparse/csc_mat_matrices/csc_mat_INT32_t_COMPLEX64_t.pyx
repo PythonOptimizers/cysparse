@@ -16,7 +16,6 @@ from cysparse.sparse.ll_mat_matrices.ll_mat_INT32_t_COMPLEX64_t cimport LLSparse
 # Cython, NumPy import/cimport
 ########################################################################################################################
 from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
-from python_ref cimport Py_INCREF, Py_DECREF
 
 cimport numpy as cnp
 import numpy as np
@@ -159,6 +158,41 @@ cdef class CSCSparseMatrix_INT32_t_COMPLEX64_t(ImmutableSparseMatrix_INT32_t_COM
         cdef INT32_t j = key[1]
 
         return self.safe_at(i, j)
+
+    def find(self):
+        """
+        Return 3 NumPy arrays with the non-zero matrix entries: i-rows, j-cols, vals.
+        """
+        pass
+        cdef cnp.npy_intp dmat[1]
+        dmat[0] = <cnp.npy_intp> self.__nnz
+
+        # EXPLICIT TYPE TESTS
+
+        cdef:
+            cnp.ndarray[cnp.npy_int32, ndim=1] a_row = cnp.PyArray_SimpleNew( 1, dmat, cnp.NPY_INT32)
+            cnp.ndarray[cnp.npy_int32, ndim=1] a_col = cnp.PyArray_SimpleNew( 1, dmat, cnp.NPY_INT32)
+            cnp.ndarray[cnp.npy_complex64, ndim=1] a_val = cnp.PyArray_SimpleNew( 1, dmat, cnp.NPY_COMPLEX64)
+
+            INT32_t   *pi
+            INT32_t   *pj
+            COMPLEX64_t    *pv
+            INT32_t   j, k, elem
+
+        pi = <INT32_t *> cnp.PyArray_DATA(a_row)
+        pj = <INT32_t *> cnp.PyArray_DATA(a_col)
+        pv = <COMPLEX64_t *> cnp.PyArray_DATA(a_val)
+
+        elem = 0
+        for j from 0 <= j < self.__ncol:
+            for k from self.ind[j] <= k < self.ind[j+1]:
+                pi[ elem ] = self.row[j]
+                pj[ elem ] = j
+                pv[ elem ] = self.val[k]
+                elem += 1
+
+        return (a_row, a_col, a_val)
+
 
     ####################################################################################################################
     # Common operations

@@ -60,7 +60,6 @@ cdef class LLSparseMatrix_INT64_t_COMPLEX256_t(MutableSparseMatrix_INT64_t_COMPL
     cpdef object keys(self)
     cpdef object values(self)
     cpdef object items(self)
-    cpdef find(self)
 
     cpdef take_triplet(self, id1, id2, cnp.ndarray[cnp.npy_complex256, ndim=1] b)
 

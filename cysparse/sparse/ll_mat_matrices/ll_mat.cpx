@@ -1529,7 +1529,7 @@ YOU HAVE TO DEFINE OR CAST YOUR NEW UNRECOGNIZED TYPE
 
         return <object> list_p
 
-    cpdef find(self):
+    def find(self):
         """
         Return 3 NumPy arrays with the non-zero matrix entries: i-rows, j-cols, vals.
         """
@@ -1539,44 +1539,13 @@ YOU HAVE TO DEFINE OR CAST YOUR NEW UNRECOGNIZED TYPE
         # EXPLICIT TYPE TESTS
 
         cdef:
+            cnp.ndarray[cnp.@index|cysparse_type_to_numpy_c_type@, ndim=1] a_row = cnp.PyArray_SimpleNew( 1, dmat, cnp.@index|cysparse_type_to_numpy_enum_type@)
+            cnp.ndarray[cnp.@index|cysparse_type_to_numpy_c_type@, ndim=1] a_col = cnp.PyArray_SimpleNew( 1, dmat, cnp.@index|cysparse_type_to_numpy_enum_type@)
+            cnp.ndarray[cnp.@type|cysparse_type_to_numpy_c_type@, ndim=1] a_val = cnp.PyArray_SimpleNew( 1, dmat, cnp.@type|cysparse_type_to_numpy_enum_type@)
 
-{% if index == 'INT32_t' %}
-            cnp.ndarray[cnp.int32_t, ndim=1] a_row = cnp.PyArray_SimpleNew( 1, dmat, cnp.NPY_INT32)
-            cnp.ndarray[cnp.int32_t, ndim=1] a_col = cnp.PyArray_SimpleNew( 1, dmat, cnp.NPY_INT32)
-{% elif index == 'INT64_t' %}
-            cnp.ndarray[cnp.int64_t, ndim=1] a_row = cnp.PyArray_SimpleNew( 1, dmat, cnp.NPY_INT64)
-            cnp.ndarray[cnp.int64_t, ndim=1] a_col = cnp.PyArray_SimpleNew( 1, dmat, cnp.NPY_INT64)
-{% else %}
-YOU HAVE TO DEFINE WHAT HAPPENS WITH YOUR NEW INDEX TYPE
-{% endif %}
-
-{% if type == 'INT32_t' %}
-            cnp.ndarray[cnp.int32_t, ndim=1] a_val = cnp.PyArray_SimpleNew( 1, dmat, cnp.NPY_INT32)
-{% elif type == 'INT64_t' %}
-            cnp.ndarray[cnp.int64_t, ndim=1] a_val = cnp.PyArray_SimpleNew( 1, dmat, cnp.NPY_INT64)
-{% elif type == 'UINT32_t' %}
-            cnp.ndarray[cnp.uint32_t, ndim=1] a_val  = cnp.PyArray_SimpleNew( 1, dmat, cnp.NPY_UINT32)
-{% elif type == 'UINT64_t' %}
-            cnp.ndarray[cnp.uint64_t, ndim=1] a_val  = cnp.PyArray_SimpleNew( 1, dmat, cnp.NPY_UINT64)
-{% elif type == 'FLOAT32_t' %}
-            cnp.ndarray[cnp.float32_t, ndim=1] a_val  = cnp.PyArray_SimpleNew( 1, dmat, cnp.NPY_FLOAT32)
-{% elif type == 'FLOAT64_t' %}
-            cnp.ndarray[cnp.float64_t, ndim=1] a_val  = cnp.PyArray_SimpleNew( 1, dmat, cnp.NPY_FLOAT64)
-{% elif type == 'FLOAT128_t' %}
-            cnp.ndarray[cnp.npy_float128, ndim=1] a_val  = cnp.PyArray_SimpleNew( 1, dmat, cnp.NPY_FLOAT128)
-{% elif type == 'COMPLEX64_t' %}
-            cnp.ndarray[cnp.complex64_t, ndim=1] a_val = cnp.PyArray_SimpleNew( 1, dmat, cnp.NPY_COMPLEX64)
-{% elif type == 'COMPLEX128_t' %}
-            cnp.ndarray[cnp.complex128_t, ndim=1] a_val = cnp.PyArray_SimpleNew( 1, dmat, cnp.NPY_COMPLEX128)
-{% elif type == 'COMPLEX256_t' %}
-            cnp.ndarray[cnp.npy_complex256, ndim=1] a_val = cnp.PyArray_SimpleNew( 1, dmat, cnp.NPY_COMPLEX256)
-{% else %}
-YOU HAVE TO DEFINE OR CAST YOUR NEW UNRECOGNIZED TYPE
-{% endif %}
-
-            @index@   *pi, *pj;   # Intermediate pointers to matrix data
-            @type@    *pv;
-            @index@   i, k, elem;
+            @index@   *pi, *pj   # Intermediate pointers to matrix data
+            @type@    *pv
+            @index@   i, k, elem
 
         pi = <@index@ *> cnp.PyArray_DATA(a_row)
         pj = <@index@ *> cnp.PyArray_DATA(a_col)
@@ -1593,6 +1562,67 @@ YOU HAVE TO DEFINE OR CAST YOUR NEW UNRECOGNIZED TYPE
                 elem += 1
 
         return (a_row, a_col, a_val)
+
+
+    def diag(self, k = 0):
+        """
+        Return the :math:`k^\textrm{th}` diagonal.
+
+        """
+        assert -self.__nrow + 1 <= k <= self.__ncol -1, "Wrong diagonal number (%d <= k <= %d)" % (-self.__nrow + 1, self.__ncol -1)
+
+        cdef @index@ diag_size
+
+        if k == 0:
+            diag_size = min(self.__nrow, self.__ncol)
+        elif k > 0:
+            diag_size = min(self.__nrow, self.__ncol - k)
+        else:
+            diag_size = min(self.__nrow+k, self.__ncol)
+
+        assert diag_size > 0, "Something is wrong with the diagonal size"
+
+        # create NumPy array
+        cdef cnp.npy_intp dmat[1]
+        dmat[0] = <cnp.npy_intp> diag_size
+
+        cdef:
+            cnp.ndarray[cnp.@type|cysparse_type_to_numpy_c_type@, ndim=1] diag = cnp.PyArray_SimpleNew( 1, dmat, cnp.@type|cysparse_type_to_numpy_enum_type@)
+            @type@    *pv
+            @index@   i, k_
+
+        pv = <@type@ *> cnp.PyArray_DATA(diag)
+
+        # init NumPy array
+        for i from 0 <= i < diag_size:
+{% if type in integer_list %}
+            pv[i] = 0
+{% elif type in real_list %}
+            pv[i] = 0.0
+{% elif type in complex_list %}
+            pv[i] = 0.0 + 0.0j
+{% else %}
+YOU HAVE TO EXPLICITY CAST YOUR TYPE
+{% endif %}
+
+        if k >= 0:
+            for i from 0 <= i < self.__nrow:
+                k_ = self.root[i]
+                while k_ != -1:
+                    if i + k == self.col[k_]:
+                        pv[i] = self.val[k_]
+                    k_ = self.link[k_]
+
+        else:  #  k < 0
+            for i from 0 <= i < self.__nrow:
+                k_ = self.root[i]
+                while k_ != -1:
+                    j = self.col[k_]
+                    if i + k == j:
+                        pv[j] = self.val[k_]
+                    k_ = self.link[k_]
+
+        return diag
 
     ####################################################################################################################
     # Addition
