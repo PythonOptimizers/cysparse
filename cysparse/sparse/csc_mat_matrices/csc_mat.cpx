@@ -16,6 +16,9 @@ from cysparse.sparse.ll_mat_matrices.ll_mat_@index@_@type@ cimport LLSparseMatri
 # Cython, NumPy import/cimport
 ########################################################################################################################
 from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
+from libc.stdlib cimport malloc,free, calloc
+from libc.string cimport memcpy
+from cpython cimport PyObject, Py_INCREF
 
 cimport numpy as cnp
 import numpy as np
@@ -61,8 +64,9 @@ cdef class CSCSparseMatrix_@index@_@type@(ImmutableSparseMatrix_@index@_@type@):
         This matrix can **not** be modified.
 
     """
-
-
+    ####################################################################################################################
+    # Init/Free/Memory
+    ####################################################################################################################
     def __cinit__(self,  **kwargs):
 
         self.__type = "CSCSparseMatrix"
@@ -72,6 +76,55 @@ cdef class CSCSparseMatrix_@index@_@type@(ImmutableSparseMatrix_@index@_@type@):
         PyMem_Free(self.val)
         PyMem_Free(self.row)
         PyMem_Free(self.ind)
+
+    def copy(self):
+        """
+        Return a (deep) copy of itself.
+
+        Warning:
+            Because we use memcpy and thus copy memory internally, we have to be careful to always update this method
+            whenever the CSCSparseMatrix class changes.
+        """
+        # Warning: Because we use memcpy and thus copy memory internally, we have to be careful to always update this method
+        # whenever the CSCSparseMatrix class changes...
+
+        cdef CSCSparseMatrix_@index@_@type@ self_copy
+
+        # we copy manually the C-arrays
+        cdef:
+            @type@ * val
+            @index@ * row
+            @index@ * ind
+            @index@ nnz
+
+        nnz = self.nnz
+
+        self_copy = CSCSparseMatrix_@index@_@type@(control_object=unexposed_value, nrow=self.__nrow, ncol=self.__ncol, is_symmetric=self.__is_symmetric)
+
+        val = <@type@ *> PyMem_Malloc(nnz * sizeof(@type@))
+        if not val:
+            raise MemoryError()
+        memcpy(val, self.val, nnz * sizeof(@type@))
+        self_copy.val = val
+
+        row = <@index@ *> PyMem_Malloc(nnz * sizeof(@index@))
+        if not row:
+            PyMem_Free(self_copy.val)
+            raise MemoryError()
+        memcpy(row, self.row, nnz * sizeof(@index@))
+        self_copy.row = row
+
+        ind = <@index@ *> PyMem_Malloc((self.__ncol + 1) * sizeof(@index@))
+        if not ind:
+            PyMem_Free(self_copy.val)
+            PyMem_Free(self_copy.row)
+            raise MemoryError()
+        memcpy(ind, self.ind, (self.__ncol + 1) * sizeof(@index@))
+        self_copy.ind = ind
+
+        self_copy.__nnz = nnz
+
+        return self_copy
 
     ####################################################################################################################
     # Set/Get items
@@ -445,7 +498,7 @@ YOU HAVE TO EXPLICITY CAST YOUR TYPE
 ########################################################################################################################
 # Factory methods
 ########################################################################################################################
-cdef MakeCSCSparseMatrix_@index@_@type@(@index@ nrow, @index@ ncol, @index@ nnz, @index@ * ind, @index@ * row, @type@ * val, bint __is_symmetric):
+cdef MakeCSCSparseMatrix_@index@_@type@(@index@ nrow, @index@ ncol, @index@ nnz, @index@ * ind, @index@ * row, @type@ * val, bint is_symmetric):
     """
     Construct a CSCSparseMatrix object.
 
@@ -457,7 +510,7 @@ cdef MakeCSCSparseMatrix_@index@_@type@(@index@ nrow, @index@ ncol, @index@ nnz,
         row  (@index@ *): C-array with row indices.
         val  (@type@ *): C-array with values.
     """
-    csc_mat = CSCSparseMatrix_@index@_@type@(control_object=unexposed_value, nrow=nrow, ncol=ncol, nnz=nnz, __is_symmetric=__is_symmetric)
+    csc_mat = CSCSparseMatrix_@index@_@type@(control_object=unexposed_value, nrow=nrow, ncol=ncol, nnz=nnz, is_symmetric=is_symmetric)
 
     csc_mat.val = val
     csc_mat.ind = ind

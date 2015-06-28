@@ -283,7 +283,8 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX128_t(MutableSparseMatrix_INT32_t_COMPL
         Return a (deep) copy of itself.
 
         Warning:
-            Because we use memcpy and thus copy memory internally, we have to be careful
+            Because we use memcpy and thus copy memory internally, we have to be careful to always update this method
+            whenever the LLSparseMatrix class changes.
         """
         # Warning: Because we use memcpy and thus copy memory internally, we have to be careful to always update this method
         # whenever the LLSparseMatrix class changes...

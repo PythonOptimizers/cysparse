@@ -51,3 +51,25 @@ l2.print_to(sys.stdout)
 
 print l2.dtype
 print l2.itype
+
+########################################################################################################################
+print '$' * 80
+
+l3 = l1.to_csr().copy()
+
+l3.print_to(sys.stdout)
+
+
+print l3.dtype
+print l3.itype
+
+########################################################################################################################
+print '$' * 80
+
+l4 = l1.to_csc().copy()
+
+l4.print_to(sys.stdout)
+
+
+print l4.dtype
+print l4.itype

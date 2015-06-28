@@ -16,6 +16,9 @@ from cysparse.sparse.ll_mat_matrices.ll_mat_INT32_t_FLOAT64_t cimport LLSparseMa
 # Cython, NumPy import/cimport
 ########################################################################################################################
 from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
+from libc.stdlib cimport malloc,free, calloc
+from libc.string cimport memcpy
+from cpython cimport PyObject, Py_INCREF
 
 cimport numpy as cnp
 import numpy as np
@@ -61,8 +64,9 @@ cdef class CSCSparseMatrix_INT32_t_FLOAT64_t(ImmutableSparseMatrix_INT32_t_FLOAT
         This matrix can **not** be modified.
 
     """
-
-
+    ####################################################################################################################
+    # Init/Free/Memory
+    ####################################################################################################################
     def __cinit__(self,  **kwargs):
 
         self.__type = "CSCSparseMatrix"
@@ -72,6 +76,55 @@ cdef class CSCSparseMatrix_INT32_t_FLOAT64_t(ImmutableSparseMatrix_INT32_t_FLOAT
         PyMem_Free(self.val)
         PyMem_Free(self.row)
         PyMem_Free(self.ind)
+
+    def copy(self):
+        """
+        Return a (deep) copy of itself.
+
+        Warning:
+            Because we use memcpy and thus copy memory internally, we have to be careful to always update this method
+            whenever the CSCSparseMatrix class changes.
+        """
+        # Warning: Because we use memcpy and thus copy memory internally, we have to be careful to always update this method
+        # whenever the CSCSparseMatrix class changes...
+
+        cdef CSCSparseMatrix_INT32_t_FLOAT64_t self_copy
+
+        # we copy manually the C-arrays
+        cdef:
+            FLOAT64_t * val
+            INT32_t * row
+            INT32_t * ind
+            INT32_t nnz
+
+        nnz = self.nnz
+
+        self_copy = CSCSparseMatrix_INT32_t_FLOAT64_t(control_object=unexposed_value, nrow=self.__nrow, ncol=self.__ncol, is_symmetric=self.__is_symmetric)
+
+        val = <FLOAT64_t *> PyMem_Malloc(nnz * sizeof(FLOAT64_t))
+        if not val:
+            raise MemoryError()
+        memcpy(val, self.val, nnz * sizeof(FLOAT64_t))
+        self_copy.val = val
+
+        row = <INT32_t *> PyMem_Malloc(nnz * sizeof(INT32_t))
+        if not row:
+            PyMem_Free(self_copy.val)
+            raise MemoryError()
+        memcpy(row, self.row, nnz * sizeof(INT32_t))
+        self_copy.row = row
+
+        ind = <INT32_t *> PyMem_Malloc((self.__ncol + 1) * sizeof(INT32_t))
+        if not ind:
+            PyMem_Free(self_copy.val)
+            PyMem_Free(self_copy.row)
+            raise MemoryError()
+        memcpy(ind, self.ind, (self.__ncol + 1) * sizeof(INT32_t))
+        self_copy.ind = ind
+
+        self_copy.__nnz = nnz
+
+        return self_copy
 
     ####################################################################################################################
     # Set/Get items
@@ -420,7 +473,7 @@ cdef class CSCSparseMatrix_INT32_t_FLOAT64_t(ImmutableSparseMatrix_INT32_t_FLOAT
 ########################################################################################################################
 # Factory methods
 ########################################################################################################################
-cdef MakeCSCSparseMatrix_INT32_t_FLOAT64_t(INT32_t nrow, INT32_t ncol, INT32_t nnz, INT32_t * ind, INT32_t * row, FLOAT64_t * val, bint __is_symmetric):
+cdef MakeCSCSparseMatrix_INT32_t_FLOAT64_t(INT32_t nrow, INT32_t ncol, INT32_t nnz, INT32_t * ind, INT32_t * row, FLOAT64_t * val, bint is_symmetric):
     """
     Construct a CSCSparseMatrix object.
 
@@ -432,7 +485,7 @@ cdef MakeCSCSparseMatrix_INT32_t_FLOAT64_t(INT32_t nrow, INT32_t ncol, INT32_t n
         row  (INT32_t *): C-array with row indices.
         val  (FLOAT64_t *): C-array with values.
     """
-    csc_mat = CSCSparseMatrix_INT32_t_FLOAT64_t(control_object=unexposed_value, nrow=nrow, ncol=ncol, nnz=nnz, __is_symmetric=__is_symmetric)
+    csc_mat = CSCSparseMatrix_INT32_t_FLOAT64_t(control_object=unexposed_value, nrow=nrow, ncol=ncol, nnz=nnz, is_symmetric=is_symmetric)
 
     csc_mat.val = val
     csc_mat.ind = ind

@@ -72,7 +72,7 @@ cdef class SparseMatrix:
         #self.cp_type.itype = kwargs.get('itype', INT32_T)
         #self.cp_type.dtype = kwargs.get('dtype', FLOAT64_T)
 
-        self.__is_symmetric = kwargs.get('__is_symmetric', False)
+        self.__is_symmetric = kwargs.get('is_symmetric', False)
         self.__store_zeros = kwargs.get('store_zeros', False)
         self.__is_mutable = False
 

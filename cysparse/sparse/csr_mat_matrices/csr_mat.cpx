@@ -19,8 +19,10 @@ from cysparse.sparse.sparse_utils.generic.sort_indices_@index@ cimport sort_arra
 # Cython, NumPy import/cimport
 ########################################################################################################################
 from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
-from cpython cimport PyObject
 from libc.stdlib cimport malloc,free, calloc
+from libc.string cimport memcpy
+from cpython cimport PyObject, Py_INCREF
+
 
 cimport numpy as cnp
 import numpy as np
@@ -74,7 +76,7 @@ cdef class CSRSparseMatrix_@index@_@type@(ImmutableSparseMatrix_@index@_@type@):
 
     """
     ####################################################################################################################
-    # Init/Free
+    # Init/Free/Memory
     ####################################################################################################################
     def __cinit__(self, **kwargs):
 
@@ -85,6 +87,55 @@ cdef class CSRSparseMatrix_@index@_@type@(ImmutableSparseMatrix_@index@_@type@):
         PyMem_Free(self.val)
         PyMem_Free(self.col)
         PyMem_Free(self.ind)
+
+    def copy(self):
+        """
+        Return a (deep) copy of itself.
+
+        Warning:
+            Because we use memcpy and thus copy memory internally, we have to be careful to always update this method
+            whenever the CSRSparseMatrix class changes.
+        """
+        # Warning: Because we use memcpy and thus copy memory internally, we have to be careful to always update this method
+        # whenever the CSRSparseMatrix class changes...
+
+        cdef CSRSparseMatrix_@index@_@type@ self_copy
+
+        # we copy manually the C-arrays
+        cdef:
+            @type@ * val
+            @index@ * col
+            @index@ * ind
+            @index@ nnz
+
+        nnz = self.nnz
+
+        self_copy = CSRSparseMatrix_@index@_@type@(control_object=unexposed_value, nrow=self.__nrow, ncol=self.__ncol, is_symmetric=self.__is_symmetric)
+
+        val = <@type@ *> PyMem_Malloc(nnz * sizeof(@type@))
+        if not val:
+            raise MemoryError()
+        memcpy(val, self.val, nnz * sizeof(@type@))
+        self_copy.val = val
+
+        col = <@index@ *> PyMem_Malloc(nnz * sizeof(@index@))
+        if not col:
+            PyMem_Free(self_copy.val)
+            raise MemoryError()
+        memcpy(col, self.col, nnz * sizeof(@index@))
+        self_copy.col = col
+
+        ind = <@index@ *> PyMem_Malloc((self.__nrow + 1) * sizeof(@index@))
+        if not ind:
+            PyMem_Free(self_copy.val)
+            PyMem_Free(self_copy.col)
+            raise MemoryError()
+        memcpy(ind, self.ind, (self.__nrow + 1) * sizeof(@index@))
+        self_copy.ind = ind
+
+        self_copy.__nnz = nnz
+
+        return self_copy
 
     ####################################################################################################################
     # Column indices ordering
@@ -516,7 +567,7 @@ YOU HAVE TO EXPLICITY CAST YOUR TYPE
 ########################################################################################################################
 # Factory methods
 ########################################################################################################################
-cdef MakeCSRSparseMatrix_@index@_@type@(@index@ nrow, @index@ ncol, @index@ nnz, @index@ * ind, @index@ * col, @type@ * val, bint __is_symmetric):
+cdef MakeCSRSparseMatrix_@index@_@type@(@index@ nrow, @index@ ncol, @index@ nnz, @index@ * ind, @index@ * col, @type@ * val, bint is_symmetric):
     """
     Construct a CSRSparseMatrix object.
 
@@ -527,10 +578,10 @@ cdef MakeCSRSparseMatrix_@index@_@type@(@index@ nrow, @index@ ncol, @index@ nnz,
         ind (@index@ *): C-array with column indices pointers.
         col  (@index@ *): C-array with column indices.
         val  (@type@ *): C-array with values.
-        __is_symmetric (boolean): Is matrix symmetrix or not?
+        is_symmetric (boolean): Is matrix symmetrix or not?
     """
 
-    csr_mat = CSRSparseMatrix_@index@_@type@(control_object=unexposed_value, nrow=nrow, ncol=ncol, nnz=nnz, __is_symmetric=__is_symmetric)
+    csr_mat = CSRSparseMatrix_@index@_@type@(control_object=unexposed_value, nrow=nrow, ncol=ncol, nnz=nnz, is_symmetric=is_symmetric)
 
     csr_mat.val = val
     csr_mat.ind = ind

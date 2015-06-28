@@ -1185,9 +1185,8 @@ static char __pyx_k_type_name[] = "type_name";
 static char __pyx_k_is_mutable[] = "is_mutable";
 static char __pyx_k_Not_defined[] = "Not defined";
 static char __pyx_k_store_zeros[] = "store_zeros";
-static char __pyx_k_is_symmetric[] = "__is_symmetric";
+static char __pyx_k_is_symmetric[] = "is_symmetric";
 static char __pyx_k_control_object[] = "control_object";
-static char __pyx_k_is_symmetric_2[] = "is_symmetric";
 static char __pyx_k_NonZeros___exit[] = "NonZeros.__exit__";
 static char __pyx_k_NonZeros___init[] = "NonZeros.__init__";
 static char __pyx_k_is_complex_type[] = "is_complex_type";
@@ -1234,7 +1233,6 @@ static PyObject *__pyx_n_s_init;
 static PyObject *__pyx_n_s_is_complex_type;
 static PyObject *__pyx_n_s_is_mutable;
 static PyObject *__pyx_n_s_is_symmetric;
-static PyObject *__pyx_n_s_is_symmetric_2;
 static PyObject *__pyx_n_s_itype;
 static PyObject *__pyx_n_s_main;
 static PyObject *__pyx_n_s_metaclass;
@@ -1847,7 +1845,7 @@ static int __pyx_pf_8cysparse_6sparse_5s_mat_12SparseMatrix___cinit__(struct __p
   /* "cysparse/sparse/s_mat.pyx":75
  *         #self.cp_type.dtype = kwargs.get('dtype', FLOAT64_T)
  * 
- *         self.__is_symmetric = kwargs.get('__is_symmetric', False)             # <<<<<<<<<<<<<<
+ *         self.__is_symmetric = kwargs.get('is_symmetric', False)             # <<<<<<<<<<<<<<
  *         self.__store_zeros = kwargs.get('store_zeros', False)
  *         self.__is_mutable = False
  */
@@ -1859,7 +1857,7 @@ static int __pyx_pf_8cysparse_6sparse_5s_mat_12SparseMatrix___cinit__(struct __p
 
   /* "cysparse/sparse/s_mat.pyx":76
  * 
- *         self.__is_symmetric = kwargs.get('__is_symmetric', False)
+ *         self.__is_symmetric = kwargs.get('is_symmetric', False)
  *         self.__store_zeros = kwargs.get('store_zeros', False)             # <<<<<<<<<<<<<<
  *         self.__is_mutable = False
  * 
@@ -1871,7 +1869,7 @@ static int __pyx_pf_8cysparse_6sparse_5s_mat_12SparseMatrix___cinit__(struct __p
   __pyx_v_self->__pyx___store_zeros = __pyx_t_3;
 
   /* "cysparse/sparse/s_mat.pyx":77
- *         self.__is_symmetric = kwargs.get('__is_symmetric', False)
+ *         self.__is_symmetric = kwargs.get('is_symmetric', False)
  *         self.__store_zeros = kwargs.get('store_zeros', False)
  *         self.__is_mutable = False             # <<<<<<<<<<<<<<
  * 
@@ -3867,7 +3865,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_is_complex_type, __pyx_k_is_complex_type, sizeof(__pyx_k_is_complex_type), 0, 0, 1, 1},
   {&__pyx_n_s_is_mutable, __pyx_k_is_mutable, sizeof(__pyx_k_is_mutable), 0, 0, 1, 1},
   {&__pyx_n_s_is_symmetric, __pyx_k_is_symmetric, sizeof(__pyx_k_is_symmetric), 0, 0, 1, 1},
-  {&__pyx_n_s_is_symmetric_2, __pyx_k_is_symmetric_2, sizeof(__pyx_k_is_symmetric_2), 0, 0, 1, 1},
   {&__pyx_n_s_itype, __pyx_k_itype, sizeof(__pyx_k_itype), 0, 0, 1, 1},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
   {&__pyx_n_s_metaclass, __pyx_k_metaclass, sizeof(__pyx_k_metaclass), 0, 0, 1, 1},
@@ -4429,7 +4426,7 @@ PyMODINIT_FUNC PyInit_s_mat(void)
  *         return self.__is_symmetric
  * 
  */
-  __pyx_t_2 = __Pyx_GetNameInClass((PyObject *)__pyx_ptype_8cysparse_6sparse_5s_mat_SparseMatrix, __pyx_n_s_is_symmetric_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 93; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_GetNameInClass((PyObject *)__pyx_ptype_8cysparse_6sparse_5s_mat_SparseMatrix, __pyx_n_s_is_symmetric); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 93; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
 
   /* "cysparse/sparse/s_mat.pyx":92
@@ -4447,7 +4444,7 @@ PyMODINIT_FUNC PyInit_s_mat(void)
   __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_property, __pyx_t_1, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 92; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (PyDict_SetItem((PyObject *)__pyx_ptype_8cysparse_6sparse_5s_mat_SparseMatrix->tp_dict, __pyx_n_s_is_symmetric_2, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 93; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_8cysparse_6sparse_5s_mat_SparseMatrix->tp_dict, __pyx_n_s_is_symmetric, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 93; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   PyType_Modified(__pyx_ptype_8cysparse_6sparse_5s_mat_SparseMatrix);
 
