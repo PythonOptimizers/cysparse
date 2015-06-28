@@ -143,6 +143,26 @@ cdef class SparseMatrix:
         """
         raise NotImplementedError("Operation not implemented (yet). Please report.")
 
+    def triu(self, include_diagonal = True):
+        """
+        Return the triangular upper matrix.
+
+        Args:
+            include_diagonal: Do we include the main diagonal or not?
+
+        """
+        raise NotImplementedError("Operation not implemented (yet). Please report.")
+
+    def tril(self, include_diagonal = True):
+        """
+        Return the triangular lower matrix.
+
+        Args:
+            include_diagonal: Do we include the main diagonal or not?
+
+        """
+        raise NotImplementedError("Operation not implemented (yet). Please report.")
+
     def full(self):
         """
         Return an :program:`NumPy` dense array.

@@ -1488,6 +1488,50 @@ cdef class LLSparseMatrix_INT32_t_INT64_t(MutableSparseMatrix_INT32_t_INT64_t):
 
         return diag
 
+    def triu(self, include_diagonal = True):
+        """
+        Return the triangular upper matrix as ``LLSparseMatrix``.
+
+        """
+        cdef:
+            INT32_t i, j, k
+            LLSparseMatrix_INT32_t_INT64_t ll_mat_triu
+
+        ll_mat_triu = LLSparseMatrix_INT32_t_INT64_t(control_object=unexposed_value, nrow=self.__ncol, ncol=self.__nrow, size_hint=self.__nnz, store_zeros=self.__store_zeros, __is_symmetric=False)
+
+        # NON OPTIMIZED OPERATION
+        if include_diagonal:
+            if self.__is_symmetric:
+                raise NotImplementedError('Operation not implemented yet for symmetric matrices')
+            else:  # non symmetric
+                for i from 0 <= i < self.__nrow:
+                    k = self.root[i]
+                    while k != -1:
+                        j = self.col[k]
+                        if i <= j:
+                            ll_mat_triu[i, j] = self.val[k]
+                        k = self.link[k]
+        else:  # don't include the main diagonal
+            if self.__is_symmetric:
+                raise NotImplementedError('Operation not implemented yet for symmetric matrices')
+            else:  # non symmetric
+                for i from 0 <= i < self.__nrow:
+                    k = self.root[i]
+                    while k != -1:
+                        j = self.col[k]
+                        if i < j:
+                            ll_mat_triu[i, j] = self.val[k]
+                        k = self.link[k]
+
+        return ll_mat_triu
+
+    #def tril(self, include_diagonal = True):
+    #    """
+    #    Return the triangular lower matrix as ``LLSparseMatrix``.
+
+    #    """
+    #    pass
+
     ####################################################################################################################
     # Addition
     ####################################################################################################################
