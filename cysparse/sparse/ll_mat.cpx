@@ -393,6 +393,9 @@ def NewArrowheadLLSparseMatrix(**kwargs):
     """
     element = kwargs.pop('element', None)
 
+    if kwargs.get('is_symmetric', False):
+        raise NotImplementedError('This type of matrix is not implemented for symmetric matrices')
+
     ll_mat = NewLLSparseMatrix(**kwargs)
 
     itype = ll_mat.itype

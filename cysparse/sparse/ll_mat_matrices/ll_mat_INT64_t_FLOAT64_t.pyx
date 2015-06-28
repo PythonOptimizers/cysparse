@@ -1502,7 +1502,11 @@ cdef class LLSparseMatrix_INT64_t_FLOAT64_t(MutableSparseMatrix_INT64_t_FLOAT64_
         # NON OPTIMIZED OPERATION
         if include_diagonal:
             if self.__is_symmetric:
-                raise NotImplementedError('Operation not implemented yet for symmetric matrices')
+                for i from 0 <= i < self.__nrow:
+                    k = self.root[i]
+                    while k != -1:
+                        ll_mat_triu.put(self.col[k], i, self.val[k])
+                        k = self.link[k]
             else:  # non symmetric
                 for i from 0 <= i < self.__nrow:
                     k = self.root[i]
@@ -1513,7 +1517,13 @@ cdef class LLSparseMatrix_INT64_t_FLOAT64_t(MutableSparseMatrix_INT64_t_FLOAT64_
                         k = self.link[k]
         else:  # don't include the main diagonal
             if self.__is_symmetric:
-                raise NotImplementedError('Operation not implemented yet for symmetric matrices')
+                for i from 0 <= i < self.__nrow:
+                    k = self.root[i]
+                    while k != -1:
+                        j = self.col[k]
+                        if i > j:
+                            ll_mat_triu.put(j, i, self.val[k])
+                        k = self.link[k]
             else:  # non symmetric
                 for i from 0 <= i < self.__nrow:
                     k = self.root[i]

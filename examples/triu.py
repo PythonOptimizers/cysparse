@@ -8,7 +8,8 @@ m = 5
 
 n = 3
 
-A = NewLinearFillLLSparseMatrix(nrow=m, ncol=n)
+print "Initial matrix"
+A = NewLinearFillLLSparseMatrix(nrow=m, ncol=n, row_wise=False)
 A.print_to(sys.stdout)
 
 ########################################################################################################################
@@ -22,3 +23,17 @@ A.triu(include_diagonal=False).print_to(sys.stdout)
 
 ########################################################################################################################
 print "=" * 80
+print "+" * 80
+
+B = NewLinearFillLLSparseMatrix(size=m, is_symmetric=True, row_wise=False)
+B.print_to(sys.stdout)
+
+########################################################################################################################
+print "=" * 80
+
+B.triu().print_to(sys.stdout)
+
+########################################################################################################################
+print "=" * 80
+B.triu(include_diagonal=False).print_to(sys.stdout)
+

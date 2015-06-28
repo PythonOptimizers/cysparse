@@ -1497,30 +1497,40 @@ cdef class LLSparseMatrix_INT32_t_FLOAT32_t(MutableSparseMatrix_INT32_t_FLOAT32_
             INT32_t i, j, k
             LLSparseMatrix_INT32_t_FLOAT32_t ll_mat_triu
 
-        ll_mat_triu = LLSparseMatrix_INT32_t_FLOAT32_t(control_object=unexposed_value, nrow=self.__ncol, ncol=self.__nrow, size_hint=self.__nnz, store_zeros=self.__store_zeros, __is_symmetric=False)
+        ll_mat_triu = LLSparseMatrix_INT32_t_FLOAT32_t(control_object=unexposed_value, nrow=self.__nrow, ncol=self.__ncol, size_hint=self.__nnz, store_zeros=self.__store_zeros, __is_symmetric=False)
 
         # NON OPTIMIZED OPERATION
         if include_diagonal:
             if self.__is_symmetric:
-                raise NotImplementedError('Operation not implemented yet for symmetric matrices')
+                for i from 0 <= i < self.__nrow:
+                    k = self.root[i]
+                    while k != -1:
+                        ll_mat_triu.put(self.col[k], i, self.val[k])
+                        k = self.link[k]
             else:  # non symmetric
                 for i from 0 <= i < self.__nrow:
                     k = self.root[i]
                     while k != -1:
                         j = self.col[k]
                         if i <= j:
-                            ll_mat_triu[i, j] = self.val[k]
+                            ll_mat_triu.put(i, j, self.val[k])
                         k = self.link[k]
         else:  # don't include the main diagonal
             if self.__is_symmetric:
-                raise NotImplementedError('Operation not implemented yet for symmetric matrices')
+                for i from 0 <= i < self.__nrow:
+                    k = self.root[i]
+                    while k != -1:
+                        j = self.col[k]
+                        if i > j:
+                            ll_mat_triu.put(j, i, self.val[k])
+                        k = self.link[k]
             else:  # non symmetric
                 for i from 0 <= i < self.__nrow:
                     k = self.root[i]
                     while k != -1:
                         j = self.col[k]
                         if i < j:
-                            ll_mat_triu[i, j] = self.val[k]
+                            ll_mat_triu.put(i, j, self.val[k])
                         k = self.link[k]
 
         return ll_mat_triu

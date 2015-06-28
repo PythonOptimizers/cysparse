@@ -57,6 +57,13 @@ cdef class SparseMatrix_INT64_t_INT32_t(SparseMatrix):
 
         self.__nrow = kwargs.get('nrow', -1)
         self.__ncol = kwargs.get('ncol', -1)
+
+        assert self.__nrow != -1, "Number of rows must be given"
+        assert self.__ncol != -1, "Number of columns must be given"
+
+        if self.__is_symmetric:
+            assert self.__nrow == self.__ncol, "A symmetric matrix must have equal number of rows and columns"
+
         self.__nnz = kwargs.get('nnz', 0)
 
         self.__nargin = self.__ncol

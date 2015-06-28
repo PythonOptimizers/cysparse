@@ -20,16 +20,28 @@ cdef LLSparseMatrix_INT32_t_FLOAT128_t MakeLinearFillLLSparseMatrix_INT32_t_FLOA
     sum = first_element
 
     # NON OPTIMIZED code
-    if row_wise:
-        for i from 0 <= i < A_nrow:
-            for j from 0 <= j < A_ncol:
-                A.put(i, j, sum)
-                sum += step
-
-    else:  #  column wise
-        for j from 0 <= j < A_ncol:
+    if A.is_symmetric:
+        if row_wise:
             for i from 0 <= i < A_nrow:
-                A.put(i, j, sum)
-                sum += step
+                for j from 0 <= j <= i:
+                    A.put(i, j, sum)
+                    sum += step
+        else:  #  column wise
+            for i from 0 <= i < A_nrow:
+                for j from i <= j < A_ncol:
+                    A.put(j, i, sum)
+                    sum += step
+    else:  # A non symmetric
+        if row_wise:
+            for i from 0 <= i < A_nrow:
+                for j from 0 <= j < A_ncol:
+                    A.put(i, j, sum)
+                    sum += step
+
+        else:  #  column wise
+            for j from 0 <= j < A_ncol:
+                for i from 0 <= i < A_nrow:
+                    A.put(i, j, sum)
+                    sum += step
 
     return A
