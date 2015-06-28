@@ -58,7 +58,7 @@ class CySparseCSCMultiplicationWithANumpyVectorTestCase(CySparseCSCMultiplicatio
         #self.l_@outerloop.index@_@loop.index@ = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=@index_type|type2enum@, dtype=@element_type|type2enum@)
         #construct_sparse_matrix(self.l_@outerloop.index@_@loop.index@, self.nrow, self.ncol, self.nbr_of_elements)
 
-        self.l_@outerloop.index@_@loop.index@ = NewLinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, , itype=@index_type|type2enum@, dtype=@element_type|type2enum@, row_wise=False)
+        self.l_@outerloop.index@_@loop.index@ = NewLinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, itype=@index_type|type2enum@, dtype=@element_type|type2enum@, row_wise=False)
 
         self.l_@outerloop.index@_@loop.index@_csc = self.l_@outerloop.index@_@loop.index@.to_csc()
   {% endfor %}

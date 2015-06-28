@@ -614,7 +614,7 @@ YOU HAVE TO DEFINE OR CAST YOUR NEW UNRECOGNIZED COMPLEX TYPE
 
         Warning:
             Memory **must** be freed by the caller!
-            Column indices are **not** necessarily sorted!
+            Column indices **are** sorted!
 
         """
         cdef @index@ * ind = <@index@ *> PyMem_Malloc((self.__nrow + 1) * sizeof(@index@))
@@ -638,7 +638,7 @@ YOU HAVE TO DEFINE OR CAST YOUR NEW UNRECOGNIZED COMPLEX TYPE
         cdef @index@ i
         cdef @index@ k
 
-        # indices are NOT sorted for each row
+        # indices are sorted for each row by definition of LLSparseMatrix
         for i from 0 <= i < self.__nrow:
             k = self.root[i]
 

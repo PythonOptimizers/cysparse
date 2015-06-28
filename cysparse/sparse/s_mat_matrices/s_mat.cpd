@@ -37,4 +37,4 @@ cdef class MutableSparseMatrix_@index@_@type@(SparseMatrix_@index@_@type@):
 
 cdef class ImmutableSparseMatrix_@index@_@type@(SparseMatrix_@index@_@type@):
     cdef:
-        @index@ test2
+        @index@ temp
