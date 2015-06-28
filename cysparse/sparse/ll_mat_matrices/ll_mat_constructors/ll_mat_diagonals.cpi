@@ -1,0 +1,21 @@
+
+
+cdef LLSparseMatrix_@index@_@type@ MakeDiagonalLLSparseMatrix_@index@_@type@(LLSparseMatrix_@index@_@type@ A, @type@ element):
+    """
+    Populate an ``LLSparseMatrix_@index@_@type@ with a number on the main diagonal.
+
+    Note:
+        We don't expect the matrix to be square.
+    """
+    cdef:
+        @index@ i, j, A_nrow, A_ncol
+
+    A_nrow, A_ncol = A.shape
+
+    # NON OPTIMIZED code
+    for i from 0 <= i < A_nrow:
+        for j from 0 <= j < A_ncol:
+            if i == j:
+                A.put(i, j, element)
+
+    return A

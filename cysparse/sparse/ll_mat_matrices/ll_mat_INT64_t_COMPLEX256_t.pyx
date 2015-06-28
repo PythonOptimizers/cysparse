@@ -1627,6 +1627,7 @@ cdef class LLSparseMatrix_INT64_t_COMPLEX256_t(MutableSparseMatrix_INT64_t_COMPL
                             ll_mat_tril.put(i, j, self.val[k])
                         k = self.link[k]
         else:  # don't include the main diagonal
+            # code is the same for both cases but I do keep both codes in case later...
             if self.__is_symmetric:
                 pass
                 for i from 0 <= i < self.__nrow:

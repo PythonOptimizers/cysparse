@@ -69,53 +69,69 @@ from cysparse.sparse.ll_mat_matrices.ll_mat_INT64_t_COMPLEX256_t cimport LLSpars
 
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT32_t_INT32_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_diagonals_INT32_t_INT32_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT32_t_INT32_t.pxi"
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT32_t_INT64_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_diagonals_INT32_t_INT64_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT32_t_INT64_t.pxi"
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT32_t_FLOAT32_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_diagonals_INT32_t_FLOAT32_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT32_t_FLOAT32_t.pxi"
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT32_t_FLOAT64_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_diagonals_INT32_t_FLOAT64_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT32_t_FLOAT64_t.pxi"
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT32_t_FLOAT128_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_diagonals_INT32_t_FLOAT128_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT32_t_FLOAT128_t.pxi"
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT32_t_COMPLEX64_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_diagonals_INT32_t_COMPLEX64_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT32_t_COMPLEX64_t.pxi"
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT32_t_COMPLEX128_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_diagonals_INT32_t_COMPLEX128_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT32_t_COMPLEX128_t.pxi"
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT32_t_COMPLEX256_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_diagonals_INT32_t_COMPLEX256_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT32_t_COMPLEX256_t.pxi"
     
 
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT64_t_INT32_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_diagonals_INT64_t_INT32_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT64_t_INT32_t.pxi"
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT64_t_INT64_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_diagonals_INT64_t_INT64_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT64_t_INT64_t.pxi"
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT64_t_FLOAT32_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_diagonals_INT64_t_FLOAT32_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT64_t_FLOAT32_t.pxi"
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT64_t_FLOAT64_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_diagonals_INT64_t_FLOAT64_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT64_t_FLOAT64_t.pxi"
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT64_t_FLOAT128_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_diagonals_INT64_t_FLOAT128_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT64_t_FLOAT128_t.pxi"
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT64_t_COMPLEX64_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_diagonals_INT64_t_COMPLEX64_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT64_t_COMPLEX64_t.pxi"
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT64_t_COMPLEX128_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_diagonals_INT64_t_COMPLEX128_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT64_t_COMPLEX128_t.pxi"
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT64_t_COMPLEX256_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_diagonals_INT64_t_COMPLEX256_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT64_t_COMPLEX256_t.pxi"
     
 
@@ -782,6 +798,133 @@ def NewArrowheadLLSparseMatrix(**kwargs):
         raise TypeError('itype not recognized')
 
 
+def NewDiagonalLLSparseMatrix(**kwargs):
+    """
+    See ``MakeDiagonalLLSparseMatrix``.
+
+    Note:
+        Input arguments are **not** tested.
+    """
+    element = kwargs.pop('element', None)
+
+    if kwargs.get('is_symmetric', False):
+        raise NotImplementedError('This type of matrix is not implemented for symmetric matrices')
+
+    ll_mat = NewLLSparseMatrix(**kwargs)
+
+    itype = ll_mat.itype
+    dtype = ll_mat.dtype
+
+    # create 1.0 element if needed
+    if element is None:
+        if is_integer_type(dtype):
+            element = 1
+        elif is_real_type(dtype):
+            element = 1.0
+        elif is_complex_type(dtype):
+            element = 1.0 + 0.0j
+        else:
+            raise TypeError('dtype not recognized')
+
+    # launch right "constructor" method
+
+    
+    if itype == INT32_T:
+    
+        
+        if dtype == INT32_T:
+        
+            return MakeDiagonalLLSparseMatrix_INT32_t_INT32_t(ll_mat, element)
+    
+        
+        elif dtype == INT64_T:
+        
+            return MakeDiagonalLLSparseMatrix_INT32_t_INT64_t(ll_mat, element)
+    
+        
+        elif dtype == FLOAT32_T:
+        
+            return MakeDiagonalLLSparseMatrix_INT32_t_FLOAT32_t(ll_mat, element)
+    
+        
+        elif dtype == FLOAT64_T:
+        
+            return MakeDiagonalLLSparseMatrix_INT32_t_FLOAT64_t(ll_mat, element)
+    
+        
+        elif dtype == FLOAT128_T:
+        
+            return MakeDiagonalLLSparseMatrix_INT32_t_FLOAT128_t(ll_mat, element)
+    
+        
+        elif dtype == COMPLEX64_T:
+        
+            return MakeDiagonalLLSparseMatrix_INT32_t_COMPLEX64_t(ll_mat, element)
+    
+        
+        elif dtype == COMPLEX128_T:
+        
+            return MakeDiagonalLLSparseMatrix_INT32_t_COMPLEX128_t(ll_mat, element)
+    
+        
+        elif dtype == COMPLEX256_T:
+        
+            return MakeDiagonalLLSparseMatrix_INT32_t_COMPLEX256_t(ll_mat, element)
+    
+    
+
+    
+    elif itype == INT64_T:
+    
+        
+        if dtype == INT32_T:
+        
+            return MakeDiagonalLLSparseMatrix_INT64_t_INT32_t(ll_mat, element)
+    
+        
+        elif dtype == INT64_T:
+        
+            return MakeDiagonalLLSparseMatrix_INT64_t_INT64_t(ll_mat, element)
+    
+        
+        elif dtype == FLOAT32_T:
+        
+            return MakeDiagonalLLSparseMatrix_INT64_t_FLOAT32_t(ll_mat, element)
+    
+        
+        elif dtype == FLOAT64_T:
+        
+            return MakeDiagonalLLSparseMatrix_INT64_t_FLOAT64_t(ll_mat, element)
+    
+        
+        elif dtype == FLOAT128_T:
+        
+            return MakeDiagonalLLSparseMatrix_INT64_t_FLOAT128_t(ll_mat, element)
+    
+        
+        elif dtype == COMPLEX64_T:
+        
+            return MakeDiagonalLLSparseMatrix_INT64_t_COMPLEX64_t(ll_mat, element)
+    
+        
+        elif dtype == COMPLEX128_T:
+        
+            return MakeDiagonalLLSparseMatrix_INT64_t_COMPLEX128_t(ll_mat, element)
+    
+        
+        elif dtype == COMPLEX256_T:
+        
+            return MakeDiagonalLLSparseMatrix_INT64_t_COMPLEX256_t(ll_mat, element)
+    
+    
+
+    else:
+        raise TypeError('itype not recognized')
+
+# alias
+def NewUnityLLSparseMatrix(**kwargs):
+    element = kwargs.pop('element', None)
+    return NewDiagonalLLSparseMatrix(**kwargs)
 
 def NewLinearFillLLSparseMatrix(**kwargs):
     """

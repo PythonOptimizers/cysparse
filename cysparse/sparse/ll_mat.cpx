@@ -37,6 +37,7 @@ from cysparse.sparse.ll_mat_matrices.ll_mat_@index_type@_@element_type@ cimport 
 {% for index_type in index_list %}
     {% for element_type in type_list %}
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_@index_type@_@element_type@.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_diagonals_@index_type@_@element_type@.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_@index_type@_@element_type@.pxi"
     {% endfor %}
 {% endfor %}
@@ -440,6 +441,65 @@ def NewArrowheadLLSparseMatrix(**kwargs):
         raise TypeError('itype not recognized')
 
 
+def NewDiagonalLLSparseMatrix(**kwargs):
+    """
+    See ``MakeDiagonalLLSparseMatrix``.
+
+    Note:
+        Input arguments are **not** tested.
+    """
+    element = kwargs.pop('element', None)
+
+    if kwargs.get('is_symmetric', False):
+        raise NotImplementedError('This type of matrix is not implemented for symmetric matrices')
+
+    ll_mat = NewLLSparseMatrix(**kwargs)
+
+    itype = ll_mat.itype
+    dtype = ll_mat.dtype
+
+    # create 1.0 element if needed
+    if element is None:
+        if is_integer_type(dtype):
+            element = 1
+        elif is_real_type(dtype):
+            element = 1.0
+        elif is_complex_type(dtype):
+            element = 1.0 + 0.0j
+        else:
+            raise TypeError('dtype not recognized')
+
+    # launch right "constructor" method
+{% for index_type in index_list %}
+    {% if index_type == index_list |first %}
+    if itype == @index_type|type2enum@:
+    {% for element_type in type_list %}
+        {% if element_type == type_list |first %}
+        if dtype == @element_type|type2enum@:
+        {% else %}
+        elif dtype == @element_type|type2enum@:
+        {% endif %}
+            return MakeDiagonalLLSparseMatrix_@index_type@_@element_type@(ll_mat, element)
+    {% endfor %}
+    {% else %}
+    elif itype == @index_type|type2enum@:
+    {% for element_type in type_list %}
+        {% if element_type == type_list |first %}
+        if dtype == @element_type|type2enum@:
+        {% else %}
+        elif dtype == @element_type|type2enum@:
+        {% endif %}
+            return MakeDiagonalLLSparseMatrix_@index_type@_@element_type@(ll_mat, element)
+    {% endfor %}
+    {% endif %}
+{% endfor %}
+    else:
+        raise TypeError('itype not recognized')
+
+# alias
+def NewUnityLLSparseMatrix(**kwargs):
+    element = kwargs.pop('element', None)
+    return NewDiagonalLLSparseMatrix(**kwargs)
 
 def NewLinearFillLLSparseMatrix(**kwargs):
     """
