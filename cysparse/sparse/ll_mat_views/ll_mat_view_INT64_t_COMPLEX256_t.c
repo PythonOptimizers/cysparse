@@ -1034,7 +1034,6 @@ struct __pyx_vtabstruct_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT64_t_COM
   PyObject *(*keys)(struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT64_t_COMPLEX256_t_LLSparseMatrix_INT64_t_COMPLEX256_t *, int __pyx_skip_dispatch);
   PyObject *(*values)(struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT64_t_COMPLEX256_t_LLSparseMatrix_INT64_t_COMPLEX256_t *, int __pyx_skip_dispatch);
   PyObject *(*items)(struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT64_t_COMPLEX256_t_LLSparseMatrix_INT64_t_COMPLEX256_t *, int __pyx_skip_dispatch);
-  PyObject *(*find)(struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT64_t_COMPLEX256_t_LLSparseMatrix_INT64_t_COMPLEX256_t *, int __pyx_skip_dispatch);
   PyObject *(*take_triplet)(struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT64_t_COMPLEX256_t_LLSparseMatrix_INT64_t_COMPLEX256_t *, PyObject *, PyObject *, PyArrayObject *, int __pyx_skip_dispatch);
   PyObject *(*_norm_inf)(struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT64_t_COMPLEX256_t_LLSparseMatrix_INT64_t_COMPLEX256_t *);
   PyObject *(*_norm_one)(struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT64_t_COMPLEX256_t_LLSparseMatrix_INT64_t_COMPLEX256_t *);

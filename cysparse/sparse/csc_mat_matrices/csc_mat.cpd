@@ -32,4 +32,4 @@ cdef class CSCSparseMatrix_@index@_@type@(ImmutableSparseMatrix_@index@_@type@):
     cdef @type@ safe_at(self, @index@ i, @index@ j) except? 2
 {% endif %}
 
-cdef MakeCSCSparseMatrix_@index@_@type@(@index@ nrow, @index@ ncol, @index@ nnz, @index@ * ind, @index@ * row, @type@ * val, bint __is_symmetric)
+cdef MakeCSCSparseMatrix_@index@_@type@(@index@ nrow, @index@ ncol, @index@ nnz, @index@ * ind, @index@ * row, @type@ * val, bint is_symmetric, bint store_zeros)

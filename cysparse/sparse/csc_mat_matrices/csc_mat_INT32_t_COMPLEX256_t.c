@@ -1779,6 +1779,7 @@ static char __pyx_k_complex256[] = "complex256";
 static char __pyx_k_pyx_vtable[] = "__pyx_vtable__";
 static char __pyx_k_MemoryError[] = "MemoryError";
 static char __pyx_k_SyntaxError[] = "SyntaxError";
+static char __pyx_k_store_zeros[] = "store_zeros";
 static char __pyx_k_RuntimeError[] = "RuntimeError";
 static char __pyx_k_is_symmetric[] = "is_symmetric";
 static char __pyx_k_control_object[] = "control_object";
@@ -1856,6 +1857,7 @@ static PyObject *__pyx_n_s_range;
 static PyObject *__pyx_kp_s_row;
 static PyObject *__pyx_n_s_sep;
 static PyObject *__pyx_n_s_size;
+static PyObject *__pyx_n_s_store_zeros;
 static PyObject *__pyx_n_s_test;
 static PyObject *__pyx_kp_u_unknown_dtype_code_in_numpy_pxd;
 static PyObject *__pyx_kp_s_val;
@@ -5243,7 +5245,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  * 
  *         nnz = self.nnz             # <<<<<<<<<<<<<<
  * 
- *         self_copy = CSCSparseMatrix_INT32_t_COMPLEX256_t(control_object=unexposed_value, nrow=self.__nrow, ncol=self.__ncol, is_symmetric=self.__is_symmetric)
+ *         self_copy = CSCSparseMatrix_INT32_t_COMPLEX256_t(control_object=unexposed_value, nrow=self.__nrow, ncol=self.__ncol, store_zeros=self.__store_zeros, is_symmetric=self.__is_symmetric)
  */
   __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_nnz); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 100; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
@@ -5254,7 +5256,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX256_t.pyx":102
  *         nnz = self.nnz
  * 
- *         self_copy = CSCSparseMatrix_INT32_t_COMPLEX256_t(control_object=unexposed_value, nrow=self.__nrow, ncol=self.__ncol, is_symmetric=self.__is_symmetric)             # <<<<<<<<<<<<<<
+ *         self_copy = CSCSparseMatrix_INT32_t_COMPLEX256_t(control_object=unexposed_value, nrow=self.__nrow, ncol=self.__ncol, store_zeros=self.__store_zeros, is_symmetric=self.__is_symmetric)             # <<<<<<<<<<<<<<
  * 
  *         val = <COMPLEX256_t *> PyMem_Malloc(nnz * sizeof(COMPLEX256_t))
  */
@@ -5269,6 +5271,10 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   __Pyx_GOTREF(__pyx_t_3);
   if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_ncol, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 102; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_3 = __Pyx_PyBool_FromLong(__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___store_zeros); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 102; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_store_zeros, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 102; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_3 = __Pyx_PyBool_FromLong(__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___is_symmetric); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 102; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_is_symmetric, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 102; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -5280,7 +5286,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   __pyx_t_3 = 0;
 
   /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX256_t.pyx":104
- *         self_copy = CSCSparseMatrix_INT32_t_COMPLEX256_t(control_object=unexposed_value, nrow=self.__nrow, ncol=self.__ncol, is_symmetric=self.__is_symmetric)
+ *         self_copy = CSCSparseMatrix_INT32_t_COMPLEX256_t(control_object=unexposed_value, nrow=self.__nrow, ncol=self.__ncol, store_zeros=self.__store_zeros, is_symmetric=self.__is_symmetric)
  * 
  *         val = <COMPLEX256_t *> PyMem_Malloc(nnz * sizeof(COMPLEX256_t))             # <<<<<<<<<<<<<<
  *         if not val:
@@ -8596,12 +8602,12 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
 /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX256_t.pyx":489
  * # Factory methods
  * ########################################################################################################################
- * cdef MakeCSCSparseMatrix_INT32_t_COMPLEX256_t(INT32_t nrow, INT32_t ncol, INT32_t nnz, INT32_t * ind, INT32_t * row, COMPLEX256_t * val, bint is_symmetric):             # <<<<<<<<<<<<<<
+ * cdef MakeCSCSparseMatrix_INT32_t_COMPLEX256_t(INT32_t nrow, INT32_t ncol, INT32_t nnz, INT32_t * ind, INT32_t * row, COMPLEX256_t * val, bint is_symmetric, bint store_zeros):             # <<<<<<<<<<<<<<
  *     """
  *     Construct a CSCSparseMatrix object.
  */
 
-static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX256_t_MakeCSCSparseMatrix_INT32_t_COMPLEX256_t(__pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_nrow, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_ncol, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_nnz, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *__pyx_v_ind, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *__pyx_v_row, __pyx_t_long_double_complex *__pyx_v_val, int __pyx_v_is_symmetric) {
+static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX256_t_MakeCSCSparseMatrix_INT32_t_COMPLEX256_t(__pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_nrow, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_ncol, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_nnz, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *__pyx_v_ind, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *__pyx_v_row, __pyx_t_long_double_complex *__pyx_v_val, int __pyx_v_is_symmetric, int __pyx_v_store_zeros) {
   struct __pyx_obj_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX256_t_CSCSparseMatrix_INT32_t_COMPLEX256_t *__pyx_v_csc_mat = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -8615,7 +8621,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_
   /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX256_t.pyx":501
  *         val  (COMPLEX256_t *): C-array with values.
  *     """
- *     csc_mat = CSCSparseMatrix_INT32_t_COMPLEX256_t(control_object=unexposed_value, nrow=nrow, ncol=ncol, nnz=nnz, is_symmetric=is_symmetric)             # <<<<<<<<<<<<<<
+ *     csc_mat = CSCSparseMatrix_INT32_t_COMPLEX256_t(control_object=unexposed_value, nrow=nrow, ncol=ncol, nnz=nnz, is_symmetric=is_symmetric, store_zeros=store_zeros)             # <<<<<<<<<<<<<<
  * 
  *     csc_mat.val = val
  */
@@ -8638,6 +8644,10 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_
   __Pyx_GOTREF(__pyx_t_2);
   if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_is_symmetric, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 501; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_2 = __Pyx_PyBool_FromLong(__pyx_v_store_zeros); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 501; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_store_zeros, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 501; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)((PyObject*)__pyx_ptype_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX256_t_CSCSparseMatrix_INT32_t_COMPLEX256_t)), __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 501; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -8645,7 +8655,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_
   __pyx_t_2 = 0;
 
   /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX256_t.pyx":503
- *     csc_mat = CSCSparseMatrix_INT32_t_COMPLEX256_t(control_object=unexposed_value, nrow=nrow, ncol=ncol, nnz=nnz, is_symmetric=is_symmetric)
+ *     csc_mat = CSCSparseMatrix_INT32_t_COMPLEX256_t(control_object=unexposed_value, nrow=nrow, ncol=ncol, nnz=nnz, is_symmetric=is_symmetric, store_zeros=store_zeros)
  * 
  *     csc_mat.val = val             # <<<<<<<<<<<<<<
  *     csc_mat.ind = ind
@@ -8684,7 +8694,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_
   /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX256_t.pyx":489
  * # Factory methods
  * ########################################################################################################################
- * cdef MakeCSCSparseMatrix_INT32_t_COMPLEX256_t(INT32_t nrow, INT32_t ncol, INT32_t nnz, INT32_t * ind, INT32_t * row, COMPLEX256_t * val, bint is_symmetric):             # <<<<<<<<<<<<<<
+ * cdef MakeCSCSparseMatrix_INT32_t_COMPLEX256_t(INT32_t nrow, INT32_t ncol, INT32_t nnz, INT32_t * ind, INT32_t * row, COMPLEX256_t * val, bint is_symmetric, bint store_zeros):             # <<<<<<<<<<<<<<
  *     """
  *     Construct a CSCSparseMatrix object.
  */
@@ -11000,6 +11010,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_row, __pyx_k_row, sizeof(__pyx_k_row), 0, 0, 1, 0},
   {&__pyx_n_s_sep, __pyx_k_sep, sizeof(__pyx_k_sep), 0, 0, 1, 1},
   {&__pyx_n_s_size, __pyx_k_size, sizeof(__pyx_k_size), 0, 0, 1, 1},
+  {&__pyx_n_s_store_zeros, __pyx_k_store_zeros, sizeof(__pyx_k_store_zeros), 0, 0, 1, 1},
   {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
   {&__pyx_kp_u_unknown_dtype_code_in_numpy_pxd, __pyx_k_unknown_dtype_code_in_numpy_pxd, sizeof(__pyx_k_unknown_dtype_code_in_numpy_pxd), 0, 1, 0, 0},
   {&__pyx_kp_s_val, __pyx_k_val, sizeof(__pyx_k_val), 0, 0, 1, 0},
@@ -11274,7 +11285,7 @@ PyMODINIT_FUNC PyInit_csc_mat_INT32_t_COMPLEX256_t(void)
   /*--- Global init code ---*/
   /*--- Variable export code ---*/
   /*--- Function export code ---*/
-  if (__Pyx_ExportFunction("MakeCSCSparseMatrix_INT32_t_COMPLEX256_t", (void (*)(void))__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX256_t_MakeCSCSparseMatrix_INT32_t_COMPLEX256_t, "PyObject *(__pyx_t_8cysparse_5types_14cysparse_types_INT32_t, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *, __pyx_t_long_double_complex *, int)") < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_ExportFunction("MakeCSCSparseMatrix_INT32_t_COMPLEX256_t", (void (*)(void))__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX256_t_MakeCSCSparseMatrix_INT32_t_COMPLEX256_t, "PyObject *(__pyx_t_8cysparse_5types_14cysparse_types_INT32_t, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *, __pyx_t_long_double_complex *, int, int)") < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   /*--- Type init code ---*/
   __pyx_ptype_8cysparse_6sparse_14s_mat_matrices_26s_mat_INT32_t_COMPLEX256_t_ImmutableSparseMatrix_INT32_t_COMPLEX256_t = __Pyx_ImportType("cysparse.sparse.s_mat_matrices.s_mat_INT32_t_COMPLEX256_t", "ImmutableSparseMatrix_INT32_t_COMPLEX256_t", sizeof(struct __pyx_obj_8cysparse_6sparse_14s_mat_matrices_26s_mat_INT32_t_COMPLEX256_t_ImmutableSparseMatrix_INT32_t_COMPLEX256_t), 1); if (unlikely(!__pyx_ptype_8cysparse_6sparse_14s_mat_matrices_26s_mat_INT32_t_COMPLEX256_t_ImmutableSparseMatrix_INT32_t_COMPLEX256_t)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_vtabptr_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX256_t_CSCSparseMatrix_INT32_t_COMPLEX256_t = &__pyx_vtable_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX256_t_CSCSparseMatrix_INT32_t_COMPLEX256_t;

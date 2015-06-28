@@ -197,7 +197,7 @@ def NewLLSparseMatrix(**kwargs):
      ], "dtype is not accepted as type for a matrix element"
 
     cdef bint store_zeros = kwargs.get('store_zeros', False)
-    cdef bint __is_symmetric = kwargs.get('is_symmetric', False)
+    cdef bint is_symmetric = kwargs.get('is_symmetric', False)
     cdef bint test_bounds = kwargs.get('test_bounds', True)
 
     # From matrices
@@ -259,7 +259,7 @@ def NewLLSparseMatrix(**kwargs):
                                                                   itype=itype,
                                                                   size_hint=size_hint,
                                                                   store_zeros=store_zeros,
-                                                                  __is_symmetric=__is_symmetric)
+                                                                  is_symmetric=is_symmetric)
     {% endfor %}
 {% endfor %}
 

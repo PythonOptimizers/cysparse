@@ -110,7 +110,7 @@ cdef class CSRSparseMatrix_INT64_t_COMPLEX128_t(ImmutableSparseMatrix_INT64_t_CO
 
         nnz = self.nnz
 
-        self_copy = CSRSparseMatrix_INT64_t_COMPLEX128_t(control_object=unexposed_value, nrow=self.__nrow, ncol=self.__ncol, is_symmetric=self.__is_symmetric)
+        self_copy = CSRSparseMatrix_INT64_t_COMPLEX128_t(control_object=unexposed_value, nrow=self.__nrow, ncol=self.__ncol, store_zeros=self.__store_zeros, is_symmetric=self.__is_symmetric)
 
         val = <COMPLEX128_t *> PyMem_Malloc(nnz * sizeof(COMPLEX128_t))
         if not val:
@@ -553,7 +553,7 @@ cdef class CSRSparseMatrix_INT64_t_COMPLEX128_t(ImmutableSparseMatrix_INT64_t_CO
 ########################################################################################################################
 # Factory methods
 ########################################################################################################################
-cdef MakeCSRSparseMatrix_INT64_t_COMPLEX128_t(INT64_t nrow, INT64_t ncol, INT64_t nnz, INT64_t * ind, INT64_t * col, COMPLEX128_t * val, bint is_symmetric):
+cdef MakeCSRSparseMatrix_INT64_t_COMPLEX128_t(INT64_t nrow, INT64_t ncol, INT64_t nnz, INT64_t * ind, INT64_t * col, COMPLEX128_t * val, bint is_symmetric, bint store_zeros):
     """
     Construct a CSRSparseMatrix object.
 
@@ -567,7 +567,7 @@ cdef MakeCSRSparseMatrix_INT64_t_COMPLEX128_t(INT64_t nrow, INT64_t ncol, INT64_
         is_symmetric (boolean): Is matrix symmetrix or not?
     """
 
-    csr_mat = CSRSparseMatrix_INT64_t_COMPLEX128_t(control_object=unexposed_value, nrow=nrow, ncol=ncol, nnz=nnz, is_symmetric=is_symmetric)
+    csr_mat = CSRSparseMatrix_INT64_t_COMPLEX128_t(control_object=unexposed_value, nrow=nrow, ncol=ncol, nnz=nnz, is_symmetric=is_symmetric, store_zeros=store_zeros)
 
     csr_mat.val = val
     csr_mat.ind = ind

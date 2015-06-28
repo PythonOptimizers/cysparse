@@ -292,7 +292,7 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX128_t(MutableSparseMatrix_INT32_t_COMPL
         cdef LLSparseMatrix_INT32_t_COMPLEX128_t self_copy
 
         # we copy manually the C-arrays
-        self_copy = LLSparseMatrix_INT32_t_COMPLEX128_t(control_object=unexposed_value, no_memory=True, nrow=self.__nrow, ncol=self.__ncol, size_hint=self.size_hint, store_zeros=self.__store_zeros, __is_symmetric=self.__is_symmetric)
+        self_copy = LLSparseMatrix_INT32_t_COMPLEX128_t(control_object=unexposed_value, no_memory=True, nrow=self.__nrow, ncol=self.__ncol, size_hint=self.size_hint, store_zeros=self.__store_zeros, is_symmetric=self.__is_symmetric)
 
         # copy C-arrays
         cdef:
@@ -639,7 +639,7 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX128_t(MutableSparseMatrix_INT32_t_COMPL
 
             ind[i+1] = ind_col_index
 
-        csr_mat = MakeCSRSparseMatrix_INT32_t_COMPLEX128_t(nrow=self.__nrow, ncol=self.__ncol, nnz=self.__nnz, ind=ind, col=col, val=val, __is_symmetric=self.__is_symmetric)
+        csr_mat = MakeCSRSparseMatrix_INT32_t_COMPLEX128_t(nrow=self.__nrow, ncol=self.__ncol, nnz=self.__nnz, ind=ind, col=col, val=val, is_symmetric=self.__is_symmetric, store_zeros=self.__store_zeros)
 
         return csr_mat
 
@@ -712,7 +712,7 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX128_t(MutableSparseMatrix_INT32_t_COMPL
 
         free(col_indexes)
 
-        csc_mat = MakeCSCSparseMatrix_INT32_t_COMPLEX128_t(nrow=self.__nrow, ncol=self.__ncol, nnz=self.__nnz, ind=ind, row=row, val=val, __is_symmetric=self.__is_symmetric)
+        csc_mat = MakeCSCSparseMatrix_INT32_t_COMPLEX128_t(nrow=self.__nrow, ncol=self.__ncol, nnz=self.__nnz, ind=ind, row=row, val=val, is_symmetric=self.__is_symmetric, store_zeros=self.__store_zeros)
 
         return csc_mat
 

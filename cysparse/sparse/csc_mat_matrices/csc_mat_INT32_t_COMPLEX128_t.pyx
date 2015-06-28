@@ -99,7 +99,7 @@ cdef class CSCSparseMatrix_INT32_t_COMPLEX128_t(ImmutableSparseMatrix_INT32_t_CO
 
         nnz = self.nnz
 
-        self_copy = CSCSparseMatrix_INT32_t_COMPLEX128_t(control_object=unexposed_value, nrow=self.__nrow, ncol=self.__ncol, is_symmetric=self.__is_symmetric)
+        self_copy = CSCSparseMatrix_INT32_t_COMPLEX128_t(control_object=unexposed_value, nrow=self.__nrow, ncol=self.__ncol, store_zeros=self.__store_zeros, is_symmetric=self.__is_symmetric)
 
         val = <COMPLEX128_t *> PyMem_Malloc(nnz * sizeof(COMPLEX128_t))
         if not val:
@@ -486,7 +486,7 @@ cdef class CSCSparseMatrix_INT32_t_COMPLEX128_t(ImmutableSparseMatrix_INT32_t_CO
 ########################################################################################################################
 # Factory methods
 ########################################################################################################################
-cdef MakeCSCSparseMatrix_INT32_t_COMPLEX128_t(INT32_t nrow, INT32_t ncol, INT32_t nnz, INT32_t * ind, INT32_t * row, COMPLEX128_t * val, bint is_symmetric):
+cdef MakeCSCSparseMatrix_INT32_t_COMPLEX128_t(INT32_t nrow, INT32_t ncol, INT32_t nnz, INT32_t * ind, INT32_t * row, COMPLEX128_t * val, bint is_symmetric, bint store_zeros):
     """
     Construct a CSCSparseMatrix object.
 
@@ -498,7 +498,7 @@ cdef MakeCSCSparseMatrix_INT32_t_COMPLEX128_t(INT32_t nrow, INT32_t ncol, INT32_
         row  (INT32_t *): C-array with row indices.
         val  (COMPLEX128_t *): C-array with values.
     """
-    csc_mat = CSCSparseMatrix_INT32_t_COMPLEX128_t(control_object=unexposed_value, nrow=nrow, ncol=ncol, nnz=nnz, is_symmetric=is_symmetric)
+    csc_mat = CSCSparseMatrix_INT32_t_COMPLEX128_t(control_object=unexposed_value, nrow=nrow, ncol=ncol, nnz=nnz, is_symmetric=is_symmetric, store_zeros=store_zeros)
 
     csc_mat.val = val
     csc_mat.ind = ind

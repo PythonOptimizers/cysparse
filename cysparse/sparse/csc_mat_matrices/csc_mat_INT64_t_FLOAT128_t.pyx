@@ -99,7 +99,7 @@ cdef class CSCSparseMatrix_INT64_t_FLOAT128_t(ImmutableSparseMatrix_INT64_t_FLOA
 
         nnz = self.nnz
 
-        self_copy = CSCSparseMatrix_INT64_t_FLOAT128_t(control_object=unexposed_value, nrow=self.__nrow, ncol=self.__ncol, is_symmetric=self.__is_symmetric)
+        self_copy = CSCSparseMatrix_INT64_t_FLOAT128_t(control_object=unexposed_value, nrow=self.__nrow, ncol=self.__ncol, store_zeros=self.__store_zeros, is_symmetric=self.__is_symmetric)
 
         val = <FLOAT128_t *> PyMem_Malloc(nnz * sizeof(FLOAT128_t))
         if not val:
@@ -473,7 +473,7 @@ cdef class CSCSparseMatrix_INT64_t_FLOAT128_t(ImmutableSparseMatrix_INT64_t_FLOA
 ########################################################################################################################
 # Factory methods
 ########################################################################################################################
-cdef MakeCSCSparseMatrix_INT64_t_FLOAT128_t(INT64_t nrow, INT64_t ncol, INT64_t nnz, INT64_t * ind, INT64_t * row, FLOAT128_t * val, bint is_symmetric):
+cdef MakeCSCSparseMatrix_INT64_t_FLOAT128_t(INT64_t nrow, INT64_t ncol, INT64_t nnz, INT64_t * ind, INT64_t * row, FLOAT128_t * val, bint is_symmetric, bint store_zeros):
     """
     Construct a CSCSparseMatrix object.
 
@@ -485,7 +485,7 @@ cdef MakeCSCSparseMatrix_INT64_t_FLOAT128_t(INT64_t nrow, INT64_t ncol, INT64_t 
         row  (INT64_t *): C-array with row indices.
         val  (FLOAT128_t *): C-array with values.
     """
-    csc_mat = CSCSparseMatrix_INT64_t_FLOAT128_t(control_object=unexposed_value, nrow=nrow, ncol=ncol, nnz=nnz, is_symmetric=is_symmetric)
+    csc_mat = CSCSparseMatrix_INT64_t_FLOAT128_t(control_object=unexposed_value, nrow=nrow, ncol=ncol, nnz=nnz, is_symmetric=is_symmetric, store_zeros=store_zeros)
 
     csc_mat.val = val
     csc_mat.ind = ind
