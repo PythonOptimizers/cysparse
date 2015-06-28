@@ -506,7 +506,7 @@ cdef class LLSparseMatrix_INT64_t_COMPLEX64_t(MutableSparseMatrix_INT64_t_COMPLE
         if self.__is_symmetric:
             return self.copy()
         else:
-            transpose = LLSparseMatrix_INT64_t_COMPLEX64_t(control_object=unexposed_value, nrow=self.__ncol, ncol=self.__nrow, size_hint=self.__nnz, store_zeros=self.__store_zeros, __is_symmetric=self.__is_symmetric)
+            transpose = LLSparseMatrix_INT64_t_COMPLEX64_t(control_object=unexposed_value, nrow=self.__ncol, ncol=self.__nrow, size_hint=self.__nnz, store_zeros=self.__store_zeros, is_symmetric=self.__is_symmetric)
 
             for i from 0 <= i < self.__nrow:
                 k = self.root[i]
@@ -532,7 +532,7 @@ cdef class LLSparseMatrix_INT64_t_COMPLEX64_t(MutableSparseMatrix_INT64_t_COMPLE
             return self.create_conjugate()
 
         else:
-            conjugate_transpose = LLSparseMatrix_INT64_t_COMPLEX64_t(control_object=unexposed_value, nrow=self.__ncol, ncol=self.__nrow, size_hint=self.__nnz, store_zeros=self.__store_zeros, __is_symmetric=self.__is_symmetric)
+            conjugate_transpose = LLSparseMatrix_INT64_t_COMPLEX64_t(control_object=unexposed_value, nrow=self.__ncol, ncol=self.__nrow, size_hint=self.__nnz, store_zeros=self.__store_zeros, is_symmetric=self.__is_symmetric)
 
             for i from 0 <= i < self.__nrow:
                 k = self.root[i]
@@ -1559,7 +1559,7 @@ cdef class LLSparseMatrix_INT64_t_COMPLEX64_t(MutableSparseMatrix_INT64_t_COMPLE
             INT64_t i, j, k
             LLSparseMatrix_INT64_t_COMPLEX64_t ll_mat_triu
 
-        ll_mat_triu = LLSparseMatrix_INT64_t_COMPLEX64_t(control_object=unexposed_value, nrow=self.__nrow, ncol=self.__ncol, size_hint=self.__nnz, store_zeros=self.__store_zeros, __is_symmetric=False)
+        ll_mat_triu = LLSparseMatrix_INT64_t_COMPLEX64_t(control_object=unexposed_value, nrow=self.__nrow, ncol=self.__ncol, size_hint=self.__nnz, store_zeros=self.__store_zeros, is_symmetric=False)
 
         # NON OPTIMIZED OPERATION
         if include_diagonal:
@@ -1597,12 +1597,54 @@ cdef class LLSparseMatrix_INT64_t_COMPLEX64_t(MutableSparseMatrix_INT64_t_COMPLE
 
         return ll_mat_triu
 
-    #def tril(self, include_diagonal = True):
-    #    """
-    #    Return the triangular lower matrix as ``LLSparseMatrix``.
+    def tril(self, include_diagonal = True):
+        """
+        Return the triangular lower matrix as ``LLSparseMatrix``.
 
-    #    """
-    #    pass
+        """
+        cdef:
+            INT64_t i, j, k
+            LLSparseMatrix_INT64_t_COMPLEX64_t ll_mat_triu
+
+        ll_mat_tril = LLSparseMatrix_INT64_t_COMPLEX64_t(control_object=unexposed_value, nrow=self.__nrow, ncol=self.__ncol, size_hint=self.__nnz, store_zeros=self.__store_zeros, is_symmetric=False)
+
+        # NON OPTIMIZED OPERATION
+        if include_diagonal:
+            if self.__is_symmetric:
+                for i from 0 <= i < self.__nrow:
+                    k = self.root[i]
+                    while k != -1:
+                        ll_mat_tril.put(i, self.col[k], self.val[k])
+                        k = self.link[k]
+            else:  # non symmetric
+                for i from 0 <= i < self.__nrow:
+                    k = self.root[i]
+                    while k != -1:
+                        j = self.col[k]
+                        if i >= j:
+                            ll_mat_tril.put(i, j, self.val[k])
+                        k = self.link[k]
+        else:  # don't include the main diagonal
+            if self.__is_symmetric:
+                pass
+                for i from 0 <= i < self.__nrow:
+                    k = self.root[i]
+                    while k != -1:
+                        j = self.col[k]
+                        if i > j:
+                            ll_mat_tril.put(i, j, self.val[k])
+                        k = self.link[k]
+            else:  # non symmetric
+                for i from 0 <= i < self.__nrow:
+                    k = self.root[i]
+                    while k != -1:
+                        j = self.col[k]
+                        if i > j:
+                            ll_mat_tril.put(i, j, self.val[k])
+                        k = self.link[k]
+
+        return ll_mat_tril
+
 
     ####################################################################################################################
     # Addition

@@ -23,7 +23,7 @@ LL_MAT_DEFAULT_SIZE_HINT = 40
 
 LL_MAT_PPRINT_COL_THRESH = 20
 LL_MAT_PPRINT_ROW_THRESH = 40
- 
+
 
     
 from cysparse.sparse.ll_mat_matrices.ll_mat_INT32_t_INT32_t cimport LLSparseMatrix_INT32_t_INT32_t
