@@ -26,4 +26,4 @@ cdef class MutableSparseMatrix_INT32_t_FLOAT128_t(SparseMatrix_INT32_t_FLOAT128_
 
 cdef class ImmutableSparseMatrix_INT32_t_FLOAT128_t(SparseMatrix_INT32_t_FLOAT128_t):
     cdef:
-        INT32_t test2
+        INT32_t temp

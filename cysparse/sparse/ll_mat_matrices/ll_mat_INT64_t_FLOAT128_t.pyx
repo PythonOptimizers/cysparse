@@ -556,7 +556,7 @@ cdef class LLSparseMatrix_INT64_t_FLOAT128_t(MutableSparseMatrix_INT64_t_FLOAT12
 
         Warning:
             Memory **must** be freed by the caller!
-            Column indices are **not** necessarily sorted!
+            Column indices **are** sorted!
 
         """
         cdef INT64_t * ind = <INT64_t *> PyMem_Malloc((self.__nrow + 1) * sizeof(INT64_t))
@@ -580,7 +580,7 @@ cdef class LLSparseMatrix_INT64_t_FLOAT128_t(MutableSparseMatrix_INT64_t_FLOAT12
         cdef INT64_t i
         cdef INT64_t k
 
-        # indices are NOT sorted for each row
+        # indices are sorted for each row by definition of LLSparseMatrix
         for i from 0 <= i < self.__nrow:
             k = self.root[i]
 
@@ -1183,11 +1183,58 @@ cdef class LLSparseMatrix_INT64_t_FLOAT128_t(MutableSparseMatrix_INT64_t_FLOAT12
             raise TypeError('Both arguments with indices must be of the same type (lists or NumPy arrays)')
 
 
-        #cdef Py_ssize_t i
-        #cdef PyObject * elem
+    cpdef put_diagonal(self, INT64_t k, cnp.ndarray[cnp.npy_float128, ndim=1] b):
+        """
+        Set the values of a :program:`NumPy` vector to the k :sup:`th` diagonal.
 
-        #for i from 0 <= i < index_i_length:
-        #    self.safe_put(index_i[i], index_j[i], val[i])
+        Args:
+            k: Number of the diagonal.
+            diag: One dimentionnal :program:`NumPy` array.
+
+        Raises:
+            ``IndexError`` if the diagonal number is out of bounds.
+            ``NotImplementedError`` when adding positive diagonals to symmetric matrices.
+        """
+        if not (-self.__nrow + 1 <= k <= self.__ncol -1):
+            raise IndexError('Wrong diagonal number (%d <= k <= %d)' % (-self.__nrow + 1, self.__ncol -1))
+
+        cdef:
+            INT64_t diag_size, i
+            FLOAT128_t * b_data
+
+        # direct access to vector b
+        b_data = <FLOAT128_t *> cnp.PyArray_DATA(b)
+
+        if k >= 0:
+            diag_size = min(self.__nrow, self.__ncol - k)
+        else:
+            diag_size = min(self.__nrow + k, self.__ncol)
+
+        if b.size < diag_size:
+            raise IndexError("Vector doesn't contain enough elements (%d instead of %d)" % (b.size, diag_size))
+
+        # stride size if any
+        cdef size_t sd = sizeof(FLOAT128_t)
+        cdef INT64_t incx = b.strides[0] / sd
+
+        # NON OPTIMIZED CODE
+        if k > 0:
+            if self.is_symmetric:
+                raise NotImplementedError('You cannot add postive diagonals to symmetric matrices')
+
+            if cnp.PyArray_ISCONTIGUOUS(b):
+                for i from 0 <= i < diag_size:
+                    self.put(i, k+i, b_data[i])
+            else:   #  b not C-contiguous
+                for i from 0 <= i < diag_size:
+                    self.put(i, k+i, b_data[i * incx])
+        else:  #  k <= 0
+            if cnp.PyArray_ISCONTIGUOUS(b):
+                for i from 0 <= i < diag_size:
+                    self.put(-k+i, i, b_data[i])
+            else:   #  b not C-contiguous
+                for i from 0 <= i < diag_size:
+                    self.put(-k+i, i, b_data[i * incx])
 
     ####################################################################################################################
     #                                            *** GET ***

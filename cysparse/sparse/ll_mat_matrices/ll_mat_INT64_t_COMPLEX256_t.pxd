@@ -62,6 +62,7 @@ cdef class LLSparseMatrix_INT64_t_COMPLEX256_t(MutableSparseMatrix_INT64_t_COMPL
     cpdef object items(self)
 
     cpdef take_triplet(self, id1, id2, cnp.ndarray[cnp.npy_complex256, ndim=1] b)
+    cpdef put_diagonal(self, INT64_t k, cnp.ndarray[cnp.npy_complex256, ndim=1] b)
 
     ####################################################################################################################
     # Norms

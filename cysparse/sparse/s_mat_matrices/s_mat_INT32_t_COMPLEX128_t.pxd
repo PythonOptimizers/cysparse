@@ -37,4 +37,4 @@ cdef class MutableSparseMatrix_INT32_t_COMPLEX128_t(SparseMatrix_INT32_t_COMPLEX
 
 cdef class ImmutableSparseMatrix_INT32_t_COMPLEX128_t(SparseMatrix_INT32_t_COMPLEX128_t):
     cdef:
-        INT32_t test2
+        INT32_t temp

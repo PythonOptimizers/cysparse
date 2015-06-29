@@ -696,11 +696,11 @@ struct __pyx_obj_8cysparse_6sparse_14s_mat_matrices_21s_mat_INT32_t_INT64_t_Muta
  * 
  * cdef class ImmutableSparseMatrix_INT32_t_INT64_t(SparseMatrix_INT32_t_INT64_t):             # <<<<<<<<<<<<<<
  *     cdef:
- *         INT32_t test2
+ *         INT32_t temp
  */
 struct __pyx_obj_8cysparse_6sparse_14s_mat_matrices_21s_mat_INT32_t_INT64_t_ImmutableSparseMatrix_INT32_t_INT64_t {
   struct __pyx_obj_8cysparse_6sparse_14s_mat_matrices_21s_mat_INT32_t_INT64_t_SparseMatrix_INT32_t_INT64_t __pyx_base;
-  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t test2;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t temp;
 };
 
 

@@ -696,11 +696,11 @@ struct __pyx_obj_8cysparse_6sparse_14s_mat_matrices_24s_mat_INT64_t_FLOAT128_t_M
  * 
  * cdef class ImmutableSparseMatrix_INT64_t_FLOAT128_t(SparseMatrix_INT64_t_FLOAT128_t):             # <<<<<<<<<<<<<<
  *     cdef:
- *         INT64_t test2
+ *         INT64_t temp
  */
 struct __pyx_obj_8cysparse_6sparse_14s_mat_matrices_24s_mat_INT64_t_FLOAT128_t_ImmutableSparseMatrix_INT64_t_FLOAT128_t {
   struct __pyx_obj_8cysparse_6sparse_14s_mat_matrices_24s_mat_INT64_t_FLOAT128_t_SparseMatrix_INT64_t_FLOAT128_t __pyx_base;
-  __pyx_t_8cysparse_5types_14cysparse_types_INT64_t test2;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT64_t temp;
 };
 
 

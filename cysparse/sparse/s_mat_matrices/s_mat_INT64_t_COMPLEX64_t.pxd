@@ -37,4 +37,4 @@ cdef class MutableSparseMatrix_INT64_t_COMPLEX64_t(SparseMatrix_INT64_t_COMPLEX6
 
 cdef class ImmutableSparseMatrix_INT64_t_COMPLEX64_t(SparseMatrix_INT64_t_COMPLEX64_t):
     cdef:
-        INT64_t test2
+        INT64_t temp
