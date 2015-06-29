@@ -55,8 +55,10 @@ class CySparseCSCTransposedMultiplicationWithANumpyVectorTestCase(CySparseCSCTra
 {% for index_type in index_list %}
   {% set outerloop = loop %}
   {% for element_type in type_list %}
-        self.l_@outerloop.index@_@loop.index@ = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=@index_type|type2enum@, dtype=@element_type|type2enum@)
-        construct_sparse_matrix(self.l_@outerloop.index@_@loop.index@, self.nrow, self.ncol, self.nbr_of_elements)
+        #self.l_@outerloop.index@_@loop.index@ = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=@index_type|type2enum@, dtype=@element_type|type2enum@)
+        #construct_sparse_matrix(self.l_@outerloop.index@_@loop.index@, self.nrow, self.ncol, self.nbr_of_elements)
+
+        self.l_@outerloop.index@_@loop.index@ = NewLinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, itype=@index_type|type2enum@, dtype=@element_type|type2enum@, row_wise=False)
 
         self.l_@outerloop.index@_@loop.index@_csc = self.l_@outerloop.index@_@loop.index@.to_csc()
   {% endfor %}
@@ -89,8 +91,10 @@ class CySparseSymCSCTransposedMultiplicationWithANumpyVectorTestCase(CySparseCSC
 {% for index_type in index_list %}
   {% set outerloop = loop %}
   {% for element_type in type_list %}
-        self.l_@outerloop.index@_@loop.index@ = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=@index_type|type2enum@, dtype=@element_type|type2enum@)
-        construct_sym_sparse_matrix(self.l_@outerloop.index@_@loop.index@, self.size, self.nbr_of_elements)
+        #self.l_@outerloop.index@_@loop.index@ = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=@index_type|type2enum@, dtype=@element_type|type2enum@)
+        #construct_sym_sparse_matrix(self.l_@outerloop.index@_@loop.index@, self.size, self.nbr_of_elements)
+
+        self.l_@outerloop.index@_@loop.index@ = NewLinearFillLLSparseMatrix(size=self.size, itype=@index_type|type2enum@, dtype=@element_type|type2enum@, row_wise=False, is_symmetric=True)
 
         self.l_@outerloop.index@_@loop.index@_csc = self.l_@outerloop.index@_@loop.index@.to_csc()
   {% endfor %}
@@ -127,8 +131,10 @@ class CySparseCSCTransposedMultiplicationWithAStridedNumpyVectorTestCase(CySpars
 {% for index_type in index_list %}
   {% set outerloop = loop %}
   {% for element_type in type_list %}
-        self.l_@outerloop.index@_@loop.index@ = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=@index_type|type2enum@, dtype=@element_type|type2enum@)
-        construct_sparse_matrix(self.l_@outerloop.index@_@loop.index@, self.nrow, self.ncol, self.nbr_of_elements)
+        #self.l_@outerloop.index@_@loop.index@ = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=@index_type|type2enum@, dtype=@element_type|type2enum@)
+        #construct_sparse_matrix(self.l_@outerloop.index@_@loop.index@, self.nrow, self.ncol, self.nbr_of_elements)
+
+        self.l_@outerloop.index@_@loop.index@ = NewLinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, itype=@index_type|type2enum@, dtype=@element_type|type2enum@, row_wise=False)
 
         self.l_@outerloop.index@_@loop.index@_csc = self.l_@outerloop.index@_@loop.index@.to_csc()
   {% endfor %}
@@ -158,7 +164,7 @@ class CySparseCSCTransposedMultiplicationWithAStridedNumpyVectorTestCase(CySpars
 
 class CySparseSymCSCTransposedMultiplicationWithAStridedNumpyVectorTestCase(CySparseCSCTransposedMultiplicationWithANumpyVectorBaseTestCase):
     """
-    Basic case: ``y = A * x`` with ``A`` **symmetric** and ``x`` **with** strides.
+    Basic case: ``y = A^t * x`` with ``A`` **symmetric** and ``x`` **with** strides.
     """
     def setUp(self):
         self.nbr_of_elements = 10
@@ -169,8 +175,10 @@ class CySparseSymCSCTransposedMultiplicationWithAStridedNumpyVectorTestCase(CySp
 {% for index_type in index_list %}
   {% set outerloop = loop %}
   {% for element_type in type_list %}
-        self.l_@outerloop.index@_@loop.index@ = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=@index_type|type2enum@, dtype=@element_type|type2enum@)
-        construct_sym_sparse_matrix(self.l_@outerloop.index@_@loop.index@, self.size, self.nbr_of_elements)
+        #self.l_@outerloop.index@_@loop.index@ = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=@index_type|type2enum@, dtype=@element_type|type2enum@)
+        #construct_sym_sparse_matrix(self.l_@outerloop.index@_@loop.index@, self.size, self.nbr_of_elements)
+
+        self.l_@outerloop.index@_@loop.index@ = NewLinearFillLLSparseMatrix(size=self.size, itype=@index_type|type2enum@, dtype=@element_type|type2enum@, row_wise=False, is_symmetric=True)
 
         self.l_@outerloop.index@_@loop.index@_csc = self.l_@outerloop.index@_@loop.index@.to_csc()
   {% endfor %}
@@ -189,8 +197,8 @@ class CySparseSymCSCTransposedMultiplicationWithAStridedNumpyVectorTestCase(CySp
 {% for index_type in index_list %}
   {% set outerloop = loop %}
   {% for element_type in type_list %}
-        l_y = self.l_@outerloop.index@_@loop.index@.matvec(self.x_@element_type@)
-        csc_y = self.l_@outerloop.index@_@loop.index@_csc.matvec(self.x_strided_@element_type@[::self.stride_factor])
+        l_y = self.l_@outerloop.index@_@loop.index@.matvec_transp(self.x_@element_type@)
+        csc_y = self.l_@outerloop.index@_@loop.index@_csc.matvec_transp(self.x_strided_@element_type@[::self.stride_factor])
         for i in xrange(self.size):
             self.failUnless(l_y[i] == csc_y[i])
   {% endfor %}

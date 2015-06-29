@@ -16,7 +16,7 @@ proxy and is thus **not** a real matrix. As such, it cannot replace a matrix in 
 Available proxies
 ==================
 
-Three basic proxies are available:
+Three basic proxies [#proxy_is_called_sparse_matrix]_ are available:
 
 - the transpose matrix proxy (:class:`TransposedSparseMatrix` given by the ``.T`` attribute);
 - the conjugate transpose matrix proxy (:class:`ConjugateTransposedSparseMatrix` given by the ``.H`` attribute) and
@@ -60,3 +60,9 @@ For all proxies, the method ``copy_matrix()`` is available:
     T = Transpose_proxy.copy_matrix()
     
 ``T`` is now a real matrix of the same type as the original ``A`` matrix.    
+
+..  raw:: html
+
+    <h4>Footnote</h4>
+
+..  [#proxy_is_called_sparse_matrix] Despite being *proxies* and **not** matrices, we still give them the name ``...SparseMatrix``. 

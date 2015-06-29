@@ -931,11 +931,11 @@ struct __pyx_obj_8cysparse_6sparse_14s_mat_matrices_21s_mat_INT64_t_INT64_t_Muta
  * 
  * cdef class ImmutableSparseMatrix_INT64_t_INT64_t(SparseMatrix_INT64_t_INT64_t):             # <<<<<<<<<<<<<<
  *     cdef:
- *         INT64_t test2
+ *         INT64_t temp
  */
 struct __pyx_obj_8cysparse_6sparse_14s_mat_matrices_21s_mat_INT64_t_INT64_t_ImmutableSparseMatrix_INT64_t_INT64_t {
   struct __pyx_obj_8cysparse_6sparse_14s_mat_matrices_21s_mat_INT64_t_INT64_t_SparseMatrix_INT64_t_INT64_t __pyx_base;
-  __pyx_t_8cysparse_5types_14cysparse_types_INT64_t test2;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT64_t temp;
 };
 
 
@@ -1007,6 +1007,7 @@ struct __pyx_vtabstruct_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT64_t_INT
   PyObject *(*values)(struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT64_t_INT64_t_LLSparseMatrix_INT64_t_INT64_t *, int __pyx_skip_dispatch);
   PyObject *(*items)(struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT64_t_INT64_t_LLSparseMatrix_INT64_t_INT64_t *, int __pyx_skip_dispatch);
   PyObject *(*take_triplet)(struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT64_t_INT64_t_LLSparseMatrix_INT64_t_INT64_t *, PyObject *, PyObject *, PyArrayObject *, int __pyx_skip_dispatch);
+  PyObject *(*put_diagonal)(struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT64_t_INT64_t_LLSparseMatrix_INT64_t_INT64_t *, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t, PyArrayObject *, int __pyx_skip_dispatch);
   PyObject *(*_norm_inf)(struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT64_t_INT64_t_LLSparseMatrix_INT64_t_INT64_t *);
   PyObject *(*_norm_one)(struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT64_t_INT64_t_LLSparseMatrix_INT64_t_INT64_t *);
   PyObject *(*_norm_frob)(struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT64_t_INT64_t_LLSparseMatrix_INT64_t_INT64_t *);

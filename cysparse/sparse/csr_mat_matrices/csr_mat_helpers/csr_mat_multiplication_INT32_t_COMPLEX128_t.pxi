@@ -233,14 +233,12 @@ cdef cnp.ndarray[cnp.npy_complex128, ndim=1, mode='c'] multiply_conjugated_csr_m
     # test if b vector is C-contiguous or not
     if cnp.PyArray_ISCONTIGUOUS(b):
         if A.__is_symmetric:
-            raise NotImplementedError("eh...")
             multiply_conjugated_sym_csr_mat_with_numpy_vector_kernel_INT32_t_COMPLEX128_t(A_nrow, b_data, c_data, A.val, A.col, A.ind)
         else:
             multiply_conjugated_csr_mat_with_numpy_vector_kernel_INT32_t_COMPLEX128_t(A_nrow, b_data, c_data, A.val, A.col, A.ind)
 
     else:
         if A.__is_symmetric:
-            raise NotImplementedError("eh...")
             multiply_conjugated_sym_csr_mat_with_strided_numpy_vector_kernel_INT32_t_COMPLEX128_t(A.nrow,
                                                                  b_data, b.strides[0] / sd,
                                                                  c_data, c.strides[0] / sd,
