@@ -396,11 +396,9 @@ cdef class CSCSparseMatrix_INT64_t_FLOAT128_t(ImmutableSparseMatrix_INT64_t_FLOA
             print('Matrix too big to print out', file=OUT)
 
     ####################################################################################################################
-    # Access to internals as resquested by Sylvain
-    #
-    # This is temporary and shouldn't be released!!!!
-    #
+    # Internal arrays
     ####################################################################################################################
+    # TODO: test, test, test!
     def get_c_pointers(self):
         """
         Return C pointers to internal arrays.

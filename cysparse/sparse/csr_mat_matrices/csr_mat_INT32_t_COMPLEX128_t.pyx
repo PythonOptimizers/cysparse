@@ -522,6 +522,53 @@ cdef class CSRSparseMatrix_INT32_t_COMPLEX128_t(ImmutableSparseMatrix_INT32_t_CO
             print('Matrix too big to print out', file=OUT)
 
     ####################################################################################################################
+    # Internal arrays
+    ####################################################################################################################
+    # TODO: test, test, test!
+    def get_c_pointers(self):
+        """
+        Return C pointers to internal arrays.
+
+        Returns:
+            Triple `(ind, col, val)`.
+
+        Warning:
+            The returned values can only be used by C-extensions.
+        """
+        cdef:
+            PyObject * ind_obj = <PyObject *> self.ind
+            PyObject * col_obj = <PyObject *> self.col
+            PyObject * val_obj = <PyObject *> self.val
+
+        return <object>ind_obj, <object>col_obj, <object>val_obj
+
+    def get_numpy_arrays(self):
+        """
+        Return :program:`NumPy` arrays equivalent to internal C-arrays.
+
+        Note:
+            No copy is made, i.e. the :program:`NumPy` arrays have direct access to the internal C-arrays. Change the
+            former and you change the latter (which shouldn't happen unless you **really** know what you are doing).
+        """
+        cdef:
+            cnp.npy_intp dim[1]
+
+        # ind
+        dim[0] = self.nrow + 1
+        ind_numpy_array = cnp.PyArray_SimpleNewFromData(1, dim, cnp.NPY_INT32, <INT32_t *>self.ind)
+
+        # col
+        dim[0] = self.nnz
+        col_numpy_array = cnp.PyArray_SimpleNewFromData(1, dim, cnp.NPY_INT32, <INT32_t *>self.col)
+
+        # val
+        dim[0] = self.nnz
+        val_numpy_array = cnp.PyArray_SimpleNewFromData(1, dim, cnp.NPY_COMPLEX128, <COMPLEX128_t *>self.val)
+
+
+        return ind_numpy_array, col_numpy_array, val_numpy_array
+
+    ####################################################################################################################
     # DEBUG
     ####################################################################################################################
     def debug_print(self):

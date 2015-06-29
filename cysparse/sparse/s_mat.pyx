@@ -143,15 +143,12 @@ cdef class SparseMatrix:
         """
         raise NotImplementedError("Operation not implemented (yet). Please report.")
 
-    def full(self):
+    def to_ndarray(self):
         """
-        Return an :program:`NumPy` dense array.
+        Return the matrix in the form of a :program:`NumPy` ``ndarray``.
+
         """
         raise NotImplementedError("Operation not implemented (yet). Please report.")
-
-    # Alias
-    def to_array(self):
-        return self.full()
 
     #########################
     # Multiplication with vectors

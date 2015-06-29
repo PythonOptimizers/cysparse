@@ -34,3 +34,19 @@ print 'Internal arrays as C-pointers: (but you can not do anything with it in Py
 print 'Diagonal as NumPy array:'
 diag = A_CSC.diag()
 print diag
+
+########################################################################################################################
+print "+" * 80
+A_CSR = A.to_csr()
+print A_CSR
+A_CSR.print_to(sys.stdout)
+
+print 'Internal arrays as NumPy arrays:'
+ind, col, val = A_CSR.get_numpy_arrays()
+print ind
+print col
+print val
+
+print 'Diagonal as NumPy array:'
+diag = A_CSR.diag()
+print diag
