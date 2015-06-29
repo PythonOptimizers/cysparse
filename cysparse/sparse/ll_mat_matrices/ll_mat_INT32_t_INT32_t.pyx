@@ -1205,7 +1205,7 @@ cdef class LLSparseMatrix_INT32_t_INT32_t(MutableSparseMatrix_INT32_t_INT32_t):
         # direct access to vector b
         b_data = <INT32_t *> cnp.PyArray_DATA(b)
 
-        if k >= 0:
+        if k > 0:
             diag_size = min(self.__nrow, self.__ncol - k)
         else:
             diag_size = min(self.__nrow + k, self.__ncol)

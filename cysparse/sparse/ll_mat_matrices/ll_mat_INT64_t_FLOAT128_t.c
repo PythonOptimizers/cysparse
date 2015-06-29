@@ -13451,23 +13451,23 @@ static PyObject *__pyx_f_8cysparse_6sparse_15ll_mat_matrices_25ll_mat_INT64_t_FL
  *         # direct access to vector b
  *         b_data = <FLOAT128_t *> cnp.PyArray_DATA(b)             # <<<<<<<<<<<<<<
  * 
- *         if k >= 0:
+ *         if k > 0:
  */
   __pyx_v_b_data = ((__pyx_t_8cysparse_5types_14cysparse_types_FLOAT128_t *)PyArray_DATA(((PyArrayObject *)__pyx_v_b)));
 
   /* "cysparse/sparse/ll_mat_matrices/ll_mat_INT64_t_FLOAT128_t.pyx":1208
  *         b_data = <FLOAT128_t *> cnp.PyArray_DATA(b)
  * 
- *         if k >= 0:             # <<<<<<<<<<<<<<
+ *         if k > 0:             # <<<<<<<<<<<<<<
  *             diag_size = min(self.__nrow, self.__ncol - k)
  *         else:
  */
-  __pyx_t_9 = ((__pyx_v_k >= 0) != 0);
+  __pyx_t_9 = ((__pyx_v_k > 0) != 0);
   if (__pyx_t_9) {
 
     /* "cysparse/sparse/ll_mat_matrices/ll_mat_INT64_t_FLOAT128_t.pyx":1209
  * 
- *         if k >= 0:
+ *         if k > 0:
  *             diag_size = min(self.__nrow, self.__ncol - k)             # <<<<<<<<<<<<<<
  *         else:
  *             diag_size = min(self.__nrow + k, self.__ncol)

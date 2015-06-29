@@ -13,3 +13,10 @@ b3 = np.array([1+1j, 1+1j, -1j], dtype=np.complex64)
 l1.put_diagonal(-1, b3)
 
 l1.print_to(sys.stdout)
+
+########################################################################################################################
+print "*" * 80
+
+A = NewBandLLSparseMatrix(nrow=2, ncol=3, diag_coeff=[-1, 1, 2], numpy_arrays=[b1, b2, b3], dtype=COMPLEX64_T)
+
+A.print_to(sys.stdout)

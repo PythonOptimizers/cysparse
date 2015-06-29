@@ -18,6 +18,34 @@ from libc.stdlib cimport *
 
 from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
 
+cdef extern from "Python.h":
+    # *** Types ***
+    Py_ssize_t PY_SSIZE_T_MAX
+    int PyInt_Check(PyObject *o)
+    long PyInt_AS_LONG(PyObject *io)
+
+    # *** Slices ***
+    ctypedef struct PySliceObject:
+        pass
+
+    # Cython's version doesn't work for all versions...
+    int PySlice_GetIndicesEx(
+        PySliceObject* s, Py_ssize_t length,
+        Py_ssize_t *start, Py_ssize_t *stop, Py_ssize_t *step,
+        Py_ssize_t *slicelength) except -1
+
+    int PySlice_Check(PyObject *ob)
+
+    # *** List ***
+    int PyList_Check(PyObject *p)
+    PyObject* PyList_GetItem(PyObject *list, Py_ssize_t index)
+    Py_ssize_t PyList_Size(PyObject *list)
+
+    PyObject* Py_BuildValue(char *format, ...)
+    PyObject* PyList_New(Py_ssize_t len)
+    void PyList_SET_ITEM(PyObject *list, Py_ssize_t i, PyObject *o)
+    PyObject* PyList_GET_ITEM(PyObject *list, Py_ssize_t i)
+
 LL_MAT_INCREASE_FACTOR = 1.5
 LL_MAT_DEFAULT_SIZE_HINT = 40
 
@@ -70,68 +98,84 @@ from cysparse.sparse.ll_mat_matrices.ll_mat_INT64_t_COMPLEX256_t cimport LLSpars
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT32_t_INT32_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_diagonals_INT32_t_INT32_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_bands_INT32_t_INT32_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT32_t_INT32_t.pxi"
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT32_t_INT64_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_diagonals_INT32_t_INT64_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_bands_INT32_t_INT64_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT32_t_INT64_t.pxi"
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT32_t_FLOAT32_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_diagonals_INT32_t_FLOAT32_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_bands_INT32_t_FLOAT32_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT32_t_FLOAT32_t.pxi"
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT32_t_FLOAT64_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_diagonals_INT32_t_FLOAT64_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_bands_INT32_t_FLOAT64_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT32_t_FLOAT64_t.pxi"
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT32_t_FLOAT128_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_diagonals_INT32_t_FLOAT128_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_bands_INT32_t_FLOAT128_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT32_t_FLOAT128_t.pxi"
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT32_t_COMPLEX64_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_diagonals_INT32_t_COMPLEX64_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_bands_INT32_t_COMPLEX64_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT32_t_COMPLEX64_t.pxi"
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT32_t_COMPLEX128_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_diagonals_INT32_t_COMPLEX128_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_bands_INT32_t_COMPLEX128_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT32_t_COMPLEX128_t.pxi"
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT32_t_COMPLEX256_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_diagonals_INT32_t_COMPLEX256_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_bands_INT32_t_COMPLEX256_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT32_t_COMPLEX256_t.pxi"
     
 
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT64_t_INT32_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_diagonals_INT64_t_INT32_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_bands_INT64_t_INT32_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT64_t_INT32_t.pxi"
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT64_t_INT64_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_diagonals_INT64_t_INT64_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_bands_INT64_t_INT64_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT64_t_INT64_t.pxi"
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT64_t_FLOAT32_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_diagonals_INT64_t_FLOAT32_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_bands_INT64_t_FLOAT32_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT64_t_FLOAT32_t.pxi"
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT64_t_FLOAT64_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_diagonals_INT64_t_FLOAT64_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_bands_INT64_t_FLOAT64_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT64_t_FLOAT64_t.pxi"
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT64_t_FLOAT128_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_diagonals_INT64_t_FLOAT128_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_bands_INT64_t_FLOAT128_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT64_t_FLOAT128_t.pxi"
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT64_t_COMPLEX64_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_diagonals_INT64_t_COMPLEX64_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_bands_INT64_t_COMPLEX64_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT64_t_COMPLEX64_t.pxi"
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT64_t_COMPLEX128_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_diagonals_INT64_t_COMPLEX128_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_bands_INT64_t_COMPLEX128_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT64_t_COMPLEX128_t.pxi"
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT64_t_COMPLEX256_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_diagonals_INT64_t_COMPLEX256_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_bands_INT64_t_COMPLEX256_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT64_t_COMPLEX256_t.pxi"
     
 
@@ -926,6 +970,123 @@ def NewUnityLLSparseMatrix(**kwargs):
     element = kwargs.pop('element', None)
     return NewDiagonalLLSparseMatrix(**kwargs)
 
+
+def NewBandLLSparseMatrix(**kwargs):
+    """
+    See ``MakeBandLLSparseMatrix__``.
+
+    Note:
+        Input arguments are **not** tested.
+    """
+    diag_coeff = kwargs.pop('diag_coeff', None)
+    numpy_arrays = kwargs.pop('numpy_arrays', None)
+
+    if diag_coeff is None:
+        raise ValueError("Named argument 'diag_coeff' not given")
+
+    if numpy_arrays is None:
+        raise ValueError("Named argument 'numpy_arrays' not given")
+
+    ll_mat = NewLLSparseMatrix(**kwargs)
+
+    itype = ll_mat.itype
+    dtype = ll_mat.dtype
+
+    # launch right "constructor" method
+
+    
+    if itype == INT32_T:
+    
+        
+        if dtype == INT32_T:
+        
+            return MakeBandLLSparseMatrix_INT32_t_INT32_t(ll_mat, diag_coeff, numpy_arrays)
+    
+        
+        elif dtype == INT64_T:
+        
+            return MakeBandLLSparseMatrix_INT32_t_INT64_t(ll_mat, diag_coeff, numpy_arrays)
+    
+        
+        elif dtype == FLOAT32_T:
+        
+            return MakeBandLLSparseMatrix_INT32_t_FLOAT32_t(ll_mat, diag_coeff, numpy_arrays)
+    
+        
+        elif dtype == FLOAT64_T:
+        
+            return MakeBandLLSparseMatrix_INT32_t_FLOAT64_t(ll_mat, diag_coeff, numpy_arrays)
+    
+        
+        elif dtype == FLOAT128_T:
+        
+            return MakeBandLLSparseMatrix_INT32_t_FLOAT128_t(ll_mat, diag_coeff, numpy_arrays)
+    
+        
+        elif dtype == COMPLEX64_T:
+        
+            return MakeBandLLSparseMatrix_INT32_t_COMPLEX64_t(ll_mat, diag_coeff, numpy_arrays)
+    
+        
+        elif dtype == COMPLEX128_T:
+        
+            return MakeBandLLSparseMatrix_INT32_t_COMPLEX128_t(ll_mat, diag_coeff, numpy_arrays)
+    
+        
+        elif dtype == COMPLEX256_T:
+        
+            return MakeBandLLSparseMatrix_INT32_t_COMPLEX256_t(ll_mat, diag_coeff, numpy_arrays)
+    
+    
+
+    
+    elif itype == INT64_T:
+    
+        
+        if dtype == INT32_T:
+        
+            return MakeBandLLSparseMatrix_INT64_t_INT32_t(ll_mat, diag_coeff, numpy_arrays)
+    
+        
+        elif dtype == INT64_T:
+        
+            return MakeBandLLSparseMatrix_INT64_t_INT64_t(ll_mat, diag_coeff, numpy_arrays)
+    
+        
+        elif dtype == FLOAT32_T:
+        
+            return MakeBandLLSparseMatrix_INT64_t_FLOAT32_t(ll_mat, diag_coeff, numpy_arrays)
+    
+        
+        elif dtype == FLOAT64_T:
+        
+            return MakeBandLLSparseMatrix_INT64_t_FLOAT64_t(ll_mat, diag_coeff, numpy_arrays)
+    
+        
+        elif dtype == FLOAT128_T:
+        
+            return MakeBandLLSparseMatrix_INT64_t_FLOAT128_t(ll_mat, diag_coeff, numpy_arrays)
+    
+        
+        elif dtype == COMPLEX64_T:
+        
+            return MakeBandLLSparseMatrix_INT64_t_COMPLEX64_t(ll_mat, diag_coeff, numpy_arrays)
+    
+        
+        elif dtype == COMPLEX128_T:
+        
+            return MakeBandLLSparseMatrix_INT64_t_COMPLEX128_t(ll_mat, diag_coeff, numpy_arrays)
+    
+        
+        elif dtype == COMPLEX256_T:
+        
+            return MakeBandLLSparseMatrix_INT64_t_COMPLEX256_t(ll_mat, diag_coeff, numpy_arrays)
+    
+    
+
+    else:
+        raise TypeError('itype not recognized')
+
 def NewLinearFillLLSparseMatrix(**kwargs):
     """
     See ``MakeLinearFillLLSparseMatrix``.
@@ -937,6 +1098,7 @@ def NewLinearFillLLSparseMatrix(**kwargs):
     step = kwargs.pop('step', None)
     row_wise = kwargs.pop('row_wise', True)
 
+    # this is only really needed to compute 'size_hint'
     size = kwargs.get('size', None)
     if size is None:
         nrow = kwargs.get('nrow', None)
