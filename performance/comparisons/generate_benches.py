@@ -3,7 +3,14 @@ import glob
 import os
 import sys
 
+"""
+Generate benches from subdirectories.
 
+Usage:
+
+python generate_benches.py subdir
+
+"""
 
 def generate_txt_benches(sub_dir, suffix='bench.txt'):
     python_script_benches = glob.glob(os.path.join(sub_dir, '*.py'))

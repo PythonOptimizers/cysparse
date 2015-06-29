@@ -250,3 +250,18 @@ cdef class SparseMatrix:
         raise NotImplementedError("Operation not implemented (yet). Please report.")
 
 
+    #########################
+    # Internal arrays
+    #########################
+    def get_c_pointers(self):
+        """
+        Return C pointers to internal arrays.
+
+        """
+        raise NotImplementedError("Operation not allowed or not implemented.")
+
+    def get_numpy_arrays(self):
+        """
+        Return :program:`NumPy` arrays equivalent to internal C-arrays.
+        """
+        raise NotImplementedError("Operation not allowed or not implemented.")
