@@ -108,11 +108,14 @@ class CySparseCSRConjugatedMultiplicationWithANumpyVectorTestCase(CySparseCSRCon
 
 
 
-        self.x_COMPLEX64_t = np.ones(self.ncol, dtype=np.complex64)
+        self.x_COMPLEX64_t = np.empty(self.ncol, dtype=np.complex64)
+        self.x_COMPLEX64_t.fill(1+2j)
 
-        self.x_COMPLEX128_t = np.ones(self.ncol, dtype=np.complex128)
+        self.x_COMPLEX128_t = np.empty(self.ncol, dtype=np.complex128)
+        self.x_COMPLEX128_t.fill(1+2j)
 
-        self.x_COMPLEX256_t = np.ones(self.ncol, dtype=np.complex256)
+        self.x_COMPLEX256_t = np.empty(self.ncol, dtype=np.complex256)
+        self.x_COMPLEX256_t.fill(1+2j)
 
 
     def test_simple_multiplication_one_by_one(self):
@@ -213,11 +216,14 @@ class CySparseSymCSRConjugatedMultiplicationWithANumpyVectorTestCase(CySparseCSR
 
 
 
-        self.x_COMPLEX64_t = np.ones(self.size, dtype=np.complex64)
+        self.x_COMPLEX64_t = np.empty(self.size, dtype=np.complex64)
+        self.x_COMPLEX64_t.fill(1+2j)
 
-        self.x_COMPLEX128_t = np.ones(self.size, dtype=np.complex128)
+        self.x_COMPLEX128_t = np.empty(self.size, dtype=np.complex128)
+        self.x_COMPLEX128_t.fill(1+2j)
 
-        self.x_COMPLEX256_t = np.ones(self.size, dtype=np.complex256)
+        self.x_COMPLEX256_t = np.empty(self.size, dtype=np.complex256)
+        self.x_COMPLEX256_t.fill(1+2j)
 
 
     def test_simple_multiplication_one_by_one(self):
@@ -322,21 +328,24 @@ class CySparseCSRConjugatedMultiplicationWithAStridedNumpyVectorTestCase(CySpars
 
 
 
-        self.x_COMPLEX64_t = np.ones(self.ncol, dtype=np.complex64)
+        self.x_COMPLEX64_t = np.empty(self.ncol, dtype=np.complex64)
+        self.x_COMPLEX64_t.fill(1+2j)
         self.x_strided_COMPLEX64_t = np.empty(self.ncol * self.stride_factor, dtype=np.complex64)
         self.x_strided_COMPLEX64_t.fill(2)
 
         for i in xrange(self.ncol):
             self.x_strided_COMPLEX64_t[i * self.stride_factor] = self.x_COMPLEX64_t[i]
 
-        self.x_COMPLEX128_t = np.ones(self.ncol, dtype=np.complex128)
+        self.x_COMPLEX128_t = np.empty(self.ncol, dtype=np.complex128)
+        self.x_COMPLEX128_t.fill(1+2j)
         self.x_strided_COMPLEX128_t = np.empty(self.ncol * self.stride_factor, dtype=np.complex128)
         self.x_strided_COMPLEX128_t.fill(2)
 
         for i in xrange(self.ncol):
             self.x_strided_COMPLEX128_t[i * self.stride_factor] = self.x_COMPLEX128_t[i]
 
-        self.x_COMPLEX256_t = np.ones(self.ncol, dtype=np.complex256)
+        self.x_COMPLEX256_t = np.empty(self.ncol, dtype=np.complex256)
+        self.x_COMPLEX256_t.fill(1+2j)
         self.x_strided_COMPLEX256_t = np.empty(self.ncol * self.stride_factor, dtype=np.complex256)
         self.x_strided_COMPLEX256_t.fill(2)
 
@@ -451,21 +460,24 @@ class CySparseSymCSRConjugatedMultiplicationWithAStridedNumpyVectorTestCase(CySp
 
 
 
-        self.x_COMPLEX64_t = np.ones(self.size, dtype=np.complex64)
+        self.x_COMPLEX64_t = np.empty(self.size, dtype=np.complex64)
+        self.x_COMPLEX64_t.fill(1+2j)
         self.x_strided_COMPLEX64_t = np.empty(self.size * self.stride_factor, dtype=np.complex64)
         self.x_strided_COMPLEX64_t.fill(2)
 
         for i in xrange(self.size):
             self.x_strided_COMPLEX64_t[i * self.stride_factor] = self.x_COMPLEX64_t[i]
 
-        self.x_COMPLEX128_t = np.ones(self.size, dtype=np.complex128)
+        self.x_COMPLEX128_t = np.empty(self.size, dtype=np.complex128)
+        self.x_COMPLEX128_t.fill(1+2j)
         self.x_strided_COMPLEX128_t = np.empty(self.size * self.stride_factor, dtype=np.complex128)
         self.x_strided_COMPLEX128_t.fill(2)
 
         for i in xrange(self.size):
             self.x_strided_COMPLEX128_t[i * self.stride_factor] = self.x_COMPLEX128_t[i]
 
-        self.x_COMPLEX256_t = np.ones(self.size, dtype=np.complex256)
+        self.x_COMPLEX256_t = np.empty(self.size, dtype=np.complex256)
+        self.x_COMPLEX256_t.fill(1+2j)
         self.x_strided_COMPLEX256_t = np.empty(self.size * self.stride_factor, dtype=np.complex256)
         self.x_strided_COMPLEX256_t.fill(2)
 

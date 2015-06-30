@@ -55,86 +55,118 @@ class CySparseCSRTransposedMultiplicationWithANumpyVectorTestCase(CySparseCSRTra
 
   
   
-        self.l_1_1 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=INT32_T)
-        construct_sparse_matrix(self.l_1_1, self.nrow, self.ncol, self.nbr_of_elements)
+        #self.l_1_1 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=INT32_T)
+        #construct_sparse_matrix(self.l_1_1, self.nrow, self.ncol, self.nbr_of_elements)
+
+        self.l_1_1 = NewLinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, itype=INT32_T, dtype=INT32_T, row_wise=False)
 
         self.l_1_1_csr = self.l_1_1.to_csr()
   
-        self.l_1_2 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=INT64_T)
-        construct_sparse_matrix(self.l_1_2, self.nrow, self.ncol, self.nbr_of_elements)
+        #self.l_1_2 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=INT64_T)
+        #construct_sparse_matrix(self.l_1_2, self.nrow, self.ncol, self.nbr_of_elements)
+
+        self.l_1_2 = NewLinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, itype=INT32_T, dtype=INT64_T, row_wise=False)
 
         self.l_1_2_csr = self.l_1_2.to_csr()
   
-        self.l_1_3 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=FLOAT32_T)
-        construct_sparse_matrix(self.l_1_3, self.nrow, self.ncol, self.nbr_of_elements)
+        #self.l_1_3 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=FLOAT32_T)
+        #construct_sparse_matrix(self.l_1_3, self.nrow, self.ncol, self.nbr_of_elements)
+
+        self.l_1_3 = NewLinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, itype=INT32_T, dtype=FLOAT32_T, row_wise=False)
 
         self.l_1_3_csr = self.l_1_3.to_csr()
   
-        self.l_1_4 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=FLOAT64_T)
-        construct_sparse_matrix(self.l_1_4, self.nrow, self.ncol, self.nbr_of_elements)
+        #self.l_1_4 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=FLOAT64_T)
+        #construct_sparse_matrix(self.l_1_4, self.nrow, self.ncol, self.nbr_of_elements)
+
+        self.l_1_4 = NewLinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, itype=INT32_T, dtype=FLOAT64_T, row_wise=False)
 
         self.l_1_4_csr = self.l_1_4.to_csr()
   
-        self.l_1_5 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=FLOAT128_T)
-        construct_sparse_matrix(self.l_1_5, self.nrow, self.ncol, self.nbr_of_elements)
+        #self.l_1_5 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=FLOAT128_T)
+        #construct_sparse_matrix(self.l_1_5, self.nrow, self.ncol, self.nbr_of_elements)
+
+        self.l_1_5 = NewLinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, itype=INT32_T, dtype=FLOAT128_T, row_wise=False)
 
         self.l_1_5_csr = self.l_1_5.to_csr()
   
-        self.l_1_6 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=COMPLEX64_T)
-        construct_sparse_matrix(self.l_1_6, self.nrow, self.ncol, self.nbr_of_elements)
+        #self.l_1_6 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=COMPLEX64_T)
+        #construct_sparse_matrix(self.l_1_6, self.nrow, self.ncol, self.nbr_of_elements)
+
+        self.l_1_6 = NewLinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, itype=INT32_T, dtype=COMPLEX64_T, row_wise=False)
 
         self.l_1_6_csr = self.l_1_6.to_csr()
   
-        self.l_1_7 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=COMPLEX128_T)
-        construct_sparse_matrix(self.l_1_7, self.nrow, self.ncol, self.nbr_of_elements)
+        #self.l_1_7 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=COMPLEX128_T)
+        #construct_sparse_matrix(self.l_1_7, self.nrow, self.ncol, self.nbr_of_elements)
+
+        self.l_1_7 = NewLinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, itype=INT32_T, dtype=COMPLEX128_T, row_wise=False)
 
         self.l_1_7_csr = self.l_1_7.to_csr()
   
-        self.l_1_8 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=COMPLEX256_T)
-        construct_sparse_matrix(self.l_1_8, self.nrow, self.ncol, self.nbr_of_elements)
+        #self.l_1_8 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=COMPLEX256_T)
+        #construct_sparse_matrix(self.l_1_8, self.nrow, self.ncol, self.nbr_of_elements)
+
+        self.l_1_8 = NewLinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, itype=INT32_T, dtype=COMPLEX256_T, row_wise=False)
 
         self.l_1_8_csr = self.l_1_8.to_csr()
   
 
   
   
-        self.l_2_1 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=INT32_T)
-        construct_sparse_matrix(self.l_2_1, self.nrow, self.ncol, self.nbr_of_elements)
+        #self.l_2_1 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=INT32_T)
+        #construct_sparse_matrix(self.l_2_1, self.nrow, self.ncol, self.nbr_of_elements)
+
+        self.l_2_1 = NewLinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, itype=INT64_T, dtype=INT32_T, row_wise=False)
 
         self.l_2_1_csr = self.l_2_1.to_csr()
   
-        self.l_2_2 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=INT64_T)
-        construct_sparse_matrix(self.l_2_2, self.nrow, self.ncol, self.nbr_of_elements)
+        #self.l_2_2 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=INT64_T)
+        #construct_sparse_matrix(self.l_2_2, self.nrow, self.ncol, self.nbr_of_elements)
+
+        self.l_2_2 = NewLinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, itype=INT64_T, dtype=INT64_T, row_wise=False)
 
         self.l_2_2_csr = self.l_2_2.to_csr()
   
-        self.l_2_3 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=FLOAT32_T)
-        construct_sparse_matrix(self.l_2_3, self.nrow, self.ncol, self.nbr_of_elements)
+        #self.l_2_3 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=FLOAT32_T)
+        #construct_sparse_matrix(self.l_2_3, self.nrow, self.ncol, self.nbr_of_elements)
+
+        self.l_2_3 = NewLinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, itype=INT64_T, dtype=FLOAT32_T, row_wise=False)
 
         self.l_2_3_csr = self.l_2_3.to_csr()
   
-        self.l_2_4 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=FLOAT64_T)
-        construct_sparse_matrix(self.l_2_4, self.nrow, self.ncol, self.nbr_of_elements)
+        #self.l_2_4 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=FLOAT64_T)
+        #construct_sparse_matrix(self.l_2_4, self.nrow, self.ncol, self.nbr_of_elements)
+
+        self.l_2_4 = NewLinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, itype=INT64_T, dtype=FLOAT64_T, row_wise=False)
 
         self.l_2_4_csr = self.l_2_4.to_csr()
   
-        self.l_2_5 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=FLOAT128_T)
-        construct_sparse_matrix(self.l_2_5, self.nrow, self.ncol, self.nbr_of_elements)
+        #self.l_2_5 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=FLOAT128_T)
+        #construct_sparse_matrix(self.l_2_5, self.nrow, self.ncol, self.nbr_of_elements)
+
+        self.l_2_5 = NewLinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, itype=INT64_T, dtype=FLOAT128_T, row_wise=False)
 
         self.l_2_5_csr = self.l_2_5.to_csr()
   
-        self.l_2_6 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=COMPLEX64_T)
-        construct_sparse_matrix(self.l_2_6, self.nrow, self.ncol, self.nbr_of_elements)
+        #self.l_2_6 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=COMPLEX64_T)
+        #construct_sparse_matrix(self.l_2_6, self.nrow, self.ncol, self.nbr_of_elements)
+
+        self.l_2_6 = NewLinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, itype=INT64_T, dtype=COMPLEX64_T, row_wise=False)
 
         self.l_2_6_csr = self.l_2_6.to_csr()
   
-        self.l_2_7 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=COMPLEX128_T)
-        construct_sparse_matrix(self.l_2_7, self.nrow, self.ncol, self.nbr_of_elements)
+        #self.l_2_7 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=COMPLEX128_T)
+        #construct_sparse_matrix(self.l_2_7, self.nrow, self.ncol, self.nbr_of_elements)
+
+        self.l_2_7 = NewLinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, itype=INT64_T, dtype=COMPLEX128_T, row_wise=False)
 
         self.l_2_7_csr = self.l_2_7.to_csr()
   
-        self.l_2_8 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=COMPLEX256_T)
-        construct_sparse_matrix(self.l_2_8, self.nrow, self.ncol, self.nbr_of_elements)
+        #self.l_2_8 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=COMPLEX256_T)
+        #construct_sparse_matrix(self.l_2_8, self.nrow, self.ncol, self.nbr_of_elements)
+
+        self.l_2_8 = NewLinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, itype=INT64_T, dtype=COMPLEX256_T, row_wise=False)
 
         self.l_2_8_csr = self.l_2_8.to_csr()
   
@@ -258,86 +290,118 @@ class CySparseSymCSRTransposedMultiplicationWithANumpyVectorTestCase(CySparseCSR
 
   
   
-        self.l_1_1 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=INT32_T)
-        construct_sym_sparse_matrix(self.l_1_1, self.size, self.nbr_of_elements)
+        #self.l_1_1 = NewLLSparseMatrix(is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=INT32_T)
+        #construct_sym_sparse_matrix(self.l_1_1, self.size, self.nbr_of_elements)
+
+        self.l_1_1 = NewLinearFillLLSparseMatrix(size=self.size, itype=INT32_T, dtype=INT32_T, row_wise=False, is_symmetric=True)
 
         self.l_1_1_csr = self.l_1_1.to_csr()
   
-        self.l_1_2 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=INT64_T)
-        construct_sym_sparse_matrix(self.l_1_2, self.size, self.nbr_of_elements)
+        #self.l_1_2 = NewLLSparseMatrix(is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=INT64_T)
+        #construct_sym_sparse_matrix(self.l_1_2, self.size, self.nbr_of_elements)
+
+        self.l_1_2 = NewLinearFillLLSparseMatrix(size=self.size, itype=INT32_T, dtype=INT64_T, row_wise=False, is_symmetric=True)
 
         self.l_1_2_csr = self.l_1_2.to_csr()
   
-        self.l_1_3 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=FLOAT32_T)
-        construct_sym_sparse_matrix(self.l_1_3, self.size, self.nbr_of_elements)
+        #self.l_1_3 = NewLLSparseMatrix(is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=FLOAT32_T)
+        #construct_sym_sparse_matrix(self.l_1_3, self.size, self.nbr_of_elements)
+
+        self.l_1_3 = NewLinearFillLLSparseMatrix(size=self.size, itype=INT32_T, dtype=FLOAT32_T, row_wise=False, is_symmetric=True)
 
         self.l_1_3_csr = self.l_1_3.to_csr()
   
-        self.l_1_4 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=FLOAT64_T)
-        construct_sym_sparse_matrix(self.l_1_4, self.size, self.nbr_of_elements)
+        #self.l_1_4 = NewLLSparseMatrix(is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=FLOAT64_T)
+        #construct_sym_sparse_matrix(self.l_1_4, self.size, self.nbr_of_elements)
+
+        self.l_1_4 = NewLinearFillLLSparseMatrix(size=self.size, itype=INT32_T, dtype=FLOAT64_T, row_wise=False, is_symmetric=True)
 
         self.l_1_4_csr = self.l_1_4.to_csr()
   
-        self.l_1_5 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=FLOAT128_T)
-        construct_sym_sparse_matrix(self.l_1_5, self.size, self.nbr_of_elements)
+        #self.l_1_5 = NewLLSparseMatrix(is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=FLOAT128_T)
+        #construct_sym_sparse_matrix(self.l_1_5, self.size, self.nbr_of_elements)
+
+        self.l_1_5 = NewLinearFillLLSparseMatrix(size=self.size, itype=INT32_T, dtype=FLOAT128_T, row_wise=False, is_symmetric=True)
 
         self.l_1_5_csr = self.l_1_5.to_csr()
   
-        self.l_1_6 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=COMPLEX64_T)
-        construct_sym_sparse_matrix(self.l_1_6, self.size, self.nbr_of_elements)
+        #self.l_1_6 = NewLLSparseMatrix(is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=COMPLEX64_T)
+        #construct_sym_sparse_matrix(self.l_1_6, self.size, self.nbr_of_elements)
+
+        self.l_1_6 = NewLinearFillLLSparseMatrix(size=self.size, itype=INT32_T, dtype=COMPLEX64_T, row_wise=False, is_symmetric=True)
 
         self.l_1_6_csr = self.l_1_6.to_csr()
   
-        self.l_1_7 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=COMPLEX128_T)
-        construct_sym_sparse_matrix(self.l_1_7, self.size, self.nbr_of_elements)
+        #self.l_1_7 = NewLLSparseMatrix(is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=COMPLEX128_T)
+        #construct_sym_sparse_matrix(self.l_1_7, self.size, self.nbr_of_elements)
+
+        self.l_1_7 = NewLinearFillLLSparseMatrix(size=self.size, itype=INT32_T, dtype=COMPLEX128_T, row_wise=False, is_symmetric=True)
 
         self.l_1_7_csr = self.l_1_7.to_csr()
   
-        self.l_1_8 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=COMPLEX256_T)
-        construct_sym_sparse_matrix(self.l_1_8, self.size, self.nbr_of_elements)
+        #self.l_1_8 = NewLLSparseMatrix(is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=COMPLEX256_T)
+        #construct_sym_sparse_matrix(self.l_1_8, self.size, self.nbr_of_elements)
+
+        self.l_1_8 = NewLinearFillLLSparseMatrix(size=self.size, itype=INT32_T, dtype=COMPLEX256_T, row_wise=False, is_symmetric=True)
 
         self.l_1_8_csr = self.l_1_8.to_csr()
   
 
   
   
-        self.l_2_1 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=INT32_T)
-        construct_sym_sparse_matrix(self.l_2_1, self.size, self.nbr_of_elements)
+        #self.l_2_1 = NewLLSparseMatrix(is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=INT32_T)
+        #construct_sym_sparse_matrix(self.l_2_1, self.size, self.nbr_of_elements)
+
+        self.l_2_1 = NewLinearFillLLSparseMatrix(size=self.size, itype=INT64_T, dtype=INT32_T, row_wise=False, is_symmetric=True)
 
         self.l_2_1_csr = self.l_2_1.to_csr()
   
-        self.l_2_2 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=INT64_T)
-        construct_sym_sparse_matrix(self.l_2_2, self.size, self.nbr_of_elements)
+        #self.l_2_2 = NewLLSparseMatrix(is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=INT64_T)
+        #construct_sym_sparse_matrix(self.l_2_2, self.size, self.nbr_of_elements)
+
+        self.l_2_2 = NewLinearFillLLSparseMatrix(size=self.size, itype=INT64_T, dtype=INT64_T, row_wise=False, is_symmetric=True)
 
         self.l_2_2_csr = self.l_2_2.to_csr()
   
-        self.l_2_3 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=FLOAT32_T)
-        construct_sym_sparse_matrix(self.l_2_3, self.size, self.nbr_of_elements)
+        #self.l_2_3 = NewLLSparseMatrix(is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=FLOAT32_T)
+        #construct_sym_sparse_matrix(self.l_2_3, self.size, self.nbr_of_elements)
+
+        self.l_2_3 = NewLinearFillLLSparseMatrix(size=self.size, itype=INT64_T, dtype=FLOAT32_T, row_wise=False, is_symmetric=True)
 
         self.l_2_3_csr = self.l_2_3.to_csr()
   
-        self.l_2_4 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=FLOAT64_T)
-        construct_sym_sparse_matrix(self.l_2_4, self.size, self.nbr_of_elements)
+        #self.l_2_4 = NewLLSparseMatrix(is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=FLOAT64_T)
+        #construct_sym_sparse_matrix(self.l_2_4, self.size, self.nbr_of_elements)
+
+        self.l_2_4 = NewLinearFillLLSparseMatrix(size=self.size, itype=INT64_T, dtype=FLOAT64_T, row_wise=False, is_symmetric=True)
 
         self.l_2_4_csr = self.l_2_4.to_csr()
   
-        self.l_2_5 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=FLOAT128_T)
-        construct_sym_sparse_matrix(self.l_2_5, self.size, self.nbr_of_elements)
+        #self.l_2_5 = NewLLSparseMatrix(is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=FLOAT128_T)
+        #construct_sym_sparse_matrix(self.l_2_5, self.size, self.nbr_of_elements)
+
+        self.l_2_5 = NewLinearFillLLSparseMatrix(size=self.size, itype=INT64_T, dtype=FLOAT128_T, row_wise=False, is_symmetric=True)
 
         self.l_2_5_csr = self.l_2_5.to_csr()
   
-        self.l_2_6 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=COMPLEX64_T)
-        construct_sym_sparse_matrix(self.l_2_6, self.size, self.nbr_of_elements)
+        #self.l_2_6 = NewLLSparseMatrix(is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=COMPLEX64_T)
+        #construct_sym_sparse_matrix(self.l_2_6, self.size, self.nbr_of_elements)
+
+        self.l_2_6 = NewLinearFillLLSparseMatrix(size=self.size, itype=INT64_T, dtype=COMPLEX64_T, row_wise=False, is_symmetric=True)
 
         self.l_2_6_csr = self.l_2_6.to_csr()
   
-        self.l_2_7 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=COMPLEX128_T)
-        construct_sym_sparse_matrix(self.l_2_7, self.size, self.nbr_of_elements)
+        #self.l_2_7 = NewLLSparseMatrix(is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=COMPLEX128_T)
+        #construct_sym_sparse_matrix(self.l_2_7, self.size, self.nbr_of_elements)
+
+        self.l_2_7 = NewLinearFillLLSparseMatrix(size=self.size, itype=INT64_T, dtype=COMPLEX128_T, row_wise=False, is_symmetric=True)
 
         self.l_2_7_csr = self.l_2_7.to_csr()
   
-        self.l_2_8 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=COMPLEX256_T)
-        construct_sym_sparse_matrix(self.l_2_8, self.size, self.nbr_of_elements)
+        #self.l_2_8 = NewLLSparseMatrix(is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=COMPLEX256_T)
+        #construct_sym_sparse_matrix(self.l_2_8, self.size, self.nbr_of_elements)
+
+        self.l_2_8 = NewLinearFillLLSparseMatrix(size=self.size, itype=INT64_T, dtype=COMPLEX256_T, row_wise=False, is_symmetric=True)
 
         self.l_2_8_csr = self.l_2_8.to_csr()
   
@@ -466,86 +530,118 @@ class CySparseCSRTransposedMultiplicationWithAStridedNumpyVectorTestCase(CySpars
 
   
   
-        self.l_1_1 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=INT32_T)
-        construct_sparse_matrix(self.l_1_1, self.nrow, self.ncol, self.nbr_of_elements)
+        #self.l_1_1 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=INT32_T)
+        #construct_sparse_matrix(self.l_1_1, self.nrow, self.ncol, self.nbr_of_elements)
+
+        self.l_1_1 = NewLinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, itype=INT32_T, dtype=INT32_T, row_wise=True)
 
         self.l_1_1_csr = self.l_1_1.to_csr()
   
-        self.l_1_2 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=INT64_T)
-        construct_sparse_matrix(self.l_1_2, self.nrow, self.ncol, self.nbr_of_elements)
+        #self.l_1_2 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=INT64_T)
+        #construct_sparse_matrix(self.l_1_2, self.nrow, self.ncol, self.nbr_of_elements)
+
+        self.l_1_2 = NewLinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, itype=INT32_T, dtype=INT64_T, row_wise=True)
 
         self.l_1_2_csr = self.l_1_2.to_csr()
   
-        self.l_1_3 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=FLOAT32_T)
-        construct_sparse_matrix(self.l_1_3, self.nrow, self.ncol, self.nbr_of_elements)
+        #self.l_1_3 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=FLOAT32_T)
+        #construct_sparse_matrix(self.l_1_3, self.nrow, self.ncol, self.nbr_of_elements)
+
+        self.l_1_3 = NewLinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, itype=INT32_T, dtype=FLOAT32_T, row_wise=True)
 
         self.l_1_3_csr = self.l_1_3.to_csr()
   
-        self.l_1_4 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=FLOAT64_T)
-        construct_sparse_matrix(self.l_1_4, self.nrow, self.ncol, self.nbr_of_elements)
+        #self.l_1_4 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=FLOAT64_T)
+        #construct_sparse_matrix(self.l_1_4, self.nrow, self.ncol, self.nbr_of_elements)
+
+        self.l_1_4 = NewLinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, itype=INT32_T, dtype=FLOAT64_T, row_wise=True)
 
         self.l_1_4_csr = self.l_1_4.to_csr()
   
-        self.l_1_5 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=FLOAT128_T)
-        construct_sparse_matrix(self.l_1_5, self.nrow, self.ncol, self.nbr_of_elements)
+        #self.l_1_5 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=FLOAT128_T)
+        #construct_sparse_matrix(self.l_1_5, self.nrow, self.ncol, self.nbr_of_elements)
+
+        self.l_1_5 = NewLinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, itype=INT32_T, dtype=FLOAT128_T, row_wise=True)
 
         self.l_1_5_csr = self.l_1_5.to_csr()
   
-        self.l_1_6 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=COMPLEX64_T)
-        construct_sparse_matrix(self.l_1_6, self.nrow, self.ncol, self.nbr_of_elements)
+        #self.l_1_6 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=COMPLEX64_T)
+        #construct_sparse_matrix(self.l_1_6, self.nrow, self.ncol, self.nbr_of_elements)
+
+        self.l_1_6 = NewLinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, itype=INT32_T, dtype=COMPLEX64_T, row_wise=True)
 
         self.l_1_6_csr = self.l_1_6.to_csr()
   
-        self.l_1_7 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=COMPLEX128_T)
-        construct_sparse_matrix(self.l_1_7, self.nrow, self.ncol, self.nbr_of_elements)
+        #self.l_1_7 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=COMPLEX128_T)
+        #construct_sparse_matrix(self.l_1_7, self.nrow, self.ncol, self.nbr_of_elements)
+
+        self.l_1_7 = NewLinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, itype=INT32_T, dtype=COMPLEX128_T, row_wise=True)
 
         self.l_1_7_csr = self.l_1_7.to_csr()
   
-        self.l_1_8 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=COMPLEX256_T)
-        construct_sparse_matrix(self.l_1_8, self.nrow, self.ncol, self.nbr_of_elements)
+        #self.l_1_8 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=COMPLEX256_T)
+        #construct_sparse_matrix(self.l_1_8, self.nrow, self.ncol, self.nbr_of_elements)
+
+        self.l_1_8 = NewLinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, itype=INT32_T, dtype=COMPLEX256_T, row_wise=True)
 
         self.l_1_8_csr = self.l_1_8.to_csr()
   
 
   
   
-        self.l_2_1 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=INT32_T)
-        construct_sparse_matrix(self.l_2_1, self.nrow, self.ncol, self.nbr_of_elements)
+        #self.l_2_1 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=INT32_T)
+        #construct_sparse_matrix(self.l_2_1, self.nrow, self.ncol, self.nbr_of_elements)
+
+        self.l_2_1 = NewLinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, itype=INT64_T, dtype=INT32_T, row_wise=True)
 
         self.l_2_1_csr = self.l_2_1.to_csr()
   
-        self.l_2_2 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=INT64_T)
-        construct_sparse_matrix(self.l_2_2, self.nrow, self.ncol, self.nbr_of_elements)
+        #self.l_2_2 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=INT64_T)
+        #construct_sparse_matrix(self.l_2_2, self.nrow, self.ncol, self.nbr_of_elements)
+
+        self.l_2_2 = NewLinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, itype=INT64_T, dtype=INT64_T, row_wise=True)
 
         self.l_2_2_csr = self.l_2_2.to_csr()
   
-        self.l_2_3 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=FLOAT32_T)
-        construct_sparse_matrix(self.l_2_3, self.nrow, self.ncol, self.nbr_of_elements)
+        #self.l_2_3 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=FLOAT32_T)
+        #construct_sparse_matrix(self.l_2_3, self.nrow, self.ncol, self.nbr_of_elements)
+
+        self.l_2_3 = NewLinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, itype=INT64_T, dtype=FLOAT32_T, row_wise=True)
 
         self.l_2_3_csr = self.l_2_3.to_csr()
   
-        self.l_2_4 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=FLOAT64_T)
-        construct_sparse_matrix(self.l_2_4, self.nrow, self.ncol, self.nbr_of_elements)
+        #self.l_2_4 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=FLOAT64_T)
+        #construct_sparse_matrix(self.l_2_4, self.nrow, self.ncol, self.nbr_of_elements)
+
+        self.l_2_4 = NewLinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, itype=INT64_T, dtype=FLOAT64_T, row_wise=True)
 
         self.l_2_4_csr = self.l_2_4.to_csr()
   
-        self.l_2_5 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=FLOAT128_T)
-        construct_sparse_matrix(self.l_2_5, self.nrow, self.ncol, self.nbr_of_elements)
+        #self.l_2_5 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=FLOAT128_T)
+        #construct_sparse_matrix(self.l_2_5, self.nrow, self.ncol, self.nbr_of_elements)
+
+        self.l_2_5 = NewLinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, itype=INT64_T, dtype=FLOAT128_T, row_wise=True)
 
         self.l_2_5_csr = self.l_2_5.to_csr()
   
-        self.l_2_6 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=COMPLEX64_T)
-        construct_sparse_matrix(self.l_2_6, self.nrow, self.ncol, self.nbr_of_elements)
+        #self.l_2_6 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=COMPLEX64_T)
+        #construct_sparse_matrix(self.l_2_6, self.nrow, self.ncol, self.nbr_of_elements)
+
+        self.l_2_6 = NewLinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, itype=INT64_T, dtype=COMPLEX64_T, row_wise=True)
 
         self.l_2_6_csr = self.l_2_6.to_csr()
   
-        self.l_2_7 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=COMPLEX128_T)
-        construct_sparse_matrix(self.l_2_7, self.nrow, self.ncol, self.nbr_of_elements)
+        #self.l_2_7 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=COMPLEX128_T)
+        #construct_sparse_matrix(self.l_2_7, self.nrow, self.ncol, self.nbr_of_elements)
+
+        self.l_2_7 = NewLinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, itype=INT64_T, dtype=COMPLEX128_T, row_wise=True)
 
         self.l_2_7_csr = self.l_2_7.to_csr()
   
-        self.l_2_8 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=COMPLEX256_T)
-        construct_sparse_matrix(self.l_2_8, self.nrow, self.ncol, self.nbr_of_elements)
+        #self.l_2_8 = NewLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=COMPLEX256_T)
+        #construct_sparse_matrix(self.l_2_8, self.nrow, self.ncol, self.nbr_of_elements)
+
+        self.l_2_8 = NewLinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, itype=INT64_T, dtype=COMPLEX256_T, row_wise=True)
 
         self.l_2_8_csr = self.l_2_8.to_csr()
   
@@ -713,86 +809,118 @@ class CySparseSymCSRTransposedMultiplicationWithAStridedNumpyVectorTestCase(CySp
 
   
   
-        self.l_1_1 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=INT32_T)
-        construct_sym_sparse_matrix(self.l_1_1, self.size, self.nbr_of_elements)
+        #self.l_1_1 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=INT32_T)
+        #construct_sym_sparse_matrix(self.l_1_1, self.size, self.nbr_of_elements)
+
+        self.l_1_1 = NewLinearFillLLSparseMatrix(size=self.size, itype=INT32_T, dtype=INT32_T, row_wise=False, is_symmetric=True)
 
         self.l_1_1_csr = self.l_1_1.to_csr()
   
-        self.l_1_2 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=INT64_T)
-        construct_sym_sparse_matrix(self.l_1_2, self.size, self.nbr_of_elements)
+        #self.l_1_2 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=INT64_T)
+        #construct_sym_sparse_matrix(self.l_1_2, self.size, self.nbr_of_elements)
+
+        self.l_1_2 = NewLinearFillLLSparseMatrix(size=self.size, itype=INT32_T, dtype=INT64_T, row_wise=False, is_symmetric=True)
 
         self.l_1_2_csr = self.l_1_2.to_csr()
   
-        self.l_1_3 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=FLOAT32_T)
-        construct_sym_sparse_matrix(self.l_1_3, self.size, self.nbr_of_elements)
+        #self.l_1_3 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=FLOAT32_T)
+        #construct_sym_sparse_matrix(self.l_1_3, self.size, self.nbr_of_elements)
+
+        self.l_1_3 = NewLinearFillLLSparseMatrix(size=self.size, itype=INT32_T, dtype=FLOAT32_T, row_wise=False, is_symmetric=True)
 
         self.l_1_3_csr = self.l_1_3.to_csr()
   
-        self.l_1_4 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=FLOAT64_T)
-        construct_sym_sparse_matrix(self.l_1_4, self.size, self.nbr_of_elements)
+        #self.l_1_4 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=FLOAT64_T)
+        #construct_sym_sparse_matrix(self.l_1_4, self.size, self.nbr_of_elements)
+
+        self.l_1_4 = NewLinearFillLLSparseMatrix(size=self.size, itype=INT32_T, dtype=FLOAT64_T, row_wise=False, is_symmetric=True)
 
         self.l_1_4_csr = self.l_1_4.to_csr()
   
-        self.l_1_5 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=FLOAT128_T)
-        construct_sym_sparse_matrix(self.l_1_5, self.size, self.nbr_of_elements)
+        #self.l_1_5 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=FLOAT128_T)
+        #construct_sym_sparse_matrix(self.l_1_5, self.size, self.nbr_of_elements)
+
+        self.l_1_5 = NewLinearFillLLSparseMatrix(size=self.size, itype=INT32_T, dtype=FLOAT128_T, row_wise=False, is_symmetric=True)
 
         self.l_1_5_csr = self.l_1_5.to_csr()
   
-        self.l_1_6 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=COMPLEX64_T)
-        construct_sym_sparse_matrix(self.l_1_6, self.size, self.nbr_of_elements)
+        #self.l_1_6 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=COMPLEX64_T)
+        #construct_sym_sparse_matrix(self.l_1_6, self.size, self.nbr_of_elements)
+
+        self.l_1_6 = NewLinearFillLLSparseMatrix(size=self.size, itype=INT32_T, dtype=COMPLEX64_T, row_wise=False, is_symmetric=True)
 
         self.l_1_6_csr = self.l_1_6.to_csr()
   
-        self.l_1_7 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=COMPLEX128_T)
-        construct_sym_sparse_matrix(self.l_1_7, self.size, self.nbr_of_elements)
+        #self.l_1_7 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=COMPLEX128_T)
+        #construct_sym_sparse_matrix(self.l_1_7, self.size, self.nbr_of_elements)
+
+        self.l_1_7 = NewLinearFillLLSparseMatrix(size=self.size, itype=INT32_T, dtype=COMPLEX128_T, row_wise=False, is_symmetric=True)
 
         self.l_1_7_csr = self.l_1_7.to_csr()
   
-        self.l_1_8 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=COMPLEX256_T)
-        construct_sym_sparse_matrix(self.l_1_8, self.size, self.nbr_of_elements)
+        #self.l_1_8 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT32_T, dtype=COMPLEX256_T)
+        #construct_sym_sparse_matrix(self.l_1_8, self.size, self.nbr_of_elements)
+
+        self.l_1_8 = NewLinearFillLLSparseMatrix(size=self.size, itype=INT32_T, dtype=COMPLEX256_T, row_wise=False, is_symmetric=True)
 
         self.l_1_8_csr = self.l_1_8.to_csr()
   
 
   
   
-        self.l_2_1 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=INT32_T)
-        construct_sym_sparse_matrix(self.l_2_1, self.size, self.nbr_of_elements)
+        #self.l_2_1 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=INT32_T)
+        #construct_sym_sparse_matrix(self.l_2_1, self.size, self.nbr_of_elements)
+
+        self.l_2_1 = NewLinearFillLLSparseMatrix(size=self.size, itype=INT64_T, dtype=INT32_T, row_wise=False, is_symmetric=True)
 
         self.l_2_1_csr = self.l_2_1.to_csr()
   
-        self.l_2_2 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=INT64_T)
-        construct_sym_sparse_matrix(self.l_2_2, self.size, self.nbr_of_elements)
+        #self.l_2_2 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=INT64_T)
+        #construct_sym_sparse_matrix(self.l_2_2, self.size, self.nbr_of_elements)
+
+        self.l_2_2 = NewLinearFillLLSparseMatrix(size=self.size, itype=INT64_T, dtype=INT64_T, row_wise=False, is_symmetric=True)
 
         self.l_2_2_csr = self.l_2_2.to_csr()
   
-        self.l_2_3 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=FLOAT32_T)
-        construct_sym_sparse_matrix(self.l_2_3, self.size, self.nbr_of_elements)
+        #self.l_2_3 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=FLOAT32_T)
+        #construct_sym_sparse_matrix(self.l_2_3, self.size, self.nbr_of_elements)
+
+        self.l_2_3 = NewLinearFillLLSparseMatrix(size=self.size, itype=INT64_T, dtype=FLOAT32_T, row_wise=False, is_symmetric=True)
 
         self.l_2_3_csr = self.l_2_3.to_csr()
   
-        self.l_2_4 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=FLOAT64_T)
-        construct_sym_sparse_matrix(self.l_2_4, self.size, self.nbr_of_elements)
+        #self.l_2_4 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=FLOAT64_T)
+        #construct_sym_sparse_matrix(self.l_2_4, self.size, self.nbr_of_elements)
+
+        self.l_2_4 = NewLinearFillLLSparseMatrix(size=self.size, itype=INT64_T, dtype=FLOAT64_T, row_wise=False, is_symmetric=True)
 
         self.l_2_4_csr = self.l_2_4.to_csr()
   
-        self.l_2_5 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=FLOAT128_T)
-        construct_sym_sparse_matrix(self.l_2_5, self.size, self.nbr_of_elements)
+        #self.l_2_5 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=FLOAT128_T)
+        #construct_sym_sparse_matrix(self.l_2_5, self.size, self.nbr_of_elements)
+
+        self.l_2_5 = NewLinearFillLLSparseMatrix(size=self.size, itype=INT64_T, dtype=FLOAT128_T, row_wise=False, is_symmetric=True)
 
         self.l_2_5_csr = self.l_2_5.to_csr()
   
-        self.l_2_6 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=COMPLEX64_T)
-        construct_sym_sparse_matrix(self.l_2_6, self.size, self.nbr_of_elements)
+        #self.l_2_6 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=COMPLEX64_T)
+        #construct_sym_sparse_matrix(self.l_2_6, self.size, self.nbr_of_elements)
+
+        self.l_2_6 = NewLinearFillLLSparseMatrix(size=self.size, itype=INT64_T, dtype=COMPLEX64_T, row_wise=False, is_symmetric=True)
 
         self.l_2_6_csr = self.l_2_6.to_csr()
   
-        self.l_2_7 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=COMPLEX128_T)
-        construct_sym_sparse_matrix(self.l_2_7, self.size, self.nbr_of_elements)
+        #self.l_2_7 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=COMPLEX128_T)
+        #construct_sym_sparse_matrix(self.l_2_7, self.size, self.nbr_of_elements)
+
+        self.l_2_7 = NewLinearFillLLSparseMatrix(size=self.size, itype=INT64_T, dtype=COMPLEX128_T, row_wise=False, is_symmetric=True)
 
         self.l_2_7_csr = self.l_2_7.to_csr()
   
-        self.l_2_8 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=COMPLEX256_T)
-        construct_sym_sparse_matrix(self.l_2_8, self.size, self.nbr_of_elements)
+        #self.l_2_8 = NewLLSparseMatrix(__is_symmetric=True, size=self.size, size_hint=self.nbr_of_elements, itype=INT64_T, dtype=COMPLEX256_T)
+        #construct_sym_sparse_matrix(self.l_2_8, self.size, self.nbr_of_elements)
+
+        self.l_2_8 = NewLinearFillLLSparseMatrix(size=self.size, itype=INT64_T, dtype=COMPLEX256_T, row_wise=False, is_symmetric=True)
 
         self.l_2_8_csr = self.l_2_8.to_csr()
   

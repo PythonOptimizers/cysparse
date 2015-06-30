@@ -70,7 +70,8 @@ class CySparseCSRConjugatedMultiplicationWithANumpyVectorTestCase(CySparseCSRCon
 {% endfor %}
 
 {% for element_type in complex_list %}
-        self.x_@element_type@ = np.ones(self.ncol, dtype=np.@element_type|type2enum|cysparse_type_to_numpy_type@)
+        self.x_@element_type@ = np.empty(self.ncol, dtype=np.@element_type|type2enum|cysparse_type_to_numpy_type@)
+        self.x_@element_type@.fill(1+2j)
 {% endfor %}
 
     def test_simple_multiplication_one_by_one(self):
@@ -105,7 +106,8 @@ class CySparseSymCSRConjugatedMultiplicationWithANumpyVectorTestCase(CySparseCSR
 {% endfor %}
 
 {% for element_type in complex_list %}
-        self.x_@element_type@ = np.ones(self.size, dtype=np.@element_type|type2enum|cysparse_type_to_numpy_type@)
+        self.x_@element_type@ = np.empty(self.size, dtype=np.@element_type|type2enum|cysparse_type_to_numpy_type@)
+        self.x_@element_type@.fill(1+2j)
 {% endfor %}
 
     def test_simple_multiplication_one_by_one(self):
@@ -144,7 +146,8 @@ class CySparseCSRConjugatedMultiplicationWithAStridedNumpyVectorTestCase(CySpars
 {% endfor %}
 
 {% for element_type in complex_list %}
-        self.x_@element_type@ = np.ones(self.ncol, dtype=np.@element_type|type2enum|cysparse_type_to_numpy_type@)
+        self.x_@element_type@ = np.empty(self.ncol, dtype=np.@element_type|type2enum|cysparse_type_to_numpy_type@)
+        self.x_@element_type@.fill(1+2j)
         self.x_strided_@element_type@ = np.empty(self.ncol * self.stride_factor, dtype=np.@element_type|type2enum|cysparse_type_to_numpy_type@)
         self.x_strided_@element_type@.fill(2)
 
@@ -188,7 +191,8 @@ class CySparseSymCSRConjugatedMultiplicationWithAStridedNumpyVectorTestCase(CySp
 {% endfor %}
 
 {% for element_type in complex_list %}
-        self.x_@element_type@ = np.ones(self.size, dtype=np.@element_type|type2enum|cysparse_type_to_numpy_type@)
+        self.x_@element_type@ = np.empty(self.size, dtype=np.@element_type|type2enum|cysparse_type_to_numpy_type@)
+        self.x_@element_type@.fill(1+2j)
         self.x_strided_@element_type@ = np.empty(self.size * self.stride_factor, dtype=np.@element_type|type2enum|cysparse_type_to_numpy_type@)
         self.x_strided_@element_type@.fill(2)
 
