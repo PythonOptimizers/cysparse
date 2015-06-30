@@ -147,7 +147,20 @@ For all sparse matrix formats, we'll detail an example. Let :math:`A` be the fol
     
 Notice that this matrix is sparse with 4 non zero entries, is non symmetric and has an empty row and column.
 
+How to run through a ``LL`` matrix
+-------------------------------------
 
+To find all triplets :math:`(i, j, v)`:
+
+..  code-block:: python
+
+    for i from 0 <= i < nrow:
+        k = self.root[i]
+        while k != -1:
+           j = self.col[k]
+           v = self.val[k]
+
+           k = self.link[k]
 
 The ``CSR`` sparse format in details
 =========================================
@@ -171,7 +184,7 @@ One can immediatly see that the values are stored row-wise in ``col`` and ``val`
 How to run through a ``CSR`` matrix
 -------------------------------------
 
-To find all triplets :math:`(i, j, k)`:
+To find all triplets :math:`(i, j, v)`:
 
 ..  code-block:: python
 
@@ -202,7 +215,7 @@ Detailed example
 How to run through a ``CSC`` matrix
 -------------------------------------
 
-To find all triplets :math:`(i, j, k)`:
+To find all triplets :math:`(i, j, v)`:
 
 ..  code-block:: python
 

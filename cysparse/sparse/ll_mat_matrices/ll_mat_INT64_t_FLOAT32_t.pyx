@@ -700,6 +700,29 @@ cdef class LLSparseMatrix_INT64_t_FLOAT32_t(MutableSparseMatrix_INT64_t_FLOAT32_
         row_indices = create_c_array_indices_from_python_object_INT64_t(self.__nrow, obj1, &nrow)
         col_indices = create_c_array_indices_from_python_object_INT64_t(self.__ncol, obj2, &ncol)
 
+    def to_ndarray(self):
+        """
+        Return the matrix in the form of a :program:`NumPy` ``ndarray``.
+
+        """
+        # EXPLICIT TYPE TESTS
+        cdef:
+            cnp.ndarray[cnp.npy_float32, ndim=2] np_ndarray
+            INT64_t i, k
+            FLOAT32_t [:,:] np_memview
+
+        np_ndarray = np.zeros((self.__nrow, self.__ncol), dtype=np.float32, order='C')
+        np_memview = np_ndarray
+
+        for i from 0 <= i < self.__nrow:
+            k = self.root[i]
+            while k != -1:
+               np_memview[i, self.col[k]] = self.val[k]
+
+               k = self.link[k]
+
+        return np_ndarray
+
     ####################################################################################################################
     #                                            ### ASSIGN ###
     cdef assign(self, LLSparseMatrixView_INT64_t_FLOAT32_t view, object obj):

@@ -1,0 +1,35 @@
+# Benchmark Report
+
+## Frobenius norm with 100 elements and size = 1,000
+
+    name | rank | runs |      mean |     stdev | baseline
+---------|------|------|-----------|-----------|---------
+cysparse |    1 |  100 | 1.984e-06 | 6.802e-07 |        1
+pysparse |    2 |  100 | 2.279e-06 | 7.481e-07 |    1.149
+
+## Frobenius norm with 1,000 elements and size = 10,000
+
+    name | rank | runs |      mean |     stdev | baseline
+---------|------|------|-----------|-----------|---------
+cysparse |    1 |  100 | 1.235e-05 | 5.343e-07 |        1
+pysparse |    2 |  100 | 1.277e-05 | 7.166e-07 |    1.035
+
+## Frobenius norm with 10,000 elements and size = 100,000
+
+    name | rank | runs |      mean |     stdev | baseline
+---------|------|------|-----------|-----------|---------
+pysparse |    1 |  100 | 7.979e-05 | 2.649e-05 |        1
+cysparse |    2 |  100 | 8.157e-05 | 2.442e-05 |    1.022
+
+## Frobenius norm with 80,000 elements and size = 100,000
+
+    name | rank | runs |      mean |     stdev | baseline
+---------|------|------|-----------|-----------|---------
+cysparse |    1 |  100 | 0.0001228 | 5.476e-06 |        1
+pysparse |    2 |  100 | 0.0001238 | 5.887e-06 |    1.008
+
+Total runs: 800 run in arbitrary order
+Python version: 2.7.5+
+System: x86_64 Linux 3.11.0-12-generic
+Version: benchmark v0.1.5
+Date: 2015-06-30 12:35:20

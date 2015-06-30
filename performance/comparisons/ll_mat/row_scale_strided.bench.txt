@@ -1,0 +1,42 @@
+# Benchmark Report
+
+## Simple row_scale with 100 elements and size = 1,000 and a strided NumPy vector (stride = 10)
+
+    name | rank | runs |      mean |     stdev | baseline
+---------|------|------|-----------|-----------|---------
+cysparse |    1 |   10 | 6.795e-06 |  4.34e-06 |        1
+pysparse |    2 |   10 | 1.063e-05 | 5.356e-06 |    1.565
+
+## Simple row_scale with 1000 elements and size = 10,000 and a strided NumPy vector (stride = 10)
+
+    name | rank | runs |      mean |     stdev | baseline
+---------|------|------|-----------|-----------|---------
+cysparse |    1 |   10 |  2.98e-05 | 4.465e-06 |        1
+pysparse |    2 |   10 | 6.437e-05 | 2.242e-06 |     2.16
+
+## Simple row_scale with 10000 elements and size = 100,000 and a strided NumPy vector (stride = 10)
+
+    name | rank | runs |      mean |     stdev | baseline
+---------|------|------|-----------|-----------|---------
+cysparse |    1 |   10 | 0.0004509 |  5.03e-05 |        1
+pysparse |    2 |   10 | 0.0007622 | 0.0001148 |     1.69
+
+## Simple row_scale with 80000 elements and size = 100,000 and a strided NumPy vector (stride = 10)
+
+    name | rank | runs |      mean |     stdev | baseline
+---------|------|------|-----------|-----------|---------
+cysparse |    1 |   10 | 0.0005415 | 8.575e-05 |        1
+pysparse |    2 |   10 | 0.0007555 | 5.368e-05 |    1.395
+
+## Simple row_scale with 10000 elements and size = 100,000 and a strided NumPy vector (stride = 739)
+
+    name | rank | runs |     mean |     stdev | baseline
+---------|------|------|----------|-----------|---------
+cysparse |    1 |   10 | 0.001368 | 0.0002009 |        1
+pysparse |    2 |   10 | 0.001876 | 0.0002506 |    1.372
+
+Total runs: 100 run in arbitrary order
+Python version: 2.7.5+
+System: x86_64 Linux 3.11.0-12-generic
+Version: benchmark v0.1.5
+Date: 2015-06-30 12:35:07
