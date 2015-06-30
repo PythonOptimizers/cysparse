@@ -17,7 +17,7 @@ This is the multi-types version (last single type version: ce86f8476166f63d0af72
    for the moment. I'll do some benchmarking to assess this process.
 
    **Update**: Hm, maybe for I don't know what reason, this speed up doesn't work with CySparse. After some tests, memory views where still slower...
-   see #126.
+   see [#126](https://github.com/Funartech/cysparse/issues/126).
 
 ## Want to follow the implementation of CySparse?
 
