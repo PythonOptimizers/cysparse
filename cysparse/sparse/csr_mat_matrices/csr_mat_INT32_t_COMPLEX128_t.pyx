@@ -326,6 +326,9 @@ cdef class CSRSparseMatrix_INT32_t_COMPLEX128_t(ImmutableSparseMatrix_INT32_t_CO
 
         return self.safe_at(i, j)
 
+    ####################################################################################################################
+    # Common operations
+    ####################################################################################################################
     def find(self):
         """
         Return 3 NumPy arrays with the non-zero matrix entries: i-rows, j-cols, vals.
@@ -408,6 +411,26 @@ cdef class CSRSparseMatrix_INT32_t_COMPLEX128_t(ImmutableSparseMatrix_INT32_t_CO
                         pv[j] = self.val[k_]
 
         return diag
+
+    def to_ndarray(self):
+        """
+        Return the matrix in the form of a :program:`NumPy` ``ndarray``.
+
+        """
+        # EXPLICIT TYPE TESTS
+        cdef:
+            cnp.ndarray[cnp.npy_complex128, ndim=2] np_ndarray
+            INT32_t i, k
+            COMPLEX128_t [:,:] np_memview
+
+        np_ndarray = np.zeros((self.__nrow, self.__ncol), dtype=np.complex128, order='C')
+        np_memview = np_ndarray
+
+        for i from 0 <= i < self.__nrow:
+            for k from self.ind[i] <= k < self.ind[i+1]:
+                np_memview[i, self.col[k]] = self.val[k]
+
+        return np_ndarray
 
     ####################################################################################################################
     # Multiplication

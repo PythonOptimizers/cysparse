@@ -212,6 +212,9 @@ cdef class CSCSparseMatrix_INT64_t_COMPLEX64_t(ImmutableSparseMatrix_INT64_t_COM
 
         return self.safe_at(i, j)
 
+    ####################################################################################################################
+    # Common operations
+    ####################################################################################################################
     def find(self):
         """
         Return 3 NumPy arrays with the non-zero matrix entries: i-rows, j-cols, vals.
@@ -246,10 +249,6 @@ cdef class CSCSparseMatrix_INT64_t_COMPLEX64_t(ImmutableSparseMatrix_INT64_t_COM
 
         return (a_row, a_col, a_val)
 
-
-    ####################################################################################################################
-    # Common operations
-    ####################################################################################################################
     def diag(self, k = 0):
         """
         Return the :math:`k^\textrm{th}` diagonal.
@@ -302,7 +301,25 @@ cdef class CSCSparseMatrix_INT64_t_COMPLEX64_t(ImmutableSparseMatrix_INT64_t_COM
 
         return diag
 
+    def to_ndarray(self):
+        """
+        Return the matrix in the form of a :program:`NumPy` ``ndarray``.
 
+        """
+        # EXPLICIT TYPE TESTS
+        cdef:
+            cnp.ndarray[cnp.npy_complex64, ndim=2] np_ndarray
+            INT64_t i, j, k
+            COMPLEX64_t [:,:] np_memview
+
+        np_ndarray = np.zeros((self.__nrow, self.__ncol), dtype=np.complex64, order='C')
+        np_memview = np_ndarray
+
+        for j from 0 <= j < self.__ncol:
+            for k from self.ind[j] <= k < self.ind[j+1]:
+                np_memview[self.row[k], j] = self.val[k]
+
+        return np_ndarray
 
     ####################################################################################################################
     # Multiplication
