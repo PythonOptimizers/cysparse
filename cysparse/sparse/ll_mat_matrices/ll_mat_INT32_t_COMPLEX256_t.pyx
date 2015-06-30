@@ -1785,34 +1785,42 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX256_t(MutableSparseMatrix_INT32_t_COMPL
     ####################################################################################################################
     # Multiplication
     ####################################################################################################################
-    def matvec(self, B):
+    def matvec(self, b):
         """
         Return :math:`A * b`.
         """
-        assert are_mixed_types_compatible(COMPLEX256_T, B.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(COMPLEX256_T)
-        return multiply_ll_mat_with_numpy_vector_INT32_t_COMPLEX256_t(self, B)
+        assert are_mixed_types_compatible(COMPLEX256_T, b.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(COMPLEX256_T)
+        return multiply_ll_mat_with_numpy_vector_INT32_t_COMPLEX256_t(self, b)
 
-    def matvec_transp(self, B):
+    def matvec2(self, b):
+        """ 
+        Return :math:`A * b`.
+
+        Test with memoryviews.
+        """
+        return multiply_ll_mat_with_numpy_vector2_INT32_t_COMPLEX256_t(self, b)
+
+    def matvec_transp(self, b):
         """
         Return :math:`A^t * b`.
         """
-        assert are_mixed_types_compatible(COMPLEX256_T, B.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(COMPLEX256_T)
-        return multiply_transposed_ll_mat_with_numpy_vector_INT32_t_COMPLEX256_t(self, B)
+        assert are_mixed_types_compatible(COMPLEX256_T, b.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(COMPLEX256_T)
+        return multiply_transposed_ll_mat_with_numpy_vector_INT32_t_COMPLEX256_t(self, b)
 
 
-    def matvec_htransp(self, B):
+    def matvec_htransp(self, b):
         """
         Return :math:`A^h * b`.
         """
-        assert are_mixed_types_compatible(COMPLEX256_T, B.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(COMPLEX256_T)
-        return multiply_conjugate_transposed_ll_mat_with_numpy_vector_INT32_t_COMPLEX256_t(self, B)
+        assert are_mixed_types_compatible(COMPLEX256_T, b.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(COMPLEX256_T)
+        return multiply_conjugate_transposed_ll_mat_with_numpy_vector_INT32_t_COMPLEX256_t(self, b)
 
-    def matvec_conj(self, B):
+    def matvec_conj(self, b):
         """
         Return :math:`conj(A) * b`.
         """
-        assert are_mixed_types_compatible(COMPLEX256_T, B.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(COMPLEX256_T)
-        return multiply__conjugate_ll_mat_with_numpy_vector_INT32_t_COMPLEX256_t(self, B)
+        assert are_mixed_types_compatible(COMPLEX256_T, b.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(COMPLEX256_T)
+        return multiply__conjugate_ll_mat_with_numpy_vector_INT32_t_COMPLEX256_t(self, b)
 
     def matdot(self, B):
         """

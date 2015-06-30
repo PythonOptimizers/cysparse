@@ -1721,19 +1721,27 @@ cdef class LLSparseMatrix_INT64_t_INT64_t(MutableSparseMatrix_INT64_t_INT64_t):
     ####################################################################################################################
     # Multiplication
     ####################################################################################################################
-    def matvec(self, B):
+    def matvec(self, b):
         """
         Return :math:`A * b`.
         """
-        assert are_mixed_types_compatible(INT64_T, B.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(INT64_T)
-        return multiply_ll_mat_with_numpy_vector_INT64_t_INT64_t(self, B)
+        assert are_mixed_types_compatible(INT64_T, b.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(INT64_T)
+        return multiply_ll_mat_with_numpy_vector_INT64_t_INT64_t(self, b)
 
-    def matvec_transp(self, B):
+    def matvec2(self, b):
+        """ 
+        Return :math:`A * b`.
+
+        Test with memoryviews.
+        """
+        return multiply_ll_mat_with_numpy_vector2_INT64_t_INT64_t(self, b)
+
+    def matvec_transp(self, b):
         """
         Return :math:`A^t * b`.
         """
-        assert are_mixed_types_compatible(INT64_T, B.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(INT64_T)
-        return multiply_transposed_ll_mat_with_numpy_vector_INT64_t_INT64_t(self, B)
+        assert are_mixed_types_compatible(INT64_T, b.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(INT64_T)
+        return multiply_transposed_ll_mat_with_numpy_vector_INT64_t_INT64_t(self, b)
 
 
     def matdot(self, B):

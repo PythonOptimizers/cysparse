@@ -1859,34 +1859,42 @@ YOU HAVE TO EXPLICITY CAST YOUR TYPE
     ####################################################################################################################
     # Multiplication
     ####################################################################################################################
-    def matvec(self, B):
+    def matvec(self, b):
         """
         Return :math:`A * b`.
         """
-        assert are_mixed_types_compatible(@type|type2enum@, B.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(@type|type2enum@)
-        return multiply_ll_mat_with_numpy_vector_@index@_@type@(self, B)
+        assert are_mixed_types_compatible(@type|type2enum@, b.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(@type|type2enum@)
+        return multiply_ll_mat_with_numpy_vector_@index@_@type@(self, b)
 
-    def matvec_transp(self, B):
+    def matvec2(self, b):
+        """ 
+        Return :math:`A * b`.
+
+        Test with memoryviews.
+        """
+        return multiply_ll_mat_with_numpy_vector2_@index@_@type@(self, b)
+
+    def matvec_transp(self, b):
         """
         Return :math:`A^t * b`.
         """
-        assert are_mixed_types_compatible(@type|type2enum@, B.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(@type|type2enum@)
-        return multiply_transposed_ll_mat_with_numpy_vector_@index@_@type@(self, B)
+        assert are_mixed_types_compatible(@type|type2enum@, b.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(@type|type2enum@)
+        return multiply_transposed_ll_mat_with_numpy_vector_@index@_@type@(self, b)
 
 {% if type in complex_list %}
-    def matvec_htransp(self, B):
+    def matvec_htransp(self, b):
         """
         Return :math:`A^h * b`.
         """
-        assert are_mixed_types_compatible(@type|type2enum@, B.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(@type|type2enum@)
-        return multiply_conjugate_transposed_ll_mat_with_numpy_vector_@index@_@type@(self, B)
+        assert are_mixed_types_compatible(@type|type2enum@, b.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(@type|type2enum@)
+        return multiply_conjugate_transposed_ll_mat_with_numpy_vector_@index@_@type@(self, b)
 
-    def matvec_conj(self, B):
+    def matvec_conj(self, b):
         """
         Return :math:`conj(A) * b`.
         """
-        assert are_mixed_types_compatible(@type|type2enum@, B.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(@type|type2enum@)
-        return multiply__conjugate_ll_mat_with_numpy_vector_@index@_@type@(self, B)
+        assert are_mixed_types_compatible(@type|type2enum@, b.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(@type|type2enum@)
+        return multiply__conjugate_ll_mat_with_numpy_vector_@index@_@type@(self, b)
 {% endif %}
     def matdot(self, B):
         """
