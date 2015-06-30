@@ -1793,11 +1793,12 @@ cdef class LLSparseMatrix_INT64_t_COMPLEX256_t(MutableSparseMatrix_INT64_t_COMPL
         return multiply_ll_mat_with_numpy_vector_INT64_t_COMPLEX256_t(self, b)
 
     def matvec2(self, b):
-        """ 
+        """
         Return :math:`A * b`.
 
         Test with memoryviews.
         """
+        # TODO: remove or adapt code
         return multiply_ll_mat_with_numpy_vector2_INT64_t_COMPLEX256_t(self, b)
 
     def matvec_transp(self, b):
@@ -1858,6 +1859,15 @@ cdef class LLSparseMatrix_INT64_t_COMPLEX256_t(MutableSparseMatrix_INT64_t_COMPL
             return multiply_transposed_ll_mat_with_numpy_ndarray_COMPLEX256_t(self, B)
         else:
             raise NotImplementedError("Multiplication with this kind of object not allowed")
+
+    def matdot_transp_self(self, d=None):
+        """
+        Return :math:`A^t * A` or :math:`A^t * d * A`.
+        """
+        if d is None:
+            return multiply_transposed_ll_mat_with_self(self)
+        else:
+            return multiply_transposed_ll_mat_with_self_scaled(self, d)
 
     def __mul__(self, B):
         """

@@ -232,6 +232,120 @@ cdef cnp.ndarray[cnp.npy_float128, ndim=2] multiply_ll_mat_with_numpy_ndarray_FL
 
     return C
 
+cdef LLSparseMatrix_INT32_t_FLOAT128_t multiply_transposed_ll_mat_with_self(LLSparseMatrix_INT32_t_FLOAT128_t A):
+    """
+    Multiply a :class:`LLSparseMatrix_INT32_t_FLOAT128_t` ``A`` with itself.
+
+    Args:
+        A: An :class:``LLSparseMatrix_INT32_t_FLOAT128_t`` ``A``.
+
+    Returns:
+        A **new** ``LLSparseMatrix_INT32_t_FLOAT128_t`` ``C = A^t * A``.
+
+    Raises:
+        ``IndexError`` if matrix dimension don't agree.
+        ``NotImplementedError``: When matrix ``A`` is symmetric.
+        ``RuntimeError`` if some error occurred during the computation.
+    """
+    if A.is_symmetric:
+        raise NotImplementedError('matdot_transp_self peration with symmetric matrices not supported')
+
+    cdef:
+        bint store_zeros = A.store_zeros
+        INT32_t size_hint = A.size_hint
+        LLSparseMatrix_INT32_t_FLOAT128_t C
+        INT32_t iA, iC, kA, kA2
+        FLOAT128_t valA
+
+    C = LLSparseMatrix_INT32_t_FLOAT128_t(control_object=unexposed_value, nrow=A.ncol, ncol=A.ncol, size_hint=size_hint, store_zeros=store_zeros, is_symmetric=True)
+
+    for iA from 0 <= iA < A.nrow:
+        kA = A.root[iA]
+        while kA != -1:
+            iC = A.col[kA]
+            valA = A.val[kA]
+
+            kA2 = A.root[iA]
+            while kA2 != -1:
+                if iC >= A.col[kA2]:
+                    update_ll_mat_item_add_INT32_t_FLOAT128_t(C, iC, A.col[kA2], valA * A.val[kA2])
+
+                kA2 = A.link[kA2]
+
+            kA = A.link[kA]
+
+    return C
+
+cdef LLSparseMatrix_INT32_t_FLOAT128_t multiply_transposed_ll_mat_with_self_scaled(LLSparseMatrix_INT32_t_FLOAT128_t A, cnp.ndarray[cnp.npy_float128, ndim=1] d):
+    """
+    Multiply a :class:`LLSparseMatrix_INT32_t_FLOAT128_t` ``A`` with itself and a scale vector.
+
+    Args:
+        A: An :class:``LLSparseMatrix_INT32_t_FLOAT128_t`` ``A``.
+        b: A :program:`NumPy` scaling vector.
+
+    Returns:
+        A **new** ``LLSparseMatrix_INT32_t_FLOAT128_t`` ``C = A^t * D * A`` where ``D=diag(d)``.
+
+    Raises:
+        ``IndexError`` if matrix dimension don't agree.
+        ``NotImplementedError``: When matrix ``A`` is symmetric.
+        ``RuntimeError`` if some error occurred during the computation.
+    """
+    if A.is_symmetric:
+        raise NotImplementedError('matdot_transp_self peration with symmetric matrices not supported')
+
+    cdef:
+        bint store_zeros = A.store_zeros
+        INT32_t size_hint = A.size_hint
+        LLSparseMatrix_INT32_t_FLOAT128_t C
+        INT32_t iA, iC, kA, kA2
+        FLOAT128_t valA
+
+    # direct access to vector d
+    cdef FLOAT128_t * d_data = <FLOAT128_t *> cnp.PyArray_DATA(d)
+
+    # stride if any
+    cdef:
+        size_t sd = sizeof(FLOAT128_t)
+        INT32_t incx = d.strides[0] / sd
+
+
+    C = LLSparseMatrix_INT32_t_FLOAT128_t(control_object=unexposed_value, nrow=A.ncol, ncol=A.ncol, size_hint=size_hint, store_zeros=store_zeros, is_symmetric=True)
+
+    if cnp.PyArray_ISCONTIGUOUS(d):
+        for iA from 0 <= iA < A.nrow:
+            kA = A.root[iA]
+            while kA != -1:
+                iC = A.col[kA]
+                valA = A.val[kA] * d_data[iA]
+
+                kA2 = A.root[iA]
+                while kA2 != -1:
+                    if iC >= A.col[kA2]:
+                        update_ll_mat_item_add_INT32_t_FLOAT128_t(C, iC, A.col[kA2], valA * A.val[kA2])
+
+                    kA2 = A.link[kA2]
+
+                kA = A.link[kA]
+
+    else:  #  d not C-contiguous
+        for iA from 0 <= iA < A.nrow:
+            kA = A.root[iA]
+            while kA != -1:
+                iC = A.col[kA]
+                valA = A.val[kA] * d_data[iA * incx]
+
+                kA2 = A.root[iA]
+                while kA2 != -1:
+                    if iC >= A.col[kA2]:
+                        update_ll_mat_item_add_INT32_t_FLOAT128_t(C, iC, A.col[kA2], valA * A.val[kA2])
+
+                    kA2 = A.link[kA2]
+
+                kA = A.link[kA]
+
+    return C
 
 ###################################################
 # Transposed LLSparseMatrix by a full NumPy matrix

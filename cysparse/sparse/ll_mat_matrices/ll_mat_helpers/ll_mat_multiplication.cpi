@@ -232,6 +232,120 @@ cdef cnp.ndarray[cnp.@type|cysparse_type_to_numpy_c_type@, ndim=2] multiply_ll_m
 
     return C
 
+cdef LLSparseMatrix_@index@_@type@ multiply_transposed_ll_mat_with_self(LLSparseMatrix_@index@_@type@ A):
+    """
+    Multiply a :class:`LLSparseMatrix_@index@_@type@` ``A`` with itself.
+
+    Args:
+        A: An :class:``LLSparseMatrix_@index@_@type@`` ``A``.
+
+    Returns:
+        A **new** ``LLSparseMatrix_@index@_@type@`` ``C = A^t * A``.
+
+    Raises:
+        ``IndexError`` if matrix dimension don't agree.
+        ``NotImplementedError``: When matrix ``A`` is symmetric.
+        ``RuntimeError`` if some error occurred during the computation.
+    """
+    if A.is_symmetric:
+        raise NotImplementedError('matdot_transp_self peration with symmetric matrices not supported')
+
+    cdef:
+        bint store_zeros = A.store_zeros
+        @index@ size_hint = A.size_hint
+        LLSparseMatrix_@index@_@type@ C
+        @index@ iA, iC, kA, kA2
+        @type@ valA
+
+    C = LLSparseMatrix_@index@_@type@(control_object=unexposed_value, nrow=A.ncol, ncol=A.ncol, size_hint=size_hint, store_zeros=store_zeros, is_symmetric=True)
+
+    for iA from 0 <= iA < A.nrow:
+        kA = A.root[iA]
+        while kA != -1:
+            iC = A.col[kA]
+            valA = A.val[kA]
+
+            kA2 = A.root[iA]
+            while kA2 != -1:
+                if iC >= A.col[kA2]:
+                    update_ll_mat_item_add_@index@_@type@(C, iC, A.col[kA2], valA * A.val[kA2])
+
+                kA2 = A.link[kA2]
+
+            kA = A.link[kA]
+
+    return C
+
+cdef LLSparseMatrix_@index@_@type@ multiply_transposed_ll_mat_with_self_scaled(LLSparseMatrix_@index@_@type@ A, cnp.ndarray[cnp.@type|cysparse_type_to_numpy_c_type@, ndim=1] d):
+    """
+    Multiply a :class:`LLSparseMatrix_@index@_@type@` ``A`` with itself and a scale vector.
+
+    Args:
+        A: An :class:``LLSparseMatrix_@index@_@type@`` ``A``.
+        b: A :program:`NumPy` scaling vector.
+
+    Returns:
+        A **new** ``LLSparseMatrix_@index@_@type@`` ``C = A^t * D * A`` where ``D=diag(d)``.
+
+    Raises:
+        ``IndexError`` if matrix dimension don't agree.
+        ``NotImplementedError``: When matrix ``A`` is symmetric.
+        ``RuntimeError`` if some error occurred during the computation.
+    """
+    if A.is_symmetric:
+        raise NotImplementedError('matdot_transp_self peration with symmetric matrices not supported')
+
+    cdef:
+        bint store_zeros = A.store_zeros
+        @index@ size_hint = A.size_hint
+        LLSparseMatrix_@index@_@type@ C
+        @index@ iA, iC, kA, kA2
+        @type@ valA
+
+    # direct access to vector d
+    cdef @type@ * d_data = <@type@ *> cnp.PyArray_DATA(d)
+
+    # stride if any
+    cdef:
+        size_t sd = sizeof(@type@)
+        @index@ incx = d.strides[0] / sd
+
+
+    C = LLSparseMatrix_@index@_@type@(control_object=unexposed_value, nrow=A.ncol, ncol=A.ncol, size_hint=size_hint, store_zeros=store_zeros, is_symmetric=True)
+
+    if cnp.PyArray_ISCONTIGUOUS(d):
+        for iA from 0 <= iA < A.nrow:
+            kA = A.root[iA]
+            while kA != -1:
+                iC = A.col[kA]
+                valA = A.val[kA] * d_data[iA]
+
+                kA2 = A.root[iA]
+                while kA2 != -1:
+                    if iC >= A.col[kA2]:
+                        update_ll_mat_item_add_@index@_@type@(C, iC, A.col[kA2], valA * A.val[kA2])
+
+                    kA2 = A.link[kA2]
+
+                kA = A.link[kA]
+
+    else:  #  d not C-contiguous
+        for iA from 0 <= iA < A.nrow:
+            kA = A.root[iA]
+            while kA != -1:
+                iC = A.col[kA]
+                valA = A.val[kA] * d_data[iA * incx]
+
+                kA2 = A.root[iA]
+                while kA2 != -1:
+                    if iC >= A.col[kA2]:
+                        update_ll_mat_item_add_@index@_@type@(C, iC, A.col[kA2], valA * A.val[kA2])
+
+                    kA2 = A.link[kA2]
+
+                kA = A.link[kA]
+
+    return C
 
 ###################################################
 # Transposed LLSparseMatrix by a full NumPy matrix
