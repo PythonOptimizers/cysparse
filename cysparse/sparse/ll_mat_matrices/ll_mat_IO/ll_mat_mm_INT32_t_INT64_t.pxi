@@ -147,8 +147,10 @@ cdef LLSparseMatrix_INT32_t_INT64_t MakeLLSparseMatrixFromMMFile2_INT32_t_INT64_
         list storage_scheme_list = [MM_GENERAL_STR, MM_SYMM_STR, MM_HERM_STR, MM_SKEW_STR]
         dict storage_scheme_dict = {MM_GENERAL_STR : MM_GENERAL, MM_SYMM_STR : MM_SYMMETRIC, MM_HERM_STR : MM_HERMITIAN, MM_SKEW_STR : MM_SKEW}
 
+
         COMPLEX128_t z, w
         FLOAT64_t real_part, imag_part
+
 
     cdef LLSparseMatrix_INT32_t_INT64_t A
 

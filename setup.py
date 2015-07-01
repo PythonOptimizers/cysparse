@@ -79,7 +79,8 @@ include_dirs = [numpy_include, '.']
 
 ext_params = {}
 ext_params['include_dirs'] = include_dirs
-ext_params['extra_compile_args'] = ["-O2", '-std=c99']
+# -Wno-unused-function is potentially dangerous... use with care!
+ext_params['extra_compile_args'] = ["-O2", '-std=c99', '-Wno-unused-function']
 ext_params['extra_link_args'] = []
 
 

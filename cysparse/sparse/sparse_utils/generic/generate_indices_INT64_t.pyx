@@ -14,6 +14,7 @@ Indices can be given in **any** order or **repeated**.
 
 Numpy arrays can be strided or not.
 """
+#defining NPY_NO_DEPRECATED_API NPY_1_7_API_VERSION
 
 from cysparse.types.cysparse_types cimport *
 from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
@@ -107,7 +108,6 @@ cdef INT64_t * create_c_array_indices_from_python_object_INT64_t(INT64_t max_len
         # test if index is valid
         if not (0 <= i < max_length):
             raise IndexError("Index %d out of bounds [%d, %d[" % (i, 0, max_length))
-            return NULL
 
         length = 1
         indices = <INT64_t *> PyMem_Malloc(length * sizeof(INT64_t))
@@ -149,7 +149,6 @@ cdef INT64_t * create_c_array_indices_from_python_object_INT64_t(INT64_t max_len
                 # test if index is valid
                 if not (0 <= index < max_length):
                     raise IndexError("Index %d out of bounds [%d, %d[" % (<long>index, 0, max_length))
-                    return NULL
                 indices[i] = <INT64_t> index
             else:
                 PyMem_Free(indices)
@@ -183,7 +182,6 @@ cdef INT64_t * create_c_array_indices_from_python_object_INT64_t(INT64_t max_len
             index = <INT64_t> array_data[i]
             if not (0 <= index < max_length):
                 raise IndexError("Index %d out of bounds [%d, %d[" % (index, 0, max_length))
-                return NULL
             indices[i] = array_data[i]
 
     else:

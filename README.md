@@ -12,12 +12,12 @@ This is the multi-types version (last single type version: ce86f8476166f63d0af72
    Note to myself: **never** **ever** use automatic refactoring tools again... (they probably work great with a given code but **not** with
    my own source format...).
 
-2. CySparse will **probably (?)** need to be **completely** rewritten: Cython memoryviews seem to be 20+% faster than the old NumPy C-API used in CySparse
-   if used properly. No stable version of CySparse in sight before **end July 2015**. The transition will be done piece by piece and is **not** my priority
-   for the moment. I'll do some benchmarking to assess this process.
+2. Cython memoryviews don't seem to be faster in our case. This should be assessed in the optimization phase. For the moment, I'll continue
+   to code with NumPy's C-API. This is **not** the way Cython is intended by my tests indicate that this produces the fastest code. To be continued.
 
-   **Update**: Hm, maybe for I don't know what reason, this speed up doesn't work with CySparse. After some tests, memory views where still slower...
-   see [#126](https://github.com/Funartech/cysparse/issues/126).
+   Sorry for the fuzz.
+
+   Stable version in sight: 15th of July.
 
 ## Want to follow the implementation of CySparse?
 

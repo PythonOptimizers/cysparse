@@ -345,7 +345,9 @@ cdef class CSRSparseMatrix_@index@_@type@(ImmutableSparseMatrix_@index@_@type@):
             cnp.ndarray[cnp.@index|cysparse_type_to_numpy_c_type@, ndim=1] a_col = cnp.PyArray_SimpleNew( 1, dmat, cnp.@index|cysparse_type_to_numpy_enum_type@)
             cnp.ndarray[cnp.@type|cysparse_type_to_numpy_c_type@, ndim=1] a_val = cnp.PyArray_SimpleNew( 1, dmat, cnp.@type|cysparse_type_to_numpy_enum_type@)
 
-            @index@   *pi, *pj   # Intermediate pointers to matrix data
+            # Intermediate pointers to matrix data
+            @index@   *pi
+            @index@   *pj
             @type@    *pv
             @index@   i, k, elem
 

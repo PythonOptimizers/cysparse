@@ -103,8 +103,8 @@ cdef extern from 'math.h':
     float sqrtf (float x)
     long double sqrtl (long double x)
 
-cdef extern from "stdlib.h":
-    void *memcpy(void *dst, void *src, long n)
+#cdef extern from "stdlib.h":
+#    void *memcpy(void *dst, void *src, long n)
 
 ########################################################################################################################
 # CySparse cimport/import to avoid circular dependencies
@@ -369,21 +369,21 @@ cdef class LLSparseMatrix_INT64_t_FLOAT32_t(MutableSparseMatrix_INT64_t_FLOAT32_
 
         raise NotImplementedError('Not yet implemented')
 
-        cdef:
-            Py_ssize_t B_list_length, i_list
+        #cdef:
+        #    Py_ssize_t B_list_length, i_list
 
-        if PyList_Check(<PyObject *>B):
-            B_list_length = PyList_Size(<PyObject *>B)
+        #if PyList_Check(<PyObject *>B):
+        #    B_list_length = PyList_Size(<PyObject *>B)
 
-            for i_list from 0 <= i_list < B_list_length:
-                pass
+        #    for i_list from 0 <= i_list < B_list_length:
+        #        pass
 
 
 
-        elif cnp.PyArray_Check(B):
-            pass
-        else:
-            raise NotImplementedError('Argument must be a list or a NumPy array with indices of rows to delete')
+        #elif cnp.PyArray_Check(B):
+        #    pass
+        #else:
+        #    raise NotImplementedError('Argument must be a list or a NumPy array with indices of rows to delete')
 
     def delete_rows_with_mask(self, cnp.ndarray[dtype=cnp.npy_int8, ndim=1] maskArray):
         """
@@ -690,15 +690,15 @@ cdef class LLSparseMatrix_INT64_t_FLOAT32_t(MutableSparseMatrix_INT64_t_FLOAT32_
     # TODO: to be done
     cdef create_submatrix(self, PyObject* obj1, PyObject* obj2):
         raise NotImplementedError("Not implemented yet...")
-        cdef:
-            INT64_t nrow
-            INT64_t * row_indices,
-            INT64_t ncol
-            INT64_t * col_indices
-            INT64_t i, j
+    #    cdef:
+    #        INT64_t nrow
+    #        INT64_t * row_indices,
+    #        INT64_t ncol
+    #        INT64_t * col_indices
+    #        INT64_t i, j
 
-        row_indices = create_c_array_indices_from_python_object_INT64_t(self.__nrow, obj1, &nrow)
-        col_indices = create_c_array_indices_from_python_object_INT64_t(self.__ncol, obj2, &ncol)
+    #    row_indices = create_c_array_indices_from_python_object_INT64_t(self.__nrow, obj1, &nrow)
+    #    col_indices = create_c_array_indices_from_python_object_INT64_t(self.__ncol, obj2, &ncol)
 
     def to_ndarray(self):
         """
@@ -812,23 +812,40 @@ cdef class LLSparseMatrix_INT64_t_FLOAT32_t(MutableSparseMatrix_INT64_t_FLOAT32_
 
         nnz = 0
 
-        if self.is_symmetric:
-            raise NotImplementedError('Operation not yet implemented')
-            
         # NON OPTIMIZED CODE (VERY SLOW CODE: O(nnz * nrow * ncol) )
 
-        for i from 0 <= i < self.__nrow:
-            k = self.root[i]
-            while k != -1:
-                j = self.col[k]
+        if self.is_symmetric:
+            for i from 0 <= i < self.__nrow:
+                k = self.root[i]
+                while k != -1:
+                    j = self.col[k]
 
-                # count how many times this element is present in the indices
-                for i_index from 0<= i_index < row_indices_length:
-                    if i == i_index:
-                        for j_index from 0 <= j_index < col_indices_length:
-                            if j_index == j:  # we have a match
-                                nnz += 1
-                k = self.link[k]
+                    # count how many times this element is present in the indices
+                    for i_index from 0<= i_index < row_indices_length:
+                        if i == i_index:
+                            for j_index from 0 <= j_index < col_indices_length:
+                                if j == j_index:  # we have a match
+                                    nnz += 1
+                        elif j == i_index:
+                            for j_index from 0 <= j_index < col_indices_length:
+                                if i == j_index:  # we have a match
+                                    nnz += 1
+                    k = self.link[k]
+
+
+        else:   # non symmetric
+            for i from 0 <= i < self.__nrow:
+                k = self.root[i]
+                while k != -1:
+                    j = self.col[k]
+
+                    # count how many times this element is present in the indices
+                    for i_index from 0<= i_index < row_indices_length:
+                        if i == i_index:
+                            for j_index from 0 <= j_index < col_indices_length:
+                                if j == j_index:  # we have a match
+                                    nnz += 1
+                    k = self.link[k]
 
         return nnz
 
@@ -919,7 +936,6 @@ cdef class LLSparseMatrix_INT64_t_FLOAT32_t(MutableSparseMatrix_INT64_t_FLOAT32_
 
                 self.__nnz -= 1
 
-
     cdef int safe_put(self, INT64_t i, INT64_t j, FLOAT32_t value)  except -1:
         """
         Set ``A[i, j] = value`` directly.
@@ -931,7 +947,6 @@ cdef class LLSparseMatrix_INT64_t_FLOAT32_t(MutableSparseMatrix_INT64_t_FLOAT32_
 
         if i < 0 or i >= self.__nrow or j < 0 or j >= self.__ncol:
             raise IndexError('Indices out of range')
-            return -1
 
         self.put(i, j, value)
 
@@ -1389,7 +1404,7 @@ cdef class LLSparseMatrix_INT64_t_FLOAT32_t(MutableSparseMatrix_INT64_t_FLOAT32_
             else:  # non contiguous array
                 # fill vector
                 for i_array from 0 <= i_array < id1_array_length:
-                    b_data[i_list*incx] = self.safe_at(id1_data[i_array], id2_data[i_array])
+                    b_data[i_array*incx] = self.safe_at(id1_data[i_array], id2_data[i_array])
 
         else:
             raise TypeError('Both arguments with indices must be of the same type (lists or NumPy arrays)')
@@ -1506,8 +1521,11 @@ cdef class LLSparseMatrix_INT64_t_FLOAT32_t(MutableSparseMatrix_INT64_t_FLOAT32_
             cnp.ndarray[cnp.npy_int64, ndim=1] a_col = cnp.PyArray_SimpleNew( 1, dmat, cnp.NPY_INT64)
             cnp.ndarray[cnp.npy_float32, ndim=1] a_val = cnp.PyArray_SimpleNew( 1, dmat, cnp.NPY_FLOAT32)
 
-            INT64_t   *pi, *pj   # Intermediate pointers to matrix data
+            # Intermediate pointers to matrix data
+            INT64_t   *pi
+            INT64_t   *pj
             FLOAT32_t    *pv
+
             INT64_t   i, k, elem
 
         pi = <INT64_t *> cnp.PyArray_DATA(a_row)

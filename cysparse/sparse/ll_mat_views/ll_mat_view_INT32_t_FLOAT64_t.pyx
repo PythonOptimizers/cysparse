@@ -14,7 +14,7 @@ from cysparse.sparse.sparse_utils.generic.generate_indices_INT32_t cimport creat
 
 from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
 from cpython cimport PyObject
-from python_ref cimport Py_INCREF, Py_DECREF
+from cpython cimport Py_INCREF, Py_DECREF
 
 cimport numpy as cnp
 cnp.import_array()
@@ -83,7 +83,6 @@ cdef class LLSparseMatrixView_INT32_t_FLOAT64_t:
         """
         if i < 0 or i >= self.nrow or j < 0 or j >= self.ncol:
             raise IndexError('Indices out of range')
-            return -1
 
         self.put(i, j, value)
         return 1
@@ -116,8 +115,6 @@ cdef class LLSparseMatrixView_INT32_t_FLOAT64_t:
         """
         if not 0 <= i < self.nrow or not 0 <= j < self.ncol:
             raise IndexError("Index out of bounds")
-
-            return 1
 
 
         return self.at(i, j)

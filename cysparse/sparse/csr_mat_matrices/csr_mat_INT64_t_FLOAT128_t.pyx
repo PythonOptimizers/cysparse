@@ -342,7 +342,9 @@ cdef class CSRSparseMatrix_INT64_t_FLOAT128_t(ImmutableSparseMatrix_INT64_t_FLOA
             cnp.ndarray[cnp.npy_int64, ndim=1] a_col = cnp.PyArray_SimpleNew( 1, dmat, cnp.NPY_INT64)
             cnp.ndarray[cnp.npy_float128, ndim=1] a_val = cnp.PyArray_SimpleNew( 1, dmat, cnp.NPY_FLOAT128)
 
-            INT64_t   *pi, *pj   # Intermediate pointers to matrix data
+            # Intermediate pointers to matrix data
+            INT64_t   *pi
+            INT64_t   *pj
             FLOAT128_t    *pv
             INT64_t   i, k, elem
 

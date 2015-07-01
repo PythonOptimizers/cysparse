@@ -6,7 +6,6 @@ import sys
 
 l1 = NewLinearFillLLSparseMatrix(nrow=10, ncol=10, size_hint=40)
 print l1
-print type(l1)             # lots of classes are used internally...
 
 
 
@@ -17,3 +16,16 @@ A = l1[1:5, [2, 2, 2, 3]]
 print A
 
 print A.nnz
+
+########################################################################################################################
+print "*" * 80
+l2 = NewLinearFillLLSparseMatrix(nrow=10, ncol=10, size_hint=40, is_symmetric=True)
+print l2
+
+
+
+l2.print_to(sys.stdout)
+
+B = l1[1:5, [2, 2, 3]]
+
+print B.nnz

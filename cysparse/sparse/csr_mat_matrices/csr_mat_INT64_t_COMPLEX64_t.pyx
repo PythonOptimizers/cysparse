@@ -343,7 +343,9 @@ cdef class CSRSparseMatrix_INT64_t_COMPLEX64_t(ImmutableSparseMatrix_INT64_t_COM
             cnp.ndarray[cnp.npy_int64, ndim=1] a_col = cnp.PyArray_SimpleNew( 1, dmat, cnp.NPY_INT64)
             cnp.ndarray[cnp.npy_complex64, ndim=1] a_val = cnp.PyArray_SimpleNew( 1, dmat, cnp.NPY_COMPLEX64)
 
-            INT64_t   *pi, *pj   # Intermediate pointers to matrix data
+            # Intermediate pointers to matrix data
+            INT64_t   *pi
+            INT64_t   *pj
             COMPLEX64_t    *pv
             INT64_t   i, k, elem
 
