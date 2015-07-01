@@ -26,10 +26,6 @@ cdef class LLSparseMatrixView_@index@_@type@:
         bint __is_symmetric
         bint __store_zeros
 
-        object nnz   # number of non zeros elements of the collected view
-        bint __counted_nnz  # did we already count the number of nnz?
-        @index@ _nnz     # number of non zeros
-
     ####################################################################################################################
     # SET/GET
     ####################################################################################################################

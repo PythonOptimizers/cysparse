@@ -26,10 +26,6 @@ cdef class LLSparseMatrixView_INT64_t_COMPLEX128_t:
         bint __is_symmetric
         bint __store_zeros
 
-        object nnz   # number of non zeros elements of the collected view
-        bint __counted_nnz  # did we already count the number of nnz?
-        INT64_t _nnz     # number of non zeros
-
     ####################################################################################################################
     # SET/GET
     ####################################################################################################################

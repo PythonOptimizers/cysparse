@@ -42,7 +42,7 @@ cdef class LLSparseMatrix_@index@_@type@(MutableSparseMatrix_@index@_@type@):
     ####################################################################################################################
     # COUNTING ELEMENTS
     ####################################################################################################################
-    cdef count_nnz_from_indices(self, @index@ * row_indices,@index@ row_indices_length, @index@ * col_indices, @index@ col_indices_length)
+    cdef @index@ count_nnz_from_indices(self, @index@ * row_indices,@index@ row_indices_length, @index@ * col_indices, @index@ col_indices_length)
 
     ####################################################################################################################
     # SET/GET

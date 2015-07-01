@@ -796,7 +796,7 @@ cdef class LLSparseMatrix_INT64_t_INT64_t(MutableSparseMatrix_INT64_t_INT64_t):
     # COUNTING ELEMENTS
     ####################################################################################################################
     # TODO: to be done
-    cdef count_nnz_from_indices(self, INT64_t * row_indices,INT64_t row_indices_length, INT64_t * col_indices, INT64_t col_indices_length):
+    cdef INT64_t count_nnz_from_indices(self, INT64_t * row_indices,INT64_t row_indices_length, INT64_t * col_indices, INT64_t col_indices_length):
         """
         Counts the nnz specified by row and column indices.
 
@@ -806,7 +806,31 @@ cdef class LLSparseMatrix_INT64_t_INT64_t(MutableSparseMatrix_INT64_t_INT64_t):
         Warning:
             This method is costly, use with care.
         """
-        raise NotImplementedError("Not implemented yet...")
+        cdef:
+            INT64_t i, j, i_index, j_index, k
+            INT64_t nnz
+
+        nnz = 0
+
+        if self.is_symmetric:
+            raise NotImplementedError('Operation not yet implemented')
+            
+        # NON OPTIMIZED CODE (VERY SLOW CODE: O(nnz * nrow * ncol) )
+
+        for i from 0 <= i < self.__nrow:
+            k = self.root[i]
+            while k != -1:
+                j = self.col[k]
+
+                # count how many times this element is present in the indices
+                for i_index from 0<= i_index < row_indices_length:
+                    if i == i_index:
+                        for j_index from 0 <= j_index < col_indices_length:
+                            if j_index == j:  # we have a match
+                                nnz += 1
+                k = self.link[k]
+
+        return nnz
 
     ####################################################################################################################
     # Set/Get individual elements

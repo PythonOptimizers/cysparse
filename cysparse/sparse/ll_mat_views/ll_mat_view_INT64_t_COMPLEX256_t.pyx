@@ -26,6 +26,9 @@ cdef extern from "Python.h":
     int PyInt_Check(PyObject *o)
 
 cdef class LLSparseMatrixView_INT64_t_COMPLEX256_t:
+    ####################################################################################################################
+    # Init/Free/Memory
+    ####################################################################################################################
     def __cinit__(self,control_object, LLSparseMatrix_INT64_t_COMPLEX256_t A, INT64_t nrow, INT64_t ncol):
         assert control_object == unexposed_value, "LLSparseMatrixView must be instantiated with a factory method"
         self.nrow = nrow  # number of rows of the view
@@ -42,8 +45,19 @@ cdef class LLSparseMatrixView_INT64_t_COMPLEX256_t:
         self.__is_symmetric = A.is_symmetric
         self.__store_zeros = A.store_zeros
 
-        self.__counted_nnz = False
-        self._nnz = 0
+
+    
+    @property
+    def nnz(self):
+        """
+        Return the number of non zeros inside the view.
+
+        Warning:
+            This property is costly.
+        """
+        # Because views must **always** be up to date with the original matrix, we cannot rely on cached results.
+        # We could use a cache in LLSparseMatrix but is it worth it?
+        return self.A.count_nnz_from_indices(self.row_indices, self.nrow, self.col_indices, self.ncol)
 
 
     def __dealloc__(self):
@@ -212,8 +226,6 @@ cdef class LLSparseMatrixView_INT64_t_COMPLEX256_t:
         view.col_indices = col_indices
 
         view.is_empty = self.is_empty
-        view.__counted_nnz = self.__counted_nnz
-        view._nnz = self._nnz
 
         return view
 
