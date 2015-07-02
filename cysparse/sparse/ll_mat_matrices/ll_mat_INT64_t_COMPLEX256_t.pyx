@@ -2231,6 +2231,7 @@ cdef class LLSparseMatrix_INT64_t_COMPLEX256_t(MutableSparseMatrix_INT64_t_COMPL
             COMPLEX256_t v
             FLOAT64_t exp
 
+        # EXPLICIT TYPE TESTS
         k = self.root[i]
         while k != -1:
             next_col = self.col[k]

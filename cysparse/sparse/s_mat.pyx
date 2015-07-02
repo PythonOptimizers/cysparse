@@ -277,3 +277,66 @@ cdef class SparseMatrix:
 
         """
         raise NotImplementedError("Operation not implemented (yet). Please report.")
+
+
+
+
+cdef MakeMatrixString(SparseMatrix A, char mode='M', full=False):
+    """
+    Return a print of the :class:`SparseMatrix` object.
+
+    Args:
+        A: :class:`SparseMatrix` object to print.
+        mode: Can be `M`, `T`, `H` or `C`:
+            - `M`: `M`atrix mode: the object itself.
+            - `T`: `T`ransposed mode: the transposed object.
+            - `H`: `H`ermitian mode: the transpose conjugated object.
+            - `C`: `C`onjugated mode: the conjugated object.
+        full: If ``True`` overwrite settings and print the **full** matrix.
+
+    Note:
+        This is the **only** function to print :class:`SparseMatrix` objects.
+
+    """
+    cdef:
+        Py_ssize_t MAX_MATRIX_HEIGHT = 11
+        Py_ssize_t MAX_MATRIX_WIDTH = 11
+        Py_ssize_t cell_width = 10
+
+        Py_ssize_t max_height, max_width, i, j, frontier
+
+    s = ''
+
+    if mode == 'M':
+        if not full and (A.nrow > MAX_MATRIX_HEIGHT or A.ncol > MAX_MATRIX_WIDTH):
+            max_height = min(A.nrow, MAX_MATRIX_HEIGHT)
+            max_width  = min(A.ncol, MAX_MATRIX_WIDTH)
+
+            for i from 0 <= i < max_height:
+                frontier = max_width - i
+                for j from 0 <= j < max_width:
+                    if j < frontier:
+                        s += "%s " % A.at_to_string(i, j)
+                    elif j == frontier:
+                        s += " " * cell_width
+                    else:
+                        s += "%s " % A.at_to_string(A.nrow - max_height + i, A.ncol - max_width + j)
+                s += '\n'
+            s += '\n'
+        else:
+            for i from 0 <= i < A.nrow:
+                for j from 0 <= j < A.ncol:
+                    s += "%s " % A.at_to_string(i, j)
+                s += '\n'
+            s += '\n'
+
+    elif mode == 'T':
+        pass
+    elif mode == 'H':
+        pass
+    elif mode == 'C':
+        pass
+    else:
+        raise TypeError("Mode '%s' not recognized" % mode)
+
+    return s

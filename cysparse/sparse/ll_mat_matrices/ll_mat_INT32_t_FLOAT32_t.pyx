@@ -2153,6 +2153,7 @@ cdef class LLSparseMatrix_INT32_t_FLOAT32_t(MutableSparseMatrix_INT32_t_FLOAT32_
             FLOAT32_t v
             FLOAT64_t exp
 
+        # EXPLICIT TYPE TESTS
         k = self.root[i]
         while k != -1:
             next_col = self.col[k]

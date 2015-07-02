@@ -4,7 +4,7 @@ import numpy as np
 
 import sys
 
-l1 = NewLinearFillLLSparseMatrix(nrow=10, ncol=10, size_hint=40, dtype=types.COMPLEX64_T, store_zeros=True)
+l1 = NewLinearFillLLSparseMatrix(nrow=10, ncol=10, size_hint=40, dtype=types.COMPLEX256_T, store_zeros=True)
 l1.clear_submatrix(1,3, 4,6)
 print l1
 
