@@ -102,6 +102,7 @@ cdef extern from 'math.h':
     double sqrt (double x)
     float sqrtf (float x)
     long double sqrtl (long double x)
+    double log  (double x)
 
 #cdef extern from "stdlib.h":
 #    void *memcpy(void *dst, void *src, long n)
@@ -2143,6 +2144,50 @@ cdef class LLSparseMatrix_INT32_t_FLOAT128_t(MutableSparseMatrix_INT32_t_FLOAT12
     ####################################################################################################################
     # String representations
     ####################################################################################################################
+    def at_to_string(self, INT32_t i, INT32_t j, INT32_t cell_width=10):
+        """
+        Return a string with a given element if it exists or an "empty" string.
+
+
+        """
+        cdef:
+            INT32_t k, next_col
+            FLOAT128_t v
+            FLOAT64_t exp
+
+        k = self.root[i]
+        while k != -1:
+            next_col = self.col[k]
+            if next_col >= j:
+                if next_col == j:
+                    v = self.val[k]
+
+                    exp = log(fabsl(self.val[k]))
+
+                    if abs(exp) <= 4:
+                        if exp < 0:
+
+                            return ("%9.6f" % v).ljust(cell_width)
+
+
+                        else:
+
+                            return ("%9.*f" % (6,v)).ljust(cell_width)
+
+
+                    else:
+
+                        return ("%9.2e" % v).ljust(cell_width)
+
+
+                else:  # value not found
+                    break
+
+            k = self.link[k]
+
+        return "---".center(cell_width)
+
+
     def print_to(self, OUT, width=9, print_big_matrices=False, transposed=False):
         """
         Print content of matrix to output stream.
@@ -2199,3 +2244,4 @@ cdef class LLSparseMatrix_INT32_t_FLOAT128_t(MutableSparseMatrix_INT32_t_FLOAT12
 
         else:
             print('Matrix too big to print out', file=OUT)
+

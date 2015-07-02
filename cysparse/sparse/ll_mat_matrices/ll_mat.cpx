@@ -102,6 +102,7 @@ cdef extern from 'math.h':
     double sqrt (double x)
     float sqrtf (float x)
     long double sqrtl (long double x)
+    double log  (double x)
 
 #cdef extern from "stdlib.h":
 #    void *memcpy(void *dst, void *src, long n)
@@ -2391,6 +2392,85 @@ YOU HAVE TO CAST YOUR NEW TYPE HERE
     ####################################################################################################################
     # String representations
     ####################################################################################################################
+    def at_to_string(self, @index@ i, @index@ j, @index@ cell_width=10):
+        """
+        Return a string with a given element if it exists or an "empty" string.
+
+
+        """
+        cdef:
+            @index@ k, next_col
+            @type@ v
+            FLOAT64_t exp
+
+        # EXPLICIT TYPE TESTS
+        k = self.root[i]
+        while k != -1:
+            next_col = self.col[k]
+            if next_col >= j:
+                if next_col == j:
+                    v = self.val[k]
+{% if type in integer_list %}
+                    exp = log(fabs(<FLOAT64_t> self.val[k]))
+{% elif type == 'FLOAT32_t' %}
+                    exp = log(fabsf(self.val[k]))
+{% elif type == 'FLOAT64_t' %}
+                    exp = log(fabs(self.val[k]))
+{% elif type == 'FLOAT128_t' %}
+                    exp = log(fabsl(self.val[k]))
+{% elif type == 'COMPLEX64_t' %}
+                    exp = log(cabsf(self.val[k]))
+{% elif type == 'COMPLEX128_t' %}
+                    exp = log(cabs(self.val[k]))
+{% elif type == 'COMPLEX256_t' %}
+                    exp = log(cabsl(self.val[k]))
+{% else %}
+YOU HAVE TO CAST YOUR NEW TYPE HERE
+{% endif %}
+                    if abs(exp) <= 4:
+                        if exp < 0:
+{% if type == 'COMPLEX64_t' %}
+                            return ("%9.6f" % crealf(v)).ljust(cell_width) + '+' + ("%9.6fj" % cimagf(v)).ljust(cell_width)
+{% elif type == 'COMPLEX128_t' %}
+                            return ("%9.6f" % creal(v)).ljust(cell_width) + '+' + ("%9.6fj" % cimag(v)).ljust(cell_width)
+{% elif type == 'COMPLEX256_t' %}
+                            return ("%9.6f" % creall(v)).ljust(cell_width) + '+' + ("%9.6fj" % cimagl(v)).ljust(cell_width)
+{% else %}
+                            return ("%9.6f" % v).ljust(cell_width)
+{% endif %}
+
+                        else:
+{% if type == 'COMPLEX64_t' %}
+                            return ("%9.*f" % (6,crealf(v))).ljust(cell_width) + '+' + ("%9.*fj" % (6,cimagf(v))).ljust(cell_width)
+{% elif type == 'COMPLEX128_t' %}
+                            return ("%9.*f" % (6,creal(v))).ljust(cell_width) + '+' + ("%9.*fj" % (6,cimag(v))).ljust(cell_width)
+{% elif type == 'COMPLEX256_t' %}
+                            return ("%9.*f" % (6,creall(v))).ljust(cell_width) + '+' + ("%9.*fj" % (6,cimagl(v))).ljust(cell_width)
+{% else %}
+                            return ("%9.*f" % (6,v)).ljust(cell_width)
+{% endif %}
+
+                    else:
+{% if type == 'COMPLEX64_t' %}
+                        return ("%9.2e" % crealf(v)).ljust(cell_width) + '+' + ("%9.2ej" % cimagf(v)).ljust(cell_width)
+{% elif type == 'COMPLEX128_t' %}
+                        return ("%9.2e" % creal(v)).ljust(cell_width) + '+' + ("%9.2ej" % cimag(v)).ljust(cell_width)
+{% elif type == 'COMPLEX256_t' %}
+                        return ("%9.2e" % creall(v)).ljust(cell_width) + '+' + ("%9.2ej" % cimagl(v)).ljust(cell_width)
+{% else %}
+                        return ("%9.2e" % v).ljust(cell_width)
+{% endif %}
+
+                else:  # value not found
+                    break
+
+            k = self.link[k]
+{% if type in complex_list %}
+        return "---".center(cell_width) + ' ' + "---".center(cell_width)
+{% else %}
+        return "---".center(cell_width)
+{% endif %}
+
     def print_to(self, OUT, width=9, print_big_matrices=False, transposed=False):
         """
         Print content of matrix to output stream.
@@ -2453,4 +2533,5 @@ YOU HAVE TO CAST YOUR NEW TYPE HERE
 
         else:
             print('Matrix too big to print out', file=OUT)
+
 

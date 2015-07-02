@@ -4,10 +4,26 @@ import numpy as np
 
 import sys
 
-l1 = NewLinearFillLLSparseMatrix(nrow=10, ncol=10, size_hint=40)
+l1 = NewLinearFillLLSparseMatrix(nrow=10, ncol=10, size_hint=40, dtype=types.COMPLEX64_T, store_zeros=True)
+l1.clear_submatrix(1,3, 4,6)
 print l1
 
+l1[0, 0] = 9999999999999999996788989
 
+l1[0, 1] = 0
+
+#print l1.at_to_string(0, 0)
+#print l1.at_to_string(10, 10)
+#print l1.at_to_string(9, 9)
+#print l1.at_to_string(2,6)
+
+print "8" * 80
+
+for i in xrange(10):
+    for j in xrange(10):
+        print l1.at_to_string(i, j), ' ',
+
+    print
 
 l1.print_to(sys.stdout)
 

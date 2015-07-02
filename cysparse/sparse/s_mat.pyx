@@ -249,7 +249,6 @@ cdef class SparseMatrix:
 
         raise NotImplementedError("Operation not implemented (yet). Please report.")
 
-
     #########################
     # Internal arrays
     #########################
@@ -265,3 +264,16 @@ cdef class SparseMatrix:
         Return :program:`NumPy` arrays equivalent to internal C-arrays.
         """
         raise NotImplementedError("Operation not allowed or not implemented.")
+
+    #########################
+    # Printing
+    #########################
+    def to_string(self, mode='M', implicit_zero = ' ', cell_width=11, number_width=9, precision=6,  **kwargs):
+        """
+        Return a string representing the **content** of matrix.
+
+        Args:
+            kwargs: Arguments are named.
+
+        """
+        raise NotImplementedError("Operation not implemented (yet). Please report.")
