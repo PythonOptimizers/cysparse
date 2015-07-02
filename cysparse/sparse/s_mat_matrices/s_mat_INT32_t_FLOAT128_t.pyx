@@ -1,5 +1,5 @@
 from cysparse.types.cysparse_types cimport *
-from cysparse.sparse.s_mat cimport SparseMatrix, unexposed_value, MUTABLE_SPARSE_MAT_DEFAULT_SIZE_HINT
+from cysparse.sparse.s_mat cimport SparseMatrix, unexposed_value, MUTABLE_SPARSE_MAT_DEFAULT_SIZE_HINT, MakeMatrixString
 
 from cysparse.sparse.sparse_proxies.t_mat cimport TransposedSparseMatrix
 
@@ -280,8 +280,25 @@ cdef class SparseMatrix_INT32_t_FLOAT128_t(SparseMatrix):
         return s
 
     def __repr__(self):
+        """
+        Return an unique representation of the :class:`SparseMatrix` object.
+
+        """
         s = "%s %s" % (self.__type_name, self.attributes_long_string())
         return s
+
+    def __str__(self):
+        """
+        Return a string to print the :class:`SparseMatrix` object to screen.
+
+        """
+        s = self._matrix_description_before_printing()
+        s += '\n'
+        s += MakeMatrixString(self)
+
+        return s
+
+
 
 ########################################################################################################################
 # BASE MUTABLE MATRIX CLASS

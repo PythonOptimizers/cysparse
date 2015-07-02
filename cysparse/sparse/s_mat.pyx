@@ -306,6 +306,7 @@ cdef MakeMatrixString(SparseMatrix A, char mode='M', full=False):
         Py_ssize_t max_height, max_width, i, j, frontier
 
     s = ''
+    empty_cell = " " * (cell_width + 1)
 
     if mode == 'M':
         if not full and (A.nrow > MAX_MATRIX_HEIGHT or A.ncol > MAX_MATRIX_WIDTH):
@@ -318,7 +319,7 @@ cdef MakeMatrixString(SparseMatrix A, char mode='M', full=False):
                     if j < frontier:
                         s += "%s " % A.at_to_string(i, j)
                     elif j == frontier:
-                        s += " " * cell_width
+                        s += empty_cell
                     else:
                         s += "%s " % A.at_to_string(A.nrow - max_height + i, A.ncol - max_width + j)
                 s += '\n'

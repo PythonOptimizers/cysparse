@@ -19,6 +19,7 @@ from cysparse.sparse.csr_mat_matrices.csr_mat_INT32_t_FLOAT32_t cimport MakeCSRS
 from cysparse.sparse.csc_mat_matrices.csc_mat_INT32_t_FLOAT32_t cimport MakeCSCSparseMatrix_INT32_t_FLOAT32_t
 
 from cysparse.sparse.sparse_utils.generic.generate_indices_INT32_t cimport create_c_array_indices_from_python_object_INT32_t
+from cysparse.sparse.sparse_utils.generic.print_FLOAT32_t cimport element_to_string_FLOAT32_t, empty_to_string_FLOAT32_t
 
 ########################################################################################################################
 # CySparse include
@@ -2142,7 +2143,7 @@ cdef class LLSparseMatrix_INT32_t_FLOAT32_t(MutableSparseMatrix_INT32_t_FLOAT32_
     ####################################################################################################################
     # String representations
     ####################################################################################################################
-    def at_to_string(self, INT32_t i, INT32_t j, INT32_t cell_width=10):
+    def at_to_string(self, INT32_t i, INT32_t j, int cell_width=10):
         """
         Return a string with a given element if it exists or an "empty" string.
 
@@ -2159,33 +2160,15 @@ cdef class LLSparseMatrix_INT32_t_FLOAT32_t(MutableSparseMatrix_INT32_t_FLOAT32_
             next_col = self.col[k]
             if next_col >= j:
                 if next_col == j:
-                    v = self.val[k]
-
-                    exp = log(fabsf(self.val[k]))
-
-                    if abs(exp) <= 4:
-                        if exp < 0:
-
-                            return ("%9.6f" % v).ljust(cell_width)
-
-
-                        else:
-
-                            return ("%9.*f" % (6,v)).ljust(cell_width)
-
-
-                    else:
-
-                        return ("%9.2e" % v).ljust(cell_width)
-
-
+                    #v = self.val[k]
+                    return element_to_string_FLOAT32_t(self.val[k], cell_width=cell_width)
                 else:  # value not found
                     break
 
             k = self.link[k]
 
-        return "---".center(cell_width)
-
+        # element not found -> return empty cell
+        return empty_to_string_FLOAT32_t(cell_width=cell_width)
 
     def print_to(self, OUT, width=9, print_big_matrices=False, transposed=False):
         """

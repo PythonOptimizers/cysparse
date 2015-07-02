@@ -239,7 +239,7 @@ INDEX_MM_TYPES = ['INT32_t', 'INT64_t']
 ELEMENT_MM_TYPES = ['INT64_t', 'FLOAT64_t', 'COMPLEX128_t']
 
 # when coding
-ELEMENT_TYPES = ['FLOAT64_t']
+#ELEMENT_TYPES = ['FLOAT64_t']
 #ELEMENT_TYPES = ['COMPLEX64_t']
 
 
@@ -338,7 +338,7 @@ def generate_following_only_index(logger, template_filenames, template_environme
         logger: logging engine.
         template_filenames: List of file names.
         environment: An Jinja2 Environment.
-        index_types: List of types.
+        index_types: List of index types.
         ext: Extension of the created files.
 
     Note:
@@ -356,6 +356,34 @@ def generate_following_only_index(logger, template_filenames, template_environme
             context.update(template_context)
 
             generate_template_files(logger, template_filenames, template_environment, context, '_%s%s' % (index_name, ext))
+
+
+def generate_following_only_type(logger, template_filenames, template_environment, template_context, element_types, ext):
+    """
+    Generate Cython code.
+
+    Args:
+        logger: logging engine.
+        template_filenames: List of file names.
+        environment: An Jinja2 Environment.
+        element_types: List of element types.
+        ext: Extension of the created files.
+
+    Note:
+        A file is created for each element types.
+    """
+    for filename in template_filenames:
+
+        for type_name in element_types:
+
+            context = {
+                'type' : type_name,
+                'element_list' : ELEMENT_TYPES
+            }
+
+            context.update(template_context)
+
+            generate_template_files(logger, template_filenames, template_environment, context, '_%s%s' % (type_name, ext))
 
 
 def generate_following_type_and_index(logger, template_filenames, template_environment, template_context, element_types, index_types, ext, tabu_combination=None):
@@ -429,6 +457,9 @@ SPARSE_SPARSE_UTILS_GENERATE_INDICES_DEFINITION_FILES = [os.path.join(SPARSE_SPA
 
 SPARSE_SPARSE_UTILS_FIND_DECLARATION_FILES = [os.path.join(SPARSE_SPARSE_UTILS_TEMPLATE_DIR, 'find.cpd')]
 SPARSE_SPARSE_UTILS_FIND_DEFINITION_FILES = [os.path.join(SPARSE_SPARSE_UTILS_TEMPLATE_DIR, 'find.cpx')]
+
+SPARSE_SPARSE_UTILS_PRINT_DECLARATION_FILES = [os.path.join(SPARSE_SPARSE_UTILS_TEMPLATE_DIR, 'print.cpd')]
+SPARSE_SPARSE_UTILS_PRINT_DEFINITION_FILES = [os.path.join(SPARSE_SPARSE_UTILS_TEMPLATE_DIR, 'print.cpx')]
 
 SPARSE_SPARSE_UTILS_SORT_INDICES_DECLARATION_FILES = [os.path.join(SPARSE_SPARSE_UTILS_TEMPLATE_DIR, 'sort_indices.cpd')]
 SPARSE_SPARSE_UTILS_SORT_INDICES_DEFINITION_FILES = [os.path.join(SPARSE_SPARSE_UTILS_TEMPLATE_DIR, 'sort_indices.cpx')]
@@ -682,6 +713,10 @@ if __name__ == "__main__":
             # sort_indices_@index@.pxd and sort_indices_@index@.pyx
             generate_following_only_index(logger, SPARSE_SPARSE_UTILS_SORT_INDICES_DECLARATION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, INDEX_TYPES, '.pxd')
             generate_following_only_index(logger, SPARSE_SPARSE_UTILS_SORT_INDICES_DEFINITION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, INDEX_TYPES, '.pyx')
+
+            # element_to_string_@type@
+            generate_following_only_type(logger, SPARSE_SPARSE_UTILS_PRINT_DECLARATION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, ELEMENT_TYPES, '.pxd')
+            generate_following_only_type(logger, SPARSE_SPARSE_UTILS_PRINT_DEFINITION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, ELEMENT_TYPES, '.pyx')
 
             # find_@index@_@type@.pxd and find_@index@_@type@.pyx
             generate_following_type_and_index(logger, SPARSE_SPARSE_UTILS_FIND_DECLARATION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, ELEMENT_TYPES, INDEX_TYPES, '.pxd')

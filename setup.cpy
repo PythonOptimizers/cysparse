@@ -147,6 +147,13 @@ new_sparse_ext = [
             **sparse_ext_params),
 {% endfor %}
 
+{% for element_type in type_list %}
+  Extension(name="cysparse.sparse.sparse_utils.generic.print_@element_type@",
+            sources=["cysparse/sparse/sparse_utils/generic/print_@element_type@.pxd",
+                     "cysparse/sparse/sparse_utils/generic/print_@element_type@.pyx"],
+            **sparse_ext_params),
+{% endfor %}
+
 {% for index_type in index_list %}
     {% for element_type in type_list %}
   Extension(name="cysparse.sparse.sparse_utils.generic.find_@index_type@",

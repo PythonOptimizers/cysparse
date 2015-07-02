@@ -157,6 +157,48 @@ new_sparse_ext = [
 
 
 
+  Extension(name="cysparse.sparse.sparse_utils.generic.print_INT32_t",
+            sources=["cysparse/sparse/sparse_utils/generic/print_INT32_t.pxd",
+                     "cysparse/sparse/sparse_utils/generic/print_INT32_t.pyx"],
+            **sparse_ext_params),
+
+  Extension(name="cysparse.sparse.sparse_utils.generic.print_INT64_t",
+            sources=["cysparse/sparse/sparse_utils/generic/print_INT64_t.pxd",
+                     "cysparse/sparse/sparse_utils/generic/print_INT64_t.pyx"],
+            **sparse_ext_params),
+
+  Extension(name="cysparse.sparse.sparse_utils.generic.print_FLOAT32_t",
+            sources=["cysparse/sparse/sparse_utils/generic/print_FLOAT32_t.pxd",
+                     "cysparse/sparse/sparse_utils/generic/print_FLOAT32_t.pyx"],
+            **sparse_ext_params),
+
+  Extension(name="cysparse.sparse.sparse_utils.generic.print_FLOAT64_t",
+            sources=["cysparse/sparse/sparse_utils/generic/print_FLOAT64_t.pxd",
+                     "cysparse/sparse/sparse_utils/generic/print_FLOAT64_t.pyx"],
+            **sparse_ext_params),
+
+  Extension(name="cysparse.sparse.sparse_utils.generic.print_FLOAT128_t",
+            sources=["cysparse/sparse/sparse_utils/generic/print_FLOAT128_t.pxd",
+                     "cysparse/sparse/sparse_utils/generic/print_FLOAT128_t.pyx"],
+            **sparse_ext_params),
+
+  Extension(name="cysparse.sparse.sparse_utils.generic.print_COMPLEX64_t",
+            sources=["cysparse/sparse/sparse_utils/generic/print_COMPLEX64_t.pxd",
+                     "cysparse/sparse/sparse_utils/generic/print_COMPLEX64_t.pyx"],
+            **sparse_ext_params),
+
+  Extension(name="cysparse.sparse.sparse_utils.generic.print_COMPLEX128_t",
+            sources=["cysparse/sparse/sparse_utils/generic/print_COMPLEX128_t.pxd",
+                     "cysparse/sparse/sparse_utils/generic/print_COMPLEX128_t.pyx"],
+            **sparse_ext_params),
+
+  Extension(name="cysparse.sparse.sparse_utils.generic.print_COMPLEX256_t",
+            sources=["cysparse/sparse/sparse_utils/generic/print_COMPLEX256_t.pxd",
+                     "cysparse/sparse/sparse_utils/generic/print_COMPLEX256_t.pyx"],
+            **sparse_ext_params),
+
+
+
     
   Extension(name="cysparse.sparse.sparse_utils.generic.find_INT32_t",
             sources=["cysparse/sparse/sparse_utils/generic/find_INT32_t_INT32_t.pxd",
