@@ -281,7 +281,7 @@ cdef class SparseMatrix:
 
 
 
-cdef MakeMatrixString(SparseMatrix A, char mode='M', full=False):
+cdef MakeMatrixString(object A, char mode='M', full=False):
     """
     Return a print of the :class:`SparseMatrix` object.
 
@@ -305,8 +305,11 @@ cdef MakeMatrixString(SparseMatrix A, char mode='M', full=False):
 
         Py_ssize_t max_height, max_width, i, j, frontier
 
+
     s = ''
     empty_cell = " " * (cell_width + 1)
+
+
 
     if mode == 'M':
         if not full and (A.nrow > MAX_MATRIX_HEIGHT or A.ncol > MAX_MATRIX_WIDTH):

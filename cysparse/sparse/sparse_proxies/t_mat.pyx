@@ -2,7 +2,7 @@
 # For the moment I (Nikolaj) 'm leaving it as it is just in case things change...
 
 from cysparse.types.cysparse_types import *
-from cysparse.sparse.s_mat cimport SparseMatrix
+from cysparse.sparse.s_mat cimport SparseMatrix, MakeMatrixString
 #from cysparse.sparse.sparse_proxies cimport ProxySparseMatrix
 
 from cysparse.types.cysparse_numpy_types import are_mixed_types_compatible, cysparse_to_numpy_type
@@ -87,9 +87,6 @@ cdef class TransposedSparseMatrix:
     def __dealloc__(self):
         Py_DECREF(self.A) # release ref
 
-    def __repr__(self):
-        return "Proxy to the transposed (.T) of %s" % self.A
-
     ####################################################################################################################
     # End of Common code
     ####################################################################################################################
@@ -163,3 +160,30 @@ cdef class TransposedSparseMatrix:
 
     def print_to(self, OUT):
         return self.A.print_to(OUT, transposed=True)
+
+    ####################################################################################################################
+    # String representations
+    ####################################################################################################################
+    def __repr__(self):
+        """
+        Return an unique representation of the :class:`TransposedSparseMatrix` object.
+
+        """
+        return "Proxy to the transposed (.T) of %s" % self.A.__repr__()
+
+    def _matrix_description_before_printing(self):
+        return ""
+
+    def at_to_string(self, i, j, int cell_width=10):
+        return self.A.at_to_string(j, i, cell_width)
+
+    def __str__(self):
+        """
+        Return a string to print the :class:`SparseMatrix` object to screen.
+
+        """
+        s = self._matrix_description_before_printing()
+        s += '\n'
+        s += MakeMatrixString(self)
+
+        return s
