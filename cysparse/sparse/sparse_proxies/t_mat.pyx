@@ -172,7 +172,7 @@ cdef class TransposedSparseMatrix:
         return "Proxy to the transposed (.T) of %s" % self.A.__repr__()
 
     def _matrix_description_before_printing(self):
-        return ""
+        return "Proxy to the transposed (.T) of %s" % self.A._matrix_description_before_printing()
 
     def at_to_string(self, i, j, int cell_width=10):
         return self.A.at_to_string(j, i, cell_width)

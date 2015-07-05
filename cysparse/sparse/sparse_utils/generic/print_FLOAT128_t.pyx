@@ -36,11 +36,17 @@ cdef element_to_string_FLOAT128_t(FLOAT128_t v, int cell_width=10):
 
 
     """
+    # This is the *main* and *unique* function to print an element of a sparse matrix. All other printing functions
+    # **must** use this function.
     cdef:
         FLOAT64_t exp
 
 
+
     exp = log(fabsl(v))
+
+
+
 
     if abs(exp) <= 4:
         if exp < 0:
@@ -56,6 +62,21 @@ cdef element_to_string_FLOAT128_t(FLOAT128_t v, int cell_width=10):
     else:
 
         return ("%9.2e" % v).ljust(cell_width)
+
+
+
+cdef conjugated_element_to_string_FLOAT128_t(FLOAT128_t v, int cell_width=10):
+    """
+    Return a string representing the conjugate of an element of type FLOAT128_t.
+
+    Note:
+        This function works for **all** types, not only complex ones.
+
+    """
+
+    # start to add the possibility of having to conjugate non complex elements...
+    # TODO: see if we allow this or not. For the moment, this is only called from complex typed matrices.
+    return element_to_string_FLOAT128_t(v)
 
 
 

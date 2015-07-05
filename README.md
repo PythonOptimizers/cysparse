@@ -13,7 +13,7 @@ This is the multi-types version (last single type version: ce86f8476166f63d0af72
    my own source format...).
 
 2. Cython memoryviews don't seem to be faster in our case. This should be assessed in the optimization phase. For the moment, I'll continue
-   to code with NumPy's C-API. This is **not** the way Cython is intended by my tests indicate that this produces the fastest code. To be continued.
+   to code with NumPy's C-API. This is **not** the way Cython is intended but my tests indicate that this produces the fastest code. To be continued.
 
    Sorry for the fuzz.
 

@@ -19,7 +19,7 @@ from cysparse.sparse.csr_mat_matrices.csr_mat_INT32_t_INT64_t cimport MakeCSRSpa
 from cysparse.sparse.csc_mat_matrices.csc_mat_INT32_t_INT64_t cimport MakeCSCSparseMatrix_INT32_t_INT64_t
 
 from cysparse.sparse.sparse_utils.generic.generate_indices_INT32_t cimport create_c_array_indices_from_python_object_INT32_t
-from cysparse.sparse.sparse_utils.generic.print_INT64_t cimport element_to_string_INT64_t, empty_to_string_INT64_t
+from cysparse.sparse.sparse_utils.generic.print_INT64_t cimport element_to_string_INT64_t, conjugated_element_to_string_INT64_t, empty_to_string_INT64_t
 
 ########################################################################################################################
 # CySparse include
@@ -2162,6 +2162,33 @@ cdef class LLSparseMatrix_INT32_t_INT64_t(MutableSparseMatrix_INT32_t_INT64_t):
                 if next_col == j:
                     #v = self.val[k]
                     return element_to_string_INT64_t(self.val[k], cell_width=cell_width)
+                else:  # value not found
+                    break
+
+            k = self.link[k]
+
+        # element not found -> return empty cell
+        return empty_to_string_INT64_t(cell_width=cell_width)
+
+    def at_conj_to_string(self, INT32_t i, INT32_t j, int cell_width=10):
+        """
+        Return a string with a given element if it exists or an "empty" string.
+
+
+        """
+        cdef:
+            INT32_t k, next_col
+            INT64_t v
+            FLOAT64_t exp
+
+        # EXPLICIT TYPE TESTS
+        k = self.root[i]
+        while k != -1:
+            next_col = self.col[k]
+            if next_col >= j:
+                if next_col == j:
+                    #v = self.val[k]
+                    return conjugated_element_to_string_INT64_t(self.val[k], cell_width=cell_width)
                 else:  # value not found
                     break
 

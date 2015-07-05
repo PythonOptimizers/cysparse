@@ -1,4 +1,4 @@
-from cysparse.sparse.s_mat cimport SparseMatrix
+from cysparse.sparse.s_mat cimport SparseMatrix, MakeMatrixString
 
 from cysparse.types.cysparse_numpy_types import are_mixed_types_compatible, cysparse_to_numpy_type
 from cysparse.sparse.ll_mat cimport PyLLSparseMatrix_Check
@@ -157,3 +157,30 @@ cdef class ConjugateTransposedSparseMatrix_INT64_t_COMPLEX128_t:
 
     def matrix_copy(self):
         return self.A.create_conjugate_transpose()
+
+    ####################################################################################################################
+    # String representations
+    ####################################################################################################################
+    def __repr__(self):
+        """
+        Return an unique representation of the :class:`ConjugateTransposedSparseMatrix` object.
+
+        """
+        return "Proxy to the conjugate transposed (.H) of %s" % self.A.__repr__()
+
+    def _matrix_description_before_printing(self):
+        return "Proxy to the conjugate transposed (.H) of %s" % self.A._matrix_description_before_printing()
+
+    def at_to_string(self, i, j, int cell_width=10):
+        return self.A.at_conj_to_string(j, i, cell_width)
+
+    def __str__(self):
+        """
+        Return a string to print the :class:`SparseMatrix` object to screen.
+
+        """
+        s = self._matrix_description_before_printing()
+        s += '\n'
+        s += MakeMatrixString(self)
+
+        return s

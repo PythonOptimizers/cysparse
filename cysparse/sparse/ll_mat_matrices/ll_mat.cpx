@@ -19,7 +19,7 @@ from cysparse.sparse.csr_mat_matrices.csr_mat_@index@_@type@ cimport MakeCSRSpar
 from cysparse.sparse.csc_mat_matrices.csc_mat_@index@_@type@ cimport MakeCSCSparseMatrix_@index@_@type@
 
 from cysparse.sparse.sparse_utils.generic.generate_indices_@index@ cimport create_c_array_indices_from_python_object_@index@
-from cysparse.sparse.sparse_utils.generic.print_@type@ cimport element_to_string_@type@, empty_to_string_@type@
+from cysparse.sparse.sparse_utils.generic.print_@type@ cimport element_to_string_@type@, conjugated_element_to_string_@type@, empty_to_string_@type@
 
 ########################################################################################################################
 # CySparse include
@@ -2412,6 +2412,33 @@ YOU HAVE TO CAST YOUR NEW TYPE HERE
                 if next_col == j:
                     #v = self.val[k]
                     return element_to_string_@type@(self.val[k], cell_width=cell_width)
+                else:  # value not found
+                    break
+
+            k = self.link[k]
+
+        # element not found -> return empty cell
+        return empty_to_string_@type@(cell_width=cell_width)
+
+    def at_conj_to_string(self, @index@ i, @index@ j, int cell_width=10):
+        """
+        Return a string with a given element if it exists or an "empty" string.
+
+
+        """
+        cdef:
+            @index@ k, next_col
+            @type@ v
+            FLOAT64_t exp
+
+        # EXPLICIT TYPE TESTS
+        k = self.root[i]
+        while k != -1:
+            next_col = self.col[k]
+            if next_col >= j:
+                if next_col == j:
+                    #v = self.val[k]
+                    return conjugated_element_to_string_@type@(self.val[k], cell_width=cell_width)
                 else:  # value not found
                     break
 

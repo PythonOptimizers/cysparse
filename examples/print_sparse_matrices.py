@@ -15,3 +15,13 @@ l1.print_to(sys.stdout)
 print "v" * 80
 
 print l1.T
+
+print "w" * 80
+
+l2 = NewLinearFillLLSparseMatrix(first_element=0+5j, nrow=12, ncol=6, size_hint=40, store_zeros=True, dtype=types.COMPLEX64_T)
+
+print l2.H
+
+print "z" * 80
+
+print l2.conj

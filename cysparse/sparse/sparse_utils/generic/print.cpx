@@ -36,8 +36,14 @@ cdef element_to_string_@type@(@type@ v, int cell_width=10):
 
 
     """
+    # This is the *main* and *unique* function to print an element of a sparse matrix. All other printing functions
+    # **must** use this function.
     cdef:
         FLOAT64_t exp
+{% if type in complex_list %}
+        @type|cysparse_real_type_from_real_cysparse_complex_type@ real_part, imag_part
+    sign = '+'
+{% endif %}
 
 {% if type in integer_list %}
     exp = log(fabs(<FLOAT64_t> v))
@@ -56,38 +62,66 @@ cdef element_to_string_@type@(@type@ v, int cell_width=10):
 {% else %}
 YOU HAVE TO CAST YOUR NEW TYPE HERE
 {% endif %}
+
+{% if type in complex_list %}
+    {% if type == 'COMPLEX64_t' %}
+    real_part = crealf(v)
+    imag_part = cimagf(v)
+    {% elif type == 'COMPLEX128_t' %}
+    real_part = creal(v)
+    imag_part = cimag(v)
+    {% elif type == 'COMPLEX256_t' %}
+    real_part = creall(v)
+    imag_part = cimagl(v)
+    {% else %}
+YOU HAVE TO CAST YOUR NEW COMPLEX TYPE HERE
+    {% endif %}
+    if imag_part < 0.0:
+        sign = '-'
+        imag_part *= -1.0
+{% endif %}
+
     if abs(exp) <= 4:
         if exp < 0:
-{% if type == 'COMPLEX64_t' %}
-            return ("%9.6f" % crealf(v)).ljust(cell_width) + '+' + ("%9.6fj" % cimagf(v)).ljust(cell_width)
-{% elif type == 'COMPLEX128_t' %}
-            return ("%9.6f" % creal(v)).ljust(cell_width) + '+' + ("%9.6fj" % cimag(v)).ljust(cell_width)
-{% elif type == 'COMPLEX256_t' %}
-            return ("%9.6f" % creall(v)).ljust(cell_width) + '+' + ("%9.6fj" % cimagl(v)).ljust(cell_width)
+{% if type in complex_list %}
+            return ("%9.6f" % real_part).ljust(cell_width) + sign + ("%9.6fj" % imag_part).ljust(cell_width)
 {% else %}
             return ("%9.6f" % v).ljust(cell_width)
 {% endif %}
 
         else:
-{% if type == 'COMPLEX64_t' %}
-            return ("%9.*f" % (6,crealf(v))).ljust(cell_width) + '+' + ("%9.*fj" % (6,cimagf(v))).ljust(cell_width)
-{% elif type == 'COMPLEX128_t' %}
-            return ("%9.*f" % (6,creal(v))).ljust(cell_width) + '+' + ("%9.*fj" % (6,cimag(v))).ljust(cell_width)
-{% elif type == 'COMPLEX256_t' %}
-            return ("%9.*f" % (6,creall(v))).ljust(cell_width) + '+' + ("%9.*fj" % (6,cimagl(v))).ljust(cell_width)
+{% if type in complex_list %}
+            return ("%9.*f" % (6, real_part)).ljust(cell_width) + sign + ("%9.*fj" % (6, imag_part)).ljust(cell_width)
 {% else %}
             return ("%9.*f" % (6,v)).ljust(cell_width)
 {% endif %}
 
     else:
-{% if type == 'COMPLEX64_t' %}
-        return ("%9.2e" % crealf(v)).ljust(cell_width) + '+' + ("%9.2ej" % cimagf(v)).ljust(cell_width)
-{% elif type == 'COMPLEX128_t' %}
-        return ("%9.2e" % creal(v)).ljust(cell_width) + '+' + ("%9.2ej" % cimag(v)).ljust(cell_width)
-{% elif type == 'COMPLEX256_t' %}
-        return ("%9.2e" % creall(v)).ljust(cell_width) + '+' + ("%9.2ej" % cimagl(v)).ljust(cell_width)
+{% if type in complex_list %}
+        return ("%9.2e" % real_part).ljust(cell_width) + sign + ("%9.2ej" % imag_part).ljust(cell_width)
 {% else %}
         return ("%9.2e" % v).ljust(cell_width)
+{% endif %}
+
+
+cdef conjugated_element_to_string_@type@(@type@ v, int cell_width=10):
+    """
+    Return a string representing the conjugate of an element of type @type@.
+
+    Note:
+        This function works for **all** types, not only complex ones.
+
+    """
+{% if type == 'COMPLEX64_t' %}
+    return element_to_string_@type@(conjf(v), cell_width)
+{% elif type == 'COMPLEX128_t' %}
+    return element_to_string_@type@(conj(v), cell_width)
+{% elif type == 'COMPLEX256_t' %}
+    return element_to_string_@type@(conjl(v), cell_width)
+{% else %}
+    # start to add the possibility of having to conjugate non complex elements...
+    # TODO: see if we allow this or not. For the moment, this is only called from complex typed matrices.
+    return element_to_string_@type@(v)
 {% endif %}
 
 

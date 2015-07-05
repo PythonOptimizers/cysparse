@@ -36,26 +36,56 @@ cdef element_to_string_COMPLEX64_t(COMPLEX64_t v, int cell_width=10):
 
 
     """
+    # This is the *main* and *unique* function to print an element of a sparse matrix. All other printing functions
+    # **must** use this function.
     cdef:
         FLOAT64_t exp
+
+        FLOAT32_t real_part, imag_part
+    sign = '+'
+
 
 
     exp = log(cabsf(v))
 
+
+
+    
+    real_part = crealf(v)
+    imag_part = cimagf(v)
+    
+    if imag_part < 0.0:
+        sign = '-'
+        imag_part *= -1.0
+
+
     if abs(exp) <= 4:
         if exp < 0:
 
-            return ("%9.6f" % crealf(v)).ljust(cell_width) + '+' + ("%9.6fj" % cimagf(v)).ljust(cell_width)
+            return ("%9.6f" % real_part).ljust(cell_width) + sign + ("%9.6fj" % imag_part).ljust(cell_width)
 
 
         else:
 
-            return ("%9.*f" % (6,crealf(v))).ljust(cell_width) + '+' + ("%9.*fj" % (6,cimagf(v))).ljust(cell_width)
+            return ("%9.*f" % (6, real_part)).ljust(cell_width) + sign + ("%9.*fj" % (6, imag_part)).ljust(cell_width)
 
 
     else:
 
-        return ("%9.2e" % crealf(v)).ljust(cell_width) + '+' + ("%9.2ej" % cimagf(v)).ljust(cell_width)
+        return ("%9.2e" % real_part).ljust(cell_width) + sign + ("%9.2ej" % imag_part).ljust(cell_width)
+
+
+
+cdef conjugated_element_to_string_COMPLEX64_t(COMPLEX64_t v, int cell_width=10):
+    """
+    Return a string representing the conjugate of an element of type COMPLEX64_t.
+
+    Note:
+        This function works for **all** types, not only complex ones.
+
+    """
+
+    return element_to_string_COMPLEX64_t(conjf(v), cell_width)
 
 
 

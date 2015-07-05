@@ -281,21 +281,16 @@ cdef class SparseMatrix:
 
 
 
-cdef MakeMatrixString(object A, char mode='M', full=False):
+cdef MakeMatrixString(object A, full=False):
     """
     Return a print of the :class:`SparseMatrix` object.
 
     Args:
-        A: :class:`SparseMatrix` object to print.
-        mode: Can be `M`, `T`, `H` or `C`:
-            - `M`: `M`atrix mode: the object itself.
-            - `T`: `T`ransposed mode: the transposed object.
-            - `H`: `H`ermitian mode: the transpose conjugated object.
-            - `C`: `C`onjugated mode: the conjugated object.
+        A: A matrix like object (:class:`SparseMatrix` or :class:`ProxySparseMatrix`).
         full: If ``True`` overwrite settings and print the **full** matrix.
 
     Note:
-        This is the **only** function to print :class:`SparseMatrix` objects.
+        This is the **only** function to print matrix like objects.
 
     """
     cdef:
@@ -307,47 +302,30 @@ cdef MakeMatrixString(object A, char mode='M', full=False):
 
 
     s = ''
-    empty_cell = " " * (cell_width + 1)
+    empty_cell = "...".center(cell_width + 1)
+    if is_complex_type(A.dtype):
+        empty_cell = empty_cell + empty_cell
 
+    if not full and (A.nrow > MAX_MATRIX_HEIGHT or A.ncol > MAX_MATRIX_WIDTH):
+        max_height = min(A.nrow, MAX_MATRIX_HEIGHT)
+        max_width  = min(A.ncol, MAX_MATRIX_WIDTH)
 
-
-    if mode == 'M':
-        if not full and (A.nrow > MAX_MATRIX_HEIGHT or A.ncol > MAX_MATRIX_WIDTH):
-            max_height = min(A.nrow, MAX_MATRIX_HEIGHT)
-            max_width  = min(A.ncol, MAX_MATRIX_WIDTH)
-
-            for i from 0 <= i < max_height:
-                frontier = max_width - i
-                for j from 0 <= j < max_width:
-                    if j < frontier:
-                        s += "%s " % A.at_to_string(i, j)
-                    elif j == frontier:
-                        s += empty_cell
-                    else:
-                        s += "%s " % A.at_to_string(A.nrow - max_height + i, A.ncol - max_width + j)
-                s += '\n'
+        for i from 0 <= i < max_height:
+            frontier = max_width - i
+            for j from 0 <= j < max_width:
+                if j < frontier:
+                    s += "%s " % A.at_to_string(i, j, cell_width)
+                elif j == frontier:
+                    s += empty_cell
+                else:
+                    s += "%s " % A.at_to_string(A.nrow - max_height + i, A.ncol - max_width + j, cell_width)
             s += '\n'
-        else:  # full matrix
-            for i from 0 <= i < A.nrow:
-                for j from 0 <= j < A.ncol:
-                    s += "%s " % A.at_to_string(i, j)
-                s += '\n'
-            s += '\n'
-
-    elif mode == 'T':
-        if not full and (A.nrow > MAX_MATRIX_HEIGHT or A.ncol > MAX_MATRIX_WIDTH):
-            pass
-        else:    # full matrix
+        s += '\n'
+    else:  # full matrix
+        for i from 0 <= i < A.nrow:
             for j from 0 <= j < A.ncol:
-                for i from 0 <= i < A.nrow:
-                    s += "%s " % A.at_to_string(j, i)
-                s += '\n'
+                s += "%s " % A.at_to_string(i, j, cell_width)
             s += '\n'
-    elif mode == 'H':
-        pass
-    elif mode == 'C':
-        pass
-    else:
-        raise TypeError("Mode '%s' not recognized" % mode)
+        s += '\n'
 
     return s
