@@ -819,6 +819,18 @@ struct __pyx_t_8cysparse_5types_14cysparse_types_CPType {
   enum __pyx_t_8cysparse_5types_14cysparse_types_CySparseType dtype;
   enum __pyx_t_8cysparse_5types_14cysparse_types_CySparseType itype;
 };
+struct __pyx_opt_args_8cysparse_6sparse_5s_mat_MakeMatrixString;
+
+/* "cysparse/sparse/s_mat.pxd":51
+ * 
+ * 
+ * cdef MakeMatrixString(SparseMatrix A, char mode=?, full=?)             # <<<<<<<<<<<<<<
+ */
+struct __pyx_opt_args_8cysparse_6sparse_5s_mat_MakeMatrixString {
+  int __pyx_n;
+  char mode;
+  PyObject *full;
+};
 
 /* "../local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":765
  * ctypedef npy_longdouble longdouble_t

@@ -625,11 +625,12 @@ struct __pyx_opt_args_8cysparse_6sparse_5s_mat_MakeMatrixString;
 /* "cysparse/sparse/s_mat.pxd":51
  * 
  * 
- * cdef MakeMatrixString(SparseMatrix A, char mode=?)             # <<<<<<<<<<<<<<
+ * cdef MakeMatrixString(SparseMatrix A, char mode=?, full=?)             # <<<<<<<<<<<<<<
  */
 struct __pyx_opt_args_8cysparse_6sparse_5s_mat_MakeMatrixString {
   int __pyx_n;
   char mode;
+  PyObject *full;
 };
 
 /* "cysparse/sparse/s_mat.pxd":20
