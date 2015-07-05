@@ -268,7 +268,7 @@ cdef class SparseMatrix:
     #########################
     # Printing
     #########################
-    def to_string(self, mode='M', implicit_zero = ' ', cell_width=11, number_width=9, precision=6,  **kwargs):
+    def to_string(self, **kwargs):
         """
         Return a string representing the **content** of matrix.
 
@@ -324,7 +324,7 @@ cdef MakeMatrixString(SparseMatrix A, char mode='M', full=False):
                         s += "%s " % A.at_to_string(A.nrow - max_height + i, A.ncol - max_width + j)
                 s += '\n'
             s += '\n'
-        else:
+        else:  # full matrix
             for i from 0 <= i < A.nrow:
                 for j from 0 <= j < A.ncol:
                     s += "%s " % A.at_to_string(i, j)
@@ -332,7 +332,14 @@ cdef MakeMatrixString(SparseMatrix A, char mode='M', full=False):
             s += '\n'
 
     elif mode == 'T':
-        pass
+        if not full and (A.nrow > MAX_MATRIX_HEIGHT or A.ncol > MAX_MATRIX_WIDTH):
+            pass
+        else:    # full matrix
+            for j from 0 <= j < A.ncol:
+                for i from 0 <= i < A.nrow:
+                    s += "%s " % A.at_to_string(j, i)
+                s += '\n'
+            s += '\n'
     elif mode == 'H':
         pass
     elif mode == 'C':
