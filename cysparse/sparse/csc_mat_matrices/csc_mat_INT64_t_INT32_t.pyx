@@ -12,6 +12,8 @@ from cysparse.sparse.s_mat cimport unexposed_value
 from cysparse.sparse.s_mat_matrices.s_mat_INT64_t_INT32_t cimport ImmutableSparseMatrix_INT64_t_INT32_t
 from cysparse.sparse.ll_mat_matrices.ll_mat_INT64_t_INT32_t cimport LLSparseMatrix_INT64_t_INT32_t
 
+from cysparse.sparse.sparse_utils.generic.print_INT32_t cimport element_to_string_INT32_t, conjugated_element_to_string_INT32_t, empty_to_string_INT32_t
+
 ########################################################################################################################
 # Cython, NumPy import/cimport
 ########################################################################################################################
@@ -356,9 +358,41 @@ cdef class CSCSparseMatrix_INT64_t_INT32_t(ImmutableSparseMatrix_INT64_t_INT32_t
     ####################################################################################################################
     # String representations
     ####################################################################################################################
-    def __repr__(self):
-        s = "CSCSparseMatrix of size %d by %d with %d non zero values" % (self.nrow, self.ncol, self.nnz)
-        return s
+    def at_to_string(self, INT64_t i, INT64_t j, int cell_width=10):
+        """
+        Return a string with a given element if it exists or an "empty" string.
+
+
+        """
+        cdef:
+            INT64_t k
+
+        for k from self.ind[j] <= k < self.ind[j+1]:
+            if i == self.row[k]:
+                return element_to_string_INT32_t(self.val[k], cell_width=cell_width)
+
+        # element not found -> return empty cell
+        return empty_to_string_INT32_t(cell_width=cell_width)
+
+    def at_conj_to_string(self, INT64_t i, INT64_t j, int cell_width=10):
+        """
+        Return a string with a given element if it exists or an "empty" string.
+
+
+        """
+        cdef:
+            INT64_t k
+
+        for k from self.ind[j] <= k < self.ind[j+1]:
+            if i == self.row[k]:
+                return conjugated_element_to_string_INT32_t(self.val[k], cell_width=cell_width)
+
+        # element not found -> return empty cell
+        return empty_to_string_INT32_t(cell_width=cell_width)
+
+    #def __repr__(self):
+    #    s = "CSCSparseMatrix of size %d by %d with %d non zero values" % (self.nrow, self.ncol, self.nnz)
+    #    return s
 
     def print_to(self, OUT):
         """

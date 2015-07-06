@@ -279,8 +279,6 @@ cdef class SparseMatrix:
         raise NotImplementedError("Operation not implemented (yet). Please report.")
 
 
-
-
 cdef MakeMatrixString(object A, full=False):
     """
     Return a print of the :class:`SparseMatrix` object.
@@ -293,6 +291,7 @@ cdef MakeMatrixString(object A, full=False):
         This is the **only** function to print matrix like objects.
 
     """
+    # This the main and only function to print matrix objects.
     cdef:
         Py_ssize_t MAX_MATRIX_HEIGHT = 11
         Py_ssize_t MAX_MATRIX_WIDTH = 11
@@ -300,11 +299,12 @@ cdef MakeMatrixString(object A, full=False):
 
         Py_ssize_t max_height, max_width, i, j, frontier
 
-
     s = ''
     empty_cell = "...".center(cell_width + 1)
+
     if is_complex_type(A.dtype):
         empty_cell = empty_cell + empty_cell
+        MAX_MATRIX_WIDTH = MAX_MATRIX_WIDTH / 2
 
     if not full and (A.nrow > MAX_MATRIX_HEIGHT or A.ncol > MAX_MATRIX_WIDTH):
         max_height = min(A.nrow, MAX_MATRIX_HEIGHT)

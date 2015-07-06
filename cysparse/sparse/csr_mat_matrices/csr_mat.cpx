@@ -14,6 +14,7 @@ from cysparse.sparse.ll_mat_matrices.ll_mat_@index@_@type@ cimport LLSparseMatri
 from cysparse.sparse.csc_mat_matrices.csc_mat_@index@_@type@ cimport CSCSparseMatrix_@index@_@type@
 
 from cysparse.sparse.sparse_utils.generic.sort_indices_@index@ cimport sort_array_@index@
+from cysparse.sparse.sparse_utils.generic.print_@type@ cimport element_to_string_@type@, conjugated_element_to_string_@type@, empty_to_string_@type@
 
 ########################################################################################################################
 # Cython, NumPy import/cimport
@@ -496,9 +497,41 @@ YOU HAVE TO EXPLICITY CAST YOUR TYPE
     ####################################################################################################################
     # String representations
     ####################################################################################################################
-    def __repr__(self):
-        s = "CSRSparseMatrix of size %d by %d with %d non zero values" % (self.nrow, self.ncol, self.nnz)
-        return s
+    def at_to_string(self, @index@ i, @index@ j, int cell_width=10):
+        """
+        Return a string with a given element if it exists or an "empty" string.
+
+
+        """
+        cdef:
+            @index@ k
+
+        for k from self.ind[i] <= k < self.ind[i+1]:
+            if j == self.col[k]:
+                return element_to_string_@type@(self.val[k], cell_width=cell_width)
+
+        # element not found -> return empty cell
+        return empty_to_string_@type@(cell_width=cell_width)
+
+    def at_conj_to_string(self, @index@ i, @index@ j, int cell_width=10):
+        """
+        Return a string with a given element if it exists or an "empty" string.
+
+
+        """
+        cdef:
+            @index@ k
+
+        for k from self.ind[i] <= k < self.ind[i+1]:
+            if j == self.col[k]:
+                return conjugated_element_to_string_@type@(self.val[k], cell_width=cell_width)
+
+        # element not found -> return empty cell
+        return empty_to_string_@type@(cell_width=cell_width)
+
+    #def __repr__(self):
+    #    s = "CSRSparseMatrix of size %d by %d with %d non zero values" % (self.nrow, self.ncol, self.nnz)
+    #    return s
 
     def print_to(self, OUT, width=9, print_big_matrices=False, transposed=False):
         """
