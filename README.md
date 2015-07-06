@@ -28,6 +28,6 @@ See [Wiki](https://github.com/Funartech/cysparse/wiki) for details!
 - Version 0.1.0 released on July 6, 2015
 
   First release with multiple types.
-  
+
 - Version 0.0.1 released on April 23, 2015
 

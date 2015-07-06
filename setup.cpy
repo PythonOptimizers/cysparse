@@ -65,7 +65,8 @@ cysparse_config.read('cysparse.cfg')
 numpy_include = np.get_include()
 
 # SUITESPARSE
-use_suitesparse = cysparse_config.get('SUITESPARSE', 'use_suitesparse')
+# Do we use it or not?
+use_suitesparse = cysparse_config.getboolean('SUITESPARSE', 'use_suitesparse')
 
 # find user defined directories
 if use_suitesparse:
@@ -102,37 +103,6 @@ base_ext = [
 sparse_ext_params = ext_params.copy()
 
 sparse_ext = [
-  #Extension(name="cysparse.sparse.ll_mat",
-  #          sources=["cysparse/sparse/ll_mat_details/ll_mat_multiplication.pxi",
-  #                   "cysparse/sparse/ll_mat_details/ll_mat_assignment.pxi",
-  #                   "cysparse/sparse/ll_mat_details/ll_mat_real_assignment_kernels.pxi",
-  #                   "cysparse/sparse/ll_mat_details/ll_mat_real_multiplication_kernels.pxi",
-  #                   "cysparse/sparse/ll_mat_details/ll_mat_transpose.pxi",
-  #                   "cysparse/sparse/ll_mat.pxd",
-  #                   "cysparse/sparse/ll_mat.pyx"], **sparse_ext_params),
-  #Extension(name="cysparse.sparse.sparse_mat",
-  #          sources=["cysparse/sparse/sparse_mat.pxd", "cysparse/sparse/sparse_mat.pyx"], **sparse_ext_params),
-  #Extension(name="cysparse.sparse.csr_mat",
-  #          sources=["cysparse/sparse/csr_mat.pxd", "cysparse/sparse/csr_mat.pyx"], **sparse_ext_params),
-  #Extension(name="cysparse.sparse.csc_mat",
-  #          sources=["cysparse/sparse/csc_mat.pxd", "cysparse/sparse/csc_mat.pyx"], **sparse_ext_params),
-  #Extension(name="cysparse.sparse.ll_mat_view",
-  #          sources=["cysparse.sparse.object_index.pxi",
-  #                   "cysparse/sparse/ll_mat_view.pxd",
-  #                   "cysparse/sparse/ll_mat_view.pyx"], **sparse_ext_params),
-  #Extension(name="cysparse.sparse.IO.mm",
-  #          sources=["cysparse/sparse/IO/mm_read_file.pxi",
-  #                   "cysparse/sparse/IO/mm_read_file2.pxi",
-  #                   "cysparse/sparse/IO/mm_write_file.pxi",
-  #                   "cysparse/sparse/IO/mm.pxd",
-  #                   "cysparse/sparse/IO/mm.pyx"], **sparse_ext_params),
-  #Extension("sparse.ll_vec", ["cysparse/sparse/ll_vec.pyx"], **sparse_ext_params)
-]
-
-########################################################################################################################
-#                                                *** NEW sparse ***
-
-new_sparse_ext = [
   ######################
   # ### Sparse ###
   ######################
@@ -162,18 +132,6 @@ new_sparse_ext = [
             **sparse_ext_params),
     {% endfor %}
 {% endfor %}
-
-
-
-  #Extension(name="cysparse.sparse.ll_mat",
-  #          sources=["cysparse/sparse/ll_mat_details/ll_mat_multiplication.pxi",
-  #                   "cysparse/sparse/ll_mat_details/ll_mat_assignment.pxi",
-  #                   "cysparse/sparse/ll_mat_details/ll_mat_real_assignment_kernels.pxi",
-  #                   "cysparse/sparse/ll_mat_details/ll_mat_real_multiplication_kernels.pxi",
-  #                   "cysparse/sparse/ll_mat_details/ll_mat_transpose.pxi",
-  #                   "cysparse/sparse/ll_mat.pxd",
-  #                   "cysparse/sparse/ll_mat.pyx"], **sparse_ext_params),
-
 
   ######################
   # ### SparseMatrix ###
@@ -326,12 +284,16 @@ packages_list = ['cysparse',
             #'cysparse.solvers.suitesparse',
             #'cysparse.sparse.IO'
             ]
+
+ext_modules = base_ext + sparse_ext
+
 if use_suitesparse:
-    ext_modules = base_ext +  new_sparse_ext # + utils_ext + umfpack_ext
     # add suitsparse package
+    ext_modules += umfpack_ext
+
 
 else:
-    ext_modules = base_ext +  new_sparse_ext # + utils_ext
+    pass
 
 setup(name=  'CySparse',
   version=find_version('cysparse', '__init__.py'),

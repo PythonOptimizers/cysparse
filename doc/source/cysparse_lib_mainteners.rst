@@ -11,6 +11,16 @@ conventions. We explain and justify these conventions in the following sections.
 
 The sparse matrix formats are detailed in the section :ref:`sparse_matrix_formats`.
 
+Versions
+=====================================
+
+The version is stored in the file ``__init__.py`` of the ``cysparse`` subdirectory:
+
+..  code-block:: python
+
+    __version__ = "0.1.0"
+    
+The version can be anything inside the quotes but this line has to be on its own and start with ``__version__ = "`` (notice the one space before and after the equal sign). See the function ``find_version()`` in the file ``setup.cpy`` for more details.
 
 Meta-programming aka code generation
 =====================================
