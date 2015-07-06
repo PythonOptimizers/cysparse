@@ -235,51 +235,28 @@ cdef class LLSparseMatrixView_INT64_t_COMPLEX256_t:
         """
 
         """
-        s = "of dim %d by %d" % (self.nrow, self.ncol)
-        return s
+        return self.A.attributes_short_string()
 
     def attributes_long_string(self):
-
-        symmetric_string = None
-        if self.__is_symmetric:
-            symmetric_string = 'symmetric'
-        else:
-            symmetric_string = 'general'
-
-        store_zeros_string = None
-        if self.__store_zeros:
-            store_zeros_string = "store_zeros"
-        else:
-            store_zeros_string = "no_zeros"
-
-        s = "%s [%s, %s]" % (self.attributes_short_string(), symmetric_string, store_zeros_string)
-
-        return s
+        return self.A.attributes_long_string()
 
     def attributes_condensed(self):
-        symmetric_string = None
-        if self.__is_symmetric:
-            symmetric_string = 'S'
-        else:
-            symmetric_string = 'G'
-
-        store_zeros_string = None
-        if self.__store_zeros:
-            store_zeros_string = "SZ"
-        else:
-            store_zeros_string = "NZ"
-
-        s= "(%s, %s, [%d, %d])" % (symmetric_string, store_zeros_string, self.nrow, self.ncol)
-
-        return s
+        return self.A.attributes_condensed()
 
     def _matrix_description_before_printing(self):
-        s = "%s %s" % (self.__type_name, self.attributes_condensed())
-        return s
+        return self._matrix_description_before_printing()
 
     def __repr__(self):
-        s = "%s %s" % (self.__type_name, self.attributes_long_string())
-        return s
+        return 'View to ' + self.A.__repr__()
+
+    def __str__(self):
+        """
+        Return a string representing the view of the matrix.
+
+        Warning:
+            This method is costly! Use with care.
+        """
+        return 'View to ' + str(self.matrix_copy())
 
 ########################################################################################################################
 # Factory methods

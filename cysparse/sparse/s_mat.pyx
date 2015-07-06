@@ -292,6 +292,8 @@ cdef MakeMatrixString(object A, full=False):
 
     """
     # This the main and only function to print matrix objects.
+    # TODO: add better coordination between this function and 'element_to_string_@type@'. The latter uses some widths
+    # (9, 6 and 2) that correspond to the widths defined here...
     cdef:
         Py_ssize_t MAX_MATRIX_HEIGHT = 11
         Py_ssize_t MAX_MATRIX_WIDTH = 11

@@ -38,3 +38,7 @@ print "/" * 80
 l1 = NewLinearFillLLSparseMatrix(nrow=102, ncol=600, size_hint=40000, store_zeros=False)
 l1.clear_submatrix(1,3, 4,6)
 print l1
+
+print "?" * 80
+
+print l1[1:6,8:59]
