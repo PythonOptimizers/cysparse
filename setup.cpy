@@ -164,9 +164,13 @@ sparse_ext = [
   Extension(name="cysparse.sparse.ll_mat_matrices.ll_mat_@index_type@_@element_type@",
             sources=["cysparse/sparse/ll_mat_matrices/ll_mat_@index_type@_@element_type@.pxd",
                      "cysparse/sparse/ll_mat_matrices/ll_mat_@index_type@_@element_type@.pyx",
+                     "cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_addition_@index_type@_@element_type@.pxi",
                      "cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_@index_type@_@element_type@.pxi",
                      "cysparse/sparse/ll_mat_matrices/ll_mat_kernel/ll_mat_assignment_kernel_@index_type@_@element_type@.pxi",
-                     "cysparse/sparse/ll_mat_matrices/ll_mat_kernel/ll_mat_multiplication_by_numpy_vector_kernel_@index_type@_@element_type@.pxi"
+                     "cysparse/sparse/ll_mat_matrices/ll_mat_kernel/ll_mat_multiplication_by_numpy_vector_kernel_@index_type@_@element_type@.pxi",
+  {% if index in mm_index_list and type in mm_type_list %}
+                     "cysparse/sparse/ll_mat_matrices/ll_mat_IO/ll_mat_mm_@index_type@_@element_type@.pxi",
+  {% endif %}
                      ],
             **sparse_ext_params),
   {% endfor %}
@@ -180,6 +184,8 @@ sparse_ext = [
   Extension(name="cysparse.sparse.csr_mat_matrices.csr_mat_@index_type@_@element_type@",
             sources=["cysparse/sparse/csr_mat_matrices/csr_mat_@index_type@_@element_type@.pxd",
                      "cysparse/sparse/csr_mat_matrices/csr_mat_@index_type@_@element_type@.pyx",
+                     "cysparse/sparse/csr_mat_matrices/csr_mat_helpers/csr_mat_multiplication_@index_type@_@element_type@.pxi",
+                     "cysparse/sparse/csr_mat_matrices/csr_mat_kernel/csr_mat_multiplication_by_numpy_vector_kernel_@index_type@_@element_type@.pxi",
                      ],
             **sparse_ext_params),
   {% endfor %}
@@ -193,6 +199,8 @@ sparse_ext = [
   Extension(name="cysparse.sparse.csc_mat_matrices.csc_mat_@index_type@_@element_type@",
             sources=["cysparse/sparse/csc_mat_matrices/csc_mat_@index_type@_@element_type@.pxd",
                      "cysparse/sparse/csc_mat_matrices/csc_mat_@index_type@_@element_type@.pyx",
+                     "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_@index_type@_@element_type@.pxi",
+                     "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_@index_type@_@element_type@.pxi",
                      ],
             **sparse_ext_params),
   {% endfor %}
