@@ -349,7 +349,7 @@ cdef LLSparseMatrixView_INT32_t_FLOAT32_t MakeLLSparseMatrixViewFromView_INT32_t
     """
     cdef:
         INT32_t nrow
-        INT32_t * row_indices,
+        INT32_t * row_indices
         INT32_t ncol
         INT32_t * col_indices
         INT32_t A_nrow = A.__nrow

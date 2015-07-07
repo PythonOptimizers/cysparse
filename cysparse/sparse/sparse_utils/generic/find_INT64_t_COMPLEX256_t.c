@@ -242,8 +242,8 @@ class __Pyx_FakeReference {
 #define _USE_MATH_DEFINES
 #endif
 #include <math.h>
-#define __PYX_HAVE__cysparse__sparse__sparse_utils__generic__find_INT64_t
-#define __PYX_HAVE_API__cysparse__sparse__sparse_utils__generic__find_INT64_t
+#define __PYX_HAVE__cysparse__sparse__sparse_utils__generic__find_INT64_t_COMPLEX256_t
+#define __PYX_HAVE_API__cysparse__sparse__sparse_utils__generic__find_INT64_t_COMPLEX256_t
 #include "string.h"
 #include "stdio.h"
 #include "pythread.h"
@@ -455,7 +455,7 @@ static const char *__pyx_filename;
 
 
 static const char *__pyx_f[] = {
-  "se/sparse_utils/generic/find_INT64_t_COMPLEX256_t.pyx",
+  "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX256_t.pyx",
   "type.pxd",
   "bool.pxd",
   "complex.pxd",
@@ -844,6 +844,8 @@ static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *);
 
 static int __Pyx_check_binary_version(void);
 
+static int __Pyx_ExportFunction(const char *name, void (*f)(void), const char *sig);
+
 #if !defined(__Pyx_PyIdentifier_FromString)
 #if PY_MAJOR_VERSION < 3
   #define __Pyx_PyIdentifier_FromString(s) PyString_FromString(s)
@@ -944,12 +946,12 @@ static PyTypeObject *__pyx_ptype_7cpython_7complex_complex = 0;
 
 /* Module declarations from 'cysparse.types.cysparse_types' */
 
-/* Module declarations from 'cysparse.sparse.sparse_utils.generic.find_INT64_t' */
-static __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_f_8cysparse_6sparse_12sparse_utils_7generic_12find_INT64_t_compare_complex_COMPLEX256_t(__pyx_t_long_double_complex, __pyx_t_long_double_complex); /*proto*/
-#define __Pyx_MODULE_NAME "cysparse.sparse.sparse_utils.generic.find_INT64_t"
-int __pyx_module_is_main_cysparse__sparse__sparse_utils__generic__find_INT64_t = 0;
+/* Module declarations from 'cysparse.sparse.sparse_utils.generic.find_INT64_t_COMPLEX256_t' */
+static __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_f_8cysparse_6sparse_12sparse_utils_7generic_25find_INT64_t_COMPLEX256_t_compare_complex_COMPLEX256_t(__pyx_t_long_double_complex, __pyx_t_long_double_complex); /*proto*/
+#define __Pyx_MODULE_NAME "cysparse.sparse.sparse_utils.generic.find_INT64_t_COMPLEX256_t"
+int __pyx_module_is_main_cysparse__sparse__sparse_utils__generic__find_INT64_t_COMPLEX256_t = 0;
 
-/* Implementation of 'cysparse.sparse.sparse_utils.generic.find_INT64_t' */
+/* Implementation of 'cysparse.sparse.sparse_utils.generic.find_INT64_t_COMPLEX256_t' */
 static char __pyx_k_main[] = "__main__";
 static char __pyx_k_test[] = "__test__";
 static char __pyx_k_Lower_bound_must_be_smaller_than[] = "Lower bound must be smaller than upper bound";
@@ -965,7 +967,7 @@ static PyObject *__pyx_n_s_test;
  *     Compare two complex numbers.
  */
 
-static __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_f_8cysparse_6sparse_12sparse_utils_7generic_12find_INT64_t_compare_complex_COMPLEX256_t(__pyx_t_long_double_complex __pyx_v_a, __pyx_t_long_double_complex __pyx_v_b) {
+static __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_f_8cysparse_6sparse_12sparse_utils_7generic_25find_INT64_t_COMPLEX256_t_compare_complex_COMPLEX256_t(__pyx_t_long_double_complex __pyx_v_a, __pyx_t_long_double_complex __pyx_v_b) {
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_r;
   __Pyx_RefNannyDeclarations
   int __pyx_t_1;
@@ -1089,7 +1091,7 @@ static __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_f_8cysparse_6spar
  *     Find the index of a given element in an array by bissecting.
  */
 
-static __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_f_8cysparse_6sparse_12sparse_utils_7generic_12find_INT64_t_find_bisec_INT64_t_COMPLEX256_t(__pyx_t_long_double_complex __pyx_v_element, __pyx_t_long_double_complex *__pyx_v_array, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_v_lb, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_v_ub) {
+static __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_f_8cysparse_6sparse_12sparse_utils_7generic_25find_INT64_t_COMPLEX256_t_find_bisec_INT64_t_COMPLEX256_t(__pyx_t_long_double_complex __pyx_v_element, __pyx_t_long_double_complex *__pyx_v_array, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_v_lb, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_v_ub) {
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_v_lb_;
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_v_ub_;
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_v_middle_;
@@ -1173,7 +1175,7 @@ static __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_f_8cysparse_6spar
  *             ub_ = middle_
  *         elif compare_complex_COMPLEX256_t(array[middle_], element) < 0:
  */
-    __pyx_t_1 = ((__pyx_f_8cysparse_6sparse_12sparse_utils_7generic_12find_INT64_t_compare_complex_COMPLEX256_t((__pyx_v_array[__pyx_v_middle_]), __pyx_v_element) > 0) != 0);
+    __pyx_t_1 = ((__pyx_f_8cysparse_6sparse_12sparse_utils_7generic_25find_INT64_t_COMPLEX256_t_compare_complex_COMPLEX256_t((__pyx_v_array[__pyx_v_middle_]), __pyx_v_element) > 0) != 0);
     if (__pyx_t_1) {
 
       /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX256_t.pyx":69
@@ -1194,7 +1196,7 @@ static __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_f_8cysparse_6spar
  *             lb_ = middle_
  *         else:
  */
-    __pyx_t_1 = ((__pyx_f_8cysparse_6sparse_12sparse_utils_7generic_12find_INT64_t_compare_complex_COMPLEX256_t((__pyx_v_array[__pyx_v_middle_]), __pyx_v_element) < 0) != 0);
+    __pyx_t_1 = ((__pyx_f_8cysparse_6sparse_12sparse_utils_7generic_25find_INT64_t_COMPLEX256_t_compare_complex_COMPLEX256_t((__pyx_v_array[__pyx_v_middle_]), __pyx_v_element) < 0) != 0);
     if (__pyx_t_1) {
 
       /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX256_t.pyx":71
@@ -1283,7 +1285,7 @@ static __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_f_8cysparse_6spar
 
   /* function exit code */
   __pyx_L1_error:;
-  __Pyx_AddTraceback("cysparse.sparse.sparse_utils.generic.find_INT64_t.find_bisec_INT64_t_COMPLEX256_t", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("cysparse.sparse.sparse_utils.generic.find_INT64_t_COMPLEX256_t.find_bisec_INT64_t_COMPLEX256_t", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = -1;
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();
@@ -1298,7 +1300,7 @@ static __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_f_8cysparse_6spar
  *     Find the index of a given element in an array by linear search.
  */
 
-static __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_f_8cysparse_6sparse_12sparse_utils_7generic_12find_INT64_t_find_linear_INT64_t_COMPLEX256_t(__pyx_t_long_double_complex __pyx_v_element, __pyx_t_long_double_complex *__pyx_v_array, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_v_lb, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_v_ub) {
+static __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_f_8cysparse_6sparse_12sparse_utils_7generic_25find_INT64_t_COMPLEX256_t_find_linear_INT64_t_COMPLEX256_t(__pyx_t_long_double_complex __pyx_v_element, __pyx_t_long_double_complex *__pyx_v_array, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_v_lb, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_v_ub) {
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_v_index;
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_r;
   __Pyx_RefNannyDeclarations
@@ -1309,7 +1311,7 @@ static __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_f_8cysparse_6spar
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("find_linear_INT64_t_COMPLEX256_t", 0);
 
-  /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX256_t.pyx":97
+  /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX256_t.pyx":100
  * 
  *     """
  *     assert lb < ub, "Lower bound must be smaller than upper bound"             # <<<<<<<<<<<<<<
@@ -1320,12 +1322,12 @@ static __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_f_8cysparse_6spar
   if (unlikely(!Py_OptimizeFlag)) {
     if (unlikely(!((__pyx_v_lb < __pyx_v_ub) != 0))) {
       PyErr_SetObject(PyExc_AssertionError, __pyx_kp_s_Lower_bound_must_be_smaller_than);
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 97; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 100; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
   }
   #endif
 
-  /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX256_t.pyx":102
+  /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX256_t.pyx":105
  *         INT64_t index
  * 
  *     for index from lb <= index < ub:             # <<<<<<<<<<<<<<
@@ -1335,7 +1337,7 @@ static __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_f_8cysparse_6spar
   __pyx_t_1 = __pyx_v_ub;
   for (__pyx_v_index = __pyx_v_lb; __pyx_v_index < __pyx_t_1; __pyx_v_index++) {
 
-    /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX256_t.pyx":103
+    /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX256_t.pyx":106
  * 
  *     for index from lb <= index < ub:
  *         if array[index] == element:             # <<<<<<<<<<<<<<
@@ -1345,7 +1347,7 @@ static __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_f_8cysparse_6spar
     __pyx_t_2 = ((__Pyx_c_eql((__pyx_v_array[__pyx_v_index]), __pyx_v_element)) != 0);
     if (__pyx_t_2) {
 
-      /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX256_t.pyx":104
+      /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX256_t.pyx":107
  *     for index from lb <= index < ub:
  *         if array[index] == element:
  *             break             # <<<<<<<<<<<<<<
@@ -1357,7 +1359,7 @@ static __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_f_8cysparse_6spar
   }
   __pyx_L4_break:;
 
-  /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX256_t.pyx":106
+  /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX256_t.pyx":109
  *             break
  * 
  *     return index             # <<<<<<<<<<<<<<
@@ -1375,7 +1377,7 @@ static __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_f_8cysparse_6spar
 
   /* function exit code */
   __pyx_L1_error:;
-  __Pyx_AddTraceback("cysparse.sparse.sparse_utils.generic.find_INT64_t.find_linear_INT64_t_COMPLEX256_t", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("cysparse.sparse.sparse_utils.generic.find_INT64_t_COMPLEX256_t.find_linear_INT64_t_COMPLEX256_t", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = -1;
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();
@@ -1393,7 +1395,7 @@ static struct PyModuleDef __pyx_moduledef = {
   #else
     PyModuleDef_HEAD_INIT,
   #endif
-    "find_INT64_t",
+    "find_INT64_t_COMPLEX256_t",
     0, /* m_doc */
     -1, /* m_size */
     __pyx_methods /* m_methods */,
@@ -1429,11 +1431,11 @@ static int __Pyx_InitGlobals(void) {
 }
 
 #if PY_MAJOR_VERSION < 3
-PyMODINIT_FUNC initfind_INT64_t(void); /*proto*/
-PyMODINIT_FUNC initfind_INT64_t(void)
+PyMODINIT_FUNC initfind_INT64_t_COMPLEX256_t(void); /*proto*/
+PyMODINIT_FUNC initfind_INT64_t_COMPLEX256_t(void)
 #else
-PyMODINIT_FUNC PyInit_find_INT64_t(void); /*proto*/
-PyMODINIT_FUNC PyInit_find_INT64_t(void)
+PyMODINIT_FUNC PyInit_find_INT64_t_COMPLEX256_t(void); /*proto*/
+PyMODINIT_FUNC PyInit_find_INT64_t_COMPLEX256_t(void)
 #endif
 {
   PyObject *__pyx_t_1 = NULL;
@@ -1450,7 +1452,7 @@ PyMODINIT_FUNC PyInit_find_INT64_t(void)
           Py_FatalError("failed to import 'refnanny' module");
   }
   #endif
-  __Pyx_RefNannySetupContext("PyMODINIT_FUNC PyInit_find_INT64_t(void)", 0);
+  __Pyx_RefNannySetupContext("PyMODINIT_FUNC PyInit_find_INT64_t_COMPLEX256_t(void)", 0);
   if ( __Pyx_check_binary_version() < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_empty_tuple = PyTuple_New(0); if (unlikely(!__pyx_empty_tuple)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_empty_bytes = PyBytes_FromStringAndSize("", 0); if (unlikely(!__pyx_empty_bytes)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -1472,7 +1474,7 @@ PyMODINIT_FUNC PyInit_find_INT64_t(void)
   #endif
   /*--- Module creation code ---*/
   #if PY_MAJOR_VERSION < 3
-  __pyx_m = Py_InitModule4("find_INT64_t", __pyx_methods, 0, 0, PYTHON_API_VERSION); Py_XINCREF(__pyx_m);
+  __pyx_m = Py_InitModule4("find_INT64_t_COMPLEX256_t", __pyx_methods, 0, 0, PYTHON_API_VERSION); Py_XINCREF(__pyx_m);
   #else
   __pyx_m = PyModule_Create(&__pyx_moduledef);
   #endif
@@ -1489,14 +1491,14 @@ PyMODINIT_FUNC PyInit_find_INT64_t(void)
   #if PY_MAJOR_VERSION < 3 && (__PYX_DEFAULT_STRING_ENCODING_IS_ASCII || __PYX_DEFAULT_STRING_ENCODING_IS_DEFAULT)
   if (__Pyx_init_sys_getdefaultencoding_params() < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   #endif
-  if (__pyx_module_is_main_cysparse__sparse__sparse_utils__generic__find_INT64_t) {
+  if (__pyx_module_is_main_cysparse__sparse__sparse_utils__generic__find_INT64_t_COMPLEX256_t) {
     if (PyObject_SetAttrString(__pyx_m, "__name__", __pyx_n_s_main) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   }
   #if PY_MAJOR_VERSION >= 3
   {
     PyObject *modules = PyImport_GetModuleDict(); if (unlikely(!modules)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    if (!PyDict_GetItemString(modules, "cysparse.sparse.sparse_utils.generic.find_INT64_t")) {
-      if (unlikely(PyDict_SetItemString(modules, "cysparse.sparse.sparse_utils.generic.find_INT64_t", __pyx_m) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (!PyDict_GetItemString(modules, "cysparse.sparse.sparse_utils.generic.find_INT64_t_COMPLEX256_t")) {
+      if (unlikely(PyDict_SetItemString(modules, "cysparse.sparse.sparse_utils.generic.find_INT64_t_COMPLEX256_t", __pyx_m) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
   }
   #endif
@@ -1507,6 +1509,8 @@ PyMODINIT_FUNC PyInit_find_INT64_t(void)
   /*--- Global init code ---*/
   /*--- Variable export code ---*/
   /*--- Function export code ---*/
+  if (__Pyx_ExportFunction("find_bisec_INT64_t_COMPLEX256_t", (void (*)(void))__pyx_f_8cysparse_6sparse_12sparse_utils_7generic_25find_INT64_t_COMPLEX256_t_find_bisec_INT64_t_COMPLEX256_t, "__pyx_t_8cysparse_5types_14cysparse_types_INT64_t (__pyx_t_long_double_complex, __pyx_t_long_double_complex *, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_ExportFunction("find_linear_INT64_t_COMPLEX256_t", (void (*)(void))__pyx_f_8cysparse_6sparse_12sparse_utils_7generic_25find_INT64_t_COMPLEX256_t_find_linear_INT64_t_COMPLEX256_t, "__pyx_t_8cysparse_5types_14cysparse_types_INT64_t (__pyx_t_long_double_complex, __pyx_t_long_double_complex *, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   /*--- Type init code ---*/
   /*--- Type import code ---*/
   __pyx_ptype_7cpython_4type_type = __Pyx_ImportType(__Pyx_BUILTIN_MODULE_NAME, "type", 
@@ -1539,11 +1543,11 @@ PyMODINIT_FUNC PyInit_find_INT64_t(void)
   __Pyx_XDECREF(__pyx_t_1);
   if (__pyx_m) {
     if (__pyx_d) {
-      __Pyx_AddTraceback("init cysparse.sparse.sparse_utils.generic.find_INT64_t", __pyx_clineno, __pyx_lineno, __pyx_filename);
+      __Pyx_AddTraceback("init cysparse.sparse.sparse_utils.generic.find_INT64_t_COMPLEX256_t", __pyx_clineno, __pyx_lineno, __pyx_filename);
     }
     Py_DECREF(__pyx_m); __pyx_m = 0;
   } else if (!PyErr_Occurred()) {
-    PyErr_SetString(PyExc_ImportError, "init cysparse.sparse.sparse_utils.generic.find_INT64_t");
+    PyErr_SetString(PyExc_ImportError, "init cysparse.sparse.sparse_utils.generic.find_INT64_t_COMPLEX256_t");
   }
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();
@@ -2347,6 +2351,42 @@ static int __Pyx_check_binary_version(void) {
         return PyErr_WarnEx(NULL, message, 1);
     }
     return 0;
+}
+
+static int __Pyx_ExportFunction(const char *name, void (*f)(void), const char *sig) {
+    PyObject *d = 0;
+    PyObject *cobj = 0;
+    union {
+        void (*fp)(void);
+        void *p;
+    } tmp;
+    d = PyObject_GetAttrString(__pyx_m, (char *)"__pyx_capi__");
+    if (!d) {
+        PyErr_Clear();
+        d = PyDict_New();
+        if (!d)
+            goto bad;
+        Py_INCREF(d);
+        if (PyModule_AddObject(__pyx_m, (char *)"__pyx_capi__", d) < 0)
+            goto bad;
+    }
+    tmp.fp = f;
+#if PY_VERSION_HEX >= 0x02070000
+    cobj = PyCapsule_New(tmp.p, sig, 0);
+#else
+    cobj = PyCObject_FromVoidPtrAndDesc(tmp.p, (void *)sig, 0);
+#endif
+    if (!cobj)
+        goto bad;
+    if (PyDict_SetItemString(d, name, cobj) < 0)
+        goto bad;
+    Py_DECREF(cobj);
+    Py_DECREF(d);
+    return 0;
+bad:
+    Py_XDECREF(cobj);
+    Py_XDECREF(d);
+    return -1;
 }
 
 #ifndef __PYX_HAVE_RT_ImportModule

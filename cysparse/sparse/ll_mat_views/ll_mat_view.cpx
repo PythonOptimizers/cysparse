@@ -352,7 +352,7 @@ cdef LLSparseMatrixView_@index@_@type@ MakeLLSparseMatrixViewFromView_@index@_@t
     """
     cdef:
         @index@ nrow
-        @index@ * row_indices,
+        @index@ * row_indices
         @index@ ncol
         @index@ * col_indices
         @index@ A_nrow = A.__nrow

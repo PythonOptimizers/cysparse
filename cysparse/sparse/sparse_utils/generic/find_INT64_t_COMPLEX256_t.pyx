@@ -90,6 +90,9 @@ cdef INT64_t find_linear_INT64_t_COMPLEX256_t(COMPLEX256_t element, COMPLEX256_t
         lb: a lower bound on the search index.
         ub: an upper bound on the search index. Note that this bound is not reachable. Thus the search happens inside ``[lb, ub[``.
 
+    Returns:
+        The index of the found element or the upper bound if the element is not found.
+
     Note:
         The array is **not** supposed to be **sorted**. If the arrays contains the element multiple times, only the first one will be choosen,
 

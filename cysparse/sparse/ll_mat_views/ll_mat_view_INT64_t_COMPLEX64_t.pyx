@@ -349,7 +349,7 @@ cdef LLSparseMatrixView_INT64_t_COMPLEX64_t MakeLLSparseMatrixViewFromView_INT64
     """
     cdef:
         INT64_t nrow
-        INT64_t * row_indices,
+        INT64_t * row_indices
         INT64_t ncol
         INT64_t * col_indices
         INT64_t A_nrow = A.__nrow

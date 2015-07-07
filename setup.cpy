@@ -126,7 +126,7 @@ sparse_ext = [
 
 {% for index_type in index_list %}
     {% for element_type in type_list %}
-  Extension(name="cysparse.sparse.sparse_utils.generic.find_@index_type@",
+  Extension(name="cysparse.sparse.sparse_utils.generic.find_@index_type@_@element_type@",
             sources=["cysparse/sparse/sparse_utils/generic/find_@index_type@_@element_type@.pxd",
                      "cysparse/sparse/sparse_utils/generic/find_@index_type@_@element_type@.pyx"],
             **sparse_ext_params),
