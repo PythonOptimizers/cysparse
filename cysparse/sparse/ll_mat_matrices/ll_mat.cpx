@@ -507,6 +507,83 @@ cdef class LLSparseMatrix_@index@_@type@(MutableSparseMatrix_@index@_@type@):
         self.__nrow = newm
         self.__nnz = newnnz
 
+    def delete_cols(self, B):
+        """
+        Delete columns.
+
+        Args:
+            B: List or :program:`NumPy` array with indices of the rows to be deleted.
+        """
+        # TODO: this code is very slow... 
+        if self.__is_symmetric:
+            raise NotImplementedError('This method is not allowed for symmetric matrices')
+
+        cdef:
+            @index@ ncol, col
+            @index@ * col_indices
+            @index@ * shift
+            @index@ newn
+
+        col_indices = create_c_array_indices_from_python_object_@index@(self.__ncol, <PyObject *> B, &ncol)
+
+        # find shift in kept column indices
+        shift = <@index@ *> malloc(self.__ncol*sizeof(@index@))
+        newn = self.__ncol
+
+        # shift is only valid for the column indices we keep
+        # after deletion col[i] = col[i] - shift[i]
+        if find_linear_@index@_@index@(0, col_indices, 0, ncol) == ncol:    # keep first column
+            shift[0] = 0
+        else:                                                               # drop first column
+            shift[0] = 1
+            newn -= 1
+
+        for col from 1 <= col < self.__ncol:
+            if find_linear_@index@_@index@(col, col_indices, 0, ncol) == ncol:    # keep column
+                shift[col] = shift[col - 1]
+            else:                                                                 # drop column
+                shift[col] = shift[col - 1] + 1
+                newn -= 1
+
+        # Delete the cols
+        cdef:
+            @index@ row, old, act
+            @index@ newnnz = self.__nnz
+
+        for row from 0<= row < self.__nrow:
+            old = -1
+            act = self.root[row]
+
+            while act != -1:
+
+                if find_linear_@index@_@index@(self.col[act], col_indices, 0, ncol) == ncol:  # keep column
+                    self.col[act] -= shift[self.col[act]]
+                    old = act
+                    act = self.link[act]
+                else:                                                             # drop column
+                    newnnz -= 1
+                    if self.root[row] == act:             # Special case: first row element
+                        self.root[row] = self.link[act]
+                        old = act
+                        act = self.link[act]
+                        self.link[old] = self.free        # Append element into freelist
+                        self.free = old
+                    else:                                 # Regular case: element inbetween
+                        act = self.link[act]
+                        self.link[self.link[old]] = self.free
+                        self.free = self.link[old]
+                        self.link[old] = act              # Append element into freelist
+
+
+        # Update
+        self.__ncol = newn
+        self.__nnz = newnnz
+
+
+        PyMem_Free(col_indices)
+        free(shift)
+
+
     def clear_submatrix(self, @index@ start_i, @index@ stop_i, @index@ start_j, @index@ stop_j):
         """
         Remove all non zero entries in ``A[start_i:stop_i, start_j: stop_j]``.
