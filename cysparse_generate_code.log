@@ -16484,3 +16484,35 @@
 2015-07-07 13:47:51,232 - INFO - Parsing file '/home/nikolaj/Documents/WORK/Dominique/PROJECT/domisparse_virtual_env/try1/cysparse/tests/cysparse/sparse/csr_mat_matrices/generic/test_csr_multiplication_with_numpy_vector.cpy'
 2015-07-07 13:47:51,260 - INFO -    Source didn't change
 2015-07-07 13:47:51,260 - INFO - Stop some action(s)
+2015-07-07 13:52:45,436 - INFO - ****************************************************************************************************
+2015-07-07 13:52:45,436 - INFO - ****************************************************************************************************
+2015-07-07 13:52:45,436 - INFO - Start some action(s)
+2015-07-07 13:52:45,436 - INFO - Act for setup file
+2015-07-07 13:52:45,436 - INFO - Cleaning directory '/home/nikolaj/Documents/WORK/Dominique/PROJECT/domisparse_virtual_env/try1/cysparse'
+2015-07-07 13:52:45,437 - INFO - Act for generic types
+2015-07-07 13:52:45,437 - INFO - Cleaning directory '/home/nikolaj/Documents/WORK/Dominique/PROJECT/domisparse_virtual_env/try1/cysparse/cysparse/sparse'
+2015-07-07 13:52:45,437 - INFO - Cleaning directory '/home/nikolaj/Documents/WORK/Dominique/PROJECT/domisparse_virtual_env/try1/cysparse/cysparse/sparse'
+2015-07-07 13:52:45,437 - INFO - Act for matrices
+2015-07-07 13:52:45,437 - INFO - Clean generated files
+2015-07-07 13:52:45,437 - INFO - Cleaning directory '/home/nikolaj/Documents/WORK/Dominique/PROJECT/domisparse_virtual_env/try1/cysparse/cysparse/sparse/sparse_utils/generic'
+2015-07-07 13:52:45,438 - INFO - Cleaning directory '/home/nikolaj/Documents/WORK/Dominique/PROJECT/domisparse_virtual_env/try1/cysparse/cysparse/sparse/s_mat_matrices'
+2015-07-07 13:52:45,438 - INFO - Cleaning directory '/home/nikolaj/Documents/WORK/Dominique/PROJECT/domisparse_virtual_env/try1/cysparse/cysparse/sparse/sparse_proxies'
+2015-07-07 13:52:45,438 - INFO - Cleaning directory '/home/nikolaj/Documents/WORK/Dominique/PROJECT/domisparse_virtual_env/try1/cysparse/cysparse/sparse/sparse_proxies'
+2015-07-07 13:52:45,439 - INFO - Cleaning directory '/home/nikolaj/Documents/WORK/Dominique/PROJECT/domisparse_virtual_env/try1/cysparse/cysparse/sparse/sparse_proxies/complex_generic'
+2015-07-07 13:52:45,439 - INFO - Cleaning directory '/home/nikolaj/Documents/WORK/Dominique/PROJECT/domisparse_virtual_env/try1/cysparse/cysparse/sparse/ll_mat_matrices'
+2015-07-07 13:52:45,440 - INFO - Cleaning directory '/home/nikolaj/Documents/WORK/Dominique/PROJECT/domisparse_virtual_env/try1/cysparse/cysparse/sparse'
+2015-07-07 13:52:45,440 - INFO - Cleaning directory '/home/nikolaj/Documents/WORK/Dominique/PROJECT/domisparse_virtual_env/try1/cysparse/cysparse/sparse/ll_mat_matrices/ll_mat_kernel'
+2015-07-07 13:52:45,440 - INFO - Cleaning directory '/home/nikolaj/Documents/WORK/Dominique/PROJECT/domisparse_virtual_env/try1/cysparse/cysparse/sparse/ll_mat_matrices/ll_mat_helpers'
+2015-07-07 13:52:45,441 - INFO - Cleaning directory '/home/nikolaj/Documents/WORK/Dominique/PROJECT/domisparse_virtual_env/try1/cysparse/cysparse/sparse/ll_mat_matrices/ll_mat_IO'
+2015-07-07 13:52:45,441 - INFO - Cleaning directory '/home/nikolaj/Documents/WORK/Dominique/PROJECT/domisparse_virtual_env/try1/cysparse/cysparse/sparse/ll_mat_matrices/ll_mat_constructors'
+2015-07-07 13:52:45,442 - INFO - Cleaning directory '/home/nikolaj/Documents/WORK/Dominique/PROJECT/domisparse_virtual_env/try1/cysparse/cysparse/sparse/ll_mat_views'
+2015-07-07 13:52:45,443 - INFO - Cleaning directory '/home/nikolaj/Documents/WORK/Dominique/PROJECT/domisparse_virtual_env/try1/cysparse/cysparse/sparse/csr_mat_matrices'
+2015-07-07 13:52:45,444 - INFO - Cleaning directory '/home/nikolaj/Documents/WORK/Dominique/PROJECT/domisparse_virtual_env/try1/cysparse/cysparse/sparse/csr_mat_matrices/csr_mat_kernel'
+2015-07-07 13:52:45,444 - INFO - Cleaning directory '/home/nikolaj/Documents/WORK/Dominique/PROJECT/domisparse_virtual_env/try1/cysparse/cysparse/sparse/csr_mat_matrices/csr_mat_helpers'
+2015-07-07 13:52:45,444 - INFO - Cleaning directory '/home/nikolaj/Documents/WORK/Dominique/PROJECT/domisparse_virtual_env/try1/cysparse/cysparse/sparse/csc_mat_matrices'
+2015-07-07 13:52:45,445 - INFO - Cleaning directory '/home/nikolaj/Documents/WORK/Dominique/PROJECT/domisparse_virtual_env/try1/cysparse/cysparse/sparse/csc_mat_matrices/csc_mat_kernel'
+2015-07-07 13:52:45,445 - INFO - Cleaning directory '/home/nikolaj/Documents/WORK/Dominique/PROJECT/domisparse_virtual_env/try1/cysparse/cysparse/sparse/csc_mat_matrices/csc_mat_helpers'
+2015-07-07 13:52:45,446 - INFO - Act for generic tests
+2015-07-07 13:52:45,446 - INFO - Cleaning directory '/home/nikolaj/Documents/WORK/Dominique/PROJECT/domisparse_virtual_env/try1/cysparse/tests/cysparse/sparse/csc_mat_matrices/generic'
+2015-07-07 13:52:45,446 - INFO - Cleaning directory '/home/nikolaj/Documents/WORK/Dominique/PROJECT/domisparse_virtual_env/try1/cysparse/tests/cysparse/sparse/csr_mat_matrices/generic'
+2015-07-07 13:52:45,446 - INFO - Stop some action(s)
