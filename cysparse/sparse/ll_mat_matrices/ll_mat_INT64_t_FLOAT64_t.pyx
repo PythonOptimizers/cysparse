@@ -362,14 +362,13 @@ cdef class LLSparseMatrix_INT64_t_FLOAT64_t(MutableSparseMatrix_INT64_t_FLOAT64_
 
                     k = self.link[k]
 
-    def delete_rows(self, B):
+    def delete_rows(self, Obj):
         """
         Delete rows.
 
         Args:
-            B: List or :program:`NumPy` array with indices of the rows to be deleted.
+            Obj: List or :program:`NumPy` array with indices of the rows to be deleted.
         """
-        # TODO: this code is duplicated from 'delete_rows_with_mask': maybe we should merge both codes?
         # TODO: this code is very slow... maybe optimize one day? In particular the main loop combined with linear search
         #       for non existing elements is particularly poor design.
 
@@ -380,7 +379,7 @@ cdef class LLSparseMatrix_INT64_t_FLOAT64_t(MutableSparseMatrix_INT64_t_FLOAT64_
             INT64_t nrow
             INT64_t * row_indices
 
-        row_indices = create_c_array_indices_from_python_object_INT64_t(self.__nrow, <PyObject *> B, &nrow)
+        row_indices = create_c_array_indices_from_python_object_INT64_t(self.__nrow, <PyObject *> Obj, &nrow)
 
         # Delete the rows to be cancelled by rearranging the row
         # array. After having done so, newdim is the new matrix dim.
@@ -412,108 +411,14 @@ cdef class LLSparseMatrix_INT64_t_FLOAT64_t(MutableSparseMatrix_INT64_t_FLOAT64_
 
         PyMem_Free(row_indices)
 
-    def delete_row(self, INT64_t row):
-        """
-        Delete one row in place.
-
-        Args:
-            row: Number of the row to delete.
-
-        Note:
-            **Don't** call this method repeatly to delete several rows. See ...
-        """
-        # Deleting one or several rows takes the same amount of time.
-
-        if not (0<= row < self.__nrow):
-            raise IndexError('Wrong row number (%d)' % row)
-
-        if self.__is_symmetric:
-            raise NotImplementedError('This method is not allowed for symmetric matrices')
-
-        cdef:
-            INT64_t act, i
-            INT64_t newnnz = self.__nnz
-
-        # deal with the row to be deleted
-        act = self.root[row]
-
-        if act != -1:
-            newnnz -= 1
-            while self.link[act] != -1: #  Walk to the end of the list
-                act = self.link[act]
-                newnnz -= 1
-
-            self.link[act] = self.free  # Attach end of row to free list
-            self.free = self.root[row] # Start free list where row began
-
-        # Shift remaining rows to the left
-        for i from row <= i < self.__nrow - 1:
-            self.root[i] = self.root[i+1]
-
-        # Set the new values
-        self.__nrow = self.__nrow - 1
-        self.__nnz = newnnz
-
-    def delete_rows_with_mask(self, cnp.ndarray[dtype=cnp.npy_int8, ndim=1] maskArray):
-        """
-        Delete rows according to a mask ``maskArray``.
-
-        If ``maskArray[i] == False``, we delete row ``i``.
-
-        Args:
-            maskArray: :program:`NumPy` array with elements corresponding to the rows, i.e. the array must be at least as long as there are
-                rows in the matrix.
-
-        Warning:
-            We use ``int8`` as element type for the mask.
-        """
-        # Warning: we use int8 instead of bool. There are too many problems with the bool type...
-
-        if self.__is_symmetric:
-            raise NotImplementedError('This method is not allowed for symmetric matrices')
-
-        if maskArray.size < self.__nrow:
-            raise IndexError('Mask array must be at least as long as the number of rows in this matrix')
-
-        # Delete the rows to be cancelled by rearranging the row
-        # array. After having done so, newdim is the new matrix dim.
-        cdef:
-            INT64_t row, act
-            INT64_t newm = 0
-            INT64_t newnnz = self.__nnz
-
-        cdef:
-            signed char * maskArray_data = <signed char *> cnp.PyArray_DATA(maskArray)
-            INT64_t maskArray_stride = <INT64_t> maskArray.strides[0]
-
-        for row from 0<= row < self.__nrow:
-
-            if maskArray_data[row * maskArray_stride]: # This row has to be kept
-                self.root[newm] = self.root[row]       # Shift row to the left
-                newm += 1
-            else:  #  row left out; update free list
-                act = self.root[row]
-                if act != -1:
-                    newnnz -= 1
-                    while self.link[act] != -1:        #  Walk to the end of the list
-                        act = self.link[act]
-                        newnnz -= 1
-
-                    self.link[act] = self.free         # Attach end of row to free list
-                    self.free = self.root[row]         # Start free list where row began
-
-
-        # Set the new values
-        self.__nrow = newm
-        self.__nnz = newnnz
-
-    def delete_cols(self, B):
+    def delete_cols(self, Obj):
         """
         Delete columns.
 
         Args:
-            B: List or :program:`NumPy` array with indices of the rows to be deleted.
+            Obj: List or :program:`NumPy` array with indices of the rows to be deleted.
         """
+        # TODO: this code is very slow...
         if self.__is_symmetric:
             raise NotImplementedError('This method is not allowed for symmetric matrices')
 
@@ -523,7 +428,7 @@ cdef class LLSparseMatrix_INT64_t_FLOAT64_t(MutableSparseMatrix_INT64_t_FLOAT64_
             INT64_t * shift
             INT64_t newn
 
-        col_indices = create_c_array_indices_from_python_object_INT64_t(self.__ncol, <PyObject *> B, &ncol)
+        col_indices = create_c_array_indices_from_python_object_INT64_t(self.__ncol, <PyObject *> Obj, &ncol)
 
         # find shift in kept column indices
         shift = <INT64_t *> malloc(self.__ncol*sizeof(INT64_t))
@@ -577,7 +482,6 @@ cdef class LLSparseMatrix_INT64_t_FLOAT64_t(MutableSparseMatrix_INT64_t_FLOAT64_
         # Update
         self.__ncol = newn
         self.__nnz = newnnz
-
 
         PyMem_Free(col_indices)
         free(shift)

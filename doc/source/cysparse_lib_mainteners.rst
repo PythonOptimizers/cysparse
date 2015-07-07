@@ -35,7 +35,7 @@ if it does you might generate difficult to find bugs. Trust me on this one.
 Justifications
 -----------------
 
-Following conventions is not always easy, especially if you don't understand them. In this sub-section we try to convince you or at least we try to explain and justify some choices I (Nikolaj) made.
+Following conventions is not always easy, especially if you don't understand them. In this sub-section we try to convince you or at least we try to explain and justify some choices I (Nikolaj) made (and try to follow).
 
 These conventions were made with the following purpose in mind:
 
