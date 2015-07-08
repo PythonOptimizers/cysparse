@@ -845,9 +845,15 @@ cdef class LLSparseMatrix_INT64_t_INT64_t(MutableSparseMatrix_INT64_t_INT64_t):
     # COUNTING ELEMENTS
     ####################################################################################################################
     # TODO: to be done
-    cdef INT64_t count_nnz_from_indices(self, INT64_t * row_indices,INT64_t row_indices_length, INT64_t * col_indices, INT64_t col_indices_length):
+    cdef INT64_t count_nnz_from_indices(self, INT64_t * row_indices,INT64_t row_indices_length, INT64_t * col_indices,
+                                        INT64_t col_indices_length, bint count_only_stored=True):
         """
         Counts the nnz specified by row and column indices.
+
+        Args:
+            real_count: If we count the real values stored or if we count the values supposed to be stored. This only
+                applies for symmetric matrices. Do we return the number of nnz stored or the number of elements in the
+                matrix?
 
         Note:
             A row or column index can be repeated and indices are **not** supposed to be sorted.
@@ -863,7 +869,7 @@ cdef class LLSparseMatrix_INT64_t_INT64_t(MutableSparseMatrix_INT64_t_INT64_t):
 
         # NON OPTIMIZED CODE (VERY SLOW CODE: O(nnz * nrow * ncol) )
 
-        if self.is_symmetric:
+        if self.is_symmetric and count_only_stored:
             for i from 0 <= i < self.__nrow:
                 k = self.root[i]
                 while k != -1:
@@ -882,7 +888,7 @@ cdef class LLSparseMatrix_INT64_t_INT64_t(MutableSparseMatrix_INT64_t_INT64_t):
                     k = self.link[k]
 
 
-        else:   # non symmetric
+        else:   # non symmetric or count_only_stored == False
             for i from 0 <= i < self.__nrow:
                 k = self.root[i]
                 while k != -1:

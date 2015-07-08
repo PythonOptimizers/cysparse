@@ -10,21 +10,19 @@ from cpython cimport PyObject
 
 cdef class LLSparseMatrixView_INT32_t_COMPLEX64_t:
     cdef:
-        public INT32_t nrow    # number of rows of the collected view
-        public INT32_t ncol    # number of columns of the collected view
+        INT32_t __nrow    # number of rows of the collected view
+        INT32_t __ncol    # number of columns of the collected view
 
-        public bint is_empty  # view is empty, probably constructed with bad index objects
+        bint __is_empty   # view is empty, probably constructed with bad index objects
 
-        public char * __type_name   # Name of matrix view type
-        public char * type        # Type of matrix view
+        str __type_name   # Name of matrix view type
+        str __type        # Type of matrix view
 
         INT32_t * row_indices  # collected row indices
         INT32_t * col_indices  # collected col indices
 
         LLSparseMatrix_INT32_t_COMPLEX64_t A
 
-        bint __is_symmetric
-        bint __store_zeros
 
     ####################################################################################################################
     # SET/GET

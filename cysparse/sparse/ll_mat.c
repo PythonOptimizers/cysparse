@@ -1459,16 +1459,14 @@ struct __pyx_obj_8cysparse_6sparse_14s_mat_matrices_21s_mat_INT32_t_INT32_t_Immu
 struct __pyx_obj_8cysparse_6sparse_12ll_mat_views_27ll_mat_view_INT32_t_INT32_t_LLSparseMatrixView_INT32_t_INT32_t {
   PyObject_HEAD
   struct __pyx_vtabstruct_8cysparse_6sparse_12ll_mat_views_27ll_mat_view_INT32_t_INT32_t_LLSparseMatrixView_INT32_t_INT32_t *__pyx_vtab;
-  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t nrow;
-  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t ncol;
-  int is_empty;
-  char *__type_name;
-  char *type;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx___nrow;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx___ncol;
+  int __pyx___is_empty;
+  PyObject *__pyx___type_name;
+  PyObject *__pyx___type;
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *row_indices;
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *col_indices;
   struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT32_t_INT32_t_LLSparseMatrix_INT32_t_INT32_t *A;
-  int __pyx___is_symmetric;
-  int __pyx___store_zeros;
 };
 
 
@@ -1546,16 +1544,14 @@ struct __pyx_obj_8cysparse_6sparse_14s_mat_matrices_21s_mat_INT32_t_INT64_t_Immu
 struct __pyx_obj_8cysparse_6sparse_12ll_mat_views_27ll_mat_view_INT32_t_INT64_t_LLSparseMatrixView_INT32_t_INT64_t {
   PyObject_HEAD
   struct __pyx_vtabstruct_8cysparse_6sparse_12ll_mat_views_27ll_mat_view_INT32_t_INT64_t_LLSparseMatrixView_INT32_t_INT64_t *__pyx_vtab;
-  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t nrow;
-  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t ncol;
-  int is_empty;
-  char *__type_name;
-  char *type;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx___nrow;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx___ncol;
+  int __pyx___is_empty;
+  PyObject *__pyx___type_name;
+  PyObject *__pyx___type;
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *row_indices;
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *col_indices;
   struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT32_t_INT64_t_LLSparseMatrix_INT32_t_INT64_t *A;
-  int __pyx___is_symmetric;
-  int __pyx___store_zeros;
 };
 
 
@@ -1633,16 +1629,14 @@ struct __pyx_obj_8cysparse_6sparse_14s_mat_matrices_23s_mat_INT32_t_FLOAT32_t_Im
 struct __pyx_obj_8cysparse_6sparse_12ll_mat_views_29ll_mat_view_INT32_t_FLOAT32_t_LLSparseMatrixView_INT32_t_FLOAT32_t {
   PyObject_HEAD
   struct __pyx_vtabstruct_8cysparse_6sparse_12ll_mat_views_29ll_mat_view_INT32_t_FLOAT32_t_LLSparseMatrixView_INT32_t_FLOAT32_t *__pyx_vtab;
-  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t nrow;
-  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t ncol;
-  int is_empty;
-  char *__type_name;
-  char *type;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx___nrow;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx___ncol;
+  int __pyx___is_empty;
+  PyObject *__pyx___type_name;
+  PyObject *__pyx___type;
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *row_indices;
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *col_indices;
   struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT32_t_LLSparseMatrix_INT32_t_FLOAT32_t *A;
-  int __pyx___is_symmetric;
-  int __pyx___store_zeros;
 };
 
 
@@ -1720,16 +1714,14 @@ struct __pyx_obj_8cysparse_6sparse_14s_mat_matrices_23s_mat_INT32_t_FLOAT64_t_Im
 struct __pyx_obj_8cysparse_6sparse_12ll_mat_views_29ll_mat_view_INT32_t_FLOAT64_t_LLSparseMatrixView_INT32_t_FLOAT64_t {
   PyObject_HEAD
   struct __pyx_vtabstruct_8cysparse_6sparse_12ll_mat_views_29ll_mat_view_INT32_t_FLOAT64_t_LLSparseMatrixView_INT32_t_FLOAT64_t *__pyx_vtab;
-  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t nrow;
-  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t ncol;
-  int is_empty;
-  char *__type_name;
-  char *type;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx___nrow;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx___ncol;
+  int __pyx___is_empty;
+  PyObject *__pyx___type_name;
+  PyObject *__pyx___type;
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *row_indices;
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *col_indices;
   struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT64_t_LLSparseMatrix_INT32_t_FLOAT64_t *A;
-  int __pyx___is_symmetric;
-  int __pyx___store_zeros;
 };
 
 
@@ -1807,16 +1799,14 @@ struct __pyx_obj_8cysparse_6sparse_14s_mat_matrices_24s_mat_INT32_t_FLOAT128_t_I
 struct __pyx_obj_8cysparse_6sparse_12ll_mat_views_30ll_mat_view_INT32_t_FLOAT128_t_LLSparseMatrixView_INT32_t_FLOAT128_t {
   PyObject_HEAD
   struct __pyx_vtabstruct_8cysparse_6sparse_12ll_mat_views_30ll_mat_view_INT32_t_FLOAT128_t_LLSparseMatrixView_INT32_t_FLOAT128_t *__pyx_vtab;
-  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t nrow;
-  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t ncol;
-  int is_empty;
-  char *__type_name;
-  char *type;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx___nrow;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx___ncol;
+  int __pyx___is_empty;
+  PyObject *__pyx___type_name;
+  PyObject *__pyx___type;
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *row_indices;
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *col_indices;
   struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_25ll_mat_INT32_t_FLOAT128_t_LLSparseMatrix_INT32_t_FLOAT128_t *A;
-  int __pyx___is_symmetric;
-  int __pyx___store_zeros;
 };
 
 
@@ -1918,16 +1908,14 @@ struct __pyx_obj_8cysparse_6sparse_14s_mat_matrices_25s_mat_INT32_t_COMPLEX64_t_
 struct __pyx_obj_8cysparse_6sparse_12ll_mat_views_31ll_mat_view_INT32_t_COMPLEX64_t_LLSparseMatrixView_INT32_t_COMPLEX64_t {
   PyObject_HEAD
   struct __pyx_vtabstruct_8cysparse_6sparse_12ll_mat_views_31ll_mat_view_INT32_t_COMPLEX64_t_LLSparseMatrixView_INT32_t_COMPLEX64_t *__pyx_vtab;
-  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t nrow;
-  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t ncol;
-  int is_empty;
-  char *__type_name;
-  char *type;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx___nrow;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx___ncol;
+  int __pyx___is_empty;
+  PyObject *__pyx___type_name;
+  PyObject *__pyx___type;
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *row_indices;
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *col_indices;
   struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT32_t_COMPLEX64_t_LLSparseMatrix_INT32_t_COMPLEX64_t *A;
-  int __pyx___is_symmetric;
-  int __pyx___store_zeros;
 };
 
 
@@ -2029,16 +2017,14 @@ struct __pyx_obj_8cysparse_6sparse_14s_mat_matrices_26s_mat_INT32_t_COMPLEX128_t
 struct __pyx_obj_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_LLSparseMatrixView_INT32_t_COMPLEX128_t {
   PyObject_HEAD
   struct __pyx_vtabstruct_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX128_t_LLSparseMatrixView_INT32_t_COMPLEX128_t *__pyx_vtab;
-  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t nrow;
-  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t ncol;
-  int is_empty;
-  char *__type_name;
-  char *type;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx___nrow;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx___ncol;
+  int __pyx___is_empty;
+  PyObject *__pyx___type_name;
+  PyObject *__pyx___type;
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *row_indices;
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *col_indices;
   struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32_t_COMPLEX128_t_LLSparseMatrix_INT32_t_COMPLEX128_t *A;
-  int __pyx___is_symmetric;
-  int __pyx___store_zeros;
 };
 
 
@@ -2140,16 +2126,14 @@ struct __pyx_obj_8cysparse_6sparse_14s_mat_matrices_26s_mat_INT32_t_COMPLEX256_t
 struct __pyx_obj_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX256_t_LLSparseMatrixView_INT32_t_COMPLEX256_t {
   PyObject_HEAD
   struct __pyx_vtabstruct_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX256_t_LLSparseMatrixView_INT32_t_COMPLEX256_t *__pyx_vtab;
-  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t nrow;
-  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t ncol;
-  int is_empty;
-  char *__type_name;
-  char *type;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx___nrow;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx___ncol;
+  int __pyx___is_empty;
+  PyObject *__pyx___type_name;
+  PyObject *__pyx___type;
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *row_indices;
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *col_indices;
   struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32_t_COMPLEX256_t_LLSparseMatrix_INT32_t_COMPLEX256_t *A;
-  int __pyx___is_symmetric;
-  int __pyx___store_zeros;
 };
 
 
@@ -2227,16 +2211,14 @@ struct __pyx_obj_8cysparse_6sparse_14s_mat_matrices_21s_mat_INT64_t_INT32_t_Immu
 struct __pyx_obj_8cysparse_6sparse_12ll_mat_views_27ll_mat_view_INT64_t_INT32_t_LLSparseMatrixView_INT64_t_INT32_t {
   PyObject_HEAD
   struct __pyx_vtabstruct_8cysparse_6sparse_12ll_mat_views_27ll_mat_view_INT64_t_INT32_t_LLSparseMatrixView_INT64_t_INT32_t *__pyx_vtab;
-  __pyx_t_8cysparse_5types_14cysparse_types_INT64_t nrow;
-  __pyx_t_8cysparse_5types_14cysparse_types_INT64_t ncol;
-  int is_empty;
-  char *__type_name;
-  char *type;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx___nrow;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx___ncol;
+  int __pyx___is_empty;
+  PyObject *__pyx___type_name;
+  PyObject *__pyx___type;
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t *row_indices;
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t *col_indices;
   struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT64_t_INT32_t_LLSparseMatrix_INT64_t_INT32_t *A;
-  int __pyx___is_symmetric;
-  int __pyx___store_zeros;
 };
 
 
@@ -2314,16 +2296,14 @@ struct __pyx_obj_8cysparse_6sparse_14s_mat_matrices_21s_mat_INT64_t_INT64_t_Immu
 struct __pyx_obj_8cysparse_6sparse_12ll_mat_views_27ll_mat_view_INT64_t_INT64_t_LLSparseMatrixView_INT64_t_INT64_t {
   PyObject_HEAD
   struct __pyx_vtabstruct_8cysparse_6sparse_12ll_mat_views_27ll_mat_view_INT64_t_INT64_t_LLSparseMatrixView_INT64_t_INT64_t *__pyx_vtab;
-  __pyx_t_8cysparse_5types_14cysparse_types_INT64_t nrow;
-  __pyx_t_8cysparse_5types_14cysparse_types_INT64_t ncol;
-  int is_empty;
-  char *__type_name;
-  char *type;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx___nrow;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx___ncol;
+  int __pyx___is_empty;
+  PyObject *__pyx___type_name;
+  PyObject *__pyx___type;
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t *row_indices;
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t *col_indices;
   struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT64_t_INT64_t_LLSparseMatrix_INT64_t_INT64_t *A;
-  int __pyx___is_symmetric;
-  int __pyx___store_zeros;
 };
 
 
@@ -2401,16 +2381,14 @@ struct __pyx_obj_8cysparse_6sparse_14s_mat_matrices_23s_mat_INT64_t_FLOAT32_t_Im
 struct __pyx_obj_8cysparse_6sparse_12ll_mat_views_29ll_mat_view_INT64_t_FLOAT32_t_LLSparseMatrixView_INT64_t_FLOAT32_t {
   PyObject_HEAD
   struct __pyx_vtabstruct_8cysparse_6sparse_12ll_mat_views_29ll_mat_view_INT64_t_FLOAT32_t_LLSparseMatrixView_INT64_t_FLOAT32_t *__pyx_vtab;
-  __pyx_t_8cysparse_5types_14cysparse_types_INT64_t nrow;
-  __pyx_t_8cysparse_5types_14cysparse_types_INT64_t ncol;
-  int is_empty;
-  char *__type_name;
-  char *type;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx___nrow;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx___ncol;
+  int __pyx___is_empty;
+  PyObject *__pyx___type_name;
+  PyObject *__pyx___type;
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t *row_indices;
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t *col_indices;
   struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT64_t_FLOAT32_t_LLSparseMatrix_INT64_t_FLOAT32_t *A;
-  int __pyx___is_symmetric;
-  int __pyx___store_zeros;
 };
 
 
@@ -2488,16 +2466,14 @@ struct __pyx_obj_8cysparse_6sparse_14s_mat_matrices_23s_mat_INT64_t_FLOAT64_t_Im
 struct __pyx_obj_8cysparse_6sparse_12ll_mat_views_29ll_mat_view_INT64_t_FLOAT64_t_LLSparseMatrixView_INT64_t_FLOAT64_t {
   PyObject_HEAD
   struct __pyx_vtabstruct_8cysparse_6sparse_12ll_mat_views_29ll_mat_view_INT64_t_FLOAT64_t_LLSparseMatrixView_INT64_t_FLOAT64_t *__pyx_vtab;
-  __pyx_t_8cysparse_5types_14cysparse_types_INT64_t nrow;
-  __pyx_t_8cysparse_5types_14cysparse_types_INT64_t ncol;
-  int is_empty;
-  char *__type_name;
-  char *type;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx___nrow;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx___ncol;
+  int __pyx___is_empty;
+  PyObject *__pyx___type_name;
+  PyObject *__pyx___type;
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t *row_indices;
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t *col_indices;
   struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT64_t_FLOAT64_t_LLSparseMatrix_INT64_t_FLOAT64_t *A;
-  int __pyx___is_symmetric;
-  int __pyx___store_zeros;
 };
 
 
@@ -2575,16 +2551,14 @@ struct __pyx_obj_8cysparse_6sparse_14s_mat_matrices_24s_mat_INT64_t_FLOAT128_t_I
 struct __pyx_obj_8cysparse_6sparse_12ll_mat_views_30ll_mat_view_INT64_t_FLOAT128_t_LLSparseMatrixView_INT64_t_FLOAT128_t {
   PyObject_HEAD
   struct __pyx_vtabstruct_8cysparse_6sparse_12ll_mat_views_30ll_mat_view_INT64_t_FLOAT128_t_LLSparseMatrixView_INT64_t_FLOAT128_t *__pyx_vtab;
-  __pyx_t_8cysparse_5types_14cysparse_types_INT64_t nrow;
-  __pyx_t_8cysparse_5types_14cysparse_types_INT64_t ncol;
-  int is_empty;
-  char *__type_name;
-  char *type;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx___nrow;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx___ncol;
+  int __pyx___is_empty;
+  PyObject *__pyx___type_name;
+  PyObject *__pyx___type;
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t *row_indices;
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t *col_indices;
   struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_25ll_mat_INT64_t_FLOAT128_t_LLSparseMatrix_INT64_t_FLOAT128_t *A;
-  int __pyx___is_symmetric;
-  int __pyx___store_zeros;
 };
 
 
@@ -2686,16 +2660,14 @@ struct __pyx_obj_8cysparse_6sparse_14s_mat_matrices_25s_mat_INT64_t_COMPLEX64_t_
 struct __pyx_obj_8cysparse_6sparse_12ll_mat_views_31ll_mat_view_INT64_t_COMPLEX64_t_LLSparseMatrixView_INT64_t_COMPLEX64_t {
   PyObject_HEAD
   struct __pyx_vtabstruct_8cysparse_6sparse_12ll_mat_views_31ll_mat_view_INT64_t_COMPLEX64_t_LLSparseMatrixView_INT64_t_COMPLEX64_t *__pyx_vtab;
-  __pyx_t_8cysparse_5types_14cysparse_types_INT64_t nrow;
-  __pyx_t_8cysparse_5types_14cysparse_types_INT64_t ncol;
-  int is_empty;
-  char *__type_name;
-  char *type;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx___nrow;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx___ncol;
+  int __pyx___is_empty;
+  PyObject *__pyx___type_name;
+  PyObject *__pyx___type;
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t *row_indices;
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t *col_indices;
   struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT64_t_COMPLEX64_t_LLSparseMatrix_INT64_t_COMPLEX64_t *A;
-  int __pyx___is_symmetric;
-  int __pyx___store_zeros;
 };
 
 
@@ -2797,16 +2769,14 @@ struct __pyx_obj_8cysparse_6sparse_14s_mat_matrices_26s_mat_INT64_t_COMPLEX128_t
 struct __pyx_obj_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT64_t_COMPLEX128_t_LLSparseMatrixView_INT64_t_COMPLEX128_t {
   PyObject_HEAD
   struct __pyx_vtabstruct_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT64_t_COMPLEX128_t_LLSparseMatrixView_INT64_t_COMPLEX128_t *__pyx_vtab;
-  __pyx_t_8cysparse_5types_14cysparse_types_INT64_t nrow;
-  __pyx_t_8cysparse_5types_14cysparse_types_INT64_t ncol;
-  int is_empty;
-  char *__type_name;
-  char *type;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx___nrow;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx___ncol;
+  int __pyx___is_empty;
+  PyObject *__pyx___type_name;
+  PyObject *__pyx___type;
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t *row_indices;
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t *col_indices;
   struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT64_t_COMPLEX128_t_LLSparseMatrix_INT64_t_COMPLEX128_t *A;
-  int __pyx___is_symmetric;
-  int __pyx___store_zeros;
 };
 
 
@@ -2908,16 +2878,14 @@ struct __pyx_obj_8cysparse_6sparse_14s_mat_matrices_26s_mat_INT64_t_COMPLEX256_t
 struct __pyx_obj_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT64_t_COMPLEX256_t_LLSparseMatrixView_INT64_t_COMPLEX256_t {
   PyObject_HEAD
   struct __pyx_vtabstruct_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT64_t_COMPLEX256_t_LLSparseMatrixView_INT64_t_COMPLEX256_t *__pyx_vtab;
-  __pyx_t_8cysparse_5types_14cysparse_types_INT64_t nrow;
-  __pyx_t_8cysparse_5types_14cysparse_types_INT64_t ncol;
-  int is_empty;
-  char *__type_name;
-  char *type;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx___nrow;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx___ncol;
+  int __pyx___is_empty;
+  PyObject *__pyx___type_name;
+  PyObject *__pyx___type;
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t *row_indices;
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t *col_indices;
   struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT64_t_COMPLEX256_t_LLSparseMatrix_INT64_t_COMPLEX256_t *A;
-  int __pyx___is_symmetric;
-  int __pyx___store_zeros;
 };
 
 

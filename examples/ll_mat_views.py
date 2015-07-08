@@ -44,4 +44,6 @@ l2.print_to(sys.stdout)
 
 B = l1[1:5, [2, 2, 3]]
 
+print B
 print B.nnz
+

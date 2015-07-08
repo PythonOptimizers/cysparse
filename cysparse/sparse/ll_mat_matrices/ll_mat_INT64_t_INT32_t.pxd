@@ -42,7 +42,8 @@ cdef class LLSparseMatrix_INT64_t_INT32_t(MutableSparseMatrix_INT64_t_INT32_t):
     ####################################################################################################################
     # COUNTING ELEMENTS
     ####################################################################################################################
-    cdef INT64_t count_nnz_from_indices(self, INT64_t * row_indices,INT64_t row_indices_length, INT64_t * col_indices, INT64_t col_indices_length)
+    cdef INT64_t count_nnz_from_indices(self, INT64_t * row_indices,INT64_t row_indices_length, INT64_t * col_indices,
+                                        INT64_t col_indices_length, bint count_only_stored=?)
 
     ####################################################################################################################
     # SET/GET

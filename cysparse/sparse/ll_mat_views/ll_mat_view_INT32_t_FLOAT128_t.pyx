@@ -31,20 +31,27 @@ cdef class LLSparseMatrixView_INT32_t_FLOAT128_t:
     ####################################################################################################################
     def __cinit__(self,control_object, LLSparseMatrix_INT32_t_FLOAT128_t A, INT32_t nrow, INT32_t ncol):
         assert control_object == unexposed_value, "LLSparseMatrixView must be instantiated with a factory method"
-        self.nrow = nrow  # number of rows of the view
-        self.ncol = ncol  # number of columns of the view
+        self.__nrow = nrow  # number of rows of the view
+        self.__ncol = ncol  # number of columns of the view
 
-        self.type = "LLSparseMatrixView"
+        self.__type = "LLSparseMatrixView"
         self.__type_name = "LLSparseMatrixView [INT32_t, FLOAT128_t]"
 
-        self.is_empty = True
+        self.__is_empty = True
 
         self.A = A
         Py_INCREF(self.A)  # increase ref to object to avoid the user deleting it explicitly or implicitly
 
-        self.__is_symmetric = A.is_symmetric
-        self.__store_zeros = A.store_zeros
 
+    
+    @property
+    def nrow(self):
+        return self.__nrow
+
+    
+    @property
+    def ncol(self):
+        return self.__ncol
 
     
     @property
@@ -57,7 +64,48 @@ cdef class LLSparseMatrixView_INT32_t_FLOAT128_t:
         """
         # Because views must **always** be up to date with the original matrix, we cannot rely on cached results.
         # We could use a cache in LLSparseMatrix but is it worth it?
-        return self.A.count_nnz_from_indices(self.row_indices, self.nrow, self.col_indices, self.ncol)
+        return self.A.count_nnz_from_indices(self.row_indices, self.__nrow, self.col_indices, self.__ncol)
+
+    # for compatibility with numpy, PyKrylov, etc
+    
+    @property
+    def shape(self):
+        return (self.__nrow, self.__ncol)
+
+    
+    @property
+    def dtype(self):
+        return self.A.cp_type.dtype
+
+    
+    @property
+    def itype(self):
+        return self.A.cp_type.itype
+
+    
+    @property
+    def is_symmetric(self):
+        return self.A.__is_symmetric
+
+    
+    @property
+    def is_mutable(self):
+        return self.A.__is_mutable
+
+    
+    @property
+    def store_zeros(self):
+        return self.A.__store_zeros
+
+    
+    @property
+    def type(self):
+        return self.__type
+
+    
+    @property
+    def type_name(self):
+        return self.__type_name
 
 
     def __dealloc__(self):
@@ -81,7 +129,7 @@ cdef class LLSparseMatrixView_INT32_t_FLOAT128_t:
         Raises:
             IndexError: when index out of bound.
         """
-        if i < 0 or i >= self.nrow or j < 0 or j >= self.ncol:
+        if i < 0 or i >= self.__nrow or j < 0 or j >= self.__ncol:
             raise IndexError('Indices out of range')
 
         self.put(i, j, value)
@@ -113,7 +161,7 @@ cdef class LLSparseMatrixView_INT32_t_FLOAT128_t:
             IndexError: when index out of bound.
 
         """
-        if not 0 <= i < self.nrow or not 0 <= j < self.ncol:
+        if not 0 <= i < self.__nrow or not 0 <= j < self.__ncol:
             raise IndexError("Index out of bounds")
 
 
@@ -170,22 +218,22 @@ cdef class LLSparseMatrixView_INT32_t_FLOAT128_t:
 
         """
         # This is completely arbitrary
-        cdef INT32_t size_hint = min(<INT32_t>(self.nrow * self.ncol)/4, self.A.nalloc) + 1
+        cdef INT32_t size_hint = min(<INT32_t>(self.__nrow * self.__ncol)/4, self.A.nalloc) + 1
 
         cdef LLSparseMatrix_INT32_t_FLOAT128_t A_copy = LLSparseMatrix_INT32_t_FLOAT128_t(control_object=unexposed_value,
-                                                                                  nrow=self.nrow,
-                                                                                  ncol=self.ncol,
+                                                                                  nrow=self.__nrow,
+                                                                                  ncol=self.__ncol,
                                                                                   size_hint=size_hint,
                                                                                   store_zeros=False,
-                                                                                  __is_symmetric=False)
+                                                                                  is_symmetric=False)
 
         cdef:
             INT32_t i, j
             INT32_t row_index
 
-        for i from 0 <= i < self.nrow:
+        for i from 0 <= i < self.__nrow:
             row_index = self.row_indices[i]
-            for j from 0 <= j < self.ncol:
+            for j from 0 <= j < self.__ncol:
                 A_copy.put(i, j, self.A[row_index, self.col_indices[j]])
 
         if compress:
@@ -199,32 +247,30 @@ cdef class LLSparseMatrixView_INT32_t_FLOAT128_t:
 
         """
         cdef:
-            INT32_t nrow
             INT32_t * row_indices,
-            INT32_t ncol
             INT32_t * col_indices
 
-        row_indices = <INT32_t *> PyMem_Malloc(self.nrow * sizeof(INT32_t))
+        row_indices = <INT32_t *> PyMem_Malloc(self.__nrow * sizeof(INT32_t))
         if not row_indices:
             raise MemoryError()
 
-        col_indices = <INT32_t *> PyMem_Malloc(self.ncol * sizeof(INT32_t))
+        col_indices = <INT32_t *> PyMem_Malloc(self.__ncol * sizeof(INT32_t))
         if not col_indices:
             PyMem_Free(row_indices)
             raise MemoryError()
 
-        cdef LLSparseMatrixView_INT32_t_FLOAT128_t view = LLSparseMatrixView_INT32_t_FLOAT128_t(unexposed_value, self.A, self.nrow, self.ncol)
+        cdef LLSparseMatrixView_INT32_t_FLOAT128_t view = LLSparseMatrixView_INT32_t_FLOAT128_t(unexposed_value, self.A, self.__nrow, self.__ncol)
 
-        for i from 0 <= i < self.nrow:
+        for i from 0 <= i < self.__nrow:
             row_indices[i] = self.row_indices[i]
 
-        for j from 0 <= j < self.ncol:
+        for j from 0 <= j < self.__ncol:
             col_indices[j] = self.col_indices[j]
 
         view.row_indices = row_indices
         view.col_indices = col_indices
 
-        view.is_empty = self.is_empty
+        view.__is_empty = self.__is_empty
 
         return view
 
@@ -309,9 +355,9 @@ cdef LLSparseMatrixView_INT32_t_FLOAT128_t MakeLLSparseMatrixView_INT32_t_FLOAT1
     view.col_indices = col_indices
 
     if nrow == 0 or ncol == 0:
-        view.is_empty = True
+        view.__is_empty = True
     else:
-        view.is_empty = False
+        view.__is_empty = False
 
     return view
 
@@ -388,8 +434,8 @@ cdef LLSparseMatrixView_INT32_t_FLOAT128_t MakeLLSparseMatrixViewFromView_INT32_
     PyMem_Free(col_indices)
 
     if nrow == 0 or ncol == 0:
-        view.is_empty = True
+        view.__is_empty = True
     else:
-        view.is_empty = False
+        view.__is_empty = False
 
     return view
