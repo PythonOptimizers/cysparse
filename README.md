@@ -19,6 +19,8 @@ This is the multi-types version (last single type version: ce86f8476166f63d0af72
 
    Stable version in sight: 15th of July.
 
+3. If we don't use masks, 100% of PySparse's `ll_mat` has been implemented in CySparse.
+
 ## Want to follow the implementation of CySparse?
 
 See [Wiki](https://github.com/Funartech/cysparse/wiki) for details!
