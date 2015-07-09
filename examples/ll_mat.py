@@ -39,8 +39,11 @@ l1[4, 5] = 98374983.093843483
 l1.print_to(sys.stdout)
 
 ########################################################################################################################
-print "=" * 80
-l2 = NewLLSparseMatrix(size=10, dtype=types.INT32_T, itype=types.INT32_T)
+print "4=" * 80
+l2 = NewLLSparseMatrix(size=10, dtype=types.COMPLEX64_T, itype=types.INT32_T)
+print l2.type
+print l2.type_name
+
 print l2
 
 try:

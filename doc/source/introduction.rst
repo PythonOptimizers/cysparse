@@ -17,12 +17,16 @@ Content
 :program:`PySparse` vs :program:`CySparse`
 ===========================================
 
-Even if :program:`CySparse` is inspired from :program:`PySparse`, there are notable differences:
+Even if :program:`CySparse` is (strongly) inspired from :program:`PySparse`, there are notable differences. In short, :program:`CySparse`:
 
-- :program:`CySparse` allow the use of matrices with different types of indices and elements at run time (see ...);
-- :program:`CySparse` is faster than :program:`PySparse` (see ...);
-- :program:`CySparse` uses matrix views - a very light proxy object - that represent parts of a matrix without the need to copy elements (see...);
-- they define similar but also different matrix classes: 
+- allows the use of matrices with **different types** of indices and elements at run time (see ...);
+- is **faster** than :program:`PySparse` (see ...);
+- uses **matrix views** - a very light proxy object - that represent parts of a matrix without the need to copy elements (see...);
+- has more **syntaxic sugar**, like ``A * b, b * A, A.T * b`` etc. 
+- has a **symmetric** version of **all** its matrix types.
+- **doesn't use masks**.
+
+Both libraries define similar but also different matrix classes: 
 
   =========================================   ======================================================   ============================================
   Matrix type                                 :program:`PySparse`                                      :program:`CySparse` 
@@ -34,8 +38,6 @@ Even if :program:`CySparse` is inspired from :program:`PySparse`, there are nota
   Compressed Sparse Row and Column Format     -                                                        ``CSBSparseMatrix``
   =========================================   ======================================================   ============================================
     
-- :program:`CySparse` has more syntaxic sugar, like ``A * b, b * A, A.T * b`` etc. 
-- :program:`CySparse` has a *symmetric* version of **all** its matrix types.
 
 
 

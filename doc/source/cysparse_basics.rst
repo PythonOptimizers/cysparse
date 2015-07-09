@@ -9,8 +9,66 @@ In this section, we expose the basics of :program:`CySparse`: how to create a ma
 Common attributes
 ==================
 
+Most attributes and **all** common ones are *read-only*. Some attributes ask for some expensive computation. We indicate whenever this is the case.
+Some attributes can also be given as arguments to most factory methods. We also detail which do. 
+
+``nrow`` and ``ncol``
+----------------------
+
+``nrow`` and ``ncol`` give respectively the number of rows and columns. You also can grab both at the same time with the ``shape`` attribute:
+
+..  code-block:: python
+
+    A = ...
+    A.shape == A.nrow, A.ncol  # is True
+    
+You can use ``nrow`` and ``ncol`` as arguments to construct a new matrix. Whenever the number of rows is equal to the number of columns, i.e. when the matrix is square, you can
+instead use the argument ``size=...`` in most factory methods.
+
+``dtype`` and ``itype``
+-------------------------
+
+Each matrix (matrix-like) object has an internal index *type* and stores *typed* elements. Both types (enums) can be retrieved for specialization.
+``dtype`` returns the type of the elements of the matrix and ``itype`` returns its index type.
+ 
+See ... about the available types.
+
+``is_symmetric``
+--------------------
+
+Symmetric matrices can be stored by only storing the **lower** triangular part and the diagonal of a matrix. To create a symmetric matrix, add the arguement ``is_symmetric=True`` to the call of one of the factory methods.
+The attribute ``is_symmetric`` returns if this storage method is used or not. Thus, if ``is_symmetric`` is ``True``, you know that you deal with a symmetric matrix **and** that roughly only half of its elements are stored. If 
+``is_symmetric`` is ``False``, it simply means that this storage scheme is not used. The matrix itself migth be symmetric or not.
+
+..  warning:: The attribute ``is_symmetric`` is only about the ``storage scheme`` used and **not** necessarily about the symmetry of the matrix. 
+
+
+``is_mutable``
+--------------------
+
+``is_mutable`` returns if the matrix can be changed or not. Notice that for the moment, **only** an :class:`LLSparseMatrix` matrix can be changed.
+
+``type`` and ``type_name``
+-----------------------------
+
+Each matrix or matrix-like object has its own type and type name. For instance:
+
+..  code-block:: python
+
+    A = NewLLSparseMatrix(size=10, dtype=COMPLEX64_T, itype=INT32_T)
+    print A.type
+    print A.type_name
+    
+returns
+
+..  code-block:: bash
+
+    LLSparseMatrix
+    LLSparseMatrix [INT32_t, COMPLEX64_t]
+
+
 ``store_zeros``
-------------------
+------------------------------
 
 By default non specified (implicit) elements are zero (``0``, ``0.0`` or ``0+0j``). :program:`CySparse` allow the user to store explicitely zeros. To explicitely store zeros, declare ``store_zeros=True`` as an argument
 in any factory method:
@@ -36,6 +94,18 @@ returns ``True`` for our example. This attribute is read-only and cannot be chan
 This context manager temporarily set the ``store_zeros`` attribute to ``False`` before restoring its inital value.
 
 By default, ``store_zeros`` is set to ``False``.
+
+``nnz``
+---------
+
+The ``nnz`` attribute returns the number of "non zeros" stored in the matrix. Notice that ``0`` could be stored if ``store_zeros`` is set to ``True`` and if so, it will be counted in the number of "non zero" elements.
+Whenever the symmetric storage scheme is used (``is_symmetric`` is ``True``), ``nnz`` only returns the number of "non zero" elements stored in the lower triangular part and the diagonal of the matrix, i.e. ``nnz`` 
+returns exactly how many elements are stored internally.
+
+..  warning:: ``nnz`` returns the number of elements stored internally.
+
+When using views, this attribute is **costly** to retrieve as it is systematically recomputed each time and we don't make any assomption on the views (views can represent matrices with rows and columns in any order and duplicated 
+rows and columns any number of times). The number returned is the number of "non zero" elements stored in the equivalent matrix using the **same** storage scheme than initial matrix.
     
 ..  topic:: Factory method or factory function?
     

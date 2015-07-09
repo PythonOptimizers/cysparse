@@ -64,7 +64,7 @@ cdef class LLSparseMatrixView_INT64_t_COMPLEX64_t:
         """
         # Because views must **always** be up to date with the original matrix, we cannot rely on cached results.
         # We could use a cache in LLSparseMatrix but is it worth it?
-        return self.A.count_nnz_from_indices(self.row_indices, self.__nrow, self.col_indices, self.__ncol)
+        return self.A.count_nnz_from_indices(self.row_indices, self.__nrow, self.col_indices, self.__ncol, count_only_stored=True)
 
     # for compatibility with numpy, PyKrylov, etc
     

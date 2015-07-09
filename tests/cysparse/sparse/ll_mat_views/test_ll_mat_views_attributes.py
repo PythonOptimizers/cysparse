@@ -57,6 +57,8 @@ class CySparseLLSparseMatrixViewOutOfBoundsTestCase(CySparseLLSparseMatrixAttrib
         self.failUnless(self.A2.ncol == self.B2.ncol == self.nrow)
 
         self.failUnless(self.A2.shape == self.B2.shape)
+        print self.A2.nnz
+        print self.B2.nnz
         self.failUnless(self.A2.nnz == self.B2.nnz)
 
         self.failUnless(self.B2.type == 'LLSparseMatrixView')

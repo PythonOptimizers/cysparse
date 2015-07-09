@@ -12884,7 +12884,7 @@ static __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_f_8cysparse_6spar
   /* "cysparse/sparse/ll_mat_matrices/ll_mat_INT32_t_FLOAT64_t.pyx":872
  *         # NON OPTIMIZED CODE (VERY SLOW CODE: O(nnz * nrow * ncol) )
  * 
- *         if self.is_symmetric and count_only_stored:             # <<<<<<<<<<<<<<
+ *         if self.is_symmetric and not count_only_stored:             # <<<<<<<<<<<<<<
  *             for i from 0 <= i < self.__nrow:
  *                 k = self.root[i]
  */
@@ -12897,14 +12897,14 @@ static __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_f_8cysparse_6spar
     __pyx_t_1 = __pyx_t_3;
     goto __pyx_L4_bool_binop_done;
   }
-  __pyx_t_3 = (__pyx_v_count_only_stored != 0);
+  __pyx_t_3 = ((!(__pyx_v_count_only_stored != 0)) != 0);
   __pyx_t_1 = __pyx_t_3;
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_1) {
 
     /* "cysparse/sparse/ll_mat_matrices/ll_mat_INT32_t_FLOAT64_t.pyx":873
  * 
- *         if self.is_symmetric and count_only_stored:
+ *         if self.is_symmetric and not count_only_stored:
  *             for i from 0 <= i < self.__nrow:             # <<<<<<<<<<<<<<
  *                 k = self.root[i]
  *                 while k != -1:
@@ -12913,7 +12913,7 @@ static __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_f_8cysparse_6spar
     for (__pyx_v_i = 0; __pyx_v_i < __pyx_t_4; __pyx_v_i++) {
 
       /* "cysparse/sparse/ll_mat_matrices/ll_mat_INT32_t_FLOAT64_t.pyx":874
- *         if self.is_symmetric and count_only_stored:
+ *         if self.is_symmetric and not count_only_stored:
  *             for i from 0 <= i < self.__nrow:
  *                 k = self.root[i]             # <<<<<<<<<<<<<<
  *                 while k != -1:
@@ -13059,7 +13059,7 @@ static __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_f_8cysparse_6spar
 
     /* "cysparse/sparse/ll_mat_matrices/ll_mat_INT32_t_FLOAT64_t.pyx":892
  * 
- *         else:   # non symmetric or count_only_stored == False
+ *         else:   # non symmetric or count_only_stored == True
  *             for i from 0 <= i < self.__nrow:             # <<<<<<<<<<<<<<
  *                 k = self.root[i]
  *                 while k != -1:
@@ -13068,7 +13068,7 @@ static __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_f_8cysparse_6spar
     for (__pyx_v_i = 0; __pyx_v_i < __pyx_t_4; __pyx_v_i++) {
 
       /* "cysparse/sparse/ll_mat_matrices/ll_mat_INT32_t_FLOAT64_t.pyx":893
- *         else:   # non symmetric or count_only_stored == False
+ *         else:   # non symmetric or count_only_stored == True
  *             for i from 0 <= i < self.__nrow:
  *                 k = self.root[i]             # <<<<<<<<<<<<<<
  *                 while k != -1:
