@@ -51,7 +51,8 @@ Respect the DRY principle
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Don't write the same code twice. This means of course than whenever you can factorize some common code, you should do so but in our case, because we lack the notion of *templates* (like :program:`C++` templates), we 
-**have** to repeat ourselves and rewrite the classes with different types. This is the main reason to use a template engine and templated code.  
+**have** to repeat ourselves and rewrite the classes with different types. This is the main reason to use a template engine and templated code. That said, some code has been duplicated because I (Nikolaj) could not find
+how to make it work in :program:`Cython`. One example is the proxy classes: they all share common code. I wasn't able to make them inherit from a base class [#proxies_inheriting_from_a_common_base_class]_.
 
 If the conventions are not respected, the code shouldn't compile
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -185,6 +186,8 @@ Types
 ..  raw:: html
 
     <h4>Footnotes</h4>
+
+..  [#proxies_inheriting_from_a_common_base_class] See https://github.com/Funartech/cysparse/issues/113 for more about this issue.
     
 ..  [#typed_variables] Use your intelligence and knowledge of :program:`Cython`. Know when it makes a difference to type a variable.
 

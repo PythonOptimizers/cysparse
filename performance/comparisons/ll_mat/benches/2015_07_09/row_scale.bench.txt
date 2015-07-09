@@ -1,0 +1,35 @@
+# Benchmark Report
+
+## Simple row_scale with 100 elements and size = 1,000
+
+    name | rank | runs |     mean |     stdev | baseline
+---------|------|------|----------|-----------|---------
+pysparse |    1 |  100 | 3.04e-06 | 8.562e-07 |        1
+cysparse |    2 |  100 |  3.6e-06 | 1.563e-06 |    1.184
+
+## Simple row_scale with 1000 elements and size = 10,000
+
+    name | rank | runs |      mean |     stdev | baseline
+---------|------|------|-----------|-----------|---------
+cysparse |    1 |   10 |   1.5e-05 | 9.299e-07 |        1
+pysparse |    2 |   10 | 1.702e-05 | 7.214e-07 |    1.135
+
+## Simple row_scale with 10,000 elements and size = 100,000
+
+    name | rank | runs |      mean |     stdev | baseline
+---------|------|------|-----------|-----------|---------
+cysparse |    1 |   10 | 0.0001221 |  3.93e-06 |        1
+pysparse |    2 |   10 | 0.0001538 | 4.935e-06 |     1.26
+
+## Simple row_scale with 80,000 elements and size = 100,000
+
+    name | rank | runs |      mean |     stdev | baseline
+---------|------|------|-----------|-----------|---------
+cysparse |    1 |   10 | 0.0002212 | 1.363e-05 |        1
+pysparse |    2 |   10 | 0.0002646 | 8.265e-06 |    1.197
+
+Total runs: 260 run in arbitrary order
+Python version: 2.7.5+
+System: x86_64 Linux 3.11.0-12-generic
+Version: benchmark v0.1.5
+Date: 2015-07-09 16:54:47

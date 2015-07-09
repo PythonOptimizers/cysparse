@@ -272,10 +272,14 @@ GENERAL_ENVIRONMENT.filters['cysparse_real_type_from_real_cysparse_complex_type'
 def clean_cython_files(logger, directory, file_list=None):
     """
 
-    :param logger:
-    :param directory:
-    :param file_list: File name **must** be absolute!
-    :return:
+    Args:
+        logger:
+        directory:
+        file_list: File name **must** be absolute!
+
+    Note:
+        We don't test if ``directory`` and ``file_list`` correspond, i.e. we don't check if the absolute filenames
+        contain ``directory`` as last subdirectory.
     """
     real_file_list = []
 

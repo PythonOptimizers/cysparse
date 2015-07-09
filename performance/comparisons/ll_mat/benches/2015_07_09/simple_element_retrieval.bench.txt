@@ -1,0 +1,14 @@
+# Benchmark Report
+
+## Simple element retrieval with 100 elements and size = 1,000
+
+    name | rank | runs |    mean |    stdev | baseline
+---------|------|------|---------|----------|---------
+cysparse |    1 |   10 | 0.09809 |  0.00111 |        1
+pysparse |    2 |   10 |  0.1181 | 0.002891 |    1.204
+
+Total runs: 20 run in arbitrary order
+Python version: 2.7.5+
+System: x86_64 Linux 3.11.0-12-generic
+Version: benchmark v0.1.5
+Date: 2015-07-09 16:54:40

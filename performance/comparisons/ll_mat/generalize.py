@@ -47,7 +47,7 @@ class LLMatFrobeniusNormBenchmark(benchmark.Benchmark):
         self.nbr_elements = 100
         self.size = 1000
 
-        self.A_c = NewLLSparseMatrix(size=self.size, size_hint=self.nbr_elements, dtype=FLOAT64_T, __is_symmetric=True)
+        self.A_c = NewLLSparseMatrix(size=self.size, size_hint=self.nbr_elements, dtype=FLOAT64_T, is_symmetric=True)
         construct_sym_sparse_matrix(self.A_c, self.size, self.nbr_elements)
 
         self.A_p = spmatrix.ll_mat_sym(self.size, self.size, self.nbr_elements)
@@ -82,7 +82,7 @@ class LLMatFrobeniusNormBenchmark_1(LLMatFrobeniusNormBenchmark):
         self.nbr_elements = 1000
         self.size = 10000
 
-        self.A_c = NewLLSparseMatrix(size=self.size, size_hint=self.nbr_elements, dtype=FLOAT64_T, __is_symmetric=True)
+        self.A_c = NewLLSparseMatrix(size=self.size, size_hint=self.nbr_elements, dtype=FLOAT64_T, is_symmetric=True)
         construct_sym_sparse_matrix(self.A_c, self.size, self.nbr_elements)
 
         self.A_p = spmatrix.ll_mat_sym(self.size, self.size, self.nbr_elements)
@@ -101,7 +101,7 @@ class LLMatFrobeniusNormBenchmark_2(LLMatFrobeniusNormBenchmark):
         self.nbr_elements = 10000
         self.size = 100000
 
-        self.A_c = NewLLSparseMatrix(size=self.size, size_hint=self.nbr_elements, dtype=FLOAT64_T, __is_symmetric=True)
+        self.A_c = NewLLSparseMatrix(size=self.size, size_hint=self.nbr_elements, dtype=FLOAT64_T, is_symmetric=True)
         construct_sym_sparse_matrix(self.A_c, self.size, self.nbr_elements)
 
         self.A_p = spmatrix.ll_mat_sym(self.size, self.size, self.nbr_elements)
@@ -119,7 +119,7 @@ class LLMatFrobeniusNormBenchmark_3(LLMatFrobeniusNormBenchmark):
         self.nbr_elements = 80000
         self.size = 100000
 
-        self.A_c = NewLLSparseMatrix(size=self.size, size_hint=self.nbr_elements, dtype=FLOAT64_T, __is_symmetric=True)
+        self.A_c = NewLLSparseMatrix(size=self.size, size_hint=self.nbr_elements, dtype=FLOAT64_T, is_symmetric=True)
         construct_sym_sparse_matrix(self.A_c, self.size, self.nbr_elements)
 
         self.A_p = spmatrix.ll_mat_sym(self.size, self.size, self.nbr_elements)

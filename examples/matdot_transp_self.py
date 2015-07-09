@@ -15,6 +15,7 @@ l1.print_to(sys.stdout)
 
 A = l1.matdot_transp_self()
 
+print "9" * 80
 print A
 A.print_to(sys.stdout)
 

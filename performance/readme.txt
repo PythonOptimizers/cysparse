@@ -1,4 +1,4 @@
-Not sure it is worth to make a distinction.
+Not sure it is worth to make a distinction but here it goes:
 
 
 Benchmarks: compare multiple versions of the same operation in CySparse.

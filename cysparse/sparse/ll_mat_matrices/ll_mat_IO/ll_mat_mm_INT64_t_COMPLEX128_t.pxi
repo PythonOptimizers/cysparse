@@ -142,7 +142,7 @@ cdef LLSparseMatrix_INT64_t_COMPLEX128_t MakeLLSparseMatrixFromMMFile_INT64_t_CO
 
     return A
 
-
+# This version doesn't work yet...
 cdef LLSparseMatrix_INT64_t_COMPLEX128_t MakeLLSparseMatrixFromMMFile2_INT64_t_COMPLEX128_t(str mm_filename, bint store_zeros=False, bint test_bounds=True):
     cdef:
         str line

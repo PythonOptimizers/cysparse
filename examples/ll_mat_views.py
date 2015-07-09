@@ -47,3 +47,6 @@ B = l1[1:5, [2, 2, 3]]
 print B
 print B.nnz
 
+print "4" * 80
+print B.get_matrix()
+

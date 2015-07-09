@@ -112,6 +112,11 @@ cdef class LLSparseMatrixView_INT32_t_COMPLEX256_t:
     def type_name(self):
         return self.__type_name
 
+    def get_matrix(self):
+        """
+        Return pointer to original matrix ``A``.
+        """
+        return self.A
 
     def __dealloc__(self):
         PyMem_Free(self.row_indices)

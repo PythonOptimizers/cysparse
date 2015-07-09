@@ -1,0 +1,35 @@
+# Benchmark Report
+
+## 1-norm with 100 elements and size = 1,000
+
+    name | rank | runs |      mean |     stdev | baseline
+---------|------|------|-----------|-----------|---------
+cysparse |    1 |  100 | 3.536e-06 | 8.301e-07 |        1
+pysparse |    2 |  100 | 6.156e-06 | 6.159e-07 |    1.741
+
+## 1-norm with 1,000 elements and size = 10,000
+
+    name | rank | runs |      mean |     stdev | baseline
+---------|------|------|-----------|-----------|---------
+cysparse |    1 |  100 | 2.544e-05 | 1.335e-06 |        1
+pysparse |    2 |  100 | 4.495e-05 | 2.257e-06 |    1.767
+
+## 1-norm with 10,000 elements and size = 100,000
+
+    name | rank | runs |      mean |     stdev | baseline
+---------|------|------|-----------|-----------|---------
+cysparse |    1 |  100 | 0.0001866 | 6.462e-05 |        1
+pysparse |    2 |  100 | 0.0002533 | 2.274e-05 |    1.357
+
+## 1-norm with 80,000 elements and size = 100,000
+
+    name | rank | runs |      mean |    stdev | baseline
+---------|------|------|-----------|----------|---------
+cysparse |    1 |  100 | 0.0002578 | 2.71e-05 |        1
+pysparse |    2 |  100 | 0.0004488 | 2.25e-05 |    1.741
+
+Total runs: 800 run in arbitrary order
+Python version: 2.7.5+
+System: x86_64 Linux 3.11.0-12-generic
+Version: benchmark v0.1.5
+Date: 2015-07-09 16:53:11

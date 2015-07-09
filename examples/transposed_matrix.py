@@ -17,7 +17,7 @@ a = np.array([1,1,1], dtype=np.float64)
 
 print "=" * 80
 T = l1.T
-
+print T.nrow
 
 F = l1.T.T.T.T.T
 print F.dtype

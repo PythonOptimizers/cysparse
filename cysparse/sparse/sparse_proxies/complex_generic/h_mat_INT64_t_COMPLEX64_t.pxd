@@ -14,20 +14,6 @@ cdef class ConjugateTransposedSparseMatrix_INT64_t_COMPLEX64_t:
     Warning:
         This class is **not** a real matrix.
     """
-    ####################################################################################################################
-    # Common code from p_mat.pxd See #113: I could not solve the circular dependencies...
-    ####################################################################################################################
     cdef:
 
-        public SparseMatrix A
-
-        object nrow
-        object ncol
-        object dtype
-        object itype
-
-        object shape     # for compatibility with numpy, PyKrylov, etc.
-
-    ####################################################################################################################
-    # End of Common code
-    ####################################################################################################################
+        SparseMatrix A

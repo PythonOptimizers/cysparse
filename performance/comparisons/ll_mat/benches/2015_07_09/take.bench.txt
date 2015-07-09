@@ -1,0 +1,28 @@
+# Benchmark Report
+
+## Simple take_triplet with 100 elements, size = 1,000 and take_size = 1,000
+
+    name | rank | runs |      mean |     stdev | baseline
+---------|------|------|-----------|-----------|---------
+cysparse |    1 |  100 | 1.191e-05 | 2.478e-06 |        1
+pysparse |    2 |  100 | 1.232e-05 | 1.171e-06 |    1.035
+
+## Simple take_triplet with 1000 elements, size = 10,000 and take_size = 10,000
+
+    name | rank | runs |      mean |     stdev | baseline
+---------|------|------|-----------|-----------|---------
+cysparse |    1 |  100 | 7.537e-05 | 6.738e-06 |        1
+pysparse |    2 |  100 | 8.334e-05 | 1.545e-05 |    1.106
+
+## Simple take_triplet with 10000 elements, size = 100,000 and take_size = 100,000
+
+    name | rank | runs |      mean |     stdev | baseline
+---------|------|------|-----------|-----------|---------
+cysparse |    1 |  100 | 0.0005842 | 3.071e-05 |        1
+pysparse |    2 |  100 | 0.0007418 | 4.905e-05 |     1.27
+
+Total runs: 600 run in arbitrary order
+Python version: 2.7.5+
+System: x86_64 Linux 3.11.0-12-generic
+Version: benchmark v0.1.5
+Date: 2015-07-09 16:54:32
