@@ -27,6 +27,12 @@ See [Wiki](https://github.com/Funartech/cysparse/wiki) for details!
 
 ## Release history
 
+- Version 0.1.4 released on July 9, 2015
+
+  Skipped immediately to version 0.1.4 (versions 0.1.2 and 0.1.3 were incorporated in version 0.1.0).
+
+  Better support for `LLSparseMatrixView`s.
+
 - Version 0.1.0 released on July 6, 2015
 
   First release with multiple types.
