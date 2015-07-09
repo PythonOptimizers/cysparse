@@ -99,6 +99,11 @@ cdef class LLSparseMatrixView_INT32_t_COMPLEX256_t:
 
     
     @property
+    def is_empty(self):
+        return self.__is_empty
+
+    
+    @property
     def type(self):
         return self.__type
 

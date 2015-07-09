@@ -97,5 +97,22 @@ class CySparseLLSparseMatrixViewOfLLSparseMatrixViewOutOfBoundsTestCase(CySparse
             for j in xrange(self.C_restrict_shape[1]):
                 self.failUnless(self.C_restrict[i, j] == self.C[2*i,2*j+3])
 
+
+class CySparseLLSparseMatrixViewCreationOutOfBoundsTestCase(CySparseLLSparseMatrixBoundsBaseTestCase):
+    def setUp(self):
+        self.nrow = 4
+        self.ncol = 6
+
+        self.A = NewLinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, itype=INT32_T, dtype=FLOAT64_T, row_wise=False)
+
+    def test_simple_out_of_bound_at_creation(self):
+        with self.assertRaises(IndexError):
+            B = self.A[-1, [0]]
+            B = self.A[[0], -1]
+            B = self.A[[-1], [0]]
+            B = self.A[[0], [-1]]
+            B = self.A[[self.nrow], [self.ncol]]
+            B = self.A[0:3, [0, 1, self.ncol, 4]]
+
 if __name__ == '__main__':
     unittest.main()

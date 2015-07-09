@@ -109,6 +109,12 @@ cdef class LLSparseMatrixView_@index@_@type@:
     {% raw %}
     @property
     {%- endraw %}
+    def is_empty(self):
+        return self.__is_empty
+
+    {% raw %}
+    @property
+    {%- endraw %}
     def type(self):
         return self.__type
 

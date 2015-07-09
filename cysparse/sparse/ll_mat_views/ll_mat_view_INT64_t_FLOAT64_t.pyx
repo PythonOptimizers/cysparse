@@ -99,6 +99,11 @@ cdef class LLSparseMatrixView_INT64_t_FLOAT64_t:
 
     
     @property
+    def is_empty(self):
+        return self.__is_empty
+
+    
+    @property
     def type(self):
         return self.__type
 
