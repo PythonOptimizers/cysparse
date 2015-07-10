@@ -17,4 +17,12 @@ for i in xrange(0, -C.nrow, -1):
     print "nnz = %d" % D.nnz
     print D
 
-print C.tril(-C.nrow)
+print "2" * 80
+
+for i in xrange(C.ncol):
+    print "** k = %d" % i
+    D = C.triu(i)
+    print "nnz = %d" % D.nnz
+    print D
+
+

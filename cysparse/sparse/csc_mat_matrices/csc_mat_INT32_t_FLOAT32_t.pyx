@@ -307,10 +307,14 @@ cdef class CSCSparseMatrix_INT32_t_FLOAT32_t(ImmutableSparseMatrix_INT32_t_FLOAT
         Return the lower triangular part of the matrix.
 
         Args:
-            k: (k<=0) the last diagonal to be include in the lower triangular part.
+            k: (k<=0) the last diagonal to be included in the lower triangular part.
 
         Returns:
             A ``CSCSparseMatrix`` with the lower triangular part.
+
+        Raises:
+            IndexError if the diagonal number is out of bounds.
+
         """
         if k > 0:
             raise IndexError("k-th diagonal must be <= 0 (here: k = %d)" % k)
@@ -353,6 +357,79 @@ cdef class CSCSparseMatrix_INT32_t_FLOAT32_t(ImmutableSparseMatrix_INT32_t_FLOAT
                     nnz += 1
 
             ind[j+1] = nnz
+
+        return MakeCSCSparseMatrix_INT32_t_FLOAT32_t(self.__nrow, self.__ncol, nnz, ind, row, val, is_symmetric=False, store_zeros=self.__store_zeros)
+
+    def triu(self, int k):
+        """
+        Return the upper triangular part of the matrix.
+
+        Args:
+            k: (k>=0) the last diagonal to be included in the upper triangular part.
+
+        Returns:
+            A ``CSCSparseMatrix`` with the upper triangular part.
+
+        Raises:
+            IndexError if the diagonal number is out of bounds.
+
+        """
+        if k < 0:
+            raise IndexError("k-th diagonal must be >= 0 (here: k = %d)" % k)
+
+        if k > self.ncol - 1:
+            raise IndexError("k_th diagonal must be 0 <= k <= %d (here: k = %d)" % (-self.ncol - 1, k))
+
+        # create internal arrays (big enough to contain all elements)
+
+        cdef INT32_t * ind = <INT32_t *> PyMem_Malloc((self.__ncol + 1) * sizeof(INT32_t))
+        if not ind:
+            raise MemoryError()
+
+        cdef INT32_t * row = <INT32_t *> PyMem_Malloc(self.__nnz * sizeof(INT32_t))
+        if not row:
+            PyMem_Free(ind)
+            raise MemoryError()
+
+        cdef FLOAT32_t * val = <FLOAT32_t *> PyMem_Malloc(self.__nnz * sizeof(FLOAT32_t))
+        if not val:
+            PyMem_Free(ind)
+            PyMem_Free(row)
+            raise MemoryError()
+
+        # populate arrays
+        cdef:
+            INT32_t j, k_, nnz
+
+        nnz = 0
+        ind[0] = 0
+
+        if self.__is_symmetric:
+            # TO BE DONE
+            pass
+            for j from 0 <= j < self.__ncol:
+                for k_ from self.ind[j] <= k_ < self.ind[j+1]:
+                    i = self.row[k_]
+                    v = self.val[k_]
+
+                    if i >= j - k:
+                        row[nnz] = i
+                        val[nnz] = v
+                        nnz += 1
+
+                ind[j+1] = nnz
+        else:  # not symmtric
+            for j from 0 <= j < self.__ncol:
+                for k_ from self.ind[j] <= k_ < self.ind[j+1]:
+                    i = self.row[k_]
+                    v = self.val[k_]
+
+                    if i <= j - k:
+                        row[nnz] = i
+                        val[nnz] = v
+                        nnz += 1
+
+                ind[j+1] = nnz
 
         return MakeCSCSparseMatrix_INT32_t_FLOAT32_t(self.__nrow, self.__ncol, nnz, ind, row, val, is_symmetric=False, store_zeros=self.__store_zeros)
 
