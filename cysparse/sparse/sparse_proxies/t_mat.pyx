@@ -102,7 +102,7 @@ cdef class TransposedSparseMatrix:
     # Basic operations
     ####################################################################################################################
     def __mul__(self, B):
-        # This call is needed as ``__mul__`` doesn't not find self.A ...
+        # This call is needed as ``__mul__`` doesn't find self.A ...
         return self._mul(B)
 
     def _mul(self, B):

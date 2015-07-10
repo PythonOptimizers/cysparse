@@ -1732,7 +1732,6 @@ cdef class LLSparseMatrix_INT64_t_INT64_t(MutableSparseMatrix_INT64_t_INT64_t):
         else:  # don't include the main diagonal
             # code is the same for both cases but I do keep both codes in case later...
             if self.__is_symmetric:
-                pass
                 for i from 0 <= i < self.__nrow:
                     k = self.root[i]
                     while k != -1:

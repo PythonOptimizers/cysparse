@@ -2462,7 +2462,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_14sparse_proxies_5t_mat_22Transposed
  *     # Basic operations
  *     ####################################################################################################################
  *     def __mul__(self, B):             # <<<<<<<<<<<<<<
- *         # This call is needed as ``__mul__`` doesn't not find self.A ...
+ *         # This call is needed as ``__mul__`` doesn't find self.A ...
  *         return self._mul(B)
  */
 
@@ -2493,7 +2493,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_14sparse_proxies_5t_mat_22Transposed
 
   /* "cysparse/sparse/sparse_proxies/t_mat.pyx":106
  *     def __mul__(self, B):
- *         # This call is needed as ``__mul__`` doesn't not find self.A ...
+ *         # This call is needed as ``__mul__`` doesn't find self.A ...
  *         return self._mul(B)             # <<<<<<<<<<<<<<
  * 
  *     def _mul(self, B):
@@ -2534,7 +2534,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_14sparse_proxies_5t_mat_22Transposed
  *     # Basic operations
  *     ####################################################################################################################
  *     def __mul__(self, B):             # <<<<<<<<<<<<<<
- *         # This call is needed as ``__mul__`` doesn't not find self.A ...
+ *         # This call is needed as ``__mul__`` doesn't find self.A ...
  *         return self._mul(B)
  */
 

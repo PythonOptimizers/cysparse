@@ -32,7 +32,7 @@ cdef LLSparseMatrix_INT64_t_COMPLEX64_t MakeBandLLSparseMatrix_INT64_t_COMPLEX64
 
     # normally, with slices, it is common in Python to chop off...
     # Here we only chop off from above, not below...
-    # -m + 1 <= k <= n -1   : only k <= n - 1 will be satified (greater indices are disregarded)
+    # -m + 1 <= k <= n -1   : only k <= n - 1 will be satisfied (greater indices are disregarded)
     # but nothing is done if k < -m + 1
     max_length = A.__ncol
 

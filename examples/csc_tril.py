@@ -1,0 +1,20 @@
+from cysparse.sparse.ll_mat import *
+import cysparse.types.cysparse_types as types
+import numpy as np
+
+import sys
+
+A = NewLinearFillLLSparseMatrix(nrow=5, ncol=7, store_zeros=True)
+
+print A
+
+C = A.to_csc()
+print C
+
+for i in xrange(0, -C.nrow, -1):
+    print "** k = %d" % i
+    D = C.tril(i)
+    print "nnz = %d" % D.nnz
+    print D
+
+print C.tril(-C.nrow)
