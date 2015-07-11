@@ -442,6 +442,13 @@ YOU HAVE TO EXPLICITY CAST YOUR TYPE
 
         return MakeCSCSparseMatrix_@index@_@type@(self.__nrow, self.__ncol, nnz, ind, row, val, is_symmetric=False, store_zeros=self.__store_zeros)
 
+    def to_csr(self):
+        """
+        Transform this matrix into a :class:`CSRSparseMatrix`.
+
+        """
+        raise NotImplementedError
+
     def to_ndarray(self):
         """
         Return the matrix in the form of a :program:`NumPy` ``ndarray``.

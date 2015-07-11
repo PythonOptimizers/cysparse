@@ -407,7 +407,7 @@ cdef class CSCSparseMatrix_INT32_t_COMPLEX256_t(ImmutableSparseMatrix_INT32_t_CO
 
         if self.__is_symmetric:
             # TO BE DONE
-            pass
+            raise NotImplementedError('Not implemented yet...')
             for j from 0 <= j < self.__ncol:
                 for k_ from self.ind[j] <= k_ < self.ind[j+1]:
                     i = self.row[k_]
@@ -433,6 +433,13 @@ cdef class CSCSparseMatrix_INT32_t_COMPLEX256_t(ImmutableSparseMatrix_INT32_t_CO
                 ind[j+1] = nnz
 
         return MakeCSCSparseMatrix_INT32_t_COMPLEX256_t(self.__nrow, self.__ncol, nnz, ind, row, val, is_symmetric=False, store_zeros=self.__store_zeros)
+
+    def to_csr(self):
+        """
+        Transform this matrix into a :class:`CSRSparseMatrix`.
+
+        """
+        raise NotImplementedError
 
     def to_ndarray(self):
         """

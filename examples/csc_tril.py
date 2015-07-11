@@ -25,4 +25,3 @@ for i in xrange(C.ncol):
     print "nnz = %d" % D.nnz
     print D
 
-
