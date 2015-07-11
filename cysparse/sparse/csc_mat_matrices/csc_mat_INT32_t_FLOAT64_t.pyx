@@ -13,7 +13,9 @@ from cysparse.sparse.s_mat_matrices.s_mat_INT32_t_FLOAT64_t cimport ImmutableSpa
 from cysparse.sparse.ll_mat_matrices.ll_mat_INT32_t_FLOAT64_t cimport LLSparseMatrix_INT32_t_FLOAT64_t
 
 from cysparse.sparse.sparse_utils.generic.print_FLOAT64_t cimport element_to_string_FLOAT64_t, conjugated_element_to_string_FLOAT64_t, empty_to_string_FLOAT64_t
-from cysparse.sparse.sparse_utils.generic.matrix_translations_INT32_t_FLOAT64_t cimport csr_to_csc_kernel_INT32_t_FLOAT64_t
+from cysparse.sparse.sparse_utils.generic.matrix_translations_INT32_t_FLOAT64_t cimport csr_to_csc_kernel_INT32_t_FLOAT64_t, csc_to_csr_kernel_INT32_t_FLOAT64_t
+
+from cysparse.sparse.csr_mat_matrices.csr_mat_INT32_t_FLOAT64_t cimport CSRSparseMatrix_INT32_t_FLOAT64_t, MakeCSRSparseMatrix_INT32_t_FLOAT64_t
 
 ########################################################################################################################
 # Cython, NumPy import/cimport
@@ -484,7 +486,7 @@ cdef class CSCSparseMatrix_INT32_t_FLOAT64_t(ImmutableSparseMatrix_INT32_t_FLOAT
 
         temp = <FLOAT64_t *> PyMem_Realloc(val, nnz * sizeof(FLOAT64_t))
         val = <FLOAT64_t*>temp
-        
+
         return MakeCSCSparseMatrix_INT32_t_FLOAT64_t(self.__nrow, self.__ncol, nnz, ind, row, val, is_symmetric=False, store_zeros=self.__store_zeros)
 
     def to_csr(self):
@@ -492,7 +494,28 @@ cdef class CSCSparseMatrix_INT32_t_FLOAT64_t(ImmutableSparseMatrix_INT32_t_FLOAT
         Transform this matrix into a :class:`CSRSparseMatrix`.
 
         """
-        raise NotImplementedError
+        # create CSR internal arrays: ind, col and val
+        cdef INT32_t * ind = <INT32_t *> PyMem_Malloc((self.__nrow + 1) * sizeof(INT32_t))
+        if not ind:
+            raise MemoryError()
+
+        cdef INT32_t * col = <INT32_t *> PyMem_Malloc(self.__nnz * sizeof(INT32_t))
+        if not col:
+            PyMem_Free(ind)
+            raise MemoryError()
+
+        cdef FLOAT64_t * val = <FLOAT64_t *> PyMem_Malloc(self.__nnz * sizeof(FLOAT64_t))
+        if not val:
+            PyMem_Free(ind)
+            PyMem_Free(col)
+            raise MemoryError()
+
+        csc_to_csr_kernel_INT32_t_FLOAT64_t(self.__nrow, self.__ncol, self.__nnz,
+                       <INT32_t *>self.ind, <INT32_t *>self.row, <FLOAT64_t *>self.val,
+                       ind, col, val)
+
+        return MakeCSRSparseMatrix_INT32_t_FLOAT64_t(self.__nrow, self.__ncol, self.__nnz, ind, col, val, is_symmetric=self.is_symmetric, store_zeros=self.store_zeros)
+
 
     def to_ndarray(self):
         """

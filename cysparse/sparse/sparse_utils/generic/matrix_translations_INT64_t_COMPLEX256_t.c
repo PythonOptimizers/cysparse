@@ -1183,6 +1183,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_12sparse_utils_7generic_40matrix_tran
  *         temp   = csc_ind[j]
  *         csc_ind[j] = last             # <<<<<<<<<<<<<<
  *         last   = temp
+ * 
  */
     (__pyx_v_csc_ind[__pyx_v_j]) = __pyx_v_last;
 
@@ -1190,6 +1191,8 @@ static PyObject *__pyx_f_8cysparse_6sparse_12sparse_utils_7generic_40matrix_tran
  *         temp   = csc_ind[j]
  *         csc_ind[j] = last
  *         last   = temp             # <<<<<<<<<<<<<<
+ * 
+ * 
  */
     __pyx_v_last = __pyx_v_temp;
   }
@@ -1200,6 +1203,263 @@ static PyObject *__pyx_f_8cysparse_6sparse_12sparse_utils_7generic_40matrix_tran
  * cdef csr_to_csc_kernel_INT64_t_COMPLEX256_t(INT64_t nrow, INT64_t ncol, INT64_t nnz,             # <<<<<<<<<<<<<<
  *                                       INT64_t * csr_ind, INT64_t * csr_col, COMPLEX256_t * csr_val,
  *                                       INT64_t * csc_ind, INT64_t * csc_row, COMPLEX256_t * csc_val):
+ */
+
+  /* function exit code */
+  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "cysparse/sparse/sparse_utils/generic/matrix_translations_INT64_t_COMPLEX256_t.pyx":71
+ * 
+ * 
+ * cdef csc_to_csr_kernel_INT64_t_COMPLEX256_t(INT64_t nrow, INT64_t ncol, INT64_t nnz,             # <<<<<<<<<<<<<<
+ *                                       INT64_t * csc_ind, INT64_t * csc_row, COMPLEX256_t * csc_val,
+ *                                       INT64_t * csr_ind, INT64_t * csr_col, COMPLEX256_t * csr_val):
+ */
+
+static PyObject *__pyx_f_8cysparse_6sparse_12sparse_utils_7generic_40matrix_translations_INT64_t_COMPLEX256_t_csc_to_csr_kernel_INT64_t_COMPLEX256_t(__pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_v_nrow, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_v_ncol, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_v_nnz, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t *__pyx_v_csc_ind, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t *__pyx_v_csc_row, __pyx_t_long_double_complex *__pyx_v_csc_val, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t *__pyx_v_csr_ind, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t *__pyx_v_csr_col, __pyx_t_long_double_complex *__pyx_v_csr_val) {
+  __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_v_i;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_v_j;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_v_n;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_v_cumsum;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_v_temp;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_v_ii;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_v_dest;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_v_last;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_t_1;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_t_2;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_t_3;
+  __Pyx_RefNannySetupContext("csc_to_csr_kernel_INT64_t_COMPLEX256_t", 0);
+
+  /* "cysparse/sparse/sparse_utils/generic/matrix_translations_INT64_t_COMPLEX256_t.pyx":90
+ * 
+ *     # initialize to 0
+ *     for i from 0 <= i <= nrow:             # <<<<<<<<<<<<<<
+ *         csr_ind[i] = 0
+ *     # count nnz per row
+ */
+  __pyx_t_1 = __pyx_v_nrow;
+  for (__pyx_v_i = 0; __pyx_v_i <= __pyx_t_1; __pyx_v_i++) {
+
+    /* "cysparse/sparse/sparse_utils/generic/matrix_translations_INT64_t_COMPLEX256_t.pyx":91
+ *     # initialize to 0
+ *     for i from 0 <= i <= nrow:
+ *         csr_ind[i] = 0             # <<<<<<<<<<<<<<
+ *     # count nnz per row
+ *     for n from 0 <= n < nnz:
+ */
+    (__pyx_v_csr_ind[__pyx_v_i]) = 0;
+  }
+
+  /* "cysparse/sparse/sparse_utils/generic/matrix_translations_INT64_t_COMPLEX256_t.pyx":93
+ *         csr_ind[i] = 0
+ *     # count nnz per row
+ *     for n from 0 <= n < nnz:             # <<<<<<<<<<<<<<
+ *         csr_ind[csc_row[n]] += 1
+ * 
+ */
+  __pyx_t_1 = __pyx_v_nnz;
+  for (__pyx_v_n = 0; __pyx_v_n < __pyx_t_1; __pyx_v_n++) {
+
+    /* "cysparse/sparse/sparse_utils/generic/matrix_translations_INT64_t_COMPLEX256_t.pyx":94
+ *     # count nnz per row
+ *     for n from 0 <= n < nnz:
+ *         csr_ind[csc_row[n]] += 1             # <<<<<<<<<<<<<<
+ * 
+ *     # cumsum the nnz per row to get csr_ind
+ */
+    __pyx_t_2 = (__pyx_v_csc_row[__pyx_v_n]);
+    (__pyx_v_csr_ind[__pyx_t_2]) = ((__pyx_v_csr_ind[__pyx_t_2]) + 1);
+  }
+
+  /* "cysparse/sparse/sparse_utils/generic/matrix_translations_INT64_t_COMPLEX256_t.pyx":98
+ *     # cumsum the nnz per row to get csr_ind
+ *     cdef:
+ *         INT64_t cumsum = 0             # <<<<<<<<<<<<<<
+ *         INT64_t temp = 0
+ * 
+ */
+  __pyx_v_cumsum = 0;
+
+  /* "cysparse/sparse/sparse_utils/generic/matrix_translations_INT64_t_COMPLEX256_t.pyx":99
+ *     cdef:
+ *         INT64_t cumsum = 0
+ *         INT64_t temp = 0             # <<<<<<<<<<<<<<
+ * 
+ *     for i from 0<= i < nrow:
+ */
+  __pyx_v_temp = 0;
+
+  /* "cysparse/sparse/sparse_utils/generic/matrix_translations_INT64_t_COMPLEX256_t.pyx":101
+ *         INT64_t temp = 0
+ * 
+ *     for i from 0<= i < nrow:             # <<<<<<<<<<<<<<
+ *         temp  = csr_ind[i]
+ *         csr_ind[i] = cumsum
+ */
+  __pyx_t_1 = __pyx_v_nrow;
+  for (__pyx_v_i = 0; __pyx_v_i < __pyx_t_1; __pyx_v_i++) {
+
+    /* "cysparse/sparse/sparse_utils/generic/matrix_translations_INT64_t_COMPLEX256_t.pyx":102
+ * 
+ *     for i from 0<= i < nrow:
+ *         temp  = csr_ind[i]             # <<<<<<<<<<<<<<
+ *         csr_ind[i] = cumsum
+ *         cumsum += temp
+ */
+    __pyx_v_temp = (__pyx_v_csr_ind[__pyx_v_i]);
+
+    /* "cysparse/sparse/sparse_utils/generic/matrix_translations_INT64_t_COMPLEX256_t.pyx":103
+ *     for i from 0<= i < nrow:
+ *         temp  = csr_ind[i]
+ *         csr_ind[i] = cumsum             # <<<<<<<<<<<<<<
+ *         cumsum += temp
+ * 
+ */
+    (__pyx_v_csr_ind[__pyx_v_i]) = __pyx_v_cumsum;
+
+    /* "cysparse/sparse/sparse_utils/generic/matrix_translations_INT64_t_COMPLEX256_t.pyx":104
+ *         temp  = csr_ind[i]
+ *         csr_ind[i] = cumsum
+ *         cumsum += temp             # <<<<<<<<<<<<<<
+ * 
+ *     csr_ind[nrow] = nnz
+ */
+    __pyx_v_cumsum = (__pyx_v_cumsum + __pyx_v_temp);
+  }
+
+  /* "cysparse/sparse/sparse_utils/generic/matrix_translations_INT64_t_COMPLEX256_t.pyx":106
+ *         cumsum += temp
+ * 
+ *     csr_ind[nrow] = nnz             # <<<<<<<<<<<<<<
+ * 
+ *     # csr_ind is computed but will change in the next lines: we'll recompute it afterwoods
+ */
+  (__pyx_v_csr_ind[__pyx_v_nrow]) = __pyx_v_nnz;
+
+  /* "cysparse/sparse/sparse_utils/generic/matrix_translations_INT64_t_COMPLEX256_t.pyx":116
+ *     cdef INT64_t ii, dest
+ * 
+ *     for j from 0 <= j < ncol:             # <<<<<<<<<<<<<<
+ *         for ii from csc_ind[j] <= ii < csc_ind[j+1]:
+ *             i  = csc_row[ii]
+ */
+  __pyx_t_1 = __pyx_v_ncol;
+  for (__pyx_v_j = 0; __pyx_v_j < __pyx_t_1; __pyx_v_j++) {
+
+    /* "cysparse/sparse/sparse_utils/generic/matrix_translations_INT64_t_COMPLEX256_t.pyx":117
+ * 
+ *     for j from 0 <= j < ncol:
+ *         for ii from csc_ind[j] <= ii < csc_ind[j+1]:             # <<<<<<<<<<<<<<
+ *             i  = csc_row[ii]
+ *             dest = csr_ind[i]
+ */
+    __pyx_t_2 = (__pyx_v_csc_ind[(__pyx_v_j + 1)]);
+    for (__pyx_v_ii = (__pyx_v_csc_ind[__pyx_v_j]); __pyx_v_ii < __pyx_t_2; __pyx_v_ii++) {
+
+      /* "cysparse/sparse/sparse_utils/generic/matrix_translations_INT64_t_COMPLEX256_t.pyx":118
+ *     for j from 0 <= j < ncol:
+ *         for ii from csc_ind[j] <= ii < csc_ind[j+1]:
+ *             i  = csc_row[ii]             # <<<<<<<<<<<<<<
+ *             dest = csr_ind[i]
+ * 
+ */
+      __pyx_v_i = (__pyx_v_csc_row[__pyx_v_ii]);
+
+      /* "cysparse/sparse/sparse_utils/generic/matrix_translations_INT64_t_COMPLEX256_t.pyx":119
+ *         for ii from csc_ind[j] <= ii < csc_ind[j+1]:
+ *             i  = csc_row[ii]
+ *             dest = csr_ind[i]             # <<<<<<<<<<<<<<
+ * 
+ *             csr_col[dest] = j
+ */
+      __pyx_v_dest = (__pyx_v_csr_ind[__pyx_v_i]);
+
+      /* "cysparse/sparse/sparse_utils/generic/matrix_translations_INT64_t_COMPLEX256_t.pyx":121
+ *             dest = csr_ind[i]
+ * 
+ *             csr_col[dest] = j             # <<<<<<<<<<<<<<
+ *             csr_val[dest] = csc_val[ii]
+ * 
+ */
+      (__pyx_v_csr_col[__pyx_v_dest]) = __pyx_v_j;
+
+      /* "cysparse/sparse/sparse_utils/generic/matrix_translations_INT64_t_COMPLEX256_t.pyx":122
+ * 
+ *             csr_col[dest] = j
+ *             csr_val[dest] = csc_val[ii]             # <<<<<<<<<<<<<<
+ * 
+ *             csr_ind[i] += 1
+ */
+      (__pyx_v_csr_val[__pyx_v_dest]) = (__pyx_v_csc_val[__pyx_v_ii]);
+
+      /* "cysparse/sparse/sparse_utils/generic/matrix_translations_INT64_t_COMPLEX256_t.pyx":124
+ *             csr_val[dest] = csc_val[ii]
+ * 
+ *             csr_ind[i] += 1             # <<<<<<<<<<<<<<
+ * 
+ *     # reshift csr_ind to the right, starting with csr_ind[0] = 0
+ */
+      __pyx_t_3 = __pyx_v_i;
+      (__pyx_v_csr_ind[__pyx_t_3]) = ((__pyx_v_csr_ind[__pyx_t_3]) + 1);
+    }
+  }
+
+  /* "cysparse/sparse/sparse_utils/generic/matrix_translations_INT64_t_COMPLEX256_t.pyx":129
+ *     # from [1, 2, 3, 3] get back [0, 1, 2 , 3]
+ * 
+ *     cdef INT64_t last = 0             # <<<<<<<<<<<<<<
+ * 
+ *     for i from 0 <= i <= nrow:
+ */
+  __pyx_v_last = 0;
+
+  /* "cysparse/sparse/sparse_utils/generic/matrix_translations_INT64_t_COMPLEX256_t.pyx":131
+ *     cdef INT64_t last = 0
+ * 
+ *     for i from 0 <= i <= nrow:             # <<<<<<<<<<<<<<
+ *         temp   = csr_ind[i]
+ *         csr_ind[i] = last
+ */
+  __pyx_t_1 = __pyx_v_nrow;
+  for (__pyx_v_i = 0; __pyx_v_i <= __pyx_t_1; __pyx_v_i++) {
+
+    /* "cysparse/sparse/sparse_utils/generic/matrix_translations_INT64_t_COMPLEX256_t.pyx":132
+ * 
+ *     for i from 0 <= i <= nrow:
+ *         temp   = csr_ind[i]             # <<<<<<<<<<<<<<
+ *         csr_ind[i] = last
+ *         last   = temp
+ */
+    __pyx_v_temp = (__pyx_v_csr_ind[__pyx_v_i]);
+
+    /* "cysparse/sparse/sparse_utils/generic/matrix_translations_INT64_t_COMPLEX256_t.pyx":133
+ *     for i from 0 <= i <= nrow:
+ *         temp   = csr_ind[i]
+ *         csr_ind[i] = last             # <<<<<<<<<<<<<<
+ *         last   = temp
+ */
+    (__pyx_v_csr_ind[__pyx_v_i]) = __pyx_v_last;
+
+    /* "cysparse/sparse/sparse_utils/generic/matrix_translations_INT64_t_COMPLEX256_t.pyx":134
+ *         temp   = csr_ind[i]
+ *         csr_ind[i] = last
+ *         last   = temp             # <<<<<<<<<<<<<<
+ */
+    __pyx_v_last = __pyx_v_temp;
+  }
+
+  /* "cysparse/sparse/sparse_utils/generic/matrix_translations_INT64_t_COMPLEX256_t.pyx":71
+ * 
+ * 
+ * cdef csc_to_csr_kernel_INT64_t_COMPLEX256_t(INT64_t nrow, INT64_t ncol, INT64_t nnz,             # <<<<<<<<<<<<<<
+ *                                       INT64_t * csc_ind, INT64_t * csc_row, COMPLEX256_t * csc_val,
+ *                                       INT64_t * csr_ind, INT64_t * csr_col, COMPLEX256_t * csr_val):
  */
 
   /* function exit code */
@@ -1334,6 +1594,7 @@ PyMODINIT_FUNC PyInit_matrix_translations_INT64_t_COMPLEX256_t(void)
   /*--- Variable export code ---*/
   /*--- Function export code ---*/
   if (__Pyx_ExportFunction("csr_to_csc_kernel_INT64_t_COMPLEX256_t", (void (*)(void))__pyx_f_8cysparse_6sparse_12sparse_utils_7generic_40matrix_translations_INT64_t_COMPLEX256_t_csr_to_csc_kernel_INT64_t_COMPLEX256_t, "PyObject *(__pyx_t_8cysparse_5types_14cysparse_types_INT64_t, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t *, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t *, __pyx_t_long_double_complex *, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t *, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t *, __pyx_t_long_double_complex *)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_ExportFunction("csc_to_csr_kernel_INT64_t_COMPLEX256_t", (void (*)(void))__pyx_f_8cysparse_6sparse_12sparse_utils_7generic_40matrix_translations_INT64_t_COMPLEX256_t_csc_to_csr_kernel_INT64_t_COMPLEX256_t, "PyObject *(__pyx_t_8cysparse_5types_14cysparse_types_INT64_t, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t *, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t *, __pyx_t_long_double_complex *, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t *, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t *, __pyx_t_long_double_complex *)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   /*--- Type init code ---*/
   /*--- Type import code ---*/
   __pyx_ptype_7cpython_4type_type = __Pyx_ImportType(__Pyx_BUILTIN_MODULE_NAME, "type", 

@@ -25,3 +25,14 @@ for i in xrange(C.ncol):
     print "nnz = %d" % D.nnz
     print D
 
+print "$" * 80
+D = C.to_csr()
+print D
+
+print "/" * 80
+
+A[0, 0] = 0.0
+E = A.to_csr()
+print E
+F = E.to_csc()
+print F
