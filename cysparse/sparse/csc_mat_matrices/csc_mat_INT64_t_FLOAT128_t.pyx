@@ -13,6 +13,7 @@ from cysparse.sparse.s_mat_matrices.s_mat_INT64_t_FLOAT128_t cimport ImmutableSp
 from cysparse.sparse.ll_mat_matrices.ll_mat_INT64_t_FLOAT128_t cimport LLSparseMatrix_INT64_t_FLOAT128_t
 
 from cysparse.sparse.sparse_utils.generic.print_FLOAT128_t cimport element_to_string_FLOAT128_t, conjugated_element_to_string_FLOAT128_t, empty_to_string_FLOAT128_t
+from cysparse.sparse.sparse_utils.generic.matrix_translations_INT64_t_FLOAT128_t cimport csr_to_csc_kernel_INT64_t_FLOAT128_t
 
 ########################################################################################################################
 # Cython, NumPy import/cimport
@@ -404,20 +405,58 @@ cdef class CSCSparseMatrix_INT64_t_FLOAT128_t(ImmutableSparseMatrix_INT64_t_FLOA
         nnz = 0
         ind[0] = 0
 
+        # Special case: when matrix is symmetric: we first create a internal CSR and then translate it to CSC
+        cdef INT64_t * csr_ind = <INT64_t *> PyMem_Malloc((self.__nrow + 1) * sizeof(INT64_t))
+        if not csr_ind:
+            PyMem_Free(ind)
+            PyMem_Free(row)
+            PyMem_Free(val)
+
+            raise MemoryError()
+
+        cdef INT64_t * csr_col = <INT64_t *> PyMem_Malloc(self.__nnz * sizeof(INT64_t))
+        if not csr_col:
+            PyMem_Free(ind)
+            PyMem_Free(row)
+            PyMem_Free(val)
+
+            PyMem_Free(csr_ind)
+            raise MemoryError()
+
+        cdef FLOAT128_t * csr_val = <FLOAT128_t *> PyMem_Malloc(self.__nnz * sizeof(FLOAT128_t))
+        if not csr_val:
+            PyMem_Free(ind)
+            PyMem_Free(row)
+            PyMem_Free(val)
+
+            PyMem_Free(csr_ind)
+            PyMem_Free(csr_col)
+            raise MemoryError()
+
         if self.__is_symmetric:
-            # TO BE DONE
-            raise NotImplementedError('Not implemented yet...')
+            # Special (and annoying) case: we first create a CSR and then translate it to CSC
+
+
             for j from 0 <= j < self.__ncol:
                 for k_ from self.ind[j] <= k_ < self.ind[j+1]:
                     i = self.row[k_]
                     v = self.val[k_]
 
-                    if i >= j - k:
-                        row[nnz] = i
-                        val[nnz] = v
+                    if i <= j - k:
+                        csr_col[nnz] = j
+                        csr_val[nnz] = v
                         nnz += 1
 
-                ind[j+1] = nnz
+                csr_ind[j+1] = nnz
+
+            csr_to_csc_kernel_INT64_t_FLOAT128_t(self.__nrow, self.__ncol, self.__nnz,
+                                      csr_ind, csr_col, csr_val,
+                                      ind, row, val)
+            # erase temp arrays
+            PyMem_Free(csr_ind)
+            PyMem_Free(csr_col)
+            PyMem_Free(csr_val)
+
         else:  # not symmtric
             for j from 0 <= j < self.__ncol:
                 for k_ from self.ind[j] <= k_ < self.ind[j+1]:

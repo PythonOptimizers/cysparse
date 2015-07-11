@@ -13,6 +13,7 @@ from cysparse.sparse.s_mat_matrices.s_mat_@index@_@type@ cimport ImmutableSparse
 from cysparse.sparse.ll_mat_matrices.ll_mat_@index@_@type@ cimport LLSparseMatrix_@index@_@type@
 
 from cysparse.sparse.sparse_utils.generic.print_@type@ cimport element_to_string_@type@, conjugated_element_to_string_@type@, empty_to_string_@type@
+from cysparse.sparse.sparse_utils.generic.matrix_translations_@index@_@type@ cimport csr_to_csc_kernel_@index@_@type@
 
 ########################################################################################################################
 # Cython, NumPy import/cimport
@@ -413,20 +414,58 @@ YOU HAVE TO EXPLICITY CAST YOUR TYPE
         nnz = 0
         ind[0] = 0
 
+        # Special case: when matrix is symmetric: we first create a internal CSR and then translate it to CSC
+        cdef @index@ * csr_ind = <@index@ *> PyMem_Malloc((self.__nrow + 1) * sizeof(@index@))
+        if not csr_ind:
+            PyMem_Free(ind)
+            PyMem_Free(row)
+            PyMem_Free(val)
+
+            raise MemoryError()
+
+        cdef @index@ * csr_col = <@index@ *> PyMem_Malloc(self.__nnz * sizeof(@index@))
+        if not csr_col:
+            PyMem_Free(ind)
+            PyMem_Free(row)
+            PyMem_Free(val)
+
+            PyMem_Free(csr_ind)
+            raise MemoryError()
+
+        cdef @type@ * csr_val = <@type@ *> PyMem_Malloc(self.__nnz * sizeof(@type@))
+        if not csr_val:
+            PyMem_Free(ind)
+            PyMem_Free(row)
+            PyMem_Free(val)
+
+            PyMem_Free(csr_ind)
+            PyMem_Free(csr_col)
+            raise MemoryError()
+
         if self.__is_symmetric:
-            # TO BE DONE
-            raise NotImplementedError('Not implemented yet...')
+            # Special (and annoying) case: we first create a CSR and then translate it to CSC
+
+
             for j from 0 <= j < self.__ncol:
                 for k_ from self.ind[j] <= k_ < self.ind[j+1]:
                     i = self.row[k_]
                     v = self.val[k_]
 
-                    if i >= j - k:
-                        row[nnz] = i
-                        val[nnz] = v
+                    if i <= j - k:
+                        csr_col[nnz] = j
+                        csr_val[nnz] = v
                         nnz += 1
 
-                ind[j+1] = nnz
+                csr_ind[j+1] = nnz
+
+            csr_to_csc_kernel_@index@_@type@(self.__nrow, self.__ncol, self.__nnz,
+                                      csr_ind, csr_col, csr_val,
+                                      ind, row, val)
+            # erase temp arrays
+            PyMem_Free(csr_ind)
+            PyMem_Free(csr_col)
+            PyMem_Free(csr_val)
+
         else:  # not symmtric
             for j from 0 <= j < self.__ncol:
                 for k_ from self.ind[j] <= k_ < self.ind[j+1]:

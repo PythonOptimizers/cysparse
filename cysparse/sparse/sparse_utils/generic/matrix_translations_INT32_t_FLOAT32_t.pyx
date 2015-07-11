@@ -4,6 +4,15 @@ from cysparse.types.cysparse_types cimport *
 cdef csr_to_csc_kernel_INT32_t_FLOAT32_t(INT32_t nrow, INT32_t ncol, INT32_t nnz,
                                       INT32_t * csr_ind, INT32_t * csr_col, FLOAT32_t * csr_val,
                                       INT32_t * csc_ind, INT32_t * csc_row, FLOAT32_t * csc_val):
+    """
+    Translate an CSR to an CSC matrix format.
+
+    Args:
+        nrow, ncol: Matrix dimension.
+        nnz: Number of non zero elements.
+        csr_ind, csr_col, csr_val: CSR matrix (IN argument).
+        csc_ind, csc_row, csc_val: Computed CSC matrix (OUT argument).
+    """
     ############
     # compute csc_ind, i.e. the nnz of each column of the matrix
     ############
