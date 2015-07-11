@@ -39,6 +39,7 @@ cdef csr_to_csc_kernel_@index@_@type@(@index@ nrow, @index@ ncol, @index@ nnz,
     csc_ind[ncol] = nnz
 
     # csc_ind is computed but will change in the next lines: we'll recompute it afterwoods
+    # csc_ind will be shifted to the left, for instance [0, 1, 2, 3] becomes [1, 2, 3, 3]
 
     ############
     # populate row and val
@@ -54,6 +55,9 @@ cdef csr_to_csc_kernel_@index@_@type@(@index@ nrow, @index@ ncol, @index@ nnz,
             csc_val[dest] = csr_val[jj]
 
             csc_ind[j] += 1
+
+    # reshift csc_ind to the right, starting with csc_ind[0] = 0
+    # from [1, 2, 3, 3] get back [0, 1, 2 , 3]
 
     cdef @index@ last = 0
 

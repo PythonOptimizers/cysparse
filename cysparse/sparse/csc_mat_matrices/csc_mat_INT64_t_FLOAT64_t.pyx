@@ -405,59 +405,64 @@ cdef class CSCSparseMatrix_INT64_t_FLOAT64_t(ImmutableSparseMatrix_INT64_t_FLOAT
         nnz = 0
         ind[0] = 0
 
-        # Special case: when matrix is symmetric: we first create a internal CSR and then translate it to CSC
-        cdef INT64_t * csr_ind = <INT64_t *> PyMem_Malloc((self.__nrow + 1) * sizeof(INT64_t))
-        if not csr_ind:
-            PyMem_Free(ind)
-            PyMem_Free(row)
-            PyMem_Free(val)
-
-            raise MemoryError()
-
-        cdef INT64_t * csr_col = <INT64_t *> PyMem_Malloc(self.__nnz * sizeof(INT64_t))
-        if not csr_col:
-            PyMem_Free(ind)
-            PyMem_Free(row)
-            PyMem_Free(val)
-
-            PyMem_Free(csr_ind)
-            raise MemoryError()
-
-        cdef FLOAT64_t * csr_val = <FLOAT64_t *> PyMem_Malloc(self.__nnz * sizeof(FLOAT64_t))
-        if not csr_val:
-            PyMem_Free(ind)
-            PyMem_Free(row)
-            PyMem_Free(val)
-
-            PyMem_Free(csr_ind)
-            PyMem_Free(csr_col)
-            raise MemoryError()
+        # Special case: when matrix is symmetric: we first create an internal CSR and then translate it to CSC
+        cdef INT64_t * csr_ind
+        cdef INT64_t * csr_col
+        cdef FLOAT64_t  * csr_val
 
         if self.__is_symmetric:
             # Special (and annoying) case: we first create a CSR and then translate it to CSC
+            csr_ind = <INT64_t *> PyMem_Malloc((self.__nrow + 1) * sizeof(INT64_t))
+            if not csr_ind:
+                PyMem_Free(ind)
+                PyMem_Free(row)
+                PyMem_Free(val)
 
+                raise MemoryError()
+
+            csr_col = <INT64_t *> PyMem_Malloc(self.__nnz * sizeof(INT64_t))
+            if not csr_col:
+                PyMem_Free(ind)
+                PyMem_Free(row)
+                PyMem_Free(val)
+
+                PyMem_Free(csr_ind)
+                raise MemoryError()
+
+            csr_val = <FLOAT64_t *> PyMem_Malloc(self.__nnz * sizeof(FLOAT64_t))
+            if not csr_val:
+                PyMem_Free(ind)
+                PyMem_Free(row)
+                PyMem_Free(val)
+
+                PyMem_Free(csr_ind)
+                PyMem_Free(csr_col)
+                raise MemoryError()
+
+            csr_ind[0] = 0
 
             for j from 0 <= j < self.__ncol:
                 for k_ from self.ind[j] <= k_ < self.ind[j+1]:
                     i = self.row[k_]
                     v = self.val[k_]
 
-                    if i <= j - k:
-                        csr_col[nnz] = j
+                    if i >= j + k:
+                        csr_col[nnz] = i
                         csr_val[nnz] = v
                         nnz += 1
 
                 csr_ind[j+1] = nnz
 
-            csr_to_csc_kernel_INT64_t_FLOAT64_t(self.__nrow, self.__ncol, self.__nnz,
+            csr_to_csc_kernel_INT64_t_FLOAT64_t(self.__nrow, self.__ncol, nnz,
                                       csr_ind, csr_col, csr_val,
                                       ind, row, val)
+
             # erase temp arrays
             PyMem_Free(csr_ind)
             PyMem_Free(csr_col)
             PyMem_Free(csr_val)
 
-        else:  # not symmtric
+        else:  # not symmetric
             for j from 0 <= j < self.__ncol:
                 for k_ from self.ind[j] <= k_ < self.ind[j+1]:
                     i = self.row[k_]
@@ -470,6 +475,16 @@ cdef class CSCSparseMatrix_INT64_t_FLOAT64_t(ImmutableSparseMatrix_INT64_t_FLOAT
 
                 ind[j+1] = nnz
 
+        # resize arrays row and val
+        cdef:
+            void *temp
+
+        temp = <INT64_t *> PyMem_Realloc(row, nnz * sizeof(INT64_t))
+        row = <INT64_t*>temp
+
+        temp = <FLOAT64_t *> PyMem_Realloc(val, nnz * sizeof(FLOAT64_t))
+        val = <FLOAT64_t*>temp
+        
         return MakeCSCSparseMatrix_INT64_t_FLOAT64_t(self.__nrow, self.__ncol, nnz, ind, row, val, is_symmetric=False, store_zeros=self.__store_zeros)
 
     def to_csr(self):
