@@ -64,6 +64,8 @@ class CySparseCommonOperationsMatrixTranslationsTestCase(CySparseCommonOperation
   {% for element_type in type_list %}
         self.failUnless(is_equal(self.l_@outerloop.index@_@loop.index@_csc.to_csr(), self.l_@outerloop.index@_@loop.index@_csr))
         self.failUnless(is_equal(self.l_@outerloop.index@_@loop.index@_csr.to_csc(), self.l_@outerloop.index@_@loop.index@_csc))
+        np.testing.assert_allclose(self.l_@outerloop.index@_@loop.index@.to_ndarray(), self.l_@outerloop.index@_@loop.index@_csc.to_ndarray())
+        np.testing.assert_allclose(self.l_@outerloop.index@_@loop.index@.to_ndarray(), self.l_@outerloop.index@_@loop.index@_csr.to_ndarray())
   {% endfor %}
 {% endfor %}
 
@@ -94,6 +96,8 @@ class CySparseCommonOperationsSymMatrixTranslationsTestCase(CySparseCommonOperat
   {% for element_type in type_list %}
         self.failUnless(is_equal(self.l_@outerloop.index@_@loop.index@_csc.to_csr(), self.l_@outerloop.index@_@loop.index@_csr))
         self.failUnless(is_equal(self.l_@outerloop.index@_@loop.index@_csr.to_csc(), self.l_@outerloop.index@_@loop.index@_csc))
+        np.testing.assert_allclose(self.l_@outerloop.index@_@loop.index@.to_ndarray(), self.l_@outerloop.index@_@loop.index@_csc.to_ndarray())
+        np.testing.assert_allclose(self.l_@outerloop.index@_@loop.index@.to_ndarray(), self.l_@outerloop.index@_@loop.index@_csr.to_ndarray())
   {% endfor %}
 {% endfor %}
 

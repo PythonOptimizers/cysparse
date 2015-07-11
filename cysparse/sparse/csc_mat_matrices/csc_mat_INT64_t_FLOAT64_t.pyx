@@ -344,7 +344,7 @@ cdef class CSCSparseMatrix_INT64_t_FLOAT64_t(ImmutableSparseMatrix_INT64_t_FLOAT
 
         # populate arrays
         cdef:
-            INT64_t j, k_, nnz
+            INT64_t i, j, k_, nnz
 
         nnz = 0
         ind[0] = 0
@@ -360,6 +360,16 @@ cdef class CSCSparseMatrix_INT64_t_FLOAT64_t(ImmutableSparseMatrix_INT64_t_FLOAT
                     nnz += 1
 
             ind[j+1] = nnz
+
+        # resize arrays row and val
+        cdef:
+            void *temp
+
+        temp = <INT64_t *> PyMem_Realloc(row, nnz * sizeof(INT64_t))
+        row = <INT64_t*>temp
+
+        temp = <FLOAT64_t *> PyMem_Realloc(val, nnz * sizeof(FLOAT64_t))
+        val = <FLOAT64_t*>temp
 
         return MakeCSCSparseMatrix_INT64_t_FLOAT64_t(self.__nrow, self.__ncol, nnz, ind, row, val, is_symmetric=False, store_zeros=self.__store_zeros)
 
@@ -402,7 +412,7 @@ cdef class CSCSparseMatrix_INT64_t_FLOAT64_t(ImmutableSparseMatrix_INT64_t_FLOAT
 
         # populate arrays
         cdef:
-            INT64_t j, k_, nnz
+            INT64_t i, j, k_, nnz
 
         nnz = 0
         ind[0] = 0

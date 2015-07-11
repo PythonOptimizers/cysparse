@@ -353,7 +353,7 @@ YOU HAVE TO EXPLICITY CAST YOUR TYPE
 
         # populate arrays
         cdef:
-            @index@ j, k_, nnz
+            @index@ i, j, k_, nnz
 
         nnz = 0
         ind[0] = 0
@@ -369,6 +369,16 @@ YOU HAVE TO EXPLICITY CAST YOUR TYPE
                     nnz += 1
 
             ind[j+1] = nnz
+
+        # resize arrays row and val
+        cdef:
+            void *temp
+
+        temp = <@index@ *> PyMem_Realloc(row, nnz * sizeof(@index@))
+        row = <@index@*>temp
+
+        temp = <@type@ *> PyMem_Realloc(val, nnz * sizeof(@type@))
+        val = <@type@*>temp
 
         return MakeCSCSparseMatrix_@index@_@type@(self.__nrow, self.__ncol, nnz, ind, row, val, is_symmetric=False, store_zeros=self.__store_zeros)
 
@@ -411,7 +421,7 @@ YOU HAVE TO EXPLICITY CAST YOUR TYPE
 
         # populate arrays
         cdef:
-            @index@ j, k_, nnz
+            @index@ i, j, k_, nnz
 
         nnz = 0
         ind[0] = 0

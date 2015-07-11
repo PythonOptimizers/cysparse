@@ -345,7 +345,7 @@ cdef class CSCSparseMatrix_INT32_t_COMPLEX128_t(ImmutableSparseMatrix_INT32_t_CO
 
         # populate arrays
         cdef:
-            INT32_t j, k_, nnz
+            INT32_t i, j, k_, nnz
 
         nnz = 0
         ind[0] = 0
@@ -361,6 +361,16 @@ cdef class CSCSparseMatrix_INT32_t_COMPLEX128_t(ImmutableSparseMatrix_INT32_t_CO
                     nnz += 1
 
             ind[j+1] = nnz
+
+        # resize arrays row and val
+        cdef:
+            void *temp
+
+        temp = <INT32_t *> PyMem_Realloc(row, nnz * sizeof(INT32_t))
+        row = <INT32_t*>temp
+
+        temp = <COMPLEX128_t *> PyMem_Realloc(val, nnz * sizeof(COMPLEX128_t))
+        val = <COMPLEX128_t*>temp
 
         return MakeCSCSparseMatrix_INT32_t_COMPLEX128_t(self.__nrow, self.__ncol, nnz, ind, row, val, is_symmetric=False, store_zeros=self.__store_zeros)
 
@@ -403,7 +413,7 @@ cdef class CSCSparseMatrix_INT32_t_COMPLEX128_t(ImmutableSparseMatrix_INT32_t_CO
 
         # populate arrays
         cdef:
-            INT32_t j, k_, nnz
+            INT32_t i, j, k_, nnz
 
         nnz = 0
         ind[0] = 0

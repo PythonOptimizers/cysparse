@@ -142,54 +142,86 @@ class CySparseCommonOperationsMatrixTranslationsTestCase(CySparseCommonOperation
   
         self.failUnless(is_equal(self.l_1_1_csc.to_csr(), self.l_1_1_csr))
         self.failUnless(is_equal(self.l_1_1_csr.to_csc(), self.l_1_1_csc))
+        np.testing.assert_allclose(self.l_1_1.to_ndarray(), self.l_1_1_csc.to_ndarray())
+        np.testing.assert_allclose(self.l_1_1.to_ndarray(), self.l_1_1_csr.to_ndarray())
   
         self.failUnless(is_equal(self.l_1_2_csc.to_csr(), self.l_1_2_csr))
         self.failUnless(is_equal(self.l_1_2_csr.to_csc(), self.l_1_2_csc))
+        np.testing.assert_allclose(self.l_1_2.to_ndarray(), self.l_1_2_csc.to_ndarray())
+        np.testing.assert_allclose(self.l_1_2.to_ndarray(), self.l_1_2_csr.to_ndarray())
   
         self.failUnless(is_equal(self.l_1_3_csc.to_csr(), self.l_1_3_csr))
         self.failUnless(is_equal(self.l_1_3_csr.to_csc(), self.l_1_3_csc))
+        np.testing.assert_allclose(self.l_1_3.to_ndarray(), self.l_1_3_csc.to_ndarray())
+        np.testing.assert_allclose(self.l_1_3.to_ndarray(), self.l_1_3_csr.to_ndarray())
   
         self.failUnless(is_equal(self.l_1_4_csc.to_csr(), self.l_1_4_csr))
         self.failUnless(is_equal(self.l_1_4_csr.to_csc(), self.l_1_4_csc))
+        np.testing.assert_allclose(self.l_1_4.to_ndarray(), self.l_1_4_csc.to_ndarray())
+        np.testing.assert_allclose(self.l_1_4.to_ndarray(), self.l_1_4_csr.to_ndarray())
   
         self.failUnless(is_equal(self.l_1_5_csc.to_csr(), self.l_1_5_csr))
         self.failUnless(is_equal(self.l_1_5_csr.to_csc(), self.l_1_5_csc))
+        np.testing.assert_allclose(self.l_1_5.to_ndarray(), self.l_1_5_csc.to_ndarray())
+        np.testing.assert_allclose(self.l_1_5.to_ndarray(), self.l_1_5_csr.to_ndarray())
   
         self.failUnless(is_equal(self.l_1_6_csc.to_csr(), self.l_1_6_csr))
         self.failUnless(is_equal(self.l_1_6_csr.to_csc(), self.l_1_6_csc))
+        np.testing.assert_allclose(self.l_1_6.to_ndarray(), self.l_1_6_csc.to_ndarray())
+        np.testing.assert_allclose(self.l_1_6.to_ndarray(), self.l_1_6_csr.to_ndarray())
   
         self.failUnless(is_equal(self.l_1_7_csc.to_csr(), self.l_1_7_csr))
         self.failUnless(is_equal(self.l_1_7_csr.to_csc(), self.l_1_7_csc))
+        np.testing.assert_allclose(self.l_1_7.to_ndarray(), self.l_1_7_csc.to_ndarray())
+        np.testing.assert_allclose(self.l_1_7.to_ndarray(), self.l_1_7_csr.to_ndarray())
   
         self.failUnless(is_equal(self.l_1_8_csc.to_csr(), self.l_1_8_csr))
         self.failUnless(is_equal(self.l_1_8_csr.to_csc(), self.l_1_8_csc))
+        np.testing.assert_allclose(self.l_1_8.to_ndarray(), self.l_1_8_csc.to_ndarray())
+        np.testing.assert_allclose(self.l_1_8.to_ndarray(), self.l_1_8_csr.to_ndarray())
   
 
   
   
         self.failUnless(is_equal(self.l_2_1_csc.to_csr(), self.l_2_1_csr))
         self.failUnless(is_equal(self.l_2_1_csr.to_csc(), self.l_2_1_csc))
+        np.testing.assert_allclose(self.l_2_1.to_ndarray(), self.l_2_1_csc.to_ndarray())
+        np.testing.assert_allclose(self.l_2_1.to_ndarray(), self.l_2_1_csr.to_ndarray())
   
         self.failUnless(is_equal(self.l_2_2_csc.to_csr(), self.l_2_2_csr))
         self.failUnless(is_equal(self.l_2_2_csr.to_csc(), self.l_2_2_csc))
+        np.testing.assert_allclose(self.l_2_2.to_ndarray(), self.l_2_2_csc.to_ndarray())
+        np.testing.assert_allclose(self.l_2_2.to_ndarray(), self.l_2_2_csr.to_ndarray())
   
         self.failUnless(is_equal(self.l_2_3_csc.to_csr(), self.l_2_3_csr))
         self.failUnless(is_equal(self.l_2_3_csr.to_csc(), self.l_2_3_csc))
+        np.testing.assert_allclose(self.l_2_3.to_ndarray(), self.l_2_3_csc.to_ndarray())
+        np.testing.assert_allclose(self.l_2_3.to_ndarray(), self.l_2_3_csr.to_ndarray())
   
         self.failUnless(is_equal(self.l_2_4_csc.to_csr(), self.l_2_4_csr))
         self.failUnless(is_equal(self.l_2_4_csr.to_csc(), self.l_2_4_csc))
+        np.testing.assert_allclose(self.l_2_4.to_ndarray(), self.l_2_4_csc.to_ndarray())
+        np.testing.assert_allclose(self.l_2_4.to_ndarray(), self.l_2_4_csr.to_ndarray())
   
         self.failUnless(is_equal(self.l_2_5_csc.to_csr(), self.l_2_5_csr))
         self.failUnless(is_equal(self.l_2_5_csr.to_csc(), self.l_2_5_csc))
+        np.testing.assert_allclose(self.l_2_5.to_ndarray(), self.l_2_5_csc.to_ndarray())
+        np.testing.assert_allclose(self.l_2_5.to_ndarray(), self.l_2_5_csr.to_ndarray())
   
         self.failUnless(is_equal(self.l_2_6_csc.to_csr(), self.l_2_6_csr))
         self.failUnless(is_equal(self.l_2_6_csr.to_csc(), self.l_2_6_csc))
+        np.testing.assert_allclose(self.l_2_6.to_ndarray(), self.l_2_6_csc.to_ndarray())
+        np.testing.assert_allclose(self.l_2_6.to_ndarray(), self.l_2_6_csr.to_ndarray())
   
         self.failUnless(is_equal(self.l_2_7_csc.to_csr(), self.l_2_7_csr))
         self.failUnless(is_equal(self.l_2_7_csr.to_csc(), self.l_2_7_csc))
+        np.testing.assert_allclose(self.l_2_7.to_ndarray(), self.l_2_7_csc.to_ndarray())
+        np.testing.assert_allclose(self.l_2_7.to_ndarray(), self.l_2_7_csr.to_ndarray())
   
         self.failUnless(is_equal(self.l_2_8_csc.to_csr(), self.l_2_8_csr))
         self.failUnless(is_equal(self.l_2_8_csr.to_csc(), self.l_2_8_csc))
+        np.testing.assert_allclose(self.l_2_8.to_ndarray(), self.l_2_8_csc.to_ndarray())
+        np.testing.assert_allclose(self.l_2_8.to_ndarray(), self.l_2_8_csr.to_ndarray())
   
 
 
@@ -298,54 +330,86 @@ class CySparseCommonOperationsSymMatrixTranslationsTestCase(CySparseCommonOperat
   
         self.failUnless(is_equal(self.l_1_1_csc.to_csr(), self.l_1_1_csr))
         self.failUnless(is_equal(self.l_1_1_csr.to_csc(), self.l_1_1_csc))
+        np.testing.assert_allclose(self.l_1_1.to_ndarray(), self.l_1_1_csc.to_ndarray())
+        np.testing.assert_allclose(self.l_1_1.to_ndarray(), self.l_1_1_csr.to_ndarray())
   
         self.failUnless(is_equal(self.l_1_2_csc.to_csr(), self.l_1_2_csr))
         self.failUnless(is_equal(self.l_1_2_csr.to_csc(), self.l_1_2_csc))
+        np.testing.assert_allclose(self.l_1_2.to_ndarray(), self.l_1_2_csc.to_ndarray())
+        np.testing.assert_allclose(self.l_1_2.to_ndarray(), self.l_1_2_csr.to_ndarray())
   
         self.failUnless(is_equal(self.l_1_3_csc.to_csr(), self.l_1_3_csr))
         self.failUnless(is_equal(self.l_1_3_csr.to_csc(), self.l_1_3_csc))
+        np.testing.assert_allclose(self.l_1_3.to_ndarray(), self.l_1_3_csc.to_ndarray())
+        np.testing.assert_allclose(self.l_1_3.to_ndarray(), self.l_1_3_csr.to_ndarray())
   
         self.failUnless(is_equal(self.l_1_4_csc.to_csr(), self.l_1_4_csr))
         self.failUnless(is_equal(self.l_1_4_csr.to_csc(), self.l_1_4_csc))
+        np.testing.assert_allclose(self.l_1_4.to_ndarray(), self.l_1_4_csc.to_ndarray())
+        np.testing.assert_allclose(self.l_1_4.to_ndarray(), self.l_1_4_csr.to_ndarray())
   
         self.failUnless(is_equal(self.l_1_5_csc.to_csr(), self.l_1_5_csr))
         self.failUnless(is_equal(self.l_1_5_csr.to_csc(), self.l_1_5_csc))
+        np.testing.assert_allclose(self.l_1_5.to_ndarray(), self.l_1_5_csc.to_ndarray())
+        np.testing.assert_allclose(self.l_1_5.to_ndarray(), self.l_1_5_csr.to_ndarray())
   
         self.failUnless(is_equal(self.l_1_6_csc.to_csr(), self.l_1_6_csr))
         self.failUnless(is_equal(self.l_1_6_csr.to_csc(), self.l_1_6_csc))
+        np.testing.assert_allclose(self.l_1_6.to_ndarray(), self.l_1_6_csc.to_ndarray())
+        np.testing.assert_allclose(self.l_1_6.to_ndarray(), self.l_1_6_csr.to_ndarray())
   
         self.failUnless(is_equal(self.l_1_7_csc.to_csr(), self.l_1_7_csr))
         self.failUnless(is_equal(self.l_1_7_csr.to_csc(), self.l_1_7_csc))
+        np.testing.assert_allclose(self.l_1_7.to_ndarray(), self.l_1_7_csc.to_ndarray())
+        np.testing.assert_allclose(self.l_1_7.to_ndarray(), self.l_1_7_csr.to_ndarray())
   
         self.failUnless(is_equal(self.l_1_8_csc.to_csr(), self.l_1_8_csr))
         self.failUnless(is_equal(self.l_1_8_csr.to_csc(), self.l_1_8_csc))
+        np.testing.assert_allclose(self.l_1_8.to_ndarray(), self.l_1_8_csc.to_ndarray())
+        np.testing.assert_allclose(self.l_1_8.to_ndarray(), self.l_1_8_csr.to_ndarray())
   
 
   
   
         self.failUnless(is_equal(self.l_2_1_csc.to_csr(), self.l_2_1_csr))
         self.failUnless(is_equal(self.l_2_1_csr.to_csc(), self.l_2_1_csc))
+        np.testing.assert_allclose(self.l_2_1.to_ndarray(), self.l_2_1_csc.to_ndarray())
+        np.testing.assert_allclose(self.l_2_1.to_ndarray(), self.l_2_1_csr.to_ndarray())
   
         self.failUnless(is_equal(self.l_2_2_csc.to_csr(), self.l_2_2_csr))
         self.failUnless(is_equal(self.l_2_2_csr.to_csc(), self.l_2_2_csc))
+        np.testing.assert_allclose(self.l_2_2.to_ndarray(), self.l_2_2_csc.to_ndarray())
+        np.testing.assert_allclose(self.l_2_2.to_ndarray(), self.l_2_2_csr.to_ndarray())
   
         self.failUnless(is_equal(self.l_2_3_csc.to_csr(), self.l_2_3_csr))
         self.failUnless(is_equal(self.l_2_3_csr.to_csc(), self.l_2_3_csc))
+        np.testing.assert_allclose(self.l_2_3.to_ndarray(), self.l_2_3_csc.to_ndarray())
+        np.testing.assert_allclose(self.l_2_3.to_ndarray(), self.l_2_3_csr.to_ndarray())
   
         self.failUnless(is_equal(self.l_2_4_csc.to_csr(), self.l_2_4_csr))
         self.failUnless(is_equal(self.l_2_4_csr.to_csc(), self.l_2_4_csc))
+        np.testing.assert_allclose(self.l_2_4.to_ndarray(), self.l_2_4_csc.to_ndarray())
+        np.testing.assert_allclose(self.l_2_4.to_ndarray(), self.l_2_4_csr.to_ndarray())
   
         self.failUnless(is_equal(self.l_2_5_csc.to_csr(), self.l_2_5_csr))
         self.failUnless(is_equal(self.l_2_5_csr.to_csc(), self.l_2_5_csc))
+        np.testing.assert_allclose(self.l_2_5.to_ndarray(), self.l_2_5_csc.to_ndarray())
+        np.testing.assert_allclose(self.l_2_5.to_ndarray(), self.l_2_5_csr.to_ndarray())
   
         self.failUnless(is_equal(self.l_2_6_csc.to_csr(), self.l_2_6_csr))
         self.failUnless(is_equal(self.l_2_6_csr.to_csc(), self.l_2_6_csc))
+        np.testing.assert_allclose(self.l_2_6.to_ndarray(), self.l_2_6_csc.to_ndarray())
+        np.testing.assert_allclose(self.l_2_6.to_ndarray(), self.l_2_6_csr.to_ndarray())
   
         self.failUnless(is_equal(self.l_2_7_csc.to_csr(), self.l_2_7_csr))
         self.failUnless(is_equal(self.l_2_7_csr.to_csc(), self.l_2_7_csc))
+        np.testing.assert_allclose(self.l_2_7.to_ndarray(), self.l_2_7_csc.to_ndarray())
+        np.testing.assert_allclose(self.l_2_7.to_ndarray(), self.l_2_7_csr.to_ndarray())
   
         self.failUnless(is_equal(self.l_2_8_csc.to_csr(), self.l_2_8_csr))
         self.failUnless(is_equal(self.l_2_8_csr.to_csc(), self.l_2_8_csc))
+        np.testing.assert_allclose(self.l_2_8.to_ndarray(), self.l_2_8_csc.to_ndarray())
+        np.testing.assert_allclose(self.l_2_8.to_ndarray(), self.l_2_8_csr.to_ndarray())
   
 
 
