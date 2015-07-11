@@ -130,8 +130,15 @@ sparse_ext = [
             sources=["cysparse/sparse/sparse_utils/generic/find_@index_type@_@element_type@.pxd",
                      "cysparse/sparse/sparse_utils/generic/find_@index_type@_@element_type@.pyx"],
             **sparse_ext_params),
+
+  Extension(name="cysparse.sparse.sparse_utils.generic.matrix_translations_@index_type@_@element_type@",
+            sources=["cysparse/sparse/sparse_utils/generic/matrix_translations_@index_type@_@element_type@.pxd",
+                     "cysparse/sparse/sparse_utils/generic/matrix_translations_@index_type@_@element_type@.pyx"],
+            **sparse_ext_params),
     {% endfor %}
 {% endfor %}
+
+
 
   ######################
   # ### SparseMatrix ###

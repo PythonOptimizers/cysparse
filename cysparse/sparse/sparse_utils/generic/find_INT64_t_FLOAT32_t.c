@@ -1132,7 +1132,7 @@ static __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_f_8cysparse_6spar
  *         while index > lb and array[index] == element:
  *             index -= 1             # <<<<<<<<<<<<<<
  * 
- * 
+ *     return index
  */
       __pyx_v_index = (__pyx_v_index - 1);
     }
@@ -1140,8 +1140,8 @@ static __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_f_8cysparse_6spar
   }
   __pyx_L6:;
 
-  /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_FLOAT32_t.pyx":59
- * 
+  /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_FLOAT32_t.pyx":58
+ *             index -= 1
  * 
  *     return index             # <<<<<<<<<<<<<<
  * 
@@ -1167,7 +1167,7 @@ static __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_f_8cysparse_6spar
   return __pyx_r;
 }
 
-/* "cysparse/sparse/sparse_utils/generic/find_INT64_t_FLOAT32_t.pyx":61
+/* "cysparse/sparse/sparse_utils/generic/find_INT64_t_FLOAT32_t.pyx":60
  *     return index
  * 
  * cdef INT64_t find_linear_INT64_t_FLOAT32_t(FLOAT32_t element, FLOAT32_t * array, INT64_t lb, INT64_t ub) except -1:             # <<<<<<<<<<<<<<
@@ -1186,7 +1186,7 @@ static __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_f_8cysparse_6spar
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("find_linear_INT64_t_FLOAT32_t", 0);
 
-  /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_FLOAT32_t.pyx":78
+  /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_FLOAT32_t.pyx":77
  * 
  *     """
  *     assert lb < ub, "Lower bound must be smaller than upper bound"             # <<<<<<<<<<<<<<
@@ -1197,12 +1197,12 @@ static __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_f_8cysparse_6spar
   if (unlikely(!Py_OptimizeFlag)) {
     if (unlikely(!((__pyx_v_lb < __pyx_v_ub) != 0))) {
       PyErr_SetObject(PyExc_AssertionError, __pyx_kp_s_Lower_bound_must_be_smaller_than);
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 78; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 77; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
   }
   #endif
 
-  /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_FLOAT32_t.pyx":83
+  /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_FLOAT32_t.pyx":82
  *         INT64_t index
  * 
  *     for index from lb <= index < ub:             # <<<<<<<<<<<<<<
@@ -1212,7 +1212,7 @@ static __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_f_8cysparse_6spar
   __pyx_t_1 = __pyx_v_ub;
   for (__pyx_v_index = __pyx_v_lb; __pyx_v_index < __pyx_t_1; __pyx_v_index++) {
 
-    /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_FLOAT32_t.pyx":84
+    /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_FLOAT32_t.pyx":83
  * 
  *     for index from lb <= index < ub:
  *         if array[index] == element:             # <<<<<<<<<<<<<<
@@ -1222,7 +1222,7 @@ static __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_f_8cysparse_6spar
     __pyx_t_2 = (((__pyx_v_array[__pyx_v_index]) == __pyx_v_element) != 0);
     if (__pyx_t_2) {
 
-      /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_FLOAT32_t.pyx":85
+      /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_FLOAT32_t.pyx":84
  *     for index from lb <= index < ub:
  *         if array[index] == element:
  *             break             # <<<<<<<<<<<<<<
@@ -1234,7 +1234,7 @@ static __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_f_8cysparse_6spar
   }
   __pyx_L4_break:;
 
-  /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_FLOAT32_t.pyx":87
+  /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_FLOAT32_t.pyx":86
  *             break
  * 
  *     return index             # <<<<<<<<<<<<<<
@@ -1242,7 +1242,7 @@ static __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_f_8cysparse_6spar
   __pyx_r = __pyx_v_index;
   goto __pyx_L0;
 
-  /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_FLOAT32_t.pyx":61
+  /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_FLOAT32_t.pyx":60
  *     return index
  * 
  * cdef INT64_t find_linear_INT64_t_FLOAT32_t(FLOAT32_t element, FLOAT32_t * array, INT64_t lb, INT64_t ub) except -1:             # <<<<<<<<<<<<<<

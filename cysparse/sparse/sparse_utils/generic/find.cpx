@@ -115,7 +115,6 @@ cdef @index@ find_bisec_@index@_@type@(@type@ element, @type@ * array, @index@ l
         while index > lb and array[index] == element:
             index -= 1
 
-
     return index
 
 cdef @index@ find_linear_@index@_@type@(@type@ element, @type@ * array, @index@ lb, @index@ ub) except -1:

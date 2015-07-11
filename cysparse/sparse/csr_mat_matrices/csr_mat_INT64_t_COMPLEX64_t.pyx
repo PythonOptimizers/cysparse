@@ -15,6 +15,7 @@ from cysparse.sparse.csc_mat_matrices.csc_mat_INT64_t_COMPLEX64_t cimport CSCSpa
 
 from cysparse.sparse.sparse_utils.generic.sort_indices_INT64_t cimport sort_array_INT64_t
 from cysparse.sparse.sparse_utils.generic.print_COMPLEX64_t cimport element_to_string_COMPLEX64_t, conjugated_element_to_string_COMPLEX64_t, empty_to_string_COMPLEX64_t
+from cysparse.sparse.sparse_utils.generic.matrix_translations_INT64_t_COMPLEX64_t cimport csr_to_csc_kernel_INT64_t_COMPLEX64_t
 
 ########################################################################################################################
 # Cython, NumPy import/cimport
@@ -437,56 +438,9 @@ cdef class CSRSparseMatrix_INT64_t_COMPLEX64_t(ImmutableSparseMatrix_INT64_t_COM
             PyMem_Free(row)
             raise MemoryError()
 
-        ############
-        # compute ind, i.e. the nnz of each column of the matrix
-        ############
-        cdef:
-            INT64_t i, j, n
-
-        # initialize to 0
-        for j from 0 <= j <= self.__ncol:
-            ind[j] = 0
-        # count nnz per column
-        for n from 0 <= n < self.__nnz:
-            ind[self.col[n]] += 1
-
-        # cumsum the nnz per column to get ind
-        cdef:
-            INT64_t cumsum = 0
-            INT64_t temp = 0
-
-        for j from 0<= j < self.__ncol:
-            temp  = ind[j]
-            ind[j] = cumsum
-            cumsum += temp
-
-        ind[self.__ncol] = self.__nnz
-
-        print("computed ind:")
-        for j from 0 <= j < self.__ncol:
-            print("%d : %d" % (j, ind[j]))
-
-        ############
-        # populate row and val
-        ############
-        cdef INT64_t jj, dest
-
-        for i from 0<= i < self.__nrow:
-            for jj from self.ind[i] <= jj < self.ind[i+1]:
-                j  = self.col[jj]
-                dest = ind[j]
-
-                row[dest] = i
-                val[dest] = self.val[jj]
-
-                ind[j] += 1
-
-        cdef INT64_t last = 0
-
-        for j from 0 <= j <= self.__ncol:
-            temp   = ind[j]
-            ind[j] = last
-            last   = temp
+        csr_to_csc_kernel_INT64_t_COMPLEX64_t(self.__nrow, self.__ncol, self.__nnz,
+                       <INT64_t *>self.ind, <INT64_t *>self.col, <COMPLEX64_t *>self.val,
+                       ind, row, val)
 
         return MakeCSCSparseMatrix_INT64_t_COMPLEX64_t(self.__nrow, self.__ncol, self.__nnz, ind, row, val, is_symmetric=self.is_symmetric, store_zeros=self.store_zeros)
 

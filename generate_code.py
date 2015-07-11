@@ -462,6 +462,10 @@ SPARSE_SPARSE_UTILS_GENERATE_INDICES_DEFINITION_FILES = [os.path.join(SPARSE_SPA
 SPARSE_SPARSE_UTILS_FIND_DECLARATION_FILES = [os.path.join(SPARSE_SPARSE_UTILS_TEMPLATE_DIR, 'find.cpd')]
 SPARSE_SPARSE_UTILS_FIND_DEFINITION_FILES = [os.path.join(SPARSE_SPARSE_UTILS_TEMPLATE_DIR, 'find.cpx')]
 
+SPARSE_SPARSE_UTILS_MATRIX_TRANSLATIONS_DECLARATION_FILES = [os.path.join(SPARSE_SPARSE_UTILS_TEMPLATE_DIR, 'matrix_translations.cpd')]
+SPARSE_SPARSE_UTILS_MATRIX_TRANSLATIONS_DEFINITION_FILES = [os.path.join(SPARSE_SPARSE_UTILS_TEMPLATE_DIR, 'matrix_translations.cpx')]
+
+
 SPARSE_SPARSE_UTILS_PRINT_DECLARATION_FILES = [os.path.join(SPARSE_SPARSE_UTILS_TEMPLATE_DIR, 'print.cpd')]
 SPARSE_SPARSE_UTILS_PRINT_DEFINITION_FILES = [os.path.join(SPARSE_SPARSE_UTILS_TEMPLATE_DIR, 'print.cpx')]
 
@@ -729,6 +733,10 @@ if __name__ == "__main__":
             # find_@index@_@type@.pxd and find_@index@_@type@.pyx
             generate_following_type_and_index(logger, SPARSE_SPARSE_UTILS_FIND_DECLARATION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, ELEMENT_TYPES, INDEX_TYPES, '.pxd')
             generate_following_type_and_index(logger, SPARSE_SPARSE_UTILS_FIND_DEFINITION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, ELEMENT_TYPES, INDEX_TYPES, '.pyx')
+
+            # matrix_translations_@index@_@type@.pxd and matrix_translations_@index@_@type@.pyx
+            generate_following_type_and_index(logger, SPARSE_SPARSE_UTILS_MATRIX_TRANSLATIONS_DECLARATION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, ELEMENT_TYPES, INDEX_TYPES, '.pxd')
+            generate_following_type_and_index(logger, SPARSE_SPARSE_UTILS_MATRIX_TRANSLATIONS_DEFINITION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, ELEMENT_TYPES, INDEX_TYPES, '.pyx')
 
             ###############################
             # SparseMatrix

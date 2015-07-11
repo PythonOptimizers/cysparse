@@ -1,0 +1,9 @@
+"""
+Diverse utilities to translate one matrix format into another.
+
+"""
+from cysparse.types.cysparse_types cimport *
+
+cdef csr_to_csc_kernel_@index@_@type@(@index@ nrow, @index@ ncol, @index@ nnz,
+                                      @index@ * csr_ind, @index@ * csr_col, @type@ * csr_val,
+                                      @index@ * csc_ind, @index@ * csc_row, @type@ * csc_val)
