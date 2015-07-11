@@ -13,6 +13,9 @@ from cysparse.sparse.s_mat_matrices.s_mat_INT64_t_COMPLEX128_t cimport Immutable
 from cysparse.sparse.ll_mat_matrices.ll_mat_INT64_t_COMPLEX128_t cimport LLSparseMatrix_INT64_t_COMPLEX128_t
 
 from cysparse.sparse.sparse_utils.generic.print_COMPLEX128_t cimport element_to_string_COMPLEX128_t, conjugated_element_to_string_COMPLEX128_t, empty_to_string_COMPLEX128_t
+from cysparse.sparse.sparse_utils.generic.matrix_translations_INT64_t_COMPLEX128_t cimport csr_to_csc_kernel_INT64_t_COMPLEX128_t, csc_to_csr_kernel_INT64_t_COMPLEX128_t
+
+from cysparse.sparse.csr_mat_matrices.csr_mat_INT64_t_COMPLEX128_t cimport CSRSparseMatrix_INT64_t_COMPLEX128_t, MakeCSRSparseMatrix_INT64_t_COMPLEX128_t
 
 ########################################################################################################################
 # Cython, NumPy import/cimport
@@ -342,7 +345,7 @@ cdef class CSCSparseMatrix_INT64_t_COMPLEX128_t(ImmutableSparseMatrix_INT64_t_CO
 
         # populate arrays
         cdef:
-            INT64_t j, k_, nnz
+            INT64_t i, j, k_, nnz
 
         nnz = 0
         ind[0] = 0
@@ -358,6 +361,16 @@ cdef class CSCSparseMatrix_INT64_t_COMPLEX128_t(ImmutableSparseMatrix_INT64_t_CO
                     nnz += 1
 
             ind[j+1] = nnz
+
+        # resize arrays row and val
+        cdef:
+            void *temp
+
+        temp = <INT64_t *> PyMem_Realloc(row, nnz * sizeof(INT64_t))
+        row = <INT64_t*>temp
+
+        temp = <COMPLEX128_t *> PyMem_Realloc(val, nnz * sizeof(COMPLEX128_t))
+        val = <COMPLEX128_t*>temp
 
         return MakeCSCSparseMatrix_INT64_t_COMPLEX128_t(self.__nrow, self.__ncol, nnz, ind, row, val, is_symmetric=False, store_zeros=self.__store_zeros)
 
@@ -400,26 +413,69 @@ cdef class CSCSparseMatrix_INT64_t_COMPLEX128_t(ImmutableSparseMatrix_INT64_t_CO
 
         # populate arrays
         cdef:
-            INT64_t j, k_, nnz
+            INT64_t i, j, k_, nnz
 
         nnz = 0
         ind[0] = 0
 
+        # Special case: when matrix is symmetric: we first create an internal CSR and then translate it to CSC
+        cdef INT64_t * csr_ind
+        cdef INT64_t * csr_col
+        cdef COMPLEX128_t  * csr_val
+
         if self.__is_symmetric:
-            # TO BE DONE
-            raise NotImplementedError('Not implemented yet...')
+            # Special (and annoying) case: we first create a CSR and then translate it to CSC
+            csr_ind = <INT64_t *> PyMem_Malloc((self.__nrow + 1) * sizeof(INT64_t))
+            if not csr_ind:
+                PyMem_Free(ind)
+                PyMem_Free(row)
+                PyMem_Free(val)
+
+                raise MemoryError()
+
+            csr_col = <INT64_t *> PyMem_Malloc(self.__nnz * sizeof(INT64_t))
+            if not csr_col:
+                PyMem_Free(ind)
+                PyMem_Free(row)
+                PyMem_Free(val)
+
+                PyMem_Free(csr_ind)
+                raise MemoryError()
+
+            csr_val = <COMPLEX128_t *> PyMem_Malloc(self.__nnz * sizeof(COMPLEX128_t))
+            if not csr_val:
+                PyMem_Free(ind)
+                PyMem_Free(row)
+                PyMem_Free(val)
+
+                PyMem_Free(csr_ind)
+                PyMem_Free(csr_col)
+                raise MemoryError()
+
+            csr_ind[0] = 0
+
             for j from 0 <= j < self.__ncol:
                 for k_ from self.ind[j] <= k_ < self.ind[j+1]:
                     i = self.row[k_]
                     v = self.val[k_]
 
-                    if i >= j - k:
-                        row[nnz] = i
-                        val[nnz] = v
+                    if i >= j + k:
+                        csr_col[nnz] = i
+                        csr_val[nnz] = v
                         nnz += 1
 
-                ind[j+1] = nnz
-        else:  # not symmtric
+                csr_ind[j+1] = nnz
+
+            csr_to_csc_kernel_INT64_t_COMPLEX128_t(self.__nrow, self.__ncol, nnz,
+                                      csr_ind, csr_col, csr_val,
+                                      ind, row, val)
+
+            # erase temp arrays
+            PyMem_Free(csr_ind)
+            PyMem_Free(csr_col)
+            PyMem_Free(csr_val)
+
+        else:  # not symmetric
             for j from 0 <= j < self.__ncol:
                 for k_ from self.ind[j] <= k_ < self.ind[j+1]:
                     i = self.row[k_]
@@ -432,6 +488,16 @@ cdef class CSCSparseMatrix_INT64_t_COMPLEX128_t(ImmutableSparseMatrix_INT64_t_CO
 
                 ind[j+1] = nnz
 
+        # resize arrays row and val
+        cdef:
+            void *temp
+
+        temp = <INT64_t *> PyMem_Realloc(row, nnz * sizeof(INT64_t))
+        row = <INT64_t*>temp
+
+        temp = <COMPLEX128_t *> PyMem_Realloc(val, nnz * sizeof(COMPLEX128_t))
+        val = <COMPLEX128_t*>temp
+
         return MakeCSCSparseMatrix_INT64_t_COMPLEX128_t(self.__nrow, self.__ncol, nnz, ind, row, val, is_symmetric=False, store_zeros=self.__store_zeros)
 
     def to_csr(self):
@@ -439,7 +505,28 @@ cdef class CSCSparseMatrix_INT64_t_COMPLEX128_t(ImmutableSparseMatrix_INT64_t_CO
         Transform this matrix into a :class:`CSRSparseMatrix`.
 
         """
-        raise NotImplementedError
+        # create CSR internal arrays: ind, col and val
+        cdef INT64_t * ind = <INT64_t *> PyMem_Malloc((self.__nrow + 1) * sizeof(INT64_t))
+        if not ind:
+            raise MemoryError()
+
+        cdef INT64_t * col = <INT64_t *> PyMem_Malloc(self.__nnz * sizeof(INT64_t))
+        if not col:
+            PyMem_Free(ind)
+            raise MemoryError()
+
+        cdef COMPLEX128_t * val = <COMPLEX128_t *> PyMem_Malloc(self.__nnz * sizeof(COMPLEX128_t))
+        if not val:
+            PyMem_Free(ind)
+            PyMem_Free(col)
+            raise MemoryError()
+
+        csc_to_csr_kernel_INT64_t_COMPLEX128_t(self.__nrow, self.__ncol, self.__nnz,
+                       <INT64_t *>self.ind, <INT64_t *>self.row, <COMPLEX128_t *>self.val,
+                       ind, col, val)
+
+        return MakeCSRSparseMatrix_INT64_t_COMPLEX128_t(self.__nrow, self.__ncol, self.__nnz, ind, col, val, is_symmetric=self.is_symmetric, store_zeros=self.store_zeros)
+
 
     def to_ndarray(self):
         """

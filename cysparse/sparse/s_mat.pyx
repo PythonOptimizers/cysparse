@@ -143,6 +143,26 @@ cdef class SparseMatrix:
         """
         raise NotImplementedError("Operation not implemented (yet). Please report.")
 
+    def tril(self, int k):
+        """
+        Return the lower triangular part of the matrix.
+
+        Args:
+            k: (k<=0) the last diagonal to be included in the lower triangular part.
+
+        """
+        raise NotImplementedError("Operation not implemented (yet). Please report.")
+
+    def triu(self, int k):
+        """
+        Return the upper triangular part of the matrix.
+
+        Args:
+            k: (k>=0) the last diagonal to be included in the upper triangular part.
+
+        """
+        raise NotImplementedError("Operation not implemented (yet). Please report.")
+
     def to_ndarray(self):
         """
         Return the matrix in the form of a :program:`NumPy` ``ndarray``.
