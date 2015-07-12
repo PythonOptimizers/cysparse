@@ -1130,5 +1130,4 @@ setup(name=  'CySparse',
   ext_modules = ext_modules,
   package_dir = {"cysparse": "cysparse"},
   packages=packages_list
-
 )
