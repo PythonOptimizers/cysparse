@@ -1,12 +1,14 @@
 ########################################################################################################################
-# Doesn't work!!!!
+# Several helpers that deal with generic types.
 #
-# Kept here for future reuse.
+#
 ########################################################################################################################
 from cysparse.types.cysparse_types cimport *
 
-{% for __type_name in basic_type_list %}
-cdef test_cast_to_@__type_name@(@__type_name@ n)
+{% for index_name in index_list %}
+{% for type_name in complex_list %}
+cdef split_array_complex_values_kernel_@index_name@_@type_name@(@type_name@ * val, @index@ val_length,
+                                            @type_name|cysparse_real_type_from_real_cysparse_complex_type@ * rval, @index_name@ rval_length,
+                                            @type_name|cysparse_real_type_from_real_cysparse_complex_type@ * ival, @index_name@ ival_length)
 {% endfor %}
-
-cdef min_type(n, type_list)
+{% endfor %}
