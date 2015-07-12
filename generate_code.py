@@ -77,8 +77,9 @@ def make_parser():
     parser.add_argument("-a", "--all", help="Create all action files.", action='store_true', required=False)
 
     parser.add_argument("-m", "--matrices", help="Create sparse matrices.", action='store_true', required=False)
-    parser.add_argument("-s", "--setup", help="Create setup file.", action='store_true', required=False)
+    parser.add_argument("-p", "--setup", help="Create setup file.", action='store_true', required=False)
     parser.add_argument("-g", "--generic_types", help="Create generic types.", action='store_true', required=False)
+    parser.add_argument("-s", "--solvers", help="Create solvers.", action='store_true', required=False)
     parser.add_argument("-t", "--tests", help="Create generic tests.", action='store_true', required=False)
     parser.add_argument("-c", "--clean", help="Clean action files.", action='store_true', required=False)
 
@@ -88,6 +89,9 @@ def make_parser():
 #################################################################################################
 # JINJA2 FILTERS
 #################################################################################################
+####################################
+# CYSPARSE/NUMPY TYPES
+####################################
 def type2enum(__type_name):
     """
     Transform a real :program:`CySparse` type into the equivalent :program:`CySparse` enum type.
@@ -198,6 +202,7 @@ def cysparse_type_to_real_sum_cysparse_type(cysparse_type):
 
     return r_type
 
+
 def cysparse_real_type_from_real_cysparse_complex_type(cysparse_type):
     """
     Returns the **real** type for the real or imaginary part of a **real** complex type.
@@ -223,6 +228,22 @@ def cysparse_real_type_from_real_cysparse_complex_type(cysparse_type):
 
     return r_type
 
+
+####################################
+# UMFPACK TYPES
+####################################
+def cysparse_real_type_to_umfpack_family(cysparse_type):
+    if cysparse_type in ['INT32_t']:
+        return 'i'
+    elif cysparse_type in ['INT64_t']:
+        return 'l'
+    elif cysparse_type in ['FLOAT64_t']:
+        return 'd'
+    elif cysparse_type in ['COMPLEX128_t']:
+        return 'z'
+    else:
+        raise TypeError("Not a recognized SuiteSparse Umfpack type")
+
 #################################################################################################
 # COMMON STUFF
 #################################################################################################
@@ -238,10 +259,17 @@ COMPLEX_ELEMENT_TYPES = ['COMPLEX64_t', 'COMPLEX128_t', 'COMPLEX256_t']
 INDEX_MM_TYPES = ['INT32_t', 'INT64_t']
 ELEMENT_MM_TYPES = ['INT64_t', 'FLOAT64_t', 'COMPLEX128_t']
 
+# Solvers
+# SuiteSparse
+# Umfpack
+UMFPACK_INDEX_TYPES = ['INT32_t', 'INT64_t']
+UMFPACK_ELEMENT_TYPES = ['FLOAT64_t', 'COMPLEX128_t']
+
 # when coding
 #ELEMENT_TYPES = ['FLOAT64_t']
 #ELEMENT_TYPES = ['COMPLEX64_t']
-
+UMFPACK_INDEX_TYPES = ['INT32_t']
+UMFPACK_ELEMENT_TYPES = ['FLOAT64_t']
 
 GENERAL_CONTEXT = {
                     'basic_type_list' : BASIC_TYPES,
@@ -251,7 +279,9 @@ GENERAL_CONTEXT = {
                     'real_list' : REAL_ELEMENT_TYPES,
                     'complex_list' : COMPLEX_ELEMENT_TYPES,
                     'mm_index_list' : INDEX_MM_TYPES,
-                    'mm_type_list' : ELEMENT_MM_TYPES
+                    'mm_type_list' : ELEMENT_MM_TYPES,
+                    'umfpack_index_list' : UMFPACK_INDEX_TYPES,
+                    'umfpack_type_list' : UMFPACK_ELEMENT_TYPES
                 }
 
 GENERAL_ENVIRONMENT = Environment(
@@ -267,6 +297,7 @@ GENERAL_ENVIRONMENT.filters['cysparse_type_to_numpy_type'] = cysparse_type_to_nu
 GENERAL_ENVIRONMENT.filters['cysparse_type_to_real_sum_cysparse_type'] = cysparse_type_to_real_sum_cysparse_type
 GENERAL_ENVIRONMENT.filters['cysparse_type_to_numpy_enum_type'] = cysparse_type_to_numpy_enum_type
 GENERAL_ENVIRONMENT.filters['cysparse_real_type_from_real_cysparse_complex_type'] = cysparse_real_type_from_real_cysparse_complex_type
+GENERAL_ENVIRONMENT.filters['cysparse_real_type_to_umfpack_family'] = cysparse_real_type_to_umfpack_family
 
 
 def clean_cython_files(logger, directory, file_list=None):
@@ -572,6 +603,21 @@ CSC_SPARSE_MATRIX_HELPERS_INCLUDE_FILES = glob.glob(os.path.join(CSC_SPARSE_MATR
 ### CSBSparseMatrix
 ##########################################
 
+#################################################################################################
+# SOLVERS
+#################################################################################################
+SOLVERS_TEMPLATE_DIR = os.path.join(PATH, 'cysparse', 'solvers')
+
+##########################################
+### SuiteSparse
+##########################################
+SOLVERS_SUITESPARSE_TEMPLATE_DIR = os.path.join(SOLVERS_TEMPLATE_DIR, 'suitesparse')
+
+# UMFPACK
+SOLVERS_SUITESPARSE_UMFPACK_TEMPLATE_DIR = os.path.join(SOLVERS_SUITESPARSE_TEMPLATE_DIR, 'umfpack')
+
+SOLVERS_SUITESPARSE_UMFPACK_DECLARATION_FILES = glob.glob(os.path.join(SOLVERS_SUITESPARSE_UMFPACK_TEMPLATE_DIR, '*.cpd'))
+SOLVERS_SUITESPARSE_UMFPACK_DEFINITION_FILES = glob.glob(os.path.join(SOLVERS_SUITESPARSE_UMFPACK_TEMPLATE_DIR, '*.cpx'))
 
 #################################################################################################
 # TESTS
@@ -819,6 +865,21 @@ if __name__ == "__main__":
 
             # helpers
             generate_following_type_and_index(logger, CSC_SPARSE_MATRIX_HELPERS_INCLUDE_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, ELEMENT_TYPES, INDEX_TYPES, '.pxi')
+
+    if arg_options.solvers or arg_options.all:
+        action = True
+        logger.info("Act for generic solvers")
+
+        if arg_options.clean:
+            # Umfpack
+            clean_cython_files(logger, SOLVERS_SUITESPARSE_UMFPACK_TEMPLATE_DIR)
+        else:
+            ###############################
+            # SuiteSparse
+            ###############################
+            # Umfpack
+            generate_following_type_and_index(logger, SOLVERS_SUITESPARSE_UMFPACK_DECLARATION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, UMFPACK_ELEMENT_TYPES, UMFPACK_INDEX_TYPES, '.pxd')
+            generate_following_type_and_index(logger, SOLVERS_SUITESPARSE_UMFPACK_DEFINITION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, UMFPACK_ELEMENT_TYPES, UMFPACK_INDEX_TYPES, '.pyx')
 
     if arg_options.tests or arg_options.all:
         action = True
