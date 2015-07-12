@@ -15,6 +15,7 @@ cdef class UmfpackSolver_@index@_@type@:
 
         @index@ nrow
         @index@ ncol
+        @index@ nnz
 
         # Matrix A in CSC format
         CSCSparseMatrix_@index@_@type@ csc_mat
@@ -29,6 +30,16 @@ cdef class UmfpackSolver_@index@_@type@:
         # Control and Info arrays
         public double info[UMFPACK_INFO]
         public double control[UMFPACK_CONTROL]
+
+{% if type in complex_type_list %}
+        # we keep internally two arrays for the complex numbers: this is required by UMFPACK...
+        @type|cysparse_real_type_from_real_cysparse_complex_type@ * csc_rval
+        @type|cysparse_real_type_from_real_cysparse_complex_type@ * csc_ival
+
+        bint internal_real_arrays_computed
+
+    cdef create_real_arrays_if_needed(self)
+{% endif %}
 
     cdef int _create_symbolic(self)
     cdef int _create_numeric(self)

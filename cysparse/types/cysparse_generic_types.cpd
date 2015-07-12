@@ -1,6 +1,6 @@
 ########################################################################################################################
-# Several helpers that deal with generic types.
 #
+# Several helpers that deal with generic types.
 #
 ########################################################################################################################
 from cysparse.types.cysparse_types cimport *
@@ -10,5 +10,20 @@ from cysparse.types.cysparse_types cimport *
 cdef split_array_complex_values_kernel_@index_name@_@type_name@(@type_name@ * val, @index@ val_length,
                                             @type_name|cysparse_real_type_from_real_cysparse_complex_type@ * rval, @index_name@ rval_length,
                                             @type_name|cysparse_real_type_from_real_cysparse_complex_type@ * ival, @index_name@ ival_length)
+{% endfor %}
+{% endfor %}
+
+{% for type_name in complex_list %}
+cdef @type_name@ make_complex_from_real_parts_@type_name@(@type_name|cysparse_real_type_from_real_cysparse_complex_type@ real,
+                                              @type_name|cysparse_real_type_from_real_cysparse_complex_type@ imag)
+{% endfor %}
+
+
+{% for index_name in index_list %}
+{% for type_name in complex_list %}
+cdef join_array_complex_values_kernel_@index_name@_@type_name@(
+                                            @type_name|cysparse_real_type_from_real_cysparse_complex_type@ * rval, @index_name@ rval_length,
+                                            @type_name|cysparse_real_type_from_real_cysparse_complex_type@ * ival, @index_name@ ival_length,
+                                            @type_name@ * val, @index@ val_length)
 {% endfor %}
 {% endfor %}

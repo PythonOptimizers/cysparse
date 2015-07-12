@@ -4,7 +4,12 @@ from cysparse.sparse.ll_mat_matrices.ll_mat_@index@_@type@ cimport LLSparseMatri
 from cysparse.sparse.csr_mat_matrices.csr_mat_@index@_@type@ cimport CSRSparseMatrix_@index@_@type@, MakeCSRSparseMatrix_@index@_@type@
 from cysparse.sparse.csc_mat_matrices.csc_mat_@index@_@type@ cimport CSCSparseMatrix_@index@_@type@, MakeCSCSparseMatrix_@index@_@type@
 
+{% if type in complex_list %}
+from cysparse.types.cysparse_generic_types cimport split_array_complex_values_kernel_@index@_@type@
+{% endif %}
+
 from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
+from cpython cimport Py_INCREF, Py_DECREF
 
 import numpy as np
 cimport numpy as cnp
@@ -93,6 +98,8 @@ cdef extern from "umfpack.h":
     # TODO: Change types for CySparse types? int -> INT32_t, double -> FLOAT64_t etc?
     #       and keep only **one** declaration? Might be problematic on some platforms?
 
+{% if type == 'FLOAT64_t' %}
+{% if index == 'INT32_t'  %}
     ####################################################################################################################
     # DI VERSION:  real double precision, int integers
     ####################################################################################################################
@@ -125,7 +132,11 @@ cdef extern from "umfpack.h":
     void umfpack_di_report_info(double *, double *)
     void umfpack_di_report_symbolic(void *, double *)
     void umfpack_di_report_numeric(void *, double *)
+{% endif %}
+{% endif %}
 
+{% if type == 'FLOAT64_t' %}
+{% if index == 'INT64_t'  %}
     ####################################################################################################################
     # DL VERSION:   real double precision, SuiteSparse long integers
     ####################################################################################################################
@@ -158,7 +169,11 @@ cdef extern from "umfpack.h":
     void umfpack_dl_report_info(double *, double *)
     void umfpack_dl_report_symbolic(void *, double *)
     void umfpack_dl_report_numeric(void *, double *)
+{% endif %}
+{% endif %}
 
+{% if type == 'COMPLEX128_t' %}
+{% if index == 'INT32_t'  %}
     ####################################################################################################################
     # ZI VERSION:   complex double precision, int integers
     ####################################################################################################################
@@ -191,6 +206,11 @@ cdef extern from "umfpack.h":
     void umfpack_zi_report_info(double *, double *)
     void umfpack_zi_report_symbolic(void *, double *)
     void umfpack_zi_report_numeric(void *, double *)
+{% endif %}
+{% endif %}
+
+{% if type == 'COMPLEX128_t' %}
+{% if index == 'INT64_t'  %}
 
     ####################################################################################################################
     # ZL VERSION:   complex double precision, SuiteSparse long integers
@@ -224,6 +244,8 @@ cdef extern from "umfpack.h":
     void umfpack_zl_report_info(double *, double *)
     void umfpack_zl_report_symbolic(void *, double *)
     void umfpack_zl_report_numeric(void *, double *)
+{% endif %}
+{% endif %}
 
 def umfpack_version():
     version_string = "UMFPACK version %s" % UMFPACK_VERSION
@@ -312,16 +334,46 @@ cdef class UmfpackSolver_@index@_@type@:
 
     def __cinit__(self, LLSparseMatrix_@index@_@type@ A):
         """
+        Args:
+            A: A :class:`LLSparseMatrix_@index@_@type@` object.
+
+        Warning:
+            The solver takes a "snapshot" of the matrix ``A``, i.e. the results given by the solver are only
+            valid for the matrix given. If the matrix ``A`` changes aferwards, the results given by the solver won't
+            reflect this change.
 
         """
         self.A = A
+        Py_INCREF(self.A)  # increase ref to object to avoid the user deleting it explicitly or implicitly
+
         self.nrow = A.nrow
         self.ncol = A.ncol
+
+        self.nnz = self.A.nnz
 
         # test if we can use UMFPACK
         assert self.nrow == self.ncol, "Only square matrices are handled in UMFPACK"
 
 
+{% if type in complex_list %}
+        # we keep internally two arrays for the complex numbers: this is required by UMFPACK...
+        self.internal_real_arrays_computed = False
+
+        cdef:
+            @type|cysparse_real_type_from_real_cysparse_complex_type@ * rval
+            @type|cysparse_real_type_from_real_cysparse_complex_type@ * ival
+
+        rval = <@type|cysparse_real_type_from_real_cysparse_complex_type@ *> PyMem_Malloc(self.nnz * sizeof(@type|cysparse_real_type_from_real_cysparse_complex_type@))
+        if not rval:
+            raise MemoryError()
+        self.csc_rval = rval
+
+        ival = <@type|cysparse_real_type_from_real_cysparse_complex_type@ *> PyMem_Malloc(self.nnz * sizeof(@type|cysparse_real_type_from_real_cysparse_complex_type@))
+        if not ival:
+            PyMem_Free(rval)
+            raise MemoryError()
+        self.csc_ival = ival
+{% endif %}
 
 
 
@@ -334,6 +386,27 @@ cdef class UmfpackSolver_@index@_@type@:
         umfpack_@type|cysparse_real_type_to_umfpack_family@@index|cysparse_real_type_to_umfpack_family@_defaults(<double *>&self.control)
         self.set_verbosity(3)
 
+{% if type in complex_list %}
+    cdef create_real_arrays_if_needed(self):
+        """
+        Duplicate the complex ``val`` array of the CSC representation into two real arrays: ``csc_rval`` and ``csc_ival``.
+
+        Note:
+            Results are cached.
+
+        """
+        if not self.internal_real_arrays_computed:
+
+            if self.nnz != self.A.nnz:
+                raise RuntimeError('Initial matrix has changed!')
+
+            split_array_complex_values_kernel_@index@_@type@(self.csc_mat.val, self.nnz,
+                                                                       self.csc_rval, self.nnz,
+                                                                       self.csc_ival, self.nnz)
+
+            self.internal_real_arrays_computed = True
+{% endif %}
+
     ####################################################################################################################
     # FREE MEMORY
     ####################################################################################################################
@@ -342,6 +415,13 @@ cdef class UmfpackSolver_@index@_@type@:
         
         """
         self.free()
+
+        Py_DECREF(self.A) # release ref
+
+{% if type in complex_list %}
+        PyMem_Free(self.rval)
+        PyMem_Free(self.ival)
+{% endif %}
 
     def free_symbolic(self):
         """
@@ -381,15 +461,17 @@ cdef class UmfpackSolver_@index@_@type@:
 
         cdef @index@ * ind = <@index@ *> self.csc_mat.ind
         cdef @index@ * row = <@index@ *> self.csc_mat.row
+
+{% if type in complex_list %}
+        # create self.csc_rval and self.csc_ival **if** needed
+        self.create_real_arrays_if_needed()
+{% else %}
         cdef @type@ * val = <@type@ *> self.csc_mat.val
-{% if type in complex_type_list %}
-        # TEMP: THIS IS COMPLETELY FALSE!!!
-        cdef @type@ * ival = <@type@ *> self.csc_mat.val
 {% endif %}
         cdef int status
 
 {% if type in complex_list %}
-        status= umfpack_@type|cysparse_real_type_to_umfpack_family@@index|cysparse_real_type_to_umfpack_family@_symbolic(self.nrow, self.ncol, ind, row, val, ival, &self.symbolic, self.control, self.info)
+        status= umfpack_@type|cysparse_real_type_to_umfpack_family@@index|cysparse_real_type_to_umfpack_family@_symbolic(self.nrow, self.ncol, ind, row, self.csc_rval, self.csc_ival, &self.symbolic, self.control, self.info)
 {% else %}
         status= umfpack_@type|cysparse_real_type_to_umfpack_family@@index|cysparse_real_type_to_umfpack_family@_symbolic(self.nrow, self.ncol, ind, row, val, &self.symbolic, self.control, self.info)
 {% endif %}
@@ -423,13 +505,27 @@ cdef class UmfpackSolver_@index@_@type@:
 
         cdef @index@ * ind = <@index@ *> self.csc_mat.ind
         cdef @index@ * row = <@index@ *> self.csc_mat.row
-        cdef @type@ * val = <@type@ *> self.csc_mat.val
 
-        cdef @index@ status =  umfpack_@type|cysparse_real_type_to_umfpack_family@@index|cysparse_real_type_to_umfpack_family@_numeric(ind, row, val,
+{% if type in complex_list %}
+        # create self.csc_rval and self.csc_ival **if** needed
+        self.create_real_arrays_if_needed()
+{% else %}
+        cdef @type@ * val = <@type@ *> self.csc_mat.val
+{% endif %}
+
+{% if type in complex_list %}
+        cdef @index@ status =  umfpack_@type|cysparse_real_type_to_umfpack_family@@index|cysparse_real_type_to_umfpack_family@_numeric(ind, row,
+                           self.csc_rval, self.csc_ival,
                            self.symbolic,
                            &self.numeric,
                            self.control, self.info)
 
+{% else %}
+        cdef @index@ status =  umfpack_@type|cysparse_real_type_to_umfpack_family@@index|cysparse_real_type_to_umfpack_family@_numeric(ind, row, val,
+                           self.symbolic,
+                           &self.numeric,
+                           self.control, self.info)
+{% endif %}
         self.numeric_computed = True
 
         return status

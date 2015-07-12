@@ -978,12 +978,15 @@ static PyTypeObject *__pyx_ptype_7cpython_7complex_complex = 0;
 /* Module declarations from 'cysparse.types.cysparse_types' */
 
 /* Module declarations from 'cysparse.types.cysparse_generic_types' */
+static __pyx_t_float_complex __pyx_f_8cysparse_5types_22cysparse_generic_types_make_complex_from_real_parts_COMPLEX64_t(__pyx_t_8cysparse_5types_14cysparse_types_FLOAT32_t, __pyx_t_8cysparse_5types_14cysparse_types_FLOAT32_t); /*proto*/
+static __pyx_t_double_complex __pyx_f_8cysparse_5types_22cysparse_generic_types_make_complex_from_real_parts_COMPLEX128_t(__pyx_t_8cysparse_5types_14cysparse_types_FLOAT64_t, __pyx_t_8cysparse_5types_14cysparse_types_FLOAT64_t); /*proto*/
+static __pyx_t_long_double_complex __pyx_f_8cysparse_5types_22cysparse_generic_types_make_complex_from_real_parts_COMPLEX256_t(__pyx_t_8cysparse_5types_14cysparse_types_FLOAT128_t, __pyx_t_8cysparse_5types_14cysparse_types_FLOAT128_t); /*proto*/
 #define __Pyx_MODULE_NAME "cysparse.types.cysparse_generic_types"
 int __pyx_module_is_main_cysparse__types__cysparse_generic_types = 0;
 
 /* Implementation of 'cysparse.types.cysparse_generic_types' */
 static PyObject *__pyx_builtin_IndexError;
-static char __pyx_k__7[] = "*";
+static char __pyx_k__13[] = "*";
 static char __pyx_k_main[] = "__main__";
 static char __pyx_k_test[] = "__test__";
 static char __pyx_k_import[] = "__import__";
@@ -993,7 +996,7 @@ static char __pyx_k_Several_generic_functions_on_ty[] = "\nSeveral generic funct
 static char __pyx_k_Real_and_Imaginary_values_arrays[] = "Real and Imaginary values arrays must be of size equal or bigger as Complex array";
 static PyObject *__pyx_n_s_IndexError;
 static PyObject *__pyx_kp_s_Real_and_Imaginary_values_arrays;
-static PyObject *__pyx_n_s__7;
+static PyObject *__pyx_n_s__13;
 static PyObject *__pyx_n_s_cysparse_types_cysparse_types;
 static PyObject *__pyx_n_s_import;
 static PyObject *__pyx_n_s_main;
@@ -1004,6 +1007,12 @@ static PyObject *__pyx_tuple__3;
 static PyObject *__pyx_tuple__4;
 static PyObject *__pyx_tuple__5;
 static PyObject *__pyx_tuple__6;
+static PyObject *__pyx_tuple__7;
+static PyObject *__pyx_tuple__8;
+static PyObject *__pyx_tuple__9;
+static PyObject *__pyx_tuple__10;
+static PyObject *__pyx_tuple__11;
+static PyObject *__pyx_tuple__12;
 
 /* "cysparse/types/cysparse_generic_types.pyx":37
  * 
@@ -1755,6 +1764,756 @@ static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_split_array_c
   return __pyx_r;
 }
 
+/* "cysparse/types/cysparse_generic_types.pyx":152
+ * 
+ * 
+ * cdef COMPLEX64_t make_complex_from_real_parts_COMPLEX64_t(FLOAT32_t real,             # <<<<<<<<<<<<<<
+ *                                               FLOAT32_t imag):
+ *     return <COMPLEX64_t> real + imag * 1j
+ */
+
+static __pyx_t_float_complex __pyx_f_8cysparse_5types_22cysparse_generic_types_make_complex_from_real_parts_COMPLEX64_t(__pyx_t_8cysparse_5types_14cysparse_types_FLOAT32_t __pyx_v_real, __pyx_t_8cysparse_5types_14cysparse_types_FLOAT32_t __pyx_v_imag) {
+  __pyx_t_float_complex __pyx_r;
+  __Pyx_RefNannyDeclarations
+  __pyx_t_double_complex __pyx_t_1;
+  __Pyx_RefNannySetupContext("make_complex_from_real_parts_COMPLEX64_t", 0);
+
+  /* "cysparse/types/cysparse_generic_types.pyx":154
+ * cdef COMPLEX64_t make_complex_from_real_parts_COMPLEX64_t(FLOAT32_t real,
+ *                                               FLOAT32_t imag):
+ *     return <COMPLEX64_t> real + imag * 1j             # <<<<<<<<<<<<<<
+ * 
+ * cdef COMPLEX128_t make_complex_from_real_parts_COMPLEX128_t(FLOAT64_t real,
+ */
+  __pyx_t_1 = __Pyx_c_sum(__pyx_t_double_complex_from_parts(__Pyx_CREAL(__pyx_t_float_complex_from_parts(((float)__pyx_v_real), 0)), __Pyx_CIMAG(__pyx_t_float_complex_from_parts(((float)__pyx_v_real), 0))), __Pyx_c_prod(__pyx_t_double_complex_from_parts(__pyx_v_imag, 0), __pyx_t_double_complex_from_parts(0, 1.0)));
+  __pyx_r = __pyx_t_float_complex_from_parts(__Pyx_CREAL(__pyx_t_1), __Pyx_CIMAG(__pyx_t_1));
+  goto __pyx_L0;
+
+  /* "cysparse/types/cysparse_generic_types.pyx":152
+ * 
+ * 
+ * cdef COMPLEX64_t make_complex_from_real_parts_COMPLEX64_t(FLOAT32_t real,             # <<<<<<<<<<<<<<
+ *                                               FLOAT32_t imag):
+ *     return <COMPLEX64_t> real + imag * 1j
+ */
+
+  /* function exit code */
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "cysparse/types/cysparse_generic_types.pyx":156
+ *     return <COMPLEX64_t> real + imag * 1j
+ * 
+ * cdef COMPLEX128_t make_complex_from_real_parts_COMPLEX128_t(FLOAT64_t real,             # <<<<<<<<<<<<<<
+ *                                               FLOAT64_t imag):
+ *     return <COMPLEX128_t> real + imag * 1j
+ */
+
+static __pyx_t_double_complex __pyx_f_8cysparse_5types_22cysparse_generic_types_make_complex_from_real_parts_COMPLEX128_t(__pyx_t_8cysparse_5types_14cysparse_types_FLOAT64_t __pyx_v_real, __pyx_t_8cysparse_5types_14cysparse_types_FLOAT64_t __pyx_v_imag) {
+  __pyx_t_double_complex __pyx_r;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("make_complex_from_real_parts_COMPLEX128_t", 0);
+
+  /* "cysparse/types/cysparse_generic_types.pyx":158
+ * cdef COMPLEX128_t make_complex_from_real_parts_COMPLEX128_t(FLOAT64_t real,
+ *                                               FLOAT64_t imag):
+ *     return <COMPLEX128_t> real + imag * 1j             # <<<<<<<<<<<<<<
+ * 
+ * cdef COMPLEX256_t make_complex_from_real_parts_COMPLEX256_t(FLOAT128_t real,
+ */
+  __pyx_r = __Pyx_c_sum(__pyx_t_double_complex_from_parts(((double)__pyx_v_real), 0), __Pyx_c_prod(__pyx_t_double_complex_from_parts(__pyx_v_imag, 0), __pyx_t_double_complex_from_parts(0, 1.0)));
+  goto __pyx_L0;
+
+  /* "cysparse/types/cysparse_generic_types.pyx":156
+ *     return <COMPLEX64_t> real + imag * 1j
+ * 
+ * cdef COMPLEX128_t make_complex_from_real_parts_COMPLEX128_t(FLOAT64_t real,             # <<<<<<<<<<<<<<
+ *                                               FLOAT64_t imag):
+ *     return <COMPLEX128_t> real + imag * 1j
+ */
+
+  /* function exit code */
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "cysparse/types/cysparse_generic_types.pyx":160
+ *     return <COMPLEX128_t> real + imag * 1j
+ * 
+ * cdef COMPLEX256_t make_complex_from_real_parts_COMPLEX256_t(FLOAT128_t real,             # <<<<<<<<<<<<<<
+ *                                               FLOAT128_t imag):
+ *     return <COMPLEX256_t> real + imag * 1j
+ */
+
+static __pyx_t_long_double_complex __pyx_f_8cysparse_5types_22cysparse_generic_types_make_complex_from_real_parts_COMPLEX256_t(__pyx_t_8cysparse_5types_14cysparse_types_FLOAT128_t __pyx_v_real, __pyx_t_8cysparse_5types_14cysparse_types_FLOAT128_t __pyx_v_imag) {
+  __pyx_t_long_double_complex __pyx_r;
+  __Pyx_RefNannyDeclarations
+  __pyx_t_double_complex __pyx_t_1;
+  __Pyx_RefNannySetupContext("make_complex_from_real_parts_COMPLEX256_t", 0);
+
+  /* "cysparse/types/cysparse_generic_types.pyx":162
+ * cdef COMPLEX256_t make_complex_from_real_parts_COMPLEX256_t(FLOAT128_t real,
+ *                                               FLOAT128_t imag):
+ *     return <COMPLEX256_t> real + imag * 1j             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+  __pyx_t_1 = __pyx_t_double_complex_from_parts(0, 1.0);
+  __pyx_r = __Pyx_c_suml(__pyx_t_long_double_complex_from_parts(((long double)__pyx_v_real), 0), __Pyx_c_prodl(__pyx_t_long_double_complex_from_parts(__pyx_v_imag, 0), __pyx_t_long_double_complex_from_parts(__Pyx_CREAL(__pyx_t_1), __Pyx_CIMAG(__pyx_t_1))));
+  goto __pyx_L0;
+
+  /* "cysparse/types/cysparse_generic_types.pyx":160
+ *     return <COMPLEX128_t> real + imag * 1j
+ * 
+ * cdef COMPLEX256_t make_complex_from_real_parts_COMPLEX256_t(FLOAT128_t real,             # <<<<<<<<<<<<<<
+ *                                               FLOAT128_t imag):
+ *     return <COMPLEX256_t> real + imag * 1j
+ */
+
+  /* function exit code */
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "cysparse/types/cysparse_generic_types.pyx":168
+ * 
+ * 
+ * cdef join_array_complex_values_kernel_INT32_t_COMPLEX64_t(             # <<<<<<<<<<<<<<
+ *                                             FLOAT32_t * rval, INT32_t rval_length,
+ *                                             FLOAT32_t * ival, INT32_t ival_length,
+ */
+
+static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_join_array_complex_values_kernel_INT32_t_COMPLEX64_t(__pyx_t_8cysparse_5types_14cysparse_types_FLOAT32_t *__pyx_v_rval, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_rval_length, __pyx_t_8cysparse_5types_14cysparse_types_FLOAT32_t *__pyx_v_ival, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_ival_length, __pyx_t_float_complex *__pyx_v_val, PyObject *__pyx_v_val_length) {
+  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_i;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  int __pyx_t_1;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  int __pyx_t_4;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_t_5;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("join_array_complex_values_kernel_INT32_t_COMPLEX64_t", 0);
+
+  /* "cysparse/types/cysparse_generic_types.pyx":173
+ *                                             COMPLEX64_t * val,  val_length):
+ * 
+ *     if val_length > rval_length or val_length > ival_length:             # <<<<<<<<<<<<<<
+ *         raise IndexError('Real and Imaginary values arrays must be of size equal or bigger as Complex array')
+ * 
+ */
+  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_rval_length); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 173; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = PyObject_RichCompare(__pyx_v_val_length, __pyx_t_2, Py_GT); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 173; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 173; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  if (!__pyx_t_4) {
+  } else {
+    __pyx_t_1 = __pyx_t_4;
+    goto __pyx_L4_bool_binop_done;
+  }
+  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_ival_length); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 173; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_2 = PyObject_RichCompare(__pyx_v_val_length, __pyx_t_3, Py_GT); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 173; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 173; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_1 = __pyx_t_4;
+  __pyx_L4_bool_binop_done:;
+  if (__pyx_t_1) {
+
+    /* "cysparse/types/cysparse_generic_types.pyx":174
+ * 
+ *     if val_length > rval_length or val_length > ival_length:
+ *         raise IndexError('Real and Imaginary values arrays must be of size equal or bigger as Complex array')             # <<<<<<<<<<<<<<
+ * 
+ *     cdef:
+ */
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 174; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_Raise(__pyx_t_2, 0, 0, 0);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 174; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  }
+
+  /* "cysparse/types/cysparse_generic_types.pyx":180
+ *         COMPLEX64_t v
+ * 
+ *     for i from 0 <= i < val_length:             # <<<<<<<<<<<<<<
+ *         val[i] = make_complex_from_real_parts_COMPLEX64_t(rval[i], ival[i])
+ * 
+ */
+  __pyx_t_5 = __Pyx_PyInt_As_int(__pyx_v_val_length); if (unlikely((__pyx_t_5 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 180; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  for (__pyx_v_i = 0; __pyx_v_i < __pyx_t_5; __pyx_v_i++) {
+
+    /* "cysparse/types/cysparse_generic_types.pyx":181
+ * 
+ *     for i from 0 <= i < val_length:
+ *         val[i] = make_complex_from_real_parts_COMPLEX64_t(rval[i], ival[i])             # <<<<<<<<<<<<<<
+ * 
+ * cdef join_array_complex_values_kernel_INT32_t_COMPLEX128_t(
+ */
+    (__pyx_v_val[__pyx_v_i]) = __pyx_f_8cysparse_5types_22cysparse_generic_types_make_complex_from_real_parts_COMPLEX64_t((__pyx_v_rval[__pyx_v_i]), (__pyx_v_ival[__pyx_v_i]));
+  }
+
+  /* "cysparse/types/cysparse_generic_types.pyx":168
+ * 
+ * 
+ * cdef join_array_complex_values_kernel_INT32_t_COMPLEX64_t(             # <<<<<<<<<<<<<<
+ *                                             FLOAT32_t * rval, INT32_t rval_length,
+ *                                             FLOAT32_t * ival, INT32_t ival_length,
+ */
+
+  /* function exit code */
+  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_AddTraceback("cysparse.types.cysparse_generic_types.join_array_complex_values_kernel_INT32_t_COMPLEX64_t", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = 0;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "cysparse/types/cysparse_generic_types.pyx":183
+ *         val[i] = make_complex_from_real_parts_COMPLEX64_t(rval[i], ival[i])
+ * 
+ * cdef join_array_complex_values_kernel_INT32_t_COMPLEX128_t(             # <<<<<<<<<<<<<<
+ *                                             FLOAT64_t * rval, INT32_t rval_length,
+ *                                             FLOAT64_t * ival, INT32_t ival_length,
+ */
+
+static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_join_array_complex_values_kernel_INT32_t_COMPLEX128_t(__pyx_t_8cysparse_5types_14cysparse_types_FLOAT64_t *__pyx_v_rval, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_rval_length, __pyx_t_8cysparse_5types_14cysparse_types_FLOAT64_t *__pyx_v_ival, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_ival_length, __pyx_t_double_complex *__pyx_v_val, PyObject *__pyx_v_val_length) {
+  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_i;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  int __pyx_t_1;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  int __pyx_t_4;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_t_5;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("join_array_complex_values_kernel_INT32_t_COMPLEX128_t", 0);
+
+  /* "cysparse/types/cysparse_generic_types.pyx":188
+ *                                             COMPLEX128_t * val,  val_length):
+ * 
+ *     if val_length > rval_length or val_length > ival_length:             # <<<<<<<<<<<<<<
+ *         raise IndexError('Real and Imaginary values arrays must be of size equal or bigger as Complex array')
+ * 
+ */
+  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_rval_length); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 188; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = PyObject_RichCompare(__pyx_v_val_length, __pyx_t_2, Py_GT); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 188; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 188; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  if (!__pyx_t_4) {
+  } else {
+    __pyx_t_1 = __pyx_t_4;
+    goto __pyx_L4_bool_binop_done;
+  }
+  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_ival_length); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 188; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_2 = PyObject_RichCompare(__pyx_v_val_length, __pyx_t_3, Py_GT); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 188; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 188; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_1 = __pyx_t_4;
+  __pyx_L4_bool_binop_done:;
+  if (__pyx_t_1) {
+
+    /* "cysparse/types/cysparse_generic_types.pyx":189
+ * 
+ *     if val_length > rval_length or val_length > ival_length:
+ *         raise IndexError('Real and Imaginary values arrays must be of size equal or bigger as Complex array')             # <<<<<<<<<<<<<<
+ * 
+ *     cdef:
+ */
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_tuple__8, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 189; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_Raise(__pyx_t_2, 0, 0, 0);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 189; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  }
+
+  /* "cysparse/types/cysparse_generic_types.pyx":195
+ *         COMPLEX128_t v
+ * 
+ *     for i from 0 <= i < val_length:             # <<<<<<<<<<<<<<
+ *         val[i] = make_complex_from_real_parts_COMPLEX128_t(rval[i], ival[i])
+ * 
+ */
+  __pyx_t_5 = __Pyx_PyInt_As_int(__pyx_v_val_length); if (unlikely((__pyx_t_5 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 195; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  for (__pyx_v_i = 0; __pyx_v_i < __pyx_t_5; __pyx_v_i++) {
+
+    /* "cysparse/types/cysparse_generic_types.pyx":196
+ * 
+ *     for i from 0 <= i < val_length:
+ *         val[i] = make_complex_from_real_parts_COMPLEX128_t(rval[i], ival[i])             # <<<<<<<<<<<<<<
+ * 
+ * cdef join_array_complex_values_kernel_INT32_t_COMPLEX256_t(
+ */
+    (__pyx_v_val[__pyx_v_i]) = __pyx_f_8cysparse_5types_22cysparse_generic_types_make_complex_from_real_parts_COMPLEX128_t((__pyx_v_rval[__pyx_v_i]), (__pyx_v_ival[__pyx_v_i]));
+  }
+
+  /* "cysparse/types/cysparse_generic_types.pyx":183
+ *         val[i] = make_complex_from_real_parts_COMPLEX64_t(rval[i], ival[i])
+ * 
+ * cdef join_array_complex_values_kernel_INT32_t_COMPLEX128_t(             # <<<<<<<<<<<<<<
+ *                                             FLOAT64_t * rval, INT32_t rval_length,
+ *                                             FLOAT64_t * ival, INT32_t ival_length,
+ */
+
+  /* function exit code */
+  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_AddTraceback("cysparse.types.cysparse_generic_types.join_array_complex_values_kernel_INT32_t_COMPLEX128_t", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = 0;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "cysparse/types/cysparse_generic_types.pyx":198
+ *         val[i] = make_complex_from_real_parts_COMPLEX128_t(rval[i], ival[i])
+ * 
+ * cdef join_array_complex_values_kernel_INT32_t_COMPLEX256_t(             # <<<<<<<<<<<<<<
+ *                                             FLOAT128_t * rval, INT32_t rval_length,
+ *                                             FLOAT128_t * ival, INT32_t ival_length,
+ */
+
+static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_join_array_complex_values_kernel_INT32_t_COMPLEX256_t(__pyx_t_8cysparse_5types_14cysparse_types_FLOAT128_t *__pyx_v_rval, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_rval_length, __pyx_t_8cysparse_5types_14cysparse_types_FLOAT128_t *__pyx_v_ival, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_ival_length, __pyx_t_long_double_complex *__pyx_v_val, PyObject *__pyx_v_val_length) {
+  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_i;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  int __pyx_t_1;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  int __pyx_t_4;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_t_5;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("join_array_complex_values_kernel_INT32_t_COMPLEX256_t", 0);
+
+  /* "cysparse/types/cysparse_generic_types.pyx":203
+ *                                             COMPLEX256_t * val,  val_length):
+ * 
+ *     if val_length > rval_length or val_length > ival_length:             # <<<<<<<<<<<<<<
+ *         raise IndexError('Real and Imaginary values arrays must be of size equal or bigger as Complex array')
+ * 
+ */
+  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_rval_length); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 203; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = PyObject_RichCompare(__pyx_v_val_length, __pyx_t_2, Py_GT); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 203; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 203; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  if (!__pyx_t_4) {
+  } else {
+    __pyx_t_1 = __pyx_t_4;
+    goto __pyx_L4_bool_binop_done;
+  }
+  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_ival_length); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 203; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_2 = PyObject_RichCompare(__pyx_v_val_length, __pyx_t_3, Py_GT); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 203; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 203; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_1 = __pyx_t_4;
+  __pyx_L4_bool_binop_done:;
+  if (__pyx_t_1) {
+
+    /* "cysparse/types/cysparse_generic_types.pyx":204
+ * 
+ *     if val_length > rval_length or val_length > ival_length:
+ *         raise IndexError('Real and Imaginary values arrays must be of size equal or bigger as Complex array')             # <<<<<<<<<<<<<<
+ * 
+ *     cdef:
+ */
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_tuple__9, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 204; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_Raise(__pyx_t_2, 0, 0, 0);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 204; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  }
+
+  /* "cysparse/types/cysparse_generic_types.pyx":210
+ *         COMPLEX256_t v
+ * 
+ *     for i from 0 <= i < val_length:             # <<<<<<<<<<<<<<
+ *         val[i] = make_complex_from_real_parts_COMPLEX256_t(rval[i], ival[i])
+ * 
+ */
+  __pyx_t_5 = __Pyx_PyInt_As_int(__pyx_v_val_length); if (unlikely((__pyx_t_5 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 210; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  for (__pyx_v_i = 0; __pyx_v_i < __pyx_t_5; __pyx_v_i++) {
+
+    /* "cysparse/types/cysparse_generic_types.pyx":211
+ * 
+ *     for i from 0 <= i < val_length:
+ *         val[i] = make_complex_from_real_parts_COMPLEX256_t(rval[i], ival[i])             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+    (__pyx_v_val[__pyx_v_i]) = __pyx_f_8cysparse_5types_22cysparse_generic_types_make_complex_from_real_parts_COMPLEX256_t((__pyx_v_rval[__pyx_v_i]), (__pyx_v_ival[__pyx_v_i]));
+  }
+
+  /* "cysparse/types/cysparse_generic_types.pyx":198
+ *         val[i] = make_complex_from_real_parts_COMPLEX128_t(rval[i], ival[i])
+ * 
+ * cdef join_array_complex_values_kernel_INT32_t_COMPLEX256_t(             # <<<<<<<<<<<<<<
+ *                                             FLOAT128_t * rval, INT32_t rval_length,
+ *                                             FLOAT128_t * ival, INT32_t ival_length,
+ */
+
+  /* function exit code */
+  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_AddTraceback("cysparse.types.cysparse_generic_types.join_array_complex_values_kernel_INT32_t_COMPLEX256_t", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = 0;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "cysparse/types/cysparse_generic_types.pyx":215
+ * 
+ * 
+ * cdef join_array_complex_values_kernel_INT64_t_COMPLEX64_t(             # <<<<<<<<<<<<<<
+ *                                             FLOAT32_t * rval, INT64_t rval_length,
+ *                                             FLOAT32_t * ival, INT64_t ival_length,
+ */
+
+static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_join_array_complex_values_kernel_INT64_t_COMPLEX64_t(__pyx_t_8cysparse_5types_14cysparse_types_FLOAT32_t *__pyx_v_rval, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_v_rval_length, __pyx_t_8cysparse_5types_14cysparse_types_FLOAT32_t *__pyx_v_ival, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_v_ival_length, __pyx_t_float_complex *__pyx_v_val, PyObject *__pyx_v_val_length) {
+  __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_v_i;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  int __pyx_t_1;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  int __pyx_t_4;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_t_5;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("join_array_complex_values_kernel_INT64_t_COMPLEX64_t", 0);
+
+  /* "cysparse/types/cysparse_generic_types.pyx":220
+ *                                             COMPLEX64_t * val,  val_length):
+ * 
+ *     if val_length > rval_length or val_length > ival_length:             # <<<<<<<<<<<<<<
+ *         raise IndexError('Real and Imaginary values arrays must be of size equal or bigger as Complex array')
+ * 
+ */
+  __pyx_t_2 = __Pyx_PyInt_From_long(__pyx_v_rval_length); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 220; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = PyObject_RichCompare(__pyx_v_val_length, __pyx_t_2, Py_GT); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 220; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 220; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  if (!__pyx_t_4) {
+  } else {
+    __pyx_t_1 = __pyx_t_4;
+    goto __pyx_L4_bool_binop_done;
+  }
+  __pyx_t_3 = __Pyx_PyInt_From_long(__pyx_v_ival_length); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 220; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_2 = PyObject_RichCompare(__pyx_v_val_length, __pyx_t_3, Py_GT); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 220; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 220; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_1 = __pyx_t_4;
+  __pyx_L4_bool_binop_done:;
+  if (__pyx_t_1) {
+
+    /* "cysparse/types/cysparse_generic_types.pyx":221
+ * 
+ *     if val_length > rval_length or val_length > ival_length:
+ *         raise IndexError('Real and Imaginary values arrays must be of size equal or bigger as Complex array')             # <<<<<<<<<<<<<<
+ * 
+ *     cdef:
+ */
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_tuple__10, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 221; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_Raise(__pyx_t_2, 0, 0, 0);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 221; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  }
+
+  /* "cysparse/types/cysparse_generic_types.pyx":227
+ *         COMPLEX64_t v
+ * 
+ *     for i from 0 <= i < val_length:             # <<<<<<<<<<<<<<
+ *         val[i] = make_complex_from_real_parts_COMPLEX64_t(rval[i], ival[i])
+ * 
+ */
+  __pyx_t_5 = __Pyx_PyInt_As_long(__pyx_v_val_length); if (unlikely((__pyx_t_5 == (long)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 227; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  for (__pyx_v_i = 0; __pyx_v_i < __pyx_t_5; __pyx_v_i++) {
+
+    /* "cysparse/types/cysparse_generic_types.pyx":228
+ * 
+ *     for i from 0 <= i < val_length:
+ *         val[i] = make_complex_from_real_parts_COMPLEX64_t(rval[i], ival[i])             # <<<<<<<<<<<<<<
+ * 
+ * cdef join_array_complex_values_kernel_INT64_t_COMPLEX128_t(
+ */
+    (__pyx_v_val[__pyx_v_i]) = __pyx_f_8cysparse_5types_22cysparse_generic_types_make_complex_from_real_parts_COMPLEX64_t((__pyx_v_rval[__pyx_v_i]), (__pyx_v_ival[__pyx_v_i]));
+  }
+
+  /* "cysparse/types/cysparse_generic_types.pyx":215
+ * 
+ * 
+ * cdef join_array_complex_values_kernel_INT64_t_COMPLEX64_t(             # <<<<<<<<<<<<<<
+ *                                             FLOAT32_t * rval, INT64_t rval_length,
+ *                                             FLOAT32_t * ival, INT64_t ival_length,
+ */
+
+  /* function exit code */
+  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_AddTraceback("cysparse.types.cysparse_generic_types.join_array_complex_values_kernel_INT64_t_COMPLEX64_t", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = 0;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "cysparse/types/cysparse_generic_types.pyx":230
+ *         val[i] = make_complex_from_real_parts_COMPLEX64_t(rval[i], ival[i])
+ * 
+ * cdef join_array_complex_values_kernel_INT64_t_COMPLEX128_t(             # <<<<<<<<<<<<<<
+ *                                             FLOAT64_t * rval, INT64_t rval_length,
+ *                                             FLOAT64_t * ival, INT64_t ival_length,
+ */
+
+static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_join_array_complex_values_kernel_INT64_t_COMPLEX128_t(__pyx_t_8cysparse_5types_14cysparse_types_FLOAT64_t *__pyx_v_rval, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_v_rval_length, __pyx_t_8cysparse_5types_14cysparse_types_FLOAT64_t *__pyx_v_ival, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_v_ival_length, __pyx_t_double_complex *__pyx_v_val, PyObject *__pyx_v_val_length) {
+  __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_v_i;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  int __pyx_t_1;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  int __pyx_t_4;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_t_5;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("join_array_complex_values_kernel_INT64_t_COMPLEX128_t", 0);
+
+  /* "cysparse/types/cysparse_generic_types.pyx":235
+ *                                             COMPLEX128_t * val,  val_length):
+ * 
+ *     if val_length > rval_length or val_length > ival_length:             # <<<<<<<<<<<<<<
+ *         raise IndexError('Real and Imaginary values arrays must be of size equal or bigger as Complex array')
+ * 
+ */
+  __pyx_t_2 = __Pyx_PyInt_From_long(__pyx_v_rval_length); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 235; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = PyObject_RichCompare(__pyx_v_val_length, __pyx_t_2, Py_GT); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 235; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 235; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  if (!__pyx_t_4) {
+  } else {
+    __pyx_t_1 = __pyx_t_4;
+    goto __pyx_L4_bool_binop_done;
+  }
+  __pyx_t_3 = __Pyx_PyInt_From_long(__pyx_v_ival_length); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 235; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_2 = PyObject_RichCompare(__pyx_v_val_length, __pyx_t_3, Py_GT); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 235; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 235; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_1 = __pyx_t_4;
+  __pyx_L4_bool_binop_done:;
+  if (__pyx_t_1) {
+
+    /* "cysparse/types/cysparse_generic_types.pyx":236
+ * 
+ *     if val_length > rval_length or val_length > ival_length:
+ *         raise IndexError('Real and Imaginary values arrays must be of size equal or bigger as Complex array')             # <<<<<<<<<<<<<<
+ * 
+ *     cdef:
+ */
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_tuple__11, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 236; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_Raise(__pyx_t_2, 0, 0, 0);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 236; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  }
+
+  /* "cysparse/types/cysparse_generic_types.pyx":242
+ *         COMPLEX128_t v
+ * 
+ *     for i from 0 <= i < val_length:             # <<<<<<<<<<<<<<
+ *         val[i] = make_complex_from_real_parts_COMPLEX128_t(rval[i], ival[i])
+ * 
+ */
+  __pyx_t_5 = __Pyx_PyInt_As_long(__pyx_v_val_length); if (unlikely((__pyx_t_5 == (long)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 242; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  for (__pyx_v_i = 0; __pyx_v_i < __pyx_t_5; __pyx_v_i++) {
+
+    /* "cysparse/types/cysparse_generic_types.pyx":243
+ * 
+ *     for i from 0 <= i < val_length:
+ *         val[i] = make_complex_from_real_parts_COMPLEX128_t(rval[i], ival[i])             # <<<<<<<<<<<<<<
+ * 
+ * cdef join_array_complex_values_kernel_INT64_t_COMPLEX256_t(
+ */
+    (__pyx_v_val[__pyx_v_i]) = __pyx_f_8cysparse_5types_22cysparse_generic_types_make_complex_from_real_parts_COMPLEX128_t((__pyx_v_rval[__pyx_v_i]), (__pyx_v_ival[__pyx_v_i]));
+  }
+
+  /* "cysparse/types/cysparse_generic_types.pyx":230
+ *         val[i] = make_complex_from_real_parts_COMPLEX64_t(rval[i], ival[i])
+ * 
+ * cdef join_array_complex_values_kernel_INT64_t_COMPLEX128_t(             # <<<<<<<<<<<<<<
+ *                                             FLOAT64_t * rval, INT64_t rval_length,
+ *                                             FLOAT64_t * ival, INT64_t ival_length,
+ */
+
+  /* function exit code */
+  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_AddTraceback("cysparse.types.cysparse_generic_types.join_array_complex_values_kernel_INT64_t_COMPLEX128_t", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = 0;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "cysparse/types/cysparse_generic_types.pyx":245
+ *         val[i] = make_complex_from_real_parts_COMPLEX128_t(rval[i], ival[i])
+ * 
+ * cdef join_array_complex_values_kernel_INT64_t_COMPLEX256_t(             # <<<<<<<<<<<<<<
+ *                                             FLOAT128_t * rval, INT64_t rval_length,
+ *                                             FLOAT128_t * ival, INT64_t ival_length,
+ */
+
+static PyObject *__pyx_f_8cysparse_5types_22cysparse_generic_types_join_array_complex_values_kernel_INT64_t_COMPLEX256_t(__pyx_t_8cysparse_5types_14cysparse_types_FLOAT128_t *__pyx_v_rval, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_v_rval_length, __pyx_t_8cysparse_5types_14cysparse_types_FLOAT128_t *__pyx_v_ival, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_v_ival_length, __pyx_t_long_double_complex *__pyx_v_val, PyObject *__pyx_v_val_length) {
+  __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_v_i;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  int __pyx_t_1;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  int __pyx_t_4;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_t_5;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("join_array_complex_values_kernel_INT64_t_COMPLEX256_t", 0);
+
+  /* "cysparse/types/cysparse_generic_types.pyx":250
+ *                                             COMPLEX256_t * val,  val_length):
+ * 
+ *     if val_length > rval_length or val_length > ival_length:             # <<<<<<<<<<<<<<
+ *         raise IndexError('Real and Imaginary values arrays must be of size equal or bigger as Complex array')
+ * 
+ */
+  __pyx_t_2 = __Pyx_PyInt_From_long(__pyx_v_rval_length); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 250; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = PyObject_RichCompare(__pyx_v_val_length, __pyx_t_2, Py_GT); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 250; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 250; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  if (!__pyx_t_4) {
+  } else {
+    __pyx_t_1 = __pyx_t_4;
+    goto __pyx_L4_bool_binop_done;
+  }
+  __pyx_t_3 = __Pyx_PyInt_From_long(__pyx_v_ival_length); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 250; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_2 = PyObject_RichCompare(__pyx_v_val_length, __pyx_t_3, Py_GT); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 250; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 250; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_1 = __pyx_t_4;
+  __pyx_L4_bool_binop_done:;
+  if (__pyx_t_1) {
+
+    /* "cysparse/types/cysparse_generic_types.pyx":251
+ * 
+ *     if val_length > rval_length or val_length > ival_length:
+ *         raise IndexError('Real and Imaginary values arrays must be of size equal or bigger as Complex array')             # <<<<<<<<<<<<<<
+ * 
+ *     cdef:
+ */
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_tuple__12, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 251; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_Raise(__pyx_t_2, 0, 0, 0);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 251; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  }
+
+  /* "cysparse/types/cysparse_generic_types.pyx":257
+ *         COMPLEX256_t v
+ * 
+ *     for i from 0 <= i < val_length:             # <<<<<<<<<<<<<<
+ *         val[i] = make_complex_from_real_parts_COMPLEX256_t(rval[i], ival[i])
+ * 
+ */
+  __pyx_t_5 = __Pyx_PyInt_As_long(__pyx_v_val_length); if (unlikely((__pyx_t_5 == (long)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 257; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  for (__pyx_v_i = 0; __pyx_v_i < __pyx_t_5; __pyx_v_i++) {
+
+    /* "cysparse/types/cysparse_generic_types.pyx":258
+ * 
+ *     for i from 0 <= i < val_length:
+ *         val[i] = make_complex_from_real_parts_COMPLEX256_t(rval[i], ival[i])             # <<<<<<<<<<<<<<
+ * 
+ */
+    (__pyx_v_val[__pyx_v_i]) = __pyx_f_8cysparse_5types_22cysparse_generic_types_make_complex_from_real_parts_COMPLEX256_t((__pyx_v_rval[__pyx_v_i]), (__pyx_v_ival[__pyx_v_i]));
+  }
+
+  /* "cysparse/types/cysparse_generic_types.pyx":245
+ *         val[i] = make_complex_from_real_parts_COMPLEX128_t(rval[i], ival[i])
+ * 
+ * cdef join_array_complex_values_kernel_INT64_t_COMPLEX256_t(             # <<<<<<<<<<<<<<
+ *                                             FLOAT128_t * rval, INT64_t rval_length,
+ *                                             FLOAT128_t * ival, INT64_t ival_length,
+ */
+
+  /* function exit code */
+  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_AddTraceback("cysparse.types.cysparse_generic_types.join_array_complex_values_kernel_INT64_t_COMPLEX256_t", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = 0;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
 static PyMethodDef __pyx_methods[] = {
   {0, 0, 0, 0}
 };
@@ -1931,7 +2690,7 @@ static struct PyModuleDef __pyx_moduledef = {
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_IndexError, __pyx_k_IndexError, sizeof(__pyx_k_IndexError), 0, 0, 1, 1},
   {&__pyx_kp_s_Real_and_Imaginary_values_arrays, __pyx_k_Real_and_Imaginary_values_arrays, sizeof(__pyx_k_Real_and_Imaginary_values_arrays), 0, 0, 1, 0},
-  {&__pyx_n_s__7, __pyx_k__7, sizeof(__pyx_k__7), 0, 0, 1, 1},
+  {&__pyx_n_s__13, __pyx_k__13, sizeof(__pyx_k__13), 0, 0, 1, 1},
   {&__pyx_n_s_cysparse_types_cysparse_types, __pyx_k_cysparse_types_cysparse_types, sizeof(__pyx_k_cysparse_types_cysparse_types), 0, 0, 1, 1},
   {&__pyx_n_s_import, __pyx_k_import, sizeof(__pyx_k_import), 0, 0, 1, 1},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
@@ -2014,6 +2773,72 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__6 = PyTuple_Pack(1, __pyx_kp_s_Real_and_Imaginary_values_arrays); if (unlikely(!__pyx_tuple__6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 134; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__6);
   __Pyx_GIVEREF(__pyx_tuple__6);
+
+  /* "cysparse/types/cysparse_generic_types.pyx":174
+ * 
+ *     if val_length > rval_length or val_length > ival_length:
+ *         raise IndexError('Real and Imaginary values arrays must be of size equal or bigger as Complex array')             # <<<<<<<<<<<<<<
+ * 
+ *     cdef:
+ */
+  __pyx_tuple__7 = PyTuple_Pack(1, __pyx_kp_s_Real_and_Imaginary_values_arrays); if (unlikely(!__pyx_tuple__7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 174; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__7);
+  __Pyx_GIVEREF(__pyx_tuple__7);
+
+  /* "cysparse/types/cysparse_generic_types.pyx":189
+ * 
+ *     if val_length > rval_length or val_length > ival_length:
+ *         raise IndexError('Real and Imaginary values arrays must be of size equal or bigger as Complex array')             # <<<<<<<<<<<<<<
+ * 
+ *     cdef:
+ */
+  __pyx_tuple__8 = PyTuple_Pack(1, __pyx_kp_s_Real_and_Imaginary_values_arrays); if (unlikely(!__pyx_tuple__8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 189; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__8);
+  __Pyx_GIVEREF(__pyx_tuple__8);
+
+  /* "cysparse/types/cysparse_generic_types.pyx":204
+ * 
+ *     if val_length > rval_length or val_length > ival_length:
+ *         raise IndexError('Real and Imaginary values arrays must be of size equal or bigger as Complex array')             # <<<<<<<<<<<<<<
+ * 
+ *     cdef:
+ */
+  __pyx_tuple__9 = PyTuple_Pack(1, __pyx_kp_s_Real_and_Imaginary_values_arrays); if (unlikely(!__pyx_tuple__9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 204; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__9);
+  __Pyx_GIVEREF(__pyx_tuple__9);
+
+  /* "cysparse/types/cysparse_generic_types.pyx":221
+ * 
+ *     if val_length > rval_length or val_length > ival_length:
+ *         raise IndexError('Real and Imaginary values arrays must be of size equal or bigger as Complex array')             # <<<<<<<<<<<<<<
+ * 
+ *     cdef:
+ */
+  __pyx_tuple__10 = PyTuple_Pack(1, __pyx_kp_s_Real_and_Imaginary_values_arrays); if (unlikely(!__pyx_tuple__10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 221; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__10);
+  __Pyx_GIVEREF(__pyx_tuple__10);
+
+  /* "cysparse/types/cysparse_generic_types.pyx":236
+ * 
+ *     if val_length > rval_length or val_length > ival_length:
+ *         raise IndexError('Real and Imaginary values arrays must be of size equal or bigger as Complex array')             # <<<<<<<<<<<<<<
+ * 
+ *     cdef:
+ */
+  __pyx_tuple__11 = PyTuple_Pack(1, __pyx_kp_s_Real_and_Imaginary_values_arrays); if (unlikely(!__pyx_tuple__11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 236; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__11);
+  __Pyx_GIVEREF(__pyx_tuple__11);
+
+  /* "cysparse/types/cysparse_generic_types.pyx":251
+ * 
+ *     if val_length > rval_length or val_length > ival_length:
+ *         raise IndexError('Real and Imaginary values arrays must be of size equal or bigger as Complex array')             # <<<<<<<<<<<<<<
+ * 
+ *     cdef:
+ */
+  __pyx_tuple__12 = PyTuple_Pack(1, __pyx_kp_s_Real_and_Imaginary_values_arrays); if (unlikely(!__pyx_tuple__12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 251; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__12);
+  __Pyx_GIVEREF(__pyx_tuple__12);
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -2114,6 +2939,15 @@ PyMODINIT_FUNC PyInit_cysparse_generic_types(void)
   if (__Pyx_ExportFunction("split_array_complex_values_kernel_INT64_t_COMPLEX64_t", (void (*)(void))__pyx_f_8cysparse_5types_22cysparse_generic_types_split_array_complex_values_kernel_INT64_t_COMPLEX64_t, "PyObject *(__pyx_t_float_complex *, PyObject *, __pyx_t_8cysparse_5types_14cysparse_types_FLOAT32_t *, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t, __pyx_t_8cysparse_5types_14cysparse_types_FLOAT32_t *, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   if (__Pyx_ExportFunction("split_array_complex_values_kernel_INT64_t_COMPLEX128_t", (void (*)(void))__pyx_f_8cysparse_5types_22cysparse_generic_types_split_array_complex_values_kernel_INT64_t_COMPLEX128_t, "PyObject *(__pyx_t_double_complex *, PyObject *, __pyx_t_8cysparse_5types_14cysparse_types_FLOAT64_t *, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t, __pyx_t_8cysparse_5types_14cysparse_types_FLOAT64_t *, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   if (__Pyx_ExportFunction("split_array_complex_values_kernel_INT64_t_COMPLEX256_t", (void (*)(void))__pyx_f_8cysparse_5types_22cysparse_generic_types_split_array_complex_values_kernel_INT64_t_COMPLEX256_t, "PyObject *(__pyx_t_long_double_complex *, PyObject *, __pyx_t_8cysparse_5types_14cysparse_types_FLOAT128_t *, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t, __pyx_t_8cysparse_5types_14cysparse_types_FLOAT128_t *, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_ExportFunction("make_complex_from_real_parts_COMPLEX64_t", (void (*)(void))__pyx_f_8cysparse_5types_22cysparse_generic_types_make_complex_from_real_parts_COMPLEX64_t, "__pyx_t_float_complex (__pyx_t_8cysparse_5types_14cysparse_types_FLOAT32_t, __pyx_t_8cysparse_5types_14cysparse_types_FLOAT32_t)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_ExportFunction("make_complex_from_real_parts_COMPLEX128_t", (void (*)(void))__pyx_f_8cysparse_5types_22cysparse_generic_types_make_complex_from_real_parts_COMPLEX128_t, "__pyx_t_double_complex (__pyx_t_8cysparse_5types_14cysparse_types_FLOAT64_t, __pyx_t_8cysparse_5types_14cysparse_types_FLOAT64_t)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_ExportFunction("make_complex_from_real_parts_COMPLEX256_t", (void (*)(void))__pyx_f_8cysparse_5types_22cysparse_generic_types_make_complex_from_real_parts_COMPLEX256_t, "__pyx_t_long_double_complex (__pyx_t_8cysparse_5types_14cysparse_types_FLOAT128_t, __pyx_t_8cysparse_5types_14cysparse_types_FLOAT128_t)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_ExportFunction("join_array_complex_values_kernel_INT32_t_COMPLEX64_t", (void (*)(void))__pyx_f_8cysparse_5types_22cysparse_generic_types_join_array_complex_values_kernel_INT32_t_COMPLEX64_t, "PyObject *(__pyx_t_8cysparse_5types_14cysparse_types_FLOAT32_t *, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t, __pyx_t_8cysparse_5types_14cysparse_types_FLOAT32_t *, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t, __pyx_t_float_complex *, PyObject *)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_ExportFunction("join_array_complex_values_kernel_INT32_t_COMPLEX128_t", (void (*)(void))__pyx_f_8cysparse_5types_22cysparse_generic_types_join_array_complex_values_kernel_INT32_t_COMPLEX128_t, "PyObject *(__pyx_t_8cysparse_5types_14cysparse_types_FLOAT64_t *, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t, __pyx_t_8cysparse_5types_14cysparse_types_FLOAT64_t *, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t, __pyx_t_double_complex *, PyObject *)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_ExportFunction("join_array_complex_values_kernel_INT32_t_COMPLEX256_t", (void (*)(void))__pyx_f_8cysparse_5types_22cysparse_generic_types_join_array_complex_values_kernel_INT32_t_COMPLEX256_t, "PyObject *(__pyx_t_8cysparse_5types_14cysparse_types_FLOAT128_t *, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t, __pyx_t_8cysparse_5types_14cysparse_types_FLOAT128_t *, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t, __pyx_t_long_double_complex *, PyObject *)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_ExportFunction("join_array_complex_values_kernel_INT64_t_COMPLEX64_t", (void (*)(void))__pyx_f_8cysparse_5types_22cysparse_generic_types_join_array_complex_values_kernel_INT64_t_COMPLEX64_t, "PyObject *(__pyx_t_8cysparse_5types_14cysparse_types_FLOAT32_t *, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t, __pyx_t_8cysparse_5types_14cysparse_types_FLOAT32_t *, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t, __pyx_t_float_complex *, PyObject *)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_ExportFunction("join_array_complex_values_kernel_INT64_t_COMPLEX128_t", (void (*)(void))__pyx_f_8cysparse_5types_22cysparse_generic_types_join_array_complex_values_kernel_INT64_t_COMPLEX128_t, "PyObject *(__pyx_t_8cysparse_5types_14cysparse_types_FLOAT64_t *, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t, __pyx_t_8cysparse_5types_14cysparse_types_FLOAT64_t *, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t, __pyx_t_double_complex *, PyObject *)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_ExportFunction("join_array_complex_values_kernel_INT64_t_COMPLEX256_t", (void (*)(void))__pyx_f_8cysparse_5types_22cysparse_generic_types_join_array_complex_values_kernel_INT64_t_COMPLEX256_t, "PyObject *(__pyx_t_8cysparse_5types_14cysparse_types_FLOAT128_t *, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t, __pyx_t_8cysparse_5types_14cysparse_types_FLOAT128_t *, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t, __pyx_t_long_double_complex *, PyObject *)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   /*--- Type init code ---*/
   /*--- Type import code ---*/
   __pyx_ptype_7cpython_4type_type = __Pyx_ImportType(__Pyx_BUILTIN_MODULE_NAME, "type", 
@@ -2138,9 +2972,9 @@ PyMODINIT_FUNC PyInit_cysparse_generic_types(void)
  */
   __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 11; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_INCREF(__pyx_n_s__7);
-  PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s__7);
-  __Pyx_GIVEREF(__pyx_n_s__7);
+  __Pyx_INCREF(__pyx_n_s__13);
+  PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s__13);
+  __Pyx_GIVEREF(__pyx_n_s__13);
   __pyx_t_2 = __Pyx_Import(__pyx_n_s_cysparse_types_cysparse_types, __pyx_t_1, -1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 11; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -2149,8 +2983,8 @@ PyMODINIT_FUNC PyInit_cysparse_generic_types(void)
 
   /* "cysparse/types/cysparse_generic_types.pyx":1
  * ########################################################################################################################             # <<<<<<<<<<<<<<
- * # Doesn't work!!!!
  * #
+ * # Several helpers that deal with generic types.
  */
   __pyx_t_2 = PyDict_New(); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);

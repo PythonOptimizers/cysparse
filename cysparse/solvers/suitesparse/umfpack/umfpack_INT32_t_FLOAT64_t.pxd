@@ -15,6 +15,7 @@ cdef class UmfpackSolver_INT32_t_FLOAT64_t:
 
         INT32_t nrow
         INT32_t ncol
+        INT32_t nnz
 
         # Matrix A in CSC format
         CSCSparseMatrix_INT32_t_FLOAT64_t csc_mat
@@ -29,6 +30,8 @@ cdef class UmfpackSolver_INT32_t_FLOAT64_t:
         # Control and Info arrays
         public double info[UMFPACK_INFO]
         public double control[UMFPACK_CONTROL]
+
+
 
     cdef int _create_symbolic(self)
     cdef int _create_numeric(self)

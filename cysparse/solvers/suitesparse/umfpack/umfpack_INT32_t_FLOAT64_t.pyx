@@ -4,7 +4,10 @@ from cysparse.sparse.ll_mat_matrices.ll_mat_INT32_t_FLOAT64_t cimport LLSparseMa
 from cysparse.sparse.csr_mat_matrices.csr_mat_INT32_t_FLOAT64_t cimport CSRSparseMatrix_INT32_t_FLOAT64_t, MakeCSRSparseMatrix_INT32_t_FLOAT64_t
 from cysparse.sparse.csc_mat_matrices.csc_mat_INT32_t_FLOAT64_t cimport CSCSparseMatrix_INT32_t_FLOAT64_t, MakeCSCSparseMatrix_INT32_t_FLOAT64_t
 
+
+
 from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
+from cpython cimport Py_INCREF, Py_DECREF
 
 import numpy as np
 cimport numpy as cnp
@@ -93,6 +96,8 @@ cdef extern from "umfpack.h":
     # TODO: Change types for CySparse types? int -> INT32_t, double -> FLOAT64_t etc?
     #       and keep only **one** declaration? Might be problematic on some platforms?
 
+
+
     ####################################################################################################################
     # DI VERSION:  real double precision, int integers
     ####################################################################################################################
@@ -126,104 +131,15 @@ cdef extern from "umfpack.h":
     void umfpack_di_report_symbolic(void *, double *)
     void umfpack_di_report_numeric(void *, double *)
 
-    ####################################################################################################################
-    # DL VERSION:   real double precision, SuiteSparse long integers
-    ####################################################################################################################
-    SuiteSparse_long umfpack_dl_symbolic(SuiteSparse_long n_row, SuiteSparse_long n_col,
-                            SuiteSparse_long * Ap, SuiteSparse_long * Ai, double * Ax,
-                            void ** symbolic,
-                            double * control, double * info)
 
-    SuiteSparse_long umfpack_dl_numeric(SuiteSparse_long * Ap, SuiteSparse_long * Ai, double * Ax,
-                           void * symbolic,
-                           void ** numeric,
-                           double * control, double * info)
 
-    void umfpack_dl_free_symbolic(void ** symbolic)
-    void umfpack_dl_free_numeric(void ** numeric)
-    void umfpack_dl_defaults(double * control)
 
-    SuiteSparse_long umfpack_dl_solve(SuiteSparse_long umfpack_sys, SuiteSparse_long * Ap, SuiteSparse_long * Ai, double * Ax, double * x, double * b, void * numeric, double * control, double * info)
 
-    SuiteSparse_long umfpack_dl_get_lunz(SuiteSparse_long * lnz, SuiteSparse_long * unz, SuiteSparse_long * n_row, SuiteSparse_long * n_col,
-                            SuiteSparse_long * nz_udiag, void * numeric)
 
-    SuiteSparse_long umfpack_dl_get_numeric(SuiteSparse_long * Lp, SuiteSparse_long * Lj, double * Lx,
-                               SuiteSparse_long * Up, SuiteSparse_long * Ui, double * Ux,
-                               SuiteSparse_long * P, SuiteSparse_long * Q, double * Dx,
-                               SuiteSparse_long * do_recip, double * Rs,
-                               void * numeric)
 
-    void umfpack_dl_report_control(double *)
-    void umfpack_dl_report_info(double *, double *)
-    void umfpack_dl_report_symbolic(void *, double *)
-    void umfpack_dl_report_numeric(void *, double *)
 
-    ####################################################################################################################
-    # ZI VERSION:   complex double precision, int integers
-    ####################################################################################################################
-    int umfpack_zi_symbolic(int n_row, int n_col,
-                            int * Ap, int * Ai, double * Ax, double * Az,
-                            void ** symbolic,
-                            double * control, double * info)
 
-    int umfpack_zi_numeric(int * Ap, int * Ai, double * Ax, double * Az,
-                           void * symbolic,
-                           void ** numeric,
-                           double * control, double * info)
 
-    void umfpack_zi_free_symbolic(void ** symbolic)
-    void umfpack_zi_free_numeric(void ** numeric)
-    void umfpack_zi_defaults(double * control)
-
-    int umfpack_zi_solve(int umfpack_sys, int * Ap, int * Ai, double * Ax,  double * Az, double * x, double * b, void * numeric, double * control, double * info)
-
-    int umfpack_zi_get_lunz(int * lnz, int * unz, int * n_row, int * n_col,
-                            int * nz_udiag, void * numeric)
-
-    int umfpack_zi_get_numeric(int * Lp, int * Lj, double * Lx,
-                               int * Up, int * Ui, double * Ux,
-                               int * P, int * Q, double * Dx,
-                               int * do_recip, double * Rs,
-                               void * numeric)
-
-    void umfpack_zi_report_control(double *)
-    void umfpack_zi_report_info(double *, double *)
-    void umfpack_zi_report_symbolic(void *, double *)
-    void umfpack_zi_report_numeric(void *, double *)
-
-    ####################################################################################################################
-    # ZL VERSION:   complex double precision, SuiteSparse long integers
-    ####################################################################################################################
-    SuiteSparse_long umfpack_zl_symbolic(SuiteSparse_long n_row, SuiteSparse_long n_col,
-                            SuiteSparse_long * Ap, SuiteSparse_long * Ai, double * Ax, double * Az,
-                            void ** symbolic,
-                            double * control, double * info)
-
-    SuiteSparse_long umfpack_zl_numeric(SuiteSparse_long * Ap, SuiteSparse_long * Ai, double * Ax, double * Az,
-                           void * symbolic,
-                           void ** numeric,
-                           double * control, double * info)
-
-    void umfpack_zl_free_symbolic(void ** symbolic)
-    void umfpack_zl_free_numeric(void ** numeric)
-    void umfpack_zl_defaults(double * control)
-
-    SuiteSparse_long umfpack_zl_solve(SuiteSparse_long umfpack_sys, SuiteSparse_long * Ap, SuiteSparse_long * Ai, double * Ax,  double * Az, double * x, double * b, void * numeric, double * control, double * info)
-
-    SuiteSparse_long umfpack_zl_get_lunz(SuiteSparse_long * lnz, SuiteSparse_long * unz, SuiteSparse_long * n_row, SuiteSparse_long * n_col,
-                            SuiteSparse_long * nz_udiag, void * numeric)
-
-    SuiteSparse_long umfpack_zl_get_numeric(SuiteSparse_long * Lp, SuiteSparse_long * Lj, double * Lx,
-                               SuiteSparse_long * Up, SuiteSparse_long * Ui, double * Ux,
-                               SuiteSparse_long * P, SuiteSparse_long * Q, double * Dx,
-                               SuiteSparse_long * do_recip, double * Rs,
-                               void * numeric)
-
-    void umfpack_zl_report_control(double *)
-    void umfpack_zl_report_info(double *, double *)
-    void umfpack_zl_report_symbolic(void *, double *)
-    void umfpack_zl_report_numeric(void *, double *)
 
 def umfpack_version():
     version_string = "UMFPACK version %s" % UMFPACK_VERSION
@@ -312,14 +228,26 @@ cdef class UmfpackSolver_INT32_t_FLOAT64_t:
 
     def __cinit__(self, LLSparseMatrix_INT32_t_FLOAT64_t A):
         """
+        Args:
+            A: A :class:`LLSparseMatrix_INT32_t_FLOAT64_t` object.
+
+        Warning:
+            The solver takes a "snapshot" of the matrix ``A``, i.e. the results given by the solver are only
+            valid for the matrix given. If the matrix ``A`` changes aferwards, the results given by the solver won't
+            reflect this change.
 
         """
         self.A = A
+        Py_INCREF(self.A)  # increase ref to object to avoid the user deleting it explicitly or implicitly
+
         self.nrow = A.nrow
         self.ncol = A.ncol
 
+        self.nnz = self.A.nnz
+
         # test if we can use UMFPACK
         assert self.nrow == self.ncol, "Only square matrices are handled in UMFPACK"
+
 
 
 
@@ -334,6 +262,8 @@ cdef class UmfpackSolver_INT32_t_FLOAT64_t:
         umfpack_di_defaults(<double *>&self.control)
         self.set_verbosity(3)
 
+
+
     ####################################################################################################################
     # FREE MEMORY
     ####################################################################################################################
@@ -342,6 +272,10 @@ cdef class UmfpackSolver_INT32_t_FLOAT64_t:
         
         """
         self.free()
+
+        Py_DECREF(self.A) # release ref
+
+
 
     def free_symbolic(self):
         """
@@ -381,6 +315,8 @@ cdef class UmfpackSolver_INT32_t_FLOAT64_t:
 
         cdef INT32_t * ind = <INT32_t *> self.csc_mat.ind
         cdef INT32_t * row = <INT32_t *> self.csc_mat.row
+
+
         cdef FLOAT64_t * val = <FLOAT64_t *> self.csc_mat.val
 
         cdef int status
@@ -418,7 +354,11 @@ cdef class UmfpackSolver_INT32_t_FLOAT64_t:
 
         cdef INT32_t * ind = <INT32_t *> self.csc_mat.ind
         cdef INT32_t * row = <INT32_t *> self.csc_mat.row
+
+
         cdef FLOAT64_t * val = <FLOAT64_t *> self.csc_mat.val
+
+
 
         cdef INT32_t status =  umfpack_di_numeric(ind, row, val,
                            self.symbolic,
