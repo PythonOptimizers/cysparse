@@ -4,7 +4,7 @@ import numpy as np
 
 import sys
 
-A = NewLinearFillLLSparseMatrix(nrow=4, ncol=4, itype=types.INT32_T)
+A = NewLinearFillLLSparseMatrix(nrow=4, ncol=4, itype=types.INT64_T, dtype=types.COMPLEX128_T)
 
 A.put_triplet([0, 0], [0, 1], [3, 5.6])
 
@@ -20,7 +20,7 @@ solver.report_numeric()
 
 print "*" * 80
 
-b = np.array([1.0, 1.0, 1.0, 1.0])
+b = np.array([1.0, 1.0, 1.0, 1.0], dtype=np.complex128)
 
 sol = solver.solve(b)
 
