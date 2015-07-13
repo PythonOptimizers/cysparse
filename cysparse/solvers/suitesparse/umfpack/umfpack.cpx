@@ -5,7 +5,7 @@ from cysparse.sparse.csr_mat_matrices.csr_mat_@index@_@type@ cimport CSRSparseMa
 from cysparse.sparse.csc_mat_matrices.csc_mat_@index@_@type@ cimport CSCSparseMatrix_@index@_@type@, MakeCSCSparseMatrix_@index@_@type@
 
 {% if type in complex_list %}
-from cysparse.types.cysparse_generic_types cimport split_array_complex_values_kernel_@index@_@type@
+from cysparse.types.cysparse_generic_types cimport split_array_complex_values_kernel_@index@_@type@, join_array_complex_values_kernel_@index@_@type@
 {% endif %}
 
 from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
@@ -191,14 +191,18 @@ cdef extern from "umfpack.h":
     void umfpack_zi_free_numeric(void ** numeric)
     void umfpack_zi_defaults(double * control)
 
-    int umfpack_zi_solve(int umfpack_sys, int * Ap, int * Ai, double * Ax,  double * Az, double * x, double * b, void * numeric, double * control, double * info)
+    int umfpack_zi_solve(int umfpack_sys, int * Ap, int * Ai, double * Ax,  double * Az,
+                         double * Xx, double * Xz, double * bx, double * bz, void * numeric, double * control, double * info)
 
     int umfpack_zi_get_lunz(int * lnz, int * unz, int * n_row, int * n_col,
                             int * nz_udiag, void * numeric)
 
-    int umfpack_zi_get_numeric(int * Lp, int * Lj, double * Lx,
-                               int * Up, int * Ui, double * Ux,
-                               int * P, int * Q, double * Dx,
+    int umfpack_zi_get_numeric(int * Lp, int * Lj,
+                               double * Lx, double * Lz,
+                               int * Up, int * Ui,
+                               double * Ux, double * Uz,
+                               int * P, int * Q,
+                               double * Dx, double * Dz,
                                int * do_recip, double * Rs,
                                void * numeric)
 
@@ -229,14 +233,17 @@ cdef extern from "umfpack.h":
     void umfpack_zl_free_numeric(void ** numeric)
     void umfpack_zl_defaults(double * control)
 
-    SuiteSparse_long umfpack_zl_solve(SuiteSparse_long umfpack_sys, SuiteSparse_long * Ap, SuiteSparse_long * Ai, double * Ax,  double * Az, double * x, double * b, void * numeric, double * control, double * info)
+    SuiteSparse_long umfpack_zl_solve(SuiteSparse_long umfpack_sys, SuiteSparse_long * Ap, SuiteSparse_long * Ai, double * Ax,  double * Az, double * Xx, double * Xz, double * bx, double * bz, void * numeric, double * control, double * info)
 
     SuiteSparse_long umfpack_zl_get_lunz(SuiteSparse_long * lnz, SuiteSparse_long * unz, SuiteSparse_long * n_row, SuiteSparse_long * n_col,
                             SuiteSparse_long * nz_udiag, void * numeric)
 
-    SuiteSparse_long umfpack_zl_get_numeric(SuiteSparse_long * Lp, SuiteSparse_long * Lj, double * Lx,
-                               SuiteSparse_long * Up, SuiteSparse_long * Ui, double * Ux,
-                               SuiteSparse_long * P, SuiteSparse_long * Q, double * Dx,
+    SuiteSparse_long umfpack_zl_get_numeric(SuiteSparse_long * Lp, SuiteSparse_long * Lj,
+                               double * Lx, double * Lz,
+                               SuiteSparse_long * Up, SuiteSparse_long * Ui,
+                               double * Ux, double * Uz,
+                               SuiteSparse_long * P, SuiteSparse_long * Q,
+                               double * Dx, double * Dz,
                                SuiteSparse_long * do_recip, double * Rs,
                                void * numeric)
 
@@ -419,8 +426,8 @@ cdef class UmfpackSolver_@index@_@type@:
         Py_DECREF(self.A) # release ref
 
 {% if type in complex_list %}
-        PyMem_Free(self.rval)
-        PyMem_Free(self.ival)
+        PyMem_Free(self.csc_rval)
+        PyMem_Free(self.csc_ival)
 {% endif %}
 
     def free_symbolic(self):
@@ -546,7 +553,7 @@ cdef class UmfpackSolver_@index@_@type@:
             test_umfpack_result(status, "create_numeric()")
 
 
-    def solve(self, cnp.ndarray[cnp.double_t, ndim=1, mode="c"] b, umfpack_sys='UMFPACK_A', irsteps=2):
+    def solve(self, cnp.ndarray[cnp.@type|cysparse_type_to_numpy_c_type@, ndim=1, mode="c"] b, umfpack_sys='UMFPACK_A', irsteps=2):
         """
         Solve the linear system  ``A x = b``.
 
@@ -612,16 +619,83 @@ cdef class UmfpackSolver_@index@_@type@:
         self.create_symbolic()
         self.create_numeric()
 
-        cdef cnp.ndarray[cnp.double_t, ndim=1, mode='c'] sol = np.empty(self.ncol, dtype=np.double)
+        cdef cnp.ndarray[cnp.@type|cysparse_type_to_numpy_c_type@, ndim=1, mode='c'] sol = np.empty(self.ncol, dtype=np.@type|cysparse_type_to_numpy_type@)
 
         cdef @index@ * ind = <@index@ *> self.csc_mat.ind
         cdef @index@ * row = <@index@ *> self.csc_mat.row
+
+{% if type in complex_list %}
+        # create self.csc_rval and self.csc_ival **if** needed
+        self.create_real_arrays_if_needed()
+
+        # access b
+        cdef @type@ * b_data = <@type@ *> cnp.PyArray_DATA(b)
+
+        # create bx and bz
+        cdef:
+            @type|cysparse_real_type_from_real_cysparse_complex_type@ * bx
+            @type|cysparse_real_type_from_real_cysparse_complex_type@ * bz
+
+        bx = <@type|cysparse_real_type_from_real_cysparse_complex_type@ *> PyMem_Malloc(dim_b * sizeof(@type|cysparse_real_type_from_real_cysparse_complex_type@))
+        if not bx:
+            raise MemoryError()
+
+        bz = <@type|cysparse_real_type_from_real_cysparse_complex_type@ *> PyMem_Malloc(dim_b * sizeof(@type|cysparse_real_type_from_real_cysparse_complex_type@))
+
+        if not bz:
+            PyMem_Free(bx)
+            raise MemoryError()
+
+        split_array_complex_values_kernel_@index@_@type@(b_data, dim_b,
+                                                         bx, dim_b,
+                                                         bz, dim_b)
+
+        # create solx and solz
+        cdef:
+            @type|cysparse_real_type_from_real_cysparse_complex_type@ * solx
+            @type|cysparse_real_type_from_real_cysparse_complex_type@ * solz
+
+        solx = <@type|cysparse_real_type_from_real_cysparse_complex_type@ *> PyMem_Malloc(self.ncol * sizeof(@type|cysparse_real_type_from_real_cysparse_complex_type@))
+        if not solx:
+            PyMem_Free(bx)
+            PyMem_Free(bz)
+
+            raise MemoryError()
+
+        solz = <@type|cysparse_real_type_from_real_cysparse_complex_type@ *> PyMem_Malloc(self.ncol * sizeof(@type|cysparse_real_type_from_real_cysparse_complex_type@))
+
+        if not solz:
+            PyMem_Free(bx)
+            PyMem_Free(bz)
+
+            PyMem_Free(solx)
+            raise MemoryError()
+{% else %}
         cdef @type@ * val = <@type@ *> self.csc_mat.val
+{% endif %}
 
+{% if type in complex_list %}
+        cdef int status =  umfpack_@type|cysparse_real_type_to_umfpack_family@@index|cysparse_real_type_to_umfpack_family@_solve(UMFPACK_SYS_DICT[umfpack_sys], ind, row, self.csc_rval, self.csc_ival, solx, solz, bx, bz, self.numeric, self.control, self.info)
+{% else %}
         cdef int status =  umfpack_@type|cysparse_real_type_to_umfpack_family@@index|cysparse_real_type_to_umfpack_family@_solve(UMFPACK_SYS_DICT[umfpack_sys], ind, row, val, <@type@ *> cnp.PyArray_DATA(sol), <@type@ *> cnp.PyArray_DATA(b), self.numeric, self.control, self.info)
-
+{% endif %}
         if status != UMFPACK_OK:
             test_umfpack_result(status, "solve()")
+
+{% if type in complex_list %}
+        # join solx and solz
+        cdef @type@ * sol_data = <@type@ *> cnp.PyArray_DATA(sol)
+
+        join_array_complex_values_kernel_@index@_@type@(solx, self.ncol,
+                                                        solz, self.ncol,
+                                                        sol_data, self.ncol)
+
+        # Free temp arrays
+        PyMem_Free(bx)
+        PyMem_Free(bz)
+        PyMem_Free(solx)
+        PyMem_Free(solz)
+{% endif %}
 
         return sol
 
@@ -653,11 +727,11 @@ cdef class UmfpackSolver_@index@_@type@:
         self.create_numeric()
 
         cdef:
-            int lnz
-            int unz
-            int n_row
-            int n_col
-            int nz_udiag
+            @index@ lnz
+            @index@ unz
+            @index@ n_row
+            @index@ n_col
+            @index@ nz_udiag
 
         cdef status = umfpack_@type|cysparse_real_type_to_umfpack_family@@index|cysparse_real_type_to_umfpack_family@_get_lunz(&lnz, &unz, &n_row, &n_col, &nz_udiag, self.numeric)
 
@@ -699,13 +773,13 @@ cdef class UmfpackSolver_@index@_@type@:
         self.create_numeric()
 
         cdef:
-            int lnz
-            int unz
-            int n_row
-            int n_col
-            int nz_udiag
+            @index@ lnz
+            @index@ unz
+            @index@ n_row
+            @index@ n_col
+            @index@ nz_udiag
 
-            int _do_recip
+            @index@ _do_recip
 
         (lnz, unz, n_row, n_col, nz_udiag) = self.get_lunz()
 
@@ -718,9 +792,19 @@ cdef class UmfpackSolver_@index@_@type@:
         if not Lj:
             raise MemoryError()
 
+{% if type in complex_list %}
+        cdef @type|cysparse_real_type_from_real_cysparse_complex_type@ * Lx = <@type|cysparse_real_type_from_real_cysparse_complex_type@ *> PyMem_Malloc(lnz * sizeof(@type|cysparse_real_type_from_real_cysparse_complex_type@))
+        if not Lx:
+            raise MemoryError()
+
+        cdef @type|cysparse_real_type_from_real_cysparse_complex_type@ * Lz = <@type|cysparse_real_type_from_real_cysparse_complex_type@ *> PyMem_Malloc(lnz * sizeof(@type|cysparse_real_type_from_real_cysparse_complex_type@))
+        if not Lz:
+            raise MemoryError()
+{% else %}
         cdef @type@ * Lx = <@type@ *> PyMem_Malloc(lnz * sizeof(@type@))
         if not Lx:
             raise MemoryError()
+{% endif %}
 
         # U CSC matrix
         cdef @index@ * Up = <@index@ *> PyMem_Malloc((n_col + 1) * sizeof(@index@))
@@ -731,15 +815,27 @@ cdef class UmfpackSolver_@index@_@type@:
         if not Ui:
             raise MemoryError()
 
+{% if type in complex_list %}
+        cdef @type|cysparse_real_type_from_real_cysparse_complex_type@ * Ux = <@type|cysparse_real_type_from_real_cysparse_complex_type@ *> PyMem_Malloc(unz * sizeof(@type|cysparse_real_type_from_real_cysparse_complex_type@))
+        if not Ux:
+            raise MemoryError()
+
+        cdef @type|cysparse_real_type_from_real_cysparse_complex_type@ * Uz = <@type|cysparse_real_type_from_real_cysparse_complex_type@ *> PyMem_Malloc(unz * sizeof(@type|cysparse_real_type_from_real_cysparse_complex_type@))
+        if not Uz:
+            raise MemoryError()
+{% else %}
         cdef @type@ * Ux = <@type@ *> PyMem_Malloc(unz * sizeof(@type@))
         if not Ux:
             raise MemoryError()
+{% endif %}
 
         # TODO: see what type of int exactly to pass
         cdef cnp.npy_intp *dims_n_row = [n_row]
         cdef cnp.npy_intp *dims_n_col = [n_col]
 
         cdef cnp.npy_intp *dims_min = [min(n_row, n_col)]
+
+        cdef @index@ dim_D = min(n_row, n_col)
 
         #cdef cnp.ndarray[cnp.int_t, ndim=1, mode='c'] P
         cdef cnp.ndarray[int, ndim=1, mode='c'] P
@@ -753,16 +849,47 @@ cdef class UmfpackSolver_@index@_@type@:
         cdef cnp.ndarray[cnp.double_t, ndim=1, mode='c'] D
         D = cnp.PyArray_EMPTY(1, dims_min, cnp.NPY_DOUBLE, 0)
 
+{% if type in complex_list %}
+        # create Dx and Dz
+        cdef:
+            @type|cysparse_real_type_from_real_cysparse_complex_type@ * Dx
+            @type|cysparse_real_type_from_real_cysparse_complex_type@ * Dz
+
+        Dx = <@type|cysparse_real_type_from_real_cysparse_complex_type@ *> PyMem_Malloc(dim_D * sizeof(@type|cysparse_real_type_from_real_cysparse_complex_type@))
+        if not Dx:
+            #PyMem_Free(bx)
+            #PyMem_Free(bz)
+
+            raise MemoryError()
+
+        Dz = <@type|cysparse_real_type_from_real_cysparse_complex_type@ *> PyMem_Malloc(dim_D * sizeof(@type|cysparse_real_type_from_real_cysparse_complex_type@))
+
+        if not Dz:
+            #PyMem_Free(bx)
+            #PyMem_Free(bz)
+
+            PyMem_Free(Dx)
+            raise MemoryError()
+{% endif %}
+
         cdef cnp.ndarray[cnp.double_t, ndim=1, mode='c'] R
         R = cnp.PyArray_EMPTY(1, dims_n_row, cnp.NPY_DOUBLE, 0)
 
-
+{% if type in complex_list %}
+        cdef int status =umfpack_@type|cysparse_real_type_to_umfpack_family@@index|cysparse_real_type_to_umfpack_family@_get_numeric(Lp, Lj, Lx, Lz,
+                               Up, Ui, Ux,Uz,
+                               <@index@ *> cnp.PyArray_DATA(P), <@index@ *> cnp.PyArray_DATA(Q), Dx, Dz,
+                               &_do_recip, <double *> cnp.PyArray_DATA(R),
+                               self.numeric)
+{% else %}
 
         cdef int status =umfpack_@type|cysparse_real_type_to_umfpack_family@@index|cysparse_real_type_to_umfpack_family@_get_numeric(Lp, Lj, Lx,
                                Up, Ui, Ux,
                                <@index@ *> cnp.PyArray_DATA(P), <@index@ *> cnp.PyArray_DATA(Q), <@type@ *> cnp.PyArray_DATA(D),
-                               &_do_recip, <@type@ *> cnp.PyArray_DATA(R),
+                               &_do_recip, <double *> cnp.PyArray_DATA(R),
                                self.numeric)
+{% endif %}
+
 
         if status != UMFPACK_OK:
             test_umfpack_result(status, "get_LU()")
@@ -773,9 +900,30 @@ cdef class UmfpackSolver_@index@_@type@:
         cdef CSCSparseMatrix_@index@_@type@ U
 
         cdef @index@ size = min(n_row,n_col)
+
+{% if type in complex_list %}
+        cdef @type@ * Lx_complex = <@type@ *> PyMem_Malloc(lnz * sizeof(@type@))
+        if not Lx_complex:
+            raise MemoryError()
+
+        join_array_complex_values_kernel_@index@_@type@(Lx, lnz,
+                                                        Lz, lnz,
+                                                        Lx_complex, lnz)
+
+        cdef @type@ * Ux_complex = <@type@ *> PyMem_Malloc(unz * sizeof(@type@))
+        if not Ux_complex:
+            raise MemoryError()
+
+        join_array_complex_values_kernel_@index@_@type@(Ux, unz,
+                                                        Uz, unz,
+                                                        Ux_complex, unz)
+
+        L = MakeCSRSparseMatrix_@index@_@type@(nrow=size, ncol=size, nnz=lnz, ind=Lp, col=Lj, val=Lx_complex, is_symmetric=False, store_zeros=False)
+        U = MakeCSCSparseMatrix_@index@_@type@(nrow=size, ncol=size, nnz=unz, ind=Up, row=Ui, val=Ux_complex, is_symmetric=False, store_zeros=False)
+{% else %}
         L = MakeCSRSparseMatrix_@index@_@type@(nrow=size, ncol=size, nnz=lnz, ind=Lp, col=Lj, val=Lx, is_symmetric=False, store_zeros=False)
         U = MakeCSCSparseMatrix_@index@_@type@(nrow=size, ncol=size, nnz=unz, ind=Up, row=Ui, val=Ux, is_symmetric=False, store_zeros=False)
-
+{% endif %}
         return (L, U, P, Q, D, do_recip, R)
 
     ####################################################################################################################

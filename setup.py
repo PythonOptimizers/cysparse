@@ -1092,6 +1092,20 @@ if use_suitesparse:
                   sources=['cysparse/solvers/suitesparse/umfpack/umfpack_INT32_t_FLOAT64_t.pxd',
                            'cysparse/solvers/suitesparse/umfpack/umfpack_INT32_t_FLOAT64_t.pyx'], **umfpack_ext_params),
     
+        Extension(name="cysparse.solvers.suitesparse.umfpack.umfpack_INT32_t_COMPLEX128_t",
+                  sources=['cysparse/solvers/suitesparse/umfpack/umfpack_INT32_t_COMPLEX128_t.pxd',
+                           'cysparse/solvers/suitesparse/umfpack/umfpack_INT32_t_COMPLEX128_t.pyx'], **umfpack_ext_params),
+    
+
+  
+        Extension(name="cysparse.solvers.suitesparse.umfpack.umfpack_INT64_t_FLOAT64_t",
+                  sources=['cysparse/solvers/suitesparse/umfpack/umfpack_INT64_t_FLOAT64_t.pxd',
+                           'cysparse/solvers/suitesparse/umfpack/umfpack_INT64_t_FLOAT64_t.pyx'], **umfpack_ext_params),
+    
+        Extension(name="cysparse.solvers.suitesparse.umfpack.umfpack_INT64_t_COMPLEX128_t",
+                  sources=['cysparse/solvers/suitesparse/umfpack/umfpack_INT64_t_COMPLEX128_t.pxd',
+                           'cysparse/solvers/suitesparse/umfpack/umfpack_INT64_t_COMPLEX128_t.pyx'], **umfpack_ext_params),
+    
 
         ]
 

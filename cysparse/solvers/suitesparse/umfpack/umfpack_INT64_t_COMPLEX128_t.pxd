@@ -32,6 +32,14 @@ cdef class UmfpackSolver_INT64_t_COMPLEX128_t:
         public double control[UMFPACK_CONTROL]
 
 
+        # we keep internally two arrays for the complex numbers: this is required by UMFPACK...
+        FLOAT64_t * csc_rval
+        FLOAT64_t * csc_ival
+
+        bint internal_real_arrays_computed
+
+    cdef create_real_arrays_if_needed(self)
+
 
     cdef int _create_symbolic(self)
     cdef int _create_numeric(self)

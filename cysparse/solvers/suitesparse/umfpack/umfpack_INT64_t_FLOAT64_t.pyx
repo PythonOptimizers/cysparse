@@ -385,7 +385,7 @@ cdef class UmfpackSolver_INT64_t_FLOAT64_t:
             test_umfpack_result(status, "create_numeric()")
 
 
-    def solve(self, cnp.ndarray[cnp.double_t, ndim=1, mode="c"] b, umfpack_sys='UMFPACK_A', irsteps=2):
+    def solve(self, cnp.ndarray[cnp.npy_float64, ndim=1, mode="c"] b, umfpack_sys='UMFPACK_A', irsteps=2):
         """
         Solve the linear system  ``A x = b``.
 
@@ -451,16 +451,22 @@ cdef class UmfpackSolver_INT64_t_FLOAT64_t:
         self.create_symbolic()
         self.create_numeric()
 
-        cdef cnp.ndarray[cnp.double_t, ndim=1, mode='c'] sol = np.empty(self.ncol, dtype=np.double)
+        cdef cnp.ndarray[cnp.npy_float64, ndim=1, mode='c'] sol = np.empty(self.ncol, dtype=np.float64)
 
         cdef INT64_t * ind = <INT64_t *> self.csc_mat.ind
         cdef INT64_t * row = <INT64_t *> self.csc_mat.row
+
+
         cdef FLOAT64_t * val = <FLOAT64_t *> self.csc_mat.val
+
+
 
         cdef int status =  umfpack_dl_solve(UMFPACK_SYS_DICT[umfpack_sys], ind, row, val, <FLOAT64_t *> cnp.PyArray_DATA(sol), <FLOAT64_t *> cnp.PyArray_DATA(b), self.numeric, self.control, self.info)
 
         if status != UMFPACK_OK:
             test_umfpack_result(status, "solve()")
+
+
 
         return sol
 
@@ -492,11 +498,11 @@ cdef class UmfpackSolver_INT64_t_FLOAT64_t:
         self.create_numeric()
 
         cdef:
-            int lnz
-            int unz
-            int n_row
-            int n_col
-            int nz_udiag
+            INT64_t lnz
+            INT64_t unz
+            INT64_t n_row
+            INT64_t n_col
+            INT64_t nz_udiag
 
         cdef status = umfpack_dl_get_lunz(&lnz, &unz, &n_row, &n_col, &nz_udiag, self.numeric)
 
@@ -538,13 +544,13 @@ cdef class UmfpackSolver_INT64_t_FLOAT64_t:
         self.create_numeric()
 
         cdef:
-            int lnz
-            int unz
-            int n_row
-            int n_col
-            int nz_udiag
+            INT64_t lnz
+            INT64_t unz
+            INT64_t n_row
+            INT64_t n_col
+            INT64_t nz_udiag
 
-            int _do_recip
+            INT64_t _do_recip
 
         (lnz, unz, n_row, n_col, nz_udiag) = self.get_lunz()
 
@@ -557,9 +563,11 @@ cdef class UmfpackSolver_INT64_t_FLOAT64_t:
         if not Lj:
             raise MemoryError()
 
+
         cdef FLOAT64_t * Lx = <FLOAT64_t *> PyMem_Malloc(lnz * sizeof(FLOAT64_t))
         if not Lx:
             raise MemoryError()
+
 
         # U CSC matrix
         cdef INT64_t * Up = <INT64_t *> PyMem_Malloc((n_col + 1) * sizeof(INT64_t))
@@ -570,15 +578,19 @@ cdef class UmfpackSolver_INT64_t_FLOAT64_t:
         if not Ui:
             raise MemoryError()
 
+
         cdef FLOAT64_t * Ux = <FLOAT64_t *> PyMem_Malloc(unz * sizeof(FLOAT64_t))
         if not Ux:
             raise MemoryError()
+
 
         # TODO: see what type of int exactly to pass
         cdef cnp.npy_intp *dims_n_row = [n_row]
         cdef cnp.npy_intp *dims_n_col = [n_col]
 
         cdef cnp.npy_intp *dims_min = [min(n_row, n_col)]
+
+        cdef INT64_t dim_D = min(n_row, n_col)
 
         #cdef cnp.ndarray[cnp.int_t, ndim=1, mode='c'] P
         cdef cnp.ndarray[int, ndim=1, mode='c'] P
@@ -592,6 +604,8 @@ cdef class UmfpackSolver_INT64_t_FLOAT64_t:
         cdef cnp.ndarray[cnp.double_t, ndim=1, mode='c'] D
         D = cnp.PyArray_EMPTY(1, dims_min, cnp.NPY_DOUBLE, 0)
 
+
+
         cdef cnp.ndarray[cnp.double_t, ndim=1, mode='c'] R
         R = cnp.PyArray_EMPTY(1, dims_n_row, cnp.NPY_DOUBLE, 0)
 
@@ -600,8 +614,10 @@ cdef class UmfpackSolver_INT64_t_FLOAT64_t:
         cdef int status =umfpack_dl_get_numeric(Lp, Lj, Lx,
                                Up, Ui, Ux,
                                <INT64_t *> cnp.PyArray_DATA(P), <INT64_t *> cnp.PyArray_DATA(Q), <FLOAT64_t *> cnp.PyArray_DATA(D),
-                               &_do_recip, <FLOAT64_t *> cnp.PyArray_DATA(R),
+                               &_do_recip, <double *> cnp.PyArray_DATA(R),
                                self.numeric)
+
+
 
         if status != UMFPACK_OK:
             test_umfpack_result(status, "get_LU()")
@@ -612,6 +628,8 @@ cdef class UmfpackSolver_INT64_t_FLOAT64_t:
         cdef CSCSparseMatrix_INT64_t_FLOAT64_t U
 
         cdef INT64_t size = min(n_row,n_col)
+
+
         L = MakeCSRSparseMatrix_INT64_t_FLOAT64_t(nrow=size, ncol=size, nnz=lnz, ind=Lp, col=Lj, val=Lx, is_symmetric=False, store_zeros=False)
         U = MakeCSCSparseMatrix_INT64_t_FLOAT64_t(nrow=size, ncol=size, nnz=unz, ind=Up, row=Ui, val=Ux, is_symmetric=False, store_zeros=False)
 

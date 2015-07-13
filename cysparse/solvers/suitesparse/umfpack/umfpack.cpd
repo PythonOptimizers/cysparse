@@ -31,7 +31,7 @@ cdef class UmfpackSolver_@index@_@type@:
         public double info[UMFPACK_INFO]
         public double control[UMFPACK_CONTROL]
 
-{% if type in complex_type_list %}
+{% if type in complex_list %}
         # we keep internally two arrays for the complex numbers: this is required by UMFPACK...
         @type|cysparse_real_type_from_real_cysparse_complex_type@ * csc_rval
         @type|cysparse_real_type_from_real_cysparse_complex_type@ * csc_ival

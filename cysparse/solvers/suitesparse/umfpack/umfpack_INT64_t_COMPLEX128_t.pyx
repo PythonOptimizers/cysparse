@@ -5,7 +5,7 @@ from cysparse.sparse.csr_mat_matrices.csr_mat_INT64_t_COMPLEX128_t cimport CSRSp
 from cysparse.sparse.csc_mat_matrices.csc_mat_INT64_t_COMPLEX128_t cimport CSCSparseMatrix_INT64_t_COMPLEX128_t, MakeCSCSparseMatrix_INT64_t_COMPLEX128_t
 
 
-from cysparse.types.cysparse_generic_types cimport split_array_complex_values_kernel_INT64_t_COMPLEX128_t
+from cysparse.types.cysparse_generic_types cimport split_array_complex_values_kernel_INT64_t_COMPLEX128_t, join_array_complex_values_kernel_INT64_t_COMPLEX128_t
 
 
 from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
@@ -126,14 +126,17 @@ cdef extern from "umfpack.h":
     void umfpack_zl_free_numeric(void ** numeric)
     void umfpack_zl_defaults(double * control)
 
-    SuiteSparse_long umfpack_zl_solve(SuiteSparse_long umfpack_sys, SuiteSparse_long * Ap, SuiteSparse_long * Ai, double * Ax,  double * Az, double * x, double * b, void * numeric, double * control, double * info)
+    SuiteSparse_long umfpack_zl_solve(SuiteSparse_long umfpack_sys, SuiteSparse_long * Ap, SuiteSparse_long * Ai, double * Ax,  double * Az, double * Xx, double * Xz, double * bx, double * bz, void * numeric, double * control, double * info)
 
     SuiteSparse_long umfpack_zl_get_lunz(SuiteSparse_long * lnz, SuiteSparse_long * unz, SuiteSparse_long * n_row, SuiteSparse_long * n_col,
                             SuiteSparse_long * nz_udiag, void * numeric)
 
-    SuiteSparse_long umfpack_zl_get_numeric(SuiteSparse_long * Lp, SuiteSparse_long * Lj, double * Lx,
-                               SuiteSparse_long * Up, SuiteSparse_long * Ui, double * Ux,
-                               SuiteSparse_long * P, SuiteSparse_long * Q, double * Dx,
+    SuiteSparse_long umfpack_zl_get_numeric(SuiteSparse_long * Lp, SuiteSparse_long * Lj,
+                               double * Lx, double * Lz,
+                               SuiteSparse_long * Up, SuiteSparse_long * Ui,
+                               double * Ux, double * Uz,
+                               SuiteSparse_long * P, SuiteSparse_long * Q,
+                               double * Dx, double * Dz,
                                SuiteSparse_long * do_recip, double * Rs,
                                void * numeric)
 
@@ -316,8 +319,8 @@ cdef class UmfpackSolver_INT64_t_COMPLEX128_t:
         Py_DECREF(self.A) # release ref
 
 
-        PyMem_Free(self.rval)
-        PyMem_Free(self.ival)
+        PyMem_Free(self.csc_rval)
+        PyMem_Free(self.csc_ival)
 
 
     def free_symbolic(self):
@@ -432,7 +435,7 @@ cdef class UmfpackSolver_INT64_t_COMPLEX128_t:
             test_umfpack_result(status, "create_numeric()")
 
 
-    def solve(self, cnp.ndarray[cnp.double_t, ndim=1, mode="c"] b, umfpack_sys='UMFPACK_A', irsteps=2):
+    def solve(self, cnp.ndarray[cnp.npy_complex128, ndim=1, mode="c"] b, umfpack_sys='UMFPACK_A', irsteps=2):
         """
         Solve the linear system  ``A x = b``.
 
@@ -498,16 +501,79 @@ cdef class UmfpackSolver_INT64_t_COMPLEX128_t:
         self.create_symbolic()
         self.create_numeric()
 
-        cdef cnp.ndarray[cnp.double_t, ndim=1, mode='c'] sol = np.empty(self.ncol, dtype=np.double)
+        cdef cnp.ndarray[cnp.npy_complex128, ndim=1, mode='c'] sol = np.empty(self.ncol, dtype=np.complex128)
 
         cdef INT64_t * ind = <INT64_t *> self.csc_mat.ind
         cdef INT64_t * row = <INT64_t *> self.csc_mat.row
-        cdef COMPLEX128_t * val = <COMPLEX128_t *> self.csc_mat.val
 
-        cdef int status =  umfpack_zl_solve(UMFPACK_SYS_DICT[umfpack_sys], ind, row, val, <COMPLEX128_t *> cnp.PyArray_DATA(sol), <COMPLEX128_t *> cnp.PyArray_DATA(b), self.numeric, self.control, self.info)
+
+        # create self.csc_rval and self.csc_ival **if** needed
+        self.create_real_arrays_if_needed()
+
+        # access b
+        cdef COMPLEX128_t * b_data = <COMPLEX128_t *> cnp.PyArray_DATA(b)
+
+        # create bx and bz
+        cdef:
+            FLOAT64_t * bx
+            FLOAT64_t * bz
+
+        bx = <FLOAT64_t *> PyMem_Malloc(dim_b * sizeof(FLOAT64_t))
+        if not bx:
+            raise MemoryError()
+
+        bz = <FLOAT64_t *> PyMem_Malloc(dim_b * sizeof(FLOAT64_t))
+
+        if not bz:
+            PyMem_Free(bx)
+            raise MemoryError()
+
+        split_array_complex_values_kernel_INT64_t_COMPLEX128_t(b_data, dim_b,
+                                                         bx, dim_b,
+                                                         bz, dim_b)
+
+        # create solx and solz
+        cdef:
+            FLOAT64_t * solx
+            FLOAT64_t * solz
+
+        solx = <FLOAT64_t *> PyMem_Malloc(self.ncol * sizeof(FLOAT64_t))
+        if not solx:
+            PyMem_Free(bx)
+            PyMem_Free(bz)
+
+            raise MemoryError()
+
+        solz = <FLOAT64_t *> PyMem_Malloc(self.ncol * sizeof(FLOAT64_t))
+
+        if not solz:
+            PyMem_Free(bx)
+            PyMem_Free(bz)
+
+            PyMem_Free(solx)
+            raise MemoryError()
+
+
+
+        cdef int status =  umfpack_zl_solve(UMFPACK_SYS_DICT[umfpack_sys], ind, row, self.csc_rval, self.csc_ival, solx, solz, bx, bz, self.numeric, self.control, self.info)
 
         if status != UMFPACK_OK:
             test_umfpack_result(status, "solve()")
+
+
+        # join solx and solz
+        cdef COMPLEX128_t * sol_data = <COMPLEX128_t *> cnp.PyArray_DATA(sol)
+
+        join_array_complex_values_kernel_INT64_t_COMPLEX128_t(solx, self.ncol,
+                                                        solz, self.ncol,
+                                                        sol_data, self.ncol)
+
+        # Free temp arrays
+        PyMem_Free(bx)
+        PyMem_Free(bz)
+        PyMem_Free(solx)
+        PyMem_Free(solz)
+
 
         return sol
 
@@ -539,11 +605,11 @@ cdef class UmfpackSolver_INT64_t_COMPLEX128_t:
         self.create_numeric()
 
         cdef:
-            int lnz
-            int unz
-            int n_row
-            int n_col
-            int nz_udiag
+            INT64_t lnz
+            INT64_t unz
+            INT64_t n_row
+            INT64_t n_col
+            INT64_t nz_udiag
 
         cdef status = umfpack_zl_get_lunz(&lnz, &unz, &n_row, &n_col, &nz_udiag, self.numeric)
 
@@ -585,13 +651,13 @@ cdef class UmfpackSolver_INT64_t_COMPLEX128_t:
         self.create_numeric()
 
         cdef:
-            int lnz
-            int unz
-            int n_row
-            int n_col
-            int nz_udiag
+            INT64_t lnz
+            INT64_t unz
+            INT64_t n_row
+            INT64_t n_col
+            INT64_t nz_udiag
 
-            int _do_recip
+            INT64_t _do_recip
 
         (lnz, unz, n_row, n_col, nz_udiag) = self.get_lunz()
 
@@ -604,9 +670,15 @@ cdef class UmfpackSolver_INT64_t_COMPLEX128_t:
         if not Lj:
             raise MemoryError()
 
-        cdef COMPLEX128_t * Lx = <COMPLEX128_t *> PyMem_Malloc(lnz * sizeof(COMPLEX128_t))
+
+        cdef FLOAT64_t * Lx = <FLOAT64_t *> PyMem_Malloc(lnz * sizeof(FLOAT64_t))
         if not Lx:
             raise MemoryError()
+
+        cdef FLOAT64_t * Lz = <FLOAT64_t *> PyMem_Malloc(lnz * sizeof(FLOAT64_t))
+        if not Lz:
+            raise MemoryError()
+
 
         # U CSC matrix
         cdef INT64_t * Up = <INT64_t *> PyMem_Malloc((n_col + 1) * sizeof(INT64_t))
@@ -617,15 +689,23 @@ cdef class UmfpackSolver_INT64_t_COMPLEX128_t:
         if not Ui:
             raise MemoryError()
 
-        cdef COMPLEX128_t * Ux = <COMPLEX128_t *> PyMem_Malloc(unz * sizeof(COMPLEX128_t))
+
+        cdef FLOAT64_t * Ux = <FLOAT64_t *> PyMem_Malloc(unz * sizeof(FLOAT64_t))
         if not Ux:
             raise MemoryError()
+
+        cdef FLOAT64_t * Uz = <FLOAT64_t *> PyMem_Malloc(unz * sizeof(FLOAT64_t))
+        if not Uz:
+            raise MemoryError()
+
 
         # TODO: see what type of int exactly to pass
         cdef cnp.npy_intp *dims_n_row = [n_row]
         cdef cnp.npy_intp *dims_n_col = [n_col]
 
         cdef cnp.npy_intp *dims_min = [min(n_row, n_col)]
+
+        cdef INT64_t dim_D = min(n_row, n_col)
 
         #cdef cnp.ndarray[cnp.int_t, ndim=1, mode='c'] P
         cdef cnp.ndarray[int, ndim=1, mode='c'] P
@@ -639,16 +719,40 @@ cdef class UmfpackSolver_INT64_t_COMPLEX128_t:
         cdef cnp.ndarray[cnp.double_t, ndim=1, mode='c'] D
         D = cnp.PyArray_EMPTY(1, dims_min, cnp.NPY_DOUBLE, 0)
 
+
+        # create Dx and Dz
+        cdef:
+            FLOAT64_t * Dx
+            FLOAT64_t * Dz
+
+        Dx = <FLOAT64_t *> PyMem_Malloc(dim_D * sizeof(FLOAT64_t))
+        if not Dx:
+            #PyMem_Free(bx)
+            #PyMem_Free(bz)
+
+            raise MemoryError()
+
+        Dz = <FLOAT64_t *> PyMem_Malloc(dim_D * sizeof(FLOAT64_t))
+
+        if not Dz:
+            #PyMem_Free(bx)
+            #PyMem_Free(bz)
+
+            PyMem_Free(Dx)
+            raise MemoryError()
+
+
         cdef cnp.ndarray[cnp.double_t, ndim=1, mode='c'] R
         R = cnp.PyArray_EMPTY(1, dims_n_row, cnp.NPY_DOUBLE, 0)
 
 
-
-        cdef int status =umfpack_zl_get_numeric(Lp, Lj, Lx,
-                               Up, Ui, Ux,
-                               <INT64_t *> cnp.PyArray_DATA(P), <INT64_t *> cnp.PyArray_DATA(Q), <COMPLEX128_t *> cnp.PyArray_DATA(D),
-                               &_do_recip, <COMPLEX128_t *> cnp.PyArray_DATA(R),
+        cdef int status =umfpack_zl_get_numeric(Lp, Lj, Lx, Lz,
+                               Up, Ui, Ux,Uz,
+                               <INT64_t *> cnp.PyArray_DATA(P), <INT64_t *> cnp.PyArray_DATA(Q), Dx, Dz,
+                               &_do_recip, <double *> cnp.PyArray_DATA(R),
                                self.numeric)
+
+
 
         if status != UMFPACK_OK:
             test_umfpack_result(status, "get_LU()")
@@ -659,8 +763,26 @@ cdef class UmfpackSolver_INT64_t_COMPLEX128_t:
         cdef CSCSparseMatrix_INT64_t_COMPLEX128_t U
 
         cdef INT64_t size = min(n_row,n_col)
-        L = MakeCSRSparseMatrix_INT64_t_COMPLEX128_t(nrow=size, ncol=size, nnz=lnz, ind=Lp, col=Lj, val=Lx, is_symmetric=False, store_zeros=False)
-        U = MakeCSCSparseMatrix_INT64_t_COMPLEX128_t(nrow=size, ncol=size, nnz=unz, ind=Up, row=Ui, val=Ux, is_symmetric=False, store_zeros=False)
+
+
+        cdef COMPLEX128_t * Lx_complex = <COMPLEX128_t *> PyMem_Malloc(lnz * sizeof(COMPLEX128_t))
+        if not Lx_complex:
+            raise MemoryError()
+
+        join_array_complex_values_kernel_INT64_t_COMPLEX128_t(Lx, lnz,
+                                                        Lz, lnz,
+                                                        Lx_complex, lnz)
+
+        cdef COMPLEX128_t * Ux_complex = <COMPLEX128_t *> PyMem_Malloc(unz * sizeof(COMPLEX128_t))
+        if not Ux_complex:
+            raise MemoryError()
+
+        join_array_complex_values_kernel_INT64_t_COMPLEX128_t(Ux, unz,
+                                                        Uz, unz,
+                                                        Ux_complex, unz)
+
+        L = MakeCSRSparseMatrix_INT64_t_COMPLEX128_t(nrow=size, ncol=size, nnz=lnz, ind=Lp, col=Lj, val=Lx_complex, is_symmetric=False, store_zeros=False)
+        U = MakeCSCSparseMatrix_INT64_t_COMPLEX128_t(nrow=size, ncol=size, nnz=unz, ind=Up, row=Ui, val=Ux_complex, is_symmetric=False, store_zeros=False)
 
         return (L, U, P, Q, D, do_recip, R)
 
