@@ -802,42 +802,93 @@ cdef class UmfpackSolver_@index@_@type@:
 
         cdef @index@ * Lj = <@index@ *> PyMem_Malloc(lnz * sizeof(@index@))
         if not Lj:
+            PyMem_Free(Lp)
             raise MemoryError()
 
 {% if type in complex_list %}
         cdef @type|cysparse_real_type_from_real_cysparse_complex_type@ * Lx = <@type|cysparse_real_type_from_real_cysparse_complex_type@ *> PyMem_Malloc(lnz * sizeof(@type|cysparse_real_type_from_real_cysparse_complex_type@))
         if not Lx:
+            PyMem_Free(Lp)
+            PyMem_Free(Lj)
+
             raise MemoryError()
 
         cdef @type|cysparse_real_type_from_real_cysparse_complex_type@ * Lz = <@type|cysparse_real_type_from_real_cysparse_complex_type@ *> PyMem_Malloc(lnz * sizeof(@type|cysparse_real_type_from_real_cysparse_complex_type@))
         if not Lz:
+            PyMem_Free(Lp)
+            PyMem_Free(Lj)
+
+            PyMem_Free(Lx)
+
             raise MemoryError()
 {% else %}
         cdef @type@ * Lx = <@type@ *> PyMem_Malloc(lnz * sizeof(@type@))
         if not Lx:
+            PyMem_Free(Lp)
+            PyMem_Free(Lj)
+
             raise MemoryError()
 {% endif %}
 
         # U CSC matrix
         cdef @index@ * Up = <@index@ *> PyMem_Malloc((n_col + 1) * sizeof(@index@))
         if not Up:
+            PyMem_Free(Lp)
+            PyMem_Free(Lj)
+
+            PyMem_Free(Lx)
+{% if type in complex_list %}
+            PyMem_Free(Lz)
+{% endif %}
             raise MemoryError()
 
         cdef @index@ * Ui = <@index@ *> PyMem_Malloc(unz * sizeof(@index@))
         if not Ui:
+            PyMem_Free(Lp)
+            PyMem_Free(Lj)
+
+            PyMem_Free(Lx)
+{% if type in complex_list %}
+            PyMem_Free(Lz)
+{% endif %}
+            PyMem_Free(Up)
+
             raise MemoryError()
 
 {% if type in complex_list %}
         cdef @type|cysparse_real_type_from_real_cysparse_complex_type@ * Ux = <@type|cysparse_real_type_from_real_cysparse_complex_type@ *> PyMem_Malloc(unz * sizeof(@type|cysparse_real_type_from_real_cysparse_complex_type@))
         if not Ux:
+            PyMem_Free(Lp)
+            PyMem_Free(Lj)
+
+            PyMem_Free(Lx)
+            PyMem_Free(Lz)
+
+            PyMem_Free(Ui)
+
             raise MemoryError()
 
         cdef @type|cysparse_real_type_from_real_cysparse_complex_type@ * Uz = <@type|cysparse_real_type_from_real_cysparse_complex_type@ *> PyMem_Malloc(unz * sizeof(@type|cysparse_real_type_from_real_cysparse_complex_type@))
         if not Uz:
+            PyMem_Free(Lp)
+            PyMem_Free(Lj)
+
+            PyMem_Free(Lx)
+            PyMem_Free(Lz)
+
+            PyMem_Free(Ui)
+            PyMem_Free(Ux)
+
             raise MemoryError()
 {% else %}
         cdef @type@ * Ux = <@type@ *> PyMem_Malloc(unz * sizeof(@type@))
         if not Ux:
+            PyMem_Free(Lp)
+            PyMem_Free(Lj)
+            PyMem_Free(Lx)
+
+            PyMem_Free(Ui)
+
             raise MemoryError()
 {% endif %}
 
@@ -877,16 +928,28 @@ cdef class UmfpackSolver_@index@_@type@:
 
         Dx = <@type|cysparse_real_type_from_real_cysparse_complex_type@ *> PyMem_Malloc(dim_D * sizeof(@type|cysparse_real_type_from_real_cysparse_complex_type@))
         if not Dx:
-            #PyMem_Free(bx)
-            #PyMem_Free(bz)
+            PyMem_Free(Lp)
+            PyMem_Free(Lj)
+
+            PyMem_Free(Lx)
+            PyMem_Free(Lz)
+
+            PyMem_Free(Ui)
+            PyMem_Free(Ux)
 
             raise MemoryError()
 
         Dz = <@type|cysparse_real_type_from_real_cysparse_complex_type@ *> PyMem_Malloc(dim_D * sizeof(@type|cysparse_real_type_from_real_cysparse_complex_type@))
 
         if not Dz:
-            #PyMem_Free(bx)
-            #PyMem_Free(bz)
+            PyMem_Free(Lp)
+            PyMem_Free(Lj)
+
+            PyMem_Free(Lx)
+            PyMem_Free(Lz)
+
+            PyMem_Free(Ui)
+            PyMem_Free(Ux)
 
             PyMem_Free(Dx)
             raise MemoryError()
@@ -924,6 +987,18 @@ cdef class UmfpackSolver_@index@_@type@:
 {% if type in complex_list %}
         cdef @type@ * Lx_complex = <@type@ *> PyMem_Malloc(lnz * sizeof(@type@))
         if not Lx_complex:
+            PyMem_Free(Lp)
+            PyMem_Free(Lj)
+
+            PyMem_Free(Lx)
+            PyMem_Free(Lz)
+
+            PyMem_Free(Ui)
+            PyMem_Free(Ux)
+
+            PyMem_Free(Dx)
+            PyMem_Free(Dz)
+
             raise MemoryError()
 
         join_array_complex_values_kernel_@index@_@type@(Lx, lnz,
@@ -932,6 +1007,20 @@ cdef class UmfpackSolver_@index@_@type@:
 
         cdef @type@ * Ux_complex = <@type@ *> PyMem_Malloc(unz * sizeof(@type@))
         if not Ux_complex:
+            PyMem_Free(Lp)
+            PyMem_Free(Lj)
+
+            PyMem_Free(Lx)
+            PyMem_Free(Lz)
+
+            PyMem_Free(Ui)
+            PyMem_Free(Ux)
+
+            PyMem_Free(Dx)
+            PyMem_Free(Dz)
+
+            PyMem_Free(Lx_complex)
+            
             raise MemoryError()
 
         join_array_complex_values_kernel_@index@_@type@(Ux, unz,

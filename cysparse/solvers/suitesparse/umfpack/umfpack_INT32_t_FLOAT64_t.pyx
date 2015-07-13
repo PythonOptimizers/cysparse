@@ -573,26 +573,48 @@ cdef class UmfpackSolver_INT32_t_FLOAT64_t:
 
         cdef INT32_t * Lj = <INT32_t *> PyMem_Malloc(lnz * sizeof(INT32_t))
         if not Lj:
+            PyMem_Free(Lp)
             raise MemoryError()
 
 
         cdef FLOAT64_t * Lx = <FLOAT64_t *> PyMem_Malloc(lnz * sizeof(FLOAT64_t))
         if not Lx:
+            PyMem_Free(Lp)
+            PyMem_Free(Lj)
+
             raise MemoryError()
 
 
         # U CSC matrix
         cdef INT32_t * Up = <INT32_t *> PyMem_Malloc((n_col + 1) * sizeof(INT32_t))
         if not Up:
+            PyMem_Free(Lp)
+            PyMem_Free(Lj)
+
+            PyMem_Free(Lx)
+
             raise MemoryError()
 
         cdef INT32_t * Ui = <INT32_t *> PyMem_Malloc(unz * sizeof(INT32_t))
         if not Ui:
+            PyMem_Free(Lp)
+            PyMem_Free(Lj)
+
+            PyMem_Free(Lx)
+
+            PyMem_Free(Up)
+
             raise MemoryError()
 
 
         cdef FLOAT64_t * Ux = <FLOAT64_t *> PyMem_Malloc(unz * sizeof(FLOAT64_t))
         if not Ux:
+            PyMem_Free(Lp)
+            PyMem_Free(Lj)
+            PyMem_Free(Lx)
+
+            PyMem_Free(Ui)
+
             raise MemoryError()
 
 

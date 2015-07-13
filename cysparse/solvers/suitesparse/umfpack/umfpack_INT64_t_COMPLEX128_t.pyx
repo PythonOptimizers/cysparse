@@ -680,34 +680,76 @@ cdef class UmfpackSolver_INT64_t_COMPLEX128_t:
 
         cdef INT64_t * Lj = <INT64_t *> PyMem_Malloc(lnz * sizeof(INT64_t))
         if not Lj:
+            PyMem_Free(Lp)
             raise MemoryError()
 
 
         cdef FLOAT64_t * Lx = <FLOAT64_t *> PyMem_Malloc(lnz * sizeof(FLOAT64_t))
         if not Lx:
+            PyMem_Free(Lp)
+            PyMem_Free(Lj)
+
             raise MemoryError()
 
         cdef FLOAT64_t * Lz = <FLOAT64_t *> PyMem_Malloc(lnz * sizeof(FLOAT64_t))
         if not Lz:
+            PyMem_Free(Lp)
+            PyMem_Free(Lj)
+
+            PyMem_Free(Lx)
+
             raise MemoryError()
 
 
         # U CSC matrix
         cdef INT64_t * Up = <INT64_t *> PyMem_Malloc((n_col + 1) * sizeof(INT64_t))
         if not Up:
+            PyMem_Free(Lp)
+            PyMem_Free(Lj)
+
+            PyMem_Free(Lx)
+
+            PyMem_Free(Lz)
+
             raise MemoryError()
 
         cdef INT64_t * Ui = <INT64_t *> PyMem_Malloc(unz * sizeof(INT64_t))
         if not Ui:
+            PyMem_Free(Lp)
+            PyMem_Free(Lj)
+
+            PyMem_Free(Lx)
+
+            PyMem_Free(Lz)
+
+            PyMem_Free(Up)
+
             raise MemoryError()
 
 
         cdef FLOAT64_t * Ux = <FLOAT64_t *> PyMem_Malloc(unz * sizeof(FLOAT64_t))
         if not Ux:
+            PyMem_Free(Lp)
+            PyMem_Free(Lj)
+
+            PyMem_Free(Lx)
+            PyMem_Free(Lz)
+
+            PyMem_Free(Ui)
+
             raise MemoryError()
 
         cdef FLOAT64_t * Uz = <FLOAT64_t *> PyMem_Malloc(unz * sizeof(FLOAT64_t))
         if not Uz:
+            PyMem_Free(Lp)
+            PyMem_Free(Lj)
+
+            PyMem_Free(Lx)
+            PyMem_Free(Lz)
+
+            PyMem_Free(Ui)
+            PyMem_Free(Ux)
+
             raise MemoryError()
 
 
@@ -747,16 +789,28 @@ cdef class UmfpackSolver_INT64_t_COMPLEX128_t:
 
         Dx = <FLOAT64_t *> PyMem_Malloc(dim_D * sizeof(FLOAT64_t))
         if not Dx:
-            #PyMem_Free(bx)
-            #PyMem_Free(bz)
+            PyMem_Free(Lp)
+            PyMem_Free(Lj)
+
+            PyMem_Free(Lx)
+            PyMem_Free(Lz)
+
+            PyMem_Free(Ui)
+            PyMem_Free(Ux)
 
             raise MemoryError()
 
         Dz = <FLOAT64_t *> PyMem_Malloc(dim_D * sizeof(FLOAT64_t))
 
         if not Dz:
-            #PyMem_Free(bx)
-            #PyMem_Free(bz)
+            PyMem_Free(Lp)
+            PyMem_Free(Lj)
+
+            PyMem_Free(Lx)
+            PyMem_Free(Lz)
+
+            PyMem_Free(Ui)
+            PyMem_Free(Ux)
 
             PyMem_Free(Dx)
             raise MemoryError()
@@ -787,6 +841,18 @@ cdef class UmfpackSolver_INT64_t_COMPLEX128_t:
 
         cdef COMPLEX128_t * Lx_complex = <COMPLEX128_t *> PyMem_Malloc(lnz * sizeof(COMPLEX128_t))
         if not Lx_complex:
+            PyMem_Free(Lp)
+            PyMem_Free(Lj)
+
+            PyMem_Free(Lx)
+            PyMem_Free(Lz)
+
+            PyMem_Free(Ui)
+            PyMem_Free(Ux)
+
+            PyMem_Free(Dx)
+            PyMem_Free(Dz)
+
             raise MemoryError()
 
         join_array_complex_values_kernel_INT64_t_COMPLEX128_t(Lx, lnz,
@@ -795,6 +861,20 @@ cdef class UmfpackSolver_INT64_t_COMPLEX128_t:
 
         cdef COMPLEX128_t * Ux_complex = <COMPLEX128_t *> PyMem_Malloc(unz * sizeof(COMPLEX128_t))
         if not Ux_complex:
+            PyMem_Free(Lp)
+            PyMem_Free(Lj)
+
+            PyMem_Free(Lx)
+            PyMem_Free(Lz)
+
+            PyMem_Free(Ui)
+            PyMem_Free(Ux)
+
+            PyMem_Free(Dx)
+            PyMem_Free(Dz)
+
+            PyMem_Free(Lx_complex)
+            
             raise MemoryError()
 
         join_array_complex_values_kernel_INT64_t_COMPLEX128_t(Ux, unz,
