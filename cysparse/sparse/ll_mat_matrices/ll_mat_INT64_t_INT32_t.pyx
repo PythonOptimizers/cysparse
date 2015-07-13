@@ -107,8 +107,6 @@ cdef extern from 'math.h':
     long double sqrtl (long double x)
     double log  (double x)
 
-#cdef extern from "stdlib.h":
-#    void *memcpy(void *dst, void *src, long n)
 
 ########################################################################################################################
 # CySparse cimport/import to avoid circular dependencies

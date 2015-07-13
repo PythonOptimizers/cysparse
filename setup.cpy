@@ -273,9 +273,13 @@ if use_suitesparse:
     umfpack_ext_params['libraries'] = ['umfpack', 'amd']
 
     umfpack_ext = [
-        Extension(name="cysparse.solvers.suitesparse.umfpack",
-                  sources=['cysparse/solvers/suitesparse/umfpack.pxd',
-                           'cysparse/solvers/suitesparse/umfpack.pyx'], **umfpack_ext_params)
+{% for index_type in umfpack_index_list %}
+  {% for element_type in umfpack_type_list %}
+        Extension(name="cysparse.solvers.suitesparse.umfpack.umfpack_@index_type@_@element_type@",
+                  sources=['cysparse/solvers/suitesparse/umfpack/umfpack_@index_type@_@element_type@.pxd',
+                           'cysparse/solvers/suitesparse/umfpack/umfpack_@index_type@_@element_type@.pyx'], **umfpack_ext_params),
+    {% endfor %}
+{% endfor %}
         ]
 
 
@@ -295,8 +299,7 @@ packages_list = ['cysparse',
             'cysparse.sparse.csc_mat_matrices',
             'cysparse.sparse.ll_mat_views',
             'cysparse.utils',
-            #'cysparse.solvers',
-            #'cysparse.solvers.suitesparse',
+            'cysparse.solvers',
             #'cysparse.sparse.IO'
             ]
 
@@ -305,10 +308,7 @@ ext_modules = base_ext + sparse_ext
 if use_suitesparse:
     # add suitsparse package
     ext_modules += umfpack_ext
-
-
-else:
-    pass
+    packages_list.append('cysparse.solvers.suitesparse')
 
 setup(name=  'CySparse',
   version=find_version('cysparse', '__init__.py'),
