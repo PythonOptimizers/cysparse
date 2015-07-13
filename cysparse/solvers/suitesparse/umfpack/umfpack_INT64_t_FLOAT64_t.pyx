@@ -378,6 +378,8 @@ cdef class UmfpackSolver_INT64_t_FLOAT64_t:
         if not recompute and self.numeric_computed:
             return
 
+        self.create_symbolic(recompute=recompute)
+        
         cdef int status = self._create_numeric()
 
         if status != UMFPACK_OK:
