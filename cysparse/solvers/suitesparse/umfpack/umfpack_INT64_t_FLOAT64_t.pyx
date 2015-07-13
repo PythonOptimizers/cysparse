@@ -19,7 +19,7 @@ cnp.import_array()
 cdef extern from "umfpack.h":
 
     char * UMFPACK_DATE
-    ctypedef long SuiteSparse_long
+    ctypedef long SuiteSparse_long  # This is exactly CySparse's INT64_t
 
     cdef enum:
         UMFPACK_CONTROL, UMFPACK_INFO
@@ -94,7 +94,7 @@ cdef extern from "umfpack.h":
         UMFPACK_Uat
 
     # TODO: Change types for CySparse types? int -> INT32_t, double -> FLOAT64_t etc?
-    #       and keep only **one** declaration? Might be problematic on some platforms?
+    #       and keep only **one** declaration?
 
 
 
@@ -251,8 +251,6 @@ cdef class UmfpackSolver_INT64_t_FLOAT64_t:
 
 
 
-
-
         self.csc_mat  = self.A.to_csc()
 
         self.symbolic_computed = False
@@ -279,7 +277,7 @@ cdef class UmfpackSolver_INT64_t_FLOAT64_t:
 
     def free_symbolic(self):
         """
-        
+        Free symbolic object if needed.
         
         """
         if self.symbolic_computed:
@@ -287,7 +285,7 @@ cdef class UmfpackSolver_INT64_t_FLOAT64_t:
 
     def free_numeric(self):
         """
-        
+        Free numeric object if needed.
         
         """
         if self.numeric_computed:
@@ -295,7 +293,7 @@ cdef class UmfpackSolver_INT64_t_FLOAT64_t:
 
     def free(self):
         """
-        
+        Free symbolic and/or numeric objects if needed.
         
         """
         self.free_numeric()
@@ -306,7 +304,10 @@ cdef class UmfpackSolver_INT64_t_FLOAT64_t:
     ####################################################################################################################
     cdef int _create_symbolic(self):
         """
-        
+        Create the symbolic object.
+
+        Note:
+            Create the object no matter what. See :meth:`create_symbolic` for a conditional creation.
         
         """
 
@@ -331,7 +332,10 @@ cdef class UmfpackSolver_INT64_t_FLOAT64_t:
 
     def create_symbolic(self, recompute=False):
         """
-        
+        Create the symbolic object if it is not already in cache (or if ``recompute`` is set to ``True``).
+
+        Args:
+            recompute: If ``True`` forces the (re)computation of the object.
         
         """
         if not recompute and self.symbolic_computed:
@@ -345,7 +349,10 @@ cdef class UmfpackSolver_INT64_t_FLOAT64_t:
 
     cdef int _create_numeric(self):
         """
-        
+        Create the numeric object.
+
+        Note:
+            Create the object no matter what. See :meth:`create_numeric` for a conditional creation.
         
         """
 
@@ -371,7 +378,10 @@ cdef class UmfpackSolver_INT64_t_FLOAT64_t:
 
     def create_numeric(self, recompute=False):
         """
-        
+        Create the numeric object if it is not already in cache (or if ``recompute`` is set to ``True``).
+
+        Args:
+            recompute: If ``True`` forces the (re)computation of the object.
         
         """
 
@@ -379,7 +389,7 @@ cdef class UmfpackSolver_INT64_t_FLOAT64_t:
             return
 
         self.create_symbolic(recompute=recompute)
-        
+
         cdef int status = self._create_numeric()
 
         if status != UMFPACK_OK:
@@ -592,16 +602,22 @@ cdef class UmfpackSolver_INT64_t_FLOAT64_t:
 
         cdef cnp.npy_intp *dims_min = [min(n_row, n_col)]
 
-        cdef INT64_t dim_D = min(n_row, n_col)
-
         #cdef cnp.ndarray[cnp.int_t, ndim=1, mode='c'] P
-        cdef cnp.ndarray[int, ndim=1, mode='c'] P
+        #cdef cnp.ndarray[int, ndim=1, mode='c'] P
+        cdef cnp.ndarray[cnp.npy_int64, ndim=1, mode='c'] P
 
-        P = cnp.PyArray_EMPTY(1, dims_n_row, cnp.NPY_INT32, 0)
+
+        #P = cnp.PyArray_EMPTY(1, dims_n_row, cnp.NPY_INT32, 0)
+        P = cnp.PyArray_EMPTY(1, dims_n_row, cnp.NPY_INT64, 0)
+
 
         #cdef cnp.ndarray[cnp.int_t, ndim=1, mode='c'] Q
-        cdef cnp.ndarray[int, ndim=1, mode='c'] Q
-        Q = cnp.PyArray_EMPTY(1, dims_n_col, cnp.NPY_INT32, 0)
+        #cdef cnp.ndarray[int, ndim=1, mode='c'] Q
+        cdef cnp.ndarray[cnp.npy_int64, ndim=1, mode='c'] Q
+
+        #Q = cnp.PyArray_EMPTY(1, dims_n_col, cnp.NPY_INT32, 0)
+        Q = cnp.PyArray_EMPTY(1, dims_n_col, cnp.NPY_INT64, 0)
+
 
         cdef cnp.ndarray[cnp.double_t, ndim=1, mode='c'] D
         D = cnp.PyArray_EMPTY(1, dims_min, cnp.NPY_DOUBLE, 0)

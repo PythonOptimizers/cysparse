@@ -4,7 +4,7 @@ import numpy as np
 
 import sys
 
-A = NewLinearFillLLSparseMatrix(nrow=4, ncol=4, dtype=types.COMPLEX128_T)
+A = NewLinearFillLLSparseMatrix(nrow=4, ncol=4, itype=types.INT32_T)
 
 A.put_triplet([0, 0], [0, 1], [3, 5.6])
 
