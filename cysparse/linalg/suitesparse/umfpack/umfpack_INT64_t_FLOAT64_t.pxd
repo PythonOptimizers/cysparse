@@ -1,7 +1,7 @@
 from cysparse.types.cysparse_types cimport *
 
-from cysparse.sparse.ll_mat cimport LLSparseMatrix
-from cysparse.sparse.csc_mat cimport CSCSparseMatrix
+from cysparse.sparse.ll_mat_matrices.ll_mat_INT64_t_FLOAT64_t cimport LLSparseMatrix_INT64_t_FLOAT64_t
+from cysparse.sparse.csc_mat_matrices.csc_mat_INT64_t_FLOAT64_t cimport CSCSparseMatrix_INT64_t_FLOAT64_t
 
 
 cdef extern from "umfpack.h":
@@ -9,19 +9,16 @@ cdef extern from "umfpack.h":
         UMFPACK_CONTROL, UMFPACK_INFO
 
 
-cdef class UmfpackSolver:
+cdef class UmfpackSolver_INT64_t_FLOAT64_t:
     cdef:
-        LLSparseMatrix A
+        LLSparseMatrix_INT64_t_FLOAT64_t A
 
-        SIZE_t nrow
-        SIZE_t ncol
-
-        public bint is_complex
-
-        public str family
+        INT64_t nrow
+        INT64_t ncol
+        INT64_t nnz
 
         # Matrix A in CSC format
-        CSCSparseMatrix csc_mat
+        CSCSparseMatrix_INT64_t_FLOAT64_t csc_mat
 
         # UMFPACK opaque objects
         void * symbolic
@@ -34,6 +31,7 @@ cdef class UmfpackSolver:
         public double info[UMFPACK_INFO]
         public double control[UMFPACK_CONTROL]
 
+
+
     cdef int _create_symbolic(self)
     cdef int _create_numeric(self)
-

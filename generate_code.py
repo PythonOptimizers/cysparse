@@ -77,8 +77,9 @@ def make_parser():
     parser.add_argument("-a", "--all", help="Create all action files.", action='store_true', required=False)
 
     parser.add_argument("-m", "--matrices", help="Create sparse matrices.", action='store_true', required=False)
-    parser.add_argument("-s", "--setup", help="Create setup file.", action='store_true', required=False)
+    parser.add_argument("-p", "--setup", help="Create setup file.", action='store_true', required=False)
     parser.add_argument("-g", "--generic_types", help="Create generic types.", action='store_true', required=False)
+    parser.add_argument("-s", "--solvers", help="Create solvers.", action='store_true', required=False)
     parser.add_argument("-t", "--tests", help="Create generic tests.", action='store_true', required=False)
     parser.add_argument("-c", "--clean", help="Clean action files.", action='store_true', required=False)
 
@@ -88,6 +89,9 @@ def make_parser():
 #################################################################################################
 # JINJA2 FILTERS
 #################################################################################################
+####################################
+# CYSPARSE/NUMPY TYPES
+####################################
 def type2enum(__type_name):
     """
     Transform a real :program:`CySparse` type into the equivalent :program:`CySparse` enum type.
@@ -198,6 +202,7 @@ def cysparse_type_to_real_sum_cysparse_type(cysparse_type):
 
     return r_type
 
+
 def cysparse_real_type_from_real_cysparse_complex_type(cysparse_type):
     """
     Returns the **real** type for the real or imaginary part of a **real** complex type.
@@ -223,6 +228,22 @@ def cysparse_real_type_from_real_cysparse_complex_type(cysparse_type):
 
     return r_type
 
+
+####################################
+# UMFPACK TYPES
+####################################
+def cysparse_real_type_to_umfpack_family(cysparse_type):
+    if cysparse_type in ['INT32_t']:
+        return 'i'
+    elif cysparse_type in ['INT64_t']:
+        return 'l'
+    elif cysparse_type in ['FLOAT64_t']:
+        return 'd'
+    elif cysparse_type in ['COMPLEX128_t']:
+        return 'z'
+    else:
+        raise TypeError("Not a recognized SuiteSparse Umfpack type")
+
 #################################################################################################
 # COMMON STUFF
 #################################################################################################
@@ -238,10 +259,17 @@ COMPLEX_ELEMENT_TYPES = ['COMPLEX64_t', 'COMPLEX128_t', 'COMPLEX256_t']
 INDEX_MM_TYPES = ['INT32_t', 'INT64_t']
 ELEMENT_MM_TYPES = ['INT64_t', 'FLOAT64_t', 'COMPLEX128_t']
 
+# Solvers
+# SuiteSparse
+# Umfpack
+UMFPACK_INDEX_TYPES = ['INT32_t', 'INT64_t']
+UMFPACK_ELEMENT_TYPES = ['FLOAT64_t', 'COMPLEX128_t']
+
 # when coding
 #ELEMENT_TYPES = ['FLOAT64_t']
 #ELEMENT_TYPES = ['COMPLEX64_t']
-
+#UMFPACK_INDEX_TYPES = ['INT32_t']
+#UMFPACK_ELEMENT_TYPES = ['FLOAT64_t']
 
 GENERAL_CONTEXT = {
                     'basic_type_list' : BASIC_TYPES,
@@ -251,7 +279,9 @@ GENERAL_CONTEXT = {
                     'real_list' : REAL_ELEMENT_TYPES,
                     'complex_list' : COMPLEX_ELEMENT_TYPES,
                     'mm_index_list' : INDEX_MM_TYPES,
-                    'mm_type_list' : ELEMENT_MM_TYPES
+                    'mm_type_list' : ELEMENT_MM_TYPES,
+                    'umfpack_index_list' : UMFPACK_INDEX_TYPES,
+                    'umfpack_type_list' : UMFPACK_ELEMENT_TYPES
                 }
 
 GENERAL_ENVIRONMENT = Environment(
@@ -267,6 +297,7 @@ GENERAL_ENVIRONMENT.filters['cysparse_type_to_numpy_type'] = cysparse_type_to_nu
 GENERAL_ENVIRONMENT.filters['cysparse_type_to_real_sum_cysparse_type'] = cysparse_type_to_real_sum_cysparse_type
 GENERAL_ENVIRONMENT.filters['cysparse_type_to_numpy_enum_type'] = cysparse_type_to_numpy_enum_type
 GENERAL_ENVIRONMENT.filters['cysparse_real_type_from_real_cysparse_complex_type'] = cysparse_real_type_from_real_cysparse_complex_type
+GENERAL_ENVIRONMENT.filters['cysparse_real_type_to_umfpack_family'] = cysparse_real_type_to_umfpack_family
 
 
 def clean_cython_files(logger, directory, file_list=None):
@@ -462,6 +493,10 @@ SPARSE_SPARSE_UTILS_GENERATE_INDICES_DEFINITION_FILES = [os.path.join(SPARSE_SPA
 SPARSE_SPARSE_UTILS_FIND_DECLARATION_FILES = [os.path.join(SPARSE_SPARSE_UTILS_TEMPLATE_DIR, 'find.cpd')]
 SPARSE_SPARSE_UTILS_FIND_DEFINITION_FILES = [os.path.join(SPARSE_SPARSE_UTILS_TEMPLATE_DIR, 'find.cpx')]
 
+SPARSE_SPARSE_UTILS_MATRIX_TRANSLATIONS_DECLARATION_FILES = [os.path.join(SPARSE_SPARSE_UTILS_TEMPLATE_DIR, 'matrix_translations.cpd')]
+SPARSE_SPARSE_UTILS_MATRIX_TRANSLATIONS_DEFINITION_FILES = [os.path.join(SPARSE_SPARSE_UTILS_TEMPLATE_DIR, 'matrix_translations.cpx')]
+
+
 SPARSE_SPARSE_UTILS_PRINT_DECLARATION_FILES = [os.path.join(SPARSE_SPARSE_UTILS_TEMPLATE_DIR, 'print.cpd')]
 SPARSE_SPARSE_UTILS_PRINT_DEFINITION_FILES = [os.path.join(SPARSE_SPARSE_UTILS_TEMPLATE_DIR, 'print.cpx')]
 
@@ -568,6 +603,21 @@ CSC_SPARSE_MATRIX_HELPERS_INCLUDE_FILES = glob.glob(os.path.join(CSC_SPARSE_MATR
 ### CSBSparseMatrix
 ##########################################
 
+#################################################################################################
+# SOLVERS
+#################################################################################################
+SOLVERS_TEMPLATE_DIR = os.path.join(PATH, 'cysparse', 'solvers')
+
+##########################################
+### SuiteSparse
+##########################################
+SOLVERS_SUITESPARSE_TEMPLATE_DIR = os.path.join(SOLVERS_TEMPLATE_DIR, 'suitesparse')
+
+# UMFPACK
+SOLVERS_SUITESPARSE_UMFPACK_TEMPLATE_DIR = os.path.join(SOLVERS_SUITESPARSE_TEMPLATE_DIR, 'umfpack')
+
+SOLVERS_SUITESPARSE_UMFPACK_DECLARATION_FILES = glob.glob(os.path.join(SOLVERS_SUITESPARSE_UMFPACK_TEMPLATE_DIR, '*.cpd'))
+SOLVERS_SUITESPARSE_UMFPACK_DEFINITION_FILES = glob.glob(os.path.join(SOLVERS_SUITESPARSE_UMFPACK_TEMPLATE_DIR, '*.cpx'))
 
 #################################################################################################
 # TESTS
@@ -583,6 +633,8 @@ TESTS_CSR_SPARSE_MATRIX_GENERIC_TEST_FILES = glob.glob(os.path.join(TESTS_CSR_SP
 TESTS_LL_SPARSE_MATRIX_VIEW_GENERIC_TEST_DIR = os.path.join(TESTS_TEMPLATE_DIR, 'cysparse', 'sparse', 'll_mat_views', 'generic')
 TESTS_LL_SPARSE_MATRIX_VIEW_GENERIC_TEST_FILES = glob.glob(os.path.join(TESTS_LL_SPARSE_MATRIX_VIEW_GENERIC_TEST_DIR, '*.cpy'))
 
+TESTS_SPARSE_MATRIX_COMMON_OPERATIONS_GENERIC_TEST_DIR = os.path.join(TESTS_TEMPLATE_DIR, 'cysparse', 'sparse', 'common_operations', 'generic')
+TESTS_SPARSE_MATRIX_COMMON_OPERATIONS_GENERIC_TEST_FILES = glob.glob(os.path.join(TESTS_SPARSE_MATRIX_COMMON_OPERATIONS_GENERIC_TEST_DIR, '*.cpy'))
 
 #################################################################################################
 # MAIN
@@ -730,6 +782,10 @@ if __name__ == "__main__":
             generate_following_type_and_index(logger, SPARSE_SPARSE_UTILS_FIND_DECLARATION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, ELEMENT_TYPES, INDEX_TYPES, '.pxd')
             generate_following_type_and_index(logger, SPARSE_SPARSE_UTILS_FIND_DEFINITION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, ELEMENT_TYPES, INDEX_TYPES, '.pyx')
 
+            # matrix_translations_@index@_@type@.pxd and matrix_translations_@index@_@type@.pyx
+            generate_following_type_and_index(logger, SPARSE_SPARSE_UTILS_MATRIX_TRANSLATIONS_DECLARATION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, ELEMENT_TYPES, INDEX_TYPES, '.pxd')
+            generate_following_type_and_index(logger, SPARSE_SPARSE_UTILS_MATRIX_TRANSLATIONS_DEFINITION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, ELEMENT_TYPES, INDEX_TYPES, '.pyx')
+
             ###############################
             # SparseMatrix
             ###############################
@@ -810,6 +866,21 @@ if __name__ == "__main__":
             # helpers
             generate_following_type_and_index(logger, CSC_SPARSE_MATRIX_HELPERS_INCLUDE_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, ELEMENT_TYPES, INDEX_TYPES, '.pxi')
 
+    if arg_options.solvers or arg_options.all:
+        action = True
+        logger.info("Act for generic solvers")
+
+        if arg_options.clean:
+            # Umfpack
+            clean_cython_files(logger, SOLVERS_SUITESPARSE_UMFPACK_TEMPLATE_DIR)
+        else:
+            ###############################
+            # SuiteSparse
+            ###############################
+            # Umfpack
+            generate_following_type_and_index(logger, SOLVERS_SUITESPARSE_UMFPACK_DECLARATION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, UMFPACK_ELEMENT_TYPES, UMFPACK_INDEX_TYPES, '.pxd')
+            generate_following_type_and_index(logger, SOLVERS_SUITESPARSE_UMFPACK_DEFINITION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, UMFPACK_ELEMENT_TYPES, UMFPACK_INDEX_TYPES, '.pyx')
+
     if arg_options.tests or arg_options.all:
         action = True
         logger.info("Act for generic tests")
@@ -817,8 +888,8 @@ if __name__ == "__main__":
         if arg_options.clean:
             clean_cython_files(logger, TESTS_CSC_SPARSE_MATRIX_GENERIC_TEST_DIR, find_files(TESTS_CSC_SPARSE_MATRIX_GENERIC_TEST_DIR, '*.py', False, True))
             clean_cython_files(logger, TESTS_CSR_SPARSE_MATRIX_GENERIC_TEST_DIR, find_files(TESTS_CSR_SPARSE_MATRIX_GENERIC_TEST_DIR, '*.py', False, True))
-            clean_cython_files(logger, TESTS_LL_SPARSE_MATRIX_VIEW_GENERIC_TEST_DIR, find_files(TESTS_CSR_SPARSE_MATRIX_GENERIC_TEST_DIR, '*.py', False, True))
-
+            clean_cython_files(logger, TESTS_LL_SPARSE_MATRIX_VIEW_GENERIC_TEST_DIR, find_files(TESTS_LL_SPARSE_MATRIX_VIEW_GENERIC_TEST_DIR, '*.py', False, True))
+            clean_cython_files(logger, TESTS_SPARSE_MATRIX_COMMON_OPERATIONS_GENERIC_TEST_DIR, find_files(TESTS_SPARSE_MATRIX_COMMON_OPERATIONS_GENERIC_TEST_DIR, '*.py', False, True))
         else:
             ###############################
             # Types
@@ -827,6 +898,7 @@ if __name__ == "__main__":
             generate_template_files(logger, TESTS_CSC_SPARSE_MATRIX_GENERIC_TEST_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, '.py')
             generate_template_files(logger, TESTS_CSR_SPARSE_MATRIX_GENERIC_TEST_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, '.py')
             generate_template_files(logger, TESTS_LL_SPARSE_MATRIX_VIEW_GENERIC_TEST_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, '.py')
+            generate_template_files(logger, TESTS_SPARSE_MATRIX_COMMON_OPERATIONS_GENERIC_TEST_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, '.py')
 
     if not action:
         logger.warning("No action proceeded...")

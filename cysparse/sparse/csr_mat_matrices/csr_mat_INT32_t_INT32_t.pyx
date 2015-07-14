@@ -11,10 +11,11 @@ from cysparse.types.cysparse_numpy_types import *
 
 from cysparse.sparse.s_mat_matrices.s_mat_INT32_t_INT32_t cimport ImmutableSparseMatrix_INT32_t_INT32_t, MutableSparseMatrix_INT32_t_INT32_t
 from cysparse.sparse.ll_mat_matrices.ll_mat_INT32_t_INT32_t cimport LLSparseMatrix_INT32_t_INT32_t
-from cysparse.sparse.csc_mat_matrices.csc_mat_INT32_t_INT32_t cimport CSCSparseMatrix_INT32_t_INT32_t
+from cysparse.sparse.csc_mat_matrices.csc_mat_INT32_t_INT32_t cimport CSCSparseMatrix_INT32_t_INT32_t, MakeCSCSparseMatrix_INT32_t_INT32_t
 
 from cysparse.sparse.sparse_utils.generic.sort_indices_INT32_t cimport sort_array_INT32_t
 from cysparse.sparse.sparse_utils.generic.print_INT32_t cimport element_to_string_INT32_t, conjugated_element_to_string_INT32_t, empty_to_string_INT32_t
+from cysparse.sparse.sparse_utils.generic.matrix_translations_INT32_t_INT32_t cimport csr_to_csc_kernel_INT32_t_INT32_t, csc_to_csr_kernel_INT32_t_INT32_t
 
 ########################################################################################################################
 # Cython, NumPy import/cimport
@@ -413,6 +414,229 @@ cdef class CSRSparseMatrix_INT32_t_INT32_t(ImmutableSparseMatrix_INT32_t_INT32_t
                         pv[j] = self.val[k_]
 
         return diag
+
+    def tril(self, int k):
+        """
+        Return the lower triangular part of the matrix.
+
+        Args:
+            k: (k<=0) the last diagonal to be included in the lower triangular part.
+
+        Returns:
+            A ``CSRSparseMatrix`` with the lower triangular part.
+
+        Raises:
+            IndexError if the diagonal number is out of bounds.
+
+        """
+        if k > 0:
+            raise IndexError("k-th diagonal must be <= 0 (here: k = %d)" % k)
+
+        if k < -self.nrow + 1:
+            raise IndexError("k_th diagonal must be %d <= k <= 0 (here: k = %d)" % (-self.nrow + 1, k))
+
+        # create internal arrays (big enough to contain all elements)
+
+        cdef INT32_t * ind = <INT32_t *> PyMem_Malloc((self.__nrow + 1) * sizeof(INT32_t))
+        if not ind:
+            raise MemoryError()
+
+        cdef INT32_t * col = <INT32_t *> PyMem_Malloc(self.__nnz * sizeof(INT32_t))
+        if not col:
+            PyMem_Free(ind)
+            raise MemoryError()
+
+        cdef INT32_t * val = <INT32_t *> PyMem_Malloc(self.__nnz * sizeof(INT32_t))
+        if not val:
+            PyMem_Free(ind)
+            PyMem_Free(col)
+            raise MemoryError()
+
+        # populate arrays
+        cdef:
+            INT32_t i, j, k_, nnz
+
+        nnz = 0
+        ind[0] = 0
+
+        for i from 0 <= i < self.__nrow:
+            for k_ from self.ind[i] <= k_ < self.ind[i+1]:
+                j = self.col[k_]
+                v = self.val[k_]
+
+                if i >= j - k:
+                    col[nnz] = j
+                    val[nnz] = v
+                    nnz += 1
+
+            ind[i+1] = nnz
+
+        # resize arrays col and val
+        cdef:
+            void *temp
+
+        temp = <INT32_t *> PyMem_Realloc(col, nnz * sizeof(INT32_t))
+        col = <INT32_t*>temp
+
+        temp = <INT32_t *> PyMem_Realloc(val, nnz * sizeof(INT32_t))
+        val = <INT32_t*>temp
+
+        return MakeCSRSparseMatrix_INT32_t_INT32_t(self.__nrow, self.__ncol, nnz, ind, col, val, is_symmetric=False, store_zeros=self.__store_zeros)
+
+    def triu(self, int k):
+        """
+        Return the upper triangular part of the matrix.
+
+        Args:
+            k: (k>=0) the last diagonal to be included in the upper triangular part.
+
+        Returns:
+            A ``CSRSparseMatrix`` with the upper triangular part.
+
+        Raises:
+            IndexError if the diagonal number is out of bounds.
+
+        """
+        if k < 0:
+            raise IndexError("k-th diagonal must be >= 0 (here: k = %d)" % k)
+
+        if k > self.ncol - 1:
+            raise IndexError("k_th diagonal must be 0 <= k <= %d (here: k = %d)" % (-self.ncol - 1, k))
+
+        # create internal arrays (big enough to contain all elements)
+
+        cdef INT32_t * ind = <INT32_t *> PyMem_Malloc((self.__nrow + 1) * sizeof(INT32_t))
+        if not ind:
+            raise MemoryError()
+
+        cdef INT32_t * col = <INT32_t *> PyMem_Malloc(self.__nnz * sizeof(INT32_t))
+        if not col:
+            PyMem_Free(ind)
+            raise MemoryError()
+
+        cdef INT32_t * val = <INT32_t *> PyMem_Malloc(self.__nnz * sizeof(INT32_t))
+        if not val:
+            PyMem_Free(ind)
+            PyMem_Free(col)
+            raise MemoryError()
+
+        # populate arrays
+        cdef:
+            INT32_t i, j, k_, nnz
+
+        nnz = 0
+        ind[0] = 0
+
+        # Special case: when matrix is symmetric: we first create an internal CSC and then translate it to CSR
+        cdef INT32_t * csc_ind
+        cdef INT32_t * csc_row
+        cdef INT32_t  * csc_val
+
+        if self.__is_symmetric:
+            # Special (and annoying) case: we first create a CSC and then translate it to CSR
+            csc_ind = <INT32_t *> PyMem_Malloc((self.__ncol + 1) * sizeof(INT32_t))
+            if not csc_ind:
+                PyMem_Free(ind)
+                PyMem_Free(col)
+                PyMem_Free(val)
+
+                raise MemoryError()
+
+            csc_row = <INT32_t *> PyMem_Malloc(self.__nnz * sizeof(INT32_t))
+            if not csc_row:
+                PyMem_Free(ind)
+                PyMem_Free(col)
+                PyMem_Free(val)
+
+                PyMem_Free(csc_ind)
+                raise MemoryError()
+
+            csc_val = <INT32_t *> PyMem_Malloc(self.__nnz * sizeof(INT32_t))
+            if not csc_val:
+                PyMem_Free(ind)
+                PyMem_Free(col)
+                PyMem_Free(val)
+
+                PyMem_Free(csc_ind)
+                PyMem_Free(csc_row)
+                raise MemoryError()
+
+            csc_ind[0] = 0
+
+            for i from 0 <= i < self.__nrow:
+                for k_ from self.ind[i] <= k_ < self.ind[i+1]:
+                    j = self.col[k_]
+                    v = self.val[k_]
+
+                    if i >= j + k:
+                        csc_row[nnz] = j
+                        csc_val[nnz] = v
+                        nnz += 1
+
+                csc_ind[i+1] = nnz
+
+            csc_to_csr_kernel_INT32_t_INT32_t(self.__nrow, self.__ncol, nnz,
+                                      csc_ind, csc_row, csc_val,
+                                      ind, col, val)
+
+            # erase temp arrays
+            PyMem_Free(csc_ind)
+            PyMem_Free(csc_row)
+            PyMem_Free(csc_val)
+
+        else:  # not symmetric
+            for i from 0 <= i < self.__nrow:
+                for k_ from self.ind[i] <= k_ < self.ind[i+1]:
+                    j = self.col[k_]
+                    v = self.val[k_]
+
+                    if i <= j - k:
+                        col[nnz] = j
+                        val[nnz] = v
+                        nnz += 1
+
+                ind[i+1] = nnz
+
+        # resize arrays col and val
+        cdef:
+            void *temp
+
+        temp = <INT32_t *> PyMem_Realloc(col, nnz * sizeof(INT32_t))
+        col = <INT32_t*>temp
+
+        temp = <INT32_t *> PyMem_Realloc(val, nnz * sizeof(INT32_t))
+        val = <INT32_t*>temp
+
+        return MakeCSRSparseMatrix_INT32_t_INT32_t(self.__nrow, self.__ncol, nnz, ind, col, val, is_symmetric=False, store_zeros=self.__store_zeros)
+
+    def to_csc(self):
+        """
+        Transform this matrix into a :class:`CSRSparseMatrix`.
+
+        """
+
+        # create CSC internal arrays: ind, row and val
+        cdef INT32_t * ind = <INT32_t *> PyMem_Malloc((self.__ncol + 1) * sizeof(INT32_t))
+        if not ind:
+            raise MemoryError()
+
+        cdef INT32_t * row = <INT32_t *> PyMem_Malloc(self.__nnz * sizeof(INT32_t))
+        if not row:
+            PyMem_Free(ind)
+            raise MemoryError()
+
+        cdef INT32_t * val = <INT32_t *> PyMem_Malloc(self.__nnz * sizeof(INT32_t))
+        if not val:
+            PyMem_Free(ind)
+            PyMem_Free(row)
+            raise MemoryError()
+
+        csr_to_csc_kernel_INT32_t_INT32_t(self.__nrow, self.__ncol, self.__nnz,
+                       <INT32_t *>self.ind, <INT32_t *>self.col, <INT32_t *>self.val,
+                       ind, row, val)
+
+        return MakeCSCSparseMatrix_INT32_t_INT32_t(self.__nrow, self.__ncol, self.__nnz, ind, row, val, is_symmetric=self.is_symmetric, store_zeros=self.store_zeros)
+
 
     def to_ndarray(self):
         """

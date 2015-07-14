@@ -107,8 +107,6 @@ cdef extern from 'math.h':
     long double sqrtl (long double x)
     double log  (double x)
 
-#cdef extern from "stdlib.h":
-#    void *memcpy(void *dst, void *src, long n)
 
 ########################################################################################################################
 # CySparse cimport/import to avoid circular dependencies
@@ -1657,101 +1655,91 @@ cdef class LLSparseMatrix_INT32_t_FLOAT128_t(MutableSparseMatrix_INT32_t_FLOAT12
 
         return diag
 
-    def triu(self, include_diagonal = True):
+    def tril(self, int k):
         """
-        Return the triangular upper matrix as ``LLSparseMatrix``.
+        Return the lower triangular part of the matrix.
+
+        Args:
+            k: (k<=0) the last diagonal to be included in the lower triangular part.
+
+        Returns:
+            A ``LLSparseMatrix`` with the lower triangular part.
+
+        Raises:
+            IndexError if the diagonal number is out of bounds.
 
         """
+        if k > 0:
+            raise IndexError("k-th diagonal must be <= 0 (here: k = %d)" % k)
+
+        if k < -self.nrow + 1:
+            raise IndexError("k_th diagonal must be %d <= k <= 0 (here: k = %d)" % (-self.nrow + 1, k))
+
         cdef:
-            INT32_t i, j, k
+            INT32_t i, j, k_
+            LLSparseMatrix_INT32_t_FLOAT128_t ll_mat_tril
+
+        ll_mat_tril = LLSparseMatrix_INT32_t_FLOAT128_t(control_object=unexposed_value, nrow=self.__nrow, ncol=self.__ncol, size_hint=self.__nnz, store_zeros=self.__store_zeros, is_symmetric=False)
+
+        # NON OPTIMIZED OPERATION
+        # code is same for symmetric or non symmetric cases
+        for i from 0 <= i < self.__nrow:
+            k_ = self.root[i]
+            while k_ != -1:
+                j = self.col[k_]
+                if i >= j - k:
+                    ll_mat_tril.put(i, j, self.val[k_])
+                k_ = self.link[k_]
+
+        return ll_mat_tril
+
+    def triu(self, int k):
+        """
+        Return the upper triangular part of the matrix.
+
+        Args:
+            k: (k>=0) the last diagonal to be included in the upper triangular part.
+
+        Returns:
+            A ``CSCSparseMatrix`` with the upper triangular part.
+
+        Raises:
+            IndexError if the diagonal number is out of bounds.
+
+        """
+        if k < 0:
+            raise IndexError("k-th diagonal must be >= 0 (here: k = %d)" % k)
+
+        if k > self.ncol - 1:
+            raise IndexError("k_th diagonal must be 0 <= k <= %d (here: k = %d)" % (-self.ncol - 1, k))
+
+        cdef:
+            INT32_t i, j, k_
             LLSparseMatrix_INT32_t_FLOAT128_t ll_mat_triu
 
         ll_mat_triu = LLSparseMatrix_INT32_t_FLOAT128_t(control_object=unexposed_value, nrow=self.__nrow, ncol=self.__ncol, size_hint=self.__nnz, store_zeros=self.__store_zeros, is_symmetric=False)
 
         # NON OPTIMIZED OPERATION
-        if include_diagonal:
-            if self.__is_symmetric:
-                for i from 0 <= i < self.__nrow:
-                    k = self.root[i]
-                    while k != -1:
-                        ll_mat_triu.put(self.col[k], i, self.val[k])
-                        k = self.link[k]
-            else:  # non symmetric
-                for i from 0 <= i < self.__nrow:
-                    k = self.root[i]
-                    while k != -1:
-                        j = self.col[k]
-                        if i <= j:
-                            ll_mat_triu.put(i, j, self.val[k])
-                        k = self.link[k]
-        else:  # don't include the main diagonal
-            if self.__is_symmetric:
-                for i from 0 <= i < self.__nrow:
-                    k = self.root[i]
-                    while k != -1:
-                        j = self.col[k]
-                        if i > j:
-                            ll_mat_triu.put(j, i, self.val[k])
-                        k = self.link[k]
-            else:  # non symmetric
-                for i from 0 <= i < self.__nrow:
-                    k = self.root[i]
-                    while k != -1:
-                        j = self.col[k]
-                        if i < j:
-                            ll_mat_triu.put(i, j, self.val[k])
-                        k = self.link[k]
+        if self.__is_symmetric:
+            for i from 0 <= i < self.__nrow:
+                k_ = self.root[i]
+                while k_ != -1:
+                    j = self.col[k_]
+                    if i >= j + k:
+                        ll_mat_triu.put(j, i, self.val[k_])
+                    k_ = self.link[k_]
+
+        else:    # non symmetric case
+
+            for i from 0 <= i < self.__nrow:
+                k_ = self.root[i]
+                while k_ != -1:
+                    j = self.col[k_]
+                    if i <= j - k:
+                        ll_mat_triu.put(i, j, self.val[k_])
+                    k_ = self.link[k_]
 
         return ll_mat_triu
-
-    def tril(self, include_diagonal = True):
-        """
-        Return the triangular lower matrix as ``LLSparseMatrix``.
-
-        """
-        cdef:
-            INT32_t i, j, k
-            LLSparseMatrix_INT32_t_FLOAT128_t ll_mat_triu
-
-        ll_mat_tril = LLSparseMatrix_INT32_t_FLOAT128_t(control_object=unexposed_value, nrow=self.__nrow, ncol=self.__ncol, size_hint=self.__nnz, store_zeros=self.__store_zeros, is_symmetric=False)
-
-        # NON OPTIMIZED OPERATION
-        if include_diagonal:
-            if self.__is_symmetric:
-                for i from 0 <= i < self.__nrow:
-                    k = self.root[i]
-                    while k != -1:
-                        ll_mat_tril.put(i, self.col[k], self.val[k])
-                        k = self.link[k]
-            else:  # non symmetric
-                for i from 0 <= i < self.__nrow:
-                    k = self.root[i]
-                    while k != -1:
-                        j = self.col[k]
-                        if i >= j:
-                            ll_mat_tril.put(i, j, self.val[k])
-                        k = self.link[k]
-        else:  # don't include the main diagonal
-            # code is the same for both cases but I do keep both codes in case later...
-            if self.__is_symmetric:
-                for i from 0 <= i < self.__nrow:
-                    k = self.root[i]
-                    while k != -1:
-                        j = self.col[k]
-                        if i > j:
-                            ll_mat_tril.put(i, j, self.val[k])
-                        k = self.link[k]
-            else:  # non symmetric
-                for i from 0 <= i < self.__nrow:
-                    k = self.root[i]
-                    while k != -1:
-                        j = self.col[k]
-                        if i > j:
-                            ll_mat_tril.put(i, j, self.val[k])
-                        k = self.link[k]
-
-        return ll_mat_tril
-
 
     ####################################################################################################################
     # Addition

@@ -1,10 +1,15 @@
 from cysparse.types.cysparse_types cimport *
 
-assert FLOAT_T == FLOAT64_T, "UMFPACK only deals with double precision (FLOAT64)"
+from cysparse.sparse.ll_mat_matrices.ll_mat_INT32_t_COMPLEX128_t cimport LLSparseMatrix_INT32_t_COMPLEX128_t
+from cysparse.sparse.csr_mat_matrices.csr_mat_INT32_t_COMPLEX128_t cimport CSRSparseMatrix_INT32_t_COMPLEX128_t, MakeCSRSparseMatrix_INT32_t_COMPLEX128_t
+from cysparse.sparse.csc_mat_matrices.csc_mat_INT32_t_COMPLEX128_t cimport CSCSparseMatrix_INT32_t_COMPLEX128_t, MakeCSCSparseMatrix_INT32_t_COMPLEX128_t
 
-from cysparse.sparse.ll_mat cimport LLSparseMatrix
-from cysparse.sparse.csr_mat cimport CSRSparseMatrix, MakeCSRSparseMatrix
-from cysparse.sparse.csc_mat cimport CSCSparseMatrix, MakeCSCSparseMatrix
+
+from cysparse.types.cysparse_generic_types cimport split_array_complex_values_kernel_INT32_t_COMPLEX128_t, join_array_complex_values_kernel_INT32_t_COMPLEX128_t
+
+
+from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
+from cpython cimport Py_INCREF, Py_DECREF
 
 import numpy as np
 cimport numpy as cnp
@@ -16,7 +21,7 @@ cnp.import_array()
 cdef extern from "umfpack.h":
 
     char * UMFPACK_DATE
-    ctypedef long SuiteSparse_long
+    ctypedef long SuiteSparse_long  # This is exactly CySparse's INT64_t
 
     cdef enum:
         UMFPACK_CONTROL, UMFPACK_INFO
@@ -90,71 +95,14 @@ cdef extern from "umfpack.h":
         UMFPACK_Ut
         UMFPACK_Uat
 
-    ####################################################################################################################
-    # DI VERSION:  real double precision, int integers
-    ####################################################################################################################
-    int umfpack_di_symbolic(int n_row, int n_col,
-                            int * Ap, int * Ai, double * Ax,
-                            void ** symbolic,
-                            double * control, double * info)
+    # TODO: Change types for CySparse types? int -> INT32_t, double -> FLOAT64_t etc?
+    #       and keep only **one** declaration?
 
-    int umfpack_di_numeric(int * Ap, int * Ai, double * Ax,
-                           void * symbolic,
-                           void ** numeric,
-                           double * control, double * info)
 
-    void umfpack_di_free_symbolic(void ** symbolic)
-    void umfpack_di_free_numeric(void ** numeric)
-    void umfpack_di_defaults(double * control)
 
-    int umfpack_di_solve(int umfpack_sys, int * Ap, int * Ai, double * Ax, double * x, double * b, void * numeric, double * control, double * info)
 
-    int umfpack_di_get_lunz(int * lnz, int * unz, int * n_row, int * n_col,
-                            int * nz_udiag, void * numeric)
 
-    int umfpack_di_get_numeric(int * Lp, int * Lj, double * Lx,
-                               int * Up, int * Ui, double * Ux,
-                               int * P, int * Q, double * Dx,
-                               int * do_recip, double * Rs,
-                               void * numeric)
 
-    void umfpack_di_report_control(double *)
-    void umfpack_di_report_info(double *, double *)
-    void umfpack_di_report_symbolic(void *, double *)
-    void umfpack_di_report_numeric(void *, double *)
-
-    ####################################################################################################################
-    # DL VERSION:   real double precision, SuiteSparse long integers
-    ####################################################################################################################
-    SuiteSparse_long umfpack_dl_symbolic(SuiteSparse_long n_row, SuiteSparse_long n_col,
-                            SuiteSparse_long * Ap, SuiteSparse_long * Ai, double * Ax,
-                            void ** symbolic,
-                            double * control, double * info)
-
-    SuiteSparse_long umfpack_dl_numeric(SuiteSparse_long * Ap, SuiteSparse_long * Ai, double * Ax,
-                           void * symbolic,
-                           void ** numeric,
-                           double * control, double * info)
-
-    void umfpack_dl_free_symbolic(void ** symbolic)
-    void umfpack_dl_free_numeric(void ** numeric)
-    void umfpack_dl_defaults(double * control)
-
-    SuiteSparse_long umfpack_dl_solve(SuiteSparse_long umfpack_sys, SuiteSparse_long * Ap, SuiteSparse_long * Ai, double * Ax, double * x, double * b, void * numeric, double * control, double * info)
-
-    SuiteSparse_long umfpack_dl_get_lunz(SuiteSparse_long * lnz, SuiteSparse_long * unz, SuiteSparse_long * n_row, SuiteSparse_long * n_col,
-                            SuiteSparse_long * nz_udiag, void * numeric)
-
-    SuiteSparse_long umfpack_dl_get_numeric(SuiteSparse_long * Lp, SuiteSparse_long * Lj, double * Lx,
-                               SuiteSparse_long * Up, SuiteSparse_long * Ui, double * Ux,
-                               SuiteSparse_long * P, SuiteSparse_long * Q, double * Dx,
-                               SuiteSparse_long * do_recip, double * Rs,
-                               void * numeric)
-
-    void umfpack_dl_report_control(double *)
-    void umfpack_dl_report_info(double *, double *)
-    void umfpack_dl_report_symbolic(void *, double *)
-    void umfpack_dl_report_numeric(void *, double *)
 
     ####################################################################################################################
     # ZI VERSION:   complex double precision, int integers
@@ -173,14 +121,18 @@ cdef extern from "umfpack.h":
     void umfpack_zi_free_numeric(void ** numeric)
     void umfpack_zi_defaults(double * control)
 
-    int umfpack_zi_solve(int umfpack_sys, int * Ap, int * Ai, double * Ax,  double * Az, double * x, double * b, void * numeric, double * control, double * info)
+    int umfpack_zi_solve(int umfpack_sys, int * Ap, int * Ai, double * Ax,  double * Az,
+                         double * Xx, double * Xz, double * bx, double * bz, void * numeric, double * control, double * info)
 
     int umfpack_zi_get_lunz(int * lnz, int * unz, int * n_row, int * n_col,
                             int * nz_udiag, void * numeric)
 
-    int umfpack_zi_get_numeric(int * Lp, int * Lj, double * Lx,
-                               int * Up, int * Ui, double * Ux,
-                               int * P, int * Q, double * Dx,
+    int umfpack_zi_get_numeric(int * Lp, int * Lj,
+                               double * Lx, double * Lz,
+                               int * Up, int * Ui,
+                               double * Ux, double * Uz,
+                               int * P, int * Q,
+                               double * Dx, double * Dz,
                                int * do_recip, double * Rs,
                                void * numeric)
 
@@ -189,38 +141,11 @@ cdef extern from "umfpack.h":
     void umfpack_zi_report_symbolic(void *, double *)
     void umfpack_zi_report_numeric(void *, double *)
 
-    ####################################################################################################################
-    # ZL VERSION:   complex double precision, SuiteSparse long integers
-    ####################################################################################################################
-    SuiteSparse_long umfpack_zl_symbolic(SuiteSparse_long n_row, SuiteSparse_long n_col,
-                            SuiteSparse_long * Ap, SuiteSparse_long * Ai, double * Ax, double * Az,
-                            void ** symbolic,
-                            double * control, double * info)
 
-    SuiteSparse_long umfpack_zl_numeric(SuiteSparse_long * Ap, SuiteSparse_long * Ai, double * Ax, double * Az,
-                           void * symbolic,
-                           void ** numeric,
-                           double * control, double * info)
 
-    void umfpack_zl_free_symbolic(void ** symbolic)
-    void umfpack_zl_free_numeric(void ** numeric)
-    void umfpack_zl_defaults(double * control)
 
-    SuiteSparse_long umfpack_zl_solve(SuiteSparse_long umfpack_sys, SuiteSparse_long * Ap, SuiteSparse_long * Ai, double * Ax,  double * Az, double * x, double * b, void * numeric, double * control, double * info)
 
-    SuiteSparse_long umfpack_zl_get_lunz(SuiteSparse_long * lnz, SuiteSparse_long * unz, SuiteSparse_long * n_row, SuiteSparse_long * n_col,
-                            SuiteSparse_long * nz_udiag, void * numeric)
 
-    SuiteSparse_long umfpack_zl_get_numeric(SuiteSparse_long * Lp, SuiteSparse_long * Lj, double * Lx,
-                               SuiteSparse_long * Up, SuiteSparse_long * Ui, double * Ux,
-                               SuiteSparse_long * P, SuiteSparse_long * Q, double * Dx,
-                               SuiteSparse_long * do_recip, double * Rs,
-                               void * numeric)
-
-    void umfpack_zl_report_control(double *)
-    void umfpack_zl_report_info(double *, double *)
-    void umfpack_zl_report_symbolic(void *, double *)
-    void umfpack_zl_report_numeric(void *, double *)
 
 def umfpack_version():
     version_string = "UMFPACK version %s" % UMFPACK_VERSION
@@ -292,11 +217,11 @@ def test_umfpack_result(status, msg, raise_error=True, print_on_screen=True):
             print "%s %s: %s" % (msg, "warning", UMFPACK_ERROR_CODE_DICT[status])
 
 
-cdef class UmfpackSolver:
+cdef class UmfpackSolver_INT32_t_COMPLEX128_t:
     """
     Umfpack Solver from SuiteSparse.
 
-    This version **only** deals with ``LLSparseMatrix`` objects.
+    This version **only** deals with ``LLSparseMatrix_INT32_t_COMPLEX128_t`` objects.
 
     We follow the common use of Umfpack. In particular, we use the same names for the methods of this
     class as their corresponding counter-parts in Umfpack.
@@ -307,41 +232,48 @@ cdef class UmfpackSolver:
                                      UMFPACK_DATE)
 
 
-    def __cinit__(self, LLSparseMatrix A):
+    def __cinit__(self, LLSparseMatrix_INT32_t_COMPLEX128_t A):
         """
-        {{COMPLEX: YES}}
-        {{GENERIC: YES}}
+        Args:
+            A: A :class:`LLSparseMatrix_INT32_t_COMPLEX128_t` object.
+
+        Warning:
+            The solver takes a "snapshot" of the matrix ``A``, i.e. the results given by the solver are only
+            valid for the matrix given. If the matrix ``A`` changes aferwards, the results given by the solver won't
+            reflect this change.
+
         """
         self.A = A
+        Py_INCREF(self.A)  # increase ref to object to avoid the user deleting it explicitly or implicitly
+
         self.nrow = A.nrow
         self.ncol = A.ncol
+
+        self.nnz = self.A.nnz
 
         # test if we can use UMFPACK
         assert self.nrow == self.ncol, "Only square matrices are handled in UMFPACK"
 
 
 
-        self.is_complex = A.is_complex
+        # we keep internally two arrays for the complex numbers: this is required by UMFPACK...
+        self.internal_real_arrays_computed = False
 
-        # fix UMFPACK family: 'di', 'dl', 'zi' or 'zl'
-        if self.is_complex:
-            self.family = 'z'
-        else:
-            self.family = 'd'
+        cdef:
+            FLOAT64_t * rval
+            FLOAT64_t * ival
 
-        if INT_T == INT64_T:
-            self.family += 'l'
-        elif INT_T == INT32_T:
-            self.family += 'i'
-        else:
-            raise TypeError("UMFPACK only works with INT32 or INT64 for matrix indices")
+        rval = <FLOAT64_t *> PyMem_Malloc(self.nnz * sizeof(FLOAT64_t))
+        if not rval:
+            raise MemoryError()
+        self.csc_rval = rval
 
-        # TODO: implement both cases!
-        if INT_T == INT64_T:
-            raise NotImplementedError("UMFPACK library not (yet) interfaced with INT64 (long)")
+        ival = <FLOAT64_t *> PyMem_Malloc(self.nnz * sizeof(FLOAT64_t))
+        if not ival:
+            PyMem_Free(rval)
+            raise MemoryError()
+        self.csc_ival = ival
 
-        if A.is_complex:
-            raise NotImplementedError("Complex version of UMFPACK not (yet) implemented")
 
         self.csc_mat  = self.A.to_csc()
 
@@ -349,39 +281,66 @@ cdef class UmfpackSolver:
         self.numeric_computed = False
 
         # set default parameters for control
-        umfpack_di_defaults(<double *>&self.control)
+        umfpack_zi_defaults(<double *>&self.control)
         self.set_verbosity(3)
+
+
+    cdef create_real_arrays_if_needed(self):
+        """
+        Duplicate the complex ``val`` array of the CSC representation into two real arrays: ``csc_rval`` and ``csc_ival``.
+
+        Note:
+            Results are cached.
+
+        """
+        if not self.internal_real_arrays_computed:
+
+            if self.nnz != self.A.nnz:
+                raise RuntimeError('Initial matrix has changed!')
+
+            split_array_complex_values_kernel_INT32_t_COMPLEX128_t(self.csc_mat.val, self.nnz,
+                                                                       self.csc_rval, self.nnz,
+                                                                       self.csc_ival, self.nnz)
+
+            self.internal_real_arrays_computed = True
+
 
     ####################################################################################################################
     # FREE MEMORY
     ####################################################################################################################
     def __dealloc__(self):
         """
-        {{COMPLEX: YES}}
-        {{GENERIC: YES}}
+        
         """
         self.free()
 
+        Py_DECREF(self.A) # release ref
+
+
+        PyMem_Free(self.csc_rval)
+        PyMem_Free(self.csc_ival)
+
+
     def free_symbolic(self):
         """
-        {{COMPLEX: YES}}
-        {{GENERIC: YES}}
+        Free symbolic object if needed.
+        
         """
         if self.symbolic_computed:
-            umfpack_di_free_symbolic(&self.symbolic)
+            umfpack_zi_free_symbolic(&self.symbolic)
 
     def free_numeric(self):
         """
-        {{COMPLEX: YES}}
-        {{GENERIC: YES}}
+        Free numeric object if needed.
+        
         """
         if self.numeric_computed:
-            umfpack_di_free_numeric(&self.numeric)
+            umfpack_zi_free_numeric(&self.numeric)
 
     def free(self):
         """
-        {{COMPLEX: YES}}
-        {{GENERIC: YES}}
+        Free symbolic and/or numeric objects if needed.
+        
         """
         self.free_numeric()
         self.free_symbolic()
@@ -391,26 +350,27 @@ cdef class UmfpackSolver:
     ####################################################################################################################
     cdef int _create_symbolic(self):
         """
-        {{COMPLEX: NO}}
-        {{GENERIC: NO}}
+        Create the symbolic object.
+
+        Note:
+            Create the object no matter what. See :meth:`create_symbolic` for a conditional creation.
+        
         """
 
         if self.symbolic_computed:
             self.free_symbolic()
 
-        cdef INT_t * ind = <INT_t *> self.csc_mat.ind
-        cdef INT_t * row = <INT_t *> self.csc_mat.row
-        cdef double * val = <double *> self.csc_mat.val
-        cdef double * ival
+        cdef INT32_t * ind = <INT32_t *> self.csc_mat.ind
+        cdef INT32_t * row = <INT32_t *> self.csc_mat.row
+
+
+        # create self.csc_rval and self.csc_ival **if** needed
+        self.create_real_arrays_if_needed()
 
         cdef int status
 
-        if self.is_complex:
-            # TODO: add complex type for CSC
-            #ival = <double *> self.csc_mat.ival
-            status= umfpack_zi_symbolic(self.nrow, self.ncol, ind, row, val, ival, &self.symbolic, self.control, self.info)
-        else:
-            status= umfpack_di_symbolic(self.nrow, self.ncol, ind, row, val, &self.symbolic, self.control, self.info)
+
+        status= umfpack_zi_symbolic(self.nrow, self.ncol, ind, row, self.csc_rval, self.csc_ival, &self.symbolic, self.control, self.info)
 
         self.symbolic_computed = True
 
@@ -419,8 +379,11 @@ cdef class UmfpackSolver:
 
     def create_symbolic(self, recompute=False):
         """
-        {{COMPLEX: NO}}
-        {{GENERIC: NO}}
+        Create the symbolic object if it is not already in cache (or if ``recompute`` is set to ``True``).
+
+        Args:
+            recompute: If ``True`` forces the (re)computation of the object.
+        
         """
         if not recompute and self.symbolic_computed:
             return
@@ -433,21 +396,31 @@ cdef class UmfpackSolver:
 
     cdef int _create_numeric(self):
         """
-        {{COMPLEX: NO}}
-        {{GENERIC: NO}}
+        Create the numeric object.
+
+        Note:
+            Create the object no matter what. See :meth:`create_numeric` for a conditional creation.
+        
         """
 
         if self.numeric_computed:
             self.free_numeric()
 
-        cdef int * ind = <int *> self.csc_mat.ind
-        cdef int * row = <int *> self.csc_mat.row
-        cdef double * val = <double *> self.csc_mat.val
+        cdef INT32_t * ind = <INT32_t *> self.csc_mat.ind
+        cdef INT32_t * row = <INT32_t *> self.csc_mat.row
 
-        cdef int status =  umfpack_di_numeric(ind, row, val,
+
+        # create self.csc_rval and self.csc_ival **if** needed
+        self.create_real_arrays_if_needed()
+
+
+
+        cdef INT32_t status =  umfpack_zi_numeric(ind, row,
+                           self.csc_rval, self.csc_ival,
                            self.symbolic,
                            &self.numeric,
                            self.control, self.info)
+
 
         self.numeric_computed = True
 
@@ -455,12 +428,17 @@ cdef class UmfpackSolver:
 
     def create_numeric(self, recompute=False):
         """
-        {{COMPLEX: NO}}
-        {{GENERIC: NO}}
+        Create the numeric object if it is not already in cache (or if ``recompute`` is set to ``True``).
+
+        Args:
+            recompute: If ``True`` forces the (re)computation of the object.
+        
         """
 
         if not recompute and self.numeric_computed:
             return
+
+        self.create_symbolic(recompute=recompute)
 
         cdef int status = self._create_numeric()
 
@@ -469,7 +447,7 @@ cdef class UmfpackSolver:
             test_umfpack_result(status, "create_numeric()")
 
 
-    def solve(self, cnp.ndarray[cnp.double_t, ndim=1, mode="c"] b, umfpack_sys='UMFPACK_A', irsteps=2):
+    def solve(self, cnp.ndarray[cnp.npy_complex128, ndim=1, mode="c"] b, umfpack_sys='UMFPACK_A', irsteps=2):
         """
         Solve the linear system  ``A x = b``.
 
@@ -514,8 +492,8 @@ cdef class UmfpackSolver:
 
             You can ask for a report of what happened by calling :meth:`report_info()`.
 
-        {{COMPLEX: NO}}
-        {{GENERIC: NO}}
+        
+        
         """
         #TODO: add other umfpack_sys arguments to the docstring.
         # test argument b
@@ -535,16 +513,79 @@ cdef class UmfpackSolver:
         self.create_symbolic()
         self.create_numeric()
 
-        cdef cnp.ndarray[cnp.double_t, ndim=1, mode='c'] sol = np.empty(self.ncol, dtype=np.double)
+        cdef cnp.ndarray[cnp.npy_complex128, ndim=1, mode='c'] sol = np.empty(self.ncol, dtype=np.complex128)
 
-        cdef int * ind = <int *> self.csc_mat.ind
-        cdef int * row = <int *> self.csc_mat.row
-        cdef double * val = <double *> self.csc_mat.val
+        cdef INT32_t * ind = <INT32_t *> self.csc_mat.ind
+        cdef INT32_t * row = <INT32_t *> self.csc_mat.row
 
-        cdef int status =  umfpack_di_solve(UMFPACK_SYS_DICT[umfpack_sys], ind, row, val, <double*> cnp.PyArray_DATA(sol), <double *> cnp.PyArray_DATA(b), self.numeric, self.control, self.info)
+
+        # create self.csc_rval and self.csc_ival **if** needed
+        self.create_real_arrays_if_needed()
+
+        # access b
+        cdef COMPLEX128_t * b_data = <COMPLEX128_t *> cnp.PyArray_DATA(b)
+
+        # create bx and bz
+        cdef:
+            FLOAT64_t * bx
+            FLOAT64_t * bz
+
+        bx = <FLOAT64_t *> PyMem_Malloc(dim_b * sizeof(FLOAT64_t))
+        if not bx:
+            raise MemoryError()
+
+        bz = <FLOAT64_t *> PyMem_Malloc(dim_b * sizeof(FLOAT64_t))
+
+        if not bz:
+            PyMem_Free(bx)
+            raise MemoryError()
+
+        split_array_complex_values_kernel_INT32_t_COMPLEX128_t(b_data, dim_b,
+                                                         bx, dim_b,
+                                                         bz, dim_b)
+
+        # create solx and solz
+        cdef:
+            FLOAT64_t * solx
+            FLOAT64_t * solz
+
+        solx = <FLOAT64_t *> PyMem_Malloc(self.ncol * sizeof(FLOAT64_t))
+        if not solx:
+            PyMem_Free(bx)
+            PyMem_Free(bz)
+
+            raise MemoryError()
+
+        solz = <FLOAT64_t *> PyMem_Malloc(self.ncol * sizeof(FLOAT64_t))
+
+        if not solz:
+            PyMem_Free(bx)
+            PyMem_Free(bz)
+
+            PyMem_Free(solx)
+            raise MemoryError()
+
+
+
+        cdef int status =  umfpack_zi_solve(UMFPACK_SYS_DICT[umfpack_sys], ind, row, self.csc_rval, self.csc_ival, solx, solz, bx, bz, self.numeric, self.control, self.info)
 
         if status != UMFPACK_OK:
             test_umfpack_result(status, "solve()")
+
+
+        # join solx and solz
+        cdef COMPLEX128_t * sol_data = <COMPLEX128_t *> cnp.PyArray_DATA(sol)
+
+        join_array_complex_values_kernel_INT32_t_COMPLEX128_t(solx, self.ncol,
+                                                        solz, self.ncol,
+                                                        sol_data, self.ncol)
+
+        # Free temp arrays
+        PyMem_Free(bx)
+        PyMem_Free(bz)
+        PyMem_Free(solx)
+        PyMem_Free(solz)
+
 
         return sol
 
@@ -570,19 +611,19 @@ cdef class UmfpackSolver:
         Raises:
             RuntimeError: When ``UMFPACK`` return status is not ``UMFPACK_OK`` and is an error.
 
-        {{COMPLEX: NO}}
-        {{GENERIC: NO}}
+        
+        
         """
         self.create_numeric()
 
         cdef:
-            int lnz
-            int unz
-            int n_row
-            int n_col
-            int nz_udiag
+            INT32_t lnz
+            INT32_t unz
+            INT32_t n_row
+            INT32_t n_col
+            INT32_t nz_udiag
 
-        cdef status = umfpack_di_get_lunz(&lnz, &unz, &n_row, &n_col, &nz_udiag, self.numeric)
+        cdef status = umfpack_zi_get_lunz(&lnz, &unz, &n_row, &n_col, &nz_udiag, self.numeric)
 
         if status != UMFPACK_OK:
             test_umfpack_result(status, "get_lunz()")
@@ -613,8 +654,8 @@ cdef class UmfpackSolver:
             P, Q and R are returned as NumPy arrays.
 
 
-        {{COMPLEX: NO}}
-        {{GENERIC: NO}}
+        
+        
         """
         # TODO: use properties?? we can only get matrices, not set them...
         # TODO: implement the use of L=True, U=True, P=True, Q=True, D=True, R=True
@@ -622,41 +663,95 @@ cdef class UmfpackSolver:
         self.create_numeric()
 
         cdef:
-            int lnz
-            int unz
-            int n_row
-            int n_col
-            int nz_udiag
+            INT32_t lnz
+            INT32_t unz
+            INT32_t n_row
+            INT32_t n_col
+            INT32_t nz_udiag
 
-            int _do_recip
+            INT32_t _do_recip
 
         (lnz, unz, n_row, n_col, nz_udiag) = self.get_lunz()
 
         # L CSR matrix
-        cdef int * Lp = <int *> PyMem_Malloc((n_row + 1) * sizeof(int))
+        cdef INT32_t * Lp = <INT32_t *> PyMem_Malloc((n_row + 1) * sizeof(INT32_t))
         if not Lp:
             raise MemoryError()
 
-        cdef int * Lj = <int *> PyMem_Malloc(lnz * sizeof(int))
+        cdef INT32_t * Lj = <INT32_t *> PyMem_Malloc(lnz * sizeof(INT32_t))
         if not Lj:
+            PyMem_Free(Lp)
             raise MemoryError()
 
-        cdef double * Lx = <double *> PyMem_Malloc(lnz * sizeof(double))
+
+        cdef FLOAT64_t * Lx = <FLOAT64_t *> PyMem_Malloc(lnz * sizeof(FLOAT64_t))
         if not Lx:
+            PyMem_Free(Lp)
+            PyMem_Free(Lj)
+
             raise MemoryError()
+
+        cdef FLOAT64_t * Lz = <FLOAT64_t *> PyMem_Malloc(lnz * sizeof(FLOAT64_t))
+        if not Lz:
+            PyMem_Free(Lp)
+            PyMem_Free(Lj)
+
+            PyMem_Free(Lx)
+
+            raise MemoryError()
+
 
         # U CSC matrix
-        cdef int * Up = <int *> PyMem_Malloc((n_col + 1) * sizeof(int))
+        cdef INT32_t * Up = <INT32_t *> PyMem_Malloc((n_col + 1) * sizeof(INT32_t))
         if not Up:
+            PyMem_Free(Lp)
+            PyMem_Free(Lj)
+
+            PyMem_Free(Lx)
+
+            PyMem_Free(Lz)
+
             raise MemoryError()
 
-        cdef int * Ui = <int *> PyMem_Malloc(unz * sizeof(int))
+        cdef INT32_t * Ui = <INT32_t *> PyMem_Malloc(unz * sizeof(INT32_t))
         if not Ui:
+            PyMem_Free(Lp)
+            PyMem_Free(Lj)
+
+            PyMem_Free(Lx)
+
+            PyMem_Free(Lz)
+
+            PyMem_Free(Up)
+
             raise MemoryError()
 
-        cdef double * Ux = <double *> PyMem_Malloc(unz * sizeof(double))
+
+        cdef FLOAT64_t * Ux = <FLOAT64_t *> PyMem_Malloc(unz * sizeof(FLOAT64_t))
         if not Ux:
+            PyMem_Free(Lp)
+            PyMem_Free(Lj)
+
+            PyMem_Free(Lx)
+            PyMem_Free(Lz)
+
+            PyMem_Free(Ui)
+
             raise MemoryError()
+
+        cdef FLOAT64_t * Uz = <FLOAT64_t *> PyMem_Malloc(unz * sizeof(FLOAT64_t))
+        if not Uz:
+            PyMem_Free(Lp)
+            PyMem_Free(Lj)
+
+            PyMem_Free(Lx)
+            PyMem_Free(Lz)
+
+            PyMem_Free(Ui)
+            PyMem_Free(Ux)
+
+            raise MemoryError()
+
 
         # TODO: see what type of int exactly to pass
         cdef cnp.npy_intp *dims_n_row = [n_row]
@@ -664,40 +759,130 @@ cdef class UmfpackSolver:
 
         cdef cnp.npy_intp *dims_min = [min(n_row, n_col)]
 
-        #cdef cnp.ndarray[cnp.int_t, ndim=1, mode='c'] P
-        cdef cnp.ndarray[int, ndim=1, mode='c'] P
+        cdef INT32_t dim_D = min(n_row, n_col)
 
+        #cdef cnp.ndarray[cnp.int_t, ndim=1, mode='c'] P
+        #cdef cnp.ndarray[int, ndim=1, mode='c'] P
+        cdef cnp.ndarray[cnp.npy_int32, ndim=1, mode='c'] P
+
+
+        #P = cnp.PyArray_EMPTY(1, dims_n_row, cnp.NPY_INT32, 0)
         P = cnp.PyArray_EMPTY(1, dims_n_row, cnp.NPY_INT32, 0)
 
+
         #cdef cnp.ndarray[cnp.int_t, ndim=1, mode='c'] Q
-        cdef cnp.ndarray[int, ndim=1, mode='c'] Q
+        #cdef cnp.ndarray[int, ndim=1, mode='c'] Q
+        cdef cnp.ndarray[cnp.npy_int32, ndim=1, mode='c'] Q
+
+        #Q = cnp.PyArray_EMPTY(1, dims_n_col, cnp.NPY_INT32, 0)
         Q = cnp.PyArray_EMPTY(1, dims_n_col, cnp.NPY_INT32, 0)
+
 
         cdef cnp.ndarray[cnp.double_t, ndim=1, mode='c'] D
         D = cnp.PyArray_EMPTY(1, dims_min, cnp.NPY_DOUBLE, 0)
+
+
+        # create Dx and Dz
+        cdef:
+            FLOAT64_t * Dx
+            FLOAT64_t * Dz
+
+        Dx = <FLOAT64_t *> PyMem_Malloc(dim_D * sizeof(FLOAT64_t))
+        if not Dx:
+            PyMem_Free(Lp)
+            PyMem_Free(Lj)
+
+            PyMem_Free(Lx)
+            PyMem_Free(Lz)
+
+            PyMem_Free(Ui)
+            PyMem_Free(Ux)
+
+            raise MemoryError()
+
+        Dz = <FLOAT64_t *> PyMem_Malloc(dim_D * sizeof(FLOAT64_t))
+
+        if not Dz:
+            PyMem_Free(Lp)
+            PyMem_Free(Lj)
+
+            PyMem_Free(Lx)
+            PyMem_Free(Lz)
+
+            PyMem_Free(Ui)
+            PyMem_Free(Ux)
+
+            PyMem_Free(Dx)
+            raise MemoryError()
+
 
         cdef cnp.ndarray[cnp.double_t, ndim=1, mode='c'] R
         R = cnp.PyArray_EMPTY(1, dims_n_row, cnp.NPY_DOUBLE, 0)
 
 
-
-        cdef int status =umfpack_di_get_numeric(Lp, Lj, Lx,
-                               Up, Ui, Ux,
-                               <int *> cnp.PyArray_DATA(P), <int *> cnp.PyArray_DATA(Q), <double *> cnp.PyArray_DATA(D),
+        cdef int status =umfpack_zi_get_numeric(Lp, Lj, Lx, Lz,
+                               Up, Ui, Ux,Uz,
+                               <INT32_t *> cnp.PyArray_DATA(P), <INT32_t *> cnp.PyArray_DATA(Q), Dx, Dz,
                                &_do_recip, <double *> cnp.PyArray_DATA(R),
                                self.numeric)
+
+
 
         if status != UMFPACK_OK:
             test_umfpack_result(status, "get_LU()")
 
         cdef bint do_recip = _do_recip
 
-        cdef CSRSparseMatrix L
-        cdef CSCSparseMatrix U
+        cdef CSRSparseMatrix_INT32_t_COMPLEX128_t L
+        cdef CSCSparseMatrix_INT32_t_COMPLEX128_t U
 
-        cdef int size = min(n_row,n_col)
-        L = MakeCSRSparseMatrix(nrow=size, ncol=size, nnz=lnz, ind=Lp, col=Lj, val=Lx)
-        U = MakeCSCSparseMatrix(nrow=size, ncol=size, nnz=unz, ind=Up, row=Ui, val=Ux)
+        cdef INT32_t size = min(n_row,n_col)
+
+
+        cdef COMPLEX128_t * Lx_complex = <COMPLEX128_t *> PyMem_Malloc(lnz * sizeof(COMPLEX128_t))
+        if not Lx_complex:
+            PyMem_Free(Lp)
+            PyMem_Free(Lj)
+
+            PyMem_Free(Lx)
+            PyMem_Free(Lz)
+
+            PyMem_Free(Ui)
+            PyMem_Free(Ux)
+
+            PyMem_Free(Dx)
+            PyMem_Free(Dz)
+
+            raise MemoryError()
+
+        join_array_complex_values_kernel_INT32_t_COMPLEX128_t(Lx, lnz,
+                                                        Lz, lnz,
+                                                        Lx_complex, lnz)
+
+        cdef COMPLEX128_t * Ux_complex = <COMPLEX128_t *> PyMem_Malloc(unz * sizeof(COMPLEX128_t))
+        if not Ux_complex:
+            PyMem_Free(Lp)
+            PyMem_Free(Lj)
+
+            PyMem_Free(Lx)
+            PyMem_Free(Lz)
+
+            PyMem_Free(Ui)
+            PyMem_Free(Ux)
+
+            PyMem_Free(Dx)
+            PyMem_Free(Dz)
+
+            PyMem_Free(Lx_complex)
+            
+            raise MemoryError()
+
+        join_array_complex_values_kernel_INT32_t_COMPLEX128_t(Ux, unz,
+                                                        Uz, unz,
+                                                        Ux_complex, unz)
+
+        L = MakeCSRSparseMatrix_INT32_t_COMPLEX128_t(nrow=size, ncol=size, nnz=lnz, ind=Lp, col=Lj, val=Lx_complex, is_symmetric=False, store_zeros=False)
+        U = MakeCSCSparseMatrix_INT32_t_COMPLEX128_t(nrow=size, ncol=size, nnz=unz, ind=Up, row=Ui, val=Ux_complex, is_symmetric=False, store_zeros=False)
 
         return (L, U, P, Q, D, do_recip, R)
 
@@ -712,8 +897,8 @@ cdef class UmfpackSolver:
             level (int): Verbosity level (default: 1).
 
 
-        {{COMPLEX: YES}}
-        {{GENERIC: YES}}
+        
+        
         """
         self.control[UMFPACK_PRL] = level
 
@@ -724,8 +909,8 @@ cdef class UmfpackSolver:
         Returns:
             verbosity_level (int): The verbosity level set.
 
-        {{COMPLEX: YES}}
-        {{GENERIC: YES}}
+        
+        
         """
         return self.control[UMFPACK_PRL]
 
@@ -733,19 +918,11 @@ cdef class UmfpackSolver:
         """
         Print control values.
 
-        {{COMPLEX: YES}}
-        {{GENERIC: YES}}
+        
+        
         """
-        if self.is_complex:
-            if INT_T == INT64_T:
-                umfpack_zl_report_control(self.control)
-            else:
-                umfpack_zi_report_control(self.control)
-        else:
-            if INT_T == INT64_T:
-                umfpack_dl_report_control(self.control)
-            else:
-                umfpack_di_report_control(self.control)
+        umfpack_zi_report_control(self.control)
+
 
     def report_info(self):
         """
@@ -753,57 +930,31 @@ cdef class UmfpackSolver:
 
         Use **after** calling :meth:`create_symbolic()`, :meth:`create_numeric()`, :meth:`factorize()` or :meth:`solve()`.
 
-        {{COMPLEX: YES}}
-        {{GENERIC: YES}}
+        
+        
         """
-        if self.is_complex:
-            if INT_T == INT64_T:
-                umfpack_zl_report_info(self.control, self.info)
-            else:
-                umfpack_zi_report_info(self.control, self.info)
-        else:
-            if INT_T == INT64_T:
-                umfpack_dl_report_info(self.control, self.info)
-            else:
-                umfpack_di_report_info(self.control, self.info)
+        umfpack_zi_report_info(self.control, self.info)
+
 
     def report_symbolic(self):
         """
         Print information about the opaque ``symbolic`` object.
 
-        {{COMPLEX: YES}}
-        {{GENERIC: YES}}
+        
+        
         """
         if not self.symbolic_computed:
             print "No opaque symbolic object has been computed"
             return
 
-        if self.is_complex:
-            if INT_T == INT64_T:
-                umfpack_zl_report_symbolic(self.symbolic, self.control)
-            else:
-                umfpack_zi_report_symbolic(self.symbolic, self.control)
-        else:
-            if INT_T == INT64_T:
-                umfpack_dl_report_symbolic(self.symbolic, self.control)
-            else:
-                umfpack_di_report_symbolic(self.symbolic, self.control)
+        umfpack_zi_report_symbolic(self.symbolic, self.control)
+
 
     def report_numeric(self):
         """
         Print information about the opaque ``numeric`` object.
 
-        {{COMPLEX: YES}}
-        {{GENERIC: YES}}
+        
+        
         """
-        if self.is_complex:
-            if INT_T == INT64_T:
-                umfpack_zl_report_numeric(self.numeric, self.control)
-            else:
-                umfpack_zi_report_numeric(self.numeric, self.control)
-        else:
-            if INT_T == INT64_T:
-                umfpack_dl_report_numeric(self.numeric, self.control)
-            else:
-                umfpack_di_report_numeric(self.numeric, self.control)
-
+        umfpack_zi_report_numeric(self.numeric, self.control)
