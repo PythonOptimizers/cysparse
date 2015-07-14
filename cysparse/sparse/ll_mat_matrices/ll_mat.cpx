@@ -1694,7 +1694,7 @@ YOU HAVE TO DEFINE OR CAST YOUR NEW UNRECOGNIZED TYPE
 
     def find(self):
         """
-        Return 3 NumPy arrays with the non-zero matrix entries: i-rows, j-cols, vals.
+        Return 3 NumPy arrays (copy) with the non-zero matrix entries: i-rows, j-cols, vals.
         """
         cdef cnp.npy_intp dmat[1]
         dmat[0] = <cnp.npy_intp> self.__nnz
