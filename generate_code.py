@@ -604,20 +604,20 @@ CSC_SPARSE_MATRIX_HELPERS_INCLUDE_FILES = glob.glob(os.path.join(CSC_SPARSE_MATR
 ##########################################
 
 #################################################################################################
-# SOLVERS
+# LINALG
 #################################################################################################
-SOLVERS_TEMPLATE_DIR = os.path.join(PATH, 'cysparse', 'solvers')
+LINALG_TEMPLATE_DIR = os.path.join(PATH, 'cysparse', 'solvers')
 
 ##########################################
 ### SuiteSparse
 ##########################################
-SOLVERS_SUITESPARSE_TEMPLATE_DIR = os.path.join(SOLVERS_TEMPLATE_DIR, 'suitesparse')
+LINALG_SUITESPARSE_TEMPLATE_DIR = os.path.join(LINALG_TEMPLATE_DIR, 'suitesparse')
 
 # UMFPACK
-SOLVERS_SUITESPARSE_UMFPACK_TEMPLATE_DIR = os.path.join(SOLVERS_SUITESPARSE_TEMPLATE_DIR, 'umfpack')
+LINALG_SUITESPARSE_UMFPACK_TEMPLATE_DIR = os.path.join(LINALG_SUITESPARSE_TEMPLATE_DIR, 'umfpack')
 
-SOLVERS_SUITESPARSE_UMFPACK_DECLARATION_FILES = glob.glob(os.path.join(SOLVERS_SUITESPARSE_UMFPACK_TEMPLATE_DIR, '*.cpd'))
-SOLVERS_SUITESPARSE_UMFPACK_DEFINITION_FILES = glob.glob(os.path.join(SOLVERS_SUITESPARSE_UMFPACK_TEMPLATE_DIR, '*.cpx'))
+LINALG_SUITESPARSE_UMFPACK_DECLARATION_FILES = glob.glob(os.path.join(LINALG_SUITESPARSE_UMFPACK_TEMPLATE_DIR, '*.cpd'))
+LINALG_SUITESPARSE_UMFPACK_DEFINITION_FILES = glob.glob(os.path.join(LINALG_SUITESPARSE_UMFPACK_TEMPLATE_DIR, '*.cpx'))
 
 #################################################################################################
 # TESTS
@@ -734,6 +734,7 @@ if __name__ == "__main__":
             clean_cython_files(logger, LL_SPARSE_MATRIX_KERNEL_TEMPLATE_DIR)
             # LLSparseMatrix helpers
             clean_cython_files(logger, LL_SPARSE_MATRIX_HELPERS_TEMPLATE_DIR)
+
             # LLSparseMatrix IO
             clean_cython_files(logger, LL_SPARSE_MATRIX_IO_TEMPLATE_DIR)
             # LLSparseMatrix constructors
@@ -872,14 +873,14 @@ if __name__ == "__main__":
 
         if arg_options.clean:
             # Umfpack
-            clean_cython_files(logger, SOLVERS_SUITESPARSE_UMFPACK_TEMPLATE_DIR)
+            clean_cython_files(logger, LINALG_SUITESPARSE_UMFPACK_TEMPLATE_DIR)
         else:
             ###############################
             # SuiteSparse
             ###############################
             # Umfpack
-            generate_following_type_and_index(logger, SOLVERS_SUITESPARSE_UMFPACK_DECLARATION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, UMFPACK_ELEMENT_TYPES, UMFPACK_INDEX_TYPES, '.pxd')
-            generate_following_type_and_index(logger, SOLVERS_SUITESPARSE_UMFPACK_DEFINITION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, UMFPACK_ELEMENT_TYPES, UMFPACK_INDEX_TYPES, '.pyx')
+            generate_following_type_and_index(logger, LINALG_SUITESPARSE_UMFPACK_DECLARATION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, UMFPACK_ELEMENT_TYPES, UMFPACK_INDEX_TYPES, '.pxd')
+            generate_following_type_and_index(logger, LINALG_SUITESPARSE_UMFPACK_DEFINITION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, UMFPACK_ELEMENT_TYPES, UMFPACK_INDEX_TYPES, '.pyx')
 
     if arg_options.tests or arg_options.all:
         action = True

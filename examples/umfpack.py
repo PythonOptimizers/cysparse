@@ -64,16 +64,19 @@ lhs = L * U
 
 print lhs
 
-P_mat = NewBandLLSparseMatrix(diag_coeff=[0], numpy_arrays=[P], size=3, dtype=types.INT64_T)
+P_new = P.astype(np.float64)
+
+P_mat = NewBandLLSparseMatrix(diag_coeff=[0], numpy_arrays=[P_new], size=3, dtype=types.FLOAT64_T, itype=types.INT64_T)
 print P_mat
 
-Q_mat = NewBandLLSparseMatrix(diag_coeff=[0], numpy_arrays=[Q], size=3, dtype=types.INT64_T)
+Q_new = Q.astype(np.float64)
+Q_mat = NewBandLLSparseMatrix(diag_coeff=[0], numpy_arrays=[Q_new], size=3, dtype=types.FLOAT64_T, itype=types.INT64_T)
 print Q_mat
 
 if do_recip:
-    R_mat = NewBandLLSparseMatrix(diag_coeff=[0], numpy_arrays=[R], size=3, dtype=types.FLOAT64_T)
+    R_mat = NewBandLLSparseMatrix(diag_coeff=[0], numpy_arrays=[R], size=3, dtype=types.FLOAT64_T, itype=types.INT64_T)
 else:
-    R_mat = NewLLSparseMatrix(size=3, dtype=types.FLOAT64_t)
+    R_mat = NewLLSparseMatrix(size=3, dtype=types.FLOAT64_t, itype=types.INT64_T)
     for i in xrange(3):
         R_mat[i, i] = 1/R[i]
 print R_mat
@@ -81,5 +84,6 @@ print R_mat
 print "T" * 80
 print "lhs = "
 print lhs
-rhs = P_mat * R_mat *  A *  Q_mat
+rhs = P_mat * R_mat * A * Q_mat
+print "rhs = "
 print rhs

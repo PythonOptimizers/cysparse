@@ -11,6 +11,7 @@ from cysparse.sparse.ll_mat cimport LL_MAT_INCREASE_FACTOR
 from cysparse.sparse.s_mat cimport unexposed_value, PySparseMatrix_Check
 from cysparse.types.cysparse_numpy_types import are_mixed_types_compatible, cysparse_to_numpy_type
 from cysparse.sparse.ll_mat cimport PyLLSparseMatrix_Check, LL_MAT_PPRINT_COL_THRESH, LL_MAT_PPRINT_ROW_THRESH
+
 from cysparse.sparse.s_mat_matrices.s_mat_INT32_t_COMPLEX256_t cimport MutableSparseMatrix_INT32_t_COMPLEX256_t
 from cysparse.sparse.ll_mat_matrices.ll_mat_INT32_t_COMPLEX256_t cimport LLSparseMatrix_INT32_t_COMPLEX256_t
 from cysparse.sparse.ll_mat_views.ll_mat_view_INT32_t_COMPLEX256_t cimport LLSparseMatrixView_INT32_t_COMPLEX256_t
@@ -31,6 +32,7 @@ include "ll_mat_kernel/ll_mat_assignment_kernel_INT32_t_COMPLEX256_t.pxi"
 include "ll_mat_kernel/ll_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX256_t.pxi"
 include "ll_mat_helpers/ll_mat_multiplication_INT32_t_COMPLEX256_t.pxi"
 include "ll_mat_helpers/ll_mat_addition_INT32_t_COMPLEX256_t.pxi"
+
 
 
 ########################################################################################################################
@@ -1878,15 +1880,6 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX256_t(MutableSparseMatrix_INT32_t_COMPL
         assert are_mixed_types_compatible(COMPLEX256_T, b.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(COMPLEX256_T)
         return multiply_ll_mat_with_numpy_vector_INT32_t_COMPLEX256_t(self, b)
 
-    def matvec2(self, b):
-        """
-        Return :math:`A * b`.
-
-        Test with memoryviews.
-        """
-        # TODO: remove or adapt code
-        return multiply_ll_mat_with_numpy_vector2_INT32_t_COMPLEX256_t(self, b)
-
     def matvec_transp(self, b):
         """
         Return :math:`A^t * b`.
@@ -1921,6 +1914,7 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX256_t(MutableSparseMatrix_INT32_t_COMPL
         # CASES
         if PyLLSparseMatrix_Check(B):
             return multiply_two_ll_mat_INT32_t_COMPLEX256_t(self, B)
+
         elif cnp.PyArray_Check(B):
             # test type
             assert are_mixed_types_compatible(COMPLEX256_T, B.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(COMPLEX256_T)
