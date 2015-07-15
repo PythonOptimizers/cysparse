@@ -62,6 +62,9 @@ print "6" * 80
 
 lhs = L * U
 
+print "test L*U"
+print L.to_ndarray() * U.to_ndarray()
+
 print lhs
 
 P_new = P.astype(np.float64)
