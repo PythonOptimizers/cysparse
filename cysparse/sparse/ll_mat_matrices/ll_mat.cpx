@@ -888,7 +888,9 @@ YOU HAVE TO DEFINE OR CAST YOUR NEW UNRECOGNIZED COMPLEX TYPE
             elif cnp.PyArray_Check(obj):
                 for i from 0 <= i < nrow:
                     for j from 0 <= j < ncol:
-                        self.put(row_indices[i], col_indices[j], <@type@> obj[tuple(i, j)])
+                        # TODO: check this...
+                        #self.put(row_indices[i], col_indices[j], <@type@> obj[tuple(i, j)])
+                        self.put(row_indices[i], col_indices[j], <@type@> obj[i, j])
 
             elif is_python_number(obj):
                 for i from 0 <= i < nrow:

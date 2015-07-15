@@ -58,3 +58,8 @@ print D
 print do_recip
 print R
 
+print "6" * 80
+
+lhs = L * U
+
+print lhs

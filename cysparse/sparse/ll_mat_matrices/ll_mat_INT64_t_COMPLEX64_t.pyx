@@ -876,7 +876,9 @@ cdef class LLSparseMatrix_INT64_t_COMPLEX64_t(MutableSparseMatrix_INT64_t_COMPLE
             elif cnp.PyArray_Check(obj):
                 for i from 0 <= i < nrow:
                     for j from 0 <= j < ncol:
-                        self.put(row_indices[i], col_indices[j], <COMPLEX64_t> obj[tuple(i, j)])
+                        # TODO: check this...
+                        #self.put(row_indices[i], col_indices[j], <COMPLEX64_t> obj[tuple(i, j)])
+                        self.put(row_indices[i], col_indices[j], <COMPLEX64_t> obj[i, j])
 
             elif is_python_number(obj):
                 for i from 0 <= i < nrow:
@@ -1624,7 +1626,7 @@ cdef class LLSparseMatrix_INT64_t_COMPLEX64_t(MutableSparseMatrix_INT64_t_COMPLE
 
     def find(self):
         """
-        Return 3 NumPy arrays with the non-zero matrix entries: i-rows, j-cols, vals.
+        Return 3 NumPy arrays (copy) with the non-zero matrix entries: i-rows, j-cols, vals.
         """
         cdef cnp.npy_intp dmat[1]
         dmat[0] = <cnp.npy_intp> self.__nnz
