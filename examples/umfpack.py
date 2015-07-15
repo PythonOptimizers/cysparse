@@ -58,14 +58,21 @@ print D
 print do_recip
 print R
 
-print "6" * 80
+print "=" * 80
+
+print L
+print L.to_ndarray()
+
+print U
+print U.to_ndarray()
 
 lhs = L * U
 
 print "test L*U"
+print lhs
 print L.to_ndarray() * U.to_ndarray()
 
-print lhs
+sys.exit(-1)
 
 P_new = P.astype(np.float64)
 
