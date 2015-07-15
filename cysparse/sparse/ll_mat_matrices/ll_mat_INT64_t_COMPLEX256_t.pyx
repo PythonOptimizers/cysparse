@@ -1878,15 +1878,6 @@ cdef class LLSparseMatrix_INT64_t_COMPLEX256_t(MutableSparseMatrix_INT64_t_COMPL
         assert are_mixed_types_compatible(COMPLEX256_T, b.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(COMPLEX256_T)
         return multiply_ll_mat_with_numpy_vector_INT64_t_COMPLEX256_t(self, b)
 
-    def matvec2(self, b):
-        """
-        Return :math:`A * b`.
-
-        Test with memoryviews.
-        """
-        # TODO: remove or adapt code
-        return multiply_ll_mat_with_numpy_vector2_INT64_t_COMPLEX256_t(self, b)
-
     def matvec_transp(self, b):
         """
         Return :math:`A^t * b`.

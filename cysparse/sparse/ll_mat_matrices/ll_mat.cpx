@@ -1952,15 +1952,6 @@ YOU HAVE TO EXPLICITY CAST YOUR TYPE
         assert are_mixed_types_compatible(@type|type2enum@, b.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(@type|type2enum@)
         return multiply_ll_mat_with_numpy_vector_@index@_@type@(self, b)
 
-    def matvec2(self, b):
-        """
-        Return :math:`A * b`.
-
-        Test with memoryviews.
-        """
-        # TODO: remove or adapt code
-        return multiply_ll_mat_with_numpy_vector2_@index@_@type@(self, b)
-
     def matvec_transp(self, b):
         """
         Return :math:`A^t * b`.
