@@ -6,11 +6,20 @@ import sys
 
 #A = NewLinearFillLLSparseMatrix(nrow=3, ncol=3, itype=types.INT64_T, dtype=types.FLOAT64_T)
 
+itype = types.INT32_T
+dtype = types.FLOAT64_T
+
+np_dtype = np.float64
+
+nrow = 3
+ncol = 3
+size = 3
+
 #print A[:, :]
-A = NewLLSparseMatrix(size=3, itype=types.INT64_T, dtype=types.FLOAT64_T)
+A = NewLLSparseMatrix(size=size, itype=itype, dtype=dtype)
 
 
-B= np.array([[0, 1, 2], [1, 2, 3], [2, 3, 4]], dtype=np.float64)
+B= np.array([[0, 1, 2], [1, 2, 3], [2, 3, 4]], dtype=np_dtype)
 print B
 print B[(0,2)]
 
@@ -32,7 +41,7 @@ solver.report_numeric()
 
 print "*" * 80
 
-b = np.ones(3, dtype=np.float64)
+b = np.ones(3, dtype=np_dtype)
 
 sol = solver.solve(b)
 
@@ -58,25 +67,35 @@ print D
 print do_recip
 print R
 
-print "6" * 80
+print "=" * 80
+
+print L
+print L.to_ndarray()
+
+print U
+print U.to_ndarray()
 
 lhs = L * U
 
+print "test L*U"
 print lhs
+print L.to_ndarray() * U.to_ndarray()
 
-P_new = P.astype(np.float64)
+#sys.exit(-1)
 
-P_mat = NewBandLLSparseMatrix(diag_coeff=[0], numpy_arrays=[P_new], size=3, dtype=types.FLOAT64_T, itype=types.INT64_T)
+P_new = P.astype(np_dtype)
+
+P_mat = NewBandLLSparseMatrix(diag_coeff=[0], numpy_arrays=[P_new], size=3, dtype=dtype, itype=itype)
 print P_mat
 
-Q_new = Q.astype(np.float64)
-Q_mat = NewBandLLSparseMatrix(diag_coeff=[0], numpy_arrays=[Q_new], size=3, dtype=types.FLOAT64_T, itype=types.INT64_T)
+Q_new = Q.astype(np_dtype)
+Q_mat = NewBandLLSparseMatrix(diag_coeff=[0], numpy_arrays=[Q_new], size=3, dtype=dtype, itype=itype)
 print Q_mat
 
 if do_recip:
-    R_mat = NewBandLLSparseMatrix(diag_coeff=[0], numpy_arrays=[R], size=3, dtype=types.FLOAT64_T, itype=types.INT64_T)
+    R_mat = NewBandLLSparseMatrix(diag_coeff=[0], numpy_arrays=[R], size=3, dtype=dtype, itype=itype)
 else:
-    R_mat = NewLLSparseMatrix(size=3, dtype=types.FLOAT64_t, itype=types.INT64_T)
+    R_mat = NewLLSparseMatrix(size=3, dtype=dtype, itype=itype)
     for i in xrange(3):
         R_mat[i, i] = 1/R[i]
 print R_mat
