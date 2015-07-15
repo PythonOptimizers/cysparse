@@ -11,6 +11,7 @@ from cysparse.sparse.ll_mat cimport LL_MAT_INCREASE_FACTOR
 from cysparse.sparse.s_mat cimport unexposed_value, PySparseMatrix_Check
 from cysparse.types.cysparse_numpy_types import are_mixed_types_compatible, cysparse_to_numpy_type
 from cysparse.sparse.ll_mat cimport PyLLSparseMatrix_Check, LL_MAT_PPRINT_COL_THRESH, LL_MAT_PPRINT_ROW_THRESH
+
 from cysparse.sparse.s_mat_matrices.s_mat_@index@_@type@ cimport MutableSparseMatrix_@index@_@type@
 from cysparse.sparse.ll_mat_matrices.ll_mat_@index@_@type@ cimport LLSparseMatrix_@index@_@type@
 from cysparse.sparse.ll_mat_views.ll_mat_view_@index@_@type@ cimport LLSparseMatrixView_@index@_@type@
@@ -31,6 +32,7 @@ include "ll_mat_kernel/ll_mat_assignment_kernel_@index@_@type@.pxi"
 include "ll_mat_kernel/ll_mat_multiplication_by_numpy_vector_kernel_@index@_@type@.pxi"
 include "ll_mat_helpers/ll_mat_multiplication_@index@_@type@.pxi"
 include "ll_mat_helpers/ll_mat_addition_@index@_@type@.pxi"
+
 
 
 ########################################################################################################################
@@ -1986,6 +1988,7 @@ YOU HAVE TO EXPLICITY CAST YOUR TYPE
         # CASES
         if PyLLSparseMatrix_Check(B):
             return multiply_two_ll_mat_@index@_@type@(self, B)
+
         elif cnp.PyArray_Check(B):
             # test type
             assert are_mixed_types_compatible(@type|type2enum@, B.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(@type|type2enum@)

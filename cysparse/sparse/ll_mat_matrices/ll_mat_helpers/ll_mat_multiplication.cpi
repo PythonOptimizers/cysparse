@@ -88,6 +88,7 @@ cdef LLSparseMatrix_@index@_@type@ multiply_two_ll_mat_@index@_@type@(LLSparseMa
                 kB = B.link[kB]
     return C
 
+
 ###################################################
 # Transposed LLSparseMatrix by LLSparseMatrix
 ###################################################

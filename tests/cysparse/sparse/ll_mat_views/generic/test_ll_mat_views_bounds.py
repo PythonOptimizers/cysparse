@@ -35,12 +35,40 @@ class CySparseLLSparseMatrixViewOutOfBoundsTestCase(CySparseLLSparseMatrixBounds
 
   
   
-        self.l_1_1 = NewLinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, itype=INT32_T, dtype=FLOAT64_T, row_wise=False)
+        self.l_1_1 = NewLinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, itype=INT32_T, dtype=INT32_T, row_wise=False)
+  
+        self.l_1_2 = NewLinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, itype=INT32_T, dtype=INT64_T, row_wise=False)
+  
+        self.l_1_3 = NewLinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, itype=INT32_T, dtype=FLOAT32_T, row_wise=False)
+  
+        self.l_1_4 = NewLinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, itype=INT32_T, dtype=FLOAT64_T, row_wise=False)
+  
+        self.l_1_5 = NewLinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, itype=INT32_T, dtype=FLOAT128_T, row_wise=False)
+  
+        self.l_1_6 = NewLinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, itype=INT32_T, dtype=COMPLEX64_T, row_wise=False)
+  
+        self.l_1_7 = NewLinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, itype=INT32_T, dtype=COMPLEX128_T, row_wise=False)
+  
+        self.l_1_8 = NewLinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, itype=INT32_T, dtype=COMPLEX256_T, row_wise=False)
   
 
   
   
-        self.l_2_1 = NewLinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, itype=INT64_T, dtype=FLOAT64_T, row_wise=False)
+        self.l_2_1 = NewLinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, itype=INT64_T, dtype=INT32_T, row_wise=False)
+  
+        self.l_2_2 = NewLinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, itype=INT64_T, dtype=INT64_T, row_wise=False)
+  
+        self.l_2_3 = NewLinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, itype=INT64_T, dtype=FLOAT32_T, row_wise=False)
+  
+        self.l_2_4 = NewLinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, itype=INT64_T, dtype=FLOAT64_T, row_wise=False)
+  
+        self.l_2_5 = NewLinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, itype=INT64_T, dtype=FLOAT128_T, row_wise=False)
+  
+        self.l_2_6 = NewLinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, itype=INT64_T, dtype=COMPLEX64_T, row_wise=False)
+  
+        self.l_2_7 = NewLinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, itype=INT64_T, dtype=COMPLEX128_T, row_wise=False)
+  
+        self.l_2_8 = NewLinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, itype=INT64_T, dtype=COMPLEX256_T, row_wise=False)
   
 
 

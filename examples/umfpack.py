@@ -81,5 +81,5 @@ print R_mat
 print "T" * 80
 print "lhs = "
 print lhs
-rhs = P_mat * R_mat *  A *  Q_mat
+rhs = P_mat * R_mat * A * Q_mat
 print rhs

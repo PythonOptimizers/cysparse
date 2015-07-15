@@ -88,6 +88,7 @@ cdef LLSparseMatrix_INT64_t_INT32_t multiply_two_ll_mat_INT64_t_INT32_t(LLSparse
                 kB = B.link[kB]
     return C
 
+
 ###################################################
 # Transposed LLSparseMatrix by LLSparseMatrix
 ###################################################

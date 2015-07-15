@@ -11,6 +11,7 @@ from cysparse.sparse.ll_mat cimport LL_MAT_INCREASE_FACTOR
 from cysparse.sparse.s_mat cimport unexposed_value, PySparseMatrix_Check
 from cysparse.types.cysparse_numpy_types import are_mixed_types_compatible, cysparse_to_numpy_type
 from cysparse.sparse.ll_mat cimport PyLLSparseMatrix_Check, LL_MAT_PPRINT_COL_THRESH, LL_MAT_PPRINT_ROW_THRESH
+
 from cysparse.sparse.s_mat_matrices.s_mat_INT64_t_FLOAT128_t cimport MutableSparseMatrix_INT64_t_FLOAT128_t
 from cysparse.sparse.ll_mat_matrices.ll_mat_INT64_t_FLOAT128_t cimport LLSparseMatrix_INT64_t_FLOAT128_t
 from cysparse.sparse.ll_mat_views.ll_mat_view_INT64_t_FLOAT128_t cimport LLSparseMatrixView_INT64_t_FLOAT128_t
@@ -31,6 +32,7 @@ include "ll_mat_kernel/ll_mat_assignment_kernel_INT64_t_FLOAT128_t.pxi"
 include "ll_mat_kernel/ll_mat_multiplication_by_numpy_vector_kernel_INT64_t_FLOAT128_t.pxi"
 include "ll_mat_helpers/ll_mat_multiplication_INT64_t_FLOAT128_t.pxi"
 include "ll_mat_helpers/ll_mat_addition_INT64_t_FLOAT128_t.pxi"
+
 
 
 ########################################################################################################################
@@ -1836,6 +1838,7 @@ cdef class LLSparseMatrix_INT64_t_FLOAT128_t(MutableSparseMatrix_INT64_t_FLOAT12
         # CASES
         if PyLLSparseMatrix_Check(B):
             return multiply_two_ll_mat_INT64_t_FLOAT128_t(self, B)
+
         elif cnp.PyArray_Check(B):
             # test type
             assert are_mixed_types_compatible(FLOAT128_T, B.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(FLOAT128_T)
