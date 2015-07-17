@@ -85,11 +85,20 @@ print np.dot(L.to_ndarray(), U.to_ndarray())
 
 P_new = P.astype(np_dtype)
 
-P_mat = NewBandLLSparseMatrix(diag_coeff=[0], numpy_arrays=[P_new], size=3, dtype=dtype, itype=itype)
+#P_mat = NewBandLLSparseMatrix(diag_coeff=[0], numpy_arrays=[P_new], size=3, dtype=dtype, itype=itype)
+
+P_mat_nd = np.array([[0, 0, 1], [1, 0, 0], [0, 1, 0]], dtype=np_dtype)
+P_mat = NewLLSparseMatrix(size=3)
+P_mat[:,:] = P_mat_nd
+
 print P_mat
 
 Q_new = Q.astype(np_dtype)
-Q_mat = NewBandLLSparseMatrix(diag_coeff=[0], numpy_arrays=[Q_new], size=3, dtype=dtype, itype=itype)
+#Q_mat = NewBandLLSparseMatrix(diag_coeff=[0], numpy_arrays=[Q_new], size=3, dtype=dtype, itype=itype)
+Q_mat_nd =  np.array([[1, 0, 0], [0, 0, 1], [0, 1, 0]], dtype=np_dtype)
+Q_mat = NewLLSparseMatrix(size=3)
+Q_mat[:,:] = Q_mat_nd
+
 print Q_mat
 
 if do_recip:
