@@ -1,3 +1,4 @@
+cysparse_generate_code.log
 /build/*
 /.idea/*
 /.tox/*
