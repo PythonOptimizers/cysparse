@@ -79,7 +79,7 @@ lhs = L * U
 
 print "test L*U"
 print lhs
-print L.to_ndarray() * U.to_ndarray()
+print np.dot(L.to_ndarray(), U.to_ndarray())
 
 #sys.exit(-1)
 

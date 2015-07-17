@@ -448,7 +448,7 @@ def generate_following_type_and_index(logger, template_filenames, template_envir
     """
     context = {
         'type_list': ELEMENT_TYPES,
-        'index_list' : INDEX_TYPES
+        'index_list': INDEX_TYPES
     }
 
     for filename in template_filenames:
@@ -611,7 +611,7 @@ CSC_SPARSE_MATRIX_HELPERS_INCLUDE_FILES = glob.glob(os.path.join(CSC_SPARSE_MATR
 #################################################################################################
 # LINALG
 #################################################################################################
-LINALG_TEMPLATE_DIR = os.path.join(PATH, 'cysparse', 'solvers')
+LINALG_TEMPLATE_DIR = os.path.join(PATH, 'cysparse', 'linalg')
 
 ##########################################
 ### SuiteSparse
@@ -889,7 +889,6 @@ if __name__ == "__main__":
             clean_cython_files(logger, LINALG_SUITESPARSE_CHOLMOD_TEMPLATE_DIR)
 
         else:
-            print("generate!")
             ###############################
             # SuiteSparse
             ###############################

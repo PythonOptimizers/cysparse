@@ -29,4 +29,4 @@ print A * B
 
 print A_csr * B_csc
 
-print A_csr.to_ndarray() * B_csc.to_ndarray()
+print np.dot(A_csr.to_ndarray(), B_csc.to_ndarray())
