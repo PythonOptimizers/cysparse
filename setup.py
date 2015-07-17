@@ -36,6 +36,7 @@ def find_version(*file_paths):
         return version_match.group(1)
     raise RuntimeError("Unable to find version string.")
 
+
 # Grab paths
 def get_path_option(config, section, option):
     """

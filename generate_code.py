@@ -21,6 +21,7 @@ import fnmatch
 import argparse
 import logging
 
+from subprocess import call
 
 from jinja2 import Environment, FileSystemLoader
 
@@ -259,11 +260,30 @@ COMPLEX_ELEMENT_TYPES = ['COMPLEX64_t', 'COMPLEX128_t', 'COMPLEX256_t']
 INDEX_MM_TYPES = ['INT32_t', 'INT64_t']
 ELEMENT_MM_TYPES = ['INT64_t', 'FLOAT64_t', 'COMPLEX128_t']
 
-# Solvers
+# Contexts
 # SuiteSparse
 # Umfpack
 UMFPACK_INDEX_TYPES = ['INT32_t', 'INT64_t']
 UMFPACK_ELEMENT_TYPES = ['FLOAT64_t', 'COMPLEX128_t']
+
+# MUMPS
+
+# test if compiled lib has been compiled in 64 or 32 bits
+#MUMPS_INDEX_TYPES = []
+#MUMPS_ELEMENT_TYPES = []
+
+# ONLY VALID UNDER LINUX/IOS...
+# if use_mumps:
+#     command_line = "file -L %s | grep -q '64-bit' && echo 'library is 64 bit' || echo 'library is 32 bit'" % libcmumps.so
+#
+#
+#     Temp=subprocess.Popen(["netstat","-l"], stdout=subprocess.PIPE, shell=True)
+#     (output,errput)=Temp.communicate()
+#     return_value=Temp.wait()
+
+
+MUMPS_INDEX_TYPES = ['INT64_t']
+MUMPS_ELEMENT_TYPES = ['FLOAT32_t', 'FLOAT64_t', 'COMPLEX64_t', 'COMPLEX128_t']
 
 # when coding
 #ELEMENT_TYPES = ['FLOAT64_t']
@@ -280,8 +300,10 @@ GENERAL_CONTEXT = {
                     'complex_list' : COMPLEX_ELEMENT_TYPES,
                     'mm_index_list' : INDEX_MM_TYPES,
                     'mm_type_list' : ELEMENT_MM_TYPES,
-                    'umfpack_index_list' : UMFPACK_INDEX_TYPES,
-                    'umfpack_type_list' : UMFPACK_ELEMENT_TYPES
+                    'umfpack_index_list': UMFPACK_INDEX_TYPES,
+                    'umfpack_type_list': UMFPACK_ELEMENT_TYPES,
+                    'mumps_index_list': MUMPS_INDEX_TYPES,
+                    'mumps_type_list': MUMPS_ELEMENT_TYPES,
                 }
 
 GENERAL_ENVIRONMENT = Environment(
@@ -604,20 +626,28 @@ CSC_SPARSE_MATRIX_HELPERS_INCLUDE_FILES = glob.glob(os.path.join(CSC_SPARSE_MATR
 ##########################################
 
 #################################################################################################
-# SOLVERS
+# CONTEXTS
 #################################################################################################
-SOLVERS_TEMPLATE_DIR = os.path.join(PATH, 'cysparse', 'solvers')
+CONTEXTS_TEMPLATE_DIR = os.path.join(PATH, 'cysparse', 'linalg')
 
 ##########################################
 ### SuiteSparse
 ##########################################
-SOLVERS_SUITESPARSE_TEMPLATE_DIR = os.path.join(SOLVERS_TEMPLATE_DIR, 'suitesparse')
+CONTEXTS_SUITESPARSE_TEMPLATE_DIR = os.path.join(CONTEXTS_TEMPLATE_DIR, 'suitesparse')
 
 # UMFPACK
-SOLVERS_SUITESPARSE_UMFPACK_TEMPLATE_DIR = os.path.join(SOLVERS_SUITESPARSE_TEMPLATE_DIR, 'umfpack')
+CONTEXTS_SUITESPARSE_UMFPACK_TEMPLATE_DIR = os.path.join(CONTEXTS_SUITESPARSE_TEMPLATE_DIR, 'umfpack')
 
-SOLVERS_SUITESPARSE_UMFPACK_DECLARATION_FILES = glob.glob(os.path.join(SOLVERS_SUITESPARSE_UMFPACK_TEMPLATE_DIR, '*.cpd'))
-SOLVERS_SUITESPARSE_UMFPACK_DEFINITION_FILES = glob.glob(os.path.join(SOLVERS_SUITESPARSE_UMFPACK_TEMPLATE_DIR, '*.cpx'))
+CONTEXTS_SUITESPARSE_UMFPACK_DECLARATION_FILES = glob.glob(os.path.join(CONTEXTS_SUITESPARSE_UMFPACK_TEMPLATE_DIR, '*.cpd'))
+CONTEXTS_SUITESPARSE_UMFPACK_DEFINITION_FILES = glob.glob(os.path.join(CONTEXTS_SUITESPARSE_UMFPACK_TEMPLATE_DIR, '*.cpx'))
+
+##########################################
+### MUMPS
+##########################################
+CONTEXTS_MUMPS_TEMPLATE_DIR = os.path.join(CONTEXTS_TEMPLATE_DIR, 'mumps')
+
+CONTEXTS_MUMPS_DECLARATION_FILES = glob.glob(os.path.join(CONTEXTS_MUMPS_TEMPLATE_DIR, '*.cpd'))
+CONTEXTS_MUMPS_DEFINITION_FILES = glob.glob(os.path.join(CONTEXTS_MUMPS_TEMPLATE_DIR, '*.cpx'))
 
 #################################################################################################
 # TESTS
@@ -871,15 +901,25 @@ if __name__ == "__main__":
         logger.info("Act for generic solvers")
 
         if arg_options.clean:
+            # SuiteSparse
             # Umfpack
-            clean_cython_files(logger, SOLVERS_SUITESPARSE_UMFPACK_TEMPLATE_DIR)
+            clean_cython_files(logger, CONTEXTS_SUITESPARSE_UMFPACK_TEMPLATE_DIR)
+
+            # MUMPS
+            clean_cython_files(logger, CONTEXTS_MUMPS_TEMPLATE_DIR)
         else:
             ###############################
             # SuiteSparse
             ###############################
             # Umfpack
-            generate_following_type_and_index(logger, SOLVERS_SUITESPARSE_UMFPACK_DECLARATION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, UMFPACK_ELEMENT_TYPES, UMFPACK_INDEX_TYPES, '.pxd')
-            generate_following_type_and_index(logger, SOLVERS_SUITESPARSE_UMFPACK_DEFINITION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, UMFPACK_ELEMENT_TYPES, UMFPACK_INDEX_TYPES, '.pyx')
+            generate_following_type_and_index(logger, CONTEXTS_SUITESPARSE_UMFPACK_DECLARATION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, UMFPACK_ELEMENT_TYPES, UMFPACK_INDEX_TYPES, '.pxd')
+            generate_following_type_and_index(logger, CONTEXTS_SUITESPARSE_UMFPACK_DEFINITION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, UMFPACK_ELEMENT_TYPES, UMFPACK_INDEX_TYPES, '.pyx')
+
+            ###############################
+            # MUMPS
+            ###############################
+            generate_following_type_and_index(logger, CONTEXTS_MUMPS_DECLARATION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, MUMPS_ELEMENT_TYPES, MUMPS_INDEX_TYPES, '.pxd')
+            generate_following_type_and_index(logger, CONTEXTS_MUMPS_DEFINITION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, MUMPS_ELEMENT_TYPES, MUMPS_INDEX_TYPES, '.pyx')
 
     if arg_options.tests or arg_options.all:
         action = True

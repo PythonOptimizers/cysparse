@@ -264,7 +264,7 @@ utils_ext = [
 ]
 
 ########################################################################################################################
-#                                                *** umfpack ***
+#                                                *** SuiteSparse ***
 if use_suitesparse:
     umfpack_ext_params = ext_params.copy()
     umfpack_ext_params['include_dirs'].extend(suitesparse_include_dirs)
@@ -282,6 +282,22 @@ if use_suitesparse:
 {% endfor %}
         ]
 
+
+if use_mumps:
+    mumps_ext_params = ext_params.copy()
+    mumps_ext_params['include_dirs'].extend(mumps_include_dirs)
+    mumps_ext_params['library_dirs'] = mumps_library_dirs
+    mumps_ext_params['libraries'] = []
+
+    mumps_ext = [
+{% for index_type in mumps_index_list %}
+  {% for element_type in mumps_type_list %}
+        Extension(name="cysparse.linalg.mumps.mumps_@index_type@_@element_type@",
+                  sources=['cysparse/linalg/mumps/mumps_@index_type@_@element_type@.pxd',
+                           'cysparse/linalg/mumps/mumps_@index_type@_@element_type@.pyx'], **mumps_ext_params),
+  {% endfor %}
+{% endfor %}
+        ]
 
 ########################################################################################################################
 # SETUP
