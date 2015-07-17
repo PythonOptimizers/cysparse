@@ -163,7 +163,7 @@ def cysparse_type_to_numpy_enum_type(cysparse_type):
 
     For instance:
 
-        FLOAT64_T -> NPY_DOUBLE or NPY_FLOAT64
+        FLOAT64_T -> NPY_FLOAT64
 
     Args:
         cysparse_type:
@@ -305,7 +305,7 @@ GENERAL_CONTEXT = {
                     'mm_type_list' : ELEMENT_MM_TYPES,
                     'umfpack_index_list': UMFPACK_INDEX_TYPES,
                     'umfpack_type_list' : UMFPACK_ELEMENT_TYPES,
-		    'cholmod_index_list': CHOLMOD_INDEX_TYPES,
+		            'cholmod_index_list': CHOLMOD_INDEX_TYPES,
                     'cholmod_type_list': CHOLMOD_ELEMENT_TYPES,
                     'mumps_index_list': MUMPS_INDEX_TYPES,
                     'mumps_type_list': MUMPS_ELEMENT_TYPES,

@@ -67,11 +67,19 @@ numpy_include = np.get_include()
 # SUITESPARSE
 # Do we use it or not?
 use_suitesparse = cysparse_config.getboolean('SUITESPARSE', 'use_suitesparse')
-
 # find user defined directories
 if use_suitesparse:
     suitesparse_include_dirs = get_path_option(cysparse_config, 'SUITESPARSE', 'include_dirs')
     suitesparse_library_dirs = get_path_option(cysparse_config, 'SUITESPARSE', 'library_dirs')
+
+# MUMPS
+# Do we use it or not?
+use_mumps = cysparse_config.getboolean('MUMPS', 'use_mumps')
+# find user defined directories
+if use_mumps:
+    mumps_include_dirs = get_path_option(cysparse_config, 'MUMPS', 'include_dirs')
+    mumps_library_dirs = get_path_option(cysparse_config, 'MUMPS', 'library_dirs')
+
 
 ########################################################################################################################
 # EXTENSIONS
