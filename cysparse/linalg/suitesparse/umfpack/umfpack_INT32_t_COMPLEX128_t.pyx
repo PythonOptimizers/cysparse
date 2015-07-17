@@ -217,9 +217,9 @@ def test_umfpack_result(status, msg, raise_error=True, print_on_screen=True):
             print "%s %s: %s" % (msg, "warning", UMFPACK_ERROR_CODE_DICT[status])
 
 
-cdef class UmfpackSolver_INT32_t_COMPLEX128_t:
+cdef class UmfpackContext_INT32_t_COMPLEX128_t:
     """
-    Umfpack Solver from SuiteSparse.
+    Umfpack Context from SuiteSparse.
 
     This version **only** deals with ``LLSparseMatrix_INT32_t_COMPLEX128_t`` objects.
 

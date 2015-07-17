@@ -9,7 +9,7 @@ cdef extern from "umfpack.h":
         UMFPACK_CONTROL, UMFPACK_INFO
 
 
-cdef class UmfpackSolver_INT32_t_COMPLEX128_t:
+cdef class UmfpackContext_INT32_t_COMPLEX128_t:
     cdef:
         LLSparseMatrix_INT32_t_COMPLEX128_t A
 

@@ -10,9 +10,9 @@ from cysparse.solvers.suitesparse.umfpack.umfpack_INT64_t_FLOAT64_t import Umfpa
 from cysparse.solvers.suitesparse.umfpack.umfpack_INT64_t_COMPLEX128_t import UmfpackSolver_INT64_t_COMPLEX128_t
 
 
-def NewUmfpackSolver(A):
+def NewUmfpackContext(A):
     """
-    Create and return the right UMFPACK solver object.
+    Create and return the right UMFPACK context object.
 
     Args:
         A: :class:`LLSparseMatrix`.
@@ -24,17 +24,17 @@ def NewUmfpackSolver(A):
     # So few cases that are unlikely to change: we do the dispatch by hand...
     if A.itype == INT32_T:
         if A.dtype == FLOAT64_T:
-            return UmfpackSolver_INT32_t_FLOAT64_t(A)
+            return UmfpackContext_INT32_t_FLOAT64_t(A)
         elif A.dtype == COMPLEX128_T:
-            return UmfpackSolver_INT32_t_COMPLEX128_t(A)
+            return UmfpackContext_INT32_t_COMPLEX128_t(A)
         else:
             raise TypeError('Matrix has an element type that is incompatible with Umfpack')
 
     elif A.itype == INT64_T:
         if A.dtype == FLOAT64_T:
-            return UmfpackSolver_INT64_t_FLOAT64_t(A)
+            return UmfpackContext_INT64_t_FLOAT64_t(A)
         elif A.dtype == COMPLEX128_T:
-            return UmfpackSolver_INT64_t_COMPLEX128_t(A)
+            return UmfpackContext_INT64_t_COMPLEX128_t(A)
         else:
             raise TypeError('Matrix has an element type that is incompatible with Umfpack')
 
