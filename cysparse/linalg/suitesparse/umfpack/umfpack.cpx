@@ -324,9 +324,9 @@ def test_umfpack_result(status, msg, raise_error=True, print_on_screen=True):
             print "%s %s: %s" % (msg, "warning", UMFPACK_ERROR_CODE_DICT[status])
 
 
-cdef class UmfpackSolver_@index@_@type@:
+cdef class UmfpackContext_@index@_@type@:
     """
-    Umfpack Solver from SuiteSparse.
+    Umfpack Context from SuiteSparse.
 
     This version **only** deals with ``LLSparseMatrix_@index@_@type@`` objects.
 

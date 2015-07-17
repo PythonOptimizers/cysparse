@@ -38,3 +38,23 @@ e = l3 * l3
 
 e.print_to(sys.stdout)
 
+print "=" * 80
+
+A = NewLinearFillLLSparseMatrix(size=5)
+
+I = NewDiagonalLLSparseMatrix(size=5, element=1)
+
+print A * I
+print I * A
+print A
+
+print "?" * 80
+
+B = NewArrowheadLLSparseMatrix(size=3)
+
+print B
+
+print B * B
+
+
+

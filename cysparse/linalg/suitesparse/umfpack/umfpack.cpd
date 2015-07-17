@@ -9,7 +9,7 @@ cdef extern from "umfpack.h":
         UMFPACK_CONTROL, UMFPACK_INFO
 
 
-cdef class UmfpackSolver_@index@_@type@:
+cdef class UmfpackContext_@index@_@type@:
     cdef:
         LLSparseMatrix_@index@_@type@ A
 

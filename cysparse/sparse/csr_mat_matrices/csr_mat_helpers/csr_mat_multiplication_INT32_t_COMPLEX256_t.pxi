@@ -1,3 +1,21 @@
+"""
+Several helper routines to multiply an :class:`CSRSparseMatrix` with other matrices.
+
+Implemented: :class:`CSRSparseMatrix` by
+
+-  :program:`NumPy` vector:
+
+    - ``A * b``
+    - ``A^t * b``
+    - ``A^h * b``
+    - ``conj(A) * b``
+
+- :class:`CSCSparseMatrix`
+
+
+
+"""
+
 ###################################################
 # CSRSparseMatrix by Numpy vector
 ###################################################
@@ -252,3 +270,64 @@ cdef cnp.ndarray[cnp.npy_complex256, ndim=1, mode='c'] multiply_conjugated_csr_m
     return c
 
 
+
+
+###################################################
+# CSRSparseMatrix by a 2d matrix
+###################################################
+######################
+# CSR by CSC
+######################
+cdef LLSparseMatrix_INT32_t_COMPLEX256_t multiply_csr_mat_by_csc_mat_INT32_t_COMPLEX256_t(CSRSparseMatrix_INT32_t_COMPLEX256_t A, CSCSparseMatrix_INT32_t_COMPLEX256_t B):
+
+    # TODO: take into account if matrix A or B has its column indices ordered or not...
+    # test dimensions
+    cdef INT32_t A_nrow = A.nrow
+    cdef INT32_t A_ncol = A.ncol
+
+    cdef INT32_t B_nrow = B.nrow
+    cdef INT32_t B_ncol = B.ncol
+
+    if A_ncol != B_nrow:
+        raise IndexError("Matrix dimensions must agree ([%d, %d] * [%d, %d])" % (A_nrow, A_ncol, B_nrow, B_ncol))
+
+    cdef INT32_t C_nrow = A_nrow
+    cdef INT32_t C_ncol = B_ncol
+
+    cdef bint store_zeros = A.store_zeros and B.store_zeros
+    # TODO: what strategy to implement?
+    cdef INT32_t size_hint = A.nnz
+
+    # TODO: maybe use MakeLLSparseMatrix and fix circular dependencies...
+    C = LLSparseMatrix_INT32_t_COMPLEX256_t(control_object=unexposed_value, nrow=C_nrow, ncol=C_ncol, size_hint=size_hint, store_zeros=store_zeros)
+
+    # CASES
+    if not A.__is_symmetric and not B.__is_symmetric:
+        pass
+    else:
+        raise NotImplemented("Multiplication with symmetric matrices is not implemented yet")
+
+    # NON OPTIMIZED MULTIPLICATION
+    # TODO: what do we do? Column indices are NOT necessarily sorted...
+    cdef:
+        INT32_t i, j, k
+        COMPLEX256_t sum
+
+    # don't keep zeros, no matter what
+    cdef bint old_store_zeros = store_zeros
+    C.__store_zeros = 0
+
+    for i from 0 <= i < C_nrow:
+        for j from 0 <= j < C_ncol:
+
+            sum = 0.0 + 0.0j
+
+
+            for k from 0 <= k < A_ncol:
+                sum += (A[i, k] * B[k, j])
+
+            C.put(i, j, sum)
+
+    C.__store_zeros = old_store_zeros
+
+    return C

@@ -78,9 +78,9 @@ def make_parser():
     parser.add_argument("-a", "--all", help="Create all action files.", action='store_true', required=False)
 
     parser.add_argument("-m", "--matrices", help="Create sparse matrices.", action='store_true', required=False)
-    parser.add_argument("-p", "--setup", help="Create setup file.", action='store_true', required=False)
+    parser.add_argument("-s", "--setup", help="Create setup file.", action='store_true', required=False)
     parser.add_argument("-g", "--generic_types", help="Create generic types.", action='store_true', required=False)
-    parser.add_argument("-s", "--solvers", help="Create solvers.", action='store_true', required=False)
+    parser.add_argument("-r", "--linalg", help="Create Linear Algebra contexts.", action='store_true', required=False)
     parser.add_argument("-t", "--tests", help="Create generic tests.", action='store_true', required=False)
     parser.add_argument("-c", "--clean", help="Clean action files.", action='store_true', required=False)
 
@@ -265,6 +265,9 @@ ELEMENT_MM_TYPES = ['INT64_t', 'FLOAT64_t', 'COMPLEX128_t']
 # Umfpack
 UMFPACK_INDEX_TYPES = ['INT32_t', 'INT64_t']
 UMFPACK_ELEMENT_TYPES = ['FLOAT64_t', 'COMPLEX128_t']
+# Cholmod
+CHOLMOD_INDEX_TYPES = ['INT32_t', 'INT64_t']
+CHOLMOD_ELEMENT_TYPES = ['FLOAT64_t', 'COMPLEX128_t']
 
 # MUMPS
 
@@ -301,9 +304,12 @@ GENERAL_CONTEXT = {
                     'mm_index_list' : INDEX_MM_TYPES,
                     'mm_type_list' : ELEMENT_MM_TYPES,
                     'umfpack_index_list': UMFPACK_INDEX_TYPES,
-                    'umfpack_type_list': UMFPACK_ELEMENT_TYPES,
+                    'umfpack_type_list' : UMFPACK_ELEMENT_TYPES,
+		    'cholmod_index_list': CHOLMOD_INDEX_TYPES,
+                    'cholmod_type_list': CHOLMOD_ELEMENT_TYPES,
                     'mumps_index_list': MUMPS_INDEX_TYPES,
                     'mumps_type_list': MUMPS_ELEMENT_TYPES,
+
                 }
 
 GENERAL_ENVIRONMENT = Environment(
@@ -465,7 +471,7 @@ def generate_following_type_and_index(logger, template_filenames, template_envir
     """
     context = {
         'type_list': ELEMENT_TYPES,
-        'index_list' : INDEX_TYPES
+        'index_list': INDEX_TYPES
     }
 
     for filename in template_filenames:
@@ -626,28 +632,34 @@ CSC_SPARSE_MATRIX_HELPERS_INCLUDE_FILES = glob.glob(os.path.join(CSC_SPARSE_MATR
 ##########################################
 
 #################################################################################################
-# CONTEXTS
+# LINALG
 #################################################################################################
-CONTEXTS_TEMPLATE_DIR = os.path.join(PATH, 'cysparse', 'linalg')
+LINALG_TEMPLATE_DIR = os.path.join(PATH, 'cysparse', 'linalg')
 
 ##########################################
 ### SuiteSparse
 ##########################################
-CONTEXTS_SUITESPARSE_TEMPLATE_DIR = os.path.join(CONTEXTS_TEMPLATE_DIR, 'suitesparse')
+LINALG_SUITESPARSE_TEMPLATE_DIR = os.path.join(LINALG_TEMPLATE_DIR, 'suitesparse')
 
 # UMFPACK
-CONTEXTS_SUITESPARSE_UMFPACK_TEMPLATE_DIR = os.path.join(CONTEXTS_SUITESPARSE_TEMPLATE_DIR, 'umfpack')
+LINALG_SUITESPARSE_UMFPACK_TEMPLATE_DIR = os.path.join(LINALG_SUITESPARSE_TEMPLATE_DIR, 'umfpack')
 
-CONTEXTS_SUITESPARSE_UMFPACK_DECLARATION_FILES = glob.glob(os.path.join(CONTEXTS_SUITESPARSE_UMFPACK_TEMPLATE_DIR, '*.cpd'))
-CONTEXTS_SUITESPARSE_UMFPACK_DEFINITION_FILES = glob.glob(os.path.join(CONTEXTS_SUITESPARSE_UMFPACK_TEMPLATE_DIR, '*.cpx'))
+LINALG_SUITESPARSE_UMFPACK_DECLARATION_FILES = glob.glob(os.path.join(LINALG_SUITESPARSE_UMFPACK_TEMPLATE_DIR, '*.cpd'))
+LINALG_SUITESPARSE_UMFPACK_DEFINITION_FILES = glob.glob(os.path.join(LINALG_SUITESPARSE_UMFPACK_TEMPLATE_DIR, '*.cpx'))
+
+# CHOLMOD
+LINALG_SUITESPARSE_CHOLMOD_TEMPLATE_DIR = os.path.join(LINALG_SUITESPARSE_TEMPLATE_DIR, 'cholmod')
+
+LINALG_SUITESPARSE_CHOLMOD_DECLARATION_FILES = glob.glob(os.path.join(LINALG_SUITESPARSE_CHOLMOD_TEMPLATE_DIR, '*.cpd'))
+LINALG_SUITESPARSE_CHOLMOD_DEFINITION_FILES = glob.glob(os.path.join(LINALG_SUITESPARSE_CHOLMOD_TEMPLATE_DIR, '*.cpx'))
 
 ##########################################
 ### MUMPS
 ##########################################
-CONTEXTS_MUMPS_TEMPLATE_DIR = os.path.join(CONTEXTS_TEMPLATE_DIR, 'mumps')
+LINALG_MUMPS_TEMPLATE_DIR = os.path.join(LINALG_TEMPLATE_DIR, 'mumps')
 
-CONTEXTS_MUMPS_DECLARATION_FILES = glob.glob(os.path.join(CONTEXTS_MUMPS_TEMPLATE_DIR, '*.cpd'))
-CONTEXTS_MUMPS_DEFINITION_FILES = glob.glob(os.path.join(CONTEXTS_MUMPS_TEMPLATE_DIR, '*.cpx'))
+LINALG_MUMPS_DECLARATION_FILES = glob.glob(os.path.join(LINALG_MUMPS_TEMPLATE_DIR, '*.cpd'))
+LINALG_MUMPS_DEFINITION_FILES = glob.glob(os.path.join(LINALG_MUMPS_TEMPLATE_DIR, '*.cpx'))
 
 #################################################################################################
 # TESTS
@@ -764,6 +776,7 @@ if __name__ == "__main__":
             clean_cython_files(logger, LL_SPARSE_MATRIX_KERNEL_TEMPLATE_DIR)
             # LLSparseMatrix helpers
             clean_cython_files(logger, LL_SPARSE_MATRIX_HELPERS_TEMPLATE_DIR)
+
             # LLSparseMatrix IO
             clean_cython_files(logger, LL_SPARSE_MATRIX_IO_TEMPLATE_DIR)
             # LLSparseMatrix constructors
@@ -896,30 +909,36 @@ if __name__ == "__main__":
             # helpers
             generate_following_type_and_index(logger, CSC_SPARSE_MATRIX_HELPERS_INCLUDE_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, ELEMENT_TYPES, INDEX_TYPES, '.pxi')
 
-    if arg_options.solvers or arg_options.all:
+    if arg_options.linalg or arg_options.all:
         action = True
-        logger.info("Act for generic solvers")
+        logger.info("Act for generic contexts")
 
         if arg_options.clean:
             # SuiteSparse
             # Umfpack
-            clean_cython_files(logger, CONTEXTS_SUITESPARSE_UMFPACK_TEMPLATE_DIR)
+            clean_cython_files(logger, LINALG_SUITESPARSE_UMFPACK_TEMPLATE_DIR)
+            # Cholmod
+            clean_cython_files(logger, LINALG_SUITESPARSE_CHOLMOD_TEMPLATE_DIR)
 
             # MUMPS
-            clean_cython_files(logger, CONTEXTS_MUMPS_TEMPLATE_DIR)
+            clean_cython_files(logger, LINALG_MUMPS_TEMPLATE_DIR)
+            
         else:
             ###############################
             # SuiteSparse
             ###############################
             # Umfpack
-            generate_following_type_and_index(logger, CONTEXTS_SUITESPARSE_UMFPACK_DECLARATION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, UMFPACK_ELEMENT_TYPES, UMFPACK_INDEX_TYPES, '.pxd')
-            generate_following_type_and_index(logger, CONTEXTS_SUITESPARSE_UMFPACK_DEFINITION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, UMFPACK_ELEMENT_TYPES, UMFPACK_INDEX_TYPES, '.pyx')
+            generate_following_type_and_index(logger, LINALG_SUITESPARSE_UMFPACK_DECLARATION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, UMFPACK_ELEMENT_TYPES, UMFPACK_INDEX_TYPES, '.pxd')
+            generate_following_type_and_index(logger, LINALG_SUITESPARSE_UMFPACK_DEFINITION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, UMFPACK_ELEMENT_TYPES, UMFPACK_INDEX_TYPES, '.pyx')
+            # Cholmod
+            generate_following_type_and_index(logger, LINALG_SUITESPARSE_CHOLMOD_DECLARATION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, CHOLMOD_ELEMENT_TYPES, CHOLMOD_INDEX_TYPES, '.pxd')
+            generate_following_type_and_index(logger, LINALG_SUITESPARSE_CHOLMOD_DEFINITION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, CHOLMOD_ELEMENT_TYPES, CHOLMOD_INDEX_TYPES, '.pyx')
 
             ###############################
             # MUMPS
             ###############################
-            generate_following_type_and_index(logger, CONTEXTS_MUMPS_DECLARATION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, MUMPS_ELEMENT_TYPES, MUMPS_INDEX_TYPES, '.pxd')
-            generate_following_type_and_index(logger, CONTEXTS_MUMPS_DEFINITION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, MUMPS_ELEMENT_TYPES, MUMPS_INDEX_TYPES, '.pyx')
+            generate_following_type_and_index(logger, LINALG_MUMPS_DECLARATION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, MUMPS_ELEMENT_TYPES, MUMPS_INDEX_TYPES, '.pxd')
+            generate_following_type_and_index(logger, LINALG_MUMPS_DEFINITION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, MUMPS_ELEMENT_TYPES, MUMPS_INDEX_TYPES, '.pyx')
 
     if arg_options.tests or arg_options.all:
         action = True

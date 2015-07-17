@@ -5565,7 +5565,7 @@ static struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT32_t_INT
   __pyx_v_obj = ((PyObject *)__pyx_v_diag_coeff);
 
   /* "cysparse/sparse/ll_mat_matrices/ll_mat_constructors/ll_mat_bands_INT32_t_INT32_t.pxi":37
- *     # -m + 1 <= k <= n -1   : only k <= n - 1 will be satified (greater indices are disregarded)
+ *     # -m + 1 <= k <= n -1   : only k <= n - 1 will be satisfied (greater indices are disregarded)
  *     # but nothing is done if k < -m + 1
  *     max_length = A.__ncol             # <<<<<<<<<<<<<<
  * 
@@ -6753,7 +6753,7 @@ static struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT32_t_INT
   __pyx_v_obj = ((PyObject *)__pyx_v_diag_coeff);
 
   /* "cysparse/sparse/ll_mat_matrices/ll_mat_constructors/ll_mat_bands_INT32_t_INT64_t.pxi":37
- *     # -m + 1 <= k <= n -1   : only k <= n - 1 will be satified (greater indices are disregarded)
+ *     # -m + 1 <= k <= n -1   : only k <= n - 1 will be satisfied (greater indices are disregarded)
  *     # but nothing is done if k < -m + 1
  *     max_length = A.__ncol             # <<<<<<<<<<<<<<
  * 
@@ -7941,7 +7941,7 @@ static struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLO
   __pyx_v_obj = ((PyObject *)__pyx_v_diag_coeff);
 
   /* "cysparse/sparse/ll_mat_matrices/ll_mat_constructors/ll_mat_bands_INT32_t_FLOAT32_t.pxi":37
- *     # -m + 1 <= k <= n -1   : only k <= n - 1 will be satified (greater indices are disregarded)
+ *     # -m + 1 <= k <= n -1   : only k <= n - 1 will be satisfied (greater indices are disregarded)
  *     # but nothing is done if k < -m + 1
  *     max_length = A.__ncol             # <<<<<<<<<<<<<<
  * 
@@ -9129,7 +9129,7 @@ static struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLO
   __pyx_v_obj = ((PyObject *)__pyx_v_diag_coeff);
 
   /* "cysparse/sparse/ll_mat_matrices/ll_mat_constructors/ll_mat_bands_INT32_t_FLOAT64_t.pxi":37
- *     # -m + 1 <= k <= n -1   : only k <= n - 1 will be satified (greater indices are disregarded)
+ *     # -m + 1 <= k <= n -1   : only k <= n - 1 will be satisfied (greater indices are disregarded)
  *     # but nothing is done if k < -m + 1
  *     max_length = A.__ncol             # <<<<<<<<<<<<<<
  * 
@@ -10317,7 +10317,7 @@ static struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_25ll_mat_INT32_t_FLO
   __pyx_v_obj = ((PyObject *)__pyx_v_diag_coeff);
 
   /* "cysparse/sparse/ll_mat_matrices/ll_mat_constructors/ll_mat_bands_INT32_t_FLOAT128_t.pxi":37
- *     # -m + 1 <= k <= n -1   : only k <= n - 1 will be satified (greater indices are disregarded)
+ *     # -m + 1 <= k <= n -1   : only k <= n - 1 will be satisfied (greater indices are disregarded)
  *     # but nothing is done if k < -m + 1
  *     max_length = A.__ncol             # <<<<<<<<<<<<<<
  * 
@@ -11505,7 +11505,7 @@ static struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT32_t_COM
   __pyx_v_obj = ((PyObject *)__pyx_v_diag_coeff);
 
   /* "cysparse/sparse/ll_mat_matrices/ll_mat_constructors/ll_mat_bands_INT32_t_COMPLEX64_t.pxi":37
- *     # -m + 1 <= k <= n -1   : only k <= n - 1 will be satified (greater indices are disregarded)
+ *     # -m + 1 <= k <= n -1   : only k <= n - 1 will be satisfied (greater indices are disregarded)
  *     # but nothing is done if k < -m + 1
  *     max_length = A.__ncol             # <<<<<<<<<<<<<<
  * 
@@ -12693,7 +12693,7 @@ static struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32_t_COM
   __pyx_v_obj = ((PyObject *)__pyx_v_diag_coeff);
 
   /* "cysparse/sparse/ll_mat_matrices/ll_mat_constructors/ll_mat_bands_INT32_t_COMPLEX128_t.pxi":37
- *     # -m + 1 <= k <= n -1   : only k <= n - 1 will be satified (greater indices are disregarded)
+ *     # -m + 1 <= k <= n -1   : only k <= n - 1 will be satisfied (greater indices are disregarded)
  *     # but nothing is done if k < -m + 1
  *     max_length = A.__ncol             # <<<<<<<<<<<<<<
  * 
@@ -13881,7 +13881,7 @@ static struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32_t_COM
   __pyx_v_obj = ((PyObject *)__pyx_v_diag_coeff);
 
   /* "cysparse/sparse/ll_mat_matrices/ll_mat_constructors/ll_mat_bands_INT32_t_COMPLEX256_t.pxi":37
- *     # -m + 1 <= k <= n -1   : only k <= n - 1 will be satified (greater indices are disregarded)
+ *     # -m + 1 <= k <= n -1   : only k <= n - 1 will be satisfied (greater indices are disregarded)
  *     # but nothing is done if k < -m + 1
  *     max_length = A.__ncol             # <<<<<<<<<<<<<<
  * 
@@ -15069,7 +15069,7 @@ static struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT64_t_INT
   __pyx_v_obj = ((PyObject *)__pyx_v_diag_coeff);
 
   /* "cysparse/sparse/ll_mat_matrices/ll_mat_constructors/ll_mat_bands_INT64_t_INT32_t.pxi":37
- *     # -m + 1 <= k <= n -1   : only k <= n - 1 will be satified (greater indices are disregarded)
+ *     # -m + 1 <= k <= n -1   : only k <= n - 1 will be satisfied (greater indices are disregarded)
  *     # but nothing is done if k < -m + 1
  *     max_length = A.__ncol             # <<<<<<<<<<<<<<
  * 
@@ -16257,7 +16257,7 @@ static struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT64_t_INT
   __pyx_v_obj = ((PyObject *)__pyx_v_diag_coeff);
 
   /* "cysparse/sparse/ll_mat_matrices/ll_mat_constructors/ll_mat_bands_INT64_t_INT64_t.pxi":37
- *     # -m + 1 <= k <= n -1   : only k <= n - 1 will be satified (greater indices are disregarded)
+ *     # -m + 1 <= k <= n -1   : only k <= n - 1 will be satisfied (greater indices are disregarded)
  *     # but nothing is done if k < -m + 1
  *     max_length = A.__ncol             # <<<<<<<<<<<<<<
  * 
@@ -17445,7 +17445,7 @@ static struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT64_t_FLO
   __pyx_v_obj = ((PyObject *)__pyx_v_diag_coeff);
 
   /* "cysparse/sparse/ll_mat_matrices/ll_mat_constructors/ll_mat_bands_INT64_t_FLOAT32_t.pxi":37
- *     # -m + 1 <= k <= n -1   : only k <= n - 1 will be satified (greater indices are disregarded)
+ *     # -m + 1 <= k <= n -1   : only k <= n - 1 will be satisfied (greater indices are disregarded)
  *     # but nothing is done if k < -m + 1
  *     max_length = A.__ncol             # <<<<<<<<<<<<<<
  * 
@@ -18633,7 +18633,7 @@ static struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT64_t_FLO
   __pyx_v_obj = ((PyObject *)__pyx_v_diag_coeff);
 
   /* "cysparse/sparse/ll_mat_matrices/ll_mat_constructors/ll_mat_bands_INT64_t_FLOAT64_t.pxi":37
- *     # -m + 1 <= k <= n -1   : only k <= n - 1 will be satified (greater indices are disregarded)
+ *     # -m + 1 <= k <= n -1   : only k <= n - 1 will be satisfied (greater indices are disregarded)
  *     # but nothing is done if k < -m + 1
  *     max_length = A.__ncol             # <<<<<<<<<<<<<<
  * 
@@ -19821,7 +19821,7 @@ static struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_25ll_mat_INT64_t_FLO
   __pyx_v_obj = ((PyObject *)__pyx_v_diag_coeff);
 
   /* "cysparse/sparse/ll_mat_matrices/ll_mat_constructors/ll_mat_bands_INT64_t_FLOAT128_t.pxi":37
- *     # -m + 1 <= k <= n -1   : only k <= n - 1 will be satified (greater indices are disregarded)
+ *     # -m + 1 <= k <= n -1   : only k <= n - 1 will be satisfied (greater indices are disregarded)
  *     # but nothing is done if k < -m + 1
  *     max_length = A.__ncol             # <<<<<<<<<<<<<<
  * 
@@ -21009,7 +21009,7 @@ static struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT64_t_COM
   __pyx_v_obj = ((PyObject *)__pyx_v_diag_coeff);
 
   /* "cysparse/sparse/ll_mat_matrices/ll_mat_constructors/ll_mat_bands_INT64_t_COMPLEX64_t.pxi":37
- *     # -m + 1 <= k <= n -1   : only k <= n - 1 will be satified (greater indices are disregarded)
+ *     # -m + 1 <= k <= n -1   : only k <= n - 1 will be satisfied (greater indices are disregarded)
  *     # but nothing is done if k < -m + 1
  *     max_length = A.__ncol             # <<<<<<<<<<<<<<
  * 
@@ -22197,7 +22197,7 @@ static struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT64_t_COM
   __pyx_v_obj = ((PyObject *)__pyx_v_diag_coeff);
 
   /* "cysparse/sparse/ll_mat_matrices/ll_mat_constructors/ll_mat_bands_INT64_t_COMPLEX128_t.pxi":37
- *     # -m + 1 <= k <= n -1   : only k <= n - 1 will be satified (greater indices are disregarded)
+ *     # -m + 1 <= k <= n -1   : only k <= n - 1 will be satisfied (greater indices are disregarded)
  *     # but nothing is done if k < -m + 1
  *     max_length = A.__ncol             # <<<<<<<<<<<<<<
  * 
@@ -23385,7 +23385,7 @@ static struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT64_t_COM
   __pyx_v_obj = ((PyObject *)__pyx_v_diag_coeff);
 
   /* "cysparse/sparse/ll_mat_matrices/ll_mat_constructors/ll_mat_bands_INT64_t_COMPLEX256_t.pxi":37
- *     # -m + 1 <= k <= n -1   : only k <= n - 1 will be satified (greater indices are disregarded)
+ *     # -m + 1 <= k <= n -1   : only k <= n - 1 will be satisfied (greater indices are disregarded)
  *     # but nothing is done if k < -m + 1
  *     max_length = A.__ncol             # <<<<<<<<<<<<<<
  * 
