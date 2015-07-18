@@ -1163,6 +1163,8 @@ packages_list = ['cysparse',
             'cysparse.sparse.ll_mat_views',
             'cysparse.utils',
             'cysparse.linalg',
+            'cysparse.linalg.suitesparse',
+            'cysparse.linalg.suitesparse.umfpack',
             #'cysparse.sparse.IO'
             ]
 

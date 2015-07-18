@@ -84,9 +84,10 @@ def cysparse_to_numpy_type(cp_types.CySparseType cysparse_type):
     # the test on the argument's type is done by Cython
     return CYSPARSE_TYPES_TO_NUMPY_DICT[cysparse_type]
 
+# TODO: change name to are_mixed_types_strictly_compatible
 def are_mixed_types_compatible(cp_types.CySparseType cysparse_type, numpy_type):
     """
-    Test if two types are compatible.
+    Test if two types are **strictly** compatible.
 
     Args:
         cysparse_type:
@@ -94,3 +95,26 @@ def are_mixed_types_compatible(cp_types.CySparseType cysparse_type, numpy_type):
 
     """
     return cysparse_to_numpy_type(cysparse_type) == numpy_type
+
+def are_mixed_types_cast_compatible(cp_types.CySparseType cysparse_type, numpy_type):
+    """
+    Test if two mixed types are compatible with a cast if needed, i.e. a cast of the :program:`NumPy` ``numpy_type``
+    type to the :program:`CySparse` type.
+
+    Args:
+        cysparse_type:
+        numpy_type:
+
+    """
+    if not is_numpy_type_compatible(numpy_type):
+        return False
+
+    cdef:
+        cp_types.CySparseType numpy_type_to_cysparse_type = numpy_to_cysparse_type(numpy_type)
+        cp_types.CySparseType resulting_type
+    try:
+        resulting_type = <cp_types.CySparseType> cp_types.result_type(cysparse_type, numpy_type_to_cysparse_type)
+    except TypeError:
+        return False
+
+    return resulting_type == cysparse_type

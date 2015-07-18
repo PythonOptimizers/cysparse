@@ -93,7 +93,7 @@ def make_parser():
 ####################################
 # CYSPARSE/NUMPY TYPES
 ####################################
-def type2enum(__type_name):
+def type2enum(type_name):
     """
     Transform a real :program:`CySparse` type into the equivalent :program:`CySparse` enum type.
 
@@ -105,8 +105,8 @@ def type2enum(__type_name):
         cysparse_type:
 
     """
-    enum_name = __type_name[:-1]
-    enum_name = enum_name + __type_name[-1].upper()
+    enum_name = type_name[:-1]
+    enum_name = enum_name + type_name[-1].upper()
 
     return enum_name
 
@@ -666,6 +666,7 @@ LINALG_MUMPS_DEFINITION_FILES = glob.glob(os.path.join(LINALG_MUMPS_TEMPLATE_DIR
 #################################################################################################
 TESTS_TEMPLATE_DIR = os.path.join(PATH, 'tests')
 
+# SPARSE MATRICES
 TESTS_CSC_SPARSE_MATRIX_GENERIC_TEST_DIR = os.path.join(TESTS_TEMPLATE_DIR, 'cysparse', 'sparse', 'csc_mat_matrices', 'generic')
 TESTS_CSC_SPARSE_MATRIX_GENERIC_TEST_FILES = glob.glob(os.path.join(TESTS_CSC_SPARSE_MATRIX_GENERIC_TEST_DIR, '*.cpy'))
 
@@ -677,6 +678,17 @@ TESTS_LL_SPARSE_MATRIX_VIEW_GENERIC_TEST_FILES = glob.glob(os.path.join(TESTS_LL
 
 TESTS_SPARSE_MATRIX_COMMON_OPERATIONS_GENERIC_TEST_DIR = os.path.join(TESTS_TEMPLATE_DIR, 'cysparse', 'sparse', 'common_operations', 'generic')
 TESTS_SPARSE_MATRIX_COMMON_OPERATIONS_GENERIC_TEST_FILES = glob.glob(os.path.join(TESTS_SPARSE_MATRIX_COMMON_OPERATIONS_GENERIC_TEST_DIR, '*.cpy'))
+
+# LINALG
+TESTS_LINALG_DIR = os.path.join(TESTS_TEMPLATE_DIR, 'cysparse', 'linalg')
+
+# SUITESPARSE
+TESTS_SUITESPARSE_DIR = os.path.join(TESTS_LINALG_DIR, 'suitesparse')
+# Umfpack
+TESTS_UMFPACK_GENERIC_DIR = os.path.join(TESTS_SUITESPARSE_DIR, 'umfpack', 'generic')
+TESTS_UMFPACK_GENERIC_TEST_FILES = glob.glob(os.path.join(TESTS_UMFPACK_GENERIC_DIR, '*.cpy'))
+
+
 
 #################################################################################################
 # MAIN
@@ -949,15 +961,23 @@ if __name__ == "__main__":
             clean_cython_files(logger, TESTS_CSR_SPARSE_MATRIX_GENERIC_TEST_DIR, find_files(TESTS_CSR_SPARSE_MATRIX_GENERIC_TEST_DIR, '*.py', False, True))
             clean_cython_files(logger, TESTS_LL_SPARSE_MATRIX_VIEW_GENERIC_TEST_DIR, find_files(TESTS_LL_SPARSE_MATRIX_VIEW_GENERIC_TEST_DIR, '*.py', False, True))
             clean_cython_files(logger, TESTS_SPARSE_MATRIX_COMMON_OPERATIONS_GENERIC_TEST_DIR, find_files(TESTS_SPARSE_MATRIX_COMMON_OPERATIONS_GENERIC_TEST_DIR, '*.py', False, True))
+
+            clean_cython_files(logger, TESTS_UMFPACK_GENERIC_DIR, find_files(TESTS_UMFPACK_GENERIC_DIR, '*.py', False, True))
         else:
             ###############################
             # Types
             ###############################
-            # generic types
+            # generic types tests
+            # Sparse matrices
             generate_template_files(logger, TESTS_CSC_SPARSE_MATRIX_GENERIC_TEST_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, '.py')
             generate_template_files(logger, TESTS_CSR_SPARSE_MATRIX_GENERIC_TEST_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, '.py')
             generate_template_files(logger, TESTS_LL_SPARSE_MATRIX_VIEW_GENERIC_TEST_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, '.py')
             generate_template_files(logger, TESTS_SPARSE_MATRIX_COMMON_OPERATIONS_GENERIC_TEST_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, '.py')
+
+            # linalg
+            # SuiteSparse
+            # Umfpack
+            generate_template_files(logger, TESTS_UMFPACK_GENERIC_TEST_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, '.py')
 
     if not action:
         logger.warning("No action proceeded...")
