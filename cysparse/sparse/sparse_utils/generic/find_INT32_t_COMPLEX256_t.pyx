@@ -77,7 +77,6 @@ cdef INT32_t find_bisec_INT32_t_COMPLEX256_t(COMPLEX256_t element, COMPLEX256_t 
         while index > lb and array[index] == element:
             index -= 1
 
-
     return index
 
 cdef INT32_t find_linear_INT32_t_COMPLEX256_t(COMPLEX256_t element, COMPLEX256_t * array, INT32_t lb, INT32_t ub) except -1:

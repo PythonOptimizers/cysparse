@@ -11,6 +11,7 @@ from cysparse.sparse.ll_mat cimport LL_MAT_INCREASE_FACTOR
 from cysparse.sparse.s_mat cimport unexposed_value, PySparseMatrix_Check
 from cysparse.types.cysparse_numpy_types import are_mixed_types_compatible, cysparse_to_numpy_type
 from cysparse.sparse.ll_mat cimport PyLLSparseMatrix_Check, LL_MAT_PPRINT_COL_THRESH, LL_MAT_PPRINT_ROW_THRESH
+
 from cysparse.sparse.s_mat_matrices.s_mat_INT32_t_INT64_t cimport MutableSparseMatrix_INT32_t_INT64_t
 from cysparse.sparse.ll_mat_matrices.ll_mat_INT32_t_INT64_t cimport LLSparseMatrix_INT32_t_INT64_t
 from cysparse.sparse.ll_mat_views.ll_mat_view_INT32_t_INT64_t cimport LLSparseMatrixView_INT32_t_INT64_t
@@ -31,6 +32,7 @@ include "ll_mat_kernel/ll_mat_assignment_kernel_INT32_t_INT64_t.pxi"
 include "ll_mat_kernel/ll_mat_multiplication_by_numpy_vector_kernel_INT32_t_INT64_t.pxi"
 include "ll_mat_helpers/ll_mat_multiplication_INT32_t_INT64_t.pxi"
 include "ll_mat_helpers/ll_mat_addition_INT32_t_INT64_t.pxi"
+
 
 
 ########################################################################################################################
@@ -107,8 +109,6 @@ cdef extern from 'math.h':
     long double sqrtl (long double x)
     double log  (double x)
 
-#cdef extern from "stdlib.h":
-#    void *memcpy(void *dst, void *src, long n)
 
 ########################################################################################################################
 # CySparse cimport/import to avoid circular dependencies
@@ -832,7 +832,9 @@ cdef class LLSparseMatrix_INT32_t_INT64_t(MutableSparseMatrix_INT32_t_INT64_t):
             elif cnp.PyArray_Check(obj):
                 for i from 0 <= i < nrow:
                     for j from 0 <= j < ncol:
-                        self.put(row_indices[i], col_indices[j], <INT64_t> obj[tuple(i, j)])
+                        # TODO: check this...
+                        #self.put(row_indices[i], col_indices[j], <INT64_t> obj[tuple(i, j)])
+                        self.put(row_indices[i], col_indices[j], <INT64_t> obj[i, j])
 
             elif is_python_number(obj):
                 for i from 0 <= i < nrow:
@@ -1564,7 +1566,7 @@ cdef class LLSparseMatrix_INT32_t_INT64_t(MutableSparseMatrix_INT32_t_INT64_t):
 
     def find(self):
         """
-        Return 3 NumPy arrays with the non-zero matrix entries: i-rows, j-cols, vals.
+        Return 3 NumPy arrays (copy) with the non-zero matrix entries: i-rows, j-cols, vals.
         """
         cdef cnp.npy_intp dmat[1]
         dmat[0] = <cnp.npy_intp> self.__nnz
@@ -1655,101 +1657,91 @@ cdef class LLSparseMatrix_INT32_t_INT64_t(MutableSparseMatrix_INT32_t_INT64_t):
 
         return diag
 
-    def triu(self, include_diagonal = True):
+    def tril(self, int k):
         """
-        Return the triangular upper matrix as ``LLSparseMatrix``.
+        Return the lower triangular part of the matrix.
+
+        Args:
+            k: (k<=0) the last diagonal to be included in the lower triangular part.
+
+        Returns:
+            A ``LLSparseMatrix`` with the lower triangular part.
+
+        Raises:
+            IndexError if the diagonal number is out of bounds.
 
         """
+        if k > 0:
+            raise IndexError("k-th diagonal must be <= 0 (here: k = %d)" % k)
+
+        if k < -self.nrow + 1:
+            raise IndexError("k_th diagonal must be %d <= k <= 0 (here: k = %d)" % (-self.nrow + 1, k))
+
         cdef:
-            INT32_t i, j, k
+            INT32_t i, j, k_
+            LLSparseMatrix_INT32_t_INT64_t ll_mat_tril
+
+        ll_mat_tril = LLSparseMatrix_INT32_t_INT64_t(control_object=unexposed_value, nrow=self.__nrow, ncol=self.__ncol, size_hint=self.__nnz, store_zeros=self.__store_zeros, is_symmetric=False)
+
+        # NON OPTIMIZED OPERATION
+        # code is same for symmetric or non symmetric cases
+        for i from 0 <= i < self.__nrow:
+            k_ = self.root[i]
+            while k_ != -1:
+                j = self.col[k_]
+                if i >= j - k:
+                    ll_mat_tril.put(i, j, self.val[k_])
+                k_ = self.link[k_]
+
+        return ll_mat_tril
+
+    def triu(self, int k):
+        """
+        Return the upper triangular part of the matrix.
+
+        Args:
+            k: (k>=0) the last diagonal to be included in the upper triangular part.
+
+        Returns:
+            A ``CSCSparseMatrix`` with the upper triangular part.
+
+        Raises:
+            IndexError if the diagonal number is out of bounds.
+
+        """
+        if k < 0:
+            raise IndexError("k-th diagonal must be >= 0 (here: k = %d)" % k)
+
+        if k > self.ncol - 1:
+            raise IndexError("k_th diagonal must be 0 <= k <= %d (here: k = %d)" % (-self.ncol - 1, k))
+
+        cdef:
+            INT32_t i, j, k_
             LLSparseMatrix_INT32_t_INT64_t ll_mat_triu
 
         ll_mat_triu = LLSparseMatrix_INT32_t_INT64_t(control_object=unexposed_value, nrow=self.__nrow, ncol=self.__ncol, size_hint=self.__nnz, store_zeros=self.__store_zeros, is_symmetric=False)
 
         # NON OPTIMIZED OPERATION
-        if include_diagonal:
-            if self.__is_symmetric:
-                for i from 0 <= i < self.__nrow:
-                    k = self.root[i]
-                    while k != -1:
-                        ll_mat_triu.put(self.col[k], i, self.val[k])
-                        k = self.link[k]
-            else:  # non symmetric
-                for i from 0 <= i < self.__nrow:
-                    k = self.root[i]
-                    while k != -1:
-                        j = self.col[k]
-                        if i <= j:
-                            ll_mat_triu.put(i, j, self.val[k])
-                        k = self.link[k]
-        else:  # don't include the main diagonal
-            if self.__is_symmetric:
-                for i from 0 <= i < self.__nrow:
-                    k = self.root[i]
-                    while k != -1:
-                        j = self.col[k]
-                        if i > j:
-                            ll_mat_triu.put(j, i, self.val[k])
-                        k = self.link[k]
-            else:  # non symmetric
-                for i from 0 <= i < self.__nrow:
-                    k = self.root[i]
-                    while k != -1:
-                        j = self.col[k]
-                        if i < j:
-                            ll_mat_triu.put(i, j, self.val[k])
-                        k = self.link[k]
+        if self.__is_symmetric:
+            for i from 0 <= i < self.__nrow:
+                k_ = self.root[i]
+                while k_ != -1:
+                    j = self.col[k_]
+                    if i >= j + k:
+                        ll_mat_triu.put(j, i, self.val[k_])
+                    k_ = self.link[k_]
+
+        else:    # non symmetric case
+
+            for i from 0 <= i < self.__nrow:
+                k_ = self.root[i]
+                while k_ != -1:
+                    j = self.col[k_]
+                    if i <= j - k:
+                        ll_mat_triu.put(i, j, self.val[k_])
+                    k_ = self.link[k_]
 
         return ll_mat_triu
-
-    def tril(self, include_diagonal = True):
-        """
-        Return the triangular lower matrix as ``LLSparseMatrix``.
-
-        """
-        cdef:
-            INT32_t i, j, k
-            LLSparseMatrix_INT32_t_INT64_t ll_mat_triu
-
-        ll_mat_tril = LLSparseMatrix_INT32_t_INT64_t(control_object=unexposed_value, nrow=self.__nrow, ncol=self.__ncol, size_hint=self.__nnz, store_zeros=self.__store_zeros, is_symmetric=False)
-
-        # NON OPTIMIZED OPERATION
-        if include_diagonal:
-            if self.__is_symmetric:
-                for i from 0 <= i < self.__nrow:
-                    k = self.root[i]
-                    while k != -1:
-                        ll_mat_tril.put(i, self.col[k], self.val[k])
-                        k = self.link[k]
-            else:  # non symmetric
-                for i from 0 <= i < self.__nrow:
-                    k = self.root[i]
-                    while k != -1:
-                        j = self.col[k]
-                        if i >= j:
-                            ll_mat_tril.put(i, j, self.val[k])
-                        k = self.link[k]
-        else:  # don't include the main diagonal
-            # code is the same for both cases but I do keep both codes in case later...
-            if self.__is_symmetric:
-                for i from 0 <= i < self.__nrow:
-                    k = self.root[i]
-                    while k != -1:
-                        j = self.col[k]
-                        if i > j:
-                            ll_mat_tril.put(i, j, self.val[k])
-                        k = self.link[k]
-            else:  # non symmetric
-                for i from 0 <= i < self.__nrow:
-                    k = self.root[i]
-                    while k != -1:
-                        j = self.col[k]
-                        if i > j:
-                            ll_mat_tril.put(i, j, self.val[k])
-                        k = self.link[k]
-
-        return ll_mat_tril
-
 
     ####################################################################################################################
     # Addition
@@ -1824,15 +1816,6 @@ cdef class LLSparseMatrix_INT32_t_INT64_t(MutableSparseMatrix_INT32_t_INT64_t):
         assert are_mixed_types_compatible(INT64_T, b.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(INT64_T)
         return multiply_ll_mat_with_numpy_vector_INT32_t_INT64_t(self, b)
 
-    def matvec2(self, b):
-        """
-        Return :math:`A * b`.
-
-        Test with memoryviews.
-        """
-        # TODO: remove or adapt code
-        return multiply_ll_mat_with_numpy_vector2_INT32_t_INT64_t(self, b)
-
     def matvec_transp(self, b):
         """
         Return :math:`A^t * b`.
@@ -1853,6 +1836,7 @@ cdef class LLSparseMatrix_INT32_t_INT64_t(MutableSparseMatrix_INT32_t_INT64_t):
         # CASES
         if PyLLSparseMatrix_Check(B):
             return multiply_two_ll_mat_INT32_t_INT64_t(self, B)
+
         elif cnp.PyArray_Check(B):
             # test type
             assert are_mixed_types_compatible(INT64_T, B.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(INT64_T)

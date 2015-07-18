@@ -13,6 +13,9 @@ from cysparse.sparse.s_mat_matrices.s_mat_INT32_t_FLOAT128_t cimport ImmutableSp
 from cysparse.sparse.ll_mat_matrices.ll_mat_INT32_t_FLOAT128_t cimport LLSparseMatrix_INT32_t_FLOAT128_t
 
 from cysparse.sparse.sparse_utils.generic.print_FLOAT128_t cimport element_to_string_FLOAT128_t, conjugated_element_to_string_FLOAT128_t, empty_to_string_FLOAT128_t
+from cysparse.sparse.sparse_utils.generic.matrix_translations_INT32_t_FLOAT128_t cimport csr_to_csc_kernel_INT32_t_FLOAT128_t, csc_to_csr_kernel_INT32_t_FLOAT128_t
+
+from cysparse.sparse.csr_mat_matrices.csr_mat_INT32_t_FLOAT128_t cimport CSRSparseMatrix_INT32_t_FLOAT128_t, MakeCSRSparseMatrix_INT32_t_FLOAT128_t
 
 ########################################################################################################################
 # Cython, NumPy import/cimport
@@ -341,7 +344,7 @@ cdef class CSCSparseMatrix_INT32_t_FLOAT128_t(ImmutableSparseMatrix_INT32_t_FLOA
 
         # populate arrays
         cdef:
-            INT32_t j, k_, nnz
+            INT32_t i, j, k_, nnz
 
         nnz = 0
         ind[0] = 0
@@ -357,6 +360,16 @@ cdef class CSCSparseMatrix_INT32_t_FLOAT128_t(ImmutableSparseMatrix_INT32_t_FLOA
                     nnz += 1
 
             ind[j+1] = nnz
+
+        # resize arrays row and val
+        cdef:
+            void *temp
+
+        temp = <INT32_t *> PyMem_Realloc(row, nnz * sizeof(INT32_t))
+        row = <INT32_t*>temp
+
+        temp = <FLOAT128_t *> PyMem_Realloc(val, nnz * sizeof(FLOAT128_t))
+        val = <FLOAT128_t*>temp
 
         return MakeCSCSparseMatrix_INT32_t_FLOAT128_t(self.__nrow, self.__ncol, nnz, ind, row, val, is_symmetric=False, store_zeros=self.__store_zeros)
 
@@ -399,26 +412,69 @@ cdef class CSCSparseMatrix_INT32_t_FLOAT128_t(ImmutableSparseMatrix_INT32_t_FLOA
 
         # populate arrays
         cdef:
-            INT32_t j, k_, nnz
+            INT32_t i, j, k_, nnz
 
         nnz = 0
         ind[0] = 0
 
+        # Special case: when matrix is symmetric: we first create an internal CSR and then translate it to CSC
+        cdef INT32_t * csr_ind
+        cdef INT32_t * csr_col
+        cdef FLOAT128_t  * csr_val
+
         if self.__is_symmetric:
-            # TO BE DONE
-            pass
+            # Special (and annoying) case: we first create a CSR and then translate it to CSC
+            csr_ind = <INT32_t *> PyMem_Malloc((self.__nrow + 1) * sizeof(INT32_t))
+            if not csr_ind:
+                PyMem_Free(ind)
+                PyMem_Free(row)
+                PyMem_Free(val)
+
+                raise MemoryError()
+
+            csr_col = <INT32_t *> PyMem_Malloc(self.__nnz * sizeof(INT32_t))
+            if not csr_col:
+                PyMem_Free(ind)
+                PyMem_Free(row)
+                PyMem_Free(val)
+
+                PyMem_Free(csr_ind)
+                raise MemoryError()
+
+            csr_val = <FLOAT128_t *> PyMem_Malloc(self.__nnz * sizeof(FLOAT128_t))
+            if not csr_val:
+                PyMem_Free(ind)
+                PyMem_Free(row)
+                PyMem_Free(val)
+
+                PyMem_Free(csr_ind)
+                PyMem_Free(csr_col)
+                raise MemoryError()
+
+            csr_ind[0] = 0
+
             for j from 0 <= j < self.__ncol:
                 for k_ from self.ind[j] <= k_ < self.ind[j+1]:
                     i = self.row[k_]
                     v = self.val[k_]
 
-                    if i >= j - k:
-                        row[nnz] = i
-                        val[nnz] = v
+                    if i >= j + k:
+                        csr_col[nnz] = i
+                        csr_val[nnz] = v
                         nnz += 1
 
-                ind[j+1] = nnz
-        else:  # not symmtric
+                csr_ind[j+1] = nnz
+
+            csr_to_csc_kernel_INT32_t_FLOAT128_t(self.__nrow, self.__ncol, nnz,
+                                      csr_ind, csr_col, csr_val,
+                                      ind, row, val)
+
+            # erase temp arrays
+            PyMem_Free(csr_ind)
+            PyMem_Free(csr_col)
+            PyMem_Free(csr_val)
+
+        else:  # not symmetric
             for j from 0 <= j < self.__ncol:
                 for k_ from self.ind[j] <= k_ < self.ind[j+1]:
                     i = self.row[k_]
@@ -431,7 +487,45 @@ cdef class CSCSparseMatrix_INT32_t_FLOAT128_t(ImmutableSparseMatrix_INT32_t_FLOA
 
                 ind[j+1] = nnz
 
+        # resize arrays row and val
+        cdef:
+            void *temp
+
+        temp = <INT32_t *> PyMem_Realloc(row, nnz * sizeof(INT32_t))
+        row = <INT32_t*>temp
+
+        temp = <FLOAT128_t *> PyMem_Realloc(val, nnz * sizeof(FLOAT128_t))
+        val = <FLOAT128_t*>temp
+
         return MakeCSCSparseMatrix_INT32_t_FLOAT128_t(self.__nrow, self.__ncol, nnz, ind, row, val, is_symmetric=False, store_zeros=self.__store_zeros)
+
+    def to_csr(self):
+        """
+        Transform this matrix into a :class:`CSRSparseMatrix`.
+
+        """
+        # create CSR internal arrays: ind, col and val
+        cdef INT32_t * ind = <INT32_t *> PyMem_Malloc((self.__nrow + 1) * sizeof(INT32_t))
+        if not ind:
+            raise MemoryError()
+
+        cdef INT32_t * col = <INT32_t *> PyMem_Malloc(self.__nnz * sizeof(INT32_t))
+        if not col:
+            PyMem_Free(ind)
+            raise MemoryError()
+
+        cdef FLOAT128_t * val = <FLOAT128_t *> PyMem_Malloc(self.__nnz * sizeof(FLOAT128_t))
+        if not val:
+            PyMem_Free(ind)
+            PyMem_Free(col)
+            raise MemoryError()
+
+        csc_to_csr_kernel_INT32_t_FLOAT128_t(self.__nrow, self.__ncol, self.__nnz,
+                       <INT32_t *>self.ind, <INT32_t *>self.row, <FLOAT128_t *>self.val,
+                       ind, col, val)
+
+        return MakeCSRSparseMatrix_INT32_t_FLOAT128_t(self.__nrow, self.__ncol, self.__nnz, ind, col, val, is_symmetric=self.is_symmetric, store_zeros=self.store_zeros)
+
 
     def to_ndarray(self):
         """

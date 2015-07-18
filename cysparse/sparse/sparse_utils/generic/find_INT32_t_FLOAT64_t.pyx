@@ -55,7 +55,6 @@ cdef INT32_t find_bisec_INT32_t_FLOAT64_t(FLOAT64_t element, FLOAT64_t * array, 
         while index > lb and array[index] == element:
             index -= 1
 
-
     return index
 
 cdef INT32_t find_linear_INT32_t_FLOAT64_t(FLOAT64_t element, FLOAT64_t * array, INT32_t lb, INT32_t ub) except -1:

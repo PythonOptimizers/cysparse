@@ -21,6 +21,7 @@ import fnmatch
 import argparse
 import logging
 
+from subprocess import call
 
 from jinja2 import Environment, FileSystemLoader
 
@@ -79,6 +80,7 @@ def make_parser():
     parser.add_argument("-m", "--matrices", help="Create sparse matrices.", action='store_true', required=False)
     parser.add_argument("-s", "--setup", help="Create setup file.", action='store_true', required=False)
     parser.add_argument("-g", "--generic_types", help="Create generic types.", action='store_true', required=False)
+    parser.add_argument("-r", "--linalg", help="Create Linear Algebra contexts.", action='store_true', required=False)
     parser.add_argument("-t", "--tests", help="Create generic tests.", action='store_true', required=False)
     parser.add_argument("-c", "--clean", help="Clean action files.", action='store_true', required=False)
 
@@ -88,7 +90,10 @@ def make_parser():
 #################################################################################################
 # JINJA2 FILTERS
 #################################################################################################
-def type2enum(__type_name):
+####################################
+# CYSPARSE/NUMPY TYPES
+####################################
+def type2enum(type_name):
     """
     Transform a real :program:`CySparse` type into the equivalent :program:`CySparse` enum type.
 
@@ -100,8 +105,8 @@ def type2enum(__type_name):
         cysparse_type:
 
     """
-    enum_name = __type_name[:-1]
-    enum_name = enum_name + __type_name[-1].upper()
+    enum_name = type_name[:-1]
+    enum_name = enum_name + type_name[-1].upper()
 
     return enum_name
 
@@ -158,7 +163,7 @@ def cysparse_type_to_numpy_enum_type(cysparse_type):
 
     For instance:
 
-        FLOAT64_T -> NPY_DOUBLE or NPY_FLOAT64
+        FLOAT64_T -> NPY_FLOAT64
 
     Args:
         cysparse_type:
@@ -198,6 +203,7 @@ def cysparse_type_to_real_sum_cysparse_type(cysparse_type):
 
     return r_type
 
+
 def cysparse_real_type_from_real_cysparse_complex_type(cysparse_type):
     """
     Returns the **real** type for the real or imaginary part of a **real** complex type.
@@ -223,6 +229,22 @@ def cysparse_real_type_from_real_cysparse_complex_type(cysparse_type):
 
     return r_type
 
+
+####################################
+# UMFPACK TYPES
+####################################
+def cysparse_real_type_to_umfpack_family(cysparse_type):
+    if cysparse_type in ['INT32_t']:
+        return 'i'
+    elif cysparse_type in ['INT64_t']:
+        return 'l'
+    elif cysparse_type in ['FLOAT64_t']:
+        return 'd'
+    elif cysparse_type in ['COMPLEX128_t']:
+        return 'z'
+    else:
+        raise TypeError("Not a recognized SuiteSparse Umfpack type")
+
 #################################################################################################
 # COMMON STUFF
 #################################################################################################
@@ -235,13 +257,42 @@ REAL_ELEMENT_TYPES = ['FLOAT32_t', 'FLOAT64_t', 'FLOAT128_t']
 COMPLEX_ELEMENT_TYPES = ['COMPLEX64_t', 'COMPLEX128_t', 'COMPLEX256_t']
 
 # Matrix market types
-INDEX_MM_TYPES = ['INT32_t', 'INT64_t']
-ELEMENT_MM_TYPES = ['INT64_t', 'FLOAT64_t', 'COMPLEX128_t']
+MM_INDEX_TYPES = ['INT32_t', 'INT64_t']
+MM_ELEMENT_TYPES = ['INT64_t', 'FLOAT64_t', 'COMPLEX128_t']
+
+# Contexts
+# SuiteSparse
+# Umfpack
+UMFPACK_INDEX_TYPES = ['INT32_t', 'INT64_t']
+UMFPACK_ELEMENT_TYPES = ['FLOAT64_t', 'COMPLEX128_t']
+# Cholmod
+CHOLMOD_INDEX_TYPES = ['INT32_t', 'INT64_t']
+CHOLMOD_ELEMENT_TYPES = ['FLOAT64_t', 'COMPLEX128_t']
+
+# MUMPS
+
+# test if compiled lib has been compiled in 64 or 32 bits
+#MUMPS_INDEX_TYPES = []
+#MUMPS_ELEMENT_TYPES = []
+
+# ONLY VALID UNDER LINUX/IOS...
+# if use_mumps:
+#     command_line = "file -L %s | grep -q '64-bit' && echo 'library is 64 bit' || echo 'library is 32 bit'" % libcmumps.so
+#
+#
+#     Temp=subprocess.Popen(["netstat","-l"], stdout=subprocess.PIPE, shell=True)
+#     (output,errput)=Temp.communicate()
+#     return_value=Temp.wait()
+
+
+MUMPS_INDEX_TYPES = ['INT64_t']
+MUMPS_ELEMENT_TYPES = ['FLOAT32_t', 'FLOAT64_t', 'COMPLEX64_t', 'COMPLEX128_t']
 
 # when coding
 #ELEMENT_TYPES = ['FLOAT64_t']
 #ELEMENT_TYPES = ['COMPLEX64_t']
-
+#UMFPACK_INDEX_TYPES = ['INT32_t']
+#UMFPACK_ELEMENT_TYPES = ['FLOAT64_t']
 
 GENERAL_CONTEXT = {
                     'basic_type_list' : BASIC_TYPES,
@@ -250,8 +301,15 @@ GENERAL_CONTEXT = {
                     'integer_list' : INTEGER_ELEMENT_TYPES,
                     'real_list' : REAL_ELEMENT_TYPES,
                     'complex_list' : COMPLEX_ELEMENT_TYPES,
-                    'mm_index_list' : INDEX_MM_TYPES,
-                    'mm_type_list' : ELEMENT_MM_TYPES
+                    'mm_index_list' : MM_INDEX_TYPES,
+                    'mm_type_list' : MM_ELEMENT_TYPES,
+                    'umfpack_index_list': UMFPACK_INDEX_TYPES,
+                    'umfpack_type_list' : UMFPACK_ELEMENT_TYPES,
+                    'cholmod_index_list': CHOLMOD_INDEX_TYPES,
+                    'cholmod_type_list': CHOLMOD_ELEMENT_TYPES,
+                    'mumps_index_list': MUMPS_INDEX_TYPES,
+                    'mumps_type_list': MUMPS_ELEMENT_TYPES,
+
                 }
 
 GENERAL_ENVIRONMENT = Environment(
@@ -267,6 +325,7 @@ GENERAL_ENVIRONMENT.filters['cysparse_type_to_numpy_type'] = cysparse_type_to_nu
 GENERAL_ENVIRONMENT.filters['cysparse_type_to_real_sum_cysparse_type'] = cysparse_type_to_real_sum_cysparse_type
 GENERAL_ENVIRONMENT.filters['cysparse_type_to_numpy_enum_type'] = cysparse_type_to_numpy_enum_type
 GENERAL_ENVIRONMENT.filters['cysparse_real_type_from_real_cysparse_complex_type'] = cysparse_real_type_from_real_cysparse_complex_type
+GENERAL_ENVIRONMENT.filters['cysparse_real_type_to_umfpack_family'] = cysparse_real_type_to_umfpack_family
 
 
 def clean_cython_files(logger, directory, file_list=None):
@@ -412,7 +471,7 @@ def generate_following_type_and_index(logger, template_filenames, template_envir
     """
     context = {
         'type_list': ELEMENT_TYPES,
-        'index_list' : INDEX_TYPES
+        'index_list': INDEX_TYPES
     }
 
     for filename in template_filenames:
@@ -461,6 +520,10 @@ SPARSE_SPARSE_UTILS_GENERATE_INDICES_DEFINITION_FILES = [os.path.join(SPARSE_SPA
 
 SPARSE_SPARSE_UTILS_FIND_DECLARATION_FILES = [os.path.join(SPARSE_SPARSE_UTILS_TEMPLATE_DIR, 'find.cpd')]
 SPARSE_SPARSE_UTILS_FIND_DEFINITION_FILES = [os.path.join(SPARSE_SPARSE_UTILS_TEMPLATE_DIR, 'find.cpx')]
+
+SPARSE_SPARSE_UTILS_MATRIX_TRANSLATIONS_DECLARATION_FILES = [os.path.join(SPARSE_SPARSE_UTILS_TEMPLATE_DIR, 'matrix_translations.cpd')]
+SPARSE_SPARSE_UTILS_MATRIX_TRANSLATIONS_DEFINITION_FILES = [os.path.join(SPARSE_SPARSE_UTILS_TEMPLATE_DIR, 'matrix_translations.cpx')]
+
 
 SPARSE_SPARSE_UTILS_PRINT_DECLARATION_FILES = [os.path.join(SPARSE_SPARSE_UTILS_TEMPLATE_DIR, 'print.cpd')]
 SPARSE_SPARSE_UTILS_PRINT_DEFINITION_FILES = [os.path.join(SPARSE_SPARSE_UTILS_TEMPLATE_DIR, 'print.cpx')]
@@ -568,12 +631,42 @@ CSC_SPARSE_MATRIX_HELPERS_INCLUDE_FILES = glob.glob(os.path.join(CSC_SPARSE_MATR
 ### CSBSparseMatrix
 ##########################################
 
+#################################################################################################
+# LINALG
+#################################################################################################
+LINALG_TEMPLATE_DIR = os.path.join(PATH, 'cysparse', 'linalg')
+
+##########################################
+### SuiteSparse
+##########################################
+LINALG_SUITESPARSE_TEMPLATE_DIR = os.path.join(LINALG_TEMPLATE_DIR, 'suitesparse')
+
+# UMFPACK
+LINALG_SUITESPARSE_UMFPACK_TEMPLATE_DIR = os.path.join(LINALG_SUITESPARSE_TEMPLATE_DIR, 'umfpack')
+
+LINALG_SUITESPARSE_UMFPACK_DECLARATION_FILES = glob.glob(os.path.join(LINALG_SUITESPARSE_UMFPACK_TEMPLATE_DIR, '*.cpd'))
+LINALG_SUITESPARSE_UMFPACK_DEFINITION_FILES = glob.glob(os.path.join(LINALG_SUITESPARSE_UMFPACK_TEMPLATE_DIR, '*.cpx'))
+
+# CHOLMOD
+LINALG_SUITESPARSE_CHOLMOD_TEMPLATE_DIR = os.path.join(LINALG_SUITESPARSE_TEMPLATE_DIR, 'cholmod')
+
+LINALG_SUITESPARSE_CHOLMOD_DECLARATION_FILES = glob.glob(os.path.join(LINALG_SUITESPARSE_CHOLMOD_TEMPLATE_DIR, '*.cpd'))
+LINALG_SUITESPARSE_CHOLMOD_DEFINITION_FILES = glob.glob(os.path.join(LINALG_SUITESPARSE_CHOLMOD_TEMPLATE_DIR, '*.cpx'))
+
+##########################################
+### MUMPS
+##########################################
+LINALG_MUMPS_TEMPLATE_DIR = os.path.join(LINALG_TEMPLATE_DIR, 'mumps')
+
+LINALG_MUMPS_DECLARATION_FILES = glob.glob(os.path.join(LINALG_MUMPS_TEMPLATE_DIR, '*.cpd'))
+LINALG_MUMPS_DEFINITION_FILES = glob.glob(os.path.join(LINALG_MUMPS_TEMPLATE_DIR, '*.cpx'))
 
 #################################################################################################
 # TESTS
 #################################################################################################
 TESTS_TEMPLATE_DIR = os.path.join(PATH, 'tests')
 
+# SPARSE MATRICES
 TESTS_CSC_SPARSE_MATRIX_GENERIC_TEST_DIR = os.path.join(TESTS_TEMPLATE_DIR, 'cysparse', 'sparse', 'csc_mat_matrices', 'generic')
 TESTS_CSC_SPARSE_MATRIX_GENERIC_TEST_FILES = glob.glob(os.path.join(TESTS_CSC_SPARSE_MATRIX_GENERIC_TEST_DIR, '*.cpy'))
 
@@ -582,6 +675,19 @@ TESTS_CSR_SPARSE_MATRIX_GENERIC_TEST_FILES = glob.glob(os.path.join(TESTS_CSR_SP
 
 TESTS_LL_SPARSE_MATRIX_VIEW_GENERIC_TEST_DIR = os.path.join(TESTS_TEMPLATE_DIR, 'cysparse', 'sparse', 'll_mat_views', 'generic')
 TESTS_LL_SPARSE_MATRIX_VIEW_GENERIC_TEST_FILES = glob.glob(os.path.join(TESTS_LL_SPARSE_MATRIX_VIEW_GENERIC_TEST_DIR, '*.cpy'))
+
+TESTS_SPARSE_MATRIX_COMMON_OPERATIONS_GENERIC_TEST_DIR = os.path.join(TESTS_TEMPLATE_DIR, 'cysparse', 'sparse', 'common_operations', 'generic')
+TESTS_SPARSE_MATRIX_COMMON_OPERATIONS_GENERIC_TEST_FILES = glob.glob(os.path.join(TESTS_SPARSE_MATRIX_COMMON_OPERATIONS_GENERIC_TEST_DIR, '*.cpy'))
+
+# LINALG
+TESTS_LINALG_DIR = os.path.join(TESTS_TEMPLATE_DIR, 'cysparse', 'linalg')
+
+# SUITESPARSE
+TESTS_SUITESPARSE_DIR = os.path.join(TESTS_LINALG_DIR, 'suitesparse')
+# Umfpack
+TESTS_UMFPACK_GENERIC_DIR = os.path.join(TESTS_SUITESPARSE_DIR, 'umfpack', 'generic')
+TESTS_UMFPACK_GENERIC_TEST_FILES = glob.glob(os.path.join(TESTS_UMFPACK_GENERIC_DIR, '*.cpy'))
+
 
 
 #################################################################################################
@@ -682,6 +788,7 @@ if __name__ == "__main__":
             clean_cython_files(logger, LL_SPARSE_MATRIX_KERNEL_TEMPLATE_DIR)
             # LLSparseMatrix helpers
             clean_cython_files(logger, LL_SPARSE_MATRIX_HELPERS_TEMPLATE_DIR)
+
             # LLSparseMatrix IO
             clean_cython_files(logger, LL_SPARSE_MATRIX_IO_TEMPLATE_DIR)
             # LLSparseMatrix constructors
@@ -730,6 +837,10 @@ if __name__ == "__main__":
             generate_following_type_and_index(logger, SPARSE_SPARSE_UTILS_FIND_DECLARATION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, ELEMENT_TYPES, INDEX_TYPES, '.pxd')
             generate_following_type_and_index(logger, SPARSE_SPARSE_UTILS_FIND_DEFINITION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, ELEMENT_TYPES, INDEX_TYPES, '.pyx')
 
+            # matrix_translations_@index@_@type@.pxd and matrix_translations_@index@_@type@.pyx
+            generate_following_type_and_index(logger, SPARSE_SPARSE_UTILS_MATRIX_TRANSLATIONS_DECLARATION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, ELEMENT_TYPES, INDEX_TYPES, '.pxd')
+            generate_following_type_and_index(logger, SPARSE_SPARSE_UTILS_MATRIX_TRANSLATIONS_DEFINITION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, ELEMENT_TYPES, INDEX_TYPES, '.pyx')
+
             ###############################
             # SparseMatrix
             ###############################
@@ -772,7 +883,7 @@ if __name__ == "__main__":
             generate_following_type_and_index(logger, LL_SPARSE_MATRIX_HELPERS_INCLUDE_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, ELEMENT_TYPES, INDEX_TYPES, '.pxi')
 
             # LLSparseMatrix IO
-            generate_following_type_and_index(logger, LL_SPARSE_MATRIX_IO_INCLUDE_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, ELEMENT_MM_TYPES, INDEX_TYPES, '.pxi')
+            generate_following_type_and_index(logger, LL_SPARSE_MATRIX_IO_INCLUDE_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, MM_ELEMENT_TYPES, MM_INDEX_TYPES, '.pxi')
 
             # LLSparseMatrix Constructors
             generate_following_type_and_index(logger, LL_SPARSE_MATRIX_CONSTRUCTORS_INCLUDE_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, ELEMENT_TYPES, INDEX_TYPES, '.pxi')
@@ -810,6 +921,37 @@ if __name__ == "__main__":
             # helpers
             generate_following_type_and_index(logger, CSC_SPARSE_MATRIX_HELPERS_INCLUDE_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, ELEMENT_TYPES, INDEX_TYPES, '.pxi')
 
+    if arg_options.linalg or arg_options.all:
+        action = True
+        logger.info("Act for generic contexts")
+
+        if arg_options.clean:
+            # SuiteSparse
+            # Umfpack
+            clean_cython_files(logger, LINALG_SUITESPARSE_UMFPACK_TEMPLATE_DIR)
+            # Cholmod
+            clean_cython_files(logger, LINALG_SUITESPARSE_CHOLMOD_TEMPLATE_DIR)
+
+            # MUMPS
+            clean_cython_files(logger, LINALG_MUMPS_TEMPLATE_DIR)
+            
+        else:
+            ###############################
+            # SuiteSparse
+            ###############################
+            # Umfpack
+            generate_following_type_and_index(logger, LINALG_SUITESPARSE_UMFPACK_DECLARATION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, UMFPACK_ELEMENT_TYPES, UMFPACK_INDEX_TYPES, '.pxd')
+            generate_following_type_and_index(logger, LINALG_SUITESPARSE_UMFPACK_DEFINITION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, UMFPACK_ELEMENT_TYPES, UMFPACK_INDEX_TYPES, '.pyx')
+            # Cholmod
+            generate_following_type_and_index(logger, LINALG_SUITESPARSE_CHOLMOD_DECLARATION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, CHOLMOD_ELEMENT_TYPES, CHOLMOD_INDEX_TYPES, '.pxd')
+            generate_following_type_and_index(logger, LINALG_SUITESPARSE_CHOLMOD_DEFINITION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, CHOLMOD_ELEMENT_TYPES, CHOLMOD_INDEX_TYPES, '.pyx')
+
+            ###############################
+            # MUMPS
+            ###############################
+            generate_following_type_and_index(logger, LINALG_MUMPS_DECLARATION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, MUMPS_ELEMENT_TYPES, MUMPS_INDEX_TYPES, '.pxd')
+            generate_following_type_and_index(logger, LINALG_MUMPS_DEFINITION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, MUMPS_ELEMENT_TYPES, MUMPS_INDEX_TYPES, '.pyx')
+
     if arg_options.tests or arg_options.all:
         action = True
         logger.info("Act for generic tests")
@@ -817,16 +959,25 @@ if __name__ == "__main__":
         if arg_options.clean:
             clean_cython_files(logger, TESTS_CSC_SPARSE_MATRIX_GENERIC_TEST_DIR, find_files(TESTS_CSC_SPARSE_MATRIX_GENERIC_TEST_DIR, '*.py', False, True))
             clean_cython_files(logger, TESTS_CSR_SPARSE_MATRIX_GENERIC_TEST_DIR, find_files(TESTS_CSR_SPARSE_MATRIX_GENERIC_TEST_DIR, '*.py', False, True))
-            clean_cython_files(logger, TESTS_LL_SPARSE_MATRIX_VIEW_GENERIC_TEST_DIR, find_files(TESTS_CSR_SPARSE_MATRIX_GENERIC_TEST_DIR, '*.py', False, True))
+            clean_cython_files(logger, TESTS_LL_SPARSE_MATRIX_VIEW_GENERIC_TEST_DIR, find_files(TESTS_LL_SPARSE_MATRIX_VIEW_GENERIC_TEST_DIR, '*.py', False, True))
+            clean_cython_files(logger, TESTS_SPARSE_MATRIX_COMMON_OPERATIONS_GENERIC_TEST_DIR, find_files(TESTS_SPARSE_MATRIX_COMMON_OPERATIONS_GENERIC_TEST_DIR, '*.py', False, True))
 
+            clean_cython_files(logger, TESTS_UMFPACK_GENERIC_DIR, find_files(TESTS_UMFPACK_GENERIC_DIR, '*.py', False, True))
         else:
             ###############################
             # Types
             ###############################
-            # generic types
+            # generic types tests
+            # Sparse matrices
             generate_template_files(logger, TESTS_CSC_SPARSE_MATRIX_GENERIC_TEST_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, '.py')
             generate_template_files(logger, TESTS_CSR_SPARSE_MATRIX_GENERIC_TEST_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, '.py')
             generate_template_files(logger, TESTS_LL_SPARSE_MATRIX_VIEW_GENERIC_TEST_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, '.py')
+            generate_template_files(logger, TESTS_SPARSE_MATRIX_COMMON_OPERATIONS_GENERIC_TEST_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, '.py')
+
+            # linalg
+            # SuiteSparse
+            # Umfpack
+            generate_template_files(logger, TESTS_UMFPACK_GENERIC_TEST_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, '.py')
 
     if not action:
         logger.warning("No action proceeded...")

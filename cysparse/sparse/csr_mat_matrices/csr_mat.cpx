@@ -11,10 +11,11 @@ from cysparse.types.cysparse_numpy_types import *
 
 from cysparse.sparse.s_mat_matrices.s_mat_@index@_@type@ cimport ImmutableSparseMatrix_@index@_@type@, MutableSparseMatrix_@index@_@type@
 from cysparse.sparse.ll_mat_matrices.ll_mat_@index@_@type@ cimport LLSparseMatrix_@index@_@type@
-from cysparse.sparse.csc_mat_matrices.csc_mat_@index@_@type@ cimport CSCSparseMatrix_@index@_@type@
+from cysparse.sparse.csc_mat_matrices.csc_mat_@index@_@type@ cimport CSCSparseMatrix_@index@_@type@, MakeCSCSparseMatrix_@index@_@type@
 
 from cysparse.sparse.sparse_utils.generic.sort_indices_@index@ cimport sort_array_@index@
 from cysparse.sparse.sparse_utils.generic.print_@type@ cimport element_to_string_@type@, conjugated_element_to_string_@type@, empty_to_string_@type@
+from cysparse.sparse.sparse_utils.generic.matrix_translations_@index@_@type@ cimport csr_to_csc_kernel_@index@_@type@, csc_to_csr_kernel_@index@_@type@
 
 ########################################################################################################################
 # Cython, NumPy import/cimport
@@ -423,6 +424,229 @@ YOU HAVE TO EXPLICITY CAST YOUR TYPE
 
         return diag
 
+    def tril(self, int k):
+        """
+        Return the lower triangular part of the matrix.
+
+        Args:
+            k: (k<=0) the last diagonal to be included in the lower triangular part.
+
+        Returns:
+            A ``CSRSparseMatrix`` with the lower triangular part.
+
+        Raises:
+            IndexError if the diagonal number is out of bounds.
+
+        """
+        if k > 0:
+            raise IndexError("k-th diagonal must be <= 0 (here: k = %d)" % k)
+
+        if k < -self.nrow + 1:
+            raise IndexError("k_th diagonal must be %d <= k <= 0 (here: k = %d)" % (-self.nrow + 1, k))
+
+        # create internal arrays (big enough to contain all elements)
+
+        cdef @index@ * ind = <@index@ *> PyMem_Malloc((self.__nrow + 1) * sizeof(@index@))
+        if not ind:
+            raise MemoryError()
+
+        cdef @index@ * col = <@index@ *> PyMem_Malloc(self.__nnz * sizeof(@index@))
+        if not col:
+            PyMem_Free(ind)
+            raise MemoryError()
+
+        cdef @type@ * val = <@type@ *> PyMem_Malloc(self.__nnz * sizeof(@type@))
+        if not val:
+            PyMem_Free(ind)
+            PyMem_Free(col)
+            raise MemoryError()
+
+        # populate arrays
+        cdef:
+            @index@ i, j, k_, nnz
+
+        nnz = 0
+        ind[0] = 0
+
+        for i from 0 <= i < self.__nrow:
+            for k_ from self.ind[i] <= k_ < self.ind[i+1]:
+                j = self.col[k_]
+                v = self.val[k_]
+
+                if i >= j - k:
+                    col[nnz] = j
+                    val[nnz] = v
+                    nnz += 1
+
+            ind[i+1] = nnz
+
+        # resize arrays col and val
+        cdef:
+            void *temp
+
+        temp = <@index@ *> PyMem_Realloc(col, nnz * sizeof(@index@))
+        col = <@index@*>temp
+
+        temp = <@type@ *> PyMem_Realloc(val, nnz * sizeof(@type@))
+        val = <@type@*>temp
+
+        return MakeCSRSparseMatrix_@index@_@type@(self.__nrow, self.__ncol, nnz, ind, col, val, is_symmetric=False, store_zeros=self.__store_zeros)
+
+    def triu(self, int k):
+        """
+        Return the upper triangular part of the matrix.
+
+        Args:
+            k: (k>=0) the last diagonal to be included in the upper triangular part.
+
+        Returns:
+            A ``CSRSparseMatrix`` with the upper triangular part.
+
+        Raises:
+            IndexError if the diagonal number is out of bounds.
+
+        """
+        if k < 0:
+            raise IndexError("k-th diagonal must be >= 0 (here: k = %d)" % k)
+
+        if k > self.ncol - 1:
+            raise IndexError("k_th diagonal must be 0 <= k <= %d (here: k = %d)" % (-self.ncol - 1, k))
+
+        # create internal arrays (big enough to contain all elements)
+
+        cdef @index@ * ind = <@index@ *> PyMem_Malloc((self.__nrow + 1) * sizeof(@index@))
+        if not ind:
+            raise MemoryError()
+
+        cdef @index@ * col = <@index@ *> PyMem_Malloc(self.__nnz * sizeof(@index@))
+        if not col:
+            PyMem_Free(ind)
+            raise MemoryError()
+
+        cdef @type@ * val = <@type@ *> PyMem_Malloc(self.__nnz * sizeof(@type@))
+        if not val:
+            PyMem_Free(ind)
+            PyMem_Free(col)
+            raise MemoryError()
+
+        # populate arrays
+        cdef:
+            @index@ i, j, k_, nnz
+
+        nnz = 0
+        ind[0] = 0
+
+        # Special case: when matrix is symmetric: we first create an internal CSC and then translate it to CSR
+        cdef @index@ * csc_ind
+        cdef @index@ * csc_row
+        cdef @type@  * csc_val
+
+        if self.__is_symmetric:
+            # Special (and annoying) case: we first create a CSC and then translate it to CSR
+            csc_ind = <@index@ *> PyMem_Malloc((self.__ncol + 1) * sizeof(@index@))
+            if not csc_ind:
+                PyMem_Free(ind)
+                PyMem_Free(col)
+                PyMem_Free(val)
+
+                raise MemoryError()
+
+            csc_row = <@index@ *> PyMem_Malloc(self.__nnz * sizeof(@index@))
+            if not csc_row:
+                PyMem_Free(ind)
+                PyMem_Free(col)
+                PyMem_Free(val)
+
+                PyMem_Free(csc_ind)
+                raise MemoryError()
+
+            csc_val = <@type@ *> PyMem_Malloc(self.__nnz * sizeof(@type@))
+            if not csc_val:
+                PyMem_Free(ind)
+                PyMem_Free(col)
+                PyMem_Free(val)
+
+                PyMem_Free(csc_ind)
+                PyMem_Free(csc_row)
+                raise MemoryError()
+
+            csc_ind[0] = 0
+
+            for i from 0 <= i < self.__nrow:
+                for k_ from self.ind[i] <= k_ < self.ind[i+1]:
+                    j = self.col[k_]
+                    v = self.val[k_]
+
+                    if i >= j + k:
+                        csc_row[nnz] = j
+                        csc_val[nnz] = v
+                        nnz += 1
+
+                csc_ind[i+1] = nnz
+
+            csc_to_csr_kernel_@index@_@type@(self.__nrow, self.__ncol, nnz,
+                                      csc_ind, csc_row, csc_val,
+                                      ind, col, val)
+
+            # erase temp arrays
+            PyMem_Free(csc_ind)
+            PyMem_Free(csc_row)
+            PyMem_Free(csc_val)
+
+        else:  # not symmetric
+            for i from 0 <= i < self.__nrow:
+                for k_ from self.ind[i] <= k_ < self.ind[i+1]:
+                    j = self.col[k_]
+                    v = self.val[k_]
+
+                    if i <= j - k:
+                        col[nnz] = j
+                        val[nnz] = v
+                        nnz += 1
+
+                ind[i+1] = nnz
+
+        # resize arrays col and val
+        cdef:
+            void *temp
+
+        temp = <@index@ *> PyMem_Realloc(col, nnz * sizeof(@index@))
+        col = <@index@*>temp
+
+        temp = <@type@ *> PyMem_Realloc(val, nnz * sizeof(@type@))
+        val = <@type@*>temp
+
+        return MakeCSRSparseMatrix_@index@_@type@(self.__nrow, self.__ncol, nnz, ind, col, val, is_symmetric=False, store_zeros=self.__store_zeros)
+
+    def to_csc(self):
+        """
+        Transform this matrix into a :class:`CSRSparseMatrix`.
+
+        """
+
+        # create CSC internal arrays: ind, row and val
+        cdef @index@ * ind = <@index@ *> PyMem_Malloc((self.__ncol + 1) * sizeof(@index@))
+        if not ind:
+            raise MemoryError()
+
+        cdef @index@ * row = <@index@ *> PyMem_Malloc(self.__nnz * sizeof(@index@))
+        if not row:
+            PyMem_Free(ind)
+            raise MemoryError()
+
+        cdef @type@ * val = <@type@ *> PyMem_Malloc(self.__nnz * sizeof(@type@))
+        if not val:
+            PyMem_Free(ind)
+            PyMem_Free(row)
+            raise MemoryError()
+
+        csr_to_csc_kernel_@index@_@type@(self.__nrow, self.__ncol, self.__nnz,
+                       <@index@ *>self.ind, <@index@ *>self.col, <@type@ *>self.val,
+                       ind, row, val)
+
+        return MakeCSCSparseMatrix_@index@_@type@(self.__nrow, self.__ncol, self.__nnz, ind, row, val, is_symmetric=self.is_symmetric, store_zeros=self.store_zeros)
+
+
     def to_ndarray(self):
         """
         Return the matrix in the form of a :program:`NumPy` ``ndarray``.
@@ -693,67 +917,3 @@ cdef MakeCSRSparseMatrix_@index@_@type@(@index@ nrow, @index@ ncol, @index@ nnz,
 
     return csr_mat
 
-########################################################################################################################
-# Multiplication functions
-########################################################################################################################
-# TODO: put in helpers...
-cdef LLSparseMatrix_@index@_@type@ multiply_csr_mat_by_csc_mat_@index@_@type@(CSRSparseMatrix_@index@_@type@ A, CSCSparseMatrix_@index@_@type@ B):
-
-    if A.is_complex or B.is_complex:
-        raise NotImplemented("This operation is not (yet) implemented for complex matrices")
-
-    # TODO: take into account if matrix A or B has its column indices ordered or not...
-    # test dimensions
-    cdef @index@ A_nrow = A.nrow
-    cdef @index@ A_ncol = A.ncol
-
-    cdef @index@ B_nrow = B.nrow
-    cdef @index@ B_ncol = B.ncol
-
-    if A_ncol != B_nrow:
-        raise IndexError("Matrix dimensions must agree ([%d, %d] * [%d, %d])" % (A_nrow, A_ncol, B_nrow, B_ncol))
-
-    cdef @index@ C_nrow = A_nrow
-    cdef @index@ C_ncol = B_ncol
-
-    cdef bint store_zeros = A.store_zeros and B.store_zeros
-    # TODO: what strategy to implement?
-    cdef @index@ size_hint = A.nnz
-
-    # TODO: maybe use MakeLLSparseMatrix and fix circular dependencies...
-    C = LLSparseMatrix_@index@_@type@(control_object=unexposed_value, nrow=C_nrow, ncol=C_ncol, size_hint=size_hint, store_zeros=store_zeros)
-
-    # CASES
-    if not A.__is_symmetric and not B.__is_symmetric:
-        pass
-    else:
-        raise NotImplemented("Multiplication with symmetric matrices is not implemented yet")
-
-    # NON OPTIMIZED MULTIPLICATION
-    # TODO: what do we do? Column indices are NOT necessarily sorted...
-    cdef:
-        @index@ i, j, k
-        @type@ sum
-
-    # don't keep zeros, no matter what
-    cdef bint old_store_zeros = store_zeros
-    C.store_zeros = 0
-
-    for i from 0 <= i < C_nrow:
-        for j from 0 <= j < C_ncol:
-{% if type in integer_list %}
-            sum = 0
-{% elif type in complex_list %}
-            sum = 0.0 + 0.0j
-{% else %}
-            sum = 0.0
-{% endif %}
-
-            for k from 0 <= k < A_ncol:
-                sum += (A[i, k] * B[k, j])
-
-            C.put(i, j, sum)
-
-    C.store_zeros = old_store_zeros
-
-    return C
