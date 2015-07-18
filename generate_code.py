@@ -305,7 +305,7 @@ GENERAL_CONTEXT = {
                     'mm_type_list' : MM_ELEMENT_TYPES,
                     'umfpack_index_list': UMFPACK_INDEX_TYPES,
                     'umfpack_type_list' : UMFPACK_ELEMENT_TYPES,
-		            'cholmod_index_list': CHOLMOD_INDEX_TYPES,
+                    'cholmod_index_list': CHOLMOD_INDEX_TYPES,
                     'cholmod_type_list': CHOLMOD_ELEMENT_TYPES,
                     'mumps_index_list': MUMPS_INDEX_TYPES,
                     'mumps_type_list': MUMPS_ELEMENT_TYPES,
