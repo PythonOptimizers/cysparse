@@ -10,7 +10,7 @@ We test **all** types and the symmetric and general cases.
 """
 from cysparse.sparse.ll_mat import *
 from cysparse.types.cysparse_types import *
-from cysparse.linalg.umfpack import NewUmfpackSolver
+from cysparse.linalg.umfpack import NewUmfpackContext
 
 import numpy as np
 
@@ -18,13 +18,13 @@ import unittest
 
 import sys
 
-def is_equal(A, B):
+def is_equal(A, B, eps=1e-12):
     if A.nrow != B.nrow or A.ncol != B.ncol:
         return False
 
     for i in xrange(A.nrow):
         for j in xrange(A.ncol):
-            if A[i, j] != B[i, j]:
+            if abs(A[i, j] - B[i, j]) > eps:
                 return False
 
     return True
@@ -42,27 +42,41 @@ class CySparseUmfpackLUTestCase(CySparseUmfpackBaseTestCase):
     """
     def setUp(self):
         self.nbr_of_elements = 36
-        self.nrow = 6
-        self.ncol = 6
+        self.size = 6
 
-{% for index_type in index_list %}
+{% for index_type in umfpack_index_list %}
   {% set outerloop = loop %}
-  {% for element_type in type_list %}
-        self.l_@outerloop.index@_@loop.index@ = NewLinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, itype=@index_type|type2enum@, dtype=@element_type|type2enum@, row_wise=False)
+  {% for element_type in umfpack_type_list %}
+        self.l_@outerloop.index@_@loop.index@ = NewArrowheadLLSparseMatrix(size=self.size, itype=@index_type|type2enum@, dtype=@element_type|type2enum@, row_wise=False)
 
-        #self.l_@outerloop.index@_@loop.index@_csc = self.l_@outerloop.index@_@loop.index@.to_csc()
-        #self.l_@outerloop.index@_@loop.index@_csr = self.l_@outerloop.index@_@loop.index@.to_csr()
+        self.context_@outerloop.index@_@loop.index@ = NewUmfpackContext(self.l_@outerloop.index@_@loop.index@)
+        self.context_@outerloop.index@_@loop.index@.set_verbosity(0)
+
   {% endfor %}
 {% endfor %}
 
-
-    def test_simple_equality_one_by_one(self):
-{% for index_type in index_list %}
+{% for index_type in umfpack_index_list %}
   {% set outerloop = loop %}
-  {% for element_type in type_list %}
+  {% for element_type in umfpack_type_list %}
+    def test_simple_equality_one_by_one_@outerloop.index@_@loop.index@(self):
+        (L, U, P, Q, D, do_recip, R) = self.context_@outerloop.index@_@loop.index@.get_LU()
 
-        self.failUnless(is_equal(self.l_@outerloop.index@_@loop.index@_csc.copy(), self.l_@outerloop.index@_@loop.index@_csr))
-        self.failUnless(is_equal(self.l_@outerloop.index@_@loop.index@_csr.copy(), self.l_@outerloop.index@_@loop.index@_csc))
-        self.failUnless(is_equal(self.l_@outerloop.index@_@loop.index@.copy(), self.l_@outerloop.index@_@loop.index@))
+        P_mat = NewPermutationLLSparseMatrix(P=P, size=self.size, dtype=@element_type|type2enum@, itype=@index_type|type2enum@)
+        Q_mat = NewPermutationLLSparseMatrix(P=Q, size=self.size, dtype=@element_type|type2enum@, itype=@index_type|type2enum@)
+
+        if do_recip:
+            R_mat = NewLLSparseMatrix(size=self.size, dtype=@element_type|type2enum@, itype=@index_type|type2enum@)
+            for i in xrange(self.size):
+                R_mat[i, i] = R[i]
+        else:
+            R_mat = NewLLSparseMatrix(size=self.size, dtype=@element_type|type2enum@, itype=@index_type|type2enum@)
+            for i in xrange(self.size):
+                R_mat[i, i] = 1/R[i]
+
+        self.failUnless(is_equal(L * U, P_mat * R_mat * self.l_@outerloop.index@_@loop.index@ * Q_mat))
+
   {% endfor %}
 {% endfor %}
+
+if __name__ == '__main__':
+    unittest.main()

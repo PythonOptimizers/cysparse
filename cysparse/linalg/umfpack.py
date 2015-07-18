@@ -4,10 +4,10 @@ Factory method to access SuiteSparse UMFPACK.
 from cysparse.sparse.ll_mat import PyLLSparseMatrix_Check
 from cysparse.types.cysparse_types import *
 
-from cysparse.solvers.suitesparse.umfpack.umfpack_INT32_t_FLOAT64_t import UmfpackSolver_INT32_t_FLOAT64_t
-from cysparse.solvers.suitesparse.umfpack.umfpack_INT32_t_COMPLEX128_t import UmfpackSolver_INT32_t_COMPLEX128_t
-from cysparse.solvers.suitesparse.umfpack.umfpack_INT64_t_FLOAT64_t import UmfpackSolver_INT64_t_FLOAT64_t
-from cysparse.solvers.suitesparse.umfpack.umfpack_INT64_t_COMPLEX128_t import UmfpackSolver_INT64_t_COMPLEX128_t
+from cysparse.linalg.suitesparse.umfpack.umfpack_INT32_t_FLOAT64_t import UmfpackContext_INT32_t_FLOAT64_t
+from cysparse.linalg.suitesparse.umfpack.umfpack_INT32_t_COMPLEX128_t import UmfpackContext_INT32_t_COMPLEX128_t
+from cysparse.linalg.suitesparse.umfpack.umfpack_INT64_t_FLOAT64_t import UmfpackContext_INT64_t_FLOAT64_t
+from cysparse.linalg.suitesparse.umfpack.umfpack_INT64_t_COMPLEX128_t import UmfpackContext_INT64_t_COMPLEX128_t
 
 
 def NewUmfpackContext(A):

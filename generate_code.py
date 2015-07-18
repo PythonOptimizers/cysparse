@@ -93,7 +93,7 @@ def make_parser():
 ####################################
 # CYSPARSE/NUMPY TYPES
 ####################################
-def type2enum(__type_name):
+def type2enum(type_name):
     """
     Transform a real :program:`CySparse` type into the equivalent :program:`CySparse` enum type.
 
@@ -105,8 +105,8 @@ def type2enum(__type_name):
         cysparse_type:
 
     """
-    enum_name = __type_name[:-1]
-    enum_name = enum_name + __type_name[-1].upper()
+    enum_name = type_name[:-1]
+    enum_name = enum_name + type_name[-1].upper()
 
     return enum_name
 

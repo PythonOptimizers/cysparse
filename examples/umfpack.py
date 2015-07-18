@@ -7,9 +7,9 @@ import sys
 #A = NewLinearFillLLSparseMatrix(nrow=3, ncol=3, itype=types.INT64_T, dtype=types.FLOAT64_T)
 
 itype = types.INT32_T
-dtype = types.FLOAT64_T
+dtype = types.COMPLEX128_T
 
-np_dtype = np.float64
+np_dtype = np.complex128
 
 nrow = 3
 ncol = 3
@@ -29,9 +29,9 @@ A[0:3,0:3] = B
 #A[0, 0] = 0
 print A
 
-from cysparse.solvers.umfpack import NewUmfpackSolver
+from cysparse.linalg.umfpack import NewUmfpackContext
 
-solver = NewUmfpackSolver(A)
+solver = NewUmfpackContext(A)
 
 solver.set_verbosity(0)
 
@@ -83,21 +83,29 @@ print np.dot(L.to_ndarray(), U.to_ndarray())
 
 #sys.exit(-1)
 
-P_mat = NewPermutationLLSparseMatrix(P=P, size=3)
+P_mat = NewPermutationLLSparseMatrix(P=P, size=3, dtype=dtype, itype=itype)
 
 
 print P_mat
 
-Q_mat = NewPermutationLLSparseMatrix(P=Q, size=3)
+Q_mat = NewPermutationLLSparseMatrix(P=Q, size=3, dtype=dtype, itype=itype)
 
 print Q_mat
 
+print "z" * 80
+print R
+print R.dtype
+
 if do_recip:
-    R_mat = NewBandLLSparseMatrix(diag_coeff=[0], numpy_arrays=[R], size=3, dtype=dtype, itype=itype)
+    #R_mat = NewBandLLSparseMatrix(diag_coeff=[0], numpy_arrays=[R], size=3, dtype=dtype, itype=itype)
+    R_mat = NewLLSparseMatrix(size=3, dtype=dtype, itype=itype)
+    for i in xrange(3):
+        R_mat[i, i] = R[i]
 else:
     R_mat = NewLLSparseMatrix(size=3, dtype=dtype, itype=itype)
     for i in xrange(3):
         R_mat[i, i] = 1/R[i]
+
 print R_mat
 
 print "T" * 80
