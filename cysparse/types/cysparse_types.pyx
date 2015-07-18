@@ -231,7 +231,7 @@ cpdef int result_type(cp_types.CySparseType type1, cp_types.CySparseType type2) 
         type2:
 
     Returns:
-        Resulting type. The return is ``int`` to be compatible with ``Python``.
+        Resulting type. The return type is ``int`` to be compatible with ``Python``.
 
     Raises:
         ``TypeError`` whenever both types are **not** compatible.
@@ -308,7 +308,6 @@ cpdef int result_type(cp_types.CySparseType type1, cp_types.CySparseType type2) 
         raise TypeError("Shouldn't happen. CODE 6. Please report.")
 
     return r_type
-
 
 cpdef int result_real_sum_type(cp_types.CySparseType type1):
     """

@@ -1231,3 +1231,115 @@ def NewLinearFillLLSparseMatrix(**kwargs):
 
     else:
         raise TypeError('itype not recognized')
+
+def NewPermutationLLSparseMatrix(**kwargs):
+    """
+    See ``MakePermutationLLSparseMatrix``.
+
+    Note:
+        Input arguments are **not** tested.
+    """
+    p_vec = kwargs.pop('P', None)
+
+    if kwargs.get('is_symmetric', False):
+        raise NotImplementedError('This type of matrix is not implemented for symmetric matrices')
+
+    ll_mat = NewLLSparseMatrix(**kwargs)
+
+    itype = ll_mat.itype
+    dtype = ll_mat.dtype
+
+    # launch right "constructor" method
+
+    
+    if itype == INT32_T:
+    
+        
+        if dtype == INT32_T:
+        
+            return MakePartitionLLSparseMatrix_INT32_t_INT32_t(ll_mat, p_vec)
+    
+        
+        elif dtype == INT64_T:
+        
+            return MakePartitionLLSparseMatrix_INT32_t_INT64_t(ll_mat, p_vec)
+    
+        
+        elif dtype == FLOAT32_T:
+        
+            return MakePartitionLLSparseMatrix_INT32_t_FLOAT32_t(ll_mat, p_vec)
+    
+        
+        elif dtype == FLOAT64_T:
+        
+            return MakePartitionLLSparseMatrix_INT32_t_FLOAT64_t(ll_mat, p_vec)
+    
+        
+        elif dtype == FLOAT128_T:
+        
+            return MakePartitionLLSparseMatrix_INT32_t_FLOAT128_t(ll_mat, p_vec)
+    
+        
+        elif dtype == COMPLEX64_T:
+        
+            return MakePartitionLLSparseMatrix_INT32_t_COMPLEX64_t(ll_mat, p_vec)
+    
+        
+        elif dtype == COMPLEX128_T:
+        
+            return MakePartitionLLSparseMatrix_INT32_t_COMPLEX128_t(ll_mat, p_vec)
+    
+        
+        elif dtype == COMPLEX256_T:
+        
+            return MakePartitionLLSparseMatrix_INT32_t_COMPLEX256_t(ll_mat, p_vec)
+    
+    
+
+    
+    elif itype == INT64_T:
+    
+        
+        if dtype == INT32_T:
+        
+            return MakePartitionLLSparseMatrix_INT64_t_INT32_t(ll_mat, p_vec)
+    
+        
+        elif dtype == INT64_T:
+        
+            return MakePartitionLLSparseMatrix_INT64_t_INT64_t(ll_mat, p_vec)
+    
+        
+        elif dtype == FLOAT32_T:
+        
+            return MakePartitionLLSparseMatrix_INT64_t_FLOAT32_t(ll_mat, p_vec)
+    
+        
+        elif dtype == FLOAT64_T:
+        
+            return MakePartitionLLSparseMatrix_INT64_t_FLOAT64_t(ll_mat, p_vec)
+    
+        
+        elif dtype == FLOAT128_T:
+        
+            return MakePartitionLLSparseMatrix_INT64_t_FLOAT128_t(ll_mat, p_vec)
+    
+        
+        elif dtype == COMPLEX64_T:
+        
+            return MakePartitionLLSparseMatrix_INT64_t_COMPLEX64_t(ll_mat, p_vec)
+    
+        
+        elif dtype == COMPLEX128_T:
+        
+            return MakePartitionLLSparseMatrix_INT64_t_COMPLEX128_t(ll_mat, p_vec)
+    
+        
+        elif dtype == COMPLEX256_T:
+        
+            return MakePartitionLLSparseMatrix_INT64_t_COMPLEX256_t(ll_mat, p_vec)
+    
+    
+
+    else:
+        raise TypeError('itype not recognized')

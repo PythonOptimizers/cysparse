@@ -655,3 +655,47 @@ def NewLinearFillLLSparseMatrix(**kwargs):
 {% endfor %}
     else:
         raise TypeError('itype not recognized')
+
+def NewPermutationLLSparseMatrix(**kwargs):
+    """
+    See ``MakePermutationLLSparseMatrix``.
+
+    Note:
+        Input arguments are **not** tested.
+    """
+    p_vec = kwargs.pop('P', None)
+
+    if kwargs.get('is_symmetric', False):
+        raise NotImplementedError('This type of matrix is not implemented for symmetric matrices')
+
+    ll_mat = NewLLSparseMatrix(**kwargs)
+
+    itype = ll_mat.itype
+    dtype = ll_mat.dtype
+
+    # launch right "constructor" method
+{% for index_type in index_list %}
+    {% if index_type == index_list |first %}
+    if itype == @index_type|type2enum@:
+    {% for element_type in type_list %}
+        {% if element_type == type_list |first %}
+        if dtype == @element_type|type2enum@:
+        {% else %}
+        elif dtype == @element_type|type2enum@:
+        {% endif %}
+            return MakePartitionLLSparseMatrix_@index_type@_@element_type@(ll_mat, p_vec)
+    {% endfor %}
+    {% else %}
+    elif itype == @index_type|type2enum@:
+    {% for element_type in type_list %}
+        {% if element_type == type_list |first %}
+        if dtype == @element_type|type2enum@:
+        {% else %}
+        elif dtype == @element_type|type2enum@:
+        {% endif %}
+            return MakePartitionLLSparseMatrix_@index_type@_@element_type@(ll_mat, p_vec)
+    {% endfor %}
+    {% endif %}
+{% endfor %}
+    else:
+        raise TypeError('itype not recognized')
