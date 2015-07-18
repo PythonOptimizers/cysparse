@@ -5,6 +5,7 @@ from cysparse.sparse.s_mat cimport unexposed_value
 from cysparse.types.cysparse_types import *
 from cysparse.types.cysparse_types cimport *
 from cysparse.types.cysparse_types cimport min_integer_type
+from cysparse.types.cysparse_numpy_types import are_mixed_types_cast_compatible
 
 #from cysparse.types.cysparse_generic_types cimport min_type
 
@@ -52,6 +53,21 @@ LL_MAT_DEFAULT_SIZE_HINT = 40
 LL_MAT_PPRINT_COL_THRESH = 20
 LL_MAT_PPRINT_ROW_THRESH = 40
 
+########################################################################################################################
+# Cython, NumPy import/cimport
+########################################################################################################################
+# Import the Python-level symbols of numpy
+import numpy as np
+
+# Import the C-level symbols of numpy
+cimport numpy as cnp
+
+cnp.import_array()
+
+########################################################################################################################
+# CySparse include
+########################################################################################################################
+# pxi files should come last (except for circular dependencies)
 
     
 from cysparse.sparse.ll_mat_matrices.ll_mat_INT32_t_INT32_t cimport LLSparseMatrix_INT32_t_INT32_t
@@ -90,51 +106,56 @@ from cysparse.sparse.ll_mat_matrices.ll_mat_INT64_t_COMPLEX256_t cimport LLSpars
     
 
 
-########################################################################################################################
-# CySparse include
-########################################################################################################################
-# pxi files should come last (except for circular dependencies)
+
 
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT32_t_INT32_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_diagonals_INT32_t_INT32_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_bands_INT32_t_INT32_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT32_t_INT32_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_permutations_INT32_t_INT32_t.pxi"
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT32_t_INT64_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_diagonals_INT32_t_INT64_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_bands_INT32_t_INT64_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT32_t_INT64_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_permutations_INT32_t_INT64_t.pxi"
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT32_t_FLOAT32_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_diagonals_INT32_t_FLOAT32_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_bands_INT32_t_FLOAT32_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT32_t_FLOAT32_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_permutations_INT32_t_FLOAT32_t.pxi"
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT32_t_FLOAT64_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_diagonals_INT32_t_FLOAT64_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_bands_INT32_t_FLOAT64_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT32_t_FLOAT64_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_permutations_INT32_t_FLOAT64_t.pxi"
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT32_t_FLOAT128_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_diagonals_INT32_t_FLOAT128_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_bands_INT32_t_FLOAT128_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT32_t_FLOAT128_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_permutations_INT32_t_FLOAT128_t.pxi"
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT32_t_COMPLEX64_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_diagonals_INT32_t_COMPLEX64_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_bands_INT32_t_COMPLEX64_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT32_t_COMPLEX64_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_permutations_INT32_t_COMPLEX64_t.pxi"
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT32_t_COMPLEX128_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_diagonals_INT32_t_COMPLEX128_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_bands_INT32_t_COMPLEX128_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT32_t_COMPLEX128_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_permutations_INT32_t_COMPLEX128_t.pxi"
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT32_t_COMPLEX256_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_diagonals_INT32_t_COMPLEX256_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_bands_INT32_t_COMPLEX256_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT32_t_COMPLEX256_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_permutations_INT32_t_COMPLEX256_t.pxi"
     
 
     
@@ -142,41 +163,49 @@ include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT64_t_INT32_t.p
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_diagonals_INT64_t_INT32_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_bands_INT64_t_INT32_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT64_t_INT32_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_permutations_INT64_t_INT32_t.pxi"
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT64_t_INT64_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_diagonals_INT64_t_INT64_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_bands_INT64_t_INT64_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT64_t_INT64_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_permutations_INT64_t_INT64_t.pxi"
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT64_t_FLOAT32_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_diagonals_INT64_t_FLOAT32_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_bands_INT64_t_FLOAT32_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT64_t_FLOAT32_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_permutations_INT64_t_FLOAT32_t.pxi"
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT64_t_FLOAT64_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_diagonals_INT64_t_FLOAT64_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_bands_INT64_t_FLOAT64_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT64_t_FLOAT64_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_permutations_INT64_t_FLOAT64_t.pxi"
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT64_t_FLOAT128_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_diagonals_INT64_t_FLOAT128_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_bands_INT64_t_FLOAT128_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT64_t_FLOAT128_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_permutations_INT64_t_FLOAT128_t.pxi"
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT64_t_COMPLEX64_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_diagonals_INT64_t_COMPLEX64_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_bands_INT64_t_COMPLEX64_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT64_t_COMPLEX64_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_permutations_INT64_t_COMPLEX64_t.pxi"
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT64_t_COMPLEX128_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_diagonals_INT64_t_COMPLEX128_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_bands_INT64_t_COMPLEX128_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT64_t_COMPLEX128_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_permutations_INT64_t_COMPLEX128_t.pxi"
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT64_t_COMPLEX256_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_diagonals_INT64_t_COMPLEX256_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_bands_INT64_t_COMPLEX256_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT64_t_COMPLEX256_t.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_permutations_INT64_t_COMPLEX256_t.pxi"
     
 
 
@@ -1257,42 +1286,42 @@ def NewPermutationLLSparseMatrix(**kwargs):
         
         if dtype == INT32_T:
         
-            return MakePartitionLLSparseMatrix_INT32_t_INT32_t(ll_mat, p_vec)
+            return MakePermutationLLSparseMatrix_INT32_t_INT32_t(ll_mat, p_vec)
     
         
         elif dtype == INT64_T:
         
-            return MakePartitionLLSparseMatrix_INT32_t_INT64_t(ll_mat, p_vec)
+            return MakePermutationLLSparseMatrix_INT32_t_INT64_t(ll_mat, p_vec)
     
         
         elif dtype == FLOAT32_T:
         
-            return MakePartitionLLSparseMatrix_INT32_t_FLOAT32_t(ll_mat, p_vec)
+            return MakePermutationLLSparseMatrix_INT32_t_FLOAT32_t(ll_mat, p_vec)
     
         
         elif dtype == FLOAT64_T:
         
-            return MakePartitionLLSparseMatrix_INT32_t_FLOAT64_t(ll_mat, p_vec)
+            return MakePermutationLLSparseMatrix_INT32_t_FLOAT64_t(ll_mat, p_vec)
     
         
         elif dtype == FLOAT128_T:
         
-            return MakePartitionLLSparseMatrix_INT32_t_FLOAT128_t(ll_mat, p_vec)
+            return MakePermutationLLSparseMatrix_INT32_t_FLOAT128_t(ll_mat, p_vec)
     
         
         elif dtype == COMPLEX64_T:
         
-            return MakePartitionLLSparseMatrix_INT32_t_COMPLEX64_t(ll_mat, p_vec)
+            return MakePermutationLLSparseMatrix_INT32_t_COMPLEX64_t(ll_mat, p_vec)
     
         
         elif dtype == COMPLEX128_T:
         
-            return MakePartitionLLSparseMatrix_INT32_t_COMPLEX128_t(ll_mat, p_vec)
+            return MakePermutationLLSparseMatrix_INT32_t_COMPLEX128_t(ll_mat, p_vec)
     
         
         elif dtype == COMPLEX256_T:
         
-            return MakePartitionLLSparseMatrix_INT32_t_COMPLEX256_t(ll_mat, p_vec)
+            return MakePermutationLLSparseMatrix_INT32_t_COMPLEX256_t(ll_mat, p_vec)
     
     
 
@@ -1302,42 +1331,42 @@ def NewPermutationLLSparseMatrix(**kwargs):
         
         if dtype == INT32_T:
         
-            return MakePartitionLLSparseMatrix_INT64_t_INT32_t(ll_mat, p_vec)
+            return MakePermutationLLSparseMatrix_INT64_t_INT32_t(ll_mat, p_vec)
     
         
         elif dtype == INT64_T:
         
-            return MakePartitionLLSparseMatrix_INT64_t_INT64_t(ll_mat, p_vec)
+            return MakePermutationLLSparseMatrix_INT64_t_INT64_t(ll_mat, p_vec)
     
         
         elif dtype == FLOAT32_T:
         
-            return MakePartitionLLSparseMatrix_INT64_t_FLOAT32_t(ll_mat, p_vec)
+            return MakePermutationLLSparseMatrix_INT64_t_FLOAT32_t(ll_mat, p_vec)
     
         
         elif dtype == FLOAT64_T:
         
-            return MakePartitionLLSparseMatrix_INT64_t_FLOAT64_t(ll_mat, p_vec)
+            return MakePermutationLLSparseMatrix_INT64_t_FLOAT64_t(ll_mat, p_vec)
     
         
         elif dtype == FLOAT128_T:
         
-            return MakePartitionLLSparseMatrix_INT64_t_FLOAT128_t(ll_mat, p_vec)
+            return MakePermutationLLSparseMatrix_INT64_t_FLOAT128_t(ll_mat, p_vec)
     
         
         elif dtype == COMPLEX64_T:
         
-            return MakePartitionLLSparseMatrix_INT64_t_COMPLEX64_t(ll_mat, p_vec)
+            return MakePermutationLLSparseMatrix_INT64_t_COMPLEX64_t(ll_mat, p_vec)
     
         
         elif dtype == COMPLEX128_T:
         
-            return MakePartitionLLSparseMatrix_INT64_t_COMPLEX128_t(ll_mat, p_vec)
+            return MakePermutationLLSparseMatrix_INT64_t_COMPLEX128_t(ll_mat, p_vec)
     
         
         elif dtype == COMPLEX256_T:
         
-            return MakePartitionLLSparseMatrix_INT64_t_COMPLEX256_t(ll_mat, p_vec)
+            return MakePermutationLLSparseMatrix_INT64_t_COMPLEX256_t(ll_mat, p_vec)
     
     
 

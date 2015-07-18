@@ -5,6 +5,7 @@ from cysparse.sparse.s_mat cimport unexposed_value
 from cysparse.types.cysparse_types import *
 from cysparse.types.cysparse_types cimport *
 from cysparse.types.cysparse_types cimport min_integer_type
+from cysparse.types.cysparse_numpy_types import are_mixed_types_cast_compatible
 
 #from cysparse.types.cysparse_generic_types cimport min_type
 
@@ -52,11 +53,16 @@ LL_MAT_DEFAULT_SIZE_HINT = 40
 LL_MAT_PPRINT_COL_THRESH = 20
 LL_MAT_PPRINT_ROW_THRESH = 40
 
-{% for index_type in index_list %}
-    {% for element_type in type_list %}
-from cysparse.sparse.ll_mat_matrices.ll_mat_@index_type@_@element_type@ cimport LLSparseMatrix_@index_type@_@element_type@
-    {% endfor %}
-{% endfor %}
+########################################################################################################################
+# Cython, NumPy import/cimport
+########################################################################################################################
+# Import the Python-level symbols of numpy
+import numpy as np
+
+# Import the C-level symbols of numpy
+cimport numpy as cnp
+
+cnp.import_array()
 
 ########################################################################################################################
 # CySparse include
@@ -64,10 +70,18 @@ from cysparse.sparse.ll_mat_matrices.ll_mat_@index_type@_@element_type@ cimport 
 # pxi files should come last (except for circular dependencies)
 {% for index_type in index_list %}
     {% for element_type in type_list %}
+from cysparse.sparse.ll_mat_matrices.ll_mat_@index_type@_@element_type@ cimport LLSparseMatrix_@index_type@_@element_type@
+    {% endfor %}
+{% endfor %}
+
+
+{% for index_type in index_list %}
+    {% for element_type in type_list %}
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_@index_type@_@element_type@.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_diagonals_@index_type@_@element_type@.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_bands_@index_type@_@element_type@.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_@index_type@_@element_type@.pxi"
+include "ll_mat_matrices/ll_mat_constructors/ll_mat_permutations_@index_type@_@element_type@.pxi"
     {% endfor %}
 {% endfor %}
 
@@ -683,7 +697,7 @@ def NewPermutationLLSparseMatrix(**kwargs):
         {% else %}
         elif dtype == @element_type|type2enum@:
         {% endif %}
-            return MakePartitionLLSparseMatrix_@index_type@_@element_type@(ll_mat, p_vec)
+            return MakePermutationLLSparseMatrix_@index_type@_@element_type@(ll_mat, p_vec)
     {% endfor %}
     {% else %}
     elif itype == @index_type|type2enum@:
@@ -693,7 +707,7 @@ def NewPermutationLLSparseMatrix(**kwargs):
         {% else %}
         elif dtype == @element_type|type2enum@:
         {% endif %}
-            return MakePartitionLLSparseMatrix_@index_type@_@element_type@(ll_mat, p_vec)
+            return MakePermutationLLSparseMatrix_@index_type@_@element_type@(ll_mat, p_vec)
     {% endfor %}
     {% endif %}
 {% endfor %}
