@@ -256,8 +256,8 @@ REAL_ELEMENT_TYPES = ['FLOAT32_t', 'FLOAT64_t', 'FLOAT128_t']
 COMPLEX_ELEMENT_TYPES = ['COMPLEX64_t', 'COMPLEX128_t', 'COMPLEX256_t']
 
 # Matrix market types
-INDEX_MM_TYPES = ['INT32_t', 'INT64_t']
-ELEMENT_MM_TYPES = ['INT64_t', 'FLOAT64_t', 'COMPLEX128_t']
+MM_INDEX_TYPES = ['INT32_t', 'INT64_t']
+MM_ELEMENT_TYPES = ['INT64_t', 'FLOAT64_t', 'COMPLEX128_t']
 
 # Solvers
 # SuiteSparse
@@ -278,8 +278,8 @@ GENERAL_CONTEXT = {
                     'integer_list' : INTEGER_ELEMENT_TYPES,
                     'real_list' : REAL_ELEMENT_TYPES,
                     'complex_list' : COMPLEX_ELEMENT_TYPES,
-                    'mm_index_list' : INDEX_MM_TYPES,
-                    'mm_type_list' : ELEMENT_MM_TYPES,
+                    'mm_index_list' : MM_INDEX_TYPES,
+                    'mm_type_list' : MM_ELEMENT_TYPES,
                     'umfpack_index_list' : UMFPACK_INDEX_TYPES,
                     'umfpack_type_list' : UMFPACK_ELEMENT_TYPES
                 }
@@ -829,7 +829,7 @@ if __name__ == "__main__":
             generate_following_type_and_index(logger, LL_SPARSE_MATRIX_HELPERS_INCLUDE_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, ELEMENT_TYPES, INDEX_TYPES, '.pxi')
 
             # LLSparseMatrix IO
-            generate_following_type_and_index(logger, LL_SPARSE_MATRIX_IO_INCLUDE_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, ELEMENT_MM_TYPES, INDEX_TYPES, '.pxi')
+            generate_following_type_and_index(logger, LL_SPARSE_MATRIX_IO_INCLUDE_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, MM_ELEMENT_TYPES, MM_INDEX_TYPES, '.pxi')
 
             # LLSparseMatrix Constructors
             generate_following_type_and_index(logger, LL_SPARSE_MATRIX_CONSTRUCTORS_INCLUDE_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, ELEMENT_TYPES, INDEX_TYPES, '.pxi')
