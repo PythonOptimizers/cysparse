@@ -301,9 +301,15 @@ GENERAL_CONTEXT = {
                     'integer_list' : INTEGER_ELEMENT_TYPES,
                     'real_list' : REAL_ELEMENT_TYPES,
                     'complex_list' : COMPLEX_ELEMENT_TYPES,
+<<<<<<< HEAD
                     'mm_index_list' : MM_INDEX_TYPES,
                     'mm_type_list' : MM_ELEMENT_TYPES,
+                    'umfpack_index_list' : UMFPACK_INDEX_TYPES,
+=======
+                    'mm_index_list' : INDEX_MM_TYPES,
+                    'mm_type_list' : ELEMENT_MM_TYPES,
                     'umfpack_index_list': UMFPACK_INDEX_TYPES,
+>>>>>>> feature/mumps
                     'umfpack_type_list' : UMFPACK_ELEMENT_TYPES,
 		            'cholmod_index_list': CHOLMOD_INDEX_TYPES,
                     'cholmod_type_list': CHOLMOD_ELEMENT_TYPES,

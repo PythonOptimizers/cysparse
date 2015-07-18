@@ -67,11 +67,19 @@ numpy_include = np.get_include()
 # SUITESPARSE
 # Do we use it or not?
 use_suitesparse = cysparse_config.getboolean('SUITESPARSE', 'use_suitesparse')
-
 # find user defined directories
 if use_suitesparse:
     suitesparse_include_dirs = get_path_option(cysparse_config, 'SUITESPARSE', 'include_dirs')
     suitesparse_library_dirs = get_path_option(cysparse_config, 'SUITESPARSE', 'library_dirs')
+
+# MUMPS
+# Do we use it or not?
+use_mumps = cysparse_config.getboolean('MUMPS', 'use_mumps')
+# find user defined directories
+if use_mumps:
+    mumps_include_dirs = get_path_option(cysparse_config, 'MUMPS', 'include_dirs')
+    mumps_library_dirs = get_path_option(cysparse_config, 'MUMPS', 'library_dirs')
+
 
 ########################################################################################################################
 # EXTENSIONS
@@ -264,7 +272,7 @@ utils_ext = [
 ]
 
 ########################################################################################################################
-#                                                *** umfpack ***
+#                                                *** SuiteSparse ***
 if use_suitesparse:
     umfpack_ext_params = ext_params.copy()
     umfpack_ext_params['include_dirs'].extend(suitesparse_include_dirs)
@@ -282,6 +290,22 @@ if use_suitesparse:
 {% endfor %}
         ]
 
+
+if use_mumps:
+    mumps_ext_params = ext_params.copy()
+    mumps_ext_params['include_dirs'].extend(mumps_include_dirs)
+    mumps_ext_params['library_dirs'] = mumps_library_dirs
+    mumps_ext_params['libraries'] = []
+
+    mumps_ext = [
+{% for index_type in mumps_index_list %}
+  {% for element_type in mumps_type_list %}
+        Extension(name="cysparse.linalg.mumps.mumps_@index_type@_@element_type@",
+                  sources=['cysparse/linalg/mumps/mumps_@index_type@_@element_type@.pxd',
+                           'cysparse/linalg/mumps/mumps_@index_type@_@element_type@.pyx'], **mumps_ext_params),
+  {% endfor %}
+{% endfor %}
+        ]
 
 ########################################################################################################################
 # SETUP
