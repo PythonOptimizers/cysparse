@@ -1,28 +1,15 @@
+from cysparse.sparse.ll_mat_matrices.ll_mat_INT64_t_FLOAT32_t cimport LLSparseMatrix_INT64_t_FLOAT32_t
+from cysparse.sparse.csc_mat_matrices.csc_mat_INT64_t_FLOAT32_t cimport CSCSparseMatrix_INT64_t_FLOAT32_t
 
-cdef extern from "mumps_c_types.h":
+from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
+from cpython cimport Py_INCREF, Py_DECREF
 
-    ctypedef int        MUMPS_INT
-    ctypedef np.int8_t  MUMPS_INT8
+import numpy as np
+cimport numpy as cnp
 
-    ctypedef float      SMUMPS_COMPLEX
-    ctypedef float      SMUMPS_REAL
+cnp.import_array()
 
-    ctypedef double     DMUMPS_COMPLEX
-    ctypedef double     DMUMPS_REAL
 
-    ctypedef struct mumps_complex:
-        pass
-
-    ctypedef mumps_complex  CMUMPS_COMPLEX
-    ctypedef float          CMUMPS_REAL
-
-    ctypedef struct mumps_double_complex:
-        pass
-
-    ctypedef mumps_double_complex  ZMUMPS_COMPLEX
-    ctypedef double                ZMUMPS_REAL
-
-    char* MUMPS_VERSION
 
 
 cdef class MumpsContext_INT64_t_FLOAT32_t:
@@ -34,7 +21,7 @@ cdef class MumpsContext_INT64_t_FLOAT32_t:
     We follow the common use of Mumps. In particular, we use the same names for the methods of this
     class as their corresponding counter-parts in Mumps.
     """
-    MUMPS_VERSION = "%s" % MUMPS_VERSION
+    MUMPS_VERSION = "0.66666"
 
     def __cinit__(self, LLSparseMatrix_INT64_t_FLOAT32_t A):
         """

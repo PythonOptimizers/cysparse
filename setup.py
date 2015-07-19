@@ -1125,8 +1125,7 @@ packages_list = ['cysparse',
             'cysparse.sparse.ll_mat_views',
             'cysparse.utils',
             'cysparse.linalg',
-            'cysparse.linalg.suitesparse',
-            'cysparse.linalg.suitesparse.umfpack',
+            'cysparse.linalg.mumps',
             #'cysparse.sparse.IO'
             ]
 
@@ -1136,6 +1135,12 @@ if use_suitesparse:
     # add suitsparse package
     ext_modules += umfpack_ext
     packages_list.append('cysparse.linalg.suitesparse')
+    packages_list.append('cysparse.linalg.suitesparse.umfpack')
+
+if use_mumps:
+    # add mumps
+    ext_modules += mumps_ext
+    packages_list.append('cysparse.linalg.mumps')
 
 setup(name=  'CySparse',
   version=find_version(os.path.realpath(__file__), 'cysparse', '__init__.py'),
