@@ -13,6 +13,9 @@
 # http://jinja.pocoo.org/docs/dev/
 #
 #################################################################################################
+
+from setup.files_finder import find_files
+
 import os
 import sys
 import glob
@@ -20,36 +23,11 @@ import fnmatch
 
 import argparse
 import logging
+import ConfigParser
 
 from subprocess import call
 
 from jinja2 import Environment, FileSystemLoader
-
-
-#################################################################################################
-# HELPERS
-##################################################################################################
-def find_files(directory, pattern, recursively=True, complete_filename=True):
-    """
-    Return a list of files with or without base directories, recursively or not.
-
-    Args:
-        directory: base directory to start the search.
-        pattern: fnmatch pattern for filenames.
-        complete_filename: return complete filename or not?
-        recursively: do we recurse or not?
-    """
-
-    for root, dirs, files in os.walk(directory):
-        for basename in files:
-            if fnmatch.fnmatch(basename, pattern):
-                if complete_filename:
-                    filename = os.path.join(root, basename)
-                else:
-                    filename = basename
-                yield filename
-        if not recursively:
-            break
 
 
 #################################################################################################
@@ -74,7 +52,6 @@ def make_parser():
         The command line parser.
     """
     parser = argparse.ArgumentParser(description='%s: a Cython code generator for the CySparse library.' % os.path.basename(sys.argv[0]))
-    parser.add_argument("-l", "--log_level", help="Log level while processing actions.", required=False, default='INFO')
     parser.add_argument("-a", "--all", help="Create all action files.", action='store_true', required=False)
 
     parser.add_argument("-m", "--matrices", help="Create sparse matrices.", action='store_true', required=False)
@@ -699,14 +676,21 @@ if __name__ == "__main__":
     parser = make_parser()
     arg_options = parser.parse_args()
 
+    # read cysparse.cfg
+    cysparse_config = ConfigParser.SafeConfigParser()
+    cysparse_config.read('cysparse.cfg')
+
     # create logger
-    logger_name = 'cysparse_generate_code'
+    logger_name = cysparse_config.get('CODE_GENERATION', 'log_name')
+    if logger_name == '':
+        logger_name = 'cysparse_generate_code'
+
     logger = logging.getLogger(logger_name)
 
     # levels
-    log_level = LOG_LEVELS[arg_options.log_level]
-    console_log_level = LOG_LEVELS['WARNING']       # CHANGE THIS
-    file_log_level = LOG_LEVELS['INFO']             # CHANGE THIS
+    log_level = LOG_LEVELS[cysparse_config.get('CODE_GENERATION', 'log_level')]
+    console_log_level = LOG_LEVELS[cysparse_config.get('CODE_GENERATION', 'console_log_level')]
+    file_log_level = LOG_LEVELS[cysparse_config.get('CODE_GENERATION', 'file_log_level')]
 
     logger.setLevel(log_level)
 
