@@ -265,59 +265,40 @@ cdef class SparseMatrix_INT32_t_COMPLEX64_t(SparseMatrix):
     ####################################################################################################################
     # OUTPUT STRINGS
     ####################################################################################################################
-    def attributes_short_string(self):
+    def matrix_short_description(self):
         """
 
         """
-        s = "of dim (%d, %d) with %d non zero values" % (self.__nrow, self.__ncol, self.__nnz)
+        s = "of size=(%d, %d) with %d non zero values" % (self.__nrow, self.__ncol, self.__nnz)
         return s
 
-    def attributes_long_string(self):
-
+    def storage_scheme_string(self):
         symmetric_string = None
         if self.__is_symmetric:
-            symmetric_string = 'symmetric'
+            symmetric_string = 'Symmetric'
         else:
-            symmetric_string = 'general'
+            symmetric_string = 'General'
 
         store_zeros_string = None
         if self.__store_zeros:
-            store_zeros_string = "store_zeros"
+            store_zeros_string = "with"
         else:
-            store_zeros_string = "no_zeros"
+            store_zeros_string = "without"
 
-        s = "%s [%s, %s]" % (self.attributes_short_string(), symmetric_string, store_zeros_string)
-
-        return s
-
-    def attributes_condensed(self):
-        symmetric_string = None
-        if self.__is_symmetric:
-            symmetric_string = 'S'
-        else:
-            symmetric_string = 'G'
-
-        store_zeros_string = None
-        if self.__store_zeros:
-            store_zeros_string = "SZ"
-        else:
-            store_zeros_string = "NZ"
-
-        s= "(%s, %s, [%d, %d])" % (symmetric_string, store_zeros_string, self.__nrow, self.__ncol)
+        s = '%s and %s zeros' % (symmetric_string, store_zeros_string)
 
         return s
 
     def _matrix_description_before_printing(self):
-        s = "%s %s" % (self.__type_name, self.attributes_condensed())
+        s = "%s %s <Storage scheme: %s>" % (self.__type_name, self.matrix_short_description(), self.storage_scheme_string())
         return s
 
     def __repr__(self):
         """
-        Return an unique representation of the :class:`SparseMatrix` object.
+        Return an "unique" representation of the :class:`SparseMatrix` object.
 
         """
-        s = "%s %s" % (self.__type_name, self.attributes_long_string())
-        return s
+        return self._matrix_description_before_printing()
 
     def __str__(self):
         """
