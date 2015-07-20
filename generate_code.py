@@ -238,6 +238,7 @@ def cysparse_real_type_to_mumps_family(cysparse_type):
     else:
         raise TypeError("Not a recognized Mumps type")
 
+
 def clean_cython_files(logger, directory, file_list=None):
     """
 
