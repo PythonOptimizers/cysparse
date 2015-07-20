@@ -11,4 +11,4 @@ from cysparse.linalg.mumps_context import NewMumpsContext
 
 context = NewMumpsContext(A)
 
-print context
+print context.MUMPS_VERSION

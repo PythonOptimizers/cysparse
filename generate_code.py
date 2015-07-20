@@ -223,6 +223,21 @@ def cysparse_real_type_to_umfpack_family(cysparse_type):
         raise TypeError("Not a recognized SuiteSparse Umfpack type")
 
 
+####################################
+# MUMPS TYPES
+####################################
+def cysparse_real_type_to_mumps_family(cysparse_type):
+    if cysparse_type in ['FLOAT32_t']:
+        return 's'
+    elif cysparse_type in ['FLOAT64_t']:
+        return 'd'
+    elif cysparse_type in ['COMPLEX64_t']:
+        return 'c'
+    elif cysparse_type in ['COMPLEX128_t']:
+        return 'z'
+    else:
+        raise TypeError("Not a recognized Mumps type")
+
 def clean_cython_files(logger, directory, file_list=None):
     """
 
@@ -684,6 +699,8 @@ if __name__ == "__main__":
     GENERAL_ENVIRONMENT.filters['cysparse_type_to_numpy_enum_type'] = cysparse_type_to_numpy_enum_type
     GENERAL_ENVIRONMENT.filters['cysparse_real_type_from_real_cysparse_complex_type'] = cysparse_real_type_from_real_cysparse_complex_type
     GENERAL_ENVIRONMENT.filters['cysparse_real_type_to_umfpack_family'] = cysparse_real_type_to_umfpack_family
+    GENERAL_ENVIRONMENT.filters['cysparse_real_type_to_mumps_family'] = cysparse_real_type_to_mumps_family
+
     #################################################################################################
     # END COMMON STUFF
     #################################################################################################

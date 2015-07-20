@@ -253,6 +253,8 @@ class __Pyx_FakeReference {
 #include "stdlib.h"
 #include "numpy/arrayobject.h"
 #include "numpy/ufuncobject.h"
+#include "mumps_c_types.h"
+#include "smumps_c.h"
 #ifdef _OPENMP
 #include <omp.h>
 #endif /* _OPENMP */
@@ -1576,24 +1578,24 @@ static char __pyx_k_test[] = "__test__";
 static char __pyx_k_numpy[] = "numpy";
 static char __pyx_k_range[] = "range";
 static char __pyx_k_import[] = "__import__";
-static char __pyx_k_0_66666[] = "0.66666";
 static char __pyx_k_ValueError[] = "ValueError";
 static char __pyx_k_pyx_vtable[] = "__pyx_vtable__";
 static char __pyx_k_RuntimeError[] = "RuntimeError";
 static char __pyx_k_MUMPS_VERSION[] = "MUMPS_VERSION";
+static char __pyx_k_TO_BE_DEFINED[] = "TO BE DEFINED...";
 static char __pyx_k_ndarray_is_not_C_contiguous[] = "ndarray is not C contiguous";
 static char __pyx_k_unknown_dtype_code_in_numpy_pxd[] = "unknown dtype code in numpy.pxd (%d)";
 static char __pyx_k_Format_string_allocated_too_shor[] = "Format string allocated too short, see comment in numpy.pxd";
 static char __pyx_k_Non_native_byte_order_not_suppor[] = "Non-native byte order not supported";
 static char __pyx_k_ndarray_is_not_Fortran_contiguou[] = "ndarray is not Fortran contiguous";
 static char __pyx_k_Format_string_allocated_too_shor_2[] = "Format string allocated too short.";
-static PyObject *__pyx_kp_s_0_66666;
 static PyObject *__pyx_n_s_A;
 static PyObject *__pyx_kp_u_Format_string_allocated_too_shor;
 static PyObject *__pyx_kp_u_Format_string_allocated_too_shor_2;
 static PyObject *__pyx_n_s_MUMPS_VERSION;
 static PyObject *__pyx_kp_u_Non_native_byte_order_not_suppor;
 static PyObject *__pyx_n_s_RuntimeError;
+static PyObject *__pyx_kp_s_TO_BE_DEFINED;
 static PyObject *__pyx_n_s_ValueError;
 static PyObject *__pyx_n_s_import;
 static PyObject *__pyx_n_s_main;
@@ -1615,8 +1617,8 @@ static PyObject *__pyx_tuple__4;
 static PyObject *__pyx_tuple__5;
 static PyObject *__pyx_tuple__6;
 
-/* "cysparse/linalg/mumps/mumps_INT64_t_FLOAT32_t.pyx":26
- *     MUMPS_VERSION = "0.66666"
+/* "cysparse/linalg/mumps/mumps_INT64_t_FLOAT32_t.pyx":135
+ *     MUMPS_VERSION = 'TO BE DEFINED...'
  * 
  *     def __cinit__(self, LLSparseMatrix_INT64_t_FLOAT32_t A):             # <<<<<<<<<<<<<<
  *         """
@@ -1651,7 +1653,7 @@ static int __pyx_pw_8cysparse_6linalg_5mumps_23mumps_INT64_t_FLOAT32_t_30MumpsCo
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__cinit__") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 26; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__cinit__") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 135; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 1) {
       goto __pyx_L5_argtuple_error;
@@ -1662,13 +1664,13 @@ static int __pyx_pw_8cysparse_6linalg_5mumps_23mumps_INT64_t_FLOAT32_t_30MumpsCo
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 1, 1, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 26; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 1, 1, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 135; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("cysparse.linalg.mumps.mumps_INT64_t_FLOAT32_t.MumpsContext_INT64_t_FLOAT32_t.__cinit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return -1;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_A), __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT64_t_FLOAT32_t_LLSparseMatrix_INT64_t_FLOAT32_t, 1, "A", 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 26; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_A), __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT64_t_FLOAT32_t_LLSparseMatrix_INT64_t_FLOAT32_t, 1, "A", 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 135; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_r = __pyx_pf_8cysparse_6linalg_5mumps_23mumps_INT64_t_FLOAT32_t_30MumpsContext_INT64_t_FLOAT32_t___cinit__(((struct __pyx_obj_8cysparse_6linalg_5mumps_23mumps_INT64_t_FLOAT32_t_MumpsContext_INT64_t_FLOAT32_t *)__pyx_v_self), __pyx_v_A);
 
   /* function exit code */
@@ -1690,7 +1692,7 @@ static int __pyx_pf_8cysparse_6linalg_5mumps_23mumps_INT64_t_FLOAT32_t_30MumpsCo
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__cinit__", 0);
 
-  /* "cysparse/linalg/mumps/mumps_INT64_t_FLOAT32_t.pyx":37
+  /* "cysparse/linalg/mumps/mumps_INT64_t_FLOAT32_t.pyx":146
  * 
  *         """
  *         self.A = A             # <<<<<<<<<<<<<<
@@ -1703,7 +1705,7 @@ static int __pyx_pf_8cysparse_6linalg_5mumps_23mumps_INT64_t_FLOAT32_t_30MumpsCo
   __Pyx_DECREF(((PyObject *)__pyx_v_self->A));
   __pyx_v_self->A = __pyx_v_A;
 
-  /* "cysparse/linalg/mumps/mumps_INT64_t_FLOAT32_t.pyx":38
+  /* "cysparse/linalg/mumps/mumps_INT64_t_FLOAT32_t.pyx":147
  *         """
  *         self.A = A
  *         Py_INCREF(self.A)  # increase ref to object to avoid the user deleting it explicitly or implicitly             # <<<<<<<<<<<<<<
@@ -1715,45 +1717,45 @@ static int __pyx_pf_8cysparse_6linalg_5mumps_23mumps_INT64_t_FLOAT32_t_30MumpsCo
   Py_INCREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "cysparse/linalg/mumps/mumps_INT64_t_FLOAT32_t.pyx":40
+  /* "cysparse/linalg/mumps/mumps_INT64_t_FLOAT32_t.pyx":149
  *         Py_INCREF(self.A)  # increase ref to object to avoid the user deleting it explicitly or implicitly
  * 
  *         self.nrow = A.nrow             # <<<<<<<<<<<<<<
  *         self.ncol = A.ncol
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_A), __pyx_n_s_nrow); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 40; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_A), __pyx_n_s_nrow); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 149; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyInt_As_long(__pyx_t_1); if (unlikely((__pyx_t_2 == (long)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 40; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyInt_As_long(__pyx_t_1); if (unlikely((__pyx_t_2 == (long)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 149; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_self->nrow = __pyx_t_2;
 
-  /* "cysparse/linalg/mumps/mumps_INT64_t_FLOAT32_t.pyx":41
+  /* "cysparse/linalg/mumps/mumps_INT64_t_FLOAT32_t.pyx":150
  * 
  *         self.nrow = A.nrow
  *         self.ncol = A.ncol             # <<<<<<<<<<<<<<
  * 
  *         self.nnz = self.A.nnz
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_A), __pyx_n_s_ncol); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 41; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_A), __pyx_n_s_ncol); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 150; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyInt_As_long(__pyx_t_1); if (unlikely((__pyx_t_2 == (long)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 41; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyInt_As_long(__pyx_t_1); if (unlikely((__pyx_t_2 == (long)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 150; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_self->ncol = __pyx_t_2;
 
-  /* "cysparse/linalg/mumps/mumps_INT64_t_FLOAT32_t.pyx":43
+  /* "cysparse/linalg/mumps/mumps_INT64_t_FLOAT32_t.pyx":152
  *         self.ncol = A.ncol
  * 
  *         self.nnz = self.A.nnz             # <<<<<<<<<<<<<<
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self->A), __pyx_n_s_nnz); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 43; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self->A), __pyx_n_s_nnz); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 152; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyInt_As_long(__pyx_t_1); if (unlikely((__pyx_t_2 == (long)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 43; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyInt_As_long(__pyx_t_1); if (unlikely((__pyx_t_2 == (long)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 152; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_self->nnz = __pyx_t_2;
 
-  /* "cysparse/linalg/mumps/mumps_INT64_t_FLOAT32_t.pyx":26
- *     MUMPS_VERSION = "0.66666"
+  /* "cysparse/linalg/mumps/mumps_INT64_t_FLOAT32_t.pyx":135
+ *     MUMPS_VERSION = 'TO BE DEFINED...'
  * 
  *     def __cinit__(self, LLSparseMatrix_INT64_t_FLOAT32_t A):             # <<<<<<<<<<<<<<
  *         """
@@ -3913,13 +3915,13 @@ static struct PyModuleDef __pyx_moduledef = {
 #endif
 
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
-  {&__pyx_kp_s_0_66666, __pyx_k_0_66666, sizeof(__pyx_k_0_66666), 0, 0, 1, 0},
   {&__pyx_n_s_A, __pyx_k_A, sizeof(__pyx_k_A), 0, 0, 1, 1},
   {&__pyx_kp_u_Format_string_allocated_too_shor, __pyx_k_Format_string_allocated_too_shor, sizeof(__pyx_k_Format_string_allocated_too_shor), 0, 1, 0, 0},
   {&__pyx_kp_u_Format_string_allocated_too_shor_2, __pyx_k_Format_string_allocated_too_shor_2, sizeof(__pyx_k_Format_string_allocated_too_shor_2), 0, 1, 0, 0},
   {&__pyx_n_s_MUMPS_VERSION, __pyx_k_MUMPS_VERSION, sizeof(__pyx_k_MUMPS_VERSION), 0, 0, 1, 1},
   {&__pyx_kp_u_Non_native_byte_order_not_suppor, __pyx_k_Non_native_byte_order_not_suppor, sizeof(__pyx_k_Non_native_byte_order_not_suppor), 0, 1, 0, 0},
   {&__pyx_n_s_RuntimeError, __pyx_k_RuntimeError, sizeof(__pyx_k_RuntimeError), 0, 0, 1, 1},
+  {&__pyx_kp_s_TO_BE_DEFINED, __pyx_k_TO_BE_DEFINED, sizeof(__pyx_k_TO_BE_DEFINED), 0, 0, 1, 0},
   {&__pyx_n_s_ValueError, __pyx_k_ValueError, sizeof(__pyx_k_ValueError), 0, 0, 1, 1},
   {&__pyx_n_s_import, __pyx_k_import, sizeof(__pyx_k_import), 0, 0, 1, 1},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
@@ -4109,9 +4111,9 @@ PyMODINIT_FUNC PyInit_mumps_INT64_t_FLOAT32_t(void)
   /*--- Variable export code ---*/
   /*--- Function export code ---*/
   /*--- Type init code ---*/
-  if (PyType_Ready(&__pyx_type_8cysparse_6linalg_5mumps_23mumps_INT64_t_FLOAT32_t_MumpsContext_INT64_t_FLOAT32_t) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 15; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyType_Ready(&__pyx_type_8cysparse_6linalg_5mumps_23mumps_INT64_t_FLOAT32_t_MumpsContext_INT64_t_FLOAT32_t) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 124; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_type_8cysparse_6linalg_5mumps_23mumps_INT64_t_FLOAT32_t_MumpsContext_INT64_t_FLOAT32_t.tp_print = 0;
-  if (PyObject_SetAttrString(__pyx_m, "MumpsContext_INT64_t_FLOAT32_t", (PyObject *)&__pyx_type_8cysparse_6linalg_5mumps_23mumps_INT64_t_FLOAT32_t_MumpsContext_INT64_t_FLOAT32_t) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 15; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyObject_SetAttrString(__pyx_m, "MumpsContext_INT64_t_FLOAT32_t", (PyObject *)&__pyx_type_8cysparse_6linalg_5mumps_23mumps_INT64_t_FLOAT32_t_MumpsContext_INT64_t_FLOAT32_t) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 124; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_ptype_8cysparse_6linalg_5mumps_23mumps_INT64_t_FLOAT32_t_MumpsContext_INT64_t_FLOAT32_t = &__pyx_type_8cysparse_6linalg_5mumps_23mumps_INT64_t_FLOAT32_t_MumpsContext_INT64_t_FLOAT32_t;
   /*--- Type import code ---*/
   __pyx_ptype_7cpython_4type_type = __Pyx_ImportType(__Pyx_BUILTIN_MODULE_NAME, "type", 
@@ -4164,18 +4166,18 @@ PyMODINIT_FUNC PyInit_mumps_INT64_t_FLOAT32_t(void)
  * 
  * cnp.import_array()             # <<<<<<<<<<<<<<
  * 
- * 
+ * cdef extern from "mumps_c_types.h":
  */
   import_array();
 
-  /* "cysparse/linalg/mumps/mumps_INT64_t_FLOAT32_t.pyx":24
+  /* "cysparse/linalg/mumps/mumps_INT64_t_FLOAT32_t.pyx":133
  *     class as their corresponding counter-parts in Mumps.
  *     """
- *     MUMPS_VERSION = "0.66666"             # <<<<<<<<<<<<<<
+ *     MUMPS_VERSION = 'TO BE DEFINED...'             # <<<<<<<<<<<<<<
  * 
  *     def __cinit__(self, LLSparseMatrix_INT64_t_FLOAT32_t A):
  */
-  if (PyDict_SetItem((PyObject *)__pyx_ptype_8cysparse_6linalg_5mumps_23mumps_INT64_t_FLOAT32_t_MumpsContext_INT64_t_FLOAT32_t->tp_dict, __pyx_n_s_MUMPS_VERSION, __pyx_kp_s_0_66666) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 24; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_8cysparse_6linalg_5mumps_23mumps_INT64_t_FLOAT32_t_MumpsContext_INT64_t_FLOAT32_t->tp_dict, __pyx_n_s_MUMPS_VERSION, __pyx_kp_s_TO_BE_DEFINED) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 133; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   PyType_Modified(__pyx_ptype_8cysparse_6linalg_5mumps_23mumps_INT64_t_FLOAT32_t_MumpsContext_INT64_t_FLOAT32_t);
 
   /* "cysparse/linalg/mumps/mumps_INT64_t_FLOAT32_t.pyx":1
