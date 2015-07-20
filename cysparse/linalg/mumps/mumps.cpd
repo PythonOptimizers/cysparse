@@ -1,0 +1,17 @@
+from cysparse.types.cysparse_types cimport *
+
+from cysparse.sparse.ll_mat_matrices.ll_mat_@index@_@type@ cimport LLSparseMatrix_@index@_@type@
+from cysparse.sparse.csc_mat_matrices.csc_mat_@index@_@type@ cimport CSCSparseMatrix_@index@_@type@
+
+
+
+cdef class MumpsContext_@index@_@type@:
+    cdef:
+        LLSparseMatrix_@index@_@type@ A
+
+        @index@ nrow
+        @index@ ncol
+        @index@ nnz
+
+        # Matrix A in CSC format
+        CSCSparseMatrix_@index@_@type@ csc_mat

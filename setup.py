@@ -4,6 +4,9 @@
 # Generate it with
 # python generate_code -s
 
+from setup.version import find_version, read
+from setup.config import get_path_option
+
 from distutils.core import setup
 from distutils.extension import Extension
 from Cython.Distutils import build_ext
@@ -11,50 +14,7 @@ from Cython.Distutils import build_ext
 import numpy as np
 
 import ConfigParser
-import io
 import os
-import re
-
-####################################################################s####################################################
-# HELPERS
-########################################################################################################################
-
-# Versioning: from https://packaging.python.org/en/latest/single_source_version.html#single-sourcing-the-version
-# (see also https://github.com/pypa/pip)
-def read(*names, **kwargs):
-    with io.open(
-        os.path.join(os.path.dirname(__file__), *names),
-        encoding=kwargs.get("encoding", "utf8")
-    ) as fp:
-        return fp.read()
-
-def find_version(*file_paths):
-    version_file = read(*file_paths)
-    version_match = re.search(r"^__version__ = ['\"]([^'\"]*)['\"]",
-                              version_file, re.M)
-    if version_match:
-        return version_match.group(1)
-    raise RuntimeError("Unable to find version string.")
-
-# Grab paths
-def get_path_option(config, section, option):
-    """
-    Get path(s) from an option in a section of a ``ConfigParser``.
-
-    Args:
-        config (ConfigParser): Configuration.
-        section (str): Section ``[section]`` in the ``config`` configuration.
-        option (str): Option ``option`` key.
-
-    Returns:
-        One or several paths ``str``\s in a ``list``.
-    """
-    import os
-    try:
-        val = config.get(section,option).split(os.pathsep)
-    except:
-        val = None
-    return val
 
 ####################################################################s####################################################
 # INIT
@@ -75,6 +35,8 @@ if use_suitesparse:
 # MUMPS
 # Do we use it or not?
 use_mumps = cysparse_config.getboolean('MUMPS', 'use_mumps')
+mumps_compiled_in_64bits = cysparse_config.getboolean('MUMPS', 'mumps_compiled_in_64bits')
+
 # find user defined directories
 if use_mumps:
     mumps_include_dirs = get_path_option(cysparse_config, 'MUMPS', 'include_dirs')
@@ -1163,8 +1125,7 @@ packages_list = ['cysparse',
             'cysparse.sparse.ll_mat_views',
             'cysparse.utils',
             'cysparse.linalg',
-            'cysparse.linalg.suitesparse',
-            'cysparse.linalg.suitesparse.umfpack',
+            'cysparse.linalg.mumps',
             #'cysparse.sparse.IO'
             ]
 
@@ -1174,9 +1135,15 @@ if use_suitesparse:
     # add suitsparse package
     ext_modules += umfpack_ext
     packages_list.append('cysparse.linalg.suitesparse')
+    packages_list.append('cysparse.linalg.suitesparse.umfpack')
+
+if use_mumps:
+    # add mumps
+    ext_modules += mumps_ext
+    packages_list.append('cysparse.linalg.mumps')
 
 setup(name=  'CySparse',
-  version=find_version('cysparse', '__init__.py'),
+  version=find_version(os.path.realpath(__file__), 'cysparse', '__init__.py'),
   #ext_package='cysparse', <- doesn't work with pxd files...
   cmdclass = {'build_ext': build_ext},
   ext_modules = ext_modules,

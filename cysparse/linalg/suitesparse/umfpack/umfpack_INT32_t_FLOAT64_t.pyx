@@ -15,7 +15,6 @@ cimport numpy as cnp
 
 cnp.import_array()
 
-
 cdef extern from "umfpack.h":
 
     char * UMFPACK_DATE
