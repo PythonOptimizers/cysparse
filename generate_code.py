@@ -492,7 +492,8 @@ LL_SPARSE_MATRIX_HELPERS_INCLUDE_FILES = glob.glob(os.path.join(LL_SPARSE_MATRIX
 
 ### LLSparseMatrix IO
 LL_SPARSE_MATRIX_IO_TEMPLATE_DIR = os.path.join(LL_SPARSE_MATRIX_TEMPLATE_DIR, 'll_mat_IO')
-LL_SPARSE_MATRIX_IO_INCLUDE_FILES = glob.glob(os.path.join(LL_SPARSE_MATRIX_IO_TEMPLATE_DIR, '*.cpi'))
+
+LL_SPARSE_MATRIX_MM_IO_INCLUDE_FILE = os.path.join(LL_SPARSE_MATRIX_IO_TEMPLATE_DIR, 'll_mat_mm.cpi')
 
 ### LLSparseMatrix construcors
 LL_SPARSE_MATRIX_CONSTRUCTORS_TEMPLATE_DIR = os.path.join(LL_SPARSE_MATRIX_TEMPLATE_DIR, 'll_mat_constructors')
@@ -892,7 +893,8 @@ if __name__ == "__main__":
             generate_following_type_and_index(logger, LL_SPARSE_MATRIX_HELPERS_INCLUDE_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, ELEMENT_TYPES, INDEX_TYPES, '.pxi')
 
             # LLSparseMatrix IO
-            generate_following_type_and_index(logger, LL_SPARSE_MATRIX_IO_INCLUDE_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, MM_ELEMENT_TYPES, MM_INDEX_TYPES, '.pxi')
+            # Matrix Market
+            generate_following_type_and_index(logger, [LL_SPARSE_MATRIX_MM_IO_INCLUDE_FILE], GENERAL_ENVIRONMENT, GENERAL_CONTEXT, MM_ELEMENT_TYPES, MM_INDEX_TYPES, '.pxi')
 
             # LLSparseMatrix Constructors
             generate_following_type_and_index(logger, LL_SPARSE_MATRIX_CONSTRUCTORS_INCLUDE_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, ELEMENT_TYPES, INDEX_TYPES, '.pxi')
