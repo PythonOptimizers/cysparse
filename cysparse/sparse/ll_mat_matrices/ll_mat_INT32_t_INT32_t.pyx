@@ -1601,6 +1601,27 @@ cdef class LLSparseMatrix_INT32_t_INT32_t(MutableSparseMatrix_INT32_t_INT32_t):
 
         return (a_row, a_col, a_val)
 
+    cdef take_triplet_pointers(self, INT32_t * a_row, INT32_t * a_col, INT32_t * a_val):
+        cdef:
+            INT32_t   i, k, elem
+
+        a_row = <INT32_t *> PyMem_Malloc(self.__nnz * sizeof(INT32_t))
+        a_col = <INT32_t *> PyMem_Malloc(self.__nnz * sizeof(INT32_t))
+        a_val = <INT32_t *> PyMem_Malloc(self.__nnz * sizeof(INT32_t))
+
+
+        elem = 0
+        for i from 0 <= i < self.__nrow:
+            k = self.root[i]
+            while k != -1:
+                a_row[ elem ] = i
+                a_col[ elem ] = self.col[k]
+                a_val[ elem ] = self.val[k]
+                k = self.link[k]
+                elem += 1
+
+
+
 
     def diag(self, k = 0):
         """

@@ -64,6 +64,8 @@ cdef class LLSparseMatrix_@index@_@type@(MutableSparseMatrix_@index@_@type@):
     cpdef object values(self)
     cpdef object items(self)
 
+    cdef take_triplet_pointers(self, @index@ * a_row, @index@ * a_col, @type@ * a_val)
+
     cpdef take_triplet(self, id1, id2, cnp.ndarray[cnp.@type|cysparse_type_to_numpy_c_type@, ndim=1] b)
     cpdef put_diagonal(self, @index@ k, cnp.ndarray[cnp.@type|cysparse_type_to_numpy_c_type@, ndim=1] b)
 

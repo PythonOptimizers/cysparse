@@ -115,6 +115,31 @@ cdef extern from "@type|cysparse_real_type_to_mumps_family@mumps_c.h":
 
     cdef void @type|cysparse_real_type_to_mumps_family@mumps_c(@type|cysparse_real_type_to_mumps_family|upper@MUMPS_STRUC_C *)
 
+cdef class mumps_int_array:
+    """
+    Internal classes to use x[i] = value and x[i] setters and getters
+    int version.
+
+    """
+    cdef:
+        MUMPS_INT * array
+        int ub
+
+    cdef get_array(self, MUMPS_INT * array, int ub = ?)
+
+cdef class @type|cysparse_real_type_to_mumps_family@mumps_real_array:
+    """
+    Internal classes to use x[i] = value and x[i] setters and getters
+    Real version.
+
+    """
+    cdef:
+        @type|cysparse_real_type_to_mumps_family|upper@MUMPS_REAL * array
+        int ub
+
+    cdef get_array(self, @type|cysparse_real_type_to_mumps_family|upper@MUMPS_REAL * array, int ub = ?)
+
+
 cdef class MumpsContext_@index@_@type@:
     cdef:
         LLSparseMatrix_@index@_@type@ A
@@ -126,7 +151,23 @@ cdef class MumpsContext_@index@_@type@:
         # Matrix A in CSC format
         CSCSparseMatrix_@index@_@type@ csc_mat
 
+        # MUMPS
         @type|cysparse_real_type_to_mumps_family|upper@MUMPS_STRUC_C params
 
-        # MUMPS
-        cdef @type|cysparse_real_type_to_mumps_family|upper@MUMPS_STRUC_C ob
+        # internal classes for getters and setters
+        mumps_int_array icntl
+        mumps_int_array info
+        mumps_int_array infog
+
+        @type|cysparse_real_type_to_mumps_family@mumps_real_array cntl
+        @type|cysparse_real_type_to_mumps_family@mumps_real_array rinfo
+        @type|cysparse_real_type_to_mumps_family@mumps_real_array rinfog
+
+        @index@ * a_row
+        @index@ * a_col
+        @type@ *  a_val
+
+
+    cdef mumps_call(self)
+    cdef set_centralized_assembled_matrix(self)
+    cdef set_dense_rhs(self, @type@ * rhs, @index@ rhs_length, @index@ nrhs)

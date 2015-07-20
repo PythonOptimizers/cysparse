@@ -115,6 +115,31 @@ cdef extern from "dmumps_c.h":
 
     cdef void dmumps_c(DMUMPS_STRUC_C *)
 
+cdef class mumps_int_array:
+    """
+    Internal classes to use x[i] = value and x[i] setters and getters
+    int version.
+
+    """
+    cdef:
+        MUMPS_INT * array
+        int ub
+
+    cdef get_array(self, MUMPS_INT * array, int ub = ?)
+
+cdef class dmumps_real_array:
+    """
+    Internal classes to use x[i] = value and x[i] setters and getters
+    Real version.
+
+    """
+    cdef:
+        DMUMPS_REAL * array
+        int ub
+
+    cdef get_array(self, DMUMPS_REAL * array, int ub = ?)
+
+
 cdef class MumpsContext_INT64_t_FLOAT64_t:
     cdef:
         LLSparseMatrix_INT64_t_FLOAT64_t A
@@ -126,7 +151,23 @@ cdef class MumpsContext_INT64_t_FLOAT64_t:
         # Matrix A in CSC format
         CSCSparseMatrix_INT64_t_FLOAT64_t csc_mat
 
+        # MUMPS
         DMUMPS_STRUC_C params
 
-        # MUMPS
-        cdef DMUMPS_STRUC_C ob
+        # internal classes for getters and setters
+        mumps_int_array icntl
+        mumps_int_array info
+        mumps_int_array infog
+
+        dmumps_real_array cntl
+        dmumps_real_array rinfo
+        dmumps_real_array rinfog
+
+        INT64_t * a_row
+        INT64_t * a_col
+        FLOAT64_t *  a_val
+
+
+    cdef mumps_call(self)
+    cdef set_centralized_assembled_matrix(self)
+    cdef set_dense_rhs(self, FLOAT64_t * rhs, INT64_t rhs_length, INT64_t nrhs)
