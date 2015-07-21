@@ -3,6 +3,7 @@ from cysparse.types.cysparse_types cimport *
 from cysparse.sparse.ll_mat_matrices.ll_mat_INT64_t_FLOAT32_t cimport LLSparseMatrix_INT64_t_FLOAT32_t
 from cysparse.sparse.csc_mat_matrices.csc_mat_INT64_t_FLOAT32_t cimport CSCSparseMatrix_INT64_t_FLOAT32_t
 
+
 cimport numpy as cnp
 
 cdef extern from "mumps_c_types.h":
@@ -167,7 +168,18 @@ cdef class MumpsContext_INT64_t_FLOAT32_t:
         INT64_t * a_col
         FLOAT32_t *  a_val
 
+        bint analysed
+        bint factored
+        bint out_of_core
+
+        object analysis_stats
+        object factorize_stats
+        object solve_stats
+
 
     cdef mumps_call(self)
     cdef set_centralized_assembled_matrix(self)
-    cdef set_dense_rhs(self, FLOAT32_t * rhs, INT64_t rhs_length, INT64_t nrhs)
+
+    cdef solve_dense(self, FLOAT32_t * rhs, INT64_t rhs_length, INT64_t nrhs)
+    cdef solve_sparse(self, INT64_t * rhs_col_ptr, INT64_t * rhs_row_ind,
+                       FLOAT32_t * rhs_val, INT64_t rhs_nnz, INT64_t nrhs, FLOAT32_t * x, INT64_t x_length)

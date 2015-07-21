@@ -21,7 +21,7 @@ from cysparse.linalg.mumps.mumps_INT64_t_COMPLEX128_t import MumpsContext_INT64_
     
 
 
-def NewMumpsContext(A):
+def NewMumpsContext(A, verbose=False):
     """
     Create and return the right Mumps context object.
 
@@ -41,22 +41,22 @@ def NewMumpsContext(A):
         
         if dtype == FLOAT32_T:
         
-            return MumpsContext_INT64_t_FLOAT32_t(A)
+            return MumpsContext_INT64_t_FLOAT32_t(A, verbose=verbose)
     
         
         elif dtype == FLOAT64_T:
         
-            return MumpsContext_INT64_t_FLOAT64_t(A)
+            return MumpsContext_INT64_t_FLOAT64_t(A, verbose=verbose)
     
         
         elif dtype == COMPLEX64_T:
         
-            return MumpsContext_INT64_t_COMPLEX64_t(A)
+            return MumpsContext_INT64_t_COMPLEX64_t(A, verbose=verbose)
     
         
         elif dtype == COMPLEX128_T:
         
-            return MumpsContext_INT64_t_COMPLEX128_t(A)
+            return MumpsContext_INT64_t_COMPLEX128_t(A, verbose=verbose)
     
     
 

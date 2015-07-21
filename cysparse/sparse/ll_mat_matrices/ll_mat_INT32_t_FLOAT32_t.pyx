@@ -1602,12 +1602,12 @@ cdef class LLSparseMatrix_INT32_t_FLOAT32_t(MutableSparseMatrix_INT32_t_FLOAT32_
         return (a_row, a_col, a_val)
 
     cdef take_triplet_pointers(self, INT32_t * a_row, INT32_t * a_col, FLOAT32_t * a_val):
+        """
+        Warning:
+            Arrays **must** be allocated.
+        """
         cdef:
             INT32_t   i, k, elem
-
-        a_row = <INT32_t *> PyMem_Malloc(self.__nnz * sizeof(INT32_t))
-        a_col = <INT32_t *> PyMem_Malloc(self.__nnz * sizeof(INT32_t))
-        a_val = <FLOAT32_t *> PyMem_Malloc(self.__nnz * sizeof(FLOAT32_t))
 
 
         elem = 0

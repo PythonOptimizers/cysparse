@@ -9,15 +9,10 @@ A = NewLinearFillLLSparseMatrix(size=4, itype=types.INT64_T, dtype=types.FLOAT64
 
 from cysparse.linalg.mumps_context import NewMumpsContext
 
-context = NewMumpsContext(A)
+context = NewMumpsContext(A, verbose=True)
 
 print context.version_number
 
-context.icntl[1] = 0
-context.icntl[2] = 0
-context.icntl[3] = 0
-context.icntl[4] = 0
+context.analyse()
 
-print context.icntl[1]
 
-context.icntl[22] = 1

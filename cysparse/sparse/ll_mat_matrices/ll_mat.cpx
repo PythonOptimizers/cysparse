@@ -1734,12 +1734,12 @@ YOU HAVE TO DEFINE OR CAST YOUR NEW UNRECOGNIZED TYPE
         return (a_row, a_col, a_val)
 
     cdef take_triplet_pointers(self, @index@ * a_row, @index@ * a_col, @type@ * a_val):
+        """
+        Warning:
+            Arrays **must** be allocated.
+        """
         cdef:
             @index@   i, k, elem
-
-        a_row = <@index@ *> PyMem_Malloc(self.__nnz * sizeof(@index@))
-        a_col = <@index@ *> PyMem_Malloc(self.__nnz * sizeof(@index@))
-        a_val = <@type@ *> PyMem_Malloc(self.__nnz * sizeof(@type@))
 
 
         elem = 0

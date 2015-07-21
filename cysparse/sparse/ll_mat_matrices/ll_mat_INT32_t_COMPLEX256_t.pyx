@@ -1666,12 +1666,12 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX256_t(MutableSparseMatrix_INT32_t_COMPL
         return (a_row, a_col, a_val)
 
     cdef take_triplet_pointers(self, INT32_t * a_row, INT32_t * a_col, COMPLEX256_t * a_val):
+        """
+        Warning:
+            Arrays **must** be allocated.
+        """
         cdef:
             INT32_t   i, k, elem
-
-        a_row = <INT32_t *> PyMem_Malloc(self.__nnz * sizeof(INT32_t))
-        a_col = <INT32_t *> PyMem_Malloc(self.__nnz * sizeof(INT32_t))
-        a_val = <COMPLEX256_t *> PyMem_Malloc(self.__nnz * sizeof(COMPLEX256_t))
 
 
         elem = 0

@@ -17480,8 +17480,8 @@ static PyObject *__pyx_pf_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT64_t_F
  *         return (a_row, a_col, a_val)
  * 
  *     cdef take_triplet_pointers(self, INT64_t * a_row, INT64_t * a_col, FLOAT32_t * a_val):             # <<<<<<<<<<<<<<
- *         cdef:
- *             INT64_t   i, k, elem
+ *         """
+ *         Warning:
  */
 
 static PyObject *__pyx_f_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT64_t_FLOAT32_t_32LLSparseMatrix_INT64_t_FLOAT32_t_take_triplet_pointers(struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT64_t_FLOAT32_t_LLSparseMatrix_INT64_t_FLOAT32_t *__pyx_v_self, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t *__pyx_v_a_row, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t *__pyx_v_a_col, __pyx_t_8cysparse_5types_14cysparse_types_FLOAT32_t *__pyx_v_a_val) {
@@ -17493,33 +17493,6 @@ static PyObject *__pyx_f_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT64_t_FL
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx_t_1;
   int __pyx_t_2;
   __Pyx_RefNannySetupContext("take_triplet_pointers", 0);
-
-  /* "cysparse/sparse/ll_mat_matrices/ll_mat_INT64_t_FLOAT32_t.pyx":1608
- *             INT64_t   i, k, elem
- * 
- *         a_row = <INT64_t *> PyMem_Malloc(self.__nnz * sizeof(INT64_t))             # <<<<<<<<<<<<<<
- *         a_col = <INT64_t *> PyMem_Malloc(self.__nnz * sizeof(INT64_t))
- *         a_val = <FLOAT32_t *> PyMem_Malloc(self.__nnz * sizeof(FLOAT32_t))
- */
-  __pyx_v_a_row = ((__pyx_t_8cysparse_5types_14cysparse_types_INT64_t *)PyMem_Malloc((__pyx_v_self->__pyx_base.__pyx_base.__pyx___nnz * (sizeof(__pyx_t_8cysparse_5types_14cysparse_types_INT64_t)))));
-
-  /* "cysparse/sparse/ll_mat_matrices/ll_mat_INT64_t_FLOAT32_t.pyx":1609
- * 
- *         a_row = <INT64_t *> PyMem_Malloc(self.__nnz * sizeof(INT64_t))
- *         a_col = <INT64_t *> PyMem_Malloc(self.__nnz * sizeof(INT64_t))             # <<<<<<<<<<<<<<
- *         a_val = <FLOAT32_t *> PyMem_Malloc(self.__nnz * sizeof(FLOAT32_t))
- * 
- */
-  __pyx_v_a_col = ((__pyx_t_8cysparse_5types_14cysparse_types_INT64_t *)PyMem_Malloc((__pyx_v_self->__pyx_base.__pyx_base.__pyx___nnz * (sizeof(__pyx_t_8cysparse_5types_14cysparse_types_INT64_t)))));
-
-  /* "cysparse/sparse/ll_mat_matrices/ll_mat_INT64_t_FLOAT32_t.pyx":1610
- *         a_row = <INT64_t *> PyMem_Malloc(self.__nnz * sizeof(INT64_t))
- *         a_col = <INT64_t *> PyMem_Malloc(self.__nnz * sizeof(INT64_t))
- *         a_val = <FLOAT32_t *> PyMem_Malloc(self.__nnz * sizeof(FLOAT32_t))             # <<<<<<<<<<<<<<
- * 
- * 
- */
-  __pyx_v_a_val = ((__pyx_t_8cysparse_5types_14cysparse_types_FLOAT32_t *)PyMem_Malloc((__pyx_v_self->__pyx_base.__pyx_base.__pyx___nnz * (sizeof(__pyx_t_8cysparse_5types_14cysparse_types_FLOAT32_t)))));
 
   /* "cysparse/sparse/ll_mat_matrices/ll_mat_INT64_t_FLOAT32_t.pyx":1613
  * 
@@ -17611,8 +17584,8 @@ static PyObject *__pyx_f_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT64_t_FL
  *         return (a_row, a_col, a_val)
  * 
  *     cdef take_triplet_pointers(self, INT64_t * a_row, INT64_t * a_col, FLOAT32_t * a_val):             # <<<<<<<<<<<<<<
- *         cdef:
- *             INT64_t   i, k, elem
+ *         """
+ *         Warning:
  */
 
   /* function exit code */
