@@ -15,7 +15,7 @@ from cysparse.linalg.mumps.mumps_@index_type@_@element_type@ import MumpsContext
     {% endfor %}
 {% endfor %}
 
-def NewMumpsContext(A):
+def NewMumpsContext(A, verbose=False):
     """
     Create and return the right Mumps context object.
 
@@ -37,7 +37,7 @@ def NewMumpsContext(A):
         {% else %}
         elif dtype == @element_type|type2enum@:
         {% endif %}
-            return MumpsContext_@index_type@_@element_type@(A)
+            return MumpsContext_@index_type@_@element_type@(A, verbose=verbose)
     {% endfor %}
     {% else %}
     elif itype == @index_type|type2enum@:
@@ -47,7 +47,7 @@ def NewMumpsContext(A):
         {% else %}
         elif dtype == @element_type|type2enum@:
         {% endif %}
-            return MumpsContext_@index_type@_@element_type@(A)
+            return MumpsContext_@index_type@_@element_type@(A, verbose=verbose)
     {% endfor %}
     {% endif %}
 {% endfor %}

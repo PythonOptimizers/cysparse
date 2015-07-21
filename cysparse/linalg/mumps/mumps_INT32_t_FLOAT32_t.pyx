@@ -1,5 +1,5 @@
-from cysparse.sparse.ll_mat_matrices.ll_mat_INT64_t_FLOAT64_t cimport LLSparseMatrix_INT64_t_FLOAT64_t
-from cysparse.sparse.csc_mat_matrices.csc_mat_INT64_t_FLOAT64_t cimport CSCSparseMatrix_INT64_t_FLOAT64_t
+from cysparse.sparse.ll_mat_matrices.ll_mat_INT32_t_FLOAT32_t cimport LLSparseMatrix_INT32_t_FLOAT32_t
+from cysparse.sparse.csc_mat_matrices.csc_mat_INT32_t_FLOAT32_t cimport CSCSparseMatrix_INT32_t_FLOAT32_t
 
 from cysparse.types.cysparse_numpy_types import are_mixed_types_compatible, cysparse_to_numpy_type
 
@@ -41,14 +41,14 @@ cdef extern from "mumps_c_types.h":
     ctypedef mumps_double_complex  ZMUMPS_COMPLEX
     ctypedef double                ZMUMPS_REAL
 
-cdef extern from "dmumps_c.h":
-    ctypedef struct DMUMPS_STRUC_C:
+cdef extern from "smumps_c.h":
+    ctypedef struct SMUMPS_STRUC_C:
         MUMPS_INT      sym, par, job
         MUMPS_INT      comm_fortran    # Fortran communicator
         MUMPS_INT      icntl[40]
         MUMPS_INT      keep[500]
-        DMUMPS_REAL    cntl[15]
-        DMUMPS_REAL    dkeep[130];
+        SMUMPS_REAL    cntl[15]
+        SMUMPS_REAL    dkeep[130];
         MUMPS_INT8     keep8[150];
         MUMPS_INT      n
 
@@ -60,19 +60,19 @@ cdef extern from "dmumps_c.h":
         MUMPS_INT      nz
         MUMPS_INT      *irn
         MUMPS_INT      *jcn
-        DMUMPS_COMPLEX *a
+        SMUMPS_COMPLEX *a
 
         # Distributed entry
         MUMPS_INT      nz_loc
         MUMPS_INT      *irn_loc
         MUMPS_INT      *jcn_loc
-        DMUMPS_COMPLEX *a_loc
+        SMUMPS_COMPLEX *a_loc
 
         # Element entry
         MUMPS_INT      nelt
         MUMPS_INT      *eltptr
         MUMPS_INT      *eltvar
-        DMUMPS_COMPLEX *a_elt
+        SMUMPS_COMPLEX *a_elt
 
         # Ordering, if given by user
         MUMPS_INT      *perm_in
@@ -82,17 +82,17 @@ cdef extern from "dmumps_c.h":
         MUMPS_INT      *uns_perm    # column permutation
 
         # Scaling (input only in this version)
-        DMUMPS_REAL    *colsca
-        DMUMPS_REAL    *rowsca
+        SMUMPS_REAL    *colsca
+        SMUMPS_REAL    *rowsca
         MUMPS_INT colsca_from_mumps;
         MUMPS_INT rowsca_from_mumps;
 
 
         # RHS, solution, ouptput data and statistics
-        DMUMPS_COMPLEX *rhs
-        DMUMPS_COMPLEX *redrhs
-        DMUMPS_COMPLEX *rhs_sparse
-        DMUMPS_COMPLEX *sol_loc
+        SMUMPS_COMPLEX *rhs
+        SMUMPS_COMPLEX *redrhs
+        SMUMPS_COMPLEX *rhs_sparse
+        SMUMPS_COMPLEX *sol_loc
         MUMPS_INT      *irhs_sparse
         MUMPS_INT      *irhs_ptr
         MUMPS_INT      *isol_loc
@@ -101,8 +101,8 @@ cdef extern from "dmumps_c.h":
         MUMPS_INT      mblock, nblock, nprow, npcol
         MUMPS_INT      info[40]
         MUMPS_INT      infog[40]
-        DMUMPS_REAL    rinfo[40]
-        DMUMPS_REAL    rinfog[40]
+        SMUMPS_REAL    rinfo[40]
+        SMUMPS_REAL    rinfog[40]
 
         # Null space
         MUMPS_INT      deficiency
@@ -112,11 +112,11 @@ cdef extern from "dmumps_c.h":
         # Schur
         MUMPS_INT      size_schur
         MUMPS_INT      *listvar_schur
-        DMUMPS_COMPLEX *schur
+        SMUMPS_COMPLEX *schur
 
         # Internal parameters
         MUMPS_INT      instance_number
-        DMUMPS_COMPLEX *wk_user
+        SMUMPS_COMPLEX *wk_user
 
         char *version_number
         # For out-of-core
@@ -126,7 +126,7 @@ cdef extern from "dmumps_c.h":
         char *write_problem
         MUMPS_INT      lwk_user
 
-    cdef void dmumps_c(DMUMPS_STRUC_C *)
+    cdef void smumps_c(SMUMPS_STRUC_C *)
 
 ########################################################################################################################
 # MUMPS
@@ -195,7 +195,7 @@ cdef class mumps_int_array:
     def __setitem__(self, key, value):
         self.array[key - 1] = value
 
-cdef class dmumps_real_array:
+cdef class smumps_real_array:
     """
     Internal classes to use x[i] = value and x[i] setters and getters
 
@@ -205,7 +205,7 @@ cdef class dmumps_real_array:
     def __cinit__(self):
         pass
 
-    cdef get_array(self, DMUMPS_REAL * array, int ub = 40):
+    cdef get_array(self, SMUMPS_REAL * array, int ub = 40):
         """
         Args:
             ub: upper bound.
@@ -228,9 +228,9 @@ cdef class dmumps_real_array:
 
 
 
-cdef c_to_fortran_index_array(INT64_t * a, INT64_t a_size):
+cdef c_to_fortran_index_array(INT32_t * a, INT32_t a_size):
     cdef:
-        INT64_t i
+        INT32_t i
 
     for i from 0 <= i < a_size:
         a[i] += 1
@@ -238,20 +238,20 @@ cdef c_to_fortran_index_array(INT64_t * a, INT64_t a_size):
 ################################################################
 # MUMPS CONTEXT
 ################################################################
-cdef class MumpsContext_INT64_t_FLOAT64_t:
+cdef class MumpsContext_INT32_t_FLOAT32_t:
     """
     Mumps Context.
 
-    This version **only** deals with ``LLSparseMatrix_INT64_t_FLOAT64_t`` objects.
+    This version **only** deals with ``LLSparseMatrix_INT32_t_FLOAT32_t`` objects.
 
     We follow the common use of Mumps. In particular, we use the same names for the methods of this
     class as their corresponding counter-parts in Mumps.
     """
 
-    def __cinit__(self, LLSparseMatrix_INT64_t_FLOAT64_t A, comm_fortran=-987654, verbose=False):
+    def __cinit__(self, LLSparseMatrix_INT32_t_FLOAT32_t A, comm_fortran=-987654, verbose=False):
         """
         Args:
-            A: A :class:`LLSparseMatrix_INT64_t_FLOAT64_t` object.
+            A: A :class:`LLSparseMatrix_INT32_t_FLOAT32_t` object.
 
         Warning:
             The solver takes a "snapshot" of the matrix ``A``, i.e. the results given by the solver are only
@@ -270,17 +270,18 @@ cdef class MumpsContext_INT64_t_FLOAT64_t:
         self.nnz = self.A.nnz
 
         # MUMPS
-        self.analysed = False
-        self.factored = False
+        self.analyzed = False
+        self.factorized = False
         self.out_of_core = False
 
         self.params.job = -1
+        # TODO: change this
         self.params.sym = self.A.is_symmetric
         self.params.par = 1
 
         self.params.comm_fortran = comm_fortran
 
-        dmumps_c(&self.params)
+        smumps_c(&self.params)
 
         # mumps int arrays
         # integer control parameters
@@ -297,24 +298,24 @@ cdef class MumpsContext_INT64_t_FLOAT64_t:
         self.infog.get_array(self.params.infog)
 
         # real control parameters
-        self.cntl = dmumps_real_array()
+        self.cntl = smumps_real_array()
         self.cntl.get_array(self.params.cntl)
 
-        self.rinfo = dmumps_real_array()
+        self.rinfo = smumps_real_array()
         self.rinfo.get_array(self.params.rinfo)
 
-        self.rinfog = dmumps_real_array()
+        self.rinfog = smumps_real_array()
         self.rinfog.get_array(self.params.rinfog)
 
         # create i, j, val
         #cdef:
-        #    INT64_t * a_row
-        #    INT64_t * a_col
-        #    FLOAT64_t *  a_val
+        #    INT32_t * a_row
+        #    INT32_t * a_col
+        #    FLOAT32_t *  a_val
 
-        self.a_row = <INT64_t *> PyMem_Malloc(self.nnz * sizeof(INT64_t))
-        self.a_col = <INT64_t *> PyMem_Malloc(self.nnz * sizeof(INT64_t))
-        self.a_val = <FLOAT64_t *> PyMem_Malloc(self.nnz * sizeof(FLOAT64_t))
+        self.a_row = <INT32_t *> PyMem_Malloc(self.nnz * sizeof(INT32_t))
+        self.a_col = <INT32_t *> PyMem_Malloc(self.nnz * sizeof(INT32_t))
+        self.a_val = <FLOAT32_t *> PyMem_Malloc(self.nnz * sizeof(FLOAT32_t))
 
         self.A.take_triplet_pointers(self.a_row, self.a_col, self.a_val)
 
@@ -337,7 +338,7 @@ cdef class MumpsContext_INT64_t_FLOAT64_t:
 
         self.params.irn = <MUMPS_INT *> self.a_row
         self.params.jcn = <MUMPS_INT *> self.a_col
-        self.params.a = <DMUMPS_COMPLEX *> self.a_val
+        self.params.a = <SMUMPS_COMPLEX *> self.a_val
 
 
     def __dealloc__(self):
@@ -531,40 +532,40 @@ cdef class MumpsContext_INT64_t_FLOAT64_t:
 
     #property cntl:
     #    def __get__(self):
-    #        cdef DMUMPS_REAL[::1] view = <DMUMPS_REAL[::1]> self.params.cntl
+    #        cdef SMUMPS_REAL[::1] view = <SMUMPS_REAL[::1]> self.params.cntl
     #        return view
 
     property a:
         def __get__(self): return <long> self.params.a
-        def __set__(self, long value): self.params.a = <DMUMPS_COMPLEX*> value
+        def __set__(self, long value): self.params.a = <SMUMPS_COMPLEX*> value
 
     property a_loc:
         def __get__(self): return <long> self.params.a_loc
-        def __set__(self, long value): self.params.a_loc = <DMUMPS_COMPLEX*> value
+        def __set__(self, long value): self.params.a_loc = <SMUMPS_COMPLEX*> value
 
     property a_elt:
         def __get__(self): return <long> self.params.a_elt
-        def __set__(self, long value): self.params.a_elt = <DMUMPS_COMPLEX*> value
+        def __set__(self, long value): self.params.a_elt = <SMUMPS_COMPLEX*> value
 
     property colsca:
         def __get__(self): return <long> self.params.colsca
-        def __set__(self, long value): self.params.colsca = <DMUMPS_REAL*> value
+        def __set__(self, long value): self.params.colsca = <SMUMPS_REAL*> value
     property rowsca:
         def __get__(self): return <long> self.params.rowsca
-        def __set__(self, long value): self.params.rowsca = <DMUMPS_REAL*> value
+        def __set__(self, long value): self.params.rowsca = <SMUMPS_REAL*> value
 
     property rhs:
         def __get__(self): return <long> self.params.rhs
-        def __set__(self, long value): self.params.rhs = <DMUMPS_COMPLEX*> value
+        def __set__(self, long value): self.params.rhs = <SMUMPS_COMPLEX*> value
     property redrhs:
         def __get__(self): return <long> self.params.redrhs
-        def __set__(self, long value): self.params.redrhs = <DMUMPS_COMPLEX*> value
+        def __set__(self, long value): self.params.redrhs = <SMUMPS_COMPLEX*> value
     property rhs_sparse:
         def __get__(self): return <long> self.params.rhs_sparse
-        def __set__(self, long value): self.params.rhs_sparse = <DMUMPS_COMPLEX*> value
+        def __set__(self, long value): self.params.rhs_sparse = <SMUMPS_COMPLEX*> value
     property sol_loc:
         def __get__(self): return <long> self.params.sol_loc
-        def __set__(self, long value): self.params.sol_loc = <DMUMPS_COMPLEX*> value
+        def __set__(self, long value): self.params.sol_loc = <SMUMPS_COMPLEX*> value
 
     property rinfo:
         def __get__(self):
@@ -576,11 +577,11 @@ cdef class MumpsContext_INT64_t_FLOAT64_t:
 
     property schur:
         def __get__(self): return <long> self.params.schur
-        def __set__(self, long value): self.params.schur = <DMUMPS_COMPLEX*> value
+        def __set__(self, long value): self.params.schur = <SMUMPS_COMPLEX*> value
 
     property wk_user:
         def __get__(self): return <long> self.params.wk_user
-        def __set__(self, long value): self.params.wk_user = <DMUMPS_COMPLEX*> value
+        def __set__(self, long value): self.params.wk_user = <SMUMPS_COMPLEX*> value
 
     ####################################################################################################################
     # MUMPS CALL
@@ -589,7 +590,7 @@ cdef class MumpsContext_INT64_t_FLOAT64_t:
         """
         Call to Xmumps_c(XMUMPS_STRUC_C).
         """
-        dmumps_c(&self.params)
+        smumps_c(&self.params)
 
 
     def set_silent(self):
@@ -608,7 +609,7 @@ cdef class MumpsContext_INT64_t_FLOAT64_t:
     ####################################################################################################################
     # Analyse
     ####################################################################################################################
-    def analyse(self, ordering='auto'):
+    def analyze(self, ordering='auto'):
         """
         Perform analysis step of MUMPS.
 
@@ -627,6 +628,8 @@ cdef class MumpsContext_INT64_t_FLOAT64_t:
                 particular ordering depends on the MUMPS installation.  Default is
                 'auto'.
         """
+        if self.analyzed:
+            return
 
         self.params.icntl[7] = orderings[ordering]
         t1 = time.clock()
@@ -637,15 +640,68 @@ cdef class MumpsContext_INT64_t_FLOAT64_t:
         if self.params.infog[1] < 0:
             raise MUMPSError(self.params.infog[1])
 
-        self.analysed = True
+        self.analyzed = True
 
         #self.analysis_stats = AnalysisStatistics(self.params,
         #                                         t2 - t1)
 
     ####################################################################################################################
+    # Factorize
+    ####################################################################################################################
+    def factorize(self, ordering='auto', pivot_tol=0.01):
+        """
+        Perform the LU factorization of the matrix (or LDL' if the matrix
+        is symmetric).
+
+        This factorization can then later be used to solve a linear system
+        with `solve`. Statistical data of the factorization is stored in
+        `factor_stats`.
+
+        Args:
+            ordering : { 'auto', 'amd', 'amf', 'scotch', 'pord', 'metis', 'qamd' }
+                ordering to use in the factorization. The availability of a
+                particular ordering depends on the MUMPS installation.  Default is
+                'auto'.
+            pivot_tol: number in the range [0, 1]
+                pivoting threshold. Pivoting is typically limited in sparse
+                solvers, as too much pivoting destroys sparsity. 1.0 means full
+                pivoting, whereas 0.0 means no pivoting. Default is 0.01.
+        """
+        # TODO: ordering
+
+        # Analysis phase must be done before factorization
+        if not self.analyzed :
+            self.analyze(ordering=ordering)
+
+        self.params.icntl[22] = 1 if self.out_of_core else 1
+        self.params.cntl[1] = pivot_tol
+        self.params.job = 2
+
+        done = False
+        while not done:
+            t1 = time.clock()
+            self.mumps_call()
+            t2 = time.clock()
+
+            # error -8, -9 (not enough allocated memory) is treated
+            # specially, by increasing the memory relaxation parameter
+            if self.params.infog[1] < 0:
+                if self.params.infog[1] in (-8, -9):
+                    # double the additional memory
+                    self.params.icntl[14] = self.params.icntl[14]*2
+                else:
+                    raise MUMPSError(self.params.infog)
+            else:
+                done = True
+
+        self.factorized = True
+        #if self.verbose:
+        #    self.factorize_stats = FactorizationStatistics(self.params, t2 - t1)
+
+    ####################################################################################################################
     # Solve
     ####################################################################################################################
-    cdef solve_dense(self, FLOAT64_t * rhs, INT64_t rhs_length, INT64_t nrhs):
+    cdef solve_dense(self, FLOAT32_t * rhs, INT32_t rhs_length, INT32_t nrhs):
         """
         Solve a linear system after the LU (or LDLt) factorization has previously been performed by `factorize`
 
@@ -661,13 +717,13 @@ cdef class MumpsContext_INT64_t_FLOAT64_t:
 
         self.params.nrhs = <MUMPS_INT> nrhs
         self.params.lrhs = <MUMPS_INT> rhs_length
-        self.params.rhs = <FLOAT64_t *>rhs
+        self.params.rhs = <FLOAT32_t *>rhs
 
         self.params.job = 3  # solve
         self.mumps_call()
 
-    cdef solve_sparse(self, INT64_t * rhs_col_ptr, INT64_t * rhs_row_ind,
-                       FLOAT64_t * rhs_val, INT64_t rhs_nnz, INT64_t nrhs, FLOAT64_t * x, INT64_t x_length):
+    cdef solve_sparse(self, INT32_t * rhs_col_ptr, INT32_t * rhs_row_ind,
+                       FLOAT32_t * rhs_val, INT32_t rhs_nnz, INT32_t nrhs, FLOAT32_t * x, INT32_t x_length):
         """
         Solve a linear system after the LU (or LDL^t) factorization has previously been performed by `factorize`
 
@@ -687,13 +743,13 @@ cdef class MumpsContext_INT64_t_FLOAT64_t:
 
         self.params.nz_rhs = rhs_nnz
         self.params.nrhs = nrhs # nrhs -1 ?
-        self.params.rhs_sparse = <FLOAT64_t *> rhs_val
+        self.params.rhs_sparse = <FLOAT32_t *> rhs_val
         self.params.irhs_sparse = <MUMPS_INT *> rhs_row_ind
         self.params.irhs_ptr = <MUMPS_INT *> rhs_col_ptr
 
         # Mumps places the solution(s) of the linear system in its dense rhs...
         self.params.lrhs = <MUMPS_INT> x_length
-        self.params.rhs = <FLOAT64_t *> x
+        self.params.rhs = <FLOAT32_t *> x
 
         self.params.job = 3        # solve
         self.params.icntl[20] = 1  # tell solver rhs is sparse
@@ -710,14 +766,14 @@ cdef class MumpsContext_INT64_t_FLOAT64_t:
         Returns:
             Dense NumPy array ``x`` (matrix or vector) with the solution(s) of the linear system.
         """
-        if not self.factored:
+        if not self.factorized:
             self.factorize()
 
         transpose_solve = kwargs.get('transpose_solve', False)
         self.params.icntl[9] = 2 if transpose_solve else 1
 
         cdef:
-            INT64_t nrhs
+            INT32_t nrhs
 
         # rhs can be dense or sparse
         if 'rhs' in kwargs:
@@ -735,7 +791,7 @@ cdef class MumpsContext_INT64_t_FLOAT64_t:
                                  "and rhs is of size (%g)"%(self.nrow, self.nrow, rhs_shape))
 
 
-            assert are_mixed_types_compatible(FLOAT64_T, rhs.dtype), "Rhs matrix or vector must have a Numpy compatible type (%s)!" % cysparse_to_numpy_type(FLOAT64_T)
+            assert are_mixed_types_compatible(FLOAT32_T, rhs.dtype), "Rhs matrix or vector must have a Numpy compatible type (%s)!" % cysparse_to_numpy_type(FLOAT32_T)
 
 
             # create x
@@ -745,9 +801,9 @@ cdef class MumpsContext_INT64_t_FLOAT64_t:
             if rhs.ndim == 1:
                 nrhs = 1
             else:
-                nrhs = <INT64_t> rhs_shape[1]
+                nrhs = <INT32_t> rhs_shape[1]
 
-            self.solve_dense(<FLOAT64_t *> cnp.PyArray_DATA(x), rhs_shape[0], nrhs)
+            self.solve_dense(<FLOAT32_t *> cnp.PyArray_DATA(x), rhs_shape[0], nrhs)
 
         elif ['rhs_col_ptr', 'rhs_row_ind', 'rhs_val'] in kwargs:
             pass

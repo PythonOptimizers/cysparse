@@ -1671,7 +1671,6 @@ cdef class LLSparseMatrix_INT64_t_COMPLEX128_t(MutableSparseMatrix_INT64_t_COMPL
         cdef:
             INT64_t   i, k, elem
 
-
         elem = 0
         for i from 0 <= i < self.__nrow:
             k = self.root[i]

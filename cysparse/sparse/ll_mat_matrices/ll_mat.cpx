@@ -1741,7 +1741,6 @@ YOU HAVE TO DEFINE OR CAST YOUR NEW UNRECOGNIZED TYPE
         cdef:
             @index@   i, k, elem
 
-
         elem = 0
         for i from 0 <= i < self.__nrow:
             k = self.root[i]

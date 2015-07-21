@@ -168,8 +168,8 @@ cdef class MumpsContext_@index@_@type@:
         @index@ * a_col
         @type@ *  a_val
 
-        bint analysed
-        bint factored
+        bint analyzed
+        bint factorized
         bint out_of_core
 
         object analysis_stats

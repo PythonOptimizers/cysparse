@@ -1,7 +1,7 @@
 from cysparse.types.cysparse_types cimport *
 
-from cysparse.sparse.ll_mat_matrices.ll_mat_INT64_t_FLOAT32_t cimport LLSparseMatrix_INT64_t_FLOAT32_t
-from cysparse.sparse.csc_mat_matrices.csc_mat_INT64_t_FLOAT32_t cimport CSCSparseMatrix_INT64_t_FLOAT32_t
+from cysparse.sparse.ll_mat_matrices.ll_mat_INT32_t_FLOAT32_t cimport LLSparseMatrix_INT32_t_FLOAT32_t
+from cysparse.sparse.csc_mat_matrices.csc_mat_INT32_t_FLOAT32_t cimport CSCSparseMatrix_INT32_t_FLOAT32_t
 
 
 cimport numpy as cnp
@@ -141,16 +141,16 @@ cdef class smumps_real_array:
     cdef get_array(self, SMUMPS_REAL * array, int ub = ?)
 
 
-cdef class MumpsContext_INT64_t_FLOAT32_t:
+cdef class MumpsContext_INT32_t_FLOAT32_t:
     cdef:
-        LLSparseMatrix_INT64_t_FLOAT32_t A
+        LLSparseMatrix_INT32_t_FLOAT32_t A
 
-        INT64_t nrow
-        INT64_t ncol
-        INT64_t nnz
+        INT32_t nrow
+        INT32_t ncol
+        INT32_t nnz
 
         # Matrix A in CSC format
-        CSCSparseMatrix_INT64_t_FLOAT32_t csc_mat
+        CSCSparseMatrix_INT32_t_FLOAT32_t csc_mat
 
         # MUMPS
         SMUMPS_STRUC_C params
@@ -164,12 +164,12 @@ cdef class MumpsContext_INT64_t_FLOAT32_t:
         smumps_real_array rinfo
         smumps_real_array rinfog
 
-        INT64_t * a_row
-        INT64_t * a_col
+        INT32_t * a_row
+        INT32_t * a_col
         FLOAT32_t *  a_val
 
-        bint analysed
-        bint factored
+        bint analyzed
+        bint factorized
         bint out_of_core
 
         object analysis_stats
@@ -180,6 +180,6 @@ cdef class MumpsContext_INT64_t_FLOAT32_t:
     cdef mumps_call(self)
     cdef set_centralized_assembled_matrix(self)
 
-    cdef solve_dense(self, FLOAT32_t * rhs, INT64_t rhs_length, INT64_t nrhs)
-    cdef solve_sparse(self, INT64_t * rhs_col_ptr, INT64_t * rhs_row_ind,
-                       FLOAT32_t * rhs_val, INT64_t rhs_nnz, INT64_t nrhs, FLOAT32_t * x, INT64_t x_length)
+    cdef solve_dense(self, FLOAT32_t * rhs, INT32_t rhs_length, INT32_t nrhs)
+    cdef solve_sparse(self, INT32_t * rhs_col_ptr, INT32_t * rhs_row_ind,
+                       FLOAT32_t * rhs_val, INT32_t rhs_nnz, INT32_t nrhs, FLOAT32_t * x, INT32_t x_length)

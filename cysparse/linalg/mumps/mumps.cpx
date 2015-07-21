@@ -278,11 +278,12 @@ cdef class MumpsContext_@index@_@type@:
         self.nnz = self.A.nnz
 
         # MUMPS
-        self.analysed = False
-        self.factored = False
+        self.analyzed = False
+        self.factorized = False
         self.out_of_core = False
 
         self.params.job = -1
+        # TODO: change this
         self.params.sym = self.A.is_symmetric
         self.params.par = 1
 
@@ -616,7 +617,7 @@ cdef class MumpsContext_@index@_@type@:
     ####################################################################################################################
     # Analyse
     ####################################################################################################################
-    def analyse(self, ordering='auto'):
+    def analyze(self, ordering='auto'):
         """
         Perform analysis step of MUMPS.
 
@@ -635,6 +636,8 @@ cdef class MumpsContext_@index@_@type@:
                 particular ordering depends on the MUMPS installation.  Default is
                 'auto'.
         """
+        if self.analyzed:
+            return
 
         self.params.icntl[7] = orderings[ordering]
         t1 = time.clock()
@@ -645,10 +648,63 @@ cdef class MumpsContext_@index@_@type@:
         if self.params.infog[1] < 0:
             raise MUMPSError(self.params.infog[1])
 
-        self.analysed = True
+        self.analyzed = True
 
         #self.analysis_stats = AnalysisStatistics(self.params,
         #                                         t2 - t1)
+
+    ####################################################################################################################
+    # Factorize
+    ####################################################################################################################
+    def factorize(self, ordering='auto', pivot_tol=0.01):
+        """
+        Perform the LU factorization of the matrix (or LDL' if the matrix
+        is symmetric).
+
+        This factorization can then later be used to solve a linear system
+        with `solve`. Statistical data of the factorization is stored in
+        `factor_stats`.
+
+        Args:
+            ordering : { 'auto', 'amd', 'amf', 'scotch', 'pord', 'metis', 'qamd' }
+                ordering to use in the factorization. The availability of a
+                particular ordering depends on the MUMPS installation.  Default is
+                'auto'.
+            pivot_tol: number in the range [0, 1]
+                pivoting threshold. Pivoting is typically limited in sparse
+                solvers, as too much pivoting destroys sparsity. 1.0 means full
+                pivoting, whereas 0.0 means no pivoting. Default is 0.01.
+        """
+        # TODO: ordering
+
+        # Analysis phase must be done before factorization
+        if not self.analyzed :
+            self.analyze(ordering=ordering)
+
+        self.params.icntl[22] = 1 if self.out_of_core else 1
+        self.params.cntl[1] = pivot_tol
+        self.params.job = 2
+
+        done = False
+        while not done:
+            t1 = time.clock()
+            self.mumps_call()
+            t2 = time.clock()
+
+            # error -8, -9 (not enough allocated memory) is treated
+            # specially, by increasing the memory relaxation parameter
+            if self.params.infog[1] < 0:
+                if self.params.infog[1] in (-8, -9):
+                    # double the additional memory
+                    self.params.icntl[14] = self.params.icntl[14]*2
+                else:
+                    raise MUMPSError(self.params.infog)
+            else:
+                done = True
+
+        self.factorized = True
+        #if self.verbose:
+        #    self.factorize_stats = FactorizationStatistics(self.params, t2 - t1)
 
     ####################################################################################################################
     # Solve
@@ -718,7 +774,7 @@ cdef class MumpsContext_@index@_@type@:
         Returns:
             Dense NumPy array ``x`` (matrix or vector) with the solution(s) of the linear system.
         """
-        if not self.factored:
+        if not self.factorized:
             self.factorize()
 
         transpose_solve = kwargs.get('transpose_solve', False)

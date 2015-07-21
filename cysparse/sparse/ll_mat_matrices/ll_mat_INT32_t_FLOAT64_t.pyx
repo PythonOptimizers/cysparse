@@ -1609,7 +1609,6 @@ cdef class LLSparseMatrix_INT32_t_FLOAT64_t(MutableSparseMatrix_INT32_t_FLOAT64_
         cdef:
             INT32_t   i, k, elem
 
-
         elem = 0
         for i from 0 <= i < self.__nrow:
             k = self.root[i]

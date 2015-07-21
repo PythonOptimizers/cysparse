@@ -1086,41 +1086,41 @@ if use_mumps:
     mumps_ext = []
 
   
-    mumps_ext_params_INT64_t_FLOAT32_t = ext_params.copy()
-    mumps_ext_params_INT64_t_FLOAT32_t['include_dirs'].extend(mumps_include_dirs)
-    mumps_ext_params_INT64_t_FLOAT32_t['library_dirs'] = mumps_library_dirs
-    mumps_ext_params_INT64_t_FLOAT32_t['libraries'] = [] # 'scalapack', 'pord']
+    mumps_ext_params_INT32_t_FLOAT32_t = ext_params.copy()
+    mumps_ext_params_INT32_t_FLOAT32_t['include_dirs'].extend(mumps_include_dirs)
+    mumps_ext_params_INT32_t_FLOAT32_t['library_dirs'] = mumps_library_dirs
+    mumps_ext_params_INT32_t_FLOAT32_t['libraries'] = [] # 'scalapack', 'pord']
 
-    mumps_ext_params_INT64_t_FLOAT32_t['libraries'].append('smumps')
-    mumps_ext_params_INT64_t_FLOAT32_t['libraries'].append('mumps_common')
-    mumps_ext_params_INT64_t_FLOAT32_t['libraries'].append('pord')
-    mumps_ext_params_INT64_t_FLOAT32_t['libraries'].append('mpiseq')
-    mumps_ext_params_INT64_t_FLOAT32_t['libraries'].append('blas')
-    mumps_ext_params_INT64_t_FLOAT32_t['libraries'].append('pthread')
+    mumps_ext_params_INT32_t_FLOAT32_t['libraries'].append('smumps')
+    mumps_ext_params_INT32_t_FLOAT32_t['libraries'].append('mumps_common')
+    mumps_ext_params_INT32_t_FLOAT32_t['libraries'].append('pord')
+    mumps_ext_params_INT32_t_FLOAT32_t['libraries'].append('mpiseq')
+    mumps_ext_params_INT32_t_FLOAT32_t['libraries'].append('blas')
+    mumps_ext_params_INT32_t_FLOAT32_t['libraries'].append('pthread')
 
     mumps_ext.append(
 
-        Extension(name="cysparse.linalg.mumps.mumps_INT64_t_FLOAT32_t",
-                  sources=['cysparse/linalg/mumps/mumps_INT64_t_FLOAT32_t.pxd',
-                           'cysparse/linalg/mumps/mumps_INT64_t_FLOAT32_t.pyx'], **mumps_ext_params_INT64_t_FLOAT32_t))
+        Extension(name="cysparse.linalg.mumps.mumps_INT32_t_FLOAT32_t",
+                  sources=['cysparse/linalg/mumps/mumps_INT32_t_FLOAT32_t.pxd',
+                           'cysparse/linalg/mumps/mumps_INT32_t_FLOAT32_t.pyx'], **mumps_ext_params_INT32_t_FLOAT32_t))
   
-    mumps_ext_params_INT64_t_FLOAT64_t = ext_params.copy()
-    mumps_ext_params_INT64_t_FLOAT64_t['include_dirs'].extend(mumps_include_dirs)
-    mumps_ext_params_INT64_t_FLOAT64_t['library_dirs'] = mumps_library_dirs
-    mumps_ext_params_INT64_t_FLOAT64_t['libraries'] = [] # 'scalapack', 'pord']
+    mumps_ext_params_INT32_t_FLOAT64_t = ext_params.copy()
+    mumps_ext_params_INT32_t_FLOAT64_t['include_dirs'].extend(mumps_include_dirs)
+    mumps_ext_params_INT32_t_FLOAT64_t['library_dirs'] = mumps_library_dirs
+    mumps_ext_params_INT32_t_FLOAT64_t['libraries'] = [] # 'scalapack', 'pord']
 
-    mumps_ext_params_INT64_t_FLOAT64_t['libraries'].append('dmumps')
-    mumps_ext_params_INT64_t_FLOAT64_t['libraries'].append('mumps_common')
-    mumps_ext_params_INT64_t_FLOAT64_t['libraries'].append('pord')
-    mumps_ext_params_INT64_t_FLOAT64_t['libraries'].append('mpiseq')
-    mumps_ext_params_INT64_t_FLOAT64_t['libraries'].append('blas')
-    mumps_ext_params_INT64_t_FLOAT64_t['libraries'].append('pthread')
+    mumps_ext_params_INT32_t_FLOAT64_t['libraries'].append('dmumps')
+    mumps_ext_params_INT32_t_FLOAT64_t['libraries'].append('mumps_common')
+    mumps_ext_params_INT32_t_FLOAT64_t['libraries'].append('pord')
+    mumps_ext_params_INT32_t_FLOAT64_t['libraries'].append('mpiseq')
+    mumps_ext_params_INT32_t_FLOAT64_t['libraries'].append('blas')
+    mumps_ext_params_INT32_t_FLOAT64_t['libraries'].append('pthread')
 
     mumps_ext.append(
 
-        Extension(name="cysparse.linalg.mumps.mumps_INT64_t_FLOAT64_t",
-                  sources=['cysparse/linalg/mumps/mumps_INT64_t_FLOAT64_t.pxd',
-                           'cysparse/linalg/mumps/mumps_INT64_t_FLOAT64_t.pyx'], **mumps_ext_params_INT64_t_FLOAT64_t))
+        Extension(name="cysparse.linalg.mumps.mumps_INT32_t_FLOAT64_t",
+                  sources=['cysparse/linalg/mumps/mumps_INT32_t_FLOAT64_t.pxd',
+                           'cysparse/linalg/mumps/mumps_INT32_t_FLOAT64_t.pyx'], **mumps_ext_params_INT32_t_FLOAT64_t))
   
 
 
