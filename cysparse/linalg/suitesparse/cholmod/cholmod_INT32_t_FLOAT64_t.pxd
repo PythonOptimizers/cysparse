@@ -3,6 +3,12 @@ from cysparse.types.cysparse_types cimport *
 from cysparse.sparse.ll_mat_matrices.ll_mat_INT32_t_FLOAT64_t cimport LLSparseMatrix_INT32_t_FLOAT64_t
 from cysparse.sparse.csc_mat_matrices.csc_mat_INT32_t_FLOAT64_t cimport CSCSparseMatrix_INT32_t_FLOAT64_t
 
+
+cdef extern from "cholmod.h":
+
+    ctypedef struct cholmod_common:
+        pass
+
 cdef class CholmodContext_INT32_t_FLOAT64_t:
     cdef:
         LLSparseMatrix_INT32_t_FLOAT64_t A
@@ -13,3 +19,5 @@ cdef class CholmodContext_INT32_t_FLOAT64_t:
 
         # Matrix A in CSC format
         CSCSparseMatrix_INT32_t_FLOAT64_t csc_mat
+
+        cholmod_common common_struct

@@ -3,6 +3,12 @@ from cysparse.types.cysparse_types cimport *
 from cysparse.sparse.ll_mat_matrices.ll_mat_@index@_@type@ cimport LLSparseMatrix_@index@_@type@
 from cysparse.sparse.csc_mat_matrices.csc_mat_@index@_@type@ cimport CSCSparseMatrix_@index@_@type@
 
+
+cdef extern from "cholmod.h":
+
+    ctypedef struct cholmod_common:
+        pass
+
 cdef class CholmodContext_@index@_@type@:
     cdef:
         LLSparseMatrix_@index@_@type@ A
@@ -13,3 +19,5 @@ cdef class CholmodContext_@index@_@type@:
 
         # Matrix A in CSC format
         CSCSparseMatrix_@index@_@type@ csc_mat
+
+        cholmod_common common_struct

@@ -222,6 +222,17 @@ def cysparse_real_type_to_umfpack_family(cysparse_type):
     else:
         raise TypeError("Not a recognized SuiteSparse Umfpack type")
 
+####################################
+# CHOLMOD TYPES
+####################################
+def cysparse_real_type_to_cholmod_prefix(cysparse_type):
+    if cysparse_type in ['INT32_t']:
+        return 'cholmod_'
+    elif cysparse_type in ['INT64_t']:
+        return 'cholmod_l'
+    else:
+        raise TypeError("Not a recognized SuiteSparse Cholmod type")
+
 
 ####################################
 # MUMPS TYPES
