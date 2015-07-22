@@ -4,7 +4,6 @@ This is the interface to MUMPS (http://mumps.enseeiht.fr/index.php?page=home)
 """
 
 """
-
 Some notes for the maintainers of this library.
 
 Basic working:

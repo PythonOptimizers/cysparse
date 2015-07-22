@@ -24,13 +24,21 @@ cysparse_config.read('cysparse.cfg')
 
 numpy_include = np.get_include()
 
+# DEFAULT
+default_include_dir = get_path_option(cysparse_config, 'DEFAULT', 'include_dirs')
+default_library_dir = get_path_option(cysparse_config, 'DEFAULT', 'library_dirs')
+
 # SUITESPARSE
 # Do we use it or not?
 use_suitesparse = cysparse_config.getboolean('SUITESPARSE', 'use_suitesparse')
 # find user defined directories
 if use_suitesparse:
     suitesparse_include_dirs = get_path_option(cysparse_config, 'SUITESPARSE', 'include_dirs')
+    if suitesparse_include_dirs == '':
+        suitesparse_include_dirs = default_include_dir
     suitesparse_library_dirs = get_path_option(cysparse_config, 'SUITESPARSE', 'library_dirs')
+    if suitesparse_library_dirs == '':
+        suitesparse_library_dirs = default_library_dir
 
 # MUMPS
 # Do we use it or not?
@@ -40,8 +48,11 @@ mumps_compiled_in_64bits = cysparse_config.getboolean('MUMPS', 'mumps_compiled_i
 # find user defined directories
 if use_mumps:
     mumps_include_dirs = get_path_option(cysparse_config, 'MUMPS', 'include_dirs')
+    if mumps_include_dirs == '':
+        mumps_include_dirs = default_include_dir
     mumps_library_dirs = get_path_option(cysparse_config, 'MUMPS', 'library_dirs')
-
+    if mumps_library_dirs == '':
+        mumps_library_dirs = default_library_dir
 
 ########################################################################################################################
 # EXTENSIONS
