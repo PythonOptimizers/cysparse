@@ -1663,6 +1663,26 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX64_t(MutableSparseMatrix_INT32_t_COMPLE
 
         return (a_row, a_col, a_val)
 
+    cdef take_triplet_pointers(self, INT32_t * a_row, INT32_t * a_col, COMPLEX64_t * a_val):
+        """
+        Warning:
+            Arrays **must** be allocated.
+        """
+        cdef:
+            INT32_t   i, k, elem
+
+        elem = 0
+        for i from 0 <= i < self.__nrow:
+            k = self.root[i]
+            while k != -1:
+                a_row[ elem ] = i
+                a_col[ elem ] = self.col[k]
+                a_val[ elem ] = self.val[k]
+                k = self.link[k]
+                elem += 1
+
+
+
 
     def diag(self, k = 0):
         """

@@ -24,13 +24,21 @@ cysparse_config.read('cysparse.cfg')
 
 numpy_include = np.get_include()
 
+# DEFAULT
+default_include_dir = get_path_option(cysparse_config, 'DEFAULT', 'include_dirs')
+default_library_dir = get_path_option(cysparse_config, 'DEFAULT', 'library_dirs')
+
 # SUITESPARSE
 # Do we use it or not?
 use_suitesparse = cysparse_config.getboolean('SUITESPARSE', 'use_suitesparse')
 # find user defined directories
 if use_suitesparse:
     suitesparse_include_dirs = get_path_option(cysparse_config, 'SUITESPARSE', 'include_dirs')
+    if suitesparse_include_dirs == '':
+        suitesparse_include_dirs = default_include_dir
     suitesparse_library_dirs = get_path_option(cysparse_config, 'SUITESPARSE', 'library_dirs')
+    if suitesparse_library_dirs == '':
+        suitesparse_library_dirs = default_library_dir
 
 # MUMPS
 # Do we use it or not?
@@ -40,8 +48,11 @@ mumps_compiled_in_64bits = cysparse_config.getboolean('MUMPS', 'mumps_compiled_i
 # find user defined directories
 if use_mumps:
     mumps_include_dirs = get_path_option(cysparse_config, 'MUMPS', 'include_dirs')
+    if mumps_include_dirs == '':
+        mumps_include_dirs = default_include_dir
     mumps_library_dirs = get_path_option(cysparse_config, 'MUMPS', 'library_dirs')
-
+    if mumps_library_dirs == '':
+        mumps_library_dirs = default_library_dir
 
 ########################################################################################################################
 # EXTENSIONS
@@ -252,22 +263,33 @@ if use_suitesparse:
 {% endfor %}
         ]
 
+#../lib/libsmumps.so ../lib/libmumps_common.so  -L../PORD/lib/ -lpord  -L../libseq -lmpiseq -lblas -lpthread
+
 
 if use_mumps:
-    mumps_ext_params = ext_params.copy()
-    mumps_ext_params['include_dirs'].extend(mumps_include_dirs)
-    mumps_ext_params['library_dirs'] = mumps_library_dirs
-    mumps_ext_params['libraries'] = []
-
-    mumps_ext = [
+    mumps_ext = []
 {% for index_type in mumps_index_list %}
   {% for element_type in mumps_type_list %}
+    mumps_ext_params_@index_type@_@element_type@ = ext_params.copy()
+    mumps_ext_params_@index_type@_@element_type@['include_dirs'].extend(mumps_include_dirs)
+    mumps_ext_params_@index_type@_@element_type@['library_dirs'] = mumps_library_dirs
+    mumps_ext_params_@index_type@_@element_type@['libraries'] = [] # 'scalapack', 'pord']
+
+    mumps_ext_params_@index_type@_@element_type@['libraries'].append('@element_type|cysparse_real_type_to_mumps_family@mumps')
+    mumps_ext_params_@index_type@_@element_type@['libraries'].append('mumps_common')
+    mumps_ext_params_@index_type@_@element_type@['libraries'].append('pord')
+    mumps_ext_params_@index_type@_@element_type@['libraries'].append('mpiseq')
+    mumps_ext_params_@index_type@_@element_type@['libraries'].append('blas')
+    mumps_ext_params_@index_type@_@element_type@['libraries'].append('pthread')
+
+    mumps_ext.append(
+
         Extension(name="cysparse.linalg.mumps.mumps_@index_type@_@element_type@",
                   sources=['cysparse/linalg/mumps/mumps_@index_type@_@element_type@.pxd',
-                           'cysparse/linalg/mumps/mumps_@index_type@_@element_type@.pyx'], **mumps_ext_params),
+                           'cysparse/linalg/mumps/mumps_@index_type@_@element_type@.pyx'], **mumps_ext_params_@index_type@_@element_type@))
   {% endfor %}
 {% endfor %}
-        ]
+
 
 ########################################################################################################################
 # SETUP

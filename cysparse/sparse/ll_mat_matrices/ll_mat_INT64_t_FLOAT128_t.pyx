@@ -1603,6 +1603,26 @@ cdef class LLSparseMatrix_INT64_t_FLOAT128_t(MutableSparseMatrix_INT64_t_FLOAT12
 
         return (a_row, a_col, a_val)
 
+    cdef take_triplet_pointers(self, INT64_t * a_row, INT64_t * a_col, FLOAT128_t * a_val):
+        """
+        Warning:
+            Arrays **must** be allocated.
+        """
+        cdef:
+            INT64_t   i, k, elem
+
+        elem = 0
+        for i from 0 <= i < self.__nrow:
+            k = self.root[i]
+            while k != -1:
+                a_row[ elem ] = i
+                a_col[ elem ] = self.col[k]
+                a_val[ elem ] = self.val[k]
+                k = self.link[k]
+                elem += 1
+
+
+
 
     def diag(self, k = 0):
         """

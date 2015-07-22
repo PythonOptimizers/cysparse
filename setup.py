@@ -1079,34 +1079,51 @@ if use_suitesparse:
 
         ]
 
+#../lib/libsmumps.so ../lib/libmumps_common.so  -L../PORD/lib/ -lpord  -L../libseq -lmpiseq -lblas -lpthread
+
 
 if use_mumps:
-    mumps_ext_params = ext_params.copy()
-    mumps_ext_params['include_dirs'].extend(mumps_include_dirs)
-    mumps_ext_params['library_dirs'] = mumps_library_dirs
-    mumps_ext_params['libraries'] = []
-
-    mumps_ext = [
+    mumps_ext = []
 
   
-        Extension(name="cysparse.linalg.mumps.mumps_INT64_t_FLOAT32_t",
-                  sources=['cysparse/linalg/mumps/mumps_INT64_t_FLOAT32_t.pxd',
-                           'cysparse/linalg/mumps/mumps_INT64_t_FLOAT32_t.pyx'], **mumps_ext_params),
+    mumps_ext_params_INT32_t_FLOAT32_t = ext_params.copy()
+    mumps_ext_params_INT32_t_FLOAT32_t['include_dirs'].extend(mumps_include_dirs)
+    mumps_ext_params_INT32_t_FLOAT32_t['library_dirs'] = mumps_library_dirs
+    mumps_ext_params_INT32_t_FLOAT32_t['libraries'] = [] # 'scalapack', 'pord']
+
+    mumps_ext_params_INT32_t_FLOAT32_t['libraries'].append('smumps')
+    mumps_ext_params_INT32_t_FLOAT32_t['libraries'].append('mumps_common')
+    mumps_ext_params_INT32_t_FLOAT32_t['libraries'].append('pord')
+    mumps_ext_params_INT32_t_FLOAT32_t['libraries'].append('mpiseq')
+    mumps_ext_params_INT32_t_FLOAT32_t['libraries'].append('blas')
+    mumps_ext_params_INT32_t_FLOAT32_t['libraries'].append('pthread')
+
+    mumps_ext.append(
+
+        Extension(name="cysparse.linalg.mumps.mumps_INT32_t_FLOAT32_t",
+                  sources=['cysparse/linalg/mumps/mumps_INT32_t_FLOAT32_t.pxd',
+                           'cysparse/linalg/mumps/mumps_INT32_t_FLOAT32_t.pyx'], **mumps_ext_params_INT32_t_FLOAT32_t))
   
-        Extension(name="cysparse.linalg.mumps.mumps_INT64_t_FLOAT64_t",
-                  sources=['cysparse/linalg/mumps/mumps_INT64_t_FLOAT64_t.pxd',
-                           'cysparse/linalg/mumps/mumps_INT64_t_FLOAT64_t.pyx'], **mumps_ext_params),
-  
-        Extension(name="cysparse.linalg.mumps.mumps_INT64_t_COMPLEX64_t",
-                  sources=['cysparse/linalg/mumps/mumps_INT64_t_COMPLEX64_t.pxd',
-                           'cysparse/linalg/mumps/mumps_INT64_t_COMPLEX64_t.pyx'], **mumps_ext_params),
-  
-        Extension(name="cysparse.linalg.mumps.mumps_INT64_t_COMPLEX128_t",
-                  sources=['cysparse/linalg/mumps/mumps_INT64_t_COMPLEX128_t.pxd',
-                           'cysparse/linalg/mumps/mumps_INT64_t_COMPLEX128_t.pyx'], **mumps_ext_params),
+    mumps_ext_params_INT32_t_FLOAT64_t = ext_params.copy()
+    mumps_ext_params_INT32_t_FLOAT64_t['include_dirs'].extend(mumps_include_dirs)
+    mumps_ext_params_INT32_t_FLOAT64_t['library_dirs'] = mumps_library_dirs
+    mumps_ext_params_INT32_t_FLOAT64_t['libraries'] = [] # 'scalapack', 'pord']
+
+    mumps_ext_params_INT32_t_FLOAT64_t['libraries'].append('dmumps')
+    mumps_ext_params_INT32_t_FLOAT64_t['libraries'].append('mumps_common')
+    mumps_ext_params_INT32_t_FLOAT64_t['libraries'].append('pord')
+    mumps_ext_params_INT32_t_FLOAT64_t['libraries'].append('mpiseq')
+    mumps_ext_params_INT32_t_FLOAT64_t['libraries'].append('blas')
+    mumps_ext_params_INT32_t_FLOAT64_t['libraries'].append('pthread')
+
+    mumps_ext.append(
+
+        Extension(name="cysparse.linalg.mumps.mumps_INT32_t_FLOAT64_t",
+                  sources=['cysparse/linalg/mumps/mumps_INT32_t_FLOAT64_t.pxd',
+                           'cysparse/linalg/mumps/mumps_INT32_t_FLOAT64_t.pyx'], **mumps_ext_params_INT32_t_FLOAT64_t))
   
 
-        ]
+
 
 ########################################################################################################################
 # SETUP

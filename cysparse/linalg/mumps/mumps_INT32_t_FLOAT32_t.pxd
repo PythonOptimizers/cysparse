@@ -1,13 +1,10 @@
-from cysparse.sparse.ll_mat_matrices.ll_mat_INT64_t_FLOAT64_t cimport LLSparseMatrix_INT64_t_FLOAT64_t
-from cysparse.sparse.csc_mat_matrices.csc_mat_INT64_t_FLOAT64_t cimport CSCSparseMatrix_INT64_t_FLOAT64_t
+from cysparse.types.cysparse_types cimport *
 
-from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
-from cpython cimport Py_INCREF, Py_DECREF
+from cysparse.sparse.ll_mat_matrices.ll_mat_INT32_t_FLOAT32_t cimport LLSparseMatrix_INT32_t_FLOAT32_t
+from cysparse.sparse.csc_mat_matrices.csc_mat_INT32_t_FLOAT32_t cimport CSCSparseMatrix_INT32_t_FLOAT32_t
 
-import numpy as np
+
 cimport numpy as cnp
-
-cnp.import_array()
 
 cdef extern from "mumps_c_types.h":
 
@@ -32,14 +29,14 @@ cdef extern from "mumps_c_types.h":
     ctypedef mumps_double_complex  ZMUMPS_COMPLEX
     ctypedef double                ZMUMPS_REAL
 
-cdef extern from "dmumps_c.h":
-    ctypedef struct DMUMPS_STRUC_C:
+cdef extern from "smumps_c.h":
+    ctypedef struct SMUMPS_STRUC_C:
         MUMPS_INT      sym, par, job
         MUMPS_INT      comm_fortran    # Fortran communicator
         MUMPS_INT      icntl[40]
         MUMPS_INT      keep[500]
-        DMUMPS_REAL    cntl[15]
-        DMUMPS_REAL    dkeep[130];
+        SMUMPS_REAL    cntl[15]
+        SMUMPS_REAL    dkeep[130];
         MUMPS_INT8     keep8[150];
         MUMPS_INT      n
 
@@ -51,19 +48,19 @@ cdef extern from "dmumps_c.h":
         MUMPS_INT      nz
         MUMPS_INT      *irn
         MUMPS_INT      *jcn
-        DMUMPS_COMPLEX *a
+        SMUMPS_COMPLEX *a
 
         # Distributed entry
         MUMPS_INT      nz_loc
         MUMPS_INT      *irn_loc
         MUMPS_INT      *jcn_loc
-        DMUMPS_COMPLEX *a_loc
+        SMUMPS_COMPLEX *a_loc
 
         # Element entry
         MUMPS_INT      nelt
         MUMPS_INT      *eltptr
         MUMPS_INT      *eltvar
-        DMUMPS_COMPLEX *a_elt
+        SMUMPS_COMPLEX *a_elt
 
         # Ordering, if given by user
         MUMPS_INT      *perm_in
@@ -73,17 +70,17 @@ cdef extern from "dmumps_c.h":
         MUMPS_INT      *uns_perm    # column permutation
 
         # Scaling (input only in this version)
-        DMUMPS_REAL    *colsca
-        DMUMPS_REAL    *rowsca
+        SMUMPS_REAL    *colsca
+        SMUMPS_REAL    *rowsca
         MUMPS_INT colsca_from_mumps;
         MUMPS_INT rowsca_from_mumps;
 
 
         # RHS, solution, ouptput data and statistics
-        DMUMPS_COMPLEX *rhs
-        DMUMPS_COMPLEX *redrhs
-        DMUMPS_COMPLEX *rhs_sparse
-        DMUMPS_COMPLEX *sol_loc
+        SMUMPS_COMPLEX *rhs
+        SMUMPS_COMPLEX *redrhs
+        SMUMPS_COMPLEX *rhs_sparse
+        SMUMPS_COMPLEX *sol_loc
         MUMPS_INT      *irhs_sparse
         MUMPS_INT      *irhs_ptr
         MUMPS_INT      *isol_loc
@@ -92,8 +89,8 @@ cdef extern from "dmumps_c.h":
         MUMPS_INT      mblock, nblock, nprow, npcol
         MUMPS_INT      info[40]
         MUMPS_INT      infog[40]
-        DMUMPS_REAL    rinfo[40]
-        DMUMPS_REAL    rinfog[40]
+        SMUMPS_REAL    rinfo[40]
+        SMUMPS_REAL    rinfog[40]
 
         # Null space
         MUMPS_INT      deficiency
@@ -103,11 +100,11 @@ cdef extern from "dmumps_c.h":
         # Schur
         MUMPS_INT      size_schur
         MUMPS_INT      *listvar_schur
-        DMUMPS_COMPLEX *schur
+        SMUMPS_COMPLEX *schur
 
         # Internal parameters
         MUMPS_INT      instance_number
-        DMUMPS_COMPLEX *wk_user
+        SMUMPS_COMPLEX *wk_user
 
         char *version_number
         # For out-of-core
@@ -117,36 +114,72 @@ cdef extern from "dmumps_c.h":
         char *write_problem
         MUMPS_INT      lwk_user
 
+    cdef void smumps_c(SMUMPS_STRUC_C *)
 
-
-
-
-cdef class MumpsContext_INT64_t_FLOAT64_t:
+cdef class mumps_int_array:
     """
-    Mumps Context.
+    Internal classes to use x[i] = value and x[i] setters and getters
+    int version.
 
-    This version **only** deals with ``LLSparseMatrix_INT64_t_FLOAT64_t`` objects.
-
-    We follow the common use of Mumps. In particular, we use the same names for the methods of this
-    class as their corresponding counter-parts in Mumps.
     """
-    MUMPS_VERSION = 'TO BE DEFINED...'
+    cdef:
+        MUMPS_INT * array
+        int ub
 
-    def __cinit__(self, LLSparseMatrix_INT64_t_FLOAT64_t A):
-        """
-        Args:
-            A: A :class:`LLSparseMatrix_INT64_t_FLOAT64_t` object.
+    cdef get_array(self, MUMPS_INT * array, int ub = ?)
 
-        Warning:
-            The solver takes a "snapshot" of the matrix ``A``, i.e. the results given by the solver are only
-            valid for the matrix given. If the matrix ``A`` changes aferwards, the results given by the solver won't
-            reflect this change.
+cdef class smumps_real_array:
+    """
+    Internal classes to use x[i] = value and x[i] setters and getters
+    Real version.
 
-        """
-        self.A = A
-        Py_INCREF(self.A)  # increase ref to object to avoid the user deleting it explicitly or implicitly
+    """
+    cdef:
+        SMUMPS_REAL * array
+        int ub
 
-        self.nrow = A.nrow
-        self.ncol = A.ncol
+    cdef get_array(self, SMUMPS_REAL * array, int ub = ?)
 
-        self.nnz = self.A.nnz
+
+cdef class MumpsContext_INT32_t_FLOAT32_t:
+    cdef:
+        LLSparseMatrix_INT32_t_FLOAT32_t A
+
+        INT32_t nrow
+        INT32_t ncol
+        INT32_t nnz
+
+        # Matrix A in CSC format
+        CSCSparseMatrix_INT32_t_FLOAT32_t csc_mat
+
+        # MUMPS
+        SMUMPS_STRUC_C params
+
+        # internal classes for getters and setters
+        mumps_int_array icntl
+        mumps_int_array info
+        mumps_int_array infog
+
+        smumps_real_array cntl
+        smumps_real_array rinfo
+        smumps_real_array rinfog
+
+        INT32_t * a_row
+        INT32_t * a_col
+        FLOAT32_t *  a_val
+
+        bint analyzed
+        bint factorized
+        bint out_of_core
+
+        object analysis_stats
+        object factorize_stats
+        object solve_stats
+
+
+    cdef mumps_call(self)
+    cdef set_centralized_assembled_matrix(self)
+
+    cdef solve_dense(self, FLOAT32_t * rhs, INT32_t rhs_length, INT32_t nrhs)
+    cdef solve_sparse(self, INT32_t * rhs_col_ptr, INT32_t * rhs_row_ind,
+                       FLOAT32_t * rhs_val, INT32_t rhs_nnz, INT32_t nrhs, FLOAT32_t * x, INT32_t x_length)
