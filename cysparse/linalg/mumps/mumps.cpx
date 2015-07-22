@@ -58,6 +58,15 @@ Default 32 bit integers compilation:
 By default, MUMPS is compiled in 32 bit integers **unless** it is compiled with the option -DINTSIZE64. 32 and 64 bit
 versions are **not** compatible.
 
+Lib creation:
+-------------
+
+The :file:`libmpiseq.so` file is *missing* by default in lib and must be added by hand. It is compiled in directory
+libseq. :file:`libmpiseq.so` is essentially a dummy file to deal with sequential code.
+
+The order in which the library (.so) files are given to construct the MUMPS part
+of CySparse **is** important... and not standard.
+
 """
 
 from cysparse.sparse.ll_mat_matrices.ll_mat_@index@_@type@ cimport LLSparseMatrix_@index@_@type@
