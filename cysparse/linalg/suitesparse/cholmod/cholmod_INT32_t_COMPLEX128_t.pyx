@@ -47,13 +47,16 @@ cdef extern from "cholmod.h":
 
     int cholmod_defaults(cholmod_common *Common)
 
+    # Common struct
     int cholmod_check_common(cholmod_common *Common)
-
     int cholmod_print_common(const char *name, cholmod_common *Common)
 
-    int cholmod_print_sparse(cholmod_sparse *A, const char *name, cholmod_common *Common)
+    # Sparse struct
     int cholmod_check_sparse(cholmod_sparse *A, cholmod_common *Common)
+    int cholmod_print_sparse(cholmod_sparse *A, const char *name, cholmod_common *Common)
 
+    # Factor struct
+    int cholmod_check_factor(cholmod_factor *L, cholmod_common *Common)
 
 
 
@@ -203,7 +206,8 @@ cdef class CholmodContext_INT32_t_COMPLEX128_t:
                                                      self.csc_ival, self.nnz)
 
 
-        cholmod_check_sparse(&self.sparse_struct, &self.common_struct)
+        # TODO: uncomment when everything is OK
+        #cholmod_check_sparse(&self.sparse_struct, &self.common_struct)
 
     ####################################################################################################################
     # Properties
