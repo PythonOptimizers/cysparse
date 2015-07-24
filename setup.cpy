@@ -15,6 +15,7 @@ import numpy as np
 
 import ConfigParser
 import os
+import copy
 
 ####################################################################s####################################################
 # INIT
@@ -68,7 +69,7 @@ ext_params['extra_link_args'] = []
 
 ########################################################################################################################
 #                                                *** types ***
-base_ext_params = ext_params.copy()
+base_ext_params = copy.deepcopy(ext_params)
 base_ext = [
     Extension(name="cysparse.types.cysparse_types",
               sources=["cysparse/types/cysparse_types.pxd", "cysparse/types/cysparse_types.pyx"]),
@@ -81,7 +82,7 @@ base_ext = [
 
 ########################################################################################################################
 #                                                *** sparse ***
-sparse_ext_params = ext_params.copy()
+sparse_ext_params = copy.deepcopy(ext_params)
 
 sparse_ext = [
   ######################
@@ -247,9 +248,9 @@ utils_ext = [
 ########################################################################################################################
 #                                                *** SuiteSparse ***
 if use_suitesparse:
-    umfpack_ext_params = ext_params.copy()
+    # UMFPACK
+    umfpack_ext_params = copy.deepcopy(ext_params)
     umfpack_ext_params['include_dirs'].extend(suitesparse_include_dirs)
-    #umfpack_ext_params['include_dirs'] = suitesparse_include_dirs
     umfpack_ext_params['library_dirs'] = suitesparse_library_dirs
     umfpack_ext_params['libraries'] = ['umfpack', 'amd']
 
@@ -263,14 +264,31 @@ if use_suitesparse:
 {% endfor %}
         ]
 
-#../lib/libsmumps.so ../lib/libmumps_common.so  -L../PORD/lib/ -lpord  -L../libseq -lmpiseq -lblas -lpthread
+    # CHOLMOD
+    cholmod_ext_params = copy.deepcopy(ext_params)
+    print cholmod_ext_params
 
+    cholmod_ext_params['include_dirs'].extend(suitesparse_include_dirs)
+    cholmod_ext_params['library_dirs'] = suitesparse_library_dirs
+    cholmod_ext_params['libraries'] = ['cholmod', 'amd']
+
+    print cholmod_ext_params
+
+    cholmod_ext = [
+{% for index_type in cholmod_index_list %}
+  {% for element_type in cholmod_type_list %}
+        Extension(name="cysparse.linalg.suitesparse.cholmod.cholmod_@index_type@_@element_type@",
+                  sources=['cysparse/linalg/suitesparse/cholmod/cholmod_@index_type@_@element_type@.pxd',
+                           'cysparse/linalg/suitesparse/cholmod/cholmod_@index_type@_@element_type@.pyx'], **cholmod_ext_params),
+    {% endfor %}
+{% endfor %}
+        ]
 
 if use_mumps:
     mumps_ext = []
 {% for index_type in mumps_index_list %}
   {% for element_type in mumps_type_list %}
-    mumps_ext_params_@index_type@_@element_type@ = ext_params.copy()
+    mumps_ext_params_@index_type@_@element_type@ = copy.deepcopy(ext_params)
     mumps_ext_params_@index_type@_@element_type@['include_dirs'].extend(mumps_include_dirs)
     mumps_ext_params_@index_type@_@element_type@['library_dirs'] = mumps_library_dirs
     mumps_ext_params_@index_type@_@element_type@['libraries'] = [] # 'scalapack', 'pord']
@@ -317,8 +335,10 @@ ext_modules = base_ext + sparse_ext
 if use_suitesparse:
     # add suitsparse package
     ext_modules += umfpack_ext
+    ext_modules += cholmod_ext
     packages_list.append('cysparse.linalg.suitesparse')
     packages_list.append('cysparse.linalg.suitesparse.umfpack')
+    packages_list.append('cysparse.linalg.suitesparse.cholmod')
 
 if use_mumps:
     # add mumps

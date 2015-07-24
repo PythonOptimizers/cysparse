@@ -222,6 +222,24 @@ def cysparse_real_type_to_umfpack_family(cysparse_type):
     else:
         raise TypeError("Not a recognized SuiteSparse Umfpack type")
 
+####################################
+# CHOLMOD TYPES
+####################################
+def cysparse_real_type_to_cholmod_prefix(cysparse_type):
+    if cysparse_type in ['INT32_t']:
+        return 'cholmod'
+    elif cysparse_type in ['INT64_t']:
+        return 'cholmod_l'
+    else:
+        raise TypeError("Not a recognized SuiteSparse Cholmod type for prefixing Cholmod routines")
+
+def cysparse_real_type_to_cholmod_type(cysparse_type):
+    if cysparse_type in ['FLOAT32_t', 'COMPLEX64_t']:
+        return 'CHOLMOD_SINGLE'
+    elif cysparse_type in ['INT64_t', 'COMPLEX128_t']:
+        return 'CHOLMOD_DOUBLE'
+    else:
+        raise TypeError("Not a recognized SuiteSparse Cholmod type for prefixing Cholmod routines")
 
 ####################################
 # MUMPS TYPES
@@ -703,6 +721,8 @@ if __name__ == "__main__":
     GENERAL_ENVIRONMENT.filters['cysparse_real_type_from_real_cysparse_complex_type'] = cysparse_real_type_from_real_cysparse_complex_type
     GENERAL_ENVIRONMENT.filters['cysparse_real_type_to_umfpack_family'] = cysparse_real_type_to_umfpack_family
     GENERAL_ENVIRONMENT.filters['cysparse_real_type_to_mumps_family'] = cysparse_real_type_to_mumps_family
+    GENERAL_ENVIRONMENT.filters['cysparse_real_type_to_cholmod_prefix'] = cysparse_real_type_to_cholmod_prefix
+    GENERAL_ENVIRONMENT.filters['cysparse_real_type_to_cholmod_type'] = cysparse_real_type_to_cholmod_type
 
     #################################################################################################
     # END COMMON STUFF
