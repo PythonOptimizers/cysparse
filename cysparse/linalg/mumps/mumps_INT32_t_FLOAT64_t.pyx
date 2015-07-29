@@ -823,7 +823,7 @@ cdef class MumpsContext_INT32_t_FLOAT64_t:
                 whether the data in ``rhs`` may be overwritten, which can lead to a small
                 performance gain. Default is ``False``.
             x : the solution to the linear system as a dense matrix or vector.
-            x_length: ``self.nrow * nrhs``.
+            x_length: ``self.nrow`` (sequential version).
 
         Warning:
             Mumps overwrites ``rhs`` and replaces it by the solution of the linear system.
@@ -913,11 +913,9 @@ cdef class MumpsContext_INT32_t_FLOAT64_t:
             rhs_row_ind += 1
 
             nrhs = rhs_col_ptr.size - 1
-            print "toto"
-            print nrhs
             x_length = self.nrow
             rhs_nnz = rhs_val.size
-            print rhs_nnz
+
             x = np.zeros([self.nrow, nrhs], dtype=np.float64)
 
             self.solve_sparse(<INT32_t *>cnp.PyArray_DATA(rhs_col_ptr), <INT32_t *>cnp.PyArray_DATA(rhs_row_ind), <FLOAT64_t *> cnp.PyArray_DATA(rhs_val),
