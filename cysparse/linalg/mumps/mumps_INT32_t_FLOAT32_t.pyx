@@ -1,3 +1,88 @@
+"""
+This is the interface to MUMPS (http://mumps.enseeiht.fr/index.php?page=home)
+
+"""
+
+"""
+Some notes for the maintainers of this library.
+
+Basic working:
+--------------
+
+MUMPS working is simple:
+
+- initialize/modify the C struct MUMPS_STRUC_C;
+- call mumps_c(MUMPS_STRUC_C *).
+
+For example:
+
+# analyze
+MUMPS_STRUC_C.job = 1
+mumps_c(&MUMPS_STRUC_C)
+
+# factorize
+MUMPS_STRUC_C.job = 2
+mumps_c(&MUMPS_STRUC_C)
+
+# solve
+MUMPS_STRUC_C.job = 3
+mumps_c(&MUMPS_STRUC_C)
+
+etc.
+
+Access to:
+ - icntl
+ - info
+ - infog
+ - cntl
+ - rinfo
+ - rinfog
+
+**must** be done through properties!!!!
+
+
+Typed C struct:
+---------------
+
+Each MUMPS_STRUC_C is specialized and prefixed by a letter:
+
+- SMUMPS_STRUC_C: simple precision;
+- DMUMPS_STRUC_C: double precision;
+- CMUMPS_STRUC_C: simple complex;
+- ZMUMPS_STRUC_C: double complex.
+
+In CySparse (MumpsContext_INT32_t_FLOAT32_t), Xmumps_c() is called by a call to self.mumps_call().
+
+Solve:
+------
+
+MUMPS **overwrites** the rhs member and replaces it by the solution(s) it finds. If sparse solve is used, the solution
+is placed in a dummy dense rhs member.
+
+The rhs member can be a matrix or a vector.
+
+1-based index arrays:
+---------------------
+
+MUMPS uses exclusively FORTRAN routines and by consequence **all** array indices start with index **1** (not 0).
+
+Default 32 bit integers compilation:
+------------------------------------
+
+By default, MUMPS is compiled in 32 bit integers **unless** it is compiled with the option -DINTSIZE64. 32 and 64 bit
+versions are **not** compatible.
+
+Lib creation:
+-------------
+
+The :file:`libmpiseq.so` file is *missing* by default in lib and must be added by hand. It is compiled in directory
+libseq. :file:`libmpiseq.so` is essentially a dummy file to deal with sequential code.
+
+The order in which the library (.so) files are given to construct the MUMPS part
+of CySparse **is** important... and not standard.
+
+"""
+
 from cysparse.sparse.ll_mat_matrices.ll_mat_INT32_t_FLOAT32_t cimport LLSparseMatrix_INT32_t_FLOAT32_t
 from cysparse.sparse.csc_mat_matrices.csc_mat_INT32_t_FLOAT32_t cimport CSCSparseMatrix_INT32_t_FLOAT32_t
 
@@ -290,6 +375,10 @@ cdef class MumpsContext_INT32_t_FLOAT32_t:
 
         if not verbose:
             self.set_silent()
+
+        # int control parameters
+        self.icntl = mumps_int_array()
+        self.icntl.get_array(self.params.icntl)
 
         self.info = mumps_int_array()
         self.info.get_array(self.params.info)
@@ -631,14 +720,14 @@ cdef class MumpsContext_INT32_t_FLOAT32_t:
         if self.analyzed:
             return
 
-        self.params.icntl[7] = orderings[ordering]
+        self.icntl[7] = orderings[ordering]
         t1 = time.clock()
         self.params.job = 1   # analyse
         self.mumps_call()
         t2 = time.clock()
 
-        if self.params.infog[1] < 0:
-            raise MUMPSError(self.params.infog[1])
+        if self.infog[1] < 0:
+            raise MUMPSError(self.infog[1])
 
         self.analyzed = True
 
@@ -673,8 +762,8 @@ cdef class MumpsContext_INT32_t_FLOAT32_t:
         if not self.analyzed :
             self.analyze(ordering=ordering)
 
-        self.params.icntl[22] = 1 if self.out_of_core else 1
-        self.params.cntl[1] = pivot_tol
+        self.icntl[22] = 1 if self.out_of_core else 1
+        self.cntl[1] = pivot_tol
         self.params.job = 2
 
         done = False
@@ -685,12 +774,12 @@ cdef class MumpsContext_INT32_t_FLOAT32_t:
 
             # error -8, -9 (not enough allocated memory) is treated
             # specially, by increasing the memory relaxation parameter
-            if self.params.infog[1] < 0:
-                if self.params.infog[1] in (-8, -9):
+            if self.infog[1] < 0:
+                if self.infog[1] in (-8, -9):
                     # double the additional memory
-                    self.params.icntl[14] = self.params.icntl[14]*2
+                    self.icntl[14] = self.icntl[14]*2
                 else:
-                    raise MUMPSError(self.params.infog)
+                    raise MUMPSError(self.infog)
             else:
                 done = True
 
@@ -713,7 +802,7 @@ cdef class MumpsContext_INT32_t_FLOAT32_t:
         Warning:
             Mumps overwrites ``rhs`` and replaces it by the solution of the linear system.
         """
-        #self.params.icntl[9] = 2 if transpose_solve else 1
+        #self.icntl[9] = 2 if transpose_solve else 1
 
         self.params.nrhs = <MUMPS_INT> nrhs
         self.params.lrhs = <MUMPS_INT> rhs_length
@@ -734,12 +823,13 @@ cdef class MumpsContext_INT32_t_FLOAT32_t:
                 whether the data in ``rhs`` may be overwritten, which can lead to a small
                 performance gain. Default is ``False``.
             x : the solution to the linear system as a dense matrix or vector.
+            x_length: ``self.nrow`` (sequential version).
 
         Warning:
             Mumps overwrites ``rhs`` and replaces it by the solution of the linear system.
 
         """
-        #self.params.icntl[9] = 2 if transpose_solve else 1
+        #self.icntl[9] = 2 if transpose_solve else 1
 
         self.params.nz_rhs = rhs_nnz
         self.params.nrhs = nrhs # nrhs -1 ?
@@ -752,7 +842,7 @@ cdef class MumpsContext_INT32_t_FLOAT32_t:
         self.params.rhs = <FLOAT32_t *> x
 
         self.params.job = 3        # solve
-        self.params.icntl[20] = 1  # tell solver rhs is sparse
+        self.icntl[20] = 1  # tell solver rhs is sparse
         self.mumps_call()
 
     def solve(self, **kwargs):
@@ -770,11 +860,14 @@ cdef class MumpsContext_INT32_t_FLOAT32_t:
             self.factorize()
 
         transpose_solve = kwargs.get('transpose_solve', False)
-        self.params.icntl[9] = 2 if transpose_solve else 1
+        self.icntl[9] = 2 if transpose_solve else 1
 
         cdef:
             INT32_t nrhs
 
+        ################################################################################################################
+        # DENSE VERSION
+        ################################################################################################################
         # rhs can be dense or sparse
         if 'rhs' in kwargs:
             rhs = kwargs['rhs']
@@ -795,7 +888,7 @@ cdef class MumpsContext_INT32_t_FLOAT32_t:
 
 
             # create x
-            x = cnp.asfortranarray(rhs.copy())
+            x = np.asfortranarray(rhs.copy())
 
             # test number of columns in rhs
             if rhs.ndim == 1:
@@ -805,10 +898,31 @@ cdef class MumpsContext_INT32_t_FLOAT32_t:
 
             self.solve_dense(<FLOAT32_t *> cnp.PyArray_DATA(x), rhs_shape[0], nrhs)
 
-        elif ['rhs_col_ptr', 'rhs_row_ind', 'rhs_val'] in kwargs:
-            pass
+
+        ################################################################################################################
+        # SPARSE VERSION
+        ################################################################################################################
+        elif all(arg in kwargs for arg in ['rhs_col_ptr', 'rhs_row_ind', 'rhs_val']) :
+
+            rhs_col_ptr = kwargs['rhs_col_ptr']
+            rhs_row_ind = kwargs['rhs_row_ind']
+            rhs_val = kwargs['rhs_val']
+
+            # fortran indices, done internally in C: no efficiency lost
+            rhs_col_ptr += 1
+            rhs_row_ind += 1
+
+            nrhs = rhs_col_ptr.size - 1
+            x_length = self.nrow
+            rhs_nnz = rhs_val.size
+
+            x = np.zeros([self.nrow, nrhs], dtype=np.float32)
+
+            self.solve_sparse(<INT32_t *>cnp.PyArray_DATA(rhs_col_ptr), <INT32_t *>cnp.PyArray_DATA(rhs_row_ind), <FLOAT32_t *> cnp.PyArray_DATA(rhs_val),
+                        rhs_nnz, nrhs, <FLOAT32_t *> cnp.PyArray_DATA(x), x_length)
         else:
             raise TypeError('rhs not given in the right format (dense: rhs=..., sparse: rhs_col_ptr=..., rhs_row_ind=..., rhs_val=...)')
 
 
+        return x
 

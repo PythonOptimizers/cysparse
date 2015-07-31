@@ -30,6 +30,17 @@ mumps_c(&MUMPS_STRUC_C)
 
 etc.
 
+Access to:
+ - icntl
+ - info
+ - infog
+ - cntl
+ - rinfo
+ - rinfog
+
+**must** be done through properties!!!!
+
+
 Typed C struct:
 ---------------
 
@@ -373,6 +384,10 @@ cdef class MumpsContext_@index@_@type@:
         if not verbose:
             self.set_silent()
 
+        # int control parameters
+        self.icntl = mumps_int_array()
+        self.icntl.get_array(self.params.icntl)
+
         self.info = mumps_int_array()
         self.info.get_array(self.params.info)
 
@@ -713,14 +728,14 @@ cdef class MumpsContext_@index@_@type@:
         if self.analyzed:
             return
 
-        self.params.icntl[7] = orderings[ordering]
+        self.icntl[7] = orderings[ordering]
         t1 = time.clock()
         self.params.job = 1   # analyse
         self.mumps_call()
         t2 = time.clock()
 
-        if self.params.infog[1] < 0:
-            raise MUMPSError(self.params.infog[1])
+        if self.infog[1] < 0:
+            raise MUMPSError(self.infog[1])
 
         self.analyzed = True
 
@@ -755,8 +770,8 @@ cdef class MumpsContext_@index@_@type@:
         if not self.analyzed :
             self.analyze(ordering=ordering)
 
-        self.params.icntl[22] = 1 if self.out_of_core else 1
-        self.params.cntl[1] = pivot_tol
+        self.icntl[22] = 1 if self.out_of_core else 1
+        self.cntl[1] = pivot_tol
         self.params.job = 2
 
         done = False
@@ -767,12 +782,12 @@ cdef class MumpsContext_@index@_@type@:
 
             # error -8, -9 (not enough allocated memory) is treated
             # specially, by increasing the memory relaxation parameter
-            if self.params.infog[1] < 0:
-                if self.params.infog[1] in (-8, -9):
+            if self.infog[1] < 0:
+                if self.infog[1] in (-8, -9):
                     # double the additional memory
-                    self.params.icntl[14] = self.params.icntl[14]*2
+                    self.icntl[14] = self.icntl[14]*2
                 else:
-                    raise MUMPSError(self.params.infog)
+                    raise MUMPSError(self.infog)
             else:
                 done = True
 
@@ -795,7 +810,7 @@ cdef class MumpsContext_@index@_@type@:
         Warning:
             Mumps overwrites ``rhs`` and replaces it by the solution of the linear system.
         """
-        #self.params.icntl[9] = 2 if transpose_solve else 1
+        #self.icntl[9] = 2 if transpose_solve else 1
 
         self.params.nrhs = <MUMPS_INT> nrhs
         self.params.lrhs = <MUMPS_INT> rhs_length
@@ -816,12 +831,13 @@ cdef class MumpsContext_@index@_@type@:
                 whether the data in ``rhs`` may be overwritten, which can lead to a small
                 performance gain. Default is ``False``.
             x : the solution to the linear system as a dense matrix or vector.
+            x_length: ``self.nrow`` (sequential version).
 
         Warning:
             Mumps overwrites ``rhs`` and replaces it by the solution of the linear system.
 
         """
-        #self.params.icntl[9] = 2 if transpose_solve else 1
+        #self.icntl[9] = 2 if transpose_solve else 1
 
         self.params.nz_rhs = rhs_nnz
         self.params.nrhs = nrhs # nrhs -1 ?
@@ -834,7 +850,7 @@ cdef class MumpsContext_@index@_@type@:
         self.params.rhs = <@type@ *> x
 
         self.params.job = 3        # solve
-        self.params.icntl[20] = 1  # tell solver rhs is sparse
+        self.icntl[20] = 1  # tell solver rhs is sparse
         self.mumps_call()
 
     def solve(self, **kwargs):
@@ -852,11 +868,14 @@ cdef class MumpsContext_@index@_@type@:
             self.factorize()
 
         transpose_solve = kwargs.get('transpose_solve', False)
-        self.params.icntl[9] = 2 if transpose_solve else 1
+        self.icntl[9] = 2 if transpose_solve else 1
 
         cdef:
             @index@ nrhs
 
+        ################################################################################################################
+        # DENSE VERSION
+        ################################################################################################################
         # rhs can be dense or sparse
         if 'rhs' in kwargs:
             rhs = kwargs['rhs']
@@ -877,7 +896,7 @@ cdef class MumpsContext_@index@_@type@:
 
 
             # create x
-            x = cnp.asfortranarray(rhs.copy())
+            x = np.asfortranarray(rhs.copy())
 
             # test number of columns in rhs
             if rhs.ndim == 1:
@@ -887,11 +906,32 @@ cdef class MumpsContext_@index@_@type@:
 
             self.solve_dense(<@type@ *> cnp.PyArray_DATA(x), rhs_shape[0], nrhs)
 
-        elif ['rhs_col_ptr', 'rhs_row_ind', 'rhs_val'] in kwargs:
-            pass
+
+        ################################################################################################################
+        # SPARSE VERSION
+        ################################################################################################################
+        elif all(arg in kwargs for arg in ['rhs_col_ptr', 'rhs_row_ind', 'rhs_val']) :
+
+            rhs_col_ptr = kwargs['rhs_col_ptr']
+            rhs_row_ind = kwargs['rhs_row_ind']
+            rhs_val = kwargs['rhs_val']
+
+            # fortran indices, done internally in C: no efficiency lost
+            rhs_col_ptr += 1
+            rhs_row_ind += 1
+
+            nrhs = rhs_col_ptr.size - 1
+            x_length = self.nrow
+            rhs_nnz = rhs_val.size
+
+            x = np.zeros([self.nrow, nrhs], dtype=np.@type|cysparse_type_to_numpy_type@)
+
+            self.solve_sparse(<@index@ *>cnp.PyArray_DATA(rhs_col_ptr), <@index@ *>cnp.PyArray_DATA(rhs_row_ind), <@type@ *> cnp.PyArray_DATA(rhs_val),
+                        rhs_nnz, nrhs, <@type@ *> cnp.PyArray_DATA(x), x_length)
         else:
             raise TypeError('rhs not given in the right format (dense: rhs=..., sparse: rhs_col_ptr=..., rhs_row_ind=..., rhs_val=...)')
 
 
+        return x
 
 
