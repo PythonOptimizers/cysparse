@@ -1,11 +1,8 @@
-CySparse==0.0.0
 Cython==0.22
 Jinja2==2.7.3
 MarkupSafe==0.23
-SparseLib==0.0.0
 argparse==1.2.1
 fortranformat==0.2.5
 numpy==1.9.2
 sphinx-bootstrap-theme==0.4.5
 wsgiref==0.1.2
-wxPython==2.9.4.1
