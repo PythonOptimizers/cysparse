@@ -813,7 +813,8 @@ cdef class LLSparseMatrix_INT32_t_INT64_t(MutableSparseMatrix_INT32_t_INT64_t):
             elif cnp.PyArray_Check(obj):
                 for i from 0 <= i < nrow:
                     for j from 0 <= j <= i:
-                        self.put(row_indices[i], col_indices[j], <INT64_t> obj[tuple(i, j)])
+                        #self.put(row_indices[i], col_indices[j], <INT64_t> obj[tuple(i, j)])
+                        self.put(row_indices[i], col_indices[j], <INT64_t> obj[i, j])
 
             elif is_python_number(obj):
                 for i from 0 <= i < nrow:

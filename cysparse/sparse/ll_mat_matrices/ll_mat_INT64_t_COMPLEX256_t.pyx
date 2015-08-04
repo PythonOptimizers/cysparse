@@ -859,7 +859,8 @@ cdef class LLSparseMatrix_INT64_t_COMPLEX256_t(MutableSparseMatrix_INT64_t_COMPL
             elif cnp.PyArray_Check(obj):
                 for i from 0 <= i < nrow:
                     for j from 0 <= j <= i:
-                        self.put(row_indices[i], col_indices[j], <COMPLEX256_t> obj[tuple(i, j)])
+                        #self.put(row_indices[i], col_indices[j], <COMPLEX256_t> obj[tuple(i, j)])
+                        self.put(row_indices[i], col_indices[j], <COMPLEX256_t> obj[i, j])
 
             elif is_python_number(obj):
                 for i from 0 <= i < nrow:
