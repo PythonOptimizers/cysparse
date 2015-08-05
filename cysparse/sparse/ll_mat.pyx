@@ -619,9 +619,11 @@ def NewLLSparseMatrix(**kwargs):
         if mm_filename is not None:
             # Matrix Market format
 
-            assert itype in [INT32_T,INT64_T], "itype is not accepted as index type for a matrix from a Matrix Market file"
+            assert itype in [INT32_T,INT64_T], "itype is not accepted as index type for a matrix from a Matrix Market file.\n\Accepted itypes:\n\t" + \
+             "INT32_T,INT64_T"
 
-            assert dtype in [INT64_T,FLOAT64_T,COMPLEX128_T], "dtype is not accepted as type for a matrix from a Matrix Market file"
+            assert dtype in [INT64_T,FLOAT64_T,COMPLEX128_T], "dtype is not accepted as type for a matrix from a Matrix Market file.\nAccepted dtypes:\n\t" + \
+             "INT64_T,FLOAT64_T,COMPLEX128_T"
 
 
     
