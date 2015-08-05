@@ -53,6 +53,10 @@ Each MUMPS_STRUC_C is specialized and prefixed by a letter:
 
 In CySparse (MumpsContext_@index@_@type@), Xmumps_c() is called by a call to self.mumps_call().
 
+<@type|cysparse_real_type_to_mumps_family|upper@MUMPS_COMPLEX *> can be used for **ALL** four types.
+
+CySparse complex type **IS** compatible with MUMPS_COMPLEX struct (both use C99 complex types).
+
 Solve:
 ------
 
@@ -814,8 +818,7 @@ cdef class MumpsContext_@index@_@type@:
 
         self.params.nrhs = <MUMPS_INT> nrhs
         self.params.lrhs = <MUMPS_INT> rhs_length
-        self.params.rhs = <@type@ *>rhs
-
+        self.params.rhs = <@type|cysparse_real_type_to_mumps_family|upper@MUMPS_COMPLEX *>rhs
         self.params.job = 3  # solve
         self.mumps_call()
 
@@ -841,13 +844,14 @@ cdef class MumpsContext_@index@_@type@:
 
         self.params.nz_rhs = rhs_nnz
         self.params.nrhs = nrhs # nrhs -1 ?
-        self.params.rhs_sparse = <@type@ *> rhs_val
+
+        self.params.rhs_sparse = <@type|cysparse_real_type_to_mumps_family|upper@MUMPS_COMPLEX *> rhs_val
         self.params.irhs_sparse = <MUMPS_INT *> rhs_row_ind
         self.params.irhs_ptr = <MUMPS_INT *> rhs_col_ptr
 
         # Mumps places the solution(s) of the linear system in its dense rhs...
         self.params.lrhs = <MUMPS_INT> x_length
-        self.params.rhs = <@type@ *> x
+        self.params.rhs = <@type|cysparse_real_type_to_mumps_family|upper@MUMPS_COMPLEX *> x
 
         self.params.job = 3        # solve
         self.icntl[20] = 1  # tell solver rhs is sparse

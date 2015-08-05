@@ -88,6 +88,7 @@ from cysparse.sparse.csc_mat_matrices.csc_mat_INT32_t_FLOAT64_t cimport CSCSpars
 
 from cysparse.types.cysparse_numpy_types import are_mixed_types_compatible, cysparse_to_numpy_type
 
+
 from cysparse.linalg.mumps.mumps_statistics import AnalysisStatistics, FactorizationStatistics, SolveStatistics
 
 from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
@@ -404,6 +405,7 @@ cdef class MumpsContext_INT32_t_FLOAT64_t:
 
         self.a_row = <INT32_t *> PyMem_Malloc(self.nnz * sizeof(INT32_t))
         self.a_col = <INT32_t *> PyMem_Malloc(self.nnz * sizeof(INT32_t))
+
         self.a_val = <FLOAT64_t *> PyMem_Malloc(self.nnz * sizeof(FLOAT64_t))
 
         self.A.take_triplet_pointers(self.a_row, self.a_col, self.a_val)
@@ -806,6 +808,7 @@ cdef class MumpsContext_INT32_t_FLOAT64_t:
 
         self.params.nrhs = <MUMPS_INT> nrhs
         self.params.lrhs = <MUMPS_INT> rhs_length
+
         self.params.rhs = <FLOAT64_t *>rhs
 
         self.params.job = 3  # solve
@@ -833,13 +836,14 @@ cdef class MumpsContext_INT32_t_FLOAT64_t:
 
         self.params.nz_rhs = rhs_nnz
         self.params.nrhs = nrhs # nrhs -1 ?
-        self.params.rhs_sparse = <FLOAT64_t *> rhs_val
+
+        self.params.rhs_sparse = <DMUMPS_COMPLEX *> rhs_val
         self.params.irhs_sparse = <MUMPS_INT *> rhs_row_ind
         self.params.irhs_ptr = <MUMPS_INT *> rhs_col_ptr
 
         # Mumps places the solution(s) of the linear system in its dense rhs...
         self.params.lrhs = <MUMPS_INT> x_length
-        self.params.rhs = <FLOAT64_t *> x
+        self.params.rhs = <DMUMPS_COMPLEX *> x
 
         self.params.job = 3        # solve
         self.icntl[20] = 1  # tell solver rhs is sparse

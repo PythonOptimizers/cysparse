@@ -1165,6 +1165,42 @@ if use_mumps:
                   sources=['cysparse/linalg/mumps/mumps_INT32_t_FLOAT64_t.pxd',
                            'cysparse/linalg/mumps/mumps_INT32_t_FLOAT64_t.pyx'], **mumps_ext_params_INT32_t_FLOAT64_t))
   
+    mumps_ext_params_INT32_t_COMPLEX64_t = copy.deepcopy(ext_params)
+    mumps_ext_params_INT32_t_COMPLEX64_t['include_dirs'].extend(mumps_include_dirs)
+    mumps_ext_params_INT32_t_COMPLEX64_t['library_dirs'] = mumps_library_dirs
+    mumps_ext_params_INT32_t_COMPLEX64_t['libraries'] = [] # 'scalapack', 'pord']
+
+    mumps_ext_params_INT32_t_COMPLEX64_t['libraries'].append('cmumps')
+    mumps_ext_params_INT32_t_COMPLEX64_t['libraries'].append('mumps_common')
+    mumps_ext_params_INT32_t_COMPLEX64_t['libraries'].append('pord')
+    mumps_ext_params_INT32_t_COMPLEX64_t['libraries'].append('mpiseq')
+    mumps_ext_params_INT32_t_COMPLEX64_t['libraries'].append('blas')
+    mumps_ext_params_INT32_t_COMPLEX64_t['libraries'].append('pthread')
+
+    mumps_ext.append(
+
+        Extension(name="cysparse.linalg.mumps.mumps_INT32_t_COMPLEX64_t",
+                  sources=['cysparse/linalg/mumps/mumps_INT32_t_COMPLEX64_t.pxd',
+                           'cysparse/linalg/mumps/mumps_INT32_t_COMPLEX64_t.pyx'], **mumps_ext_params_INT32_t_COMPLEX64_t))
+  
+    mumps_ext_params_INT32_t_COMPLEX128_t = copy.deepcopy(ext_params)
+    mumps_ext_params_INT32_t_COMPLEX128_t['include_dirs'].extend(mumps_include_dirs)
+    mumps_ext_params_INT32_t_COMPLEX128_t['library_dirs'] = mumps_library_dirs
+    mumps_ext_params_INT32_t_COMPLEX128_t['libraries'] = [] # 'scalapack', 'pord']
+
+    mumps_ext_params_INT32_t_COMPLEX128_t['libraries'].append('zmumps')
+    mumps_ext_params_INT32_t_COMPLEX128_t['libraries'].append('mumps_common')
+    mumps_ext_params_INT32_t_COMPLEX128_t['libraries'].append('pord')
+    mumps_ext_params_INT32_t_COMPLEX128_t['libraries'].append('mpiseq')
+    mumps_ext_params_INT32_t_COMPLEX128_t['libraries'].append('blas')
+    mumps_ext_params_INT32_t_COMPLEX128_t['libraries'].append('pthread')
+
+    mumps_ext.append(
+
+        Extension(name="cysparse.linalg.mumps.mumps_INT32_t_COMPLEX128_t",
+                  sources=['cysparse/linalg/mumps/mumps_INT32_t_COMPLEX128_t.pxd',
+                           'cysparse/linalg/mumps/mumps_INT32_t_COMPLEX128_t.pyx'], **mumps_ext_params_INT32_t_COMPLEX128_t))
+  
 
 
 

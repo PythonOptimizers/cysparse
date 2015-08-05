@@ -679,8 +679,8 @@ if __name__ == "__main__":
     # MUMPS
     # This list is defined above in the conditional part
     # MUMPS_INDEX_TYPES = [MUMPS_INT]
-    #MUMPS_ELEMENT_TYPES = ['FLOAT32_t', 'FLOAT64_t', 'COMPLEX64_t', 'COMPLEX128_t']
-    MUMPS_ELEMENT_TYPES = ['FLOAT32_t', 'FLOAT64_t']
+    MUMPS_ELEMENT_TYPES = ['FLOAT32_t', 'FLOAT64_t', 'COMPLEX64_t', 'COMPLEX128_t']
+    #MUMPS_ELEMENT_TYPES = ['FLOAT32_t', 'FLOAT64_t']
 
     # when coding
     #ELEMENT_TYPES = ['FLOAT64_t']

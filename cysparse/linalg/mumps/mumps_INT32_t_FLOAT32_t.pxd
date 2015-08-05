@@ -3,7 +3,6 @@ from cysparse.types.cysparse_types cimport *
 from cysparse.sparse.ll_mat_matrices.ll_mat_INT32_t_FLOAT32_t cimport LLSparseMatrix_INT32_t_FLOAT32_t
 from cysparse.sparse.csc_mat_matrices.csc_mat_INT32_t_FLOAT32_t cimport CSCSparseMatrix_INT32_t_FLOAT32_t
 
-
 cimport numpy as cnp
 
 cdef extern from "mumps_c_types.h":
