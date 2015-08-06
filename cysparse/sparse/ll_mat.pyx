@@ -222,7 +222,7 @@ cdef:
     str MM_INT_STR = "integer"
     str MM_PATTERN_STR = "pattern"
     str MM_GENERAL_STR = "general"
-    str MM_SYMM_STR = "symmetric"
+    str MM_SYMM_STR = "symmetric" 
     str MM_HERM_STR = "hermitian"
     str MM_SKEW_STR = "skew"
 
@@ -340,9 +340,38 @@ def matvec_transp(A, b):
 ########################################################################################################################
 def NewLLSparseMatrix(**kwargs):
     """
-    Factory method to create an empty ``LLSparseMatrix``.
+    Main factory method to create a (filled or empty) ``LLSparseMatrix`` matrix.
 
-    Internal arrays can be preallocated to avoid reallocation.
+    An ``LLSparseMatrix`` can be created in three different ways (cases):
+        - from specifications;
+        - from another matrix;
+        - from a file.
+
+    In the first case, from specifications, an empty matrix is created. To distinguish between these 3 cases, use the
+    right named arguments.
+
+    Warning:
+        **All** arguments are named.
+
+    In all cases, you **can** supply an ``itype`` (index type) and a ``dtype`` (element type). By default (i.e. if you
+    don't provide these arguments, ``itype == INT32_T`` and ``dtype == FLOAT64_T``) and specify a *storage format*:
+        - ``store_zeros``: if ``True``, store explicitely zeros (default: ``False``);
+        - ``is_symmetric``: if ``True``, use symmetric storage, i.e. only the lower triangular part of the matrix is stored (by default: ``False``);
+
+    If a matrix or filename is supplied, these arguments **must** coincide with the supplied matrix types. If not, an error is thrown.
+
+    To create an ``LLSparseMatrix`` matrix, use the following arguments:
+
+    * Case 1: From specifications. Use ``nrow`` and ``ncol`` or ``size`` to specify the dimension of the new matrix. You can provide a
+        ``size_hint`` argument to (pre)allocate some space for the elements in advance.
+    * Case 2: From another matrix. Use the ``matrix`` argument.
+        This is not yet implemented.
+    * Case 3: From a file.
+        By default, a ``test_bounds`` argument is set to ``True`` to test if all indices are not out of bounds. You can disable this to gain
+        some speed when reading a file.
+        For the moment, only the Matrix Market format is available. See :func:`NewLLSparseMatrixFromMMFile` if you have no idea of the
+        matrix type contained in a matrix market file. To give a file name of a file in Matrix Market format, use the ``mm_filename`` argument.
+
     """
     ####################################################################################################################
     #                                            *** Get arguments ***
@@ -670,7 +699,7 @@ def NewLLSparseMatrix(**kwargs):
 
 def NewLLSparseMatrixFromMMFile(filename, store_zeros=False, test_bounds=True):
     """
-    Factory method to create an ``LLSparseMatrix`` from a ``Matrix Market`` file.
+    Factory method to create an ``LLSparseMatrix`` matrix from a ``Matrix Market`` file.
 
     Return the minimal ``LLSparseMatrix`` possible to hold the matrix.
 

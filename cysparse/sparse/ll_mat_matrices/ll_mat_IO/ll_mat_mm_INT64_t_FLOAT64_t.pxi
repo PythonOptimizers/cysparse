@@ -20,7 +20,7 @@ cdef LLSparseMatrix_INT64_t_FLOAT64_t MakeLLSparseMatrixFromMMFile_INT64_t_FLOAT
 
     cdef:
         bint sparse
-        bint __is_symmetric
+        bint is_symmetric
         bint is_complex
         list sparse_dense_list = [MM_ARRAY_STR, MM_COORDINATE_STR]
         list data_type_list = [MM_COMPLEX_STR, MM_REAL_STR, MM_INT_STR, MM_PATTERN_STR]
@@ -77,7 +77,11 @@ cdef LLSparseMatrix_INT64_t_FLOAT64_t MakeLLSparseMatrixFromMMFile_INT64_t_FLOAT
         if token not in storage_scheme_list:
             raise IOError('Matrix format not recognized as Matrix Market format: fourth token in the Matrix Market banner is not in "%s"' % storage_scheme_list)
         storage_scheme = storage_scheme_dict[token]
-        __is_symmetric = storage_scheme == MM_SYMMETRIC
+        is_symmetric = storage_scheme == MM_SYMMETRIC
+        if is_symmetric:
+            print("is symmetric=yes")
+        else:
+            print("is symmetric=false")
 
         # SKIP COMMENTS
         line = f.readline()
@@ -96,7 +100,7 @@ cdef LLSparseMatrix_INT64_t_FLOAT64_t MakeLLSparseMatrixFromMMFile_INT64_t_FLOAT
         if data_type == MM_PATTERN:
             raise IOError('Matrix Market format not supported for PATTERN')
 
-        A = LLSparseMatrix_INT64_t_FLOAT64_t(control_object=unexposed_value, nrow=nrow, ncol=ncol, size_hint=nnz, __is_symmetric=__is_symmetric, is_complex=is_complex, store_zeros=store_zeros)
+        A = LLSparseMatrix_INT64_t_FLOAT64_t(control_object=unexposed_value, nrow=nrow, ncol=ncol, size_hint=nnz, is_symmetric=is_symmetric, is_complex=is_complex, store_zeros=store_zeros)
 
 
         line = f.readline()
@@ -125,6 +129,7 @@ cdef LLSparseMatrix_INT64_t_FLOAT64_t MakeLLSparseMatrixFromMMFile_INT64_t_FLOAT
     return A
 
 # This version doesn't work yet...
+# TODO: write this!
 cdef LLSparseMatrix_INT64_t_FLOAT64_t MakeLLSparseMatrixFromMMFile2_INT64_t_FLOAT64_t(str mm_filename, bint store_zeros=False, bint test_bounds=True):
     cdef:
         str line
@@ -139,7 +144,7 @@ cdef LLSparseMatrix_INT64_t_FLOAT64_t MakeLLSparseMatrixFromMMFile2_INT64_t_FLOA
 
     cdef:
         bint sparse
-        bint __is_symmetric
+        bint is_symmetric
         bint is_complex
         list sparse_dense_list = [MM_ARRAY_STR, MM_COORDINATE_STR]
         list data_type_list = [MM_COMPLEX_STR, MM_REAL_STR, MM_INT_STR, MM_PATTERN_STR]
@@ -205,7 +210,7 @@ cdef LLSparseMatrix_INT64_t_FLOAT64_t MakeLLSparseMatrixFromMMFile2_INT64_t_FLOA
         if token not in storage_scheme_list:
             raise IOError('Matrix format not recognized as Matrix Market format: fourth token in the Matrix Market banner is not in "%s"' % storage_scheme_list)
         storage_scheme = storage_scheme_dict[token]
-        __is_symmetric = storage_scheme == MM_SYMMETRIC
+        is_symmetric = storage_scheme == MM_SYMMETRIC
 
         # SKIP COMMENTS
         line = f.readline()
@@ -224,7 +229,7 @@ cdef LLSparseMatrix_INT64_t_FLOAT64_t MakeLLSparseMatrixFromMMFile2_INT64_t_FLOA
         if data_type == MM_PATTERN:
             raise IOError('Matrix Market format not supported for PATTERN')
 
-        A = LLSparseMatrix_INT64_t_FLOAT64_t(control_object=unexposed_value, no_memory=True, nrow=nrow, ncol=ncol, size_hint=nnz, __is_symmetric=__is_symmetric, is_complex=is_complex, store_zeros=store_zeros)
+        A = LLSparseMatrix_INT64_t_FLOAT64_t(control_object=unexposed_value, no_memory=True, nrow=nrow, ncol=ncol, size_hint=nnz, is_symmetric=is_symmetric, is_complex=is_complex, store_zeros=store_zeros)
 
 
 
