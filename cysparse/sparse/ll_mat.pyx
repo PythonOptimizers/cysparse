@@ -222,7 +222,7 @@ cdef:
     str MM_INT_STR = "integer"
     str MM_PATTERN_STR = "pattern"
     str MM_GENERAL_STR = "general"
-    str MM_SYMM_STR = "symmetric" 
+    str MM_SYMM_STR = "symmetric"
     str MM_HERM_STR = "hermitian"
     str MM_SKEW_STR = "skew"
 

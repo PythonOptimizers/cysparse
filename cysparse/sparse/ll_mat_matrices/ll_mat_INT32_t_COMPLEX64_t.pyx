@@ -1281,6 +1281,7 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX64_t(MutableSparseMatrix_INT32_t_COMPLE
 
                 if cnp.PyArray_ISCONTIGUOUS(b):
                     for i_list from 0 <= i_list < id1_list_length:
+
                         self.safe_put(PyInt_AS_LONG(PyList_GET_ITEM(<PyObject *>id1, i_list)), PyInt_AS_LONG(PyList_GET_ITEM(<PyObject *>id2, i_list)), <COMPLEX64_t> b_data[i_list])
                 else:
                     for i_list from 0 <= i_list < id1_list_length:
