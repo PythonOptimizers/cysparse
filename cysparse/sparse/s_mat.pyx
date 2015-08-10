@@ -68,10 +68,6 @@ cdef class SparseMatrix:
         self.__type = "Not defined"
         self.__index_and_type = "[not defined, not defined]"
 
-        # This is overwritten in inheriting classes
-        #self.cp_type.itype = kwargs.get('itype', INT32_T)
-        #self.cp_type.dtype = kwargs.get('dtype', FLOAT64_T)
-
         self.__is_symmetric = kwargs.get('is_symmetric', False)
         self.__store_zeros = kwargs.get('store_zeros', False)
         self.__is_mutable = False

@@ -4,6 +4,8 @@
 :program:`CySparse` installation
 ===================================
 
+[TO BE REWRITTEN]
+
 Installation
 ==============
 
@@ -11,31 +13,19 @@ The installation can be done in a few simple steps:
 
 1. Clone the repository;
 2. Install the dependencies;
-3. Generate the source code:
+3. Tweak the configuration file :file:`cysparse.cfg`;
+4. Generate the source code;
+5. Compile and install the library:
 
-   Some parts of the library source code have to be generated. We use a script:
+We detail these steps in the next sections.
 
-   ..  code-block:: bash
-
-       python generate_code.py -a
-        
-   The switch ``-a`` stands for ``--all`` and generates the entire library. If you need help, try the ``-h`` switch.
-    
-4. Compile and install the library:
-
-   Use the traditionnal:
-
-   ..  code-block:: bash
-
-       python setup.py install
+Clone the repository
+---------------------
 
 
 
-
-
-
-Depencies
-============
+Install the depencies
+----------------------
 
 All :program:`Python` dependencies are described in the :file:`requirements.txt` files. You can easily install them all with:
 
@@ -47,7 +37,7 @@ or a similar command. Other dependencies need some manual installation. Read fur
 
 
 :program:`CySparse`
----------------------
+""""""""""""""""""""
 
 - :program:`Cython`
 - :program:`Jinja2`
@@ -56,21 +46,64 @@ or a similar command. Other dependencies need some manual installation. Read fur
 - :program:`SuiteSparse` (for the moment, it not possible to install :program:`CySparse` **without** :program:`SuiteSparse`)
 
 Documentation
------------------
+""""""""""""""""
 
 - :program:`Sphinx`
 - sphinx-bootstrap-theme
 
 Unit testing
-------------
+"""""""""""""""
 
 - :program:`PySparse`
 
 Performance testing
-----------------------
+"""""""""""""""""""""""
 
 - :program:`PySparse`
 - benchmark.py (https://github.com/optimizers/benchmark.py)
+
+
+Tweak the configuration file :file:`cysparse.cfg`
+---------------------------------------------------
+
+[THIS IS WORK IN PROGRESS]
+
+# log file name **without** extension (by default, we use '.log')
+log_name = cysparse_generate_code
+# DEBUG/INFO/WARNING/ERROR/CRITICAL
+log_level = INFO
+console_log_level = WARNING
+file_log_level = WARNING
+
+
+# 32bits/64bits
+# if left blank, we use INT64_t on 64 bits platforms and INT32_t on 32 bits platforms
+DEFAULT_INDEX_TYPE =
+
+Generate the source code
+--------------------------
+
+
+Some parts of the library source code have to be generated. We use a script:
+
+..  code-block:: bash
+
+	python generate_code.py -a
+    
+The switch ``-a`` stands for ``--all`` and generates the entire library. If you need help, try the ``-h`` switch.
+
+Compile and install the library
+---------------------------------
+
+The preferred way to install the library is to install it in its own `virtualenv`.
+
+Wheter using a virtual environment or not, use the traditionnal:
+
+..  code-block:: bash
+
+    python setup.py install
+
+to compile and install the library.
 
 Inconveniences
 ==============

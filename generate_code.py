@@ -632,6 +632,12 @@ if __name__ == "__main__":
     arg_options = parser.parse_args()
 
     # read cysparse.cfg
+    # type of platform? 32bits or 64bits?
+    is_64bits = sys.maxsize > 2**32
+    default_index_type_str = '32bits'
+    if is_64bits:
+        default_index_type_str = '64bits'
+
     cysparse_config = ConfigParser.SafeConfigParser()
     cysparse_config.read('cysparse.cfg')
 
@@ -647,6 +653,19 @@ if __name__ == "__main__":
         MUMPS_INT = 'INT32_t'
 
     MUMPS_INDEX_TYPES = [MUMPS_INT]
+
+    # index type for LLSparseMatrix
+    DEFAULT_INDEX_TYPE = 'INT32_T'
+    if is_64bits:
+        DEFAULT_INDEX_TYPE = 'INT64_T'
+
+    if cysparse_config.get('CODE_GENERATION', 'DEFAULT_INDEX_TYPE') == '32bits':
+        DEFAULT_INDEX_TYPE = 'INT32_T'
+    elif cysparse_config.get('CODE_GENERATION', 'DEFAULT_INDEX_TYPE') == '64bits':
+        DEFAULT_INDEX_TYPE = 'INT64_T'
+    else:
+        # don't do anything: use platform's default
+        pass
 
     #######################################
     # END CONDITIONAL CODE GENERATION
@@ -692,6 +711,7 @@ if __name__ == "__main__":
                         'basic_type_list' : BASIC_TYPES,
                         'type_list': ELEMENT_TYPES,
                         'index_list' : INDEX_TYPES,
+                        'default_index_type' : DEFAULT_INDEX_TYPE,
                         'integer_list' : INTEGER_ELEMENT_TYPES,
                         'real_list' : REAL_ELEMENT_TYPES,
                         'complex_list' : COMPLEX_ELEMENT_TYPES,

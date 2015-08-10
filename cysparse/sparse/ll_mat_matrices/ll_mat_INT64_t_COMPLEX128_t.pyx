@@ -1305,6 +1305,9 @@ cdef class LLSparseMatrix_INT64_t_COMPLEX128_t(MutableSparseMatrix_INT64_t_COMPL
             if not cnp.PyArray_ISCONTIGUOUS(id1) or not cnp.PyArray_ISCONTIGUOUS(id2):
                 raise TypeError('Both NumPy index arrays must be C-contiguous')
 
+            if not are_mixed_types_compatible(INT64_T, id1.dtype) or not are_mixed_types_compatible(INT64_T, id2.dtype):
+                raise TypeError('Index NumPy array must contain elements of the right index type (%s)' % cysparse_to_numpy_type(INT64_T))
+
             # direct access to indices arrays
             id1_data = <INT64_t *> cnp.PyArray_DATA(id1)
             id2_data = <INT64_t *> cnp.PyArray_DATA(id2)
@@ -1334,7 +1337,7 @@ cdef class LLSparseMatrix_INT64_t_COMPLEX128_t(MutableSparseMatrix_INT64_t_COMPL
             elif cnp.PyArray_Check(b):
                 # check if NumPy array type is compatible
                 if not are_mixed_types_compatible(COMPLEX128_T, b.dtype):
-                    raise TypeError('Value NumPy array must contain elements of the right index type (%s)' % cysparse_to_numpy_type(COMPLEX128_T))
+                    raise TypeError('Value NumPy array must contain elements of the right value type (%s)' % cysparse_to_numpy_type(COMPLEX128_T))
 
                 b_array_length = b.size
                 if b_array_length != id1_array_length:

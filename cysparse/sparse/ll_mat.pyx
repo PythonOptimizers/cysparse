@@ -382,7 +382,8 @@ def NewLLSparseMatrix(**kwargs):
     size = kwargs.get('size', -1)
     size_hint = kwargs.get('size_hint', LL_MAT_DEFAULT_SIZE_HINT)
 
-    itype = kwargs.get('itype', INT32_T)
+    #itype = kwargs.get('itype', INT32_T)
+    itype = kwargs.get('itype', INT64_T)
     dtype = kwargs.get('dtype', FLOAT64_T)
 
     assert itype in INDEX_TYPES, "itype not recognized"
