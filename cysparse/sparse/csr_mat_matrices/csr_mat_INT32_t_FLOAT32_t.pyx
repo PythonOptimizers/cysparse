@@ -85,6 +85,10 @@ cdef class CSRSparseMatrix_INT32_t_FLOAT32_t(ImmutableSparseMatrix_INT32_t_FLOAT
         self.__type = "CSRSparseMatrix"
         self.__type_name = "CSRSparseMatrix %s" % self.__index_and_type
 
+        self.__col_indices_sorted_test_done = False
+        self.__col_indices_sorted = False
+        self.__first_row_not_ordered = -1
+
     def __dealloc__(self):
         PyMem_Free(self.val)
         PyMem_Free(self.col)
@@ -866,7 +870,15 @@ cdef class CSRSparseMatrix_INT32_t_FLOAT32_t(ImmutableSparseMatrix_INT32_t_FLOAT
 ########################################################################################################################
 # Factory methods
 ########################################################################################################################
-cdef MakeCSRSparseMatrix_INT32_t_FLOAT32_t(INT32_t nrow, INT32_t ncol, INT32_t nnz, INT32_t * ind, INT32_t * col, FLOAT32_t * val, bint is_symmetric, bint store_zeros):
+cdef MakeCSRSparseMatrix_INT32_t_FLOAT32_t(INT32_t nrow,
+                                        INT32_t ncol,
+                                        INT32_t nnz,
+                                        INT32_t * ind,
+                                        INT32_t * col,
+                                        FLOAT32_t * val,
+                                        bint is_symmetric,
+                                        bint store_zeros,
+                                        bint col_indices_are_sorted=False):
     """
     Construct a CSRSparseMatrix object.
 
@@ -878,12 +890,18 @@ cdef MakeCSRSparseMatrix_INT32_t_FLOAT32_t(INT32_t nrow, INT32_t ncol, INT32_t n
         col  (INT32_t *): C-array with column indices.
         val  (FLOAT32_t *): C-array with values.
         is_symmetric (boolean): Is matrix symmetrix or not?
+        store_zeros (boolean): Do we store zeros or not?
+        col_indices_are_sorted (boolean): Are the column indices sorted or not?
     """
+    cdef CSRSparseMatrix_INT32_t_FLOAT32_t csr_mat
 
     csr_mat = CSRSparseMatrix_INT32_t_FLOAT32_t(control_object=unexposed_value, nrow=nrow, ncol=ncol, nnz=nnz, is_symmetric=is_symmetric, store_zeros=store_zeros)
 
     csr_mat.val = val
     csr_mat.ind = ind
     csr_mat.col = col
+
+    if col_indices_are_sorted:
+        csr_mat._set_column_indices_ordered_is_true()
 
     return csr_mat

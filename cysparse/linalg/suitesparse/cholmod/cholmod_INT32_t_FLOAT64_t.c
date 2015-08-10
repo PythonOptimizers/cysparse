@@ -1049,9 +1049,9 @@ struct __pyx_obj_8cysparse_6sparse_16csc_mat_matrices_25csc_mat_INT32_t_FLOAT64_
   __pyx_t_8cysparse_5types_14cysparse_types_FLOAT64_t *val;
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *row;
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *ind;
-  int __pyx___col_indices_sorted_test_done;
-  int __pyx___col_indices_sorted;
-  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx___first_row_not_ordered;
+  int __pyx___row_indices_sorted_test_done;
+  int __pyx___row_indices_sorted;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx___first_col_not_ordered;
 };
 
 

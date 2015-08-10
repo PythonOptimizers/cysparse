@@ -688,10 +688,17 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX128_t(MutableSparseMatrix_INT32_t_COMPL
 
             ind[i+1] = ind_col_index
 
-        csr_mat = MakeCSRSparseMatrix_INT32_t_COMPLEX128_t(nrow=self.__nrow, ncol=self.__ncol, nnz=self.__nnz, ind=ind, col=col, val=val, is_symmetric=self.__is_symmetric, store_zeros=self.__store_zeros)
+        # column indices **are** ordered by definition of the order of the column indices of a LLSparseMatrix object
+        csr_mat = MakeCSRSparseMatrix_INT32_t_COMPLEX128_t(nrow=self.__nrow,
+                                                     ncol=self.__ncol,
+                                                     nnz=self.__nnz,
+                                                     ind=ind, col=col,
+                                                     val=val,
+                                                     is_symmetric=self.__is_symmetric,
+                                                     store_zeros=self.__store_zeros,
+                                                     col_indices_are_sorted=True)
 
         return csr_mat
-
 
     def to_csc(self):
         """
@@ -762,6 +769,8 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX128_t(MutableSparseMatrix_INT32_t_COMPL
         free(col_indexes)
 
         csc_mat = MakeCSCSparseMatrix_INT32_t_COMPLEX128_t(nrow=self.__nrow, ncol=self.__ncol, nnz=self.__nnz, ind=ind, row=row, val=val, is_symmetric=self.__is_symmetric, store_zeros=self.__store_zeros)
+
+
 
         return csc_mat
 

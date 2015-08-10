@@ -33,6 +33,14 @@ cdef class CSRSparseMatrix_INT32_t_FLOAT128_t(ImmutableSparseMatrix_INT32_t_FLOA
     cdef FLOAT128_t safe_at(self, INT32_t i, INT32_t j) except? 2
 
 
-cdef MakeCSRSparseMatrix_INT32_t_FLOAT128_t(INT32_t nrow, INT32_t ncol, INT32_t nnz, INT32_t * ind, INT32_t * col, FLOAT128_t * val, bint is_symmetric, bint store_zeros)
+cdef MakeCSRSparseMatrix_INT32_t_FLOAT128_t(INT32_t nrow,
+                                        INT32_t ncol,
+                                        INT32_t nnz,
+                                        INT32_t * ind,
+                                        INT32_t * col,
+                                        FLOAT128_t * val,
+                                        bint is_symmetric,
+                                        bint store_zeros,
+                                        bint col_indices_are_sorted=?)
 
 cdef LLSparseMatrix_INT32_t_FLOAT128_t multiply_csr_mat_by_csc_mat_INT32_t_FLOAT128_t(CSRSparseMatrix_INT32_t_FLOAT128_t A, CSCSparseMatrix_INT32_t_FLOAT128_t B)

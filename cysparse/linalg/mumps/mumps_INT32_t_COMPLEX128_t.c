@@ -1063,9 +1063,9 @@ struct __pyx_obj_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX1
   __pyx_t_double_complex *val;
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *row;
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *ind;
-  int __pyx___col_indices_sorted_test_done;
-  int __pyx___col_indices_sorted;
-  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx___first_row_not_ordered;
+  int __pyx___row_indices_sorted_test_done;
+  int __pyx___row_indices_sorted;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx___first_col_not_ordered;
 };
 
 

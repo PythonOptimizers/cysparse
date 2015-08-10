@@ -34,6 +34,14 @@ cdef class CSRSparseMatrix_INT32_t_COMPLEX128_t(ImmutableSparseMatrix_INT32_t_CO
     cdef COMPLEX128_t safe_at(self, INT32_t i, INT32_t j) except *
 
 
-cdef MakeCSRSparseMatrix_INT32_t_COMPLEX128_t(INT32_t nrow, INT32_t ncol, INT32_t nnz, INT32_t * ind, INT32_t * col, COMPLEX128_t * val, bint is_symmetric, bint store_zeros)
+cdef MakeCSRSparseMatrix_INT32_t_COMPLEX128_t(INT32_t nrow,
+                                        INT32_t ncol,
+                                        INT32_t nnz,
+                                        INT32_t * ind,
+                                        INT32_t * col,
+                                        COMPLEX128_t * val,
+                                        bint is_symmetric,
+                                        bint store_zeros,
+                                        bint col_indices_are_sorted=?)
 
 cdef LLSparseMatrix_INT32_t_COMPLEX128_t multiply_csr_mat_by_csc_mat_INT32_t_COMPLEX128_t(CSRSparseMatrix_INT32_t_COMPLEX128_t A, CSCSparseMatrix_INT32_t_COMPLEX128_t B)

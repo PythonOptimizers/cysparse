@@ -77,6 +77,10 @@ cdef class CSCSparseMatrix_INT32_t_COMPLEX64_t(ImmutableSparseMatrix_INT32_t_COM
         self.__type = "CSCSparseMatrix"
         self.__type_name = "CSCSparseMatrix %s" % self.__index_and_type
 
+        self.__row_indices_sorted_test_done = False
+        self.__row_indices_sorted = False
+        self.__first_col_not_ordered = -1
+
     def __dealloc__(self):
         PyMem_Free(self.val)
         PyMem_Free(self.row)
@@ -130,6 +134,42 @@ cdef class CSCSparseMatrix_INT32_t_COMPLEX64_t(ImmutableSparseMatrix_INT32_t_COM
         self_copy.__nnz = nnz
 
         return self_copy
+
+    ####################################################################################################################
+    # Row indices ordering
+    ####################################################################################################################
+    def are_row_indices_sorted(self):
+        """
+        Tell if row indices are sorted in augmenting order (ordered).
+
+
+        """
+        cdef INT32_t j
+        cdef INT32_t row_index
+        cdef INT32_t row_index_stop
+
+        if self.__row_indices_sorted_test_done:
+            return self.__row_indices_sorted
+        else:
+            # do the test
+            self.__row_indices_sorted_test_done = True
+            # test each row
+            for j from 0 <= j < self.__ncol:
+                row_index = self.ind[j]
+                row_index_stop = self.ind[j+1] - 1
+
+                self.__first_col_not_ordered = j
+
+                while row_index < row_index_stop:
+                    if self.row[row_index] > self.row[row_index + 1]:
+                        self.__row_indices_sorted = False
+                        return self.__row_indices_sorted
+                    row_index += 1
+
+        # row indices are ordered
+        self.__first_col_not_ordered = self.__ncol
+        self.__row_indices_sorted = True
+        return self.__row_indices_sorted
 
     ####################################################################################################################
     # Set/Get items

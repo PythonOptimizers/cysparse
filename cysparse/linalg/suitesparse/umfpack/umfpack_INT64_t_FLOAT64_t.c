@@ -922,6 +922,19 @@ struct __pyx_opt_args_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT64_t_FLOAT
   int __pyx_n;
   int count_only_stored;
 };
+struct __pyx_opt_args_8cysparse_6sparse_16csr_mat_matrices_25csr_mat_INT64_t_FLOAT64_t_MakeCSRSparseMatrix_INT64_t_FLOAT64_t;
+
+/* "cysparse/sparse/csr_mat_matrices/csr_mat_INT64_t_FLOAT64_t.pxd":36
+ * 
+ * 
+ * cdef MakeCSRSparseMatrix_INT64_t_FLOAT64_t(INT64_t nrow,             # <<<<<<<<<<<<<<
+ *                                         INT64_t ncol,
+ *                                         INT64_t nnz,
+ */
+struct __pyx_opt_args_8cysparse_6sparse_16csr_mat_matrices_25csr_mat_INT64_t_FLOAT64_t_MakeCSRSparseMatrix_INT64_t_FLOAT64_t {
+  int __pyx_n;
+  int col_indices_are_sorted;
+};
 
 /* "cysparse/sparse/s_mat.pxd":20
  * cpdef bint PySparseMatrix_Check(object obj)
@@ -1053,9 +1066,9 @@ struct __pyx_obj_8cysparse_6sparse_16csc_mat_matrices_25csc_mat_INT64_t_FLOAT64_
   __pyx_t_8cysparse_5types_14cysparse_types_FLOAT64_t *val;
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t *row;
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t *ind;
-  int __pyx___col_indices_sorted_test_done;
-  int __pyx___col_indices_sorted;
-  __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx___first_row_not_ordered;
+  int __pyx___row_indices_sorted_test_done;
+  int __pyx___row_indices_sorted;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT64_t __pyx___first_col_not_ordered;
 };
 
 struct __pyx_obj_8cysparse_6sparse_16csr_mat_matrices_25csr_mat_INT64_t_FLOAT64_t_CSRSparseMatrix_INT64_t_FLOAT64_t {
@@ -1705,7 +1718,7 @@ static PyObject *(*__pyx_f_8cysparse_6sparse_16csc_mat_matrices_25csc_mat_INT64_
 
 /* Module declarations from 'cysparse.sparse.csr_mat_matrices.csr_mat_INT64_t_FLOAT64_t' */
 static PyTypeObject *__pyx_ptype_8cysparse_6sparse_16csr_mat_matrices_25csr_mat_INT64_t_FLOAT64_t_CSRSparseMatrix_INT64_t_FLOAT64_t = 0;
-static PyObject *(*__pyx_f_8cysparse_6sparse_16csr_mat_matrices_25csr_mat_INT64_t_FLOAT64_t_MakeCSRSparseMatrix_INT64_t_FLOAT64_t)(__pyx_t_8cysparse_5types_14cysparse_types_INT64_t, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t *, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t *, __pyx_t_8cysparse_5types_14cysparse_types_FLOAT64_t *, int, int); /*proto*/
+static PyObject *(*__pyx_f_8cysparse_6sparse_16csr_mat_matrices_25csr_mat_INT64_t_FLOAT64_t_MakeCSRSparseMatrix_INT64_t_FLOAT64_t)(__pyx_t_8cysparse_5types_14cysparse_types_INT64_t, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t *, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t *, __pyx_t_8cysparse_5types_14cysparse_types_FLOAT64_t *, int, int, struct __pyx_opt_args_8cysparse_6sparse_16csr_mat_matrices_25csr_mat_INT64_t_FLOAT64_t_MakeCSRSparseMatrix_INT64_t_FLOAT64_t *__pyx_optional_args); /*proto*/
 
 /* Module declarations from 'cysparse.linalg.suitesparse.umfpack.umfpack_INT64_t_FLOAT64_t' */
 static PyTypeObject *__pyx_ptype_8cysparse_6linalg_11suitesparse_7umfpack_25umfpack_INT64_t_FLOAT64_t_UmfpackContext_INT64_t_FLOAT64_t = 0;
@@ -5442,7 +5455,7 @@ static PyObject *__pyx_pf_8cysparse_6linalg_11suitesparse_7umfpack_25umfpack_INT
  *         U = MakeCSCSparseMatrix_INT64_t_FLOAT64_t(nrow=size, ncol=size, nnz=unz, ind=Up, row=Ui, val=Ux, is_symmetric=False, store_zeros=False)
  * 
  */
-  __pyx_t_1 = __pyx_f_8cysparse_6sparse_16csr_mat_matrices_25csr_mat_INT64_t_FLOAT64_t_MakeCSRSparseMatrix_INT64_t_FLOAT64_t(__pyx_v_size, __pyx_v_size, __pyx_v_lnz, __pyx_v_Lp, __pyx_v_Lj, __pyx_v_Lx, 0, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 674; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_8cysparse_6sparse_16csr_mat_matrices_25csr_mat_INT64_t_FLOAT64_t_MakeCSRSparseMatrix_INT64_t_FLOAT64_t(__pyx_v_size, __pyx_v_size, __pyx_v_lnz, __pyx_v_Lp, __pyx_v_Lj, __pyx_v_Lx, 0, 0, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 674; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_8cysparse_6sparse_16csr_mat_matrices_25csr_mat_INT64_t_FLOAT64_t_CSRSparseMatrix_INT64_t_FLOAT64_t))))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 674; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_v_L = ((struct __pyx_obj_8cysparse_6sparse_16csr_mat_matrices_25csr_mat_INT64_t_FLOAT64_t_CSRSparseMatrix_INT64_t_FLOAT64_t *)__pyx_t_1);
@@ -9171,7 +9184,7 @@ PyMODINIT_FUNC PyInit_umfpack_INT64_t_FLOAT64_t(void)
   if (__Pyx_ImportFunction(__pyx_t_2, "MakeCSCSparseMatrix_INT64_t_FLOAT64_t", (void (**)(void))&__pyx_f_8cysparse_6sparse_16csc_mat_matrices_25csc_mat_INT64_t_FLOAT64_t_MakeCSCSparseMatrix_INT64_t_FLOAT64_t, "PyObject *(__pyx_t_8cysparse_5types_14cysparse_types_INT64_t, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t *, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t *, __pyx_t_8cysparse_5types_14cysparse_types_FLOAT64_t *, int, int)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   Py_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_3 = __Pyx_ImportModule("cysparse.sparse.csr_mat_matrices.csr_mat_INT64_t_FLOAT64_t"); if (!__pyx_t_3) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (__Pyx_ImportFunction(__pyx_t_3, "MakeCSRSparseMatrix_INT64_t_FLOAT64_t", (void (**)(void))&__pyx_f_8cysparse_6sparse_16csr_mat_matrices_25csr_mat_INT64_t_FLOAT64_t_MakeCSRSparseMatrix_INT64_t_FLOAT64_t, "PyObject *(__pyx_t_8cysparse_5types_14cysparse_types_INT64_t, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t *, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t *, __pyx_t_8cysparse_5types_14cysparse_types_FLOAT64_t *, int, int)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_ImportFunction(__pyx_t_3, "MakeCSRSparseMatrix_INT64_t_FLOAT64_t", (void (**)(void))&__pyx_f_8cysparse_6sparse_16csr_mat_matrices_25csr_mat_INT64_t_FLOAT64_t_MakeCSRSparseMatrix_INT64_t_FLOAT64_t, "PyObject *(__pyx_t_8cysparse_5types_14cysparse_types_INT64_t, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t *, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t *, __pyx_t_8cysparse_5types_14cysparse_types_FLOAT64_t *, int, int, struct __pyx_opt_args_8cysparse_6sparse_16csr_mat_matrices_25csr_mat_INT64_t_FLOAT64_t_MakeCSRSparseMatrix_INT64_t_FLOAT64_t *__pyx_optional_args)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   Py_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   /*--- Execution code ---*/
 

@@ -20,9 +20,9 @@ cdef class CSCSparseMatrix_INT64_t_FLOAT64_t(ImmutableSparseMatrix_INT64_t_FLOAT
         INT64_t    *row		 # pointer to array of indices
         INT64_t    *ind		 # pointer to array of indices
 
-        bint __col_indices_sorted_test_done  # we only test this once
-        bint __col_indices_sorted  # are the column indices sorted in ascending order?
-        INT64_t __first_row_not_ordered # first row that is not ordered
+        bint __row_indices_sorted_test_done  # we only test this once
+        bint __row_indices_sorted  # are the column indices sorted in ascending order?
+        INT64_t __first_col_not_ordered # first row that is not ordered
 
     cdef at(self, INT64_t i, INT64_t j)
 

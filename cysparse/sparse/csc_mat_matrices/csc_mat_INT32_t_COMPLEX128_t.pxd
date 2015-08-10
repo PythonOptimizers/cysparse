@@ -20,9 +20,9 @@ cdef class CSCSparseMatrix_INT32_t_COMPLEX128_t(ImmutableSparseMatrix_INT32_t_CO
         INT32_t    *row		 # pointer to array of indices
         INT32_t    *ind		 # pointer to array of indices
 
-        bint __col_indices_sorted_test_done  # we only test this once
-        bint __col_indices_sorted  # are the column indices sorted in ascending order?
-        INT32_t __first_row_not_ordered # first row that is not ordered
+        bint __row_indices_sorted_test_done  # we only test this once
+        bint __row_indices_sorted  # are the column indices sorted in ascending order?
+        INT32_t __first_col_not_ordered # first row that is not ordered
 
     cdef at(self, INT32_t i, INT32_t j)
 

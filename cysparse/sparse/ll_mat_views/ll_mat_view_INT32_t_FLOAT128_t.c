@@ -1019,6 +1019,7 @@ struct __pyx_vtabstruct_8cysparse_6sparse_15ll_mat_matrices_25ll_mat_INT32_t_FLO
   PyObject *(*keys)(struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_25ll_mat_INT32_t_FLOAT128_t_LLSparseMatrix_INT32_t_FLOAT128_t *, int __pyx_skip_dispatch);
   PyObject *(*values)(struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_25ll_mat_INT32_t_FLOAT128_t_LLSparseMatrix_INT32_t_FLOAT128_t *, int __pyx_skip_dispatch);
   PyObject *(*items)(struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_25ll_mat_INT32_t_FLOAT128_t_LLSparseMatrix_INT32_t_FLOAT128_t *, int __pyx_skip_dispatch);
+  PyObject *(*take_triplet_pointers)(struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_25ll_mat_INT32_t_FLOAT128_t_LLSparseMatrix_INT32_t_FLOAT128_t *, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *, __pyx_t_8cysparse_5types_14cysparse_types_FLOAT128_t *);
   PyObject *(*take_triplet)(struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_25ll_mat_INT32_t_FLOAT128_t_LLSparseMatrix_INT32_t_FLOAT128_t *, PyObject *, PyObject *, PyArrayObject *, int __pyx_skip_dispatch);
   PyObject *(*put_diagonal)(struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_25ll_mat_INT32_t_FLOAT128_t_LLSparseMatrix_INT32_t_FLOAT128_t *, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t, PyArrayObject *, int __pyx_skip_dispatch);
   PyObject *(*_norm_inf)(struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_25ll_mat_INT32_t_FLOAT128_t_LLSparseMatrix_INT32_t_FLOAT128_t *);
