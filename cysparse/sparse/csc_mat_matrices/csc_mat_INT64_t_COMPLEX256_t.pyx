@@ -134,6 +134,10 @@ cdef class CSCSparseMatrix_INT64_t_COMPLEX256_t(ImmutableSparseMatrix_INT64_t_CO
 
         self_copy.__nnz = nnz
 
+        self_copy.__row_indices_sorted_test_done = self.__row_indices_sorted_test_done
+        self_copy.__row_indices_sorted = self.__row_indices_sorted
+        self_copy.__first_col_not_ordered = self.__first_col_not_ordered
+
         return self_copy
 
     ####################################################################################################################

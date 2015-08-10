@@ -141,6 +141,10 @@ cdef class CSRSparseMatrix_INT32_t_FLOAT128_t(ImmutableSparseMatrix_INT32_t_FLOA
 
         self_copy.__nnz = nnz
 
+        self_copy.__col_indices_sorted_test_done = self.__col_indices_sorted_test_done
+        self_copy.__col_indices_sorted = self.__col_indices_sorted
+        self_copy.__first_row_not_ordered = self.__first_row_not_ordered
+
         return self_copy
 
     ####################################################################################################################

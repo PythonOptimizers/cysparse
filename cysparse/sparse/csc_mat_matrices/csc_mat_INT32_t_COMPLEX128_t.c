@@ -6168,12 +6168,42 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  * 
  *         self_copy.__nnz = nnz             # <<<<<<<<<<<<<<
  * 
- *         return self_copy
+ *         self_copy.__row_indices_sorted_test_done = self.__row_indices_sorted_test_done
  */
   __pyx_v_self_copy->__pyx_base.__pyx_base.__pyx___nnz = __pyx_v_nnz;
 
   /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":137
  *         self_copy.__nnz = nnz
+ * 
+ *         self_copy.__row_indices_sorted_test_done = self.__row_indices_sorted_test_done             # <<<<<<<<<<<<<<
+ *         self_copy.__row_indices_sorted = self.__row_indices_sorted
+ *         self_copy.__first_col_not_ordered = self.__first_col_not_ordered
+ */
+  __pyx_t_4 = __pyx_v_self->__pyx___row_indices_sorted_test_done;
+  __pyx_v_self_copy->__pyx___row_indices_sorted_test_done = __pyx_t_4;
+
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":138
+ * 
+ *         self_copy.__row_indices_sorted_test_done = self.__row_indices_sorted_test_done
+ *         self_copy.__row_indices_sorted = self.__row_indices_sorted             # <<<<<<<<<<<<<<
+ *         self_copy.__first_col_not_ordered = self.__first_col_not_ordered
+ * 
+ */
+  __pyx_t_4 = __pyx_v_self->__pyx___row_indices_sorted;
+  __pyx_v_self_copy->__pyx___row_indices_sorted = __pyx_t_4;
+
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":139
+ *         self_copy.__row_indices_sorted_test_done = self.__row_indices_sorted_test_done
+ *         self_copy.__row_indices_sorted = self.__row_indices_sorted
+ *         self_copy.__first_col_not_ordered = self.__first_col_not_ordered             # <<<<<<<<<<<<<<
+ * 
+ *         return self_copy
+ */
+  __pyx_t_2 = __pyx_v_self->__pyx___first_col_not_ordered;
+  __pyx_v_self_copy->__pyx___first_col_not_ordered = __pyx_t_2;
+
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":141
+ *         self_copy.__first_col_not_ordered = self.__first_col_not_ordered
  * 
  *         return self_copy             # <<<<<<<<<<<<<<
  * 
@@ -6205,7 +6235,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   return __pyx_r;
 }
 
-/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":142
+/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":146
  *     # Row indices ordering
  *     ####################################################################################################################
  *     def are_row_indices_sorted(self):             # <<<<<<<<<<<<<<
@@ -6241,7 +6271,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("are_row_indices_sorted", 0);
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":152
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":156
  *         cdef INT32_t row_index_stop
  * 
  *         if self.__row_indices_sorted_test_done:             # <<<<<<<<<<<<<<
@@ -6251,7 +6281,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   __pyx_t_1 = (__pyx_v_self->__pyx___row_indices_sorted_test_done != 0);
   if (__pyx_t_1) {
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":153
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":157
  * 
  *         if self.__row_indices_sorted_test_done:
  *             return self.__row_indices_sorted             # <<<<<<<<<<<<<<
@@ -6259,7 +6289,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  *             # do the test
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_2 = __Pyx_PyBool_FromLong(__pyx_v_self->__pyx___row_indices_sorted); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 153; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyBool_FromLong(__pyx_v_self->__pyx___row_indices_sorted); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 157; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_r = __pyx_t_2;
     __pyx_t_2 = 0;
@@ -6267,7 +6297,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   }
   /*else*/ {
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":156
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":160
  *         else:
  *             # do the test
  *             self.__row_indices_sorted_test_done = True             # <<<<<<<<<<<<<<
@@ -6276,7 +6306,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
     __pyx_v_self->__pyx___row_indices_sorted_test_done = 1;
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":158
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":162
  *             self.__row_indices_sorted_test_done = True
  *             # test each row
  *             for j from 0 <= j < self.__ncol:             # <<<<<<<<<<<<<<
@@ -6286,7 +6316,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
     __pyx_t_3 = __pyx_v_self->__pyx_base.__pyx_base.__pyx___ncol;
     for (__pyx_v_j = 0; __pyx_v_j < __pyx_t_3; __pyx_v_j++) {
 
-      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":159
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":163
  *             # test each row
  *             for j from 0 <= j < self.__ncol:
  *                 row_index = self.ind[j]             # <<<<<<<<<<<<<<
@@ -6295,7 +6325,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
       __pyx_v_row_index = (__pyx_v_self->ind[__pyx_v_j]);
 
-      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":160
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":164
  *             for j from 0 <= j < self.__ncol:
  *                 row_index = self.ind[j]
  *                 row_index_stop = self.ind[j+1] - 1             # <<<<<<<<<<<<<<
@@ -6304,7 +6334,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
       __pyx_v_row_index_stop = ((__pyx_v_self->ind[(__pyx_v_j + 1)]) - 1);
 
-      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":162
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":166
  *                 row_index_stop = self.ind[j+1] - 1
  * 
  *                 self.__first_col_not_ordered = j             # <<<<<<<<<<<<<<
@@ -6313,7 +6343,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
       __pyx_v_self->__pyx___first_col_not_ordered = __pyx_v_j;
 
-      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":164
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":168
  *                 self.__first_col_not_ordered = j
  * 
  *                 while row_index < row_index_stop:             # <<<<<<<<<<<<<<
@@ -6324,7 +6354,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
         __pyx_t_1 = ((__pyx_v_row_index < __pyx_v_row_index_stop) != 0);
         if (!__pyx_t_1) break;
 
-        /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":165
+        /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":169
  * 
  *                 while row_index < row_index_stop:
  *                     if self.row[row_index] > self.row[row_index + 1]:             # <<<<<<<<<<<<<<
@@ -6334,7 +6364,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
         __pyx_t_1 = (((__pyx_v_self->row[__pyx_v_row_index]) > (__pyx_v_self->row[(__pyx_v_row_index + 1)])) != 0);
         if (__pyx_t_1) {
 
-          /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":166
+          /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":170
  *                 while row_index < row_index_stop:
  *                     if self.row[row_index] > self.row[row_index + 1]:
  *                         self.__row_indices_sorted = False             # <<<<<<<<<<<<<<
@@ -6343,7 +6373,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
           __pyx_v_self->__pyx___row_indices_sorted = 0;
 
-          /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":167
+          /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":171
  *                     if self.row[row_index] > self.row[row_index + 1]:
  *                         self.__row_indices_sorted = False
  *                         return self.__row_indices_sorted             # <<<<<<<<<<<<<<
@@ -6351,14 +6381,14 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  * 
  */
           __Pyx_XDECREF(__pyx_r);
-          __pyx_t_2 = __Pyx_PyBool_FromLong(__pyx_v_self->__pyx___row_indices_sorted); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 167; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_2 = __Pyx_PyBool_FromLong(__pyx_v_self->__pyx___row_indices_sorted); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 171; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_2);
           __pyx_r = __pyx_t_2;
           __pyx_t_2 = 0;
           goto __pyx_L0;
         }
 
-        /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":168
+        /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":172
  *                         self.__row_indices_sorted = False
  *                         return self.__row_indices_sorted
  *                     row_index += 1             # <<<<<<<<<<<<<<
@@ -6370,7 +6400,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
     }
   }
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":171
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":175
  * 
  *         # row indices are ordered
  *         self.__first_col_not_ordered = self.__ncol             # <<<<<<<<<<<<<<
@@ -6380,7 +6410,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   __pyx_t_3 = __pyx_v_self->__pyx_base.__pyx_base.__pyx___ncol;
   __pyx_v_self->__pyx___first_col_not_ordered = __pyx_t_3;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":172
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":176
  *         # row indices are ordered
  *         self.__first_col_not_ordered = self.__ncol
  *         self.__row_indices_sorted = True             # <<<<<<<<<<<<<<
@@ -6389,7 +6419,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
   __pyx_v_self->__pyx___row_indices_sorted = 1;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":173
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":177
  *         self.__first_col_not_ordered = self.__ncol
  *         self.__row_indices_sorted = True
  *         return self.__row_indices_sorted             # <<<<<<<<<<<<<<
@@ -6397,13 +6427,13 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  *     cdef _set_row_indices_ordered_is_true(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyBool_FromLong(__pyx_v_self->__pyx___row_indices_sorted); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 173; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyBool_FromLong(__pyx_v_self->__pyx___row_indices_sorted); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 177; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":142
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":146
  *     # Row indices ordering
  *     ####################################################################################################################
  *     def are_row_indices_sorted(self):             # <<<<<<<<<<<<<<
@@ -6422,7 +6452,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   return __pyx_r;
 }
 
-/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":175
+/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":179
  *         return self.__row_indices_sorted
  * 
  *     cdef _set_row_indices_ordered_is_true(self):             # <<<<<<<<<<<<<<
@@ -6435,7 +6465,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("_set_row_indices_ordered_is_true", 0);
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":183
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":187
  *             almost all operations.
  *         """
  *         self.__row_indices_sorted_test_done = True             # <<<<<<<<<<<<<<
@@ -6444,7 +6474,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_
  */
   __pyx_v_self->__pyx___row_indices_sorted_test_done = 1;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":184
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":188
  *         """
  *         self.__row_indices_sorted_test_done = True
  *         self.__row_indices_sorted = True             # <<<<<<<<<<<<<<
@@ -6453,7 +6483,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_
  */
   __pyx_v_self->__pyx___row_indices_sorted = 1;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":175
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":179
  *         return self.__row_indices_sorted
  * 
  *     cdef _set_row_indices_ordered_is_true(self):             # <<<<<<<<<<<<<<
@@ -6468,7 +6498,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_
   return __pyx_r;
 }
 
-/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":186
+/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":190
  *         self.__row_indices_sorted = True
  * 
  *     cdef _order_row_indices(self):             # <<<<<<<<<<<<<<
@@ -6493,14 +6523,14 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("_order_row_indices", 0);
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":193
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":197
  *         """
  *         #  must be called to find first col not ordered
  *         if self.are_row_indices_sorted():             # <<<<<<<<<<<<<<
  *             return
  * 
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_are_row_indices_sorted); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 193; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_are_row_indices_sorted); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 197; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_2))) {
@@ -6513,18 +6543,18 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_
     }
   }
   if (__pyx_t_3) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 193; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 197; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   } else {
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 193; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 197; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 193; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 197; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_4) {
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":194
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":198
  *         #  must be called to find first col not ordered
  *         if self.are_row_indices_sorted():
  *             return             # <<<<<<<<<<<<<<
@@ -6536,7 +6566,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_
     goto __pyx_L0;
   }
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":196
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":200
  *             return
  * 
  *         cdef INT32_t j = self.__first_col_not_ordered             # <<<<<<<<<<<<<<
@@ -6546,7 +6576,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_
   __pyx_t_5 = __pyx_v_self->__pyx___first_col_not_ordered;
   __pyx_v_j = __pyx_t_5;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":201
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":205
  *         cdef INT32_t row_index_stop
  * 
  *         while j < self.__ncol:             # <<<<<<<<<<<<<<
@@ -6557,7 +6587,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_
     __pyx_t_4 = ((__pyx_v_j < __pyx_v_self->__pyx_base.__pyx_base.__pyx___ncol) != 0);
     if (!__pyx_t_4) break;
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":202
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":206
  * 
  *         while j < self.__ncol:
  *             row_index = self.ind[j]             # <<<<<<<<<<<<<<
@@ -6566,7 +6596,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_
  */
     __pyx_v_row_index = (__pyx_v_self->ind[__pyx_v_j]);
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":203
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":207
  *         while j < self.__ncol:
  *             row_index = self.ind[j]
  *             row_index_start = row_index             # <<<<<<<<<<<<<<
@@ -6575,7 +6605,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_
  */
     __pyx_v_row_index_start = __pyx_v_row_index;
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":204
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":208
  *             row_index = self.ind[j]
  *             row_index_start = row_index
  *             row_index_stop = self.ind[j+1]             # <<<<<<<<<<<<<<
@@ -6584,7 +6614,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_
  */
     __pyx_v_row_index_stop = (__pyx_v_self->ind[(__pyx_v_j + 1)]);
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":206
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":210
  *             row_index_stop = self.ind[j+1]
  * 
  *             while row_index < row_index_stop - 1:             # <<<<<<<<<<<<<<
@@ -6595,7 +6625,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_
       __pyx_t_4 = ((__pyx_v_row_index < (__pyx_v_row_index_stop - 1)) != 0);
       if (!__pyx_t_4) break;
 
-      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":208
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":212
  *             while row_index < row_index_stop - 1:
  *                 # detect if col is not ordered
  *                 if self.row[row_index] > self.row[row_index + 1]:             # <<<<<<<<<<<<<<
@@ -6605,18 +6635,18 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_
       __pyx_t_4 = (((__pyx_v_self->row[__pyx_v_row_index]) > (__pyx_v_self->row[(__pyx_v_row_index + 1)])) != 0);
       if (__pyx_t_4) {
 
-        /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":211
+        /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":215
  *                     # sort
  *                     # TODO: maybe use the row index for optimization?
  *                     sort_array_INT32_t(self.row, row_index_start, row_index_stop)             # <<<<<<<<<<<<<<
  *                     break
  *                 else:
  */
-        __pyx_t_1 = __pyx_f_8cysparse_6sparse_12sparse_utils_7generic_20sort_indices_INT32_t_sort_array_INT32_t(__pyx_v_self->row, __pyx_v_row_index_start, __pyx_v_row_index_stop); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 211; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_1 = __pyx_f_8cysparse_6sparse_12sparse_utils_7generic_20sort_indices_INT32_t_sort_array_INT32_t(__pyx_v_self->row, __pyx_v_row_index_start, __pyx_v_row_index_stop); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 215; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-        /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":212
+        /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":216
  *                     # TODO: maybe use the row index for optimization?
  *                     sort_array_INT32_t(self.row, row_index_start, row_index_stop)
  *                     break             # <<<<<<<<<<<<<<
@@ -6627,7 +6657,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_
       }
       /*else*/ {
 
-        /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":214
+        /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":218
  *                     break
  *                 else:
  *                     row_index += 1             # <<<<<<<<<<<<<<
@@ -6639,7 +6669,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_
     }
     __pyx_L7_break:;
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":216
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":220
  *                     row_index += 1
  * 
  *             j += 1             # <<<<<<<<<<<<<<
@@ -6649,7 +6679,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_
     __pyx_v_j = (__pyx_v_j + 1);
   }
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":186
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":190
  *         self.__row_indices_sorted = True
  * 
  *     cdef _order_row_indices(self):             # <<<<<<<<<<<<<<
@@ -6672,7 +6702,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_
   return __pyx_r;
 }
 
-/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":218
+/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":222
  *             j += 1
  * 
  *     def order_row_indices(self):             # <<<<<<<<<<<<<<
@@ -6703,7 +6733,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("order_row_indices", 0);
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":222
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":226
  *         Forces row indices to be ordered.
  *         """
  *         return self._order_row_indices()             # <<<<<<<<<<<<<<
@@ -6711,13 +6741,13 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  *     ####################################################################################################################
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((struct __pyx_vtabstruct_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX128_t_CSCSparseMatrix_INT32_t_COMPLEX128_t *)__pyx_v_self->__pyx_vtab)->_order_row_indices(__pyx_v_self); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 222; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = ((struct __pyx_vtabstruct_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX128_t_CSCSparseMatrix_INT32_t_COMPLEX128_t *)__pyx_v_self->__pyx_vtab)->_order_row_indices(__pyx_v_self); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 226; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":218
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":222
  *             j += 1
  * 
  *     def order_row_indices(self):             # <<<<<<<<<<<<<<
@@ -6736,7 +6766,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   return __pyx_r;
 }
 
-/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":229
+/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":233
  *     ####################################################################################################################
  *     #                                            *** SET ***
  *     def __setitem__(self, tuple key, value):             # <<<<<<<<<<<<<<
@@ -6753,7 +6783,7 @@ static int __pyx_pw_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPL
   int __pyx_r;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__setitem__ (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_key), (&PyTuple_Type), 1, "key", 1))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 229; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_key), (&PyTuple_Type), 1, "key", 1))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 233; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_r = __pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX128_t_36CSCSparseMatrix_INT32_t_COMPLEX128_t_10__setitem__(((struct __pyx_obj_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX128_t_CSCSparseMatrix_INT32_t_COMPLEX128_t *)__pyx_v_self), ((PyObject*)__pyx_v_key), ((PyObject *)__pyx_v_value));
 
   /* function exit code */
@@ -6774,20 +6804,20 @@ static int __pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPL
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__setitem__", 0);
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":230
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":234
  *     #                                            *** SET ***
  *     def __setitem__(self, tuple key, value):
  *         raise SyntaxError("Assign individual elements is not allowed")             # <<<<<<<<<<<<<<
  * 
  *     #                                            *** GET ***
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_SyntaxError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 230; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_SyntaxError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 234; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  {__pyx_filename = __pyx_f[1]; __pyx_lineno = 230; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  {__pyx_filename = __pyx_f[1]; __pyx_lineno = 234; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":229
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":233
  *     ####################################################################################################################
  *     #                                            *** SET ***
  *     def __setitem__(self, tuple key, value):             # <<<<<<<<<<<<<<
@@ -6804,7 +6834,7 @@ static int __pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPL
   return __pyx_r;
 }
 
-/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":233
+/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":237
  * 
  *     #                                            *** GET ***
  *     cdef at(self, INT32_t i, INT32_t j):             # <<<<<<<<<<<<<<
@@ -6826,7 +6856,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("at", 0);
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":251
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":255
  * 
  *         # code is duplicated for optimization
  *         if self.__is_symmetric:             # <<<<<<<<<<<<<<
@@ -6836,7 +6866,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_
   __pyx_t_1 = (__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___is_symmetric != 0);
   if (__pyx_t_1) {
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":252
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":256
  *         # code is duplicated for optimization
  *         if self.__is_symmetric:
  *             if i < j:             # <<<<<<<<<<<<<<
@@ -6846,7 +6876,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_
     __pyx_t_1 = ((__pyx_v_i < __pyx_v_j) != 0);
     if (__pyx_t_1) {
 
-      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":253
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":257
  *         if self.__is_symmetric:
  *             if i < j:
  *                 real_i = j             # <<<<<<<<<<<<<<
@@ -6855,7 +6885,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_
  */
       __pyx_v_real_i = __pyx_v_j;
 
-      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":254
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":258
  *             if i < j:
  *                 real_i = j
  *                 real_j = i             # <<<<<<<<<<<<<<
@@ -6867,7 +6897,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_
     }
     /*else*/ {
 
-      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":256
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":260
  *                 real_j = i
  *             else:
  *                 real_i = i             # <<<<<<<<<<<<<<
@@ -6876,7 +6906,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_
  */
       __pyx_v_real_i = __pyx_v_i;
 
-      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":257
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":261
  *             else:
  *                 real_i = i
  *                 real_j = j             # <<<<<<<<<<<<<<
@@ -6887,7 +6917,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_
     }
     __pyx_L4:;
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":259
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":263
  *                 real_j = j
  * 
  *             if self. __row_indices_sorted:             # <<<<<<<<<<<<<<
@@ -6897,7 +6927,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_
     __pyx_t_1 = (__pyx_v_self->__pyx___row_indices_sorted != 0);
     if (__pyx_t_1) {
 
-      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":260
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":264
  * 
  *             if self. __row_indices_sorted:
  *                 for k from self.ind[real_j] <= k < self.ind[real_j+1]:             # <<<<<<<<<<<<<<
@@ -6907,7 +6937,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_
       __pyx_t_2 = (__pyx_v_self->ind[(__pyx_v_real_j + 1)]);
       for (__pyx_v_k = (__pyx_v_self->ind[__pyx_v_real_j]); __pyx_v_k < __pyx_t_2; __pyx_v_k++) {
 
-        /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":261
+        /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":265
  *             if self. __row_indices_sorted:
  *                 for k from self.ind[real_j] <= k < self.ind[real_j+1]:
  *                     if real_i == self.row[k]:             # <<<<<<<<<<<<<<
@@ -6917,7 +6947,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_
         __pyx_t_1 = ((__pyx_v_real_i == (__pyx_v_self->row[__pyx_v_k])) != 0);
         if (__pyx_t_1) {
 
-          /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":262
+          /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":266
  *                 for k from self.ind[real_j] <= k < self.ind[real_j+1]:
  *                     if real_i == self.row[k]:
  *                         return self.val[k]             # <<<<<<<<<<<<<<
@@ -6925,14 +6955,14 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_
  *                         break
  */
           __Pyx_XDECREF(__pyx_r);
-          __pyx_t_3 = __pyx_PyComplex_FromComplex((__pyx_v_self->val[__pyx_v_k])); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 262; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_3 = __pyx_PyComplex_FromComplex((__pyx_v_self->val[__pyx_v_k])); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 266; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_3);
           __pyx_r = __pyx_t_3;
           __pyx_t_3 = 0;
           goto __pyx_L0;
         }
 
-        /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":263
+        /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":267
  *                     if real_i == self.row[k]:
  *                         return self.val[k]
  *                     elif real_i > self.row[k]:             # <<<<<<<<<<<<<<
@@ -6942,7 +6972,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_
         __pyx_t_1 = ((__pyx_v_real_i > (__pyx_v_self->row[__pyx_v_k])) != 0);
         if (__pyx_t_1) {
 
-          /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":264
+          /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":268
  *                         return self.val[k]
  *                     elif real_i > self.row[k]:
  *                         break             # <<<<<<<<<<<<<<
@@ -6957,7 +6987,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_
     }
     /*else*/ {
 
-      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":266
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":270
  *                         break
  *             else:
  *                 for k from self.ind[real_j] <= k < self.ind[real_j+1]:             # <<<<<<<<<<<<<<
@@ -6967,7 +6997,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_
       __pyx_t_2 = (__pyx_v_self->ind[(__pyx_v_real_j + 1)]);
       for (__pyx_v_k = (__pyx_v_self->ind[__pyx_v_real_j]); __pyx_v_k < __pyx_t_2; __pyx_v_k++) {
 
-        /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":267
+        /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":271
  *             else:
  *                 for k from self.ind[real_j] <= k < self.ind[real_j+1]:
  *                     if real_i == self.row[k]:             # <<<<<<<<<<<<<<
@@ -6977,7 +7007,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_
         __pyx_t_1 = ((__pyx_v_real_i == (__pyx_v_self->row[__pyx_v_k])) != 0);
         if (__pyx_t_1) {
 
-          /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":268
+          /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":272
  *                 for k from self.ind[real_j] <= k < self.ind[real_j+1]:
  *                     if real_i == self.row[k]:
  *                         return self.val[k]             # <<<<<<<<<<<<<<
@@ -6985,7 +7015,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_
  *         else:  # not symmetric
  */
           __Pyx_XDECREF(__pyx_r);
-          __pyx_t_3 = __pyx_PyComplex_FromComplex((__pyx_v_self->val[__pyx_v_k])); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 268; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_3 = __pyx_PyComplex_FromComplex((__pyx_v_self->val[__pyx_v_k])); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 272; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_3);
           __pyx_r = __pyx_t_3;
           __pyx_t_3 = 0;
@@ -6998,7 +7028,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_
   }
   /*else*/ {
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":271
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":275
  * 
  *         else:  # not symmetric
  *             if self. __row_indices_sorted:             # <<<<<<<<<<<<<<
@@ -7008,7 +7038,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_
     __pyx_t_1 = (__pyx_v_self->__pyx___row_indices_sorted != 0);
     if (__pyx_t_1) {
 
-      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":272
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":276
  *         else:  # not symmetric
  *             if self. __row_indices_sorted:
  *                 for k from self.ind[j] <= k < self.ind[j+1]:             # <<<<<<<<<<<<<<
@@ -7018,7 +7048,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_
       __pyx_t_2 = (__pyx_v_self->ind[(__pyx_v_j + 1)]);
       for (__pyx_v_k = (__pyx_v_self->ind[__pyx_v_j]); __pyx_v_k < __pyx_t_2; __pyx_v_k++) {
 
-        /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":273
+        /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":277
  *             if self. __row_indices_sorted:
  *                 for k from self.ind[j] <= k < self.ind[j+1]:
  *                     if i == self.row[k]:             # <<<<<<<<<<<<<<
@@ -7028,7 +7058,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_
         __pyx_t_1 = ((__pyx_v_i == (__pyx_v_self->row[__pyx_v_k])) != 0);
         if (__pyx_t_1) {
 
-          /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":274
+          /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":278
  *                 for k from self.ind[j] <= k < self.ind[j+1]:
  *                     if i == self.row[k]:
  *                         return self.val[k]             # <<<<<<<<<<<<<<
@@ -7036,14 +7066,14 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_
  *                         break
  */
           __Pyx_XDECREF(__pyx_r);
-          __pyx_t_3 = __pyx_PyComplex_FromComplex((__pyx_v_self->val[__pyx_v_k])); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 274; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_3 = __pyx_PyComplex_FromComplex((__pyx_v_self->val[__pyx_v_k])); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 278; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_3);
           __pyx_r = __pyx_t_3;
           __pyx_t_3 = 0;
           goto __pyx_L0;
         }
 
-        /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":275
+        /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":279
  *                     if i == self.row[k]:
  *                         return self.val[k]
  *                     elif i > self.row[k]:             # <<<<<<<<<<<<<<
@@ -7053,7 +7083,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_
         __pyx_t_1 = ((__pyx_v_i > (__pyx_v_self->row[__pyx_v_k])) != 0);
         if (__pyx_t_1) {
 
-          /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":276
+          /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":280
  *                         return self.val[k]
  *                     elif i > self.row[k]:
  *                         break             # <<<<<<<<<<<<<<
@@ -7068,7 +7098,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_
     }
     /*else*/ {
 
-      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":278
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":282
  *                         break
  *             else:
  *                 for k from self.ind[j] <= k < self.ind[j+1]:             # <<<<<<<<<<<<<<
@@ -7078,7 +7108,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_
       __pyx_t_2 = (__pyx_v_self->ind[(__pyx_v_j + 1)]);
       for (__pyx_v_k = (__pyx_v_self->ind[__pyx_v_j]); __pyx_v_k < __pyx_t_2; __pyx_v_k++) {
 
-        /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":279
+        /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":283
  *             else:
  *                 for k from self.ind[j] <= k < self.ind[j+1]:
  *                     if i == self.row[k]:             # <<<<<<<<<<<<<<
@@ -7088,7 +7118,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_
         __pyx_t_1 = ((__pyx_v_i == (__pyx_v_self->row[__pyx_v_k])) != 0);
         if (__pyx_t_1) {
 
-          /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":280
+          /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":284
  *                 for k from self.ind[j] <= k < self.ind[j+1]:
  *                     if i == self.row[k]:
  *                         return self.val[k]             # <<<<<<<<<<<<<<
@@ -7096,7 +7126,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_
  *         return 0.0
  */
           __Pyx_XDECREF(__pyx_r);
-          __pyx_t_3 = __pyx_PyComplex_FromComplex((__pyx_v_self->val[__pyx_v_k])); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 280; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_3 = __pyx_PyComplex_FromComplex((__pyx_v_self->val[__pyx_v_k])); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 284; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_3);
           __pyx_r = __pyx_t_3;
           __pyx_t_3 = 0;
@@ -7108,7 +7138,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_
   }
   __pyx_L3:;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":282
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":286
  *                         return self.val[k]
  * 
  *         return 0.0             # <<<<<<<<<<<<<<
@@ -7120,7 +7150,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_
   __pyx_r = __pyx_float_0_0;
   goto __pyx_L0;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":233
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":237
  * 
  *     #                                            *** GET ***
  *     cdef at(self, INT32_t i, INT32_t j):             # <<<<<<<<<<<<<<
@@ -7139,7 +7169,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_
   return __pyx_r;
 }
 
-/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":287
+/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":291
  * 
  *     # this is needed as for the complex type, Cython's compiler crashes...
  *     cdef COMPLEX128_t safe_at(self, INT32_t i, INT32_t j) except *:             # <<<<<<<<<<<<<<
@@ -7162,25 +7192,25 @@ static __pyx_t_double_complex __pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("safe_at", 0);
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":296
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":300
  * 
  *         """
  *         if not 0 <= i < self.nrow or not 0 <= j < self.ncol:             # <<<<<<<<<<<<<<
  *             raise IndexError("Index out of bounds")
  * 
  */
-  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_i); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 296; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_i); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 300; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyObject_RichCompare(__pyx_int_0, __pyx_t_2, Py_LE); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 296; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = PyObject_RichCompare(__pyx_int_0, __pyx_t_2, Py_LE); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 300; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   if (__Pyx_PyObject_IsTrue(__pyx_t_3)) {
     __Pyx_DECREF(__pyx_t_3);
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_nrow); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 296; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_nrow); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 300; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_3 = PyObject_RichCompare(__pyx_t_2, __pyx_t_4, Py_LT); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 296; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = PyObject_RichCompare(__pyx_t_2, __pyx_t_4, Py_LT); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 300; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 296; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 300; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_6 = ((!__pyx_t_5) != 0);
   if (!__pyx_t_6) {
@@ -7188,53 +7218,53 @@ static __pyx_t_double_complex __pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc
     __pyx_t_1 = __pyx_t_6;
     goto __pyx_L4_bool_binop_done;
   }
-  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_j); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 296; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_j); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 300; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = PyObject_RichCompare(__pyx_int_0, __pyx_t_3, Py_LE); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 296; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyObject_RichCompare(__pyx_int_0, __pyx_t_3, Py_LE); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 300; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   if (__Pyx_PyObject_IsTrue(__pyx_t_2)) {
     __Pyx_DECREF(__pyx_t_2);
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_ncol); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 296; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_ncol); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 300; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_2 = PyObject_RichCompare(__pyx_t_3, __pyx_t_4, Py_LT); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 296; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = PyObject_RichCompare(__pyx_t_3, __pyx_t_4, Py_LT); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 300; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_6 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 296; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_6 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 300; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_5 = ((!__pyx_t_6) != 0);
   __pyx_t_1 = __pyx_t_5;
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_1) {
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":297
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":301
  *         """
  *         if not 0 <= i < self.nrow or not 0 <= j < self.ncol:
  *             raise IndexError("Index out of bounds")             # <<<<<<<<<<<<<<
  * 
  *         return self.at(i, j)
  */
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 297; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 301; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 297; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 301; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":299
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":303
  *             raise IndexError("Index out of bounds")
  * 
  *         return self.at(i, j)             # <<<<<<<<<<<<<<
  * 
  *     def __getitem__(self, tuple key):
  */
-  __pyx_t_2 = ((struct __pyx_vtabstruct_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX128_t_CSCSparseMatrix_INT32_t_COMPLEX128_t *)__pyx_v_self->__pyx_vtab)->at(__pyx_v_self, __pyx_v_i, __pyx_v_j); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 299; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = ((struct __pyx_vtabstruct_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX128_t_CSCSparseMatrix_INT32_t_COMPLEX128_t *)__pyx_v_self->__pyx_vtab)->at(__pyx_v_self, __pyx_v_i, __pyx_v_j); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 303; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_7 = __Pyx_PyComplex_As___pyx_t_double_complex(__pyx_t_2); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 299; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = __Pyx_PyComplex_As___pyx_t_double_complex(__pyx_t_2); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 303; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_r = __pyx_t_7;
   goto __pyx_L0;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":287
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":291
  * 
  *     # this is needed as for the complex type, Cython's compiler crashes...
  *     cdef COMPLEX128_t safe_at(self, INT32_t i, INT32_t j) except *:             # <<<<<<<<<<<<<<
@@ -7254,7 +7284,7 @@ static __pyx_t_double_complex __pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc
   return __pyx_r;
 }
 
-/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":301
+/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":305
  *         return self.at(i, j)
  * 
  *     def __getitem__(self, tuple key):             # <<<<<<<<<<<<<<
@@ -7275,7 +7305,7 @@ static PyObject *__pyx_pw_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__getitem__ (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_key), (&PyTuple_Type), 1, "key", 1))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 301; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_key), (&PyTuple_Type), 1, "key", 1))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 305; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_r = __pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX128_t_36CSCSparseMatrix_INT32_t_COMPLEX128_t_12__getitem__(((struct __pyx_obj_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX128_t_CSCSparseMatrix_INT32_t_COMPLEX128_t *)__pyx_v_self), ((PyObject*)__pyx_v_key));
 
   /* function exit code */
@@ -7303,7 +7333,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__getitem__", 0);
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":314
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":318
  *             ``csr_mat[i, j]``.
  *         """
  *         if len(key) != 2:             # <<<<<<<<<<<<<<
@@ -7312,13 +7342,13 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
   if (unlikely(__pyx_v_key == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
-    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 314; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 318; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = PyTuple_GET_SIZE(__pyx_v_key); if (unlikely(__pyx_t_1 == -1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 314; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyTuple_GET_SIZE(__pyx_v_key); if (unlikely(__pyx_t_1 == -1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 318; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_t_2 = ((__pyx_t_1 != 2) != 0);
   if (__pyx_t_2) {
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":315
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":319
  *         """
  *         if len(key) != 2:
  *             raise IndexError('Index tuple must be of length 2 (not %d)' % len(key))             # <<<<<<<<<<<<<<
@@ -7327,28 +7357,28 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
     if (unlikely(__pyx_v_key == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
-      {__pyx_filename = __pyx_f[1]; __pyx_lineno = 315; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[1]; __pyx_lineno = 319; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_t_1 = PyTuple_GET_SIZE(__pyx_v_key); if (unlikely(__pyx_t_1 == -1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 315; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __pyx_t_3 = PyInt_FromSsize_t(__pyx_t_1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 315; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyTuple_GET_SIZE(__pyx_v_key); if (unlikely(__pyx_t_1 == -1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 319; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = PyInt_FromSsize_t(__pyx_t_1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 319; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_4 = __Pyx_PyString_Format(__pyx_kp_s_Index_tuple_must_be_of_length_2, __pyx_t_3); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 315; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyString_Format(__pyx_kp_s_Index_tuple_must_be_of_length_2, __pyx_t_3); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 319; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 315; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 319; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_4);
     __Pyx_GIVEREF(__pyx_t_4);
     __pyx_t_4 = 0;
-    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_t_3, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 315; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_t_3, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 319; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_Raise(__pyx_t_4, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 315; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 319; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":317
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":321
  *             raise IndexError('Index tuple must be of length 2 (not %d)' % len(key))
  * 
  *         cdef INT32_t i = key[0]             # <<<<<<<<<<<<<<
@@ -7357,15 +7387,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
   if (unlikely(__pyx_v_key == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 317; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 321; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_4 = __Pyx_GetItemInt_Tuple(__pyx_v_key, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 317; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_4 = __Pyx_GetItemInt_Tuple(__pyx_v_key, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 321; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = __Pyx_PyInt_As_int(__pyx_t_4); if (unlikely((__pyx_t_5 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 317; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_PyInt_As_int(__pyx_t_4); if (unlikely((__pyx_t_5 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 321; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_v_i = __pyx_t_5;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":318
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":322
  * 
  *         cdef INT32_t i = key[0]
  *         cdef INT32_t j = key[1]             # <<<<<<<<<<<<<<
@@ -7374,15 +7404,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
   if (unlikely(__pyx_v_key == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 318; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 322; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_4 = __Pyx_GetItemInt_Tuple(__pyx_v_key, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 318; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_4 = __Pyx_GetItemInt_Tuple(__pyx_v_key, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 322; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = __Pyx_PyInt_As_int(__pyx_t_4); if (unlikely((__pyx_t_5 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 318; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_PyInt_As_int(__pyx_t_4); if (unlikely((__pyx_t_5 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 322; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_v_j = __pyx_t_5;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":320
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":324
  *         cdef INT32_t j = key[1]
  * 
  *         return self.safe_at(i, j)             # <<<<<<<<<<<<<<
@@ -7390,14 +7420,14 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  *     ####################################################################################################################
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_6 = ((struct __pyx_vtabstruct_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX128_t_CSCSparseMatrix_INT32_t_COMPLEX128_t *)__pyx_v_self->__pyx_vtab)->safe_at(__pyx_v_self, __pyx_v_i, __pyx_v_j); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 320; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_4 = __pyx_PyComplex_FromComplex(__pyx_t_6); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 320; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_6 = ((struct __pyx_vtabstruct_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX128_t_CSCSparseMatrix_INT32_t_COMPLEX128_t *)__pyx_v_self->__pyx_vtab)->safe_at(__pyx_v_self, __pyx_v_i, __pyx_v_j); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 324; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __pyx_PyComplex_FromComplex(__pyx_t_6); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 324; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_r = __pyx_t_4;
   __pyx_t_4 = 0;
   goto __pyx_L0;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":301
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":305
  *         return self.at(i, j)
  * 
  *     def __getitem__(self, tuple key):             # <<<<<<<<<<<<<<
@@ -7417,7 +7447,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   return __pyx_r;
 }
 
-/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":325
+/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":329
  *     # Common operations
  *     ####################################################################################################################
  *     def find(self):             # <<<<<<<<<<<<<<
@@ -7481,7 +7511,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   __pyx_pybuffernd_a_val.data = NULL;
   __pyx_pybuffernd_a_val.rcbuffer = &__pyx_pybuffer_a_val;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":331
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":335
  *         pass
  *         cdef cnp.npy_intp dmat[1]
  *         dmat[0] = <cnp.npy_intp> self.__nnz             # <<<<<<<<<<<<<<
@@ -7490,22 +7520,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
   (__pyx_v_dmat[0]) = ((npy_intp)__pyx_v_self->__pyx_base.__pyx_base.__pyx___nnz);
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":336
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":340
  * 
  *         cdef:
  *             cnp.ndarray[cnp.npy_int32, ndim=1] a_row = cnp.PyArray_SimpleNew( 1, dmat, cnp.NPY_INT32)             # <<<<<<<<<<<<<<
  *             cnp.ndarray[cnp.npy_int32, ndim=1] a_col = cnp.PyArray_SimpleNew( 1, dmat, cnp.NPY_INT32)
  *             cnp.ndarray[cnp.npy_complex128, ndim=1] a_val = cnp.PyArray_SimpleNew( 1, dmat, cnp.NPY_COMPLEX128)
  */
-  __pyx_t_1 = PyArray_SimpleNew(1, __pyx_v_dmat, NPY_INT32); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 336; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyArray_SimpleNew(1, __pyx_v_dmat, NPY_INT32); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 340; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 336; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 340; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_t_2 = ((PyArrayObject *)__pyx_t_1);
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
     if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_a_row.rcbuffer->pybuffer, (PyObject*)__pyx_t_2, &__Pyx_TypeInfo_nn_npy_int32, PyBUF_FORMAT| PyBUF_STRIDES, 1, 0, __pyx_stack) == -1)) {
       __pyx_v_a_row = ((PyArrayObject *)Py_None); __Pyx_INCREF(Py_None); __pyx_pybuffernd_a_row.rcbuffer->pybuffer.buf = NULL;
-      {__pyx_filename = __pyx_f[1]; __pyx_lineno = 336; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[1]; __pyx_lineno = 340; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     } else {__pyx_pybuffernd_a_row.diminfo[0].strides = __pyx_pybuffernd_a_row.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_a_row.diminfo[0].shape = __pyx_pybuffernd_a_row.rcbuffer->pybuffer.shape[0];
     }
   }
@@ -7513,22 +7543,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   __pyx_v_a_row = ((PyArrayObject *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":337
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":341
  *         cdef:
  *             cnp.ndarray[cnp.npy_int32, ndim=1] a_row = cnp.PyArray_SimpleNew( 1, dmat, cnp.NPY_INT32)
  *             cnp.ndarray[cnp.npy_int32, ndim=1] a_col = cnp.PyArray_SimpleNew( 1, dmat, cnp.NPY_INT32)             # <<<<<<<<<<<<<<
  *             cnp.ndarray[cnp.npy_complex128, ndim=1] a_val = cnp.PyArray_SimpleNew( 1, dmat, cnp.NPY_COMPLEX128)
  * 
  */
-  __pyx_t_1 = PyArray_SimpleNew(1, __pyx_v_dmat, NPY_INT32); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 337; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyArray_SimpleNew(1, __pyx_v_dmat, NPY_INT32); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 341; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 337; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 341; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_t_3 = ((PyArrayObject *)__pyx_t_1);
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
     if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_a_col.rcbuffer->pybuffer, (PyObject*)__pyx_t_3, &__Pyx_TypeInfo_nn_npy_int32, PyBUF_FORMAT| PyBUF_STRIDES, 1, 0, __pyx_stack) == -1)) {
       __pyx_v_a_col = ((PyArrayObject *)Py_None); __Pyx_INCREF(Py_None); __pyx_pybuffernd_a_col.rcbuffer->pybuffer.buf = NULL;
-      {__pyx_filename = __pyx_f[1]; __pyx_lineno = 337; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[1]; __pyx_lineno = 341; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     } else {__pyx_pybuffernd_a_col.diminfo[0].strides = __pyx_pybuffernd_a_col.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_a_col.diminfo[0].shape = __pyx_pybuffernd_a_col.rcbuffer->pybuffer.shape[0];
     }
   }
@@ -7536,22 +7566,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   __pyx_v_a_col = ((PyArrayObject *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":338
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":342
  *             cnp.ndarray[cnp.npy_int32, ndim=1] a_row = cnp.PyArray_SimpleNew( 1, dmat, cnp.NPY_INT32)
  *             cnp.ndarray[cnp.npy_int32, ndim=1] a_col = cnp.PyArray_SimpleNew( 1, dmat, cnp.NPY_INT32)
  *             cnp.ndarray[cnp.npy_complex128, ndim=1] a_val = cnp.PyArray_SimpleNew( 1, dmat, cnp.NPY_COMPLEX128)             # <<<<<<<<<<<<<<
  * 
  *             INT32_t   *pi
  */
-  __pyx_t_1 = PyArray_SimpleNew(1, __pyx_v_dmat, NPY_COMPLEX128); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 338; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyArray_SimpleNew(1, __pyx_v_dmat, NPY_COMPLEX128); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 342; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 338; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 342; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_t_4 = ((PyArrayObject *)__pyx_t_1);
   {
     __Pyx_BufFmt_StackElem __pyx_stack[2];
     if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_a_val.rcbuffer->pybuffer, (PyObject*)__pyx_t_4, &__Pyx_TypeInfo_nn_npy_complex128, PyBUF_FORMAT| PyBUF_STRIDES, 1, 0, __pyx_stack) == -1)) {
       __pyx_v_a_val = ((PyArrayObject *)Py_None); __Pyx_INCREF(Py_None); __pyx_pybuffernd_a_val.rcbuffer->pybuffer.buf = NULL;
-      {__pyx_filename = __pyx_f[1]; __pyx_lineno = 338; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[1]; __pyx_lineno = 342; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     } else {__pyx_pybuffernd_a_val.diminfo[0].strides = __pyx_pybuffernd_a_val.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_a_val.diminfo[0].shape = __pyx_pybuffernd_a_val.rcbuffer->pybuffer.shape[0];
     }
   }
@@ -7559,7 +7589,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   __pyx_v_a_val = ((PyArrayObject *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":345
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":349
  *             INT32_t   j, k, elem
  * 
  *         pi = <INT32_t *> cnp.PyArray_DATA(a_row)             # <<<<<<<<<<<<<<
@@ -7568,7 +7598,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
   __pyx_v_pi = ((__pyx_t_8cysparse_5types_14cysparse_types_INT32_t *)PyArray_DATA(((PyArrayObject *)__pyx_v_a_row)));
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":346
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":350
  * 
  *         pi = <INT32_t *> cnp.PyArray_DATA(a_row)
  *         pj = <INT32_t *> cnp.PyArray_DATA(a_col)             # <<<<<<<<<<<<<<
@@ -7577,7 +7607,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
   __pyx_v_pj = ((__pyx_t_8cysparse_5types_14cysparse_types_INT32_t *)PyArray_DATA(((PyArrayObject *)__pyx_v_a_col)));
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":347
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":351
  *         pi = <INT32_t *> cnp.PyArray_DATA(a_row)
  *         pj = <INT32_t *> cnp.PyArray_DATA(a_col)
  *         pv = <COMPLEX128_t *> cnp.PyArray_DATA(a_val)             # <<<<<<<<<<<<<<
@@ -7586,7 +7616,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
   __pyx_v_pv = ((__pyx_t_double_complex *)PyArray_DATA(((PyArrayObject *)__pyx_v_a_val)));
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":349
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":353
  *         pv = <COMPLEX128_t *> cnp.PyArray_DATA(a_val)
  * 
  *         elem = 0             # <<<<<<<<<<<<<<
@@ -7595,7 +7625,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
   __pyx_v_elem = 0;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":350
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":354
  * 
  *         elem = 0
  *         for j from 0 <= j < self.__ncol:             # <<<<<<<<<<<<<<
@@ -7605,7 +7635,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   __pyx_t_5 = __pyx_v_self->__pyx_base.__pyx_base.__pyx___ncol;
   for (__pyx_v_j = 0; __pyx_v_j < __pyx_t_5; __pyx_v_j++) {
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":351
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":355
  *         elem = 0
  *         for j from 0 <= j < self.__ncol:
  *             for k from self.ind[j] <= k < self.ind[j+1]:             # <<<<<<<<<<<<<<
@@ -7615,7 +7645,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
     __pyx_t_6 = (__pyx_v_self->ind[(__pyx_v_j + 1)]);
     for (__pyx_v_k = (__pyx_v_self->ind[__pyx_v_j]); __pyx_v_k < __pyx_t_6; __pyx_v_k++) {
 
-      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":352
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":356
  *         for j from 0 <= j < self.__ncol:
  *             for k from self.ind[j] <= k < self.ind[j+1]:
  *                 pi[ elem ] = self.row[j]             # <<<<<<<<<<<<<<
@@ -7624,7 +7654,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
       (__pyx_v_pi[__pyx_v_elem]) = (__pyx_v_self->row[__pyx_v_j]);
 
-      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":353
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":357
  *             for k from self.ind[j] <= k < self.ind[j+1]:
  *                 pi[ elem ] = self.row[j]
  *                 pj[ elem ] = j             # <<<<<<<<<<<<<<
@@ -7633,7 +7663,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
       (__pyx_v_pj[__pyx_v_elem]) = __pyx_v_j;
 
-      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":354
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":358
  *                 pi[ elem ] = self.row[j]
  *                 pj[ elem ] = j
  *                 pv[ elem ] = self.val[k]             # <<<<<<<<<<<<<<
@@ -7642,7 +7672,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
       (__pyx_v_pv[__pyx_v_elem]) = (__pyx_v_self->val[__pyx_v_k]);
 
-      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":355
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":359
  *                 pj[ elem ] = j
  *                 pv[ elem ] = self.val[k]
  *                 elem += 1             # <<<<<<<<<<<<<<
@@ -7653,7 +7683,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
     }
   }
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":357
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":361
  *                 elem += 1
  * 
  *         return (a_row, a_col, a_val)             # <<<<<<<<<<<<<<
@@ -7661,7 +7691,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  *     def diag(self, k = 0):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 357; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 361; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(((PyObject *)__pyx_v_a_row));
   PyTuple_SET_ITEM(__pyx_t_1, 0, ((PyObject *)__pyx_v_a_row));
@@ -7676,7 +7706,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":325
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":329
  *     # Common operations
  *     ####################################################################################################################
  *     def find(self):             # <<<<<<<<<<<<<<
@@ -7709,7 +7739,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   return __pyx_r;
 }
 
-/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":359
+/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":363
  *         return (a_row, a_col, a_val)
  * 
  *     def diag(self, k = 0):             # <<<<<<<<<<<<<<
@@ -7749,7 +7779,7 @@ static PyObject *__pyx_pw_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "diag") < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 359; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "diag") < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 363; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -7762,7 +7792,7 @@ static PyObject *__pyx_pw_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("diag", 0, 0, 1, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[1]; __pyx_lineno = 359; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("diag", 0, 0, 1, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[1]; __pyx_lineno = 363; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("cysparse.sparse.csc_mat_matrices.csc_mat_INT32_t_COMPLEX128_t.CSCSparseMatrix_INT32_t_COMPLEX128_t.diag", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -7806,41 +7836,41 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   __pyx_pybuffernd_diag.data = NULL;
   __pyx_pybuffernd_diag.rcbuffer = &__pyx_pybuffer_diag;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":364
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":368
  * 
  *         """
  *         if not (-self.__nrow + 1 <= k <= self.__ncol -1):             # <<<<<<<<<<<<<<
  *             raise IndexError("Wrong diagonal number (%d <= k <= %d)" % (-self.__nrow + 1, self.__ncol -1))
  * 
  */
-  __pyx_t_1 = __Pyx_PyInt_From_long(((-__pyx_v_self->__pyx_base.__pyx_base.__pyx___nrow) + 1)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 364; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyInt_From_long(((-__pyx_v_self->__pyx_base.__pyx_base.__pyx___nrow) + 1)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 368; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, __pyx_v_k, Py_LE); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 364; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, __pyx_v_k, Py_LE); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 368; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   if (__Pyx_PyObject_IsTrue(__pyx_t_2)) {
     __Pyx_DECREF(__pyx_t_2);
-    __pyx_t_3 = __Pyx_PyInt_From_long((__pyx_v_self->__pyx_base.__pyx_base.__pyx___ncol - 1)); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 364; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyInt_From_long((__pyx_v_self->__pyx_base.__pyx_base.__pyx___ncol - 1)); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 368; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_2 = PyObject_RichCompare(__pyx_v_k, __pyx_t_3, Py_LE); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 364; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = PyObject_RichCompare(__pyx_v_k, __pyx_t_3, Py_LE); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 368; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 364; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 368; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_5 = ((!__pyx_t_4) != 0);
   if (__pyx_t_5) {
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":365
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":369
  *         """
  *         if not (-self.__nrow + 1 <= k <= self.__ncol -1):
  *             raise IndexError("Wrong diagonal number (%d <= k <= %d)" % (-self.__nrow + 1, self.__ncol -1))             # <<<<<<<<<<<<<<
  * 
  *         cdef INT32_t diag_size
  */
-    __pyx_t_2 = __Pyx_PyInt_From_long(((-__pyx_v_self->__pyx_base.__pyx_base.__pyx___nrow) + 1)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 365; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyInt_From_long(((-__pyx_v_self->__pyx_base.__pyx_base.__pyx___nrow) + 1)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 369; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = __Pyx_PyInt_From_long((__pyx_v_self->__pyx_base.__pyx_base.__pyx___ncol - 1)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 365; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyInt_From_long((__pyx_v_self->__pyx_base.__pyx_base.__pyx___ncol - 1)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 369; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 365; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 369; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_2);
     __Pyx_GIVEREF(__pyx_t_2);
@@ -7848,35 +7878,35 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
     __Pyx_GIVEREF(__pyx_t_1);
     __pyx_t_2 = 0;
     __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_PyString_Format(__pyx_kp_s_Wrong_diagonal_number_d_k_d, __pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 365; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyString_Format(__pyx_kp_s_Wrong_diagonal_number_d_k_d, __pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 369; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 365; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 369; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1);
     __Pyx_GIVEREF(__pyx_t_1);
     __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_t_3, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 365; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_t_3, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 369; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 365; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 369; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":369
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":373
  *         cdef INT32_t diag_size
  * 
  *         if k == 0:             # <<<<<<<<<<<<<<
  *             diag_size = min(self.__nrow, self.__ncol)
  *         elif k > 0:
  */
-  __pyx_t_1 = PyObject_RichCompare(__pyx_v_k, __pyx_int_0, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 369; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 369; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyObject_RichCompare(__pyx_v_k, __pyx_int_0, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 373; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 373; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_5) {
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":370
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":374
  * 
  *         if k == 0:
  *             diag_size = min(self.__nrow, self.__ncol)             # <<<<<<<<<<<<<<
@@ -7894,55 +7924,55 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
     goto __pyx_L4;
   }
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":371
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":375
  *         if k == 0:
  *             diag_size = min(self.__nrow, self.__ncol)
  *         elif k > 0:             # <<<<<<<<<<<<<<
  *             diag_size = min(self.__nrow, self.__ncol - k)
  *         else:
  */
-  __pyx_t_1 = PyObject_RichCompare(__pyx_v_k, __pyx_int_0, Py_GT); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 371; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 371; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyObject_RichCompare(__pyx_v_k, __pyx_int_0, Py_GT); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 375; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 375; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_5) {
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":372
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":376
  *             diag_size = min(self.__nrow, self.__ncol)
  *         elif k > 0:
  *             diag_size = min(self.__nrow, self.__ncol - k)             # <<<<<<<<<<<<<<
  *         else:
  *             diag_size = min(self.__nrow+k, self.__ncol)
  */
-    __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->__pyx_base.__pyx_base.__pyx___ncol); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 372; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->__pyx_base.__pyx_base.__pyx___ncol); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 376; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = PyNumber_Subtract(__pyx_t_1, __pyx_v_k); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 372; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = PyNumber_Subtract(__pyx_t_1, __pyx_v_k); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 376; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_t_8 = __pyx_v_self->__pyx_base.__pyx_base.__pyx___nrow;
-    __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_t_8); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 372; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_t_8); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 376; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_9 = PyObject_RichCompare(__pyx_t_3, __pyx_t_2, Py_LT); __Pyx_XGOTREF(__pyx_t_9); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 372; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_9 = PyObject_RichCompare(__pyx_t_3, __pyx_t_2, Py_LT); __Pyx_XGOTREF(__pyx_t_9); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 376; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_9); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 372; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_9); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 376; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
     if (__pyx_t_5) {
       __Pyx_INCREF(__pyx_t_3);
       __pyx_t_1 = __pyx_t_3;
     } else {
-      __pyx_t_9 = __Pyx_PyInt_From_int(__pyx_t_8); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 372; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_9 = __Pyx_PyInt_From_int(__pyx_t_8); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 376; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_9);
       __pyx_t_1 = __pyx_t_9;
       __pyx_t_9 = 0;
     }
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_8 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_8 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 372; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_8 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_8 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 376; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_v_diag_size = __pyx_t_8;
     goto __pyx_L4;
   }
   /*else*/ {
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":374
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":378
  *             diag_size = min(self.__nrow, self.__ncol - k)
  *         else:
  *             diag_size = min(self.__nrow+k, self.__ncol)             # <<<<<<<<<<<<<<
@@ -7950,19 +7980,19 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  *         assert diag_size > 0, "Something is wrong with the diagonal size"
  */
     __pyx_t_8 = __pyx_v_self->__pyx_base.__pyx_base.__pyx___ncol;
-    __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->__pyx_base.__pyx_base.__pyx___nrow); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 374; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->__pyx_base.__pyx_base.__pyx___nrow); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 378; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = PyNumber_Add(__pyx_t_1, __pyx_v_k); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 374; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = PyNumber_Add(__pyx_t_1, __pyx_v_k); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 378; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_9 = __Pyx_PyInt_From_int(__pyx_t_8); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 374; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_9 = __Pyx_PyInt_From_int(__pyx_t_8); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 378; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_9);
-    __pyx_t_2 = PyObject_RichCompare(__pyx_t_9, __pyx_t_3, Py_LT); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 374; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = PyObject_RichCompare(__pyx_t_9, __pyx_t_3, Py_LT); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 378; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-    __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 374; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 378; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     if (__pyx_t_5) {
-      __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_t_8); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 374; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_t_8); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 378; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
       __pyx_t_1 = __pyx_t_2;
       __pyx_t_2 = 0;
@@ -7971,13 +8001,13 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
       __pyx_t_1 = __pyx_t_3;
     }
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_8 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_8 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 374; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_8 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_8 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 378; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_v_diag_size = __pyx_t_8;
   }
   __pyx_L4:;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":376
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":380
  *             diag_size = min(self.__nrow+k, self.__ncol)
  * 
  *         assert diag_size > 0, "Something is wrong with the diagonal size"             # <<<<<<<<<<<<<<
@@ -7988,12 +8018,12 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   if (unlikely(!Py_OptimizeFlag)) {
     if (unlikely(!((__pyx_v_diag_size > 0) != 0))) {
       PyErr_SetObject(PyExc_AssertionError, __pyx_kp_s_Something_is_wrong_with_the_diag);
-      {__pyx_filename = __pyx_f[1]; __pyx_lineno = 376; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[1]; __pyx_lineno = 380; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
   }
   #endif
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":380
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":384
  *         # create NumPy array
  *         cdef cnp.npy_intp dmat[1]
  *         dmat[0] = <cnp.npy_intp> diag_size             # <<<<<<<<<<<<<<
@@ -8002,22 +8032,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
   (__pyx_v_dmat[0]) = ((npy_intp)__pyx_v_diag_size);
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":383
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":387
  * 
  *         cdef:
  *             cnp.ndarray[cnp.npy_complex128, ndim=1] diag = cnp.PyArray_SimpleNew( 1, dmat, cnp.NPY_COMPLEX128)             # <<<<<<<<<<<<<<
  *             COMPLEX128_t    *pv
  *             INT32_t   i, j, k_
  */
-  __pyx_t_1 = PyArray_SimpleNew(1, __pyx_v_dmat, NPY_COMPLEX128); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 383; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyArray_SimpleNew(1, __pyx_v_dmat, NPY_COMPLEX128); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 387; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 383; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 387; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_t_10 = ((PyArrayObject *)__pyx_t_1);
   {
     __Pyx_BufFmt_StackElem __pyx_stack[2];
     if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_diag.rcbuffer->pybuffer, (PyObject*)__pyx_t_10, &__Pyx_TypeInfo_nn_npy_complex128, PyBUF_FORMAT| PyBUF_STRIDES, 1, 0, __pyx_stack) == -1)) {
       __pyx_v_diag = ((PyArrayObject *)Py_None); __Pyx_INCREF(Py_None); __pyx_pybuffernd_diag.rcbuffer->pybuffer.buf = NULL;
-      {__pyx_filename = __pyx_f[1]; __pyx_lineno = 383; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[1]; __pyx_lineno = 387; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     } else {__pyx_pybuffernd_diag.diminfo[0].strides = __pyx_pybuffernd_diag.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_diag.diminfo[0].shape = __pyx_pybuffernd_diag.rcbuffer->pybuffer.shape[0];
     }
   }
@@ -8025,7 +8055,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   __pyx_v_diag = ((PyArrayObject *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":387
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":391
  *             INT32_t   i, j, k_
  * 
  *         pv = <COMPLEX128_t *> cnp.PyArray_DATA(diag)             # <<<<<<<<<<<<<<
@@ -8034,7 +8064,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
   __pyx_v_pv = ((__pyx_t_double_complex *)PyArray_DATA(((PyArrayObject *)__pyx_v_diag)));
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":390
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":394
  * 
  *         # init NumPy array
  *         for i from 0 <= i < diag_size:             # <<<<<<<<<<<<<<
@@ -8044,7 +8074,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   __pyx_t_8 = __pyx_v_diag_size;
   for (__pyx_v_i = 0; __pyx_v_i < __pyx_t_8; __pyx_v_i++) {
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":392
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":396
  *         for i from 0 <= i < diag_size:
  * 
  *             pv[i] = 0.0 + 0.0j             # <<<<<<<<<<<<<<
@@ -8054,19 +8084,19 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
     (__pyx_v_pv[__pyx_v_i]) = __Pyx_c_sum(__pyx_t_double_complex_from_parts(0.0, 0), __pyx_t_double_complex_from_parts(0, 0.0));
   }
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":395
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":399
  * 
  * 
  *         if k >= 0:             # <<<<<<<<<<<<<<
  *             for j from 0 <= j < self.__ncol:
  *                 for k_ from self.ind[j] <= k_ < self.ind[j+1]:
  */
-  __pyx_t_1 = PyObject_RichCompare(__pyx_v_k, __pyx_int_0, Py_GE); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 395; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 395; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyObject_RichCompare(__pyx_v_k, __pyx_int_0, Py_GE); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 399; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 399; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_5) {
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":396
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":400
  * 
  *         if k >= 0:
  *             for j from 0 <= j < self.__ncol:             # <<<<<<<<<<<<<<
@@ -8076,7 +8106,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
     __pyx_t_8 = __pyx_v_self->__pyx_base.__pyx_base.__pyx___ncol;
     for (__pyx_v_j = 0; __pyx_v_j < __pyx_t_8; __pyx_v_j++) {
 
-      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":397
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":401
  *         if k >= 0:
  *             for j from 0 <= j < self.__ncol:
  *                 for k_ from self.ind[j] <= k_ < self.ind[j+1]:             # <<<<<<<<<<<<<<
@@ -8086,7 +8116,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
       __pyx_t_6 = (__pyx_v_self->ind[(__pyx_v_j + 1)]);
       for (__pyx_v_k_ = (__pyx_v_self->ind[__pyx_v_j]); __pyx_v_k_ < __pyx_t_6; __pyx_v_k_++) {
 
-        /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":398
+        /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":402
  *             for j from 0 <= j < self.__ncol:
  *                 for k_ from self.ind[j] <= k_ < self.ind[j+1]:
  *                     i = self.row[k_]             # <<<<<<<<<<<<<<
@@ -8095,28 +8125,28 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
         __pyx_v_i = (__pyx_v_self->row[__pyx_v_k_]);
 
-        /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":399
+        /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":403
  *                 for k_ from self.ind[j] <= k_ < self.ind[j+1]:
  *                     i = self.row[k_]
  *                     if i + k == j:             # <<<<<<<<<<<<<<
  *                         pv[i] = self.val[k_]
  * 
  */
-        __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_i); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 399; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_i); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 403; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_1);
-        __pyx_t_3 = PyNumber_Add(__pyx_t_1, __pyx_v_k); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 399; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_3 = PyNumber_Add(__pyx_t_1, __pyx_v_k); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 403; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_3);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-        __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_j); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 399; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_j); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 403; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_1);
-        __pyx_t_2 = PyObject_RichCompare(__pyx_t_3, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 399; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_2 = PyObject_RichCompare(__pyx_t_3, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 403; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-        __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 399; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 403; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
         if (__pyx_t_5) {
 
-          /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":400
+          /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":404
  *                     i = self.row[k_]
  *                     if i + k == j:
  *                         pv[i] = self.val[k_]             # <<<<<<<<<<<<<<
@@ -8133,7 +8163,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   }
   /*else*/ {
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":403
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":407
  * 
  *         else:  #  k < 0
  *             for j from 0 <= j < self.__ncol:             # <<<<<<<<<<<<<<
@@ -8143,7 +8173,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
     __pyx_t_8 = __pyx_v_self->__pyx_base.__pyx_base.__pyx___ncol;
     for (__pyx_v_j = 0; __pyx_v_j < __pyx_t_8; __pyx_v_j++) {
 
-      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":404
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":408
  *         else:  #  k < 0
  *             for j from 0 <= j < self.__ncol:
  *                 for k_ from self.ind[j] <= k_ < self.ind[j+1]:             # <<<<<<<<<<<<<<
@@ -8153,7 +8183,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
       __pyx_t_6 = (__pyx_v_self->ind[(__pyx_v_j + 1)]);
       for (__pyx_v_k_ = (__pyx_v_self->ind[__pyx_v_j]); __pyx_v_k_ < __pyx_t_6; __pyx_v_k_++) {
 
-        /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":405
+        /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":409
  *             for j from 0 <= j < self.__ncol:
  *                 for k_ from self.ind[j] <= k_ < self.ind[j+1]:
  *                     i = self.row[k_]             # <<<<<<<<<<<<<<
@@ -8162,28 +8192,28 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
         __pyx_v_i = (__pyx_v_self->row[__pyx_v_k_]);
 
-        /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":406
+        /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":410
  *                 for k_ from self.ind[j] <= k_ < self.ind[j+1]:
  *                     i = self.row[k_]
  *                     if i + k == j:             # <<<<<<<<<<<<<<
  *                         pv[j] = self.val[k_]
  * 
  */
-        __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_i); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 406; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_i); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 410; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_2);
-        __pyx_t_1 = PyNumber_Add(__pyx_t_2, __pyx_v_k); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 406; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_1 = PyNumber_Add(__pyx_t_2, __pyx_v_k); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 410; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-        __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_j); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 406; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_j); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 410; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_2);
-        __pyx_t_3 = PyObject_RichCompare(__pyx_t_1, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 406; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_3 = PyObject_RichCompare(__pyx_t_1, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 410; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-        __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 406; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 410; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
         if (__pyx_t_5) {
 
-          /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":407
+          /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":411
  *                     i = self.row[k_]
  *                     if i + k == j:
  *                         pv[j] = self.val[k_]             # <<<<<<<<<<<<<<
@@ -8199,7 +8229,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   }
   __pyx_L7:;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":409
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":413
  *                         pv[j] = self.val[k_]
  * 
  *         return diag             # <<<<<<<<<<<<<<
@@ -8211,7 +8241,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   __pyx_r = ((PyObject *)__pyx_v_diag);
   goto __pyx_L0;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":359
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":363
  *         return (a_row, a_col, a_val)
  * 
  *     def diag(self, k = 0):             # <<<<<<<<<<<<<<
@@ -8241,7 +8271,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   return __pyx_r;
 }
 
-/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":411
+/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":415
  *         return diag
  * 
  *     def tril(self, int k):             # <<<<<<<<<<<<<<
@@ -8261,7 +8291,7 @@ static PyObject *__pyx_pw_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("tril (wrapper)", 0);
   assert(__pyx_arg_k); {
-    __pyx_v_k = __Pyx_PyInt_As_int(__pyx_arg_k); if (unlikely((__pyx_v_k == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 411; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_k = __Pyx_PyInt_As_int(__pyx_arg_k); if (unlikely((__pyx_v_k == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 415; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -8300,7 +8330,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("tril", 0);
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":425
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":429
  * 
  *         """
  *         if k > 0:             # <<<<<<<<<<<<<<
@@ -8310,73 +8340,73 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   __pyx_t_1 = ((__pyx_v_k > 0) != 0);
   if (__pyx_t_1) {
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":426
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":430
  *         """
  *         if k > 0:
  *             raise IndexError("k-th diagonal must be <= 0 (here: k = %d)" % k)             # <<<<<<<<<<<<<<
  * 
  *         if k < -self.nrow + 1:
  */
-    __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_k); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 426; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_k); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 430; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = __Pyx_PyString_Format(__pyx_kp_s_k_th_diagonal_must_be_0_here_k_d, __pyx_t_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 426; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyString_Format(__pyx_kp_s_k_th_diagonal_must_be_0_here_k_d, __pyx_t_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 430; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 426; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 430; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
     PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_3);
     __Pyx_GIVEREF(__pyx_t_3);
     __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_t_2, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 426; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_t_2, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 430; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 426; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 430; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":428
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":432
  *             raise IndexError("k-th diagonal must be <= 0 (here: k = %d)" % k)
  * 
  *         if k < -self.nrow + 1:             # <<<<<<<<<<<<<<
  *             raise IndexError("k_th diagonal must be %d <= k <= 0 (here: k = %d)" % (-self.nrow + 1, k))
  * 
  */
-  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_k); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 428; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_k); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 432; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_nrow); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 428; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_nrow); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 432; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = PyNumber_Negative(__pyx_t_2); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 428; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = PyNumber_Negative(__pyx_t_2); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 432; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyNumber_Add(__pyx_t_4, __pyx_int_1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 428; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyNumber_Add(__pyx_t_4, __pyx_int_1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 432; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = PyObject_RichCompare(__pyx_t_3, __pyx_t_2, Py_LT); __Pyx_XGOTREF(__pyx_t_4); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 428; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = PyObject_RichCompare(__pyx_t_3, __pyx_t_2, Py_LT); __Pyx_XGOTREF(__pyx_t_4); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 432; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_4); if (unlikely(__pyx_t_1 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 428; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_4); if (unlikely(__pyx_t_1 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 432; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   if (__pyx_t_1) {
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":429
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":433
  * 
  *         if k < -self.nrow + 1:
  *             raise IndexError("k_th diagonal must be %d <= k <= 0 (here: k = %d)" % (-self.nrow + 1, k))             # <<<<<<<<<<<<<<
  * 
  *         # create internal arrays (big enough to contain all elements)
  */
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_nrow); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 429; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_nrow); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 433; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_2 = PyNumber_Negative(__pyx_t_4); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 429; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = PyNumber_Negative(__pyx_t_4); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 433; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __pyx_t_4 = PyNumber_Add(__pyx_t_2, __pyx_int_1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 429; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = PyNumber_Add(__pyx_t_2, __pyx_int_1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 433; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_k); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 429; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_k); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 433; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 429; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 433; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_4);
     __Pyx_GIVEREF(__pyx_t_4);
@@ -8384,23 +8414,23 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
     __Pyx_GIVEREF(__pyx_t_2);
     __pyx_t_4 = 0;
     __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyString_Format(__pyx_kp_s_k_th_diagonal_must_be_d_k_0_here, __pyx_t_3); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 429; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyString_Format(__pyx_kp_s_k_th_diagonal_must_be_d_k_0_here, __pyx_t_3); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 433; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 429; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 433; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_2);
     __Pyx_GIVEREF(__pyx_t_2);
     __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_t_3, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 429; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_t_3, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 433; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 429; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 433; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":433
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":437
  *         # create internal arrays (big enough to contain all elements)
  * 
  *         cdef INT32_t * ind = <INT32_t *> PyMem_Malloc((self.__ncol + 1) * sizeof(INT32_t))             # <<<<<<<<<<<<<<
@@ -8409,7 +8439,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
   __pyx_v_ind = ((__pyx_t_8cysparse_5types_14cysparse_types_INT32_t *)PyMem_Malloc(((__pyx_v_self->__pyx_base.__pyx_base.__pyx___ncol + 1) * (sizeof(__pyx_t_8cysparse_5types_14cysparse_types_INT32_t)))));
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":434
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":438
  * 
  *         cdef INT32_t * ind = <INT32_t *> PyMem_Malloc((self.__ncol + 1) * sizeof(INT32_t))
  *         if not ind:             # <<<<<<<<<<<<<<
@@ -8419,17 +8449,17 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   __pyx_t_1 = ((!(__pyx_v_ind != 0)) != 0);
   if (__pyx_t_1) {
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":435
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":439
  *         cdef INT32_t * ind = <INT32_t *> PyMem_Malloc((self.__ncol + 1) * sizeof(INT32_t))
  *         if not ind:
  *             raise MemoryError()             # <<<<<<<<<<<<<<
  * 
  *         cdef INT32_t * row = <INT32_t *> PyMem_Malloc(self.__nnz * sizeof(INT32_t))
  */
-    PyErr_NoMemory(); {__pyx_filename = __pyx_f[1]; __pyx_lineno = 435; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    PyErr_NoMemory(); {__pyx_filename = __pyx_f[1]; __pyx_lineno = 439; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":437
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":441
  *             raise MemoryError()
  * 
  *         cdef INT32_t * row = <INT32_t *> PyMem_Malloc(self.__nnz * sizeof(INT32_t))             # <<<<<<<<<<<<<<
@@ -8438,7 +8468,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
   __pyx_v_row = ((__pyx_t_8cysparse_5types_14cysparse_types_INT32_t *)PyMem_Malloc((__pyx_v_self->__pyx_base.__pyx_base.__pyx___nnz * (sizeof(__pyx_t_8cysparse_5types_14cysparse_types_INT32_t)))));
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":438
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":442
  * 
  *         cdef INT32_t * row = <INT32_t *> PyMem_Malloc(self.__nnz * sizeof(INT32_t))
  *         if not row:             # <<<<<<<<<<<<<<
@@ -8448,7 +8478,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   __pyx_t_1 = ((!(__pyx_v_row != 0)) != 0);
   if (__pyx_t_1) {
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":439
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":443
  *         cdef INT32_t * row = <INT32_t *> PyMem_Malloc(self.__nnz * sizeof(INT32_t))
  *         if not row:
  *             PyMem_Free(ind)             # <<<<<<<<<<<<<<
@@ -8457,17 +8487,17 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
     PyMem_Free(__pyx_v_ind);
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":440
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":444
  *         if not row:
  *             PyMem_Free(ind)
  *             raise MemoryError()             # <<<<<<<<<<<<<<
  * 
  *         cdef COMPLEX128_t * val = <COMPLEX128_t *> PyMem_Malloc(self.__nnz * sizeof(COMPLEX128_t))
  */
-    PyErr_NoMemory(); {__pyx_filename = __pyx_f[1]; __pyx_lineno = 440; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    PyErr_NoMemory(); {__pyx_filename = __pyx_f[1]; __pyx_lineno = 444; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":442
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":446
  *             raise MemoryError()
  * 
  *         cdef COMPLEX128_t * val = <COMPLEX128_t *> PyMem_Malloc(self.__nnz * sizeof(COMPLEX128_t))             # <<<<<<<<<<<<<<
@@ -8476,7 +8506,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
   __pyx_v_val = ((__pyx_t_double_complex *)PyMem_Malloc((__pyx_v_self->__pyx_base.__pyx_base.__pyx___nnz * (sizeof(__pyx_t_double_complex)))));
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":443
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":447
  * 
  *         cdef COMPLEX128_t * val = <COMPLEX128_t *> PyMem_Malloc(self.__nnz * sizeof(COMPLEX128_t))
  *         if not val:             # <<<<<<<<<<<<<<
@@ -8486,7 +8516,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   __pyx_t_1 = ((!(__pyx_v_val != 0)) != 0);
   if (__pyx_t_1) {
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":444
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":448
  *         cdef COMPLEX128_t * val = <COMPLEX128_t *> PyMem_Malloc(self.__nnz * sizeof(COMPLEX128_t))
  *         if not val:
  *             PyMem_Free(ind)             # <<<<<<<<<<<<<<
@@ -8495,7 +8525,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
     PyMem_Free(__pyx_v_ind);
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":445
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":449
  *         if not val:
  *             PyMem_Free(ind)
  *             PyMem_Free(row)             # <<<<<<<<<<<<<<
@@ -8504,17 +8534,17 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
     PyMem_Free(__pyx_v_row);
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":446
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":450
  *             PyMem_Free(ind)
  *             PyMem_Free(row)
  *             raise MemoryError()             # <<<<<<<<<<<<<<
  * 
  *         # populate arrays
  */
-    PyErr_NoMemory(); {__pyx_filename = __pyx_f[1]; __pyx_lineno = 446; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    PyErr_NoMemory(); {__pyx_filename = __pyx_f[1]; __pyx_lineno = 450; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":452
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":456
  *             INT32_t i, j, k_, nnz
  * 
  *         nnz = 0             # <<<<<<<<<<<<<<
@@ -8523,7 +8553,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
   __pyx_v_nnz = 0;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":453
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":457
  * 
  *         nnz = 0
  *         ind[0] = 0             # <<<<<<<<<<<<<<
@@ -8532,7 +8562,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
   (__pyx_v_ind[0]) = 0;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":455
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":459
  *         ind[0] = 0
  * 
  *         for j from 0 <= j < self.__ncol:             # <<<<<<<<<<<<<<
@@ -8542,7 +8572,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   __pyx_t_5 = __pyx_v_self->__pyx_base.__pyx_base.__pyx___ncol;
   for (__pyx_v_j = 0; __pyx_v_j < __pyx_t_5; __pyx_v_j++) {
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":456
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":460
  * 
  *         for j from 0 <= j < self.__ncol:
  *             for k_ from self.ind[j] <= k_ < self.ind[j+1]:             # <<<<<<<<<<<<<<
@@ -8552,7 +8582,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
     __pyx_t_6 = (__pyx_v_self->ind[(__pyx_v_j + 1)]);
     for (__pyx_v_k_ = (__pyx_v_self->ind[__pyx_v_j]); __pyx_v_k_ < __pyx_t_6; __pyx_v_k_++) {
 
-      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":457
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":461
  *         for j from 0 <= j < self.__ncol:
  *             for k_ from self.ind[j] <= k_ < self.ind[j+1]:
  *                 i = self.row[k_]             # <<<<<<<<<<<<<<
@@ -8561,19 +8591,19 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
       __pyx_v_i = (__pyx_v_self->row[__pyx_v_k_]);
 
-      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":458
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":462
  *             for k_ from self.ind[j] <= k_ < self.ind[j+1]:
  *                 i = self.row[k_]
  *                 v = self.val[k_]             # <<<<<<<<<<<<<<
  * 
  *                 if i >= j - k:
  */
-      __pyx_t_2 = __pyx_PyComplex_FromComplex((__pyx_v_self->val[__pyx_v_k_])); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 458; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = __pyx_PyComplex_FromComplex((__pyx_v_self->val[__pyx_v_k_])); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 462; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_XDECREF_SET(__pyx_v_v, __pyx_t_2);
       __pyx_t_2 = 0;
 
-      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":460
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":464
  *                 v = self.val[k_]
  * 
  *                 if i >= j - k:             # <<<<<<<<<<<<<<
@@ -8583,7 +8613,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
       __pyx_t_1 = ((__pyx_v_i >= (__pyx_v_j - __pyx_v_k)) != 0);
       if (__pyx_t_1) {
 
-        /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":461
+        /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":465
  * 
  *                 if i >= j - k:
  *                     row[nnz] = i             # <<<<<<<<<<<<<<
@@ -8592,17 +8622,17 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
         (__pyx_v_row[__pyx_v_nnz]) = __pyx_v_i;
 
-        /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":462
+        /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":466
  *                 if i >= j - k:
  *                     row[nnz] = i
  *                     val[nnz] = v             # <<<<<<<<<<<<<<
  *                     nnz += 1
  * 
  */
-        __pyx_t_7 = __Pyx_PyComplex_As___pyx_t_double_complex(__pyx_v_v); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 462; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_7 = __Pyx_PyComplex_As___pyx_t_double_complex(__pyx_v_v); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 466; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         (__pyx_v_val[__pyx_v_nnz]) = __pyx_t_7;
 
-        /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":463
+        /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":467
  *                     row[nnz] = i
  *                     val[nnz] = v
  *                     nnz += 1             # <<<<<<<<<<<<<<
@@ -8615,7 +8645,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
       __pyx_L12:;
     }
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":465
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":469
  *                     nnz += 1
  * 
  *             ind[j+1] = nnz             # <<<<<<<<<<<<<<
@@ -8625,7 +8655,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
     (__pyx_v_ind[(__pyx_v_j + 1)]) = __pyx_v_nnz;
   }
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":471
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":475
  *             void *temp
  * 
  *         temp = <INT32_t *> PyMem_Realloc(row, nnz * sizeof(INT32_t))             # <<<<<<<<<<<<<<
@@ -8634,7 +8664,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
   __pyx_v_temp = ((__pyx_t_8cysparse_5types_14cysparse_types_INT32_t *)PyMem_Realloc(__pyx_v_row, (__pyx_v_nnz * (sizeof(__pyx_t_8cysparse_5types_14cysparse_types_INT32_t)))));
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":472
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":476
  * 
  *         temp = <INT32_t *> PyMem_Realloc(row, nnz * sizeof(INT32_t))
  *         row = <INT32_t*>temp             # <<<<<<<<<<<<<<
@@ -8643,7 +8673,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
   __pyx_v_row = ((__pyx_t_8cysparse_5types_14cysparse_types_INT32_t *)__pyx_v_temp);
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":474
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":478
  *         row = <INT32_t*>temp
  * 
  *         temp = <COMPLEX128_t *> PyMem_Realloc(val, nnz * sizeof(COMPLEX128_t))             # <<<<<<<<<<<<<<
@@ -8652,7 +8682,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
   __pyx_v_temp = ((__pyx_t_double_complex *)PyMem_Realloc(__pyx_v_val, (__pyx_v_nnz * (sizeof(__pyx_t_double_complex)))));
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":475
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":479
  * 
  *         temp = <COMPLEX128_t *> PyMem_Realloc(val, nnz * sizeof(COMPLEX128_t))
  *         val = <COMPLEX128_t*>temp             # <<<<<<<<<<<<<<
@@ -8661,7 +8691,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
   __pyx_v_val = ((__pyx_t_double_complex *)__pyx_v_temp);
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":477
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":481
  *         val = <COMPLEX128_t*>temp
  * 
  *         return MakeCSCSparseMatrix_INT32_t_COMPLEX128_t(self.__nrow, self.__ncol, nnz, ind, row, val, is_symmetric=False, store_zeros=self.__store_zeros)             # <<<<<<<<<<<<<<
@@ -8669,13 +8699,13 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  *     def triu(self, int k):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX128_t_MakeCSCSparseMatrix_INT32_t_COMPLEX128_t(__pyx_v_self->__pyx_base.__pyx_base.__pyx___nrow, __pyx_v_self->__pyx_base.__pyx_base.__pyx___ncol, __pyx_v_nnz, __pyx_v_ind, __pyx_v_row, __pyx_v_val, 0, __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___store_zeros, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 477; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX128_t_MakeCSCSparseMatrix_INT32_t_COMPLEX128_t(__pyx_v_self->__pyx_base.__pyx_base.__pyx___nrow, __pyx_v_self->__pyx_base.__pyx_base.__pyx___ncol, __pyx_v_nnz, __pyx_v_ind, __pyx_v_row, __pyx_v_val, 0, __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___store_zeros, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 481; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":411
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":415
  *         return diag
  * 
  *     def tril(self, int k):             # <<<<<<<<<<<<<<
@@ -8697,7 +8727,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   return __pyx_r;
 }
 
-/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":479
+/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":483
  *         return MakeCSCSparseMatrix_INT32_t_COMPLEX128_t(self.__nrow, self.__ncol, nnz, ind, row, val, is_symmetric=False, store_zeros=self.__store_zeros)
  * 
  *     def triu(self, int k):             # <<<<<<<<<<<<<<
@@ -8717,7 +8747,7 @@ static PyObject *__pyx_pw_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("triu (wrapper)", 0);
   assert(__pyx_arg_k); {
-    __pyx_v_k = __Pyx_PyInt_As_int(__pyx_arg_k); if (unlikely((__pyx_v_k == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 479; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_k = __Pyx_PyInt_As_int(__pyx_arg_k); if (unlikely((__pyx_v_k == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 483; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -8759,7 +8789,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("triu", 0);
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":493
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":497
  * 
  *         """
  *         if k < 0:             # <<<<<<<<<<<<<<
@@ -8769,70 +8799,70 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   __pyx_t_1 = ((__pyx_v_k < 0) != 0);
   if (__pyx_t_1) {
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":494
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":498
  *         """
  *         if k < 0:
  *             raise IndexError("k-th diagonal must be >= 0 (here: k = %d)" % k)             # <<<<<<<<<<<<<<
  * 
  *         if k > self.ncol - 1:
  */
-    __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_k); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 494; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_k); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 498; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = __Pyx_PyString_Format(__pyx_kp_s_k_th_diagonal_must_be_0_here_k_d_2, __pyx_t_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 494; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyString_Format(__pyx_kp_s_k_th_diagonal_must_be_0_here_k_d_2, __pyx_t_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 498; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 494; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 498; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
     PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_3);
     __Pyx_GIVEREF(__pyx_t_3);
     __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_t_2, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 494; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_t_2, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 498; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 494; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 498; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":496
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":500
  *             raise IndexError("k-th diagonal must be >= 0 (here: k = %d)" % k)
  * 
  *         if k > self.ncol - 1:             # <<<<<<<<<<<<<<
  *             raise IndexError("k_th diagonal must be 0 <= k <= %d (here: k = %d)" % (-self.ncol - 1, k))
  * 
  */
-  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_k); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 496; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_k); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 500; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_ncol); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 496; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_ncol); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 500; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = PyNumber_Subtract(__pyx_t_2, __pyx_int_1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 496; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = PyNumber_Subtract(__pyx_t_2, __pyx_int_1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 500; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyObject_RichCompare(__pyx_t_3, __pyx_t_4, Py_GT); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 496; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyObject_RichCompare(__pyx_t_3, __pyx_t_4, Py_GT); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 500; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_1 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 496; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_1 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 500; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_1) {
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":497
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":501
  * 
  *         if k > self.ncol - 1:
  *             raise IndexError("k_th diagonal must be 0 <= k <= %d (here: k = %d)" % (-self.ncol - 1, k))             # <<<<<<<<<<<<<<
  * 
  *         # create internal arrays (big enough to contain all elements)
  */
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_ncol); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 497; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_ncol); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 501; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_4 = PyNumber_Negative(__pyx_t_2); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 497; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = PyNumber_Negative(__pyx_t_2); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 501; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = PyNumber_Subtract(__pyx_t_4, __pyx_int_1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 497; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = PyNumber_Subtract(__pyx_t_4, __pyx_int_1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 501; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_k); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 497; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_k); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 501; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 497; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 501; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_2);
     __Pyx_GIVEREF(__pyx_t_2);
@@ -8840,23 +8870,23 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
     __Pyx_GIVEREF(__pyx_t_4);
     __pyx_t_2 = 0;
     __pyx_t_4 = 0;
-    __pyx_t_4 = __Pyx_PyString_Format(__pyx_kp_s_k_th_diagonal_must_be_0_k_d_here, __pyx_t_3); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 497; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyString_Format(__pyx_kp_s_k_th_diagonal_must_be_0_k_d_here, __pyx_t_3); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 501; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 497; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 501; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_4);
     __Pyx_GIVEREF(__pyx_t_4);
     __pyx_t_4 = 0;
-    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_t_3, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 497; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_t_3, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 501; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_Raise(__pyx_t_4, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 497; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 501; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":501
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":505
  *         # create internal arrays (big enough to contain all elements)
  * 
  *         cdef INT32_t * ind = <INT32_t *> PyMem_Malloc((self.__ncol + 1) * sizeof(INT32_t))             # <<<<<<<<<<<<<<
@@ -8865,7 +8895,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
   __pyx_v_ind = ((__pyx_t_8cysparse_5types_14cysparse_types_INT32_t *)PyMem_Malloc(((__pyx_v_self->__pyx_base.__pyx_base.__pyx___ncol + 1) * (sizeof(__pyx_t_8cysparse_5types_14cysparse_types_INT32_t)))));
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":502
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":506
  * 
  *         cdef INT32_t * ind = <INT32_t *> PyMem_Malloc((self.__ncol + 1) * sizeof(INT32_t))
  *         if not ind:             # <<<<<<<<<<<<<<
@@ -8875,17 +8905,17 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   __pyx_t_1 = ((!(__pyx_v_ind != 0)) != 0);
   if (__pyx_t_1) {
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":503
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":507
  *         cdef INT32_t * ind = <INT32_t *> PyMem_Malloc((self.__ncol + 1) * sizeof(INT32_t))
  *         if not ind:
  *             raise MemoryError()             # <<<<<<<<<<<<<<
  * 
  *         cdef INT32_t * row = <INT32_t *> PyMem_Malloc(self.__nnz * sizeof(INT32_t))
  */
-    PyErr_NoMemory(); {__pyx_filename = __pyx_f[1]; __pyx_lineno = 503; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    PyErr_NoMemory(); {__pyx_filename = __pyx_f[1]; __pyx_lineno = 507; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":505
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":509
  *             raise MemoryError()
  * 
  *         cdef INT32_t * row = <INT32_t *> PyMem_Malloc(self.__nnz * sizeof(INT32_t))             # <<<<<<<<<<<<<<
@@ -8894,7 +8924,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
   __pyx_v_row = ((__pyx_t_8cysparse_5types_14cysparse_types_INT32_t *)PyMem_Malloc((__pyx_v_self->__pyx_base.__pyx_base.__pyx___nnz * (sizeof(__pyx_t_8cysparse_5types_14cysparse_types_INT32_t)))));
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":506
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":510
  * 
  *         cdef INT32_t * row = <INT32_t *> PyMem_Malloc(self.__nnz * sizeof(INT32_t))
  *         if not row:             # <<<<<<<<<<<<<<
@@ -8904,7 +8934,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   __pyx_t_1 = ((!(__pyx_v_row != 0)) != 0);
   if (__pyx_t_1) {
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":507
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":511
  *         cdef INT32_t * row = <INT32_t *> PyMem_Malloc(self.__nnz * sizeof(INT32_t))
  *         if not row:
  *             PyMem_Free(ind)             # <<<<<<<<<<<<<<
@@ -8913,17 +8943,17 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
     PyMem_Free(__pyx_v_ind);
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":508
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":512
  *         if not row:
  *             PyMem_Free(ind)
  *             raise MemoryError()             # <<<<<<<<<<<<<<
  * 
  *         cdef COMPLEX128_t * val = <COMPLEX128_t *> PyMem_Malloc(self.__nnz * sizeof(COMPLEX128_t))
  */
-    PyErr_NoMemory(); {__pyx_filename = __pyx_f[1]; __pyx_lineno = 508; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    PyErr_NoMemory(); {__pyx_filename = __pyx_f[1]; __pyx_lineno = 512; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":510
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":514
  *             raise MemoryError()
  * 
  *         cdef COMPLEX128_t * val = <COMPLEX128_t *> PyMem_Malloc(self.__nnz * sizeof(COMPLEX128_t))             # <<<<<<<<<<<<<<
@@ -8932,7 +8962,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
   __pyx_v_val = ((__pyx_t_double_complex *)PyMem_Malloc((__pyx_v_self->__pyx_base.__pyx_base.__pyx___nnz * (sizeof(__pyx_t_double_complex)))));
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":511
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":515
  * 
  *         cdef COMPLEX128_t * val = <COMPLEX128_t *> PyMem_Malloc(self.__nnz * sizeof(COMPLEX128_t))
  *         if not val:             # <<<<<<<<<<<<<<
@@ -8942,7 +8972,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   __pyx_t_1 = ((!(__pyx_v_val != 0)) != 0);
   if (__pyx_t_1) {
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":512
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":516
  *         cdef COMPLEX128_t * val = <COMPLEX128_t *> PyMem_Malloc(self.__nnz * sizeof(COMPLEX128_t))
  *         if not val:
  *             PyMem_Free(ind)             # <<<<<<<<<<<<<<
@@ -8951,7 +8981,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
     PyMem_Free(__pyx_v_ind);
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":513
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":517
  *         if not val:
  *             PyMem_Free(ind)
  *             PyMem_Free(row)             # <<<<<<<<<<<<<<
@@ -8960,17 +8990,17 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
     PyMem_Free(__pyx_v_row);
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":514
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":518
  *             PyMem_Free(ind)
  *             PyMem_Free(row)
  *             raise MemoryError()             # <<<<<<<<<<<<<<
  * 
  *         # populate arrays
  */
-    PyErr_NoMemory(); {__pyx_filename = __pyx_f[1]; __pyx_lineno = 514; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    PyErr_NoMemory(); {__pyx_filename = __pyx_f[1]; __pyx_lineno = 518; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":520
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":524
  *             INT32_t i, j, k_, nnz
  * 
  *         nnz = 0             # <<<<<<<<<<<<<<
@@ -8979,7 +9009,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
   __pyx_v_nnz = 0;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":521
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":525
  * 
  *         nnz = 0
  *         ind[0] = 0             # <<<<<<<<<<<<<<
@@ -8988,7 +9018,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
   (__pyx_v_ind[0]) = 0;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":528
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":532
  *         cdef COMPLEX128_t  * csr_val
  * 
  *         if self.__is_symmetric:             # <<<<<<<<<<<<<<
@@ -8998,7 +9028,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   __pyx_t_1 = (__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___is_symmetric != 0);
   if (__pyx_t_1) {
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":530
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":534
  *         if self.__is_symmetric:
  *             # Special (and annoying) case: we first create a CSR and then translate it to CSC
  *             csr_ind = <INT32_t *> PyMem_Malloc((self.__nrow + 1) * sizeof(INT32_t))             # <<<<<<<<<<<<<<
@@ -9007,7 +9037,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
     __pyx_v_csr_ind = ((__pyx_t_8cysparse_5types_14cysparse_types_INT32_t *)PyMem_Malloc(((__pyx_v_self->__pyx_base.__pyx_base.__pyx___nrow + 1) * (sizeof(__pyx_t_8cysparse_5types_14cysparse_types_INT32_t)))));
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":531
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":535
  *             # Special (and annoying) case: we first create a CSR and then translate it to CSC
  *             csr_ind = <INT32_t *> PyMem_Malloc((self.__nrow + 1) * sizeof(INT32_t))
  *             if not csr_ind:             # <<<<<<<<<<<<<<
@@ -9017,7 +9047,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
     __pyx_t_1 = ((!(__pyx_v_csr_ind != 0)) != 0);
     if (__pyx_t_1) {
 
-      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":532
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":536
  *             csr_ind = <INT32_t *> PyMem_Malloc((self.__nrow + 1) * sizeof(INT32_t))
  *             if not csr_ind:
  *                 PyMem_Free(ind)             # <<<<<<<<<<<<<<
@@ -9026,7 +9056,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
       PyMem_Free(__pyx_v_ind);
 
-      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":533
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":537
  *             if not csr_ind:
  *                 PyMem_Free(ind)
  *                 PyMem_Free(row)             # <<<<<<<<<<<<<<
@@ -9035,7 +9065,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
       PyMem_Free(__pyx_v_row);
 
-      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":534
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":538
  *                 PyMem_Free(ind)
  *                 PyMem_Free(row)
  *                 PyMem_Free(val)             # <<<<<<<<<<<<<<
@@ -9044,17 +9074,17 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
       PyMem_Free(__pyx_v_val);
 
-      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":536
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":540
  *                 PyMem_Free(val)
  * 
  *                 raise MemoryError()             # <<<<<<<<<<<<<<
  * 
  *             csr_col = <INT32_t *> PyMem_Malloc(self.__nnz * sizeof(INT32_t))
  */
-      PyErr_NoMemory(); {__pyx_filename = __pyx_f[1]; __pyx_lineno = 536; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      PyErr_NoMemory(); {__pyx_filename = __pyx_f[1]; __pyx_lineno = 540; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":538
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":542
  *                 raise MemoryError()
  * 
  *             csr_col = <INT32_t *> PyMem_Malloc(self.__nnz * sizeof(INT32_t))             # <<<<<<<<<<<<<<
@@ -9063,7 +9093,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
     __pyx_v_csr_col = ((__pyx_t_8cysparse_5types_14cysparse_types_INT32_t *)PyMem_Malloc((__pyx_v_self->__pyx_base.__pyx_base.__pyx___nnz * (sizeof(__pyx_t_8cysparse_5types_14cysparse_types_INT32_t)))));
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":539
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":543
  * 
  *             csr_col = <INT32_t *> PyMem_Malloc(self.__nnz * sizeof(INT32_t))
  *             if not csr_col:             # <<<<<<<<<<<<<<
@@ -9073,7 +9103,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
     __pyx_t_1 = ((!(__pyx_v_csr_col != 0)) != 0);
     if (__pyx_t_1) {
 
-      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":540
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":544
  *             csr_col = <INT32_t *> PyMem_Malloc(self.__nnz * sizeof(INT32_t))
  *             if not csr_col:
  *                 PyMem_Free(ind)             # <<<<<<<<<<<<<<
@@ -9082,7 +9112,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
       PyMem_Free(__pyx_v_ind);
 
-      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":541
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":545
  *             if not csr_col:
  *                 PyMem_Free(ind)
  *                 PyMem_Free(row)             # <<<<<<<<<<<<<<
@@ -9091,7 +9121,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
       PyMem_Free(__pyx_v_row);
 
-      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":542
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":546
  *                 PyMem_Free(ind)
  *                 PyMem_Free(row)
  *                 PyMem_Free(val)             # <<<<<<<<<<<<<<
@@ -9100,7 +9130,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
       PyMem_Free(__pyx_v_val);
 
-      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":544
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":548
  *                 PyMem_Free(val)
  * 
  *                 PyMem_Free(csr_ind)             # <<<<<<<<<<<<<<
@@ -9109,17 +9139,17 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
       PyMem_Free(__pyx_v_csr_ind);
 
-      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":545
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":549
  * 
  *                 PyMem_Free(csr_ind)
  *                 raise MemoryError()             # <<<<<<<<<<<<<<
  * 
  *             csr_val = <COMPLEX128_t *> PyMem_Malloc(self.__nnz * sizeof(COMPLEX128_t))
  */
-      PyErr_NoMemory(); {__pyx_filename = __pyx_f[1]; __pyx_lineno = 545; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      PyErr_NoMemory(); {__pyx_filename = __pyx_f[1]; __pyx_lineno = 549; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":547
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":551
  *                 raise MemoryError()
  * 
  *             csr_val = <COMPLEX128_t *> PyMem_Malloc(self.__nnz * sizeof(COMPLEX128_t))             # <<<<<<<<<<<<<<
@@ -9128,7 +9158,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
     __pyx_v_csr_val = ((__pyx_t_double_complex *)PyMem_Malloc((__pyx_v_self->__pyx_base.__pyx_base.__pyx___nnz * (sizeof(__pyx_t_double_complex)))));
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":548
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":552
  * 
  *             csr_val = <COMPLEX128_t *> PyMem_Malloc(self.__nnz * sizeof(COMPLEX128_t))
  *             if not csr_val:             # <<<<<<<<<<<<<<
@@ -9138,7 +9168,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
     __pyx_t_1 = ((!(__pyx_v_csr_val != 0)) != 0);
     if (__pyx_t_1) {
 
-      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":549
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":553
  *             csr_val = <COMPLEX128_t *> PyMem_Malloc(self.__nnz * sizeof(COMPLEX128_t))
  *             if not csr_val:
  *                 PyMem_Free(ind)             # <<<<<<<<<<<<<<
@@ -9147,7 +9177,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
       PyMem_Free(__pyx_v_ind);
 
-      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":550
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":554
  *             if not csr_val:
  *                 PyMem_Free(ind)
  *                 PyMem_Free(row)             # <<<<<<<<<<<<<<
@@ -9156,7 +9186,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
       PyMem_Free(__pyx_v_row);
 
-      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":551
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":555
  *                 PyMem_Free(ind)
  *                 PyMem_Free(row)
  *                 PyMem_Free(val)             # <<<<<<<<<<<<<<
@@ -9165,7 +9195,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
       PyMem_Free(__pyx_v_val);
 
-      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":553
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":557
  *                 PyMem_Free(val)
  * 
  *                 PyMem_Free(csr_ind)             # <<<<<<<<<<<<<<
@@ -9174,7 +9204,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
       PyMem_Free(__pyx_v_csr_ind);
 
-      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":554
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":558
  * 
  *                 PyMem_Free(csr_ind)
  *                 PyMem_Free(csr_col)             # <<<<<<<<<<<<<<
@@ -9183,17 +9213,17 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
       PyMem_Free(__pyx_v_csr_col);
 
-      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":555
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":559
  *                 PyMem_Free(csr_ind)
  *                 PyMem_Free(csr_col)
  *                 raise MemoryError()             # <<<<<<<<<<<<<<
  * 
  *             csr_ind[0] = 0
  */
-      PyErr_NoMemory(); {__pyx_filename = __pyx_f[1]; __pyx_lineno = 555; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      PyErr_NoMemory(); {__pyx_filename = __pyx_f[1]; __pyx_lineno = 559; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":557
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":561
  *                 raise MemoryError()
  * 
  *             csr_ind[0] = 0             # <<<<<<<<<<<<<<
@@ -9202,7 +9232,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
     (__pyx_v_csr_ind[0]) = 0;
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":559
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":563
  *             csr_ind[0] = 0
  * 
  *             for j from 0 <= j < self.__ncol:             # <<<<<<<<<<<<<<
@@ -9212,7 +9242,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
     __pyx_t_5 = __pyx_v_self->__pyx_base.__pyx_base.__pyx___ncol;
     for (__pyx_v_j = 0; __pyx_v_j < __pyx_t_5; __pyx_v_j++) {
 
-      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":560
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":564
  * 
  *             for j from 0 <= j < self.__ncol:
  *                 for k_ from self.ind[j] <= k_ < self.ind[j+1]:             # <<<<<<<<<<<<<<
@@ -9222,7 +9252,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
       __pyx_t_6 = (__pyx_v_self->ind[(__pyx_v_j + 1)]);
       for (__pyx_v_k_ = (__pyx_v_self->ind[__pyx_v_j]); __pyx_v_k_ < __pyx_t_6; __pyx_v_k_++) {
 
-        /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":561
+        /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":565
  *             for j from 0 <= j < self.__ncol:
  *                 for k_ from self.ind[j] <= k_ < self.ind[j+1]:
  *                     i = self.row[k_]             # <<<<<<<<<<<<<<
@@ -9231,19 +9261,19 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
         __pyx_v_i = (__pyx_v_self->row[__pyx_v_k_]);
 
-        /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":562
+        /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":566
  *                 for k_ from self.ind[j] <= k_ < self.ind[j+1]:
  *                     i = self.row[k_]
  *                     v = self.val[k_]             # <<<<<<<<<<<<<<
  * 
  *                     if i >= j + k:
  */
-        __pyx_t_4 = __pyx_PyComplex_FromComplex((__pyx_v_self->val[__pyx_v_k_])); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 562; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_4 = __pyx_PyComplex_FromComplex((__pyx_v_self->val[__pyx_v_k_])); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 566; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_4);
         __Pyx_XDECREF_SET(__pyx_v_v, __pyx_t_4);
         __pyx_t_4 = 0;
 
-        /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":564
+        /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":568
  *                     v = self.val[k_]
  * 
  *                     if i >= j + k:             # <<<<<<<<<<<<<<
@@ -9253,7 +9283,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
         __pyx_t_1 = ((__pyx_v_i >= (__pyx_v_j + __pyx_v_k)) != 0);
         if (__pyx_t_1) {
 
-          /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":565
+          /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":569
  * 
  *                     if i >= j + k:
  *                         csr_col[nnz] = i             # <<<<<<<<<<<<<<
@@ -9262,17 +9292,17 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
           (__pyx_v_csr_col[__pyx_v_nnz]) = __pyx_v_i;
 
-          /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":566
+          /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":570
  *                     if i >= j + k:
  *                         csr_col[nnz] = i
  *                         csr_val[nnz] = v             # <<<<<<<<<<<<<<
  *                         nnz += 1
  * 
  */
-          __pyx_t_7 = __Pyx_PyComplex_As___pyx_t_double_complex(__pyx_v_v); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 566; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_7 = __Pyx_PyComplex_As___pyx_t_double_complex(__pyx_v_v); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 570; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           (__pyx_v_csr_val[__pyx_v_nnz]) = __pyx_t_7;
 
-          /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":567
+          /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":571
  *                         csr_col[nnz] = i
  *                         csr_val[nnz] = v
  *                         nnz += 1             # <<<<<<<<<<<<<<
@@ -9285,7 +9315,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
         __pyx_L16:;
       }
 
-      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":569
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":573
  *                         nnz += 1
  * 
  *                 csr_ind[j+1] = nnz             # <<<<<<<<<<<<<<
@@ -9295,18 +9325,18 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
       (__pyx_v_csr_ind[(__pyx_v_j + 1)]) = __pyx_v_nnz;
     }
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":571
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":575
  *                 csr_ind[j+1] = nnz
  * 
  *             csr_to_csc_kernel_INT32_t_COMPLEX128_t(self.__nrow, self.__ncol, nnz,             # <<<<<<<<<<<<<<
  *                                       csr_ind, csr_col, csr_val,
  *                                       ind, row, val)
  */
-    __pyx_t_4 = __pyx_f_8cysparse_6sparse_12sparse_utils_7generic_40matrix_translations_INT32_t_COMPLEX128_t_csr_to_csc_kernel_INT32_t_COMPLEX128_t(__pyx_v_self->__pyx_base.__pyx_base.__pyx___nrow, __pyx_v_self->__pyx_base.__pyx_base.__pyx___ncol, __pyx_v_nnz, __pyx_v_csr_ind, __pyx_v_csr_col, __pyx_v_csr_val, __pyx_v_ind, __pyx_v_row, __pyx_v_val); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 571; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __pyx_f_8cysparse_6sparse_12sparse_utils_7generic_40matrix_translations_INT32_t_COMPLEX128_t_csr_to_csc_kernel_INT32_t_COMPLEX128_t(__pyx_v_self->__pyx_base.__pyx_base.__pyx___nrow, __pyx_v_self->__pyx_base.__pyx_base.__pyx___ncol, __pyx_v_nnz, __pyx_v_csr_ind, __pyx_v_csr_col, __pyx_v_csr_val, __pyx_v_ind, __pyx_v_row, __pyx_v_val); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 575; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":576
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":580
  * 
  *             # erase temp arrays
  *             PyMem_Free(csr_ind)             # <<<<<<<<<<<<<<
@@ -9315,7 +9345,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
     PyMem_Free(__pyx_v_csr_ind);
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":577
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":581
  *             # erase temp arrays
  *             PyMem_Free(csr_ind)
  *             PyMem_Free(csr_col)             # <<<<<<<<<<<<<<
@@ -9324,7 +9354,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
     PyMem_Free(__pyx_v_csr_col);
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":578
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":582
  *             PyMem_Free(csr_ind)
  *             PyMem_Free(csr_col)
  *             PyMem_Free(csr_val)             # <<<<<<<<<<<<<<
@@ -9336,7 +9366,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   }
   /*else*/ {
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":581
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":585
  * 
  *         else:  # not symmetric
  *             for j from 0 <= j < self.__ncol:             # <<<<<<<<<<<<<<
@@ -9346,7 +9376,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
     __pyx_t_5 = __pyx_v_self->__pyx_base.__pyx_base.__pyx___ncol;
     for (__pyx_v_j = 0; __pyx_v_j < __pyx_t_5; __pyx_v_j++) {
 
-      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":582
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":586
  *         else:  # not symmetric
  *             for j from 0 <= j < self.__ncol:
  *                 for k_ from self.ind[j] <= k_ < self.ind[j+1]:             # <<<<<<<<<<<<<<
@@ -9356,7 +9386,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
       __pyx_t_6 = (__pyx_v_self->ind[(__pyx_v_j + 1)]);
       for (__pyx_v_k_ = (__pyx_v_self->ind[__pyx_v_j]); __pyx_v_k_ < __pyx_t_6; __pyx_v_k_++) {
 
-        /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":583
+        /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":587
  *             for j from 0 <= j < self.__ncol:
  *                 for k_ from self.ind[j] <= k_ < self.ind[j+1]:
  *                     i = self.row[k_]             # <<<<<<<<<<<<<<
@@ -9365,19 +9395,19 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
         __pyx_v_i = (__pyx_v_self->row[__pyx_v_k_]);
 
-        /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":584
+        /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":588
  *                 for k_ from self.ind[j] <= k_ < self.ind[j+1]:
  *                     i = self.row[k_]
  *                     v = self.val[k_]             # <<<<<<<<<<<<<<
  * 
  *                     if i <= j - k:
  */
-        __pyx_t_4 = __pyx_PyComplex_FromComplex((__pyx_v_self->val[__pyx_v_k_])); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 584; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_4 = __pyx_PyComplex_FromComplex((__pyx_v_self->val[__pyx_v_k_])); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 588; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_4);
         __Pyx_XDECREF_SET(__pyx_v_v, __pyx_t_4);
         __pyx_t_4 = 0;
 
-        /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":586
+        /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":590
  *                     v = self.val[k_]
  * 
  *                     if i <= j - k:             # <<<<<<<<<<<<<<
@@ -9387,7 +9417,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
         __pyx_t_1 = ((__pyx_v_i <= (__pyx_v_j - __pyx_v_k)) != 0);
         if (__pyx_t_1) {
 
-          /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":587
+          /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":591
  * 
  *                     if i <= j - k:
  *                         row[nnz] = i             # <<<<<<<<<<<<<<
@@ -9396,17 +9426,17 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
           (__pyx_v_row[__pyx_v_nnz]) = __pyx_v_i;
 
-          /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":588
+          /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":592
  *                     if i <= j - k:
  *                         row[nnz] = i
  *                         val[nnz] = v             # <<<<<<<<<<<<<<
  *                         nnz += 1
  * 
  */
-          __pyx_t_7 = __Pyx_PyComplex_As___pyx_t_double_complex(__pyx_v_v); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 588; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_7 = __Pyx_PyComplex_As___pyx_t_double_complex(__pyx_v_v); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 592; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           (__pyx_v_val[__pyx_v_nnz]) = __pyx_t_7;
 
-          /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":589
+          /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":593
  *                         row[nnz] = i
  *                         val[nnz] = v
  *                         nnz += 1             # <<<<<<<<<<<<<<
@@ -9419,7 +9449,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
         __pyx_L21:;
       }
 
-      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":591
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":595
  *                         nnz += 1
  * 
  *                 ind[j+1] = nnz             # <<<<<<<<<<<<<<
@@ -9431,7 +9461,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   }
   __pyx_L8:;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":597
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":601
  *             void *temp
  * 
  *         temp = <INT32_t *> PyMem_Realloc(row, nnz * sizeof(INT32_t))             # <<<<<<<<<<<<<<
@@ -9440,7 +9470,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
   __pyx_v_temp = ((__pyx_t_8cysparse_5types_14cysparse_types_INT32_t *)PyMem_Realloc(__pyx_v_row, (__pyx_v_nnz * (sizeof(__pyx_t_8cysparse_5types_14cysparse_types_INT32_t)))));
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":598
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":602
  * 
  *         temp = <INT32_t *> PyMem_Realloc(row, nnz * sizeof(INT32_t))
  *         row = <INT32_t*>temp             # <<<<<<<<<<<<<<
@@ -9449,7 +9479,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
   __pyx_v_row = ((__pyx_t_8cysparse_5types_14cysparse_types_INT32_t *)__pyx_v_temp);
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":600
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":604
  *         row = <INT32_t*>temp
  * 
  *         temp = <COMPLEX128_t *> PyMem_Realloc(val, nnz * sizeof(COMPLEX128_t))             # <<<<<<<<<<<<<<
@@ -9458,7 +9488,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
   __pyx_v_temp = ((__pyx_t_double_complex *)PyMem_Realloc(__pyx_v_val, (__pyx_v_nnz * (sizeof(__pyx_t_double_complex)))));
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":601
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":605
  * 
  *         temp = <COMPLEX128_t *> PyMem_Realloc(val, nnz * sizeof(COMPLEX128_t))
  *         val = <COMPLEX128_t*>temp             # <<<<<<<<<<<<<<
@@ -9467,7 +9497,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
   __pyx_v_val = ((__pyx_t_double_complex *)__pyx_v_temp);
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":603
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":607
  *         val = <COMPLEX128_t*>temp
  * 
  *         return MakeCSCSparseMatrix_INT32_t_COMPLEX128_t(self.__nrow, self.__ncol, nnz, ind, row, val, is_symmetric=False, store_zeros=self.__store_zeros)             # <<<<<<<<<<<<<<
@@ -9475,13 +9505,13 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  *     def to_csr(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_4 = __pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX128_t_MakeCSCSparseMatrix_INT32_t_COMPLEX128_t(__pyx_v_self->__pyx_base.__pyx_base.__pyx___nrow, __pyx_v_self->__pyx_base.__pyx_base.__pyx___ncol, __pyx_v_nnz, __pyx_v_ind, __pyx_v_row, __pyx_v_val, 0, __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___store_zeros, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 603; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX128_t_MakeCSCSparseMatrix_INT32_t_COMPLEX128_t(__pyx_v_self->__pyx_base.__pyx_base.__pyx___nrow, __pyx_v_self->__pyx_base.__pyx_base.__pyx___ncol, __pyx_v_nnz, __pyx_v_ind, __pyx_v_row, __pyx_v_val, 0, __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___store_zeros, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 607; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_r = __pyx_t_4;
   __pyx_t_4 = 0;
   goto __pyx_L0;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":479
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":483
  *         return MakeCSCSparseMatrix_INT32_t_COMPLEX128_t(self.__nrow, self.__ncol, nnz, ind, row, val, is_symmetric=False, store_zeros=self.__store_zeros)
  * 
  *     def triu(self, int k):             # <<<<<<<<<<<<<<
@@ -9503,7 +9533,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   return __pyx_r;
 }
 
-/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":605
+/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":609
  *         return MakeCSCSparseMatrix_INT32_t_COMPLEX128_t(self.__nrow, self.__ncol, nnz, ind, row, val, is_symmetric=False, store_zeros=self.__store_zeros)
  * 
  *     def to_csr(self):             # <<<<<<<<<<<<<<
@@ -9539,7 +9569,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("to_csr", 0);
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":611
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":615
  *         """
  *         # create CSR internal arrays: ind, col and val
  *         cdef INT32_t * ind = <INT32_t *> PyMem_Malloc((self.__nrow + 1) * sizeof(INT32_t))             # <<<<<<<<<<<<<<
@@ -9548,7 +9578,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
   __pyx_v_ind = ((__pyx_t_8cysparse_5types_14cysparse_types_INT32_t *)PyMem_Malloc(((__pyx_v_self->__pyx_base.__pyx_base.__pyx___nrow + 1) * (sizeof(__pyx_t_8cysparse_5types_14cysparse_types_INT32_t)))));
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":612
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":616
  *         # create CSR internal arrays: ind, col and val
  *         cdef INT32_t * ind = <INT32_t *> PyMem_Malloc((self.__nrow + 1) * sizeof(INT32_t))
  *         if not ind:             # <<<<<<<<<<<<<<
@@ -9558,17 +9588,17 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   __pyx_t_1 = ((!(__pyx_v_ind != 0)) != 0);
   if (__pyx_t_1) {
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":613
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":617
  *         cdef INT32_t * ind = <INT32_t *> PyMem_Malloc((self.__nrow + 1) * sizeof(INT32_t))
  *         if not ind:
  *             raise MemoryError()             # <<<<<<<<<<<<<<
  * 
  *         cdef INT32_t * col = <INT32_t *> PyMem_Malloc(self.__nnz * sizeof(INT32_t))
  */
-    PyErr_NoMemory(); {__pyx_filename = __pyx_f[1]; __pyx_lineno = 613; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    PyErr_NoMemory(); {__pyx_filename = __pyx_f[1]; __pyx_lineno = 617; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":615
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":619
  *             raise MemoryError()
  * 
  *         cdef INT32_t * col = <INT32_t *> PyMem_Malloc(self.__nnz * sizeof(INT32_t))             # <<<<<<<<<<<<<<
@@ -9577,7 +9607,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
   __pyx_v_col = ((__pyx_t_8cysparse_5types_14cysparse_types_INT32_t *)PyMem_Malloc((__pyx_v_self->__pyx_base.__pyx_base.__pyx___nnz * (sizeof(__pyx_t_8cysparse_5types_14cysparse_types_INT32_t)))));
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":616
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":620
  * 
  *         cdef INT32_t * col = <INT32_t *> PyMem_Malloc(self.__nnz * sizeof(INT32_t))
  *         if not col:             # <<<<<<<<<<<<<<
@@ -9587,7 +9617,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   __pyx_t_1 = ((!(__pyx_v_col != 0)) != 0);
   if (__pyx_t_1) {
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":617
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":621
  *         cdef INT32_t * col = <INT32_t *> PyMem_Malloc(self.__nnz * sizeof(INT32_t))
  *         if not col:
  *             PyMem_Free(ind)             # <<<<<<<<<<<<<<
@@ -9596,17 +9626,17 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
     PyMem_Free(__pyx_v_ind);
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":618
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":622
  *         if not col:
  *             PyMem_Free(ind)
  *             raise MemoryError()             # <<<<<<<<<<<<<<
  * 
  *         cdef COMPLEX128_t * val = <COMPLEX128_t *> PyMem_Malloc(self.__nnz * sizeof(COMPLEX128_t))
  */
-    PyErr_NoMemory(); {__pyx_filename = __pyx_f[1]; __pyx_lineno = 618; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    PyErr_NoMemory(); {__pyx_filename = __pyx_f[1]; __pyx_lineno = 622; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":620
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":624
  *             raise MemoryError()
  * 
  *         cdef COMPLEX128_t * val = <COMPLEX128_t *> PyMem_Malloc(self.__nnz * sizeof(COMPLEX128_t))             # <<<<<<<<<<<<<<
@@ -9615,7 +9645,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
   __pyx_v_val = ((__pyx_t_double_complex *)PyMem_Malloc((__pyx_v_self->__pyx_base.__pyx_base.__pyx___nnz * (sizeof(__pyx_t_double_complex)))));
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":621
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":625
  * 
  *         cdef COMPLEX128_t * val = <COMPLEX128_t *> PyMem_Malloc(self.__nnz * sizeof(COMPLEX128_t))
  *         if not val:             # <<<<<<<<<<<<<<
@@ -9625,7 +9655,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   __pyx_t_1 = ((!(__pyx_v_val != 0)) != 0);
   if (__pyx_t_1) {
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":622
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":626
  *         cdef COMPLEX128_t * val = <COMPLEX128_t *> PyMem_Malloc(self.__nnz * sizeof(COMPLEX128_t))
  *         if not val:
  *             PyMem_Free(ind)             # <<<<<<<<<<<<<<
@@ -9634,7 +9664,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
     PyMem_Free(__pyx_v_ind);
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":623
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":627
  *         if not val:
  *             PyMem_Free(ind)
  *             PyMem_Free(col)             # <<<<<<<<<<<<<<
@@ -9643,28 +9673,28 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
     PyMem_Free(__pyx_v_col);
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":624
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":628
  *             PyMem_Free(ind)
  *             PyMem_Free(col)
  *             raise MemoryError()             # <<<<<<<<<<<<<<
  * 
  *         csc_to_csr_kernel_INT32_t_COMPLEX128_t(self.__nrow, self.__ncol, self.__nnz,
  */
-    PyErr_NoMemory(); {__pyx_filename = __pyx_f[1]; __pyx_lineno = 624; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    PyErr_NoMemory(); {__pyx_filename = __pyx_f[1]; __pyx_lineno = 628; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":626
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":630
  *             raise MemoryError()
  * 
  *         csc_to_csr_kernel_INT32_t_COMPLEX128_t(self.__nrow, self.__ncol, self.__nnz,             # <<<<<<<<<<<<<<
  *                        <INT32_t *>self.ind, <INT32_t *>self.row, <COMPLEX128_t *>self.val,
  *                        ind, col, val)
  */
-  __pyx_t_2 = __pyx_f_8cysparse_6sparse_12sparse_utils_7generic_40matrix_translations_INT32_t_COMPLEX128_t_csc_to_csr_kernel_INT32_t_COMPLEX128_t(__pyx_v_self->__pyx_base.__pyx_base.__pyx___nrow, __pyx_v_self->__pyx_base.__pyx_base.__pyx___ncol, __pyx_v_self->__pyx_base.__pyx_base.__pyx___nnz, ((__pyx_t_8cysparse_5types_14cysparse_types_INT32_t *)__pyx_v_self->ind), ((__pyx_t_8cysparse_5types_14cysparse_types_INT32_t *)__pyx_v_self->row), ((__pyx_t_double_complex *)__pyx_v_self->val), __pyx_v_ind, __pyx_v_col, __pyx_v_val); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 626; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __pyx_f_8cysparse_6sparse_12sparse_utils_7generic_40matrix_translations_INT32_t_COMPLEX128_t_csc_to_csr_kernel_INT32_t_COMPLEX128_t(__pyx_v_self->__pyx_base.__pyx_base.__pyx___nrow, __pyx_v_self->__pyx_base.__pyx_base.__pyx___ncol, __pyx_v_self->__pyx_base.__pyx_base.__pyx___nnz, ((__pyx_t_8cysparse_5types_14cysparse_types_INT32_t *)__pyx_v_self->ind), ((__pyx_t_8cysparse_5types_14cysparse_types_INT32_t *)__pyx_v_self->row), ((__pyx_t_double_complex *)__pyx_v_self->val), __pyx_v_ind, __pyx_v_col, __pyx_v_val); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 630; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":630
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":634
  *                        ind, col, val)
  * 
  *         return MakeCSRSparseMatrix_INT32_t_COMPLEX128_t(self.__nrow, self.__ncol, self.__nnz, ind, col, val, is_symmetric=self.is_symmetric, store_zeros=self.store_zeros)             # <<<<<<<<<<<<<<
@@ -9672,21 +9702,21 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_is_symmetric); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 630; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_is_symmetric); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 634; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely((__pyx_t_1 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 630; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely((__pyx_t_1 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 634; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_store_zeros); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 630; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_store_zeros); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 634; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 630; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 634; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __pyx_f_8cysparse_6sparse_16csr_mat_matrices_28csr_mat_INT32_t_COMPLEX128_t_MakeCSRSparseMatrix_INT32_t_COMPLEX128_t(__pyx_v_self->__pyx_base.__pyx_base.__pyx___nrow, __pyx_v_self->__pyx_base.__pyx_base.__pyx___ncol, __pyx_v_self->__pyx_base.__pyx_base.__pyx___nnz, __pyx_v_ind, __pyx_v_col, __pyx_v_val, __pyx_t_1, __pyx_t_3, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 630; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __pyx_f_8cysparse_6sparse_16csr_mat_matrices_28csr_mat_INT32_t_COMPLEX128_t_MakeCSRSparseMatrix_INT32_t_COMPLEX128_t(__pyx_v_self->__pyx_base.__pyx_base.__pyx___nrow, __pyx_v_self->__pyx_base.__pyx_base.__pyx___ncol, __pyx_v_self->__pyx_base.__pyx_base.__pyx___nnz, __pyx_v_ind, __pyx_v_col, __pyx_v_val, __pyx_t_1, __pyx_t_3, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 634; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":605
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":609
  *         return MakeCSCSparseMatrix_INT32_t_COMPLEX128_t(self.__nrow, self.__ncol, nnz, ind, row, val, is_symmetric=False, store_zeros=self.__store_zeros)
  * 
  *     def to_csr(self):             # <<<<<<<<<<<<<<
@@ -9705,7 +9735,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   return __pyx_r;
 }
 
-/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":633
+/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":637
  * 
  * 
  *     def to_ndarray(self):             # <<<<<<<<<<<<<<
@@ -9760,23 +9790,23 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   __pyx_pybuffernd_np_ndarray.data = NULL;
   __pyx_pybuffernd_np_ndarray.rcbuffer = &__pyx_pybuffer_np_ndarray;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":644
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":648
  *             COMPLEX128_t [:,:] np_memview
  * 
  *         np_ndarray = np.zeros((self.__nrow, self.__ncol), dtype=np.complex128, order='C')             # <<<<<<<<<<<<<<
  *         np_memview = np_ndarray
  * 
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 644; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 648; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_zeros); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 644; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_zeros); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 648; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->__pyx_base.__pyx_base.__pyx___nrow); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 644; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->__pyx_base.__pyx_base.__pyx___nrow); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 648; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_self->__pyx_base.__pyx_base.__pyx___ncol); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 644; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_self->__pyx_base.__pyx_base.__pyx___ncol); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 648; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 644; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 648; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_1);
@@ -9784,27 +9814,27 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   __Pyx_GIVEREF(__pyx_t_3);
   __pyx_t_1 = 0;
   __pyx_t_3 = 0;
-  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 644; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 648; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_4);
   __Pyx_GIVEREF(__pyx_t_4);
   __pyx_t_4 = 0;
-  __pyx_t_4 = PyDict_New(); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 644; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = PyDict_New(); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 648; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 644; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 648; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_complex128); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 644; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_complex128); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 648; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_dtype, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 644; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_dtype, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 648; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_order, __pyx_n_s_C) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 644; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_3, __pyx_t_4); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 644; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_order, __pyx_n_s_C) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 648; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_3, __pyx_t_4); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 648; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (!(likely(((__pyx_t_5) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_5, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 644; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (!(likely(((__pyx_t_5) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_5, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 648; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_t_6 = ((PyArrayObject *)__pyx_t_5);
   {
     __Pyx_BufFmt_StackElem __pyx_stack[2];
@@ -9820,13 +9850,13 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
       }
     }
     __pyx_pybuffernd_np_ndarray.diminfo[0].strides = __pyx_pybuffernd_np_ndarray.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_np_ndarray.diminfo[0].shape = __pyx_pybuffernd_np_ndarray.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_np_ndarray.diminfo[1].strides = __pyx_pybuffernd_np_ndarray.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_np_ndarray.diminfo[1].shape = __pyx_pybuffernd_np_ndarray.rcbuffer->pybuffer.shape[1];
-    if (unlikely(__pyx_t_7 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 644; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (unlikely(__pyx_t_7 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 648; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __pyx_t_6 = 0;
   __pyx_v_np_ndarray = ((PyArrayObject *)__pyx_t_5);
   __pyx_t_5 = 0;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":645
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":649
  * 
  *         np_ndarray = np.zeros((self.__nrow, self.__ncol), dtype=np.complex128, order='C')
  *         np_memview = np_ndarray             # <<<<<<<<<<<<<<
@@ -9834,12 +9864,12 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  *         for j from 0 <= j < self.__ncol:
  */
   __pyx_t_11 = __Pyx_PyObject_to_MemoryviewSlice_dsds___pyx_t_double_complex(((PyObject *)__pyx_v_np_ndarray));
-  if (unlikely(!__pyx_t_11.memview)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 645; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__pyx_t_11.memview)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 649; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_v_np_memview = __pyx_t_11;
   __pyx_t_11.memview = NULL;
   __pyx_t_11.data = NULL;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":647
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":651
  *         np_memview = np_ndarray
  * 
  *         for j from 0 <= j < self.__ncol:             # <<<<<<<<<<<<<<
@@ -9849,7 +9879,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   __pyx_t_12 = __pyx_v_self->__pyx_base.__pyx_base.__pyx___ncol;
   for (__pyx_v_j = 0; __pyx_v_j < __pyx_t_12; __pyx_v_j++) {
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":648
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":652
  * 
  *         for j from 0 <= j < self.__ncol:
  *             for k from self.ind[j] <= k < self.ind[j+1]:             # <<<<<<<<<<<<<<
@@ -9859,7 +9889,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
     __pyx_t_13 = (__pyx_v_self->ind[(__pyx_v_j + 1)]);
     for (__pyx_v_k = (__pyx_v_self->ind[__pyx_v_j]); __pyx_v_k < __pyx_t_13; __pyx_v_k++) {
 
-      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":649
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":653
  *         for j from 0 <= j < self.__ncol:
  *             for k from self.ind[j] <= k < self.ind[j+1]:
  *                 np_memview[self.row[k], j] = self.val[k]             # <<<<<<<<<<<<<<
@@ -9879,13 +9909,13 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
       } else if (unlikely(__pyx_t_15 >= __pyx_v_np_memview.shape[1])) __pyx_t_7 = 1;
       if (unlikely(__pyx_t_7 != -1)) {
         __Pyx_RaiseBufferIndexError(__pyx_t_7);
-        {__pyx_filename = __pyx_f[1]; __pyx_lineno = 649; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        {__pyx_filename = __pyx_f[1]; __pyx_lineno = 653; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
       *((__pyx_t_double_complex *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_np_memview.data + __pyx_t_14 * __pyx_v_np_memview.strides[0]) ) + __pyx_t_15 * __pyx_v_np_memview.strides[1]) )) = (__pyx_v_self->val[__pyx_v_k]);
     }
   }
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":651
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":655
  *                 np_memview[self.row[k], j] = self.val[k]
  * 
  *         return np_ndarray             # <<<<<<<<<<<<<<
@@ -9897,7 +9927,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   __pyx_r = ((PyObject *)__pyx_v_np_ndarray);
   goto __pyx_L0;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":633
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":637
  * 
  * 
  *     def to_ndarray(self):             # <<<<<<<<<<<<<<
@@ -9930,7 +9960,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   return __pyx_r;
 }
 
-/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":656
+/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":660
  *     # Multiplication
  *     ####################################################################################################################
  *     def matvec(self, b):             # <<<<<<<<<<<<<<
@@ -9961,7 +9991,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("matvec", 0);
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":660
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":664
  *         Return :math:`A * b`.
  *         """
  *         return multiply_csc_mat_with_numpy_vector_INT32_t_COMPLEX128_t(self, b)             # <<<<<<<<<<<<<<
@@ -9969,14 +9999,14 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  *     def matvec_transp(self, b):
  */
   __Pyx_XDECREF(__pyx_r);
-  if (!(likely(((__pyx_v_b) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_b, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 660; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX128_t_multiply_csc_mat_with_numpy_vector_INT32_t_COMPLEX128_t(__pyx_v_self, ((PyArrayObject *)__pyx_v_b))); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 660; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (!(likely(((__pyx_v_b) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_b, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 664; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX128_t_multiply_csc_mat_with_numpy_vector_INT32_t_COMPLEX128_t(__pyx_v_self, ((PyArrayObject *)__pyx_v_b))); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 664; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":656
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":660
  *     # Multiplication
  *     ####################################################################################################################
  *     def matvec(self, b):             # <<<<<<<<<<<<<<
@@ -9995,7 +10025,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   return __pyx_r;
 }
 
-/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":662
+/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":666
  *         return multiply_csc_mat_with_numpy_vector_INT32_t_COMPLEX128_t(self, b)
  * 
  *     def matvec_transp(self, b):             # <<<<<<<<<<<<<<
@@ -10026,7 +10056,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("matvec_transp", 0);
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":666
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":670
  *         Return :math:`A^t * b`.
  *         """
  *         return multiply_transposed_csc_mat_with_numpy_vector_INT32_t_COMPLEX128_t(self, b)             # <<<<<<<<<<<<<<
@@ -10034,14 +10064,14 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  if (!(likely(((__pyx_v_b) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_b, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 666; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX128_t_multiply_transposed_csc_mat_with_numpy_vector_INT32_t_COMPLEX128_t(__pyx_v_self, ((PyArrayObject *)__pyx_v_b))); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 666; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (!(likely(((__pyx_v_b) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_b, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 670; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX128_t_multiply_transposed_csc_mat_with_numpy_vector_INT32_t_COMPLEX128_t(__pyx_v_self, ((PyArrayObject *)__pyx_v_b))); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 670; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":662
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":666
  *         return multiply_csc_mat_with_numpy_vector_INT32_t_COMPLEX128_t(self, b)
  * 
  *     def matvec_transp(self, b):             # <<<<<<<<<<<<<<
@@ -10060,7 +10090,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   return __pyx_r;
 }
 
-/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":669
+/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":673
  * 
  * 
  *     def matvec_htransp(self, b):             # <<<<<<<<<<<<<<
@@ -10091,7 +10121,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("matvec_htransp", 0);
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":673
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":677
  *         Return :math:`A^h * b`.
  *         """
  *         return multiply_conjugate_transposed_csc_mat_with_numpy_vector_INT32_t_COMPLEX128_t(self, b)             # <<<<<<<<<<<<<<
@@ -10099,14 +10129,14 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  *     def matvec_conj(self, b):
  */
   __Pyx_XDECREF(__pyx_r);
-  if (!(likely(((__pyx_v_b) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_b, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 673; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX128_t_multiply_conjugate_transposed_csc_mat_with_numpy_vector_INT32_t_COMPLEX128_t(__pyx_v_self, ((PyArrayObject *)__pyx_v_b))); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 673; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (!(likely(((__pyx_v_b) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_b, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 677; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX128_t_multiply_conjugate_transposed_csc_mat_with_numpy_vector_INT32_t_COMPLEX128_t(__pyx_v_self, ((PyArrayObject *)__pyx_v_b))); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 677; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":669
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":673
  * 
  * 
  *     def matvec_htransp(self, b):             # <<<<<<<<<<<<<<
@@ -10125,7 +10155,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   return __pyx_r;
 }
 
-/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":675
+/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":679
  *         return multiply_conjugate_transposed_csc_mat_with_numpy_vector_INT32_t_COMPLEX128_t(self, b)
  * 
  *     def matvec_conj(self, b):             # <<<<<<<<<<<<<<
@@ -10156,7 +10186,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("matvec_conj", 0);
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":679
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":683
  *         Return :math:`\textrm{conj}(A) * b`.
  *         """
  *         return multiply_conjugated_csc_mat_with_numpy_vector_INT32_t_COMPLEX128_t(self, b)             # <<<<<<<<<<<<<<
@@ -10164,14 +10194,14 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  if (!(likely(((__pyx_v_b) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_b, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 679; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX128_t_multiply_conjugated_csc_mat_with_numpy_vector_INT32_t_COMPLEX128_t(__pyx_v_self, ((PyArrayObject *)__pyx_v_b))); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 679; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (!(likely(((__pyx_v_b) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_b, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 683; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX128_t_multiply_conjugated_csc_mat_with_numpy_vector_INT32_t_COMPLEX128_t(__pyx_v_self, ((PyArrayObject *)__pyx_v_b))); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 683; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":675
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":679
  *         return multiply_conjugate_transposed_csc_mat_with_numpy_vector_INT32_t_COMPLEX128_t(self, b)
  * 
  *     def matvec_conj(self, b):             # <<<<<<<<<<<<<<
@@ -10190,7 +10220,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   return __pyx_r;
 }
 
-/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":682
+/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":686
  * 
  * 
  *     def matdot(self, B):             # <<<<<<<<<<<<<<
@@ -10220,20 +10250,20 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("matdot", 0);
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":683
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":687
  * 
  *     def matdot(self, B):
  *         raise NotImplementedError("Multiplication with this kind of object not allowed")             # <<<<<<<<<<<<<<
  * 
  *     def matdot_transp(self, B):
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_NotImplementedError, __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 683; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_NotImplementedError, __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 687; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  {__pyx_filename = __pyx_f[1]; __pyx_lineno = 683; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  {__pyx_filename = __pyx_f[1]; __pyx_lineno = 687; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":682
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":686
  * 
  * 
  *     def matdot(self, B):             # <<<<<<<<<<<<<<
@@ -10251,7 +10281,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   return __pyx_r;
 }
 
-/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":685
+/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":689
  *         raise NotImplementedError("Multiplication with this kind of object not allowed")
  * 
  *     def matdot_transp(self, B):             # <<<<<<<<<<<<<<
@@ -10281,20 +10311,20 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("matdot_transp", 0);
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":686
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":690
  * 
  *     def matdot_transp(self, B):
  *         raise NotImplementedError("Multiplication with this kind of object not allowed")             # <<<<<<<<<<<<<<
  * 
  *     def __mul__(self, B):
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_NotImplementedError, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 686; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_NotImplementedError, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 690; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  {__pyx_filename = __pyx_f[1]; __pyx_lineno = 686; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  {__pyx_filename = __pyx_f[1]; __pyx_lineno = 690; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":685
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":689
  *         raise NotImplementedError("Multiplication with this kind of object not allowed")
  * 
  *     def matdot_transp(self, B):             # <<<<<<<<<<<<<<
@@ -10312,7 +10342,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   return __pyx_r;
 }
 
-/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":688
+/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":692
  *         raise NotImplementedError("Multiplication with this kind of object not allowed")
  * 
  *     def __mul__(self, B):             # <<<<<<<<<<<<<<
@@ -10351,7 +10381,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__mul__", 0);
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":693
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":697
  * 
  *         """
  *         if cnp.PyArray_Check(B) and B.ndim == 1:             # <<<<<<<<<<<<<<
@@ -10364,17 +10394,17 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
     __pyx_t_1 = __pyx_t_2;
     goto __pyx_L4_bool_binop_done;
   }
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_B, __pyx_n_s_ndim); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 693; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_B, __pyx_n_s_ndim); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 697; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = PyObject_RichCompare(__pyx_t_3, __pyx_int_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_4); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 693; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = PyObject_RichCompare(__pyx_t_3, __pyx_int_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_4); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 697; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_4); if (unlikely(__pyx_t_2 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 693; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_4); if (unlikely(__pyx_t_2 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 697; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_t_1 = __pyx_t_2;
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_1) {
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":694
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":698
  *         """
  *         if cnp.PyArray_Check(B) and B.ndim == 1:
  *             return self.matvec(B)             # <<<<<<<<<<<<<<
@@ -10382,7 +10412,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  *         return self.matdot(B)
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_matvec); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 694; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_matvec); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 698; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_t_5 = NULL;
     if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_3))) {
@@ -10395,16 +10425,16 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
       }
     }
     if (!__pyx_t_5) {
-      __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_B); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 694; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_B); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 698; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_4);
     } else {
-      __pyx_t_6 = PyTuple_New(1+1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 694; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_6 = PyTuple_New(1+1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 698; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_6);
       PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_5); __Pyx_GIVEREF(__pyx_t_5); __pyx_t_5 = NULL;
       __Pyx_INCREF(__pyx_v_B);
       PyTuple_SET_ITEM(__pyx_t_6, 0+1, __pyx_v_B);
       __Pyx_GIVEREF(__pyx_v_B);
-      __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_6, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 694; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_6, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 698; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     }
@@ -10414,7 +10444,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
     goto __pyx_L0;
   }
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":696
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":700
  *             return self.matvec(B)
  * 
  *         return self.matdot(B)             # <<<<<<<<<<<<<<
@@ -10422,7 +10452,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  *     ####################################################################################################################
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_matdot); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 696; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_matdot); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 700; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_6 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_3))) {
@@ -10435,16 +10465,16 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
     }
   }
   if (!__pyx_t_6) {
-    __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_B); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 696; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_B); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 700; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
   } else {
-    __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 696; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 700; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
     PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_6); __Pyx_GIVEREF(__pyx_t_6); __pyx_t_6 = NULL;
     __Pyx_INCREF(__pyx_v_B);
     PyTuple_SET_ITEM(__pyx_t_5, 0+1, __pyx_v_B);
     __Pyx_GIVEREF(__pyx_v_B);
-    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_5, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 696; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_5, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 700; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
@@ -10453,7 +10483,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   __pyx_t_4 = 0;
   goto __pyx_L0;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":688
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":692
  *         raise NotImplementedError("Multiplication with this kind of object not allowed")
  * 
  *     def __mul__(self, B):             # <<<<<<<<<<<<<<
@@ -10475,7 +10505,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   return __pyx_r;
 }
 
-/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":701
+/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":705
  *     # String representations
  *     ####################################################################################################################
  *     def at_to_string(self, INT32_t i, INT32_t j, int cell_width=10):             # <<<<<<<<<<<<<<
@@ -10517,7 +10547,7 @@ static PyObject *__pyx_pw_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_j)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("at_to_string", 0, 2, 3, 1); {__pyx_filename = __pyx_f[1]; __pyx_lineno = 701; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("at_to_string", 0, 2, 3, 1); {__pyx_filename = __pyx_f[1]; __pyx_lineno = 705; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  2:
         if (kw_args > 0) {
@@ -10526,7 +10556,7 @@ static PyObject *__pyx_pw_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "at_to_string") < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 701; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "at_to_string") < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 705; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -10537,17 +10567,17 @@ static PyObject *__pyx_pw_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
         default: goto __pyx_L5_argtuple_error;
       }
     }
-    __pyx_v_i = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_i == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 701; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
-    __pyx_v_j = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_j == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 701; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_i = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_i == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 705; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_j = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_j == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 705; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
     if (values[2]) {
-      __pyx_v_cell_width = __Pyx_PyInt_As_int(values[2]); if (unlikely((__pyx_v_cell_width == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 701; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+      __pyx_v_cell_width = __Pyx_PyInt_As_int(values[2]); if (unlikely((__pyx_v_cell_width == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 705; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
     } else {
       __pyx_v_cell_width = ((int)10);
     }
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("at_to_string", 0, 2, 3, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[1]; __pyx_lineno = 701; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("at_to_string", 0, 2, 3, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[1]; __pyx_lineno = 705; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("cysparse.sparse.csc_mat_matrices.csc_mat_INT32_t_COMPLEX128_t.CSCSparseMatrix_INT32_t_COMPLEX128_t.at_to_string", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -10574,7 +10604,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("at_to_string", 0);
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":710
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":714
  *             INT32_t k
  * 
  *         for k from self.ind[j] <= k < self.ind[j+1]:             # <<<<<<<<<<<<<<
@@ -10584,7 +10614,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   __pyx_t_1 = (__pyx_v_self->ind[(__pyx_v_j + 1)]);
   for (__pyx_v_k = (__pyx_v_self->ind[__pyx_v_j]); __pyx_v_k < __pyx_t_1; __pyx_v_k++) {
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":711
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":715
  * 
  *         for k from self.ind[j] <= k < self.ind[j+1]:
  *             if i == self.row[k]:             # <<<<<<<<<<<<<<
@@ -10594,7 +10624,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
     __pyx_t_2 = ((__pyx_v_i == (__pyx_v_self->row[__pyx_v_k])) != 0);
     if (__pyx_t_2) {
 
-      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":712
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":716
  *         for k from self.ind[j] <= k < self.ind[j+1]:
  *             if i == self.row[k]:
  *                 return element_to_string_COMPLEX128_t(self.val[k], cell_width=cell_width)             # <<<<<<<<<<<<<<
@@ -10604,7 +10634,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
       __Pyx_XDECREF(__pyx_r);
       __pyx_t_4.__pyx_n = 1;
       __pyx_t_4.cell_width = __pyx_v_cell_width;
-      __pyx_t_3 = __pyx_f_8cysparse_6sparse_12sparse_utils_7generic_18print_COMPLEX128_t_element_to_string_COMPLEX128_t((__pyx_v_self->val[__pyx_v_k]), &__pyx_t_4); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 712; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_3 = __pyx_f_8cysparse_6sparse_12sparse_utils_7generic_18print_COMPLEX128_t_element_to_string_COMPLEX128_t((__pyx_v_self->val[__pyx_v_k]), &__pyx_t_4); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 716; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_3);
       __pyx_r = __pyx_t_3;
       __pyx_t_3 = 0;
@@ -10612,7 +10642,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
     }
   }
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":715
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":719
  * 
  *         # element not found -> return empty cell
  *         return empty_to_string_COMPLEX128_t(cell_width=cell_width)             # <<<<<<<<<<<<<<
@@ -10622,13 +10652,13 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_5.__pyx_n = 1;
   __pyx_t_5.cell_width = __pyx_v_cell_width;
-  __pyx_t_3 = __pyx_f_8cysparse_6sparse_12sparse_utils_7generic_18print_COMPLEX128_t_empty_to_string_COMPLEX128_t(&__pyx_t_5); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 715; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __pyx_f_8cysparse_6sparse_12sparse_utils_7generic_18print_COMPLEX128_t_empty_to_string_COMPLEX128_t(&__pyx_t_5); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 719; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_r = __pyx_t_3;
   __pyx_t_3 = 0;
   goto __pyx_L0;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":701
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":705
  *     # String representations
  *     ####################################################################################################################
  *     def at_to_string(self, INT32_t i, INT32_t j, int cell_width=10):             # <<<<<<<<<<<<<<
@@ -10647,7 +10677,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   return __pyx_r;
 }
 
-/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":717
+/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":721
  *         return empty_to_string_COMPLEX128_t(cell_width=cell_width)
  * 
  *     def at_conj_to_string(self, INT32_t i, INT32_t j, int cell_width=10):             # <<<<<<<<<<<<<<
@@ -10689,7 +10719,7 @@ static PyObject *__pyx_pw_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_j)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("at_conj_to_string", 0, 2, 3, 1); {__pyx_filename = __pyx_f[1]; __pyx_lineno = 717; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("at_conj_to_string", 0, 2, 3, 1); {__pyx_filename = __pyx_f[1]; __pyx_lineno = 721; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  2:
         if (kw_args > 0) {
@@ -10698,7 +10728,7 @@ static PyObject *__pyx_pw_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "at_conj_to_string") < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 717; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "at_conj_to_string") < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 721; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -10709,17 +10739,17 @@ static PyObject *__pyx_pw_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
         default: goto __pyx_L5_argtuple_error;
       }
     }
-    __pyx_v_i = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_i == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 717; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
-    __pyx_v_j = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_j == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 717; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_i = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_i == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 721; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_j = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_j == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 721; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
     if (values[2]) {
-      __pyx_v_cell_width = __Pyx_PyInt_As_int(values[2]); if (unlikely((__pyx_v_cell_width == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 717; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+      __pyx_v_cell_width = __Pyx_PyInt_As_int(values[2]); if (unlikely((__pyx_v_cell_width == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 721; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
     } else {
       __pyx_v_cell_width = ((int)10);
     }
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("at_conj_to_string", 0, 2, 3, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[1]; __pyx_lineno = 717; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("at_conj_to_string", 0, 2, 3, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[1]; __pyx_lineno = 721; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("cysparse.sparse.csc_mat_matrices.csc_mat_INT32_t_COMPLEX128_t.CSCSparseMatrix_INT32_t_COMPLEX128_t.at_conj_to_string", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -10746,7 +10776,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("at_conj_to_string", 0);
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":726
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":730
  *             INT32_t k
  * 
  *         for k from self.ind[j] <= k < self.ind[j+1]:             # <<<<<<<<<<<<<<
@@ -10756,7 +10786,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   __pyx_t_1 = (__pyx_v_self->ind[(__pyx_v_j + 1)]);
   for (__pyx_v_k = (__pyx_v_self->ind[__pyx_v_j]); __pyx_v_k < __pyx_t_1; __pyx_v_k++) {
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":727
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":731
  * 
  *         for k from self.ind[j] <= k < self.ind[j+1]:
  *             if i == self.row[k]:             # <<<<<<<<<<<<<<
@@ -10766,7 +10796,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
     __pyx_t_2 = ((__pyx_v_i == (__pyx_v_self->row[__pyx_v_k])) != 0);
     if (__pyx_t_2) {
 
-      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":728
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":732
  *         for k from self.ind[j] <= k < self.ind[j+1]:
  *             if i == self.row[k]:
  *                 return conjugated_element_to_string_COMPLEX128_t(self.val[k], cell_width=cell_width)             # <<<<<<<<<<<<<<
@@ -10776,7 +10806,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
       __Pyx_XDECREF(__pyx_r);
       __pyx_t_4.__pyx_n = 1;
       __pyx_t_4.cell_width = __pyx_v_cell_width;
-      __pyx_t_3 = __pyx_f_8cysparse_6sparse_12sparse_utils_7generic_18print_COMPLEX128_t_conjugated_element_to_string_COMPLEX128_t((__pyx_v_self->val[__pyx_v_k]), &__pyx_t_4); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 728; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_3 = __pyx_f_8cysparse_6sparse_12sparse_utils_7generic_18print_COMPLEX128_t_conjugated_element_to_string_COMPLEX128_t((__pyx_v_self->val[__pyx_v_k]), &__pyx_t_4); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 732; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_3);
       __pyx_r = __pyx_t_3;
       __pyx_t_3 = 0;
@@ -10784,7 +10814,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
     }
   }
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":731
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":735
  * 
  *         # element not found -> return empty cell
  *         return empty_to_string_COMPLEX128_t(cell_width=cell_width)             # <<<<<<<<<<<<<<
@@ -10794,13 +10824,13 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_5.__pyx_n = 1;
   __pyx_t_5.cell_width = __pyx_v_cell_width;
-  __pyx_t_3 = __pyx_f_8cysparse_6sparse_12sparse_utils_7generic_18print_COMPLEX128_t_empty_to_string_COMPLEX128_t(&__pyx_t_5); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 731; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __pyx_f_8cysparse_6sparse_12sparse_utils_7generic_18print_COMPLEX128_t_empty_to_string_COMPLEX128_t(&__pyx_t_5); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 735; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_r = __pyx_t_3;
   __pyx_t_3 = 0;
   goto __pyx_L0;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":717
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":721
  *         return empty_to_string_COMPLEX128_t(cell_width=cell_width)
  * 
  *     def at_conj_to_string(self, INT32_t i, INT32_t j, int cell_width=10):             # <<<<<<<<<<<<<<
@@ -10819,7 +10849,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   return __pyx_r;
 }
 
-/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":737
+/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":741
  *     #    return s
  * 
  *     def print_to(self, OUT):             # <<<<<<<<<<<<<<
@@ -10866,7 +10896,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("print_to", 0);
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":745
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":749
  *         """
  *         # TODO: adapt to any numbers... and allow for additional parameters to control the output
  *         cdef INT32_t i, k, first = 1;             # <<<<<<<<<<<<<<
@@ -10875,18 +10905,18 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
   __pyx_v_first = 1;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":751
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":755
  *         cdef COMPLEX128_t val
  * 
  *         print('CSCSparseMatrix ([%d,%d]):' % (self.nrow, self.ncol), file=OUT)             # <<<<<<<<<<<<<<
  * 
  *         if not self.nnz:
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_nrow); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 751; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_nrow); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 755; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_ncol); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 751; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_ncol); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 755; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 751; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 755; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_1);
@@ -10894,38 +10924,38 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   __Pyx_GIVEREF(__pyx_t_2);
   __pyx_t_1 = 0;
   __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyString_Format(__pyx_kp_s_CSCSparseMatrix_d_d, __pyx_t_3); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 751; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyString_Format(__pyx_kp_s_CSCSparseMatrix_d_d, __pyx_t_3); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 755; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 751; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 755; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_2);
   __pyx_t_2 = 0;
-  __pyx_t_2 = PyDict_New(); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 751; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyDict_New(); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 755; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_file, __pyx_v_OUT) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 751; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_t_3, __pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 751; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_file, __pyx_v_OUT) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 755; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_t_3, __pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 755; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":753
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":757
  *         print('CSCSparseMatrix ([%d,%d]):' % (self.nrow, self.ncol), file=OUT)
  * 
  *         if not self.nnz:             # <<<<<<<<<<<<<<
  *             return
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_nnz); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 753; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_nnz); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 757; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 753; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 757; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_5 = ((!__pyx_t_4) != 0);
   if (__pyx_t_5) {
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":754
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":758
  * 
  *         if not self.nnz:
  *             return             # <<<<<<<<<<<<<<
@@ -10937,66 +10967,66 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
     goto __pyx_L0;
   }
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":756
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":760
  *             return
  * 
  *         if self.nrow <= CSC_MAT_PPRINT_COL_THRESH and self.ncol <= CSC_MAT_PPRINT_ROW_THRESH:             # <<<<<<<<<<<<<<
  *             # create linear vector presentation
  *             # TODO: Skip this creation
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_nrow); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 756; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_nrow); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 760; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX128_t_CSC_MAT_PPRINT_COL_THRESH); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 756; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX128_t_CSC_MAT_PPRINT_COL_THRESH); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 760; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyObject_RichCompare(__pyx_t_1, __pyx_t_2, Py_LE); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 756; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = PyObject_RichCompare(__pyx_t_1, __pyx_t_2, Py_LE); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 760; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 756; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 760; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   if (__pyx_t_4) {
   } else {
     __pyx_t_5 = __pyx_t_4;
     goto __pyx_L5_bool_binop_done;
   }
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_ncol); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 756; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_ncol); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 760; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX128_t_CSC_MAT_PPRINT_ROW_THRESH); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 756; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX128_t_CSC_MAT_PPRINT_ROW_THRESH); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 760; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = PyObject_RichCompare(__pyx_t_3, __pyx_t_2, Py_LE); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 756; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyObject_RichCompare(__pyx_t_3, __pyx_t_2, Py_LE); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 760; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 756; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 760; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_5 = __pyx_t_4;
   __pyx_L5_bool_binop_done:;
   if (__pyx_t_5) {
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":759
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":763
  *             # create linear vector presentation
  *             # TODO: Skip this creation
  *             mat = <COMPLEX128_t *> PyMem_Malloc(self.nrow * self.ncol * sizeof(COMPLEX128_t))             # <<<<<<<<<<<<<<
  * 
  *             if not mat:
  */
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_nrow); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 759; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_nrow); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 763; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_ncol); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 759; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_ncol); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 763; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = PyNumber_Multiply(__pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 759; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = PyNumber_Multiply(__pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 763; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyInt_FromSize_t((sizeof(__pyx_t_double_complex))); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 759; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyInt_FromSize_t((sizeof(__pyx_t_double_complex))); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 763; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = PyNumber_Multiply(__pyx_t_3, __pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 759; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyNumber_Multiply(__pyx_t_3, __pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 763; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_6 = __Pyx_PyInt_As_size_t(__pyx_t_1); if (unlikely((__pyx_t_6 == (size_t)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 759; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_6 = __Pyx_PyInt_As_size_t(__pyx_t_1); if (unlikely((__pyx_t_6 == (size_t)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 763; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_v_mat = ((__pyx_t_double_complex *)PyMem_Malloc(__pyx_t_6));
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":761
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":765
  *             mat = <COMPLEX128_t *> PyMem_Malloc(self.nrow * self.ncol * sizeof(COMPLEX128_t))
  * 
  *             if not mat:             # <<<<<<<<<<<<<<
@@ -11006,69 +11036,69 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
     __pyx_t_5 = ((!(__pyx_v_mat != 0)) != 0);
     if (__pyx_t_5) {
 
-      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":762
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":766
  * 
  *             if not mat:
  *                 raise MemoryError()             # <<<<<<<<<<<<<<
  * 
  *             for j from 0 <= j < self.ncol:
  */
-      PyErr_NoMemory(); {__pyx_filename = __pyx_f[1]; __pyx_lineno = 762; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      PyErr_NoMemory(); {__pyx_filename = __pyx_f[1]; __pyx_lineno = 766; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":764
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":768
  *                 raise MemoryError()
  * 
  *             for j from 0 <= j < self.ncol:             # <<<<<<<<<<<<<<
  *                 for i from 0 <= i < self.nrow:
  * 
  */
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_ncol); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 764; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_ncol); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 768; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_7 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_7 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 764; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_7 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_7 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 768; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     for (__pyx_v_j = 0; __pyx_v_j < __pyx_t_7; __pyx_v_j++) {
 
-      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":765
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":769
  * 
  *             for j from 0 <= j < self.ncol:
  *                 for i from 0 <= i < self.nrow:             # <<<<<<<<<<<<<<
  * 
  * 
  */
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_nrow); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 765; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_nrow); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 769; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_8 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_8 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 765; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_8 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_8 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 769; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       for (__pyx_v_i = 0; __pyx_v_i < __pyx_t_8; __pyx_v_i++) {
 
-        /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":768
+        /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":772
  * 
  * 
  *                     mat[i* self.ncol + j] = 0.0 + 0.0j             # <<<<<<<<<<<<<<
  * 
  * 
  */
-        __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_i); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 768; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_i); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 772; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_1);
-        __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_ncol); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 768; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_ncol); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 772; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_2);
-        __pyx_t_3 = PyNumber_Multiply(__pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 768; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_3 = PyNumber_Multiply(__pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 772; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_3);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-        __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_j); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 768; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_j); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 772; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_2);
-        __pyx_t_1 = PyNumber_Add(__pyx_t_3, __pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 768; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_1 = PyNumber_Add(__pyx_t_3, __pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 772; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-        __pyx_t_9 = __Pyx_PyIndex_AsSsize_t(__pyx_t_1); if (unlikely((__pyx_t_9 == (Py_ssize_t)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 768; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_9 = __Pyx_PyIndex_AsSsize_t(__pyx_t_1); if (unlikely((__pyx_t_9 == (Py_ssize_t)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 772; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         (__pyx_v_mat[__pyx_t_9]) = __Pyx_c_sum(__pyx_t_double_complex_from_parts(0.0, 0), __pyx_t_double_complex_from_parts(0, 0.0));
       }
 
-      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":772
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":776
  * 
  *                 # TODO: rewrite this completely
  *                 for k from self.ind[j] <= k < self.ind[j+1]:             # <<<<<<<<<<<<<<
@@ -11078,32 +11108,32 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
       __pyx_t_8 = (__pyx_v_self->ind[(__pyx_v_j + 1)]);
       for (__pyx_v_k = (__pyx_v_self->ind[__pyx_v_j]); __pyx_v_k < __pyx_t_8; __pyx_v_k++) {
 
-        /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":773
+        /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":777
  *                 # TODO: rewrite this completely
  *                 for k from self.ind[j] <= k < self.ind[j+1]:
  *                     mat[(self.row[k]*self.ncol)+j] = self.val[k]             # <<<<<<<<<<<<<<
  *                     if self.__is_symmetric:
  *                         mat[(j*self.ncol)+ self.row[k]] = self.val[k]
  */
-        __pyx_t_1 = __Pyx_PyInt_From_int((__pyx_v_self->row[__pyx_v_k])); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 773; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_1 = __Pyx_PyInt_From_int((__pyx_v_self->row[__pyx_v_k])); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 777; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_1);
-        __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_ncol); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 773; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_ncol); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 777; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_2);
-        __pyx_t_3 = PyNumber_Multiply(__pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 773; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_3 = PyNumber_Multiply(__pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 777; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_3);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-        __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_j); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 773; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_j); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 777; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_2);
-        __pyx_t_1 = PyNumber_Add(__pyx_t_3, __pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 773; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_1 = PyNumber_Add(__pyx_t_3, __pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 777; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-        __pyx_t_9 = __Pyx_PyIndex_AsSsize_t(__pyx_t_1); if (unlikely((__pyx_t_9 == (Py_ssize_t)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 773; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_9 = __Pyx_PyIndex_AsSsize_t(__pyx_t_1); if (unlikely((__pyx_t_9 == (Py_ssize_t)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 777; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         (__pyx_v_mat[__pyx_t_9]) = (__pyx_v_self->val[__pyx_v_k]);
 
-        /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":774
+        /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":778
  *                 for k from self.ind[j] <= k < self.ind[j+1]:
  *                     mat[(self.row[k]*self.ncol)+j] = self.val[k]
  *                     if self.__is_symmetric:             # <<<<<<<<<<<<<<
@@ -11113,28 +11143,28 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
         __pyx_t_5 = (__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___is_symmetric != 0);
         if (__pyx_t_5) {
 
-          /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":775
+          /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":779
  *                     mat[(self.row[k]*self.ncol)+j] = self.val[k]
  *                     if self.__is_symmetric:
  *                         mat[(j*self.ncol)+ self.row[k]] = self.val[k]             # <<<<<<<<<<<<<<
  * 
  *             for i from 0 <= i < self.nrow:
  */
-          __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_j); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 775; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_j); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 779; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_1);
-          __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_ncol); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 775; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_ncol); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 779; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_2);
-          __pyx_t_3 = PyNumber_Multiply(__pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 775; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_3 = PyNumber_Multiply(__pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 779; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_3);
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-          __pyx_t_2 = __Pyx_PyInt_From_int((__pyx_v_self->row[__pyx_v_k])); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 775; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_2 = __Pyx_PyInt_From_int((__pyx_v_self->row[__pyx_v_k])); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 779; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_2);
-          __pyx_t_1 = PyNumber_Add(__pyx_t_3, __pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 775; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_1 = PyNumber_Add(__pyx_t_3, __pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 779; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-          __pyx_t_9 = __Pyx_PyIndex_AsSsize_t(__pyx_t_1); if (unlikely((__pyx_t_9 == (Py_ssize_t)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 775; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_9 = __Pyx_PyIndex_AsSsize_t(__pyx_t_1); if (unlikely((__pyx_t_9 == (Py_ssize_t)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 779; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
           (__pyx_v_mat[__pyx_t_9]) = (__pyx_v_self->val[__pyx_v_k]);
           goto __pyx_L14;
@@ -11143,67 +11173,67 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
       }
     }
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":777
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":781
  *                         mat[(j*self.ncol)+ self.row[k]] = self.val[k]
  * 
  *             for i from 0 <= i < self.nrow:             # <<<<<<<<<<<<<<
  *                 for j from 0 <= j < self.ncol:
  *                     val = mat[(i*self.ncol)+j]
  */
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_nrow); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 777; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_nrow); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 781; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_7 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_7 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 777; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_7 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_7 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 781; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     for (__pyx_v_i = 0; __pyx_v_i < __pyx_t_7; __pyx_v_i++) {
 
-      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":778
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":782
  * 
  *             for i from 0 <= i < self.nrow:
  *                 for j from 0 <= j < self.ncol:             # <<<<<<<<<<<<<<
  *                     val = mat[(i*self.ncol)+j]
  *                     #print('%9.*f ' % (6, val), file=OUT, end='')
  */
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_ncol); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 778; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_ncol); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 782; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_8 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_8 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 778; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_8 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_8 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 782; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       for (__pyx_v_j = 0; __pyx_v_j < __pyx_t_8; __pyx_v_j++) {
 
-        /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":779
+        /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":783
  *             for i from 0 <= i < self.nrow:
  *                 for j from 0 <= j < self.ncol:
  *                     val = mat[(i*self.ncol)+j]             # <<<<<<<<<<<<<<
  *                     #print('%9.*f ' % (6, val), file=OUT, end='')
  *                     print('{0:9.6f} '.format(val), end='')
  */
-        __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_i); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 779; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_i); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 783; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_1);
-        __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_ncol); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 779; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_ncol); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 783; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_2);
-        __pyx_t_3 = PyNumber_Multiply(__pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 779; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_3 = PyNumber_Multiply(__pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 783; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_3);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-        __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_j); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 779; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_j); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 783; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_2);
-        __pyx_t_1 = PyNumber_Add(__pyx_t_3, __pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 779; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_1 = PyNumber_Add(__pyx_t_3, __pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 783; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-        __pyx_t_9 = __Pyx_PyIndex_AsSsize_t(__pyx_t_1); if (unlikely((__pyx_t_9 == (Py_ssize_t)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 779; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_9 = __Pyx_PyIndex_AsSsize_t(__pyx_t_1); if (unlikely((__pyx_t_9 == (Py_ssize_t)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 783; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         __pyx_v_val = (__pyx_v_mat[__pyx_t_9]);
 
-        /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":781
+        /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":785
  *                     val = mat[(i*self.ncol)+j]
  *                     #print('%9.*f ' % (6, val), file=OUT, end='')
  *                     print('{0:9.6f} '.format(val), end='')             # <<<<<<<<<<<<<<
  *                 print()
  * 
  */
-        __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_kp_s_0_9_6f, __pyx_n_s_format); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 781; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_kp_s_0_9_6f, __pyx_n_s_format); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 785; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_2);
-        __pyx_t_3 = __pyx_PyComplex_FromComplex(__pyx_v_val); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 781; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_3 = __pyx_PyComplex_FromComplex(__pyx_v_val); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 785; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_3);
         __pyx_t_10 = NULL;
         if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_2))) {
@@ -11216,49 +11246,49 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
           }
         }
         if (!__pyx_t_10) {
-          __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 781; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 785; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
           __Pyx_GOTREF(__pyx_t_1);
         } else {
-          __pyx_t_11 = PyTuple_New(1+1); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 781; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_11 = PyTuple_New(1+1); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 785; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_11);
           PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_t_10); __Pyx_GIVEREF(__pyx_t_10); __pyx_t_10 = NULL;
           PyTuple_SET_ITEM(__pyx_t_11, 0+1, __pyx_t_3);
           __Pyx_GIVEREF(__pyx_t_3);
           __pyx_t_3 = 0;
-          __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_11, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 781; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_11, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 785; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
         }
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-        __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 781; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 785; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_2);
         PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1);
         __Pyx_GIVEREF(__pyx_t_1);
         __pyx_t_1 = 0;
-        __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 781; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 785; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_1);
-        if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_end, __pyx_kp_s__5) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 781; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __pyx_t_11 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_t_2, __pyx_t_1); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 781; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_end, __pyx_kp_s__5) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 785; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_11 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_t_2, __pyx_t_1); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 785; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_11);
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
       }
 
-      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":782
+      /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":786
  *                     #print('%9.*f ' % (6, val), file=OUT, end='')
  *                     print('{0:9.6f} '.format(val), end='')
  *                 print()             # <<<<<<<<<<<<<<
  * 
  *             PyMem_Free(mat)
  */
-      __pyx_t_11 = __Pyx_PyObject_CallNoArg(__pyx_builtin_print); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 782; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_11 = __Pyx_PyObject_CallNoArg(__pyx_builtin_print); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 786; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_11);
       __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
     }
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":784
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":788
  *                 print()
  * 
  *             PyMem_Free(mat)             # <<<<<<<<<<<<<<
@@ -11270,24 +11300,24 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   }
   /*else*/ {
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":787
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":791
  * 
  *         else:
  *             print('Matrix too big to print out', file=OUT)             # <<<<<<<<<<<<<<
  * 
  *     ####################################################################################################################
  */
-    __pyx_t_11 = PyDict_New(); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 787; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_11 = PyDict_New(); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 791; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_11);
-    if (PyDict_SetItem(__pyx_t_11, __pyx_n_s_file, __pyx_v_OUT) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 787; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__6, __pyx_t_11); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 787; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (PyDict_SetItem(__pyx_t_11, __pyx_n_s_file, __pyx_v_OUT) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 791; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__6, __pyx_t_11); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 791; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   }
   __pyx_L4:;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":737
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":741
  *     #    return s
  * 
  *     def print_to(self, OUT):             # <<<<<<<<<<<<<<
@@ -11312,7 +11342,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   return __pyx_r;
 }
 
-/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":793
+/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":797
  *     ####################################################################################################################
  *     # TODO: test, test, test!
  *     def get_c_pointers(self):             # <<<<<<<<<<<<<<
@@ -11346,7 +11376,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_c_pointers", 0);
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":804
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":808
  *         """
  *         cdef:
  *             PyObject * ind_obj = <PyObject *> self.ind             # <<<<<<<<<<<<<<
@@ -11355,7 +11385,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
   __pyx_v_ind_obj = ((PyObject *)__pyx_v_self->ind);
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":805
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":809
  *         cdef:
  *             PyObject * ind_obj = <PyObject *> self.ind
  *             PyObject * row_obj = <PyObject *> self.row             # <<<<<<<<<<<<<<
@@ -11364,7 +11394,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
   __pyx_v_row_obj = ((PyObject *)__pyx_v_self->row);
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":806
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":810
  *             PyObject * ind_obj = <PyObject *> self.ind
  *             PyObject * row_obj = <PyObject *> self.row
  *             PyObject * val_obj = <PyObject *> self.val             # <<<<<<<<<<<<<<
@@ -11373,7 +11403,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
   __pyx_v_val_obj = ((PyObject *)__pyx_v_self->val);
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":808
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":812
  *             PyObject * val_obj = <PyObject *> self.val
  * 
  *         return <object>ind_obj, <object>row_obj, <object>val_obj             # <<<<<<<<<<<<<<
@@ -11381,7 +11411,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  *     def get_numpy_arrays(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 808; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 812; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(((PyObject *)__pyx_v_ind_obj));
   PyTuple_SET_ITEM(__pyx_t_1, 0, ((PyObject *)__pyx_v_ind_obj));
@@ -11396,7 +11426,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":793
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":797
  *     ####################################################################################################################
  *     # TODO: test, test, test!
  *     def get_c_pointers(self):             # <<<<<<<<<<<<<<
@@ -11415,7 +11445,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   return __pyx_r;
 }
 
-/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":810
+/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":814
  *         return <object>ind_obj, <object>row_obj, <object>val_obj
  * 
  *     def get_numpy_arrays(self):             # <<<<<<<<<<<<<<
@@ -11452,64 +11482,39 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_numpy_arrays", 0);
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":822
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":826
  * 
  *         # ind
  *         dim[0] = self.ncol + 1             # <<<<<<<<<<<<<<
  *         ind_numpy_array = cnp.PyArray_SimpleNewFromData(1, dim, cnp.NPY_INT32, <INT32_t *>self.ind)
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_ncol); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 822; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_ncol); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 826; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyNumber_Add(__pyx_t_1, __pyx_int_1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 822; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyNumber_Add(__pyx_t_1, __pyx_int_1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 826; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_3 = __Pyx_PyInt_As_Py_intptr_t(__pyx_t_2); if (unlikely((__pyx_t_3 == (npy_intp)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 822; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyInt_As_Py_intptr_t(__pyx_t_2); if (unlikely((__pyx_t_3 == (npy_intp)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 826; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   (__pyx_v_dim[0]) = __pyx_t_3;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":823
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":827
  *         # ind
  *         dim[0] = self.ncol + 1
  *         ind_numpy_array = cnp.PyArray_SimpleNewFromData(1, dim, cnp.NPY_INT32, <INT32_t *>self.ind)             # <<<<<<<<<<<<<<
  * 
  *         # row
  */
-  __pyx_t_2 = PyArray_SimpleNewFromData(1, __pyx_v_dim, NPY_INT32, ((__pyx_t_8cysparse_5types_14cysparse_types_INT32_t *)__pyx_v_self->ind)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 823; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyArray_SimpleNewFromData(1, __pyx_v_dim, NPY_INT32, ((__pyx_t_8cysparse_5types_14cysparse_types_INT32_t *)__pyx_v_self->ind)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 827; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_v_ind_numpy_array = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":826
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":830
  * 
  *         # row
  *         dim[0] = self.nnz             # <<<<<<<<<<<<<<
  *         row_numpy_array = cnp.PyArray_SimpleNewFromData(1, dim, cnp.NPY_INT32, <INT32_t *>self.row)
- * 
- */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_nnz); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 826; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyInt_As_Py_intptr_t(__pyx_t_2); if (unlikely((__pyx_t_3 == (npy_intp)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 826; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  (__pyx_v_dim[0]) = __pyx_t_3;
-
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":827
- *         # row
- *         dim[0] = self.nnz
- *         row_numpy_array = cnp.PyArray_SimpleNewFromData(1, dim, cnp.NPY_INT32, <INT32_t *>self.row)             # <<<<<<<<<<<<<<
- * 
- *         # val
- */
-  __pyx_t_2 = PyArray_SimpleNewFromData(1, __pyx_v_dim, NPY_INT32, ((__pyx_t_8cysparse_5types_14cysparse_types_INT32_t *)__pyx_v_self->row)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 827; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_v_row_numpy_array = __pyx_t_2;
-  __pyx_t_2 = 0;
-
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":830
- * 
- *         # val
- *         dim[0] = self.nnz             # <<<<<<<<<<<<<<
- *         val_numpy_array = cnp.PyArray_SimpleNewFromData(1, dim, cnp.NPY_COMPLEX128, <COMPLEX128_t *>self.val)
  * 
  */
   __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_nnz); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 830; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -11519,18 +11524,43 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   (__pyx_v_dim[0]) = __pyx_t_3;
 
   /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":831
+ *         # row
+ *         dim[0] = self.nnz
+ *         row_numpy_array = cnp.PyArray_SimpleNewFromData(1, dim, cnp.NPY_INT32, <INT32_t *>self.row)             # <<<<<<<<<<<<<<
+ * 
+ *         # val
+ */
+  __pyx_t_2 = PyArray_SimpleNewFromData(1, __pyx_v_dim, NPY_INT32, ((__pyx_t_8cysparse_5types_14cysparse_types_INT32_t *)__pyx_v_self->row)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 831; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_v_row_numpy_array = __pyx_t_2;
+  __pyx_t_2 = 0;
+
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":834
+ * 
+ *         # val
+ *         dim[0] = self.nnz             # <<<<<<<<<<<<<<
+ *         val_numpy_array = cnp.PyArray_SimpleNewFromData(1, dim, cnp.NPY_COMPLEX128, <COMPLEX128_t *>self.val)
+ * 
+ */
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_nnz); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 834; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = __Pyx_PyInt_As_Py_intptr_t(__pyx_t_2); if (unlikely((__pyx_t_3 == (npy_intp)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 834; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  (__pyx_v_dim[0]) = __pyx_t_3;
+
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":835
  *         # val
  *         dim[0] = self.nnz
  *         val_numpy_array = cnp.PyArray_SimpleNewFromData(1, dim, cnp.NPY_COMPLEX128, <COMPLEX128_t *>self.val)             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_t_2 = PyArray_SimpleNewFromData(1, __pyx_v_dim, NPY_COMPLEX128, ((__pyx_t_double_complex *)__pyx_v_self->val)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 831; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyArray_SimpleNewFromData(1, __pyx_v_dim, NPY_COMPLEX128, ((__pyx_t_double_complex *)__pyx_v_self->val)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 835; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_v_val_numpy_array = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":834
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":838
  * 
  * 
  *         return ind_numpy_array, row_numpy_array, val_numpy_array             # <<<<<<<<<<<<<<
@@ -11538,7 +11568,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  *     ####################################################################################################################
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = PyTuple_New(3); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 834; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyTuple_New(3); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 838; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_INCREF(__pyx_v_ind_numpy_array);
   PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_v_ind_numpy_array);
@@ -11553,7 +11583,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":810
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":814
  *         return <object>ind_obj, <object>row_obj, <object>val_obj
  * 
  *     def get_numpy_arrays(self):             # <<<<<<<<<<<<<<
@@ -11576,7 +11606,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   return __pyx_r;
 }
 
-/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":839
+/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":843
  *     # DEBUG
  *     ####################################################################################################################
  *     def debug_print(self):             # <<<<<<<<<<<<<<
@@ -11610,190 +11640,190 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("debug_print", 0);
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":841
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":845
  *     def debug_print(self):
  *         cdef INT32_t i
  *         print("ind:")             # <<<<<<<<<<<<<<
  *         for i from 0 <= i < self.ncol + 1:
  *             print(self.ind[i], end=' ', sep=' ')
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 841; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 845; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":842
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":846
  *         cdef INT32_t i
  *         print("ind:")
  *         for i from 0 <= i < self.ncol + 1:             # <<<<<<<<<<<<<<
  *             print(self.ind[i], end=' ', sep=' ')
  *         print()
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_ncol); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 842; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_ncol); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 846; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyNumber_Add(__pyx_t_1, __pyx_int_1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 842; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyNumber_Add(__pyx_t_1, __pyx_int_1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 846; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_3 = __Pyx_PyInt_As_int(__pyx_t_2); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 842; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyInt_As_int(__pyx_t_2); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 846; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   for (__pyx_v_i = 0; __pyx_v_i < __pyx_t_3; __pyx_v_i++) {
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":843
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":847
  *         print("ind:")
  *         for i from 0 <= i < self.ncol + 1:
  *             print(self.ind[i], end=' ', sep=' ')             # <<<<<<<<<<<<<<
  *         print()
  * 
  */
-    __pyx_t_2 = __Pyx_PyInt_From_int((__pyx_v_self->ind[__pyx_v_i])); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 843; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyInt_From_int((__pyx_v_self->ind[__pyx_v_i])); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 847; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 843; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 847; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_2);
     __Pyx_GIVEREF(__pyx_t_2);
     __pyx_t_2 = 0;
-    __pyx_t_2 = PyDict_New(); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 843; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = PyDict_New(); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 847; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_end, __pyx_kp_s__8) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 843; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_sep, __pyx_kp_s__8) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 843; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 843; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_end, __pyx_kp_s__8) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 847; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_sep, __pyx_kp_s__8) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 847; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 847; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":844
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":848
  *         for i from 0 <= i < self.ncol + 1:
  *             print(self.ind[i], end=' ', sep=' ')
  *         print()             # <<<<<<<<<<<<<<
  * 
  *         print("row:")
  */
-  __pyx_t_4 = __Pyx_PyObject_CallNoArg(__pyx_builtin_print); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 844; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyObject_CallNoArg(__pyx_builtin_print); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 848; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":846
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":850
  *         print()
  * 
  *         print("row:")             # <<<<<<<<<<<<<<
  *         for i from 0 <= i < self.nnz:
  *             print(self.row[i], end=' ', sep=' ')
  */
-  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__9, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 846; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__9, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 850; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":847
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":851
  * 
  *         print("row:")
  *         for i from 0 <= i < self.nnz:             # <<<<<<<<<<<<<<
  *             print(self.row[i], end=' ', sep=' ')
  *         print()
  */
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_nnz); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 847; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_nnz); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 851; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_3 = __Pyx_PyInt_As_int(__pyx_t_4); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 847; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyInt_As_int(__pyx_t_4); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 851; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   for (__pyx_v_i = 0; __pyx_v_i < __pyx_t_3; __pyx_v_i++) {
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":848
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":852
  *         print("row:")
  *         for i from 0 <= i < self.nnz:
  *             print(self.row[i], end=' ', sep=' ')             # <<<<<<<<<<<<<<
  *         print()
  * 
  */
-    __pyx_t_4 = __Pyx_PyInt_From_int((__pyx_v_self->row[__pyx_v_i])); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 848; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyInt_From_int((__pyx_v_self->row[__pyx_v_i])); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 852; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 848; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 852; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
     PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_4);
     __Pyx_GIVEREF(__pyx_t_4);
     __pyx_t_4 = 0;
-    __pyx_t_4 = PyDict_New(); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 848; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = PyDict_New(); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 852; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
-    if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_end, __pyx_kp_s__8) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 848; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_sep, __pyx_kp_s__8) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 848; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_t_2, __pyx_t_4); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 848; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_end, __pyx_kp_s__8) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 852; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_sep, __pyx_kp_s__8) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 852; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_t_2, __pyx_t_4); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 852; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   }
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":849
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":853
  *         for i from 0 <= i < self.nnz:
  *             print(self.row[i], end=' ', sep=' ')
  *         print()             # <<<<<<<<<<<<<<
  * 
  *         print("val:")
  */
-  __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_builtin_print); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 849; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_builtin_print); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 853; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":851
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":855
  *         print()
  * 
  *         print("val:")             # <<<<<<<<<<<<<<
  *         for i from 0 <= i < self.nnz:
  *             print(self.val[i], end=' == ', sep=' == ')
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__10, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 851; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__10, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 855; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":852
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":856
  * 
  *         print("val:")
  *         for i from 0 <= i < self.nnz:             # <<<<<<<<<<<<<<
  *             print(self.val[i], end=' == ', sep=' == ')
  *         print()
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_nnz); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 852; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_nnz); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 856; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 852; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 856; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   for (__pyx_v_i = 0; __pyx_v_i < __pyx_t_3; __pyx_v_i++) {
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":853
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":857
  *         print("val:")
  *         for i from 0 <= i < self.nnz:
  *             print(self.val[i], end=' == ', sep=' == ')             # <<<<<<<<<<<<<<
  *         print()
  * 
  */
-    __pyx_t_1 = __pyx_PyComplex_FromComplex((__pyx_v_self->val[__pyx_v_i])); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 853; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __pyx_PyComplex_FromComplex((__pyx_v_self->val[__pyx_v_i])); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 857; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 853; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 857; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_1);
     __Pyx_GIVEREF(__pyx_t_1);
     __pyx_t_1 = 0;
-    __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 853; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 857; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_end, __pyx_kp_s__11) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 853; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_sep, __pyx_kp_s__11) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 853; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_t_4, __pyx_t_1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 853; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_end, __pyx_kp_s__11) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 857; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_sep, __pyx_kp_s__11) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 857; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_t_4, __pyx_t_1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 857; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":854
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":858
  *         for i from 0 <= i < self.nnz:
  *             print(self.val[i], end=' == ', sep=' == ')
  *         print()             # <<<<<<<<<<<<<<
  * 
  *     def set_row(self, INT32_t i, INT32_t val):
  */
-  __pyx_t_2 = __Pyx_PyObject_CallNoArg(__pyx_builtin_print); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 854; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_CallNoArg(__pyx_builtin_print); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 858; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":839
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":843
  *     # DEBUG
  *     ####################################################################################################################
  *     def debug_print(self):             # <<<<<<<<<<<<<<
@@ -11816,7 +11846,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   return __pyx_r;
 }
 
-/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":856
+/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":860
  *         print()
  * 
  *     def set_row(self, INT32_t i, INT32_t val):             # <<<<<<<<<<<<<<
@@ -11855,11 +11885,11 @@ static PyObject *__pyx_pw_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_val_2)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("set_row", 1, 2, 2, 1); {__pyx_filename = __pyx_f[1]; __pyx_lineno = 856; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("set_row", 1, 2, 2, 1); {__pyx_filename = __pyx_f[1]; __pyx_lineno = 860; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "set_row") < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 856; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "set_row") < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 860; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -11867,12 +11897,12 @@ static PyObject *__pyx_pw_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
-    __pyx_v_i = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_i == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 856; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
-    __pyx_v_val = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_val == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 856; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_i = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_i == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 860; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_val = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_val == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 860; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("set_row", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[1]; __pyx_lineno = 856; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("set_row", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[1]; __pyx_lineno = 860; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("cysparse.sparse.csc_mat_matrices.csc_mat_INT32_t_COMPLEX128_t.CSCSparseMatrix_INT32_t_COMPLEX128_t.set_row", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -11890,7 +11920,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("set_row", 0);
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":857
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":861
  * 
  *     def set_row(self, INT32_t i, INT32_t val):
  *         self.row[i] = val             # <<<<<<<<<<<<<<
@@ -11899,7 +11929,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
  */
   (__pyx_v_self->row[__pyx_v_i]) = __pyx_v_val;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":856
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":860
  *         print()
  * 
  *     def set_row(self, INT32_t i, INT32_t val):             # <<<<<<<<<<<<<<
@@ -11914,7 +11944,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
   return __pyx_r;
 }
 
-/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":865
+/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":869
  * # Factory methods
  * ########################################################################################################################
  * cdef MakeCSCSparseMatrix_INT32_t_COMPLEX128_t(INT32_t nrow,             # <<<<<<<<<<<<<<
@@ -11924,7 +11954,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t
 
 static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX128_t_MakeCSCSparseMatrix_INT32_t_COMPLEX128_t(__pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_nrow, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_ncol, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_nnz, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *__pyx_v_ind, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t *__pyx_v_row, __pyx_t_double_complex *__pyx_v_val, int __pyx_v_is_symmetric, int __pyx_v_store_zeros, struct __pyx_opt_args_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX128_t_MakeCSCSparseMatrix_INT32_t_COMPLEX128_t *__pyx_optional_args) {
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":872
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":876
  *                                         COMPLEX128_t * val,
  *                                         bint is_symmetric, bint store_zeros,
  *                                         bint row_indices_are_sorted=False):             # <<<<<<<<<<<<<<
@@ -11948,91 +11978,91 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_
     }
   }
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":885
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":889
  *     """
  *     cdef CSCSparseMatrix_INT32_t_COMPLEX128_t csc_mat
  *     csc_mat = CSCSparseMatrix_INT32_t_COMPLEX128_t(control_object=unexposed_value,             # <<<<<<<<<<<<<<
  *                                              nrow=nrow,
  *                                              ncol=ncol,
  */
-  __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 885; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 889; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_control_object, __pyx_v_8cysparse_6sparse_5s_mat_unexposed_value) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 885; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_control_object, __pyx_v_8cysparse_6sparse_5s_mat_unexposed_value) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 889; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":886
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":890
  *     cdef CSCSparseMatrix_INT32_t_COMPLEX128_t csc_mat
  *     csc_mat = CSCSparseMatrix_INT32_t_COMPLEX128_t(control_object=unexposed_value,
  *                                              nrow=nrow,             # <<<<<<<<<<<<<<
  *                                              ncol=ncol,
  *                                              nnz=nnz,
  */
-  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_nrow); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 886; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_nrow); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 890; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_nrow, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 885; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_nrow, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 889; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":887
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":891
  *     csc_mat = CSCSparseMatrix_INT32_t_COMPLEX128_t(control_object=unexposed_value,
  *                                              nrow=nrow,
  *                                              ncol=ncol,             # <<<<<<<<<<<<<<
  *                                              nnz=nnz,
  *                                              is_symmetric=is_symmetric,
  */
-  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_ncol); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 887; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_ncol); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 891; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_ncol, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 885; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_ncol, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 889; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":888
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":892
  *                                              nrow=nrow,
  *                                              ncol=ncol,
  *                                              nnz=nnz,             # <<<<<<<<<<<<<<
  *                                              is_symmetric=is_symmetric,
  *                                              store_zeros=store_zeros)
  */
-  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_nnz); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 888; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_nnz); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 892; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_nnz, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 885; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_nnz, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 889; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":889
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":893
  *                                              ncol=ncol,
  *                                              nnz=nnz,
  *                                              is_symmetric=is_symmetric,             # <<<<<<<<<<<<<<
  *                                              store_zeros=store_zeros)
  * 
  */
-  __pyx_t_2 = __Pyx_PyBool_FromLong(__pyx_v_is_symmetric); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 889; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyBool_FromLong(__pyx_v_is_symmetric); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 893; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_is_symmetric, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 885; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_is_symmetric, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 889; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":890
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":894
  *                                              nnz=nnz,
  *                                              is_symmetric=is_symmetric,
  *                                              store_zeros=store_zeros)             # <<<<<<<<<<<<<<
  * 
  *     csc_mat.val = val
  */
-  __pyx_t_2 = __Pyx_PyBool_FromLong(__pyx_v_store_zeros); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 890; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyBool_FromLong(__pyx_v_store_zeros); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 894; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_store_zeros, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 885; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_store_zeros, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 889; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":885
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":889
  *     """
  *     cdef CSCSparseMatrix_INT32_t_COMPLEX128_t csc_mat
  *     csc_mat = CSCSparseMatrix_INT32_t_COMPLEX128_t(control_object=unexposed_value,             # <<<<<<<<<<<<<<
  *                                              nrow=nrow,
  *                                              ncol=ncol,
  */
-  __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)((PyObject*)__pyx_ptype_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX128_t_CSCSparseMatrix_INT32_t_COMPLEX128_t)), __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 885; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)((PyObject*)__pyx_ptype_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX128_t_CSCSparseMatrix_INT32_t_COMPLEX128_t)), __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 889; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_csc_mat = ((struct __pyx_obj_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX128_t_CSCSparseMatrix_INT32_t_COMPLEX128_t *)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":892
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":896
  *                                              store_zeros=store_zeros)
  * 
  *     csc_mat.val = val             # <<<<<<<<<<<<<<
@@ -12041,7 +12071,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_
  */
   __pyx_v_csc_mat->val = __pyx_v_val;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":893
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":897
  * 
  *     csc_mat.val = val
  *     csc_mat.ind = ind             # <<<<<<<<<<<<<<
@@ -12050,7 +12080,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_
  */
   __pyx_v_csc_mat->ind = __pyx_v_ind;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":894
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":898
  *     csc_mat.val = val
  *     csc_mat.ind = ind
  *     csc_mat.row = row             # <<<<<<<<<<<<<<
@@ -12059,7 +12089,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_
  */
   __pyx_v_csc_mat->row = __pyx_v_row;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":896
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":900
  *     csc_mat.row = row
  * 
  *     if row_indices_are_sorted:             # <<<<<<<<<<<<<<
@@ -12069,21 +12099,21 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_
   __pyx_t_3 = (__pyx_v_row_indices_are_sorted != 0);
   if (__pyx_t_3) {
 
-    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":897
+    /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":901
  * 
  *     if row_indices_are_sorted:
  *         csc_mat._set_row_indices_ordered_is_true()             # <<<<<<<<<<<<<<
  * 
  *     return csc_mat
  */
-    __pyx_t_2 = ((struct __pyx_vtabstruct_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX128_t_CSCSparseMatrix_INT32_t_COMPLEX128_t *)__pyx_v_csc_mat->__pyx_vtab)->_set_row_indices_ordered_is_true(__pyx_v_csc_mat); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 897; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = ((struct __pyx_vtabstruct_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX128_t_CSCSparseMatrix_INT32_t_COMPLEX128_t *)__pyx_v_csc_mat->__pyx_vtab)->_set_row_indices_ordered_is_true(__pyx_v_csc_mat); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 901; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     goto __pyx_L3;
   }
   __pyx_L3:;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":899
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":903
  *         csc_mat._set_row_indices_ordered_is_true()
  * 
  *     return csc_mat             # <<<<<<<<<<<<<<
@@ -12093,7 +12123,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_
   __pyx_r = ((PyObject *)__pyx_v_csc_mat);
   goto __pyx_L0;
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":865
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":869
  * # Factory methods
  * ########################################################################################################################
  * cdef MakeCSCSparseMatrix_INT32_t_COMPLEX128_t(INT32_t nrow,             # <<<<<<<<<<<<<<
@@ -25774,9 +25804,9 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
 static int __Pyx_InitCachedBuiltins(void) {
   __pyx_builtin_IndexError = __Pyx_GetBuiltinName(__pyx_n_s_IndexError); if (!__pyx_builtin_IndexError) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 37; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_builtin_MemoryError = __Pyx_GetBuiltinName(__pyx_n_s_MemoryError); if (!__pyx_builtin_MemoryError) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 116; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_builtin_SyntaxError = __Pyx_GetBuiltinName(__pyx_n_s_SyntaxError); if (!__pyx_builtin_SyntaxError) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 230; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_builtin_NotImplementedError = __Pyx_GetBuiltinName(__pyx_n_s_NotImplementedError); if (!__pyx_builtin_NotImplementedError) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 683; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_builtin_print = __Pyx_GetBuiltinName(__pyx_n_s_print); if (!__pyx_builtin_print) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 751; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_builtin_SyntaxError = __Pyx_GetBuiltinName(__pyx_n_s_SyntaxError); if (!__pyx_builtin_SyntaxError) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 234; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_builtin_NotImplementedError = __Pyx_GetBuiltinName(__pyx_n_s_NotImplementedError); if (!__pyx_builtin_NotImplementedError) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 687; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_builtin_print = __Pyx_GetBuiltinName(__pyx_n_s_print); if (!__pyx_builtin_print) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 755; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) {__pyx_filename = __pyx_f[2]; __pyx_lineno = 218; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) {__pyx_filename = __pyx_f[2]; __pyx_lineno = 231; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_builtin_RuntimeError = __Pyx_GetBuiltinName(__pyx_n_s_RuntimeError); if (!__pyx_builtin_RuntimeError) {__pyx_filename = __pyx_f[2]; __pyx_lineno = 802; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -25793,91 +25823,91 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":230
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":234
  *     #                                            *** SET ***
  *     def __setitem__(self, tuple key, value):
  *         raise SyntaxError("Assign individual elements is not allowed")             # <<<<<<<<<<<<<<
  * 
  *     #                                            *** GET ***
  */
-  __pyx_tuple_ = PyTuple_Pack(1, __pyx_kp_s_Assign_individual_elements_is_no); if (unlikely(!__pyx_tuple_)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 230; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple_ = PyTuple_Pack(1, __pyx_kp_s_Assign_individual_elements_is_no); if (unlikely(!__pyx_tuple_)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 234; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple_);
   __Pyx_GIVEREF(__pyx_tuple_);
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":297
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":301
  *         """
  *         if not 0 <= i < self.nrow or not 0 <= j < self.ncol:
  *             raise IndexError("Index out of bounds")             # <<<<<<<<<<<<<<
  * 
  *         return self.at(i, j)
  */
-  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_s_Index_out_of_bounds); if (unlikely(!__pyx_tuple__2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 297; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_s_Index_out_of_bounds); if (unlikely(!__pyx_tuple__2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 301; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":683
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":687
  * 
  *     def matdot(self, B):
  *         raise NotImplementedError("Multiplication with this kind of object not allowed")             # <<<<<<<<<<<<<<
  * 
  *     def matdot_transp(self, B):
  */
-  __pyx_tuple__3 = PyTuple_Pack(1, __pyx_kp_s_Multiplication_with_this_kind_of); if (unlikely(!__pyx_tuple__3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 683; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__3 = PyTuple_Pack(1, __pyx_kp_s_Multiplication_with_this_kind_of); if (unlikely(!__pyx_tuple__3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 687; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__3);
   __Pyx_GIVEREF(__pyx_tuple__3);
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":686
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":690
  * 
  *     def matdot_transp(self, B):
  *         raise NotImplementedError("Multiplication with this kind of object not allowed")             # <<<<<<<<<<<<<<
  * 
  *     def __mul__(self, B):
  */
-  __pyx_tuple__4 = PyTuple_Pack(1, __pyx_kp_s_Multiplication_with_this_kind_of); if (unlikely(!__pyx_tuple__4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 686; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__4 = PyTuple_Pack(1, __pyx_kp_s_Multiplication_with_this_kind_of); if (unlikely(!__pyx_tuple__4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 690; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__4);
   __Pyx_GIVEREF(__pyx_tuple__4);
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":787
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":791
  * 
  *         else:
  *             print('Matrix too big to print out', file=OUT)             # <<<<<<<<<<<<<<
  * 
  *     ####################################################################################################################
  */
-  __pyx_tuple__6 = PyTuple_Pack(1, __pyx_kp_s_Matrix_too_big_to_print_out); if (unlikely(!__pyx_tuple__6)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 787; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__6 = PyTuple_Pack(1, __pyx_kp_s_Matrix_too_big_to_print_out); if (unlikely(!__pyx_tuple__6)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 791; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__6);
   __Pyx_GIVEREF(__pyx_tuple__6);
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":841
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":845
  *     def debug_print(self):
  *         cdef INT32_t i
  *         print("ind:")             # <<<<<<<<<<<<<<
  *         for i from 0 <= i < self.ncol + 1:
  *             print(self.ind[i], end=' ', sep=' ')
  */
-  __pyx_tuple__7 = PyTuple_Pack(1, __pyx_kp_s_ind); if (unlikely(!__pyx_tuple__7)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 841; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__7 = PyTuple_Pack(1, __pyx_kp_s_ind); if (unlikely(!__pyx_tuple__7)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 845; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__7);
   __Pyx_GIVEREF(__pyx_tuple__7);
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":846
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":850
  *         print()
  * 
  *         print("row:")             # <<<<<<<<<<<<<<
  *         for i from 0 <= i < self.nnz:
  *             print(self.row[i], end=' ', sep=' ')
  */
-  __pyx_tuple__9 = PyTuple_Pack(1, __pyx_kp_s_row); if (unlikely(!__pyx_tuple__9)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 846; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__9 = PyTuple_Pack(1, __pyx_kp_s_row); if (unlikely(!__pyx_tuple__9)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 850; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__9);
   __Pyx_GIVEREF(__pyx_tuple__9);
 
-  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":851
+  /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pyx":855
  *         print()
  * 
  *         print("val:")             # <<<<<<<<<<<<<<
  *         for i from 0 <= i < self.nnz:
  *             print(self.val[i], end=' == ', sep=' == ')
  */
-  __pyx_tuple__10 = PyTuple_Pack(1, __pyx_kp_s_val); if (unlikely(!__pyx_tuple__10)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 851; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__10 = PyTuple_Pack(1, __pyx_kp_s_val); if (unlikely(!__pyx_tuple__10)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 855; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__10);
   __Pyx_GIVEREF(__pyx_tuple__10);
 
