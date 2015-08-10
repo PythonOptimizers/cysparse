@@ -888,6 +888,19 @@ struct __pyx_opt_args_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT
   int __pyx_n;
   int count_only_stored;
 };
+struct __pyx_opt_args_8cysparse_6sparse_16csc_mat_matrices_25csc_mat_INT32_t_FLOAT64_t_MakeCSCSparseMatrix_INT32_t_FLOAT64_t;
+
+/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_FLOAT64_t.pxd":34
+ * 
+ * 
+ * cdef MakeCSCSparseMatrix_INT32_t_FLOAT64_t(INT32_t nrow,             # <<<<<<<<<<<<<<
+ *                                         INT32_t ncol,
+ *                                         INT32_t nnz,
+ */
+struct __pyx_opt_args_8cysparse_6sparse_16csc_mat_matrices_25csc_mat_INT32_t_FLOAT64_t_MakeCSCSparseMatrix_INT32_t_FLOAT64_t {
+  int __pyx_n;
+  int row_indices_are_sorted;
+};
 struct __pyx_opt_args_8cysparse_6linalg_5mumps_23mumps_INT32_t_FLOAT64_t_15mumps_int_array_get_array;
 struct __pyx_opt_args_8cysparse_6linalg_5mumps_23mumps_INT32_t_FLOAT64_t_17dmumps_real_array_get_array;
 
@@ -1203,6 +1216,8 @@ static struct __pyx_vtabstruct_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT3
  */
 
 struct __pyx_vtabstruct_8cysparse_6sparse_16csc_mat_matrices_25csc_mat_INT32_t_FLOAT64_t_CSCSparseMatrix_INT32_t_FLOAT64_t {
+  PyObject *(*_order_row_indices)(struct __pyx_obj_8cysparse_6sparse_16csc_mat_matrices_25csc_mat_INT32_t_FLOAT64_t_CSCSparseMatrix_INT32_t_FLOAT64_t *);
+  PyObject *(*_set_row_indices_ordered_is_true)(struct __pyx_obj_8cysparse_6sparse_16csc_mat_matrices_25csc_mat_INT32_t_FLOAT64_t_CSCSparseMatrix_INT32_t_FLOAT64_t *);
   PyObject *(*at)(struct __pyx_obj_8cysparse_6sparse_16csc_mat_matrices_25csc_mat_INT32_t_FLOAT64_t_CSCSparseMatrix_INT32_t_FLOAT64_t *, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t);
   __pyx_t_8cysparse_5types_14cysparse_types_FLOAT64_t (*safe_at)(struct __pyx_obj_8cysparse_6sparse_16csc_mat_matrices_25csc_mat_INT32_t_FLOAT64_t_CSCSparseMatrix_INT32_t_FLOAT64_t *, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t);
 };

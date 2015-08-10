@@ -896,6 +896,19 @@ struct __pyx_opt_args_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32_t_COMPL
   int __pyx_n;
   int count_only_stored;
 };
+struct __pyx_opt_args_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX128_t_MakeCSCSparseMatrix_INT32_t_COMPLEX128_t;
+
+/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX128_t.pxd":35
+ * 
+ * 
+ * cdef MakeCSCSparseMatrix_INT32_t_COMPLEX128_t(INT32_t nrow,             # <<<<<<<<<<<<<<
+ *                                         INT32_t ncol,
+ *                                         INT32_t nnz,
+ */
+struct __pyx_opt_args_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX128_t_MakeCSCSparseMatrix_INT32_t_COMPLEX128_t {
+  int __pyx_n;
+  int row_indices_are_sorted;
+};
 struct __pyx_opt_args_8cysparse_6linalg_11suitesparse_7cholmod_28cholmod_INT32_t_COMPLEX128_t_populate1_cholmod_sparse_struct_with_CSCSparseMatrix;
 struct __pyx_opt_args_8cysparse_6linalg_11suitesparse_7cholmod_28cholmod_INT32_t_COMPLEX128_t_populate2_cholmod_sparse_struct_with_CSCSparseMatrix;
 
@@ -1153,6 +1166,8 @@ static struct __pyx_vtabstruct_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT3
  */
 
 struct __pyx_vtabstruct_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX128_t_CSCSparseMatrix_INT32_t_COMPLEX128_t {
+  PyObject *(*_order_row_indices)(struct __pyx_obj_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX128_t_CSCSparseMatrix_INT32_t_COMPLEX128_t *);
+  PyObject *(*_set_row_indices_ordered_is_true)(struct __pyx_obj_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX128_t_CSCSparseMatrix_INT32_t_COMPLEX128_t *);
   PyObject *(*at)(struct __pyx_obj_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX128_t_CSCSparseMatrix_INT32_t_COMPLEX128_t *, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t);
   __pyx_t_double_complex (*safe_at)(struct __pyx_obj_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPLEX128_t_CSCSparseMatrix_INT32_t_COMPLEX128_t *, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t);
 };

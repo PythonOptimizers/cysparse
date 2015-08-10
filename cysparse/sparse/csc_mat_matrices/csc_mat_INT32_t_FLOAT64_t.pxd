@@ -24,9 +24,19 @@ cdef class CSCSparseMatrix_INT32_t_FLOAT64_t(ImmutableSparseMatrix_INT32_t_FLOAT
         bint __row_indices_sorted  # are the column indices sorted in ascending order?
         INT32_t __first_col_not_ordered # first row that is not ordered
 
+    cdef _order_row_indices(self)
+    cdef _set_row_indices_ordered_is_true(self)
     cdef at(self, INT32_t i, INT32_t j)
 
     cdef FLOAT64_t safe_at(self, INT32_t i, INT32_t j) except? 2
 
 
-cdef MakeCSCSparseMatrix_INT32_t_FLOAT64_t(INT32_t nrow, INT32_t ncol, INT32_t nnz, INT32_t * ind, INT32_t * row, FLOAT64_t * val, bint is_symmetric, bint store_zeros)
+cdef MakeCSCSparseMatrix_INT32_t_FLOAT64_t(INT32_t nrow,
+                                        INT32_t ncol,
+                                        INT32_t nnz,
+                                        INT32_t * ind,
+                                        INT32_t * row,
+                                        FLOAT64_t * val,
+                                        bint is_symmetric,
+                                        bint store_zeros,
+                                        bint row_indices_are_sorted=?)

@@ -608,6 +608,7 @@ cdef class LLSparseMatrix_INT64_t_INT32_t(MutableSparseMatrix_INT64_t_INT32_t):
             Column indices **are** sorted!
 
         """
+        # WARNING: this code keeps the column indices **sorted** and this is declared in the call of MakeCSR...
         cdef INT64_t * ind = <INT64_t *> PyMem_Malloc((self.__nrow + 1) * sizeof(INT64_t))
         if not ind:
             raise MemoryError()
@@ -665,6 +666,7 @@ cdef class LLSparseMatrix_INT64_t_INT32_t(MutableSparseMatrix_INT64_t_INT32_t):
         Note:
             This code also works to create *symmetric* :class:`CSCSparseMatrix` matrices.
         """
+        # WARNING: this code keeps the row indices **sorted** and this is declared in the call of MakeCSC...
         cdef INT64_t * ind = <INT64_t *> PyMem_Malloc((self.__ncol + 1) * sizeof(INT64_t))
         if not ind:
             raise MemoryError()
@@ -722,9 +724,16 @@ cdef class LLSparseMatrix_INT64_t_INT32_t(MutableSparseMatrix_INT64_t_INT32_t):
 
         free(col_indexes)
 
-        csc_mat = MakeCSCSparseMatrix_INT64_t_INT32_t(nrow=self.__nrow, ncol=self.__ncol, nnz=self.__nnz, ind=ind, row=row, val=val, is_symmetric=self.__is_symmetric, store_zeros=self.__store_zeros)
-
-
+        # row indices **are** ordered by the algorithm we use in to_csc()
+        csc_mat = MakeCSCSparseMatrix_INT64_t_INT32_t(nrow=self.__nrow,
+                                                     ncol=self.__ncol,
+                                                     nnz=self.__nnz,
+                                                     ind=ind,
+                                                     row=row,
+                                                     val=val,
+                                                     is_symmetric=self.__is_symmetric,
+                                                     store_zeros=self.__store_zeros,
+                                                     row_indices_are_sorted=True)
 
         return csc_mat
 

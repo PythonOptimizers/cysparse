@@ -12,6 +12,7 @@ from cysparse.sparse.s_mat cimport unexposed_value
 from cysparse.sparse.s_mat_matrices.s_mat_INT32_t_INT32_t cimport ImmutableSparseMatrix_INT32_t_INT32_t
 from cysparse.sparse.ll_mat_matrices.ll_mat_INT32_t_INT32_t cimport LLSparseMatrix_INT32_t_INT32_t
 
+from cysparse.sparse.sparse_utils.generic.sort_indices_INT32_t cimport sort_array_INT32_t
 from cysparse.sparse.sparse_utils.generic.print_INT32_t cimport element_to_string_INT32_t, conjugated_element_to_string_INT32_t, empty_to_string_INT32_t
 from cysparse.sparse.sparse_utils.generic.matrix_translations_INT32_t_INT32_t cimport csr_to_csc_kernel_INT32_t_INT32_t, csc_to_csr_kernel_INT32_t_INT32_t
 
@@ -171,6 +172,55 @@ cdef class CSCSparseMatrix_INT32_t_INT32_t(ImmutableSparseMatrix_INT32_t_INT32_t
         self.__row_indices_sorted = True
         return self.__row_indices_sorted
 
+    cdef _set_row_indices_ordered_is_true(self):
+        """
+        If you construct a CSC matrix and you know that its row indices **are** ordered, confirm it by calling this method.
+
+        Warning:
+            Be sure to know what you are doing because there is no control and we assume that the row indices are indeed sorted for
+            almost all operations.
+        """
+        self.__row_indices_sorted_test_done = True
+        self.__row_indices_sorted = True
+
+    cdef _order_row_indices(self):
+        """
+        Order row indices by ascending order.
+
+        We use a simple insert sort. The idea is that the row indices aren't that much not ordered.
+        """
+        #  must be called to find first col not ordered
+        if self.are_row_indices_sorted():
+            return
+
+        cdef INT32_t j = self.__first_col_not_ordered
+        cdef INT32_t row_index
+        cdef INT32_t row_index_start
+        cdef INT32_t row_index_stop
+
+        while j < self.__ncol:
+            row_index = self.ind[j]
+            row_index_start = row_index
+            row_index_stop = self.ind[j+1]
+
+            while row_index < row_index_stop - 1:
+                # detect if col is not ordered
+                if self.row[row_index] > self.row[row_index + 1]:
+                    # sort
+                    # TODO: maybe use the row index for optimization?
+                    sort_array_INT32_t(self.row, row_index_start, row_index_stop)
+                    break
+                else:
+                    row_index += 1
+
+            j += 1
+
+    def order_row_indices(self):
+        """
+        Forces row indices to be ordered.
+        """
+        return self._order_row_indices()
+
     ####################################################################################################################
     # Set/Get items
     ####################################################################################################################
@@ -199,7 +249,6 @@ cdef class CSCSparseMatrix_INT32_t_INT32_t(ImmutableSparseMatrix_INT32_t_INT32_t
 
         # code is duplicated for optimization
         if self.__is_symmetric:
-            # TODO: column indices are NOT necessarily sorted... what do we do about it?
             if i < j:
                 real_i = j
                 real_j = i
@@ -207,15 +256,28 @@ cdef class CSCSparseMatrix_INT32_t_INT32_t(ImmutableSparseMatrix_INT32_t_INT32_t
                 real_i = i
                 real_j = j
 
-            for k from self.ind[real_j] <= k < self.ind[real_j+1]:
-                if real_i == self.row[k]:
-                    return self.val[k]
+            if self. __row_indices_sorted:
+                for k from self.ind[real_j] <= k < self.ind[real_j+1]:
+                    if real_i == self.row[k]:
+                        return self.val[k]
+                    elif real_i > self.row[k]:
+                        break
+            else:
+                for k from self.ind[real_j] <= k < self.ind[real_j+1]:
+                    if real_i == self.row[k]:
+                        return self.val[k]
 
         else:  # not symmetric
-            # TODO: column indices are NOT necessarily sorted... what do we do about it?
-            for k from self.ind[j] <= k < self.ind[j+1]:
-                if i == self.row[k]:
-                    return self.val[k]
+            if self. __row_indices_sorted:
+                for k from self.ind[j] <= k < self.ind[j+1]:
+                    if i == self.row[k]:
+                        return self.val[k]
+                    elif i > self.row[k]:
+                        break
+            else:
+                for k from self.ind[j] <= k < self.ind[j+1]:
+                    if i == self.row[k]:
+                        return self.val[k]
 
         return 0.0
 
@@ -787,7 +849,14 @@ cdef class CSCSparseMatrix_INT32_t_INT32_t(ImmutableSparseMatrix_INT32_t_INT32_t
 ########################################################################################################################
 # Factory methods
 ########################################################################################################################
-cdef MakeCSCSparseMatrix_INT32_t_INT32_t(INT32_t nrow, INT32_t ncol, INT32_t nnz, INT32_t * ind, INT32_t * row, INT32_t * val, bint is_symmetric, bint store_zeros):
+cdef MakeCSCSparseMatrix_INT32_t_INT32_t(INT32_t nrow,
+                                        INT32_t ncol,
+                                        INT32_t nnz,
+                                        INT32_t * ind,
+                                        INT32_t * row,
+                                        INT32_t * val,
+                                        bint is_symmetric, bint store_zeros,
+                                        bint row_indices_are_sorted=False):
     """
     Construct a CSCSparseMatrix object.
 
@@ -799,10 +868,19 @@ cdef MakeCSCSparseMatrix_INT32_t_INT32_t(INT32_t nrow, INT32_t ncol, INT32_t nnz
         row  (INT32_t *): C-array with row indices.
         val  (INT32_t *): C-array with values.
     """
-    csc_mat = CSCSparseMatrix_INT32_t_INT32_t(control_object=unexposed_value, nrow=nrow, ncol=ncol, nnz=nnz, is_symmetric=is_symmetric, store_zeros=store_zeros)
+    cdef CSCSparseMatrix_INT32_t_INT32_t csc_mat
+    csc_mat = CSCSparseMatrix_INT32_t_INT32_t(control_object=unexposed_value,
+                                             nrow=nrow,
+                                             ncol=ncol,
+                                             nnz=nnz,
+                                             is_symmetric=is_symmetric,
+                                             store_zeros=store_zeros)
 
     csc_mat.val = val
     csc_mat.ind = ind
     csc_mat.row = row
+
+    if row_indices_are_sorted:
+        csc_mat._set_row_indices_ordered_is_true()
 
     return csc_mat

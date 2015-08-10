@@ -50,3 +50,8 @@ CSC = l1.to_csc()
 CSC.print_to(sys.stdout)
 
 print CSC.are_row_indices_sorted()
+
+A = NewLinearFillLLSparseMatrix(ncol=4, nrow=15)
+
+A_csc = A.to_csc()
+print A_csc.are_row_indices_sorted()

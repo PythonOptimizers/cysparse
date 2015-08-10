@@ -666,6 +666,7 @@ YOU HAVE TO DEFINE OR CAST YOUR NEW UNRECOGNIZED COMPLEX TYPE
             Column indices **are** sorted!
 
         """
+        # WARNING: this code keeps the column indices **sorted** and this is declared in the call of MakeCSR...
         cdef @index@ * ind = <@index@ *> PyMem_Malloc((self.__nrow + 1) * sizeof(@index@))
         if not ind:
             raise MemoryError()
@@ -723,6 +724,7 @@ YOU HAVE TO DEFINE OR CAST YOUR NEW UNRECOGNIZED COMPLEX TYPE
         Note:
             This code also works to create *symmetric* :class:`CSCSparseMatrix` matrices.
         """
+        # WARNING: this code keeps the row indices **sorted** and this is declared in the call of MakeCSC...
         cdef @index@ * ind = <@index@ *> PyMem_Malloc((self.__ncol + 1) * sizeof(@index@))
         if not ind:
             raise MemoryError()
@@ -780,9 +782,16 @@ YOU HAVE TO DEFINE OR CAST YOUR NEW UNRECOGNIZED COMPLEX TYPE
 
         free(col_indexes)
 
-        csc_mat = MakeCSCSparseMatrix_@index@_@type@(nrow=self.__nrow, ncol=self.__ncol, nnz=self.__nnz, ind=ind, row=row, val=val, is_symmetric=self.__is_symmetric, store_zeros=self.__store_zeros)
-
-
+        # row indices **are** ordered by the algorithm we use in to_csc()
+        csc_mat = MakeCSCSparseMatrix_@index@_@type@(nrow=self.__nrow,
+                                                     ncol=self.__ncol,
+                                                     nnz=self.__nnz,
+                                                     ind=ind,
+                                                     row=row,
+                                                     val=val,
+                                                     is_symmetric=self.__is_symmetric,
+                                                     store_zeros=self.__store_zeros,
+                                                     row_indices_are_sorted=True)
 
         return csc_mat
 
