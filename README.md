@@ -2,7 +2,9 @@
 
 Python/Cython library to replace PySparse.
 
-This is the multi-types version (last single type version: ce86f8476166f63d0af72e38a477a761aecf4a7c).
+:red_circle: THIS VERSION IS BUGGY :red_circle:
+
+I started to deal with sorted col/row indices for LL/CSC/CSR sparse matrices.
 
 ## Announcements
 
