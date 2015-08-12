@@ -489,7 +489,15 @@ cdef class CSRSparseMatrix_INT32_t_FLOAT128_t(ImmutableSparseMatrix_INT32_t_FLOA
         temp = <FLOAT128_t *> PyMem_Realloc(val, nnz * sizeof(FLOAT128_t))
         val = <FLOAT128_t*>temp
 
-        return MakeCSRSparseMatrix_INT32_t_FLOAT128_t(self.__nrow, self.__ncol, nnz, ind, col, val, is_symmetric=False, store_zeros=self.__store_zeros)
+        return MakeCSRSparseMatrix_INT32_t_FLOAT128_t(self.__nrow,
+                                                  self.__ncol,
+                                                  nnz,
+                                                  ind,
+                                                  col,
+                                                  val,
+                                                  is_symmetric=False,
+                                                  store_zeros=self.__store_zeros,
+                                                  col_indices_are_sorted=True)
 
     def triu(self, int k):
         """
@@ -615,7 +623,15 @@ cdef class CSRSparseMatrix_INT32_t_FLOAT128_t(ImmutableSparseMatrix_INT32_t_FLOA
         temp = <FLOAT128_t *> PyMem_Realloc(val, nnz * sizeof(FLOAT128_t))
         val = <FLOAT128_t*>temp
 
-        return MakeCSRSparseMatrix_INT32_t_FLOAT128_t(self.__nrow, self.__ncol, nnz, ind, col, val, is_symmetric=False, store_zeros=self.__store_zeros)
+        return MakeCSRSparseMatrix_INT32_t_FLOAT128_t(self.__nrow,
+                                                  self.__ncol,
+                                                  nnz,
+                                                  ind,
+                                                  col,
+                                                  val,
+                                                  is_symmetric=False,
+                                                  store_zeros=self.__store_zeros,
+                                                  col_indices_are_sorted=True)
 
     def to_csc(self):
         """
@@ -643,7 +659,15 @@ cdef class CSRSparseMatrix_INT32_t_FLOAT128_t(ImmutableSparseMatrix_INT32_t_FLOA
                        <INT32_t *>self.ind, <INT32_t *>self.col, <FLOAT128_t *>self.val,
                        ind, row, val)
 
-        return MakeCSCSparseMatrix_INT32_t_FLOAT128_t(self.__nrow, self.__ncol, self.__nnz, ind, row, val, is_symmetric=self.is_symmetric, store_zeros=self.store_zeros)
+        return MakeCSCSparseMatrix_INT32_t_FLOAT128_t(self.__nrow,
+                                                  self.__ncol,
+                                                  self.__nnz,
+                                                  ind,
+                                                  row,
+                                                  val,
+                                                  is_symmetric=self.is_symmetric,
+                                                  store_zeros=self.store_zeros,
+                                                  col_indices_are_sorted=True)
 
 
     def to_ndarray(self):

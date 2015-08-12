@@ -478,7 +478,15 @@ cdef class CSCSparseMatrix_INT64_t_COMPLEX128_t(ImmutableSparseMatrix_INT64_t_CO
         temp = <COMPLEX128_t *> PyMem_Realloc(val, nnz * sizeof(COMPLEX128_t))
         val = <COMPLEX128_t*>temp
 
-        return MakeCSCSparseMatrix_INT64_t_COMPLEX128_t(self.__nrow, self.__ncol, nnz, ind, row, val, is_symmetric=False, store_zeros=self.__store_zeros)
+        return MakeCSCSparseMatrix_INT64_t_COMPLEX128_t(self.__nrow,
+                                                  self.__ncol,
+                                                  nnz,
+                                                  ind,
+                                                  row,
+                                                  val,
+                                                  is_symmetric=False,
+                                                  store_zeros=self.__store_zeros,
+                                                  row_indices_are_sorted==True)
 
     def triu(self, int k):
         """
@@ -604,7 +612,15 @@ cdef class CSCSparseMatrix_INT64_t_COMPLEX128_t(ImmutableSparseMatrix_INT64_t_CO
         temp = <COMPLEX128_t *> PyMem_Realloc(val, nnz * sizeof(COMPLEX128_t))
         val = <COMPLEX128_t*>temp
 
-        return MakeCSCSparseMatrix_INT64_t_COMPLEX128_t(self.__nrow, self.__ncol, nnz, ind, row, val, is_symmetric=False, store_zeros=self.__store_zeros)
+        return MakeCSCSparseMatrix_INT64_t_COMPLEX128_t(self.__nrow,
+                                                  self.__ncol,
+                                                  nnz,
+                                                  ind,
+                                                  row,
+                                                  val,
+                                                  is_symmetric=False,
+                                                  store_zeros=self.__store_zeros,
+                                                  row_indices_are_sorted==True)
 
     def to_csr(self):
         """
@@ -631,7 +647,15 @@ cdef class CSCSparseMatrix_INT64_t_COMPLEX128_t(ImmutableSparseMatrix_INT64_t_CO
                        <INT64_t *>self.ind, <INT64_t *>self.row, <COMPLEX128_t *>self.val,
                        ind, col, val)
 
-        return MakeCSRSparseMatrix_INT64_t_COMPLEX128_t(self.__nrow, self.__ncol, self.__nnz, ind, col, val, is_symmetric=self.is_symmetric, store_zeros=self.store_zeros)
+        return MakeCSRSparseMatrix_INT64_t_COMPLEX128_t(self.__nrow,
+                                                  self.__ncol,
+                                                  self.__nnz,
+                                                  ind,
+                                                  col,
+                                                  val,
+                                                  is_symmetric=self.is_symmetric,
+                                                  store_zeros=self.store_zeros,
+                                                  row_indices_are_sorted=True)
 
 
     def to_ndarray(self):

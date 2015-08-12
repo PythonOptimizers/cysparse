@@ -4,6 +4,9 @@
 Sparse Matrix Formats
 =====================
 
+[THIS SECTION IS VERY DETAILED AND IS PROBABLY NOT INTENDED FOR THE COMMON USER]
+
+
 This section describes the sparse matrix storage schemes available in
 :program:`Cysparse`. In the next sections, we cover sparse matrix creation, population, view and conversion.
 
@@ -24,6 +27,13 @@ Here is a list of existing formats and their basic use:
 The CSR and CSC formats are complementary and can be viewed as respectively a row- and column view of a sparse matrix.
 
 These formats are well known in the community and you can find scores of documents about them on the internet.
+
+Sorted column and row indices
+=============================
+
+[TO BE WRITTEN]
+
+For all sparse matrix formats, we internally keep the indices sorted, i.e. in ascending order. 
 
 The ``LL`` sparse format in details
 =======================================

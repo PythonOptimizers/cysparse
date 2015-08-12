@@ -668,7 +668,15 @@ YOU HAVE TO EXPLICITY CAST YOUR TYPE
                        <@index@ *>self.ind, <@index@ *>self.col, <@type@ *>self.val,
                        ind, row, val)
 
-        return MakeCSCSparseMatrix_@index@_@type@(self.__nrow, self.__ncol, self.__nnz, ind, row, val, is_symmetric=self.is_symmetric, store_zeros=self.store_zeros)
+        return MakeCSCSparseMatrix_@index@_@type@(self.__nrow,
+                                                  self.__ncol,
+                                                  self.__nnz,
+                                                  ind,
+                                                  row,
+                                                  val,
+                                                  is_symmetric=self.is_symmetric,
+                                                  store_zeros=self.store_zeros,
+                                                  col_indices_are_sorted=True)
 
 
     def to_ndarray(self):

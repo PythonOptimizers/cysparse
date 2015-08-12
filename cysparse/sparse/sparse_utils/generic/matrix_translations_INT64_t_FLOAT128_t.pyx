@@ -12,6 +12,10 @@ cdef csr_to_csc_kernel_INT64_t_FLOAT128_t(INT64_t nrow, INT64_t ncol, INT64_t nn
         nnz: Number of non zero elements.
         csr_ind, csr_col, csr_val: CSR matrix (IN argument).
         csc_ind, csc_row, csc_val: Computed CSC matrix (OUT argument).
+
+    Note:
+        This transformation **perserve** the row indices ordering, i.e. if the column indices of the CSR sparse matrix
+        are ordered (ascending sorted), the row indices will be ordered (ascending sorted).
     """
     ############
     # compute csc_ind, i.e. the nnz of each column of the matrix
@@ -79,6 +83,10 @@ cdef csc_to_csr_kernel_INT64_t_FLOAT128_t(INT64_t nrow, INT64_t ncol, INT64_t nn
         nnz: Number of non zero elements.
         csc_ind, csc_row, csc_val: Computed CSC matrix (IN argument).
         csr_ind, csr_col, csr_val: CSR matrix (OUT argument).
+
+    Note:
+        This transformation **perserve** the column indices ordering, i.e. if the row indices of the CSC sparse matrix
+        are ordered (ascending sorted), the column indices will be ordered (ascending sorted).
     """
     ############
     # compute csr_ind, i.e. the nnz of each row of the matrix

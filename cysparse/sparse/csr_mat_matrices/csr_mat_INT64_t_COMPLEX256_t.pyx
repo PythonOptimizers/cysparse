@@ -490,7 +490,15 @@ cdef class CSRSparseMatrix_INT64_t_COMPLEX256_t(ImmutableSparseMatrix_INT64_t_CO
         temp = <COMPLEX256_t *> PyMem_Realloc(val, nnz * sizeof(COMPLEX256_t))
         val = <COMPLEX256_t*>temp
 
-        return MakeCSRSparseMatrix_INT64_t_COMPLEX256_t(self.__nrow, self.__ncol, nnz, ind, col, val, is_symmetric=False, store_zeros=self.__store_zeros)
+        return MakeCSRSparseMatrix_INT64_t_COMPLEX256_t(self.__nrow,
+                                                  self.__ncol,
+                                                  nnz,
+                                                  ind,
+                                                  col,
+                                                  val,
+                                                  is_symmetric=False,
+                                                  store_zeros=self.__store_zeros,
+                                                  col_indices_are_sorted=True)
 
     def triu(self, int k):
         """
@@ -616,7 +624,15 @@ cdef class CSRSparseMatrix_INT64_t_COMPLEX256_t(ImmutableSparseMatrix_INT64_t_CO
         temp = <COMPLEX256_t *> PyMem_Realloc(val, nnz * sizeof(COMPLEX256_t))
         val = <COMPLEX256_t*>temp
 
-        return MakeCSRSparseMatrix_INT64_t_COMPLEX256_t(self.__nrow, self.__ncol, nnz, ind, col, val, is_symmetric=False, store_zeros=self.__store_zeros)
+        return MakeCSRSparseMatrix_INT64_t_COMPLEX256_t(self.__nrow,
+                                                  self.__ncol,
+                                                  nnz,
+                                                  ind,
+                                                  col,
+                                                  val,
+                                                  is_symmetric=False,
+                                                  store_zeros=self.__store_zeros,
+                                                  col_indices_are_sorted=True)
 
     def to_csc(self):
         """
@@ -644,7 +660,15 @@ cdef class CSRSparseMatrix_INT64_t_COMPLEX256_t(ImmutableSparseMatrix_INT64_t_CO
                        <INT64_t *>self.ind, <INT64_t *>self.col, <COMPLEX256_t *>self.val,
                        ind, row, val)
 
-        return MakeCSCSparseMatrix_INT64_t_COMPLEX256_t(self.__nrow, self.__ncol, self.__nnz, ind, row, val, is_symmetric=self.is_symmetric, store_zeros=self.store_zeros)
+        return MakeCSCSparseMatrix_INT64_t_COMPLEX256_t(self.__nrow,
+                                                  self.__ncol,
+                                                  self.__nnz,
+                                                  ind,
+                                                  row,
+                                                  val,
+                                                  is_symmetric=self.is_symmetric,
+                                                  store_zeros=self.store_zeros,
+                                                  col_indices_are_sorted=True)
 
 
     def to_ndarray(self):

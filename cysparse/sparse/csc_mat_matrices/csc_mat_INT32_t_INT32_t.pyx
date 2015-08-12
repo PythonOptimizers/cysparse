@@ -477,7 +477,15 @@ cdef class CSCSparseMatrix_INT32_t_INT32_t(ImmutableSparseMatrix_INT32_t_INT32_t
         temp = <INT32_t *> PyMem_Realloc(val, nnz * sizeof(INT32_t))
         val = <INT32_t*>temp
 
-        return MakeCSCSparseMatrix_INT32_t_INT32_t(self.__nrow, self.__ncol, nnz, ind, row, val, is_symmetric=False, store_zeros=self.__store_zeros)
+        return MakeCSCSparseMatrix_INT32_t_INT32_t(self.__nrow,
+                                                  self.__ncol,
+                                                  nnz,
+                                                  ind,
+                                                  row,
+                                                  val,
+                                                  is_symmetric=False,
+                                                  store_zeros=self.__store_zeros,
+                                                  row_indices_are_sorted==True)
 
     def triu(self, int k):
         """
@@ -603,7 +611,15 @@ cdef class CSCSparseMatrix_INT32_t_INT32_t(ImmutableSparseMatrix_INT32_t_INT32_t
         temp = <INT32_t *> PyMem_Realloc(val, nnz * sizeof(INT32_t))
         val = <INT32_t*>temp
 
-        return MakeCSCSparseMatrix_INT32_t_INT32_t(self.__nrow, self.__ncol, nnz, ind, row, val, is_symmetric=False, store_zeros=self.__store_zeros)
+        return MakeCSCSparseMatrix_INT32_t_INT32_t(self.__nrow,
+                                                  self.__ncol,
+                                                  nnz,
+                                                  ind,
+                                                  row,
+                                                  val,
+                                                  is_symmetric=False,
+                                                  store_zeros=self.__store_zeros,
+                                                  row_indices_are_sorted==True)
 
     def to_csr(self):
         """
@@ -630,7 +646,15 @@ cdef class CSCSparseMatrix_INT32_t_INT32_t(ImmutableSparseMatrix_INT32_t_INT32_t
                        <INT32_t *>self.ind, <INT32_t *>self.row, <INT32_t *>self.val,
                        ind, col, val)
 
-        return MakeCSRSparseMatrix_INT32_t_INT32_t(self.__nrow, self.__ncol, self.__nnz, ind, col, val, is_symmetric=self.is_symmetric, store_zeros=self.store_zeros)
+        return MakeCSRSparseMatrix_INT32_t_INT32_t(self.__nrow,
+                                                  self.__ncol,
+                                                  self.__nnz,
+                                                  ind,
+                                                  col,
+                                                  val,
+                                                  is_symmetric=self.is_symmetric,
+                                                  store_zeros=self.store_zeros,
+                                                  row_indices_are_sorted=True)
 
 
     def to_ndarray(self):

@@ -478,7 +478,15 @@ cdef class CSCSparseMatrix_INT32_t_COMPLEX64_t(ImmutableSparseMatrix_INT32_t_COM
         temp = <COMPLEX64_t *> PyMem_Realloc(val, nnz * sizeof(COMPLEX64_t))
         val = <COMPLEX64_t*>temp
 
-        return MakeCSCSparseMatrix_INT32_t_COMPLEX64_t(self.__nrow, self.__ncol, nnz, ind, row, val, is_symmetric=False, store_zeros=self.__store_zeros)
+        return MakeCSCSparseMatrix_INT32_t_COMPLEX64_t(self.__nrow,
+                                                  self.__ncol,
+                                                  nnz,
+                                                  ind,
+                                                  row,
+                                                  val,
+                                                  is_symmetric=False,
+                                                  store_zeros=self.__store_zeros,
+                                                  row_indices_are_sorted==True)
 
     def triu(self, int k):
         """
@@ -604,7 +612,15 @@ cdef class CSCSparseMatrix_INT32_t_COMPLEX64_t(ImmutableSparseMatrix_INT32_t_COM
         temp = <COMPLEX64_t *> PyMem_Realloc(val, nnz * sizeof(COMPLEX64_t))
         val = <COMPLEX64_t*>temp
 
-        return MakeCSCSparseMatrix_INT32_t_COMPLEX64_t(self.__nrow, self.__ncol, nnz, ind, row, val, is_symmetric=False, store_zeros=self.__store_zeros)
+        return MakeCSCSparseMatrix_INT32_t_COMPLEX64_t(self.__nrow,
+                                                  self.__ncol,
+                                                  nnz,
+                                                  ind,
+                                                  row,
+                                                  val,
+                                                  is_symmetric=False,
+                                                  store_zeros=self.__store_zeros,
+                                                  row_indices_are_sorted==True)
 
     def to_csr(self):
         """
@@ -631,7 +647,15 @@ cdef class CSCSparseMatrix_INT32_t_COMPLEX64_t(ImmutableSparseMatrix_INT32_t_COM
                        <INT32_t *>self.ind, <INT32_t *>self.row, <COMPLEX64_t *>self.val,
                        ind, col, val)
 
-        return MakeCSRSparseMatrix_INT32_t_COMPLEX64_t(self.__nrow, self.__ncol, self.__nnz, ind, col, val, is_symmetric=self.is_symmetric, store_zeros=self.store_zeros)
+        return MakeCSRSparseMatrix_INT32_t_COMPLEX64_t(self.__nrow,
+                                                  self.__ncol,
+                                                  self.__nnz,
+                                                  ind,
+                                                  col,
+                                                  val,
+                                                  is_symmetric=self.is_symmetric,
+                                                  store_zeros=self.store_zeros,
+                                                  row_indices_are_sorted=True)
 
 
     def to_ndarray(self):
