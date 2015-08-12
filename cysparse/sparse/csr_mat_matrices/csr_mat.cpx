@@ -498,7 +498,15 @@ YOU HAVE TO EXPLICITY CAST YOUR TYPE
         temp = <@type@ *> PyMem_Realloc(val, nnz * sizeof(@type@))
         val = <@type@*>temp
 
-        return MakeCSRSparseMatrix_@index@_@type@(self.__nrow, self.__ncol, nnz, ind, col, val, is_symmetric=False, store_zeros=self.__store_zeros)
+        return MakeCSRSparseMatrix_@index@_@type@(self.__nrow,
+                                                  self.__ncol,
+                                                  nnz,
+                                                  ind,
+                                                  col,
+                                                  val,
+                                                  is_symmetric=False,
+                                                  store_zeros=self.__store_zeros,
+                                                  col_indices_are_sorted=True)
 
     def triu(self, int k):
         """
@@ -624,7 +632,15 @@ YOU HAVE TO EXPLICITY CAST YOUR TYPE
         temp = <@type@ *> PyMem_Realloc(val, nnz * sizeof(@type@))
         val = <@type@*>temp
 
-        return MakeCSRSparseMatrix_@index@_@type@(self.__nrow, self.__ncol, nnz, ind, col, val, is_symmetric=False, store_zeros=self.__store_zeros)
+        return MakeCSRSparseMatrix_@index@_@type@(self.__nrow,
+                                                  self.__ncol,
+                                                  nnz,
+                                                  ind,
+                                                  col,
+                                                  val,
+                                                  is_symmetric=False,
+                                                  store_zeros=self.__store_zeros,
+                                                  col_indices_are_sorted=True)
 
     def to_csc(self):
         """
