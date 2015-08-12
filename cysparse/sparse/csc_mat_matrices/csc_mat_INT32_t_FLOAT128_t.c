@@ -1492,6 +1492,12 @@ static void __Pyx_RaiseArgtupleInvalid(const char* func_name, int exact,
 
 static CYTHON_INLINE int __Pyx_CheckKeywordStrings(PyObject *kwdict, const char* function_name, int kw_allowed);
 
+static void __Pyx_RaiseDoubleKeywordsError(const char* func_name, PyObject* kw_name);
+
+static int __Pyx_ParseOptionalKeywords(PyObject *kwds, PyObject **argnames[], \
+    PyObject *kwds2, PyObject *values[], Py_ssize_t num_pos_args, \
+    const char* function_name);
+
 #if CYTHON_COMPILING_IN_CPYTHON
 static CYTHON_INLINE PyObject* __Pyx_PyObject_CallMethO(PyObject *func, PyObject *arg);
 #endif
@@ -1527,12 +1533,6 @@ static CYTHON_INLINE PyObject *__Pyx_GetItemInt_Tuple_Fast(PyObject *o, Py_ssize
 static CYTHON_INLINE PyObject *__Pyx_GetItemInt_Generic(PyObject *o, PyObject* j);
 static CYTHON_INLINE PyObject *__Pyx_GetItemInt_Fast(PyObject *o, Py_ssize_t i,
                                                      int is_list, int wraparound, int boundscheck);
-
-static void __Pyx_RaiseDoubleKeywordsError(const char* func_name, PyObject* kw_name);
-
-static int __Pyx_ParseOptionalKeywords(PyObject *kwds, PyObject **argnames[], \
-    PyObject *kwds2, PyObject *values[], Py_ssize_t num_pos_args, \
-    const char* function_name);
 
 static void __Pyx_RaiseBufferFallbackError(void);
 
@@ -2164,7 +2164,7 @@ static PyObject *__pyx_builtin_id;
 static int __pyx_pf_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT32_t_FLOAT128_t_34CSCSparseMatrix_INT32_t_FLOAT128_t___cinit__(struct __pyx_obj_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT32_t_FLOAT128_t_CSCSparseMatrix_INT32_t_FLOAT128_t *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v_kwargs); /* proto */
 static void __pyx_pf_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT32_t_FLOAT128_t_34CSCSparseMatrix_INT32_t_FLOAT128_t_2__dealloc__(struct __pyx_obj_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT32_t_FLOAT128_t_CSCSparseMatrix_INT32_t_FLOAT128_t *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT32_t_FLOAT128_t_34CSCSparseMatrix_INT32_t_FLOAT128_t_4copy(struct __pyx_obj_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT32_t_FLOAT128_t_CSCSparseMatrix_INT32_t_FLOAT128_t *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT32_t_FLOAT128_t_34CSCSparseMatrix_INT32_t_FLOAT128_t_6are_row_indices_sorted(struct __pyx_obj_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT32_t_FLOAT128_t_CSCSparseMatrix_INT32_t_FLOAT128_t *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT32_t_FLOAT128_t_34CSCSparseMatrix_INT32_t_FLOAT128_t_6are_row_indices_sorted(struct __pyx_obj_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT32_t_FLOAT128_t_CSCSparseMatrix_INT32_t_FLOAT128_t *__pyx_v_self, PyObject *__pyx_v_force_test); /* proto */
 static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT32_t_FLOAT128_t_34CSCSparseMatrix_INT32_t_FLOAT128_t_8order_row_indices(struct __pyx_obj_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT32_t_FLOAT128_t_CSCSparseMatrix_INT32_t_FLOAT128_t *__pyx_v_self); /* proto */
 static int __pyx_pf_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT32_t_FLOAT128_t_34CSCSparseMatrix_INT32_t_FLOAT128_t_10__setitem__(CYTHON_UNUSED struct __pyx_obj_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT32_t_FLOAT128_t_CSCSparseMatrix_INT32_t_FLOAT128_t *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v_key, CYTHON_UNUSED PyObject *__pyx_v_value); /* proto */
 static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT32_t_FLOAT128_t_34CSCSparseMatrix_INT32_t_FLOAT128_t_12__getitem__(struct __pyx_obj_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT32_t_FLOAT128_t_CSCSparseMatrix_INT32_t_FLOAT128_t *__pyx_v_self, PyObject *__pyx_v_key); /* proto */
@@ -2302,6 +2302,7 @@ static char __pyx_k_enumerate[] = "enumerate";
 static char __pyx_k_IndexError[] = "IndexError";
 static char __pyx_k_ValueError[] = "ValueError";
 static char __pyx_k_cell_width[] = "cell_width";
+static char __pyx_k_force_test[] = "force_test";
 static char __pyx_k_pyx_vtable[] = "__pyx_vtable__";
 static char __pyx_k_MemoryError[] = "MemoryError";
 static char __pyx_k_SyntaxError[] = "SyntaxError";
@@ -2420,6 +2421,7 @@ static PyObject *__pyx_n_s_error;
 static PyObject *__pyx_n_s_file;
 static PyObject *__pyx_n_s_flags;
 static PyObject *__pyx_n_s_float128;
+static PyObject *__pyx_n_s_force_test;
 static PyObject *__pyx_n_s_format;
 static PyObject *__pyx_n_s_fortran;
 static PyObject *__pyx_n_u_fortran;
@@ -4441,34 +4443,80 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT32_t
 /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_FLOAT128_t.pyx":146
  *     # Row indices ordering
  *     ####################################################################################################################
- *     def are_row_indices_sorted(self):             # <<<<<<<<<<<<<<
+ *     def are_row_indices_sorted(self, force_test=False):             # <<<<<<<<<<<<<<
  *         """
  *         Tell if row indices are sorted in augmenting order (ordered).
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT32_t_FLOAT128_t_34CSCSparseMatrix_INT32_t_FLOAT128_t_7are_row_indices_sorted(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT32_t_FLOAT128_t_34CSCSparseMatrix_INT32_t_FLOAT128_t_7are_row_indices_sorted(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
 static char __pyx_doc_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT32_t_FLOAT128_t_34CSCSparseMatrix_INT32_t_FLOAT128_t_6are_row_indices_sorted[] = "\n        Tell if row indices are sorted in augmenting order (ordered).\n\n\n        ";
-static PyObject *__pyx_pw_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT32_t_FLOAT128_t_34CSCSparseMatrix_INT32_t_FLOAT128_t_7are_row_indices_sorted(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT32_t_FLOAT128_t_34CSCSparseMatrix_INT32_t_FLOAT128_t_7are_row_indices_sorted(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  PyObject *__pyx_v_force_test = 0;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("are_row_indices_sorted (wrapper)", 0);
-  __pyx_r = __pyx_pf_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT32_t_FLOAT128_t_34CSCSparseMatrix_INT32_t_FLOAT128_t_6are_row_indices_sorted(((struct __pyx_obj_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT32_t_FLOAT128_t_CSCSparseMatrix_INT32_t_FLOAT128_t *)__pyx_v_self));
+  {
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_force_test,0};
+    PyObject* values[1] = {0};
+    values[0] = ((PyObject *)Py_False);
+    if (unlikely(__pyx_kwds)) {
+      Py_ssize_t kw_args;
+      const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
+      switch (pos_args) {
+        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      kw_args = PyDict_Size(__pyx_kwds);
+      switch (pos_args) {
+        case  0:
+        if (kw_args > 0) {
+          PyObject* value = PyDict_GetItem(__pyx_kwds, __pyx_n_s_force_test);
+          if (value) { values[0] = value; kw_args--; }
+        }
+      }
+      if (unlikely(kw_args > 0)) {
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "are_row_indices_sorted") < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 146; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+      }
+    } else {
+      switch (PyTuple_GET_SIZE(__pyx_args)) {
+        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+    }
+    __pyx_v_force_test = values[0];
+  }
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("are_row_indices_sorted", 0, 0, 1, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[1]; __pyx_lineno = 146; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __pyx_L3_error:;
+  __Pyx_AddTraceback("cysparse.sparse.csc_mat_matrices.csc_mat_INT32_t_FLOAT128_t.CSCSparseMatrix_INT32_t_FLOAT128_t.are_row_indices_sorted", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT32_t_FLOAT128_t_34CSCSparseMatrix_INT32_t_FLOAT128_t_6are_row_indices_sorted(((struct __pyx_obj_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT32_t_FLOAT128_t_CSCSparseMatrix_INT32_t_FLOAT128_t *)__pyx_v_self), __pyx_v_force_test);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT32_t_FLOAT128_t_34CSCSparseMatrix_INT32_t_FLOAT128_t_6are_row_indices_sorted(struct __pyx_obj_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT32_t_FLOAT128_t_CSCSparseMatrix_INT32_t_FLOAT128_t *__pyx_v_self) {
+static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT32_t_FLOAT128_t_34CSCSparseMatrix_INT32_t_FLOAT128_t_6are_row_indices_sorted(struct __pyx_obj_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT32_t_FLOAT128_t_CSCSparseMatrix_INT32_t_FLOAT128_t *__pyx_v_self, PyObject *__pyx_v_force_test) {
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_j;
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_row_index;
   __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_v_row_index_stop;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   int __pyx_t_1;
-  PyObject *__pyx_t_2 = NULL;
-  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_t_3;
+  int __pyx_t_2;
+  int __pyx_t_3;
+  PyObject *__pyx_t_4 = NULL;
+  __pyx_t_8cysparse_5types_14cysparse_types_INT32_t __pyx_t_5;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -4477,25 +4525,34 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT32_t
   /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_FLOAT128_t.pyx":156
  *         cdef INT32_t row_index_stop
  * 
- *         if self.__row_indices_sorted_test_done:             # <<<<<<<<<<<<<<
+ *         if not force_test and self.__row_indices_sorted_test_done:             # <<<<<<<<<<<<<<
  *             return self.__row_indices_sorted
  *         else:
  */
-  __pyx_t_1 = (__pyx_v_self->__pyx___row_indices_sorted_test_done != 0);
+  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_v_force_test); if (unlikely(__pyx_t_2 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 156; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = ((!__pyx_t_2) != 0);
+  if (__pyx_t_3) {
+  } else {
+    __pyx_t_1 = __pyx_t_3;
+    goto __pyx_L4_bool_binop_done;
+  }
+  __pyx_t_3 = (__pyx_v_self->__pyx___row_indices_sorted_test_done != 0);
+  __pyx_t_1 = __pyx_t_3;
+  __pyx_L4_bool_binop_done:;
   if (__pyx_t_1) {
 
     /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_FLOAT128_t.pyx":157
  * 
- *         if self.__row_indices_sorted_test_done:
+ *         if not force_test and self.__row_indices_sorted_test_done:
  *             return self.__row_indices_sorted             # <<<<<<<<<<<<<<
  *         else:
  *             # do the test
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_2 = __Pyx_PyBool_FromLong(__pyx_v_self->__pyx___row_indices_sorted); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 157; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_GOTREF(__pyx_t_2);
-    __pyx_r = __pyx_t_2;
-    __pyx_t_2 = 0;
+    __pyx_t_4 = __Pyx_PyBool_FromLong(__pyx_v_self->__pyx___row_indices_sorted); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 157; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_4);
+    __pyx_r = __pyx_t_4;
+    __pyx_t_4 = 0;
     goto __pyx_L0;
   }
   /*else*/ {
@@ -4516,8 +4573,8 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT32_t
  *                 row_index = self.ind[j]
  *                 row_index_stop = self.ind[j+1] - 1
  */
-    __pyx_t_3 = __pyx_v_self->__pyx_base.__pyx_base.__pyx___ncol;
-    for (__pyx_v_j = 0; __pyx_v_j < __pyx_t_3; __pyx_v_j++) {
+    __pyx_t_5 = __pyx_v_self->__pyx_base.__pyx_base.__pyx___ncol;
+    for (__pyx_v_j = 0; __pyx_v_j < __pyx_t_5; __pyx_v_j++) {
 
       /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_FLOAT128_t.pyx":163
  *             # test each row
@@ -4584,10 +4641,10 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT32_t
  * 
  */
           __Pyx_XDECREF(__pyx_r);
-          __pyx_t_2 = __Pyx_PyBool_FromLong(__pyx_v_self->__pyx___row_indices_sorted); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 171; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          __Pyx_GOTREF(__pyx_t_2);
-          __pyx_r = __pyx_t_2;
-          __pyx_t_2 = 0;
+          __pyx_t_4 = __Pyx_PyBool_FromLong(__pyx_v_self->__pyx___row_indices_sorted); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 171; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __Pyx_GOTREF(__pyx_t_4);
+          __pyx_r = __pyx_t_4;
+          __pyx_t_4 = 0;
           goto __pyx_L0;
         }
 
@@ -4610,8 +4667,8 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT32_t
  *         self.__row_indices_sorted = True
  *         return self.__row_indices_sorted
  */
-  __pyx_t_3 = __pyx_v_self->__pyx_base.__pyx_base.__pyx___ncol;
-  __pyx_v_self->__pyx___first_col_not_ordered = __pyx_t_3;
+  __pyx_t_5 = __pyx_v_self->__pyx_base.__pyx_base.__pyx___ncol;
+  __pyx_v_self->__pyx___first_col_not_ordered = __pyx_t_5;
 
   /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_FLOAT128_t.pyx":176
  *         # row indices are ordered
@@ -4630,23 +4687,23 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT32_t
  *     cdef _set_row_indices_ordered_is_true(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyBool_FromLong(__pyx_v_self->__pyx___row_indices_sorted); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 177; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_r = __pyx_t_2;
-  __pyx_t_2 = 0;
+  __pyx_t_4 = __Pyx_PyBool_FromLong(__pyx_v_self->__pyx___row_indices_sorted); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 177; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_4);
+  __pyx_r = __pyx_t_4;
+  __pyx_t_4 = 0;
   goto __pyx_L0;
 
   /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_FLOAT128_t.pyx":146
  *     # Row indices ordering
  *     ####################################################################################################################
- *     def are_row_indices_sorted(self):             # <<<<<<<<<<<<<<
+ *     def are_row_indices_sorted(self, force_test=False):             # <<<<<<<<<<<<<<
  *         """
  *         Tell if row indices are sorted in augmenting order (ordered).
  */
 
   /* function exit code */
   __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_4);
   __Pyx_AddTraceback("cysparse.sparse.csc_mat_matrices.csc_mat_INT32_t_FLOAT128_t.CSCSparseMatrix_INT32_t_FLOAT128_t.are_row_indices_sorted", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
@@ -5145,7 +5202,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT32_t_
  *                 for k from self.ind[real_j] <= k < self.ind[real_j+1]:
  *                     if real_i == self.row[k]:             # <<<<<<<<<<<<<<
  *                         return self.val[k]
- *                     elif real_i > self.row[k]:
+ *                     elif real_i < self.row[k]:
  */
         __pyx_t_1 = ((__pyx_v_real_i == (__pyx_v_self->row[__pyx_v_k])) != 0);
         if (__pyx_t_1) {
@@ -5154,7 +5211,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT32_t_
  *                 for k from self.ind[real_j] <= k < self.ind[real_j+1]:
  *                     if real_i == self.row[k]:
  *                         return self.val[k]             # <<<<<<<<<<<<<<
- *                     elif real_i > self.row[k]:
+ *                     elif real_i < self.row[k]:
  *                         break
  */
           __Pyx_XDECREF(__pyx_r);
@@ -5168,16 +5225,16 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT32_t_
         /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_FLOAT128_t.pyx":267
  *                     if real_i == self.row[k]:
  *                         return self.val[k]
- *                     elif real_i > self.row[k]:             # <<<<<<<<<<<<<<
+ *                     elif real_i < self.row[k]:             # <<<<<<<<<<<<<<
  *                         break
  *             else:
  */
-        __pyx_t_1 = ((__pyx_v_real_i > (__pyx_v_self->row[__pyx_v_k])) != 0);
+        __pyx_t_1 = ((__pyx_v_real_i < (__pyx_v_self->row[__pyx_v_k])) != 0);
         if (__pyx_t_1) {
 
           /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_FLOAT128_t.pyx":268
  *                         return self.val[k]
- *                     elif real_i > self.row[k]:
+ *                     elif real_i < self.row[k]:
  *                         break             # <<<<<<<<<<<<<<
  *             else:
  *                 for k from self.ind[real_j] <= k < self.ind[real_j+1]:
@@ -5256,7 +5313,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT32_t_
  *                 for k from self.ind[j] <= k < self.ind[j+1]:
  *                     if i == self.row[k]:             # <<<<<<<<<<<<<<
  *                         return self.val[k]
- *                     elif i > self.row[k]:
+ *                     elif i < self.row[k]:
  */
         __pyx_t_1 = ((__pyx_v_i == (__pyx_v_self->row[__pyx_v_k])) != 0);
         if (__pyx_t_1) {
@@ -5265,7 +5322,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT32_t_
  *                 for k from self.ind[j] <= k < self.ind[j+1]:
  *                     if i == self.row[k]:
  *                         return self.val[k]             # <<<<<<<<<<<<<<
- *                     elif i > self.row[k]:
+ *                     elif i < self.row[k]:
  *                         break
  */
           __Pyx_XDECREF(__pyx_r);
@@ -5279,16 +5336,16 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT32_t_
         /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_FLOAT128_t.pyx":279
  *                     if i == self.row[k]:
  *                         return self.val[k]
- *                     elif i > self.row[k]:             # <<<<<<<<<<<<<<
+ *                     elif i < self.row[k]:             # <<<<<<<<<<<<<<
  *                         break
  *             else:
  */
-        __pyx_t_1 = ((__pyx_v_i > (__pyx_v_self->row[__pyx_v_k])) != 0);
+        __pyx_t_1 = ((__pyx_v_i < (__pyx_v_self->row[__pyx_v_k])) != 0);
         if (__pyx_t_1) {
 
           /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_FLOAT128_t.pyx":280
  *                         return self.val[k]
- *                     elif i > self.row[k]:
+ *                     elif i < self.row[k]:
  *                         break             # <<<<<<<<<<<<<<
  *             else:
  *                 for k from self.ind[j] <= k < self.ind[j+1]:
@@ -22915,7 +22972,7 @@ static int __pyx_mp_ass_subscript_8cysparse_6sparse_16csc_mat_matrices_26csc_mat
 
 static PyMethodDef __pyx_methods_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT32_t_FLOAT128_t_CSCSparseMatrix_INT32_t_FLOAT128_t[] = {
   {"copy", (PyCFunction)__pyx_pw_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT32_t_FLOAT128_t_34CSCSparseMatrix_INT32_t_FLOAT128_t_5copy, METH_NOARGS, __pyx_doc_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT32_t_FLOAT128_t_34CSCSparseMatrix_INT32_t_FLOAT128_t_4copy},
-  {"are_row_indices_sorted", (PyCFunction)__pyx_pw_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT32_t_FLOAT128_t_34CSCSparseMatrix_INT32_t_FLOAT128_t_7are_row_indices_sorted, METH_NOARGS, __pyx_doc_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT32_t_FLOAT128_t_34CSCSparseMatrix_INT32_t_FLOAT128_t_6are_row_indices_sorted},
+  {"are_row_indices_sorted", (PyCFunction)__pyx_pw_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT32_t_FLOAT128_t_34CSCSparseMatrix_INT32_t_FLOAT128_t_7are_row_indices_sorted, METH_VARARGS|METH_KEYWORDS, __pyx_doc_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT32_t_FLOAT128_t_34CSCSparseMatrix_INT32_t_FLOAT128_t_6are_row_indices_sorted},
   {"order_row_indices", (PyCFunction)__pyx_pw_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT32_t_FLOAT128_t_34CSCSparseMatrix_INT32_t_FLOAT128_t_9order_row_indices, METH_NOARGS, __pyx_doc_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT32_t_FLOAT128_t_34CSCSparseMatrix_INT32_t_FLOAT128_t_8order_row_indices},
   {"find", (PyCFunction)__pyx_pw_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT32_t_FLOAT128_t_34CSCSparseMatrix_INT32_t_FLOAT128_t_15find, METH_NOARGS, __pyx_doc_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT32_t_FLOAT128_t_34CSCSparseMatrix_INT32_t_FLOAT128_t_14find},
   {"diag", (PyCFunction)__pyx_pw_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT32_t_FLOAT128_t_34CSCSparseMatrix_INT32_t_FLOAT128_t_17diag, METH_VARARGS|METH_KEYWORDS, __pyx_doc_8cysparse_6sparse_16csc_mat_matrices_26csc_mat_INT32_t_FLOAT128_t_34CSCSparseMatrix_INT32_t_FLOAT128_t_16diag},
@@ -23811,6 +23868,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_file, __pyx_k_file, sizeof(__pyx_k_file), 0, 0, 1, 1},
   {&__pyx_n_s_flags, __pyx_k_flags, sizeof(__pyx_k_flags), 0, 0, 1, 1},
   {&__pyx_n_s_float128, __pyx_k_float128, sizeof(__pyx_k_float128), 0, 0, 1, 1},
+  {&__pyx_n_s_force_test, __pyx_k_force_test, sizeof(__pyx_k_force_test), 0, 0, 1, 1},
   {&__pyx_n_s_format, __pyx_k_format, sizeof(__pyx_k_format), 0, 0, 1, 1},
   {&__pyx_n_s_fortran, __pyx_k_fortran, sizeof(__pyx_k_fortran), 0, 0, 1, 1},
   {&__pyx_n_u_fortran, __pyx_k_fortran, sizeof(__pyx_k_fortran), 0, 1, 0, 1},
@@ -25525,6 +25583,120 @@ invalid_keyword:
     return 0;
 }
 
+static void __Pyx_RaiseDoubleKeywordsError(
+    const char* func_name,
+    PyObject* kw_name)
+{
+    PyErr_Format(PyExc_TypeError,
+        #if PY_MAJOR_VERSION >= 3
+        "%s() got multiple values for keyword argument '%U'", func_name, kw_name);
+        #else
+        "%s() got multiple values for keyword argument '%s'", func_name,
+        PyString_AsString(kw_name));
+        #endif
+}
+
+static int __Pyx_ParseOptionalKeywords(
+    PyObject *kwds,
+    PyObject **argnames[],
+    PyObject *kwds2,
+    PyObject *values[],
+    Py_ssize_t num_pos_args,
+    const char* function_name)
+{
+    PyObject *key = 0, *value = 0;
+    Py_ssize_t pos = 0;
+    PyObject*** name;
+    PyObject*** first_kw_arg = argnames + num_pos_args;
+    while (PyDict_Next(kwds, &pos, &key, &value)) {
+        name = first_kw_arg;
+        while (*name && (**name != key)) name++;
+        if (*name) {
+            values[name-argnames] = value;
+            continue;
+        }
+        name = first_kw_arg;
+        #if PY_MAJOR_VERSION < 3
+        if (likely(PyString_CheckExact(key)) || likely(PyString_Check(key))) {
+            while (*name) {
+                if ((CYTHON_COMPILING_IN_PYPY || PyString_GET_SIZE(**name) == PyString_GET_SIZE(key))
+                        && _PyString_Eq(**name, key)) {
+                    values[name-argnames] = value;
+                    break;
+                }
+                name++;
+            }
+            if (*name) continue;
+            else {
+                PyObject*** argname = argnames;
+                while (argname != first_kw_arg) {
+                    if ((**argname == key) || (
+                            (CYTHON_COMPILING_IN_PYPY || PyString_GET_SIZE(**argname) == PyString_GET_SIZE(key))
+                             && _PyString_Eq(**argname, key))) {
+                        goto arg_passed_twice;
+                    }
+                    argname++;
+                }
+            }
+        } else
+        #endif
+        if (likely(PyUnicode_Check(key))) {
+            while (*name) {
+                int cmp = (**name == key) ? 0 :
+                #if !CYTHON_COMPILING_IN_PYPY && PY_MAJOR_VERSION >= 3
+                    (PyUnicode_GET_SIZE(**name) != PyUnicode_GET_SIZE(key)) ? 1 :
+                #endif
+                    PyUnicode_Compare(**name, key);
+                if (cmp < 0 && unlikely(PyErr_Occurred())) goto bad;
+                if (cmp == 0) {
+                    values[name-argnames] = value;
+                    break;
+                }
+                name++;
+            }
+            if (*name) continue;
+            else {
+                PyObject*** argname = argnames;
+                while (argname != first_kw_arg) {
+                    int cmp = (**argname == key) ? 0 :
+                    #if !CYTHON_COMPILING_IN_PYPY && PY_MAJOR_VERSION >= 3
+                        (PyUnicode_GET_SIZE(**argname) != PyUnicode_GET_SIZE(key)) ? 1 :
+                    #endif
+                        PyUnicode_Compare(**argname, key);
+                    if (cmp < 0 && unlikely(PyErr_Occurred())) goto bad;
+                    if (cmp == 0) goto arg_passed_twice;
+                    argname++;
+                }
+            }
+        } else
+            goto invalid_keyword_type;
+        if (kwds2) {
+            if (unlikely(PyDict_SetItem(kwds2, key, value))) goto bad;
+        } else {
+            goto invalid_keyword;
+        }
+    }
+    return 0;
+arg_passed_twice:
+    __Pyx_RaiseDoubleKeywordsError(function_name, key);
+    goto bad;
+invalid_keyword_type:
+    PyErr_Format(PyExc_TypeError,
+        "%.200s() keywords must be strings", function_name);
+    goto bad;
+invalid_keyword:
+    PyErr_Format(PyExc_TypeError,
+    #if PY_MAJOR_VERSION < 3
+        "%.200s() got an unexpected keyword argument '%.200s'",
+        function_name, PyString_AsString(key));
+    #else
+        "%s() got an unexpected keyword argument '%U'",
+        function_name, key);
+    #endif
+bad:
+    return -1;
+}
+
 #if CYTHON_COMPILING_IN_CPYTHON
 static CYTHON_INLINE PyObject* __Pyx_PyObject_CallMethO(PyObject *func, PyObject *arg) {
     PyObject *self, *result;
@@ -25691,120 +25863,6 @@ static CYTHON_INLINE PyObject *__Pyx_GetItemInt_Fast(PyObject *o, Py_ssize_t i,
     }
 #endif
     return __Pyx_GetItemInt_Generic(o, PyInt_FromSsize_t(i));
-}
-
-static void __Pyx_RaiseDoubleKeywordsError(
-    const char* func_name,
-    PyObject* kw_name)
-{
-    PyErr_Format(PyExc_TypeError,
-        #if PY_MAJOR_VERSION >= 3
-        "%s() got multiple values for keyword argument '%U'", func_name, kw_name);
-        #else
-        "%s() got multiple values for keyword argument '%s'", func_name,
-        PyString_AsString(kw_name));
-        #endif
-}
-
-static int __Pyx_ParseOptionalKeywords(
-    PyObject *kwds,
-    PyObject **argnames[],
-    PyObject *kwds2,
-    PyObject *values[],
-    Py_ssize_t num_pos_args,
-    const char* function_name)
-{
-    PyObject *key = 0, *value = 0;
-    Py_ssize_t pos = 0;
-    PyObject*** name;
-    PyObject*** first_kw_arg = argnames + num_pos_args;
-    while (PyDict_Next(kwds, &pos, &key, &value)) {
-        name = first_kw_arg;
-        while (*name && (**name != key)) name++;
-        if (*name) {
-            values[name-argnames] = value;
-            continue;
-        }
-        name = first_kw_arg;
-        #if PY_MAJOR_VERSION < 3
-        if (likely(PyString_CheckExact(key)) || likely(PyString_Check(key))) {
-            while (*name) {
-                if ((CYTHON_COMPILING_IN_PYPY || PyString_GET_SIZE(**name) == PyString_GET_SIZE(key))
-                        && _PyString_Eq(**name, key)) {
-                    values[name-argnames] = value;
-                    break;
-                }
-                name++;
-            }
-            if (*name) continue;
-            else {
-                PyObject*** argname = argnames;
-                while (argname != first_kw_arg) {
-                    if ((**argname == key) || (
-                            (CYTHON_COMPILING_IN_PYPY || PyString_GET_SIZE(**argname) == PyString_GET_SIZE(key))
-                             && _PyString_Eq(**argname, key))) {
-                        goto arg_passed_twice;
-                    }
-                    argname++;
-                }
-            }
-        } else
-        #endif
-        if (likely(PyUnicode_Check(key))) {
-            while (*name) {
-                int cmp = (**name == key) ? 0 :
-                #if !CYTHON_COMPILING_IN_PYPY && PY_MAJOR_VERSION >= 3
-                    (PyUnicode_GET_SIZE(**name) != PyUnicode_GET_SIZE(key)) ? 1 :
-                #endif
-                    PyUnicode_Compare(**name, key);
-                if (cmp < 0 && unlikely(PyErr_Occurred())) goto bad;
-                if (cmp == 0) {
-                    values[name-argnames] = value;
-                    break;
-                }
-                name++;
-            }
-            if (*name) continue;
-            else {
-                PyObject*** argname = argnames;
-                while (argname != first_kw_arg) {
-                    int cmp = (**argname == key) ? 0 :
-                    #if !CYTHON_COMPILING_IN_PYPY && PY_MAJOR_VERSION >= 3
-                        (PyUnicode_GET_SIZE(**argname) != PyUnicode_GET_SIZE(key)) ? 1 :
-                    #endif
-                        PyUnicode_Compare(**argname, key);
-                    if (cmp < 0 && unlikely(PyErr_Occurred())) goto bad;
-                    if (cmp == 0) goto arg_passed_twice;
-                    argname++;
-                }
-            }
-        } else
-            goto invalid_keyword_type;
-        if (kwds2) {
-            if (unlikely(PyDict_SetItem(kwds2, key, value))) goto bad;
-        } else {
-            goto invalid_keyword;
-        }
-    }
-    return 0;
-arg_passed_twice:
-    __Pyx_RaiseDoubleKeywordsError(function_name, key);
-    goto bad;
-invalid_keyword_type:
-    PyErr_Format(PyExc_TypeError,
-        "%.200s() keywords must be strings", function_name);
-    goto bad;
-invalid_keyword:
-    PyErr_Format(PyExc_TypeError,
-    #if PY_MAJOR_VERSION < 3
-        "%.200s() got an unexpected keyword argument '%.200s'",
-        function_name, PyString_AsString(key));
-    #else
-        "%s() got an unexpected keyword argument '%U'",
-        function_name, key);
-    #endif
-bad:
-    return -1;
 }
 
 static void __Pyx_RaiseBufferFallbackError(void) {

@@ -18,10 +18,10 @@ class CySparseLLSparseMatrixAttributesBaseTestCase(unittest.TestCase):
 
         self.nbr_elements = 10
         self.size = 10
-        self.nrow = 5
+        self.nrow = 6
         self.ncol = 6
 
-        self.A = NewLLSparseMatrix(size=self.size, size_hint=self.nbr_elements)
+        self.A = NewLLSparseMatrix(size=self.size, size_hint=self.nbr_elements, dtype=FLOAT64_T, itype=INT32_T)
         self.B = NewLLSparseMatrix(nrow=self.nrow,
                                    ncol=self.ncol,
                                    size_hint=self.nbr_elements,

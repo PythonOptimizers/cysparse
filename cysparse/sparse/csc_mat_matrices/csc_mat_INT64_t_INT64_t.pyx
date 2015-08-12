@@ -143,7 +143,7 @@ cdef class CSCSparseMatrix_INT64_t_INT64_t(ImmutableSparseMatrix_INT64_t_INT64_t
     ####################################################################################################################
     # Row indices ordering
     ####################################################################################################################
-    def are_row_indices_sorted(self):
+    def are_row_indices_sorted(self, force_test=False):
         """
         Tell if row indices are sorted in augmenting order (ordered).
 
@@ -153,7 +153,7 @@ cdef class CSCSparseMatrix_INT64_t_INT64_t(ImmutableSparseMatrix_INT64_t_INT64_t
         cdef INT64_t row_index
         cdef INT64_t row_index_stop
 
-        if self.__row_indices_sorted_test_done:
+        if not force_test and self.__row_indices_sorted_test_done:
             return self.__row_indices_sorted
         else:
             # do the test
@@ -264,7 +264,7 @@ cdef class CSCSparseMatrix_INT64_t_INT64_t(ImmutableSparseMatrix_INT64_t_INT64_t
                 for k from self.ind[real_j] <= k < self.ind[real_j+1]:
                     if real_i == self.row[k]:
                         return self.val[k]
-                    elif real_i > self.row[k]:
+                    elif real_i < self.row[k]:
                         break
             else:
                 for k from self.ind[real_j] <= k < self.ind[real_j+1]:
@@ -276,7 +276,7 @@ cdef class CSCSparseMatrix_INT64_t_INT64_t(ImmutableSparseMatrix_INT64_t_INT64_t
                 for k from self.ind[j] <= k < self.ind[j+1]:
                     if i == self.row[k]:
                         return self.val[k]
-                    elif i > self.row[k]:
+                    elif i < self.row[k]:
                         break
             else:
                 for k from self.ind[j] <= k < self.ind[j+1]:

@@ -26,8 +26,6 @@ def is_equal(A, B):
 
     for i in xrange(A.nrow):
         for j in xrange(A.ncol):
-            print A[i,j], " =? ",
-            print B[i,j]
             if A[i, j] != B[i, j]:
                 return False
 
@@ -141,7 +139,8 @@ class CySparseCommonOperationsMatrixCopyTestCase(CySparseCommonOperationsMatrixC
 
     def test_simple_equality_one_by_one(self):
 
-
+  
+  
         self.failUnless(is_equal(self.l_1_1_csc.copy(), self.l_1_1_csr))
         self.failUnless(is_equal(self.l_1_1_csr.copy(), self.l_1_1_csc))
         self.failUnless(is_equal(self.l_1_1.copy(), self.l_1_1))

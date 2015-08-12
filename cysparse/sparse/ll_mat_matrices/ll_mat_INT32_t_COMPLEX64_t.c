@@ -977,7 +977,7 @@ typedef npy_clongdouble __pyx_t_5numpy_clongdouble_t;
 typedef npy_cdouble __pyx_t_5numpy_complex_t;
 struct __pyx_opt_args_8cysparse_6sparse_16csc_mat_matrices_27csc_mat_INT32_t_COMPLEX64_t_MakeCSCSparseMatrix_INT32_t_COMPLEX64_t;
 
-/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX64_t.pxd":33
+/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX64_t.pxd":35
  * 
  * 
  * cdef MakeCSCSparseMatrix_INT32_t_COMPLEX64_t(INT32_t nrow,             # <<<<<<<<<<<<<<
@@ -1315,6 +1315,8 @@ static struct __pyx_vtabstruct_8cysparse_6sparse_12ll_mat_views_31ll_mat_view_IN
  */
 
 struct __pyx_vtabstruct_8cysparse_6sparse_16csc_mat_matrices_27csc_mat_INT32_t_COMPLEX64_t_CSCSparseMatrix_INT32_t_COMPLEX64_t {
+  PyObject *(*_order_row_indices)(struct __pyx_obj_8cysparse_6sparse_16csc_mat_matrices_27csc_mat_INT32_t_COMPLEX64_t_CSCSparseMatrix_INT32_t_COMPLEX64_t *);
+  PyObject *(*_set_row_indices_ordered_is_true)(struct __pyx_obj_8cysparse_6sparse_16csc_mat_matrices_27csc_mat_INT32_t_COMPLEX64_t_CSCSparseMatrix_INT32_t_COMPLEX64_t *);
   PyObject *(*at)(struct __pyx_obj_8cysparse_6sparse_16csc_mat_matrices_27csc_mat_INT32_t_COMPLEX64_t_CSCSparseMatrix_INT32_t_COMPLEX64_t *, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t);
   __pyx_t_float_complex (*safe_at)(struct __pyx_obj_8cysparse_6sparse_16csc_mat_matrices_27csc_mat_INT32_t_COMPLEX64_t_CSCSparseMatrix_INT32_t_COMPLEX64_t *, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t, __pyx_t_8cysparse_5types_14cysparse_types_INT32_t);
 };

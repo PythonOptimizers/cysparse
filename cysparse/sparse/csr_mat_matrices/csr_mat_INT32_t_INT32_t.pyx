@@ -272,7 +272,7 @@ cdef class CSRSparseMatrix_INT32_t_INT32_t(ImmutableSparseMatrix_INT32_t_INT32_t
                 for k from self.ind[real_i] <= k < self.ind[real_i+1]:
                     if real_j == self.col[k]:
                         return self.val[k]
-                    elif real_j > self.col[k]:
+                    elif real_j < self.col[k]:
                         break
 
             else:
@@ -285,7 +285,7 @@ cdef class CSRSparseMatrix_INT32_t_INT32_t(ImmutableSparseMatrix_INT32_t_INT32_t
                 for k from self.ind[i] <= k < self.ind[i+1]:
                     if j == self.col[k]:
                         return self.val[k]
-                    elif j > self.col[k]:
+                    elif j < self.col[k]:
                         break
 
             else:
@@ -863,10 +863,7 @@ cdef class CSRSparseMatrix_INT32_t_INT32_t(ImmutableSparseMatrix_INT32_t_INT32_t
             print(self.val[i], end=' == ', sep=' == ')
         print()
 
-        if self.is_complex:
-            for i from 0 <= i < self.nnz:
-                print(self.ival[i], end=' == ', sep=' == ')
-            print()
+
 
     def set_col(self, INT32_t i, INT32_t val):
         self.col[i] = val
