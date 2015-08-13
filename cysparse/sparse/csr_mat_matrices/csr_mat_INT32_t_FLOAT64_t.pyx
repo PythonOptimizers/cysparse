@@ -667,7 +667,7 @@ cdef class CSRSparseMatrix_INT32_t_FLOAT64_t(ImmutableSparseMatrix_INT32_t_FLOAT
                                                   val,
                                                   is_symmetric=self.is_symmetric,
                                                   store_zeros=self.store_zeros,
-                                                  col_indices_are_sorted=True)
+                                                  row_indices_are_sorted=True)
 
 
     def to_ndarray(self):

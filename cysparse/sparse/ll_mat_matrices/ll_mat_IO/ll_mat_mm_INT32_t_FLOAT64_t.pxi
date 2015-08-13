@@ -78,10 +78,6 @@ cdef LLSparseMatrix_INT32_t_FLOAT64_t MakeLLSparseMatrixFromMMFile_INT32_t_FLOAT
             raise IOError('Matrix format not recognized as Matrix Market format: fourth token in the Matrix Market banner is not in "%s"' % storage_scheme_list)
         storage_scheme = storage_scheme_dict[token]
         is_symmetric = storage_scheme == MM_SYMMETRIC
-        if is_symmetric:
-            print("is symmetric=yes")
-        else:
-            print("is symmetric=false")
 
         # SKIP COMMENTS
         line = f.readline()
@@ -128,6 +124,9 @@ cdef LLSparseMatrix_INT32_t_FLOAT64_t MakeLLSparseMatrixFromMMFile_INT32_t_FLOAT
 
     return A
 
+########################################################################################################################
+# Optimized version
+########################################################################################################################
 # This version doesn't work yet...
 # TODO: write this!
 cdef LLSparseMatrix_INT32_t_FLOAT64_t MakeLLSparseMatrixFromMMFile2_INT32_t_FLOAT64_t(str mm_filename, bint store_zeros=False, bint test_bounds=True):
@@ -229,7 +228,13 @@ cdef LLSparseMatrix_INT32_t_FLOAT64_t MakeLLSparseMatrixFromMMFile2_INT32_t_FLOA
         if data_type == MM_PATTERN:
             raise IOError('Matrix Market format not supported for PATTERN')
 
-        A = LLSparseMatrix_INT32_t_FLOAT64_t(control_object=unexposed_value, no_memory=True, nrow=nrow, ncol=ncol, size_hint=nnz, is_symmetric=is_symmetric, is_complex=is_complex, store_zeros=store_zeros)
+        A = LLSparseMatrix_INT32_t_FLOAT64_t(control_object=unexposed_value,
+                                          no_memory=True,
+                                          nrow=nrow,
+                                          ncol=ncol,
+                                          size_hint=nnz,
+                                          is_symmetric=is_symmetric,
+                                          store_zeros=store_zeros)
 
 
 

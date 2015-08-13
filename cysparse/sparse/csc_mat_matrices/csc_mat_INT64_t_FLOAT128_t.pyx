@@ -485,7 +485,7 @@ cdef class CSCSparseMatrix_INT64_t_FLOAT128_t(ImmutableSparseMatrix_INT64_t_FLOA
                                                   val,
                                                   is_symmetric=False,
                                                   store_zeros=self.__store_zeros,
-                                                  row_indices_are_sorted==True)
+                                                  row_indices_are_sorted=True)
 
     def triu(self, int k):
         """
@@ -619,7 +619,7 @@ cdef class CSCSparseMatrix_INT64_t_FLOAT128_t(ImmutableSparseMatrix_INT64_t_FLOA
                                                   val,
                                                   is_symmetric=False,
                                                   store_zeros=self.__store_zeros,
-                                                  row_indices_are_sorted==True)
+                                                  row_indices_are_sorted=True)
 
     def to_csr(self):
         """
@@ -654,7 +654,7 @@ cdef class CSCSparseMatrix_INT64_t_FLOAT128_t(ImmutableSparseMatrix_INT64_t_FLOA
                                                   val,
                                                   is_symmetric=self.is_symmetric,
                                                   store_zeros=self.store_zeros,
-                                                  row_indices_are_sorted=True)
+                                                  col_indices_are_sorted=True)
 
 
     def to_ndarray(self):
@@ -870,8 +870,6 @@ cdef class CSCSparseMatrix_INT64_t_FLOAT128_t(ImmutableSparseMatrix_INT64_t_FLOA
 
     def set_row(self, INT64_t i, INT64_t val):
         self.row[i] = val
-
-
 
 
 ########################################################################################################################

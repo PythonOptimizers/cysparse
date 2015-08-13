@@ -494,7 +494,7 @@ YOU HAVE TO EXPLICITY CAST YOUR TYPE
                                                   val,
                                                   is_symmetric=False,
                                                   store_zeros=self.__store_zeros,
-                                                  row_indices_are_sorted==True)
+                                                  row_indices_are_sorted=True)
 
     def triu(self, int k):
         """
@@ -628,7 +628,7 @@ YOU HAVE TO EXPLICITY CAST YOUR TYPE
                                                   val,
                                                   is_symmetric=False,
                                                   store_zeros=self.__store_zeros,
-                                                  row_indices_are_sorted==True)
+                                                  row_indices_are_sorted=True)
 
     def to_csr(self):
         """
@@ -663,7 +663,7 @@ YOU HAVE TO EXPLICITY CAST YOUR TYPE
                                                   val,
                                                   is_symmetric=self.is_symmetric,
                                                   store_zeros=self.store_zeros,
-                                                  row_indices_are_sorted=True)
+                                                  col_indices_are_sorted=True)
 
 
     def to_ndarray(self):

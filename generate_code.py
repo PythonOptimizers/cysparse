@@ -702,7 +702,7 @@ if __name__ == "__main__":
     #MUMPS_ELEMENT_TYPES = ['FLOAT32_t', 'FLOAT64_t']
 
     # when coding
-    ELEMENT_TYPES = ['FLOAT64_t']
+    #ELEMENT_TYPES = ['FLOAT64_t']
     #ELEMENT_TYPES = ['COMPLEX64_t']
     #UMFPACK_INDEX_TYPES = ['INT32_t']
     #UMFPACK_ELEMENT_TYPES = ['FLOAT64_t']

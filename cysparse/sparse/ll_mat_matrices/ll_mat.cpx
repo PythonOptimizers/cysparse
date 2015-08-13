@@ -141,7 +141,7 @@ cdef class LLSparseMatrix_@index@_@type@(MutableSparseMatrix_@index@_@type@):
 
         self.__type = "LLSparseMatrix"
         self.__type_name = "LLSparseMatrix %s" % self.__index_and_type
- 
+
         # This is particular to the LLSparseMatrix type
         # Do we allocate memory here or
         # do we let another factory method do it for us?
