@@ -96,8 +96,12 @@ cdef LLSparseMatrix_INT64_t_FLOAT64_t MakeLLSparseMatrixFromMMFile_INT64_t_FLOAT
         if data_type == MM_PATTERN:
             raise IOError('Matrix Market format not supported for PATTERN')
 
-        A = LLSparseMatrix_INT64_t_FLOAT64_t(control_object=unexposed_value, nrow=nrow, ncol=ncol, size_hint=nnz, is_symmetric=is_symmetric, is_complex=is_complex, store_zeros=store_zeros)
-
+        A = LLSparseMatrix_INT64_t_FLOAT64_t(control_object=unexposed_value,
+                                          nrow=nrow,
+                                          ncol=ncol,
+                                          size_hint=nnz,
+                                          is_symmetric=is_symmetric,
+                                          store_zeros=store_zeros)
 
         line = f.readline()
         nnz_read = 0

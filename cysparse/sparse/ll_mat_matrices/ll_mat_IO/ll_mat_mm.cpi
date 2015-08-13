@@ -96,8 +96,12 @@ cdef LLSparseMatrix_@index@_@type@ MakeLLSparseMatrixFromMMFile_@index@_@type@(s
         if data_type == MM_PATTERN:
             raise IOError('Matrix Market format not supported for PATTERN')
 
-        A = LLSparseMatrix_@index@_@type@(control_object=unexposed_value, nrow=nrow, ncol=ncol, size_hint=nnz, is_symmetric=is_symmetric, is_complex=is_complex, store_zeros=store_zeros)
-
+        A = LLSparseMatrix_@index@_@type@(control_object=unexposed_value,
+                                          nrow=nrow,
+                                          ncol=ncol,
+                                          size_hint=nnz,
+                                          is_symmetric=is_symmetric,
+                                          store_zeros=store_zeros)
 
         line = f.readline()
         nnz_read = 0
