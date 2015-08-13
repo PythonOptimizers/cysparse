@@ -10,7 +10,7 @@ We test **all** types and the symmetric and general cases.
 """
 from cysparse.sparse.ll_mat import *
 from cysparse.types.cysparse_types import *
-from cysparse.linalg.umfpack import NewUmfpackContext
+from cysparse.linalg.umfpack_context import NewUmfpackContext
 
 import numpy as np
 

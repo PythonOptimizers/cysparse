@@ -14,7 +14,7 @@
 #
 #################################################################################################
 
-from setup.files_finder import find_files
+from config.files_finder import find_files
 
 import os
 import sys
@@ -599,20 +599,20 @@ LINALG_MUMPS_DEFINITION_FILES = glob.glob(os.path.join(LINALG_MUMPS_TEMPLATE_DIR
 TESTS_TEMPLATE_DIR = os.path.join(PATH, 'tests')
 
 # SPARSE MATRICES
-TESTS_CSC_SPARSE_MATRIX_GENERIC_TEST_DIR = os.path.join(TESTS_TEMPLATE_DIR, 'cysparse', 'sparse', 'csc_mat_matrices', 'generic')
+TESTS_CSC_SPARSE_MATRIX_GENERIC_TEST_DIR = os.path.join(TESTS_TEMPLATE_DIR, 'cysparse_', 'sparse', 'csc_mat_matrices', 'generic')
 TESTS_CSC_SPARSE_MATRIX_GENERIC_TEST_FILES = glob.glob(os.path.join(TESTS_CSC_SPARSE_MATRIX_GENERIC_TEST_DIR, '*.cpy'))
 
-TESTS_CSR_SPARSE_MATRIX_GENERIC_TEST_DIR = os.path.join(TESTS_TEMPLATE_DIR, 'cysparse', 'sparse', 'csr_mat_matrices', 'generic')
+TESTS_CSR_SPARSE_MATRIX_GENERIC_TEST_DIR = os.path.join(TESTS_TEMPLATE_DIR, 'cysparse_', 'sparse', 'csr_mat_matrices', 'generic')
 TESTS_CSR_SPARSE_MATRIX_GENERIC_TEST_FILES = glob.glob(os.path.join(TESTS_CSR_SPARSE_MATRIX_GENERIC_TEST_DIR, '*.cpy'))
 
-TESTS_LL_SPARSE_MATRIX_VIEW_GENERIC_TEST_DIR = os.path.join(TESTS_TEMPLATE_DIR, 'cysparse', 'sparse', 'll_mat_views', 'generic')
+TESTS_LL_SPARSE_MATRIX_VIEW_GENERIC_TEST_DIR = os.path.join(TESTS_TEMPLATE_DIR, 'cysparse_', 'sparse', 'll_mat_views', 'generic')
 TESTS_LL_SPARSE_MATRIX_VIEW_GENERIC_TEST_FILES = glob.glob(os.path.join(TESTS_LL_SPARSE_MATRIX_VIEW_GENERIC_TEST_DIR, '*.cpy'))
 
-TESTS_SPARSE_MATRIX_COMMON_OPERATIONS_GENERIC_TEST_DIR = os.path.join(TESTS_TEMPLATE_DIR, 'cysparse', 'sparse', 'common_operations', 'generic')
+TESTS_SPARSE_MATRIX_COMMON_OPERATIONS_GENERIC_TEST_DIR = os.path.join(TESTS_TEMPLATE_DIR, 'cysparse_', 'sparse', 'common_operations', 'generic')
 TESTS_SPARSE_MATRIX_COMMON_OPERATIONS_GENERIC_TEST_FILES = glob.glob(os.path.join(TESTS_SPARSE_MATRIX_COMMON_OPERATIONS_GENERIC_TEST_DIR, '*.cpy'))
 
 # LINALG
-TESTS_LINALG_DIR = os.path.join(TESTS_TEMPLATE_DIR, 'cysparse', 'linalg')
+TESTS_LINALG_DIR = os.path.join(TESTS_TEMPLATE_DIR, 'cysparse_', 'linalg')
 
 # SUITESPARSE
 TESTS_SUITESPARSE_DIR = os.path.join(TESTS_LINALG_DIR, 'suitesparse')

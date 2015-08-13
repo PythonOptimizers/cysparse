@@ -2,9 +2,12 @@
 __pycache__/
 *.py[cod]
 *$py.class
+*.so
 
 cysparse_generate_code.log
 /build/*
 /.idea/*
 /.tox/*
 /doc/build/*
+/*.egg-info
+/dist
