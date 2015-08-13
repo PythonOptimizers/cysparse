@@ -78,10 +78,6 @@ cdef LLSparseMatrix_INT64_t_INT64_t MakeLLSparseMatrixFromMMFile_INT64_t_INT64_t
             raise IOError('Matrix format not recognized as Matrix Market format: fourth token in the Matrix Market banner is not in "%s"' % storage_scheme_list)
         storage_scheme = storage_scheme_dict[token]
         is_symmetric = storage_scheme == MM_SYMMETRIC
-        if is_symmetric:
-            print("is symmetric=yes")
-        else:
-            print("is symmetric=false")
 
         # SKIP COMMENTS
         line = f.readline()
@@ -100,8 +96,12 @@ cdef LLSparseMatrix_INT64_t_INT64_t MakeLLSparseMatrixFromMMFile_INT64_t_INT64_t
         if data_type == MM_PATTERN:
             raise IOError('Matrix Market format not supported for PATTERN')
 
-        A = LLSparseMatrix_INT64_t_INT64_t(control_object=unexposed_value, nrow=nrow, ncol=ncol, size_hint=nnz, is_symmetric=is_symmetric, is_complex=is_complex, store_zeros=store_zeros)
-
+        A = LLSparseMatrix_INT64_t_INT64_t(control_object=unexposed_value,
+                                          nrow=nrow,
+                                          ncol=ncol,
+                                          size_hint=nnz,
+                                          is_symmetric=is_symmetric,
+                                          store_zeros=store_zeros)
 
         line = f.readline()
         nnz_read = 0
@@ -128,6 +128,9 @@ cdef LLSparseMatrix_INT64_t_INT64_t MakeLLSparseMatrixFromMMFile_INT64_t_INT64_t
 
     return A
 
+########################################################################################################################
+# Optimized version
+########################################################################################################################
 # This version doesn't work yet...
 # TODO: write this!
 cdef LLSparseMatrix_INT64_t_INT64_t MakeLLSparseMatrixFromMMFile2_INT64_t_INT64_t(str mm_filename, bint store_zeros=False, bint test_bounds=True):
@@ -232,7 +235,13 @@ cdef LLSparseMatrix_INT64_t_INT64_t MakeLLSparseMatrixFromMMFile2_INT64_t_INT64_
         if data_type == MM_PATTERN:
             raise IOError('Matrix Market format not supported for PATTERN')
 
-        A = LLSparseMatrix_INT64_t_INT64_t(control_object=unexposed_value, no_memory=True, nrow=nrow, ncol=ncol, size_hint=nnz, is_symmetric=is_symmetric, is_complex=is_complex, store_zeros=store_zeros)
+        A = LLSparseMatrix_INT64_t_INT64_t(control_object=unexposed_value,
+                                          no_memory=True,
+                                          nrow=nrow,
+                                          ncol=ncol,
+                                          size_hint=nnz,
+                                          is_symmetric=is_symmetric,
+                                          store_zeros=store_zeros)
 
 
 
