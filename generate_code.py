@@ -51,15 +51,15 @@ def make_parser():
     Returns:
         The command line parser.
     """
-    parser = argparse.ArgumentParser(description='%s: a Cython code generator for the CySparse library.' % os.path.basename(sys.argv[0]))
-    parser.add_argument("-a", "--all", help="Create all action files.", action='store_true', required=False)
+    parser = argparse.ArgumentParser(description='%s: a Cython code generator for the CySparse library' % os.path.basename(sys.argv[0]))
+    parser.add_argument("-a", "--all", help="Create all action files", action='store_true', required=False)
 
-    parser.add_argument("-m", "--matrices", help="Create sparse matrices.", action='store_true', required=False)
-    parser.add_argument("-s", "--setup", help="Create setup file.", action='store_true', required=False)
-    parser.add_argument("-g", "--generic_types", help="Create generic types.", action='store_true', required=False)
-    parser.add_argument("-l", "--linalg", help="Create Linear Algebra contexts.", action='store_true', required=False)
-    parser.add_argument("-t", "--tests", help="Create generic tests.", action='store_true', required=False)
-    parser.add_argument("-c", "--clean", help="Clean action files.", action='store_true', required=False)
+    parser.add_argument("-m", "--matrices", help="Create sparse matrices", action='store_true', required=False)
+    parser.add_argument("-s", "--setup", help="Create setup file", action='store_true', required=False)
+    parser.add_argument("-g", "--generic_types", help="Create generic types", action='store_true', required=False)
+    parser.add_argument("-l", "--linalg", help="Create Linear Algebra contexts", action='store_true', required=False)
+    parser.add_argument("-t", "--tests", help="Create generic tests", action='store_true', required=False)
+    parser.add_argument("-c", "--clean", help="Clean action files", action='store_true', required=False)
 
     return parser
 
