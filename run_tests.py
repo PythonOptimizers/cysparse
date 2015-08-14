@@ -1,11 +1,11 @@
-import fnmatch
 import os
 import sys
-import unittest
 import subprocess
 
 import shutil
 import distutils
+
+#TODO: add switches to regenerate code and cleaning
 
 platform = distutils.util.get_platform()
 python_version = sys.version
@@ -17,5 +17,10 @@ destination_dir = lib_dir + os.path.sep + "tests"
 shutil.rmtree(destination_dir, ignore_errors=True)
 shutil.copytree("tests", destination_dir, symlinks=False, ignore=None)
 
+# generate lib
+subprocess.call(['python', 'generate_code.py','-a'])
+subprocess.call(['python', 'setup.py', 'build'])
+
+# launch tests
 os.chdir(lib_dir)
 subprocess.call(['nosetests','tests'])
