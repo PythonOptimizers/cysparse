@@ -13,6 +13,8 @@ import shutil
 import distutils
 import argparse
 
+import ConfigParser
+
 try:
     import nose
 except ImportError:
@@ -46,7 +48,7 @@ def generate_lib():
     subprocess.call(['python', 'setup.py', 'build'])
 
 
-def launch_nosetests(pattern=None, verbose=False):
+def launch_nosetests(pattern=None, verbose=False, use_libraries=None):
     current_dir = os.getcwd()
     os.chdir(lib_dir)
 
@@ -55,7 +57,21 @@ def launch_nosetests(pattern=None, verbose=False):
         commands_list.append('--verbosity=2')
 
     if pattern is not None:
-        pass
+        commands_list.append('-p')
+        commands_list.append(pattern)
+
+    # do we exclude some libraries?
+    # TODO: this is very fragile...
+    if use_libraries is not None:
+        # SuiteSparse
+        if not use_libraries['use_suitesparse']:
+            commands_list.append('--exclude-dir')
+            commands_list.append(os.path.sep.join(['tests', 'cysparse', 'linalg', 'suitesparse']))
+
+        # MUMPS
+        if not use_libraries['use_suitesparse']:
+            commands_list.append('--exclude-dir')
+            commands_list.append(os.path.sep.join(['tests', 'cysparse', 'linalg', 'mumps']))
 
     commands_list.append('tests')
 
@@ -124,7 +140,18 @@ if __name__ == "__main__":
         if arg_options.verbose:
             print "done"
 
+    # do we skip some tests?
+    # Some libraries might be missing...
+    cysparse_config = ConfigParser.SafeConfigParser()
+    cysparse_config.read('cysparse.cfg')
+
+    use_suitesparse = cysparse_config.getboolean('SUITESPARSE', 'use_suitesparse')
+    use_mumps = cysparse_config.getboolean('MUMPS', 'use_mumps')
+
+    use_libraries = {'use_suitesparse': use_suitesparse,
+                     'use_mumps': use_mumps}
+
     if arg_options.dont_use_nose:
         launch_unittest(arg_options.pattern, arg_options.verbose)
     else:
-        launch_nosetests(arg_options.pattern, arg_options.verbose)
+        launch_nosetests(arg_options.pattern, arg_options.verbose, use_libraries)

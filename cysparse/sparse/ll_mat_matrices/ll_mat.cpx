@@ -2224,8 +2224,6 @@ YOU HAVE TO EXPLICITY CAST YOUR TYPE
         """
         Computes :math:`||A||_1`.
 
-        Warning:
-            Only works if the matrix is **not** symmetric!
 
         """
         cdef:
