@@ -4,10 +4,11 @@
 # Generate it with
 # python generate_code -s
 
-from setup.version import find_version, read
-from setup.config import get_path_option
+from config.version import find_version, read
+from config.config import get_path_option
 
 from distutils.core import setup
+from setuptools import find_packages
 from distutils.extension import Extension
 from Cython.Distutils import build_ext
 
@@ -16,6 +17,9 @@ import numpy as np
 import ConfigParser
 import os
 import copy
+
+from codecs import open
+from os import path
 
 ####################################################################s####################################################
 # INIT
@@ -310,25 +314,28 @@ if use_mumps:
 
 
 ########################################################################################################################
-# SETUP
+# config
 ########################################################################################################################
-packages_list = ['cysparse',
-            'cysparse.types',
-            'cysparse.sparse',
-            'cysparse.sparse.sparse_proxies',
-            'cysparse.sparse.sparse_proxies.complex_generic',
-            'cysparse.sparse.sparse_utils',
-            'cysparse.sparse.sparse_utils.generic',
-            'cysparse.sparse.s_mat_matrices',
-            'cysparse.sparse.ll_mat_matrices',
-            'cysparse.sparse.csr_mat_matrices',
-            'cysparse.sparse.csc_mat_matrices',
-            'cysparse.sparse.ll_mat_views',
-            'cysparse.utils',
-            'cysparse.linalg',
-            'cysparse.linalg.mumps',
-            #'cysparse.sparse.IO'
-            ]
+{#packages_list = ['cysparse',#}
+{#            'cysparse.types',#}
+{#            'cysparse.sparse',#}
+{#            'cysparse.sparse.sparse_proxies',#}
+{#            'cysparse.sparse.sparse_proxies.complex_generic',#}
+{#            'cysparse.sparse.sparse_utils',#}
+{#            'cysparse.sparse.sparse_utils.generic',#}
+{#            'cysparse.sparse.s_mat_matrices',#}
+{#            'cysparse.sparse.ll_mat_matrices',#}
+{#            'cysparse.sparse.csr_mat_matrices',#}
+{#            'cysparse.sparse.csc_mat_matrices',#}
+{#            'cysparse.sparse.ll_mat_views',#}
+{#            'cysparse.utils',#}
+{#            'cysparse.linalg',#}
+{#            'cysparse.linalg.mumps',#}
+{#            #'cysparse.sparse.IO'#}
+{#            'tests'#}
+{#            ]#}
+
+packages_list=find_packages()
 
 ext_modules = base_ext + sparse_ext
 
@@ -345,13 +352,53 @@ if use_mumps:
     ext_modules += mumps_ext
     packages_list.append('cysparse.linalg.mumps')
 
-setup(name=  'CySparse',
-  version=find_version(os.path.realpath(__file__), 'cysparse', '__init__.py'),
-  #ext_package='cysparse', <- doesn't work with pxd files...
-  cmdclass = {'build_ext': build_ext},
-  ext_modules = ext_modules,
-  package_dir = {"cysparse": "cysparse"},
-  packages=packages_list
+########################################################################################################################
+# PACKAGE SPECIFICATIONS
+########################################################################################################################
 
+CLASSIFIERS = """\
+Development Status :: 4 - Beta
+Intended Audience :: Science/Research
+Intended Audience :: Developers
+License :: OSI Approved
+Programming Language :: Python
+Programming Language :: Cython
+Topic :: Software Development
+Topic :: Scientific/Engineering
+Operating System :: POSIX
+Operating System :: Unix
+Operating System :: MacOS :: MacOS X
+Natural Language :: English
+"""
+
+here = path.abspath(path.dirname(__file__))
+# Get the long description from the relevant file
+with open(path.join(here, 'DESCRIPTION.rst'), encoding='utf-8') as f:
+    long_description = f.read()
+
+setup(name=  'CySparse',
+      version=find_version(os.path.realpath(__file__), 'cysparse', '__init__.py'),
+      description='A Cython library for sparse matrices',
+      long_description=long_description,
+      # Author details
+      author='Nikolaj van Omme, Sylvain Arreckx, Dominique Orban',
+{% raw %}
+      author_email='cysparse\@TODO.com',
+{% endraw %}
+      maintainer = "CySparse Developers",
+{% raw %}
+      maintainer_email = "dominique.orban@gerad.ca",
+{% endraw %}
+      summary = "Fast sparse matrix library for Python",
+      url = "https://github.com/Funartech/cysparse",
+      download_url = "https://github.com/Funartech/cysparse",
+      license='LGPL',
+      classifiers=filter(None, CLASSIFIERS.split('\n')),
+      install_requires=['numpy', 'Cython'],
+      #ext_package='cysparse', <- doesn't work with pxd files...
+      cmdclass = {'build_ext': build_ext},
+      ext_modules = ext_modules,
+      package_dir = {"cysparse": "cysparse"},
+      packages=packages_list
 )
 
