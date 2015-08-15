@@ -2,7 +2,9 @@
 
 Python/Cython library to replace PySparse.
 
-:white_check_mark: THIS VERSION SHOULD WORK BUT TESTS ARE NEEDED! :white_check_mark:
+:boom: MEGA BUG: we have a packaging/import problem. DO NO USE THIS VERSION :boom:
+
+:white_check_mark: THIS VERSION SHOULD WORK BUT MORE TESTS ARE NEEDED! :white_check_mark:
 
 I started to deal with sorted col/row indices for LL/CSC/CSR sparse matrices.
 
