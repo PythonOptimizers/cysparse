@@ -798,14 +798,20 @@ cdef class LLSparseMatrix_INT32_t_INT32_t(MutableSparseMatrix_INT32_t_INT32_t):
 
         Args:
             view: An ``LLSparseMatrixView_INT32_t_INT32_t`` that points to this matrix (``self``).
-            obj: Any Python object that implements ``__getitem__()`` and accepts a ``tuple`` ``(i, j)``.
+            obj: Can be a:
+                - ``LLSparseMatrix``;
+                - ``LLSparseMatrixView``;
+                - :program:`NumPy` ``ndarray``;
+                - :program:`Python` scalar.
+
+        Raises:
+            ``IndexError`` if dimensions don't match.
 
         Note:
             This assignment is done as if ``A[i, j] = val`` was done explicitely. In particular if ``store_zeros``
-            is ``True`` and ``obj`` contains zeros, they will be explicitely added.
+            is ``True`` and ``obj`` contains zeros, they will be explicitely added. Also, you can mix elements of
+            different (compatible) types.
 
-        Warning:
-            There are not test whatsoever.
         """
         # test if view correspond...
         assert self == view.A, "LLSparseMatrixView should correspond to LLSparseMatrix!"
@@ -829,17 +835,24 @@ cdef class LLSparseMatrix_INT32_t_INT32_t(MutableSparseMatrix_INT32_t_INT32_t):
         if self.__is_symmetric:
             if PySparseMatrix_Check(obj):
                 A = <LLSparseMatrix_INT32_t_INT32_t> obj
+                if A.nrow != nrow or A.ncol != ncol:
+                    raise IndexError("Assigned LLSparseMatrix should be of dimension (%d,%d) (not (%d,%d))" % (nrow, ncol, A.nrow, A.ncol))
+
                 for i from 0 <= i < nrow:
                     for j from 0 <= j <= i:
                         self.put(row_indices[i], col_indices[j], <INT32_t> A.at(i, j))
 
             elif PyLLSparseMatrixView_Check(obj):
                 A_view = <LLSparseMatrixView_INT32_t_INT32_t> obj
+                if A_view.nrow != nrow or A_view.ncol != ncol:
+                    raise IndexError("Assigned LLSparseMatrixView should be of dimension (%d,%d) (not (%d,%d))" % (nrow, ncol, A_view.nrow, A_view.ncol))
                 for i from 0 <= i < nrow:
                     for j from 0 <= j <= i:
                         self.put(row_indices[i], col_indices[j], <INT32_t> A_view.at(i, j))
 
             elif cnp.PyArray_Check(obj):
+                if (nrow, ncol) != obj.shape:
+                    raise IndexError("Assigned NumPy ndarray should be of dimension (%d,%d) (not (%d,%d))" % (nrow, ncol, obj.shape[0], obj.shape[1]))
                 for i from 0 <= i < nrow:
                     for j from 0 <= j <= i:
                         #self.put(row_indices[i], col_indices[j], <INT32_t> obj[tuple(i, j)])
@@ -856,17 +869,24 @@ cdef class LLSparseMatrix_INT32_t_INT32_t(MutableSparseMatrix_INT32_t_INT32_t):
 
             if PySparseMatrix_Check(obj):
                 A = <LLSparseMatrix_INT32_t_INT32_t> obj
+                if A.nrow != nrow or A.ncol != ncol:
+                    raise IndexError("Assigned LLSparseMatrix should be of dimension (%d,%d) (not (%d,%d))" % (nrow, ncol, A.nrow, A.ncol))
+
                 for i from 0 <= i < nrow:
                     for j from 0 <= j < ncol:
                         self.put(row_indices[i], col_indices[j], <INT32_t> A.at(i, j))
 
             elif PyLLSparseMatrixView_Check(obj):
                 A_view = <LLSparseMatrixView_INT32_t_INT32_t> obj
+                if A_view.nrow != nrow or A_view.ncol != ncol:
+                    raise IndexError("Assigned LLSparseMatrixView should be of dimension (%d,%d) (not (%d,%d))" % (nrow, ncol, A_view.nrow, A_view.ncol))
                 for i from 0 <= i < nrow:
                     for j from 0 <= j < ncol:
-                        self.put(row_indices[i], col_indices[j], <INT32_t> A_view.at(i, j))
+                        self.put(row_indices[i], col_indices[j], <INT32_t> A_view.safe_at(i, j))
 
             elif cnp.PyArray_Check(obj):
+                if (nrow, ncol) != obj.shape:
+                    raise IndexError("Assigned NumPy ndarray should be of dimension (%d,%d) (not (%d,%d))" % (nrow, ncol, obj.shape[0], obj.shape[1]))
                 for i from 0 <= i < nrow:
                     for j from 0 <= j < ncol:
                         # TODO: check this...

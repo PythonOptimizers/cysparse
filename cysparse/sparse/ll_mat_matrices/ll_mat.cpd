@@ -1,3 +1,5 @@
+#define NPY_NO_DEPRECATED_API NPY_1_7_API_VERSION
+
 from cysparse.types.cysparse_types cimport *
 
 from cysparse.sparse.s_mat_matrices.s_mat_@index@_@type@ cimport MutableSparseMatrix_@index@_@type@
@@ -50,6 +52,7 @@ cdef class LLSparseMatrix_@index@_@type@(MutableSparseMatrix_@index@_@type@):
     ####################################################################################################################
     cdef put(self, @index@ i, @index@ j, @type@ value)
     cdef int safe_put(self, @index@ i, @index@ j, @type@ value) except -1
+    # EXPLICIT TYPE TESTS
     cdef assign(self, LLSparseMatrixView_@index@_@type@ view, obj)
 
     # EXPLICIT TYPE TESTS

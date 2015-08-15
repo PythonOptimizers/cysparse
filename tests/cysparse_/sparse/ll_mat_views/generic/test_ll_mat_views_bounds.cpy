@@ -34,11 +34,15 @@ class CySparseLLSparseMatrixViewOutOfBoundsTestCase(CySparseLLSparseMatrixBounds
 
 {% for index_type in index_list %}
   {% set outerloop = loop %}
-  {% for element_type in type_list %}
+  {% for element_type in complex_list %}
         self.l_@outerloop.index@_@loop.index@ = NewLinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, itype=@index_type|type2enum@, dtype=@element_type|type2enum@, row_wise=False)
+        self.l_@outerloop.index@_@loop.index@_csr = self.l_@outerloop.index@_@loop.index@.to_csr()
   {% endfor %}
 {% endfor %}
 
+{% for element_type in complex_list %}
+        self.x_@element_type@ = np.ones(self.nrow, dtype=np.@element_type|type2enum|cysparse_type_to_numpy_type@)
+{% endfor %}
 
     def test_simple_out_of_bound(self):
 {% for index_type in index_list %}

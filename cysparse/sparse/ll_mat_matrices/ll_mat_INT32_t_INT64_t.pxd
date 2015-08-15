@@ -1,3 +1,5 @@
+#define NPY_NO_DEPRECATED_API NPY_1_7_API_VERSION
+
 from cysparse.types.cysparse_types cimport *
 
 from cysparse.sparse.s_mat_matrices.s_mat_INT32_t_INT64_t cimport MutableSparseMatrix_INT32_t_INT64_t
@@ -50,6 +52,7 @@ cdef class LLSparseMatrix_INT32_t_INT64_t(MutableSparseMatrix_INT32_t_INT64_t):
     ####################################################################################################################
     cdef put(self, INT32_t i, INT32_t j, INT64_t value)
     cdef int safe_put(self, INT32_t i, INT32_t j, INT64_t value) except -1
+    # EXPLICIT TYPE TESTS
     cdef assign(self, LLSparseMatrixView_INT32_t_INT64_t view, obj)
 
     # EXPLICIT TYPE TESTS

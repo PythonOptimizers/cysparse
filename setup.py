@@ -67,6 +67,7 @@ include_dirs = [numpy_include, '.']
 ext_params = {}
 ext_params['include_dirs'] = include_dirs
 # -Wno-unused-function is potentially dangerous... use with care!
+# '-DNPY_NO_DEPRECATED_API=NPY_1_7_API_VERSION': doesn't work with Cython... because it **does** use a deprecated version...
 ext_params['extra_compile_args'] = ["-O2", '-std=c99', '-Wno-unused-function']
 ext_params['extra_link_args'] = []
 

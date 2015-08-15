@@ -626,7 +626,7 @@ struct __pyx_t_8cysparse_5types_14cysparse_types_CPType {
 };
 struct __pyx_opt_args_8cysparse_6sparse_5s_mat_MakeMatrixString;
 
-/* "cysparse/sparse/s_mat.pxd":51
+/* "cysparse/sparse/s_mat.pxd":52
  * 
  * 
  * cdef MakeMatrixString(object A, full=?)             # <<<<<<<<<<<<<<
@@ -636,8 +636,8 @@ struct __pyx_opt_args_8cysparse_6sparse_5s_mat_MakeMatrixString {
   PyObject *full;
 };
 
-/* "cysparse/sparse/s_mat.pxd":20
- * cpdef bint PySparseMatrix_Check(object obj)
+/* "cysparse/sparse/s_mat.pxd":21
+ * cpdef bint PyLLSparseMatrixView_Check(object obj)
  * 
  * cdef class SparseMatrix:             # <<<<<<<<<<<<<<
  *     """
