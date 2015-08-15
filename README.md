@@ -3,7 +3,9 @@
 Python/Cython library to replace PySparse.
 
 :boom: MEGA BUG: we have a packaging/import problem. :boom:
-This problem will be fixed soon (During the week of the 17th of August).
+
+
+This problem will be fixed soon (During the week of the **17th of August**).
 
 Meanwhile, this is the way to go:
 
@@ -28,8 +30,9 @@ Meanwhile, this is the way to go:
 
 - to use examples:
 
-    `python setup.py build`
+    `python setup.py develop`
 
+This means that the code is compiled **TWICE**...
 
 :white_check_mark: THIS VERSION SHOULD WORK BUT MORE TESTS ARE NEEDED! :white_check_mark:
 
