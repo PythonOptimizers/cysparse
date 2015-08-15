@@ -378,23 +378,23 @@ with open(path.join(here, 'DESCRIPTION.rst'), encoding='utf-8') as f:
 
 setup(name=  'CySparse',
       version=find_version(os.path.realpath(__file__), 'cysparse', '__init__.py'),
-      description='A Cython library for sparse matrices',
-      long_description=long_description,
+      #description='A Cython library for sparse matrices',
+      #long_description=long_description,
       # Author details
-      author='Nikolaj van Omme, Sylvain Arreckx, Dominique Orban',
+      #author='Nikolaj van Omme, Sylvain Arreckx, Dominique Orban',
 {% raw %}
-      author_email='cysparse\@TODO.com',
+      #author_email='cysparse\@TODO.com',
 {% endraw %}
-      maintainer = "CySparse Developers",
+      #maintainer = "CySparse Developers",
 {% raw %}
-      maintainer_email = "dominique.orban@gerad.ca",
+      #maintainer_email = "dominique.orban@gerad.ca",
 {% endraw %}
-      summary = "Fast sparse matrix library for Python",
-      url = "https://github.com/Funartech/cysparse",
-      download_url = "https://github.com/Funartech/cysparse",
-      license='LGPL',
-      classifiers=filter(None, CLASSIFIERS.split('\n')),
-      install_requires=['numpy', 'Cython'],
+      #summary = "Fast sparse matrix library for Python",
+      #url = "https://github.com/Funartech/cysparse",
+      #download_url = "https://github.com/Funartech/cysparse",
+      #license='LGPL',
+      #classifiers=filter(None, CLASSIFIERS.split('\n')),
+      #install_requires=['numpy', 'Cython'],
       #ext_package='cysparse', <- doesn't work with pxd files...
       cmdclass = {'build_ext': build_ext},
       ext_modules = ext_modules,
