@@ -39,6 +39,7 @@ class NonZeros():
     def __exit__(self, type, value, traceback):
         __set_store_zeros_attribute(self.A, self.__store_zeros)
 
+
 cpdef bint PySparseMatrix_Check(object obj):
     """
     Test if ``obj`` is a ``SparseMatrix`` or not.
@@ -50,6 +51,26 @@ cpdef bint PySparseMatrix_Check(object obj):
         ``True`` if ``obj`` is a ``SparseMatrix`` object or inherited from it.
     """
     return isinstance(obj, SparseMatrix)
+
+
+cpdef bint PyLLSparseMatrixView_Check(object obj):
+    """
+    Test if ``obj`` is a ``LLSparseMatrixView`` or not.
+
+    Args:
+        obj: Whatever.
+
+    Return:
+        ``True`` if ``obj`` is a ``LLSparseMatrixView`` object or inherited from it.
+    """
+    is_ll_mat_view = False
+    try:
+        if obj.type == 'LLSparseMatrixView':
+            is_ll_mat_view = True
+    except:
+        pass
+
+    return is_ll_mat_view
 
 ########################################################################################################################
 # BASE MATRIX CLASS

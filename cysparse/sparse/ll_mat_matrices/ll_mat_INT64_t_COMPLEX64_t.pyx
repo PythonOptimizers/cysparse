@@ -8,7 +8,7 @@ from cysparse.types.cysparse_types import type_to_string
 
 from cysparse.sparse.ll_mat cimport LL_MAT_INCREASE_FACTOR
 
-from cysparse.sparse.s_mat cimport unexposed_value, PySparseMatrix_Check
+from cysparse.sparse.s_mat cimport unexposed_value, PySparseMatrix_Check, PyLLSparseMatrixView_Check
 from cysparse.types.cysparse_numpy_types import are_mixed_types_compatible, cysparse_to_numpy_type
 from cysparse.sparse.ll_mat cimport PyLLSparseMatrix_Check, LL_MAT_PPRINT_COL_THRESH, LL_MAT_PPRINT_ROW_THRESH
 
@@ -868,11 +868,22 @@ cdef class LLSparseMatrix_INT64_t_COMPLEX64_t(MutableSparseMatrix_INT64_t_COMPLE
         cdef:
             INT64_t i, j
 
+        cdef:
+            LLSparseMatrix_INT64_t_COMPLEX64_t A
+            LLSparseMatrixView_INT64_t_COMPLEX64_t A_view
+
         if self.__is_symmetric:
             if PySparseMatrix_Check(obj):
+                A = <LLSparseMatrix_INT64_t_COMPLEX64_t> obj
                 for i from 0 <= i < nrow:
                     for j from 0 <= j <= i:
-                        self.put(row_indices[i], col_indices[j], <COMPLEX64_t> obj.at(i, j))
+                        self.put(row_indices[i], col_indices[j], <COMPLEX64_t> A.at(i, j))
+
+            elif PyLLSparseMatrixView_Check(obj):
+                A_view = <LLSparseMatrixView_INT64_t_COMPLEX64_t> obj
+                for i from 0 <= i < nrow:
+                    for j from 0 <= j <= i:
+                        self.put(row_indices[i], col_indices[j], <COMPLEX64_t> A_view.at(i, j))
 
             elif cnp.PyArray_Check(obj):
                 for i from 0 <= i < nrow:
@@ -890,9 +901,16 @@ cdef class LLSparseMatrix_INT64_t_COMPLEX64_t(MutableSparseMatrix_INT64_t_COMPLE
         else:   # general case, i.e. not symmetric
 
             if PySparseMatrix_Check(obj):
+                A = <LLSparseMatrix_INT64_t_COMPLEX64_t> obj
                 for i from 0 <= i < nrow:
                     for j from 0 <= j < ncol:
-                        self.put(row_indices[i], col_indices[j], <COMPLEX64_t> obj.at(i, j))
+                        self.put(row_indices[i], col_indices[j], <COMPLEX64_t> A.at(i, j))
+
+            elif PyLLSparseMatrixView_Check(obj):
+                A_view = <LLSparseMatrixView_INT64_t_COMPLEX64_t> obj
+                for i from 0 <= i < nrow:
+                    for j from 0 <= j < ncol:
+                        self.put(row_indices[i], col_indices[j], <COMPLEX64_t> A_view.at(i, j))
 
             elif cnp.PyArray_Check(obj):
                 for i from 0 <= i < nrow:
@@ -2148,8 +2166,6 @@ cdef class LLSparseMatrix_INT64_t_COMPLEX64_t(MutableSparseMatrix_INT64_t_COMPLE
         """
         Computes :math:`||A||_1`.
 
-        Warning:
-            Only works if the matrix is **not** symmetric!
 
         """
         cdef:
