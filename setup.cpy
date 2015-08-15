@@ -316,26 +316,26 @@ if use_mumps:
 ########################################################################################################################
 # config
 ########################################################################################################################
-{#packages_list = ['cysparse',#}
-{#            'cysparse.types',#}
-{#            'cysparse.sparse',#}
-{#            'cysparse.sparse.sparse_proxies',#}
-{#            'cysparse.sparse.sparse_proxies.complex_generic',#}
-{#            'cysparse.sparse.sparse_utils',#}
-{#            'cysparse.sparse.sparse_utils.generic',#}
-{#            'cysparse.sparse.s_mat_matrices',#}
-{#            'cysparse.sparse.ll_mat_matrices',#}
-{#            'cysparse.sparse.csr_mat_matrices',#}
-{#            'cysparse.sparse.csc_mat_matrices',#}
-{#            'cysparse.sparse.ll_mat_views',#}
-{#            'cysparse.utils',#}
-{#            'cysparse.linalg',#}
-{#            'cysparse.linalg.mumps',#}
-{#            #'cysparse.sparse.IO'#}
-{#            'tests'#}
-{#            ]#}
+packages_list = ['cysparse',
+            'cysparse.types',
+            'cysparse.sparse',
+            'cysparse.sparse.sparse_proxies',
+            'cysparse.sparse.sparse_proxies.complex_generic',
+            'cysparse.sparse.sparse_utils',
+            'cysparse.sparse.sparse_utils.generic',
+            'cysparse.sparse.s_mat_matrices',
+            'cysparse.sparse.ll_mat_matrices',
+            'cysparse.sparse.csr_mat_matrices',
+            'cysparse.sparse.csc_mat_matrices',
+            'cysparse.sparse.ll_mat_views',
+            'cysparse.utils',
+            'cysparse.linalg',
+            'cysparse.linalg.mumps',
+            #'cysparse.sparse.IO'
+            'tests'
+            ]
 
-packages_list=find_packages()
+#packages_list=find_packages()
 
 ext_modules = base_ext + sparse_ext
 
