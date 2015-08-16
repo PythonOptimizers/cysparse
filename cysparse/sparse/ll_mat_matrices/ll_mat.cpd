@@ -51,7 +51,7 @@ cdef class LLSparseMatrix_@index@_@type@(MutableSparseMatrix_@index@_@type@):
     # SET/GET
     ####################################################################################################################
     cdef put(self, @index@ i, @index@ j, @type@ value)
-    cdef int safe_put(self, @index@ i, @index@ j, @type@ value) except -1
+    cdef safe_put(self, @index@ i, @index@ j, @type@ value)
     # EXPLICIT TYPE TESTS
     cdef assign(self, LLSparseMatrixView_@index@_@type@ view, obj)
 

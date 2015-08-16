@@ -804,13 +804,18 @@ cdef class LLSparseMatrix_INT64_t_FLOAT64_t(MutableSparseMatrix_INT64_t_FLOAT64_
                 - :program:`NumPy` ``ndarray``;
                 - :program:`Python` scalar.
 
+                Except for the scalar, all matrix-like object **must** have exactly the same dimensions.
+
         Raises:
             ``IndexError`` if dimensions don't match.
 
-        Note:
+        Notes:
             This assignment is done as if ``A[i, j] = val`` was done explicitely. In particular if ``store_zeros``
             is ``True`` and ``obj`` contains zeros, they will be explicitely added. Also, you can mix elements of
             different (compatible) types.
+
+            If the matrix-like `obj` has the same `itype` and `dtype` as the matrix itself, the code is slightly
+            optimized.
 
         """
         # test if view correspond...
@@ -828,31 +833,45 @@ cdef class LLSparseMatrix_INT64_t_FLOAT64_t(MutableSparseMatrix_INT64_t_FLOAT64_
         cdef:
             INT64_t i, j
 
+        # code is optimized if same kind of matrix is used
         cdef:
             LLSparseMatrix_INT64_t_FLOAT64_t A
             LLSparseMatrixView_INT64_t_FLOAT64_t A_view
 
         if self.__is_symmetric:
             if PySparseMatrix_Check(obj):
-                A = <LLSparseMatrix_INT64_t_FLOAT64_t> obj
-                if A.nrow != nrow or A.ncol != ncol:
-                    raise IndexError("Assigned LLSparseMatrix should be of dimension (%d,%d) (not (%d,%d))" % (nrow, ncol, A.nrow, A.ncol))
+                if obj.nrow != nrow or obj.ncol != ncol:
+                    raise IndexError("Assigned LLSparseMatrix should be of dimensions (%d,%d) (not (%d,%d))" % (nrow, ncol, obj.nrow, obj.ncol))
+                if obj.dtype == self.dtype and obj.itype == self.itype:
+                    A = <LLSparseMatrix_INT64_t_FLOAT64_t> obj
 
-                for i from 0 <= i < nrow:
-                    for j from 0 <= j <= i:
-                        self.put(row_indices[i], col_indices[j], <FLOAT64_t> A.at(i, j))
+                    for i from 0 <= i < nrow:
+                        for j from 0 <= j <= i:
+                            self.put(row_indices[i], col_indices[j], A.at(i, j))
+                else:
+                    # some type mismatch
+                    for i from 0 <= i < nrow:
+                        for j from 0 <= j <= i:
+                            self.put(row_indices[i], col_indices[j], <FLOAT64_t> obj[i, j])
 
             elif PyLLSparseMatrixView_Check(obj):
-                A_view = <LLSparseMatrixView_INT64_t_FLOAT64_t> obj
-                if A_view.nrow != nrow or A_view.ncol != ncol:
-                    raise IndexError("Assigned LLSparseMatrixView should be of dimension (%d,%d) (not (%d,%d))" % (nrow, ncol, A_view.nrow, A_view.ncol))
-                for i from 0 <= i < nrow:
-                    for j from 0 <= j <= i:
-                        self.put(row_indices[i], col_indices[j], <FLOAT64_t> A_view.at(i, j))
+                if obj.nrow != nrow or obj.ncol != ncol:
+                    raise IndexError("Assigned LLSparseMatrixView should be of dimensions (%d,%d) (not (%d,%d))" % (nrow, ncol, obj.nrow, obj.ncol))
+                if obj.dtype == self.dtype and obj.itype == self.itype:
+                    A_view = <LLSparseMatrixView_INT64_t_FLOAT64_t> obj
+
+                    for i from 0 <= i < nrow:
+                        for j from 0 <= j <= i:
+                            self.put(row_indices[i], col_indices[j], A_view.at(i, j))
+                else:
+                    # some type mismatch
+                    for i from 0 <= i < nrow:
+                        for j from 0 <= j <= i:
+                            self.put(row_indices[i], col_indices[j], <FLOAT64_t> obj[i, j])
 
             elif cnp.PyArray_Check(obj):
                 if (nrow, ncol) != obj.shape:
-                    raise IndexError("Assigned NumPy ndarray should be of dimension (%d,%d) (not (%d,%d))" % (nrow, ncol, obj.shape[0], obj.shape[1]))
+                    raise IndexError("Assigned NumPy ndarray should be of dimensions (%d,%d) (not (%d,%d))" % (nrow, ncol, obj.shape[0], obj.shape[1]))
                 for i from 0 <= i < nrow:
                     for j from 0 <= j <= i:
                         #self.put(row_indices[i], col_indices[j], <FLOAT64_t> obj[tuple(i, j)])
@@ -868,25 +887,40 @@ cdef class LLSparseMatrix_INT64_t_FLOAT64_t(MutableSparseMatrix_INT64_t_FLOAT64_
         else:   # general case, i.e. not symmetric
 
             if PySparseMatrix_Check(obj):
-                A = <LLSparseMatrix_INT64_t_FLOAT64_t> obj
-                if A.nrow != nrow or A.ncol != ncol:
-                    raise IndexError("Assigned LLSparseMatrix should be of dimension (%d,%d) (not (%d,%d))" % (nrow, ncol, A.nrow, A.ncol))
+                if obj.nrow != nrow or obj.ncol != ncol:
+                    raise IndexError("Assigned LLSparseMatrix should be of dimensions (%d,%d) (not (%d,%d))" % (nrow, ncol, obj.nrow, obj.ncol))
 
-                for i from 0 <= i < nrow:
-                    for j from 0 <= j < ncol:
-                        self.put(row_indices[i], col_indices[j], <FLOAT64_t> A.at(i, j))
+                if obj.dtype == self.dtype and obj.itype == self.itype:
+                    A = <LLSparseMatrix_INT64_t_FLOAT64_t> obj
+
+                    for i from 0 <= i < nrow:
+                        for j from 0 <= j < ncol:
+                            self.put(row_indices[i], col_indices[j], A.at(i, j))
+                else:
+                    # some type mismatch
+                    for i from 0 <= i < nrow:
+                        for j from 0 <= j < ncol:
+                            self.put(row_indices[i], col_indices[j], <FLOAT64_t> obj[i, j])
 
             elif PyLLSparseMatrixView_Check(obj):
-                A_view = <LLSparseMatrixView_INT64_t_FLOAT64_t> obj
-                if A_view.nrow != nrow or A_view.ncol != ncol:
-                    raise IndexError("Assigned LLSparseMatrixView should be of dimension (%d,%d) (not (%d,%d))" % (nrow, ncol, A_view.nrow, A_view.ncol))
-                for i from 0 <= i < nrow:
-                    for j from 0 <= j < ncol:
-                        self.put(row_indices[i], col_indices[j], <FLOAT64_t> A_view.safe_at(i, j))
+                if obj.nrow != nrow or obj.ncol != ncol:
+                    raise IndexError("Assigned LLSparseMatrixView should be of dimensions (%d,%d) (not (%d,%d))" % (nrow, ncol, obj.nrow, obj.ncol))
+
+                if obj.dtype == self.dtype and obj.itype == self.itype:
+                    A_view = <LLSparseMatrixView_INT64_t_FLOAT64_t> obj
+
+                    for i from 0 <= i < nrow:
+                        for j from 0 <= j < ncol:
+                            self.put(row_indices[i], col_indices[j], A_view.safe_at(i, j))
+                else:
+                    # some type mismatch
+                    for i from 0 <= i < nrow:
+                        for j from 0 <= j < ncol:
+                            self.put(row_indices[i], col_indices[j], obj[i, j])
 
             elif cnp.PyArray_Check(obj):
                 if (nrow, ncol) != obj.shape:
-                    raise IndexError("Assigned NumPy ndarray should be of dimension (%d,%d) (not (%d,%d))" % (nrow, ncol, obj.shape[0], obj.shape[1]))
+                    raise IndexError("Assigned NumPy ndarray should be of dimensions (%d,%d) (not (%d,%d))" % (nrow, ncol, obj.shape[0], obj.shape[1]))
                 for i from 0 <= i < nrow:
                     for j from 0 <= j < ncol:
                         # TODO: check this...
@@ -903,7 +937,6 @@ cdef class LLSparseMatrix_INT64_t_FLOAT64_t(MutableSparseMatrix_INT64_t_FLOAT64_
     ####################################################################################################################
     # COUNTING ELEMENTS
     ####################################################################################################################
-    # TODO: to be done
     cdef INT64_t count_nnz_from_indices(self, INT64_t * row_indices,INT64_t row_indices_length, INT64_t * col_indices,
                                         INT64_t col_indices_length, bint count_only_stored=True):
         """
@@ -1050,7 +1083,7 @@ cdef class LLSparseMatrix_INT64_t_FLOAT64_t(MutableSparseMatrix_INT64_t_FLOAT64_
 
                 self.__nnz -= 1
 
-    cdef int safe_put(self, INT64_t i, INT64_t j, FLOAT64_t value)  except -1:
+    cdef safe_put(self, INT64_t i, INT64_t j, FLOAT64_t value):
         """
         Set ``A[i, j] = value`` directly.
 
@@ -1064,7 +1097,6 @@ cdef class LLSparseMatrix_INT64_t_FLOAT64_t(MutableSparseMatrix_INT64_t_FLOAT64_
 
         self.put(i, j, value)
 
-        return 1
 
     ####################################################################################################################
     #                                            *** GET ***
