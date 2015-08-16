@@ -55,7 +55,11 @@ cdef extern from "cholmod.h":
 
     # Factor struct
     int cholmod_l_check_factor(cholmod_factor *L, cholmod_common *Common)
+    int cholmod_l_print_factor(cholmod_factor *L, const char *name, cholmod_common *Common)
 
+    # Triplet struct
+    #int cholmod_l_check_triplet(cholmod_triplet *T, cholmod_common *Common)
+    
 
 
 ########################################################################################################################
@@ -65,7 +69,7 @@ cdef extern from "cholmod.h":
 # - first (populate1), we give the common attributes and
 # - second (populate2), we split the values array in two if needed (complex case) and give the values (real or complex).
 
-cdef populate1_cholmod_sparse_struct_with_CSCSparseMatrix(cholmod_sparse sparse_struct, CSCSparseMatrix_INT64_t_FLOAT64_t csc_mat, bint no_copy=True):
+cdef populate1_cholmod_sparse_struct_with_CSCSparseMatrix(cholmod_sparse * sparse_struct, CSCSparseMatrix_INT64_t_FLOAT64_t csc_mat, bint no_copy=True):
     """
     Populate a CHOLMO C struct ``cholmod_sparse`` with the content of a :class:`CSCSparseMatrix_INT64_t_FLOAT64_t` matrix.
 
@@ -95,7 +99,7 @@ cdef populate1_cholmod_sparse_struct_with_CSCSparseMatrix(cholmod_sparse sparse_
     #sparse_struct.dtype
 
 
-cdef populate2_cholmod_sparse_struct_with_CSCSparseMatrix(cholmod_sparse sparse_struct, CSCSparseMatrix_INT64_t_FLOAT64_t csc_mat, bint no_copy=True):
+cdef populate2_cholmod_sparse_struct_with_CSCSparseMatrix(cholmod_sparse * sparse_struct, CSCSparseMatrix_INT64_t_FLOAT64_t csc_mat, bint no_copy=True):
     """
     Populate a CHOLMO C struct ``cholmod_sparse`` with the content of a :class:`CSCSparseMatrix_INT64_t_FLOAT64_t` matrix.
 
@@ -169,9 +173,9 @@ cdef class CholmodContext_INT64_t_FLOAT64_t:
         # TODO: add the possibility to use directly a CSCSparseMatrix
         self.sparse_struct = cholmod_sparse()
         # common attributes for real and complex matrices
-        populate1_cholmod_sparse_struct_with_CSCSparseMatrix(self.sparse_struct, self.csc_mat)
+        populate1_cholmod_sparse_struct_with_CSCSparseMatrix(&self.sparse_struct, self.csc_mat)
 
-        populate2_cholmod_sparse_struct_with_CSCSparseMatrix(self.sparse_struct, self.csc_mat)
+        populate2_cholmod_sparse_struct_with_CSCSparseMatrix(&self.sparse_struct, self.csc_mat)
 
 
         # TODO: uncomment when everything is OK

@@ -60,7 +60,7 @@ cdef extern from "cholmod.h":
     int @index|cysparse_real_type_to_cholmod_prefix@_print_factor(cholmod_factor *L, const char *name, cholmod_common *Common)
 
     # Triplet struct
-    int @index|cysparse_real_type_to_cholmod_prefix@_check_triplet(cholmod_triplet *T, cholmod_common *Common)
+    #int @index|cysparse_real_type_to_cholmod_prefix@_check_triplet(cholmod_triplet *T, cholmod_common *Common)
     
 
 
@@ -71,7 +71,7 @@ cdef extern from "cholmod.h":
 # - first (populate1), we give the common attributes and
 # - second (populate2), we split the values array in two if needed (complex case) and give the values (real or complex).
 
-cdef populate1_cholmod_sparse_struct_with_CSCSparseMatrix(cholmod_sparse sparse_struct, CSCSparseMatrix_@index@_@type@ csc_mat, bint no_copy=True):
+cdef populate1_cholmod_sparse_struct_with_CSCSparseMatrix(cholmod_sparse * sparse_struct, CSCSparseMatrix_@index@_@type@ csc_mat, bint no_copy=True):
     """
     Populate a CHOLMO C struct ``cholmod_sparse`` with the content of a :class:`CSCSparseMatrix_@index@_@type@` matrix.
 
@@ -105,7 +105,7 @@ YOU HAVE TO CAST YOUR INDEX TYPE HERE
     #sparse_struct.dtype
 
 {% if type in complex_list %}
-cdef populate2_cholmod_sparse_struct_with_CSCSparseMatrix(cholmod_sparse sparse_struct,
+cdef populate2_cholmod_sparse_struct_with_CSCSparseMatrix(cholmod_sparse * sparse_struct,
                                                               CSCSparseMatrix_@index@_@type@ csc_mat,
                                                               @type|cysparse_real_type_from_real_cysparse_complex_type@ * csc_mat_rval,
                                                               @type|cysparse_real_type_from_real_cysparse_complex_type@ * csc_mat_ival,
@@ -131,7 +131,7 @@ cdef populate2_cholmod_sparse_struct_with_CSCSparseMatrix(cholmod_sparse sparse_
     sparse_struct.packed = 1                                 # We use the packed CSC version
 
 {% else %}
-cdef populate2_cholmod_sparse_struct_with_CSCSparseMatrix(cholmod_sparse sparse_struct, CSCSparseMatrix_@index@_@type@ csc_mat, bint no_copy=True):
+cdef populate2_cholmod_sparse_struct_with_CSCSparseMatrix(cholmod_sparse * sparse_struct, CSCSparseMatrix_@index@_@type@ csc_mat, bint no_copy=True):
     """
     Populate a CHOLMO C struct ``cholmod_sparse`` with the content of a :class:`CSCSparseMatrix_@index@_@type@` matrix.
 
@@ -205,7 +205,7 @@ cdef class CholmodContext_@index@_@type@:
         # TODO: add the possibility to use directly a CSCSparseMatrix
         self.sparse_struct = cholmod_sparse()
         # common attributes for real and complex matrices
-        populate1_cholmod_sparse_struct_with_CSCSparseMatrix(self.sparse_struct, self.csc_mat)
+        populate1_cholmod_sparse_struct_with_CSCSparseMatrix(&self.sparse_struct, self.csc_mat)
 {% if type in complex_list %}
 
         cdef:
@@ -228,7 +228,7 @@ cdef class CholmodContext_@index@_@type@:
                                                      self.csc_rval, self.nnz,
                                                      self.csc_ival, self.nnz)
 {% else %}
-        populate2_cholmod_sparse_struct_with_CSCSparseMatrix(self.sparse_struct, self.csc_mat)
+        populate2_cholmod_sparse_struct_with_CSCSparseMatrix(&self.sparse_struct, self.csc_mat)
 {% endif %}
 
         # TODO: uncomment when everything is OK
