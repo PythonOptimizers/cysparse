@@ -53,12 +53,17 @@ cdef extern from "cholmod.h":
     int cholmod_l_check_sparse(cholmod_sparse *A, cholmod_common *Common)
     int cholmod_l_print_sparse(cholmod_sparse *A, const char *name, cholmod_common *Common)
 
+    # _nnz
+
     # Factor struct
     int cholmod_l_check_factor(cholmod_factor *L, cholmod_common *Common)
     int cholmod_l_print_factor(cholmod_factor *L, const char *name, cholmod_common *Common)
+    #int cholmod_l_free_factor()
+    # factor_to_sparse
 
     # Triplet struct
     #int cholmod_l_check_triplet(cholmod_triplet *T, cholmod_common *Common)
+    #print_triplet
     
 
 
@@ -81,7 +86,7 @@ cdef populate1_cholmod_sparse_struct_with_CSCSparseMatrix(cholmod_sparse * spars
     assert no_copy, "The version with copy is not implemented yet..."
 
     assert(csc_mat.are_row_indices_sorted()), "We only use CSC matrices with internal row indices sorted. The non sorted version is not implemented yet."
-    
+
     sparse_struct.nrow = csc_mat.nrow
     sparse_struct.ncol = csc_mat.ncol
     sparse_struct.nzmax = csc_mat.nnz
@@ -173,7 +178,6 @@ cdef class CholmodContext_INT64_t_FLOAT64_t:
         self.common_struct = cholmod_common()
         cholmod_l_start(&self.common_struct)
 
-        # TODO: add the possibility to use directly a CSCSparseMatrix
         self.sparse_struct = cholmod_sparse()
         # common attributes for real and complex matrices
         populate1_cholmod_sparse_struct_with_CSCSparseMatrix(&self.sparse_struct, self.csc_mat)
@@ -181,6 +185,8 @@ cdef class CholmodContext_INT64_t_FLOAT64_t:
         populate2_cholmod_sparse_struct_with_CSCSparseMatrix(&self.sparse_struct, self.csc_mat)
 
 
+        # TODO: add factor_struct_initialized = True/False
+        #self.factor_struct = ...
 
 
     ####################################################################################################################
@@ -209,6 +215,11 @@ cdef class CholmodContext_INT64_t_FLOAT64_t:
 
         """
         cholmod_l_finish(&self.common_struct)
+
+        # we don't delete sparse_struct as **all** arrays are allocated in self.csc_mat
+        # TODO: doesn't work... WHY?
+        #del self.csc_mat
+
         Py_DECREF(self.A) # release ref
 
     ####################################################################################################################

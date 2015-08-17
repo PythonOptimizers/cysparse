@@ -103,6 +103,7 @@ cdef extern from "cholmod.h":
     ctypedef struct cholmod_factor:
         pass
 
+
 cdef populate1_cholmod_sparse_struct_with_CSCSparseMatrix(cholmod_sparse * sparse_struct, CSCSparseMatrix_INT32_t_FLOAT64_t csc_mat, bint no_copy=?)
 
 cdef populate2_cholmod_sparse_struct_with_CSCSparseMatrix(cholmod_sparse * sparse_struct, CSCSparseMatrix_INT32_t_FLOAT64_t csc_mat, bint no_copy=?)
@@ -121,6 +122,7 @@ cdef class CholmodContext_INT32_t_FLOAT64_t:
 
         cholmod_common common_struct
         cholmod_sparse sparse_struct
+        cholmod_factor factor_struct
 
 
 

@@ -55,12 +55,17 @@ cdef extern from "cholmod.h":
     int @index|cysparse_real_type_to_cholmod_prefix@_check_sparse(cholmod_sparse *A, cholmod_common *Common)
     int @index|cysparse_real_type_to_cholmod_prefix@_print_sparse(cholmod_sparse *A, const char *name, cholmod_common *Common)
 
+    # _nnz
+
     # Factor struct
     int @index|cysparse_real_type_to_cholmod_prefix@_check_factor(cholmod_factor *L, cholmod_common *Common)
     int @index|cysparse_real_type_to_cholmod_prefix@_print_factor(cholmod_factor *L, const char *name, cholmod_common *Common)
+    #int @index|cysparse_real_type_to_cholmod_prefix@_free_factor()
+    # factor_to_sparse
 
     # Triplet struct
     #int @index|cysparse_real_type_to_cholmod_prefix@_check_triplet(cholmod_triplet *T, cholmod_common *Common)
+    #print_triplet
     
 
 
@@ -203,7 +208,6 @@ cdef class CholmodContext_@index@_@type@:
         self.common_struct = cholmod_common()
         @index|cysparse_real_type_to_cholmod_prefix@_start(&self.common_struct)
 
-        # TODO: add the possibility to use directly a CSCSparseMatrix
         self.sparse_struct = cholmod_sparse()
         # common attributes for real and complex matrices
         populate1_cholmod_sparse_struct_with_CSCSparseMatrix(&self.sparse_struct, self.csc_mat)
@@ -232,6 +236,8 @@ cdef class CholmodContext_@index@_@type@:
         populate2_cholmod_sparse_struct_with_CSCSparseMatrix(&self.sparse_struct, self.csc_mat)
 {% endif %}
 
+        # TODO: add factor_struct_initialized = True/False
+        #self.factor_struct = ...
 
 
     ####################################################################################################################
@@ -260,6 +266,11 @@ cdef class CholmodContext_@index@_@type@:
 
         """
         @index|cysparse_real_type_to_cholmod_prefix@_finish(&self.common_struct)
+
+        # we don't delete sparse_struct as **all** arrays are allocated in self.csc_mat
+        # TODO: doesn't work... WHY?
+        #del self.csc_mat
+
         Py_DECREF(self.A) # release ref
 
     ####################################################################################################################

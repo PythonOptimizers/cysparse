@@ -128,6 +128,7 @@ cdef class CholmodContext_@index@_@type@:
 
         cholmod_common common_struct
         cholmod_sparse sparse_struct
+        cholmod_factor factor_struct
 
 {% if type in complex_list %}
         # we keep internally two arrays for the complex numbers: this is required by CHOLMOD...
