@@ -51,7 +51,7 @@ cdef class LLSparseMatrix_INT64_t_FLOAT32_t(MutableSparseMatrix_INT64_t_FLOAT32_
     # SET/GET
     ####################################################################################################################
     cdef put(self, INT64_t i, INT64_t j, FLOAT32_t value)
-    cdef int safe_put(self, INT64_t i, INT64_t j, FLOAT32_t value) except -1
+    cdef safe_put(self, INT64_t i, INT64_t j, FLOAT32_t value)
     # EXPLICIT TYPE TESTS
     cdef assign(self, LLSparseMatrixView_INT64_t_FLOAT32_t view, obj)
 
