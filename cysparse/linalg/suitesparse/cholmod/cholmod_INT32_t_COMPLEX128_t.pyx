@@ -66,8 +66,13 @@ cdef extern from "cholmod.h":
     # Triplet struct
     #int cholmod_check_triplet(cholmod_triplet *T, cholmod_common *Common)
     #print_triplet
-    
 
+    # ANALYZE
+    cholmod_factor * cholmod_analyze(cholmod_sparse *A,cholmod_common *Common)
+    int  cholmod_check_factor(cholmod_factor *L, cholmod_common *Common)
+    
+    # FACTORIZE
+    int cholmod_factorize(cholmod_sparse *, cholmod_factor *, cholmod_common *)
 
 ########################################################################################################################
 # CHOLMOD HELPERS
@@ -216,8 +221,9 @@ cdef class CholmodContext_INT32_t_COMPLEX128_t:
                                                      self.csc_ival, self.nnz)
 
 
-        # TODO: add factor_struct_initialized = True/False
-        #self.factor_struct = ...
+
+        self.factor_struct_initialized = False
+        self.already_factorized = False
 
 
     ####################################################################################################################
@@ -249,7 +255,10 @@ cdef class CholmodContext_INT32_t_COMPLEX128_t:
 
         # we don't delete sparse_struct as **all** arrays are allocated in self.csc_mat
         # TODO: doesn't work... WHY?
-        #del self.csc_mat
+        del self.csc_mat
+
+        if self.factor_struct_initialized:
+            pass
 
         Py_DECREF(self.A) # release ref
 
@@ -268,6 +277,25 @@ cdef class CholmodContext_INT32_t_COMPLEX128_t:
             be displayed on ``sys.stdout``.
         """
         return cholmod_check_sparse(&self.sparse_struct, &self.common_struct)
+
+    def analyze(self):
+        if not self.factor_struct_initialized:
+            self.factor_struct = <cholmod_factor *> cholmod_analyze(&self.sparse_struct,&self.common_struct)
+            self.factor_struct_initialized = True
+
+    cpdef bint check_factor(self):
+        if self.factor_struct_initialized:
+            return cholmod_check_factor(self.factor_struct, &self.common_struct)
+
+        return False
+
+    def factorize(self, force = False):
+        # if needed
+        self.analyze()
+
+        if not self.already_factorized or force:
+            cholmod_factorize(&self.sparse_struct, self.factor_struct, &self.common_struct)
+            self.already_factorized = True
 
     ####################################################################################################################
     # GPU

@@ -32,3 +32,11 @@ print "Checking if internal matrix is OK: " + str(cholmod.check_matrix())
 cholmod.print_common_struct()
 
 cholmod.print_sparse_matrix()
+
+print "$" * 80
+
+cholmod.analyze()
+
+print "Factor OK? " + str(cholmod.check_factor())
+
+cholmod.factorize()

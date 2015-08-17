@@ -66,8 +66,13 @@ cdef extern from "cholmod.h":
     # Triplet struct
     #int @index|cysparse_real_type_to_cholmod_prefix@_check_triplet(cholmod_triplet *T, cholmod_common *Common)
     #print_triplet
-    
 
+    # ANALYZE
+    cholmod_factor * @index|cysparse_real_type_to_cholmod_prefix@_analyze(cholmod_sparse *A,cholmod_common *Common)
+    int  @index|cysparse_real_type_to_cholmod_prefix@_check_factor(cholmod_factor *L, cholmod_common *Common)
+    
+    # FACTORIZE
+    int @index|cysparse_real_type_to_cholmod_prefix@_factorize(cholmod_sparse *, cholmod_factor *, cholmod_common *)
 
 ########################################################################################################################
 # CHOLMOD HELPERS
@@ -236,8 +241,9 @@ cdef class CholmodContext_@index@_@type@:
         populate2_cholmod_sparse_struct_with_CSCSparseMatrix(&self.sparse_struct, self.csc_mat)
 {% endif %}
 
-        # TODO: add factor_struct_initialized = True/False
-        #self.factor_struct = ...
+
+        self.factor_struct_initialized = False
+        self.already_factorized = False
 
 
     ####################################################################################################################
@@ -271,6 +277,9 @@ cdef class CholmodContext_@index@_@type@:
         # TODO: doesn't work... WHY?
         #del self.csc_mat
 
+        if self.factor_struct_initialized:
+            pass
+
         Py_DECREF(self.A) # release ref
 
     ####################################################################################################################
@@ -288,6 +297,25 @@ cdef class CholmodContext_@index@_@type@:
             be displayed on ``sys.stdout``.
         """
         return @index|cysparse_real_type_to_cholmod_prefix@_check_sparse(&self.sparse_struct, &self.common_struct)
+
+    def analyze(self):
+        if not self.factor_struct_initialized:
+            self.factor_struct = <cholmod_factor *> @index|cysparse_real_type_to_cholmod_prefix@_analyze(&self.sparse_struct,&self.common_struct)
+            self.factor_struct_initialized = True
+
+    cpdef bint check_factor(self):
+        if self.factor_struct_initialized:
+            return @index|cysparse_real_type_to_cholmod_prefix@_check_factor(self.factor_struct, &self.common_struct)
+
+        return False
+
+    def factorize(self, force = False):
+        # if needed
+        self.analyze()
+
+        if not self.already_factorized or force:
+            @index|cysparse_real_type_to_cholmod_prefix@_factorize(&self.sparse_struct, self.factor_struct, &self.common_struct)
+            self.already_factorized = True
 
     ####################################################################################################################
     # GPU

@@ -126,7 +126,9 @@ cdef class CholmodContext_INT32_t_COMPLEX128_t:
 
         cholmod_common common_struct
         cholmod_sparse sparse_struct
-        cholmod_factor factor_struct
+        bint factor_struct_initialized
+        cholmod_factor * factor_struct
+        bint already_factorized
 
 
         # we keep internally two arrays for the complex numbers: this is required by CHOLMOD...
@@ -136,3 +138,4 @@ cdef class CholmodContext_INT32_t_COMPLEX128_t:
 
 
     cpdef bint check_matrix(self)
+    cpdef bint check_factor(self)
