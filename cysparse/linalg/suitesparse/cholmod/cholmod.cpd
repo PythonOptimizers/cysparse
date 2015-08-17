@@ -103,15 +103,16 @@ cdef extern from "cholmod.h":
     ctypedef struct cholmod_factor:
         pass
 
-cdef populate1_cholmod_sparse_struct_with_CSCSparseMatrix(cholmod_sparse sparse_struct, CSCSparseMatrix_@index@_@type@ csc_mat, bint no_copy=?)
+
+cdef populate1_cholmod_sparse_struct_with_CSCSparseMatrix(cholmod_sparse * sparse_struct, CSCSparseMatrix_@index@_@type@ csc_mat, bint no_copy=?)
 {% if type in complex_list %}
-cdef populate2_cholmod_sparse_struct_with_CSCSparseMatrix(cholmod_sparse sparse_struct,
+cdef populate2_cholmod_sparse_struct_with_CSCSparseMatrix(cholmod_sparse * sparse_struct,
                                                               CSCSparseMatrix_@index@_@type@ csc_mat,
                                                               @type|cysparse_real_type_from_real_cysparse_complex_type@ * csc_mat_rval,
                                                               @type|cysparse_real_type_from_real_cysparse_complex_type@ * csc_mat_ival,
                                                               bint no_copy=?)
 {% else %}
-cdef populate2_cholmod_sparse_struct_with_CSCSparseMatrix(cholmod_sparse sparse_struct, CSCSparseMatrix_@index@_@type@ csc_mat, bint no_copy=?)
+cdef populate2_cholmod_sparse_struct_with_CSCSparseMatrix(cholmod_sparse * sparse_struct, CSCSparseMatrix_@index@_@type@ csc_mat, bint no_copy=?)
 {% endif %}
 
 cdef class CholmodContext_@index@_@type@:
@@ -134,3 +135,5 @@ cdef class CholmodContext_@index@_@type@:
         @type|cysparse_real_type_from_real_cysparse_complex_type@ * csc_ival
 
 {% endif %}
+
+    cpdef bint check_matrix(self)

@@ -9,6 +9,10 @@ from cysparse.linalg.cholmod_context import NewCholmodContext, cholmod_detailed_
 
 A = NewLinearFillLLSparseMatrix(size=4, is_symmetric=True)
 
+print A
+
+A.to_csc().debug_print()
+
 cholmod = NewCholmodContext(A)
 
 print cholmod
@@ -22,6 +26,8 @@ cholmod.request_GPU()
 print cholmod.c_print
 cholmod.c_print = 4
 print cholmod.c_print
+
+print "Checking if internal matrix is OK: " + str(cholmod.check_matrix())
 
 cholmod.print_common_struct()
 

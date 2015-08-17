@@ -57,7 +57,11 @@ cdef extern from "cholmod.h":
 
     # Factor struct
     int cholmod_l_check_factor(cholmod_factor *L, cholmod_common *Common)
+    int cholmod_l_print_factor(cholmod_factor *L, const char *name, cholmod_common *Common)
 
+    # Triplet struct
+    #int cholmod_l_check_triplet(cholmod_triplet *T, cholmod_common *Common)
+    
 
 
 ########################################################################################################################
@@ -67,17 +71,19 @@ cdef extern from "cholmod.h":
 # - first (populate1), we give the common attributes and
 # - second (populate2), we split the values array in two if needed (complex case) and give the values (real or complex).
 
-cdef populate1_cholmod_sparse_struct_with_CSCSparseMatrix(cholmod_sparse sparse_struct, CSCSparseMatrix_INT64_t_COMPLEX128_t csc_mat, bint no_copy=True):
+cdef populate1_cholmod_sparse_struct_with_CSCSparseMatrix(cholmod_sparse * sparse_struct, CSCSparseMatrix_INT64_t_COMPLEX128_t csc_mat, bint no_copy=True):
     """
     Populate a CHOLMO C struct ``cholmod_sparse`` with the content of a :class:`CSCSparseMatrix_INT64_t_COMPLEX128_t` matrix.
 
     First part: common attributes for both real and complex matrices.
 
     Note:
-        We only use the ``cholmod_sparse`` **packed** version.
+        We only use the ``cholmod_sparse`` **packed** and **sorted** version.
     """
     assert no_copy, "The version with copy is not implemented yet..."
 
+    assert(csc_mat.are_row_indices_sorted()), "We only use CSC matrices with internal row indices sorted. The non sorted version is not implemented yet."
+    
     sparse_struct.nrow = csc_mat.nrow
     sparse_struct.ncol = csc_mat.ncol
     sparse_struct.nzmax = csc_mat.nnz
@@ -93,11 +99,13 @@ cdef populate1_cholmod_sparse_struct_with_CSCSparseMatrix(cholmod_sparse sparse_
     sparse_struct.itype = CHOLMOD_LONG
 
 
+    sparse_struct.sorted = 1                                 # TRUE if columns are sorted, FALSE otherwise
+    sparse_struct.packed = 1                                 # We use the packed CSC version: **no** need to construct
+                                                             # the nz (array with number of non zeros by column)
 
-    #sparse_struct.dtype
 
 
-cdef populate2_cholmod_sparse_struct_with_CSCSparseMatrix(cholmod_sparse sparse_struct,
+cdef populate2_cholmod_sparse_struct_with_CSCSparseMatrix(cholmod_sparse * sparse_struct,
                                                               CSCSparseMatrix_INT64_t_COMPLEX128_t csc_mat,
                                                               FLOAT64_t * csc_mat_rval,
                                                               FLOAT64_t * csc_mat_ival,
@@ -118,9 +126,7 @@ cdef populate2_cholmod_sparse_struct_with_CSCSparseMatrix(cholmod_sparse sparse_
 
     sparse_struct.xtype = CHOLMOD_ZOMPLEX                    # CHOLMOD_PATTERN, _REAL, _COMPLEX, or _ZOMPLEX
     sparse_struct.dtype = CHOLMOD_DOUBLE
-    # TODO: test if indices are really sorted or not
-    sparse_struct.sorted = 0                                 # TRUE if columns are sorted, FALSE otherwise
-    sparse_struct.packed = 1                                 # We use the packed CSC version
+
 
 
 
@@ -182,7 +188,7 @@ cdef class CholmodContext_INT64_t_COMPLEX128_t:
         # TODO: add the possibility to use directly a CSCSparseMatrix
         self.sparse_struct = cholmod_sparse()
         # common attributes for real and complex matrices
-        populate1_cholmod_sparse_struct_with_CSCSparseMatrix(self.sparse_struct, self.csc_mat)
+        populate1_cholmod_sparse_struct_with_CSCSparseMatrix(&self.sparse_struct, self.csc_mat)
 
 
         cdef:
@@ -206,8 +212,7 @@ cdef class CholmodContext_INT64_t_COMPLEX128_t:
                                                      self.csc_ival, self.nnz)
 
 
-        # TODO: uncomment when everything is OK
-        #cholmod_l_check_sparse(&self.sparse_struct, &self.common_struct)
+
 
     ####################################################################################################################
     # Properties
@@ -242,6 +247,16 @@ cdef class CholmodContext_INT64_t_COMPLEX128_t:
     ####################################################################################################################
     def reset_default_parameters(self):
         cholmod_l_defaults(&self.common_struct)
+
+    cpdef bint check_matrix(self):
+        """
+        Check if internal CSC matrix is OK.
+
+        Returns:
+            ``True`` if everything is OK, ``False`` otherwise. Depending on the verbosity, some error messages can
+            be displayed on ``sys.stdout``.
+        """
+        return cholmod_l_check_sparse(&self.sparse_struct, &self.common_struct)
 
     ####################################################################################################################
     # GPU

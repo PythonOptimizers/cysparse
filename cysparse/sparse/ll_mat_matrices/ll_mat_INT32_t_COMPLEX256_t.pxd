@@ -51,7 +51,7 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX256_t(MutableSparseMatrix_INT32_t_COMPL
     # SET/GET
     ####################################################################################################################
     cdef put(self, INT32_t i, INT32_t j, COMPLEX256_t value)
-    cdef int safe_put(self, INT32_t i, INT32_t j, COMPLEX256_t value) except -1
+    cdef safe_put(self, INT32_t i, INT32_t j, COMPLEX256_t value)
     # EXPLICIT TYPE TESTS
     cdef assign(self, LLSparseMatrixView_INT32_t_COMPLEX256_t view, obj)
 
