@@ -83,7 +83,7 @@ cdef populate1_cholmod_sparse_struct_with_CSCSparseMatrix(cholmod_sparse * spars
     assert no_copy, "The version with copy is not implemented yet..."
 
     assert(csc_mat.are_row_indices_sorted()), "We only use CSC matrices with internal row indices sorted. The non sorted version is not implemented yet."
-    
+
     sparse_struct.nrow = csc_mat.nrow
     sparse_struct.ncol = csc_mat.ncol
     sparse_struct.nzmax = csc_mat.nnz
