@@ -78,10 +78,12 @@ cdef populate1_cholmod_sparse_struct_with_CSCSparseMatrix(cholmod_sparse * spars
     First part: common attributes for both real and complex matrices.
 
     Note:
-        We only use the ``cholmod_sparse`` **packed** version.
+        We only use the ``cholmod_sparse`` **packed** and **sorted** version.
     """
     assert no_copy, "The version with copy is not implemented yet..."
 
+    assert(csc_mat.are_row_indices_sorted()), "We only use CSC matrices with internal row indices sorted. The non sorted version is not implemented yet."
+    
     sparse_struct.nrow = csc_mat.nrow
     sparse_struct.ncol = csc_mat.ncol
     sparse_struct.nzmax = csc_mat.nnz
@@ -137,8 +139,7 @@ cdef populate2_cholmod_sparse_struct_with_CSCSparseMatrix(cholmod_sparse * spars
 
     Second part: Non common attributes for complex matrices.
 
-    Note:
-        We only use the ``cholmod_sparse`` **packed** version.
+
     """
     assert no_copy, "The version with copy is not implemented yet..."
 
@@ -231,8 +232,7 @@ cdef class CholmodContext_@index@_@type@:
         populate2_cholmod_sparse_struct_with_CSCSparseMatrix(&self.sparse_struct, self.csc_mat)
 {% endif %}
 
-        # TODO: uncomment when everything is OK
-        #@index|cysparse_real_type_to_cholmod_prefix@_check_sparse(&self.sparse_struct, &self.common_struct)
+
 
     ####################################################################################################################
     # Properties
@@ -267,6 +267,16 @@ cdef class CholmodContext_@index@_@type@:
     ####################################################################################################################
     def reset_default_parameters(self):
         @index|cysparse_real_type_to_cholmod_prefix@_defaults(&self.common_struct)
+
+    cpdef bint check_matrix(self):
+        """
+        Check if internal CSC matrix is OK.
+
+        Returns:
+            ``True`` if everything is OK, ``False`` otherwise. Depending on the verbosity, some error messages can
+            be displayed on ``sys.stdout``.
+        """
+        return @index|cysparse_real_type_to_cholmod_prefix@_check_sparse(&self.sparse_struct, &self.common_struct)
 
     ####################################################################################################################
     # GPU

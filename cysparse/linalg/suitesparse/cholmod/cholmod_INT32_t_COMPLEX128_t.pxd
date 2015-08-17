@@ -131,3 +131,6 @@ cdef class CholmodContext_INT32_t_COMPLEX128_t:
         FLOAT64_t * csc_rval
         FLOAT64_t * csc_ival
 
+
+
+    cpdef bint check_matrix(self)

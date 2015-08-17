@@ -134,3 +134,5 @@ cdef class CholmodContext_@index@_@type@:
         @type|cysparse_real_type_from_real_cysparse_complex_type@ * csc_ival
 
 {% endif %}
+
+    cpdef bint check_matrix(self)

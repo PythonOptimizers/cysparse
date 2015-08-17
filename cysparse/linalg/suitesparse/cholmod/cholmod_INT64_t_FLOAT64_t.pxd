@@ -122,3 +122,6 @@ cdef class CholmodContext_INT64_t_FLOAT64_t:
         cholmod_common common_struct
         cholmod_sparse sparse_struct
 
+
+
+    cpdef bint check_matrix(self)
