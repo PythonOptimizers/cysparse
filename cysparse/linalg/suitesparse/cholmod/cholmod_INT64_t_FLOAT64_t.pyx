@@ -95,8 +95,19 @@ cdef populate1_cholmod_sparse_struct_with_CSCSparseMatrix(cholmod_sparse * spars
     sparse_struct.itype = CHOLMOD_LONG
 
 
+    sparse_struct.sorted = 1                                 # TRUE if columns are sorted, FALSE otherwise
+    sparse_struct.packed = 1                                 # We use the packed CSC version
 
-    #sparse_struct.dtype
+    # compute nz, the number of non zeros for each column
+    # This is documented to be **not** needed if sparse matrix is packed
+    # TODO: verify type because in cholmod_sparse_struct (in file cholmod_core.h) it is defined as void *
+    # and in check_sparse (in file cholmod_check.c) it is defined as Int *
+    cdef int * nz = <int *> PyMem_Malloc(csc_mat.ncol * sizeof(int))
+    cdef INT64_t i, j
+    for j from 0 <= j < csc_mat.ncol:
+        nz[j] = csc_mat.count_nnz_by_column(j)
+
+    #sparse_struct.nz = nz
 
 
 cdef populate2_cholmod_sparse_struct_with_CSCSparseMatrix(cholmod_sparse * sparse_struct, CSCSparseMatrix_INT64_t_FLOAT64_t csc_mat, bint no_copy=True):

@@ -226,6 +226,22 @@ cdef class CSCSparseMatrix_INT32_t_FLOAT32_t(ImmutableSparseMatrix_INT32_t_FLOAT
         return self._order_row_indices()
 
     ####################################################################################################################
+    # Counting elements
+    ####################################################################################################################
+    cdef INT32_t count_nnz_by_column(self, INT32_t j):
+        """
+        Return the number of non zero elements in a given column.
+
+        Args:
+            j: Internal column number.
+
+        """
+        if j < 0 or j >= self.__ncol:
+            raise IndexError('Column index out of range')
+
+        return self.ind[j+1] - self.ind[j]
+
+    ####################################################################################################################
     # Set/Get items
     ####################################################################################################################
     ####################################################################################################################

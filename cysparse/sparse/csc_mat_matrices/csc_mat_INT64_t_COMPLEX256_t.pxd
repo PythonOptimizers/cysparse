@@ -26,6 +26,9 @@ cdef class CSCSparseMatrix_INT64_t_COMPLEX256_t(ImmutableSparseMatrix_INT64_t_CO
 
     cdef _order_row_indices(self)
     cdef _set_row_indices_ordered_is_true(self)
+
+    cdef INT64_t count_nnz_by_column(self, INT64_t column_number)
+
     cdef at(self, INT64_t i, INT64_t j)
 
     # this is needed as for the complex type, Cython's compiler crashes...

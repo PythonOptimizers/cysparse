@@ -26,6 +26,9 @@ cdef class CSCSparseMatrix_@index@_@type@(ImmutableSparseMatrix_@index@_@type@):
 
     cdef _order_row_indices(self)
     cdef _set_row_indices_ordered_is_true(self)
+
+    cdef @index@ count_nnz_by_column(self, @index@ column_number)
+
     cdef at(self, @index@ i, @index@ j)
 {% if type in complex_list %}
     # this is needed as for the complex type, Cython's compiler crashes...

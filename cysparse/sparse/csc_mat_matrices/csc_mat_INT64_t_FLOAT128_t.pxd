@@ -26,6 +26,9 @@ cdef class CSCSparseMatrix_INT64_t_FLOAT128_t(ImmutableSparseMatrix_INT64_t_FLOA
 
     cdef _order_row_indices(self)
     cdef _set_row_indices_ordered_is_true(self)
+
+    cdef INT64_t count_nnz_by_column(self, INT64_t column_number)
+
     cdef at(self, INT64_t i, INT64_t j)
 
     cdef FLOAT128_t safe_at(self, INT64_t i, INT64_t j) except? 2

@@ -26,6 +26,9 @@ cdef class CSCSparseMatrix_INT32_t_INT32_t(ImmutableSparseMatrix_INT32_t_INT32_t
 
     cdef _order_row_indices(self)
     cdef _set_row_indices_ordered_is_true(self)
+
+    cdef INT32_t count_nnz_by_column(self, INT32_t column_number)
+
     cdef at(self, INT32_t i, INT32_t j)
 
     cdef INT32_t safe_at(self, INT32_t i, INT32_t j) except? 2
