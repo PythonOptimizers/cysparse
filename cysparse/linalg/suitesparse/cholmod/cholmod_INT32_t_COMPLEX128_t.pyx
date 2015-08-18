@@ -71,7 +71,8 @@ cdef extern from "cholmod.h":
     int cholmod_check_sparse(cholmod_sparse *A, cholmod_common *Common)
     int cholmod_print_sparse(cholmod_sparse *A, const char *name, cholmod_common *Common)
 
-    # _nnz
+    # Dense struct
+    int cholmod_free_dense(cholmod_dense **X, cholmod_common *Common)
 
     # Factor struct
     int cholmod_check_factor(cholmod_factor *L, cholmod_common *Common)
@@ -391,9 +392,11 @@ cdef class CholmodContext_INT32_t_COMPLEX128_t:
         cdef COMPLEX128_t * cholmod_sol_array_ptr = <COMPLEX128_t * > cholmod_sol.x
 
 
+        raise NotImplementedError("To be coded")
 
 
-
+        cholmod_free_dense(&cholmod_sol, &self.common_struct)
+        
         return sol
 
 

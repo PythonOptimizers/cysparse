@@ -69,7 +69,8 @@ cdef extern from "cholmod.h":
     int cholmod_l_check_sparse(cholmod_sparse *A, cholmod_common *Common)
     int cholmod_l_print_sparse(cholmod_sparse *A, const char *name, cholmod_common *Common)
 
-    # _nnz
+    # Dense struct
+    int cholmod_l_free_dense(cholmod_dense **X, cholmod_common *Common)
 
     # Factor struct
     int cholmod_l_check_factor(cholmod_factor *L, cholmod_common *Common)
@@ -366,6 +367,8 @@ cdef class CholmodContext_INT64_t_FLOAT64_t:
             sol[j] = <FLOAT64_t> cholmod_sol_array_ptr[j]
 
 
+        cholmod_l_free_dense(&cholmod_sol, &self.common_struct)
+        
         return sol
 
 
