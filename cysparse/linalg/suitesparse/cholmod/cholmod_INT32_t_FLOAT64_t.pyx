@@ -87,6 +87,7 @@ cdef extern from "cholmod.h":
     
     # FACTORIZE
     int cholmod_factorize(cholmod_sparse *, cholmod_factor *, cholmod_common *)
+    int cholmod_free_factor(cholmod_factor **LHandle, cholmod_common *Common)
 
     # SOLVE
     cholmod_dense * cholmod_solve (int, cholmod_factor *, cholmod_dense *, cholmod_common *)
@@ -277,14 +278,14 @@ cdef class CholmodContext_INT32_t_FLOAT64_t:
         """
 
         """
-        cholmod_finish(&self.common_struct)
-
         # we don't delete sparse_struct as **all** arrays are allocated in self.csc_mat
         # TODO: doesn't work... WHY?
         #del self.csc_mat
 
         if self.factor_struct_initialized:
-            pass
+            cholmod_free_factor(&self.factor_struct, &self.common_struct)
+
+        cholmod_finish(&self.common_struct)
 
         Py_DECREF(self.A) # release ref
 
@@ -341,7 +342,7 @@ cdef class CholmodContext_INT32_t_FLOAT64_t:
         # if needed
         self.factorize()
 
-        # convert NumPy array
+        # convert NumPy array to CHOLMOD dense vector
         cdef cholmod_dense B
 
         B = numpy_ndarray_to_cholmod_dense(b)
@@ -353,6 +354,17 @@ cdef class CholmodContext_INT32_t_FLOAT64_t:
         # TODO: convert sol to NumPy array
 
         cdef cnp.ndarray[cnp.npy_float64, ndim=1, mode='c'] sol = np.empty(self.ncol, dtype=np.float64)
+
+        # make a copy
+        cdef INT32_t j
+
+        cdef FLOAT64_t * cholmod_sol_array_ptr = <FLOAT64_t * > cholmod_sol.x
+
+
+
+        for j from 0 <= j < self.ncol:
+            sol[j] = <FLOAT64_t> cholmod_sol_array_ptr[j]
+
 
         return sol
 

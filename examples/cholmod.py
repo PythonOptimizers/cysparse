@@ -46,3 +46,5 @@ print "+" * 80
 b = np.ones(4, dtype=np.float64)
 
 sol = cholmod.solve(b)
+
+print sol

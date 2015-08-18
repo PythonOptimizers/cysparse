@@ -89,6 +89,7 @@ cdef extern from "cholmod.h":
     
     # FACTORIZE
     int cholmod_l_factorize(cholmod_sparse *, cholmod_factor *, cholmod_common *)
+    int cholmod_l_free_factor(cholmod_factor **LHandle, cholmod_common *Common)
 
     # SOLVE
     cholmod_dense * cholmod_l_solve (int, cholmod_factor *, cholmod_dense *, cholmod_common *)
@@ -307,14 +308,14 @@ cdef class CholmodContext_INT64_t_COMPLEX128_t:
         """
 
         """
-        cholmod_l_finish(&self.common_struct)
-
         # we don't delete sparse_struct as **all** arrays are allocated in self.csc_mat
         # TODO: doesn't work... WHY?
         #del self.csc_mat
 
         if self.factor_struct_initialized:
-            pass
+            cholmod_l_free_factor(&self.factor_struct, &self.common_struct)
+
+        cholmod_l_finish(&self.common_struct)
 
         Py_DECREF(self.A) # release ref
 
@@ -371,7 +372,7 @@ cdef class CholmodContext_INT64_t_COMPLEX128_t:
         # if needed
         self.factorize()
 
-        # convert NumPy array
+        # convert NumPy array to CHOLMOD dense vector
         cdef cholmod_dense B
 
         B = numpy_ndarray_to_cholmod_dense(b)
@@ -383,6 +384,15 @@ cdef class CholmodContext_INT64_t_COMPLEX128_t:
         # TODO: convert sol to NumPy array
 
         cdef cnp.ndarray[cnp.npy_complex128, ndim=1, mode='c'] sol = np.empty(self.ncol, dtype=np.complex128)
+
+        # make a copy
+        cdef INT64_t j
+
+        cdef COMPLEX128_t * cholmod_sol_array_ptr = <COMPLEX128_t * > cholmod_sol.x
+
+
+
+
 
         return sol
 

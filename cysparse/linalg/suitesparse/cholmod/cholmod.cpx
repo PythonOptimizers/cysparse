@@ -89,6 +89,7 @@ cdef extern from "cholmod.h":
     
     # FACTORIZE
     int @index|cysparse_real_type_to_cholmod_prefix@_factorize(cholmod_sparse *, cholmod_factor *, cholmod_common *)
+    int @index|cysparse_real_type_to_cholmod_prefix@_free_factor(cholmod_factor **LHandle, cholmod_common *Common)
 
     # SOLVE
     cholmod_dense * @index|cysparse_real_type_to_cholmod_prefix@_solve (int, cholmod_factor *, cholmod_dense *, cholmod_common *)
@@ -334,14 +335,14 @@ cdef class CholmodContext_@index@_@type@:
         """
 
         """
-        @index|cysparse_real_type_to_cholmod_prefix@_finish(&self.common_struct)
-
         # we don't delete sparse_struct as **all** arrays are allocated in self.csc_mat
         # TODO: doesn't work... WHY?
         #del self.csc_mat
 
         if self.factor_struct_initialized:
-            pass
+            @index|cysparse_real_type_to_cholmod_prefix@_free_factor(&self.factor_struct, &self.common_struct)
+
+        @index|cysparse_real_type_to_cholmod_prefix@_finish(&self.common_struct)
 
         Py_DECREF(self.A) # release ref
 
@@ -398,7 +399,7 @@ cdef class CholmodContext_@index@_@type@:
         # if needed
         self.factorize()
 
-        # convert NumPy array
+        # convert NumPy array to CHOLMOD dense vector
         cdef cholmod_dense B
 
         B = numpy_ndarray_to_cholmod_dense(b)
@@ -410,6 +411,19 @@ cdef class CholmodContext_@index@_@type@:
         # TODO: convert sol to NumPy array
 
         cdef cnp.ndarray[cnp.@type|cysparse_type_to_numpy_c_type@, ndim=1, mode='c'] sol = np.empty(self.ncol, dtype=np.@type|cysparse_type_to_numpy_type@)
+
+        # make a copy
+        cdef @index@ j
+
+        cdef @type@ * cholmod_sol_array_ptr = <@type@ * > cholmod_sol.x
+
+{% if type in complex_list %}
+        raise NotImplementedError("To be coded")
+{% else %}
+
+        for j from 0 <= j < self.ncol:
+            sol[j] = <@type@> cholmod_sol_array_ptr[j]
+{% endif %}
 
         return sol
 
