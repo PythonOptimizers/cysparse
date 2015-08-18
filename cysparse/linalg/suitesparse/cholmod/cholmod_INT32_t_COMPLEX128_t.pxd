@@ -3,10 +3,15 @@ from cysparse.types.cysparse_types cimport *
 from cysparse.sparse.ll_mat_matrices.ll_mat_INT32_t_COMPLEX128_t cimport LLSparseMatrix_INT32_t_COMPLEX128_t
 from cysparse.sparse.csc_mat_matrices.csc_mat_INT32_t_COMPLEX128_t cimport CSCSparseMatrix_INT32_t_COMPLEX128_t
 
+import numpy as np
+cimport numpy as cnp
+
 # external definition of this type
 ctypedef long SuiteSparse_long # This is exactly CySparse's INT64_t
 
+
 cdef extern from "cholmod.h":
+    # COMMON STRUCT
     ctypedef struct cholmod_common:
         #######################################################
         # parameters for symbolic/numeric factorization and update/downdate
@@ -99,6 +104,17 @@ cdef extern from "cholmod.h":
         int packed                     # TRUE if packed (nz ignored), FALSE if unpacked
 			                           # (nz is required)
 
+    # DENSE MATRIX
+    ctypedef struct cholmod_dense:
+        size_t nrow                    # the matrix is nrow-by-ncol
+        size_t ncol
+        size_t nzmax                   # maximum number of entries in the matrix
+        size_t d                       # leading dimension (d >= nrow must hold)
+        void *x                        # size nzmax or 2*nzmax, if present
+        void *z                        # size nzmax, if present
+        int xtype                      # pattern, real, complex, or zomplex
+        int dtype                      # x and z double or float
+
     # FACTOR
     ctypedef struct cholmod_factor:
         pass
@@ -112,6 +128,8 @@ cdef populate2_cholmod_sparse_struct_with_CSCSparseMatrix(cholmod_sparse * spars
                                                               FLOAT64_t * csc_mat_ival,
                                                               bint no_copy=?)
 
+cdef cholmod_dense numpy_ndarray_to_cholmod_dense(cnp.ndarray[cnp.npy_complex128, ndim=1, mode="c"] b)
+cdef cnp.ndarray[cnp.npy_complex128, ndim=1, mode="c"] cholmod_dense_to_numpy_ndarray(cholmod_dense * b)
 
 cdef class CholmodContext_INT32_t_COMPLEX128_t:
     cdef:

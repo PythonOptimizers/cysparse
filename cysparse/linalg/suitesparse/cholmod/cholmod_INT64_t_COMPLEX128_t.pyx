@@ -5,6 +5,11 @@ from cpython cimport Py_INCREF, Py_DECREF
 from cysparse.types.cysparse_generic_types cimport split_array_complex_values_kernel_INT64_t_COMPLEX128_t, join_array_complex_values_kernel_INT64_t_COMPLEX128_t
 
 
+import numpy as np
+cimport numpy as cnp
+
+cnp.import_array()
+
 cdef extern from "cholmod.h":
 
     char * CHOLMOD_DATE
@@ -42,6 +47,17 @@ cdef extern from "cholmod.h":
         CHOLMOD_DOUBLE      # all numerical values are double
         CHOLMOD_SINGLE
 
+    cdef enum:
+        CHOLMOD_A    		# solve Ax=b
+        CHOLMOD_LDLt        # solve LDL'x=b
+        CHOLMOD_LD          # solve LDx=b
+        CHOLMOD_DLt  	    # solve DL'x=b
+        CHOLMOD_L    	    # solve Lx=b
+        CHOLMOD_Lt   	    # solve L'x=b
+        CHOLMOD_D    	    # solve Dx=b
+        CHOLMOD_P    	    # permute x=Px
+        CHOLMOD_Pt   	    # permute x=P'x
+
     int cholmod_l_start(cholmod_common *Common)
     int cholmod_l_finish(cholmod_common *Common)
 
@@ -73,6 +89,15 @@ cdef extern from "cholmod.h":
     
     # FACTORIZE
     int cholmod_l_factorize(cholmod_sparse *, cholmod_factor *, cholmod_common *)
+
+    # SOLVE
+    cholmod_dense * cholmod_l_solve (int, cholmod_factor *, cholmod_dense *, cholmod_common *)
+    cholmod_sparse * cholmod_l_spsolve (int, cholmod_factor *, cholmod_sparse *,
+    cholmod_common *)
+
+CHOLMOD_SYS_DICT = {
+        'CHOLMOD_A'     : CHOLMOD_A
+    }
 
 ########################################################################################################################
 # CHOLMOD HELPERS
@@ -139,6 +164,37 @@ cdef populate2_cholmod_sparse_struct_with_CSCSparseMatrix(cholmod_sparse * spars
 
 
 
+
+cdef cholmod_dense numpy_ndarray_to_cholmod_dense(cnp.ndarray[cnp.npy_complex128, ndim=1, mode="c"] b):
+    """
+    Convert a :program:`NumPy` one dimensionnal array to the corresponding ``cholmod_dense`` matrix.
+    """
+    # access b
+    cdef COMPLEX128_t * b_data = <COMPLEX128_t *> cnp.PyArray_DATA(b)
+
+    # Creation of CHOLMOD DENSE MATRIX
+    cdef cholmod_dense B
+    B = cholmod_dense()
+
+    B.nrow = b.shape[0]
+    B.ncol = 1
+
+    B.nzmax = b.shape[0]
+
+    B.d = b.shape[0]
+
+
+    # TODO: to be done!
+    raise NotImplementedError("Not yet...")
+
+    B.xtype = CHOLMOD_ZOMPLEX                    # CHOLMOD_PATTERN, _REAL, _COMPLEX, or _ZOMPLEX
+    B.dtype = CHOLMOD_DOUBLE
+
+
+    return B
+
+cdef cnp.ndarray[cnp.npy_complex128, ndim=1, mode="c"] cholmod_dense_to_numpy_ndarray(cholmod_dense * b):
+    pass
 
 ########################################################################################################################
 # CHOLMOD
@@ -255,7 +311,7 @@ cdef class CholmodContext_INT64_t_COMPLEX128_t:
 
         # we don't delete sparse_struct as **all** arrays are allocated in self.csc_mat
         # TODO: doesn't work... WHY?
-        del self.csc_mat
+        #del self.csc_mat
 
         if self.factor_struct_initialized:
             pass
@@ -296,6 +352,41 @@ cdef class CholmodContext_INT64_t_COMPLEX128_t:
         if not self.already_factorized or force:
             cholmod_l_factorize(&self.sparse_struct, self.factor_struct, &self.common_struct)
             self.already_factorized = True
+
+    def solve(self, cnp.ndarray[cnp.npy_complex128, ndim=1, mode="c"] b, cholmod_sys='CHOLMOD_A'):
+
+        # test argument b
+        cdef cnp.npy_intp * shape_b
+        try:
+            shape_b = b.shape
+        except:
+            raise AttributeError("argument b must implement attribute 'shape'")
+
+        dim_b = shape_b[0]
+        assert dim_b == self.nrow, "array dimensions must agree"
+
+        if cholmod_sys not in CHOLMOD_SYS_DICT.keys():
+            raise ValueError('cholmod_sys must be in' % CHOLMOD_SYS_DICT.keys())
+
+        # if needed
+        self.factorize()
+
+        # convert NumPy array
+        cdef cholmod_dense B
+
+        B = numpy_ndarray_to_cholmod_dense(b)
+
+        cdef cholmod_dense * cholmod_sol
+        cholmod_sol = cholmod_l_solve(CHOLMOD_SYS_DICT[cholmod_sys], self.factor_struct, &B, &self.common_struct)
+
+        # TODO: free B
+        # TODO: convert sol to NumPy array
+
+        cdef cnp.ndarray[cnp.npy_complex128, ndim=1, mode='c'] sol = np.empty(self.ncol, dtype=np.complex128)
+
+        return sol
+
+
 
     ####################################################################################################################
     # GPU

@@ -236,7 +236,7 @@ def cysparse_real_type_to_cholmod_prefix(cysparse_type):
 def cysparse_real_type_to_cholmod_type(cysparse_type):
     if cysparse_type in ['FLOAT32_t', 'COMPLEX64_t']:
         return 'CHOLMOD_SINGLE'
-    elif cysparse_type in ['INT64_t', 'COMPLEX128_t']:
+    elif cysparse_type in ['FLOAT64_t', 'COMPLEX128_t']:
         return 'CHOLMOD_DOUBLE'
     else:
         raise TypeError("Not a recognized SuiteSparse Cholmod type for prefixing Cholmod routines")
