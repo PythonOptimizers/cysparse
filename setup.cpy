@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# THIS FILE (setup.py) IS AUTOMATICALLY GENERATED
+# The file setup.py is automatically generated
 # Generate it with
 # python generate_code -s
 

@@ -2,38 +2,6 @@
 
 Python/Cython library to replace PySparse.
 
-:boom: MEGA BUG: we have a packaging/import problem. :boom:
-
-
-This problem will be fixed soon (During the week of the **17th of August**).
-
-Meanwhile, this is the way to go:
-
-- to test:
-
-    `python run_tests.py`. If needed, use the `-r` or `-b` switch:
-
-    ```
-    usage: run_tests.py [-h] [-r] [-b] [-p PATTERN] [-v] [-n]
-
-    run_tests.py: run all or some tests for the CySparse library
-
-    optional arguments:
-      -h, --help            show this help message and exit
-      -r, --rebuild         Rebuild from scratch the CySparse library
-      -b, --build           Build (if needed) CySparse library with new code
-      -p PATTERN, --pattern PATTERN
-                            Run tests with a given filename pattern
-      -v, --verbose         Add some context on the console
-      -n, --dont_use_nose   Use unittest discover instead of nosetests
-    ```
-
-- to use examples:
-
-    `python setup.py develop`
-
-This means that the code is compiled **TWICE**...
-
 :white_check_mark: THIS VERSION SHOULD WORK BUT MORE TESTS ARE NEEDED! :white_check_mark:
 
 I started to deal with sorted col/row indices for LL/CSC/CSR sparse matrices.

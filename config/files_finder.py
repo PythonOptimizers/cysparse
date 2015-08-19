@@ -1,5 +1,6 @@
 # Several helpers to find files and/or directories
-
+import os
+import fnmatch
 
 def find_files(directory, pattern, recursively=True, complete_filename=True):
     """

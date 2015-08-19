@@ -5,6 +5,7 @@ __pycache__/
 *.so
 
 cysparse_generate_code.log
+cysparse.cfg
 /build/*
 /.idea/*
 /.tox/*
