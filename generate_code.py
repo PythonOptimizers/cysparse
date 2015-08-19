@@ -1036,6 +1036,6 @@ if __name__ == "__main__":
             generate_template_files(logger, TESTS_UMFPACK_GENERIC_TEST_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, '.py')
 
     if not action:
-        logger.warning("No action proceeded...")
+        logger.warning("Nothing has been done...")
 
     logger.info("Stop some action(s)")
