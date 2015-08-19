@@ -8,7 +8,7 @@ from cysparse.types.cysparse_types import type_to_string
 
 from cysparse.sparse.ll_mat cimport LL_MAT_INCREASE_FACTOR
 
-from cysparse.sparse.s_mat cimport unexposed_value, PySparseMatrix_Check
+from cysparse.sparse.s_mat cimport unexposed_value, PySparseMatrix_Check, PyLLSparseMatrixView_Check
 from cysparse.types.cysparse_numpy_types import are_mixed_types_compatible, cysparse_to_numpy_type
 from cysparse.sparse.ll_mat cimport PyLLSparseMatrix_Check, LL_MAT_PPRINT_COL_THRESH, LL_MAT_PPRINT_ROW_THRESH
 
@@ -666,6 +666,7 @@ YOU HAVE TO DEFINE OR CAST YOUR NEW UNRECOGNIZED COMPLEX TYPE
             Column indices **are** sorted!
 
         """
+        # WARNING: this code keeps the column indices **sorted** and this is declared in the call of MakeCSR...
         cdef @index@ * ind = <@index@ *> PyMem_Malloc((self.__nrow + 1) * sizeof(@index@))
         if not ind:
             raise MemoryError()
@@ -700,10 +701,17 @@ YOU HAVE TO DEFINE OR CAST YOUR NEW UNRECOGNIZED COMPLEX TYPE
 
             ind[i+1] = ind_col_index
 
-        csr_mat = MakeCSRSparseMatrix_@index@_@type@(nrow=self.__nrow, ncol=self.__ncol, nnz=self.__nnz, ind=ind, col=col, val=val, is_symmetric=self.__is_symmetric, store_zeros=self.__store_zeros)
+        # column indices **are** ordered by definition of the order of the column indices of a LLSparseMatrix object
+        csr_mat = MakeCSRSparseMatrix_@index@_@type@(nrow=self.__nrow,
+                                                     ncol=self.__ncol,
+                                                     nnz=self.__nnz,
+                                                     ind=ind, col=col,
+                                                     val=val,
+                                                     is_symmetric=self.__is_symmetric,
+                                                     store_zeros=self.__store_zeros,
+                                                     col_indices_are_sorted=True)
 
         return csr_mat
-
 
     def to_csc(self):
         """
@@ -716,6 +724,7 @@ YOU HAVE TO DEFINE OR CAST YOUR NEW UNRECOGNIZED COMPLEX TYPE
         Note:
             This code also works to create *symmetric* :class:`CSCSparseMatrix` matrices.
         """
+        # WARNING: this code keeps the row indices **sorted** and this is declared in the call of MakeCSC...
         cdef @index@ * ind = <@index@ *> PyMem_Malloc((self.__ncol + 1) * sizeof(@index@))
         if not ind:
             raise MemoryError()
@@ -773,7 +782,16 @@ YOU HAVE TO DEFINE OR CAST YOUR NEW UNRECOGNIZED COMPLEX TYPE
 
         free(col_indexes)
 
-        csc_mat = MakeCSCSparseMatrix_@index@_@type@(nrow=self.__nrow, ncol=self.__ncol, nnz=self.__nnz, ind=ind, row=row, val=val, is_symmetric=self.__is_symmetric, store_zeros=self.__store_zeros)
+        # row indices **are** ordered by the algorithm we use in to_csc()
+        csc_mat = MakeCSCSparseMatrix_@index@_@type@(nrow=self.__nrow,
+                                                     ncol=self.__ncol,
+                                                     nnz=self.__nnz,
+                                                     ind=ind,
+                                                     row=row,
+                                                     val=val,
+                                                     is_symmetric=self.__is_symmetric,
+                                                     store_zeros=self.__store_zeros,
+                                                     row_indices_are_sorted=True)
 
         return csc_mat
 
@@ -838,14 +856,25 @@ YOU HAVE TO DEFINE OR CAST YOUR NEW UNRECOGNIZED COMPLEX TYPE
 
         Args:
             view: An ``LLSparseMatrixView_@index@_@type@`` that points to this matrix (``self``).
-            obj: Any Python object that implements ``__getitem__()`` and accepts a ``tuple`` ``(i, j)``.
+            obj: Can be a:
+                - ``LLSparseMatrix``;
+                - ``LLSparseMatrixView``;
+                - :program:`NumPy` ``ndarray``;
+                - :program:`Python` scalar.
 
-        Note:
+                Except for the scalar, all matrix-like object **must** have exactly the same dimensions.
+
+        Raises:
+            ``IndexError`` if dimensions don't match.
+
+        Notes:
             This assignment is done as if ``A[i, j] = val`` was done explicitely. In particular if ``store_zeros``
-            is ``True`` and ``obj`` contains zeros, they will be explicitely added.
+            is ``True`` and ``obj`` contains zeros, they will be explicitely added. Also, you can mix elements of
+            different (compatible) types.
 
-        Warning:
-            There are not test whatsoever.
+            If the matrix-like `obj` has the same `itype` and `dtype` as the matrix itself, the code is slightly
+            optimized.
+
         """
         # test if view correspond...
         assert self == view.A, "LLSparseMatrixView should correspond to LLSparseMatrix!"
@@ -862,16 +891,49 @@ YOU HAVE TO DEFINE OR CAST YOUR NEW UNRECOGNIZED COMPLEX TYPE
         cdef:
             @index@ i, j
 
+        # code is optimized if same kind of matrix is used
+        cdef:
+            LLSparseMatrix_@index@_@type@ A
+            LLSparseMatrixView_@index@_@type@ A_view
+
         if self.__is_symmetric:
             if PySparseMatrix_Check(obj):
-                for i from 0 <= i < nrow:
-                    for j from 0 <= j <= i:
-                        self.put(row_indices[i], col_indices[j], <@type@> obj.at(i, j))
+                if obj.nrow != nrow or obj.ncol != ncol:
+                    raise IndexError("Assigned LLSparseMatrix should be of dimensions (%d,%d) (not (%d,%d))" % (nrow, ncol, obj.nrow, obj.ncol))
+                if obj.dtype == self.dtype and obj.itype == self.itype:
+                    A = <LLSparseMatrix_@index@_@type@> obj
+
+                    for i from 0 <= i < nrow:
+                        for j from 0 <= j <= i:
+                            self.put(row_indices[i], col_indices[j], A.at(i, j))
+                else:
+                    # some type mismatch
+                    for i from 0 <= i < nrow:
+                        for j from 0 <= j <= i:
+                            self.put(row_indices[i], col_indices[j], <@type@> obj[i, j])
+
+            elif PyLLSparseMatrixView_Check(obj):
+                if obj.nrow != nrow or obj.ncol != ncol:
+                    raise IndexError("Assigned LLSparseMatrixView should be of dimensions (%d,%d) (not (%d,%d))" % (nrow, ncol, obj.nrow, obj.ncol))
+                if obj.dtype == self.dtype and obj.itype == self.itype:
+                    A_view = <LLSparseMatrixView_@index@_@type@> obj
+
+                    for i from 0 <= i < nrow:
+                        for j from 0 <= j <= i:
+                            self.put(row_indices[i], col_indices[j], A_view.at(i, j))
+                else:
+                    # some type mismatch
+                    for i from 0 <= i < nrow:
+                        for j from 0 <= j <= i:
+                            self.put(row_indices[i], col_indices[j], <@type@> obj[i, j])
 
             elif cnp.PyArray_Check(obj):
+                if (nrow, ncol) != obj.shape:
+                    raise IndexError("Assigned NumPy ndarray should be of dimensions (%d,%d) (not (%d,%d))" % (nrow, ncol, obj.shape[0], obj.shape[1]))
                 for i from 0 <= i < nrow:
                     for j from 0 <= j <= i:
-                        self.put(row_indices[i], col_indices[j], <@type@> obj[tuple(i, j)])
+                        #self.put(row_indices[i], col_indices[j], <@type@> obj[tuple(i, j)])
+                        self.put(row_indices[i], col_indices[j], <@type@> obj[i, j])
 
             elif is_python_number(obj):
                 for i from 0 <= i < nrow:
@@ -883,11 +945,40 @@ YOU HAVE TO DEFINE OR CAST YOUR NEW UNRECOGNIZED COMPLEX TYPE
         else:   # general case, i.e. not symmetric
 
             if PySparseMatrix_Check(obj):
-                for i from 0 <= i < nrow:
-                    for j from 0 <= j < ncol:
-                        self.put(row_indices[i], col_indices[j], <@type@> obj.at(i, j))
+                if obj.nrow != nrow or obj.ncol != ncol:
+                    raise IndexError("Assigned LLSparseMatrix should be of dimensions (%d,%d) (not (%d,%d))" % (nrow, ncol, obj.nrow, obj.ncol))
+
+                if obj.dtype == self.dtype and obj.itype == self.itype:
+                    A = <LLSparseMatrix_@index@_@type@> obj
+
+                    for i from 0 <= i < nrow:
+                        for j from 0 <= j < ncol:
+                            self.put(row_indices[i], col_indices[j], A.at(i, j))
+                else:
+                    # some type mismatch
+                    for i from 0 <= i < nrow:
+                        for j from 0 <= j < ncol:
+                            self.put(row_indices[i], col_indices[j], <@type@> obj[i, j])
+
+            elif PyLLSparseMatrixView_Check(obj):
+                if obj.nrow != nrow or obj.ncol != ncol:
+                    raise IndexError("Assigned LLSparseMatrixView should be of dimensions (%d,%d) (not (%d,%d))" % (nrow, ncol, obj.nrow, obj.ncol))
+
+                if obj.dtype == self.dtype and obj.itype == self.itype:
+                    A_view = <LLSparseMatrixView_@index@_@type@> obj
+
+                    for i from 0 <= i < nrow:
+                        for j from 0 <= j < ncol:
+                            self.put(row_indices[i], col_indices[j], A_view.safe_at(i, j))
+                else:
+                    # some type mismatch
+                    for i from 0 <= i < nrow:
+                        for j from 0 <= j < ncol:
+                            self.put(row_indices[i], col_indices[j], obj[i, j])
 
             elif cnp.PyArray_Check(obj):
+                if (nrow, ncol) != obj.shape:
+                    raise IndexError("Assigned NumPy ndarray should be of dimensions (%d,%d) (not (%d,%d))" % (nrow, ncol, obj.shape[0], obj.shape[1]))
                 for i from 0 <= i < nrow:
                     for j from 0 <= j < ncol:
                         # TODO: check this...
@@ -904,7 +995,6 @@ YOU HAVE TO DEFINE OR CAST YOUR NEW UNRECOGNIZED COMPLEX TYPE
     ####################################################################################################################
     # COUNTING ELEMENTS
     ####################################################################################################################
-    # TODO: to be done
     cdef @index@ count_nnz_from_indices(self, @index@ * row_indices,@index@ row_indices_length, @index@ * col_indices,
                                         @index@ col_indices_length, bint count_only_stored=True):
         """
@@ -963,6 +1053,7 @@ YOU HAVE TO DEFINE OR CAST YOUR NEW UNRECOGNIZED COMPLEX TYPE
                     k = self.link[k]
 
         return nnz
+
 
     ####################################################################################################################
     # Set/Get individual elements
@@ -1051,7 +1142,7 @@ YOU HAVE TO DEFINE OR CAST YOUR NEW UNRECOGNIZED COMPLEX TYPE
 
                 self.__nnz -= 1
 
-    cdef int safe_put(self, @index@ i, @index@ j, @type@ value)  except -1:
+    cdef safe_put(self, @index@ i, @index@ j, @type@ value):
         """
         Set ``A[i, j] = value`` directly.
 
@@ -1065,7 +1156,6 @@ YOU HAVE TO DEFINE OR CAST YOUR NEW UNRECOGNIZED COMPLEX TYPE
 
         self.put(i, j, value)
 
-        return 1
 
     ####################################################################################################################
     #                                            *** GET ***
@@ -1300,6 +1390,7 @@ YOU HAVE TO EXPLICITY CAST YOUR TYPE
 
                 if cnp.PyArray_ISCONTIGUOUS(b):
                     for i_list from 0 <= i_list < id1_list_length:
+
                         self.safe_put(PyInt_AS_LONG(PyList_GET_ITEM(<PyObject *>id1, i_list)), PyInt_AS_LONG(PyList_GET_ITEM(<PyObject *>id2, i_list)), <@type@> b_data[i_list])
                 else:
                     for i_list from 0 <= i_list < id1_list_length:
@@ -1322,6 +1413,9 @@ YOU HAVE TO EXPLICITY CAST YOUR TYPE
 
             if not cnp.PyArray_ISCONTIGUOUS(id1) or not cnp.PyArray_ISCONTIGUOUS(id2):
                 raise TypeError('Both NumPy index arrays must be C-contiguous')
+
+            if not are_mixed_types_compatible(@index|type2enum@, id1.dtype) or not are_mixed_types_compatible(@index|type2enum@, id2.dtype):
+                raise TypeError('Index NumPy array must contain elements of the right index type (%s)' % cysparse_to_numpy_type(@index|type2enum@))
 
             # direct access to indices arrays
             id1_data = <@index@ *> cnp.PyArray_DATA(id1)
@@ -1358,7 +1452,7 @@ YOU HAVE TO EXPLICITY CAST YOUR TYPE
             elif cnp.PyArray_Check(b):
                 # check if NumPy array type is compatible
                 if not are_mixed_types_compatible(@type|type2enum@, b.dtype):
-                    raise TypeError('Value NumPy array must contain elements of the right index type (%s)' % cysparse_to_numpy_type(@type|type2enum@))
+                    raise TypeError('Value NumPy array must contain elements of the right value type (%s)' % cysparse_to_numpy_type(@type|type2enum@))
 
                 b_array_length = b.size
                 if b_array_length != id1_array_length:
@@ -1732,6 +1826,26 @@ YOU HAVE TO DEFINE OR CAST YOUR NEW UNRECOGNIZED TYPE
                 elem += 1
 
         return (a_row, a_col, a_val)
+
+    cdef take_triplet_pointers(self, @index@ * a_row, @index@ * a_col, @type@ * a_val):
+        """
+        Warning:
+            Arrays **must** be allocated.
+        """
+        cdef:
+            @index@   i, k, elem
+
+        elem = 0
+        for i from 0 <= i < self.__nrow:
+            k = self.root[i]
+            while k != -1:
+                a_row[ elem ] = i
+                a_col[ elem ] = self.col[k]
+                a_val[ elem ] = self.val[k]
+                k = self.link[k]
+                elem += 1
+
+
 
 
     def diag(self, k = 0):
@@ -2181,8 +2295,6 @@ YOU HAVE TO EXPLICITY CAST YOUR TYPE
         """
         Computes :math:`||A||_1`.
 
-        Warning:
-            Only works if the matrix is **not** symmetric!
 
         """
         cdef:

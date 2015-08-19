@@ -1,60 +1,25 @@
 #!/usr/bin/env python
 
-# THIS FILE (setup.py) IS AUTOMATICALLY GENERATED
+# The file setup.py is automatically generated
 # Generate it with
 # python generate_code -s
 
+from config.version import find_version, read
+from config.config import get_path_option
+
 from distutils.core import setup
+from setuptools import find_packages
 from distutils.extension import Extension
 from Cython.Distutils import build_ext
 
 import numpy as np
 
 import ConfigParser
-import io
 import os
-import re
+import copy
 
-####################################################################s####################################################
-# HELPERS
-########################################################################################################################
-
-# Versioning: from https://packaging.python.org/en/latest/single_source_version.html#single-sourcing-the-version
-# (see also https://github.com/pypa/pip)
-def read(*names, **kwargs):
-    with io.open(
-        os.path.join(os.path.dirname(__file__), *names),
-        encoding=kwargs.get("encoding", "utf8")
-    ) as fp:
-        return fp.read()
-
-def find_version(*file_paths):
-    version_file = read(*file_paths)
-    version_match = re.search(r"^__version__ = ['\"]([^'\"]*)['\"]",
-                              version_file, re.M)
-    if version_match:
-        return version_match.group(1)
-    raise RuntimeError("Unable to find version string.")
-
-# Grab paths
-def get_path_option(config, section, option):
-    """
-    Get path(s) from an option in a section of a ``ConfigParser``.
-
-    Args:
-        config (ConfigParser): Configuration.
-        section (str): Section ``[section]`` in the ``config`` configuration.
-        option (str): Option ``option`` key.
-
-    Returns:
-        One or several paths ``str``\s in a ``list``.
-    """
-    import os
-    try:
-        val = config.get(section,option).split(os.pathsep)
-    except:
-        val = None
-    return val
+from codecs import open
+from os import path
 
 ####################################################################s####################################################
 # INIT
@@ -64,22 +29,35 @@ cysparse_config.read('cysparse.cfg')
 
 numpy_include = np.get_include()
 
+# DEFAULT
+default_include_dir = get_path_option(cysparse_config, 'DEFAULT', 'include_dirs')
+default_library_dir = get_path_option(cysparse_config, 'DEFAULT', 'library_dirs')
+
 # SUITESPARSE
 # Do we use it or not?
 use_suitesparse = cysparse_config.getboolean('SUITESPARSE', 'use_suitesparse')
 # find user defined directories
 if use_suitesparse:
     suitesparse_include_dirs = get_path_option(cysparse_config, 'SUITESPARSE', 'include_dirs')
+    if suitesparse_include_dirs == '':
+        suitesparse_include_dirs = default_include_dir
     suitesparse_library_dirs = get_path_option(cysparse_config, 'SUITESPARSE', 'library_dirs')
+    if suitesparse_library_dirs == '':
+        suitesparse_library_dirs = default_library_dir
 
 # MUMPS
 # Do we use it or not?
 use_mumps = cysparse_config.getboolean('MUMPS', 'use_mumps')
+mumps_compiled_in_64bits = cysparse_config.getboolean('MUMPS', 'mumps_compiled_in_64bits')
+
 # find user defined directories
 if use_mumps:
     mumps_include_dirs = get_path_option(cysparse_config, 'MUMPS', 'include_dirs')
+    if mumps_include_dirs == '':
+        mumps_include_dirs = default_include_dir
     mumps_library_dirs = get_path_option(cysparse_config, 'MUMPS', 'library_dirs')
-
+    if mumps_library_dirs == '':
+        mumps_library_dirs = default_library_dir
 
 ########################################################################################################################
 # EXTENSIONS
@@ -89,13 +67,14 @@ include_dirs = [numpy_include, '.']
 ext_params = {}
 ext_params['include_dirs'] = include_dirs
 # -Wno-unused-function is potentially dangerous... use with care!
+# '-DNPY_NO_DEPRECATED_API=NPY_1_7_API_VERSION': doesn't work with Cython... because it **does** use a deprecated version...
 ext_params['extra_compile_args'] = ["-O2", '-std=c99', '-Wno-unused-function']
 ext_params['extra_link_args'] = []
 
 
 ########################################################################################################################
 #                                                *** types ***
-base_ext_params = ext_params.copy()
+base_ext_params = copy.deepcopy(ext_params)
 base_ext = [
     Extension(name="cysparse.types.cysparse_types",
               sources=["cysparse/types/cysparse_types.pxd", "cysparse/types/cysparse_types.pyx"]),
@@ -108,7 +87,7 @@ base_ext = [
 
 ########################################################################################################################
 #                                                *** sparse ***
-sparse_ext_params = ext_params.copy()
+sparse_ext_params = copy.deepcopy(ext_params)
 
 sparse_ext = [
   ######################
@@ -274,9 +253,9 @@ utils_ext = [
 ########################################################################################################################
 #                                                *** SuiteSparse ***
 if use_suitesparse:
-    umfpack_ext_params = ext_params.copy()
+    # UMFPACK
+    umfpack_ext_params = copy.deepcopy(ext_params)
     umfpack_ext_params['include_dirs'].extend(suitesparse_include_dirs)
-    #umfpack_ext_params['include_dirs'] = suitesparse_include_dirs
     umfpack_ext_params['library_dirs'] = suitesparse_library_dirs
     umfpack_ext_params['libraries'] = ['umfpack', 'amd']
 
@@ -290,25 +269,53 @@ if use_suitesparse:
 {% endfor %}
         ]
 
+    # CHOLMOD
+    cholmod_ext_params = copy.deepcopy(ext_params)
+    print cholmod_ext_params
 
-if use_mumps:
-    mumps_ext_params = ext_params.copy()
-    mumps_ext_params['include_dirs'].extend(mumps_include_dirs)
-    mumps_ext_params['library_dirs'] = mumps_library_dirs
-    mumps_ext_params['libraries'] = []
+    cholmod_ext_params['include_dirs'].extend(suitesparse_include_dirs)
+    cholmod_ext_params['library_dirs'] = suitesparse_library_dirs
+    cholmod_ext_params['libraries'] = ['cholmod', 'amd']
 
-    mumps_ext = [
-{% for index_type in mumps_index_list %}
-  {% for element_type in mumps_type_list %}
-        Extension(name="cysparse.linalg.mumps.mumps_@index_type@_@element_type@",
-                  sources=['cysparse/linalg/mumps/mumps_@index_type@_@element_type@.pxd',
-                           'cysparse/linalg/mumps/mumps_@index_type@_@element_type@.pyx'], **mumps_ext_params),
-  {% endfor %}
+    print cholmod_ext_params
+
+    cholmod_ext = [
+{% for index_type in cholmod_index_list %}
+  {% for element_type in cholmod_type_list %}
+        Extension(name="cysparse.linalg.suitesparse.cholmod.cholmod_@index_type@_@element_type@",
+                  sources=['cysparse/linalg/suitesparse/cholmod/cholmod_@index_type@_@element_type@.pxd',
+                           'cysparse/linalg/suitesparse/cholmod/cholmod_@index_type@_@element_type@.pyx'], **cholmod_ext_params),
+    {% endfor %}
 {% endfor %}
         ]
 
+if use_mumps:
+    mumps_ext = []
+{% for index_type in mumps_index_list %}
+  {% for element_type in mumps_type_list %}
+    mumps_ext_params_@index_type@_@element_type@ = copy.deepcopy(ext_params)
+    mumps_ext_params_@index_type@_@element_type@['include_dirs'].extend(mumps_include_dirs)
+    mumps_ext_params_@index_type@_@element_type@['library_dirs'] = mumps_library_dirs
+    mumps_ext_params_@index_type@_@element_type@['libraries'] = [] # 'scalapack', 'pord']
+
+    mumps_ext_params_@index_type@_@element_type@['libraries'].append('@element_type|cysparse_real_type_to_mumps_family@mumps')
+    mumps_ext_params_@index_type@_@element_type@['libraries'].append('mumps_common')
+    mumps_ext_params_@index_type@_@element_type@['libraries'].append('pord')
+    mumps_ext_params_@index_type@_@element_type@['libraries'].append('mpiseq')
+    mumps_ext_params_@index_type@_@element_type@['libraries'].append('blas')
+    mumps_ext_params_@index_type@_@element_type@['libraries'].append('pthread')
+
+    mumps_ext.append(
+
+        Extension(name="cysparse.linalg.mumps.mumps_@index_type@_@element_type@",
+                  sources=['cysparse/linalg/mumps/mumps_@index_type@_@element_type@.pxd',
+                           'cysparse/linalg/mumps/mumps_@index_type@_@element_type@.pyx'], **mumps_ext_params_@index_type@_@element_type@))
+  {% endfor %}
+{% endfor %}
+
+
 ########################################################################################################################
-# SETUP
+# config
 ########################################################################################################################
 packages_list = ['cysparse',
             'cysparse.types',
@@ -324,25 +331,76 @@ packages_list = ['cysparse',
             'cysparse.sparse.ll_mat_views',
             'cysparse.utils',
             'cysparse.linalg',
-            'cysparse.linalg.suitesparse',
-            'cysparse.linalg.suitesparse.umfpack',
+            'cysparse.linalg.mumps',
             #'cysparse.sparse.IO'
+            'tests'
             ]
+
+#packages_list=find_packages()
 
 ext_modules = base_ext + sparse_ext
 
 if use_suitesparse:
     # add suitsparse package
     ext_modules += umfpack_ext
+    ext_modules += cholmod_ext
     packages_list.append('cysparse.linalg.suitesparse')
+    packages_list.append('cysparse.linalg.suitesparse.umfpack')
+    packages_list.append('cysparse.linalg.suitesparse.cholmod')
+
+if use_mumps:
+    # add mumps
+    ext_modules += mumps_ext
+    packages_list.append('cysparse.linalg.mumps')
+
+########################################################################################################################
+# PACKAGE SPECIFICATIONS
+########################################################################################################################
+
+CLASSIFIERS = """\
+Development Status :: 4 - Beta
+Intended Audience :: Science/Research
+Intended Audience :: Developers
+License :: OSI Approved
+Programming Language :: Python
+Programming Language :: Cython
+Topic :: Software Development
+Topic :: Scientific/Engineering
+Operating System :: POSIX
+Operating System :: Unix
+Operating System :: MacOS :: MacOS X
+Natural Language :: English
+"""
+
+here = path.abspath(path.dirname(__file__))
+# Get the long description from the relevant file
+with open(path.join(here, 'DESCRIPTION.rst'), encoding='utf-8') as f:
+    long_description = f.read()
 
 setup(name=  'CySparse',
-  version=find_version('cysparse', '__init__.py'),
-  #ext_package='cysparse', <- doesn't work with pxd files...
-  cmdclass = {'build_ext': build_ext},
-  ext_modules = ext_modules,
-  package_dir = {"cysparse": "cysparse"},
-  packages=packages_list
-
+      version=find_version(os.path.realpath(__file__), 'cysparse', '__init__.py'),
+      description='A Cython library for sparse matrices',
+      long_description=long_description,
+      #Author details
+      author='Nikolaj van Omme, Sylvain Arreckx, Dominique Orban',
+{% raw %}
+      author_email='cysparse\@TODO.com',
+{% endraw %}
+      maintainer = "CySparse Developers",
+{% raw %}
+      maintainer_email = "dominique.orban@gerad.ca",
+{% endraw %}
+      summary = "Fast sparse matrix library for Python",
+      url = "https://github.com/Funartech/cysparse",
+      download_url = "https://github.com/Funartech/cysparse",
+      license='LGPL',
+      classifiers=filter(None, CLASSIFIERS.split('\n')),
+      install_requires=['numpy', 'Cython'],
+      #ext_package='cysparse', <- doesn't work with pxd files...
+      cmdclass = {'build_ext': build_ext},
+      ext_modules = ext_modules,
+      package_dir = {"cysparse": "cysparse"},
+      packages=packages_list,
+      zip_safe=False
 )
 

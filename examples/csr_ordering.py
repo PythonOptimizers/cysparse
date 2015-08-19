@@ -47,6 +47,19 @@ print "=" * 80
 
 CSR = l1.to_csr()
 
+print CSR
+
 CSR.print_to(sys.stdout)
 
 print CSR.are_column_indices_sorted()
+
+for i in xrange(10):
+    for j in xrange(10):
+        print "(", i, ",", j, ") = ", CSR[i, j], " ",
+    print "\n"
+
+print "\n"
+
+print "*" * 80
+
+CSR.debug_print()

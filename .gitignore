@@ -1,5 +1,14 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
 cysparse_generate_code.log
+cysparse.cfg
 /build/*
 /.idea/*
 /.tox/*
 /doc/build/*
+/*.egg-info
+/dist

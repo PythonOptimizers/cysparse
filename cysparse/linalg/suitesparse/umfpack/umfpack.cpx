@@ -17,7 +17,6 @@ cimport numpy as cnp
 
 cnp.import_array()
 
-
 cdef extern from "umfpack.h":
 
     char * UMFPACK_DATE
@@ -338,7 +337,9 @@ cdef class UmfpackContext_@index@_@type@:
                                      UMFPACK_SUBSUB_VERSION,
                                      UMFPACK_DATE)
 
-
+    ####################################################################################################################
+    # INIT
+    ####################################################################################################################
     def __cinit__(self, LLSparseMatrix_@index@_@type@ A):
         """
         Args:

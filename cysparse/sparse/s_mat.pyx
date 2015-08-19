@@ -39,6 +39,7 @@ class NonZeros():
     def __exit__(self, type, value, traceback):
         __set_store_zeros_attribute(self.A, self.__store_zeros)
 
+
 cpdef bint PySparseMatrix_Check(object obj):
     """
     Test if ``obj`` is a ``SparseMatrix`` or not.
@@ -50,6 +51,26 @@ cpdef bint PySparseMatrix_Check(object obj):
         ``True`` if ``obj`` is a ``SparseMatrix`` object or inherited from it.
     """
     return isinstance(obj, SparseMatrix)
+
+
+cpdef bint PyLLSparseMatrixView_Check(object obj):
+    """
+    Test if ``obj`` is a ``LLSparseMatrixView`` or not.
+
+    Args:
+        obj: Whatever.
+
+    Return:
+        ``True`` if ``obj`` is a ``LLSparseMatrixView`` object or inherited from it.
+    """
+    is_ll_mat_view = False
+    try:
+        if obj.type == 'LLSparseMatrixView':
+            is_ll_mat_view = True
+    except:
+        pass
+
+    return is_ll_mat_view
 
 ########################################################################################################################
 # BASE MATRIX CLASS
@@ -67,10 +88,6 @@ cdef class SparseMatrix:
         self.__type_name = "Not defined"
         self.__type = "Not defined"
         self.__index_and_type = "[not defined, not defined]"
-
-        # This is overwritten in inheriting classes
-        #self.cp_type.itype = kwargs.get('itype', INT32_T)
-        #self.cp_type.dtype = kwargs.get('dtype', FLOAT64_T)
 
         self.__is_symmetric = kwargs.get('is_symmetric', False)
         self.__store_zeros = kwargs.get('store_zeros', False)
