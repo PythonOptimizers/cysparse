@@ -251,7 +251,25 @@ utils_ext = [
 ]
 
 ########################################################################################################################
-#                                                *** SuiteSparse ***
+#                                                *** LinAlg ***
+
+##########################
+# Base Contexts
+##########################
+context_ext_params = copy.deepcopy(ext_params)
+base_context_ext = [
+{% for index_type in index_list %}
+  {% for element_type in type_list %}
+        Extension(name="cysparse.linalg.contexts.context_@index_type@_@element_type@",
+                  sources=['cysparse/linalg/contexts/context_@index_type@_@element_type@.pxd',
+                           'cysparse/linalg/contexts/context_@index_type@_@element_type@.pyx'], **context_ext_params),
+    {% endfor %}
+{% endfor %}
+
+    ]
+##########################
+# SuiteSparse
+##########################
 if use_suitesparse:
     # UMFPACK
     umfpack_ext_params = copy.deepcopy(ext_params)
@@ -289,6 +307,9 @@ if use_suitesparse:
 {% endfor %}
         ]
 
+##########################
+# MUMPS
+##########################
 if use_mumps:
     mumps_ext = []
 {% for index_type in mumps_index_list %}
@@ -331,14 +352,15 @@ packages_list = ['cysparse',
             'cysparse.sparse.ll_mat_views',
             'cysparse.utils',
             'cysparse.linalg',
-            'cysparse.linalg.mumps',
+            'cysparse.linalg.contexts',
+            #'cysparse.linalg.mumps',
             #'cysparse.sparse.IO'
             'tests'
             ]
 
 #packages_list=find_packages()
 
-ext_modules = base_ext + sparse_ext
+ext_modules = base_ext + sparse_ext + base_context_ext
 
 if use_suitesparse:
     # add suitsparse package

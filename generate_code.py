@@ -570,6 +570,14 @@ CSC_SPARSE_MATRIX_HELPERS_INCLUDE_FILES = glob.glob(os.path.join(CSC_SPARSE_MATR
 LINALG_TEMPLATE_DIR = os.path.join(PATH, 'cysparse', 'linalg')
 
 ##########################################
+### Base Contexts
+##########################################
+LINALG_BASE_CONTEXT_TEMPLATE_DIR = os.path.join(LINALG_TEMPLATE_DIR, 'contexts')
+
+LINALG_BASE_CONTEXT_DECLARATION_FILES = glob.glob(os.path.join(LINALG_BASE_CONTEXT_TEMPLATE_DIR, '*.cpd'))
+LINALG_BASE_CONTEXT_DEFINITION_FILES = glob.glob(os.path.join(LINALG_BASE_CONTEXT_TEMPLATE_DIR, '*.cpx'))
+
+##########################################
 ### SuiteSparse
 ##########################################
 LINALG_SUITESPARSE_TEMPLATE_DIR = os.path.join(LINALG_TEMPLATE_DIR, 'suitesparse')
@@ -982,6 +990,9 @@ if __name__ == "__main__":
         logger.info("Act for generic contexts")
 
         if arg_options.clean:
+            # Base Contexts
+            clean_cython_files(logger, LINALG_BASE_CONTEXT_TEMPLATE_DIR)
+
             # SuiteSparse
             # Umfpack
             clean_cython_files(logger, LINALG_SUITESPARSE_UMFPACK_TEMPLATE_DIR)
@@ -993,6 +1004,12 @@ if __name__ == "__main__":
             clean_cython_files(logger, LINALG_MUMPS_TEMPLATE_DIR)
             
         else:
+            ###############################
+            # Base Contexts
+            ###############################
+            generate_following_type_and_index(logger, LINALG_BASE_CONTEXT_DECLARATION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, ELEMENT_TYPES, INDEX_TYPES, '.pxd')
+            generate_following_type_and_index(logger, LINALG_BASE_CONTEXT_DECLARATION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, ELEMENT_TYPES, INDEX_TYPES, '.pyx')
+
             ###############################
             # SuiteSparse
             ###############################
