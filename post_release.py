@@ -5,16 +5,6 @@ import os
 
 
 if __name__ == '__main__':
-    # Copy locally the whole cysparse repository
-    CYSPARSE_DIR = os.path.curdir
-    CYSPARSE_DEST = os.path.abspath(os.path.join(CYSPARSE_DIR, '..', 'tmp_cysparse_34534'))
-
-    shutil.rmtree(CYSPARSE_DEST, ignore_errors=True)
-    shutil.copytree(CYSPARSE_DIR, CYSPARSE_DEST, symlinks=True, ignore=shutil.ignore_patterns('build', 'dist'))
-
-    # go into new repository
-    os.chdir(CYSPARSE_DEST)
-
     # Switch to develop branch
     subprocess.call(['git', 'checkout', 'develop'])
 
@@ -23,8 +13,8 @@ if __name__ == '__main__':
     subprocess.call(['git', 'checkout', '-b', BRANCH_NAME])
 
     # clean
-    subprocess.call(['python', 'clean.py'])
-    subprocess.call(['python', 'generate_code.py', '-ac'])
+    subprocess.call(['python', 'clean.py', '-u'])
+    subprocess.call(['python', 'generate_code.py', '-acu'])
 
     # commit files
     subprocess.call(['git', 'add', '--all'])
@@ -38,6 +28,3 @@ if __name__ == '__main__':
     subprocess.call(['git', 'push', 'origin', '--delete', BRANCH_NAME])
     # create remote branch: -u = set-upstream and push
     subprocess.call(['git', 'push', '-u', 'origin', BRANCH_NAME])
-
-    # clean temporary repository
-    shutil.rmtree(CYSPARSE_DEST, ignore_errors=True)
