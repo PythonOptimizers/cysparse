@@ -60,6 +60,7 @@ def make_parser():
     parser.add_argument("-l", "--linalg", help="Create Linear Algebra contexts", action='store_true', required=False)
     parser.add_argument("-t", "--tests", help="Create generic tests", action='store_true', required=False)
     parser.add_argument("-c", "--clean", help="Clean action files", action='store_true', required=False)
+    parser.add_argument("-u", "--untrack", help="Untrack files from git", action='store_true', required=False)
 
     return parser
 
@@ -257,7 +258,7 @@ def cysparse_real_type_to_mumps_family(cysparse_type):
         raise TypeError("Not a recognized Mumps type")
 
 
-def clean_cython_files(logger, directory, file_list=None, exclude_file_list=None):
+def clean_cython_files(logger, directory, file_list=None, exclude_file_list=[], untrack=False):
     """
 
     Args:
@@ -283,11 +284,16 @@ def clean_cython_files(logger, directory, file_list=None, exclude_file_list=None
         real_file_list.extend(glob.glob(os.path.join(directory, '*.pyx')))
 
     for filename in real_file_list:
-        try:
+        #try:
             if not any(filename.endswith(e) for e in exclude_file_list):
-                os.remove(filename)
-        except:
-            logger.warning("Couln't remove file '%s'" % filename)
+                if untrack:
+                    print ["git", "rm", "--cached", filename.split(PATH+os.sep)[1]]
+                    call(["git", "rm", "--cached", filename.split(PATH+os.sep)[1]])
+                else:
+                    os.remove(filename)
+
+        #except:
+        #    logger.warning("Couldn't remove file '%s'" % filename)
 
 
 def render_template(template_filename, template_environment, context):
@@ -796,7 +802,7 @@ if __name__ == "__main__":
         logger.info("Act for setup file")
 
         if arg_options.clean:
-            clean_cython_files(logger, PATH, [SETUP_PY_FILE])
+            clean_cython_files(logger, PATH, [SETUP_PY_FILE], untrack=arg_options.untrack)
         else:
             generate_template_files(logger, [SETUP_FILE], GENERAL_ENVIRONMENT, GENERAL_CONTEXT, '.py')
 
@@ -805,8 +811,8 @@ if __name__ == "__main__":
         logger.info("Act for generic types")
 
         if arg_options.clean:
-            clean_cython_files(logger, SPARSE_DIR, [TYPES_GENERIC_TYPES_DECLARATION_FILE[:-4] + '.pxd'])
-            clean_cython_files(logger, SPARSE_DIR, [TYPES_GENERIC_TYPES_DEFINITION_FILE[:-4] + '.pyx'])
+            clean_cython_files(logger, SPARSE_DIR, [TYPES_GENERIC_TYPES_DECLARATION_FILE[:-4] + '.pxd'], untrack=arg_options.untrack)
+            clean_cython_files(logger, SPARSE_DIR, [TYPES_GENERIC_TYPES_DEFINITION_FILE[:-4] + '.pyx'], untrack=arg_options.untrack)
 
         else:
             ###############################
@@ -823,51 +829,51 @@ if __name__ == "__main__":
         if arg_options.clean:
             logger.info("Clean generated files")
             # Sparse
-            clean_cython_files(logger, SPARSE_SPARSE_UTILS_TEMPLATE_DIR)
+            clean_cython_files(logger, SPARSE_SPARSE_UTILS_TEMPLATE_DIR, untrack=arg_options.untrack)
 
 
             # SparseMatrix
-            clean_cython_files(logger, SPARSE_MATRIX_TEMPLATE_DIR)
+            clean_cython_files(logger, SPARSE_MATRIX_TEMPLATE_DIR, untrack=arg_options.untrack)
 
             # TransposedSparseMatrix
-            clean_cython_files(logger, SPARSE_MATRIX_PROXIES_TEMPLATE_DIR, [SPARSE_MATRIX_PROXIES_TRANSPOSE_DECLARATION_FILE[:-4] + '.pxd'])
-            clean_cython_files(logger, SPARSE_MATRIX_PROXIES_TEMPLATE_DIR, [SPARSE_MATRIX_PROXIES_TRANSPOSE_DEFINITION_FILE[:-4] + '.pyx'])
+            clean_cython_files(logger, SPARSE_MATRIX_PROXIES_TEMPLATE_DIR, [SPARSE_MATRIX_PROXIES_TRANSPOSE_DECLARATION_FILE[:-4] + '.pxd'], untrack=arg_options.untrack)
+            clean_cython_files(logger, SPARSE_MATRIX_PROXIES_TEMPLATE_DIR, [SPARSE_MATRIX_PROXIES_TRANSPOSE_DEFINITION_FILE[:-4] + '.pyx'], untrack=arg_options.untrack)
 
             # ConjugateTransposedSparseMatrix
-            clean_cython_files(logger, SPARSE_MATRIX_PROXIES_GENERIC_TEMPLATE_DIR)
+            clean_cython_files(logger, SPARSE_MATRIX_PROXIES_GENERIC_TEMPLATE_DIR, untrack=arg_options.untrack)
 
             # LLSparseMatrix
-            clean_cython_files(logger, LL_SPARSE_MATRIX_TEMPLATE_DIR)
-            clean_cython_files(logger, SPARSE_DIR, [LL_SPARSE_MATRIX_BASE_FILE[:-4] + '.pyx'])
+            clean_cython_files(logger, LL_SPARSE_MATRIX_TEMPLATE_DIR, untrack=arg_options.untrack)
+            clean_cython_files(logger, SPARSE_DIR, [LL_SPARSE_MATRIX_BASE_FILE[:-4] + '.pyx'], untrack=arg_options.untrack)
             # LLSparseMatrix kernel
-            clean_cython_files(logger, LL_SPARSE_MATRIX_KERNEL_TEMPLATE_DIR)
+            clean_cython_files(logger, LL_SPARSE_MATRIX_KERNEL_TEMPLATE_DIR, untrack=arg_options.untrack)
             # LLSparseMatrix helpers
-            clean_cython_files(logger, LL_SPARSE_MATRIX_HELPERS_TEMPLATE_DIR)
+            clean_cython_files(logger, LL_SPARSE_MATRIX_HELPERS_TEMPLATE_DIR, untrack=arg_options.untrack)
 
             # LLSparseMatrix IO
-            clean_cython_files(logger, LL_SPARSE_MATRIX_IO_TEMPLATE_DIR)
+            clean_cython_files(logger, LL_SPARSE_MATRIX_IO_TEMPLATE_DIR, untrack=arg_options.untrack)
             # LLSparseMatrix constructors
-            clean_cython_files(logger, LL_SPARSE_MATRIX_CONSTRUCTORS_TEMPLATE_DIR)
+            clean_cython_files(logger, LL_SPARSE_MATRIX_CONSTRUCTORS_TEMPLATE_DIR, untrack=arg_options.untrack)
 
 
             # LLSparseMatrixView
-            clean_cython_files(logger, LL_SPARSE_MATRIX_VIEW_TEMPLATE_DIR)
+            clean_cython_files(logger, LL_SPARSE_MATRIX_VIEW_TEMPLATE_DIR, untrack=arg_options.untrack)
 
 
             # CSRSparseMatrix
-            clean_cython_files(logger, CSR_SPARSE_MATRIX_TEMPLATE_DIR)
+            clean_cython_files(logger, CSR_SPARSE_MATRIX_TEMPLATE_DIR, untrack=arg_options.untrack)
             # CSRSparseMatrix kernel
-            clean_cython_files(logger, CSR_SPARSE_MATRIX_KERNEL_TEMPLATE_DIR)
+            clean_cython_files(logger, CSR_SPARSE_MATRIX_KERNEL_TEMPLATE_DIR, untrack=arg_options.untrack)
             # CSRSparseMatrix helpers
-            clean_cython_files(logger, CSR_SPARSE_MATRIX_HELPERS_TEMPLATE_DIR)
+            clean_cython_files(logger, CSR_SPARSE_MATRIX_HELPERS_TEMPLATE_DIR, untrack=arg_options.untrack)
 
 
             # CSCSparseMatrix
-            clean_cython_files(logger, CSC_SPARSE_MATRIX_TEMPLATE_DIR)
+            clean_cython_files(logger, CSC_SPARSE_MATRIX_TEMPLATE_DIR, untrack=arg_options.untrack)
             # CSCSparseMatrix kernel
-            clean_cython_files(logger, CSC_SPARSE_MATRIX_KERNEL_TEMPLATE_DIR)
+            clean_cython_files(logger, CSC_SPARSE_MATRIX_KERNEL_TEMPLATE_DIR, untrack=arg_options.untrack)
             # CSCSparseMatrix helpers
-            clean_cython_files(logger, CSC_SPARSE_MATRIX_HELPERS_TEMPLATE_DIR)
+            clean_cython_files(logger, CSC_SPARSE_MATRIX_HELPERS_TEMPLATE_DIR, untrack=arg_options.untrack)
 
         else:
             logger.info("Generate code files")
@@ -984,13 +990,13 @@ if __name__ == "__main__":
         if arg_options.clean:
             # SuiteSparse
             # Umfpack
-            clean_cython_files(logger, LINALG_SUITESPARSE_UMFPACK_TEMPLATE_DIR)
+            clean_cython_files(logger, LINALG_SUITESPARSE_UMFPACK_TEMPLATE_DIR, untrack=arg_options.untrack)
             # Cholmod
-            clean_cython_files(logger, LINALG_SUITESPARSE_CHOLMOD_TEMPLATE_DIR)
+            clean_cython_files(logger, LINALG_SUITESPARSE_CHOLMOD_TEMPLATE_DIR, untrack=arg_options.untrack)
 
             # MUMPS
-            clean_cython_files(logger, TESTS_LINALG_DIR, [LINALG_MUMPS_FACTORY_METHOD_FILE[:-4] + '.py'])
-            clean_cython_files(logger, LINALG_MUMPS_TEMPLATE_DIR)
+            clean_cython_files(logger, TESTS_LINALG_DIR, [LINALG_MUMPS_FACTORY_METHOD_FILE[:-4] + '.py'], untrack=arg_options.untrack)
+            clean_cython_files(logger, LINALG_MUMPS_TEMPLATE_DIR, untrack=arg_options.untrack)
             
         else:
             ###############################
@@ -1016,12 +1022,12 @@ if __name__ == "__main__":
         logger.info("Act for generic tests")
 
         if arg_options.clean:
-            clean_cython_files(logger, TESTS_CSC_SPARSE_MATRIX_GENERIC_TEST_DIR, find_files(TESTS_CSC_SPARSE_MATRIX_GENERIC_TEST_DIR, '*.py', False, True), exclude_file_list=['__init__.py'])
-            clean_cython_files(logger, TESTS_CSR_SPARSE_MATRIX_GENERIC_TEST_DIR, find_files(TESTS_CSR_SPARSE_MATRIX_GENERIC_TEST_DIR, '*.py', False, True), exclude_file_list=['__init__.py'])
-            clean_cython_files(logger, TESTS_LL_SPARSE_MATRIX_VIEW_GENERIC_TEST_DIR, find_files(TESTS_LL_SPARSE_MATRIX_VIEW_GENERIC_TEST_DIR, '*.py', False, True), exclude_file_list=['__init__.py'])
-            clean_cython_files(logger, TESTS_SPARSE_MATRIX_COMMON_OPERATIONS_GENERIC_TEST_DIR, find_files(TESTS_SPARSE_MATRIX_COMMON_OPERATIONS_GENERIC_TEST_DIR, '*.py', False, True), exclude_file_list=['__init__.py'])
+            clean_cython_files(logger, TESTS_CSC_SPARSE_MATRIX_GENERIC_TEST_DIR, find_files(TESTS_CSC_SPARSE_MATRIX_GENERIC_TEST_DIR, '*.py', False, True), exclude_file_list=['__init__.py'], untrack=arg_options.untrack)
+            clean_cython_files(logger, TESTS_CSR_SPARSE_MATRIX_GENERIC_TEST_DIR, find_files(TESTS_CSR_SPARSE_MATRIX_GENERIC_TEST_DIR, '*.py', False, True), exclude_file_list=['__init__.py'], untrack=arg_options.untrack)
+            clean_cython_files(logger, TESTS_LL_SPARSE_MATRIX_VIEW_GENERIC_TEST_DIR, find_files(TESTS_LL_SPARSE_MATRIX_VIEW_GENERIC_TEST_DIR, '*.py', False, True), exclude_file_list=['__init__.py'], untrack=arg_options.untrack)
+            clean_cython_files(logger, TESTS_SPARSE_MATRIX_COMMON_OPERATIONS_GENERIC_TEST_DIR, find_files(TESTS_SPARSE_MATRIX_COMMON_OPERATIONS_GENERIC_TEST_DIR, '*.py', False, True), exclude_file_list=['__init__.py'], untrack=arg_options.untrack)
 
-            clean_cython_files(logger, TESTS_UMFPACK_GENERIC_DIR, find_files(TESTS_UMFPACK_GENERIC_DIR, '*.py', False, True), exclude_file_list=['__init__.py'])
+            clean_cython_files(logger, TESTS_UMFPACK_GENERIC_DIR, find_files(TESTS_UMFPACK_GENERIC_DIR, '*.py', False, True), exclude_file_list=['__init__.py'], untrack=arg_options.untrack)
         else:
             ###############################
             # Types
