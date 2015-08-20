@@ -257,13 +257,15 @@ def cysparse_real_type_to_mumps_family(cysparse_type):
         raise TypeError("Not a recognized Mumps type")
 
 
-def clean_cython_files(logger, directory, file_list=None):
+def clean_cython_files(logger, directory, file_list=None, exclude_file_list=None):
     """
 
     Args:
         logger:
         directory:
-        file_list: File name **must** be absolute!
+        file_list: File name **must** be absolute, i.e. absolute paths!
+        exclude_file_list: Files from this list are excluded, i.e. **not** erased! Filenames are real filenames **not**
+            paths.
 
     Note:
         We don't test if ``directory`` and ``file_list`` correspond, i.e. we don't check if the absolute filenames
@@ -282,7 +284,8 @@ def clean_cython_files(logger, directory, file_list=None):
 
     for filename in real_file_list:
         try:
-            os.remove(filename)
+            if not any(filename.endswith(e) for e in exclude_file_list):
+                os.remove(filename)
         except:
             logger.warning("Couln't remove file '%s'" % filename)
 
@@ -1013,12 +1016,12 @@ if __name__ == "__main__":
         logger.info("Act for generic tests")
 
         if arg_options.clean:
-            clean_cython_files(logger, TESTS_CSC_SPARSE_MATRIX_GENERIC_TEST_DIR, find_files(TESTS_CSC_SPARSE_MATRIX_GENERIC_TEST_DIR, '*.py', False, True))
-            clean_cython_files(logger, TESTS_CSR_SPARSE_MATRIX_GENERIC_TEST_DIR, find_files(TESTS_CSR_SPARSE_MATRIX_GENERIC_TEST_DIR, '*.py', False, True))
-            clean_cython_files(logger, TESTS_LL_SPARSE_MATRIX_VIEW_GENERIC_TEST_DIR, find_files(TESTS_LL_SPARSE_MATRIX_VIEW_GENERIC_TEST_DIR, '*.py', False, True))
-            clean_cython_files(logger, TESTS_SPARSE_MATRIX_COMMON_OPERATIONS_GENERIC_TEST_DIR, find_files(TESTS_SPARSE_MATRIX_COMMON_OPERATIONS_GENERIC_TEST_DIR, '*.py', False, True))
+            clean_cython_files(logger, TESTS_CSC_SPARSE_MATRIX_GENERIC_TEST_DIR, find_files(TESTS_CSC_SPARSE_MATRIX_GENERIC_TEST_DIR, '*.py', False, True), exclude_file_list=['__init__.py'])
+            clean_cython_files(logger, TESTS_CSR_SPARSE_MATRIX_GENERIC_TEST_DIR, find_files(TESTS_CSR_SPARSE_MATRIX_GENERIC_TEST_DIR, '*.py', False, True), exclude_file_list=['__init__.py'])
+            clean_cython_files(logger, TESTS_LL_SPARSE_MATRIX_VIEW_GENERIC_TEST_DIR, find_files(TESTS_LL_SPARSE_MATRIX_VIEW_GENERIC_TEST_DIR, '*.py', False, True), exclude_file_list=['__init__.py'])
+            clean_cython_files(logger, TESTS_SPARSE_MATRIX_COMMON_OPERATIONS_GENERIC_TEST_DIR, find_files(TESTS_SPARSE_MATRIX_COMMON_OPERATIONS_GENERIC_TEST_DIR, '*.py', False, True), exclude_file_list=['__init__.py'])
 
-            clean_cython_files(logger, TESTS_UMFPACK_GENERIC_DIR, find_files(TESTS_UMFPACK_GENERIC_DIR, '*.py', False, True))
+            clean_cython_files(logger, TESTS_UMFPACK_GENERIC_DIR, find_files(TESTS_UMFPACK_GENERIC_DIR, '*.py', False, True), exclude_file_list=['__init__.py'])
         else:
             ###############################
             # Types
