@@ -27,3 +27,6 @@ if __name__ == '__main__':
     subprocess.call(['git', 'push', 'origin', '--delete', BRANCH_NAME])
     # create remote branch: -u = set-upstream and push
     subprocess.call(['git', 'push', '-u', 'origin', BRANCH_NAME])
+   
+    # Switch back to develop
+    subprocess.call(['git', 'checkout', '-f', 'develop'])
