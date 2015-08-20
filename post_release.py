@@ -16,13 +16,12 @@ if __name__ == '__main__':
     subprocess.call(['python', 'clean.py', '-u'])
     subprocess.call(['python', 'generate_code.py', '-acu'])
 
-    # commit files
-    subprocess.call(['git', 'add', '--all'])
     # retrieve last commit sha1
     p = subprocess.Popen(['git', 'rev-parse', 'develop'], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     last_commit_str, err = p.communicate()
     return_code = p.returncode
 
+    # commit files
     subprocess.call(['git', 'commit', '-m', 'minimal version of commit %s' % last_commit_str])
     # delete remote branch
     subprocess.call(['git', 'push', 'origin', '--delete', BRANCH_NAME])
