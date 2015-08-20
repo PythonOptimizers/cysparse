@@ -10,6 +10,7 @@ if __name__ == '__main__':
 
     # create local brand new branch
     BRANCH_NAME = 'minimal_source'
+    subprocess.call(['git', 'branch', '-D', BRANCH_NAME])
     subprocess.call(['git', 'checkout', '-b', BRANCH_NAME])
 
     # clean
@@ -29,4 +30,7 @@ if __name__ == '__main__':
     subprocess.call(['git', 'push', '-u', 'origin', BRANCH_NAME])
    
     # Switch back to develop
-    subprocess.call(['git', 'checkout', '-f', 'develop'])
+    # but first we need to commit all unstage files to make it work properly
+    subprocess.call(['git', 'checkout', 'develop'])
+    subprocess.call(['git', 'commit', '-m', '"fake"'])
+    subprocess.call(['git', 'checkout', 'develop'])
