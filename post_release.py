@@ -34,4 +34,3 @@ if __name__ == '__main__':
     subprocess.call(['git', 'add', '--all'])
     subprocess.call(['git', 'commit', '-m', '"fake"'])
     subprocess.call(['git', 'checkout', 'develop'])
-    subprocess.call(['git', 'checkout', 'develop'])
