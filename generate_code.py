@@ -284,16 +284,15 @@ def clean_cython_files(logger, directory, file_list=None, exclude_file_list=[], 
         real_file_list.extend(glob.glob(os.path.join(directory, '*.pyx')))
 
     for filename in real_file_list:
-        #try:
+        try:
             if not any(filename.endswith(e) for e in exclude_file_list):
                 if untrack:
-                    print ["git", "rm", "--cached", filename.split(PATH+os.sep)[1]]
                     call(["git", "rm", "--cached", filename.split(PATH+os.sep)[1]])
                 else:
                     os.remove(filename)
 
-        #except:
-        #    logger.warning("Couldn't remove file '%s'" % filename)
+        except:
+            logger.warning("Couldn't remove file '%s'" % filename)
 
 
 def render_template(template_filename, template_environment, context):

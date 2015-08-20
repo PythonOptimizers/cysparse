@@ -25,6 +25,6 @@ if __name__ == '__main__':
 
     subprocess.call(['git', 'commit', '-m', 'minimal version of commit %s' % last_commit_str])
     # delete remote branch
-    # subprocess.call(['git', 'push', 'origin', '--delete', BRANCH_NAME])
+    subprocess.call(['git', 'push', 'origin', '--delete', BRANCH_NAME])
     # create remote branch: -u = set-upstream and push
-    # subprocess.call(['git', 'push', '-u', 'origin', BRANCH_NAME])
+    subprocess.call(['git', 'push', '-u', 'origin', BRANCH_NAME])
