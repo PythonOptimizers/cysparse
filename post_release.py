@@ -31,6 +31,7 @@ if __name__ == '__main__':
    
     # Switch back to develop
     # but first we need to commit all unstage files to make it work properly
-    subprocess.call(['git', 'checkout', 'develop'])
+    subprocess.call(['git', 'add', '--all'])
     subprocess.call(['git', 'commit', '-m', '"fake"'])
+    subprocess.call(['git', 'checkout', 'develop'])
     subprocess.call(['git', 'checkout', 'develop'])
