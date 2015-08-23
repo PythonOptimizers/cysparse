@@ -155,7 +155,8 @@ cdef LLSparseMatrix_INT64_t_FLOAT64_t MakeLLSparseMatrixFromMMFile2_INT64_t_FLOA
         list storage_scheme_list = [MM_GENERAL_STR, MM_SYMM_STR, MM_HERM_STR, MM_SKEW_STR]
         dict storage_scheme_dict = {MM_GENERAL_STR : MM_GENERAL, MM_SYMM_STR : MM_SYMMETRIC, MM_HERM_STR : MM_HERMITIAN, MM_SKEW_STR : MM_SKEW}
 
-
+        COMPLEX128_t z, w
+        FLOAT64_t real_part, imag_part
 
     cdef LLSparseMatrix_INT64_t_FLOAT64_t A
 
@@ -288,8 +289,8 @@ cdef LLSparseMatrix_INT64_t_FLOAT64_t MakeLLSparseMatrixFromMMFile2_INT64_t_FLOA
             i = atoi(token_list[0])-1
             j = atoi(token_list[1]) - 1
 
-            #print "i = %d" % i
-            #print "j = %d" % j
+            print "i = %d" % i
+            print "j = %d" % j
 
             if test_bounds:
                 if not (0 <= i < nrow):
@@ -306,7 +307,7 @@ cdef LLSparseMatrix_INT64_t_FLOAT64_t MakeLLSparseMatrixFromMMFile2_INT64_t_FLOA
             #############################
 
             if root[i] == -1:
-                print "first element on row i"
+                print "first element on the row %d" % i
                 # first element on row i
                 root[i] = nnz_read
 
@@ -314,7 +315,7 @@ cdef LLSparseMatrix_INT64_t_FLOAT64_t MakeLLSparseMatrixFromMMFile2_INT64_t_FLOA
             val[nnz_read] = v
             # last element on row i
             end_root[i] = nnz_read
-            link[end_root[i]] = nnz_read
+            link[end_root[i]] = nnz_read + 1
 
         # post processing
         # close row lists

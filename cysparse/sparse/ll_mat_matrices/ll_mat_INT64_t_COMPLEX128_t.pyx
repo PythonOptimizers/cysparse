@@ -1042,7 +1042,6 @@ cdef class LLSparseMatrix_INT64_t_COMPLEX128_t(MutableSparseMatrix_INT64_t_COMPL
 
         return nnz
 
-
     ####################################################################################################################
     # Set/Get individual elements
     ####################################################################################################################
@@ -2478,3 +2477,29 @@ cdef class LLSparseMatrix_INT64_t_COMPLEX128_t(MutableSparseMatrix_INT64_t_COMPL
         else:
             print('Matrix too big to print out', file=OUT)
 
+
+    ####################################################################################################################
+    # DEBUG
+    ####################################################################################################################
+    def debug_print(self):
+        cdef INT64_t i
+        print("root:")
+        for i from 0 <= i < self.nrow:
+            print(self.root[i], end=' ', sep=' ')
+        print()
+
+
+        print("col:")
+        for i from 0 <= i < self.nnz:
+            print(self.col[i], end=' ', sep=' ')
+        print()
+
+        print("val:")
+        for i from 0 <= i < self.nnz:
+            print(self.val[i], end=' == ', sep=' == ')
+        print()
+
+        print("link:")
+        for i from 0 <= i < self.nnz:
+            print(self.link[i], end=' ', sep=' ')
+        print()

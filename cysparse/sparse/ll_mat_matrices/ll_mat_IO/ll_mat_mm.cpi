@@ -185,10 +185,8 @@ cdef LLSparseMatrix_@index@_@type@ MakeLLSparseMatrixFromMMFile2_@index@_@type@(
         list storage_scheme_list = [MM_GENERAL_STR, MM_SYMM_STR, MM_HERM_STR, MM_SKEW_STR]
         dict storage_scheme_dict = {MM_GENERAL_STR : MM_GENERAL, MM_SYMM_STR : MM_SYMMETRIC, MM_HERM_STR : MM_HERMITIAN, MM_SKEW_STR : MM_SKEW}
 
-{% if type == 'INT64_t' %}
         COMPLEX128_t z, w
         FLOAT64_t real_part, imag_part
-{% endif %}
 
     cdef LLSparseMatrix_@index@_@type@ A
 
@@ -321,8 +319,8 @@ cdef LLSparseMatrix_@index@_@type@ MakeLLSparseMatrixFromMMFile2_@index@_@type@(
             i = atoi(token_list[0])-1
             j = atoi(token_list[1]) - 1
 
-            #print "i = %d" % i
-            #print "j = %d" % j
+            print "i = %d" % i
+            print "j = %d" % j
 
             if test_bounds:
                 if not (0 <= i < nrow):
@@ -340,8 +338,8 @@ cdef LLSparseMatrix_@index@_@type@ MakeLLSparseMatrixFromMMFile2_@index@_@type@(
             # I have no idea why we have to use temp variables...
             real_part =  <FLOAT64_t> atof(token_list[2])
             imag_part =  <FLOAT64_t> atof(token_list[3])
-            z.real = real_part
-            z.imag = imag_part
+            v.real = real_part
+            v.imag = imag_part
 {% else %}
 YOU MUST CAST YOUR TYPE HERE
 {% endif %}
@@ -351,7 +349,7 @@ YOU MUST CAST YOUR TYPE HERE
             #############################
 
             if root[i] == -1:
-                print "first element on row i"
+                print "first element on the row %d" % i
                 # first element on row i
                 root[i] = nnz_read
 
@@ -359,7 +357,7 @@ YOU MUST CAST YOUR TYPE HERE
             val[nnz_read] = v
             # last element on row i
             end_root[i] = nnz_read
-            link[end_root[i]] = nnz_read
+            link[end_root[i]] = nnz_read + 1
 
         # post processing
         # close row lists

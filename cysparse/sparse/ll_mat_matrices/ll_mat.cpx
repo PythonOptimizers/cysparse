@@ -1054,7 +1054,6 @@ YOU HAVE TO DEFINE OR CAST YOUR NEW UNRECOGNIZED COMPLEX TYPE
 
         return nnz
 
-
     ####################################################################################################################
     # Set/Get individual elements
     ####################################################################################################################
@@ -2659,3 +2658,28 @@ YOU HAVE TO CAST YOUR NEW TYPE HERE
             print('Matrix too big to print out', file=OUT)
 
 
+    ####################################################################################################################
+    # DEBUG
+    ####################################################################################################################
+    def debug_print(self):
+        cdef @index@ i
+        print("root:")
+        for i from 0 <= i < self.nrow:
+            print(self.root[i], end=' ', sep=' ')
+        print()
+
+
+        print("col:")
+        for i from 0 <= i < self.nnz:
+            print(self.col[i], end=' ', sep=' ')
+        print()
+
+        print("val:")
+        for i from 0 <= i < self.nnz:
+            print(self.val[i], end=' == ', sep=' == ')
+        print()
+
+        print("link:")
+        for i from 0 <= i < self.nnz:
+            print(self.link[i], end=' ', sep=' ')
+        print()
