@@ -642,6 +642,9 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX128_t(MutableSparseMatrix_INT32_t_COMPL
 
         return True  # not bad column index detected
 
+    def are_column_indices_sorted(self):
+        return self.is_sorted()
+
     ####################################################################################################################
     # Matrix conversions
     ####################################################################################################################

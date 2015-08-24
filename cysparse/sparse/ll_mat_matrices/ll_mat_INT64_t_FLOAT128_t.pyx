@@ -596,6 +596,9 @@ cdef class LLSparseMatrix_INT64_t_FLOAT128_t(MutableSparseMatrix_INT64_t_FLOAT12
 
         return True  # not bad column index detected
 
+    def are_column_indices_sorted(self):
+        return self.is_sorted()
+
     ####################################################################################################################
     # Matrix conversions
     ####################################################################################################################

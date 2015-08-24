@@ -173,7 +173,9 @@ cdef LLSparseMatrix_@index@_@type@ MakeLLSparseMatrixFromMMFile2_@index@_@type@(
         @index@ nrow
         @index@ ncol
         @index@ nnz
+        @index@ nnz_real
         @index@ nnz_read
+
 
     cdef:
         bint sparse
@@ -309,8 +311,9 @@ cdef LLSparseMatrix_@index@_@type@ MakeLLSparseMatrixFromMMFile2_@index@_@type@(
 
         ### DOES NOT WORK (YET) ###
         # Reading matrix content
+        nnz_real = 0
         for nnz_read from 0 <= nnz_read < nnz:
-            print "read element... "
+            #print "read element... "
             #############################
             # read new element (i, j, v)
             #############################
@@ -319,8 +322,8 @@ cdef LLSparseMatrix_@index@_@type@ MakeLLSparseMatrixFromMMFile2_@index@_@type@(
             i = atoi(token_list[0])-1
             j = atoi(token_list[1]) - 1
 
-            print "i = %d" % i
-            print "j = %d" % j
+            #print "i = %d" % i
+            #print "j = %d" % j
 
             if test_bounds:
                 if not (0 <= i < nrow):
@@ -344,20 +347,22 @@ cdef LLSparseMatrix_@index@_@type@ MakeLLSparseMatrixFromMMFile2_@index@_@type@(
 YOU MUST CAST YOUR TYPE HERE
 {% endif %}
 
-            #############################
-            # fill in arrays
-            #############################
+            if store_zeros or v != 0.0:
+                nnz_real = nnz_real + 1
+                #############################
+                # fill in arrays
+                #############################
 
-            if root[i] == -1:
-                print "first element on the row %d" % i
-                # first element on row i
-                root[i] = nnz_read
+                if root[i] == -1:
+                    #print "first element on the row %d" % i
+                    # first element on row i
+                    root[i] = nnz_read
 
-            col[nnz_read] = j
-            val[nnz_read] = v
-            # last element on row i
-            end_root[i] = nnz_read
-            link[end_root[i]] = nnz_read + 1
+                col[nnz_read] = j
+                val[nnz_read] = v
+                # last element on row i
+                end_root[i] = nnz_read
+                link[end_root[i]] = nnz_read + 1
 
         # post processing
         # close row lists
@@ -371,7 +376,7 @@ YOU MUST CAST YOUR TYPE HERE
         A.link = link
         A.root = root
         A.free = -1
-        A.__nnz = nnz
+        A.__nnz = nnz_real
         A.nalloc = nnz
 
 

@@ -654,6 +654,9 @@ YOU HAVE TO DEFINE OR CAST YOUR NEW UNRECOGNIZED COMPLEX TYPE
 
         return True  # not bad column index detected
 
+    def are_column_indices_sorted(self):
+        return self.is_sorted()
+
     ####################################################################################################################
     # Matrix conversions
     ####################################################################################################################
