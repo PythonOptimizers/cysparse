@@ -996,7 +996,7 @@ if __name__ == "__main__":
 
         if arg_options.clean:
             # Base Contexts
-            clean_cython_files(logger, LINALG_BASE_CONTEXT_TEMPLATE_DIR)
+            clean_cython_files(logger, LINALG_BASE_CONTEXT_TEMPLATE_DIR, untrack=arg_options.untrack)
 
             # SuiteSparse
             # Umfpack
