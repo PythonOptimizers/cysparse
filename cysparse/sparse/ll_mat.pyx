@@ -408,11 +408,14 @@ def NewLLSparseMatrix(**kwargs):
     if matrix is not None or from_filename:
         assert (matrix is not None) != (from_filename), "Cannot use a matrix and a file to create a LLSparseMatrix"
 
+<<<<<<< HEAD
     mm_read_file_experimental = kwargs.get('mm_experimental', None) is not None
 
     if mm_read_file_experimental:
         print "Try experimental reading of MM files"
 
+=======
+>>>>>>> hotfix/184
     ####################################################################################################################
     #                                            *** Case dispatch ***
     ####################################################################################################################
@@ -668,22 +671,31 @@ def NewLLSparseMatrix(**kwargs):
         
                 if dtype == INT64_T:
         
+<<<<<<< HEAD
                     if mm_read_file_experimental:
                         return MakeLLSparseMatrixFromMMFile2_INT32_t_INT64_t(mm_filename=mm_filename, store_zeros=store_zeros, test_bounds=test_bounds)
+=======
+>>>>>>> hotfix/184
                     return MakeLLSparseMatrixFromMMFile_INT32_t_INT64_t(mm_filename=mm_filename, store_zeros=store_zeros, test_bounds=test_bounds)
     
         
                 elif dtype == FLOAT64_T:
         
+<<<<<<< HEAD
                     if mm_read_file_experimental:
                         return MakeLLSparseMatrixFromMMFile2_INT32_t_FLOAT64_t(mm_filename=mm_filename, store_zeros=store_zeros, test_bounds=test_bounds)
+=======
+>>>>>>> hotfix/184
                     return MakeLLSparseMatrixFromMMFile_INT32_t_FLOAT64_t(mm_filename=mm_filename, store_zeros=store_zeros, test_bounds=test_bounds)
     
         
                 elif dtype == COMPLEX128_T:
         
+<<<<<<< HEAD
                     if mm_read_file_experimental:
                         return MakeLLSparseMatrixFromMMFile2_INT32_t_COMPLEX128_t(mm_filename=mm_filename, store_zeros=store_zeros, test_bounds=test_bounds)
+=======
+>>>>>>> hotfix/184
                     return MakeLLSparseMatrixFromMMFile_INT32_t_COMPLEX128_t(mm_filename=mm_filename, store_zeros=store_zeros, test_bounds=test_bounds)
     
 
@@ -694,22 +706,31 @@ def NewLLSparseMatrix(**kwargs):
         
                 if dtype == INT64_T:
         
+<<<<<<< HEAD
                     if mm_read_file_experimental:
                         return MakeLLSparseMatrixFromMMFile2_INT64_t_INT64_t(mm_filename=mm_filename, store_zeros=store_zeros, test_bounds=test_bounds)
+=======
+>>>>>>> hotfix/184
                     return MakeLLSparseMatrixFromMMFile_INT64_t_INT64_t(mm_filename=mm_filename, store_zeros=store_zeros, test_bounds=test_bounds)
     
         
                 elif dtype == FLOAT64_T:
         
+<<<<<<< HEAD
                     if mm_read_file_experimental:
                         return MakeLLSparseMatrixFromMMFile2_INT64_t_FLOAT64_t(mm_filename=mm_filename, store_zeros=store_zeros, test_bounds=test_bounds)
+=======
+>>>>>>> hotfix/184
                     return MakeLLSparseMatrixFromMMFile_INT64_t_FLOAT64_t(mm_filename=mm_filename, store_zeros=store_zeros, test_bounds=test_bounds)
     
         
                 elif dtype == COMPLEX128_T:
         
+<<<<<<< HEAD
                     if mm_read_file_experimental:
                         return MakeLLSparseMatrixFromMMFile2_INT64_t_COMPLEX128_t(mm_filename=mm_filename, store_zeros=store_zeros, test_bounds=test_bounds)
+=======
+>>>>>>> hotfix/184
                     return MakeLLSparseMatrixFromMMFile_INT64_t_COMPLEX128_t(mm_filename=mm_filename, store_zeros=store_zeros, test_bounds=test_bounds)
     
 

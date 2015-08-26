@@ -341,6 +341,7 @@ if use_mumps:
 packages_list = ['cysparse',
             'cysparse.types',
             'cysparse.sparse',
+            'cysparse.sparse.like',
             'cysparse.sparse.sparse_proxies',
             'cysparse.sparse.sparse_proxies.complex_generic',
             'cysparse.sparse.sparse_utils',

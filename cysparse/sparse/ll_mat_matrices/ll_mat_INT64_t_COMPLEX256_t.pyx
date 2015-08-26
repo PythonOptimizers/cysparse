@@ -642,9 +642,12 @@ cdef class LLSparseMatrix_INT64_t_COMPLEX256_t(MutableSparseMatrix_INT64_t_COMPL
 
         return True  # not bad column index detected
 
+<<<<<<< HEAD
     def are_column_indices_sorted(self):
         return self.is_sorted()
 
+=======
+>>>>>>> hotfix/184
     ####################################################################################################################
     # Matrix conversions
     ####################################################################################################################
@@ -1045,6 +1048,10 @@ cdef class LLSparseMatrix_INT64_t_COMPLEX256_t(MutableSparseMatrix_INT64_t_COMPL
 
         return nnz
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> hotfix/184
     ####################################################################################################################
     # Set/Get individual elements
     ####################################################################################################################
@@ -2482,6 +2489,7 @@ cdef class LLSparseMatrix_INT64_t_COMPLEX256_t(MutableSparseMatrix_INT64_t_COMPL
         else:
             print('Matrix too big to print out', file=OUT)
 
+<<<<<<< HEAD
 
     ####################################################################################################################
     # DEBUG
@@ -2508,3 +2516,5 @@ cdef class LLSparseMatrix_INT64_t_COMPLEX256_t(MutableSparseMatrix_INT64_t_COMPL
         for i from 0 <= i < self.nnz:
             print(self.link[i], end=' ', sep=' ')
         print()
+=======
+>>>>>>> hotfix/184
