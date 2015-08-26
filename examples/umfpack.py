@@ -29,7 +29,7 @@ A[0:3,0:3] = B
 #A[0, 0] = 0
 print A
 
-from cysparse.linalg.umfpack import NewUmfpackContext
+from cysparse.linalg.umfpack_context import NewUmfpackContext
 
 solver = NewUmfpackContext(A)
 

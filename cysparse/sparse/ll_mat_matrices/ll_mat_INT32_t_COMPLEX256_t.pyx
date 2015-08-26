@@ -642,6 +642,9 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX256_t(MutableSparseMatrix_INT32_t_COMPL
 
         return True  # not bad column index detected
 
+    def are_column_indices_sorted(self):
+        return self.is_sorted()
+
     ####################################################################################################################
     # Matrix conversions
     ####################################################################################################################
@@ -1041,7 +1044,6 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX256_t(MutableSparseMatrix_INT32_t_COMPL
                     k = self.link[k]
 
         return nnz
-
 
     ####################################################################################################################
     # Set/Get individual elements
@@ -2480,3 +2482,29 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX256_t(MutableSparseMatrix_INT32_t_COMPL
         else:
             print('Matrix too big to print out', file=OUT)
 
+
+    ####################################################################################################################
+    # DEBUG
+    ####################################################################################################################
+    def debug_print(self):
+        cdef INT32_t i
+        print("root:")
+        for i from 0 <= i < self.nrow:
+            print(self.root[i], end=' ', sep=' ')
+        print()
+
+
+        print("col:")
+        for i from 0 <= i < self.nnz:
+            print(self.col[i], end=' ', sep=' ')
+        print()
+
+        print("val:")
+        for i from 0 <= i < self.nnz:
+            print(self.val[i], end=' == ', sep=' == ')
+        print()
+
+        print("link:")
+        for i from 0 <= i < self.nnz:
+            print(self.link[i], end=' ', sep=' ')
+        print()

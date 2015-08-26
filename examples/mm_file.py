@@ -6,15 +6,27 @@ import cysparse.types.cysparse_types as types
 import sys
 
 
-try:
-    l1 = NewLLSparseMatrix(size=4, dtype=types.INT32_T, test_bounds=True)
-    l1[0, 0] = 33333333333333333333
-    l1.print_to(sys.stdout)
-except:
-    print "Nope didn't work ..."
+
 
 
 print '=' * 80
 
-l2 = NewLLSparseMatrixFromMMFile('togolo.mtx')
-l2.print_to(sys.stdout)
+l2 = NewLLSparseMatrixFromMMFile('zenios.mtx')
+#l2.print_to(sys.stdout)
+print l2
+l2.debug_print()
+print l2.are_column_indices_sorted()
+
+print '+' * 80
+
+l3 = NewLLSparseMatrix(mm_filename='zenios.mtx', mm_experimental=True, dtype=types.FLOAT64_T)
+print l3.dtype_str()
+print l3
+
+print "&" * 80
+l3.debug_print()
+
+print "$" * 80
+print l3.are_column_indices_sorted()
+
+#print l3

@@ -596,6 +596,9 @@ cdef class LLSparseMatrix_INT64_t_FLOAT64_t(MutableSparseMatrix_INT64_t_FLOAT64_
 
         return True  # not bad column index detected
 
+    def are_column_indices_sorted(self):
+        return self.is_sorted()
+
     ####################################################################################################################
     # Matrix conversions
     ####################################################################################################################
@@ -995,7 +998,6 @@ cdef class LLSparseMatrix_INT64_t_FLOAT64_t(MutableSparseMatrix_INT64_t_FLOAT64_
                     k = self.link[k]
 
         return nnz
-
 
     ####################################################################################################################
     # Set/Get individual elements
@@ -2402,3 +2404,29 @@ cdef class LLSparseMatrix_INT64_t_FLOAT64_t(MutableSparseMatrix_INT64_t_FLOAT64_
         else:
             print('Matrix too big to print out', file=OUT)
 
+
+    ####################################################################################################################
+    # DEBUG
+    ####################################################################################################################
+    def debug_print(self):
+        cdef INT64_t i
+        print("root:")
+        for i from 0 <= i < self.nrow:
+            print(self.root[i], end=' ', sep=' ')
+        print()
+
+
+        print("col:")
+        for i from 0 <= i < self.nnz:
+            print(self.col[i], end=' ', sep=' ')
+        print()
+
+        print("val:")
+        for i from 0 <= i < self.nnz:
+            print(self.val[i], end=' == ', sep=' == ')
+        print()
+
+        print("link:")
+        for i from 0 <= i < self.nnz:
+            print(self.link[i], end=' ', sep=' ')
+        print()
