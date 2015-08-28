@@ -1064,7 +1064,6 @@ utils_ext = [
 ]
 
 ########################################################################################################################
-<<<<<<< HEAD
 #                                                *** LinAlg ***
 
 ##########################
@@ -1146,9 +1145,6 @@ base_context_ext = [
 ##########################
 # SuiteSparse
 ##########################
-=======
-#                                                *** SuiteSparse ***
->>>>>>> hotfix/184
 if use_suitesparse:
     # UMFPACK
     umfpack_ext_params = copy.deepcopy(ext_params)
@@ -1214,12 +1210,9 @@ if use_suitesparse:
 
         ]
 
-<<<<<<< HEAD
 ##########################
 # MUMPS
 ##########################
-=======
->>>>>>> hotfix/184
 if use_mumps:
     mumps_ext = []
 
@@ -1305,10 +1298,7 @@ if use_mumps:
 packages_list = ['cysparse',
             'cysparse.types',
             'cysparse.sparse',
-<<<<<<< HEAD
-=======
             'cysparse.sparse.like',
->>>>>>> hotfix/184
             'cysparse.sparse.sparse_proxies',
             'cysparse.sparse.sparse_proxies.complex_generic',
             'cysparse.sparse.sparse_utils',
@@ -1320,23 +1310,15 @@ packages_list = ['cysparse',
             'cysparse.sparse.ll_mat_views',
             'cysparse.utils',
             'cysparse.linalg',
-<<<<<<< HEAD
             'cysparse.linalg.contexts',
             #'cysparse.linalg.mumps',
-=======
-            'cysparse.linalg.mumps',
->>>>>>> hotfix/184
             #'cysparse.sparse.IO'
             'tests'
             ]
 
 #packages_list=find_packages()
 
-<<<<<<< HEAD
 ext_modules = base_ext + sparse_ext + base_context_ext
-=======
-ext_modules = base_ext + sparse_ext
->>>>>>> hotfix/184
 
 if use_suitesparse:
     # add suitsparse package

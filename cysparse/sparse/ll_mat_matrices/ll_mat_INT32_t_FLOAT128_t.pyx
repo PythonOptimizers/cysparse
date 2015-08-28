@@ -596,12 +596,9 @@ cdef class LLSparseMatrix_INT32_t_FLOAT128_t(MutableSparseMatrix_INT32_t_FLOAT12
 
         return True  # not bad column index detected
 
-<<<<<<< HEAD
     def are_column_indices_sorted(self):
         return self.is_sorted()
 
-=======
->>>>>>> hotfix/184
     ####################################################################################################################
     # Matrix conversions
     ####################################################################################################################
@@ -1002,10 +999,6 @@ cdef class LLSparseMatrix_INT32_t_FLOAT128_t(MutableSparseMatrix_INT32_t_FLOAT12
 
         return nnz
 
-<<<<<<< HEAD
-=======
-
->>>>>>> hotfix/184
     ####################################################################################################################
     # Set/Get individual elements
     ####################################################################################################################
@@ -2413,7 +2406,6 @@ cdef class LLSparseMatrix_INT32_t_FLOAT128_t(MutableSparseMatrix_INT32_t_FLOAT12
         else:
             print('Matrix too big to print out', file=OUT)
 
-<<<<<<< HEAD
 
     ####################################################################################################################
     # DEBUG
@@ -2440,5 +2432,3 @@ cdef class LLSparseMatrix_INT32_t_FLOAT128_t(MutableSparseMatrix_INT32_t_FLOAT12
         for i from 0 <= i < self.nnz:
             print(self.link[i], end=' ', sep=' ')
         print()
-=======
->>>>>>> hotfix/184

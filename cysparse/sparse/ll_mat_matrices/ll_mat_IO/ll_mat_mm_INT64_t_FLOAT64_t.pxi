@@ -143,15 +143,10 @@ cdef LLSparseMatrix_INT64_t_FLOAT64_t MakeLLSparseMatrixFromMMFile2_INT64_t_FLOA
         INT64_t nrow
         INT64_t ncol
         INT64_t nnz
-<<<<<<< HEAD
         INT64_t nnz_real
         INT64_t nnz_read
 
 
-=======
-        INT64_t nnz_read
-
->>>>>>> hotfix/184
     cdef:
         bint sparse
         bint is_symmetric
@@ -162,12 +157,8 @@ cdef LLSparseMatrix_INT64_t_FLOAT64_t MakeLLSparseMatrixFromMMFile2_INT64_t_FLOA
         list storage_scheme_list = [MM_GENERAL_STR, MM_SYMM_STR, MM_HERM_STR, MM_SKEW_STR]
         dict storage_scheme_dict = {MM_GENERAL_STR : MM_GENERAL, MM_SYMM_STR : MM_SYMMETRIC, MM_HERM_STR : MM_HERMITIAN, MM_SKEW_STR : MM_SKEW}
 
-<<<<<<< HEAD
         COMPLEX128_t z, w
         FLOAT64_t real_part, imag_part
-=======
-
->>>>>>> hotfix/184
 
     cdef LLSparseMatrix_INT64_t_FLOAT64_t A
 
@@ -290,14 +281,9 @@ cdef LLSparseMatrix_INT64_t_FLOAT64_t MakeLLSparseMatrixFromMMFile2_INT64_t_FLOA
 
         ### DOES NOT WORK (YET) ###
         # Reading matrix content
-<<<<<<< HEAD
         nnz_real = 0
         for nnz_read from 0 <= nnz_read < nnz:
             #print "read element... "
-=======
-        for nnz_read from 0 <= nnz_read < nnz:
-            print "read element... "
->>>>>>> hotfix/184
             #############################
             # read new element (i, j, v)
             #############################
@@ -319,7 +305,6 @@ cdef LLSparseMatrix_INT64_t_FLOAT64_t MakeLLSparseMatrixFromMMFile2_INT64_t_FLOA
             v = <FLOAT64_t>atof(token_list[2])
 
 
-<<<<<<< HEAD
             if store_zeros or v != 0.0:
                 nnz_real = nnz_real + 1
                 #############################
@@ -336,22 +321,6 @@ cdef LLSparseMatrix_INT64_t_FLOAT64_t MakeLLSparseMatrixFromMMFile2_INT64_t_FLOA
                 # last element on row i
                 end_root[i] = nnz_read
                 link[end_root[i]] = nnz_read + 1
-=======
-            #############################
-            # fill in arrays
-            #############################
-
-            if root[i] == -1:
-                print "first element on row i"
-                # first element on row i
-                root[i] = nnz_read
-
-            col[nnz_read] = j
-            val[nnz_read] = v
-            # last element on row i
-            end_root[i] = nnz_read
-            link[end_root[i]] = nnz_read
->>>>>>> hotfix/184
 
         # post processing
         # close row lists
@@ -365,11 +334,7 @@ cdef LLSparseMatrix_INT64_t_FLOAT64_t MakeLLSparseMatrixFromMMFile2_INT64_t_FLOA
         A.link = link
         A.root = root
         A.free = -1
-<<<<<<< HEAD
         A.__nnz = nnz_real
-=======
-        A.__nnz = nnz
->>>>>>> hotfix/184
         A.nalloc = nnz
 
 

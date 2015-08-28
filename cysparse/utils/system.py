@@ -1,0 +1,8 @@
+import os
+import inspect
+
+def get_include():
+    thisfile = inspect.getabsfile(inspect.currentframe())
+    thispath = os.path.dirname(thisfile)
+    toppath  = os.path.dirname(thispath)
+    return os.path.join(toppath,'include')
