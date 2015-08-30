@@ -679,15 +679,26 @@ cdef class CSRSparseMatrix_INT32_t_COMPLEX128_t(ImmutableSparseMatrix_INT32_t_CO
         # EXPLICIT TYPE TESTS
         cdef:
             cnp.ndarray[cnp.npy_complex128, ndim=2] np_ndarray
-            INT32_t i, k
+            INT32_t i, j, k
             COMPLEX128_t [:,:] np_memview
+            COMPLEX128_t value
 
         np_ndarray = np.zeros((self.__nrow, self.__ncol), dtype=np.complex128, order='C')
         np_memview = np_ndarray
 
-        for i from 0 <= i < self.__nrow:
-            for k from self.ind[i] <= k < self.ind[i+1]:
-                np_memview[i, self.col[k]] = self.val[k]
+        if not self.__is_symmetric:
+            for i from 0 <= i < self.__nrow:
+                for k from self.ind[i] <= k < self.ind[i+1]:
+                    np_memview[i, self.col[k]] = self.val[k]
+
+        else:
+            for i from 0 <= i < self.__nrow:
+                for k from self.ind[i] <= k < self.ind[i+1]:
+                    j = self.col[k]
+                    value = self.val[k]
+
+                    np_memview[i, j] = value
+                    np_memview[j, i] = value
 
         return np_ndarray
 

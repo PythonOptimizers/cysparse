@@ -778,18 +778,31 @@ cdef class LLSparseMatrix_INT64_t_INT32_t(MutableSparseMatrix_INT64_t_INT32_t):
         # EXPLICIT TYPE TESTS
         cdef:
             cnp.ndarray[cnp.npy_int32, ndim=2] np_ndarray
-            INT64_t i, k
+            INT64_t i, j, k
             INT32_t [:,:] np_memview
+            INT32_t value
 
         np_ndarray = np.zeros((self.__nrow, self.__ncol), dtype=np.int32, order='C')
         np_memview = np_ndarray
 
-        for i from 0 <= i < self.__nrow:
-            k = self.root[i]
-            while k != -1:
-               np_memview[i, self.col[k]] = self.val[k]
+        if not self.__is_symmetric:
+            for i from 0 <= i < self.__nrow:
+                k = self.root[i]
+                while k != -1:
+                    np_memview[i, self.col[k]] = self.val[k]
 
-               k = self.link[k]
+                    k = self.link[k]
+
+        else:
+            for i from 0 <= i < self.__nrow:
+                k = self.root[i]
+                while k != -1:
+                    j = self.col[k]
+                    value = self.val[k]
+                    np_memview[i, j] = value
+                    np_memview[j, i] = value
+
+                    k = self.link[k]
 
         return np_ndarray
 

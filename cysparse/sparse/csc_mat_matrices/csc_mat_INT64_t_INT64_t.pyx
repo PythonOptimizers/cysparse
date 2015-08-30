@@ -683,13 +683,22 @@ cdef class CSCSparseMatrix_INT64_t_INT64_t(ImmutableSparseMatrix_INT64_t_INT64_t
             cnp.ndarray[cnp.npy_int64, ndim=2] np_ndarray
             INT64_t i, j, k
             INT64_t [:,:] np_memview
+            INT64_t value
 
         np_ndarray = np.zeros((self.__nrow, self.__ncol), dtype=np.int64, order='C')
         np_memview = np_ndarray
 
-        for j from 0 <= j < self.__ncol:
-            for k from self.ind[j] <= k < self.ind[j+1]:
-                np_memview[self.row[k], j] = self.val[k]
+        if not self.__is_symmetric:
+            for j from 0 <= j < self.__ncol:
+                for k from self.ind[j] <= k < self.ind[j+1]:
+                    np_memview[self.row[k], j] = self.val[k]
+        else:
+            for j from 0 <= j < self.__ncol:
+                for k from self.ind[j] <= k < self.ind[j+1]:
+                    i = self.row[k]
+                    value = self.val[k]
+                    np_memview[i, j] = value
+                    np_memview[j, i] = value
 
         return np_ndarray
 

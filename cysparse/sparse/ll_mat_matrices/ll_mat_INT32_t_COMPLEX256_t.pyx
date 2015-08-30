@@ -824,18 +824,31 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX256_t(MutableSparseMatrix_INT32_t_COMPL
         # EXPLICIT TYPE TESTS
         cdef:
             cnp.ndarray[cnp.npy_complex256, ndim=2] np_ndarray
-            INT32_t i, k
+            INT32_t i, j, k
             COMPLEX256_t [:,:] np_memview
+            COMPLEX256_t value
 
         np_ndarray = np.zeros((self.__nrow, self.__ncol), dtype=np.complex256, order='C')
         np_memview = np_ndarray
 
-        for i from 0 <= i < self.__nrow:
-            k = self.root[i]
-            while k != -1:
-               np_memview[i, self.col[k]] = self.val[k]
+        if not self.__is_symmetric:
+            for i from 0 <= i < self.__nrow:
+                k = self.root[i]
+                while k != -1:
+                    np_memview[i, self.col[k]] = self.val[k]
 
-               k = self.link[k]
+                    k = self.link[k]
+
+        else:
+            for i from 0 <= i < self.__nrow:
+                k = self.root[i]
+                while k != -1:
+                    j = self.col[k]
+                    value = self.val[k]
+                    np_memview[i, j] = value
+                    np_memview[j, i] = value
+
+                    k = self.link[k]
 
         return np_ndarray
 
