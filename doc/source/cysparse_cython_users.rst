@@ -5,7 +5,12 @@
 =========================================================
 
 I efficiency is a major concern to you, we strongly encourage you to use :program:`Cython` to 
-compile your own Python extension. 
+compile your own Python extension.
+
+How to compile with :program:`Cython`?
+======================================
+
+To compile and link your project with :program:`CySparse`, simply download the complete source code of :program:`CySparse` and refer to the ``.pxd`` files as needed. 
 
 Creation of matrices
 ====================
