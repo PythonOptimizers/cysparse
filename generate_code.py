@@ -257,6 +257,11 @@ def cysparse_real_type_to_mumps_family(cysparse_type):
     else:
         raise TypeError("Not a recognized Mumps type")
 
+def cysparse_short(cysparse_type):
+    if cysparse_type in ['INT32_t', 'INT64_t', 'FLOAT32_t', 'FLOAT64_t', 'COMPLEX64_t', 'COMPLEX128_t']:
+        return cysparse_type[:-2]
+    else:
+        raise TypeError("Not a recognized CySparse type")
 
 def clean_cython_files(logger, directory, file_list=None, exclude_file_list=[], untrack=False):
     """
@@ -757,6 +762,7 @@ if __name__ == "__main__":
     GENERAL_ENVIRONMENT.filters['cysparse_real_type_from_real_cysparse_complex_type'] = cysparse_real_type_from_real_cysparse_complex_type
     GENERAL_ENVIRONMENT.filters['cysparse_real_type_to_umfpack_family'] = cysparse_real_type_to_umfpack_family
     GENERAL_ENVIRONMENT.filters['cysparse_real_type_to_mumps_family'] = cysparse_real_type_to_mumps_family
+    GENERAL_ENVIRONMENT.filters['cysparse_short'] = cysparse_short
     GENERAL_ENVIRONMENT.filters['cysparse_real_type_to_cholmod_prefix'] = cysparse_real_type_to_cholmod_prefix
     GENERAL_ENVIRONMENT.filters['cysparse_real_type_to_cholmod_type'] = cysparse_real_type_to_cholmod_type
 

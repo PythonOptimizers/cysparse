@@ -1,5 +1,5 @@
 """
-Factory method to access Mumps.
+Factory method to access MUMPS.
 
 The python code (this module) is autmotically generated because the code depends
 on the compile/architecture configuration.
@@ -11,13 +11,13 @@ from cysparse.types.cysparse_types import *
 
 {% for index_type in mumps_index_list %}
     {% for element_type in mumps_type_list %}
-from cysparse.linalg.mumps.mumps_@index_type@_@element_type@ import MumpsContext_@index_type@_@element_type@
+from cysparse.linalg.mumps.mumps_@index_type@_@element_type@ import MUMPSContext_@index_type@_@element_type@
     {% endfor %}
 {% endfor %}
 
-def NewMumpsContext(A, verbose=False):
+def NewMUMPSContext(A, verbose=False):
     """
-    Create and return the right Mumps context object.
+    Create and return the right MUMPS context object.
 
     Args:
         A: :class:`LLSparseMatrix`.
@@ -37,7 +37,7 @@ def NewMumpsContext(A, verbose=False):
         {% else %}
         elif dtype == @element_type|type2enum@:
         {% endif %}
-            return MumpsContext_@index_type@_@element_type@(A, verbose=verbose)
+            return MUMPSContext_@index_type@_@element_type@(A, verbose=verbose)
     {% endfor %}
     {% else %}
     elif itype == @index_type|type2enum@:
@@ -47,7 +47,7 @@ def NewMumpsContext(A, verbose=False):
         {% else %}
         elif dtype == @element_type|type2enum@:
         {% endif %}
-            return MumpsContext_@index_type@_@element_type@(A, verbose=verbose)
+            return MUMPSContext_@index_type@_@element_type@(A, verbose=verbose)
     {% endfor %}
     {% endif %}
 {% endfor %}
@@ -68,5 +68,5 @@ def NewMumpsContext(A, verbose=False):
      {%- endfor -%}
      \n'
 
-    type_error_msg = 'Matrix has an index and/or element type that is incompatible with Mumps\nAllowed types:\n%s' % allowed_types
+    type_error_msg = 'Matrix has an index and/or element type that is incompatible with MUMPS\nAllowed types:\n%s' % allowed_types
     raise TypeError(type_error_msg)
