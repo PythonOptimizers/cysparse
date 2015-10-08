@@ -720,6 +720,7 @@ if __name__ == "__main__":
     # when coding
     #ELEMENT_TYPES = ['FLOAT64_t']
     #ELEMENT_TYPES = ['COMPLEX64_t']
+    #ELEMENT_TYPES = ['COMPLEX256_t']
     #UMFPACK_INDEX_TYPES = ['INT32_t']
     #UMFPACK_ELEMENT_TYPES = ['FLOAT64_t']
 

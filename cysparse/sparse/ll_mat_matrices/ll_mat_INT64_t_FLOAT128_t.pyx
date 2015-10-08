@@ -839,6 +839,9 @@ cdef class LLSparseMatrix_INT64_t_FLOAT128_t(MutableSparseMatrix_INT64_t_FLOAT12
 
         # TODO: refine this method. It is too generic to do any optimization at all...
 
+        # CYTHON BUG: this method does not work with COMPLEX256_T ...
+
+
         # VIEW
         cdef:
             INT64_t * row_indices = view.row_indices

@@ -885,6 +885,11 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX256_t(MutableSparseMatrix_INT32_t_COMPL
 
         # TODO: refine this method. It is too generic to do any optimization at all...
 
+        # CYTHON BUG: this method does not work with COMPLEX256_T ...
+
+        raise NotImplementedError("Partial assignment is not allowed (and thus not implemented) for COMPLEX256_T: see issue #190")
+
+
         # VIEW
         cdef:
             INT32_t * row_indices = view.row_indices

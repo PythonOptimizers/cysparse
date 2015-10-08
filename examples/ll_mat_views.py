@@ -50,3 +50,16 @@ print B.nnz
 print "4" * 80
 print B.get_matrix()
 
+print  "9" * 80
+
+C = NewLinearFillLLSparseMatrix(nrow=10, ncol=10, size_hint=40, dtype=types.COMPLEX256_T, store_zeros=True)
+print C
+print C[:3,:3]
+
+print B[:3,:3]
+
+#print C
+print "before"
+C[:3, :3] = B[:3,:3]
+print "after"
+print C
