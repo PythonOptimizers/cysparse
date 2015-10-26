@@ -1,7 +1,7 @@
 from cysparse.types.cysparse_types cimport *
 
-from cysparse.sparse.ll_mat_matrices.ll_mat_@index@_@type@ cimport LLSparseMatrix_@index@_@type@
-from cysparse.sparse.csc_mat_matrices.csc_mat_@index@_@type@ cimport CSCSparseMatrix_@index@_@type@
+from cysparse.sparse.ll_mat_matrices.ll_mat_INT32_t_FLOAT64_t cimport LLSparseMatrix_INT32_t_FLOAT64_t
+from cysparse.sparse.csc_mat_matrices.csc_mat_INT32_t_FLOAT64_t cimport CSCSparseMatrix_INT32_t_FLOAT64_t
 
 import numpy as np
 cimport numpy as cnp
@@ -10,7 +10,7 @@ cimport numpy as cnp
 ctypedef long SuiteSparse_long # This is exactly CySparse's INT64_t
 
 
-from  cysparse.linalg.suitesparse.cholmod.cholmod_@index@_@type@ cimport *
+from  cysparse.linalg.suitesparse.cholmod.cholmod_INT32_t_FLOAT64_t cimport *
 
 cdef extern from  "SuiteSparseQR_C.h":
     # returns rank(A) estimate, (-1) if failure
@@ -147,24 +147,18 @@ cdef extern from  "SuiteSparseQR_C.h":
 
 
 
-cdef class SPQRContext_@index@_@type@:
+cdef class SPQRContext_INT32_t_FLOAT64_t:
     cdef:
-        LLSparseMatrix_@index@_@type@ A
+        LLSparseMatrix_INT32_t_FLOAT64_t A
 
-        @index@ nrow
-        @index@ ncol
-        @index@ nnz
+        INT32_t nrow
+        INT32_t ncol
+        INT32_t nnz
 
         # Matrix A in CSC format
-        CSCSparseMatrix_@index@_@type@ csc_mat
+        CSCSparseMatrix_INT32_t_FLOAT64_t csc_mat
 
         cholmod_common common_struct
         cholmod_sparse sparse_struct
 
-{% if type in complex_list %}
-        # we keep internally two arrays for the complex numbers: this is required by CHOLMOD...
-        @type|cysparse_real_type_from_real_cysparse_complex_type@ * csc_rval
-        @type|cysparse_real_type_from_real_cysparse_complex_type@ * csc_ival
-
-{% endif %}
 

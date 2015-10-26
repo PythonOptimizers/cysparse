@@ -119,6 +119,27 @@ cdef extern from "cholmod.h":
     ctypedef struct cholmod_factor:
         pass
 
+    int cholmod_start(cholmod_common *Common)
+    int cholmod_finish(cholmod_common *Common)
+
+    int cholmod_defaults(cholmod_common *Common)
+
+    # Common struct
+    int cholmod_check_common(cholmod_common *Common)
+    int cholmod_print_common(const char *name, cholmod_common *Common)
+
+    # Sparse struct
+    int cholmod_check_sparse(cholmod_sparse *A, cholmod_common *Common)
+    int cholmod_print_sparse(cholmod_sparse *A, const char *name, cholmod_common *Common)
+
+    # Dense struct
+    int cholmod_free_dense(cholmod_dense **X, cholmod_common *Common)
+
+    # Factor struct
+    int cholmod_check_factor(cholmod_factor *L, cholmod_common *Common)
+    int cholmod_print_factor(cholmod_factor *L, const char *name, cholmod_common *Common)
+    #int cholmod_free_factor()
+    # factor_to_sparse
 
 cdef populate1_cholmod_sparse_struct_with_CSCSparseMatrix(cholmod_sparse * sparse_struct, CSCSparseMatrix_INT32_t_FLOAT64_t csc_mat, bint no_copy=?)
 

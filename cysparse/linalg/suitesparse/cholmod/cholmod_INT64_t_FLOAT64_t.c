@@ -943,8 +943,8 @@ struct __pyx_opt_args_8cysparse_6sparse_16csc_mat_matrices_25csc_mat_INT64_t_FLO
 struct __pyx_opt_args_8cysparse_6linalg_11suitesparse_7cholmod_25cholmod_INT64_t_FLOAT64_t_populate1_cholmod_sparse_struct_with_CSCSparseMatrix;
 struct __pyx_opt_args_8cysparse_6linalg_11suitesparse_7cholmod_25cholmod_INT64_t_FLOAT64_t_populate2_cholmod_sparse_struct_with_CSCSparseMatrix;
 
-/* "cysparse/linalg/suitesparse/cholmod/cholmod_INT64_t_FLOAT64_t.pxd":123
- * 
+/* "cysparse/linalg/suitesparse/cholmod/cholmod_INT64_t_FLOAT64_t.pxd":144
+ *     # factor_to_sparse
  * 
  * cdef populate1_cholmod_sparse_struct_with_CSCSparseMatrix(cholmod_sparse * sparse_struct, CSCSparseMatrix_INT64_t_FLOAT64_t csc_mat, bint no_copy=?)             # <<<<<<<<<<<<<<
  * 
@@ -955,7 +955,7 @@ struct __pyx_opt_args_8cysparse_6linalg_11suitesparse_7cholmod_25cholmod_INT64_t
   int no_copy;
 };
 
-/* "cysparse/linalg/suitesparse/cholmod/cholmod_INT64_t_FLOAT64_t.pxd":125
+/* "cysparse/linalg/suitesparse/cholmod/cholmod_INT64_t_FLOAT64_t.pxd":146
  * cdef populate1_cholmod_sparse_struct_with_CSCSparseMatrix(cholmod_sparse * sparse_struct, CSCSparseMatrix_INT64_t_FLOAT64_t csc_mat, bint no_copy=?)
  * 
  * cdef populate2_cholmod_sparse_struct_with_CSCSparseMatrix(cholmod_sparse * sparse_struct, CSCSparseMatrix_INT64_t_FLOAT64_t csc_mat, bint no_copy=?)             # <<<<<<<<<<<<<<
@@ -1103,7 +1103,7 @@ struct __pyx_obj_8cysparse_6sparse_16csc_mat_matrices_25csc_mat_INT64_t_FLOAT64_
 };
 
 
-/* "cysparse/linalg/suitesparse/cholmod/cholmod_INT64_t_FLOAT64_t.pxd":130
+/* "cysparse/linalg/suitesparse/cholmod/cholmod_INT64_t_FLOAT64_t.pxd":151
  * cdef cnp.ndarray[cnp.npy_float64, ndim=1, mode="c"] cholmod_dense_to_numpy_ndarray(cholmod_dense * b)
  * 
  * cdef class CholmodContext_INT64_t_FLOAT64_t:             # <<<<<<<<<<<<<<

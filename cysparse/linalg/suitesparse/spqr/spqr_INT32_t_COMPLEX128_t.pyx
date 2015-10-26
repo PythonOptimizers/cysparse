@@ -1,37 +1,39 @@
+from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
+from cpython cimport Py_INCREF, Py_DECREF
+
 from cysparse.types.cysparse_types cimport *
 
-from cysparse.sparse.ll_mat_matrices.ll_mat_@index@_@type@ cimport LLSparseMatrix_@index@_@type@
-from cysparse.sparse.csc_mat_matrices.csc_mat_@index@_@type@ cimport CSCSparseMatrix_@index@_@type@
+from cysparse.sparse.ll_mat_matrices.ll_mat_INT32_t_COMPLEX128_t cimport LLSparseMatrix_INT32_t_COMPLEX128_t
+from cysparse.sparse.csc_mat_matrices.csc_mat_INT32_t_COMPLEX128_t cimport CSCSparseMatrix_INT32_t_COMPLEX128_t
 
 import numpy as np
 cimport numpy as cnp
 
-# external definition of this type
-ctypedef long SuiteSparse_long # This is exactly CySparse's INT64_t
+from  cysparse.linalg.suitesparse.cholmod.cholmod_INT32_t_COMPLEX128_t cimport *
 
+from cysparse.types.cysparse_generic_types cimport split_array_complex_values_kernel_INT32_t_COMPLEX128_t, join_array_complex_values_kernel_INT32_t_COMPLEX128_t
 
-from  cysparse.linalg.suitesparse.cholmod.cholmod_@index@_@type@ cimport *
 
 cdef extern from  "SuiteSparseQR_C.h":
     # returns rank(A) estimate, (-1) if failure
     cdef SuiteSparse_long SuiteSparseQR_C(
         # inputs:
         int ordering,               # all, except 3:given treated as 0:fixed
-        double tol,                 # columns with 2-norm <= tol treated as 0 
-        SuiteSparse_long econ,      # e = max(min(m,econ),rank(A)) 
-        int getCTX,                 # 0: Z=C (e-by-k), 1: Z=C', 2: Z=X (e-by-k) 
-        cholmod_sparse *A,          # m-by-n sparse matrix to factorize 
-        cholmod_sparse *Bsparse,    # sparse m-by-k B 
-        cholmod_dense  *Bdense,     # dense  m-by-k B 
-        # outputs: 
-        cholmod_sparse **Zsparse,   # sparse Z 
-        cholmod_dense  **Zdense,    # dense Z 
-        cholmod_sparse **R,         # e-by-n sparse matrix 
-        SuiteSparse_long **E,       # size n column perm, NULL if identity 
-        cholmod_sparse **H,         # m-by-nh Householder vectors 
-        SuiteSparse_long **HPinv,   # size m row permutation 
-        cholmod_dense **HTau,       # 1-by-nh Householder coefficients 
-        cholmod_common *cc          # workspace and parameters 
+        double tol,                 # columns with 2-norm <= tol treated as 0
+        SuiteSparse_long econ,      # e = max(min(m,econ),rank(A))
+        int getCTX,                 # 0: Z=C (e-by-k), 1: Z=C', 2: Z=X (e-by-k)
+        cholmod_sparse *A,          # m-by-n sparse matrix to factorize
+        cholmod_sparse *Bsparse,    # sparse m-by-k B
+        cholmod_dense  *Bdense,     # dense  m-by-k B
+        # outputs:
+        cholmod_sparse **Zsparse,   # sparse Z
+        cholmod_dense  **Zdense,    # dense Z
+        cholmod_sparse **R,         # e-by-n sparse matrix
+        SuiteSparse_long **E,       # size n column perm, NULL if identity
+        cholmod_sparse **H,         # m-by-nh Householder vectors
+        SuiteSparse_long **HPinv,   # size m row permutation
+        cholmod_dense **HTau,       # 1-by-nh Householder coefficients
+        cholmod_common *cc          # workspace and parameters
         )
 
 
@@ -58,7 +60,7 @@ cdef extern from  "SuiteSparseQR_C.h":
         cholmod_sparse *A,          # m-by-n sparse matrix
         cholmod_dense  *B,          # m-by-k
         cholmod_common *cc          # workspace and parameters
-    ) 
+    )
 
     # X = A\B where B is dense, using default ordering and tol
     # returns X, NULL if failure
@@ -66,7 +68,7 @@ cdef extern from  "SuiteSparseQR_C.h":
         cholmod_sparse *A,          # m-by-n sparse matrix
         cholmod_dense  *B,          # m-by-k
         cholmod_common *cc          # workspace and parameters
-    ) 
+    )
 
     # X = A\B where B is sparse
     # returns X, or NULL
@@ -77,24 +79,18 @@ cdef extern from  "SuiteSparseQR_C.h":
         cholmod_sparse *A,          # m-by-n sparse matrix
         cholmod_sparse *B,          # m-by-k
         cholmod_common *cc          # workspace and parameters
-    ) 
+    )
 
     ####################################################################################################################
     # EXPERT MODE
     ####################################################################################################################
-    # A real or complex QR factorization, computed by SuiteSparseQR_C_factorize
-    ctypedef struct SuiteSparseQR_C_factorization:
-        int xtype                  # CHOLMOD_REAL or CHOLMOD_COMPLEX
-        void *factors              # from SuiteSparseQR_factorize <double> or SuiteSparseQR_factorize <Complex>
-
-
     cdef SuiteSparseQR_C_factorization *SuiteSparseQR_C_factorize (
         # inputs:
         int ordering,               # all, except 3:given treated as 0:fixed
         double tol,                 # columns with 2-norm <= tol treated as 0
         cholmod_sparse *A,          # m-by-n sparse matrix
         cholmod_common *cc          # workspace and parameters
-    ) 
+    )
 
     cdef SuiteSparseQR_C_factorization *SuiteSparseQR_C_symbolic (
         # inputs:
@@ -102,7 +98,7 @@ cdef extern from  "SuiteSparseQR_C.h":
         int allow_tol,              # if TRUE allow tol for rank detection
         cholmod_sparse *A,          # m-by-n sparse matrix, A->x ignored
         cholmod_common *cc          # workspace and parameters
-    ) 
+    )
 
     cdef int SuiteSparseQR_C_numeric (
         # inputs:
@@ -111,14 +107,14 @@ cdef extern from  "SuiteSparseQR_C.h":
         # input/output:
         SuiteSparseQR_C_factorization *QR,
         cholmod_common *cc          # workspace and parameters
-    ) 
+    )
 
     # Free the QR factors computed by SuiteSparseQR_C_factorize
     # returns TRUE (1) if OK, FALSE (0) otherwise
     cdef int SuiteSparseQR_C_free (
         SuiteSparseQR_C_factorization **QR,
         cholmod_common *cc          # workspace and parameters
-    ) 
+    )
 
     # returnx X, or NULL if failure
     cdef cholmod_dense* SuiteSparseQR_C_solve (
@@ -126,7 +122,7 @@ cdef extern from  "SuiteSparseQR_C.h":
         SuiteSparseQR_C_factorization *QR,  # of an m-by-n sparse matrix A
         cholmod_dense *B,           # right-hand-side, m-by-k or n-by-k
         cholmod_common *cc          # workspace and parameters
-    ) 
+    )
 
     # Applies Q in Householder form (as stored in the QR factorization object
     # returned by SuiteSparseQR_C_factorize) to a dense matrix X.
@@ -143,28 +139,76 @@ cdef extern from  "SuiteSparseQR_C.h":
         SuiteSparseQR_C_factorization *QR,  # of an m-by-n sparse matrix A
         cholmod_dense *X,           # size m-by-n with leading dimension ldx
         cholmod_common *cc          # workspace and parameters
-    ) 
+    )
+
+cdef class SPQRContext_INT32_t_COMPLEX128_t:
+    """
+    SPQR Context from SuiteSparse.
+
+    This version **only** deals with ``LLSparseMatrix_INT32_t_COMPLEX128_t`` objects.
+
+    We follow the common use of SPQR. In particular, we use the same names for the methods of this
+    class as their corresponding counter-parts in SPQR.
+    """
+    ####################################################################################################################
+    # INIT
+    ####################################################################################################################
+    def __cinit__(self, LLSparseMatrix_INT32_t_COMPLEX128_t A, bint verbose=False):
+        """
+        """
+        self.A = A
+        Py_INCREF(self.A)  # increase ref to object to avoid the user deleting it explicitly or implicitly
+
+        self.nrow = A.nrow
+        self.ncol = A.ncol
+
+        self.nnz = self.A.nnz
+
+        self.csc_mat = self.A.to_csc()
+
+        # CHOLMOD
+        self.common_struct = cholmod_common()
+        cholmod_start(&self.common_struct)
+
+        self.sparse_struct = cholmod_sparse()
+        # common attributes for real and complex matrices
+        populate1_cholmod_sparse_struct_with_CSCSparseMatrix(&self.sparse_struct, self.csc_mat)
+
+
+        cdef:
+            FLOAT64_t * rval
+            FLOAT64_t * ival
+
+        rval = <FLOAT64_t *> PyMem_Malloc(self.nnz * sizeof(FLOAT64_t))
+        if not rval:
+            raise MemoryError()
+        self.csc_rval = rval
+
+        ival = <FLOAT64_t *> PyMem_Malloc(self.nnz * sizeof(FLOAT64_t))
+        if not ival:
+            PyMem_Free(rval)
+            raise MemoryError()
+        self.csc_ival = ival
+
+        # split array of complex values into two real value arrays
+        split_array_complex_values_kernel_INT32_t_COMPLEX128_t(self.csc_mat.val, self.nnz,
+                                                     self.csc_rval, self.nnz,
+                                                     self.csc_ival, self.nnz)
 
 
 
-cdef class SPQRContext_@index@_@type@:
-    cdef:
-        LLSparseMatrix_@index@_@type@ A
+    ####################################################################################################################
+    # FREE MEMORY
+    ####################################################################################################################
+    def __dealloc__(self):
+        """
 
-        @index@ nrow
-        @index@ ncol
-        @index@ nnz
+        """
+        # we don't delete sparse_struct as **all** arrays are allocated in self.csc_mat
+        # TODO: doesn't work... WHY?
+        #del self.csc_mat
 
-        # Matrix A in CSC format
-        CSCSparseMatrix_@index@_@type@ csc_mat
 
-        cholmod_common common_struct
-        cholmod_sparse sparse_struct
+        cholmod_finish(&self.common_struct)
 
-{% if type in complex_list %}
-        # we keep internally two arrays for the complex numbers: this is required by CHOLMOD...
-        @type|cysparse_real_type_from_real_cysparse_complex_type@ * csc_rval
-        @type|cysparse_real_type_from_real_cysparse_complex_type@ * csc_ival
-
-{% endif %}
-
+        Py_DECREF(self.A) # release ref
