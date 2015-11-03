@@ -12,6 +12,22 @@ ctypedef long SuiteSparse_long # This is exactly CySparse's INT64_t
 
 from  cysparse.linalg.suitesparse.cholmod.cholmod_INT64_t_FLOAT64_t cimport *
 
+cdef extern from "SuiteSparseQR_definitions.h":
+    # ordering options
+    cdef enum:
+        SPQR_ORDERING_FIXED = 0
+        SPQR_ORDERING_NATURAL = 1
+        SPQR_ORDERING_COLAMD = 2
+        SPQR_ORDERING_GIVEN = 3       # only used for C/C++ interface
+        SPQR_ORDERING_CHOLMOD = 4     # CHOLMOD best-effort (COLAMD, METIS,...)
+        SPQR_ORDERING_AMD = 5         # AMD(A'*A)
+        SPQR_ORDERING_METIS = 6       # metis(A'*A)
+        SPQR_ORDERING_DEFAULT = 7     # SuiteSparseQR default ordering
+        SPQR_ORDERING_BEST = 8        # try COLAMD, AMD, and METIS; pick best
+        SPQR_ORDERING_BESTAMD = 9     # try COLAMD and AMD; pick best
+
+
+
 cdef extern from  "SuiteSparseQR_C.h":
     # returns rank(A) estimate, (-1) if failure
     cdef SuiteSparse_long SuiteSparseQR_C(
@@ -161,4 +177,13 @@ cdef class SPQRContext_INT64_t_FLOAT64_t:
         cholmod_common common_struct
         cholmod_sparse sparse_struct
 
+        SuiteSparseQR_C_factorization * factors_struct
+        bint factors_struct_initialized
+        bint numeric_computed
+        bint factorized
 
+
+
+    cdef bint _create_symbolic(self, int ordering, bint allow_tol)
+    cdef bint _create_numeric(self, double drop_tol)
+    cdef _SPQR_istat(self)

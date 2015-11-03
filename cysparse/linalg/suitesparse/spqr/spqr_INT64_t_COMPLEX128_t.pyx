@@ -14,6 +14,17 @@ from  cysparse.linalg.suitesparse.cholmod.cholmod_INT64_t_COMPLEX128_t cimport *
 from cysparse.types.cysparse_generic_types cimport split_array_complex_values_kernel_INT64_t_COMPLEX128_t, join_array_complex_values_kernel_INT64_t_COMPLEX128_t
 
 
+ORDERING_METHOD_LIST = ['SPQR_ORDERING_FIXED',
+        'SPQR_ORDERING_NATURAL',
+        'SPQR_ORDERING_COLAMD',
+        'SPQR_ORDERING_GIVEN',
+        'SPQR_ORDERING_CHOLMOD',
+        'SPQR_ORDERING_AMD',
+        'SPQR_ORDERING_METIS',
+        'SPQR_ORDERING_DEFAULT',
+        'SPQR_ORDERING_BEST',
+        'SPQR_ORDERING_BESTAMD']
+
 cdef extern from  "SuiteSparseQR_C.h":
     # returns rank(A) estimate, (-1) if failure
     cdef SuiteSparse_long SuiteSparseQR_C(
@@ -196,6 +207,10 @@ cdef class SPQRContext_INT64_t_COMPLEX128_t:
                                                      self.csc_ival, self.nnz)
 
 
+        self.factors_struct_initialized = False
+        self.numeric_computed = False
+        self.factorized = False
+
 
     ####################################################################################################################
     # FREE MEMORY
@@ -212,3 +227,171 @@ cdef class SPQRContext_INT64_t_COMPLEX128_t:
         cholmod_l_finish(&self.common_struct)
 
         Py_DECREF(self.A) # release ref
+
+    ####################################################################################################################
+    # COMMON OPERATIONS
+    ####################################################################################################################
+    cdef bint _create_symbolic(self, int ordering, bint allow_tol):
+        """
+        Create the symbolic object.
+
+        Note:
+            Create the object no matter what. See :meth:`create_symbolic` for a conditional creation.
+
+        """
+        cdef bint status = 1
+        self.factors_struct_initialized = True
+
+        self.factors_struct = SuiteSparseQR_C_symbolic(ordering, allow_tol, &self.sparse_struct, &self.common_struct)
+
+        if self.factors_struct is NULL:
+            status = 0
+            self.factors_struct_initialized = False
+
+        return status
+
+
+    def create_symbolic(self, ordering=SPQR_ORDERING_BEST, rank_detection=False):
+        """
+        Create the symbolic object if it is not already in cache.
+
+        Args:
+            ordering:
+            rank_detection:
+
+        Note:
+            We don't allow to force recomputation of the ``factors_struct`` because we can not delete ``factors_struct``
+            without deleting at the same time ``common_struct``.
+
+        """
+        if self.factors_struct_initialized:
+            return
+
+        cdef bint status = self._create_symbolic(ordering, rank_detection)
+
+        # TODO: raise exception
+
+    cdef bint _create_numeric(self, double drop_tol):
+        """
+        Create the numeric object.
+
+        Args:
+            drop_tol: Treat columns with 2-norm <= drop_tol as zero.
+
+        Note:
+            Create the object no matter what. See :meth:`create_numeric` for a conditional creation.
+            No test is done to verify if ``create_symbolic()`` has been called before.
+
+        """
+        cdef int status = 0
+
+        SuiteSparseQR_C_numeric(drop_tol, &self.sparse_struct, self.factors_struct, &self.common_struct)
+        self.numeric_computed = True
+
+        return status
+
+    def create_numeric(self, drop_tol=0):
+        """
+        Create the numeric object if it is not already in cache.
+
+        Args:
+
+        """
+        if self.numeric_computed:
+            return
+
+        self.create_symbolic()
+
+        cdef int status = self._create_numeric(drop_tol)
+
+        # TODO: raise exception on error
+
+
+    def analyze(self, ordering=SPQR_ORDERING_BEST, rank_detection=False, drop_tol=0):
+        self.create_symbolic(ordering, rank_detection)
+        self.create_numeric(drop_tol)
+
+        # TODO: raise exception...
+
+
+    def factorize(self, force = False, ordering=SPQR_ORDERING_BEST, drop_tol=0):
+        self.factorized = True
+
+        # if needed
+        self.analyze(ordering=ordering)
+
+        if not self.factorized or force:
+            self.factors_struct = SuiteSparseQR_C_factorize(ordering, drop_tol, &self.sparse_struct, &self.common_struct)
+
+        if self.factors_struct is NULL:
+            status = 0
+            self.factors_struct_initialized = False
+            self.factorized = False
+
+
+        # TODO: raise exception if needed...
+        #return status
+
+    cdef _SPQR_istat(self):
+        s = ''
+
+        # ordering
+        s += 'ORDERING USED: %s' % ORDERING_METHOD_LIST[self.common_struct.SPQR_istat[7]]
+
+        return s
+
+    def spqr_statistics(self):
+        # TODO: todo
+        return self. _SPQR_istat()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

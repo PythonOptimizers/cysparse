@@ -17,6 +17,14 @@ solver = NewSPQRContext(A)
 
 print solver
 
+solver.create_symbolic(ordering=1)
+print solver.spqr_statistics()
+
+solver.create_numeric()
+
+solver.factorize(ordering=4)
+print solver.spqr_statistics()
+
 
 
 
