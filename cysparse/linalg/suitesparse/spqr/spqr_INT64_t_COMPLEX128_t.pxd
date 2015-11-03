@@ -1,7 +1,7 @@
 from cysparse.types.cysparse_types cimport *
 
-from cysparse.sparse.ll_mat_matrices.ll_mat_@index@_@type@ cimport LLSparseMatrix_@index@_@type@
-from cysparse.sparse.csc_mat_matrices.csc_mat_@index@_@type@ cimport CSCSparseMatrix_@index@_@type@
+from cysparse.sparse.ll_mat_matrices.ll_mat_INT64_t_COMPLEX128_t cimport LLSparseMatrix_INT64_t_COMPLEX128_t
+from cysparse.sparse.csc_mat_matrices.csc_mat_INT64_t_COMPLEX128_t cimport CSCSparseMatrix_INT64_t_COMPLEX128_t
 
 import numpy as np
 cimport numpy as cnp
@@ -10,7 +10,7 @@ cimport numpy as cnp
 ctypedef long SuiteSparse_long # This is exactly CySparse's INT64_t
 
 
-from  cysparse.linalg.suitesparse.cholmod.cholmod_@index@_@type@ cimport *
+from  cysparse.linalg.suitesparse.cholmod.cholmod_INT64_t_COMPLEX128_t cimport *
 
 cdef extern from "SuiteSparseQR_definitions.h":
     # ordering options
@@ -26,24 +26,7 @@ cdef extern from "SuiteSparseQR_definitions.h":
         SPQR_ORDERING_BEST = 8        # try COLAMD, AMD, and METIS; pick best
         SPQR_ORDERING_BESTAMD = 9     # try COLAMD and AMD; pick best
 
-    # tol options
-    cdef enum:
-        SPQR_DEFAULT_TOL = -2       # if tol <= -2, the default tol is used
-        SPQR_NO_TOL = -1            # if -2 < tol < 0, then no tol is used
 
-    # for qmult, method can be 0,1,2,3:
-    cdef enum:
-        SPQR_QTX = 0
-        SPQR_QX  = 1
-        SPQR_XQT = 2
-        SPQR_XQ  = 3
-
-    # system can be 0,1,2,3:  Given Q*R=A*E from SuiteSparseQR_factorize:
-    cdef enum:
-        SPQR_RX_EQUALS_B =  0       # solve R*X=B      or X = R\B
-        SPQR_RETX_EQUALS_B = 1      # solve R*E'*X=B   or X = E*(R\B)
-        SPQR_RTX_EQUALS_B = 2       # solve R'*X=B     or X = R'\B
-        SPQR_RTX_EQUALS_ETB = 3     # solve R'*X=E'*B  or X = R'\(E'*B)
 
 cdef extern from  "SuiteSparseQR_C.h":
     # returns rank(A) estimate, (-1) if failure
@@ -180,16 +163,16 @@ cdef extern from  "SuiteSparseQR_C.h":
 
 
 
-cdef class SPQRContext_@index@_@type@:
+cdef class SPQRContext_INT64_t_COMPLEX128_t:
     cdef:
-        LLSparseMatrix_@index@_@type@ A
+        LLSparseMatrix_INT64_t_COMPLEX128_t A
 
-        @index@ nrow
-        @index@ ncol
-        @index@ nnz
+        INT64_t nrow
+        INT64_t ncol
+        INT64_t nnz
 
         # Matrix A in CSC format
-        CSCSparseMatrix_@index@_@type@ csc_mat
+        CSCSparseMatrix_INT64_t_COMPLEX128_t csc_mat
 
         cholmod_common common_struct
         cholmod_sparse sparse_struct
@@ -199,14 +182,13 @@ cdef class SPQRContext_@index@_@type@:
         bint numeric_computed
         bint factorized
 
-{% if type in complex_list %}
-        # we keep internally two arrays for the complex numbers: this is required by CHOLMOD...
-        @type|cysparse_real_type_from_real_cysparse_complex_type@ * csc_rval
-        @type|cysparse_real_type_from_real_cysparse_complex_type@ * csc_ival
 
-{% endif %}
+        # we keep internally two arrays for the complex numbers: this is required by CHOLMOD...
+        FLOAT64_t * csc_rval
+        FLOAT64_t * csc_ival
+
+
 
     cdef bint _create_symbolic(self, int ordering, bint allow_tol)
     cdef bint _create_numeric(self, double drop_tol)
     cdef _SPQR_istat(self)
-

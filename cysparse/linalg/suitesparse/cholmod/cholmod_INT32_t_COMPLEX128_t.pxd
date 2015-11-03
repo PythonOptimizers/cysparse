@@ -50,11 +50,64 @@ cdef extern from "cholmod.h":
         SuiteSparse_long mark
 
         #######################################################
-        # GPU configuration and statistics
+        # Statistics
+        #######################################################
+
+        int status 	        # error code
+        double fl 		    # LL' flop count from most recent analysis 
+        double lnz 	        # fundamental nz in L
+        double anz 	        # nonzeros in tril(A) if A is symmetric/lower,
+                            # triu(A) if symmetric/upper, or tril(A*A') if
+                            # unsymmetric, in last call to cholmod_analyze. 
+        double modfl 	    # flop count from most recent update/downdate/
+                            # rowadd/rowdel (excluding flops to modify the
+                            # solution to Lx=b, if computed) 
+        size_t malloc_count    # # of objects malloc'ed minus the # free'd
+        size_t memory_usage    # peak memory usage in bytes 
+        size_t memory_inuse    # current memory usage in bytes 
+
+        double nrealloc_col    # of column reallocations
+        double nrealloc_factor # of factor reallocations due to col. reallocs
+        double ndbounds_hit    # of times diagonal modified by dbound
+
+        double rowfacfl 	    # of flops in last call to cholmod_rowfac
+        double aatfl 	        # of flops to compute A(:,f)*A(:,f)'
+
+        int called_nd 	    # TRUE if the last call to
+                            # cholmod_analyze called NESDIS or METIS.
+        int blas_ok         # FALSE if BLAS int overflow TRUE otherwise
+
+        # SuiteSparseQR control parameters:
+
+        double SPQR_grain       # task size is >= max (total flops / grain) 
+        double SPQR_small       # task size is >= small 
+        int SPQR_shrink         # controls stack realloc method 
+        int SPQR_nthreads       # number of TBB threads, 0 = auto 
+
+        # SuiteSparseQR statistics 
+
+        # was other1 [0:3] 
+        double SPQR_flopcount          # flop count for SPQR 
+        double SPQR_analyze_time       # analysis time in seconds for SPQR 
+        double SPQR_factorize_time     # factorize time in seconds for SPQR 
+        double SPQR_solve_time         # backsolve time in seconds 
+
+        # was SPQR_xstat [0:3] 
+        double SPQR_flopcount_bound    # upper bound on flop count 
+        double SPQR_tol_used           # tolerance used 
+        double SPQR_norm_E_fro         # Frobenius norm of dropped entries 
+
+        # was SPQR_istat [0:9] 
+        SuiteSparse_long SPQR_istat [10] 
+
+        #######################################################
+        # GPU configuration
         #######################################################
         int useGPU
         size_t maxGpuMemBytes
         double maxGpuMemFraction
+
+
 
     # SPARSE MATRIX
     ctypedef struct cholmod_sparse:
@@ -119,6 +172,27 @@ cdef extern from "cholmod.h":
     ctypedef struct cholmod_factor:
         pass
 
+    int cholmod_start(cholmod_common *Common)
+    int cholmod_finish(cholmod_common *Common)
+
+    int cholmod_defaults(cholmod_common *Common)
+
+    # Common struct
+    int cholmod_check_common(cholmod_common *Common)
+    int cholmod_print_common(const char *name, cholmod_common *Common)
+
+    # Sparse struct
+    int cholmod_check_sparse(cholmod_sparse *A, cholmod_common *Common)
+    int cholmod_print_sparse(cholmod_sparse *A, const char *name, cholmod_common *Common)
+
+    # Dense struct
+    int cholmod_free_dense(cholmod_dense **X, cholmod_common *Common)
+
+    # Factor struct
+    int cholmod_check_factor(cholmod_factor *L, cholmod_common *Common)
+    int cholmod_print_factor(cholmod_factor *L, const char *name, cholmod_common *Common)
+    #int cholmod_free_factor()
+    # factor_to_sparse
 
 cdef populate1_cholmod_sparse_struct_with_CSCSparseMatrix(cholmod_sparse * sparse_struct, CSCSparseMatrix_INT32_t_COMPLEX128_t csc_mat, bint no_copy=?)
 

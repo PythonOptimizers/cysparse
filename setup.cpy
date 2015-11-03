@@ -295,8 +295,6 @@ if use_suitesparse:
     cholmod_ext_params['library_dirs'] = suitesparse_library_dirs
     cholmod_ext_params['libraries'] = ['cholmod', 'amd']
 
-    print cholmod_ext_params
-
     cholmod_ext = [
 {% for index_type in cholmod_index_list %}
   {% for element_type in cholmod_type_list %}
@@ -307,6 +305,23 @@ if use_suitesparse:
 {% endfor %}
         ]
 
+    # SPQR
+    spqr_ext_params = copy.deepcopy(ext_params)
+    print spqr_ext_params
+
+    spqr_ext_params['include_dirs'].extend(suitesparse_include_dirs)
+    spqr_ext_params['library_dirs'] = suitesparse_library_dirs
+    spqr_ext_params['libraries'] = ['cholmod','spqr', 'amd']
+
+    spqr_ext = [
+{% for index_type in spqr_index_list %}
+  {% for element_type in spqr_type_list %}
+        Extension(name="cysparse.linalg.suitesparse.spqr.spqr_@index_type@_@element_type@",
+                  sources=['cysparse/linalg/suitesparse/spqr/spqr_@index_type@_@element_type@.pxd',
+                           'cysparse/linalg/suitesparse/spqr/spqr_@index_type@_@element_type@.pyx'], **spqr_ext_params),
+    {% endfor %}
+{% endfor %}
+        ]
 ##########################
 # MUMPS
 ##########################
@@ -367,9 +382,11 @@ if use_suitesparse:
     # add suitsparse package
     ext_modules += umfpack_ext
     ext_modules += cholmod_ext
+    ext_modules += spqr_ext
     packages_list.append('cysparse.linalg.suitesparse')
     packages_list.append('cysparse.linalg.suitesparse.umfpack')
     packages_list.append('cysparse.linalg.suitesparse.cholmod')
+    packages_list.append('cysparse.linalg.suitesparse.spqr')
 
 if use_mumps:
     # add mumps

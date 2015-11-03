@@ -1184,8 +1184,6 @@ if use_suitesparse:
     cholmod_ext_params['library_dirs'] = suitesparse_library_dirs
     cholmod_ext_params['libraries'] = ['cholmod', 'amd']
 
-    print cholmod_ext_params
-
     cholmod_ext = [
 
   
@@ -1210,6 +1208,37 @@ if use_suitesparse:
 
         ]
 
+    # SPQR
+    spqr_ext_params = copy.deepcopy(ext_params)
+    print spqr_ext_params
+
+    spqr_ext_params['include_dirs'].extend(suitesparse_include_dirs)
+    spqr_ext_params['library_dirs'] = suitesparse_library_dirs
+    spqr_ext_params['libraries'] = ['cholmod','spqr', 'amd']
+
+    spqr_ext = [
+
+  
+        Extension(name="cysparse.linalg.suitesparse.spqr.spqr_INT32_t_FLOAT64_t",
+                  sources=['cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pxd',
+                           'cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx'], **spqr_ext_params),
+    
+        Extension(name="cysparse.linalg.suitesparse.spqr.spqr_INT32_t_COMPLEX128_t",
+                  sources=['cysparse/linalg/suitesparse/spqr/spqr_INT32_t_COMPLEX128_t.pxd',
+                           'cysparse/linalg/suitesparse/spqr/spqr_INT32_t_COMPLEX128_t.pyx'], **spqr_ext_params),
+    
+
+  
+        Extension(name="cysparse.linalg.suitesparse.spqr.spqr_INT64_t_FLOAT64_t",
+                  sources=['cysparse/linalg/suitesparse/spqr/spqr_INT64_t_FLOAT64_t.pxd',
+                           'cysparse/linalg/suitesparse/spqr/spqr_INT64_t_FLOAT64_t.pyx'], **spqr_ext_params),
+    
+        Extension(name="cysparse.linalg.suitesparse.spqr.spqr_INT64_t_COMPLEX128_t",
+                  sources=['cysparse/linalg/suitesparse/spqr/spqr_INT64_t_COMPLEX128_t.pxd',
+                           'cysparse/linalg/suitesparse/spqr/spqr_INT64_t_COMPLEX128_t.pyx'], **spqr_ext_params),
+    
+
+        ]
 ##########################
 # MUMPS
 ##########################
@@ -1324,9 +1353,11 @@ if use_suitesparse:
     # add suitsparse package
     ext_modules += umfpack_ext
     ext_modules += cholmod_ext
+    ext_modules += spqr_ext
     packages_list.append('cysparse.linalg.suitesparse')
     packages_list.append('cysparse.linalg.suitesparse.umfpack')
     packages_list.append('cysparse.linalg.suitesparse.cholmod')
+    packages_list.append('cysparse.linalg.suitesparse.spqr')
 
 if use_mumps:
     # add mumps

@@ -3,16 +3,16 @@ from cpython cimport Py_INCREF, Py_DECREF
 
 from cysparse.types.cysparse_types cimport *
 
-from cysparse.sparse.ll_mat_matrices.ll_mat_@index@_@type@ cimport LLSparseMatrix_@index@_@type@
-from cysparse.sparse.csc_mat_matrices.csc_mat_@index@_@type@ cimport CSCSparseMatrix_@index@_@type@
+from cysparse.sparse.ll_mat_matrices.ll_mat_INT32_t_COMPLEX128_t cimport LLSparseMatrix_INT32_t_COMPLEX128_t
+from cysparse.sparse.csc_mat_matrices.csc_mat_INT32_t_COMPLEX128_t cimport CSCSparseMatrix_INT32_t_COMPLEX128_t
 
 import numpy as np
 cimport numpy as cnp
 
-from  cysparse.linalg.suitesparse.cholmod.cholmod_@index@_@type@ cimport *
-{% if type in complex_list %}
-from cysparse.types.cysparse_generic_types cimport split_array_complex_values_kernel_@index@_@type@, join_array_complex_values_kernel_@index@_@type@
-{% endif %}
+from  cysparse.linalg.suitesparse.cholmod.cholmod_INT32_t_COMPLEX128_t cimport *
+
+from cysparse.types.cysparse_generic_types cimport split_array_complex_values_kernel_INT32_t_COMPLEX128_t, join_array_complex_values_kernel_INT32_t_COMPLEX128_t
+
 
 ORDERING_METHOD_LIST = ['SPQR_ORDERING_FIXED',
         'SPQR_ORDERING_NATURAL',
@@ -152,11 +152,11 @@ cdef extern from  "SuiteSparseQR_C.h":
         cholmod_common *cc          # workspace and parameters
     )
 
-cdef class SPQRContext_@index@_@type@:
+cdef class SPQRContext_INT32_t_COMPLEX128_t:
     """
     SPQR Context from SuiteSparse.
 
-    This version **only** deals with ``LLSparseMatrix_@index@_@type@`` objects.
+    This version **only** deals with ``LLSparseMatrix_INT32_t_COMPLEX128_t`` objects.
 
     We follow the common use of SPQR. In particular, we use the same names for the methods of this
     class as their corresponding counter-parts in SPQR.
@@ -164,7 +164,7 @@ cdef class SPQRContext_@index@_@type@:
     ####################################################################################################################
     # INIT
     ####################################################################################################################
-    def __cinit__(self, LLSparseMatrix_@index@_@type@ A, bint verbose=False):
+    def __cinit__(self, LLSparseMatrix_INT32_t_COMPLEX128_t A, bint verbose=False):
         """
         """
         self.A = A
@@ -179,35 +179,33 @@ cdef class SPQRContext_@index@_@type@:
 
         # CHOLMOD
         self.common_struct = cholmod_common()
-        @index|cysparse_real_type_to_cholmod_prefix@_start(&self.common_struct)
+        cholmod_start(&self.common_struct)
 
         self.sparse_struct = cholmod_sparse()
         # common attributes for real and complex matrices
         populate1_cholmod_sparse_struct_with_CSCSparseMatrix(&self.sparse_struct, self.csc_mat)
-{% if type in complex_list %}
+
 
         cdef:
-            @type|cysparse_real_type_from_real_cysparse_complex_type@ * rval
-            @type|cysparse_real_type_from_real_cysparse_complex_type@ * ival
+            FLOAT64_t * rval
+            FLOAT64_t * ival
 
-        rval = <@type|cysparse_real_type_from_real_cysparse_complex_type@ *> PyMem_Malloc(self.nnz * sizeof(@type|cysparse_real_type_from_real_cysparse_complex_type@))
+        rval = <FLOAT64_t *> PyMem_Malloc(self.nnz * sizeof(FLOAT64_t))
         if not rval:
             raise MemoryError()
         self.csc_rval = rval
 
-        ival = <@type|cysparse_real_type_from_real_cysparse_complex_type@ *> PyMem_Malloc(self.nnz * sizeof(@type|cysparse_real_type_from_real_cysparse_complex_type@))
+        ival = <FLOAT64_t *> PyMem_Malloc(self.nnz * sizeof(FLOAT64_t))
         if not ival:
             PyMem_Free(rval)
             raise MemoryError()
         self.csc_ival = ival
 
         # split array of complex values into two real value arrays
-        split_array_complex_values_kernel_@index@_@type@(self.csc_mat.val, self.nnz,
+        split_array_complex_values_kernel_INT32_t_COMPLEX128_t(self.csc_mat.val, self.nnz,
                                                      self.csc_rval, self.nnz,
                                                      self.csc_ival, self.nnz)
-{% else %}
-        populate2_cholmod_sparse_struct_with_CSCSparseMatrix(&self.sparse_struct, self.csc_mat)
-{% endif %}
+
 
         self.factors_struct_initialized = False
         self.numeric_computed = False
@@ -226,7 +224,7 @@ cdef class SPQRContext_@index@_@type@:
         #del self.csc_mat
 
 
-        @index|cysparse_real_type_to_cholmod_prefix@_finish(&self.common_struct)
+        cholmod_finish(&self.common_struct)
 
         Py_DECREF(self.A) # release ref
 
@@ -347,51 +345,53 @@ cdef class SPQRContext_@index@_@type@:
         return self. _SPQR_istat()
 
 
-    def solve(self, cnp.ndarray[cnp.@type|cysparse_type_to_numpy_c_type@, mode="c"] b, spqr_sys=):
 
-        # test argument b
-        cdef cnp.npy_intp * shape_b
-        try:
-            shape_b = b.shape
-        except:
-            raise AttributeError("argument b must implement attribute 'shape'")
 
-        dim_b = shape_b[0]
-        assert dim_b == self.nrow, "array dimensions must agree"
 
-        if cholmod_sys not in CHOLMOD_SYS_DICT.keys():
-            raise ValueError('cholmod_sys must be in' % CHOLMOD_SYS_DICT.keys())
 
-        # if needed
-        self.factorize()
 
-        # convert NumPy array to CHOLMOD dense vector
-        cdef cholmod_dense B
 
-        B = numpy_ndarray_to_cholmod_dense(b)
 
-        cdef cholmod_dense * cholmod_sol
-        cholmod_sol = @index|cysparse_real_type_to_cholmod_prefix@_solve(CHOLMOD_SYS_DICT[cholmod_sys], self.factor_struct, &B, &self.common_struct)
 
-        # TODO: free B
-        # TODO: convert sol to NumPy array
 
-        cdef cnp.ndarray[cnp.@type|cysparse_type_to_numpy_c_type@, ndim=1, mode='c'] sol = np.empty(self.ncol, dtype=np.@type|cysparse_type_to_numpy_type@)
 
-        # make a copy
-        cdef @index@ j
 
-        cdef @type@ * cholmod_sol_array_ptr = <@type@ * > cholmod_sol.x
 
-{% if type in complex_list %}
-        raise NotImplementedError("To be coded")
-{% else %}
 
-        for j from 0 <= j < self.ncol:
-            sol[j] = <@type@> cholmod_sol_array_ptr[j]
-{% endif %}
 
-        # Free CHOLMOD dense solution
-        @index|cysparse_real_type_to_cholmod_prefix@_free_dense(&cholmod_sol, &self.common_struct)
 
-        return sol
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

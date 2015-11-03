@@ -599,6 +599,14 @@ LINALG_SUITESPARSE_CHOLMOD_TEMPLATE_DIR = os.path.join(LINALG_SUITESPARSE_TEMPLA
 LINALG_SUITESPARSE_CHOLMOD_DECLARATION_FILES = glob.glob(os.path.join(LINALG_SUITESPARSE_CHOLMOD_TEMPLATE_DIR, '*.cpd'))
 LINALG_SUITESPARSE_CHOLMOD_DEFINITION_FILES = glob.glob(os.path.join(LINALG_SUITESPARSE_CHOLMOD_TEMPLATE_DIR, '*.cpx'))
 
+# SPQR
+LINALG_SUITESPARSE_SPQR_TEMPLATE_DIR = os.path.join(LINALG_SUITESPARSE_TEMPLATE_DIR, 'spqr')
+
+LINALG_SPQR_FACTORY_METHOD_FILE = os.path.join(LINALG_TEMPLATE_DIR, 'spqr_context.cpy')
+
+LINALG_SUITESPARSE_SPQR_DECLARATION_FILES = glob.glob(os.path.join(LINALG_SUITESPARSE_SPQR_TEMPLATE_DIR, '*.cpd'))
+LINALG_SUITESPARSE_SPQR_DEFINITION_FILES = glob.glob(os.path.join(LINALG_SUITESPARSE_SPQR_TEMPLATE_DIR, '*.cpx'))
+
 ##########################################
 ### MUMPS
 ##########################################
@@ -710,6 +718,9 @@ if __name__ == "__main__":
     # Cholmod
     CHOLMOD_INDEX_TYPES = ['INT32_t', 'INT64_t']
     CHOLMOD_ELEMENT_TYPES = ['FLOAT64_t', 'COMPLEX128_t']
+    # SPQR
+    SPQR_INDEX_TYPES = ['INT32_t', 'INT64_t']
+    SPQR_ELEMENT_TYPES = ['FLOAT64_t', 'COMPLEX128_t']
 
     # MUMPS
     # This list is defined above in the conditional part
@@ -738,6 +749,8 @@ if __name__ == "__main__":
                         'umfpack_type_list' : UMFPACK_ELEMENT_TYPES,
                         'cholmod_index_list': CHOLMOD_INDEX_TYPES,
                         'cholmod_type_list': CHOLMOD_ELEMENT_TYPES,
+                        'spqr_index_list': SPQR_INDEX_TYPES,
+                        'spqr_type_list': SPQR_ELEMENT_TYPES,
                         'mumps_index_list': MUMPS_INDEX_TYPES,
                         'mumps_type_list': MUMPS_ELEMENT_TYPES,
 
@@ -1004,6 +1017,9 @@ if __name__ == "__main__":
             clean_cython_files(logger, LINALG_SUITESPARSE_UMFPACK_TEMPLATE_DIR, untrack=arg_options.untrack)
             # Cholmod
             clean_cython_files(logger, LINALG_SUITESPARSE_CHOLMOD_TEMPLATE_DIR, untrack=arg_options.untrack)
+            # SPQR
+            clean_cython_files(logger, TESTS_LINALG_DIR, [LINALG_SPQR_FACTORY_METHOD_FILE[:-4] + '.py'], untrack=arg_options.untrack)
+            clean_cython_files(logger, LINALG_SUITESPARSE_SPQR_TEMPLATE_DIR, untrack=arg_options.untrack)
 
             # MUMPS
             clean_cython_files(logger, TESTS_LINALG_DIR, [LINALG_MUMPS_FACTORY_METHOD_FILE[:-4] + '.py'], untrack=arg_options.untrack)
@@ -1025,12 +1041,15 @@ if __name__ == "__main__":
             # Cholmod
             generate_following_type_and_index(logger, LINALG_SUITESPARSE_CHOLMOD_DECLARATION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, CHOLMOD_ELEMENT_TYPES, CHOLMOD_INDEX_TYPES, '.pxd')
             generate_following_type_and_index(logger, LINALG_SUITESPARSE_CHOLMOD_DEFINITION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, CHOLMOD_ELEMENT_TYPES, CHOLMOD_INDEX_TYPES, '.pyx')
+            # SPQR
+            generate_template_files(logger, [LINALG_SPQR_FACTORY_METHOD_FILE], GENERAL_ENVIRONMENT, GENERAL_CONTEXT, '.py')
+            generate_following_type_and_index(logger, LINALG_SUITESPARSE_SPQR_DECLARATION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, SPQR_ELEMENT_TYPES, SPQR_INDEX_TYPES, '.pxd')
+            generate_following_type_and_index(logger, LINALG_SUITESPARSE_SPQR_DEFINITION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, SPQR_ELEMENT_TYPES, SPQR_INDEX_TYPES, '.pyx')
 
             ###############################
             # MUMPS
             ###############################
             generate_template_files(logger, [LINALG_MUMPS_FACTORY_METHOD_FILE], GENERAL_ENVIRONMENT, GENERAL_CONTEXT, '.py')
-
             generate_following_type_and_index(logger, LINALG_MUMPS_DECLARATION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, MUMPS_ELEMENT_TYPES, MUMPS_INDEX_TYPES, '.pxd')
             generate_following_type_and_index(logger, LINALG_MUMPS_DEFINITION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, MUMPS_ELEMENT_TYPES, MUMPS_INDEX_TYPES, '.pyx')
 
