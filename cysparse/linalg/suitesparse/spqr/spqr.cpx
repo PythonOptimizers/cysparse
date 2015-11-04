@@ -334,19 +334,6 @@ cdef class SPQRContext_@index@_@type@:
         # TODO: raise exception if needed...
         #return status
 
-    cdef _SPQR_istat(self):
-        s = ''
-
-        # ordering
-        s += 'ORDERING USED: %s' % ORDERING_METHOD_LIST[self.common_struct.SPQR_istat[7]]
-
-        return s
-
-    def spqr_statistics(self):
-        # TODO: todo
-        return self. _SPQR_istat()
-
-
     def solve(self, cnp.ndarray[cnp.@type|cysparse_type_to_numpy_c_type@, mode="c"] b, spqr_sys=):
 
         # test argument b
@@ -395,3 +382,18 @@ cdef class SPQRContext_@index@_@type@:
         @index|cysparse_real_type_to_cholmod_prefix@_free_dense(&cholmod_sol, &self.common_struct)
 
         return sol
+
+    ####################################################################################################################
+    # STATISTICS
+    ####################################################################################################################
+    cdef _SPQR_istat(self):
+        s = ''
+
+        # ordering
+        s += 'ORDERING USED: %s' % ORDERING_METHOD_LIST[self.common_struct.SPQR_istat[7]]
+
+        return s
+
+    def spqr_statistics(self):
+        # TODO: todo
+        return self. _SPQR_istat()
