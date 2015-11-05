@@ -7,14 +7,14 @@ import sys
 from cysparse.linalg.spqr_context import NewSPQRContext
 
 
-A = NewLinearFillLLSparseMatrix(size=4, is_symmetric=True)
+A = NewLinearFillLLSparseMatrix(nrow=5, ncol=4)
 
 print A
 
 AA = A.to_ndarray()
 
 print "WWW"
-print np.linalg.det(AA)
+#print np.linalg.det(AA)
 
 
 
@@ -42,17 +42,26 @@ print "$" * 80
 #
 # print "+" * 80
 #
-b = np.ones(4, dtype=np.float64)
+b = np.ones(5, dtype=np.float64)
 #
 sol = solver.solve(b)
+sol_default = solver.solve_default(b)
 
-sol1 = np.linalg.solve(AA, b)
+#sol1 = np.linalg.solve(AA, b)
 
-print sol1
+#print sol1
 #
 print sol
+print sol_default
 
 print "3" * 80
 
-print np.dot(AA,sol1)
+#print np.dot(AA,sol1)
 print A * sol
+print solver.SPQR_drop_tol_used()
+
+print A * sol_default
+
+print "%" * 80
+
+print solver.SPQR_ordering_list()

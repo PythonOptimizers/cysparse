@@ -129,7 +129,10 @@ cdef populate1_cholmod_sparse_struct_with_CSCSparseMatrix(cholmod_sparse * spars
     sparse_struct.i = csc_mat.row
 
     # TODO: change this when we'll accept symmetric matrices **without** symmetric storage scheme
-    sparse_struct.stype = -1
+    if csc_mat.is_symmetric:
+        sparse_struct.stype = -1
+    else:
+        sparse_struct.stype = 0
 
     # itype: can be CHOLMOD_INT or CHOLMOD_LONG: we don't use the mixed version CHOLMOD_INTLONG
 
