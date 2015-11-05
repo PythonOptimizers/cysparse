@@ -112,6 +112,7 @@ cdef extern from  "SuiteSparseQR_C.h":
         cholmod_common *cc          # workspace and parameters
     ) 
 
+{% if spqr_export_mode %}
     ####################################################################################################################
     # EXPERT MODE
     ####################################################################################################################
@@ -177,7 +178,7 @@ cdef extern from  "SuiteSparseQR_C.h":
         cholmod_dense *X,           # size m-by-n with leading dimension ldx
         cholmod_common *cc          # workspace and parameters
     ) 
-
+{% endif %}
 
 
 cdef class SPQRContext_@index@_@type@:
