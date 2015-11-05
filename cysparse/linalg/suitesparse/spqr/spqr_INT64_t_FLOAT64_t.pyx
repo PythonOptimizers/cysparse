@@ -58,6 +58,15 @@ ORDERING_METHOD_LIST = ['SPQR_ORDERING_FIXED',
 
 
 
+SPQR_SYS_DICT = {
+        'SPQR_RX_EQUALS_B'     : SPQR_RX_EQUALS_B,
+        'SPQR_RETX_EQUALS_B'   : SPQR_RETX_EQUALS_B,
+        'SPQR_RTX_EQUALS_B'    : SPQR_RTX_EQUALS_B,
+        'SPQR_RTX_EQUALS_ETB'  : SPQR_RTX_EQUALS_ETB
+    }
+
+
+
 cdef extern from  "SuiteSparseQR_C.h":
     # returns rank(A) estimate, (-1) if failure
     cdef SuiteSparse_long SuiteSparseQR_C(
@@ -126,6 +135,67 @@ cdef extern from  "SuiteSparseQR_C.h":
     )
 
 
+    ####################################################################################################################
+    # EXPERT MODE
+    ####################################################################################################################
+    cdef SuiteSparseQR_C_factorization *SuiteSparseQR_C_factorize (
+        # inputs:
+        int ordering,               # all, except 3:given treated as 0:fixed
+        double tol,                 # columns with 2-norm <= tol treated as 0
+        cholmod_sparse *A,          # m-by-n sparse matrix
+        cholmod_common *cc          # workspace and parameters
+    )
+
+    cdef SuiteSparseQR_C_factorization *SuiteSparseQR_C_symbolic (
+        # inputs:
+        int ordering,               # all, except 3:given treated as 0:fixed
+        int allow_tol,              # if TRUE allow tol for rank detection
+        cholmod_sparse *A,          # m-by-n sparse matrix, A->x ignored
+        cholmod_common *cc          # workspace and parameters
+    )
+
+    cdef int SuiteSparseQR_C_numeric (
+        # inputs:
+        double tol,                 # treat columns with 2-norm <= tol as zero
+        cholmod_sparse *A,          # sparse matrix to factorize
+        # input/output:
+        SuiteSparseQR_C_factorization *QR,
+        cholmod_common *cc          # workspace and parameters
+    )
+
+    # Free the QR factors computed by SuiteSparseQR_C_factorize
+    # returns TRUE (1) if OK, FALSE (0) otherwise
+    cdef int SuiteSparseQR_C_free (
+        SuiteSparseQR_C_factorization **QR,
+        cholmod_common *cc          # workspace and parameters
+    )
+
+    # returnx X, or NULL if failure
+    cdef cholmod_dense* SuiteSparseQR_C_solve (
+        int system,                 # which system to solve
+        SuiteSparseQR_C_factorization *QR,  # of an m-by-n sparse matrix A
+        cholmod_dense *B,           # right-hand-side, m-by-k or n-by-k
+        cholmod_common *cc          # workspace and parameters
+    )
+
+    # Applies Q in Householder form (as stored in the QR factorization object
+    # returned by SuiteSparseQR_C_factorize) to a dense matrix X.
+    #
+    # method SPQR_QTX (0): Y = Q'*X
+    # method SPQR_QX  (1): Y = Q*X
+    # method SPQR_XQT (2): Y = X*Q'
+    # method SPQR_XQ  (3): Y = X*Q
+
+    # returns Y, or NULL on failure
+    cdef cholmod_dense *SuiteSparseQR_C_qmult (
+        # inputs:
+        int method,                 # 0,1,2,3
+        SuiteSparseQR_C_factorization *QR,  # of an m-by-n sparse matrix A
+        cholmod_dense *X,           # size m-by-n with leading dimension ldx
+        cholmod_common *cc          # workspace and parameters
+    )
+
+
 
 cdef class SPQRContext_INT64_t_FLOAT64_t:
     """
@@ -163,6 +233,7 @@ cdef class SPQRContext_INT64_t_FLOAT64_t:
         populate2_cholmod_sparse_struct_with_CSCSparseMatrix(&self.sparse_struct, self.csc_mat)
 
 
+
         self.factors_struct_initialized = False
         self.numeric_computed = False
         self.factorized = False
@@ -187,6 +258,237 @@ cdef class SPQRContext_INT64_t_FLOAT64_t:
     ####################################################################################################################
     # COMMON OPERATIONS
     ####################################################################################################################
+    def solve(self, cnp.ndarray[cnp.npy_float64, mode="c"] b, int ordering=SPQR_ORDERING_BEST, double drop_tol=0):
+        """
+        Solve `A*x = b` with `b` dense (case `X = A\B`).
+
+        Args:
+            ordering:
+            drop_tol: Treat columns with 2-norm <= drop_tol as zero.
+
+        """
+        # test argument b
+        cdef cnp.npy_intp * shape_b
+        try:
+            shape_b = b.shape
+        except:
+            raise AttributeError("argument b must implement attribute 'shape'")
+
+        dim_b = shape_b[0]
+        assert dim_b == self.nrow, "array dimensions must agree"
+
+        # TODO: change this (see TODO below)
+        if b.ndim != 1:
+            raise NotImplementedError('Matrices for right member will be implemented soon...')
+
+
+        # convert NumPy array to CHOLMOD dense vector
+        cdef cholmod_dense B
+
+        # TODO: does it use multidimension (matrix and not vector)
+        # Currently ONLY support vectors...
+        B = numpy_ndarray_to_cholmod_dense(b)
+
+        cdef cholmod_dense * cholmod_sol
+
+        cholmod_sol = SuiteSparseQR_C_backslash(ordering, drop_tol, &self.sparse_struct, &B, &self.common_struct)
+
+        # test solution
+        if cholmod_sol == NULL:
+            # no solution was found
+            pass
+
+        # TODO: free B
+        # TODO: convert sol to NumPy array
+
+        cdef cnp.ndarray[cnp.npy_float64, ndim=1, mode='c'] sol = np.empty(self.ncol, dtype=np.float64)
+
+        # make a copy
+        cdef INT64_t j
+
+        cdef FLOAT64_t * cholmod_sol_array_ptr = <FLOAT64_t * > cholmod_sol.x
+
+
+
+        for j from 0 <= j < self.ncol:
+            sol[j] = <FLOAT64_t> cholmod_sol_array_ptr[j]
+
+
+        # Free CHOLMOD dense solution
+        cholmod_l_free_dense(&cholmod_sol, &self.common_struct)
+
+        return sol
+
+
+
+    cdef bint _create_symbolic(self, int ordering, bint allow_tol):
+        """
+        Create the symbolic object.
+
+        Note:
+            Create the object no matter what. See :meth:`create_symbolic` for a conditional creation.
+
+        """
+        cdef bint status = 1
+        self.factors_struct_initialized = True
+
+        self.factors_struct = SuiteSparseQR_C_symbolic(ordering, allow_tol, &self.sparse_struct, &self.common_struct)
+
+        if self.factors_struct is NULL:
+            status = 0
+            self.factors_struct_initialized = False
+
+        return status
+
+
+    def create_symbolic(self, ordering=SPQR_ORDERING_BEST, rank_detection=False):
+        """
+        Create the symbolic object if it is not already in cache.
+
+        Args:
+            ordering:
+            rank_detection:
+
+        Note:
+            We don't allow to force recomputation of the ``factors_struct`` because we can not delete ``factors_struct``
+            without deleting at the same time ``common_struct``.
+
+        """
+        if self.factors_struct_initialized:
+            return
+
+        cdef bint status = self._create_symbolic(ordering, rank_detection)
+
+        # TODO: raise exception
+
+    cdef bint _create_numeric(self, double drop_tol):
+        """
+        Create the numeric object.
+
+        Args:
+            drop_tol: Treat columns with 2-norm <= drop_tol as zero.
+
+        Note:
+            Create the object no matter what. See :meth:`create_numeric` for a conditional creation.
+            No test is done to verify if ``create_symbolic()`` has been called before.
+
+        """
+        cdef int status = 0
+
+        SuiteSparseQR_C_numeric(drop_tol, &self.sparse_struct, self.factors_struct, &self.common_struct)
+        self.numeric_computed = True
+
+        return status
+
+    def create_numeric(self, drop_tol=0):
+        """
+        Create the numeric object if it is not already in cache.
+
+        Args:
+
+        """
+        if self.numeric_computed:
+            return
+
+        self.create_symbolic()
+
+        cdef int status = self._create_numeric(drop_tol)
+
+        # TODO: raise exception on error
+
+
+    def analyze(self, ordering=SPQR_ORDERING_BEST, rank_detection=False, drop_tol=0):
+        self.create_symbolic(ordering, rank_detection)
+        self.create_numeric(drop_tol)
+
+        # TODO: raise exception...
+
+
+    def factorize(self, force = False, ordering=SPQR_ORDERING_BEST, drop_tol=0):
+        self.factorized = True
+
+        # if needed
+        self.analyze(ordering=ordering)
+
+        if not self.factorized or force:
+            self.factors_struct = SuiteSparseQR_C_factorize(ordering, drop_tol, &self.sparse_struct, &self.common_struct)
+
+        if self.factors_struct is NULL:
+            status = 0
+            self.factors_struct_initialized = False
+            self.factorized = False
+
+
+        # TODO: raise exception if needed...
+        #return status
+
+    def solve_expert(self, cnp.ndarray[cnp.npy_float64, mode="c"] b, spqr_sys='SPQR_RX_EQUALS_B'):
+        """
+        This is the expert solve (simply called `solve()` in :program:`SPQR`).
+
+        Args:
+            spqr_sys: can be:
+                - SPQR_RX_EQUALS_B =  0       # solve R*X=B      or X = R\B
+                - SPQR_RETX_EQUALS_B = 1      # solve R*E'*X=B   or X = E*(R\B)
+                - SPQR_RTX_EQUALS_B = 2       # solve R'*X=B     or X = R'\B
+                - SPQR_RTX_EQUALS_ETB = 3     # solve R'*X=E'*B  or X = R'\(E'*B)
+        """
+
+        # test argument b
+        cdef cnp.npy_intp * shape_b
+        try:
+            shape_b = b.shape
+        except:
+            raise AttributeError("argument b must implement attribute 'shape'")
+
+        dim_b = shape_b[0]
+        assert dim_b == self.nrow, "array dimensions must agree"
+
+        # TODO: change this (see TODO below)
+        if b.ndim != 1:
+            raise NotImplementedError('Matrices for right member will be implemented soon...')
+
+        if spqr_sys not in SPQR_SYS_DICT.keys():
+            raise ValueError('spqr_sys must be in' % SPQR_SYS_DICT.keys())
+
+        # if needed
+        self.factorize()
+
+
+        # convert NumPy array to CHOLMOD dense vector
+        cdef cholmod_dense B
+
+        # TODO: does it use multidimension (matrix and not vector)
+        # Currently ONLY support vectors...
+        B = numpy_ndarray_to_cholmod_dense(b)
+
+        cdef cholmod_dense * cholmod_sol
+        # XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+        cholmod_sol = SuiteSparseQR_C_solve(SPQR_SYS_DICT[spqr_sys], self.factors_struct, &B, &self.common_struct)
+
+        #cholmod_sol = cholmod_l_solve(CHOLMOD_SYS_DICT[cholmod_sys], self.factor_struct, &B, &self.common_struct)
+
+        # TODO: free B
+        # TODO: convert sol to NumPy array
+
+        cdef cnp.ndarray[cnp.npy_float64, ndim=1, mode='c'] sol = np.empty(self.ncol, dtype=np.float64)
+
+        # make a copy
+        cdef INT64_t j
+
+        cdef FLOAT64_t * cholmod_sol_array_ptr = <FLOAT64_t * > cholmod_sol.x
+
+
+
+        for j from 0 <= j < self.ncol:
+            sol[j] = <FLOAT64_t> cholmod_sol_array_ptr[j]
+
+
+        # Free CHOLMOD dense solution
+        cholmod_l_free_dense(&cholmod_sol, &self.common_struct)
+
+        return sol
 
 
     ####################################################################################################################

@@ -44,7 +44,7 @@ print "$" * 80
 #
 b = np.ones(4, dtype=np.float64)
 #
-sol = solver.solve_expert(b, 'SPQR_RETX_EQUALS_B')
+sol = solver.solve(b)
 
 sol1 = np.linalg.solve(AA, b)
 

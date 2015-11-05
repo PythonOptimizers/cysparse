@@ -195,10 +195,12 @@ cdef class SPQRContext_@index@_@type@:
         cholmod_common common_struct
         cholmod_sparse sparse_struct
 
+{% if spqr_export_mode %}
         SuiteSparseQR_C_factorization * factors_struct
         bint factors_struct_initialized
         bint numeric_computed
         bint factorized
+{% endif %}
 
 {% if type in complex_list %}
         # we keep internally two arrays for the complex numbers: this is required by CHOLMOD...

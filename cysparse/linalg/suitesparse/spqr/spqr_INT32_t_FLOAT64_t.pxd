@@ -112,6 +112,7 @@ cdef extern from  "SuiteSparseQR_C.h":
         cholmod_common *cc          # workspace and parameters
     ) 
 
+
     ####################################################################################################################
     # EXPERT MODE
     ####################################################################################################################
@@ -194,6 +195,7 @@ cdef class SPQRContext_INT32_t_FLOAT64_t:
         cholmod_common common_struct
         cholmod_sparse sparse_struct
 
+
         SuiteSparseQR_C_factorization * factors_struct
         bint factors_struct_initialized
         bint numeric_computed
@@ -201,6 +203,10 @@ cdef class SPQRContext_INT32_t_FLOAT64_t:
 
 
 
+
+
+    cdef bint _create_symbolic(self, int ordering, bint allow_tol)
+    cdef bint _create_numeric(self, double drop_tol)
 
 
     cdef _SPQR_istat(self)
