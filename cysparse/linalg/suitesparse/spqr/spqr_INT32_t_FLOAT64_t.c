@@ -1096,7 +1096,7 @@ struct __pyx_obj_8cysparse_6linalg_11suitesparse_7cholmod_25cholmod_INT32_t_FLOA
 };
 
 
-/* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pxd":166
+/* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pxd":183
  * 
  * 
  * cdef class SPQRContext_INT32_t_FLOAT64_t:             # <<<<<<<<<<<<<<
@@ -1203,8 +1203,8 @@ struct __pyx_vtabstruct_8cysparse_6linalg_11suitesparse_7cholmod_25cholmod_INT32
 static struct __pyx_vtabstruct_8cysparse_6linalg_11suitesparse_7cholmod_25cholmod_INT32_t_FLOAT64_t_CholmodContext_INT32_t_FLOAT64_t *__pyx_vtabptr_8cysparse_6linalg_11suitesparse_7cholmod_25cholmod_INT32_t_FLOAT64_t_CholmodContext_INT32_t_FLOAT64_t;
 
 
-/* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":153
- *     )
+/* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":130
+ * 
  * 
  * cdef class SPQRContext_INT32_t_FLOAT64_t:             # <<<<<<<<<<<<<<
  *     """
@@ -1212,8 +1212,6 @@ static struct __pyx_vtabstruct_8cysparse_6linalg_11suitesparse_7cholmod_25cholmo
  */
 
 struct __pyx_vtabstruct_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_SPQRContext_INT32_t_FLOAT64_t {
-  int (*_create_symbolic)(struct __pyx_obj_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_SPQRContext_INT32_t_FLOAT64_t *, int, int);
-  int (*_create_numeric)(struct __pyx_obj_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_SPQRContext_INT32_t_FLOAT64_t *, double);
   PyObject *(*_SPQR_istat)(struct __pyx_obj_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_SPQRContext_INT32_t_FLOAT64_t *);
 };
 static struct __pyx_vtabstruct_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_SPQRContext_INT32_t_FLOAT64_t *__pyx_vtabptr_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_SPQRContext_INT32_t_FLOAT64_t;
@@ -1407,8 +1405,6 @@ static void __Pyx_AddTraceback(const char *funcname, int c_line,
 
 static PyObject *__Pyx_Import(PyObject *name, PyObject *from_list, int level);
 
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value);
-
 static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *);
 
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value);
@@ -1550,6 +1546,8 @@ static CYTHON_INLINE __pyx_t_long_double_complex __pyx_t_long_double_complex_fro
     #endif
 #endif
 
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value);
+
 static CYTHON_INLINE long __Pyx_PyInt_As_long(PyObject *);
 
 static int __Pyx_check_binary_version(void);
@@ -1572,8 +1570,6 @@ static int __Pyx_ImportFunction(PyObject *module, const char *funcname, void (**
 
 static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 
-static int __pyx_f_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t__create_symbolic(struct __pyx_obj_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_SPQRContext_INT32_t_FLOAT64_t *__pyx_v_self, int __pyx_v_ordering, int __pyx_v_allow_tol); /* proto*/
-static int __pyx_f_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t__create_numeric(struct __pyx_obj_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_SPQRContext_INT32_t_FLOAT64_t *__pyx_v_self, double __pyx_v_drop_tol); /* proto*/
 static PyObject *__pyx_f_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t__SPQR_istat(struct __pyx_obj_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_SPQRContext_INT32_t_FLOAT64_t *__pyx_v_self); /* proto*/
 
 /* Module declarations from 'cpython.version' */
@@ -1713,14 +1709,12 @@ static PyObject *__pyx_builtin_range;
 static PyObject *__pyx_builtin_RuntimeError;
 static int __pyx_pf_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t___cinit__(struct __pyx_obj_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_SPQRContext_INT32_t_FLOAT64_t *__pyx_v_self, struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT64_t_LLSparseMatrix_INT32_t_FLOAT64_t *__pyx_v_A, CYTHON_UNUSED int __pyx_v_verbose); /* proto */
 static void __pyx_pf_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t_2__dealloc__(struct __pyx_obj_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_SPQRContext_INT32_t_FLOAT64_t *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t_4create_symbolic(struct __pyx_obj_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_SPQRContext_INT32_t_FLOAT64_t *__pyx_v_self, PyObject *__pyx_v_ordering, PyObject *__pyx_v_rank_detection); /* proto */
-static PyObject *__pyx_pf_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t_6create_numeric(struct __pyx_obj_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_SPQRContext_INT32_t_FLOAT64_t *__pyx_v_self, PyObject *__pyx_v_drop_tol); /* proto */
-static PyObject *__pyx_pf_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t_8analyze(struct __pyx_obj_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_SPQRContext_INT32_t_FLOAT64_t *__pyx_v_self, PyObject *__pyx_v_ordering, PyObject *__pyx_v_rank_detection, PyObject *__pyx_v_drop_tol); /* proto */
-static PyObject *__pyx_pf_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t_10factorize(struct __pyx_obj_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_SPQRContext_INT32_t_FLOAT64_t *__pyx_v_self, PyObject *__pyx_v_force, PyObject *__pyx_v_ordering, PyObject *__pyx_v_drop_tol); /* proto */
-static PyObject *__pyx_pf_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t_12spqr_statistics(struct __pyx_obj_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_SPQRContext_INT32_t_FLOAT64_t *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t_4SPQR_orderning(struct __pyx_obj_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_SPQRContext_INT32_t_FLOAT64_t *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t_6spqr_statistics(struct __pyx_obj_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_SPQRContext_INT32_t_FLOAT64_t *__pyx_v_self); /* proto */
 static int __pyx_pf_5numpy_7ndarray___getbuffer__(PyArrayObject *__pyx_v_self, Py_buffer *__pyx_v_info, int __pyx_v_flags); /* proto */
 static void __pyx_pf_5numpy_7ndarray_2__releasebuffer__(PyArrayObject *__pyx_v_self, Py_buffer *__pyx_v_info); /* proto */
 static PyObject *__pyx_tp_new_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_SPQRContext_INT32_t_FLOAT64_t(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
+static char __pyx_k_[] = "";
 static char __pyx_k_A[] = "A";
 static char __pyx_k_B[] = "B";
 static char __pyx_k_H[] = "H";
@@ -1739,29 +1733,22 @@ static char __pyx_k_q[] = "q";
 static char __pyx_k_Zd[] = "Zd";
 static char __pyx_k_Zf[] = "Zf";
 static char __pyx_k_Zg[] = "Zg";
-static char __pyx_k__4[] = "";
 static char __pyx_k_np[] = "np";
 static char __pyx_k_nnz[] = "nnz";
 static char __pyx_k_main[] = "__main__";
 static char __pyx_k_ncol[] = "ncol";
 static char __pyx_k_nrow[] = "nrow";
 static char __pyx_k_test[] = "__test__";
-static char __pyx_k_force[] = "force";
 static char __pyx_k_numpy[] = "numpy";
 static char __pyx_k_range[] = "range";
 static char __pyx_k_import[] = "__import__";
 static char __pyx_k_to_csc[] = "to_csc";
-static char __pyx_k_analyze[] = "analyze";
 static char __pyx_k_verbose[] = "verbose";
-static char __pyx_k_drop_tol[] = "drop_tol";
-static char __pyx_k_ordering[] = "ordering";
 static char __pyx_k_ValueError[] = "ValueError";
 static char __pyx_k_pyx_vtable[] = "__pyx_vtable__";
 static char __pyx_k_RuntimeError[] = "RuntimeError";
-static char __pyx_k_create_numeric[] = "create_numeric";
-static char __pyx_k_rank_detection[] = "rank_detection";
+static char __pyx_k_SPQR_orderning[] = "SPQR_orderning";
 static char __pyx_k_ORDERING_USED_s[] = "ORDERING USED: %s";
-static char __pyx_k_create_symbolic[] = "create_symbolic";
 static char __pyx_k_SPQR_ORDERING_AMD[] = "SPQR_ORDERING_AMD";
 static char __pyx_k_SPQR_ORDERING_BEST[] = "SPQR_ORDERING_BEST";
 static char __pyx_k_SPQR_ORDERING_FIXED[] = "SPQR_ORDERING_FIXED";
@@ -1779,6 +1766,7 @@ static char __pyx_k_Format_string_allocated_too_shor[] = "Format string allocate
 static char __pyx_k_Non_native_byte_order_not_suppor[] = "Non-native byte order not supported";
 static char __pyx_k_ndarray_is_not_Fortran_contiguou[] = "ndarray is not Fortran contiguous";
 static char __pyx_k_Format_string_allocated_too_shor_2[] = "Format string allocated too short.";
+static PyObject *__pyx_kp_s_;
 static PyObject *__pyx_n_s_A;
 static PyObject *__pyx_kp_u_Format_string_allocated_too_shor;
 static PyObject *__pyx_kp_u_Format_string_allocated_too_shor_2;
@@ -1796,13 +1784,8 @@ static PyObject *__pyx_n_s_SPQR_ORDERING_FIXED;
 static PyObject *__pyx_n_s_SPQR_ORDERING_GIVEN;
 static PyObject *__pyx_n_s_SPQR_ORDERING_METIS;
 static PyObject *__pyx_n_s_SPQR_ORDERING_NATURAL;
+static PyObject *__pyx_n_s_SPQR_orderning;
 static PyObject *__pyx_n_s_ValueError;
-static PyObject *__pyx_kp_s__4;
-static PyObject *__pyx_n_s_analyze;
-static PyObject *__pyx_n_s_create_numeric;
-static PyObject *__pyx_n_s_create_symbolic;
-static PyObject *__pyx_n_s_drop_tol;
-static PyObject *__pyx_n_s_force;
 static PyObject *__pyx_n_s_import;
 static PyObject *__pyx_n_s_main;
 static PyObject *__pyx_n_s_ncol;
@@ -1812,26 +1795,20 @@ static PyObject *__pyx_n_s_nnz;
 static PyObject *__pyx_n_s_np;
 static PyObject *__pyx_n_s_nrow;
 static PyObject *__pyx_n_s_numpy;
-static PyObject *__pyx_n_s_ordering;
 static PyObject *__pyx_n_s_pyx_vtable;
 static PyObject *__pyx_n_s_range;
-static PyObject *__pyx_n_s_rank_detection;
 static PyObject *__pyx_n_s_test;
 static PyObject *__pyx_n_s_to_csc;
 static PyObject *__pyx_kp_u_unknown_dtype_code_in_numpy_pxd;
 static PyObject *__pyx_n_s_verbose;
-static PyObject *__pyx_int_0;
-static PyObject *__pyx_k_;
-static PyObject *__pyx_k__2;
-static PyObject *__pyx_k__3;
+static PyObject *__pyx_tuple__2;
+static PyObject *__pyx_tuple__3;
+static PyObject *__pyx_tuple__4;
 static PyObject *__pyx_tuple__5;
 static PyObject *__pyx_tuple__6;
 static PyObject *__pyx_tuple__7;
-static PyObject *__pyx_tuple__8;
-static PyObject *__pyx_tuple__9;
-static PyObject *__pyx_tuple__10;
 
-/* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":165
+/* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":142
  *     # INIT
  *     ####################################################################################################################
  *     def __cinit__(self, LLSparseMatrix_INT32_t_FLOAT64_t A, bint verbose=False):             # <<<<<<<<<<<<<<
@@ -1874,7 +1851,7 @@ static int __pyx_pw_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__cinit__") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 165; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__cinit__") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 142; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -1886,20 +1863,20 @@ static int __pyx_pw_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64
     }
     __pyx_v_A = ((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT64_t_LLSparseMatrix_INT32_t_FLOAT64_t *)values[0]);
     if (values[1]) {
-      __pyx_v_verbose = __Pyx_PyObject_IsTrue(values[1]); if (unlikely((__pyx_v_verbose == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 165; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+      __pyx_v_verbose = __Pyx_PyObject_IsTrue(values[1]); if (unlikely((__pyx_v_verbose == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 142; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
     } else {
       __pyx_v_verbose = ((int)0);
     }
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__cinit__", 0, 1, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 165; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("__cinit__", 0, 1, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 142; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("cysparse.linalg.suitesparse.spqr.spqr_INT32_t_FLOAT64_t.SPQRContext_INT32_t_FLOAT64_t.__cinit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return -1;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_A), __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT64_t_LLSparseMatrix_INT32_t_FLOAT64_t, 1, "A", 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 165; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_A), __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT64_t_LLSparseMatrix_INT32_t_FLOAT64_t, 1, "A", 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 142; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_r = __pyx_pf_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t___cinit__(((struct __pyx_obj_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_SPQRContext_INT32_t_FLOAT64_t *)__pyx_v_self), __pyx_v_A, __pyx_v_verbose);
 
   /* function exit code */
@@ -1925,7 +1902,7 @@ static int __pyx_pf_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__cinit__", 0);
 
-  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":168
+  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":145
  *         """
  *         """
  *         self.A = A             # <<<<<<<<<<<<<<
@@ -1938,7 +1915,7 @@ static int __pyx_pf_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64
   __Pyx_DECREF(((PyObject *)__pyx_v_self->A));
   __pyx_v_self->A = __pyx_v_A;
 
-  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":169
+  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":146
  *         """
  *         self.A = A
  *         Py_INCREF(self.A)  # increase ref to object to avoid the user deleting it explicitly or implicitly             # <<<<<<<<<<<<<<
@@ -1950,53 +1927,53 @@ static int __pyx_pf_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64
   Py_INCREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":171
+  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":148
  *         Py_INCREF(self.A)  # increase ref to object to avoid the user deleting it explicitly or implicitly
  * 
  *         self.nrow = A.nrow             # <<<<<<<<<<<<<<
  *         self.ncol = A.ncol
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_A), __pyx_n_s_nrow); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 171; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_A), __pyx_n_s_nrow); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 148; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_2 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 171; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_2 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 148; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_self->nrow = __pyx_t_2;
 
-  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":172
+  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":149
  * 
  *         self.nrow = A.nrow
  *         self.ncol = A.ncol             # <<<<<<<<<<<<<<
  * 
  *         self.nnz = self.A.nnz
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_A), __pyx_n_s_ncol); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 172; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_A), __pyx_n_s_ncol); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 149; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_2 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 172; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_2 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 149; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_self->ncol = __pyx_t_2;
 
-  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":174
+  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":151
  *         self.ncol = A.ncol
  * 
  *         self.nnz = self.A.nnz             # <<<<<<<<<<<<<<
  * 
  *         self.csc_mat = self.A.to_csc()
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self->A), __pyx_n_s_nnz); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 174; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self->A), __pyx_n_s_nnz); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 151; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_2 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 174; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_2 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 151; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_self->nnz = __pyx_t_2;
 
-  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":176
+  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":153
  *         self.nnz = self.A.nnz
  * 
  *         self.csc_mat = self.A.to_csc()             # <<<<<<<<<<<<<<
  * 
  *         # CHOLMOD
  */
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self->A), __pyx_n_s_to_csc); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 176; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self->A), __pyx_n_s_to_csc); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 153; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_4 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_3))) {
@@ -2009,21 +1986,21 @@ static int __pyx_pf_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64
     }
   }
   if (__pyx_t_4) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_4); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 176; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_4); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 153; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   } else {
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 176; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 153; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_8cysparse_6sparse_16csc_mat_matrices_25csc_mat_INT32_t_FLOAT64_t_CSCSparseMatrix_INT32_t_FLOAT64_t))))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 176; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_8cysparse_6sparse_16csc_mat_matrices_25csc_mat_INT32_t_FLOAT64_t_CSCSparseMatrix_INT32_t_FLOAT64_t))))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 153; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GIVEREF(__pyx_t_1);
   __Pyx_GOTREF(__pyx_v_self->csc_mat);
   __Pyx_DECREF(((PyObject *)__pyx_v_self->csc_mat));
   __pyx_v_self->csc_mat = ((struct __pyx_obj_8cysparse_6sparse_16csc_mat_matrices_25csc_mat_INT32_t_FLOAT64_t_CSCSparseMatrix_INT32_t_FLOAT64_t *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":179
+  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":156
  * 
  *         # CHOLMOD
  *         self.common_struct = cholmod_common()             # <<<<<<<<<<<<<<
@@ -2032,7 +2009,7 @@ static int __pyx_pf_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64
  */
   __pyx_v_self->common_struct = __pyx_t_5;
 
-  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":180
+  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":157
  *         # CHOLMOD
  *         self.common_struct = cholmod_common()
  *         cholmod_start(&self.common_struct)             # <<<<<<<<<<<<<<
@@ -2041,7 +2018,7 @@ static int __pyx_pf_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64
  */
   cholmod_start((&__pyx_v_self->common_struct));
 
-  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":182
+  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":159
  *         cholmod_start(&self.common_struct)
  * 
  *         self.sparse_struct = cholmod_sparse()             # <<<<<<<<<<<<<<
@@ -2050,7 +2027,7 @@ static int __pyx_pf_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64
  */
   __pyx_v_self->sparse_struct = __pyx_t_6;
 
-  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":184
+  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":161
  *         self.sparse_struct = cholmod_sparse()
  *         # common attributes for real and complex matrices
  *         populate1_cholmod_sparse_struct_with_CSCSparseMatrix(&self.sparse_struct, self.csc_mat)             # <<<<<<<<<<<<<<
@@ -2059,12 +2036,12 @@ static int __pyx_pf_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64
  */
   __pyx_t_1 = ((PyObject *)__pyx_v_self->csc_mat);
   __Pyx_INCREF(__pyx_t_1);
-  __pyx_t_3 = __pyx_f_8cysparse_6linalg_11suitesparse_7cholmod_25cholmod_INT32_t_FLOAT64_t_populate1_cholmod_sparse_struct_with_CSCSparseMatrix((&__pyx_v_self->sparse_struct), ((struct __pyx_obj_8cysparse_6sparse_16csc_mat_matrices_25csc_mat_INT32_t_FLOAT64_t_CSCSparseMatrix_INT32_t_FLOAT64_t *)__pyx_t_1), NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 184; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __pyx_f_8cysparse_6linalg_11suitesparse_7cholmod_25cholmod_INT32_t_FLOAT64_t_populate1_cholmod_sparse_struct_with_CSCSparseMatrix((&__pyx_v_self->sparse_struct), ((struct __pyx_obj_8cysparse_6sparse_16csc_mat_matrices_25csc_mat_INT32_t_FLOAT64_t_CSCSparseMatrix_INT32_t_FLOAT64_t *)__pyx_t_1), NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 161; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":186
+  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":163
  *         populate1_cholmod_sparse_struct_with_CSCSparseMatrix(&self.sparse_struct, self.csc_mat)
  * 
  *         populate2_cholmod_sparse_struct_with_CSCSparseMatrix(&self.sparse_struct, self.csc_mat)             # <<<<<<<<<<<<<<
@@ -2073,12 +2050,12 @@ static int __pyx_pf_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64
  */
   __pyx_t_3 = ((PyObject *)__pyx_v_self->csc_mat);
   __Pyx_INCREF(__pyx_t_3);
-  __pyx_t_1 = __pyx_f_8cysparse_6linalg_11suitesparse_7cholmod_25cholmod_INT32_t_FLOAT64_t_populate2_cholmod_sparse_struct_with_CSCSparseMatrix((&__pyx_v_self->sparse_struct), ((struct __pyx_obj_8cysparse_6sparse_16csc_mat_matrices_25csc_mat_INT32_t_FLOAT64_t_CSCSparseMatrix_INT32_t_FLOAT64_t *)__pyx_t_3), NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 186; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_8cysparse_6linalg_11suitesparse_7cholmod_25cholmod_INT32_t_FLOAT64_t_populate2_cholmod_sparse_struct_with_CSCSparseMatrix((&__pyx_v_self->sparse_struct), ((struct __pyx_obj_8cysparse_6sparse_16csc_mat_matrices_25csc_mat_INT32_t_FLOAT64_t_CSCSparseMatrix_INT32_t_FLOAT64_t *)__pyx_t_3), NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 163; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":189
+  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":166
  * 
  * 
  *         self.factors_struct_initialized = False             # <<<<<<<<<<<<<<
@@ -2087,7 +2064,7 @@ static int __pyx_pf_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64
  */
   __pyx_v_self->factors_struct_initialized = 0;
 
-  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":190
+  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":167
  * 
  *         self.factors_struct_initialized = False
  *         self.numeric_computed = False             # <<<<<<<<<<<<<<
@@ -2096,7 +2073,7 @@ static int __pyx_pf_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64
  */
   __pyx_v_self->numeric_computed = 0;
 
-  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":191
+  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":168
  *         self.factors_struct_initialized = False
  *         self.numeric_computed = False
  *         self.factorized = False             # <<<<<<<<<<<<<<
@@ -2105,7 +2082,7 @@ static int __pyx_pf_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64
  */
   __pyx_v_self->factorized = 0;
 
-  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":165
+  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":142
  *     # INIT
  *     ####################################################################################################################
  *     def __cinit__(self, LLSparseMatrix_INT32_t_FLOAT64_t A, bint verbose=False):             # <<<<<<<<<<<<<<
@@ -2127,7 +2104,7 @@ static int __pyx_pf_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64
   return __pyx_r;
 }
 
-/* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":197
+/* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":174
  *     # FREE MEMORY
  *     ####################################################################################################################
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
@@ -2151,7 +2128,7 @@ static void __pyx_pf_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT6
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("__dealloc__", 0);
 
-  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":206
+  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":183
  * 
  * 
  *         cholmod_finish(&self.common_struct)             # <<<<<<<<<<<<<<
@@ -2160,7 +2137,7 @@ static void __pyx_pf_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT6
  */
   cholmod_finish((&__pyx_v_self->common_struct));
 
-  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":208
+  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":185
  *         cholmod_finish(&self.common_struct)
  * 
  *         Py_DECREF(self.A) # release ref             # <<<<<<<<<<<<<<
@@ -2172,7 +2149,7 @@ static void __pyx_pf_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT6
   Py_DECREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":197
+  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":174
  *     # FREE MEMORY
  *     ####################################################################################################################
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
@@ -2184,661 +2161,68 @@ static void __pyx_pf_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT6
   __Pyx_RefNannyFinishContext();
 }
 
-/* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":213
- *     # COMMON OPERATIONS
+/* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":195
+ *     # STATISTICS
  *     ####################################################################################################################
- *     cdef bint _create_symbolic(self, int ordering, bint allow_tol):             # <<<<<<<<<<<<<<
+ *     def SPQR_orderning(self):             # <<<<<<<<<<<<<<
  *         """
- *         Create the symbolic object.
- */
-
-static int __pyx_f_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t__create_symbolic(struct __pyx_obj_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_SPQRContext_INT32_t_FLOAT64_t *__pyx_v_self, int __pyx_v_ordering, int __pyx_v_allow_tol) {
-  int __pyx_v_status;
-  int __pyx_r;
-  __Pyx_RefNannyDeclarations
-  int __pyx_t_1;
-  __Pyx_RefNannySetupContext("_create_symbolic", 0);
-
-  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":221
- * 
- *         """
- *         cdef bint status = 1             # <<<<<<<<<<<<<<
- *         self.factors_struct_initialized = True
- * 
- */
-  __pyx_v_status = 1;
-
-  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":222
- *         """
- *         cdef bint status = 1
- *         self.factors_struct_initialized = True             # <<<<<<<<<<<<<<
- * 
- *         self.factors_struct = SuiteSparseQR_C_symbolic(ordering, allow_tol, &self.sparse_struct, &self.common_struct)
- */
-  __pyx_v_self->factors_struct_initialized = 1;
-
-  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":224
- *         self.factors_struct_initialized = True
- * 
- *         self.factors_struct = SuiteSparseQR_C_symbolic(ordering, allow_tol, &self.sparse_struct, &self.common_struct)             # <<<<<<<<<<<<<<
- * 
- *         if self.factors_struct is NULL:
- */
-  __pyx_v_self->factors_struct = SuiteSparseQR_C_symbolic(__pyx_v_ordering, __pyx_v_allow_tol, (&__pyx_v_self->sparse_struct), (&__pyx_v_self->common_struct));
-
-  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":226
- *         self.factors_struct = SuiteSparseQR_C_symbolic(ordering, allow_tol, &self.sparse_struct, &self.common_struct)
- * 
- *         if self.factors_struct is NULL:             # <<<<<<<<<<<<<<
- *             status = 0
- *             self.factors_struct_initialized = False
- */
-  __pyx_t_1 = ((__pyx_v_self->factors_struct == NULL) != 0);
-  if (__pyx_t_1) {
-
-    /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":227
- * 
- *         if self.factors_struct is NULL:
- *             status = 0             # <<<<<<<<<<<<<<
- *             self.factors_struct_initialized = False
- * 
- */
-    __pyx_v_status = 0;
-
-    /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":228
- *         if self.factors_struct is NULL:
- *             status = 0
- *             self.factors_struct_initialized = False             # <<<<<<<<<<<<<<
- * 
- *         return status
- */
-    __pyx_v_self->factors_struct_initialized = 0;
-    goto __pyx_L3;
-  }
-  __pyx_L3:;
-
-  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":230
- *             self.factors_struct_initialized = False
- * 
- *         return status             # <<<<<<<<<<<<<<
- * 
- * 
- */
-  __pyx_r = __pyx_v_status;
-  goto __pyx_L0;
-
-  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":213
- *     # COMMON OPERATIONS
- *     ####################################################################################################################
- *     cdef bint _create_symbolic(self, int ordering, bint allow_tol):             # <<<<<<<<<<<<<<
- *         """
- *         Create the symbolic object.
- */
-
-  /* function exit code */
-  __pyx_L0:;
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-/* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":233
- * 
- * 
- *     def create_symbolic(self, ordering=SPQR_ORDERING_BEST, rank_detection=False):             # <<<<<<<<<<<<<<
- *         """
- *         Create the symbolic object if it is not already in cache.
+ *         Returns the chosen ordering.
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t_5create_symbolic(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t_4create_symbolic[] = "\n        Create the symbolic object if it is not already in cache.\n\n        Args:\n            ordering:\n            rank_detection:\n\n        Note:\n            We don't allow to force recomputation of the ``factors_struct`` because we can not delete ``factors_struct``\n            without deleting at the same time ``common_struct``.\n\n        ";
-static PyObject *__pyx_pw_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t_5create_symbolic(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
-  PyObject *__pyx_v_ordering = 0;
-  PyObject *__pyx_v_rank_detection = 0;
-  int __pyx_lineno = 0;
-  const char *__pyx_filename = NULL;
-  int __pyx_clineno = 0;
+static PyObject *__pyx_pw_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t_5SPQR_orderning(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static char __pyx_doc_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t_4SPQR_orderning[] = "\n        Returns the chosen ordering.\n        ";
+static PyObject *__pyx_pw_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t_5SPQR_orderning(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("create_symbolic (wrapper)", 0);
-  {
-    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_ordering,&__pyx_n_s_rank_detection,0};
-    PyObject* values[2] = {0,0};
-    values[0] = __pyx_k_;
-    values[1] = ((PyObject *)Py_False);
-    if (unlikely(__pyx_kwds)) {
-      Py_ssize_t kw_args;
-      const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
-      switch (pos_args) {
-        case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
-        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
-        case  0: break;
-        default: goto __pyx_L5_argtuple_error;
-      }
-      kw_args = PyDict_Size(__pyx_kwds);
-      switch (pos_args) {
-        case  0:
-        if (kw_args > 0) {
-          PyObject* value = PyDict_GetItem(__pyx_kwds, __pyx_n_s_ordering);
-          if (value) { values[0] = value; kw_args--; }
-        }
-        case  1:
-        if (kw_args > 0) {
-          PyObject* value = PyDict_GetItem(__pyx_kwds, __pyx_n_s_rank_detection);
-          if (value) { values[1] = value; kw_args--; }
-        }
-      }
-      if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "create_symbolic") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 233; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
-      }
-    } else {
-      switch (PyTuple_GET_SIZE(__pyx_args)) {
-        case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
-        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
-        case  0: break;
-        default: goto __pyx_L5_argtuple_error;
-      }
-    }
-    __pyx_v_ordering = values[0];
-    __pyx_v_rank_detection = values[1];
-  }
-  goto __pyx_L4_argument_unpacking_done;
-  __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("create_symbolic", 0, 0, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 233; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
-  __pyx_L3_error:;
-  __Pyx_AddTraceback("cysparse.linalg.suitesparse.spqr.spqr_INT32_t_FLOAT64_t.SPQRContext_INT32_t_FLOAT64_t.create_symbolic", __pyx_clineno, __pyx_lineno, __pyx_filename);
-  __Pyx_RefNannyFinishContext();
-  return NULL;
-  __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t_4create_symbolic(((struct __pyx_obj_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_SPQRContext_INT32_t_FLOAT64_t *)__pyx_v_self), __pyx_v_ordering, __pyx_v_rank_detection);
+  __Pyx_RefNannySetupContext("SPQR_orderning (wrapper)", 0);
+  __pyx_r = __pyx_pf_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t_4SPQR_orderning(((struct __pyx_obj_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_SPQRContext_INT32_t_FLOAT64_t *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t_4create_symbolic(struct __pyx_obj_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_SPQRContext_INT32_t_FLOAT64_t *__pyx_v_self, PyObject *__pyx_v_ordering, PyObject *__pyx_v_rank_detection) {
-  CYTHON_UNUSED int __pyx_v_status;
-  PyObject *__pyx_r = NULL;
-  __Pyx_RefNannyDeclarations
-  int __pyx_t_1;
-  int __pyx_t_2;
-  int __pyx_lineno = 0;
-  const char *__pyx_filename = NULL;
-  int __pyx_clineno = 0;
-  __Pyx_RefNannySetupContext("create_symbolic", 0);
-
-  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":246
- * 
- *         """
- *         if self.factors_struct_initialized:             # <<<<<<<<<<<<<<
- *             return
- * 
- */
-  __pyx_t_1 = (__pyx_v_self->factors_struct_initialized != 0);
-  if (__pyx_t_1) {
-
-    /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":247
- *         """
- *         if self.factors_struct_initialized:
- *             return             # <<<<<<<<<<<<<<
- * 
- *         cdef bint status = self._create_symbolic(ordering, rank_detection)
- */
-    __Pyx_XDECREF(__pyx_r);
-    __pyx_r = Py_None; __Pyx_INCREF(Py_None);
-    goto __pyx_L0;
-  }
-
-  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":249
- *             return
- * 
- *         cdef bint status = self._create_symbolic(ordering, rank_detection)             # <<<<<<<<<<<<<<
- * 
- *         # TODO: raise exception
- */
-  __pyx_t_2 = __Pyx_PyInt_As_int(__pyx_v_ordering); if (unlikely((__pyx_t_2 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 249; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_v_rank_detection); if (unlikely((__pyx_t_1 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 249; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_v_status = ((struct __pyx_vtabstruct_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_SPQRContext_INT32_t_FLOAT64_t *)__pyx_v_self->__pyx_vtab)->_create_symbolic(__pyx_v_self, __pyx_t_2, __pyx_t_1);
-
-  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":233
- * 
- * 
- *     def create_symbolic(self, ordering=SPQR_ORDERING_BEST, rank_detection=False):             # <<<<<<<<<<<<<<
- *         """
- *         Create the symbolic object if it is not already in cache.
- */
-
-  /* function exit code */
-  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
-  goto __pyx_L0;
-  __pyx_L1_error:;
-  __Pyx_AddTraceback("cysparse.linalg.suitesparse.spqr.spqr_INT32_t_FLOAT64_t.SPQRContext_INT32_t_FLOAT64_t.create_symbolic", __pyx_clineno, __pyx_lineno, __pyx_filename);
-  __pyx_r = NULL;
-  __pyx_L0:;
-  __Pyx_XGIVEREF(__pyx_r);
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-/* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":253
- *         # TODO: raise exception
- * 
- *     cdef bint _create_numeric(self, double drop_tol):             # <<<<<<<<<<<<<<
- *         """
- *         Create the numeric object.
- */
-
-static int __pyx_f_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t__create_numeric(struct __pyx_obj_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_SPQRContext_INT32_t_FLOAT64_t *__pyx_v_self, double __pyx_v_drop_tol) {
-  int __pyx_v_status;
-  int __pyx_r;
-  __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("_create_numeric", 0);
-
-  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":265
- * 
- *         """
- *         cdef int status = 0             # <<<<<<<<<<<<<<
- * 
- *         SuiteSparseQR_C_numeric(drop_tol, &self.sparse_struct, self.factors_struct, &self.common_struct)
- */
-  __pyx_v_status = 0;
-
-  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":267
- *         cdef int status = 0
- * 
- *         SuiteSparseQR_C_numeric(drop_tol, &self.sparse_struct, self.factors_struct, &self.common_struct)             # <<<<<<<<<<<<<<
- *         self.numeric_computed = True
- * 
- */
-  SuiteSparseQR_C_numeric(__pyx_v_drop_tol, (&__pyx_v_self->sparse_struct), __pyx_v_self->factors_struct, (&__pyx_v_self->common_struct));
-
-  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":268
- * 
- *         SuiteSparseQR_C_numeric(drop_tol, &self.sparse_struct, self.factors_struct, &self.common_struct)
- *         self.numeric_computed = True             # <<<<<<<<<<<<<<
- * 
- *         return status
- */
-  __pyx_v_self->numeric_computed = 1;
-
-  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":270
- *         self.numeric_computed = True
- * 
- *         return status             # <<<<<<<<<<<<<<
- * 
- *     def create_numeric(self, drop_tol=0):
- */
-  __pyx_r = __pyx_v_status;
-  goto __pyx_L0;
-
-  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":253
- *         # TODO: raise exception
- * 
- *     cdef bint _create_numeric(self, double drop_tol):             # <<<<<<<<<<<<<<
- *         """
- *         Create the numeric object.
- */
-
-  /* function exit code */
-  __pyx_L0:;
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-/* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":272
- *         return status
- * 
- *     def create_numeric(self, drop_tol=0):             # <<<<<<<<<<<<<<
- *         """
- *         Create the numeric object if it is not already in cache.
- */
-
-/* Python wrapper */
-static PyObject *__pyx_pw_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t_7create_numeric(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t_6create_numeric[] = "\n        Create the numeric object if it is not already in cache.\n\n        Args:\n\n        ";
-static PyObject *__pyx_pw_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t_7create_numeric(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
-  PyObject *__pyx_v_drop_tol = 0;
-  int __pyx_lineno = 0;
-  const char *__pyx_filename = NULL;
-  int __pyx_clineno = 0;
-  PyObject *__pyx_r = 0;
-  __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("create_numeric (wrapper)", 0);
-  {
-    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_drop_tol,0};
-    PyObject* values[1] = {0};
-    values[0] = ((PyObject *)__pyx_int_0);
-    if (unlikely(__pyx_kwds)) {
-      Py_ssize_t kw_args;
-      const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
-      switch (pos_args) {
-        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
-        case  0: break;
-        default: goto __pyx_L5_argtuple_error;
-      }
-      kw_args = PyDict_Size(__pyx_kwds);
-      switch (pos_args) {
-        case  0:
-        if (kw_args > 0) {
-          PyObject* value = PyDict_GetItem(__pyx_kwds, __pyx_n_s_drop_tol);
-          if (value) { values[0] = value; kw_args--; }
-        }
-      }
-      if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "create_numeric") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 272; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
-      }
-    } else {
-      switch (PyTuple_GET_SIZE(__pyx_args)) {
-        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
-        case  0: break;
-        default: goto __pyx_L5_argtuple_error;
-      }
-    }
-    __pyx_v_drop_tol = values[0];
-  }
-  goto __pyx_L4_argument_unpacking_done;
-  __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("create_numeric", 0, 0, 1, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 272; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
-  __pyx_L3_error:;
-  __Pyx_AddTraceback("cysparse.linalg.suitesparse.spqr.spqr_INT32_t_FLOAT64_t.SPQRContext_INT32_t_FLOAT64_t.create_numeric", __pyx_clineno, __pyx_lineno, __pyx_filename);
-  __Pyx_RefNannyFinishContext();
-  return NULL;
-  __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t_6create_numeric(((struct __pyx_obj_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_SPQRContext_INT32_t_FLOAT64_t *)__pyx_v_self), __pyx_v_drop_tol);
-
-  /* function exit code */
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-static PyObject *__pyx_pf_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t_6create_numeric(struct __pyx_obj_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_SPQRContext_INT32_t_FLOAT64_t *__pyx_v_self, PyObject *__pyx_v_drop_tol) {
-  CYTHON_UNUSED int __pyx_v_status;
-  PyObject *__pyx_r = NULL;
-  __Pyx_RefNannyDeclarations
-  int __pyx_t_1;
-  PyObject *__pyx_t_2 = NULL;
-  PyObject *__pyx_t_3 = NULL;
-  PyObject *__pyx_t_4 = NULL;
-  double __pyx_t_5;
-  int __pyx_lineno = 0;
-  const char *__pyx_filename = NULL;
-  int __pyx_clineno = 0;
-  __Pyx_RefNannySetupContext("create_numeric", 0);
-
-  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":279
- * 
- *         """
- *         if self.numeric_computed:             # <<<<<<<<<<<<<<
- *             return
- * 
- */
-  __pyx_t_1 = (__pyx_v_self->numeric_computed != 0);
-  if (__pyx_t_1) {
-
-    /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":280
- *         """
- *         if self.numeric_computed:
- *             return             # <<<<<<<<<<<<<<
- * 
- *         self.create_symbolic()
- */
-    __Pyx_XDECREF(__pyx_r);
-    __pyx_r = Py_None; __Pyx_INCREF(Py_None);
-    goto __pyx_L0;
-  }
-
-  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":282
- *             return
- * 
- *         self.create_symbolic()             # <<<<<<<<<<<<<<
- * 
- *         cdef int status = self._create_numeric(drop_tol)
- */
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_create_symbolic); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 282; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = NULL;
-  if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_3))) {
-    __pyx_t_4 = PyMethod_GET_SELF(__pyx_t_3);
-    if (likely(__pyx_t_4)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
-      __Pyx_INCREF(__pyx_t_4);
-      __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_3, function);
-    }
-  }
-  if (__pyx_t_4) {
-    __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_4); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 282; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  } else {
-    __pyx_t_2 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 282; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  }
-  __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-
-  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":284
- *         self.create_symbolic()
- * 
- *         cdef int status = self._create_numeric(drop_tol)             # <<<<<<<<<<<<<<
- * 
- *         # TODO: raise exception on error
- */
-  __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_v_drop_tol); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 284; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_v_status = ((struct __pyx_vtabstruct_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_SPQRContext_INT32_t_FLOAT64_t *)__pyx_v_self->__pyx_vtab)->_create_numeric(__pyx_v_self, __pyx_t_5);
-
-  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":272
- *         return status
- * 
- *     def create_numeric(self, drop_tol=0):             # <<<<<<<<<<<<<<
- *         """
- *         Create the numeric object if it is not already in cache.
- */
-
-  /* function exit code */
-  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
-  goto __pyx_L0;
-  __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_2);
-  __Pyx_XDECREF(__pyx_t_3);
-  __Pyx_XDECREF(__pyx_t_4);
-  __Pyx_AddTraceback("cysparse.linalg.suitesparse.spqr.spqr_INT32_t_FLOAT64_t.SPQRContext_INT32_t_FLOAT64_t.create_numeric", __pyx_clineno, __pyx_lineno, __pyx_filename);
-  __pyx_r = NULL;
-  __pyx_L0:;
-  __Pyx_XGIVEREF(__pyx_r);
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-/* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":289
- * 
- * 
- *     def analyze(self, ordering=SPQR_ORDERING_BEST, rank_detection=False, drop_tol=0):             # <<<<<<<<<<<<<<
- *         self.create_symbolic(ordering, rank_detection)
- *         self.create_numeric(drop_tol)
- */
-
-/* Python wrapper */
-static PyObject *__pyx_pw_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t_9analyze(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyObject *__pyx_pw_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t_9analyze(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
-  PyObject *__pyx_v_ordering = 0;
-  PyObject *__pyx_v_rank_detection = 0;
-  PyObject *__pyx_v_drop_tol = 0;
-  int __pyx_lineno = 0;
-  const char *__pyx_filename = NULL;
-  int __pyx_clineno = 0;
-  PyObject *__pyx_r = 0;
-  __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("analyze (wrapper)", 0);
-  {
-    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_ordering,&__pyx_n_s_rank_detection,&__pyx_n_s_drop_tol,0};
-    PyObject* values[3] = {0,0,0};
-    values[0] = __pyx_k__2;
-    values[1] = ((PyObject *)Py_False);
-    values[2] = ((PyObject *)__pyx_int_0);
-    if (unlikely(__pyx_kwds)) {
-      Py_ssize_t kw_args;
-      const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
-      switch (pos_args) {
-        case  3: values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
-        case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
-        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
-        case  0: break;
-        default: goto __pyx_L5_argtuple_error;
-      }
-      kw_args = PyDict_Size(__pyx_kwds);
-      switch (pos_args) {
-        case  0:
-        if (kw_args > 0) {
-          PyObject* value = PyDict_GetItem(__pyx_kwds, __pyx_n_s_ordering);
-          if (value) { values[0] = value; kw_args--; }
-        }
-        case  1:
-        if (kw_args > 0) {
-          PyObject* value = PyDict_GetItem(__pyx_kwds, __pyx_n_s_rank_detection);
-          if (value) { values[1] = value; kw_args--; }
-        }
-        case  2:
-        if (kw_args > 0) {
-          PyObject* value = PyDict_GetItem(__pyx_kwds, __pyx_n_s_drop_tol);
-          if (value) { values[2] = value; kw_args--; }
-        }
-      }
-      if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "analyze") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 289; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
-      }
-    } else {
-      switch (PyTuple_GET_SIZE(__pyx_args)) {
-        case  3: values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
-        case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
-        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
-        case  0: break;
-        default: goto __pyx_L5_argtuple_error;
-      }
-    }
-    __pyx_v_ordering = values[0];
-    __pyx_v_rank_detection = values[1];
-    __pyx_v_drop_tol = values[2];
-  }
-  goto __pyx_L4_argument_unpacking_done;
-  __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("analyze", 0, 0, 3, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 289; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
-  __pyx_L3_error:;
-  __Pyx_AddTraceback("cysparse.linalg.suitesparse.spqr.spqr_INT32_t_FLOAT64_t.SPQRContext_INT32_t_FLOAT64_t.analyze", __pyx_clineno, __pyx_lineno, __pyx_filename);
-  __Pyx_RefNannyFinishContext();
-  return NULL;
-  __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t_8analyze(((struct __pyx_obj_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_SPQRContext_INT32_t_FLOAT64_t *)__pyx_v_self), __pyx_v_ordering, __pyx_v_rank_detection, __pyx_v_drop_tol);
-
-  /* function exit code */
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-static PyObject *__pyx_pf_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t_8analyze(struct __pyx_obj_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_SPQRContext_INT32_t_FLOAT64_t *__pyx_v_self, PyObject *__pyx_v_ordering, PyObject *__pyx_v_rank_detection, PyObject *__pyx_v_drop_tol) {
+static PyObject *__pyx_pf_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t_4SPQR_orderning(struct __pyx_obj_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_SPQRContext_INT32_t_FLOAT64_t *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   PyObject *__pyx_t_2 = NULL;
-  PyObject *__pyx_t_3 = NULL;
-  Py_ssize_t __pyx_t_4;
-  PyObject *__pyx_t_5 = NULL;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
-  __Pyx_RefNannySetupContext("analyze", 0);
+  __Pyx_RefNannySetupContext("SPQR_orderning", 0);
 
-  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":290
+  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":199
+ *         Returns the chosen ordering.
+ *         """
+ *         return ORDERING_METHOD_LIST[self.common_struct.SPQR_istat[7]]             # <<<<<<<<<<<<<<
  * 
- *     def analyze(self, ordering=SPQR_ORDERING_BEST, rank_detection=False, drop_tol=0):
- *         self.create_symbolic(ordering, rank_detection)             # <<<<<<<<<<<<<<
- *         self.create_numeric(drop_tol)
- * 
+ *     cdef _SPQR_istat(self):
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_create_symbolic); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 290; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = NULL;
-  __pyx_t_4 = 0;
-  if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_2))) {
-    __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_2);
-    if (likely(__pyx_t_3)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
-      __Pyx_INCREF(__pyx_t_3);
-      __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_2, function);
-      __pyx_t_4 = 1;
-    }
-  }
-  __pyx_t_5 = PyTuple_New(2+__pyx_t_4); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 290; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_5);
-  if (__pyx_t_3) {
-    PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_3); __Pyx_GIVEREF(__pyx_t_3); __pyx_t_3 = NULL;
-  }
-  __Pyx_INCREF(__pyx_v_ordering);
-  PyTuple_SET_ITEM(__pyx_t_5, 0+__pyx_t_4, __pyx_v_ordering);
-  __Pyx_GIVEREF(__pyx_v_ordering);
-  __Pyx_INCREF(__pyx_v_rank_detection);
-  PyTuple_SET_ITEM(__pyx_t_5, 1+__pyx_t_4, __pyx_v_rank_detection);
-  __Pyx_GIVEREF(__pyx_v_rank_detection);
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 290; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_ORDERING_METHOD_LIST); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 199; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-
-  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":291
- *     def analyze(self, ordering=SPQR_ORDERING_BEST, rank_detection=False, drop_tol=0):
- *         self.create_symbolic(ordering, rank_detection)
- *         self.create_numeric(drop_tol)             # <<<<<<<<<<<<<<
- * 
- *         # TODO: raise exception...
- */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_create_numeric); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 291; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_GetItemInt(__pyx_t_1, (__pyx_v_self->common_struct.SPQR_istat[7]), __pyx_t_8cysparse_6linalg_11suitesparse_7cholmod_25cholmod_INT32_t_FLOAT64_t_SuiteSparse_long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 199; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_5 = NULL;
-  if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_2))) {
-    __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_2);
-    if (likely(__pyx_t_5)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
-      __Pyx_INCREF(__pyx_t_5);
-      __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_2, function);
-    }
-  }
-  if (!__pyx_t_5) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_drop_tol); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 291; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_GOTREF(__pyx_t_1);
-  } else {
-    __pyx_t_3 = PyTuple_New(1+1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 291; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_GOTREF(__pyx_t_3);
-    PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_5); __Pyx_GIVEREF(__pyx_t_5); __pyx_t_5 = NULL;
-    __Pyx_INCREF(__pyx_v_drop_tol);
-    PyTuple_SET_ITEM(__pyx_t_3, 0+1, __pyx_v_drop_tol);
-    __Pyx_GIVEREF(__pyx_v_drop_tol);
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_3, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 291; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_GOTREF(__pyx_t_1);
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  }
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_r = __pyx_t_2;
+  __pyx_t_2 = 0;
+  goto __pyx_L0;
 
-  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":289
- * 
- * 
- *     def analyze(self, ordering=SPQR_ORDERING_BEST, rank_detection=False, drop_tol=0):             # <<<<<<<<<<<<<<
- *         self.create_symbolic(ordering, rank_detection)
- *         self.create_numeric(drop_tol)
+  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":195
+ *     # STATISTICS
+ *     ####################################################################################################################
+ *     def SPQR_orderning(self):             # <<<<<<<<<<<<<<
+ *         """
+ *         Returns the chosen ordering.
  */
 
   /* function exit code */
-  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
-  goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_2);
-  __Pyx_XDECREF(__pyx_t_3);
-  __Pyx_XDECREF(__pyx_t_5);
-  __Pyx_AddTraceback("cysparse.linalg.suitesparse.spqr.spqr_INT32_t_FLOAT64_t.SPQRContext_INT32_t_FLOAT64_t.analyze", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("cysparse.linalg.suitesparse.spqr.spqr_INT32_t_FLOAT64_t.SPQRContext_INT32_t_FLOAT64_t.SPQR_orderning", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -2846,235 +2230,12 @@ static PyObject *__pyx_pf_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_F
   return __pyx_r;
 }
 
-/* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":296
- * 
- * 
- *     def factorize(self, force = False, ordering=SPQR_ORDERING_BEST, drop_tol=0):             # <<<<<<<<<<<<<<
- *         self.factorized = True
- * 
- */
-
-/* Python wrapper */
-static PyObject *__pyx_pw_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t_11factorize(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyObject *__pyx_pw_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t_11factorize(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
-  PyObject *__pyx_v_force = 0;
-  PyObject *__pyx_v_ordering = 0;
-  PyObject *__pyx_v_drop_tol = 0;
-  int __pyx_lineno = 0;
-  const char *__pyx_filename = NULL;
-  int __pyx_clineno = 0;
-  PyObject *__pyx_r = 0;
-  __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("factorize (wrapper)", 0);
-  {
-    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_force,&__pyx_n_s_ordering,&__pyx_n_s_drop_tol,0};
-    PyObject* values[3] = {0,0,0};
-    values[0] = ((PyObject *)Py_False);
-    values[1] = __pyx_k__3;
-    values[2] = ((PyObject *)__pyx_int_0);
-    if (unlikely(__pyx_kwds)) {
-      Py_ssize_t kw_args;
-      const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
-      switch (pos_args) {
-        case  3: values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
-        case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
-        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
-        case  0: break;
-        default: goto __pyx_L5_argtuple_error;
-      }
-      kw_args = PyDict_Size(__pyx_kwds);
-      switch (pos_args) {
-        case  0:
-        if (kw_args > 0) {
-          PyObject* value = PyDict_GetItem(__pyx_kwds, __pyx_n_s_force);
-          if (value) { values[0] = value; kw_args--; }
-        }
-        case  1:
-        if (kw_args > 0) {
-          PyObject* value = PyDict_GetItem(__pyx_kwds, __pyx_n_s_ordering);
-          if (value) { values[1] = value; kw_args--; }
-        }
-        case  2:
-        if (kw_args > 0) {
-          PyObject* value = PyDict_GetItem(__pyx_kwds, __pyx_n_s_drop_tol);
-          if (value) { values[2] = value; kw_args--; }
-        }
-      }
-      if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "factorize") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 296; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
-      }
-    } else {
-      switch (PyTuple_GET_SIZE(__pyx_args)) {
-        case  3: values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
-        case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
-        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
-        case  0: break;
-        default: goto __pyx_L5_argtuple_error;
-      }
-    }
-    __pyx_v_force = values[0];
-    __pyx_v_ordering = values[1];
-    __pyx_v_drop_tol = values[2];
-  }
-  goto __pyx_L4_argument_unpacking_done;
-  __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("factorize", 0, 0, 3, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 296; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
-  __pyx_L3_error:;
-  __Pyx_AddTraceback("cysparse.linalg.suitesparse.spqr.spqr_INT32_t_FLOAT64_t.SPQRContext_INT32_t_FLOAT64_t.factorize", __pyx_clineno, __pyx_lineno, __pyx_filename);
-  __Pyx_RefNannyFinishContext();
-  return NULL;
-  __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t_10factorize(((struct __pyx_obj_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_SPQRContext_INT32_t_FLOAT64_t *)__pyx_v_self), __pyx_v_force, __pyx_v_ordering, __pyx_v_drop_tol);
-
-  /* function exit code */
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-static PyObject *__pyx_pf_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t_10factorize(struct __pyx_obj_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_SPQRContext_INT32_t_FLOAT64_t *__pyx_v_self, PyObject *__pyx_v_force, PyObject *__pyx_v_ordering, PyObject *__pyx_v_drop_tol) {
-  CYTHON_UNUSED long __pyx_v_status;
-  PyObject *__pyx_r = NULL;
-  __Pyx_RefNannyDeclarations
-  PyObject *__pyx_t_1 = NULL;
-  PyObject *__pyx_t_2 = NULL;
-  PyObject *__pyx_t_3 = NULL;
-  int __pyx_t_4;
-  int __pyx_t_5;
-  int __pyx_t_6;
-  double __pyx_t_7;
-  int __pyx_lineno = 0;
-  const char *__pyx_filename = NULL;
-  int __pyx_clineno = 0;
-  __Pyx_RefNannySetupContext("factorize", 0);
-
-  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":297
- * 
- *     def factorize(self, force = False, ordering=SPQR_ORDERING_BEST, drop_tol=0):
- *         self.factorized = True             # <<<<<<<<<<<<<<
- * 
- *         # if needed
- */
-  __pyx_v_self->factorized = 1;
-
-  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":300
- * 
- *         # if needed
- *         self.analyze(ordering=ordering)             # <<<<<<<<<<<<<<
- * 
- *         if not self.factorized or force:
- */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_analyze); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 300; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyDict_New(); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 300; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_ordering, __pyx_v_ordering) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 300; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 300; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-
-  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":302
- *         self.analyze(ordering=ordering)
- * 
- *         if not self.factorized or force:             # <<<<<<<<<<<<<<
- *             self.factors_struct = SuiteSparseQR_C_factorize(ordering, drop_tol, &self.sparse_struct, &self.common_struct)
- * 
- */
-  __pyx_t_5 = ((!(__pyx_v_self->factorized != 0)) != 0);
-  if (!__pyx_t_5) {
-  } else {
-    __pyx_t_4 = __pyx_t_5;
-    goto __pyx_L4_bool_binop_done;
-  }
-  __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_v_force); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 302; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_4 = __pyx_t_5;
-  __pyx_L4_bool_binop_done:;
-  if (__pyx_t_4) {
-
-    /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":303
- * 
- *         if not self.factorized or force:
- *             self.factors_struct = SuiteSparseQR_C_factorize(ordering, drop_tol, &self.sparse_struct, &self.common_struct)             # <<<<<<<<<<<<<<
- * 
- *         if self.factors_struct is NULL:
- */
-    __pyx_t_6 = __Pyx_PyInt_As_int(__pyx_v_ordering); if (unlikely((__pyx_t_6 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 303; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __pyx_t_7 = __pyx_PyFloat_AsDouble(__pyx_v_drop_tol); if (unlikely((__pyx_t_7 == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 303; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __pyx_v_self->factors_struct = SuiteSparseQR_C_factorize(__pyx_t_6, __pyx_t_7, (&__pyx_v_self->sparse_struct), (&__pyx_v_self->common_struct));
-    goto __pyx_L3;
-  }
-  __pyx_L3:;
-
-  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":305
- *             self.factors_struct = SuiteSparseQR_C_factorize(ordering, drop_tol, &self.sparse_struct, &self.common_struct)
- * 
- *         if self.factors_struct is NULL:             # <<<<<<<<<<<<<<
- *             status = 0
- *             self.factors_struct_initialized = False
- */
-  __pyx_t_4 = ((__pyx_v_self->factors_struct == NULL) != 0);
-  if (__pyx_t_4) {
-
-    /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":306
- * 
- *         if self.factors_struct is NULL:
- *             status = 0             # <<<<<<<<<<<<<<
- *             self.factors_struct_initialized = False
- *             self.factorized = False
- */
-    __pyx_v_status = 0;
-
-    /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":307
- *         if self.factors_struct is NULL:
- *             status = 0
- *             self.factors_struct_initialized = False             # <<<<<<<<<<<<<<
- *             self.factorized = False
- * 
- */
-    __pyx_v_self->factors_struct_initialized = 0;
-
-    /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":308
- *             status = 0
- *             self.factors_struct_initialized = False
- *             self.factorized = False             # <<<<<<<<<<<<<<
- * 
- * 
- */
-    __pyx_v_self->factorized = 0;
-    goto __pyx_L6;
-  }
-  __pyx_L6:;
-
-  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":296
- * 
- * 
- *     def factorize(self, force = False, ordering=SPQR_ORDERING_BEST, drop_tol=0):             # <<<<<<<<<<<<<<
- *         self.factorized = True
- * 
- */
-
-  /* function exit code */
-  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
-  goto __pyx_L0;
-  __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_XDECREF(__pyx_t_2);
-  __Pyx_XDECREF(__pyx_t_3);
-  __Pyx_AddTraceback("cysparse.linalg.suitesparse.spqr.spqr_INT32_t_FLOAT64_t.SPQRContext_INT32_t_FLOAT64_t.factorize", __pyx_clineno, __pyx_lineno, __pyx_filename);
-  __pyx_r = NULL;
-  __pyx_L0:;
-  __Pyx_XGIVEREF(__pyx_r);
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-/* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":314
- *         #return status
+/* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":201
+ *         return ORDERING_METHOD_LIST[self.common_struct.SPQR_istat[7]]
  * 
  *     cdef _SPQR_istat(self):             # <<<<<<<<<<<<<<
- *         s = ''
- * 
+ *         """
+ *         Main statistic method for SPQR, :program:`Cython` version.
  */
 
 static PyObject *__pyx_f_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t__SPQR_istat(struct __pyx_obj_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_SPQRContext_INT32_t_FLOAT64_t *__pyx_v_self) {
@@ -3083,44 +2244,60 @@ static PyObject *__pyx_f_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FL
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("_SPQR_istat", 0);
 
-  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":315
- * 
- *     cdef _SPQR_istat(self):
+  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":205
+ *         Main statistic method for SPQR, :program:`Cython` version.
+ *         """
  *         s = ''             # <<<<<<<<<<<<<<
  * 
  *         # ordering
  */
-  __Pyx_INCREF(__pyx_kp_s__4);
-  __pyx_v_s = __pyx_kp_s__4;
+  __Pyx_INCREF(__pyx_kp_s_);
+  __pyx_v_s = __pyx_kp_s_;
 
-  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":318
+  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":208
  * 
  *         # ordering
- *         s += 'ORDERING USED: %s' % ORDERING_METHOD_LIST[self.common_struct.SPQR_istat[7]]             # <<<<<<<<<<<<<<
+ *         s += 'ORDERING USED: %s' % self.SPQR_orderning()             # <<<<<<<<<<<<<<
  * 
  *         return s
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_ORDERING_METHOD_LIST); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 318; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_GetItemInt(__pyx_t_1, (__pyx_v_self->common_struct.SPQR_istat[7]), __pyx_t_8cysparse_6linalg_11suitesparse_7cholmod_25cholmod_INT32_t_FLOAT64_t_SuiteSparse_long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 318; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_SPQR_orderning); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 208; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyString_Format(__pyx_kp_s_ORDERING_USED_s, __pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 318; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = NULL;
+  if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_2))) {
+    __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_2);
+    if (likely(__pyx_t_3)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
+      __Pyx_INCREF(__pyx_t_3);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_2, function);
+    }
+  }
+  if (__pyx_t_3) {
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 208; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  } else {
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 208; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  }
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyNumber_InPlaceAdd(__pyx_v_s, __pyx_t_1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 318; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyString_Format(__pyx_kp_s_ORDERING_USED_s, __pyx_t_1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 208; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __Pyx_DECREF_SET(__pyx_v_s, __pyx_t_2);
-  __pyx_t_2 = 0;
+  __pyx_t_1 = PyNumber_InPlaceAdd(__pyx_v_s, __pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 208; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF_SET(__pyx_v_s, __pyx_t_1);
+  __pyx_t_1 = 0;
 
-  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":320
- *         s += 'ORDERING USED: %s' % ORDERING_METHOD_LIST[self.common_struct.SPQR_istat[7]]
+  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":210
+ *         s += 'ORDERING USED: %s' % self.SPQR_orderning()
  * 
  *         return s             # <<<<<<<<<<<<<<
  * 
@@ -3131,18 +2308,19 @@ static PyObject *__pyx_f_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FL
   __pyx_r = __pyx_v_s;
   goto __pyx_L0;
 
-  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":314
- *         #return status
+  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":201
+ *         return ORDERING_METHOD_LIST[self.common_struct.SPQR_istat[7]]
  * 
  *     cdef _SPQR_istat(self):             # <<<<<<<<<<<<<<
- *         s = ''
- * 
+ *         """
+ *         Main statistic method for SPQR, :program:`Cython` version.
  */
 
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
   __Pyx_AddTraceback("cysparse.linalg.suitesparse.spqr.spqr_INT32_t_FLOAT64_t.SPQRContext_INT32_t_FLOAT64_t._SPQR_istat", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = 0;
   __pyx_L0:;
@@ -3152,28 +2330,29 @@ static PyObject *__pyx_f_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FL
   return __pyx_r;
 }
 
-/* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":322
+/* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":212
  *         return s
  * 
  *     def spqr_statistics(self):             # <<<<<<<<<<<<<<
- *         # TODO: todo
- *         return self. _SPQR_istat()
+ *         """
+ *         Main statistic for SPQR.
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t_13spqr_statistics(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t_13spqr_statistics(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t_7spqr_statistics(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static char __pyx_doc_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t_6spqr_statistics[] = "\n        Main statistic for SPQR.\n\n        ";
+static PyObject *__pyx_pw_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t_7spqr_statistics(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("spqr_statistics (wrapper)", 0);
-  __pyx_r = __pyx_pf_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t_12spqr_statistics(((struct __pyx_obj_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_SPQRContext_INT32_t_FLOAT64_t *)__pyx_v_self));
+  __pyx_r = __pyx_pf_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t_6spqr_statistics(((struct __pyx_obj_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_SPQRContext_INT32_t_FLOAT64_t *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t_12spqr_statistics(struct __pyx_obj_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_SPQRContext_INT32_t_FLOAT64_t *__pyx_v_self) {
+static PyObject *__pyx_pf_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t_6spqr_statistics(struct __pyx_obj_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_SPQRContext_INT32_t_FLOAT64_t *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -3182,26 +2361,24 @@ static PyObject *__pyx_pf_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_F
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("spqr_statistics", 0);
 
-  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":324
- *     def spqr_statistics(self):
+  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":218
+ *         """
  *         # TODO: todo
  *         return self. _SPQR_istat()             # <<<<<<<<<<<<<<
- * 
- * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((struct __pyx_vtabstruct_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_SPQRContext_INT32_t_FLOAT64_t *)__pyx_v_self->__pyx_vtab)->_SPQR_istat(__pyx_v_self); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 324; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = ((struct __pyx_vtabstruct_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_SPQRContext_INT32_t_FLOAT64_t *)__pyx_v_self->__pyx_vtab)->_SPQR_istat(__pyx_v_self); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 218; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":322
+  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":212
  *         return s
  * 
  *     def spqr_statistics(self):             # <<<<<<<<<<<<<<
- *         # TODO: todo
- *         return self. _SPQR_istat()
+ *         """
+ *         Main statistic for SPQR.
  */
 
   /* function exit code */
@@ -3371,7 +2548,7 @@ static int __pyx_pf_5numpy_7ndarray___getbuffer__(PyArrayObject *__pyx_v_self, P
  * 
  *             if ((flags & pybuf.PyBUF_F_CONTIGUOUS == pybuf.PyBUF_F_CONTIGUOUS)
  */
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__5, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 218; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 218; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -3411,7 +2588,7 @@ static int __pyx_pf_5numpy_7ndarray___getbuffer__(PyArrayObject *__pyx_v_self, P
  * 
  *             info.buf = PyArray_DATA(self)
  */
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__6, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 222; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 222; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -3688,7 +2865,7 @@ static int __pyx_pf_5numpy_7ndarray___getbuffer__(PyArrayObject *__pyx_v_self, P
  *                 if   t == NPY_BYTE:        f = "b"
  *                 elif t == NPY_UBYTE:       f = "B"
  */
-      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 260; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 260; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_Raise(__pyx_t_3, 0, 0, 0);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -4500,7 +3677,7 @@ static CYTHON_INLINE char *__pyx_f_5numpy__util_dtypestring(PyArray_Descr *__pyx
  * 
  *         if ((child.byteorder == c'>' and little_endian) or
  */
-      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_RuntimeError, __pyx_tuple__8, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 802; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_RuntimeError, __pyx_tuple__5, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 802; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_Raise(__pyx_t_3, 0, 0, 0);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -4552,7 +3729,7 @@ static CYTHON_INLINE char *__pyx_f_5numpy__util_dtypestring(PyArray_Descr *__pyx
  *             # One could encode it in the format string and have Cython
  *             # complain instead, BUT: < and > in format strings also imply
  */
-      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__9, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 806; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__6, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 806; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_Raise(__pyx_t_3, 0, 0, 0);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -4653,7 +3830,7 @@ static CYTHON_INLINE char *__pyx_f_5numpy__util_dtypestring(PyArray_Descr *__pyx
  * 
  *             # Until ticket #99 is fixed, use integers to avoid warnings
  */
-        __pyx_t_4 = __Pyx_PyObject_Call(__pyx_builtin_RuntimeError, __pyx_tuple__10, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 826; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_4 = __Pyx_PyObject_Call(__pyx_builtin_RuntimeError, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 826; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_4);
         __Pyx_Raise(__pyx_t_4, 0, 0, 0);
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -5283,11 +4460,8 @@ static int __pyx_tp_clear_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_F
 }
 
 static PyMethodDef __pyx_methods_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_SPQRContext_INT32_t_FLOAT64_t[] = {
-  {"create_symbolic", (PyCFunction)__pyx_pw_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t_5create_symbolic, METH_VARARGS|METH_KEYWORDS, __pyx_doc_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t_4create_symbolic},
-  {"create_numeric", (PyCFunction)__pyx_pw_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t_7create_numeric, METH_VARARGS|METH_KEYWORDS, __pyx_doc_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t_6create_numeric},
-  {"analyze", (PyCFunction)__pyx_pw_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t_9analyze, METH_VARARGS|METH_KEYWORDS, 0},
-  {"factorize", (PyCFunction)__pyx_pw_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t_11factorize, METH_VARARGS|METH_KEYWORDS, 0},
-  {"spqr_statistics", (PyCFunction)__pyx_pw_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t_13spqr_statistics, METH_NOARGS, 0},
+  {"SPQR_orderning", (PyCFunction)__pyx_pw_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t_5SPQR_orderning, METH_NOARGS, __pyx_doc_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t_4SPQR_orderning},
+  {"spqr_statistics", (PyCFunction)__pyx_pw_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t_7spqr_statistics, METH_NOARGS, __pyx_doc_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t_6spqr_statistics},
   {0, 0, 0, 0}
 };
 
@@ -5371,6 +4545,7 @@ static struct PyModuleDef __pyx_moduledef = {
 #endif
 
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
+  {&__pyx_kp_s_, __pyx_k_, sizeof(__pyx_k_), 0, 0, 1, 0},
   {&__pyx_n_s_A, __pyx_k_A, sizeof(__pyx_k_A), 0, 0, 1, 1},
   {&__pyx_kp_u_Format_string_allocated_too_shor, __pyx_k_Format_string_allocated_too_shor, sizeof(__pyx_k_Format_string_allocated_too_shor), 0, 1, 0, 0},
   {&__pyx_kp_u_Format_string_allocated_too_shor_2, __pyx_k_Format_string_allocated_too_shor_2, sizeof(__pyx_k_Format_string_allocated_too_shor_2), 0, 1, 0, 0},
@@ -5388,13 +4563,8 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_SPQR_ORDERING_GIVEN, __pyx_k_SPQR_ORDERING_GIVEN, sizeof(__pyx_k_SPQR_ORDERING_GIVEN), 0, 0, 1, 1},
   {&__pyx_n_s_SPQR_ORDERING_METIS, __pyx_k_SPQR_ORDERING_METIS, sizeof(__pyx_k_SPQR_ORDERING_METIS), 0, 0, 1, 1},
   {&__pyx_n_s_SPQR_ORDERING_NATURAL, __pyx_k_SPQR_ORDERING_NATURAL, sizeof(__pyx_k_SPQR_ORDERING_NATURAL), 0, 0, 1, 1},
+  {&__pyx_n_s_SPQR_orderning, __pyx_k_SPQR_orderning, sizeof(__pyx_k_SPQR_orderning), 0, 0, 1, 1},
   {&__pyx_n_s_ValueError, __pyx_k_ValueError, sizeof(__pyx_k_ValueError), 0, 0, 1, 1},
-  {&__pyx_kp_s__4, __pyx_k__4, sizeof(__pyx_k__4), 0, 0, 1, 0},
-  {&__pyx_n_s_analyze, __pyx_k_analyze, sizeof(__pyx_k_analyze), 0, 0, 1, 1},
-  {&__pyx_n_s_create_numeric, __pyx_k_create_numeric, sizeof(__pyx_k_create_numeric), 0, 0, 1, 1},
-  {&__pyx_n_s_create_symbolic, __pyx_k_create_symbolic, sizeof(__pyx_k_create_symbolic), 0, 0, 1, 1},
-  {&__pyx_n_s_drop_tol, __pyx_k_drop_tol, sizeof(__pyx_k_drop_tol), 0, 0, 1, 1},
-  {&__pyx_n_s_force, __pyx_k_force, sizeof(__pyx_k_force), 0, 0, 1, 1},
   {&__pyx_n_s_import, __pyx_k_import, sizeof(__pyx_k_import), 0, 0, 1, 1},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
   {&__pyx_n_s_ncol, __pyx_k_ncol, sizeof(__pyx_k_ncol), 0, 0, 1, 1},
@@ -5404,10 +4574,8 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_np, __pyx_k_np, sizeof(__pyx_k_np), 0, 0, 1, 1},
   {&__pyx_n_s_nrow, __pyx_k_nrow, sizeof(__pyx_k_nrow), 0, 0, 1, 1},
   {&__pyx_n_s_numpy, __pyx_k_numpy, sizeof(__pyx_k_numpy), 0, 0, 1, 1},
-  {&__pyx_n_s_ordering, __pyx_k_ordering, sizeof(__pyx_k_ordering), 0, 0, 1, 1},
   {&__pyx_n_s_pyx_vtable, __pyx_k_pyx_vtable, sizeof(__pyx_k_pyx_vtable), 0, 0, 1, 1},
   {&__pyx_n_s_range, __pyx_k_range, sizeof(__pyx_k_range), 0, 0, 1, 1},
-  {&__pyx_n_s_rank_detection, __pyx_k_rank_detection, sizeof(__pyx_k_rank_detection), 0, 0, 1, 1},
   {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
   {&__pyx_n_s_to_csc, __pyx_k_to_csc, sizeof(__pyx_k_to_csc), 0, 0, 1, 1},
   {&__pyx_kp_u_unknown_dtype_code_in_numpy_pxd, __pyx_k_unknown_dtype_code_in_numpy_pxd, sizeof(__pyx_k_unknown_dtype_code_in_numpy_pxd), 0, 1, 0, 0},
@@ -5434,9 +4602,9 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  *             if ((flags & pybuf.PyBUF_F_CONTIGUOUS == pybuf.PyBUF_F_CONTIGUOUS)
  */
-  __pyx_tuple__5 = PyTuple_Pack(1, __pyx_kp_u_ndarray_is_not_C_contiguous); if (unlikely(!__pyx_tuple__5)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 218; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__5);
-  __Pyx_GIVEREF(__pyx_tuple__5);
+  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_u_ndarray_is_not_C_contiguous); if (unlikely(!__pyx_tuple__2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 218; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__2);
+  __Pyx_GIVEREF(__pyx_tuple__2);
 
   /* "../local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":222
  *             if ((flags & pybuf.PyBUF_F_CONTIGUOUS == pybuf.PyBUF_F_CONTIGUOUS)
@@ -5445,9 +4613,9 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  *             info.buf = PyArray_DATA(self)
  */
-  __pyx_tuple__6 = PyTuple_Pack(1, __pyx_kp_u_ndarray_is_not_Fortran_contiguou); if (unlikely(!__pyx_tuple__6)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 222; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__6);
-  __Pyx_GIVEREF(__pyx_tuple__6);
+  __pyx_tuple__3 = PyTuple_Pack(1, __pyx_kp_u_ndarray_is_not_Fortran_contiguou); if (unlikely(!__pyx_tuple__3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 222; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__3);
+  __Pyx_GIVEREF(__pyx_tuple__3);
 
   /* "../local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":260
  *                 if ((descr.byteorder == c'>' and little_endian) or
@@ -5456,9 +4624,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                 if   t == NPY_BYTE:        f = "b"
  *                 elif t == NPY_UBYTE:       f = "B"
  */
-  __pyx_tuple__7 = PyTuple_Pack(1, __pyx_kp_u_Non_native_byte_order_not_suppor); if (unlikely(!__pyx_tuple__7)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 260; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__7);
-  __Pyx_GIVEREF(__pyx_tuple__7);
+  __pyx_tuple__4 = PyTuple_Pack(1, __pyx_kp_u_Non_native_byte_order_not_suppor); if (unlikely(!__pyx_tuple__4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 260; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__4);
+  __Pyx_GIVEREF(__pyx_tuple__4);
 
   /* "../local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":802
  * 
@@ -5467,9 +4635,9 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  *         if ((child.byteorder == c'>' and little_endian) or
  */
-  __pyx_tuple__8 = PyTuple_Pack(1, __pyx_kp_u_Format_string_allocated_too_shor); if (unlikely(!__pyx_tuple__8)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 802; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__8);
-  __Pyx_GIVEREF(__pyx_tuple__8);
+  __pyx_tuple__5 = PyTuple_Pack(1, __pyx_kp_u_Format_string_allocated_too_shor); if (unlikely(!__pyx_tuple__5)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 802; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__5);
+  __Pyx_GIVEREF(__pyx_tuple__5);
 
   /* "../local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":806
  *         if ((child.byteorder == c'>' and little_endian) or
@@ -5478,9 +4646,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             # One could encode it in the format string and have Cython
  *             # complain instead, BUT: < and > in format strings also imply
  */
-  __pyx_tuple__9 = PyTuple_Pack(1, __pyx_kp_u_Non_native_byte_order_not_suppor); if (unlikely(!__pyx_tuple__9)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 806; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__9);
-  __Pyx_GIVEREF(__pyx_tuple__9);
+  __pyx_tuple__6 = PyTuple_Pack(1, __pyx_kp_u_Non_native_byte_order_not_suppor); if (unlikely(!__pyx_tuple__6)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 806; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__6);
+  __Pyx_GIVEREF(__pyx_tuple__6);
 
   /* "../local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":826
  *             t = child.type_num
@@ -5489,9 +4657,9 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  *             # Until ticket #99 is fixed, use integers to avoid warnings
  */
-  __pyx_tuple__10 = PyTuple_Pack(1, __pyx_kp_u_Format_string_allocated_too_shor_2); if (unlikely(!__pyx_tuple__10)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 826; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__10);
-  __Pyx_GIVEREF(__pyx_tuple__10);
+  __pyx_tuple__7 = PyTuple_Pack(1, __pyx_kp_u_Format_string_allocated_too_shor_2); if (unlikely(!__pyx_tuple__7)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 826; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__7);
+  __Pyx_GIVEREF(__pyx_tuple__7);
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -5501,7 +4669,6 @@ static int __Pyx_InitCachedConstants(void) {
 
 static int __Pyx_InitGlobals(void) {
   if (__Pyx_InitStrings(__pyx_string_tab) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-  __pyx_int_0 = PyInt_FromLong(0); if (unlikely(!__pyx_int_0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -5590,13 +4757,11 @@ PyMODINIT_FUNC PyInit_spqr_INT32_t_FLOAT64_t(void)
   /*--- Function export code ---*/
   /*--- Type init code ---*/
   __pyx_vtabptr_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_SPQRContext_INT32_t_FLOAT64_t = &__pyx_vtable_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_SPQRContext_INT32_t_FLOAT64_t;
-  __pyx_vtable_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_SPQRContext_INT32_t_FLOAT64_t._create_symbolic = (int (*)(struct __pyx_obj_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_SPQRContext_INT32_t_FLOAT64_t *, int, int))__pyx_f_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t__create_symbolic;
-  __pyx_vtable_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_SPQRContext_INT32_t_FLOAT64_t._create_numeric = (int (*)(struct __pyx_obj_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_SPQRContext_INT32_t_FLOAT64_t *, double))__pyx_f_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t__create_numeric;
   __pyx_vtable_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_SPQRContext_INT32_t_FLOAT64_t._SPQR_istat = (PyObject *(*)(struct __pyx_obj_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_SPQRContext_INT32_t_FLOAT64_t *))__pyx_f_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_29SPQRContext_INT32_t_FLOAT64_t__SPQR_istat;
-  if (PyType_Ready(&__pyx_type_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_SPQRContext_INT32_t_FLOAT64_t) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 153; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyType_Ready(&__pyx_type_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_SPQRContext_INT32_t_FLOAT64_t) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 130; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_type_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_SPQRContext_INT32_t_FLOAT64_t.tp_print = 0;
-  if (__Pyx_SetVtable(__pyx_type_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_SPQRContext_INT32_t_FLOAT64_t.tp_dict, __pyx_vtabptr_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_SPQRContext_INT32_t_FLOAT64_t) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 153; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (PyObject_SetAttrString(__pyx_m, "SPQRContext_INT32_t_FLOAT64_t", (PyObject *)&__pyx_type_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_SPQRContext_INT32_t_FLOAT64_t) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 153; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_SetVtable(__pyx_type_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_SPQRContext_INT32_t_FLOAT64_t.tp_dict, __pyx_vtabptr_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_SPQRContext_INT32_t_FLOAT64_t) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 130; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyObject_SetAttrString(__pyx_m, "SPQRContext_INT32_t_FLOAT64_t", (PyObject *)&__pyx_type_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_SPQRContext_INT32_t_FLOAT64_t) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 130; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_ptype_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_SPQRContext_INT32_t_FLOAT64_t = &__pyx_type_8cysparse_6linalg_11suitesparse_4spqr_22spqr_INT32_t_FLOAT64_t_SPQRContext_INT32_t_FLOAT64_t;
   /*--- Type import code ---*/
   __pyx_ptype_7cpython_4type_type = __Pyx_ImportType(__Pyx_BUILTIN_MODULE_NAME, "type", 
@@ -5650,14 +4815,14 @@ PyMODINIT_FUNC PyInit_spqr_INT32_t_FLOAT64_t(void)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_np, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":15
- * 
+  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":48
+ *         SPQR_RTX_EQUALS_ETB = 3     # solve R'*X=E'*B  or X = R'\(E'*B)
  * 
  * ORDERING_METHOD_LIST = ['SPQR_ORDERING_FIXED',             # <<<<<<<<<<<<<<
  *         'SPQR_ORDERING_NATURAL',
  *         'SPQR_ORDERING_COLAMD',
  */
-  __pyx_t_3 = PyList_New(10); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 15; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = PyList_New(10); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 48; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_INCREF(__pyx_n_s_SPQR_ORDERING_FIXED);
   PyList_SET_ITEM(__pyx_t_3, 0, __pyx_n_s_SPQR_ORDERING_FIXED);
@@ -5689,47 +4854,8 @@ PyMODINIT_FUNC PyInit_spqr_INT32_t_FLOAT64_t(void)
   __Pyx_INCREF(__pyx_n_s_SPQR_ORDERING_BESTAMD);
   PyList_SET_ITEM(__pyx_t_3, 9, __pyx_n_s_SPQR_ORDERING_BESTAMD);
   __Pyx_GIVEREF(__pyx_n_s_SPQR_ORDERING_BESTAMD);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_ORDERING_METHOD_LIST, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 15; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_ORDERING_METHOD_LIST, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 48; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-
-  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":233
- * 
- * 
- *     def create_symbolic(self, ordering=SPQR_ORDERING_BEST, rank_detection=False):             # <<<<<<<<<<<<<<
- *         """
- *         Create the symbolic object if it is not already in cache.
- */
-  __pyx_t_3 = __Pyx_PyInt_From_int(SPQR_ORDERING_BEST); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 233; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_3);
-  __pyx_k_ = __pyx_t_3;
-  __Pyx_GIVEREF(__pyx_t_3);
-  __pyx_t_3 = 0;
-
-  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":289
- * 
- * 
- *     def analyze(self, ordering=SPQR_ORDERING_BEST, rank_detection=False, drop_tol=0):             # <<<<<<<<<<<<<<
- *         self.create_symbolic(ordering, rank_detection)
- *         self.create_numeric(drop_tol)
- */
-  __pyx_t_3 = __Pyx_PyInt_From_int(SPQR_ORDERING_BEST); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 289; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_3);
-  __pyx_k__2 = __pyx_t_3;
-  __Pyx_GIVEREF(__pyx_t_3);
-  __pyx_t_3 = 0;
-
-  /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":296
- * 
- * 
- *     def factorize(self, force = False, ordering=SPQR_ORDERING_BEST, drop_tol=0):             # <<<<<<<<<<<<<<
- *         self.factorized = True
- * 
- */
-  __pyx_t_3 = __Pyx_PyInt_From_int(SPQR_ORDERING_BEST); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 296; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_3);
-  __pyx_k__3 = __pyx_t_3;
-  __Pyx_GIVEREF(__pyx_t_3);
-  __pyx_t_3 = 0;
 
   /* "cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx":1
  * from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free             # <<<<<<<<<<<<<<
@@ -6629,32 +5755,6 @@ bad:
     return module;
 }
 
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value) {
-    const int neg_one = (int) -1, const_zero = 0;
-    const int is_unsigned = neg_one > const_zero;
-    if (is_unsigned) {
-        if (sizeof(int) < sizeof(long)) {
-            return PyInt_FromLong((long) value);
-        } else if (sizeof(int) <= sizeof(unsigned long)) {
-            return PyLong_FromUnsignedLong((unsigned long) value);
-        } else if (sizeof(int) <= sizeof(unsigned long long)) {
-            return PyLong_FromUnsignedLongLong((unsigned long long) value);
-        }
-    } else {
-        if (sizeof(int) <= sizeof(long)) {
-            return PyInt_FromLong((long) value);
-        } else if (sizeof(int) <= sizeof(long long)) {
-            return PyLong_FromLongLong((long long) value);
-        }
-    }
-    {
-        int one = 1; int little = (int)*(unsigned char *)&one;
-        unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(int),
-                                     little, !is_unsigned);
-    }
-}
-
 #define __PYX_VERIFY_RETURN_INT(target_type, func_type, func_value)       \
     {                                                                     \
         func_type value = func_value;                                     \
@@ -7156,6 +6256,32 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value) {
         }
     #endif
 #endif
+
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value) {
+    const int neg_one = (int) -1, const_zero = 0;
+    const int is_unsigned = neg_one > const_zero;
+    if (is_unsigned) {
+        if (sizeof(int) < sizeof(long)) {
+            return PyInt_FromLong((long) value);
+        } else if (sizeof(int) <= sizeof(unsigned long)) {
+            return PyLong_FromUnsignedLong((unsigned long) value);
+        } else if (sizeof(int) <= sizeof(unsigned long long)) {
+            return PyLong_FromUnsignedLongLong((unsigned long long) value);
+        }
+    } else {
+        if (sizeof(int) <= sizeof(long)) {
+            return PyInt_FromLong((long) value);
+        } else if (sizeof(int) <= sizeof(long long)) {
+            return PyLong_FromLongLong((long long) value);
+        }
+    }
+    {
+        int one = 1; int little = (int)*(unsigned char *)&one;
+        unsigned char *bytes = (unsigned char *)&value;
+        return _PyLong_FromByteArray(bytes, sizeof(int),
+                                     little, !is_unsigned);
+    }
+}
 
 static CYTHON_INLINE long __Pyx_PyInt_As_long(PyObject *x) {
     const long neg_one = (long) -1, const_zero = 0;

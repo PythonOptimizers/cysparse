@@ -691,6 +691,10 @@ if __name__ == "__main__":
         # don't do anything: use platform's default
         pass
 
+    # SuiteSparse
+    # SPQR
+    SPQR_EXPERT_MODE = not cysparse_config.getboolean('SUITESPARSE', 'NEXPERT')
+
     #######################################
     # END CONDITIONAL CODE GENERATION
     #######################################
@@ -751,6 +755,7 @@ if __name__ == "__main__":
                         'cholmod_type_list': CHOLMOD_ELEMENT_TYPES,
                         'spqr_index_list': SPQR_INDEX_TYPES,
                         'spqr_type_list': SPQR_ELEMENT_TYPES,
+                        'spqr_export_mode' : SPQR_EXPERT_MODE,
                         'mumps_index_list': MUMPS_INDEX_TYPES,
                         'mumps_type_list': MUMPS_ELEMENT_TYPES,
 

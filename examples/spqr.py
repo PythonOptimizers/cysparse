@@ -11,6 +11,13 @@ A = NewLinearFillLLSparseMatrix(size=4, is_symmetric=True)
 
 print A
 
+AA = A.to_ndarray()
+
+print "WWW"
+print np.linalg.det(AA)
+
+
+
 A.to_csc().debug_print()
 
 solver = NewSPQRContext(A)
@@ -25,9 +32,6 @@ solver.create_numeric()
 solver.factorize(ordering=4)
 print solver.spqr_statistics()
 
-
-
-
 print "$" * 80
 
 # solver.analyze()
@@ -38,8 +42,17 @@ print "$" * 80
 #
 # print "+" * 80
 #
-# b = np.ones(4, dtype=np.float64)
+b = np.ones(4, dtype=np.float64)
 #
-# sol = solver.solve(b)
+sol = solver.solve_expert(b, 'SPQR_RETX_EQUALS_B')
+
+sol1 = np.linalg.solve(AA, b)
+
+print sol1
 #
-# print sol
+print sol
+
+print "3" * 80
+
+print np.dot(AA,sol1)
+print A * sol

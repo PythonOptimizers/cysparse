@@ -14,6 +14,39 @@ from  cysparse.linalg.suitesparse.cholmod.cholmod_INT32_t_COMPLEX128_t cimport *
 from cysparse.types.cysparse_generic_types cimport split_array_complex_values_kernel_INT32_t_COMPLEX128_t, join_array_complex_values_kernel_INT32_t_COMPLEX128_t
 
 
+cdef extern from "SuiteSparseQR_definitions.h":
+    # ordering options
+    cdef enum:
+        SPQR_ORDERING_FIXED = 0
+        SPQR_ORDERING_NATURAL = 1
+        SPQR_ORDERING_COLAMD = 2
+        SPQR_ORDERING_GIVEN = 3       # only used for C/C++ interface
+        SPQR_ORDERING_CHOLMOD = 4     # CHOLMOD best-effort (COLAMD, METIS,...)
+        SPQR_ORDERING_AMD = 5         # AMD(A'*A)
+        SPQR_ORDERING_METIS = 6       # metis(A'*A)
+        SPQR_ORDERING_DEFAULT = 7     # SuiteSparseQR default ordering
+        SPQR_ORDERING_BEST = 8        # try COLAMD, AMD, and METIS; pick best
+        SPQR_ORDERING_BESTAMD = 9     # try COLAMD and AMD; pick best
+
+    # tol options
+    cdef enum:
+        SPQR_DEFAULT_TOL = -2       # if tol <= -2, the default tol is used
+        SPQR_NO_TOL = -1            # if -2 < tol < 0, then no tol is used
+
+    # for qmult, method can be 0,1,2,3:
+    cdef enum:
+        SPQR_QTX = 0
+        SPQR_QX  = 1
+        SPQR_XQT = 2
+        SPQR_XQ  = 3
+
+    # system can be 0,1,2,3:  Given Q*R=A*E from SuiteSparseQR_factorize:
+    cdef enum:
+        SPQR_RX_EQUALS_B =  0       # solve R*X=B      or X = R\B
+        SPQR_RETX_EQUALS_B = 1      # solve R*E'*X=B   or X = E*(R\B)
+        SPQR_RTX_EQUALS_B = 2       # solve R'*X=B     or X = R'\B
+        SPQR_RTX_EQUALS_ETB = 3     # solve R'*X=E'*B  or X = R'\(E'*B)
+
 ORDERING_METHOD_LIST = ['SPQR_ORDERING_FIXED',
         'SPQR_ORDERING_NATURAL',
         'SPQR_ORDERING_COLAMD',
@@ -24,6 +57,8 @@ ORDERING_METHOD_LIST = ['SPQR_ORDERING_FIXED',
         'SPQR_ORDERING_DEFAULT',
         'SPQR_ORDERING_BEST',
         'SPQR_ORDERING_BESTAMD']
+
+
 
 cdef extern from  "SuiteSparseQR_C.h":
     # returns rank(A) estimate, (-1) if failure
@@ -92,65 +127,7 @@ cdef extern from  "SuiteSparseQR_C.h":
         cholmod_common *cc          # workspace and parameters
     )
 
-    ####################################################################################################################
-    # EXPERT MODE
-    ####################################################################################################################
-    cdef SuiteSparseQR_C_factorization *SuiteSparseQR_C_factorize (
-        # inputs:
-        int ordering,               # all, except 3:given treated as 0:fixed
-        double tol,                 # columns with 2-norm <= tol treated as 0
-        cholmod_sparse *A,          # m-by-n sparse matrix
-        cholmod_common *cc          # workspace and parameters
-    )
 
-    cdef SuiteSparseQR_C_factorization *SuiteSparseQR_C_symbolic (
-        # inputs:
-        int ordering,               # all, except 3:given treated as 0:fixed
-        int allow_tol,              # if TRUE allow tol for rank detection
-        cholmod_sparse *A,          # m-by-n sparse matrix, A->x ignored
-        cholmod_common *cc          # workspace and parameters
-    )
-
-    cdef int SuiteSparseQR_C_numeric (
-        # inputs:
-        double tol,                 # treat columns with 2-norm <= tol as zero
-        cholmod_sparse *A,          # sparse matrix to factorize
-        # input/output:
-        SuiteSparseQR_C_factorization *QR,
-        cholmod_common *cc          # workspace and parameters
-    )
-
-    # Free the QR factors computed by SuiteSparseQR_C_factorize
-    # returns TRUE (1) if OK, FALSE (0) otherwise
-    cdef int SuiteSparseQR_C_free (
-        SuiteSparseQR_C_factorization **QR,
-        cholmod_common *cc          # workspace and parameters
-    )
-
-    # returnx X, or NULL if failure
-    cdef cholmod_dense* SuiteSparseQR_C_solve (
-        int system,                 # which system to solve
-        SuiteSparseQR_C_factorization *QR,  # of an m-by-n sparse matrix A
-        cholmod_dense *B,           # right-hand-side, m-by-k or n-by-k
-        cholmod_common *cc          # workspace and parameters
-    )
-
-    # Applies Q in Householder form (as stored in the QR factorization object
-    # returned by SuiteSparseQR_C_factorize) to a dense matrix X.
-    #
-    # method SPQR_QTX (0): Y = Q'*X
-    # method SPQR_QX  (1): Y = Q*X
-    # method SPQR_XQT (2): Y = X*Q'
-    # method SPQR_XQ  (3): Y = X*Q
-
-    # returns Y, or NULL on failure
-    cdef cholmod_dense *SuiteSparseQR_C_qmult (
-        # inputs:
-        int method,                 # 0,1,2,3
-        SuiteSparseQR_C_factorization *QR,  # of an m-by-n sparse matrix A
-        cholmod_dense *X,           # size m-by-n with leading dimension ldx
-        cholmod_common *cc          # workspace and parameters
-    )
 
 cdef class SPQRContext_INT32_t_COMPLEX128_t:
     """
@@ -231,167 +208,32 @@ cdef class SPQRContext_INT32_t_COMPLEX128_t:
     ####################################################################################################################
     # COMMON OPERATIONS
     ####################################################################################################################
-    cdef bint _create_symbolic(self, int ordering, bint allow_tol):
+
+
+    ####################################################################################################################
+    # STATISTICS
+    ####################################################################################################################
+    def SPQR_orderning(self):
         """
-        Create the symbolic object.
-
-        Note:
-            Create the object no matter what. See :meth:`create_symbolic` for a conditional creation.
-
+        Returns the chosen ordering.
         """
-        cdef bint status = 1
-        self.factors_struct_initialized = True
-
-        self.factors_struct = SuiteSparseQR_C_symbolic(ordering, allow_tol, &self.sparse_struct, &self.common_struct)
-
-        if self.factors_struct is NULL:
-            status = 0
-            self.factors_struct_initialized = False
-
-        return status
-
-
-    def create_symbolic(self, ordering=SPQR_ORDERING_BEST, rank_detection=False):
-        """
-        Create the symbolic object if it is not already in cache.
-
-        Args:
-            ordering:
-            rank_detection:
-
-        Note:
-            We don't allow to force recomputation of the ``factors_struct`` because we can not delete ``factors_struct``
-            without deleting at the same time ``common_struct``.
-
-        """
-        if self.factors_struct_initialized:
-            return
-
-        cdef bint status = self._create_symbolic(ordering, rank_detection)
-
-        # TODO: raise exception
-
-    cdef bint _create_numeric(self, double drop_tol):
-        """
-        Create the numeric object.
-
-        Args:
-            drop_tol: Treat columns with 2-norm <= drop_tol as zero.
-
-        Note:
-            Create the object no matter what. See :meth:`create_numeric` for a conditional creation.
-            No test is done to verify if ``create_symbolic()`` has been called before.
-
-        """
-        cdef int status = 0
-
-        SuiteSparseQR_C_numeric(drop_tol, &self.sparse_struct, self.factors_struct, &self.common_struct)
-        self.numeric_computed = True
-
-        return status
-
-    def create_numeric(self, drop_tol=0):
-        """
-        Create the numeric object if it is not already in cache.
-
-        Args:
-
-        """
-        if self.numeric_computed:
-            return
-
-        self.create_symbolic()
-
-        cdef int status = self._create_numeric(drop_tol)
-
-        # TODO: raise exception on error
-
-
-    def analyze(self, ordering=SPQR_ORDERING_BEST, rank_detection=False, drop_tol=0):
-        self.create_symbolic(ordering, rank_detection)
-        self.create_numeric(drop_tol)
-
-        # TODO: raise exception...
-
-
-    def factorize(self, force = False, ordering=SPQR_ORDERING_BEST, drop_tol=0):
-        self.factorized = True
-
-        # if needed
-        self.analyze(ordering=ordering)
-
-        if not self.factorized or force:
-            self.factors_struct = SuiteSparseQR_C_factorize(ordering, drop_tol, &self.sparse_struct, &self.common_struct)
-
-        if self.factors_struct is NULL:
-            status = 0
-            self.factors_struct_initialized = False
-            self.factorized = False
-
-
-        # TODO: raise exception if needed...
-        #return status
+        return ORDERING_METHOD_LIST[self.common_struct.SPQR_istat[7]]
 
     cdef _SPQR_istat(self):
+        """
+        Main statistic method for SPQR, :program:`Cython` version.
+        """
         s = ''
 
         # ordering
-        s += 'ORDERING USED: %s' % ORDERING_METHOD_LIST[self.common_struct.SPQR_istat[7]]
+        s += 'ORDERING USED: %s' % self.SPQR_orderning()
 
         return s
 
     def spqr_statistics(self):
+        """
+        Main statistic for SPQR.
+
+        """
         # TODO: todo
         return self. _SPQR_istat()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
