@@ -5,6 +5,7 @@ import numpy as np
 import sys
 
 from cysparse.linalg.spqr_context import NewSPQRContext
+from cysparse.linalg.suitesparse.spqr import SPQR_ORDERING_BEST_
 
 
 A = NewLinearFillLLSparseMatrix(nrow=5, ncol=4)
@@ -65,3 +66,7 @@ print A * sol_default
 print "%" * 80
 
 print solver.SPQR_ordering_list()
+
+print "D" * 80
+
+solver.get_QR()

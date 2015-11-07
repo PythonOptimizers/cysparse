@@ -22,6 +22,7 @@ The version is stored in the file ``__init__.py`` of the ``cysparse`` subdirecto
     
 The version can be anything inside the quotes but this line has to be on its own and start with ``__version__ = "`` (notice the one space before and after the equal sign). See the function ``find_version()`` in the file ``setup.cpy`` for more details.
 
+
 Meta-programming aka code generation
 =====================================
 
@@ -182,6 +183,22 @@ Types
 --------
 
 **All** classes are typed and *almost* all algorithms used specialized typed variables. Many algorithm are specialized for **one** type of variable. This allows to have optimized algorithms but at the detriment of being able to mix types. For instance, most of the methods of sparse matrices only works for **one** ``dtype`` and **one** ``itype``. 
+
+
+``enum``
+--------
+
+Even if recently :program:`Cyhton` exposes automagically ``enum``\s to :program:`Python` (see https://groups.google.com/forum/#!topic/cython-users/gn1p6znjoyE), don't count on it. The convention is 
+to expose equivalent strings to the user. This string is then translated internally by the corresponding ``enum``. For instance, the ``enum`` value ``UMFPACK_A`` :program:`UmfPack` system parameter can be 
+given as the string `'UMFPACK_A'` by the user (as a parameter to a `solve()` method for instance). Internally, this string is translated:
+
+..  code-block:: python
+
+    def solve(..., umfpack_sys_string='UMFPACK_A', ...):
+        cdef:
+            int umfpack_sys = UMFPACK_SYS_DICT[umfpack_sys_string]
+        ...
+
 
 ..  raw:: html
 

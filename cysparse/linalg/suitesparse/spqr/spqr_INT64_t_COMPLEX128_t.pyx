@@ -58,6 +58,8 @@ ORDERING_METHOD_LIST = ['SPQR_ORDERING_FIXED',
         'SPQR_ORDERING_BEST',
         'SPQR_ORDERING_BESTAMD']
 
+SPQR_ORDERING_BEST_ = SPQR_ORDERING_BEST
+
 
 
 SPQR_SYS_DICT = {
@@ -342,8 +344,7 @@ cdef class SPQRContext_INT64_t_COMPLEX128_t:
         Solve `A*x = b` with `b` dense (case `X = A\B`).
 
         Args:
-            ordering:
-            drop_tol: Treat columns with 2-norm <= drop_tol as zero.
+            b
 
         """
         # test argument b
@@ -395,14 +396,15 @@ cdef class SPQRContext_INT64_t_COMPLEX128_t:
 
         return sol
 
-    def get_QR(self,int ordering, double drop_tol, SuiteSparse_long econ):
+    def get_QR(self, int ordering, SuiteSparse_long econ, double drop_tol = 0):
         """
         Return QR factorisation objects. If needed, the QR factorisation is triggered.
 
         Args:
             ordering: SPQR ordening. See `ORDERING_METHOD_LIST`.
-            double tol,                 # columns with 2-norm <= tol treated as 0
-            SuiteSparse_long econ,      # e = max(min(m,econ),rank(A))
+            drop_tol (double): Columns with `2-norm <= drop_tol` are treated as 0.
+            econ (SuiteSparse_long): Parameter such that `e = max(min(m,econ),rank(A))`.
+
         Returns:
             (Q,R,E)
 
@@ -411,29 +413,26 @@ cdef class SPQRContext_INT64_t_COMPLEX128_t:
                 Q R = A E
 
             where:
-             - Q is ,
-             - R is ,
-             - E is a permutation matrice
+             - A is a `m`-by-`n` sparse matrix to factorize;
+             - Q is a `m`-by-`e` sparse matrix;
+             - R is a `e`-by-`n` sparse matrix and
+             - E is a `n`-by-`n` permutation matrice.
 
             Q and R are returned as CSCSparseMatrix matrices.
-            E is returned as a NumPy vector.
-
-        # [Q,R,E] = qr(A), returning Q as a sparse matrix
-        # returns rank(A) est., (-1) if failure
-        cdef SuiteSparse_long SuiteSparseQR_C_QR (
-            # inputs:
-            int ordering,               # all, except 3:given treated as 0:fixed
-            double tol,                 # columns with 2-norm <= tol treated as 0
-            SuiteSparse_long econ,      # e = max(min(m,econ),rank(A))
-            cholmod_sparse *A,          # m-by-n sparse matrix to factorize
-            # outputs:
-            cholmod_sparse **Q,         # m-by-e sparse matrix
-            cholmod_sparse **R,         # e-by-n sparse matrix
-            SuiteSparse_long **E,       # size n column perm, NULL if identity
-            cholmod_common *cc          # workspace and parameters
-            )
+            E is returned as a one dimensional NumPy vector of size `n`.
         """
-        pass
+        cdef:
+            cholmod_sparse *Q_cholmod
+            cholmod_sparse *R_cholmod
+            SuiteSparse_long *E_cholmod
+            SuiteSparse_long status
+
+        # returns rank(A) est., (-1) if failure
+        status = SuiteSparseQR_C_QR (ordering, drop_tol, econ, &self.sparse_struct, &Q_cholmod, &R_cholmod, &E_cholmod, &self.common_struct)
+
+        if status == -1:
+            raise RuntimeError('SPQR could not factorize matrix...')
+
 
     ####################################################################################################################
     # EXPERT MODE
