@@ -104,7 +104,10 @@ CHOLMOD_SYS_DICT = {
 ########################################################################################################################
 # CHOLMOD HELPERS
 ########################################################################################################################
-# Populating a sparse matrix in CHOLMOD is done in two times:
+##################################################################
+# FROM CSCSparseMatrix -> cholmod_sparse
+##################################################################
+# Populating a sparse matrix in CHOLMOD is done in two steps:
 # - first (populate1), we give the common attributes and
 # - second (populate2), we split the values array in two if needed (complex case) and give the values (real or complex).
 
@@ -190,6 +193,25 @@ cdef populate2_cholmod_sparse_struct_with_CSCSparseMatrix(cholmod_sparse * spars
 
 {% endif %}
 
+##################################################################
+# FROM cholmod_sparse -> CSCSparseMatrix
+##################################################################
+cdef CSCSparseMatrix_@index@_@type@ cholmod_sparse_to_CSCSparseMatrix_@index@_@type@(cholmod_sparse * sparse_struct, bint no_copy=False):
+
+    assert sparse_struct.sorted == 1, "We only accept cholmod_sparse matrices with sorted indices"
+    assert sparse_struct.packed == 1, "We only accept cholmod_sparse matrices with packed indices"
+
+    #cdef:
+    #    CSCSparseMatrix_@index@_@type@ csc_mat
+
+    # TODO: see UmfPack get_LU...
+
+    #csc_mat = MakeCSCSparseMatrix_@index@_@type@(nrow=33, ncol=23, nnz=44, ind=Up, row=Ui, val=Ux_complex, is_symmetric=False, store_zeros=False)
+    #return csc_mat
+
+##################################################################
+# FROM NumPy ndarray -> cholmod_dense
+##################################################################
 cdef cholmod_dense numpy_ndarray_to_cholmod_dense(cnp.ndarray[cnp.@type|cysparse_type_to_numpy_c_type@, ndim=1, mode="c"] b):
     """
     Convert a :program:`NumPy` one dimensionnal array to the corresponding ``cholmod_dense`` matrix.
@@ -223,8 +245,11 @@ cdef cholmod_dense numpy_ndarray_to_cholmod_dense(cnp.ndarray[cnp.@type|cysparse
 
     return B
 
+##################################################################
+# FROM cholmod_dense -> NumPy ndarray
+##################################################################
 cdef cnp.ndarray[cnp.@type|cysparse_type_to_numpy_c_type@, ndim=1, mode="c"] cholmod_dense_to_numpy_ndarray(cholmod_dense * b):
-    pass
+    raise NotImplementedError()
 
 ########################################################################################################################
 # CHOLMOD

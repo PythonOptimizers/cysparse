@@ -69,4 +69,4 @@ print solver.SPQR_ordering_list()
 
 print "D" * 80
 
-solver.get_QR('SPQR_ORDERING_BEST', 32)
+solver.get_QR(ordering='SPQR_ORDERING_BEST', econ=32)

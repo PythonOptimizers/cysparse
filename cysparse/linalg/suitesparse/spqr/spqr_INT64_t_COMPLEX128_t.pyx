@@ -400,7 +400,7 @@ cdef class SPQRContext_INT64_t_COMPLEX128_t:
 
         return sol
 
-    def get_QR(self, str ordering, SuiteSparse_long econ, double drop_tol = 0):
+    def get_QR(self, SuiteSparse_long econ, str ordering='SPQR_ORDERING_BEST', double drop_tol = 0):
         """
         Return QR factorisation objects. If needed, the QR factorisation is triggered.
 
@@ -437,6 +437,13 @@ cdef class SPQRContext_INT64_t_COMPLEX128_t:
         if status == -1:
             raise RuntimeError('SPQR could not factorize matrix...')
 
+        # create matrices to return
+        cdef:
+            CSCSparseMatrix_INT64_t_COMPLEX128_t Q_csc_mat
+
+        Q_csc_mat = cholmod_sparse_to_CSCSparseMatrix_INT64_t_COMPLEX128_t(Q_cholmod, no_copy=False)
+
+        return Q_csc_mat
 
     ####################################################################################################################
     # EXPERT MODE

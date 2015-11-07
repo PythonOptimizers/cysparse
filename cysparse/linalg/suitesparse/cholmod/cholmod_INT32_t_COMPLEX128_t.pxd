@@ -202,6 +202,7 @@ cdef populate2_cholmod_sparse_struct_with_CSCSparseMatrix(cholmod_sparse * spars
                                                               FLOAT64_t * csc_mat_ival,
                                                               bint no_copy=?)
 
+cdef CSCSparseMatrix_INT32_t_COMPLEX128_t cholmod_sparse_to_CSCSparseMatrix_INT32_t_COMPLEX128_t(cholmod_sparse * sparse_struct, bint no_copy=?)
 cdef cholmod_dense numpy_ndarray_to_cholmod_dense(cnp.ndarray[cnp.npy_complex128, ndim=1, mode="c"] b)
 cdef cnp.ndarray[cnp.npy_complex128, ndim=1, mode="c"] cholmod_dense_to_numpy_ndarray(cholmod_dense * b)
 
