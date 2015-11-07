@@ -411,8 +411,9 @@ cdef class SPQRContext_@index@_@type@:
 
         Args:
             ordering: SPQR ordening. See `ORDERING_METHOD_LIST`.
-            double tol,                 # columns with 2-norm <= tol treated as 0
-            SuiteSparse_long econ,      # e = max(min(m,econ),rank(A))
+            drop_tol (double): Columns with `2-norm <= drop_tol` are treated as 0.
+            econ (SuiteSparse_long): Parameter such that `e = max(min(m,econ),rank(A))`.
+
         Returns:
             (Q,R,E)
 
@@ -421,13 +422,15 @@ cdef class SPQRContext_@index@_@type@:
                 Q R = A E
 
             where:
-             - Q is ,
-             - R is ,
-             - E is a permutation matrice
+             - A is a `m`-by-`n` sparse matrix to factorize;
+             - Q is a `m`-by-`e` sparse matrix;
+             - R is a `e`-by-`n` sparse matrix and
+             - E is a `n`-by-`n` permutation matrice.
 
             Q and R are returned as CSCSparseMatrix matrices.
-            E is returned as a NumPy vector.
+            E is returned as a one dimensional NumPy vector of size `n`.
 
+        XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
         # [Q,R,E] = qr(A), returning Q as a sparse matrix
         # returns rank(A) est., (-1) if failure
         cdef SuiteSparse_long SuiteSparseQR_C_QR (
