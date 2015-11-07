@@ -5,7 +5,7 @@ import numpy as np
 import sys
 
 from cysparse.linalg.spqr_context import NewSPQRContext
-from cysparse.linalg.suitesparse.spqr import SPQR_ORDERING_BEST_
+
 
 
 A = NewLinearFillLLSparseMatrix(nrow=5, ncol=4)
@@ -25,12 +25,12 @@ solver = NewSPQRContext(A)
 
 print solver
 
-solver.create_symbolic(ordering=1)
+solver.create_symbolic(ordering='SPQR_ORDERING_NATURAL')
 print solver.spqr_statistics()
 
 solver.create_numeric()
 
-solver.factorize(ordering=4)
+solver.factorize(ordering='SPQR_ORDERING_CHOLMOD')
 print solver.spqr_statistics()
 
 print "$" * 80
@@ -69,4 +69,4 @@ print solver.SPQR_ordering_list()
 
 print "D" * 80
 
-solver.get_QR()
+solver.get_QR('SPQR_ORDERING_BEST', 32)

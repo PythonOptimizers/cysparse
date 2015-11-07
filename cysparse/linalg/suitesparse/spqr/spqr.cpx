@@ -9,6 +9,8 @@ from cysparse.sparse.csc_mat_matrices.csc_mat_@index@_@type@ cimport CSCSparseMa
 import numpy as np
 cimport numpy as cnp
 
+from collections import OrderedDict
+
 from  cysparse.linalg.suitesparse.cholmod.cholmod_@index@_@type@ cimport *
 {% if type in complex_list %}
 from cysparse.types.cysparse_generic_types cimport split_array_complex_values_kernel_@index@_@type@, join_array_complex_values_kernel_@index@_@type@
@@ -47,18 +49,20 @@ cdef extern from "SuiteSparseQR_definitions.h":
         SPQR_RTX_EQUALS_B = 2       # solve R'*X=B     or X = R'\B
         SPQR_RTX_EQUALS_ETB = 3     # solve R'*X=E'*B  or X = R'\(E'*B)
 
-ORDERING_METHOD_LIST = ['SPQR_ORDERING_FIXED',
-        'SPQR_ORDERING_NATURAL',
-        'SPQR_ORDERING_COLAMD',
-        'SPQR_ORDERING_GIVEN',
-        'SPQR_ORDERING_CHOLMOD',
-        'SPQR_ORDERING_AMD',
-        'SPQR_ORDERING_METIS',
-        'SPQR_ORDERING_DEFAULT',
-        'SPQR_ORDERING_BEST',
-        'SPQR_ORDERING_BESTAMD']
+ORDERING_METHOD_DICT = OrderedDict()
+ORDERING_METHOD_DICT['SPQR_ORDERING_FIXED'] = SPQR_ORDERING_FIXED
+ORDERING_METHOD_DICT['SPQR_ORDERING_NATURAL'] = SPQR_ORDERING_NATURAL
+ORDERING_METHOD_DICT['SPQR_ORDERING_COLAMD'] = SPQR_ORDERING_COLAMD
+ORDERING_METHOD_DICT['SPQR_ORDERING_GIVEN'] = SPQR_ORDERING_GIVEN
+ORDERING_METHOD_DICT['SPQR_ORDERING_CHOLMOD'] = SPQR_ORDERING_CHOLMOD
+ORDERING_METHOD_DICT['SPQR_ORDERING_AMD'] = SPQR_ORDERING_AMD
+ORDERING_METHOD_DICT['SPQR_ORDERING_METIS'] = SPQR_ORDERING_METIS
+ORDERING_METHOD_DICT['SPQR_ORDERING_DEFAULT'] = SPQR_ORDERING_DEFAULT
+ORDERING_METHOD_DICT['SPQR_ORDERING_BEST'] = SPQR_ORDERING_BEST
+ORDERING_METHOD_DICT['SPQR_ORDERING_BESTAMD'] = SPQR_ORDERING_BESTAMD
 
-SPQR_ORDERING_BEST_ = SPQR_ORDERING_BEST
+ORDERING_METHOD_LIST = ORDERING_METHOD_DICT.keys()
+
 
 {% if spqr_export_mode %}
 
@@ -283,13 +287,13 @@ cdef class SPQRContext_@index@_@type@:
     ####################################################################################################################
     # COMMON OPERATIONS
     ####################################################################################################################
-    def solve(self, cnp.ndarray[cnp.@type|cysparse_type_to_numpy_c_type@, mode="c"] b, int ordering=SPQR_ORDERING_BEST, double drop_tol=0):
+    def solve(self, cnp.ndarray[cnp.@type|cysparse_type_to_numpy_c_type@, mode="c"] b, str ordering='SPQR_ORDERING_BEST', double drop_tol=0):
         """
         Solve `A*x = b` with `b` dense (case `X = A\B`).
 
         Args:
-            ordering:
-            drop_tol: Treat columns with 2-norm <= drop_tol as zero.
+            ordering (str):
+            drop_tol (double): Treat columns with 2-norm <= drop_tol as zero.
 
         """
         # test argument b
@@ -315,7 +319,7 @@ cdef class SPQRContext_@index@_@type@:
 
         cdef cholmod_dense * cholmod_sol
 
-        cholmod_sol = SuiteSparseQR_C_backslash(ordering, drop_tol, &self.sparse_struct, &B, &self.common_struct)
+        cholmod_sol = SuiteSparseQR_C_backslash(ORDERING_METHOD_DICT[ordering], drop_tol, &self.sparse_struct, &B, &self.common_struct)
 
         # test solution
         if cholmod_sol == NULL:
@@ -406,12 +410,12 @@ cdef class SPQRContext_@index@_@type@:
 
         return sol
 
-    def get_QR(self, int ordering, SuiteSparse_long econ, double drop_tol = 0):
+    def get_QR(self, str ordering, SuiteSparse_long econ, double drop_tol = 0):
         """
         Return QR factorisation objects. If needed, the QR factorisation is triggered.
 
         Args:
-            ordering: SPQR ordening. See `ORDERING_METHOD_LIST`.
+            ordering (str): SPQR ordening. See `ORDERING_METHOD_LIST`.
             drop_tol (double): Columns with `2-norm <= drop_tol` are treated as 0.
             econ (SuiteSparse_long): Parameter such that `e = max(min(m,econ),rank(A))`.
 
@@ -438,7 +442,7 @@ cdef class SPQRContext_@index@_@type@:
             SuiteSparse_long status
 
         # returns rank(A) est., (-1) if failure
-        status = SuiteSparseQR_C_QR (ordering, drop_tol, econ, &self.sparse_struct, &Q_cholmod, &R_cholmod, &E_cholmod, &self.common_struct)
+        status = SuiteSparseQR_C_QR (ORDERING_METHOD_DICT[ordering], drop_tol, econ, &self.sparse_struct, &Q_cholmod, &R_cholmod, &E_cholmod, &self.common_struct)
 
         if status == -1:
             raise RuntimeError('SPQR could not factorize matrix...')
@@ -468,12 +472,12 @@ cdef class SPQRContext_@index@_@type@:
         return status
 
 
-    def create_symbolic(self, ordering=SPQR_ORDERING_BEST, rank_detection=False):
+    def create_symbolic(self, str ordering='SPQR_ORDERING_BEST', rank_detection=False):
         """
         Create the symbolic object if it is not already in cache.
 
         Args:
-            ordering:
+            ordering (str):
             rank_detection:
 
         Note:
@@ -484,7 +488,7 @@ cdef class SPQRContext_@index@_@type@:
         if self.factors_struct_initialized:
             return
 
-        cdef bint status = self._create_symbolic(ordering, rank_detection)
+        cdef bint status = self._create_symbolic(ORDERING_METHOD_DICT[ordering], rank_detection)
 
         # TODO: raise exception
 
@@ -524,21 +528,21 @@ cdef class SPQRContext_@index@_@type@:
         # TODO: raise exception on error
 
 
-    def analyze(self, ordering=SPQR_ORDERING_BEST, rank_detection=False, drop_tol=0):
+    def analyze(self, str ordering='SPQR_ORDERING_BEST', rank_detection=False, drop_tol=0):
         self.create_symbolic(ordering, rank_detection)
         self.create_numeric(drop_tol)
 
         # TODO: raise exception...
 
 
-    def factorize(self, force = False, ordering=SPQR_ORDERING_BEST, drop_tol=0):
+    def factorize(self, force = False, str ordering='SPQR_ORDERING_BEST', drop_tol=0):
         self.factorized = True
 
         # if needed
-        self.analyze(ordering=ordering)
+        self.analyze(ordering)
 
         if not self.factorized or force:
-            self.factors_struct = SuiteSparseQR_C_factorize(ordering, drop_tol, &self.sparse_struct, &self.common_struct)
+            self.factors_struct = SuiteSparseQR_C_factorize(ORDERING_METHOD_DICT[ordering], drop_tol, &self.sparse_struct, &self.common_struct)
 
         if self.factors_struct is NULL:
             status = 0

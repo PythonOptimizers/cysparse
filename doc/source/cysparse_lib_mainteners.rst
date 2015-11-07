@@ -185,8 +185,8 @@ Types
 **All** classes are typed and *almost* all algorithms used specialized typed variables. Many algorithm are specialized for **one** type of variable. This allows to have optimized algorithms but at the detriment of being able to mix types. For instance, most of the methods of sparse matrices only works for **one** ``dtype`` and **one** ``itype``. 
 
 
-``enum``
---------
+How to expose ``enum``\s to :program:`Python`
+----------------------------------------------
 
 Even if recently :program:`Cyhton` exposes automagically ``enum``\s to :program:`Python` (see https://groups.google.com/forum/#!topic/cython-users/gn1p6znjoyE), don't count on it. The convention is 
 to expose equivalent strings to the user. This string is then translated internally by the corresponding ``enum``. For instance, the ``enum`` value ``UMFPACK_A`` :program:`UmfPack` system parameter can be 
@@ -199,6 +199,7 @@ given as the string `'UMFPACK_A'` by the user (as a parameter to a `solve()` met
             int umfpack_sys = UMFPACK_SYS_DICT[umfpack_sys_string]
         ...
 
+In :program:`Cython` code, you are free to directly use the ``enum`` itself.
 
 ..  raw:: html
 
