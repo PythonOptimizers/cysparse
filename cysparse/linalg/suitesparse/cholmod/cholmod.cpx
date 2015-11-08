@@ -197,14 +197,21 @@ cdef populate2_cholmod_sparse_struct_with_CSCSparseMatrix(cholmod_sparse * spars
 # FROM cholmod_sparse -> CSCSparseMatrix
 ##################################################################
 cdef CSCSparseMatrix_@index@_@type@ cholmod_sparse_to_CSCSparseMatrix_@index@_@type@(cholmod_sparse * sparse_struct, bint no_copy=False):
+    """
+    Convert a ``cholmod`` sparse struct to a :class:`CSCSparseMatrix_@index@_@type@`.
 
+    """
+    # TODO: generalize to any cholmod sparse structure, with or without copy
+    # TODO: generalize to complex case
     assert sparse_struct.sorted == 1, "We only accept cholmod_sparse matrices with sorted indices"
     assert sparse_struct.packed == 1, "We only accept cholmod_sparse matrices with packed indices"
 
     #cdef:
     #    CSCSparseMatrix_@index@_@type@ csc_mat
 
-    # TODO: see UmfPack get_LU...
+    cdef @index@ * Lp = <@index@ *> PyMem_Malloc((n_row + 1) * sizeof(@index@))
+        if not Lp:
+            raise MemoryError()
 
     #csc_mat = MakeCSCSparseMatrix_@index@_@type@(nrow=33, ncol=23, nnz=44, ind=Up, row=Ui, val=Ux_complex, is_symmetric=False, store_zeros=False)
     #return csc_mat
