@@ -184,6 +184,7 @@ cdef extern from "cholmod.h":
     # Sparse struct
     int cholmod_check_sparse(cholmod_sparse *A, cholmod_common *Common)
     int cholmod_print_sparse(cholmod_sparse *A, const char *name, cholmod_common *Common)
+    int cholmod_free_sparse(cholmod_sparse **A, cholmod_common *Common)
 
     # Dense struct
     int cholmod_free_dense(cholmod_dense **X, cholmod_common *Common)
@@ -193,6 +194,9 @@ cdef extern from "cholmod.h":
     int cholmod_print_factor(cholmod_factor *L, const char *name, cholmod_common *Common)
     #int cholmod_free_factor()
     # factor_to_sparse
+
+    # Memory management
+    void * cholmod_free(size_t n, size_t size,	void *p,  cholmod_common *Common)
 
 cdef populate1_cholmod_sparse_struct_with_CSCSparseMatrix(cholmod_sparse * sparse_struct, CSCSparseMatrix_INT32_t_FLOAT64_t csc_mat, bint no_copy=?)
 

@@ -69,4 +69,38 @@ print solver.SPQR_ordering_list()
 
 print "D" * 80
 
-solver.get_QR(ordering='SPQR_ORDERING_BEST', econ=32)
+Q, R, E = solver.get_QR(ordering='SPQR_ORDERING_BEST', econ=32)
+
+print "Q:"
+print Q.are_row_indices_sorted()
+print Q
+print Q.debug_print()
+
+print "R:"
+print R.are_row_indices_sorted()
+print R
+print R.debug_print()
+
+print "%" * 90
+print "well constructed?"
+print Q.is_well_constructed(raise_exception=True)
+print R.is_well_constructed()
+
+print "CRASH" * 20
+Q_np = Q.to_ndarray()
+R_np = R.to_ndarray()
+
+
+print Q
+print Q_np
+
+print "1" * 80
+print R
+print R_np
+
+print np.dot(Q_np, R_np)
+
+#print Q.to_ndarray() * R.to_ndarray()
+
+print "Z" * 80
+print E

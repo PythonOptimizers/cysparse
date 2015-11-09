@@ -24,6 +24,9 @@ cdef class CSCSparseMatrix_INT64_t_FLOAT64_t(ImmutableSparseMatrix_INT64_t_FLOAT
         bint __row_indices_sorted  # are the column indices sorted in ascending order?
         INT64_t __first_col_not_ordered # first row that is not ordered
 
+
+    cpdef bint is_well_constructed(self, bint raise_exception=?)  except False
+
     cdef _order_row_indices(self)
     cdef _set_row_indices_ordered_is_true(self)
 

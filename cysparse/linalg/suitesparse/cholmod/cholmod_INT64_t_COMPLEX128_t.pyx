@@ -5,6 +5,8 @@ from cpython cimport Py_INCREF, Py_DECREF
 from cysparse.types.cysparse_generic_types cimport split_array_complex_values_kernel_INT64_t_COMPLEX128_t, join_array_complex_values_kernel_INT64_t_COMPLEX128_t
 
 
+from cysparse.sparse.csc_mat_matrices.csc_mat_INT64_t_COMPLEX128_t cimport CSCSparseMatrix_INT64_t_COMPLEX128_t, MakeCSCSparseMatrix_INT64_t_COMPLEX128_t
+
 import numpy as np
 cimport numpy as cnp
 
@@ -70,6 +72,7 @@ cdef extern from "cholmod.h":
     # Sparse struct
     int cholmod_l_check_sparse(cholmod_sparse *A, cholmod_common *Common)
     int cholmod_l_print_sparse(cholmod_sparse *A, const char *name, cholmod_common *Common)
+    int cholmod_l_free_sparse(cholmod_sparse **A, cholmod_common *Common)
 
     # Dense struct
     int cholmod_l_free_dense(cholmod_dense **X, cholmod_common *Common)
@@ -79,6 +82,9 @@ cdef extern from "cholmod.h":
     int cholmod_l_print_factor(cholmod_factor *L, const char *name, cholmod_common *Common)
     #int cholmod_l_free_factor()
     # factor_to_sparse
+
+    # Memory management
+    void * cholmod_l_free(size_t n, size_t size,	void *p,  cholmod_common *Common)
 
     # Triplet struct
     #int cholmod_l_check_triplet(cholmod_triplet *T, cholmod_common *Common)
@@ -177,18 +183,128 @@ cdef populate2_cholmod_sparse_struct_with_CSCSparseMatrix(cholmod_sparse * spars
 # FROM cholmod_sparse -> CSCSparseMatrix
 ##################################################################
 cdef CSCSparseMatrix_INT64_t_COMPLEX128_t cholmod_sparse_to_CSCSparseMatrix_INT64_t_COMPLEX128_t(cholmod_sparse * sparse_struct, bint no_copy=False):
+    """
+    Convert a ``cholmod`` sparse struct to a :class:`CSCSparseMatrix_INT64_t_COMPLEX128_t`.
 
+    """
+    # TODO: generalize to any cholmod sparse structure, with or without copy
+    # TODO: generalize to complex case
+    # TODO: remove asserts
     assert sparse_struct.sorted == 1, "We only accept cholmod_sparse matrices with sorted indices"
     assert sparse_struct.packed == 1, "We only accept cholmod_sparse matrices with packed indices"
 
-    print "TOTO"
-    print sparse_struct.packed
+    assert sparse_struct.xtype == CHOLMOD_ZOMPLEX, "We only accept cholmod_sparse matrices with zomplex"
 
-    #cdef:
-    #    CSCSparseMatrix_INT64_t_COMPLEX128_t csc_mat
 
-    #csc_mat = MakeCSCSparseMatrix_INT64_t_COMPLEX128_t(nrow=33, ncol=23, nnz=44, ind=Up, row=Ui, val=Ux_complex, is_symmetric=False, store_zeros=False)
-    #return csc_mat
+    cdef:
+        CSCSparseMatrix_INT64_t_COMPLEX128_t csc_mat
+        INT64_t nrow
+        INT64_t ncol
+        INT64_t nnz
+        bint is_symmetric = False
+
+        # internal arrays of the CSC matrix
+        INT64_t * ind
+        INT64_t * row
+
+        # internal arrays of the cholmod sparse matrix
+        INT64_t * ind_cholmod
+        INT64_t * row_cholmod
+
+        # internal arrays for the CSC matrix
+        FLOAT64_t * valx
+        FLOAT64_t * valz
+
+        COMPLEX128_t * val_complex
+
+        # internal arrays for the cholmod sparse matrix
+        FLOAT64_t * valx_cholmod
+        FLOAT64_t * valz_cholmod
+
+
+
+        INT64_t j, k
+
+    nrow = sparse_struct.nrow
+    ncol = sparse_struct.ncol
+    nnz = sparse_struct.nzmax
+
+    if sparse_struct.stype == 0:
+        is_symmetric = False
+    elif sparse_struct.stype < 0:
+        is_symmetric == True
+    else:
+        raise NotImplementedError('We do not accept cholmod square symmetric sparse matrix with upper triangular part filled in.')
+
+    ##################################### NO COPY ######################################################################
+    if no_copy:
+        ind = <INT64_t *> sparse_struct.p
+        row = <INT64_t *> sparse_struct.i
+
+        valx = <FLOAT64_t *> sparse_struct.x
+        valz = <FLOAT64_t *> sparse_struct.z
+
+    ##################################### WITH COPY ####################################################################
+    else:   # we do a copy
+
+        ind_cholmod = <INT64_t * > sparse_struct.p
+        row_cholmod = <INT64_t * > sparse_struct.i
+
+        ind = <INT64_t *> PyMem_Malloc((ncol + 1) * sizeof(INT64_t))
+
+        if not ind:
+            raise MemoryError()
+
+        row = <INT64_t *> PyMem_Malloc(nnz * sizeof(INT64_t))
+
+        if not row:
+            PyMem_Free(ind)
+            PyMem_Free(row)
+
+            raise MemoryError()
+
+
+        for j from 0 <= j <= ncol:
+            ind[j] = ind_cholmod[j]
+
+        for k from 0 <= k < nnz:
+            row[k] = row_cholmod[k]
+
+
+
+        valx_cholmod = <FLOAT64_t *> sparse_struct.x
+        valz_cholmod = <FLOAT64_t *> sparse_struct.z
+
+        valx = <FLOAT64_t *> PyMem_Malloc(nnz * sizeof(FLOAT64_t))
+
+        if not valx:
+            PyMem_Free(ind)
+            PyMem_Free(row)
+            PyMem_Free(valx)
+
+            raise MemoryError()
+
+        valz = <FLOAT64_t *> PyMem_Malloc(nnz * sizeof(FLOAT64_t))
+
+        if not valz:
+            PyMem_Free(ind)
+            PyMem_Free(row)
+            PyMem_Free(valx)
+            PyMem_Free(valz)
+
+            raise MemoryError()
+
+        for k from 0 <= k < nnz:
+            valx[k] = valx_cholmod[k]
+            valz[k] = valz_cholmod[k]
+
+
+
+    raise NotImplementedError('Complex case not implemented yet...')
+
+
+    return csc_mat
+
 
 ##################################################################
 # FROM NumPy ndarray -> cholmod_dense

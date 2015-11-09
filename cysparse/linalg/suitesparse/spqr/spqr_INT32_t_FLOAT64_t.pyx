@@ -1,4 +1,5 @@
 from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
+from libc.stdlib cimport malloc,free, calloc
 from cpython cimport Py_INCREF, Py_DECREF
 
 from cysparse.types.cysparse_types cimport *
@@ -388,25 +389,29 @@ cdef class SPQRContext_INT32_t_FLOAT64_t:
         Return QR factorisation objects. If needed, the QR factorisation is triggered.
 
         Args:
-            ordering (str): SPQR ordening. See `ORDERING_METHOD_LIST`.
-            drop_tol (double): Columns with `2-norm <= drop_tol` are treated as 0.
-            econ (SuiteSparse_long): Parameter such that `e = max(min(m,econ),rank(A))`.
+            ordering (str): SPQR ordening. See ``ORDERING_METHOD_LIST``.
+            drop_tol (double): Columns with ``2-norm <= drop_tol`` are treated as 0.
+            econ (SuiteSparse_long): Parameter such that ``e = max(min(m,econ),rank(A))``.
 
         Returns:
-            (Q,R,E)
+            ``(Q,R,E)``
 
-            The original matrix A is factorized into
+            The original matrix ``A`` is factorized into
 
-                Q R = A E
+                ``Q R = A E``
 
             where:
-             - A is a `m`-by-`n` sparse matrix to factorize;
-             - Q is a `m`-by-`e` sparse matrix;
-             - R is a `e`-by-`n` sparse matrix and
-             - E is a `n`-by-`n` permutation matrice.
+             - ``A`` is a ``m``-by-``n`` sparse matrix to factorize;
+             - ``Q`` is a ``m``-by-``e`` sparse matrix;
+             - ``R`` is a ``e``-by-``n`` sparse matrix and
+             - ``E`` is a ``n``-by-``n`` permutation matrice.
 
-            Q and R are returned as CSCSparseMatrix matrices.
-            E is returned as a one dimensional NumPy vector of size `n`.
+            ``Q`` and ``R`` are returned as ``CSCSparseMatrix`` matrices.
+            ``E`` is returned as a one dimensional NumPy vector of size ``n``.
+
+        Warning:
+            We don't cache any matrix. ``E`` is **always** returned.
+
         """
         cdef:
             cholmod_sparse *Q_cholmod
@@ -423,10 +428,34 @@ cdef class SPQRContext_INT32_t_FLOAT64_t:
         # create matrices to return
         cdef:
             CSCSparseMatrix_INT32_t_FLOAT64_t Q_csc_mat
+            CSCSparseMatrix_INT32_t_FLOAT64_t R_csc_mat
 
         Q_csc_mat = cholmod_sparse_to_CSCSparseMatrix_INT32_t_FLOAT64_t(Q_cholmod, no_copy=False)
+        R_csc_mat = cholmod_sparse_to_CSCSparseMatrix_INT32_t_FLOAT64_t(R_cholmod, no_copy=False)
 
-        return Q_csc_mat
+        # create permutation matrix E
+        cdef:
+            cnp.ndarray[cnp.npy_int32, ndim=1] E_ndarray
+            INT32_t i
+
+        # test if E is identity
+        if E_cholmod == NULL:
+            E_ndarray = np.empty(self.ncol, dtype=np.int32)
+            for i from 0 <= i < self.ncol:
+                E_ndarray[i] = i
+        else:
+            E_ndarray = np.empty(self.ncol, dtype=np.int32)
+
+            for i from 0 <= i < self.ncol:
+                E_ndarray[i] = E_cholmod[i]
+
+        # delete cholmod matrices
+        cholmod_free_sparse(&Q_cholmod, &self.common_struct)
+        cholmod_free_sparse(&R_cholmod, &self.common_struct)
+
+        cholmod_free(self.ncol, sizeof(SuiteSparse_long),	E_cholmod,  &self.common_struct)
+
+        return Q_csc_mat, R_csc_mat, E_ndarray
 
     ####################################################################################################################
     # EXPERT MODE
