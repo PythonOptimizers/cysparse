@@ -132,6 +132,7 @@ cdef extern from  "SuiteSparseQR_C.h":
         cholmod_common *cc          # workspace and parameters
     )
 
+    # TODO: implement this version?
     # X = A\B where B is sparse
     # returns X, or NULL
     cdef cholmod_sparse *SuiteSparseQR_C_backslash_sparse (
@@ -278,6 +279,8 @@ cdef class SPQRContext_INT64_t_COMPLEX128_t:
         # TODO: doesn't work... WHY?
         #del self.csc_mat
 
+        if self.factorized:
+            SuiteSparseQR_C_free(&self.factors_struct, &self.common_struct)
 
         cholmod_l_finish(&self.common_struct)
 
