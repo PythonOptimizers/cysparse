@@ -188,7 +188,6 @@ cdef class LLSparseMatrixView_@index@_@type@:
         if not 0 <= i < self.__nrow or not 0 <= j < self.__ncol:
             raise IndexError("Index out of bounds")
 
-
         return self.at(i, j)
 
     ####################################################################################################################

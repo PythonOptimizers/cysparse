@@ -2,6 +2,7 @@
 import os
 import fnmatch
 
+
 def find_files(directory, pattern, recursively=True, complete_filename=True):
     """
     Return a list of files with or without base directories, recursively or not.

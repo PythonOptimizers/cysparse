@@ -1,6 +1,6 @@
 from cysparse.sparse.ll_mat import *
 import cysparse.types.cysparse_types as types
-from cysparse.linalg.mumps_context import NewMumpsContext
+from cysparse.linalg.mumps_context import NewMUMPSContext
 
 import numpy as np
 
@@ -17,9 +17,9 @@ e = np.ones(n, 'd')
 #rhs = np.zeros(n, 'd')
 rhs = A*e
 
-
-context = NewMumpsContext(A, verbose=True)
-
+print 'before context'
+context = NewMUMPSContext(A, verbose=True)
+print 'after context'
 print context.version_number
 
 context.analyze()

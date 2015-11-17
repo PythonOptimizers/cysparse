@@ -141,6 +141,66 @@ cdef class CSCSparseMatrix_INT64_t_FLOAT64_t(ImmutableSparseMatrix_INT64_t_FLOAT
         return self_copy
 
     ####################################################################################################################
+    # Internal tests
+    ####################################################################################################################
+    cpdef bint is_well_constructed(self, bint raise_exception=False) except False:
+        """
+        Test if matrix internals are OK, i.e. if we have a good matrix representation.
+
+        Args:
+            raise_exception: If ``True``, the method raises an exception, otherwise no exception is raised.
+
+        Raises:
+            RuntimeError if the matrix is not well constructed with an appropriate error message.
+
+        Note:
+            This method is really for internal use. For small matrices, you can also use :meth:`debug_print()`.
+            This method is costly, use only to test your matrix constructions in development mode.
+        """
+        cdef:
+            bint well_constructed = False
+            str err_msg = ''
+            str common_msg = 'problem with %s'
+            str matrix_triplet_line = 'i = %d, j = %d k = %d'
+            INT64_t i, j, k
+            FLOAT64_t v
+            bint loop_through_elements = False
+
+        try:
+            err_msg = common_msg % 'nnz'
+            self.nnz
+            err_msg = common_msg % 'nrow'
+            self.nrow
+            err_msg = common_msg % 'ncol'
+            self.ncol
+
+            loop_through_elements = True
+
+            # test all elements
+            for j from 0 <= j < self.ncol:
+                assert 0 <= self.ind[j] <= self.nnz
+                assert 0 <= self.ind[j+1] <= self.nnz
+                assert self.ind[j] <= self.ind[j+1]
+                for k from self.ind[j] <= k < self.ind[j+1]:
+                    i = self.row[k]
+                    assert 0 <= i < self.nrow
+                    v = self.val[k]
+
+            well_constructed = True
+
+
+        except:
+            well_constructed = False
+
+            if loop_through_elements:
+                err_msg = common_msg % (matrix_triplet_line % (i, j, k))
+
+            if raise_exception:
+                raise RuntimeError(err_msg)
+
+        return well_constructed
+
+    ####################################################################################################################
     # Row indices ordering
     ####################################################################################################################
     def are_row_indices_sorted(self, force_test=False):
@@ -683,13 +743,22 @@ cdef class CSCSparseMatrix_INT64_t_FLOAT64_t(ImmutableSparseMatrix_INT64_t_FLOAT
             cnp.ndarray[cnp.npy_float64, ndim=2] np_ndarray
             INT64_t i, j, k
             FLOAT64_t [:,:] np_memview
+            FLOAT64_t value
 
         np_ndarray = np.zeros((self.__nrow, self.__ncol), dtype=np.float64, order='C')
         np_memview = np_ndarray
 
-        for j from 0 <= j < self.__ncol:
-            for k from self.ind[j] <= k < self.ind[j+1]:
-                np_memview[self.row[k], j] = self.val[k]
+        if not self.__is_symmetric:
+            for j from 0 <= j < self.__ncol:
+                for k from self.ind[j] <= k < self.ind[j+1]:
+                    np_memview[self.row[k], j] = self.val[k]
+        else:
+            for j from 0 <= j < self.__ncol:
+                for k from self.ind[j] <= k < self.ind[j+1]:
+                    i = self.row[k]
+                    value = self.val[k]
+                    np_memview[i, j] = value
+                    np_memview[j, i] = value
 
         return np_ndarray
 

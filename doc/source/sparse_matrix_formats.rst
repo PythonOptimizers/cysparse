@@ -221,6 +221,18 @@ and everything we wrote about the ``CSR`` format transposes to the ``CSC`` forma
 Detailed example
 -------------------
 
+Here are the three internal arrays for the example matrix:
+
+.. figure:: images/csc_detailed_example.* 
+    :width: 100pt
+    :align: center
+    
+    The internal arrays of a ``CSC`` matrix
+    
+The values are stored column-wise in ``row`` and ``val``: first the column ``0``, than column ``1`` and finally column ``2`` (nothing for column ``3``). ``ind`` gives the first indices for each column: ``ind[0] == 0`` gives the start of column ``0``,
+``ind[1] == 1`` gives the start of column ``1``, etc. This means that ``ind[j+1] - ind[j]`` returns the number of elements in column ``j``.
+
+
 
 How to run through a ``CSC`` matrix
 -------------------------------------

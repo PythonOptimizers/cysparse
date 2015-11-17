@@ -20,3 +20,7 @@ print "*" * 80
 A = NewBandLLSparseMatrix(nrow=2, ncol=3, diag_coeff=[-1, 1, 2], numpy_arrays=[b1, b2, b3], dtype=COMPLEX64_T)
 
 A.print_to(sys.stdout)
+
+print "/" * 80
+B = NewBandLLSparseMatrix(nrow=2, ncol=3, diag_coeff=[1], numpy_arrays=[b2], dtype=COMPLEX64_T)
+print B

@@ -8,8 +8,34 @@ I started to deal with sorted col/row indices for LL/CSC/CSR sparse matrices.
 
 ## Announcements
 
-1. I have added **sorted** row/col indices for CSC/CSR matrices. This is a **BIG** change and needs some serious testing.
-   You might experience some bugs because of this change... Let me know and I'll correct it. Thanks.
+1. Unless there are some urgent needs (add the tag `priority` to the issues you want me to close urgently), I'll spend the next days (weeks) **decoupling** the code:
+
+    - The template generation will be **completely** rewritten to ease the automation process (and avoid some recurrent human errors)
+      and will be an autonomous project;
+    - The code generation process will be revisited to allow the use of the Cython debugger (it seems it is complicated to use the Python debugger on OSX).
+    - The `linalg` part will be **completely** removed from `CySparse` and **each** interface with a solver will be an autonomous project (in their respective
+      GitHub repositories). A common interface for all the solvers will be created and allow the interchange of solvers on the fly.
+    - 'CySparse' itself will have its API changed to better reflect the common use in the community (See 'PySparse', 'NumPy' and 'SciPy.sparse').
+    - A better mechanism will be implemented to allow the mix of special matrix cases (Symmetrical/general matrices, C-contiguous/non C-contiguous, etc). The aim
+      is to introduce complex hermitian matrices (much later).
+
+2. A centralized error/exception mechanism will be added.
+
+3. Memory leaks will be taken seriously and hopefully I'll be able to avoid any memory leak (Valgrind anyone?). Some leaks were left on purpose: I wanted to test some
+   Cython combinations before resolving these leaks (some ask for lots of work). These will be now taken care of.
+
+4. There is a need for a better unit test generation: we need a meta meta generation. I have some ideas that I will test in the next weeks.
+
+5. I have added **sorted** row/col indices for CSC/CSR matrices. This is a **BIG** change and needs some serious testing.
+   You might experience some bugs because of this change... Let me know and I'll correct it. Thanks. This is still of actuality.
+
+6. Documentation will be updated accordingly.
+
+All this is very ambitious. I'll try to do it cleverly, step by step, knowing that I might get stuck somewhere before I can finish everything.
+Each step will be done in dedicated branches so that the master and develop branches can be used as usual. Changes will only be committed in
+major versions. So basically, there are two types of improvements going on: big non compatible changes (major versions) and business
+as usual (minor versions).
+
 
 ## Want to follow the implementation of CySparse?
 

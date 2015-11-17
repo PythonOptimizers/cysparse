@@ -926,9 +926,22 @@ struct __pyx_opt_args_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT64_t_COMPL
   int __pyx_n;
   int count_only_stored;
 };
+struct __pyx_opt_args_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT64_t_COMPLEX128_t_36CSCSparseMatrix_INT64_t_COMPLEX128_t_is_well_constructed;
 struct __pyx_opt_args_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT64_t_COMPLEX128_t_MakeCSCSparseMatrix_INT64_t_COMPLEX128_t;
 
-/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT64_t_COMPLEX128_t.pxd":38
+/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT64_t_COMPLEX128_t.pxd":28
+ * 
+ * 
+ *     cpdef bint is_well_constructed(self, bint raise_exception=?)  except False             # <<<<<<<<<<<<<<
+ * 
+ *     cdef _order_row_indices(self)
+ */
+struct __pyx_opt_args_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT64_t_COMPLEX128_t_36CSCSparseMatrix_INT64_t_COMPLEX128_t_is_well_constructed {
+  int __pyx_n;
+  int raise_exception;
+};
+
+/* "cysparse/sparse/csc_mat_matrices/csc_mat_INT64_t_COMPLEX128_t.pxd":41
  * 
  * 
  * cdef MakeCSCSparseMatrix_INT64_t_COMPLEX128_t(INT64_t nrow,             # <<<<<<<<<<<<<<
@@ -1200,6 +1213,7 @@ static struct __pyx_vtabstruct_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT6
  */
 
 struct __pyx_vtabstruct_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT64_t_COMPLEX128_t_CSCSparseMatrix_INT64_t_COMPLEX128_t {
+  int (*is_well_constructed)(struct __pyx_obj_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT64_t_COMPLEX128_t_CSCSparseMatrix_INT64_t_COMPLEX128_t *, int __pyx_skip_dispatch, struct __pyx_opt_args_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT64_t_COMPLEX128_t_36CSCSparseMatrix_INT64_t_COMPLEX128_t_is_well_constructed *__pyx_optional_args);
   PyObject *(*_order_row_indices)(struct __pyx_obj_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT64_t_COMPLEX128_t_CSCSparseMatrix_INT64_t_COMPLEX128_t *);
   PyObject *(*_set_row_indices_ordered_is_true)(struct __pyx_obj_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT64_t_COMPLEX128_t_CSCSparseMatrix_INT64_t_COMPLEX128_t *);
   __pyx_t_8cysparse_5types_14cysparse_types_INT64_t (*count_nnz_by_column)(struct __pyx_obj_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT64_t_COMPLEX128_t_CSCSparseMatrix_INT64_t_COMPLEX128_t *, __pyx_t_8cysparse_5types_14cysparse_types_INT64_t);
@@ -5174,12 +5188,12 @@ static PyObject *__pyx_pf_8cysparse_6linalg_11suitesparse_7umfpack_28umfpack_INT
  * 
  *     def get_LU(self, get_L=True, get_U=True, get_P=True, get_Q=True, get_D=True, get_R=True):             # <<<<<<<<<<<<<<
  *         """
- *         Return LU factorisation objects. If needed, the LU factorisation is triered.
+ *         Return LU factorisation objects. If needed, the LU factorisation is triggered.
  */
 
 /* Python wrapper */
 static PyObject *__pyx_pw_8cysparse_6linalg_11suitesparse_7umfpack_28umfpack_INT64_t_COMPLEX128_t_35UmfpackContext_INT64_t_COMPLEX128_t_19get_LU(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_8cysparse_6linalg_11suitesparse_7umfpack_28umfpack_INT64_t_COMPLEX128_t_35UmfpackContext_INT64_t_COMPLEX128_t_18get_LU[] = "\n        Return LU factorisation objects. If needed, the LU factorisation is triered.\n\n        Returns:\n            (L, U, P, Q, D, do_recip, R)\n\n            The original matrix A is factorized into\n\n                L U = P R A Q\n\n            where:\n             - L is unit lower triangular,\n             - U is upper triangular,\n             - P and Q are permutation matrices,\n             - R is a row-scaling diagonal matrix such that\n\n                  * the i-th row of A has been multiplied by R[i] if do_recip = True,\n                  * the i-th row of A has been divided by R[i] if do_recip = False.\n\n            L and U are returned as CSRSparseMatrix and CSCSparseMatrix sparse matrices respectively.\n            P, Q and R are returned as NumPy arrays.\n\n\n        \n        \n        ";
+static char __pyx_doc_8cysparse_6linalg_11suitesparse_7umfpack_28umfpack_INT64_t_COMPLEX128_t_35UmfpackContext_INT64_t_COMPLEX128_t_18get_LU[] = "\n        Return LU factorisation objects. If needed, the LU factorisation is triggered.\n\n        Returns:\n            (L, U, P, Q, D, do_recip, R)\n\n            The original matrix A is factorized into\n\n                L U = P R A Q\n\n            where:\n             - L is unit lower triangular,\n             - U is upper triangular,\n             - P and Q are permutation matrices,\n             - R is a row-scaling diagonal matrix such that\n\n                  * the i-th row of A has been multiplied by R[i] if do_recip = True,\n                  * the i-th row of A has been divided by R[i] if do_recip = False.\n\n            L and U are returned as CSRSparseMatrix and CSCSparseMatrix sparse matrices respectively.\n            P, Q and R are returned as NumPy arrays.\n\n\n        \n        \n        ";
 static PyObject *__pyx_pw_8cysparse_6linalg_11suitesparse_7umfpack_28umfpack_INT64_t_COMPLEX128_t_35UmfpackContext_INT64_t_COMPLEX128_t_19get_LU(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   CYTHON_UNUSED PyObject *__pyx_v_get_L = 0;
   CYTHON_UNUSED PyObject *__pyx_v_get_U = 0;
@@ -6740,7 +6754,7 @@ static PyObject *__pyx_pf_8cysparse_6linalg_11suitesparse_7umfpack_28umfpack_INT
  * 
  *     def get_LU(self, get_L=True, get_U=True, get_P=True, get_Q=True, get_D=True, get_R=True):             # <<<<<<<<<<<<<<
  *         """
- *         Return LU factorisation objects. If needed, the LU factorisation is triered.
+ *         Return LU factorisation objects. If needed, the LU factorisation is triggered.
  */
 
   /* function exit code */

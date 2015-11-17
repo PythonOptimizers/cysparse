@@ -134,6 +134,15 @@ cdef class SparseMatrix:
     # this class, i.e. if it works, it is optimized for that particular class, if not, it must be implemented if needed.
 
     #########################
+    # Strings
+    #########################
+    def itype_str(self):
+        return type_to_string(self.itype)
+
+    def dtype_str(self):
+        return type_to_string(self.dtype)
+
+    #########################
     # Sub matrices
     #########################
     # Copy

@@ -173,7 +173,9 @@ cdef LLSparseMatrix_@index@_@type@ MakeLLSparseMatrixFromMMFile2_@index@_@type@(
         @index@ nrow
         @index@ ncol
         @index@ nnz
+        @index@ nnz_real
         @index@ nnz_read
+
 
     cdef:
         bint sparse
@@ -185,10 +187,8 @@ cdef LLSparseMatrix_@index@_@type@ MakeLLSparseMatrixFromMMFile2_@index@_@type@(
         list storage_scheme_list = [MM_GENERAL_STR, MM_SYMM_STR, MM_HERM_STR, MM_SKEW_STR]
         dict storage_scheme_dict = {MM_GENERAL_STR : MM_GENERAL, MM_SYMM_STR : MM_SYMMETRIC, MM_HERM_STR : MM_HERMITIAN, MM_SKEW_STR : MM_SKEW}
 
-{% if type == 'INT64_t' %}
         COMPLEX128_t z, w
         FLOAT64_t real_part, imag_part
-{% endif %}
 
     cdef LLSparseMatrix_@index@_@type@ A
 
@@ -311,8 +311,9 @@ cdef LLSparseMatrix_@index@_@type@ MakeLLSparseMatrixFromMMFile2_@index@_@type@(
 
         ### DOES NOT WORK (YET) ###
         # Reading matrix content
+        nnz_real = 0
         for nnz_read from 0 <= nnz_read < nnz:
-            print "read element... "
+            #print "read element... "
             #############################
             # read new element (i, j, v)
             #############################
@@ -340,26 +341,28 @@ cdef LLSparseMatrix_@index@_@type@ MakeLLSparseMatrixFromMMFile2_@index@_@type@(
             # I have no idea why we have to use temp variables...
             real_part =  <FLOAT64_t> atof(token_list[2])
             imag_part =  <FLOAT64_t> atof(token_list[3])
-            z.real = real_part
-            z.imag = imag_part
+            v.real = real_part
+            v.imag = imag_part
 {% else %}
 YOU MUST CAST YOUR TYPE HERE
 {% endif %}
 
-            #############################
-            # fill in arrays
-            #############################
+            if store_zeros or v != 0.0:
+                nnz_real = nnz_real + 1
+                #############################
+                # fill in arrays
+                #############################
 
-            if root[i] == -1:
-                print "first element on row i"
-                # first element on row i
-                root[i] = nnz_read
+                if root[i] == -1:
+                    #print "first element on the row %d" % i
+                    # first element on row i
+                    root[i] = nnz_read
 
-            col[nnz_read] = j
-            val[nnz_read] = v
-            # last element on row i
-            end_root[i] = nnz_read
-            link[end_root[i]] = nnz_read
+                col[nnz_read] = j
+                val[nnz_read] = v
+                # last element on row i
+                end_root[i] = nnz_read
+                link[end_root[i]] = nnz_read + 1
 
         # post processing
         # close row lists
@@ -373,7 +376,7 @@ YOU MUST CAST YOUR TYPE HERE
         A.link = link
         A.root = root
         A.free = -1
-        A.__nnz = nnz
+        A.__nnz = nnz_real
         A.nalloc = nnz
 
 

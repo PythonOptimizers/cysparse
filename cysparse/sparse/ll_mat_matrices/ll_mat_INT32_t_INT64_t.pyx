@@ -596,6 +596,9 @@ cdef class LLSparseMatrix_INT32_t_INT64_t(MutableSparseMatrix_INT32_t_INT64_t):
 
         return True  # not bad column index detected
 
+    def are_column_indices_sorted(self):
+        return self.is_sorted()
+
     ####################################################################################################################
     # Matrix conversions
     ####################################################################################################################
@@ -775,18 +778,31 @@ cdef class LLSparseMatrix_INT32_t_INT64_t(MutableSparseMatrix_INT32_t_INT64_t):
         # EXPLICIT TYPE TESTS
         cdef:
             cnp.ndarray[cnp.npy_int64, ndim=2] np_ndarray
-            INT32_t i, k
+            INT32_t i, j, k
             INT64_t [:,:] np_memview
+            INT64_t value
 
         np_ndarray = np.zeros((self.__nrow, self.__ncol), dtype=np.int64, order='C')
         np_memview = np_ndarray
 
-        for i from 0 <= i < self.__nrow:
-            k = self.root[i]
-            while k != -1:
-               np_memview[i, self.col[k]] = self.val[k]
+        if not self.__is_symmetric:
+            for i from 0 <= i < self.__nrow:
+                k = self.root[i]
+                while k != -1:
+                    np_memview[i, self.col[k]] = self.val[k]
 
-               k = self.link[k]
+                    k = self.link[k]
+
+        else:
+            for i from 0 <= i < self.__nrow:
+                k = self.root[i]
+                while k != -1:
+                    j = self.col[k]
+                    value = self.val[k]
+                    np_memview[i, j] = value
+                    np_memview[j, i] = value
+
+                    k = self.link[k]
 
         return np_ndarray
 
@@ -822,6 +838,9 @@ cdef class LLSparseMatrix_INT32_t_INT64_t(MutableSparseMatrix_INT32_t_INT64_t):
         assert self == view.A, "LLSparseMatrixView should correspond to LLSparseMatrix!"
 
         # TODO: refine this method. It is too generic to do any optimization at all...
+
+        # CYTHON BUG: this method does not work with COMPLEX256_T ...
+
 
         # VIEW
         cdef:
@@ -995,7 +1014,6 @@ cdef class LLSparseMatrix_INT32_t_INT64_t(MutableSparseMatrix_INT32_t_INT64_t):
                     k = self.link[k]
 
         return nnz
-
 
     ####################################################################################################################
     # Set/Get individual elements
@@ -2402,3 +2420,29 @@ cdef class LLSparseMatrix_INT32_t_INT64_t(MutableSparseMatrix_INT32_t_INT64_t):
         else:
             print('Matrix too big to print out', file=OUT)
 
+
+    ####################################################################################################################
+    # DEBUG
+    ####################################################################################################################
+    def debug_print(self):
+        cdef INT32_t i
+        print("root:")
+        for i from 0 <= i < self.nrow:
+            print(self.root[i], end=' ', sep=' ')
+        print()
+
+
+        print("col:")
+        for i from 0 <= i < self.nnz:
+            print(self.col[i], end=' ', sep=' ')
+        print()
+
+        print("val:")
+        for i from 0 <= i < self.nnz:
+            print(self.val[i], end=' == ', sep=' == ')
+        print()
+
+        print("link:")
+        for i from 0 <= i < self.nnz:
+            print(self.link[i], end=' ', sep=' ')
+        print()
