@@ -633,7 +633,7 @@ cdef class UmfpackContext_INT64_t_COMPLEX128_t:
 
     def get_LU(self, get_L=True, get_U=True, get_P=True, get_Q=True, get_D=True, get_R=True):
         """
-        Return LU factorisation objects. If needed, the LU factorisation is triered.
+        Return LU factorisation objects. If needed, the LU factorisation is triggered.
 
         Returns:
             (L, U, P, Q, D, do_recip, R)

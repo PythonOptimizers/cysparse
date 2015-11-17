@@ -112,6 +112,7 @@ cdef extern from  "SuiteSparseQR_C.h":
         cholmod_common *cc          # workspace and parameters
     ) 
 
+{% if spqr_export_mode %}
     ####################################################################################################################
     # EXPERT MODE
     ####################################################################################################################
@@ -177,7 +178,7 @@ cdef extern from  "SuiteSparseQR_C.h":
         cholmod_dense *X,           # size m-by-n with leading dimension ldx
         cholmod_common *cc          # workspace and parameters
     ) 
-
+{% endif %}
 
 
 cdef class SPQRContext_@index@_@type@:
@@ -194,10 +195,12 @@ cdef class SPQRContext_@index@_@type@:
         cholmod_common common_struct
         cholmod_sparse sparse_struct
 
+{% if spqr_export_mode %}
         SuiteSparseQR_C_factorization * factors_struct
         bint factors_struct_initialized
         bint numeric_computed
         bint factorized
+{% endif %}
 
 {% if type in complex_list %}
         # we keep internally two arrays for the complex numbers: this is required by CHOLMOD...
@@ -206,7 +209,10 @@ cdef class SPQRContext_@index@_@type@:
 
 {% endif %}
 
+{% if spqr_export_mode %}
     cdef bint _create_symbolic(self, int ordering, bint allow_tol)
     cdef bint _create_numeric(self, double drop_tol)
+{% endif %}
+
     cdef _SPQR_istat(self)
 

@@ -184,6 +184,7 @@ cdef extern from "cholmod.h":
     # Sparse struct
     int cholmod_check_sparse(cholmod_sparse *A, cholmod_common *Common)
     int cholmod_print_sparse(cholmod_sparse *A, const char *name, cholmod_common *Common)
+    int cholmod_free_sparse(cholmod_sparse **A, cholmod_common *Common)
 
     # Dense struct
     int cholmod_free_dense(cholmod_dense **X, cholmod_common *Common)
@@ -194,6 +195,9 @@ cdef extern from "cholmod.h":
     #int cholmod_free_factor()
     # factor_to_sparse
 
+    # Memory management
+    void * cholmod_free(size_t n, size_t size,	void *p,  cholmod_common *Common)
+
 cdef populate1_cholmod_sparse_struct_with_CSCSparseMatrix(cholmod_sparse * sparse_struct, CSCSparseMatrix_INT32_t_COMPLEX128_t csc_mat, bint no_copy=?)
 
 cdef populate2_cholmod_sparse_struct_with_CSCSparseMatrix(cholmod_sparse * sparse_struct,
@@ -202,6 +206,7 @@ cdef populate2_cholmod_sparse_struct_with_CSCSparseMatrix(cholmod_sparse * spars
                                                               FLOAT64_t * csc_mat_ival,
                                                               bint no_copy=?)
 
+cdef CSCSparseMatrix_INT32_t_COMPLEX128_t cholmod_sparse_to_CSCSparseMatrix_INT32_t_COMPLEX128_t(cholmod_sparse * sparse_struct, bint no_copy=?)
 cdef cholmod_dense numpy_ndarray_to_cholmod_dense(cnp.ndarray[cnp.npy_complex128, ndim=1, mode="c"] b)
 cdef cnp.ndarray[cnp.npy_complex128, ndim=1, mode="c"] cholmod_dense_to_numpy_ndarray(cholmod_dense * b)
 

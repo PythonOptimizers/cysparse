@@ -184,6 +184,7 @@ cdef extern from "cholmod.h":
     # Sparse struct
     int @index|cysparse_real_type_to_cholmod_prefix@_check_sparse(cholmod_sparse *A, cholmod_common *Common)
     int @index|cysparse_real_type_to_cholmod_prefix@_print_sparse(cholmod_sparse *A, const char *name, cholmod_common *Common)
+    int @index|cysparse_real_type_to_cholmod_prefix@_free_sparse(cholmod_sparse **A, cholmod_common *Common)
 
     # Dense struct
     int @index|cysparse_real_type_to_cholmod_prefix@_free_dense(cholmod_dense **X, cholmod_common *Common)
@@ -193,6 +194,9 @@ cdef extern from "cholmod.h":
     int @index|cysparse_real_type_to_cholmod_prefix@_print_factor(cholmod_factor *L, const char *name, cholmod_common *Common)
     #int @index|cysparse_real_type_to_cholmod_prefix@_free_factor()
     # factor_to_sparse
+
+    # Memory management
+    void * @index|cysparse_real_type_to_cholmod_prefix@_free(size_t n, size_t size,	void *p,  cholmod_common *Common)
 
 cdef populate1_cholmod_sparse_struct_with_CSCSparseMatrix(cholmod_sparse * sparse_struct, CSCSparseMatrix_@index@_@type@ csc_mat, bint no_copy=?)
 {% if type in complex_list %}
@@ -204,6 +208,7 @@ cdef populate2_cholmod_sparse_struct_with_CSCSparseMatrix(cholmod_sparse * spars
 {% else %}
 cdef populate2_cholmod_sparse_struct_with_CSCSparseMatrix(cholmod_sparse * sparse_struct, CSCSparseMatrix_@index@_@type@ csc_mat, bint no_copy=?)
 {% endif %}
+cdef CSCSparseMatrix_@index@_@type@ cholmod_sparse_to_CSCSparseMatrix_@index@_@type@(cholmod_sparse * sparse_struct, bint no_copy=?)
 cdef cholmod_dense numpy_ndarray_to_cholmod_dense(cnp.ndarray[cnp.@type|cysparse_type_to_numpy_c_type@, ndim=1, mode="c"] b)
 cdef cnp.ndarray[cnp.@type|cysparse_type_to_numpy_c_type@, ndim=1, mode="c"] cholmod_dense_to_numpy_ndarray(cholmod_dense * b)
 

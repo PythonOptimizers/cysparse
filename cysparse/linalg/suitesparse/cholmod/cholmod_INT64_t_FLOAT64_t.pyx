@@ -3,6 +3,8 @@ from cpython cimport Py_INCREF, Py_DECREF
 
 
 
+from cysparse.sparse.csc_mat_matrices.csc_mat_INT64_t_FLOAT64_t cimport CSCSparseMatrix_INT64_t_FLOAT64_t, MakeCSCSparseMatrix_INT64_t_FLOAT64_t
+
 import numpy as np
 cimport numpy as cnp
 
@@ -68,6 +70,7 @@ cdef extern from "cholmod.h":
     # Sparse struct
     int cholmod_l_check_sparse(cholmod_sparse *A, cholmod_common *Common)
     int cholmod_l_print_sparse(cholmod_sparse *A, const char *name, cholmod_common *Common)
+    int cholmod_l_free_sparse(cholmod_sparse **A, cholmod_common *Common)
 
     # Dense struct
     int cholmod_l_free_dense(cholmod_dense **X, cholmod_common *Common)
@@ -77,6 +80,9 @@ cdef extern from "cholmod.h":
     int cholmod_l_print_factor(cholmod_factor *L, const char *name, cholmod_common *Common)
     #int cholmod_l_free_factor()
     # factor_to_sparse
+
+    # Memory management
+    void * cholmod_l_free(size_t n, size_t size,	void *p,  cholmod_common *Common)
 
     # Triplet struct
     #int cholmod_l_check_triplet(cholmod_triplet *T, cholmod_common *Common)
@@ -102,7 +108,10 @@ CHOLMOD_SYS_DICT = {
 ########################################################################################################################
 # CHOLMOD HELPERS
 ########################################################################################################################
-# Populating a sparse matrix in CHOLMOD is done in two times:
+##################################################################
+# FROM CSCSparseMatrix -> cholmod_sparse
+##################################################################
+# Populating a sparse matrix in CHOLMOD is done in two steps:
 # - first (populate1), we give the common attributes and
 # - second (populate2), we split the values array in two if needed (complex case) and give the values (real or complex).
 
@@ -127,7 +136,10 @@ cdef populate1_cholmod_sparse_struct_with_CSCSparseMatrix(cholmod_sparse * spars
     sparse_struct.i = csc_mat.row
 
     # TODO: change this when we'll accept symmetric matrices **without** symmetric storage scheme
-    sparse_struct.stype = -1
+    if csc_mat.is_symmetric:
+        sparse_struct.stype = -1
+    else:
+        sparse_struct.stype = 0
 
     # itype: can be CHOLMOD_INT or CHOLMOD_LONG: we don't use the mixed version CHOLMOD_INTLONG
 
@@ -157,6 +169,117 @@ cdef populate2_cholmod_sparse_struct_with_CSCSparseMatrix(cholmod_sparse * spars
 
 
 
+##################################################################
+# FROM cholmod_sparse -> CSCSparseMatrix
+##################################################################
+cdef CSCSparseMatrix_INT64_t_FLOAT64_t cholmod_sparse_to_CSCSparseMatrix_INT64_t_FLOAT64_t(cholmod_sparse * sparse_struct, bint no_copy=False):
+    """
+    Convert a ``cholmod`` sparse struct to a :class:`CSCSparseMatrix_INT64_t_FLOAT64_t`.
+
+    """
+    # TODO: generalize to any cholmod sparse structure, with or without copy
+    # TODO: generalize to complex case
+    # TODO: remove asserts
+    assert sparse_struct.sorted == 1, "We only accept cholmod_sparse matrices with sorted indices"
+    assert sparse_struct.packed == 1, "We only accept cholmod_sparse matrices with packed indices"
+
+
+
+
+    cdef:
+        CSCSparseMatrix_INT64_t_FLOAT64_t csc_mat
+        INT64_t nrow
+        INT64_t ncol
+        INT64_t nnz
+        bint is_symmetric = False
+
+        # internal arrays of the CSC matrix
+        INT64_t * ind
+        INT64_t * row
+
+        # internal arrays of the cholmod sparse matrix
+        INT64_t * ind_cholmod
+        INT64_t * row_cholmod
+
+        # internal array for the CSC matrix
+        FLOAT64_t * val
+
+        # internal array for the cholmod sparse matrix
+        FLOAT64_t * val_cholmod
+
+
+        INT64_t j, k
+
+    nrow = sparse_struct.nrow
+    ncol = sparse_struct.ncol
+    nnz = sparse_struct.nzmax
+
+    if sparse_struct.stype == 0:
+        is_symmetric = False
+    elif sparse_struct.stype < 0:
+        is_symmetric == True
+    else:
+        raise NotImplementedError('We do not accept cholmod square symmetric sparse matrix with upper triangular part filled in.')
+
+    ##################################### NO COPY ######################################################################
+    if no_copy:
+        ind = <INT64_t *> sparse_struct.p
+        row = <INT64_t *> sparse_struct.i
+
+        val = <FLOAT64_t *> sparse_struct.x
+
+    ##################################### WITH COPY ####################################################################
+    else:   # we do a copy
+
+        ind_cholmod = <INT64_t * > sparse_struct.p
+        row_cholmod = <INT64_t * > sparse_struct.i
+
+        ind = <INT64_t *> PyMem_Malloc((ncol + 1) * sizeof(INT64_t))
+
+        if not ind:
+            raise MemoryError()
+
+        row = <INT64_t *> PyMem_Malloc(nnz * sizeof(INT64_t))
+
+        if not row:
+            PyMem_Free(ind)
+            PyMem_Free(row)
+
+            raise MemoryError()
+
+
+        for j from 0 <= j <= ncol:
+            ind[j] = ind_cholmod[j]
+
+        for k from 0 <= k < nnz:
+            row[k] = row_cholmod[k]
+
+
+        val_cholmod = <FLOAT64_t * > sparse_struct.x
+
+        val = <FLOAT64_t *> PyMem_Malloc(nnz * sizeof(FLOAT64_t))
+
+        if not val:
+            PyMem_Free(ind)
+            PyMem_Free(row)
+            PyMem_Free(val)
+
+            raise MemoryError()
+
+        for k from 0 <= k < nnz:
+            val[k] = val_cholmod[k]
+
+
+
+    csc_mat = MakeCSCSparseMatrix_INT64_t_FLOAT64_t(nrow=nrow, ncol=ncol, nnz=nnz, ind=ind, row=row, val=val, is_symmetric=is_symmetric, store_zeros=False)
+
+
+    return csc_mat
+
+
+##################################################################
+# FROM NumPy ndarray -> cholmod_dense
+##################################################################
 cdef cholmod_dense numpy_ndarray_to_cholmod_dense(cnp.ndarray[cnp.npy_float64, ndim=1, mode="c"] b):
     """
     Convert a :program:`NumPy` one dimensionnal array to the corresponding ``cholmod_dense`` matrix.
@@ -184,8 +307,11 @@ cdef cholmod_dense numpy_ndarray_to_cholmod_dense(cnp.ndarray[cnp.npy_float64, n
 
     return B
 
+##################################################################
+# FROM cholmod_dense -> NumPy ndarray
+##################################################################
 cdef cnp.ndarray[cnp.npy_float64, ndim=1, mode="c"] cholmod_dense_to_numpy_ndarray(cholmod_dense * b):
-    pass
+    raise NotImplementedError()
 
 ########################################################################################################################
 # CHOLMOD
