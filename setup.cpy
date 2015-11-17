@@ -331,9 +331,9 @@ if use_mumps:
   {% for element_type in mumps_type_list %}
     mumps_ext_params_@index_type@_@element_type@ = copy.deepcopy(ext_params)
     mumps_ext_params_@index_type@_@element_type@['include_dirs'].extend(mumps_include_dirs)
+    mumps_ext_params_@index_type@_@element_type@['include_dirs'].append("/Users/syarra/work/VirtualEnvs/nlpy_new/programs/MUMPS.py/")
     mumps_ext_params_@index_type@_@element_type@['library_dirs'] = mumps_library_dirs
     mumps_ext_params_@index_type@_@element_type@['libraries'] = [] # 'scalapack', 'pord']
-
     mumps_ext_params_@index_type@_@element_type@['libraries'].append('@element_type|cysparse_real_type_to_mumps_family@mumps')
     mumps_ext_params_@index_type@_@element_type@['libraries'].append('mumps_common')
     mumps_ext_params_@index_type@_@element_type@['libraries'].append('pord')

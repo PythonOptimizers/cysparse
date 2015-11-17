@@ -1248,9 +1248,9 @@ if use_mumps:
   
     mumps_ext_params_INT32_t_FLOAT32_t = copy.deepcopy(ext_params)
     mumps_ext_params_INT32_t_FLOAT32_t['include_dirs'].extend(mumps_include_dirs)
+    mumps_ext_params_INT32_t_FLOAT32_t['include_dirs'].append("/Users/syarra/work/VirtualEnvs/nlpy_new/programs/MUMPS.py/")
     mumps_ext_params_INT32_t_FLOAT32_t['library_dirs'] = mumps_library_dirs
     mumps_ext_params_INT32_t_FLOAT32_t['libraries'] = [] # 'scalapack', 'pord']
-
     mumps_ext_params_INT32_t_FLOAT32_t['libraries'].append('smumps')
     mumps_ext_params_INT32_t_FLOAT32_t['libraries'].append('mumps_common')
     mumps_ext_params_INT32_t_FLOAT32_t['libraries'].append('pord')
@@ -1266,9 +1266,10 @@ if use_mumps:
   
     mumps_ext_params_INT32_t_FLOAT64_t = copy.deepcopy(ext_params)
     mumps_ext_params_INT32_t_FLOAT64_t['include_dirs'].extend(mumps_include_dirs)
+    mumps_ext_params_INT32_t_FLOAT64_t['include_dirs'].append("/Users/syarra/work/VirtualEnvs/nlpy_new/programs/MUMPS.py/")
     mumps_ext_params_INT32_t_FLOAT64_t['library_dirs'] = mumps_library_dirs
+    mumps_ext_params_INT32_t_FLOAT64_t['library_dirs'].append("/Users/syarra/work/VirtualEnvs/nlpy_new/lib/python2.7/site-packages/MUMPS.py-0.1.0.dev0-py2.7-macosx-10.10-x86_64.egg/")
     mumps_ext_params_INT32_t_FLOAT64_t['libraries'] = [] # 'scalapack', 'pord']
-
     mumps_ext_params_INT32_t_FLOAT64_t['libraries'].append('dmumps')
     mumps_ext_params_INT32_t_FLOAT64_t['libraries'].append('mumps_common')
     mumps_ext_params_INT32_t_FLOAT64_t['libraries'].append('pord')
@@ -1284,9 +1285,9 @@ if use_mumps:
   
     mumps_ext_params_INT32_t_COMPLEX64_t = copy.deepcopy(ext_params)
     mumps_ext_params_INT32_t_COMPLEX64_t['include_dirs'].extend(mumps_include_dirs)
+    mumps_ext_params_INT32_t_COMPLEX64_t['include_dirs'].append("/Users/syarra/work/VirtualEnvs/nlpy_new/programs/MUMPS.py/")
     mumps_ext_params_INT32_t_COMPLEX64_t['library_dirs'] = mumps_library_dirs
     mumps_ext_params_INT32_t_COMPLEX64_t['libraries'] = [] # 'scalapack', 'pord']
-
     mumps_ext_params_INT32_t_COMPLEX64_t['libraries'].append('cmumps')
     mumps_ext_params_INT32_t_COMPLEX64_t['libraries'].append('mumps_common')
     mumps_ext_params_INT32_t_COMPLEX64_t['libraries'].append('pord')
@@ -1302,9 +1303,9 @@ if use_mumps:
   
     mumps_ext_params_INT32_t_COMPLEX128_t = copy.deepcopy(ext_params)
     mumps_ext_params_INT32_t_COMPLEX128_t['include_dirs'].extend(mumps_include_dirs)
+    mumps_ext_params_INT32_t_COMPLEX128_t['include_dirs'].append("/Users/syarra/work/VirtualEnvs/nlpy_new/programs/MUMPS.py/")
     mumps_ext_params_INT32_t_COMPLEX128_t['library_dirs'] = mumps_library_dirs
     mumps_ext_params_INT32_t_COMPLEX128_t['libraries'] = [] # 'scalapack', 'pord']
-
     mumps_ext_params_INT32_t_COMPLEX128_t['libraries'].append('zmumps')
     mumps_ext_params_INT32_t_COMPLEX128_t['libraries'].append('mumps_common')
     mumps_ext_params_INT32_t_COMPLEX128_t['libraries'].append('pord')
