@@ -36,6 +36,30 @@ Each step will be done in dedicated branches so that the master and develop bran
 major versions. So basically, there are two types of improvements going on: big non compatible changes (major versions) and business
 as usual (minor versions).
 
+## Dependencies
+
+For the Python version:
+
+- NumPy;
+
+For the Cython version, include everything needed for Python and add:
+
+- Cython;
+- cygenja;
+
+## Installation
+
+### Python version
+
+1. Clone repository (git clone https://github.com/PythonOptimizers/cysparse.git) or copy source code.
+2. Install Python dependencies.
+3. Copy `cysparse_template.cfg` to `cysparse.cfg` and adapt it to your needs.
+4. Python setup.py install. 
+
+### Cython version
+
+[TODO]
+
 
 ## Want to follow the implementation of CySparse?
 
