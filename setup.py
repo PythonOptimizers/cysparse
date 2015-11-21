@@ -12,6 +12,8 @@ from setuptools import find_packages
 from distutils.extension import Extension
 from Cython.Distutils import build_ext
 
+from Cython.Build import cythonize
+
 import numpy as np
 
 import ConfigParser
@@ -1308,6 +1310,7 @@ setup(name=  'CySparse',
       install_requires=['numpy', 'Cython'],
       #ext_package='cysparse', <- doesn't work with pxd files...
       cmdclass = {'build_ext': build_ext},
+      #ext_modules = cythonize(ext_modules),
       ext_modules = ext_modules,
       package_dir = {"cysparse": "cysparse"},
       packages=packages_list,
