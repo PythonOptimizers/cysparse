@@ -4,7 +4,7 @@ Python/Cython library to replace PySparse.
 
 :white_check_mark: THIS VERSION SHOULD WORK BUT MORE TESTS ARE NEEDED! :white_check_mark:
 
-:bangbang: This version if :snowflake: FROZEN :snowflake: :bangbang:
+:bangbang: This version is :snowflake: FROZEN :snowflake: :bangbang:
 
 I'm working on branch `features/decoupling` which contains the :new: version of `CySparse`.
  
