@@ -1,8 +1,8 @@
 # CySparse
 
-Python/Cython library to replace PySparse.
+Fast sparse matrix library for Python/Cython.
 
-:white_check_mark: THIS VERSION SHOULD WORK BUT MORE TESTS ARE NEEDED! :white_check_mark:
+:bangbang: THIS VERSION DOES NOT WORK YET :bangbang:
 
 I started to deal with sorted col/row indices for LL/CSC/CSR sparse matrices.
 
