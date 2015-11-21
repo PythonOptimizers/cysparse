@@ -6,7 +6,7 @@ Python/Cython library to replace PySparse.
 
 :bangbang: This version is :snowflake: FROZEN :snowflake: :bangbang:
 
-I'm working on branch `features/decoupling` which contains the :new: version of `CySparse`.
+I'm working on branch `feature/decoupling` which contains the :new: version of `CySparse`.
  
 Nikolaj
 
