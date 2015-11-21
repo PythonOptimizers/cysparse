@@ -45,20 +45,6 @@ if use_suitesparse:
     if suitesparse_library_dirs == '':
         suitesparse_library_dirs = default_library_dir
 
-# MUMPS
-# Do we use it or not?
-use_mumps = cysparse_config.getboolean('MUMPS', 'use_mumps')
-mumps_compiled_in_64bits = cysparse_config.getboolean('MUMPS', 'mumps_compiled_in_64bits')
-
-# find user defined directories
-if use_mumps:
-    mumps_include_dirs = get_path_option(cysparse_config, 'MUMPS', 'include_dirs')
-    if mumps_include_dirs == '':
-        mumps_include_dirs = default_include_dir
-    mumps_library_dirs = get_path_option(cysparse_config, 'MUMPS', 'library_dirs')
-    if mumps_library_dirs == '':
-        mumps_library_dirs = default_library_dir
-
 ########################################################################################################################
 # EXTENSIONS
 ########################################################################################################################
@@ -1239,88 +1225,6 @@ if use_suitesparse:
     
 
         ]
-##########################
-# MUMPS
-##########################
-if use_mumps:
-    mumps_ext = []
-
-  
-    mumps_ext_params_INT32_t_FLOAT32_t = copy.deepcopy(ext_params)
-    mumps_ext_params_INT32_t_FLOAT32_t['include_dirs'].extend(mumps_include_dirs)
-    mumps_ext_params_INT32_t_FLOAT32_t['include_dirs'].append("/Users/syarra/work/VirtualEnvs/nlpy_new/programs/MUMPS.py/")
-    mumps_ext_params_INT32_t_FLOAT32_t['library_dirs'] = mumps_library_dirs
-    mumps_ext_params_INT32_t_FLOAT32_t['libraries'] = [] # 'scalapack', 'pord']
-    mumps_ext_params_INT32_t_FLOAT32_t['libraries'].append('smumps')
-    mumps_ext_params_INT32_t_FLOAT32_t['libraries'].append('mumps_common')
-    mumps_ext_params_INT32_t_FLOAT32_t['libraries'].append('pord')
-    mumps_ext_params_INT32_t_FLOAT32_t['libraries'].append('mpiseq')
-    mumps_ext_params_INT32_t_FLOAT32_t['libraries'].append('blas')
-    mumps_ext_params_INT32_t_FLOAT32_t['libraries'].append('pthread')
-
-    mumps_ext.append(
-
-        Extension(name="cysparse.linalg.mumps.mumps_INT32_t_FLOAT32_t",
-                  sources=['cysparse/linalg/mumps/mumps_INT32_t_FLOAT32_t.pxd',
-                           'cysparse/linalg/mumps/mumps_INT32_t_FLOAT32_t.pyx'], **mumps_ext_params_INT32_t_FLOAT32_t))
-  
-    mumps_ext_params_INT32_t_FLOAT64_t = copy.deepcopy(ext_params)
-    mumps_ext_params_INT32_t_FLOAT64_t['include_dirs'].extend(mumps_include_dirs)
-    mumps_ext_params_INT32_t_FLOAT64_t['include_dirs'].append("/Users/syarra/work/VirtualEnvs/nlpy_new/programs/MUMPS.py/")
-    mumps_ext_params_INT32_t_FLOAT64_t['library_dirs'] = mumps_library_dirs
-    mumps_ext_params_INT32_t_FLOAT64_t['library_dirs'].append("/Users/syarra/work/VirtualEnvs/nlpy_new/lib/python2.7/site-packages/MUMPS.py-0.1.0.dev0-py2.7-macosx-10.10-x86_64.egg/")
-    mumps_ext_params_INT32_t_FLOAT64_t['libraries'] = [] # 'scalapack', 'pord']
-    mumps_ext_params_INT32_t_FLOAT64_t['libraries'].append('dmumps')
-    mumps_ext_params_INT32_t_FLOAT64_t['libraries'].append('mumps_common')
-    mumps_ext_params_INT32_t_FLOAT64_t['libraries'].append('pord')
-    mumps_ext_params_INT32_t_FLOAT64_t['libraries'].append('mpiseq')
-    mumps_ext_params_INT32_t_FLOAT64_t['libraries'].append('blas')
-    mumps_ext_params_INT32_t_FLOAT64_t['libraries'].append('pthread')
-
-    mumps_ext.append(
-
-        Extension(name="cysparse.linalg.mumps.mumps_INT32_t_FLOAT64_t",
-                  sources=['cysparse/linalg/mumps/mumps_INT32_t_FLOAT64_t.pxd',
-                           'cysparse/linalg/mumps/mumps_INT32_t_FLOAT64_t.pyx'], **mumps_ext_params_INT32_t_FLOAT64_t))
-  
-    mumps_ext_params_INT32_t_COMPLEX64_t = copy.deepcopy(ext_params)
-    mumps_ext_params_INT32_t_COMPLEX64_t['include_dirs'].extend(mumps_include_dirs)
-    mumps_ext_params_INT32_t_COMPLEX64_t['include_dirs'].append("/Users/syarra/work/VirtualEnvs/nlpy_new/programs/MUMPS.py/")
-    mumps_ext_params_INT32_t_COMPLEX64_t['library_dirs'] = mumps_library_dirs
-    mumps_ext_params_INT32_t_COMPLEX64_t['libraries'] = [] # 'scalapack', 'pord']
-    mumps_ext_params_INT32_t_COMPLEX64_t['libraries'].append('cmumps')
-    mumps_ext_params_INT32_t_COMPLEX64_t['libraries'].append('mumps_common')
-    mumps_ext_params_INT32_t_COMPLEX64_t['libraries'].append('pord')
-    mumps_ext_params_INT32_t_COMPLEX64_t['libraries'].append('mpiseq')
-    mumps_ext_params_INT32_t_COMPLEX64_t['libraries'].append('blas')
-    mumps_ext_params_INT32_t_COMPLEX64_t['libraries'].append('pthread')
-
-    mumps_ext.append(
-
-        Extension(name="cysparse.linalg.mumps.mumps_INT32_t_COMPLEX64_t",
-                  sources=['cysparse/linalg/mumps/mumps_INT32_t_COMPLEX64_t.pxd',
-                           'cysparse/linalg/mumps/mumps_INT32_t_COMPLEX64_t.pyx'], **mumps_ext_params_INT32_t_COMPLEX64_t))
-  
-    mumps_ext_params_INT32_t_COMPLEX128_t = copy.deepcopy(ext_params)
-    mumps_ext_params_INT32_t_COMPLEX128_t['include_dirs'].extend(mumps_include_dirs)
-    mumps_ext_params_INT32_t_COMPLEX128_t['include_dirs'].append("/Users/syarra/work/VirtualEnvs/nlpy_new/programs/MUMPS.py/")
-    mumps_ext_params_INT32_t_COMPLEX128_t['library_dirs'] = mumps_library_dirs
-    mumps_ext_params_INT32_t_COMPLEX128_t['libraries'] = [] # 'scalapack', 'pord']
-    mumps_ext_params_INT32_t_COMPLEX128_t['libraries'].append('zmumps')
-    mumps_ext_params_INT32_t_COMPLEX128_t['libraries'].append('mumps_common')
-    mumps_ext_params_INT32_t_COMPLEX128_t['libraries'].append('pord')
-    mumps_ext_params_INT32_t_COMPLEX128_t['libraries'].append('mpiseq')
-    mumps_ext_params_INT32_t_COMPLEX128_t['libraries'].append('blas')
-    mumps_ext_params_INT32_t_COMPLEX128_t['libraries'].append('pthread')
-
-    mumps_ext.append(
-
-        Extension(name="cysparse.linalg.mumps.mumps_INT32_t_COMPLEX128_t",
-                  sources=['cysparse/linalg/mumps/mumps_INT32_t_COMPLEX128_t.pxd',
-                           'cysparse/linalg/mumps/mumps_INT32_t_COMPLEX128_t.pyx'], **mumps_ext_params_INT32_t_COMPLEX128_t))
-  
-
-
 
 ########################################################################################################################
 # config
@@ -1340,7 +1244,6 @@ packages_list = ['cysparse',
             'cysparse.utils',
             'cysparse.linalg',
             'cysparse.linalg.contexts',
-            #'cysparse.linalg.mumps',
             #'cysparse.sparse.IO'
             'tests'
             ]
@@ -1359,10 +1262,6 @@ if use_suitesparse:
     packages_list.append('cysparse.linalg.suitesparse.cholmod')
     packages_list.append('cysparse.linalg.suitesparse.spqr')
 
-if use_mumps:
-    # add mumps
-    ext_modules += mumps_ext
-    packages_list.append('cysparse.linalg.mumps')
 
 ########################################################################################################################
 # PACKAGE SPECIFICATIONS

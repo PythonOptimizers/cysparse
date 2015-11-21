@@ -242,26 +242,12 @@ def cysparse_real_type_to_cholmod_type(cysparse_type):
     else:
         raise TypeError("Not a recognized SuiteSparse Cholmod type for prefixing Cholmod routines")
 
-####################################
-# MUMPS TYPES
-####################################
-def cysparse_real_type_to_mumps_family(cysparse_type):
-    if cysparse_type in ['FLOAT32_t']:
-        return 's'
-    elif cysparse_type in ['FLOAT64_t']:
-        return 'd'
-    elif cysparse_type in ['COMPLEX64_t']:
-        return 'c'
-    elif cysparse_type in ['COMPLEX128_t']:
-        return 'z'
-    else:
-        raise TypeError("Not a recognized Mumps type")
 
-def cysparse_short(cysparse_type):
-    if cysparse_type in ['INT32_t', 'INT64_t', 'FLOAT32_t', 'FLOAT64_t', 'COMPLEX64_t', 'COMPLEX128_t']:
-        return cysparse_type[:-2]
-    else:
-        raise TypeError("Not a recognized CySparse type")
+#def cysparse_short(cysparse_type):
+#    if cysparse_type in ['INT32_t', 'INT64_t', 'FLOAT32_t', 'FLOAT64_t', 'COMPLEX64_t', 'COMPLEX128_t']:
+#        return cysparse_type[:-2]
+#    else:
+#        raise TypeError("Not a recognized CySparse type")
 
 def clean_cython_files(logger, directory, file_list=None, exclude_file_list=[], untrack=False):
     """
@@ -612,15 +598,6 @@ LINALG_SPQR_FACTORY_METHOD_FILE = os.path.join(LINALG_TEMPLATE_DIR, 'spqr_contex
 LINALG_SUITESPARSE_SPQR_DECLARATION_FILES = glob.glob(os.path.join(LINALG_SUITESPARSE_SPQR_TEMPLATE_DIR, '*.cpd'))
 LINALG_SUITESPARSE_SPQR_DEFINITION_FILES = glob.glob(os.path.join(LINALG_SUITESPARSE_SPQR_TEMPLATE_DIR, '*.cpx'))
 
-##########################################
-### MUMPS
-##########################################
-LINALG_MUMPS_TEMPLATE_DIR = os.path.join(LINALG_TEMPLATE_DIR, 'mumps')
-
-LINALG_MUMPS_FACTORY_METHOD_FILE = os.path.join(LINALG_TEMPLATE_DIR, 'mumps_context.cpy')
-
-LINALG_MUMPS_DECLARATION_FILES = glob.glob(os.path.join(LINALG_MUMPS_TEMPLATE_DIR, '*.cpd'))
-LINALG_MUMPS_DEFINITION_FILES = glob.glob(os.path.join(LINALG_MUMPS_TEMPLATE_DIR, '*.cpx'))
 
 #################################################################################################
 # TESTS
@@ -673,15 +650,6 @@ if __name__ == "__main__":
     #######################################
     # CONDITIONAL CODE GENERATION
     #######################################
-    # MUMPS
-    # test if compiled lib has been compiled in 64 or 32 bits
-    MUMPS_INT = None
-    if cysparse_config.getboolean('MUMPS', 'mumps_compiled_in_64bits'):
-        MUMPS_INT = 'INT64_t'
-    else:
-        MUMPS_INT = 'INT32_t'
-
-    MUMPS_INDEX_TYPES = [MUMPS_INT]
 
     # index type for LLSparseMatrix
     DEFAULT_INDEX_TYPE = 'INT32_T'
@@ -731,11 +699,7 @@ if __name__ == "__main__":
     SPQR_INDEX_TYPES = ['INT32_t', 'INT64_t']
     SPQR_ELEMENT_TYPES = ['FLOAT64_t', 'COMPLEX128_t']
 
-    # MUMPS
-    # This list is defined above in the conditional part
-    # MUMPS_INDEX_TYPES = [MUMPS_INT]
-    MUMPS_ELEMENT_TYPES = ['FLOAT32_t', 'FLOAT64_t', 'COMPLEX64_t', 'COMPLEX128_t']
-    #MUMPS_ELEMENT_TYPES = ['FLOAT32_t', 'FLOAT64_t']
+
 
     # when coding
     #ELEMENT_TYPES = ['FLOAT64_t']
@@ -760,9 +724,7 @@ if __name__ == "__main__":
                         'cholmod_type_list': CHOLMOD_ELEMENT_TYPES,
                         'spqr_index_list': SPQR_INDEX_TYPES,
                         'spqr_type_list': SPQR_ELEMENT_TYPES,
-                        'spqr_export_mode' : SPQR_EXPERT_MODE,
-                        'mumps_index_list': MUMPS_INDEX_TYPES,
-                        'mumps_type_list': MUMPS_ELEMENT_TYPES,
+                        'spqr_export_mode' : SPQR_EXPERT_MODE
 
                     }
 
@@ -780,8 +742,7 @@ if __name__ == "__main__":
     GENERAL_ENVIRONMENT.filters['cysparse_type_to_numpy_enum_type'] = cysparse_type_to_numpy_enum_type
     GENERAL_ENVIRONMENT.filters['cysparse_real_type_from_real_cysparse_complex_type'] = cysparse_real_type_from_real_cysparse_complex_type
     GENERAL_ENVIRONMENT.filters['cysparse_real_type_to_umfpack_family'] = cysparse_real_type_to_umfpack_family
-    GENERAL_ENVIRONMENT.filters['cysparse_real_type_to_mumps_family'] = cysparse_real_type_to_mumps_family
-    GENERAL_ENVIRONMENT.filters['cysparse_short'] = cysparse_short
+#    GENERAL_ENVIRONMENT.filters['cysparse_short'] = cysparse_short
     GENERAL_ENVIRONMENT.filters['cysparse_real_type_to_cholmod_prefix'] = cysparse_real_type_to_cholmod_prefix
     GENERAL_ENVIRONMENT.filters['cysparse_real_type_to_cholmod_type'] = cysparse_real_type_to_cholmod_type
 
@@ -1032,9 +993,7 @@ if __name__ == "__main__":
             clean_cython_files(logger, TESTS_LINALG_DIR, [LINALG_SPQR_FACTORY_METHOD_FILE[:-4] + '.py'], untrack=arg_options.untrack)
             clean_cython_files(logger, LINALG_SUITESPARSE_SPQR_TEMPLATE_DIR, untrack=arg_options.untrack)
 
-            # MUMPS
-            clean_cython_files(logger, TESTS_LINALG_DIR, [LINALG_MUMPS_FACTORY_METHOD_FILE[:-4] + '.py'], untrack=arg_options.untrack)
-            clean_cython_files(logger, LINALG_MUMPS_TEMPLATE_DIR, untrack=arg_options.untrack)
+
             
         else:
             ###############################
@@ -1057,12 +1016,7 @@ if __name__ == "__main__":
             generate_following_type_and_index(logger, LINALG_SUITESPARSE_SPQR_DECLARATION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, SPQR_ELEMENT_TYPES, SPQR_INDEX_TYPES, '.pxd')
             generate_following_type_and_index(logger, LINALG_SUITESPARSE_SPQR_DEFINITION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, SPQR_ELEMENT_TYPES, SPQR_INDEX_TYPES, '.pyx')
 
-            ###############################
-            # MUMPS
-            ###############################
-            generate_template_files(logger, [LINALG_MUMPS_FACTORY_METHOD_FILE], GENERAL_ENVIRONMENT, GENERAL_CONTEXT, '.py')
-            generate_following_type_and_index(logger, LINALG_MUMPS_DECLARATION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, MUMPS_ELEMENT_TYPES, MUMPS_INDEX_TYPES, '.pxd')
-            generate_following_type_and_index(logger, LINALG_MUMPS_DEFINITION_FILES, GENERAL_ENVIRONMENT, GENERAL_CONTEXT, MUMPS_ELEMENT_TYPES, MUMPS_INDEX_TYPES, '.pyx')
+
 
     if arg_options.tests or arg_options.all:
         action = True
