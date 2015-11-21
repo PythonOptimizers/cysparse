@@ -42,6 +42,11 @@ For the Python version:
 
 - NumPy;
 
+If you intend to generate the documention:
+
+- Sphinx;
+- sphinx_bootstrap_theme
+
 For the Cython version, include everything needed for Python and add:
 
 - Cython;
@@ -55,6 +60,7 @@ For the Cython version, include everything needed for Python and add:
 2. Install Python dependencies.
 3. Copy `cysparse_template.cfg` to `cysparse.cfg` and adapt it to your needs.
 4. Python setup.py install. 
+
 
 ### Cython version
 
