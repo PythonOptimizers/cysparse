@@ -93,7 +93,7 @@ from cysparse.sparse.csc_mat_matrices.csc_mat_INT32_t_FLOAT64_t cimport CSCSpars
 from cysparse.types.cysparse_numpy_types import are_mixed_types_compatible, cysparse_to_numpy_type
 from cysparse.types.cysparse_types import *
 
-from mumps.src.mumps_INT32_FLOAT64 cimport BaseMUMPSContext_INT32_FLOAT64, c_to_fortran_index_array, MUMPS_INT
+from cysparse.linalg.mumps.mumps_INT32_t_FLOAT64_t cimport BaseMUMPSContext_INT32_FLOAT64, c_to_fortran_index_array, MUMPS_INT
 
 
 from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
