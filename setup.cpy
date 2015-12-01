@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 
-# The file setup.py is automatically generated
-# Generate it with
-# python generate_code -s
+########################################################################################################################
+#                                                                                                                      #
+#                              The file `setup.py` is automatically generated from `setup.cpy`                         #
+#                                                                                                                      #
+########################################################################################################################
 
 from config.version import find_version, read
 from config.config import get_path_option
@@ -31,7 +33,7 @@ def prepare_Cython_extensions_as_C_extensions(extensions):
         extensions: A list of (`Cython`) `distutils` extensions.
 
     Warning:
-        The extensions are changed in place.
+        The extensions are changed in place. This function is not compatible with `C++` code.
 
     Note:
         Only `Cython` source files are modified into their `C` equivalent source files. Other file types are unchanged.
@@ -63,10 +65,9 @@ cysparse_config.read(cysparse_config_file)
 
 numpy_include = np.get_include()
 
-
 # Use Cython?
-USE_CYTHON = cysparse_config.getboolean('CODE_GENERATION', 'USE_CYTHON')
-if USE_CYTHON:
+use_cython = cysparse_config.getboolean('CODE_GENERATION', 'use_cython')
+if use_cython:
     try:
         from Cython.Distutils import build_ext
         from Cython.Build import cythonize
@@ -74,7 +75,7 @@ if USE_CYTHON:
         raise ImportError("Check '%s': Cython is not properly installed." % cysparse_config_file)
 
 # Debug mode?
-DEBUG_SYMBOLS = cysparse_config.getboolean('CODE_GENERATION', 'DEBUG_SYMBOLS')
+use_debug_symbols = cysparse_config.getboolean('CODE_GENERATION', 'use_debug_symbols')
 
 # DEFAULT
 default_include_dir = get_path_option(cysparse_config, 'DEFAULT', 'include_dirs')
@@ -102,14 +103,14 @@ ext_params['include_dirs'] = include_dirs
 # -Wno-unused-function is potentially dangerous... use with care!
 # '-DNPY_NO_DEPRECATED_API=NPY_1_7_API_VERSION': doesn't work with Cython... because it **does** use a deprecated version...
 
-if not DEBUG_SYMBOLS:
+if not use_debug_symbols:
     ext_params['extra_compile_args'] = ["-O2", '-std=c99', '-Wno-unused-function']
     ext_params['extra_link_args'] = []
 else:
     ext_params['extra_compile_args'] = ["-g", '-std=c99', '-Wno-unused-function']
     ext_params['extra_link_args'] = ["-g"]
 
-########################################################################################################################
+#-----------------------------------------------------------------------------------------------------------------------
 #                                                *** types ***
 base_ext_params = copy.deepcopy(ext_params)
 base_ext = [
@@ -122,7 +123,7 @@ base_ext = [
               sources=["cysparse/cysparse_types/cysparse_generic_types.pxd", "cysparse/cysparse_types/cysparse_generic_types.pyx"]),
     ]
 
-########################################################################################################################
+#-----------------------------------------------------------------------------------------------------------------------
 #                                                *** sparse ***
 sparse_ext_params = copy.deepcopy(ext_params)
 
@@ -284,14 +285,15 @@ sparse_ext = [
   {% endfor %}
 {% endfor %}
 ]
-########################################################################################################################
+
+#-----------------------------------------------------------------------------------------------------------------------
 #                                                *** utils ***
 utils_ext = [
     Extension("cysparse.utils.equality", ["cysparse/utils/equality.pxd",
                                           "cysparse/utils/equality.pyx"], **sparse_ext_params),
 ]
 
-########################################################################################################################
+#-----------------------------------------------------------------------------------------------------------------------
 #                                                *** LinAlg ***
 
 ##########################
@@ -403,7 +405,8 @@ if use_suitesparse:
 ########################################################################################################################
 # PACKAGE PREPARATION FOR EXCLUSIVE C EXTENSIONS
 ########################################################################################################################
-if not USE_CYTHON:
+# We only use the C files **without** Cython. In fact, Cython doesn't need to be installed.
+if not use_cython:
     prepare_Cython_extensions_as_C_extensions(ext_modules)
 
 ########################################################################################################################
@@ -459,36 +462,7 @@ setup_args = {
 
 }
 
-if USE_CYTHON:
+if use_cython:
     setup_args['cmdclass'] = {'build_ext': build_ext}
 
 setup(**setup_args)
-
-{#setup(name=  'CySparse',#}
-{#      version=find_version(os.path.realpath(__file__), 'cysparse', '__init__.py'),#}
-{#      description='A Cython library for sparse matrices',#}
-{#      long_description=long_description,#}
-{#      #Author details#}
-{#      author='Nikolaj van Omme, Sylvain Arreckx, Dominique Orban',#}
-{#{% raw %}#}
-{#      author_email='cysparse\@TODO.com',#}
-{#{% endraw %}#}
-{#      maintainer = "CySparse Developers",#}
-{#{% raw %}#}
-{#      maintainer_email = "dominique.orban@gerad.ca",#}
-{#{% endraw %}#}
-{#      summary = "Fast sparse matrix library for Python",#}
-{#      url = "https://github.com/Funartech/cysparse",#}
-{#      download_url = "https://github.com/Funartech/cysparse",#}
-{#      license='LGPL',#}
-{#      classifiers=filter(None, CLASSIFIERS.split('\n')),#}
-{#      install_requires=['numpy', 'Cython'],#}
-{#      #ext_package='cysparse', <- doesn't work with pxd files...#}
-{#      cmdclass = {'build_ext': build_ext},#}
-{#      #ext_modules = cythonize(ext_modules),#}
-{#      ext_modules = ext_modules,#}
-{#      package_dir = {"cysparse": "cysparse"},#}
-{#      packages=packages_list,#}
-{#      zip_safe=False#}
-{#)#}
-

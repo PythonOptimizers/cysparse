@@ -65,8 +65,8 @@ numpy_include = np.get_include()
 
 
 # Use Cython?
-USE_CYTHON = cysparse_config.getboolean('CODE_GENERATION', 'USE_CYTHON')
-if USE_CYTHON:
+use_cython = cysparse_config.getboolean('CODE_GENERATION', 'use_cython')
+if use_cython:
     try:
         from Cython.Distutils import build_ext
         from Cython.Build import cythonize
@@ -1358,7 +1358,7 @@ if use_suitesparse:
 ########################################################################################################################
 # PACKAGE PREPARATION FOR EXCLUSIVE C EXTENSIONS
 ########################################################################################################################
-if not USE_CYTHON:
+if not use_cython:
     prepare_Cython_extensions_as_C_extensions(ext_modules)
 
 ########################################################################################################################
@@ -1414,7 +1414,7 @@ setup_args = {
 
 }
 
-if USE_CYTHON:
+if use_cython:
     setup_args['cmdclass'] = {'build_ext': build_ext}
 
 setup(**setup_args)
