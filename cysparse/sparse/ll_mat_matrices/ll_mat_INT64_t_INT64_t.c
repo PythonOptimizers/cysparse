@@ -1067,7 +1067,7 @@ struct __pyx_opt_args_8cysparse_6sparse_12sparse_utils_7generic_13print_INT64_t_
 };
 struct __pyx_opt_args_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT64_t_INT64_t_30LLSparseMatrix_INT64_t_INT64_t_count_nnz_from_indices;
 
-/* "cysparse/sparse/ll_mat_matrices/ll_mat_INT64_t_INT64_t.pxd":47
+/* "cysparse/sparse/ll_mat_matrices/ll_mat_INT64_t_INT64_t.pxd":48
  *     # COUNTING ELEMENTS
  *     ####################################################################################################################
  *     cdef INT64_t count_nnz_from_indices(self, INT64_t * row_indices,INT64_t row_indices_length, INT64_t * col_indices,             # <<<<<<<<<<<<<<
@@ -1216,7 +1216,7 @@ struct __pyx_obj_8cysparse_6sparse_16csr_mat_matrices_23csr_mat_INT64_t_INT64_t_
 };
 
 
-/* "cysparse/sparse/ll_mat_matrices/ll_mat_INT64_t_INT64_t.pxd":13
+/* "cysparse/sparse/ll_mat_matrices/ll_mat_INT64_t_INT64_t.pxd":14
  * from cpython cimport PyObject
  * 
  * cdef class LLSparseMatrix_INT64_t_INT64_t(MutableSparseMatrix_INT64_t_INT64_t):             # <<<<<<<<<<<<<<

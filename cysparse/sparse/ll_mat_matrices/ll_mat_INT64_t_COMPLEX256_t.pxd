@@ -3,7 +3,8 @@
 from cysparse.types.cysparse_types cimport *
 
 from cysparse.sparse.s_mat_matrices.s_mat_INT64_t_COMPLEX256_t cimport MutableSparseMatrix_INT64_t_COMPLEX256_t
-from cysparse.sparse.ll_mat_matrices.ll_mat_INT64_t_COMPLEX256_t cimport LLSparseMatrix_INT64_t_COMPLEX256_t
+# TODO: investigate: how come this could even compile before?
+#from cysparse.sparse.ll_mat_matrices.ll_mat_INT64_t_COMPLEX256_t cimport LLSparseMatrix_INT64_t_COMPLEX256_t
 from cysparse.sparse.ll_mat_views.ll_mat_view_INT64_t_COMPLEX256_t cimport LLSparseMatrixView_INT64_t_COMPLEX256_t
 
 cimport numpy as cnp

@@ -3,7 +3,8 @@
 from cysparse.types.cysparse_types cimport *
 
 from cysparse.sparse.s_mat_matrices.s_mat_@index@_@type@ cimport MutableSparseMatrix_@index@_@type@
-from cysparse.sparse.ll_mat_matrices.ll_mat_@index@_@type@ cimport LLSparseMatrix_@index@_@type@
+# TODO: investigate: how come this could even compile before?
+#from cysparse.sparse.ll_mat_matrices.ll_mat_@index@_@type@ cimport LLSparseMatrix_@index@_@type@
 from cysparse.sparse.ll_mat_views.ll_mat_view_@index@_@type@ cimport LLSparseMatrixView_@index@_@type@
 
 cimport numpy as cnp

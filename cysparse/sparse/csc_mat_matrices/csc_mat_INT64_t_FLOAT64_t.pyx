@@ -501,6 +501,7 @@ cdef class CSCSparseMatrix_INT64_t_FLOAT64_t(ImmutableSparseMatrix_INT64_t_FLOAT
             IndexError if the diagonal number is out of bounds.
 
         """
+
         if k > 0:
             raise IndexError("k-th diagonal must be <= 0 (here: k = %d)" % k)
 
