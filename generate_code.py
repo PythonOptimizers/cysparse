@@ -430,7 +430,7 @@ SETUP_PY_FILE = os.path.join(PATH, 'setup.py')
 #################################################################################################
 # GENERIC TYPES
 #################################################################################################
-TYPES_DIR = os.path.join(PATH, 'cysparse', 'types')
+TYPES_DIR = os.path.join(PATH, 'cysparse', 'cysparse_types')
 
 TYPES_GENERIC_TYPES_DECLARATION_FILE = os.path.join(TYPES_DIR, 'cysparse_generic_types.cpd')
 TYPES_GENERIC_TYPES_DEFINITION_FILE = os.path.join(TYPES_DIR, 'cysparse_generic_types.cpx')

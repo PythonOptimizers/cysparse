@@ -474,7 +474,7 @@ static const char *__pyx_filename;
 
 
 static const char *__pyx_f[] = {
-  "cysparse/types/cysparse_numpy_types.pyx",
+  "cysparse/cysparse_types/cysparse_numpy_types.pyx",
   "__init__.pxd",
   "type.pxd",
   "bool.pxd",
@@ -1349,7 +1349,7 @@ static char __pyx_k_ndarray_is_not_C_contiguous[] = "ndarray is not C contiguous
 static char __pyx_k_numpy_type_to_cysparse_type[] = "numpy_type_to_cysparse_type";
 static char __pyx_k_CYSPARSE_TYPES_TO_NUMPY_DICT[] = "CYSPARSE_TYPES_TO_NUMPY_DICT";
 static char __pyx_k_are_mixed_types_cast_compatible[] = "are_mixed_types_cast_compatible";
-static char __pyx_k_home_nikolaj_Documents_WORK_Dom[] = "/home/nikolaj/Documents/WORK/Dominique/PROJECT/DECOUPLED_VERSION/SOLID/cysparse/cysparse/types/cysparse_numpy_types.pyx";
+static char __pyx_k_home_nikolaj_Documents_WORK_Dom[] = "/home/nikolaj/Documents/WORK/Dominique/PROJECT/DECOUPLED_VERSION/SOLID/cysparse/cysparse/cysparse_types/cysparse_numpy_types.pyx";
 static char __pyx_k_unknown_dtype_code_in_numpy_pxd[] = "unknown dtype code in numpy.pxd (%d)";
 static char __pyx_k_Format_string_allocated_too_shor[] = "Format string allocated too short, see comment in numpy.pxd";
 static char __pyx_k_Non_native_byte_order_not_suppor[] = "Non-native byte order not supported";
@@ -1422,7 +1422,7 @@ static PyObject *__pyx_codeobj__14;
 static PyObject *__pyx_codeobj__16;
 static PyObject *__pyx_codeobj__18;
 
-/* "cysparse/types/cysparse_numpy_types.pyx":23
+/* "cysparse/cysparse_types/cysparse_numpy_types.pyx":23
  * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.COMPLEX256_T] = np.complex256
  * 
  * def numpy_to_cysparse_type(numpy_type):             # <<<<<<<<<<<<<<
@@ -1459,7 +1459,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_numpy_to_cyspa
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("numpy_to_cysparse_type", 0);
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":33
+  /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":33
  *     """
  * 
  *     if not np.issctype(numpy_type):             # <<<<<<<<<<<<<<
@@ -1501,7 +1501,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_numpy_to_cyspa
   __pyx_t_6 = ((!__pyx_t_5) != 0);
   if (__pyx_t_6) {
 
-    /* "cysparse/types/cysparse_numpy_types.pyx":34
+    /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":34
  * 
  *     if not np.issctype(numpy_type):
  *         raise TypeError("Not a NumPy type")             # <<<<<<<<<<<<<<
@@ -1514,7 +1514,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_numpy_to_cyspa
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     {__pyx_filename = __pyx_f[0]; __pyx_lineno = 34; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-    /* "cysparse/types/cysparse_numpy_types.pyx":33
+    /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":33
  *     """
  * 
  *     if not np.issctype(numpy_type):             # <<<<<<<<<<<<<<
@@ -1523,7 +1523,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_numpy_to_cyspa
  */
   }
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":38
+  /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":38
  *     # we use the == operator defined by NumPy
  *     # this also allows the test of dtype for ndarrays
  *     if numpy_type == np.int32:             # <<<<<<<<<<<<<<
@@ -1541,7 +1541,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_numpy_to_cyspa
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_6) {
 
-    /* "cysparse/types/cysparse_numpy_types.pyx":39
+    /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":39
  *     # this also allows the test of dtype for ndarrays
  *     if numpy_type == np.int32:
  *         return cp_types.INT32_T             # <<<<<<<<<<<<<<
@@ -1555,7 +1555,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_numpy_to_cyspa
     __pyx_t_1 = 0;
     goto __pyx_L0;
 
-    /* "cysparse/types/cysparse_numpy_types.pyx":38
+    /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":38
  *     # we use the == operator defined by NumPy
  *     # this also allows the test of dtype for ndarrays
  *     if numpy_type == np.int32:             # <<<<<<<<<<<<<<
@@ -1564,7 +1564,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_numpy_to_cyspa
  */
   }
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":40
+  /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":40
  *     if numpy_type == np.int32:
  *         return cp_types.INT32_T
  *     elif numpy_type == np.uint32:             # <<<<<<<<<<<<<<
@@ -1582,7 +1582,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_numpy_to_cyspa
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_6) {
 
-    /* "cysparse/types/cysparse_numpy_types.pyx":41
+    /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":41
  *         return cp_types.INT32_T
  *     elif numpy_type == np.uint32:
  *         return cp_types.UINT32_T             # <<<<<<<<<<<<<<
@@ -1596,7 +1596,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_numpy_to_cyspa
     __pyx_t_1 = 0;
     goto __pyx_L0;
 
-    /* "cysparse/types/cysparse_numpy_types.pyx":40
+    /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":40
  *     if numpy_type == np.int32:
  *         return cp_types.INT32_T
  *     elif numpy_type == np.uint32:             # <<<<<<<<<<<<<<
@@ -1605,7 +1605,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_numpy_to_cyspa
  */
   }
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":42
+  /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":42
  *     elif numpy_type == np.uint32:
  *         return cp_types.UINT32_T
  *     elif numpy_type == np.int64:             # <<<<<<<<<<<<<<
@@ -1623,7 +1623,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_numpy_to_cyspa
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_6) {
 
-    /* "cysparse/types/cysparse_numpy_types.pyx":43
+    /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":43
  *         return cp_types.UINT32_T
  *     elif numpy_type == np.int64:
  *         return cp_types.INT64_T             # <<<<<<<<<<<<<<
@@ -1637,7 +1637,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_numpy_to_cyspa
     __pyx_t_1 = 0;
     goto __pyx_L0;
 
-    /* "cysparse/types/cysparse_numpy_types.pyx":42
+    /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":42
  *     elif numpy_type == np.uint32:
  *         return cp_types.UINT32_T
  *     elif numpy_type == np.int64:             # <<<<<<<<<<<<<<
@@ -1646,7 +1646,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_numpy_to_cyspa
  */
   }
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":44
+  /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":44
  *     elif numpy_type == np.int64:
  *         return cp_types.INT64_T
  *     elif numpy_type == np.uint64:             # <<<<<<<<<<<<<<
@@ -1664,7 +1664,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_numpy_to_cyspa
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_6) {
 
-    /* "cysparse/types/cysparse_numpy_types.pyx":45
+    /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":45
  *         return cp_types.INT64_T
  *     elif numpy_type == np.uint64:
  *         return cp_types.UINT64_T             # <<<<<<<<<<<<<<
@@ -1678,7 +1678,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_numpy_to_cyspa
     __pyx_t_1 = 0;
     goto __pyx_L0;
 
-    /* "cysparse/types/cysparse_numpy_types.pyx":44
+    /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":44
  *     elif numpy_type == np.int64:
  *         return cp_types.INT64_T
  *     elif numpy_type == np.uint64:             # <<<<<<<<<<<<<<
@@ -1687,7 +1687,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_numpy_to_cyspa
  */
   }
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":46
+  /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":46
  *     elif numpy_type == np.uint64:
  *         return cp_types.UINT64_T
  *     elif numpy_type == np.float32:             # <<<<<<<<<<<<<<
@@ -1705,7 +1705,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_numpy_to_cyspa
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_6) {
 
-    /* "cysparse/types/cysparse_numpy_types.pyx":47
+    /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":47
  *         return cp_types.UINT64_T
  *     elif numpy_type == np.float32:
  *         return cp_types.FLOAT32_T             # <<<<<<<<<<<<<<
@@ -1719,7 +1719,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_numpy_to_cyspa
     __pyx_t_1 = 0;
     goto __pyx_L0;
 
-    /* "cysparse/types/cysparse_numpy_types.pyx":46
+    /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":46
  *     elif numpy_type == np.uint64:
  *         return cp_types.UINT64_T
  *     elif numpy_type == np.float32:             # <<<<<<<<<<<<<<
@@ -1728,7 +1728,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_numpy_to_cyspa
  */
   }
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":48
+  /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":48
  *     elif numpy_type == np.float32:
  *         return cp_types.FLOAT32_T
  *     elif numpy_type == np.float64:             # <<<<<<<<<<<<<<
@@ -1746,7 +1746,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_numpy_to_cyspa
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_6) {
 
-    /* "cysparse/types/cysparse_numpy_types.pyx":49
+    /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":49
  *         return cp_types.FLOAT32_T
  *     elif numpy_type == np.float64:
  *         return cp_types.FLOAT64_T             # <<<<<<<<<<<<<<
@@ -1760,7 +1760,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_numpy_to_cyspa
     __pyx_t_1 = 0;
     goto __pyx_L0;
 
-    /* "cysparse/types/cysparse_numpy_types.pyx":48
+    /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":48
  *     elif numpy_type == np.float32:
  *         return cp_types.FLOAT32_T
  *     elif numpy_type == np.float64:             # <<<<<<<<<<<<<<
@@ -1769,7 +1769,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_numpy_to_cyspa
  */
   }
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":50
+  /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":50
  *     elif numpy_type == np.float64:
  *         return cp_types.FLOAT64_T
  *     elif numpy_type == np.float128:             # <<<<<<<<<<<<<<
@@ -1787,7 +1787,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_numpy_to_cyspa
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_6) {
 
-    /* "cysparse/types/cysparse_numpy_types.pyx":51
+    /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":51
  *         return cp_types.FLOAT64_T
  *     elif numpy_type == np.float128:
  *         return cp_types.FLOAT128_T             # <<<<<<<<<<<<<<
@@ -1801,7 +1801,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_numpy_to_cyspa
     __pyx_t_1 = 0;
     goto __pyx_L0;
 
-    /* "cysparse/types/cysparse_numpy_types.pyx":50
+    /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":50
  *     elif numpy_type == np.float64:
  *         return cp_types.FLOAT64_T
  *     elif numpy_type == np.float128:             # <<<<<<<<<<<<<<
@@ -1810,7 +1810,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_numpy_to_cyspa
  */
   }
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":52
+  /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":52
  *     elif numpy_type == np.float128:
  *         return cp_types.FLOAT128_T
  *     elif numpy_type == np.complex64:             # <<<<<<<<<<<<<<
@@ -1828,7 +1828,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_numpy_to_cyspa
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_6) {
 
-    /* "cysparse/types/cysparse_numpy_types.pyx":53
+    /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":53
  *         return cp_types.FLOAT128_T
  *     elif numpy_type == np.complex64:
  *         return cp_types.COMPLEX64_T             # <<<<<<<<<<<<<<
@@ -1842,7 +1842,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_numpy_to_cyspa
     __pyx_t_1 = 0;
     goto __pyx_L0;
 
-    /* "cysparse/types/cysparse_numpy_types.pyx":52
+    /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":52
  *     elif numpy_type == np.float128:
  *         return cp_types.FLOAT128_T
  *     elif numpy_type == np.complex64:             # <<<<<<<<<<<<<<
@@ -1851,7 +1851,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_numpy_to_cyspa
  */
   }
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":54
+  /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":54
  *     elif numpy_type == np.complex64:
  *         return cp_types.COMPLEX64_T
  *     elif numpy_type == np.complex128:             # <<<<<<<<<<<<<<
@@ -1869,7 +1869,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_numpy_to_cyspa
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_6) {
 
-    /* "cysparse/types/cysparse_numpy_types.pyx":55
+    /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":55
  *         return cp_types.COMPLEX64_T
  *     elif numpy_type == np.complex128:
  *         return cp_types.COMPLEX128_T             # <<<<<<<<<<<<<<
@@ -1883,7 +1883,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_numpy_to_cyspa
     __pyx_t_1 = 0;
     goto __pyx_L0;
 
-    /* "cysparse/types/cysparse_numpy_types.pyx":54
+    /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":54
  *     elif numpy_type == np.complex64:
  *         return cp_types.COMPLEX64_T
  *     elif numpy_type == np.complex128:             # <<<<<<<<<<<<<<
@@ -1892,7 +1892,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_numpy_to_cyspa
  */
   }
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":56
+  /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":56
  *     elif numpy_type == np.complex128:
  *         return cp_types.COMPLEX128_T
  *     elif numpy_type == np.complex256:             # <<<<<<<<<<<<<<
@@ -1910,7 +1910,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_numpy_to_cyspa
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_6) {
 
-    /* "cysparse/types/cysparse_numpy_types.pyx":57
+    /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":57
  *         return cp_types.COMPLEX128_T
  *     elif numpy_type == np.complex256:
  *         return cp_types.COMPLEX256_T             # <<<<<<<<<<<<<<
@@ -1924,7 +1924,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_numpy_to_cyspa
     __pyx_t_1 = 0;
     goto __pyx_L0;
 
-    /* "cysparse/types/cysparse_numpy_types.pyx":56
+    /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":56
  *     elif numpy_type == np.complex128:
  *         return cp_types.COMPLEX128_T
  *     elif numpy_type == np.complex256:             # <<<<<<<<<<<<<<
@@ -1933,7 +1933,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_numpy_to_cyspa
  */
   }
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":59
+  /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":59
  *         return cp_types.COMPLEX256_T
  *     else:
  *         raise TypeError("Not a NumPy compatible type")             # <<<<<<<<<<<<<<
@@ -1948,7 +1948,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_numpy_to_cyspa
     {__pyx_filename = __pyx_f[0]; __pyx_lineno = 59; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":23
+  /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":23
  * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.COMPLEX256_T] = np.complex256
  * 
  * def numpy_to_cysparse_type(numpy_type):             # <<<<<<<<<<<<<<
@@ -1970,7 +1970,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_numpy_to_cyspa
   return __pyx_r;
 }
 
-/* "cysparse/types/cysparse_numpy_types.pyx":61
+/* "cysparse/cysparse_types/cysparse_numpy_types.pyx":61
  *         raise TypeError("Not a NumPy compatible type")
  * 
  * def is_numpy_type_compatible(numpy_type):             # <<<<<<<<<<<<<<
@@ -2009,7 +2009,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_2is_numpy_type
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("is_numpy_type_compatible", 0);
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":69
+  /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":69
  * 
  *     """
  *     try:             # <<<<<<<<<<<<<<
@@ -2023,7 +2023,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_2is_numpy_type
     __Pyx_XGOTREF(__pyx_t_3);
     /*try:*/ {
 
-      /* "cysparse/types/cysparse_numpy_types.pyx":70
+      /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":70
  *     """
  *     try:
  *         numpy_to_cysparse_type(numpy_type)             # <<<<<<<<<<<<<<
@@ -2059,7 +2059,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_2is_numpy_type
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-      /* "cysparse/types/cysparse_numpy_types.pyx":71
+      /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":71
  *     try:
  *         numpy_to_cysparse_type(numpy_type)
  *         return True             # <<<<<<<<<<<<<<
@@ -2071,7 +2071,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_2is_numpy_type
       __pyx_r = Py_True;
       goto __pyx_L7_try_return;
 
-      /* "cysparse/types/cysparse_numpy_types.pyx":69
+      /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":69
  * 
  *     """
  *     try:             # <<<<<<<<<<<<<<
@@ -2085,7 +2085,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_2is_numpy_type
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-    /* "cysparse/types/cysparse_numpy_types.pyx":72
+    /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":72
  *         numpy_to_cysparse_type(numpy_type)
  *         return True
  *     except TypeError:             # <<<<<<<<<<<<<<
@@ -2100,7 +2100,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_2is_numpy_type
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_GOTREF(__pyx_t_7);
 
-      /* "cysparse/types/cysparse_numpy_types.pyx":73
+      /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":73
  *         return True
  *     except TypeError:
  *         return False             # <<<<<<<<<<<<<<
@@ -2118,7 +2118,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_2is_numpy_type
     goto __pyx_L5_except_error;
     __pyx_L5_except_error:;
 
-    /* "cysparse/types/cysparse_numpy_types.pyx":69
+    /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":69
  * 
  *     """
  *     try:             # <<<<<<<<<<<<<<
@@ -2144,7 +2144,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_2is_numpy_type
     goto __pyx_L0;
   }
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":61
+  /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":61
  *         raise TypeError("Not a NumPy compatible type")
  * 
  * def is_numpy_type_compatible(numpy_type):             # <<<<<<<<<<<<<<
@@ -2166,7 +2166,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_2is_numpy_type
   return __pyx_r;
 }
 
-/* "cysparse/types/cysparse_numpy_types.pyx":75
+/* "cysparse/cysparse_types/cysparse_numpy_types.pyx":75
  *         return False
  * 
  * def cysparse_to_numpy_type(cp_types.CySparseType cysparse_type):             # <<<<<<<<<<<<<<
@@ -2213,7 +2213,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_4cysparse_to_n
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("cysparse_to_numpy_type", 0);
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":85
+  /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":85
  *     """
  *     # the test on the argument's type is done by Cython
  *     return CYSPARSE_TYPES_TO_NUMPY_DICT[cysparse_type]             # <<<<<<<<<<<<<<
@@ -2233,7 +2233,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_4cysparse_to_n
   __pyx_t_3 = 0;
   goto __pyx_L0;
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":75
+  /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":75
  *         return False
  * 
  * def cysparse_to_numpy_type(cp_types.CySparseType cysparse_type):             # <<<<<<<<<<<<<<
@@ -2254,7 +2254,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_4cysparse_to_n
   return __pyx_r;
 }
 
-/* "cysparse/types/cysparse_numpy_types.pyx":88
+/* "cysparse/cysparse_types/cysparse_numpy_types.pyx":88
  * 
  * # TODO: change name to are_mixed_types_strictly_compatible
  * def are_mixed_types_compatible(cp_types.CySparseType cysparse_type, numpy_type):             # <<<<<<<<<<<<<<
@@ -2338,7 +2338,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_6are_mixed_typ
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("are_mixed_types_compatible", 0);
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":97
+  /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":97
  * 
  *     """
  *     return cysparse_to_numpy_type(cysparse_type) == numpy_type             # <<<<<<<<<<<<<<
@@ -2382,7 +2382,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_6are_mixed_typ
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":88
+  /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":88
  * 
  * # TODO: change name to are_mixed_types_strictly_compatible
  * def are_mixed_types_compatible(cp_types.CySparseType cysparse_type, numpy_type):             # <<<<<<<<<<<<<<
@@ -2405,7 +2405,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_6are_mixed_typ
   return __pyx_r;
 }
 
-/* "cysparse/types/cysparse_numpy_types.pyx":99
+/* "cysparse/cysparse_types/cysparse_numpy_types.pyx":99
  *     return cysparse_to_numpy_type(cysparse_type) == numpy_type
  * 
  * def are_mixed_types_cast_compatible(cp_types.CySparseType cysparse_type, numpy_type):             # <<<<<<<<<<<<<<
@@ -2497,7 +2497,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_8are_mixed_typ
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("are_mixed_types_cast_compatible", 0);
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":109
+  /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":109
  * 
  *     """
  *     if not is_numpy_type_compatible(numpy_type):             # <<<<<<<<<<<<<<
@@ -2536,7 +2536,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_8are_mixed_typ
   __pyx_t_6 = ((!__pyx_t_5) != 0);
   if (__pyx_t_6) {
 
-    /* "cysparse/types/cysparse_numpy_types.pyx":110
+    /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":110
  *     """
  *     if not is_numpy_type_compatible(numpy_type):
  *         return False             # <<<<<<<<<<<<<<
@@ -2548,7 +2548,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_8are_mixed_typ
     __pyx_r = Py_False;
     goto __pyx_L0;
 
-    /* "cysparse/types/cysparse_numpy_types.pyx":109
+    /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":109
  * 
  *     """
  *     if not is_numpy_type_compatible(numpy_type):             # <<<<<<<<<<<<<<
@@ -2557,7 +2557,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_8are_mixed_typ
  */
   }
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":113
+  /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":113
  * 
  *     cdef:
  *         cp_types.CySparseType numpy_type_to_cysparse_type = numpy_to_cysparse_type(numpy_type)             # <<<<<<<<<<<<<<
@@ -2595,7 +2595,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_8are_mixed_typ
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_numpy_type_to_cysparse_type = __pyx_t_7;
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":115
+  /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":115
  *         cp_types.CySparseType numpy_type_to_cysparse_type = numpy_to_cysparse_type(numpy_type)
  *         cp_types.CySparseType resulting_type
  *     try:             # <<<<<<<<<<<<<<
@@ -2609,7 +2609,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_8are_mixed_typ
     __Pyx_XGOTREF(__pyx_t_10);
     /*try:*/ {
 
-      /* "cysparse/types/cysparse_numpy_types.pyx":116
+      /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":116
  *         cp_types.CySparseType resulting_type
  *     try:
  *         resulting_type = <cp_types.CySparseType> cp_types.result_type(cysparse_type, numpy_type_to_cysparse_type)             # <<<<<<<<<<<<<<
@@ -2619,7 +2619,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_8are_mixed_typ
       __pyx_t_11 = __pyx_f_8cysparse_5types_14cysparse_types_result_type(__pyx_v_cysparse_type, __pyx_v_numpy_type_to_cysparse_type, 0); if (unlikely(__pyx_t_11 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 116; __pyx_clineno = __LINE__; goto __pyx_L4_error;}
       __pyx_v_resulting_type = ((enum __pyx_t_8cysparse_5types_14cysparse_types_CySparseType)__pyx_t_11);
 
-      /* "cysparse/types/cysparse_numpy_types.pyx":115
+      /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":115
  *         cp_types.CySparseType numpy_type_to_cysparse_type = numpy_to_cysparse_type(numpy_type)
  *         cp_types.CySparseType resulting_type
  *     try:             # <<<<<<<<<<<<<<
@@ -2637,7 +2637,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_8are_mixed_typ
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "cysparse/types/cysparse_numpy_types.pyx":117
+    /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":117
  *     try:
  *         resulting_type = <cp_types.CySparseType> cp_types.result_type(cysparse_type, numpy_type_to_cysparse_type)
  *     except TypeError:             # <<<<<<<<<<<<<<
@@ -2652,7 +2652,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_8are_mixed_typ
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_GOTREF(__pyx_t_3);
 
-      /* "cysparse/types/cysparse_numpy_types.pyx":118
+      /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":118
  *         resulting_type = <cp_types.CySparseType> cp_types.result_type(cysparse_type, numpy_type_to_cysparse_type)
  *     except TypeError:
  *         return False             # <<<<<<<<<<<<<<
@@ -2670,7 +2670,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_8are_mixed_typ
     goto __pyx_L6_except_error;
     __pyx_L6_except_error:;
 
-    /* "cysparse/types/cysparse_numpy_types.pyx":115
+    /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":115
  *         cp_types.CySparseType numpy_type_to_cysparse_type = numpy_to_cysparse_type(numpy_type)
  *         cp_types.CySparseType resulting_type
  *     try:             # <<<<<<<<<<<<<<
@@ -2691,7 +2691,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_8are_mixed_typ
     __pyx_L11_try_end:;
   }
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":120
+  /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":120
  *         return False
  * 
  *     return resulting_type == cysparse_type             # <<<<<<<<<<<<<<
@@ -2703,7 +2703,7 @@ static PyObject *__pyx_pf_8cysparse_5types_20cysparse_numpy_types_8are_mixed_typ
   __pyx_t_3 = 0;
   goto __pyx_L0;
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":99
+  /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":99
  *     return cysparse_to_numpy_type(cysparse_type) == numpy_type
  * 
  * def are_mixed_types_cast_compatible(cp_types.CySparseType cysparse_type, numpy_type):             # <<<<<<<<<<<<<<
@@ -4947,7 +4947,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":34
+  /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":34
  * 
  *     if not np.issctype(numpy_type):
  *         raise TypeError("Not a NumPy type")             # <<<<<<<<<<<<<<
@@ -4958,7 +4958,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple_);
   __Pyx_GIVEREF(__pyx_tuple_);
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":59
+  /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":59
  *         return cp_types.COMPLEX256_T
  *     else:
  *         raise TypeError("Not a NumPy compatible type")             # <<<<<<<<<<<<<<
@@ -5035,7 +5035,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__8);
   __Pyx_GIVEREF(__pyx_tuple__8);
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":23
+  /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":23
  * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.COMPLEX256_T] = np.complex256
  * 
  * def numpy_to_cysparse_type(numpy_type):             # <<<<<<<<<<<<<<
@@ -5047,7 +5047,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__9);
   __pyx_codeobj__10 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__9, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_nikolaj_Documents_WORK_Dom, __pyx_n_s_numpy_to_cysparse_type, 23, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 23; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":61
+  /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":61
  *         raise TypeError("Not a NumPy compatible type")
  * 
  * def is_numpy_type_compatible(numpy_type):             # <<<<<<<<<<<<<<
@@ -5059,7 +5059,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__11);
   __pyx_codeobj__12 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__11, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_nikolaj_Documents_WORK_Dom, __pyx_n_s_is_numpy_type_compatible, 61, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 61; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":75
+  /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":75
  *         return False
  * 
  * def cysparse_to_numpy_type(cp_types.CySparseType cysparse_type):             # <<<<<<<<<<<<<<
@@ -5071,7 +5071,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__13);
   __pyx_codeobj__14 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__13, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_nikolaj_Documents_WORK_Dom, __pyx_n_s_cysparse_to_numpy_type, 75, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 75; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":88
+  /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":88
  * 
  * # TODO: change name to are_mixed_types_strictly_compatible
  * def are_mixed_types_compatible(cp_types.CySparseType cysparse_type, numpy_type):             # <<<<<<<<<<<<<<
@@ -5083,7 +5083,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__15);
   __pyx_codeobj__16 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__15, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_nikolaj_Documents_WORK_Dom, __pyx_n_s_are_mixed_types_compatible, 88, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__16)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 88; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":99
+  /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":99
  *     return cysparse_to_numpy_type(cysparse_type) == numpy_type
  * 
  * def are_mixed_types_cast_compatible(cp_types.CySparseType cysparse_type, numpy_type):             # <<<<<<<<<<<<<<
@@ -5222,7 +5222,7 @@ PyMODINIT_FUNC PyInit_cysparse_numpy_types(void)
   if (__Pyx_patch_abc() < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   #endif
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":4
+  /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":4
  * cimport numpy as cnp
  * #from numpy.math cimport INFINITY
  * import numpy as np             # <<<<<<<<<<<<<<
@@ -5234,7 +5234,7 @@ PyMODINIT_FUNC PyInit_cysparse_numpy_types(void)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_np, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 4; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":10
+  /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":10
  * 
  * 
  * CYSPARSE_TYPES_TO_NUMPY_DICT = dict()             # <<<<<<<<<<<<<<
@@ -5246,7 +5246,7 @@ PyMODINIT_FUNC PyInit_cysparse_numpy_types(void)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_CYSPARSE_TYPES_TO_NUMPY_DICT, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 10; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":12
+  /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":12
  * CYSPARSE_TYPES_TO_NUMPY_DICT = dict()
  * 
  * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.INT32_T] = np.int32             # <<<<<<<<<<<<<<
@@ -5267,7 +5267,7 @@ PyMODINIT_FUNC PyInit_cysparse_numpy_types(void)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":13
+  /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":13
  * 
  * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.INT32_T] = np.int32
  * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.UINT32_T] = np.uint32             # <<<<<<<<<<<<<<
@@ -5288,7 +5288,7 @@ PyMODINIT_FUNC PyInit_cysparse_numpy_types(void)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":14
+  /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":14
  * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.INT32_T] = np.int32
  * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.UINT32_T] = np.uint32
  * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.INT64_T] = np.int64             # <<<<<<<<<<<<<<
@@ -5309,7 +5309,7 @@ PyMODINIT_FUNC PyInit_cysparse_numpy_types(void)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":15
+  /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":15
  * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.UINT32_T] = np.uint32
  * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.INT64_T] = np.int64
  * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.UINT64_T] = np.uint64             # <<<<<<<<<<<<<<
@@ -5330,7 +5330,7 @@ PyMODINIT_FUNC PyInit_cysparse_numpy_types(void)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":16
+  /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":16
  * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.INT64_T] = np.int64
  * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.UINT64_T] = np.uint64
  * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.FLOAT32_T] = np.float32             # <<<<<<<<<<<<<<
@@ -5351,7 +5351,7 @@ PyMODINIT_FUNC PyInit_cysparse_numpy_types(void)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":17
+  /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":17
  * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.UINT64_T] = np.uint64
  * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.FLOAT32_T] = np.float32
  * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.FLOAT64_T] = np.float64             # <<<<<<<<<<<<<<
@@ -5372,7 +5372,7 @@ PyMODINIT_FUNC PyInit_cysparse_numpy_types(void)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":18
+  /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":18
  * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.FLOAT32_T] = np.float32
  * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.FLOAT64_T] = np.float64
  * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.FLOAT128_T] = np.float128             # <<<<<<<<<<<<<<
@@ -5393,7 +5393,7 @@ PyMODINIT_FUNC PyInit_cysparse_numpy_types(void)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":19
+  /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":19
  * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.FLOAT64_T] = np.float64
  * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.FLOAT128_T] = np.float128
  * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.COMPLEX64_T] = np.complex64             # <<<<<<<<<<<<<<
@@ -5414,7 +5414,7 @@ PyMODINIT_FUNC PyInit_cysparse_numpy_types(void)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":20
+  /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":20
  * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.FLOAT128_T] = np.float128
  * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.COMPLEX64_T] = np.complex64
  * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.COMPLEX128_T] = np.complex128             # <<<<<<<<<<<<<<
@@ -5435,7 +5435,7 @@ PyMODINIT_FUNC PyInit_cysparse_numpy_types(void)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":21
+  /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":21
  * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.COMPLEX64_T] = np.complex64
  * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.COMPLEX128_T] = np.complex128
  * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.COMPLEX256_T] = np.complex256             # <<<<<<<<<<<<<<
@@ -5456,7 +5456,7 @@ PyMODINIT_FUNC PyInit_cysparse_numpy_types(void)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":23
+  /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":23
  * CYSPARSE_TYPES_TO_NUMPY_DICT[cp_types.COMPLEX256_T] = np.complex256
  * 
  * def numpy_to_cysparse_type(numpy_type):             # <<<<<<<<<<<<<<
@@ -5468,7 +5468,7 @@ PyMODINIT_FUNC PyInit_cysparse_numpy_types(void)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_numpy_to_cysparse_type, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 23; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":61
+  /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":61
  *         raise TypeError("Not a NumPy compatible type")
  * 
  * def is_numpy_type_compatible(numpy_type):             # <<<<<<<<<<<<<<
@@ -5480,7 +5480,7 @@ PyMODINIT_FUNC PyInit_cysparse_numpy_types(void)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_is_numpy_type_compatible, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 61; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":75
+  /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":75
  *         return False
  * 
  * def cysparse_to_numpy_type(cp_types.CySparseType cysparse_type):             # <<<<<<<<<<<<<<
@@ -5492,7 +5492,7 @@ PyMODINIT_FUNC PyInit_cysparse_numpy_types(void)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_cysparse_to_numpy_type, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 75; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":88
+  /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":88
  * 
  * # TODO: change name to are_mixed_types_strictly_compatible
  * def are_mixed_types_compatible(cp_types.CySparseType cysparse_type, numpy_type):             # <<<<<<<<<<<<<<
@@ -5504,7 +5504,7 @@ PyMODINIT_FUNC PyInit_cysparse_numpy_types(void)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_are_mixed_types_compatible, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 88; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":99
+  /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":99
  *     return cysparse_to_numpy_type(cysparse_type) == numpy_type
  * 
  * def are_mixed_types_cast_compatible(cp_types.CySparseType cysparse_type, numpy_type):             # <<<<<<<<<<<<<<
@@ -5516,7 +5516,7 @@ PyMODINIT_FUNC PyInit_cysparse_numpy_types(void)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_are_mixed_types_cast_compatible, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 99; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "cysparse/types/cysparse_numpy_types.pyx":1
+  /* "cysparse/cysparse_types/cysparse_numpy_types.pyx":1
  * cimport cysparse.types.cysparse_types as cp_types             # <<<<<<<<<<<<<<
  * cimport numpy as cnp
  * #from numpy.math cimport INFINITY

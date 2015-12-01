@@ -114,12 +114,12 @@ else:
 base_ext_params = copy.deepcopy(ext_params)
 base_ext = [
     Extension(name="cysparse.types.cysparse_types",
-              sources=["cysparse/types/cysparse_types.pxd", "cysparse/types/cysparse_types.pyx"]),
+              sources=["cysparse/cysparse_types/cysparse_types.pxd", "cysparse/cysparse_types/cysparse_types.pyx"]),
     Extension(name="cysparse.types.cysparse_numpy_types",
-              sources=["cysparse/types/cysparse_numpy_types.pxd", "cysparse/types/cysparse_numpy_types.pyx"],
+              sources=["cysparse/cysparse_types/cysparse_numpy_types.pxd", "cysparse/cysparse_types/cysparse_numpy_types.pyx"],
               **base_ext_params),
     Extension(name="cysparse.types.cysparse_generic_types",
-              sources=["cysparse/types/cysparse_generic_types.pxd", "cysparse/types/cysparse_generic_types.pyx"]),
+              sources=["cysparse/cysparse_types/cysparse_generic_types.pxd", "cysparse/cysparse_types/cysparse_generic_types.pyx"]),
     ]
 
 ########################################################################################################################
@@ -368,7 +368,7 @@ if use_suitesparse:
 # config
 ########################################################################################################################
 packages_list = ['cysparse',
-            'cysparse.types',
+            'cysparse.cysparse_types',
             'cysparse.sparse',
             'cysparse.sparse.sparse_proxies',
             'cysparse.sparse.sparse_proxies.complex_generic',

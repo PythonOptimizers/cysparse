@@ -472,11 +472,11 @@ static const char *__pyx_filename;
 
 
 static const char *__pyx_f[] = {
-  "cysparse/types/cysparse_types.pyx",
+  "cysparse/cysparse_types/cysparse_types.pyx",
   "type.pxd",
   "bool.pxd",
   "complex.pxd",
-  "cysparse/types/cysparse_types.pxd",
+  "cysparse_types.pxd",
 };
 
 /* "cysparse/types/cysparse_types.pxd":60
@@ -1181,7 +1181,7 @@ static char __pyx_k_SIGNED_INTEGER_ELEMENT_TYPES[] = "SIGNED_INTEGER_ELEMENT_TYP
 static char __pyx_k_cysparse_types_cysparse_types[] = "cysparse.types.cysparse_types";
 static char __pyx_k_UNSIGNED_INTEGER_ELEMENT_TYPES[] = "UNSIGNED_INTEGER_ELEMENT_TYPES";
 static char __pyx_k_This_file_contains_the_basic_ty[] = "\nThis file contains the basic types used in CySparse.\n\nCySparse allows you to dynamically type your matrices. This is not obvious to code in C or Cython. We do this by\ngenerating different source code files for the different types. Sometimes, we need to test at compile time what type\nwe use (for instance to generate the right type of NumPy matrices). These tests are hard-coded.\n\nYou can find such places in the template files by looking for the comment '# EXPLICIT TYPE TESTS'.\n\nTypes are given by XXX_t.\n\nFor each type XXX_t, there is a corresponding:\n\n - XXX_T : an enum constant\n - XXX_t_BIT : numbers of bits for this type\n\nAlthough we use NumPy compatible types, this will is not and should not be dependent on NumPy.\n\n";
-static char __pyx_k_home_nikolaj_Documents_WORK_Dom[] = "/home/nikolaj/Documents/WORK/Dominique/PROJECT/DECOUPLED_VERSION/SOLID/cysparse/cysparse/types/cysparse_types.pyx";
+static char __pyx_k_home_nikolaj_Documents_WORK_Dom[] = "/home/nikolaj/Documents/WORK/Dominique/PROJECT/DECOUPLED_VERSION/SOLID/cysparse/cysparse/cysparse_types/cysparse_types.pyx";
 static char __pyx_k_min_precision_real_imag_max_pre[] = " (min precision real/imag, max precision real/imag) = (";
 static char __pyx_k_No_type_was_found_to_cast_number[] = "No type was found to cast number";
 static char __pyx_k_Shouldn_t_happen_CODE_1_Please_r[] = "Shouldn't happen. CODE 1. Please report.";
@@ -1336,7 +1336,7 @@ static PyObject *__pyx_codeobj__41;
 static PyObject *__pyx_codeobj__43;
 static PyObject *__pyx_codeobj__45;
 
-/* "cysparse/types/cysparse_types.pyx":77
+/* "cysparse/cysparse_types/cysparse_types.pyx":77
  * ########################################################################################################################
  * # EXPLICIT TYPE TESTS
  * def is_subtype(cp_types.CySparseType type1, cp_types.CySparseType type2):             # <<<<<<<<<<<<<<
@@ -1422,7 +1422,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_is_subtype(CYTHON_UN
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("is_subtype", 0);
 
-  /* "cysparse/types/cysparse_types.pyx":92
+  /* "cysparse/cysparse_types/cysparse_types.pyx":92
  *         complex numbers.
  *     """
  *     assert type1 in BASIC_TYPES_DICT and type2 in BASIC_TYPES_DICT, "Type(s) not recognized"             # <<<<<<<<<<<<<<
@@ -1461,7 +1461,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_is_subtype(CYTHON_UN
   }
   #endif
 
-  /* "cysparse/types/cysparse_types.pyx":94
+  /* "cysparse/cysparse_types/cysparse_types.pyx":94
  *     assert type1 in BASIC_TYPES_DICT and type2 in BASIC_TYPES_DICT, "Type(s) not recognized"
  * 
  *     subtype = False             # <<<<<<<<<<<<<<
@@ -1470,7 +1470,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_is_subtype(CYTHON_UN
  */
   __pyx_v_subtype = 0;
 
-  /* "cysparse/types/cysparse_types.pyx":96
+  /* "cysparse/cysparse_types/cysparse_types.pyx":96
  *     subtype = False
  * 
  *     if type1 == type2:             # <<<<<<<<<<<<<<
@@ -1480,7 +1480,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_is_subtype(CYTHON_UN
   __pyx_t_1 = ((__pyx_v_type1 == __pyx_v_type2) != 0);
   if (__pyx_t_1) {
 
-    /* "cysparse/types/cysparse_types.pyx":97
+    /* "cysparse/cysparse_types/cysparse_types.pyx":97
  * 
  *     if type1 == type2:
  *         subtype = True             # <<<<<<<<<<<<<<
@@ -1489,7 +1489,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_is_subtype(CYTHON_UN
  */
     __pyx_v_subtype = 1;
 
-    /* "cysparse/types/cysparse_types.pyx":96
+    /* "cysparse/cysparse_types/cysparse_types.pyx":96
  *     subtype = False
  * 
  *     if type1 == type2:             # <<<<<<<<<<<<<<
@@ -1499,7 +1499,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_is_subtype(CYTHON_UN
     goto __pyx_L5;
   }
 
-  /* "cysparse/types/cysparse_types.pyx":98
+  /* "cysparse/cysparse_types/cysparse_types.pyx":98
  *     if type1 == type2:
  *         subtype = True
  *     elif type2 == cp_types.INT64_T:             # <<<<<<<<<<<<<<
@@ -1509,7 +1509,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_is_subtype(CYTHON_UN
   __pyx_t_1 = ((__pyx_v_type2 == __pyx_e_8cysparse_5types_14cysparse_types_INT64_T) != 0);
   if (__pyx_t_1) {
 
-    /* "cysparse/types/cysparse_types.pyx":99
+    /* "cysparse/cysparse_types/cysparse_types.pyx":99
  *         subtype = True
  *     elif type2 == cp_types.INT64_T:
  *         if type1 in [cp_types.UINT32_T, cp_types.INT32_T]:             # <<<<<<<<<<<<<<
@@ -1520,7 +1520,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_is_subtype(CYTHON_UN
       case __pyx_e_8cysparse_5types_14cysparse_types_UINT32_T:
       case __pyx_e_8cysparse_5types_14cysparse_types_INT32_T:
 
-      /* "cysparse/types/cysparse_types.pyx":100
+      /* "cysparse/cysparse_types/cysparse_types.pyx":100
  *     elif type2 == cp_types.INT64_T:
  *         if type1 in [cp_types.UINT32_T, cp_types.INT32_T]:
  *             subtype = True             # <<<<<<<<<<<<<<
@@ -1529,7 +1529,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_is_subtype(CYTHON_UN
  */
       __pyx_v_subtype = 1;
 
-      /* "cysparse/types/cysparse_types.pyx":99
+      /* "cysparse/cysparse_types/cysparse_types.pyx":99
  *         subtype = True
  *     elif type2 == cp_types.INT64_T:
  *         if type1 in [cp_types.UINT32_T, cp_types.INT32_T]:             # <<<<<<<<<<<<<<
@@ -1540,7 +1540,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_is_subtype(CYTHON_UN
       default: break;
     }
 
-    /* "cysparse/types/cysparse_types.pyx":98
+    /* "cysparse/cysparse_types/cysparse_types.pyx":98
  *     if type1 == type2:
  *         subtype = True
  *     elif type2 == cp_types.INT64_T:             # <<<<<<<<<<<<<<
@@ -1550,7 +1550,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_is_subtype(CYTHON_UN
     goto __pyx_L5;
   }
 
-  /* "cysparse/types/cysparse_types.pyx":101
+  /* "cysparse/cysparse_types/cysparse_types.pyx":101
  *         if type1 in [cp_types.UINT32_T, cp_types.INT32_T]:
  *             subtype = True
  *     elif type2 == cp_types.UINT64_T:             # <<<<<<<<<<<<<<
@@ -1560,7 +1560,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_is_subtype(CYTHON_UN
   __pyx_t_1 = ((__pyx_v_type2 == __pyx_e_8cysparse_5types_14cysparse_types_UINT64_T) != 0);
   if (__pyx_t_1) {
 
-    /* "cysparse/types/cysparse_types.pyx":102
+    /* "cysparse/cysparse_types/cysparse_types.pyx":102
  *             subtype = True
  *     elif type2 == cp_types.UINT64_T:
  *         if type1 in [cp_types.UINT32_T]:             # <<<<<<<<<<<<<<
@@ -1571,7 +1571,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_is_subtype(CYTHON_UN
     __pyx_t_1 = (((__pyx_t_6 == __pyx_e_8cysparse_5types_14cysparse_types_UINT32_T) != 0) != 0);
     if (__pyx_t_1) {
 
-      /* "cysparse/types/cysparse_types.pyx":103
+      /* "cysparse/cysparse_types/cysparse_types.pyx":103
  *     elif type2 == cp_types.UINT64_T:
  *         if type1 in [cp_types.UINT32_T]:
  *             subtype = True             # <<<<<<<<<<<<<<
@@ -1580,7 +1580,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_is_subtype(CYTHON_UN
  */
       __pyx_v_subtype = 1;
 
-      /* "cysparse/types/cysparse_types.pyx":102
+      /* "cysparse/cysparse_types/cysparse_types.pyx":102
  *             subtype = True
  *     elif type2 == cp_types.UINT64_T:
  *         if type1 in [cp_types.UINT32_T]:             # <<<<<<<<<<<<<<
@@ -1589,7 +1589,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_is_subtype(CYTHON_UN
  */
     }
 
-    /* "cysparse/types/cysparse_types.pyx":101
+    /* "cysparse/cysparse_types/cysparse_types.pyx":101
  *         if type1 in [cp_types.UINT32_T, cp_types.INT32_T]:
  *             subtype = True
  *     elif type2 == cp_types.UINT64_T:             # <<<<<<<<<<<<<<
@@ -1599,7 +1599,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_is_subtype(CYTHON_UN
     goto __pyx_L5;
   }
 
-  /* "cysparse/types/cysparse_types.pyx":104
+  /* "cysparse/cysparse_types/cysparse_types.pyx":104
  *         if type1 in [cp_types.UINT32_T]:
  *             subtype = True
  *     elif type2 == cp_types.FLOAT64_T:             # <<<<<<<<<<<<<<
@@ -1609,7 +1609,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_is_subtype(CYTHON_UN
   __pyx_t_1 = ((__pyx_v_type2 == __pyx_e_8cysparse_5types_14cysparse_types_FLOAT64_T) != 0);
   if (__pyx_t_1) {
 
-    /* "cysparse/types/cysparse_types.pyx":105
+    /* "cysparse/cysparse_types/cysparse_types.pyx":105
  *             subtype = True
  *     elif type2 == cp_types.FLOAT64_T:
  *         if type1 in [cp_types.FLOAT32_T]:             # <<<<<<<<<<<<<<
@@ -1620,7 +1620,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_is_subtype(CYTHON_UN
     __pyx_t_1 = (((__pyx_t_6 == __pyx_e_8cysparse_5types_14cysparse_types_FLOAT32_T) != 0) != 0);
     if (__pyx_t_1) {
 
-      /* "cysparse/types/cysparse_types.pyx":106
+      /* "cysparse/cysparse_types/cysparse_types.pyx":106
  *     elif type2 == cp_types.FLOAT64_T:
  *         if type1 in [cp_types.FLOAT32_T]:
  *             subtype = True             # <<<<<<<<<<<<<<
@@ -1629,7 +1629,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_is_subtype(CYTHON_UN
  */
       __pyx_v_subtype = 1;
 
-      /* "cysparse/types/cysparse_types.pyx":105
+      /* "cysparse/cysparse_types/cysparse_types.pyx":105
  *             subtype = True
  *     elif type2 == cp_types.FLOAT64_T:
  *         if type1 in [cp_types.FLOAT32_T]:             # <<<<<<<<<<<<<<
@@ -1638,7 +1638,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_is_subtype(CYTHON_UN
  */
     }
 
-    /* "cysparse/types/cysparse_types.pyx":104
+    /* "cysparse/cysparse_types/cysparse_types.pyx":104
  *         if type1 in [cp_types.UINT32_T]:
  *             subtype = True
  *     elif type2 == cp_types.FLOAT64_T:             # <<<<<<<<<<<<<<
@@ -1648,7 +1648,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_is_subtype(CYTHON_UN
     goto __pyx_L5;
   }
 
-  /* "cysparse/types/cysparse_types.pyx":107
+  /* "cysparse/cysparse_types/cysparse_types.pyx":107
  *         if type1 in [cp_types.FLOAT32_T]:
  *             subtype = True
  *     elif type2 == cp_types.FLOAT128_T:             # <<<<<<<<<<<<<<
@@ -1658,7 +1658,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_is_subtype(CYTHON_UN
   __pyx_t_1 = ((__pyx_v_type2 == __pyx_e_8cysparse_5types_14cysparse_types_FLOAT128_T) != 0);
   if (__pyx_t_1) {
 
-    /* "cysparse/types/cysparse_types.pyx":108
+    /* "cysparse/cysparse_types/cysparse_types.pyx":108
  *             subtype = True
  *     elif type2 == cp_types.FLOAT128_T:
  *         if type1 in [cp_types.FLOAT32_T, cp_types.FLOAT64_T]:             # <<<<<<<<<<<<<<
@@ -1669,7 +1669,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_is_subtype(CYTHON_UN
       case __pyx_e_8cysparse_5types_14cysparse_types_FLOAT32_T:
       case __pyx_e_8cysparse_5types_14cysparse_types_FLOAT64_T:
 
-      /* "cysparse/types/cysparse_types.pyx":109
+      /* "cysparse/cysparse_types/cysparse_types.pyx":109
  *     elif type2 == cp_types.FLOAT128_T:
  *         if type1 in [cp_types.FLOAT32_T, cp_types.FLOAT64_T]:
  *             subtype = True             # <<<<<<<<<<<<<<
@@ -1678,7 +1678,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_is_subtype(CYTHON_UN
  */
       __pyx_v_subtype = 1;
 
-      /* "cysparse/types/cysparse_types.pyx":108
+      /* "cysparse/cysparse_types/cysparse_types.pyx":108
  *             subtype = True
  *     elif type2 == cp_types.FLOAT128_T:
  *         if type1 in [cp_types.FLOAT32_T, cp_types.FLOAT64_T]:             # <<<<<<<<<<<<<<
@@ -1689,7 +1689,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_is_subtype(CYTHON_UN
       default: break;
     }
 
-    /* "cysparse/types/cysparse_types.pyx":107
+    /* "cysparse/cysparse_types/cysparse_types.pyx":107
  *         if type1 in [cp_types.FLOAT32_T]:
  *             subtype = True
  *     elif type2 == cp_types.FLOAT128_T:             # <<<<<<<<<<<<<<
@@ -1699,7 +1699,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_is_subtype(CYTHON_UN
     goto __pyx_L5;
   }
 
-  /* "cysparse/types/cysparse_types.pyx":110
+  /* "cysparse/cysparse_types/cysparse_types.pyx":110
  *         if type1 in [cp_types.FLOAT32_T, cp_types.FLOAT64_T]:
  *             subtype = True
  *     elif type2 == cp_types.COMPLEX64_T:             # <<<<<<<<<<<<<<
@@ -1709,7 +1709,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_is_subtype(CYTHON_UN
   __pyx_t_1 = ((__pyx_v_type2 == __pyx_e_8cysparse_5types_14cysparse_types_COMPLEX64_T) != 0);
   if (__pyx_t_1) {
 
-    /* "cysparse/types/cysparse_types.pyx":111
+    /* "cysparse/cysparse_types/cysparse_types.pyx":111
  *             subtype = True
  *     elif type2 == cp_types.COMPLEX64_T:
  *         if type1 in [cp_types.FLOAT32_T]:             # <<<<<<<<<<<<<<
@@ -1720,7 +1720,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_is_subtype(CYTHON_UN
     __pyx_t_1 = (((__pyx_t_6 == __pyx_e_8cysparse_5types_14cysparse_types_FLOAT32_T) != 0) != 0);
     if (__pyx_t_1) {
 
-      /* "cysparse/types/cysparse_types.pyx":112
+      /* "cysparse/cysparse_types/cysparse_types.pyx":112
  *     elif type2 == cp_types.COMPLEX64_T:
  *         if type1 in [cp_types.FLOAT32_T]:
  *             subtype = True             # <<<<<<<<<<<<<<
@@ -1729,7 +1729,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_is_subtype(CYTHON_UN
  */
       __pyx_v_subtype = 1;
 
-      /* "cysparse/types/cysparse_types.pyx":111
+      /* "cysparse/cysparse_types/cysparse_types.pyx":111
  *             subtype = True
  *     elif type2 == cp_types.COMPLEX64_T:
  *         if type1 in [cp_types.FLOAT32_T]:             # <<<<<<<<<<<<<<
@@ -1738,7 +1738,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_is_subtype(CYTHON_UN
  */
     }
 
-    /* "cysparse/types/cysparse_types.pyx":110
+    /* "cysparse/cysparse_types/cysparse_types.pyx":110
  *         if type1 in [cp_types.FLOAT32_T, cp_types.FLOAT64_T]:
  *             subtype = True
  *     elif type2 == cp_types.COMPLEX64_T:             # <<<<<<<<<<<<<<
@@ -1748,7 +1748,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_is_subtype(CYTHON_UN
     goto __pyx_L5;
   }
 
-  /* "cysparse/types/cysparse_types.pyx":113
+  /* "cysparse/cysparse_types/cysparse_types.pyx":113
  *         if type1 in [cp_types.FLOAT32_T]:
  *             subtype = True
  *     elif type2 == cp_types.COMPLEX128_T:             # <<<<<<<<<<<<<<
@@ -1758,7 +1758,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_is_subtype(CYTHON_UN
   __pyx_t_1 = ((__pyx_v_type2 == __pyx_e_8cysparse_5types_14cysparse_types_COMPLEX128_T) != 0);
   if (__pyx_t_1) {
 
-    /* "cysparse/types/cysparse_types.pyx":114
+    /* "cysparse/cysparse_types/cysparse_types.pyx":114
  *             subtype = True
  *     elif type2 == cp_types.COMPLEX128_T:
  *         if type1 in [cp_types.FLOAT32_T, cp_types.FLOAT64_T, cp_types.COMPLEX64_T]:             # <<<<<<<<<<<<<<
@@ -1770,7 +1770,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_is_subtype(CYTHON_UN
       case __pyx_e_8cysparse_5types_14cysparse_types_FLOAT64_T:
       case __pyx_e_8cysparse_5types_14cysparse_types_COMPLEX64_T:
 
-      /* "cysparse/types/cysparse_types.pyx":115
+      /* "cysparse/cysparse_types/cysparse_types.pyx":115
  *     elif type2 == cp_types.COMPLEX128_T:
  *         if type1 in [cp_types.FLOAT32_T, cp_types.FLOAT64_T, cp_types.COMPLEX64_T]:
  *             subtype = True             # <<<<<<<<<<<<<<
@@ -1779,7 +1779,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_is_subtype(CYTHON_UN
  */
       __pyx_v_subtype = 1;
 
-      /* "cysparse/types/cysparse_types.pyx":114
+      /* "cysparse/cysparse_types/cysparse_types.pyx":114
  *             subtype = True
  *     elif type2 == cp_types.COMPLEX128_T:
  *         if type1 in [cp_types.FLOAT32_T, cp_types.FLOAT64_T, cp_types.COMPLEX64_T]:             # <<<<<<<<<<<<<<
@@ -1790,7 +1790,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_is_subtype(CYTHON_UN
       default: break;
     }
 
-    /* "cysparse/types/cysparse_types.pyx":113
+    /* "cysparse/cysparse_types/cysparse_types.pyx":113
  *         if type1 in [cp_types.FLOAT32_T]:
  *             subtype = True
  *     elif type2 == cp_types.COMPLEX128_T:             # <<<<<<<<<<<<<<
@@ -1800,7 +1800,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_is_subtype(CYTHON_UN
     goto __pyx_L5;
   }
 
-  /* "cysparse/types/cysparse_types.pyx":116
+  /* "cysparse/cysparse_types/cysparse_types.pyx":116
  *         if type1 in [cp_types.FLOAT32_T, cp_types.FLOAT64_T, cp_types.COMPLEX64_T]:
  *             subtype = True
  *     elif type2 == cp_types.COMPLEX256_T:             # <<<<<<<<<<<<<<
@@ -1810,7 +1810,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_is_subtype(CYTHON_UN
   __pyx_t_1 = ((__pyx_v_type2 == __pyx_e_8cysparse_5types_14cysparse_types_COMPLEX256_T) != 0);
   if (__pyx_t_1) {
 
-    /* "cysparse/types/cysparse_types.pyx":117
+    /* "cysparse/cysparse_types/cysparse_types.pyx":117
  *             subtype = True
  *     elif type2 == cp_types.COMPLEX256_T:
  *         if type1 in [cp_types.FLOAT32_T, cp_types.FLOAT64_T, cp_types.FLOAT128_T, cp_types.COMPLEX64_T, cp_types.COMPLEX128_T]:             # <<<<<<<<<<<<<<
@@ -1824,7 +1824,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_is_subtype(CYTHON_UN
       case __pyx_e_8cysparse_5types_14cysparse_types_COMPLEX64_T:
       case __pyx_e_8cysparse_5types_14cysparse_types_COMPLEX128_T:
 
-      /* "cysparse/types/cysparse_types.pyx":118
+      /* "cysparse/cysparse_types/cysparse_types.pyx":118
  *     elif type2 == cp_types.COMPLEX256_T:
  *         if type1 in [cp_types.FLOAT32_T, cp_types.FLOAT64_T, cp_types.FLOAT128_T, cp_types.COMPLEX64_T, cp_types.COMPLEX128_T]:
  *             subtype = True             # <<<<<<<<<<<<<<
@@ -1833,7 +1833,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_is_subtype(CYTHON_UN
  */
       __pyx_v_subtype = 1;
 
-      /* "cysparse/types/cysparse_types.pyx":117
+      /* "cysparse/cysparse_types/cysparse_types.pyx":117
  *             subtype = True
  *     elif type2 == cp_types.COMPLEX256_T:
  *         if type1 in [cp_types.FLOAT32_T, cp_types.FLOAT64_T, cp_types.FLOAT128_T, cp_types.COMPLEX64_T, cp_types.COMPLEX128_T]:             # <<<<<<<<<<<<<<
@@ -1844,7 +1844,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_is_subtype(CYTHON_UN
       default: break;
     }
 
-    /* "cysparse/types/cysparse_types.pyx":116
+    /* "cysparse/cysparse_types/cysparse_types.pyx":116
  *         if type1 in [cp_types.FLOAT32_T, cp_types.FLOAT64_T, cp_types.COMPLEX64_T]:
  *             subtype = True
  *     elif type2 == cp_types.COMPLEX256_T:             # <<<<<<<<<<<<<<
@@ -1854,7 +1854,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_is_subtype(CYTHON_UN
   }
   __pyx_L5:;
 
-  /* "cysparse/types/cysparse_types.pyx":120
+  /* "cysparse/cysparse_types/cysparse_types.pyx":120
  *             subtype = True
  * 
  *     return subtype             # <<<<<<<<<<<<<<
@@ -1868,7 +1868,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_is_subtype(CYTHON_UN
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "cysparse/types/cysparse_types.pyx":77
+  /* "cysparse/cysparse_types/cysparse_types.pyx":77
  * ########################################################################################################################
  * # EXPLICIT TYPE TESTS
  * def is_subtype(cp_types.CySparseType type1, cp_types.CySparseType type2):             # <<<<<<<<<<<<<<
@@ -1888,7 +1888,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_is_subtype(CYTHON_UN
   return __pyx_r;
 }
 
-/* "cysparse/types/cysparse_types.pyx":123
+/* "cysparse/cysparse_types/cysparse_types.pyx":123
  * 
  * 
  * def is_integer_type(cp_types.CySparseType type1):             # <<<<<<<<<<<<<<
@@ -1935,7 +1935,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_2is_integer_type(CYT
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("is_integer_type", 0);
 
-  /* "cysparse/types/cysparse_types.pyx":131
+  /* "cysparse/cysparse_types/cysparse_types.pyx":131
  * 
  *     """
  *     return type1 in INTEGER_ELEMENT_TYPES             # <<<<<<<<<<<<<<
@@ -1956,7 +1956,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_2is_integer_type(CYT
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "cysparse/types/cysparse_types.pyx":123
+  /* "cysparse/cysparse_types/cysparse_types.pyx":123
  * 
  * 
  * def is_integer_type(cp_types.CySparseType type1):             # <<<<<<<<<<<<<<
@@ -1976,7 +1976,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_2is_integer_type(CYT
   return __pyx_r;
 }
 
-/* "cysparse/types/cysparse_types.pyx":133
+/* "cysparse/cysparse_types/cysparse_types.pyx":133
  *     return type1 in INTEGER_ELEMENT_TYPES
  * 
  * def is_signed_integer_type(cp_types.CySparseType type1):             # <<<<<<<<<<<<<<
@@ -2023,7 +2023,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_4is_signed_integer_t
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("is_signed_integer_type", 0);
 
-  /* "cysparse/types/cysparse_types.pyx":140
+  /* "cysparse/cysparse_types/cysparse_types.pyx":140
  *         type1:
  *     """
  *     return type1 in SIGNED_INTEGER_ELEMENT_TYPES             # <<<<<<<<<<<<<<
@@ -2044,7 +2044,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_4is_signed_integer_t
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "cysparse/types/cysparse_types.pyx":133
+  /* "cysparse/cysparse_types/cysparse_types.pyx":133
  *     return type1 in INTEGER_ELEMENT_TYPES
  * 
  * def is_signed_integer_type(cp_types.CySparseType type1):             # <<<<<<<<<<<<<<
@@ -2064,7 +2064,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_4is_signed_integer_t
   return __pyx_r;
 }
 
-/* "cysparse/types/cysparse_types.pyx":142
+/* "cysparse/cysparse_types/cysparse_types.pyx":142
  *     return type1 in SIGNED_INTEGER_ELEMENT_TYPES
  * 
  * def is_unsigned_integer_type(cp_types.CySparseType type1):             # <<<<<<<<<<<<<<
@@ -2111,7 +2111,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_6is_unsigned_integer
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("is_unsigned_integer_type", 0);
 
-  /* "cysparse/types/cysparse_types.pyx":149
+  /* "cysparse/cysparse_types/cysparse_types.pyx":149
  *         type1:
  *     """
  *     return type1 in UNSIGNED_INTEGER_ELEMENT_TYPES             # <<<<<<<<<<<<<<
@@ -2132,7 +2132,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_6is_unsigned_integer
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "cysparse/types/cysparse_types.pyx":142
+  /* "cysparse/cysparse_types/cysparse_types.pyx":142
  *     return type1 in SIGNED_INTEGER_ELEMENT_TYPES
  * 
  * def is_unsigned_integer_type(cp_types.CySparseType type1):             # <<<<<<<<<<<<<<
@@ -2152,7 +2152,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_6is_unsigned_integer
   return __pyx_r;
 }
 
-/* "cysparse/types/cysparse_types.pyx":151
+/* "cysparse/cysparse_types/cysparse_types.pyx":151
  *     return type1 in UNSIGNED_INTEGER_ELEMENT_TYPES
  * 
  * def is_real_type(cp_types.CySparseType type1):             # <<<<<<<<<<<<<<
@@ -2199,7 +2199,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_8is_real_type(CYTHON
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("is_real_type", 0);
 
-  /* "cysparse/types/cysparse_types.pyx":159
+  /* "cysparse/cysparse_types/cysparse_types.pyx":159
  * 
  *     """
  *     return type1 in REAL_ELEMENT_TYPES             # <<<<<<<<<<<<<<
@@ -2220,7 +2220,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_8is_real_type(CYTHON
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "cysparse/types/cysparse_types.pyx":151
+  /* "cysparse/cysparse_types/cysparse_types.pyx":151
  *     return type1 in UNSIGNED_INTEGER_ELEMENT_TYPES
  * 
  * def is_real_type(cp_types.CySparseType type1):             # <<<<<<<<<<<<<<
@@ -2240,7 +2240,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_8is_real_type(CYTHON
   return __pyx_r;
 }
 
-/* "cysparse/types/cysparse_types.pyx":162
+/* "cysparse/cysparse_types/cysparse_types.pyx":162
  * 
  * 
  * def is_complex_type(cp_types.CySparseType type1):             # <<<<<<<<<<<<<<
@@ -2287,7 +2287,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_10is_complex_type(CY
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("is_complex_type", 0);
 
-  /* "cysparse/types/cysparse_types.pyx":170
+  /* "cysparse/cysparse_types/cysparse_types.pyx":170
  * 
  *     """
  *     return type1 in COMPLEX_ELEMENT_TYPES             # <<<<<<<<<<<<<<
@@ -2308,7 +2308,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_10is_complex_type(CY
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "cysparse/types/cysparse_types.pyx":162
+  /* "cysparse/cysparse_types/cysparse_types.pyx":162
  * 
  * 
  * def is_complex_type(cp_types.CySparseType type1):             # <<<<<<<<<<<<<<
@@ -2328,7 +2328,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_10is_complex_type(CY
   return __pyx_r;
 }
 
-/* "cysparse/types/cysparse_types.pyx":172
+/* "cysparse/cysparse_types/cysparse_types.pyx":172
  *     return type1 in COMPLEX_ELEMENT_TYPES
  * 
  * def is_index_type(cp_types.CySparseType type1):             # <<<<<<<<<<<<<<
@@ -2375,7 +2375,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_12is_index_type(CYTH
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("is_index_type", 0);
 
-  /* "cysparse/types/cysparse_types.pyx":179
+  /* "cysparse/cysparse_types/cysparse_types.pyx":179
  *         type1:
  *     """
  *     return type1 in INDEX_TYPES             # <<<<<<<<<<<<<<
@@ -2396,7 +2396,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_12is_index_type(CYTH
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "cysparse/types/cysparse_types.pyx":172
+  /* "cysparse/cysparse_types/cysparse_types.pyx":172
  *     return type1 in COMPLEX_ELEMENT_TYPES
  * 
  * def is_index_type(cp_types.CySparseType type1):             # <<<<<<<<<<<<<<
@@ -2416,7 +2416,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_12is_index_type(CYTH
   return __pyx_r;
 }
 
-/* "cysparse/types/cysparse_types.pyx":181
+/* "cysparse/cysparse_types/cysparse_types.pyx":181
  *     return type1 in INDEX_TYPES
  * 
  * def is_element_type(cp_types.CySparseType type1):             # <<<<<<<<<<<<<<
@@ -2463,7 +2463,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_14is_element_type(CY
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("is_element_type", 0);
 
-  /* "cysparse/types/cysparse_types.pyx":189
+  /* "cysparse/cysparse_types/cysparse_types.pyx":189
  * 
  *     """
  *     return type1 in ELEMENT_TYPES             # <<<<<<<<<<<<<<
@@ -2484,7 +2484,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_14is_element_type(CY
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "cysparse/types/cysparse_types.pyx":181
+  /* "cysparse/cysparse_types/cysparse_types.pyx":181
  *     return type1 in INDEX_TYPES
  * 
  * def is_element_type(cp_types.CySparseType type1):             # <<<<<<<<<<<<<<
@@ -2504,7 +2504,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_14is_element_type(CY
   return __pyx_r;
 }
 
-/* "cysparse/types/cysparse_types.pyx":194
+/* "cysparse/cysparse_types/cysparse_types.pyx":194
  * # TESTS ON NUMBERS
  * ########################################################################################################################
  * cpdef is_python_number(object obj):             # <<<<<<<<<<<<<<
@@ -2524,7 +2524,7 @@ static PyObject *__pyx_f_8cysparse_5types_14cysparse_types_is_python_number(PyOb
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("is_python_number", 0);
 
-  /* "cysparse/types/cysparse_types.pyx":195
+  /* "cysparse/cysparse_types/cysparse_types.pyx":195
  * ########################################################################################################################
  * cpdef is_python_number(object obj):
  *     return PyInt_Check(<PyObject *>obj) or PyFloat_Check(<PyObject *>obj) or PyComplex_Check(<PyObject *>obj) or PyLong_Check(<PyObject *>obj) or PyBool_Check(<PyObject *>obj)             # <<<<<<<<<<<<<<
@@ -2578,7 +2578,7 @@ static PyObject *__pyx_f_8cysparse_5types_14cysparse_types_is_python_number(PyOb
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "cysparse/types/cysparse_types.pyx":194
+  /* "cysparse/cysparse_types/cysparse_types.pyx":194
  * # TESTS ON NUMBERS
  * ########################################################################################################################
  * cpdef is_python_number(object obj):             # <<<<<<<<<<<<<<
@@ -2637,7 +2637,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_16is_python_number(C
   return __pyx_r;
 }
 
-/* "cysparse/types/cysparse_types.pyx":197
+/* "cysparse/cysparse_types/cysparse_types.pyx":197
  *     return PyInt_Check(<PyObject *>obj) or PyFloat_Check(<PyObject *>obj) or PyComplex_Check(<PyObject *>obj) or PyLong_Check(<PyObject *>obj) or PyBool_Check(<PyObject *>obj)
  * 
  * cpdef is_cysparse_number(obj):             # <<<<<<<<<<<<<<
@@ -2661,7 +2661,7 @@ static PyObject *__pyx_f_8cysparse_5types_14cysparse_types_is_cysparse_number(Py
   CYTHON_UNUSED int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("is_cysparse_number", 0);
 
-  /* "cysparse/types/cysparse_types.pyx":202
+  /* "cysparse/cysparse_types/cysparse_types.pyx":202
  *         COMPLEX256_t complex_var
  * 
  *     try:             # <<<<<<<<<<<<<<
@@ -2675,7 +2675,7 @@ static PyObject *__pyx_f_8cysparse_5types_14cysparse_types_is_cysparse_number(Py
     __Pyx_XGOTREF(__pyx_t_3);
     /*try:*/ {
 
-      /* "cysparse/types/cysparse_types.pyx":203
+      /* "cysparse/cysparse_types/cysparse_types.pyx":203
  * 
  *     try:
  *         real_var = <FLOAT128_t> obj             # <<<<<<<<<<<<<<
@@ -2685,7 +2685,7 @@ static PyObject *__pyx_f_8cysparse_5types_14cysparse_types_is_cysparse_number(Py
       __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_v_obj); if (unlikely((__pyx_t_4 == (long double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 203; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       __pyx_v_real_var = ((__pyx_t_8cysparse_5types_14cysparse_types_FLOAT128_t)__pyx_t_4);
 
-      /* "cysparse/types/cysparse_types.pyx":204
+      /* "cysparse/cysparse_types/cysparse_types.pyx":204
  *     try:
  *         real_var = <FLOAT128_t> obj
  *         return True             # <<<<<<<<<<<<<<
@@ -2697,7 +2697,7 @@ static PyObject *__pyx_f_8cysparse_5types_14cysparse_types_is_cysparse_number(Py
       __pyx_r = Py_True;
       goto __pyx_L7_try_return;
 
-      /* "cysparse/types/cysparse_types.pyx":202
+      /* "cysparse/cysparse_types/cysparse_types.pyx":202
  *         COMPLEX256_t complex_var
  * 
  *     try:             # <<<<<<<<<<<<<<
@@ -2707,7 +2707,7 @@ static PyObject *__pyx_f_8cysparse_5types_14cysparse_types_is_cysparse_number(Py
     }
     __pyx_L3_error:;
 
-    /* "cysparse/types/cysparse_types.pyx":205
+    /* "cysparse/cysparse_types/cysparse_types.pyx":205
  *         real_var = <FLOAT128_t> obj
  *         return True
  *     except:             # <<<<<<<<<<<<<<
@@ -2720,7 +2720,7 @@ static PyObject *__pyx_f_8cysparse_5types_14cysparse_types_is_cysparse_number(Py
     }
     __pyx_L7_try_return:;
 
-    /* "cysparse/types/cysparse_types.pyx":202
+    /* "cysparse/cysparse_types/cysparse_types.pyx":202
  *         COMPLEX256_t complex_var
  * 
  *     try:             # <<<<<<<<<<<<<<
@@ -2739,7 +2739,7 @@ static PyObject *__pyx_f_8cysparse_5types_14cysparse_types_is_cysparse_number(Py
     __Pyx_ExceptionReset(__pyx_t_1, __pyx_t_2, __pyx_t_3);
   }
 
-  /* "cysparse/types/cysparse_types.pyx":208
+  /* "cysparse/cysparse_types/cysparse_types.pyx":208
  *         pass
  * 
  *     try:             # <<<<<<<<<<<<<<
@@ -2753,7 +2753,7 @@ static PyObject *__pyx_f_8cysparse_5types_14cysparse_types_is_cysparse_number(Py
     __Pyx_XGOTREF(__pyx_t_1);
     /*try:*/ {
 
-      /* "cysparse/types/cysparse_types.pyx":209
+      /* "cysparse/cysparse_types/cysparse_types.pyx":209
  * 
  *     try:
  *         complex_var = <COMPLEX256_t> obj             # <<<<<<<<<<<<<<
@@ -2763,7 +2763,7 @@ static PyObject *__pyx_f_8cysparse_5types_14cysparse_types_is_cysparse_number(Py
       __pyx_t_5 = __Pyx_PyComplex_As___pyx_t_long_double_complex(__pyx_v_obj); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 209; __pyx_clineno = __LINE__; goto __pyx_L11_error;}
       __pyx_v_complex_var = __pyx_t_long_double_complex_from_parts(((long double)__Pyx_CREAL(__pyx_t_5)), ((long double)__Pyx_CIMAG(__pyx_t_5)));
 
-      /* "cysparse/types/cysparse_types.pyx":210
+      /* "cysparse/cysparse_types/cysparse_types.pyx":210
  *     try:
  *         complex_var = <COMPLEX256_t> obj
  *         return True             # <<<<<<<<<<<<<<
@@ -2775,7 +2775,7 @@ static PyObject *__pyx_f_8cysparse_5types_14cysparse_types_is_cysparse_number(Py
       __pyx_r = Py_True;
       goto __pyx_L15_try_return;
 
-      /* "cysparse/types/cysparse_types.pyx":208
+      /* "cysparse/cysparse_types/cysparse_types.pyx":208
  *         pass
  * 
  *     try:             # <<<<<<<<<<<<<<
@@ -2785,7 +2785,7 @@ static PyObject *__pyx_f_8cysparse_5types_14cysparse_types_is_cysparse_number(Py
     }
     __pyx_L11_error:;
 
-    /* "cysparse/types/cysparse_types.pyx":211
+    /* "cysparse/cysparse_types/cysparse_types.pyx":211
  *         complex_var = <COMPLEX256_t> obj
  *         return True
  *     except:             # <<<<<<<<<<<<<<
@@ -2798,7 +2798,7 @@ static PyObject *__pyx_f_8cysparse_5types_14cysparse_types_is_cysparse_number(Py
     }
     __pyx_L15_try_return:;
 
-    /* "cysparse/types/cysparse_types.pyx":208
+    /* "cysparse/cysparse_types/cysparse_types.pyx":208
  *         pass
  * 
  *     try:             # <<<<<<<<<<<<<<
@@ -2817,7 +2817,7 @@ static PyObject *__pyx_f_8cysparse_5types_14cysparse_types_is_cysparse_number(Py
     __Pyx_ExceptionReset(__pyx_t_3, __pyx_t_2, __pyx_t_1);
   }
 
-  /* "cysparse/types/cysparse_types.pyx":214
+  /* "cysparse/cysparse_types/cysparse_types.pyx":214
  *         pass
  * 
  *     return False             # <<<<<<<<<<<<<<
@@ -2829,7 +2829,7 @@ static PyObject *__pyx_f_8cysparse_5types_14cysparse_types_is_cysparse_number(Py
   __pyx_r = Py_False;
   goto __pyx_L0;
 
-  /* "cysparse/types/cysparse_types.pyx":197
+  /* "cysparse/cysparse_types/cysparse_types.pyx":197
  *     return PyInt_Check(<PyObject *>obj) or PyFloat_Check(<PyObject *>obj) or PyComplex_Check(<PyObject *>obj) or PyLong_Check(<PyObject *>obj) or PyBool_Check(<PyObject *>obj)
  * 
  * cpdef is_cysparse_number(obj):             # <<<<<<<<<<<<<<
@@ -2883,7 +2883,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_18is_cysparse_number
   return __pyx_r;
 }
 
-/* "cysparse/types/cysparse_types.pyx":216
+/* "cysparse/cysparse_types/cysparse_types.pyx":216
  *     return False
  * 
  * cpdef is_scalar(obj):             # <<<<<<<<<<<<<<
@@ -2903,7 +2903,7 @@ static PyObject *__pyx_f_8cysparse_5types_14cysparse_types_is_scalar(PyObject *_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("is_scalar", 0);
 
-  /* "cysparse/types/cysparse_types.pyx":217
+  /* "cysparse/cysparse_types/cysparse_types.pyx":217
  * 
  * cpdef is_scalar(obj):
  *     return is_python_number(obj) or is_cysparse_number(obj)             # <<<<<<<<<<<<<<
@@ -2932,7 +2932,7 @@ static PyObject *__pyx_f_8cysparse_5types_14cysparse_types_is_scalar(PyObject *_
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "cysparse/types/cysparse_types.pyx":216
+  /* "cysparse/cysparse_types/cysparse_types.pyx":216
  *     return False
  * 
  * cpdef is_scalar(obj):             # <<<<<<<<<<<<<<
@@ -2991,7 +2991,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_20is_scalar(CYTHON_U
   return __pyx_r;
 }
 
-/* "cysparse/types/cysparse_types.pyx":225
+/* "cysparse/cysparse_types/cysparse_types.pyx":225
  * 
  * # EXPLICIT TYPE TESTS
  * cpdef int result_type(cp_types.CySparseType type1, cp_types.CySparseType type2) except -1:             # <<<<<<<<<<<<<<
@@ -3024,7 +3024,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("result_type", 0);
 
-  /* "cysparse/types/cysparse_types.pyx":243
+  /* "cysparse/cysparse_types/cysparse_types.pyx":243
  *         **without** changing this function!
  *     """
  *     assert type1 in BASIC_TYPES_DICT and type2 in BASIC_TYPES_DICT, "Type(s) not recognized"             # <<<<<<<<<<<<<<
@@ -3063,7 +3063,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
   }
   #endif
 
-  /* "cysparse/types/cysparse_types.pyx":245
+  /* "cysparse/cysparse_types/cysparse_types.pyx":245
  *     assert type1 in BASIC_TYPES_DICT and type2 in BASIC_TYPES_DICT, "Type(s) not recognized"
  * 
  *     if type1 == type2:             # <<<<<<<<<<<<<<
@@ -3073,7 +3073,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
   __pyx_t_1 = ((__pyx_v_type1 == __pyx_v_type2) != 0);
   if (__pyx_t_1) {
 
-    /* "cysparse/types/cysparse_types.pyx":246
+    /* "cysparse/cysparse_types/cysparse_types.pyx":246
  * 
  *     if type1 == type2:
  *         return type1             # <<<<<<<<<<<<<<
@@ -3083,7 +3083,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
     __pyx_r = __pyx_v_type1;
     goto __pyx_L0;
 
-    /* "cysparse/types/cysparse_types.pyx":245
+    /* "cysparse/cysparse_types/cysparse_types.pyx":245
  *     assert type1 in BASIC_TYPES_DICT and type2 in BASIC_TYPES_DICT, "Type(s) not recognized"
  * 
  *     if type1 == type2:             # <<<<<<<<<<<<<<
@@ -3092,7 +3092,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
  */
   }
 
-  /* "cysparse/types/cysparse_types.pyx":251
+  /* "cysparse/cysparse_types/cysparse_types.pyx":251
  *         cp_types.CySparseType r_type, min_type, max_type
  * 
  *     min_type = min(type1, type2)             # <<<<<<<<<<<<<<
@@ -3108,7 +3108,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
   }
   __pyx_v_min_type = __pyx_t_8;
 
-  /* "cysparse/types/cysparse_types.pyx":252
+  /* "cysparse/cysparse_types/cysparse_types.pyx":252
  * 
  *     min_type = min(type1, type2)
  *     max_type = max(type1, type2)             # <<<<<<<<<<<<<<
@@ -3124,7 +3124,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
   }
   __pyx_v_max_type = __pyx_t_7;
 
-  /* "cysparse/types/cysparse_types.pyx":254
+  /* "cysparse/cysparse_types/cysparse_types.pyx":254
  *     max_type = max(type1, type2)
  * 
  *     r_type = max_type             # <<<<<<<<<<<<<<
@@ -3133,7 +3133,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
  */
   __pyx_v_r_type = __pyx_v_max_type;
 
-  /* "cysparse/types/cysparse_types.pyx":257
+  /* "cysparse/cysparse_types/cysparse_types.pyx":257
  * 
  *     # CASE 1: same family type (integers, real or complex)
  *     if is_integer_type(min_type) and is_integer_type(max_type):             # <<<<<<<<<<<<<<
@@ -3213,7 +3213,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
   __pyx_L7_bool_binop_done:;
   if (__pyx_t_1) {
 
-    /* "cysparse/types/cysparse_types.pyx":258
+    /* "cysparse/cysparse_types/cysparse_types.pyx":258
  *     # CASE 1: same family type (integers, real or complex)
  *     if is_integer_type(min_type) and is_integer_type(max_type):
  *         if (is_signed_integer_type(min_type) and is_signed_integer_type(max_type)) or (is_unsigned_integer_type(min_type) and is_unsigned_integer_type(max_type)):             # <<<<<<<<<<<<<<
@@ -3367,7 +3367,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
     __pyx_L10_bool_binop_done:;
     if (__pyx_t_1) {
 
-      /* "cysparse/types/cysparse_types.pyx":259
+      /* "cysparse/cysparse_types/cysparse_types.pyx":259
  *     if is_integer_type(min_type) and is_integer_type(max_type):
  *         if (is_signed_integer_type(min_type) and is_signed_integer_type(max_type)) or (is_unsigned_integer_type(min_type) and is_unsigned_integer_type(max_type)):
  *             r_type= max_type             # <<<<<<<<<<<<<<
@@ -3376,7 +3376,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
  */
       __pyx_v_r_type = __pyx_v_max_type;
 
-      /* "cysparse/types/cysparse_types.pyx":258
+      /* "cysparse/cysparse_types/cysparse_types.pyx":258
  *     # CASE 1: same family type (integers, real or complex)
  *     if is_integer_type(min_type) and is_integer_type(max_type):
  *         if (is_signed_integer_type(min_type) and is_signed_integer_type(max_type)) or (is_unsigned_integer_type(min_type) and is_unsigned_integer_type(max_type)):             # <<<<<<<<<<<<<<
@@ -3386,7 +3386,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
       goto __pyx_L9;
     }
 
-    /* "cysparse/types/cysparse_types.pyx":261
+    /* "cysparse/cysparse_types/cysparse_types.pyx":261
  *             r_type= max_type
  * 
  *         elif min_type == cp_types.INT32_T:             # <<<<<<<<<<<<<<
@@ -3396,7 +3396,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
     __pyx_t_1 = ((__pyx_v_min_type == __pyx_e_8cysparse_5types_14cysparse_types_INT32_T) != 0);
     if (__pyx_t_1) {
 
-      /* "cysparse/types/cysparse_types.pyx":262
+      /* "cysparse/cysparse_types/cysparse_types.pyx":262
  * 
  *         elif min_type == cp_types.INT32_T:
  *             if max_type in [cp_types.UINT32_T, cp_types.INT64_T]:             # <<<<<<<<<<<<<<
@@ -3407,7 +3407,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
         case __pyx_e_8cysparse_5types_14cysparse_types_UINT32_T:
         case __pyx_e_8cysparse_5types_14cysparse_types_INT64_T:
 
-        /* "cysparse/types/cysparse_types.pyx":263
+        /* "cysparse/cysparse_types/cysparse_types.pyx":263
  *         elif min_type == cp_types.INT32_T:
  *             if max_type in [cp_types.UINT32_T, cp_types.INT64_T]:
  *                 r_type = cp_types.INT64_T             # <<<<<<<<<<<<<<
@@ -3416,7 +3416,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
  */
         __pyx_v_r_type = __pyx_e_8cysparse_5types_14cysparse_types_INT64_T;
 
-        /* "cysparse/types/cysparse_types.pyx":262
+        /* "cysparse/cysparse_types/cysparse_types.pyx":262
  * 
  *         elif min_type == cp_types.INT32_T:
  *             if max_type in [cp_types.UINT32_T, cp_types.INT64_T]:             # <<<<<<<<<<<<<<
@@ -3425,7 +3425,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
  */
         break;
 
-        /* "cysparse/types/cysparse_types.pyx":264
+        /* "cysparse/cysparse_types/cysparse_types.pyx":264
  *             if max_type in [cp_types.UINT32_T, cp_types.INT64_T]:
  *                 r_type = cp_types.INT64_T
  *             elif max_type in [cp_types.UINT64_T]:             # <<<<<<<<<<<<<<
@@ -3434,7 +3434,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
  */
         case __pyx_e_8cysparse_5types_14cysparse_types_UINT64_T:
 
-        /* "cysparse/types/cysparse_types.pyx":265
+        /* "cysparse/cysparse_types/cysparse_types.pyx":265
  *                 r_type = cp_types.INT64_T
  *             elif max_type in [cp_types.UINT64_T]:
  *                 raise TypeError("%s and %s are incompatible" % (type_to_string(min_type), type_to_string(max_type)))             # <<<<<<<<<<<<<<
@@ -3524,7 +3524,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
         {__pyx_filename = __pyx_f[0]; __pyx_lineno = 265; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-        /* "cysparse/types/cysparse_types.pyx":264
+        /* "cysparse/cysparse_types/cysparse_types.pyx":264
  *             if max_type in [cp_types.UINT32_T, cp_types.INT64_T]:
  *                 r_type = cp_types.INT64_T
  *             elif max_type in [cp_types.UINT64_T]:             # <<<<<<<<<<<<<<
@@ -3534,7 +3534,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
         break;
         default:
 
-        /* "cysparse/types/cysparse_types.pyx":267
+        /* "cysparse/cysparse_types/cysparse_types.pyx":267
  *                 raise TypeError("%s and %s are incompatible" % (type_to_string(min_type), type_to_string(max_type)))
  *             else:
  *                 raise TypeError("Shouldn't happen. CODE 1. Please report.")             # <<<<<<<<<<<<<<
@@ -3549,7 +3549,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
         break;
       }
 
-      /* "cysparse/types/cysparse_types.pyx":261
+      /* "cysparse/cysparse_types/cysparse_types.pyx":261
  *             r_type= max_type
  * 
  *         elif min_type == cp_types.INT32_T:             # <<<<<<<<<<<<<<
@@ -3559,7 +3559,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
       goto __pyx_L9;
     }
 
-    /* "cysparse/types/cysparse_types.pyx":268
+    /* "cysparse/cysparse_types/cysparse_types.pyx":268
  *             else:
  *                 raise TypeError("Shouldn't happen. CODE 1. Please report.")
  *         elif min_type == cp_types.UINT32_T:             # <<<<<<<<<<<<<<
@@ -3569,7 +3569,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
     __pyx_t_1 = ((__pyx_v_min_type == __pyx_e_8cysparse_5types_14cysparse_types_UINT32_T) != 0);
     if (__pyx_t_1) {
 
-      /* "cysparse/types/cysparse_types.pyx":269
+      /* "cysparse/cysparse_types/cysparse_types.pyx":269
  *                 raise TypeError("Shouldn't happen. CODE 1. Please report.")
  *         elif min_type == cp_types.UINT32_T:
  *             if max_type in [cp_types.INT64_T]:             # <<<<<<<<<<<<<<
@@ -3579,7 +3579,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
       switch (__pyx_v_max_type) {
         case __pyx_e_8cysparse_5types_14cysparse_types_INT64_T:
 
-        /* "cysparse/types/cysparse_types.pyx":270
+        /* "cysparse/cysparse_types/cysparse_types.pyx":270
  *         elif min_type == cp_types.UINT32_T:
  *             if max_type in [cp_types.INT64_T]:
  *                 r_type = cp_types.INT64_T             # <<<<<<<<<<<<<<
@@ -3588,7 +3588,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
  */
         __pyx_v_r_type = __pyx_e_8cysparse_5types_14cysparse_types_INT64_T;
 
-        /* "cysparse/types/cysparse_types.pyx":269
+        /* "cysparse/cysparse_types/cysparse_types.pyx":269
  *                 raise TypeError("Shouldn't happen. CODE 1. Please report.")
  *         elif min_type == cp_types.UINT32_T:
  *             if max_type in [cp_types.INT64_T]:             # <<<<<<<<<<<<<<
@@ -3597,7 +3597,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
  */
         break;
 
-        /* "cysparse/types/cysparse_types.pyx":271
+        /* "cysparse/cysparse_types/cysparse_types.pyx":271
  *             if max_type in [cp_types.INT64_T]:
  *                 r_type = cp_types.INT64_T
  *             elif max_type in [cp_types.UINT64_T]:             # <<<<<<<<<<<<<<
@@ -3606,7 +3606,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
  */
         case __pyx_e_8cysparse_5types_14cysparse_types_UINT64_T:
 
-        /* "cysparse/types/cysparse_types.pyx":272
+        /* "cysparse/cysparse_types/cysparse_types.pyx":272
  *                 r_type = cp_types.INT64_T
  *             elif max_type in [cp_types.UINT64_T]:
  *                 r_type = cp_types.UINT64_T             # <<<<<<<<<<<<<<
@@ -3615,7 +3615,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
  */
         __pyx_v_r_type = __pyx_e_8cysparse_5types_14cysparse_types_UINT64_T;
 
-        /* "cysparse/types/cysparse_types.pyx":271
+        /* "cysparse/cysparse_types/cysparse_types.pyx":271
  *             if max_type in [cp_types.INT64_T]:
  *                 r_type = cp_types.INT64_T
  *             elif max_type in [cp_types.UINT64_T]:             # <<<<<<<<<<<<<<
@@ -3625,7 +3625,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
         break;
         default:
 
-        /* "cysparse/types/cysparse_types.pyx":274
+        /* "cysparse/cysparse_types/cysparse_types.pyx":274
  *                 r_type = cp_types.UINT64_T
  *             else:
  *                 raise TypeError("Shouldn't happen. CODE 2. Please report.")             # <<<<<<<<<<<<<<
@@ -3640,7 +3640,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
         break;
       }
 
-      /* "cysparse/types/cysparse_types.pyx":268
+      /* "cysparse/cysparse_types/cysparse_types.pyx":268
  *             else:
  *                 raise TypeError("Shouldn't happen. CODE 1. Please report.")
  *         elif min_type == cp_types.UINT32_T:             # <<<<<<<<<<<<<<
@@ -3650,7 +3650,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
       goto __pyx_L9;
     }
 
-    /* "cysparse/types/cysparse_types.pyx":275
+    /* "cysparse/cysparse_types/cysparse_types.pyx":275
  *             else:
  *                 raise TypeError("Shouldn't happen. CODE 2. Please report.")
  *         elif min_type == cp_types.INT64_T:             # <<<<<<<<<<<<<<
@@ -3660,7 +3660,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
     __pyx_t_1 = ((__pyx_v_min_type == __pyx_e_8cysparse_5types_14cysparse_types_INT64_T) != 0);
     if (__pyx_t_1) {
 
-      /* "cysparse/types/cysparse_types.pyx":276
+      /* "cysparse/cysparse_types/cysparse_types.pyx":276
  *                 raise TypeError("Shouldn't happen. CODE 2. Please report.")
  *         elif min_type == cp_types.INT64_T:
  *             if max_type in [cp_types.UINT64_T]:             # <<<<<<<<<<<<<<
@@ -3671,7 +3671,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
       __pyx_t_1 = (((__pyx_t_7 == __pyx_e_8cysparse_5types_14cysparse_types_UINT64_T) != 0) != 0);
       if (__pyx_t_1) {
 
-        /* "cysparse/types/cysparse_types.pyx":277
+        /* "cysparse/cysparse_types/cysparse_types.pyx":277
  *         elif min_type == cp_types.INT64_T:
  *             if max_type in [cp_types.UINT64_T]:
  *                 raise TypeError("%s and %s are incompatible" % (type_to_string(min_type), type_to_string(max_type)))             # <<<<<<<<<<<<<<
@@ -3761,7 +3761,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
         {__pyx_filename = __pyx_f[0]; __pyx_lineno = 277; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-        /* "cysparse/types/cysparse_types.pyx":276
+        /* "cysparse/cysparse_types/cysparse_types.pyx":276
  *                 raise TypeError("Shouldn't happen. CODE 2. Please report.")
  *         elif min_type == cp_types.INT64_T:
  *             if max_type in [cp_types.UINT64_T]:             # <<<<<<<<<<<<<<
@@ -3770,7 +3770,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
  */
       }
 
-      /* "cysparse/types/cysparse_types.pyx":279
+      /* "cysparse/cysparse_types/cysparse_types.pyx":279
  *                 raise TypeError("%s and %s are incompatible" % (type_to_string(min_type), type_to_string(max_type)))
  *             else:
  *                 raise TypeError("Shouldn't happen. CODE 3. Please report.")             # <<<<<<<<<<<<<<
@@ -3785,7 +3785,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
         {__pyx_filename = __pyx_f[0]; __pyx_lineno = 279; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
 
-      /* "cysparse/types/cysparse_types.pyx":275
+      /* "cysparse/cysparse_types/cysparse_types.pyx":275
  *             else:
  *                 raise TypeError("Shouldn't happen. CODE 2. Please report.")
  *         elif min_type == cp_types.INT64_T:             # <<<<<<<<<<<<<<
@@ -3794,7 +3794,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
  */
     }
 
-    /* "cysparse/types/cysparse_types.pyx":281
+    /* "cysparse/cysparse_types/cysparse_types.pyx":281
  *                 raise TypeError("Shouldn't happen. CODE 3. Please report.")
  *         else:
  *             raise TypeError("Shouldn't happen. CODE 4. Please report.")             # <<<<<<<<<<<<<<
@@ -3810,7 +3810,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
     }
     __pyx_L9:;
 
-    /* "cysparse/types/cysparse_types.pyx":257
+    /* "cysparse/cysparse_types/cysparse_types.pyx":257
  * 
  *     # CASE 1: same family type (integers, real or complex)
  *     if is_integer_type(min_type) and is_integer_type(max_type):             # <<<<<<<<<<<<<<
@@ -3820,7 +3820,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
     goto __pyx_L6;
   }
 
-  /* "cysparse/types/cysparse_types.pyx":282
+  /* "cysparse/cysparse_types/cysparse_types.pyx":282
  *         else:
  *             raise TypeError("Shouldn't happen. CODE 4. Please report.")
  *     elif is_real_type(min_type) and is_integer_type(max_type):             # <<<<<<<<<<<<<<
@@ -3900,7 +3900,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
   __pyx_L15_bool_binop_done:;
   if (__pyx_t_1) {
 
-    /* "cysparse/types/cysparse_types.pyx":283
+    /* "cysparse/cysparse_types/cysparse_types.pyx":283
  *             raise TypeError("Shouldn't happen. CODE 4. Please report.")
  *     elif is_real_type(min_type) and is_integer_type(max_type):
  *         r_type = max_type             # <<<<<<<<<<<<<<
@@ -3909,7 +3909,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
  */
     __pyx_v_r_type = __pyx_v_max_type;
 
-    /* "cysparse/types/cysparse_types.pyx":282
+    /* "cysparse/cysparse_types/cysparse_types.pyx":282
  *         else:
  *             raise TypeError("Shouldn't happen. CODE 4. Please report.")
  *     elif is_real_type(min_type) and is_integer_type(max_type):             # <<<<<<<<<<<<<<
@@ -3919,7 +3919,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
     goto __pyx_L6;
   }
 
-  /* "cysparse/types/cysparse_types.pyx":284
+  /* "cysparse/cysparse_types/cysparse_types.pyx":284
  *     elif is_real_type(min_type) and is_integer_type(max_type):
  *         r_type = max_type
  *     elif is_complex_type(min_type) and is_complex_type(max_type):             # <<<<<<<<<<<<<<
@@ -3999,7 +3999,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
   __pyx_L17_bool_binop_done:;
   if (__pyx_t_1) {
 
-    /* "cysparse/types/cysparse_types.pyx":285
+    /* "cysparse/cysparse_types/cysparse_types.pyx":285
  *         r_type = max_type
  *     elif is_complex_type(min_type) and is_complex_type(max_type):
  *         r_type = max_type             # <<<<<<<<<<<<<<
@@ -4008,7 +4008,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
  */
     __pyx_v_r_type = __pyx_v_max_type;
 
-    /* "cysparse/types/cysparse_types.pyx":284
+    /* "cysparse/cysparse_types/cysparse_types.pyx":284
  *     elif is_real_type(min_type) and is_integer_type(max_type):
  *         r_type = max_type
  *     elif is_complex_type(min_type) and is_complex_type(max_type):             # <<<<<<<<<<<<<<
@@ -4018,7 +4018,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
     goto __pyx_L6;
   }
 
-  /* "cysparse/types/cysparse_types.pyx":289
+  /* "cysparse/cysparse_types/cysparse_types.pyx":289
  *     # CASE 2: different family types
  *     # we use the default behavior of min_type/max_type and only consider the exceptions to this default behavior
  *     elif is_integer_type(min_type):             # <<<<<<<<<<<<<<
@@ -4059,7 +4059,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
   __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
   if (__pyx_t_1) {
 
-    /* "cysparse/types/cysparse_types.pyx":290
+    /* "cysparse/cysparse_types/cysparse_types.pyx":290
  *     # we use the default behavior of min_type/max_type and only consider the exceptions to this default behavior
  *     elif is_integer_type(min_type):
  *         if is_real_type(max_type):             # <<<<<<<<<<<<<<
@@ -4100,7 +4100,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
     __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
     if (__pyx_t_1) {
 
-      /* "cysparse/types/cysparse_types.pyx":291
+      /* "cysparse/cysparse_types/cysparse_types.pyx":291
  *     elif is_integer_type(min_type):
  *         if is_real_type(max_type):
  *             if min_type in [cp_types.INT64_T, cp_types.UINT64_T]:             # <<<<<<<<<<<<<<
@@ -4111,7 +4111,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
         case __pyx_e_8cysparse_5types_14cysparse_types_INT64_T:
         case __pyx_e_8cysparse_5types_14cysparse_types_UINT64_T:
 
-        /* "cysparse/types/cysparse_types.pyx":292
+        /* "cysparse/cysparse_types/cysparse_types.pyx":292
  *         if is_real_type(max_type):
  *             if min_type in [cp_types.INT64_T, cp_types.UINT64_T]:
  *                 r_type = <cp_types.CySparseType> result_type(cp_types.FLOAT64_T, max_type)             # <<<<<<<<<<<<<<
@@ -4121,7 +4121,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
         __pyx_t_13 = __pyx_f_8cysparse_5types_14cysparse_types_result_type(__pyx_e_8cysparse_5types_14cysparse_types_FLOAT64_T, __pyx_v_max_type, 0); if (unlikely(__pyx_t_13 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 292; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __pyx_v_r_type = ((enum __pyx_t_8cysparse_5types_14cysparse_types_CySparseType)__pyx_t_13);
 
-        /* "cysparse/types/cysparse_types.pyx":291
+        /* "cysparse/cysparse_types/cysparse_types.pyx":291
  *     elif is_integer_type(min_type):
  *         if is_real_type(max_type):
  *             if min_type in [cp_types.INT64_T, cp_types.UINT64_T]:             # <<<<<<<<<<<<<<
@@ -4132,7 +4132,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
         default: break;
       }
 
-      /* "cysparse/types/cysparse_types.pyx":290
+      /* "cysparse/cysparse_types/cysparse_types.pyx":290
  *     # we use the default behavior of min_type/max_type and only consider the exceptions to this default behavior
  *     elif is_integer_type(min_type):
  *         if is_real_type(max_type):             # <<<<<<<<<<<<<<
@@ -4142,7 +4142,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
       goto __pyx_L19;
     }
 
-    /* "cysparse/types/cysparse_types.pyx":293
+    /* "cysparse/cysparse_types/cysparse_types.pyx":293
  *             if min_type in [cp_types.INT64_T, cp_types.UINT64_T]:
  *                 r_type = <cp_types.CySparseType> result_type(cp_types.FLOAT64_T, max_type)
  *         elif is_complex_type(max_type):             # <<<<<<<<<<<<<<
@@ -4183,7 +4183,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
     __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
     if (__pyx_t_1) {
 
-      /* "cysparse/types/cysparse_types.pyx":294
+      /* "cysparse/cysparse_types/cysparse_types.pyx":294
  *                 r_type = <cp_types.CySparseType> result_type(cp_types.FLOAT64_T, max_type)
  *         elif is_complex_type(max_type):
  *             if min_type in [cp_types.INT64_T, cp_types.UINT64_T]:             # <<<<<<<<<<<<<<
@@ -4194,7 +4194,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
         case __pyx_e_8cysparse_5types_14cysparse_types_INT64_T:
         case __pyx_e_8cysparse_5types_14cysparse_types_UINT64_T:
 
-        /* "cysparse/types/cysparse_types.pyx":295
+        /* "cysparse/cysparse_types/cysparse_types.pyx":295
  *         elif is_complex_type(max_type):
  *             if min_type in [cp_types.INT64_T, cp_types.UINT64_T]:
  *                 r_type = <cp_types.CySparseType> result_type(cp_types.COMPLEX128_T, max_type)             # <<<<<<<<<<<<<<
@@ -4204,7 +4204,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
         __pyx_t_13 = __pyx_f_8cysparse_5types_14cysparse_types_result_type(__pyx_e_8cysparse_5types_14cysparse_types_COMPLEX128_T, __pyx_v_max_type, 0); if (unlikely(__pyx_t_13 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 295; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __pyx_v_r_type = ((enum __pyx_t_8cysparse_5types_14cysparse_types_CySparseType)__pyx_t_13);
 
-        /* "cysparse/types/cysparse_types.pyx":294
+        /* "cysparse/cysparse_types/cysparse_types.pyx":294
  *                 r_type = <cp_types.CySparseType> result_type(cp_types.FLOAT64_T, max_type)
  *         elif is_complex_type(max_type):
  *             if min_type in [cp_types.INT64_T, cp_types.UINT64_T]:             # <<<<<<<<<<<<<<
@@ -4215,7 +4215,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
         default: break;
       }
 
-      /* "cysparse/types/cysparse_types.pyx":293
+      /* "cysparse/cysparse_types/cysparse_types.pyx":293
  *             if min_type in [cp_types.INT64_T, cp_types.UINT64_T]:
  *                 r_type = <cp_types.CySparseType> result_type(cp_types.FLOAT64_T, max_type)
  *         elif is_complex_type(max_type):             # <<<<<<<<<<<<<<
@@ -4225,7 +4225,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
     }
     __pyx_L19:;
 
-    /* "cysparse/types/cysparse_types.pyx":289
+    /* "cysparse/cysparse_types/cysparse_types.pyx":289
  *     # CASE 2: different family types
  *     # we use the default behavior of min_type/max_type and only consider the exceptions to this default behavior
  *     elif is_integer_type(min_type):             # <<<<<<<<<<<<<<
@@ -4235,7 +4235,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
     goto __pyx_L6;
   }
 
-  /* "cysparse/types/cysparse_types.pyx":296
+  /* "cysparse/cysparse_types/cysparse_types.pyx":296
  *             if min_type in [cp_types.INT64_T, cp_types.UINT64_T]:
  *                 r_type = <cp_types.CySparseType> result_type(cp_types.COMPLEX128_T, max_type)
  *     elif is_real_type(min_type):             # <<<<<<<<<<<<<<
@@ -4276,7 +4276,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
   __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
   if (__pyx_t_1) {
 
-    /* "cysparse/types/cysparse_types.pyx":297
+    /* "cysparse/cysparse_types/cysparse_types.pyx":297
  *                 r_type = <cp_types.CySparseType> result_type(cp_types.COMPLEX128_T, max_type)
  *     elif is_real_type(min_type):
  *         if is_complex_type(max_type):             # <<<<<<<<<<<<<<
@@ -4317,7 +4317,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
     __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
     if (__pyx_t_1) {
 
-      /* "cysparse/types/cysparse_types.pyx":298
+      /* "cysparse/cysparse_types/cysparse_types.pyx":298
  *     elif is_real_type(min_type):
  *         if is_complex_type(max_type):
  *             if min_type == cp_types.FLOAT64_T:             # <<<<<<<<<<<<<<
@@ -4327,7 +4327,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
       switch (__pyx_v_min_type) {
         case __pyx_e_8cysparse_5types_14cysparse_types_FLOAT64_T:
 
-        /* "cysparse/types/cysparse_types.pyx":299
+        /* "cysparse/cysparse_types/cysparse_types.pyx":299
  *         if is_complex_type(max_type):
  *             if min_type == cp_types.FLOAT64_T:
  *                 r_type = <cp_types.CySparseType> result_type(cp_types.COMPLEX128_T, max_type)             # <<<<<<<<<<<<<<
@@ -4337,7 +4337,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
         __pyx_t_13 = __pyx_f_8cysparse_5types_14cysparse_types_result_type(__pyx_e_8cysparse_5types_14cysparse_types_COMPLEX128_T, __pyx_v_max_type, 0); if (unlikely(__pyx_t_13 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 299; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __pyx_v_r_type = ((enum __pyx_t_8cysparse_5types_14cysparse_types_CySparseType)__pyx_t_13);
 
-        /* "cysparse/types/cysparse_types.pyx":298
+        /* "cysparse/cysparse_types/cysparse_types.pyx":298
  *     elif is_real_type(min_type):
  *         if is_complex_type(max_type):
  *             if min_type == cp_types.FLOAT64_T:             # <<<<<<<<<<<<<<
@@ -4346,7 +4346,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
  */
         break;
 
-        /* "cysparse/types/cysparse_types.pyx":300
+        /* "cysparse/cysparse_types/cysparse_types.pyx":300
  *             if min_type == cp_types.FLOAT64_T:
  *                 r_type = <cp_types.CySparseType> result_type(cp_types.COMPLEX128_T, max_type)
  *             elif min_type == cp_types.FLOAT128_T:             # <<<<<<<<<<<<<<
@@ -4355,7 +4355,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
  */
         case __pyx_e_8cysparse_5types_14cysparse_types_FLOAT128_T:
 
-        /* "cysparse/types/cysparse_types.pyx":301
+        /* "cysparse/cysparse_types/cysparse_types.pyx":301
  *                 r_type = <cp_types.CySparseType> result_type(cp_types.COMPLEX128_T, max_type)
  *             elif min_type == cp_types.FLOAT128_T:
  *                 r_type = cp_types.COMPLEX256_T             # <<<<<<<<<<<<<<
@@ -4364,7 +4364,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
  */
         __pyx_v_r_type = __pyx_e_8cysparse_5types_14cysparse_types_COMPLEX256_T;
 
-        /* "cysparse/types/cysparse_types.pyx":300
+        /* "cysparse/cysparse_types/cysparse_types.pyx":300
  *             if min_type == cp_types.FLOAT64_T:
  *                 r_type = <cp_types.CySparseType> result_type(cp_types.COMPLEX128_T, max_type)
  *             elif min_type == cp_types.FLOAT128_T:             # <<<<<<<<<<<<<<
@@ -4374,7 +4374,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
         break;
         default:
 
-        /* "cysparse/types/cysparse_types.pyx":303
+        /* "cysparse/cysparse_types/cysparse_types.pyx":303
  *                 r_type = cp_types.COMPLEX256_T
  *             else:
  *                 TypeError("Shouldn't happen. CODE 5. Please report.")             # <<<<<<<<<<<<<<
@@ -4387,7 +4387,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
         break;
       }
 
-      /* "cysparse/types/cysparse_types.pyx":297
+      /* "cysparse/cysparse_types/cysparse_types.pyx":297
  *                 r_type = <cp_types.CySparseType> result_type(cp_types.COMPLEX128_T, max_type)
  *     elif is_real_type(min_type):
  *         if is_complex_type(max_type):             # <<<<<<<<<<<<<<
@@ -4396,7 +4396,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
  */
     }
 
-    /* "cysparse/types/cysparse_types.pyx":296
+    /* "cysparse/cysparse_types/cysparse_types.pyx":296
  *             if min_type in [cp_types.INT64_T, cp_types.UINT64_T]:
  *                 r_type = <cp_types.CySparseType> result_type(cp_types.COMPLEX128_T, max_type)
  *     elif is_real_type(min_type):             # <<<<<<<<<<<<<<
@@ -4406,7 +4406,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
     goto __pyx_L6;
   }
 
-  /* "cysparse/types/cysparse_types.pyx":304
+  /* "cysparse/cysparse_types/cysparse_types.pyx":304
  *             else:
  *                 TypeError("Shouldn't happen. CODE 5. Please report.")
  *     elif is_complex_type(min_type):             # <<<<<<<<<<<<<<
@@ -4449,7 +4449,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
     goto __pyx_L6;
   }
 
-  /* "cysparse/types/cysparse_types.pyx":308
+  /* "cysparse/cysparse_types/cysparse_types.pyx":308
  *         pass
  *     else:
  *         raise TypeError("Shouldn't happen. CODE 6. Please report.")             # <<<<<<<<<<<<<<
@@ -4465,7 +4465,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
   }
   __pyx_L6:;
 
-  /* "cysparse/types/cysparse_types.pyx":310
+  /* "cysparse/cysparse_types/cysparse_types.pyx":310
  *         raise TypeError("Shouldn't happen. CODE 6. Please report.")
  * 
  *     return r_type             # <<<<<<<<<<<<<<
@@ -4475,7 +4475,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_type(enum __pyx_t_8c
   __pyx_r = __pyx_v_r_type;
   goto __pyx_L0;
 
-  /* "cysparse/types/cysparse_types.pyx":225
+  /* "cysparse/cysparse_types/cysparse_types.pyx":225
  * 
  * # EXPLICIT TYPE TESTS
  * cpdef int result_type(cp_types.CySparseType type1, cp_types.CySparseType type2) except -1:             # <<<<<<<<<<<<<<
@@ -4588,7 +4588,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_22result_type(CYTHON
   return __pyx_r;
 }
 
-/* "cysparse/types/cysparse_types.pyx":312
+/* "cysparse/cysparse_types/cysparse_types.pyx":312
  *     return r_type
  * 
  * cpdef int result_real_sum_type(cp_types.CySparseType type1):             # <<<<<<<<<<<<<<
@@ -4607,7 +4607,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_real_sum_type(enum _
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("result_real_sum_type", 0);
 
-  /* "cysparse/types/cysparse_types.pyx":323
+  /* "cysparse/cysparse_types/cysparse_types.pyx":323
  *         cp_types.CySparseType r_type
  * 
  *     if type1 in [cp_types.INT32_T, cp_types.UINT32_T, cp_types.INT64_T, cp_types.UINT64_T]:             # <<<<<<<<<<<<<<
@@ -4620,7 +4620,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_real_sum_type(enum _
     case __pyx_e_8cysparse_5types_14cysparse_types_INT64_T:
     case __pyx_e_8cysparse_5types_14cysparse_types_UINT64_T:
 
-    /* "cysparse/types/cysparse_types.pyx":324
+    /* "cysparse/cysparse_types/cysparse_types.pyx":324
  * 
  *     if type1 in [cp_types.INT32_T, cp_types.UINT32_T, cp_types.INT64_T, cp_types.UINT64_T]:
  *         r_type = cp_types.FLOAT64_T             # <<<<<<<<<<<<<<
@@ -4629,7 +4629,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_real_sum_type(enum _
  */
     __pyx_v_r_type = __pyx_e_8cysparse_5types_14cysparse_types_FLOAT64_T;
 
-    /* "cysparse/types/cysparse_types.pyx":323
+    /* "cysparse/cysparse_types/cysparse_types.pyx":323
  *         cp_types.CySparseType r_type
  * 
  *     if type1 in [cp_types.INT32_T, cp_types.UINT32_T, cp_types.INT64_T, cp_types.UINT64_T]:             # <<<<<<<<<<<<<<
@@ -4638,7 +4638,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_real_sum_type(enum _
  */
     break;
 
-    /* "cysparse/types/cysparse_types.pyx":325
+    /* "cysparse/cysparse_types/cysparse_types.pyx":325
  *     if type1 in [cp_types.INT32_T, cp_types.UINT32_T, cp_types.INT64_T, cp_types.UINT64_T]:
  *         r_type = cp_types.FLOAT64_T
  *     elif type1 in [cp_types.FLOAT32_T, cp_types.FLOAT64_T]:             # <<<<<<<<<<<<<<
@@ -4648,7 +4648,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_real_sum_type(enum _
     case __pyx_e_8cysparse_5types_14cysparse_types_FLOAT32_T:
     case __pyx_e_8cysparse_5types_14cysparse_types_FLOAT64_T:
 
-    /* "cysparse/types/cysparse_types.pyx":326
+    /* "cysparse/cysparse_types/cysparse_types.pyx":326
  *         r_type = cp_types.FLOAT64_T
  *     elif type1 in [cp_types.FLOAT32_T, cp_types.FLOAT64_T]:
  *         r_type = cp_types.FLOAT64_T             # <<<<<<<<<<<<<<
@@ -4657,7 +4657,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_real_sum_type(enum _
  */
     __pyx_v_r_type = __pyx_e_8cysparse_5types_14cysparse_types_FLOAT64_T;
 
-    /* "cysparse/types/cysparse_types.pyx":325
+    /* "cysparse/cysparse_types/cysparse_types.pyx":325
  *     if type1 in [cp_types.INT32_T, cp_types.UINT32_T, cp_types.INT64_T, cp_types.UINT64_T]:
  *         r_type = cp_types.FLOAT64_T
  *     elif type1 in [cp_types.FLOAT32_T, cp_types.FLOAT64_T]:             # <<<<<<<<<<<<<<
@@ -4666,7 +4666,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_real_sum_type(enum _
  */
     break;
 
-    /* "cysparse/types/cysparse_types.pyx":327
+    /* "cysparse/cysparse_types/cysparse_types.pyx":327
  *     elif type1 in [cp_types.FLOAT32_T, cp_types.FLOAT64_T]:
  *         r_type = cp_types.FLOAT64_T
  *     elif type1 in [cp_types.FLOAT128_T]:             # <<<<<<<<<<<<<<
@@ -4675,7 +4675,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_real_sum_type(enum _
  */
     case __pyx_e_8cysparse_5types_14cysparse_types_FLOAT128_T:
 
-    /* "cysparse/types/cysparse_types.pyx":328
+    /* "cysparse/cysparse_types/cysparse_types.pyx":328
  *         r_type = cp_types.FLOAT64_T
  *     elif type1 in [cp_types.FLOAT128_T]:
  *         r_type = cp_types.FLOAT128_T             # <<<<<<<<<<<<<<
@@ -4684,7 +4684,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_real_sum_type(enum _
  */
     __pyx_v_r_type = __pyx_e_8cysparse_5types_14cysparse_types_FLOAT128_T;
 
-    /* "cysparse/types/cysparse_types.pyx":327
+    /* "cysparse/cysparse_types/cysparse_types.pyx":327
  *     elif type1 in [cp_types.FLOAT32_T, cp_types.FLOAT64_T]:
  *         r_type = cp_types.FLOAT64_T
  *     elif type1 in [cp_types.FLOAT128_T]:             # <<<<<<<<<<<<<<
@@ -4693,7 +4693,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_real_sum_type(enum _
  */
     break;
 
-    /* "cysparse/types/cysparse_types.pyx":329
+    /* "cysparse/cysparse_types/cysparse_types.pyx":329
  *     elif type1 in [cp_types.FLOAT128_T]:
  *         r_type = cp_types.FLOAT128_T
  *     elif type1 in [cp_types.COMPLEX64_T, cp_types.COMPLEX128_T]:             # <<<<<<<<<<<<<<
@@ -4703,7 +4703,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_real_sum_type(enum _
     case __pyx_e_8cysparse_5types_14cysparse_types_COMPLEX64_T:
     case __pyx_e_8cysparse_5types_14cysparse_types_COMPLEX128_T:
 
-    /* "cysparse/types/cysparse_types.pyx":330
+    /* "cysparse/cysparse_types/cysparse_types.pyx":330
  *         r_type = cp_types.FLOAT128_T
  *     elif type1 in [cp_types.COMPLEX64_T, cp_types.COMPLEX128_T]:
  *         r_type = cp_types.FLOAT64_T             # <<<<<<<<<<<<<<
@@ -4712,7 +4712,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_real_sum_type(enum _
  */
     __pyx_v_r_type = __pyx_e_8cysparse_5types_14cysparse_types_FLOAT64_T;
 
-    /* "cysparse/types/cysparse_types.pyx":329
+    /* "cysparse/cysparse_types/cysparse_types.pyx":329
  *     elif type1 in [cp_types.FLOAT128_T]:
  *         r_type = cp_types.FLOAT128_T
  *     elif type1 in [cp_types.COMPLEX64_T, cp_types.COMPLEX128_T]:             # <<<<<<<<<<<<<<
@@ -4721,7 +4721,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_real_sum_type(enum _
  */
     break;
 
-    /* "cysparse/types/cysparse_types.pyx":331
+    /* "cysparse/cysparse_types/cysparse_types.pyx":331
  *     elif type1 in [cp_types.COMPLEX64_T, cp_types.COMPLEX128_T]:
  *         r_type = cp_types.FLOAT64_T
  *     elif type1 in [cp_types.COMPLEX256_T]:             # <<<<<<<<<<<<<<
@@ -4730,7 +4730,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_real_sum_type(enum _
  */
     case __pyx_e_8cysparse_5types_14cysparse_types_COMPLEX256_T:
 
-    /* "cysparse/types/cysparse_types.pyx":332
+    /* "cysparse/cysparse_types/cysparse_types.pyx":332
  *         r_type = cp_types.FLOAT64_T
  *     elif type1 in [cp_types.COMPLEX256_T]:
  *         r_type = cp_types.FLOAT128_T             # <<<<<<<<<<<<<<
@@ -4739,7 +4739,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_real_sum_type(enum _
  */
     __pyx_v_r_type = __pyx_e_8cysparse_5types_14cysparse_types_FLOAT128_T;
 
-    /* "cysparse/types/cysparse_types.pyx":331
+    /* "cysparse/cysparse_types/cysparse_types.pyx":331
  *     elif type1 in [cp_types.COMPLEX64_T, cp_types.COMPLEX128_T]:
  *         r_type = cp_types.FLOAT64_T
  *     elif type1 in [cp_types.COMPLEX256_T]:             # <<<<<<<<<<<<<<
@@ -4749,7 +4749,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_real_sum_type(enum _
     break;
     default:
 
-    /* "cysparse/types/cysparse_types.pyx":334
+    /* "cysparse/cysparse_types/cysparse_types.pyx":334
  *         r_type = cp_types.FLOAT128_T
  *     else:
  *         raise TypeError("Not a recognized type")             # <<<<<<<<<<<<<<
@@ -4764,7 +4764,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_real_sum_type(enum _
     break;
   }
 
-  /* "cysparse/types/cysparse_types.pyx":336
+  /* "cysparse/cysparse_types/cysparse_types.pyx":336
  *         raise TypeError("Not a recognized type")
  * 
  *     return r_type             # <<<<<<<<<<<<<<
@@ -4774,7 +4774,7 @@ static int __pyx_f_8cysparse_5types_14cysparse_types_result_real_sum_type(enum _
   __pyx_r = __pyx_v_r_type;
   goto __pyx_L0;
 
-  /* "cysparse/types/cysparse_types.pyx":312
+  /* "cysparse/cysparse_types/cysparse_types.pyx":312
  *     return r_type
  * 
  * cpdef int result_real_sum_type(cp_types.CySparseType type1):             # <<<<<<<<<<<<<<
@@ -4845,7 +4845,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_24result_real_sum_ty
   return __pyx_r;
 }
 
-/* "cysparse/types/cysparse_types.pyx":341
+/* "cysparse/cysparse_types/cysparse_types.pyx":341
  * # I/O String/type conversions
  * ########################################################################################################################
  * def type_to_string(cp_types.CySparseType type1):             # <<<<<<<<<<<<<<
@@ -4892,7 +4892,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_26type_to_string(CYT
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("type_to_string", 0);
 
-  /* "cysparse/types/cysparse_types.pyx":342
+  /* "cysparse/cysparse_types/cysparse_types.pyx":342
  * ########################################################################################################################
  * def type_to_string(cp_types.CySparseType type1):
  *     assert type1 in BASIC_TYPES_DICT, "Type not recognized"             # <<<<<<<<<<<<<<
@@ -4915,7 +4915,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_26type_to_string(CYT
   }
   #endif
 
-  /* "cysparse/types/cysparse_types.pyx":344
+  /* "cysparse/cysparse_types/cysparse_types.pyx":344
  *     assert type1 in BASIC_TYPES_DICT, "Type not recognized"
  * 
  *     return BASIC_TYPES_DICT[type1][0]             # <<<<<<<<<<<<<<
@@ -4938,7 +4938,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_26type_to_string(CYT
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "cysparse/types/cysparse_types.pyx":341
+  /* "cysparse/cysparse_types/cysparse_types.pyx":341
  * # I/O String/type conversions
  * ########################################################################################################################
  * def type_to_string(cp_types.CySparseType type1):             # <<<<<<<<<<<<<<
@@ -4959,7 +4959,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_26type_to_string(CYT
   return __pyx_r;
 }
 
-/* "cysparse/types/cysparse_types.pyx":346
+/* "cysparse/cysparse_types/cysparse_types.pyx":346
  *     return BASIC_TYPES_DICT[type1][0]
  * 
  * def string_to_type(str type_string1):             # <<<<<<<<<<<<<<
@@ -5000,7 +5000,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_28string_to_type(CYT
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("string_to_type", 0);
 
-  /* "cysparse/types/cysparse_types.pyx":347
+  /* "cysparse/cysparse_types/cysparse_types.pyx":347
  * 
  * def string_to_type(str type_string1):
  *     assert type_string1 in BASIC_TYPES_STR_DICT, "String type not recognized"             # <<<<<<<<<<<<<<
@@ -5020,7 +5020,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_28string_to_type(CYT
   }
   #endif
 
-  /* "cysparse/types/cysparse_types.pyx":349
+  /* "cysparse/cysparse_types/cysparse_types.pyx":349
  *     assert type_string1 in BASIC_TYPES_STR_DICT, "String type not recognized"
  * 
  *     return BASIC_TYPES_STR_DICT[type_string1][1]             # <<<<<<<<<<<<<<
@@ -5040,7 +5040,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_28string_to_type(CYT
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "cysparse/types/cysparse_types.pyx":346
+  /* "cysparse/cysparse_types/cysparse_types.pyx":346
  *     return BASIC_TYPES_DICT[type1][0]
  * 
  * def string_to_type(str type_string1):             # <<<<<<<<<<<<<<
@@ -5060,7 +5060,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_28string_to_type(CYT
   return __pyx_r;
 }
 
-/* "cysparse/types/cysparse_types.pyx":355
+/* "cysparse/cysparse_types/cysparse_types.pyx":355
  * # REPORT
  * ########################################################################################################################
  * def report_basic_types(OUT=sys.stdout):             # <<<<<<<<<<<<<<
@@ -5149,7 +5149,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_30report_basic_types
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("report_basic_types", 0);
 
-  /* "cysparse/types/cysparse_types.pyx":356
+  /* "cysparse/cysparse_types/cysparse_types.pyx":356
  * ########################################################################################################################
  * def report_basic_types(OUT=sys.stdout):
  *     print('Basic types in CySparse:', file=OUT)             # <<<<<<<<<<<<<<
@@ -5164,7 +5164,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_30report_basic_types
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "cysparse/types/cysparse_types.pyx":357
+  /* "cysparse/cysparse_types/cysparse_types.pyx":357
  * def report_basic_types(OUT=sys.stdout):
  *     print('Basic types in CySparse:', file=OUT)
  *     print(file=OUT)             # <<<<<<<<<<<<<<
@@ -5179,7 +5179,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_30report_basic_types
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "cysparse/types/cysparse_types.pyx":358
+  /* "cysparse/cysparse_types/cysparse_types.pyx":358
  *     print('Basic types in CySparse:', file=OUT)
  *     print(file=OUT)
  *     for key, item in BASIC_TYPES_STR_DICT.items():             # <<<<<<<<<<<<<<
@@ -5304,7 +5304,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_30report_basic_types
     __Pyx_XDECREF_SET(__pyx_v_item, __pyx_t_6);
     __pyx_t_6 = 0;
 
-    /* "cysparse/types/cysparse_types.pyx":359
+    /* "cysparse/cysparse_types/cysparse_types.pyx":359
  *     print(file=OUT)
  *     for key, item in BASIC_TYPES_STR_DICT.items():
  *         print('{:12}: {:10d} bits ({:d})'.format(key, item[0], item[1]), file=OUT, end='')             # <<<<<<<<<<<<<<
@@ -5362,7 +5362,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_30report_basic_types
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
 
-    /* "cysparse/types/cysparse_types.pyx":360
+    /* "cysparse/cysparse_types/cysparse_types.pyx":360
  *     for key, item in BASIC_TYPES_STR_DICT.items():
  *         print('{:12}: {:10d} bits ({:d})'.format(key, item[0], item[1]), file=OUT, end='')
  *         if BASIC_TYPES_STR_DICT[key][1] in INTEGER_ELEMENT_TYPES:             # <<<<<<<<<<<<<<
@@ -5385,7 +5385,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_30report_basic_types
     __pyx_t_13 = (__pyx_t_12 != 0);
     if (__pyx_t_13) {
 
-      /* "cysparse/types/cysparse_types.pyx":361
+      /* "cysparse/cysparse_types/cysparse_types.pyx":361
  *         print('{:12}: {:10d} bits ({:d})'.format(key, item[0], item[1]), file=OUT, end='')
  *         if BASIC_TYPES_STR_DICT[key][1] in INTEGER_ELEMENT_TYPES:
  *             print(" (min, max) = (", file=OUT, end='')             # <<<<<<<<<<<<<<
@@ -5401,7 +5401,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_30report_basic_types
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
 
-      /* "cysparse/types/cysparse_types.pyx":362
+      /* "cysparse/cysparse_types/cysparse_types.pyx":362
  *         if BASIC_TYPES_STR_DICT[key][1] in INTEGER_ELEMENT_TYPES:
  *             print(" (min, max) = (", file=OUT, end='')
  *             print(item[2], file=OUT, end='')             # <<<<<<<<<<<<<<
@@ -5425,7 +5425,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_30report_basic_types
       __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-      /* "cysparse/types/cysparse_types.pyx":363
+      /* "cysparse/cysparse_types/cysparse_types.pyx":363
  *             print(" (min, max) = (", file=OUT, end='')
  *             print(item[2], file=OUT, end='')
  *             print(',', file=OUT, end='')             # <<<<<<<<<<<<<<
@@ -5441,7 +5441,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_30report_basic_types
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
 
-      /* "cysparse/types/cysparse_types.pyx":364
+      /* "cysparse/cysparse_types/cysparse_types.pyx":364
  *             print(item[2], file=OUT, end='')
  *             print(',', file=OUT, end='')
  *             print(item[3], file=OUT, end='')             # <<<<<<<<<<<<<<
@@ -5465,7 +5465,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_30report_basic_types
       __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "cysparse/types/cysparse_types.pyx":365
+      /* "cysparse/cysparse_types/cysparse_types.pyx":365
  *             print(',', file=OUT, end='')
  *             print(item[3], file=OUT, end='')
  *             print(')', file=OUT)             # <<<<<<<<<<<<<<
@@ -5480,7 +5480,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_30report_basic_types
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
 
-      /* "cysparse/types/cysparse_types.pyx":360
+      /* "cysparse/cysparse_types/cysparse_types.pyx":360
  *     for key, item in BASIC_TYPES_STR_DICT.items():
  *         print('{:12}: {:10d} bits ({:d})'.format(key, item[0], item[1]), file=OUT, end='')
  *         if BASIC_TYPES_STR_DICT[key][1] in INTEGER_ELEMENT_TYPES:             # <<<<<<<<<<<<<<
@@ -5490,7 +5490,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_30report_basic_types
       goto __pyx_L7;
     }
 
-    /* "cysparse/types/cysparse_types.pyx":366
+    /* "cysparse/cysparse_types/cysparse_types.pyx":366
  *             print(item[3], file=OUT, end='')
  *             print(')', file=OUT)
  *         elif BASIC_TYPES_STR_DICT[key][1] in REAL_ELEMENT_TYPES:             # <<<<<<<<<<<<<<
@@ -5513,7 +5513,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_30report_basic_types
     __pyx_t_12 = (__pyx_t_13 != 0);
     if (__pyx_t_12) {
 
-      /* "cysparse/types/cysparse_types.pyx":367
+      /* "cysparse/cysparse_types/cysparse_types.pyx":367
  *             print(')', file=OUT)
  *         elif BASIC_TYPES_STR_DICT[key][1] in REAL_ELEMENT_TYPES:
  *             print(" (min precision, max precision) = (", file=OUT, end='')             # <<<<<<<<<<<<<<
@@ -5529,7 +5529,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_30report_basic_types
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
 
-      /* "cysparse/types/cysparse_types.pyx":368
+      /* "cysparse/cysparse_types/cysparse_types.pyx":368
  *         elif BASIC_TYPES_STR_DICT[key][1] in REAL_ELEMENT_TYPES:
  *             print(" (min precision, max precision) = (", file=OUT, end='')
  *             print(item[2], file=OUT, end='')             # <<<<<<<<<<<<<<
@@ -5553,7 +5553,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_30report_basic_types
       __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-      /* "cysparse/types/cysparse_types.pyx":369
+      /* "cysparse/cysparse_types/cysparse_types.pyx":369
  *             print(" (min precision, max precision) = (", file=OUT, end='')
  *             print(item[2], file=OUT, end='')
  *             print(',', file=OUT, end='')             # <<<<<<<<<<<<<<
@@ -5569,7 +5569,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_30report_basic_types
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
 
-      /* "cysparse/types/cysparse_types.pyx":370
+      /* "cysparse/cysparse_types/cysparse_types.pyx":370
  *             print(item[2], file=OUT, end='')
  *             print(',', file=OUT, end='')
  *             print(item[3], file=OUT, end='')             # <<<<<<<<<<<<<<
@@ -5593,7 +5593,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_30report_basic_types
       __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "cysparse/types/cysparse_types.pyx":371
+      /* "cysparse/cysparse_types/cysparse_types.pyx":371
  *             print(',', file=OUT, end='')
  *             print(item[3], file=OUT, end='')
  *             print(')', file=OUT)             # <<<<<<<<<<<<<<
@@ -5608,7 +5608,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_30report_basic_types
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
 
-      /* "cysparse/types/cysparse_types.pyx":366
+      /* "cysparse/cysparse_types/cysparse_types.pyx":366
  *             print(item[3], file=OUT, end='')
  *             print(')', file=OUT)
  *         elif BASIC_TYPES_STR_DICT[key][1] in REAL_ELEMENT_TYPES:             # <<<<<<<<<<<<<<
@@ -5618,7 +5618,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_30report_basic_types
       goto __pyx_L7;
     }
 
-    /* "cysparse/types/cysparse_types.pyx":372
+    /* "cysparse/cysparse_types/cysparse_types.pyx":372
  *             print(item[3], file=OUT, end='')
  *             print(')', file=OUT)
  *         elif BASIC_TYPES_STR_DICT[key][1] in COMPLEX_ELEMENT_TYPES:             # <<<<<<<<<<<<<<
@@ -5641,7 +5641,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_30report_basic_types
     __pyx_t_13 = (__pyx_t_12 != 0);
     if (__pyx_t_13) {
 
-      /* "cysparse/types/cysparse_types.pyx":373
+      /* "cysparse/cysparse_types/cysparse_types.pyx":373
  *             print(')', file=OUT)
  *         elif BASIC_TYPES_STR_DICT[key][1] in COMPLEX_ELEMENT_TYPES:
  *             print(" (min precision real/imag, max precision real/imag) = (", file=OUT, end='')             # <<<<<<<<<<<<<<
@@ -5657,7 +5657,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_30report_basic_types
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
 
-      /* "cysparse/types/cysparse_types.pyx":374
+      /* "cysparse/cysparse_types/cysparse_types.pyx":374
  *         elif BASIC_TYPES_STR_DICT[key][1] in COMPLEX_ELEMENT_TYPES:
  *             print(" (min precision real/imag, max precision real/imag) = (", file=OUT, end='')
  *             print(item[2], file=OUT, end='')             # <<<<<<<<<<<<<<
@@ -5681,7 +5681,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_30report_basic_types
       __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-      /* "cysparse/types/cysparse_types.pyx":375
+      /* "cysparse/cysparse_types/cysparse_types.pyx":375
  *             print(" (min precision real/imag, max precision real/imag) = (", file=OUT, end='')
  *             print(item[2], file=OUT, end='')
  *             print(',', file=OUT, end='')             # <<<<<<<<<<<<<<
@@ -5697,7 +5697,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_30report_basic_types
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
 
-      /* "cysparse/types/cysparse_types.pyx":376
+      /* "cysparse/cysparse_types/cysparse_types.pyx":376
  *             print(item[2], file=OUT, end='')
  *             print(',', file=OUT, end='')
  *             print(item[3], file=OUT, end='')             # <<<<<<<<<<<<<<
@@ -5721,7 +5721,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_30report_basic_types
       __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "cysparse/types/cysparse_types.pyx":377
+      /* "cysparse/cysparse_types/cysparse_types.pyx":377
  *             print(',', file=OUT, end='')
  *             print(item[3], file=OUT, end='')
  *             print(')', file=OUT)             # <<<<<<<<<<<<<<
@@ -5736,7 +5736,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_30report_basic_types
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
 
-      /* "cysparse/types/cysparse_types.pyx":372
+      /* "cysparse/cysparse_types/cysparse_types.pyx":372
  *             print(item[3], file=OUT, end='')
  *             print(')', file=OUT)
  *         elif BASIC_TYPES_STR_DICT[key][1] in COMPLEX_ELEMENT_TYPES:             # <<<<<<<<<<<<<<
@@ -5746,7 +5746,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_30report_basic_types
     }
     __pyx_L7:;
 
-    /* "cysparse/types/cysparse_types.pyx":358
+    /* "cysparse/cysparse_types/cysparse_types.pyx":358
  *     print('Basic types in CySparse:', file=OUT)
  *     print(file=OUT)
  *     for key, item in BASIC_TYPES_STR_DICT.items():             # <<<<<<<<<<<<<<
@@ -5756,7 +5756,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_30report_basic_types
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "cysparse/types/cysparse_types.pyx":355
+  /* "cysparse/cysparse_types/cysparse_types.pyx":355
  * # REPORT
  * ########################################################################################################################
  * def report_basic_types(OUT=sys.stdout):             # <<<<<<<<<<<<<<
@@ -5785,7 +5785,7 @@ static PyObject *__pyx_pf_8cysparse_5types_14cysparse_types_30report_basic_types
   return __pyx_r;
 }
 
-/* "cysparse/types/cysparse_types.pyx":382
+/* "cysparse/cysparse_types/cysparse_types.pyx":382
  * # NUMBER CASTS
  * ########################################################################################################################
  * cpdef CySparseType min_integer_type(n, type_list) except? cp_types.UINT64_T:             # <<<<<<<<<<<<<<
@@ -5813,7 +5813,7 @@ static enum __pyx_t_8cysparse_5types_14cysparse_types_CySparseType __pyx_f_8cysp
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("min_integer_type", 0);
 
-  /* "cysparse/types/cysparse_types.pyx":400
+  /* "cysparse/cysparse_types/cysparse_types.pyx":400
  *         This function is **slow**. There is no test on the ``n`` argument.
  *     """
  *     for type_el in type_list:             # <<<<<<<<<<<<<<
@@ -5862,7 +5862,7 @@ static enum __pyx_t_8cysparse_5types_14cysparse_types_CySparseType __pyx_f_8cysp
     __Pyx_XDECREF_SET(__pyx_v_type_el, __pyx_t_4);
     __pyx_t_4 = 0;
 
-    /* "cysparse/types/cysparse_types.pyx":401
+    /* "cysparse/cysparse_types/cysparse_types.pyx":401
  *     """
  *     for type_el in type_list:
  *         if type_el in INTEGER_ELEMENT_TYPES:             # <<<<<<<<<<<<<<
@@ -5876,7 +5876,7 @@ static enum __pyx_t_8cysparse_5types_14cysparse_types_CySparseType __pyx_f_8cysp
     __pyx_t_6 = (__pyx_t_5 != 0);
     if (__pyx_t_6) {
 
-      /* "cysparse/types/cysparse_types.pyx":402
+      /* "cysparse/cysparse_types/cysparse_types.pyx":402
  *     for type_el in type_list:
  *         if type_el in INTEGER_ELEMENT_TYPES:
  *             if BASIC_TYPES_DICT[type_el][2] <= n <= BASIC_TYPES_DICT[type_el][3]:             # <<<<<<<<<<<<<<
@@ -5910,7 +5910,7 @@ static enum __pyx_t_8cysparse_5types_14cysparse_types_CySparseType __pyx_f_8cysp
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
       if (__pyx_t_6) {
 
-        /* "cysparse/types/cysparse_types.pyx":403
+        /* "cysparse/cysparse_types/cysparse_types.pyx":403
  *         if type_el in INTEGER_ELEMENT_TYPES:
  *             if BASIC_TYPES_DICT[type_el][2] <= n <= BASIC_TYPES_DICT[type_el][3]:
  *                 return <cp_types.CySparseType> type_el             # <<<<<<<<<<<<<<
@@ -5922,7 +5922,7 @@ static enum __pyx_t_8cysparse_5types_14cysparse_types_CySparseType __pyx_f_8cysp
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         goto __pyx_L0;
 
-        /* "cysparse/types/cysparse_types.pyx":402
+        /* "cysparse/cysparse_types/cysparse_types.pyx":402
  *     for type_el in type_list:
  *         if type_el in INTEGER_ELEMENT_TYPES:
  *             if BASIC_TYPES_DICT[type_el][2] <= n <= BASIC_TYPES_DICT[type_el][3]:             # <<<<<<<<<<<<<<
@@ -5931,7 +5931,7 @@ static enum __pyx_t_8cysparse_5types_14cysparse_types_CySparseType __pyx_f_8cysp
  */
       }
 
-      /* "cysparse/types/cysparse_types.pyx":401
+      /* "cysparse/cysparse_types/cysparse_types.pyx":401
  *     """
  *     for type_el in type_list:
  *         if type_el in INTEGER_ELEMENT_TYPES:             # <<<<<<<<<<<<<<
@@ -5941,7 +5941,7 @@ static enum __pyx_t_8cysparse_5types_14cysparse_types_CySparseType __pyx_f_8cysp
       goto __pyx_L5;
     }
 
-    /* "cysparse/types/cysparse_types.pyx":405
+    /* "cysparse/cysparse_types/cysparse_types.pyx":405
  *                 return <cp_types.CySparseType> type_el
  *         else:
  *             raise TypeError('Type is not an integer type')             # <<<<<<<<<<<<<<
@@ -5957,7 +5957,7 @@ static enum __pyx_t_8cysparse_5types_14cysparse_types_CySparseType __pyx_f_8cysp
     }
     __pyx_L5:;
 
-    /* "cysparse/types/cysparse_types.pyx":400
+    /* "cysparse/cysparse_types/cysparse_types.pyx":400
  *         This function is **slow**. There is no test on the ``n`` argument.
  *     """
  *     for type_el in type_list:             # <<<<<<<<<<<<<<
@@ -5967,7 +5967,7 @@ static enum __pyx_t_8cysparse_5types_14cysparse_types_CySparseType __pyx_f_8cysp
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "cysparse/types/cysparse_types.pyx":407
+  /* "cysparse/cysparse_types/cysparse_types.pyx":407
  *             raise TypeError('Type is not an integer type')
  * 
  *     raise TypeError('No type was found to cast number')             # <<<<<<<<<<<<<<
@@ -5979,7 +5979,7 @@ static enum __pyx_t_8cysparse_5types_14cysparse_types_CySparseType __pyx_f_8cysp
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   {__pyx_filename = __pyx_f[0]; __pyx_lineno = 407; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "cysparse/types/cysparse_types.pyx":382
+  /* "cysparse/cysparse_types/cysparse_types.pyx":382
  * # NUMBER CASTS
  * ########################################################################################################################
  * cpdef CySparseType min_integer_type(n, type_list) except? cp_types.UINT64_T:             # <<<<<<<<<<<<<<
@@ -6220,7 +6220,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "cysparse/types/cysparse_types.pyx":267
+  /* "cysparse/cysparse_types/cysparse_types.pyx":267
  *                 raise TypeError("%s and %s are incompatible" % (type_to_string(min_type), type_to_string(max_type)))
  *             else:
  *                 raise TypeError("Shouldn't happen. CODE 1. Please report.")             # <<<<<<<<<<<<<<
@@ -6231,7 +6231,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple_);
   __Pyx_GIVEREF(__pyx_tuple_);
 
-  /* "cysparse/types/cysparse_types.pyx":274
+  /* "cysparse/cysparse_types/cysparse_types.pyx":274
  *                 r_type = cp_types.UINT64_T
  *             else:
  *                 raise TypeError("Shouldn't happen. CODE 2. Please report.")             # <<<<<<<<<<<<<<
@@ -6242,7 +6242,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
 
-  /* "cysparse/types/cysparse_types.pyx":279
+  /* "cysparse/cysparse_types/cysparse_types.pyx":279
  *                 raise TypeError("%s and %s are incompatible" % (type_to_string(min_type), type_to_string(max_type)))
  *             else:
  *                 raise TypeError("Shouldn't happen. CODE 3. Please report.")             # <<<<<<<<<<<<<<
@@ -6253,7 +6253,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__3);
   __Pyx_GIVEREF(__pyx_tuple__3);
 
-  /* "cysparse/types/cysparse_types.pyx":281
+  /* "cysparse/cysparse_types/cysparse_types.pyx":281
  *                 raise TypeError("Shouldn't happen. CODE 3. Please report.")
  *         else:
  *             raise TypeError("Shouldn't happen. CODE 4. Please report.")             # <<<<<<<<<<<<<<
@@ -6264,7 +6264,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__4);
   __Pyx_GIVEREF(__pyx_tuple__4);
 
-  /* "cysparse/types/cysparse_types.pyx":303
+  /* "cysparse/cysparse_types/cysparse_types.pyx":303
  *                 r_type = cp_types.COMPLEX256_T
  *             else:
  *                 TypeError("Shouldn't happen. CODE 5. Please report.")             # <<<<<<<<<<<<<<
@@ -6275,7 +6275,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__5);
   __Pyx_GIVEREF(__pyx_tuple__5);
 
-  /* "cysparse/types/cysparse_types.pyx":308
+  /* "cysparse/cysparse_types/cysparse_types.pyx":308
  *         pass
  *     else:
  *         raise TypeError("Shouldn't happen. CODE 6. Please report.")             # <<<<<<<<<<<<<<
@@ -6286,7 +6286,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__6);
   __Pyx_GIVEREF(__pyx_tuple__6);
 
-  /* "cysparse/types/cysparse_types.pyx":334
+  /* "cysparse/cysparse_types/cysparse_types.pyx":334
  *         r_type = cp_types.FLOAT128_T
  *     else:
  *         raise TypeError("Not a recognized type")             # <<<<<<<<<<<<<<
@@ -6297,7 +6297,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__7);
   __Pyx_GIVEREF(__pyx_tuple__7);
 
-  /* "cysparse/types/cysparse_types.pyx":356
+  /* "cysparse/cysparse_types/cysparse_types.pyx":356
  * ########################################################################################################################
  * def report_basic_types(OUT=sys.stdout):
  *     print('Basic types in CySparse:', file=OUT)             # <<<<<<<<<<<<<<
@@ -6308,7 +6308,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__9);
   __Pyx_GIVEREF(__pyx_tuple__9);
 
-  /* "cysparse/types/cysparse_types.pyx":361
+  /* "cysparse/cysparse_types/cysparse_types.pyx":361
  *         print('{:12}: {:10d} bits ({:d})'.format(key, item[0], item[1]), file=OUT, end='')
  *         if BASIC_TYPES_STR_DICT[key][1] in INTEGER_ELEMENT_TYPES:
  *             print(" (min, max) = (", file=OUT, end='')             # <<<<<<<<<<<<<<
@@ -6319,7 +6319,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__11);
   __Pyx_GIVEREF(__pyx_tuple__11);
 
-  /* "cysparse/types/cysparse_types.pyx":363
+  /* "cysparse/cysparse_types/cysparse_types.pyx":363
  *             print(" (min, max) = (", file=OUT, end='')
  *             print(item[2], file=OUT, end='')
  *             print(',', file=OUT, end='')             # <<<<<<<<<<<<<<
@@ -6330,7 +6330,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__13);
   __Pyx_GIVEREF(__pyx_tuple__13);
 
-  /* "cysparse/types/cysparse_types.pyx":365
+  /* "cysparse/cysparse_types/cysparse_types.pyx":365
  *             print(',', file=OUT, end='')
  *             print(item[3], file=OUT, end='')
  *             print(')', file=OUT)             # <<<<<<<<<<<<<<
@@ -6341,7 +6341,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__15);
   __Pyx_GIVEREF(__pyx_tuple__15);
 
-  /* "cysparse/types/cysparse_types.pyx":367
+  /* "cysparse/cysparse_types/cysparse_types.pyx":367
  *             print(')', file=OUT)
  *         elif BASIC_TYPES_STR_DICT[key][1] in REAL_ELEMENT_TYPES:
  *             print(" (min precision, max precision) = (", file=OUT, end='')             # <<<<<<<<<<<<<<
@@ -6352,7 +6352,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__16);
   __Pyx_GIVEREF(__pyx_tuple__16);
 
-  /* "cysparse/types/cysparse_types.pyx":369
+  /* "cysparse/cysparse_types/cysparse_types.pyx":369
  *             print(" (min precision, max precision) = (", file=OUT, end='')
  *             print(item[2], file=OUT, end='')
  *             print(',', file=OUT, end='')             # <<<<<<<<<<<<<<
@@ -6363,7 +6363,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__17);
   __Pyx_GIVEREF(__pyx_tuple__17);
 
-  /* "cysparse/types/cysparse_types.pyx":371
+  /* "cysparse/cysparse_types/cysparse_types.pyx":371
  *             print(',', file=OUT, end='')
  *             print(item[3], file=OUT, end='')
  *             print(')', file=OUT)             # <<<<<<<<<<<<<<
@@ -6374,7 +6374,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__18);
   __Pyx_GIVEREF(__pyx_tuple__18);
 
-  /* "cysparse/types/cysparse_types.pyx":373
+  /* "cysparse/cysparse_types/cysparse_types.pyx":373
  *             print(')', file=OUT)
  *         elif BASIC_TYPES_STR_DICT[key][1] in COMPLEX_ELEMENT_TYPES:
  *             print(" (min precision real/imag, max precision real/imag) = (", file=OUT, end='')             # <<<<<<<<<<<<<<
@@ -6385,7 +6385,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__19);
   __Pyx_GIVEREF(__pyx_tuple__19);
 
-  /* "cysparse/types/cysparse_types.pyx":375
+  /* "cysparse/cysparse_types/cysparse_types.pyx":375
  *             print(" (min precision real/imag, max precision real/imag) = (", file=OUT, end='')
  *             print(item[2], file=OUT, end='')
  *             print(',', file=OUT, end='')             # <<<<<<<<<<<<<<
@@ -6396,7 +6396,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__20);
   __Pyx_GIVEREF(__pyx_tuple__20);
 
-  /* "cysparse/types/cysparse_types.pyx":377
+  /* "cysparse/cysparse_types/cysparse_types.pyx":377
  *             print(',', file=OUT, end='')
  *             print(item[3], file=OUT, end='')
  *             print(')', file=OUT)             # <<<<<<<<<<<<<<
@@ -6407,7 +6407,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__21);
   __Pyx_GIVEREF(__pyx_tuple__21);
 
-  /* "cysparse/types/cysparse_types.pyx":405
+  /* "cysparse/cysparse_types/cysparse_types.pyx":405
  *                 return <cp_types.CySparseType> type_el
  *         else:
  *             raise TypeError('Type is not an integer type')             # <<<<<<<<<<<<<<
@@ -6418,7 +6418,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__22);
   __Pyx_GIVEREF(__pyx_tuple__22);
 
-  /* "cysparse/types/cysparse_types.pyx":407
+  /* "cysparse/cysparse_types/cysparse_types.pyx":407
  *             raise TypeError('Type is not an integer type')
  * 
  *     raise TypeError('No type was found to cast number')             # <<<<<<<<<<<<<<
@@ -6428,7 +6428,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__23);
   __Pyx_GIVEREF(__pyx_tuple__23);
 
-  /* "cysparse/types/cysparse_types.pyx":77
+  /* "cysparse/cysparse_types/cysparse_types.pyx":77
  * ########################################################################################################################
  * # EXPLICIT TYPE TESTS
  * def is_subtype(cp_types.CySparseType type1, cp_types.CySparseType type2):             # <<<<<<<<<<<<<<
@@ -6440,7 +6440,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__24);
   __pyx_codeobj__25 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__24, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_nikolaj_Documents_WORK_Dom, __pyx_n_s_is_subtype, 77, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__25)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 77; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "cysparse/types/cysparse_types.pyx":123
+  /* "cysparse/cysparse_types/cysparse_types.pyx":123
  * 
  * 
  * def is_integer_type(cp_types.CySparseType type1):             # <<<<<<<<<<<<<<
@@ -6452,7 +6452,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__26);
   __pyx_codeobj__27 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__26, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_nikolaj_Documents_WORK_Dom, __pyx_n_s_is_integer_type, 123, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__27)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 123; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "cysparse/types/cysparse_types.pyx":133
+  /* "cysparse/cysparse_types/cysparse_types.pyx":133
  *     return type1 in INTEGER_ELEMENT_TYPES
  * 
  * def is_signed_integer_type(cp_types.CySparseType type1):             # <<<<<<<<<<<<<<
@@ -6464,7 +6464,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__28);
   __pyx_codeobj__29 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__28, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_nikolaj_Documents_WORK_Dom, __pyx_n_s_is_signed_integer_type, 133, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__29)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 133; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "cysparse/types/cysparse_types.pyx":142
+  /* "cysparse/cysparse_types/cysparse_types.pyx":142
  *     return type1 in SIGNED_INTEGER_ELEMENT_TYPES
  * 
  * def is_unsigned_integer_type(cp_types.CySparseType type1):             # <<<<<<<<<<<<<<
@@ -6476,7 +6476,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__30);
   __pyx_codeobj__31 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__30, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_nikolaj_Documents_WORK_Dom, __pyx_n_s_is_unsigned_integer_type, 142, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__31)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 142; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "cysparse/types/cysparse_types.pyx":151
+  /* "cysparse/cysparse_types/cysparse_types.pyx":151
  *     return type1 in UNSIGNED_INTEGER_ELEMENT_TYPES
  * 
  * def is_real_type(cp_types.CySparseType type1):             # <<<<<<<<<<<<<<
@@ -6488,7 +6488,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__32);
   __pyx_codeobj__33 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__32, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_nikolaj_Documents_WORK_Dom, __pyx_n_s_is_real_type, 151, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__33)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 151; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "cysparse/types/cysparse_types.pyx":162
+  /* "cysparse/cysparse_types/cysparse_types.pyx":162
  * 
  * 
  * def is_complex_type(cp_types.CySparseType type1):             # <<<<<<<<<<<<<<
@@ -6500,7 +6500,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__34);
   __pyx_codeobj__35 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__34, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_nikolaj_Documents_WORK_Dom, __pyx_n_s_is_complex_type, 162, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__35)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 162; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "cysparse/types/cysparse_types.pyx":172
+  /* "cysparse/cysparse_types/cysparse_types.pyx":172
  *     return type1 in COMPLEX_ELEMENT_TYPES
  * 
  * def is_index_type(cp_types.CySparseType type1):             # <<<<<<<<<<<<<<
@@ -6512,7 +6512,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__36);
   __pyx_codeobj__37 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__36, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_nikolaj_Documents_WORK_Dom, __pyx_n_s_is_index_type, 172, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__37)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 172; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "cysparse/types/cysparse_types.pyx":181
+  /* "cysparse/cysparse_types/cysparse_types.pyx":181
  *     return type1 in INDEX_TYPES
  * 
  * def is_element_type(cp_types.CySparseType type1):             # <<<<<<<<<<<<<<
@@ -6524,7 +6524,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__38);
   __pyx_codeobj__39 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__38, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_nikolaj_Documents_WORK_Dom, __pyx_n_s_is_element_type, 181, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__39)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 181; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "cysparse/types/cysparse_types.pyx":341
+  /* "cysparse/cysparse_types/cysparse_types.pyx":341
  * # I/O String/type conversions
  * ########################################################################################################################
  * def type_to_string(cp_types.CySparseType type1):             # <<<<<<<<<<<<<<
@@ -6536,7 +6536,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__40);
   __pyx_codeobj__41 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__40, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_nikolaj_Documents_WORK_Dom, __pyx_n_s_type_to_string, 341, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__41)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 341; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "cysparse/types/cysparse_types.pyx":346
+  /* "cysparse/cysparse_types/cysparse_types.pyx":346
  *     return BASIC_TYPES_DICT[type1][0]
  * 
  * def string_to_type(str type_string1):             # <<<<<<<<<<<<<<
@@ -6548,7 +6548,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__42);
   __pyx_codeobj__43 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__42, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_nikolaj_Documents_WORK_Dom, __pyx_n_s_string_to_type, 346, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__43)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 346; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "cysparse/types/cysparse_types.pyx":355
+  /* "cysparse/cysparse_types/cysparse_types.pyx":355
  * # REPORT
  * ########################################################################################################################
  * def report_basic_types(OUT=sys.stdout):             # <<<<<<<<<<<<<<
@@ -6694,7 +6694,7 @@ PyMODINIT_FUNC PyInit_cysparse_types(void)
   if (__Pyx_patch_abc() < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   #endif
 
-  /* "cysparse/types/cysparse_types.pyx":7
+  /* "cysparse/cysparse_types/cysparse_types.pyx":7
  * cimport cython
  * 
  * from collections import OrderedDict             # <<<<<<<<<<<<<<
@@ -6715,7 +6715,7 @@ PyMODINIT_FUNC PyInit_cysparse_types(void)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "cysparse/types/cysparse_types.pyx":8
+  /* "cysparse/cysparse_types/cysparse_types.pyx":8
  * 
  * from collections import OrderedDict
  * import sys             # <<<<<<<<<<<<<<
@@ -6727,7 +6727,7 @@ PyMODINIT_FUNC PyInit_cysparse_types(void)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_sys, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 8; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "cysparse/types/cysparse_types.pyx":22
+  /* "cysparse/cysparse_types/cysparse_types.pyx":22
  * # export limits in Python for integer types only
  * 
  * INT32_t_MIN  = cp_types.INT32_MIN             # <<<<<<<<<<<<<<
@@ -6739,7 +6739,7 @@ PyMODINIT_FUNC PyInit_cysparse_types(void)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_INT32_t_MIN, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 22; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "cysparse/types/cysparse_types.pyx":23
+  /* "cysparse/cysparse_types/cysparse_types.pyx":23
  * 
  * INT32_t_MIN  = cp_types.INT32_MIN
  * INT32_t_MAX  = cp_types.INT32_MAX             # <<<<<<<<<<<<<<
@@ -6751,7 +6751,7 @@ PyMODINIT_FUNC PyInit_cysparse_types(void)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_INT32_t_MAX, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 23; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "cysparse/types/cysparse_types.pyx":24
+  /* "cysparse/cysparse_types/cysparse_types.pyx":24
  * INT32_t_MIN  = cp_types.INT32_MIN
  * INT32_t_MAX  = cp_types.INT32_MAX
  * UINT32_t_MAX = cp_types.UINT32_MAX             # <<<<<<<<<<<<<<
@@ -6763,7 +6763,7 @@ PyMODINIT_FUNC PyInit_cysparse_types(void)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_UINT32_t_MAX, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 24; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "cysparse/types/cysparse_types.pyx":25
+  /* "cysparse/cysparse_types/cysparse_types.pyx":25
  * INT32_t_MAX  = cp_types.INT32_MAX
  * UINT32_t_MAX = cp_types.UINT32_MAX
  * INT64_t_MIN  = cp_types.INT64_MIN             # <<<<<<<<<<<<<<
@@ -6775,7 +6775,7 @@ PyMODINIT_FUNC PyInit_cysparse_types(void)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_INT64_t_MIN, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 25; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "cysparse/types/cysparse_types.pyx":26
+  /* "cysparse/cysparse_types/cysparse_types.pyx":26
  * UINT32_t_MAX = cp_types.UINT32_MAX
  * INT64_t_MIN  = cp_types.INT64_MIN
  * INT64_t_MAX  = cp_types.INT64_MAX             # <<<<<<<<<<<<<<
@@ -6787,7 +6787,7 @@ PyMODINIT_FUNC PyInit_cysparse_types(void)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_INT64_t_MAX, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 26; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "cysparse/types/cysparse_types.pyx":27
+  /* "cysparse/cysparse_types/cysparse_types.pyx":27
  * INT64_t_MIN  = cp_types.INT64_MIN
  * INT64_t_MAX  = cp_types.INT64_MAX
  * UINT64_t_MAX = cp_types.UINT64_MAX             # <<<<<<<<<<<<<<
@@ -6799,7 +6799,7 @@ PyMODINIT_FUNC PyInit_cysparse_types(void)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_UINT64_t_MAX, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 27; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "cysparse/types/cysparse_types.pyx":30
+  /* "cysparse/cysparse_types/cysparse_types.pyx":30
  * 
  * 
  * BASIC_TYPES_STR_DICT = OrderedDict()             # <<<<<<<<<<<<<<
@@ -6829,7 +6829,7 @@ PyMODINIT_FUNC PyInit_cysparse_types(void)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_BASIC_TYPES_STR_DICT, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 30; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "cysparse/types/cysparse_types.pyx":35
+  /* "cysparse/cysparse_types/cysparse_types.pyx":35
  * # For real types: min value is the minimum representable floating-point number, max value the maximum representable floating-point number.
  * # For complex types: min value and max value correspond to the real types min/max values for real and imaginary parts.
  * BASIC_TYPES_STR_DICT['INT32_t'] = (cp_types.INT32_t_BIT, cp_types.INT32_T, cp_types.INT32_MIN, cp_types.INT32_MAX)             # <<<<<<<<<<<<<<
@@ -6864,7 +6864,7 @@ PyMODINIT_FUNC PyInit_cysparse_types(void)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "cysparse/types/cysparse_types.pyx":36
+  /* "cysparse/cysparse_types/cysparse_types.pyx":36
  * # For complex types: min value and max value correspond to the real types min/max values for real and imaginary parts.
  * BASIC_TYPES_STR_DICT['INT32_t'] = (cp_types.INT32_t_BIT, cp_types.INT32_T, cp_types.INT32_MIN, cp_types.INT32_MAX)
  * BASIC_TYPES_STR_DICT['UINT32_t'] = (cp_types.UINT32_t_BIT, cp_types.UINT32_T, 0, cp_types.UINT32_MAX)             # <<<<<<<<<<<<<<
@@ -6897,7 +6897,7 @@ PyMODINIT_FUNC PyInit_cysparse_types(void)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "cysparse/types/cysparse_types.pyx":37
+  /* "cysparse/cysparse_types/cysparse_types.pyx":37
  * BASIC_TYPES_STR_DICT['INT32_t'] = (cp_types.INT32_t_BIT, cp_types.INT32_T, cp_types.INT32_MIN, cp_types.INT32_MAX)
  * BASIC_TYPES_STR_DICT['UINT32_t'] = (cp_types.UINT32_t_BIT, cp_types.UINT32_T, 0, cp_types.UINT32_MAX)
  * BASIC_TYPES_STR_DICT['INT64_t'] = (cp_types.INT64_t_BIT, cp_types.INT64_T, cp_types.INT64_MIN, cp_types.INT64_MAX)             # <<<<<<<<<<<<<<
@@ -6932,7 +6932,7 @@ PyMODINIT_FUNC PyInit_cysparse_types(void)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "cysparse/types/cysparse_types.pyx":38
+  /* "cysparse/cysparse_types/cysparse_types.pyx":38
  * BASIC_TYPES_STR_DICT['UINT32_t'] = (cp_types.UINT32_t_BIT, cp_types.UINT32_T, 0, cp_types.UINT32_MAX)
  * BASIC_TYPES_STR_DICT['INT64_t'] = (cp_types.INT64_t_BIT, cp_types.INT64_T, cp_types.INT64_MIN, cp_types.INT64_MAX)
  * BASIC_TYPES_STR_DICT['UINT64_t'] = (cp_types.UINT64_t_BIT, cp_types.UINT64_T, 0, cp_types.UINT64_MAX)             # <<<<<<<<<<<<<<
@@ -6965,7 +6965,7 @@ PyMODINIT_FUNC PyInit_cysparse_types(void)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "cysparse/types/cysparse_types.pyx":39
+  /* "cysparse/cysparse_types/cysparse_types.pyx":39
  * BASIC_TYPES_STR_DICT['INT64_t'] = (cp_types.INT64_t_BIT, cp_types.INT64_T, cp_types.INT64_MIN, cp_types.INT64_MAX)
  * BASIC_TYPES_STR_DICT['UINT64_t'] = (cp_types.UINT64_t_BIT, cp_types.UINT64_T, 0, cp_types.UINT64_MAX)
  * BASIC_TYPES_STR_DICT['FLOAT32_t'] = (cp_types.FLOAT32_t_BIT, cp_types.FLOAT32_T, cp_types.FLT_MIN, cp_types.FLT_MAX)             # <<<<<<<<<<<<<<
@@ -7000,7 +7000,7 @@ PyMODINIT_FUNC PyInit_cysparse_types(void)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "cysparse/types/cysparse_types.pyx":40
+  /* "cysparse/cysparse_types/cysparse_types.pyx":40
  * BASIC_TYPES_STR_DICT['UINT64_t'] = (cp_types.UINT64_t_BIT, cp_types.UINT64_T, 0, cp_types.UINT64_MAX)
  * BASIC_TYPES_STR_DICT['FLOAT32_t'] = (cp_types.FLOAT32_t_BIT, cp_types.FLOAT32_T, cp_types.FLT_MIN, cp_types.FLT_MAX)
  * BASIC_TYPES_STR_DICT['FLOAT64_t'] = (cp_types.FLOAT64_t_BIT, cp_types.FLOAT64_T, cp_types.DBL_MIN, cp_types.DBL_MAX)             # <<<<<<<<<<<<<<
@@ -7035,7 +7035,7 @@ PyMODINIT_FUNC PyInit_cysparse_types(void)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "cysparse/types/cysparse_types.pyx":41
+  /* "cysparse/cysparse_types/cysparse_types.pyx":41
  * BASIC_TYPES_STR_DICT['FLOAT32_t'] = (cp_types.FLOAT32_t_BIT, cp_types.FLOAT32_T, cp_types.FLT_MIN, cp_types.FLT_MAX)
  * BASIC_TYPES_STR_DICT['FLOAT64_t'] = (cp_types.FLOAT64_t_BIT, cp_types.FLOAT64_T, cp_types.DBL_MIN, cp_types.DBL_MAX)
  * BASIC_TYPES_STR_DICT['FLOAT128_t'] = (cp_types.FLOAT128_t_BIT, cp_types.FLOAT128_T, cp_types.LDBL_MIN, cp_types.LDBL_MAX)             # <<<<<<<<<<<<<<
@@ -7070,7 +7070,7 @@ PyMODINIT_FUNC PyInit_cysparse_types(void)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "cysparse/types/cysparse_types.pyx":42
+  /* "cysparse/cysparse_types/cysparse_types.pyx":42
  * BASIC_TYPES_STR_DICT['FLOAT64_t'] = (cp_types.FLOAT64_t_BIT, cp_types.FLOAT64_T, cp_types.DBL_MIN, cp_types.DBL_MAX)
  * BASIC_TYPES_STR_DICT['FLOAT128_t'] = (cp_types.FLOAT128_t_BIT, cp_types.FLOAT128_T, cp_types.LDBL_MIN, cp_types.LDBL_MAX)
  * BASIC_TYPES_STR_DICT['COMPLEX64_t'] = (cp_types.COMPLEX64_t_BIT, cp_types.COMPLEX64_T, cp_types.FLT_MIN, cp_types.FLT_MAX)             # <<<<<<<<<<<<<<
@@ -7105,7 +7105,7 @@ PyMODINIT_FUNC PyInit_cysparse_types(void)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "cysparse/types/cysparse_types.pyx":43
+  /* "cysparse/cysparse_types/cysparse_types.pyx":43
  * BASIC_TYPES_STR_DICT['FLOAT128_t'] = (cp_types.FLOAT128_t_BIT, cp_types.FLOAT128_T, cp_types.LDBL_MIN, cp_types.LDBL_MAX)
  * BASIC_TYPES_STR_DICT['COMPLEX64_t'] = (cp_types.COMPLEX64_t_BIT, cp_types.COMPLEX64_T, cp_types.FLT_MIN, cp_types.FLT_MAX)
  * BASIC_TYPES_STR_DICT['COMPLEX128_t'] = (cp_types.COMPLEX128_t_BIT, cp_types.COMPLEX128_T, cp_types.DBL_MIN, cp_types.DBL_MAX)             # <<<<<<<<<<<<<<
@@ -7140,7 +7140,7 @@ PyMODINIT_FUNC PyInit_cysparse_types(void)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "cysparse/types/cysparse_types.pyx":44
+  /* "cysparse/cysparse_types/cysparse_types.pyx":44
  * BASIC_TYPES_STR_DICT['COMPLEX64_t'] = (cp_types.COMPLEX64_t_BIT, cp_types.COMPLEX64_T, cp_types.FLT_MIN, cp_types.FLT_MAX)
  * BASIC_TYPES_STR_DICT['COMPLEX128_t'] = (cp_types.COMPLEX128_t_BIT, cp_types.COMPLEX128_T, cp_types.DBL_MIN, cp_types.DBL_MAX)
  * BASIC_TYPES_STR_DICT['COMPLEX256_t'] = (cp_types.COMPLEX256_t_BIT, cp_types.COMPLEX256_T, cp_types.LDBL_MIN, cp_types.LDBL_MAX)             # <<<<<<<<<<<<<<
@@ -7175,7 +7175,7 @@ PyMODINIT_FUNC PyInit_cysparse_types(void)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "cysparse/types/cysparse_types.pyx":48
+  /* "cysparse/cysparse_types/cysparse_types.pyx":48
  * # construct inverse dict
  * # BASIC_TYPES_DICT[enum value] = (type string, nbr of bits, min value, max value)
  * BASIC_TYPES_DICT = {v[1]: (k, v[0], v[2], v[3]) for k, v in BASIC_TYPES_STR_DICT.items()}             # <<<<<<<<<<<<<<
@@ -7343,7 +7343,7 @@ PyMODINIT_FUNC PyInit_cysparse_types(void)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_BASIC_TYPES_DICT, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 48; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "cysparse/types/cysparse_types.pyx":52
+  /* "cysparse/cysparse_types/cysparse_types.pyx":52
  * # Type classification
  * # elements in general
  * BASIC_TYPES = BASIC_TYPES_DICT.keys()             # <<<<<<<<<<<<<<
@@ -7376,7 +7376,7 @@ PyMODINIT_FUNC PyInit_cysparse_types(void)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_BASIC_TYPES, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 52; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "cysparse/types/cysparse_types.pyx":53
+  /* "cysparse/cysparse_types/cysparse_types.pyx":53
  * # elements in general
  * BASIC_TYPES = BASIC_TYPES_DICT.keys()
  * ELEMENT_TYPES = BASIC_TYPES_DICT.keys()             # <<<<<<<<<<<<<<
@@ -7409,7 +7409,7 @@ PyMODINIT_FUNC PyInit_cysparse_types(void)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_ELEMENT_TYPES, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 53; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "cysparse/types/cysparse_types.pyx":54
+  /* "cysparse/cysparse_types/cysparse_types.pyx":54
  * BASIC_TYPES = BASIC_TYPES_DICT.keys()
  * ELEMENT_TYPES = BASIC_TYPES_DICT.keys()
  * INDEX_TYPES = [INT32_T, INT64_T]             # <<<<<<<<<<<<<<
@@ -7431,7 +7431,7 @@ PyMODINIT_FUNC PyInit_cysparse_types(void)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_INDEX_TYPES, __pyx_t_10) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 54; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
 
-  /* "cysparse/types/cysparse_types.pyx":57
+  /* "cysparse/cysparse_types/cysparse_types.pyx":57
  * 
  * # elements that behave like integers
  * INTEGER_ELEMENT_TYPES = [INT32_T, UINT32_T, INT64_T, UINT64_T]             # <<<<<<<<<<<<<<
@@ -7463,7 +7463,7 @@ PyMODINIT_FUNC PyInit_cysparse_types(void)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_INTEGER_ELEMENT_TYPES, __pyx_t_8) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 57; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
-  /* "cysparse/types/cysparse_types.pyx":58
+  /* "cysparse/cysparse_types/cysparse_types.pyx":58
  * # elements that behave like integers
  * INTEGER_ELEMENT_TYPES = [INT32_T, UINT32_T, INT64_T, UINT64_T]
  * UNSIGNED_INTEGER_ELEMENT_TYPES = [UINT32_T, UINT64_T]             # <<<<<<<<<<<<<<
@@ -7485,7 +7485,7 @@ PyMODINIT_FUNC PyInit_cysparse_types(void)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_UNSIGNED_INTEGER_ELEMENT_TYPES, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 58; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "cysparse/types/cysparse_types.pyx":59
+  /* "cysparse/cysparse_types/cysparse_types.pyx":59
  * INTEGER_ELEMENT_TYPES = [INT32_T, UINT32_T, INT64_T, UINT64_T]
  * UNSIGNED_INTEGER_ELEMENT_TYPES = [UINT32_T, UINT64_T]
  * SIGNED_INTEGER_ELEMENT_TYPES = [type1 for type1 in INTEGER_ELEMENT_TYPES if type1 not in UNSIGNED_INTEGER_ELEMENT_TYPES]             # <<<<<<<<<<<<<<
@@ -7557,7 +7557,7 @@ PyMODINIT_FUNC PyInit_cysparse_types(void)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_SIGNED_INTEGER_ELEMENT_TYPES, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 59; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "cysparse/types/cysparse_types.pyx":62
+  /* "cysparse/cysparse_types/cysparse_types.pyx":62
  * 
  * # elements that behave like real numbers (floats)
  * REAL_ELEMENT_TYPES = [FLOAT32_T, FLOAT64_T, FLOAT128_T]             # <<<<<<<<<<<<<<
@@ -7584,7 +7584,7 @@ PyMODINIT_FUNC PyInit_cysparse_types(void)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_REAL_ELEMENT_TYPES, __pyx_t_4) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 62; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "cysparse/types/cysparse_types.pyx":64
+  /* "cysparse/cysparse_types/cysparse_types.pyx":64
  * REAL_ELEMENT_TYPES = [FLOAT32_T, FLOAT64_T, FLOAT128_T]
  * # elements that behave like complex numbers (we only consider complex floats)
  * COMPLEX_ELEMENT_TYPES = [COMPLEX64_T, COMPLEX128_T, COMPLEX256_T]             # <<<<<<<<<<<<<<
@@ -7611,7 +7611,7 @@ PyMODINIT_FUNC PyInit_cysparse_types(void)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_COMPLEX_ELEMENT_TYPES, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 64; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "cysparse/types/cysparse_types.pyx":70
+  /* "cysparse/cysparse_types/cysparse_types.pyx":70
  *     float NAN
  * 
  * inf = INFINITY             # <<<<<<<<<<<<<<
@@ -7623,7 +7623,7 @@ PyMODINIT_FUNC PyInit_cysparse_types(void)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_inf, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 70; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "cysparse/types/cysparse_types.pyx":71
+  /* "cysparse/cysparse_types/cysparse_types.pyx":71
  * 
  * inf = INFINITY
  * nan = NAN             # <<<<<<<<<<<<<<
@@ -7635,7 +7635,7 @@ PyMODINIT_FUNC PyInit_cysparse_types(void)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_nan, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 71; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "cysparse/types/cysparse_types.pyx":77
+  /* "cysparse/cysparse_types/cysparse_types.pyx":77
  * ########################################################################################################################
  * # EXPLICIT TYPE TESTS
  * def is_subtype(cp_types.CySparseType type1, cp_types.CySparseType type2):             # <<<<<<<<<<<<<<
@@ -7647,7 +7647,7 @@ PyMODINIT_FUNC PyInit_cysparse_types(void)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_is_subtype, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 77; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "cysparse/types/cysparse_types.pyx":123
+  /* "cysparse/cysparse_types/cysparse_types.pyx":123
  * 
  * 
  * def is_integer_type(cp_types.CySparseType type1):             # <<<<<<<<<<<<<<
@@ -7659,7 +7659,7 @@ PyMODINIT_FUNC PyInit_cysparse_types(void)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_is_integer_type, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 123; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "cysparse/types/cysparse_types.pyx":133
+  /* "cysparse/cysparse_types/cysparse_types.pyx":133
  *     return type1 in INTEGER_ELEMENT_TYPES
  * 
  * def is_signed_integer_type(cp_types.CySparseType type1):             # <<<<<<<<<<<<<<
@@ -7671,7 +7671,7 @@ PyMODINIT_FUNC PyInit_cysparse_types(void)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_is_signed_integer_type, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 133; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "cysparse/types/cysparse_types.pyx":142
+  /* "cysparse/cysparse_types/cysparse_types.pyx":142
  *     return type1 in SIGNED_INTEGER_ELEMENT_TYPES
  * 
  * def is_unsigned_integer_type(cp_types.CySparseType type1):             # <<<<<<<<<<<<<<
@@ -7683,7 +7683,7 @@ PyMODINIT_FUNC PyInit_cysparse_types(void)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_is_unsigned_integer_type, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 142; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "cysparse/types/cysparse_types.pyx":151
+  /* "cysparse/cysparse_types/cysparse_types.pyx":151
  *     return type1 in UNSIGNED_INTEGER_ELEMENT_TYPES
  * 
  * def is_real_type(cp_types.CySparseType type1):             # <<<<<<<<<<<<<<
@@ -7695,7 +7695,7 @@ PyMODINIT_FUNC PyInit_cysparse_types(void)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_is_real_type, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 151; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "cysparse/types/cysparse_types.pyx":162
+  /* "cysparse/cysparse_types/cysparse_types.pyx":162
  * 
  * 
  * def is_complex_type(cp_types.CySparseType type1):             # <<<<<<<<<<<<<<
@@ -7707,7 +7707,7 @@ PyMODINIT_FUNC PyInit_cysparse_types(void)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_is_complex_type, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 162; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "cysparse/types/cysparse_types.pyx":172
+  /* "cysparse/cysparse_types/cysparse_types.pyx":172
  *     return type1 in COMPLEX_ELEMENT_TYPES
  * 
  * def is_index_type(cp_types.CySparseType type1):             # <<<<<<<<<<<<<<
@@ -7719,7 +7719,7 @@ PyMODINIT_FUNC PyInit_cysparse_types(void)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_is_index_type, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 172; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "cysparse/types/cysparse_types.pyx":181
+  /* "cysparse/cysparse_types/cysparse_types.pyx":181
  *     return type1 in INDEX_TYPES
  * 
  * def is_element_type(cp_types.CySparseType type1):             # <<<<<<<<<<<<<<
@@ -7731,7 +7731,7 @@ PyMODINIT_FUNC PyInit_cysparse_types(void)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_is_element_type, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 181; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "cysparse/types/cysparse_types.pyx":341
+  /* "cysparse/cysparse_types/cysparse_types.pyx":341
  * # I/O String/type conversions
  * ########################################################################################################################
  * def type_to_string(cp_types.CySparseType type1):             # <<<<<<<<<<<<<<
@@ -7743,7 +7743,7 @@ PyMODINIT_FUNC PyInit_cysparse_types(void)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_type_to_string, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 341; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "cysparse/types/cysparse_types.pyx":346
+  /* "cysparse/cysparse_types/cysparse_types.pyx":346
  *     return BASIC_TYPES_DICT[type1][0]
  * 
  * def string_to_type(str type_string1):             # <<<<<<<<<<<<<<
@@ -7755,7 +7755,7 @@ PyMODINIT_FUNC PyInit_cysparse_types(void)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_string_to_type, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 346; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "cysparse/types/cysparse_types.pyx":355
+  /* "cysparse/cysparse_types/cysparse_types.pyx":355
  * # REPORT
  * ########################################################################################################################
  * def report_basic_types(OUT=sys.stdout):             # <<<<<<<<<<<<<<
@@ -7775,7 +7775,7 @@ PyMODINIT_FUNC PyInit_cysparse_types(void)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_report_basic_types, __pyx_t_8) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 355; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
-  /* "cysparse/types/cysparse_types.pyx":1
+  /* "cysparse/cysparse_types/cysparse_types.pyx":1
  * from __future__ import print_function             # <<<<<<<<<<<<<<
  * 
  * cimport cysparse.types.cysparse_types as cp_types
