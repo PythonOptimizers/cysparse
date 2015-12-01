@@ -20,7 +20,41 @@ import copy
 from codecs import open
 from os import path
 
-####################################################################s####################################################
+###################################################################s####################################################
+# HELPERS
+########################################################################################################################
+def prepare_Cython_extensions_as_C_extensions(extensions):
+    """
+    Modify the list of sources to transform `Cython` extensions into `C` extensions.
+
+    Args:
+        extensions: A list of (`Cython`) `distutils` extensions.
+
+    Warning:
+        The extensions are changed in place.
+
+    Note:
+        Only `Cython` source files are modified into their `C` equivalent source files. Other file types are unchanged.
+
+    """
+    for extension in extensions:
+        c_sources = list()
+        for source_path in extension.sources:
+            path, source = os.path.split(source_path)
+            filename, ext = os.path.splitext(source)
+
+            if ext == '.pyx':
+                c_sources.append(os.path.join(path, filename + '.c'))
+            elif ext in ['.pxd', '.pxi']:
+                pass
+            else:
+                # copy source as is
+                c_sources.append(source_path)
+
+        # modify extension in place
+        extension.sources = c_sources
+
+###################################################################s####################################################
 # INIT
 ########################################################################################################################
 cysparse_config_file = 'cysparse.cfg'
@@ -29,8 +63,7 @@ cysparse_config.read(cysparse_config_file)
 
 numpy_include = np.get_include()
 
-#####################
-# TODO: fix this
+
 # Use Cython?
 USE_CYTHON = cysparse_config.getboolean('CODE_GENERATION', 'USE_CYTHON')
 if USE_CYTHON:
@@ -39,10 +72,6 @@ if USE_CYTHON:
         from Cython.Build import cythonize
     except ImportError:
         raise ImportError("Check '%s': Cython is not properly installed." % cysparse_config_file)
-
-#
-ext = '.pyx' if USE_CYTHON else '.c'
-#####################
 
 # Debug mode?
 DEBUG_SYMBOLS = cysparse_config.getboolean('CODE_GENERATION', 'DEBUG_SYMBOLS')
@@ -371,6 +400,11 @@ if use_suitesparse:
     packages_list.append('cysparse.linalg.suitesparse.cholmod')
     packages_list.append('cysparse.linalg.suitesparse.spqr')
 
+########################################################################################################################
+# PACKAGE PREPARATION FOR EXCLUSIVE C EXTENSIONS
+########################################################################################################################
+if not USE_CYTHON:
+    prepare_Cython_extensions_as_C_extensions(ext_modules)
 
 ########################################################################################################################
 # PACKAGE SPECIFICATIONS
@@ -396,31 +430,65 @@ here = path.abspath(path.dirname(__file__))
 with open(path.join(here, 'DESCRIPTION.rst'), encoding='utf-8') as f:
     long_description = f.read()
 
-setup(name=  'CySparse',
-      version=find_version(os.path.realpath(__file__), 'cysparse', '__init__.py'),
-      description='A Cython library for sparse matrices',
-      long_description=long_description,
-      #Author details
-      author='Nikolaj van Omme, Sylvain Arreckx, Dominique Orban',
+setup_args = {
+    'name' :  'CySparse',
+    'version' : find_version(os.path.realpath(__file__), 'cysparse', '__init__.py'),
+    'description' : 'A Cython library for sparse matrices',
+    'long_description' : long_description,
+    #Author details
+    'author' : 'Nikolaj van Omme, Sylvain Arreckx, Dominique Orban',
 {% raw %}
-      author_email='cysparse\@TODO.com',
+    'author_email' : 'cysparse\@TODO.com',
 {% endraw %}
-      maintainer = "CySparse Developers",
+    'maintainer' : "CySparse Developers",
 {% raw %}
-      maintainer_email = "dominique.orban@gerad.ca",
+    'maintainer_email' : "dominique.orban@gerad.ca",
 {% endraw %}
-      summary = "Fast sparse matrix library for Python",
-      url = "https://github.com/Funartech/cysparse",
-      download_url = "https://github.com/Funartech/cysparse",
-      license='LGPL',
-      classifiers=filter(None, CLASSIFIERS.split('\n')),
-      install_requires=['numpy', 'Cython'],
-      #ext_package='cysparse', <- doesn't work with pxd files...
-      cmdclass = {'build_ext': build_ext},
-      #ext_modules = cythonize(ext_modules),
-      ext_modules = ext_modules,
-      package_dir = {"cysparse": "cysparse"},
-      packages=packages_list,
-      zip_safe=False
-)
+    'summary' : "Fast sparse matrix library for Python",
+    'url' : "https://github.com/Funartech/cysparse",
+    'download_url' : "https://github.com/Funartech/cysparse",
+    'license' : 'LGPL',
+    'classifiers' : filter(None, CLASSIFIERS.split('\n')),
+    'install_requires' : ['numpy', 'Cython'],
+    #ext_package' : 'cysparse', <- doesn't work with pxd files...
+    #ext_modules = cythonize(ext_modules),
+    'ext_modules' : ext_modules,
+    'package_dir' : {"cysparse": "cysparse"},
+    'packages' : packages_list,
+    'zip_safe' : False
+
+}
+
+if USE_CYTHON:
+    setup_args['cmdclass'] = {'build_ext': build_ext}
+
+setup(**setup_args)
+
+{#setup(name=  'CySparse',#}
+{#      version=find_version(os.path.realpath(__file__), 'cysparse', '__init__.py'),#}
+{#      description='A Cython library for sparse matrices',#}
+{#      long_description=long_description,#}
+{#      #Author details#}
+{#      author='Nikolaj van Omme, Sylvain Arreckx, Dominique Orban',#}
+{#{% raw %}#}
+{#      author_email='cysparse\@TODO.com',#}
+{#{% endraw %}#}
+{#      maintainer = "CySparse Developers",#}
+{#{% raw %}#}
+{#      maintainer_email = "dominique.orban@gerad.ca",#}
+{#{% endraw %}#}
+{#      summary = "Fast sparse matrix library for Python",#}
+{#      url = "https://github.com/Funartech/cysparse",#}
+{#      download_url = "https://github.com/Funartech/cysparse",#}
+{#      license='LGPL',#}
+{#      classifiers=filter(None, CLASSIFIERS.split('\n')),#}
+{#      install_requires=['numpy', 'Cython'],#}
+{#      #ext_package='cysparse', <- doesn't work with pxd files...#}
+{#      cmdclass = {'build_ext': build_ext},#}
+{#      #ext_modules = cythonize(ext_modules),#}
+{#      ext_modules = ext_modules,#}
+{#      package_dir = {"cysparse": "cysparse"},#}
+{#      packages=packages_list,#}
+{#      zip_safe=False#}
+{#)#}
 
