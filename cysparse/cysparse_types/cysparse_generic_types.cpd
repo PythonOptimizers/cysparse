@@ -3,7 +3,7 @@
 # Several helpers that deal with generic types.
 #
 ########################################################################################################################
-from cysparse.types.cysparse_types cimport *
+from cysparse.cysparse_types.cysparse_types cimport *
 
 {% for index_name in index_list %}
 {% for type_name in complex_list %}

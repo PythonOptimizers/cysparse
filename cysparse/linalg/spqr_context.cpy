@@ -7,7 +7,7 @@ on the compile/architecture configuration.
 """
 
 from cysparse.sparse.ll_mat import PyLLSparseMatrix_Check
-from cysparse.types.cysparse_types import *
+from cysparse.cysparse_types.cysparse_types import *
 
 {% for index_type in spqr_index_list %}
     {% for element_type in spqr_type_list %}

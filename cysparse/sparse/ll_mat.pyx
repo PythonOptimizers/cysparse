@@ -2,12 +2,12 @@
 from cysparse.sparse.ll_mat cimport LL_MAT_DEFAULT_SIZE_HINT
 from cysparse.sparse.s_mat cimport unexposed_value
 
-from cysparse.types.cysparse_types import *
-from cysparse.types.cysparse_types cimport *
-from cysparse.types.cysparse_types cimport min_integer_type
-from cysparse.types.cysparse_numpy_types import are_mixed_types_cast_compatible
+from cysparse.cysparse_types.cysparse_types import *
+from cysparse.cysparse_types.cysparse_types cimport *
+from cysparse.cysparse_types.cysparse_types cimport min_integer_type
+from cysparse.cysparse_types.cysparse_numpy_types import are_mixed_types_cast_compatible
 
-#from cysparse.types.cysparse_generic_types cimport min_type
+#from cysparse.cysparse_types.cysparse_generic_types cimport min_type
 
 from cysparse.sparse.s_mat cimport SparseMatrix
 

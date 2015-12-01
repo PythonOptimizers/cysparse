@@ -1,4 +1,4 @@
-from cysparse.types.cysparse_types cimport *
+from cysparse.cysparse_types.cysparse_types cimport *
 
 from cysparse.sparse.s_mat_matrices.s_mat_INT32_t_FLOAT32_t cimport ImmutableSparseMatrix_INT32_t_FLOAT32_t
 from cysparse.sparse.ll_mat_matrices.ll_mat_INT32_t_FLOAT32_t cimport LLSparseMatrix_INT32_t_FLOAT32_t

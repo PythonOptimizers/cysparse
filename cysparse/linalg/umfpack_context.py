@@ -2,7 +2,7 @@
 Factory method to access SuiteSparse UMFPACK.
 """
 from cysparse.sparse.ll_mat import PyLLSparseMatrix_Check
-from cysparse.types.cysparse_types import *
+from cysparse.cysparse_types.cysparse_types import *
 
 from cysparse.linalg.suitesparse.umfpack.umfpack_INT32_t_FLOAT64_t import UmfpackContext_INT32_t_FLOAT64_t
 from cysparse.linalg.suitesparse.umfpack.umfpack_INT32_t_COMPLEX128_t import UmfpackContext_INT32_t_COMPLEX128_t

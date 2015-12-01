@@ -7,7 +7,7 @@ Syntactic sugar: we want to use the following code: ``A.T * b`` to compute :math
 # TODO: verify if we need to generate this file
 # For the moment I (Nikolaj) 'm leaving it as it is just in case things change...
 
-from cysparse.types.cysparse_types cimport CPType
+from cysparse.cysparse_types.cysparse_types cimport CPType
 from cysparse.sparse.s_mat cimport SparseMatrix
 
 cdef class TransposedSparseMatrix:

@@ -5,7 +5,7 @@ Condensed Sparse Column (CSC) Format Matrices.
 """
 from __future__ import print_function
 
-from cysparse.types.cysparse_types cimport *
+from cysparse.cysparse_types.cysparse_types cimport *
 
 from cysparse.sparse.s_mat cimport unexposed_value
 

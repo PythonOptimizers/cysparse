@@ -1,5 +1,5 @@
-from cysparse.types.cysparse_types cimport *
-from cysparse.types.cysparse_types import *
+from cysparse.cysparse_types.cysparse_types cimport *
+from cysparse.cysparse_types.cysparse_types import *
 
 cdef INT32_t MUTABLE_SPARSE_MAT_DEFAULT_SIZE_HINT = 40        # allocated size by default
 

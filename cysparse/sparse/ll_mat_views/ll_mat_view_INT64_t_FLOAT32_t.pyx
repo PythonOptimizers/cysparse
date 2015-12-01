@@ -3,7 +3,7 @@ Lightweight object to view a :class:`LLSparseMatrix_INT64_t_FLOAT32_t`.
 
 
 """
-from cysparse.types.cysparse_types cimport *
+from cysparse.cysparse_types.cysparse_types cimport *
 
 # forward declaration
 cdef class LLSparseMatrixView_INT64_t_FLOAT32_t

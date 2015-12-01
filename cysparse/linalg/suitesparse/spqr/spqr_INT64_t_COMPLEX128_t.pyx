@@ -2,7 +2,7 @@ from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
 from libc.stdlib cimport malloc,free, calloc
 from cpython cimport Py_INCREF, Py_DECREF
 
-from cysparse.types.cysparse_types cimport *
+from cysparse.cysparse_types.cysparse_types cimport *
 
 from cysparse.sparse.ll_mat_matrices.ll_mat_INT64_t_COMPLEX128_t cimport LLSparseMatrix_INT64_t_COMPLEX128_t
 from cysparse.sparse.csc_mat_matrices.csc_mat_INT64_t_COMPLEX128_t cimport CSCSparseMatrix_INT64_t_COMPLEX128_t
@@ -14,7 +14,7 @@ from collections import OrderedDict
 
 from  cysparse.linalg.suitesparse.cholmod.cholmod_INT64_t_COMPLEX128_t cimport *
 
-from cysparse.types.cysparse_generic_types cimport split_array_complex_values_kernel_INT64_t_COMPLEX128_t, join_array_complex_values_kernel_INT64_t_COMPLEX128_t
+from cysparse.cysparse_types.cysparse_generic_types cimport split_array_complex_values_kernel_INT64_t_COMPLEX128_t, join_array_complex_values_kernel_INT64_t_COMPLEX128_t
 
 
 cdef extern from "SuiteSparseQR_definitions.h":

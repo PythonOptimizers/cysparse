@@ -7,8 +7,8 @@
 """
 Several generic functions on types.
 """
-from cysparse.types.cysparse_types cimport *
-from cysparse.types.cysparse_types import *
+from cysparse.cysparse_types.cysparse_types cimport *
+from cysparse.cysparse_types.cysparse_types import *
 
 cdef extern from "complex.h":
     float crealf(float complex z)

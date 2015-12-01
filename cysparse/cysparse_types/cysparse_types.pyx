@@ -1,6 +1,6 @@
 from __future__ import print_function
 
-cimport cysparse.types.cysparse_types as cp_types
+cimport cysparse.cysparse_types.cysparse_types as cp_types
 
 cimport cython
 

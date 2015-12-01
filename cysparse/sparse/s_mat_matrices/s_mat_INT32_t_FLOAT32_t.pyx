@@ -1,4 +1,4 @@
-from cysparse.types.cysparse_types cimport *
+from cysparse.cysparse_types.cysparse_types cimport *
 from cysparse.sparse.s_mat cimport SparseMatrix, unexposed_value, MUTABLE_SPARSE_MAT_DEFAULT_SIZE_HINT, MakeMatrixString
 
 from cysparse.sparse.sparse_proxies.t_mat cimport TransposedSparseMatrix

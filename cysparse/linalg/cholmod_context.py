@@ -2,7 +2,7 @@
 Factory method to access SuiteSparse CHOLMOD.
 """
 from cysparse.sparse.ll_mat import PyLLSparseMatrix_Check
-from cysparse.types.cysparse_types import *
+from cysparse.cysparse_types.cysparse_types import *
 
 from cysparse.linalg.suitesparse.cholmod.cholmod_INT32_t_FLOAT64_t import CholmodContext_INT32_t_FLOAT64_t
 from cysparse.linalg.suitesparse.cholmod.cholmod_INT32_t_COMPLEX128_t import CholmodContext_INT32_t_COMPLEX128_t
