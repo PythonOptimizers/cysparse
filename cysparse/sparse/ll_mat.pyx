@@ -1051,7 +1051,7 @@ def NewUnityLLSparseMatrix(**kwargs):
 
 def NewBandLLSparseMatrix(**kwargs):
     """
-    See ``MakeBandLLSparseMatrix__``.
+    See ``MakeBandLLSparseMatrix_INT32_t_None``.
 
     Note:
         Input arguments are **not** tested.

@@ -1409,7 +1409,7 @@ setup_args = {
     'classifiers' : filter(None, CLASSIFIERS.split('\n')),
     'install_requires' : ['numpy', 'Cython'],
     #ext_package' : 'cysparse', <- doesn't work with pxd files...
-    #ext_modules = cythonize(ext_modules),
+    #ext_modules = cythonize(ext_modules), <- doesn't work with our settings... (combinations of .pxi and .pxd files)
     'ext_modules' : ext_modules,
     'package_dir' : {"cysparse": "cysparse"},
     'packages' : packages_list,
