@@ -55,15 +55,6 @@ if is_64bits:
 cysparse_config = ConfigParser.SafeConfigParser()
 cysparse_config.read('cysparse.cfg')
 
-# MUMPS
-# test if compiled lib has been compiled in 64 or 32 bits
-MUMPS_INT = None
-if cysparse_config.getboolean('MUMPS', 'mumps_compiled_in_64bits'):
-    MUMPS_INT = 'INT64_t'
-else:
-    MUMPS_INT = 'INT32_t'
-
-MUMPS_INDEX_TYPES = [MUMPS_INT]
 
 # index type for LLSparseMatrix
 DEFAULT_INDEX_TYPE = 'INT32_T'
@@ -77,10 +68,6 @@ elif cysparse_config.get('CODE_GENERATION', 'DEFAULT_INDEX_TYPE') == '64bits':
 else:
     # don't do anything: use platform's default
     pass
-
-# SuiteSparse
-# SPQR
-SPQR_EXPERT_MODE = not cysparse_config.getboolean('SUITESPARSE', 'NEXPERT')
 
 #####################################################
 # COMMON STUFF
@@ -97,30 +84,10 @@ COMPLEX_ELEMENT_TYPES = ['COMPLEX64_t', 'COMPLEX128_t', 'COMPLEX256_t']
 MM_INDEX_TYPES = ['INT32_t', 'INT64_t']
 MM_ELEMENT_TYPES = ['INT64_t', 'FLOAT64_t', 'COMPLEX128_t']
 
-# Contexts
-# SuiteSparse
-# Umfpack
-UMFPACK_INDEX_TYPES = ['INT32_t', 'INT64_t']
-UMFPACK_ELEMENT_TYPES = ['FLOAT64_t', 'COMPLEX128_t']
-# Cholmod
-CHOLMOD_INDEX_TYPES = ['INT32_t', 'INT64_t']
-CHOLMOD_ELEMENT_TYPES = ['FLOAT64_t', 'COMPLEX128_t']
-# SPQR
-SPQR_INDEX_TYPES = ['INT32_t', 'INT64_t']
-SPQR_ELEMENT_TYPES = ['FLOAT64_t', 'COMPLEX128_t']
-
-# MUMPS
-# This list is defined above in the conditional part
-# MUMPS_INDEX_TYPES = [MUMPS_INT]
-MUMPS_ELEMENT_TYPES = ['FLOAT32_t', 'FLOAT64_t', 'COMPLEX64_t', 'COMPLEX128_t']
-#MUMPS_ELEMENT_TYPES = ['FLOAT32_t', 'FLOAT64_t']
-
 # when coding
 #ELEMENT_TYPES = ['FLOAT64_t']
 #ELEMENT_TYPES = ['COMPLEX64_t']
 #ELEMENT_TYPES = ['COMPLEX256_t']
-#UMFPACK_INDEX_TYPES = ['INT32_t']
-#UMFPACK_ELEMENT_TYPES = ['FLOAT64_t']
 
 GENERAL_CONTEXT = {
                     'basic_type_list' : BASIC_TYPES,
@@ -132,17 +99,7 @@ GENERAL_CONTEXT = {
                     'complex_list' : COMPLEX_ELEMENT_TYPES,
                     'mm_index_list' : MM_INDEX_TYPES,
                     'mm_type_list' : MM_ELEMENT_TYPES,
-                    'umfpack_index_list': UMFPACK_INDEX_TYPES,
-                    'umfpack_type_list' : UMFPACK_ELEMENT_TYPES,
-                    'cholmod_index_list': CHOLMOD_INDEX_TYPES,
-                    'cholmod_type_list': CHOLMOD_ELEMENT_TYPES,
-                    'spqr_index_list': SPQR_INDEX_TYPES,
-                    'spqr_type_list': SPQR_ELEMENT_TYPES,
-                    'spqr_export_mode' : SPQR_EXPERT_MODE,
-                    'mumps_index_list': MUMPS_INDEX_TYPES,
-                    'mumps_type_list': MUMPS_ELEMENT_TYPES,
-
-                }
+                  }
 
 
 #####################################################
@@ -224,8 +181,6 @@ if __name__ == "__main__":
     current_directory = os.path.dirname(os.path.abspath(__file__))
     cygenja_engine = Generator(current_directory, logger=logger)
 
-    print cygenja_engine.root_directory()
-
     # register filters
     cygenja_engine.register_common_type_filters()
 
@@ -282,8 +237,5 @@ if __name__ == "__main__":
         cygenja_engine.generate(arg_options.dir_pattern, arg_options.file_pattern, action_ch='c', recursively=arg_options.recursive, force=arg_options.force)
     else:
         cygenja_engine.generate(arg_options.dir_pattern, arg_options.file_pattern, action_ch='g', recursively=arg_options.recursive, force=arg_options.force)
-
-    ####################################################################################################################
-    # Special setup.py case
-    ####################################################################################################################
-    shutil.copy2(os.path.join('config', 'setup.py'), '.')
+        # special case
+        shutil.copy2(os.path.join('config', 'setup.py'), '.')

@@ -81,18 +81,6 @@ use_debug_symbols = cysparse_config.getboolean('CODE_GENERATION', 'use_debug_sym
 default_include_dir = get_path_option(cysparse_config, 'DEFAULT', 'include_dirs')
 default_library_dir = get_path_option(cysparse_config, 'DEFAULT', 'library_dirs')
 
-# SUITESPARSE
-# Do we use it or not?
-use_suitesparse = cysparse_config.getboolean('SUITESPARSE', 'use_suitesparse')
-# find user defined directories
-if use_suitesparse:
-    suitesparse_include_dirs = get_path_option(cysparse_config, 'SUITESPARSE', 'include_dirs')
-    if suitesparse_include_dirs == '':
-        suitesparse_include_dirs = default_include_dir
-    suitesparse_library_dirs = get_path_option(cysparse_config, 'SUITESPARSE', 'library_dirs')
-    if suitesparse_library_dirs == '':
-        suitesparse_library_dirs = default_library_dir
-
 ########################################################################################################################
 # EXTENSIONS
 ########################################################################################################################
@@ -102,6 +90,7 @@ ext_params = {}
 ext_params['include_dirs'] = include_dirs
 # -Wno-unused-function is potentially dangerous... use with care!
 # '-DNPY_NO_DEPRECATED_API=NPY_1_7_API_VERSION': doesn't work with Cython... because it **does** use a deprecated version...
+
 
 if not use_debug_symbols:
     ext_params['extra_compile_args'] = ["-O2", '-std=c99', '-Wno-unused-function']
@@ -1144,183 +1133,6 @@ utils_ext = [
                                           "cysparse/utils/equality.pyx"], **sparse_ext_params),
 ]
 
-#-----------------------------------------------------------------------------------------------------------------------
-#                                                *** LinAlg ***
-
-##########################
-# Base Contexts
-##########################
-context_ext_params = copy.deepcopy(ext_params)
-base_context_ext = [
-
-  
-        Extension(name="cysparse.linalg.contexts.context_INT32_t_INT32_t",
-                  sources=['cysparse/linalg/contexts/context_INT32_t_INT32_t.pxd',
-                           'cysparse/linalg/contexts/context_INT32_t_INT32_t.pyx'], **context_ext_params),
-    
-        Extension(name="cysparse.linalg.contexts.context_INT32_t_INT64_t",
-                  sources=['cysparse/linalg/contexts/context_INT32_t_INT64_t.pxd',
-                           'cysparse/linalg/contexts/context_INT32_t_INT64_t.pyx'], **context_ext_params),
-    
-        Extension(name="cysparse.linalg.contexts.context_INT32_t_FLOAT32_t",
-                  sources=['cysparse/linalg/contexts/context_INT32_t_FLOAT32_t.pxd',
-                           'cysparse/linalg/contexts/context_INT32_t_FLOAT32_t.pyx'], **context_ext_params),
-    
-        Extension(name="cysparse.linalg.contexts.context_INT32_t_FLOAT64_t",
-                  sources=['cysparse/linalg/contexts/context_INT32_t_FLOAT64_t.pxd',
-                           'cysparse/linalg/contexts/context_INT32_t_FLOAT64_t.pyx'], **context_ext_params),
-    
-        Extension(name="cysparse.linalg.contexts.context_INT32_t_FLOAT128_t",
-                  sources=['cysparse/linalg/contexts/context_INT32_t_FLOAT128_t.pxd',
-                           'cysparse/linalg/contexts/context_INT32_t_FLOAT128_t.pyx'], **context_ext_params),
-    
-        Extension(name="cysparse.linalg.contexts.context_INT32_t_COMPLEX64_t",
-                  sources=['cysparse/linalg/contexts/context_INT32_t_COMPLEX64_t.pxd',
-                           'cysparse/linalg/contexts/context_INT32_t_COMPLEX64_t.pyx'], **context_ext_params),
-    
-        Extension(name="cysparse.linalg.contexts.context_INT32_t_COMPLEX128_t",
-                  sources=['cysparse/linalg/contexts/context_INT32_t_COMPLEX128_t.pxd',
-                           'cysparse/linalg/contexts/context_INT32_t_COMPLEX128_t.pyx'], **context_ext_params),
-    
-        Extension(name="cysparse.linalg.contexts.context_INT32_t_COMPLEX256_t",
-                  sources=['cysparse/linalg/contexts/context_INT32_t_COMPLEX256_t.pxd',
-                           'cysparse/linalg/contexts/context_INT32_t_COMPLEX256_t.pyx'], **context_ext_params),
-    
-
-  
-        Extension(name="cysparse.linalg.contexts.context_INT64_t_INT32_t",
-                  sources=['cysparse/linalg/contexts/context_INT64_t_INT32_t.pxd',
-                           'cysparse/linalg/contexts/context_INT64_t_INT32_t.pyx'], **context_ext_params),
-    
-        Extension(name="cysparse.linalg.contexts.context_INT64_t_INT64_t",
-                  sources=['cysparse/linalg/contexts/context_INT64_t_INT64_t.pxd',
-                           'cysparse/linalg/contexts/context_INT64_t_INT64_t.pyx'], **context_ext_params),
-    
-        Extension(name="cysparse.linalg.contexts.context_INT64_t_FLOAT32_t",
-                  sources=['cysparse/linalg/contexts/context_INT64_t_FLOAT32_t.pxd',
-                           'cysparse/linalg/contexts/context_INT64_t_FLOAT32_t.pyx'], **context_ext_params),
-    
-        Extension(name="cysparse.linalg.contexts.context_INT64_t_FLOAT64_t",
-                  sources=['cysparse/linalg/contexts/context_INT64_t_FLOAT64_t.pxd',
-                           'cysparse/linalg/contexts/context_INT64_t_FLOAT64_t.pyx'], **context_ext_params),
-    
-        Extension(name="cysparse.linalg.contexts.context_INT64_t_FLOAT128_t",
-                  sources=['cysparse/linalg/contexts/context_INT64_t_FLOAT128_t.pxd',
-                           'cysparse/linalg/contexts/context_INT64_t_FLOAT128_t.pyx'], **context_ext_params),
-    
-        Extension(name="cysparse.linalg.contexts.context_INT64_t_COMPLEX64_t",
-                  sources=['cysparse/linalg/contexts/context_INT64_t_COMPLEX64_t.pxd',
-                           'cysparse/linalg/contexts/context_INT64_t_COMPLEX64_t.pyx'], **context_ext_params),
-    
-        Extension(name="cysparse.linalg.contexts.context_INT64_t_COMPLEX128_t",
-                  sources=['cysparse/linalg/contexts/context_INT64_t_COMPLEX128_t.pxd',
-                           'cysparse/linalg/contexts/context_INT64_t_COMPLEX128_t.pyx'], **context_ext_params),
-    
-        Extension(name="cysparse.linalg.contexts.context_INT64_t_COMPLEX256_t",
-                  sources=['cysparse/linalg/contexts/context_INT64_t_COMPLEX256_t.pxd',
-                           'cysparse/linalg/contexts/context_INT64_t_COMPLEX256_t.pyx'], **context_ext_params),
-    
-
-
-    ]
-##########################
-# SuiteSparse
-##########################
-if use_suitesparse:
-    # UMFPACK
-    umfpack_ext_params = copy.deepcopy(ext_params)
-    umfpack_ext_params['include_dirs'].extend(suitesparse_include_dirs)
-    umfpack_ext_params['library_dirs'] = suitesparse_library_dirs
-    umfpack_ext_params['libraries'] = ['umfpack', 'amd']
-
-    umfpack_ext = [
-
-  
-        Extension(name="cysparse.linalg.suitesparse.umfpack.umfpack_INT32_t_FLOAT64_t",
-                  sources=['cysparse/linalg/suitesparse/umfpack/umfpack_INT32_t_FLOAT64_t.pxd',
-                           'cysparse/linalg/suitesparse/umfpack/umfpack_INT32_t_FLOAT64_t.pyx'], **umfpack_ext_params),
-    
-        Extension(name="cysparse.linalg.suitesparse.umfpack.umfpack_INT32_t_COMPLEX128_t",
-                  sources=['cysparse/linalg/suitesparse/umfpack/umfpack_INT32_t_COMPLEX128_t.pxd',
-                           'cysparse/linalg/suitesparse/umfpack/umfpack_INT32_t_COMPLEX128_t.pyx'], **umfpack_ext_params),
-    
-
-  
-        Extension(name="cysparse.linalg.suitesparse.umfpack.umfpack_INT64_t_FLOAT64_t",
-                  sources=['cysparse/linalg/suitesparse/umfpack/umfpack_INT64_t_FLOAT64_t.pxd',
-                           'cysparse/linalg/suitesparse/umfpack/umfpack_INT64_t_FLOAT64_t.pyx'], **umfpack_ext_params),
-    
-        Extension(name="cysparse.linalg.suitesparse.umfpack.umfpack_INT64_t_COMPLEX128_t",
-                  sources=['cysparse/linalg/suitesparse/umfpack/umfpack_INT64_t_COMPLEX128_t.pxd',
-                           'cysparse/linalg/suitesparse/umfpack/umfpack_INT64_t_COMPLEX128_t.pyx'], **umfpack_ext_params),
-    
-
-        ]
-
-    # CHOLMOD
-    cholmod_ext_params = copy.deepcopy(ext_params)
-    print cholmod_ext_params
-
-    cholmod_ext_params['include_dirs'].extend(suitesparse_include_dirs)
-    cholmod_ext_params['library_dirs'] = suitesparse_library_dirs
-    cholmod_ext_params['libraries'] = ['cholmod', 'amd']
-
-    cholmod_ext = [
-
-  
-        Extension(name="cysparse.linalg.suitesparse.cholmod.cholmod_INT32_t_FLOAT64_t",
-                  sources=['cysparse/linalg/suitesparse/cholmod/cholmod_INT32_t_FLOAT64_t.pxd',
-                           'cysparse/linalg/suitesparse/cholmod/cholmod_INT32_t_FLOAT64_t.pyx'], **cholmod_ext_params),
-    
-        Extension(name="cysparse.linalg.suitesparse.cholmod.cholmod_INT32_t_COMPLEX128_t",
-                  sources=['cysparse/linalg/suitesparse/cholmod/cholmod_INT32_t_COMPLEX128_t.pxd',
-                           'cysparse/linalg/suitesparse/cholmod/cholmod_INT32_t_COMPLEX128_t.pyx'], **cholmod_ext_params),
-    
-
-  
-        Extension(name="cysparse.linalg.suitesparse.cholmod.cholmod_INT64_t_FLOAT64_t",
-                  sources=['cysparse/linalg/suitesparse/cholmod/cholmod_INT64_t_FLOAT64_t.pxd',
-                           'cysparse/linalg/suitesparse/cholmod/cholmod_INT64_t_FLOAT64_t.pyx'], **cholmod_ext_params),
-    
-        Extension(name="cysparse.linalg.suitesparse.cholmod.cholmod_INT64_t_COMPLEX128_t",
-                  sources=['cysparse/linalg/suitesparse/cholmod/cholmod_INT64_t_COMPLEX128_t.pxd',
-                           'cysparse/linalg/suitesparse/cholmod/cholmod_INT64_t_COMPLEX128_t.pyx'], **cholmod_ext_params),
-    
-
-        ]
-
-    # SPQR
-    spqr_ext_params = copy.deepcopy(ext_params)
-    print spqr_ext_params
-
-    spqr_ext_params['include_dirs'].extend(suitesparse_include_dirs)
-    spqr_ext_params['library_dirs'] = suitesparse_library_dirs
-    spqr_ext_params['libraries'] = ['cholmod','spqr', 'amd']
-
-    spqr_ext = [
-
-  
-        Extension(name="cysparse.linalg.suitesparse.spqr.spqr_INT32_t_FLOAT64_t",
-                  sources=['cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pxd',
-                           'cysparse/linalg/suitesparse/spqr/spqr_INT32_t_FLOAT64_t.pyx'], **spqr_ext_params),
-    
-        Extension(name="cysparse.linalg.suitesparse.spqr.spqr_INT32_t_COMPLEX128_t",
-                  sources=['cysparse/linalg/suitesparse/spqr/spqr_INT32_t_COMPLEX128_t.pxd',
-                           'cysparse/linalg/suitesparse/spqr/spqr_INT32_t_COMPLEX128_t.pyx'], **spqr_ext_params),
-    
-
-  
-        Extension(name="cysparse.linalg.suitesparse.spqr.spqr_INT64_t_FLOAT64_t",
-                  sources=['cysparse/linalg/suitesparse/spqr/spqr_INT64_t_FLOAT64_t.pxd',
-                           'cysparse/linalg/suitesparse/spqr/spqr_INT64_t_FLOAT64_t.pyx'], **spqr_ext_params),
-    
-        Extension(name="cysparse.linalg.suitesparse.spqr.spqr_INT64_t_COMPLEX128_t",
-                  sources=['cysparse/linalg/suitesparse/spqr/spqr_INT64_t_COMPLEX128_t.pxd',
-                           'cysparse/linalg/suitesparse/spqr/spqr_INT64_t_COMPLEX128_t.pyx'], **spqr_ext_params),
-    
-
-        ]
-
 ########################################################################################################################
 # config
 ########################################################################################################################
@@ -1337,25 +1149,13 @@ packages_list = ['cysparse',
             'cysparse.sparse.csc_mat_matrices',
             'cysparse.sparse.ll_mat_views',
             'cysparse.utils',
-            'cysparse.linalg',
-            'cysparse.linalg.contexts',
             #'cysparse.sparse.IO'
             'tests'
             ]
 
 #packages_list=find_packages()
 
-ext_modules = base_ext + sparse_ext + base_context_ext
-
-if use_suitesparse:
-    # add suitsparse package
-    ext_modules += umfpack_ext
-    ext_modules += cholmod_ext
-    ext_modules += spqr_ext
-    packages_list.append('cysparse.linalg.suitesparse')
-    packages_list.append('cysparse.linalg.suitesparse.umfpack')
-    packages_list.append('cysparse.linalg.suitesparse.cholmod')
-    packages_list.append('cysparse.linalg.suitesparse.spqr')
+ext_modules = base_ext + sparse_ext
 
 ########################################################################################################################
 # PACKAGE PREPARATION FOR EXCLUSIVE C EXTENSIONS
