@@ -16,7 +16,7 @@ I started to deal with sorted col/row indices for LL/CSC/CSR sparse matrices.
       (it seems it is complicated to use the Python debugger on OSX). After one day trying... forget about cygdb. :white_check_mark:
     - The `linalg` part will be **completely** removed from `CySparse` and **each** interface with a solver will be an autonomous project (in their respective
       GitHub repositories). A common interface for all the solvers will be created and allow the interchange of solvers on the fly.
-    - 'CySparse' itself will have its API changed to better reflect the common use in the community (See 'PySparse', 'NumPy' and 'SciPy.sparse').
+    - `CySparse` itself will have its API changed to better reflect the common use in the community (See 'PySparse', 'NumPy' and 'SciPy.sparse').
     - A better mechanism will be implemented to allow the mix of special matrix cases (Symmetrical/general matrices, C-contiguous/non C-contiguous, etc). The aim
       is to introduce complex hermitian matrices (much later).
 
