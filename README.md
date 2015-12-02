@@ -13,7 +13,8 @@ I started to deal with sorted col/row indices for LL/CSC/CSR sparse matrices.
     - The template generation will be **completely** rewritten to ease the automation process (and avoid some recurrent human errors)
       and will be an autonomous project; :white_check_mark:
     - The code generation process will be revisited to allow the use of the Cython debugger 
-      (it seems it is complicated to use the Python debugger on OSX). After one day trying... forget about cygdb. :white_check_mark:
+      (it seems it is complicated to use the Python debugger on OSX). After one day trying... forget about cygdb. gbd itself works well and we now can add 
+       debug symbols with a switch in `cysparse.cfg`. :white_check_mark:
     - The `linalg` part will be **completely** removed from `CySparse` and **each** interface with a solver will be an autonomous project (in their respective
       GitHub repositories). A common interface for all the solvers will be created and allow the interchange of solvers on the fly.
     - `CySparse` itself will have its API changed to better reflect the common use in the community (See `PySparse`, `NumPy` and `SciPy.sparse`).
