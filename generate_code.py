@@ -107,34 +107,37 @@ GENERAL_CONTEXT = {
 #####################################################
 # GENERAL
 def single_generation():
+    """
+    Only generate one file without any suffix.
+    """
     yield '', GENERAL_CONTEXT
 
 
 def generate_following_only_index():
     """
-
+    Generate files following the index types.
     """
+    GENERAL_CONTEXT['type'] = None
     for index in INDEX_TYPES:
-        # keys 'index' and 'type' are redefined in **all** action function.
         GENERAL_CONTEXT['index'] = index
-        GENERAL_CONTEXT['type'] = None
+
         yield '_%s' % index, GENERAL_CONTEXT
 
 
-def generate_following_only_type():
+def generate_following_only_element():
     """
-
+    Generate files following the element types.
     """
+    GENERAL_CONTEXT['index'] = None
     for type in ELEMENT_TYPES:
-        # keys 'index' and 'type' are redefined in **all** action function.
-        GENERAL_CONTEXT['index'] = None
         GENERAL_CONTEXT['type'] = type
+
         yield '_%s' % type, GENERAL_CONTEXT
 
 
-def generate_following_index_and_type():
+def generate_following_index_and_element():
     """
-
+    Generate files following the index and element types.
     """
     for index in INDEX_TYPES:
         GENERAL_CONTEXT['index'] = index
@@ -143,9 +146,9 @@ def generate_following_index_and_type():
             yield '_%s_%s' % (index, type), GENERAL_CONTEXT
 
 
-def generate_following_index_and_complex_type():
+def generate_following_index_and_complex_element():
     """
-
+    Generate files following the index and complex element types.
     """
     for index in INDEX_TYPES:
         GENERAL_CONTEXT['index'] = index
@@ -155,7 +158,10 @@ def generate_following_index_and_complex_type():
 
 
 # Matrix Market
-def generate_MM_following_index_and_type():
+def generate_MM_following_index_and_element():
+    """
+    Generate files following the Matrix Market index and element types.
+    """
     for index in MM_INDEX_TYPES:
         GENERAL_CONTEXT['index'] = index
         for type in MM_ELEMENT_TYPES:
@@ -199,31 +205,31 @@ if __name__ == "__main__":
     cygenja_engine.register_action('cysparse/cysparse_types', '*.*', single_generation)
     ########## Sparse ###########
     # CSC
-    cygenja_engine.register_action('cysparse/sparse/csc_mat_matrices', '*.*', generate_following_index_and_type)
-    cygenja_engine.register_action('cysparse/sparse/csc_mat_matrices/csc_mat_helpers', '*.cpi', generate_following_index_and_type)
-    cygenja_engine.register_action('cysparse/sparse/csc_mat_matrices/csc_mat_kernel', '*.cpi', generate_following_index_and_type)
+    cygenja_engine.register_action('cysparse/sparse/csc_mat_matrices', '*.*', generate_following_index_and_element)
+    cygenja_engine.register_action('cysparse/sparse/csc_mat_matrices/csc_mat_helpers', '*.cpi', generate_following_index_and_element)
+    cygenja_engine.register_action('cysparse/sparse/csc_mat_matrices/csc_mat_kernel', '*.cpi', generate_following_index_and_element)
     # CSR
-    cygenja_engine.register_action('cysparse/sparse/csr_mat_matrices', '*.*', generate_following_index_and_type)
-    cygenja_engine.register_action('cysparse/sparse/csr_mat_matrices/csr_mat_helpers', '*.cpi', generate_following_index_and_type)
-    cygenja_engine.register_action('cysparse/sparse/csr_mat_matrices/csr_mat_kernel', '*.cpi', generate_following_index_and_type)
+    cygenja_engine.register_action('cysparse/sparse/csr_mat_matrices', '*.*', generate_following_index_and_element)
+    cygenja_engine.register_action('cysparse/sparse/csr_mat_matrices/csr_mat_helpers', '*.cpi', generate_following_index_and_element)
+    cygenja_engine.register_action('cysparse/sparse/csr_mat_matrices/csr_mat_kernel', '*.cpi', generate_following_index_and_element)
     # LL
-    cygenja_engine.register_action('cysparse/sparse/ll_mat_matrices', '*.*', generate_following_index_and_type)
-    cygenja_engine.register_action('cysparse/sparse/ll_mat_matrices/ll_mat_IO', 'll_mat_mm.*', generate_MM_following_index_and_type)
-    cygenja_engine.register_action('cysparse/sparse/ll_mat_matrices/ll_mat_constructors', '*.cpi', generate_following_index_and_type)
-    cygenja_engine.register_action('cysparse/sparse/ll_mat_matrices/ll_mat_helpers', '*.cpi', generate_following_index_and_type)
-    cygenja_engine.register_action('cysparse/sparse/ll_mat_matrices/ll_mat_kernel', '*.cpi', generate_following_index_and_type)
+    cygenja_engine.register_action('cysparse/sparse/ll_mat_matrices', '*.*', generate_following_index_and_element)
+    cygenja_engine.register_action('cysparse/sparse/ll_mat_matrices/ll_mat_IO', 'll_mat_mm.*', generate_MM_following_index_and_element)
+    cygenja_engine.register_action('cysparse/sparse/ll_mat_matrices/ll_mat_constructors', '*.cpi', generate_following_index_and_element)
+    cygenja_engine.register_action('cysparse/sparse/ll_mat_matrices/ll_mat_helpers', '*.cpi', generate_following_index_and_element)
+    cygenja_engine.register_action('cysparse/sparse/ll_mat_matrices/ll_mat_kernel', '*.cpi', generate_following_index_and_element)
     # LL views
-    cygenja_engine.register_action('cysparse/sparse/ll_mat_views', '*.*', generate_following_index_and_type)
+    cygenja_engine.register_action('cysparse/sparse/ll_mat_views', '*.*', generate_following_index_and_element)
     # S MAT
-    cygenja_engine.register_action('cysparse/sparse/s_mat_matrices', '*.*', generate_following_index_and_type)
+    cygenja_engine.register_action('cysparse/sparse/s_mat_matrices', '*.*', generate_following_index_and_element)
     # Proxies
     cygenja_engine.register_action('cysparse/sparse/sparse_proxies', '*.*', single_generation)
-    cygenja_engine.register_action('cysparse/sparse/sparse_proxies/complex_generic', '*.*', generate_following_index_and_complex_type)
+    cygenja_engine.register_action('cysparse/sparse/sparse_proxies/complex_generic', '*.*', generate_following_index_and_complex_element)
     # Sparse utils
-    cygenja_engine.register_action('cysparse/sparse/sparse_utils/generic', 'find.*', generate_following_index_and_type)
+    cygenja_engine.register_action('cysparse/sparse/sparse_utils/generic', 'find.*', generate_following_index_and_element)
     cygenja_engine.register_action('cysparse/sparse/sparse_utils/generic', 'generate_indices.*', generate_following_only_index)
-    cygenja_engine.register_action('cysparse/sparse/sparse_utils/generic', 'matrix_translations.*', generate_following_index_and_type)
-    cygenja_engine.register_action('cysparse/sparse/sparse_utils/generic', 'print.*', generate_following_only_type)
+    cygenja_engine.register_action('cysparse/sparse/sparse_utils/generic', 'matrix_translations.*', generate_following_index_and_element)
+    cygenja_engine.register_action('cysparse/sparse/sparse_utils/generic', 'print.*', generate_following_only_element)
     cygenja_engine.register_action('cysparse/sparse/sparse_utils/generic', 'sort_indices.*', generate_following_only_index)
     # Sparse
     cygenja_engine.register_action('cysparse/sparse', '*.*', single_generation)
@@ -237,5 +243,5 @@ if __name__ == "__main__":
         cygenja_engine.generate(arg_options.dir_pattern, arg_options.file_pattern, action_ch='c', recursively=arg_options.recursive, force=arg_options.force)
     else:
         cygenja_engine.generate(arg_options.dir_pattern, arg_options.file_pattern, action_ch='g', recursively=arg_options.recursive, force=arg_options.force)
-        # special case
+        # special case for the setup.py file
         shutil.copy2(os.path.join('config', 'setup.py'), '.')
