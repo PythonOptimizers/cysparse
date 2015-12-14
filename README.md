@@ -1,8 +1,8 @@
 # CySparse
 
-Python/Cython library to replace PySparse.
+Fast sparse matrix library for Python/Cython.
 
-:white_check_mark: THIS VERSION SHOULD WORK BUT MORE TESTS ARE NEEDED! :white_check_mark:
+:white_check_mark: THIS VERSION SHOULD WORK BUT MORE TESTS ARE NEEDED!  :white_check_mark:
 
 :bangbang: This version is :snowflake: FROZEN :snowflake: :bangbang:
 
@@ -17,11 +17,14 @@ I started to deal with sorted col/row indices for LL/CSC/CSR sparse matrices.
 1. Unless there are some urgent needs (add the tag `priority` to the issues you want me to close urgently), I'll spend the next days (weeks) **decoupling** the code:
 
     - The template generation will be **completely** rewritten to ease the automation process (and avoid some recurrent human errors)
-      and will be an autonomous project;
-    - The code generation process will be revisited to allow the use of the Cython debugger (it seems it is complicated to use the Python debugger on OSX).
+      and will be an autonomous project; :white_check_mark:
+    - The code generation process will be revisited to allow the use of the Cython debugger 
+      (it seems it is complicated to use the Python debugger on OSX). After one day trying... forget about cygdb. gbd itself works well and we now can add 
+       debug symbols with a switch in `cysparse.cfg`. :white_check_mark:
     - The `linalg` part will be **completely** removed from `CySparse` and **each** interface with a solver will be an autonomous project (in their respective
-      GitHub repositories). A common interface for all the solvers will be created and allow the interchange of solvers on the fly.
-    - 'CySparse' itself will have its API changed to better reflect the common use in the community (See 'PySparse', 'NumPy' and 'SciPy.sparse').
+      GitHub repositories). A common interface for all the solvers will be created and allow the interchange of solvers on the fly. :white_check_mark: (the linalg repositories 
+      still have to be created though).
+    - `CySparse` itself will have its API changed to better reflect the common use in the community (See `PySparse`, `NumPy` and `SciPy.sparse`).
     - A better mechanism will be implemented to allow the mix of special matrix cases (Symmetrical/general matrices, C-contiguous/non C-contiguous, etc). The aim
       is to introduce complex hermitian matrices (much later).
 
@@ -48,6 +51,11 @@ For the Python version:
 
 - NumPy;
 
+If you intend to generate the documention:
+
+- Sphinx;
+- sphinx_bootstrap_theme
+
 For the Cython version, include everything needed for Python and add:
 
 - Cython;
@@ -62,6 +70,7 @@ For the Cython version, include everything needed for Python and add:
 3. Copy `cysparse_template.cfg` to `cysparse.cfg` and adapt it to your needs.
 4. Python setup.py install. 
 
+
 ### Cython version
 
 [TODO]
@@ -73,6 +82,10 @@ See [Wiki](https://github.com/Funartech/cysparse/wiki) for details!
 
 ## Release history
 
+- Version 0.2.0 released on Dec 14, 2015
+
+  Use of ``cygenja``, decoupling of ``linalg``.
+  
 - Version 0.1.5 released on July 18, 2015
 
   Added UMFPACK.

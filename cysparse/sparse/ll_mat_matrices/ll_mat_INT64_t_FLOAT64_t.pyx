@@ -3,13 +3,13 @@ from __future__ import print_function
 ########################################################################################################################
 # CySparse cimport/import
 ########################################################################################################################
-from cysparse.types.cysparse_types cimport *
-from cysparse.types.cysparse_types import type_to_string
+from cysparse.cysparse_types.cysparse_types cimport *
+from cysparse.cysparse_types.cysparse_types import type_to_string
 
 from cysparse.sparse.ll_mat cimport LL_MAT_INCREASE_FACTOR
 
 from cysparse.sparse.s_mat cimport unexposed_value, PySparseMatrix_Check, PyLLSparseMatrixView_Check
-from cysparse.types.cysparse_numpy_types import are_mixed_types_compatible, cysparse_to_numpy_type
+from cysparse.cysparse_types.cysparse_numpy_types import are_mixed_types_compatible, cysparse_to_numpy_type
 from cysparse.sparse.ll_mat cimport PyLLSparseMatrix_Check, LL_MAT_PPRINT_COL_THRESH, LL_MAT_PPRINT_ROW_THRESH
 
 from cysparse.sparse.s_mat_matrices.s_mat_INT64_t_FLOAT64_t cimport MutableSparseMatrix_INT64_t_FLOAT64_t

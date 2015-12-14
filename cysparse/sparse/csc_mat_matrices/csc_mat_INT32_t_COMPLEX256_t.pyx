@@ -5,7 +5,7 @@ Condensed Sparse Column (CSC) Format Matrices.
 """
 from __future__ import print_function
 
-from cysparse.types.cysparse_types cimport *
+from cysparse.cysparse_types.cysparse_types cimport *
 
 from cysparse.sparse.s_mat cimport unexposed_value
 
@@ -502,6 +502,7 @@ cdef class CSCSparseMatrix_INT32_t_COMPLEX256_t(ImmutableSparseMatrix_INT32_t_CO
             IndexError if the diagonal number is out of bounds.
 
         """
+
         if k > 0:
             raise IndexError("k-th diagonal must be <= 0 (here: k = %d)" % k)
 

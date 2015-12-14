@@ -1,5 +1,5 @@
 from cysparse.sparse.ll_mat import *
-from cysparse.types.cysparse_types import *
+from cysparse.cysparse_types.cysparse_types import *
 import numpy as np
 
 A = NewLLSparseMatrix(nrow=2, ncol=3, size_hint=6)
