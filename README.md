@@ -4,6 +4,8 @@ Fast sparse matrix library for Python/Cython.
 
 :white_check_mark: THIS VERSION SHOULD WORK BUT MORE TESTS ARE NEEDED!  :white_check_mark:
 
+This is the new decoupled version.
+
 I started to deal with sorted col/row indices for LL/CSC/CSR sparse matrices.
 
 ## Announcements
