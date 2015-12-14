@@ -10,6 +10,7 @@
 ###############################################################################
 
 from cygenja.generator import Generator
+from jinja2 import Environment, FileSystemLoader
 
 from cysparse.utils.log_utils import make_logger
 
@@ -185,7 +186,13 @@ if __name__ == "__main__":
 
     # cygenja engine
     current_directory = os.path.dirname(os.path.abspath(__file__))
-    cygenja_engine = Generator(current_directory, logger=logger)
+    jinja2_env = Environment(autoescape=False,
+                            loader=FileSystemLoader('/'), # we use absolute filenames
+                            trim_blocks=False,
+                            variable_start_string='@',
+                            variable_end_string='@')
+
+    cygenja_engine = Generator(current_directory, jinja2_env, logger=logger)
 
     # register filters
     cygenja_engine.register_common_type_filters()
