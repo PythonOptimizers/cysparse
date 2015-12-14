@@ -20,3 +20,5 @@ def get_path_option(config, section, option):
     except:
         val = None
     return val
+
+

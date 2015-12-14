@@ -1,4 +1,4 @@
-from cysparse.types.cysparse_types cimport *
+from cysparse.cysparse_types.cysparse_types cimport *
 
 
 cdef element_to_string_FLOAT32_t(FLOAT32_t v, int cell_width=?)

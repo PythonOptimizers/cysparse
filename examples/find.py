@@ -1,5 +1,5 @@
 from cysparse.sparse.ll_mat import *
-import cysparse.types.cysparse_types as types
+import cysparse.cysparse_types.cysparse_types as types
 import numpy as np
 
 A = NewLinearFillLLSparseMatrix(nrow=4, ncol=3, dtype=FLOAT32_T)

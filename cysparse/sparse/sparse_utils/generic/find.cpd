@@ -2,7 +2,7 @@
 Several routines to find elements in C-arrays.
 """
 
-from cysparse.types.cysparse_types cimport *
+from cysparse.cysparse_types.cysparse_types cimport *
 
 # EXPLICIT TYPE TESTS
 {% if type == 'COMPLEX128_t' or type == 'COMPLEX64_t' %}
