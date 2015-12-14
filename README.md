@@ -82,6 +82,10 @@ See [Wiki](https://github.com/Funartech/cysparse/wiki) for details!
 
 ## Release history
 
+- Version 0.2.2 released on Dec 14, 2015
+
+  Clean up.
+  
 - Version 0.2.0 released on Dec 14, 2015
 
   Use of ``cygenja``, decoupling of ``linalg``.
