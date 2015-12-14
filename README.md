@@ -2,7 +2,7 @@
 
 Fast sparse matrix library for Python/Cython.
 
-:bangbang: THIS VERSION DOES NOT WORK YET :bangbang:
+:white_check_mark: THIS VERSION SHOULD WORK BUT MORE TESTS ARE NEEDED!  :white_check_mark:
 
 I started to deal with sorted col/row indices for LL/CSC/CSR sparse matrices.
 
@@ -76,6 +76,10 @@ See [Wiki](https://github.com/Funartech/cysparse/wiki) for details!
 
 ## Release history
 
+- Version 0.2.0 released on Dec 14, 2015
+
+  Use of ``cygenja``, decoupling of ``linalg``.
+  
 - Version 0.1.5 released on July 18, 2015
 
   Added UMFPACK.
