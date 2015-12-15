@@ -4,13 +4,15 @@
 :program:`CySparse`\'s basics
 =========================================================
 
-In this section, we expose the basics of :program:`CySparse`: how to create a matrix, what are the common attributes, etc.
+In this section, we explain the very basics of :program:`CySparse`. Most matrices share some common basic attributes that we detail here. To create a matrix, we use *factory methods* [#factory_method_strange_name]_: 
+functions that return an object corresponding
+to their arguments. Different arguments make them return different kind of objects (matrices).
 
 Common attributes
 ==================
 
 Most attributes and **all** common ones are *read-only*. Some attributes ask for some expensive computation. We indicate whenever this is the case.
-Some attributes can also be given as arguments to most factory methods. We also detail which do. 
+Some attributes can also be given as arguments to most factory methods. We also detail which ones. 
 
 ``nrow`` and ``ncol``
 ----------------------
@@ -28,10 +30,10 @@ instead use the argument ``size=...`` in most factory methods.
 ``dtype`` and ``itype``
 -------------------------
 
-Each matrix (matrix-like) object has an internal index *type* and stores *typed* elements. Both types (enums) can be retrieved for specialization.
+Each matrix (matrix-like) object has an internal index *type* and stores *typed* elements. Both types (enums) can be retrieved.
 ``dtype`` returns the type of the elements of the matrix and ``itype`` returns its index type.
  
-See ... about the available types.
+See section :ref:`availabe_types` about the available types.
 
 ``use_symmetric_storage``
 ----------------------------
@@ -40,18 +42,45 @@ Symmetric matrices can be stored by only storing the **lower** triangular part a
 The attribute ``use_symmetric_storage`` returns if this storage method is used or not. Thus, if ``use_symmetric_storage`` is ``True``, you know that you deal with a symmetric matrix **and** that roughly only half of its elements are stored. If 
 ``use_symmetric_storage`` is ``False``, it simply means that this storage scheme is not used. The matrix itself migth be symmetric or not.
 
+``use_zero_storage``
+------------------------------
+
+By default non specified (implicit) elements are zero (``0``, ``0.0`` or ``0+0j``). :program:`CySparse` allow the user to store explicitely zeros. To explicitely store zeros, declare ``use_zero_storage=True`` as an argument
+in any factory method:
+
+..  code-block:: python
+
+    A = NewLLSparseMatrix(use_zero_storage=True, ...)
+    
+The matrix ``A`` will store any zero explicitely as will any matrix created from it. You can access the value of this attribute:
+
+..  code-block:: python
+
+    A.use_zero_storage
+    
+returns ``True`` for our example. This attribute is read-only and cannot be changed. If you want to temporarily exclude zeros in some operations, you can use the ``NonZeros`` context manager:
+
+..  code-block:: python
+
+    with NonZeros(A):
+        # use some method to add entries to A but disregard zeros entries
+        ...
+
+This context manager temporarily set the ``use_zero_storage`` attribute to ``False`` before restoring its inital value.
+
+By default, ``use_zero_storage`` is set to ``False``.
 
 
 
 ``is_mutable``
 --------------------
 
-``is_mutable`` returns if the matrix can be changed or not. Notice that for the moment, **only** an :class:`LLSparseMatrix` matrix can be changed.
+``is_mutable`` returns if the matrix can be modified or not. Note that for the moment, **only** an :class:`LLSparseMatrix` matrix can be modified.
 
 ``type`` and ``type_name``
 -----------------------------
 
-Each matrix or matrix-like object has its own type and type name. For instance:
+Each matrix or matrix-like object has its own type and type name defined as strings. For instance:
 
 ..  code-block:: python
 
@@ -66,52 +95,20 @@ returns
     LLSparseMatrix
     LLSparseMatrix [INT32_t, COMPLEX64_t]
 
-
-``store_zeros``
-------------------------------
-
-By default non specified (implicit) elements are zero (``0``, ``0.0`` or ``0+0j``). :program:`CySparse` allow the user to store explicitely zeros. To explicitely store zeros, declare ``store_zeros=True`` as an argument
-in any factory method:
-
-..  code-block:: python
-
-    A = NewLLSparseMatrix(store_zeros=True, ...)
-    
-The matrix ``A`` will store any zero explicitely as will any matrix created from it. You can access the value of this attribute:
-
-..  code-block:: python
-
-    A.store_zeros
-    
-returns ``True`` for our example. This attribute is read-only and cannot be changed. If you want to temporarily exclude zeros in some operations, you can use the ``NonZeros`` context manager:
-
-..  code-block:: python
-
-    with NonZeros(A):
-        # use some method to add entries to A but disregard zeros entries
-        ...
-
-This context manager temporarily set the ``store_zeros`` attribute to ``False`` before restoring its inital value.
-
-By default, ``store_zeros`` is set to ``False``.
+The type ``LLSparseMatrix`` is common among ``LL`` sparse format matrices while the ``type_name`` gives the specific details of the index and element types.
 
 ``nnz``
 ---------
 
-The ``nnz`` attribute returns the number of "non zeros" stored in the matrix. Notice that ``0`` could be stored if ``store_zeros`` is set to ``True`` and if so, it will be counted in the number of "non zero" elements.
+The ``nnz`` attribute returns the number of "non zeros" stored in the matrix. Notice that ``0`` could be stored if ``use_zero_storage`` is set to ``True`` and if so, it will be counted in the number of "non zero" elements.
 Whenever the symmetric storage scheme is used (``use_symmetric_storage`` is ``True``), ``nnz`` only returns the number of "non zero" elements stored in the lower triangular part and the diagonal of the matrix, i.e. ``nnz`` 
 returns exactly how many elements are stored internally.
 
 ..  warning:: ``nnz`` returns the number of elements stored internally.
 
 When using views, this attribute is **costly** to retrieve as it is systematically recomputed each time and we don't make any assomption on the views (views can represent matrices with rows and columns in any order and duplicated 
-rows and columns any number of times). The number returned is the number of "non zero" elements stored in the equivalent matrix using the **same** storage scheme than initial matrix.
+rows and columns any number of times). The number returned is the number of "non zero" elements stored in the equivalent matrix using the **same** storage scheme than viewed matrix.
     
-..  topic:: Factory method or factory function?
-    
-    We use **functions** to create ``LLSparseMatrix`` matrices, so why do we speak about factory **methods**? It is simply because in programming pattern parlance we speak about *factory methods* in general.
-
-
 
 How to create a matrix?
 ========================
@@ -154,7 +151,9 @@ you'll get the following error:
 
 ..  raw:: html
 
-    <h4>Footnote</h4>
+    <h4>Footnotes</h4>
+
+..  [#factory_method_strange_name] The term *factory method* is coined by the Design Pattern community. The *method* in itself can be a function, method, class, ...
     
 ..  [#use_of_pure_c_variables_in_constructors] This not exactly true. :program:`Cython` allows to pass some pure C variables that can be *easily* mapped to :program:`Python` arguments. The idea is that the same arguments are 
     passed to ``__cinit__()`` **and** ``__init__()`` methods.    

@@ -94,8 +94,8 @@ cdef class LLSparseMatrixView_INT32_t_COMPLEX64_t:
 
     
     @property
-    def use_nonzero_storage(self):
-        return self.A.__use_nonzero_storage
+    def use_zero_storage(self):
+        return self.A.__use_zero_storage
 
     
     @property
@@ -220,7 +220,7 @@ cdef class LLSparseMatrixView_INT32_t_COMPLEX64_t:
 
         Note:
             Because we lost sight of zero elements added in the viewed :class:`LLSparseMatrix_INT32_t_COMPLEX64_t`,
-            the returned matrix has its ``use_nonzero_storage`` attribute set
+            the returned matrix has its ``use_zero_storage`` attribute set
             to ``False`` and no zero is copied.
 
             Because we don't know what submatrix is taken, the returned matrix **cannot** by symmetric.
@@ -233,7 +233,7 @@ cdef class LLSparseMatrixView_INT32_t_COMPLEX64_t:
                                                                                   nrow=self.__nrow,
                                                                                   ncol=self.__ncol,
                                                                                   size_hint=size_hint,
-                                                                                  use_nonzero_storage=False,
+                                                                                  use_zero_storage=False,
                                                                                   use_symmetric_storage=False)
 
         cdef:

@@ -116,7 +116,7 @@ cdef class CSRSparseMatrix_INT32_t_COMPLEX64_t(ImmutableSparseMatrix_INT32_t_COM
 
         nnz = self.nnz
 
-        self_copy = CSRSparseMatrix_INT32_t_COMPLEX64_t(control_object=unexposed_value, nrow=self.__nrow, ncol=self.__ncol, use_nonzero_storage=self.__use_nonzero_storage, use_symmetric_storage=self.__use_symmetric_storage)
+        self_copy = CSRSparseMatrix_INT32_t_COMPLEX64_t(control_object=unexposed_value, nrow=self.__nrow, ncol=self.__ncol, use_zero_storage=self.__use_zero_storage, use_symmetric_storage=self.__use_symmetric_storage)
 
         val = <COMPLEX64_t *> PyMem_Malloc(nnz * sizeof(COMPLEX64_t))
         if not val:
@@ -497,7 +497,7 @@ cdef class CSRSparseMatrix_INT32_t_COMPLEX64_t(ImmutableSparseMatrix_INT32_t_COM
                                                   col,
                                                   val,
                                                   use_symmetric_storage=False,
-                                                  use_nonzero_storage=self.__use_nonzero_storage,
+                                                  use_zero_storage=self.__use_zero_storage,
                                                   col_indices_are_sorted=True)
 
     def triu(self, int k):
@@ -631,7 +631,7 @@ cdef class CSRSparseMatrix_INT32_t_COMPLEX64_t(ImmutableSparseMatrix_INT32_t_COM
                                                   col,
                                                   val,
                                                   use_symmetric_storage=False,
-                                                  use_nonzero_storage=self.__use_nonzero_storage,
+                                                  use_zero_storage=self.__use_zero_storage,
                                                   col_indices_are_sorted=True)
 
     def to_csc(self):
@@ -667,7 +667,7 @@ cdef class CSRSparseMatrix_INT32_t_COMPLEX64_t(ImmutableSparseMatrix_INT32_t_COM
                                                   row,
                                                   val,
                                                   use_symmetric_storage=self.use_symmetric_storage,
-                                                  use_nonzero_storage=self.use_nonzero_storage,
+                                                  use_zero_storage=self.use_zero_storage,
                                                   row_indices_are_sorted=True)
 
 
@@ -928,7 +928,7 @@ cdef MakeCSRSparseMatrix_INT32_t_COMPLEX64_t(INT32_t nrow,
                                         INT32_t * col,
                                         COMPLEX64_t * val,
                                         bint use_symmetric_storage,
-                                        bint use_nonzero_storage,
+                                        bint use_zero_storage,
                                         bint col_indices_are_sorted=False):
     """
     Construct a CSRSparseMatrix object.
@@ -941,12 +941,12 @@ cdef MakeCSRSparseMatrix_INT32_t_COMPLEX64_t(INT32_t nrow,
         col  (INT32_t *): C-array with column indices.
         val  (COMPLEX64_t *): C-array with values.
         use_symmetric_storage (boolean): Is matrix symmetrix or not?
-        use_nonzero_storage (boolean): Do we store zeros or not?
+        use_zero_storage (boolean): Do we store zeros or not?
         col_indices_are_sorted (boolean): Are the column indices sorted or not?
     """
     cdef CSRSparseMatrix_INT32_t_COMPLEX64_t csr_mat
 
-    csr_mat = CSRSparseMatrix_INT32_t_COMPLEX64_t(control_object=unexposed_value, nrow=nrow, ncol=ncol, nnz=nnz, use_symmetric_storage=use_symmetric_storage, use_nonzero_storage=use_nonzero_storage)
+    csr_mat = CSRSparseMatrix_INT32_t_COMPLEX64_t(control_object=unexposed_value, nrow=nrow, ncol=ncol, nnz=nnz, use_symmetric_storage=use_symmetric_storage, use_zero_storage=use_zero_storage)
 
     csr_mat.val = val
     csr_mat.ind = ind

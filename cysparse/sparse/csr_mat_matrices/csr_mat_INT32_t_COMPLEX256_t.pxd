@@ -41,7 +41,7 @@ cdef MakeCSRSparseMatrix_INT32_t_COMPLEX256_t(INT32_t nrow,
                                         INT32_t * col,
                                         COMPLEX256_t * val,
                                         bint use_symmetric_storage,
-                                        bint use_nonzero_storage,
+                                        bint use_zero_storage,
                                         bint col_indices_are_sorted=?)
 
 cdef LLSparseMatrix_INT32_t_COMPLEX256_t multiply_csr_mat_by_csc_mat_INT32_t_COMPLEX256_t(CSRSparseMatrix_INT32_t_COMPLEX256_t A, CSCSparseMatrix_INT32_t_COMPLEX256_t B)

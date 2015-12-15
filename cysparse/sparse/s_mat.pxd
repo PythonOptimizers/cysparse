@@ -14,7 +14,7 @@ cdef unexposed_value
 
 cdef INT32_t MUTABLE_SPARSE_MAT_DEFAULT_SIZE_HINT
 
-cdef __set_use_nonzero_storage_attribute(SparseMatrix A, bint use_nonzero_storage)
+cdef __set_use_zero_storage_attribute(SparseMatrix A, bint use_zero_storage)
 cpdef bint PySparseMatrix_Check(object obj)
 cpdef bint PyLLSparseMatrixView_Check(object obj)
 
@@ -37,7 +37,7 @@ cdef class SparseMatrix:
     cdef:
         # attributes that have a corresponding Python property start with '__'
         bint __use_symmetric_storage           # True if symmetric matrix
-        bint __use_nonzero_storage            # True if 0.0 is to be stored explicitly
+        bint __use_zero_storage            # True if 0.0 is to be stored explicitly
 
         bint __is_mutable             # True if mutable
 

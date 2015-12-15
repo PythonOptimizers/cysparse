@@ -36,7 +36,7 @@ extensions += ['sphinx.ext.todo']
 extensions += ['sphinx.ext.inheritance_diagram']
 extensions += ['ipython_console_highlighting']
 extensions += ['mathjax']
-mathjax_path = 'https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'
+mathjax_path = 'https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'
 
 graphviz_output_format = 'svg'
 inheritance_node_attrs = dict(shape='box', fontsize=12,

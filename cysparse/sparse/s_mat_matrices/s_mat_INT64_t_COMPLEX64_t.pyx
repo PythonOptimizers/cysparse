@@ -279,13 +279,13 @@ cdef class SparseMatrix_INT64_t_COMPLEX64_t(SparseMatrix):
         else:
             symmetric_string = 'General'
 
-        use_nonzero_storage_string = None
-        if self.__use_nonzero_storage:
-            use_nonzero_storage_string = "with"
+        use_zero_storage_string = None
+        if self.__use_zero_storage:
+            use_zero_storage_string = "with"
         else:
-            use_nonzero_storage_string = "without"
+            use_zero_storage_string = "without"
 
-        s = '%s and %s zeros' % (symmetric_string, use_nonzero_storage_string)
+        s = '%s and %s zeros' % (symmetric_string, use_zero_storage_string)
 
         return s
 

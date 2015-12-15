@@ -56,10 +56,10 @@ cdef LLSparseMatrix_INT64_t_COMPLEX64_t multiply_two_ll_mat_INT64_t_COMPLEX64_t(
     cdef INT64_t C_nrow = A_nrow
     cdef INT64_t C_ncol = B_ncol
 
-    cdef bint use_nonzero_storage = A.use_nonzero_storage and B.use_nonzero_storage
+    cdef bint use_zero_storage = A.use_zero_storage and B.use_zero_storage
     cdef INT64_t size_hint = A.size_hint
 
-    C = LLSparseMatrix_INT64_t_COMPLEX64_t(control_object=unexposed_value, nrow=C_nrow, ncol=C_ncol, size_hint=size_hint, use_nonzero_storage=use_nonzero_storage)
+    C = LLSparseMatrix_INT64_t_COMPLEX64_t(control_object=unexposed_value, nrow=C_nrow, ncol=C_ncol, size_hint=size_hint, use_zero_storage=use_zero_storage)
 
 
     # CASES
@@ -121,11 +121,11 @@ cdef LLSparseMatrix_INT64_t_COMPLEX64_t multiply_transposed_ll_mat_by_ll_mat_INT
     cdef INT64_t C_nrow = A_ncol
     cdef INT64_t C_ncol = B_ncol
 
-    cdef bint use_nonzero_storage = A.use_nonzero_storage and B.use_nonzero_storage
+    cdef bint use_zero_storage = A.use_zero_storage and B.use_zero_storage
     # TODO: is this a good idea?
     cdef INT64_t size_hint = min(A.__nnz, B.__nnz)
 
-    C = LLSparseMatrix_INT64_t_COMPLEX64_t(control_object=unexposed_value, nrow=C_nrow, ncol=C_ncol, size_hint=size_hint, use_nonzero_storage=use_nonzero_storage)
+    C = LLSparseMatrix_INT64_t_COMPLEX64_t(control_object=unexposed_value, nrow=C_nrow, ncol=C_ncol, size_hint=size_hint, use_zero_storage=use_zero_storage)
 
     # CASES
     if not A.__use_symmetric_storage and not B.__use_symmetric_storage:
@@ -252,13 +252,13 @@ cdef LLSparseMatrix_INT64_t_COMPLEX64_t multiply_transposed_ll_mat_with_self(LLS
         raise NotImplementedError('matdot_transp_self peration with symmetric matrices not supported')
 
     cdef:
-        bint use_nonzero_storage = A.use_nonzero_storage
+        bint use_zero_storage = A.use_zero_storage
         INT64_t size_hint = A.size_hint
         LLSparseMatrix_INT64_t_COMPLEX64_t C
         INT64_t iA, iC, kA, kA2
         COMPLEX64_t valA
 
-    C = LLSparseMatrix_INT64_t_COMPLEX64_t(control_object=unexposed_value, nrow=A.ncol, ncol=A.ncol, size_hint=size_hint, use_nonzero_storage=use_nonzero_storage, use_symmetric_storage=True)
+    C = LLSparseMatrix_INT64_t_COMPLEX64_t(control_object=unexposed_value, nrow=A.ncol, ncol=A.ncol, size_hint=size_hint, use_zero_storage=use_zero_storage, use_symmetric_storage=True)
 
     for iA from 0 <= iA < A.nrow:
         kA = A.root[iA]
@@ -297,7 +297,7 @@ cdef LLSparseMatrix_INT64_t_COMPLEX64_t multiply_transposed_ll_mat_with_self_sca
         raise NotImplementedError('matdot_transp_self peration with symmetric matrices not supported')
 
     cdef:
-        bint use_nonzero_storage = A.use_nonzero_storage
+        bint use_zero_storage = A.use_zero_storage
         INT64_t size_hint = A.size_hint
         LLSparseMatrix_INT64_t_COMPLEX64_t C
         INT64_t iA, iC, kA, kA2
@@ -312,7 +312,7 @@ cdef LLSparseMatrix_INT64_t_COMPLEX64_t multiply_transposed_ll_mat_with_self_sca
         INT64_t incx = d.strides[0] / sd
 
 
-    C = LLSparseMatrix_INT64_t_COMPLEX64_t(control_object=unexposed_value, nrow=A.ncol, ncol=A.ncol, size_hint=size_hint, use_nonzero_storage=use_nonzero_storage, use_symmetric_storage=True)
+    C = LLSparseMatrix_INT64_t_COMPLEX64_t(control_object=unexposed_value, nrow=A.ncol, ncol=A.ncol, size_hint=size_hint, use_zero_storage=use_zero_storage, use_symmetric_storage=True)
 
     if cnp.PyArray_ISCONTIGUOUS(d):
         for iA from 0 <= iA < A.nrow:

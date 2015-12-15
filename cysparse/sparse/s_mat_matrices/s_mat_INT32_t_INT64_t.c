@@ -660,7 +660,7 @@ struct __pyx_opt_args_8cysparse_6sparse_5s_mat_MakeMatrixString {
 struct __pyx_obj_8cysparse_6sparse_5s_mat_SparseMatrix {
   PyObject_HEAD
   int __pyx___use_symmetric_storage;
-  int __pyx___use_nonzero_storage;
+  int __pyx___use_zero_storage;
   int __pyx___is_mutable;
   PyObject *__pyx___type_name;
   PyObject *__pyx___type;
@@ -2823,7 +2823,7 @@ static PyObject *__pyx_pw_8cysparse_6sparse_14s_mat_matrices_21s_mat_INT32_t_INT
 
 static PyObject *__pyx_pf_8cysparse_6sparse_14s_mat_matrices_21s_mat_INT32_t_INT64_t_28SparseMatrix_INT32_t_INT64_t_26storage_scheme_string(struct __pyx_obj_8cysparse_6sparse_14s_mat_matrices_21s_mat_INT32_t_INT64_t_SparseMatrix_INT32_t_INT64_t *__pyx_v_self) {
   PyObject *__pyx_v_symmetric_string = NULL;
-  PyObject *__pyx_v_use_nonzero_storage_string = NULL;
+  PyObject *__pyx_v_use_zero_storage_string = NULL;
   PyObject *__pyx_v_s = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -2880,7 +2880,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_14s_mat_matrices_21s_mat_INT32_t_INT
  *         else:
  *             symmetric_string = 'General'             # <<<<<<<<<<<<<<
  * 
- *         use_nonzero_storage_string = None
+ *         use_zero_storage_string = None
  */
   /*else*/ {
     __Pyx_INCREF(__pyx_n_s_General);
@@ -2891,60 +2891,60 @@ static PyObject *__pyx_pf_8cysparse_6sparse_14s_mat_matrices_21s_mat_INT32_t_INT
   /* "cysparse/sparse/s_mat_matrices/s_mat_INT32_t_INT64_t.pyx":250
  *             symmetric_string = 'General'
  * 
- *         use_nonzero_storage_string = None             # <<<<<<<<<<<<<<
- *         if self.__use_nonzero_storage:
- *             use_nonzero_storage_string = "with"
+ *         use_zero_storage_string = None             # <<<<<<<<<<<<<<
+ *         if self.__use_zero_storage:
+ *             use_zero_storage_string = "with"
  */
   __Pyx_INCREF(Py_None);
-  __pyx_v_use_nonzero_storage_string = Py_None;
+  __pyx_v_use_zero_storage_string = Py_None;
 
   /* "cysparse/sparse/s_mat_matrices/s_mat_INT32_t_INT64_t.pyx":251
  * 
- *         use_nonzero_storage_string = None
- *         if self.__use_nonzero_storage:             # <<<<<<<<<<<<<<
- *             use_nonzero_storage_string = "with"
+ *         use_zero_storage_string = None
+ *         if self.__use_zero_storage:             # <<<<<<<<<<<<<<
+ *             use_zero_storage_string = "with"
  *         else:
  */
-  __pyx_t_1 = (__pyx_v_self->__pyx_base.__pyx___use_nonzero_storage != 0);
+  __pyx_t_1 = (__pyx_v_self->__pyx_base.__pyx___use_zero_storage != 0);
   if (__pyx_t_1) {
 
     /* "cysparse/sparse/s_mat_matrices/s_mat_INT32_t_INT64_t.pyx":252
- *         use_nonzero_storage_string = None
- *         if self.__use_nonzero_storage:
- *             use_nonzero_storage_string = "with"             # <<<<<<<<<<<<<<
+ *         use_zero_storage_string = None
+ *         if self.__use_zero_storage:
+ *             use_zero_storage_string = "with"             # <<<<<<<<<<<<<<
  *         else:
- *             use_nonzero_storage_string = "without"
+ *             use_zero_storage_string = "without"
  */
     __Pyx_INCREF(__pyx_n_s_with);
-    __Pyx_DECREF_SET(__pyx_v_use_nonzero_storage_string, __pyx_n_s_with);
+    __Pyx_DECREF_SET(__pyx_v_use_zero_storage_string, __pyx_n_s_with);
 
     /* "cysparse/sparse/s_mat_matrices/s_mat_INT32_t_INT64_t.pyx":251
  * 
- *         use_nonzero_storage_string = None
- *         if self.__use_nonzero_storage:             # <<<<<<<<<<<<<<
- *             use_nonzero_storage_string = "with"
+ *         use_zero_storage_string = None
+ *         if self.__use_zero_storage:             # <<<<<<<<<<<<<<
+ *             use_zero_storage_string = "with"
  *         else:
  */
     goto __pyx_L4;
   }
 
   /* "cysparse/sparse/s_mat_matrices/s_mat_INT32_t_INT64_t.pyx":254
- *             use_nonzero_storage_string = "with"
+ *             use_zero_storage_string = "with"
  *         else:
- *             use_nonzero_storage_string = "without"             # <<<<<<<<<<<<<<
+ *             use_zero_storage_string = "without"             # <<<<<<<<<<<<<<
  * 
- *         s = '%s and %s zeros' % (symmetric_string, use_nonzero_storage_string)
+ *         s = '%s and %s zeros' % (symmetric_string, use_zero_storage_string)
  */
   /*else*/ {
     __Pyx_INCREF(__pyx_n_s_without);
-    __Pyx_DECREF_SET(__pyx_v_use_nonzero_storage_string, __pyx_n_s_without);
+    __Pyx_DECREF_SET(__pyx_v_use_zero_storage_string, __pyx_n_s_without);
   }
   __pyx_L4:;
 
   /* "cysparse/sparse/s_mat_matrices/s_mat_INT32_t_INT64_t.pyx":256
- *             use_nonzero_storage_string = "without"
+ *             use_zero_storage_string = "without"
  * 
- *         s = '%s and %s zeros' % (symmetric_string, use_nonzero_storage_string)             # <<<<<<<<<<<<<<
+ *         s = '%s and %s zeros' % (symmetric_string, use_zero_storage_string)             # <<<<<<<<<<<<<<
  * 
  *         return s
  */
@@ -2953,9 +2953,9 @@ static PyObject *__pyx_pf_8cysparse_6sparse_14s_mat_matrices_21s_mat_INT32_t_INT
   __Pyx_INCREF(__pyx_v_symmetric_string);
   __Pyx_GIVEREF(__pyx_v_symmetric_string);
   PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_v_symmetric_string);
-  __Pyx_INCREF(__pyx_v_use_nonzero_storage_string);
-  __Pyx_GIVEREF(__pyx_v_use_nonzero_storage_string);
-  PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_v_use_nonzero_storage_string);
+  __Pyx_INCREF(__pyx_v_use_zero_storage_string);
+  __Pyx_GIVEREF(__pyx_v_use_zero_storage_string);
+  PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_v_use_zero_storage_string);
   __pyx_t_3 = __Pyx_PyString_Format(__pyx_kp_s_s_and_s_zeros, __pyx_t_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 256; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -2963,7 +2963,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_14s_mat_matrices_21s_mat_INT32_t_INT
   __pyx_t_3 = 0;
 
   /* "cysparse/sparse/s_mat_matrices/s_mat_INT32_t_INT64_t.pyx":258
- *         s = '%s and %s zeros' % (symmetric_string, use_nonzero_storage_string)
+ *         s = '%s and %s zeros' % (symmetric_string, use_zero_storage_string)
  * 
  *         return s             # <<<<<<<<<<<<<<
  * 
@@ -2990,7 +2990,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_14s_mat_matrices_21s_mat_INT32_t_INT
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_symmetric_string);
-  __Pyx_XDECREF(__pyx_v_use_nonzero_storage_string);
+  __Pyx_XDECREF(__pyx_v_use_zero_storage_string);
   __Pyx_XDECREF(__pyx_v_s);
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();

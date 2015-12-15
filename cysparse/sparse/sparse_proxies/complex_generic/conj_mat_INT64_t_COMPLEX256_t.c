@@ -887,7 +887,7 @@ typedef npy_cdouble __pyx_t_5numpy_complex_t;
 struct __pyx_obj_8cysparse_6sparse_5s_mat_SparseMatrix {
   PyObject_HEAD
   int __pyx___use_symmetric_storage;
-  int __pyx___use_nonzero_storage;
+  int __pyx___use_zero_storage;
   int __pyx___is_mutable;
   PyObject *__pyx___type_name;
   PyObject *__pyx___type;

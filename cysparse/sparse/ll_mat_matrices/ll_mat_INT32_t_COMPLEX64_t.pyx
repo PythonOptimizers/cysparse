@@ -296,7 +296,7 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX64_t(MutableSparseMatrix_INT32_t_COMPLE
         cdef LLSparseMatrix_INT32_t_COMPLEX64_t self_copy
 
         # we copy manually the C-arrays
-        self_copy = LLSparseMatrix_INT32_t_COMPLEX64_t(control_object=unexposed_value, no_memory=True, nrow=self.__nrow, ncol=self.__ncol, size_hint=self.size_hint, use_nonzero_storage=self.__use_nonzero_storage, use_symmetric_storage=self.__use_symmetric_storage)
+        self_copy = LLSparseMatrix_INT32_t_COMPLEX64_t(control_object=unexposed_value, no_memory=True, nrow=self.__nrow, ncol=self.__ncol, size_hint=self.size_hint, use_zero_storage=self.__use_zero_storage, use_symmetric_storage=self.__use_symmetric_storage)
 
         # copy C-arrays
         cdef:
@@ -555,7 +555,7 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX64_t(MutableSparseMatrix_INT32_t_COMPLE
         if self.__use_symmetric_storage:
             return self.copy()
         else:
-            transpose = LLSparseMatrix_INT32_t_COMPLEX64_t(control_object=unexposed_value, nrow=self.__ncol, ncol=self.__nrow, size_hint=self.__nnz, use_nonzero_storage=self.__use_nonzero_storage, use_symmetric_storage=self.__use_symmetric_storage)
+            transpose = LLSparseMatrix_INT32_t_COMPLEX64_t(control_object=unexposed_value, nrow=self.__ncol, ncol=self.__nrow, size_hint=self.__nnz, use_zero_storage=self.__use_zero_storage, use_symmetric_storage=self.__use_symmetric_storage)
 
             for i from 0 <= i < self.__nrow:
                 k = self.root[i]
@@ -581,7 +581,7 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX64_t(MutableSparseMatrix_INT32_t_COMPLE
             return self.create_conjugate()
 
         else:
-            conjugate_transpose = LLSparseMatrix_INT32_t_COMPLEX64_t(control_object=unexposed_value, nrow=self.__ncol, ncol=self.__nrow, size_hint=self.__nnz, use_nonzero_storage=self.__use_nonzero_storage, use_symmetric_storage=self.__use_symmetric_storage)
+            conjugate_transpose = LLSparseMatrix_INT32_t_COMPLEX64_t(control_object=unexposed_value, nrow=self.__ncol, ncol=self.__nrow, size_hint=self.__nnz, use_zero_storage=self.__use_zero_storage, use_symmetric_storage=self.__use_symmetric_storage)
 
             for i from 0 <= i < self.__nrow:
                 k = self.root[i]
@@ -699,7 +699,7 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX64_t(MutableSparseMatrix_INT32_t_COMPLE
                                                      ind=ind, col=col,
                                                      val=val,
                                                      use_symmetric_storage=self.__use_symmetric_storage,
-                                                     use_nonzero_storage=self.__use_nonzero_storage,
+                                                     use_zero_storage=self.__use_zero_storage,
                                                      col_indices_are_sorted=True)
 
         return csr_mat
@@ -781,7 +781,7 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX64_t(MutableSparseMatrix_INT32_t_COMPLE
                                                      row=row,
                                                      val=val,
                                                      use_symmetric_storage=self.__use_symmetric_storage,
-                                                     use_nonzero_storage=self.__use_nonzero_storage,
+                                                     use_zero_storage=self.__use_zero_storage,
                                                      row_indices_are_sorted=True)
 
         return csc_mat
@@ -872,7 +872,7 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX64_t(MutableSparseMatrix_INT32_t_COMPLE
             ``IndexError`` if dimensions don't match.
 
         Notes:
-            This assignment is done as if ``A[i, j] = val`` was done explicitely. In particular if ``use_nonzero_storage``
+            This assignment is done as if ``A[i, j] = val`` was done explicitely. In particular if ``use_zero_storage``
             is ``True`` and ``obj`` contains zeros, they will be explicitely added. Also, you can mix elements of
             different (compatible) types.
 
@@ -1071,7 +1071,7 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX64_t(MutableSparseMatrix_INT32_t_COMPLE
         Set :math:`A[i, j] = \textrm{value}` directly.
 
         Note:
-            Store zero elements **only** if ``use_nonzero_storage`` is ``True``.
+            Store zero elements **only** if ``use_zero_storage`` is ``True``.
 
         Warning:
             No out of bound check.
@@ -1098,7 +1098,7 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX64_t(MutableSparseMatrix_INT32_t_COMPLE
             k = self.link[k]
 
         # Store value
-        if self.__use_nonzero_storage or value != 0.0:
+        if self.__use_zero_storage or value != 0.0:
             if col == j:
                 # element already exist
                 self.val[k] = value
@@ -1875,7 +1875,7 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX64_t(MutableSparseMatrix_INT32_t_COMPLE
             INT32_t i, j, k_
             LLSparseMatrix_INT32_t_COMPLEX64_t ll_mat_tril
 
-        ll_mat_tril = LLSparseMatrix_INT32_t_COMPLEX64_t(control_object=unexposed_value, nrow=self.__nrow, ncol=self.__ncol, size_hint=self.__nnz, use_nonzero_storage=self.__use_nonzero_storage, use_symmetric_storage=False)
+        ll_mat_tril = LLSparseMatrix_INT32_t_COMPLEX64_t(control_object=unexposed_value, nrow=self.__nrow, ncol=self.__ncol, size_hint=self.__nnz, use_zero_storage=self.__use_zero_storage, use_symmetric_storage=False)
 
         # NON OPTIMIZED OPERATION
         # code is same for symmetric or non symmetric cases
@@ -1913,7 +1913,7 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX64_t(MutableSparseMatrix_INT32_t_COMPLE
             INT32_t i, j, k_
             LLSparseMatrix_INT32_t_COMPLEX64_t ll_mat_triu
 
-        ll_mat_triu = LLSparseMatrix_INT32_t_COMPLEX64_t(control_object=unexposed_value, nrow=self.__nrow, ncol=self.__ncol, size_hint=self.__nnz, use_nonzero_storage=self.__use_nonzero_storage, use_symmetric_storage=False)
+        ll_mat_triu = LLSparseMatrix_INT32_t_COMPLEX64_t(control_object=unexposed_value, nrow=self.__nrow, ncol=self.__ncol, size_hint=self.__nnz, use_zero_storage=self.__use_zero_storage, use_symmetric_storage=False)
 
         # NON OPTIMIZED OPERATION
         if self.__use_symmetric_storage:

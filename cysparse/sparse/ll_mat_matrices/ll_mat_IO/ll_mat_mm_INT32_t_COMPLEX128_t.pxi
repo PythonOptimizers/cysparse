@@ -6,7 +6,7 @@ See http://math.nist.gov/MatrixMarket/ .
 """
 
 
-cdef LLSparseMatrix_INT32_t_COMPLEX128_t MakeLLSparseMatrixFromMMFile_INT32_t_COMPLEX128_t(str mm_filename, bint use_nonzero_storage=False, bint test_bounds=True):
+cdef LLSparseMatrix_INT32_t_COMPLEX128_t MakeLLSparseMatrixFromMMFile_INT32_t_COMPLEX128_t(str mm_filename, bint use_zero_storage=False, bint test_bounds=True):
     cdef:
         str line
         list token_list
@@ -101,7 +101,7 @@ cdef LLSparseMatrix_INT32_t_COMPLEX128_t MakeLLSparseMatrixFromMMFile_INT32_t_CO
                                           ncol=ncol,
                                           size_hint=nnz,
                                           use_symmetric_storage=use_symmetric_storage,
-                                          use_nonzero_storage=use_nonzero_storage)
+                                          use_zero_storage=use_zero_storage)
 
         line = f.readline()
         nnz_read = 0
@@ -151,7 +151,7 @@ cdef LLSparseMatrix_INT32_t_COMPLEX128_t MakeLLSparseMatrixFromMMFile_INT32_t_CO
 ########################################################################################################################
 # This version doesn't work yet...
 # TODO: write this!
-cdef LLSparseMatrix_INT32_t_COMPLEX128_t MakeLLSparseMatrixFromMMFile2_INT32_t_COMPLEX128_t(str mm_filename, bint use_nonzero_storage=False, bint test_bounds=True):
+cdef LLSparseMatrix_INT32_t_COMPLEX128_t MakeLLSparseMatrixFromMMFile2_INT32_t_COMPLEX128_t(str mm_filename, bint use_zero_storage=False, bint test_bounds=True):
     cdef:
         str line
         list token_list
@@ -259,7 +259,7 @@ cdef LLSparseMatrix_INT32_t_COMPLEX128_t MakeLLSparseMatrixFromMMFile2_INT32_t_C
                                           ncol=ncol,
                                           size_hint=nnz,
                                           use_symmetric_storage=use_symmetric_storage,
-                                          use_nonzero_storage=use_nonzero_storage)
+                                          use_zero_storage=use_zero_storage)
 
 
 
@@ -329,7 +329,7 @@ cdef LLSparseMatrix_INT32_t_COMPLEX128_t MakeLLSparseMatrixFromMMFile2_INT32_t_C
             v.imag = imag_part
 
 
-            if use_nonzero_storage or v != 0.0:
+            if use_zero_storage or v != 0.0:
                 nnz_real = nnz_real + 1
                 #############################
                 # fill in arrays

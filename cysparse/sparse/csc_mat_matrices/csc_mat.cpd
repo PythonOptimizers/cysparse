@@ -47,5 +47,5 @@ cdef MakeCSCSparseMatrix_@index@_@type@(@index@ nrow,
                                         @index@ * row,
                                         @type@ * val,
                                         bint use_symmetric_storage,
-                                        bint use_nonzero_storage,
+                                        bint use_zero_storage,
                                         bint row_indices_are_sorted=?)

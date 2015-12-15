@@ -219,7 +219,7 @@ def NewLLSparseMatrix(**kwargs):
 
     In all cases, you **can** supply an ``itype`` (index type) and a ``dtype`` (element type). By default (i.e. if you
     don't provide these arguments, ``itype == INT32_T`` and ``dtype == FLOAT64_T``) and specify a *storage format*:
-        - ``use_nonzero_storage``: if ``True``, store explicitely zeros (default: ``False``);
+        - ``use_zero_storage``: if ``True``, store explicitely zeros (default: ``False``);
         - ``use_symmetric_storage``: if ``True``, use symmetric storage, i.e. only the lower triangular part of the matrix is stored (by default: ``False``);
 
     If a matrix or filename is supplied, these arguments **must** coincide with the supplied matrix types. If not, an error is thrown.
@@ -270,7 +270,7 @@ def NewLLSparseMatrix(**kwargs):
      {%- endfor -%}
      ], "dtype is not accepted as type for a matrix element"
 
-    cdef bint use_nonzero_storage = kwargs.get('use_nonzero_storage', False)
+    cdef bint use_zero_storage = kwargs.get('use_zero_storage', False)
     cdef bint use_symmetric_storage = kwargs.get('use_symmetric_storage', False)
     cdef bint test_bounds = kwargs.get('test_bounds', True)
 
@@ -337,7 +337,7 @@ def NewLLSparseMatrix(**kwargs):
                                                                   dtype=dtype,
                                                                   itype=itype,
                                                                   size_hint=size_hint,
-                                                                  use_nonzero_storage=use_nonzero_storage,
+                                                                  use_zero_storage=use_zero_storage,
                                                                   use_symmetric_storage=use_symmetric_storage)
     {% endfor %}
 {% endfor %}
@@ -394,13 +394,13 @@ def NewLLSparseMatrix(**kwargs):
                 elif dtype == @element_type|type2enum@:
         {% endif %}
                     if mm_read_file_experimental:
-                        return MakeLLSparseMatrixFromMMFile2_@index_type@_@element_type@(mm_filename=mm_filename, use_nonzero_storage=use_nonzero_storage, test_bounds=test_bounds)
-                    return MakeLLSparseMatrixFromMMFile_@index_type@_@element_type@(mm_filename=mm_filename, use_nonzero_storage=use_nonzero_storage, test_bounds=test_bounds)
+                        return MakeLLSparseMatrixFromMMFile2_@index_type@_@element_type@(mm_filename=mm_filename, use_zero_storage=use_zero_storage, test_bounds=test_bounds)
+                    return MakeLLSparseMatrixFromMMFile_@index_type@_@element_type@(mm_filename=mm_filename, use_zero_storage=use_zero_storage, test_bounds=test_bounds)
     {% endfor %}
 {% endfor %}
 
 
-def NewLLSparseMatrixFromMMFile(filename, use_nonzero_storage=False, test_bounds=True):
+def NewLLSparseMatrixFromMMFile(filename, use_zero_storage=False, test_bounds=True):
     """
     Factory method to create an ``LLSparseMatrix`` matrix from a ``Matrix Market`` file.
 
@@ -456,7 +456,7 @@ def NewLLSparseMatrixFromMMFile(filename, use_nonzero_storage=False, test_bounds
         {% else %}
         elif dtype == @element_type|type2enum@:
         {% endif %}
-            return MakeLLSparseMatrixFromMMFile_@index_type@_@element_type@(mm_filename=filename, use_nonzero_storage=use_nonzero_storage, test_bounds=test_bounds)
+            return MakeLLSparseMatrixFromMMFile_@index_type@_@element_type@(mm_filename=filename, use_zero_storage=use_zero_storage, test_bounds=test_bounds)
     {% endfor %}
     {% else %}
     elif itype == @index_type|type2enum@:
@@ -466,7 +466,7 @@ def NewLLSparseMatrixFromMMFile(filename, use_nonzero_storage=False, test_bounds
         {% else %}
         elif dtype == @element_type|type2enum@:
         {% endif %}
-            return MakeLLSparseMatrixFromMMFile_@index_type@_@element_type@(mm_filename=filename, use_nonzero_storage=use_nonzero_storage, test_bounds=test_bounds)
+            return MakeLLSparseMatrixFromMMFile_@index_type@_@element_type@(mm_filename=filename, use_zero_storage=use_zero_storage, test_bounds=test_bounds)
     {% endfor %}
     {% endif %}
 {% endfor %}
