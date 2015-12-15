@@ -294,12 +294,12 @@ cdef LLSparseMatrix_INT32_t_COMPLEX128_t multiply_csr_mat_by_csc_mat_INT32_t_COM
     cdef INT32_t C_nrow = A_nrow
     cdef INT32_t C_ncol = B_ncol
 
-    cdef bint store_zeros = A.store_zeros and B.store_zeros
+    cdef bint use_nonzero_storage = A.use_nonzero_storage and B.use_nonzero_storage
     # TODO: what strategy to implement?
     cdef INT32_t size_hint = A.nnz
 
     # TODO: maybe use MakeLLSparseMatrix and fix circular dependencies...
-    C = LLSparseMatrix_INT32_t_COMPLEX128_t(control_object=unexposed_value, nrow=C_nrow, ncol=C_ncol, size_hint=size_hint, store_zeros=store_zeros)
+    C = LLSparseMatrix_INT32_t_COMPLEX128_t(control_object=unexposed_value, nrow=C_nrow, ncol=C_ncol, size_hint=size_hint, use_nonzero_storage=use_nonzero_storage)
 
     # CASES
     if not A.__use_symmetric_storage and not B.__use_symmetric_storage:
@@ -314,8 +314,8 @@ cdef LLSparseMatrix_INT32_t_COMPLEX128_t multiply_csr_mat_by_csc_mat_INT32_t_COM
         COMPLEX128_t sum
 
     # don't keep zeros, no matter what
-    cdef bint old_store_zeros = store_zeros
-    C.__store_zeros = 0
+    cdef bint old_use_nonzero_storage = use_nonzero_storage
+    C.__use_nonzero_storage = 0
 
     for i from 0 <= i < C_nrow:
         for j from 0 <= j < C_ncol:
@@ -328,6 +328,6 @@ cdef LLSparseMatrix_INT32_t_COMPLEX128_t multiply_csr_mat_by_csc_mat_INT32_t_COM
 
             C.put(i, j, sum)
 
-    C.__store_zeros = old_store_zeros
+    C.__use_nonzero_storage = old_use_nonzero_storage
 
     return C

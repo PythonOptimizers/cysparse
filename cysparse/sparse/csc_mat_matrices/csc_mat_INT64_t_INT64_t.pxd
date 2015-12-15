@@ -44,5 +44,5 @@ cdef MakeCSCSparseMatrix_INT64_t_INT64_t(INT64_t nrow,
                                         INT64_t * row,
                                         INT64_t * val,
                                         bint use_symmetric_storage,
-                                        bint store_zeros,
+                                        bint use_nonzero_storage,
                                         bint row_indices_are_sorted=?)

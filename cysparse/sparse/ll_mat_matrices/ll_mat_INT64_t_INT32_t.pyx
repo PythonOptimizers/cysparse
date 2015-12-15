@@ -296,7 +296,7 @@ cdef class LLSparseMatrix_INT64_t_INT32_t(MutableSparseMatrix_INT64_t_INT32_t):
         cdef LLSparseMatrix_INT64_t_INT32_t self_copy
 
         # we copy manually the C-arrays
-        self_copy = LLSparseMatrix_INT64_t_INT32_t(control_object=unexposed_value, no_memory=True, nrow=self.__nrow, ncol=self.__ncol, size_hint=self.size_hint, store_zeros=self.__store_zeros, use_symmetric_storage=self.__use_symmetric_storage)
+        self_copy = LLSparseMatrix_INT64_t_INT32_t(control_object=unexposed_value, no_memory=True, nrow=self.__nrow, ncol=self.__ncol, size_hint=self.size_hint, use_nonzero_storage=self.__use_nonzero_storage, use_symmetric_storage=self.__use_symmetric_storage)
 
         # copy C-arrays
         cdef:
@@ -555,7 +555,7 @@ cdef class LLSparseMatrix_INT64_t_INT32_t(MutableSparseMatrix_INT64_t_INT32_t):
         if self.__use_symmetric_storage:
             return self.copy()
         else:
-            transpose = LLSparseMatrix_INT64_t_INT32_t(control_object=unexposed_value, nrow=self.__ncol, ncol=self.__nrow, size_hint=self.__nnz, store_zeros=self.__store_zeros, use_symmetric_storage=self.__use_symmetric_storage)
+            transpose = LLSparseMatrix_INT64_t_INT32_t(control_object=unexposed_value, nrow=self.__ncol, ncol=self.__nrow, size_hint=self.__nnz, use_nonzero_storage=self.__use_nonzero_storage, use_symmetric_storage=self.__use_symmetric_storage)
 
             for i from 0 <= i < self.__nrow:
                 k = self.root[i]
@@ -653,7 +653,7 @@ cdef class LLSparseMatrix_INT64_t_INT32_t(MutableSparseMatrix_INT64_t_INT32_t):
                                                      ind=ind, col=col,
                                                      val=val,
                                                      use_symmetric_storage=self.__use_symmetric_storage,
-                                                     store_zeros=self.__store_zeros,
+                                                     use_nonzero_storage=self.__use_nonzero_storage,
                                                      col_indices_are_sorted=True)
 
         return csr_mat
@@ -735,7 +735,7 @@ cdef class LLSparseMatrix_INT64_t_INT32_t(MutableSparseMatrix_INT64_t_INT32_t):
                                                      row=row,
                                                      val=val,
                                                      use_symmetric_storage=self.__use_symmetric_storage,
-                                                     store_zeros=self.__store_zeros,
+                                                     use_nonzero_storage=self.__use_nonzero_storage,
                                                      row_indices_are_sorted=True)
 
         return csc_mat
@@ -826,7 +826,7 @@ cdef class LLSparseMatrix_INT64_t_INT32_t(MutableSparseMatrix_INT64_t_INT32_t):
             ``IndexError`` if dimensions don't match.
 
         Notes:
-            This assignment is done as if ``A[i, j] = val`` was done explicitely. In particular if ``store_zeros``
+            This assignment is done as if ``A[i, j] = val`` was done explicitely. In particular if ``use_nonzero_storage``
             is ``True`` and ``obj`` contains zeros, they will be explicitely added. Also, you can mix elements of
             different (compatible) types.
 
@@ -1025,7 +1025,7 @@ cdef class LLSparseMatrix_INT64_t_INT32_t(MutableSparseMatrix_INT64_t_INT32_t):
         Set :math:`A[i, j] = \textrm{value}` directly.
 
         Note:
-            Store zero elements **only** if ``store_zeros`` is ``True``.
+            Store zero elements **only** if ``use_nonzero_storage`` is ``True``.
 
         Warning:
             No out of bound check.
@@ -1052,7 +1052,7 @@ cdef class LLSparseMatrix_INT64_t_INT32_t(MutableSparseMatrix_INT64_t_INT32_t):
             k = self.link[k]
 
         # Store value
-        if self.__store_zeros or value != 0.0:
+        if self.__use_nonzero_storage or value != 0.0:
             if col == j:
                 # element already exist
                 self.val[k] = value
@@ -1813,7 +1813,7 @@ cdef class LLSparseMatrix_INT64_t_INT32_t(MutableSparseMatrix_INT64_t_INT32_t):
             INT64_t i, j, k_
             LLSparseMatrix_INT64_t_INT32_t ll_mat_tril
 
-        ll_mat_tril = LLSparseMatrix_INT64_t_INT32_t(control_object=unexposed_value, nrow=self.__nrow, ncol=self.__ncol, size_hint=self.__nnz, store_zeros=self.__store_zeros, use_symmetric_storage=False)
+        ll_mat_tril = LLSparseMatrix_INT64_t_INT32_t(control_object=unexposed_value, nrow=self.__nrow, ncol=self.__ncol, size_hint=self.__nnz, use_nonzero_storage=self.__use_nonzero_storage, use_symmetric_storage=False)
 
         # NON OPTIMIZED OPERATION
         # code is same for symmetric or non symmetric cases
@@ -1851,7 +1851,7 @@ cdef class LLSparseMatrix_INT64_t_INT32_t(MutableSparseMatrix_INT64_t_INT32_t):
             INT64_t i, j, k_
             LLSparseMatrix_INT64_t_INT32_t ll_mat_triu
 
-        ll_mat_triu = LLSparseMatrix_INT64_t_INT32_t(control_object=unexposed_value, nrow=self.__nrow, ncol=self.__ncol, size_hint=self.__nnz, store_zeros=self.__store_zeros, use_symmetric_storage=False)
+        ll_mat_triu = LLSparseMatrix_INT64_t_INT32_t(control_object=unexposed_value, nrow=self.__nrow, ncol=self.__ncol, size_hint=self.__nnz, use_nonzero_storage=self.__use_nonzero_storage, use_symmetric_storage=False)
 
         # NON OPTIMIZED OPERATION
         if self.__use_symmetric_storage:

@@ -40,7 +40,7 @@ cdef MakeCSRSparseMatrix_INT64_t_INT32_t(INT64_t nrow,
                                         INT64_t * col,
                                         INT32_t * val,
                                         bint use_symmetric_storage,
-                                        bint store_zeros,
+                                        bint use_nonzero_storage,
                                         bint col_indices_are_sorted=?)
 
 cdef LLSparseMatrix_INT64_t_INT32_t multiply_csr_mat_by_csc_mat_INT64_t_INT32_t(CSRSparseMatrix_INT64_t_INT32_t A, CSCSparseMatrix_INT64_t_INT32_t B)

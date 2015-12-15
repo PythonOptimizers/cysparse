@@ -33,14 +33,14 @@ Each matrix (matrix-like) object has an internal index *type* and stores *typed*
  
 See ... about the available types.
 
-``is_symmetric``
---------------------
+``use_symmetric_storage``
+----------------------------
 
-Symmetric matrices can be stored by only storing the **lower** triangular part and the diagonal of a matrix. To create a symmetric matrix, add the arguement ``is_symmetric=True`` to the call of one of the factory methods.
-The attribute ``is_symmetric`` returns if this storage method is used or not. Thus, if ``is_symmetric`` is ``True``, you know that you deal with a symmetric matrix **and** that roughly only half of its elements are stored. If 
-``is_symmetric`` is ``False``, it simply means that this storage scheme is not used. The matrix itself migth be symmetric or not.
+Symmetric matrices can be stored by only storing the **lower** triangular part and the diagonal of a matrix. To create a symmetric matrix, add the arguement ``use_symmetric_storage=True`` to the call of one of the factory methods.
+The attribute ``use_symmetric_storage`` returns if this storage method is used or not. Thus, if ``use_symmetric_storage`` is ``True``, you know that you deal with a symmetric matrix **and** that roughly only half of its elements are stored. If 
+``use_symmetric_storage`` is ``False``, it simply means that this storage scheme is not used. The matrix itself migth be symmetric or not.
 
-..  warning:: The attribute ``is_symmetric`` is only about the ``storage scheme`` used and **not** necessarily about the symmetry of the matrix. 
+
 
 
 ``is_mutable``
@@ -99,7 +99,7 @@ By default, ``store_zeros`` is set to ``False``.
 ---------
 
 The ``nnz`` attribute returns the number of "non zeros" stored in the matrix. Notice that ``0`` could be stored if ``store_zeros`` is set to ``True`` and if so, it will be counted in the number of "non zero" elements.
-Whenever the symmetric storage scheme is used (``is_symmetric`` is ``True``), ``nnz`` only returns the number of "non zero" elements stored in the lower triangular part and the diagonal of the matrix, i.e. ``nnz`` 
+Whenever the symmetric storage scheme is used (``use_symmetric_storage`` is ``True``), ``nnz`` only returns the number of "non zero" elements stored in the lower triangular part and the diagonal of the matrix, i.e. ``nnz`` 
 returns exactly how many elements are stored internally.
 
 ..  warning:: ``nnz`` returns the number of elements stored internally.
