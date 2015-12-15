@@ -109,7 +109,7 @@ cdef class CSCSparseMatrix_INT32_t_COMPLEX128_t(ImmutableSparseMatrix_INT32_t_CO
 
         nnz = self.nnz
 
-        self_copy = CSCSparseMatrix_INT32_t_COMPLEX128_t(control_object=unexposed_value, nrow=self.__nrow, ncol=self.__ncol, store_zeros=self.__store_zeros, is_symmetric=self.__is_symmetric)
+        self_copy = CSCSparseMatrix_INT32_t_COMPLEX128_t(control_object=unexposed_value, nrow=self.__nrow, ncol=self.__ncol, store_zeros=self.__store_zeros, use_symmetric_storage=self.__use_symmetric_storage)
 
         val = <COMPLEX128_t *> PyMem_Malloc(nnz * sizeof(COMPLEX128_t))
         if not val:
@@ -328,7 +328,7 @@ cdef class CSCSparseMatrix_INT32_t_COMPLEX128_t(ImmutableSparseMatrix_INT32_t_CO
             INT32_t real_j
 
         # code is duplicated for optimization
-        if self.__is_symmetric:
+        if self.__use_symmetric_storage:
             if i < j:
                 real_i = j
                 real_j = i
@@ -561,7 +561,7 @@ cdef class CSCSparseMatrix_INT32_t_COMPLEX128_t(ImmutableSparseMatrix_INT32_t_CO
                                                   ind,
                                                   row,
                                                   val,
-                                                  is_symmetric=False,
+                                                  use_symmetric_storage=False,
                                                   store_zeros=self.__store_zeros,
                                                   row_indices_are_sorted=True)
 
@@ -614,7 +614,7 @@ cdef class CSCSparseMatrix_INT32_t_COMPLEX128_t(ImmutableSparseMatrix_INT32_t_CO
         cdef INT32_t * csr_col
         cdef COMPLEX128_t  * csr_val
 
-        if self.__is_symmetric:
+        if self.__use_symmetric_storage:
             # Special (and annoying) case: we first create a CSR and then translate it to CSC
             csr_ind = <INT32_t *> PyMem_Malloc((self.__nrow + 1) * sizeof(INT32_t))
             if not csr_ind:
@@ -695,7 +695,7 @@ cdef class CSCSparseMatrix_INT32_t_COMPLEX128_t(ImmutableSparseMatrix_INT32_t_CO
                                                   ind,
                                                   row,
                                                   val,
-                                                  is_symmetric=False,
+                                                  use_symmetric_storage=False,
                                                   store_zeros=self.__store_zeros,
                                                   row_indices_are_sorted=True)
 
@@ -730,7 +730,7 @@ cdef class CSCSparseMatrix_INT32_t_COMPLEX128_t(ImmutableSparseMatrix_INT32_t_CO
                                                   ind,
                                                   col,
                                                   val,
-                                                  is_symmetric=self.is_symmetric,
+                                                  use_symmetric_storage=self.use_symmetric_storage,
                                                   store_zeros=self.store_zeros,
                                                   col_indices_are_sorted=True)
 
@@ -750,7 +750,7 @@ cdef class CSCSparseMatrix_INT32_t_COMPLEX128_t(ImmutableSparseMatrix_INT32_t_CO
         np_ndarray = np.zeros((self.__nrow, self.__ncol), dtype=np.complex128, order='C')
         np_memview = np_ndarray
 
-        if not self.__is_symmetric:
+        if not self.__use_symmetric_storage:
             for j from 0 <= j < self.__ncol:
                 for k from self.ind[j] <= k < self.ind[j+1]:
                     np_memview[self.row[k], j] = self.val[k]
@@ -885,7 +885,7 @@ cdef class CSCSparseMatrix_INT32_t_COMPLEX128_t(ImmutableSparseMatrix_INT32_t_CO
                 # TODO: rewrite this completely
                 for k from self.ind[j] <= k < self.ind[j+1]:
                     mat[(self.row[k]*self.ncol)+j] = self.val[k]
-                    if self.__is_symmetric:
+                    if self.__use_symmetric_storage:
                         mat[(j*self.ncol)+ self.row[k]] = self.val[k]
 
             for i from 0 <= i < self.nrow:
@@ -980,7 +980,7 @@ cdef MakeCSCSparseMatrix_INT32_t_COMPLEX128_t(INT32_t nrow,
                                         INT32_t * ind,
                                         INT32_t * row,
                                         COMPLEX128_t * val,
-                                        bint is_symmetric, bint store_zeros,
+                                        bint use_symmetric_storage, bint store_zeros,
                                         bint row_indices_are_sorted=False):
     """
     Construct a CSCSparseMatrix object.
@@ -998,7 +998,7 @@ cdef MakeCSCSparseMatrix_INT32_t_COMPLEX128_t(INT32_t nrow,
                                              nrow=nrow,
                                              ncol=ncol,
                                              nnz=nnz,
-                                             is_symmetric=is_symmetric,
+                                             use_symmetric_storage=use_symmetric_storage,
                                              store_zeros=store_zeros)
 
     csc_mat.val = val

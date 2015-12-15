@@ -663,7 +663,7 @@ struct __pyx_opt_args_8cysparse_6sparse_5s_mat_MakeMatrixString {
  */
 struct __pyx_obj_8cysparse_6sparse_5s_mat_SparseMatrix {
   PyObject_HEAD
-  int __pyx___is_symmetric;
+  int __pyx___use_symmetric_storage;
   int __pyx___store_zeros;
   int __pyx___is_mutable;
   PyObject *__pyx___type_name;
@@ -1489,7 +1489,7 @@ static int __pyx_pf_8cysparse_6sparse_14s_mat_matrices_26s_mat_INT64_t_COMPLEX12
  *         assert self.__nrow != -1, "Number of rows must be given"
  *         assert self.__ncol != -1, "Number of columns must be given"             # <<<<<<<<<<<<<<
  * 
- *         if self.__is_symmetric:
+ *         if self.__use_symmetric_storage:
  */
   #ifndef CYTHON_WITHOUT_ASSERTIONS
   if (unlikely(!Py_OptimizeFlag)) {
@@ -1503,16 +1503,16 @@ static int __pyx_pf_8cysparse_6sparse_14s_mat_matrices_26s_mat_INT64_t_COMPLEX12
   /* "cysparse/sparse/s_mat_matrices/s_mat_INT64_t_COMPLEX128_t.pyx":67
  *         assert self.__ncol != -1, "Number of columns must be given"
  * 
- *         if self.__is_symmetric:             # <<<<<<<<<<<<<<
+ *         if self.__use_symmetric_storage:             # <<<<<<<<<<<<<<
  *             assert self.__nrow == self.__ncol, "A symmetric matrix must have equal number of rows and columns"
  * 
  */
-  __pyx_t_3 = (__pyx_v_self->__pyx_base.__pyx___is_symmetric != 0);
+  __pyx_t_3 = (__pyx_v_self->__pyx_base.__pyx___use_symmetric_storage != 0);
   if (__pyx_t_3) {
 
     /* "cysparse/sparse/s_mat_matrices/s_mat_INT64_t_COMPLEX128_t.pyx":68
  * 
- *         if self.__is_symmetric:
+ *         if self.__use_symmetric_storage:
  *             assert self.__nrow == self.__ncol, "A symmetric matrix must have equal number of rows and columns"             # <<<<<<<<<<<<<<
  * 
  *         self.__nnz = kwargs.get('nnz', 0)
@@ -1529,7 +1529,7 @@ static int __pyx_pf_8cysparse_6sparse_14s_mat_matrices_26s_mat_INT64_t_COMPLEX12
     /* "cysparse/sparse/s_mat_matrices/s_mat_INT64_t_COMPLEX128_t.pyx":67
  *         assert self.__ncol != -1, "Number of columns must be given"
  * 
- *         if self.__is_symmetric:             # <<<<<<<<<<<<<<
+ *         if self.__use_symmetric_storage:             # <<<<<<<<<<<<<<
  *             assert self.__nrow == self.__ncol, "A symmetric matrix must have equal number of rows and columns"
  * 
  */
@@ -3221,7 +3221,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_14s_mat_matrices_26s_mat_INT64_t_COM
  * 
  *     def storage_scheme_string(self):             # <<<<<<<<<<<<<<
  *         symmetric_string = None
- *         if self.__is_symmetric:
+ *         if self.__use_symmetric_storage:
  */
 
 /* Python wrapper */
@@ -3255,7 +3255,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_14s_mat_matrices_26s_mat_INT64_t_COM
  * 
  *     def storage_scheme_string(self):
  *         symmetric_string = None             # <<<<<<<<<<<<<<
- *         if self.__is_symmetric:
+ *         if self.__use_symmetric_storage:
  *             symmetric_string = 'Symmetric'
  */
   __Pyx_INCREF(Py_None);
@@ -3264,16 +3264,16 @@ static PyObject *__pyx_pf_8cysparse_6sparse_14s_mat_matrices_26s_mat_INT64_t_COM
   /* "cysparse/sparse/s_mat_matrices/s_mat_INT64_t_COMPLEX128_t.pyx":277
  *     def storage_scheme_string(self):
  *         symmetric_string = None
- *         if self.__is_symmetric:             # <<<<<<<<<<<<<<
+ *         if self.__use_symmetric_storage:             # <<<<<<<<<<<<<<
  *             symmetric_string = 'Symmetric'
  *         else:
  */
-  __pyx_t_1 = (__pyx_v_self->__pyx_base.__pyx___is_symmetric != 0);
+  __pyx_t_1 = (__pyx_v_self->__pyx_base.__pyx___use_symmetric_storage != 0);
   if (__pyx_t_1) {
 
     /* "cysparse/sparse/s_mat_matrices/s_mat_INT64_t_COMPLEX128_t.pyx":278
  *         symmetric_string = None
- *         if self.__is_symmetric:
+ *         if self.__use_symmetric_storage:
  *             symmetric_string = 'Symmetric'             # <<<<<<<<<<<<<<
  *         else:
  *             symmetric_string = 'General'
@@ -3284,7 +3284,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_14s_mat_matrices_26s_mat_INT64_t_COM
     /* "cysparse/sparse/s_mat_matrices/s_mat_INT64_t_COMPLEX128_t.pyx":277
  *     def storage_scheme_string(self):
  *         symmetric_string = None
- *         if self.__is_symmetric:             # <<<<<<<<<<<<<<
+ *         if self.__use_symmetric_storage:             # <<<<<<<<<<<<<<
  *             symmetric_string = 'Symmetric'
  *         else:
  */
@@ -3395,7 +3395,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_14s_mat_matrices_26s_mat_INT64_t_COM
  * 
  *     def storage_scheme_string(self):             # <<<<<<<<<<<<<<
  *         symmetric_string = None
- *         if self.__is_symmetric:
+ *         if self.__use_symmetric_storage:
  */
 
   /* function exit code */

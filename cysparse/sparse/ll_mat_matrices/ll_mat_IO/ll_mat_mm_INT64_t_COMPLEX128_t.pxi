@@ -20,7 +20,7 @@ cdef LLSparseMatrix_INT64_t_COMPLEX128_t MakeLLSparseMatrixFromMMFile_INT64_t_CO
 
     cdef:
         bint sparse
-        bint is_symmetric
+        bint use_symmetric_storage
         bint is_complex
         list sparse_dense_list = [MM_ARRAY_STR, MM_COORDINATE_STR]
         list data_type_list = [MM_COMPLEX_STR, MM_REAL_STR, MM_INT_STR, MM_PATTERN_STR]
@@ -77,7 +77,7 @@ cdef LLSparseMatrix_INT64_t_COMPLEX128_t MakeLLSparseMatrixFromMMFile_INT64_t_CO
         if token not in storage_scheme_list:
             raise IOError('Matrix format not recognized as Matrix Market format: fourth token in the Matrix Market banner is not in "%s"' % storage_scheme_list)
         storage_scheme = storage_scheme_dict[token]
-        is_symmetric = storage_scheme == MM_SYMMETRIC
+        use_symmetric_storage = storage_scheme == MM_SYMMETRIC
 
         # SKIP COMMENTS
         line = f.readline()
@@ -100,7 +100,7 @@ cdef LLSparseMatrix_INT64_t_COMPLEX128_t MakeLLSparseMatrixFromMMFile_INT64_t_CO
                                           nrow=nrow,
                                           ncol=ncol,
                                           size_hint=nnz,
-                                          is_symmetric=is_symmetric,
+                                          use_symmetric_storage=use_symmetric_storage,
                                           store_zeros=store_zeros)
 
         line = f.readline()
@@ -167,7 +167,7 @@ cdef LLSparseMatrix_INT64_t_COMPLEX128_t MakeLLSparseMatrixFromMMFile2_INT64_t_C
 
     cdef:
         bint sparse
-        bint is_symmetric
+        bint use_symmetric_storage
         bint is_complex
         list sparse_dense_list = [MM_ARRAY_STR, MM_COORDINATE_STR]
         list data_type_list = [MM_COMPLEX_STR, MM_REAL_STR, MM_INT_STR, MM_PATTERN_STR]
@@ -234,7 +234,7 @@ cdef LLSparseMatrix_INT64_t_COMPLEX128_t MakeLLSparseMatrixFromMMFile2_INT64_t_C
         if token not in storage_scheme_list:
             raise IOError('Matrix format not recognized as Matrix Market format: fourth token in the Matrix Market banner is not in "%s"' % storage_scheme_list)
         storage_scheme = storage_scheme_dict[token]
-        is_symmetric = storage_scheme == MM_SYMMETRIC
+        use_symmetric_storage = storage_scheme == MM_SYMMETRIC
 
         # SKIP COMMENTS
         line = f.readline()
@@ -258,7 +258,7 @@ cdef LLSparseMatrix_INT64_t_COMPLEX128_t MakeLLSparseMatrixFromMMFile2_INT64_t_C
                                           nrow=nrow,
                                           ncol=ncol,
                                           size_hint=nnz,
-                                          is_symmetric=is_symmetric,
+                                          use_symmetric_storage=use_symmetric_storage,
                                           store_zeros=store_zeros)
 
 

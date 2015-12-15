@@ -36,7 +36,7 @@ cdef class SparseMatrix:
     """
     cdef:
         # attributes that have a corresponding Python property start with '__'
-        bint __is_symmetric           # True if symmetric matrix
+        bint __use_symmetric_storage           # True if symmetric matrix
         bint __store_zeros            # True if 0.0 is to be stored explicitly
 
         bint __is_mutable             # True if mutable

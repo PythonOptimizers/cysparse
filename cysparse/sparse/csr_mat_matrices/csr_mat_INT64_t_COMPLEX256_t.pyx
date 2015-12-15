@@ -116,7 +116,7 @@ cdef class CSRSparseMatrix_INT64_t_COMPLEX256_t(ImmutableSparseMatrix_INT64_t_CO
 
         nnz = self.nnz
 
-        self_copy = CSRSparseMatrix_INT64_t_COMPLEX256_t(control_object=unexposed_value, nrow=self.__nrow, ncol=self.__ncol, store_zeros=self.__store_zeros, is_symmetric=self.__is_symmetric)
+        self_copy = CSRSparseMatrix_INT64_t_COMPLEX256_t(control_object=unexposed_value, nrow=self.__nrow, ncol=self.__ncol, store_zeros=self.__store_zeros, use_symmetric_storage=self.__use_symmetric_storage)
 
         val = <COMPLEX256_t *> PyMem_Malloc(nnz * sizeof(COMPLEX256_t))
         if not val:
@@ -260,7 +260,7 @@ cdef class CSRSparseMatrix_INT64_t_COMPLEX256_t(ImmutableSparseMatrix_INT64_t_CO
 
         # TODO: TEST!!!
         # code duplicated for optimization
-        if self.__is_symmetric:
+        if self.__use_symmetric_storage:
             if i < j:
                 real_i = j
                 real_j = i
@@ -496,7 +496,7 @@ cdef class CSRSparseMatrix_INT64_t_COMPLEX256_t(ImmutableSparseMatrix_INT64_t_CO
                                                   ind,
                                                   col,
                                                   val,
-                                                  is_symmetric=False,
+                                                  use_symmetric_storage=False,
                                                   store_zeros=self.__store_zeros,
                                                   col_indices_are_sorted=True)
 
@@ -549,7 +549,7 @@ cdef class CSRSparseMatrix_INT64_t_COMPLEX256_t(ImmutableSparseMatrix_INT64_t_CO
         cdef INT64_t * csc_row
         cdef COMPLEX256_t  * csc_val
 
-        if self.__is_symmetric:
+        if self.__use_symmetric_storage:
             # Special (and annoying) case: we first create a CSC and then translate it to CSR
             csc_ind = <INT64_t *> PyMem_Malloc((self.__ncol + 1) * sizeof(INT64_t))
             if not csc_ind:
@@ -630,7 +630,7 @@ cdef class CSRSparseMatrix_INT64_t_COMPLEX256_t(ImmutableSparseMatrix_INT64_t_CO
                                                   ind,
                                                   col,
                                                   val,
-                                                  is_symmetric=False,
+                                                  use_symmetric_storage=False,
                                                   store_zeros=self.__store_zeros,
                                                   col_indices_are_sorted=True)
 
@@ -666,7 +666,7 @@ cdef class CSRSparseMatrix_INT64_t_COMPLEX256_t(ImmutableSparseMatrix_INT64_t_CO
                                                   ind,
                                                   row,
                                                   val,
-                                                  is_symmetric=self.is_symmetric,
+                                                  use_symmetric_storage=self.use_symmetric_storage,
                                                   store_zeros=self.store_zeros,
                                                   row_indices_are_sorted=True)
 
@@ -686,7 +686,7 @@ cdef class CSRSparseMatrix_INT64_t_COMPLEX256_t(ImmutableSparseMatrix_INT64_t_CO
         np_ndarray = np.zeros((self.__nrow, self.__ncol), dtype=np.complex256, order='C')
         np_memview = np_ndarray
 
-        if not self.__is_symmetric:
+        if not self.__use_symmetric_storage:
             for i from 0 <= i < self.__nrow:
                 for k from self.ind[i] <= k < self.ind[i+1]:
                     np_memview[i, self.col[k]] = self.val[k]
@@ -927,7 +927,7 @@ cdef MakeCSRSparseMatrix_INT64_t_COMPLEX256_t(INT64_t nrow,
                                         INT64_t * ind,
                                         INT64_t * col,
                                         COMPLEX256_t * val,
-                                        bint is_symmetric,
+                                        bint use_symmetric_storage,
                                         bint store_zeros,
                                         bint col_indices_are_sorted=False):
     """
@@ -940,13 +940,13 @@ cdef MakeCSRSparseMatrix_INT64_t_COMPLEX256_t(INT64_t nrow,
         ind (INT64_t *): C-array with column indices pointers.
         col  (INT64_t *): C-array with column indices.
         val  (COMPLEX256_t *): C-array with values.
-        is_symmetric (boolean): Is matrix symmetrix or not?
+        use_symmetric_storage (boolean): Is matrix symmetrix or not?
         store_zeros (boolean): Do we store zeros or not?
         col_indices_are_sorted (boolean): Are the column indices sorted or not?
     """
     cdef CSRSparseMatrix_INT64_t_COMPLEX256_t csr_mat
 
-    csr_mat = CSRSparseMatrix_INT64_t_COMPLEX256_t(control_object=unexposed_value, nrow=nrow, ncol=ncol, nnz=nnz, is_symmetric=is_symmetric, store_zeros=store_zeros)
+    csr_mat = CSRSparseMatrix_INT64_t_COMPLEX256_t(control_object=unexposed_value, nrow=nrow, ncol=ncol, nnz=nnz, use_symmetric_storage=use_symmetric_storage, store_zeros=store_zeros)
 
     csr_mat.val = val
     csr_mat.ind = ind

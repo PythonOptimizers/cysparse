@@ -43,6 +43,6 @@ cdef MakeCSCSparseMatrix_INT32_t_INT32_t(INT32_t nrow,
                                         INT32_t * ind,
                                         INT32_t * row,
                                         INT32_t * val,
-                                        bint is_symmetric,
+                                        bint use_symmetric_storage,
                                         bint store_zeros,
                                         bint row_indices_are_sorted=?)

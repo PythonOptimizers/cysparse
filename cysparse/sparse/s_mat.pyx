@@ -89,7 +89,7 @@ cdef class SparseMatrix:
         self.__type = "Not defined"
         self.__index_and_type = "[not defined, not defined]"
 
-        self.__is_symmetric = kwargs.get('is_symmetric', False)
+        self.__use_symmetric_storage = kwargs.get('use_symmetric_storage', False)
         self.__store_zeros = kwargs.get('store_zeros', False)
         self.__is_mutable = False
 
@@ -107,8 +107,8 @@ cdef class SparseMatrix:
         return self.cp_type.itype
 
     @property
-    def is_symmetric(self):
-        return self.__is_symmetric
+    def use_symmetric_storage(self):
+        return self.__use_symmetric_storage
 
     @property
     def is_mutable(self):

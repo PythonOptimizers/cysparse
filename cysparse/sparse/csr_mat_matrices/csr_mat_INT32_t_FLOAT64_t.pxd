@@ -39,7 +39,7 @@ cdef MakeCSRSparseMatrix_INT32_t_FLOAT64_t(INT32_t nrow,
                                         INT32_t * ind,
                                         INT32_t * col,
                                         FLOAT64_t * val,
-                                        bint is_symmetric,
+                                        bint use_symmetric_storage,
                                         bint store_zeros,
                                         bint col_indices_are_sorted=?)
 

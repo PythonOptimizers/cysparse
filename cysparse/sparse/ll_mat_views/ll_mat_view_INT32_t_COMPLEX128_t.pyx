@@ -84,8 +84,8 @@ cdef class LLSparseMatrixView_INT32_t_COMPLEX128_t:
 
     
     @property
-    def is_symmetric(self):
-        return self.A.__is_symmetric
+    def use_symmetric_storage(self):
+        return self.A.__use_symmetric_storage
 
     
     @property
@@ -234,7 +234,7 @@ cdef class LLSparseMatrixView_INT32_t_COMPLEX128_t:
                                                                                   ncol=self.__ncol,
                                                                                   size_hint=size_hint,
                                                                                   store_zeros=False,
-                                                                                  is_symmetric=False)
+                                                                                  use_symmetric_storage=False)
 
         cdef:
             INT32_t i, j

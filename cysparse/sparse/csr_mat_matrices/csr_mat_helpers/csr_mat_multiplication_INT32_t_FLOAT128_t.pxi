@@ -63,13 +63,13 @@ cdef cnp.ndarray[cnp.npy_float128, ndim=1, mode='c'] multiply_csr_mat_with_numpy
 
     # test if b vector is C-contiguous or not
     if cnp.PyArray_ISCONTIGUOUS(b):
-        if A.__is_symmetric:
+        if A.__use_symmetric_storage:
             pass
             multiply_sym_csr_mat_with_numpy_vector_kernel_INT32_t_FLOAT128_t(A_nrow, b_data, c_data, A.val, A.col, A.ind)
         else:
             multiply_csr_mat_with_numpy_vector_kernel_INT32_t_FLOAT128_t(A_nrow, b_data, c_data, A.val, A.col, A.ind)
     else:
-        if A.__is_symmetric:
+        if A.__use_symmetric_storage:
             multiply_sym_csr_mat_with_strided_numpy_vector_kernel_INT32_t_FLOAT128_t(A.nrow,
                                                                  b_data, b.strides[0] / sd,
                                                                  c_data, c.strides[0] / sd,
@@ -125,13 +125,13 @@ cdef cnp.ndarray[cnp.npy_float128, ndim=1, mode='c'] multiply_transposed_csr_mat
 
     # test if b vector is C-contiguous or not
     if cnp.PyArray_ISCONTIGUOUS(b):
-        if A.__is_symmetric:
+        if A.__use_symmetric_storage:
             multiply_sym_csr_mat_with_numpy_vector_kernel_INT32_t_FLOAT128_t(A_nrow, b_data, c_data, A.val, A.col, A.ind)
         else:
             multiply_tranposed_csr_mat_with_numpy_vector_kernel_INT32_t_FLOAT128_t(A_nrow, A_ncol, b_data, c_data,
          A.val, A.col, A.ind)
     else:
-        if A.__is_symmetric:
+        if A.__use_symmetric_storage:
             multiply_sym_csr_mat_with_strided_numpy_vector_kernel_INT32_t_FLOAT128_t(A.nrow,
                                                                  b_data, b.strides[0] / sd,
                                                                  c_data, c.strides[0] / sd,
@@ -176,7 +176,7 @@ cdef LLSparseMatrix_INT32_t_FLOAT128_t multiply_csr_mat_by_csc_mat_INT32_t_FLOAT
     C = LLSparseMatrix_INT32_t_FLOAT128_t(control_object=unexposed_value, nrow=C_nrow, ncol=C_ncol, size_hint=size_hint, store_zeros=store_zeros)
 
     # CASES
-    if not A.__is_symmetric and not B.__is_symmetric:
+    if not A.__use_symmetric_storage and not B.__use_symmetric_storage:
         pass
     else:
         raise NotImplemented("Multiplication with symmetric matrices is not implemented yet")

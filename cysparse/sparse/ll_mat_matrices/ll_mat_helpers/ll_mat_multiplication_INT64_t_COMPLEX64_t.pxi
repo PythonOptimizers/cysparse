@@ -3,13 +3,13 @@ Several helper routines for multiplication with/by a ``LLSparseMatrix`` matrix.
 
 Covered cases:
 
-1. LLSparseMatrix by another two dimensional matrix:
+1. ``LLSparseMatrix`` by another two dimensional matrix:
 
-    - LLSparseMatrix by LLSparseMatrix;
-    - Transposed LLSparseMatrix by LLSparseMatrix;
-    - LLSparseMatrix by NumPy array;
+    - ``LLSparseMatrix`` by ``LLSparseMatrix``;
+    - ``Transposed LLSparseMatrix`` by ``LLSparseMatrix``;
+    - ``LLSparseMatrix`` by ``NumPy`` array;
 
-2. LLSparseMatrix by Numpy vector
+2. ``LLSparseMatrix`` by ``Numpy`` vector
 
     - A * b;
     - A^t * b;
@@ -63,7 +63,7 @@ cdef LLSparseMatrix_INT64_t_COMPLEX64_t multiply_two_ll_mat_INT64_t_COMPLEX64_t(
 
 
     # CASES
-    if not A.__is_symmetric and not B.__is_symmetric:
+    if not A.__use_symmetric_storage and not B.__use_symmetric_storage:
         pass
     else:
         raise NotImplementedError("Multiplication with symmetric matrices is not implemented yet")
@@ -128,7 +128,7 @@ cdef LLSparseMatrix_INT64_t_COMPLEX64_t multiply_transposed_ll_mat_by_ll_mat_INT
     C = LLSparseMatrix_INT64_t_COMPLEX64_t(control_object=unexposed_value, nrow=C_nrow, ncol=C_ncol, size_hint=size_hint, store_zeros=store_zeros)
 
     # CASES
-    if not A.__is_symmetric and not B.__is_symmetric:
+    if not A.__use_symmetric_storage and not B.__use_symmetric_storage:
         # we only deal with non symmetric matrices
         pass
     else:
@@ -202,7 +202,7 @@ cdef cnp.ndarray[cnp.npy_complex64, ndim=2] multiply_ll_mat_with_numpy_ndarray_C
         INT64_t iA, jA, kA, jB
 
     # CASES
-    if not A.__is_symmetric:
+    if not A.__use_symmetric_storage:
         for iA from 0 <= iA < A_nrow:
             kA = A.root[iA]
 
@@ -248,7 +248,7 @@ cdef LLSparseMatrix_INT64_t_COMPLEX64_t multiply_transposed_ll_mat_with_self(LLS
         ``NotImplementedError``: When matrix ``A`` is symmetric.
         ``RuntimeError`` if some error occurred during the computation.
     """
-    if A.is_symmetric:
+    if A.use_symmetric_storage:
         raise NotImplementedError('matdot_transp_self peration with symmetric matrices not supported')
 
     cdef:
@@ -258,7 +258,7 @@ cdef LLSparseMatrix_INT64_t_COMPLEX64_t multiply_transposed_ll_mat_with_self(LLS
         INT64_t iA, iC, kA, kA2
         COMPLEX64_t valA
 
-    C = LLSparseMatrix_INT64_t_COMPLEX64_t(control_object=unexposed_value, nrow=A.ncol, ncol=A.ncol, size_hint=size_hint, store_zeros=store_zeros, is_symmetric=True)
+    C = LLSparseMatrix_INT64_t_COMPLEX64_t(control_object=unexposed_value, nrow=A.ncol, ncol=A.ncol, size_hint=size_hint, store_zeros=store_zeros, use_symmetric_storage=True)
 
     for iA from 0 <= iA < A.nrow:
         kA = A.root[iA]
@@ -293,7 +293,7 @@ cdef LLSparseMatrix_INT64_t_COMPLEX64_t multiply_transposed_ll_mat_with_self_sca
         ``NotImplementedError``: When matrix ``A`` is symmetric.
         ``RuntimeError`` if some error occurred during the computation.
     """
-    if A.is_symmetric:
+    if A.use_symmetric_storage:
         raise NotImplementedError('matdot_transp_self peration with symmetric matrices not supported')
 
     cdef:
@@ -312,7 +312,7 @@ cdef LLSparseMatrix_INT64_t_COMPLEX64_t multiply_transposed_ll_mat_with_self_sca
         INT64_t incx = d.strides[0] / sd
 
 
-    C = LLSparseMatrix_INT64_t_COMPLEX64_t(control_object=unexposed_value, nrow=A.ncol, ncol=A.ncol, size_hint=size_hint, store_zeros=store_zeros, is_symmetric=True)
+    C = LLSparseMatrix_INT64_t_COMPLEX64_t(control_object=unexposed_value, nrow=A.ncol, ncol=A.ncol, size_hint=size_hint, store_zeros=store_zeros, use_symmetric_storage=True)
 
     if cnp.PyArray_ISCONTIGUOUS(d):
         for iA from 0 <= iA < A.nrow:
@@ -394,7 +394,7 @@ cdef cnp.ndarray[cnp.npy_complex64, ndim=2] multiply_transposed_ll_mat_with_nump
         INT64_t iA, jA, kA, jB
 
     # CASES
-    if not A.__is_symmetric:
+    if not A.__use_symmetric_storage:
         for iA from 0 <= iA < A_nrow:
             kA = A.root[iA]
 
@@ -473,12 +473,12 @@ cdef cnp.ndarray[cnp.npy_complex64, ndim=1, mode='c'] multiply_ll_mat_with_numpy
 
     # test if b vector is C-contiguous or not
     if cnp.PyArray_ISCONTIGUOUS(b):
-        if A.__is_symmetric:
+        if A.__use_symmetric_storage:
             multiply_sym_ll_mat_with_numpy_vector_kernel_INT64_t_COMPLEX64_t(A_nrow, b_data, c_data, A.val, A.col, A.link, A.root)
         else:
             multiply_ll_mat_with_numpy_vector_kernel_INT64_t_COMPLEX64_t(A_nrow, b_data, c_data, A.val, A.col, A.link, A.root)
     else:
-        if A.__is_symmetric:
+        if A.__use_symmetric_storage:
             multiply_sym_ll_mat_with_strided_numpy_vector_kernel_INT64_t_COMPLEX64_t(A.nrow,
                                                                  b_data, b.strides[0] / sd,
                                                                  c_data, c.strides[0] / sd,
@@ -534,13 +534,13 @@ cdef cnp.ndarray[cnp.npy_complex64, ndim=1, mode='c'] multiply_transposed_ll_mat
 
     # test if b vector is C-contiguous or not
     if cnp.PyArray_ISCONTIGUOUS(b):
-        if A.__is_symmetric:
+        if A.__use_symmetric_storage:
             multiply_sym_ll_mat_with_numpy_vector_kernel_INT64_t_COMPLEX64_t(A_nrow, b_data, c_data, A.val, A.col, A.link, A.root)
         else:
             multiply_tranposed_ll_mat_with_numpy_vector_kernel_INT64_t_COMPLEX64_t(A_nrow, A_ncol, b_data, c_data,
          A.val, A.col, A.link, A.root)
     else:
-        if A.__is_symmetric:
+        if A.__use_symmetric_storage:
             multiply_sym_ll_mat_with_strided_numpy_vector_kernel_INT64_t_COMPLEX64_t(A.nrow,
                                                                  b_data, b.strides[0] / sd,
                                                                  c_data, c.strides[0] / sd,
@@ -596,13 +596,13 @@ cdef cnp.ndarray[cnp.npy_complex64, ndim=1, mode='c'] multiply_conjugate_transpo
 
     # test if b vector is C-contiguous or not
     if cnp.PyArray_ISCONTIGUOUS(b):
-        if A.__is_symmetric:
+        if A.__use_symmetric_storage:
             multiply_conjugate_tranposed_sym_ll_mat_with_numpy_vector_kernel_INT64_t_COMPLEX64_t(A_nrow, A_ncol, b_data, c_data, A.val, A.col, A.link, A.root)
         else:
             multiply_conjugate_tranposed_ll_mat_with_numpy_vector_kernel_INT64_t_COMPLEX64_t(A_nrow, A_ncol, b_data, c_data,
          A.val, A.col, A.link, A.root)
     else:
-        if A.__is_symmetric:
+        if A.__use_symmetric_storage:
             multiply_conjugate_tranposed_sym_ll_mat_with_strided_numpy_vector_kernel_INT64_t_COMPLEX64_t(A_nrow, A_ncol,
                                                                  b_data, b.strides[0] / sd,
                                                                  c_data, c.strides[0] / sd,
@@ -658,12 +658,12 @@ cdef cnp.ndarray[cnp.npy_complex64, ndim=1, mode='c'] multiply__conjugate_ll_mat
 
     # test if b vector is C-contiguous or not
     if cnp.PyArray_ISCONTIGUOUS(b):
-        if A.__is_symmetric:
+        if A.__use_symmetric_storage:
             multiply_conjugate_sym_ll_mat_with_numpy_vector_kernel_INT64_t_COMPLEX64_t(A_nrow, b_data, c_data, A.val, A.col, A.link, A.root)
         else:
             multiply_conjugate_ll_mat_with_numpy_vector_kernel_INT64_t_COMPLEX64_t(A_nrow, b_data, c_data, A.val, A.col, A.link, A.root)
     else:
-        if A.__is_symmetric:
+        if A.__use_symmetric_storage:
             multiply_conjugate_sym_ll_mat_with_strided_numpy_vector_kernel_INT64_t_COMPLEX64_t(A.nrow,
                                                                  b_data, b.strides[0] / sd,
                                                                  c_data, c.strides[0] / sd,

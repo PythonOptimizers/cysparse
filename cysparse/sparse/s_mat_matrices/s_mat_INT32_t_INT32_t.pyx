@@ -61,7 +61,7 @@ cdef class SparseMatrix_INT32_t_INT32_t(SparseMatrix):
         assert self.__nrow != -1, "Number of rows must be given"
         assert self.__ncol != -1, "Number of columns must be given"
 
-        if self.__is_symmetric:
+        if self.__use_symmetric_storage:
             assert self.__nrow == self.__ncol, "A symmetric matrix must have equal number of rows and columns"
 
         self.__nnz = kwargs.get('nnz', 0)
@@ -242,7 +242,7 @@ cdef class SparseMatrix_INT32_t_INT32_t(SparseMatrix):
 
     def storage_scheme_string(self):
         symmetric_string = None
-        if self.__is_symmetric:
+        if self.__use_symmetric_storage:
             symmetric_string = 'Symmetric'
         else:
             symmetric_string = 'General'

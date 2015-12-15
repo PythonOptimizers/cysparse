@@ -44,6 +44,6 @@ cdef MakeCSCSparseMatrix_INT64_t_COMPLEX256_t(INT64_t nrow,
                                         INT64_t * ind,
                                         INT64_t * row,
                                         COMPLEX256_t * val,
-                                        bint is_symmetric,
+                                        bint use_symmetric_storage,
                                         bint store_zeros,
                                         bint row_indices_are_sorted=?)

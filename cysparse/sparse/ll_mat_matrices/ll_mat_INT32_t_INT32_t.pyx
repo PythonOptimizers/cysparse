@@ -296,7 +296,7 @@ cdef class LLSparseMatrix_INT32_t_INT32_t(MutableSparseMatrix_INT32_t_INT32_t):
         cdef LLSparseMatrix_INT32_t_INT32_t self_copy
 
         # we copy manually the C-arrays
-        self_copy = LLSparseMatrix_INT32_t_INT32_t(control_object=unexposed_value, no_memory=True, nrow=self.__nrow, ncol=self.__ncol, size_hint=self.size_hint, store_zeros=self.__store_zeros, is_symmetric=self.__is_symmetric)
+        self_copy = LLSparseMatrix_INT32_t_INT32_t(control_object=unexposed_value, no_memory=True, nrow=self.__nrow, ncol=self.__ncol, size_hint=self.size_hint, store_zeros=self.__store_zeros, use_symmetric_storage=self.__use_symmetric_storage)
 
         # copy C-arrays
         cdef:
@@ -348,9 +348,9 @@ cdef class LLSparseMatrix_INT32_t_INT32_t(MutableSparseMatrix_INT32_t_INT32_t):
         cdef:
             INT32_t k, i, j
 
-        if self.__is_symmetric:
+        if self.__use_symmetric_storage:
 
-            self.__is_symmetric = False  # to allow writing in upper triangle
+            self.__use_symmetric_storage = False  # to allow writing in upper triangle
 
             for i from 0 <= i < self.__nrow:
                 k = self.root[i]
@@ -372,7 +372,7 @@ cdef class LLSparseMatrix_INT32_t_INT32_t(MutableSparseMatrix_INT32_t_INT32_t):
         # TODO: this code is very slow... maybe optimize one day? In particular the main loop combined with linear search
         #       for non existing elements is particularly poor design.
 
-        if self.__is_symmetric:
+        if self.__use_symmetric_storage:
             raise NotImplementedError('This method is not allowed for symmetric matrices')
 
         cdef:
@@ -419,7 +419,7 @@ cdef class LLSparseMatrix_INT32_t_INT32_t(MutableSparseMatrix_INT32_t_INT32_t):
             Obj: List or :program:`NumPy` array with indices of the rows to be deleted.
         """
         # TODO: this code is very slow...
-        if self.__is_symmetric:
+        if self.__use_symmetric_storage:
             raise NotImplementedError('This method is not allowed for symmetric matrices')
 
         cdef:
@@ -552,10 +552,10 @@ cdef class LLSparseMatrix_INT32_t_INT32_t(MutableSparseMatrix_INT32_t_INT32_t):
             INT32_t i, j, k
             LLSparseMatrix_INT32_t_INT32_t transpose
 
-        if self.__is_symmetric:
+        if self.__use_symmetric_storage:
             return self.copy()
         else:
-            transpose = LLSparseMatrix_INT32_t_INT32_t(control_object=unexposed_value, nrow=self.__ncol, ncol=self.__nrow, size_hint=self.__nnz, store_zeros=self.__store_zeros, is_symmetric=self.__is_symmetric)
+            transpose = LLSparseMatrix_INT32_t_INT32_t(control_object=unexposed_value, nrow=self.__ncol, ncol=self.__nrow, size_hint=self.__nnz, store_zeros=self.__store_zeros, use_symmetric_storage=self.__use_symmetric_storage)
 
             for i from 0 <= i < self.__nrow:
                 k = self.root[i]
@@ -652,7 +652,7 @@ cdef class LLSparseMatrix_INT32_t_INT32_t(MutableSparseMatrix_INT32_t_INT32_t):
                                                      nnz=self.__nnz,
                                                      ind=ind, col=col,
                                                      val=val,
-                                                     is_symmetric=self.__is_symmetric,
+                                                     use_symmetric_storage=self.__use_symmetric_storage,
                                                      store_zeros=self.__store_zeros,
                                                      col_indices_are_sorted=True)
 
@@ -734,7 +734,7 @@ cdef class LLSparseMatrix_INT32_t_INT32_t(MutableSparseMatrix_INT32_t_INT32_t):
                                                      ind=ind,
                                                      row=row,
                                                      val=val,
-                                                     is_symmetric=self.__is_symmetric,
+                                                     use_symmetric_storage=self.__use_symmetric_storage,
                                                      store_zeros=self.__store_zeros,
                                                      row_indices_are_sorted=True)
 
@@ -785,7 +785,7 @@ cdef class LLSparseMatrix_INT32_t_INT32_t(MutableSparseMatrix_INT32_t_INT32_t):
         np_ndarray = np.zeros((self.__nrow, self.__ncol), dtype=np.int32, order='C')
         np_memview = np_ndarray
 
-        if not self.__is_symmetric:
+        if not self.__use_symmetric_storage:
             for i from 0 <= i < self.__nrow:
                 k = self.root[i]
                 while k != -1:
@@ -857,7 +857,7 @@ cdef class LLSparseMatrix_INT32_t_INT32_t(MutableSparseMatrix_INT32_t_INT32_t):
             LLSparseMatrix_INT32_t_INT32_t A
             LLSparseMatrixView_INT32_t_INT32_t A_view
 
-        if self.__is_symmetric:
+        if self.__use_symmetric_storage:
             if PySparseMatrix_Check(obj):
                 if obj.nrow != nrow or obj.ncol != ncol:
                     raise IndexError("Assigned LLSparseMatrix should be of dimensions (%d,%d) (not (%d,%d))" % (nrow, ncol, obj.nrow, obj.ncol))
@@ -980,7 +980,7 @@ cdef class LLSparseMatrix_INT32_t_INT32_t(MutableSparseMatrix_INT32_t_INT32_t):
 
         # NON OPTIMIZED CODE (VERY SLOW CODE: O(nnz * nrow * ncol) )
 
-        if self.is_symmetric and not count_only_stored:
+        if self.use_symmetric_storage and not count_only_stored:
             for i from 0 <= i < self.__nrow:
                 k = self.root[i]
                 while k != -1:
@@ -1035,7 +1035,7 @@ cdef class LLSparseMatrix_INT32_t_INT32_t(MutableSparseMatrix_INT32_t_INT32_t):
 
 
         """
-        if self.__is_symmetric and i < j:
+        if self.__use_symmetric_storage and i < j:
             raise IndexError('Write operation to upper triangle of symmetric matrix not allowed')
 
         cdef INT32_t k, new_elem, last, col
@@ -1136,7 +1136,7 @@ cdef class LLSparseMatrix_INT32_t_INT32_t(MutableSparseMatrix_INT32_t_INT32_t):
         """
         cdef INT32_t k, t
 
-        if self.__is_symmetric and i < j:
+        if self.__use_symmetric_storage and i < j:
             t = i; i = j; j = t
 
         k = self.root[i]
@@ -1450,7 +1450,7 @@ cdef class LLSparseMatrix_INT32_t_INT32_t(MutableSparseMatrix_INT32_t_INT32_t):
 
         # NON OPTIMIZED CODE
         if k > 0:
-            if self.is_symmetric:
+            if self.use_symmetric_storage:
                 raise NotImplementedError('You cannot add postive diagonals to symmetric matrices')
 
             if cnp.PyArray_ISCONTIGUOUS(b):
@@ -1590,7 +1590,7 @@ cdef class LLSparseMatrix_INT32_t_INT32_t(MutableSparseMatrix_INT32_t_INT32_t):
             INT32_t i, j, k
             Py_ssize_t pos = 0    # position in list
 
-        if not self.__is_symmetric:
+        if not self.__use_symmetric_storage:
 
             # create list
             list_p = PyList_New(self.__nnz)
@@ -1619,7 +1619,7 @@ cdef class LLSparseMatrix_INT32_t_INT32_t(MutableSparseMatrix_INT32_t_INT32_t):
             INT32_t i, k
             Py_ssize_t pos = 0        # position in list
 
-        if not self.__is_symmetric:
+        if not self.__use_symmetric_storage:
             list_p = PyList_New(self.__nnz)
             if list_p == NULL:
                 raise MemoryError()
@@ -1813,7 +1813,7 @@ cdef class LLSparseMatrix_INT32_t_INT32_t(MutableSparseMatrix_INT32_t_INT32_t):
             INT32_t i, j, k_
             LLSparseMatrix_INT32_t_INT32_t ll_mat_tril
 
-        ll_mat_tril = LLSparseMatrix_INT32_t_INT32_t(control_object=unexposed_value, nrow=self.__nrow, ncol=self.__ncol, size_hint=self.__nnz, store_zeros=self.__store_zeros, is_symmetric=False)
+        ll_mat_tril = LLSparseMatrix_INT32_t_INT32_t(control_object=unexposed_value, nrow=self.__nrow, ncol=self.__ncol, size_hint=self.__nnz, store_zeros=self.__store_zeros, use_symmetric_storage=False)
 
         # NON OPTIMIZED OPERATION
         # code is same for symmetric or non symmetric cases
@@ -1851,10 +1851,10 @@ cdef class LLSparseMatrix_INT32_t_INT32_t(MutableSparseMatrix_INT32_t_INT32_t):
             INT32_t i, j, k_
             LLSparseMatrix_INT32_t_INT32_t ll_mat_triu
 
-        ll_mat_triu = LLSparseMatrix_INT32_t_INT32_t(control_object=unexposed_value, nrow=self.__nrow, ncol=self.__ncol, size_hint=self.__nnz, store_zeros=self.__store_zeros, is_symmetric=False)
+        ll_mat_triu = LLSparseMatrix_INT32_t_INT32_t(control_object=unexposed_value, nrow=self.__nrow, ncol=self.__ncol, size_hint=self.__nnz, store_zeros=self.__store_zeros, use_symmetric_storage=False)
 
         # NON OPTIMIZED OPERATION
-        if self.__is_symmetric:
+        if self.__use_symmetric_storage:
             for i from 0 <= i < self.__nrow:
                 k_ = self.root[i]
                 while k_ != -1:
@@ -1895,7 +1895,7 @@ cdef class LLSparseMatrix_INT32_t_INT32_t(MutableSparseMatrix_INT32_t_INT32_t):
         except:
             raise TypeError('Factor sigma is not compatible with the dtype (%d) of this matrix' % type_to_string(self.dtype))
 
-        if self.__is_symmetric == B.__is_symmetric:
+        if self.__use_symmetric_storage == B.__use_symmetric_storage:
             # both matrices are symmetric or are not symmetric
             for i from 0 <= i < B.__nrow:
                 k = B.root[i]
@@ -1904,7 +1904,7 @@ cdef class LLSparseMatrix_INT32_t_INT32_t(MutableSparseMatrix_INT32_t_INT32_t):
                     update_ll_mat_item_add_INT32_t_INT32_t(self, i, B.col[k], casted_sigma * B.val[k])
                     k = B.link[k]
 
-        elif B.__is_symmetric:
+        elif B.__use_symmetric_storage:
             # self is not symmetric
             for i from 0 <= i < B.__nrow:
                 k = B.root[i]
@@ -2172,7 +2172,7 @@ cdef class LLSparseMatrix_INT32_t_INT32_t(MutableSparseMatrix_INT32_t_INT32_t):
         if not col_sum:
             raise MemoryError()
 
-        if self.__is_symmetric:
+        if self.__use_symmetric_storage:
 
             # compute sum of columns
             for i from 0<= i < self.__nrow:
@@ -2225,7 +2225,7 @@ cdef class LLSparseMatrix_INT32_t_INT32_t(MutableSparseMatrix_INT32_t_INT32_t):
 
         max_row_sum = <FLOAT64_t> 0.0
 
-        if not self.__is_symmetric:
+        if not self.__use_symmetric_storage:
             for i from 0<= i < self.__nrow:
                 k = self.root[i]
 
@@ -2294,7 +2294,7 @@ cdef class LLSparseMatrix_INT32_t_INT32_t(MutableSparseMatrix_INT32_t_INT32_t):
 
                 abs_val_square = abs_val * abs_val
                 norm_sum += abs_val_square
-                if self.__is_symmetric and i != self.col[k]:
+                if self.__use_symmetric_storage and i != self.col[k]:
                     norm_sum += abs_val_square
 
                 k = self.link[k]
@@ -2402,7 +2402,7 @@ cdef class LLSparseMatrix_INT32_t_INT32_t(MutableSparseMatrix_INT32_t_INT32_t):
                 k = self.root[i]
                 while k != -1:
                     mat[(i*self.__ncol)+self.col[k]] = self.val[k]
-                    if self.__is_symmetric:
+                    if self.__use_symmetric_storage:
                         mat[(self.col[k]*self.__ncol)+i] = self.val[k]
                     k = self.link[k]
 

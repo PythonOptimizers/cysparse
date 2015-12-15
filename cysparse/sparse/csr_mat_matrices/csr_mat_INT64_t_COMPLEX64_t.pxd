@@ -40,7 +40,7 @@ cdef MakeCSRSparseMatrix_INT64_t_COMPLEX64_t(INT64_t nrow,
                                         INT64_t * ind,
                                         INT64_t * col,
                                         COMPLEX64_t * val,
-                                        bint is_symmetric,
+                                        bint use_symmetric_storage,
                                         bint store_zeros,
                                         bint col_indices_are_sorted=?)
 

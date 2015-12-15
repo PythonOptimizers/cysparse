@@ -356,7 +356,7 @@ def NewLLSparseMatrix(**kwargs):
     In all cases, you **can** supply an ``itype`` (index type) and a ``dtype`` (element type). By default (i.e. if you
     don't provide these arguments, ``itype == INT32_T`` and ``dtype == FLOAT64_T``) and specify a *storage format*:
         - ``store_zeros``: if ``True``, store explicitely zeros (default: ``False``);
-        - ``is_symmetric``: if ``True``, use symmetric storage, i.e. only the lower triangular part of the matrix is stored (by default: ``False``);
+        - ``use_symmetric_storage``: if ``True``, use symmetric storage, i.e. only the lower triangular part of the matrix is stored (by default: ``False``);
 
     If a matrix or filename is supplied, these arguments **must** coincide with the supplied matrix types. If not, an error is thrown.
 
@@ -393,7 +393,7 @@ def NewLLSparseMatrix(**kwargs):
     assert dtype in [INT32_T,INT64_T,FLOAT32_T,FLOAT64_T,FLOAT128_T,COMPLEX64_T,COMPLEX128_T,COMPLEX256_T], "dtype is not accepted as type for a matrix element"
 
     cdef bint store_zeros = kwargs.get('store_zeros', False)
-    cdef bint is_symmetric = kwargs.get('is_symmetric', False)
+    cdef bint use_symmetric_storage = kwargs.get('use_symmetric_storage', False)
     cdef bint test_bounds = kwargs.get('test_bounds', True)
 
     # From matrices
@@ -456,7 +456,7 @@ def NewLLSparseMatrix(**kwargs):
                                                                   itype=itype,
                                                                   size_hint=size_hint,
                                                                   store_zeros=store_zeros,
-                                                                  is_symmetric=is_symmetric)
+                                                                  use_symmetric_storage=use_symmetric_storage)
     
         
             elif dtype == INT64_T:
@@ -468,7 +468,7 @@ def NewLLSparseMatrix(**kwargs):
                                                                   itype=itype,
                                                                   size_hint=size_hint,
                                                                   store_zeros=store_zeros,
-                                                                  is_symmetric=is_symmetric)
+                                                                  use_symmetric_storage=use_symmetric_storage)
     
         
             elif dtype == FLOAT32_T:
@@ -480,7 +480,7 @@ def NewLLSparseMatrix(**kwargs):
                                                                   itype=itype,
                                                                   size_hint=size_hint,
                                                                   store_zeros=store_zeros,
-                                                                  is_symmetric=is_symmetric)
+                                                                  use_symmetric_storage=use_symmetric_storage)
     
         
             elif dtype == FLOAT64_T:
@@ -492,7 +492,7 @@ def NewLLSparseMatrix(**kwargs):
                                                                   itype=itype,
                                                                   size_hint=size_hint,
                                                                   store_zeros=store_zeros,
-                                                                  is_symmetric=is_symmetric)
+                                                                  use_symmetric_storage=use_symmetric_storage)
     
         
             elif dtype == FLOAT128_T:
@@ -504,7 +504,7 @@ def NewLLSparseMatrix(**kwargs):
                                                                   itype=itype,
                                                                   size_hint=size_hint,
                                                                   store_zeros=store_zeros,
-                                                                  is_symmetric=is_symmetric)
+                                                                  use_symmetric_storage=use_symmetric_storage)
     
         
             elif dtype == COMPLEX64_T:
@@ -516,7 +516,7 @@ def NewLLSparseMatrix(**kwargs):
                                                                   itype=itype,
                                                                   size_hint=size_hint,
                                                                   store_zeros=store_zeros,
-                                                                  is_symmetric=is_symmetric)
+                                                                  use_symmetric_storage=use_symmetric_storage)
     
         
             elif dtype == COMPLEX128_T:
@@ -528,7 +528,7 @@ def NewLLSparseMatrix(**kwargs):
                                                                   itype=itype,
                                                                   size_hint=size_hint,
                                                                   store_zeros=store_zeros,
-                                                                  is_symmetric=is_symmetric)
+                                                                  use_symmetric_storage=use_symmetric_storage)
     
         
             elif dtype == COMPLEX256_T:
@@ -540,7 +540,7 @@ def NewLLSparseMatrix(**kwargs):
                                                                   itype=itype,
                                                                   size_hint=size_hint,
                                                                   store_zeros=store_zeros,
-                                                                  is_symmetric=is_symmetric)
+                                                                  use_symmetric_storage=use_symmetric_storage)
     
 
     
@@ -557,7 +557,7 @@ def NewLLSparseMatrix(**kwargs):
                                                                   itype=itype,
                                                                   size_hint=size_hint,
                                                                   store_zeros=store_zeros,
-                                                                  is_symmetric=is_symmetric)
+                                                                  use_symmetric_storage=use_symmetric_storage)
     
         
             elif dtype == INT64_T:
@@ -569,7 +569,7 @@ def NewLLSparseMatrix(**kwargs):
                                                                   itype=itype,
                                                                   size_hint=size_hint,
                                                                   store_zeros=store_zeros,
-                                                                  is_symmetric=is_symmetric)
+                                                                  use_symmetric_storage=use_symmetric_storage)
     
         
             elif dtype == FLOAT32_T:
@@ -581,7 +581,7 @@ def NewLLSparseMatrix(**kwargs):
                                                                   itype=itype,
                                                                   size_hint=size_hint,
                                                                   store_zeros=store_zeros,
-                                                                  is_symmetric=is_symmetric)
+                                                                  use_symmetric_storage=use_symmetric_storage)
     
         
             elif dtype == FLOAT64_T:
@@ -593,7 +593,7 @@ def NewLLSparseMatrix(**kwargs):
                                                                   itype=itype,
                                                                   size_hint=size_hint,
                                                                   store_zeros=store_zeros,
-                                                                  is_symmetric=is_symmetric)
+                                                                  use_symmetric_storage=use_symmetric_storage)
     
         
             elif dtype == FLOAT128_T:
@@ -605,7 +605,7 @@ def NewLLSparseMatrix(**kwargs):
                                                                   itype=itype,
                                                                   size_hint=size_hint,
                                                                   store_zeros=store_zeros,
-                                                                  is_symmetric=is_symmetric)
+                                                                  use_symmetric_storage=use_symmetric_storage)
     
         
             elif dtype == COMPLEX64_T:
@@ -617,7 +617,7 @@ def NewLLSparseMatrix(**kwargs):
                                                                   itype=itype,
                                                                   size_hint=size_hint,
                                                                   store_zeros=store_zeros,
-                                                                  is_symmetric=is_symmetric)
+                                                                  use_symmetric_storage=use_symmetric_storage)
     
         
             elif dtype == COMPLEX128_T:
@@ -629,7 +629,7 @@ def NewLLSparseMatrix(**kwargs):
                                                                   itype=itype,
                                                                   size_hint=size_hint,
                                                                   store_zeros=store_zeros,
-                                                                  is_symmetric=is_symmetric)
+                                                                  use_symmetric_storage=use_symmetric_storage)
     
         
             elif dtype == COMPLEX256_T:
@@ -641,7 +641,7 @@ def NewLLSparseMatrix(**kwargs):
                                                                   itype=itype,
                                                                   size_hint=size_hint,
                                                                   store_zeros=store_zeros,
-                                                                  is_symmetric=is_symmetric)
+                                                                  use_symmetric_storage=use_symmetric_storage)
     
 
 
@@ -805,7 +805,7 @@ def NewArrowheadLLSparseMatrix(**kwargs):
     """
     element = kwargs.pop('element', None)
 
-    if kwargs.get('is_symmetric', False):
+    if kwargs.get('use_symmetric_storage', False):
         raise NotImplementedError('This type of matrix is not implemented for symmetric matrices')
 
     ll_mat = NewLLSparseMatrix(**kwargs)
@@ -929,7 +929,7 @@ def NewDiagonalLLSparseMatrix(**kwargs):
     """
     element = kwargs.pop('element', None)
 
-    if kwargs.get('is_symmetric', False):
+    if kwargs.get('use_symmetric_storage', False):
         raise NotImplementedError('This type of matrix is not implemented for symmetric matrices')
 
     ll_mat = NewLLSparseMatrix(**kwargs)
@@ -1319,7 +1319,7 @@ def NewPermutationLLSparseMatrix(**kwargs):
     """
     p_vec = kwargs.pop('P', None)
 
-    if kwargs.get('is_symmetric', False):
+    if kwargs.get('use_symmetric_storage', False):
         raise NotImplementedError('This type of matrix is not implemented for symmetric matrices')
 
     ll_mat = NewLLSparseMatrix(**kwargs)

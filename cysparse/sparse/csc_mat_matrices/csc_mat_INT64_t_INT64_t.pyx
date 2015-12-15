@@ -109,7 +109,7 @@ cdef class CSCSparseMatrix_INT64_t_INT64_t(ImmutableSparseMatrix_INT64_t_INT64_t
 
         nnz = self.nnz
 
-        self_copy = CSCSparseMatrix_INT64_t_INT64_t(control_object=unexposed_value, nrow=self.__nrow, ncol=self.__ncol, store_zeros=self.__store_zeros, is_symmetric=self.__is_symmetric)
+        self_copy = CSCSparseMatrix_INT64_t_INT64_t(control_object=unexposed_value, nrow=self.__nrow, ncol=self.__ncol, store_zeros=self.__store_zeros, use_symmetric_storage=self.__use_symmetric_storage)
 
         val = <INT64_t *> PyMem_Malloc(nnz * sizeof(INT64_t))
         if not val:
@@ -328,7 +328,7 @@ cdef class CSCSparseMatrix_INT64_t_INT64_t(ImmutableSparseMatrix_INT64_t_INT64_t
             INT64_t real_j
 
         # code is duplicated for optimization
-        if self.__is_symmetric:
+        if self.__use_symmetric_storage:
             if i < j:
                 real_i = j
                 real_j = i
@@ -560,7 +560,7 @@ cdef class CSCSparseMatrix_INT64_t_INT64_t(ImmutableSparseMatrix_INT64_t_INT64_t
                                                   ind,
                                                   row,
                                                   val,
-                                                  is_symmetric=False,
+                                                  use_symmetric_storage=False,
                                                   store_zeros=self.__store_zeros,
                                                   row_indices_are_sorted=True)
 
@@ -613,7 +613,7 @@ cdef class CSCSparseMatrix_INT64_t_INT64_t(ImmutableSparseMatrix_INT64_t_INT64_t
         cdef INT64_t * csr_col
         cdef INT64_t  * csr_val
 
-        if self.__is_symmetric:
+        if self.__use_symmetric_storage:
             # Special (and annoying) case: we first create a CSR and then translate it to CSC
             csr_ind = <INT64_t *> PyMem_Malloc((self.__nrow + 1) * sizeof(INT64_t))
             if not csr_ind:
@@ -694,7 +694,7 @@ cdef class CSCSparseMatrix_INT64_t_INT64_t(ImmutableSparseMatrix_INT64_t_INT64_t
                                                   ind,
                                                   row,
                                                   val,
-                                                  is_symmetric=False,
+                                                  use_symmetric_storage=False,
                                                   store_zeros=self.__store_zeros,
                                                   row_indices_are_sorted=True)
 
@@ -729,7 +729,7 @@ cdef class CSCSparseMatrix_INT64_t_INT64_t(ImmutableSparseMatrix_INT64_t_INT64_t
                                                   ind,
                                                   col,
                                                   val,
-                                                  is_symmetric=self.is_symmetric,
+                                                  use_symmetric_storage=self.use_symmetric_storage,
                                                   store_zeros=self.store_zeros,
                                                   col_indices_are_sorted=True)
 
@@ -749,7 +749,7 @@ cdef class CSCSparseMatrix_INT64_t_INT64_t(ImmutableSparseMatrix_INT64_t_INT64_t
         np_ndarray = np.zeros((self.__nrow, self.__ncol), dtype=np.int64, order='C')
         np_memview = np_ndarray
 
-        if not self.__is_symmetric:
+        if not self.__use_symmetric_storage:
             for j from 0 <= j < self.__ncol:
                 for k from self.ind[j] <= k < self.ind[j+1]:
                     np_memview[self.row[k], j] = self.val[k]
@@ -872,7 +872,7 @@ cdef class CSCSparseMatrix_INT64_t_INT64_t(ImmutableSparseMatrix_INT64_t_INT64_t
                 # TODO: rewrite this completely
                 for k from self.ind[j] <= k < self.ind[j+1]:
                     mat[(self.row[k]*self.ncol)+j] = self.val[k]
-                    if self.__is_symmetric:
+                    if self.__use_symmetric_storage:
                         mat[(j*self.ncol)+ self.row[k]] = self.val[k]
 
             for i from 0 <= i < self.nrow:
@@ -967,7 +967,7 @@ cdef MakeCSCSparseMatrix_INT64_t_INT64_t(INT64_t nrow,
                                         INT64_t * ind,
                                         INT64_t * row,
                                         INT64_t * val,
-                                        bint is_symmetric, bint store_zeros,
+                                        bint use_symmetric_storage, bint store_zeros,
                                         bint row_indices_are_sorted=False):
     """
     Construct a CSCSparseMatrix object.
@@ -985,7 +985,7 @@ cdef MakeCSCSparseMatrix_INT64_t_INT64_t(INT64_t nrow,
                                              nrow=nrow,
                                              ncol=ncol,
                                              nnz=nnz,
-                                             is_symmetric=is_symmetric,
+                                             use_symmetric_storage=use_symmetric_storage,
                                              store_zeros=store_zeros)
 
     csc_mat.val = val
