@@ -3,13 +3,13 @@ Several helper routines for multiplication with/by a ``LLSparseMatrix`` matrix.
 
 Covered cases:
 
-1. LLSparseMatrix by another two dimensional matrix:
+1. ``LLSparseMatrix`` by another two dimensional matrix:
 
-    - LLSparseMatrix by LLSparseMatrix;
-    - Transposed LLSparseMatrix by LLSparseMatrix;
-    - LLSparseMatrix by NumPy array;
+    - ``LLSparseMatrix`` by ``LLSparseMatrix``;
+    - ``Transposed LLSparseMatrix`` by ``LLSparseMatrix``;
+    - ``LLSparseMatrix`` by ``NumPy`` array;
 
-2. LLSparseMatrix by Numpy vector
+2. ``LLSparseMatrix`` by ``Numpy`` vector
 
     - A * b;
     - A^t * b;
