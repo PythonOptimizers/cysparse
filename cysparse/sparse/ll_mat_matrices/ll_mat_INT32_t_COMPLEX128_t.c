@@ -2447,12 +2447,12 @@ static char __pyx_k_allocate_buffer[] = "allocate_buffer";
 static char __pyx_k_dtype_is_object[] = "dtype_is_object";
 static char __pyx_k_LLSparseMatrix_s[] = "LLSparseMatrix %s";
 static char __pyx_k_create_conjugate[] = "create_conjugate";
+static char __pyx_k_use_zero_storage[] = "use_zero_storage";
 static char __pyx_k_print_big_matrices[] = "print_big_matrices";
 static char __pyx_k_strided_and_direct[] = "<strided and direct>";
 static char __pyx_k_Index_out_of_bounds[] = "Index out of bounds";
 static char __pyx_k_NotImplementedError[] = "NotImplementedError";
 static char __pyx_k_Not_implemented_yet[] = "Not implemented yet...";
-static char __pyx_k_use_zero_storage[] = "use_zero_storage";
 static char __pyx_k_Indices_out_of_range[] = "Indices out of range";
 static char __pyx_k_strided_and_indirect[] = "<strided and indirect>";
 static char __pyx_k_contiguous_and_direct[] = "<contiguous and direct>";
@@ -2731,8 +2731,8 @@ static PyObject *__pyx_kp_s_unable_to_allocate_array_data;
 static PyObject *__pyx_kp_s_unable_to_allocate_shape_and_str;
 static PyObject *__pyx_kp_u_unknown_dtype_code_in_numpy_pxd;
 static PyObject *__pyx_n_s_unpack;
-static PyObject *__pyx_n_s_use_zero_storage;
 static PyObject *__pyx_n_s_use_symmetric_storage;
+static PyObject *__pyx_n_s_use_zero_storage;
 static PyObject *__pyx_n_s_val;
 static PyObject *__pyx_kp_s_val_2;
 static PyObject *__pyx_n_s_values;
@@ -44075,8 +44075,8 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_unable_to_allocate_shape_and_str, __pyx_k_unable_to_allocate_shape_and_str, sizeof(__pyx_k_unable_to_allocate_shape_and_str), 0, 0, 1, 0},
   {&__pyx_kp_u_unknown_dtype_code_in_numpy_pxd, __pyx_k_unknown_dtype_code_in_numpy_pxd, sizeof(__pyx_k_unknown_dtype_code_in_numpy_pxd), 0, 1, 0, 0},
   {&__pyx_n_s_unpack, __pyx_k_unpack, sizeof(__pyx_k_unpack), 0, 0, 1, 1},
-  {&__pyx_n_s_use_zero_storage, __pyx_k_use_zero_storage, sizeof(__pyx_k_use_zero_storage), 0, 0, 1, 1},
   {&__pyx_n_s_use_symmetric_storage, __pyx_k_use_symmetric_storage, sizeof(__pyx_k_use_symmetric_storage), 0, 0, 1, 1},
+  {&__pyx_n_s_use_zero_storage, __pyx_k_use_zero_storage, sizeof(__pyx_k_use_zero_storage), 0, 0, 1, 1},
   {&__pyx_n_s_val, __pyx_k_val, sizeof(__pyx_k_val), 0, 0, 1, 1},
   {&__pyx_kp_s_val_2, __pyx_k_val_2, sizeof(__pyx_k_val_2), 0, 0, 1, 0},
   {&__pyx_n_s_values, __pyx_k_values, sizeof(__pyx_k_values), 0, 0, 1, 1},

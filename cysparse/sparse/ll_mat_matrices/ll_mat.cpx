@@ -2169,12 +2169,13 @@ YOU HAVE TO EXPLICITY CAST YOUR TYPE
 
     #def __rmul__(self, B):
 
-    def __imul__(self, B):
+    def __imul__(self, sigma):
         """
-        Classical in place multiplication ``A *= B``.
+        Classical in place multiplication ``A *= sigma``.
         """
         # TODO: add tests and error messages
-        self.scale(B)
+        # TODO: test if sigma is scalar or not
+        self.scale(sigma)
         return self
 
     ####################################################################################################################

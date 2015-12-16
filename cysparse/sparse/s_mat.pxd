@@ -29,8 +29,8 @@ cdef class SparseMatrix:
             - s_mat_matrices/s_mat.* (with * in place of 'cpd' or 'cpx') to deal with specifics of types at compile time.
 
         For instance, we have transferred some definitions into s_mat_matrices/s_mat.* (for instance ``nnz``,
-        ``ncol``, ``nrow``) because we also define the mutable/immutable versions of sparse matrices. The only rule
-        is to keep everything coherent but basically this class and s_mat_matrices/s_mat.* define the same class. Use your judgement.
+        ``ncol``, ``nrow``). The only rule is to keep everything coherent but basically this
+        class and s_mat_matrices/s_mat.* define the same class. Use your judgement.
 
         This class is also used to break circular dependencies.
     """

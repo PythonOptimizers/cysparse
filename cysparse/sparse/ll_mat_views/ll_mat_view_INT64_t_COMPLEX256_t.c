@@ -1659,9 +1659,9 @@ static char __pyx_k_MemoryError[] = "MemoryError";
 static char __pyx_k_matrix_copy[] = "matrix_copy";
 static char __pyx_k_RuntimeError[] = "RuntimeError";
 static char __pyx_k_control_object[] = "control_object";
+static char __pyx_k_use_zero_storage[] = "use_zero_storage";
 static char __pyx_k_LLSparseMatrixView[] = "LLSparseMatrixView";
 static char __pyx_k_Index_out_of_bounds[] = "Index out of bounds";
-static char __pyx_k_use_zero_storage[] = "use_zero_storage";
 static char __pyx_k_Indices_out_of_range[] = "Indices out of range";
 static char __pyx_k_attributes_condensed[] = "attributes_condensed";
 static char __pyx_k_use_symmetric_storage[] = "use_symmetric_storage";
@@ -1723,8 +1723,8 @@ static PyObject *__pyx_n_s_test;
 static PyObject *__pyx_n_s_type;
 static PyObject *__pyx_n_s_type_name;
 static PyObject *__pyx_kp_u_unknown_dtype_code_in_numpy_pxd;
-static PyObject *__pyx_n_s_use_zero_storage;
 static PyObject *__pyx_n_s_use_symmetric_storage;
+static PyObject *__pyx_n_s_use_zero_storage;
 static int __pyx_pf_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT64_t_COMPLEX256_t_39LLSparseMatrixView_INT64_t_COMPLEX256_t___cinit__(struct __pyx_obj_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT64_t_COMPLEX256_t_LLSparseMatrixView_INT64_t_COMPLEX256_t *__pyx_v_self, PyObject *__pyx_v_control_object, struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT64_t_COMPLEX256_t_LLSparseMatrix_INT64_t_COMPLEX256_t *__pyx_v_A, __pyx_t_8cysparse_14cysparse_types_14cysparse_types_INT64_t __pyx_v_nrow, __pyx_t_8cysparse_14cysparse_types_14cysparse_types_INT64_t __pyx_v_ncol); /* proto */
 static PyObject *__pyx_pf_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT64_t_COMPLEX256_t_39LLSparseMatrixView_INT64_t_COMPLEX256_t_2nrow(struct __pyx_obj_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT64_t_COMPLEX256_t_LLSparseMatrixView_INT64_t_COMPLEX256_t *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT64_t_COMPLEX256_t_39LLSparseMatrixView_INT64_t_COMPLEX256_t_4ncol(struct __pyx_obj_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT64_t_COMPLEX256_t_LLSparseMatrixView_INT64_t_COMPLEX256_t *__pyx_v_self); /* proto */
@@ -7707,8 +7707,8 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_type, __pyx_k_type, sizeof(__pyx_k_type), 0, 0, 1, 1},
   {&__pyx_n_s_type_name, __pyx_k_type_name, sizeof(__pyx_k_type_name), 0, 0, 1, 1},
   {&__pyx_kp_u_unknown_dtype_code_in_numpy_pxd, __pyx_k_unknown_dtype_code_in_numpy_pxd, sizeof(__pyx_k_unknown_dtype_code_in_numpy_pxd), 0, 1, 0, 0},
-  {&__pyx_n_s_use_zero_storage, __pyx_k_use_zero_storage, sizeof(__pyx_k_use_zero_storage), 0, 0, 1, 1},
   {&__pyx_n_s_use_symmetric_storage, __pyx_k_use_symmetric_storage, sizeof(__pyx_k_use_symmetric_storage), 0, 0, 1, 1},
+  {&__pyx_n_s_use_zero_storage, __pyx_k_use_zero_storage, sizeof(__pyx_k_use_zero_storage), 0, 0, 1, 1},
   {0, 0, 0, 0, 0, 0, 0}
 };
 static int __Pyx_InitCachedBuiltins(void) {

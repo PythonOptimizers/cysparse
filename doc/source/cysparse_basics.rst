@@ -71,12 +71,6 @@ This context manager temporarily set the ``use_zero_storage`` attribute to ``Fal
 By default, ``use_zero_storage`` is set to ``False``.
 
 
-
-``is_mutable``
---------------------
-
-``is_mutable`` returns if the matrix can be modified or not. Note that for the moment, **only** an :class:`LLSparseMatrix` matrix can be modified.
-
 ``type`` and ``type_name``
 -----------------------------
 
@@ -109,6 +103,19 @@ returns exactly how many elements are stored internally.
 When using views, this attribute is **costly** to retrieve as it is systematically recomputed each time and we don't make any assomption on the views (views can represent matrices with rows and columns in any order and duplicated 
 rows and columns any number of times). The number returned is the number of "non zero" elements stored in the equivalent matrix using the **same** storage scheme than viewed matrix.
     
+``is_mutable``
+--------------------
+
+``is_mutable`` returns if the matrix can be modified or not. Note that for the moment, **only** an :class:`LLSparseMatrix` matrix can be modified.
+
+``is_symmetric``
+-------------------
+
+[TODO in the code!!!]
+
+Returns if the matrix is symmetric or not. While matrices using the symmetric storage (``use_symmetric_storage == True``) are symmetric by definition and ``is_symmetric`` returns immediatly ``True``, this attribute is costly to 
+compute in general.
+
 
 How to create a matrix?
 ========================
@@ -118,13 +125,28 @@ Before you can use any type of sparse matrix, you **must** first instantiate an 
 Sparse matrices all come from a ``LLSparseMatrix``
 ------------------------------------------------------
 
+The ``LLSparseMatrix`` matrix type is the only one that is *mutable*. You can add and/or delete elements, rows, columns, sub-matrices at will. Once you have constructed your matrix, it is time to transform it into an appropriate 
+matrix format that is optimized for your needs. This transformation is not done in place and a copy is made. Here is an example:
+
+..  code-block:: python
+
+    A = ...  # A is a LLSparseMatrix
+    # add some elements
+    for i in range(n):
+        for j in range(m):
+            A[i, j] = ...
+    
+    # once the matrix is constructed, transform it into suitable matrix format
+    # here to CSC
+    C = A.to_csc()
+
 ..  _matrices_must_be_instantiated_by_a_factory_method:
 
 ``LLSparseMatrix`` matrices must be instantiated by a factory method
 ---------------------------------------------------------------------------
 
-Matrices **must** be instantiated by one of the factory methods. Although we talk about factory *methods*, we mean factory *functions*.
-For instance, to create a (specialized) :class:`LLSparseMatrix` (see :ref:`ll_mat`), use the following code:
+Matrices **must** be instantiated by one of the factory methods. 
+For instance, to create a :class:`LLSparseMatrix` (see :ref:`ll_mat`), use the following code:
 
 ..  code-block:: python
 
@@ -138,7 +160,7 @@ If you don't use a factory method:
 
 ..  code-block:: python
 
-    A = m.LLSparseMatrix()
+    A = LLSparseMatrix()
 
 you'll get the following error:
 
