@@ -4,7 +4,7 @@ Main entry point for ``SparseMatrix`` objects.
 See also s_mat_matrices/s_mat.* .
 
 """
-from cysparse.cysparse_types.cysparse_types cimport *
+from cysparse.common_types.cysparse_types cimport *
 
 #cdef class SparseMatrix
 

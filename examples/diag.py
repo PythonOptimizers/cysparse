@@ -1,5 +1,5 @@
 from cysparse.sparse.ll_mat import *
-import cysparse.cysparse_types.cysparse_types as types
+import cysparse.common_types.cysparse_types as types
 import numpy as np
 
 m = 4

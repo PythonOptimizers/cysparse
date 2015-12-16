@@ -1,11 +1,11 @@
 # TODO: verify if we need to generate this file
 # For the moment I (Nikolaj) 'm leaving it as it is just in case things change...
 
-from cysparse.cysparse_types.cysparse_types import *
+from cysparse.common_types.cysparse_types import *
 from cysparse.sparse.s_mat cimport SparseMatrix, MakeMatrixString
 #from cysparse.sparse.sparse_proxies cimport ProxySparseMatrix
 
-from cysparse.cysparse_types.cysparse_numpy_types import are_mixed_types_compatible, cysparse_to_numpy_type
+from cysparse.common_types.cysparse_numpy_types import are_mixed_types_compatible, cysparse_to_numpy_type
 from cysparse.sparse.ll_mat cimport PyLLSparseMatrix_Check
 
 cimport numpy as cnp

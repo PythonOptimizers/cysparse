@@ -479,68 +479,68 @@ static const char *__pyx_f[] = {
   "complex.pxd",
 };
 
-/* "cysparse/cysparse_types/cysparse_types.pxd":60
+/* "cysparse/common_types/cysparse_types.pxd":60
  *     COMPLEX256_T = 9
  * 
  * ctypedef int INT32_t             # <<<<<<<<<<<<<<
  * ctypedef unsigned int UINT32_t
  * ctypedef long INT64_t
  */
-typedef int __pyx_t_8cysparse_14cysparse_types_14cysparse_types_INT32_t;
+typedef int __pyx_t_8cysparse_12common_types_14cysparse_types_INT32_t;
 
-/* "cysparse/cysparse_types/cysparse_types.pxd":61
+/* "cysparse/common_types/cysparse_types.pxd":61
  * 
  * ctypedef int INT32_t
  * ctypedef unsigned int UINT32_t             # <<<<<<<<<<<<<<
  * ctypedef long INT64_t
  * ctypedef unsigned long UINT64_t
  */
-typedef unsigned int __pyx_t_8cysparse_14cysparse_types_14cysparse_types_UINT32_t;
+typedef unsigned int __pyx_t_8cysparse_12common_types_14cysparse_types_UINT32_t;
 
-/* "cysparse/cysparse_types/cysparse_types.pxd":62
+/* "cysparse/common_types/cysparse_types.pxd":62
  * ctypedef int INT32_t
  * ctypedef unsigned int UINT32_t
  * ctypedef long INT64_t             # <<<<<<<<<<<<<<
  * ctypedef unsigned long UINT64_t
  * 
  */
-typedef long __pyx_t_8cysparse_14cysparse_types_14cysparse_types_INT64_t;
+typedef long __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t;
 
-/* "cysparse/cysparse_types/cysparse_types.pxd":63
+/* "cysparse/common_types/cysparse_types.pxd":63
  * ctypedef unsigned int UINT32_t
  * ctypedef long INT64_t
  * ctypedef unsigned long UINT64_t             # <<<<<<<<<<<<<<
  * 
  * ctypedef float FLOAT32_t
  */
-typedef unsigned long __pyx_t_8cysparse_14cysparse_types_14cysparse_types_UINT64_t;
+typedef unsigned long __pyx_t_8cysparse_12common_types_14cysparse_types_UINT64_t;
 
-/* "cysparse/cysparse_types/cysparse_types.pxd":65
+/* "cysparse/common_types/cysparse_types.pxd":65
  * ctypedef unsigned long UINT64_t
  * 
  * ctypedef float FLOAT32_t             # <<<<<<<<<<<<<<
  * ctypedef double FLOAT64_t
  * ctypedef long double FLOAT128_t
  */
-typedef float __pyx_t_8cysparse_14cysparse_types_14cysparse_types_FLOAT32_t;
+typedef float __pyx_t_8cysparse_12common_types_14cysparse_types_FLOAT32_t;
 
-/* "cysparse/cysparse_types/cysparse_types.pxd":66
+/* "cysparse/common_types/cysparse_types.pxd":66
  * 
  * ctypedef float FLOAT32_t
  * ctypedef double FLOAT64_t             # <<<<<<<<<<<<<<
  * ctypedef long double FLOAT128_t
  * 
  */
-typedef double __pyx_t_8cysparse_14cysparse_types_14cysparse_types_FLOAT64_t;
+typedef double __pyx_t_8cysparse_12common_types_14cysparse_types_FLOAT64_t;
 
-/* "cysparse/cysparse_types/cysparse_types.pxd":67
+/* "cysparse/common_types/cysparse_types.pxd":67
  * ctypedef float FLOAT32_t
  * ctypedef double FLOAT64_t
  * ctypedef long double FLOAT128_t             # <<<<<<<<<<<<<<
  * 
  * ctypedef float complex COMPLEX64_t
  */
-typedef long double __pyx_t_8cysparse_14cysparse_types_14cysparse_types_FLOAT128_t;
+typedef long double __pyx_t_8cysparse_12common_types_14cysparse_types_FLOAT128_t;
 #if CYTHON_CCOMPLEX
   #ifdef __cplusplus
     typedef ::std::complex< float > __pyx_t_float_complex;
@@ -573,66 +573,66 @@ typedef long double __pyx_t_8cysparse_14cysparse_types_14cysparse_types_FLOAT128
 
 
 /*--- Type declarations ---*/
-struct __pyx_t_8cysparse_14cysparse_types_14cysparse_types_CPType;
+struct __pyx_t_8cysparse_12common_types_14cysparse_types_CPType;
 
-/* "cysparse/cysparse_types/cysparse_types.pxd":48
+/* "cysparse/common_types/cysparse_types.pxd":48
  * #################################################################################################
  * 
  * cpdef enum CySparseType:             # <<<<<<<<<<<<<<
  *     INT32_T = 0
  *     UINT32_T = 1
  */
-enum __pyx_t_8cysparse_14cysparse_types_14cysparse_types_CySparseType {
-  __pyx_e_8cysparse_14cysparse_types_14cysparse_types_INT32_T = 0,
-  __pyx_e_8cysparse_14cysparse_types_14cysparse_types_UINT32_T = 1,
-  __pyx_e_8cysparse_14cysparse_types_14cysparse_types_INT64_T = 2,
-  __pyx_e_8cysparse_14cysparse_types_14cysparse_types_UINT64_T = 3,
-  __pyx_e_8cysparse_14cysparse_types_14cysparse_types_FLOAT32_T = 4,
-  __pyx_e_8cysparse_14cysparse_types_14cysparse_types_FLOAT64_T = 5,
-  __pyx_e_8cysparse_14cysparse_types_14cysparse_types_FLOAT128_T = 6,
-  __pyx_e_8cysparse_14cysparse_types_14cysparse_types_COMPLEX64_T = 7,
-  __pyx_e_8cysparse_14cysparse_types_14cysparse_types_COMPLEX128_T = 8,
-  __pyx_e_8cysparse_14cysparse_types_14cysparse_types_COMPLEX256_T = 9
+enum __pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType {
+  __pyx_e_8cysparse_12common_types_14cysparse_types_INT32_T = 0,
+  __pyx_e_8cysparse_12common_types_14cysparse_types_UINT32_T = 1,
+  __pyx_e_8cysparse_12common_types_14cysparse_types_INT64_T = 2,
+  __pyx_e_8cysparse_12common_types_14cysparse_types_UINT64_T = 3,
+  __pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT32_T = 4,
+  __pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT64_T = 5,
+  __pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT128_T = 6,
+  __pyx_e_8cysparse_12common_types_14cysparse_types_COMPLEX64_T = 7,
+  __pyx_e_8cysparse_12common_types_14cysparse_types_COMPLEX128_T = 8,
+  __pyx_e_8cysparse_12common_types_14cysparse_types_COMPLEX256_T = 9
 };
 
-/* "cysparse/cysparse_types/cysparse_types.pxd":81
+/* "cysparse/common_types/cysparse_types.pxd":81
  * 
  * # in bits
  * cdef enum CySparseTypeBitSize:             # <<<<<<<<<<<<<<
  *     INT32_t_BIT = sizeof(INT32_t) * CHAR_BIT
  *     UINT32_t_BIT = sizeof(INT32_t) * CHAR_BIT
  */
-enum __pyx_t_8cysparse_14cysparse_types_14cysparse_types_CySparseTypeBitSize {
+enum __pyx_t_8cysparse_12common_types_14cysparse_types_CySparseTypeBitSize {
 
-  /* "cysparse/cysparse_types/cysparse_types.pxd":91
+  /* "cysparse/common_types/cysparse_types.pxd":91
  *     COMPLEX64_t_BIT = sizeof(COMPLEX64_t) * CHAR_BIT
  *     COMPLEX128_t_BIT = sizeof(COMPLEX128_t) * CHAR_BIT
  *     COMPLEX256_t_BIT = sizeof(COMPLEX256_t) * CHAR_BIT             # <<<<<<<<<<<<<<
  * 
  * #################################################################################################
  */
-  __pyx_e_8cysparse_14cysparse_types_14cysparse_types_INT32_t_BIT = ((sizeof(__pyx_t_8cysparse_14cysparse_types_14cysparse_types_INT32_t)) * CHAR_BIT),
-  __pyx_e_8cysparse_14cysparse_types_14cysparse_types_UINT32_t_BIT = ((sizeof(__pyx_t_8cysparse_14cysparse_types_14cysparse_types_INT32_t)) * CHAR_BIT),
-  __pyx_e_8cysparse_14cysparse_types_14cysparse_types_INT64_t_BIT = ((sizeof(__pyx_t_8cysparse_14cysparse_types_14cysparse_types_INT64_t)) * CHAR_BIT),
-  __pyx_e_8cysparse_14cysparse_types_14cysparse_types_UINT64_t_BIT = ((sizeof(__pyx_t_8cysparse_14cysparse_types_14cysparse_types_UINT64_t)) * CHAR_BIT),
-  __pyx_e_8cysparse_14cysparse_types_14cysparse_types_FLOAT32_t_BIT = ((sizeof(__pyx_t_8cysparse_14cysparse_types_14cysparse_types_FLOAT32_t)) * CHAR_BIT),
-  __pyx_e_8cysparse_14cysparse_types_14cysparse_types_FLOAT64_t_BIT = ((sizeof(__pyx_t_8cysparse_14cysparse_types_14cysparse_types_FLOAT64_t)) * CHAR_BIT),
-  __pyx_e_8cysparse_14cysparse_types_14cysparse_types_FLOAT128_t_BIT = ((sizeof(__pyx_t_8cysparse_14cysparse_types_14cysparse_types_FLOAT128_t)) * CHAR_BIT),
-  __pyx_e_8cysparse_14cysparse_types_14cysparse_types_COMPLEX64_t_BIT = ((sizeof(__pyx_t_float_complex)) * CHAR_BIT),
-  __pyx_e_8cysparse_14cysparse_types_14cysparse_types_COMPLEX128_t_BIT = ((sizeof(__pyx_t_double_complex)) * CHAR_BIT),
-  __pyx_e_8cysparse_14cysparse_types_14cysparse_types_COMPLEX256_t_BIT = ((sizeof(__pyx_t_long_double_complex)) * CHAR_BIT)
+  __pyx_e_8cysparse_12common_types_14cysparse_types_INT32_t_BIT = ((sizeof(__pyx_t_8cysparse_12common_types_14cysparse_types_INT32_t)) * CHAR_BIT),
+  __pyx_e_8cysparse_12common_types_14cysparse_types_UINT32_t_BIT = ((sizeof(__pyx_t_8cysparse_12common_types_14cysparse_types_INT32_t)) * CHAR_BIT),
+  __pyx_e_8cysparse_12common_types_14cysparse_types_INT64_t_BIT = ((sizeof(__pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t)) * CHAR_BIT),
+  __pyx_e_8cysparse_12common_types_14cysparse_types_UINT64_t_BIT = ((sizeof(__pyx_t_8cysparse_12common_types_14cysparse_types_UINT64_t)) * CHAR_BIT),
+  __pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT32_t_BIT = ((sizeof(__pyx_t_8cysparse_12common_types_14cysparse_types_FLOAT32_t)) * CHAR_BIT),
+  __pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT64_t_BIT = ((sizeof(__pyx_t_8cysparse_12common_types_14cysparse_types_FLOAT64_t)) * CHAR_BIT),
+  __pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT128_t_BIT = ((sizeof(__pyx_t_8cysparse_12common_types_14cysparse_types_FLOAT128_t)) * CHAR_BIT),
+  __pyx_e_8cysparse_12common_types_14cysparse_types_COMPLEX64_t_BIT = ((sizeof(__pyx_t_float_complex)) * CHAR_BIT),
+  __pyx_e_8cysparse_12common_types_14cysparse_types_COMPLEX128_t_BIT = ((sizeof(__pyx_t_double_complex)) * CHAR_BIT),
+  __pyx_e_8cysparse_12common_types_14cysparse_types_COMPLEX256_t_BIT = ((sizeof(__pyx_t_long_double_complex)) * CHAR_BIT)
 };
 
-/* "cysparse/cysparse_types/cysparse_types.pxd":96
+/* "cysparse/common_types/cysparse_types.pxd":96
  * #                                 *** SPARSE MATRIX TYPES ***
  * #################################################################################################
  * cdef struct CPType:             # <<<<<<<<<<<<<<
  *     CySparseType dtype
  *     CySparseType itype
  */
-struct __pyx_t_8cysparse_14cysparse_types_14cysparse_types_CPType {
-  enum __pyx_t_8cysparse_14cysparse_types_14cysparse_types_CySparseType dtype;
-  enum __pyx_t_8cysparse_14cysparse_types_14cysparse_types_CySparseType itype;
+struct __pyx_t_8cysparse_12common_types_14cysparse_types_CPType {
+  enum __pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType dtype;
+  enum __pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType itype;
 };
 
 /* --- Runtime support code (head) --- */
@@ -698,7 +698,7 @@ struct __pyx_t_8cysparse_14cysparse_types_14cysparse_types_CPType {
 #define __Pyx_CLEAR(r)    do { PyObject* tmp = ((PyObject*)(r)); r = NULL; __Pyx_DECREF(tmp);} while(0)
 #define __Pyx_XCLEAR(r)   do { if((r) != NULL) {PyObject* tmp = ((PyObject*)(r)); r = NULL; __Pyx_DECREF(tmp);}} while(0)
 
-static CYTHON_INLINE __pyx_t_8cysparse_14cysparse_types_14cysparse_types_INT64_t __Pyx_div___pyx_t_8cysparse_14cysparse_types_14cysparse_types_INT64_t(__pyx_t_8cysparse_14cysparse_types_14cysparse_types_INT64_t, __pyx_t_8cysparse_14cysparse_types_14cysparse_types_INT64_t);
+static CYTHON_INLINE __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t __Pyx_div___pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t(__pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t, __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t);
 
 typedef struct {
     int code_line;
@@ -962,10 +962,10 @@ static PyTypeObject *__pyx_ptype_7cpython_7complex_complex = 0;
 
 /* Module declarations from 'cpython' */
 
-/* Module declarations from 'cysparse.cysparse_types.cysparse_types' */
+/* Module declarations from 'cysparse.common_types.cysparse_types' */
 
 /* Module declarations from 'cysparse.sparse.sparse_utils.generic.find_INT64_t_COMPLEX256_t' */
-static __pyx_t_8cysparse_14cysparse_types_14cysparse_types_INT32_t __pyx_f_8cysparse_6sparse_12sparse_utils_7generic_25find_INT64_t_COMPLEX256_t_compare_complex_COMPLEX256_t(__pyx_t_long_double_complex, __pyx_t_long_double_complex); /*proto*/
+static __pyx_t_8cysparse_12common_types_14cysparse_types_INT32_t __pyx_f_8cysparse_6sparse_12sparse_utils_7generic_25find_INT64_t_COMPLEX256_t_compare_complex_COMPLEX256_t(__pyx_t_long_double_complex, __pyx_t_long_double_complex); /*proto*/
 #define __Pyx_MODULE_NAME "cysparse.sparse.sparse_utils.generic.find_INT64_t_COMPLEX256_t"
 int __pyx_module_is_main_cysparse__sparse__sparse_utils__generic__find_INT64_t_COMPLEX256_t = 0;
 
@@ -985,8 +985,8 @@ static PyObject *__pyx_n_s_test;
  *     Compare two complex numbers.
  */
 
-static __pyx_t_8cysparse_14cysparse_types_14cysparse_types_INT32_t __pyx_f_8cysparse_6sparse_12sparse_utils_7generic_25find_INT64_t_COMPLEX256_t_compare_complex_COMPLEX256_t(__pyx_t_long_double_complex __pyx_v_a, __pyx_t_long_double_complex __pyx_v_b) {
-  __pyx_t_8cysparse_14cysparse_types_14cysparse_types_INT32_t __pyx_r;
+static __pyx_t_8cysparse_12common_types_14cysparse_types_INT32_t __pyx_f_8cysparse_6sparse_12sparse_utils_7generic_25find_INT64_t_COMPLEX256_t_compare_complex_COMPLEX256_t(__pyx_t_long_double_complex __pyx_v_a, __pyx_t_long_double_complex __pyx_v_b) {
+  __pyx_t_8cysparse_12common_types_14cysparse_types_INT32_t __pyx_r;
   __Pyx_RefNannyDeclarations
   int __pyx_t_1;
   __Pyx_RefNannySetupContext("compare_complex_COMPLEX256_t", 0);
@@ -1141,12 +1141,12 @@ static __pyx_t_8cysparse_14cysparse_types_14cysparse_types_INT32_t __pyx_f_8cysp
  *     Find the index of a given element in an array by bissecting.
  */
 
-static __pyx_t_8cysparse_14cysparse_types_14cysparse_types_INT64_t __pyx_f_8cysparse_6sparse_12sparse_utils_7generic_25find_INT64_t_COMPLEX256_t_find_bisec_INT64_t_COMPLEX256_t(__pyx_t_long_double_complex __pyx_v_element, __pyx_t_long_double_complex *__pyx_v_array, __pyx_t_8cysparse_14cysparse_types_14cysparse_types_INT64_t __pyx_v_lb, __pyx_t_8cysparse_14cysparse_types_14cysparse_types_INT64_t __pyx_v_ub) {
-  __pyx_t_8cysparse_14cysparse_types_14cysparse_types_INT64_t __pyx_v_lb_;
-  __pyx_t_8cysparse_14cysparse_types_14cysparse_types_INT64_t __pyx_v_ub_;
-  __pyx_t_8cysparse_14cysparse_types_14cysparse_types_INT64_t __pyx_v_middle_;
-  __pyx_t_8cysparse_14cysparse_types_14cysparse_types_INT64_t __pyx_v_index;
-  __pyx_t_8cysparse_14cysparse_types_14cysparse_types_INT64_t __pyx_r;
+static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t __pyx_f_8cysparse_6sparse_12sparse_utils_7generic_25find_INT64_t_COMPLEX256_t_find_bisec_INT64_t_COMPLEX256_t(__pyx_t_long_double_complex __pyx_v_element, __pyx_t_long_double_complex *__pyx_v_array, __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t __pyx_v_lb, __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t __pyx_v_ub) {
+  __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t __pyx_v_lb_;
+  __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t __pyx_v_ub_;
+  __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t __pyx_v_middle_;
+  __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t __pyx_v_index;
+  __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t __pyx_r;
   __Pyx_RefNannyDeclarations
   int __pyx_t_1;
   int __pyx_t_2;
@@ -1216,7 +1216,7 @@ static __pyx_t_8cysparse_14cysparse_types_14cysparse_types_INT64_t __pyx_f_8cysp
  *         if compare_complex_COMPLEX256_t(array[middle_], element) > 0:
  *             ub_ = middle_
  */
-    __pyx_v_middle_ = ((__pyx_t_8cysparse_14cysparse_types_14cysparse_types_INT64_t)floor(__Pyx_div___pyx_t_8cysparse_14cysparse_types_14cysparse_types_INT64_t((__pyx_v_lb_ + __pyx_v_ub_), 2)));
+    __pyx_v_middle_ = ((__pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t)floor(__Pyx_div___pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t((__pyx_v_lb_ + __pyx_v_ub_), 2)));
 
     /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX256_t.pyx":68
  *     while index == -1:
@@ -1372,11 +1372,11 @@ static __pyx_t_8cysparse_14cysparse_types_14cysparse_types_INT64_t __pyx_f_8cysp
  *     Find the index of a given element in an array by linear search.
  */
 
-static __pyx_t_8cysparse_14cysparse_types_14cysparse_types_INT64_t __pyx_f_8cysparse_6sparse_12sparse_utils_7generic_25find_INT64_t_COMPLEX256_t_find_linear_INT64_t_COMPLEX256_t(__pyx_t_long_double_complex __pyx_v_element, __pyx_t_long_double_complex *__pyx_v_array, __pyx_t_8cysparse_14cysparse_types_14cysparse_types_INT64_t __pyx_v_lb, __pyx_t_8cysparse_14cysparse_types_14cysparse_types_INT64_t __pyx_v_ub) {
-  __pyx_t_8cysparse_14cysparse_types_14cysparse_types_INT64_t __pyx_v_index;
-  __pyx_t_8cysparse_14cysparse_types_14cysparse_types_INT64_t __pyx_r;
+static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t __pyx_f_8cysparse_6sparse_12sparse_utils_7generic_25find_INT64_t_COMPLEX256_t_find_linear_INT64_t_COMPLEX256_t(__pyx_t_long_double_complex __pyx_v_element, __pyx_t_long_double_complex *__pyx_v_array, __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t __pyx_v_lb, __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t __pyx_v_ub) {
+  __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t __pyx_v_index;
+  __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t __pyx_r;
   __Pyx_RefNannyDeclarations
-  __pyx_t_8cysparse_14cysparse_types_14cysparse_types_INT64_t __pyx_t_1;
+  __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t __pyx_t_1;
   int __pyx_t_2;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
@@ -1595,8 +1595,8 @@ PyMODINIT_FUNC PyInit_find_INT64_t_COMPLEX256_t(void)
   /*--- Global init code ---*/
   /*--- Variable export code ---*/
   /*--- Function export code ---*/
-  if (__Pyx_ExportFunction("find_bisec_INT64_t_COMPLEX256_t", (void (*)(void))__pyx_f_8cysparse_6sparse_12sparse_utils_7generic_25find_INT64_t_COMPLEX256_t_find_bisec_INT64_t_COMPLEX256_t, "__pyx_t_8cysparse_14cysparse_types_14cysparse_types_INT64_t (__pyx_t_long_double_complex, __pyx_t_long_double_complex *, __pyx_t_8cysparse_14cysparse_types_14cysparse_types_INT64_t, __pyx_t_8cysparse_14cysparse_types_14cysparse_types_INT64_t)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (__Pyx_ExportFunction("find_linear_INT64_t_COMPLEX256_t", (void (*)(void))__pyx_f_8cysparse_6sparse_12sparse_utils_7generic_25find_INT64_t_COMPLEX256_t_find_linear_INT64_t_COMPLEX256_t, "__pyx_t_8cysparse_14cysparse_types_14cysparse_types_INT64_t (__pyx_t_long_double_complex, __pyx_t_long_double_complex *, __pyx_t_8cysparse_14cysparse_types_14cysparse_types_INT64_t, __pyx_t_8cysparse_14cysparse_types_14cysparse_types_INT64_t)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_ExportFunction("find_bisec_INT64_t_COMPLEX256_t", (void (*)(void))__pyx_f_8cysparse_6sparse_12sparse_utils_7generic_25find_INT64_t_COMPLEX256_t_find_bisec_INT64_t_COMPLEX256_t, "__pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t (__pyx_t_long_double_complex, __pyx_t_long_double_complex *, __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t, __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_ExportFunction("find_linear_INT64_t_COMPLEX256_t", (void (*)(void))__pyx_f_8cysparse_6sparse_12sparse_utils_7generic_25find_INT64_t_COMPLEX256_t_find_linear_INT64_t_COMPLEX256_t, "__pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t (__pyx_t_long_double_complex, __pyx_t_long_double_complex *, __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t, __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   /*--- Type init code ---*/
   /*--- Type import code ---*/
   __pyx_ptype_7cpython_4type_type = __Pyx_ImportType(__Pyx_BUILTIN_MODULE_NAME, "type", 
@@ -1616,7 +1616,7 @@ PyMODINIT_FUNC PyInit_find_INT64_t_COMPLEX256_t(void)
   #endif
 
   /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX256_t.pyx":1
- * from cysparse.cysparse_types.cysparse_types cimport *             # <<<<<<<<<<<<<<
+ * from cysparse.common_types.cysparse_types cimport *             # <<<<<<<<<<<<<<
  * 
  * cdef extern from "math.h":
  */
@@ -1664,9 +1664,9 @@ end:
 }
 #endif
 
-static CYTHON_INLINE __pyx_t_8cysparse_14cysparse_types_14cysparse_types_INT64_t __Pyx_div___pyx_t_8cysparse_14cysparse_types_14cysparse_types_INT64_t(__pyx_t_8cysparse_14cysparse_types_14cysparse_types_INT64_t a, __pyx_t_8cysparse_14cysparse_types_14cysparse_types_INT64_t b) {
-    __pyx_t_8cysparse_14cysparse_types_14cysparse_types_INT64_t q = a / b;
-    __pyx_t_8cysparse_14cysparse_types_14cysparse_types_INT64_t r = a - q*b;
+static CYTHON_INLINE __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t __Pyx_div___pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t(__pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t a, __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t b) {
+    __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t q = a / b;
+    __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t r = a - q*b;
     q -= ((r != 0) & ((r ^ b) < 0));
     return q;
 }

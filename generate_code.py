@@ -73,7 +73,7 @@ else:
 #####################################################
 # COMMON STUFF
 #####################################################
-# TODO: grab this from cysparse_types.pxd or at least from a one common file
+# TODO: grab this from common_types.pxd or at least from a one common file
 BASIC_TYPES = ['INT32_t', 'UINT32_t', 'INT64_t', 'UINT64_t', 'FLOAT32_t', 'FLOAT64_t', 'FLOAT128_t', 'COMPLEX64_t', 'COMPLEX128_t', 'COMPLEX256_t']
 ELEMENT_TYPES = ['INT32_t', 'INT64_t', 'FLOAT32_t', 'FLOAT64_t', 'FLOAT128_t', 'COMPLEX64_t', 'COMPLEX128_t', 'COMPLEX256_t']
 INDEX_TYPES = ['INT32_t', 'INT64_t']
@@ -209,7 +209,7 @@ if __name__ == "__main__":
     ########## Setup ############
     cygenja_engine.register_action('config', '*.*', single_generation)
     ########## TYPES ############
-    cygenja_engine.register_action('cysparse/cysparse_types', '*.*', single_generation)
+    cygenja_engine.register_action('cysparse/common_types', '*.*', single_generation)
     ########## Sparse ###########
     # CSC
     cygenja_engine.register_action('cysparse/sparse/csc_mat_matrices', '*.*', generate_following_index_and_element)

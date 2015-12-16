@@ -2,7 +2,7 @@
 
 ########################################################################################################################
 #                                                                                                                      #
-#                              The file `setup.py` is automatically generated from `setup.cpy`                         #
+#                              The file `setup.py` is automatically generated from `config/setup.cpy`                  #
 #                                                                                                                      #
 ########################################################################################################################
 
@@ -103,13 +103,13 @@ else:
 #                                                *** types ***
 base_ext_params = copy.deepcopy(ext_params)
 base_ext = [
-    Extension(name="cysparse.cysparse_types.cysparse_types",
-              sources=["cysparse/cysparse_types/cysparse_types.pxd", "cysparse/cysparse_types/cysparse_types.pyx"]),
-    Extension(name="cysparse.cysparse_types.cysparse_numpy_types",
-              sources=["cysparse/cysparse_types/cysparse_numpy_types.pxd", "cysparse/cysparse_types/cysparse_numpy_types.pyx"],
+    Extension(name="cysparse.common_types.cysparse_types",
+              sources=["cysparse/common_types/cysparse_types.pxd", "cysparse/common_types/cysparse_types.pyx"]),
+    Extension(name="cysparse.common_types.cysparse_numpy_types",
+              sources=["cysparse/common_types/cysparse_numpy_types.pxd", "cysparse/common_types/cysparse_numpy_types.pyx"],
               **base_ext_params),
-    Extension(name="cysparse.cysparse_types.cysparse_generic_types",
-              sources=["cysparse/cysparse_types/cysparse_generic_types.pxd", "cysparse/cysparse_types/cysparse_generic_types.pyx"]),
+    Extension(name="cysparse.common_types.cysparse_generic_types",
+              sources=["cysparse/common_types/cysparse_generic_types.pxd", "cysparse/common_types/cysparse_generic_types.pyx"]),
     ]
 
 #-----------------------------------------------------------------------------------------------------------------------
@@ -1137,7 +1137,7 @@ utils_ext = [
 # config
 ########################################################################################################################
 packages_list = ['cysparse',
-            'cysparse.cysparse_types',
+            'cysparse.common_types',
             'cysparse.sparse',
             'cysparse.sparse.sparse_proxies',
             'cysparse.sparse.sparse_proxies.complex_generic',

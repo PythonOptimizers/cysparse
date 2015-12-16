@@ -8,7 +8,7 @@ Warning:
     instantiation.
 """
 
-from cysparse.cysparse_types.cysparse_types cimport *
+from cysparse.common_types.cysparse_types cimport *
 
 #from cysparse.sparse.ll_mat_view cimport LLSparseMatrixView
 

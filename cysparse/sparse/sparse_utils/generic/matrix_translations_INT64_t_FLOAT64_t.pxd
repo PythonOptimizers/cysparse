@@ -2,7 +2,7 @@
 Diverse utilities to translate one matrix format into another.
 
 """
-from cysparse.cysparse_types.cysparse_types cimport *
+from cysparse.common_types.cysparse_types cimport *
 
 cdef csr_to_csc_kernel_INT64_t_FLOAT64_t(INT64_t nrow, INT64_t ncol, INT64_t nnz,
                                       INT64_t * csr_ind, INT64_t * csr_col, FLOAT64_t * csr_val,

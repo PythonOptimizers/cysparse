@@ -4,7 +4,7 @@ Syntactic sugar: we want to use the following code: ``A.H * b`` to compute :math
 ``A.H`` returns a proxy to the original matrix ``A`` that allows us to use the above notation.
 """
 
-from cysparse.cysparse_types.cysparse_types cimport CPType
+from cysparse.common_types.cysparse_types cimport CPType
 from cysparse.sparse.s_mat cimport SparseMatrix
 
 cdef class ConjugateTransposedSparseMatrix_INT32_t_COMPLEX64_t:

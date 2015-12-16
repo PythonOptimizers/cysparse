@@ -7,7 +7,7 @@ Condensed Sparse Row (CSR) Format Matrices.
 from __future__ import print_function
 
 from cysparse.sparse.s_mat cimport unexposed_value
-from cysparse.cysparse_types.cysparse_numpy_types import *
+from cysparse.common_types.cysparse_numpy_types import *
 
 from cysparse.sparse.s_mat_matrices.s_mat_INT64_t_COMPLEX256_t cimport ImmutableSparseMatrix_INT64_t_COMPLEX256_t, MutableSparseMatrix_INT64_t_COMPLEX256_t
 from cysparse.sparse.ll_mat_matrices.ll_mat_INT64_t_COMPLEX256_t cimport LLSparseMatrix_INT64_t_COMPLEX256_t

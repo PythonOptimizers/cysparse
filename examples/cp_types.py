@@ -1,5 +1,5 @@
-import cysparse.cysparse_types.cysparse_types as types
-import cysparse.cysparse_types.cysparse_numpy_types as np_types
+import cysparse.common_types.cysparse_types as types
+import cysparse.common_types.cysparse_numpy_types as np_types
 import cysparse.sparse.ll_mat as ll_mat
 
 import numpy as np

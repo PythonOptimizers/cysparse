@@ -1,4 +1,4 @@
-from cysparse.cysparse_types.cysparse_types import min_integer_type, BASIC_TYPES, report_basic_types, INT32_t_MAX
+from cysparse.common_types.cysparse_types import min_integer_type, BASIC_TYPES, report_basic_types, INT32_t_MAX
 
 n = 2
 

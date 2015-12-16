@@ -1,6 +1,6 @@
 #define NPY_NO_DEPRECATED_API NPY_1_7_API_VERSION
 
-from cysparse.cysparse_types.cysparse_types cimport *
+from cysparse.common_types.cysparse_types cimport *
 
 from cysparse.sparse.s_mat_matrices.s_mat_INT64_t_COMPLEX64_t cimport MutableSparseMatrix_INT64_t_COMPLEX64_t
 # TODO: investigate: how come this could even compile before?

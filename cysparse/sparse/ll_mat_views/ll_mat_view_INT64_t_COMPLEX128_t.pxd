@@ -1,4 +1,4 @@
-from cysparse.cysparse_types.cysparse_types cimport *
+from cysparse.common_types.cysparse_types cimport *
 
 # forward declaration
 cdef class LLSparseMatrixView_INT64_t_COMPLEX128_t

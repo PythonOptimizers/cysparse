@@ -1,4 +1,4 @@
-from cysparse.cysparse_types.cysparse_types cimport *
+from cysparse.common_types.cysparse_types cimport *
 
 
 cdef csr_to_csc_kernel_INT64_t_COMPLEX256_t(INT64_t nrow, INT64_t ncol, INT64_t nnz,
