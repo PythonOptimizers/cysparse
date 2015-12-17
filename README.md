@@ -78,6 +78,19 @@ For the Cython version, include everything needed for Python and add:
 
 [TODO]
 
+## Run tests
+
+Invoke:
+
+```bash
+python run_tests.py
+```
+
+Try the ``-h`` switch to see what options are available.
+
+## Run performance tests
+
+[TODO]
 
 ## Want to follow the implementation of CySparse?
 
