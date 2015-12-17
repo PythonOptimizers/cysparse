@@ -1,5 +1,5 @@
 from cysparse.common_types.cysparse_types cimport *
-from cysparse.sparse.s_mat cimport SparseMatrix, unexposed_value, MUTABLE_SPARSE_MAT_DEFAULT_SIZE_HINT, MakeMatrixString
+from cysparse.sparse.s_mat cimport SparseMatrix, unexposed_value, MUTABLE_SPARSE_MAT_DEFAULT_SIZE_HINT, MakeMatrixLikeString
 
 from cysparse.sparse.sparse_proxies.t_mat cimport TransposedSparseMatrix
 
@@ -307,7 +307,7 @@ cdef class SparseMatrix_INT64_t_COMPLEX64_t(SparseMatrix):
         """
         s = self._matrix_description_before_printing()
         s += '\n'
-        s += MakeMatrixString(self)
+        s += MakeMatrixLikeString(self)
 
         return s
 

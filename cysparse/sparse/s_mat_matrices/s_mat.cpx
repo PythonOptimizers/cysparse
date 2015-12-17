@@ -1,5 +1,5 @@
 from cysparse.common_types.cysparse_types cimport *
-from cysparse.sparse.s_mat cimport SparseMatrix, unexposed_value, MUTABLE_SPARSE_MAT_DEFAULT_SIZE_HINT, MakeMatrixString
+from cysparse.sparse.s_mat cimport SparseMatrix, unexposed_value, MUTABLE_SPARSE_MAT_DEFAULT_SIZE_HINT, MakeMatrixLikeString
 
 from cysparse.sparse.sparse_proxies.t_mat cimport TransposedSparseMatrix
 {% if type in complex_list %}
@@ -46,7 +46,7 @@ cdef class SparseMatrix_@index@_@type@(SparseMatrix):
         """
 
         Warning:
-            Only use named arguments!
+            Only use named arguments! This is on purppose!
         """
         assert unexposed_value == kwargs.get('control_object', None), "Matrix must be instantiated with a factory method"
 
@@ -315,7 +315,7 @@ cdef class SparseMatrix_@index@_@type@(SparseMatrix):
         """
         s = self._matrix_description_before_printing()
         s += '\n'
-        s += MakeMatrixString(self)
+        s += MakeMatrixLikeString(self)
 
         return s
 
@@ -329,7 +329,7 @@ cdef class MutableSparseMatrix_@index@_@type@(SparseMatrix_@index@_@type@):
         """
 
         Warning:
-            Only use named arguments!
+            We only use named arguments! This is on purppose!
 
         """
         self.size_hint = kwargs.get('size_hint', MUTABLE_SPARSE_MAT_DEFAULT_SIZE_HINT)
@@ -350,6 +350,6 @@ cdef class ImmutableSparseMatrix_@index@_@type@(SparseMatrix_@index@_@type@):
         """
 
         Warning:
-            Only use named arguments!
+            We only use named arguments! This is on purppose!
         """
         self.__is_mutable = False

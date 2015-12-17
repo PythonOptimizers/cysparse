@@ -49,4 +49,4 @@ cdef class SparseMatrix:
         CPType cp_type                # Internal types of the matrix
 
 
-cdef MakeMatrixString(object A, full=?)
+cdef MakeMatrixLikeString(object A, full=?)

@@ -634,14 +634,14 @@ struct __pyx_t_8cysparse_12common_types_14cysparse_types_CPType {
   enum __pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType dtype;
   enum __pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType itype;
 };
-struct __pyx_opt_args_8cysparse_6sparse_5s_mat_MakeMatrixString;
+struct __pyx_opt_args_8cysparse_6sparse_5s_mat_MakeMatrixLikeString;
 
 /* "cysparse/sparse/s_mat.pxd":52
  * 
  * 
- * cdef MakeMatrixString(object A, full=?)             # <<<<<<<<<<<<<<
+ * cdef MakeMatrixLikeString(object A, full=?)             # <<<<<<<<<<<<<<
  */
-struct __pyx_opt_args_8cysparse_6sparse_5s_mat_MakeMatrixString {
+struct __pyx_opt_args_8cysparse_6sparse_5s_mat_MakeMatrixLikeString {
   int __pyx_n;
   PyObject *full;
 };
@@ -2033,7 +2033,7 @@ static int __pyx_pf_8cysparse_6sparse_5s_mat_12SparseMatrix___cinit__(struct __p
   __Pyx_RefNannySetupContext("__cinit__", 0);
 
   /* "cysparse/sparse/s_mat.pyx":86
- *             Only use named arguments! This is on purpose!
+ *             We only use named arguments! This is on purpose!
  *         """
  *         assert unexposed_value == kwargs.get('control_object', None), "Matrix must be instantiated with a factory method"             # <<<<<<<<<<<<<<
  * 
@@ -4273,12 +4273,12 @@ static PyObject *__pyx_pf_8cysparse_6sparse_5s_mat_12SparseMatrix_54to_string(CY
 /* "cysparse/sparse/s_mat.pyx":328
  * 
  * 
- * cdef MakeMatrixString(object A, full=False):             # <<<<<<<<<<<<<<
+ * cdef MakeMatrixLikeString(object A, full=False):             # <<<<<<<<<<<<<<
  *     """
  *     Return a print of the :class:`SparseMatrix` object.
  */
 
-static PyObject *__pyx_f_8cysparse_6sparse_5s_mat_MakeMatrixString(PyObject *__pyx_v_A, struct __pyx_opt_args_8cysparse_6sparse_5s_mat_MakeMatrixString *__pyx_optional_args) {
+static PyObject *__pyx_f_8cysparse_6sparse_5s_mat_MakeMatrixLikeString(PyObject *__pyx_v_A, struct __pyx_opt_args_8cysparse_6sparse_5s_mat_MakeMatrixLikeString *__pyx_optional_args) {
   PyObject *__pyx_v_full = ((PyObject *)Py_False);
   Py_ssize_t __pyx_v_MAX_MATRIX_HEIGHT;
   Py_ssize_t __pyx_v_MAX_MATRIX_WIDTH;
@@ -4308,7 +4308,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_5s_mat_MakeMatrixString(PyObject *__p
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
-  __Pyx_RefNannySetupContext("MakeMatrixString", 0);
+  __Pyx_RefNannySetupContext("MakeMatrixLikeString", 0);
   if (__pyx_optional_args) {
     if (__pyx_optional_args->__pyx_n > 0) {
       __pyx_v_full = __pyx_optional_args->full;
@@ -4938,7 +4938,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_5s_mat_MakeMatrixString(PyObject *__p
   /* "cysparse/sparse/s_mat.pyx":328
  * 
  * 
- * cdef MakeMatrixString(object A, full=False):             # <<<<<<<<<<<<<<
+ * cdef MakeMatrixLikeString(object A, full=False):             # <<<<<<<<<<<<<<
  *     """
  *     Return a print of the :class:`SparseMatrix` object.
  */
@@ -4952,7 +4952,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_5s_mat_MakeMatrixString(PyObject *__p
   __Pyx_XDECREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_11);
   __Pyx_XDECREF(__pyx_t_13);
-  __Pyx_AddTraceback("cysparse.sparse.s_mat.MakeMatrixString", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("cysparse.sparse.s_mat.MakeMatrixLikeString", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = 0;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_s);
@@ -5112,7 +5112,7 @@ static int __pyx_import_star_set(PyObject *o, PyObject* py_name, char *name) {
     "__pyx_ctuple_Py_ssize_t_struct",
     "__pyx_ctuple_cdb91__3dff7__enum__space___dunderpyx_t_8cysparse_12common_types_14cysparse_types_CySparseType__etc__etc",
     "__pyx_ctuple_cdb91__3dff7__enum__space___dunderpyx_t_8cysparse_12common_types_14cysparse_types_CySparseType__etc__etc_struct",
-    "__pyx_opt_args_8cysparse_6sparse_5s_mat_MakeMatrixString",
+    "__pyx_opt_args_8cysparse_6sparse_5s_mat_MakeMatrixLikeString",
     0
   };
   const char** type_name = internal_type_names;
@@ -5844,7 +5844,7 @@ PyMODINIT_FUNC PyInit_s_mat(void)
   if (__Pyx_ExportFunction("__set_use_zero_storage_attribute", (void (*)(void))__pyx_f_8cysparse_6sparse_5s_mat___set_use_zero_storage_attribute, "PyObject *(struct __pyx_obj_8cysparse_6sparse_5s_mat_SparseMatrix *, int)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   if (__Pyx_ExportFunction("PySparseMatrix_Check", (void (*)(void))__pyx_f_8cysparse_6sparse_5s_mat_PySparseMatrix_Check, "int (PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   if (__Pyx_ExportFunction("PyLLSparseMatrixView_Check", (void (*)(void))__pyx_f_8cysparse_6sparse_5s_mat_PyLLSparseMatrixView_Check, "int (PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (__Pyx_ExportFunction("MakeMatrixString", (void (*)(void))__pyx_f_8cysparse_6sparse_5s_mat_MakeMatrixString, "PyObject *(PyObject *, struct __pyx_opt_args_8cysparse_6sparse_5s_mat_MakeMatrixString *__pyx_optional_args)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_ExportFunction("MakeMatrixLikeString", (void (*)(void))__pyx_f_8cysparse_6sparse_5s_mat_MakeMatrixLikeString, "PyObject *(PyObject *, struct __pyx_opt_args_8cysparse_6sparse_5s_mat_MakeMatrixLikeString *__pyx_optional_args)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   /*--- Type init code ---*/
   if (PyType_Ready(&__pyx_type_8cysparse_6sparse_5s_mat_SparseMatrix) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 78; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_type_8cysparse_6sparse_5s_mat_SparseMatrix.tp_print = 0;

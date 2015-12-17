@@ -1,4 +1,4 @@
-from cysparse.sparse.s_mat cimport SparseMatrix, MakeMatrixString
+from cysparse.sparse.s_mat cimport SparseMatrix, MakeMatrixLikeString
 
 from cysparse.common_types.cysparse_numpy_types import are_mixed_types_compatible, cysparse_to_numpy_type
 from cysparse.sparse.ll_mat cimport PyLLSparseMatrix_Check
@@ -157,6 +157,6 @@ cdef class ConjugatedSparseMatrix_INT32_t_COMPLEX128_t:
         """
         s = self._matrix_description_before_printing()
         s += '\n'
-        s += MakeMatrixString(self)
+        s += MakeMatrixLikeString(self)
 
         return s

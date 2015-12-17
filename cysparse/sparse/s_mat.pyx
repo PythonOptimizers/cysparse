@@ -63,6 +63,7 @@ cpdef bint PyLLSparseMatrixView_Check(object obj):
     Return:
         ``True`` if ``obj`` is a ``LLSparseMatrixView`` object or inherited from it.
     """
+    # warning: this works with inherited objects as long as the convention to name type ""LLSparseMatrixView"" holds...
     is_ll_mat_view = False
     try:
         if obj.type == 'LLSparseMatrixView':
@@ -81,7 +82,7 @@ cdef class SparseMatrix:
         """
 
         Warning:
-            Only use named arguments! This is on purpose!
+            We only use named arguments! This is on purpose!
         """
         assert unexposed_value == kwargs.get('control_object', None), "Matrix must be instantiated with a factory method"
 
@@ -131,7 +132,7 @@ cdef class SparseMatrix:
     ####################################################################################################################
     # All methods raise NotImplementedError. We could have provided a common method that would have been refined in
     # the respective children classes but we preferred to force an optimized version for all classes inheriting from
-    # this class, i.e. if it works, it is optimized for that particular class, if not, it must be implemented if needed.
+    # this class, i.e. if it works, it is optimized for that particular class, if not, it must be implemented.
 
     #########################
     # Strings
@@ -325,7 +326,7 @@ cdef class SparseMatrix:
         raise NotImplementedError("Operation not implemented (yet). Please report.")
 
 
-cdef MakeMatrixString(object A, full=False):
+cdef MakeMatrixLikeString(object A, full=False):
     """
     Return a print of the :class:`SparseMatrix` object.
 
