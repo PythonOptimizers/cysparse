@@ -59,6 +59,10 @@ To run the tests:
 
 - nose;
 
+to run the performance tests:
+
+[TODO]
+
 For the Cython version, include everything needed for Python and add:
 
 - Cython;
