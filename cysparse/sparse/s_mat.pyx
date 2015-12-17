@@ -152,7 +152,7 @@ cdef class SparseMatrix:
         """
         raise NotImplementedError("Operation not implemented (yet). Please report.")
 
-    def tril(self, int k):
+    def tril(self, int k = 0):
         """
         Return the lower triangular part of the matrix.
 
@@ -162,7 +162,7 @@ cdef class SparseMatrix:
         """
         raise NotImplementedError("Operation not implemented (yet). Please report.")
 
-    def triu(self, int k):
+    def triu(self, int k = 0):
         """
         Return the upper triangular part of the matrix.
 
@@ -182,32 +182,32 @@ cdef class SparseMatrix:
     #########################
     # Multiplication with vectors
     #########################
-    def matvec(self, B):
+    def matvec(self, b):
         """
-        Return ``A * B`` with ``B`` a :program:`NumPy` vector.
+        Return ``A * b`` with ``b`` a :program:`NumPy` vector.
 
         Args:
-            B: A :program:`NumPy` vector.
+            b: A :program:`NumPy` vector.
 
         """
         raise NotImplementedError("Operation not implemented (yet). Please report.")
 
-    def matvec_transp(self, B):
+    def matvec_transp(self, b):
         """
-        Return ``A^t * B`` with ``B`` a :program:`NumPy` vector.
+        Return ``A^t * b`` with ``b`` a :program:`NumPy` vector.
 
         Args:
-            B: A :program:`NumPy` vector.
+            b: A :program:`NumPy` vector.
 
         """
         raise NotImplementedError("Operation not implemented (yet). Please report.")
 
-    def matvec_htransp(self, B):
+    def matvec_htransp(self, b):
         """
-        Return ``A^h * B`` with ``B`` a :program:`NumPy` vector.
+        Return ``A^h * b`` with ``b`` a :program:`NumPy` vector.
 
         Args:
-            B: A :program:`NumPy` vector.
+            b: A :program:`NumPy` vector.
 
         """
         if not is_complex_type(self.cp_type.dtype):
@@ -216,12 +216,12 @@ cdef class SparseMatrix:
         raise NotImplementedError("Operation not implemented (yet). Please report.")
 
 
-    def matvec_conj(self, B):
+    def matvec_conj(self, b):
         """
-        Return ``conj(A) * B`` with ``B`` a :program:`NumPy` vector.
+        Return ``conj(A) * b`` with ``b`` a :program:`NumPy` vector.
 
         Args:
-            B: A :program:`NumPy` vector.
+            b: A :program:`NumPy` vector.
 
         """
         if not is_complex_type(self.cp_type.dtype):
@@ -281,13 +281,6 @@ cdef class SparseMatrix:
     #########################
     # Internal arrays
     #########################
-    def get_c_pointers(self):
-        """
-        Return C pointers to internal arrays.
-
-        """
-        raise NotImplementedError("Operation not allowed or not implemented.")
-
     def get_numpy_arrays(self):
         """
         Return :program:`NumPy` arrays equivalent to internal C-arrays.
@@ -297,12 +290,9 @@ cdef class SparseMatrix:
     #########################
     # Printing
     #########################
-    def to_string(self, **kwargs):
+    def __str__(self):
         """
         Return a string representing the **content** of matrix.
-
-        Args:
-            kwargs: Arguments are named.
 
         """
         raise NotImplementedError("Operation not implemented (yet). Please report.")
