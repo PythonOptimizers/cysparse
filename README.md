@@ -2,7 +2,7 @@
 
 Fast sparse matrix library for Python/Cython.
 
-:white_check_mark: THIS VERSION SHOULD WORK BUT MORE TESTS ARE NEEDED!  :white_check_mark:
+:cyclone: :cyclone: :cyclone: THIS VERSION IS BEING COMPLETELY REWRITTEN: :weary: YOU :weary: SHALL :no_entry: NOT :no_entry: USE IT! :cyclone: :cyclone: :cyclone:
 
 
 I'm working on branch `feature/decoupling` which contains the :new: version of `CySparse`.
