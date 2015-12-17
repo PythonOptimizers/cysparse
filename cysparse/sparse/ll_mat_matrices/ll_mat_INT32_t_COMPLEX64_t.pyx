@@ -1853,7 +1853,7 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX64_t(MutableSparseMatrix_INT32_t_COMPLE
 
         return diag
 
-    def tril(self, int k):
+    def tril(self, int k = 0):
         """
         Return the lower triangular part of the matrix.
 
@@ -1891,7 +1891,7 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX64_t(MutableSparseMatrix_INT32_t_COMPLE
 
         return ll_mat_tril
 
-    def triu(self, int k):
+    def triu(self, int k = 0):
         """
         Return the upper triangular part of the matrix.
 

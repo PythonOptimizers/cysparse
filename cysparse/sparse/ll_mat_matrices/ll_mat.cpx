@@ -1931,7 +1931,7 @@ YOU HAVE TO EXPLICITY CAST YOUR TYPE
 
         return diag
 
-    def tril(self, int k):
+    def tril(self, int k = 0):
         """
         Return the lower triangular part of the matrix.
 
@@ -1969,7 +1969,7 @@ YOU HAVE TO EXPLICITY CAST YOUR TYPE
 
         return ll_mat_tril
 
-    def triu(self, int k):
+    def triu(self, int k = 0):
         """
         Return the upper triangular part of the matrix.
 

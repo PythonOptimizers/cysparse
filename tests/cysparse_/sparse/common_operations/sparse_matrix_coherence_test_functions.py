@@ -42,6 +42,10 @@ def test_common_matrix_like__vector_multiplication(obj):
     Returns:
         ``True`` if all methods do exist, ``False`` otherwise.
 
+    Note:
+        The existence of a method doesn't guarantee anything about its implementation. Maybe it is not implemented (empty)
+        or it raises some ``NotImplementedError`` or other exception.
+
     """
     all_OK = True
 
