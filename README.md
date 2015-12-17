@@ -53,7 +53,11 @@ For the Python version:
 If you intend to generate the documention:
 
 - Sphinx;
-- sphinx_bootstrap_theme
+- sphinx_bootstrap_theme;
+
+To run the tests:
+
+- nose;
 
 For the Cython version, include everything needed for Python and add:
 
