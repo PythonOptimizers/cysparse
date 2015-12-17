@@ -218,8 +218,17 @@ While this makes perfect sense at first, it is not very practical with the curre
 ``nrow`` and ``ncol`` as attributes but this cannot be done for the moment as both attributes are better typed [#untyped_attributes]_. Thus, ``nrow`` and ``ncol`` must be defined in ``SparseMatrix_INDEX_TYPE``, and then
 again in ``LLSparseMatrixView_INDEX_TYPE`` and then again... We could define a base ``MatrixLike_INDEX_TYPE`` class and so on.But the point is that ``MatrixLike`` would be quite empty. Basically, I tried to keep it simple and 
 without too many inheritance. The resulting class hierarchy is far from optimal (and **is** strange [#class_hierarchy_strange]_) but is - in my view - a good compromise between code complexity (maintenance), code 
-duplication and ease of use but also Cython's limitations.
+duplication and ease of use but also Cython's limitations (See [#proxies_inheriting_from_a_common_base_class]_).
 
+The current situation is:
+
+.. figure:: images/current_class_hierarchy.*
+    :width: 700pt
+    :align: center
+
+    Current class hierarchy
+    
+which involves some code duplication and the use of global functions.
 
 ..  raw:: html
 

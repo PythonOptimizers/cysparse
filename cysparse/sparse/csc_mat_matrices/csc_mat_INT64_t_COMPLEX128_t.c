@@ -944,14 +944,14 @@ struct __pyx_t_8cysparse_12common_types_14cysparse_types_CPType {
   enum __pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType dtype;
   enum __pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType itype;
 };
-struct __pyx_opt_args_8cysparse_6sparse_5s_mat_MakeMatrixString;
+struct __pyx_opt_args_8cysparse_6sparse_5s_mat_MakeMatrixLikeString;
 
 /* "cysparse/sparse/s_mat.pxd":52
  * 
  * 
- * cdef MakeMatrixString(object A, full=?)             # <<<<<<<<<<<<<<
+ * cdef MakeMatrixLikeString(object A, full=?)             # <<<<<<<<<<<<<<
  */
-struct __pyx_opt_args_8cysparse_6sparse_5s_mat_MakeMatrixString {
+struct __pyx_opt_args_8cysparse_6sparse_5s_mat_MakeMatrixLikeString {
   int __pyx_n;
   PyObject *full;
 };
@@ -1081,7 +1081,7 @@ struct __pyx_opt_args_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT64_t_COM
 };
 
 /* "cysparse/sparse/s_mat.pxd":21
- * cpdef bint PyLLSparseMatrixView_Check(object obj)
+ * 
  * 
  * cdef class SparseMatrix:             # <<<<<<<<<<<<<<
  *     """

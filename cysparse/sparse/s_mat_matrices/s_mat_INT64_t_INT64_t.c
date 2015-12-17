@@ -651,7 +651,7 @@ struct __pyx_opt_args_8cysparse_6sparse_5s_mat_MakeMatrixLikeString {
 };
 
 /* "cysparse/sparse/s_mat.pxd":21
- * cpdef bint PyLLSparseMatrixView_Check(object obj)
+ * 
  * 
  * cdef class SparseMatrix:             # <<<<<<<<<<<<<<
  *     """
@@ -1312,7 +1312,7 @@ static int __pyx_pf_8cysparse_6sparse_14s_mat_matrices_21s_mat_INT64_t_INT64_t_2
   __Pyx_RefNannySetupContext("__cinit__", 0);
 
   /* "cysparse/sparse/s_mat_matrices/s_mat_INT64_t_INT64_t.pyx":48
- *             Only use named arguments!
+ *             Only use named arguments! This is on purppose!
  *         """
  *         assert unexposed_value == kwargs.get('control_object', None), "Matrix must be instantiated with a factory method"             # <<<<<<<<<<<<<<
  * 
@@ -3530,7 +3530,7 @@ static int __pyx_pf_8cysparse_6sparse_14s_mat_matrices_21s_mat_INT64_t_INT64_t_3
   __Pyx_RefNannySetupContext("__cinit__", 0);
 
   /* "cysparse/sparse/s_mat_matrices/s_mat_INT64_t_INT64_t.pyx":315
- *             Only use named arguments!
+ *             We only use named arguments! This is on purppose!
  *         """
  *         self.__is_mutable = False             # <<<<<<<<<<<<<<
  */

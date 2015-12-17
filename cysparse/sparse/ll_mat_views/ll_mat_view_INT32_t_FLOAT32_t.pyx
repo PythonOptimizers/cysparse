@@ -25,6 +25,26 @@ cdef extern from "Python.h":
     # *** Types ***
     int PyInt_Check(PyObject *o)
 
+cpdef bint PyLLSparseMatrixView_Check(object obj):
+    """
+    Test if ``obj`` is a ``LLSparseMatrixView`` or not.
+
+    Args:
+        obj: Whatever.
+
+    Return:
+        ``True`` if ``obj`` is a ``LLSparseMatrixView`` object or inherited from it.
+    """
+    # warning: this works with inherited objects as long as the convention to name type ""LLSparseMatrixView"" holds...
+    is_ll_mat_view = False
+    try:
+        if obj.type == 'LLSparseMatrixView':
+            is_ll_mat_view = True
+    except:
+        pass
+
+    return is_ll_mat_view
+
 cdef class LLSparseMatrixView_INT32_t_FLOAT32_t:
     ####################################################################################################################
     # Init/Free/Memory

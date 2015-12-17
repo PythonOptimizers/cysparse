@@ -16,7 +16,7 @@ cdef INT32_t MUTABLE_SPARSE_MAT_DEFAULT_SIZE_HINT
 
 cdef __set_use_zero_storage_attribute(SparseMatrix A, bint use_zero_storage)
 cpdef bint PySparseMatrix_Check(object obj)
-cpdef bint PyLLSparseMatrixView_Check(object obj)
+
 
 cdef class SparseMatrix:
     """

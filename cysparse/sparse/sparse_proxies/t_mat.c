@@ -877,7 +877,7 @@ typedef npy_clongdouble __pyx_t_5numpy_clongdouble_t;
 typedef npy_cdouble __pyx_t_5numpy_complex_t;
 
 /* "cysparse/sparse/s_mat.pxd":21
- * cpdef bint PyLLSparseMatrixView_Check(object obj)
+ * 
  * 
  * cdef class SparseMatrix:             # <<<<<<<<<<<<<<
  *     """

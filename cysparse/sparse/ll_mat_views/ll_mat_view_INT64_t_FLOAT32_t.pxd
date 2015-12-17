@@ -7,6 +7,8 @@ from cysparse.sparse.ll_mat_matrices.ll_mat_INT64_t_FLOAT32_t cimport LLSparseMa
 
 from cpython cimport PyObject
 
+cpdef bint PyLLSparseMatrixView_Check(object obj)
+
 cdef class LLSparseMatrixView_INT64_t_FLOAT32_t:
     cdef:
         INT64_t __nrow    # number of rows of the collected view

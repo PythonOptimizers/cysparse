@@ -43,7 +43,7 @@ cdef class SparseMatrix_INT64_t_INT64_t(SparseMatrix):
         """
 
         Warning:
-            Only use named arguments!
+            Only use named arguments! This is on purppose!
         """
         assert unexposed_value == kwargs.get('control_object', None), "Matrix must be instantiated with a factory method"
 
@@ -289,7 +289,7 @@ cdef class MutableSparseMatrix_INT64_t_INT64_t(SparseMatrix_INT64_t_INT64_t):
         """
 
         Warning:
-            Only use named arguments!
+            We only use named arguments! This is on purppose!
 
         """
         self.size_hint = kwargs.get('size_hint', MUTABLE_SPARSE_MAT_DEFAULT_SIZE_HINT)
@@ -310,6 +310,6 @@ cdef class ImmutableSparseMatrix_INT64_t_INT64_t(SparseMatrix_INT64_t_INT64_t):
         """
 
         Warning:
-            Only use named arguments!
+            We only use named arguments! This is on purppose!
         """
         self.__is_mutable = False
