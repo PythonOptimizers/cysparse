@@ -201,11 +201,31 @@ given as the string `'UMFPACK_A'` by the user (as a parameter to a `solve()` met
 
 In :program:`Cython` code, you are free to directly use the ``enum`` itself.
 
+Class hierarchy
+=====================================
+
+The class hierarchy may seems strange at first and indeed is strange. In my wildest dreams (I = Nikolaj) I would like to have a base class ``MatrixLike`` from which all other classes inherit.
+Something like this [#class_hierarchy_with_future_classes]_:
+
+.. figure:: images/ideal_class_hierarchy.*
+    :width: 600pt
+    :align: center
+    
+
+    The ideal (?) class hierarchy
+
+While this makes perfect sense at first, it is not very practical with the current situation of :program:`Cython` and its inability to really use *templates*. For instance, the ``MatrixLike`` class should have 
+``nrow`` and ``ncol`` as attributes but this cannot be done for the moment as both attributes are better typed [#untyped_attributes]_. Thus, ``nrow`` and ``ncol`` must be defined in ``SparseMatrix_INDEX_TYPE``, and then
+again in ``LLSparseMatrixView_INDEX_TYPE`` and then again... We could define a base ``MatrixLike_INDEX_TYPE`` class and so on.But the point is that ``MatrixLike`` would be quite empty. Basically, I tried to keep it simple and 
+without too many inheritance. The resulting class hierarchy is far from optimal (and **is** strange [#class_hierarchy_strange]_) but is - in my view - a good compromise between code complexity (maintenance), code 
+duplication and ease of use but also Cython's limitations.
+
+
 ..  raw:: html
 
     <h4>Footnotes</h4>
 
-..  [#proxies_inheriting_from_a_common_base_class] See https://github.com/Funartech/cysparse/issues/113 for more about this issue.
+..  [#proxies_inheriting_from_a_common_base_class] See https://github.com/PythonOptimizers/cysparse/issues/113 for more about this issue.
     
 ..  [#typed_variables] Use your intelligence and knowledge of :program:`Cython`. Know when it makes a difference to type a variable.
 
@@ -216,3 +236,10 @@ In :program:`Cython` code, you are free to directly use the ``enum`` itself.
         - inline functions;
         
 ..  [#signed_vs_unsigned_integers] We don't want to enter into the debate unsigned vs signed integers. Accept this as a fact. Beside, we use internally negative indices.
+
+..  [#class_hierarchy_with_future_classes] Note that some classes don't exist yet.
+
+..  [#untyped_attributes] Of course, one could argue that we could use non typed attributes in ``MatrixLike``.
+
+..  [#class_hierarchy_strange] Especially with the ``SparseMatrix`` class split in two (``SparseMatrix`` and ``SparseMatrix_INDEX_TYPE``)), ``LLSparseMatrixView_INDEX_TYPE`` on its own and 
+    non typed proxies.  
