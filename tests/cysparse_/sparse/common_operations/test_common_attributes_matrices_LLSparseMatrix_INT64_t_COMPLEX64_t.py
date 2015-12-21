@@ -1,0 +1,86 @@
+#!/usr/bin/env python
+
+"""
+This file tests basic common attributes for **all** matrix like objects.
+
+See file ``sparse_matrix_coherence_test_functions``.
+"""
+from sparse_matrix_coherence_test_functions import common_matrix_like_attributes
+
+import unittest
+from cysparse.sparse.ll_mat import *
+from cysparse.common_types.cysparse_types import *
+
+########################################################################################################################
+# Tests
+########################################################################################################################
+
+class CySparseCommonAttributesMatrices_LLSparseMatrix_INT64_t_COMPLEX64_t_TestCase(unittest.TestCase):
+    def setUp(self):
+        self.A = LinearFillLLSparseMatrix(nrow=10, ncol=14, dtype=COMPLEX64_T, itype=INT64_T)
+
+        self.C = self.A
+
+
+    def test_common_attributes(self):
+        self.failUnless(common_matrix_like_attributes(self.C))
+
+    def test_symmetric_storage_attribute(self):
+        self.failUnless(not self.C.store_symmetric)
+
+    def test_zero_storage_attribute(self):
+        self.failUnless(not self.C.store_zero)
+
+
+class CySparseCommonAttributesSymmetricMatrices_LLSparseMatrix_INT64_t_COMPLEX64_t_TestCase(unittest.TestCase):
+    def setUp(self):
+        self.A = LinearFillLLSparseMatrix(nrow=14, ncol=14, dtype=COMPLEX64_T, itype=INT64_T, store_symmetric=True)
+
+        self.C = self.A
+
+
+    def test_common_attributes(self):
+        self.failUnless(common_matrix_like_attributes(self.C))
+
+    def test_symmetric_storage_attribute(self):
+        self.failUnless(self.C.store_symmetric)
+
+    def test_zero_storage_attribute(self):
+        self.failUnless(not self.C.store_zero)
+
+
+class CySparseCommonAttributesWithZeroMatrices_LLSparseMatrix_INT64_t_COMPLEX64_t_TestCase(unittest.TestCase):
+    def setUp(self):
+        self.A = LinearFillLLSparseMatrix(nrow=10, ncol=14, dtype=COMPLEX64_T, itype=INT64_T, store_zero=True)
+
+        self.C = self.A
+
+
+    def test_common_attributes(self):
+        self.failUnless(common_matrix_like_attributes(self.C))
+
+    def test_symmetric_storage_attribute(self):
+        self.failUnless(not self.C.store_symmetric)
+
+    def test_zero_storage_attribute(self):
+        self.failUnless(self.C.store_zero)
+
+
+class CySparseCommonAttributesSymmetricWithZeroMatrices_LLSparseMatrix_INT64_t_COMPLEX64_t_TestCase(unittest.TestCase):
+    def setUp(self):
+        self.A = LinearFillLLSparseMatrix(nrow=14, ncol=14, dtype=COMPLEX64_T, itype=INT64_T, store_symmetric=True, store_zero=True)
+
+        self.C = self.A
+
+
+    def test_common_attributes(self):
+        self.failUnless(common_matrix_like_attributes(self.C))
+
+    def test_symmetric_storage_attribute(self):
+        self.failUnless(self.C.store_symmetric)
+
+    def test_zero_storage_attribute(self):
+        self.failUnless(self.C.store_zero)
+
+if __name__ == '__main__':
+    unittest.main()

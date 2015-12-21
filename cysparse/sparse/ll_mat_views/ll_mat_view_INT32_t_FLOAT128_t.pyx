@@ -104,8 +104,8 @@ cdef class LLSparseMatrixView_INT32_t_FLOAT128_t:
 
     
     @property
-    def use_symmetric_storage(self):
-        return self.A.__use_symmetric_storage
+    def store_symmetric(self):
+        return self.A.__store_symmetric
 
     
     @property
@@ -114,8 +114,8 @@ cdef class LLSparseMatrixView_INT32_t_FLOAT128_t:
 
     
     @property
-    def use_zero_storage(self):
-        return self.A.__use_zero_storage
+    def store_zero(self):
+        return self.A.__store_zero
 
     
     @property
@@ -240,7 +240,7 @@ cdef class LLSparseMatrixView_INT32_t_FLOAT128_t:
 
         Note:
             Because we lost sight of zero elements added in the viewed :class:`LLSparseMatrix_INT32_t_FLOAT128_t`,
-            the returned matrix has its ``use_zero_storage`` attribute set
+            the returned matrix has its ``store_zero`` attribute set
             to ``False`` and no zero is copied.
 
             Because we don't know what submatrix is taken, the returned matrix **cannot** by symmetric.
@@ -253,8 +253,8 @@ cdef class LLSparseMatrixView_INT32_t_FLOAT128_t:
                                                                                   nrow=self.__nrow,
                                                                                   ncol=self.__ncol,
                                                                                   size_hint=size_hint,
-                                                                                  use_zero_storage=False,
-                                                                                  use_symmetric_storage=False)
+                                                                                  store_zero=False,
+                                                                                  store_symmetric=False)
 
         cdef:
             INT32_t i, j

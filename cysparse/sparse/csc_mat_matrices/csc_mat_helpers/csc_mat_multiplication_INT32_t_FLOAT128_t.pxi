@@ -47,13 +47,13 @@ cdef cnp.ndarray[cnp.npy_float128, ndim=1, mode='c'] multiply_csc_mat_with_numpy
 
     # test if b vector is C-contiguous or not
     if cnp.PyArray_ISCONTIGUOUS(b):
-        if A.__use_symmetric_storage:
+        if A.__store_symmetric:
             pass
             multiply_sym_csc_mat_with_numpy_vector_kernel_INT32_t_FLOAT128_t(A_nrow, A_ncol, b_data, c_data, A.val, A.row, A.ind)
         else:
             multiply_csc_mat_with_numpy_vector_kernel_INT32_t_FLOAT128_t(A_nrow, A_ncol, b_data, c_data, A.val, A.row, A.ind)
     else:
-        if A.__use_symmetric_storage:
+        if A.__store_symmetric:
             multiply_sym_csc_mat_with_strided_numpy_vector_kernel_INT32_t_FLOAT128_t(A.nrow, A.ncol,
                                                                  b_data, b.strides[0] / sd,
                                                                  c_data, c.strides[0] / sd,
@@ -109,13 +109,13 @@ cdef cnp.ndarray[cnp.npy_float128, ndim=1, mode='c'] multiply_transposed_csc_mat
 
     # test if b vector is C-contiguous or not
     if cnp.PyArray_ISCONTIGUOUS(b):
-        if A.__use_symmetric_storage:
+        if A.__store_symmetric:
             multiply_sym_csc_mat_with_numpy_vector_kernel_INT32_t_FLOAT128_t(A_nrow, A_ncol, b_data, c_data, A.val, A.row, A.ind)
         else:
             multiply_tranposed_csc_mat_with_numpy_vector_kernel_INT32_t_FLOAT128_t(A_nrow, A_ncol, b_data, c_data,
          A.val, A.row, A.ind)
     else:
-        if A.__use_symmetric_storage:
+        if A.__store_symmetric:
             multiply_sym_csc_mat_with_strided_numpy_vector_kernel_INT32_t_FLOAT128_t(A.nrow, A_ncol,
                                                                  b_data, b.strides[0] / sd,
                                                                  c_data, c.strides[0] / sd,

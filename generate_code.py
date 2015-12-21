@@ -40,8 +40,6 @@ def make_parser():
 
     return parser
 
-
-
 ###################################################################s####################################################
 # LOGGING
 ########################################################################################################################
@@ -150,6 +148,20 @@ GENERAL_CONTEXT = {
                     'mm_type_list' : MM_ELEMENT_TYPES,
                   }
 
+# For tests
+MATRIX_CLASSES = {'LLSparseMatrix' : 'll_mat_matrices.ll_mat',
+                  'CSCSparseMatrix' : 'csc_mat_matrices.csc_mat',
+                  'CSRSparseMatrix' : 'csr_mat_matrices.csr_mat'}
+MATRIX_VIEW_CLASSES = {'LLSparseMatrixView' : 'll_mat_views.ll_mat_views'}
+MATRIX_PROXY_CLASSES = {'TransposedSparseMatrix' : 'sparse_proxies.t_mat',
+                        'ConjugatedSparseMatrix' : 'sparse_proxies.complex_generic.conj_mat',
+                       'ConjugateTransposedSparseMatrix' : 'sparse_proxies.complex_generic.h_mat'}
+
+MATRIX_LIKE_CLASSES = {}
+MATRIX_LIKE_CLASSES.update(MATRIX_CLASSES)
+MATRIX_LIKE_CLASSES.update(MATRIX_VIEW_CLASSES)
+MATRIX_LIKE_CLASSES.update(MATRIX_PROXY_CLASSES)
+
 
 #####################################################
 # ACTION FUNCTION
@@ -216,6 +228,91 @@ def generate_MM_following_index_and_element():
         for type in MM_ELEMENT_TYPES:
             GENERAL_CONTEXT['type'] = type
             yield '_%s_%s' % (index, type), GENERAL_CONTEXT
+
+
+# Tests
+def generate_following_matrix_class_and_index_and_type():
+    """
+    Generate files following index, element and class types.
+
+    This generator is for tests only.
+
+    Warning:
+        Class :class:`TransposedSparseMatrix` is not generated because of its special status.
+
+    """
+    for klass, directory in MATRIX_CLASSES.items():
+        GENERAL_CONTEXT['class'] = klass
+        GENERAL_CONTEXT['directory'] = directory
+        for index in INDEX_TYPES:
+            GENERAL_CONTEXT['index'] = index
+            for type in ELEMENT_TYPES:
+                GENERAL_CONTEXT['type'] = type
+                yield '_%s_%s_%s' % (klass, index, type), GENERAL_CONTEXT
+
+
+def generate_following_matrix_view_class_and_index_and_type():
+    """
+    Generate files following index, element and class types.
+
+    This generator is for tests only.
+
+    """
+    for klass, directory in MATRIX_VIEW_CLASSES.items():
+        GENERAL_CONTEXT['class'] = klass
+        GENERAL_CONTEXT['directory'] = directory
+        for index in INDEX_TYPES:
+            GENERAL_CONTEXT['index'] = index
+            for type in ELEMENT_TYPES:
+                GENERAL_CONTEXT['type'] = type
+                yield '_%s_%s_%s' % (klass, index, type), GENERAL_CONTEXT
+
+
+def generate_following_complex_matrix_proxy_class_and_index_and_type():
+    """
+    Generate files following index, element and class types.
+
+    This generator is for tests only.
+
+    Warning:
+        Class :class:`TransposedSparseMatrix` is not generated because of its special status.
+
+    Note:
+        We only take proxies for **complex** matrices!
+
+    """
+    for klass, directory in MATRIX_PROXY_CLASSES.items():
+        if klass == 'TransposedSparseMatrix':
+            continue
+        GENERAL_CONTEXT['class'] = klass
+        GENERAL_CONTEXT['directory'] = directory
+        for index in INDEX_TYPES:
+            GENERAL_CONTEXT['index'] = index
+            for type in COMPLEX_ELEMENT_TYPES:
+                GENERAL_CONTEXT['type'] = type
+                yield '_%s_%s_%s' % (klass, index, type), GENERAL_CONTEXT
+
+
+def generate_following_matrix_proxy_transposed_class_and_index_and_type():
+    """
+    Generate files following index, element and class types.
+
+    This generator is for tests only.
+
+    Warning:
+        Only the class :class:`TransposedSparseMatrix` is generated.
+
+    """
+    for klass, directory in MATRIX_PROXY_CLASSES.items():
+        if klass != 'TransposedSparseMatrix':
+            continue
+        GENERAL_CONTEXT['class'] = klass
+        GENERAL_CONTEXT['directory'] = directory
+        for index in INDEX_TYPES:
+            GENERAL_CONTEXT['index'] = index
+            for type in ELEMENT_TYPES:
+                GENERAL_CONTEXT['type'] = type
+                yield '_%s_%s_%s' % (klass, index, type), GENERAL_CONTEXT
 
 ###############################################################################
 # MAIN
@@ -288,6 +385,12 @@ if __name__ == "__main__":
     cygenja_engine.register_action('cysparse/sparse/sparse_utils/generic', 'sort_indices.*', generate_following_only_index)
     # Sparse
     cygenja_engine.register_action('cysparse/sparse', '*.*', single_generation)
+
+    # Tests
+    cygenja_engine.register_action('tests/cysparse_/sparse/common_operations', 'test_common_attributes_matrices.*', generate_following_matrix_class_and_index_and_type)
+    cygenja_engine.register_action('tests/cysparse_/sparse/common_operations', 'test_common_attributes_matrices_views.*', generate_following_matrix_view_class_and_index_and_type)
+    cygenja_engine.register_action('tests/cysparse_/sparse/common_operations', 'test_common_attributes_matrices_proxies.*', generate_following_complex_matrix_proxy_class_and_index_and_type)
+    cygenja_engine.register_action('tests/cysparse_/sparse/common_operations', 'test_common_attributes_matrices_proxies_transposed.*', generate_following_matrix_proxy_transposed_class_and_index_and_type)
 
     ####################################################################################################################
     # Generation

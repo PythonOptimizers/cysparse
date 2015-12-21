@@ -6,20 +6,20 @@ cdef INT32_t MUTABLE_SPARSE_MAT_DEFAULT_SIZE_HINT = 40        # allocated size b
 unexposed_value = object()
 
 
-cdef __set_use_zero_storage_attribute(SparseMatrix A, bint use_zero_storage):
+cdef __set_store_zero_attribute(SparseMatrix A, bint store_zero):
     """
-    Access private  ``__use_zero_storage`` attribute and change it.
+    Access private  ``__store_zero`` attribute and change it.
 
     Args:
         A: ``SparseMatrix``.
-        use_zero_storage: Boolean value to set the attribute to.
+        store_zero: Boolean value to set the attribute to.
 
     """
-    A.__use_zero_storage = use_zero_storage
+    A.__store_zero = store_zero
 
 class NonZeros():
     """
-    Context manager to use methods with flag ``use_zero_storage`` to ``False``.
+    Context manager to use methods with flag ``store_zero`` to ``False``.
 
     The initial value is restored upon completion.
 
@@ -30,14 +30,14 @@ class NonZeros():
     """
     def __init__(self, SparseMatrix A):
         self.A = A
-        self.__use_zero_storage = False
+        self.__store_zero = False
 
     def __enter__(self):
-        self.__use_zero_storage = self.A.use_zero_storage
-        __set_use_zero_storage_attribute(self.A, False)
+        self.__store_zero = self.A.store_zero
+        __set_store_zero_attribute(self.A, False)
 
     def __exit__(self, type, value, traceback):
-        __set_use_zero_storage_attribute(self.A, self.__use_zero_storage)
+        __set_store_zero_attribute(self.A, self.__store_zero)
 
 
 cpdef bint PySparseMatrix_Check(object obj):
@@ -72,8 +72,8 @@ cdef class SparseMatrix:
         self.__type = "Not defined"
         self.__index_and_type = "[not defined, not defined]"
 
-        self.__use_symmetric_storage = kwargs.get('use_symmetric_storage', False)
-        self.__use_zero_storage = kwargs.get('use_zero_storage', False)
+        self.__store_symmetric = kwargs.get('store_symmetric', False)
+        self.__store_zero = kwargs.get('store_zero', False)
         self.__is_mutable = False
 
     # for compatibility with numpy, PyKrylov, etc
@@ -90,16 +90,16 @@ cdef class SparseMatrix:
         return self.cp_type.itype
 
     @property
-    def use_symmetric_storage(self):
-        return self.__use_symmetric_storage
+    def store_symmetric(self):
+        return self.__store_symmetric
 
     @property
     def is_mutable(self):
         return self.__is_mutable
 
     @property
-    def use_zero_storage(self):
-        return self.__use_zero_storage
+    def store_zero(self):
+        return self.__store_zero
 
     @property
     def type(self):

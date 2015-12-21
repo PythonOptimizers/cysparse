@@ -109,7 +109,7 @@ cdef class CSCSparseMatrix_INT64_t_FLOAT64_t(ImmutableSparseMatrix_INT64_t_FLOAT
 
         nnz = self.nnz
 
-        self_copy = CSCSparseMatrix_INT64_t_FLOAT64_t(control_object=unexposed_value, nrow=self.__nrow, ncol=self.__ncol, use_zero_storage=self.__use_zero_storage, use_symmetric_storage=self.__use_symmetric_storage)
+        self_copy = CSCSparseMatrix_INT64_t_FLOAT64_t(control_object=unexposed_value, nrow=self.__nrow, ncol=self.__ncol, store_zero=self.__store_zero, store_symmetric=self.__store_symmetric)
 
         val = <FLOAT64_t *> PyMem_Malloc(nnz * sizeof(FLOAT64_t))
         if not val:
@@ -328,7 +328,7 @@ cdef class CSCSparseMatrix_INT64_t_FLOAT64_t(ImmutableSparseMatrix_INT64_t_FLOAT
             INT64_t real_j
 
         # code is duplicated for optimization
-        if self.__use_symmetric_storage:
+        if self.__store_symmetric:
             if i < j:
                 real_i = j
                 real_j = i
@@ -560,8 +560,8 @@ cdef class CSCSparseMatrix_INT64_t_FLOAT64_t(ImmutableSparseMatrix_INT64_t_FLOAT
                                                   ind,
                                                   row,
                                                   val,
-                                                  use_symmetric_storage=False,
-                                                  use_zero_storage=self.__use_zero_storage,
+                                                  store_symmetric=False,
+                                                  store_zero=self.__store_zero,
                                                   row_indices_are_sorted=True)
 
     def triu(self, int k = 0):
@@ -613,7 +613,7 @@ cdef class CSCSparseMatrix_INT64_t_FLOAT64_t(ImmutableSparseMatrix_INT64_t_FLOAT
         cdef INT64_t * csr_col
         cdef FLOAT64_t  * csr_val
 
-        if self.__use_symmetric_storage:
+        if self.__store_symmetric:
             # Special (and annoying) case: we first create a CSR and then translate it to CSC
             csr_ind = <INT64_t *> PyMem_Malloc((self.__nrow + 1) * sizeof(INT64_t))
             if not csr_ind:
@@ -694,8 +694,8 @@ cdef class CSCSparseMatrix_INT64_t_FLOAT64_t(ImmutableSparseMatrix_INT64_t_FLOAT
                                                   ind,
                                                   row,
                                                   val,
-                                                  use_symmetric_storage=False,
-                                                  use_zero_storage=self.__use_zero_storage,
+                                                  store_symmetric=False,
+                                                  store_zero=self.__store_zero,
                                                   row_indices_are_sorted=True)
 
     def to_csr(self):
@@ -729,8 +729,8 @@ cdef class CSCSparseMatrix_INT64_t_FLOAT64_t(ImmutableSparseMatrix_INT64_t_FLOAT
                                                   ind,
                                                   col,
                                                   val,
-                                                  use_symmetric_storage=self.use_symmetric_storage,
-                                                  use_zero_storage=self.use_zero_storage,
+                                                  store_symmetric=self.store_symmetric,
+                                                  store_zero=self.store_zero,
                                                   col_indices_are_sorted=True)
 
 
@@ -749,7 +749,7 @@ cdef class CSCSparseMatrix_INT64_t_FLOAT64_t(ImmutableSparseMatrix_INT64_t_FLOAT
         np_ndarray = np.zeros((self.__nrow, self.__ncol), dtype=np.float64, order='C')
         np_memview = np_ndarray
 
-        if not self.__use_symmetric_storage:
+        if not self.__store_symmetric:
             for j from 0 <= j < self.__ncol:
                 for k from self.ind[j] <= k < self.ind[j+1]:
                     np_memview[self.row[k], j] = self.val[k]
@@ -872,7 +872,7 @@ cdef class CSCSparseMatrix_INT64_t_FLOAT64_t(ImmutableSparseMatrix_INT64_t_FLOAT
                 # TODO: rewrite this completely
                 for k from self.ind[j] <= k < self.ind[j+1]:
                     mat[(self.row[k]*self.ncol)+j] = self.val[k]
-                    if self.__use_symmetric_storage:
+                    if self.__store_symmetric:
                         mat[(j*self.ncol)+ self.row[k]] = self.val[k]
 
             for i from 0 <= i < self.nrow:
@@ -967,7 +967,7 @@ cdef MakeCSCSparseMatrix_INT64_t_FLOAT64_t(INT64_t nrow,
                                         INT64_t * ind,
                                         INT64_t * row,
                                         FLOAT64_t * val,
-                                        bint use_symmetric_storage, bint use_zero_storage,
+                                        bint store_symmetric, bint store_zero,
                                         bint row_indices_are_sorted=False):
     """
     Construct a CSCSparseMatrix object.
@@ -985,8 +985,8 @@ cdef MakeCSCSparseMatrix_INT64_t_FLOAT64_t(INT64_t nrow,
                                              nrow=nrow,
                                              ncol=ncol,
                                              nnz=nnz,
-                                             use_symmetric_storage=use_symmetric_storage,
-                                             use_zero_storage=use_zero_storage)
+                                             store_symmetric=store_symmetric,
+                                             store_zero=store_zero)
 
     csc_mat.val = val
     csc_mat.ind = ind

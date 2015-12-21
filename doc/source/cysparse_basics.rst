@@ -35,28 +35,28 @@ Each matrix (matrix-like) object has an internal index *type* and stores *typed*
  
 See section :ref:`availabe_types` about the available types.
 
-``use_symmetric_storage``
+``store_symmetric``
 ----------------------------
 
-Symmetric matrices can be stored by only storing the **lower** triangular part and the diagonal of a matrix. To create a symmetric matrix, add the arguement ``use_symmetric_storage=True`` to the call of one of the factory methods.
-The attribute ``use_symmetric_storage`` returns if this storage method is used or not. Thus, if ``use_symmetric_storage`` is ``True``, you know that you deal with a symmetric matrix **and** that roughly only half of its elements are stored. If 
-``use_symmetric_storage`` is ``False``, it simply means that this storage scheme is not used. The matrix itself migth be symmetric or not.
+Symmetric matrices can be stored by only storing the **lower** triangular part and the diagonal of a matrix. To create a symmetric matrix, add the arguement ``store_symmetric=True`` to the call of one of the factory methods.
+The attribute ``store_symmetric`` returns if this storage method is used or not. Thus, if ``store_symmetric`` is ``True``, you know that you deal with a symmetric matrix **and** that roughly only half of its elements are stored. If 
+``store_symmetric`` is ``False``, it simply means that this storage scheme is not used. The matrix itself migth be symmetric or not.
 
-``use_zero_storage``
+``store_zero``
 ------------------------------
 
-By default non specified (implicit) elements are zero (``0``, ``0.0`` or ``0+0j``). :program:`CySparse` allow the user to store explicitely zeros. To explicitely store zeros, declare ``use_zero_storage=True`` as an argument
+By default non specified (implicit) elements are zero (``0``, ``0.0`` or ``0+0j``). :program:`CySparse` allow the user to store explicitely zeros. To explicitely store zeros, declare ``store_zero=True`` as an argument
 in any factory method:
 
 ..  code-block:: python
 
-    A = NewLLSparseMatrix(use_zero_storage=True, ...)
+    A = NewLLSparseMatrix(store_zero=True, ...)
     
 The matrix ``A`` will store any zero explicitely as will any matrix created from it. You can access the value of this attribute:
 
 ..  code-block:: python
 
-    A.use_zero_storage
+    A.store_zero
     
 returns ``True`` for our example. This attribute is read-only and cannot be changed. If you want to temporarily exclude zeros in some operations, you can use the ``NonZeros`` context manager:
 
@@ -66,9 +66,9 @@ returns ``True`` for our example. This attribute is read-only and cannot be chan
         # use some method to add entries to A but disregard zeros entries
         ...
 
-This context manager temporarily set the ``use_zero_storage`` attribute to ``False`` before restoring its inital value.
+This context manager temporarily set the ``store_zero`` attribute to ``False`` before restoring its inital value.
 
-By default, ``use_zero_storage`` is set to ``False``.
+By default, ``store_zero`` is set to ``False``.
 
 
 ``type`` and ``type_name``
@@ -94,11 +94,11 @@ The type ``LLSparseMatrix`` is common among ``LL`` sparse format matrices while 
 ``nnz``
 ---------
 
-The ``nnz`` attribute returns the number of "non zeros" stored in the matrix. Notice that ``0`` could be stored if ``use_zero_storage`` is set to ``True`` and if so, it will be counted in the number of "non zero" elements.
-Whenever the symmetric storage scheme is used (``use_symmetric_storage`` is ``True``), ``nnz`` only returns the number of "non zero" elements stored in the lower triangular part and the diagonal of the matrix, i.e. ``nnz`` 
+The ``nnz`` attribute returns the number of "non zeros" stored in the matrix. Notice that ``0`` could be stored if ``store_zero`` is set to ``True`` and if so, it will be counted in the number of "non zero" elements.
+Whenever the symmetric storage scheme is used (``store_symmetric`` is ``True``), ``nnz`` only returns the number of "non zero" elements stored in the lower triangular part and the diagonal of the matrix, i.e. ``nnz`` 
 returns exactly how many elements are stored internally.
 
-..  warning:: ``nnz`` returns the number of elements stored internally.
+..  warning:: ``nnz`` returns **exactly** the number of elements stored internally.
 
 When using views, this attribute is **costly** to retrieve as it is systematically recomputed each time and we don't make any assomption on the views (views can represent matrices with rows and columns in any order and duplicated 
 rows and columns any number of times). The number returned is the number of "non zero" elements stored in the equivalent matrix using the **same** storage scheme than viewed matrix.
@@ -113,7 +113,7 @@ rows and columns any number of times). The number returned is the number of "non
 
 [TODO in the code!!!]
 
-Returns if the matrix is symmetric or not. While matrices using the symmetric storage (``use_symmetric_storage == True``) are symmetric by definition and ``is_symmetric`` returns immediatly ``True``, this attribute is costly to 
+Returns if the matrix is symmetric or not. While matrices using the symmetric storage (``store_symmetric == True``) are symmetric by definition and ``is_symmetric`` returns immediatly ``True``, this attribute is costly to 
 compute in general.
 
 

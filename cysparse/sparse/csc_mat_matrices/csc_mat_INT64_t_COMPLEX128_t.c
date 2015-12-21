@@ -1089,8 +1089,8 @@ struct __pyx_opt_args_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT64_t_COM
  */
 struct __pyx_obj_8cysparse_6sparse_5s_mat_SparseMatrix {
   PyObject_HEAD
-  int __pyx___use_symmetric_storage;
-  int __pyx___use_zero_storage;
+  int __pyx___store_symmetric;
+  int __pyx___store_zero;
   int __pyx___is_mutable;
   PyObject *__pyx___type_name;
   PyObject *__pyx___type;
@@ -2372,6 +2372,7 @@ static char __pyx_k_cell_width[] = "cell_width";
 static char __pyx_k_complex128[] = "complex128";
 static char __pyx_k_force_test[] = "force_test";
 static char __pyx_k_pyx_vtable[] = "__pyx_vtable__";
+static char __pyx_k_store_zero[] = "store_zero";
 static char __pyx_k_MemoryError[] = "MemoryError";
 static char __pyx_k_SyntaxError[] = "SyntaxError";
 static char __pyx_k_i_d_j_d_k_d[] = "i = %d, j = %d k = %d";
@@ -2383,7 +2384,7 @@ static char __pyx_k_CSCSparseMatrix[] = "CSCSparseMatrix";
 static char __pyx_k_allocate_buffer[] = "allocate_buffer";
 static char __pyx_k_dtype_is_object[] = "dtype_is_object";
 static char __pyx_k_raise_exception[] = "raise_exception";
-static char __pyx_k_use_zero_storage[] = "use_zero_storage";
+static char __pyx_k_store_symmetric[] = "store_symmetric";
 static char __pyx_k_CSCSparseMatrix_s[] = "CSCSparseMatrix %s";
 static char __pyx_k_strided_and_direct[] = "<strided and direct>";
 static char __pyx_k_CSCSparseMatrix_d_d[] = "CSCSparseMatrix ([%d,%d]):";
@@ -2392,7 +2393,6 @@ static char __pyx_k_NotImplementedError[] = "NotImplementedError";
 static char __pyx_k_is_well_constructed[] = "is_well_constructed";
 static char __pyx_k_strided_and_indirect[] = "<strided and indirect>";
 static char __pyx_k_contiguous_and_direct[] = "<contiguous and direct>";
-static char __pyx_k_use_symmetric_storage[] = "use_symmetric_storage";
 static char __pyx_k_MemoryView_of_r_object[] = "<MemoryView of %r object>";
 static char __pyx_k_are_row_indices_sorted[] = "are_row_indices_sorted";
 static char __pyx_k_MemoryView_of_r_at_0x_x[] = "<MemoryView of %r at 0x%x>";
@@ -2547,6 +2547,8 @@ static PyObject *__pyx_n_s_size;
 static PyObject *__pyx_n_s_start;
 static PyObject *__pyx_n_s_step;
 static PyObject *__pyx_n_s_stop;
+static PyObject *__pyx_n_s_store_symmetric;
+static PyObject *__pyx_n_s_store_zero;
 static PyObject *__pyx_kp_s_strided_and_direct;
 static PyObject *__pyx_kp_s_strided_and_direct_or_indirect;
 static PyObject *__pyx_kp_s_strided_and_indirect;
@@ -2556,8 +2558,6 @@ static PyObject *__pyx_kp_s_unable_to_allocate_array_data;
 static PyObject *__pyx_kp_s_unable_to_allocate_shape_and_str;
 static PyObject *__pyx_kp_u_unknown_dtype_code_in_numpy_pxd;
 static PyObject *__pyx_n_s_unpack;
-static PyObject *__pyx_n_s_use_symmetric_storage;
-static PyObject *__pyx_n_s_use_zero_storage;
 static PyObject *__pyx_kp_s_val;
 static PyObject *__pyx_n_s_val_2;
 static PyObject *__pyx_n_s_zeros;
@@ -4377,7 +4377,7 @@ static PyArrayObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT
  * 
  *     # test if b vector is C-contiguous or not
  *     if cnp.PyArray_ISCONTIGUOUS(b):             # <<<<<<<<<<<<<<
- *         if A.__use_symmetric_storage:
+ *         if A.__store_symmetric:
  *             pass
  */
   __pyx_t_5 = (PyArray_ISCONTIGUOUS(((PyArrayObject *)__pyx_v_b)) != 0);
@@ -4386,15 +4386,15 @@ static PyArrayObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT
     /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT64_t_COMPLEX128_t.pxi":50
  *     # test if b vector is C-contiguous or not
  *     if cnp.PyArray_ISCONTIGUOUS(b):
- *         if A.__use_symmetric_storage:             # <<<<<<<<<<<<<<
+ *         if A.__store_symmetric:             # <<<<<<<<<<<<<<
  *             pass
  *             multiply_sym_csc_mat_with_numpy_vector_kernel_INT64_t_COMPLEX128_t(A_nrow, A_ncol, b_data, c_data, A.val, A.row, A.ind)
  */
-    __pyx_t_5 = (__pyx_v_A->__pyx_base.__pyx_base.__pyx_base.__pyx___use_symmetric_storage != 0);
+    __pyx_t_5 = (__pyx_v_A->__pyx_base.__pyx_base.__pyx_base.__pyx___store_symmetric != 0);
     if (__pyx_t_5) {
 
       /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT64_t_COMPLEX128_t.pxi":52
- *         if A.__use_symmetric_storage:
+ *         if A.__store_symmetric:
  *             pass
  *             multiply_sym_csc_mat_with_numpy_vector_kernel_INT64_t_COMPLEX128_t(A_nrow, A_ncol, b_data, c_data, A.val, A.row, A.ind)             # <<<<<<<<<<<<<<
  *         else:
@@ -4405,7 +4405,7 @@ static PyArrayObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT
       /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT64_t_COMPLEX128_t.pxi":50
  *     # test if b vector is C-contiguous or not
  *     if cnp.PyArray_ISCONTIGUOUS(b):
- *         if A.__use_symmetric_storage:             # <<<<<<<<<<<<<<
+ *         if A.__store_symmetric:             # <<<<<<<<<<<<<<
  *             pass
  *             multiply_sym_csc_mat_with_numpy_vector_kernel_INT64_t_COMPLEX128_t(A_nrow, A_ncol, b_data, c_data, A.val, A.row, A.ind)
  */
@@ -4417,7 +4417,7 @@ static PyArrayObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT
  *         else:
  *             multiply_csc_mat_with_numpy_vector_kernel_INT64_t_COMPLEX128_t(A_nrow, A_ncol, b_data, c_data, A.val, A.row, A.ind)             # <<<<<<<<<<<<<<
  *     else:
- *         if A.__use_symmetric_storage:
+ *         if A.__store_symmetric:
  */
     /*else*/ {
       __pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT64_t_COMPLEX128_t_multiply_csc_mat_with_numpy_vector_kernel_INT64_t_COMPLEX128_t(__pyx_v_A_nrow, __pyx_v_A_ncol, __pyx_v_b_data, __pyx_v_c_data, __pyx_v_A->val, __pyx_v_A->row, __pyx_v_A->ind);
@@ -4428,7 +4428,7 @@ static PyArrayObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT
  * 
  *     # test if b vector is C-contiguous or not
  *     if cnp.PyArray_ISCONTIGUOUS(b):             # <<<<<<<<<<<<<<
- *         if A.__use_symmetric_storage:
+ *         if A.__store_symmetric:
  *             pass
  */
     goto __pyx_L4;
@@ -4437,17 +4437,17 @@ static PyArrayObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT
   /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT64_t_COMPLEX128_t.pxi":56
  *             multiply_csc_mat_with_numpy_vector_kernel_INT64_t_COMPLEX128_t(A_nrow, A_ncol, b_data, c_data, A.val, A.row, A.ind)
  *     else:
- *         if A.__use_symmetric_storage:             # <<<<<<<<<<<<<<
+ *         if A.__store_symmetric:             # <<<<<<<<<<<<<<
  *             multiply_sym_csc_mat_with_strided_numpy_vector_kernel_INT64_t_COMPLEX128_t(A.nrow, A.ncol,
  *                                                                  b_data, b.strides[0] / sd,
  */
   /*else*/ {
-    __pyx_t_5 = (__pyx_v_A->__pyx_base.__pyx_base.__pyx_base.__pyx___use_symmetric_storage != 0);
+    __pyx_t_5 = (__pyx_v_A->__pyx_base.__pyx_base.__pyx_base.__pyx___store_symmetric != 0);
     if (__pyx_t_5) {
 
       /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT64_t_COMPLEX128_t.pxi":57
  *     else:
- *         if A.__use_symmetric_storage:
+ *         if A.__store_symmetric:
  *             multiply_sym_csc_mat_with_strided_numpy_vector_kernel_INT64_t_COMPLEX128_t(A.nrow, A.ncol,             # <<<<<<<<<<<<<<
  *                                                                  b_data, b.strides[0] / sd,
  *                                                                  c_data, c.strides[0] / sd,
@@ -4462,7 +4462,7 @@ static PyArrayObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
       /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT64_t_COMPLEX128_t.pxi":58
- *         if A.__use_symmetric_storage:
+ *         if A.__store_symmetric:
  *             multiply_sym_csc_mat_with_strided_numpy_vector_kernel_INT64_t_COMPLEX128_t(A.nrow, A.ncol,
  *                                                                  b_data, b.strides[0] / sd,             # <<<<<<<<<<<<<<
  *                                                                  c_data, c.strides[0] / sd,
@@ -4487,7 +4487,7 @@ static PyArrayObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT
 
       /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT64_t_COMPLEX128_t.pxi":57
  *     else:
- *         if A.__use_symmetric_storage:
+ *         if A.__store_symmetric:
  *             multiply_sym_csc_mat_with_strided_numpy_vector_kernel_INT64_t_COMPLEX128_t(A.nrow, A.ncol,             # <<<<<<<<<<<<<<
  *                                                                  b_data, b.strides[0] / sd,
  *                                                                  c_data, c.strides[0] / sd,
@@ -4497,7 +4497,7 @@ static PyArrayObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT
       /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT64_t_COMPLEX128_t.pxi":56
  *             multiply_csc_mat_with_numpy_vector_kernel_INT64_t_COMPLEX128_t(A_nrow, A_ncol, b_data, c_data, A.val, A.row, A.ind)
  *     else:
- *         if A.__use_symmetric_storage:             # <<<<<<<<<<<<<<
+ *         if A.__store_symmetric:             # <<<<<<<<<<<<<<
  *             multiply_sym_csc_mat_with_strided_numpy_vector_kernel_INT64_t_COMPLEX128_t(A.nrow, A.ncol,
  *                                                                  b_data, b.strides[0] / sd,
  */
@@ -4823,7 +4823,7 @@ static PyArrayObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT
  * 
  *     # test if b vector is C-contiguous or not
  *     if cnp.PyArray_ISCONTIGUOUS(b):             # <<<<<<<<<<<<<<
- *         if A.__use_symmetric_storage:
+ *         if A.__store_symmetric:
  *             multiply_sym_csc_mat_with_numpy_vector_kernel_INT64_t_COMPLEX128_t(A_nrow, A_ncol, b_data, c_data, A.val, A.row, A.ind)
  */
   __pyx_t_5 = (PyArray_ISCONTIGUOUS(((PyArrayObject *)__pyx_v_b)) != 0);
@@ -4832,16 +4832,16 @@ static PyArrayObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT
     /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT64_t_COMPLEX128_t.pxi":112
  *     # test if b vector is C-contiguous or not
  *     if cnp.PyArray_ISCONTIGUOUS(b):
- *         if A.__use_symmetric_storage:             # <<<<<<<<<<<<<<
+ *         if A.__store_symmetric:             # <<<<<<<<<<<<<<
  *             multiply_sym_csc_mat_with_numpy_vector_kernel_INT64_t_COMPLEX128_t(A_nrow, A_ncol, b_data, c_data, A.val, A.row, A.ind)
  *         else:
  */
-    __pyx_t_5 = (__pyx_v_A->__pyx_base.__pyx_base.__pyx_base.__pyx___use_symmetric_storage != 0);
+    __pyx_t_5 = (__pyx_v_A->__pyx_base.__pyx_base.__pyx_base.__pyx___store_symmetric != 0);
     if (__pyx_t_5) {
 
       /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT64_t_COMPLEX128_t.pxi":113
  *     if cnp.PyArray_ISCONTIGUOUS(b):
- *         if A.__use_symmetric_storage:
+ *         if A.__store_symmetric:
  *             multiply_sym_csc_mat_with_numpy_vector_kernel_INT64_t_COMPLEX128_t(A_nrow, A_ncol, b_data, c_data, A.val, A.row, A.ind)             # <<<<<<<<<<<<<<
  *         else:
  *             multiply_tranposed_csc_mat_with_numpy_vector_kernel_INT64_t_COMPLEX128_t(A_nrow, A_ncol, b_data, c_data,
@@ -4851,7 +4851,7 @@ static PyArrayObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT
       /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT64_t_COMPLEX128_t.pxi":112
  *     # test if b vector is C-contiguous or not
  *     if cnp.PyArray_ISCONTIGUOUS(b):
- *         if A.__use_symmetric_storage:             # <<<<<<<<<<<<<<
+ *         if A.__store_symmetric:             # <<<<<<<<<<<<<<
  *             multiply_sym_csc_mat_with_numpy_vector_kernel_INT64_t_COMPLEX128_t(A_nrow, A_ncol, b_data, c_data, A.val, A.row, A.ind)
  *         else:
  */
@@ -4872,7 +4872,7 @@ static PyArrayObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT
  *             multiply_tranposed_csc_mat_with_numpy_vector_kernel_INT64_t_COMPLEX128_t(A_nrow, A_ncol, b_data, c_data,
  *          A.val, A.row, A.ind)             # <<<<<<<<<<<<<<
  *     else:
- *         if A.__use_symmetric_storage:
+ *         if A.__store_symmetric:
  */
       __pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT64_t_COMPLEX128_t_multiply_tranposed_csc_mat_with_numpy_vector_kernel_INT64_t_COMPLEX128_t(__pyx_v_A_nrow, __pyx_v_A_ncol, __pyx_v_b_data, __pyx_v_c_data, __pyx_v_A->val, __pyx_v_A->row, __pyx_v_A->ind);
     }
@@ -4882,7 +4882,7 @@ static PyArrayObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT
  * 
  *     # test if b vector is C-contiguous or not
  *     if cnp.PyArray_ISCONTIGUOUS(b):             # <<<<<<<<<<<<<<
- *         if A.__use_symmetric_storage:
+ *         if A.__store_symmetric:
  *             multiply_sym_csc_mat_with_numpy_vector_kernel_INT64_t_COMPLEX128_t(A_nrow, A_ncol, b_data, c_data, A.val, A.row, A.ind)
  */
     goto __pyx_L4;
@@ -4891,17 +4891,17 @@ static PyArrayObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT
   /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT64_t_COMPLEX128_t.pxi":118
  *          A.val, A.row, A.ind)
  *     else:
- *         if A.__use_symmetric_storage:             # <<<<<<<<<<<<<<
+ *         if A.__store_symmetric:             # <<<<<<<<<<<<<<
  *             multiply_sym_csc_mat_with_strided_numpy_vector_kernel_INT64_t_COMPLEX128_t(A.nrow, A_ncol,
  *                                                                  b_data, b.strides[0] / sd,
  */
   /*else*/ {
-    __pyx_t_5 = (__pyx_v_A->__pyx_base.__pyx_base.__pyx_base.__pyx___use_symmetric_storage != 0);
+    __pyx_t_5 = (__pyx_v_A->__pyx_base.__pyx_base.__pyx_base.__pyx___store_symmetric != 0);
     if (__pyx_t_5) {
 
       /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT64_t_COMPLEX128_t.pxi":119
  *     else:
- *         if A.__use_symmetric_storage:
+ *         if A.__store_symmetric:
  *             multiply_sym_csc_mat_with_strided_numpy_vector_kernel_INT64_t_COMPLEX128_t(A.nrow, A_ncol,             # <<<<<<<<<<<<<<
  *                                                                  b_data, b.strides[0] / sd,
  *                                                                  c_data, c.strides[0] / sd,
@@ -4912,7 +4912,7 @@ static PyArrayObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
       /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT64_t_COMPLEX128_t.pxi":120
- *         if A.__use_symmetric_storage:
+ *         if A.__store_symmetric:
  *             multiply_sym_csc_mat_with_strided_numpy_vector_kernel_INT64_t_COMPLEX128_t(A.nrow, A_ncol,
  *                                                                  b_data, b.strides[0] / sd,             # <<<<<<<<<<<<<<
  *                                                                  c_data, c.strides[0] / sd,
@@ -4937,7 +4937,7 @@ static PyArrayObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT
 
       /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT64_t_COMPLEX128_t.pxi":119
  *     else:
- *         if A.__use_symmetric_storage:
+ *         if A.__store_symmetric:
  *             multiply_sym_csc_mat_with_strided_numpy_vector_kernel_INT64_t_COMPLEX128_t(A.nrow, A_ncol,             # <<<<<<<<<<<<<<
  *                                                                  b_data, b.strides[0] / sd,
  *                                                                  c_data, c.strides[0] / sd,
@@ -4947,7 +4947,7 @@ static PyArrayObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT
       /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT64_t_COMPLEX128_t.pxi":118
  *          A.val, A.row, A.ind)
  *     else:
- *         if A.__use_symmetric_storage:             # <<<<<<<<<<<<<<
+ *         if A.__store_symmetric:             # <<<<<<<<<<<<<<
  *             multiply_sym_csc_mat_with_strided_numpy_vector_kernel_INT64_t_COMPLEX128_t(A.nrow, A_ncol,
  *                                                                  b_data, b.strides[0] / sd,
  */
@@ -5266,7 +5266,7 @@ static PyArrayObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT
  * 
  *     # test if b vector is C-contiguous or not
  *     if cnp.PyArray_ISCONTIGUOUS(b):             # <<<<<<<<<<<<<<
- *         if A.__use_symmetric_storage:
+ *         if A.__store_symmetric:
  *             multiply_conjugate_transposed_sym_csc_mat_with_numpy_vector_kernel_INT64_t_COMPLEX128_t(A_nrow, A_ncol, b_data, c_data, A.val, A.row, A.ind)
  */
   __pyx_t_5 = (PyArray_ISCONTIGUOUS(((PyArrayObject *)__pyx_v_b)) != 0);
@@ -5275,16 +5275,16 @@ static PyArrayObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT
     /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT64_t_COMPLEX128_t.pxi":174
  *     # test if b vector is C-contiguous or not
  *     if cnp.PyArray_ISCONTIGUOUS(b):
- *         if A.__use_symmetric_storage:             # <<<<<<<<<<<<<<
+ *         if A.__store_symmetric:             # <<<<<<<<<<<<<<
  *             multiply_conjugate_transposed_sym_csc_mat_with_numpy_vector_kernel_INT64_t_COMPLEX128_t(A_nrow, A_ncol, b_data, c_data, A.val, A.row, A.ind)
  *         else:
  */
-    __pyx_t_5 = (__pyx_v_A->__pyx_base.__pyx_base.__pyx_base.__pyx___use_symmetric_storage != 0);
+    __pyx_t_5 = (__pyx_v_A->__pyx_base.__pyx_base.__pyx_base.__pyx___store_symmetric != 0);
     if (__pyx_t_5) {
 
       /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT64_t_COMPLEX128_t.pxi":175
  *     if cnp.PyArray_ISCONTIGUOUS(b):
- *         if A.__use_symmetric_storage:
+ *         if A.__store_symmetric:
  *             multiply_conjugate_transposed_sym_csc_mat_with_numpy_vector_kernel_INT64_t_COMPLEX128_t(A_nrow, A_ncol, b_data, c_data, A.val, A.row, A.ind)             # <<<<<<<<<<<<<<
  *         else:
  *             multiply_conjugate_transposed_csc_mat_with_numpy_vector_kernel_INT64_t_COMPLEX128_t(A_nrow, A_ncol, b_data, c_data,
@@ -5294,7 +5294,7 @@ static PyArrayObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT
       /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT64_t_COMPLEX128_t.pxi":174
  *     # test if b vector is C-contiguous or not
  *     if cnp.PyArray_ISCONTIGUOUS(b):
- *         if A.__use_symmetric_storage:             # <<<<<<<<<<<<<<
+ *         if A.__store_symmetric:             # <<<<<<<<<<<<<<
  *             multiply_conjugate_transposed_sym_csc_mat_with_numpy_vector_kernel_INT64_t_COMPLEX128_t(A_nrow, A_ncol, b_data, c_data, A.val, A.row, A.ind)
  *         else:
  */
@@ -5315,7 +5315,7 @@ static PyArrayObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT
  *             multiply_conjugate_transposed_csc_mat_with_numpy_vector_kernel_INT64_t_COMPLEX128_t(A_nrow, A_ncol, b_data, c_data,
  *                 A.val, A.row, A.ind)             # <<<<<<<<<<<<<<
  *     else:
- *         if A.__use_symmetric_storage:
+ *         if A.__store_symmetric:
  */
       __pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT64_t_COMPLEX128_t_multiply_conjugate_transposed_csc_mat_with_numpy_vector_kernel_INT64_t_COMPLEX128_t(__pyx_v_A_nrow, __pyx_v_A_ncol, __pyx_v_b_data, __pyx_v_c_data, __pyx_v_A->val, __pyx_v_A->row, __pyx_v_A->ind);
     }
@@ -5325,7 +5325,7 @@ static PyArrayObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT
  * 
  *     # test if b vector is C-contiguous or not
  *     if cnp.PyArray_ISCONTIGUOUS(b):             # <<<<<<<<<<<<<<
- *         if A.__use_symmetric_storage:
+ *         if A.__store_symmetric:
  *             multiply_conjugate_transposed_sym_csc_mat_with_numpy_vector_kernel_INT64_t_COMPLEX128_t(A_nrow, A_ncol, b_data, c_data, A.val, A.row, A.ind)
  */
     goto __pyx_L4;
@@ -5334,17 +5334,17 @@ static PyArrayObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT
   /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT64_t_COMPLEX128_t.pxi":180
  *                 A.val, A.row, A.ind)
  *     else:
- *         if A.__use_symmetric_storage:             # <<<<<<<<<<<<<<
+ *         if A.__store_symmetric:             # <<<<<<<<<<<<<<
  *             multiply_conjugate_transposed_sym_csc_mat_with_strided_numpy_vector_kernel_INT64_t_COMPLEX128_t(A.nrow, A.ncol,
  *                                                                  b_data, b.strides[0] / sd,
  */
   /*else*/ {
-    __pyx_t_5 = (__pyx_v_A->__pyx_base.__pyx_base.__pyx_base.__pyx___use_symmetric_storage != 0);
+    __pyx_t_5 = (__pyx_v_A->__pyx_base.__pyx_base.__pyx_base.__pyx___store_symmetric != 0);
     if (__pyx_t_5) {
 
       /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT64_t_COMPLEX128_t.pxi":181
  *     else:
- *         if A.__use_symmetric_storage:
+ *         if A.__store_symmetric:
  *             multiply_conjugate_transposed_sym_csc_mat_with_strided_numpy_vector_kernel_INT64_t_COMPLEX128_t(A.nrow, A.ncol,             # <<<<<<<<<<<<<<
  *                                                                  b_data, b.strides[0] / sd,
  *                                                                  c_data, c.strides[0] / sd,
@@ -5359,7 +5359,7 @@ static PyArrayObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
       /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT64_t_COMPLEX128_t.pxi":182
- *         if A.__use_symmetric_storage:
+ *         if A.__store_symmetric:
  *             multiply_conjugate_transposed_sym_csc_mat_with_strided_numpy_vector_kernel_INT64_t_COMPLEX128_t(A.nrow, A.ncol,
  *                                                                  b_data, b.strides[0] / sd,             # <<<<<<<<<<<<<<
  *                                                                  c_data, c.strides[0] / sd,
@@ -5384,7 +5384,7 @@ static PyArrayObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT
 
       /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT64_t_COMPLEX128_t.pxi":181
  *     else:
- *         if A.__use_symmetric_storage:
+ *         if A.__store_symmetric:
  *             multiply_conjugate_transposed_sym_csc_mat_with_strided_numpy_vector_kernel_INT64_t_COMPLEX128_t(A.nrow, A.ncol,             # <<<<<<<<<<<<<<
  *                                                                  b_data, b.strides[0] / sd,
  *                                                                  c_data, c.strides[0] / sd,
@@ -5394,7 +5394,7 @@ static PyArrayObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT
       /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT64_t_COMPLEX128_t.pxi":180
  *                 A.val, A.row, A.ind)
  *     else:
- *         if A.__use_symmetric_storage:             # <<<<<<<<<<<<<<
+ *         if A.__store_symmetric:             # <<<<<<<<<<<<<<
  *             multiply_conjugate_transposed_sym_csc_mat_with_strided_numpy_vector_kernel_INT64_t_COMPLEX128_t(A.nrow, A.ncol,
  *                                                                  b_data, b.strides[0] / sd,
  */
@@ -5713,7 +5713,7 @@ static PyArrayObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT
  * 
  *     # test if b vector is C-contiguous or not
  *     if cnp.PyArray_ISCONTIGUOUS(b):             # <<<<<<<<<<<<<<
- *         if A.__use_symmetric_storage:
+ *         if A.__store_symmetric:
  *             multiply_conjugated_sym_csc_mat_with_numpy_vector_kernel_INT64_t_COMPLEX128_t(A_nrow, A_ncol, b_data, c_data, A.val, A.row, A.ind)
  */
   __pyx_t_5 = (PyArray_ISCONTIGUOUS(((PyArrayObject *)__pyx_v_b)) != 0);
@@ -5722,16 +5722,16 @@ static PyArrayObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT
     /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT64_t_COMPLEX128_t.pxi":237
  *     # test if b vector is C-contiguous or not
  *     if cnp.PyArray_ISCONTIGUOUS(b):
- *         if A.__use_symmetric_storage:             # <<<<<<<<<<<<<<
+ *         if A.__store_symmetric:             # <<<<<<<<<<<<<<
  *             multiply_conjugated_sym_csc_mat_with_numpy_vector_kernel_INT64_t_COMPLEX128_t(A_nrow, A_ncol, b_data, c_data, A.val, A.row, A.ind)
  *         else:
  */
-    __pyx_t_5 = (__pyx_v_A->__pyx_base.__pyx_base.__pyx_base.__pyx___use_symmetric_storage != 0);
+    __pyx_t_5 = (__pyx_v_A->__pyx_base.__pyx_base.__pyx_base.__pyx___store_symmetric != 0);
     if (__pyx_t_5) {
 
       /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT64_t_COMPLEX128_t.pxi":238
  *     if cnp.PyArray_ISCONTIGUOUS(b):
- *         if A.__use_symmetric_storage:
+ *         if A.__store_symmetric:
  *             multiply_conjugated_sym_csc_mat_with_numpy_vector_kernel_INT64_t_COMPLEX128_t(A_nrow, A_ncol, b_data, c_data, A.val, A.row, A.ind)             # <<<<<<<<<<<<<<
  *         else:
  *             multiply_conjugated_csc_mat_with_numpy_vector_kernel_INT64_t_COMPLEX128_t(A_nrow, A_ncol, b_data, c_data, A.val, A.row, A.ind)
@@ -5741,7 +5741,7 @@ static PyArrayObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT
       /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT64_t_COMPLEX128_t.pxi":237
  *     # test if b vector is C-contiguous or not
  *     if cnp.PyArray_ISCONTIGUOUS(b):
- *         if A.__use_symmetric_storage:             # <<<<<<<<<<<<<<
+ *         if A.__store_symmetric:             # <<<<<<<<<<<<<<
  *             multiply_conjugated_sym_csc_mat_with_numpy_vector_kernel_INT64_t_COMPLEX128_t(A_nrow, A_ncol, b_data, c_data, A.val, A.row, A.ind)
  *         else:
  */
@@ -5753,7 +5753,7 @@ static PyArrayObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT
  *         else:
  *             multiply_conjugated_csc_mat_with_numpy_vector_kernel_INT64_t_COMPLEX128_t(A_nrow, A_ncol, b_data, c_data, A.val, A.row, A.ind)             # <<<<<<<<<<<<<<
  *     else:
- *         if A.__use_symmetric_storage:
+ *         if A.__store_symmetric:
  */
     /*else*/ {
       __pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT64_t_COMPLEX128_t_multiply_conjugated_csc_mat_with_numpy_vector_kernel_INT64_t_COMPLEX128_t(__pyx_v_A_nrow, __pyx_v_A_ncol, __pyx_v_b_data, __pyx_v_c_data, __pyx_v_A->val, __pyx_v_A->row, __pyx_v_A->ind);
@@ -5764,7 +5764,7 @@ static PyArrayObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT
  * 
  *     # test if b vector is C-contiguous or not
  *     if cnp.PyArray_ISCONTIGUOUS(b):             # <<<<<<<<<<<<<<
- *         if A.__use_symmetric_storage:
+ *         if A.__store_symmetric:
  *             multiply_conjugated_sym_csc_mat_with_numpy_vector_kernel_INT64_t_COMPLEX128_t(A_nrow, A_ncol, b_data, c_data, A.val, A.row, A.ind)
  */
     goto __pyx_L4;
@@ -5773,17 +5773,17 @@ static PyArrayObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT
   /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT64_t_COMPLEX128_t.pxi":242
  *             multiply_conjugated_csc_mat_with_numpy_vector_kernel_INT64_t_COMPLEX128_t(A_nrow, A_ncol, b_data, c_data, A.val, A.row, A.ind)
  *     else:
- *         if A.__use_symmetric_storage:             # <<<<<<<<<<<<<<
+ *         if A.__store_symmetric:             # <<<<<<<<<<<<<<
  *             multiply_conjugated_sym_csc_mat_with_strided_numpy_vector_kernel_INT64_t_COMPLEX128_t(A.nrow, A.ncol,
  *                                                                  b_data, b.strides[0] / sd,
  */
   /*else*/ {
-    __pyx_t_5 = (__pyx_v_A->__pyx_base.__pyx_base.__pyx_base.__pyx___use_symmetric_storage != 0);
+    __pyx_t_5 = (__pyx_v_A->__pyx_base.__pyx_base.__pyx_base.__pyx___store_symmetric != 0);
     if (__pyx_t_5) {
 
       /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT64_t_COMPLEX128_t.pxi":243
  *     else:
- *         if A.__use_symmetric_storage:
+ *         if A.__store_symmetric:
  *             multiply_conjugated_sym_csc_mat_with_strided_numpy_vector_kernel_INT64_t_COMPLEX128_t(A.nrow, A.ncol,             # <<<<<<<<<<<<<<
  *                                                                  b_data, b.strides[0] / sd,
  *                                                                  c_data, c.strides[0] / sd,
@@ -5798,7 +5798,7 @@ static PyArrayObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
       /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT64_t_COMPLEX128_t.pxi":244
- *         if A.__use_symmetric_storage:
+ *         if A.__store_symmetric:
  *             multiply_conjugated_sym_csc_mat_with_strided_numpy_vector_kernel_INT64_t_COMPLEX128_t(A.nrow, A.ncol,
  *                                                                  b_data, b.strides[0] / sd,             # <<<<<<<<<<<<<<
  *                                                                  c_data, c.strides[0] / sd,
@@ -5823,7 +5823,7 @@ static PyArrayObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT
 
       /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT64_t_COMPLEX128_t.pxi":243
  *     else:
- *         if A.__use_symmetric_storage:
+ *         if A.__store_symmetric:
  *             multiply_conjugated_sym_csc_mat_with_strided_numpy_vector_kernel_INT64_t_COMPLEX128_t(A.nrow, A.ncol,             # <<<<<<<<<<<<<<
  *                                                                  b_data, b.strides[0] / sd,
  *                                                                  c_data, c.strides[0] / sd,
@@ -5833,7 +5833,7 @@ static PyArrayObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT
       /* "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT64_t_COMPLEX128_t.pxi":242
  *             multiply_conjugated_csc_mat_with_numpy_vector_kernel_INT64_t_COMPLEX128_t(A_nrow, A_ncol, b_data, c_data, A.val, A.row, A.ind)
  *     else:
- *         if A.__use_symmetric_storage:             # <<<<<<<<<<<<<<
+ *         if A.__store_symmetric:             # <<<<<<<<<<<<<<
  *             multiply_conjugated_sym_csc_mat_with_strided_numpy_vector_kernel_INT64_t_COMPLEX128_t(A.nrow, A.ncol,
  *                                                                  b_data, b.strides[0] / sd,
  */
@@ -6155,7 +6155,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT64_t
  * 
  *         nnz = self.nnz             # <<<<<<<<<<<<<<
  * 
- *         self_copy = CSCSparseMatrix_INT64_t_COMPLEX128_t(control_object=unexposed_value, nrow=self.__nrow, ncol=self.__ncol, use_zero_storage=self.__use_zero_storage, use_symmetric_storage=self.__use_symmetric_storage)
+ *         self_copy = CSCSparseMatrix_INT64_t_COMPLEX128_t(control_object=unexposed_value, nrow=self.__nrow, ncol=self.__ncol, store_zero=self.__store_zero, store_symmetric=self.__store_symmetric)
  */
   __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_nnz); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 110; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
@@ -6166,7 +6166,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT64_t
   /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT64_t_COMPLEX128_t.pyx":112
  *         nnz = self.nnz
  * 
- *         self_copy = CSCSparseMatrix_INT64_t_COMPLEX128_t(control_object=unexposed_value, nrow=self.__nrow, ncol=self.__ncol, use_zero_storage=self.__use_zero_storage, use_symmetric_storage=self.__use_symmetric_storage)             # <<<<<<<<<<<<<<
+ *         self_copy = CSCSparseMatrix_INT64_t_COMPLEX128_t(control_object=unexposed_value, nrow=self.__nrow, ncol=self.__ncol, store_zero=self.__store_zero, store_symmetric=self.__store_symmetric)             # <<<<<<<<<<<<<<
  * 
  *         val = <COMPLEX128_t *> PyMem_Malloc(nnz * sizeof(COMPLEX128_t))
  */
@@ -6181,13 +6181,13 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT64_t
   __Pyx_GOTREF(__pyx_t_3);
   if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_ncol, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 112; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyBool_FromLong(__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___use_zero_storage); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 112; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyBool_FromLong(__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___store_zero); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 112; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_use_zero_storage, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 112; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_store_zero, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 112; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyBool_FromLong(__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___use_symmetric_storage); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 112; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyBool_FromLong(__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___store_symmetric); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 112; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_use_symmetric_storage, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 112; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_store_symmetric, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 112; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT64_t_COMPLEX128_t_CSCSparseMatrix_INT64_t_COMPLEX128_t), __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 112; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
@@ -6196,7 +6196,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT64_t
   __pyx_t_3 = 0;
 
   /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT64_t_COMPLEX128_t.pyx":114
- *         self_copy = CSCSparseMatrix_INT64_t_COMPLEX128_t(control_object=unexposed_value, nrow=self.__nrow, ncol=self.__ncol, use_zero_storage=self.__use_zero_storage, use_symmetric_storage=self.__use_symmetric_storage)
+ *         self_copy = CSCSparseMatrix_INT64_t_COMPLEX128_t(control_object=unexposed_value, nrow=self.__nrow, ncol=self.__ncol, store_zero=self.__store_zero, store_symmetric=self.__store_symmetric)
  * 
  *         val = <COMPLEX128_t *> PyMem_Malloc(nnz * sizeof(COMPLEX128_t))             # <<<<<<<<<<<<<<
  *         if not val:
@@ -7930,16 +7930,16 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT64_t_
   /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT64_t_COMPLEX128_t.pyx":331
  * 
  *         # code is duplicated for optimization
- *         if self.__use_symmetric_storage:             # <<<<<<<<<<<<<<
+ *         if self.__store_symmetric:             # <<<<<<<<<<<<<<
  *             if i < j:
  *                 real_i = j
  */
-  __pyx_t_1 = (__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___use_symmetric_storage != 0);
+  __pyx_t_1 = (__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___store_symmetric != 0);
   if (__pyx_t_1) {
 
     /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT64_t_COMPLEX128_t.pyx":332
  *         # code is duplicated for optimization
- *         if self.__use_symmetric_storage:
+ *         if self.__store_symmetric:
  *             if i < j:             # <<<<<<<<<<<<<<
  *                 real_i = j
  *                 real_j = i
@@ -7948,7 +7948,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT64_t_
     if (__pyx_t_1) {
 
       /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT64_t_COMPLEX128_t.pyx":333
- *         if self.__use_symmetric_storage:
+ *         if self.__store_symmetric:
  *             if i < j:
  *                 real_i = j             # <<<<<<<<<<<<<<
  *                 real_j = i
@@ -7967,7 +7967,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT64_t_
 
       /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT64_t_COMPLEX128_t.pyx":332
  *         # code is duplicated for optimization
- *         if self.__use_symmetric_storage:
+ *         if self.__store_symmetric:
  *             if i < j:             # <<<<<<<<<<<<<<
  *                 real_i = j
  *                 real_j = i
@@ -8139,7 +8139,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT64_t_
     /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT64_t_COMPLEX128_t.pyx":331
  * 
  *         # code is duplicated for optimization
- *         if self.__use_symmetric_storage:             # <<<<<<<<<<<<<<
+ *         if self.__store_symmetric:             # <<<<<<<<<<<<<<
  *             if i < j:
  *                 real_i = j
  */
@@ -9994,15 +9994,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT64_t
   __Pyx_XDECREF(__pyx_r);
 
   /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT64_t_COMPLEX128_t.pyx":566
- *                                                   use_symmetric_storage=False,
- *                                                   use_zero_storage=self.__use_zero_storage,
+ *                                                   store_symmetric=False,
+ *                                                   store_zero=self.__store_zero,
  *                                                   row_indices_are_sorted=True)             # <<<<<<<<<<<<<<
  * 
  *     def triu(self, int k = 0):
  */
   __pyx_t_8.__pyx_n = 1;
   __pyx_t_8.row_indices_are_sorted = 1;
-  __pyx_t_2 = __pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT64_t_COMPLEX128_t_MakeCSCSparseMatrix_INT64_t_COMPLEX128_t(__pyx_v_self->__pyx_base.__pyx_base.__pyx___nrow, __pyx_v_self->__pyx_base.__pyx_base.__pyx___ncol, __pyx_v_nnz, __pyx_v_ind, __pyx_v_row, __pyx_v_val, 0, __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___use_zero_storage, &__pyx_t_8); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 558; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT64_t_COMPLEX128_t_MakeCSCSparseMatrix_INT64_t_COMPLEX128_t(__pyx_v_self->__pyx_base.__pyx_base.__pyx___nrow, __pyx_v_self->__pyx_base.__pyx_base.__pyx___ncol, __pyx_v_nnz, __pyx_v_ind, __pyx_v_row, __pyx_v_val, 0, __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___store_zero, &__pyx_t_8); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 558; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -10399,15 +10399,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT64_t
   /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT64_t_COMPLEX128_t.pyx":617
  *         cdef COMPLEX128_t  * csr_val
  * 
- *         if self.__use_symmetric_storage:             # <<<<<<<<<<<<<<
+ *         if self.__store_symmetric:             # <<<<<<<<<<<<<<
  *             # Special (and annoying) case: we first create a CSR and then translate it to CSC
  *             csr_ind = <INT64_t *> PyMem_Malloc((self.__nrow + 1) * sizeof(INT64_t))
  */
-  __pyx_t_1 = (__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___use_symmetric_storage != 0);
+  __pyx_t_1 = (__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___store_symmetric != 0);
   if (__pyx_t_1) {
 
     /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT64_t_COMPLEX128_t.pyx":619
- *         if self.__use_symmetric_storage:
+ *         if self.__store_symmetric:
  *             # Special (and annoying) case: we first create a CSR and then translate it to CSC
  *             csr_ind = <INT64_t *> PyMem_Malloc((self.__nrow + 1) * sizeof(INT64_t))             # <<<<<<<<<<<<<<
  *             if not csr_ind:
@@ -10774,7 +10774,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT64_t
     /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT64_t_COMPLEX128_t.pyx":617
  *         cdef COMPLEX128_t  * csr_val
  * 
- *         if self.__use_symmetric_storage:             # <<<<<<<<<<<<<<
+ *         if self.__store_symmetric:             # <<<<<<<<<<<<<<
  *             # Special (and annoying) case: we first create a CSR and then translate it to CSC
  *             csr_ind = <INT64_t *> PyMem_Malloc((self.__nrow + 1) * sizeof(INT64_t))
  */
@@ -10929,15 +10929,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT64_t
   __Pyx_XDECREF(__pyx_r);
 
   /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT64_t_COMPLEX128_t.pyx":700
- *                                                   use_symmetric_storage=False,
- *                                                   use_zero_storage=self.__use_zero_storage,
+ *                                                   store_symmetric=False,
+ *                                                   store_zero=self.__store_zero,
  *                                                   row_indices_are_sorted=True)             # <<<<<<<<<<<<<<
  * 
  *     def to_csr(self):
  */
   __pyx_t_8.__pyx_n = 1;
   __pyx_t_8.row_indices_are_sorted = 1;
-  __pyx_t_4 = __pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT64_t_COMPLEX128_t_MakeCSCSparseMatrix_INT64_t_COMPLEX128_t(__pyx_v_self->__pyx_base.__pyx_base.__pyx___nrow, __pyx_v_self->__pyx_base.__pyx_base.__pyx___ncol, __pyx_v_nnz, __pyx_v_ind, __pyx_v_row, __pyx_v_val, 0, __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___use_zero_storage, &__pyx_t_8); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 692; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT64_t_COMPLEX128_t_MakeCSCSparseMatrix_INT64_t_COMPLEX128_t(__pyx_v_self->__pyx_base.__pyx_base.__pyx___nrow, __pyx_v_self->__pyx_base.__pyx_base.__pyx___ncol, __pyx_v_nnz, __pyx_v_ind, __pyx_v_row, __pyx_v_val, 0, __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___store_zero, &__pyx_t_8); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 692; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_r = __pyx_t_4;
   __pyx_t_4 = 0;
@@ -11163,23 +11163,23 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT64_t
   /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT64_t_COMPLEX128_t.pyx":733
  *                                                   col,
  *                                                   val,
- *                                                   use_symmetric_storage=self.use_symmetric_storage,             # <<<<<<<<<<<<<<
- *                                                   use_zero_storage=self.use_zero_storage,
+ *                                                   store_symmetric=self.store_symmetric,             # <<<<<<<<<<<<<<
+ *                                                   store_zero=self.store_zero,
  *                                                   col_indices_are_sorted=True)
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_use_symmetric_storage); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 733; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_store_symmetric); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 733; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely((__pyx_t_1 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 733; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT64_t_COMPLEX128_t.pyx":734
  *                                                   val,
- *                                                   use_symmetric_storage=self.use_symmetric_storage,
- *                                                   use_zero_storage=self.use_zero_storage,             # <<<<<<<<<<<<<<
+ *                                                   store_symmetric=self.store_symmetric,
+ *                                                   store_zero=self.store_zero,             # <<<<<<<<<<<<<<
  *                                                   col_indices_are_sorted=True)
  * 
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_use_zero_storage); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 734; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_store_zero); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 734; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 734; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -11351,7 +11351,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT64_t
  *         np_ndarray = np.zeros((self.__nrow, self.__ncol), dtype=np.complex128, order='C')
  *         np_memview = np_ndarray             # <<<<<<<<<<<<<<
  * 
- *         if not self.__use_symmetric_storage:
+ *         if not self.__store_symmetric:
  */
   __pyx_t_11 = __Pyx_PyObject_to_MemoryviewSlice_dsds___pyx_t_double_complex(((PyObject *)__pyx_v_np_ndarray));
   if (unlikely(!__pyx_t_11.memview)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 751; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -11362,16 +11362,16 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT64_t
   /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT64_t_COMPLEX128_t.pyx":753
  *         np_memview = np_ndarray
  * 
- *         if not self.__use_symmetric_storage:             # <<<<<<<<<<<<<<
+ *         if not self.__store_symmetric:             # <<<<<<<<<<<<<<
  *             for j from 0 <= j < self.__ncol:
  *                 for k from self.ind[j] <= k < self.ind[j+1]:
  */
-  __pyx_t_12 = ((!(__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___use_symmetric_storage != 0)) != 0);
+  __pyx_t_12 = ((!(__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___store_symmetric != 0)) != 0);
   if (__pyx_t_12) {
 
     /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT64_t_COMPLEX128_t.pyx":754
  * 
- *         if not self.__use_symmetric_storage:
+ *         if not self.__store_symmetric:
  *             for j from 0 <= j < self.__ncol:             # <<<<<<<<<<<<<<
  *                 for k from self.ind[j] <= k < self.ind[j+1]:
  *                     np_memview[self.row[k], j] = self.val[k]
@@ -11380,7 +11380,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT64_t
     for (__pyx_v_j = 0; __pyx_v_j < __pyx_t_13; __pyx_v_j++) {
 
       /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT64_t_COMPLEX128_t.pyx":755
- *         if not self.__use_symmetric_storage:
+ *         if not self.__store_symmetric:
  *             for j from 0 <= j < self.__ncol:
  *                 for k from self.ind[j] <= k < self.ind[j+1]:             # <<<<<<<<<<<<<<
  *                     np_memview[self.row[k], j] = self.val[k]
@@ -11418,7 +11418,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT64_t
     /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT64_t_COMPLEX128_t.pyx":753
  *         np_memview = np_ndarray
  * 
- *         if not self.__use_symmetric_storage:             # <<<<<<<<<<<<<<
+ *         if not self.__store_symmetric:             # <<<<<<<<<<<<<<
  *             for j from 0 <= j < self.__ncol:
  *                 for k from self.ind[j] <= k < self.ind[j+1]:
  */
@@ -12745,7 +12745,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT64_t
  *                 # TODO: rewrite this completely
  *                 for k from self.ind[j] <= k < self.ind[j+1]:             # <<<<<<<<<<<<<<
  *                     mat[(self.row[k]*self.ncol)+j] = self.val[k]
- *                     if self.__use_symmetric_storage:
+ *                     if self.__store_symmetric:
  */
       __pyx_t_8 = (__pyx_v_self->ind[(__pyx_v_j + 1)]);
       for (__pyx_v_k = (__pyx_v_self->ind[__pyx_v_j]); __pyx_v_k < __pyx_t_8; __pyx_v_k++) {
@@ -12754,7 +12754,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT64_t
  *                 # TODO: rewrite this completely
  *                 for k from self.ind[j] <= k < self.ind[j+1]:
  *                     mat[(self.row[k]*self.ncol)+j] = self.val[k]             # <<<<<<<<<<<<<<
- *                     if self.__use_symmetric_storage:
+ *                     if self.__store_symmetric:
  *                         mat[(j*self.ncol)+ self.row[k]] = self.val[k]
  */
         __pyx_t_1 = __Pyx_PyInt_From_long((__pyx_v_self->row[__pyx_v_k])); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 887; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -12778,16 +12778,16 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT64_t
         /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT64_t_COMPLEX128_t.pyx":888
  *                 for k from self.ind[j] <= k < self.ind[j+1]:
  *                     mat[(self.row[k]*self.ncol)+j] = self.val[k]
- *                     if self.__use_symmetric_storage:             # <<<<<<<<<<<<<<
+ *                     if self.__store_symmetric:             # <<<<<<<<<<<<<<
  *                         mat[(j*self.ncol)+ self.row[k]] = self.val[k]
  * 
  */
-        __pyx_t_5 = (__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___use_symmetric_storage != 0);
+        __pyx_t_5 = (__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___store_symmetric != 0);
         if (__pyx_t_5) {
 
           /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT64_t_COMPLEX128_t.pyx":889
  *                     mat[(self.row[k]*self.ncol)+j] = self.val[k]
- *                     if self.__use_symmetric_storage:
+ *                     if self.__store_symmetric:
  *                         mat[(j*self.ncol)+ self.row[k]] = self.val[k]             # <<<<<<<<<<<<<<
  * 
  *             for i from 0 <= i < self.nrow:
@@ -12813,7 +12813,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT64_t
           /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT64_t_COMPLEX128_t.pyx":888
  *                 for k from self.ind[j] <= k < self.ind[j+1]:
  *                     mat[(self.row[k]*self.ncol)+j] = self.val[k]
- *                     if self.__use_symmetric_storage:             # <<<<<<<<<<<<<<
+ *                     if self.__store_symmetric:             # <<<<<<<<<<<<<<
  *                         mat[(j*self.ncol)+ self.row[k]] = self.val[k]
  * 
  */
@@ -13608,11 +13608,11 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT64_t
  *                                         INT64_t nnz,
  */
 
-static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT64_t_COMPLEX128_t_MakeCSCSparseMatrix_INT64_t_COMPLEX128_t(__pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t __pyx_v_nrow, __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t __pyx_v_ncol, __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t __pyx_v_nnz, __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_v_ind, __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_v_row, __pyx_t_double_complex *__pyx_v_val, int __pyx_v_use_symmetric_storage, int __pyx_v_use_zero_storage, struct __pyx_opt_args_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT64_t_COMPLEX128_t_MakeCSCSparseMatrix_INT64_t_COMPLEX128_t *__pyx_optional_args) {
+static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT64_t_COMPLEX128_t_MakeCSCSparseMatrix_INT64_t_COMPLEX128_t(__pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t __pyx_v_nrow, __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t __pyx_v_ncol, __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t __pyx_v_nnz, __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_v_ind, __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_v_row, __pyx_t_double_complex *__pyx_v_val, int __pyx_v_store_symmetric, int __pyx_v_store_zero, struct __pyx_opt_args_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT64_t_COMPLEX128_t_MakeCSCSparseMatrix_INT64_t_COMPLEX128_t *__pyx_optional_args) {
 
   /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT64_t_COMPLEX128_t.pyx":984
  *                                         COMPLEX128_t * val,
- *                                         bint use_symmetric_storage, bint use_zero_storage,
+ *                                         bint store_symmetric, bint store_zero,
  *                                         bint row_indices_are_sorted=False):             # <<<<<<<<<<<<<<
  *     """
  *     Construct a CSCSparseMatrix object.
@@ -13662,7 +13662,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT64_t_
  *                                              nrow=nrow,
  *                                              ncol=ncol,             # <<<<<<<<<<<<<<
  *                                              nnz=nnz,
- *                                              use_symmetric_storage=use_symmetric_storage,
+ *                                              store_symmetric=store_symmetric,
  */
   __pyx_t_2 = __Pyx_PyInt_From_long(__pyx_v_ncol); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 999; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
@@ -13673,8 +13673,8 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT64_t_
  *                                              nrow=nrow,
  *                                              ncol=ncol,
  *                                              nnz=nnz,             # <<<<<<<<<<<<<<
- *                                              use_symmetric_storage=use_symmetric_storage,
- *                                              use_zero_storage=use_zero_storage)
+ *                                              store_symmetric=store_symmetric,
+ *                                              store_zero=store_zero)
  */
   __pyx_t_2 = __Pyx_PyInt_From_long(__pyx_v_nnz); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1000; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
@@ -13684,25 +13684,25 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT64_t_
   /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT64_t_COMPLEX128_t.pyx":1001
  *                                              ncol=ncol,
  *                                              nnz=nnz,
- *                                              use_symmetric_storage=use_symmetric_storage,             # <<<<<<<<<<<<<<
- *                                              use_zero_storage=use_zero_storage)
+ *                                              store_symmetric=store_symmetric,             # <<<<<<<<<<<<<<
+ *                                              store_zero=store_zero)
  * 
  */
-  __pyx_t_2 = __Pyx_PyBool_FromLong(__pyx_v_use_symmetric_storage); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1001; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyBool_FromLong(__pyx_v_store_symmetric); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1001; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_use_symmetric_storage, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 997; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_store_symmetric, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 997; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT64_t_COMPLEX128_t.pyx":1002
  *                                              nnz=nnz,
- *                                              use_symmetric_storage=use_symmetric_storage,
- *                                              use_zero_storage=use_zero_storage)             # <<<<<<<<<<<<<<
+ *                                              store_symmetric=store_symmetric,
+ *                                              store_zero=store_zero)             # <<<<<<<<<<<<<<
  * 
  *     csc_mat.val = val
  */
-  __pyx_t_2 = __Pyx_PyBool_FromLong(__pyx_v_use_zero_storage); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1002; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyBool_FromLong(__pyx_v_store_zero); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1002; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_use_zero_storage, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 997; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_store_zero, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 997; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT64_t_COMPLEX128_t.pyx":997
@@ -13719,7 +13719,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT64_t_
   __pyx_t_2 = 0;
 
   /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT64_t_COMPLEX128_t.pyx":1004
- *                                              use_zero_storage=use_zero_storage)
+ *                                              store_zero=store_zero)
  * 
  *     csc_mat.val = val             # <<<<<<<<<<<<<<
  *     csc_mat.ind = ind
@@ -28492,6 +28492,8 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_start, __pyx_k_start, sizeof(__pyx_k_start), 0, 0, 1, 1},
   {&__pyx_n_s_step, __pyx_k_step, sizeof(__pyx_k_step), 0, 0, 1, 1},
   {&__pyx_n_s_stop, __pyx_k_stop, sizeof(__pyx_k_stop), 0, 0, 1, 1},
+  {&__pyx_n_s_store_symmetric, __pyx_k_store_symmetric, sizeof(__pyx_k_store_symmetric), 0, 0, 1, 1},
+  {&__pyx_n_s_store_zero, __pyx_k_store_zero, sizeof(__pyx_k_store_zero), 0, 0, 1, 1},
   {&__pyx_kp_s_strided_and_direct, __pyx_k_strided_and_direct, sizeof(__pyx_k_strided_and_direct), 0, 0, 1, 0},
   {&__pyx_kp_s_strided_and_direct_or_indirect, __pyx_k_strided_and_direct_or_indirect, sizeof(__pyx_k_strided_and_direct_or_indirect), 0, 0, 1, 0},
   {&__pyx_kp_s_strided_and_indirect, __pyx_k_strided_and_indirect, sizeof(__pyx_k_strided_and_indirect), 0, 0, 1, 0},
@@ -28501,8 +28503,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_unable_to_allocate_shape_and_str, __pyx_k_unable_to_allocate_shape_and_str, sizeof(__pyx_k_unable_to_allocate_shape_and_str), 0, 0, 1, 0},
   {&__pyx_kp_u_unknown_dtype_code_in_numpy_pxd, __pyx_k_unknown_dtype_code_in_numpy_pxd, sizeof(__pyx_k_unknown_dtype_code_in_numpy_pxd), 0, 1, 0, 0},
   {&__pyx_n_s_unpack, __pyx_k_unpack, sizeof(__pyx_k_unpack), 0, 0, 1, 1},
-  {&__pyx_n_s_use_symmetric_storage, __pyx_k_use_symmetric_storage, sizeof(__pyx_k_use_symmetric_storage), 0, 0, 1, 1},
-  {&__pyx_n_s_use_zero_storage, __pyx_k_use_zero_storage, sizeof(__pyx_k_use_zero_storage), 0, 0, 1, 1},
   {&__pyx_kp_s_val, __pyx_k_val, sizeof(__pyx_k_val), 0, 0, 1, 0},
   {&__pyx_n_s_val_2, __pyx_k_val_2, sizeof(__pyx_k_val_2), 0, 0, 1, 1},
   {&__pyx_n_s_zeros, __pyx_k_zeros, sizeof(__pyx_k_zeros), 0, 0, 1, 1},

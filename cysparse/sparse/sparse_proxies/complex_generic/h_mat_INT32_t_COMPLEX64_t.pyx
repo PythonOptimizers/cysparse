@@ -60,6 +60,11 @@ cdef class ConjugateTransposedSparseMatrix_INT32_t_COMPLEX64_t:
 
     
     @property
+    def nnz(self):
+        return self.A.nnz
+
+    
+    @property
     def dtype(self):
         return self.A.cp_type.dtype
 
@@ -67,6 +72,16 @@ cdef class ConjugateTransposedSparseMatrix_INT32_t_COMPLEX64_t:
     @property
     def itype(self):
         return self.A.cp_type.itype
+
+    
+    @property
+    def store_symmetric(self):
+        return self.A.store_symmetric
+
+    
+    @property
+    def store_zero(self):
+        return self.A.store_zero
 
     # for compatibility with numpy, PyKrylov, etc
     

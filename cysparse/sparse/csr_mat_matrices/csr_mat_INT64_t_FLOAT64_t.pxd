@@ -39,8 +39,8 @@ cdef MakeCSRSparseMatrix_INT64_t_FLOAT64_t(INT64_t nrow,
                                         INT64_t * ind,
                                         INT64_t * col,
                                         FLOAT64_t * val,
-                                        bint use_symmetric_storage,
-                                        bint use_zero_storage,
+                                        bint store_symmetric,
+                                        bint store_zero,
                                         bint col_indices_are_sorted=?)
 
 cdef LLSparseMatrix_INT64_t_FLOAT64_t multiply_csr_mat_by_csc_mat_INT64_t_FLOAT64_t(CSRSparseMatrix_INT64_t_FLOAT64_t A, CSCSparseMatrix_INT64_t_FLOAT64_t B)

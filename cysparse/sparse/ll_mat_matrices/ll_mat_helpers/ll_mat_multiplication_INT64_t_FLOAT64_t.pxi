@@ -56,14 +56,14 @@ cdef LLSparseMatrix_INT64_t_FLOAT64_t multiply_two_ll_mat_INT64_t_FLOAT64_t(LLSp
     cdef INT64_t C_nrow = A_nrow
     cdef INT64_t C_ncol = B_ncol
 
-    cdef bint use_zero_storage = A.use_zero_storage and B.use_zero_storage
+    cdef bint store_zero = A.store_zero and B.store_zero
     cdef INT64_t size_hint = A.size_hint
 
-    C = LLSparseMatrix_INT64_t_FLOAT64_t(control_object=unexposed_value, nrow=C_nrow, ncol=C_ncol, size_hint=size_hint, use_zero_storage=use_zero_storage)
+    C = LLSparseMatrix_INT64_t_FLOAT64_t(control_object=unexposed_value, nrow=C_nrow, ncol=C_ncol, size_hint=size_hint, store_zero=store_zero)
 
 
     # CASES
-    if not A.__use_symmetric_storage and not B.__use_symmetric_storage:
+    if not A.__store_symmetric and not B.__store_symmetric:
         pass
     else:
         raise NotImplementedError("Multiplication with symmetric matrices is not implemented yet")
@@ -121,14 +121,14 @@ cdef LLSparseMatrix_INT64_t_FLOAT64_t multiply_transposed_ll_mat_by_ll_mat_INT64
     cdef INT64_t C_nrow = A_ncol
     cdef INT64_t C_ncol = B_ncol
 
-    cdef bint use_zero_storage = A.use_zero_storage and B.use_zero_storage
+    cdef bint store_zero = A.store_zero and B.store_zero
     # TODO: is this a good idea?
     cdef INT64_t size_hint = min(A.__nnz, B.__nnz)
 
-    C = LLSparseMatrix_INT64_t_FLOAT64_t(control_object=unexposed_value, nrow=C_nrow, ncol=C_ncol, size_hint=size_hint, use_zero_storage=use_zero_storage)
+    C = LLSparseMatrix_INT64_t_FLOAT64_t(control_object=unexposed_value, nrow=C_nrow, ncol=C_ncol, size_hint=size_hint, store_zero=store_zero)
 
     # CASES
-    if not A.__use_symmetric_storage and not B.__use_symmetric_storage:
+    if not A.__store_symmetric and not B.__store_symmetric:
         # we only deal with non symmetric matrices
         pass
     else:
@@ -202,7 +202,7 @@ cdef cnp.ndarray[cnp.npy_float64, ndim=2] multiply_ll_mat_with_numpy_ndarray_FLO
         INT64_t iA, jA, kA, jB
 
     # CASES
-    if not A.__use_symmetric_storage:
+    if not A.__store_symmetric:
         for iA from 0 <= iA < A_nrow:
             kA = A.root[iA]
 
@@ -248,17 +248,17 @@ cdef LLSparseMatrix_INT64_t_FLOAT64_t multiply_transposed_ll_mat_with_self(LLSpa
         ``NotImplementedError``: When matrix ``A`` is symmetric.
         ``RuntimeError`` if some error occurred during the computation.
     """
-    if A.use_symmetric_storage:
+    if A.store_symmetric:
         raise NotImplementedError('matdot_transp_self peration with symmetric matrices not supported')
 
     cdef:
-        bint use_zero_storage = A.use_zero_storage
+        bint store_zero = A.store_zero
         INT64_t size_hint = A.size_hint
         LLSparseMatrix_INT64_t_FLOAT64_t C
         INT64_t iA, iC, kA, kA2
         FLOAT64_t valA
 
-    C = LLSparseMatrix_INT64_t_FLOAT64_t(control_object=unexposed_value, nrow=A.ncol, ncol=A.ncol, size_hint=size_hint, use_zero_storage=use_zero_storage, use_symmetric_storage=True)
+    C = LLSparseMatrix_INT64_t_FLOAT64_t(control_object=unexposed_value, nrow=A.ncol, ncol=A.ncol, size_hint=size_hint, store_zero=store_zero, store_symmetric=True)
 
     for iA from 0 <= iA < A.nrow:
         kA = A.root[iA]
@@ -293,11 +293,11 @@ cdef LLSparseMatrix_INT64_t_FLOAT64_t multiply_transposed_ll_mat_with_self_scale
         ``NotImplementedError``: When matrix ``A`` is symmetric.
         ``RuntimeError`` if some error occurred during the computation.
     """
-    if A.use_symmetric_storage:
+    if A.store_symmetric:
         raise NotImplementedError('matdot_transp_self peration with symmetric matrices not supported')
 
     cdef:
-        bint use_zero_storage = A.use_zero_storage
+        bint store_zero = A.store_zero
         INT64_t size_hint = A.size_hint
         LLSparseMatrix_INT64_t_FLOAT64_t C
         INT64_t iA, iC, kA, kA2
@@ -312,7 +312,7 @@ cdef LLSparseMatrix_INT64_t_FLOAT64_t multiply_transposed_ll_mat_with_self_scale
         INT64_t incx = d.strides[0] / sd
 
 
-    C = LLSparseMatrix_INT64_t_FLOAT64_t(control_object=unexposed_value, nrow=A.ncol, ncol=A.ncol, size_hint=size_hint, use_zero_storage=use_zero_storage, use_symmetric_storage=True)
+    C = LLSparseMatrix_INT64_t_FLOAT64_t(control_object=unexposed_value, nrow=A.ncol, ncol=A.ncol, size_hint=size_hint, store_zero=store_zero, store_symmetric=True)
 
     if cnp.PyArray_ISCONTIGUOUS(d):
         for iA from 0 <= iA < A.nrow:
@@ -394,7 +394,7 @@ cdef cnp.ndarray[cnp.npy_float64, ndim=2] multiply_transposed_ll_mat_with_numpy_
         INT64_t iA, jA, kA, jB
 
     # CASES
-    if not A.__use_symmetric_storage:
+    if not A.__store_symmetric:
         for iA from 0 <= iA < A_nrow:
             kA = A.root[iA]
 
@@ -473,12 +473,12 @@ cdef cnp.ndarray[cnp.npy_float64, ndim=1, mode='c'] multiply_ll_mat_with_numpy_v
 
     # test if b vector is C-contiguous or not
     if cnp.PyArray_ISCONTIGUOUS(b):
-        if A.__use_symmetric_storage:
+        if A.__store_symmetric:
             multiply_sym_ll_mat_with_numpy_vector_kernel_INT64_t_FLOAT64_t(A_nrow, b_data, c_data, A.val, A.col, A.link, A.root)
         else:
             multiply_ll_mat_with_numpy_vector_kernel_INT64_t_FLOAT64_t(A_nrow, b_data, c_data, A.val, A.col, A.link, A.root)
     else:
-        if A.__use_symmetric_storage:
+        if A.__store_symmetric:
             multiply_sym_ll_mat_with_strided_numpy_vector_kernel_INT64_t_FLOAT64_t(A.nrow,
                                                                  b_data, b.strides[0] / sd,
                                                                  c_data, c.strides[0] / sd,
@@ -534,13 +534,13 @@ cdef cnp.ndarray[cnp.npy_float64, ndim=1, mode='c'] multiply_transposed_ll_mat_w
 
     # test if b vector is C-contiguous or not
     if cnp.PyArray_ISCONTIGUOUS(b):
-        if A.__use_symmetric_storage:
+        if A.__store_symmetric:
             multiply_sym_ll_mat_with_numpy_vector_kernel_INT64_t_FLOAT64_t(A_nrow, b_data, c_data, A.val, A.col, A.link, A.root)
         else:
             multiply_tranposed_ll_mat_with_numpy_vector_kernel_INT64_t_FLOAT64_t(A_nrow, A_ncol, b_data, c_data,
          A.val, A.col, A.link, A.root)
     else:
-        if A.__use_symmetric_storage:
+        if A.__store_symmetric:
             multiply_sym_ll_mat_with_strided_numpy_vector_kernel_INT64_t_FLOAT64_t(A.nrow,
                                                                  b_data, b.strides[0] / sd,
                                                                  c_data, c.strides[0] / sd,

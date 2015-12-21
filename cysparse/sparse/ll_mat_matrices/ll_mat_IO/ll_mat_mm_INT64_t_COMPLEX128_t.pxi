@@ -6,7 +6,7 @@ See http://math.nist.gov/MatrixMarket/ .
 """
 
 
-cdef LLSparseMatrix_INT64_t_COMPLEX128_t MakeLLSparseMatrixFromMMFile_INT64_t_COMPLEX128_t(str mm_filename, bint use_zero_storage=False, bint test_bounds=True):
+cdef LLSparseMatrix_INT64_t_COMPLEX128_t MakeLLSparseMatrixFromMMFile_INT64_t_COMPLEX128_t(str mm_filename, bint store_zero=False, bint test_bounds=True):
     cdef:
         str line
         list token_list
@@ -20,7 +20,7 @@ cdef LLSparseMatrix_INT64_t_COMPLEX128_t MakeLLSparseMatrixFromMMFile_INT64_t_CO
 
     cdef:
         bint sparse
-        bint use_symmetric_storage
+        bint store_symmetric
         bint is_complex
         list sparse_dense_list = [MM_ARRAY_STR, MM_COORDINATE_STR]
         list data_type_list = [MM_COMPLEX_STR, MM_REAL_STR, MM_INT_STR, MM_PATTERN_STR]
@@ -77,7 +77,7 @@ cdef LLSparseMatrix_INT64_t_COMPLEX128_t MakeLLSparseMatrixFromMMFile_INT64_t_CO
         if token not in storage_scheme_list:
             raise IOError('Matrix format not recognized as Matrix Market format: fourth token in the Matrix Market banner is not in "%s"' % storage_scheme_list)
         storage_scheme = storage_scheme_dict[token]
-        use_symmetric_storage = storage_scheme == MM_SYMMETRIC
+        store_symmetric = storage_scheme == MM_SYMMETRIC
 
         # SKIP COMMENTS
         line = f.readline()
@@ -100,8 +100,8 @@ cdef LLSparseMatrix_INT64_t_COMPLEX128_t MakeLLSparseMatrixFromMMFile_INT64_t_CO
                                           nrow=nrow,
                                           ncol=ncol,
                                           size_hint=nnz,
-                                          use_symmetric_storage=use_symmetric_storage,
-                                          use_zero_storage=use_zero_storage)
+                                          store_symmetric=store_symmetric,
+                                          store_zero=store_zero)
 
         line = f.readline()
         nnz_read = 0
@@ -151,7 +151,7 @@ cdef LLSparseMatrix_INT64_t_COMPLEX128_t MakeLLSparseMatrixFromMMFile_INT64_t_CO
 ########################################################################################################################
 # This version doesn't work yet...
 # TODO: write this!
-cdef LLSparseMatrix_INT64_t_COMPLEX128_t MakeLLSparseMatrixFromMMFile2_INT64_t_COMPLEX128_t(str mm_filename, bint use_zero_storage=False, bint test_bounds=True):
+cdef LLSparseMatrix_INT64_t_COMPLEX128_t MakeLLSparseMatrixFromMMFile2_INT64_t_COMPLEX128_t(str mm_filename, bint store_zero=False, bint test_bounds=True):
     cdef:
         str line
         list token_list
@@ -167,7 +167,7 @@ cdef LLSparseMatrix_INT64_t_COMPLEX128_t MakeLLSparseMatrixFromMMFile2_INT64_t_C
 
     cdef:
         bint sparse
-        bint use_symmetric_storage
+        bint store_symmetric
         bint is_complex
         list sparse_dense_list = [MM_ARRAY_STR, MM_COORDINATE_STR]
         list data_type_list = [MM_COMPLEX_STR, MM_REAL_STR, MM_INT_STR, MM_PATTERN_STR]
@@ -234,7 +234,7 @@ cdef LLSparseMatrix_INT64_t_COMPLEX128_t MakeLLSparseMatrixFromMMFile2_INT64_t_C
         if token not in storage_scheme_list:
             raise IOError('Matrix format not recognized as Matrix Market format: fourth token in the Matrix Market banner is not in "%s"' % storage_scheme_list)
         storage_scheme = storage_scheme_dict[token]
-        use_symmetric_storage = storage_scheme == MM_SYMMETRIC
+        store_symmetric = storage_scheme == MM_SYMMETRIC
 
         # SKIP COMMENTS
         line = f.readline()
@@ -258,8 +258,8 @@ cdef LLSparseMatrix_INT64_t_COMPLEX128_t MakeLLSparseMatrixFromMMFile2_INT64_t_C
                                           nrow=nrow,
                                           ncol=ncol,
                                           size_hint=nnz,
-                                          use_symmetric_storage=use_symmetric_storage,
-                                          use_zero_storage=use_zero_storage)
+                                          store_symmetric=store_symmetric,
+                                          store_zero=store_zero)
 
 
 
@@ -329,7 +329,7 @@ cdef LLSparseMatrix_INT64_t_COMPLEX128_t MakeLLSparseMatrixFromMMFile2_INT64_t_C
             v.imag = imag_part
 
 
-            if use_zero_storage or v != 0.0:
+            if store_zero or v != 0.0:
                 nnz_real = nnz_real + 1
                 #############################
                 # fill in arrays

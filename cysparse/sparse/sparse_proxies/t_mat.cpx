@@ -54,6 +54,12 @@ cdef class TransposedSparseMatrix:
     {% raw %}
     @property
     {%- endraw %}
+    def nnz(self):
+        return self.A.nnz
+
+    {% raw %}
+    @property
+    {%- endraw %}
     def dtype(self):
         return self.A.cp_type.dtype
 
@@ -62,6 +68,18 @@ cdef class TransposedSparseMatrix:
     {%- endraw %}
     def itype(self):
         return self.A.cp_type.itype
+
+    {% raw %}
+    @property
+    {%- endraw %}
+    def store_symmetric(self):
+        return self.A.store_symmetric
+
+    {% raw %}
+    @property
+    {%- endraw %}
+    def store_zero(self):
+        return self.A.store_zero
 
     # for compatibility with numpy, PyKrylov, etc
     {% raw %}

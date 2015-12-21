@@ -116,7 +116,7 @@ cdef class CSRSparseMatrix_@index@_@type@(ImmutableSparseMatrix_@index@_@type@):
 
         nnz = self.nnz
 
-        self_copy = CSRSparseMatrix_@index@_@type@(control_object=unexposed_value, nrow=self.__nrow, ncol=self.__ncol, use_zero_storage=self.__use_zero_storage, use_symmetric_storage=self.__use_symmetric_storage)
+        self_copy = CSRSparseMatrix_@index@_@type@(control_object=unexposed_value, nrow=self.__nrow, ncol=self.__ncol, store_zero=self.__store_zero, store_symmetric=self.__store_symmetric)
 
         val = <@type@ *> PyMem_Malloc(nnz * sizeof(@type@))
         if not val:
@@ -260,7 +260,7 @@ cdef class CSRSparseMatrix_@index@_@type@(ImmutableSparseMatrix_@index@_@type@):
 
         # TODO: TEST!!!
         # code duplicated for optimization
-        if self.__use_symmetric_storage:
+        if self.__store_symmetric:
             if i < j:
                 real_i = j
                 real_j = i
@@ -504,8 +504,8 @@ YOU HAVE TO EXPLICITY CAST YOUR TYPE
                                                   ind,
                                                   col,
                                                   val,
-                                                  use_symmetric_storage=False,
-                                                  use_zero_storage=self.__use_zero_storage,
+                                                  store_symmetric=False,
+                                                  store_zero=self.__store_zero,
                                                   col_indices_are_sorted=True)
 
     def triu(self, int k = 0):
@@ -557,7 +557,7 @@ YOU HAVE TO EXPLICITY CAST YOUR TYPE
         cdef @index@ * csc_row
         cdef @type@  * csc_val
 
-        if self.__use_symmetric_storage:
+        if self.__store_symmetric:
             # Special (and annoying) case: we first create a CSC and then translate it to CSR
             csc_ind = <@index@ *> PyMem_Malloc((self.__ncol + 1) * sizeof(@index@))
             if not csc_ind:
@@ -638,8 +638,8 @@ YOU HAVE TO EXPLICITY CAST YOUR TYPE
                                                   ind,
                                                   col,
                                                   val,
-                                                  use_symmetric_storage=False,
-                                                  use_zero_storage=self.__use_zero_storage,
+                                                  store_symmetric=False,
+                                                  store_zero=self.__store_zero,
                                                   col_indices_are_sorted=True)
 
     def to_csc(self):
@@ -674,8 +674,8 @@ YOU HAVE TO EXPLICITY CAST YOUR TYPE
                                                   ind,
                                                   row,
                                                   val,
-                                                  use_symmetric_storage=self.use_symmetric_storage,
-                                                  use_zero_storage=self.use_zero_storage,
+                                                  store_symmetric=self.store_symmetric,
+                                                  store_zero=self.store_zero,
                                                   row_indices_are_sorted=True)
 
 
@@ -694,7 +694,7 @@ YOU HAVE TO EXPLICITY CAST YOUR TYPE
         np_ndarray = np.zeros((self.__nrow, self.__ncol), dtype=np.@type|cysparse_type_to_numpy_type@, order='C')
         np_memview = np_ndarray
 
-        if not self.__use_symmetric_storage:
+        if not self.__store_symmetric:
             for i from 0 <= i < self.__nrow:
                 for k from self.ind[i] <= k < self.ind[i+1]:
                     np_memview[i, self.col[k]] = self.val[k]
@@ -941,8 +941,8 @@ cdef MakeCSRSparseMatrix_@index@_@type@(@index@ nrow,
                                         @index@ * ind,
                                         @index@ * col,
                                         @type@ * val,
-                                        bint use_symmetric_storage,
-                                        bint use_zero_storage,
+                                        bint store_symmetric,
+                                        bint store_zero,
                                         bint col_indices_are_sorted=False):
     """
     Construct a CSRSparseMatrix object.
@@ -954,13 +954,13 @@ cdef MakeCSRSparseMatrix_@index@_@type@(@index@ nrow,
         ind (@index@ *): C-array with column indices pointers.
         col  (@index@ *): C-array with column indices.
         val  (@type@ *): C-array with values.
-        use_symmetric_storage (boolean): Is matrix symmetrix or not?
-        use_zero_storage (boolean): Do we store zeros or not?
+        store_symmetric (boolean): Is matrix symmetrix or not?
+        store_zero (boolean): Do we store zeros or not?
         col_indices_are_sorted (boolean): Are the column indices sorted or not?
     """
     cdef CSRSparseMatrix_@index@_@type@ csr_mat
 
-    csr_mat = CSRSparseMatrix_@index@_@type@(control_object=unexposed_value, nrow=nrow, ncol=ncol, nnz=nnz, use_symmetric_storage=use_symmetric_storage, use_zero_storage=use_zero_storage)
+    csr_mat = CSRSparseMatrix_@index@_@type@(control_object=unexposed_value, nrow=nrow, ncol=ncol, nnz=nnz, store_symmetric=store_symmetric, store_zero=store_zero)
 
     csr_mat.val = val
     csr_mat.ind = ind

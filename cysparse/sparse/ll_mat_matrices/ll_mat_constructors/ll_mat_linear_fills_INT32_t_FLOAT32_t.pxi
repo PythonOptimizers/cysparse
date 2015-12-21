@@ -20,7 +20,7 @@ cdef LLSparseMatrix_INT32_t_FLOAT32_t MakeLinearFillLLSparseMatrix_INT32_t_FLOAT
     sum = first_element
 
     # NON OPTIMIZED code
-    if A.use_symmetric_storage:
+    if A.store_symmetric:
         if row_wise:
             for i from 0 <= i < A_nrow:
                 for j from 0 <= j <= i:

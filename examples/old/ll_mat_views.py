@@ -4,7 +4,7 @@ import numpy as np
 
 import sys
 
-l1 = NewLinearFillLLSparseMatrix(nrow=10, ncol=10, size_hint=40, dtype=types.COMPLEX256_T, store_zeros=True)
+l1 = LinearFillLLSparseMatrix(nrow=10, ncol=10, size_hint=40, dtype=types.COMPLEX256_T, store_zeros=True)
 l1.clear_submatrix(1,3, 4,6)
 print l1
 
@@ -35,7 +35,7 @@ print A.nnz
 
 ########################################################################################################################
 print "*" * 80
-l2 = NewLinearFillLLSparseMatrix(nrow=10, ncol=10, size_hint=40, is_symmetric=True)
+l2 = LinearFillLLSparseMatrix(nrow=10, ncol=10, size_hint=40, is_symmetric=True)
 print l2
 
 
@@ -52,7 +52,7 @@ print B.get_matrix()
 
 print  "9" * 80
 
-C = NewLinearFillLLSparseMatrix(nrow=10, ncol=10, size_hint=40, dtype=types.COMPLEX256_T, store_zeros=True)
+C = LinearFillLLSparseMatrix(nrow=10, ncol=10, size_hint=40, dtype=types.COMPLEX256_T, store_zeros=True)
 print C
 print C[:3,:3]
 

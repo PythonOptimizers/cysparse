@@ -63,13 +63,13 @@ cdef cnp.ndarray[cnp.npy_complex128, ndim=1, mode='c'] multiply_csr_mat_with_num
 
     # test if b vector is C-contiguous or not
     if cnp.PyArray_ISCONTIGUOUS(b):
-        if A.__use_symmetric_storage:
+        if A.__store_symmetric:
             pass
             multiply_sym_csr_mat_with_numpy_vector_kernel_INT32_t_COMPLEX128_t(A_nrow, b_data, c_data, A.val, A.col, A.ind)
         else:
             multiply_csr_mat_with_numpy_vector_kernel_INT32_t_COMPLEX128_t(A_nrow, b_data, c_data, A.val, A.col, A.ind)
     else:
-        if A.__use_symmetric_storage:
+        if A.__store_symmetric:
             multiply_sym_csr_mat_with_strided_numpy_vector_kernel_INT32_t_COMPLEX128_t(A.nrow,
                                                                  b_data, b.strides[0] / sd,
                                                                  c_data, c.strides[0] / sd,
@@ -125,13 +125,13 @@ cdef cnp.ndarray[cnp.npy_complex128, ndim=1, mode='c'] multiply_transposed_csr_m
 
     # test if b vector is C-contiguous or not
     if cnp.PyArray_ISCONTIGUOUS(b):
-        if A.__use_symmetric_storage:
+        if A.__store_symmetric:
             multiply_sym_csr_mat_with_numpy_vector_kernel_INT32_t_COMPLEX128_t(A_nrow, b_data, c_data, A.val, A.col, A.ind)
         else:
             multiply_tranposed_csr_mat_with_numpy_vector_kernel_INT32_t_COMPLEX128_t(A_nrow, A_ncol, b_data, c_data,
          A.val, A.col, A.ind)
     else:
-        if A.__use_symmetric_storage:
+        if A.__store_symmetric:
             multiply_sym_csr_mat_with_strided_numpy_vector_kernel_INT32_t_COMPLEX128_t(A.nrow,
                                                                  b_data, b.strides[0] / sd,
                                                                  c_data, c.strides[0] / sd,
@@ -187,13 +187,13 @@ cdef cnp.ndarray[cnp.npy_complex128, ndim=1, mode='c'] multiply_conjugate_transp
 
     # test if b vector is C-contiguous or not
     if cnp.PyArray_ISCONTIGUOUS(b):
-        if A.__use_symmetric_storage:
+        if A.__store_symmetric:
             multiply_conjugate_transposed_sym_csr_mat_with_numpy_vector_kernel_INT32_t_COMPLEX128_t(A_nrow, A_ncol, b_data, c_data, A.val, A.col, A.ind)
         else:
             multiply_conjugate_transposed_csr_mat_with_numpy_vector_kernel_INT32_t_COMPLEX128_t(A_nrow, A_ncol, b_data, c_data,
          A.val, A.col, A.ind)
     else:
-        if A.__use_symmetric_storage:
+        if A.__store_symmetric:
             multiply_conjugate_transposed_sym_csr_mat_with_strided_numpy_vector_kernel_INT32_t_COMPLEX128_t(A.nrow, A.ncol,
                                                                  b_data, b.strides[0] / sd,
                                                                  c_data, c.strides[0] / sd,
@@ -250,13 +250,13 @@ cdef cnp.ndarray[cnp.npy_complex128, ndim=1, mode='c'] multiply_conjugated_csr_m
 
     # test if b vector is C-contiguous or not
     if cnp.PyArray_ISCONTIGUOUS(b):
-        if A.__use_symmetric_storage:
+        if A.__store_symmetric:
             multiply_conjugated_sym_csr_mat_with_numpy_vector_kernel_INT32_t_COMPLEX128_t(A_nrow, b_data, c_data, A.val, A.col, A.ind)
         else:
             multiply_conjugated_csr_mat_with_numpy_vector_kernel_INT32_t_COMPLEX128_t(A_nrow, b_data, c_data, A.val, A.col, A.ind)
 
     else:
-        if A.__use_symmetric_storage:
+        if A.__store_symmetric:
             multiply_conjugated_sym_csr_mat_with_strided_numpy_vector_kernel_INT32_t_COMPLEX128_t(A.nrow,
                                                                  b_data, b.strides[0] / sd,
                                                                  c_data, c.strides[0] / sd,
@@ -294,15 +294,15 @@ cdef LLSparseMatrix_INT32_t_COMPLEX128_t multiply_csr_mat_by_csc_mat_INT32_t_COM
     cdef INT32_t C_nrow = A_nrow
     cdef INT32_t C_ncol = B_ncol
 
-    cdef bint use_zero_storage = A.use_zero_storage and B.use_zero_storage
+    cdef bint store_zero = A.store_zero and B.store_zero
     # TODO: what strategy to implement?
     cdef INT32_t size_hint = A.nnz
 
     # TODO: maybe use MakeLLSparseMatrix and fix circular dependencies...
-    C = LLSparseMatrix_INT32_t_COMPLEX128_t(control_object=unexposed_value, nrow=C_nrow, ncol=C_ncol, size_hint=size_hint, use_zero_storage=use_zero_storage)
+    C = LLSparseMatrix_INT32_t_COMPLEX128_t(control_object=unexposed_value, nrow=C_nrow, ncol=C_ncol, size_hint=size_hint, store_zero=store_zero)
 
     # CASES
-    if not A.__use_symmetric_storage and not B.__use_symmetric_storage:
+    if not A.__store_symmetric and not B.__store_symmetric:
         pass
     else:
         raise NotImplemented("Multiplication with symmetric matrices is not implemented yet")
@@ -314,8 +314,8 @@ cdef LLSparseMatrix_INT32_t_COMPLEX128_t multiply_csr_mat_by_csc_mat_INT32_t_COM
         COMPLEX128_t sum
 
     # don't keep zeros, no matter what
-    cdef bint old_use_zero_storage = use_zero_storage
-    C.__use_zero_storage = 0
+    cdef bint old_store_zero = store_zero
+    C.__store_zero = 0
 
     for i from 0 <= i < C_nrow:
         for j from 0 <= j < C_ncol:
@@ -328,6 +328,6 @@ cdef LLSparseMatrix_INT32_t_COMPLEX128_t multiply_csr_mat_by_csc_mat_INT32_t_COM
 
             C.put(i, j, sum)
 
-    C.__use_zero_storage = old_use_zero_storage
+    C.__store_zero = old_store_zero
 
     return C

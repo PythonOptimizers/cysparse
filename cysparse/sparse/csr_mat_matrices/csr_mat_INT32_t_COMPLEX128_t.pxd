@@ -40,8 +40,8 @@ cdef MakeCSRSparseMatrix_INT32_t_COMPLEX128_t(INT32_t nrow,
                                         INT32_t * ind,
                                         INT32_t * col,
                                         COMPLEX128_t * val,
-                                        bint use_symmetric_storage,
-                                        bint use_zero_storage,
+                                        bint store_symmetric,
+                                        bint store_zero,
                                         bint col_indices_are_sorted=?)
 
 cdef LLSparseMatrix_INT32_t_COMPLEX128_t multiply_csr_mat_by_csc_mat_INT32_t_COMPLEX128_t(CSRSparseMatrix_INT32_t_COMPLEX128_t A, CSCSparseMatrix_INT32_t_COMPLEX128_t B)
