@@ -1092,8 +1092,8 @@ struct __pyx_obj_8cysparse_6sparse_5s_mat_SparseMatrix {
   int __pyx___store_symmetric;
   int __pyx___store_zero;
   int __pyx___is_mutable;
-  PyObject *__pyx___type_name;
-  PyObject *__pyx___type;
+  PyObject *__pyx___full_type_str;
+  PyObject *__pyx___base_type_str;
   PyObject *__pyx___index_and_type;
   struct __pyx_t_8cysparse_12common_types_14cysparse_types_CPType cp_type;
 };
@@ -1201,8 +1201,8 @@ struct __pyx_obj_8cysparse_6sparse_12ll_mat_views_32ll_mat_view_INT32_t_COMPLEX2
   __pyx_t_8cysparse_12common_types_14cysparse_types_INT32_t __pyx___nrow;
   __pyx_t_8cysparse_12common_types_14cysparse_types_INT32_t __pyx___ncol;
   int __pyx___is_empty;
-  PyObject *__pyx___type_name;
-  PyObject *__pyx___type;
+  PyObject *__pyx___full_type_str;
+  PyObject *__pyx___base_type_str;
   __pyx_t_8cysparse_12common_types_14cysparse_types_INT32_t *row_indices;
   __pyx_t_8cysparse_12common_types_14cysparse_types_INT32_t *col_indices;
   struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32_t_COMPLEX256_t_LLSparseMatrix_INT32_t_COMPLEX256_t *A;
@@ -5944,7 +5944,7 @@ static PyArrayObject *__pyx_f_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT
  *     ####################################################################################################################
  *     def __cinit__(self,  **kwargs):             # <<<<<<<<<<<<<<
  * 
- *         self.__type = "CSCSparseMatrix"
+ *         self.__base_type_str = "CSCSparseMatrix"
  */
 
 /* Python wrapper */
@@ -5977,33 +5977,33 @@ static int __pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPL
   /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX256_t.pyx":78
  *     def __cinit__(self,  **kwargs):
  * 
- *         self.__type = "CSCSparseMatrix"             # <<<<<<<<<<<<<<
- *         self.__type_name = "CSCSparseMatrix %s" % self.__index_and_type
+ *         self.__base_type_str = "CSCSparseMatrix"             # <<<<<<<<<<<<<<
+ *         self.__full_type_str = "CSCSparseMatrix %s" % self.__index_and_type
  * 
  */
   __Pyx_INCREF(__pyx_n_s_CSCSparseMatrix);
   __Pyx_GIVEREF(__pyx_n_s_CSCSparseMatrix);
-  __Pyx_GOTREF(__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___type);
-  __Pyx_DECREF(__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___type);
-  __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___type = __pyx_n_s_CSCSparseMatrix;
+  __Pyx_GOTREF(__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___base_type_str);
+  __Pyx_DECREF(__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___base_type_str);
+  __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___base_type_str = __pyx_n_s_CSCSparseMatrix;
 
   /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX256_t.pyx":79
  * 
- *         self.__type = "CSCSparseMatrix"
- *         self.__type_name = "CSCSparseMatrix %s" % self.__index_and_type             # <<<<<<<<<<<<<<
+ *         self.__base_type_str = "CSCSparseMatrix"
+ *         self.__full_type_str = "CSCSparseMatrix %s" % self.__index_and_type             # <<<<<<<<<<<<<<
  * 
  *         self.__row_indices_sorted_test_done = False
  */
   __pyx_t_1 = __Pyx_PyString_Format(__pyx_kp_s_CSCSparseMatrix_s, __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___index_and_type); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 79; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_1);
-  __Pyx_GOTREF(__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___type_name);
-  __Pyx_DECREF(__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___type_name);
-  __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___type_name = ((PyObject*)__pyx_t_1);
+  __Pyx_GOTREF(__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___full_type_str);
+  __Pyx_DECREF(__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___full_type_str);
+  __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___full_type_str = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
   /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX256_t.pyx":81
- *         self.__type_name = "CSCSparseMatrix %s" % self.__index_and_type
+ *         self.__full_type_str = "CSCSparseMatrix %s" % self.__index_and_type
  * 
  *         self.__row_indices_sorted_test_done = False             # <<<<<<<<<<<<<<
  *         self.__row_indices_sorted = False
@@ -6034,7 +6034,7 @@ static int __pyx_pf_8cysparse_6sparse_16csc_mat_matrices_28csc_mat_INT32_t_COMPL
  *     ####################################################################################################################
  *     def __cinit__(self,  **kwargs):             # <<<<<<<<<<<<<<
  * 
- *         self.__type = "CSCSparseMatrix"
+ *         self.__base_type_str = "CSCSparseMatrix"
  */
 
   /* function exit code */

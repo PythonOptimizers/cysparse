@@ -1091,8 +1091,8 @@ struct __pyx_obj_8cysparse_6sparse_5s_mat_SparseMatrix {
   int __pyx___store_symmetric;
   int __pyx___store_zero;
   int __pyx___is_mutable;
-  PyObject *__pyx___type_name;
-  PyObject *__pyx___type;
+  PyObject *__pyx___full_type_str;
+  PyObject *__pyx___base_type_str;
   PyObject *__pyx___index_and_type;
   struct __pyx_t_8cysparse_12common_types_14cysparse_types_CPType cp_type;
 };
@@ -1170,8 +1170,8 @@ struct __pyx_obj_8cysparse_6sparse_12ll_mat_views_30ll_mat_view_INT64_t_FLOAT128
   __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t __pyx___nrow;
   __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t __pyx___ncol;
   int __pyx___is_empty;
-  PyObject *__pyx___type_name;
-  PyObject *__pyx___type;
+  PyObject *__pyx___full_type_str;
+  PyObject *__pyx___base_type_str;
   __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *row_indices;
   __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *col_indices;
   struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_25ll_mat_INT64_t_FLOAT128_t_LLSparseMatrix_INT64_t_FLOAT128_t *A;
@@ -8087,7 +8087,7 @@ static int __pyx_pf_8cysparse_6sparse_15ll_mat_matrices_25ll_mat_INT64_t_FLOAT12
  *         if self.size_hint < 1:
  *             raise ValueError('size_hint (%d) must be >= 1' % self.size_hint)             # <<<<<<<<<<<<<<
  * 
- *         self.__type = "LLSparseMatrix"
+ *         self.__base_type_str = "LLSparseMatrix"
  */
     __pyx_t_2 = __Pyx_PyInt_From_long(__pyx_v_self->__pyx_base.size_hint); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[2]; __pyx_lineno = 142; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
@@ -8118,29 +8118,29 @@ static int __pyx_pf_8cysparse_6sparse_15ll_mat_matrices_25ll_mat_INT64_t_FLOAT12
   /* "cysparse/sparse/ll_mat_matrices/ll_mat_INT64_t_FLOAT128_t.pyx":144
  *             raise ValueError('size_hint (%d) must be >= 1' % self.size_hint)
  * 
- *         self.__type = "LLSparseMatrix"             # <<<<<<<<<<<<<<
- *         self.__type_name = "LLSparseMatrix %s" % self.__index_and_type
+ *         self.__base_type_str = "LLSparseMatrix"             # <<<<<<<<<<<<<<
+ *         self.__full_type_str = "LLSparseMatrix %s" % self.__index_and_type
  * 
  */
   __Pyx_INCREF(__pyx_n_s_LLSparseMatrix);
   __Pyx_GIVEREF(__pyx_n_s_LLSparseMatrix);
-  __Pyx_GOTREF(__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___type);
-  __Pyx_DECREF(__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___type);
-  __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___type = __pyx_n_s_LLSparseMatrix;
+  __Pyx_GOTREF(__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___base_type_str);
+  __Pyx_DECREF(__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___base_type_str);
+  __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___base_type_str = __pyx_n_s_LLSparseMatrix;
 
   /* "cysparse/sparse/ll_mat_matrices/ll_mat_INT64_t_FLOAT128_t.pyx":145
  * 
- *         self.__type = "LLSparseMatrix"
- *         self.__type_name = "LLSparseMatrix %s" % self.__index_and_type             # <<<<<<<<<<<<<<
+ *         self.__base_type_str = "LLSparseMatrix"
+ *         self.__full_type_str = "LLSparseMatrix %s" % self.__index_and_type             # <<<<<<<<<<<<<<
  * 
  *         # This is particular to the LLSparseMatrix type
  */
   __pyx_t_3 = __Pyx_PyString_Format(__pyx_kp_s_LLSparseMatrix_s, __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___index_and_type); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[2]; __pyx_lineno = 145; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_3);
-  __Pyx_GOTREF(__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___type_name);
-  __Pyx_DECREF(__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___type_name);
-  __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___type_name = ((PyObject*)__pyx_t_3);
+  __Pyx_GOTREF(__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___full_type_str);
+  __Pyx_DECREF(__pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___full_type_str);
+  __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx___full_type_str = ((PyObject*)__pyx_t_3);
   __pyx_t_3 = 0;
 
   /* "cysparse/sparse/ll_mat_matrices/ll_mat_INT64_t_FLOAT128_t.pyx":150

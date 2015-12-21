@@ -54,8 +54,8 @@ cdef class LLSparseMatrixView_INT32_t_COMPLEX128_t:
         self.__nrow = nrow  # number of rows of the view
         self.__ncol = ncol  # number of columns of the view
 
-        self.__type = "LLSparseMatrixView"
-        self.__type_name = "LLSparseMatrixView [INT32_t, COMPLEX128_t]"
+        self.__base_type_str = "LLSparseMatrixView"
+        self.__full_type_str = "LLSparseMatrixView [INT32_t, COMPLEX128_t]"
 
         self.__is_empty = True
 
@@ -124,13 +124,23 @@ cdef class LLSparseMatrixView_INT32_t_COMPLEX128_t:
 
     
     @property
-    def type(self):
-        return self.__type
+    def base_type_str(self):
+        return self.__base_type_str
 
     
     @property
-    def type_name(self):
-        return self.__type_name
+    def full_type_str(self):
+        return self.__full_type_str
+
+    
+    @property
+    def itype_str(self):
+        return self.A.itype_str
+
+    
+    @property
+    def dtype_str(self):
+        return self.A.dtype_str
 
     def get_matrix(self):
         """

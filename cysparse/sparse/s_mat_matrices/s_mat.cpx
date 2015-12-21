@@ -52,8 +52,8 @@ cdef class SparseMatrix_@index@_@type@(SparseMatrix):
 
         self.__index_and_type = "[@index@, @type@]"
 
-        self.__type = "SparseMatrix"
-        self.__type_name = "SparseMatrix %s" % self.__index_and_type
+        self.__base_type_str = "SparseMatrix"
+        self.__full_type_str = "SparseMatrix %s" % self.__index_and_type
 
         self.cp_type.itype = @index|type2enum@
         self.cp_type.dtype = @type|type2enum@

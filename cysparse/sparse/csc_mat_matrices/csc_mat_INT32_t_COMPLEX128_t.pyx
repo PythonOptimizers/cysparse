@@ -75,8 +75,8 @@ cdef class CSCSparseMatrix_INT32_t_COMPLEX128_t(ImmutableSparseMatrix_INT32_t_CO
     ####################################################################################################################
     def __cinit__(self,  **kwargs):
 
-        self.__type = "CSCSparseMatrix"
-        self.__type_name = "CSCSparseMatrix %s" % self.__index_and_type
+        self.__base_type_str = "CSCSparseMatrix"
+        self.__full_type_str = "CSCSparseMatrix %s" % self.__index_and_type
 
         self.__row_indices_sorted_test_done = False
         self.__row_indices_sorted = False

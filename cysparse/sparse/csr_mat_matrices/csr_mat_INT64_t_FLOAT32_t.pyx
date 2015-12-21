@@ -82,8 +82,8 @@ cdef class CSRSparseMatrix_INT64_t_FLOAT32_t(ImmutableSparseMatrix_INT64_t_FLOAT
     ####################################################################################################################
     def __cinit__(self, **kwargs):
 
-        self.__type = "CSRSparseMatrix"
-        self.__type_name = "CSRSparseMatrix %s" % self.__index_and_type
+        self.__base_type_str = "CSRSparseMatrix"
+        self.__full_type_str = "CSRSparseMatrix %s" % self.__index_and_type
 
         self.__col_indices_sorted_test_done = False
         self.__col_indices_sorted = False

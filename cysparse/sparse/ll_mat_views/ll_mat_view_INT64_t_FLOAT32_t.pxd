@@ -16,8 +16,8 @@ cdef class LLSparseMatrixView_INT64_t_FLOAT32_t:
 
         bint __is_empty   # view is empty, probably constructed with bad index objects
 
-        str __type_name   # Name of matrix view type
-        str __type        # Type of matrix view
+        str __full_type_str   # Name of matrix view type
+        str __base_type_str   # Type of matrix view
 
         INT64_t * row_indices  # collected row indices
         INT64_t * col_indices  # collected col indices

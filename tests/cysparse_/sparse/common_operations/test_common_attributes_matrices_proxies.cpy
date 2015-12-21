@@ -27,7 +27,8 @@ YOU HAVE TO ADAPT THIS TEST TO A NEW MATRIX PROXY
 {% endif %}
 
     def test_common_attributes(self):
-        self.failUnless(common_matrix_like_attributes(self.C))
+        is_OK, attribute = common_matrix_like_attributes(self.C)
+        self.assertTrue(is_OK, msg="Attribute '%s' is missing" % attribute)
 
     def test_symmetric_storage_attribute(self):
         self.failUnless(not self.C.store_symmetric)
@@ -48,7 +49,8 @@ YOU HAVE TO ADAPT THIS TEST TO A NEW MATRIX PROXY
 {% endif %}
 
     def test_common_attributes(self):
-        self.failUnless(common_matrix_like_attributes(self.C))
+        is_OK, attribute = common_matrix_like_attributes(self.C)
+        self.assertTrue(is_OK, msg="Attribute '%s' is missing" % attribute)
 
     def test_symmetric_storage_attribute(self):
         self.failUnless(self.C.store_symmetric)
@@ -68,7 +70,8 @@ YOU HAVE TO ADAPT THIS TEST TO A NEW MATRIX PROXY
 {% endif %}
 
     def test_common_attributes(self):
-        self.failUnless(common_matrix_like_attributes(self.C))
+        is_OK, attribute = common_matrix_like_attributes(self.C)
+        self.assertTrue(is_OK, msg="Attribute '%s' is missing" % attribute)
 
     def test_symmetric_storage_attribute(self):
         self.failUnless(not self.C.store_symmetric)
@@ -88,7 +91,8 @@ YOU HAVE TO ADAPT THIS TEST TO A NEW MATRIX PROXY
 {% endif %}
 
     def test_common_attributes(self):
-        self.failUnless(common_matrix_like_attributes(self.C))
+        is_OK, attribute = common_matrix_like_attributes(self.C)
+        self.assertTrue(is_OK, msg="Attribute '%s' is missing" % attribute)
 
     def test_symmetric_storage_attribute(self):
         self.failUnless(self.C.store_symmetric)

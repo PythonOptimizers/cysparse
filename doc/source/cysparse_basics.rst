@@ -8,32 +8,13 @@ In this section, we explain the very basics of :program:`CySparse`. Most matrice
 functions that return an object corresponding
 to their arguments. Different arguments make them return different kind of objects (matrices).
 
-Common attributes
-==================
-
 Most attributes and **all** common ones are *read-only*. Some attributes ask for some expensive computation. We indicate whenever this is the case.
 Some attributes can also be given as arguments to most factory methods. We also detail which ones. 
 
-``nrow`` and ``ncol``
-----------------------
+Common strorage attributes
+===========================
 
-``nrow`` and ``ncol`` give respectively the number of rows and columns. You also can grab both at the same time with the ``shape`` attribute:
-
-..  code-block:: python
-
-    A = ...
-    A.shape == A.nrow, A.ncol  # is True
-    
-You can use ``nrow`` and ``ncol`` as arguments to construct a new matrix. Whenever the number of rows is equal to the number of columns, i.e. when the matrix is square, you can
-instead use the argument ``size=...`` in most factory methods.
-
-``dtype`` and ``itype``
--------------------------
-
-Each matrix (matrix-like) object has an internal index *type* and stores *typed* elements. Both types (enums) can be retrieved.
-``dtype`` returns the type of the elements of the matrix and ``itype`` returns its index type.
- 
-See section :ref:`availabe_types` about the available types.
+For efficiency reasons, :program:`CySparse` can use different storage schemes/methods to store matrices. For instance, symmetric matrices can be stored with only half of their elements. 
 
 ``store_symmetric``
 ----------------------------
@@ -50,7 +31,7 @@ in any factory method:
 
 ..  code-block:: python
 
-    A = NewLLSparseMatrix(store_zero=True, ...)
+    A = LLSparseMatrix(store_zero=True, ...)
     
 The matrix ``A`` will store any zero explicitely as will any matrix created from it. You can access the value of this attribute:
 
@@ -70,26 +51,28 @@ This context manager temporarily set the ``store_zero`` attribute to ``False`` b
 
 By default, ``store_zero`` is set to ``False``.
 
+``is_mutable``
+--------------------
 
-``type`` and ``type_name``
------------------------------
+``is_mutable`` returns if the matrix can be modified or not. Note that for the moment, **only** an :class:`LLSparseMatrix` matrix can be modified.
 
-Each matrix or matrix-like object has its own type and type name defined as strings. For instance:
+
+Common content attributes
+=========================
+
+
+``nrow`` and ``ncol``
+----------------------
+
+``nrow`` and ``ncol`` give respectively the number of rows and columns. You also can grab both at the same time with the ``shape`` attribute:
 
 ..  code-block:: python
 
-    A = NewLLSparseMatrix(size=10, dtype=COMPLEX64_T, itype=INT32_T)
-    print A.type
-    print A.type_name
+    A = ...
+    A.shape == A.nrow, A.ncol  # is True
     
-returns
-
-..  code-block:: bash
-
-    LLSparseMatrix
-    LLSparseMatrix [INT32_t, COMPLEX64_t]
-
-The type ``LLSparseMatrix`` is common among ``LL`` sparse format matrices while the ``type_name`` gives the specific details of the index and element types.
+You can use ``nrow`` and ``ncol`` as arguments to construct a new matrix. Whenever the number of rows is equal to the number of columns, i.e. when the matrix is square, you can
+instead use the argument ``size=...`` in most factory methods.
 
 ``nnz``
 ---------
@@ -103,10 +86,18 @@ returns exactly how many elements are stored internally.
 When using views, this attribute is **costly** to retrieve as it is systematically recomputed each time and we don't make any assomption on the views (views can represent matrices with rows and columns in any order and duplicated 
 rows and columns any number of times). The number returned is the number of "non zero" elements stored in the equivalent matrix using the **same** storage scheme than viewed matrix.
     
-``is_mutable``
---------------------
 
-``is_mutable`` returns if the matrix can be modified or not. Note that for the moment, **only** an :class:`LLSparseMatrix` matrix can be modified.
+
+Common type attributes
+=========================
+
+``dtype`` and ``itype``
+-------------------------
+
+Each matrix (matrix-like) object has an internal index *type* and stores *typed* elements. Both types (enums) can be retrieved.
+``dtype`` returns the type of the elements of the matrix and ``itype`` returns its index type.
+ 
+See section :ref:`availabe_types` about the available types.
 
 ``is_symmetric``
 -------------------
@@ -115,6 +106,33 @@ rows and columns any number of times). The number returned is the number of "non
 
 Returns if the matrix is symmetric or not. While matrices using the symmetric storage (``store_symmetric == True``) are symmetric by definition and ``is_symmetric`` returns immediatly ``True``, this attribute is costly to 
 compute in general.
+
+
+
+Common string attributes
+===========================
+
+Some attributes are stored as ``C`` struct internally and can thus not be accessed from :program:`Python`. We do however provide some strings for the most important ones.
+
+``base_type_str`` and ``full_type_str``
+------------------------------------------
+
+Each matrix or matrix-like object has its own type and type name defined as strings. For instance:
+
+..  code-block:: python
+
+    A = NewLLSparseMatrix(size=10, dtype=COMPLEX64_T, itype=INT32_T)
+    print A.base_type_str
+    print A.full_type_str
+    
+returns
+
+..  code-block:: bash
+
+    LLSparseMatrix
+    LLSparseMatrix [INT32_t, COMPLEX64_t]
+
+The type ``LLSparseMatrix`` is common among ``LL`` sparse format matrices while the ``full_type_str`` gives the specific details of the index and element types.
 
 
 How to create a matrix?
@@ -169,6 +187,21 @@ you'll get the following error:
     AssertionError: Matrix must be instantiated with a factory method
     
 ..  warning::  An ``LLSparseMatrix`` can **only** be instantiated through a factory method.
+
+
+Helpers
+--------
+
+``size``
+""""""""""
+
+``size`` is **not** an attribute... 
+
+
+Typed matrices in :program:`Python`?
+======================================
+
+
 
 
 ..  raw:: html

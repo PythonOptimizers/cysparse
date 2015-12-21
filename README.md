@@ -90,7 +90,7 @@ Invoke:
 python run_tests.py
 ```
 
-Try the ``-h`` switch to see what options are available.
+Try the ``-h`` switch to see what options are available. Note that you need to install the library to run the tests.
 
 ## Run performance tests
 

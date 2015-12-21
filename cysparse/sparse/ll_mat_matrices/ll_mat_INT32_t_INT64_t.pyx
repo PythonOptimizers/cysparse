@@ -141,8 +141,8 @@ cdef class LLSparseMatrix_INT32_t_INT64_t(MutableSparseMatrix_INT32_t_INT64_t):
         if self.size_hint < 1:
             raise ValueError('size_hint (%d) must be >= 1' % self.size_hint)
 
-        self.__type = "LLSparseMatrix"
-        self.__type_name = "LLSparseMatrix %s" % self.__index_and_type
+        self.__base_type_str = "LLSparseMatrix"
+        self.__full_type_str = "LLSparseMatrix %s" % self.__index_and_type
 
         # This is particular to the LLSparseMatrix type
         # Do we allocate memory here or

@@ -52,8 +52,8 @@ cdef class SparseMatrix_INT32_t_COMPLEX256_t(SparseMatrix):
 
         self.__index_and_type = "[INT32_t, COMPLEX256_t]"
 
-        self.__type = "SparseMatrix"
-        self.__type_name = "SparseMatrix %s" % self.__index_and_type
+        self.__base_type_str = "SparseMatrix"
+        self.__full_type_str = "SparseMatrix %s" % self.__index_and_type
 
         self.cp_type.itype = INT32_T
         self.cp_type.dtype = COMPLEX256_T

@@ -68,8 +68,8 @@ cdef class SparseMatrix:
         """
         assert unexposed_value == kwargs.get('control_object', None), "Matrix must be instantiated with a factory method"
 
-        self.__type_name = "Not defined"
-        self.__type = "Not defined"
+        self.__full_type_str = "Not defined"
+        self.__base_type_str = "Not defined"
         self.__index_and_type = "[not defined, not defined]"
 
         self.__store_symmetric = kwargs.get('store_symmetric', False)
@@ -101,13 +101,22 @@ cdef class SparseMatrix:
     def store_zero(self):
         return self.__store_zero
 
+    #########################
+    # Strings
+    #########################
     @property
-    def type(self):
-        return self.__type
+    def base_type_str(self):
+        return self.__base_type_str
 
     @property
-    def type_name(self):
-        return self.__type_name
+    def full_type_str(self):
+        return self.__full_type_str
+
+    def itype_str(self):
+        return type_to_string(self.itype)
+
+    def dtype_str(self):
+        return type_to_string(self.dtype)
 
     ####################################################################################################################
     # Basic common methods
@@ -115,16 +124,6 @@ cdef class SparseMatrix:
     # All methods raise NotImplementedError. We could have provided a common method that would have been refined in
     # the respective children classes but we preferred to force an optimized version for all classes inheriting from
     # this class, i.e. if it works, it is optimized for that particular class, if not, it must be implemented.
-
-    #########################
-    # Strings
-    #########################
-    def itype_str(self):
-        return type_to_string(self.itype)
-
-    def dtype_str(self):
-        return type_to_string(self.dtype)
-
     #########################
     # Sub matrices
     #########################

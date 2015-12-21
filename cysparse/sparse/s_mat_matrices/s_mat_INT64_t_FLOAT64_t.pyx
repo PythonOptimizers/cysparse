@@ -49,8 +49,8 @@ cdef class SparseMatrix_INT64_t_FLOAT64_t(SparseMatrix):
 
         self.__index_and_type = "[INT64_t, FLOAT64_t]"
 
-        self.__type = "SparseMatrix"
-        self.__type_name = "SparseMatrix %s" % self.__index_and_type
+        self.__base_type_str = "SparseMatrix"
+        self.__full_type_str = "SparseMatrix %s" % self.__index_and_type
 
         self.cp_type.itype = INT64_T
         self.cp_type.dtype = FLOAT64_T

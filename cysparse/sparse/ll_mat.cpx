@@ -589,7 +589,7 @@ def DiagonalLLSparseMatrix(**kwargs):
         raise TypeError('itype not recognized')
 
 # alias
-def UnityLLSparseMatrix(**kwargs):
+def IdentityLLSparseMatrix(**kwargs):
     element = kwargs.pop('element', None)
     return DiagonalLLSparseMatrix(**kwargs)
 

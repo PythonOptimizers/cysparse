@@ -84,6 +84,31 @@ cdef class ConjugatedSparseMatrix_INT32_t_COMPLEX128_t:
     def store_zero(self):
         return self.A.store_zero
 
+    
+    @property
+    def is_mutable(self):
+        return self.A.__is_mutable
+
+    
+    @property
+    def base_type_str(self):
+        return self.A.base_type_str
+
+    
+    @property
+    def full_type_str(self):
+        return self.A.full_type_str
+
+    
+    @property
+    def itype_str(self):
+        return self.A.itype_str
+
+    
+    @property
+    def dtype_str(self):
+        return self.A.dtype_str
+
     # for compatibility with numpy, PyKrylov, etc
     
     @property
