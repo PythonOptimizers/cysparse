@@ -160,7 +160,7 @@ MATRIX_PROXY_CLASSES = {'TransposedSparseMatrix' : 'sparse_proxies.t_mat',
 
 MATRIX_LIKE_CLASSES = {}
 MATRIX_LIKE_CLASSES.update(MATRIX_CLASSES)
-#MATRIX_LIKE_CLASSES.update(MATRIX_VIEW_CLASSES)
+MATRIX_LIKE_CLASSES.update(MATRIX_VIEW_CLASSES)
 MATRIX_LIKE_CLASSES.update(MATRIX_PROXY_CLASSES)
 
 
@@ -406,11 +406,8 @@ if __name__ == "__main__":
     cygenja_engine.register_action('cysparse/sparse', '*.*', single_generation)
 
     # Tests
-    cygenja_engine.register_action('tests/cysparse_/sparse/common_attributes', 'test_common_attributes_matrices.*', generate_following_matrix_like_class_and_index_and_type)
+    cygenja_engine.register_action('tests/cysparse_/sparse/common_attributes', 'test_common_attributes_matrices_likes.*', generate_following_matrix_like_class_and_index_and_type)
     cygenja_engine.register_action('tests/cysparse_/sparse/common_attributes', 'test_explicit_is_symmetric_matrices.*', generate_following_matrix_class_and_index_and_type)
-    cygenja_engine.register_action('tests/cysparse_/sparse/common_attributes', 'test_common_attributes_matrices_views.*', generate_following_matrix_view_class_and_index_and_type)
-    cygenja_engine.register_action('tests/cysparse_/sparse/common_attributes', 'test_common_attributes_matrices_proxies.*', generate_following_matrix_proxy_class_and_index_and_type)
-    cygenja_engine.register_action('tests/cysparse_/sparse/common_attributes', 'test_common_attributes_matrices_proxies_transposed.*', generate_following_matrix_proxy_transposed_class_and_index_and_type)
 
     ####################################################################################################################
     # Generation

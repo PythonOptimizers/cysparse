@@ -124,6 +124,18 @@ cdef class LLSparseMatrixView_INT64_t_FLOAT128_t:
 
     
     @property
+    def is_symmetric(self):
+        """
+        Return if **view** is symmetric.
+
+        Warning:
+            This proprety is **very** costly: internally, we construct a corresponding ``LLSparseMatrix`` and test its
+            symmetry.
+        """
+        return self.matrix_copy().is_symmetric
+
+    
+    @property
     def base_type_str(self):
         return self.__base_type_str
 
@@ -253,7 +265,7 @@ cdef class LLSparseMatrixView_INT64_t_FLOAT128_t:
             the returned matrix has its ``store_zero`` attribute set
             to ``False`` and no zero is copied.
 
-            Because we don't know what submatrix is taken, the returned matrix **cannot** by symmetric.
+            Because we don't know what submatrix is taken, the returned matrix **cannot** use symmetric storage.
 
         """
         # This is completely arbitrary
