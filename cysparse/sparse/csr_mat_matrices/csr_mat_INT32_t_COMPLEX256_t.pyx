@@ -61,6 +61,7 @@ cdef extern from "complex.h":
 
 include "csr_mat_kernel/csr_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX256_t.pxi"
 include "csr_mat_helpers/csr_mat_multiplication_INT32_t_COMPLEX256_t.pxi"
+include "csr_mat_helpers/csr_mat_is_symmetric_INT32_t_COMPLEX256_t.pxi"
 
 
 cdef extern from "Python.h":
@@ -88,6 +89,17 @@ cdef class CSRSparseMatrix_INT32_t_COMPLEX256_t(ImmutableSparseMatrix_INT32_t_CO
         self.__col_indices_sorted_test_done = False
         self.__col_indices_sorted = False
         self.__first_row_not_ordered = -1
+
+    
+    @property
+    def is_symmetric(self):
+        if self.__store_symmetric:
+            return True
+
+        if self.__nrow != self.__ncol:
+            return False
+
+        return is_symmetric_INT32_t_COMPLEX256_t(self)
 
     def __dealloc__(self):
         PyMem_Free(self.val)

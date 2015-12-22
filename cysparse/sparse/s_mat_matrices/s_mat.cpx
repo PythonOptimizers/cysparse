@@ -142,8 +142,20 @@ cdef class SparseMatrix_@index@_@type@(SparseMatrix):
             self.__conjugated_proxy_matrix_generated = True
 
         return self.__conjugated_proxy_matrix
+{% else %}
+    {% raw %}
+    @property
+    {%- endraw %}
+    def H(self):
+        return self.T
 
+    {% raw %}
+    @property
+    {%- endraw %}
+    def conj(self):
+        return self
 {% endif %}
+
     ####################################################################################################################
     # Set/Get list of elements
     ####################################################################################################################
@@ -298,7 +310,7 @@ cdef class SparseMatrix_@index@_@type@(SparseMatrix):
         return s
 
     def _matrix_description_before_printing(self):
-        s = "%s %s <Storage scheme: %s>" % (self.__type_name, self.matrix_short_description(), self.storage_scheme_string())
+        s = "%s %s <Storage scheme: %s>" % (self.__full_type_str, self.matrix_short_description(), self.storage_scheme_string())
         return s
 
     def __repr__(self):

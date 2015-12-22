@@ -290,7 +290,7 @@ cdef class SparseMatrix_INT64_t_COMPLEX128_t(SparseMatrix):
         return s
 
     def _matrix_description_before_printing(self):
-        s = "%s %s <Storage scheme: %s>" % (self.__type_name, self.matrix_short_description(), self.storage_scheme_string())
+        s = "%s %s <Storage scheme: %s>" % (self.__full_type_str, self.matrix_short_description(), self.storage_scheme_string())
         return s
 
     def __repr__(self):

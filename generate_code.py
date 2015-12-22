@@ -155,11 +155,12 @@ MATRIX_CLASSES = {'LLSparseMatrix' : 'll_mat_matrices.ll_mat',
 MATRIX_VIEW_CLASSES = {'LLSparseMatrixView' : 'll_mat_views.ll_mat_views'}
 MATRIX_PROXY_CLASSES = {'TransposedSparseMatrix' : 'sparse_proxies.t_mat',
                         'ConjugatedSparseMatrix' : 'sparse_proxies.complex_generic.conj_mat',
-                       'ConjugateTransposedSparseMatrix' : 'sparse_proxies.complex_generic.h_mat'}
+                        'ConjugateTransposedSparseMatrix' : 'sparse_proxies.complex_generic.h_mat'}
+
 
 MATRIX_LIKE_CLASSES = {}
 MATRIX_LIKE_CLASSES.update(MATRIX_CLASSES)
-MATRIX_LIKE_CLASSES.update(MATRIX_VIEW_CLASSES)
+#MATRIX_LIKE_CLASSES.update(MATRIX_VIEW_CLASSES)
 MATRIX_LIKE_CLASSES.update(MATRIX_PROXY_CLASSES)
 
 
@@ -268,7 +269,7 @@ def generate_following_matrix_view_class_and_index_and_type():
                 yield '_%s_%s_%s' % (klass, index, type), GENERAL_CONTEXT
 
 
-def generate_following_complex_matrix_proxy_class_and_index_and_type():
+def generate_following_matrix_proxy_class_and_index_and_type():
     """
     Generate files following index, element and class types.
 
@@ -288,7 +289,7 @@ def generate_following_complex_matrix_proxy_class_and_index_and_type():
         GENERAL_CONTEXT['directory'] = directory
         for index in INDEX_TYPES:
             GENERAL_CONTEXT['index'] = index
-            for type in COMPLEX_ELEMENT_TYPES:
+            for type in ELEMENT_TYPES:
                 GENERAL_CONTEXT['type'] = type
                 yield '_%s_%s_%s' % (klass, index, type), GENERAL_CONTEXT
 
@@ -313,6 +314,24 @@ def generate_following_matrix_proxy_transposed_class_and_index_and_type():
             for type in ELEMENT_TYPES:
                 GENERAL_CONTEXT['type'] = type
                 yield '_%s_%s_%s' % (klass, index, type), GENERAL_CONTEXT
+
+
+def generate_following_matrix_like_class_and_index_and_type():
+    """
+    Generate files following index, element and class types.
+
+    This generator is for tests only.
+
+    """
+    for klass, directory in MATRIX_LIKE_CLASSES.items():
+        GENERAL_CONTEXT['class'] = klass
+        GENERAL_CONTEXT['directory'] = directory
+        for index in INDEX_TYPES:
+            GENERAL_CONTEXT['index'] = index
+            for type in ELEMENT_TYPES:
+                GENERAL_CONTEXT['type'] = type
+                yield '_%s_%s_%s' % (klass, index, type), GENERAL_CONTEXT
+
 
 ###############################################################################
 # MAIN
@@ -387,10 +406,11 @@ if __name__ == "__main__":
     cygenja_engine.register_action('cysparse/sparse', '*.*', single_generation)
 
     # Tests
-    cygenja_engine.register_action('tests/cysparse_/sparse/common_operations', 'test_common_attributes_matrices.*', generate_following_matrix_class_and_index_and_type)
-    cygenja_engine.register_action('tests/cysparse_/sparse/common_operations', 'test_common_attributes_matrices_views.*', generate_following_matrix_view_class_and_index_and_type)
-    cygenja_engine.register_action('tests/cysparse_/sparse/common_operations', 'test_common_attributes_matrices_proxies.*', generate_following_complex_matrix_proxy_class_and_index_and_type)
-    cygenja_engine.register_action('tests/cysparse_/sparse/common_operations', 'test_common_attributes_matrices_proxies_transposed.*', generate_following_matrix_proxy_transposed_class_and_index_and_type)
+    cygenja_engine.register_action('tests/cysparse_/sparse/common_attributes', 'test_common_attributes_matrices.*', generate_following_matrix_like_class_and_index_and_type)
+    cygenja_engine.register_action('tests/cysparse_/sparse/common_attributes', 'test_explicit_is_symmetric_matrices.*', generate_following_matrix_class_and_index_and_type)
+    cygenja_engine.register_action('tests/cysparse_/sparse/common_attributes', 'test_common_attributes_matrices_views.*', generate_following_matrix_view_class_and_index_and_type)
+    cygenja_engine.register_action('tests/cysparse_/sparse/common_attributes', 'test_common_attributes_matrices_proxies.*', generate_following_matrix_proxy_class_and_index_and_type)
+    cygenja_engine.register_action('tests/cysparse_/sparse/common_attributes', 'test_common_attributes_matrices_proxies_transposed.*', generate_following_matrix_proxy_transposed_class_and_index_and_type)
 
     ####################################################################################################################
     # Generation

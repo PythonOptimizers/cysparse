@@ -81,6 +81,12 @@ cdef class ConjugateTransposedSparseMatrix_@index@_@type@:
     {% raw %}
     @property
     {%- endraw %}
+    def is_symmetric(self):
+        return self.A.is_symmetric
+
+    {% raw %}
+    @property
+    {%- endraw %}
     def store_symmetric(self):
         return self.A.store_symmetric
 
@@ -100,13 +106,13 @@ cdef class ConjugateTransposedSparseMatrix_@index@_@type@:
     @property
     {%- endraw %}
     def base_type_str(self):
-        return self.A.base_type_str
+        return 'Conjugate Transposed of ' + self.A.base_type_str
 
     {% raw %}
     @property
     {%- endraw %}
     def full_type_str(self):
-        return self.A.full_type_str
+        return 'Conjugate Transposed of ' + self.A.full_type_str
 
     {% raw %}
     @property

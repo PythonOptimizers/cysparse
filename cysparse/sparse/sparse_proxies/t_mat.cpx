@@ -72,6 +72,12 @@ cdef class TransposedSparseMatrix:
     {% raw %}
     @property
     {%- endraw %}
+    def is_symmetric(self):
+        return self.A.is_symmetric
+
+    {% raw %}
+    @property
+    {%- endraw %}
     def store_symmetric(self):
         return self.A.store_symmetric
 
@@ -91,13 +97,13 @@ cdef class TransposedSparseMatrix:
     @property
     {%- endraw %}
     def base_type_str(self):
-        return self.A.base_type_str
+        return 'Transposed of ' + self.A.base_type_str
 
     {% raw %}
     @property
     {%- endraw %}
     def full_type_str(self):
-        return self.A.full_type_str
+        return 'Tranposed of ' + self.A.full_type_str
 
     {% raw %}
     @property

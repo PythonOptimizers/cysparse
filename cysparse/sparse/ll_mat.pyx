@@ -1051,7 +1051,7 @@ def IdentityLLSparseMatrix(**kwargs):
 
 def BandLLSparseMatrix(**kwargs):
     """
-    See ``MakeBandLLSparseMatrix_INT64_t_COMPLEX256_t``.
+    See ``MakeBandLLSparseMatrix_INT32_t_INT32_t``.
 
     Note:
         Input arguments are **not** tested.

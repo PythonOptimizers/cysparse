@@ -101,6 +101,10 @@ cdef class SparseMatrix:
     def store_zero(self):
         return self.__store_zero
 
+    @property
+    def is_symmetric(self):
+        raise NotImplementedError("Operation not implemented (yet). Please report.")
+
     #########################
     # Strings
     #########################

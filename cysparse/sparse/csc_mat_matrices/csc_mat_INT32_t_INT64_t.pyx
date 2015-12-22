@@ -60,6 +60,7 @@ cdef extern from "complex.h":
 
 include "csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT32_t_INT64_t.pxi"
 include "csc_mat_helpers/csc_mat_multiplication_INT32_t_INT64_t.pxi"
+include "csc_mat_helpers/csc_mat_is_symmetric_INT32_t_INT64_t.pxi"
 
 
 cdef class CSCSparseMatrix_INT32_t_INT64_t(ImmutableSparseMatrix_INT32_t_INT64_t):
@@ -81,6 +82,17 @@ cdef class CSCSparseMatrix_INT32_t_INT64_t(ImmutableSparseMatrix_INT32_t_INT64_t
         self.__row_indices_sorted_test_done = False
         self.__row_indices_sorted = False
         self.__first_col_not_ordered = -1
+
+    
+    @property
+    def is_symmetric(self):
+        if self.__store_symmetric:
+            return True
+
+        if self.__nrow != self.__ncol:
+            return False
+
+        return is_symmetric_INT32_t_INT64_t(self)
 
     def __dealloc__(self):
         PyMem_Free(self.val)

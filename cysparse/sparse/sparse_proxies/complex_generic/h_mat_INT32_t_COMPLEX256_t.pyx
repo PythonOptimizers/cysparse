@@ -75,6 +75,11 @@ cdef class ConjugateTransposedSparseMatrix_INT32_t_COMPLEX256_t:
 
     
     @property
+    def is_symmetric(self):
+        return self.A.is_symmetric
+
+    
+    @property
     def store_symmetric(self):
         return self.A.store_symmetric
 
@@ -91,12 +96,12 @@ cdef class ConjugateTransposedSparseMatrix_INT32_t_COMPLEX256_t:
     
     @property
     def base_type_str(self):
-        return self.A.base_type_str
+        return 'Conjugate Transposed of ' + self.A.base_type_str
 
     
     @property
     def full_type_str(self):
-        return self.A.full_type_str
+        return 'Conjugate Transposed of ' + self.A.full_type_str
 
     
     @property

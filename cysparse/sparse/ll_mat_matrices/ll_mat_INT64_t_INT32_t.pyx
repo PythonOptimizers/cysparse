@@ -34,6 +34,7 @@ include "ll_mat_kernel/ll_mat_assignment_kernel_INT64_t_INT32_t.pxi"
 include "ll_mat_kernel/ll_mat_multiplication_by_numpy_vector_kernel_INT64_t_INT32_t.pxi"
 include "ll_mat_helpers/ll_mat_multiplication_INT64_t_INT32_t.pxi"
 include "ll_mat_helpers/ll_mat_addition_INT64_t_INT32_t.pxi"
+include "ll_mat_helpers/ll_mat_is_symmetric_INT64_t_INT32_t.pxi"
 
 
 
@@ -184,6 +185,17 @@ cdef class LLSparseMatrix_INT64_t_INT32_t(MutableSparseMatrix_INT64_t_INT32_t):
 
             for i from 0 <= i < self.__nrow:
                 root[i] = -1
+
+    
+    @property
+    def is_symmetric(self):
+        if self.__store_symmetric:
+            return True
+
+        if self.__nrow != self.__ncol:
+            return False
+
+        return is_symmetric_INT64_t_INT32_t(self)
 
     def __dealloc__(self):
         """
