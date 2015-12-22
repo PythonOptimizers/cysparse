@@ -84,8 +84,6 @@ from cysparse.sparse.ll_mat_matrices.ll_mat_INT32_t_COMPLEX64_t cimport LLSparse
     
 from cysparse.sparse.ll_mat_matrices.ll_mat_INT32_t_COMPLEX128_t cimport LLSparseMatrix_INT32_t_COMPLEX128_t
     
-from cysparse.sparse.ll_mat_matrices.ll_mat_INT32_t_COMPLEX256_t cimport LLSparseMatrix_INT32_t_COMPLEX256_t
-    
 
     
 from cysparse.sparse.ll_mat_matrices.ll_mat_INT64_t_INT32_t cimport LLSparseMatrix_INT64_t_INT32_t
@@ -101,8 +99,6 @@ from cysparse.sparse.ll_mat_matrices.ll_mat_INT64_t_FLOAT128_t cimport LLSparseM
 from cysparse.sparse.ll_mat_matrices.ll_mat_INT64_t_COMPLEX64_t cimport LLSparseMatrix_INT64_t_COMPLEX64_t
     
 from cysparse.sparse.ll_mat_matrices.ll_mat_INT64_t_COMPLEX128_t cimport LLSparseMatrix_INT64_t_COMPLEX128_t
-    
-from cysparse.sparse.ll_mat_matrices.ll_mat_INT64_t_COMPLEX256_t cimport LLSparseMatrix_INT64_t_COMPLEX256_t
     
 
 
@@ -151,12 +147,6 @@ include "ll_mat_matrices/ll_mat_constructors/ll_mat_bands_INT32_t_COMPLEX128_t.p
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT32_t_COMPLEX128_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_permutations_INT32_t_COMPLEX128_t.pxi"
     
-include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT32_t_COMPLEX256_t.pxi"
-include "ll_mat_matrices/ll_mat_constructors/ll_mat_diagonals_INT32_t_COMPLEX256_t.pxi"
-include "ll_mat_matrices/ll_mat_constructors/ll_mat_bands_INT32_t_COMPLEX256_t.pxi"
-include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT32_t_COMPLEX256_t.pxi"
-include "ll_mat_matrices/ll_mat_constructors/ll_mat_permutations_INT32_t_COMPLEX256_t.pxi"
-    
 
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT64_t_INT32_t.pxi"
@@ -200,12 +190,6 @@ include "ll_mat_matrices/ll_mat_constructors/ll_mat_diagonals_INT64_t_COMPLEX128
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_bands_INT64_t_COMPLEX128_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT64_t_COMPLEX128_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_permutations_INT64_t_COMPLEX128_t.pxi"
-    
-include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT64_t_COMPLEX256_t.pxi"
-include "ll_mat_matrices/ll_mat_constructors/ll_mat_diagonals_INT64_t_COMPLEX256_t.pxi"
-include "ll_mat_matrices/ll_mat_constructors/ll_mat_bands_INT64_t_COMPLEX256_t.pxi"
-include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT64_t_COMPLEX256_t.pxi"
-include "ll_mat_matrices/ll_mat_constructors/ll_mat_permutations_INT64_t_COMPLEX256_t.pxi"
     
 
 
@@ -292,15 +276,11 @@ include "ll_mat_matrices/ll_mat_IO/ll_mat_mm_INT32_t_INT64_t.pxi"
     
 include "ll_mat_matrices/ll_mat_IO/ll_mat_mm_INT32_t_FLOAT64_t.pxi"
     
-include "ll_mat_matrices/ll_mat_IO/ll_mat_mm_INT32_t_COMPLEX128_t.pxi"
-    
 
     
 include "ll_mat_matrices/ll_mat_IO/ll_mat_mm_INT64_t_INT64_t.pxi"
     
 include "ll_mat_matrices/ll_mat_IO/ll_mat_mm_INT64_t_FLOAT64_t.pxi"
-    
-include "ll_mat_matrices/ll_mat_IO/ll_mat_mm_INT64_t_COMPLEX128_t.pxi"
     
 
 
@@ -390,7 +370,7 @@ def LLSparseMatrix(**kwargs):
     assert dtype in ELEMENT_TYPES, "dtype not recognized"
 
     assert itype in [INT32_T,INT64_T], "itype is not accepted as index type"
-    assert dtype in [INT32_T,INT64_T,FLOAT32_T,FLOAT64_T,FLOAT128_T,COMPLEX64_T,COMPLEX128_T,COMPLEX256_T], "dtype is not accepted as type for a matrix element"
+    assert dtype in [INT32_T,INT64_T,FLOAT32_T,FLOAT64_T,FLOAT128_T,COMPLEX64_T,COMPLEX128_T], "dtype is not accepted as type for a matrix element"
 
     cdef bint store_zero = kwargs.get('store_zero', False)
     cdef bint store_symmetric = kwargs.get('store_symmetric', False)
@@ -530,18 +510,6 @@ def LLSparseMatrix(**kwargs):
                                                                   store_zero=store_zero,
                                                                   store_symmetric=store_symmetric)
     
-        
-            elif dtype == COMPLEX256_T:
-        
-                return LLSparseMatrix_INT32_t_COMPLEX256_t(control_object=unexposed_value,
-                                                                  nrow=real_nrow,
-                                                                  ncol=real_ncol,
-                                                                  dtype=dtype,
-                                                                  itype=itype,
-                                                                  size_hint=size_hint,
-                                                                  store_zero=store_zero,
-                                                                  store_symmetric=store_symmetric)
-    
 
     
         elif itype == INT64_T:
@@ -631,18 +599,6 @@ def LLSparseMatrix(**kwargs):
                                                                   store_zero=store_zero,
                                                                   store_symmetric=store_symmetric)
     
-        
-            elif dtype == COMPLEX256_T:
-        
-                return LLSparseMatrix_INT64_t_COMPLEX256_t(control_object=unexposed_value,
-                                                                  nrow=real_nrow,
-                                                                  ncol=real_ncol,
-                                                                  dtype=dtype,
-                                                                  itype=itype,
-                                                                  size_hint=size_hint,
-                                                                  store_zero=store_zero,
-                                                                  store_symmetric=store_symmetric)
-    
 
 
     #                                            CASE 2: from another matrix
@@ -657,8 +613,8 @@ def LLSparseMatrix(**kwargs):
             assert itype in [INT32_T,INT64_T], "itype is not accepted as index type for a matrix from a Matrix Market file.\n\Accepted itypes:\n\t" + \
              "INT32_T,INT64_T"
 
-            assert dtype in [INT64_T,FLOAT64_T,COMPLEX128_T], "dtype is not accepted as type for a matrix from a Matrix Market file.\nAccepted dtypes:\n\t" + \
-             "INT64_T,FLOAT64_T,COMPLEX128_T"
+            assert dtype in [INT64_T,FLOAT64_T], "dtype is not accepted as type for a matrix from a Matrix Market file.\nAccepted dtypes:\n\t" + \
+             "INT64_T,FLOAT64_T"
 
 
     
@@ -679,13 +635,6 @@ def LLSparseMatrix(**kwargs):
                         return MakeLLSparseMatrixFromMMFile2_INT32_t_FLOAT64_t(mm_filename=mm_filename, store_zero=store_zero, test_bounds=test_bounds)
                     return MakeLLSparseMatrixFromMMFile_INT32_t_FLOAT64_t(mm_filename=mm_filename, store_zero=store_zero, test_bounds=test_bounds)
     
-        
-                elif dtype == COMPLEX128_T:
-        
-                    if mm_read_file_experimental:
-                        return MakeLLSparseMatrixFromMMFile2_INT32_t_COMPLEX128_t(mm_filename=mm_filename, store_zero=store_zero, test_bounds=test_bounds)
-                    return MakeLLSparseMatrixFromMMFile_INT32_t_COMPLEX128_t(mm_filename=mm_filename, store_zero=store_zero, test_bounds=test_bounds)
-    
 
     
             elif itype == INT64_T:
@@ -704,13 +653,6 @@ def LLSparseMatrix(**kwargs):
                     if mm_read_file_experimental:
                         return MakeLLSparseMatrixFromMMFile2_INT64_t_FLOAT64_t(mm_filename=mm_filename, store_zero=store_zero, test_bounds=test_bounds)
                     return MakeLLSparseMatrixFromMMFile_INT64_t_FLOAT64_t(mm_filename=mm_filename, store_zero=store_zero, test_bounds=test_bounds)
-    
-        
-                elif dtype == COMPLEX128_T:
-        
-                    if mm_read_file_experimental:
-                        return MakeLLSparseMatrixFromMMFile2_INT64_t_COMPLEX128_t(mm_filename=mm_filename, store_zero=store_zero, test_bounds=test_bounds)
-                    return MakeLLSparseMatrixFromMMFile_INT64_t_COMPLEX128_t(mm_filename=mm_filename, store_zero=store_zero, test_bounds=test_bounds)
     
 
 
@@ -762,11 +704,6 @@ def LLSparseMatrixFromMMFile(filename, store_zero=False, test_bounds=True):
         
             return MakeLLSparseMatrixFromMMFile_INT32_t_FLOAT64_t(mm_filename=filename, store_zero=store_zero, test_bounds=test_bounds)
     
-        
-        elif dtype == COMPLEX128_T:
-        
-            return MakeLLSparseMatrixFromMMFile_INT32_t_COMPLEX128_t(mm_filename=filename, store_zero=store_zero, test_bounds=test_bounds)
-    
     
 
     
@@ -781,11 +718,6 @@ def LLSparseMatrixFromMMFile(filename, store_zero=False, test_bounds=True):
         elif dtype == FLOAT64_T:
         
             return MakeLLSparseMatrixFromMMFile_INT64_t_FLOAT64_t(mm_filename=filename, store_zero=store_zero, test_bounds=test_bounds)
-    
-        
-        elif dtype == COMPLEX128_T:
-        
-            return MakeLLSparseMatrixFromMMFile_INT64_t_COMPLEX128_t(mm_filename=filename, store_zero=store_zero, test_bounds=test_bounds)
     
     
 
@@ -864,11 +796,6 @@ def ArrowheadLLSparseMatrix(**kwargs):
         
             return MakeArrowHeadLLSparseMatrix_INT32_t_COMPLEX128_t(ll_mat, element)
     
-        
-        elif dtype == COMPLEX256_T:
-        
-            return MakeArrowHeadLLSparseMatrix_INT32_t_COMPLEX256_t(ll_mat, element)
-    
     
 
     
@@ -908,11 +835,6 @@ def ArrowheadLLSparseMatrix(**kwargs):
         elif dtype == COMPLEX128_T:
         
             return MakeArrowHeadLLSparseMatrix_INT64_t_COMPLEX128_t(ll_mat, element)
-    
-        
-        elif dtype == COMPLEX256_T:
-        
-            return MakeArrowHeadLLSparseMatrix_INT64_t_COMPLEX256_t(ll_mat, element)
     
     
 
@@ -988,11 +910,6 @@ def DiagonalLLSparseMatrix(**kwargs):
         
             return MakeDiagonalLLSparseMatrix_INT32_t_COMPLEX128_t(ll_mat, element)
     
-        
-        elif dtype == COMPLEX256_T:
-        
-            return MakeDiagonalLLSparseMatrix_INT32_t_COMPLEX256_t(ll_mat, element)
-    
     
 
     
@@ -1033,11 +950,6 @@ def DiagonalLLSparseMatrix(**kwargs):
         
             return MakeDiagonalLLSparseMatrix_INT64_t_COMPLEX128_t(ll_mat, element)
     
-        
-        elif dtype == COMPLEX256_T:
-        
-            return MakeDiagonalLLSparseMatrix_INT64_t_COMPLEX256_t(ll_mat, element)
-    
     
 
     else:
@@ -1051,7 +963,7 @@ def IdentityLLSparseMatrix(**kwargs):
 
 def BandLLSparseMatrix(**kwargs):
     """
-    See ``MakeBandLLSparseMatrix_INT32_t_INT32_t``.
+    See ``MakeBandLLSparseMatrix_INT64_t_COMPLEX128_t``.
 
     Note:
         Input arguments are **not** tested.
@@ -1110,11 +1022,6 @@ def BandLLSparseMatrix(**kwargs):
         
             return MakeBandLLSparseMatrix_INT32_t_COMPLEX128_t(ll_mat, diag_coeff, numpy_arrays)
     
-        
-        elif dtype == COMPLEX256_T:
-        
-            return MakeBandLLSparseMatrix_INT32_t_COMPLEX256_t(ll_mat, diag_coeff, numpy_arrays)
-    
     
 
     
@@ -1154,11 +1061,6 @@ def BandLLSparseMatrix(**kwargs):
         elif dtype == COMPLEX128_T:
         
             return MakeBandLLSparseMatrix_INT64_t_COMPLEX128_t(ll_mat, diag_coeff, numpy_arrays)
-    
-        
-        elif dtype == COMPLEX256_T:
-        
-            return MakeBandLLSparseMatrix_INT64_t_COMPLEX256_t(ll_mat, diag_coeff, numpy_arrays)
     
     
 
@@ -1255,11 +1157,6 @@ def LinearFillLLSparseMatrix(**kwargs):
         
             return MakeLinearFillLLSparseMatrix_INT32_t_COMPLEX128_t(ll_mat, first_element, step, row_wise)
     
-        
-        elif dtype == COMPLEX256_T:
-        
-            return MakeLinearFillLLSparseMatrix_INT32_t_COMPLEX256_t(ll_mat, first_element, step, row_wise)
-    
     
 
     
@@ -1299,11 +1196,6 @@ def LinearFillLLSparseMatrix(**kwargs):
         elif dtype == COMPLEX128_T:
         
             return MakeLinearFillLLSparseMatrix_INT64_t_COMPLEX128_t(ll_mat, first_element, step, row_wise)
-    
-        
-        elif dtype == COMPLEX256_T:
-        
-            return MakeLinearFillLLSparseMatrix_INT64_t_COMPLEX256_t(ll_mat, first_element, step, row_wise)
     
     
 
@@ -1367,11 +1259,6 @@ def PermutationLLSparseMatrix(**kwargs):
         
             return MakePermutationLLSparseMatrix_INT32_t_COMPLEX128_t(ll_mat, p_vec)
     
-        
-        elif dtype == COMPLEX256_T:
-        
-            return MakePermutationLLSparseMatrix_INT32_t_COMPLEX256_t(ll_mat, p_vec)
-    
     
 
     
@@ -1411,11 +1298,6 @@ def PermutationLLSparseMatrix(**kwargs):
         elif dtype == COMPLEX128_T:
         
             return MakePermutationLLSparseMatrix_INT64_t_COMPLEX128_t(ll_mat, p_vec)
-    
-        
-        elif dtype == COMPLEX256_T:
-        
-            return MakePermutationLLSparseMatrix_INT64_t_COMPLEX256_t(ll_mat, p_vec)
     
     
 

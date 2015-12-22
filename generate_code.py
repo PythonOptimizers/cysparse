@@ -119,17 +119,23 @@ else:
 #####################################################
 # COMMON STUFF
 #####################################################
+
+# ======================================================================================================================
+# As of 22nd of December 2015, we no longer support COMPLEX256_T as it is too problematic to work with in Cython.
+#
+# ======================================================================================================================
+
 # TODO: grab this from common_types.pxd or at least from a one common file
-BASIC_TYPES = ['INT32_t', 'UINT32_t', 'INT64_t', 'UINT64_t', 'FLOAT32_t', 'FLOAT64_t', 'FLOAT128_t', 'COMPLEX64_t', 'COMPLEX128_t', 'COMPLEX256_t']
-ELEMENT_TYPES = ['INT32_t', 'INT64_t', 'FLOAT32_t', 'FLOAT64_t', 'FLOAT128_t', 'COMPLEX64_t', 'COMPLEX128_t', 'COMPLEX256_t']
+BASIC_TYPES = ['INT32_t', 'UINT32_t', 'INT64_t', 'UINT64_t', 'FLOAT32_t', 'FLOAT64_t', 'FLOAT128_t', 'COMPLEX64_t', 'COMPLEX128_t'] #, 'COMPLEX256_t']
+ELEMENT_TYPES = ['INT32_t', 'INT64_t', 'FLOAT32_t', 'FLOAT64_t', 'FLOAT128_t', 'COMPLEX64_t', 'COMPLEX128_t'] #, 'COMPLEX256_t']
 INDEX_TYPES = ['INT32_t', 'INT64_t']
 INTEGER_ELEMENT_TYPES = ['INT32_t', 'INT64_t']
 REAL_ELEMENT_TYPES = ['FLOAT32_t', 'FLOAT64_t', 'FLOAT128_t']
-COMPLEX_ELEMENT_TYPES = ['COMPLEX64_t', 'COMPLEX128_t', 'COMPLEX256_t']
+COMPLEX_ELEMENT_TYPES = ['COMPLEX64_t', 'COMPLEX128_t'] #, 'COMPLEX256_t']
 
 # Matrix market types
 MM_INDEX_TYPES = ['INT32_t', 'INT64_t']
-MM_ELEMENT_TYPES = ['INT64_t', 'FLOAT64_t', 'COMPLEX128_t']
+MM_ELEMENT_TYPES = ['INT64_t', 'FLOAT64_t'] #, 'COMPLEX128_t']
 
 # when coding
 #ELEMENT_TYPES = ['FLOAT64_t']
@@ -406,8 +412,14 @@ if __name__ == "__main__":
     cygenja_engine.register_action('cysparse/sparse', '*.*', single_generation)
 
     # Tests
+    #### SPARSE ####
+    # --- common attributes ---
     cygenja_engine.register_action('tests/cysparse_/sparse/common_attributes', 'test_common_attributes_matrices_likes.*', generate_following_matrix_like_class_and_index_and_type)
     cygenja_engine.register_action('tests/cysparse_/sparse/common_attributes', 'test_explicit_is_symmetric_matrices.*', generate_following_matrix_class_and_index_and_type)
+    # --- common operations ---
+    # object creation
+    cygenja_engine.register_action('tests/cysparse_/sparse/common_operations/object_creation', 'test_creation*.cpy', generate_following_matrix_like_class_and_index_and_type)
+
 
     ####################################################################################################################
     # Generation

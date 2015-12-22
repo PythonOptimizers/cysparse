@@ -213,6 +213,9 @@ cdef class LLSparseMatrixView_INT32_t_COMPLEX128_t:
             IndexError: when index out of bound.
 
         """
+        print self.__nrow
+        print self.__ncol
+
         if not 0 <= i < self.__nrow or not 0 <= j < self.__ncol:
             raise IndexError("Index out of bounds")
 

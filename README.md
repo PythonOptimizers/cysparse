@@ -2,6 +2,8 @@
 
 Fast sparse matrix library for Python/Cython.
 
+:warning: `COMPLEX256_T is **no** longer supported :warning:
+
 :cyclone: :cyclone: :cyclone: THIS VERSION IS BEING COMPLETELY REWRITTEN: :weary: YOU :weary: SHALL :no_entry: NOT :no_entry: USE IT! :cyclone: :cyclone: :cyclone:
 
 
