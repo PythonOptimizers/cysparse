@@ -21,6 +21,7 @@ We tests:
 - Vector multiplication operations:
     * ``matvec()``;
     * ``matvec_transp()``;
+    * ``matvec_htransp()``;
 
 and this for all combinations of indices and element types.
 
@@ -95,7 +96,7 @@ class CySparseCommonNumpyVectorMultiplication_TransposedSparseMatrix_INT32_t_FLO
 
 
 # ======================================================================================================================
-    def test_numpy_vector_matvec_transp_element_by_element(self):
+    def test_numpy_vector_matvec_htransp_element_by_element(self):
         """
         Test ``matvec_htransp``.
         """
@@ -155,6 +156,21 @@ class CySparseCommonNumpyVectorMultiplication_Symmetric_TransposedSparseMatrix_I
 
 
 
+# ======================================================================================================================
+    def test_numpy_vector_matvec_htransp_element_by_element(self):
+        """
+        Test ``matvec_htransp``.
+        """
+
+        # this only works because the matrix doesn't have any imaginary term
+        result_with_A = self.A.T.matvec_htransp(self.x)
+        result_with_C = self.C.matvec_htransp(self.x)
+
+        for i in range(self.size):
+            self.assertTrue(result_with_A[i] == result_with_C[i])
+
+
+
 ##################################
 # Case Non Symmetric, Zero
 ##################################
@@ -203,6 +219,20 @@ class CySparseCommonNumpyVectorMultiplication_WithZeroTransposedSparseMatrix_INT
 
 
 
+# ======================================================================================================================
+    def test_numpy_vector_matvec_htransp_element_by_element(self):
+        """
+        Test ``matvec_htransp``.
+        """
+
+        # this only works because the matrix doesn't have any imaginary term
+        result_with_A = self.A.T.matvec_htransp(self.x)
+        result_with_C = self.C.matvec_htransp(self.x)
+
+        for i in range(self.nrow):
+            self.assertTrue(result_with_A[i] == result_with_C[i])
+
+
 ##################################
 # Case Symmetric, Zero
 ##################################
@@ -243,6 +273,21 @@ class CySparseCommonNumpyVectorMultiplication_Symmetric_WithZero_TransposedSpars
         # this only works because the matrix doesn't have any imaginary term
         result_with_A = self.A.T.matvec_transp(self.x)
         result_with_C = self.C.matvec_transp(self.x)
+
+        for i in range(self.size):
+            self.assertTrue(result_with_A[i] == result_with_C[i])
+
+
+
+# ======================================================================================================================
+    def test_numpy_vector_matvec_htransp_element_by_element(self):
+        """
+        Test ``matvec_htransp``.
+        """
+
+        # this only works because the matrix doesn't have any imaginary term
+        result_with_A = self.A.T.matvec_htransp(self.x)
+        result_with_C = self.C.matvec_htransp(self.x)
 
         for i in range(self.size):
             self.assertTrue(result_with_A[i] == result_with_C[i])
@@ -313,6 +358,20 @@ class CySparseCommonNumpyVectorWithStrideMultiplication_TransposedSparseMatrix_I
 
 
 
+# ======================================================================================================================
+    def test_numpy_vector_matvec_htransp_element_by_element(self):
+        """
+        Test ``matvec_htransp``.
+        """
+
+        # this only works because the matrix doesn't have any imaginary term
+        result_with_A = self.A.T.matvec_htransp(self.x)
+        result_with_C = self.C.matvec_htransp(self.x_strided[::self.stride_factor])
+
+        for i in range(self.nrow):
+            self.assertTrue(result_with_A[i] == result_with_C[i])
+
+
 ##################################
 # Case Symmetric, Non Zero
 ##################################
@@ -363,6 +422,20 @@ class CySparseCommonNumpyVectorWithStrideMultiplication_Symmetric_TransposedSpar
         for i in range(self.size):
             self.assertTrue(result_with_A[i] == result_with_C[i])
 
+
+
+# ======================================================================================================================
+    def test_numpy_vector_matvec_htransp_element_by_element(self):
+        """
+        Test ``matvec_htransp``.
+        """
+
+        # this only works because the matrix doesn't have any imaginary term
+        result_with_A = self.A.T.matvec_htransp(self.x)
+        result_with_C = self.C.matvec_htransp(self.x_strided[::self.stride_factor])
+
+        for i in range(self.size):
+            self.assertTrue(result_with_A[i] == result_with_C[i])
 
 
 
@@ -427,6 +500,21 @@ class CySparseCommonNumpyVectorWithStrideMultiplication_WithZeroTransposedSparse
 
 
 
+# ======================================================================================================================
+    def test_numpy_vector_matvec_htransp_element_by_element(self):
+        """
+        Test ``matvec_transp``.
+        """
+
+        # this only works because the matrix doesn't have any imaginary term
+        result_with_A = self.A.T.matvec_htransp(self.x)
+        result_with_C = self.C.matvec_htransp(self.x_strided[::self.stride_factor])
+
+        for i in range(self.nrow):
+            self.assertTrue(result_with_A[i] == result_with_C[i])
+
+
+
 ##################################
 # Case Symmetric, Zero
 ##################################
@@ -473,6 +561,21 @@ class CySparseCommonNumpyVectorWithStrideMultiplication_Symmetric_WithZero_Trans
         # this only works because the matrix doesn't have any imaginary term
         result_with_A = self.A.T.matvec_transp(self.x)
         result_with_C = self.C.matvec_transp(self.x_strided[::self.stride_factor])
+
+        for i in range(self.size):
+            self.assertTrue(result_with_A[i] == result_with_C[i])
+
+
+
+# ======================================================================================================================
+    def test_numpy_vector_matvec_htransp_element_by_element(self):
+        """
+        Test ``matvec_transp``.
+        """
+
+        # this only works because the matrix doesn't have any imaginary term
+        result_with_A = self.A.T.matvec_htransp(self.x)
+        result_with_C = self.C.matvec_htransp(self.x_strided[::self.stride_factor])
 
         for i in range(self.size):
             self.assertTrue(result_with_A[i] == result_with_C[i])

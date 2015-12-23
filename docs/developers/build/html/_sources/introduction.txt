@@ -8,7 +8,7 @@ Welcome to :program:`CySparse`'s developers manual!
 
 :program:`CySparse` is a fast sparse matrix library for :program:`Python`/:program:`Cython`.
 
-..  warning:: This is the manual for **developers**.
+
 
 Maintening a library as :program:`CySparse` is not a small task. This is partly due to:
 

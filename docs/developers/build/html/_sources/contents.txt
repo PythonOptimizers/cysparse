@@ -6,6 +6,7 @@
 :Release: |version|
 :Date: |today|
 
+..  warning:: This is the manual for **developers**.
 
 .. toctree::
    :maxdepth: 2

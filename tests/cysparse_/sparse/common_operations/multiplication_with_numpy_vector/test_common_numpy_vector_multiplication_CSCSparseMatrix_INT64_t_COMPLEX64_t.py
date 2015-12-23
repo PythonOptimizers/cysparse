@@ -21,6 +21,7 @@ We tests:
 - Vector multiplication operations:
     * ``matvec()``;
     * ``matvec_transp()``;
+    * ``matvec_htransp()``;
 
 and this for all combinations of indices and element types.
 
@@ -92,7 +93,7 @@ class CySparseCommonNumpyVectorMultiplication_CSCSparseMatrix_INT64_t_COMPLEX64_
 
 
 # ======================================================================================================================
-    def test_numpy_vector_matvec_transp_element_by_element(self):
+    def test_numpy_vector_matvec_htransp_element_by_element(self):
         """
         Test ``matvec_htransp``.
         """
@@ -149,6 +150,20 @@ class CySparseCommonNumpyVectorMultiplication_Symmetric_CSCSparseMatrix_INT64_t_
 
 
 
+# ======================================================================================================================
+    def test_numpy_vector_matvec_htransp_element_by_element(self):
+        """
+        Test ``matvec_htransp``.
+        """
+
+        result_with_A = self.A.matvec_htransp(self.x)
+        result_with_C = self.C.matvec_htransp(self.x)
+
+        for i in range(self.size):
+            self.assertTrue(result_with_A[i] == result_with_C[i])
+
+
+
 ##################################
 # Case Non Symmetric, Zero
 ##################################
@@ -195,6 +210,19 @@ class CySparseCommonNumpyVectorMultiplication_WithZeroCSCSparseMatrix_INT64_t_CO
 
 
 
+# ======================================================================================================================
+    def test_numpy_vector_matvec_htransp_element_by_element(self):
+        """
+        Test ``matvec_htransp``.
+        """
+
+        result_with_A = self.A.matvec_htransp(self.y)
+        result_with_C = self.C.matvec_htransp(self.y)
+
+        for j in range(self.ncol):
+            self.assertTrue(result_with_A[j] == result_with_C[j])
+
+
 ##################################
 # Case Symmetric, Zero
 ##################################
@@ -233,6 +261,20 @@ class CySparseCommonNumpyVectorMultiplication_Symmetric_WithZero_CSCSparseMatrix
 
         result_with_A = self.A.matvec_transp(self.x)
         result_with_C = self.C.matvec_transp(self.x)
+
+        for i in range(self.size):
+            self.assertTrue(result_with_A[i] == result_with_C[i])
+
+
+
+# ======================================================================================================================
+    def test_numpy_vector_matvec_htransp_element_by_element(self):
+        """
+        Test ``matvec_htransp``.
+        """
+
+        result_with_A = self.A.matvec_htransp(self.x)
+        result_with_C = self.C.matvec_htransp(self.x)
 
         for i in range(self.size):
             self.assertTrue(result_with_A[i] == result_with_C[i])
@@ -300,6 +342,19 @@ class CySparseCommonNumpyVectorWithStrideMultiplication_CSCSparseMatrix_INT64_t_
 
 
 
+# ======================================================================================================================
+    def test_numpy_vector_matvec_htransp_element_by_element(self):
+        """
+        Test ``matvec_htransp``.
+        """
+
+        result_with_A = self.A.matvec_htransp(self.y)
+        result_with_C = self.C.matvec_htransp(self.y_strided[::self.stride_factor])
+
+        for j in range(self.ncol):
+            self.assertTrue(result_with_A[j] == result_with_C[j])
+
+
 ##################################
 # Case Symmetric, Non Zero
 ##################################
@@ -348,6 +403,19 @@ class CySparseCommonNumpyVectorWithStrideMultiplication_Symmetric_CSCSparseMatri
         for j in range(self.size):
             self.assertTrue(result_with_A[j] == result_with_C[j])
 
+
+
+# ======================================================================================================================
+    def test_numpy_vector_matvec_htransp_element_by_element(self):
+        """
+        Test ``matvec_htransp``.
+        """
+
+        result_with_A = self.A.matvec_htransp(self.x)
+        result_with_C = self.C.matvec_htransp(self.x_strided[::self.stride_factor])
+
+        for j in range(self.size):
+            self.assertTrue(result_with_A[j] == result_with_C[j])
 
 
 
@@ -410,6 +478,20 @@ class CySparseCommonNumpyVectorWithStrideMultiplication_WithZeroCSCSparseMatrix_
 
 
 
+# ======================================================================================================================
+    def test_numpy_vector_matvec_htransp_element_by_element(self):
+        """
+        Test ``matvec_transp``.
+        """
+
+        result_with_A = self.A.matvec_htransp(self.y)
+        result_with_C = self.C.matvec_htransp(self.y_strided[::self.stride_factor])
+
+        for j in range(self.ncol):
+            self.assertTrue(result_with_A[j] == result_with_C[j])
+
+
+
 ##################################
 # Case Symmetric, Zero
 ##################################
@@ -454,6 +536,20 @@ class CySparseCommonNumpyVectorWithStrideMultiplication_Symmetric_WithZero_CSCSp
 
         result_with_A = self.A.matvec_transp(self.x)
         result_with_C = self.C.matvec_transp(self.x_strided[::self.stride_factor])
+
+        for j in range(self.size):
+            self.assertTrue(result_with_A[j] == result_with_C[j])
+
+
+
+# ======================================================================================================================
+    def test_numpy_vector_matvec_htransp_element_by_element(self):
+        """
+        Test ``matvec_transp``.
+        """
+
+        result_with_A = self.A.matvec_htransp(self.x)
+        result_with_C = self.C.matvec_htransp(self.x_strided[::self.stride_factor])
 
         for j in range(self.size):
             self.assertTrue(result_with_A[j] == result_with_C[j])
