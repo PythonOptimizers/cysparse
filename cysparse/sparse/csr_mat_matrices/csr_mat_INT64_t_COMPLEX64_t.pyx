@@ -751,19 +751,13 @@ cdef class CSRSparseMatrix_INT64_t_COMPLEX64_t(ImmutableSparseMatrix_INT64_t_COM
     def matdot_transp(self, B):
         raise NotImplementedError("Multiplication with this kind of object not allowed")
 
-    def __mul__(self, other):
+    def __mul__(self, B):
 
-        # test if implemented
-        if isinstance(other, (MutableSparseMatrix_INT64_t_COMPLEX64_t, ImmutableSparseMatrix_INT64_t_COMPLEX64_t)):
-            pass
-        else:
-            raise NotImplemented("Multiplication not (yet) allowed")
+        if cnp.PyArray_Check(B) and B.ndim == 1:
+            return self.matvec(B)
 
-        # CASES
-        if isinstance(other, CSCSparseMatrix_INT64_t_COMPLEX64_t):
-            return multiply_csr_mat_by_csc_mat_INT64_t_COMPLEX64_t(self, other)
-        else:
-            raise NotImplemented("Multiplication not (yet) allowed")
+        return self.matdot(B)
+
 
     ####################################################################################################################
     # String representations

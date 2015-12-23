@@ -7,7 +7,7 @@ Proxies are only tested for a :class:`LLSparseMatrix` object.
 
 See file ``sparse_matrix_coherence_test_functions``.
 """
-from sparse_matrix_coherence_test_functions import common_matrix_like_attributes
+from sparse_matrix_like_common_attributes import common_matrix_like_attributes
 
 import unittest
 from cysparse.sparse.ll_mat import *

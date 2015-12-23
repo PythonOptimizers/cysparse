@@ -760,19 +760,13 @@ YOU HAVE TO EXPLICITY CAST YOUR TYPE
     def matdot_transp(self, B):
         raise NotImplementedError("Multiplication with this kind of object not allowed")
 
-    def __mul__(self, other):
+    def __mul__(self, B):
 
-        # test if implemented
-        if isinstance(other, (MutableSparseMatrix_@index@_@type@, ImmutableSparseMatrix_@index@_@type@)):
-            pass
-        else:
-            raise NotImplemented("Multiplication not (yet) allowed")
+        if cnp.PyArray_Check(B) and B.ndim == 1:
+            return self.matvec(B)
 
-        # CASES
-        if isinstance(other, CSCSparseMatrix_@index@_@type@):
-            return multiply_csr_mat_by_csc_mat_@index@_@type@(self, other)
-        else:
-            raise NotImplemented("Multiplication not (yet) allowed")
+        return self.matdot(B)
+
 
     ####################################################################################################################
     # String representations

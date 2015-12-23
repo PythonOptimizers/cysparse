@@ -159,7 +159,10 @@ cdef class ConjugatedSparseMatrix_INT32_t_COMPLEX64_t:
     # Basic operations
     ####################################################################################################################
     def __mul__(self, B):
-        raise NotImplementedError("Multiplication with this kind of object not implemented yet...")
+        if cnp.PyArray_Check(B) and B.ndim == 1:
+            return self.matvec(B)
+
+        return self.matdot(B)
 
     def matvec(self, B):
         return self.A.matvec_conj(B)
@@ -179,6 +182,9 @@ cdef class ConjugatedSparseMatrix_INT32_t_COMPLEX64_t:
     def matrix_copy(self):
         return self.A.create_conjugate()
 
+    def matdot(self, B):
+        raise NotImplementedError("Multiplication with this kind of object not implemented yet...")
+        
     ####################################################################################################################
     # String representations
     ####################################################################################################################

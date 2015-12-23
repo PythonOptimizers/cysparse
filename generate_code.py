@@ -166,8 +166,13 @@ MATRIX_PROXY_CLASSES = {'TransposedSparseMatrix' : 'sparse_proxies.t_mat',
 
 MATRIX_LIKE_CLASSES = {}
 MATRIX_LIKE_CLASSES.update(MATRIX_CLASSES)
-MATRIX_LIKE_CLASSES.update(MATRIX_VIEW_CLASSES)
 MATRIX_LIKE_CLASSES.update(MATRIX_PROXY_CLASSES)
+
+ALL_SPARSE_OBJECT = {}
+ALL_SPARSE_OBJECT.update(MATRIX_CLASSES)
+ALL_SPARSE_OBJECT.update(MATRIX_PROXY_CLASSES)
+ALL_SPARSE_OBJECT.update(MATRIX_VIEW_CLASSES)
+
 
 
 #####################################################
@@ -237,7 +242,14 @@ def generate_MM_following_index_and_element():
             yield '_%s_%s' % (index, type), GENERAL_CONTEXT
 
 
+#####################
 # Tests
+#
+# Matrices: LLSparseMatrix, CSCSparseMatrix, CSRSparseMatrix
+# Matrix-likes: Matrices + Proxies
+# Sparse-likes: Matrix-likes + Views
+#
+#####################
 def generate_following_matrix_class_and_index_and_type():
     """
     Generate files following index, element and class types.
@@ -339,6 +351,22 @@ def generate_following_matrix_like_class_and_index_and_type():
                 yield '_%s_%s_%s' % (klass, index, type), GENERAL_CONTEXT
 
 
+def generate_following_all_sparse_like_objects_class_and_index_and_type():
+    """
+    Generate files following index, element and class types.
+
+    This generator is for tests only.
+
+    """
+    for klass, directory in ALL_SPARSE_OBJECT.items():
+        GENERAL_CONTEXT['class'] = klass
+        GENERAL_CONTEXT['directory'] = directory
+        for index in INDEX_TYPES:
+            GENERAL_CONTEXT['index'] = index
+            for type in ELEMENT_TYPES:
+                GENERAL_CONTEXT['type'] = type
+                yield '_%s_%s_%s' % (klass, index, type), GENERAL_CONTEXT
+
 ###############################################################################
 # MAIN
 ###############################################################################
@@ -414,12 +442,13 @@ if __name__ == "__main__":
     # Tests
     #### SPARSE ####
     # --- common attributes ---
-    cygenja_engine.register_action('tests/cysparse_/sparse/common_attributes', 'test_common_attributes_matrices_likes.*', generate_following_matrix_like_class_and_index_and_type)
+    cygenja_engine.register_action('tests/cysparse_/sparse/common_attributes', 'test_common_attributes_matrices_likes.*', generate_following_all_sparse_like_objects_class_and_index_and_type)
     cygenja_engine.register_action('tests/cysparse_/sparse/common_attributes', 'test_explicit_is_symmetric_matrices.*', generate_following_matrix_class_and_index_and_type)
     # --- common operations ---
     # object creation
-    cygenja_engine.register_action('tests/cysparse_/sparse/common_operations/object_creation', 'test_creation*.cpy', generate_following_matrix_like_class_and_index_and_type)
-
+    cygenja_engine.register_action('tests/cysparse_/sparse/common_operations/object_creation', 'test_creation*.cpy', generate_following_all_sparse_like_objects_class_and_index_and_type)
+    # multiplication with a NumPy vector
+    cygenja_engine.register_action('tests/cysparse_/sparse/common_operations/multiplication_with_numpy_vector', 'test_common_numpy_vector_multiplication.cpy', generate_following_matrix_like_class_and_index_and_type)
 
     ####################################################################################################################
     # Generation
