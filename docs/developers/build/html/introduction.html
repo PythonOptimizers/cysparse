@@ -70,7 +70,9 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sparse_matrix_formats.html">Sparse Matrix Formats</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sparse_mat_hierarchy.html"><strong class="program">CySparse</strong>&#8216;s sparse matrix classes hierachy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code_generation.html">Code generation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cysparse_lib_mainteners.html"><strong class="program">CySparse</strong> for library maintainers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="afterthougths.html">Afterthougths</a></li>
 </ul>
 </ul>
 </li>
@@ -128,14 +130,20 @@
       
   <div class="section" id="introduction">
 <h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<p>Welcome to <strong class="program">CySparse</strong>&#8216;s developers manual!</p>
+<p><strong class="program">CySparse</strong> is a fast sparse matrix library for <strong class="program">Python</strong>/<strong class="program">Cython</strong>.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This is the manual for <strong>developers</strong>.</p>
+</div>
 <p>Maintening a library as <strong class="program">CySparse</strong> is not a small task. This is partly due to:</p>
 <ul class="simple">
 <li>the mix of several programming languages (mainly <strong class="program">Cython</strong>, <strong class="program">Python</strong> and <strong class="program">C</strong>);</li>
 <li>the use of templated source files;</li>
 <li>the use of several external tools (<a class="reference external" href="https://github.com/PythonOptimizers/cygenja">cygenja</a>, <a class="reference external" href="http://jinja.pocoo.org/">Jinja2</a>, <a class="reference external" href="http://sphinx-doc.org/">Sphinx</a>, <a class="reference external" href="https://www.latex-project.org/">LaTeX</a>, etc.);</li>
-<li>the optimized code (several chuncks are highly optimized for speed);</li>
+<li>the optimized code (several code chuncks are highly optimized for speed);</li>
 <li>the coupling with <a class="reference external" href="http://www.numpy.org/">NumPy</a>;</li>
-<li>the language <a class="reference external" href="http://cython.org/">Cython</a> that is not mature. They are doing a fantastic job but the language still has numerous bugs. If you&#8217;ve never used a compiler with bugs, welcome to this wonderful world were you might have
+<li>the language <a class="reference external" href="http://cython.org/">Cython</a> that is not really mature yet. The team behind <strong class="program">Cython</strong> is doing a fantastic job but the language still has numerous bugs. If you&#8217;ve never used a compiler with bugs, welcome to this wonderful world were you might have
 to debug the compiler as much as your code (yep!);</li>
 </ul>
 </div>

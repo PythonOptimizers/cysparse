@@ -7,21 +7,15 @@
 :Date: |today|
 
 
-Welcome to :program:`CySparse`'s developers manual!
-
-:program:`CySparse` is a fast sparse matrix library for :program:`Python`/:program:`Cython`.
-
-..  warning:: This is the manual for **developers**.
-
-
-
 .. toctree::
    :maxdepth: 2
 
    introduction
    sparse_matrix_formats
    sparse_mat_hierarchy
+   code_generation
    cysparse_lib_mainteners
+   afterthougths
    
 
 Some pages of this documentation display equations via the `jsMath

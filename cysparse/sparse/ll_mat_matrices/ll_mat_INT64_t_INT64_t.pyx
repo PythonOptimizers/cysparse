@@ -1969,6 +1969,23 @@ cdef class LLSparseMatrix_INT64_t_INT64_t(MutableSparseMatrix_INT64_t_INT64_t):
         assert are_mixed_types_compatible(INT64_T, b.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(INT64_T)
         return multiply_transposed_ll_mat_with_numpy_vector_INT64_t_INT64_t(self, b)
 
+    def matvec_htransp(self, b):
+        """
+        Return :math:`A^h * b`.
+        """
+        assert are_mixed_types_compatible(INT64_T, b.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(INT64_T)
+
+        return self.matvec_transp(b)
+
+
+    def matvec_conj(self, b):
+        """
+        Return :math:`conj(A) * b`.
+        """
+        assert are_mixed_types_compatible(INT64_T, b.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(INT64_T)
+
+        return self.matvec(b)
+
 
     def matdot(self, B):
         """

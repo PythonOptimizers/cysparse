@@ -1,12 +1,12 @@
-\BOOKMARK [0][-]{chapter.1}{Introduction to CySparse}{}% 1
+\BOOKMARK [0][-]{chapter.1}{Introduction}{}% 1
 \BOOKMARK [1][-]{section.1.1}{What is CySparse?}{chapter.1}% 2
 \BOOKMARK [1][-]{section.1.2}{Content}{chapter.1}% 3
 \BOOKMARK [1][-]{section.1.3}{PySparse legacy}{chapter.1}% 4
 \BOOKMARK [1][-]{section.1.4}{PySparse vs CySparse}{chapter.1}% 5
 \BOOKMARK [1][-]{section.1.5}{License}{chapter.1}% 6
 \BOOKMARK [0][-]{chapter.2}{CySparse installation}{}% 7
-\BOOKMARK [1][-]{section.2.1}{Installation}{chapter.2}% 8
-\BOOKMARK [1][-]{section.2.2}{Inconveniences}{chapter.2}% 9
+\BOOKMARK [1][-]{section.2.1}{Python installation mode}{chapter.2}% 8
+\BOOKMARK [1][-]{section.2.2}{Cython installation mode}{chapter.2}% 9
 \BOOKMARK [0][-]{chapter.3}{CySparse`s types}{}% 10
 \BOOKMARK [1][-]{section.3.1}{Compatibility with NumPy}{chapter.3}% 11
 \BOOKMARK [1][-]{section.3.2}{Available types}{chapter.3}% 12

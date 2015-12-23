@@ -675,3 +675,4 @@ cdef cnp.ndarray[cnp.npy_complex64, ndim=1, mode='c'] multiply__conjugate_ll_mat
                                                              A.val, A.col, A.link, A.root)
 
     return c
+

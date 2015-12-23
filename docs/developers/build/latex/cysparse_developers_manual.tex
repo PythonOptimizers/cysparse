@@ -137,6 +137,9 @@ December 23, 2015
 
 \end{description}\end{quote}
 
+
+\chapter{Introduction}
+\label{introduction:introduction}\label{introduction::doc}\label{introduction:cysparse-s-developers-manual}
 Welcome to \textbf{\texttt{CySparse}}`s developers manual!
 
 \textbf{\texttt{CySparse}} is a fast sparse matrix library for \textbf{\texttt{Python}}/\textbf{\texttt{Cython}}.
@@ -145,9 +148,6 @@ Welcome to \textbf{\texttt{CySparse}}`s developers manual!
 This is the manual for \textbf{developers}.
 \end{notice}
 
-
-\chapter{Introduction}
-\label{introduction:introduction}\label{introduction::doc}\label{introduction:cysparse-s-developers-manual}
 Maintening a library as \textbf{\texttt{CySparse}} is not a small task. This is partly due to:
 \begin{itemize}
 \item {} 
@@ -160,13 +160,13 @@ the use of templated source files;
 the use of several external tools (\href{https://github.com/PythonOptimizers/cygenja}{cygenja}, \href{http://jinja.pocoo.org/}{Jinja2}, \href{http://sphinx-doc.org/}{Sphinx}, \href{https://www.latex-project.org/}{LaTeX}, etc.);
 
 \item {} 
-the optimized code (several chuncks are highly optimized for speed);
+the optimized code (several code chuncks are highly optimized for speed);
 
 \item {} 
 the coupling with \href{http://www.numpy.org/}{NumPy};
 
 \item {} 
-the language \href{http://cython.org/}{Cython} that is not mature. They are doing a fantastic job but the language still has numerous bugs. If you've never used a compiler with bugs, welcome to this wonderful world were you might have
+the language \href{http://cython.org/}{Cython} that is not really mature yet. The team behind \textbf{\texttt{Cython}} is doing a fantastic job but the language still has numerous bugs. If you've never used a compiler with bugs, welcome to this wonderful world were you might have
 to debug the compiler as much as your code (yep!);
 
 \end{itemize}
@@ -433,6 +433,26 @@ To find all triplets \((i, j, v)\):
 
 \section{The \texttt{ImmutableSparseMatrix} class}
 \label{sparse_mat_hierarchy:the-immutablesparsematrix-class}
+
+\chapter{Code generation}
+\label{code_generation::doc}\label{code_generation:code-generation}
+
+\section{\textbf{\texttt{generate\_code}} in more details}
+\label{code_generation:generate-code-in-more-details}\label{code_generation:id1}
+To generate the whole library:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+python generate\PYGZus{}code.py \PYGZhy{}r cysparse
+\end{Verbatim}
+
+To generate a specific file, for instance the file \code{csr\_mat.cpd}:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+python generate\PYGZus{}code.py \PYGZhy{}r cysparse \PYG{l+s+s1}{\PYGZsq{}csr\PYGZus{}mat.cpd\PYGZsq{}}
+\end{Verbatim}
+
+You can use
+
 
 \chapter{\textbf{\texttt{CySparse}} for library maintainers}
 \label{cysparse_lib_mainteners:cysparse-for-library-mainteners}\label{cysparse_lib_mainteners::doc}\label{cysparse_lib_mainteners:cysparse-for-library-maintainers}
@@ -796,6 +816,11 @@ The current situation is:
 \caption{Current class hierarchy}\end{figure}
 
 which involves some code duplication and the use of global functions.
+
+
+\chapter{Afterthougths}
+\label{afterthougths::doc}\label{afterthougths:afterthougths}
+This
 
 Some pages of this documentation display equations via the \href{http://www.math.union.edu/~dpvc/jsMath/welcome.html}{jsMath} package. They should
 look reasonably good with most setups but the best rendering is obtained by

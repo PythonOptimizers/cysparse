@@ -6,10 +6,6 @@
 :Release: |version|
 :Date: |today|
 
-Welcome to :program:`CySparse`'s users manual!
-
-:program:`CySparse` is a fast sparse matrix library for :program:`Python`/:program:`Cython`.
-
 .. toctree::
    :maxdepth: 2
 

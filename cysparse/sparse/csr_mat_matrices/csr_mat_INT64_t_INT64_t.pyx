@@ -729,6 +729,23 @@ cdef class CSRSparseMatrix_INT64_t_INT64_t(ImmutableSparseMatrix_INT64_t_INT64_t
         return multiply_transposed_csr_mat_with_numpy_vector_INT64_t_INT64_t(self, b)
 
 
+    def matvec_htransp(self, b):
+        """
+        Return :math:`A^h * b`.
+        """
+        assert are_mixed_types_compatible(INT64_T, b.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(INT64_T)
+
+        return self.matvec_transp(b)
+
+
+    def matvec_conj(self, b):
+        """
+        Return :math:`\textrm{conj}(A) * b`.
+        """
+        assert are_mixed_types_compatible(INT64_T, b.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(INT64_T)
+
+        return self.matvec(b)
+
 
     def matdot(self, B):
         raise NotImplementedError("Multiplication with this kind of object not allowed")

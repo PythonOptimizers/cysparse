@@ -800,18 +800,25 @@ YOU HAVE TO EXPLICITY CAST YOUR TYPE
         """
         return multiply_transposed_csc_mat_with_numpy_vector_@index@_@type@(self, b)
 
-{% if type in complex_list %}
+
     def matvec_htransp(self, b):
         """
         Return :math:`A^h * b`.
         """
+{% if type in complex_list %}
         return multiply_conjugate_transposed_csc_mat_with_numpy_vector_@index@_@type@(self, b)
+{% else %}
+        return self.matvec_transp(b)
+{% endif %}
 
     def matvec_conj(self, b):
         """
         Return :math:`\textrm{conj}(A) * b`.
         """
+{% if type in complex_list %}
         return multiply_conjugated_csc_mat_with_numpy_vector_@index@_@type@(self, b)
+{% else %}
+        return self.matvec(b)
 {% endif %}
 
     def matdot(self, B):

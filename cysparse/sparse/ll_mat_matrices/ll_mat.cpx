@@ -2110,21 +2110,28 @@ YOU HAVE TO EXPLICITY CAST YOUR TYPE
         assert are_mixed_types_compatible(@type|type2enum@, b.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(@type|type2enum@)
         return multiply_transposed_ll_mat_with_numpy_vector_@index@_@type@(self, b)
 
-{% if type in complex_list %}
     def matvec_htransp(self, b):
         """
         Return :math:`A^h * b`.
         """
         assert are_mixed_types_compatible(@type|type2enum@, b.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(@type|type2enum@)
+{% if type in complex_list %}
         return multiply_conjugate_transposed_ll_mat_with_numpy_vector_@index@_@type@(self, b)
+{% else %}
+        return self.matvec_transp(b)
+{% endif %}
 
     def matvec_conj(self, b):
         """
         Return :math:`conj(A) * b`.
         """
         assert are_mixed_types_compatible(@type|type2enum@, b.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(@type|type2enum@)
+{% if type in complex_list %}
         return multiply__conjugate_ll_mat_with_numpy_vector_@index@_@type@(self, b)
+{% else %}
+        return self.matvec(b)
 {% endif %}
+
     def matdot(self, B):
         """
         Return :math:`A*B`.

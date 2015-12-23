@@ -137,16 +137,20 @@ December 23, 2015
 
 \end{description}\end{quote}
 
+
+\chapter{Introduction}
+\label{introduction:introduction}\label{introduction:cysparse-s-users-manual}\label{introduction::doc}
 Welcome to \textbf{\texttt{CySparse}}`s users manual!
 
-\textbf{\texttt{CySparse}} is a fast sparse matrix library for \textbf{\texttt{Python}}/\textbf{\texttt{Cython}}.
+We tried to keep this manual as simple and short as possible. You can find much more detailed information in the developer's manual.
+To see \textbf{\texttt{CySparse}} in action, you can try the tutorials written in \href{http://ipython.org/notebook.html}{IPython Notebooks} or run the examples in the
+\code{examples} directory.
 
-
-\chapter{Introduction to \textbf{\texttt{CySparse}}}
-\label{introduction:cysparse-s-users-manual}\label{introduction::doc}\label{introduction:introduction-to-cysparse}
 
 \section{What is \textbf{\texttt{CySparse}}?}
 \label{introduction:what-is-cysparse}
+\textbf{\texttt{CySparse}} is a fast sparse matrix library for \textbf{\texttt{Python}}/\textbf{\texttt{Cython}}.
+
 
 \section{Content}
 \label{introduction:content}
@@ -238,12 +242,21 @@ Compressed Sparse Row and Column Format
 
 \chapter{\textbf{\texttt{CySparse}} installation}
 \label{installation:cysparse-installation}\label{installation::doc}
-{[}TO BE REWRITTEN{]}
+There are basically \footnote{
+Some special configurations might need a complete or partial \textbf{\texttt{Cython}} source generation.
+}, two modes to install \textbf{\texttt{CySparse}}:
+\begin{itemize}
+\item {} 
+\textbf{\texttt{Python}} mode and
 
+\item {} 
+\textbf{\texttt{Cython}} mode.
 
-\section{Installation}
-\label{installation:installation}
-The installation can be done in a few simple steps:
+\end{itemize}
+
+In \textbf{\texttt{Python}} mode, you install the library as a usual \textbf{\texttt{Python}} library. In \textbf{\texttt{Cython}} mode a little bit more work is involved as you also need to generate the source code from templated files.
+
+The installation is done in a few simple steps:
 \begin{enumerate}
 \item {} 
 Clone the repository;
@@ -255,15 +268,18 @@ Install the dependencies;
 Tweak the configuration file \code{cysparse.cfg};
 
 \item {} 
-Generate the source code;
+Generate the source code if needed (i.e. in \textbf{\texttt{Cython}} mode);
 
 \item {} 
 Compile and install the library:
 
 \end{enumerate}
 
-We detail these steps in the next sections.
+We detail these steps in the next sections for both installation modes.
 
+
+\section{\textbf{\texttt{Python}} installation mode}
+\label{installation:python-installation-mode}
 
 \subsection{Clone the repository}
 \label{installation:clone-the-repository}
@@ -347,7 +363,7 @@ DEFAULT\_INDEX\_TYPE =
 
 \subsection{Generate the source code}
 \label{installation:generate-the-source-code}
-Some parts of the library source code have to be generated. We use a script:
+Some parts of the library source code have to be generated \textbf{if} you use \textbf{\texttt{Cython}} or wish to generate the code from scratch. We use a script:
 
 \begin{Verbatim}[commandchars=\\\{\}]
 python generate\PYGZus{}code.py \PYGZhy{}a
@@ -369,10 +385,13 @@ python setup.py install
 to compile and install the library.
 
 
-\section{Inconveniences}
+\section{\textbf{\texttt{Cython}} installation mode}
+\label{installation:cython-installation-mode}
+
+\subsection{Inconveniences}
 \label{installation:inconveniences}\begin{itemize}
 \item {} 
-\textbf{If} you transform the \textbf{\texttt{Cython}} code yourself, sometimes \textbf{\texttt{Cython}} can ask for a complete recompilation.
+Sometimes \textbf{\texttt{Cython}} can ask for a complete recompilation.
 Whenever this happens, it displays the following message when trying to import the library
 into \textbf{\texttt{Python}}:
 

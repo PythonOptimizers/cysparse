@@ -791,6 +791,21 @@ cdef class CSCSparseMatrix_INT32_t_INT64_t(ImmutableSparseMatrix_INT32_t_INT64_t
         return multiply_transposed_csc_mat_with_numpy_vector_INT32_t_INT64_t(self, b)
 
 
+    def matvec_htransp(self, b):
+        """
+        Return :math:`A^h * b`.
+        """
+
+        return self.matvec_transp(b)
+
+
+    def matvec_conj(self, b):
+        """
+        Return :math:`\textrm{conj}(A) * b`.
+        """
+
+        return self.matvec(b)
+
 
     def matdot(self, B):
         raise NotImplementedError("Multiplication with this kind of object not allowed")

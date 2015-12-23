@@ -1,11 +1,20 @@
 .. introduction_to_cy_sparse:
 
 ====================================
-Introduction to :program:`CySparse`
+Introduction
 ====================================
+
+Welcome to :program:`CySparse`'s users manual!
+
+We tried to keep this manual as simple and short as possible. You can find much more detailed information in the developer's manual.
+To see :program:`CySparse` in action, you can try the tutorials written in `IPython Notebooks <http://ipython.org/notebook.html>`_ or run the examples in the 
+``examples`` directory.
+
 
 What is :program:`CySparse`?
 =============================
+
+:program:`CySparse` is a fast sparse matrix library for :program:`Python`/:program:`Cython`.
 
 Content
 ========

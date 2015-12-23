@@ -31,7 +31,7 @@
     <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="CySparse 0.2.2 documentation" href="contents.html" />
     <link rel="next" title="CySparse‘s types" href="types.html" />
-    <link rel="prev" title="Introduction to CySparse" href="introduction.html" />
+    <link rel="prev" title="Introduction" href="introduction.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -67,7 +67,7 @@
   <ul class="dropdown-menu globaltoc"
       role="menu"
       aria-labelledby="dLabelGlobalToc"><ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to <strong class="program">CySparse</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href=""><strong class="program">CySparse</strong> installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="types.html"><strong class="program">CySparse</strong>&#8216;s types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cysparse_basics.html"><strong class="program">CySparse</strong>&#8216;s basics</a></li>
@@ -91,7 +91,7 @@
       role="menu"
       aria-labelledby="dLabelLocalToc"><ul>
 <li><a class="reference internal" href="#"><strong class="program">CySparse</strong> installation</a><ul>
-<li><a class="reference internal" href="#installation">Installation</a><ul>
+<li><a class="reference internal" href="#python-installation-mode"><strong class="program">Python</strong> installation mode</a><ul>
 <li><a class="reference internal" href="#clone-the-repository">Clone the repository</a></li>
 <li><a class="reference internal" href="#install-the-depencies">Install the depencies</a><ul>
 <li><a class="reference internal" href="#cysparse"><strong class="program">CySparse</strong></a></li>
@@ -105,7 +105,10 @@
 <li><a class="reference internal" href="#compile-and-install-the-library">Compile and install the library</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#cython-installation-mode"><strong class="program">Cython</strong> installation mode</a><ul>
 <li><a class="reference internal" href="#inconveniences">Inconveniences</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -117,7 +120,7 @@
               
                 
   <li>
-    <a href="introduction.html" title="Previous Chapter: Introduction to CySparse"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Introduction ...</span>
+    <a href="introduction.html" title="Previous Chapter: Introduction"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Introduction</span>
     </a>
   </li>
   <li>
@@ -151,18 +154,23 @@
       
   <div class="section" id="cysparse-installation">
 <h1><strong class="program">CySparse</strong> installation<a class="headerlink" href="#cysparse-installation" title="Permalink to this headline">¶</a></h1>
-<p>[TO BE REWRITTEN]</p>
-<div class="section" id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
-<p>The installation can be done in a few simple steps:</p>
+<p>There are basically <a class="footnote-reference" href="#tricky-installations" id="id1">[1]</a>, two modes to install <strong class="program">CySparse</strong>:</p>
+<ul class="simple">
+<li><strong class="program">Python</strong> mode and</li>
+<li><strong class="program">Cython</strong> mode.</li>
+</ul>
+<p>In <strong class="program">Python</strong> mode, you install the library as a usual <strong class="program">Python</strong> library. In <strong class="program">Cython</strong> mode a little bit more work is involved as you also need to generate the source code from templated files.</p>
+<p>The installation is done in a few simple steps:</p>
 <ol class="arabic simple">
 <li>Clone the repository;</li>
 <li>Install the dependencies;</li>
 <li>Tweak the configuration file <code class="file docutils literal"><span class="pre">cysparse.cfg</span></code>;</li>
-<li>Generate the source code;</li>
+<li>Generate the source code if needed (i.e. in <strong class="program">Cython</strong> mode);</li>
 <li>Compile and install the library:</li>
 </ol>
-<p>We detail these steps in the next sections.</p>
+<p>We detail these steps in the next sections for both installation modes.</p>
+<div class="section" id="python-installation-mode">
+<h2><strong class="program">Python</strong> installation mode<a class="headerlink" href="#python-installation-mode" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="clone-the-repository">
 <h3>Clone the repository<a class="headerlink" href="#clone-the-repository" title="Permalink to this headline">¶</a></h3>
 </div>
@@ -219,7 +227,7 @@ DEFAULT_INDEX_TYPE =</p>
 </div>
 <div class="section" id="generate-the-source-code">
 <h3>Generate the source code<a class="headerlink" href="#generate-the-source-code" title="Permalink to this headline">¶</a></h3>
-<p>Some parts of the library source code have to be generated. We use a script:</p>
+<p>Some parts of the library source code have to be generated <strong>if</strong> you use <strong class="program">Cython</strong> or wish to generate the code from scratch. We use a script:</p>
 <div class="highlight-bash"><div class="highlight"><pre>python generate_code.py -a
 </pre></div>
 </div>
@@ -235,22 +243,24 @@ DEFAULT_INDEX_TYPE =</p>
 <p>to compile and install the library.</p>
 </div>
 </div>
+<div class="section" id="cython-installation-mode">
+<h2><strong class="program">Cython</strong> installation mode<a class="headerlink" href="#cython-installation-mode" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="inconveniences">
-<h2>Inconveniences<a class="headerlink" href="#inconveniences" title="Permalink to this headline">¶</a></h2>
+<h3>Inconveniences<a class="headerlink" href="#inconveniences" title="Permalink to this headline">¶</a></h3>
 <ul>
-<li><p class="first"><strong>If</strong> you transform the <strong class="program">Cython</strong> code yourself, sometimes <strong class="program">Cython</strong> can ask for a complete recompilation.
+<li><p class="first">Sometimes <strong class="program">Cython</strong> can ask for a complete recompilation.
 Whenever this happens, it displays the following message when trying to import the library
 into <strong class="program">Python</strong>:</p>
 <div class="highlight-bash"><div class="highlight"><pre>ValueError: XXX has the wrong size, try recompiling
 </pre></div>
 </div>
 <p>where XXX is the first class that has the wrong size. The easiest way to deal with this is to recompile all the .pyx files again (you can force this by removing
-all the .c files) <a class="footnote-reference" href="#cython-try-recompiling" id="id1">[1]</a>.</p>
+all the .c files) <a class="footnote-reference" href="#cython-try-recompiling" id="id2">[2]</a>.</p>
 <p>See Robert Bradshaw&#8217;s <a class="reference external" href="https://groups.google.com/forum/?hl=en#!topic/cython-users/cOAVM0whJkY">answer</a>.
 See also <a class="reference external" href="https://github.com/cython/cython/wiki/enhancements-distutils_preprocessing">enhancements distutils_preprocessing</a>.</p>
 </li>
 <li><p class="first"><strong>If</strong> you modify the templated code, some dependencies might be missing in the (generated) <code class="docutils literal"><span class="pre">setup.py</span></code> file and require manual intervention,
-i.e. recompilation. The easiest way to go is to recompile everything from scratch <a class="footnote-reference" href="#missing-dependencies-generated-templates" id="id2">[2]</a>. First delete the generated files:</p>
+i.e. recompilation. The easiest way to go is to recompile everything from scratch <a class="footnote-reference" href="#missing-dependencies-generated-templates" id="id3">[3]</a>. First delete the generated files:</p>
 <div class="highlight-bash"><div class="highlight"><pre>python generate_code.py -ac
 </pre></div>
 </div>
@@ -261,18 +271,25 @@ i.e. recompilation. The easiest way to go is to recompile everything from scratc
 <p>This will delete <strong>all</strong> <strong class="program">C</strong> <code class="docutils literal"><span class="pre">.c</span></code> files. You can then recompile the library from scratch.</p>
 </li>
 </ul>
-<h4>Footnotes</h4><table class="docutils footnote" frame="void" id="cython-try-recompiling" rules="none">
+<h4>Footnotes</h4><table class="docutils footnote" frame="void" id="tricky-installations" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>The problem is interdependencies between source files that are not catched at compile time. Whenever <strong class="program">Cython</strong> can catch them at runtime, it throws this <code class="docutils literal"><span class="pre">ValueError</span></code>.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Some special configurations might need a complete or partial <strong class="program">Cython</strong> source generation.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="cython-try-recompiling" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td>The problem is interdependencies between source files that are not catched at compile time. Whenever <strong class="program">Cython</strong> can catch them at runtime, it throws this <code class="docutils literal"><span class="pre">ValueError</span></code>.</td></tr>
 </tbody>
 </table>
 <table class="docutils footnote" frame="void" id="missing-dependencies-generated-templates" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td>Interdependencies between generated templates are <strong>not</strong> monitored. Instead of recompiling everything from scratch, you can also simply delete the corresponding <strong class="program">Cython</strong> generated files. This will spare you some compilation time.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id3">[3]</a></td><td>Interdependencies between generated templates are <strong>not</strong> monitored. Instead of recompiling everything from scratch, you can also simply delete the corresponding <strong class="program">Cython</strong> generated files. This will spare you some compilation time.</td></tr>
 </tbody>
 </table>
+</div>
 </div>
 </div>
 

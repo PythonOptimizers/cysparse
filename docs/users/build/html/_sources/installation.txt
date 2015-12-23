@@ -4,20 +4,26 @@
 :program:`CySparse` installation
 ===================================
 
-[TO BE REWRITTEN]
+There are basically [#tricky_installations]_, two modes to install :program:`CySparse`:
 
-Installation
-==============
+- :program:`Python` mode and
+- :program:`Cython` mode.
 
-The installation can be done in a few simple steps:
+In :program:`Python` mode, you install the library as a usual :program:`Python` library. In :program:`Cython` mode a little bit more work is involved as you also need to generate the source code from templated files.
+
+
+The installation is done in a few simple steps:
 
 1. Clone the repository;
 2. Install the dependencies;
 3. Tweak the configuration file :file:`cysparse.cfg`;
-4. Generate the source code;
+4. Generate the source code if needed (i.e. in :program:`Cython` mode);
 5. Compile and install the library:
 
-We detail these steps in the next sections.
+We detail these steps in the next sections for both installation modes.
+
+:program:`Python` installation mode
+===================================
 
 Clone the repository
 ---------------------
@@ -84,7 +90,7 @@ Generate the source code
 --------------------------
 
 
-Some parts of the library source code have to be generated. We use a script:
+Some parts of the library source code have to be generated **if** you use :program:`Cython` or wish to generate the code from scratch. We use a script:
 
 ..  code-block:: bash
 
@@ -105,10 +111,14 @@ Wheter using a virtual environment or not, use the traditionnal:
 
 to compile and install the library.
 
-Inconveniences
-==============
+:program:`Cython` installation mode
+===================================
 
-- **If** you transform the :program:`Cython` code yourself, sometimes :program:`Cython` can ask for a complete recompilation. 
+
+Inconveniences
+----------------
+
+- Sometimes :program:`Cython` can ask for a complete recompilation. 
   Whenever this happens, it displays the following message when trying to import the library 
   into :program:`Python`:
 
@@ -138,11 +148,11 @@ Inconveniences
   This will delete **all** :program:`C` ``.c`` files. You can then recompile the library from scratch.
 
 
-
 ..  raw:: html
 
     <h4>Footnotes</h4>
     
+..  [#tricky_installations] Some special configurations might need a complete or partial :program:`Cython` source generation.
 
 ..  [#cython_try_recompiling] The problem is interdependencies between source files that are not catched at compile time. Whenever :program:`Cython` can catch them at runtime, it throws this ``ValueError``.
 

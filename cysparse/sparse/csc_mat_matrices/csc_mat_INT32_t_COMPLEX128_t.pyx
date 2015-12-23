@@ -796,12 +796,15 @@ cdef class CSCSparseMatrix_INT32_t_COMPLEX128_t(ImmutableSparseMatrix_INT32_t_CO
         """
         Return :math:`A^h * b`.
         """
+
         return multiply_conjugate_transposed_csc_mat_with_numpy_vector_INT32_t_COMPLEX128_t(self, b)
+
 
     def matvec_conj(self, b):
         """
         Return :math:`\textrm{conj}(A) * b`.
         """
+
         return multiply_conjugated_csc_mat_with_numpy_vector_INT32_t_COMPLEX128_t(self, b)
 
 
