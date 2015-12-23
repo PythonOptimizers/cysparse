@@ -1,18 +1,28 @@
 #!/usr/bin/env python
 
 """
-This file tests the basic multiplication operations (``matvec``) with a :program:`NumPy` vector for **all** matrix like objects.
+This file tests the basic multiplication operations with a :program:`NumPy` vector for **all** matrix like objects.
 
 Proxies are only tested for a :class:`LLSparseMatrix` object.
 
 We tests:
 
 - Matrix-like objects:
+    * Sparse Matrices;
+    * Sparse Matrix Proxies;
+
+- Optimized versions:
     * with/without Symmetry;
-    * with/without StoreZero scheme
+    * with/without StoreZero scheme;
 
 - Numpy vectors:
-    * with/without strides
+    * with/without strides;
+
+- Vector multiplication operations:
+    * ``matvec()``;
+    * ``matvec_transp()``;
+
+and this for all combinations of indices and element types.
 
 See file ``sparse_matrix_like_vector_multiplication``.
 
@@ -29,9 +39,9 @@ from cysparse.common_types.cysparse_types import *
 # Tests
 ########################################################################################################################
 
-#########################################################################
+########################################################################################################################
 # WITHOUT STRIDES IN THE NUMPY VECTORS
-#########################################################################
+########################################################################################################################
 ##################################
 # Case Non Symmetric, Non Zero
 ##################################
@@ -69,8 +79,11 @@ class CySparseCommonNumpyVectorMultiplication_@class@_@index@_@type@_TestCase(un
 YOU HAVE TO ADD YOUR NEW MATRIX TYPE HERE
 {% endif %}
 
-
+# ======================================================================================================================
     def test_numpy_vector_multiplication_element_by_element(self):
+        """
+        Test ``matvec`` through the ``*`` operator.
+        """
 {% if class == 'TransposedSparseMatrix' or class == 'ConjugateTransposedSparseMatrix' %}
         # this only works because the matrix doesn't have any imaginary term
         result_with_A = self.A.T * self.y
@@ -85,6 +98,50 @@ YOU HAVE TO ADD YOUR NEW MATRIX TYPE HERE
 
         for i in range(self.nrow):
             self.assertTrue(result_with_A[i] == result_with_C[i])
+{% endif %}
+
+# ======================================================================================================================
+    def test_numpy_vector_matvec_transp_element_by_element(self):
+        """
+        Test ``matvec_transp``.
+        """
+{% if class == 'TransposedSparseMatrix' or class == 'ConjugateTransposedSparseMatrix' %}
+        # this only works because the matrix doesn't have any imaginary term
+        result_with_A = self.A.T.matvec_transp(self.x)
+        result_with_C = self.C.matvec_transp(self.x)
+
+        for i in range(self.nrow):
+            self.assertTrue(result_with_A[i] == result_with_C[i])
+
+{% else %}
+        result_with_A = self.A.matvec_transp(self.y)
+        result_with_C = self.C.matvec_transp(self.y)
+
+        for j in range(self.ncol):
+            self.assertTrue(result_with_A[j] == result_with_C[j])
+
+{% endif %}
+
+# ======================================================================================================================
+    def test_numpy_vector_matvec_transp_element_by_element(self):
+        """
+        Test ``matvec_htransp``.
+        """
+{% if class == 'TransposedSparseMatrix' or class == 'ConjugateTransposedSparseMatrix' %}
+        # this only works because the matrix doesn't have any imaginary term
+        result_with_A = self.A.T.matvec_htransp(self.x)
+        result_with_C = self.C.matvec_htransp(self.x)
+
+        for i in range(self.nrow):
+            self.assertTrue(result_with_A[i] == result_with_C[i])
+
+{% else %}
+        result_with_A = self.A.matvec_htransp(self.y)
+        result_with_C = self.C.matvec_htransp(self.y)
+
+        for j in range(self.ncol):
+            self.assertTrue(result_with_A[j] == result_with_C[j])
+
 {% endif %}
 
 ##################################
@@ -121,7 +178,7 @@ class CySparseCommonNumpyVectorMultiplication_Symmetric_@class@_@index@_@type@_T
 YOU HAVE TO ADD YOUR NEW MATRIX TYPE HERE
 {% endif %}
 
-
+# ======================================================================================================================
     def test_numpy_vector_multiplication_element_by_element(self):
 {% if class == 'TransposedSparseMatrix' or class == 'ConjugateTransposedSparseMatrix' %}
         result_with_A = self.A.T * self.x
@@ -136,6 +193,28 @@ YOU HAVE TO ADD YOUR NEW MATRIX TYPE HERE
 
         for i in range(self.size):
             self.assertTrue(result_with_A[i] == result_with_C[i])
+{% endif %}
+
+# ======================================================================================================================
+    def test_numpy_vector_matvec_transp_element_by_element(self):
+        """
+        Test ``matvec_transp``.
+        """
+{% if class == 'TransposedSparseMatrix' or class == 'ConjugateTransposedSparseMatrix' %}
+        # this only works because the matrix doesn't have any imaginary term
+        result_with_A = self.A.T.matvec_transp(self.x)
+        result_with_C = self.C.matvec_transp(self.x)
+
+        for i in range(self.size):
+            self.assertTrue(result_with_A[i] == result_with_C[i])
+
+{% else %}
+        result_with_A = self.A.matvec_transp(self.x)
+        result_with_C = self.C.matvec_transp(self.x)
+
+        for i in range(self.size):
+            self.assertTrue(result_with_A[i] == result_with_C[i])
+
 {% endif %}
 
 ##################################
@@ -175,7 +254,7 @@ class CySparseCommonNumpyVectorMultiplication_WithZero@class@_@index@_@type@_Tes
 YOU HAVE TO ADD YOUR NEW MATRIX TYPE HERE
 {% endif %}
 
-
+# ======================================================================================================================
     def test_numpy_vector_multiplication_element_by_element(self):
 {% if class == 'TransposedSparseMatrix' or class == 'ConjugateTransposedSparseMatrix' %}
         result_with_A = self.A.T * self.y
@@ -190,6 +269,28 @@ YOU HAVE TO ADD YOUR NEW MATRIX TYPE HERE
 
         for i in range(self.nrow):
             self.assertTrue(result_with_A[i] == result_with_C[i])
+{% endif %}
+
+# ======================================================================================================================
+    def test_numpy_vector_matvec_transp_element_by_element(self):
+        """
+        Test ``matvec_transp``.
+        """
+{% if class == 'TransposedSparseMatrix' or class == 'ConjugateTransposedSparseMatrix' %}
+        # this only works because the matrix doesn't have any imaginary term
+        result_with_A = self.A.T.matvec_transp(self.x)
+        result_with_C = self.C.matvec_transp(self.x)
+
+        for i in range(self.nrow):
+            self.assertTrue(result_with_A[i] == result_with_C[i])
+
+{% else %}
+        result_with_A = self.A.matvec_transp(self.y)
+        result_with_C = self.C.matvec_transp(self.y)
+
+        for j in range(self.ncol):
+            self.assertTrue(result_with_A[j] == result_with_C[j])
+
 {% endif %}
 
 ##################################
@@ -226,7 +327,7 @@ class CySparseCommonNumpyVectorMultiplication_Symmetric_WithZero_@class@_@index@
 YOU HAVE TO ADD YOUR NEW MATRIX TYPE HERE
 {% endif %}
 
-
+# ======================================================================================================================
     def test_numpy_vector_multiplication_element_by_element(self):
 {% if class == 'TransposedSparseMatrix' or class == 'ConjugateTransposedSparseMatrix' %}
         result_with_A = self.A.T * self.x
@@ -243,9 +344,31 @@ YOU HAVE TO ADD YOUR NEW MATRIX TYPE HERE
             self.assertTrue(result_with_A[i] == result_with_C[i])
 {% endif %}
 
-#########################################################################
+# ======================================================================================================================
+    def test_numpy_vector_matvec_transp_element_by_element(self):
+        """
+        Test ``matvec_transp``.
+        """
+{% if class == 'TransposedSparseMatrix' or class == 'ConjugateTransposedSparseMatrix' %}
+        # this only works because the matrix doesn't have any imaginary term
+        result_with_A = self.A.T.matvec_transp(self.x)
+        result_with_C = self.C.matvec_transp(self.x)
+
+        for i in range(self.size):
+            self.assertTrue(result_with_A[i] == result_with_C[i])
+
+{% else %}
+        result_with_A = self.A.matvec_transp(self.x)
+        result_with_C = self.C.matvec_transp(self.x)
+
+        for i in range(self.size):
+            self.assertTrue(result_with_A[i] == result_with_C[i])
+
+{% endif %}
+
+########################################################################################################################
 # WITH STRIDES IN THE NUMPY VECTORS
-#########################################################################
+########################################################################################################################
 ##################################
 # Case Non Symmetric, Non Zero
 ##################################
@@ -297,7 +420,7 @@ class CySparseCommonNumpyVectorWithStrideMultiplication_@class@_@index@_@type@_T
 YOU HAVE TO ADD YOUR NEW MATRIX TYPE HERE
 {% endif %}
 
-
+# ======================================================================================================================
     def test_numpy_vector_multiplication_element_by_element(self):
 {% if class == 'TransposedSparseMatrix' or class == 'ConjugateTransposedSparseMatrix' %}
         # this only works because the matrix doesn't have any imaginary term
@@ -313,6 +436,28 @@ YOU HAVE TO ADD YOUR NEW MATRIX TYPE HERE
 
         for i in range(self.nrow):
             self.assertTrue(result_with_A[i] == result_with_C[i])
+{% endif %}
+
+# ======================================================================================================================
+    def test_numpy_vector_matvec_transp_element_by_element(self):
+        """
+        Test ``matvec_transp``.
+        """
+{% if class == 'TransposedSparseMatrix' or class == 'ConjugateTransposedSparseMatrix' %}
+        # this only works because the matrix doesn't have any imaginary term
+        result_with_A = self.A.T.matvec_transp(self.x)
+        result_with_C = self.C.matvec_transp(self.x_strided[::self.stride_factor])
+
+        for i in range(self.nrow):
+            self.assertTrue(result_with_A[i] == result_with_C[i])
+
+{% else %}
+        result_with_A = self.A.matvec_transp(self.y)
+        result_with_C = self.C.matvec_transp(self.y_strided[::self.stride_factor])
+
+        for j in range(self.ncol):
+            self.assertTrue(result_with_A[j] == result_with_C[j])
+
 {% endif %}
 
 ##################################
@@ -356,7 +501,7 @@ class CySparseCommonNumpyVectorWithStrideMultiplication_Symmetric_@class@_@index
 YOU HAVE TO ADD YOUR NEW MATRIX TYPE HERE
 {% endif %}
 
-
+# ======================================================================================================================
     def test_numpy_vector_multiplication_element_by_element(self):
 {% if class == 'TransposedSparseMatrix' or class == 'ConjugateTransposedSparseMatrix' %}
         result_with_A = self.A.T * self.x
@@ -372,6 +517,29 @@ YOU HAVE TO ADD YOUR NEW MATRIX TYPE HERE
         for i in range(self.size):
             self.assertTrue(result_with_A[i] == result_with_C[i])
 {% endif %}
+
+# ======================================================================================================================
+    def test_numpy_vector_matvec_transp_element_by_element(self):
+        """
+        Test ``matvec_transp``.
+        """
+{% if class == 'TransposedSparseMatrix' or class == 'ConjugateTransposedSparseMatrix' %}
+        # this only works because the matrix doesn't have any imaginary term
+        result_with_A = self.A.T.matvec_transp(self.x)
+        result_with_C = self.C.matvec_transp(self.x_strided[::self.stride_factor])
+
+        for i in range(self.size):
+            self.assertTrue(result_with_A[i] == result_with_C[i])
+
+{% else %}
+        result_with_A = self.A.matvec_transp(self.x)
+        result_with_C = self.C.matvec_transp(self.x_strided[::self.stride_factor])
+
+        for j in range(self.size):
+            self.assertTrue(result_with_A[j] == result_with_C[j])
+
+{% endif %}
+
 
 ##################################
 # Case Non Symmetric, Zero
@@ -425,7 +593,7 @@ class CySparseCommonNumpyVectorWithStrideMultiplication_WithZero@class@_@index@_
 YOU HAVE TO ADD YOUR NEW MATRIX TYPE HERE
 {% endif %}
 
-
+# ======================================================================================================================
     def test_numpy_vector_multiplication_element_by_element(self):
 {% if class == 'TransposedSparseMatrix' or class == 'ConjugateTransposedSparseMatrix' %}
         result_with_A = self.A.T * self.y
@@ -440,6 +608,28 @@ YOU HAVE TO ADD YOUR NEW MATRIX TYPE HERE
 
         for i in range(self.nrow):
             self.assertTrue(result_with_A[i] == result_with_C[i])
+{% endif %}
+
+# ======================================================================================================================
+    def test_numpy_vector_matvec_transp_element_by_element(self):
+        """
+        Test ``matvec_transp``.
+        """
+{% if class == 'TransposedSparseMatrix' or class == 'ConjugateTransposedSparseMatrix' %}
+        # this only works because the matrix doesn't have any imaginary term
+        result_with_A = self.A.T.matvec_transp(self.x)
+        result_with_C = self.C.matvec_transp(self.x_strided[::self.stride_factor])
+
+        for i in range(self.nrow):
+            self.assertTrue(result_with_A[i] == result_with_C[i])
+
+{% else %}
+        result_with_A = self.A.matvec_transp(self.y)
+        result_with_C = self.C.matvec_transp(self.y_strided[::self.stride_factor])
+
+        for j in range(self.ncol):
+            self.assertTrue(result_with_A[j] == result_with_C[j])
+
 {% endif %}
 
 ##################################
@@ -483,7 +673,7 @@ class CySparseCommonNumpyVectorWithStrideMultiplication_Symmetric_WithZero_@clas
 YOU HAVE TO ADD YOUR NEW MATRIX TYPE HERE
 {% endif %}
 
-
+# ======================================================================================================================
     def test_numpy_vector_multiplication_element_by_element(self):
 {% if class == 'TransposedSparseMatrix' or class == 'ConjugateTransposedSparseMatrix' %}
         result_with_A = self.A.T * self.x
@@ -500,6 +690,27 @@ YOU HAVE TO ADD YOUR NEW MATRIX TYPE HERE
             self.assertTrue(result_with_A[i] == result_with_C[i])
 {% endif %}
 
+# ======================================================================================================================
+    def test_numpy_vector_matvec_transp_element_by_element(self):
+        """
+        Test ``matvec_transp``.
+        """
+{% if class == 'TransposedSparseMatrix' or class == 'ConjugateTransposedSparseMatrix' %}
+        # this only works because the matrix doesn't have any imaginary term
+        result_with_A = self.A.T.matvec_transp(self.x)
+        result_with_C = self.C.matvec_transp(self.x_strided[::self.stride_factor])
+
+        for i in range(self.size):
+            self.assertTrue(result_with_A[i] == result_with_C[i])
+
+{% else %}
+        result_with_A = self.A.matvec_transp(self.x)
+        result_with_C = self.C.matvec_transp(self.x_strided[::self.stride_factor])
+
+        for j in range(self.size):
+            self.assertTrue(result_with_A[j] == result_with_C[j])
+
+{% endif %}
 
 if __name__ == '__main__':
     unittest.main()

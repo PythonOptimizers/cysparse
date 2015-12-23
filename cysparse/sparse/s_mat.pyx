@@ -213,8 +213,8 @@ cdef class SparseMatrix:
             b: A :program:`NumPy` vector.
 
         """
-        if not is_complex_type(self.cp_type.dtype):
-            raise TypeError("This operation is only valid for complex matrices")
+        #if not is_complex_type(self.cp_type.dtype):
+        #    raise TypeError("This operation is only valid for complex matrices")
 
         raise NotImplementedError("Operation not implemented (yet). Please report.")
 
@@ -227,8 +227,8 @@ cdef class SparseMatrix:
             b: A :program:`NumPy` vector.
 
         """
-        if not is_complex_type(self.cp_type.dtype):
-            raise TypeError("This operation is only valid for complex matrices")
+        #if not is_complex_type(self.cp_type.dtype):
+        #    raise TypeError("This operation is only valid for complex matrices")
 
         raise NotImplementedError("Operation not implemented (yet). Please report.")
 
@@ -263,8 +263,8 @@ cdef class SparseMatrix:
             B:
 
         """
-        if not is_complex_type(self.cp_type.dtype):
-            raise TypeError("This operation is only valid for complex matrices")
+        #if not is_complex_type(self.cp_type.dtype):
+        #    raise TypeError("This operation is only valid for complex matrices")
 
         raise NotImplementedError("Operation not implemented (yet). Please report.")
 
@@ -276,8 +276,8 @@ cdef class SparseMatrix:
             B:
 
         """
-        if not is_complex_type(self.cp_type.dtype):
-            raise TypeError("This operation is only valid for complex matrices")
+        #if not is_complex_type(self.cp_type.dtype):
+        #    raise TypeError("This operation is only valid for complex matrices")
 
         raise NotImplementedError("Operation not implemented (yet). Please report.")
 

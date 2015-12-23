@@ -553,7 +553,7 @@ cdef cnp.ndarray[cnp.@type|cysparse_type_to_numpy_c_type@, ndim=1, mode='c'] mul
 
     return c
 
-{% if type in complex_list %}
+
 ######################
 # A^h * b
 ######################
@@ -676,4 +676,3 @@ cdef cnp.ndarray[cnp.@type|cysparse_type_to_numpy_c_type@, ndim=1, mode='c'] mul
 
     return c
 
-{% endif %}

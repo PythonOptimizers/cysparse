@@ -1,18 +1,28 @@
 #!/usr/bin/env python
 
 """
-This file tests the basic multiplication operations (``matvec``) with a :program:`NumPy` vector for **all** matrix like objects.
+This file tests the basic multiplication operations with a :program:`NumPy` vector for **all** matrix like objects.
 
 Proxies are only tested for a :class:`LLSparseMatrix` object.
 
 We tests:
 
 - Matrix-like objects:
+    * Sparse Matrices;
+    * Sparse Matrix Proxies;
+
+- Optimized versions:
     * with/without Symmetry;
-    * with/without StoreZero scheme
+    * with/without StoreZero scheme;
 
 - Numpy vectors:
-    * with/without strides
+    * with/without strides;
+
+- Vector multiplication operations:
+    * ``matvec()``;
+    * ``matvec_transp()``;
+
+and this for all combinations of indices and element types.
 
 See file ``sparse_matrix_like_vector_multiplication``.
 
@@ -29,9 +39,9 @@ from cysparse.common_types.cysparse_types import *
 # Tests
 ########################################################################################################################
 
-#########################################################################
+########################################################################################################################
 # WITHOUT STRIDES IN THE NUMPY VECTORS
-#########################################################################
+########################################################################################################################
 ##################################
 # Case Non Symmetric, Non Zero
 ##################################
@@ -54,14 +64,45 @@ class CySparseCommonNumpyVectorMultiplication_LLSparseMatrix_INT32_t_FLOAT128_t_
         self.C = self.A
 
 
-
+# ======================================================================================================================
     def test_numpy_vector_multiplication_element_by_element(self):
+        """
+        Test ``matvec`` through the ``*`` operator.
+        """
 
         result_with_A = self.A * self.x
         result_with_C = self.C * self.x
 
         for i in range(self.nrow):
             self.assertTrue(result_with_A[i] == result_with_C[i])
+
+
+# ======================================================================================================================
+    def test_numpy_vector_matvec_transp_element_by_element(self):
+        """
+        Test ``matvec_transp``.
+        """
+
+        result_with_A = self.A.matvec_transp(self.y)
+        result_with_C = self.C.matvec_transp(self.y)
+
+        for j in range(self.ncol):
+            self.assertTrue(result_with_A[j] == result_with_C[j])
+
+
+
+# ======================================================================================================================
+    def test_numpy_vector_matvec_transp_element_by_element(self):
+        """
+        Test ``matvec_htransp``.
+        """
+
+        result_with_A = self.A.matvec_htransp(self.y)
+        result_with_C = self.C.matvec_htransp(self.y)
+
+        for j in range(self.ncol):
+            self.assertTrue(result_with_A[j] == result_with_C[j])
+
 
 
 ##################################
@@ -84,7 +125,7 @@ class CySparseCommonNumpyVectorMultiplication_Symmetric_LLSparseMatrix_INT32_t_F
         self.C = self.A
 
 
-
+# ======================================================================================================================
     def test_numpy_vector_multiplication_element_by_element(self):
 
         result_with_A = self.A * self.x
@@ -92,6 +133,20 @@ class CySparseCommonNumpyVectorMultiplication_Symmetric_LLSparseMatrix_INT32_t_F
 
         for i in range(self.size):
             self.assertTrue(result_with_A[i] == result_with_C[i])
+
+
+# ======================================================================================================================
+    def test_numpy_vector_matvec_transp_element_by_element(self):
+        """
+        Test ``matvec_transp``.
+        """
+
+        result_with_A = self.A.matvec_transp(self.x)
+        result_with_C = self.C.matvec_transp(self.x)
+
+        for i in range(self.size):
+            self.assertTrue(result_with_A[i] == result_with_C[i])
+
 
 
 ##################################
@@ -116,7 +171,7 @@ class CySparseCommonNumpyVectorMultiplication_WithZeroLLSparseMatrix_INT32_t_FLO
         self.C = self.A
 
 
-
+# ======================================================================================================================
     def test_numpy_vector_multiplication_element_by_element(self):
 
         result_with_A = self.A * self.x
@@ -124,6 +179,20 @@ class CySparseCommonNumpyVectorMultiplication_WithZeroLLSparseMatrix_INT32_t_FLO
 
         for i in range(self.nrow):
             self.assertTrue(result_with_A[i] == result_with_C[i])
+
+
+# ======================================================================================================================
+    def test_numpy_vector_matvec_transp_element_by_element(self):
+        """
+        Test ``matvec_transp``.
+        """
+
+        result_with_A = self.A.matvec_transp(self.y)
+        result_with_C = self.C.matvec_transp(self.y)
+
+        for j in range(self.ncol):
+            self.assertTrue(result_with_A[j] == result_with_C[j])
+
 
 
 ##################################
@@ -146,7 +215,7 @@ class CySparseCommonNumpyVectorMultiplication_Symmetric_WithZero_LLSparseMatrix_
         self.C = self.A
 
 
-
+# ======================================================================================================================
     def test_numpy_vector_multiplication_element_by_element(self):
 
         result_with_A = self.A * self.x
@@ -156,9 +225,23 @@ class CySparseCommonNumpyVectorMultiplication_Symmetric_WithZero_LLSparseMatrix_
             self.assertTrue(result_with_A[i] == result_with_C[i])
 
 
-#########################################################################
+# ======================================================================================================================
+    def test_numpy_vector_matvec_transp_element_by_element(self):
+        """
+        Test ``matvec_transp``.
+        """
+
+        result_with_A = self.A.matvec_transp(self.x)
+        result_with_C = self.C.matvec_transp(self.x)
+
+        for i in range(self.size):
+            self.assertTrue(result_with_A[i] == result_with_C[i])
+
+
+
+########################################################################################################################
 # WITH STRIDES IN THE NUMPY VECTORS
-#########################################################################
+########################################################################################################################
 ##################################
 # Case Non Symmetric, Non Zero
 ##################################
@@ -193,7 +276,7 @@ class CySparseCommonNumpyVectorWithStrideMultiplication_LLSparseMatrix_INT32_t_F
         self.C = self.A
 
 
-
+# ======================================================================================================================
     def test_numpy_vector_multiplication_element_by_element(self):
 
         result_with_A = self.A * self.x
@@ -201,6 +284,20 @@ class CySparseCommonNumpyVectorWithStrideMultiplication_LLSparseMatrix_INT32_t_F
 
         for i in range(self.nrow):
             self.assertTrue(result_with_A[i] == result_with_C[i])
+
+
+# ======================================================================================================================
+    def test_numpy_vector_matvec_transp_element_by_element(self):
+        """
+        Test ``matvec_transp``.
+        """
+
+        result_with_A = self.A.matvec_transp(self.y)
+        result_with_C = self.C.matvec_transp(self.y_strided[::self.stride_factor])
+
+        for j in range(self.ncol):
+            self.assertTrue(result_with_A[j] == result_with_C[j])
+
 
 
 ##################################
@@ -229,7 +326,7 @@ class CySparseCommonNumpyVectorWithStrideMultiplication_Symmetric_LLSparseMatrix
         self.C = self.A
 
 
-
+# ======================================================================================================================
     def test_numpy_vector_multiplication_element_by_element(self):
 
         result_with_A = self.A * self.x
@@ -237,6 +334,21 @@ class CySparseCommonNumpyVectorWithStrideMultiplication_Symmetric_LLSparseMatrix
 
         for i in range(self.size):
             self.assertTrue(result_with_A[i] == result_with_C[i])
+
+
+# ======================================================================================================================
+    def test_numpy_vector_matvec_transp_element_by_element(self):
+        """
+        Test ``matvec_transp``.
+        """
+
+        result_with_A = self.A.matvec_transp(self.x)
+        result_with_C = self.C.matvec_transp(self.x_strided[::self.stride_factor])
+
+        for j in range(self.size):
+            self.assertTrue(result_with_A[j] == result_with_C[j])
+
+
 
 
 ##################################
@@ -274,7 +386,7 @@ class CySparseCommonNumpyVectorWithStrideMultiplication_WithZeroLLSparseMatrix_I
         self.C = self.A
 
 
-
+# ======================================================================================================================
     def test_numpy_vector_multiplication_element_by_element(self):
 
         result_with_A = self.A * self.x
@@ -282,6 +394,20 @@ class CySparseCommonNumpyVectorWithStrideMultiplication_WithZeroLLSparseMatrix_I
 
         for i in range(self.nrow):
             self.assertTrue(result_with_A[i] == result_with_C[i])
+
+
+# ======================================================================================================================
+    def test_numpy_vector_matvec_transp_element_by_element(self):
+        """
+        Test ``matvec_transp``.
+        """
+
+        result_with_A = self.A.matvec_transp(self.y)
+        result_with_C = self.C.matvec_transp(self.y_strided[::self.stride_factor])
+
+        for j in range(self.ncol):
+            self.assertTrue(result_with_A[j] == result_with_C[j])
+
 
 
 ##################################
@@ -310,7 +436,7 @@ class CySparseCommonNumpyVectorWithStrideMultiplication_Symmetric_WithZero_LLSpa
         self.C = self.A
 
 
-
+# ======================================================================================================================
     def test_numpy_vector_multiplication_element_by_element(self):
 
         result_with_A = self.A * self.x
@@ -318,6 +444,19 @@ class CySparseCommonNumpyVectorWithStrideMultiplication_Symmetric_WithZero_LLSpa
 
         for i in range(self.size):
             self.assertTrue(result_with_A[i] == result_with_C[i])
+
+
+# ======================================================================================================================
+    def test_numpy_vector_matvec_transp_element_by_element(self):
+        """
+        Test ``matvec_transp``.
+        """
+
+        result_with_A = self.A.matvec_transp(self.x)
+        result_with_C = self.C.matvec_transp(self.x_strided[::self.stride_factor])
+
+        for j in range(self.size):
+            self.assertTrue(result_with_A[j] == result_with_C[j])
 
 
 

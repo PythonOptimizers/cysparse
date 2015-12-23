@@ -176,13 +176,9 @@ cdef class TransposedSparseMatrix:
         return self.A.matvec(B)
 
     def matvec_htransp(self, B):
-        if not is_complex_type(self.A.cp_type.dtype):
-            raise TypeError("This operation is only valid for complex matrices")
         return self.A.matvec_conj(B)
 
     def matvec_conj(self, B):
-        if not is_complex_type(self.A.cp_type.dtype):
-            raise TypeError("This operation is only valid for complex matrices")
         return self.A.matvec_htransp(B)
 
     def copy(self):

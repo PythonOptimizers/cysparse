@@ -1,0 +1,865 @@
+/usr/lib/python2.7/distutils/dist.py:267: UserWarning: Unknown distribution option: 'summary'
+  warnings.warn(msg)
+running install
+running bdist_egg
+running egg_info
+writing requirements to CySparse.egg-info/requires.txt
+writing CySparse.egg-info/PKG-INFO
+writing top-level names to CySparse.egg-info/top_level.txt
+writing dependency_links to CySparse.egg-info/dependency_links.txt
+reading manifest file 'CySparse.egg-info/SOURCES.txt'
+reading manifest template 'MANIFEST.in'
+writing manifest file 'CySparse.egg-info/SOURCES.txt'
+installing library code to build/bdist.linux-x86_64/egg
+running install_lib
+running build_py
+running build_ext
+skipping 'cysparse/common_types/cysparse_types.c' Cython extension (up-to-date)
+skipping 'cysparse/common_types/cysparse_numpy_types.c' Cython extension (up-to-date)
+skipping 'cysparse/common_types/cysparse_generic_types.c' Cython extension (up-to-date)
+skipping 'cysparse/sparse/sparse_utils/generic/generate_indices_INT32_t.c' Cython extension (up-to-date)
+skipping 'cysparse/sparse/sparse_utils/generic/sort_indices_INT32_t.c' Cython extension (up-to-date)
+skipping 'cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.c' Cython extension (up-to-date)
+skipping 'cysparse/sparse/sparse_utils/generic/sort_indices_INT64_t.c' Cython extension (up-to-date)
+skipping 'cysparse/sparse/sparse_utils/generic/print_INT32_t.c' Cython extension (up-to-date)
+skipping 'cysparse/sparse/sparse_utils/generic/print_INT64_t.c' Cython extension (up-to-date)
+skipping 'cysparse/sparse/sparse_utils/generic/print_FLOAT32_t.c' Cython extension (up-to-date)
+skipping 'cysparse/sparse/sparse_utils/generic/print_FLOAT64_t.c' Cython extension (up-to-date)
+skipping 'cysparse/sparse/sparse_utils/generic/print_FLOAT128_t.c' Cython extension (up-to-date)
+skipping 'cysparse/sparse/sparse_utils/generic/print_COMPLEX64_t.c' Cython extension (up-to-date)
+skipping 'cysparse/sparse/sparse_utils/generic/print_COMPLEX128_t.c' Cython extension (up-to-date)
+skipping 'cysparse/sparse/sparse_utils/generic/find_INT32_t_INT32_t.c' Cython extension (up-to-date)
+skipping 'cysparse/sparse/sparse_utils/generic/matrix_translations_INT32_t_INT32_t.c' Cython extension (up-to-date)
+skipping 'cysparse/sparse/sparse_utils/generic/find_INT32_t_INT64_t.c' Cython extension (up-to-date)
+skipping 'cysparse/sparse/sparse_utils/generic/matrix_translations_INT32_t_INT64_t.c' Cython extension (up-to-date)
+skipping 'cysparse/sparse/sparse_utils/generic/find_INT32_t_FLOAT32_t.c' Cython extension (up-to-date)
+skipping 'cysparse/sparse/sparse_utils/generic/matrix_translations_INT32_t_FLOAT32_t.c' Cython extension (up-to-date)
+skipping 'cysparse/sparse/sparse_utils/generic/find_INT32_t_FLOAT64_t.c' Cython extension (up-to-date)
+skipping 'cysparse/sparse/sparse_utils/generic/matrix_translations_INT32_t_FLOAT64_t.c' Cython extension (up-to-date)
+skipping 'cysparse/sparse/sparse_utils/generic/find_INT32_t_FLOAT128_t.c' Cython extension (up-to-date)
+skipping 'cysparse/sparse/sparse_utils/generic/matrix_translations_INT32_t_FLOAT128_t.c' Cython extension (up-to-date)
+skipping 'cysparse/sparse/sparse_utils/generic/find_INT32_t_COMPLEX64_t.c' Cython extension (up-to-date)
+skipping 'cysparse/sparse/sparse_utils/generic/matrix_translations_INT32_t_COMPLEX64_t.c' Cython extension (up-to-date)
+skipping 'cysparse/sparse/sparse_utils/generic/find_INT32_t_COMPLEX128_t.c' Cython extension (up-to-date)
+skipping 'cysparse/sparse/sparse_utils/generic/matrix_translations_INT32_t_COMPLEX128_t.c' Cython extension (up-to-date)
+skipping 'cysparse/sparse/sparse_utils/generic/find_INT64_t_INT32_t.c' Cython extension (up-to-date)
+skipping 'cysparse/sparse/sparse_utils/generic/matrix_translations_INT64_t_INT32_t.c' Cython extension (up-to-date)
+skipping 'cysparse/sparse/sparse_utils/generic/find_INT64_t_INT64_t.c' Cython extension (up-to-date)
+skipping 'cysparse/sparse/sparse_utils/generic/matrix_translations_INT64_t_INT64_t.c' Cython extension (up-to-date)
+skipping 'cysparse/sparse/sparse_utils/generic/find_INT64_t_FLOAT32_t.c' Cython extension (up-to-date)
+skipping 'cysparse/sparse/sparse_utils/generic/matrix_translations_INT64_t_FLOAT32_t.c' Cython extension (up-to-date)
+skipping 'cysparse/sparse/sparse_utils/generic/find_INT64_t_FLOAT64_t.c' Cython extension (up-to-date)
+skipping 'cysparse/sparse/sparse_utils/generic/matrix_translations_INT64_t_FLOAT64_t.c' Cython extension (up-to-date)
+skipping 'cysparse/sparse/sparse_utils/generic/find_INT64_t_FLOAT128_t.c' Cython extension (up-to-date)
+skipping 'cysparse/sparse/sparse_utils/generic/matrix_translations_INT64_t_FLOAT128_t.c' Cython extension (up-to-date)
+skipping 'cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.c' Cython extension (up-to-date)
+skipping 'cysparse/sparse/sparse_utils/generic/matrix_translations_INT64_t_COMPLEX64_t.c' Cython extension (up-to-date)
+skipping 'cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX128_t.c' Cython extension (up-to-date)
+skipping 'cysparse/sparse/sparse_utils/generic/matrix_translations_INT64_t_COMPLEX128_t.c' Cython extension (up-to-date)
+skipping 'cysparse/sparse/s_mat.c' Cython extension (up-to-date)
+skipping 'cysparse/sparse/s_mat_matrices/s_mat_INT32_t_INT32_t.c' Cython extension (up-to-date)
+skipping 'cysparse/sparse/s_mat_matrices/s_mat_INT32_t_INT64_t.c' Cython extension (up-to-date)
+skipping 'cysparse/sparse/s_mat_matrices/s_mat_INT32_t_FLOAT32_t.c' Cython extension (up-to-date)
+skipping 'cysparse/sparse/s_mat_matrices/s_mat_INT32_t_FLOAT64_t.c' Cython extension (up-to-date)
+skipping 'cysparse/sparse/s_mat_matrices/s_mat_INT32_t_FLOAT128_t.c' Cython extension (up-to-date)
+skipping 'cysparse/sparse/s_mat_matrices/s_mat_INT32_t_COMPLEX64_t.c' Cython extension (up-to-date)
+skipping 'cysparse/sparse/s_mat_matrices/s_mat_INT32_t_COMPLEX128_t.c' Cython extension (up-to-date)
+skipping 'cysparse/sparse/s_mat_matrices/s_mat_INT64_t_INT32_t.c' Cython extension (up-to-date)
+skipping 'cysparse/sparse/s_mat_matrices/s_mat_INT64_t_INT64_t.c' Cython extension (up-to-date)
+skipping 'cysparse/sparse/s_mat_matrices/s_mat_INT64_t_FLOAT32_t.c' Cython extension (up-to-date)
+skipping 'cysparse/sparse/s_mat_matrices/s_mat_INT64_t_FLOAT64_t.c' Cython extension (up-to-date)
+skipping 'cysparse/sparse/s_mat_matrices/s_mat_INT64_t_FLOAT128_t.c' Cython extension (up-to-date)
+skipping 'cysparse/sparse/s_mat_matrices/s_mat_INT64_t_COMPLEX64_t.c' Cython extension (up-to-date)
+skipping 'cysparse/sparse/s_mat_matrices/s_mat_INT64_t_COMPLEX128_t.c' Cython extension (up-to-date)
+skipping 'cysparse/sparse/ll_mat.c' Cython extension (up-to-date)
+cythoning cysparse/sparse/ll_mat_matrices/ll_mat_INT32_t_INT32_t.pyx to cysparse/sparse/ll_mat_matrices/ll_mat_INT32_t_INT32_t.c
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+    cdef INT32_t * c_data = <INT32_t *> cnp.PyArray_DATA(c)
+
+    # test if b vector is C-contiguous or not
+    if cnp.PyArray_ISCONTIGUOUS(b):
+        if A.__store_symmetric:
+            multiply_conjugate_tranposed_sym_ll_mat_with_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, A_ncol, b_data, c_data, A.val, A.col, A.link, A.root)
+                                                                                           ^
+------------------------------------------------------------
+
+cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_INT32_t.pxi:600:92: undeclared name not builtin: multiply_conjugate_tranposed_sym_ll_mat_with_numpy_vector_kernel_INT32_t_INT32_t
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+    cdef INT32_t * c_data = <INT32_t *> cnp.PyArray_DATA(c)
+
+    # test if b vector is C-contiguous or not
+    if cnp.PyArray_ISCONTIGUOUS(b):
+        if A.__store_symmetric:
+            multiply_conjugate_tranposed_sym_ll_mat_with_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, A_ncol, b_data, c_data, A.val, A.col, A.link, A.root)
+                                                                                                                  ^
+------------------------------------------------------------
+
+cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_INT32_t.pxi:600:115: Cannot convert 'INT32_t *' to Python object
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+    cdef INT32_t * c_data = <INT32_t *> cnp.PyArray_DATA(c)
+
+    # test if b vector is C-contiguous or not
+    if cnp.PyArray_ISCONTIGUOUS(b):
+        if A.__store_symmetric:
+            multiply_conjugate_tranposed_sym_ll_mat_with_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, A_ncol, b_data, c_data, A.val, A.col, A.link, A.root)
+                                                                                                                          ^
+------------------------------------------------------------
+
+cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_INT32_t.pxi:600:123: Cannot convert 'INT32_t *' to Python object
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+    cdef INT32_t * c_data = <INT32_t *> cnp.PyArray_DATA(c)
+
+    # test if b vector is C-contiguous or not
+    if cnp.PyArray_ISCONTIGUOUS(b):
+        if A.__store_symmetric:
+            multiply_conjugate_tranposed_sym_ll_mat_with_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, A_ncol, b_data, c_data, A.val, A.col, A.link, A.root)
+                                                                                                                             ^
+------------------------------------------------------------
+
+cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_INT32_t.pxi:600:126: Cannot convert 'INT32_t *' to Python object
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+    cdef INT32_t * c_data = <INT32_t *> cnp.PyArray_DATA(c)
+
+    # test if b vector is C-contiguous or not
+    if cnp.PyArray_ISCONTIGUOUS(b):
+        if A.__store_symmetric:
+            multiply_conjugate_tranposed_sym_ll_mat_with_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, A_ncol, b_data, c_data, A.val, A.col, A.link, A.root)
+                                                                                                                                    ^
+------------------------------------------------------------
+
+cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_INT32_t.pxi:600:133: Cannot convert 'INT32_t *' to Python object
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+    cdef INT32_t * c_data = <INT32_t *> cnp.PyArray_DATA(c)
+
+    # test if b vector is C-contiguous or not
+    if cnp.PyArray_ISCONTIGUOUS(b):
+        if A.__store_symmetric:
+            multiply_conjugate_tranposed_sym_ll_mat_with_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, A_ncol, b_data, c_data, A.val, A.col, A.link, A.root)
+                                                                                                                                           ^
+------------------------------------------------------------
+
+cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_INT32_t.pxi:600:140: Cannot convert 'INT32_t *' to Python object
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+    cdef INT32_t * c_data = <INT32_t *> cnp.PyArray_DATA(c)
+
+    # test if b vector is C-contiguous or not
+    if cnp.PyArray_ISCONTIGUOUS(b):
+        if A.__store_symmetric:
+            multiply_conjugate_tranposed_sym_ll_mat_with_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, A_ncol, b_data, c_data, A.val, A.col, A.link, A.root)
+                                                                                                                                                   ^
+------------------------------------------------------------
+
+cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_INT32_t.pxi:600:148: Cannot convert 'INT32_t *' to Python object
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+    # test if b vector is C-contiguous or not
+    if cnp.PyArray_ISCONTIGUOUS(b):
+        if A.__store_symmetric:
+            multiply_conjugate_tranposed_sym_ll_mat_with_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, A_ncol, b_data, c_data, A.val, A.col, A.link, A.root)
+        else:
+            multiply_conjugate_tranposed_ll_mat_with_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, A_ncol, b_data, c_data,
+                                                                                       ^
+------------------------------------------------------------
+
+cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_INT32_t.pxi:602:88: undeclared name not builtin: multiply_conjugate_tranposed_ll_mat_with_numpy_vector_kernel_INT32_t_INT32_t
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+    # test if b vector is C-contiguous or not
+    if cnp.PyArray_ISCONTIGUOUS(b):
+        if A.__store_symmetric:
+            multiply_conjugate_tranposed_sym_ll_mat_with_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, A_ncol, b_data, c_data, A.val, A.col, A.link, A.root)
+        else:
+            multiply_conjugate_tranposed_ll_mat_with_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, A_ncol, b_data, c_data,
+                                                                                                              ^
+------------------------------------------------------------
+
+cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_INT32_t.pxi:602:111: Cannot convert 'INT32_t *' to Python object
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+    # test if b vector is C-contiguous or not
+    if cnp.PyArray_ISCONTIGUOUS(b):
+        if A.__store_symmetric:
+            multiply_conjugate_tranposed_sym_ll_mat_with_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, A_ncol, b_data, c_data, A.val, A.col, A.link, A.root)
+        else:
+            multiply_conjugate_tranposed_ll_mat_with_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, A_ncol, b_data, c_data,
+                                                                                                                      ^
+------------------------------------------------------------
+
+cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_INT32_t.pxi:602:119: Cannot convert 'INT32_t *' to Python object
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+    if cnp.PyArray_ISCONTIGUOUS(b):
+        if A.__store_symmetric:
+            multiply_conjugate_tranposed_sym_ll_mat_with_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, A_ncol, b_data, c_data, A.val, A.col, A.link, A.root)
+        else:
+            multiply_conjugate_tranposed_ll_mat_with_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, A_ncol, b_data, c_data,
+         A.val, A.col, A.link, A.root)
+         ^
+------------------------------------------------------------
+
+cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_INT32_t.pxi:603:10: Cannot convert 'INT32_t *' to Python object
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+    if cnp.PyArray_ISCONTIGUOUS(b):
+        if A.__store_symmetric:
+            multiply_conjugate_tranposed_sym_ll_mat_with_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, A_ncol, b_data, c_data, A.val, A.col, A.link, A.root)
+        else:
+            multiply_conjugate_tranposed_ll_mat_with_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, A_ncol, b_data, c_data,
+         A.val, A.col, A.link, A.root)
+                ^
+------------------------------------------------------------
+
+cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_INT32_t.pxi:603:17: Cannot convert 'INT32_t *' to Python object
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+    if cnp.PyArray_ISCONTIGUOUS(b):
+        if A.__store_symmetric:
+            multiply_conjugate_tranposed_sym_ll_mat_with_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, A_ncol, b_data, c_data, A.val, A.col, A.link, A.root)
+        else:
+            multiply_conjugate_tranposed_ll_mat_with_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, A_ncol, b_data, c_data,
+         A.val, A.col, A.link, A.root)
+                       ^
+------------------------------------------------------------
+
+cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_INT32_t.pxi:603:24: Cannot convert 'INT32_t *' to Python object
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+    if cnp.PyArray_ISCONTIGUOUS(b):
+        if A.__store_symmetric:
+            multiply_conjugate_tranposed_sym_ll_mat_with_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, A_ncol, b_data, c_data, A.val, A.col, A.link, A.root)
+        else:
+            multiply_conjugate_tranposed_ll_mat_with_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, A_ncol, b_data, c_data,
+         A.val, A.col, A.link, A.root)
+                               ^
+------------------------------------------------------------
+
+cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_INT32_t.pxi:603:32: Cannot convert 'INT32_t *' to Python object
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+        else:
+            multiply_conjugate_tranposed_ll_mat_with_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, A_ncol, b_data, c_data,
+         A.val, A.col, A.link, A.root)
+    else:
+        if A.__store_symmetric:
+            multiply_conjugate_tranposed_sym_ll_mat_with_strided_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, A_ncol,
+                                                                                                   ^
+------------------------------------------------------------
+
+cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_INT32_t.pxi:606:100: undeclared name not builtin: multiply_conjugate_tranposed_sym_ll_mat_with_strided_numpy_vector_kernel_INT32_t_INT32_t
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+            multiply_conjugate_tranposed_ll_mat_with_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, A_ncol, b_data, c_data,
+         A.val, A.col, A.link, A.root)
+    else:
+        if A.__store_symmetric:
+            multiply_conjugate_tranposed_sym_ll_mat_with_strided_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, A_ncol,
+                                                                 b_data, b.strides[0] / sd,
+                                                                      ^
+------------------------------------------------------------
+
+cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_INT32_t.pxi:607:71: Cannot convert 'INT32_t *' to Python object
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+         A.val, A.col, A.link, A.root)
+    else:
+        if A.__store_symmetric:
+            multiply_conjugate_tranposed_sym_ll_mat_with_strided_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, A_ncol,
+                                                                 b_data, b.strides[0] / sd,
+                                                                 c_data, c.strides[0] / sd,
+                                                                      ^
+------------------------------------------------------------
+
+cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_INT32_t.pxi:608:71: Cannot convert 'INT32_t *' to Python object
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+    else:
+        if A.__store_symmetric:
+            multiply_conjugate_tranposed_sym_ll_mat_with_strided_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, A_ncol,
+                                                                 b_data, b.strides[0] / sd,
+                                                                 c_data, c.strides[0] / sd,
+                                                                 A.val, A.col, A.link, A.root)
+                                                                 ^
+------------------------------------------------------------
+
+cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_INT32_t.pxi:609:66: Cannot convert 'INT32_t *' to Python object
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+    else:
+        if A.__store_symmetric:
+            multiply_conjugate_tranposed_sym_ll_mat_with_strided_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, A_ncol,
+                                                                 b_data, b.strides[0] / sd,
+                                                                 c_data, c.strides[0] / sd,
+                                                                 A.val, A.col, A.link, A.root)
+                                                                        ^
+------------------------------------------------------------
+
+cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_INT32_t.pxi:609:73: Cannot convert 'INT32_t *' to Python object
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+    else:
+        if A.__store_symmetric:
+            multiply_conjugate_tranposed_sym_ll_mat_with_strided_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, A_ncol,
+                                                                 b_data, b.strides[0] / sd,
+                                                                 c_data, c.strides[0] / sd,
+                                                                 A.val, A.col, A.link, A.root)
+                                                                               ^
+------------------------------------------------------------
+
+cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_INT32_t.pxi:609:80: Cannot convert 'INT32_t *' to Python object
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+    else:
+        if A.__store_symmetric:
+            multiply_conjugate_tranposed_sym_ll_mat_with_strided_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, A_ncol,
+                                                                 b_data, b.strides[0] / sd,
+                                                                 c_data, c.strides[0] / sd,
+                                                                 A.val, A.col, A.link, A.root)
+                                                                                       ^
+------------------------------------------------------------
+
+cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_INT32_t.pxi:609:88: Cannot convert 'INT32_t *' to Python object
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+            multiply_conjugate_tranposed_sym_ll_mat_with_strided_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, A_ncol,
+                                                                 b_data, b.strides[0] / sd,
+                                                                 c_data, c.strides[0] / sd,
+                                                                 A.val, A.col, A.link, A.root)
+        else:
+            multiply_conjugate_tranposed_ll_mat_with_strided_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, A_ncol,
+                                                                                               ^
+------------------------------------------------------------
+
+cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_INT32_t.pxi:611:96: undeclared name not builtin: multiply_conjugate_tranposed_ll_mat_with_strided_numpy_vector_kernel_INT32_t_INT32_t
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+                                                                 b_data, b.strides[0] / sd,
+                                                                 c_data, c.strides[0] / sd,
+                                                                 A.val, A.col, A.link, A.root)
+        else:
+            multiply_conjugate_tranposed_ll_mat_with_strided_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, A_ncol,
+                                                                                      b_data, b.strides[0] / sd,
+                                                                                           ^
+------------------------------------------------------------
+
+cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_INT32_t.pxi:612:92: Cannot convert 'INT32_t *' to Python object
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+                                                                 c_data, c.strides[0] / sd,
+                                                                 A.val, A.col, A.link, A.root)
+        else:
+            multiply_conjugate_tranposed_ll_mat_with_strided_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, A_ncol,
+                                                                                      b_data, b.strides[0] / sd,
+                                                                                      c_data, c.strides[0] / sd,
+                                                                                           ^
+------------------------------------------------------------
+
+cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_INT32_t.pxi:613:92: Cannot convert 'INT32_t *' to Python object
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+                                                                 A.val, A.col, A.link, A.root)
+        else:
+            multiply_conjugate_tranposed_ll_mat_with_strided_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, A_ncol,
+                                                                                      b_data, b.strides[0] / sd,
+                                                                                      c_data, c.strides[0] / sd,
+                                                                                      A.val, A.col, A.link, A.root)
+                                                                                      ^
+------------------------------------------------------------
+
+cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_INT32_t.pxi:614:87: Cannot convert 'INT32_t *' to Python object
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+                                                                 A.val, A.col, A.link, A.root)
+        else:
+            multiply_conjugate_tranposed_ll_mat_with_strided_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, A_ncol,
+                                                                                      b_data, b.strides[0] / sd,
+                                                                                      c_data, c.strides[0] / sd,
+                                                                                      A.val, A.col, A.link, A.root)
+                                                                                             ^
+------------------------------------------------------------
+
+cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_INT32_t.pxi:614:94: Cannot convert 'INT32_t *' to Python object
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+                                                                 A.val, A.col, A.link, A.root)
+        else:
+            multiply_conjugate_tranposed_ll_mat_with_strided_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, A_ncol,
+                                                                                      b_data, b.strides[0] / sd,
+                                                                                      c_data, c.strides[0] / sd,
+                                                                                      A.val, A.col, A.link, A.root)
+                                                                                                    ^
+------------------------------------------------------------
+
+cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_INT32_t.pxi:614:101: Cannot convert 'INT32_t *' to Python object
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+                                                                 A.val, A.col, A.link, A.root)
+        else:
+            multiply_conjugate_tranposed_ll_mat_with_strided_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, A_ncol,
+                                                                                      b_data, b.strides[0] / sd,
+                                                                                      c_data, c.strides[0] / sd,
+                                                                                      A.val, A.col, A.link, A.root)
+                                                                                                            ^
+------------------------------------------------------------
+
+cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_INT32_t.pxi:614:109: Cannot convert 'INT32_t *' to Python object
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+    cdef INT32_t * c_data = <INT32_t *> cnp.PyArray_DATA(c)
+
+    # test if b vector is C-contiguous or not
+    if cnp.PyArray_ISCONTIGUOUS(b):
+        if A.__store_symmetric:
+            multiply_conjugate_sym_ll_mat_with_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, b_data, c_data, A.val, A.col, A.link, A.root)
+                                                                                 ^
+------------------------------------------------------------
+
+cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_INT32_t.pxi:662:82: undeclared name not builtin: multiply_conjugate_sym_ll_mat_with_numpy_vector_kernel_INT32_t_INT32_t
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+    cdef INT32_t * c_data = <INT32_t *> cnp.PyArray_DATA(c)
+
+    # test if b vector is C-contiguous or not
+    if cnp.PyArray_ISCONTIGUOUS(b):
+        if A.__store_symmetric:
+            multiply_conjugate_sym_ll_mat_with_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, b_data, c_data, A.val, A.col, A.link, A.root)
+                                                                                                ^
+------------------------------------------------------------
+
+cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_INT32_t.pxi:662:97: Cannot convert 'INT32_t *' to Python object
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+    cdef INT32_t * c_data = <INT32_t *> cnp.PyArray_DATA(c)
+
+    # test if b vector is C-contiguous or not
+    if cnp.PyArray_ISCONTIGUOUS(b):
+        if A.__store_symmetric:
+            multiply_conjugate_sym_ll_mat_with_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, b_data, c_data, A.val, A.col, A.link, A.root)
+                                                                                                        ^
+------------------------------------------------------------
+
+cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_INT32_t.pxi:662:105: Cannot convert 'INT32_t *' to Python object
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+    cdef INT32_t * c_data = <INT32_t *> cnp.PyArray_DATA(c)
+
+    # test if b vector is C-contiguous or not
+    if cnp.PyArray_ISCONTIGUOUS(b):
+        if A.__store_symmetric:
+            multiply_conjugate_sym_ll_mat_with_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, b_data, c_data, A.val, A.col, A.link, A.root)
+                                                                                                           ^
+------------------------------------------------------------
+
+cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_INT32_t.pxi:662:108: Cannot convert 'INT32_t *' to Python object
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+    cdef INT32_t * c_data = <INT32_t *> cnp.PyArray_DATA(c)
+
+    # test if b vector is C-contiguous or not
+    if cnp.PyArray_ISCONTIGUOUS(b):
+        if A.__store_symmetric:
+            multiply_conjugate_sym_ll_mat_with_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, b_data, c_data, A.val, A.col, A.link, A.root)
+                                                                                                                  ^
+------------------------------------------------------------
+
+cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_INT32_t.pxi:662:115: Cannot convert 'INT32_t *' to Python object
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+    cdef INT32_t * c_data = <INT32_t *> cnp.PyArray_DATA(c)
+
+    # test if b vector is C-contiguous or not
+    if cnp.PyArray_ISCONTIGUOUS(b):
+        if A.__store_symmetric:
+            multiply_conjugate_sym_ll_mat_with_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, b_data, c_data, A.val, A.col, A.link, A.root)
+                                                                                                                         ^
+------------------------------------------------------------
+
+cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_INT32_t.pxi:662:122: Cannot convert 'INT32_t *' to Python object
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+    cdef INT32_t * c_data = <INT32_t *> cnp.PyArray_DATA(c)
+
+    # test if b vector is C-contiguous or not
+    if cnp.PyArray_ISCONTIGUOUS(b):
+        if A.__store_symmetric:
+            multiply_conjugate_sym_ll_mat_with_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, b_data, c_data, A.val, A.col, A.link, A.root)
+                                                                                                                                 ^
+------------------------------------------------------------
+
+cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_INT32_t.pxi:662:130: Cannot convert 'INT32_t *' to Python object
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+    # test if b vector is C-contiguous or not
+    if cnp.PyArray_ISCONTIGUOUS(b):
+        if A.__store_symmetric:
+            multiply_conjugate_sym_ll_mat_with_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, b_data, c_data, A.val, A.col, A.link, A.root)
+        else:
+            multiply_conjugate_ll_mat_with_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, b_data, c_data, A.val, A.col, A.link, A.root)
+                                                                             ^
+------------------------------------------------------------
+
+cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_INT32_t.pxi:664:78: undeclared name not builtin: multiply_conjugate_ll_mat_with_numpy_vector_kernel_INT32_t_INT32_t
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+    # test if b vector is C-contiguous or not
+    if cnp.PyArray_ISCONTIGUOUS(b):
+        if A.__store_symmetric:
+            multiply_conjugate_sym_ll_mat_with_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, b_data, c_data, A.val, A.col, A.link, A.root)
+        else:
+            multiply_conjugate_ll_mat_with_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, b_data, c_data, A.val, A.col, A.link, A.root)
+                                                                                            ^
+------------------------------------------------------------
+
+cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_INT32_t.pxi:664:93: Cannot convert 'INT32_t *' to Python object
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+    # test if b vector is C-contiguous or not
+    if cnp.PyArray_ISCONTIGUOUS(b):
+        if A.__store_symmetric:
+            multiply_conjugate_sym_ll_mat_with_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, b_data, c_data, A.val, A.col, A.link, A.root)
+        else:
+            multiply_conjugate_ll_mat_with_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, b_data, c_data, A.val, A.col, A.link, A.root)
+                                                                                                    ^
+------------------------------------------------------------
+
+cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_INT32_t.pxi:664:101: Cannot convert 'INT32_t *' to Python object
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+    # test if b vector is C-contiguous or not
+    if cnp.PyArray_ISCONTIGUOUS(b):
+        if A.__store_symmetric:
+            multiply_conjugate_sym_ll_mat_with_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, b_data, c_data, A.val, A.col, A.link, A.root)
+        else:
+            multiply_conjugate_ll_mat_with_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, b_data, c_data, A.val, A.col, A.link, A.root)
+                                                                                                       ^
+------------------------------------------------------------
+
+cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_INT32_t.pxi:664:104: Cannot convert 'INT32_t *' to Python object
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+    # test if b vector is C-contiguous or not
+    if cnp.PyArray_ISCONTIGUOUS(b):
+        if A.__store_symmetric:
+            multiply_conjugate_sym_ll_mat_with_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, b_data, c_data, A.val, A.col, A.link, A.root)
+        else:
+            multiply_conjugate_ll_mat_with_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, b_data, c_data, A.val, A.col, A.link, A.root)
+                                                                                                              ^
+------------------------------------------------------------
+
+cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_INT32_t.pxi:664:111: Cannot convert 'INT32_t *' to Python object
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+    # test if b vector is C-contiguous or not
+    if cnp.PyArray_ISCONTIGUOUS(b):
+        if A.__store_symmetric:
+            multiply_conjugate_sym_ll_mat_with_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, b_data, c_data, A.val, A.col, A.link, A.root)
+        else:
+            multiply_conjugate_ll_mat_with_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, b_data, c_data, A.val, A.col, A.link, A.root)
+                                                                                                                     ^
+------------------------------------------------------------
+
+cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_INT32_t.pxi:664:118: Cannot convert 'INT32_t *' to Python object
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+    # test if b vector is C-contiguous or not
+    if cnp.PyArray_ISCONTIGUOUS(b):
+        if A.__store_symmetric:
+            multiply_conjugate_sym_ll_mat_with_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, b_data, c_data, A.val, A.col, A.link, A.root)
+        else:
+            multiply_conjugate_ll_mat_with_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, b_data, c_data, A.val, A.col, A.link, A.root)
+                                                                                                                             ^
+------------------------------------------------------------
+
+cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_INT32_t.pxi:664:126: Cannot convert 'INT32_t *' to Python object
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+            multiply_conjugate_sym_ll_mat_with_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, b_data, c_data, A.val, A.col, A.link, A.root)
+        else:
+            multiply_conjugate_ll_mat_with_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, b_data, c_data, A.val, A.col, A.link, A.root)
+    else:
+        if A.__store_symmetric:
+            multiply_conjugate_sym_ll_mat_with_strided_numpy_vector_kernel_INT32_t_INT32_t(A.nrow,
+                                                                                         ^
+------------------------------------------------------------
+
+cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_INT32_t.pxi:667:90: undeclared name not builtin: multiply_conjugate_sym_ll_mat_with_strided_numpy_vector_kernel_INT32_t_INT32_t
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+        else:
+            multiply_conjugate_ll_mat_with_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, b_data, c_data, A.val, A.col, A.link, A.root)
+    else:
+        if A.__store_symmetric:
+            multiply_conjugate_sym_ll_mat_with_strided_numpy_vector_kernel_INT32_t_INT32_t(A.nrow,
+                                                                 b_data, b.strides[0] / sd,
+                                                                      ^
+------------------------------------------------------------
+
+cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_INT32_t.pxi:668:71: Cannot convert 'INT32_t *' to Python object
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+            multiply_conjugate_ll_mat_with_numpy_vector_kernel_INT32_t_INT32_t(A_nrow, b_data, c_data, A.val, A.col, A.link, A.root)
+    else:
+        if A.__store_symmetric:
+            multiply_conjugate_sym_ll_mat_with_strided_numpy_vector_kernel_INT32_t_INT32_t(A.nrow,
+                                                                 b_data, b.strides[0] / sd,
+                                                                 c_data, c.strides[0] / sd,
+                                                                      ^
+------------------------------------------------------------
+
+cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_INT32_t.pxi:669:71: Cannot convert 'INT32_t *' to Python object
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+    else:
+        if A.__store_symmetric:
+            multiply_conjugate_sym_ll_mat_with_strided_numpy_vector_kernel_INT32_t_INT32_t(A.nrow,
+                                                                 b_data, b.strides[0] / sd,
+                                                                 c_data, c.strides[0] / sd,
+                                                                 A.val, A.col, A.link, A.root)
+                                                                 ^
+------------------------------------------------------------
+
+cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_INT32_t.pxi:670:66: Cannot convert 'INT32_t *' to Python object
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+    else:
+        if A.__store_symmetric:
+            multiply_conjugate_sym_ll_mat_with_strided_numpy_vector_kernel_INT32_t_INT32_t(A.nrow,
+                                                                 b_data, b.strides[0] / sd,
+                                                                 c_data, c.strides[0] / sd,
+                                                                 A.val, A.col, A.link, A.root)
+                                                                        ^
+------------------------------------------------------------
+
+cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_INT32_t.pxi:670:73: Cannot convert 'INT32_t *' to Python object
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+    else:
+        if A.__store_symmetric:
+            multiply_conjugate_sym_ll_mat_with_strided_numpy_vector_kernel_INT32_t_INT32_t(A.nrow,
+                                                                 b_data, b.strides[0] / sd,
+                                                                 c_data, c.strides[0] / sd,
+                                                                 A.val, A.col, A.link, A.root)
+                                                                               ^
+------------------------------------------------------------
+
+cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_INT32_t.pxi:670:80: Cannot convert 'INT32_t *' to Python object
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+    else:
+        if A.__store_symmetric:
+            multiply_conjugate_sym_ll_mat_with_strided_numpy_vector_kernel_INT32_t_INT32_t(A.nrow,
+                                                                 b_data, b.strides[0] / sd,
+                                                                 c_data, c.strides[0] / sd,
+                                                                 A.val, A.col, A.link, A.root)
+                                                                                       ^
+------------------------------------------------------------
+
+cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_INT32_t.pxi:670:88: Cannot convert 'INT32_t *' to Python object
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+            multiply_conjugate_sym_ll_mat_with_strided_numpy_vector_kernel_INT32_t_INT32_t(A.nrow,
+                                                                 b_data, b.strides[0] / sd,
+                                                                 c_data, c.strides[0] / sd,
+                                                                 A.val, A.col, A.link, A.root)
+        else:
+            multiply_conjugate_ll_mat_with_strided_numpy_vector_kernel_INT32_t_INT32_t(A.nrow,
+                                                                                     ^
+------------------------------------------------------------
+
+cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_INT32_t.pxi:672:86: undeclared name not builtin: multiply_conjugate_ll_mat_with_strided_numpy_vector_kernel_INT32_t_INT32_t
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+                                                                 b_data, b.strides[0] / sd,
+                                                                 c_data, c.strides[0] / sd,
+                                                                 A.val, A.col, A.link, A.root)
+        else:
+            multiply_conjugate_ll_mat_with_strided_numpy_vector_kernel_INT32_t_INT32_t(A.nrow,
+                                                             b_data, b.strides[0] / sd,
+                                                                  ^
+------------------------------------------------------------
+
+cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_INT32_t.pxi:673:67: Cannot convert 'INT32_t *' to Python object
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+                                                                 c_data, c.strides[0] / sd,
+                                                                 A.val, A.col, A.link, A.root)
+        else:
+            multiply_conjugate_ll_mat_with_strided_numpy_vector_kernel_INT32_t_INT32_t(A.nrow,
+                                                             b_data, b.strides[0] / sd,
+                                                             c_data, c.strides[0] / sd,
+                                                                  ^
+------------------------------------------------------------
+
+cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_INT32_t.pxi:674:67: Cannot convert 'INT32_t *' to Python object
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+                                                                 A.val, A.col, A.link, A.root)
+        else:
+            multiply_conjugate_ll_mat_with_strided_numpy_vector_kernel_INT32_t_INT32_t(A.nrow,
+                                                             b_data, b.strides[0] / sd,
+                                                             c_data, c.strides[0] / sd,
+                                                             A.val, A.col, A.link, A.root)
+                                                             ^
+------------------------------------------------------------
+
+cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_INT32_t.pxi:675:62: Cannot convert 'INT32_t *' to Python object
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+                                                                 A.val, A.col, A.link, A.root)
+        else:
+            multiply_conjugate_ll_mat_with_strided_numpy_vector_kernel_INT32_t_INT32_t(A.nrow,
+                                                             b_data, b.strides[0] / sd,
+                                                             c_data, c.strides[0] / sd,
+                                                             A.val, A.col, A.link, A.root)
+                                                                    ^
+------------------------------------------------------------
+
+cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_INT32_t.pxi:675:69: Cannot convert 'INT32_t *' to Python object
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+                                                                 A.val, A.col, A.link, A.root)
+        else:
+            multiply_conjugate_ll_mat_with_strided_numpy_vector_kernel_INT32_t_INT32_t(A.nrow,
+                                                             b_data, b.strides[0] / sd,
+                                                             c_data, c.strides[0] / sd,
+                                                             A.val, A.col, A.link, A.root)
+                                                                           ^
+------------------------------------------------------------
+
+cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_INT32_t.pxi:675:76: Cannot convert 'INT32_t *' to Python object
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+                                                                 A.val, A.col, A.link, A.root)
+        else:
+            multiply_conjugate_ll_mat_with_strided_numpy_vector_kernel_INT32_t_INT32_t(A.nrow,
+                                                             b_data, b.strides[0] / sd,
+                                                             c_data, c.strides[0] / sd,
+                                                             A.val, A.col, A.link, A.root)
+                                                                                   ^
+------------------------------------------------------------
+
+cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_INT32_t.pxi:675:84: Cannot convert 'INT32_t *' to Python object
+building 'cysparse.sparse.ll_mat_matrices.ll_mat_INT32_t_INT32_t' extension
+x86_64-linux-gnu-gcc -pthread -fno-strict-aliasing -DNDEBUG -g -fwrapv -O2 -Wall -Wstrict-prototypes -fPIC -I/home/nikolaj/Documents/WORK/Dominique/PROJECT/DECOUPLED_VERSION/SOLID/local/lib/python2.7/site-packages/numpy/core/include -I. -I/usr/include/python2.7 -c cysparse/sparse/ll_mat_matrices/ll_mat_INT32_t_INT32_t.c -o build/temp.linux-x86_64-2.7/cysparse/sparse/ll_mat_matrices/ll_mat_INT32_t_INT32_t.o -O2 -std=c99 -Wno-unused-function
+cysparse/sparse/ll_mat_matrices/ll_mat_INT32_t_INT32_t.c:1:2: error: #error Do not use this file, it is the result of a failed Cython compilation.
+ #error Do not use this file, it is the result of a failed Cython compilation.
+  ^
+error: command 'x86_64-linux-gnu-gcc' failed with exit status 1

@@ -170,7 +170,7 @@ cdef class ConjugateTransposedSparseMatrix_INT32_t_COMPLEX64_t:
         return self.A.matvec_htransp(B)
 
     def matvec_transp(self, B):
-        return self.matvec_conj(B)
+        return self.A.matvec_conj(B)
 
     def matvec_htransp(self, B):
         return self.A.matvec(B)

@@ -3425,7 +3425,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_14sparse_proxies_15complex_generic_2
  *         return self.A.matvec_htransp(B)
  * 
  *     def matvec_transp(self, B):             # <<<<<<<<<<<<<<
- *         return self.matvec_conj(B)
+ *         return self.A.matvec_conj(B)
  * 
  */
 
@@ -3457,12 +3457,12 @@ static PyObject *__pyx_pf_8cysparse_6sparse_14sparse_proxies_15complex_generic_2
   /* "cysparse/sparse/sparse_proxies/complex_generic/h_mat_INT64_t_COMPLEX64_t.pyx":173
  * 
  *     def matvec_transp(self, B):
- *         return self.matvec_conj(B)             # <<<<<<<<<<<<<<
+ *         return self.A.matvec_conj(B)             # <<<<<<<<<<<<<<
  * 
  *     def matvec_htransp(self, B):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_matvec_conj); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 173; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self->A), __pyx_n_s_matvec_conj); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 173; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_2))) {
@@ -3497,7 +3497,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_14sparse_proxies_15complex_generic_2
  *         return self.A.matvec_htransp(B)
  * 
  *     def matvec_transp(self, B):             # <<<<<<<<<<<<<<
- *         return self.matvec_conj(B)
+ *         return self.A.matvec_conj(B)
  * 
  */
 
@@ -3516,7 +3516,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_14sparse_proxies_15complex_generic_2
 }
 
 /* "cysparse/sparse/sparse_proxies/complex_generic/h_mat_INT64_t_COMPLEX64_t.pyx":175
- *         return self.matvec_conj(B)
+ *         return self.A.matvec_conj(B)
  * 
  *     def matvec_htransp(self, B):             # <<<<<<<<<<<<<<
  *         return self.A.matvec(B)
@@ -3588,7 +3588,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_14sparse_proxies_15complex_generic_2
   goto __pyx_L0;
 
   /* "cysparse/sparse/sparse_proxies/complex_generic/h_mat_INT64_t_COMPLEX64_t.pyx":175
- *         return self.matvec_conj(B)
+ *         return self.A.matvec_conj(B)
  * 
  *     def matvec_htransp(self, B):             # <<<<<<<<<<<<<<
  *         return self.A.matvec(B)

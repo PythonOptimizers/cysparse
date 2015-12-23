@@ -184,7 +184,7 @@ cdef class ConjugatedSparseMatrix_INT32_t_COMPLEX64_t:
 
     def matdot(self, B):
         raise NotImplementedError("Multiplication with this kind of object not implemented yet...")
-        
+
     ####################################################################################################################
     # String representations
     ####################################################################################################################
