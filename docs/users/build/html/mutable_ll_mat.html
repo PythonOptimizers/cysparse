@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Mutable matrices: LLSparseMatrix and LLSparseMatrixView &mdash; CySparse 0.2.2 documentation</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootswatch-3.3.4/spacelab/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.2.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="CySparse 0.2.2 documentation" href="contents.html" />
+    <link rel="next" title="Imutable matrices: CSR-, CSC- and CSBSparseMatrix" href="immutable_mat.html" />
+    <link rel="prev" title="How to create a matrix?" href="matrix_creation.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body role="document">
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="contents.html">
+          CySparse</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.2</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="contents.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to <strong class="program">CySparse</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html"><strong class="program">CySparse</strong> installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="types.html"><strong class="program">CySparse</strong>&#8216;s types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cysparse_basics.html"><strong class="program">CySparse</strong>&#8216;s basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matrix_creation.html">How to create a matrix?</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Mutable matrices: <code class="docutils literal"><span class="pre">LLSparseMatrix</span></code> and <code class="docutils literal"><span class="pre">LLSparseMatrixView</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="immutable_mat.html">Imutable matrices: <code class="docutils literal"><span class="pre">CSR-</span></code>, <code class="docutils literal"><span class="pre">CSC-</span></code> and <code class="docutils literal"><span class="pre">CSBSparseMatrix</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="proxies.html">Sparse Matrix Proxies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io_formats.html">IO formats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cysparse_cython_users.html"><strong class="program">CySparse</strong> for <strong class="program">Cython</strong> users</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Mutable matrices: <code class="docutils literal"><span class="pre">LLSparseMatrix</span></code> and <code class="docutils literal"><span class="pre">LLSparseMatrixView</span></code></a><ul>
+<li><a class="reference internal" href="#the-llsparsematrix-class">The <code class="docutils literal"><span class="pre">LLSparseMatrix</span></code> class</a><ul>
+<li><a class="reference internal" href="#creation">Creation</a></li>
+<li><a class="reference internal" href="#population">Population</a></li>
+<li><a class="reference internal" href="#accessing-elements">Accessing elements</a><ul>
+<li><a class="reference internal" href="#individual-access">Individual access</a></li>
+<li><a class="reference internal" href="#batch-access">Batch access</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-llsparsematrixview-class">The <code class="docutils literal"><span class="pre">LLSparseMatrixView</span></code> class</a><ul>
+<li><a class="reference internal" href="#views-of-views">Views of views</a></li>
+<li><a class="reference internal" href="#references-to-the-base-llsparsematrix">References to the base <code class="docutils literal"><span class="pre">LLSparseMatrix</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="matrix_creation.html" title="Previous Chapter: How to create a matrix?"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; How to create...</span>
+    </a>
+  </li>
+  <li>
+    <a href="immutable_mat.html" title="Next Chapter: Imutable matrices: CSR-, CSC- and CSBSparseMatrix"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Imutable matr... &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+  <div class="section" id="mutable-matrices-llsparsematrix-and-llsparsematrixview">
+<span id="ll-mat"></span><h1>Mutable matrices: <code class="xref py py-class docutils literal"><span class="pre">LLSparseMatrix</span></code> and <code class="xref py py-class docutils literal"><span class="pre">LLSparseMatrixView</span></code><a class="headerlink" href="#mutable-matrices-llsparsematrix-and-llsparsematrixview" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="the-llsparsematrix-class">
+<h2>The <code class="xref py py-class docutils literal"><span class="pre">LLSparseMatrix</span></code> class<a class="headerlink" href="#the-llsparsematrix-class" title="Permalink to this headline">¶</a></h2>
+<p>The <em>mutable</em> <code class="xref py py-class docutils literal"><span class="pre">LLSparseMatrix</span></code> class is the base class to <strong>construct</strong> and <strong>populate</strong> a matrix. With it you can easily add or delete elements, rows, columns, assign sub-matrices, etc. Once your matrix is constructed,
+you create a new <em>optimized</em> and <em>immutable</em> matrix from it. You can choose between CSR, CSC and CSB. Each has its strength and weaknesses and we cover them in depth in their respective sections.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The <code class="docutils literal"><span class="pre">LLSparseMatrix</span></code> class is <strong>not</strong> optimized for matrix operations!</p>
+</div>
+<div class="section" id="creation">
+<h3>Creation<a class="headerlink" href="#creation" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="population">
+<h3>Population<a class="headerlink" href="#population" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="accessing-elements">
+<h3>Accessing elements<a class="headerlink" href="#accessing-elements" title="Permalink to this headline">¶</a></h3>
+<p>Elements can be accessed individually or by batch, i.e. several elements can be accessed at the same time and stored in a container.</p>
+<div class="section" id="individual-access">
+<h4>Individual access<a class="headerlink" href="#individual-access" title="Permalink to this headline">¶</a></h4>
+<p>You can use the common <code class="docutils literal"><span class="pre">[]</span></code> operator:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">L</span> <span class="o">=</span> <span class="n">NewLLSparseMatrix</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+
+<span class="n">e</span> <span class="o">=</span> <span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal"><span class="pre">i</span></code> and <code class="docutils literal"><span class="pre">j</span></code> are integer indices. At all time, bounds are checked and an <code class="docutils literal"><span class="pre">IndexError</span></code> is raised if an index is out of bound. <strong class="program">Cython</strong> users can access the elements <strong>whithout</strong> bound checking if desired.</p>
+<p>Notice that if one of the argument you pass to the <code class="docutils literal"><span class="pre">[]</span></code> operator is <strong>not</strong> an integer, you&#8217;ll get an <code class="docutils literal"><span class="pre">LLSparseMatrixView</span></code> (see <a class="reference internal" href="#ll-sparse-matrix-view"><span>The LLSparseMatrixView class</span></a>).</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">If one of the argument you pass to the <code class="docutils literal"><span class="pre">[]</span></code> operator is <strong>not</strong> an integer, you&#8217;ll get an <code class="docutils literal"><span class="pre">LLSparseMatrixView</span></code></p>
+</div>
+</div>
+<div class="section" id="batch-access">
+<h4>Batch access<a class="headerlink" href="#batch-access" title="Permalink to this headline">¶</a></h4>
+<p>Basically, you can take a submatrix (and store its elements in a <code class="docutils literal"><span class="pre">NumPy</span></code> two dimensionnal array or another <code class="docutils literal"><span class="pre">LLSparseMatrix</span></code> or get a view to it, see <a class="reference internal" href="#ll-sparse-matrix-view"><span>The LLSparseMatrixView class</span></a> ) or a list of elements</p>
+</div>
+</div>
+</div>
+<div class="section" id="the-llsparsematrixview-class">
+<span id="ll-sparse-matrix-view"></span><h2>The <code class="xref py py-class docutils literal"><span class="pre">LLSparseMatrixView</span></code> class<a class="headerlink" href="#the-llsparsematrixview-class" title="Permalink to this headline">¶</a></h2>
+<div class="topic">
+<p class="topic-title first">What is an <code class="xref py py-class docutils literal"><span class="pre">LLSparseMatrixView</span></code> good for?</p>
+<p>There are basically two reasons to use a view instead of a matrix:</p>
+<ul class="simple">
+<li>efficiency: no matrix_copy is made and the <code class="xref py py-class docutils literal"><span class="pre">LLSparseMatrixView</span></code> is a light object. TO BE COMPLETED</li>
+<li>really fancy indexing: if you need a new matrix constructed by <strong>any</strong> combinations of rows and columns, including
+index repetitions. TO BE COMPLETED.</li>
+</ul>
+</div>
+<div class="section" id="views-of-views">
+<h3>Views of views<a class="headerlink" href="#views-of-views" title="Permalink to this headline">¶</a></h3>
+<p>It is possible to have views of... views as the following code illustrates:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">A</span> <span class="o">=</span> <span class="n">MakeLLSparseMatrix</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="n">A_view1</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+<span class="n">A_view2</span> <span class="o">=</span> <span class="n">A_view1</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>The second <code class="xref py py-class docutils literal"><span class="pre">LLSparseMatrixView</span></code> is <strong>not</strong> a view on a view but a direct view on the original matrix <code class="docutils literal"><span class="pre">A</span></code>. The only difference between the two objects <code class="docutils literal"><span class="pre">A_view1</span></code> and <code class="docutils literal"><span class="pre">A_view2</span></code> is that
+the indices given in the <code class="docutils literal"><span class="pre">[...,</span> <span class="pre">...]</span></code> in <code class="docutils literal"><span class="pre">A_view1[...,</span> <span class="pre">...]</span></code> refer to indices of <code class="docutils literal"><span class="pre">A_view1</span></code> <strong>not</strong> the original matrix <code class="docutils literal"><span class="pre">A</span></code>.</p>
+<p>An example will clarify this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="references-to-the-base-llsparsematrix">
+<h3>References to the base <code class="xref py py-class docutils literal"><span class="pre">LLSparseMatrix</span></code><a class="headerlink" href="#references-to-the-base-llsparsematrix" title="Permalink to this headline">¶</a></h3>
+<p>Whenever a <code class="xref py py-class docutils literal"><span class="pre">LLSparseMatrixView</span></code> is created, the corresponding <code class="xref py py-class docutils literal"><span class="pre">LLSparseMatrix</span></code> has its
+internal CPython reference count incremented such that even if the matrix object is (implicitely of explicitely) deleted, it still
+exist in Python internal memory and can even be retrieved again through the view:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">A</span> <span class="o">=</span> <span class="n">MakeLLSparseMatrix</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="n">A_view</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+
+<span class="k">del</span> <span class="n">A</span>
+
+<span class="n">A_view</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="o">...</span>  <span class="c"># still works!</span>
+
+<span class="n">A</span> <span class="o">=</span> <span class="n">A_view</span><span class="o">.</span><span class="n">get_matrix</span><span class="p">()</span> <span class="c"># A points again to the original matrix</span>
+</pre></div>
+</div>
+<p>In the code above, the <code class="xref py py-class docutils literal"><span class="pre">LLSparseMatrix</span></code> pointed by the variable <code class="docutils literal"><span class="pre">A</span></code> on the first line has never been
+deleted from memory. If you also delete <strong>all</strong> <code class="xref py py-class docutils literal"><span class="pre">LLSparseMatrixView</span></code> objects refering to the <code class="xref py py-class docutils literal"><span class="pre">LLSparseMatrix</span></code> object,
+then it is effictively deleted by the garbage collector.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">A</span> <span class="o">=</span> <span class="n">MakeLLSparseMatrix</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="n">A_view</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+
+<span class="k">del</span> <span class="n">A</span>
+<span class="k">del</span> <span class="n">A_view</span>
+
+<span class="c"># matrix A is lost... and will be deleted by the garbage collector</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="_sources/mutable_ll_mat.txt"
+     rel="nofollow">Source</a>
+</div>
+      
+    </p>
+    <p>
+        &copy; Copyright 2015, Dominique Orban, Sylvain Arreckx and Nikolaj van Omme.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

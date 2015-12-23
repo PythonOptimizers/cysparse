@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>CySparse‘s types &mdash; CySparse 0.2.2 documentation</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootswatch-3.3.4/spacelab/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.2.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="CySparse 0.2.2 documentation" href="contents.html" />
+    <link rel="next" title="CySparse‘s basics" href="cysparse_basics.html" />
+    <link rel="prev" title="CySparse installation" href="installation.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body role="document">
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="contents.html">
+          CySparse</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.2</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="contents.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to <strong class="program">CySparse</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html"><strong class="program">CySparse</strong> installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href=""><strong class="program">CySparse</strong>&#8216;s types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cysparse_basics.html"><strong class="program">CySparse</strong>&#8216;s basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matrix_creation.html">How to create a matrix?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mutable_ll_mat.html">Mutable matrices: <code class="docutils literal"><span class="pre">LLSparseMatrix</span></code> and <code class="docutils literal"><span class="pre">LLSparseMatrixView</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="immutable_mat.html">Imutable matrices: <code class="docutils literal"><span class="pre">CSR-</span></code>, <code class="docutils literal"><span class="pre">CSC-</span></code> and <code class="docutils literal"><span class="pre">CSBSparseMatrix</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="proxies.html">Sparse Matrix Proxies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io_formats.html">IO formats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cysparse_cython_users.html"><strong class="program">CySparse</strong> for <strong class="program">Cython</strong> users</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#"><strong class="program">CySparse</strong>&#8216;s types</a><ul>
+<li><a class="reference internal" href="#compatibility-with-numpy">Compatibility with <strong class="program">NumPy</strong></a></li>
+<li><a class="reference internal" href="#available-types">Available types</a><ul>
+<li><a class="reference internal" href="#indices-integer-numbers">Indices: integer numbers</a></li>
+<li><a class="reference internal" href="#elements-integers-real-and-complex-numbers">Elements: integers, real and complex numbers</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#number-s-behavior-in-cysparse">Number&#8217;s behavior in <strong class="program">CySparse</strong></a><ul>
+<li><a class="reference internal" href="#overflow-on-assignment">Overflow on assignment</a></li>
+<li><a class="reference internal" href="#overflow-on-operation">Overflow on operation</a></li>
+<li><a class="reference internal" href="#nan-and-inf"><code class="docutils literal"><span class="pre">nan</span></code> and <code class="docutils literal"><span class="pre">inf</span></code></a></li>
+<li><a class="reference internal" href="#types-compatibilities-implicit-castings">Types compatibilities (implicit castings)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="installation.html" title="Previous Chapter: CySparse installation"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; CySparse inst...</span>
+    </a>
+  </li>
+  <li>
+    <a href="cysparse_basics.html" title="Next Chapter: CySparse‘s basics"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">CySparse‘s ba... &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+  <div class="section" id="cysparse-s-types">
+<span id="cysparse-types"></span><h1><strong class="program">CySparse</strong>&#8216;s types<a class="headerlink" href="#cysparse-s-types" title="Permalink to this headline">¶</a></h1>
+<p>Internally, <strong class="program">CySparse</strong> uses typed variables. As a <strong class="program">Python</strong> user, you don&#8217;t have directly access to these types but you can ask for a specific type to be used through the use of simple (enum) arguments.
+As a <strong class="program">Cython</strong> user however, you do have access to these types and you can (and should) use them in your <strong class="program">Cython</strong> programs. For every type, there is a corresponding (enum) argument. Types are written with
+<code class="docutils literal"><span class="pre">_t</span></code> as suffix: <code class="docutils literal"><span class="pre">INT32_t</span></code>, <code class="docutils literal"><span class="pre">COMPLEX256_t</span></code>. The corresponding (enum) arguments are simply the names of the types with <code class="docutils literal"><span class="pre">_T</span></code> as suffix. Thus the (enum) argument corresponding to type <code class="docutils literal"><span class="pre">FLOAT64_t</span></code> is <code class="docutils literal"><span class="pre">FLOAT64_T</span></code>
+(notice the capital <code class="docutils literal"><span class="pre">T</span></code>).</p>
+<div class="section" id="compatibility-with-numpy">
+<h2>Compatibility with <strong class="program">NumPy</strong><a class="headerlink" href="#compatibility-with-numpy" title="Permalink to this headline">¶</a></h2>
+<p>In short, <strong class="program">CySparse</strong>&#8216;s types  are 100% compatible with the <strong class="program">NumPy</strong> corresponding types <a class="footnote-reference" href="#numpy-cysparse-compatible-types" id="id1">[1]</a>.
+There are some differences thought between the way both libraries treat their types and numbers. Read on.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The behavior of similar types in <strong class="program">NumPy</strong> and <strong class="program">CySparse</strong> can be different!</p>
+</div>
+</div>
+<div class="section" id="available-types">
+<span id="availabe-types"></span><h2>Available types<a class="headerlink" href="#available-types" title="Permalink to this headline">¶</a></h2>
+<p><strong class="program">CySparse</strong> has some types that can be used for indices and some types that can be used for elements.</p>
+<div class="section" id="indices-integer-numbers">
+<h3>Indices: integer numbers<a class="headerlink" href="#indices-integer-numbers" title="Permalink to this headline">¶</a></h3>
+<p>Two index types exist: signed 32 and signed 64 bits integers. Internally, they are named <code class="docutils literal"><span class="pre">INT32_t</span></code> and <code class="docutils literal"><span class="pre">ÌNT64_t</span></code>.</p>
+</div>
+<div class="section" id="elements-integers-real-and-complex-numbers">
+<h3>Elements: integers, real and complex numbers<a class="headerlink" href="#elements-integers-real-and-complex-numbers" title="Permalink to this headline">¶</a></h3>
+<p><strong class="program">CySparse</strong> has three different families of element types:</p>
+<ul class="simple">
+<li>integers: simple and double precision signed integers (<code class="docutils literal"><span class="pre">INT32_t</span></code> and <code class="docutils literal"><span class="pre">INT64_t</span></code>).</li>
+<li>real numbers: simple, double and quadruple precision real numbers (<code class="docutils literal"><span class="pre">FLOAT32_t</span></code>, <code class="docutils literal"><span class="pre">FLOAT64_t</span></code> and <code class="docutils literal"><span class="pre">FLOAT128_t</span></code>).</li>
+<li>complex numbers: simple and double precision complex numbers (<code class="docutils literal"><span class="pre">COMPLEX64_t</span></code>, <code class="docutils literal"><span class="pre">COMPLEX128_t</span></code>, <code class="docutils literal"><span class="pre">COMPLEX256_t</span></code>).</li>
+</ul>
+<p>Quadruple precision has some limited support in <strong class="program">C99</strong> standard and <strong class="program">Cython</strong> and thus in <strong class="program">CySparse</strong>. The same can be said about complex number in general although the simple and double precision are quite
+well integrated. This is worth a warning:</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Quadruple precision and complex numbers have some limitations.</p>
+</div>
+</div>
+</div>
+<div class="section" id="number-s-behavior-in-cysparse">
+<h2>Number&#8217;s behavior in <strong class="program">CySparse</strong><a class="headerlink" href="#number-s-behavior-in-cysparse" title="Permalink to this headline">¶</a></h2>
+<p>The three families of element types behave somewhat differently.</p>
+<div class="section" id="overflow-on-assignment">
+<h3>Overflow on assignment<a class="headerlink" href="#overflow-on-assignment" title="Permalink to this headline">¶</a></h3>
+<p>Numbers do overflow <a class="footnote-reference" href="#overflow-depends-on-compiler" id="id2">[2]</a>. When assigning an integer number a value too big for its type, an <code class="docutils literal"><span class="pre">OverflowError</span></code> is raised.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">B</span> <span class="o">=</span> <span class="n">ll_mat</span><span class="o">.</span><span class="n">NewLLSparseMatrix</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">types</span><span class="o">.</span><span class="n">INT32_T</span><span class="p">)</span>
+
+<span class="n">B</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="mi">31</span>
+</pre></div>
+</div>
+<p>raises an <code class="docutils literal"><span class="pre">OverflowError</span></code> with the following message:</p>
+<div class="highlight-bash"><div class="highlight"><pre>Traceback <span class="o">(</span>most recent call last<span class="o">)</span>:
+  File <span class="s2">&quot;new_types.py&quot;</span>, line 102, in &lt;module&gt;
+    B<span class="o">[</span>1, 1<span class="o">]</span> <span class="o">=</span> 2**31
+  File <span class="s2">&quot;cysparse/sparse/ll_mat_matrices/ll_mat_INT32_t_INT32_t.pyx&quot;</span>, line 538, in cysparse.sparse.ll_mat_matrices.ll_mat_INT32_t_INT32_t.LLSparseMatrix_INT32_t_INT32_t.__setitem__ <span class="o">(</span>cysparse/sparse/ll_mat_matrices/ll_mat_INT32_t_INT32_t.c:6565<span class="o">)</span>
+OverflowError: value too large to convert to int
+</pre></div>
+</div>
+<p>When assigning a real or complex number a value that is too big for its type,
+it is assigned <cite>inf</cite>, i.e. <span class="math">\(+\infty\)</span> <strong>without</strong> any warning:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">B</span> <span class="o">=</span> <span class="n">ll_mat</span><span class="o">.</span><span class="n">NewLLSparseMatrix</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">types</span><span class="o">.</span><span class="n">FLOAT32_T</span><span class="p">)</span>
+
+<span class="n">B</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">232</span>
+<span class="n">B</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.3</span>
+<span class="n">B</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="mi">310</span>
+
+<span class="n">B</span><span class="o">.</span><span class="n">print_to</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>prints:</p>
+<div class="highlight-bash"><div class="highlight"><pre>LLSparseMatrix <span class="o">[</span>INT32_t, FLOAT32_t<span class="o">]</span> <span class="o">(</span>G, NZ, <span class="o">[</span>2, 2<span class="o">])</span>
+232.000000  1.300000
+  0.000000       inf
+</pre></div>
+</div>
+</div>
+<div class="section" id="overflow-on-operation">
+<h3>Overflow on operation<a class="headerlink" href="#overflow-on-operation" title="Permalink to this headline">¶</a></h3>
+<p>We follow the <strong class="program">C99</strong> standard and let an overflow during an operation pass silently (and give strange results) without a warning.</p>
+<p>Let&#8217;s define a matrix with huge numbers:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">B</span> <span class="o">=</span> <span class="n">ll_mat</span><span class="o">.</span><span class="n">NewLLSparseMatrix</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">types</span><span class="o">.</span><span class="n">INT32_T</span><span class="p">)</span>
+
+<span class="n">B</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">232</span>
+<span class="n">B</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.3</span>
+<span class="n">B</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="mi">31</span> <span class="o">-</span><span class="mi">1</span>
+
+<span class="n">B</span><span class="o">.</span><span class="n">print_to</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This prints:</p>
+<div class="highlight-bash"><div class="highlight"><pre>LLSparseMatrix <span class="o">[</span>INT32_t, INT32_t<span class="o">]</span> <span class="o">(</span>G, NZ, <span class="o">[</span>2, 2<span class="o">])</span>
+<span class="m">232</span>          1
+  <span class="m">0</span> 2147483647
+</pre></div>
+</div>
+<p>Multiplying <code class="docutils literal"><span class="pre">B</span></code> by itself returns a strange result:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">C</span> <span class="o">=</span> <span class="n">B</span> <span class="o">*</span> <span class="n">B</span>
+<span class="n">C</span><span class="o">.</span><span class="n">print_to</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>prints:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="m">53824</span> -2147483417
+    <span class="m">0</span>           1
+</pre></div>
+</div>
+</div>
+<div class="section" id="nan-and-inf">
+<h3><code class="docutils literal"><span class="pre">nan</span></code> and <code class="docutils literal"><span class="pre">inf</span></code><a class="headerlink" href="#nan-and-inf" title="Permalink to this headline">¶</a></h3>
+<p>Like <strong class="program">NumPy</strong>, <strong class="program">CySparse</strong> defines <code class="docutils literal"><span class="pre">nan</span></code> and <code class="docutils literal"><span class="pre">inf</span></code>. These are compatible with their <strong class="program">NumPy</strong> counterparts and can be used interchangebly. They are used internally as the <cite>C99</cite> standard recommends.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">cysparse.types.cysparse_types</span> <span class="kn">as</span> <span class="nn">types</span>
+
+<span class="n">B</span> <span class="o">=</span> <span class="n">ll_mat</span><span class="o">.</span><span class="n">NewLLSparseMatrix</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">types</span><span class="o">.</span><span class="n">FLOAT64_T</span><span class="p">)</span>
+
+<span class="n">B</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">232</span>
+<span class="n">B</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.3</span>
+<span class="n">B</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">types</span><span class="o">.</span><span class="n">inf</span>
+
+<span class="n">B</span><span class="o">.</span><span class="n">print_to</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This prints:</p>
+<div class="highlight-bash"><div class="highlight"><pre>LLSparseMatrix <span class="o">[</span>INT32_t, FLOAT64_t<span class="o">]</span> <span class="o">(</span>G, NZ, <span class="o">[</span>2, 2<span class="o">])</span>
+232.000000  1.300000
+  0.000000       inf
+</pre></div>
+</div>
+<p>If we multiply <code class="docutils literal"><span class="pre">B</span></code> by itself, we obtain:</p>
+<div class="highlight-bash"><div class="highlight"><pre>LLSparseMatrix <span class="o">[</span>INT32_t, FLOAT64_t<span class="o">]</span> <span class="o">(</span>G, NZ, <span class="o">[</span>2, 2<span class="o">])</span>
+53824.000000       inf
+    0.000000       inf
+</pre></div>
+</div>
+<p>as expected.</p>
+</div>
+<div class="section" id="types-compatibilities-implicit-castings">
+<h3>Types compatibilities (implicit castings)<a class="headerlink" href="#types-compatibilities-implicit-castings" title="Permalink to this headline">¶</a></h3>
+<p>Whenever an integer is assigned a real number, <strong class="program">CySparse</strong> assigns the integer part, i.e. takes its <code class="docutils literal"><span class="pre">floor()</span></code> part.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">B</span> <span class="o">=</span> <span class="n">ll_mat</span><span class="o">.</span><span class="n">NewLLSparseMatrix</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">types</span><span class="o">.</span><span class="n">INT64_T</span><span class="p">)</span>
+
+<span class="n">B</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">232</span>
+<span class="n">B</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.3</span>
+<span class="n">B</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.89</span>
+</pre></div>
+</div>
+<p>This matrix is in fact:</p>
+<div class="highlight-bash"><div class="highlight"><pre>LLSparseMatrix <span class="o">[</span>INT32_t, INT64_t<span class="o">]</span> <span class="o">(</span>G, NZ, <span class="o">[</span>2, 2<span class="o">])</span>
+<span class="m">232</span>  1
+  <span class="m">0</span>  0
+</pre></div>
+</div>
+<p>Complex number are compatible between them if they don&#8217;t overflow but otherwise are <strong>not</strong> compatible
+nor with the integer neither with the real numbers.</p>
+<p>[TO BE DONE: write an example with complex numbers]</p>
+<h4>Footnote</h4><table class="docutils footnote" frame="void" id="numpy-cysparse-compatible-types" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Behind the hood, both libraries use <strong class="program">C99</strong> types (whenever <strong class="program">NumPy</strong> is compiled with a <strong class="program">C99</strong> compliant compiler).
+<strong class="program">CySparse</strong> doesn&#8217;t offer as many different types as <strong class="program">NumPy</strong> though«.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="overflow-depends-on-compiler" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td>Overflow is compiler-dependent (and compilers are often system-dependent).</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="_sources/types.txt"
+     rel="nofollow">Source</a>
+</div>
+      
+    </p>
+    <p>
+        &copy; Copyright 2015, Dominique Orban, Sylvain Arreckx and Nikolaj van Omme.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

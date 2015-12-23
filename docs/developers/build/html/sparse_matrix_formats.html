@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Sparse Matrix Formats &mdash; CySparse 0.2.2 documentation</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootswatch-3.3.4/spacelab/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.2.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="CySparse 0.2.2 documentation" href="contents.html" />
+    <link rel="next" title="CySparse‘s sparse matrix classes hierachy" href="sparse_mat_hierarchy.html" />
+    <link rel="prev" title="Introduction" href="introduction.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body role="document">
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="contents.html">
+          CySparse</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.2</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="contents.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Sparse Matrix Formats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sparse_mat_hierarchy.html"><strong class="program">CySparse</strong>&#8216;s sparse matrix classes hierachy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cysparse_lib_mainteners.html"><strong class="program">CySparse</strong> for library maintainers</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Sparse Matrix Formats</a><ul>
+<li><a class="reference internal" href="#sorted-column-and-row-indices">Sorted column and row indices</a></li>
+<li><a class="reference internal" href="#the-ll-sparse-format-in-details">The <code class="docutils literal"><span class="pre">LL</span></code> sparse format in details</a><ul>
+<li><a class="reference internal" href="#elements-are-linked-in-chains-aka-linked-lists">Elements are linked in chains (aka linked lists)</a></li>
+<li><a class="reference internal" href="#elements-are-aligned-row-wise-chains-correspond-to-rows">Elements are &#8220;aligned&#8221; row wise (chains correspond to rows)</a></li>
+<li><a class="reference internal" href="#inside-a-row-elements-are-ordered-by-column-order-how-to-run-through-a-ll-matrix">Inside a row, elements are ordered by column order (how to run through a <code class="docutils literal"><span class="pre">LL</span></code> matrix)</a></li>
+<li><a class="reference internal" href="#insertion-of-a-new-element-in-more-details">Insertion of a new element in more details</a></li>
+<li><a class="reference internal" href="#detailed-example">Detailed example</a></li>
+<li><a class="reference internal" href="#how-to-run-through-a-ll-matrix">How to run through a <code class="docutils literal"><span class="pre">LL</span></code> matrix</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-csr-sparse-format-in-details">The <code class="docutils literal"><span class="pre">CSR</span></code> sparse format in details</a><ul>
+<li><a class="reference internal" href="#id2">Detailed example</a></li>
+<li><a class="reference internal" href="#how-to-run-through-a-csr-matrix">How to run through a <code class="docutils literal"><span class="pre">CSR</span></code> matrix</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-csc-sparse-format-in-details">The <code class="docutils literal"><span class="pre">CSC</span></code> sparse format in details</a><ul>
+<li><a class="reference internal" href="#id3">Detailed example</a></li>
+<li><a class="reference internal" href="#how-to-run-through-a-csc-matrix">How to run through a <code class="docutils literal"><span class="pre">CSC</span></code> matrix</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="introduction.html" title="Previous Chapter: Introduction"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Introduction</span>
+    </a>
+  </li>
+  <li>
+    <a href="sparse_mat_hierarchy.html" title="Next Chapter: CySparse‘s sparse matrix classes hierachy"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">CySparse‘s sp... &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+  <div class="section" id="sparse-matrix-formats">
+<span id="id1"></span><h1>Sparse Matrix Formats<a class="headerlink" href="#sparse-matrix-formats" title="Permalink to this headline">¶</a></h1>
+<p>[THIS SECTION IS VERY DETAILED AND IS PROBABLY NOT INTENDED FOR THE COMMON USER]</p>
+<p>This section describes the sparse matrix storage schemes available in
+<strong class="program">Cysparse</strong>. In the next sections, we cover sparse matrix creation, population, view and conversion.</p>
+<p>Basically, we use one general sparse matrix format to <em>create</em> a general sparse matrix: the <code class="xref py py-class docutils literal"><span class="pre">LLSparseMatrix</span></code> class. This class has
+a rich API and allows multiple ways to create and transform a sparse matrix. Once the matrix is ready to be used, it can be appropriately converted
+into a specialized sparse matrix format that is optimized for the needed operations. The <code class="xref py py-class docutils literal"><span class="pre">LLSparseMatrix</span></code> is also the only type of matrices that
+can be modified while the other types of matrices are <strong>immutable</strong> for efficiency.</p>
+<p>Here is a list of existing formats and their basic use:</p>
+<ul class="simple">
+<li>Linked-list format (<code class="docutils literal"><span class="pre">LL</span></code>): a convenient format for creating and populating
+a sparse matrix, whether symmetric or general.</li>
+<li>Compressed sparse row format (<code class="docutils literal"><span class="pre">CSR</span></code>): a format designed to speed up
+matrix-vector products.</li>
+<li>Compressed sparse column format (<code class="docutils literal"><span class="pre">CSC</span></code>): a format designed to speed up
+vector-matrix products.</li>
+</ul>
+<p>The CSR and CSC formats are complementary and can be viewed as respectively a row- and column view of a sparse matrix.</p>
+<p>These formats are well known in the community and you can find scores of documents about them on the internet.</p>
+<div class="section" id="sorted-column-and-row-indices">
+<h2>Sorted column and row indices<a class="headerlink" href="#sorted-column-and-row-indices" title="Permalink to this headline">¶</a></h2>
+<p>[TO BE WRITTEN]</p>
+<p>For all sparse matrix formats, we internally keep the indices sorted, i.e. in ascending order.</p>
+</div>
+<div class="section" id="the-ll-sparse-format-in-details">
+<h2>The <code class="docutils literal"><span class="pre">LL</span></code> sparse format in details<a class="headerlink" href="#the-ll-sparse-format-in-details" title="Permalink to this headline">¶</a></h2>
+<p>This format is implemented by the <code class="xref py py-class docutils literal"><span class="pre">LLSparseMatrix</span></code> class.</p>
+<p>All matrix classes are straightforward with perhaps the only exception of the <code class="xref py py-class docutils literal"><span class="pre">LLSparseMatrix</span></code> class. This class is really a container where you can easily add or remove elements but it is not much more than that: a container. As such, it is <strong>not</strong> optimized for any matrix operation. There are some internal optimisations though to add or retrieve an element and we explain them here.</p>
+<div class="section" id="elements-are-linked-in-chains-aka-linked-lists">
+<h3>Elements are linked in chains (aka linked lists)<a class="headerlink" href="#elements-are-linked-in-chains-aka-linked-lists" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="xref py py-class docutils literal"><span class="pre">LLSparseMatrix</span></code> container is made of 4 one dimensionnal arrays and one pointer (<code class="docutils literal"><span class="pre">free</span></code>):</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">root[i]</span></code>: points to the first elements of row <code class="docutils literal"><span class="pre">i</span></code>;</li>
+<li><code class="docutils literal"><span class="pre">col[k]</span></code>: contains the column index <code class="docutils literal"><span class="pre">j</span></code> of an element stored at the <code class="docutils literal"><span class="pre">k</span></code>-th place;</li>
+<li><code class="docutils literal"><span class="pre">val[k]</span></code>: contains the value of the element stored at the <code class="docutils literal"><span class="pre">k</span></code>-th place;</li>
+<li><code class="docutils literal"><span class="pre">link[k]</span></code>: contains the pointer to the next element in the chain where the <code class="docutils literal"><span class="pre">k</span></code>-th element belongs.</li>
+</ul>
+<p>The pointer <code class="docutils literal"><span class="pre">free</span></code> points to the first free element in the chain of free elements.</p>
+<p>Despite its name, <em>linked list</em> sparse matrix, this container doesn&#8217;t use list of pointers but <strong>only</strong> arrays of indices. &#8220;Pointers&#8221; are indices in arrays and to denote a pointer to <code class="docutils literal"><span class="pre">NULL</span></code> the value <code class="docutils literal"><span class="pre">-1</span></code> if used. For instance, if <code class="docutils literal"><span class="pre">free</span> <span class="pre">==</span> <span class="pre">-1</span></code>,
+this means that the chain of free elements is empty.</p>
+<p>Then chain can be traversed by following the <code class="docutils literal"><span class="pre">link</span></code> array:</p>
+<div class="figure align-center" id="id4">
+<a class="reference internal image-reference" href="_images/ll_mat_link.png"><img alt="_images/ll_mat_link.png" src="_images/ll_mat_link.png" style="width: 400pt;" /></a>
+<p class="caption"><span class="caption-text">Chains in an <code class="docutils literal"><span class="pre">LLSparseMatrix</span></code> matrix</span></p>
+</div>
+<p>Two chains are depicted in the picture. First, the chain with free elements. These are elements that where removed. The <code class="docutils literal"><span class="pre">free</span></code> pointer points to the first element of this chain and <code class="docutils literal"><span class="pre">link[free]</span></code> if <span class="math">\(f_0\)</span> which points to
+the second element in this chain. Whenever a new elements is added, it will take the place of this first element.</p>
+<p>The second chain starts with element (<span class="math">\(j_0\)</span>, <span class="math">\(v_0\)</span>, <span class="math">\(k_0\)</span>). <span class="math">\(k_0\)</span> points to the second element (<span class="math">\(j_1\)</span>, <span class="math">\(v_1\)</span>, <span class="math">\(k_1\)</span>) and <span class="math">\(k_1\)</span> points to the second and last element (<span class="math">\(j_2\)</span>, <span class="math">\(v_2\)</span>, <span class="math">\(k_2\)</span>).</p>
+<p>Inside the arrays, the elements can be stored in any order.</p>
+</div>
+<div class="section" id="elements-are-aligned-row-wise-chains-correspond-to-rows">
+<h3>Elements are &#8220;aligned&#8221; row wise (chains correspond to rows)<a class="headerlink" href="#elements-are-aligned-row-wise-chains-correspond-to-rows" title="Permalink to this headline">¶</a></h3>
+<p>Each chain of elements corresponds to one row of the matrix. The pointer <code class="docutils literal"><span class="pre">root[i]</span></code> points to the first element of the <code class="docutils literal"><span class="pre">i</span></code> <sup>th</sup> row. If the above chain (<span class="math">\(k_0\)</span>, <span class="math">\(k_1\)</span> and <span class="math">\(k_2\)</span> ) correspond to the only
+elements on row <code class="docutils literal"><span class="pre">i</span></code>, <code class="docutils literal"><span class="pre">root[i]</span></code> would point to element (<span class="math">\(j_0\)</span>, <span class="math">\(v_0\)</span>, <span class="math">\(k_0\)</span>). If row <code class="docutils literal"><span class="pre">i</span></code> doesn&#8217;t have any element, <code class="docutils literal"><span class="pre">root[i]</span> <span class="pre">==</span> <span class="pre">-1</span></code>.</p>
+<p>To traverse the <code class="docutils literal"><span class="pre">i</span></code><sup>th</sup> row, simply use:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">k</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+<span class="k">while</span> <span class="n">k</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+    <span class="c"># we consider element A[i, j] == val</span>
+    <span class="n">j</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">col</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+    <span class="n">val</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">val</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+    <span class="o">...</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">link</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="inside-a-row-elements-are-ordered-by-column-order-how-to-run-through-a-ll-matrix">
+<h3>Inside a row, elements are ordered by column order (how to run through a <code class="docutils literal"><span class="pre">LL</span></code> matrix)<a class="headerlink" href="#inside-a-row-elements-are-ordered-by-column-order-how-to-run-through-a-ll-matrix" title="Permalink to this headline">¶</a></h3>
+<p>If the chain corresponding to row <code class="docutils literal"><span class="pre">i</span></code> is <span class="math">\(k_0, k_1, \ldots, k_p\)</span>, then we know that the corresponding column indices are ordered: <span class="math">\(j_0 &lt; j_1 &lt; \ldots &lt; j_p\)</span>. When an element is added with the <code class="docutils literal"><span class="pre">put(i,</span> <span class="pre">j,</span> <span class="pre">val)</span></code> method, this new element is inserted in the right place, swapping pointers elements of <code class="docutils literal"><span class="pre">link</span></code> if necessary.</p>
+<p>This means that looking for an element <code class="docutils literal"><span class="pre">A[i,</span> <span class="pre">k]</span></code>, one can simply use:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">k</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+<span class="k">while</span> <span class="n">k</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">col</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">j</span><span class="p">:</span>
+        <span class="c"># element doesn&#39;t exist</span>
+        <span class="k">break</span>
+
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">col</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">==</span> <span class="n">j</span><span class="p">:</span>
+        <span class="c"># element exists</span>
+        <span class="o">...</span>
+
+    <span class="n">k</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">link</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="insertion-of-a-new-element-in-more-details">
+<h3>Insertion of a new element in more details<a class="headerlink" href="#insertion-of-a-new-element-in-more-details" title="Permalink to this headline">¶</a></h3>
+<p>The next figure represent the internal state of a <code class="docutils literal"><span class="pre">LLSparseMatrix</span></code>:</p>
+<div class="figure align-center" id="id5">
+<a class="reference internal image-reference" href="_images/ll_mat_link_swap_left.png"><img alt="_images/ll_mat_link_swap_left.png" src="_images/ll_mat_link_swap_left.png" style="width: 300pt;" /></a>
+<p class="caption"><span class="caption-text"><strong>Before</strong> insertion of element <span class="math">\((j, v, k)\)</span> in a <code class="docutils literal"><span class="pre">LLSparseMatrix</span></code> matrix</span></p>
+</div>
+<p>We have <span class="math">\(j_1 &lt; j_2\)</span> and <span class="math">\(k_1\)</span> points to element <span class="math">\(k_2\)</span>. Let&#8217;s say we want to insert an new element <span class="math">\((j, v, k)\)</span> with column index <span class="math">\(j\)</span> such that <span class="math">\(j_1 &lt;  j &lt; j_2\)</span>.
+To preserve the ordering, we have to insert this element <strong>between</strong> the elements <span class="math">\(k_1\)</span> and <span class="math">\(k_2\)</span> as shown on the following figure:</p>
+<div class="figure align-center" id="id6">
+<a class="reference internal image-reference" href="_images/ll_mat_link_swap_right.png"><img alt="_images/ll_mat_link_swap_right.png" src="_images/ll_mat_link_swap_right.png" style="width: 300pt;" /></a>
+<p class="caption"><span class="caption-text"><strong>After</strong> insertion of element <span class="math">\((j, v, k)\)</span> in a <code class="docutils literal"><span class="pre">LLSparseMatrix</span></code> matrix</span></p>
+</div>
+<p>The element <span class="math">\((j, v, k)\)</span> was inserted in place of the first free element pointed by <code class="docutils literal"><span class="pre">free</span></code> and <span class="math">\(k_1\)</span> now points to this element. Notice also that now, <code class="docutils literal"><span class="pre">free</span></code> points to the next free element <span class="math">\(f_1\)</span>.</p>
+</div>
+<div class="section" id="detailed-example">
+<h3>Detailed example<a class="headerlink" href="#detailed-example" title="Permalink to this headline">¶</a></h3>
+<p>For all sparse matrix formats, we&#8217;ll detail an example. Let <span class="math">\(A\)</span> be the following <span class="math">\(3 \times 4\)</span> sparse matrix:</p>
+<div class="figure align-center" id="id7">
+<a class="reference internal image-reference" href="_images/detailed_example_smatrix_formats.png"><img alt="_images/detailed_example_smatrix_formats.png" src="_images/detailed_example_smatrix_formats.png" style="width: 100pt;" /></a>
+<p class="caption"><span class="caption-text">The example sparse matrix <span class="math">\(A\)</span></span></p>
+</div>
+<p>Notice that this matrix is sparse with 4 non zero entries, is non symmetric and has an empty row and column.</p>
+</div>
+<div class="section" id="how-to-run-through-a-ll-matrix">
+<h3>How to run through a <code class="docutils literal"><span class="pre">LL</span></code> matrix<a class="headerlink" href="#how-to-run-through-a-ll-matrix" title="Permalink to this headline">¶</a></h3>
+<p>To find all triplets <span class="math">\((i, j, v)\)</span>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">for</span> <span class="n">i</span> <span class="kn">from</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nrow</span><span class="p">:</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="k">while</span> <span class="n">k</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+       <span class="n">j</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">col</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+       <span class="n">v</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">val</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+
+       <span class="n">k</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">link</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="the-csr-sparse-format-in-details">
+<h2>The <code class="docutils literal"><span class="pre">CSR</span></code> sparse format in details<a class="headerlink" href="#the-csr-sparse-format-in-details" title="Permalink to this headline">¶</a></h2>
+<p>This format is implemented by the <code class="xref py py-class docutils literal"><span class="pre">CSRSparseMatrix</span></code> class. This format use a row-wise representation, as the above <code class="docutils literal"><span class="pre">LL</span></code> Sparse format, i.e. elements are stored row by row.</p>
+<div class="section" id="id2">
+<h3>Detailed example<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>Here are the three internal arrays for the example matrix:</p>
+<div class="figure align-center" id="id8">
+<a class="reference internal image-reference" href="_images/csr_detailed_example.png"><img alt="_images/csr_detailed_example.png" src="_images/csr_detailed_example.png" style="width: 100pt;" /></a>
+<p class="caption"><span class="caption-text">The internal arrays of a <code class="docutils literal"><span class="pre">CSR</span></code> matrix</span></p>
+</div>
+<p>One can immediatly see that the values are stored row-wise in <code class="docutils literal"><span class="pre">col</span></code> and <code class="docutils literal"><span class="pre">val</span></code>: first the row <code class="docutils literal"><span class="pre">0</span></code>, than the row <code class="docutils literal"><span class="pre">1</span></code> (and nothing for row <code class="docutils literal"><span class="pre">2</span></code>). <code class="docutils literal"><span class="pre">ind</span></code> gives the first indices for each row: <code class="docutils literal"><span class="pre">ind[0]</span> <span class="pre">==</span> <span class="pre">0</span></code> gives the start of row <code class="docutils literal"><span class="pre">0</span></code>,
+<code class="docutils literal"><span class="pre">ind[1]</span> <span class="pre">==</span> <span class="pre">2</span></code> gives the start of row <code class="docutils literal"><span class="pre">1</span></code>, etc. This means that <code class="docutils literal"><span class="pre">ind[i+1]</span> <span class="pre">-</span> <span class="pre">ind[i]</span></code> returns the number of elements in row <code class="docutils literal"><span class="pre">i</span></code>.</p>
+</div>
+<div class="section" id="how-to-run-through-a-csr-matrix">
+<h3>How to run through a <code class="docutils literal"><span class="pre">CSR</span></code> matrix<a class="headerlink" href="#how-to-run-through-a-csr-matrix" title="Permalink to this headline">¶</a></h3>
+<p>To find all triplets <span class="math">\((i, j, v)\)</span>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">for</span> <span class="n">i</span> <span class="kn">from</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nrow</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="kn">from</span> <span class="nn">ind</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">ind</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="n">col</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">val</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="the-csc-sparse-format-in-details">
+<h2>The <code class="docutils literal"><span class="pre">CSC</span></code> sparse format in details<a class="headerlink" href="#the-csc-sparse-format-in-details" title="Permalink to this headline">¶</a></h2>
+<p>This format is implemented by the <code class="xref py py-class docutils literal"><span class="pre">CSCSparseMatrix</span></code> class.</p>
+<p>The <code class="docutils literal"><span class="pre">CSC</span></code> sparse matrix format is exactly the same as the CSR sparse matrix format but column-wise. Given a matrix <span class="math">\(A\)</span> and a <code class="docutils literal"><span class="pre">CSR</span></code> representation of this matrix is exactly the same as a <code class="docutils literal"><span class="pre">CSC</span></code> respresentation
+of the transposed matrix <span class="math">\(A^t\)</span>, i.e.</p>
+<div class="math">
+\[\textrm{CSR}(A) = \textrm{CSC}(A^t)\]</div>
+<p>and everything we wrote about the <code class="docutils literal"><span class="pre">CSR</span></code> format transposes to the <code class="docutils literal"><span class="pre">CSC</span></code> format by exchanging rows for columns and vice-versa.</p>
+<div class="section" id="id3">
+<h3>Detailed example<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>Here are the three internal arrays for the example matrix:</p>
+<div class="figure align-center" id="id9">
+<a class="reference internal image-reference" href="_images/csc_detailed_example.png"><img alt="_images/csc_detailed_example.png" src="_images/csc_detailed_example.png" style="width: 100pt;" /></a>
+<p class="caption"><span class="caption-text">The internal arrays of a <code class="docutils literal"><span class="pre">CSC</span></code> matrix</span></p>
+</div>
+<p>The values are stored column-wise in <code class="docutils literal"><span class="pre">row</span></code> and <code class="docutils literal"><span class="pre">val</span></code>: first the column <code class="docutils literal"><span class="pre">0</span></code>, than column <code class="docutils literal"><span class="pre">1</span></code> and finally column <code class="docutils literal"><span class="pre">2</span></code> (nothing for column <code class="docutils literal"><span class="pre">3</span></code>). <code class="docutils literal"><span class="pre">ind</span></code> gives the first indices for each column: <code class="docutils literal"><span class="pre">ind[0]</span> <span class="pre">==</span> <span class="pre">0</span></code> gives the start of column <code class="docutils literal"><span class="pre">0</span></code>,
+<code class="docutils literal"><span class="pre">ind[1]</span> <span class="pre">==</span> <span class="pre">1</span></code> gives the start of column <code class="docutils literal"><span class="pre">1</span></code>, etc. This means that <code class="docutils literal"><span class="pre">ind[j+1]</span> <span class="pre">-</span> <span class="pre">ind[j]</span></code> returns the number of elements in column <code class="docutils literal"><span class="pre">j</span></code>.</p>
+</div>
+<div class="section" id="how-to-run-through-a-csc-matrix">
+<h3>How to run through a <code class="docutils literal"><span class="pre">CSC</span></code> matrix<a class="headerlink" href="#how-to-run-through-a-csc-matrix" title="Permalink to this headline">¶</a></h3>
+<p>To find all triplets <span class="math">\((i, j, v)\)</span>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">for</span> <span class="n">j</span> <span class="kn">from</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">ncol</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="kn">from</span> <span class="nn">ind</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">ind</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">val</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="_sources/sparse_matrix_formats.txt"
+     rel="nofollow">Source</a>
+</div>
+      
+    </p>
+    <p>
+        &copy; Copyright 2015, Dominique Orban, Sylvain Arreckx and Nikolaj van Omme.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

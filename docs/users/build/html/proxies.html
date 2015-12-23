@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Sparse Matrix Proxies &mdash; CySparse 0.2.2 documentation</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootswatch-3.3.4/spacelab/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.2.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="CySparse 0.2.2 documentation" href="contents.html" />
+    <link rel="next" title="IO formats" href="io_formats.html" />
+    <link rel="prev" title="Imutable matrices: CSR-, CSC- and CSBSparseMatrix" href="immutable_mat.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body role="document">
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="contents.html">
+          CySparse</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.2</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="contents.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to <strong class="program">CySparse</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html"><strong class="program">CySparse</strong> installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="types.html"><strong class="program">CySparse</strong>&#8216;s types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cysparse_basics.html"><strong class="program">CySparse</strong>&#8216;s basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matrix_creation.html">How to create a matrix?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mutable_ll_mat.html">Mutable matrices: <code class="docutils literal"><span class="pre">LLSparseMatrix</span></code> and <code class="docutils literal"><span class="pre">LLSparseMatrixView</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="immutable_mat.html">Imutable matrices: <code class="docutils literal"><span class="pre">CSR-</span></code>, <code class="docutils literal"><span class="pre">CSC-</span></code> and <code class="docutils literal"><span class="pre">CSBSparseMatrix</span></code></a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Sparse Matrix Proxies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io_formats.html">IO formats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cysparse_cython_users.html"><strong class="program">CySparse</strong> for <strong class="program">Cython</strong> users</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Sparse Matrix Proxies</a><ul>
+<li><a class="reference internal" href="#available-proxies">Available proxies</a></li>
+<li><a class="reference internal" href="#basic-operations">Basic operations</a></li>
+<li><a class="reference internal" href="#what-if-i-need-the-full-scale-corresponding-matrix">What if I need the full scale corresponding matrix?</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="immutable_mat.html" title="Previous Chapter: Imutable matrices: CSR-, CSC- and CSBSparseMatrix"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Imutable matr...</span>
+    </a>
+  </li>
+  <li>
+    <a href="io_formats.html" title="Next Chapter: IO formats"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">IO formats &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+  <div class="section" id="sparse-matrix-proxies">
+<span id="id1"></span><h1>Sparse Matrix Proxies<a class="headerlink" href="#sparse-matrix-proxies" title="Permalink to this headline">¶</a></h1>
+<p>This section describes the sparse matrix proxies available in
+<strong class="program">Cysparse</strong>. Sometimes, we can use a substitute for certain types of matrices instead of creating a full scale matrix. For instance, instead of creating the transpose of a matrix <cite>A</cite>, one can use <cite>A.T</cite>. <cite>A.T</cite> is a
+proxy and is thus <strong>not</strong> a real matrix. As such, it cannot replace a matrix in all circonstances but it can be used for the following operations:</p>
+<ul class="simple">
+<li>printing;</li>
+<li>accessing a value;</li>
+<li>multiplying with a <strong class="program">NumPy</strong> vector;</li>
+<li>accessing basic attributes of a matrix (<cite>shape</cite>, <cite>ncol</cite>, <cite>nrow</cite>, ...);</li>
+</ul>
+<div class="section" id="available-proxies">
+<h2>Available proxies<a class="headerlink" href="#available-proxies" title="Permalink to this headline">¶</a></h2>
+<p>Three basic proxies <a class="footnote-reference" href="#proxy-is-called-sparse-matrix" id="id2">[1]</a> are available:</p>
+<ul class="simple">
+<li>the transpose matrix proxy (<code class="xref py py-class docutils literal"><span class="pre">TransposedSparseMatrix</span></code> given by the <code class="docutils literal"><span class="pre">.T</span></code> attribute);</li>
+<li>the conjugate transpose matrix proxy (<code class="xref py py-class docutils literal"><span class="pre">ConjugateTransposedSparseMatrix</span></code> given by the <code class="docutils literal"><span class="pre">.H</span></code> attribute) and</li>
+<li>the conjugate matrix proxy (<code class="xref py py-class docutils literal"><span class="pre">ConjugatedSparseMatrix</span></code> given by the <code class="docutils literal"><span class="pre">.conj</span></code> attribute).</li>
+</ul>
+<p>Each of them is unique (i.e. the user is not supposed to copy them) and automagically updates whenever the original matrix is changed (for <code class="xref py py-class docutils literal"><span class="pre">LLSparseMatrix</span></code> matrices).</p>
+<p>These proxies are available for <strong>all</strong> sparse matrix and proxy types when they make sense. This means that the following code is legit:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">A</span> <span class="o">=</span> <span class="n">NewSparseMatrix</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+
+<span class="n">A</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">H</span><span class="o">.</span><span class="n">conj</span><span class="o">.</span><span class="n">H</span><span class="o">.</span><span class="n">H</span> <span class="o">*</span> <span class="n">b</span>
+</pre></div>
+</div>
+<p>The expression <code class="docutils literal"><span class="pre">A.T.H.conj.H.H</span></code> has to be read for left to right: we start by taking the transpose matrix of matrix <code class="docutils literal"><span class="pre">A</span></code>, then the conjugate transpose matrix of the transpose matrix of matrix <code class="docutils literal"><span class="pre">A</span></code> etc. The chaining of proxies can be as long as memory permits and no penalty occurs, i.e. each proxy is only instantiated once.</p>
+<p>The <code class="docutils literal"><span class="pre">H</span></code> and <code class="docutils literal"><span class="pre">conj</span></code> proxies are <strong>only</strong> available for complex matrices, i.e. matrices with a complex <code class="docutils literal"><span class="pre">dtype</span></code>.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The <code class="docutils literal"><span class="pre">H</span></code> and <code class="docutils literal"><span class="pre">conj</span></code> proxies are <strong>only</strong> available for complex matrices.</p>
+</div>
+</div>
+<div class="section" id="basic-operations">
+<h2>Basic operations<a class="headerlink" href="#basic-operations" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="what-if-i-need-the-full-scale-corresponding-matrix">
+<h2>What if I need the full scale corresponding matrix?<a class="headerlink" href="#what-if-i-need-the-full-scale-corresponding-matrix" title="Permalink to this headline">¶</a></h2>
+<p>For all proxies, the method <code class="docutils literal"><span class="pre">copy_matrix()</span></code> is available:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">A</span> <span class="o">=</span> <span class="n">NewSparseMatrix</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+
+<span class="n">Transpose_proxy</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">T</span>
+
+<span class="c"># real matrix</span>
+<span class="n">T</span> <span class="o">=</span> <span class="n">Transpose_proxy</span><span class="o">.</span><span class="n">copy_matrix</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">T</span></code> is now a real matrix of the same type as the original <code class="docutils literal"><span class="pre">A</span></code> matrix.</p>
+<h4>Footnote</h4><table class="docutils footnote" frame="void" id="proxy-is-called-sparse-matrix" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[1]</a></td><td>Despite being <em>proxies</em> and <strong>not</strong> matrices, we still give them the name <code class="docutils literal"><span class="pre">...SparseMatrix</span></code>.</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="_sources/proxies.txt"
+     rel="nofollow">Source</a>
+</div>
+      
+    </p>
+    <p>
+        &copy; Copyright 2015, Dominique Orban, Sylvain Arreckx and Nikolaj van Omme.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

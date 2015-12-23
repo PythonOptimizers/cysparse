@@ -1,0 +1,42 @@
+\BOOKMARK [0][-]{chapter.1}{Introduction to CySparse}{}% 1
+\BOOKMARK [1][-]{section.1.1}{What is CySparse?}{chapter.1}% 2
+\BOOKMARK [1][-]{section.1.2}{Content}{chapter.1}% 3
+\BOOKMARK [1][-]{section.1.3}{PySparse legacy}{chapter.1}% 4
+\BOOKMARK [1][-]{section.1.4}{PySparse vs CySparse}{chapter.1}% 5
+\BOOKMARK [1][-]{section.1.5}{License}{chapter.1}% 6
+\BOOKMARK [0][-]{chapter.2}{CySparse installation}{}% 7
+\BOOKMARK [1][-]{section.2.1}{Installation}{chapter.2}% 8
+\BOOKMARK [1][-]{section.2.2}{Inconveniences}{chapter.2}% 9
+\BOOKMARK [0][-]{chapter.3}{CySparse`s types}{}% 10
+\BOOKMARK [1][-]{section.3.1}{Compatibility with NumPy}{chapter.3}% 11
+\BOOKMARK [1][-]{section.3.2}{Available types}{chapter.3}% 12
+\BOOKMARK [1][-]{section.3.3}{Number's behavior in CySparse}{chapter.3}% 13
+\BOOKMARK [0][-]{chapter.4}{CySparse`s basics}{}% 14
+\BOOKMARK [1][-]{section.4.1}{Common strorage attributes}{chapter.4}% 15
+\BOOKMARK [1][-]{section.4.2}{Common content attributes}{chapter.4}% 16
+\BOOKMARK [1][-]{section.4.3}{Common type attributes}{chapter.4}% 17
+\BOOKMARK [1][-]{section.4.4}{Common string attributes}{chapter.4}% 18
+\BOOKMARK [1][-]{section.4.5}{Typed matrices in Python?}{chapter.4}% 19
+\BOOKMARK [0][-]{chapter.5}{How to create a matrix?}{}% 20
+\BOOKMARK [1][-]{section.5.1}{Sparse matrices all come from a LLSparseMatrix}{chapter.5}% 21
+\BOOKMARK [1][-]{section.5.2}{LLSparseMatrix matrices must be instantiated by a factory method}{chapter.5}% 22
+\BOOKMARK [1][-]{section.5.3}{Helpers}{chapter.5}% 23
+\BOOKMARK [0][-]{chapter.6}{Mutable matrices: LLSparseMatrix and LLSparseMatrixView}{}% 24
+\BOOKMARK [1][-]{section.6.1}{The LLSparseMatrix class}{chapter.6}% 25
+\BOOKMARK [1][-]{section.6.2}{The LLSparseMatrixView class}{chapter.6}% 26
+\BOOKMARK [0][-]{chapter.7}{Imutable matrices: CSR-, CSC- and CSBSparseMatrix}{}% 27
+\BOOKMARK [1][-]{section.7.1}{The CSRSparseMatrix class}{chapter.7}% 28
+\BOOKMARK [1][-]{section.7.2}{The CSCSparseMatrix class}{chapter.7}% 29
+\BOOKMARK [1][-]{section.7.3}{The CSBSparseMatrix class}{chapter.7}% 30
+\BOOKMARK [0][-]{chapter.8}{Sparse Matrix Proxies}{}% 31
+\BOOKMARK [1][-]{section.8.1}{Available proxies}{chapter.8}% 32
+\BOOKMARK [1][-]{section.8.2}{Basic operations}{chapter.8}% 33
+\BOOKMARK [1][-]{section.8.3}{What if I need the full scale corresponding matrix?}{chapter.8}% 34
+\BOOKMARK [0][-]{chapter.9}{IO formats}{}% 35
+\BOOKMARK [1][-]{section.9.1}{Text formats}{chapter.9}% 36
+\BOOKMARK [1][-]{section.9.2}{Binary formats}{chapter.9}% 37
+\BOOKMARK [0][-]{chapter.10}{CySparse for Cython users}{}% 38
+\BOOKMARK [1][-]{section.10.1}{How to compile with Cython?}{chapter.10}% 39
+\BOOKMARK [1][-]{section.10.2}{Creation of matrices}{chapter.10}% 40
+\BOOKMARK [1][-]{section.10.3}{Accessing matrix elements}{chapter.10}% 41
+\BOOKMARK [0][-]{chapter.11}{Indices and Tables}{}% 42
