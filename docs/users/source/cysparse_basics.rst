@@ -4,6 +4,10 @@
 Basics
 =========================================================
 
+[TO BE REWRITTEN]
+
+To add: shape
+
 ..  only:: html
     
     This page presents the basics of :program:`CySparse`. It covers a lot but you don't need to understand all the details. Instead, treat it as a gentle warm up for the rest of the manual.

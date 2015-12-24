@@ -48,7 +48,13 @@ The following has been optimized:
 Helpers
 ========
 
-in_arg and out_arg
+We provide the following helpers for the multiplication of a sparse matrix by a vector:
+
+- ``nargin``: The dimension of the vector ``v`` in ``A * v`` and
+- ``nargout``: The dimension of the result vector ``w`` in ``w = A * v``.
+
+Both are read-only attributes and are defined for all sparse matrices (``LLSparseMatrix``, ``CSRSparseMatrix`` and ``CSCSparseMatrix``) and matrix proxies (``TransposedSparseMatrix``, ``ConjugateTransposedSparseMatrix`` and ``ConjugatedSparseMatrix``)
+but all views (``LLSParseMatrixView``). Of course ``nargin == ncol`` and ``nargout == nrow``.
 
 For compapility reasons, we also provide the following global functions:
 
@@ -57,8 +63,8 @@ For compapility reasons, we also provide the following global functions:
 - ``matvec_htransp(A, x)``;
 - ``matvec_conj(A, x)``.
 
-Matrix ``A`` must be a sparse matrix, aka its type must inherit from :class:`SparseMatrix`. All methods accept a :program:`NumPy` vector but the first two methods also accepts a sparse vector (i.e. ``x`` can also be one
-dimensional sparse matrix).
+Matrix ``A`` must be a sparse matrix, aka its type must inherit from :class:`SparseMatrix`. All methods accept a :program:`NumPy` vector but the first two methods also accepts a sparse vector (i.e. ``x`` can also be "one
+dimensional" sparse matrix [#one_dimensional_sparse_matrix_not_yet]_).
 
 ``matvec()``
 ==============
@@ -174,4 +180,8 @@ and you need to use **two** indices to access its elements:
     for i in range(4):
         print v[i, 0]
         
-           
+..  only:: html
+
+    ..  rubric:: Footnotes
+    
+..  [#one_dimensional_sparse_matrix_not_yet] Remember that there is no such thing as a "one dimensional" sparse vector in :program:`CySparse`. We only use a two dimensional sparse matrix with only one row or one column.               

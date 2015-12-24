@@ -113,6 +113,16 @@ cdef class ConjugateTransposedSparseMatrix_INT64_t_COMPLEX128_t:
     def dtype_str(self):
         return self.A.dtype_str
 
+    
+    @property
+    def nargin(self):
+        return self.A.nargout
+
+    
+    @property
+    def nargout(self):
+        return self.A.nargin
+
     # for compatibility with numpy, PyKrylov, etc
     
     @property

@@ -99,6 +99,18 @@ cdef class LLSparseMatrixView_@index@_@type@:
     {% raw %}
     @property
     {%- endraw %}
+    def nargin(self):
+        return self.__ncol
+
+    {% raw %}
+    @property
+    {%- endraw %}
+    def nargout(self):
+        return self.__nrow
+
+    {% raw %}
+    @property
+    {%- endraw %}
     def dtype(self):
         return self.A.cp_type.dtype
 

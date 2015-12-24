@@ -126,6 +126,18 @@ cdef class ConjugateTransposedSparseMatrix_@index@_@type@:
     def dtype_str(self):
         return self.A.dtype_str
 
+    {% raw %}
+    @property
+    {%- endraw %}
+    def nargin(self):
+        return self.A.nargout
+
+    {% raw %}
+    @property
+    {%- endraw %}
+    def nargout(self):
+        return self.A.nargin
+
     # for compatibility with numpy, PyKrylov, etc
     {% raw %}
     @property

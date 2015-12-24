@@ -94,6 +94,16 @@ cdef class LLSparseMatrixView_INT64_t_INT32_t:
 
     
     @property
+    def nargin(self):
+        return self.__ncol
+
+    
+    @property
+    def nargout(self):
+        return self.__nrow
+
+    
+    @property
     def dtype(self):
         return self.A.cp_type.dtype
 
