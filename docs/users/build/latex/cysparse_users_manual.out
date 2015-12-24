@@ -11,44 +11,40 @@
 \BOOKMARK [1][-]{section.3.1}{Sparse Matrices and other matrix-like objects}{chapter.3}% 11
 \BOOKMARK [1][-]{section.3.2}{Storage schemes}{chapter.3}% 12
 \BOOKMARK [1][-]{section.3.3}{Types}{chapter.3}% 13
-\BOOKMARK [1][-]{section.3.4}{What to import}{chapter.3}% 14
-\BOOKMARK [1][-]{section.3.5}{Factory methods}{chapter.3}% 15
-\BOOKMARK [1][-]{section.3.6}{Common strorage attributes}{chapter.3}% 16
-\BOOKMARK [1][-]{section.3.7}{Common content attributes}{chapter.3}% 17
-\BOOKMARK [1][-]{section.3.8}{Common type attributes}{chapter.3}% 18
-\BOOKMARK [1][-]{section.3.9}{Common string attributes}{chapter.3}% 19
-\BOOKMARK [1][-]{section.3.10}{Typed matrices in Python?}{chapter.3}% 20
-\BOOKMARK [0][-]{chapter.4}{CySparse`s types}{}% 21
-\BOOKMARK [1][-]{section.4.1}{Compatibility with NumPy}{chapter.4}% 22
-\BOOKMARK [1][-]{section.4.2}{Available types}{chapter.4}% 23
-\BOOKMARK [1][-]{section.4.3}{Number's behavior in CySparse}{chapter.4}% 24
-\BOOKMARK [0][-]{chapter.5}{How to create a matrix?}{}% 25
-\BOOKMARK [1][-]{section.5.1}{Sparse matrices all come from a LLSparseMatrix}{chapter.5}% 26
-\BOOKMARK [1][-]{section.5.2}{LLSparseMatrix matrices must be instantiated by a factory method}{chapter.5}% 27
-\BOOKMARK [1][-]{section.5.3}{Helpers}{chapter.5}% 28
-\BOOKMARK [0][-]{chapter.6}{Mutable matrices: LLSparseMatrix and LLSparseMatrixView}{}% 29
-\BOOKMARK [1][-]{section.6.1}{The LLSparseMatrix class}{chapter.6}% 30
-\BOOKMARK [1][-]{section.6.2}{The LLSparseMatrixView class}{chapter.6}% 31
-\BOOKMARK [0][-]{chapter.7}{Imutable matrices: CSR-, CSC- and CSBSparseMatrix}{}% 32
-\BOOKMARK [1][-]{section.7.1}{The CSRSparseMatrix class}{chapter.7}% 33
-\BOOKMARK [1][-]{section.7.2}{The CSCSparseMatrix class}{chapter.7}% 34
-\BOOKMARK [1][-]{section.7.3}{The CSBSparseMatrix class}{chapter.7}% 35
-\BOOKMARK [0][-]{chapter.8}{Sparse Matrix Proxies}{}% 36
-\BOOKMARK [1][-]{section.8.1}{Available proxies}{chapter.8}% 37
-\BOOKMARK [1][-]{section.8.2}{Basic operations}{chapter.8}% 38
-\BOOKMARK [1][-]{section.8.3}{What if I need the full scale corresponding matrix?}{chapter.8}% 39
-\BOOKMARK [0][-]{chapter.9}{Multiplication with a NumPy vector}{}% 40
-\BOOKMARK [1][-]{section.9.1}{Optimization}{chapter.9}% 41
-\BOOKMARK [1][-]{section.9.2}{matvec\(\)}{chapter.9}% 42
-\BOOKMARK [1][-]{section.9.3}{matvec\137transp}{chapter.9}% 43
-\BOOKMARK [1][-]{section.9.4}{matvec\137htransp}{chapter.9}% 44
-\BOOKMARK [1][-]{section.9.5}{matvec\137conj}{chapter.9}% 45
-\BOOKMARK [1][-]{section.9.6}{What about sparse vectors?}{chapter.9}% 46
-\BOOKMARK [0][-]{chapter.10}{IO formats}{}% 47
-\BOOKMARK [1][-]{section.10.1}{Text formats}{chapter.10}% 48
-\BOOKMARK [1][-]{section.10.2}{Binary formats}{chapter.10}% 49
-\BOOKMARK [0][-]{chapter.11}{CySparse for Cython users}{}% 50
-\BOOKMARK [1][-]{section.11.1}{How to compile with Cython?}{chapter.11}% 51
-\BOOKMARK [1][-]{section.11.2}{Creation of matrices}{chapter.11}% 52
-\BOOKMARK [1][-]{section.11.3}{Accessing matrix elements}{chapter.11}% 53
-\BOOKMARK [0][-]{chapter.12}{Indices and Tables}{}% 54
+\BOOKMARK [1][-]{section.3.4}{Common type attributes}{chapter.3}% 14
+\BOOKMARK [1][-]{section.3.5}{What to import}{chapter.3}% 15
+\BOOKMARK [1][-]{section.3.6}{Factory methods}{chapter.3}% 16
+\BOOKMARK [0][-]{chapter.4}{CySparse`s types}{}% 17
+\BOOKMARK [1][-]{section.4.1}{Compatibility with NumPy}{chapter.4}% 18
+\BOOKMARK [1][-]{section.4.2}{Available types}{chapter.4}% 19
+\BOOKMARK [1][-]{section.4.3}{Number's behavior in CySparse}{chapter.4}% 20
+\BOOKMARK [0][-]{chapter.5}{How to create a matrix?}{}% 21
+\BOOKMARK [1][-]{section.5.1}{Sparse matrices all come from a LLSparseMatrix}{chapter.5}% 22
+\BOOKMARK [1][-]{section.5.2}{LLSparseMatrix matrices must be instantiated by a factory method}{chapter.5}% 23
+\BOOKMARK [1][-]{section.5.3}{Helpers}{chapter.5}% 24
+\BOOKMARK [0][-]{chapter.6}{Mutable matrices: LLSparseMatrix and LLSparseMatrixView}{}% 25
+\BOOKMARK [1][-]{section.6.1}{The LLSparseMatrix class}{chapter.6}% 26
+\BOOKMARK [1][-]{section.6.2}{The LLSparseMatrixView class}{chapter.6}% 27
+\BOOKMARK [0][-]{chapter.7}{Imutable matrices: CSR-, CSC- and CSBSparseMatrix}{}% 28
+\BOOKMARK [1][-]{section.7.1}{The CSRSparseMatrix class}{chapter.7}% 29
+\BOOKMARK [1][-]{section.7.2}{The CSCSparseMatrix class}{chapter.7}% 30
+\BOOKMARK [1][-]{section.7.3}{The CSBSparseMatrix class}{chapter.7}% 31
+\BOOKMARK [0][-]{chapter.8}{Sparse Matrix Proxies}{}% 32
+\BOOKMARK [1][-]{section.8.1}{Available proxies}{chapter.8}% 33
+\BOOKMARK [1][-]{section.8.2}{Basic operations}{chapter.8}% 34
+\BOOKMARK [1][-]{section.8.3}{What if I need the full scale corresponding matrix?}{chapter.8}% 35
+\BOOKMARK [0][-]{chapter.9}{Multiplication with a NumPy vector}{}% 36
+\BOOKMARK [1][-]{section.9.1}{Optimization}{chapter.9}% 37
+\BOOKMARK [1][-]{section.9.2}{matvec\(\)}{chapter.9}% 38
+\BOOKMARK [1][-]{section.9.3}{matvec\137transp}{chapter.9}% 39
+\BOOKMARK [1][-]{section.9.4}{matvec\137htransp}{chapter.9}% 40
+\BOOKMARK [1][-]{section.9.5}{matvec\137conj}{chapter.9}% 41
+\BOOKMARK [1][-]{section.9.6}{What about sparse vectors?}{chapter.9}% 42
+\BOOKMARK [0][-]{chapter.10}{IO formats}{}% 43
+\BOOKMARK [1][-]{section.10.1}{Text formats}{chapter.10}% 44
+\BOOKMARK [1][-]{section.10.2}{Binary formats}{chapter.10}% 45
+\BOOKMARK [0][-]{chapter.11}{CySparse for Cython users}{}% 46
+\BOOKMARK [1][-]{section.11.1}{How to compile with Cython?}{chapter.11}% 47
+\BOOKMARK [1][-]{section.11.2}{Creation of matrices}{chapter.11}% 48
+\BOOKMARK [1][-]{section.11.3}{Accessing matrix elements}{chapter.11}% 49
+\BOOKMARK [0][-]{chapter.12}{Indices and Tables}{}% 50

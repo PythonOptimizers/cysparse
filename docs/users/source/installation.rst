@@ -1,7 +1,7 @@
 ..  cysparse_intallation:
 
 ===================================
-:program:`CySparse` installation
+Installation
 ===================================
 
 There are basically [#tricky_installations]_, two modes to install :program:`CySparse`:
@@ -22,7 +22,7 @@ The installation is done in a few simple steps:
 
 We detail these steps in the next sections for both installation modes.
 
-:program:`Python` installation mode
+:program:`Python` installation
 ===================================
 
 Clone the repository
@@ -111,7 +111,7 @@ Wheter using a virtual environment or not, use the traditionnal:
 
 to compile and install the library.
 
-:program:`Cython` installation mode
+:program:`Cython` installation
 ===================================
 
 

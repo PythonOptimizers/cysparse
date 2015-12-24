@@ -1,4 +1,4 @@
-.. _ll_mat:
+.. _mutable_ll_mat:
 
 =================================================================================================
 Mutable matrices: :class:`LLSparseMatrix` and :class:`LLSparseMatrixView`

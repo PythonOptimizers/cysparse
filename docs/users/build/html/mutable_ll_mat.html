@@ -67,14 +67,15 @@
   <ul class="dropdown-menu globaltoc"
       role="menu"
       aria-labelledby="dLabelGlobalToc"><ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to <strong class="program">CySparse</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html"><strong class="program">CySparse</strong> installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="types.html"><strong class="program">CySparse</strong>&#8216;s types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cysparse_basics.html"><strong class="program">CySparse</strong>&#8216;s basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="types.html"><strong class="program">CySparse</strong>&#8216;s types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="matrix_creation.html">How to create a matrix?</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="">Mutable matrices: <code class="docutils literal"><span class="pre">LLSparseMatrix</span></code> and <code class="docutils literal"><span class="pre">LLSparseMatrixView</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="immutable_mat.html">Imutable matrices: <code class="docutils literal"><span class="pre">CSR-</span></code>, <code class="docutils literal"><span class="pre">CSC-</span></code> and <code class="docutils literal"><span class="pre">CSBSparseMatrix</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="proxies.html">Sparse Matrix Proxies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multiplication_with_numpy_vector.html">Multiplication with a <strong class="program">NumPy</strong> vector</a></li>
 <li class="toctree-l1"><a class="reference internal" href="io_formats.html">IO formats</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cysparse_cython_users.html"><strong class="program">CySparse</strong> for <strong class="program">Cython</strong> users</a></li>
 </ul>
@@ -150,7 +151,7 @@
     <div class="col-md-12 content">
       
   <div class="section" id="mutable-matrices-llsparsematrix-and-llsparsematrixview">
-<span id="ll-mat"></span><h1>Mutable matrices: <code class="xref py py-class docutils literal"><span class="pre">LLSparseMatrix</span></code> and <code class="xref py py-class docutils literal"><span class="pre">LLSparseMatrixView</span></code><a class="headerlink" href="#mutable-matrices-llsparsematrix-and-llsparsematrixview" title="Permalink to this headline">¶</a></h1>
+<span id="mutable-ll-mat"></span><h1>Mutable matrices: <code class="xref py py-class docutils literal"><span class="pre">LLSparseMatrix</span></code> and <code class="xref py py-class docutils literal"><span class="pre">LLSparseMatrixView</span></code><a class="headerlink" href="#mutable-matrices-llsparsematrix-and-llsparsematrixview" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="the-llsparsematrix-class">
 <h2>The <code class="xref py py-class docutils literal"><span class="pre">LLSparseMatrix</span></code> class<a class="headerlink" href="#the-llsparsematrix-class" title="Permalink to this headline">¶</a></h2>
 <p>The <em>mutable</em> <code class="xref py py-class docutils literal"><span class="pre">LLSparseMatrix</span></code> class is the base class to <strong>construct</strong> and <strong>populate</strong> a matrix. With it you can easily add or delete elements, rows, columns, assign sub-matrices, etc. Once your matrix is constructed,

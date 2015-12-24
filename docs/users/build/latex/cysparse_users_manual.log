@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.1.20)  23 DEC 2015 22:35
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.1.20)  23 DEC 2015 22:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -900,7 +900,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 128--128
 
  []
 
-<cysparse_logo128.pdf, id=222, 92.5056pt x 69.3792pt>
+<cysparse_logo128.pdf, id=206, 92.5056pt x 69.3792pt>
 File: cysparse_logo128.pdf Graphic file (type pdf)
 
 <use cysparse_logo128.pdf>
@@ -952,7 +952,7 @@ File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 LaTeX Font Info:    Font shape `T1/pcr/bx/n' in size <10> not available
 (Font)              Font shape `T1/pcr/b/n' tried instead on input line 3.
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <10> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 69.
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 72.
  [1
 
 ])
@@ -1013,30 +1013,25 @@ LaTeX Font Info:    Try loading font information for TS1+pcr on input line 481.
  (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1pcr.fd
 File: ts1pcr.fd 2001/06/04 font definitions for TS1/pcr.
 ) [10]
-Overfull \hbox (86.25366pt too wide) in paragraph at lines 556--557
-\T1/ptm/m/n/10 ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ
-ZZZZZZZZZZZZZZZZZZZZZZZZZZZ 
- []
-
-[11]
 LaTeX Font Info:    Font shape `T1/pcr/bx/n' in size <9> not available
-(Font)              Font shape `T1/pcr/b/n' tried instead on input line 596.
-
-Underfull \hbox (badness 10000) in paragraph at lines 633--636
+(Font)              Font shape `T1/pcr/b/n' tried instead on input line 581.
+ [11]
+[12]
+Underfull \hbox (badness 10000) in paragraph at lines 659--662
 
  []
 
-[12] [13] [14
+[13] [14
 
 ]
 Chapter 4.
 
-Underfull \hbox (badness 10000) in paragraph at lines 704--707
+Underfull \hbox (badness 10000) in paragraph at lines 716--719
 
  []
 
 [15]
-Underfull \hbox (badness 10000) in paragraph at lines 737--740
+Underfull \hbox (badness 10000) in paragraph at lines 749--752
 
  []
 
@@ -1045,26 +1040,26 @@ Chapter 5.
 [19
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 948--951
+Underfull \hbox (badness 10000) in paragraph at lines 960--963
 
  []
 
 [20]
 Chapter 6.
 
-Underfull \hbox (badness 10000) in paragraph at lines 969--972
+Underfull \hbox (badness 10000) in paragraph at lines 981--984
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 999--1002
+Underfull \hbox (badness 10000) in paragraph at lines 1011--1014
 
  []
 
 [21
 
 ]
-Overfull \hbox (14.79999pt too wide) in paragraph at lines 1028--1028
+Overfull \hbox (14.79999pt too wide) in paragraph at lines 1040--1040
  [] 
  []
 
@@ -1077,14 +1072,14 @@ Chapter 7.
 ]
 Chapter 8.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1149--1152
+Underfull \hbox (badness 10000) in paragraph at lines 1161--1164
 
  []
 
 [27] [28]
 Chapter 9.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1178--1180
+Underfull \hbox (badness 10000) in paragraph at lines 1190--1192
 \T1/pcr/m/n/10 CSRSparseMatrix \T1/ptm/m/n/10 and \T1/pcr/m/n/10 CSCSparseMatri
 x\T1/ptm/m/n/10 ), \T1/ptm/b/n/10 all \T1/ptm/m/n/10 proxy types (\T1/pcr/m/n/1
 0 TransposedSparseMatrix\T1/ptm/m/n/10 ,
@@ -1097,7 +1092,7 @@ x\T1/ptm/m/n/10 ), \T1/ptm/b/n/10 all \T1/ptm/m/n/10 proxy types (\T1/pcr/m/n/1
 ]
 Chapter 10.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1353--1356
+Underfull \hbox (badness 10000) in paragraph at lines 1365--1368
 
  []
 
@@ -1110,25 +1105,25 @@ Chapter 11.
 ]
 Chapter 12.
 (./cysparse_users_manual.ind)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1409.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1421.
  [37]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1409.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1421.
  (./cysparse_users_manual.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1409.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1409.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1421.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1421.
 
 Package rerunfilecheck Info: File `cysparse_users_manual.out' has not changed.
-(rerunfilecheck)             Checksum: 7B1AD81688170CBABCFC335F805E37D9;3631.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1409.
+(rerunfilecheck)             Checksum: 045334EE3A254BFA0C00F8AA21BD1B2B;3342.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1421.
  ) 
 Here is how much of TeX's memory you used:
- 9610 strings out of 493307
- 135536 string characters out of 6139905
- 235307 words of memory out of 5000000
- 12598 multiletter control sequences out of 15000+600000
+ 9604 strings out of 493307
+ 135458 string characters out of 6139905
+ 236273 words of memory out of 5000000
+ 12593 multiletter control sequences out of 15000+600000
  83336 words of font info for 111 fonts, out of 8000000 for 9000
  958 hyphenation exceptions out of 8191
- 36i,13n,49p,568b,508s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 37i,13n,49p,568b,485s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/
@@ -1141,10 +1136,10 @@ live/texmf-dist/fonts/type1/urw/helvetic/uhvbo8a.pfb></usr/share/texlive/texmf-
 dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/t
 ype1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/
 utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on cysparse_users_manual.pdf (41 pages, 223447 bytes).
+Output written on cysparse_users_manual.pdf (41 pages, 223637 bytes).
 PDF statistics:
- 625 PDF objects out of 1000 (max. 8388607)
- 556 compressed objects within 6 object streams
- 149 named destinations out of 1000 (max. 500000)
- 458 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 610 PDF objects out of 1000 (max. 8388607)
+ 541 compressed objects within 6 object streams
+ 148 named destinations out of 1000 (max. 500000)
+ 426 words of extra memory for PDF output out of 10000 (max. 10000000)
 

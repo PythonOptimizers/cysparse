@@ -67,12 +67,12 @@
       role="menu"
       aria-labelledby="dLabelGlobalToc"><ul>
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="installation.html"><strong class="program">CySparse</strong> installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cysparse_basics.html"><strong class="program">CySparse</strong>&#8216;s basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cysparse_basics.html">Basics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="types.html"><strong class="program">CySparse</strong>&#8216;s types</a></li>
-<li class="toctree-l1"><a class="reference internal" href="matrix_creation.html">How to create a matrix?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mutable_ll_mat.html">Mutable matrices: <code class="docutils literal"><span class="pre">LLSparseMatrix</span></code> and <code class="docutils literal"><span class="pre">LLSparseMatrixView</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="immutable_mat.html">Imutable matrices: <code class="docutils literal"><span class="pre">CSR-</span></code>, <code class="docutils literal"><span class="pre">CSC-</span></code> and <code class="docutils literal"><span class="pre">CSBSparseMatrix</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="matrix_creation.html">How to create a matrix?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="proxies.html">Sparse Matrix Proxies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="multiplication_with_numpy_vector.html">Multiplication with a <strong class="program">NumPy</strong> vector</a></li>
 <li class="toctree-l1"><a class="reference internal" href="io_formats.html">IO formats</a></li>
@@ -153,34 +153,24 @@
 <li class="toctree-l2"><a class="reference internal" href="introduction.html#license">License</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="installation.html"><strong class="program">CySparse</strong> installation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#python-installation-mode"><strong class="program">Python</strong> installation mode</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#cython-installation-mode"><strong class="program">Cython</strong> installation mode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#python-installation"><strong class="program">Python</strong> installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#cython-installation"><strong class="program">Cython</strong> installation</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="cysparse_basics.html"><strong class="program">CySparse</strong>&#8216;s basics</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="cysparse_basics.html">Basics</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="cysparse_basics.html#sparse-matrices-and-other-matrix-like-objects">Sparse Matrices and other matrix-like objects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cysparse_basics.html#storage-schemes">Storage schemes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cysparse_basics.html#types">Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cysparse_basics.html#common-type-attributes">Common type attributes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cysparse_basics.html#what-to-import">What to import</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cysparse_basics.html#factory-methods">Factory methods</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cysparse_basics.html#common-strorage-attributes">Common strorage attributes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cysparse_basics.html#common-content-attributes">Common content attributes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cysparse_basics.html#common-type-attributes">Common type attributes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cysparse_basics.html#common-string-attributes">Common string attributes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cysparse_basics.html#typed-matrices-in-python">Typed matrices in <strong class="program">Python</strong>?</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="types.html"><strong class="program">CySparse</strong>&#8216;s types</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="types.html#compatibility-with-numpy">Compatibility with <strong class="program">NumPy</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="types.html#available-types">Available types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="types.html#number-s-behavior-in-cysparse">Number&#8217;s behavior in <strong class="program">CySparse</strong></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="matrix_creation.html">How to create a matrix?</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="matrix_creation.html#sparse-matrices-all-come-from-a-llsparsematrix">Sparse matrices all come from a <code class="docutils literal"><span class="pre">LLSparseMatrix</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="matrix_creation.html#llsparsematrix-matrices-must-be-instantiated-by-a-factory-method"><code class="docutils literal"><span class="pre">LLSparseMatrix</span></code> matrices must be instantiated by a factory method</a></li>
-<li class="toctree-l2"><a class="reference internal" href="matrix_creation.html#helpers">Helpers</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="mutable_ll_mat.html">Mutable matrices: <code class="docutils literal"><span class="pre">LLSparseMatrix</span></code> and <code class="docutils literal"><span class="pre">LLSparseMatrixView</span></code></a><ul>
@@ -192,6 +182,12 @@
 <li class="toctree-l2"><a class="reference internal" href="immutable_mat.html#the-csrsparsematrix-class">The <code class="docutils literal"><span class="pre">CSRSparseMatrix</span></code> class</a></li>
 <li class="toctree-l2"><a class="reference internal" href="immutable_mat.html#the-cscsparsematrix-class">The <code class="docutils literal"><span class="pre">CSCSparseMatrix</span></code> class</a></li>
 <li class="toctree-l2"><a class="reference internal" href="immutable_mat.html#the-csbsparsematrix-class">The <code class="docutils literal"><span class="pre">CSBSparseMatrix</span></code> class</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="matrix_creation.html">How to create a matrix?</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="matrix_creation.html#sparse-matrices-all-come-from-a-llsparsematrix">Sparse matrices all come from a <code class="docutils literal"><span class="pre">LLSparseMatrix</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="matrix_creation.html#llsparsematrix-matrices-must-be-instantiated-by-a-factory-method"><code class="docutils literal"><span class="pre">LLSparseMatrix</span></code> matrices must be instantiated by a factory method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="matrix_creation.html#helpers">Helpers</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="proxies.html">Sparse Matrix Proxies</a><ul>

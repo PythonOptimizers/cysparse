@@ -1,7 +1,7 @@
 ..  _cysparse_basics:
 
 =========================================================
-:program:`CySparse`\'s basics
+Basics
 =========================================================
 
 ..  only:: html
@@ -109,69 +109,31 @@ Views only exist for **LL** format matrices but because you read carefully, you 
 
 That's it. You have already seen **all** the main objects of the library! Of course, we need to talk a little bit more about the details and the common uses.
 
+You can read more on:
+
+- LL matrices and views: :ref:`mutable_ll_mat`;
+- CSC and CSR matrices: :ref:`immutable_mat`;
+- proxy matrices: :ref:`sparse_matrix_proxies`.
+
 Storage schemes
 ===============
 
-
-
-..  _basics_types:
-
-Types
-=======
-
-Each library has been written with a main goal in mind. We tried to optimize :program:`CySparse` for speed. Its code is therefor highly optimized and we use *typed* :program:`C` variables internally. All elements inside 
-a matrix have the same well-defined types. Even indices are typed! For efficiency reasons, we often don't allow XXX
-
-
-You will not be surprised that in :program:`CySparse`, we **strongly** discourage the mixing of types. Actually, most operations require to deal with objets that have **exactly**
-the same types for their indices **and** their elements. As a rule of thumb, try not to mix objects with different types. We call this our *Golden Rule*.
-
-..  important:: The Golden Rule:
-
-    Never mix matrices with different types! 
-    
-If you follow this rule, you will not run into troubles in :program:`CySparse`.    
-    
-:program:`NumPy` and :program:`SciPy` let you mix matrices with different types. You can even declare your own type for the elements of a matrix! This flexibility has a cost as you can see in our benchmarks. :program:`CySparse`
-is not as flexible but is some order of magnitude more efficient.
-
-What to import
-==============
-
-Factory methods
-===============
-
-..  only:: html
-
-    ..  rubric:: footnotes
-
-..  [#store_zero_elements] In some cases thought, it **is** worth keeping **some** zeros explicitly. This can be done in :program:`CySparse` through the use of the ``store_zero`` parameter. Read further.
-  
-..  [#why_only_one_type_of_view] Remember that the LL format matrices are the only ones you can modify in :program:`CySparse`!
-
-ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ
-
-[TO BE SORTED OUT]
-
-In this section, we explain the very basics of :program:`CySparse`. Most matrices share some common basic attributes that we detail here. 
-
-Most attributes and **all** common ones are *read-only*. Some attributes ask for some expensive computation. We indicate whenever this is the case.
-Some attributes can also be given as arguments to most factory methods. We also detail which ones. 
+[TO BE REWRITTEN]
 
 Common strorage attributes
-===========================
+----------------------------
 
 For efficiency reasons, :program:`CySparse` can use different storage schemes/methods to store matrices. For instance, symmetric matrices can be stored with only half of their elements. 
 
 ``store_symmetric``
-----------------------------
+"""""""""""""""""""""""
 
 Symmetric matrices can be stored by only storing the **lower** triangular part and the diagonal of a matrix. To create a symmetric matrix, add the arguement ``store_symmetric=True`` to the call of one of the factory methods.
 The attribute ``store_symmetric`` returns if this storage method is used or not. Thus, if ``store_symmetric`` is ``True``, you know that you deal with a symmetric matrix **and** that roughly only half of its elements are stored. If 
 ``store_symmetric`` is ``False``, it simply means that this storage scheme is not used. The matrix itself migth be symmetric or not.
 
 ``store_zero``
-------------------------------
+"""""""""""""""""""
 
 By default non specified (implicit) elements are zero (``0``, ``0.0`` or ``0+0j``). :program:`CySparse` allow the user to store explicitely zeros. To explicitely store zeros, declare ``store_zero=True`` as an argument
 in any factory method:
@@ -199,41 +161,34 @@ This context manager temporarily set the ``store_zero`` attribute to ``False`` b
 By default, ``store_zero`` is set to ``False``.
 
 ``is_mutable``
---------------------
+""""""""""""""""""
 
 ``is_mutable`` returns if the matrix can be modified or not. Note that for the moment, **only** an :class:`LLSparseMatrix` matrix can be modified.
 
 
-Common content attributes
-=========================
+
+..  _basics_types:
+
+Types
+=======
+
+Each library has been written with a main goal in mind. We tried to optimize :program:`CySparse` for speed. Its code is therefor highly optimized and we use *typed* :program:`C` variables internally. All elements inside 
+a matrix have the same well-defined types. Even indices are typed! For efficiency reasons, we often don't allow XXX
 
 
-``nrow`` and ``ncol``
-----------------------
+You will not be surprised that in :program:`CySparse`, we **strongly** discourage the mixing of types. Actually, most operations require to deal with objets that have **exactly**
+the same types for their indices **and** their elements. As a rule of thumb, try not to mix objects with different types. We call this our *Golden Rule*.
 
-``nrow`` and ``ncol`` give respectively the number of rows and columns. You also can grab both at the same time with the ``shape`` attribute:
+..  important:: The Golden Rule:
 
-..  code-block:: python
-
-    A = ...
-    A.shape == A.nrow, A.ncol  # is True
+    Never mix matrices with different types! 
     
-You can use ``nrow`` and ``ncol`` as arguments to construct a new matrix. Whenever the number of rows is equal to the number of columns, i.e. when the matrix is square, you can
-instead use the argument ``size=...`` in most factory methods.
-
-``nnz``
----------
-
-The ``nnz`` attribute returns the number of "non zeros" stored in the matrix. Notice that ``0`` could be stored if ``store_zero`` is set to ``True`` and if so, it will be counted in the number of "non zero" elements.
-Whenever the symmetric storage scheme is used (``store_symmetric`` is ``True``), ``nnz`` only returns the number of "non zero" elements stored in the lower triangular part and the diagonal of the matrix, i.e. ``nnz`` 
-returns exactly how many elements are stored internally.
-
-..  warning:: ``nnz`` returns **exactly** the number of elements stored internally.
-
-When using views, this attribute is **costly** to retrieve as it is systematically recomputed each time and we don't make any assomption on the views (views can represent matrices with rows and columns in any order and duplicated 
-rows and columns any number of times). The number returned is the number of "non zero" elements stored in the equivalent matrix using the **same** storage scheme than viewed matrix.
+If you follow this rule, you will not run into troubles in :program:`CySparse`.    
     
+:program:`NumPy` and :program:`SciPy` let you mix matrices with different types. You can even declare your own type for the elements of a matrix! This flexibility has a cost as you can see in our benchmarks. :program:`CySparse`
+is not as flexible but is some order of magnitude more efficient.
 
+[TO BE REWRITTEN]
 
 Common type attributes
 =========================
@@ -246,8 +201,49 @@ Each matrix (matrix-like) object has an internal index *type* and stores *typed*
  
 See section :ref:`availabe_types` about the available types.
 
+What to import
+==============
+
+Factory methods
+===============
+
+[TO BE REWRITTEN]
+
+Common content attributes
+-----------------------------
+
+
+``nrow`` and ``ncol``
+"""""""""""""""""""""""""
+
+``nrow`` and ``ncol`` give respectively the number of rows and columns. You also can grab both at the same time with the ``shape`` attribute:
+
+..  code-block:: python
+
+    A = ...
+    A.shape == A.nrow, A.ncol  # is True
+    
+You can use ``nrow`` and ``ncol`` as arguments to construct a new matrix. Whenever the number of rows is equal to the number of columns, i.e. when the matrix is square, you can
+instead use the argument ``size=...`` in most factory methods.
+
+``nnz``
+""""""""""
+
+The ``nnz`` attribute returns the number of "non zeros" stored in the matrix. Notice that ``0`` could be stored if ``store_zero`` is set to ``True`` and if so, it will be counted in the number of "non zero" elements.
+Whenever the symmetric storage scheme is used (``store_symmetric`` is ``True``), ``nnz`` only returns the number of "non zero" elements stored in the lower triangular part and the diagonal of the matrix, i.e. ``nnz`` 
+returns exactly how many elements are stored internally.
+
+..  warning:: ``nnz`` returns **exactly** the number of elements stored internally.
+
+When using views, this attribute is **costly** to retrieve as it is systematically recomputed each time and we don't make any assomption on the views (views can represent matrices with rows and columns in any order and duplicated 
+rows and columns any number of times). The number returned is the number of "non zero" elements stored in the equivalent matrix using the **same** storage scheme than viewed matrix.
+    
+
+
+
+
 ``is_symmetric``
--------------------
+"""""""""""""""""""""""
 
 [TODO in the code!!!]
 
@@ -257,12 +253,12 @@ compute in general.
 
 
 Common string attributes
-===========================
+----------------------------
 
 Some attributes are stored as ``C`` struct internally and can thus not be accessed from :program:`Python`. We do however provide some strings for the most important ones.
 
 ``base_type_str`` and ``full_type_str``
-------------------------------------------
+""""""""""""""""""""""""""""""""""""""""""
 
 Each matrix or matrix-like object has its own type and type name defined as strings. For instance:
 
@@ -283,8 +279,20 @@ The type ``LLSparseMatrix`` is common among ``LL`` sparse format matrices while 
 
 
 
-Typed matrices in :program:`Python`?
-======================================
+..  only:: html
+
+    ..  rubric:: footnotes
+
+..  [#store_zero_elements] In some cases thought, it **is** worth keeping **some** zeros explicitly. This can be done in :program:`CySparse` through the use of the ``store_zero`` parameter. Read further.
+  
+..  [#why_only_one_type_of_view] Remember that the LL format matrices are the only ones you can modify in :program:`CySparse`!
+
+
+
+
+
+
+
 
 
 

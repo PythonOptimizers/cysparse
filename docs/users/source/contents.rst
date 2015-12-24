@@ -13,9 +13,9 @@
    installation
    cysparse_basics
    types
-   matrix_creation
    mutable_ll_mat
    immutable_mat
+   matrix_creation
    proxies
    multiplication_with_numpy_vector
    io_formats
