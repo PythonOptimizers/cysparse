@@ -47,13 +47,27 @@ cpdef bint PySparseMatrix_Check(object obj):
     Args:
         obj: Whatever.
 
-    Return:
+    Returns:
         ``True`` if ``obj`` is a ``SparseMatrix`` object or inherited from it.
     """
     return isinstance(obj, SparseMatrix)
 
 
+cdef bint PyBothSparseMatricesAreOfSameType(object obj1, object obj2):
+    """
+    Test if ``obj1`` is a sparse matrix of the same type as sparse matrix ``obj2``
 
+    Args:
+        obj1:
+        obj2:
+
+    Returns:
+        ``True`` if both ``obj1`` and ``obj2`` are ``SparseMatrix`` and have same base types.
+    """
+    if not PySparseMatrix_Check(obj1) or not PySparseMatrix_Check(obj2):
+        return False
+
+    return obj1.base_type_str == obj2.base_type_str
 
 ########################################################################################################################
 # BASE MATRIX CLASS
@@ -263,9 +277,6 @@ cdef class SparseMatrix:
             B:
 
         """
-        #if not is_complex_type(self.cp_type.dtype):
-        #    raise TypeError("This operation is only valid for complex matrices")
-
         raise NotImplementedError("Operation not implemented (yet). Please report.")
 
     def matdot_conj(self, B):
@@ -276,9 +287,6 @@ cdef class SparseMatrix:
             B:
 
         """
-        #if not is_complex_type(self.cp_type.dtype):
-        #    raise TypeError("This operation is only valid for complex matrices")
-
         raise NotImplementedError("Operation not implemented (yet). Please report.")
 
     #########################

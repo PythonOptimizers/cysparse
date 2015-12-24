@@ -18,6 +18,7 @@
    matrix_creation
    proxies
    multiplication_with_numpy_vector
+   multiplication_with_matrix
    io_formats
    cysparse_cython_users
    

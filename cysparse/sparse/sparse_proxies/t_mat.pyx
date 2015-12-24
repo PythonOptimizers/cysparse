@@ -165,7 +165,7 @@ cdef class TransposedSparseMatrix:
             else:
                 raise IndexError("Matrix dimensions must agree")
         elif PyLLSparseMatrix_Check(B):
-            return self.A.matdot(B)
+            return self.A.matdot_transp(B)
         else:
             raise NotImplementedError("Multiplication with this kind of object not implemented yet...")
 

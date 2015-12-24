@@ -10,5 +10,35 @@ print A
 
 C = A * v
 print C
+print matvec(A, v)
 
-A.T[0, 0] = 8.9
+
+B = LinearFillLLSparseMatrix(nrow=2, ncol=2)
+
+import numpy as np
+
+a=np.mat('4 3; 2 1', dtype=np.float64)
+
+print a
+
+print type(a)
+D = B * a
+
+print D
+print type(D)
+
+print "+" * 80
+
+A = LinearFillLLSparseMatrix(nrow=2, ncol=2)
+B = np.mat('4 3; 2 1', dtype=np.float64) # NumPy matrix
+
+print A
+print B
+
+C = A * B
+
+print C
+print type(C)
+
+print "=" * 80
+

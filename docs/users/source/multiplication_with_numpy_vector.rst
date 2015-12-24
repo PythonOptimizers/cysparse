@@ -10,6 +10,7 @@ Because :program:`NumPy` vectors are dense, the multiplication of a sparse matri
 
 All :program:`NumPy` vector multiplication operations work accross **all** sparse matrix types (``LLSparseMatrix``, ``CSRSparseMatrix`` and ``CSCSparseMatrix``), 
 **all** proxy types (``TransposedSparseMatrix``, ``ConjugateTransposedSparseMatrix`` and ``ConjugatedSparseMatrix``) and this for **all** **real** and **complex** element types.
+Views **don't** implement matrix multiplication.
 
 As all multiplications are **higly** optimized, you really should use the corresponding method and not use a combination of them equivalent to the one you seek. For instance, 
 
@@ -44,6 +45,20 @@ The following has been optimized:
 - strided vectors have special dedicated code;
 - we used the best loops to compute the multiplication for each type of matrix;
 
+Helpers
+========
+
+in_arg and out_arg
+
+For compapility reasons, we also provide the following global functions:
+
+- ``matvec(A, x)``;
+- ``matvec_transp(A, x)``;
+- ``matvec_htransp(A, x)``;
+- ``matvec_conj(A, x)``.
+
+Matrix ``A`` must be a sparse matrix, aka its type must inherit from :class:`SparseMatrix`. All methods accept a :program:`NumPy` vector but the first two methods also accepts a sparse vector (i.e. ``x`` can also be one
+dimensional sparse matrix).
 
 ``matvec()``
 ==============
@@ -149,4 +164,14 @@ will result in
 
 ..  code-block:: bash
 
-    IndexError: Matrix dimensions must agree ([3, 4] * [1, 4])    
+    IndexError: Matrix dimensions must agree ([3, 4] * [1, 4]) 
+    
+and you need to use **two** indices to access its elements:
+
+..  code-block:: python
+
+    v = LLSparseMatrix(nrow=4, ncol=1)
+    for i in range(4):
+        print v[i, 0]
+        
+           

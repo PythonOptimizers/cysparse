@@ -449,6 +449,7 @@ if __name__ == "__main__":
     cygenja_engine.register_action('tests/cysparse_/sparse/common_operations/object_creation', 'test_creation*.cpy', generate_following_all_sparse_like_objects_class_and_index_and_type)
     # multiplication with a NumPy vector
     cygenja_engine.register_action('tests/cysparse_/sparse/common_operations/multiplication_with_numpy_vector', 'test_common_numpy_vector_multiplication.cpy', generate_following_matrix_like_class_and_index_and_type)
+    cygenja_engine.register_action('tests/cysparse_/sparse/common_operations/multiplication_with_numpy_vector', 'test_global_matvec_functions.cpy', generate_following_matrix_class_and_index_and_type)
 
     ####################################################################################################################
     # Generation

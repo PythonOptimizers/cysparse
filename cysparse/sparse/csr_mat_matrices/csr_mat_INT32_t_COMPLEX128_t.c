@@ -1082,7 +1082,7 @@ struct __pyx_opt_args_8cysparse_6sparse_16csr_mat_matrices_28csr_mat_INT32_t_COM
 };
 
 /* "cysparse/sparse/s_mat.pxd":21
- * 
+ * cdef bint PyBothSparseMatricesAreOfSameType(object obj1, object obj2)
  * 
  * cdef class SparseMatrix:             # <<<<<<<<<<<<<<
  *     """
@@ -2439,7 +2439,6 @@ static char __pyx_k_Invalid_mode_expected_c_or_fortr[] = "Invalid mode, expected
 static char __pyx_k_Matrix_dimensions_must_agree_d_d[] = "Matrix dimensions must agree ([%d, %d] * [%d, %d])";
 static char __pyx_k_Multiplication_only_allowed_with[] = "Multiplication only allowed with a Numpy compatible type (%s)!";
 static char __pyx_k_Multiplication_with_symmetric_ma[] = "Multiplication with symmetric matrices is not implemented yet";
-static char __pyx_k_Multiplication_with_this_kind_of[] = "Multiplication with this kind of object not allowed";
 static char __pyx_k_Non_native_byte_order_not_suppor[] = "Non-native byte order not supported";
 static char __pyx_k_Only_integer_indices_are_allowed[] = "Only integer indices are allowed";
 static char __pyx_k_Out_of_bounds_on_buffer_access_a[] = "Out of bounds on buffer access (axis %d)";
@@ -2450,6 +2449,8 @@ static char __pyx_k_got_differing_extents_in_dimensi[] = "got differing extents 
 static char __pyx_k_k_th_diagonal_must_be_0_here_k_d[] = "k-th diagonal must be <= 0 (here: k = %d)";
 static char __pyx_k_k_th_diagonal_must_be_0_k_d_here[] = "k_th diagonal must be 0 <= k <= %d (here: k = %d)";
 static char __pyx_k_k_th_diagonal_must_be_d_k_0_here[] = "k_th diagonal must be %d <= k <= 0 (here: k = %d)";
+static char __pyx_k_matdot_not_implemented_for_CSR_m[] = "matdot not implemented for CSR matrices";
+static char __pyx_k_matdot_transp_not_implemented_fo[] = "matdot_transp not implemented for CSR matrices";
 static char __pyx_k_ndarray_is_not_Fortran_contiguou[] = "ndarray is not Fortran contiguous";
 static char __pyx_k_unable_to_allocate_shape_and_str[] = "unable to allocate shape and strides.";
 static char __pyx_k_Format_string_allocated_too_shor_2[] = "Format string allocated too short.";
@@ -2480,7 +2481,6 @@ static PyObject *__pyx_kp_s_MemoryView_of_r_at_0x_x;
 static PyObject *__pyx_kp_s_MemoryView_of_r_object;
 static PyObject *__pyx_kp_s_Multiplication_only_allowed_with;
 static PyObject *__pyx_kp_s_Multiplication_with_symmetric_ma;
-static PyObject *__pyx_kp_s_Multiplication_with_this_kind_of;
 static PyObject *__pyx_kp_u_Non_native_byte_order_not_suppor;
 static PyObject *__pyx_n_s_NotImplemented;
 static PyObject *__pyx_n_s_NotImplementedError;
@@ -2542,6 +2542,8 @@ static PyObject *__pyx_kp_s_k_th_diagonal_must_be_0_k_d_here;
 static PyObject *__pyx_kp_s_k_th_diagonal_must_be_d_k_0_here;
 static PyObject *__pyx_n_s_main;
 static PyObject *__pyx_n_s_matdot;
+static PyObject *__pyx_kp_s_matdot_not_implemented_for_CSR_m;
+static PyObject *__pyx_kp_s_matdot_transp_not_implemented_fo;
 static PyObject *__pyx_n_s_matrix_description_before_print;
 static PyObject *__pyx_n_s_matvec;
 static PyObject *__pyx_n_s_memview;
@@ -11938,7 +11940,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csr_mat_matrices_28csr_mat_INT32_t
  * 
  * 
  *     def matdot(self, B):             # <<<<<<<<<<<<<<
- *         raise NotImplementedError("Multiplication with this kind of object not allowed")
+ *         raise NotImplementedError("matdot not implemented for CSR matrices")
  * 
  */
 
@@ -11967,7 +11969,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csr_mat_matrices_28csr_mat_INT32_t
   /* "cysparse/sparse/csr_mat_matrices/csr_mat_INT32_t_COMPLEX128_t.pyx":752
  * 
  *     def matdot(self, B):
- *         raise NotImplementedError("Multiplication with this kind of object not allowed")             # <<<<<<<<<<<<<<
+ *         raise NotImplementedError("matdot not implemented for CSR matrices")             # <<<<<<<<<<<<<<
  * 
  *     def matdot_transp(self, B):
  */
@@ -11981,7 +11983,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csr_mat_matrices_28csr_mat_INT32_t
  * 
  * 
  *     def matdot(self, B):             # <<<<<<<<<<<<<<
- *         raise NotImplementedError("Multiplication with this kind of object not allowed")
+ *         raise NotImplementedError("matdot not implemented for CSR matrices")
  * 
  */
 
@@ -11996,10 +11998,10 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csr_mat_matrices_28csr_mat_INT32_t
 }
 
 /* "cysparse/sparse/csr_mat_matrices/csr_mat_INT32_t_COMPLEX128_t.pyx":754
- *         raise NotImplementedError("Multiplication with this kind of object not allowed")
+ *         raise NotImplementedError("matdot not implemented for CSR matrices")
  * 
  *     def matdot_transp(self, B):             # <<<<<<<<<<<<<<
- *         raise NotImplementedError("Multiplication with this kind of object not allowed")
+ *         raise NotImplementedError("matdot_transp not implemented for CSR matrices")
  * 
  */
 
@@ -12028,7 +12030,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csr_mat_matrices_28csr_mat_INT32_t
   /* "cysparse/sparse/csr_mat_matrices/csr_mat_INT32_t_COMPLEX128_t.pyx":755
  * 
  *     def matdot_transp(self, B):
- *         raise NotImplementedError("Multiplication with this kind of object not allowed")             # <<<<<<<<<<<<<<
+ *         raise NotImplementedError("matdot_transp not implemented for CSR matrices")             # <<<<<<<<<<<<<<
  * 
  *     def __mul__(self, B):
  */
@@ -12039,10 +12041,10 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csr_mat_matrices_28csr_mat_INT32_t
   {__pyx_filename = __pyx_f[0]; __pyx_lineno = 755; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "cysparse/sparse/csr_mat_matrices/csr_mat_INT32_t_COMPLEX128_t.pyx":754
- *         raise NotImplementedError("Multiplication with this kind of object not allowed")
+ *         raise NotImplementedError("matdot not implemented for CSR matrices")
  * 
  *     def matdot_transp(self, B):             # <<<<<<<<<<<<<<
- *         raise NotImplementedError("Multiplication with this kind of object not allowed")
+ *         raise NotImplementedError("matdot_transp not implemented for CSR matrices")
  * 
  */
 
@@ -12057,7 +12059,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csr_mat_matrices_28csr_mat_INT32_t
 }
 
 /* "cysparse/sparse/csr_mat_matrices/csr_mat_INT32_t_COMPLEX128_t.pyx":757
- *         raise NotImplementedError("Multiplication with this kind of object not allowed")
+ *         raise NotImplementedError("matdot_transp not implemented for CSR matrices")
  * 
  *     def __mul__(self, B):             # <<<<<<<<<<<<<<
  * 
@@ -12203,7 +12205,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csr_mat_matrices_28csr_mat_INT32_t
   goto __pyx_L0;
 
   /* "cysparse/sparse/csr_mat_matrices/csr_mat_INT32_t_COMPLEX128_t.pyx":757
- *         raise NotImplementedError("Multiplication with this kind of object not allowed")
+ *         raise NotImplementedError("matdot_transp not implemented for CSR matrices")
  * 
  *     def __mul__(self, B):             # <<<<<<<<<<<<<<
  * 
@@ -28866,7 +28868,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_MemoryView_of_r_object, __pyx_k_MemoryView_of_r_object, sizeof(__pyx_k_MemoryView_of_r_object), 0, 0, 1, 0},
   {&__pyx_kp_s_Multiplication_only_allowed_with, __pyx_k_Multiplication_only_allowed_with, sizeof(__pyx_k_Multiplication_only_allowed_with), 0, 0, 1, 0},
   {&__pyx_kp_s_Multiplication_with_symmetric_ma, __pyx_k_Multiplication_with_symmetric_ma, sizeof(__pyx_k_Multiplication_with_symmetric_ma), 0, 0, 1, 0},
-  {&__pyx_kp_s_Multiplication_with_this_kind_of, __pyx_k_Multiplication_with_this_kind_of, sizeof(__pyx_k_Multiplication_with_this_kind_of), 0, 0, 1, 0},
   {&__pyx_kp_u_Non_native_byte_order_not_suppor, __pyx_k_Non_native_byte_order_not_suppor, sizeof(__pyx_k_Non_native_byte_order_not_suppor), 0, 1, 0, 0},
   {&__pyx_n_s_NotImplemented, __pyx_k_NotImplemented, sizeof(__pyx_k_NotImplemented), 0, 0, 1, 1},
   {&__pyx_n_s_NotImplementedError, __pyx_k_NotImplementedError, sizeof(__pyx_k_NotImplementedError), 0, 0, 1, 1},
@@ -28928,6 +28929,8 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_k_th_diagonal_must_be_d_k_0_here, __pyx_k_k_th_diagonal_must_be_d_k_0_here, sizeof(__pyx_k_k_th_diagonal_must_be_d_k_0_here), 0, 0, 1, 0},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
   {&__pyx_n_s_matdot, __pyx_k_matdot, sizeof(__pyx_k_matdot), 0, 0, 1, 1},
+  {&__pyx_kp_s_matdot_not_implemented_for_CSR_m, __pyx_k_matdot_not_implemented_for_CSR_m, sizeof(__pyx_k_matdot_not_implemented_for_CSR_m), 0, 0, 1, 0},
+  {&__pyx_kp_s_matdot_transp_not_implemented_fo, __pyx_k_matdot_transp_not_implemented_fo, sizeof(__pyx_k_matdot_transp_not_implemented_fo), 0, 0, 1, 0},
   {&__pyx_n_s_matrix_description_before_print, __pyx_k_matrix_description_before_print, sizeof(__pyx_k_matrix_description_before_print), 0, 0, 1, 1},
   {&__pyx_n_s_matvec, __pyx_k_matvec, sizeof(__pyx_k_matvec), 0, 0, 1, 1},
   {&__pyx_n_s_memview, __pyx_k_memview, sizeof(__pyx_k_memview), 0, 0, 1, 1},
@@ -29048,22 +29051,22 @@ static int __Pyx_InitCachedConstants(void) {
   /* "cysparse/sparse/csr_mat_matrices/csr_mat_INT32_t_COMPLEX128_t.pyx":752
  * 
  *     def matdot(self, B):
- *         raise NotImplementedError("Multiplication with this kind of object not allowed")             # <<<<<<<<<<<<<<
+ *         raise NotImplementedError("matdot not implemented for CSR matrices")             # <<<<<<<<<<<<<<
  * 
  *     def matdot_transp(self, B):
  */
-  __pyx_tuple__5 = PyTuple_Pack(1, __pyx_kp_s_Multiplication_with_this_kind_of); if (unlikely(!__pyx_tuple__5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 752; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__5 = PyTuple_Pack(1, __pyx_kp_s_matdot_not_implemented_for_CSR_m); if (unlikely(!__pyx_tuple__5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 752; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__5);
   __Pyx_GIVEREF(__pyx_tuple__5);
 
   /* "cysparse/sparse/csr_mat_matrices/csr_mat_INT32_t_COMPLEX128_t.pyx":755
  * 
  *     def matdot_transp(self, B):
- *         raise NotImplementedError("Multiplication with this kind of object not allowed")             # <<<<<<<<<<<<<<
+ *         raise NotImplementedError("matdot_transp not implemented for CSR matrices")             # <<<<<<<<<<<<<<
  * 
  *     def __mul__(self, B):
  */
-  __pyx_tuple__6 = PyTuple_Pack(1, __pyx_kp_s_Multiplication_with_this_kind_of); if (unlikely(!__pyx_tuple__6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 755; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__6 = PyTuple_Pack(1, __pyx_kp_s_matdot_transp_not_implemented_fo); if (unlikely(!__pyx_tuple__6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 755; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__6);
   __Pyx_GIVEREF(__pyx_tuple__6);
 

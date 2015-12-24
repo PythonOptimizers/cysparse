@@ -808,10 +808,10 @@ cdef class CSCSparseMatrix_INT32_t_FLOAT64_t(ImmutableSparseMatrix_INT32_t_FLOAT
 
 
     def matdot(self, B):
-        raise NotImplementedError("Multiplication with this kind of object not allowed")
+        raise NotImplementedError("matdot is not implemented for CSC matrices")
 
     def matdot_transp(self, B):
-        raise NotImplementedError("Multiplication with this kind of object not allowed")
+        raise NotImplementedError("matdot_transp is not implemented for CSC matrices")
 
     def __mul__(self, B):
         """

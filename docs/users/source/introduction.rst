@@ -22,8 +22,8 @@ What is :program:`CySparse`?
 ============================
 
 :program:`CySparse` can be seen as the replacement of the :program:`PySparse` library with **lots** of improvements. Instead of improving the existing :program:`PySparse` library written in :program:`C` and :program:`CPython`, 
-we decided to rewrite it from scratch in :program:`Cython`. This allows us a shorter developement cycle and allows us to hook existing :program:`C` and :program:`C++` libraries very easily to :program:`CySparse` 
-(see the `PythonOptimizers <https://github.com/PythonOptimizers>`_ project for a full list of Solvers wrappers).
+we decided to rewrite it from scratch in :program:`Cython`. This allows us a shorter developement cycle and to hook existing :program:`C` and :program:`C++` libraries very easily to :program:`CySparse` 
+(see the `PythonOptimizers <https://github.com/PythonOptimizers>`_ project for a full list of compatible Solvers wrappers).
 
 In short, :program:`CySparse` is :program:`PySparse` but on steroids!
 
@@ -40,7 +40,7 @@ Even if :program:`CySparse` is (strongly) inspired from :program:`PySparse`, the
 - has a **symmetric** storage scheme for **all** its matrix types.
 - doesn't use masks.
 - has lots of unit tests.
-- is well integrated with some of the best solvers (SuiteSparse, MUMPS, qr_mumps, ...).
+- is well integrated with some of the best solvers (`SuiteSparse <http://faculty.cse.tamu.edu/davis/suitesparse.html>`_, `MUMPS <http://mumps.enseeiht.fr/>`_, `qr_mumps <http://buttari.perso.enseeiht.fr/qr_mumps/>`_, ...).
 - is well documented.
 - can be used in :program:`Python` **and** :program:`Cython`.
 - has less dependencies.
@@ -54,7 +54,7 @@ Both libraries define similar but also different matrix classes:
   Compressed Sparse Row Format                ``csr_mat``                                              ``CSRSparseMatrix``
   Compressed Sparse Column Format             -                                                        ``CSCSparseMatrix``
   Sparse Skyline Format                       ``sss_mat``                                              -
-  Compressed Sparse Row and Column Format     -                                                        ``CSBSparseMatrix``
+  Compressed Sparse Row and Column Format     -                                                        ``CSBSparseMatrix`` (later)
   =========================================   ======================================================   ============================================
     
 
@@ -63,3 +63,4 @@ Both libraries define similar but also different matrix classes:
 License
 ========
 
+The :program:`CySparse` library is released under the XXX license. See YYY.

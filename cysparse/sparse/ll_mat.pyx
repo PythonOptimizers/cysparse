@@ -4,12 +4,9 @@ from cysparse.sparse.s_mat cimport unexposed_value
 
 from cysparse.common_types.cysparse_types import *
 from cysparse.common_types.cysparse_types cimport *
-from cysparse.common_types.cysparse_types cimport min_integer_type
 from cysparse.common_types.cysparse_numpy_types import are_mixed_types_cast_compatible
 
-#from cysparse.common_types.cysparse_generic_types cimport min_type
-
-from cysparse.sparse.s_mat cimport SparseMatrix
+from cysparse.sparse.s_mat cimport SparseMatrix, PySparseMatrix_Check, PyBothSparseMatricesAreOfSameType
 
 from cython cimport isinstance
 from libc.stdio cimport *
@@ -305,15 +302,93 @@ def matvec(A, b):
     """
     Return :math:`A * b`.
     """
-    # TODO: test input arguments?
-    return A.matvec(b)
+    # only works with a sparse matrix A
+    if not PySparseMatrix_Check(A):
+        raise TypeError("Matrix A must be a sparse matrix!")
+
+    # TODO: implement the more general matdot method for ALL matrices, not only LLSparseMatrix
+    # See commented code in matvec_transp().
+    # Maybe a sparse ll_mat vector?
+    if PyLLSparseMatrix_Check(b):
+        # both operands must be of same type
+        if not PyLLSparseMatrix_Check(A):
+            raise TypeError("LLSparseMatrix vector can only be use if matrix A is itself an LLSparseMatrix")
+        return A.matdot(b)
+
+    elif cnp.PyArray_Check(b):
+        return A.matvec(b)
+
+    raise TypeError("Vector b must be of type SparseMatrix or NumPy ndarray")
 
 def matvec_transp(A, b):
     """
     Return :math:`A^t*b`.
     """
+    # only works with a sparse matrix A
+    if not PySparseMatrix_Check(A):
+        raise TypeError("Matrix A must be a sparse matrix!")
+
+    # Maybe a sparse ll_mat vector?
+    if PyLLSparseMatrix_Check(b):
+        # both operands must be of same type
+        if not PyLLSparseMatrix_Check(A):
+            raise TypeError("LLSparseMatrix vector can only be use if matrix A is itself an LLSparseMatrix")
+        return A.matdot_transp(b)
+
+    # More general when matdot_transp will be implemented for all matrices
+    ## Maybe a sparse vector?
+    #if PySparseMatrix_Check(b):
+    #    # both operands must be of same type
+    #    if not PyBothSparseMatricesAreOfSameType(A, b):
+    #        raise TypeError("Operands must be both of same SparseMatrix type")
+    #    return A.matdot_transp(b)
+
+    elif cnp.PyArray_Check(b):
+        return A.matvec_transp(b)
+
+    raise TypeError("Vector b must be of type SparseMatrix or NumPy ndarray")
+
+def matvec_htransp(A, b):
+    """
+    Return :math:`A^h*b`.
+    """
+    # only works with a sparse matrix A
+    if not PySparseMatrix_Check(A):
+        raise TypeError("Matrix A must be a sparse matrix!")
+
+    if cnp.PyArray_Check(b):
+        return A.matvec_htransp(b)
+
+    raise TypeError("Vector b must of type NumPy ndarray")
+
+def matvec_conj(A, b):
+    """
+    Return :math:`conj(A) * b`.
+    """
+    # only works with a sparse matrix A
+    if not PySparseMatrix_Check(A):
+        raise TypeError("Matrix A must be a sparse matrix!")
+
+    if cnp.PyArray_Check(b):
+        return A.matvec_conj(b)
+
+    raise TypeError("Vector b must of type NumPy ndarray")
+
+
+def matdot(A, B):
+    """
+    Return :math:`A * B`.
+    """
     # TODO: test input arguments?
-    return A.matvec_transp(b)
+    return A.matdot(B)
+
+def matdot_transp(A, B):
+    """
+    Return :math:`A^t*B`.
+    """
+    # TODO: test input arguments?
+    return A.matdot_transp(B)
+
 
 ########################################################################################################################
 # General factory methods

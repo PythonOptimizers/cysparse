@@ -23217,7 +23217,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT64_t_I
 
 /* Python wrapper */
 static PyObject *__pyx_pw_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT64_t_INT64_t_30LLSparseMatrix_INT64_t_INT64_t_69matdot(PyObject *__pyx_v_self, PyObject *__pyx_v_B); /*proto*/
-static char __pyx_doc_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT64_t_INT64_t_30LLSparseMatrix_INT64_t_INT64_t_68matdot[] = "\n        Return :math:`A*B`.\n\n        Cases:\n\n        - ``C = A * B`` where `B` is an ``LLSparseMatrix`` matrix. ``C`` is an ``LLSparseMatrix`` of same ``dtype``.\n        - ``C = A * B`` where ``B`` is an :program:`NumPy` matrix. ``C`` is a dense :program:`NumPy` matrix. (not yet implemented).\n        ";
+static char __pyx_doc_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT64_t_INT64_t_30LLSparseMatrix_INT64_t_INT64_t_68matdot[] = "\n        Return :math:`A*B`.\n\n        Cases:\n\n        - ``C = A * B`` where `B` is an ``LLSparseMatrix`` matrix. ``C`` is an ``LLSparseMatrix`` of same ``dtype``.\n        - ``C = A * B`` where ``B`` is an :program:`NumPy` matrix. ``C`` is a dense :program:`NumPy` matrix.\n        ";
 static PyObject *__pyx_pw_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT64_t_INT64_t_30LLSparseMatrix_INT64_t_INT64_t_69matdot(PyObject *__pyx_v_self, PyObject *__pyx_v_B) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations

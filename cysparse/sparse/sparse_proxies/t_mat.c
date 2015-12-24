@@ -877,7 +877,7 @@ typedef npy_clongdouble __pyx_t_5numpy_clongdouble_t;
 typedef npy_cdouble __pyx_t_5numpy_complex_t;
 
 /* "cysparse/sparse/s_mat.pxd":21
- * 
+ * cdef bint PyBothSparseMatricesAreOfSameType(object obj1, object obj2)
  * 
  * cdef class SparseMatrix:             # <<<<<<<<<<<<<<
  *     """
@@ -1462,6 +1462,7 @@ static char __pyx_k_is_symmetric[] = "is_symmetric";
 static char __pyx_k_Transposed_of[] = "Transposed of ";
 static char __pyx_k_base_type_str[] = "base_type_str";
 static char __pyx_k_full_type_str[] = "full_type_str";
+static char __pyx_k_matdot_transp[] = "matdot_transp";
 static char __pyx_k_matvec_transp[] = "matvec_transp";
 static char __pyx_k_matvec_htransp[] = "matvec_htransp";
 static char __pyx_k_store_symmetric[] = "store_symmetric";
@@ -1527,6 +1528,7 @@ static PyObject *__pyx_n_s_itype_str;
 static PyObject *__pyx_n_s_j;
 static PyObject *__pyx_n_s_main;
 static PyObject *__pyx_n_s_matdot;
+static PyObject *__pyx_n_s_matdot_transp;
 static PyObject *__pyx_n_s_matrix_description_before_print;
 static PyObject *__pyx_n_s_matvec;
 static PyObject *__pyx_n_s_matvec_conj;
@@ -3462,7 +3464,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_14sparse_proxies_5t_mat_22Transposed
  *             else:
  *                 raise IndexError("Matrix dimensions must agree")             # <<<<<<<<<<<<<<
  *         elif PyLLSparseMatrix_Check(B):
- *             return self.A.matdot(B)
+ *             return self.A.matdot_transp(B)
  */
     /*else*/ {
       __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 166; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -3485,7 +3487,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_14sparse_proxies_5t_mat_22Transposed
  *             else:
  *                 raise IndexError("Matrix dimensions must agree")
  *         elif PyLLSparseMatrix_Check(B):             # <<<<<<<<<<<<<<
- *             return self.A.matdot(B)
+ *             return self.A.matdot_transp(B)
  *         else:
  */
   __pyx_t_1 = (__pyx_f_8cysparse_6sparse_6ll_mat_PyLLSparseMatrix_Check(__pyx_v_B, 0) != 0);
@@ -3494,12 +3496,12 @@ static PyObject *__pyx_pf_8cysparse_6sparse_14sparse_proxies_5t_mat_22Transposed
     /* "cysparse/sparse/sparse_proxies/t_mat.pyx":168
  *                 raise IndexError("Matrix dimensions must agree")
  *         elif PyLLSparseMatrix_Check(B):
- *             return self.A.matdot(B)             # <<<<<<<<<<<<<<
+ *             return self.A.matdot_transp(B)             # <<<<<<<<<<<<<<
  *         else:
  *             raise NotImplementedError("Multiplication with this kind of object not implemented yet...")
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self->A), __pyx_n_s_matdot); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 168; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self->A), __pyx_n_s_matdot_transp); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 168; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_4 = NULL;
     if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_2))) {
@@ -3534,13 +3536,13 @@ static PyObject *__pyx_pf_8cysparse_6sparse_14sparse_proxies_5t_mat_22Transposed
  *             else:
  *                 raise IndexError("Matrix dimensions must agree")
  *         elif PyLLSparseMatrix_Check(B):             # <<<<<<<<<<<<<<
- *             return self.A.matdot(B)
+ *             return self.A.matdot_transp(B)
  *         else:
  */
   }
 
   /* "cysparse/sparse/sparse_proxies/t_mat.pyx":170
- *             return self.A.matdot(B)
+ *             return self.A.matdot_transp(B)
  *         else:
  *             raise NotImplementedError("Multiplication with this kind of object not implemented yet...")             # <<<<<<<<<<<<<<
  * 
@@ -7355,6 +7357,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_j, __pyx_k_j, sizeof(__pyx_k_j), 0, 0, 1, 1},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
   {&__pyx_n_s_matdot, __pyx_k_matdot, sizeof(__pyx_k_matdot), 0, 0, 1, 1},
+  {&__pyx_n_s_matdot_transp, __pyx_k_matdot_transp, sizeof(__pyx_k_matdot_transp), 0, 0, 1, 1},
   {&__pyx_n_s_matrix_description_before_print, __pyx_k_matrix_description_before_print, sizeof(__pyx_k_matrix_description_before_print), 0, 0, 1, 1},
   {&__pyx_n_s_matvec, __pyx_k_matvec, sizeof(__pyx_k_matvec), 0, 0, 1, 1},
   {&__pyx_n_s_matvec_conj, __pyx_k_matvec_conj, sizeof(__pyx_k_matvec_conj), 0, 0, 1, 1},
@@ -7411,14 +7414,14 @@ static int __Pyx_InitCachedConstants(void) {
  *             else:
  *                 raise IndexError("Matrix dimensions must agree")             # <<<<<<<<<<<<<<
  *         elif PyLLSparseMatrix_Check(B):
- *             return self.A.matdot(B)
+ *             return self.A.matdot_transp(B)
  */
   __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_s_Matrix_dimensions_must_agree); if (unlikely(!__pyx_tuple__2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 166; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
 
   /* "cysparse/sparse/sparse_proxies/t_mat.pyx":170
- *             return self.A.matdot(B)
+ *             return self.A.matdot_transp(B)
  *         else:
  *             raise NotImplementedError("Multiplication with this kind of object not implemented yet...")             # <<<<<<<<<<<<<<
  * 

@@ -749,10 +749,10 @@ cdef class CSRSparseMatrix_INT64_t_COMPLEX64_t(ImmutableSparseMatrix_INT64_t_COM
 
 
     def matdot(self, B):
-        raise NotImplementedError("Multiplication with this kind of object not allowed")
+        raise NotImplementedError("matdot not implemented for CSR matrices")
 
     def matdot_transp(self, B):
-        raise NotImplementedError("Multiplication with this kind of object not allowed")
+        raise NotImplementedError("matdot_transp not implemented for CSR matrices")
 
     def __mul__(self, B):
 
