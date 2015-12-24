@@ -16,24 +16,34 @@ What is :program:`CySparse`?
 
 :program:`CySparse` is a fast sparse matrix library for :program:`Python`/:program:`Cython`.
 
-Content
-========
 
 
 :program:`PySparse` legacy
 ============================
+
+:program:`CySparse` can be seen as the replacement of the :program:`PySparse` library with **lots** of improvements. Instead of improving the existing :program:`PySparse` library written in :program:`C` and :program:`CPython`, 
+we decided to rewrite it from scratch in :program:`Cython`. This allows us a shorter developement cycle and allows us to hook existing :program:`C` and :program:`C++` libraries very easily to :program:`CySparse` 
+(see the `PythonOptimizers <https://github.com/PythonOptimizers>`_ project for a full list of Solvers wrappers).
+
+In short, :program:`CySparse` is :program:`PySparse` but on steroids!
 
 :program:`PySparse` vs :program:`CySparse`
 ===========================================
 
 Even if :program:`CySparse` is (strongly) inspired from :program:`PySparse`, there are notable differences. In short, :program:`CySparse`:
 
-- allows the use of matrices with **different types** of indices and elements at run time (see ...);
-- is **faster** than :program:`PySparse` (see ...);
-- uses **matrix views** - a very light proxy object - that represent parts of a matrix without the need to copy elements (see...);
-- has more **syntaxic sugar**, like ``A * b, b * A, A.T * b`` etc. 
-- has a **symmetric** version of **all** its matrix types.
-- **doesn't use masks**.
+- allows the use of matrices with **different types** of indices and elements at **run time** (see ...);
+- is **faster** than :program:`PySparse` (see our benchmarks);
+- uses **matrix views** - a very light proxy object - that represent parts of a matrix **without** the need to copy any element (see...);
+- uses **matrix proxies** - an even lighter proxy object - that represent some common transformation of a matrix (like the transposed of a matrix) **without** the need to copy any element (see  ...); 
+- has more **syntactic sugar**, like ``A * b, b * A, A.T * b`` etc. 
+- has a **symmetric** storage scheme for **all** its matrix types.
+- doesn't use masks.
+- has lots of unit tests.
+- is well integrated with some of the best solvers (SuiteSparse, MUMPS, qr_mumps, ...).
+- is well documented.
+- can be used in :program:`Python` **and** :program:`Cython`.
+- has less dependencies.
 
 Both libraries define similar but also different matrix classes: 
 
