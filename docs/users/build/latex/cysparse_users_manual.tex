@@ -428,6 +428,263 @@ This will delete \textbf{all} \textbf{\texttt{C}} \code{.c} files. You can then 
 \end{itemize}
 
 
+\chapter{\textbf{\texttt{CySparse}}`s basics}
+\label{cysparse_basics:cysparse-s-basics}\label{cysparse_basics:cysparse-basics}\label{cysparse_basics::doc}
+{[}TO BE COMPLETELY REWRITTEN{]}
+
+
+\section{Sparse Matrices and other matrix-like objects}
+\label{cysparse_basics:sparse-matrices-and-other-matrix-like-objects}
+The main objects of the \textbf{\texttt{CySparse}} library are \emph{sparse matrices}: matrices that typically don't contain much elements that are different that \code{0}. Say otherwise, sparce matrices contain lots of \code{0}.
+To gain space and for efficiency reasons we don't store these zero elements explicitly \footnote{
+In some cases thought, it \textbf{is} worth keeping \textbf{some} zeros explicitly. This can be done in \textbf{\texttt{CySparse}} through the use of the \code{store\_zero} parameter. Read further.
+}. Sparse matrices behave like usual matrices but behind the scene, their implementation use lots of trickery to use
+partial arrays that only store non zero elements. Several implementations exists with each their pros and cons. For instance, if you want to multiply a sparse matrix with a vector, you should use a \code{CSR} matrix,
+i.e. a  \emph{Compressed Sparse Row} format matrix. Don't worry, in \textbf{\texttt{CySparse}}, there are only \textbf{3} types of sparse matrices:
+\begin{itemize}
+\item {} 
+Linked-list format (\textbf{LL}): a convenient format for creating and populating a sparse matrix.
+
+\item {} 
+Compressed sparse row format (\textbf{CSR}): a format designed to speed up matrix-vector products.
+
+\item {} 
+Compressed sparse column format (\textbf{CSC}): a format designed to speed up vector-matrix products.
+
+\end{itemize}
+
+Linked-list (LL) format matrices are well suited to \textbf{create} and/or \textbf{modify} a matrix: you can easily add or delete elements for such matrices. Compressed sparse row (CSR) and Compressed sparse column (CSC) formats
+are more suited for optimized vector multiplication and are difficult to modify. In \textbf{\texttt{CySparse}} we even don't allow you to modify CSR or CSC matrices!
+
+Matrices are the big thing in \textbf{\texttt{CySparse}} but these objects are still heavy and sometimes you don't really need to create them. Enter the matrix \emph{proxies} and matrix \emph{views}. These object behave like matrices but
+are \textbf{not} matrices. A small example will clarify this. Imagine you have a matrix \(A\) and you need to multiply its transposed with a vector. One way would be to create the transposed matrix and multiply it by this vector.
+Actually, you \textbf{don't} need to create the transpose of a matrix for that! \textbf{\texttt{CySparse}} let you play with a proxy transposed matrix, a fake matrix if you wish:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{A} \PYG{o}{=} \PYG{o}{.}\PYG{o}{.}\PYG{o}{.}  \PYG{c}{\PYGZsh{} this is a sparse matrix}
+\PYG{n}{v} \PYG{o}{=} \PYG{o}{.}\PYG{o}{.}\PYG{o}{.}  \PYG{c}{\PYGZsh{} this is a vector}
+
+\PYG{n}{w} \PYG{o}{=} \PYG{n}{A}\PYG{o}{.}\PYG{n}{T} \PYG{o}{*} \PYG{n}{v}
+\end{Verbatim}
+
+To compute the vector \code{w}, \textbf{\texttt{CySparse}} doesn't need to actually create a transposed matrix. The \code{T} attribute is used for the transposed matrix of \code{A}. No computations are done. When the time comes to do
+some computations, like multiplying this transposed \code{A.T} with a vector \code{v}, \textbf{\texttt{CySparse}} behind the scene computes this product directly from the matrix \code{A} and the vector \code{v} \textbf{without} creating the
+transposed matrix \code{A.T}. \code{A.T} behaves like a matrix but is not a matrix. If you want to modify the transposed, which is \textbf{not} allowed, like this:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{A}\PYG{o}{.}\PYG{n}{T}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{4}\PYG{p}{]} \PYG{o}{=} \PYG{l+m+mi}{6}
+\end{Verbatim}
+
+it throws an exception:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+TypeError: \PYG{l+s+s1}{\PYGZsq{}cysparse.sparse.sparse\PYGZus{}proxies.t\PYGZus{}mat.TransposedSparseMatrix\PYGZsq{}}
+object does not support item assignment
+\end{Verbatim}
+
+The type of the \code{A.T} object seems complicated and it is. The reason is again efficiency. However, except when dealing with such error messages, the types of the objects don't matter for the users as \textbf{\texttt{CySparse}}
+takes care of such intricacies. For instance, the product seen above of the transposed with a vector looks very much like it is mathematically written:
+\begin{gather}
+\begin{split}A^t * v\end{split}\notag
+\end{gather}
+There is only one more type of objects that behaves like a matrix but isn't: views. We tried to assign a new value to an element of the \code{A.T} proxy matrix and this is not allowed. It can happen that sometimes, you need to have
+access to a sub-matrix and even change some elements of this sub-matrix. Enter the \textbf{views} that as their name implies allow to have a \emph{view} over a matrix:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{A} \PYG{o}{=} \PYG{o}{.}\PYG{o}{.}\PYG{o}{.} \PYG{c}{\PYGZsh{} this is a sparse matrix}
+\PYG{n}{B} \PYG{o}{=} \PYG{n}{A}\PYG{p}{[}\PYG{l+m+mi}{3}\PYG{p}{:}\PYG{l+m+mi}{5}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{:}\PYG{l+m+mi}{7}\PYG{p}{]}
+\end{Verbatim}
+
+\code{B} is a \emph{view} and corresponds to the sub-matrix of \code{A} made by its rows 4 to 5 (\textbf{\texttt{Python}} starts couting elements from \code{0}) and its columns 3 to 6. You probably recognized the \emph{slice} notation and it is exactly that.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{C} \PYG{o}{=} \PYG{n}{A}\PYG{p}{[}\PYG{p}{:}\PYG{p}{,} \PYG{p}{:}\PYG{p}{:}\PYG{l+m+mi}{2}\PYG{p}{]}
+\end{Verbatim}
+
+\code{C} corresponds to the sub-matrix of \code{A} made by all its rows and every two columns. Actually, views can be much more complicated than that:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{D} \PYG{o}{=} \PYG{n}{A}\PYG{p}{[}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{2} \PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{l+m+mi}{3}\PYG{p}{,} \PYG{l+m+mi}{2} \PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{]}
+\end{Verbatim}
+
+Here we use two lists and \code{D} corresponds to a matrix that is no longer a sub-matrix of \code{A}: it is constructed by taking 3 times the second row, then adding the third one and then the first one combined with the first four columns in reversed order.
+
+What about modifying an element of a view?
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{B}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{4}\PYG{p}{]} \PYG{o}{=} \PYG{l+m+mi}{42}
+\end{Verbatim}
+
+is perfectly fine. That is, because \code{B} is a \(2 \times 5\) matrix. We could have stored the value \code{42} in the view but that would complicate things a little bit too much and we would loose all efficiency. Instead, when
+you modify a view, you modify the original matrix! By assigning \code{42} to element \((1,4)\) of \code{B} you are in fact assigning \code{42} to element \((4, 6)\) of the original matrix \code{A}!
+
+Views only exist for \textbf{LL} format matrices but because you read carefully, you already knew that \footnote{
+Remember that the LL format matrices are the only ones you can modify in \textbf{\texttt{CySparse}}!
+}.
+
+That's it. You have already seen \textbf{all} the main objects of the library! Of course, we need to talk a little bit more about the details and the common uses.
+
+
+\section{Storage schemes}
+\label{cysparse_basics:storage-schemes}
+
+\section{Types}
+\label{cysparse_basics:basics-types}\label{cysparse_basics:types}
+Each library has been written with a main goal in mind. We tried to optimize \textbf{\texttt{CySparse}} for speed. Its code is therefor highly optimized and we use \emph{typed} \textbf{\texttt{C}} variables internally. All elements inside
+a matrix have the same well-defined types. Even indices are typed! For efficiency reasons, we often don't allow XXX
+
+You will not be surprised that in \textbf{\texttt{CySparse}}, we \textbf{strongly} discourage the mixing of types. Actually, most operations require to deal with objets that have \textbf{exactly}
+the same types for their indices \textbf{and} their elements. As a rule of thumb, try not to mix objects with different types. We call this our \emph{Golden Rule}.
+
+\begin{notice}{important}{Important:}
+The Golden Rule:
+
+Never mix matrices with different types!
+\end{notice}
+
+If you follow this rule, you will not run into troubles in \textbf{\texttt{CySparse}}.
+
+\textbf{\texttt{NumPy}} and \textbf{\texttt{SciPy}} let you mix matrices with different types. You can even declare your own type for the elements of a matrix! This flexibility has a cost as you can see in our benchmarks. \textbf{\texttt{CySparse}}
+is not as flexible but is some order of magnitude more efficient.
+
+
+\section{What to import}
+\label{cysparse_basics:what-to-import}
+
+\section{Factory methods}
+\label{cysparse_basics:factory-methods}
+ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ
+
+{[}TO BE SORTED OUT{]}
+
+In this section, we explain the very basics of \textbf{\texttt{CySparse}}. Most matrices share some common basic attributes that we detail here.
+
+Most attributes and \textbf{all} common ones are \emph{read-only}. Some attributes ask for some expensive computation. We indicate whenever this is the case.
+Some attributes can also be given as arguments to most factory methods. We also detail which ones.
+
+
+\section{Common strorage attributes}
+\label{cysparse_basics:common-strorage-attributes}
+For efficiency reasons, \textbf{\texttt{CySparse}} can use different storage schemes/methods to store matrices. For instance, symmetric matrices can be stored with only half of their elements.
+
+
+\subsection{\texttt{store\_symmetric}}
+\label{cysparse_basics:store-symmetric}
+Symmetric matrices can be stored by only storing the \textbf{lower} triangular part and the diagonal of a matrix. To create a symmetric matrix, add the arguement \code{store\_symmetric=True} to the call of one of the factory methods.
+The attribute \code{store\_symmetric} returns if this storage method is used or not. Thus, if \code{store\_symmetric} is \code{True}, you know that you deal with a symmetric matrix \textbf{and} that roughly only half of its elements are stored. If
+\code{store\_symmetric} is \code{False}, it simply means that this storage scheme is not used. The matrix itself migth be symmetric or not.
+
+
+\subsection{\texttt{store\_zero}}
+\label{cysparse_basics:store-zero}
+By default non specified (implicit) elements are zero (\code{0}, \code{0.0} or \code{0+0j}). \textbf{\texttt{CySparse}} allow the user to store explicitely zeros. To explicitely store zeros, declare \code{store\_zero=True} as an argument
+in any factory method:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{A} \PYG{o}{=} \PYG{n}{LLSparseMatrix}\PYG{p}{(}\PYG{n}{store\PYGZus{}zero}\PYG{o}{=}\PYG{n+nb+bp}{True}\PYG{p}{,} \PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{p}{)}
+\end{Verbatim}
+
+The matrix \code{A} will store any zero explicitely as will any matrix created from it. You can access the value of this attribute:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{A}\PYG{o}{.}\PYG{n}{store\PYGZus{}zero}
+\end{Verbatim}
+
+returns \code{True} for our example. This attribute is read-only and cannot be changed. If you want to temporarily exclude zeros in some operations, you can use the \code{NonZeros} context manager:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{with} \PYG{n}{NonZeros}\PYG{p}{(}\PYG{n}{A}\PYG{p}{)}\PYG{p}{:}
+    \PYG{c}{\PYGZsh{} use some method to add entries to A but disregard zeros entries}
+    \PYG{o}{.}\PYG{o}{.}\PYG{o}{.}
+\end{Verbatim}
+
+This context manager temporarily set the \code{store\_zero} attribute to \code{False} before restoring its inital value.
+
+By default, \code{store\_zero} is set to \code{False}.
+
+
+\subsection{\texttt{is\_mutable}}
+\label{cysparse_basics:is-mutable}
+\code{is\_mutable} returns if the matrix can be modified or not. Note that for the moment, \textbf{only} an \code{LLSparseMatrix} matrix can be modified.
+
+
+\section{Common content attributes}
+\label{cysparse_basics:common-content-attributes}
+
+\subsection{\texttt{nrow} and \texttt{ncol}}
+\label{cysparse_basics:nrow-and-ncol}
+\code{nrow} and \code{ncol} give respectively the number of rows and columns. You also can grab both at the same time with the \code{shape} attribute:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{A} \PYG{o}{=} \PYG{o}{.}\PYG{o}{.}\PYG{o}{.}
+\PYG{n}{A}\PYG{o}{.}\PYG{n}{shape} \PYG{o}{==} \PYG{n}{A}\PYG{o}{.}\PYG{n}{nrow}\PYG{p}{,} \PYG{n}{A}\PYG{o}{.}\PYG{n}{ncol}  \PYG{c}{\PYGZsh{} is True}
+\end{Verbatim}
+
+You can use \code{nrow} and \code{ncol} as arguments to construct a new matrix. Whenever the number of rows is equal to the number of columns, i.e. when the matrix is square, you can
+instead use the argument \code{size=...} in most factory methods.
+
+
+\subsection{\texttt{nnz}}
+\label{cysparse_basics:nnz}
+The \code{nnz} attribute returns the number of ``non zeros'' stored in the matrix. Notice that \code{0} could be stored if \code{store\_zero} is set to \code{True} and if so, it will be counted in the number of ``non zero'' elements.
+Whenever the symmetric storage scheme is used (\code{store\_symmetric} is \code{True}), \code{nnz} only returns the number of ``non zero'' elements stored in the lower triangular part and the diagonal of the matrix, i.e. \code{nnz}
+returns exactly how many elements are stored internally.
+
+\begin{notice}{warning}{Warning:}
+\code{nnz} returns \textbf{exactly} the number of elements stored internally.
+\end{notice}
+
+When using views, this attribute is \textbf{costly} to retrieve as it is systematically recomputed each time and we don't make any assomption on the views (views can represent matrices with rows and columns in any order and duplicated
+rows and columns any number of times). The number returned is the number of ``non zero'' elements stored in the equivalent matrix using the \textbf{same} storage scheme than viewed matrix.
+
+
+\section{Common type attributes}
+\label{cysparse_basics:common-type-attributes}
+
+\subsection{\texttt{dtype} and \texttt{itype}}
+\label{cysparse_basics:dtype-and-itype}
+Each matrix (matrix-like) object has an internal index \emph{type} and stores \emph{typed} elements. Both types (enums) can be retrieved.
+\code{dtype} returns the type of the elements of the matrix and \code{itype} returns its index type.
+
+See section {\hyperref[types:availabe-types]{\emph{\DUspan{}{Available types}}}} about the available types.
+
+
+\subsection{\texttt{is\_symmetric}}
+\label{cysparse_basics:is-symmetric}
+{[}TODO in the code!!!{]}
+
+Returns if the matrix is symmetric or not. While matrices using the symmetric storage (\code{store\_symmetric == True}) are symmetric by definition and \code{is\_symmetric} returns immediatly \code{True}, this attribute is costly to
+compute in general.
+
+
+\section{Common string attributes}
+\label{cysparse_basics:common-string-attributes}
+Some attributes are stored as \code{C} struct internally and can thus not be accessed from \textbf{\texttt{Python}}. We do however provide some strings for the most important ones.
+
+
+\subsection{\texttt{base\_type\_str} and \texttt{full\_type\_str}}
+\label{cysparse_basics:base-type-str-and-full-type-str}
+Each matrix or matrix-like object has its own type and type name defined as strings. For instance:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{A} \PYG{o}{=} \PYG{n}{NewLLSparseMatrix}\PYG{p}{(}\PYG{n}{size}\PYG{o}{=}\PYG{l+m+mi}{10}\PYG{p}{,} \PYG{n}{dtype}\PYG{o}{=}\PYG{n}{COMPLEX64\PYGZus{}T}\PYG{p}{,} \PYG{n}{itype}\PYG{o}{=}\PYG{n}{INT32\PYGZus{}T}\PYG{p}{)}
+\PYG{k}{print} \PYG{n}{A}\PYG{o}{.}\PYG{n}{base\PYGZus{}type\PYGZus{}str}
+\PYG{k}{print} \PYG{n}{A}\PYG{o}{.}\PYG{n}{full\PYGZus{}type\PYGZus{}str}
+\end{Verbatim}
+
+returns
+
+\begin{Verbatim}[commandchars=\\\{\}]
+LLSparseMatrix
+LLSparseMatrix \PYG{o}{[}INT32\PYGZus{}t, COMPLEX64\PYGZus{}t\PYG{o}{]}
+\end{Verbatim}
+
+The type \code{LLSparseMatrix} is common among \code{LL} sparse format matrices while the \code{full\_type\_str} gives the specific details of the index and element types.
+
+
+\section{Typed matrices in \textbf{\texttt{Python}}?}
+\label{cysparse_basics:typed-matrices-in-python}
+
 \chapter{\textbf{\texttt{CySparse}}`s types}
 \label{types:cysparse-s-types}\label{types:cysparse-types}\label{types::doc}
 Internally, \textbf{\texttt{CySparse}} uses typed variables. As a \textbf{\texttt{Python}} user, you don't have directly access to these types but you can ask for a specific type to be used through the use of simple (enum) arguments.
@@ -630,136 +887,6 @@ nor with the integer neither with the real numbers.
 
 {[}TO BE DONE: write an example with complex numbers{]}
 
-
-\chapter{\textbf{\texttt{CySparse}}`s basics}
-\label{cysparse_basics:cysparse-s-basics}\label{cysparse_basics:cysparse-basics}\label{cysparse_basics::doc}
-In this section, we explain the very basics of \textbf{\texttt{CySparse}}. Most matrices share some common basic attributes that we detail here.
-
-Most attributes and \textbf{all} common ones are \emph{read-only}. Some attributes ask for some expensive computation. We indicate whenever this is the case.
-Some attributes can also be given as arguments to most factory methods. We also detail which ones.
-
-
-\section{Common strorage attributes}
-\label{cysparse_basics:common-strorage-attributes}
-For efficiency reasons, \textbf{\texttt{CySparse}} can use different storage schemes/methods to store matrices. For instance, symmetric matrices can be stored with only half of their elements.
-
-
-\subsection{\texttt{store\_symmetric}}
-\label{cysparse_basics:store-symmetric}
-Symmetric matrices can be stored by only storing the \textbf{lower} triangular part and the diagonal of a matrix. To create a symmetric matrix, add the arguement \code{store\_symmetric=True} to the call of one of the factory methods.
-The attribute \code{store\_symmetric} returns if this storage method is used or not. Thus, if \code{store\_symmetric} is \code{True}, you know that you deal with a symmetric matrix \textbf{and} that roughly only half of its elements are stored. If
-\code{store\_symmetric} is \code{False}, it simply means that this storage scheme is not used. The matrix itself migth be symmetric or not.
-
-
-\subsection{\texttt{store\_zero}}
-\label{cysparse_basics:store-zero}
-By default non specified (implicit) elements are zero (\code{0}, \code{0.0} or \code{0+0j}). \textbf{\texttt{CySparse}} allow the user to store explicitely zeros. To explicitely store zeros, declare \code{store\_zero=True} as an argument
-in any factory method:
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{n}{A} \PYG{o}{=} \PYG{n}{LLSparseMatrix}\PYG{p}{(}\PYG{n}{store\PYGZus{}zero}\PYG{o}{=}\PYG{n+nb+bp}{True}\PYG{p}{,} \PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{p}{)}
-\end{Verbatim}
-
-The matrix \code{A} will store any zero explicitely as will any matrix created from it. You can access the value of this attribute:
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{n}{A}\PYG{o}{.}\PYG{n}{store\PYGZus{}zero}
-\end{Verbatim}
-
-returns \code{True} for our example. This attribute is read-only and cannot be changed. If you want to temporarily exclude zeros in some operations, you can use the \code{NonZeros} context manager:
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{k}{with} \PYG{n}{NonZeros}\PYG{p}{(}\PYG{n}{A}\PYG{p}{)}\PYG{p}{:}
-    \PYG{c}{\PYGZsh{} use some method to add entries to A but disregard zeros entries}
-    \PYG{o}{.}\PYG{o}{.}\PYG{o}{.}
-\end{Verbatim}
-
-This context manager temporarily set the \code{store\_zero} attribute to \code{False} before restoring its inital value.
-
-By default, \code{store\_zero} is set to \code{False}.
-
-
-\subsection{\texttt{is\_mutable}}
-\label{cysparse_basics:is-mutable}
-\code{is\_mutable} returns if the matrix can be modified or not. Note that for the moment, \textbf{only} an \code{LLSparseMatrix} matrix can be modified.
-
-
-\section{Common content attributes}
-\label{cysparse_basics:common-content-attributes}
-
-\subsection{\texttt{nrow} and \texttt{ncol}}
-\label{cysparse_basics:nrow-and-ncol}
-\code{nrow} and \code{ncol} give respectively the number of rows and columns. You also can grab both at the same time with the \code{shape} attribute:
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{n}{A} \PYG{o}{=} \PYG{o}{.}\PYG{o}{.}\PYG{o}{.}
-\PYG{n}{A}\PYG{o}{.}\PYG{n}{shape} \PYG{o}{==} \PYG{n}{A}\PYG{o}{.}\PYG{n}{nrow}\PYG{p}{,} \PYG{n}{A}\PYG{o}{.}\PYG{n}{ncol}  \PYG{c}{\PYGZsh{} is True}
-\end{Verbatim}
-
-You can use \code{nrow} and \code{ncol} as arguments to construct a new matrix. Whenever the number of rows is equal to the number of columns, i.e. when the matrix is square, you can
-instead use the argument \code{size=...} in most factory methods.
-
-
-\subsection{\texttt{nnz}}
-\label{cysparse_basics:nnz}
-The \code{nnz} attribute returns the number of ``non zeros'' stored in the matrix. Notice that \code{0} could be stored if \code{store\_zero} is set to \code{True} and if so, it will be counted in the number of ``non zero'' elements.
-Whenever the symmetric storage scheme is used (\code{store\_symmetric} is \code{True}), \code{nnz} only returns the number of ``non zero'' elements stored in the lower triangular part and the diagonal of the matrix, i.e. \code{nnz}
-returns exactly how many elements are stored internally.
-
-\begin{notice}{warning}{Warning:}
-\code{nnz} returns \textbf{exactly} the number of elements stored internally.
-\end{notice}
-
-When using views, this attribute is \textbf{costly} to retrieve as it is systematically recomputed each time and we don't make any assomption on the views (views can represent matrices with rows and columns in any order and duplicated
-rows and columns any number of times). The number returned is the number of ``non zero'' elements stored in the equivalent matrix using the \textbf{same} storage scheme than viewed matrix.
-
-
-\section{Common type attributes}
-\label{cysparse_basics:common-type-attributes}
-
-\subsection{\texttt{dtype} and \texttt{itype}}
-\label{cysparse_basics:dtype-and-itype}
-Each matrix (matrix-like) object has an internal index \emph{type} and stores \emph{typed} elements. Both types (enums) can be retrieved.
-\code{dtype} returns the type of the elements of the matrix and \code{itype} returns its index type.
-
-See section {\hyperref[types:availabe-types]{\emph{\DUspan{}{Available types}}}} about the available types.
-
-
-\subsection{\texttt{is\_symmetric}}
-\label{cysparse_basics:is-symmetric}
-{[}TODO in the code!!!{]}
-
-Returns if the matrix is symmetric or not. While matrices using the symmetric storage (\code{store\_symmetric == True}) are symmetric by definition and \code{is\_symmetric} returns immediatly \code{True}, this attribute is costly to
-compute in general.
-
-
-\section{Common string attributes}
-\label{cysparse_basics:common-string-attributes}
-Some attributes are stored as \code{C} struct internally and can thus not be accessed from \textbf{\texttt{Python}}. We do however provide some strings for the most important ones.
-
-
-\subsection{\texttt{base\_type\_str} and \texttt{full\_type\_str}}
-\label{cysparse_basics:base-type-str-and-full-type-str}
-Each matrix or matrix-like object has its own type and type name defined as strings. For instance:
-
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{n}{A} \PYG{o}{=} \PYG{n}{NewLLSparseMatrix}\PYG{p}{(}\PYG{n}{size}\PYG{o}{=}\PYG{l+m+mi}{10}\PYG{p}{,} \PYG{n}{dtype}\PYG{o}{=}\PYG{n}{COMPLEX64\PYGZus{}T}\PYG{p}{,} \PYG{n}{itype}\PYG{o}{=}\PYG{n}{INT32\PYGZus{}T}\PYG{p}{)}
-\PYG{k}{print} \PYG{n}{A}\PYG{o}{.}\PYG{n}{base\PYGZus{}type\PYGZus{}str}
-\PYG{k}{print} \PYG{n}{A}\PYG{o}{.}\PYG{n}{full\PYGZus{}type\PYGZus{}str}
-\end{Verbatim}
-
-returns
-
-\begin{Verbatim}[commandchars=\\\{\}]
-LLSparseMatrix
-LLSparseMatrix \PYG{o}{[}INT32\PYGZus{}t, COMPLEX64\PYGZus{}t\PYG{o}{]}
-\end{Verbatim}
-
-The type \code{LLSparseMatrix} is common among \code{LL} sparse format matrices while the \code{full\_type\_str} gives the specific details of the index and element types.
-
-
-\section{Typed matrices in \textbf{\texttt{Python}}?}
-\label{cysparse_basics:typed-matrices-in-python}
 To create a matrix, we use \emph{factory methods} \footnote{
 The term \emph{factory method} is coined by the Design Pattern community. The \emph{method} in itself can be a function, method, class, ...
 }:
@@ -1043,6 +1170,154 @@ For all proxies, the method \code{copy\_matrix()} is available:
 \code{T} is now a real matrix of the same type as the original \code{A} matrix.
 
 
+\chapter{Multiplication with a \textbf{\texttt{NumPy}} vector}
+\label{multiplication_with_numpy_vector:multiplication-with-a-numpy-vector}\label{multiplication_with_numpy_vector::doc}\label{multiplication_with_numpy_vector:multiplication-with-numpy-vector}
+One very common matrix operation is to multiply a sparse matrix with a dense \textbf{\texttt{NumPy}} vector. In fact, this operation is so common that we have written very specialized and optimized code for it.
+Because \textbf{\texttt{NumPy}} vectors are dense, the multiplication of a sparse matrix by a \textbf{\texttt{NumPy}} vector returns a new (dense) \textbf{\texttt{NumPy}}.
+
+All \textbf{\texttt{NumPy}} vector multiplication operations work accross \textbf{all} sparse matrix types (\code{LLSparseMatrix}, \code{CSRSparseMatrix} and \code{CSCSparseMatrix}),
+\textbf{all} proxy types (\code{TransposedSparseMatrix}, \code{ConjugateTransposedSparseMatrix} and \code{ConjugatedSparseMatrix}) and this for \textbf{all} \textbf{real} and \textbf{complex} element types.
+
+As all multiplications are \textbf{higly} optimized, you really should use the corresponding method and not use a combination of them equivalent to the one you seek. For instance,
+\begin{gather}
+\begin{split}A^H * x = conj(A^T * conj(x))\end{split}\notag
+\end{gather}
+Because \(A^H * x\) \textbf{is} implemented, it will be much faster than \(conj(A^T * conj(x))\).
+
+Here is the list of the available multiplications:
+\begin{itemize}
+\item {} 
+\(A * x\): \code{A.matvec(x)};
+
+\item {} 
+\(A^T * x\): \code{A.matvec\_transp(x)};
+
+\item {} 
+\(A^H * x\): \code{A.matvec\_htransp(x)};
+
+\item {} 
+\(conj(A) * x\): \code{A.matvec\_conj(x)};
+
+\end{itemize}
+
+These operations can also be optained throught the corresponding proxies (with the same efficiency):
+\begin{itemize}
+\item {} 
+\code{A.matvec(x)} is the same as \code{A * x};
+
+\item {} 
+\code{A.matvec\_transp(x)} is the same as \code{A.T * x};
+
+\item {} 
+\code{A.matvec\_htransp(x)} is the same as \code{A.H * x};
+
+\item {} 
+\code{A.matvec\_conj(x)} is the same as \code{A.conj * x};
+
+\end{itemize}
+
+
+\section{Optimization}
+\label{multiplication_with_numpy_vector:optimization}
+The following has been optimized:
+\begin{itemize}
+\item {} 
+each type is using the dedicated corresponding \textbf{\texttt{C}} functions (for instance, the corresponding \emph{conj} function from the standard lib);
+
+\item {} 
+each operation is done at \textbf{\texttt{C}} level;
+
+\item {} 
+no factor is copied in any way: we work on the raw \textbf{\texttt{C}} arrays;
+
+\item {} 
+strided vectors have special dedicated code;
+
+\item {} 
+we used the best loops to compute the multiplication for each type of matrix;
+
+\end{itemize}
+
+
+\section{\texttt{matvec()}}
+\label{multiplication_with_numpy_vector:matvec}
+
+\subsection{Syntactic sugar}
+\label{multiplication_with_numpy_vector:syntactic-sugar}
+
+\section{\texttt{matvec\_transp}}
+\label{multiplication_with_numpy_vector:matvec-transp}
+
+\section{\texttt{matvec\_htransp}}
+\label{multiplication_with_numpy_vector:matvec-htransp}
+
+\subsection{Real matrices}
+\label{multiplication_with_numpy_vector:real-matrices}
+
+\section{\texttt{matvec\_conj}}
+\label{multiplication_with_numpy_vector:matvec-conj}
+
+\subsection{Real matrices}
+\label{multiplication_with_numpy_vector:id1}
+
+\section{What about sparse vectors?}
+\label{multiplication_with_numpy_vector:what-about-sparse-vectors}
+\textbf{\texttt{CySparse}} doesn't have a special sparse vector class. However, you can use a simple \code{SparseMatrix} object to represent your vector:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{v} \PYG{o}{=} \PYG{n}{LLSparseMatrix}\PYG{p}{(}\PYG{n}{nrow}\PYG{o}{=}\PYG{l+m+mi}{4}\PYG{p}{,} \PYG{n}{ncol}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{)}
+\PYG{n}{v}\PYG{o}{.}\PYG{n}{put\PYGZus{}triplet}\PYG{p}{(}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{,} \PYG{p}{[}\PYG{l+m+mf}{1.0}\PYG{p}{,} \PYG{l+m+mf}{2.0}\PYG{p}{]}\PYG{p}{)}
+
+\PYG{n}{A} \PYG{o}{=} \PYG{n}{LinearFillLLSparseMatrix}\PYG{p}{(}\PYG{n}{nrow}\PYG{o}{=}\PYG{l+m+mi}{3}\PYG{p}{,} \PYG{n}{ncol}\PYG{o}{=}\PYG{l+m+mi}{4}\PYG{p}{)}
+
+\PYG{k}{print} \PYG{n}{v}
+\PYG{k}{print} \PYG{n}{A}
+
+\PYG{n}{C} \PYG{o}{=} \PYG{n}{A} \PYG{o}{*} \PYG{n}{v}
+\PYG{k}{print} \PYG{n}{C}
+\end{Verbatim}
+
+returns the expected results:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+LLSparseMatrix \PYG{o}{[}INT64\PYGZus{}t, FLOAT64\PYGZus{}t\PYG{o}{]} of \PYG{n+nv}{size}\PYG{o}{=}\PYG{o}{(}4, 1\PYG{o}{)} with \PYG{l+m}{2} non zero values
+\PYGZlt{}Storage scheme: General and without zeros\PYGZgt{}
+ 1.000000
+   \PYGZhy{}\PYGZhy{}\PYGZhy{}
+ 2.000000
+   \PYGZhy{}\PYGZhy{}\PYGZhy{}
+
+
+LLSparseMatrix \PYG{o}{[}INT64\PYGZus{}t, FLOAT64\PYGZus{}t\PYG{o}{]} of \PYG{n+nv}{size}\PYG{o}{=}\PYG{o}{(}3, 4\PYG{o}{)} with \PYG{l+m}{12} non zero values
+\PYGZlt{}Storage scheme: General and without zeros\PYGZgt{}
+ 1.000000   2.000000   3.000000   4.000000
+ 5.000000   6.000000   7.000000   8.000000
+ 9.000000  10.000000  11.000000  12.000000
+
+
+LLSparseMatrix \PYG{o}{[}INT64\PYGZus{}t, FLOAT64\PYGZus{}t\PYG{o}{]} of \PYG{n+nv}{size}\PYG{o}{=}\PYG{o}{(}3, 1\PYG{o}{)} with \PYG{l+m}{3} non zero values
+\PYGZlt{}Storage scheme: General and without zeros\PYGZgt{}
+ 7.000000
+19.000000
+31.000000
+\end{Verbatim}
+
+Of course, the result \textbf{is} a sparse matrix. Contrary to \textbf{\texttt{NumPy}} vectors, you need to give the right dimensions for the vector:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{v} \PYG{o}{=} \PYG{n}{LLSparseMatrix}\PYG{p}{(}\PYG{n}{nrow}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n}{ncol}\PYG{o}{=}\PYG{l+m+mi}{4}\PYG{p}{)}
+\PYG{n}{A} \PYG{o}{=} \PYG{n}{LinearFillLLSparseMatrix}\PYG{p}{(}\PYG{n}{nrow}\PYG{o}{=}\PYG{l+m+mi}{3}\PYG{p}{,} \PYG{n}{ncol}\PYG{o}{=}\PYG{l+m+mi}{4}\PYG{p}{)}
+
+\PYG{n}{A} \PYG{o}{*} \PYG{n}{v}
+\end{Verbatim}
+
+will result in
+
+\begin{Verbatim}[commandchars=\\\{\}]
+IndexError: Matrix dimensions must agree \PYG{o}{(}\PYG{o}{[}3, 4\PYG{o}{]} * \PYG{o}{[}1, 4\PYG{o}{]}\PYG{o}{)}
+\end{Verbatim}
+
+
 \chapter{IO formats}
 \label{io_formats::doc}\label{io_formats:io-formats}
 Several IO formats are supported.
@@ -1113,11 +1388,6 @@ for the creation of the matrix.
 
 \section{Accessing matrix elements}
 \label{cysparse_cython_users:accessing-matrix-elements}
-Some pages of this documentation display equations via the \href{http://www.math.union.edu/~dpvc/jsMath/welcome.html}{jsMath} package. They should
-look reasonably good with most setups but the best rendering is obtained by
-installing the TeX fonts. Please refer to
-\href{http://www.math.union.edu/~dpvc/jsMath/users/welcome.html}{http://www.math.union.edu/\textasciitilde{}dpvc/jsMath/users/welcome.html}.
-
 
 \chapter{Indices and Tables}
 \label{contents:indices-and-tables}\begin{itemize}

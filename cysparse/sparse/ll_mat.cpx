@@ -181,7 +181,7 @@ cpdef bint PyLLSparseMatrix_Check(object obj):
         bint is_ll_sparse_matrix = False
 
     if isinstance(obj, SparseMatrix):
-        is_ll_sparse_matrix = obj.type == 'LLSparseMatrix'
+        is_ll_sparse_matrix = obj.base_type_str == 'LLSparseMatrix'
 
     return is_ll_sparse_matrix
 

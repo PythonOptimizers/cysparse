@@ -66,149 +66,184 @@
 \newlabel{installation:cython-installation-mode}{{2.2}{7}{\textbf {\texttt {Cython}} installation mode}{section.2.2}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2.1}Inconveniences}{7}{subsection.2.2.1}}
 \newlabel{installation:inconveniences}{{2.2.1}{7}{Inconveniences}{subsection.2.2.1}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {3}\textbf  {\texttt  {CySparse}}`s types}{9}{chapter.3}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {3}\textbf  {\texttt  {CySparse}}`s basics}{9}{chapter.3}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{types:cysparse-s-types}{{3}{9}{\textbf {\texttt {CySparse}}`s types}{chapter.3}{}}
-\newlabel{types:cysparse-types}{{3}{9}{\textbf {\texttt {CySparse}}`s types}{chapter.3}{}}
-\newlabel{types::doc}{{3}{9}{\textbf {\texttt {CySparse}}`s types}{chapter.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.1}Compatibility with \textbf  {\texttt  {NumPy}}}{9}{section.3.1}}
-\newlabel{types:compatibility-with-numpy}{{3.1}{9}{Compatibility with \textbf {\texttt {NumPy}}}{section.3.1}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.2}Available types}{9}{section.3.2}}
-\newlabel{types:availabe-types}{{3.2}{9}{Available types}{section.3.2}{}}
-\newlabel{types:available-types}{{3.2}{9}{Available types}{section.3.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}Indices: integer numbers}{9}{subsection.3.2.1}}
-\newlabel{types:indices-integer-numbers}{{3.2.1}{9}{Indices: integer numbers}{subsection.3.2.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}Elements: integers, real and complex numbers}{9}{subsection.3.2.2}}
-\newlabel{types:elements-integers-real-and-complex-numbers}{{3.2.2}{9}{Elements: integers, real and complex numbers}{subsection.3.2.2}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.3}Number's behavior in \textbf  {\texttt  {CySparse}}}{10}{section.3.3}}
-\newlabel{types:number-s-behavior-in-cysparse}{{3.3}{10}{Number's behavior in \textbf {\texttt {CySparse}}}{section.3.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.1}Overflow on assignment}{10}{subsection.3.3.1}}
-\newlabel{types:overflow-on-assignment}{{3.3.1}{10}{Overflow on assignment}{subsection.3.3.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.2}Overflow on operation}{10}{subsection.3.3.2}}
-\newlabel{types:overflow-on-operation}{{3.3.2}{10}{Overflow on operation}{subsection.3.3.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.3}\texttt  {nan} and \texttt  {inf}}{11}{subsection.3.3.3}}
-\newlabel{types:nan-and-inf}{{3.3.3}{11}{\texttt {nan} and \texttt {inf}}{subsection.3.3.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.4}Types compatibilities (implicit castings)}{11}{subsection.3.3.4}}
-\newlabel{types:types-compatibilities-implicit-castings}{{3.3.4}{11}{Types compatibilities (implicit castings)}{subsection.3.3.4}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {4}\textbf  {\texttt  {CySparse}}`s basics}{13}{chapter.4}}
+\newlabel{cysparse_basics:cysparse-s-basics}{{3}{9}{\textbf {\texttt {CySparse}}`s basics}{chapter.3}{}}
+\newlabel{cysparse_basics:cysparse-basics}{{3}{9}{\textbf {\texttt {CySparse}}`s basics}{chapter.3}{}}
+\newlabel{cysparse_basics::doc}{{3}{9}{\textbf {\texttt {CySparse}}`s basics}{chapter.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.1}Sparse Matrices and other matrix-like objects}{9}{section.3.1}}
+\newlabel{cysparse_basics:sparse-matrices-and-other-matrix-like-objects}{{3.1}{9}{Sparse Matrices and other matrix-like objects}{section.3.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.2}Storage schemes}{10}{section.3.2}}
+\newlabel{cysparse_basics:storage-schemes}{{3.2}{10}{Storage schemes}{section.3.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.3}Types}{10}{section.3.3}}
+\newlabel{cysparse_basics:basics-types}{{3.3}{10}{Types}{section.3.3}{}}
+\newlabel{cysparse_basics:types}{{3.3}{10}{Types}{section.3.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.4}What to import}{11}{section.3.4}}
+\newlabel{cysparse_basics:what-to-import}{{3.4}{11}{What to import}{section.3.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.5}Factory methods}{11}{section.3.5}}
+\newlabel{cysparse_basics:factory-methods}{{3.5}{11}{Factory methods}{section.3.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.6}Common strorage attributes}{11}{section.3.6}}
+\newlabel{cysparse_basics:common-strorage-attributes}{{3.6}{11}{Common strorage attributes}{section.3.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.6.1}\texttt  {store\_symmetric}}{11}{subsection.3.6.1}}
+\newlabel{cysparse_basics:store-symmetric}{{3.6.1}{11}{\texttt {store\_symmetric}}{subsection.3.6.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.6.2}\texttt  {store\_zero}}{11}{subsection.3.6.2}}
+\newlabel{cysparse_basics:store-zero}{{3.6.2}{11}{\texttt {store\_zero}}{subsection.3.6.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.6.3}\texttt  {is\_mutable}}{12}{subsection.3.6.3}}
+\newlabel{cysparse_basics:is-mutable}{{3.6.3}{12}{\texttt {is\_mutable}}{subsection.3.6.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.7}Common content attributes}{12}{section.3.7}}
+\newlabel{cysparse_basics:common-content-attributes}{{3.7}{12}{Common content attributes}{section.3.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.7.1}\texttt  {nrow} and \texttt  {ncol}}{12}{subsection.3.7.1}}
+\newlabel{cysparse_basics:nrow-and-ncol}{{3.7.1}{12}{\texttt {nrow} and \texttt {ncol}}{subsection.3.7.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.7.2}\texttt  {nnz}}{12}{subsection.3.7.2}}
+\newlabel{cysparse_basics:nnz}{{3.7.2}{12}{\texttt {nnz}}{subsection.3.7.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.8}Common type attributes}{13}{section.3.8}}
+\newlabel{cysparse_basics:common-type-attributes}{{3.8}{13}{Common type attributes}{section.3.8}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.8.1}\texttt  {dtype} and \texttt  {itype}}{13}{subsection.3.8.1}}
+\newlabel{cysparse_basics:dtype-and-itype}{{3.8.1}{13}{\texttt {dtype} and \texttt {itype}}{subsection.3.8.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.8.2}\texttt  {is\_symmetric}}{13}{subsection.3.8.2}}
+\newlabel{cysparse_basics:is-symmetric}{{3.8.2}{13}{\texttt {is\_symmetric}}{subsection.3.8.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.9}Common string attributes}{13}{section.3.9}}
+\newlabel{cysparse_basics:common-string-attributes}{{3.9}{13}{Common string attributes}{section.3.9}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.9.1}\texttt  {base\_type\_str} and \texttt  {full\_type\_str}}{13}{subsection.3.9.1}}
+\newlabel{cysparse_basics:base-type-str-and-full-type-str}{{3.9.1}{13}{\texttt {base\_type\_str} and \texttt {full\_type\_str}}{subsection.3.9.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.10}Typed matrices in \textbf  {\texttt  {Python}}?}{13}{section.3.10}}
+\newlabel{cysparse_basics:typed-matrices-in-python}{{3.10}{13}{Typed matrices in \textbf {\texttt {Python}}?}{section.3.10}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {4}\textbf  {\texttt  {CySparse}}`s types}{15}{chapter.4}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{cysparse_basics:cysparse-s-basics}{{4}{13}{\textbf {\texttt {CySparse}}`s basics}{chapter.4}{}}
-\newlabel{cysparse_basics:cysparse-basics}{{4}{13}{\textbf {\texttt {CySparse}}`s basics}{chapter.4}{}}
-\newlabel{cysparse_basics::doc}{{4}{13}{\textbf {\texttt {CySparse}}`s basics}{chapter.4}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.1}Common strorage attributes}{13}{section.4.1}}
-\newlabel{cysparse_basics:common-strorage-attributes}{{4.1}{13}{Common strorage attributes}{section.4.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.1}\texttt  {store\_symmetric}}{13}{subsection.4.1.1}}
-\newlabel{cysparse_basics:store-symmetric}{{4.1.1}{13}{\texttt {store\_symmetric}}{subsection.4.1.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.2}\texttt  {store\_zero}}{13}{subsection.4.1.2}}
-\newlabel{cysparse_basics:store-zero}{{4.1.2}{13}{\texttt {store\_zero}}{subsection.4.1.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.3}\texttt  {is\_mutable}}{14}{subsection.4.1.3}}
-\newlabel{cysparse_basics:is-mutable}{{4.1.3}{14}{\texttt {is\_mutable}}{subsection.4.1.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.2}Common content attributes}{14}{section.4.2}}
-\newlabel{cysparse_basics:common-content-attributes}{{4.2}{14}{Common content attributes}{section.4.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.1}\texttt  {nrow} and \texttt  {ncol}}{14}{subsection.4.2.1}}
-\newlabel{cysparse_basics:nrow-and-ncol}{{4.2.1}{14}{\texttt {nrow} and \texttt {ncol}}{subsection.4.2.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.2}\texttt  {nnz}}{14}{subsection.4.2.2}}
-\newlabel{cysparse_basics:nnz}{{4.2.2}{14}{\texttt {nnz}}{subsection.4.2.2}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.3}Common type attributes}{14}{section.4.3}}
-\newlabel{cysparse_basics:common-type-attributes}{{4.3}{14}{Common type attributes}{section.4.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.1}\texttt  {dtype} and \texttt  {itype}}{14}{subsection.4.3.1}}
-\newlabel{cysparse_basics:dtype-and-itype}{{4.3.1}{14}{\texttt {dtype} and \texttt {itype}}{subsection.4.3.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.2}\texttt  {is\_symmetric}}{15}{subsection.4.3.2}}
-\newlabel{cysparse_basics:is-symmetric}{{4.3.2}{15}{\texttt {is\_symmetric}}{subsection.4.3.2}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.4}Common string attributes}{15}{section.4.4}}
-\newlabel{cysparse_basics:common-string-attributes}{{4.4}{15}{Common string attributes}{section.4.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.1}\texttt  {base\_type\_str} and \texttt  {full\_type\_str}}{15}{subsection.4.4.1}}
-\newlabel{cysparse_basics:base-type-str-and-full-type-str}{{4.4.1}{15}{\texttt {base\_type\_str} and \texttt {full\_type\_str}}{subsection.4.4.1}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.5}Typed matrices in \textbf  {\texttt  {Python}}?}{15}{section.4.5}}
-\newlabel{cysparse_basics:typed-matrices-in-python}{{4.5}{15}{Typed matrices in \textbf {\texttt {Python}}?}{section.4.5}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {5}How to create a matrix?}{17}{chapter.5}}
+\newlabel{types:cysparse-s-types}{{4}{15}{\textbf {\texttt {CySparse}}`s types}{chapter.4}{}}
+\newlabel{types:cysparse-types}{{4}{15}{\textbf {\texttt {CySparse}}`s types}{chapter.4}{}}
+\newlabel{types::doc}{{4}{15}{\textbf {\texttt {CySparse}}`s types}{chapter.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.1}Compatibility with \textbf  {\texttt  {NumPy}}}{15}{section.4.1}}
+\newlabel{types:compatibility-with-numpy}{{4.1}{15}{Compatibility with \textbf {\texttt {NumPy}}}{section.4.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.2}Available types}{15}{section.4.2}}
+\newlabel{types:availabe-types}{{4.2}{15}{Available types}{section.4.2}{}}
+\newlabel{types:available-types}{{4.2}{15}{Available types}{section.4.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.1}Indices: integer numbers}{15}{subsection.4.2.1}}
+\newlabel{types:indices-integer-numbers}{{4.2.1}{15}{Indices: integer numbers}{subsection.4.2.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.2}Elements: integers, real and complex numbers}{15}{subsection.4.2.2}}
+\newlabel{types:elements-integers-real-and-complex-numbers}{{4.2.2}{15}{Elements: integers, real and complex numbers}{subsection.4.2.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.3}Number's behavior in \textbf  {\texttt  {CySparse}}}{16}{section.4.3}}
+\newlabel{types:number-s-behavior-in-cysparse}{{4.3}{16}{Number's behavior in \textbf {\texttt {CySparse}}}{section.4.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.1}Overflow on assignment}{16}{subsection.4.3.1}}
+\newlabel{types:overflow-on-assignment}{{4.3.1}{16}{Overflow on assignment}{subsection.4.3.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.2}Overflow on operation}{16}{subsection.4.3.2}}
+\newlabel{types:overflow-on-operation}{{4.3.2}{16}{Overflow on operation}{subsection.4.3.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.3}\texttt  {nan} and \texttt  {inf}}{17}{subsection.4.3.3}}
+\newlabel{types:nan-and-inf}{{4.3.3}{17}{\texttt {nan} and \texttt {inf}}{subsection.4.3.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.4}Types compatibilities (implicit castings)}{17}{subsection.4.3.4}}
+\newlabel{types:types-compatibilities-implicit-castings}{{4.3.4}{17}{Types compatibilities (implicit castings)}{subsection.4.3.4}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {5}How to create a matrix?}{19}{chapter.5}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{matrix_creation::doc}{{5}{17}{How to create a matrix?}{chapter.5}{}}
-\newlabel{matrix_creation:how-to-create-a-matrix}{{5}{17}{How to create a matrix?}{chapter.5}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.1}Sparse matrices all come from a \texttt  {LLSparseMatrix}}{17}{section.5.1}}
-\newlabel{matrix_creation:sparse-matrices-all-come-from-a-llsparsematrix}{{5.1}{17}{Sparse matrices all come from a \texttt {LLSparseMatrix}}{section.5.1}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.2}\texttt  {LLSparseMatrix} matrices must be instantiated by a factory method}{17}{section.5.2}}
-\newlabel{matrix_creation:matrices-must-be-instantiated-by-a-factory-method}{{5.2}{17}{\texttt {LLSparseMatrix} matrices must be instantiated by a factory method}{section.5.2}{}}
-\newlabel{matrix_creation:llsparsematrix-matrices-must-be-instantiated-by-a-factory-method}{{5.2}{17}{\texttt {LLSparseMatrix} matrices must be instantiated by a factory method}{section.5.2}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.3}Helpers}{18}{section.5.3}}
-\newlabel{matrix_creation:helpers}{{5.3}{18}{Helpers}{section.5.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.1}\texttt  {size}}{18}{subsection.5.3.1}}
-\newlabel{matrix_creation:size}{{5.3.1}{18}{\texttt {size}}{subsection.5.3.1}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {6}Mutable matrices: \texttt  {LLSparseMatrix} and \texttt  {LLSparseMatrixView}}{19}{chapter.6}}
+\newlabel{matrix_creation::doc}{{5}{19}{How to create a matrix?}{chapter.5}{}}
+\newlabel{matrix_creation:how-to-create-a-matrix}{{5}{19}{How to create a matrix?}{chapter.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.1}Sparse matrices all come from a \texttt  {LLSparseMatrix}}{19}{section.5.1}}
+\newlabel{matrix_creation:sparse-matrices-all-come-from-a-llsparsematrix}{{5.1}{19}{Sparse matrices all come from a \texttt {LLSparseMatrix}}{section.5.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.2}\texttt  {LLSparseMatrix} matrices must be instantiated by a factory method}{19}{section.5.2}}
+\newlabel{matrix_creation:matrices-must-be-instantiated-by-a-factory-method}{{5.2}{19}{\texttt {LLSparseMatrix} matrices must be instantiated by a factory method}{section.5.2}{}}
+\newlabel{matrix_creation:llsparsematrix-matrices-must-be-instantiated-by-a-factory-method}{{5.2}{19}{\texttt {LLSparseMatrix} matrices must be instantiated by a factory method}{section.5.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.3}Helpers}{20}{section.5.3}}
+\newlabel{matrix_creation:helpers}{{5.3}{20}{Helpers}{section.5.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.1}\texttt  {size}}{20}{subsection.5.3.1}}
+\newlabel{matrix_creation:size}{{5.3.1}{20}{\texttt {size}}{subsection.5.3.1}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {6}Mutable matrices: \texttt  {LLSparseMatrix} and \texttt  {LLSparseMatrixView}}{21}{chapter.6}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{mutable_ll_mat::doc}{{6}{19}{Mutable matrices: \texttt {LLSparseMatrix} and \texttt {LLSparseMatrixView}}{chapter.6}{}}
-\newlabel{mutable_ll_mat:mutable-matrices-llsparsematrix-and-llsparsematrixview}{{6}{19}{Mutable matrices: \texttt {LLSparseMatrix} and \texttt {LLSparseMatrixView}}{chapter.6}{}}
-\newlabel{mutable_ll_mat:ll-mat}{{6}{19}{Mutable matrices: \texttt {LLSparseMatrix} and \texttt {LLSparseMatrixView}}{chapter.6}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6.1}The \texttt  {LLSparseMatrix} class}{19}{section.6.1}}
-\newlabel{mutable_ll_mat:the-llsparsematrix-class}{{6.1}{19}{The \texttt {LLSparseMatrix} class}{section.6.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.1.1}Creation}{19}{subsection.6.1.1}}
-\newlabel{mutable_ll_mat:creation}{{6.1.1}{19}{Creation}{subsection.6.1.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.1.2}Population}{19}{subsection.6.1.2}}
-\newlabel{mutable_ll_mat:population}{{6.1.2}{19}{Population}{subsection.6.1.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.1.3}Accessing elements}{19}{subsection.6.1.3}}
-\newlabel{mutable_ll_mat:accessing-elements}{{6.1.3}{19}{Accessing elements}{subsection.6.1.3}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Individual access}{19}{subsubsection*.7}}
-\newlabel{mutable_ll_mat:individual-access}{{6.1.3}{19}{Individual access}{subsubsection*.7}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Batch access}{20}{subsubsection*.8}}
-\newlabel{mutable_ll_mat:batch-access}{{6.1.3}{20}{Batch access}{subsubsection*.8}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6.2}The \texttt  {LLSparseMatrixView} class}{20}{section.6.2}}
-\newlabel{mutable_ll_mat:ll-sparse-matrix-view}{{6.2}{20}{The \texttt {LLSparseMatrixView} class}{section.6.2}{}}
-\newlabel{mutable_ll_mat:the-llsparsematrixview-class}{{6.2}{20}{The \texttt {LLSparseMatrixView} class}{section.6.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.1}Views of views}{20}{subsection.6.2.1}}
-\newlabel{mutable_ll_mat:views-of-views}{{6.2.1}{20}{Views of views}{subsection.6.2.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.2}References to the base \texttt  {LLSparseMatrix}}{20}{subsection.6.2.2}}
-\newlabel{mutable_ll_mat:references-to-the-base-llsparsematrix}{{6.2.2}{20}{References to the base \texttt {LLSparseMatrix}}{subsection.6.2.2}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {7}Imutable matrices: \texttt  {CSR-}, \texttt  {CSC-} and \texttt  {CSBSparseMatrix}}{23}{chapter.7}}
+\newlabel{mutable_ll_mat::doc}{{6}{21}{Mutable matrices: \texttt {LLSparseMatrix} and \texttt {LLSparseMatrixView}}{chapter.6}{}}
+\newlabel{mutable_ll_mat:mutable-matrices-llsparsematrix-and-llsparsematrixview}{{6}{21}{Mutable matrices: \texttt {LLSparseMatrix} and \texttt {LLSparseMatrixView}}{chapter.6}{}}
+\newlabel{mutable_ll_mat:ll-mat}{{6}{21}{Mutable matrices: \texttt {LLSparseMatrix} and \texttt {LLSparseMatrixView}}{chapter.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.1}The \texttt  {LLSparseMatrix} class}{21}{section.6.1}}
+\newlabel{mutable_ll_mat:the-llsparsematrix-class}{{6.1}{21}{The \texttt {LLSparseMatrix} class}{section.6.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1.1}Creation}{21}{subsection.6.1.1}}
+\newlabel{mutable_ll_mat:creation}{{6.1.1}{21}{Creation}{subsection.6.1.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1.2}Population}{21}{subsection.6.1.2}}
+\newlabel{mutable_ll_mat:population}{{6.1.2}{21}{Population}{subsection.6.1.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1.3}Accessing elements}{21}{subsection.6.1.3}}
+\newlabel{mutable_ll_mat:accessing-elements}{{6.1.3}{21}{Accessing elements}{subsection.6.1.3}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Individual access}{21}{subsubsection*.7}}
+\newlabel{mutable_ll_mat:individual-access}{{6.1.3}{21}{Individual access}{subsubsection*.7}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Batch access}{22}{subsubsection*.8}}
+\newlabel{mutable_ll_mat:batch-access}{{6.1.3}{22}{Batch access}{subsubsection*.8}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.2}The \texttt  {LLSparseMatrixView} class}{22}{section.6.2}}
+\newlabel{mutable_ll_mat:ll-sparse-matrix-view}{{6.2}{22}{The \texttt {LLSparseMatrixView} class}{section.6.2}{}}
+\newlabel{mutable_ll_mat:the-llsparsematrixview-class}{{6.2}{22}{The \texttt {LLSparseMatrixView} class}{section.6.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.1}Views of views}{22}{subsection.6.2.1}}
+\newlabel{mutable_ll_mat:views-of-views}{{6.2.1}{22}{Views of views}{subsection.6.2.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.2}References to the base \texttt  {LLSparseMatrix}}{22}{subsection.6.2.2}}
+\newlabel{mutable_ll_mat:references-to-the-base-llsparsematrix}{{6.2.2}{22}{References to the base \texttt {LLSparseMatrix}}{subsection.6.2.2}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {7}Imutable matrices: \texttt  {CSR-}, \texttt  {CSC-} and \texttt  {CSBSparseMatrix}}{25}{chapter.7}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{immutable_mat:immutable-mat}{{7}{23}{Imutable matrices: \texttt {CSR-}, \texttt {CSC-} and \texttt {CSBSparseMatrix}}{chapter.7}{}}
-\newlabel{immutable_mat::doc}{{7}{23}{Imutable matrices: \texttt {CSR-}, \texttt {CSC-} and \texttt {CSBSparseMatrix}}{chapter.7}{}}
-\newlabel{immutable_mat:imutable-matrices-csr-csc-and-csbsparsematrix}{{7}{23}{Imutable matrices: \texttt {CSR-}, \texttt {CSC-} and \texttt {CSBSparseMatrix}}{chapter.7}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {7.1}The \texttt  {CSRSparseMatrix} class}{23}{section.7.1}}
-\newlabel{immutable_mat:the-csrsparsematrix-class}{{7.1}{23}{The \texttt {CSRSparseMatrix} class}{section.7.1}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {7.2}The \texttt  {CSCSparseMatrix} class}{23}{section.7.2}}
-\newlabel{immutable_mat:the-cscsparsematrix-class}{{7.2}{23}{The \texttt {CSCSparseMatrix} class}{section.7.2}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {7.3}The \texttt  {CSBSparseMatrix} class}{23}{section.7.3}}
-\newlabel{immutable_mat:the-csbsparsematrix-class}{{7.3}{23}{The \texttt {CSBSparseMatrix} class}{section.7.3}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {8}Sparse Matrix Proxies}{25}{chapter.8}}
+\newlabel{immutable_mat:immutable-mat}{{7}{25}{Imutable matrices: \texttt {CSR-}, \texttt {CSC-} and \texttt {CSBSparseMatrix}}{chapter.7}{}}
+\newlabel{immutable_mat::doc}{{7}{25}{Imutable matrices: \texttt {CSR-}, \texttt {CSC-} and \texttt {CSBSparseMatrix}}{chapter.7}{}}
+\newlabel{immutable_mat:imutable-matrices-csr-csc-and-csbsparsematrix}{{7}{25}{Imutable matrices: \texttt {CSR-}, \texttt {CSC-} and \texttt {CSBSparseMatrix}}{chapter.7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7.1}The \texttt  {CSRSparseMatrix} class}{25}{section.7.1}}
+\newlabel{immutable_mat:the-csrsparsematrix-class}{{7.1}{25}{The \texttt {CSRSparseMatrix} class}{section.7.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7.2}The \texttt  {CSCSparseMatrix} class}{25}{section.7.2}}
+\newlabel{immutable_mat:the-cscsparsematrix-class}{{7.2}{25}{The \texttt {CSCSparseMatrix} class}{section.7.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7.3}The \texttt  {CSBSparseMatrix} class}{25}{section.7.3}}
+\newlabel{immutable_mat:the-csbsparsematrix-class}{{7.3}{25}{The \texttt {CSBSparseMatrix} class}{section.7.3}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {8}Sparse Matrix Proxies}{27}{chapter.8}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{proxies:sparse-matrix-proxies}{{8}{25}{Sparse Matrix Proxies}{chapter.8}{}}
-\newlabel{proxies::doc}{{8}{25}{Sparse Matrix Proxies}{chapter.8}{}}
-\newlabel{proxies:id1}{{8}{25}{Sparse Matrix Proxies}{chapter.8}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {8.1}Available proxies}{25}{section.8.1}}
-\newlabel{proxies:available-proxies}{{8.1}{25}{Available proxies}{section.8.1}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {8.2}Basic operations}{26}{section.8.2}}
-\newlabel{proxies:basic-operations}{{8.2}{26}{Basic operations}{section.8.2}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {8.3}What if I need the full scale corresponding matrix?}{26}{section.8.3}}
-\newlabel{proxies:what-if-i-need-the-full-scale-corresponding-matrix}{{8.3}{26}{What if I need the full scale corresponding matrix?}{section.8.3}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {9}IO formats}{27}{chapter.9}}
+\newlabel{proxies:sparse-matrix-proxies}{{8}{27}{Sparse Matrix Proxies}{chapter.8}{}}
+\newlabel{proxies::doc}{{8}{27}{Sparse Matrix Proxies}{chapter.8}{}}
+\newlabel{proxies:id1}{{8}{27}{Sparse Matrix Proxies}{chapter.8}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {8.1}Available proxies}{27}{section.8.1}}
+\newlabel{proxies:available-proxies}{{8.1}{27}{Available proxies}{section.8.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {8.2}Basic operations}{28}{section.8.2}}
+\newlabel{proxies:basic-operations}{{8.2}{28}{Basic operations}{section.8.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {8.3}What if I need the full scale corresponding matrix?}{28}{section.8.3}}
+\newlabel{proxies:what-if-i-need-the-full-scale-corresponding-matrix}{{8.3}{28}{What if I need the full scale corresponding matrix?}{section.8.3}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {9}Multiplication with a \textbf  {\texttt  {NumPy}} vector}{29}{chapter.9}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{io_formats::doc}{{9}{27}{IO formats}{chapter.9}{}}
-\newlabel{io_formats:io-formats}{{9}{27}{IO formats}{chapter.9}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {9.1}Text formats}{27}{section.9.1}}
-\newlabel{io_formats:text-formats}{{9.1}{27}{Text formats}{section.9.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {9.1.1}Matrix Market format}{27}{subsection.9.1.1}}
-\newlabel{io_formats:matrix-market-format}{{9.1.1}{27}{Matrix Market format}{subsection.9.1.1}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {9.2}Binary formats}{27}{section.9.2}}
-\newlabel{io_formats:binary-formats}{{9.2}{27}{Binary formats}{section.9.2}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {10}\textbf  {\texttt  {CySparse}} for \textbf  {\texttt  {Cython}} users}{29}{chapter.10}}
+\newlabel{multiplication_with_numpy_vector:multiplication-with-a-numpy-vector}{{9}{29}{Multiplication with a \textbf {\texttt {NumPy}} vector}{chapter.9}{}}
+\newlabel{multiplication_with_numpy_vector::doc}{{9}{29}{Multiplication with a \textbf {\texttt {NumPy}} vector}{chapter.9}{}}
+\newlabel{multiplication_with_numpy_vector:multiplication-with-numpy-vector}{{9}{29}{Multiplication with a \textbf {\texttt {NumPy}} vector}{chapter.9}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {9.1}Optimization}{29}{section.9.1}}
+\newlabel{multiplication_with_numpy_vector:optimization}{{9.1}{29}{Optimization}{section.9.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {9.2}\texttt  {matvec()}}{30}{section.9.2}}
+\newlabel{multiplication_with_numpy_vector:matvec}{{9.2}{30}{\texttt {matvec()}}{section.9.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.2.1}Syntactic sugar}{30}{subsection.9.2.1}}
+\newlabel{multiplication_with_numpy_vector:syntactic-sugar}{{9.2.1}{30}{Syntactic sugar}{subsection.9.2.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {9.3}\texttt  {matvec\_transp}}{30}{section.9.3}}
+\newlabel{multiplication_with_numpy_vector:matvec-transp}{{9.3}{30}{\texttt {matvec\_transp}}{section.9.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {9.4}\texttt  {matvec\_htransp}}{30}{section.9.4}}
+\newlabel{multiplication_with_numpy_vector:matvec-htransp}{{9.4}{30}{\texttt {matvec\_htransp}}{section.9.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.4.1}Real matrices}{30}{subsection.9.4.1}}
+\newlabel{multiplication_with_numpy_vector:real-matrices}{{9.4.1}{30}{Real matrices}{subsection.9.4.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {9.5}\texttt  {matvec\_conj}}{30}{section.9.5}}
+\newlabel{multiplication_with_numpy_vector:matvec-conj}{{9.5}{30}{\texttt {matvec\_conj}}{section.9.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.5.1}Real matrices}{30}{subsection.9.5.1}}
+\newlabel{multiplication_with_numpy_vector:id1}{{9.5.1}{30}{Real matrices}{subsection.9.5.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {9.6}What about sparse vectors?}{30}{section.9.6}}
+\newlabel{multiplication_with_numpy_vector:what-about-sparse-vectors}{{9.6}{30}{What about sparse vectors?}{section.9.6}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {10}IO formats}{33}{chapter.10}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{cysparse_cython_users::doc}{{10}{29}{\textbf {\texttt {CySparse}} for \textbf {\texttt {Cython}} users}{chapter.10}{}}
-\newlabel{cysparse_cython_users:cysparse-for-cython-users}{{10}{29}{\textbf {\texttt {CySparse}} for \textbf {\texttt {Cython}} users}{chapter.10}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {10.1}How to compile with \textbf  {\texttt  {Cython}}?}{29}{section.10.1}}
-\newlabel{cysparse_cython_users:how-to-compile-with-cython}{{10.1}{29}{How to compile with \textbf {\texttt {Cython}}?}{section.10.1}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {10.2}Creation of matrices}{29}{section.10.2}}
-\newlabel{cysparse_cython_users:creation-of-matrices}{{10.2}{29}{Creation of matrices}{section.10.2}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {10.3}Accessing matrix elements}{29}{section.10.3}}
-\newlabel{cysparse_cython_users:accessing-matrix-elements}{{10.3}{29}{Accessing matrix elements}{section.10.3}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {11}Indices and Tables}{31}{chapter.11}}
+\newlabel{io_formats::doc}{{10}{33}{IO formats}{chapter.10}{}}
+\newlabel{io_formats:io-formats}{{10}{33}{IO formats}{chapter.10}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {10.1}Text formats}{33}{section.10.1}}
+\newlabel{io_formats:text-formats}{{10.1}{33}{Text formats}{section.10.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.1.1}Matrix Market format}{33}{subsection.10.1.1}}
+\newlabel{io_formats:matrix-market-format}{{10.1.1}{33}{Matrix Market format}{subsection.10.1.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {10.2}Binary formats}{33}{section.10.2}}
+\newlabel{io_formats:binary-formats}{{10.2}{33}{Binary formats}{section.10.2}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {11}\textbf  {\texttt  {CySparse}} for \textbf  {\texttt  {Cython}} users}{35}{chapter.11}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{contents:indices-and-tables}{{11}{31}{Indices and Tables}{chapter.11}{}}
+\newlabel{cysparse_cython_users::doc}{{11}{35}{\textbf {\texttt {CySparse}} for \textbf {\texttt {Cython}} users}{chapter.11}{}}
+\newlabel{cysparse_cython_users:cysparse-for-cython-users}{{11}{35}{\textbf {\texttt {CySparse}} for \textbf {\texttt {Cython}} users}{chapter.11}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {11.1}How to compile with \textbf  {\texttt  {Cython}}?}{35}{section.11.1}}
+\newlabel{cysparse_cython_users:how-to-compile-with-cython}{{11.1}{35}{How to compile with \textbf {\texttt {Cython}}?}{section.11.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {11.2}Creation of matrices}{35}{section.11.2}}
+\newlabel{cysparse_cython_users:creation-of-matrices}{{11.2}{35}{Creation of matrices}{section.11.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {11.3}Accessing matrix elements}{35}{section.11.3}}
+\newlabel{cysparse_cython_users:accessing-matrix-elements}{{11.3}{35}{Accessing matrix elements}{section.11.3}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {12}Indices and Tables}{37}{chapter.12}}
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{contents:indices-and-tables}{{12}{37}{Indices and Tables}{chapter.12}{}}

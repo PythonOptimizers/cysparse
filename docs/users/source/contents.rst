@@ -11,12 +11,13 @@
 
    introduction
    installation
-   types
    cysparse_basics
+   types
    matrix_creation
    mutable_ll_mat
    immutable_mat
    proxies
+   multiplication_with_numpy_vector
    io_formats
    cysparse_cython_users
    

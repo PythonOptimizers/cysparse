@@ -4,7 +4,7 @@ import numpy as np
 
 import sys
 
-l1 = NewLLSparseMatrix(nrow=10, ncol=10, size_hint=40)
+l1 = LLSparseMatrix(nrow=10, ncol=10, size_hint=40)
 print l1
 print type(l1)             # lots of classes are used internally...
 
@@ -40,9 +40,9 @@ l1.print_to(sys.stdout)
 
 ########################################################################################################################
 print "4=" * 80
-l2 = NewLLSparseMatrix(size=10, dtype=types.COMPLEX64_T, itype=types.INT32_T)
-print l2.type
-print l2.type_name
+l2 = LLSparseMatrix(size=10, dtype=types.COMPLEX64_T, itype=types.INT32_T)
+print l2.base_type_str
+print l2.full_type_str
 
 print l2
 
@@ -65,7 +65,7 @@ print l2.find()
 l2.print_to(sys.stdout)
 ########################################################################################################################
 print "=" * 80
-l3 = NewLLSparseMatrix(size=4, itype=types.INT64_T, dtype=types.COMPLEX256_T, store_zeros=True)
+l3 = LLSparseMatrix(size=4, itype=types.INT64_T, dtype=types.COMPLEX128_T, store_zero=True)
 print l3
 
 l3[2,2] = 67.0+5.0j
@@ -99,5 +99,7 @@ print l3_view_view.is_empty
 
 ########################################################################################################################
 print "=" * 80
+
+print l3[[1,2],[0,1]]
 
 

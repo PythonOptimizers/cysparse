@@ -22,6 +22,7 @@ We tests:
     * ``matvec()``;
     * ``matvec_transp()``;
     * ``matvec_htransp()``;
+    * ``matvec_conj()``;
 
 and this for all combinations of indices and element types.
 
@@ -110,6 +111,21 @@ class CySparseCommonNumpyVectorMultiplication_TransposedSparseMatrix_INT64_t_COM
 
 
 
+# ======================================================================================================================
+    def test_numpy_vector_matvec_conj_element_by_element(self):
+        """
+        Test ``matvec`` through the ``*`` operator.
+        """
+
+        # this only works because the matrix doesn't have any imaginary term
+        result_with_A = self.A.T.matvec_conj(self.y)
+        result_with_C = self.C.matvec_conj(self.y)
+
+        for j in range(self.ncol):
+            self.assertTrue(result_with_A[j] == result_with_C[j])
+
+
+
 ##################################
 # Case Symmetric, Non Zero
 ##################################
@@ -168,6 +184,17 @@ class CySparseCommonNumpyVectorMultiplication_Symmetric_TransposedSparseMatrix_I
 
         for i in range(self.size):
             self.assertTrue(result_with_A[i] == result_with_C[i])
+
+
+
+# ======================================================================================================================
+    def test_numpy_vector_matvec_conj_element_by_element(self):
+
+        result_with_A = self.A.T.matvec_conj(self.x)
+        result_with_C = self.C.matvec_conj(self.x)
+
+        for j in range(self.size):
+            self.assertTrue(result_with_A[j] == result_with_C[j])
 
 
 
@@ -233,6 +260,19 @@ class CySparseCommonNumpyVectorMultiplication_WithZeroTransposedSparseMatrix_INT
             self.assertTrue(result_with_A[i] == result_with_C[i])
 
 
+
+# ======================================================================================================================
+    def test_numpy_vector_matvec_conj_element_by_element(self):
+
+        result_with_A = self.A.T.matvec_conj(self.y)
+        result_with_C = self.C.matvec_conj(self.y)
+
+        for j in range(self.ncol):
+            self.assertTrue(result_with_A[j] == result_with_C[j])
+
+
+
+
 ##################################
 # Case Symmetric, Zero
 ##################################
@@ -291,6 +331,17 @@ class CySparseCommonNumpyVectorMultiplication_Symmetric_WithZero_TransposedSpars
 
         for i in range(self.size):
             self.assertTrue(result_with_A[i] == result_with_C[i])
+
+
+
+# ======================================================================================================================
+    def test_numpy_vector_matvec_conj_element_by_element(self):
+
+        result_with_A = self.A.T.matvec_conj(self.x)
+        result_with_C = self.C.matvec_conj(self.x)
+
+        for j in range(self.size):
+            self.assertTrue(result_with_A[j] == result_with_C[j])
 
 
 
@@ -372,6 +423,19 @@ class CySparseCommonNumpyVectorWithStrideMultiplication_TransposedSparseMatrix_I
             self.assertTrue(result_with_A[i] == result_with_C[i])
 
 
+
+# ======================================================================================================================
+    def test_numpy_vector_matvec_conj_element_by_element(self):
+
+        # this only works because the matrix doesn't have any imaginary term
+        result_with_A = self.A.T.matvec_conj(self.y)
+        result_with_C = self.C.matvec_conj(self.y_strided[::self.stride_factor])
+
+        for j in range(self.ncol):
+            self.assertTrue(result_with_A[j] == result_with_C[j])
+
+
+
 ##################################
 # Case Symmetric, Non Zero
 ##################################
@@ -436,6 +500,17 @@ class CySparseCommonNumpyVectorWithStrideMultiplication_Symmetric_TransposedSpar
 
         for i in range(self.size):
             self.assertTrue(result_with_A[i] == result_with_C[i])
+
+
+
+# ======================================================================================================================
+    def test_numpy_vector_matvec_conj_element_by_element(self):
+
+        result_with_A = self.A.T.matvec_conj(self.x)
+        result_with_C = self.C.matvec_conj(self.x_strided[::self.stride_factor])
+
+        for j in range(self.size):
+            self.assertTrue(result_with_A[j] == result_with_C[j])
 
 
 
@@ -515,6 +590,17 @@ class CySparseCommonNumpyVectorWithStrideMultiplication_WithZeroTransposedSparse
 
 
 
+# ======================================================================================================================
+    def test_numpy_vector_matvec_conj_element_by_element(self):
+
+        result_with_A = self.A.T.matvec_conj(self.y)
+        result_with_C = self.C.matvec_conj(self.y_strided[::self.stride_factor])
+
+        for j in range(self.ncol):
+            self.assertTrue(result_with_A[j] == result_with_C[j])
+
+
+
 ##################################
 # Case Symmetric, Zero
 ##################################
@@ -579,6 +665,17 @@ class CySparseCommonNumpyVectorWithStrideMultiplication_Symmetric_WithZero_Trans
 
         for i in range(self.size):
             self.assertTrue(result_with_A[i] == result_with_C[i])
+
+
+
+# ======================================================================================================================
+    def test_numpy_vector_matvec_conj_element_by_element(self):
+
+        result_with_A = self.A.T.matvec_conj(self.x)
+        result_with_C = self.C.matvec_conj(self.x_strided[::self.stride_factor])
+
+        for j in range(self.size):
+            self.assertTrue(result_with_A[j] == result_with_C[j])
 
 
 

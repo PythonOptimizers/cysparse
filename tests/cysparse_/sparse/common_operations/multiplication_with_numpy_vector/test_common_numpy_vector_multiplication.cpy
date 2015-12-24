@@ -22,6 +22,7 @@ We tests:
     * ``matvec()``;
     * ``matvec_transp()``;
     * ``matvec_htransp()``;
+    * ``matvec_conj()``;
 
 and this for all combinations of indices and element types.
 
@@ -145,6 +146,27 @@ YOU HAVE TO ADD YOUR NEW MATRIX TYPE HERE
 
 {% endif %}
 
+# ======================================================================================================================
+    def test_numpy_vector_matvec_conj_element_by_element(self):
+        """
+        Test ``matvec`` through the ``*`` operator.
+        """
+{% if class == 'TransposedSparseMatrix' or class == 'ConjugateTransposedSparseMatrix' %}
+        # this only works because the matrix doesn't have any imaginary term
+        result_with_A = self.A.T.matvec_conj(self.y)
+        result_with_C = self.C.matvec_conj(self.y)
+
+        for j in range(self.ncol):
+            self.assertTrue(result_with_A[j] == result_with_C[j])
+
+{% else %}
+        result_with_A = self.A.matvec_conj(self.x)
+        result_with_C = self.C.matvec_conj(self.x)
+
+        for i in range(self.nrow):
+            self.assertTrue(result_with_A[i] == result_with_C[i])
+{% endif %}
+
 ##################################
 # Case Symmetric, Non Zero
 ##################################
@@ -238,6 +260,23 @@ YOU HAVE TO ADD YOUR NEW MATRIX TYPE HERE
         for i in range(self.size):
             self.assertTrue(result_with_A[i] == result_with_C[i])
 
+{% endif %}
+
+# ======================================================================================================================
+    def test_numpy_vector_matvec_conj_element_by_element(self):
+{% if class == 'TransposedSparseMatrix' or class == 'ConjugateTransposedSparseMatrix' %}
+        result_with_A = self.A.T.matvec_conj(self.x)
+        result_with_C = self.C.matvec_conj(self.x)
+
+        for j in range(self.size):
+            self.assertTrue(result_with_A[j] == result_with_C[j])
+
+{% else %}
+        result_with_A = self.A.matvec_conj(self.x)
+        result_with_C = self.C.matvec_conj(self.x)
+
+        for i in range(self.size):
+            self.assertTrue(result_with_A[i] == result_with_C[i])
 {% endif %}
 
 ##################################
@@ -337,6 +376,25 @@ YOU HAVE TO ADD YOUR NEW MATRIX TYPE HERE
             self.assertTrue(result_with_A[j] == result_with_C[j])
 
 {% endif %}
+
+# ======================================================================================================================
+    def test_numpy_vector_matvec_conj_element_by_element(self):
+{% if class == 'TransposedSparseMatrix' or class == 'ConjugateTransposedSparseMatrix' %}
+        result_with_A = self.A.T.matvec_conj(self.y)
+        result_with_C = self.C.matvec_conj(self.y)
+
+        for j in range(self.ncol):
+            self.assertTrue(result_with_A[j] == result_with_C[j])
+
+{% else %}
+        result_with_A = self.A.matvec_conj(self.x)
+        result_with_C = self.C.matvec_conj(self.x)
+
+        for i in range(self.nrow):
+            self.assertTrue(result_with_A[i] == result_with_C[i])
+{% endif %}
+
+
 ##################################
 # Case Symmetric, Zero
 ##################################
@@ -430,6 +488,23 @@ YOU HAVE TO ADD YOUR NEW MATRIX TYPE HERE
         for i in range(self.size):
             self.assertTrue(result_with_A[i] == result_with_C[i])
 
+{% endif %}
+
+# ======================================================================================================================
+    def test_numpy_vector_matvec_conj_element_by_element(self):
+{% if class == 'TransposedSparseMatrix' or class == 'ConjugateTransposedSparseMatrix' %}
+        result_with_A = self.A.T.matvec_conj(self.x)
+        result_with_C = self.C.matvec_conj(self.x)
+
+        for j in range(self.size):
+            self.assertTrue(result_with_A[j] == result_with_C[j])
+
+{% else %}
+        result_with_A = self.A.matvec_conj(self.x)
+        result_with_C = self.C.matvec_conj(self.x)
+
+        for i in range(self.size):
+            self.assertTrue(result_with_A[i] == result_with_C[i])
 {% endif %}
 
 ########################################################################################################################
@@ -547,6 +622,25 @@ YOU HAVE TO ADD YOUR NEW MATRIX TYPE HERE
             self.assertTrue(result_with_A[j] == result_with_C[j])
 
 {% endif %}
+
+# ======================================================================================================================
+    def test_numpy_vector_matvec_conj_element_by_element(self):
+{% if class == 'TransposedSparseMatrix' or class == 'ConjugateTransposedSparseMatrix' %}
+        # this only works because the matrix doesn't have any imaginary term
+        result_with_A = self.A.T.matvec_conj(self.y)
+        result_with_C = self.C.matvec_conj(self.y_strided[::self.stride_factor])
+
+        for j in range(self.ncol):
+            self.assertTrue(result_with_A[j] == result_with_C[j])
+
+{% else %}
+        result_with_A = self.A.matvec_conj(self.x)
+        result_with_C = self.C.matvec_conj(self.x_strided[::self.stride_factor])
+
+        for i in range(self.nrow):
+            self.assertTrue(result_with_A[i] == result_with_C[i])
+{% endif %}
+
 ##################################
 # Case Symmetric, Non Zero
 ##################################
@@ -647,6 +741,23 @@ YOU HAVE TO ADD YOUR NEW MATRIX TYPE HERE
         for j in range(self.size):
             self.assertTrue(result_with_A[j] == result_with_C[j])
 
+{% endif %}
+
+# ======================================================================================================================
+    def test_numpy_vector_matvec_conj_element_by_element(self):
+{% if class == 'TransposedSparseMatrix' or class == 'ConjugateTransposedSparseMatrix' %}
+        result_with_A = self.A.T.matvec_conj(self.x)
+        result_with_C = self.C.matvec_conj(self.x_strided[::self.stride_factor])
+
+        for j in range(self.size):
+            self.assertTrue(result_with_A[j] == result_with_C[j])
+
+{% else %}
+        result_with_A = self.A.matvec_conj(self.x)
+        result_with_C = self.C.matvec_conj(self.x_strided[::self.stride_factor])
+
+        for i in range(self.size):
+            self.assertTrue(result_with_A[i] == result_with_C[i])
 {% endif %}
 
 ##################################
@@ -762,6 +873,23 @@ YOU HAVE TO ADD YOUR NEW MATRIX TYPE HERE
 
 {% endif %}
 
+# ======================================================================================================================
+    def test_numpy_vector_matvec_conj_element_by_element(self):
+{% if class == 'TransposedSparseMatrix' or class == 'ConjugateTransposedSparseMatrix' %}
+        result_with_A = self.A.T.matvec_conj(self.y)
+        result_with_C = self.C.matvec_conj(self.y_strided[::self.stride_factor])
+
+        for j in range(self.ncol):
+            self.assertTrue(result_with_A[j] == result_with_C[j])
+
+{% else %}
+        result_with_A = self.A.matvec_conj(self.x)
+        result_with_C = self.C.matvec_conj(self.x_strided[::self.stride_factor])
+
+        for i in range(self.nrow):
+            self.assertTrue(result_with_A[i] == result_with_C[i])
+{% endif %}
+
 ##################################
 # Case Symmetric, Zero
 ##################################
@@ -862,6 +990,23 @@ YOU HAVE TO ADD YOUR NEW MATRIX TYPE HERE
         for j in range(self.size):
             self.assertTrue(result_with_A[j] == result_with_C[j])
 
+{% endif %}
+
+# ======================================================================================================================
+    def test_numpy_vector_matvec_conj_element_by_element(self):
+{% if class == 'TransposedSparseMatrix' or class == 'ConjugateTransposedSparseMatrix' %}
+        result_with_A = self.A.T.matvec_conj(self.x)
+        result_with_C = self.C.matvec_conj(self.x_strided[::self.stride_factor])
+
+        for j in range(self.size):
+            self.assertTrue(result_with_A[j] == result_with_C[j])
+
+{% else %}
+        result_with_A = self.A.matvec_conj(self.x)
+        result_with_C = self.C.matvec_conj(self.x_strided[::self.stride_factor])
+
+        for i in range(self.size):
+            self.assertTrue(result_with_A[i] == result_with_C[i])
 {% endif %}
 
 if __name__ == '__main__':

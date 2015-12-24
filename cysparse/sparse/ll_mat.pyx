@@ -297,7 +297,7 @@ cpdef bint PyLLSparseMatrix_Check(object obj):
         bint is_ll_sparse_matrix = False
 
     if isinstance(obj, SparseMatrix):
-        is_ll_sparse_matrix = obj.type == 'LLSparseMatrix'
+        is_ll_sparse_matrix = obj.base_type_str == 'LLSparseMatrix'
 
     return is_ll_sparse_matrix
 
@@ -963,7 +963,7 @@ def IdentityLLSparseMatrix(**kwargs):
 
 def BandLLSparseMatrix(**kwargs):
     """
-    See ``MakeBandLLSparseMatrix_INT64_t_COMPLEX128_t``.
+    See ``MakeBandLLSparseMatrix_INT32_t_INT32_t``.
 
     Note:
         Input arguments are **not** tested.

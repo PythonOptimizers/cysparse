@@ -18,59 +18,74 @@
 \contentsline {subsection}{\numberline {2.1.5}Compile and install the library}{6}{subsection.2.1.5}
 \contentsline {section}{\numberline {2.2}\textbf {\texttt {Cython}} installation mode}{7}{section.2.2}
 \contentsline {subsection}{\numberline {2.2.1}Inconveniences}{7}{subsection.2.2.1}
-\contentsline {chapter}{\numberline {3}\textbf {\texttt {CySparse}}`s types}{9}{chapter.3}
-\contentsline {section}{\numberline {3.1}Compatibility with \textbf {\texttt {NumPy}}}{9}{section.3.1}
-\contentsline {section}{\numberline {3.2}Available types}{9}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}Indices: integer numbers}{9}{subsection.3.2.1}
-\contentsline {subsection}{\numberline {3.2.2}Elements: integers, real and complex numbers}{9}{subsection.3.2.2}
-\contentsline {section}{\numberline {3.3}Number's behavior in \textbf {\texttt {CySparse}}}{10}{section.3.3}
-\contentsline {subsection}{\numberline {3.3.1}Overflow on assignment}{10}{subsection.3.3.1}
-\contentsline {subsection}{\numberline {3.3.2}Overflow on operation}{10}{subsection.3.3.2}
-\contentsline {subsection}{\numberline {3.3.3}\texttt {nan} and \texttt {inf}}{11}{subsection.3.3.3}
-\contentsline {subsection}{\numberline {3.3.4}Types compatibilities (implicit castings)}{11}{subsection.3.3.4}
-\contentsline {chapter}{\numberline {4}\textbf {\texttt {CySparse}}`s basics}{13}{chapter.4}
-\contentsline {section}{\numberline {4.1}Common strorage attributes}{13}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}\texttt {store\_symmetric}}{13}{subsection.4.1.1}
-\contentsline {subsection}{\numberline {4.1.2}\texttt {store\_zero}}{13}{subsection.4.1.2}
-\contentsline {subsection}{\numberline {4.1.3}\texttt {is\_mutable}}{14}{subsection.4.1.3}
-\contentsline {section}{\numberline {4.2}Common content attributes}{14}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}\texttt {nrow} and \texttt {ncol}}{14}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}\texttt {nnz}}{14}{subsection.4.2.2}
-\contentsline {section}{\numberline {4.3}Common type attributes}{14}{section.4.3}
-\contentsline {subsection}{\numberline {4.3.1}\texttt {dtype} and \texttt {itype}}{14}{subsection.4.3.1}
-\contentsline {subsection}{\numberline {4.3.2}\texttt {is\_symmetric}}{15}{subsection.4.3.2}
-\contentsline {section}{\numberline {4.4}Common string attributes}{15}{section.4.4}
-\contentsline {subsection}{\numberline {4.4.1}\texttt {base\_type\_str} and \texttt {full\_type\_str}}{15}{subsection.4.4.1}
-\contentsline {section}{\numberline {4.5}Typed matrices in \textbf {\texttt {Python}}?}{15}{section.4.5}
-\contentsline {chapter}{\numberline {5}How to create a matrix?}{17}{chapter.5}
-\contentsline {section}{\numberline {5.1}Sparse matrices all come from a \texttt {LLSparseMatrix}}{17}{section.5.1}
-\contentsline {section}{\numberline {5.2}\texttt {LLSparseMatrix} matrices must be instantiated by a factory method}{17}{section.5.2}
-\contentsline {section}{\numberline {5.3}Helpers}{18}{section.5.3}
-\contentsline {subsection}{\numberline {5.3.1}\texttt {size}}{18}{subsection.5.3.1}
-\contentsline {chapter}{\numberline {6}Mutable matrices: \texttt {LLSparseMatrix} and \texttt {LLSparseMatrixView}}{19}{chapter.6}
-\contentsline {section}{\numberline {6.1}The \texttt {LLSparseMatrix} class}{19}{section.6.1}
-\contentsline {subsection}{\numberline {6.1.1}Creation}{19}{subsection.6.1.1}
-\contentsline {subsection}{\numberline {6.1.2}Population}{19}{subsection.6.1.2}
-\contentsline {subsection}{\numberline {6.1.3}Accessing elements}{19}{subsection.6.1.3}
-\contentsline {subsubsection}{Individual access}{19}{subsubsection*.7}
-\contentsline {subsubsection}{Batch access}{20}{subsubsection*.8}
-\contentsline {section}{\numberline {6.2}The \texttt {LLSparseMatrixView} class}{20}{section.6.2}
-\contentsline {subsection}{\numberline {6.2.1}Views of views}{20}{subsection.6.2.1}
-\contentsline {subsection}{\numberline {6.2.2}References to the base \texttt {LLSparseMatrix}}{20}{subsection.6.2.2}
-\contentsline {chapter}{\numberline {7}Imutable matrices: \texttt {CSR-}, \texttt {CSC-} and \texttt {CSBSparseMatrix}}{23}{chapter.7}
-\contentsline {section}{\numberline {7.1}The \texttt {CSRSparseMatrix} class}{23}{section.7.1}
-\contentsline {section}{\numberline {7.2}The \texttt {CSCSparseMatrix} class}{23}{section.7.2}
-\contentsline {section}{\numberline {7.3}The \texttt {CSBSparseMatrix} class}{23}{section.7.3}
-\contentsline {chapter}{\numberline {8}Sparse Matrix Proxies}{25}{chapter.8}
-\contentsline {section}{\numberline {8.1}Available proxies}{25}{section.8.1}
-\contentsline {section}{\numberline {8.2}Basic operations}{26}{section.8.2}
-\contentsline {section}{\numberline {8.3}What if I need the full scale corresponding matrix?}{26}{section.8.3}
-\contentsline {chapter}{\numberline {9}IO formats}{27}{chapter.9}
-\contentsline {section}{\numberline {9.1}Text formats}{27}{section.9.1}
-\contentsline {subsection}{\numberline {9.1.1}Matrix Market format}{27}{subsection.9.1.1}
-\contentsline {section}{\numberline {9.2}Binary formats}{27}{section.9.2}
-\contentsline {chapter}{\numberline {10}\textbf {\texttt {CySparse}} for \textbf {\texttt {Cython}} users}{29}{chapter.10}
-\contentsline {section}{\numberline {10.1}How to compile with \textbf {\texttt {Cython}}?}{29}{section.10.1}
-\contentsline {section}{\numberline {10.2}Creation of matrices}{29}{section.10.2}
-\contentsline {section}{\numberline {10.3}Accessing matrix elements}{29}{section.10.3}
-\contentsline {chapter}{\numberline {11}Indices and Tables}{31}{chapter.11}
+\contentsline {chapter}{\numberline {3}\textbf {\texttt {CySparse}}`s basics}{9}{chapter.3}
+\contentsline {section}{\numberline {3.1}Sparse Matrices and other matrix-like objects}{9}{section.3.1}
+\contentsline {section}{\numberline {3.2}Storage schemes}{10}{section.3.2}
+\contentsline {section}{\numberline {3.3}Types}{10}{section.3.3}
+\contentsline {section}{\numberline {3.4}What to import}{11}{section.3.4}
+\contentsline {section}{\numberline {3.5}Factory methods}{11}{section.3.5}
+\contentsline {section}{\numberline {3.6}Common strorage attributes}{11}{section.3.6}
+\contentsline {subsection}{\numberline {3.6.1}\texttt {store\_symmetric}}{11}{subsection.3.6.1}
+\contentsline {subsection}{\numberline {3.6.2}\texttt {store\_zero}}{11}{subsection.3.6.2}
+\contentsline {subsection}{\numberline {3.6.3}\texttt {is\_mutable}}{12}{subsection.3.6.3}
+\contentsline {section}{\numberline {3.7}Common content attributes}{12}{section.3.7}
+\contentsline {subsection}{\numberline {3.7.1}\texttt {nrow} and \texttt {ncol}}{12}{subsection.3.7.1}
+\contentsline {subsection}{\numberline {3.7.2}\texttt {nnz}}{12}{subsection.3.7.2}
+\contentsline {section}{\numberline {3.8}Common type attributes}{13}{section.3.8}
+\contentsline {subsection}{\numberline {3.8.1}\texttt {dtype} and \texttt {itype}}{13}{subsection.3.8.1}
+\contentsline {subsection}{\numberline {3.8.2}\texttt {is\_symmetric}}{13}{subsection.3.8.2}
+\contentsline {section}{\numberline {3.9}Common string attributes}{13}{section.3.9}
+\contentsline {subsection}{\numberline {3.9.1}\texttt {base\_type\_str} and \texttt {full\_type\_str}}{13}{subsection.3.9.1}
+\contentsline {section}{\numberline {3.10}Typed matrices in \textbf {\texttt {Python}}?}{13}{section.3.10}
+\contentsline {chapter}{\numberline {4}\textbf {\texttt {CySparse}}`s types}{15}{chapter.4}
+\contentsline {section}{\numberline {4.1}Compatibility with \textbf {\texttt {NumPy}}}{15}{section.4.1}
+\contentsline {section}{\numberline {4.2}Available types}{15}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Indices: integer numbers}{15}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}Elements: integers, real and complex numbers}{15}{subsection.4.2.2}
+\contentsline {section}{\numberline {4.3}Number's behavior in \textbf {\texttt {CySparse}}}{16}{section.4.3}
+\contentsline {subsection}{\numberline {4.3.1}Overflow on assignment}{16}{subsection.4.3.1}
+\contentsline {subsection}{\numberline {4.3.2}Overflow on operation}{16}{subsection.4.3.2}
+\contentsline {subsection}{\numberline {4.3.3}\texttt {nan} and \texttt {inf}}{17}{subsection.4.3.3}
+\contentsline {subsection}{\numberline {4.3.4}Types compatibilities (implicit castings)}{17}{subsection.4.3.4}
+\contentsline {chapter}{\numberline {5}How to create a matrix?}{19}{chapter.5}
+\contentsline {section}{\numberline {5.1}Sparse matrices all come from a \texttt {LLSparseMatrix}}{19}{section.5.1}
+\contentsline {section}{\numberline {5.2}\texttt {LLSparseMatrix} matrices must be instantiated by a factory method}{19}{section.5.2}
+\contentsline {section}{\numberline {5.3}Helpers}{20}{section.5.3}
+\contentsline {subsection}{\numberline {5.3.1}\texttt {size}}{20}{subsection.5.3.1}
+\contentsline {chapter}{\numberline {6}Mutable matrices: \texttt {LLSparseMatrix} and \texttt {LLSparseMatrixView}}{21}{chapter.6}
+\contentsline {section}{\numberline {6.1}The \texttt {LLSparseMatrix} class}{21}{section.6.1}
+\contentsline {subsection}{\numberline {6.1.1}Creation}{21}{subsection.6.1.1}
+\contentsline {subsection}{\numberline {6.1.2}Population}{21}{subsection.6.1.2}
+\contentsline {subsection}{\numberline {6.1.3}Accessing elements}{21}{subsection.6.1.3}
+\contentsline {subsubsection}{Individual access}{21}{subsubsection*.7}
+\contentsline {subsubsection}{Batch access}{22}{subsubsection*.8}
+\contentsline {section}{\numberline {6.2}The \texttt {LLSparseMatrixView} class}{22}{section.6.2}
+\contentsline {subsection}{\numberline {6.2.1}Views of views}{22}{subsection.6.2.1}
+\contentsline {subsection}{\numberline {6.2.2}References to the base \texttt {LLSparseMatrix}}{22}{subsection.6.2.2}
+\contentsline {chapter}{\numberline {7}Imutable matrices: \texttt {CSR-}, \texttt {CSC-} and \texttt {CSBSparseMatrix}}{25}{chapter.7}
+\contentsline {section}{\numberline {7.1}The \texttt {CSRSparseMatrix} class}{25}{section.7.1}
+\contentsline {section}{\numberline {7.2}The \texttt {CSCSparseMatrix} class}{25}{section.7.2}
+\contentsline {section}{\numberline {7.3}The \texttt {CSBSparseMatrix} class}{25}{section.7.3}
+\contentsline {chapter}{\numberline {8}Sparse Matrix Proxies}{27}{chapter.8}
+\contentsline {section}{\numberline {8.1}Available proxies}{27}{section.8.1}
+\contentsline {section}{\numberline {8.2}Basic operations}{28}{section.8.2}
+\contentsline {section}{\numberline {8.3}What if I need the full scale corresponding matrix?}{28}{section.8.3}
+\contentsline {chapter}{\numberline {9}Multiplication with a \textbf {\texttt {NumPy}} vector}{29}{chapter.9}
+\contentsline {section}{\numberline {9.1}Optimization}{29}{section.9.1}
+\contentsline {section}{\numberline {9.2}\texttt {matvec()}}{30}{section.9.2}
+\contentsline {subsection}{\numberline {9.2.1}Syntactic sugar}{30}{subsection.9.2.1}
+\contentsline {section}{\numberline {9.3}\texttt {matvec\_transp}}{30}{section.9.3}
+\contentsline {section}{\numberline {9.4}\texttt {matvec\_htransp}}{30}{section.9.4}
+\contentsline {subsection}{\numberline {9.4.1}Real matrices}{30}{subsection.9.4.1}
+\contentsline {section}{\numberline {9.5}\texttt {matvec\_conj}}{30}{section.9.5}
+\contentsline {subsection}{\numberline {9.5.1}Real matrices}{30}{subsection.9.5.1}
+\contentsline {section}{\numberline {9.6}What about sparse vectors?}{30}{section.9.6}
+\contentsline {chapter}{\numberline {10}IO formats}{33}{chapter.10}
+\contentsline {section}{\numberline {10.1}Text formats}{33}{section.10.1}
+\contentsline {subsection}{\numberline {10.1.1}Matrix Market format}{33}{subsection.10.1.1}
+\contentsline {section}{\numberline {10.2}Binary formats}{33}{section.10.2}
+\contentsline {chapter}{\numberline {11}\textbf {\texttt {CySparse}} for \textbf {\texttt {Cython}} users}{35}{chapter.11}
+\contentsline {section}{\numberline {11.1}How to compile with \textbf {\texttt {Cython}}?}{35}{section.11.1}
+\contentsline {section}{\numberline {11.2}Creation of matrices}{35}{section.11.2}
+\contentsline {section}{\numberline {11.3}Accessing matrix elements}{35}{section.11.3}
+\contentsline {chapter}{\numberline {12}Indices and Tables}{37}{chapter.12}

@@ -4533,7 +4533,6 @@ static char __pyx_k_size[] = "size";
 static char __pyx_k_skew[] = "skew";
 static char __pyx_k_step[] = "step";
 static char __pyx_k_test[] = "__test__";
-static char __pyx_k_type[] = "type";
 static char __pyx_k_array[] = "array";
 static char __pyx_k_dtype[] = "dtype";
 static char __pyx_k_enter[] = "__enter__";
@@ -4591,6 +4590,7 @@ static char __pyx_k_is_real_type[] = "is_real_type";
 static char __pyx_k_numpy_arrays[] = "numpy_arrays";
 static char __pyx_k_ELEMENT_TYPES[] = "ELEMENT_TYPES";
 static char __pyx_k_No_size_given[] = "No size given";
+static char __pyx_k_base_type_str[] = "base_type_str";
 static char __pyx_k_first_element[] = "first_element";
 static char __pyx_k_from_filename[] = "from_filename";
 static char __pyx_k_matrix_object[] = "matrix_object";
@@ -4735,6 +4735,7 @@ static PyObject *__pyx_kp_s__71;
 static PyObject *__pyx_n_s_are_mixed_types_cast_compatible;
 static PyObject *__pyx_n_s_array;
 static PyObject *__pyx_n_s_b;
+static PyObject *__pyx_n_s_base_type_str;
 static PyObject *__pyx_n_s_complex;
 static PyObject *__pyx_n_s_control_object;
 static PyObject *__pyx_n_s_coordinate;
@@ -4828,7 +4829,6 @@ static PyObject *__pyx_n_s_test;
 static PyObject *__pyx_n_s_test_bounds;
 static PyObject *__pyx_n_s_token_list;
 static PyObject *__pyx_n_s_tokens;
-static PyObject *__pyx_n_s_type;
 static PyObject *__pyx_n_s_type_to_string;
 static PyObject *__pyx_kp_u_unknown_dtype_code_in_numpy_pxd;
 static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_get_mm_matrix_dimension_specifications(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_mm_filename); /* proto */
@@ -47257,7 +47257,7 @@ static int __pyx_f_8cysparse_6sparse_6ll_mat_PyLLSparseMatrix_Check(PyObject *__
  *         bint is_ll_sparse_matrix = False
  * 
  *     if isinstance(obj, SparseMatrix):             # <<<<<<<<<<<<<<
- *         is_ll_sparse_matrix = obj.type == 'LLSparseMatrix'
+ *         is_ll_sparse_matrix = obj.base_type_str == 'LLSparseMatrix'
  * 
  */
   __pyx_t_1 = __Pyx_TypeCheck(__pyx_v_obj, __pyx_ptype_8cysparse_6sparse_5s_mat_SparseMatrix); 
@@ -47267,11 +47267,11 @@ static int __pyx_f_8cysparse_6sparse_6ll_mat_PyLLSparseMatrix_Check(PyObject *__
     /* "cysparse/sparse/ll_mat.pyx":300
  * 
  *     if isinstance(obj, SparseMatrix):
- *         is_ll_sparse_matrix = obj.type == 'LLSparseMatrix'             # <<<<<<<<<<<<<<
+ *         is_ll_sparse_matrix = obj.base_type_str == 'LLSparseMatrix'             # <<<<<<<<<<<<<<
  * 
  *     return is_ll_sparse_matrix
  */
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_obj, __pyx_n_s_type); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 300; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_obj, __pyx_n_s_base_type_str); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 300; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_t_4 = PyObject_RichCompare(__pyx_t_3, __pyx_n_s_LLSparseMatrix, Py_EQ); __Pyx_XGOTREF(__pyx_t_4); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 300; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -47283,13 +47283,13 @@ static int __pyx_f_8cysparse_6sparse_6ll_mat_PyLLSparseMatrix_Check(PyObject *__
  *         bint is_ll_sparse_matrix = False
  * 
  *     if isinstance(obj, SparseMatrix):             # <<<<<<<<<<<<<<
- *         is_ll_sparse_matrix = obj.type == 'LLSparseMatrix'
+ *         is_ll_sparse_matrix = obj.base_type_str == 'LLSparseMatrix'
  * 
  */
   }
 
   /* "cysparse/sparse/ll_mat.pyx":302
- *         is_ll_sparse_matrix = obj.type == 'LLSparseMatrix'
+ *         is_ll_sparse_matrix = obj.base_type_str == 'LLSparseMatrix'
  * 
  *     return is_ll_sparse_matrix             # <<<<<<<<<<<<<<
  * 
@@ -53640,12 +53640,12 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_18IdentityLLSparseMatrix(CYT
  * 
  * def BandLLSparseMatrix(**kwargs):             # <<<<<<<<<<<<<<
  *     """
- *     See ``MakeBandLLSparseMatrix_INT64_t_COMPLEX128_t``.
+ *     See ``MakeBandLLSparseMatrix_INT32_t_INT32_t``.
  */
 
 /* Python wrapper */
 static PyObject *__pyx_pw_8cysparse_6sparse_6ll_mat_21BandLLSparseMatrix(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_8cysparse_6sparse_6ll_mat_20BandLLSparseMatrix[] = "\n    See ``MakeBandLLSparseMatrix_INT64_t_COMPLEX128_t``.\n\n    Note:\n        Input arguments are **not** tested.\n    ";
+static char __pyx_doc_8cysparse_6sparse_6ll_mat_20BandLLSparseMatrix[] = "\n    See ``MakeBandLLSparseMatrix_INT32_t_INT32_t``.\n\n    Note:\n        Input arguments are **not** tested.\n    ";
 static PyMethodDef __pyx_mdef_8cysparse_6sparse_6ll_mat_21BandLLSparseMatrix = {"BandLLSparseMatrix", (PyCFunction)__pyx_pw_8cysparse_6sparse_6ll_mat_21BandLLSparseMatrix, METH_VARARGS|METH_KEYWORDS, __pyx_doc_8cysparse_6sparse_6ll_mat_20BandLLSparseMatrix};
 static PyObject *__pyx_pw_8cysparse_6sparse_6ll_mat_21BandLLSparseMatrix(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_kwargs = 0;
@@ -54448,7 +54448,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_20BandLLSparseMatrix(CYTHON_
  * 
  * def BandLLSparseMatrix(**kwargs):             # <<<<<<<<<<<<<<
  *     """
- *     See ``MakeBandLLSparseMatrix_INT64_t_COMPLEX128_t``.
+ *     See ``MakeBandLLSparseMatrix_INT32_t_INT32_t``.
  */
 
   /* function exit code */
@@ -59297,6 +59297,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_are_mixed_types_cast_compatible, __pyx_k_are_mixed_types_cast_compatible, sizeof(__pyx_k_are_mixed_types_cast_compatible), 0, 0, 1, 1},
   {&__pyx_n_s_array, __pyx_k_array, sizeof(__pyx_k_array), 0, 0, 1, 1},
   {&__pyx_n_s_b, __pyx_k_b, sizeof(__pyx_k_b), 0, 0, 1, 1},
+  {&__pyx_n_s_base_type_str, __pyx_k_base_type_str, sizeof(__pyx_k_base_type_str), 0, 0, 1, 1},
   {&__pyx_n_s_complex, __pyx_k_complex, sizeof(__pyx_k_complex), 0, 0, 1, 1},
   {&__pyx_n_s_control_object, __pyx_k_control_object, sizeof(__pyx_k_control_object), 0, 0, 1, 1},
   {&__pyx_n_s_coordinate, __pyx_k_coordinate, sizeof(__pyx_k_coordinate), 0, 0, 1, 1},
@@ -59390,7 +59391,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_test_bounds, __pyx_k_test_bounds, sizeof(__pyx_k_test_bounds), 0, 0, 1, 1},
   {&__pyx_n_s_token_list, __pyx_k_token_list, sizeof(__pyx_k_token_list), 0, 0, 1, 1},
   {&__pyx_n_s_tokens, __pyx_k_tokens, sizeof(__pyx_k_tokens), 0, 0, 1, 1},
-  {&__pyx_n_s_type, __pyx_k_type, sizeof(__pyx_k_type), 0, 0, 1, 1},
   {&__pyx_n_s_type_to_string, __pyx_k_type_to_string, sizeof(__pyx_k_type_to_string), 0, 0, 1, 1},
   {&__pyx_kp_u_unknown_dtype_code_in_numpy_pxd, __pyx_k_unknown_dtype_code_in_numpy_pxd, sizeof(__pyx_k_unknown_dtype_code_in_numpy_pxd), 0, 1, 0, 0},
   {0, 0, 0, 0, 0, 0, 0}
@@ -61178,7 +61178,7 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  * def BandLLSparseMatrix(**kwargs):             # <<<<<<<<<<<<<<
  *     """
- *     See ``MakeBandLLSparseMatrix_INT64_t_COMPLEX128_t``.
+ *     See ``MakeBandLLSparseMatrix_INT32_t_INT32_t``.
  */
   __pyx_tuple__172 = PyTuple_Pack(6, __pyx_n_s_kwargs, __pyx_n_s_diag_coeff, __pyx_n_s_numpy_arrays, __pyx_n_s_ll_mat, __pyx_n_s_itype, __pyx_n_s_dtype); if (unlikely(!__pyx_tuple__172)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 964; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__172);
@@ -61823,7 +61823,7 @@ PyMODINIT_FUNC PyInit_ll_mat(void)
  * 
  * def BandLLSparseMatrix(**kwargs):             # <<<<<<<<<<<<<<
  *     """
- *     See ``MakeBandLLSparseMatrix_INT64_t_COMPLEX128_t``.
+ *     See ``MakeBandLLSparseMatrix_INT32_t_INT32_t``.
  */
   __pyx_t_3 = PyCFunction_NewEx(&__pyx_mdef_8cysparse_6sparse_6ll_mat_21BandLLSparseMatrix, NULL, __pyx_n_s_cysparse_sparse_ll_mat); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 964; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
