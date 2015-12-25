@@ -136,7 +136,6 @@ class TestGenerator(object):
 
         # case 1
         OUTSTREAM.write(TEST_FILE_MEDIUM_SEPARATOR % 'Case: store_symmetry == False, Store_zero==False')
-        OUTSTREAM.write('\n')
         OUTSTREAM.write(self.generate_class_name('NoSymmetryNoZero'))
         OUTSTREAM.write(':\n')
         OUTSTREAM.write('    def setUp(self):\n\n')
@@ -145,7 +144,6 @@ class TestGenerator(object):
 
         # case 2
         OUTSTREAM.write(TEST_FILE_MEDIUM_SEPARATOR % 'Case: store_symmetry == True, Store_zero==False')
-        OUTSTREAM.write('\n')
         OUTSTREAM.write(self.generate_class_name('WithSymmetryNoZero'))
         OUTSTREAM.write(':\n')
         OUTSTREAM.write('    def setUp(self):\n\n')
@@ -154,7 +152,6 @@ class TestGenerator(object):
 
         # case 3
         OUTSTREAM.write(TEST_FILE_MEDIUM_SEPARATOR % 'Case: store_symmetry == False, Store_zero==True')
-        OUTSTREAM.write('\n')
         OUTSTREAM.write(self.generate_class_name('NoSymmetrySWithZero'))
         OUTSTREAM.write(':\n')
         OUTSTREAM.write('    def setUp(self):\n\n')
@@ -163,7 +160,6 @@ class TestGenerator(object):
 
         # case 4
         OUTSTREAM.write(TEST_FILE_MEDIUM_SEPARATOR % 'Case: store_symmetry == True, Store_zero==True')
-        OUTSTREAM.write('\n')
         OUTSTREAM.write(self.generate_class_name('WithSymmetrySWithZero'))
         OUTSTREAM.write(':\n')
         OUTSTREAM.write('    def setUp(self):\n\n')

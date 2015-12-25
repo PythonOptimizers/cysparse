@@ -16,6 +16,8 @@
    sparse_mat_hierarchy
    code_generation
    cysparse_lib_mainteners
+   tests
+   benchmarks
    afterthougths
    
 
