@@ -29,6 +29,8 @@ class CySparseCommonAttributesMatrices_TransposedSparseMatrix_INT64_t_FLOAT64_t_
 
         self.C = self.A.T
         self.base_type_str = 'Transposed of ' + self.A.base_type_str
+        self.nargin = self.nrow
+        self.nargout = self.ncol
 
 
     def test_common_attributes(self):
@@ -65,6 +67,12 @@ class CySparseCommonAttributesMatrices_TransposedSparseMatrix_INT64_t_FLOAT64_t_
     def test_is_symmetric(self):
         self.assertTrue(not self.C.is_symmetric)
 
+    def test_nargin(self):
+        self.assertTrue(self.nargin == self.C.nargin)
+
+    def test_nargout(self):
+        self.assertTrue(self.nargout == self.C.nargout)
+
 ##################################
 # Case Symmetric, Non Zero
 ##################################
@@ -72,6 +80,8 @@ class CySparseCommonAttributesSymmetricMatrices_TransposedSparseMatrix_INT64_t_F
     def setUp(self):
         self.size = 14
         self.nnz = ((self.size + 1) * self.size) / 2
+        self.nargin = self.size
+        self.nargout = self.size
 
         self.A = LinearFillLLSparseMatrix(size=self.size, dtype=FLOAT64_T, itype=INT64_T, store_symmetric=True)
 
@@ -109,6 +119,12 @@ class CySparseCommonAttributesSymmetricMatrices_TransposedSparseMatrix_INT64_t_F
     def test_is_symmetric(self):
         self.assertTrue(self.C.is_symmetric)
 
+    def test_nargin(self):
+        self.assertTrue(self.nargin == self.C.nargin)
+
+    def test_nargout(self):
+        self.assertTrue(self.nargout == self.C.nargout)
+
 ##################################
 # Case Non Symmetric, Zero
 ##################################
@@ -121,6 +137,8 @@ class CySparseCommonAttributesWithZeroMatrices_TransposedSparseMatrix_INT64_t_FL
 
         self.C = self.A.T
         self.base_type_str = 'Transposed of ' + self.A.base_type_str
+        self.nargin = self.nrow
+        self.nargout = self.ncol
 
 
     def test_common_attributes(self):
@@ -157,6 +175,12 @@ class CySparseCommonAttributesWithZeroMatrices_TransposedSparseMatrix_INT64_t_FL
     def test_is_symmetric(self):
         self.assertTrue(not self.C.is_symmetric)
 
+    def test_nargin(self):
+        self.assertTrue(self.nargin == self.C.nargin)
+
+    def test_nargout(self):
+        self.assertTrue(self.nargout == self.C.nargout)
+
 ##################################
 # Case Symmetric, Zero
 ##################################
@@ -165,6 +189,8 @@ class CySparseCommonAttributesSymmetricWithZeroMatrices_TransposedSparseMatrix_I
         self.size = 14
         self.nnz = ((self.size + 1) * self.size) / 2
         self.A = LinearFillLLSparseMatrix(size=self.size, dtype=FLOAT64_T, itype=INT64_T, store_symmetric=True, store_zero=True)
+        self.nargin = self.size
+        self.nargout = self.size
 
         self.C = self.A.T
         self.base_type_str = 'Transposed of ' + self.A.base_type_str
@@ -199,6 +225,12 @@ class CySparseCommonAttributesSymmetricWithZeroMatrices_TransposedSparseMatrix_I
 
     def test_is_symmetric(self):
         self.assertTrue(self.C.is_symmetric)
+
+    def test_nargin(self):
+        self.assertTrue(self.nargin == self.C.nargin)
+
+    def test_nargout(self):
+        self.assertTrue(self.nargout == self.C.nargout)
 
 
 if __name__ == '__main__':

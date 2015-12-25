@@ -33,13 +33,10 @@ def common_matrix_like_attributes(obj):
 
         problematic_attribute = 'shape'
         obj.shape
-
         problematic_attribute = 'nargin'
         obj.nargin
-
         problematic_attribute = 'nargout'
         obj.nargout
-
 
         problematic_attribute = 'store_symmetric'
         obj.store_symmetric

@@ -28,6 +28,8 @@ class CySparseCommonAttributesMatrices_ConjugatedSparseMatrix_INT32_t_FLOAT64_t_
         self.A = LinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, dtype=FLOAT64_T, itype=INT32_T)
 
         self.C = self.A.conj
+        self.nargin = self.ncol
+        self.nargout = self.nrow
 
         self.base_type_str = self.A.base_type_str
 
@@ -67,6 +69,12 @@ class CySparseCommonAttributesMatrices_ConjugatedSparseMatrix_INT32_t_FLOAT64_t_
     def test_is_symmetric(self):
         self.assertTrue(not self.C.is_symmetric)
 
+    def test_nargin(self):
+        self.assertTrue(self.nargin == self.C.nargin)
+
+    def test_nargout(self):
+        self.assertTrue(self.nargout == self.C.nargout)
+
 ##################################
 # Case Symmetric, Non Zero
 ##################################
@@ -74,6 +82,8 @@ class CySparseCommonAttributesSymmetricMatrices_ConjugatedSparseMatrix_INT32_t_F
     def setUp(self):
         self.size = 14
         self.nnz = ((self.size + 1) * self.size) / 2
+        self.nargin = self.size
+        self.nargout = self.size
 
         self.A = LinearFillLLSparseMatrix(size=self.size, dtype=FLOAT64_T, itype=INT32_T, store_symmetric=True)
 
@@ -113,6 +123,12 @@ class CySparseCommonAttributesSymmetricMatrices_ConjugatedSparseMatrix_INT32_t_F
     def test_is_symmetric(self):
         self.assertTrue(self.C.is_symmetric)
 
+    def test_nargin(self):
+        self.assertTrue(self.nargin == self.C.nargin)
+
+    def test_nargout(self):
+        self.assertTrue(self.nargout == self.C.nargout)
+
 ##################################
 # Case Non Symmetric, Zero
 ##################################
@@ -124,6 +140,8 @@ class CySparseCommonAttributesWithZeroMatrices_ConjugatedSparseMatrix_INT32_t_FL
         self.A = LinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, dtype=FLOAT64_T, itype=INT32_T, store_zero=True)
 
         self.C = self.A.conj
+        self.nargin = self.ncol
+        self.nargout = self.nrow
 
         self.base_type_str = self.A.base_type_str
 
@@ -163,6 +181,12 @@ class CySparseCommonAttributesWithZeroMatrices_ConjugatedSparseMatrix_INT32_t_FL
     def test_is_symmetric(self):
         self.assertTrue(not self.C.is_symmetric)
 
+    def test_nargin(self):
+        self.assertTrue(self.nargin == self.C.nargin)
+
+    def test_nargout(self):
+        self.assertTrue(self.nargout == self.C.nargout)
+
 ##################################
 # Case Symmetric, Zero
 ##################################
@@ -171,6 +195,8 @@ class CySparseCommonAttributesSymmetricWithZeroMatrices_ConjugatedSparseMatrix_I
         self.size = 14
         self.nnz = ((self.size + 1) * self.size) / 2
         self.A = LinearFillLLSparseMatrix(size=self.size, dtype=FLOAT64_T, itype=INT32_T, store_symmetric=True, store_zero=True)
+        self.nargin = self.size
+        self.nargout = self.size
 
         self.C = self.A.conj
 
@@ -207,6 +233,12 @@ class CySparseCommonAttributesSymmetricWithZeroMatrices_ConjugatedSparseMatrix_I
 
     def test_is_symmetric(self):
         self.assertTrue(self.C.is_symmetric)
+
+    def test_nargin(self):
+        self.assertTrue(self.nargin == self.C.nargin)
+
+    def test_nargout(self):
+        self.assertTrue(self.nargout == self.C.nargout)
 
 
 if __name__ == '__main__':

@@ -63,4 +63,4 @@ Both libraries define similar but also different matrix classes:
 License
 ========
 
-The :program:`CySparse` library is released under the XXX license. See YYY.
+The :program:`CySparse` library is released under the `GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.en.html>`_ (LGPL), version 3.

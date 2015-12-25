@@ -29,17 +29,27 @@ class CySparseCommonAttributesMatrices_@class@_@index@_@type@_TestCase(unittest.
 {% if class == 'CSCSparseMatrix' %}
         self.C = self.A.to_csc()
         self.base_type_str = 'CSCSparseMatrix'
+        self.nargin = self.ncol
+        self.nargout = self.nrow
 {% elif class == 'CSRSparseMatrix' %}
         self.C = self.A.to_csr()
         self.base_type_str = 'CSRSparseMatrix'
+        self.nargin = self.ncol
+        self.nargout = self.nrow
 {% elif class == 'LLSparseMatrix'%}
         self.C = self.A
         self.base_type_str = 'LLSparseMatrix'
+        self.nargin = self.ncol
+        self.nargout = self.nrow
 {% elif class == 'TransposedSparseMatrix' %}
         self.C = self.A.T
         self.base_type_str = 'Transposed of ' + self.A.base_type_str
+        self.nargin = self.nrow
+        self.nargout = self.ncol
 {% elif class == 'ConjugatedSparseMatrix' %}
         self.C = self.A.conj
+        self.nargin = self.ncol
+        self.nargout = self.nrow
 {% if type in complex_list %}
         self.base_type_str = 'Conjugated of ' + self.A.base_type_str
 {% else %}
@@ -47,6 +57,8 @@ class CySparseCommonAttributesMatrices_@class@_@index@_@type@_TestCase(unittest.
 {% endif %}
 {% elif class == 'ConjugateTransposedSparseMatrix' %}
         self.C = self.A.H
+        self.nargin = self.nrow
+        self.nargout = self.ncol
 {% if type in complex_list %}
         self.base_type_str = 'Conjugate Transposed of ' + self.A.base_type_str
 {% else %}
@@ -55,6 +67,8 @@ class CySparseCommonAttributesMatrices_@class@_@index@_@type@_TestCase(unittest.
 {% elif class == 'LLSparseMatrixView' %}
         self.C = self.A[:,:]
         self.base_type_str = 'LLSparseMatrixView'
+        self.nargin = self.ncol
+        self.nargout = self.nrow
 {% else %}
 YOU HAVE TO ADD YOUR NEW MATRIX TYPE HERE
 {% endif %}
@@ -111,6 +125,12 @@ YOU HAVE TO ADD YOUR NEW MATRIX TYPE HERE
     def test_is_symmetric(self):
         self.assertTrue(not self.C.is_symmetric)
 
+    def test_nargin(self):
+        self.assertTrue(self.nargin == self.C.nargin)
+
+    def test_nargout(self):
+        self.assertTrue(self.nargout == self.C.nargout)
+
 ##################################
 # Case Symmetric, Non Zero
 ##################################
@@ -118,6 +138,8 @@ class CySparseCommonAttributesSymmetricMatrices_@class@_@index@_@type@_TestCase(
     def setUp(self):
         self.size = 14
         self.nnz = ((self.size + 1) * self.size) / 2
+        self.nargin = self.size
+        self.nargout = self.size
 
         self.A = LinearFillLLSparseMatrix(size=self.size, dtype=@type|type2enum@, itype=@index|type2enum@, store_symmetric=True)
 {% if class == 'CSCSparseMatrix' %}
@@ -197,6 +219,12 @@ YOU HAVE TO ADD YOUR NEW MATRIX TYPE HERE
     def test_is_symmetric(self):
         self.assertTrue(self.C.is_symmetric)
 
+    def test_nargin(self):
+        self.assertTrue(self.nargin == self.C.nargin)
+
+    def test_nargout(self):
+        self.assertTrue(self.nargout == self.C.nargout)
+
 ##################################
 # Case Non Symmetric, Zero
 ##################################
@@ -209,17 +237,27 @@ class CySparseCommonAttributesWithZeroMatrices_@class@_@index@_@type@_TestCase(u
 {% if class == 'CSCSparseMatrix' %}
         self.C = self.A.to_csc()
         self.base_type_str = 'CSCSparseMatrix'
+        self.nargin = self.ncol
+        self.nargout = self.nrow
 {% elif class == 'CSRSparseMatrix' %}
         self.C = self.A.to_csr()
         self.base_type_str = 'CSRSparseMatrix'
+        self.nargin = self.ncol
+        self.nargout = self.nrow
 {% elif class == 'LLSparseMatrix'%}
         self.C = self.A
         self.base_type_str = 'LLSparseMatrix'
+        self.nargin = self.ncol
+        self.nargout = self.nrow
 {% elif class == 'TransposedSparseMatrix' %}
         self.C = self.A.T
         self.base_type_str = 'Transposed of ' + self.A.base_type_str
+        self.nargin = self.nrow
+        self.nargout = self.ncol
 {% elif class == 'ConjugatedSparseMatrix' %}
         self.C = self.A.conj
+        self.nargin = self.ncol
+        self.nargout = self.nrow
 {% if type in complex_list %}
         self.base_type_str = 'Conjugated of ' + self.A.base_type_str
 {% else %}
@@ -227,6 +265,8 @@ class CySparseCommonAttributesWithZeroMatrices_@class@_@index@_@type@_TestCase(u
 {% endif %}
 {% elif class == 'ConjugateTransposedSparseMatrix' %}
         self.C = self.A.H
+        self.nargin = self.nrow
+        self.nargout = self.ncol
 {% if type in complex_list %}
         self.base_type_str = 'Conjugate Transposed of ' + self.A.base_type_str
 {% else %}
@@ -235,6 +275,8 @@ class CySparseCommonAttributesWithZeroMatrices_@class@_@index@_@type@_TestCase(u
 {% elif class == 'LLSparseMatrixView' %}
         self.C = self.A[:,:]
         self.base_type_str = 'LLSparseMatrixView'
+        self.nargin = self.ncol
+        self.nargout = self.nrow
 {% else %}
 YOU HAVE TO ADD YOUR NEW MATRIX TYPE HERE
 {% endif %}
@@ -291,6 +333,12 @@ YOU HAVE TO ADD YOUR NEW MATRIX TYPE HERE
     def test_is_symmetric(self):
         self.assertTrue(not self.C.is_symmetric)
 
+    def test_nargin(self):
+        self.assertTrue(self.nargin == self.C.nargin)
+
+    def test_nargout(self):
+        self.assertTrue(self.nargout == self.C.nargout)
+
 ##################################
 # Case Symmetric, Zero
 ##################################
@@ -299,6 +347,8 @@ class CySparseCommonAttributesSymmetricWithZeroMatrices_@class@_@index@_@type@_T
         self.size = 14
         self.nnz = ((self.size + 1) * self.size) / 2
         self.A = LinearFillLLSparseMatrix(size=self.size, dtype=@type|type2enum@, itype=@index|type2enum@, store_symmetric=True, store_zero=True)
+        self.nargin = self.size
+        self.nargout = self.size
 {% if class == 'CSCSparseMatrix' %}
         self.C = self.A.to_csc()
         self.base_type_str = 'CSCSparseMatrix'
@@ -375,6 +425,12 @@ YOU HAVE TO ADD YOUR NEW MATRIX TYPE HERE
 
     def test_is_symmetric(self):
         self.assertTrue(self.C.is_symmetric)
+
+    def test_nargin(self):
+        self.assertTrue(self.nargin == self.C.nargin)
+
+    def test_nargout(self):
+        self.assertTrue(self.nargout == self.C.nargout)
 
 
 if __name__ == '__main__':
