@@ -94,9 +94,6 @@ def make_logger(cysparse_config):
 #######################################
 # type of platform? 32bits or 64bits?
 is_64bits = sys.maxsize > 2**32
-default_index_type_str = '32bits'
-if is_64bits:
-    default_index_type_str = '64bits'
 
 # read cysparse.cfg
 cysparse_config = ConfigParser.SafeConfigParser()
@@ -105,13 +102,24 @@ cysparse_config.read('cysparse.cfg')
 
 # index type for LLSparseMatrix
 DEFAULT_INDEX_TYPE = 'INT32_T'
+DEFAULT_ELEMENT_TYPE = 'FLOAT32_T'
 if is_64bits:
     DEFAULT_INDEX_TYPE = 'INT64_T'
+    DEFAULT_ELEMENT_TYPE = 'FLOAT64_T'
+
 
 if cysparse_config.get('CODE_GENERATION', 'DEFAULT_INDEX_TYPE') == '32bits':
     DEFAULT_INDEX_TYPE = 'INT32_T'
 elif cysparse_config.get('CODE_GENERATION', 'DEFAULT_INDEX_TYPE') == '64bits':
     DEFAULT_INDEX_TYPE = 'INT64_T'
+else:
+    # don't do anything: use platform's default
+    pass
+
+if cysparse_config.get('CODE_GENERATION', 'DEFAULT_ELEMENT_TYPE') == '32bits':
+    DEFAULT_ELEMENT_TYPE = 'FLOAT32_T'
+elif cysparse_config.get('CODE_GENERATION', 'DEFAULT_ELEMENT_TYPE') == '64bits':
+    DEFAULT_ELEMENT_TYPE = 'FLOAT64_T'
 else:
     # don't do anything: use platform's default
     pass
@@ -147,6 +155,7 @@ GENERAL_CONTEXT = {
                     'type_list': ELEMENT_TYPES,
                     'index_list' : INDEX_TYPES,
                     'default_index_type' : DEFAULT_INDEX_TYPE,
+                    'default_element_type' : DEFAULT_ELEMENT_TYPE,
                     'integer_list' : INTEGER_ELEMENT_TYPES,
                     'real_list' : REAL_ELEMENT_TYPES,
                     'complex_list' : COMPLEX_ELEMENT_TYPES,
@@ -454,9 +463,11 @@ if __name__ == "__main__":
     cygenja_engine.register_action('tests/cysparse_/sparse/common_operations/diagonals', 'test_diag.cpy', generate_following_matrix_class_and_index_and_type)
     # triangular
     cygenja_engine.register_action('tests/cysparse_/sparse/common_operations/triangular', 'test_triangular.cpy', generate_following_matrix_class_and_index_and_type)
-    # memory
+    # --- memory ---
     cygenja_engine.register_action('tests/cysparse_/sparse/memory', 'test_copy.cpy', generate_following_all_sparse_like_objects_class_and_index_and_type)
     cygenja_engine.register_action('tests/cysparse_/sparse/memory', 'test_to_ndarray.cpy', generate_following_matrix_class_and_index_and_type)
+    # --- LLSparseMatrix ---
+    cygenja_engine.register_action('tests/cysparse_/sparse/ll_mat', 'test_llsparsematrixfactories.cpy', generate_following_index_and_element)
 
     ####################################################################################################################
     # Generation

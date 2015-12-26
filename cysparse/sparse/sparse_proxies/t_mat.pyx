@@ -197,9 +197,6 @@ cdef class TransposedSparseMatrix:
     def matrix_copy(self):
         return self.A.create_transpose()
 
-    def print_to(self, OUT):
-        return self.A.print_to(OUT, transposed=True)
-
     ####################################################################################################################
     # String representations
     ####################################################################################################################

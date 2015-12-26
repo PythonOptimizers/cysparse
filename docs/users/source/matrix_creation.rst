@@ -71,12 +71,36 @@ Helpers
 
 ``size`` is **not** an attribute... 
 
+``size_hint``
+""""""""""""""""""""
+
+
 List of ``LLSparseMatrix`` factory methods
 ===========================================
 
 ``LLSparseMatrix``
 ----------------------
 
+This is the main basic factory method to create an :class:`LLSparseMatrix`. There are basically **three** ways to use it:
+
+- From specifications. Use ``nrow`` and ``ncol`` or ``size`` to specify the dimension of the new matrix. You can also provide a
+  ``size_hint`` argument to (pre)allocate some space for the elements in advance.
+  
+  ..  code-block:: python
+
+      A = LLSparseMatrix(nrow=256, ncol=3398, size_hint=600)
+
+  which returns an empty ``LLSparseMatrix [INT64_t, FLOAT64_t] of size=(256, 3398) with 0 non zero values <Storage scheme: General and without zeros>`` matrix that is ready to hold 600 elements of type ``FLOAT64_t``.
+  
+  You can change the index type and/or the element type:
+  
+  ..  code-block:: python
+
+      A = LLSparseMatrix(size=5578, size_hint=600, itype=INT32_T, dtype=COMPLEX128_T)
+      
+  which returns a corresponding ``LLSparseMatrix [INT32_t, COMPLEX128_t] of size=(5578, 5578) with 0 non zero values <Storage scheme: General and without zeros>`` matrix.
+  
+           
 ``LLSparseMatrixFromMMFile``
 -----------------------------
 

@@ -14,15 +14,17 @@ from cysparse.common_types.cysparse_types import *
 ########################################################################################################################
 # Tests
 ########################################################################################################################
-
+NROW = 10
+NCOL = 14
+SIZE = 10
 
 #######################################################################
 # Case: store_symmetry == False, Store_zero==False
 #######################################################################
 class CySparseDiagNoSymmetryNoZero_CSRSparseMatrix_INT32_t_COMPLEX64_t_TestCase(unittest.TestCase):
     def setUp(self):
-        self.nrow = 10
-        self.ncol = 14
+        self.nrow = NROW
+        self.ncol = NCOL
 
         self.A = LinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, dtype=COMPLEX64_T, itype=INT32_T)
 
@@ -72,7 +74,7 @@ class CySparseDiagNoSymmetryNoZero_CSRSparseMatrix_INT32_t_COMPLEX64_t_TestCase(
 #######################################################################
 class CySparseDiagWithSymmetryNoZero_CSRSparseMatrix_INT32_t_COMPLEX64_t_TestCase(unittest.TestCase):
     def setUp(self):
-        self.size = 10
+        self.size = SIZE
 
         self.A = LinearFillLLSparseMatrix(size=self.size, dtype=COMPLEX64_T, itype=INT32_T, store_symmetry=True)
 
@@ -121,8 +123,8 @@ class CySparseDiagWithSymmetryNoZero_CSRSparseMatrix_INT32_t_COMPLEX64_t_TestCas
 #######################################################################
 class CySparseDiagNoSymmetrySWithZero_CSRSparseMatrix_INT32_t_COMPLEX64_t_TestCase(unittest.TestCase):
     def setUp(self):
-        self.nrow = 10
-        self.ncol = 14
+        self.nrow = NROW
+        self.ncol = NCOL
 
         self.A = LinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, dtype=COMPLEX64_T, itype=INT32_T, store_zero=True)
 
@@ -171,7 +173,7 @@ class CySparseDiagNoSymmetrySWithZero_CSRSparseMatrix_INT32_t_COMPLEX64_t_TestCa
 #######################################################################
 class CySparseDiagWithSymmetrySWithZero_CSRSparseMatrix_INT32_t_COMPLEX64_t_TestCase(unittest.TestCase):
     def setUp(self):
-        self.size = 10
+        self.size = SIZE
 
         self.A = LinearFillLLSparseMatrix(size=self.size, dtype=COMPLEX64_T, itype=INT32_T, store_symmetry=True, store_zero=True)
 

@@ -801,59 +801,7 @@ cdef class CSRSparseMatrix_INT64_t_COMPLEX128_t(ImmutableSparseMatrix_INT64_t_CO
     #    s = "CSRSparseMatrix of size %d by %d with %d non zero values" % (self.nrow, self.ncol, self.nnz)
     #    return s
 
-    def print_to(self, OUT, width=9, print_big_matrices=False, transposed=False):
-        """
-        Print content of matrix to output stream.
 
-        Args:
-            OUT: Output stream that print (Python3) can print to.
-        """
-        # EXPLICIT TYPE TESTS
-        # TODO: adapt to any numbers... and allow for additional parameters to control the output
-        cdef INT64_t i, k, first = 1;
-
-        cdef COMPLEX128_t *mat
-        cdef INT64_t j
-        cdef COMPLEX128_t val
-
-        print(self._matrix_description_before_printing(), file=OUT)
-        #print('CSRSparseMatrix ([%d,%d]):' % (self.nrow, self.ncol), file=OUT)
-
-        if not self.nnz:
-            return
-
-        if self.nrow <= CSR_MAT_PPRINT_COL_THRESH and self.ncol <= CSR_MAT_PPRINT_ROW_THRESH:
-            # create linear vector presentation
-            # TODO: put in a method of its own
-            mat = <COMPLEX128_t *> PyMem_Malloc(self.nrow * self.ncol * sizeof(COMPLEX128_t))
-
-            if not mat:
-                raise MemoryError()
-
-            # creation of temp matrix
-            for i from 0 <= i < self.nrow:
-                for j from 0 <= j < self.ncol:
-
-                    mat[i* self.ncol + j] = 0.0 + 0.0j
-
-
-                k = self.ind[i]
-                while k < self.ind[i+1]:
-                    mat[(i*self.ncol)+self.col[k]] = self.val[k]
-                    k += 1
-
-            for i from 0 <= i < self.nrow:
-                for j from 0 <= j < self.ncol:
-                    val = mat[(i*self.ncol)+j]
-
-                    print('{:{width}.6f} '.format(val, width=width), end='', file=OUT)
-
-                print(file=OUT)
-
-            PyMem_Free(mat)
-
-        else:
-            print('Matrix too big to print out', file=OUT)
 
     ####################################################################################################################
     # Internal arrays

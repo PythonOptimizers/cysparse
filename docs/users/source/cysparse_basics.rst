@@ -208,17 +208,15 @@ See section :ref:`availabe_types` about the available types.
 What to import
 ==============
 
-For :program:`Python users`, only two files need to be imported:
+For :program:`Python users`, **only one** file needs to be imported:
 
-- :file:`ll_mat`: to create an ``LLSparseMatrix`` and
-- :file:`cysparse_types`: to access the different types.
+- :file:`ll_mat`: to create an ``LLSparseMatrix``.
 
 In short, you only need this:
 
 ..  code-block:: python
 
     from cysparse.sparse.ll_mat import *
-    from cysparse.common_types.cysparse_types import *
 
 :program:`Cython`'s users can import any :program:`Cython` file in any order.
 

@@ -14,15 +14,17 @@ from cysparse.common_types.cysparse_types import *
 ########################################################################################################################
 # Tests
 ########################################################################################################################
-
+NROW = 10
+NCOL = 14
+SIZE = 10
 
 #######################################################################
 # Case: store_symmetry == False, Store_zero==False
 #######################################################################
 class CySparseDiagNoSymmetryNoZero_@class@_@index@_@type@_TestCase(unittest.TestCase):
     def setUp(self):
-        self.nrow = 10
-        self.ncol = 14
+        self.nrow = NROW
+        self.ncol = NCOL
 
         self.A = LinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, dtype=@type|type2enum@, itype=@index|type2enum@)
 
@@ -78,7 +80,7 @@ YOU SHOULD ADD YOUR NEW MATRIX CLASS HERE
 #######################################################################
 class CySparseDiagWithSymmetryNoZero_@class@_@index@_@type@_TestCase(unittest.TestCase):
     def setUp(self):
-        self.size = 10
+        self.size = SIZE
 
         self.A = LinearFillLLSparseMatrix(size=self.size, dtype=@type|type2enum@, itype=@index|type2enum@, store_symmetry=True)
 
@@ -133,8 +135,8 @@ YOU SHOULD ADD YOUR NEW MATRIX CLASS HERE
 #######################################################################
 class CySparseDiagNoSymmetrySWithZero_@class@_@index@_@type@_TestCase(unittest.TestCase):
     def setUp(self):
-        self.nrow = 10
-        self.ncol = 14
+        self.nrow = NROW
+        self.ncol = NCOL
 
         self.A = LinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, dtype=@type|type2enum@, itype=@index|type2enum@, store_zero=True)
 
@@ -189,7 +191,7 @@ YOU SHOULD ADD YOUR NEW MATRIX CLASS HERE
 #######################################################################
 class CySparseDiagWithSymmetrySWithZero_@class@_@index@_@type@_TestCase(unittest.TestCase):
     def setUp(self):
-        self.size = 10
+        self.size = SIZE
 
         self.A = LinearFillLLSparseMatrix(size=self.size, dtype=@type|type2enum@, itype=@index|type2enum@, store_symmetry=True, store_zero=True)
 

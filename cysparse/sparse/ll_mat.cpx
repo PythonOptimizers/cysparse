@@ -266,7 +266,7 @@ def matdot(A, B):
     # TODO: test input arguments?
     return A.matdot(B)
 
-def matvec_transp(A, B):
+def matdot_transp(A, B):
     """
     Return :math:`A^t*B`.
     """
@@ -323,7 +323,7 @@ def LLSparseMatrix(**kwargs):
 
     #itype = kwargs.get('itype', INT32_T)
     itype = kwargs.get('itype', @default_index_type@)
-    dtype = kwargs.get('dtype', FLOAT64_T)
+    dtype = kwargs.get('dtype', @default_element_type@)
 
     assert itype in INDEX_TYPES, "itype not recognized"
     assert dtype in ELEMENT_TYPES, "dtype not recognized"

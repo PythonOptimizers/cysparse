@@ -862,57 +862,6 @@ cdef class CSCSparseMatrix_INT64_t_INT32_t(ImmutableSparseMatrix_INT64_t_INT32_t
     #    s = "CSCSparseMatrix of size %d by %d with %d non zero values" % (self.nrow, self.ncol, self.nnz)
     #    return s
 
-    def print_to(self, OUT):
-        """
-        Print content of matrix to output stream.
-
-        Args:
-            OUT: Output stream that print (Python3) can print to.
-        """
-        # TODO: adapt to any numbers... and allow for additional parameters to control the output
-        cdef INT64_t i, k, first = 1;
-
-        cdef INT32_t *mat
-        cdef INT64_t j
-        cdef INT32_t val
-
-        print('CSCSparseMatrix ([%d,%d]):' % (self.nrow, self.ncol), file=OUT)
-
-        if not self.nnz:
-            return
-
-        if self.nrow <= CSC_MAT_PPRINT_COL_THRESH and self.ncol <= CSC_MAT_PPRINT_ROW_THRESH:
-            # create linear vector presentation
-            # TODO: Skip this creation
-            mat = <INT32_t *> PyMem_Malloc(self.nrow * self.ncol * sizeof(INT32_t))
-
-            if not mat:
-                raise MemoryError()
-
-            for j from 0 <= j < self.ncol:
-                for i from 0 <= i < self.nrow:
-
-
-                    mat[i* self.ncol + j] = 0
-
-
-                # TODO: rewrite this completely
-                for k from self.ind[j] <= k < self.ind[j+1]:
-                    mat[(self.row[k]*self.ncol)+j] = self.val[k]
-                    if self.__store_symmetric:
-                        mat[(j*self.ncol)+ self.row[k]] = self.val[k]
-
-            for i from 0 <= i < self.nrow:
-                for j from 0 <= j < self.ncol:
-                    val = mat[(i*self.ncol)+j]
-                    #print('%9.*f ' % (6, val), file=OUT, end='')
-                    print('{0:9.6f} '.format(val), end='')
-                print()
-
-            PyMem_Free(mat)
-
-        else:
-            print('Matrix too big to print out', file=OUT)
 
     ####################################################################################################################
     # Internal arrays

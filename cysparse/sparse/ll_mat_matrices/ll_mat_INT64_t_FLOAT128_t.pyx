@@ -2397,62 +2397,6 @@ cdef class LLSparseMatrix_INT64_t_FLOAT128_t(MutableSparseMatrix_INT64_t_FLOAT12
         # element not found -> return empty cell
         return empty_to_string_FLOAT128_t(cell_width=cell_width)
 
-    def print_to(self, OUT, width=9, print_big_matrices=False, transposed=False):
-        """
-        Print content of matrix to output stream.
-
-        Args:
-            OUT: Output stream that print (Python3) can print to.
-
-        """
-        # EXPLICIT TYPE TESTS
-        # TODO: adapt to any numbers... and allow for additional parameters to control the output
-        # TODO: don't create temporary matrix
-        cdef INT64_t i, k, first = 1
-
-        print(self._matrix_description_before_printing(), file=OUT)
-
-        cdef FLOAT128_t *mat
-        cdef INT64_t j
-        cdef FLOAT128_t val, ival
-
-        if not self.__nnz:
-            return
-
-        if print_big_matrices or (self.__nrow <= LL_MAT_PPRINT_COL_THRESH and self.__ncol <= LL_MAT_PPRINT_ROW_THRESH):
-            # create linear vector presentation
-
-            mat = <FLOAT128_t *> PyMem_Malloc(self.__nrow * self.__ncol * sizeof(FLOAT128_t))
-
-            if not mat:
-                raise MemoryError()
-
-            # CREATION OF TEMP MATRIX
-            for i from 0 <= i < self.__nrow:
-                for j from 0 <= j < self.__ncol:
-
-                    mat[i* self.__ncol + j] = 0.0
-
-                k = self.root[i]
-                while k != -1:
-                    mat[(i*self.__ncol)+self.col[k]] = self.val[k]
-                    if self.__store_symmetric:
-                        mat[(self.col[k]*self.__ncol)+i] = self.val[k]
-                    k = self.link[k]
-
-            # PRINTING OF TEMP MATRIX
-            for i from 0 <= i < self.__nrow:
-                for j from 0 <= j < self.__ncol:
-                    val = mat[(i*self.__ncol)+j]
-
-                    print('{:{width}.6f} '.format(val, width=width), end='', file=OUT)
-
-                print(file=OUT)
-
-            PyMem_Free(mat)
-
-        else:
-            print('Matrix too big to print out', file=OUT)
 
 
     ####################################################################################################################

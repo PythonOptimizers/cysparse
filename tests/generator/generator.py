@@ -161,8 +161,9 @@ class TestGenerator(object):
         OUTSTREAM.write('\n')
 
         OUTSTREAM.write('import unittest\n')
-        OUTSTREAM.write('from cysparse.sparse.ll_mat import *\n')
-        OUTSTREAM.write('from cysparse.common_types.cysparse_types import *\n\n')
+        OUTSTREAM.write('from cysparse.sparse.ll_mat import *\n\n')
+        # not needed anymore
+        #OUTSTREAM.write('from cysparse.common_types.cysparse_types import *\n\n')
 
         OUTSTREAM.write(TEST_FILE_BIG_SEPARATOR % 'Tests')
         OUTSTREAM.write('\n')
