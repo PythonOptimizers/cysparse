@@ -1,15 +1,21 @@
 
+..  _matrix_creation:
+
+========================
+How to create a matrix?
+========================
+
+[TO BE REWRITTEN]
+
 To create a matrix, we use *factory methods* [#factory_method_strange_name]_: 
 functions that return an object corresponding
 to their arguments. Different arguments make them return different kind of objects (matrices).
 
-How to create a matrix?
-========================
 
 Before you can use any type of sparse matrix, you **must** first instantiate an ``LLSparseMatrix``. This matrix is well suited for construction but is not very optimized for most matrix operations. Once you have an ``LLSparseMatrix``, you can create a specialized sparse matrix from it.
 
 Sparse matrices all come from a ``LLSparseMatrix``
-------------------------------------------------------
+========================================================
 
 The ``LLSparseMatrix`` matrix type is the only one that is *mutable*. You can add and/or delete elements, rows, columns, sub-matrices at will. Once you have constructed your matrix, it is time to transform it into an appropriate 
 matrix format that is optimized for your needs. This transformation is not done in place and a copy is made. Here is an example:
@@ -29,10 +35,10 @@ matrix format that is optimized for your needs. This transformation is not done 
 ..  _matrices_must_be_instantiated_by_a_factory_method:
 
 ``LLSparseMatrix`` matrices must be instantiated by a factory method
----------------------------------------------------------------------------
+=========================================================================
 
 Matrices **must** be instantiated by one of the factory methods. 
-For instance, to create a :class:`LLSparseMatrix` (see :ref:`ll_mat`), use the following code:
+For instance, to create a :class:`LLSparseMatrix` (see :ref:`mutable_ll_mat`), use the following code:
 
 ..  code-block:: python
 
@@ -64,6 +70,33 @@ Helpers
 """"""""""
 
 ``size`` is **not** an attribute... 
+
+List of ``LLSparseMatrix`` factory methods
+===========================================
+
+``LLSparseMatrix``
+----------------------
+
+``LLSparseMatrixFromMMFile``
+-----------------------------
+
+
+``DiagonalLLSparseMatrix``
+------------------------------
+
+``IdentityLLSparseMatrix``
+------------------------------
+
+``ArrowheadLLSparseMatrix``
+-------------------------------
+
+``LinearFillLLSparseMatrix``
+------------------------------
+
+``PermutationLLSparseMatrix``
+-------------------------------
+
+
 
 ..  raw:: html
 

@@ -195,10 +195,10 @@ is not as flexible but is some order of magnitude more efficient.
 [TO BE REWRITTEN]
 
 Common type attributes
-=========================
+------------------------
 
 ``dtype`` and ``itype``
--------------------------
+""""""""""""""""""""""""""
 
 Each matrix (matrix-like) object has an internal index *type* and stores *typed* elements. Both types (enums) can be retrieved.
 ``dtype`` returns the type of the elements of the matrix and ``itype`` returns its index type.
@@ -207,6 +207,20 @@ See section :ref:`availabe_types` about the available types.
 
 What to import
 ==============
+
+For :program:`Python users`, only two files need to be imported:
+
+- :file:`ll_mat`: to create an ``LLSparseMatrix`` and
+- :file:`cysparse_types`: to access the different types.
+
+In short, you only need this:
+
+..  code-block:: python
+
+    from cysparse.sparse.ll_mat import *
+    from cysparse.common_types.cysparse_types import *
+
+:program:`Cython`'s users can import any :program:`Cython` file in any order.
 
 Factory methods
 ===============
