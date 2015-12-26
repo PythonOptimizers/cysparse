@@ -41,7 +41,7 @@ def generate_tests(test_name, test_type):
 
     test_generator = TestGenerator(test_name=test_name, test_type=test_type_name)
 
-    with open("test_" + test_name + TEST_FILE_EXTENSION, 'w') as f:
+    with open("test_" + test_name.lower() + TEST_FILE_EXTENSION, 'w') as f:
         test_generator.generate_test(OUTSTREAM=f)
 
 

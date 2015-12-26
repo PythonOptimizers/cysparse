@@ -109,7 +109,7 @@ See [Wiki](https://github.com/Funartech/cysparse/wiki) for details!
   This is a major update.
   New documentation, split between users and developers. Pdf is now enabled.
   Completely new API.
-  Thousands (7947) of unit tests added.
+  Thousands (8931) of unit tests added.
   
 - Version 0.2.2 released on Dec 14, 2015
 

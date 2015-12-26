@@ -42,3 +42,5 @@ print type(C)
 
 print "=" * 80
 
+print type(A.T.conj.H.conj.T.T.T)
+

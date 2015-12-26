@@ -22,11 +22,11 @@ MATRIX_PROXY_CLASSES['ConjugatedSparseMatrix'] = 'sparse_proxies.complex_generic
 MATRIX_PROXY_CLASSES['ConjugateTransposedSparseMatrix'] ='sparse_proxies.complex_generic.h_mat'
 
 
-MATRIX_LIKE_CLASSES = {}
+MATRIX_LIKE_CLASSES = OrderedDict()
 MATRIX_LIKE_CLASSES.update(MATRIX_CLASSES)
 MATRIX_LIKE_CLASSES.update(MATRIX_PROXY_CLASSES)
 
-ALL_SPARSE_OBJECT = {}
+ALL_SPARSE_OBJECT = OrderedDict()
 ALL_SPARSE_OBJECT.update(MATRIX_CLASSES)
 ALL_SPARSE_OBJECT.update(MATRIX_PROXY_CLASSES)
 ALL_SPARSE_OBJECT.update(MATRIX_VIEW_CLASSES)
@@ -129,7 +129,9 @@ class TestGenerator(object):
         OUTSTREAM.write(TEST_FILE_PROLOGUE % self.test_type)
         OUTSTREAM.write('\n')
 
-        OUTSTREAM.write('import unittest\n\n')
+        OUTSTREAM.write('import unittest\n')
+        OUTSTREAM.write('from cysparse.sparse.ll_mat import *\n')
+        OUTSTREAM.write('from cysparse.common_types.cysparse_types import *\n\n')
 
         OUTSTREAM.write(TEST_FILE_BIG_SEPARATOR % 'Tests')
         OUTSTREAM.write('\n')

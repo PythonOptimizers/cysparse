@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 """
-This file tests XXX for all matrices objects.
+This file tests XXX for all sparse-likes objects.
 
 """
 
@@ -16,7 +16,7 @@ import unittest
 #######################################################################
 # Case: store_symmetry == False, Store_zero==False
 #######################################################################
-class CySparseMyTestCaseClassNameNoSymmetryNoZero_@class@_@index@_@type@_TestCase(unittest.TestCase):
+class CySparseCopyNoSymmetryNoZero_@class@_@index@_@type@_TestCase(unittest.TestCase):
     def setUp(self):
 
 {% if class == 'LLSparseMatrix' %}
@@ -24,6 +24,14 @@ class CySparseMyTestCaseClassNameNoSymmetryNoZero_@class@_@index@_@type@_TestCas
 {% elif class == 'CSCSparseMatrix' %}
 
 {% elif class == 'CSRSparseMatrix' %}
+
+{% elif class == 'TransposedSparseMatrix' %}
+
+{% elif class == 'ConjugatedSparseMatrix' %}
+
+{% elif class == 'ConjugateTransposedSparseMatrix' %}
+
+{% elif class == 'LLSparseMatrixView' %}
 
 {% else %}
 YOU SHOULD ADD YOUR NEW MATRIX CLASS HERE
@@ -35,7 +43,7 @@ YOU SHOULD ADD YOUR NEW MATRIX CLASS HERE
 #######################################################################
 # Case: store_symmetry == True, Store_zero==False
 #######################################################################
-class CySparseMyTestCaseClassNameWithSymmetryNoZero_@class@_@index@_@type@_TestCase(unittest.TestCase):
+class CySparseCopyWithSymmetryNoZero_@class@_@index@_@type@_TestCase(unittest.TestCase):
     def setUp(self):
 
 {% if class == 'LLSparseMatrix' %}
@@ -43,6 +51,14 @@ class CySparseMyTestCaseClassNameWithSymmetryNoZero_@class@_@index@_@type@_TestC
 {% elif class == 'CSCSparseMatrix' %}
 
 {% elif class == 'CSRSparseMatrix' %}
+
+{% elif class == 'TransposedSparseMatrix' %}
+
+{% elif class == 'ConjugatedSparseMatrix' %}
+
+{% elif class == 'ConjugateTransposedSparseMatrix' %}
+
+{% elif class == 'LLSparseMatrixView' %}
 
 {% else %}
 YOU SHOULD ADD YOUR NEW MATRIX CLASS HERE
@@ -54,7 +70,7 @@ YOU SHOULD ADD YOUR NEW MATRIX CLASS HERE
 #######################################################################
 # Case: store_symmetry == False, Store_zero==True
 #######################################################################
-class CySparseMyTestCaseClassNameNoSymmetrySWithZero_@class@_@index@_@type@_TestCase(unittest.TestCase):
+class CySparseCopyNoSymmetrySWithZero_@class@_@index@_@type@_TestCase(unittest.TestCase):
     def setUp(self):
 
 {% if class == 'LLSparseMatrix' %}
@@ -62,6 +78,14 @@ class CySparseMyTestCaseClassNameNoSymmetrySWithZero_@class@_@index@_@type@_Test
 {% elif class == 'CSCSparseMatrix' %}
 
 {% elif class == 'CSRSparseMatrix' %}
+
+{% elif class == 'TransposedSparseMatrix' %}
+
+{% elif class == 'ConjugatedSparseMatrix' %}
+
+{% elif class == 'ConjugateTransposedSparseMatrix' %}
+
+{% elif class == 'LLSparseMatrixView' %}
 
 {% else %}
 YOU SHOULD ADD YOUR NEW MATRIX CLASS HERE
@@ -73,7 +97,7 @@ YOU SHOULD ADD YOUR NEW MATRIX CLASS HERE
 #######################################################################
 # Case: store_symmetry == True, Store_zero==True
 #######################################################################
-class CySparseMyTestCaseClassNameWithSymmetrySWithZero_@class@_@index@_@type@_TestCase(unittest.TestCase):
+class CySparseCopyWithSymmetrySWithZero_@class@_@index@_@type@_TestCase(unittest.TestCase):
     def setUp(self):
 
 {% if class == 'LLSparseMatrix' %}
@@ -81,6 +105,14 @@ class CySparseMyTestCaseClassNameWithSymmetrySWithZero_@class@_@index@_@type@_Te
 {% elif class == 'CSCSparseMatrix' %}
 
 {% elif class == 'CSRSparseMatrix' %}
+
+{% elif class == 'TransposedSparseMatrix' %}
+
+{% elif class == 'ConjugatedSparseMatrix' %}
+
+{% elif class == 'ConjugateTransposedSparseMatrix' %}
+
+{% elif class == 'LLSparseMatrixView' %}
 
 {% else %}
 YOU SHOULD ADD YOUR NEW MATRIX CLASS HERE
