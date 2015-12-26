@@ -38,6 +38,7 @@ YOU SHOULD ADD YOUR NEW MATRIX CLASS HERE
 {% endif %}
 
         self.C_tril = self.C.tril()
+        self.C_triu = self.C.triu()
 
     def test_tril_default(self):
         """
@@ -46,19 +47,45 @@ YOU SHOULD ADD YOUR NEW MATRIX CLASS HERE
         nrow = self.C.nrow
         ncol = self.C.ncol
 
-        max_range = min(nrow, ncol)
-
         for i in range(nrow):
-            for j in range(i + 1):
+            for j in range(min(i + 1, ncol)):
                 self.assertTrue(self.C_tril[i, j] == self.A[i, j])
 
-                if j == max_range:
-                    break
+    def test_tril_general(self):
+        """
+        Test ``tril(k)`` with ``k < 0``.
+        """
+        nrow = self.C.nrow
+        ncol = self.C.ncol
 
+        for k in range(-nrow, 0, 1):
+
+            for i in range(nrow):
+                for j in range(min(i + k + 1, ncol)):
+                    self.assertTrue(self.C_tril[i, j] == self.A[i, j])
 
     def test_triu_default(self):
-        pass
+        """
+        Test ``triu()`` with default arguments.
+        """
+        nrow = self.C.nrow
+        ncol = self.C.ncol
 
+        for j in range(ncol):
+            for i in range(min(nrow, j)):
+                self.assertTrue(self.C_triu[i, j] == self.A[i, j])
+
+    def test_triu_general(self):
+        """
+        Test ``triu(k)`` with ``k > 0``.
+        """
+        nrow = self.C.nrow
+        ncol = self.C.ncol
+
+        for k in range(1, ncol, 1):
+            for j in range(ncol):
+                for i in range(min(nrow, j - k + 1)):
+                    self.assertTrue(self.C_triu[i, j] == self.A[i, j])
 
 #######################################################################
 # Case: store_symmetry == True, Store_zero==False
@@ -80,6 +107,7 @@ YOU SHOULD ADD YOUR NEW MATRIX CLASS HERE
 {% endif %}
 
         self.C_tril = self.C.tril()
+        self.C_triu = self.C.triu()
 
 
     def test_tril_default(self):
@@ -89,15 +117,45 @@ YOU SHOULD ADD YOUR NEW MATRIX CLASS HERE
         nrow = self.C.nrow
         ncol = self.C.ncol
 
-        max_range = min(nrow, ncol)
-
         for i in range(nrow):
-            for j in range(i + 1):
+            for j in range(min(i + 1, ncol)):
                 self.assertTrue(self.C_tril[i, j] == self.A[i, j])
 
-                if j == max_range:
-                    break
+    def test_tril_general(self):
+        """
+        Test ``tril(k)`` with ``k < 0``.
+        """
+        nrow = self.C.nrow
+        ncol = self.C.ncol
 
+        for k in range(-nrow, 0, 1):
+
+            for i in range(nrow):
+                for j in range(min(i + k + 1, ncol)):
+                    self.assertTrue(self.C_tril[i, j] == self.A[i, j])
+
+    def test_triu_default(self):
+        """
+        Test ``triu()`` with default arguments.
+        """
+        nrow = self.C.nrow
+        ncol = self.C.ncol
+
+        for j in range(ncol):
+            for i in range(min(nrow, j)):
+                self.assertTrue(self.C_triu[i, j] == self.A[i, j])
+
+    def test_triu_general(self):
+        """
+        Test ``triu(k)`` with ``k > 0``.
+        """
+        nrow = self.C.nrow
+        ncol = self.C.ncol
+
+        for k in range(1, ncol, 1):
+            for j in range(ncol):
+                for i in range(min(nrow, j - k + 1)):
+                    self.assertTrue(self.C_triu[i, j] == self.A[i, j])
 
 #######################################################################
 # Case: store_symmetry == False, Store_zero==True
@@ -120,6 +178,7 @@ YOU SHOULD ADD YOUR NEW MATRIX CLASS HERE
 {% endif %}
 
         self.C_tril = self.C.tril()
+        self.C_triu = self.C.triu()
 
 
     def test_tril_default(self):
@@ -129,14 +188,45 @@ YOU SHOULD ADD YOUR NEW MATRIX CLASS HERE
         nrow = self.C.nrow
         ncol = self.C.ncol
 
-        max_range = min(nrow, ncol)
-
         for i in range(nrow):
-            for j in range(i + 1):
+            for j in range(min(i + 1, ncol)):
                 self.assertTrue(self.C_tril[i, j] == self.A[i, j])
 
-                if j == max_range:
-                    break
+    def test_tril_general(self):
+        """
+        Test ``tril(k)`` with ``k < 0``.
+        """
+        nrow = self.C.nrow
+        ncol = self.C.ncol
+
+        for k in range(-nrow, 0, 1):
+
+            for i in range(nrow):
+                for j in range(min(i + k + 1, ncol)):
+                    self.assertTrue(self.C_tril[i, j] == self.A[i, j])
+
+    def test_triu_default(self):
+        """
+        Test ``triu()`` with default arguments.
+        """
+        nrow = self.C.nrow
+        ncol = self.C.ncol
+
+        for j in range(ncol):
+            for i in range(min(nrow, j)):
+                self.assertTrue(self.C_triu[i, j] == self.A[i, j])
+
+    def test_triu_general(self):
+        """
+        Test ``triu(k)`` with ``k > 0``.
+        """
+        nrow = self.C.nrow
+        ncol = self.C.ncol
+
+        for k in range(1, ncol, 1):
+            for j in range(ncol):
+                for i in range(min(nrow, j - k + 1)):
+                    self.assertTrue(self.C_triu[i, j] == self.A[i, j])
 
 #######################################################################
 # Case: store_symmetry == True, Store_zero==True
@@ -158,6 +248,7 @@ YOU SHOULD ADD YOUR NEW MATRIX CLASS HERE
 {% endif %}
 
         self.C_tril = self.C.tril()
+        self.C_triu = self.C.triu()
 
 
     def test_tril_default(self):
@@ -167,14 +258,45 @@ YOU SHOULD ADD YOUR NEW MATRIX CLASS HERE
         nrow = self.C.nrow
         ncol = self.C.ncol
 
-        max_range = min(nrow, ncol)
-
         for i in range(nrow):
-            for j in range(i + 1):
+            for j in range(min(i + 1, ncol)):
                 self.assertTrue(self.C_tril[i, j] == self.A[i, j])
 
-                if j == max_range:
-                    break
+    def test_tril_general(self):
+        """
+        Test ``tril(k)`` with ``k < 0``.
+        """
+        nrow = self.C.nrow
+        ncol = self.C.ncol
+
+        for k in range(-nrow, 0, 1):
+
+            for i in range(nrow):
+                for j in range(min(i + k + 1, ncol)):
+                    self.assertTrue(self.C_tril[i, j] == self.A[i, j])
+
+    def test_triu_default(self):
+        """
+        Test ``triu()`` with default arguments.
+        """
+        nrow = self.C.nrow
+        ncol = self.C.ncol
+
+        for j in range(ncol):
+            for i in range(min(nrow, j)):
+                self.assertTrue(self.C_triu[i, j] == self.A[i, j])
+
+    def test_triu_general(self):
+        """
+        Test ``triu(k)`` with ``k > 0``.
+        """
+        nrow = self.C.nrow
+        ncol = self.C.ncol
+
+        for k in range(1, ncol, 1):
+            for j in range(ncol):
+                for i in range(min(nrow, j - k + 1)):
+                    self.assertTrue(self.C_triu[i, j] == self.A[i, j])
 
 if __name__ == '__main__':
     unittest.main()
