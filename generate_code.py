@@ -452,6 +452,8 @@ if __name__ == "__main__":
     cygenja_engine.register_action('tests/cysparse_/sparse/common_operations/multiplication_with_numpy_vector', 'test_global_matvec_functions.cpy', generate_following_matrix_class_and_index_and_type)
     # diagonals
     cygenja_engine.register_action('tests/cysparse_/sparse/common_operations/diagonals', 'test_diag.cpy', generate_following_matrix_class_and_index_and_type)
+    # triangular
+    cygenja_engine.register_action('tests/cysparse_/sparse/common_operations/triangular', 'test_triangular.cpy', generate_following_matrix_class_and_index_and_type)
     # memory
     cygenja_engine.register_action('tests/cysparse_/sparse/memory', 'test_copy.cpy', generate_following_all_sparse_like_objects_class_and_index_and_type)
     cygenja_engine.register_action('tests/cysparse_/sparse/memory', 'test_to_ndarray.cpy', generate_following_matrix_class_and_index_and_type)
