@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 """
-This file tests upper and lower triangular sub-matrices for all matrices objects.
+This file tests XXX for all sparse-likes objects.
 
 """
 
@@ -13,15 +13,18 @@ from cysparse.common_types.cysparse_types import *
 ########################################################################################################################
 # Tests
 ########################################################################################################################
+
 NROW = 10
 NCOL = 14
 SIZE = 10
+
 
 #######################################################################
 # Case: store_symmetry == False, Store_zero==False
 #######################################################################
 class CySparseTriangularNoSymmetryNoZero_@class@_@index@_@type@_TestCase(unittest.TestCase):
     def setUp(self):
+
         self.nrow = NROW
         self.ncol = NCOL
 
@@ -29,35 +32,49 @@ class CySparseTriangularNoSymmetryNoZero_@class@_@index@_@type@_TestCase(unittes
 
 {% if class == 'LLSparseMatrix' %}
         self.C = self.A
+
 {% elif class == 'CSCSparseMatrix' %}
         self.C = self.A.to_csc()
+
 {% elif class == 'CSRSparseMatrix' %}
         self.C = self.A.to_csr()
+
+{% elif class == 'TransposedSparseMatrix' %}
+        self.C = self.A.T
+
+{% elif class == 'ConjugatedSparseMatrix' %}
+        self.C = self.A.conj
+
+{% elif class == 'ConjugateTransposedSparseMatrix' %}
+        self.C = self.A.H
+
+{% elif class == 'LLSparseMatrixView' %}
+        self.C = self.A[:,:]
+
 {% else %}
 YOU SHOULD ADD YOUR NEW MATRIX CLASS HERE
 {% endif %}
 
-        self.C_tril = self.C.tril()
-
-    def test_tril_default(self):
-        """
-        Test ``tril()`` with default arguments.
-        """
-        nrow = self.C.nrow
-        ncol = self.C.ncol
-
-        max_range = min(nrow, ncol)
-
-        for i in range(nrow):
-            for j in range(i + 1):
-                self.assertTrue(self.C_tril[i, j] == self.A[i, j])
-
-                if j == max_range:
-                    break
-
-
-    def test_triu_default(self):
+    def test_XXX(self):
         pass
+
+{% if class == 'LLSparseMatrix' %}
+
+{% elif class == 'CSCSparseMatrix' %}
+
+{% elif class == 'CSRSparseMatrix' %}
+
+{% elif class == 'TransposedSparseMatrix' %}
+
+{% elif class == 'ConjugatedSparseMatrix' %}
+
+{% elif class == 'ConjugateTransposedSparseMatrix' %}
+
+{% elif class == 'LLSparseMatrixView' %}
+
+{% else %}
+YOU SHOULD ADD YOUR NEW MATRIX CLASS HERE
+{% endif %}
 
 
 #######################################################################
@@ -65,38 +82,56 @@ YOU SHOULD ADD YOUR NEW MATRIX CLASS HERE
 #######################################################################
 class CySparseTriangularWithSymmetryNoZero_@class@_@index@_@type@_TestCase(unittest.TestCase):
     def setUp(self):
+
         self.size = SIZE
 
         self.A = LinearFillLLSparseMatrix(size=self.size, dtype=@type|type2enum@, itype=@index|type2enum@, store_symmetry=True)
 
 {% if class == 'LLSparseMatrix' %}
         self.C = self.A
+
 {% elif class == 'CSCSparseMatrix' %}
         self.C = self.A.to_csc()
+
 {% elif class == 'CSRSparseMatrix' %}
         self.C = self.A.to_csr()
+
+{% elif class == 'TransposedSparseMatrix' %}
+        self.C = self.A.T
+
+{% elif class == 'ConjugatedSparseMatrix' %}
+        self.C = self.A.conj
+
+{% elif class == 'ConjugateTransposedSparseMatrix' %}
+        self.C = self.A.H
+
+{% elif class == 'LLSparseMatrixView' %}
+        self.C = self.A[:,:]
+
 {% else %}
 YOU SHOULD ADD YOUR NEW MATRIX CLASS HERE
 {% endif %}
 
-        self.C_tril = self.C.tril()
+    def test_XXX(self):
+        pass
 
+{% if class == 'LLSparseMatrix' %}
 
-    def test_tril_default(self):
-        """
-        Test ``tril()`` with default arguments.
-        """
-        nrow = self.C.nrow
-        ncol = self.C.ncol
+{% elif class == 'CSCSparseMatrix' %}
 
-        max_range = min(nrow, ncol)
+{% elif class == 'CSRSparseMatrix' %}
 
-        for i in range(nrow):
-            for j in range(i + 1):
-                self.assertTrue(self.C_tril[i, j] == self.A[i, j])
+{% elif class == 'TransposedSparseMatrix' %}
 
-                if j == max_range:
-                    break
+{% elif class == 'ConjugatedSparseMatrix' %}
+
+{% elif class == 'ConjugateTransposedSparseMatrix' %}
+
+{% elif class == 'LLSparseMatrixView' %}
+
+{% else %}
+YOU SHOULD ADD YOUR NEW MATRIX CLASS HERE
+{% endif %}
 
 
 #######################################################################
@@ -104,6 +139,7 @@ YOU SHOULD ADD YOUR NEW MATRIX CLASS HERE
 #######################################################################
 class CySparseTriangularNoSymmetrySWithZero_@class@_@index@_@type@_TestCase(unittest.TestCase):
     def setUp(self):
+
         self.nrow = NROW
         self.ncol = NCOL
 
@@ -111,70 +147,107 @@ class CySparseTriangularNoSymmetrySWithZero_@class@_@index@_@type@_TestCase(unit
 
 {% if class == 'LLSparseMatrix' %}
         self.C = self.A
+
 {% elif class == 'CSCSparseMatrix' %}
         self.C = self.A.to_csc()
+
 {% elif class == 'CSRSparseMatrix' %}
         self.C = self.A.to_csr()
+
+{% elif class == 'TransposedSparseMatrix' %}
+        self.C = self.A.T
+
+{% elif class == 'ConjugatedSparseMatrix' %}
+        self.C = self.A.conj
+
+{% elif class == 'ConjugateTransposedSparseMatrix' %}
+        self.C = self.A.H
+
+{% elif class == 'LLSparseMatrixView' %}
+        self.C = self.A[:,:]
+
 {% else %}
 YOU SHOULD ADD YOUR NEW MATRIX CLASS HERE
 {% endif %}
 
-        self.C_tril = self.C.tril()
+    def test_XXX(self):
+        pass
 
+{% if class == 'LLSparseMatrix' %}
 
-    def test_tril_default(self):
-        """
-        Test ``tril()`` with default arguments.
-        """
-        nrow = self.C.nrow
-        ncol = self.C.ncol
+{% elif class == 'CSCSparseMatrix' %}
 
-        max_range = min(nrow, ncol)
+{% elif class == 'CSRSparseMatrix' %}
 
-        for i in range(nrow):
-            for j in range(i + 1):
-                self.assertTrue(self.C_tril[i, j] == self.A[i, j])
+{% elif class == 'TransposedSparseMatrix' %}
 
-                if j == max_range:
-                    break
+{% elif class == 'ConjugatedSparseMatrix' %}
+
+{% elif class == 'ConjugateTransposedSparseMatrix' %}
+
+{% elif class == 'LLSparseMatrixView' %}
+
+{% else %}
+YOU SHOULD ADD YOUR NEW MATRIX CLASS HERE
+{% endif %}
+
 
 #######################################################################
 # Case: store_symmetry == True, Store_zero==True
 #######################################################################
 class CySparseTriangularWithSymmetrySWithZero_@class@_@index@_@type@_TestCase(unittest.TestCase):
     def setUp(self):
+
         self.size = SIZE
 
         self.A = LinearFillLLSparseMatrix(size=self.size, dtype=@type|type2enum@, itype=@index|type2enum@, store_symmetry=True, store_zero=True)
 
 {% if class == 'LLSparseMatrix' %}
         self.C = self.A
+
 {% elif class == 'CSCSparseMatrix' %}
         self.C = self.A.to_csc()
+
 {% elif class == 'CSRSparseMatrix' %}
         self.C = self.A.to_csr()
+
+{% elif class == 'TransposedSparseMatrix' %}
+        self.C = self.A.T
+
+{% elif class == 'ConjugatedSparseMatrix' %}
+        self.C = self.A.conj
+
+{% elif class == 'ConjugateTransposedSparseMatrix' %}
+        self.C = self.A.H
+
+{% elif class == 'LLSparseMatrixView' %}
+        self.C = self.A[:,:]
+
 {% else %}
 YOU SHOULD ADD YOUR NEW MATRIX CLASS HERE
 {% endif %}
 
-        self.C_tril = self.C.tril()
+    def test_XXX(self):
+        pass
 
+{% if class == 'LLSparseMatrix' %}
 
-    def test_tril_default(self):
-        """
-        Test ``tril()`` with default arguments.
-        """
-        nrow = self.C.nrow
-        ncol = self.C.ncol
+{% elif class == 'CSCSparseMatrix' %}
 
-        max_range = min(nrow, ncol)
+{% elif class == 'CSRSparseMatrix' %}
 
-        for i in range(nrow):
-            for j in range(i + 1):
-                self.assertTrue(self.C_tril[i, j] == self.A[i, j])
+{% elif class == 'TransposedSparseMatrix' %}
 
-                if j == max_range:
-                    break
+{% elif class == 'ConjugatedSparseMatrix' %}
+
+{% elif class == 'ConjugateTransposedSparseMatrix' %}
+
+{% elif class == 'LLSparseMatrixView' %}
+
+{% else %}
+YOU SHOULD ADD YOUR NEW MATRIX CLASS HERE
+{% endif %}
+
 
 if __name__ == '__main__':
     unittest.main()

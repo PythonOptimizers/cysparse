@@ -32,7 +32,7 @@ The ``X`` integer can have the following values:
 - ``1``: matrix-like test cases: all real matrices (case ``0`` above) and all proxy classes (``TransposedSparseMatrix``, ``ConjugatedSparseMatrix`` and ``ConjugateTransposedSparseMatrix``);
 - ``2``: sparse-like test cases: all matrix-like objects (case ``1`` above) and all view classes (``LLSparseMatrixView``).
 
-The invocation above with ``X`` set to ``2`` replacing ``MyTestCaseClassName`` by ``Copy`` , will result in a similar :file:`test_copy.cpy` template file:
+The invocation above with ``X`` set to ``2`` replacing ``MyTestCaseClassName`` by ``Copy`` , will result in a similar :file:`test_copy.cpy` template file [#real_test_template_more_advanced]_:
 
 ..  only:: html
 
@@ -296,4 +296,12 @@ The invocation above with ``X`` set to ``2`` replacing ``MyTestCaseClassName`` b
 
 
 which is our canvas for ``unittest`` files.
+
+..  only:: html
+
+    ..  rubric:: Footnotes:
+    
+..  [#real_test_template_more_advanced] The real generated template file is (much) more advanced but this gives you a good idea of the kind of template generated. One big difference is that the generated file compiles and passes the
+    tests while this example obviously does not.
+
 

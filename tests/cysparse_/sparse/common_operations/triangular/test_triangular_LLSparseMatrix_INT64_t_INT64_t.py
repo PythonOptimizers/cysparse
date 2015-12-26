@@ -13,15 +13,17 @@ from cysparse.common_types.cysparse_types import *
 ########################################################################################################################
 # Tests
 ########################################################################################################################
-
+NROW = 10
+NCOL = 14
+SIZE = 10
 
 #######################################################################
 # Case: store_symmetry == False, Store_zero==False
 #######################################################################
 class CySparseTriangularNoSymmetryNoZero_LLSparseMatrix_INT64_t_INT64_t_TestCase(unittest.TestCase):
     def setUp(self):
-        self.nrow = 10
-        self.ncol = 14
+        self.nrow = NROW
+        self.ncol = NCOL
 
         self.A = LinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, dtype=INT64_T, itype=INT64_T)
 
@@ -57,7 +59,7 @@ class CySparseTriangularNoSymmetryNoZero_LLSparseMatrix_INT64_t_INT64_t_TestCase
 #######################################################################
 class CySparseTriangularWithSymmetryNoZero_LLSparseMatrix_INT64_t_INT64_t_TestCase(unittest.TestCase):
     def setUp(self):
-        self.size = 10
+        self.size = SIZE
 
         self.A = LinearFillLLSparseMatrix(size=self.size, dtype=INT64_T, itype=INT64_T, store_symmetry=True)
 
@@ -90,8 +92,8 @@ class CySparseTriangularWithSymmetryNoZero_LLSparseMatrix_INT64_t_INT64_t_TestCa
 #######################################################################
 class CySparseTriangularNoSymmetrySWithZero_LLSparseMatrix_INT64_t_INT64_t_TestCase(unittest.TestCase):
     def setUp(self):
-        self.nrow = 10
-        self.ncol = 14
+        self.nrow = NROW
+        self.ncol = NCOL
 
         self.A = LinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, dtype=INT64_T, itype=INT64_T, store_zero=True)
 
@@ -123,7 +125,7 @@ class CySparseTriangularNoSymmetrySWithZero_LLSparseMatrix_INT64_t_INT64_t_TestC
 #######################################################################
 class CySparseTriangularWithSymmetrySWithZero_LLSparseMatrix_INT64_t_INT64_t_TestCase(unittest.TestCase):
     def setUp(self):
-        self.size = 10
+        self.size = SIZE
 
         self.A = LinearFillLLSparseMatrix(size=self.size, dtype=INT64_T, itype=INT64_T, store_symmetry=True, store_zero=True)
 

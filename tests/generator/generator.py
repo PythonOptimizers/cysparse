@@ -85,13 +85,44 @@ class TestGenerator(object):
         else:
             raise TypeError("Test type '%s' is not recognized" % self.test_type)
 
-    def generate_class_cases(self, OUT):
+    def generate_class_variable(self, klass):
+        """
+        Generate ``self.C = ...`` corresponding to the class ``klass``.
+
+        """
+        class_var_def = 'self.C = %s'
+        class_var_rhs = None
+        if klass == 'LLSparseMatrix':
+            class_var_rhs = 'self.A'
+        elif klass == 'CSCSparseMatrix':
+            class_var_rhs = 'self.A.to_csc()'
+        elif klass == 'CSRSparseMatrix':
+            class_var_rhs = 'self.A.to_csr()'
+        elif klass == 'LLSparseMatrixView':
+            class_var_rhs = 'self.A[:,:]'
+        elif klass == 'TransposedSparseMatrix':
+            class_var_rhs = 'self.A.T'
+        elif klass == 'ConjugatedSparseMatrix':
+            class_var_rhs = 'self.A.conj'
+        elif klass == 'ConjugateTransposedSparseMatrix':
+            class_var_rhs = 'self.A.H'
+        else:
+            raise NotImplementedError("Class '%s' not recognized" % klass)
+
+        return class_var_def % class_var_rhs
+
+    def generate_class_cases(self, OUT, class_setup=False):
         len_dict = len(self.test_type_dict)
         for i, class_name in enumerate(self.test_type_dict.keys()):
             if i == 0:
-                OUT.write(u"{%s if class == '%s' %s}\n\n" % ('%', class_name, '%'))
+                OUT.write(u"{%s if class == '%s' %s}\n" % ('%', class_name, '%'))
             else:
-                OUT.write(u"{%s elif class == '%s' %s}\n\n" % ('%', class_name, '%'))
+                OUT.write(u"{%s elif class == '%s' %s}\n" % ('%', class_name, '%'))
+
+            if class_setup:
+                OUT.write("        %s\n\n" % self.generate_class_variable(class_name))
+            else:
+                OUT.write("\n")
 
         OUT.write(u"{%s else %s}\n" % ('%', '%'))
         OUT.write("YOU SHOULD ADD YOUR NEW MATRIX CLASS HERE\n")
@@ -136,37 +167,70 @@ class TestGenerator(object):
         OUTSTREAM.write(TEST_FILE_BIG_SEPARATOR % 'Tests')
         OUTSTREAM.write('\n')
 
+        OUTSTREAM.write('NROW = 10\n')
+        OUTSTREAM.write('NCOL = 14\n')
+        OUTSTREAM.write('SIZE = 10\n')
+        OUTSTREAM.write('\n')
+
         # case 1
         OUTSTREAM.write(TEST_FILE_MEDIUM_SEPARATOR % 'Case: store_symmetry == False, Store_zero==False')
         OUTSTREAM.write(self.generate_class_name('NoSymmetryNoZero'))
         OUTSTREAM.write(':\n')
         OUTSTREAM.write('    def setUp(self):\n\n')
-        self.generate_class_cases(OUTSTREAM)
-        OUTSTREAM.write('    def test_XXX(self):\n\n')
+        OUTSTREAM.write('        self.nrow = NROW\n')
+        OUTSTREAM.write('        self.ncol = NCOL\n')
+        OUTSTREAM.write('\n')
+        OUTSTREAM.write('        self.A = LinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, dtype=@type|type2enum@, itype=@index|type2enum@)\n')
+        OUTSTREAM.write('\n')
+        self.generate_class_cases(OUTSTREAM, class_setup=True)
+        OUTSTREAM.write('    def test_XXX(self):\n')
+        OUTSTREAM.write('        pass\n\n')
+        self.generate_class_cases(OUTSTREAM, class_setup=False)
 
         # case 2
         OUTSTREAM.write(TEST_FILE_MEDIUM_SEPARATOR % 'Case: store_symmetry == True, Store_zero==False')
         OUTSTREAM.write(self.generate_class_name('WithSymmetryNoZero'))
         OUTSTREAM.write(':\n')
         OUTSTREAM.write('    def setUp(self):\n\n')
-        self.generate_class_cases(OUTSTREAM)
-        OUTSTREAM.write('    def test_XXX(self):\n\n')
+        OUTSTREAM.write('        self.size = SIZE\n')
+        OUTSTREAM.write('\n')
+        OUTSTREAM.write('        self.A = LinearFillLLSparseMatrix(size=self.size, dtype=@type|type2enum@, itype=@index|type2enum@, store_symmetry=True)\n')
+        OUTSTREAM.write('\n')
+        self.generate_class_cases(OUTSTREAM, class_setup=True)
+        OUTSTREAM.write('    def test_XXX(self):\n')
+        OUTSTREAM.write('        pass\n\n')
+        self.generate_class_cases(OUTSTREAM, class_setup=False)
 
         # case 3
         OUTSTREAM.write(TEST_FILE_MEDIUM_SEPARATOR % 'Case: store_symmetry == False, Store_zero==True')
         OUTSTREAM.write(self.generate_class_name('NoSymmetrySWithZero'))
         OUTSTREAM.write(':\n')
         OUTSTREAM.write('    def setUp(self):\n\n')
-        self.generate_class_cases(OUTSTREAM)
-        OUTSTREAM.write('    def test_XXX(self):\n\n')
+        OUTSTREAM.write('        self.nrow = NROW\n')
+        OUTSTREAM.write('        self.ncol = NCOL\n')
+        OUTSTREAM.write('\n')
+        OUTSTREAM.write('        self.A = LinearFillLLSparseMatrix(nrow=self.nrow, ncol=self.ncol, dtype=@type|type2enum@, itype=@index|type2enum@, store_zero=True)\n')
+        OUTSTREAM.write('\n')
+        self.generate_class_cases(OUTSTREAM, class_setup=True)
+        OUTSTREAM.write('    def test_XXX(self):\n')
+        OUTSTREAM.write('        pass\n\n')
+        self.generate_class_cases(OUTSTREAM, class_setup=False)
+
+
 
         # case 4
         OUTSTREAM.write(TEST_FILE_MEDIUM_SEPARATOR % 'Case: store_symmetry == True, Store_zero==True')
         OUTSTREAM.write(self.generate_class_name('WithSymmetrySWithZero'))
         OUTSTREAM.write(':\n')
         OUTSTREAM.write('    def setUp(self):\n\n')
-        self.generate_class_cases(OUTSTREAM)
-        OUTSTREAM.write('    def test_XXX(self):\n\n')
+        OUTSTREAM.write('        self.size = SIZE\n')
+        OUTSTREAM.write('\n')
+        OUTSTREAM.write('        self.A = LinearFillLLSparseMatrix(size=self.size, dtype=@type|type2enum@, itype=@index|type2enum@, store_symmetry=True, store_zero=True)\n')
+        OUTSTREAM.write('\n')
+        self.generate_class_cases(OUTSTREAM, class_setup=True)
+        OUTSTREAM.write('    def test_XXX(self):\n')
+        OUTSTREAM.write('        pass\n\n')
+        self.generate_class_cases(OUTSTREAM, class_setup=False)
 
         OUTSTREAM.write(TEST_FILE_EPILOGUE)
         OUTSTREAM.write('\n')
