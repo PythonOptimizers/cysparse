@@ -1,4 +1,4 @@
-from cysparse.cysparse_types.cysparse_types cimport *
+from cysparse.common_types.cysparse_types cimport *
 
 # forward declaration
 cdef class LLSparseMatrixView_INT32_t_FLOAT128_t
@@ -7,6 +7,8 @@ from cysparse.sparse.ll_mat_matrices.ll_mat_INT32_t_FLOAT128_t cimport LLSparseM
 
 from cpython cimport PyObject
 
+cpdef bint PyLLSparseMatrixView_Check(object obj)
+
 cdef class LLSparseMatrixView_INT32_t_FLOAT128_t:
     cdef:
         INT32_t __nrow    # number of rows of the collected view
@@ -14,8 +16,8 @@ cdef class LLSparseMatrixView_INT32_t_FLOAT128_t:
 
         bint __is_empty   # view is empty, probably constructed with bad index objects
 
-        str __type_name   # Name of matrix view type
-        str __type        # Type of matrix view
+        str __full_type_str   # Name of matrix view type
+        str __base_type_str   # Type of matrix view
 
         INT32_t * row_indices  # collected row indices
         INT32_t * col_indices  # collected col indices

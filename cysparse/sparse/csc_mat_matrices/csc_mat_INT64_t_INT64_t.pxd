@@ -1,4 +1,4 @@
-from cysparse.cysparse_types.cysparse_types cimport *
+from cysparse.common_types.cysparse_types cimport *
 
 from cysparse.sparse.s_mat_matrices.s_mat_INT64_t_INT64_t cimport ImmutableSparseMatrix_INT64_t_INT64_t
 from cysparse.sparse.ll_mat_matrices.ll_mat_INT64_t_INT64_t cimport LLSparseMatrix_INT64_t_INT64_t
@@ -43,6 +43,6 @@ cdef MakeCSCSparseMatrix_INT64_t_INT64_t(INT64_t nrow,
                                         INT64_t * ind,
                                         INT64_t * row,
                                         INT64_t * val,
-                                        bint is_symmetric,
-                                        bint store_zeros,
+                                        bint store_symmetric,
+                                        bint store_zero,
                                         bint row_indices_are_sorted=?)

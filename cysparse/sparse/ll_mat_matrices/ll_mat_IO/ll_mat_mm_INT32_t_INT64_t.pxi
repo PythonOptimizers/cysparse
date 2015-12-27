@@ -6,7 +6,7 @@ See http://math.nist.gov/MatrixMarket/ .
 """
 
 
-cdef LLSparseMatrix_INT32_t_INT64_t MakeLLSparseMatrixFromMMFile_INT32_t_INT64_t(str mm_filename, bint store_zeros=False, bint test_bounds=True):
+cdef LLSparseMatrix_INT32_t_INT64_t MakeLLSparseMatrixFromMMFile_INT32_t_INT64_t(str mm_filename, bint store_zero=False, bint test_bounds=True):
     cdef:
         str line
         list token_list
@@ -20,7 +20,7 @@ cdef LLSparseMatrix_INT32_t_INT64_t MakeLLSparseMatrixFromMMFile_INT32_t_INT64_t
 
     cdef:
         bint sparse
-        bint is_symmetric
+        bint store_symmetric
         bint is_complex
         list sparse_dense_list = [MM_ARRAY_STR, MM_COORDINATE_STR]
         list data_type_list = [MM_COMPLEX_STR, MM_REAL_STR, MM_INT_STR, MM_PATTERN_STR]
@@ -77,7 +77,7 @@ cdef LLSparseMatrix_INT32_t_INT64_t MakeLLSparseMatrixFromMMFile_INT32_t_INT64_t
         if token not in storage_scheme_list:
             raise IOError('Matrix format not recognized as Matrix Market format: fourth token in the Matrix Market banner is not in "%s"' % storage_scheme_list)
         storage_scheme = storage_scheme_dict[token]
-        is_symmetric = storage_scheme == MM_SYMMETRIC
+        store_symmetric = storage_scheme == MM_SYMMETRIC
 
         # SKIP COMMENTS
         line = f.readline()
@@ -100,8 +100,8 @@ cdef LLSparseMatrix_INT32_t_INT64_t MakeLLSparseMatrixFromMMFile_INT32_t_INT64_t
                                           nrow=nrow,
                                           ncol=ncol,
                                           size_hint=nnz,
-                                          is_symmetric=is_symmetric,
-                                          store_zeros=store_zeros)
+                                          store_symmetric=store_symmetric,
+                                          store_zero=store_zero)
 
         line = f.readline()
         nnz_read = 0
@@ -133,7 +133,7 @@ cdef LLSparseMatrix_INT32_t_INT64_t MakeLLSparseMatrixFromMMFile_INT32_t_INT64_t
 ########################################################################################################################
 # This version doesn't work yet...
 # TODO: write this!
-cdef LLSparseMatrix_INT32_t_INT64_t MakeLLSparseMatrixFromMMFile2_INT32_t_INT64_t(str mm_filename, bint store_zeros=False, bint test_bounds=True):
+cdef LLSparseMatrix_INT32_t_INT64_t MakeLLSparseMatrixFromMMFile2_INT32_t_INT64_t(str mm_filename, bint store_zero=False, bint test_bounds=True):
     cdef:
         str line
         list token_list
@@ -149,7 +149,7 @@ cdef LLSparseMatrix_INT32_t_INT64_t MakeLLSparseMatrixFromMMFile2_INT32_t_INT64_
 
     cdef:
         bint sparse
-        bint is_symmetric
+        bint store_symmetric
         bint is_complex
         list sparse_dense_list = [MM_ARRAY_STR, MM_COORDINATE_STR]
         list data_type_list = [MM_COMPLEX_STR, MM_REAL_STR, MM_INT_STR, MM_PATTERN_STR]
@@ -216,7 +216,7 @@ cdef LLSparseMatrix_INT32_t_INT64_t MakeLLSparseMatrixFromMMFile2_INT32_t_INT64_
         if token not in storage_scheme_list:
             raise IOError('Matrix format not recognized as Matrix Market format: fourth token in the Matrix Market banner is not in "%s"' % storage_scheme_list)
         storage_scheme = storage_scheme_dict[token]
-        is_symmetric = storage_scheme == MM_SYMMETRIC
+        store_symmetric = storage_scheme == MM_SYMMETRIC
 
         # SKIP COMMENTS
         line = f.readline()
@@ -240,8 +240,8 @@ cdef LLSparseMatrix_INT32_t_INT64_t MakeLLSparseMatrixFromMMFile2_INT32_t_INT64_
                                           nrow=nrow,
                                           ncol=ncol,
                                           size_hint=nnz,
-                                          is_symmetric=is_symmetric,
-                                          store_zeros=store_zeros)
+                                          store_symmetric=store_symmetric,
+                                          store_zero=store_zero)
 
 
 
@@ -305,7 +305,7 @@ cdef LLSparseMatrix_INT32_t_INT64_t MakeLLSparseMatrixFromMMFile2_INT32_t_INT64_
             v = <INT64_t>atoi(token_list[2])
 
 
-            if store_zeros or v != 0.0:
+            if store_zero or v != 0.0:
                 nnz_real = nnz_real + 1
                 #############################
                 # fill in arrays

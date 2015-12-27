@@ -20,7 +20,7 @@ cdef LLSparseMatrix_INT32_t_COMPLEX64_t MakeLinearFillLLSparseMatrix_INT32_t_COM
     sum = first_element
 
     # NON OPTIMIZED code
-    if A.is_symmetric:
+    if A.store_symmetric:
         if row_wise:
             for i from 0 <= i < A_nrow:
                 for j from 0 <= j <= i:

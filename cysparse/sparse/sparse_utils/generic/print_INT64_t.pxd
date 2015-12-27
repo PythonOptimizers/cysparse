@@ -1,4 +1,4 @@
-from cysparse.cysparse_types.cysparse_types cimport *
+from cysparse.common_types.cysparse_types cimport *
 
 
 cdef element_to_string_INT64_t(INT64_t v, int cell_width=?)

@@ -19,7 +19,7 @@ cdef LLSparseMatrix_INT64_t_FLOAT64_t MakePermutationLLSparseMatrix_INT64_t_FLOA
         is raised. Other errors can be raised if the content of the :program:`NumPy` vector doesn't correspond to matrix indices.
 
     Warning:
-        The :program:`NumPy` vector must be compatible with the :class:`LLSparseMatrix` itype.
+        The :program:`NumPy` vector must be compatible with the :class:`LLSparseMatrix` ``itype``.
 
     Note:
         A test is done to assert that the vector is indeed a permutation vector.

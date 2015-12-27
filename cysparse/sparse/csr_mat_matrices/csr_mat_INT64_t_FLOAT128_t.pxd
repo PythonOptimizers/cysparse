@@ -1,4 +1,4 @@
-from cysparse.cysparse_types.cysparse_types cimport *
+from cysparse.common_types.cysparse_types cimport *
 
 from cysparse.sparse.s_mat_matrices.s_mat_INT64_t_FLOAT128_t cimport ImmutableSparseMatrix_INT64_t_FLOAT128_t
 from cysparse.sparse.ll_mat_matrices.ll_mat_INT64_t_FLOAT128_t cimport LLSparseMatrix_INT64_t_FLOAT128_t
@@ -39,8 +39,8 @@ cdef MakeCSRSparseMatrix_INT64_t_FLOAT128_t(INT64_t nrow,
                                         INT64_t * ind,
                                         INT64_t * col,
                                         FLOAT128_t * val,
-                                        bint is_symmetric,
-                                        bint store_zeros,
+                                        bint store_symmetric,
+                                        bint store_zero,
                                         bint col_indices_are_sorted=?)
 
 cdef LLSparseMatrix_INT64_t_FLOAT128_t multiply_csr_mat_by_csc_mat_INT64_t_FLOAT128_t(CSRSparseMatrix_INT64_t_FLOAT128_t A, CSCSparseMatrix_INT64_t_FLOAT128_t B)

@@ -30,7 +30,7 @@ cpdef bint ll_mats_are_equals(LLSparseMatrix A, LLSparseMatrix B):
     cdef int i, j
 
     # test elements
-    if not A.store_zeros and not B.store_zeros and not A.__is_symmetric and not B.__is_symmetric:
+    if not A.store_zero and not B.store_zero and not A.__store_symmetric and not B.__store_symmetric:
         if A.nnz != B.nnz:
             return 0
 

@@ -1,4 +1,4 @@
-from cysparse.cysparse_types.cysparse_types cimport *
+from cysparse.common_types.cysparse_types cimport *
 
 
 cdef csr_to_csc_kernel_INT32_t_INT32_t(INT32_t nrow, INT32_t ncol, INT32_t nnz,

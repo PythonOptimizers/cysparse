@@ -1,25 +1,25 @@
-from cysparse.cysparse_types.cysparse_types cimport *
-from cysparse.cysparse_types.cysparse_types import *
+from cysparse.common_types.cysparse_types cimport *
+from cysparse.common_types.cysparse_types import *
 
 cdef INT32_t MUTABLE_SPARSE_MAT_DEFAULT_SIZE_HINT = 40        # allocated size by default
 
 unexposed_value = object()
 
 
-cdef __set_store_zeros_attribute(SparseMatrix A, bint store_zeros):
+cdef __set_store_zero_attribute(SparseMatrix A, bint store_zero):
     """
-    Access private  ``__store_zeros`` attribute and change it.
+    Access private  ``__store_zero`` attribute and change it.
 
     Args:
         A: ``SparseMatrix``.
-        store_zeros: Boolean value to set the attribute to.
+        store_zero: Boolean value to set the attribute to.
 
     """
-    A.__store_zeros = store_zeros
+    A.__store_zero = store_zero
 
 class NonZeros():
     """
-    Context manager to use methods with flag ``store_zeros`` to ``False``.
+    Context manager to use methods with flag ``store_zero`` to ``False``.
 
     The initial value is restored upon completion.
 
@@ -30,14 +30,14 @@ class NonZeros():
     """
     def __init__(self, SparseMatrix A):
         self.A = A
-        self.__store_zeros = False
+        self.__store_zero = False
 
     def __enter__(self):
-        self.__store_zeros = self.A.store_zeros
-        __set_store_zeros_attribute(self.A, False)
+        self.__store_zero = self.A.store_zero
+        __set_store_zero_attribute(self.A, False)
 
     def __exit__(self, type, value, traceback):
-        __set_store_zeros_attribute(self.A, self.__store_zeros)
+        __set_store_zero_attribute(self.A, self.__store_zero)
 
 
 cpdef bint PySparseMatrix_Check(object obj):
@@ -47,30 +47,27 @@ cpdef bint PySparseMatrix_Check(object obj):
     Args:
         obj: Whatever.
 
-    Return:
+    Returns:
         ``True`` if ``obj`` is a ``SparseMatrix`` object or inherited from it.
     """
     return isinstance(obj, SparseMatrix)
 
 
-cpdef bint PyLLSparseMatrixView_Check(object obj):
+cdef bint PyBothSparseMatricesAreOfSameType(object obj1, object obj2):
     """
-    Test if ``obj`` is a ``LLSparseMatrixView`` or not.
+    Test if ``obj1`` is a sparse matrix of the same type as sparse matrix ``obj2``
 
     Args:
-        obj: Whatever.
+        obj1:
+        obj2:
 
-    Return:
-        ``True`` if ``obj`` is a ``LLSparseMatrixView`` object or inherited from it.
+    Returns:
+        ``True`` if both ``obj1`` and ``obj2`` are ``SparseMatrix`` and have same base types.
     """
-    is_ll_mat_view = False
-    try:
-        if obj.type == 'LLSparseMatrixView':
-            is_ll_mat_view = True
-    except:
-        pass
+    if not PySparseMatrix_Check(obj1) or not PySparseMatrix_Check(obj2):
+        return False
 
-    return is_ll_mat_view
+    return obj1.base_type_str == obj2.base_type_str
 
 ########################################################################################################################
 # BASE MATRIX CLASS
@@ -81,16 +78,16 @@ cdef class SparseMatrix:
         """
 
         Warning:
-            Only use named arguments! This is on purpose!
+            We only use named arguments! This is on purpose!
         """
         assert unexposed_value == kwargs.get('control_object', None), "Matrix must be instantiated with a factory method"
 
-        self.__type_name = "Not defined"
-        self.__type = "Not defined"
+        self.__full_type_str = "Not defined"
+        self.__base_type_str = "Not defined"
         self.__index_and_type = "[not defined, not defined]"
 
-        self.__is_symmetric = kwargs.get('is_symmetric', False)
-        self.__store_zeros = kwargs.get('store_zeros', False)
+        self.__store_symmetric = kwargs.get('store_symmetric', False)
+        self.__store_zero = kwargs.get('store_zero', False)
         self.__is_mutable = False
 
     # for compatibility with numpy, PyKrylov, etc
@@ -107,41 +104,44 @@ cdef class SparseMatrix:
         return self.cp_type.itype
 
     @property
-    def is_symmetric(self):
-        return self.__is_symmetric
+    def store_symmetric(self):
+        return self.__store_symmetric
 
     @property
     def is_mutable(self):
         return self.__is_mutable
 
     @property
-    def store_zeros(self):
-        return self.__store_zeros
+    def store_zero(self):
+        return self.__store_zero
 
     @property
-    def type(self):
-        return self.__type
-
-    @property
-    def type_name(self):
-        return self.__type_name
-
-    ####################################################################################################################
-    # Basic common methods
-    ####################################################################################################################
-    # All methods raise NotImplementedError. We could have provided a common method that would have been refined in
-    # the respective children classes but we preferred to force an optimized version for all classes inheriting from
-    # this class, i.e. if it works, it is optimized for that particular class, if not, it must be implemented if needed.
+    def is_symmetric(self):
+        raise NotImplementedError("Operation not implemented (yet). Please report.")
 
     #########################
     # Strings
     #########################
+    @property
+    def base_type_str(self):
+        return self.__base_type_str
+
+    @property
+    def full_type_str(self):
+        return self.__full_type_str
+
     def itype_str(self):
         return type_to_string(self.itype)
 
     def dtype_str(self):
         return type_to_string(self.dtype)
 
+    ####################################################################################################################
+    # Basic common methods
+    ####################################################################################################################
+    # All methods raise NotImplementedError. We could have provided a common method that would have been refined in
+    # the respective children classes but we preferred to force an optimized version for all classes inheriting from
+    # this class, i.e. if it works, it is optimized for that particular class, if not, it must be implemented.
     #########################
     # Sub matrices
     #########################
@@ -169,7 +169,7 @@ cdef class SparseMatrix:
         """
         raise NotImplementedError("Operation not implemented (yet). Please report.")
 
-    def tril(self, int k):
+    def tril(self, int k = 0):
         """
         Return the lower triangular part of the matrix.
 
@@ -179,7 +179,7 @@ cdef class SparseMatrix:
         """
         raise NotImplementedError("Operation not implemented (yet). Please report.")
 
-    def triu(self, int k):
+    def triu(self, int k = 0):
         """
         Return the upper triangular part of the matrix.
 
@@ -199,50 +199,50 @@ cdef class SparseMatrix:
     #########################
     # Multiplication with vectors
     #########################
-    def matvec(self, B):
+    def matvec(self, b):
         """
-        Return ``A * B`` with ``B`` a :program:`NumPy` vector.
+        Return ``A * b`` with ``b`` a :program:`NumPy` vector.
 
         Args:
-            B: A :program:`NumPy` vector.
+            b: A :program:`NumPy` vector.
 
         """
         raise NotImplementedError("Operation not implemented (yet). Please report.")
 
-    def matvec_transp(self, B):
+    def matvec_transp(self, b):
         """
-        Return ``A^t * B`` with ``B`` a :program:`NumPy` vector.
+        Return ``A^t * b`` with ``b`` a :program:`NumPy` vector.
 
         Args:
-            B: A :program:`NumPy` vector.
+            b: A :program:`NumPy` vector.
 
         """
         raise NotImplementedError("Operation not implemented (yet). Please report.")
 
-    def matvec_htransp(self, B):
+    def matvec_htransp(self, b):
         """
-        Return ``A^h * B`` with ``B`` a :program:`NumPy` vector.
+        Return ``A^h * b`` with ``b`` a :program:`NumPy` vector.
 
         Args:
-            B: A :program:`NumPy` vector.
+            b: A :program:`NumPy` vector.
 
         """
-        if not is_complex_type(self.cp_type.dtype):
-            raise TypeError("This operation is only valid for complex matrices")
+        #if not is_complex_type(self.cp_type.dtype):
+        #    raise TypeError("This operation is only valid for complex matrices")
 
         raise NotImplementedError("Operation not implemented (yet). Please report.")
 
 
-    def matvec_conj(self, B):
+    def matvec_conj(self, b):
         """
-        Return ``conj(A) * B`` with ``B`` a :program:`NumPy` vector.
+        Return ``conj(A) * b`` with ``b`` a :program:`NumPy` vector.
 
         Args:
-            B: A :program:`NumPy` vector.
+            b: A :program:`NumPy` vector.
 
         """
-        if not is_complex_type(self.cp_type.dtype):
-            raise TypeError("This operation is only valid for complex matrices")
+        #if not is_complex_type(self.cp_type.dtype):
+        #    raise TypeError("This operation is only valid for complex matrices")
 
         raise NotImplementedError("Operation not implemented (yet). Please report.")
 
@@ -277,9 +277,6 @@ cdef class SparseMatrix:
             B:
 
         """
-        if not is_complex_type(self.cp_type.dtype):
-            raise TypeError("This operation is only valid for complex matrices")
-
         raise NotImplementedError("Operation not implemented (yet). Please report.")
 
     def matdot_conj(self, B):
@@ -290,21 +287,11 @@ cdef class SparseMatrix:
             B:
 
         """
-        if not is_complex_type(self.cp_type.dtype):
-            raise TypeError("This operation is only valid for complex matrices")
-
         raise NotImplementedError("Operation not implemented (yet). Please report.")
 
     #########################
     # Internal arrays
     #########################
-    def get_c_pointers(self):
-        """
-        Return C pointers to internal arrays.
-
-        """
-        raise NotImplementedError("Operation not allowed or not implemented.")
-
     def get_numpy_arrays(self):
         """
         Return :program:`NumPy` arrays equivalent to internal C-arrays.
@@ -314,18 +301,15 @@ cdef class SparseMatrix:
     #########################
     # Printing
     #########################
-    def to_string(self, **kwargs):
+    def __str__(self):
         """
         Return a string representing the **content** of matrix.
-
-        Args:
-            kwargs: Arguments are named.
 
         """
         raise NotImplementedError("Operation not implemented (yet). Please report.")
 
 
-cdef MakeMatrixString(object A, full=False):
+cdef MakeMatrixLikeString(object A, full=False):
     """
     Return a print of the :class:`SparseMatrix` object.
 

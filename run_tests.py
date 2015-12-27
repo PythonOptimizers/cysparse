@@ -6,6 +6,8 @@ By default, we use 'nosetests' but 'unittest discover' can be used instead. See 
 This script is fragile. It should be tested on different platforms.
 
 """
+from __future__ import print_function
+
 import os
 import sys
 import subprocess
@@ -13,12 +15,10 @@ import shutil
 import distutils
 import argparse
 
-import ConfigParser
-
 try:
     import nose
 except ImportError:
-    print "You need to install nose to run the tests."
+    print("You need to install nose to run the tests.")
     sys.exit(-1)
 
 
@@ -44,7 +44,7 @@ def clean_lib():
 
 
 def generate_lib():
-    subprocess.call(['python', 'generate_code.py','-a'])
+    subprocess.call(['python', 'generate_code.py','-r'])
     subprocess.call(['python', 'setup.py', 'build'])
 
 
@@ -60,23 +60,23 @@ def launch_nosetests(pattern=None, verbose=False, use_libraries=None):
         commands_list.append('-p')
         commands_list.append(pattern)
 
-    # do we exclude some libraries?
-    # TODO: this is very fragile...
-    if use_libraries is not None:
-        # SuiteSparse
-        if not use_libraries['use_suitesparse']:
-            commands_list.append('--exclude-dir')
-            commands_list.append(os.path.sep.join(['tests', 'cysparse', 'linalg', 'suitesparse']))
-
-        # MUMPS
-        if not use_libraries['use_suitesparse']:
-            commands_list.append('--exclude-dir')
-            commands_list.append(os.path.sep.join(['tests', 'cysparse', 'linalg', 'mumps']))
+    # # do we exclude some libraries?
+    # # TODO: this is very fragile...
+    # if use_libraries is not None:
+    #     # SuiteSparse
+    #     if not use_libraries['use_suitesparse']:
+    #         commands_list.append('--exclude-dir')
+    #         commands_list.append(os.path.sep.join(['tests', 'cysparse', 'linalg', 'suitesparse']))
+    #
+    #     # MUMPS
+    #     if not use_libraries['use_suitesparse']:
+    #         commands_list.append('--exclude-dir')
+    #         commands_list.append(os.path.sep.join(['tests', 'cysparse', 'linalg', 'mumps']))
 
     commands_list.append('tests')
 
     if verbose:
-        print "launch command: '%s':" % " ".join(commands_list)
+        print("launch command: '%s':" % " ".join(commands_list))
     subprocess.call(commands_list)
 
     os.chdir(current_dir)
@@ -95,7 +95,7 @@ def launch_unittest(pattern=None, verbose=False):
         commands_list.append(pattern)
 
     if verbose:
-        print "launch command: '%s':" % " ".join(commands_list)
+        print("launch command: '%s':" % " ".join(commands_list))
     subprocess.call(commands_list)
 
     os.chdir(current_dir)
@@ -113,45 +113,35 @@ if __name__ == "__main__":
     destination_dir = lib_dir + os.path.sep + "tests"
 
     if arg_options.verbose:
-        print "Deleting test directory %s... " % destination_dir,
+        print("Deleting test directory %s... " % destination_dir,)
     # clean libxxx/tests because shutil.copytree only copies non existing directories
     shutil.rmtree(destination_dir, ignore_errors=True)
     if arg_options.verbose:
-        print "done"
-        print "copying tests into test directory %s..." % destination_dir,
+        print("done")
+        print("copying tests into test directory %s..." % destination_dir,)
     shutil.copytree("tests", destination_dir, symlinks=False, ignore=None)
     if arg_options.verbose:
-        print "done"
+        print("done")
 
     if arg_options.rebuild:
         if arg_options.verbose:
-            print "Cleaning lib...",
+            print("Cleaning lib...",)
         clean_lib()
         if arg_options.verbose:
-            print "done"
-            print "Generating lib...",
+            print("done")
+            print("Generating lib...",)
         generate_lib()
         if arg_options.verbose:
-            print "done"
+            print("done")
     elif arg_options.build:
         if arg_options.verbose:
-            print "Generating lib...",
+            print("Generating lib...",)
         generate_lib()
         if arg_options.verbose:
-            print "done"
+            print("done")
 
-    # do we skip some tests?
-    # Some libraries might be missing...
-    cysparse_config = ConfigParser.SafeConfigParser()
-    cysparse_config.read('cysparse.cfg')
-
-    use_suitesparse = cysparse_config.getboolean('SUITESPARSE', 'use_suitesparse')
-    use_mumps = cysparse_config.getboolean('MUMPS', 'use_mumps')
-
-    use_libraries = {'use_suitesparse': use_suitesparse,
-                     'use_mumps': use_mumps}
 
     if arg_options.dont_use_nose:
         launch_unittest(arg_options.pattern, arg_options.verbose)
     else:
-        launch_nosetests(arg_options.pattern, arg_options.verbose, use_libraries)
+        launch_nosetests(arg_options.pattern, arg_options.verbose)

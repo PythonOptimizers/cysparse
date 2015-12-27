@@ -1,4 +1,4 @@
-from cysparse.cysparse_types.cysparse_types cimport *
+from cysparse.common_types.cysparse_types cimport *
 
 from cysparse.sparse.s_mat_matrices.s_mat_INT32_t_COMPLEX128_t cimport ImmutableSparseMatrix_INT32_t_COMPLEX128_t
 from cysparse.sparse.ll_mat_matrices.ll_mat_INT32_t_COMPLEX128_t cimport LLSparseMatrix_INT32_t_COMPLEX128_t
@@ -44,6 +44,6 @@ cdef MakeCSCSparseMatrix_INT32_t_COMPLEX128_t(INT32_t nrow,
                                         INT32_t * ind,
                                         INT32_t * row,
                                         COMPLEX128_t * val,
-                                        bint is_symmetric,
-                                        bint store_zeros,
+                                        bint store_symmetric,
+                                        bint store_zero,
                                         bint row_indices_are_sorted=?)

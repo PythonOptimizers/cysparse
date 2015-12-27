@@ -1,5 +1,5 @@
-from cysparse.cysparse_types.cysparse_types cimport *
-from cysparse.sparse.s_mat cimport SparseMatrix, unexposed_value, MUTABLE_SPARSE_MAT_DEFAULT_SIZE_HINT, MakeMatrixString
+from cysparse.common_types.cysparse_types cimport *
+from cysparse.sparse.s_mat cimport SparseMatrix, unexposed_value, MUTABLE_SPARSE_MAT_DEFAULT_SIZE_HINT, MakeMatrixLikeString
 
 from cysparse.sparse.sparse_proxies.t_mat cimport TransposedSparseMatrix
 
@@ -46,14 +46,14 @@ cdef class SparseMatrix_INT32_t_COMPLEX64_t(SparseMatrix):
         """
 
         Warning:
-            Only use named arguments!
+            Only use named arguments! This is on purppose!
         """
         assert unexposed_value == kwargs.get('control_object', None), "Matrix must be instantiated with a factory method"
 
         self.__index_and_type = "[INT32_t, COMPLEX64_t]"
 
-        self.__type = "SparseMatrix"
-        self.__type_name = "SparseMatrix %s" % self.__index_and_type
+        self.__base_type_str = "SparseMatrix"
+        self.__full_type_str = "SparseMatrix %s" % self.__index_and_type
 
         self.cp_type.itype = INT32_T
         self.cp_type.dtype = COMPLEX64_T
@@ -64,7 +64,7 @@ cdef class SparseMatrix_INT32_t_COMPLEX64_t(SparseMatrix):
         assert self.__nrow != -1, "Number of rows must be given"
         assert self.__ncol != -1, "Number of columns must be given"
 
-        if self.__is_symmetric:
+        if self.__store_symmetric:
             assert self.__nrow == self.__ncol, "A symmetric matrix must have equal number of rows and columns"
 
         self.__nnz = kwargs.get('nnz', 0)
@@ -236,31 +236,86 @@ cdef class SparseMatrix_INT32_t_COMPLEX64_t(SparseMatrix):
     ####################################################################################################################
     # MEMORY INFO
     ####################################################################################################################
-    def memory_virtual(self):
+    def memory_virtual_in_bits(self):
         """
         Return memory (in bits) needed if implementation would have kept **all** elements, not only the non zeros ones.
+
+        Returns:
+            The size in bits.
 
         Note:
             This method only returns the internal memory used for the C-arrays, **not** the whole object.
         """
         return COMPLEX64_t_BIT * self.__nrow * self.__ncol
 
-    def memory_real(self):
+    def memory_virtual_in_bytes(self):
         """
-        Real memory used internally.
+        Return memory (in bits) needed if implementation would have kept **all** elements, not only the non zeros ones.
+
+        Returns:
+            The size in bytes.
 
         Note:
             This method only returns the internal memory used for the C-arrays, **not** the whole object.
         """
-        raise NotImplementedError('Method not implemented for this type of matrix, please report')
 
-    def memory_element(self):
+        return self.memory_virtual_in_bits() / CHAR_BIT
+
+    def memory_real_in_bits(self):
+        """
+        Real memory used internally.
+
+        Returns:
+            The size in bits.
+
+        Note:
+            This method only returns the internal memory used for the C-arrays, **not** the whole object.
+        """
+        return self.memory_real_in_bytes() * CHAR_BIT
+
+    def memory_real_in_bytes(self):
+        """
+        Real memory used internally.
+
+        Returns:
+            The size in bytes.
+
+        Note:
+            This method only returns the internal memory used for the C-arrays, **not** the whole object.
+        """
+        raise NotImplementedError()
+
+    def memory_index_in_bits(self):
+        """
+        Return memory used for **one** index (in bits).
+
+
+        """
+        return INT32_t_BIT
+
+    def memory_index_in_bytes(self):
+        """
+        Return memory used for **one** index (in bytes).
+
+
+        """
+        return INT32_t_BIT / CHAR_BIT
+
+    def memory_element_in_bits(self):
         """
         Return memory used to store **one** element (in bits).
 
 
         """
         return COMPLEX64_t_BIT
+
+    def memory_element_in_bytes(self):
+        """
+        Return memory used to store **one** element (in bytes).
+
+
+        """
+        return COMPLEX64_t_BIT / CHAR_BIT
 
     ####################################################################################################################
     # OUTPUT STRINGS
@@ -274,23 +329,23 @@ cdef class SparseMatrix_INT32_t_COMPLEX64_t(SparseMatrix):
 
     def storage_scheme_string(self):
         symmetric_string = None
-        if self.__is_symmetric:
+        if self.__store_symmetric:
             symmetric_string = 'Symmetric'
         else:
             symmetric_string = 'General'
 
-        store_zeros_string = None
-        if self.__store_zeros:
-            store_zeros_string = "with"
+        store_zero_string = None
+        if self.__store_zero:
+            store_zero_string = "with"
         else:
-            store_zeros_string = "without"
+            store_zero_string = "without"
 
-        s = '%s and %s zeros' % (symmetric_string, store_zeros_string)
+        s = '%s and %s zeros' % (symmetric_string, store_zero_string)
 
         return s
 
     def _matrix_description_before_printing(self):
-        s = "%s %s <Storage scheme: %s>" % (self.__type_name, self.matrix_short_description(), self.storage_scheme_string())
+        s = "%s %s <Storage scheme: %s>" % (self.__full_type_str, self.matrix_short_description(), self.storage_scheme_string())
         return s
 
     def __repr__(self):
@@ -307,7 +362,7 @@ cdef class SparseMatrix_INT32_t_COMPLEX64_t(SparseMatrix):
         """
         s = self._matrix_description_before_printing()
         s += '\n'
-        s += MakeMatrixString(self)
+        s += MakeMatrixLikeString(self)
 
         return s
 
@@ -321,7 +376,7 @@ cdef class MutableSparseMatrix_INT32_t_COMPLEX64_t(SparseMatrix_INT32_t_COMPLEX6
         """
 
         Warning:
-            Only use named arguments!
+            We only use named arguments! This is on purppose!
 
         """
         self.size_hint = kwargs.get('size_hint', MUTABLE_SPARSE_MAT_DEFAULT_SIZE_HINT)
@@ -342,6 +397,6 @@ cdef class ImmutableSparseMatrix_INT32_t_COMPLEX64_t(SparseMatrix_INT32_t_COMPLE
         """
 
         Warning:
-            Only use named arguments!
+            We only use named arguments! This is on purppose!
         """
         self.__is_mutable = False
