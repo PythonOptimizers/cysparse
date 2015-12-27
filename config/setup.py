@@ -2,7 +2,7 @@
 
 ########################################################################################################################
 #                                                                                                                      #
-#                              The file `setup.py` is automatically generated from `setup.cpy`                         #
+#                              The file `setup.py` is automatically generated from `config/setup.cpy`                  #
 #                                                                                                                      #
 ########################################################################################################################
 
@@ -15,7 +15,7 @@ from distutils.extension import Extension
 
 import numpy as np
 
-import ConfigParser
+import configparser 
 import os
 import copy
 
@@ -60,7 +60,7 @@ def prepare_Cython_extensions_as_C_extensions(extensions):
 # INIT
 ########################################################################################################################
 cysparse_config_file = 'cysparse.cfg'
-cysparse_config = ConfigParser.SafeConfigParser()
+cysparse_config = configparser.SafeConfigParser()
 cysparse_config.read(cysparse_config_file)
 
 numpy_include = np.get_include()
@@ -103,13 +103,13 @@ else:
 #                                                *** types ***
 base_ext_params = copy.deepcopy(ext_params)
 base_ext = [
-    Extension(name="cysparse.cysparse_types.cysparse_types",
-              sources=["cysparse/cysparse_types/cysparse_types.pxd", "cysparse/cysparse_types/cysparse_types.pyx"]),
-    Extension(name="cysparse.cysparse_types.cysparse_numpy_types",
-              sources=["cysparse/cysparse_types/cysparse_numpy_types.pxd", "cysparse/cysparse_types/cysparse_numpy_types.pyx"],
+    Extension(name="cysparse.common_types.cysparse_types",
+              sources=["cysparse/common_types/cysparse_types.pxd", "cysparse/common_types/cysparse_types.pyx"]),
+    Extension(name="cysparse.common_types.cysparse_numpy_types",
+              sources=["cysparse/common_types/cysparse_numpy_types.pxd", "cysparse/common_types/cysparse_numpy_types.pyx"],
               **base_ext_params),
-    Extension(name="cysparse.cysparse_types.cysparse_generic_types",
-              sources=["cysparse/cysparse_types/cysparse_generic_types.pxd", "cysparse/cysparse_types/cysparse_generic_types.pyx"]),
+    Extension(name="cysparse.common_types.cysparse_generic_types",
+              sources=["cysparse/common_types/cysparse_generic_types.pxd", "cysparse/common_types/cysparse_generic_types.pyx"]),
     ]
 
 #-----------------------------------------------------------------------------------------------------------------------
@@ -182,12 +182,6 @@ sparse_ext = [
   Extension(name="cysparse.sparse.sparse_utils.generic.print_COMPLEX128_t",
             sources=["cysparse/sparse/sparse_utils/generic/print_COMPLEX128_t.pxd",
                      "cysparse/sparse/sparse_utils/generic/print_COMPLEX128_t.pyx"],
-            **sparse_ext_params),
-
-
-  Extension(name="cysparse.sparse.sparse_utils.generic.print_COMPLEX256_t",
-            sources=["cysparse/sparse/sparse_utils/generic/print_COMPLEX256_t.pxd",
-                     "cysparse/sparse/sparse_utils/generic/print_COMPLEX256_t.pyx"],
             **sparse_ext_params),
 
 
@@ -271,17 +265,6 @@ sparse_ext = [
             **sparse_ext_params),
 
     
-  Extension(name="cysparse.sparse.sparse_utils.generic.find_INT32_t_COMPLEX256_t",
-            sources=["cysparse/sparse/sparse_utils/generic/find_INT32_t_COMPLEX256_t.pxd",
-                     "cysparse/sparse/sparse_utils/generic/find_INT32_t_COMPLEX256_t.pyx"],
-            **sparse_ext_params),
-
-  Extension(name="cysparse.sparse.sparse_utils.generic.matrix_translations_INT32_t_COMPLEX256_t",
-            sources=["cysparse/sparse/sparse_utils/generic/matrix_translations_INT32_t_COMPLEX256_t.pxd",
-                     "cysparse/sparse/sparse_utils/generic/matrix_translations_INT32_t_COMPLEX256_t.pyx"],
-            **sparse_ext_params),
-
-    
 
     
   Extension(name="cysparse.sparse.sparse_utils.generic.find_INT64_t_INT32_t",
@@ -361,17 +344,6 @@ sparse_ext = [
             **sparse_ext_params),
 
     
-  Extension(name="cysparse.sparse.sparse_utils.generic.find_INT64_t_COMPLEX256_t",
-            sources=["cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX256_t.pxd",
-                     "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX256_t.pyx"],
-            **sparse_ext_params),
-
-  Extension(name="cysparse.sparse.sparse_utils.generic.matrix_translations_INT64_t_COMPLEX256_t",
-            sources=["cysparse/sparse/sparse_utils/generic/matrix_translations_INT64_t_COMPLEX256_t.pxd",
-                     "cysparse/sparse/sparse_utils/generic/matrix_translations_INT64_t_COMPLEX256_t.pyx"],
-            **sparse_ext_params),
-
-    
 
 
 
@@ -427,12 +399,6 @@ sparse_ext = [
             **sparse_ext_params),
 
     
-  Extension(name="cysparse.sparse.s_mat_matrices.s_mat_INT32_t_COMPLEX256_t",
-            sources=["cysparse/sparse/s_mat_matrices/s_mat_INT32_t_COMPLEX256_t.pxd",
-                     "cysparse/sparse/s_mat_matrices/s_mat_INT32_t_COMPLEX256_t.pyx"],
-            **sparse_ext_params),
-
-    
 
     
   Extension(name="cysparse.sparse.s_mat_matrices.s_mat_INT64_t_INT32_t",
@@ -474,12 +440,6 @@ sparse_ext = [
   Extension(name="cysparse.sparse.s_mat_matrices.s_mat_INT64_t_COMPLEX128_t",
             sources=["cysparse/sparse/s_mat_matrices/s_mat_INT64_t_COMPLEX128_t.pxd",
                      "cysparse/sparse/s_mat_matrices/s_mat_INT64_t_COMPLEX128_t.pyx"],
-            **sparse_ext_params),
-
-    
-  Extension(name="cysparse.sparse.s_mat_matrices.s_mat_INT64_t_COMPLEX256_t",
-            sources=["cysparse/sparse/s_mat_matrices/s_mat_INT64_t_COMPLEX256_t.pxd",
-                     "cysparse/sparse/s_mat_matrices/s_mat_INT64_t_COMPLEX256_t.pyx"],
             **sparse_ext_params),
 
     
@@ -573,17 +533,6 @@ sparse_ext = [
                      ],
             **sparse_ext_params),
   
-  Extension(name="cysparse.sparse.ll_mat_matrices.ll_mat_INT32_t_COMPLEX256_t",
-            sources=["cysparse/sparse/ll_mat_matrices/ll_mat_INT32_t_COMPLEX256_t.pxd",
-                     "cysparse/sparse/ll_mat_matrices/ll_mat_INT32_t_COMPLEX256_t.pyx",
-                     "cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_addition_INT32_t_COMPLEX256_t.pxi",
-                     "cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT32_t_COMPLEX256_t.pxi",
-                     "cysparse/sparse/ll_mat_matrices/ll_mat_kernel/ll_mat_assignment_kernel_INT32_t_COMPLEX256_t.pxi",
-                     "cysparse/sparse/ll_mat_matrices/ll_mat_kernel/ll_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX256_t.pxi",
-  
-                     ],
-            **sparse_ext_params),
-  
 
   
   Extension(name="cysparse.sparse.ll_mat_matrices.ll_mat_INT64_t_INT32_t",
@@ -663,17 +612,6 @@ sparse_ext = [
                      ],
             **sparse_ext_params),
   
-  Extension(name="cysparse.sparse.ll_mat_matrices.ll_mat_INT64_t_COMPLEX256_t",
-            sources=["cysparse/sparse/ll_mat_matrices/ll_mat_INT64_t_COMPLEX256_t.pxd",
-                     "cysparse/sparse/ll_mat_matrices/ll_mat_INT64_t_COMPLEX256_t.pyx",
-                     "cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_addition_INT64_t_COMPLEX256_t.pxi",
-                     "cysparse/sparse/ll_mat_matrices/ll_mat_helpers/ll_mat_multiplication_INT64_t_COMPLEX256_t.pxi",
-                     "cysparse/sparse/ll_mat_matrices/ll_mat_kernel/ll_mat_assignment_kernel_INT64_t_COMPLEX256_t.pxi",
-                     "cysparse/sparse/ll_mat_matrices/ll_mat_kernel/ll_mat_multiplication_by_numpy_vector_kernel_INT64_t_COMPLEX256_t.pxi",
-  
-                     ],
-            **sparse_ext_params),
-  
 
 
   ######################
@@ -737,14 +675,6 @@ sparse_ext = [
                      ],
             **sparse_ext_params),
   
-  Extension(name="cysparse.sparse.csr_mat_matrices.csr_mat_INT32_t_COMPLEX256_t",
-            sources=["cysparse/sparse/csr_mat_matrices/csr_mat_INT32_t_COMPLEX256_t.pxd",
-                     "cysparse/sparse/csr_mat_matrices/csr_mat_INT32_t_COMPLEX256_t.pyx",
-                     "cysparse/sparse/csr_mat_matrices/csr_mat_helpers/csr_mat_multiplication_INT32_t_COMPLEX256_t.pxi",
-                     "cysparse/sparse/csr_mat_matrices/csr_mat_kernel/csr_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX256_t.pxi",
-                     ],
-            **sparse_ext_params),
-  
 
   
   Extension(name="cysparse.sparse.csr_mat_matrices.csr_mat_INT64_t_INT32_t",
@@ -800,14 +730,6 @@ sparse_ext = [
                      "cysparse/sparse/csr_mat_matrices/csr_mat_INT64_t_COMPLEX128_t.pyx",
                      "cysparse/sparse/csr_mat_matrices/csr_mat_helpers/csr_mat_multiplication_INT64_t_COMPLEX128_t.pxi",
                      "cysparse/sparse/csr_mat_matrices/csr_mat_kernel/csr_mat_multiplication_by_numpy_vector_kernel_INT64_t_COMPLEX128_t.pxi",
-                     ],
-            **sparse_ext_params),
-  
-  Extension(name="cysparse.sparse.csr_mat_matrices.csr_mat_INT64_t_COMPLEX256_t",
-            sources=["cysparse/sparse/csr_mat_matrices/csr_mat_INT64_t_COMPLEX256_t.pxd",
-                     "cysparse/sparse/csr_mat_matrices/csr_mat_INT64_t_COMPLEX256_t.pyx",
-                     "cysparse/sparse/csr_mat_matrices/csr_mat_helpers/csr_mat_multiplication_INT64_t_COMPLEX256_t.pxi",
-                     "cysparse/sparse/csr_mat_matrices/csr_mat_kernel/csr_mat_multiplication_by_numpy_vector_kernel_INT64_t_COMPLEX256_t.pxi",
                      ],
             **sparse_ext_params),
   
@@ -874,14 +796,6 @@ sparse_ext = [
                      ],
             **sparse_ext_params),
   
-  Extension(name="cysparse.sparse.csc_mat_matrices.csc_mat_INT32_t_COMPLEX256_t",
-            sources=["cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX256_t.pxd",
-                     "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_COMPLEX256_t.pyx",
-                     "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT32_t_COMPLEX256_t.pxi",
-                     "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX256_t.pxi",
-                     ],
-            **sparse_ext_params),
-  
 
   
   Extension(name="cysparse.sparse.csc_mat_matrices.csc_mat_INT64_t_INT32_t",
@@ -940,14 +854,6 @@ sparse_ext = [
                      ],
             **sparse_ext_params),
   
-  Extension(name="cysparse.sparse.csc_mat_matrices.csc_mat_INT64_t_COMPLEX256_t",
-            sources=["cysparse/sparse/csc_mat_matrices/csc_mat_INT64_t_COMPLEX256_t.pxd",
-                     "cysparse/sparse/csc_mat_matrices/csc_mat_INT64_t_COMPLEX256_t.pyx",
-                     "cysparse/sparse/csc_mat_matrices/csc_mat_helpers/csc_mat_multiplication_INT64_t_COMPLEX256_t.pxi",
-                     "cysparse/sparse/csc_mat_matrices/csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT64_t_COMPLEX256_t.pxi",
-                     ],
-            **sparse_ext_params),
-  
 
 
   ######################
@@ -991,11 +897,6 @@ sparse_ext = [
                      "cysparse/sparse/ll_mat_views/ll_mat_view_INT32_t_COMPLEX128_t.pyx"],
             **sparse_ext_params),
   
-  Extension(name="cysparse.sparse.ll_mat_views.ll_mat_view_INT32_t_COMPLEX256_t",
-            sources=["cysparse/sparse/ll_mat_views/ll_mat_view_INT32_t_COMPLEX256_t.pxd",
-                     "cysparse/sparse/ll_mat_views/ll_mat_view_INT32_t_COMPLEX256_t.pyx"],
-            **sparse_ext_params),
-  
 
   
   Extension(name="cysparse.sparse.ll_mat_views.ll_mat_view_INT64_t_INT32_t",
@@ -1033,11 +934,6 @@ sparse_ext = [
                      "cysparse/sparse/ll_mat_views/ll_mat_view_INT64_t_COMPLEX128_t.pyx"],
             **sparse_ext_params),
   
-  Extension(name="cysparse.sparse.ll_mat_views.ll_mat_view_INT64_t_COMPLEX256_t",
-            sources=["cysparse/sparse/ll_mat_views/ll_mat_view_INT64_t_COMPLEX256_t.pxd",
-                     "cysparse/sparse/ll_mat_views/ll_mat_view_INT64_t_COMPLEX256_t.pyx"],
-            **sparse_ext_params),
-  
 
 
   ######################
@@ -1062,11 +958,6 @@ sparse_ext = [
                      "cysparse/sparse/sparse_proxies/complex_generic/h_mat_INT32_t_COMPLEX128_t.pyx"],
             **sparse_ext_params),
   
-  Extension(name="cysparse.sparse.sparse_proxies.complex_generic.h_mat_INT32_t_COMPLEX256_t",
-            sources=["cysparse/sparse/sparse_proxies/complex_generic/h_mat_INT32_t_COMPLEX256_t.pxd",
-                     "cysparse/sparse/sparse_proxies/complex_generic/h_mat_INT32_t_COMPLEX256_t.pyx"],
-            **sparse_ext_params),
-  
 
   
   Extension(name="cysparse.sparse.sparse_proxies.complex_generic.h_mat_INT64_t_COMPLEX64_t",
@@ -1077,11 +968,6 @@ sparse_ext = [
   Extension(name="cysparse.sparse.sparse_proxies.complex_generic.h_mat_INT64_t_COMPLEX128_t",
             sources=["cysparse/sparse/sparse_proxies/complex_generic/h_mat_INT64_t_COMPLEX128_t.pxd",
                      "cysparse/sparse/sparse_proxies/complex_generic/h_mat_INT64_t_COMPLEX128_t.pyx"],
-            **sparse_ext_params),
-  
-  Extension(name="cysparse.sparse.sparse_proxies.complex_generic.h_mat_INT64_t_COMPLEX256_t",
-            sources=["cysparse/sparse/sparse_proxies/complex_generic/h_mat_INT64_t_COMPLEX256_t.pxd",
-                     "cysparse/sparse/sparse_proxies/complex_generic/h_mat_INT64_t_COMPLEX256_t.pyx"],
             **sparse_ext_params),
   
 
@@ -1101,11 +987,6 @@ sparse_ext = [
                      "cysparse/sparse/sparse_proxies/complex_generic/conj_mat_INT32_t_COMPLEX128_t.pyx"],
             **sparse_ext_params),
   
-  Extension(name="cysparse.sparse.sparse_proxies.complex_generic.conj_mat_INT32_t_COMPLEX256_t",
-            sources=["cysparse/sparse/sparse_proxies/complex_generic/conj_mat_INT32_t_COMPLEX256_t.pxd",
-                     "cysparse/sparse/sparse_proxies/complex_generic/conj_mat_INT32_t_COMPLEX256_t.pyx"],
-            **sparse_ext_params),
-  
 
   
   Extension(name="cysparse.sparse.sparse_proxies.complex_generic.conj_mat_INT64_t_COMPLEX64_t",
@@ -1116,11 +997,6 @@ sparse_ext = [
   Extension(name="cysparse.sparse.sparse_proxies.complex_generic.conj_mat_INT64_t_COMPLEX128_t",
             sources=["cysparse/sparse/sparse_proxies/complex_generic/conj_mat_INT64_t_COMPLEX128_t.pxd",
                      "cysparse/sparse/sparse_proxies/complex_generic/conj_mat_INT64_t_COMPLEX128_t.pyx"],
-            **sparse_ext_params),
-  
-  Extension(name="cysparse.sparse.sparse_proxies.complex_generic.conj_mat_INT64_t_COMPLEX256_t",
-            sources=["cysparse/sparse/sparse_proxies/complex_generic/conj_mat_INT64_t_COMPLEX256_t.pxd",
-                     "cysparse/sparse/sparse_proxies/complex_generic/conj_mat_INT64_t_COMPLEX256_t.pyx"],
             **sparse_ext_params),
   
 
@@ -1137,7 +1013,7 @@ utils_ext = [
 # config
 ########################################################################################################################
 packages_list = ['cysparse',
-            'cysparse.cysparse_types',
+            'cysparse.common_types',
             'cysparse.sparse',
             'cysparse.sparse.sparse_proxies',
             'cysparse.sparse.sparse_proxies.complex_generic',

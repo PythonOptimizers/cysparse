@@ -1,6 +1,6 @@
 #define NPY_NO_DEPRECATED_API NPY_1_7_API_VERSION
 
-from cysparse.cysparse_types.cysparse_types cimport *
+from cysparse.common_types.cysparse_types cimport *
 
 from cysparse.sparse.s_mat_matrices.s_mat_INT32_t_COMPLEX64_t cimport MutableSparseMatrix_INT32_t_COMPLEX64_t
 # TODO: investigate: how come this could even compile before?
@@ -66,7 +66,7 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX64_t(MutableSparseMatrix_INT32_t_COMPLE
     cpdef object values(self)
     cpdef object items(self)
 
-    cdef take_triplet_pointers(self, INT32_t * a_row, INT32_t * a_col, COMPLEX64_t * a_val)
+    cdef fill_triplet(self, INT32_t * a_row, INT32_t * a_col, COMPLEX64_t * a_val)
 
     cpdef take_triplet(self, id1, id2, cnp.ndarray[cnp.npy_complex64, ndim=1] b)
     cpdef put_diagonal(self, INT32_t k, cnp.ndarray[cnp.npy_complex64, ndim=1] b)

@@ -2,14 +2,11 @@
 from cysparse.sparse.ll_mat cimport LL_MAT_DEFAULT_SIZE_HINT
 from cysparse.sparse.s_mat cimport unexposed_value
 
-from cysparse.cysparse_types.cysparse_types import *
-from cysparse.cysparse_types.cysparse_types cimport *
-from cysparse.cysparse_types.cysparse_types cimport min_integer_type
-from cysparse.cysparse_types.cysparse_numpy_types import are_mixed_types_cast_compatible
+from cysparse.common_types.cysparse_types import *
+from cysparse.common_types.cysparse_types cimport *
+from cysparse.common_types.cysparse_numpy_types import are_mixed_types_cast_compatible
 
-#from cysparse.cysparse_types.cysparse_generic_types cimport min_type
-
-from cysparse.sparse.s_mat cimport SparseMatrix
+from cysparse.sparse.s_mat cimport SparseMatrix, PySparseMatrix_Check, PyBothSparseMatricesAreOfSameType
 
 from cython cimport isinstance
 from libc.stdio cimport *
@@ -84,8 +81,6 @@ from cysparse.sparse.ll_mat_matrices.ll_mat_INT32_t_COMPLEX64_t cimport LLSparse
     
 from cysparse.sparse.ll_mat_matrices.ll_mat_INT32_t_COMPLEX128_t cimport LLSparseMatrix_INT32_t_COMPLEX128_t
     
-from cysparse.sparse.ll_mat_matrices.ll_mat_INT32_t_COMPLEX256_t cimport LLSparseMatrix_INT32_t_COMPLEX256_t
-    
 
     
 from cysparse.sparse.ll_mat_matrices.ll_mat_INT64_t_INT32_t cimport LLSparseMatrix_INT64_t_INT32_t
@@ -101,8 +96,6 @@ from cysparse.sparse.ll_mat_matrices.ll_mat_INT64_t_FLOAT128_t cimport LLSparseM
 from cysparse.sparse.ll_mat_matrices.ll_mat_INT64_t_COMPLEX64_t cimport LLSparseMatrix_INT64_t_COMPLEX64_t
     
 from cysparse.sparse.ll_mat_matrices.ll_mat_INT64_t_COMPLEX128_t cimport LLSparseMatrix_INT64_t_COMPLEX128_t
-    
-from cysparse.sparse.ll_mat_matrices.ll_mat_INT64_t_COMPLEX256_t cimport LLSparseMatrix_INT64_t_COMPLEX256_t
     
 
 
@@ -151,12 +144,6 @@ include "ll_mat_matrices/ll_mat_constructors/ll_mat_bands_INT32_t_COMPLEX128_t.p
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT32_t_COMPLEX128_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_permutations_INT32_t_COMPLEX128_t.pxi"
     
-include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT32_t_COMPLEX256_t.pxi"
-include "ll_mat_matrices/ll_mat_constructors/ll_mat_diagonals_INT32_t_COMPLEX256_t.pxi"
-include "ll_mat_matrices/ll_mat_constructors/ll_mat_bands_INT32_t_COMPLEX256_t.pxi"
-include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT32_t_COMPLEX256_t.pxi"
-include "ll_mat_matrices/ll_mat_constructors/ll_mat_permutations_INT32_t_COMPLEX256_t.pxi"
-    
 
     
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT64_t_INT32_t.pxi"
@@ -200,12 +187,6 @@ include "ll_mat_matrices/ll_mat_constructors/ll_mat_diagonals_INT64_t_COMPLEX128
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_bands_INT64_t_COMPLEX128_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT64_t_COMPLEX128_t.pxi"
 include "ll_mat_matrices/ll_mat_constructors/ll_mat_permutations_INT64_t_COMPLEX128_t.pxi"
-    
-include "ll_mat_matrices/ll_mat_constructors/ll_mat_arrowheads_INT64_t_COMPLEX256_t.pxi"
-include "ll_mat_matrices/ll_mat_constructors/ll_mat_diagonals_INT64_t_COMPLEX256_t.pxi"
-include "ll_mat_matrices/ll_mat_constructors/ll_mat_bands_INT64_t_COMPLEX256_t.pxi"
-include "ll_mat_matrices/ll_mat_constructors/ll_mat_linear_fills_INT64_t_COMPLEX256_t.pxi"
-include "ll_mat_matrices/ll_mat_constructors/ll_mat_permutations_INT64_t_COMPLEX256_t.pxi"
     
 
 
@@ -292,15 +273,11 @@ include "ll_mat_matrices/ll_mat_IO/ll_mat_mm_INT32_t_INT64_t.pxi"
     
 include "ll_mat_matrices/ll_mat_IO/ll_mat_mm_INT32_t_FLOAT64_t.pxi"
     
-include "ll_mat_matrices/ll_mat_IO/ll_mat_mm_INT32_t_COMPLEX128_t.pxi"
-    
 
     
 include "ll_mat_matrices/ll_mat_IO/ll_mat_mm_INT64_t_INT64_t.pxi"
     
 include "ll_mat_matrices/ll_mat_IO/ll_mat_mm_INT64_t_FLOAT64_t.pxi"
-    
-include "ll_mat_matrices/ll_mat_IO/ll_mat_mm_INT64_t_COMPLEX128_t.pxi"
     
 
 
@@ -317,7 +294,7 @@ cpdef bint PyLLSparseMatrix_Check(object obj):
         bint is_ll_sparse_matrix = False
 
     if isinstance(obj, SparseMatrix):
-        is_ll_sparse_matrix = obj.type == 'LLSparseMatrix'
+        is_ll_sparse_matrix = obj.base_type_str == 'LLSparseMatrix'
 
     return is_ll_sparse_matrix
 
@@ -325,20 +302,98 @@ def matvec(A, b):
     """
     Return :math:`A * b`.
     """
-    # TODO: test input arguments?
-    return A.matvec(b)
+    # only works with a sparse matrix A
+    if not PySparseMatrix_Check(A):
+        raise TypeError("Matrix A must be a sparse matrix!")
+
+    # TODO: implement the more general matdot method for ALL matrices, not only LLSparseMatrix
+    # See commented code in matvec_transp().
+    # Maybe a sparse ll_mat vector?
+    if PyLLSparseMatrix_Check(b):
+        # both operands must be of same type
+        if not PyLLSparseMatrix_Check(A):
+            raise TypeError("LLSparseMatrix vector can only be use if matrix A is itself an LLSparseMatrix")
+        return A.matdot(b)
+
+    elif cnp.PyArray_Check(b):
+        return A.matvec(b)
+
+    raise TypeError("Vector b must be of type SparseMatrix or NumPy ndarray")
 
 def matvec_transp(A, b):
     """
     Return :math:`A^t*b`.
     """
+    # only works with a sparse matrix A
+    if not PySparseMatrix_Check(A):
+        raise TypeError("Matrix A must be a sparse matrix!")
+
+    # Maybe a sparse ll_mat vector?
+    if PyLLSparseMatrix_Check(b):
+        # both operands must be of same type
+        if not PyLLSparseMatrix_Check(A):
+            raise TypeError("LLSparseMatrix vector can only be use if matrix A is itself an LLSparseMatrix")
+        return A.matdot_transp(b)
+
+    # More general when matdot_transp will be implemented for all matrices
+    ## Maybe a sparse vector?
+    #if PySparseMatrix_Check(b):
+    #    # both operands must be of same type
+    #    if not PyBothSparseMatricesAreOfSameType(A, b):
+    #        raise TypeError("Operands must be both of same SparseMatrix type")
+    #    return A.matdot_transp(b)
+
+    elif cnp.PyArray_Check(b):
+        return A.matvec_transp(b)
+
+    raise TypeError("Vector b must be of type SparseMatrix or NumPy ndarray")
+
+def matvec_htransp(A, b):
+    """
+    Return :math:`A^h*b`.
+    """
+    # only works with a sparse matrix A
+    if not PySparseMatrix_Check(A):
+        raise TypeError("Matrix A must be a sparse matrix!")
+
+    if cnp.PyArray_Check(b):
+        return A.matvec_htransp(b)
+
+    raise TypeError("Vector b must of type NumPy ndarray")
+
+def matvec_conj(A, b):
+    """
+    Return :math:`conj(A) * b`.
+    """
+    # only works with a sparse matrix A
+    if not PySparseMatrix_Check(A):
+        raise TypeError("Matrix A must be a sparse matrix!")
+
+    if cnp.PyArray_Check(b):
+        return A.matvec_conj(b)
+
+    raise TypeError("Vector b must of type NumPy ndarray")
+
+
+def matdot(A, B):
+    """
+    Return :math:`A * B`.
+    """
     # TODO: test input arguments?
-    return A.matvec_transp(b)
+    return A.matdot(B)
+
+def matdot_transp(A, B):
+    """
+    Return :math:`A^t*B`.
+    """
+    # TODO: test input arguments?
+    return A.matdot_transp(B)
+
 
 ########################################################################################################################
 # General factory methods
 ########################################################################################################################
-def NewLLSparseMatrix(**kwargs):
+def LLSparseMatrix(**kwargs):
     """
     Main factory method to create a (filled or empty) ``LLSparseMatrix`` matrix.
 
@@ -355,8 +410,8 @@ def NewLLSparseMatrix(**kwargs):
 
     In all cases, you **can** supply an ``itype`` (index type) and a ``dtype`` (element type). By default (i.e. if you
     don't provide these arguments, ``itype == INT32_T`` and ``dtype == FLOAT64_T``) and specify a *storage format*:
-        - ``store_zeros``: if ``True``, store explicitely zeros (default: ``False``);
-        - ``is_symmetric``: if ``True``, use symmetric storage, i.e. only the lower triangular part of the matrix is stored (by default: ``False``);
+        - ``store_zero``: if ``True``, store explicitely zeros (default: ``False``);
+        - ``store_symmetric``: if ``True``, use symmetric storage, i.e. only the lower triangular part of the matrix is stored (by default: ``False``);
 
     If a matrix or filename is supplied, these arguments **must** coincide with the supplied matrix types. If not, an error is thrown.
 
@@ -369,7 +424,7 @@ def NewLLSparseMatrix(**kwargs):
     * Case 3: From a file.
         By default, a ``test_bounds`` argument is set to ``True`` to test if all indices are not out of bounds. You can disable this to gain
         some speed when reading a file.
-        For the moment, only the Matrix Market format is available. See :func:`NewLLSparseMatrixFromMMFile` if you have no idea of the
+        For the moment, only the Matrix Market format is available. See :func:`LLSparseMatrixFromMMFile` if you have no idea of the
         matrix type contained in a matrix market file. To give a file name of a file in Matrix Market format, use the ``mm_filename`` argument.
 
     """
@@ -390,10 +445,10 @@ def NewLLSparseMatrix(**kwargs):
     assert dtype in ELEMENT_TYPES, "dtype not recognized"
 
     assert itype in [INT32_T,INT64_T], "itype is not accepted as index type"
-    assert dtype in [INT32_T,INT64_T,FLOAT32_T,FLOAT64_T,FLOAT128_T,COMPLEX64_T,COMPLEX128_T,COMPLEX256_T], "dtype is not accepted as type for a matrix element"
+    assert dtype in [INT32_T,INT64_T,FLOAT32_T,FLOAT64_T,FLOAT128_T,COMPLEX64_T,COMPLEX128_T], "dtype is not accepted as type for a matrix element"
 
-    cdef bint store_zeros = kwargs.get('store_zeros', False)
-    cdef bint is_symmetric = kwargs.get('is_symmetric', False)
+    cdef bint store_zero = kwargs.get('store_zero', False)
+    cdef bint store_symmetric = kwargs.get('store_symmetric', False)
     cdef bint test_bounds = kwargs.get('test_bounds', True)
 
     # From matrices
@@ -455,8 +510,8 @@ def NewLLSparseMatrix(**kwargs):
                                                                   dtype=dtype,
                                                                   itype=itype,
                                                                   size_hint=size_hint,
-                                                                  store_zeros=store_zeros,
-                                                                  is_symmetric=is_symmetric)
+                                                                  store_zero=store_zero,
+                                                                  store_symmetric=store_symmetric)
     
         
             elif dtype == INT64_T:
@@ -467,8 +522,8 @@ def NewLLSparseMatrix(**kwargs):
                                                                   dtype=dtype,
                                                                   itype=itype,
                                                                   size_hint=size_hint,
-                                                                  store_zeros=store_zeros,
-                                                                  is_symmetric=is_symmetric)
+                                                                  store_zero=store_zero,
+                                                                  store_symmetric=store_symmetric)
     
         
             elif dtype == FLOAT32_T:
@@ -479,8 +534,8 @@ def NewLLSparseMatrix(**kwargs):
                                                                   dtype=dtype,
                                                                   itype=itype,
                                                                   size_hint=size_hint,
-                                                                  store_zeros=store_zeros,
-                                                                  is_symmetric=is_symmetric)
+                                                                  store_zero=store_zero,
+                                                                  store_symmetric=store_symmetric)
     
         
             elif dtype == FLOAT64_T:
@@ -491,8 +546,8 @@ def NewLLSparseMatrix(**kwargs):
                                                                   dtype=dtype,
                                                                   itype=itype,
                                                                   size_hint=size_hint,
-                                                                  store_zeros=store_zeros,
-                                                                  is_symmetric=is_symmetric)
+                                                                  store_zero=store_zero,
+                                                                  store_symmetric=store_symmetric)
     
         
             elif dtype == FLOAT128_T:
@@ -503,8 +558,8 @@ def NewLLSparseMatrix(**kwargs):
                                                                   dtype=dtype,
                                                                   itype=itype,
                                                                   size_hint=size_hint,
-                                                                  store_zeros=store_zeros,
-                                                                  is_symmetric=is_symmetric)
+                                                                  store_zero=store_zero,
+                                                                  store_symmetric=store_symmetric)
     
         
             elif dtype == COMPLEX64_T:
@@ -515,8 +570,8 @@ def NewLLSparseMatrix(**kwargs):
                                                                   dtype=dtype,
                                                                   itype=itype,
                                                                   size_hint=size_hint,
-                                                                  store_zeros=store_zeros,
-                                                                  is_symmetric=is_symmetric)
+                                                                  store_zero=store_zero,
+                                                                  store_symmetric=store_symmetric)
     
         
             elif dtype == COMPLEX128_T:
@@ -527,20 +582,8 @@ def NewLLSparseMatrix(**kwargs):
                                                                   dtype=dtype,
                                                                   itype=itype,
                                                                   size_hint=size_hint,
-                                                                  store_zeros=store_zeros,
-                                                                  is_symmetric=is_symmetric)
-    
-        
-            elif dtype == COMPLEX256_T:
-        
-                return LLSparseMatrix_INT32_t_COMPLEX256_t(control_object=unexposed_value,
-                                                                  nrow=real_nrow,
-                                                                  ncol=real_ncol,
-                                                                  dtype=dtype,
-                                                                  itype=itype,
-                                                                  size_hint=size_hint,
-                                                                  store_zeros=store_zeros,
-                                                                  is_symmetric=is_symmetric)
+                                                                  store_zero=store_zero,
+                                                                  store_symmetric=store_symmetric)
     
 
     
@@ -556,8 +599,8 @@ def NewLLSparseMatrix(**kwargs):
                                                                   dtype=dtype,
                                                                   itype=itype,
                                                                   size_hint=size_hint,
-                                                                  store_zeros=store_zeros,
-                                                                  is_symmetric=is_symmetric)
+                                                                  store_zero=store_zero,
+                                                                  store_symmetric=store_symmetric)
     
         
             elif dtype == INT64_T:
@@ -568,8 +611,8 @@ def NewLLSparseMatrix(**kwargs):
                                                                   dtype=dtype,
                                                                   itype=itype,
                                                                   size_hint=size_hint,
-                                                                  store_zeros=store_zeros,
-                                                                  is_symmetric=is_symmetric)
+                                                                  store_zero=store_zero,
+                                                                  store_symmetric=store_symmetric)
     
         
             elif dtype == FLOAT32_T:
@@ -580,8 +623,8 @@ def NewLLSparseMatrix(**kwargs):
                                                                   dtype=dtype,
                                                                   itype=itype,
                                                                   size_hint=size_hint,
-                                                                  store_zeros=store_zeros,
-                                                                  is_symmetric=is_symmetric)
+                                                                  store_zero=store_zero,
+                                                                  store_symmetric=store_symmetric)
     
         
             elif dtype == FLOAT64_T:
@@ -592,8 +635,8 @@ def NewLLSparseMatrix(**kwargs):
                                                                   dtype=dtype,
                                                                   itype=itype,
                                                                   size_hint=size_hint,
-                                                                  store_zeros=store_zeros,
-                                                                  is_symmetric=is_symmetric)
+                                                                  store_zero=store_zero,
+                                                                  store_symmetric=store_symmetric)
     
         
             elif dtype == FLOAT128_T:
@@ -604,8 +647,8 @@ def NewLLSparseMatrix(**kwargs):
                                                                   dtype=dtype,
                                                                   itype=itype,
                                                                   size_hint=size_hint,
-                                                                  store_zeros=store_zeros,
-                                                                  is_symmetric=is_symmetric)
+                                                                  store_zero=store_zero,
+                                                                  store_symmetric=store_symmetric)
     
         
             elif dtype == COMPLEX64_T:
@@ -616,8 +659,8 @@ def NewLLSparseMatrix(**kwargs):
                                                                   dtype=dtype,
                                                                   itype=itype,
                                                                   size_hint=size_hint,
-                                                                  store_zeros=store_zeros,
-                                                                  is_symmetric=is_symmetric)
+                                                                  store_zero=store_zero,
+                                                                  store_symmetric=store_symmetric)
     
         
             elif dtype == COMPLEX128_T:
@@ -628,20 +671,8 @@ def NewLLSparseMatrix(**kwargs):
                                                                   dtype=dtype,
                                                                   itype=itype,
                                                                   size_hint=size_hint,
-                                                                  store_zeros=store_zeros,
-                                                                  is_symmetric=is_symmetric)
-    
-        
-            elif dtype == COMPLEX256_T:
-        
-                return LLSparseMatrix_INT64_t_COMPLEX256_t(control_object=unexposed_value,
-                                                                  nrow=real_nrow,
-                                                                  ncol=real_ncol,
-                                                                  dtype=dtype,
-                                                                  itype=itype,
-                                                                  size_hint=size_hint,
-                                                                  store_zeros=store_zeros,
-                                                                  is_symmetric=is_symmetric)
+                                                                  store_zero=store_zero,
+                                                                  store_symmetric=store_symmetric)
     
 
 
@@ -657,8 +688,8 @@ def NewLLSparseMatrix(**kwargs):
             assert itype in [INT32_T,INT64_T], "itype is not accepted as index type for a matrix from a Matrix Market file.\n\Accepted itypes:\n\t" + \
              "INT32_T,INT64_T"
 
-            assert dtype in [INT64_T,FLOAT64_T,COMPLEX128_T], "dtype is not accepted as type for a matrix from a Matrix Market file.\nAccepted dtypes:\n\t" + \
-             "INT64_T,FLOAT64_T,COMPLEX128_T"
+            assert dtype in [INT64_T,FLOAT64_T], "dtype is not accepted as type for a matrix from a Matrix Market file.\nAccepted dtypes:\n\t" + \
+             "INT64_T,FLOAT64_T"
 
 
     
@@ -669,22 +700,15 @@ def NewLLSparseMatrix(**kwargs):
                 if dtype == INT64_T:
         
                     if mm_read_file_experimental:
-                        return MakeLLSparseMatrixFromMMFile2_INT32_t_INT64_t(mm_filename=mm_filename, store_zeros=store_zeros, test_bounds=test_bounds)
-                    return MakeLLSparseMatrixFromMMFile_INT32_t_INT64_t(mm_filename=mm_filename, store_zeros=store_zeros, test_bounds=test_bounds)
+                        return MakeLLSparseMatrixFromMMFile2_INT32_t_INT64_t(mm_filename=mm_filename, store_zero=store_zero, test_bounds=test_bounds)
+                    return MakeLLSparseMatrixFromMMFile_INT32_t_INT64_t(mm_filename=mm_filename, store_zero=store_zero, test_bounds=test_bounds)
     
         
                 elif dtype == FLOAT64_T:
         
                     if mm_read_file_experimental:
-                        return MakeLLSparseMatrixFromMMFile2_INT32_t_FLOAT64_t(mm_filename=mm_filename, store_zeros=store_zeros, test_bounds=test_bounds)
-                    return MakeLLSparseMatrixFromMMFile_INT32_t_FLOAT64_t(mm_filename=mm_filename, store_zeros=store_zeros, test_bounds=test_bounds)
-    
-        
-                elif dtype == COMPLEX128_T:
-        
-                    if mm_read_file_experimental:
-                        return MakeLLSparseMatrixFromMMFile2_INT32_t_COMPLEX128_t(mm_filename=mm_filename, store_zeros=store_zeros, test_bounds=test_bounds)
-                    return MakeLLSparseMatrixFromMMFile_INT32_t_COMPLEX128_t(mm_filename=mm_filename, store_zeros=store_zeros, test_bounds=test_bounds)
+                        return MakeLLSparseMatrixFromMMFile2_INT32_t_FLOAT64_t(mm_filename=mm_filename, store_zero=store_zero, test_bounds=test_bounds)
+                    return MakeLLSparseMatrixFromMMFile_INT32_t_FLOAT64_t(mm_filename=mm_filename, store_zero=store_zero, test_bounds=test_bounds)
     
 
     
@@ -695,27 +719,20 @@ def NewLLSparseMatrix(**kwargs):
                 if dtype == INT64_T:
         
                     if mm_read_file_experimental:
-                        return MakeLLSparseMatrixFromMMFile2_INT64_t_INT64_t(mm_filename=mm_filename, store_zeros=store_zeros, test_bounds=test_bounds)
-                    return MakeLLSparseMatrixFromMMFile_INT64_t_INT64_t(mm_filename=mm_filename, store_zeros=store_zeros, test_bounds=test_bounds)
+                        return MakeLLSparseMatrixFromMMFile2_INT64_t_INT64_t(mm_filename=mm_filename, store_zero=store_zero, test_bounds=test_bounds)
+                    return MakeLLSparseMatrixFromMMFile_INT64_t_INT64_t(mm_filename=mm_filename, store_zero=store_zero, test_bounds=test_bounds)
     
         
                 elif dtype == FLOAT64_T:
         
                     if mm_read_file_experimental:
-                        return MakeLLSparseMatrixFromMMFile2_INT64_t_FLOAT64_t(mm_filename=mm_filename, store_zeros=store_zeros, test_bounds=test_bounds)
-                    return MakeLLSparseMatrixFromMMFile_INT64_t_FLOAT64_t(mm_filename=mm_filename, store_zeros=store_zeros, test_bounds=test_bounds)
-    
-        
-                elif dtype == COMPLEX128_T:
-        
-                    if mm_read_file_experimental:
-                        return MakeLLSparseMatrixFromMMFile2_INT64_t_COMPLEX128_t(mm_filename=mm_filename, store_zeros=store_zeros, test_bounds=test_bounds)
-                    return MakeLLSparseMatrixFromMMFile_INT64_t_COMPLEX128_t(mm_filename=mm_filename, store_zeros=store_zeros, test_bounds=test_bounds)
+                        return MakeLLSparseMatrixFromMMFile2_INT64_t_FLOAT64_t(mm_filename=mm_filename, store_zero=store_zero, test_bounds=test_bounds)
+                    return MakeLLSparseMatrixFromMMFile_INT64_t_FLOAT64_t(mm_filename=mm_filename, store_zero=store_zero, test_bounds=test_bounds)
     
 
 
 
-def NewLLSparseMatrixFromMMFile(filename, store_zeros=False, test_bounds=True):
+def LLSparseMatrixFromMMFile(filename, store_zero=False, test_bounds=True):
     """
     Factory method to create an ``LLSparseMatrix`` matrix from a ``Matrix Market`` file.
 
@@ -755,17 +772,12 @@ def NewLLSparseMatrixFromMMFile(filename, store_zeros=False, test_bounds=True):
         
         if dtype == INT64_T:
         
-            return MakeLLSparseMatrixFromMMFile_INT32_t_INT64_t(mm_filename=filename, store_zeros=store_zeros, test_bounds=test_bounds)
+            return MakeLLSparseMatrixFromMMFile_INT32_t_INT64_t(mm_filename=filename, store_zero=store_zero, test_bounds=test_bounds)
     
         
         elif dtype == FLOAT64_T:
         
-            return MakeLLSparseMatrixFromMMFile_INT32_t_FLOAT64_t(mm_filename=filename, store_zeros=store_zeros, test_bounds=test_bounds)
-    
-        
-        elif dtype == COMPLEX128_T:
-        
-            return MakeLLSparseMatrixFromMMFile_INT32_t_COMPLEX128_t(mm_filename=filename, store_zeros=store_zeros, test_bounds=test_bounds)
+            return MakeLLSparseMatrixFromMMFile_INT32_t_FLOAT64_t(mm_filename=filename, store_zero=store_zero, test_bounds=test_bounds)
     
     
 
@@ -775,17 +787,12 @@ def NewLLSparseMatrixFromMMFile(filename, store_zeros=False, test_bounds=True):
         
         if dtype == INT64_T:
         
-            return MakeLLSparseMatrixFromMMFile_INT64_t_INT64_t(mm_filename=filename, store_zeros=store_zeros, test_bounds=test_bounds)
+            return MakeLLSparseMatrixFromMMFile_INT64_t_INT64_t(mm_filename=filename, store_zero=store_zero, test_bounds=test_bounds)
     
         
         elif dtype == FLOAT64_T:
         
-            return MakeLLSparseMatrixFromMMFile_INT64_t_FLOAT64_t(mm_filename=filename, store_zeros=store_zeros, test_bounds=test_bounds)
-    
-        
-        elif dtype == COMPLEX128_T:
-        
-            return MakeLLSparseMatrixFromMMFile_INT64_t_COMPLEX128_t(mm_filename=filename, store_zeros=store_zeros, test_bounds=test_bounds)
+            return MakeLLSparseMatrixFromMMFile_INT64_t_FLOAT64_t(mm_filename=filename, store_zero=store_zero, test_bounds=test_bounds)
     
     
 
@@ -796,7 +803,7 @@ def NewLLSparseMatrixFromMMFile(filename, store_zeros=False, test_bounds=True):
 ########################################################################################################################
 # Special factory methods
 ########################################################################################################################
-def NewArrowheadLLSparseMatrix(**kwargs):
+def ArrowheadLLSparseMatrix(**kwargs):
     """
     See ``MakeArrowHeadLLSparseMatrix``.
 
@@ -805,10 +812,10 @@ def NewArrowheadLLSparseMatrix(**kwargs):
     """
     element = kwargs.pop('element', None)
 
-    if kwargs.get('is_symmetric', False):
+    if kwargs.get('store_symmetric', False):
         raise NotImplementedError('This type of matrix is not implemented for symmetric matrices')
 
-    ll_mat = NewLLSparseMatrix(**kwargs)
+    ll_mat = LLSparseMatrix(**kwargs)
 
     itype = ll_mat.itype
     dtype = ll_mat.dtype
@@ -864,11 +871,6 @@ def NewArrowheadLLSparseMatrix(**kwargs):
         
             return MakeArrowHeadLLSparseMatrix_INT32_t_COMPLEX128_t(ll_mat, element)
     
-        
-        elif dtype == COMPLEX256_T:
-        
-            return MakeArrowHeadLLSparseMatrix_INT32_t_COMPLEX256_t(ll_mat, element)
-    
     
 
     
@@ -909,18 +911,13 @@ def NewArrowheadLLSparseMatrix(**kwargs):
         
             return MakeArrowHeadLLSparseMatrix_INT64_t_COMPLEX128_t(ll_mat, element)
     
-        
-        elif dtype == COMPLEX256_T:
-        
-            return MakeArrowHeadLLSparseMatrix_INT64_t_COMPLEX256_t(ll_mat, element)
-    
     
 
     else:
         raise TypeError('itype not recognized')
 
 
-def NewDiagonalLLSparseMatrix(**kwargs):
+def DiagonalLLSparseMatrix(**kwargs):
     """
     See ``MakeDiagonalLLSparseMatrix``.
 
@@ -929,10 +926,10 @@ def NewDiagonalLLSparseMatrix(**kwargs):
     """
     element = kwargs.pop('element', None)
 
-    if kwargs.get('is_symmetric', False):
+    if kwargs.get('store_symmetric', False):
         raise NotImplementedError('This type of matrix is not implemented for symmetric matrices')
 
-    ll_mat = NewLLSparseMatrix(**kwargs)
+    ll_mat = LLSparseMatrix(**kwargs)
 
     itype = ll_mat.itype
     dtype = ll_mat.dtype
@@ -988,11 +985,6 @@ def NewDiagonalLLSparseMatrix(**kwargs):
         
             return MakeDiagonalLLSparseMatrix_INT32_t_COMPLEX128_t(ll_mat, element)
     
-        
-        elif dtype == COMPLEX256_T:
-        
-            return MakeDiagonalLLSparseMatrix_INT32_t_COMPLEX256_t(ll_mat, element)
-    
     
 
     
@@ -1033,25 +1025,20 @@ def NewDiagonalLLSparseMatrix(**kwargs):
         
             return MakeDiagonalLLSparseMatrix_INT64_t_COMPLEX128_t(ll_mat, element)
     
-        
-        elif dtype == COMPLEX256_T:
-        
-            return MakeDiagonalLLSparseMatrix_INT64_t_COMPLEX256_t(ll_mat, element)
-    
     
 
     else:
         raise TypeError('itype not recognized')
 
 # alias
-def NewUnityLLSparseMatrix(**kwargs):
+def IdentityLLSparseMatrix(**kwargs):
     element = kwargs.pop('element', None)
-    return NewDiagonalLLSparseMatrix(**kwargs)
+    return DiagonalLLSparseMatrix(**kwargs)
 
 
-def NewBandLLSparseMatrix(**kwargs):
+def BandLLSparseMatrix(**kwargs):
     """
-    See ``MakeBandLLSparseMatrix_INT32_t_None``.
+    See ``MakeBandLLSparseMatrix_INT32_t_INT32_t``.
 
     Note:
         Input arguments are **not** tested.
@@ -1065,7 +1052,7 @@ def NewBandLLSparseMatrix(**kwargs):
     if numpy_arrays is None:
         raise ValueError("Named argument 'numpy_arrays' not given")
 
-    ll_mat = NewLLSparseMatrix(**kwargs)
+    ll_mat = LLSparseMatrix(**kwargs)
 
     itype = ll_mat.itype
     dtype = ll_mat.dtype
@@ -1110,11 +1097,6 @@ def NewBandLLSparseMatrix(**kwargs):
         
             return MakeBandLLSparseMatrix_INT32_t_COMPLEX128_t(ll_mat, diag_coeff, numpy_arrays)
     
-        
-        elif dtype == COMPLEX256_T:
-        
-            return MakeBandLLSparseMatrix_INT32_t_COMPLEX256_t(ll_mat, diag_coeff, numpy_arrays)
-    
     
 
     
@@ -1155,17 +1137,12 @@ def NewBandLLSparseMatrix(**kwargs):
         
             return MakeBandLLSparseMatrix_INT64_t_COMPLEX128_t(ll_mat, diag_coeff, numpy_arrays)
     
-        
-        elif dtype == COMPLEX256_T:
-        
-            return MakeBandLLSparseMatrix_INT64_t_COMPLEX256_t(ll_mat, diag_coeff, numpy_arrays)
-    
     
 
     else:
         raise TypeError('itype not recognized')
 
-def NewLinearFillLLSparseMatrix(**kwargs):
+def LinearFillLLSparseMatrix(**kwargs):
     """
     See ``MakeLinearFillLLSparseMatrix``.
 
@@ -1190,7 +1167,7 @@ def NewLinearFillLLSparseMatrix(**kwargs):
 
     kwargs['size_hint'] = nrow * ncol
 
-    ll_mat = NewLLSparseMatrix(**kwargs)
+    ll_mat = LLSparseMatrix(**kwargs)
 
     itype = ll_mat.itype
     dtype = ll_mat.dtype
@@ -1255,11 +1232,6 @@ def NewLinearFillLLSparseMatrix(**kwargs):
         
             return MakeLinearFillLLSparseMatrix_INT32_t_COMPLEX128_t(ll_mat, first_element, step, row_wise)
     
-        
-        elif dtype == COMPLEX256_T:
-        
-            return MakeLinearFillLLSparseMatrix_INT32_t_COMPLEX256_t(ll_mat, first_element, step, row_wise)
-    
     
 
     
@@ -1300,17 +1272,12 @@ def NewLinearFillLLSparseMatrix(**kwargs):
         
             return MakeLinearFillLLSparseMatrix_INT64_t_COMPLEX128_t(ll_mat, first_element, step, row_wise)
     
-        
-        elif dtype == COMPLEX256_T:
-        
-            return MakeLinearFillLLSparseMatrix_INT64_t_COMPLEX256_t(ll_mat, first_element, step, row_wise)
-    
     
 
     else:
         raise TypeError('itype not recognized')
 
-def NewPermutationLLSparseMatrix(**kwargs):
+def PermutationLLSparseMatrix(**kwargs):
     """
     See ``MakePermutationLLSparseMatrix``.
 
@@ -1319,10 +1286,10 @@ def NewPermutationLLSparseMatrix(**kwargs):
     """
     p_vec = kwargs.pop('P', None)
 
-    if kwargs.get('is_symmetric', False):
+    if kwargs.get('store_symmetric', False):
         raise NotImplementedError('This type of matrix is not implemented for symmetric matrices')
 
-    ll_mat = NewLLSparseMatrix(**kwargs)
+    ll_mat = LLSparseMatrix(**kwargs)
 
     itype = ll_mat.itype
     dtype = ll_mat.dtype
@@ -1367,11 +1334,6 @@ def NewPermutationLLSparseMatrix(**kwargs):
         
             return MakePermutationLLSparseMatrix_INT32_t_COMPLEX128_t(ll_mat, p_vec)
     
-        
-        elif dtype == COMPLEX256_T:
-        
-            return MakePermutationLLSparseMatrix_INT32_t_COMPLEX256_t(ll_mat, p_vec)
-    
     
 
     
@@ -1411,11 +1373,6 @@ def NewPermutationLLSparseMatrix(**kwargs):
         elif dtype == COMPLEX128_T:
         
             return MakePermutationLLSparseMatrix_INT64_t_COMPLEX128_t(ll_mat, p_vec)
-    
-        
-        elif dtype == COMPLEX256_T:
-        
-            return MakePermutationLLSparseMatrix_INT64_t_COMPLEX256_t(ll_mat, p_vec)
     
     
 

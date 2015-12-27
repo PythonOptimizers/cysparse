@@ -9,6 +9,7 @@ cysparse.cfg
 /build/*
 /.idea/*
 /.tox/*
-/doc/build/*
+/docs/users/build/*
+/docs/developers/build/*
 /*.egg-info
 /dist

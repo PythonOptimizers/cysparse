@@ -1,6 +1,6 @@
-from cysparse.sparse.s_mat cimport SparseMatrix, MakeMatrixString
+from cysparse.sparse.s_mat cimport SparseMatrix, MakeMatrixLikeString
 
-from cysparse.cysparse_types.cysparse_numpy_types import are_mixed_types_compatible, cysparse_to_numpy_type
+from cysparse.common_types.cysparse_numpy_types import are_mixed_types_compatible, cysparse_to_numpy_type
 from cysparse.sparse.ll_mat cimport PyLLSparseMatrix_Check
 
 cimport numpy as cnp
@@ -60,6 +60,11 @@ cdef class ConjugateTransposedSparseMatrix_INT64_t_COMPLEX128_t:
 
     
     @property
+    def nnz(self):
+        return self.A.nnz
+
+    
+    @property
     def dtype(self):
         return self.A.cp_type.dtype
 
@@ -67,6 +72,56 @@ cdef class ConjugateTransposedSparseMatrix_INT64_t_COMPLEX128_t:
     @property
     def itype(self):
         return self.A.cp_type.itype
+
+    
+    @property
+    def is_symmetric(self):
+        return self.A.is_symmetric
+
+    
+    @property
+    def store_symmetric(self):
+        return self.A.store_symmetric
+
+    
+    @property
+    def store_zero(self):
+        return self.A.store_zero
+
+    
+    @property
+    def is_mutable(self):
+        return self.A.__is_mutable
+
+    
+    @property
+    def base_type_str(self):
+        return 'Conjugate Transposed of ' + self.A.base_type_str
+
+    
+    @property
+    def full_type_str(self):
+        return 'Conjugate Transposed of ' + self.A.full_type_str
+
+    
+    @property
+    def itype_str(self):
+        return self.A.itype_str
+
+    
+    @property
+    def dtype_str(self):
+        return self.A.dtype_str
+
+    
+    @property
+    def nargin(self):
+        return self.A.nargout
+
+    
+    @property
+    def nargout(self):
+        return self.A.nargin
 
     # for compatibility with numpy, PyKrylov, etc
     
@@ -116,13 +171,16 @@ cdef class ConjugateTransposedSparseMatrix_INT64_t_COMPLEX128_t:
     # Basic operations
     ####################################################################################################################
     def __mul__(self, B):
-        raise NotImplementedError("Multiplication with this kind of object not implemented yet...")
+        if cnp.PyArray_Check(B) and B.ndim == 1:
+            return self.matvec(B)
+
+        return self.matdot(B)
 
     def matvec(self, B):
         return self.A.matvec_htransp(B)
 
     def matvec_transp(self, B):
-        return self.matvec_conj(B)
+        return self.A.matvec_conj(B)
 
     def matvec_htransp(self, B):
         return self.A.matvec(B)
@@ -135,6 +193,9 @@ cdef class ConjugateTransposedSparseMatrix_INT64_t_COMPLEX128_t:
 
     def matrix_copy(self):
         return self.A.create_conjugate_transpose()
+
+    def matdot(self, B):
+        raise NotImplementedError('Not done yet...')
 
     ####################################################################################################################
     # String representations
@@ -159,6 +220,6 @@ cdef class ConjugateTransposedSparseMatrix_INT64_t_COMPLEX128_t:
         """
         s = self._matrix_description_before_printing()
         s += '\n'
-        s += MakeMatrixString(self)
+        s += MakeMatrixLikeString(self)
 
         return s

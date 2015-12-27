@@ -20,10 +20,10 @@ cdef bint update_ll_mat_item_add_INT64_t_FLOAT32_t(LLSparseMatrix_INT64_t_FLOAT3
     cdef:
         INT64_t k, new_elem, col, last
 
-    if A.__is_symmetric and i < j:
+    if A.__store_symmetric and i < j:
         raise IndexError("Write operation to upper triangle of symmetric matrix not allowed")
 
-    if not A.__store_zeros and x == 0.0:
+    if not A.__store_zero and x == 0.0:
         return True
 
     # Find element to be updated
@@ -40,7 +40,7 @@ cdef bint update_ll_mat_item_add_INT64_t_FLOAT32_t(LLSparseMatrix_INT64_t_FLOAT3
         # element already exists: compute updated value
         x += A.val[k]
 
-        if A.__store_zeros and x == 0.0:
+        if A.__store_zero and x == 0.0:
             #  the updated element is zero and must be removed
 
             # relink row i

@@ -7,7 +7,7 @@ Condensed Sparse Row (CSR) Format Matrices.
 from __future__ import print_function
 
 from cysparse.sparse.s_mat cimport unexposed_value
-from cysparse.cysparse_types.cysparse_numpy_types import *
+from cysparse.common_types.cysparse_numpy_types import *
 
 from cysparse.sparse.s_mat_matrices.s_mat_INT32_t_COMPLEX64_t cimport ImmutableSparseMatrix_INT32_t_COMPLEX64_t, MutableSparseMatrix_INT32_t_COMPLEX64_t
 from cysparse.sparse.ll_mat_matrices.ll_mat_INT32_t_COMPLEX64_t cimport LLSparseMatrix_INT32_t_COMPLEX64_t
@@ -61,6 +61,7 @@ cdef extern from "complex.h":
 
 include "csr_mat_kernel/csr_mat_multiplication_by_numpy_vector_kernel_INT32_t_COMPLEX64_t.pxi"
 include "csr_mat_helpers/csr_mat_multiplication_INT32_t_COMPLEX64_t.pxi"
+include "csr_mat_helpers/csr_mat_is_symmetric_INT32_t_COMPLEX64_t.pxi"
 
 
 cdef extern from "Python.h":
@@ -82,12 +83,23 @@ cdef class CSRSparseMatrix_INT32_t_COMPLEX64_t(ImmutableSparseMatrix_INT32_t_COM
     ####################################################################################################################
     def __cinit__(self, **kwargs):
 
-        self.__type = "CSRSparseMatrix"
-        self.__type_name = "CSRSparseMatrix %s" % self.__index_and_type
+        self.__base_type_str = "CSRSparseMatrix"
+        self.__full_type_str = "CSRSparseMatrix %s" % self.__index_and_type
 
         self.__col_indices_sorted_test_done = False
         self.__col_indices_sorted = False
         self.__first_row_not_ordered = -1
+
+    
+    @property
+    def is_symmetric(self):
+        if self.__store_symmetric:
+            return True
+
+        if self.__nrow != self.__ncol:
+            return False
+
+        return is_symmetric_INT32_t_COMPLEX64_t(self)
 
     def __dealloc__(self):
         PyMem_Free(self.val)
@@ -116,7 +128,7 @@ cdef class CSRSparseMatrix_INT32_t_COMPLEX64_t(ImmutableSparseMatrix_INT32_t_COM
 
         nnz = self.nnz
 
-        self_copy = CSRSparseMatrix_INT32_t_COMPLEX64_t(control_object=unexposed_value, nrow=self.__nrow, ncol=self.__ncol, store_zeros=self.__store_zeros, is_symmetric=self.__is_symmetric)
+        self_copy = CSRSparseMatrix_INT32_t_COMPLEX64_t(control_object=unexposed_value, nrow=self.__nrow, ncol=self.__ncol, store_zero=self.__store_zero, store_symmetric=self.__store_symmetric)
 
         val = <COMPLEX64_t *> PyMem_Malloc(nnz * sizeof(COMPLEX64_t))
         if not val:
@@ -146,6 +158,28 @@ cdef class CSRSparseMatrix_INT32_t_COMPLEX64_t(ImmutableSparseMatrix_INT32_t_COM
         self_copy.__first_row_not_ordered = self.__first_row_not_ordered
 
         return self_copy
+
+    def memory_real_in_bytes(self):
+        """
+        Return the real amount of memory used internally for the matrix.
+
+        Returns:
+            The exact number of bytes used to store the matrix (but not the object in itself, only the internal memory
+            needed to store the matrix).
+
+        Note:
+            You can have the same memory in bits by calling ``memory_real_in_bits()``.
+        """
+        cdef INT64_t total_memory = 0
+
+        # col
+        total_memory += self.__nnz * sizeof(INT32_t)
+        # ind
+        total_memory += (self.__nrow + 1) * sizeof(INT32_t)
+        # val
+        total_memory += self.__nnz * sizeof(COMPLEX64_t)
+
+        return total_memory
 
     ####################################################################################################################
     # Column indices ordering
@@ -260,7 +294,7 @@ cdef class CSRSparseMatrix_INT32_t_COMPLEX64_t(ImmutableSparseMatrix_INT32_t_COM
 
         # TODO: TEST!!!
         # code duplicated for optimization
-        if self.__is_symmetric:
+        if self.__store_symmetric:
             if i < j:
                 real_i = j
                 real_j = i
@@ -424,7 +458,7 @@ cdef class CSRSparseMatrix_INT32_t_COMPLEX64_t(ImmutableSparseMatrix_INT32_t_COM
 
         return diag
 
-    def tril(self, int k):
+    def tril(self, int k = 0):
         """
         Return the lower triangular part of the matrix.
 
@@ -496,11 +530,11 @@ cdef class CSRSparseMatrix_INT32_t_COMPLEX64_t(ImmutableSparseMatrix_INT32_t_COM
                                                   ind,
                                                   col,
                                                   val,
-                                                  is_symmetric=False,
-                                                  store_zeros=self.__store_zeros,
+                                                  store_symmetric=False,
+                                                  store_zero=self.__store_zero,
                                                   col_indices_are_sorted=True)
 
-    def triu(self, int k):
+    def triu(self, int k = 0):
         """
         Return the upper triangular part of the matrix.
 
@@ -549,7 +583,7 @@ cdef class CSRSparseMatrix_INT32_t_COMPLEX64_t(ImmutableSparseMatrix_INT32_t_COM
         cdef INT32_t * csc_row
         cdef COMPLEX64_t  * csc_val
 
-        if self.__is_symmetric:
+        if self.__store_symmetric:
             # Special (and annoying) case: we first create a CSC and then translate it to CSR
             csc_ind = <INT32_t *> PyMem_Malloc((self.__ncol + 1) * sizeof(INT32_t))
             if not csc_ind:
@@ -630,8 +664,8 @@ cdef class CSRSparseMatrix_INT32_t_COMPLEX64_t(ImmutableSparseMatrix_INT32_t_COM
                                                   ind,
                                                   col,
                                                   val,
-                                                  is_symmetric=False,
-                                                  store_zeros=self.__store_zeros,
+                                                  store_symmetric=False,
+                                                  store_zero=self.__store_zero,
                                                   col_indices_are_sorted=True)
 
     def to_csc(self):
@@ -666,8 +700,8 @@ cdef class CSRSparseMatrix_INT32_t_COMPLEX64_t(ImmutableSparseMatrix_INT32_t_COM
                                                   ind,
                                                   row,
                                                   val,
-                                                  is_symmetric=self.is_symmetric,
-                                                  store_zeros=self.store_zeros,
+                                                  store_symmetric=self.store_symmetric,
+                                                  store_zero=self.store_zero,
                                                   row_indices_are_sorted=True)
 
 
@@ -686,7 +720,7 @@ cdef class CSRSparseMatrix_INT32_t_COMPLEX64_t(ImmutableSparseMatrix_INT32_t_COM
         np_ndarray = np.zeros((self.__nrow, self.__ncol), dtype=np.complex64, order='C')
         np_memview = np_ndarray
 
-        if not self.__is_symmetric:
+        if not self.__store_symmetric:
             for i from 0 <= i < self.__nrow:
                 for k from self.ind[i] <= k < self.ind[i+1]:
                     np_memview[i, self.col[k]] = self.val[k]
@@ -723,35 +757,32 @@ cdef class CSRSparseMatrix_INT32_t_COMPLEX64_t(ImmutableSparseMatrix_INT32_t_COM
         Return :math:`A^h * b`.
         """
         assert are_mixed_types_compatible(COMPLEX64_T, b.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(COMPLEX64_T)
+
         return multiply_conjugate_transposed_csr_mat_with_numpy_vector_INT32_t_COMPLEX64_t(self, b)
+
 
     def matvec_conj(self, b):
         """
         Return :math:`\textrm{conj}(A) * b`.
         """
         assert are_mixed_types_compatible(COMPLEX64_T, b.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(COMPLEX64_T)
+
         return multiply_conjugated_csr_mat_with_numpy_vector_INT32_t_COMPLEX64_t(self, b)
 
 
     def matdot(self, B):
-        raise NotImplementedError("Multiplication with this kind of object not allowed")
+        raise NotImplementedError("matdot not implemented for CSR matrices")
 
     def matdot_transp(self, B):
-        raise NotImplementedError("Multiplication with this kind of object not allowed")
+        raise NotImplementedError("matdot_transp not implemented for CSR matrices")
 
-    def __mul__(self, other):
+    def __mul__(self, B):
 
-        # test if implemented
-        if isinstance(other, (MutableSparseMatrix_INT32_t_COMPLEX64_t, ImmutableSparseMatrix_INT32_t_COMPLEX64_t)):
-            pass
-        else:
-            raise NotImplemented("Multiplication not (yet) allowed")
+        if cnp.PyArray_Check(B) and B.ndim == 1:
+            return self.matvec(B)
 
-        # CASES
-        if isinstance(other, CSCSparseMatrix_INT32_t_COMPLEX64_t):
-            return multiply_csr_mat_by_csc_mat_INT32_t_COMPLEX64_t(self, other)
-        else:
-            raise NotImplemented("Multiplication not (yet) allowed")
+        return self.matdot(B)
+
 
     ####################################################################################################################
     # String representations
@@ -792,59 +823,7 @@ cdef class CSRSparseMatrix_INT32_t_COMPLEX64_t(ImmutableSparseMatrix_INT32_t_COM
     #    s = "CSRSparseMatrix of size %d by %d with %d non zero values" % (self.nrow, self.ncol, self.nnz)
     #    return s
 
-    def print_to(self, OUT, width=9, print_big_matrices=False, transposed=False):
-        """
-        Print content of matrix to output stream.
 
-        Args:
-            OUT: Output stream that print (Python3) can print to.
-        """
-        # EXPLICIT TYPE TESTS
-        # TODO: adapt to any numbers... and allow for additional parameters to control the output
-        cdef INT32_t i, k, first = 1;
-
-        cdef COMPLEX64_t *mat
-        cdef INT32_t j
-        cdef COMPLEX64_t val
-
-        print(self._matrix_description_before_printing(), file=OUT)
-        #print('CSRSparseMatrix ([%d,%d]):' % (self.nrow, self.ncol), file=OUT)
-
-        if not self.nnz:
-            return
-
-        if self.nrow <= CSR_MAT_PPRINT_COL_THRESH and self.ncol <= CSR_MAT_PPRINT_ROW_THRESH:
-            # create linear vector presentation
-            # TODO: put in a method of its own
-            mat = <COMPLEX64_t *> PyMem_Malloc(self.nrow * self.ncol * sizeof(COMPLEX64_t))
-
-            if not mat:
-                raise MemoryError()
-
-            # creation of temp matrix
-            for i from 0 <= i < self.nrow:
-                for j from 0 <= j < self.ncol:
-
-                    mat[i* self.ncol + j] = 0.0 + 0.0j
-
-
-                k = self.ind[i]
-                while k < self.ind[i+1]:
-                    mat[(i*self.ncol)+self.col[k]] = self.val[k]
-                    k += 1
-
-            for i from 0 <= i < self.nrow:
-                for j from 0 <= j < self.ncol:
-                    val = mat[(i*self.ncol)+j]
-
-                    print('{:{width}.6f} '.format(val, width=width), end='', file=OUT)
-
-                print(file=OUT)
-
-            PyMem_Free(mat)
-
-        else:
-            print('Matrix too big to print out', file=OUT)
 
     ####################################################################################################################
     # Internal arrays
@@ -927,8 +906,8 @@ cdef MakeCSRSparseMatrix_INT32_t_COMPLEX64_t(INT32_t nrow,
                                         INT32_t * ind,
                                         INT32_t * col,
                                         COMPLEX64_t * val,
-                                        bint is_symmetric,
-                                        bint store_zeros,
+                                        bint store_symmetric,
+                                        bint store_zero,
                                         bint col_indices_are_sorted=False):
     """
     Construct a CSRSparseMatrix object.
@@ -940,13 +919,13 @@ cdef MakeCSRSparseMatrix_INT32_t_COMPLEX64_t(INT32_t nrow,
         ind (INT32_t *): C-array with column indices pointers.
         col  (INT32_t *): C-array with column indices.
         val  (COMPLEX64_t *): C-array with values.
-        is_symmetric (boolean): Is matrix symmetrix or not?
-        store_zeros (boolean): Do we store zeros or not?
+        store_symmetric (boolean): Is matrix symmetrix or not?
+        store_zero (boolean): Do we store zeros or not?
         col_indices_are_sorted (boolean): Are the column indices sorted or not?
     """
     cdef CSRSparseMatrix_INT32_t_COMPLEX64_t csr_mat
 
-    csr_mat = CSRSparseMatrix_INT32_t_COMPLEX64_t(control_object=unexposed_value, nrow=nrow, ncol=ncol, nnz=nnz, is_symmetric=is_symmetric, store_zeros=store_zeros)
+    csr_mat = CSRSparseMatrix_INT32_t_COMPLEX64_t(control_object=unexposed_value, nrow=nrow, ncol=ncol, nnz=nnz, store_symmetric=store_symmetric, store_zero=store_zero)
 
     csr_mat.val = val
     csr_mat.ind = ind

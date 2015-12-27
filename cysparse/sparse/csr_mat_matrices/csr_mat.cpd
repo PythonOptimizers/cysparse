@@ -1,4 +1,4 @@
-from cysparse.cysparse_types.cysparse_types cimport *
+from cysparse.common_types.cysparse_types cimport *
 
 from cysparse.sparse.s_mat_matrices.s_mat_@index@_@type@ cimport ImmutableSparseMatrix_@index@_@type@
 from cysparse.sparse.ll_mat_matrices.ll_mat_@index@_@type@ cimport LLSparseMatrix_@index@_@type@
@@ -42,8 +42,8 @@ cdef MakeCSRSparseMatrix_@index@_@type@(@index@ nrow,
                                         @index@ * ind,
                                         @index@ * col,
                                         @type@ * val,
-                                        bint is_symmetric,
-                                        bint store_zeros,
+                                        bint store_symmetric,
+                                        bint store_zero,
                                         bint col_indices_are_sorted=?)
 
 cdef LLSparseMatrix_@index@_@type@ multiply_csr_mat_by_csc_mat_@index@_@type@(CSRSparseMatrix_@index@_@type@ A, CSCSparseMatrix_@index@_@type@ B)

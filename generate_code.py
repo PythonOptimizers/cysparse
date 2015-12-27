@@ -12,14 +12,12 @@
 from cygenja.generator import Generator
 from jinja2 import Environment, FileSystemLoader
 
-from cysparse.utils.log_utils import make_logger
-
-import ConfigParser
+import configparser
 import argparse
 import os
 import sys
 import shutil
-
+import logging
 
 #####################################################
 # PARSER
@@ -42,25 +40,73 @@ def make_parser():
 
     return parser
 
+###################################################################s####################################################
+# LOGGING
+########################################################################################################################
+LOG_LEVELS = {
+        'DEBUG': logging.DEBUG,
+        'INFO': logging.INFO,
+        'WARNING': logging.WARNING,
+        'ERROR': logging.ERROR,
+        'CRITICAL': logging.CRITICAL
+    }
+
+
+def make_logger(cysparse_config):
+    # create logger
+    logger_name = cysparse_config.get('CODE_GENERATION', 'log_name')
+    if logger_name == '':
+        logger_name = 'cysparse_generate_code'
+
+    logger = logging.getLogger(logger_name)
+
+    # levels
+    log_level = LOG_LEVELS[cysparse_config.get('CODE_GENERATION', 'log_level')]
+    console_log_level = LOG_LEVELS[cysparse_config.get('CODE_GENERATION', 'console_log_level')]
+    file_log_level = LOG_LEVELS[cysparse_config.get('CODE_GENERATION', 'file_log_level')]
+
+    logger.setLevel(log_level)
+
+    # create console handler and set logging level
+    ch = logging.StreamHandler()
+    ch.setLevel(console_log_level)
+
+    # create file handler and set logging level
+    log_file_name = logger_name + '.log'
+    fh = logging.FileHandler(log_file_name)
+    fh.setLevel(file_log_level)
+
+    # create formatter
+    formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+
+    # add formatter to ch and fh
+    ch.setFormatter(formatter)
+    fh.setFormatter(formatter)
+
+    # add ch and fh to logger
+    logger.addHandler(ch)
+    logger.addHandler(fh)
+
+    return logger
 
 #######################################
 # CONDITIONAL CODE GENERATION
 #######################################
 # type of platform? 32bits or 64bits?
 is_64bits = sys.maxsize > 2**32
-default_index_type_str = '32bits'
-if is_64bits:
-    default_index_type_str = '64bits'
 
 # read cysparse.cfg
-cysparse_config = ConfigParser.SafeConfigParser()
+cysparse_config = configparser.SafeConfigParser()
 cysparse_config.read('cysparse.cfg')
 
 
 # index type for LLSparseMatrix
 DEFAULT_INDEX_TYPE = 'INT32_T'
+DEFAULT_ELEMENT_TYPE = 'FLOAT32_T'
 if is_64bits:
     DEFAULT_INDEX_TYPE = 'INT64_T'
+    DEFAULT_ELEMENT_TYPE = 'FLOAT64_T'
+
 
 if cysparse_config.get('CODE_GENERATION', 'DEFAULT_INDEX_TYPE') == '32bits':
     DEFAULT_INDEX_TYPE = 'INT32_T'
@@ -70,20 +116,34 @@ else:
     # don't do anything: use platform's default
     pass
 
+if cysparse_config.get('CODE_GENERATION', 'DEFAULT_ELEMENT_TYPE') == '32bits':
+    DEFAULT_ELEMENT_TYPE = 'FLOAT32_T'
+elif cysparse_config.get('CODE_GENERATION', 'DEFAULT_ELEMENT_TYPE') == '64bits':
+    DEFAULT_ELEMENT_TYPE = 'FLOAT64_T'
+else:
+    # don't do anything: use platform's default
+    pass
+
 #####################################################
 # COMMON STUFF
 #####################################################
-# TODO: grab this from cysparse_types.pxd or at least from a one common file
-BASIC_TYPES = ['INT32_t', 'UINT32_t', 'INT64_t', 'UINT64_t', 'FLOAT32_t', 'FLOAT64_t', 'FLOAT128_t', 'COMPLEX64_t', 'COMPLEX128_t', 'COMPLEX256_t']
-ELEMENT_TYPES = ['INT32_t', 'INT64_t', 'FLOAT32_t', 'FLOAT64_t', 'FLOAT128_t', 'COMPLEX64_t', 'COMPLEX128_t', 'COMPLEX256_t']
+
+# ======================================================================================================================
+# As of 22nd of December 2015, we no longer support COMPLEX256_T as it is too problematic to work with in Cython.
+#
+# ======================================================================================================================
+
+# TODO: grab this from common_types.pxd or at least from a one common file
+BASIC_TYPES = ['INT32_t', 'UINT32_t', 'INT64_t', 'UINT64_t', 'FLOAT32_t', 'FLOAT64_t', 'FLOAT128_t', 'COMPLEX64_t', 'COMPLEX128_t'] #, 'COMPLEX256_t']
+ELEMENT_TYPES = ['INT32_t', 'INT64_t', 'FLOAT32_t', 'FLOAT64_t', 'FLOAT128_t', 'COMPLEX64_t', 'COMPLEX128_t'] #, 'COMPLEX256_t']
 INDEX_TYPES = ['INT32_t', 'INT64_t']
 INTEGER_ELEMENT_TYPES = ['INT32_t', 'INT64_t']
 REAL_ELEMENT_TYPES = ['FLOAT32_t', 'FLOAT64_t', 'FLOAT128_t']
-COMPLEX_ELEMENT_TYPES = ['COMPLEX64_t', 'COMPLEX128_t', 'COMPLEX256_t']
+COMPLEX_ELEMENT_TYPES = ['COMPLEX64_t', 'COMPLEX128_t'] #, 'COMPLEX256_t']
 
 # Matrix market types
 MM_INDEX_TYPES = ['INT32_t', 'INT64_t']
-MM_ELEMENT_TYPES = ['INT64_t', 'FLOAT64_t', 'COMPLEX128_t']
+MM_ELEMENT_TYPES = ['INT64_t', 'FLOAT64_t'] #, 'COMPLEX128_t']
 
 # when coding
 #ELEMENT_TYPES = ['FLOAT64_t']
@@ -95,12 +155,33 @@ GENERAL_CONTEXT = {
                     'type_list': ELEMENT_TYPES,
                     'index_list' : INDEX_TYPES,
                     'default_index_type' : DEFAULT_INDEX_TYPE,
+                    'default_element_type' : DEFAULT_ELEMENT_TYPE,
                     'integer_list' : INTEGER_ELEMENT_TYPES,
                     'real_list' : REAL_ELEMENT_TYPES,
                     'complex_list' : COMPLEX_ELEMENT_TYPES,
                     'mm_index_list' : MM_INDEX_TYPES,
                     'mm_type_list' : MM_ELEMENT_TYPES,
                   }
+
+# For tests
+MATRIX_CLASSES = {'LLSparseMatrix' : 'll_mat_matrices.ll_mat',
+                  'CSCSparseMatrix' : 'csc_mat_matrices.csc_mat',
+                  'CSRSparseMatrix' : 'csr_mat_matrices.csr_mat'}
+MATRIX_VIEW_CLASSES = {'LLSparseMatrixView' : 'll_mat_views.ll_mat_views'}
+MATRIX_PROXY_CLASSES = {'TransposedSparseMatrix' : 'sparse_proxies.t_mat',
+                        'ConjugatedSparseMatrix' : 'sparse_proxies.complex_generic.conj_mat',
+                        'ConjugateTransposedSparseMatrix' : 'sparse_proxies.complex_generic.h_mat'}
+
+
+MATRIX_LIKE_CLASSES = {}
+MATRIX_LIKE_CLASSES.update(MATRIX_CLASSES)
+MATRIX_LIKE_CLASSES.update(MATRIX_PROXY_CLASSES)
+
+ALL_SPARSE_OBJECT = {}
+ALL_SPARSE_OBJECT.update(MATRIX_CLASSES)
+ALL_SPARSE_OBJECT.update(MATRIX_PROXY_CLASSES)
+ALL_SPARSE_OBJECT.update(MATRIX_VIEW_CLASSES)
+
 
 
 #####################################################
@@ -169,6 +250,132 @@ def generate_MM_following_index_and_element():
             GENERAL_CONTEXT['type'] = type
             yield '_%s_%s' % (index, type), GENERAL_CONTEXT
 
+
+#####################
+# Tests
+#
+# Matrices: LLSparseMatrix, CSCSparseMatrix, CSRSparseMatrix
+# Matrix-likes: Matrices + Proxies
+# Sparse-likes: Matrix-likes + Views
+#
+#####################
+def generate_following_matrix_class_and_index_and_type():
+    """
+    Generate files following index, element and class types.
+
+    This generator is for tests only.
+
+    Warning:
+        Class :class:`TransposedSparseMatrix` is not generated because of its special status.
+
+    """
+    for klass, directory in MATRIX_CLASSES.items():
+        GENERAL_CONTEXT['class'] = klass
+        GENERAL_CONTEXT['directory'] = directory
+        for index in INDEX_TYPES:
+            GENERAL_CONTEXT['index'] = index
+            for type in ELEMENT_TYPES:
+                GENERAL_CONTEXT['type'] = type
+                yield '_%s_%s_%s' % (klass, index, type), GENERAL_CONTEXT
+
+
+def generate_following_matrix_view_class_and_index_and_type():
+    """
+    Generate files following index, element and class types.
+
+    This generator is for tests only.
+
+    """
+    for klass, directory in MATRIX_VIEW_CLASSES.items():
+        GENERAL_CONTEXT['class'] = klass
+        GENERAL_CONTEXT['directory'] = directory
+        for index in INDEX_TYPES:
+            GENERAL_CONTEXT['index'] = index
+            for type in ELEMENT_TYPES:
+                GENERAL_CONTEXT['type'] = type
+                yield '_%s_%s_%s' % (klass, index, type), GENERAL_CONTEXT
+
+
+def generate_following_matrix_proxy_class_and_index_and_type():
+    """
+    Generate files following index, element and class types.
+
+    This generator is for tests only.
+
+    Warning:
+        Class :class:`TransposedSparseMatrix` is not generated because of its special status.
+
+    Note:
+        We only take proxies for **complex** matrices!
+
+    """
+    for klass, directory in MATRIX_PROXY_CLASSES.items():
+        if klass == 'TransposedSparseMatrix':
+            continue
+        GENERAL_CONTEXT['class'] = klass
+        GENERAL_CONTEXT['directory'] = directory
+        for index in INDEX_TYPES:
+            GENERAL_CONTEXT['index'] = index
+            for type in ELEMENT_TYPES:
+                GENERAL_CONTEXT['type'] = type
+                yield '_%s_%s_%s' % (klass, index, type), GENERAL_CONTEXT
+
+
+def generate_following_matrix_proxy_transposed_class_and_index_and_type():
+    """
+    Generate files following index, element and class types.
+
+    This generator is for tests only.
+
+    Warning:
+        Only the class :class:`TransposedSparseMatrix` is generated.
+
+    """
+    for klass, directory in MATRIX_PROXY_CLASSES.items():
+        if klass != 'TransposedSparseMatrix':
+            continue
+        GENERAL_CONTEXT['class'] = klass
+        GENERAL_CONTEXT['directory'] = directory
+        for index in INDEX_TYPES:
+            GENERAL_CONTEXT['index'] = index
+            for type in ELEMENT_TYPES:
+                GENERAL_CONTEXT['type'] = type
+                yield '_%s_%s_%s' % (klass, index, type), GENERAL_CONTEXT
+
+
+def generate_following_matrix_like_class_and_index_and_type():
+    """
+    Generate files following index, element and class types.
+
+    This generator is for tests only.
+
+    """
+    for klass, directory in MATRIX_LIKE_CLASSES.items():
+        GENERAL_CONTEXT['class'] = klass
+        GENERAL_CONTEXT['directory'] = directory
+        for index in INDEX_TYPES:
+            GENERAL_CONTEXT['index'] = index
+            for type in ELEMENT_TYPES:
+                GENERAL_CONTEXT['type'] = type
+                yield '_%s_%s_%s' % (klass, index, type), GENERAL_CONTEXT
+
+
+def generate_following_all_sparse_like_objects_class_and_index_and_type():
+    """
+    Generate files following index, element and class types.
+
+    This generator is for tests only.
+
+    """
+    for klass, directory in ALL_SPARSE_OBJECT.items():
+        GENERAL_CONTEXT['class'] = klass
+        GENERAL_CONTEXT['directory'] = directory
+        for index in INDEX_TYPES:
+            GENERAL_CONTEXT['index'] = index
+            for type in ELEMENT_TYPES:
+                GENERAL_CONTEXT['type'] = type
+                yield '_%s_%s_%s' % (klass, index, type), GENERAL_CONTEXT
+
 ###############################################################################
 # MAIN
 ###############################################################################
@@ -209,7 +416,7 @@ if __name__ == "__main__":
     ########## Setup ############
     cygenja_engine.register_action('config', '*.*', single_generation)
     ########## TYPES ############
-    cygenja_engine.register_action('cysparse/cysparse_types', '*.*', single_generation)
+    cygenja_engine.register_action('cysparse/common_types', '*.*', single_generation)
     ########## Sparse ###########
     # CSC
     cygenja_engine.register_action('cysparse/sparse/csc_mat_matrices', '*.*', generate_following_index_and_element)
@@ -240,6 +447,28 @@ if __name__ == "__main__":
     cygenja_engine.register_action('cysparse/sparse/sparse_utils/generic', 'sort_indices.*', generate_following_only_index)
     # Sparse
     cygenja_engine.register_action('cysparse/sparse', '*.*', single_generation)
+
+    # Tests
+    #### SPARSE ####
+    # --- common attributes ---
+    cygenja_engine.register_action('tests/cysparse_/sparse/common_attributes', 'test_common_attributes_matrices_likes.*', generate_following_all_sparse_like_objects_class_and_index_and_type)
+    cygenja_engine.register_action('tests/cysparse_/sparse/common_attributes', 'test_explicit_is_symmetric_matrices.*', generate_following_matrix_class_and_index_and_type)
+    # --- common operations ---
+    # object creation
+    cygenja_engine.register_action('tests/cysparse_/sparse/common_operations/object_creation', 'test_creation*.cpy', generate_following_all_sparse_like_objects_class_and_index_and_type)
+    # multiplication with a NumPy vector
+    cygenja_engine.register_action('tests/cysparse_/sparse/common_operations/multiplication_with_numpy_vector', 'test_common_numpy_vector_multiplication.cpy', generate_following_matrix_like_class_and_index_and_type)
+    cygenja_engine.register_action('tests/cysparse_/sparse/common_operations/multiplication_with_numpy_vector', 'test_global_matvec_functions.cpy', generate_following_matrix_class_and_index_and_type)
+    # diagonals
+    cygenja_engine.register_action('tests/cysparse_/sparse/common_operations/diagonals', 'test_diag.cpy', generate_following_matrix_class_and_index_and_type)
+    # triangular
+    cygenja_engine.register_action('tests/cysparse_/sparse/common_operations/triangular', 'test_triangular.cpy', generate_following_matrix_class_and_index_and_type)
+    # --- memory ---
+    cygenja_engine.register_action('tests/cysparse_/sparse/memory', 'test_copy.cpy', generate_following_all_sparse_like_objects_class_and_index_and_type)
+    cygenja_engine.register_action('tests/cysparse_/sparse/memory', 'test_to_ndarray.cpy', generate_following_matrix_class_and_index_and_type)
+    cygenja_engine.register_action('tests/cysparse_/sparse/memory', 'test_internalmemory.cpy', generate_following_matrix_class_and_index_and_type)
+    # --- LLSparseMatrix ---
+    cygenja_engine.register_action('tests/cysparse_/sparse/ll_mat', 'test_llsparsematrixfactories.cpy', generate_following_index_and_element)
 
     ####################################################################################################################
     # Generation

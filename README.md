@@ -2,9 +2,10 @@
 
 Fast sparse matrix library for Python/Cython.
 
-:white_check_mark: THIS VERSION SHOULD WORK BUT MORE TESTS ARE NEEDED!  :white_check_mark:
+:warning: `COMPLEX256_T` is **no** longer supported :warning:
 
-:bangbang: This version is :snowflake: FROZEN :snowflake: :bangbang:
+:cyclone: :cyclone: :cyclone: THIS VERSION IS BEING COMPLETELY REWRITTEN: :weary: YOU :weary: SHALL :no_entry: NOT :no_entry: USE IT! :cyclone: :cyclone: :cyclone:
+
 
 I'm working on branch `feature/decoupling` which contains the :new: version of `CySparse`.
  
@@ -54,7 +55,15 @@ For the Python version:
 If you intend to generate the documention:
 
 - Sphinx;
-- sphinx_bootstrap_theme
+- sphinx_bootstrap_theme;
+
+To run the tests:
+
+- nose;
+
+to run the performance tests:
+
+[TODO]
 
 For the Cython version, include everything needed for Python and add:
 
@@ -75,6 +84,19 @@ For the Cython version, include everything needed for Python and add:
 
 [TODO]
 
+## Run tests
+
+Invoke:
+
+```bash
+python run_tests.py
+```
+
+Try the ``-h`` switch to see what options are available. Note that you need to install the library to run the tests.
+
+## Run performance tests
+
+[TODO]
 
 ## Want to follow the implementation of CySparse?
 
@@ -82,6 +104,13 @@ See [Wiki](https://github.com/Funartech/cysparse/wiki) for details!
 
 ## Release history
 
+- Version 0.3.0 released on Dec XX, 2015
+
+  This is a major update.
+  New documentation, split between users and developers. Pdf is now enabled.
+  Completely new API.
+  Thousands (10499) of unit tests added.
+  
 - Version 0.2.2 released on Dec 14, 2015
 
   Clean up.

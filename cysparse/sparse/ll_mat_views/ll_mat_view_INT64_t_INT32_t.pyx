@@ -3,7 +3,7 @@ Lightweight object to view a :class:`LLSparseMatrix_INT64_t_INT32_t`.
 
 
 """
-from cysparse.cysparse_types.cysparse_types cimport *
+from cysparse.common_types.cysparse_types cimport *
 
 # forward declaration
 cdef class LLSparseMatrixView_INT64_t_INT32_t
@@ -25,6 +25,26 @@ cdef extern from "Python.h":
     # *** Types ***
     int PyInt_Check(PyObject *o)
 
+cpdef bint PyLLSparseMatrixView_Check(object obj):
+    """
+    Test if ``obj`` is a ``LLSparseMatrixView`` or not.
+
+    Args:
+        obj: Whatever.
+
+    Return:
+        ``True`` if ``obj`` is a ``LLSparseMatrixView`` object or inherited from it.
+    """
+    # warning: this works with inherited objects as long as the convention to name type ""LLSparseMatrixView"" holds...
+    is_ll_mat_view = False
+    try:
+        if obj.type == 'LLSparseMatrixView':
+            is_ll_mat_view = True
+    except:
+        pass
+
+    return is_ll_mat_view
+
 cdef class LLSparseMatrixView_INT64_t_INT32_t:
     ####################################################################################################################
     # Init/Free/Memory
@@ -34,8 +54,8 @@ cdef class LLSparseMatrixView_INT64_t_INT32_t:
         self.__nrow = nrow  # number of rows of the view
         self.__ncol = ncol  # number of columns of the view
 
-        self.__type = "LLSparseMatrixView"
-        self.__type_name = "LLSparseMatrixView [INT64_t, INT32_t]"
+        self.__base_type_str = "LLSparseMatrixView"
+        self.__full_type_str = "LLSparseMatrixView [INT64_t, INT32_t]"
 
         self.__is_empty = True
 
@@ -74,6 +94,16 @@ cdef class LLSparseMatrixView_INT64_t_INT32_t:
 
     
     @property
+    def nargin(self):
+        return self.__ncol
+
+    
+    @property
+    def nargout(self):
+        return self.__nrow
+
+    
+    @property
     def dtype(self):
         return self.A.cp_type.dtype
 
@@ -84,8 +114,8 @@ cdef class LLSparseMatrixView_INT64_t_INT32_t:
 
     
     @property
-    def is_symmetric(self):
-        return self.A.__is_symmetric
+    def store_symmetric(self):
+        return self.A.__store_symmetric
 
     
     @property
@@ -94,8 +124,8 @@ cdef class LLSparseMatrixView_INT64_t_INT32_t:
 
     
     @property
-    def store_zeros(self):
-        return self.A.__store_zeros
+    def store_zero(self):
+        return self.A.__store_zero
 
     
     @property
@@ -104,13 +134,35 @@ cdef class LLSparseMatrixView_INT64_t_INT32_t:
 
     
     @property
-    def type(self):
-        return self.__type
+    def is_symmetric(self):
+        """
+        Return if **view** is symmetric.
+
+        Warning:
+            This proprety is **very** costly: internally, we construct a corresponding ``LLSparseMatrix`` and test its
+            symmetry.
+        """
+        return self.matrix_copy().is_symmetric
 
     
     @property
-    def type_name(self):
-        return self.__type_name
+    def base_type_str(self):
+        return self.__base_type_str
+
+    
+    @property
+    def full_type_str(self):
+        return self.__full_type_str
+
+    
+    @property
+    def itype_str(self):
+        return self.A.itype_str
+
+    
+    @property
+    def dtype_str(self):
+        return self.A.dtype_str
 
     def get_matrix(self):
         """
@@ -171,6 +223,9 @@ cdef class LLSparseMatrixView_INT64_t_INT32_t:
             IndexError: when index out of bound.
 
         """
+        print self.__nrow
+        print self.__ncol
+
         if not 0 <= i < self.__nrow or not 0 <= j < self.__ncol:
             raise IndexError("Index out of bounds")
 
@@ -220,10 +275,10 @@ cdef class LLSparseMatrixView_INT64_t_INT32_t:
 
         Note:
             Because we lost sight of zero elements added in the viewed :class:`LLSparseMatrix_INT64_t_INT32_t`,
-            the returned matrix has its ``store_zeros`` attribute set
+            the returned matrix has its ``store_zero`` attribute set
             to ``False`` and no zero is copied.
 
-            Because we don't know what submatrix is taken, the returned matrix **cannot** by symmetric.
+            Because we don't know what submatrix is taken, the returned matrix **cannot** use symmetric storage.
 
         """
         # This is completely arbitrary
@@ -233,8 +288,8 @@ cdef class LLSparseMatrixView_INT64_t_INT32_t:
                                                                                   nrow=self.__nrow,
                                                                                   ncol=self.__ncol,
                                                                                   size_hint=size_hint,
-                                                                                  store_zeros=False,
-                                                                                  is_symmetric=False)
+                                                                                  store_zero=False,
+                                                                                  store_symmetric=False)
 
         cdef:
             INT64_t i, j

@@ -63,13 +63,13 @@ cdef cnp.ndarray[cnp.npy_float128, ndim=1, mode='c'] multiply_csr_mat_with_numpy
 
     # test if b vector is C-contiguous or not
     if cnp.PyArray_ISCONTIGUOUS(b):
-        if A.__is_symmetric:
+        if A.__store_symmetric:
             pass
             multiply_sym_csr_mat_with_numpy_vector_kernel_INT64_t_FLOAT128_t(A_nrow, b_data, c_data, A.val, A.col, A.ind)
         else:
             multiply_csr_mat_with_numpy_vector_kernel_INT64_t_FLOAT128_t(A_nrow, b_data, c_data, A.val, A.col, A.ind)
     else:
-        if A.__is_symmetric:
+        if A.__store_symmetric:
             multiply_sym_csr_mat_with_strided_numpy_vector_kernel_INT64_t_FLOAT128_t(A.nrow,
                                                                  b_data, b.strides[0] / sd,
                                                                  c_data, c.strides[0] / sd,
@@ -125,13 +125,13 @@ cdef cnp.ndarray[cnp.npy_float128, ndim=1, mode='c'] multiply_transposed_csr_mat
 
     # test if b vector is C-contiguous or not
     if cnp.PyArray_ISCONTIGUOUS(b):
-        if A.__is_symmetric:
+        if A.__store_symmetric:
             multiply_sym_csr_mat_with_numpy_vector_kernel_INT64_t_FLOAT128_t(A_nrow, b_data, c_data, A.val, A.col, A.ind)
         else:
             multiply_tranposed_csr_mat_with_numpy_vector_kernel_INT64_t_FLOAT128_t(A_nrow, A_ncol, b_data, c_data,
          A.val, A.col, A.ind)
     else:
-        if A.__is_symmetric:
+        if A.__store_symmetric:
             multiply_sym_csr_mat_with_strided_numpy_vector_kernel_INT64_t_FLOAT128_t(A.nrow,
                                                                  b_data, b.strides[0] / sd,
                                                                  c_data, c.strides[0] / sd,
@@ -168,15 +168,15 @@ cdef LLSparseMatrix_INT64_t_FLOAT128_t multiply_csr_mat_by_csc_mat_INT64_t_FLOAT
     cdef INT64_t C_nrow = A_nrow
     cdef INT64_t C_ncol = B_ncol
 
-    cdef bint store_zeros = A.store_zeros and B.store_zeros
+    cdef bint store_zero = A.store_zero and B.store_zero
     # TODO: what strategy to implement?
     cdef INT64_t size_hint = A.nnz
 
     # TODO: maybe use MakeLLSparseMatrix and fix circular dependencies...
-    C = LLSparseMatrix_INT64_t_FLOAT128_t(control_object=unexposed_value, nrow=C_nrow, ncol=C_ncol, size_hint=size_hint, store_zeros=store_zeros)
+    C = LLSparseMatrix_INT64_t_FLOAT128_t(control_object=unexposed_value, nrow=C_nrow, ncol=C_ncol, size_hint=size_hint, store_zero=store_zero)
 
     # CASES
-    if not A.__is_symmetric and not B.__is_symmetric:
+    if not A.__store_symmetric and not B.__store_symmetric:
         pass
     else:
         raise NotImplemented("Multiplication with symmetric matrices is not implemented yet")
@@ -188,8 +188,8 @@ cdef LLSparseMatrix_INT64_t_FLOAT128_t multiply_csr_mat_by_csc_mat_INT64_t_FLOAT
         FLOAT128_t sum
 
     # don't keep zeros, no matter what
-    cdef bint old_store_zeros = store_zeros
-    C.__store_zeros = 0
+    cdef bint old_store_zero = store_zero
+    C.__store_zero = 0
 
     for i from 0 <= i < C_nrow:
         for j from 0 <= j < C_ncol:
@@ -202,6 +202,6 @@ cdef LLSparseMatrix_INT64_t_FLOAT128_t multiply_csr_mat_by_csc_mat_INT64_t_FLOAT
 
             C.put(i, j, sum)
 
-    C.__store_zeros = old_store_zeros
+    C.__store_zero = old_store_zero
 
     return C

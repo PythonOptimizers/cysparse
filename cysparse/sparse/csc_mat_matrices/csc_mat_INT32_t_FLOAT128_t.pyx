@@ -5,7 +5,7 @@ Condensed Sparse Column (CSC) Format Matrices.
 """
 from __future__ import print_function
 
-from cysparse.cysparse_types.cysparse_types cimport *
+from cysparse.common_types.cysparse_types cimport *
 
 from cysparse.sparse.s_mat cimport unexposed_value
 
@@ -60,6 +60,7 @@ cdef extern from "complex.h":
 
 include "csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT32_t_FLOAT128_t.pxi"
 include "csc_mat_helpers/csc_mat_multiplication_INT32_t_FLOAT128_t.pxi"
+include "csc_mat_helpers/csc_mat_is_symmetric_INT32_t_FLOAT128_t.pxi"
 
 
 cdef class CSCSparseMatrix_INT32_t_FLOAT128_t(ImmutableSparseMatrix_INT32_t_FLOAT128_t):
@@ -75,12 +76,23 @@ cdef class CSCSparseMatrix_INT32_t_FLOAT128_t(ImmutableSparseMatrix_INT32_t_FLOA
     ####################################################################################################################
     def __cinit__(self,  **kwargs):
 
-        self.__type = "CSCSparseMatrix"
-        self.__type_name = "CSCSparseMatrix %s" % self.__index_and_type
+        self.__base_type_str = "CSCSparseMatrix"
+        self.__full_type_str = "CSCSparseMatrix %s" % self.__index_and_type
 
         self.__row_indices_sorted_test_done = False
         self.__row_indices_sorted = False
         self.__first_col_not_ordered = -1
+
+    
+    @property
+    def is_symmetric(self):
+        if self.__store_symmetric:
+            return True
+
+        if self.__nrow != self.__ncol:
+            return False
+
+        return is_symmetric_INT32_t_FLOAT128_t(self)
 
     def __dealloc__(self):
         PyMem_Free(self.val)
@@ -109,7 +121,7 @@ cdef class CSCSparseMatrix_INT32_t_FLOAT128_t(ImmutableSparseMatrix_INT32_t_FLOA
 
         nnz = self.nnz
 
-        self_copy = CSCSparseMatrix_INT32_t_FLOAT128_t(control_object=unexposed_value, nrow=self.__nrow, ncol=self.__ncol, store_zeros=self.__store_zeros, is_symmetric=self.__is_symmetric)
+        self_copy = CSCSparseMatrix_INT32_t_FLOAT128_t(control_object=unexposed_value, nrow=self.__nrow, ncol=self.__ncol, store_zero=self.__store_zero, store_symmetric=self.__store_symmetric)
 
         val = <FLOAT128_t *> PyMem_Malloc(nnz * sizeof(FLOAT128_t))
         if not val:
@@ -139,6 +151,28 @@ cdef class CSCSparseMatrix_INT32_t_FLOAT128_t(ImmutableSparseMatrix_INT32_t_FLOA
         self_copy.__first_col_not_ordered = self.__first_col_not_ordered
 
         return self_copy
+
+    def memory_real_in_bytes(self):
+        """
+        Return the real amount of memory used internally for the matrix.
+
+        Returns:
+            The exact number of bytes used to store the matrix (but not the object in itself, only the internal memory
+            needed to store the matrix).
+
+        Note:
+            You can have the same memory in bits by calling ``memory_real_in_bits()``.
+        """
+        cdef INT64_t total_memory = 0
+
+        # row
+        total_memory += self.__nnz * sizeof(INT32_t)
+        # ind
+        total_memory += (self.__ncol + 1) * sizeof(INT32_t)
+        # val
+        total_memory += self.__nnz * sizeof(FLOAT128_t)
+
+        return total_memory
 
     ####################################################################################################################
     # Internal tests
@@ -328,7 +362,7 @@ cdef class CSCSparseMatrix_INT32_t_FLOAT128_t(ImmutableSparseMatrix_INT32_t_FLOA
             INT32_t real_j
 
         # code is duplicated for optimization
-        if self.__is_symmetric:
+        if self.__store_symmetric:
             if i < j:
                 real_i = j
                 real_j = i
@@ -487,7 +521,7 @@ cdef class CSCSparseMatrix_INT32_t_FLOAT128_t(ImmutableSparseMatrix_INT32_t_FLOA
 
         return diag
 
-    def tril(self, int k):
+    def tril(self, int k = 0):
         """
         Return the lower triangular part of the matrix.
 
@@ -560,11 +594,11 @@ cdef class CSCSparseMatrix_INT32_t_FLOAT128_t(ImmutableSparseMatrix_INT32_t_FLOA
                                                   ind,
                                                   row,
                                                   val,
-                                                  is_symmetric=False,
-                                                  store_zeros=self.__store_zeros,
+                                                  store_symmetric=False,
+                                                  store_zero=self.__store_zero,
                                                   row_indices_are_sorted=True)
 
-    def triu(self, int k):
+    def triu(self, int k = 0):
         """
         Return the upper triangular part of the matrix.
 
@@ -613,7 +647,7 @@ cdef class CSCSparseMatrix_INT32_t_FLOAT128_t(ImmutableSparseMatrix_INT32_t_FLOA
         cdef INT32_t * csr_col
         cdef FLOAT128_t  * csr_val
 
-        if self.__is_symmetric:
+        if self.__store_symmetric:
             # Special (and annoying) case: we first create a CSR and then translate it to CSC
             csr_ind = <INT32_t *> PyMem_Malloc((self.__nrow + 1) * sizeof(INT32_t))
             if not csr_ind:
@@ -694,8 +728,8 @@ cdef class CSCSparseMatrix_INT32_t_FLOAT128_t(ImmutableSparseMatrix_INT32_t_FLOA
                                                   ind,
                                                   row,
                                                   val,
-                                                  is_symmetric=False,
-                                                  store_zeros=self.__store_zeros,
+                                                  store_symmetric=False,
+                                                  store_zero=self.__store_zero,
                                                   row_indices_are_sorted=True)
 
     def to_csr(self):
@@ -729,8 +763,8 @@ cdef class CSCSparseMatrix_INT32_t_FLOAT128_t(ImmutableSparseMatrix_INT32_t_FLOA
                                                   ind,
                                                   col,
                                                   val,
-                                                  is_symmetric=self.is_symmetric,
-                                                  store_zeros=self.store_zeros,
+                                                  store_symmetric=self.store_symmetric,
+                                                  store_zero=self.store_zero,
                                                   col_indices_are_sorted=True)
 
 
@@ -749,7 +783,7 @@ cdef class CSCSparseMatrix_INT32_t_FLOAT128_t(ImmutableSparseMatrix_INT32_t_FLOA
         np_ndarray = np.zeros((self.__nrow, self.__ncol), dtype=np.float128, order='C')
         np_memview = np_ndarray
 
-        if not self.__is_symmetric:
+        if not self.__store_symmetric:
             for j from 0 <= j < self.__ncol:
                 for k from self.ind[j] <= k < self.ind[j+1]:
                     np_memview[self.row[k], j] = self.val[k]
@@ -779,12 +813,27 @@ cdef class CSCSparseMatrix_INT32_t_FLOAT128_t(ImmutableSparseMatrix_INT32_t_FLOA
         return multiply_transposed_csc_mat_with_numpy_vector_INT32_t_FLOAT128_t(self, b)
 
 
+    def matvec_htransp(self, b):
+        """
+        Return :math:`A^h * b`.
+        """
+
+        return self.matvec_transp(b)
+
+
+    def matvec_conj(self, b):
+        """
+        Return :math:`\textrm{conj}(A) * b`.
+        """
+
+        return self.matvec(b)
+
 
     def matdot(self, B):
-        raise NotImplementedError("Multiplication with this kind of object not allowed")
+        raise NotImplementedError("matdot is not implemented for CSC matrices")
 
     def matdot_transp(self, B):
-        raise NotImplementedError("Multiplication with this kind of object not allowed")
+        raise NotImplementedError("matdot_transp is not implemented for CSC matrices")
 
     def __mul__(self, B):
         """
@@ -835,57 +884,6 @@ cdef class CSCSparseMatrix_INT32_t_FLOAT128_t(ImmutableSparseMatrix_INT32_t_FLOA
     #    s = "CSCSparseMatrix of size %d by %d with %d non zero values" % (self.nrow, self.ncol, self.nnz)
     #    return s
 
-    def print_to(self, OUT):
-        """
-        Print content of matrix to output stream.
-
-        Args:
-            OUT: Output stream that print (Python3) can print to.
-        """
-        # TODO: adapt to any numbers... and allow for additional parameters to control the output
-        cdef INT32_t i, k, first = 1;
-
-        cdef FLOAT128_t *mat
-        cdef INT32_t j
-        cdef FLOAT128_t val
-
-        print('CSCSparseMatrix ([%d,%d]):' % (self.nrow, self.ncol), file=OUT)
-
-        if not self.nnz:
-            return
-
-        if self.nrow <= CSC_MAT_PPRINT_COL_THRESH and self.ncol <= CSC_MAT_PPRINT_ROW_THRESH:
-            # create linear vector presentation
-            # TODO: Skip this creation
-            mat = <FLOAT128_t *> PyMem_Malloc(self.nrow * self.ncol * sizeof(FLOAT128_t))
-
-            if not mat:
-                raise MemoryError()
-
-            for j from 0 <= j < self.ncol:
-                for i from 0 <= i < self.nrow:
-
-
-                    mat[i* self.ncol + j] = 0.0
-
-
-                # TODO: rewrite this completely
-                for k from self.ind[j] <= k < self.ind[j+1]:
-                    mat[(self.row[k]*self.ncol)+j] = self.val[k]
-                    if self.__is_symmetric:
-                        mat[(j*self.ncol)+ self.row[k]] = self.val[k]
-
-            for i from 0 <= i < self.nrow:
-                for j from 0 <= j < self.ncol:
-                    val = mat[(i*self.ncol)+j]
-                    #print('%9.*f ' % (6, val), file=OUT, end='')
-                    print('{0:9.6f} '.format(val), end='')
-                print()
-
-            PyMem_Free(mat)
-
-        else:
-            print('Matrix too big to print out', file=OUT)
 
     ####################################################################################################################
     # Internal arrays
@@ -967,7 +965,7 @@ cdef MakeCSCSparseMatrix_INT32_t_FLOAT128_t(INT32_t nrow,
                                         INT32_t * ind,
                                         INT32_t * row,
                                         FLOAT128_t * val,
-                                        bint is_symmetric, bint store_zeros,
+                                        bint store_symmetric, bint store_zero,
                                         bint row_indices_are_sorted=False):
     """
     Construct a CSCSparseMatrix object.
@@ -985,8 +983,8 @@ cdef MakeCSCSparseMatrix_INT32_t_FLOAT128_t(INT32_t nrow,
                                              nrow=nrow,
                                              ncol=ncol,
                                              nnz=nnz,
-                                             is_symmetric=is_symmetric,
-                                             store_zeros=store_zeros)
+                                             store_symmetric=store_symmetric,
+                                             store_zero=store_zero)
 
     csc_mat.val = val
     csc_mat.ind = ind

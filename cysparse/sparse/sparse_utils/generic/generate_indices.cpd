@@ -1,4 +1,4 @@
-from cysparse.cysparse_types.cysparse_types cimport *
+from cysparse.common_types.cysparse_types cimport *
 from cpython cimport PyObject
 
 cdef @index@ * create_c_array_indices_from_python_object_@index@(@index@ max_length, PyObject * obj, @index@ * number_of_elements) except NULL

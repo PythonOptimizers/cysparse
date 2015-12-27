@@ -1,4 +1,4 @@
-from cysparse.cysparse_types.cysparse_types cimport *
+from cysparse.common_types.cysparse_types cimport *
 
 
 cdef element_to_string_FLOAT128_t(FLOAT128_t v, int cell_width=?)
