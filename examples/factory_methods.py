@@ -28,3 +28,5 @@ print B.ncol
 
 print "=" * 80
 
+print B.size
+
