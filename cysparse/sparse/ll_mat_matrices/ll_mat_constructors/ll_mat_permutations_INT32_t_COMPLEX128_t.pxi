@@ -19,7 +19,7 @@ cdef LLSparseMatrix_INT32_t_COMPLEX128_t MakePermutationLLSparseMatrix_INT32_t_C
         is raised. Other errors can be raised if the content of the :program:`NumPy` vector doesn't correspond to matrix indices.
 
     Warning:
-        The :program:`NumPy` vector must be compatible with the :class:`LLSparseMatrix` itype.
+        The :program:`NumPy` vector must be compatible with the :class:`LLSparseMatrix` ``itype``.
 
     Note:
         A test is done to assert that the vector is indeed a permutation vector.

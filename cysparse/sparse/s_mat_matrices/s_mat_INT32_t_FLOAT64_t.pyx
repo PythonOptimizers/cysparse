@@ -215,31 +215,86 @@ cdef class SparseMatrix_INT32_t_FLOAT64_t(SparseMatrix):
     ####################################################################################################################
     # MEMORY INFO
     ####################################################################################################################
-    def memory_virtual(self):
+    def memory_virtual_in_bits(self):
         """
         Return memory (in bits) needed if implementation would have kept **all** elements, not only the non zeros ones.
+
+        Returns:
+            The size in bits.
 
         Note:
             This method only returns the internal memory used for the C-arrays, **not** the whole object.
         """
         return FLOAT64_t_BIT * self.__nrow * self.__ncol
 
-    def memory_real(self):
+    def memory_virtual_in_bytes(self):
         """
-        Real memory used internally.
+        Return memory (in bits) needed if implementation would have kept **all** elements, not only the non zeros ones.
+
+        Returns:
+            The size in bytes.
 
         Note:
             This method only returns the internal memory used for the C-arrays, **not** the whole object.
         """
-        raise NotImplementedError('Method not implemented for this type of matrix, please report')
 
-    def memory_element(self):
+        return self.memory_virtual_in_bits() / CHAR_BIT
+
+    def memory_real_in_bits(self):
+        """
+        Real memory used internally.
+
+        Returns:
+            The size in bits.
+
+        Note:
+            This method only returns the internal memory used for the C-arrays, **not** the whole object.
+        """
+        return self.memory_real_in_bytes() * CHAR_BIT
+
+    def memory_real_in_bytes(self):
+        """
+        Real memory used internally.
+
+        Returns:
+            The size in bytes.
+
+        Note:
+            This method only returns the internal memory used for the C-arrays, **not** the whole object.
+        """
+        raise NotImplementedError()
+
+    def memory_index_in_bits(self):
+        """
+        Return memory used for **one** index (in bits).
+
+
+        """
+        return INT32_t_BIT
+
+    def memory_index_in_bytes(self):
+        """
+        Return memory used for **one** index (in bytes).
+
+
+        """
+        return INT32_t_BIT / CHAR_BIT
+
+    def memory_element_in_bits(self):
         """
         Return memory used to store **one** element (in bits).
 
 
         """
         return FLOAT64_t_BIT
+
+    def memory_element_in_bytes(self):
+        """
+        Return memory used to store **one** element (in bytes).
+
+
+        """
+        return FLOAT64_t_BIT / CHAR_BIT
 
     ####################################################################################################################
     # OUTPUT STRINGS

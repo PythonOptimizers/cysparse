@@ -533,16 +533,18 @@ cdef class LLSparseMatrix_INT32_t_FLOAT64_t(MutableSparseMatrix_INT32_t_FLOAT64_
 
                 k = next
 
-    def memory_real(self):
+    def memory_real_in_bytes(self):
         """
         Return the real amount of memory used internally for the matrix.
 
         Returns:
-            The exact number of bits used to store the matrix (but not the object in itself, only the internal memory
+            The exact number of bytes used to store the matrix (but not the object in itself, only the internal memory
             needed to store the matrix).
 
+        Note:
+            You can have the same memory in bits by calling ``memory_real_in_bits()``.
         """
-        cdef INT32_t total_memory = 0
+        cdef INT64_t total_memory = 0
 
         # root
         total_memory += self.__nrow * sizeof(INT32_t)

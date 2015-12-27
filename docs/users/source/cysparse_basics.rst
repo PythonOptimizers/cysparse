@@ -172,42 +172,96 @@ By default, ``store_zero`` is set to ``False``.
 memory
 """"""""
 
-Just for fun, you can ask each matrix type (``LLSparseMatrix``, ``CSCSparseMatrix`` and ``CSRSparseMatrix``) how much memory they actually use (``memory_real()``) versus the memory a corresponding full dense matrix
-would need (``memory_virtual()``):
+..  index:: memory_real_in_bytes(), memory_real_in_bits(), memory_virtual_in_bytes(), memory_virtual_in_bits()
+
+Just for fun, you can ask each matrix type (``LLSparseMatrix``, ``CSCSparseMatrix`` and ``CSRSparseMatrix``) how much memory they actually use (``memory_real_in_bytes()``) versus the memory a corresponding full dense matrix
+would need (``memory_virtual_in_bytes()``):
+
 
 ..  code-block:: python
 
     A = ArrowheadLLSparseMatrix(nrow=50, ncol=800, itype=INT64_T, dtype=COMPLEX128_T)
 
-    print A.memory_real()
-    print A.memory_virtual()
+    print A.memory_real_in_bytes()
+    print A.memory_virtual_in_bytes()
 
 which returns:
 
-..  code-block::
+..  code-block:: python
     
-    34448
-    5120000
+    25736
+    640000
 
-The results are in **bits**. ``ArrowheadLLSparseMatrix`` creates a sparse matrix. In this case, this sparse matrix has 898 non zero elements. The difference is huge and this is one of the reason we **do** use special
+The results are in **bytes**. You can have the results in bits by calling the corresponding methods ``XXX_in_bits()``:
+
+..  code-block:: python
+
+    print A.memory_real_in_bits()
+    print A.memory_virtual_in_bits()
+
+which returns:
+
+..  code-block:: python
+
+    205888
+    5120000
+    
+``ArrowheadLLSparseMatrix`` creates a sparse matrix. In this case, this sparse matrix has 898 non zero elements. The difference between the sparse and dense matrix representation is **huge** and this is one of the reason we do use special
 representations of sparse matrices instead of storing all the zeros.
 
-Note that this memory is **only** the memory needed for the internal :program:`C`-arrays, **not** the total memory needed to store the whole matrix object. 
+..  index:: compress()
+
+Actually, we can do better as the creation of this sparse matrix consumes a little bit more memory than it really needs [#ll_mat_needs_more_memory_than_needed]_:
+
+..  code-block:: python
+
+    A = ArrowheadLLSparseMatrix(nrow=50, ncol=800, itype=INT64_T, dtype=COMPLEX128_T)
+    
+    A.compress()
+
+    print A.memory_real_in_bytes()
+    print A.memory_virtual_in_bytes()
+
+which this time returns:
+
+..  code-block:: python
+
+    21752
+    640000
+    
+Note that this memory is **only** the memory needed for the internal :program:`C`-arrays, **not** the total memory needed to store the whole matrix object. ``compress()`` will squeeze the ``LLSparseMatrix`` matrix to
+its minimum. Note that ``CSCSpasreMatrix`` and ``CSRSparseMatrix`` are **always** squeezed to their minimum memory consumption. 
+
+..  index:: memory_element_in_bits(), memory_element_in_bytes(), memory_index_in_bits(), memory_index_in_bytes()
 
 You can also ask what memory **one** element needs to be stored internally.
 For our example:
 
 ..  code-block:: python
 
-    print A.memory_element()
+    print A.memory_element_in_bits()
+    print A.memory_element_in_bytes()
 
 returns 
 
 ..  code-block:: python
 
     128
-    
-128 bits for a ``COMPLEX128_T`` type is to be expected.
+    16
+
+What about the memory needed to store an index?
+
+..  code-block:: python
+
+    print A.memory_index_in_bits()
+    print A.memory_index_in_bytes()
+
+returns:
+
+..  code-block:: python
+
+    32
+    4
 
 
 
@@ -342,6 +396,9 @@ The type ``LLSparseMatrix`` is common among ``LL`` sparse format matrices while 
 ..  [#store_zero_elements] In some cases thought, it **is** worth keeping **some** zeros explicitly. This can be done in :program:`CySparse` through the use of the ``store_zero`` parameter. Read further.
   
 ..  [#why_only_one_type_of_view] Remember that the LL format matrices are the only ones you can modify in :program:`CySparse`!
+
+..  [#ll_mat_needs_more_memory_than_needed] You might wonder why the construction of a matrix would take more memory than it really needs. First of all, this **only** happens for the ``LLSparseMatrix`` type. Second, it
+    is a tradeoff between speed, memory and simplicity of the code.
 
 
 

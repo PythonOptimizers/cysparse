@@ -376,6 +376,14 @@ def report_basic_types(OUT=sys.stdout):
             print(item[3], file=OUT, end='')
             print(')', file=OUT)
 
+
+def report_CHAR_BIT(self):
+    """
+    Return the number of bits for 1 bytes on this platform.
+
+    """
+    return CHAR_BIT
+
 ########################################################################################################################
 # NUMBER CASTS
 ########################################################################################################################

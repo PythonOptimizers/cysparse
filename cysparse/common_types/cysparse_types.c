@@ -1118,6 +1118,7 @@ static char __pyx_k_file[] = "file";
 static char __pyx_k_item[] = "item";
 static char __pyx_k_keys[] = "keys";
 static char __pyx_k_main[] = "__main__";
+static char __pyx_k_self[] = "self";
 static char __pyx_k_test[] = "__test__";
 static char __pyx_k_items[] = "items";
 static char __pyx_k_print[] = "print";
@@ -1161,6 +1162,7 @@ static char __pyx_k_type_to_string[] = "type_to_string";
 static char __pyx_k_is_complex_type[] = "is_complex_type";
 static char __pyx_k_is_element_type[] = "is_element_type";
 static char __pyx_k_is_integer_type[] = "is_integer_type";
+static char __pyx_k_report_CHAR_BIT[] = "report_CHAR_BIT";
 static char __pyx_k_BASIC_TYPES_DICT[] = "BASIC_TYPES_DICT";
 static char __pyx_k_REAL_ELEMENT_TYPES[] = "REAL_ELEMENT_TYPES";
 static char __pyx_k_report_basic_types[] = "report_basic_types";
@@ -1263,8 +1265,10 @@ static PyObject *__pyx_kp_s_min_precision_real_imag_max_pre;
 static PyObject *__pyx_n_s_n;
 static PyObject *__pyx_n_s_nan;
 static PyObject *__pyx_n_s_print;
+static PyObject *__pyx_n_s_report_CHAR_BIT;
 static PyObject *__pyx_n_s_report_basic_types;
 static PyObject *__pyx_kp_s_s_and_s_are_incompatible;
+static PyObject *__pyx_n_s_self;
 static PyObject *__pyx_n_s_stdout;
 static PyObject *__pyx_n_s_string_to_type;
 static PyObject *__pyx_n_s_subtype;
@@ -1291,7 +1295,8 @@ static PyObject *__pyx_pf_8cysparse_12common_types_14cysparse_types_24result_rea
 static PyObject *__pyx_pf_8cysparse_12common_types_14cysparse_types_26type_to_string(CYTHON_UNUSED PyObject *__pyx_self, enum __pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType __pyx_v_type1); /* proto */
 static PyObject *__pyx_pf_8cysparse_12common_types_14cysparse_types_28string_to_type(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_type_string1); /* proto */
 static PyObject *__pyx_pf_8cysparse_12common_types_14cysparse_types_30report_basic_types(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_OUT); /* proto */
-static PyObject *__pyx_pf_8cysparse_12common_types_14cysparse_types_32min_integer_type(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_n, PyObject *__pyx_v_type_list); /* proto */
+static PyObject *__pyx_pf_8cysparse_12common_types_14cysparse_types_32report_CHAR_BIT(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_8cysparse_12common_types_14cysparse_types_34min_integer_type(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_n, PyObject *__pyx_v_type_list); /* proto */
 static PyObject *__pyx_int_0;
 static PyObject *__pyx_k__8;
 static PyObject *__pyx_tuple_;
@@ -1324,6 +1329,7 @@ static PyObject *__pyx_tuple__38;
 static PyObject *__pyx_tuple__40;
 static PyObject *__pyx_tuple__42;
 static PyObject *__pyx_tuple__44;
+static PyObject *__pyx_tuple__46;
 static PyObject *__pyx_codeobj__25;
 static PyObject *__pyx_codeobj__27;
 static PyObject *__pyx_codeobj__29;
@@ -1335,6 +1341,7 @@ static PyObject *__pyx_codeobj__39;
 static PyObject *__pyx_codeobj__41;
 static PyObject *__pyx_codeobj__43;
 static PyObject *__pyx_codeobj__45;
+static PyObject *__pyx_codeobj__47;
 
 /* "cysparse/common_types/cysparse_types.pyx":77
  * ########################################################################################################################
@@ -5726,7 +5733,7 @@ static PyObject *__pyx_pf_8cysparse_12common_types_14cysparse_types_30report_bas
  *             print(item[3], file=OUT, end='')
  *             print(')', file=OUT)             # <<<<<<<<<<<<<<
  * 
- * ########################################################################################################################
+ * 
  */
       __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 377; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
@@ -5785,7 +5792,72 @@ static PyObject *__pyx_pf_8cysparse_12common_types_14cysparse_types_30report_bas
   return __pyx_r;
 }
 
-/* "cysparse/common_types/cysparse_types.pyx":382
+/* "cysparse/common_types/cysparse_types.pyx":380
+ * 
+ * 
+ * def report_CHAR_BIT(self):             # <<<<<<<<<<<<<<
+ *     """
+ *     Return the number of bits for 1 bytes on this platform.
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_8cysparse_12common_types_14cysparse_types_33report_CHAR_BIT(PyObject *__pyx_self, PyObject *__pyx_v_self); /*proto*/
+static char __pyx_doc_8cysparse_12common_types_14cysparse_types_32report_CHAR_BIT[] = "\n    Return the number of bits for 1 bytes on this platform.\n\n    ";
+static PyMethodDef __pyx_mdef_8cysparse_12common_types_14cysparse_types_33report_CHAR_BIT = {"report_CHAR_BIT", (PyCFunction)__pyx_pw_8cysparse_12common_types_14cysparse_types_33report_CHAR_BIT, METH_O, __pyx_doc_8cysparse_12common_types_14cysparse_types_32report_CHAR_BIT};
+static PyObject *__pyx_pw_8cysparse_12common_types_14cysparse_types_33report_CHAR_BIT(PyObject *__pyx_self, PyObject *__pyx_v_self) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("report_CHAR_BIT (wrapper)", 0);
+  __pyx_r = __pyx_pf_8cysparse_12common_types_14cysparse_types_32report_CHAR_BIT(__pyx_self, ((PyObject *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_8cysparse_12common_types_14cysparse_types_32report_CHAR_BIT(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_self) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("report_CHAR_BIT", 0);
+
+  /* "cysparse/common_types/cysparse_types.pyx":385
+ * 
+ *     """
+ *     return CHAR_BIT             # <<<<<<<<<<<<<<
+ * 
+ * ########################################################################################################################
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = __Pyx_PyInt_From_int(CHAR_BIT); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 385; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* "cysparse/common_types/cysparse_types.pyx":380
+ * 
+ * 
+ * def report_CHAR_BIT(self):             # <<<<<<<<<<<<<<
+ *     """
+ *     Return the number of bits for 1 bytes on this platform.
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("cysparse.common_types.cysparse_types.report_CHAR_BIT", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "cysparse/common_types/cysparse_types.pyx":390
  * # NUMBER CASTS
  * ########################################################################################################################
  * cpdef CySparseType min_integer_type(n, type_list) except? cp_types.UINT64_T:             # <<<<<<<<<<<<<<
@@ -5793,7 +5865,7 @@ static PyObject *__pyx_pf_8cysparse_12common_types_14cysparse_types_30report_bas
  *     Return the minimal type that can `n` can be casted into from a list of integer types.
  */
 
-static PyObject *__pyx_pw_8cysparse_12common_types_14cysparse_types_33min_integer_type(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyObject *__pyx_pw_8cysparse_12common_types_14cysparse_types_35min_integer_type(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
 static enum __pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType __pyx_f_8cysparse_12common_types_14cysparse_types_min_integer_type(PyObject *__pyx_v_n, PyObject *__pyx_v_type_list, CYTHON_UNUSED int __pyx_skip_dispatch) {
   PyObject *__pyx_v_type_el = NULL;
   enum __pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType __pyx_r;
@@ -5813,7 +5885,7 @@ static enum __pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType __pyx
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("min_integer_type", 0);
 
-  /* "cysparse/common_types/cysparse_types.pyx":400
+  /* "cysparse/common_types/cysparse_types.pyx":408
  *         This function is **slow**. There is no test on the ``n`` argument.
  *     """
  *     for type_el in type_list:             # <<<<<<<<<<<<<<
@@ -5824,26 +5896,26 @@ static enum __pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType __pyx
     __pyx_t_1 = __pyx_v_type_list; __Pyx_INCREF(__pyx_t_1); __pyx_t_2 = 0;
     __pyx_t_3 = NULL;
   } else {
-    __pyx_t_2 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_v_type_list); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 400; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_v_type_list); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 408; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = Py_TYPE(__pyx_t_1)->tp_iternext; if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 400; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = Py_TYPE(__pyx_t_1)->tp_iternext; if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 408; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   for (;;) {
     if (likely(!__pyx_t_3)) {
       if (likely(PyList_CheckExact(__pyx_t_1))) {
         if (__pyx_t_2 >= PyList_GET_SIZE(__pyx_t_1)) break;
         #if CYTHON_COMPILING_IN_CPYTHON
-        __pyx_t_4 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_2); __Pyx_INCREF(__pyx_t_4); __pyx_t_2++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 400; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_4 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_2); __Pyx_INCREF(__pyx_t_4); __pyx_t_2++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 408; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         #else
-        __pyx_t_4 = PySequence_ITEM(__pyx_t_1, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 400; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_4 = PySequence_ITEM(__pyx_t_1, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 408; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_4);
         #endif
       } else {
         if (__pyx_t_2 >= PyTuple_GET_SIZE(__pyx_t_1)) break;
         #if CYTHON_COMPILING_IN_CPYTHON
-        __pyx_t_4 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_2); __Pyx_INCREF(__pyx_t_4); __pyx_t_2++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 400; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_4 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_2); __Pyx_INCREF(__pyx_t_4); __pyx_t_2++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 408; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         #else
-        __pyx_t_4 = PySequence_ITEM(__pyx_t_1, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 400; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_4 = PySequence_ITEM(__pyx_t_1, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 408; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_4);
         #endif
       }
@@ -5853,7 +5925,7 @@ static enum __pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType __pyx
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(exc_type == PyExc_StopIteration || PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else {__pyx_filename = __pyx_f[0]; __pyx_lineno = 400; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          else {__pyx_filename = __pyx_f[0]; __pyx_lineno = 408; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         }
         break;
       }
@@ -5862,67 +5934,67 @@ static enum __pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType __pyx
     __Pyx_XDECREF_SET(__pyx_v_type_el, __pyx_t_4);
     __pyx_t_4 = 0;
 
-    /* "cysparse/common_types/cysparse_types.pyx":401
+    /* "cysparse/common_types/cysparse_types.pyx":409
  *     """
  *     for type_el in type_list:
  *         if type_el in INTEGER_ELEMENT_TYPES:             # <<<<<<<<<<<<<<
  *             if BASIC_TYPES_DICT[type_el][2] <= n <= BASIC_TYPES_DICT[type_el][3]:
  *                 return <cp_types.CySparseType> type_el
  */
-    __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_INTEGER_ELEMENT_TYPES); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 401; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_INTEGER_ELEMENT_TYPES); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 409; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_5 = (__Pyx_PySequence_ContainsTF(__pyx_v_type_el, __pyx_t_4, Py_EQ)); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 401; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = (__Pyx_PySequence_ContainsTF(__pyx_v_type_el, __pyx_t_4, Py_EQ)); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 409; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __pyx_t_6 = (__pyx_t_5 != 0);
     if (__pyx_t_6) {
 
-      /* "cysparse/common_types/cysparse_types.pyx":402
+      /* "cysparse/common_types/cysparse_types.pyx":410
  *     for type_el in type_list:
  *         if type_el in INTEGER_ELEMENT_TYPES:
  *             if BASIC_TYPES_DICT[type_el][2] <= n <= BASIC_TYPES_DICT[type_el][3]:             # <<<<<<<<<<<<<<
  *                 return <cp_types.CySparseType> type_el
  *         else:
  */
-      __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_BASIC_TYPES_DICT); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 402; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_BASIC_TYPES_DICT); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 410; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_4);
-      __pyx_t_7 = PyObject_GetItem(__pyx_t_4, __pyx_v_type_el); if (unlikely(__pyx_t_7 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 402; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+      __pyx_t_7 = PyObject_GetItem(__pyx_t_4, __pyx_v_type_el); if (unlikely(__pyx_t_7 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 410; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-      __pyx_t_4 = __Pyx_GetItemInt(__pyx_t_7, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 402; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+      __pyx_t_4 = __Pyx_GetItemInt(__pyx_t_7, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 410; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-      __pyx_t_7 = PyObject_RichCompare(__pyx_t_4, __pyx_v_n, Py_LE); __Pyx_XGOTREF(__pyx_t_7); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 402; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_7 = PyObject_RichCompare(__pyx_t_4, __pyx_v_n, Py_LE); __Pyx_XGOTREF(__pyx_t_7); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 410; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       if (__Pyx_PyObject_IsTrue(__pyx_t_7)) {
         __Pyx_DECREF(__pyx_t_7);
-        __pyx_t_8 = __Pyx_GetModuleGlobalName(__pyx_n_s_BASIC_TYPES_DICT); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 402; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_8 = __Pyx_GetModuleGlobalName(__pyx_n_s_BASIC_TYPES_DICT); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 410; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_8);
-        __pyx_t_9 = PyObject_GetItem(__pyx_t_8, __pyx_v_type_el); if (unlikely(__pyx_t_9 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 402; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+        __pyx_t_9 = PyObject_GetItem(__pyx_t_8, __pyx_v_type_el); if (unlikely(__pyx_t_9 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 410; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
         __Pyx_GOTREF(__pyx_t_9);
         __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-        __pyx_t_8 = __Pyx_GetItemInt(__pyx_t_9, 3, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_8 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 402; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+        __pyx_t_8 = __Pyx_GetItemInt(__pyx_t_9, 3, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_8 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 410; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
         __Pyx_GOTREF(__pyx_t_8);
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-        __pyx_t_7 = PyObject_RichCompare(__pyx_v_n, __pyx_t_8, Py_LE); __Pyx_XGOTREF(__pyx_t_7); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 402; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_7 = PyObject_RichCompare(__pyx_v_n, __pyx_t_8, Py_LE); __Pyx_XGOTREF(__pyx_t_7); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 410; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       }
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-      __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_7); if (unlikely(__pyx_t_6 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 402; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_7); if (unlikely(__pyx_t_6 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 410; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
       if (__pyx_t_6) {
 
-        /* "cysparse/common_types/cysparse_types.pyx":403
+        /* "cysparse/common_types/cysparse_types.pyx":411
  *         if type_el in INTEGER_ELEMENT_TYPES:
  *             if BASIC_TYPES_DICT[type_el][2] <= n <= BASIC_TYPES_DICT[type_el][3]:
  *                 return <cp_types.CySparseType> type_el             # <<<<<<<<<<<<<<
  *         else:
  *             raise TypeError('Type is not an integer type')
  */
-        __pyx_t_10 = ((enum __pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType)__Pyx_PyInt_As_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_v_type_el)); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 403; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_10 = ((enum __pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType)__Pyx_PyInt_As_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_v_type_el)); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 411; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __pyx_r = ((enum __pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType)__pyx_t_10);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         goto __pyx_L0;
 
-        /* "cysparse/common_types/cysparse_types.pyx":402
+        /* "cysparse/common_types/cysparse_types.pyx":410
  *     for type_el in type_list:
  *         if type_el in INTEGER_ELEMENT_TYPES:
  *             if BASIC_TYPES_DICT[type_el][2] <= n <= BASIC_TYPES_DICT[type_el][3]:             # <<<<<<<<<<<<<<
@@ -5931,7 +6003,7 @@ static enum __pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType __pyx
  */
       }
 
-      /* "cysparse/common_types/cysparse_types.pyx":401
+      /* "cysparse/common_types/cysparse_types.pyx":409
  *     """
  *     for type_el in type_list:
  *         if type_el in INTEGER_ELEMENT_TYPES:             # <<<<<<<<<<<<<<
@@ -5941,7 +6013,7 @@ static enum __pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType __pyx
       goto __pyx_L5;
     }
 
-    /* "cysparse/common_types/cysparse_types.pyx":405
+    /* "cysparse/common_types/cysparse_types.pyx":413
  *                 return <cp_types.CySparseType> type_el
  *         else:
  *             raise TypeError('Type is not an integer type')             # <<<<<<<<<<<<<<
@@ -5949,15 +6021,15 @@ static enum __pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType __pyx
  *     raise TypeError('No type was found to cast number')
  */
     /*else*/ {
-      __pyx_t_7 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__22, NULL); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 405; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_7 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__22, NULL); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 413; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_Raise(__pyx_t_7, 0, 0, 0);
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 405; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 413; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
     __pyx_L5:;
 
-    /* "cysparse/common_types/cysparse_types.pyx":400
+    /* "cysparse/common_types/cysparse_types.pyx":408
  *         This function is **slow**. There is no test on the ``n`` argument.
  *     """
  *     for type_el in type_list:             # <<<<<<<<<<<<<<
@@ -5967,19 +6039,19 @@ static enum __pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType __pyx
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "cysparse/common_types/cysparse_types.pyx":407
+  /* "cysparse/common_types/cysparse_types.pyx":415
  *             raise TypeError('Type is not an integer type')
  * 
  *     raise TypeError('No type was found to cast number')             # <<<<<<<<<<<<<<
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__23, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 407; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__23, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 415; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  {__pyx_filename = __pyx_f[0]; __pyx_lineno = 407; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  {__pyx_filename = __pyx_f[0]; __pyx_lineno = 415; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "cysparse/common_types/cysparse_types.pyx":382
+  /* "cysparse/common_types/cysparse_types.pyx":390
  * # NUMBER CASTS
  * ########################################################################################################################
  * cpdef CySparseType min_integer_type(n, type_list) except? cp_types.UINT64_T:             # <<<<<<<<<<<<<<
@@ -6003,9 +6075,9 @@ static enum __pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType __pyx
 }
 
 /* Python wrapper */
-static PyObject *__pyx_pw_8cysparse_12common_types_14cysparse_types_33min_integer_type(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_8cysparse_12common_types_14cysparse_types_32min_integer_type[] = "\n    Return the minimal type that can `n` can be casted into from a list of integer types.\n\n    Note:\n        We suppose that the list is sorted by ascending types.\n\n    Raises:\n        ``TypeError`` if no type can be used to cast `n` or if one element in the type list is not recognized as a\n        ``CySparseType`` for an integer type.\n\n    Args:\n        n: Python number to cast.\n        type_list: List of *types*, aka ``CySparseType`` ``enum``\\s.\n\n    Warning:\n        This function is **slow**. There is no test on the ``n`` argument.\n    ";
-static PyObject *__pyx_pw_8cysparse_12common_types_14cysparse_types_33min_integer_type(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_8cysparse_12common_types_14cysparse_types_35min_integer_type(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_8cysparse_12common_types_14cysparse_types_34min_integer_type[] = "\n    Return the minimal type that can `n` can be casted into from a list of integer types.\n\n    Note:\n        We suppose that the list is sorted by ascending types.\n\n    Raises:\n        ``TypeError`` if no type can be used to cast `n` or if one element in the type list is not recognized as a\n        ``CySparseType`` for an integer type.\n\n    Args:\n        n: Python number to cast.\n        type_list: List of *types*, aka ``CySparseType`` ``enum``\\s.\n\n    Warning:\n        This function is **slow**. There is no test on the ``n`` argument.\n    ";
+static PyObject *__pyx_pw_8cysparse_12common_types_14cysparse_types_35min_integer_type(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_n = 0;
   PyObject *__pyx_v_type_list = 0;
   int __pyx_lineno = 0;
@@ -6034,11 +6106,11 @@ static PyObject *__pyx_pw_8cysparse_12common_types_14cysparse_types_33min_intege
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_type_list)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("min_integer_type", 1, 2, 2, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 382; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("min_integer_type", 1, 2, 2, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 390; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "min_integer_type") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 382; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "min_integer_type") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 390; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -6051,20 +6123,20 @@ static PyObject *__pyx_pw_8cysparse_12common_types_14cysparse_types_33min_intege
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("min_integer_type", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 382; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("min_integer_type", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 390; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("cysparse.common_types.cysparse_types.min_integer_type", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_8cysparse_12common_types_14cysparse_types_32min_integer_type(__pyx_self, __pyx_v_n, __pyx_v_type_list);
+  __pyx_r = __pyx_pf_8cysparse_12common_types_14cysparse_types_34min_integer_type(__pyx_self, __pyx_v_n, __pyx_v_type_list);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8cysparse_12common_types_14cysparse_types_32min_integer_type(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_n, PyObject *__pyx_v_type_list) {
+static PyObject *__pyx_pf_8cysparse_12common_types_14cysparse_types_34min_integer_type(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_n, PyObject *__pyx_v_type_list) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   enum __pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType __pyx_t_1;
@@ -6074,8 +6146,8 @@ static PyObject *__pyx_pf_8cysparse_12common_types_14cysparse_types_32min_intege
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("min_integer_type", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_8cysparse_12common_types_14cysparse_types_min_integer_type(__pyx_v_n, __pyx_v_type_list, 0); if (unlikely(__pyx_t_1 == __pyx_e_8cysparse_12common_types_14cysparse_types_UINT64_T && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 382; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_t_1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 382; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_8cysparse_12common_types_14cysparse_types_min_integer_type(__pyx_v_n, __pyx_v_type_list, 0); if (unlikely(__pyx_t_1 == __pyx_e_8cysparse_12common_types_14cysparse_types_UINT64_T && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 390; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_t_1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 390; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -6098,7 +6170,7 @@ static PyMethodDef __pyx_methods[] = {
   {"is_scalar", (PyCFunction)__pyx_pw_8cysparse_12common_types_14cysparse_types_21is_scalar, METH_O, 0},
   {"result_type", (PyCFunction)__pyx_pw_8cysparse_12common_types_14cysparse_types_23result_type, METH_VARARGS|METH_KEYWORDS, __pyx_doc_8cysparse_12common_types_14cysparse_types_22result_type},
   {"result_real_sum_type", (PyCFunction)__pyx_pw_8cysparse_12common_types_14cysparse_types_25result_real_sum_type, METH_O, __pyx_doc_8cysparse_12common_types_14cysparse_types_24result_real_sum_type},
-  {"min_integer_type", (PyCFunction)__pyx_pw_8cysparse_12common_types_14cysparse_types_33min_integer_type, METH_VARARGS|METH_KEYWORDS, __pyx_doc_8cysparse_12common_types_14cysparse_types_32min_integer_type},
+  {"min_integer_type", (PyCFunction)__pyx_pw_8cysparse_12common_types_14cysparse_types_35min_integer_type, METH_VARARGS|METH_KEYWORDS, __pyx_doc_8cysparse_12common_types_14cysparse_types_34min_integer_type},
   {0, 0, 0, 0}
 };
 
@@ -6194,8 +6266,10 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_n, __pyx_k_n, sizeof(__pyx_k_n), 0, 0, 1, 1},
   {&__pyx_n_s_nan, __pyx_k_nan, sizeof(__pyx_k_nan), 0, 0, 1, 1},
   {&__pyx_n_s_print, __pyx_k_print, sizeof(__pyx_k_print), 0, 0, 1, 1},
+  {&__pyx_n_s_report_CHAR_BIT, __pyx_k_report_CHAR_BIT, sizeof(__pyx_k_report_CHAR_BIT), 0, 0, 1, 1},
   {&__pyx_n_s_report_basic_types, __pyx_k_report_basic_types, sizeof(__pyx_k_report_basic_types), 0, 0, 1, 1},
   {&__pyx_kp_s_s_and_s_are_incompatible, __pyx_k_s_and_s_are_incompatible, sizeof(__pyx_k_s_and_s_are_incompatible), 0, 0, 1, 0},
+  {&__pyx_n_s_self, __pyx_k_self, sizeof(__pyx_k_self), 0, 0, 1, 1},
   {&__pyx_n_s_stdout, __pyx_k_stdout, sizeof(__pyx_k_stdout), 0, 0, 1, 1},
   {&__pyx_n_s_string_to_type, __pyx_k_string_to_type, sizeof(__pyx_k_string_to_type), 0, 0, 1, 1},
   {&__pyx_n_s_subtype, __pyx_k_subtype, sizeof(__pyx_k_subtype), 0, 0, 1, 1},
@@ -6401,30 +6475,30 @@ static int __Pyx_InitCachedConstants(void) {
  *             print(item[3], file=OUT, end='')
  *             print(')', file=OUT)             # <<<<<<<<<<<<<<
  * 
- * ########################################################################################################################
+ * 
  */
   __pyx_tuple__21 = PyTuple_Pack(1, __pyx_kp_s__14); if (unlikely(!__pyx_tuple__21)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 377; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__21);
   __Pyx_GIVEREF(__pyx_tuple__21);
 
-  /* "cysparse/common_types/cysparse_types.pyx":405
+  /* "cysparse/common_types/cysparse_types.pyx":413
  *                 return <cp_types.CySparseType> type_el
  *         else:
  *             raise TypeError('Type is not an integer type')             # <<<<<<<<<<<<<<
  * 
  *     raise TypeError('No type was found to cast number')
  */
-  __pyx_tuple__22 = PyTuple_Pack(1, __pyx_kp_s_Type_is_not_an_integer_type); if (unlikely(!__pyx_tuple__22)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 405; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__22 = PyTuple_Pack(1, __pyx_kp_s_Type_is_not_an_integer_type); if (unlikely(!__pyx_tuple__22)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 413; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__22);
   __Pyx_GIVEREF(__pyx_tuple__22);
 
-  /* "cysparse/common_types/cysparse_types.pyx":407
+  /* "cysparse/common_types/cysparse_types.pyx":415
  *             raise TypeError('Type is not an integer type')
  * 
  *     raise TypeError('No type was found to cast number')             # <<<<<<<<<<<<<<
  * 
  */
-  __pyx_tuple__23 = PyTuple_Pack(1, __pyx_kp_s_No_type_was_found_to_cast_number); if (unlikely(!__pyx_tuple__23)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 407; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__23 = PyTuple_Pack(1, __pyx_kp_s_No_type_was_found_to_cast_number); if (unlikely(!__pyx_tuple__23)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 415; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__23);
   __Pyx_GIVEREF(__pyx_tuple__23);
 
@@ -6559,6 +6633,18 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__44);
   __Pyx_GIVEREF(__pyx_tuple__44);
   __pyx_codeobj__45 = (PyObject*)__Pyx_PyCode_New(1, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__44, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_nikolaj_Documents_WORK_Dom, __pyx_n_s_report_basic_types, 355, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__45)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 355; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+
+  /* "cysparse/common_types/cysparse_types.pyx":380
+ * 
+ * 
+ * def report_CHAR_BIT(self):             # <<<<<<<<<<<<<<
+ *     """
+ *     Return the number of bits for 1 bytes on this platform.
+ */
+  __pyx_tuple__46 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__46)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 380; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__46);
+  __Pyx_GIVEREF(__pyx_tuple__46);
+  __pyx_codeobj__47 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__46, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_nikolaj_Documents_WORK_Dom, __pyx_n_s_report_CHAR_BIT, 380, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__47)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 380; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -7773,6 +7859,18 @@ PyMODINIT_FUNC PyInit_cysparse_types(void)
   __pyx_t_8 = PyCFunction_NewEx(&__pyx_mdef_8cysparse_12common_types_14cysparse_types_31report_basic_types, NULL, __pyx_n_s_cysparse_common_types_cysparse_t); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 355; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_8);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_report_basic_types, __pyx_t_8) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 355; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+
+  /* "cysparse/common_types/cysparse_types.pyx":380
+ * 
+ * 
+ * def report_CHAR_BIT(self):             # <<<<<<<<<<<<<<
+ *     """
+ *     Return the number of bits for 1 bytes on this platform.
+ */
+  __pyx_t_8 = PyCFunction_NewEx(&__pyx_mdef_8cysparse_12common_types_14cysparse_types_33report_CHAR_BIT, NULL, __pyx_n_s_cysparse_common_types_cysparse_t); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 380; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_8);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_report_CHAR_BIT, __pyx_t_8) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 380; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
   /* "cysparse/common_types/cysparse_types.pyx":1

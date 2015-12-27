@@ -152,6 +152,28 @@ cdef class CSCSparseMatrix_INT32_t_INT64_t(ImmutableSparseMatrix_INT32_t_INT64_t
 
         return self_copy
 
+    def memory_real_in_bytes(self):
+        """
+        Return the real amount of memory used internally for the matrix.
+
+        Returns:
+            The exact number of bytes used to store the matrix (but not the object in itself, only the internal memory
+            needed to store the matrix).
+
+        Note:
+            You can have the same memory in bits by calling ``memory_real_in_bits()``.
+        """
+        cdef INT64_t total_memory = 0
+
+        # row
+        total_memory += self.__nnz * sizeof(INT32_t)
+        # ind
+        total_memory += (self.__ncol + 1) * sizeof(INT32_t)
+        # val
+        total_memory += self.__nnz * sizeof(INT64_t)
+
+        return total_memory
+
     ####################################################################################################################
     # Internal tests
     ####################################################################################################################
