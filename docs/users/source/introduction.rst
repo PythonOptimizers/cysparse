@@ -47,17 +47,26 @@ Even if :program:`CySparse` is (strongly) inspired from :program:`PySparse`, the
 
 Both libraries define similar but also different matrix classes: 
 
-  =========================================   ======================================================   ============================================
-  Matrix type                                 :program:`PySparse`                                      :program:`CySparse` 
-  =========================================   ======================================================   ============================================
-  Linked-List Format                          ``ll_mat``, ``ll_mat_sym``, ``PysparseMatrix``           ``LLSparseMatrix``
-  Compressed Sparse Row Format                ``csr_mat``                                              ``CSRSparseMatrix``
-  Compressed Sparse Column Format             -                                                        ``CSCSparseMatrix``
-  Sparse Skyline Format                       ``sss_mat``                                              -
-  Compressed Sparse Row and Column Format     -                                                        ``CSBSparseMatrix`` (later)
-  =========================================   ======================================================   ============================================
+=========================================   ======================================================   ============================================
+Matrix type                                 :program:`PySparse`                                      :program:`CySparse` 
+=========================================   ======================================================   ============================================
+Linked-List Format                          ``ll_mat``, ``ll_mat_sym``, ``PysparseMatrix``           ``LLSparseMatrix``
+Compressed Sparse Row Format                ``csr_mat``                                              ``CSRSparseMatrix``
+Compressed Sparse Column Format             -                                                        ``CSCSparseMatrix``
+Sparse Skyline Format                       ``sss_mat``                                              -
+Compressed Sparse Row and Column Format     -                                                        ``CSBSparseMatrix`` (later)
+=========================================   ======================================================   ============================================
     
+What is the maturity level of :program:`CySparse`?
+==================================================
 
+If you don't mix matrices with different types and use vector multiplication, :program:`CySparse` has been tested quite heavily but as we only started in 2016, we cannot say that lots of users already tried the library. 
+If you stick to the basics, it probably will work.
+The rest is work in progress. We are planning to add more tests soon and to test extensively its integration with several well known solvers.
+
+..  warning:: Do not use this library for critical tasks!
+
+The benchmarks also shows that the library is fast, much faster than its competitors.
 
 
 License
