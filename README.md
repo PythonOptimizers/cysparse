@@ -2,13 +2,13 @@
 
 Fast sparse matrix library for Python/Cython.
 
+
 :warning: `COMPLEX256_T` is **no** longer supported :warning:
-
-:cyclone: :cyclone: :cyclone: THIS VERSION IS BEING COMPLETELY REWRITTEN: :weary: YOU :weary: SHALL :no_entry: NOT :no_entry: USE IT! :cyclone: :cyclone: :cyclone:
-
-
-I'm working on branch `feature/decoupling` which contains the :new: version of `CySparse`.
  
+This is the new version with a new API.
+ 
+Enjoy!
+
 Nikolaj
 
 I started to deal with sorted col/row indices for LL/CSC/CSR sparse matrices.
@@ -25,9 +25,10 @@ I started to deal with sorted col/row indices for LL/CSC/CSR sparse matrices.
     - The `linalg` part will be **completely** removed from `CySparse` and **each** interface with a solver will be an autonomous project (in their respective
       GitHub repositories). A common interface for all the solvers will be created and allow the interchange of solvers on the fly. :white_check_mark: (the linalg repositories 
       still have to be created though).
-    - `CySparse` itself will have its API changed to better reflect the common use in the community (See `PySparse`, `NumPy` and `SciPy.sparse`).
+    - `CySparse` itself will have its API changed to better reflect the common use in the community (See `PySparse`, `NumPy` and `SciPy.sparse`). :white_check_mark:
     - A better mechanism will be implemented to allow the mix of special matrix cases (Symmetrical/general matrices, C-contiguous/non C-contiguous, etc). The aim
-      is to introduce complex hermitian matrices (much later).
+      is to introduce complex hermitian matrices (much later). Unfortunately, without real inheritance mechanism, I don't know what to do. So by default, this is done.
+      :white_check_mark:
 
 2. A centralized error/exception mechanism will be added.
 
