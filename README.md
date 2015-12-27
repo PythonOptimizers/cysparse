@@ -27,7 +27,8 @@ I started to deal with sorted col/row indices for LL/CSC/CSR sparse matrices.
       still have to be created though).
     - `CySparse` itself will have its API changed to better reflect the common use in the community (See `PySparse`, `NumPy` and `SciPy.sparse`). :white_check_mark:
     - A better mechanism will be implemented to allow the mix of special matrix cases (Symmetrical/general matrices, C-contiguous/non C-contiguous, etc). The aim
-      is to introduce complex hermitian matrices (much later).
+      is to introduce complex hermitian matrices (much later). Unfortunately, without real inheritance mechanism, I don't know what to do. So by default, this is done.
+      :white_check_mark:
 
 2. A centralized error/exception mechanism will be added.
 
