@@ -46,6 +46,12 @@ Before we look how to create any matrix like object from an ``LLSparseMatrix`` o
 ``LLSparseMatrix`` factory methods
 ===========================================
 
+The :program:`CySparse` library has some available factory methods to constructs some kind of matrices. These factory methods don't test their arguments (i.e. you can pass whatever you want). This means that you **must**
+provide named arguments.
+
+..  warning:: Factory methods use *named* arguments.
+
+These factory methods do tests if they are provided with the needed arguments and do some internal tests to control their consistency. Whenever an internal test fails, an ``Exception`` is raised. 
 
 ``LLSparseMatrix``
 ----------------------
@@ -196,20 +202,96 @@ These vectors **must** be big enough to fill the diagonals.
 ``ArrowheadLLSparseMatrix``
 -------------------------------
 
+``ArrowheadLLSparseMatrix`` creates `arrowhead matrices <https://en.wikipedia.org/wiki/Arrowhead_matrix>`_ but **only** with one element. This element is given to the ``element`` argument:
+
+..  code-block:: python
+
+    A = ArrowheadLLSparseMatrix(nrow=3, ncol=4, element=3.8)
+    print A
+    
+This shows:
+
+..  code-block:: python
+
+    LLSparseMatrix [INT64_t, FLOAT64_t] of size=(3, 4) with 8 non zero values 
+    <Storage scheme: General and without zeros>
+     3.800000   3.800000   3.800000   3.800000  
+     3.800000   3.800000     ---        ---     
+     3.800000     ---      3.800000     ---     
+
+
 ``LinearFillLLSparseMatrix``
 ------------------------------
+
+This factory method is only used for testing purpose as it constructs fully dense matrices. The idea is to construct a matrix row by row or column by column and fill **all** elements with numbers obtained as follows:
+we start with an initial number (argument ``first_element``) and add a constant number to it (argument ``step``) one by one. By default, the matrix is constructed row by row. This can be changed by setting the argument 
+``row_wise`` to ``False``. Here is a first example row wise:
+
+..  code-block:: python
+
+    A = LinearFillLLSparseMatrix(nrow=2, ncol=3, first_element=1-6j, step=2+5j, dtype=COMPLEX64_T)
+    print A
+
+The matrix printed is:
+
+..  code-block:: python
+
+    LLSparseMatrix [INT64_t, COMPLEX64_t] of size=(2, 3) with 6 non zero values 
+    <Storage scheme: General and without zeros>
+     1.000000 - 6.000000j  3.000000 - 1.000000j  5.000000 + 4.000000j 
+     7.000000 + 9.000000j  9.000000 +14.000000j 11.000000 +19.000000j 
+
+The same factory method but this time working column by columm:
+
+..  code-block:: python
+
+    A = LinearFillLLSparseMatrix(nrow=2, ncol=3, first_element=1-6j, step=2+5j, dtype=COMPLEX64_T, row_wise=False)
+    print A
+
+and the corresponding matrix:
+
+..  code-block:: python
+
+    LLSparseMatrix [INT64_t, COMPLEX64_t] of size=(2, 3) with 6 non zero values 
+    <Storage scheme: General and without zeros>
+     1.000000 - 6.000000j  5.000000 + 4.000000j  9.000000 +14.000000j 
+     3.000000 - 1.000000j  7.000000 + 9.000000j 11.000000 +19.000000j 
+
 
 ``PermutationLLSparseMatrix``
 -------------------------------
 
+The ``PermutationLLSparseMatrix`` factory method creates, you guessed it, `permutations matrices <https://en.wikipedia.org/wiki/Permutation_matrix>`_.
+
+It takes a :program:`NumPy` vector as argument to represent a permutation and creates the corresponding permutation matrix:
+
+..  code-block:: python
+
+    P_mat_nd = np.array([0, 2, 1], dtype=np.int32)
+    P = PermutationLLSparseMatrix(P=P_mat_nd, size=3, itype=INT32_T, dtype=COMPLEX64_T)
+
+    print P
+
+The printed matrix is:
+
+..  code-block:: python
+
+    LLSparseMatrix [INT32_t, COMPLEX64_t] of size=(3, 3) with 3 non zero values 
+    <Storage scheme: General and without zeros>
+     1.000000 + 0.000000j    ---        ---        ---        ---     
+       ---        ---        ---        ---      1.000000 + 0.000000j 
+       ---        ---      1.000000 + 0.000000j    ---        ---     
+
+Note that :program:`CySparse` tests if the :program:`NumPy` vector really describes a permutation and that the :program:`NumPy` vector type **must** be compatible with the :class:`LLSparseMatrix` ``itype``.
+
 Other ways to create matrices or matrix like objects
 =======================================================
 
+[TO BE WRITEN]
 
+..  only:: html
 
-..  raw:: html
-
-    <h4>Footnotes</h4>
+    ..  rubric:: Footnotes
 
 ..  [#factory_method_strange_name] The term *factory method* is coined by the Design Pattern community. The *method* in itself can be a function, method, class, ... In :program:`CySparse`, we use global functions.
     This not very Pythonesque approach is made necessary because :program:`Cython` doesn't allow the use of pure C variables as arguments in the constructors of classes [#use_of_pure_c_variables_in_constructors]_.

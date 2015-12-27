@@ -15,7 +15,7 @@ from distutils.extension import Extension
 
 import numpy as np
 
-import configparser 
+import configparser
 import os
 import copy
 

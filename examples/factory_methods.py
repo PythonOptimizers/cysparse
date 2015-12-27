@@ -74,3 +74,27 @@ print l2
 print "/" * 80
 l3 = BandLLSparseMatrix(nrow=2, ncol=3, diag_coeff=[1], numpy_arrays=[b2], dtype=COMPLEX64_T)
 print l3
+
+print "@" * 80
+
+H = ArrowheadLLSparseMatrix(nrow=3, ncol=4, element=3.8)
+print H
+
+print "3" * 80
+
+I = LinearFillLLSparseMatrix(nrow=2, ncol=3, first_element=1-6j, step=2+5j, dtype=COMPLEX64_T)
+
+print I
+
+print "&" * 80
+
+J =  LinearFillLLSparseMatrix(nrow=2, ncol=3, first_element=1-6j, step=2+5j, dtype=COMPLEX64_T, row_wise=False)
+print J
+
+print "#" * 80
+
+P_mat_nd = np.array([0, 2, 1], dtype=np.int32)
+
+P = PermutationLLSparseMatrix(P=P_mat_nd, size=3, itype=INT32_T, dtype=COMPLEX64_T)
+
+print P
