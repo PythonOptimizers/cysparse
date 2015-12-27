@@ -2,4 +2,4 @@
 __version__ = "0.2.2"
 
 from cysparse import *
-from utils.system import get_root_dir
+from cysparse.utils.system import get_root_dir

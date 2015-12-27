@@ -22,7 +22,8 @@ The installation is done in a few simple steps:
 
 1. Clone the repository;
 2. Install the dependencies;
-3. Compile and install the library:
+3. Copy :file:`cysparse_template.cfg` to :file:`cysparse.cfg`;
+4. Compile and install the library:
 
 We detail these steps in the next sections.
 
@@ -39,6 +40,9 @@ Beware that you'll need a good internet connexion: the code weight a little bit 
 
 Install the depencies
 ----------------------
+
+- :program:`NumPy`;
+- :program:`configparser` (**not** :program:`ConfigParser`);
 
 [TO BE WRITTEN]
 

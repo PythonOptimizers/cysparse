@@ -6,6 +6,8 @@ By default, we use 'nosetests' but 'unittest discover' can be used instead. See 
 This script is fragile. It should be tested on different platforms.
 
 """
+from __future__ import print_function
+
 import os
 import sys
 import subprocess
@@ -13,12 +15,10 @@ import shutil
 import distutils
 import argparse
 
-import ConfigParser
-
 try:
     import nose
 except ImportError:
-    print "You need to install nose to run the tests."
+    print("You need to install nose to run the tests.")
     sys.exit(-1)
 
 
@@ -76,7 +76,7 @@ def launch_nosetests(pattern=None, verbose=False, use_libraries=None):
     commands_list.append('tests')
 
     if verbose:
-        print "launch command: '%s':" % " ".join(commands_list)
+        print("launch command: '%s':" % " ".join(commands_list))
     subprocess.call(commands_list)
 
     os.chdir(current_dir)
@@ -95,7 +95,7 @@ def launch_unittest(pattern=None, verbose=False):
         commands_list.append(pattern)
 
     if verbose:
-        print "launch command: '%s':" % " ".join(commands_list)
+        print("launch command: '%s':" % " ".join(commands_list))
     subprocess.call(commands_list)
 
     os.chdir(current_dir)
@@ -113,32 +113,32 @@ if __name__ == "__main__":
     destination_dir = lib_dir + os.path.sep + "tests"
 
     if arg_options.verbose:
-        print "Deleting test directory %s... " % destination_dir,
+        print("Deleting test directory %s... " % destination_dir,)
     # clean libxxx/tests because shutil.copytree only copies non existing directories
     shutil.rmtree(destination_dir, ignore_errors=True)
     if arg_options.verbose:
-        print "done"
-        print "copying tests into test directory %s..." % destination_dir,
+        print("done")
+        print("copying tests into test directory %s..." % destination_dir,)
     shutil.copytree("tests", destination_dir, symlinks=False, ignore=None)
     if arg_options.verbose:
-        print "done"
+        print("done")
 
     if arg_options.rebuild:
         if arg_options.verbose:
-            print "Cleaning lib...",
+            print("Cleaning lib...",)
         clean_lib()
         if arg_options.verbose:
-            print "done"
-            print "Generating lib...",
+            print("done")
+            print("Generating lib...",)
         generate_lib()
         if arg_options.verbose:
-            print "done"
+            print("done")
     elif arg_options.build:
         if arg_options.verbose:
-            print "Generating lib...",
+            print("Generating lib...",)
         generate_lib()
         if arg_options.verbose:
-            print "done"
+            print("done")
 
 
     if arg_options.dont_use_nose:

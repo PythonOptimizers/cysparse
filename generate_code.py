@@ -12,7 +12,7 @@
 from cygenja.generator import Generator
 from jinja2 import Environment, FileSystemLoader
 
-import ConfigParser
+import configparser
 import argparse
 import os
 import sys
@@ -96,7 +96,7 @@ def make_logger(cysparse_config):
 is_64bits = sys.maxsize > 2**32
 
 # read cysparse.cfg
-cysparse_config = ConfigParser.SafeConfigParser()
+cysparse_config = configparser.SafeConfigParser()
 cysparse_config.read('cysparse.cfg')
 
 

@@ -188,7 +188,7 @@ wich prints:
      1.000000 + 1.000000j    ---        ---     12.000000 - 1.000000j 
 
 As you can see, we didn't create a real band matrix. The diagonals to fill in are given in list in the ``diag_coeff`` argument and the :program:`NumPy` vectors are given inside another list in the ``numpy_arrays``
-argument. The diagonals can also be given in a slice.
+argument. The diagonals can also be given by a slice.
 
 You also can notice that the :program:`NumPy` vectors can "overflow": :program:`CySparse` only take the first elements of a given vector to populate a given diagonal. 
 These vectors **must** be big enough to fill the diagonals.

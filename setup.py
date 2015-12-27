@@ -15,7 +15,7 @@ from distutils.extension import Extension
 
 import numpy as np
 
-import ConfigParser
+import configparser 
 import os
 import copy
 
@@ -60,7 +60,7 @@ def prepare_Cython_extensions_as_C_extensions(extensions):
 # INIT
 ########################################################################################################################
 cysparse_config_file = 'cysparse.cfg'
-cysparse_config = ConfigParser.SafeConfigParser()
+cysparse_config = configparser.SafeConfigParser()
 cysparse_config.read(cysparse_config_file)
 
 numpy_include = np.get_include()
