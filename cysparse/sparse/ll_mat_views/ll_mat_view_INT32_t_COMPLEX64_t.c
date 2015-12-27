@@ -842,7 +842,7 @@ struct __pyx_t_8cysparse_12common_types_14cysparse_types_CPType {
 };
 struct __pyx_opt_args_8cysparse_6sparse_5s_mat_MakeMatrixLikeString;
 
-/* "cysparse/sparse/s_mat.pxd":52
+/* "cysparse/sparse/s_mat.pxd":53
  * 
  * 
  * cdef MakeMatrixLikeString(object A, full=?)             # <<<<<<<<<<<<<<
@@ -1071,7 +1071,7 @@ struct __pyx_vtabstruct_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT32_t_COM
   PyObject *(*keys)(struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT32_t_COMPLEX64_t_LLSparseMatrix_INT32_t_COMPLEX64_t *, int __pyx_skip_dispatch);
   PyObject *(*values)(struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT32_t_COMPLEX64_t_LLSparseMatrix_INT32_t_COMPLEX64_t *, int __pyx_skip_dispatch);
   PyObject *(*items)(struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT32_t_COMPLEX64_t_LLSparseMatrix_INT32_t_COMPLEX64_t *, int __pyx_skip_dispatch);
-  PyObject *(*take_triplet_pointers)(struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT32_t_COMPLEX64_t_LLSparseMatrix_INT32_t_COMPLEX64_t *, __pyx_t_8cysparse_12common_types_14cysparse_types_INT32_t *, __pyx_t_8cysparse_12common_types_14cysparse_types_INT32_t *, __pyx_t_float_complex *);
+  PyObject *(*fill_triplet)(struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT32_t_COMPLEX64_t_LLSparseMatrix_INT32_t_COMPLEX64_t *, __pyx_t_8cysparse_12common_types_14cysparse_types_INT32_t *, __pyx_t_8cysparse_12common_types_14cysparse_types_INT32_t *, __pyx_t_float_complex *);
   PyObject *(*take_triplet)(struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT32_t_COMPLEX64_t_LLSparseMatrix_INT32_t_COMPLEX64_t *, PyObject *, PyObject *, PyArrayObject *, int __pyx_skip_dispatch);
   PyObject *(*put_diagonal)(struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT32_t_COMPLEX64_t_LLSparseMatrix_INT32_t_COMPLEX64_t *, __pyx_t_8cysparse_12common_types_14cysparse_types_INT32_t, PyArrayObject *, int __pyx_skip_dispatch);
   PyObject *(*_norm_inf)(struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT32_t_COMPLEX64_t_LLSparseMatrix_INT32_t_COMPLEX64_t *);

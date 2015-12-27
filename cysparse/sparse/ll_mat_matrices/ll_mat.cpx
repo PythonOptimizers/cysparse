@@ -1864,7 +1864,7 @@ YOU HAVE TO DEFINE OR CAST YOUR NEW UNRECOGNIZED TYPE
 
         return (a_row, a_col, a_val)
 
-    cdef take_triplet_pointers(self, @index@ * a_row, @index@ * a_col, @type@ * a_val):
+    cdef fill_triplet(self, @index@ * a_row, @index@ * a_col, @type@ * a_val):
         """
         Warning:
             Arrays **must** be allocated.

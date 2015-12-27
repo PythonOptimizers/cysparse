@@ -66,7 +66,7 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX64_t(MutableSparseMatrix_INT32_t_COMPLE
     cpdef object values(self)
     cpdef object items(self)
 
-    cdef take_triplet_pointers(self, INT32_t * a_row, INT32_t * a_col, COMPLEX64_t * a_val)
+    cdef fill_triplet(self, INT32_t * a_row, INT32_t * a_col, COMPLEX64_t * a_val)
 
     cpdef take_triplet(self, id1, id2, cnp.ndarray[cnp.npy_complex64, ndim=1] b)
     cpdef put_diagonal(self, INT32_t k, cnp.ndarray[cnp.npy_complex64, ndim=1] b)

@@ -1729,7 +1729,7 @@ cdef class LLSparseMatrix_INT32_t_FLOAT64_t(MutableSparseMatrix_INT32_t_FLOAT64_
 
         return (a_row, a_col, a_val)
 
-    cdef take_triplet_pointers(self, INT32_t * a_row, INT32_t * a_col, FLOAT64_t * a_val):
+    cdef fill_triplet(self, INT32_t * a_row, INT32_t * a_col, FLOAT64_t * a_val):
         """
         Warning:
             Arrays **must** be allocated.

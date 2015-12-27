@@ -180,7 +180,7 @@ cdef class CSRSparseMatrix_INT32_t_INT64_t(ImmutableSparseMatrix_INT32_t_INT64_t
         total_memory += self.__nnz * sizeof(INT64_t)
 
         return total_memory
-        
+
     ####################################################################################################################
     # Column indices ordering
     ####################################################################################################################
