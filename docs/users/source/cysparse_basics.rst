@@ -169,6 +169,46 @@ By default, ``store_zero`` is set to ``False``.
 
 ``is_mutable`` returns if the matrix can be modified or not. Note that for the moment, **only** an :class:`LLSparseMatrix` matrix can be modified.
 
+memory
+""""""""
+
+Just for fun, you can ask each matrix type (``LLSparseMatrix``, ``CSCSparseMatrix`` and ``CSRSparseMatrix``) how much memory they actually use (``memory_real()``) versus the memory a corresponding full dense matrix
+would need (``memory_virtual()``):
+
+..  code-block:: python
+
+    A = ArrowheadLLSparseMatrix(nrow=50, ncol=800, itype=INT64_T, dtype=COMPLEX128_T)
+
+    print A.memory_real()
+    print A.memory_virtual()
+
+which returns:
+
+..  code-block::
+    
+    34448
+    5120000
+
+The results are in **bits**. ``ArrowheadLLSparseMatrix`` creates a sparse matrix. In this case, this sparse matrix has 898 non zero elements. The difference is huge and this is one of the reason we **do** use special
+representations of sparse matrices instead of storing all the zeros.
+
+Note that this memory is **only** the memory needed for the internal :program:`C`-arrays, **not** the total memory needed to store the whole matrix object. 
+
+You can also ask what memory **one** element needs to be stored internally.
+For our example:
+
+..  code-block:: python
+
+    print A.memory_element()
+
+returns 
+
+..  code-block:: python
+
+    128
+    
+128 bits for a ``COMPLEX128_T`` type is to be expected.
+
 
 
 ..  _basics_types:
