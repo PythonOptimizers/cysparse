@@ -93,6 +93,9 @@ This is the main basic factory method to create an :class:`LLSparseMatrix`. Ther
 ``PermutationLLSparseMatrix``
 -------------------------------
 
+Other ways to create matrices or matrix like objects
+=======================================================
+
 
 
 ..  raw:: html
