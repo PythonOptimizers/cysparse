@@ -140,15 +140,6 @@ if __name__ == "__main__":
         if arg_options.verbose:
             print "done"
 
-    # do we skip some tests?
-    # Some libraries might be missing...
-    cysparse_config = ConfigParser.SafeConfigParser()
-    cysparse_config.read('cysparse.cfg')
-
-    use_suitesparse = cysparse_config.getboolean('SUITESPARSE', 'use_suitesparse')
-    use_mumps = cysparse_config.getboolean('MUMPS', 'use_mumps')
-
-
 
     if arg_options.dont_use_nose:
         launch_unittest(arg_options.pattern, arg_options.verbose)

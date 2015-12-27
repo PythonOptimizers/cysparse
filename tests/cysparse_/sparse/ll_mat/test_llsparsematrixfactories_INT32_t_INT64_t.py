@@ -27,13 +27,10 @@ class CySparseLLSparseMatrixFactoriesNoSymmetryNoZero_INT32_t_INT64_t_TestCase(u
         self.nrow = NROW
         self.ncol = NCOL
 
+
     def test_LLSparseMatrix(self):
-
         self.A = LLSparseMatrix(nrow=self.nrow, ncol=self.ncol, dtype=INT64_T, itype=INT32_T)
-        #self.assertTrue()
-
-    def test_XXX(self):
-        pass
+        self.assertTrue(self.A.nnz == 0)
 
 
 #######################################################################
@@ -45,13 +42,8 @@ class CySparseLLSparseMatrixFactoriesWithSymmetryNoZero_INT32_t_INT64_t_TestCase
         self.size = SIZE
 
     def test_LLSparseMatrix(self):
-
         self.A = LLSparseMatrix(size=self.size, dtype=INT64_T, itype=INT32_T, store_symmetry=True)
-
-
-    def test_XXX(self):
-        pass
-
+        self.assertTrue(self.A.nnz == 0)
 
 #######################################################################
 # Case: store_symmetry == False, Store_zero==True
@@ -63,12 +55,8 @@ class CySparseLLSparseMatrixFactoriesNoSymmetrySWithZero_INT32_t_INT64_t_TestCas
         self.ncol = NCOL
 
     def test_LLSparseMatrix(self):
-
         self.A = LLSparseMatrix(nrow=self.nrow, ncol=self.ncol, dtype=INT64_T, itype=INT32_T, store_zero=True)
-
-    def test_XXX(self):
-        pass
-
+        self.assertTrue(self.A.nnz == 0)
 
 
 #######################################################################
@@ -80,13 +68,8 @@ class CySparseLLSparseMatrixFactoriesWithSymmetrySWithZero_INT32_t_INT64_t_TestC
         self.size = SIZE
 
     def test_LLSparseMatrix(self):
-
         self.A = LLSparseMatrix(size=self.size, dtype=INT64_T, itype=INT32_T, store_symmetry=True, store_zero=True)
-
-
-    def test_XXX(self):
-        pass
-
+        self.assertTrue(self.A.nnz == 0)
 
 if __name__ == '__main__':
     unittest.main()

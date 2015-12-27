@@ -43,7 +43,7 @@ But the first matrix **must** be an ``LLSparseMatrix``.
 Before we look how to create any matrix like object from an ``LLSparseMatrix`` or other sparse objects, let's look at the different ways to create the first ``LLSparseMatrix`` in the next section.
 
 
-List of ``LLSparseMatrix`` factory methods
+``LLSparseMatrix`` factory methods
 ===========================================
 
 
@@ -73,17 +73,126 @@ This is the main basic factory method to create an :class:`LLSparseMatrix`. Ther
   The ``itype`` and ``dtype`` arguments represent respectively the index and element types. By default, the index and element types are (``INT32_t``, ``FLOAT32_T``) and (``INT64_t``, ``FLOAT64_T``) on 32bits and 64bits 
   platforms [#modify_default_types_in_cysparse_cfg]_. 
   
-           
+- From another matrix. Use the ``matrix`` argument. 
+
+  ..  warning:: This is not yet implemented.
+
+- From a file. By default, a ``test_bounds`` argument is set to ``True`` to test if all indices are not out of bounds. You can disable this to gain
+  some speed when reading a file.
+  For the moment, only the `Matrix Market <http://math.nist.gov/MatrixMarket/>`_ format is available. To give a file name of a file in Matrix Market format, use the ``mm_filename`` argument.           
+  
+  ..  code-block:: python
+  
+      A = LLSparseMatrix(mm_filename='bcsstk01.mtx', itype=INT64_T, dtype=FLOAT64_T)
+      
+  This will create a ``LLSparseMatrix [INT64_t, FLOAT64_t] of size=(48, 48) with 224 non zero values <Storage scheme: Symmetric and without zeros>`` matrix.
+      
+  To read a matrix file, you need to already know the type of your ``LLSparseMatrix``, here we choose ``itype=INT64_T, dtype=FLOAT64_T``. If you don't know the exact type of the matrix you need to read your file, use :func:`LLSparseMatrixFromMMFile` instead. This
+  factory method will return the right ``LLSparseMatrix`` for you. 
+  
 ``LLSparseMatrixFromMMFile``
 -----------------------------
 
+We just saw the ``LLSpasreMatrix`` factory method. This factory method can only be used if you know by advance the **exact** type of your matrix object. It might happen that you don't know exactly what type of matrix you need. 
+This is especially true when you read a file to populate a matrix. ``LLSparseMatrixFromMMFile`` allows you to open any Matrix Market file and create the right type of ``LLSparseMatrix``, i.e. the minimal ``LLSparseMatrix`` type
+to hold the matrix. Let try with the same file :file:`bcsstk01.mtx` as above:
+
+..  code-block:: python
+
+    A = LLSparseMatrixFromMMFile('bcsstk01.mtx')
+    
+This returns a ``LLSparseMatrix [INT32_t, FLOAT64_t] of size=(48, 48) with 224 non zero values <Storage scheme: Symmetric and without zeros>`` matrix. Indeed, we didn't need to use ``INT64_t`` for the index type, ``INT32_t`` is 
+sufficient.
+
+This factory method also accepts two more arguments:
+
+- ``store_zero``: ``False`` by default and
+- ``test_bounds``: ``True`` by default.
+
+Let try them:
+
+..  code-block:: python
+
+    A = LLSparseMatrixFromMMFile('bcsstk01.mtx', store_zero=True, test_bounds=False)
+    
+``A`` is now an ``LLSparseMatrix [INT32_t, FLOAT64_t] of size=(48, 48) with 224 non zero values <Storage scheme: Symmetric and with zeros>``. We now store explicitly zeros. We didn't test if the elements where 
+all within a :math:`48 \times 48` matrix but we already knew that this is the case, so we could speed up the reading by setting ``test_bounds`` to ``False``.    
 
 ``DiagonalLLSparseMatrix``
 ------------------------------
 
+``DiagonalLLSparseMatrix`` constructs `diagonal matrix <https://en.wikipedia.org/wiki/Diagonal_matrix>`_.
+You can give the diagonal element with the ``element`` argument:
+
+..  code-block:: python
+
+    A = DiagonalLLSparseMatrix(element=3-5j, nrow=2, ncol=3, dtype=COMPLEX128_T)
+
+This returns:
+
+..  code-block:: python
+
+    LLSparseMatrix [INT64_t, COMPLEX128_t] of size=(2, 3) with 2 non zero values 
+    <Storage scheme: General and without zeros>
+     3.000000 - 5.000000j    ---        ---        ---        ---     
+       ---        ---      3.000000 - 5.000000j    ---        ---   
+       
+If no element is given, a default of ``1`` is used.
+
 ``IdentityLLSparseMatrix``
 ------------------------------
 
+This factory method creates the special diagonal matrix with only ones on its main diagonal. The `identity matrix <https://en.wikipedia.org/wiki/Identity_matrix>`_ 
+
+For instance:
+
+..  code-block:: python
+
+    A = IdentityLLSparseMatrix(size = 3, dtype=COMPLEX64_T)
+    print A
+
+returns:
+
+..  code-block:: python
+
+    LLSparseMatrix [INT64_t, COMPLEX64_t] of size=(3, 3) with 3 non zero values 
+    <Storage scheme: General and without zeros>
+     1.000000 + 0.000000j    ---        ---        ---        ---     
+       ---        ---      1.000000 + 0.000000j    ---        ---     
+       ---        ---        ---        ---      1.000000 + 0.000000j     
+
+Note that this factory method is only an alias for ``DiagonalLLSparseMatrix`` with default arguments.
+
+``BandLLSparseMatrix``
+---------------------------
+
+``BandLLSparseMatrix`` creates `band matrices <https://en.wikipedia.org/wiki/Band_matrix>`_ but not only as you can use it to create more general "band-like" matrices. In :program:`CySparse`, you can use this factory 
+method to create matrices with principal diagonals. To do so, you create some :program:`NumPy` vectors and you assign them to the diagonals. Here is an example:
+
+..  code-block:: python
+
+    b1 = np.array([1+1j], dtype=np.complex64)
+    b2 = np.array([1+1j, 12-1j], dtype=np.complex64)
+    b3 = np.array([1+1j, 1+1j, -1j], dtype=np.complex64)   
+
+    A = BandLLSparseMatrix(nrow=2, ncol=3, diag_coeff=[-1, 1, 2], numpy_arrays=[b1, b2, b3], dtype=COMPLEX64_T)
+    print A 
+
+wich prints:
+
+..  code-block:: python
+
+    LLSparseMatrix [INT64_t, COMPLEX64_t] of size=(2, 3) with 4 non zero values 
+    <Storage scheme: General and without zeros>
+       ---        ---      1.000000 + 1.000000j  1.000000 + 1.000000j 
+     1.000000 + 1.000000j    ---        ---     12.000000 - 1.000000j 
+
+As you can see, we didn't create a real band matrix. The diagonals to fill in are given in list in the ``diag_coeff`` argument and the :program:`NumPy` vectors are given inside another list in the ``numpy_arrays``
+argument. The diagonals can also be given in a slice.
+
+You also can notice that the :program:`NumPy` vectors can "overflow": :program:`CySparse` only take the first elements of a given vector to populate a given diagonal. 
+These vectors **must** be big enough to fill the diagonals.
+ 
 ``ArrowheadLLSparseMatrix``
 -------------------------------
 

@@ -27,13 +27,10 @@ class CySparseLLSparseMatrixFactoriesNoSymmetryNoZero_@index@_@type@_TestCase(un
         self.nrow = NROW
         self.ncol = NCOL
 
+
     def test_LLSparseMatrix(self):
-
         self.A = LLSparseMatrix(nrow=self.nrow, ncol=self.ncol, dtype=@type|type2enum@, itype=@index|type2enum@)
-        #self.assertTrue()
-
-    def test_XXX(self):
-        pass
+        self.assertTrue(self.A.nnz == 0)
 
 
 #######################################################################
@@ -45,13 +42,8 @@ class CySparseLLSparseMatrixFactoriesWithSymmetryNoZero_@index@_@type@_TestCase(
         self.size = SIZE
 
     def test_LLSparseMatrix(self):
-
         self.A = LLSparseMatrix(size=self.size, dtype=@type|type2enum@, itype=@index|type2enum@, store_symmetry=True)
-
-
-    def test_XXX(self):
-        pass
-
+        self.assertTrue(self.A.nnz == 0)
 
 #######################################################################
 # Case: store_symmetry == False, Store_zero==True
@@ -63,12 +55,8 @@ class CySparseLLSparseMatrixFactoriesNoSymmetrySWithZero_@index@_@type@_TestCase
         self.ncol = NCOL
 
     def test_LLSparseMatrix(self):
-
         self.A = LLSparseMatrix(nrow=self.nrow, ncol=self.ncol, dtype=@type|type2enum@, itype=@index|type2enum@, store_zero=True)
-
-    def test_XXX(self):
-        pass
-
+        self.assertTrue(self.A.nnz == 0)
 
 
 #######################################################################
@@ -80,13 +68,8 @@ class CySparseLLSparseMatrixFactoriesWithSymmetrySWithZero_@index@_@type@_TestCa
         self.size = SIZE
 
     def test_LLSparseMatrix(self):
-
         self.A = LLSparseMatrix(size=self.size, dtype=@type|type2enum@, itype=@index|type2enum@, store_symmetry=True, store_zero=True)
-
-
-    def test_XXX(self):
-        pass
-
+        self.assertTrue(self.A.nnz == 0)
 
 if __name__ == '__main__':
     unittest.main()
