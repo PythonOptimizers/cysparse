@@ -104,7 +104,7 @@ See [Wiki](https://github.com/Funartech/cysparse/wiki) for details!
 
 ## Release history
 
-- Version 0.3.0 released on Dec XX, 2015
+- Version 0.3.0 released on Dec 27, 2015
 
   This is a major update.
   New documentation, split between users and developers. Pdf is now enabled.
