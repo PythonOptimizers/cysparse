@@ -16,7 +16,11 @@ What is :program:`CySparse`?
 
 :program:`CySparse` is a fast sparse matrix library for :program:`Python`/:program:`Cython`.
 
+How fast is fast?
+=================
 
+How big is big?
+===============
 
 :program:`PySparse` legacy
 ============================
