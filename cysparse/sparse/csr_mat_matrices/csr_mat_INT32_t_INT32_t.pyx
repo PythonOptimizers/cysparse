@@ -6,7 +6,7 @@ Condensed Sparse Row (CSR) Format Matrices.
 
 from __future__ import print_function
 
-from cysparse.sparse.s_mat cimport unexposed_value
+from cysparse.sparse.s_mat cimport unexposed_value, SparseMatrix
 from cysparse.common_types.cysparse_numpy_types import *
 
 from cysparse.sparse.s_mat_matrices.s_mat_INT32_t_INT32_t cimport ImmutableSparseMatrix_INT32_t_INT32_t, MutableSparseMatrix_INT32_t_INT32_t
@@ -67,7 +67,6 @@ include "csr_mat_helpers/csr_mat_is_symmetric_INT32_t_INT32_t.pxi"
 cdef extern from "Python.h":
     # *** Types ***
     int PyInt_Check(PyObject *o)
-
 
 
 cdef class CSRSparseMatrix_INT32_t_INT32_t(ImmutableSparseMatrix_INT32_t_INT32_t):

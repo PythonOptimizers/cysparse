@@ -19,4 +19,3 @@ cdef INT32_t LL_MAT_DEFAULT_SIZE_HINT
 cdef INT32_t LL_MAT_PPRINT_COL_THRESH
 cdef INT32_t LL_MAT_PPRINT_ROW_THRESH
 
-cpdef bint PyLLSparseMatrix_Check(object obj)
