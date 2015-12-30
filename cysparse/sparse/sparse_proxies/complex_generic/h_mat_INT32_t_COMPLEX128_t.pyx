@@ -1,7 +1,7 @@
 from cysparse.sparse.s_mat cimport SparseMatrix, MakeMatrixLikeString
 
 from cysparse.common_types.cysparse_numpy_types import are_mixed_types_compatible, cysparse_to_numpy_type
-from cysparse.sparse.ll_mat cimport PyLLSparseMatrix_Check
+from cysparse.sparse.s_mat cimport PyLLSparseMatrix_Check
 
 cimport numpy as cnp
 

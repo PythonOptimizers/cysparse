@@ -640,7 +640,7 @@ struct __pyx_t_8cysparse_12common_types_14cysparse_types_CPType {
 };
 struct __pyx_opt_args_8cysparse_6sparse_5s_mat_MakeMatrixLikeString;
 
-/* "cysparse/sparse/s_mat.pxd":53
+/* "cysparse/sparse/s_mat.pxd":56
  * 
  * 
  * cdef MakeMatrixLikeString(object A, full=?)             # <<<<<<<<<<<<<<
@@ -650,8 +650,8 @@ struct __pyx_opt_args_8cysparse_6sparse_5s_mat_MakeMatrixLikeString {
   PyObject *full;
 };
 
-/* "cysparse/sparse/s_mat.pxd":21
- * cdef bint PyBothSparseMatricesAreOfSameType(object obj1, object obj2)
+/* "cysparse/sparse/s_mat.pxd":24
+ * cpdef bint PyCSRSparseMatrix_Check(object obj)
  * 
  * cdef class SparseMatrix:             # <<<<<<<<<<<<<<
  *     """

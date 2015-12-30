@@ -77,10 +77,6 @@ if use_cython:
 # Debug mode?
 use_debug_symbols = cysparse_config.getboolean('CODE_GENERATION', 'use_debug_symbols')
 
-# DEFAULT
-default_include_dir = get_path_option(cysparse_config, 'DEFAULT', 'include_dirs')
-default_library_dir = get_path_option(cysparse_config, 'DEFAULT', 'library_dirs')
-
 ########################################################################################################################
 # EXTENSIONS
 ########################################################################################################################

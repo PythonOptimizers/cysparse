@@ -17,6 +17,9 @@ cdef INT32_t MUTABLE_SPARSE_MAT_DEFAULT_SIZE_HINT
 cdef __set_store_zero_attribute(SparseMatrix A, bint store_zero)
 cpdef bint PySparseMatrix_Check(object obj)
 cdef bint PyBothSparseMatricesAreOfSameType(object obj1, object obj2)
+cpdef bint PyLLSparseMatrix_Check(object obj)
+cpdef bint PyCSCSparseMatrix_Check(object obj)
+cpdef bint PyCSRSparseMatrix_Check(object obj)
 
 cdef class SparseMatrix:
     """

@@ -7,7 +7,7 @@ from __future__ import print_function
 
 from cysparse.common_types.cysparse_types cimport *
 
-from cysparse.sparse.s_mat cimport unexposed_value
+from cysparse.sparse.s_mat cimport unexposed_value, SparseMatrix
 
 from cysparse.sparse.s_mat_matrices.s_mat_INT32_t_INT64_t cimport ImmutableSparseMatrix_INT32_t_INT64_t
 from cysparse.sparse.ll_mat_matrices.ll_mat_INT32_t_INT64_t cimport LLSparseMatrix_INT32_t_INT64_t
@@ -61,7 +61,6 @@ cdef extern from "complex.h":
 include "csc_mat_kernel/csc_mat_multiplication_by_numpy_vector_kernel_INT32_t_INT64_t.pxi"
 include "csc_mat_helpers/csc_mat_multiplication_INT32_t_INT64_t.pxi"
 include "csc_mat_helpers/csc_mat_is_symmetric_INT32_t_INT64_t.pxi"
-
 
 cdef class CSCSparseMatrix_INT32_t_INT64_t(ImmutableSparseMatrix_INT32_t_INT64_t):
     """

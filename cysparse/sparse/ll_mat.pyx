@@ -6,7 +6,8 @@ from cysparse.common_types.cysparse_types import *
 from cysparse.common_types.cysparse_types cimport *
 from cysparse.common_types.cysparse_numpy_types import are_mixed_types_cast_compatible
 
-from cysparse.sparse.s_mat cimport SparseMatrix, PySparseMatrix_Check, PyBothSparseMatricesAreOfSameType
+from cysparse.sparse.s_mat cimport SparseMatrix, PySparseMatrix_Check, PyBothSparseMatricesAreOfSameType, PyLLSparseMatrix_Check, PyCSCSparseMatrix_Check, PyCSRSparseMatrix_Check
+from cysparse.sparse.s_mat import PySparseMatrix_Check, PyLLSparseMatrix_Check, PyCSCSparseMatrix_Check, PyCSRSparseMatrix_Check
 
 from cython cimport isinstance
 from libc.stdio cimport *
@@ -285,19 +286,6 @@ include "ll_mat_matrices/ll_mat_IO/ll_mat_mm_INT64_t_FLOAT64_t.pxi"
 ########################################################################################################################
 # Common matrix operations
 ########################################################################################################################
-cpdef bint PyLLSparseMatrix_Check(object obj):
-    """
-    Test if ``obj`` is a :class:`LLSparseMatrix`.
-
-    """
-    cdef:
-        bint is_ll_sparse_matrix = False
-
-    if isinstance(obj, SparseMatrix):
-        is_ll_sparse_matrix = obj.base_type_str == 'LLSparseMatrix'
-
-    return is_ll_sparse_matrix
-
 def matvec(A, b):
     """
     Return :math:`A * b`.

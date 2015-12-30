@@ -34,7 +34,7 @@ Start by cloning the :program:`GitHub` repository:
 
 ..  code-block:: bash
 
-    git clone https://github.com/PythonOptimizers/cysparse
+    git clone https://github.com/PythonOptimizers/cysparse.git
 
 Beware that you'll need a good internet connexion: the code weight a little bit more than ... 200MB!
 
@@ -43,8 +43,6 @@ Install the depencies
 
 - :program:`NumPy`;
 - :program:`configparser` (**not** :program:`ConfigParser`);
-
-[TO BE WRITTEN]
 
 
 All :program:`Python` dependencies are described in the :file:`requirements.txt` files. You can easily install them all with:
@@ -92,7 +90,7 @@ Start by cloning the :program:`GitHub` repository:
 
 ..  code-block:: bash
 
-    git clone https://github.com/PythonOptimizers/cysparse
+    git clone https://github.com/PythonOptimizers/cysparse.git
 
 Beware that you'll need a good internet connexion: the code weight a little bit more than ... 200MB!
 
@@ -196,9 +194,9 @@ Inconveniences
 
   ..  code-block:: bash
 
-      python generate_code.py -ac
+      python generate_code.py -rc cysparse
         
-  where ``-ac`` stands for ``a``\ll and ``c``\lean. This will delete **all** generated ``.pxi``, ``.pxd`` and ``.pyx`` :program:`Cython` files. Then delete the generated :program:`C` files:
+  where ``-rc`` stands for ``r``\ecursive and ``c``\lean. This will delete **all** generated ``.pxi``, ``.pxd`` and ``.pyx`` :program:`Cython` files. Then delete the generated :program:`C` files. To do this, invoke:
 
   ..  code-block:: bash
 

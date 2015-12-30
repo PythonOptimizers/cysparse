@@ -16,7 +16,11 @@ What is :program:`CySparse`?
 
 :program:`CySparse` is a fast sparse matrix library for :program:`Python`/:program:`Cython`.
 
+How fast is fast?
+=================
 
+How big is big?
+===============
 
 :program:`PySparse` legacy
 ============================
@@ -60,8 +64,8 @@ Compressed Sparse Row and Column Format     -                                   
 What is the maturity level of :program:`CySparse`?
 ==================================================
 
-If you don't mix matrices with different types and use vector multiplication, :program:`CySparse` has been tested quite heavily but as we only started in 2016, we cannot say that lots of users already tried the library. 
-If you stick to the basics, it probably will work.
+If you don't mix matrices with different types and use vector multiplication, :program:`CySparse` has been tested quite heavily but as we only started in 2016, :program:`CySpasre` is still in its infancy. 
+If you stick to the basics, it works.
 The rest is work in progress. We are planning to add more tests soon and to test extensively its integration with several well known solvers.
 
 ..  warning:: Do not use this library for critical tasks!

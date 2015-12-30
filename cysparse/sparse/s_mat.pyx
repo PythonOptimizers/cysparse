@@ -69,6 +69,46 @@ cdef bint PyBothSparseMatricesAreOfSameType(object obj1, object obj2):
 
     return obj1.base_type_str == obj2.base_type_str
 
+cpdef bint PyLLSparseMatrix_Check(object obj):
+    """
+    Test if ``obj`` is a :class:`LLSparseMatrix`.
+
+    """
+    cdef:
+        bint is_ll_sparse_matrix = False
+
+    if isinstance(obj, SparseMatrix):
+        is_ll_sparse_matrix = obj.base_type_str == 'LLSparseMatrix'
+
+    return is_ll_sparse_matrix
+
+cpdef bint PyCSCSparseMatrix_Check(object obj):
+    """
+    Test if ``obj`` is a :class:`CSCSparseMatrix`.
+
+    """
+    cdef:
+        bint is_csc_sparse_matrix = False
+
+    if isinstance(obj, SparseMatrix):
+        is_csc_sparse_matrix = obj.base_type_str == 'CSCSparseMatrix'
+
+    return is_csc_sparse_matrix
+
+
+cpdef bint PyCSRSparseMatrix_Check(object obj):
+    """
+    Test if ``obj`` is a :class:`CSRSparseMatrix`.
+
+    """
+    cdef:
+        bint is_csr_sparse_matrix = False
+
+    if isinstance(obj, SparseMatrix):
+        is_csr_sparse_matrix = obj.base_type_str == 'CSRSparseMatrix'
+
+    return is_csr_sparse_matrix
+
 ########################################################################################################################
 # BASE MATRIX CLASS
 ########################################################################################################################

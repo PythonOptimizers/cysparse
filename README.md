@@ -105,6 +105,10 @@ See [Wiki](https://github.com/Funartech/cysparse/wiki) for details!
 
 ## Release history
 
+- Version 0.4.0 released on Dec 30, 2015
+
+  All PyXXX_Check() functions now in s_mat.
+  
 - Version 0.3.0 released on Dec 27, 2015
 
   This is a major update.
