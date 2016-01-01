@@ -782,9 +782,13 @@ YOU HAVE TO EXPLICITY CAST YOUR TYPE
         return self.matvec(b)
 {% endif %}
 
-    # TODO: reintroduce exception!
-    #def matdot(self, B):
-    #    raise NotImplementedError("matdot not implemented for CSR matrices")
+    def matdot(self, B):
+
+        # CASES
+        if isinstance(B, CSCSparseMatrix_@index@_@type@):
+            return multiply_csr_mat_by_csc_mat_@index@_@type@(self, B)
+        else:
+            raise NotImplemented("Multiplication not (yet) allowed")
 
     def matdot_transp(self, B):
         raise NotImplementedError("matdot_transp not implemented for CSR matrices")
