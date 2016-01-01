@@ -769,8 +769,9 @@ cdef class CSRSparseMatrix_INT32_t_COMPLEX128_t(ImmutableSparseMatrix_INT32_t_CO
         return multiply_conjugated_csr_mat_with_numpy_vector_INT32_t_COMPLEX128_t(self, b)
 
 
-    def matdot(self, B):
-        raise NotImplementedError("matdot not implemented for CSR matrices")
+    # TODO: reintroduce exception!
+    #def matdot(self, B):
+    #    raise NotImplementedError("matdot not implemented for CSR matrices")
 
     def matdot_transp(self, B):
         raise NotImplementedError("matdot_transp not implemented for CSR matrices")

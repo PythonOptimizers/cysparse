@@ -5,6 +5,8 @@ cdef INT32_t MUTABLE_SPARSE_MAT_DEFAULT_SIZE_HINT = 40        # allocated size b
 
 unexposed_value = object()
 
+# TODO: remove next import
+import numpy as np
 
 cdef __set_store_zero_attribute(SparseMatrix A, bint store_zero):
     """
@@ -297,7 +299,12 @@ cdef class SparseMatrix:
             B:
 
         """
-        raise NotImplementedError("Operation not implemented (yet). Please report.")
+        # TODO: erase this
+        # This is really temporary to allow to test some solvers
+
+        return np.dot(self.to_ndarray(), B.to_ndarray())
+
+        #raise NotImplementedError("Operation not implemented (yet). Please report.")
 
     def matdot_transp(self, B):
         """

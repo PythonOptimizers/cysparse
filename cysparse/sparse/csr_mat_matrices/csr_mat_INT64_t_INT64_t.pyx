@@ -768,8 +768,9 @@ cdef class CSRSparseMatrix_INT64_t_INT64_t(ImmutableSparseMatrix_INT64_t_INT64_t
         return self.matvec(b)
 
 
-    def matdot(self, B):
-        raise NotImplementedError("matdot not implemented for CSR matrices")
+    # TODO: reintroduce exception!
+    #def matdot(self, B):
+    #    raise NotImplementedError("matdot not implemented for CSR matrices")
 
     def matdot_transp(self, B):
         raise NotImplementedError("matdot_transp not implemented for CSR matrices")

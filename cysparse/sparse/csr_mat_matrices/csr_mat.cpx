@@ -782,8 +782,9 @@ YOU HAVE TO EXPLICITY CAST YOUR TYPE
         return self.matvec(b)
 {% endif %}
 
-    def matdot(self, B):
-        raise NotImplementedError("matdot not implemented for CSR matrices")
+    # TODO: reintroduce exception!
+    #def matdot(self, B):
+    #    raise NotImplementedError("matdot not implemented for CSR matrices")
 
     def matdot_transp(self, B):
         raise NotImplementedError("matdot_transp not implemented for CSR matrices")
