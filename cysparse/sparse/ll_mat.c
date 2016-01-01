@@ -52533,7 +52533,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_20ArrowheadLLSparseMatrix(CY
  *     if kwargs.get('store_symmetric', False):
  *         raise NotImplementedError('This type of matrix is not implemented for symmetric matrices')             # <<<<<<<<<<<<<<
  * 
- *     ll_mat = LLSparseMatrix(**kwargs)
+ * 
  */
     __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_NotImplementedError, __pyx_tuple__134, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 804; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
@@ -52550,46 +52550,46 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_20ArrowheadLLSparseMatrix(CY
  */
   }
 
-  /* "cysparse/sparse/ll_mat.pyx":806
- *         raise NotImplementedError('This type of matrix is not implemented for symmetric matrices')
+  /* "cysparse/sparse/ll_mat.pyx":822
+ * 
  * 
  *     ll_mat = LLSparseMatrix(**kwargs)             # <<<<<<<<<<<<<<
  * 
  *     itype = ll_mat.itype
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_LLSparseMatrix); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 806; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_LLSparseMatrix); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 822; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_v_kwargs); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 806; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_v_kwargs); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 822; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_ll_mat = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "cysparse/sparse/ll_mat.pyx":808
+  /* "cysparse/sparse/ll_mat.pyx":824
  *     ll_mat = LLSparseMatrix(**kwargs)
  * 
  *     itype = ll_mat.itype             # <<<<<<<<<<<<<<
  *     dtype = ll_mat.dtype
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_ll_mat, __pyx_n_s_itype); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 808; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_ll_mat, __pyx_n_s_itype); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 824; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_itype = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "cysparse/sparse/ll_mat.pyx":809
+  /* "cysparse/sparse/ll_mat.pyx":825
  * 
  *     itype = ll_mat.itype
  *     dtype = ll_mat.dtype             # <<<<<<<<<<<<<<
  * 
  *     # create 1.0 element if needed
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_ll_mat, __pyx_n_s_dtype); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 809; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_ll_mat, __pyx_n_s_dtype); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 825; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_dtype = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "cysparse/sparse/ll_mat.pyx":812
+  /* "cysparse/sparse/ll_mat.pyx":828
  * 
  *     # create 1.0 element if needed
  *     if element is None:             # <<<<<<<<<<<<<<
@@ -52600,14 +52600,14 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_20ArrowheadLLSparseMatrix(CY
   __pyx_t_4 = (__pyx_t_3 != 0);
   if (__pyx_t_4) {
 
-    /* "cysparse/sparse/ll_mat.pyx":813
+    /* "cysparse/sparse/ll_mat.pyx":829
  *     # create 1.0 element if needed
  *     if element is None:
  *         if is_integer_type(dtype):             # <<<<<<<<<<<<<<
  *             element = 1
  *         elif is_real_type(dtype):
  */
-    __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_is_integer_type); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 813; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_is_integer_type); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 829; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_5 = NULL;
     if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_2))) {
@@ -52620,25 +52620,25 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_20ArrowheadLLSparseMatrix(CY
       }
     }
     if (!__pyx_t_5) {
-      __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_dtype); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 813; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_dtype); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 829; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
     } else {
-      __pyx_t_6 = PyTuple_New(1+1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 813; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_6 = PyTuple_New(1+1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 829; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_5); __pyx_t_5 = NULL;
       __Pyx_INCREF(__pyx_v_dtype);
       __Pyx_GIVEREF(__pyx_v_dtype);
       PyTuple_SET_ITEM(__pyx_t_6, 0+1, __pyx_v_dtype);
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_6, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 813; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_6, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 829; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     }
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 813; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 829; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_4) {
 
-      /* "cysparse/sparse/ll_mat.pyx":814
+      /* "cysparse/sparse/ll_mat.pyx":830
  *     if element is None:
  *         if is_integer_type(dtype):
  *             element = 1             # <<<<<<<<<<<<<<
@@ -52648,7 +52648,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_20ArrowheadLLSparseMatrix(CY
       __Pyx_INCREF(__pyx_int_1);
       __Pyx_DECREF_SET(__pyx_v_element, __pyx_int_1);
 
-      /* "cysparse/sparse/ll_mat.pyx":813
+      /* "cysparse/sparse/ll_mat.pyx":829
  *     # create 1.0 element if needed
  *     if element is None:
  *         if is_integer_type(dtype):             # <<<<<<<<<<<<<<
@@ -52658,14 +52658,14 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_20ArrowheadLLSparseMatrix(CY
       goto __pyx_L5;
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":815
+    /* "cysparse/sparse/ll_mat.pyx":831
  *         if is_integer_type(dtype):
  *             element = 1
  *         elif is_real_type(dtype):             # <<<<<<<<<<<<<<
  *             element = 1.0
  *         elif is_complex_type(dtype):
  */
-    __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_is_real_type); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 815; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_is_real_type); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 831; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_6 = NULL;
     if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_2))) {
@@ -52678,25 +52678,25 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_20ArrowheadLLSparseMatrix(CY
       }
     }
     if (!__pyx_t_6) {
-      __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_dtype); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 815; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_dtype); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 831; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
     } else {
-      __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 815; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 831; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_6); __pyx_t_6 = NULL;
       __Pyx_INCREF(__pyx_v_dtype);
       __Pyx_GIVEREF(__pyx_v_dtype);
       PyTuple_SET_ITEM(__pyx_t_5, 0+1, __pyx_v_dtype);
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 815; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 831; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     }
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 815; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 831; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_4) {
 
-      /* "cysparse/sparse/ll_mat.pyx":816
+      /* "cysparse/sparse/ll_mat.pyx":832
  *             element = 1
  *         elif is_real_type(dtype):
  *             element = 1.0             # <<<<<<<<<<<<<<
@@ -52706,7 +52706,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_20ArrowheadLLSparseMatrix(CY
       __Pyx_INCREF(__pyx_float_1_0);
       __Pyx_DECREF_SET(__pyx_v_element, __pyx_float_1_0);
 
-      /* "cysparse/sparse/ll_mat.pyx":815
+      /* "cysparse/sparse/ll_mat.pyx":831
  *         if is_integer_type(dtype):
  *             element = 1
  *         elif is_real_type(dtype):             # <<<<<<<<<<<<<<
@@ -52716,14 +52716,14 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_20ArrowheadLLSparseMatrix(CY
       goto __pyx_L5;
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":817
+    /* "cysparse/sparse/ll_mat.pyx":833
  *         elif is_real_type(dtype):
  *             element = 1.0
  *         elif is_complex_type(dtype):             # <<<<<<<<<<<<<<
  *             element = 1.0 + 0.0j
  *         else:
  */
-    __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_is_complex_type); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 817; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_is_complex_type); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 833; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_5 = NULL;
     if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_2))) {
@@ -52736,25 +52736,25 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_20ArrowheadLLSparseMatrix(CY
       }
     }
     if (!__pyx_t_5) {
-      __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_dtype); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 817; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_dtype); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 833; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
     } else {
-      __pyx_t_6 = PyTuple_New(1+1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 817; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_6 = PyTuple_New(1+1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 833; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_5); __pyx_t_5 = NULL;
       __Pyx_INCREF(__pyx_v_dtype);
       __Pyx_GIVEREF(__pyx_v_dtype);
       PyTuple_SET_ITEM(__pyx_t_6, 0+1, __pyx_v_dtype);
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_6, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 817; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_6, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 833; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     }
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 817; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 833; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_4) {
 
-      /* "cysparse/sparse/ll_mat.pyx":818
+      /* "cysparse/sparse/ll_mat.pyx":834
  *             element = 1.0
  *         elif is_complex_type(dtype):
  *             element = 1.0 + 0.0j             # <<<<<<<<<<<<<<
@@ -52762,12 +52762,12 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_20ArrowheadLLSparseMatrix(CY
  *             raise TypeError('dtype not recognized')
  */
       __pyx_t_7 = __Pyx_c_sum(__pyx_t_double_complex_from_parts(1.0, 0), __pyx_t_double_complex_from_parts(0, 0.0));
-      __pyx_t_1 = __pyx_PyComplex_FromComplex(__pyx_t_7); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 818; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = __pyx_PyComplex_FromComplex(__pyx_t_7); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 834; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF_SET(__pyx_v_element, __pyx_t_1);
       __pyx_t_1 = 0;
 
-      /* "cysparse/sparse/ll_mat.pyx":817
+      /* "cysparse/sparse/ll_mat.pyx":833
  *         elif is_real_type(dtype):
  *             element = 1.0
  *         elif is_complex_type(dtype):             # <<<<<<<<<<<<<<
@@ -52777,7 +52777,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_20ArrowheadLLSparseMatrix(CY
       goto __pyx_L5;
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":820
+    /* "cysparse/sparse/ll_mat.pyx":836
  *             element = 1.0 + 0.0j
  *         else:
  *             raise TypeError('dtype not recognized')             # <<<<<<<<<<<<<<
@@ -52785,15 +52785,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_20ArrowheadLLSparseMatrix(CY
  *     # launch right "constructor" method
  */
     /*else*/ {
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__135, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 820; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__135, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 836; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_Raise(__pyx_t_1, 0, 0, 0);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      {__pyx_filename = __pyx_f[1]; __pyx_lineno = 820; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[1]; __pyx_lineno = 836; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
     __pyx_L5:;
 
-    /* "cysparse/sparse/ll_mat.pyx":812
+    /* "cysparse/sparse/ll_mat.pyx":828
  * 
  *     # create 1.0 element if needed
  *     if element is None:             # <<<<<<<<<<<<<<
@@ -52802,37 +52802,37 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_20ArrowheadLLSparseMatrix(CY
  */
   }
 
-  /* "cysparse/sparse/ll_mat.pyx":825
+  /* "cysparse/sparse/ll_mat.pyx":841
  * 
  * 
  *     if itype == INT32_T:             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_INT32_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 825; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_INT32_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 841; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyObject_RichCompare(__pyx_v_itype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 825; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyObject_RichCompare(__pyx_v_itype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 841; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 825; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 841; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_4) {
 
-    /* "cysparse/sparse/ll_mat.pyx":828
+    /* "cysparse/sparse/ll_mat.pyx":844
  * 
  * 
  *         if dtype == INT32_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakeArrowHeadLLSparseMatrix_INT32_t_INT32_t(ll_mat, element)
  */
-    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_INT32_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 828; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_INT32_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 844; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 828; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 844; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 828; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 844; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_4) {
 
-      /* "cysparse/sparse/ll_mat.pyx":830
+      /* "cysparse/sparse/ll_mat.pyx":846
  *         if dtype == INT32_T:
  * 
  *             return MakeArrowHeadLLSparseMatrix_INT32_t_INT32_t(ll_mat, element)             # <<<<<<<<<<<<<<
@@ -52840,15 +52840,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_20ArrowheadLLSparseMatrix(CY
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT32_t_INT32_t_LLSparseMatrix_INT32_t_INT32_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 830; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_8 = __Pyx_PyInt_As_int(__pyx_v_element); if (unlikely((__pyx_t_8 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 830; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeArrowHeadLLSparseMatrix_INT32_t_INT32_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT32_t_INT32_t_LLSparseMatrix_INT32_t_INT32_t *)__pyx_v_ll_mat), __pyx_t_8)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 830; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT32_t_INT32_t_LLSparseMatrix_INT32_t_INT32_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 846; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_8 = __Pyx_PyInt_As_int(__pyx_v_element); if (unlikely((__pyx_t_8 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 846; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeArrowHeadLLSparseMatrix_INT32_t_INT32_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT32_t_INT32_t_LLSparseMatrix_INT32_t_INT32_t *)__pyx_v_ll_mat), __pyx_t_8)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 846; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_r = __pyx_t_1;
       __pyx_t_1 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":828
+      /* "cysparse/sparse/ll_mat.pyx":844
  * 
  * 
  *         if dtype == INT32_T:             # <<<<<<<<<<<<<<
@@ -52857,22 +52857,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_20ArrowheadLLSparseMatrix(CY
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":833
+    /* "cysparse/sparse/ll_mat.pyx":849
  * 
  * 
  *         elif dtype == INT64_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakeArrowHeadLLSparseMatrix_INT32_t_INT64_t(ll_mat, element)
  */
-    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_INT64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 833; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_INT64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 849; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 833; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 849; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 833; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 849; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     if (__pyx_t_4) {
 
-      /* "cysparse/sparse/ll_mat.pyx":835
+      /* "cysparse/sparse/ll_mat.pyx":851
  *         elif dtype == INT64_T:
  * 
  *             return MakeArrowHeadLLSparseMatrix_INT32_t_INT64_t(ll_mat, element)             # <<<<<<<<<<<<<<
@@ -52880,15 +52880,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_20ArrowheadLLSparseMatrix(CY
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT32_t_INT64_t_LLSparseMatrix_INT32_t_INT64_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 835; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_9 = __Pyx_PyInt_As_long(__pyx_v_element); if (unlikely((__pyx_t_9 == (long)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 835; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeArrowHeadLLSparseMatrix_INT32_t_INT64_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT32_t_INT64_t_LLSparseMatrix_INT32_t_INT64_t *)__pyx_v_ll_mat), __pyx_t_9)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 835; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT32_t_INT64_t_LLSparseMatrix_INT32_t_INT64_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 851; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_9 = __Pyx_PyInt_As_long(__pyx_v_element); if (unlikely((__pyx_t_9 == (long)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 851; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeArrowHeadLLSparseMatrix_INT32_t_INT64_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT32_t_INT64_t_LLSparseMatrix_INT32_t_INT64_t *)__pyx_v_ll_mat), __pyx_t_9)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 851; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
       __pyx_r = __pyx_t_2;
       __pyx_t_2 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":833
+      /* "cysparse/sparse/ll_mat.pyx":849
  * 
  * 
  *         elif dtype == INT64_T:             # <<<<<<<<<<<<<<
@@ -52897,22 +52897,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_20ArrowheadLLSparseMatrix(CY
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":838
+    /* "cysparse/sparse/ll_mat.pyx":854
  * 
  * 
  *         elif dtype == FLOAT32_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakeArrowHeadLLSparseMatrix_INT32_t_FLOAT32_t(ll_mat, element)
  */
-    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT32_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 838; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT32_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 854; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 838; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 854; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 838; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 854; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_4) {
 
-      /* "cysparse/sparse/ll_mat.pyx":840
+      /* "cysparse/sparse/ll_mat.pyx":856
  *         elif dtype == FLOAT32_T:
  * 
  *             return MakeArrowHeadLLSparseMatrix_INT32_t_FLOAT32_t(ll_mat, element)             # <<<<<<<<<<<<<<
@@ -52920,15 +52920,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_20ArrowheadLLSparseMatrix(CY
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT32_t_LLSparseMatrix_INT32_t_FLOAT32_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 840; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_10 = __pyx_PyFloat_AsFloat(__pyx_v_element); if (unlikely((__pyx_t_10 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 840; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeArrowHeadLLSparseMatrix_INT32_t_FLOAT32_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT32_t_LLSparseMatrix_INT32_t_FLOAT32_t *)__pyx_v_ll_mat), __pyx_t_10)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 840; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT32_t_LLSparseMatrix_INT32_t_FLOAT32_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 856; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_10 = __pyx_PyFloat_AsFloat(__pyx_v_element); if (unlikely((__pyx_t_10 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 856; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeArrowHeadLLSparseMatrix_INT32_t_FLOAT32_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT32_t_LLSparseMatrix_INT32_t_FLOAT32_t *)__pyx_v_ll_mat), __pyx_t_10)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 856; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_r = __pyx_t_1;
       __pyx_t_1 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":838
+      /* "cysparse/sparse/ll_mat.pyx":854
  * 
  * 
  *         elif dtype == FLOAT32_T:             # <<<<<<<<<<<<<<
@@ -52937,22 +52937,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_20ArrowheadLLSparseMatrix(CY
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":843
+    /* "cysparse/sparse/ll_mat.pyx":859
  * 
  * 
  *         elif dtype == FLOAT64_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakeArrowHeadLLSparseMatrix_INT32_t_FLOAT64_t(ll_mat, element)
  */
-    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 843; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 859; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 843; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 859; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 843; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 859; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     if (__pyx_t_4) {
 
-      /* "cysparse/sparse/ll_mat.pyx":845
+      /* "cysparse/sparse/ll_mat.pyx":861
  *         elif dtype == FLOAT64_T:
  * 
  *             return MakeArrowHeadLLSparseMatrix_INT32_t_FLOAT64_t(ll_mat, element)             # <<<<<<<<<<<<<<
@@ -52960,15 +52960,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_20ArrowheadLLSparseMatrix(CY
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT64_t_LLSparseMatrix_INT32_t_FLOAT64_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 845; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_11 = __pyx_PyFloat_AsDouble(__pyx_v_element); if (unlikely((__pyx_t_11 == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 845; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeArrowHeadLLSparseMatrix_INT32_t_FLOAT64_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT64_t_LLSparseMatrix_INT32_t_FLOAT64_t *)__pyx_v_ll_mat), __pyx_t_11)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 845; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT64_t_LLSparseMatrix_INT32_t_FLOAT64_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 861; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_11 = __pyx_PyFloat_AsDouble(__pyx_v_element); if (unlikely((__pyx_t_11 == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 861; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeArrowHeadLLSparseMatrix_INT32_t_FLOAT64_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT64_t_LLSparseMatrix_INT32_t_FLOAT64_t *)__pyx_v_ll_mat), __pyx_t_11)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 861; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
       __pyx_r = __pyx_t_2;
       __pyx_t_2 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":843
+      /* "cysparse/sparse/ll_mat.pyx":859
  * 
  * 
  *         elif dtype == FLOAT64_T:             # <<<<<<<<<<<<<<
@@ -52977,22 +52977,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_20ArrowheadLLSparseMatrix(CY
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":848
+    /* "cysparse/sparse/ll_mat.pyx":864
  * 
  * 
  *         elif dtype == FLOAT128_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakeArrowHeadLLSparseMatrix_INT32_t_FLOAT128_t(ll_mat, element)
  */
-    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT128_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 848; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT128_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 864; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 848; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 864; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 848; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 864; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_4) {
 
-      /* "cysparse/sparse/ll_mat.pyx":850
+      /* "cysparse/sparse/ll_mat.pyx":866
  *         elif dtype == FLOAT128_T:
  * 
  *             return MakeArrowHeadLLSparseMatrix_INT32_t_FLOAT128_t(ll_mat, element)             # <<<<<<<<<<<<<<
@@ -53000,15 +53000,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_20ArrowheadLLSparseMatrix(CY
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_25ll_mat_INT32_t_FLOAT128_t_LLSparseMatrix_INT32_t_FLOAT128_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 850; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_12 = __pyx_PyFloat_AsDouble(__pyx_v_element); if (unlikely((__pyx_t_12 == (long double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 850; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeArrowHeadLLSparseMatrix_INT32_t_FLOAT128_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_25ll_mat_INT32_t_FLOAT128_t_LLSparseMatrix_INT32_t_FLOAT128_t *)__pyx_v_ll_mat), __pyx_t_12)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 850; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_25ll_mat_INT32_t_FLOAT128_t_LLSparseMatrix_INT32_t_FLOAT128_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 866; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_12 = __pyx_PyFloat_AsDouble(__pyx_v_element); if (unlikely((__pyx_t_12 == (long double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 866; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeArrowHeadLLSparseMatrix_INT32_t_FLOAT128_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_25ll_mat_INT32_t_FLOAT128_t_LLSparseMatrix_INT32_t_FLOAT128_t *)__pyx_v_ll_mat), __pyx_t_12)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 866; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_r = __pyx_t_1;
       __pyx_t_1 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":848
+      /* "cysparse/sparse/ll_mat.pyx":864
  * 
  * 
  *         elif dtype == FLOAT128_T:             # <<<<<<<<<<<<<<
@@ -53017,22 +53017,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_20ArrowheadLLSparseMatrix(CY
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":853
+    /* "cysparse/sparse/ll_mat.pyx":869
  * 
  * 
  *         elif dtype == COMPLEX64_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakeArrowHeadLLSparseMatrix_INT32_t_COMPLEX64_t(ll_mat, element)
  */
-    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_COMPLEX64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 853; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_COMPLEX64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 869; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 853; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 869; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 853; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 869; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     if (__pyx_t_4) {
 
-      /* "cysparse/sparse/ll_mat.pyx":855
+      /* "cysparse/sparse/ll_mat.pyx":871
  *         elif dtype == COMPLEX64_T:
  * 
  *             return MakeArrowHeadLLSparseMatrix_INT32_t_COMPLEX64_t(ll_mat, element)             # <<<<<<<<<<<<<<
@@ -53040,15 +53040,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_20ArrowheadLLSparseMatrix(CY
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT32_t_COMPLEX64_t_LLSparseMatrix_INT32_t_COMPLEX64_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 855; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_13 = __Pyx_PyComplex_As___pyx_t_float_complex(__pyx_v_element); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 855; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeArrowHeadLLSparseMatrix_INT32_t_COMPLEX64_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT32_t_COMPLEX64_t_LLSparseMatrix_INT32_t_COMPLEX64_t *)__pyx_v_ll_mat), __pyx_t_13)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 855; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT32_t_COMPLEX64_t_LLSparseMatrix_INT32_t_COMPLEX64_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 871; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_13 = __Pyx_PyComplex_As___pyx_t_float_complex(__pyx_v_element); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 871; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeArrowHeadLLSparseMatrix_INT32_t_COMPLEX64_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT32_t_COMPLEX64_t_LLSparseMatrix_INT32_t_COMPLEX64_t *)__pyx_v_ll_mat), __pyx_t_13)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 871; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
       __pyx_r = __pyx_t_2;
       __pyx_t_2 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":853
+      /* "cysparse/sparse/ll_mat.pyx":869
  * 
  * 
  *         elif dtype == COMPLEX64_T:             # <<<<<<<<<<<<<<
@@ -53057,22 +53057,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_20ArrowheadLLSparseMatrix(CY
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":858
+    /* "cysparse/sparse/ll_mat.pyx":874
  * 
  * 
  *         elif dtype == COMPLEX128_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakeArrowHeadLLSparseMatrix_INT32_t_COMPLEX128_t(ll_mat, element)
  */
-    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_COMPLEX128_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 858; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_COMPLEX128_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 874; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 858; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 874; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 858; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 874; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_4) {
 
-      /* "cysparse/sparse/ll_mat.pyx":860
+      /* "cysparse/sparse/ll_mat.pyx":876
  *         elif dtype == COMPLEX128_T:
  * 
  *             return MakeArrowHeadLLSparseMatrix_INT32_t_COMPLEX128_t(ll_mat, element)             # <<<<<<<<<<<<<<
@@ -53080,15 +53080,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_20ArrowheadLLSparseMatrix(CY
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32_t_COMPLEX128_t_LLSparseMatrix_INT32_t_COMPLEX128_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 860; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_7 = __Pyx_PyComplex_As___pyx_t_double_complex(__pyx_v_element); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 860; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeArrowHeadLLSparseMatrix_INT32_t_COMPLEX128_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32_t_COMPLEX128_t_LLSparseMatrix_INT32_t_COMPLEX128_t *)__pyx_v_ll_mat), __pyx_t_7)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 860; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32_t_COMPLEX128_t_LLSparseMatrix_INT32_t_COMPLEX128_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 876; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_7 = __Pyx_PyComplex_As___pyx_t_double_complex(__pyx_v_element); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 876; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeArrowHeadLLSparseMatrix_INT32_t_COMPLEX128_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32_t_COMPLEX128_t_LLSparseMatrix_INT32_t_COMPLEX128_t *)__pyx_v_ll_mat), __pyx_t_7)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 876; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_r = __pyx_t_1;
       __pyx_t_1 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":858
+      /* "cysparse/sparse/ll_mat.pyx":874
  * 
  * 
  *         elif dtype == COMPLEX128_T:             # <<<<<<<<<<<<<<
@@ -53097,7 +53097,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_20ArrowheadLLSparseMatrix(CY
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":825
+    /* "cysparse/sparse/ll_mat.pyx":841
  * 
  * 
  *     if itype == INT32_T:             # <<<<<<<<<<<<<<
@@ -53107,37 +53107,37 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_20ArrowheadLLSparseMatrix(CY
     goto __pyx_L6;
   }
 
-  /* "cysparse/sparse/ll_mat.pyx":865
+  /* "cysparse/sparse/ll_mat.pyx":881
  * 
  * 
  *     elif itype == INT64_T:             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_INT64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 865; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_INT64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 881; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyObject_RichCompare(__pyx_v_itype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 865; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyObject_RichCompare(__pyx_v_itype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 881; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 865; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 881; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_4) {
 
-    /* "cysparse/sparse/ll_mat.pyx":868
+    /* "cysparse/sparse/ll_mat.pyx":884
  * 
  * 
  *         if dtype == INT32_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakeArrowHeadLLSparseMatrix_INT64_t_INT32_t(ll_mat, element)
  */
-    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_INT32_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 868; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_INT32_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 884; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 868; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 884; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 868; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 884; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_4) {
 
-      /* "cysparse/sparse/ll_mat.pyx":870
+      /* "cysparse/sparse/ll_mat.pyx":886
  *         if dtype == INT32_T:
  * 
  *             return MakeArrowHeadLLSparseMatrix_INT64_t_INT32_t(ll_mat, element)             # <<<<<<<<<<<<<<
@@ -53145,15 +53145,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_20ArrowheadLLSparseMatrix(CY
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT64_t_INT32_t_LLSparseMatrix_INT64_t_INT32_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 870; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_8 = __Pyx_PyInt_As_int(__pyx_v_element); if (unlikely((__pyx_t_8 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 870; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeArrowHeadLLSparseMatrix_INT64_t_INT32_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT64_t_INT32_t_LLSparseMatrix_INT64_t_INT32_t *)__pyx_v_ll_mat), __pyx_t_8)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 870; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT64_t_INT32_t_LLSparseMatrix_INT64_t_INT32_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 886; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_8 = __Pyx_PyInt_As_int(__pyx_v_element); if (unlikely((__pyx_t_8 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 886; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeArrowHeadLLSparseMatrix_INT64_t_INT32_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT64_t_INT32_t_LLSparseMatrix_INT64_t_INT32_t *)__pyx_v_ll_mat), __pyx_t_8)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 886; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_r = __pyx_t_1;
       __pyx_t_1 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":868
+      /* "cysparse/sparse/ll_mat.pyx":884
  * 
  * 
  *         if dtype == INT32_T:             # <<<<<<<<<<<<<<
@@ -53162,22 +53162,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_20ArrowheadLLSparseMatrix(CY
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":873
+    /* "cysparse/sparse/ll_mat.pyx":889
  * 
  * 
  *         elif dtype == INT64_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakeArrowHeadLLSparseMatrix_INT64_t_INT64_t(ll_mat, element)
  */
-    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_INT64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 873; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_INT64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 889; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 873; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 889; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 873; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 889; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     if (__pyx_t_4) {
 
-      /* "cysparse/sparse/ll_mat.pyx":875
+      /* "cysparse/sparse/ll_mat.pyx":891
  *         elif dtype == INT64_T:
  * 
  *             return MakeArrowHeadLLSparseMatrix_INT64_t_INT64_t(ll_mat, element)             # <<<<<<<<<<<<<<
@@ -53185,15 +53185,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_20ArrowheadLLSparseMatrix(CY
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT64_t_INT64_t_LLSparseMatrix_INT64_t_INT64_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 875; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_9 = __Pyx_PyInt_As_long(__pyx_v_element); if (unlikely((__pyx_t_9 == (long)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 875; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeArrowHeadLLSparseMatrix_INT64_t_INT64_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT64_t_INT64_t_LLSparseMatrix_INT64_t_INT64_t *)__pyx_v_ll_mat), __pyx_t_9)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 875; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT64_t_INT64_t_LLSparseMatrix_INT64_t_INT64_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 891; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_9 = __Pyx_PyInt_As_long(__pyx_v_element); if (unlikely((__pyx_t_9 == (long)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 891; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeArrowHeadLLSparseMatrix_INT64_t_INT64_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT64_t_INT64_t_LLSparseMatrix_INT64_t_INT64_t *)__pyx_v_ll_mat), __pyx_t_9)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 891; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
       __pyx_r = __pyx_t_2;
       __pyx_t_2 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":873
+      /* "cysparse/sparse/ll_mat.pyx":889
  * 
  * 
  *         elif dtype == INT64_T:             # <<<<<<<<<<<<<<
@@ -53202,22 +53202,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_20ArrowheadLLSparseMatrix(CY
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":878
+    /* "cysparse/sparse/ll_mat.pyx":894
  * 
  * 
  *         elif dtype == FLOAT32_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakeArrowHeadLLSparseMatrix_INT64_t_FLOAT32_t(ll_mat, element)
  */
-    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT32_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 878; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT32_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 894; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 878; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 894; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 878; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 894; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_4) {
 
-      /* "cysparse/sparse/ll_mat.pyx":880
+      /* "cysparse/sparse/ll_mat.pyx":896
  *         elif dtype == FLOAT32_T:
  * 
  *             return MakeArrowHeadLLSparseMatrix_INT64_t_FLOAT32_t(ll_mat, element)             # <<<<<<<<<<<<<<
@@ -53225,15 +53225,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_20ArrowheadLLSparseMatrix(CY
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT64_t_FLOAT32_t_LLSparseMatrix_INT64_t_FLOAT32_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 880; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_10 = __pyx_PyFloat_AsFloat(__pyx_v_element); if (unlikely((__pyx_t_10 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 880; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeArrowHeadLLSparseMatrix_INT64_t_FLOAT32_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT64_t_FLOAT32_t_LLSparseMatrix_INT64_t_FLOAT32_t *)__pyx_v_ll_mat), __pyx_t_10)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 880; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT64_t_FLOAT32_t_LLSparseMatrix_INT64_t_FLOAT32_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 896; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_10 = __pyx_PyFloat_AsFloat(__pyx_v_element); if (unlikely((__pyx_t_10 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 896; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeArrowHeadLLSparseMatrix_INT64_t_FLOAT32_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT64_t_FLOAT32_t_LLSparseMatrix_INT64_t_FLOAT32_t *)__pyx_v_ll_mat), __pyx_t_10)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 896; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_r = __pyx_t_1;
       __pyx_t_1 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":878
+      /* "cysparse/sparse/ll_mat.pyx":894
  * 
  * 
  *         elif dtype == FLOAT32_T:             # <<<<<<<<<<<<<<
@@ -53242,22 +53242,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_20ArrowheadLLSparseMatrix(CY
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":883
+    /* "cysparse/sparse/ll_mat.pyx":899
  * 
  * 
  *         elif dtype == FLOAT64_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakeArrowHeadLLSparseMatrix_INT64_t_FLOAT64_t(ll_mat, element)
  */
-    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 883; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 899; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 883; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 899; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 883; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 899; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     if (__pyx_t_4) {
 
-      /* "cysparse/sparse/ll_mat.pyx":885
+      /* "cysparse/sparse/ll_mat.pyx":901
  *         elif dtype == FLOAT64_T:
  * 
  *             return MakeArrowHeadLLSparseMatrix_INT64_t_FLOAT64_t(ll_mat, element)             # <<<<<<<<<<<<<<
@@ -53265,15 +53265,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_20ArrowheadLLSparseMatrix(CY
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT64_t_FLOAT64_t_LLSparseMatrix_INT64_t_FLOAT64_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 885; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_11 = __pyx_PyFloat_AsDouble(__pyx_v_element); if (unlikely((__pyx_t_11 == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 885; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeArrowHeadLLSparseMatrix_INT64_t_FLOAT64_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT64_t_FLOAT64_t_LLSparseMatrix_INT64_t_FLOAT64_t *)__pyx_v_ll_mat), __pyx_t_11)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 885; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT64_t_FLOAT64_t_LLSparseMatrix_INT64_t_FLOAT64_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 901; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_11 = __pyx_PyFloat_AsDouble(__pyx_v_element); if (unlikely((__pyx_t_11 == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 901; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeArrowHeadLLSparseMatrix_INT64_t_FLOAT64_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT64_t_FLOAT64_t_LLSparseMatrix_INT64_t_FLOAT64_t *)__pyx_v_ll_mat), __pyx_t_11)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 901; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
       __pyx_r = __pyx_t_2;
       __pyx_t_2 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":883
+      /* "cysparse/sparse/ll_mat.pyx":899
  * 
  * 
  *         elif dtype == FLOAT64_T:             # <<<<<<<<<<<<<<
@@ -53282,22 +53282,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_20ArrowheadLLSparseMatrix(CY
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":888
+    /* "cysparse/sparse/ll_mat.pyx":904
  * 
  * 
  *         elif dtype == FLOAT128_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakeArrowHeadLLSparseMatrix_INT64_t_FLOAT128_t(ll_mat, element)
  */
-    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT128_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 888; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT128_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 904; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 888; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 904; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 888; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 904; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_4) {
 
-      /* "cysparse/sparse/ll_mat.pyx":890
+      /* "cysparse/sparse/ll_mat.pyx":906
  *         elif dtype == FLOAT128_T:
  * 
  *             return MakeArrowHeadLLSparseMatrix_INT64_t_FLOAT128_t(ll_mat, element)             # <<<<<<<<<<<<<<
@@ -53305,15 +53305,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_20ArrowheadLLSparseMatrix(CY
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_25ll_mat_INT64_t_FLOAT128_t_LLSparseMatrix_INT64_t_FLOAT128_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 890; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_12 = __pyx_PyFloat_AsDouble(__pyx_v_element); if (unlikely((__pyx_t_12 == (long double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 890; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeArrowHeadLLSparseMatrix_INT64_t_FLOAT128_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_25ll_mat_INT64_t_FLOAT128_t_LLSparseMatrix_INT64_t_FLOAT128_t *)__pyx_v_ll_mat), __pyx_t_12)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 890; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_25ll_mat_INT64_t_FLOAT128_t_LLSparseMatrix_INT64_t_FLOAT128_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 906; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_12 = __pyx_PyFloat_AsDouble(__pyx_v_element); if (unlikely((__pyx_t_12 == (long double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 906; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeArrowHeadLLSparseMatrix_INT64_t_FLOAT128_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_25ll_mat_INT64_t_FLOAT128_t_LLSparseMatrix_INT64_t_FLOAT128_t *)__pyx_v_ll_mat), __pyx_t_12)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 906; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_r = __pyx_t_1;
       __pyx_t_1 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":888
+      /* "cysparse/sparse/ll_mat.pyx":904
  * 
  * 
  *         elif dtype == FLOAT128_T:             # <<<<<<<<<<<<<<
@@ -53322,22 +53322,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_20ArrowheadLLSparseMatrix(CY
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":893
+    /* "cysparse/sparse/ll_mat.pyx":909
  * 
  * 
  *         elif dtype == COMPLEX64_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakeArrowHeadLLSparseMatrix_INT64_t_COMPLEX64_t(ll_mat, element)
  */
-    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_COMPLEX64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 893; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_COMPLEX64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 909; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 893; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 909; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 893; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 909; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     if (__pyx_t_4) {
 
-      /* "cysparse/sparse/ll_mat.pyx":895
+      /* "cysparse/sparse/ll_mat.pyx":911
  *         elif dtype == COMPLEX64_T:
  * 
  *             return MakeArrowHeadLLSparseMatrix_INT64_t_COMPLEX64_t(ll_mat, element)             # <<<<<<<<<<<<<<
@@ -53345,15 +53345,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_20ArrowheadLLSparseMatrix(CY
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT64_t_COMPLEX64_t_LLSparseMatrix_INT64_t_COMPLEX64_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 895; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_13 = __Pyx_PyComplex_As___pyx_t_float_complex(__pyx_v_element); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 895; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeArrowHeadLLSparseMatrix_INT64_t_COMPLEX64_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT64_t_COMPLEX64_t_LLSparseMatrix_INT64_t_COMPLEX64_t *)__pyx_v_ll_mat), __pyx_t_13)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 895; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT64_t_COMPLEX64_t_LLSparseMatrix_INT64_t_COMPLEX64_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 911; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_13 = __Pyx_PyComplex_As___pyx_t_float_complex(__pyx_v_element); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 911; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeArrowHeadLLSparseMatrix_INT64_t_COMPLEX64_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT64_t_COMPLEX64_t_LLSparseMatrix_INT64_t_COMPLEX64_t *)__pyx_v_ll_mat), __pyx_t_13)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 911; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
       __pyx_r = __pyx_t_2;
       __pyx_t_2 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":893
+      /* "cysparse/sparse/ll_mat.pyx":909
  * 
  * 
  *         elif dtype == COMPLEX64_T:             # <<<<<<<<<<<<<<
@@ -53362,22 +53362,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_20ArrowheadLLSparseMatrix(CY
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":898
+    /* "cysparse/sparse/ll_mat.pyx":914
  * 
  * 
  *         elif dtype == COMPLEX128_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakeArrowHeadLLSparseMatrix_INT64_t_COMPLEX128_t(ll_mat, element)
  */
-    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_COMPLEX128_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 898; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_COMPLEX128_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 914; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 898; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 914; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 898; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 914; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_4) {
 
-      /* "cysparse/sparse/ll_mat.pyx":900
+      /* "cysparse/sparse/ll_mat.pyx":916
  *         elif dtype == COMPLEX128_T:
  * 
  *             return MakeArrowHeadLLSparseMatrix_INT64_t_COMPLEX128_t(ll_mat, element)             # <<<<<<<<<<<<<<
@@ -53385,15 +53385,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_20ArrowheadLLSparseMatrix(CY
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT64_t_COMPLEX128_t_LLSparseMatrix_INT64_t_COMPLEX128_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 900; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_7 = __Pyx_PyComplex_As___pyx_t_double_complex(__pyx_v_element); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 900; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeArrowHeadLLSparseMatrix_INT64_t_COMPLEX128_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT64_t_COMPLEX128_t_LLSparseMatrix_INT64_t_COMPLEX128_t *)__pyx_v_ll_mat), __pyx_t_7)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 900; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT64_t_COMPLEX128_t_LLSparseMatrix_INT64_t_COMPLEX128_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 916; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_7 = __Pyx_PyComplex_As___pyx_t_double_complex(__pyx_v_element); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 916; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeArrowHeadLLSparseMatrix_INT64_t_COMPLEX128_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT64_t_COMPLEX128_t_LLSparseMatrix_INT64_t_COMPLEX128_t *)__pyx_v_ll_mat), __pyx_t_7)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 916; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_r = __pyx_t_1;
       __pyx_t_1 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":898
+      /* "cysparse/sparse/ll_mat.pyx":914
  * 
  * 
  *         elif dtype == COMPLEX128_T:             # <<<<<<<<<<<<<<
@@ -53402,7 +53402,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_20ArrowheadLLSparseMatrix(CY
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":865
+    /* "cysparse/sparse/ll_mat.pyx":881
  * 
  * 
  *     elif itype == INT64_T:             # <<<<<<<<<<<<<<
@@ -53412,7 +53412,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_20ArrowheadLLSparseMatrix(CY
     goto __pyx_L6;
   }
 
-  /* "cysparse/sparse/ll_mat.pyx":905
+  /* "cysparse/sparse/ll_mat.pyx":921
  * 
  *     else:
  *         raise TypeError('itype not recognized')             # <<<<<<<<<<<<<<
@@ -53420,11 +53420,11 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_20ArrowheadLLSparseMatrix(CY
  * 
  */
   /*else*/ {
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__136, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 905; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__136, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 921; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 905; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 921; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __pyx_L6:;
 
@@ -53456,7 +53456,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_20ArrowheadLLSparseMatrix(CY
   return __pyx_r;
 }
 
-/* "cysparse/sparse/ll_mat.pyx":908
+/* "cysparse/sparse/ll_mat.pyx":924
  * 
  * 
  * def DiagonalLLSparseMatrix(**kwargs):             # <<<<<<<<<<<<<<
@@ -53511,48 +53511,48 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_22DiagonalLLSparseMatrix(CYT
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("DiagonalLLSparseMatrix", 0);
 
-  /* "cysparse/sparse/ll_mat.pyx":915
+  /* "cysparse/sparse/ll_mat.pyx":931
  *         Input arguments are **not** tested.
  *     """
  *     element = kwargs.pop('element', None)             # <<<<<<<<<<<<<<
  * 
  *     if kwargs.get('store_symmetric', False):
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_kwargs, __pyx_n_s_pop); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 915; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_kwargs, __pyx_n_s_pop); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 931; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__137, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 915; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__137, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 931; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_element = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "cysparse/sparse/ll_mat.pyx":917
+  /* "cysparse/sparse/ll_mat.pyx":933
  *     element = kwargs.pop('element', None)
  * 
  *     if kwargs.get('store_symmetric', False):             # <<<<<<<<<<<<<<
  *         raise NotImplementedError('This type of matrix is not implemented for symmetric matrices')
  * 
  */
-  __pyx_t_2 = __Pyx_PyDict_GetItemDefault(__pyx_v_kwargs, __pyx_n_s_store_symmetric, Py_False); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 917; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyDict_GetItemDefault(__pyx_v_kwargs, __pyx_n_s_store_symmetric, Py_False); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 933; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 917; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 933; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_3) {
 
-    /* "cysparse/sparse/ll_mat.pyx":918
+    /* "cysparse/sparse/ll_mat.pyx":934
  * 
  *     if kwargs.get('store_symmetric', False):
  *         raise NotImplementedError('This type of matrix is not implemented for symmetric matrices')             # <<<<<<<<<<<<<<
  * 
  *     ll_mat = LLSparseMatrix(**kwargs)
  */
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_NotImplementedError, __pyx_tuple__138, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 918; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_NotImplementedError, __pyx_tuple__138, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 934; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 918; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 934; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-    /* "cysparse/sparse/ll_mat.pyx":917
+    /* "cysparse/sparse/ll_mat.pyx":933
  *     element = kwargs.pop('element', None)
  * 
  *     if kwargs.get('store_symmetric', False):             # <<<<<<<<<<<<<<
@@ -53561,46 +53561,46 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_22DiagonalLLSparseMatrix(CYT
  */
   }
 
-  /* "cysparse/sparse/ll_mat.pyx":920
+  /* "cysparse/sparse/ll_mat.pyx":936
  *         raise NotImplementedError('This type of matrix is not implemented for symmetric matrices')
  * 
  *     ll_mat = LLSparseMatrix(**kwargs)             # <<<<<<<<<<<<<<
  * 
  *     itype = ll_mat.itype
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_LLSparseMatrix); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 920; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_LLSparseMatrix); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 936; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_v_kwargs); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 920; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_v_kwargs); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 936; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_ll_mat = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "cysparse/sparse/ll_mat.pyx":922
+  /* "cysparse/sparse/ll_mat.pyx":938
  *     ll_mat = LLSparseMatrix(**kwargs)
  * 
  *     itype = ll_mat.itype             # <<<<<<<<<<<<<<
  *     dtype = ll_mat.dtype
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_ll_mat, __pyx_n_s_itype); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 922; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_ll_mat, __pyx_n_s_itype); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 938; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_itype = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "cysparse/sparse/ll_mat.pyx":923
+  /* "cysparse/sparse/ll_mat.pyx":939
  * 
  *     itype = ll_mat.itype
  *     dtype = ll_mat.dtype             # <<<<<<<<<<<<<<
  * 
  *     # create 1.0 element if needed
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_ll_mat, __pyx_n_s_dtype); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 923; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_ll_mat, __pyx_n_s_dtype); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 939; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_dtype = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "cysparse/sparse/ll_mat.pyx":926
+  /* "cysparse/sparse/ll_mat.pyx":942
  * 
  *     # create 1.0 element if needed
  *     if element is None:             # <<<<<<<<<<<<<<
@@ -53611,14 +53611,14 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_22DiagonalLLSparseMatrix(CYT
   __pyx_t_4 = (__pyx_t_3 != 0);
   if (__pyx_t_4) {
 
-    /* "cysparse/sparse/ll_mat.pyx":927
+    /* "cysparse/sparse/ll_mat.pyx":943
  *     # create 1.0 element if needed
  *     if element is None:
  *         if is_integer_type(dtype):             # <<<<<<<<<<<<<<
  *             element = 1
  *         elif is_real_type(dtype):
  */
-    __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_is_integer_type); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 927; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_is_integer_type); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 943; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_5 = NULL;
     if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_2))) {
@@ -53631,25 +53631,25 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_22DiagonalLLSparseMatrix(CYT
       }
     }
     if (!__pyx_t_5) {
-      __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_dtype); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 927; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_dtype); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 943; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
     } else {
-      __pyx_t_6 = PyTuple_New(1+1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 927; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_6 = PyTuple_New(1+1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 943; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_5); __pyx_t_5 = NULL;
       __Pyx_INCREF(__pyx_v_dtype);
       __Pyx_GIVEREF(__pyx_v_dtype);
       PyTuple_SET_ITEM(__pyx_t_6, 0+1, __pyx_v_dtype);
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_6, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 927; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_6, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 943; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     }
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 927; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 943; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_4) {
 
-      /* "cysparse/sparse/ll_mat.pyx":928
+      /* "cysparse/sparse/ll_mat.pyx":944
  *     if element is None:
  *         if is_integer_type(dtype):
  *             element = 1             # <<<<<<<<<<<<<<
@@ -53659,7 +53659,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_22DiagonalLLSparseMatrix(CYT
       __Pyx_INCREF(__pyx_int_1);
       __Pyx_DECREF_SET(__pyx_v_element, __pyx_int_1);
 
-      /* "cysparse/sparse/ll_mat.pyx":927
+      /* "cysparse/sparse/ll_mat.pyx":943
  *     # create 1.0 element if needed
  *     if element is None:
  *         if is_integer_type(dtype):             # <<<<<<<<<<<<<<
@@ -53669,14 +53669,14 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_22DiagonalLLSparseMatrix(CYT
       goto __pyx_L5;
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":929
+    /* "cysparse/sparse/ll_mat.pyx":945
  *         if is_integer_type(dtype):
  *             element = 1
  *         elif is_real_type(dtype):             # <<<<<<<<<<<<<<
  *             element = 1.0
  *         elif is_complex_type(dtype):
  */
-    __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_is_real_type); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 929; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_is_real_type); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 945; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_6 = NULL;
     if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_2))) {
@@ -53689,25 +53689,25 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_22DiagonalLLSparseMatrix(CYT
       }
     }
     if (!__pyx_t_6) {
-      __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_dtype); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 929; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_dtype); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 945; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
     } else {
-      __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 929; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 945; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_6); __pyx_t_6 = NULL;
       __Pyx_INCREF(__pyx_v_dtype);
       __Pyx_GIVEREF(__pyx_v_dtype);
       PyTuple_SET_ITEM(__pyx_t_5, 0+1, __pyx_v_dtype);
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 929; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 945; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     }
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 929; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 945; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_4) {
 
-      /* "cysparse/sparse/ll_mat.pyx":930
+      /* "cysparse/sparse/ll_mat.pyx":946
  *             element = 1
  *         elif is_real_type(dtype):
  *             element = 1.0             # <<<<<<<<<<<<<<
@@ -53717,7 +53717,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_22DiagonalLLSparseMatrix(CYT
       __Pyx_INCREF(__pyx_float_1_0);
       __Pyx_DECREF_SET(__pyx_v_element, __pyx_float_1_0);
 
-      /* "cysparse/sparse/ll_mat.pyx":929
+      /* "cysparse/sparse/ll_mat.pyx":945
  *         if is_integer_type(dtype):
  *             element = 1
  *         elif is_real_type(dtype):             # <<<<<<<<<<<<<<
@@ -53727,14 +53727,14 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_22DiagonalLLSparseMatrix(CYT
       goto __pyx_L5;
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":931
+    /* "cysparse/sparse/ll_mat.pyx":947
  *         elif is_real_type(dtype):
  *             element = 1.0
  *         elif is_complex_type(dtype):             # <<<<<<<<<<<<<<
  *             element = 1.0 + 0.0j
  *         else:
  */
-    __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_is_complex_type); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 931; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_is_complex_type); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 947; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_5 = NULL;
     if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_2))) {
@@ -53747,25 +53747,25 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_22DiagonalLLSparseMatrix(CYT
       }
     }
     if (!__pyx_t_5) {
-      __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_dtype); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 931; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_dtype); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 947; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
     } else {
-      __pyx_t_6 = PyTuple_New(1+1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 931; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_6 = PyTuple_New(1+1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 947; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_5); __pyx_t_5 = NULL;
       __Pyx_INCREF(__pyx_v_dtype);
       __Pyx_GIVEREF(__pyx_v_dtype);
       PyTuple_SET_ITEM(__pyx_t_6, 0+1, __pyx_v_dtype);
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_6, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 931; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_6, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 947; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     }
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 931; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 947; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_4) {
 
-      /* "cysparse/sparse/ll_mat.pyx":932
+      /* "cysparse/sparse/ll_mat.pyx":948
  *             element = 1.0
  *         elif is_complex_type(dtype):
  *             element = 1.0 + 0.0j             # <<<<<<<<<<<<<<
@@ -53773,12 +53773,12 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_22DiagonalLLSparseMatrix(CYT
  *             raise TypeError('dtype not recognized')
  */
       __pyx_t_7 = __Pyx_c_sum(__pyx_t_double_complex_from_parts(1.0, 0), __pyx_t_double_complex_from_parts(0, 0.0));
-      __pyx_t_1 = __pyx_PyComplex_FromComplex(__pyx_t_7); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 932; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = __pyx_PyComplex_FromComplex(__pyx_t_7); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 948; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF_SET(__pyx_v_element, __pyx_t_1);
       __pyx_t_1 = 0;
 
-      /* "cysparse/sparse/ll_mat.pyx":931
+      /* "cysparse/sparse/ll_mat.pyx":947
  *         elif is_real_type(dtype):
  *             element = 1.0
  *         elif is_complex_type(dtype):             # <<<<<<<<<<<<<<
@@ -53788,7 +53788,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_22DiagonalLLSparseMatrix(CYT
       goto __pyx_L5;
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":934
+    /* "cysparse/sparse/ll_mat.pyx":950
  *             element = 1.0 + 0.0j
  *         else:
  *             raise TypeError('dtype not recognized')             # <<<<<<<<<<<<<<
@@ -53796,15 +53796,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_22DiagonalLLSparseMatrix(CYT
  *     # launch right "constructor" method
  */
     /*else*/ {
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__139, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 934; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__139, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 950; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_Raise(__pyx_t_1, 0, 0, 0);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      {__pyx_filename = __pyx_f[1]; __pyx_lineno = 934; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[1]; __pyx_lineno = 950; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
     __pyx_L5:;
 
-    /* "cysparse/sparse/ll_mat.pyx":926
+    /* "cysparse/sparse/ll_mat.pyx":942
  * 
  *     # create 1.0 element if needed
  *     if element is None:             # <<<<<<<<<<<<<<
@@ -53813,37 +53813,37 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_22DiagonalLLSparseMatrix(CYT
  */
   }
 
-  /* "cysparse/sparse/ll_mat.pyx":939
+  /* "cysparse/sparse/ll_mat.pyx":955
  * 
  * 
  *     if itype == INT32_T:             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_INT32_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 939; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_INT32_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 955; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyObject_RichCompare(__pyx_v_itype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 939; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyObject_RichCompare(__pyx_v_itype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 955; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 939; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 955; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_4) {
 
-    /* "cysparse/sparse/ll_mat.pyx":942
+    /* "cysparse/sparse/ll_mat.pyx":958
  * 
  * 
  *         if dtype == INT32_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakeDiagonalLLSparseMatrix_INT32_t_INT32_t(ll_mat, element)
  */
-    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_INT32_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 942; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_INT32_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 958; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 942; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 958; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 942; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 958; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_4) {
 
-      /* "cysparse/sparse/ll_mat.pyx":944
+      /* "cysparse/sparse/ll_mat.pyx":960
  *         if dtype == INT32_T:
  * 
  *             return MakeDiagonalLLSparseMatrix_INT32_t_INT32_t(ll_mat, element)             # <<<<<<<<<<<<<<
@@ -53851,15 +53851,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_22DiagonalLLSparseMatrix(CYT
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT32_t_INT32_t_LLSparseMatrix_INT32_t_INT32_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 944; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_8 = __Pyx_PyInt_As_int(__pyx_v_element); if (unlikely((__pyx_t_8 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 944; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeDiagonalLLSparseMatrix_INT32_t_INT32_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT32_t_INT32_t_LLSparseMatrix_INT32_t_INT32_t *)__pyx_v_ll_mat), __pyx_t_8)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 944; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT32_t_INT32_t_LLSparseMatrix_INT32_t_INT32_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 960; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_8 = __Pyx_PyInt_As_int(__pyx_v_element); if (unlikely((__pyx_t_8 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 960; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeDiagonalLLSparseMatrix_INT32_t_INT32_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT32_t_INT32_t_LLSparseMatrix_INT32_t_INT32_t *)__pyx_v_ll_mat), __pyx_t_8)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 960; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_r = __pyx_t_1;
       __pyx_t_1 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":942
+      /* "cysparse/sparse/ll_mat.pyx":958
  * 
  * 
  *         if dtype == INT32_T:             # <<<<<<<<<<<<<<
@@ -53868,22 +53868,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_22DiagonalLLSparseMatrix(CYT
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":947
+    /* "cysparse/sparse/ll_mat.pyx":963
  * 
  * 
  *         elif dtype == INT64_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakeDiagonalLLSparseMatrix_INT32_t_INT64_t(ll_mat, element)
  */
-    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_INT64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 947; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_INT64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 963; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 947; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 963; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 947; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 963; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     if (__pyx_t_4) {
 
-      /* "cysparse/sparse/ll_mat.pyx":949
+      /* "cysparse/sparse/ll_mat.pyx":965
  *         elif dtype == INT64_T:
  * 
  *             return MakeDiagonalLLSparseMatrix_INT32_t_INT64_t(ll_mat, element)             # <<<<<<<<<<<<<<
@@ -53891,15 +53891,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_22DiagonalLLSparseMatrix(CYT
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT32_t_INT64_t_LLSparseMatrix_INT32_t_INT64_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 949; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_9 = __Pyx_PyInt_As_long(__pyx_v_element); if (unlikely((__pyx_t_9 == (long)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 949; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeDiagonalLLSparseMatrix_INT32_t_INT64_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT32_t_INT64_t_LLSparseMatrix_INT32_t_INT64_t *)__pyx_v_ll_mat), __pyx_t_9)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 949; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT32_t_INT64_t_LLSparseMatrix_INT32_t_INT64_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 965; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_9 = __Pyx_PyInt_As_long(__pyx_v_element); if (unlikely((__pyx_t_9 == (long)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 965; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeDiagonalLLSparseMatrix_INT32_t_INT64_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT32_t_INT64_t_LLSparseMatrix_INT32_t_INT64_t *)__pyx_v_ll_mat), __pyx_t_9)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 965; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
       __pyx_r = __pyx_t_2;
       __pyx_t_2 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":947
+      /* "cysparse/sparse/ll_mat.pyx":963
  * 
  * 
  *         elif dtype == INT64_T:             # <<<<<<<<<<<<<<
@@ -53908,22 +53908,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_22DiagonalLLSparseMatrix(CYT
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":952
+    /* "cysparse/sparse/ll_mat.pyx":968
  * 
  * 
  *         elif dtype == FLOAT32_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakeDiagonalLLSparseMatrix_INT32_t_FLOAT32_t(ll_mat, element)
  */
-    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT32_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 952; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT32_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 968; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 952; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 968; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 952; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 968; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_4) {
 
-      /* "cysparse/sparse/ll_mat.pyx":954
+      /* "cysparse/sparse/ll_mat.pyx":970
  *         elif dtype == FLOAT32_T:
  * 
  *             return MakeDiagonalLLSparseMatrix_INT32_t_FLOAT32_t(ll_mat, element)             # <<<<<<<<<<<<<<
@@ -53931,15 +53931,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_22DiagonalLLSparseMatrix(CYT
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT32_t_LLSparseMatrix_INT32_t_FLOAT32_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 954; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_10 = __pyx_PyFloat_AsFloat(__pyx_v_element); if (unlikely((__pyx_t_10 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 954; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeDiagonalLLSparseMatrix_INT32_t_FLOAT32_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT32_t_LLSparseMatrix_INT32_t_FLOAT32_t *)__pyx_v_ll_mat), __pyx_t_10)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 954; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT32_t_LLSparseMatrix_INT32_t_FLOAT32_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 970; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_10 = __pyx_PyFloat_AsFloat(__pyx_v_element); if (unlikely((__pyx_t_10 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 970; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeDiagonalLLSparseMatrix_INT32_t_FLOAT32_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT32_t_LLSparseMatrix_INT32_t_FLOAT32_t *)__pyx_v_ll_mat), __pyx_t_10)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 970; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_r = __pyx_t_1;
       __pyx_t_1 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":952
+      /* "cysparse/sparse/ll_mat.pyx":968
  * 
  * 
  *         elif dtype == FLOAT32_T:             # <<<<<<<<<<<<<<
@@ -53948,22 +53948,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_22DiagonalLLSparseMatrix(CYT
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":957
+    /* "cysparse/sparse/ll_mat.pyx":973
  * 
  * 
  *         elif dtype == FLOAT64_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakeDiagonalLLSparseMatrix_INT32_t_FLOAT64_t(ll_mat, element)
  */
-    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 957; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 973; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 957; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 973; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 957; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 973; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     if (__pyx_t_4) {
 
-      /* "cysparse/sparse/ll_mat.pyx":959
+      /* "cysparse/sparse/ll_mat.pyx":975
  *         elif dtype == FLOAT64_T:
  * 
  *             return MakeDiagonalLLSparseMatrix_INT32_t_FLOAT64_t(ll_mat, element)             # <<<<<<<<<<<<<<
@@ -53971,15 +53971,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_22DiagonalLLSparseMatrix(CYT
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT64_t_LLSparseMatrix_INT32_t_FLOAT64_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 959; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_11 = __pyx_PyFloat_AsDouble(__pyx_v_element); if (unlikely((__pyx_t_11 == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 959; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeDiagonalLLSparseMatrix_INT32_t_FLOAT64_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT64_t_LLSparseMatrix_INT32_t_FLOAT64_t *)__pyx_v_ll_mat), __pyx_t_11)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 959; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT64_t_LLSparseMatrix_INT32_t_FLOAT64_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 975; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_11 = __pyx_PyFloat_AsDouble(__pyx_v_element); if (unlikely((__pyx_t_11 == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 975; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeDiagonalLLSparseMatrix_INT32_t_FLOAT64_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT64_t_LLSparseMatrix_INT32_t_FLOAT64_t *)__pyx_v_ll_mat), __pyx_t_11)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 975; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
       __pyx_r = __pyx_t_2;
       __pyx_t_2 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":957
+      /* "cysparse/sparse/ll_mat.pyx":973
  * 
  * 
  *         elif dtype == FLOAT64_T:             # <<<<<<<<<<<<<<
@@ -53988,22 +53988,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_22DiagonalLLSparseMatrix(CYT
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":962
+    /* "cysparse/sparse/ll_mat.pyx":978
  * 
  * 
  *         elif dtype == FLOAT128_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakeDiagonalLLSparseMatrix_INT32_t_FLOAT128_t(ll_mat, element)
  */
-    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT128_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 962; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT128_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 978; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 962; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 978; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 962; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 978; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_4) {
 
-      /* "cysparse/sparse/ll_mat.pyx":964
+      /* "cysparse/sparse/ll_mat.pyx":980
  *         elif dtype == FLOAT128_T:
  * 
  *             return MakeDiagonalLLSparseMatrix_INT32_t_FLOAT128_t(ll_mat, element)             # <<<<<<<<<<<<<<
@@ -54011,15 +54011,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_22DiagonalLLSparseMatrix(CYT
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_25ll_mat_INT32_t_FLOAT128_t_LLSparseMatrix_INT32_t_FLOAT128_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 964; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_12 = __pyx_PyFloat_AsDouble(__pyx_v_element); if (unlikely((__pyx_t_12 == (long double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 964; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeDiagonalLLSparseMatrix_INT32_t_FLOAT128_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_25ll_mat_INT32_t_FLOAT128_t_LLSparseMatrix_INT32_t_FLOAT128_t *)__pyx_v_ll_mat), __pyx_t_12)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 964; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_25ll_mat_INT32_t_FLOAT128_t_LLSparseMatrix_INT32_t_FLOAT128_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 980; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_12 = __pyx_PyFloat_AsDouble(__pyx_v_element); if (unlikely((__pyx_t_12 == (long double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 980; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeDiagonalLLSparseMatrix_INT32_t_FLOAT128_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_25ll_mat_INT32_t_FLOAT128_t_LLSparseMatrix_INT32_t_FLOAT128_t *)__pyx_v_ll_mat), __pyx_t_12)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 980; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_r = __pyx_t_1;
       __pyx_t_1 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":962
+      /* "cysparse/sparse/ll_mat.pyx":978
  * 
  * 
  *         elif dtype == FLOAT128_T:             # <<<<<<<<<<<<<<
@@ -54028,22 +54028,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_22DiagonalLLSparseMatrix(CYT
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":967
+    /* "cysparse/sparse/ll_mat.pyx":983
  * 
  * 
  *         elif dtype == COMPLEX64_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakeDiagonalLLSparseMatrix_INT32_t_COMPLEX64_t(ll_mat, element)
  */
-    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_COMPLEX64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 967; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_COMPLEX64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 983; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 967; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 983; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 967; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 983; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     if (__pyx_t_4) {
 
-      /* "cysparse/sparse/ll_mat.pyx":969
+      /* "cysparse/sparse/ll_mat.pyx":985
  *         elif dtype == COMPLEX64_T:
  * 
  *             return MakeDiagonalLLSparseMatrix_INT32_t_COMPLEX64_t(ll_mat, element)             # <<<<<<<<<<<<<<
@@ -54051,15 +54051,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_22DiagonalLLSparseMatrix(CYT
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT32_t_COMPLEX64_t_LLSparseMatrix_INT32_t_COMPLEX64_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 969; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_13 = __Pyx_PyComplex_As___pyx_t_float_complex(__pyx_v_element); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 969; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeDiagonalLLSparseMatrix_INT32_t_COMPLEX64_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT32_t_COMPLEX64_t_LLSparseMatrix_INT32_t_COMPLEX64_t *)__pyx_v_ll_mat), __pyx_t_13)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 969; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT32_t_COMPLEX64_t_LLSparseMatrix_INT32_t_COMPLEX64_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 985; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_13 = __Pyx_PyComplex_As___pyx_t_float_complex(__pyx_v_element); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 985; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeDiagonalLLSparseMatrix_INT32_t_COMPLEX64_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT32_t_COMPLEX64_t_LLSparseMatrix_INT32_t_COMPLEX64_t *)__pyx_v_ll_mat), __pyx_t_13)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 985; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
       __pyx_r = __pyx_t_2;
       __pyx_t_2 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":967
+      /* "cysparse/sparse/ll_mat.pyx":983
  * 
  * 
  *         elif dtype == COMPLEX64_T:             # <<<<<<<<<<<<<<
@@ -54068,22 +54068,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_22DiagonalLLSparseMatrix(CYT
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":972
+    /* "cysparse/sparse/ll_mat.pyx":988
  * 
  * 
  *         elif dtype == COMPLEX128_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakeDiagonalLLSparseMatrix_INT32_t_COMPLEX128_t(ll_mat, element)
  */
-    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_COMPLEX128_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 972; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_COMPLEX128_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 988; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 972; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 988; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 972; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 988; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_4) {
 
-      /* "cysparse/sparse/ll_mat.pyx":974
+      /* "cysparse/sparse/ll_mat.pyx":990
  *         elif dtype == COMPLEX128_T:
  * 
  *             return MakeDiagonalLLSparseMatrix_INT32_t_COMPLEX128_t(ll_mat, element)             # <<<<<<<<<<<<<<
@@ -54091,15 +54091,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_22DiagonalLLSparseMatrix(CYT
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32_t_COMPLEX128_t_LLSparseMatrix_INT32_t_COMPLEX128_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 974; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_7 = __Pyx_PyComplex_As___pyx_t_double_complex(__pyx_v_element); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 974; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeDiagonalLLSparseMatrix_INT32_t_COMPLEX128_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32_t_COMPLEX128_t_LLSparseMatrix_INT32_t_COMPLEX128_t *)__pyx_v_ll_mat), __pyx_t_7)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 974; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32_t_COMPLEX128_t_LLSparseMatrix_INT32_t_COMPLEX128_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 990; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_7 = __Pyx_PyComplex_As___pyx_t_double_complex(__pyx_v_element); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 990; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeDiagonalLLSparseMatrix_INT32_t_COMPLEX128_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32_t_COMPLEX128_t_LLSparseMatrix_INT32_t_COMPLEX128_t *)__pyx_v_ll_mat), __pyx_t_7)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 990; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_r = __pyx_t_1;
       __pyx_t_1 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":972
+      /* "cysparse/sparse/ll_mat.pyx":988
  * 
  * 
  *         elif dtype == COMPLEX128_T:             # <<<<<<<<<<<<<<
@@ -54108,7 +54108,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_22DiagonalLLSparseMatrix(CYT
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":939
+    /* "cysparse/sparse/ll_mat.pyx":955
  * 
  * 
  *     if itype == INT32_T:             # <<<<<<<<<<<<<<
@@ -54118,37 +54118,37 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_22DiagonalLLSparseMatrix(CYT
     goto __pyx_L6;
   }
 
-  /* "cysparse/sparse/ll_mat.pyx":979
+  /* "cysparse/sparse/ll_mat.pyx":995
  * 
  * 
  *     elif itype == INT64_T:             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_INT64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 979; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_INT64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 995; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyObject_RichCompare(__pyx_v_itype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 979; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyObject_RichCompare(__pyx_v_itype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 995; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 979; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 995; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_4) {
 
-    /* "cysparse/sparse/ll_mat.pyx":982
+    /* "cysparse/sparse/ll_mat.pyx":998
  * 
  * 
  *         if dtype == INT32_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakeDiagonalLLSparseMatrix_INT64_t_INT32_t(ll_mat, element)
  */
-    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_INT32_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 982; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_INT32_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 998; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 982; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 998; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 982; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 998; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_4) {
 
-      /* "cysparse/sparse/ll_mat.pyx":984
+      /* "cysparse/sparse/ll_mat.pyx":1000
  *         if dtype == INT32_T:
  * 
  *             return MakeDiagonalLLSparseMatrix_INT64_t_INT32_t(ll_mat, element)             # <<<<<<<<<<<<<<
@@ -54156,15 +54156,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_22DiagonalLLSparseMatrix(CYT
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT64_t_INT32_t_LLSparseMatrix_INT64_t_INT32_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 984; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_8 = __Pyx_PyInt_As_int(__pyx_v_element); if (unlikely((__pyx_t_8 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 984; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeDiagonalLLSparseMatrix_INT64_t_INT32_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT64_t_INT32_t_LLSparseMatrix_INT64_t_INT32_t *)__pyx_v_ll_mat), __pyx_t_8)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 984; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT64_t_INT32_t_LLSparseMatrix_INT64_t_INT32_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1000; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_8 = __Pyx_PyInt_As_int(__pyx_v_element); if (unlikely((__pyx_t_8 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1000; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeDiagonalLLSparseMatrix_INT64_t_INT32_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT64_t_INT32_t_LLSparseMatrix_INT64_t_INT32_t *)__pyx_v_ll_mat), __pyx_t_8)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1000; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_r = __pyx_t_1;
       __pyx_t_1 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":982
+      /* "cysparse/sparse/ll_mat.pyx":998
  * 
  * 
  *         if dtype == INT32_T:             # <<<<<<<<<<<<<<
@@ -54173,22 +54173,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_22DiagonalLLSparseMatrix(CYT
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":987
+    /* "cysparse/sparse/ll_mat.pyx":1003
  * 
  * 
  *         elif dtype == INT64_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakeDiagonalLLSparseMatrix_INT64_t_INT64_t(ll_mat, element)
  */
-    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_INT64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 987; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_INT64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1003; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 987; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1003; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 987; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1003; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     if (__pyx_t_4) {
 
-      /* "cysparse/sparse/ll_mat.pyx":989
+      /* "cysparse/sparse/ll_mat.pyx":1005
  *         elif dtype == INT64_T:
  * 
  *             return MakeDiagonalLLSparseMatrix_INT64_t_INT64_t(ll_mat, element)             # <<<<<<<<<<<<<<
@@ -54196,15 +54196,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_22DiagonalLLSparseMatrix(CYT
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT64_t_INT64_t_LLSparseMatrix_INT64_t_INT64_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 989; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_9 = __Pyx_PyInt_As_long(__pyx_v_element); if (unlikely((__pyx_t_9 == (long)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 989; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeDiagonalLLSparseMatrix_INT64_t_INT64_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT64_t_INT64_t_LLSparseMatrix_INT64_t_INT64_t *)__pyx_v_ll_mat), __pyx_t_9)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 989; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT64_t_INT64_t_LLSparseMatrix_INT64_t_INT64_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1005; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_9 = __Pyx_PyInt_As_long(__pyx_v_element); if (unlikely((__pyx_t_9 == (long)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1005; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeDiagonalLLSparseMatrix_INT64_t_INT64_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT64_t_INT64_t_LLSparseMatrix_INT64_t_INT64_t *)__pyx_v_ll_mat), __pyx_t_9)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1005; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
       __pyx_r = __pyx_t_2;
       __pyx_t_2 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":987
+      /* "cysparse/sparse/ll_mat.pyx":1003
  * 
  * 
  *         elif dtype == INT64_T:             # <<<<<<<<<<<<<<
@@ -54213,22 +54213,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_22DiagonalLLSparseMatrix(CYT
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":992
+    /* "cysparse/sparse/ll_mat.pyx":1008
  * 
  * 
  *         elif dtype == FLOAT32_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakeDiagonalLLSparseMatrix_INT64_t_FLOAT32_t(ll_mat, element)
  */
-    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT32_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 992; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT32_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1008; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 992; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1008; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 992; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1008; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_4) {
 
-      /* "cysparse/sparse/ll_mat.pyx":994
+      /* "cysparse/sparse/ll_mat.pyx":1010
  *         elif dtype == FLOAT32_T:
  * 
  *             return MakeDiagonalLLSparseMatrix_INT64_t_FLOAT32_t(ll_mat, element)             # <<<<<<<<<<<<<<
@@ -54236,15 +54236,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_22DiagonalLLSparseMatrix(CYT
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT64_t_FLOAT32_t_LLSparseMatrix_INT64_t_FLOAT32_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 994; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_10 = __pyx_PyFloat_AsFloat(__pyx_v_element); if (unlikely((__pyx_t_10 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 994; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeDiagonalLLSparseMatrix_INT64_t_FLOAT32_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT64_t_FLOAT32_t_LLSparseMatrix_INT64_t_FLOAT32_t *)__pyx_v_ll_mat), __pyx_t_10)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 994; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT64_t_FLOAT32_t_LLSparseMatrix_INT64_t_FLOAT32_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1010; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_10 = __pyx_PyFloat_AsFloat(__pyx_v_element); if (unlikely((__pyx_t_10 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1010; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeDiagonalLLSparseMatrix_INT64_t_FLOAT32_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT64_t_FLOAT32_t_LLSparseMatrix_INT64_t_FLOAT32_t *)__pyx_v_ll_mat), __pyx_t_10)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1010; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_r = __pyx_t_1;
       __pyx_t_1 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":992
+      /* "cysparse/sparse/ll_mat.pyx":1008
  * 
  * 
  *         elif dtype == FLOAT32_T:             # <<<<<<<<<<<<<<
@@ -54253,22 +54253,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_22DiagonalLLSparseMatrix(CYT
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":997
+    /* "cysparse/sparse/ll_mat.pyx":1013
  * 
  * 
  *         elif dtype == FLOAT64_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakeDiagonalLLSparseMatrix_INT64_t_FLOAT64_t(ll_mat, element)
  */
-    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 997; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1013; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 997; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1013; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 997; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1013; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     if (__pyx_t_4) {
 
-      /* "cysparse/sparse/ll_mat.pyx":999
+      /* "cysparse/sparse/ll_mat.pyx":1015
  *         elif dtype == FLOAT64_T:
  * 
  *             return MakeDiagonalLLSparseMatrix_INT64_t_FLOAT64_t(ll_mat, element)             # <<<<<<<<<<<<<<
@@ -54276,15 +54276,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_22DiagonalLLSparseMatrix(CYT
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT64_t_FLOAT64_t_LLSparseMatrix_INT64_t_FLOAT64_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 999; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_11 = __pyx_PyFloat_AsDouble(__pyx_v_element); if (unlikely((__pyx_t_11 == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 999; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeDiagonalLLSparseMatrix_INT64_t_FLOAT64_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT64_t_FLOAT64_t_LLSparseMatrix_INT64_t_FLOAT64_t *)__pyx_v_ll_mat), __pyx_t_11)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 999; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT64_t_FLOAT64_t_LLSparseMatrix_INT64_t_FLOAT64_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1015; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_11 = __pyx_PyFloat_AsDouble(__pyx_v_element); if (unlikely((__pyx_t_11 == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1015; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeDiagonalLLSparseMatrix_INT64_t_FLOAT64_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT64_t_FLOAT64_t_LLSparseMatrix_INT64_t_FLOAT64_t *)__pyx_v_ll_mat), __pyx_t_11)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1015; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
       __pyx_r = __pyx_t_2;
       __pyx_t_2 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":997
+      /* "cysparse/sparse/ll_mat.pyx":1013
  * 
  * 
  *         elif dtype == FLOAT64_T:             # <<<<<<<<<<<<<<
@@ -54293,22 +54293,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_22DiagonalLLSparseMatrix(CYT
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":1002
+    /* "cysparse/sparse/ll_mat.pyx":1018
  * 
  * 
  *         elif dtype == FLOAT128_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakeDiagonalLLSparseMatrix_INT64_t_FLOAT128_t(ll_mat, element)
  */
-    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT128_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1002; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT128_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1018; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1002; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1018; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1002; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1018; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_4) {
 
-      /* "cysparse/sparse/ll_mat.pyx":1004
+      /* "cysparse/sparse/ll_mat.pyx":1020
  *         elif dtype == FLOAT128_T:
  * 
  *             return MakeDiagonalLLSparseMatrix_INT64_t_FLOAT128_t(ll_mat, element)             # <<<<<<<<<<<<<<
@@ -54316,15 +54316,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_22DiagonalLLSparseMatrix(CYT
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_25ll_mat_INT64_t_FLOAT128_t_LLSparseMatrix_INT64_t_FLOAT128_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1004; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_12 = __pyx_PyFloat_AsDouble(__pyx_v_element); if (unlikely((__pyx_t_12 == (long double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1004; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeDiagonalLLSparseMatrix_INT64_t_FLOAT128_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_25ll_mat_INT64_t_FLOAT128_t_LLSparseMatrix_INT64_t_FLOAT128_t *)__pyx_v_ll_mat), __pyx_t_12)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1004; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_25ll_mat_INT64_t_FLOAT128_t_LLSparseMatrix_INT64_t_FLOAT128_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1020; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_12 = __pyx_PyFloat_AsDouble(__pyx_v_element); if (unlikely((__pyx_t_12 == (long double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1020; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeDiagonalLLSparseMatrix_INT64_t_FLOAT128_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_25ll_mat_INT64_t_FLOAT128_t_LLSparseMatrix_INT64_t_FLOAT128_t *)__pyx_v_ll_mat), __pyx_t_12)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1020; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_r = __pyx_t_1;
       __pyx_t_1 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":1002
+      /* "cysparse/sparse/ll_mat.pyx":1018
  * 
  * 
  *         elif dtype == FLOAT128_T:             # <<<<<<<<<<<<<<
@@ -54333,22 +54333,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_22DiagonalLLSparseMatrix(CYT
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":1007
+    /* "cysparse/sparse/ll_mat.pyx":1023
  * 
  * 
  *         elif dtype == COMPLEX64_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakeDiagonalLLSparseMatrix_INT64_t_COMPLEX64_t(ll_mat, element)
  */
-    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_COMPLEX64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1007; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_COMPLEX64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1023; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1007; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1023; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1007; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1023; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     if (__pyx_t_4) {
 
-      /* "cysparse/sparse/ll_mat.pyx":1009
+      /* "cysparse/sparse/ll_mat.pyx":1025
  *         elif dtype == COMPLEX64_T:
  * 
  *             return MakeDiagonalLLSparseMatrix_INT64_t_COMPLEX64_t(ll_mat, element)             # <<<<<<<<<<<<<<
@@ -54356,15 +54356,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_22DiagonalLLSparseMatrix(CYT
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT64_t_COMPLEX64_t_LLSparseMatrix_INT64_t_COMPLEX64_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1009; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_13 = __Pyx_PyComplex_As___pyx_t_float_complex(__pyx_v_element); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1009; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeDiagonalLLSparseMatrix_INT64_t_COMPLEX64_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT64_t_COMPLEX64_t_LLSparseMatrix_INT64_t_COMPLEX64_t *)__pyx_v_ll_mat), __pyx_t_13)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1009; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT64_t_COMPLEX64_t_LLSparseMatrix_INT64_t_COMPLEX64_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1025; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_13 = __Pyx_PyComplex_As___pyx_t_float_complex(__pyx_v_element); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1025; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeDiagonalLLSparseMatrix_INT64_t_COMPLEX64_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT64_t_COMPLEX64_t_LLSparseMatrix_INT64_t_COMPLEX64_t *)__pyx_v_ll_mat), __pyx_t_13)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1025; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
       __pyx_r = __pyx_t_2;
       __pyx_t_2 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":1007
+      /* "cysparse/sparse/ll_mat.pyx":1023
  * 
  * 
  *         elif dtype == COMPLEX64_T:             # <<<<<<<<<<<<<<
@@ -54373,22 +54373,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_22DiagonalLLSparseMatrix(CYT
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":1012
+    /* "cysparse/sparse/ll_mat.pyx":1028
  * 
  * 
  *         elif dtype == COMPLEX128_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakeDiagonalLLSparseMatrix_INT64_t_COMPLEX128_t(ll_mat, element)
  */
-    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_COMPLEX128_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1012; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_COMPLEX128_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1028; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1012; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1028; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1012; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1028; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_4) {
 
-      /* "cysparse/sparse/ll_mat.pyx":1014
+      /* "cysparse/sparse/ll_mat.pyx":1030
  *         elif dtype == COMPLEX128_T:
  * 
  *             return MakeDiagonalLLSparseMatrix_INT64_t_COMPLEX128_t(ll_mat, element)             # <<<<<<<<<<<<<<
@@ -54396,15 +54396,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_22DiagonalLLSparseMatrix(CYT
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT64_t_COMPLEX128_t_LLSparseMatrix_INT64_t_COMPLEX128_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1014; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_7 = __Pyx_PyComplex_As___pyx_t_double_complex(__pyx_v_element); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1014; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeDiagonalLLSparseMatrix_INT64_t_COMPLEX128_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT64_t_COMPLEX128_t_LLSparseMatrix_INT64_t_COMPLEX128_t *)__pyx_v_ll_mat), __pyx_t_7)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1014; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT64_t_COMPLEX128_t_LLSparseMatrix_INT64_t_COMPLEX128_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1030; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_7 = __Pyx_PyComplex_As___pyx_t_double_complex(__pyx_v_element); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1030; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeDiagonalLLSparseMatrix_INT64_t_COMPLEX128_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT64_t_COMPLEX128_t_LLSparseMatrix_INT64_t_COMPLEX128_t *)__pyx_v_ll_mat), __pyx_t_7)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1030; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_r = __pyx_t_1;
       __pyx_t_1 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":1012
+      /* "cysparse/sparse/ll_mat.pyx":1028
  * 
  * 
  *         elif dtype == COMPLEX128_T:             # <<<<<<<<<<<<<<
@@ -54413,7 +54413,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_22DiagonalLLSparseMatrix(CYT
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":979
+    /* "cysparse/sparse/ll_mat.pyx":995
  * 
  * 
  *     elif itype == INT64_T:             # <<<<<<<<<<<<<<
@@ -54423,7 +54423,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_22DiagonalLLSparseMatrix(CYT
     goto __pyx_L6;
   }
 
-  /* "cysparse/sparse/ll_mat.pyx":1019
+  /* "cysparse/sparse/ll_mat.pyx":1035
  * 
  *     else:
  *         raise TypeError('itype not recognized')             # <<<<<<<<<<<<<<
@@ -54431,15 +54431,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_22DiagonalLLSparseMatrix(CYT
  * # alias
  */
   /*else*/ {
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__140, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1019; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__140, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1035; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1019; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1035; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __pyx_L6:;
 
-  /* "cysparse/sparse/ll_mat.pyx":908
+  /* "cysparse/sparse/ll_mat.pyx":924
  * 
  * 
  * def DiagonalLLSparseMatrix(**kwargs):             # <<<<<<<<<<<<<<
@@ -54467,7 +54467,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_22DiagonalLLSparseMatrix(CYT
   return __pyx_r;
 }
 
-/* "cysparse/sparse/ll_mat.pyx":1022
+/* "cysparse/sparse/ll_mat.pyx":1038
  * 
  * # alias
  * def IdentityLLSparseMatrix(**kwargs):             # <<<<<<<<<<<<<<
@@ -54507,22 +54507,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_24IdentityLLSparseMatrix(CYT
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("IdentityLLSparseMatrix", 0);
 
-  /* "cysparse/sparse/ll_mat.pyx":1023
+  /* "cysparse/sparse/ll_mat.pyx":1039
  * # alias
  * def IdentityLLSparseMatrix(**kwargs):
  *     element = kwargs.pop('element', None)             # <<<<<<<<<<<<<<
  *     return DiagonalLLSparseMatrix(**kwargs)
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_kwargs, __pyx_n_s_pop); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1023; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_kwargs, __pyx_n_s_pop); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1039; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__141, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1023; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__141, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1039; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_element = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "cysparse/sparse/ll_mat.pyx":1024
+  /* "cysparse/sparse/ll_mat.pyx":1040
  * def IdentityLLSparseMatrix(**kwargs):
  *     element = kwargs.pop('element', None)
  *     return DiagonalLLSparseMatrix(**kwargs)             # <<<<<<<<<<<<<<
@@ -54530,16 +54530,16 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_24IdentityLLSparseMatrix(CYT
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_DiagonalLLSparseMatrix); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1024; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_DiagonalLLSparseMatrix); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1040; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_v_kwargs); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1024; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_v_kwargs); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1040; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "cysparse/sparse/ll_mat.pyx":1022
+  /* "cysparse/sparse/ll_mat.pyx":1038
  * 
  * # alias
  * def IdentityLLSparseMatrix(**kwargs):             # <<<<<<<<<<<<<<
@@ -54560,7 +54560,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_24IdentityLLSparseMatrix(CYT
   return __pyx_r;
 }
 
-/* "cysparse/sparse/ll_mat.pyx":1027
+/* "cysparse/sparse/ll_mat.pyx":1043
  * 
  * 
  * def BandLLSparseMatrix(**kwargs):             # <<<<<<<<<<<<<<
@@ -54607,37 +54607,37 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_26BandLLSparseMatrix(CYTHON_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("BandLLSparseMatrix", 0);
 
-  /* "cysparse/sparse/ll_mat.pyx":1034
+  /* "cysparse/sparse/ll_mat.pyx":1050
  *         Input arguments are **not** tested.
  *     """
  *     diag_coeff = kwargs.pop('diag_coeff', None)             # <<<<<<<<<<<<<<
  *     numpy_arrays = kwargs.pop('numpy_arrays', None)
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_kwargs, __pyx_n_s_pop); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1034; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_kwargs, __pyx_n_s_pop); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1050; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__142, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1034; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__142, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1050; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_diag_coeff = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "cysparse/sparse/ll_mat.pyx":1035
+  /* "cysparse/sparse/ll_mat.pyx":1051
  *     """
  *     diag_coeff = kwargs.pop('diag_coeff', None)
  *     numpy_arrays = kwargs.pop('numpy_arrays', None)             # <<<<<<<<<<<<<<
  * 
  *     if diag_coeff is None:
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_kwargs, __pyx_n_s_pop); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1035; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_kwargs, __pyx_n_s_pop); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1051; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__143, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1035; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__143, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1051; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_numpy_arrays = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "cysparse/sparse/ll_mat.pyx":1037
+  /* "cysparse/sparse/ll_mat.pyx":1053
  *     numpy_arrays = kwargs.pop('numpy_arrays', None)
  * 
  *     if diag_coeff is None:             # <<<<<<<<<<<<<<
@@ -54648,20 +54648,20 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_26BandLLSparseMatrix(CYTHON_
   __pyx_t_4 = (__pyx_t_3 != 0);
   if (__pyx_t_4) {
 
-    /* "cysparse/sparse/ll_mat.pyx":1038
+    /* "cysparse/sparse/ll_mat.pyx":1054
  * 
  *     if diag_coeff is None:
  *         raise ValueError("Named argument 'diag_coeff' not given")             # <<<<<<<<<<<<<<
  * 
  *     if numpy_arrays is None:
  */
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__144, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1038; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__144, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1054; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1038; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1054; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-    /* "cysparse/sparse/ll_mat.pyx":1037
+    /* "cysparse/sparse/ll_mat.pyx":1053
  *     numpy_arrays = kwargs.pop('numpy_arrays', None)
  * 
  *     if diag_coeff is None:             # <<<<<<<<<<<<<<
@@ -54670,7 +54670,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_26BandLLSparseMatrix(CYTHON_
  */
   }
 
-  /* "cysparse/sparse/ll_mat.pyx":1040
+  /* "cysparse/sparse/ll_mat.pyx":1056
  *         raise ValueError("Named argument 'diag_coeff' not given")
  * 
  *     if numpy_arrays is None:             # <<<<<<<<<<<<<<
@@ -54681,20 +54681,20 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_26BandLLSparseMatrix(CYTHON_
   __pyx_t_3 = (__pyx_t_4 != 0);
   if (__pyx_t_3) {
 
-    /* "cysparse/sparse/ll_mat.pyx":1041
+    /* "cysparse/sparse/ll_mat.pyx":1057
  * 
  *     if numpy_arrays is None:
  *         raise ValueError("Named argument 'numpy_arrays' not given")             # <<<<<<<<<<<<<<
  * 
  *     ll_mat = LLSparseMatrix(**kwargs)
  */
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__145, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1041; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__145, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1057; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1041; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1057; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-    /* "cysparse/sparse/ll_mat.pyx":1040
+    /* "cysparse/sparse/ll_mat.pyx":1056
  *         raise ValueError("Named argument 'diag_coeff' not given")
  * 
  *     if numpy_arrays is None:             # <<<<<<<<<<<<<<
@@ -54703,76 +54703,76 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_26BandLLSparseMatrix(CYTHON_
  */
   }
 
-  /* "cysparse/sparse/ll_mat.pyx":1043
+  /* "cysparse/sparse/ll_mat.pyx":1059
  *         raise ValueError("Named argument 'numpy_arrays' not given")
  * 
  *     ll_mat = LLSparseMatrix(**kwargs)             # <<<<<<<<<<<<<<
  * 
  *     itype = ll_mat.itype
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_LLSparseMatrix); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1043; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_LLSparseMatrix); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1059; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_v_kwargs); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1043; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_v_kwargs); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1059; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_ll_mat = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "cysparse/sparse/ll_mat.pyx":1045
+  /* "cysparse/sparse/ll_mat.pyx":1061
  *     ll_mat = LLSparseMatrix(**kwargs)
  * 
  *     itype = ll_mat.itype             # <<<<<<<<<<<<<<
  *     dtype = ll_mat.dtype
  * 
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_ll_mat, __pyx_n_s_itype); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1045; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_ll_mat, __pyx_n_s_itype); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1061; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_v_itype = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "cysparse/sparse/ll_mat.pyx":1046
+  /* "cysparse/sparse/ll_mat.pyx":1062
  * 
  *     itype = ll_mat.itype
  *     dtype = ll_mat.dtype             # <<<<<<<<<<<<<<
  * 
  *     # launch right "constructor" method
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_ll_mat, __pyx_n_s_dtype); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1046; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_ll_mat, __pyx_n_s_dtype); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1062; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_v_dtype = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "cysparse/sparse/ll_mat.pyx":1051
+  /* "cysparse/sparse/ll_mat.pyx":1067
  * 
  * 
  *     if itype == INT32_T:             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_INT32_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1051; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_INT32_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1067; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = PyObject_RichCompare(__pyx_v_itype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1051; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyObject_RichCompare(__pyx_v_itype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1067; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1051; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1067; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_3) {
 
-    /* "cysparse/sparse/ll_mat.pyx":1054
+    /* "cysparse/sparse/ll_mat.pyx":1070
  * 
  * 
  *         if dtype == INT32_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakeBandLLSparseMatrix_INT32_t_INT32_t(ll_mat, diag_coeff, numpy_arrays)
  */
-    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_INT32_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1054; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_INT32_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1070; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1054; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1070; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1054; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1070; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     if (__pyx_t_3) {
 
-      /* "cysparse/sparse/ll_mat.pyx":1056
+      /* "cysparse/sparse/ll_mat.pyx":1072
  *         if dtype == INT32_T:
  * 
  *             return MakeBandLLSparseMatrix_INT32_t_INT32_t(ll_mat, diag_coeff, numpy_arrays)             # <<<<<<<<<<<<<<
@@ -54780,15 +54780,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_26BandLLSparseMatrix(CYTHON_
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT32_t_INT32_t_LLSparseMatrix_INT32_t_INT32_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1056; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      if (!(likely(PyList_CheckExact(__pyx_v_numpy_arrays))||((__pyx_v_numpy_arrays) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_numpy_arrays)->tp_name), 0))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1056; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeBandLLSparseMatrix_INT32_t_INT32_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT32_t_INT32_t_LLSparseMatrix_INT32_t_INT32_t *)__pyx_v_ll_mat), __pyx_v_diag_coeff, ((PyObject*)__pyx_v_numpy_arrays))); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1056; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT32_t_INT32_t_LLSparseMatrix_INT32_t_INT32_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1072; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(PyList_CheckExact(__pyx_v_numpy_arrays))||((__pyx_v_numpy_arrays) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_numpy_arrays)->tp_name), 0))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1072; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeBandLLSparseMatrix_INT32_t_INT32_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT32_t_INT32_t_LLSparseMatrix_INT32_t_INT32_t *)__pyx_v_ll_mat), __pyx_v_diag_coeff, ((PyObject*)__pyx_v_numpy_arrays))); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1072; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
       __pyx_r = __pyx_t_2;
       __pyx_t_2 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":1054
+      /* "cysparse/sparse/ll_mat.pyx":1070
  * 
  * 
  *         if dtype == INT32_T:             # <<<<<<<<<<<<<<
@@ -54797,22 +54797,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_26BandLLSparseMatrix(CYTHON_
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":1059
+    /* "cysparse/sparse/ll_mat.pyx":1075
  * 
  * 
  *         elif dtype == INT64_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakeBandLLSparseMatrix_INT32_t_INT64_t(ll_mat, diag_coeff, numpy_arrays)
  */
-    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_INT64_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1059; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_INT64_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1075; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1059; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1075; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1059; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1075; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_3) {
 
-      /* "cysparse/sparse/ll_mat.pyx":1061
+      /* "cysparse/sparse/ll_mat.pyx":1077
  *         elif dtype == INT64_T:
  * 
  *             return MakeBandLLSparseMatrix_INT32_t_INT64_t(ll_mat, diag_coeff, numpy_arrays)             # <<<<<<<<<<<<<<
@@ -54820,15 +54820,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_26BandLLSparseMatrix(CYTHON_
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT32_t_INT64_t_LLSparseMatrix_INT32_t_INT64_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1061; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      if (!(likely(PyList_CheckExact(__pyx_v_numpy_arrays))||((__pyx_v_numpy_arrays) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_numpy_arrays)->tp_name), 0))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1061; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeBandLLSparseMatrix_INT32_t_INT64_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT32_t_INT64_t_LLSparseMatrix_INT32_t_INT64_t *)__pyx_v_ll_mat), __pyx_v_diag_coeff, ((PyObject*)__pyx_v_numpy_arrays))); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1061; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT32_t_INT64_t_LLSparseMatrix_INT32_t_INT64_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1077; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(PyList_CheckExact(__pyx_v_numpy_arrays))||((__pyx_v_numpy_arrays) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_numpy_arrays)->tp_name), 0))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1077; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeBandLLSparseMatrix_INT32_t_INT64_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT32_t_INT64_t_LLSparseMatrix_INT32_t_INT64_t *)__pyx_v_ll_mat), __pyx_v_diag_coeff, ((PyObject*)__pyx_v_numpy_arrays))); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1077; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_r = __pyx_t_1;
       __pyx_t_1 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":1059
+      /* "cysparse/sparse/ll_mat.pyx":1075
  * 
  * 
  *         elif dtype == INT64_T:             # <<<<<<<<<<<<<<
@@ -54837,22 +54837,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_26BandLLSparseMatrix(CYTHON_
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":1064
+    /* "cysparse/sparse/ll_mat.pyx":1080
  * 
  * 
  *         elif dtype == FLOAT32_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakeBandLLSparseMatrix_INT32_t_FLOAT32_t(ll_mat, diag_coeff, numpy_arrays)
  */
-    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT32_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1064; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT32_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1080; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1064; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1080; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1064; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1080; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     if (__pyx_t_3) {
 
-      /* "cysparse/sparse/ll_mat.pyx":1066
+      /* "cysparse/sparse/ll_mat.pyx":1082
  *         elif dtype == FLOAT32_T:
  * 
  *             return MakeBandLLSparseMatrix_INT32_t_FLOAT32_t(ll_mat, diag_coeff, numpy_arrays)             # <<<<<<<<<<<<<<
@@ -54860,15 +54860,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_26BandLLSparseMatrix(CYTHON_
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT32_t_LLSparseMatrix_INT32_t_FLOAT32_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1066; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      if (!(likely(PyList_CheckExact(__pyx_v_numpy_arrays))||((__pyx_v_numpy_arrays) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_numpy_arrays)->tp_name), 0))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1066; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeBandLLSparseMatrix_INT32_t_FLOAT32_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT32_t_LLSparseMatrix_INT32_t_FLOAT32_t *)__pyx_v_ll_mat), __pyx_v_diag_coeff, ((PyObject*)__pyx_v_numpy_arrays))); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1066; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT32_t_LLSparseMatrix_INT32_t_FLOAT32_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1082; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(PyList_CheckExact(__pyx_v_numpy_arrays))||((__pyx_v_numpy_arrays) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_numpy_arrays)->tp_name), 0))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1082; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeBandLLSparseMatrix_INT32_t_FLOAT32_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT32_t_LLSparseMatrix_INT32_t_FLOAT32_t *)__pyx_v_ll_mat), __pyx_v_diag_coeff, ((PyObject*)__pyx_v_numpy_arrays))); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1082; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
       __pyx_r = __pyx_t_2;
       __pyx_t_2 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":1064
+      /* "cysparse/sparse/ll_mat.pyx":1080
  * 
  * 
  *         elif dtype == FLOAT32_T:             # <<<<<<<<<<<<<<
@@ -54877,22 +54877,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_26BandLLSparseMatrix(CYTHON_
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":1069
+    /* "cysparse/sparse/ll_mat.pyx":1085
  * 
  * 
  *         elif dtype == FLOAT64_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakeBandLLSparseMatrix_INT32_t_FLOAT64_t(ll_mat, diag_coeff, numpy_arrays)
  */
-    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT64_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1069; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT64_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1085; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1069; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1085; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1069; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1085; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_3) {
 
-      /* "cysparse/sparse/ll_mat.pyx":1071
+      /* "cysparse/sparse/ll_mat.pyx":1087
  *         elif dtype == FLOAT64_T:
  * 
  *             return MakeBandLLSparseMatrix_INT32_t_FLOAT64_t(ll_mat, diag_coeff, numpy_arrays)             # <<<<<<<<<<<<<<
@@ -54900,15 +54900,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_26BandLLSparseMatrix(CYTHON_
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT64_t_LLSparseMatrix_INT32_t_FLOAT64_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1071; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      if (!(likely(PyList_CheckExact(__pyx_v_numpy_arrays))||((__pyx_v_numpy_arrays) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_numpy_arrays)->tp_name), 0))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1071; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeBandLLSparseMatrix_INT32_t_FLOAT64_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT64_t_LLSparseMatrix_INT32_t_FLOAT64_t *)__pyx_v_ll_mat), __pyx_v_diag_coeff, ((PyObject*)__pyx_v_numpy_arrays))); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1071; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT64_t_LLSparseMatrix_INT32_t_FLOAT64_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1087; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(PyList_CheckExact(__pyx_v_numpy_arrays))||((__pyx_v_numpy_arrays) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_numpy_arrays)->tp_name), 0))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1087; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeBandLLSparseMatrix_INT32_t_FLOAT64_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT64_t_LLSparseMatrix_INT32_t_FLOAT64_t *)__pyx_v_ll_mat), __pyx_v_diag_coeff, ((PyObject*)__pyx_v_numpy_arrays))); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1087; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_r = __pyx_t_1;
       __pyx_t_1 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":1069
+      /* "cysparse/sparse/ll_mat.pyx":1085
  * 
  * 
  *         elif dtype == FLOAT64_T:             # <<<<<<<<<<<<<<
@@ -54917,22 +54917,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_26BandLLSparseMatrix(CYTHON_
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":1074
+    /* "cysparse/sparse/ll_mat.pyx":1090
  * 
  * 
  *         elif dtype == FLOAT128_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakeBandLLSparseMatrix_INT32_t_FLOAT128_t(ll_mat, diag_coeff, numpy_arrays)
  */
-    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT128_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1074; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT128_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1090; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1074; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1090; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1074; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1090; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     if (__pyx_t_3) {
 
-      /* "cysparse/sparse/ll_mat.pyx":1076
+      /* "cysparse/sparse/ll_mat.pyx":1092
  *         elif dtype == FLOAT128_T:
  * 
  *             return MakeBandLLSparseMatrix_INT32_t_FLOAT128_t(ll_mat, diag_coeff, numpy_arrays)             # <<<<<<<<<<<<<<
@@ -54940,15 +54940,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_26BandLLSparseMatrix(CYTHON_
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_25ll_mat_INT32_t_FLOAT128_t_LLSparseMatrix_INT32_t_FLOAT128_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1076; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      if (!(likely(PyList_CheckExact(__pyx_v_numpy_arrays))||((__pyx_v_numpy_arrays) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_numpy_arrays)->tp_name), 0))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1076; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeBandLLSparseMatrix_INT32_t_FLOAT128_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_25ll_mat_INT32_t_FLOAT128_t_LLSparseMatrix_INT32_t_FLOAT128_t *)__pyx_v_ll_mat), __pyx_v_diag_coeff, ((PyObject*)__pyx_v_numpy_arrays))); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1076; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_25ll_mat_INT32_t_FLOAT128_t_LLSparseMatrix_INT32_t_FLOAT128_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1092; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(PyList_CheckExact(__pyx_v_numpy_arrays))||((__pyx_v_numpy_arrays) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_numpy_arrays)->tp_name), 0))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1092; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeBandLLSparseMatrix_INT32_t_FLOAT128_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_25ll_mat_INT32_t_FLOAT128_t_LLSparseMatrix_INT32_t_FLOAT128_t *)__pyx_v_ll_mat), __pyx_v_diag_coeff, ((PyObject*)__pyx_v_numpy_arrays))); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1092; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
       __pyx_r = __pyx_t_2;
       __pyx_t_2 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":1074
+      /* "cysparse/sparse/ll_mat.pyx":1090
  * 
  * 
  *         elif dtype == FLOAT128_T:             # <<<<<<<<<<<<<<
@@ -54957,22 +54957,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_26BandLLSparseMatrix(CYTHON_
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":1079
+    /* "cysparse/sparse/ll_mat.pyx":1095
  * 
  * 
  *         elif dtype == COMPLEX64_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakeBandLLSparseMatrix_INT32_t_COMPLEX64_t(ll_mat, diag_coeff, numpy_arrays)
  */
-    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_COMPLEX64_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1079; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_COMPLEX64_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1095; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1079; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1095; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1079; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1095; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_3) {
 
-      /* "cysparse/sparse/ll_mat.pyx":1081
+      /* "cysparse/sparse/ll_mat.pyx":1097
  *         elif dtype == COMPLEX64_T:
  * 
  *             return MakeBandLLSparseMatrix_INT32_t_COMPLEX64_t(ll_mat, diag_coeff, numpy_arrays)             # <<<<<<<<<<<<<<
@@ -54980,15 +54980,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_26BandLLSparseMatrix(CYTHON_
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT32_t_COMPLEX64_t_LLSparseMatrix_INT32_t_COMPLEX64_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1081; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      if (!(likely(PyList_CheckExact(__pyx_v_numpy_arrays))||((__pyx_v_numpy_arrays) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_numpy_arrays)->tp_name), 0))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1081; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeBandLLSparseMatrix_INT32_t_COMPLEX64_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT32_t_COMPLEX64_t_LLSparseMatrix_INT32_t_COMPLEX64_t *)__pyx_v_ll_mat), __pyx_v_diag_coeff, ((PyObject*)__pyx_v_numpy_arrays))); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1081; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT32_t_COMPLEX64_t_LLSparseMatrix_INT32_t_COMPLEX64_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1097; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(PyList_CheckExact(__pyx_v_numpy_arrays))||((__pyx_v_numpy_arrays) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_numpy_arrays)->tp_name), 0))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1097; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeBandLLSparseMatrix_INT32_t_COMPLEX64_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT32_t_COMPLEX64_t_LLSparseMatrix_INT32_t_COMPLEX64_t *)__pyx_v_ll_mat), __pyx_v_diag_coeff, ((PyObject*)__pyx_v_numpy_arrays))); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1097; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_r = __pyx_t_1;
       __pyx_t_1 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":1079
+      /* "cysparse/sparse/ll_mat.pyx":1095
  * 
  * 
  *         elif dtype == COMPLEX64_T:             # <<<<<<<<<<<<<<
@@ -54997,22 +54997,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_26BandLLSparseMatrix(CYTHON_
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":1084
+    /* "cysparse/sparse/ll_mat.pyx":1100
  * 
  * 
  *         elif dtype == COMPLEX128_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakeBandLLSparseMatrix_INT32_t_COMPLEX128_t(ll_mat, diag_coeff, numpy_arrays)
  */
-    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_COMPLEX128_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1084; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_COMPLEX128_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1100; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1084; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1100; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1084; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1100; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     if (__pyx_t_3) {
 
-      /* "cysparse/sparse/ll_mat.pyx":1086
+      /* "cysparse/sparse/ll_mat.pyx":1102
  *         elif dtype == COMPLEX128_T:
  * 
  *             return MakeBandLLSparseMatrix_INT32_t_COMPLEX128_t(ll_mat, diag_coeff, numpy_arrays)             # <<<<<<<<<<<<<<
@@ -55020,15 +55020,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_26BandLLSparseMatrix(CYTHON_
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32_t_COMPLEX128_t_LLSparseMatrix_INT32_t_COMPLEX128_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1086; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      if (!(likely(PyList_CheckExact(__pyx_v_numpy_arrays))||((__pyx_v_numpy_arrays) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_numpy_arrays)->tp_name), 0))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1086; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeBandLLSparseMatrix_INT32_t_COMPLEX128_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32_t_COMPLEX128_t_LLSparseMatrix_INT32_t_COMPLEX128_t *)__pyx_v_ll_mat), __pyx_v_diag_coeff, ((PyObject*)__pyx_v_numpy_arrays))); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1086; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32_t_COMPLEX128_t_LLSparseMatrix_INT32_t_COMPLEX128_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1102; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(PyList_CheckExact(__pyx_v_numpy_arrays))||((__pyx_v_numpy_arrays) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_numpy_arrays)->tp_name), 0))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1102; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeBandLLSparseMatrix_INT32_t_COMPLEX128_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32_t_COMPLEX128_t_LLSparseMatrix_INT32_t_COMPLEX128_t *)__pyx_v_ll_mat), __pyx_v_diag_coeff, ((PyObject*)__pyx_v_numpy_arrays))); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1102; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
       __pyx_r = __pyx_t_2;
       __pyx_t_2 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":1084
+      /* "cysparse/sparse/ll_mat.pyx":1100
  * 
  * 
  *         elif dtype == COMPLEX128_T:             # <<<<<<<<<<<<<<
@@ -55037,7 +55037,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_26BandLLSparseMatrix(CYTHON_
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":1051
+    /* "cysparse/sparse/ll_mat.pyx":1067
  * 
  * 
  *     if itype == INT32_T:             # <<<<<<<<<<<<<<
@@ -55047,37 +55047,37 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_26BandLLSparseMatrix(CYTHON_
     goto __pyx_L5;
   }
 
-  /* "cysparse/sparse/ll_mat.pyx":1091
+  /* "cysparse/sparse/ll_mat.pyx":1107
  * 
  * 
  *     elif itype == INT64_T:             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_INT64_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1091; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_INT64_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1107; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = PyObject_RichCompare(__pyx_v_itype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1091; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyObject_RichCompare(__pyx_v_itype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1107; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1091; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1107; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_3) {
 
-    /* "cysparse/sparse/ll_mat.pyx":1094
+    /* "cysparse/sparse/ll_mat.pyx":1110
  * 
  * 
  *         if dtype == INT32_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakeBandLLSparseMatrix_INT64_t_INT32_t(ll_mat, diag_coeff, numpy_arrays)
  */
-    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_INT32_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1094; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_INT32_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1110; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1094; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1110; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1094; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1110; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     if (__pyx_t_3) {
 
-      /* "cysparse/sparse/ll_mat.pyx":1096
+      /* "cysparse/sparse/ll_mat.pyx":1112
  *         if dtype == INT32_T:
  * 
  *             return MakeBandLLSparseMatrix_INT64_t_INT32_t(ll_mat, diag_coeff, numpy_arrays)             # <<<<<<<<<<<<<<
@@ -55085,15 +55085,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_26BandLLSparseMatrix(CYTHON_
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT64_t_INT32_t_LLSparseMatrix_INT64_t_INT32_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1096; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      if (!(likely(PyList_CheckExact(__pyx_v_numpy_arrays))||((__pyx_v_numpy_arrays) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_numpy_arrays)->tp_name), 0))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1096; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeBandLLSparseMatrix_INT64_t_INT32_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT64_t_INT32_t_LLSparseMatrix_INT64_t_INT32_t *)__pyx_v_ll_mat), __pyx_v_diag_coeff, ((PyObject*)__pyx_v_numpy_arrays))); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1096; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT64_t_INT32_t_LLSparseMatrix_INT64_t_INT32_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1112; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(PyList_CheckExact(__pyx_v_numpy_arrays))||((__pyx_v_numpy_arrays) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_numpy_arrays)->tp_name), 0))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1112; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeBandLLSparseMatrix_INT64_t_INT32_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT64_t_INT32_t_LLSparseMatrix_INT64_t_INT32_t *)__pyx_v_ll_mat), __pyx_v_diag_coeff, ((PyObject*)__pyx_v_numpy_arrays))); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1112; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
       __pyx_r = __pyx_t_2;
       __pyx_t_2 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":1094
+      /* "cysparse/sparse/ll_mat.pyx":1110
  * 
  * 
  *         if dtype == INT32_T:             # <<<<<<<<<<<<<<
@@ -55102,22 +55102,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_26BandLLSparseMatrix(CYTHON_
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":1099
+    /* "cysparse/sparse/ll_mat.pyx":1115
  * 
  * 
  *         elif dtype == INT64_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakeBandLLSparseMatrix_INT64_t_INT64_t(ll_mat, diag_coeff, numpy_arrays)
  */
-    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_INT64_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1099; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_INT64_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1115; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1099; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1115; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1099; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1115; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_3) {
 
-      /* "cysparse/sparse/ll_mat.pyx":1101
+      /* "cysparse/sparse/ll_mat.pyx":1117
  *         elif dtype == INT64_T:
  * 
  *             return MakeBandLLSparseMatrix_INT64_t_INT64_t(ll_mat, diag_coeff, numpy_arrays)             # <<<<<<<<<<<<<<
@@ -55125,15 +55125,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_26BandLLSparseMatrix(CYTHON_
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT64_t_INT64_t_LLSparseMatrix_INT64_t_INT64_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1101; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      if (!(likely(PyList_CheckExact(__pyx_v_numpy_arrays))||((__pyx_v_numpy_arrays) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_numpy_arrays)->tp_name), 0))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1101; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeBandLLSparseMatrix_INT64_t_INT64_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT64_t_INT64_t_LLSparseMatrix_INT64_t_INT64_t *)__pyx_v_ll_mat), __pyx_v_diag_coeff, ((PyObject*)__pyx_v_numpy_arrays))); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1101; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT64_t_INT64_t_LLSparseMatrix_INT64_t_INT64_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1117; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(PyList_CheckExact(__pyx_v_numpy_arrays))||((__pyx_v_numpy_arrays) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_numpy_arrays)->tp_name), 0))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1117; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeBandLLSparseMatrix_INT64_t_INT64_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT64_t_INT64_t_LLSparseMatrix_INT64_t_INT64_t *)__pyx_v_ll_mat), __pyx_v_diag_coeff, ((PyObject*)__pyx_v_numpy_arrays))); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1117; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_r = __pyx_t_1;
       __pyx_t_1 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":1099
+      /* "cysparse/sparse/ll_mat.pyx":1115
  * 
  * 
  *         elif dtype == INT64_T:             # <<<<<<<<<<<<<<
@@ -55142,22 +55142,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_26BandLLSparseMatrix(CYTHON_
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":1104
+    /* "cysparse/sparse/ll_mat.pyx":1120
  * 
  * 
  *         elif dtype == FLOAT32_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakeBandLLSparseMatrix_INT64_t_FLOAT32_t(ll_mat, diag_coeff, numpy_arrays)
  */
-    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT32_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1104; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT32_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1120; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1104; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1120; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1104; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1120; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     if (__pyx_t_3) {
 
-      /* "cysparse/sparse/ll_mat.pyx":1106
+      /* "cysparse/sparse/ll_mat.pyx":1122
  *         elif dtype == FLOAT32_T:
  * 
  *             return MakeBandLLSparseMatrix_INT64_t_FLOAT32_t(ll_mat, diag_coeff, numpy_arrays)             # <<<<<<<<<<<<<<
@@ -55165,15 +55165,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_26BandLLSparseMatrix(CYTHON_
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT64_t_FLOAT32_t_LLSparseMatrix_INT64_t_FLOAT32_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1106; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      if (!(likely(PyList_CheckExact(__pyx_v_numpy_arrays))||((__pyx_v_numpy_arrays) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_numpy_arrays)->tp_name), 0))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1106; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeBandLLSparseMatrix_INT64_t_FLOAT32_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT64_t_FLOAT32_t_LLSparseMatrix_INT64_t_FLOAT32_t *)__pyx_v_ll_mat), __pyx_v_diag_coeff, ((PyObject*)__pyx_v_numpy_arrays))); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1106; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT64_t_FLOAT32_t_LLSparseMatrix_INT64_t_FLOAT32_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1122; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(PyList_CheckExact(__pyx_v_numpy_arrays))||((__pyx_v_numpy_arrays) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_numpy_arrays)->tp_name), 0))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1122; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeBandLLSparseMatrix_INT64_t_FLOAT32_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT64_t_FLOAT32_t_LLSparseMatrix_INT64_t_FLOAT32_t *)__pyx_v_ll_mat), __pyx_v_diag_coeff, ((PyObject*)__pyx_v_numpy_arrays))); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1122; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
       __pyx_r = __pyx_t_2;
       __pyx_t_2 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":1104
+      /* "cysparse/sparse/ll_mat.pyx":1120
  * 
  * 
  *         elif dtype == FLOAT32_T:             # <<<<<<<<<<<<<<
@@ -55182,22 +55182,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_26BandLLSparseMatrix(CYTHON_
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":1109
+    /* "cysparse/sparse/ll_mat.pyx":1125
  * 
  * 
  *         elif dtype == FLOAT64_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakeBandLLSparseMatrix_INT64_t_FLOAT64_t(ll_mat, diag_coeff, numpy_arrays)
  */
-    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT64_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1109; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT64_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1125; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1109; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1125; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1109; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1125; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_3) {
 
-      /* "cysparse/sparse/ll_mat.pyx":1111
+      /* "cysparse/sparse/ll_mat.pyx":1127
  *         elif dtype == FLOAT64_T:
  * 
  *             return MakeBandLLSparseMatrix_INT64_t_FLOAT64_t(ll_mat, diag_coeff, numpy_arrays)             # <<<<<<<<<<<<<<
@@ -55205,15 +55205,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_26BandLLSparseMatrix(CYTHON_
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT64_t_FLOAT64_t_LLSparseMatrix_INT64_t_FLOAT64_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1111; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      if (!(likely(PyList_CheckExact(__pyx_v_numpy_arrays))||((__pyx_v_numpy_arrays) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_numpy_arrays)->tp_name), 0))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1111; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeBandLLSparseMatrix_INT64_t_FLOAT64_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT64_t_FLOAT64_t_LLSparseMatrix_INT64_t_FLOAT64_t *)__pyx_v_ll_mat), __pyx_v_diag_coeff, ((PyObject*)__pyx_v_numpy_arrays))); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1111; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT64_t_FLOAT64_t_LLSparseMatrix_INT64_t_FLOAT64_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1127; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(PyList_CheckExact(__pyx_v_numpy_arrays))||((__pyx_v_numpy_arrays) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_numpy_arrays)->tp_name), 0))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1127; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeBandLLSparseMatrix_INT64_t_FLOAT64_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT64_t_FLOAT64_t_LLSparseMatrix_INT64_t_FLOAT64_t *)__pyx_v_ll_mat), __pyx_v_diag_coeff, ((PyObject*)__pyx_v_numpy_arrays))); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1127; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_r = __pyx_t_1;
       __pyx_t_1 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":1109
+      /* "cysparse/sparse/ll_mat.pyx":1125
  * 
  * 
  *         elif dtype == FLOAT64_T:             # <<<<<<<<<<<<<<
@@ -55222,22 +55222,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_26BandLLSparseMatrix(CYTHON_
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":1114
+    /* "cysparse/sparse/ll_mat.pyx":1130
  * 
  * 
  *         elif dtype == FLOAT128_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakeBandLLSparseMatrix_INT64_t_FLOAT128_t(ll_mat, diag_coeff, numpy_arrays)
  */
-    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT128_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1114; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT128_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1130; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1114; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1130; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1114; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1130; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     if (__pyx_t_3) {
 
-      /* "cysparse/sparse/ll_mat.pyx":1116
+      /* "cysparse/sparse/ll_mat.pyx":1132
  *         elif dtype == FLOAT128_T:
  * 
  *             return MakeBandLLSparseMatrix_INT64_t_FLOAT128_t(ll_mat, diag_coeff, numpy_arrays)             # <<<<<<<<<<<<<<
@@ -55245,15 +55245,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_26BandLLSparseMatrix(CYTHON_
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_25ll_mat_INT64_t_FLOAT128_t_LLSparseMatrix_INT64_t_FLOAT128_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1116; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      if (!(likely(PyList_CheckExact(__pyx_v_numpy_arrays))||((__pyx_v_numpy_arrays) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_numpy_arrays)->tp_name), 0))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1116; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeBandLLSparseMatrix_INT64_t_FLOAT128_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_25ll_mat_INT64_t_FLOAT128_t_LLSparseMatrix_INT64_t_FLOAT128_t *)__pyx_v_ll_mat), __pyx_v_diag_coeff, ((PyObject*)__pyx_v_numpy_arrays))); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1116; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_25ll_mat_INT64_t_FLOAT128_t_LLSparseMatrix_INT64_t_FLOAT128_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1132; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(PyList_CheckExact(__pyx_v_numpy_arrays))||((__pyx_v_numpy_arrays) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_numpy_arrays)->tp_name), 0))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1132; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeBandLLSparseMatrix_INT64_t_FLOAT128_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_25ll_mat_INT64_t_FLOAT128_t_LLSparseMatrix_INT64_t_FLOAT128_t *)__pyx_v_ll_mat), __pyx_v_diag_coeff, ((PyObject*)__pyx_v_numpy_arrays))); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1132; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
       __pyx_r = __pyx_t_2;
       __pyx_t_2 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":1114
+      /* "cysparse/sparse/ll_mat.pyx":1130
  * 
  * 
  *         elif dtype == FLOAT128_T:             # <<<<<<<<<<<<<<
@@ -55262,22 +55262,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_26BandLLSparseMatrix(CYTHON_
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":1119
+    /* "cysparse/sparse/ll_mat.pyx":1135
  * 
  * 
  *         elif dtype == COMPLEX64_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakeBandLLSparseMatrix_INT64_t_COMPLEX64_t(ll_mat, diag_coeff, numpy_arrays)
  */
-    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_COMPLEX64_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1119; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_COMPLEX64_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1135; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1119; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1135; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1119; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1135; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_3) {
 
-      /* "cysparse/sparse/ll_mat.pyx":1121
+      /* "cysparse/sparse/ll_mat.pyx":1137
  *         elif dtype == COMPLEX64_T:
  * 
  *             return MakeBandLLSparseMatrix_INT64_t_COMPLEX64_t(ll_mat, diag_coeff, numpy_arrays)             # <<<<<<<<<<<<<<
@@ -55285,15 +55285,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_26BandLLSparseMatrix(CYTHON_
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT64_t_COMPLEX64_t_LLSparseMatrix_INT64_t_COMPLEX64_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1121; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      if (!(likely(PyList_CheckExact(__pyx_v_numpy_arrays))||((__pyx_v_numpy_arrays) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_numpy_arrays)->tp_name), 0))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1121; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeBandLLSparseMatrix_INT64_t_COMPLEX64_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT64_t_COMPLEX64_t_LLSparseMatrix_INT64_t_COMPLEX64_t *)__pyx_v_ll_mat), __pyx_v_diag_coeff, ((PyObject*)__pyx_v_numpy_arrays))); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1121; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT64_t_COMPLEX64_t_LLSparseMatrix_INT64_t_COMPLEX64_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1137; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(PyList_CheckExact(__pyx_v_numpy_arrays))||((__pyx_v_numpy_arrays) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_numpy_arrays)->tp_name), 0))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1137; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeBandLLSparseMatrix_INT64_t_COMPLEX64_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT64_t_COMPLEX64_t_LLSparseMatrix_INT64_t_COMPLEX64_t *)__pyx_v_ll_mat), __pyx_v_diag_coeff, ((PyObject*)__pyx_v_numpy_arrays))); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1137; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_r = __pyx_t_1;
       __pyx_t_1 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":1119
+      /* "cysparse/sparse/ll_mat.pyx":1135
  * 
  * 
  *         elif dtype == COMPLEX64_T:             # <<<<<<<<<<<<<<
@@ -55302,22 +55302,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_26BandLLSparseMatrix(CYTHON_
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":1124
+    /* "cysparse/sparse/ll_mat.pyx":1140
  * 
  * 
  *         elif dtype == COMPLEX128_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakeBandLLSparseMatrix_INT64_t_COMPLEX128_t(ll_mat, diag_coeff, numpy_arrays)
  */
-    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_COMPLEX128_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1124; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_COMPLEX128_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1140; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1124; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1140; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1124; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1140; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     if (__pyx_t_3) {
 
-      /* "cysparse/sparse/ll_mat.pyx":1126
+      /* "cysparse/sparse/ll_mat.pyx":1142
  *         elif dtype == COMPLEX128_T:
  * 
  *             return MakeBandLLSparseMatrix_INT64_t_COMPLEX128_t(ll_mat, diag_coeff, numpy_arrays)             # <<<<<<<<<<<<<<
@@ -55325,15 +55325,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_26BandLLSparseMatrix(CYTHON_
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT64_t_COMPLEX128_t_LLSparseMatrix_INT64_t_COMPLEX128_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1126; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      if (!(likely(PyList_CheckExact(__pyx_v_numpy_arrays))||((__pyx_v_numpy_arrays) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_numpy_arrays)->tp_name), 0))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1126; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeBandLLSparseMatrix_INT64_t_COMPLEX128_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT64_t_COMPLEX128_t_LLSparseMatrix_INT64_t_COMPLEX128_t *)__pyx_v_ll_mat), __pyx_v_diag_coeff, ((PyObject*)__pyx_v_numpy_arrays))); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1126; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT64_t_COMPLEX128_t_LLSparseMatrix_INT64_t_COMPLEX128_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1142; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(PyList_CheckExact(__pyx_v_numpy_arrays))||((__pyx_v_numpy_arrays) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_numpy_arrays)->tp_name), 0))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1142; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeBandLLSparseMatrix_INT64_t_COMPLEX128_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT64_t_COMPLEX128_t_LLSparseMatrix_INT64_t_COMPLEX128_t *)__pyx_v_ll_mat), __pyx_v_diag_coeff, ((PyObject*)__pyx_v_numpy_arrays))); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1142; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
       __pyx_r = __pyx_t_2;
       __pyx_t_2 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":1124
+      /* "cysparse/sparse/ll_mat.pyx":1140
  * 
  * 
  *         elif dtype == COMPLEX128_T:             # <<<<<<<<<<<<<<
@@ -55342,7 +55342,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_26BandLLSparseMatrix(CYTHON_
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":1091
+    /* "cysparse/sparse/ll_mat.pyx":1107
  * 
  * 
  *     elif itype == INT64_T:             # <<<<<<<<<<<<<<
@@ -55352,7 +55352,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_26BandLLSparseMatrix(CYTHON_
     goto __pyx_L5;
   }
 
-  /* "cysparse/sparse/ll_mat.pyx":1131
+  /* "cysparse/sparse/ll_mat.pyx":1147
  * 
  *     else:
  *         raise TypeError('itype not recognized')             # <<<<<<<<<<<<<<
@@ -55360,15 +55360,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_26BandLLSparseMatrix(CYTHON_
  * def LinearFillLLSparseMatrix(**kwargs):
  */
   /*else*/ {
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__146, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1131; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__146, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1147; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1131; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1147; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __pyx_L5:;
 
-  /* "cysparse/sparse/ll_mat.pyx":1027
+  /* "cysparse/sparse/ll_mat.pyx":1043
  * 
  * 
  * def BandLLSparseMatrix(**kwargs):             # <<<<<<<<<<<<<<
@@ -55395,7 +55395,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_26BandLLSparseMatrix(CYTHON_
   return __pyx_r;
 }
 
-/* "cysparse/sparse/ll_mat.pyx":1133
+/* "cysparse/sparse/ll_mat.pyx":1149
  *         raise TypeError('itype not recognized')
  * 
  * def LinearFillLLSparseMatrix(**kwargs):             # <<<<<<<<<<<<<<
@@ -55477,64 +55477,64 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("LinearFillLLSparseMatrix", 0);
 
-  /* "cysparse/sparse/ll_mat.pyx":1140
+  /* "cysparse/sparse/ll_mat.pyx":1156
  *         Input arguments are **not** tested.
  *     """
  *     first_element = kwargs.pop('first_element', None)             # <<<<<<<<<<<<<<
  *     step = kwargs.pop('step', None)
  *     row_wise = kwargs.pop('row_wise', True)
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_kwargs, __pyx_n_s_pop); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1140; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_kwargs, __pyx_n_s_pop); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1156; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__147, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1140; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__147, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1156; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_first_element = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "cysparse/sparse/ll_mat.pyx":1141
+  /* "cysparse/sparse/ll_mat.pyx":1157
  *     """
  *     first_element = kwargs.pop('first_element', None)
  *     step = kwargs.pop('step', None)             # <<<<<<<<<<<<<<
  *     row_wise = kwargs.pop('row_wise', True)
  * 
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_kwargs, __pyx_n_s_pop); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1141; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_kwargs, __pyx_n_s_pop); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1157; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__148, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1141; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__148, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1157; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_step = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "cysparse/sparse/ll_mat.pyx":1142
+  /* "cysparse/sparse/ll_mat.pyx":1158
  *     first_element = kwargs.pop('first_element', None)
  *     step = kwargs.pop('step', None)
  *     row_wise = kwargs.pop('row_wise', True)             # <<<<<<<<<<<<<<
  * 
  *     # this is only really needed to compute 'size_hint'
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_kwargs, __pyx_n_s_pop); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1142; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_kwargs, __pyx_n_s_pop); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1158; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__149, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1142; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__149, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1158; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_row_wise = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "cysparse/sparse/ll_mat.pyx":1145
+  /* "cysparse/sparse/ll_mat.pyx":1161
  * 
  *     # this is only really needed to compute 'size_hint'
  *     size = kwargs.get('size', None)             # <<<<<<<<<<<<<<
  *     if size is None:
  *         nrow = kwargs.get('nrow', None)
  */
-  __pyx_t_2 = __Pyx_PyDict_GetItemDefault(__pyx_v_kwargs, __pyx_n_s_size, Py_None); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1145; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyDict_GetItemDefault(__pyx_v_kwargs, __pyx_n_s_size, Py_None); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1161; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_v_size = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "cysparse/sparse/ll_mat.pyx":1146
+  /* "cysparse/sparse/ll_mat.pyx":1162
  *     # this is only really needed to compute 'size_hint'
  *     size = kwargs.get('size', None)
  *     if size is None:             # <<<<<<<<<<<<<<
@@ -55545,19 +55545,19 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
   __pyx_t_4 = (__pyx_t_3 != 0);
   if (__pyx_t_4) {
 
-    /* "cysparse/sparse/ll_mat.pyx":1147
+    /* "cysparse/sparse/ll_mat.pyx":1163
  *     size = kwargs.get('size', None)
  *     if size is None:
  *         nrow = kwargs.get('nrow', None)             # <<<<<<<<<<<<<<
  *         if nrow is None:
  *             raise TypeError('We need a size to construct the matrix')
  */
-    __pyx_t_2 = __Pyx_PyDict_GetItemDefault(__pyx_v_kwargs, __pyx_n_s_nrow, Py_None); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1147; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyDict_GetItemDefault(__pyx_v_kwargs, __pyx_n_s_nrow, Py_None); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1163; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_v_nrow = __pyx_t_2;
     __pyx_t_2 = 0;
 
-    /* "cysparse/sparse/ll_mat.pyx":1148
+    /* "cysparse/sparse/ll_mat.pyx":1164
  *     if size is None:
  *         nrow = kwargs.get('nrow', None)
  *         if nrow is None:             # <<<<<<<<<<<<<<
@@ -55568,20 +55568,20 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
     __pyx_t_3 = (__pyx_t_4 != 0);
     if (__pyx_t_3) {
 
-      /* "cysparse/sparse/ll_mat.pyx":1149
+      /* "cysparse/sparse/ll_mat.pyx":1165
  *         nrow = kwargs.get('nrow', None)
  *         if nrow is None:
  *             raise TypeError('We need a size to construct the matrix')             # <<<<<<<<<<<<<<
  *         ncol = kwargs.get('ncol', None)
  *         if ncol is None:
  */
-      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__150, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1149; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__150, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1165; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_Raise(__pyx_t_2, 0, 0, 0);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-      {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1149; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1165; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-      /* "cysparse/sparse/ll_mat.pyx":1148
+      /* "cysparse/sparse/ll_mat.pyx":1164
  *     if size is None:
  *         nrow = kwargs.get('nrow', None)
  *         if nrow is None:             # <<<<<<<<<<<<<<
@@ -55590,19 +55590,19 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":1150
+    /* "cysparse/sparse/ll_mat.pyx":1166
  *         if nrow is None:
  *             raise TypeError('We need a size to construct the matrix')
  *         ncol = kwargs.get('ncol', None)             # <<<<<<<<<<<<<<
  *         if ncol is None:
  *             raise TypeError('We need a size to construct the matrix')
  */
-    __pyx_t_2 = __Pyx_PyDict_GetItemDefault(__pyx_v_kwargs, __pyx_n_s_ncol, Py_None); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1150; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyDict_GetItemDefault(__pyx_v_kwargs, __pyx_n_s_ncol, Py_None); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1166; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_v_ncol = __pyx_t_2;
     __pyx_t_2 = 0;
 
-    /* "cysparse/sparse/ll_mat.pyx":1151
+    /* "cysparse/sparse/ll_mat.pyx":1167
  *             raise TypeError('We need a size to construct the matrix')
  *         ncol = kwargs.get('ncol', None)
  *         if ncol is None:             # <<<<<<<<<<<<<<
@@ -55613,20 +55613,20 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
     __pyx_t_4 = (__pyx_t_3 != 0);
     if (__pyx_t_4) {
 
-      /* "cysparse/sparse/ll_mat.pyx":1152
+      /* "cysparse/sparse/ll_mat.pyx":1168
  *         ncol = kwargs.get('ncol', None)
  *         if ncol is None:
  *             raise TypeError('We need a size to construct the matrix')             # <<<<<<<<<<<<<<
  *     else:
  *         nrow = ncol = size
  */
-      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__151, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1152; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__151, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1168; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_Raise(__pyx_t_2, 0, 0, 0);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-      {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1152; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1168; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-      /* "cysparse/sparse/ll_mat.pyx":1151
+      /* "cysparse/sparse/ll_mat.pyx":1167
  *             raise TypeError('We need a size to construct the matrix')
  *         ncol = kwargs.get('ncol', None)
  *         if ncol is None:             # <<<<<<<<<<<<<<
@@ -55635,7 +55635,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":1146
+    /* "cysparse/sparse/ll_mat.pyx":1162
  *     # this is only really needed to compute 'size_hint'
  *     size = kwargs.get('size', None)
  *     if size is None:             # <<<<<<<<<<<<<<
@@ -55645,7 +55645,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
     goto __pyx_L3;
   }
 
-  /* "cysparse/sparse/ll_mat.pyx":1154
+  /* "cysparse/sparse/ll_mat.pyx":1170
  *             raise TypeError('We need a size to construct the matrix')
  *     else:
  *         nrow = ncol = size             # <<<<<<<<<<<<<<
@@ -55660,58 +55660,58 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
   }
   __pyx_L3:;
 
-  /* "cysparse/sparse/ll_mat.pyx":1156
+  /* "cysparse/sparse/ll_mat.pyx":1172
  *         nrow = ncol = size
  * 
  *     kwargs['size_hint'] = nrow * ncol             # <<<<<<<<<<<<<<
  * 
  *     ll_mat = LLSparseMatrix(**kwargs)
  */
-  __pyx_t_2 = PyNumber_Multiply(__pyx_v_nrow, __pyx_v_ncol); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1156; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyNumber_Multiply(__pyx_v_nrow, __pyx_v_ncol); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1172; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  if (unlikely(PyDict_SetItem(__pyx_v_kwargs, __pyx_n_s_size_hint, __pyx_t_2) < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1156; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(PyDict_SetItem(__pyx_v_kwargs, __pyx_n_s_size_hint, __pyx_t_2) < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1172; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "cysparse/sparse/ll_mat.pyx":1158
+  /* "cysparse/sparse/ll_mat.pyx":1174
  *     kwargs['size_hint'] = nrow * ncol
  * 
  *     ll_mat = LLSparseMatrix(**kwargs)             # <<<<<<<<<<<<<<
  * 
  *     itype = ll_mat.itype
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_LLSparseMatrix); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1158; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_LLSparseMatrix); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1174; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_v_kwargs); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1158; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_v_kwargs); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1174; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_ll_mat = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "cysparse/sparse/ll_mat.pyx":1160
+  /* "cysparse/sparse/ll_mat.pyx":1176
  *     ll_mat = LLSparseMatrix(**kwargs)
  * 
  *     itype = ll_mat.itype             # <<<<<<<<<<<<<<
  *     dtype = ll_mat.dtype
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_ll_mat, __pyx_n_s_itype); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1160; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_ll_mat, __pyx_n_s_itype); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1176; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_itype = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "cysparse/sparse/ll_mat.pyx":1161
+  /* "cysparse/sparse/ll_mat.pyx":1177
  * 
  *     itype = ll_mat.itype
  *     dtype = ll_mat.dtype             # <<<<<<<<<<<<<<
  * 
  *     # create 1.0 first element and step if needed
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_ll_mat, __pyx_n_s_dtype); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1161; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_ll_mat, __pyx_n_s_dtype); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1177; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_dtype = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "cysparse/sparse/ll_mat.pyx":1164
+  /* "cysparse/sparse/ll_mat.pyx":1180
  * 
  *     # create 1.0 first element and step if needed
  *     if first_element is None or step is None:             # <<<<<<<<<<<<<<
@@ -55731,14 +55731,14 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
   __pyx_L7_bool_binop_done:;
   if (__pyx_t_4) {
 
-    /* "cysparse/sparse/ll_mat.pyx":1165
+    /* "cysparse/sparse/ll_mat.pyx":1181
  *     # create 1.0 first element and step if needed
  *     if first_element is None or step is None:
  *         if is_integer_type(dtype):             # <<<<<<<<<<<<<<
  *             if first_element is None:
  *                 first_element = 1
  */
-    __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_is_integer_type); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1165; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_is_integer_type); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1181; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_6 = NULL;
     if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_2))) {
@@ -55751,25 +55751,25 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
       }
     }
     if (!__pyx_t_6) {
-      __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_dtype); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1165; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_dtype); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1181; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
     } else {
-      __pyx_t_7 = PyTuple_New(1+1); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1165; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_7 = PyTuple_New(1+1); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1181; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_6); __pyx_t_6 = NULL;
       __Pyx_INCREF(__pyx_v_dtype);
       __Pyx_GIVEREF(__pyx_v_dtype);
       PyTuple_SET_ITEM(__pyx_t_7, 0+1, __pyx_v_dtype);
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_7, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1165; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_7, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1181; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     }
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1165; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1181; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_4) {
 
-      /* "cysparse/sparse/ll_mat.pyx":1166
+      /* "cysparse/sparse/ll_mat.pyx":1182
  *     if first_element is None or step is None:
  *         if is_integer_type(dtype):
  *             if first_element is None:             # <<<<<<<<<<<<<<
@@ -55780,7 +55780,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
       __pyx_t_3 = (__pyx_t_4 != 0);
       if (__pyx_t_3) {
 
-        /* "cysparse/sparse/ll_mat.pyx":1167
+        /* "cysparse/sparse/ll_mat.pyx":1183
  *         if is_integer_type(dtype):
  *             if first_element is None:
  *                 first_element = 1             # <<<<<<<<<<<<<<
@@ -55790,7 +55790,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
         __Pyx_INCREF(__pyx_int_1);
         __Pyx_DECREF_SET(__pyx_v_first_element, __pyx_int_1);
 
-        /* "cysparse/sparse/ll_mat.pyx":1166
+        /* "cysparse/sparse/ll_mat.pyx":1182
  *     if first_element is None or step is None:
  *         if is_integer_type(dtype):
  *             if first_element is None:             # <<<<<<<<<<<<<<
@@ -55799,7 +55799,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
  */
       }
 
-      /* "cysparse/sparse/ll_mat.pyx":1168
+      /* "cysparse/sparse/ll_mat.pyx":1184
  *             if first_element is None:
  *                 first_element = 1
  *             if step is None:             # <<<<<<<<<<<<<<
@@ -55810,7 +55810,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
       __pyx_t_4 = (__pyx_t_3 != 0);
       if (__pyx_t_4) {
 
-        /* "cysparse/sparse/ll_mat.pyx":1169
+        /* "cysparse/sparse/ll_mat.pyx":1185
  *                 first_element = 1
  *             if step is None:
  *                 step = 1             # <<<<<<<<<<<<<<
@@ -55820,7 +55820,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
         __Pyx_INCREF(__pyx_int_1);
         __Pyx_DECREF_SET(__pyx_v_step, __pyx_int_1);
 
-        /* "cysparse/sparse/ll_mat.pyx":1168
+        /* "cysparse/sparse/ll_mat.pyx":1184
  *             if first_element is None:
  *                 first_element = 1
  *             if step is None:             # <<<<<<<<<<<<<<
@@ -55829,7 +55829,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
  */
       }
 
-      /* "cysparse/sparse/ll_mat.pyx":1165
+      /* "cysparse/sparse/ll_mat.pyx":1181
  *     # create 1.0 first element and step if needed
  *     if first_element is None or step is None:
  *         if is_integer_type(dtype):             # <<<<<<<<<<<<<<
@@ -55839,14 +55839,14 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
       goto __pyx_L9;
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":1170
+    /* "cysparse/sparse/ll_mat.pyx":1186
  *             if step is None:
  *                 step = 1
  *         elif is_real_type(dtype):             # <<<<<<<<<<<<<<
  *             if first_element is None:
  *                 first_element = 1.0
  */
-    __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_is_real_type); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1170; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_is_real_type); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1186; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_7 = NULL;
     if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_2))) {
@@ -55859,25 +55859,25 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
       }
     }
     if (!__pyx_t_7) {
-      __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_dtype); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1170; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_dtype); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1186; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
     } else {
-      __pyx_t_6 = PyTuple_New(1+1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1170; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_6 = PyTuple_New(1+1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1186; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_GIVEREF(__pyx_t_7); PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_7); __pyx_t_7 = NULL;
       __Pyx_INCREF(__pyx_v_dtype);
       __Pyx_GIVEREF(__pyx_v_dtype);
       PyTuple_SET_ITEM(__pyx_t_6, 0+1, __pyx_v_dtype);
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_6, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1170; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_6, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1186; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     }
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1170; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1186; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_4) {
 
-      /* "cysparse/sparse/ll_mat.pyx":1171
+      /* "cysparse/sparse/ll_mat.pyx":1187
  *                 step = 1
  *         elif is_real_type(dtype):
  *             if first_element is None:             # <<<<<<<<<<<<<<
@@ -55888,7 +55888,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
       __pyx_t_3 = (__pyx_t_4 != 0);
       if (__pyx_t_3) {
 
-        /* "cysparse/sparse/ll_mat.pyx":1172
+        /* "cysparse/sparse/ll_mat.pyx":1188
  *         elif is_real_type(dtype):
  *             if first_element is None:
  *                 first_element = 1.0             # <<<<<<<<<<<<<<
@@ -55898,7 +55898,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
         __Pyx_INCREF(__pyx_float_1_0);
         __Pyx_DECREF_SET(__pyx_v_first_element, __pyx_float_1_0);
 
-        /* "cysparse/sparse/ll_mat.pyx":1171
+        /* "cysparse/sparse/ll_mat.pyx":1187
  *                 step = 1
  *         elif is_real_type(dtype):
  *             if first_element is None:             # <<<<<<<<<<<<<<
@@ -55907,7 +55907,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
  */
       }
 
-      /* "cysparse/sparse/ll_mat.pyx":1173
+      /* "cysparse/sparse/ll_mat.pyx":1189
  *             if first_element is None:
  *                 first_element = 1.0
  *             if step is None:             # <<<<<<<<<<<<<<
@@ -55918,7 +55918,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
       __pyx_t_4 = (__pyx_t_3 != 0);
       if (__pyx_t_4) {
 
-        /* "cysparse/sparse/ll_mat.pyx":1174
+        /* "cysparse/sparse/ll_mat.pyx":1190
  *                 first_element = 1.0
  *             if step is None:
  *                 step = 1.0             # <<<<<<<<<<<<<<
@@ -55928,7 +55928,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
         __Pyx_INCREF(__pyx_float_1_0);
         __Pyx_DECREF_SET(__pyx_v_step, __pyx_float_1_0);
 
-        /* "cysparse/sparse/ll_mat.pyx":1173
+        /* "cysparse/sparse/ll_mat.pyx":1189
  *             if first_element is None:
  *                 first_element = 1.0
  *             if step is None:             # <<<<<<<<<<<<<<
@@ -55937,7 +55937,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
  */
       }
 
-      /* "cysparse/sparse/ll_mat.pyx":1170
+      /* "cysparse/sparse/ll_mat.pyx":1186
  *             if step is None:
  *                 step = 1
  *         elif is_real_type(dtype):             # <<<<<<<<<<<<<<
@@ -55947,14 +55947,14 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
       goto __pyx_L9;
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":1175
+    /* "cysparse/sparse/ll_mat.pyx":1191
  *             if step is None:
  *                 step = 1.0
  *         elif is_complex_type(dtype):             # <<<<<<<<<<<<<<
  *             if first_element is None:
  *                 first_element = 1.0 + 0.0j
  */
-    __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_is_complex_type); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1175; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_is_complex_type); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1191; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_6 = NULL;
     if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_2))) {
@@ -55967,25 +55967,25 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
       }
     }
     if (!__pyx_t_6) {
-      __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_dtype); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1175; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_dtype); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1191; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
     } else {
-      __pyx_t_7 = PyTuple_New(1+1); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1175; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_7 = PyTuple_New(1+1); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1191; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_6); __pyx_t_6 = NULL;
       __Pyx_INCREF(__pyx_v_dtype);
       __Pyx_GIVEREF(__pyx_v_dtype);
       PyTuple_SET_ITEM(__pyx_t_7, 0+1, __pyx_v_dtype);
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_7, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1175; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_7, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1191; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     }
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1175; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1191; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_4) {
 
-      /* "cysparse/sparse/ll_mat.pyx":1176
+      /* "cysparse/sparse/ll_mat.pyx":1192
  *                 step = 1.0
  *         elif is_complex_type(dtype):
  *             if first_element is None:             # <<<<<<<<<<<<<<
@@ -55996,7 +55996,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
       __pyx_t_3 = (__pyx_t_4 != 0);
       if (__pyx_t_3) {
 
-        /* "cysparse/sparse/ll_mat.pyx":1177
+        /* "cysparse/sparse/ll_mat.pyx":1193
  *         elif is_complex_type(dtype):
  *             if first_element is None:
  *                 first_element = 1.0 + 0.0j             # <<<<<<<<<<<<<<
@@ -56004,12 +56004,12 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
  *                 step = 1.0 + 0.0j
  */
         __pyx_t_8 = __Pyx_c_sum(__pyx_t_double_complex_from_parts(1.0, 0), __pyx_t_double_complex_from_parts(0, 0.0));
-        __pyx_t_1 = __pyx_PyComplex_FromComplex(__pyx_t_8); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1177; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_1 = __pyx_PyComplex_FromComplex(__pyx_t_8); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1193; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF_SET(__pyx_v_first_element, __pyx_t_1);
         __pyx_t_1 = 0;
 
-        /* "cysparse/sparse/ll_mat.pyx":1176
+        /* "cysparse/sparse/ll_mat.pyx":1192
  *                 step = 1.0
  *         elif is_complex_type(dtype):
  *             if first_element is None:             # <<<<<<<<<<<<<<
@@ -56018,7 +56018,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
  */
       }
 
-      /* "cysparse/sparse/ll_mat.pyx":1178
+      /* "cysparse/sparse/ll_mat.pyx":1194
  *             if first_element is None:
  *                 first_element = 1.0 + 0.0j
  *             if step is None:             # <<<<<<<<<<<<<<
@@ -56029,7 +56029,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
       __pyx_t_4 = (__pyx_t_3 != 0);
       if (__pyx_t_4) {
 
-        /* "cysparse/sparse/ll_mat.pyx":1179
+        /* "cysparse/sparse/ll_mat.pyx":1195
  *                 first_element = 1.0 + 0.0j
  *             if step is None:
  *                 step = 1.0 + 0.0j             # <<<<<<<<<<<<<<
@@ -56037,12 +56037,12 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
  *             raise TypeError('dtype not recognized')
  */
         __pyx_t_8 = __Pyx_c_sum(__pyx_t_double_complex_from_parts(1.0, 0), __pyx_t_double_complex_from_parts(0, 0.0));
-        __pyx_t_1 = __pyx_PyComplex_FromComplex(__pyx_t_8); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1179; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_1 = __pyx_PyComplex_FromComplex(__pyx_t_8); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1195; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF_SET(__pyx_v_step, __pyx_t_1);
         __pyx_t_1 = 0;
 
-        /* "cysparse/sparse/ll_mat.pyx":1178
+        /* "cysparse/sparse/ll_mat.pyx":1194
  *             if first_element is None:
  *                 first_element = 1.0 + 0.0j
  *             if step is None:             # <<<<<<<<<<<<<<
@@ -56051,7 +56051,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
  */
       }
 
-      /* "cysparse/sparse/ll_mat.pyx":1175
+      /* "cysparse/sparse/ll_mat.pyx":1191
  *             if step is None:
  *                 step = 1.0
  *         elif is_complex_type(dtype):             # <<<<<<<<<<<<<<
@@ -56061,7 +56061,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
       goto __pyx_L9;
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":1181
+    /* "cysparse/sparse/ll_mat.pyx":1197
  *                 step = 1.0 + 0.0j
  *         else:
  *             raise TypeError('dtype not recognized')             # <<<<<<<<<<<<<<
@@ -56069,15 +56069,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
  *     # launch right "constructor" method
  */
     /*else*/ {
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__152, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1181; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__152, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1197; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_Raise(__pyx_t_1, 0, 0, 0);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1181; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1197; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
     __pyx_L9:;
 
-    /* "cysparse/sparse/ll_mat.pyx":1164
+    /* "cysparse/sparse/ll_mat.pyx":1180
  * 
  *     # create 1.0 first element and step if needed
  *     if first_element is None or step is None:             # <<<<<<<<<<<<<<
@@ -56086,37 +56086,37 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
  */
   }
 
-  /* "cysparse/sparse/ll_mat.pyx":1186
+  /* "cysparse/sparse/ll_mat.pyx":1202
  * 
  * 
  *     if itype == INT32_T:             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_INT32_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1186; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_INT32_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1202; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyObject_RichCompare(__pyx_v_itype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1186; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyObject_RichCompare(__pyx_v_itype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1202; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1186; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1202; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_4) {
 
-    /* "cysparse/sparse/ll_mat.pyx":1189
+    /* "cysparse/sparse/ll_mat.pyx":1205
  * 
  * 
  *         if dtype == INT32_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakeLinearFillLLSparseMatrix_INT32_t_INT32_t(ll_mat, first_element, step, row_wise)
  */
-    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_INT32_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1189; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_INT32_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1205; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1189; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1205; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1189; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1205; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_4) {
 
-      /* "cysparse/sparse/ll_mat.pyx":1191
+      /* "cysparse/sparse/ll_mat.pyx":1207
  *         if dtype == INT32_T:
  * 
  *             return MakeLinearFillLLSparseMatrix_INT32_t_INT32_t(ll_mat, first_element, step, row_wise)             # <<<<<<<<<<<<<<
@@ -56124,18 +56124,18 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT32_t_INT32_t_LLSparseMatrix_INT32_t_INT32_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1191; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_9 = __Pyx_PyInt_As_int(__pyx_v_first_element); if (unlikely((__pyx_t_9 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1191; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_10 = __Pyx_PyInt_As_int(__pyx_v_step); if (unlikely((__pyx_t_10 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1191; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT32_t_INT32_t_LLSparseMatrix_INT32_t_INT32_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1207; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_9 = __Pyx_PyInt_As_int(__pyx_v_first_element); if (unlikely((__pyx_t_9 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1207; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_10 = __Pyx_PyInt_As_int(__pyx_v_step); if (unlikely((__pyx_t_10 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1207; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __pyx_t_11.__pyx_n = 1;
       __pyx_t_11.row_wise = __pyx_v_row_wise;
-      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeLinearFillLLSparseMatrix_INT32_t_INT32_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT32_t_INT32_t_LLSparseMatrix_INT32_t_INT32_t *)__pyx_v_ll_mat), __pyx_t_9, __pyx_t_10, &__pyx_t_11)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1191; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeLinearFillLLSparseMatrix_INT32_t_INT32_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT32_t_INT32_t_LLSparseMatrix_INT32_t_INT32_t *)__pyx_v_ll_mat), __pyx_t_9, __pyx_t_10, &__pyx_t_11)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1207; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_r = __pyx_t_1;
       __pyx_t_1 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":1189
+      /* "cysparse/sparse/ll_mat.pyx":1205
  * 
  * 
  *         if dtype == INT32_T:             # <<<<<<<<<<<<<<
@@ -56144,22 +56144,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":1194
+    /* "cysparse/sparse/ll_mat.pyx":1210
  * 
  * 
  *         elif dtype == INT64_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakeLinearFillLLSparseMatrix_INT32_t_INT64_t(ll_mat, first_element, step, row_wise)
  */
-    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_INT64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1194; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_INT64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1210; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1194; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1210; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1194; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1210; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     if (__pyx_t_4) {
 
-      /* "cysparse/sparse/ll_mat.pyx":1196
+      /* "cysparse/sparse/ll_mat.pyx":1212
  *         elif dtype == INT64_T:
  * 
  *             return MakeLinearFillLLSparseMatrix_INT32_t_INT64_t(ll_mat, first_element, step, row_wise)             # <<<<<<<<<<<<<<
@@ -56167,18 +56167,18 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT32_t_INT64_t_LLSparseMatrix_INT32_t_INT64_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1196; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_12 = __Pyx_PyInt_As_long(__pyx_v_first_element); if (unlikely((__pyx_t_12 == (long)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1196; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_13 = __Pyx_PyInt_As_long(__pyx_v_step); if (unlikely((__pyx_t_13 == (long)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1196; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT32_t_INT64_t_LLSparseMatrix_INT32_t_INT64_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1212; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_12 = __Pyx_PyInt_As_long(__pyx_v_first_element); if (unlikely((__pyx_t_12 == (long)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1212; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_13 = __Pyx_PyInt_As_long(__pyx_v_step); if (unlikely((__pyx_t_13 == (long)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1212; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __pyx_t_14.__pyx_n = 1;
       __pyx_t_14.row_wise = __pyx_v_row_wise;
-      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeLinearFillLLSparseMatrix_INT32_t_INT64_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT32_t_INT64_t_LLSparseMatrix_INT32_t_INT64_t *)__pyx_v_ll_mat), __pyx_t_12, __pyx_t_13, &__pyx_t_14)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1196; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeLinearFillLLSparseMatrix_INT32_t_INT64_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT32_t_INT64_t_LLSparseMatrix_INT32_t_INT64_t *)__pyx_v_ll_mat), __pyx_t_12, __pyx_t_13, &__pyx_t_14)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1212; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
       __pyx_r = __pyx_t_2;
       __pyx_t_2 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":1194
+      /* "cysparse/sparse/ll_mat.pyx":1210
  * 
  * 
  *         elif dtype == INT64_T:             # <<<<<<<<<<<<<<
@@ -56187,22 +56187,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":1199
+    /* "cysparse/sparse/ll_mat.pyx":1215
  * 
  * 
  *         elif dtype == FLOAT32_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakeLinearFillLLSparseMatrix_INT32_t_FLOAT32_t(ll_mat, first_element, step, row_wise)
  */
-    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT32_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1199; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT32_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1215; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1199; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1215; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1199; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1215; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_4) {
 
-      /* "cysparse/sparse/ll_mat.pyx":1201
+      /* "cysparse/sparse/ll_mat.pyx":1217
  *         elif dtype == FLOAT32_T:
  * 
  *             return MakeLinearFillLLSparseMatrix_INT32_t_FLOAT32_t(ll_mat, first_element, step, row_wise)             # <<<<<<<<<<<<<<
@@ -56210,18 +56210,18 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT32_t_LLSparseMatrix_INT32_t_FLOAT32_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1201; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_15 = __pyx_PyFloat_AsFloat(__pyx_v_first_element); if (unlikely((__pyx_t_15 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1201; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_16 = __pyx_PyFloat_AsFloat(__pyx_v_step); if (unlikely((__pyx_t_16 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1201; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT32_t_LLSparseMatrix_INT32_t_FLOAT32_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1217; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_15 = __pyx_PyFloat_AsFloat(__pyx_v_first_element); if (unlikely((__pyx_t_15 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1217; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_16 = __pyx_PyFloat_AsFloat(__pyx_v_step); if (unlikely((__pyx_t_16 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1217; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __pyx_t_17.__pyx_n = 1;
       __pyx_t_17.row_wise = __pyx_v_row_wise;
-      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeLinearFillLLSparseMatrix_INT32_t_FLOAT32_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT32_t_LLSparseMatrix_INT32_t_FLOAT32_t *)__pyx_v_ll_mat), __pyx_t_15, __pyx_t_16, &__pyx_t_17)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1201; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeLinearFillLLSparseMatrix_INT32_t_FLOAT32_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT32_t_LLSparseMatrix_INT32_t_FLOAT32_t *)__pyx_v_ll_mat), __pyx_t_15, __pyx_t_16, &__pyx_t_17)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1217; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_r = __pyx_t_1;
       __pyx_t_1 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":1199
+      /* "cysparse/sparse/ll_mat.pyx":1215
  * 
  * 
  *         elif dtype == FLOAT32_T:             # <<<<<<<<<<<<<<
@@ -56230,22 +56230,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":1204
+    /* "cysparse/sparse/ll_mat.pyx":1220
  * 
  * 
  *         elif dtype == FLOAT64_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakeLinearFillLLSparseMatrix_INT32_t_FLOAT64_t(ll_mat, first_element, step, row_wise)
  */
-    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1204; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1220; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1204; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1220; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1204; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1220; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     if (__pyx_t_4) {
 
-      /* "cysparse/sparse/ll_mat.pyx":1206
+      /* "cysparse/sparse/ll_mat.pyx":1222
  *         elif dtype == FLOAT64_T:
  * 
  *             return MakeLinearFillLLSparseMatrix_INT32_t_FLOAT64_t(ll_mat, first_element, step, row_wise)             # <<<<<<<<<<<<<<
@@ -56253,18 +56253,18 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT64_t_LLSparseMatrix_INT32_t_FLOAT64_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1206; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_18 = __pyx_PyFloat_AsDouble(__pyx_v_first_element); if (unlikely((__pyx_t_18 == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1206; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_19 = __pyx_PyFloat_AsDouble(__pyx_v_step); if (unlikely((__pyx_t_19 == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1206; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT64_t_LLSparseMatrix_INT32_t_FLOAT64_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1222; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_18 = __pyx_PyFloat_AsDouble(__pyx_v_first_element); if (unlikely((__pyx_t_18 == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1222; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_19 = __pyx_PyFloat_AsDouble(__pyx_v_step); if (unlikely((__pyx_t_19 == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1222; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __pyx_t_20.__pyx_n = 1;
       __pyx_t_20.row_wise = __pyx_v_row_wise;
-      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeLinearFillLLSparseMatrix_INT32_t_FLOAT64_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT64_t_LLSparseMatrix_INT32_t_FLOAT64_t *)__pyx_v_ll_mat), __pyx_t_18, __pyx_t_19, &__pyx_t_20)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1206; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeLinearFillLLSparseMatrix_INT32_t_FLOAT64_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT64_t_LLSparseMatrix_INT32_t_FLOAT64_t *)__pyx_v_ll_mat), __pyx_t_18, __pyx_t_19, &__pyx_t_20)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1222; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
       __pyx_r = __pyx_t_2;
       __pyx_t_2 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":1204
+      /* "cysparse/sparse/ll_mat.pyx":1220
  * 
  * 
  *         elif dtype == FLOAT64_T:             # <<<<<<<<<<<<<<
@@ -56273,22 +56273,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":1209
+    /* "cysparse/sparse/ll_mat.pyx":1225
  * 
  * 
  *         elif dtype == FLOAT128_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakeLinearFillLLSparseMatrix_INT32_t_FLOAT128_t(ll_mat, first_element, step, row_wise)
  */
-    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT128_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1209; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT128_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1225; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1209; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1225; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1209; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1225; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_4) {
 
-      /* "cysparse/sparse/ll_mat.pyx":1211
+      /* "cysparse/sparse/ll_mat.pyx":1227
  *         elif dtype == FLOAT128_T:
  * 
  *             return MakeLinearFillLLSparseMatrix_INT32_t_FLOAT128_t(ll_mat, first_element, step, row_wise)             # <<<<<<<<<<<<<<
@@ -56296,18 +56296,18 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_25ll_mat_INT32_t_FLOAT128_t_LLSparseMatrix_INT32_t_FLOAT128_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1211; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_21 = __pyx_PyFloat_AsDouble(__pyx_v_first_element); if (unlikely((__pyx_t_21 == (long double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1211; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_22 = __pyx_PyFloat_AsDouble(__pyx_v_step); if (unlikely((__pyx_t_22 == (long double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1211; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_25ll_mat_INT32_t_FLOAT128_t_LLSparseMatrix_INT32_t_FLOAT128_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1227; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_21 = __pyx_PyFloat_AsDouble(__pyx_v_first_element); if (unlikely((__pyx_t_21 == (long double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1227; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_22 = __pyx_PyFloat_AsDouble(__pyx_v_step); if (unlikely((__pyx_t_22 == (long double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1227; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __pyx_t_23.__pyx_n = 1;
       __pyx_t_23.row_wise = __pyx_v_row_wise;
-      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeLinearFillLLSparseMatrix_INT32_t_FLOAT128_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_25ll_mat_INT32_t_FLOAT128_t_LLSparseMatrix_INT32_t_FLOAT128_t *)__pyx_v_ll_mat), __pyx_t_21, __pyx_t_22, &__pyx_t_23)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1211; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeLinearFillLLSparseMatrix_INT32_t_FLOAT128_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_25ll_mat_INT32_t_FLOAT128_t_LLSparseMatrix_INT32_t_FLOAT128_t *)__pyx_v_ll_mat), __pyx_t_21, __pyx_t_22, &__pyx_t_23)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1227; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_r = __pyx_t_1;
       __pyx_t_1 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":1209
+      /* "cysparse/sparse/ll_mat.pyx":1225
  * 
  * 
  *         elif dtype == FLOAT128_T:             # <<<<<<<<<<<<<<
@@ -56316,22 +56316,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":1214
+    /* "cysparse/sparse/ll_mat.pyx":1230
  * 
  * 
  *         elif dtype == COMPLEX64_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakeLinearFillLLSparseMatrix_INT32_t_COMPLEX64_t(ll_mat, first_element, step, row_wise)
  */
-    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_COMPLEX64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1214; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_COMPLEX64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1230; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1214; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1230; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1214; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1230; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     if (__pyx_t_4) {
 
-      /* "cysparse/sparse/ll_mat.pyx":1216
+      /* "cysparse/sparse/ll_mat.pyx":1232
  *         elif dtype == COMPLEX64_T:
  * 
  *             return MakeLinearFillLLSparseMatrix_INT32_t_COMPLEX64_t(ll_mat, first_element, step, row_wise)             # <<<<<<<<<<<<<<
@@ -56339,18 +56339,18 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT32_t_COMPLEX64_t_LLSparseMatrix_INT32_t_COMPLEX64_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1216; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_24 = __Pyx_PyComplex_As___pyx_t_float_complex(__pyx_v_first_element); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1216; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_25 = __Pyx_PyComplex_As___pyx_t_float_complex(__pyx_v_step); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1216; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT32_t_COMPLEX64_t_LLSparseMatrix_INT32_t_COMPLEX64_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1232; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_24 = __Pyx_PyComplex_As___pyx_t_float_complex(__pyx_v_first_element); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1232; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_25 = __Pyx_PyComplex_As___pyx_t_float_complex(__pyx_v_step); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1232; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __pyx_t_26.__pyx_n = 1;
       __pyx_t_26.row_wise = __pyx_v_row_wise;
-      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeLinearFillLLSparseMatrix_INT32_t_COMPLEX64_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT32_t_COMPLEX64_t_LLSparseMatrix_INT32_t_COMPLEX64_t *)__pyx_v_ll_mat), __pyx_t_24, __pyx_t_25, &__pyx_t_26)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1216; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeLinearFillLLSparseMatrix_INT32_t_COMPLEX64_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT32_t_COMPLEX64_t_LLSparseMatrix_INT32_t_COMPLEX64_t *)__pyx_v_ll_mat), __pyx_t_24, __pyx_t_25, &__pyx_t_26)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1232; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
       __pyx_r = __pyx_t_2;
       __pyx_t_2 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":1214
+      /* "cysparse/sparse/ll_mat.pyx":1230
  * 
  * 
  *         elif dtype == COMPLEX64_T:             # <<<<<<<<<<<<<<
@@ -56359,22 +56359,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":1219
+    /* "cysparse/sparse/ll_mat.pyx":1235
  * 
  * 
  *         elif dtype == COMPLEX128_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakeLinearFillLLSparseMatrix_INT32_t_COMPLEX128_t(ll_mat, first_element, step, row_wise)
  */
-    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_COMPLEX128_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1219; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_COMPLEX128_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1235; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1219; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1235; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1219; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1235; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_4) {
 
-      /* "cysparse/sparse/ll_mat.pyx":1221
+      /* "cysparse/sparse/ll_mat.pyx":1237
  *         elif dtype == COMPLEX128_T:
  * 
  *             return MakeLinearFillLLSparseMatrix_INT32_t_COMPLEX128_t(ll_mat, first_element, step, row_wise)             # <<<<<<<<<<<<<<
@@ -56382,18 +56382,18 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32_t_COMPLEX128_t_LLSparseMatrix_INT32_t_COMPLEX128_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1221; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_8 = __Pyx_PyComplex_As___pyx_t_double_complex(__pyx_v_first_element); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1221; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_27 = __Pyx_PyComplex_As___pyx_t_double_complex(__pyx_v_step); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1221; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32_t_COMPLEX128_t_LLSparseMatrix_INT32_t_COMPLEX128_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1237; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_8 = __Pyx_PyComplex_As___pyx_t_double_complex(__pyx_v_first_element); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1237; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_27 = __Pyx_PyComplex_As___pyx_t_double_complex(__pyx_v_step); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1237; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __pyx_t_28.__pyx_n = 1;
       __pyx_t_28.row_wise = __pyx_v_row_wise;
-      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeLinearFillLLSparseMatrix_INT32_t_COMPLEX128_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32_t_COMPLEX128_t_LLSparseMatrix_INT32_t_COMPLEX128_t *)__pyx_v_ll_mat), __pyx_t_8, __pyx_t_27, &__pyx_t_28)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1221; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeLinearFillLLSparseMatrix_INT32_t_COMPLEX128_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32_t_COMPLEX128_t_LLSparseMatrix_INT32_t_COMPLEX128_t *)__pyx_v_ll_mat), __pyx_t_8, __pyx_t_27, &__pyx_t_28)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1237; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_r = __pyx_t_1;
       __pyx_t_1 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":1219
+      /* "cysparse/sparse/ll_mat.pyx":1235
  * 
  * 
  *         elif dtype == COMPLEX128_T:             # <<<<<<<<<<<<<<
@@ -56402,7 +56402,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":1186
+    /* "cysparse/sparse/ll_mat.pyx":1202
  * 
  * 
  *     if itype == INT32_T:             # <<<<<<<<<<<<<<
@@ -56412,37 +56412,37 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
     goto __pyx_L16;
   }
 
-  /* "cysparse/sparse/ll_mat.pyx":1226
+  /* "cysparse/sparse/ll_mat.pyx":1242
  * 
  * 
  *     elif itype == INT64_T:             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_INT64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1226; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_INT64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1242; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyObject_RichCompare(__pyx_v_itype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1226; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyObject_RichCompare(__pyx_v_itype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1242; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1226; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1242; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_4) {
 
-    /* "cysparse/sparse/ll_mat.pyx":1229
+    /* "cysparse/sparse/ll_mat.pyx":1245
  * 
  * 
  *         if dtype == INT32_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakeLinearFillLLSparseMatrix_INT64_t_INT32_t(ll_mat, first_element, step, row_wise)
  */
-    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_INT32_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1229; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_INT32_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1245; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1229; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1245; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1229; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1245; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_4) {
 
-      /* "cysparse/sparse/ll_mat.pyx":1231
+      /* "cysparse/sparse/ll_mat.pyx":1247
  *         if dtype == INT32_T:
  * 
  *             return MakeLinearFillLLSparseMatrix_INT64_t_INT32_t(ll_mat, first_element, step, row_wise)             # <<<<<<<<<<<<<<
@@ -56450,18 +56450,18 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT64_t_INT32_t_LLSparseMatrix_INT64_t_INT32_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1231; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_10 = __Pyx_PyInt_As_int(__pyx_v_first_element); if (unlikely((__pyx_t_10 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1231; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_9 = __Pyx_PyInt_As_int(__pyx_v_step); if (unlikely((__pyx_t_9 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1231; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT64_t_INT32_t_LLSparseMatrix_INT64_t_INT32_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1247; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_10 = __Pyx_PyInt_As_int(__pyx_v_first_element); if (unlikely((__pyx_t_10 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1247; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_9 = __Pyx_PyInt_As_int(__pyx_v_step); if (unlikely((__pyx_t_9 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1247; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __pyx_t_29.__pyx_n = 1;
       __pyx_t_29.row_wise = __pyx_v_row_wise;
-      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeLinearFillLLSparseMatrix_INT64_t_INT32_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT64_t_INT32_t_LLSparseMatrix_INT64_t_INT32_t *)__pyx_v_ll_mat), __pyx_t_10, __pyx_t_9, &__pyx_t_29)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1231; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeLinearFillLLSparseMatrix_INT64_t_INT32_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT64_t_INT32_t_LLSparseMatrix_INT64_t_INT32_t *)__pyx_v_ll_mat), __pyx_t_10, __pyx_t_9, &__pyx_t_29)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1247; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_r = __pyx_t_1;
       __pyx_t_1 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":1229
+      /* "cysparse/sparse/ll_mat.pyx":1245
  * 
  * 
  *         if dtype == INT32_T:             # <<<<<<<<<<<<<<
@@ -56470,22 +56470,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":1234
+    /* "cysparse/sparse/ll_mat.pyx":1250
  * 
  * 
  *         elif dtype == INT64_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakeLinearFillLLSparseMatrix_INT64_t_INT64_t(ll_mat, first_element, step, row_wise)
  */
-    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_INT64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1234; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_INT64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1250; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1234; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1250; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1234; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1250; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     if (__pyx_t_4) {
 
-      /* "cysparse/sparse/ll_mat.pyx":1236
+      /* "cysparse/sparse/ll_mat.pyx":1252
  *         elif dtype == INT64_T:
  * 
  *             return MakeLinearFillLLSparseMatrix_INT64_t_INT64_t(ll_mat, first_element, step, row_wise)             # <<<<<<<<<<<<<<
@@ -56493,18 +56493,18 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT64_t_INT64_t_LLSparseMatrix_INT64_t_INT64_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1236; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_13 = __Pyx_PyInt_As_long(__pyx_v_first_element); if (unlikely((__pyx_t_13 == (long)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1236; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_12 = __Pyx_PyInt_As_long(__pyx_v_step); if (unlikely((__pyx_t_12 == (long)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1236; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT64_t_INT64_t_LLSparseMatrix_INT64_t_INT64_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1252; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_13 = __Pyx_PyInt_As_long(__pyx_v_first_element); if (unlikely((__pyx_t_13 == (long)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1252; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_12 = __Pyx_PyInt_As_long(__pyx_v_step); if (unlikely((__pyx_t_12 == (long)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1252; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __pyx_t_30.__pyx_n = 1;
       __pyx_t_30.row_wise = __pyx_v_row_wise;
-      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeLinearFillLLSparseMatrix_INT64_t_INT64_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT64_t_INT64_t_LLSparseMatrix_INT64_t_INT64_t *)__pyx_v_ll_mat), __pyx_t_13, __pyx_t_12, &__pyx_t_30)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1236; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeLinearFillLLSparseMatrix_INT64_t_INT64_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT64_t_INT64_t_LLSparseMatrix_INT64_t_INT64_t *)__pyx_v_ll_mat), __pyx_t_13, __pyx_t_12, &__pyx_t_30)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1252; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
       __pyx_r = __pyx_t_2;
       __pyx_t_2 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":1234
+      /* "cysparse/sparse/ll_mat.pyx":1250
  * 
  * 
  *         elif dtype == INT64_T:             # <<<<<<<<<<<<<<
@@ -56513,22 +56513,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":1239
+    /* "cysparse/sparse/ll_mat.pyx":1255
  * 
  * 
  *         elif dtype == FLOAT32_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakeLinearFillLLSparseMatrix_INT64_t_FLOAT32_t(ll_mat, first_element, step, row_wise)
  */
-    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT32_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1239; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT32_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1255; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1239; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1255; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1239; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1255; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_4) {
 
-      /* "cysparse/sparse/ll_mat.pyx":1241
+      /* "cysparse/sparse/ll_mat.pyx":1257
  *         elif dtype == FLOAT32_T:
  * 
  *             return MakeLinearFillLLSparseMatrix_INT64_t_FLOAT32_t(ll_mat, first_element, step, row_wise)             # <<<<<<<<<<<<<<
@@ -56536,18 +56536,18 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT64_t_FLOAT32_t_LLSparseMatrix_INT64_t_FLOAT32_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1241; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_16 = __pyx_PyFloat_AsFloat(__pyx_v_first_element); if (unlikely((__pyx_t_16 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1241; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_15 = __pyx_PyFloat_AsFloat(__pyx_v_step); if (unlikely((__pyx_t_15 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1241; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT64_t_FLOAT32_t_LLSparseMatrix_INT64_t_FLOAT32_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1257; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_16 = __pyx_PyFloat_AsFloat(__pyx_v_first_element); if (unlikely((__pyx_t_16 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1257; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_15 = __pyx_PyFloat_AsFloat(__pyx_v_step); if (unlikely((__pyx_t_15 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1257; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __pyx_t_31.__pyx_n = 1;
       __pyx_t_31.row_wise = __pyx_v_row_wise;
-      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeLinearFillLLSparseMatrix_INT64_t_FLOAT32_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT64_t_FLOAT32_t_LLSparseMatrix_INT64_t_FLOAT32_t *)__pyx_v_ll_mat), __pyx_t_16, __pyx_t_15, &__pyx_t_31)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1241; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeLinearFillLLSparseMatrix_INT64_t_FLOAT32_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT64_t_FLOAT32_t_LLSparseMatrix_INT64_t_FLOAT32_t *)__pyx_v_ll_mat), __pyx_t_16, __pyx_t_15, &__pyx_t_31)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1257; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_r = __pyx_t_1;
       __pyx_t_1 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":1239
+      /* "cysparse/sparse/ll_mat.pyx":1255
  * 
  * 
  *         elif dtype == FLOAT32_T:             # <<<<<<<<<<<<<<
@@ -56556,22 +56556,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":1244
+    /* "cysparse/sparse/ll_mat.pyx":1260
  * 
  * 
  *         elif dtype == FLOAT64_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakeLinearFillLLSparseMatrix_INT64_t_FLOAT64_t(ll_mat, first_element, step, row_wise)
  */
-    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1244; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1260; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1244; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1260; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1244; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1260; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     if (__pyx_t_4) {
 
-      /* "cysparse/sparse/ll_mat.pyx":1246
+      /* "cysparse/sparse/ll_mat.pyx":1262
  *         elif dtype == FLOAT64_T:
  * 
  *             return MakeLinearFillLLSparseMatrix_INT64_t_FLOAT64_t(ll_mat, first_element, step, row_wise)             # <<<<<<<<<<<<<<
@@ -56579,18 +56579,18 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT64_t_FLOAT64_t_LLSparseMatrix_INT64_t_FLOAT64_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1246; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_19 = __pyx_PyFloat_AsDouble(__pyx_v_first_element); if (unlikely((__pyx_t_19 == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1246; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_18 = __pyx_PyFloat_AsDouble(__pyx_v_step); if (unlikely((__pyx_t_18 == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1246; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT64_t_FLOAT64_t_LLSparseMatrix_INT64_t_FLOAT64_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1262; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_19 = __pyx_PyFloat_AsDouble(__pyx_v_first_element); if (unlikely((__pyx_t_19 == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1262; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_18 = __pyx_PyFloat_AsDouble(__pyx_v_step); if (unlikely((__pyx_t_18 == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1262; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __pyx_t_32.__pyx_n = 1;
       __pyx_t_32.row_wise = __pyx_v_row_wise;
-      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeLinearFillLLSparseMatrix_INT64_t_FLOAT64_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT64_t_FLOAT64_t_LLSparseMatrix_INT64_t_FLOAT64_t *)__pyx_v_ll_mat), __pyx_t_19, __pyx_t_18, &__pyx_t_32)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1246; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeLinearFillLLSparseMatrix_INT64_t_FLOAT64_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT64_t_FLOAT64_t_LLSparseMatrix_INT64_t_FLOAT64_t *)__pyx_v_ll_mat), __pyx_t_19, __pyx_t_18, &__pyx_t_32)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1262; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
       __pyx_r = __pyx_t_2;
       __pyx_t_2 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":1244
+      /* "cysparse/sparse/ll_mat.pyx":1260
  * 
  * 
  *         elif dtype == FLOAT64_T:             # <<<<<<<<<<<<<<
@@ -56599,22 +56599,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":1249
+    /* "cysparse/sparse/ll_mat.pyx":1265
  * 
  * 
  *         elif dtype == FLOAT128_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakeLinearFillLLSparseMatrix_INT64_t_FLOAT128_t(ll_mat, first_element, step, row_wise)
  */
-    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT128_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1249; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT128_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1265; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1249; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1265; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1249; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1265; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_4) {
 
-      /* "cysparse/sparse/ll_mat.pyx":1251
+      /* "cysparse/sparse/ll_mat.pyx":1267
  *         elif dtype == FLOAT128_T:
  * 
  *             return MakeLinearFillLLSparseMatrix_INT64_t_FLOAT128_t(ll_mat, first_element, step, row_wise)             # <<<<<<<<<<<<<<
@@ -56622,18 +56622,18 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_25ll_mat_INT64_t_FLOAT128_t_LLSparseMatrix_INT64_t_FLOAT128_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1251; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_22 = __pyx_PyFloat_AsDouble(__pyx_v_first_element); if (unlikely((__pyx_t_22 == (long double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1251; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_21 = __pyx_PyFloat_AsDouble(__pyx_v_step); if (unlikely((__pyx_t_21 == (long double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1251; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_25ll_mat_INT64_t_FLOAT128_t_LLSparseMatrix_INT64_t_FLOAT128_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1267; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_22 = __pyx_PyFloat_AsDouble(__pyx_v_first_element); if (unlikely((__pyx_t_22 == (long double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1267; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_21 = __pyx_PyFloat_AsDouble(__pyx_v_step); if (unlikely((__pyx_t_21 == (long double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1267; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __pyx_t_33.__pyx_n = 1;
       __pyx_t_33.row_wise = __pyx_v_row_wise;
-      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeLinearFillLLSparseMatrix_INT64_t_FLOAT128_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_25ll_mat_INT64_t_FLOAT128_t_LLSparseMatrix_INT64_t_FLOAT128_t *)__pyx_v_ll_mat), __pyx_t_22, __pyx_t_21, &__pyx_t_33)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1251; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeLinearFillLLSparseMatrix_INT64_t_FLOAT128_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_25ll_mat_INT64_t_FLOAT128_t_LLSparseMatrix_INT64_t_FLOAT128_t *)__pyx_v_ll_mat), __pyx_t_22, __pyx_t_21, &__pyx_t_33)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1267; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_r = __pyx_t_1;
       __pyx_t_1 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":1249
+      /* "cysparse/sparse/ll_mat.pyx":1265
  * 
  * 
  *         elif dtype == FLOAT128_T:             # <<<<<<<<<<<<<<
@@ -56642,22 +56642,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":1254
+    /* "cysparse/sparse/ll_mat.pyx":1270
  * 
  * 
  *         elif dtype == COMPLEX64_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakeLinearFillLLSparseMatrix_INT64_t_COMPLEX64_t(ll_mat, first_element, step, row_wise)
  */
-    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_COMPLEX64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1254; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_COMPLEX64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1270; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1254; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1270; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1254; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1270; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     if (__pyx_t_4) {
 
-      /* "cysparse/sparse/ll_mat.pyx":1256
+      /* "cysparse/sparse/ll_mat.pyx":1272
  *         elif dtype == COMPLEX64_T:
  * 
  *             return MakeLinearFillLLSparseMatrix_INT64_t_COMPLEX64_t(ll_mat, first_element, step, row_wise)             # <<<<<<<<<<<<<<
@@ -56665,18 +56665,18 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT64_t_COMPLEX64_t_LLSparseMatrix_INT64_t_COMPLEX64_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1256; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_25 = __Pyx_PyComplex_As___pyx_t_float_complex(__pyx_v_first_element); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1256; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_24 = __Pyx_PyComplex_As___pyx_t_float_complex(__pyx_v_step); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1256; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT64_t_COMPLEX64_t_LLSparseMatrix_INT64_t_COMPLEX64_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1272; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_25 = __Pyx_PyComplex_As___pyx_t_float_complex(__pyx_v_first_element); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1272; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_24 = __Pyx_PyComplex_As___pyx_t_float_complex(__pyx_v_step); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1272; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __pyx_t_34.__pyx_n = 1;
       __pyx_t_34.row_wise = __pyx_v_row_wise;
-      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeLinearFillLLSparseMatrix_INT64_t_COMPLEX64_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT64_t_COMPLEX64_t_LLSparseMatrix_INT64_t_COMPLEX64_t *)__pyx_v_ll_mat), __pyx_t_25, __pyx_t_24, &__pyx_t_34)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1256; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeLinearFillLLSparseMatrix_INT64_t_COMPLEX64_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT64_t_COMPLEX64_t_LLSparseMatrix_INT64_t_COMPLEX64_t *)__pyx_v_ll_mat), __pyx_t_25, __pyx_t_24, &__pyx_t_34)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1272; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
       __pyx_r = __pyx_t_2;
       __pyx_t_2 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":1254
+      /* "cysparse/sparse/ll_mat.pyx":1270
  * 
  * 
  *         elif dtype == COMPLEX64_T:             # <<<<<<<<<<<<<<
@@ -56685,22 +56685,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":1259
+    /* "cysparse/sparse/ll_mat.pyx":1275
  * 
  * 
  *         elif dtype == COMPLEX128_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakeLinearFillLLSparseMatrix_INT64_t_COMPLEX128_t(ll_mat, first_element, step, row_wise)
  */
-    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_COMPLEX128_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1259; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_COMPLEX128_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1275; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1259; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1275; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1259; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1275; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_4) {
 
-      /* "cysparse/sparse/ll_mat.pyx":1261
+      /* "cysparse/sparse/ll_mat.pyx":1277
  *         elif dtype == COMPLEX128_T:
  * 
  *             return MakeLinearFillLLSparseMatrix_INT64_t_COMPLEX128_t(ll_mat, first_element, step, row_wise)             # <<<<<<<<<<<<<<
@@ -56708,18 +56708,18 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT64_t_COMPLEX128_t_LLSparseMatrix_INT64_t_COMPLEX128_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1261; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_27 = __Pyx_PyComplex_As___pyx_t_double_complex(__pyx_v_first_element); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1261; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_8 = __Pyx_PyComplex_As___pyx_t_double_complex(__pyx_v_step); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1261; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT64_t_COMPLEX128_t_LLSparseMatrix_INT64_t_COMPLEX128_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1277; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_27 = __Pyx_PyComplex_As___pyx_t_double_complex(__pyx_v_first_element); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1277; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_8 = __Pyx_PyComplex_As___pyx_t_double_complex(__pyx_v_step); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1277; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __pyx_t_35.__pyx_n = 1;
       __pyx_t_35.row_wise = __pyx_v_row_wise;
-      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeLinearFillLLSparseMatrix_INT64_t_COMPLEX128_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT64_t_COMPLEX128_t_LLSparseMatrix_INT64_t_COMPLEX128_t *)__pyx_v_ll_mat), __pyx_t_27, __pyx_t_8, &__pyx_t_35)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1261; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakeLinearFillLLSparseMatrix_INT64_t_COMPLEX128_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT64_t_COMPLEX128_t_LLSparseMatrix_INT64_t_COMPLEX128_t *)__pyx_v_ll_mat), __pyx_t_27, __pyx_t_8, &__pyx_t_35)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1277; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_r = __pyx_t_1;
       __pyx_t_1 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":1259
+      /* "cysparse/sparse/ll_mat.pyx":1275
  * 
  * 
  *         elif dtype == COMPLEX128_T:             # <<<<<<<<<<<<<<
@@ -56728,7 +56728,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":1226
+    /* "cysparse/sparse/ll_mat.pyx":1242
  * 
  * 
  *     elif itype == INT64_T:             # <<<<<<<<<<<<<<
@@ -56738,7 +56738,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
     goto __pyx_L16;
   }
 
-  /* "cysparse/sparse/ll_mat.pyx":1266
+  /* "cysparse/sparse/ll_mat.pyx":1282
  * 
  *     else:
  *         raise TypeError('itype not recognized')             # <<<<<<<<<<<<<<
@@ -56746,15 +56746,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
  * def PermutationLLSparseMatrix(**kwargs):
  */
   /*else*/ {
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__153, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1266; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__153, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1282; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1266; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1282; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __pyx_L16:;
 
-  /* "cysparse/sparse/ll_mat.pyx":1133
+  /* "cysparse/sparse/ll_mat.pyx":1149
  *         raise TypeError('itype not recognized')
  * 
  * def LinearFillLLSparseMatrix(**kwargs):             # <<<<<<<<<<<<<<
@@ -56787,7 +56787,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_28LinearFillLLSparseMatrix(C
   return __pyx_r;
 }
 
-/* "cysparse/sparse/ll_mat.pyx":1268
+/* "cysparse/sparse/ll_mat.pyx":1284
  *         raise TypeError('itype not recognized')
  * 
  * def PermutationLLSparseMatrix(**kwargs):             # <<<<<<<<<<<<<<
@@ -56832,48 +56832,48 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_30PermutationLLSparseMatrix(
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("PermutationLLSparseMatrix", 0);
 
-  /* "cysparse/sparse/ll_mat.pyx":1275
+  /* "cysparse/sparse/ll_mat.pyx":1291
  *         Input arguments are **not** tested.
  *     """
  *     p_vec = kwargs.pop('P', None)             # <<<<<<<<<<<<<<
  * 
  *     if kwargs.get('store_symmetric', False):
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_kwargs, __pyx_n_s_pop); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1275; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_kwargs, __pyx_n_s_pop); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1291; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__154, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1275; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__154, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1291; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_p_vec = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "cysparse/sparse/ll_mat.pyx":1277
+  /* "cysparse/sparse/ll_mat.pyx":1293
  *     p_vec = kwargs.pop('P', None)
  * 
  *     if kwargs.get('store_symmetric', False):             # <<<<<<<<<<<<<<
  *         raise NotImplementedError('This type of matrix is not implemented for symmetric matrices')
  * 
  */
-  __pyx_t_2 = __Pyx_PyDict_GetItemDefault(__pyx_v_kwargs, __pyx_n_s_store_symmetric, Py_False); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1277; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyDict_GetItemDefault(__pyx_v_kwargs, __pyx_n_s_store_symmetric, Py_False); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1293; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1277; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1293; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_3) {
 
-    /* "cysparse/sparse/ll_mat.pyx":1278
+    /* "cysparse/sparse/ll_mat.pyx":1294
  * 
  *     if kwargs.get('store_symmetric', False):
  *         raise NotImplementedError('This type of matrix is not implemented for symmetric matrices')             # <<<<<<<<<<<<<<
  * 
  *     ll_mat = LLSparseMatrix(**kwargs)
  */
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_NotImplementedError, __pyx_tuple__155, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1278; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_NotImplementedError, __pyx_tuple__155, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1294; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1278; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1294; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-    /* "cysparse/sparse/ll_mat.pyx":1277
+    /* "cysparse/sparse/ll_mat.pyx":1293
  *     p_vec = kwargs.pop('P', None)
  * 
  *     if kwargs.get('store_symmetric', False):             # <<<<<<<<<<<<<<
@@ -56882,76 +56882,76 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_30PermutationLLSparseMatrix(
  */
   }
 
-  /* "cysparse/sparse/ll_mat.pyx":1280
+  /* "cysparse/sparse/ll_mat.pyx":1296
  *         raise NotImplementedError('This type of matrix is not implemented for symmetric matrices')
  * 
  *     ll_mat = LLSparseMatrix(**kwargs)             # <<<<<<<<<<<<<<
  * 
  *     itype = ll_mat.itype
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_LLSparseMatrix); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1280; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_LLSparseMatrix); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1296; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_v_kwargs); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1280; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_v_kwargs); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1296; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_ll_mat = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "cysparse/sparse/ll_mat.pyx":1282
+  /* "cysparse/sparse/ll_mat.pyx":1298
  *     ll_mat = LLSparseMatrix(**kwargs)
  * 
  *     itype = ll_mat.itype             # <<<<<<<<<<<<<<
  *     dtype = ll_mat.dtype
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_ll_mat, __pyx_n_s_itype); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1282; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_ll_mat, __pyx_n_s_itype); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1298; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_itype = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "cysparse/sparse/ll_mat.pyx":1283
+  /* "cysparse/sparse/ll_mat.pyx":1299
  * 
  *     itype = ll_mat.itype
  *     dtype = ll_mat.dtype             # <<<<<<<<<<<<<<
  * 
  *     # launch right "constructor" method
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_ll_mat, __pyx_n_s_dtype); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1283; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_ll_mat, __pyx_n_s_dtype); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1299; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_dtype = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "cysparse/sparse/ll_mat.pyx":1288
+  /* "cysparse/sparse/ll_mat.pyx":1304
  * 
  * 
  *     if itype == INT32_T:             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_INT32_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1288; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_INT32_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1304; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyObject_RichCompare(__pyx_v_itype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1288; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyObject_RichCompare(__pyx_v_itype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1304; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1288; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1304; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_3) {
 
-    /* "cysparse/sparse/ll_mat.pyx":1291
+    /* "cysparse/sparse/ll_mat.pyx":1307
  * 
  * 
  *         if dtype == INT32_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakePermutationLLSparseMatrix_INT32_t_INT32_t(ll_mat, p_vec)
  */
-    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_INT32_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1291; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_INT32_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1307; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1291; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1307; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1291; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1307; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_3) {
 
-      /* "cysparse/sparse/ll_mat.pyx":1293
+      /* "cysparse/sparse/ll_mat.pyx":1309
  *         if dtype == INT32_T:
  * 
  *             return MakePermutationLLSparseMatrix_INT32_t_INT32_t(ll_mat, p_vec)             # <<<<<<<<<<<<<<
@@ -56959,15 +56959,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_30PermutationLLSparseMatrix(
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT32_t_INT32_t_LLSparseMatrix_INT32_t_INT32_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1293; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      if (!(likely(((__pyx_v_p_vec) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_p_vec, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1293; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakePermutationLLSparseMatrix_INT32_t_INT32_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT32_t_INT32_t_LLSparseMatrix_INT32_t_INT32_t *)__pyx_v_ll_mat), ((PyArrayObject *)__pyx_v_p_vec))); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1293; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT32_t_INT32_t_LLSparseMatrix_INT32_t_INT32_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1309; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_p_vec) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_p_vec, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1309; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakePermutationLLSparseMatrix_INT32_t_INT32_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT32_t_INT32_t_LLSparseMatrix_INT32_t_INT32_t *)__pyx_v_ll_mat), ((PyArrayObject *)__pyx_v_p_vec))); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1309; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_r = __pyx_t_1;
       __pyx_t_1 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":1291
+      /* "cysparse/sparse/ll_mat.pyx":1307
  * 
  * 
  *         if dtype == INT32_T:             # <<<<<<<<<<<<<<
@@ -56976,22 +56976,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_30PermutationLLSparseMatrix(
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":1296
+    /* "cysparse/sparse/ll_mat.pyx":1312
  * 
  * 
  *         elif dtype == INT64_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakePermutationLLSparseMatrix_INT32_t_INT64_t(ll_mat, p_vec)
  */
-    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_INT64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1296; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_INT64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1312; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1296; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1312; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1296; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1312; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     if (__pyx_t_3) {
 
-      /* "cysparse/sparse/ll_mat.pyx":1298
+      /* "cysparse/sparse/ll_mat.pyx":1314
  *         elif dtype == INT64_T:
  * 
  *             return MakePermutationLLSparseMatrix_INT32_t_INT64_t(ll_mat, p_vec)             # <<<<<<<<<<<<<<
@@ -56999,15 +56999,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_30PermutationLLSparseMatrix(
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT32_t_INT64_t_LLSparseMatrix_INT32_t_INT64_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1298; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      if (!(likely(((__pyx_v_p_vec) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_p_vec, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1298; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakePermutationLLSparseMatrix_INT32_t_INT64_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT32_t_INT64_t_LLSparseMatrix_INT32_t_INT64_t *)__pyx_v_ll_mat), ((PyArrayObject *)__pyx_v_p_vec))); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1298; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT32_t_INT64_t_LLSparseMatrix_INT32_t_INT64_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1314; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_p_vec) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_p_vec, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1314; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakePermutationLLSparseMatrix_INT32_t_INT64_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT32_t_INT64_t_LLSparseMatrix_INT32_t_INT64_t *)__pyx_v_ll_mat), ((PyArrayObject *)__pyx_v_p_vec))); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1314; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
       __pyx_r = __pyx_t_2;
       __pyx_t_2 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":1296
+      /* "cysparse/sparse/ll_mat.pyx":1312
  * 
  * 
  *         elif dtype == INT64_T:             # <<<<<<<<<<<<<<
@@ -57016,22 +57016,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_30PermutationLLSparseMatrix(
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":1301
+    /* "cysparse/sparse/ll_mat.pyx":1317
  * 
  * 
  *         elif dtype == FLOAT32_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakePermutationLLSparseMatrix_INT32_t_FLOAT32_t(ll_mat, p_vec)
  */
-    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT32_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1301; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT32_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1317; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1301; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1317; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1301; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1317; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_3) {
 
-      /* "cysparse/sparse/ll_mat.pyx":1303
+      /* "cysparse/sparse/ll_mat.pyx":1319
  *         elif dtype == FLOAT32_T:
  * 
  *             return MakePermutationLLSparseMatrix_INT32_t_FLOAT32_t(ll_mat, p_vec)             # <<<<<<<<<<<<<<
@@ -57039,15 +57039,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_30PermutationLLSparseMatrix(
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT32_t_LLSparseMatrix_INT32_t_FLOAT32_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1303; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      if (!(likely(((__pyx_v_p_vec) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_p_vec, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1303; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakePermutationLLSparseMatrix_INT32_t_FLOAT32_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT32_t_LLSparseMatrix_INT32_t_FLOAT32_t *)__pyx_v_ll_mat), ((PyArrayObject *)__pyx_v_p_vec))); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1303; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT32_t_LLSparseMatrix_INT32_t_FLOAT32_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1319; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_p_vec) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_p_vec, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1319; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakePermutationLLSparseMatrix_INT32_t_FLOAT32_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT32_t_LLSparseMatrix_INT32_t_FLOAT32_t *)__pyx_v_ll_mat), ((PyArrayObject *)__pyx_v_p_vec))); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1319; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_r = __pyx_t_1;
       __pyx_t_1 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":1301
+      /* "cysparse/sparse/ll_mat.pyx":1317
  * 
  * 
  *         elif dtype == FLOAT32_T:             # <<<<<<<<<<<<<<
@@ -57056,22 +57056,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_30PermutationLLSparseMatrix(
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":1306
+    /* "cysparse/sparse/ll_mat.pyx":1322
  * 
  * 
  *         elif dtype == FLOAT64_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakePermutationLLSparseMatrix_INT32_t_FLOAT64_t(ll_mat, p_vec)
  */
-    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1306; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1322; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1306; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1322; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1306; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1322; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     if (__pyx_t_3) {
 
-      /* "cysparse/sparse/ll_mat.pyx":1308
+      /* "cysparse/sparse/ll_mat.pyx":1324
  *         elif dtype == FLOAT64_T:
  * 
  *             return MakePermutationLLSparseMatrix_INT32_t_FLOAT64_t(ll_mat, p_vec)             # <<<<<<<<<<<<<<
@@ -57079,15 +57079,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_30PermutationLLSparseMatrix(
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT64_t_LLSparseMatrix_INT32_t_FLOAT64_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1308; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      if (!(likely(((__pyx_v_p_vec) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_p_vec, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1308; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakePermutationLLSparseMatrix_INT32_t_FLOAT64_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT64_t_LLSparseMatrix_INT32_t_FLOAT64_t *)__pyx_v_ll_mat), ((PyArrayObject *)__pyx_v_p_vec))); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1308; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT64_t_LLSparseMatrix_INT32_t_FLOAT64_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1324; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_p_vec) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_p_vec, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1324; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakePermutationLLSparseMatrix_INT32_t_FLOAT64_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT64_t_LLSparseMatrix_INT32_t_FLOAT64_t *)__pyx_v_ll_mat), ((PyArrayObject *)__pyx_v_p_vec))); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1324; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
       __pyx_r = __pyx_t_2;
       __pyx_t_2 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":1306
+      /* "cysparse/sparse/ll_mat.pyx":1322
  * 
  * 
  *         elif dtype == FLOAT64_T:             # <<<<<<<<<<<<<<
@@ -57096,22 +57096,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_30PermutationLLSparseMatrix(
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":1311
+    /* "cysparse/sparse/ll_mat.pyx":1327
  * 
  * 
  *         elif dtype == FLOAT128_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakePermutationLLSparseMatrix_INT32_t_FLOAT128_t(ll_mat, p_vec)
  */
-    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT128_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1311; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT128_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1327; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1311; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1327; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1311; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1327; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_3) {
 
-      /* "cysparse/sparse/ll_mat.pyx":1313
+      /* "cysparse/sparse/ll_mat.pyx":1329
  *         elif dtype == FLOAT128_T:
  * 
  *             return MakePermutationLLSparseMatrix_INT32_t_FLOAT128_t(ll_mat, p_vec)             # <<<<<<<<<<<<<<
@@ -57119,15 +57119,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_30PermutationLLSparseMatrix(
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_25ll_mat_INT32_t_FLOAT128_t_LLSparseMatrix_INT32_t_FLOAT128_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1313; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      if (!(likely(((__pyx_v_p_vec) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_p_vec, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1313; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakePermutationLLSparseMatrix_INT32_t_FLOAT128_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_25ll_mat_INT32_t_FLOAT128_t_LLSparseMatrix_INT32_t_FLOAT128_t *)__pyx_v_ll_mat), ((PyArrayObject *)__pyx_v_p_vec))); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1313; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_25ll_mat_INT32_t_FLOAT128_t_LLSparseMatrix_INT32_t_FLOAT128_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1329; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_p_vec) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_p_vec, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1329; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakePermutationLLSparseMatrix_INT32_t_FLOAT128_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_25ll_mat_INT32_t_FLOAT128_t_LLSparseMatrix_INT32_t_FLOAT128_t *)__pyx_v_ll_mat), ((PyArrayObject *)__pyx_v_p_vec))); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1329; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_r = __pyx_t_1;
       __pyx_t_1 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":1311
+      /* "cysparse/sparse/ll_mat.pyx":1327
  * 
  * 
  *         elif dtype == FLOAT128_T:             # <<<<<<<<<<<<<<
@@ -57136,22 +57136,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_30PermutationLLSparseMatrix(
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":1316
+    /* "cysparse/sparse/ll_mat.pyx":1332
  * 
  * 
  *         elif dtype == COMPLEX64_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakePermutationLLSparseMatrix_INT32_t_COMPLEX64_t(ll_mat, p_vec)
  */
-    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_COMPLEX64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1316; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_COMPLEX64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1332; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1316; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1332; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1316; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1332; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     if (__pyx_t_3) {
 
-      /* "cysparse/sparse/ll_mat.pyx":1318
+      /* "cysparse/sparse/ll_mat.pyx":1334
  *         elif dtype == COMPLEX64_T:
  * 
  *             return MakePermutationLLSparseMatrix_INT32_t_COMPLEX64_t(ll_mat, p_vec)             # <<<<<<<<<<<<<<
@@ -57159,15 +57159,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_30PermutationLLSparseMatrix(
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT32_t_COMPLEX64_t_LLSparseMatrix_INT32_t_COMPLEX64_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1318; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      if (!(likely(((__pyx_v_p_vec) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_p_vec, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1318; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakePermutationLLSparseMatrix_INT32_t_COMPLEX64_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT32_t_COMPLEX64_t_LLSparseMatrix_INT32_t_COMPLEX64_t *)__pyx_v_ll_mat), ((PyArrayObject *)__pyx_v_p_vec))); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1318; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT32_t_COMPLEX64_t_LLSparseMatrix_INT32_t_COMPLEX64_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1334; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_p_vec) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_p_vec, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1334; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakePermutationLLSparseMatrix_INT32_t_COMPLEX64_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT32_t_COMPLEX64_t_LLSparseMatrix_INT32_t_COMPLEX64_t *)__pyx_v_ll_mat), ((PyArrayObject *)__pyx_v_p_vec))); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1334; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
       __pyx_r = __pyx_t_2;
       __pyx_t_2 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":1316
+      /* "cysparse/sparse/ll_mat.pyx":1332
  * 
  * 
  *         elif dtype == COMPLEX64_T:             # <<<<<<<<<<<<<<
@@ -57176,22 +57176,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_30PermutationLLSparseMatrix(
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":1321
+    /* "cysparse/sparse/ll_mat.pyx":1337
  * 
  * 
  *         elif dtype == COMPLEX128_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakePermutationLLSparseMatrix_INT32_t_COMPLEX128_t(ll_mat, p_vec)
  */
-    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_COMPLEX128_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1321; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_COMPLEX128_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1337; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1321; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1337; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1321; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1337; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_3) {
 
-      /* "cysparse/sparse/ll_mat.pyx":1323
+      /* "cysparse/sparse/ll_mat.pyx":1339
  *         elif dtype == COMPLEX128_T:
  * 
  *             return MakePermutationLLSparseMatrix_INT32_t_COMPLEX128_t(ll_mat, p_vec)             # <<<<<<<<<<<<<<
@@ -57199,15 +57199,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_30PermutationLLSparseMatrix(
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32_t_COMPLEX128_t_LLSparseMatrix_INT32_t_COMPLEX128_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1323; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      if (!(likely(((__pyx_v_p_vec) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_p_vec, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1323; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakePermutationLLSparseMatrix_INT32_t_COMPLEX128_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32_t_COMPLEX128_t_LLSparseMatrix_INT32_t_COMPLEX128_t *)__pyx_v_ll_mat), ((PyArrayObject *)__pyx_v_p_vec))); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1323; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32_t_COMPLEX128_t_LLSparseMatrix_INT32_t_COMPLEX128_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1339; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_p_vec) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_p_vec, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1339; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakePermutationLLSparseMatrix_INT32_t_COMPLEX128_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32_t_COMPLEX128_t_LLSparseMatrix_INT32_t_COMPLEX128_t *)__pyx_v_ll_mat), ((PyArrayObject *)__pyx_v_p_vec))); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1339; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_r = __pyx_t_1;
       __pyx_t_1 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":1321
+      /* "cysparse/sparse/ll_mat.pyx":1337
  * 
  * 
  *         elif dtype == COMPLEX128_T:             # <<<<<<<<<<<<<<
@@ -57216,7 +57216,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_30PermutationLLSparseMatrix(
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":1288
+    /* "cysparse/sparse/ll_mat.pyx":1304
  * 
  * 
  *     if itype == INT32_T:             # <<<<<<<<<<<<<<
@@ -57226,37 +57226,37 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_30PermutationLLSparseMatrix(
     goto __pyx_L4;
   }
 
-  /* "cysparse/sparse/ll_mat.pyx":1328
+  /* "cysparse/sparse/ll_mat.pyx":1344
  * 
  * 
  *     elif itype == INT64_T:             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_INT64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1328; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_INT64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1344; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyObject_RichCompare(__pyx_v_itype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1328; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyObject_RichCompare(__pyx_v_itype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1344; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1328; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1344; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_3) {
 
-    /* "cysparse/sparse/ll_mat.pyx":1331
+    /* "cysparse/sparse/ll_mat.pyx":1347
  * 
  * 
  *         if dtype == INT32_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakePermutationLLSparseMatrix_INT64_t_INT32_t(ll_mat, p_vec)
  */
-    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_INT32_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1331; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_INT32_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1347; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1331; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1347; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1331; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1347; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_3) {
 
-      /* "cysparse/sparse/ll_mat.pyx":1333
+      /* "cysparse/sparse/ll_mat.pyx":1349
  *         if dtype == INT32_T:
  * 
  *             return MakePermutationLLSparseMatrix_INT64_t_INT32_t(ll_mat, p_vec)             # <<<<<<<<<<<<<<
@@ -57264,15 +57264,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_30PermutationLLSparseMatrix(
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT64_t_INT32_t_LLSparseMatrix_INT64_t_INT32_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1333; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      if (!(likely(((__pyx_v_p_vec) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_p_vec, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1333; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakePermutationLLSparseMatrix_INT64_t_INT32_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT64_t_INT32_t_LLSparseMatrix_INT64_t_INT32_t *)__pyx_v_ll_mat), ((PyArrayObject *)__pyx_v_p_vec))); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1333; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT64_t_INT32_t_LLSparseMatrix_INT64_t_INT32_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1349; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_p_vec) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_p_vec, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1349; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakePermutationLLSparseMatrix_INT64_t_INT32_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT64_t_INT32_t_LLSparseMatrix_INT64_t_INT32_t *)__pyx_v_ll_mat), ((PyArrayObject *)__pyx_v_p_vec))); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1349; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_r = __pyx_t_1;
       __pyx_t_1 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":1331
+      /* "cysparse/sparse/ll_mat.pyx":1347
  * 
  * 
  *         if dtype == INT32_T:             # <<<<<<<<<<<<<<
@@ -57281,22 +57281,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_30PermutationLLSparseMatrix(
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":1336
+    /* "cysparse/sparse/ll_mat.pyx":1352
  * 
  * 
  *         elif dtype == INT64_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakePermutationLLSparseMatrix_INT64_t_INT64_t(ll_mat, p_vec)
  */
-    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_INT64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1336; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_INT64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1352; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1336; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1352; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1336; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1352; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     if (__pyx_t_3) {
 
-      /* "cysparse/sparse/ll_mat.pyx":1338
+      /* "cysparse/sparse/ll_mat.pyx":1354
  *         elif dtype == INT64_T:
  * 
  *             return MakePermutationLLSparseMatrix_INT64_t_INT64_t(ll_mat, p_vec)             # <<<<<<<<<<<<<<
@@ -57304,15 +57304,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_30PermutationLLSparseMatrix(
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT64_t_INT64_t_LLSparseMatrix_INT64_t_INT64_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1338; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      if (!(likely(((__pyx_v_p_vec) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_p_vec, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1338; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakePermutationLLSparseMatrix_INT64_t_INT64_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT64_t_INT64_t_LLSparseMatrix_INT64_t_INT64_t *)__pyx_v_ll_mat), ((PyArrayObject *)__pyx_v_p_vec))); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1338; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT64_t_INT64_t_LLSparseMatrix_INT64_t_INT64_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1354; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_p_vec) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_p_vec, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1354; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakePermutationLLSparseMatrix_INT64_t_INT64_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_22ll_mat_INT64_t_INT64_t_LLSparseMatrix_INT64_t_INT64_t *)__pyx_v_ll_mat), ((PyArrayObject *)__pyx_v_p_vec))); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1354; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
       __pyx_r = __pyx_t_2;
       __pyx_t_2 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":1336
+      /* "cysparse/sparse/ll_mat.pyx":1352
  * 
  * 
  *         elif dtype == INT64_T:             # <<<<<<<<<<<<<<
@@ -57321,22 +57321,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_30PermutationLLSparseMatrix(
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":1341
+    /* "cysparse/sparse/ll_mat.pyx":1357
  * 
  * 
  *         elif dtype == FLOAT32_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakePermutationLLSparseMatrix_INT64_t_FLOAT32_t(ll_mat, p_vec)
  */
-    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT32_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1341; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT32_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1357; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1341; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1357; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1341; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1357; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_3) {
 
-      /* "cysparse/sparse/ll_mat.pyx":1343
+      /* "cysparse/sparse/ll_mat.pyx":1359
  *         elif dtype == FLOAT32_T:
  * 
  *             return MakePermutationLLSparseMatrix_INT64_t_FLOAT32_t(ll_mat, p_vec)             # <<<<<<<<<<<<<<
@@ -57344,15 +57344,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_30PermutationLLSparseMatrix(
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT64_t_FLOAT32_t_LLSparseMatrix_INT64_t_FLOAT32_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1343; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      if (!(likely(((__pyx_v_p_vec) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_p_vec, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1343; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakePermutationLLSparseMatrix_INT64_t_FLOAT32_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT64_t_FLOAT32_t_LLSparseMatrix_INT64_t_FLOAT32_t *)__pyx_v_ll_mat), ((PyArrayObject *)__pyx_v_p_vec))); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1343; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT64_t_FLOAT32_t_LLSparseMatrix_INT64_t_FLOAT32_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1359; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_p_vec) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_p_vec, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1359; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakePermutationLLSparseMatrix_INT64_t_FLOAT32_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT64_t_FLOAT32_t_LLSparseMatrix_INT64_t_FLOAT32_t *)__pyx_v_ll_mat), ((PyArrayObject *)__pyx_v_p_vec))); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1359; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_r = __pyx_t_1;
       __pyx_t_1 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":1341
+      /* "cysparse/sparse/ll_mat.pyx":1357
  * 
  * 
  *         elif dtype == FLOAT32_T:             # <<<<<<<<<<<<<<
@@ -57361,22 +57361,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_30PermutationLLSparseMatrix(
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":1346
+    /* "cysparse/sparse/ll_mat.pyx":1362
  * 
  * 
  *         elif dtype == FLOAT64_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakePermutationLLSparseMatrix_INT64_t_FLOAT64_t(ll_mat, p_vec)
  */
-    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1346; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1362; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1346; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1362; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1346; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1362; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     if (__pyx_t_3) {
 
-      /* "cysparse/sparse/ll_mat.pyx":1348
+      /* "cysparse/sparse/ll_mat.pyx":1364
  *         elif dtype == FLOAT64_T:
  * 
  *             return MakePermutationLLSparseMatrix_INT64_t_FLOAT64_t(ll_mat, p_vec)             # <<<<<<<<<<<<<<
@@ -57384,15 +57384,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_30PermutationLLSparseMatrix(
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT64_t_FLOAT64_t_LLSparseMatrix_INT64_t_FLOAT64_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1348; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      if (!(likely(((__pyx_v_p_vec) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_p_vec, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1348; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakePermutationLLSparseMatrix_INT64_t_FLOAT64_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT64_t_FLOAT64_t_LLSparseMatrix_INT64_t_FLOAT64_t *)__pyx_v_ll_mat), ((PyArrayObject *)__pyx_v_p_vec))); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1348; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT64_t_FLOAT64_t_LLSparseMatrix_INT64_t_FLOAT64_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1364; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_p_vec) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_p_vec, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1364; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakePermutationLLSparseMatrix_INT64_t_FLOAT64_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT64_t_FLOAT64_t_LLSparseMatrix_INT64_t_FLOAT64_t *)__pyx_v_ll_mat), ((PyArrayObject *)__pyx_v_p_vec))); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1364; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
       __pyx_r = __pyx_t_2;
       __pyx_t_2 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":1346
+      /* "cysparse/sparse/ll_mat.pyx":1362
  * 
  * 
  *         elif dtype == FLOAT64_T:             # <<<<<<<<<<<<<<
@@ -57401,22 +57401,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_30PermutationLLSparseMatrix(
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":1351
+    /* "cysparse/sparse/ll_mat.pyx":1367
  * 
  * 
  *         elif dtype == FLOAT128_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakePermutationLLSparseMatrix_INT64_t_FLOAT128_t(ll_mat, p_vec)
  */
-    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT128_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1351; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_FLOAT128_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1367; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1351; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1367; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1351; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1367; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_3) {
 
-      /* "cysparse/sparse/ll_mat.pyx":1353
+      /* "cysparse/sparse/ll_mat.pyx":1369
  *         elif dtype == FLOAT128_T:
  * 
  *             return MakePermutationLLSparseMatrix_INT64_t_FLOAT128_t(ll_mat, p_vec)             # <<<<<<<<<<<<<<
@@ -57424,15 +57424,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_30PermutationLLSparseMatrix(
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_25ll_mat_INT64_t_FLOAT128_t_LLSparseMatrix_INT64_t_FLOAT128_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1353; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      if (!(likely(((__pyx_v_p_vec) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_p_vec, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1353; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakePermutationLLSparseMatrix_INT64_t_FLOAT128_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_25ll_mat_INT64_t_FLOAT128_t_LLSparseMatrix_INT64_t_FLOAT128_t *)__pyx_v_ll_mat), ((PyArrayObject *)__pyx_v_p_vec))); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1353; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_25ll_mat_INT64_t_FLOAT128_t_LLSparseMatrix_INT64_t_FLOAT128_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1369; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_p_vec) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_p_vec, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1369; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakePermutationLLSparseMatrix_INT64_t_FLOAT128_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_25ll_mat_INT64_t_FLOAT128_t_LLSparseMatrix_INT64_t_FLOAT128_t *)__pyx_v_ll_mat), ((PyArrayObject *)__pyx_v_p_vec))); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1369; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_r = __pyx_t_1;
       __pyx_t_1 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":1351
+      /* "cysparse/sparse/ll_mat.pyx":1367
  * 
  * 
  *         elif dtype == FLOAT128_T:             # <<<<<<<<<<<<<<
@@ -57441,22 +57441,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_30PermutationLLSparseMatrix(
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":1356
+    /* "cysparse/sparse/ll_mat.pyx":1372
  * 
  * 
  *         elif dtype == COMPLEX64_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakePermutationLLSparseMatrix_INT64_t_COMPLEX64_t(ll_mat, p_vec)
  */
-    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_COMPLEX64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1356; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_COMPLEX64_T); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1372; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1356; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1372; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1356; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1372; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     if (__pyx_t_3) {
 
-      /* "cysparse/sparse/ll_mat.pyx":1358
+      /* "cysparse/sparse/ll_mat.pyx":1374
  *         elif dtype == COMPLEX64_T:
  * 
  *             return MakePermutationLLSparseMatrix_INT64_t_COMPLEX64_t(ll_mat, p_vec)             # <<<<<<<<<<<<<<
@@ -57464,15 +57464,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_30PermutationLLSparseMatrix(
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT64_t_COMPLEX64_t_LLSparseMatrix_INT64_t_COMPLEX64_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1358; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      if (!(likely(((__pyx_v_p_vec) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_p_vec, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1358; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakePermutationLLSparseMatrix_INT64_t_COMPLEX64_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT64_t_COMPLEX64_t_LLSparseMatrix_INT64_t_COMPLEX64_t *)__pyx_v_ll_mat), ((PyArrayObject *)__pyx_v_p_vec))); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1358; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT64_t_COMPLEX64_t_LLSparseMatrix_INT64_t_COMPLEX64_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1374; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_p_vec) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_p_vec, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1374; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakePermutationLLSparseMatrix_INT64_t_COMPLEX64_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_26ll_mat_INT64_t_COMPLEX64_t_LLSparseMatrix_INT64_t_COMPLEX64_t *)__pyx_v_ll_mat), ((PyArrayObject *)__pyx_v_p_vec))); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1374; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
       __pyx_r = __pyx_t_2;
       __pyx_t_2 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":1356
+      /* "cysparse/sparse/ll_mat.pyx":1372
  * 
  * 
  *         elif dtype == COMPLEX64_T:             # <<<<<<<<<<<<<<
@@ -57481,22 +57481,22 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_30PermutationLLSparseMatrix(
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":1361
+    /* "cysparse/sparse/ll_mat.pyx":1377
  * 
  * 
  *         elif dtype == COMPLEX128_T:             # <<<<<<<<<<<<<<
  * 
  *             return MakePermutationLLSparseMatrix_INT64_t_COMPLEX128_t(ll_mat, p_vec)
  */
-    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_COMPLEX128_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1361; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyInt_From_enum____pyx_t_8cysparse_12common_types_14cysparse_types_CySparseType(__pyx_e_8cysparse_12common_types_14cysparse_types_COMPLEX128_T); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1377; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1361; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyObject_RichCompare(__pyx_v_dtype, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1377; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1361; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1377; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_3) {
 
-      /* "cysparse/sparse/ll_mat.pyx":1363
+      /* "cysparse/sparse/ll_mat.pyx":1379
  *         elif dtype == COMPLEX128_T:
  * 
  *             return MakePermutationLLSparseMatrix_INT64_t_COMPLEX128_t(ll_mat, p_vec)             # <<<<<<<<<<<<<<
@@ -57504,15 +57504,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_30PermutationLLSparseMatrix(
  * 
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT64_t_COMPLEX128_t_LLSparseMatrix_INT64_t_COMPLEX128_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1363; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      if (!(likely(((__pyx_v_p_vec) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_p_vec, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1363; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakePermutationLLSparseMatrix_INT64_t_COMPLEX128_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT64_t_COMPLEX128_t_LLSparseMatrix_INT64_t_COMPLEX128_t *)__pyx_v_ll_mat), ((PyArrayObject *)__pyx_v_p_vec))); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1363; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_ll_mat) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_ll_mat, __pyx_ptype_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT64_t_COMPLEX128_t_LLSparseMatrix_INT64_t_COMPLEX128_t))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1379; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(((__pyx_v_p_vec) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_p_vec, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1379; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = ((PyObject *)__pyx_f_8cysparse_6sparse_6ll_mat_MakePermutationLLSparseMatrix_INT64_t_COMPLEX128_t(((struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT64_t_COMPLEX128_t_LLSparseMatrix_INT64_t_COMPLEX128_t *)__pyx_v_ll_mat), ((PyArrayObject *)__pyx_v_p_vec))); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1379; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_r = __pyx_t_1;
       __pyx_t_1 = 0;
       goto __pyx_L0;
 
-      /* "cysparse/sparse/ll_mat.pyx":1361
+      /* "cysparse/sparse/ll_mat.pyx":1377
  * 
  * 
  *         elif dtype == COMPLEX128_T:             # <<<<<<<<<<<<<<
@@ -57521,7 +57521,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_30PermutationLLSparseMatrix(
  */
     }
 
-    /* "cysparse/sparse/ll_mat.pyx":1328
+    /* "cysparse/sparse/ll_mat.pyx":1344
  * 
  * 
  *     elif itype == INT64_T:             # <<<<<<<<<<<<<<
@@ -57531,21 +57531,21 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_30PermutationLLSparseMatrix(
     goto __pyx_L4;
   }
 
-  /* "cysparse/sparse/ll_mat.pyx":1368
+  /* "cysparse/sparse/ll_mat.pyx":1384
  * 
  *     else:
  *         raise TypeError('itype not recognized')             # <<<<<<<<<<<<<<
  */
   /*else*/ {
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__156, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1368; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__156, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1384; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1368; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1384; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __pyx_L4:;
 
-  /* "cysparse/sparse/ll_mat.pyx":1268
+  /* "cysparse/sparse/ll_mat.pyx":1284
  *         raise TypeError('itype not recognized')
  * 
  * def PermutationLLSparseMatrix(**kwargs):             # <<<<<<<<<<<<<<
@@ -61800,249 +61800,249 @@ static int __Pyx_InitCachedConstants(void) {
  *     if kwargs.get('store_symmetric', False):
  *         raise NotImplementedError('This type of matrix is not implemented for symmetric matrices')             # <<<<<<<<<<<<<<
  * 
- *     ll_mat = LLSparseMatrix(**kwargs)
+ * 
  */
   __pyx_tuple__134 = PyTuple_Pack(1, __pyx_kp_s_This_type_of_matrix_is_not_imple); if (unlikely(!__pyx_tuple__134)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 804; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__134);
   __Pyx_GIVEREF(__pyx_tuple__134);
 
-  /* "cysparse/sparse/ll_mat.pyx":820
+  /* "cysparse/sparse/ll_mat.pyx":836
  *             element = 1.0 + 0.0j
  *         else:
  *             raise TypeError('dtype not recognized')             # <<<<<<<<<<<<<<
  * 
  *     # launch right "constructor" method
  */
-  __pyx_tuple__135 = PyTuple_Pack(1, __pyx_kp_s_dtype_not_recognized); if (unlikely(!__pyx_tuple__135)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 820; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__135 = PyTuple_Pack(1, __pyx_kp_s_dtype_not_recognized); if (unlikely(!__pyx_tuple__135)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 836; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__135);
   __Pyx_GIVEREF(__pyx_tuple__135);
 
-  /* "cysparse/sparse/ll_mat.pyx":905
+  /* "cysparse/sparse/ll_mat.pyx":921
  * 
  *     else:
  *         raise TypeError('itype not recognized')             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_tuple__136 = PyTuple_Pack(1, __pyx_kp_s_itype_not_recognized); if (unlikely(!__pyx_tuple__136)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 905; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__136 = PyTuple_Pack(1, __pyx_kp_s_itype_not_recognized); if (unlikely(!__pyx_tuple__136)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 921; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__136);
   __Pyx_GIVEREF(__pyx_tuple__136);
 
-  /* "cysparse/sparse/ll_mat.pyx":915
+  /* "cysparse/sparse/ll_mat.pyx":931
  *         Input arguments are **not** tested.
  *     """
  *     element = kwargs.pop('element', None)             # <<<<<<<<<<<<<<
  * 
  *     if kwargs.get('store_symmetric', False):
  */
-  __pyx_tuple__137 = PyTuple_Pack(2, __pyx_n_s_element, Py_None); if (unlikely(!__pyx_tuple__137)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 915; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__137 = PyTuple_Pack(2, __pyx_n_s_element, Py_None); if (unlikely(!__pyx_tuple__137)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 931; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__137);
   __Pyx_GIVEREF(__pyx_tuple__137);
 
-  /* "cysparse/sparse/ll_mat.pyx":918
+  /* "cysparse/sparse/ll_mat.pyx":934
  * 
  *     if kwargs.get('store_symmetric', False):
  *         raise NotImplementedError('This type of matrix is not implemented for symmetric matrices')             # <<<<<<<<<<<<<<
  * 
  *     ll_mat = LLSparseMatrix(**kwargs)
  */
-  __pyx_tuple__138 = PyTuple_Pack(1, __pyx_kp_s_This_type_of_matrix_is_not_imple); if (unlikely(!__pyx_tuple__138)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 918; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__138 = PyTuple_Pack(1, __pyx_kp_s_This_type_of_matrix_is_not_imple); if (unlikely(!__pyx_tuple__138)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 934; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__138);
   __Pyx_GIVEREF(__pyx_tuple__138);
 
-  /* "cysparse/sparse/ll_mat.pyx":934
+  /* "cysparse/sparse/ll_mat.pyx":950
  *             element = 1.0 + 0.0j
  *         else:
  *             raise TypeError('dtype not recognized')             # <<<<<<<<<<<<<<
  * 
  *     # launch right "constructor" method
  */
-  __pyx_tuple__139 = PyTuple_Pack(1, __pyx_kp_s_dtype_not_recognized); if (unlikely(!__pyx_tuple__139)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 934; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__139 = PyTuple_Pack(1, __pyx_kp_s_dtype_not_recognized); if (unlikely(!__pyx_tuple__139)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 950; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__139);
   __Pyx_GIVEREF(__pyx_tuple__139);
 
-  /* "cysparse/sparse/ll_mat.pyx":1019
+  /* "cysparse/sparse/ll_mat.pyx":1035
  * 
  *     else:
  *         raise TypeError('itype not recognized')             # <<<<<<<<<<<<<<
  * 
  * # alias
  */
-  __pyx_tuple__140 = PyTuple_Pack(1, __pyx_kp_s_itype_not_recognized); if (unlikely(!__pyx_tuple__140)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1019; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__140 = PyTuple_Pack(1, __pyx_kp_s_itype_not_recognized); if (unlikely(!__pyx_tuple__140)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1035; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__140);
   __Pyx_GIVEREF(__pyx_tuple__140);
 
-  /* "cysparse/sparse/ll_mat.pyx":1023
+  /* "cysparse/sparse/ll_mat.pyx":1039
  * # alias
  * def IdentityLLSparseMatrix(**kwargs):
  *     element = kwargs.pop('element', None)             # <<<<<<<<<<<<<<
  *     return DiagonalLLSparseMatrix(**kwargs)
  * 
  */
-  __pyx_tuple__141 = PyTuple_Pack(2, __pyx_n_s_element, Py_None); if (unlikely(!__pyx_tuple__141)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1023; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__141 = PyTuple_Pack(2, __pyx_n_s_element, Py_None); if (unlikely(!__pyx_tuple__141)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1039; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__141);
   __Pyx_GIVEREF(__pyx_tuple__141);
 
-  /* "cysparse/sparse/ll_mat.pyx":1034
+  /* "cysparse/sparse/ll_mat.pyx":1050
  *         Input arguments are **not** tested.
  *     """
  *     diag_coeff = kwargs.pop('diag_coeff', None)             # <<<<<<<<<<<<<<
  *     numpy_arrays = kwargs.pop('numpy_arrays', None)
  * 
  */
-  __pyx_tuple__142 = PyTuple_Pack(2, __pyx_n_s_diag_coeff, Py_None); if (unlikely(!__pyx_tuple__142)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1034; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__142 = PyTuple_Pack(2, __pyx_n_s_diag_coeff, Py_None); if (unlikely(!__pyx_tuple__142)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1050; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__142);
   __Pyx_GIVEREF(__pyx_tuple__142);
 
-  /* "cysparse/sparse/ll_mat.pyx":1035
+  /* "cysparse/sparse/ll_mat.pyx":1051
  *     """
  *     diag_coeff = kwargs.pop('diag_coeff', None)
  *     numpy_arrays = kwargs.pop('numpy_arrays', None)             # <<<<<<<<<<<<<<
  * 
  *     if diag_coeff is None:
  */
-  __pyx_tuple__143 = PyTuple_Pack(2, __pyx_n_s_numpy_arrays, Py_None); if (unlikely(!__pyx_tuple__143)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1035; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__143 = PyTuple_Pack(2, __pyx_n_s_numpy_arrays, Py_None); if (unlikely(!__pyx_tuple__143)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1051; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__143);
   __Pyx_GIVEREF(__pyx_tuple__143);
 
-  /* "cysparse/sparse/ll_mat.pyx":1038
+  /* "cysparse/sparse/ll_mat.pyx":1054
  * 
  *     if diag_coeff is None:
  *         raise ValueError("Named argument 'diag_coeff' not given")             # <<<<<<<<<<<<<<
  * 
  *     if numpy_arrays is None:
  */
-  __pyx_tuple__144 = PyTuple_Pack(1, __pyx_kp_s_Named_argument_diag_coeff_not_gi); if (unlikely(!__pyx_tuple__144)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1038; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__144 = PyTuple_Pack(1, __pyx_kp_s_Named_argument_diag_coeff_not_gi); if (unlikely(!__pyx_tuple__144)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1054; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__144);
   __Pyx_GIVEREF(__pyx_tuple__144);
 
-  /* "cysparse/sparse/ll_mat.pyx":1041
+  /* "cysparse/sparse/ll_mat.pyx":1057
  * 
  *     if numpy_arrays is None:
  *         raise ValueError("Named argument 'numpy_arrays' not given")             # <<<<<<<<<<<<<<
  * 
  *     ll_mat = LLSparseMatrix(**kwargs)
  */
-  __pyx_tuple__145 = PyTuple_Pack(1, __pyx_kp_s_Named_argument_numpy_arrays_not); if (unlikely(!__pyx_tuple__145)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1041; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__145 = PyTuple_Pack(1, __pyx_kp_s_Named_argument_numpy_arrays_not); if (unlikely(!__pyx_tuple__145)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1057; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__145);
   __Pyx_GIVEREF(__pyx_tuple__145);
 
-  /* "cysparse/sparse/ll_mat.pyx":1131
+  /* "cysparse/sparse/ll_mat.pyx":1147
  * 
  *     else:
  *         raise TypeError('itype not recognized')             # <<<<<<<<<<<<<<
  * 
  * def LinearFillLLSparseMatrix(**kwargs):
  */
-  __pyx_tuple__146 = PyTuple_Pack(1, __pyx_kp_s_itype_not_recognized); if (unlikely(!__pyx_tuple__146)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1131; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__146 = PyTuple_Pack(1, __pyx_kp_s_itype_not_recognized); if (unlikely(!__pyx_tuple__146)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1147; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__146);
   __Pyx_GIVEREF(__pyx_tuple__146);
 
-  /* "cysparse/sparse/ll_mat.pyx":1140
+  /* "cysparse/sparse/ll_mat.pyx":1156
  *         Input arguments are **not** tested.
  *     """
  *     first_element = kwargs.pop('first_element', None)             # <<<<<<<<<<<<<<
  *     step = kwargs.pop('step', None)
  *     row_wise = kwargs.pop('row_wise', True)
  */
-  __pyx_tuple__147 = PyTuple_Pack(2, __pyx_n_s_first_element, Py_None); if (unlikely(!__pyx_tuple__147)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1140; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__147 = PyTuple_Pack(2, __pyx_n_s_first_element, Py_None); if (unlikely(!__pyx_tuple__147)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1156; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__147);
   __Pyx_GIVEREF(__pyx_tuple__147);
 
-  /* "cysparse/sparse/ll_mat.pyx":1141
+  /* "cysparse/sparse/ll_mat.pyx":1157
  *     """
  *     first_element = kwargs.pop('first_element', None)
  *     step = kwargs.pop('step', None)             # <<<<<<<<<<<<<<
  *     row_wise = kwargs.pop('row_wise', True)
  * 
  */
-  __pyx_tuple__148 = PyTuple_Pack(2, __pyx_n_s_step, Py_None); if (unlikely(!__pyx_tuple__148)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1141; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__148 = PyTuple_Pack(2, __pyx_n_s_step, Py_None); if (unlikely(!__pyx_tuple__148)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1157; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__148);
   __Pyx_GIVEREF(__pyx_tuple__148);
 
-  /* "cysparse/sparse/ll_mat.pyx":1142
+  /* "cysparse/sparse/ll_mat.pyx":1158
  *     first_element = kwargs.pop('first_element', None)
  *     step = kwargs.pop('step', None)
  *     row_wise = kwargs.pop('row_wise', True)             # <<<<<<<<<<<<<<
  * 
  *     # this is only really needed to compute 'size_hint'
  */
-  __pyx_tuple__149 = PyTuple_Pack(2, __pyx_n_s_row_wise, Py_True); if (unlikely(!__pyx_tuple__149)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1142; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__149 = PyTuple_Pack(2, __pyx_n_s_row_wise, Py_True); if (unlikely(!__pyx_tuple__149)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1158; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__149);
   __Pyx_GIVEREF(__pyx_tuple__149);
 
-  /* "cysparse/sparse/ll_mat.pyx":1149
+  /* "cysparse/sparse/ll_mat.pyx":1165
  *         nrow = kwargs.get('nrow', None)
  *         if nrow is None:
  *             raise TypeError('We need a size to construct the matrix')             # <<<<<<<<<<<<<<
  *         ncol = kwargs.get('ncol', None)
  *         if ncol is None:
  */
-  __pyx_tuple__150 = PyTuple_Pack(1, __pyx_kp_s_We_need_a_size_to_construct_the); if (unlikely(!__pyx_tuple__150)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1149; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__150 = PyTuple_Pack(1, __pyx_kp_s_We_need_a_size_to_construct_the); if (unlikely(!__pyx_tuple__150)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1165; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__150);
   __Pyx_GIVEREF(__pyx_tuple__150);
 
-  /* "cysparse/sparse/ll_mat.pyx":1152
+  /* "cysparse/sparse/ll_mat.pyx":1168
  *         ncol = kwargs.get('ncol', None)
  *         if ncol is None:
  *             raise TypeError('We need a size to construct the matrix')             # <<<<<<<<<<<<<<
  *     else:
  *         nrow = ncol = size
  */
-  __pyx_tuple__151 = PyTuple_Pack(1, __pyx_kp_s_We_need_a_size_to_construct_the); if (unlikely(!__pyx_tuple__151)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1152; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__151 = PyTuple_Pack(1, __pyx_kp_s_We_need_a_size_to_construct_the); if (unlikely(!__pyx_tuple__151)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1168; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__151);
   __Pyx_GIVEREF(__pyx_tuple__151);
 
-  /* "cysparse/sparse/ll_mat.pyx":1181
+  /* "cysparse/sparse/ll_mat.pyx":1197
  *                 step = 1.0 + 0.0j
  *         else:
  *             raise TypeError('dtype not recognized')             # <<<<<<<<<<<<<<
  * 
  *     # launch right "constructor" method
  */
-  __pyx_tuple__152 = PyTuple_Pack(1, __pyx_kp_s_dtype_not_recognized); if (unlikely(!__pyx_tuple__152)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1181; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__152 = PyTuple_Pack(1, __pyx_kp_s_dtype_not_recognized); if (unlikely(!__pyx_tuple__152)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1197; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__152);
   __Pyx_GIVEREF(__pyx_tuple__152);
 
-  /* "cysparse/sparse/ll_mat.pyx":1266
+  /* "cysparse/sparse/ll_mat.pyx":1282
  * 
  *     else:
  *         raise TypeError('itype not recognized')             # <<<<<<<<<<<<<<
  * 
  * def PermutationLLSparseMatrix(**kwargs):
  */
-  __pyx_tuple__153 = PyTuple_Pack(1, __pyx_kp_s_itype_not_recognized); if (unlikely(!__pyx_tuple__153)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1266; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__153 = PyTuple_Pack(1, __pyx_kp_s_itype_not_recognized); if (unlikely(!__pyx_tuple__153)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1282; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__153);
   __Pyx_GIVEREF(__pyx_tuple__153);
 
-  /* "cysparse/sparse/ll_mat.pyx":1275
+  /* "cysparse/sparse/ll_mat.pyx":1291
  *         Input arguments are **not** tested.
  *     """
  *     p_vec = kwargs.pop('P', None)             # <<<<<<<<<<<<<<
  * 
  *     if kwargs.get('store_symmetric', False):
  */
-  __pyx_tuple__154 = PyTuple_Pack(2, __pyx_n_s_P, Py_None); if (unlikely(!__pyx_tuple__154)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1275; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__154 = PyTuple_Pack(2, __pyx_n_s_P, Py_None); if (unlikely(!__pyx_tuple__154)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1291; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__154);
   __Pyx_GIVEREF(__pyx_tuple__154);
 
-  /* "cysparse/sparse/ll_mat.pyx":1278
+  /* "cysparse/sparse/ll_mat.pyx":1294
  * 
  *     if kwargs.get('store_symmetric', False):
  *         raise NotImplementedError('This type of matrix is not implemented for symmetric matrices')             # <<<<<<<<<<<<<<
  * 
  *     ll_mat = LLSparseMatrix(**kwargs)
  */
-  __pyx_tuple__155 = PyTuple_Pack(1, __pyx_kp_s_This_type_of_matrix_is_not_imple); if (unlikely(!__pyx_tuple__155)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1278; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__155 = PyTuple_Pack(1, __pyx_kp_s_This_type_of_matrix_is_not_imple); if (unlikely(!__pyx_tuple__155)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1294; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__155);
   __Pyx_GIVEREF(__pyx_tuple__155);
 
-  /* "cysparse/sparse/ll_mat.pyx":1368
+  /* "cysparse/sparse/ll_mat.pyx":1384
  * 
  *     else:
  *         raise TypeError('itype not recognized')             # <<<<<<<<<<<<<<
  */
-  __pyx_tuple__156 = PyTuple_Pack(1, __pyx_kp_s_itype_not_recognized); if (unlikely(!__pyx_tuple__156)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1368; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__156 = PyTuple_Pack(1, __pyx_kp_s_itype_not_recognized); if (unlikely(!__pyx_tuple__156)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1384; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__156);
   __Pyx_GIVEREF(__pyx_tuple__156);
 
@@ -62244,65 +62244,65 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__184);
   __pyx_codeobj__185 = (PyObject*)__Pyx_PyCode_New(0, 0, 5, 0, CO_VARKEYWORDS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__184, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_nikolaj_Documents_WORK_Dom, __pyx_n_s_ArrowheadLLSparseMatrix, 794, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__185)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 794; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "cysparse/sparse/ll_mat.pyx":908
+  /* "cysparse/sparse/ll_mat.pyx":924
  * 
  * 
  * def DiagonalLLSparseMatrix(**kwargs):             # <<<<<<<<<<<<<<
  *     """
  *     See ``MakeDiagonalLLSparseMatrix``.
  */
-  __pyx_tuple__186 = PyTuple_Pack(5, __pyx_n_s_kwargs, __pyx_n_s_element, __pyx_n_s_ll_mat, __pyx_n_s_itype, __pyx_n_s_dtype); if (unlikely(!__pyx_tuple__186)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 908; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__186 = PyTuple_Pack(5, __pyx_n_s_kwargs, __pyx_n_s_element, __pyx_n_s_ll_mat, __pyx_n_s_itype, __pyx_n_s_dtype); if (unlikely(!__pyx_tuple__186)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 924; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__186);
   __Pyx_GIVEREF(__pyx_tuple__186);
-  __pyx_codeobj__187 = (PyObject*)__Pyx_PyCode_New(0, 0, 5, 0, CO_VARKEYWORDS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__186, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_nikolaj_Documents_WORK_Dom, __pyx_n_s_DiagonalLLSparseMatrix, 908, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__187)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 908; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__187 = (PyObject*)__Pyx_PyCode_New(0, 0, 5, 0, CO_VARKEYWORDS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__186, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_nikolaj_Documents_WORK_Dom, __pyx_n_s_DiagonalLLSparseMatrix, 924, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__187)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 924; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "cysparse/sparse/ll_mat.pyx":1022
+  /* "cysparse/sparse/ll_mat.pyx":1038
  * 
  * # alias
  * def IdentityLLSparseMatrix(**kwargs):             # <<<<<<<<<<<<<<
  *     element = kwargs.pop('element', None)
  *     return DiagonalLLSparseMatrix(**kwargs)
  */
-  __pyx_tuple__188 = PyTuple_Pack(2, __pyx_n_s_kwargs, __pyx_n_s_element); if (unlikely(!__pyx_tuple__188)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1022; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__188 = PyTuple_Pack(2, __pyx_n_s_kwargs, __pyx_n_s_element); if (unlikely(!__pyx_tuple__188)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1038; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__188);
   __Pyx_GIVEREF(__pyx_tuple__188);
-  __pyx_codeobj__189 = (PyObject*)__Pyx_PyCode_New(0, 0, 2, 0, CO_VARKEYWORDS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__188, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_nikolaj_Documents_WORK_Dom, __pyx_n_s_IdentityLLSparseMatrix, 1022, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__189)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1022; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__189 = (PyObject*)__Pyx_PyCode_New(0, 0, 2, 0, CO_VARKEYWORDS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__188, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_nikolaj_Documents_WORK_Dom, __pyx_n_s_IdentityLLSparseMatrix, 1038, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__189)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1038; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "cysparse/sparse/ll_mat.pyx":1027
+  /* "cysparse/sparse/ll_mat.pyx":1043
  * 
  * 
  * def BandLLSparseMatrix(**kwargs):             # <<<<<<<<<<<<<<
  *     """
  *     See ``MakeBandLLSparseMatrix_INT32_t_INT32_t``.
  */
-  __pyx_tuple__190 = PyTuple_Pack(6, __pyx_n_s_kwargs, __pyx_n_s_diag_coeff, __pyx_n_s_numpy_arrays, __pyx_n_s_ll_mat, __pyx_n_s_itype, __pyx_n_s_dtype); if (unlikely(!__pyx_tuple__190)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1027; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__190 = PyTuple_Pack(6, __pyx_n_s_kwargs, __pyx_n_s_diag_coeff, __pyx_n_s_numpy_arrays, __pyx_n_s_ll_mat, __pyx_n_s_itype, __pyx_n_s_dtype); if (unlikely(!__pyx_tuple__190)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1043; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__190);
   __Pyx_GIVEREF(__pyx_tuple__190);
-  __pyx_codeobj__191 = (PyObject*)__Pyx_PyCode_New(0, 0, 6, 0, CO_VARKEYWORDS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__190, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_nikolaj_Documents_WORK_Dom, __pyx_n_s_BandLLSparseMatrix, 1027, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__191)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1027; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__191 = (PyObject*)__Pyx_PyCode_New(0, 0, 6, 0, CO_VARKEYWORDS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__190, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_nikolaj_Documents_WORK_Dom, __pyx_n_s_BandLLSparseMatrix, 1043, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__191)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1043; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "cysparse/sparse/ll_mat.pyx":1133
+  /* "cysparse/sparse/ll_mat.pyx":1149
  *         raise TypeError('itype not recognized')
  * 
  * def LinearFillLLSparseMatrix(**kwargs):             # <<<<<<<<<<<<<<
  *     """
  *     See ``MakeLinearFillLLSparseMatrix``.
  */
-  __pyx_tuple__192 = PyTuple_Pack(10, __pyx_n_s_kwargs, __pyx_n_s_first_element, __pyx_n_s_step, __pyx_n_s_row_wise, __pyx_n_s_size, __pyx_n_s_nrow, __pyx_n_s_ncol, __pyx_n_s_ll_mat, __pyx_n_s_itype, __pyx_n_s_dtype); if (unlikely(!__pyx_tuple__192)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1133; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__192 = PyTuple_Pack(10, __pyx_n_s_kwargs, __pyx_n_s_first_element, __pyx_n_s_step, __pyx_n_s_row_wise, __pyx_n_s_size, __pyx_n_s_nrow, __pyx_n_s_ncol, __pyx_n_s_ll_mat, __pyx_n_s_itype, __pyx_n_s_dtype); if (unlikely(!__pyx_tuple__192)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1149; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__192);
   __Pyx_GIVEREF(__pyx_tuple__192);
-  __pyx_codeobj__193 = (PyObject*)__Pyx_PyCode_New(0, 0, 10, 0, CO_VARKEYWORDS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__192, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_nikolaj_Documents_WORK_Dom, __pyx_n_s_LinearFillLLSparseMatrix, 1133, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__193)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1133; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__193 = (PyObject*)__Pyx_PyCode_New(0, 0, 10, 0, CO_VARKEYWORDS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__192, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_nikolaj_Documents_WORK_Dom, __pyx_n_s_LinearFillLLSparseMatrix, 1149, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__193)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1149; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "cysparse/sparse/ll_mat.pyx":1268
+  /* "cysparse/sparse/ll_mat.pyx":1284
  *         raise TypeError('itype not recognized')
  * 
  * def PermutationLLSparseMatrix(**kwargs):             # <<<<<<<<<<<<<<
  *     """
  *     See ``MakePermutationLLSparseMatrix``.
  */
-  __pyx_tuple__194 = PyTuple_Pack(5, __pyx_n_s_kwargs, __pyx_n_s_p_vec, __pyx_n_s_ll_mat, __pyx_n_s_itype, __pyx_n_s_dtype); if (unlikely(!__pyx_tuple__194)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1268; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__194 = PyTuple_Pack(5, __pyx_n_s_kwargs, __pyx_n_s_p_vec, __pyx_n_s_ll_mat, __pyx_n_s_itype, __pyx_n_s_dtype); if (unlikely(!__pyx_tuple__194)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1284; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__194);
   __Pyx_GIVEREF(__pyx_tuple__194);
-  __pyx_codeobj__195 = (PyObject*)__Pyx_PyCode_New(0, 0, 5, 0, CO_VARKEYWORDS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__194, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_nikolaj_Documents_WORK_Dom, __pyx_n_s_PermutationLLSparseMatrix, 1268, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__195)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1268; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__195 = (PyObject*)__Pyx_PyCode_New(0, 0, 5, 0, CO_VARKEYWORDS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__194, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_nikolaj_Documents_WORK_Dom, __pyx_n_s_PermutationLLSparseMatrix, 1284, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__195)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1284; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -62986,64 +62986,64 @@ PyMODINIT_FUNC PyInit_ll_mat(void)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_ArrowheadLLSparseMatrix, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 794; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "cysparse/sparse/ll_mat.pyx":908
+  /* "cysparse/sparse/ll_mat.pyx":924
  * 
  * 
  * def DiagonalLLSparseMatrix(**kwargs):             # <<<<<<<<<<<<<<
  *     """
  *     See ``MakeDiagonalLLSparseMatrix``.
  */
-  __pyx_t_5 = PyCFunction_NewEx(&__pyx_mdef_8cysparse_6sparse_6ll_mat_23DiagonalLLSparseMatrix, NULL, __pyx_n_s_cysparse_sparse_ll_mat); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 908; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = PyCFunction_NewEx(&__pyx_mdef_8cysparse_6sparse_6ll_mat_23DiagonalLLSparseMatrix, NULL, __pyx_n_s_cysparse_sparse_ll_mat); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 924; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_DiagonalLLSparseMatrix, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 908; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_DiagonalLLSparseMatrix, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 924; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "cysparse/sparse/ll_mat.pyx":1022
+  /* "cysparse/sparse/ll_mat.pyx":1038
  * 
  * # alias
  * def IdentityLLSparseMatrix(**kwargs):             # <<<<<<<<<<<<<<
  *     element = kwargs.pop('element', None)
  *     return DiagonalLLSparseMatrix(**kwargs)
  */
-  __pyx_t_5 = PyCFunction_NewEx(&__pyx_mdef_8cysparse_6sparse_6ll_mat_25IdentityLLSparseMatrix, NULL, __pyx_n_s_cysparse_sparse_ll_mat); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1022; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = PyCFunction_NewEx(&__pyx_mdef_8cysparse_6sparse_6ll_mat_25IdentityLLSparseMatrix, NULL, __pyx_n_s_cysparse_sparse_ll_mat); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1038; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_IdentityLLSparseMatrix, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1022; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_IdentityLLSparseMatrix, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1038; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "cysparse/sparse/ll_mat.pyx":1027
+  /* "cysparse/sparse/ll_mat.pyx":1043
  * 
  * 
  * def BandLLSparseMatrix(**kwargs):             # <<<<<<<<<<<<<<
  *     """
  *     See ``MakeBandLLSparseMatrix_INT32_t_INT32_t``.
  */
-  __pyx_t_5 = PyCFunction_NewEx(&__pyx_mdef_8cysparse_6sparse_6ll_mat_27BandLLSparseMatrix, NULL, __pyx_n_s_cysparse_sparse_ll_mat); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1027; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = PyCFunction_NewEx(&__pyx_mdef_8cysparse_6sparse_6ll_mat_27BandLLSparseMatrix, NULL, __pyx_n_s_cysparse_sparse_ll_mat); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1043; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_BandLLSparseMatrix, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1027; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_BandLLSparseMatrix, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1043; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "cysparse/sparse/ll_mat.pyx":1133
+  /* "cysparse/sparse/ll_mat.pyx":1149
  *         raise TypeError('itype not recognized')
  * 
  * def LinearFillLLSparseMatrix(**kwargs):             # <<<<<<<<<<<<<<
  *     """
  *     See ``MakeLinearFillLLSparseMatrix``.
  */
-  __pyx_t_5 = PyCFunction_NewEx(&__pyx_mdef_8cysparse_6sparse_6ll_mat_29LinearFillLLSparseMatrix, NULL, __pyx_n_s_cysparse_sparse_ll_mat); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1133; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = PyCFunction_NewEx(&__pyx_mdef_8cysparse_6sparse_6ll_mat_29LinearFillLLSparseMatrix, NULL, __pyx_n_s_cysparse_sparse_ll_mat); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1149; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_LinearFillLLSparseMatrix, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1133; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_LinearFillLLSparseMatrix, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1149; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "cysparse/sparse/ll_mat.pyx":1268
+  /* "cysparse/sparse/ll_mat.pyx":1284
  *         raise TypeError('itype not recognized')
  * 
  * def PermutationLLSparseMatrix(**kwargs):             # <<<<<<<<<<<<<<
  *     """
  *     See ``MakePermutationLLSparseMatrix``.
  */
-  __pyx_t_5 = PyCFunction_NewEx(&__pyx_mdef_8cysparse_6sparse_6ll_mat_31PermutationLLSparseMatrix, NULL, __pyx_n_s_cysparse_sparse_ll_mat); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1268; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = PyCFunction_NewEx(&__pyx_mdef_8cysparse_6sparse_6ll_mat_31PermutationLLSparseMatrix, NULL, __pyx_n_s_cysparse_sparse_ll_mat); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1284; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_PermutationLLSparseMatrix, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1268; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_PermutationLLSparseMatrix, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 1284; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
   /* "cysparse/sparse/ll_mat.pyx":2
