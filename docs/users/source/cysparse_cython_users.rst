@@ -15,7 +15,7 @@ To compile and link your project with :program:`CySparse`, simply download the c
 Creation of matrices
 ====================
 
-Matrices cannot be instantiated directly in :program:`Python` (see :ref:`matrices_must_be_instantiated_by_a_factory_method`). In :program:`Cython`, the factory methods
+Matrices cannot be instantiated directly in :program:`Python` (see :ref:`matrix_creation`). In :program:`Cython`, the factory methods
 can be used **except** if this creates a *circular dependencies* between these methods. One solution is to simply invoke
 the protection mechanism for the creation of classes yourself:
 

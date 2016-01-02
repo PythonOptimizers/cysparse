@@ -21,6 +21,7 @@
    multiplication_with_numpy_vector
    multiplication_with_matrix
    io_formats
+   cysparse_vs_other_libraries	
    cysparse_cython_users
    cysparse_api
    
