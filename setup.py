@@ -1019,7 +1019,8 @@ sparse_ext = [
   Extension(name="cysparse.sparse.operator_proxies.mul_proxy",
             sources=["cysparse/sparse/operator_proxies/mul_proxy.pxd",
                      "cysparse/sparse/operator_proxies/mul_proxy.pyx"],
-            **sparse_ext_params),  
+            **sparse_ext_params),
+
 ]
 
 #-----------------------------------------------------------------------------------------------------------------------

@@ -664,6 +664,10 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX128_t(MutableSparseMatrix_INT32_t_COMPL
     ####################################################################################################################
     # Matrix conversions
     ####################################################################################################################
+    def to_ll(self):
+        # TODO: allow change of dtype and itype?
+        return self
+
     def to_csr(self):
         """
         Create a corresponding CSRSparseMatrix.

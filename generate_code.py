@@ -436,7 +436,7 @@ if __name__ == "__main__":
     cygenja_engine.register_action('cysparse/sparse/ll_mat_views', '*.*', generate_following_index_and_element)
     # S MAT
     cygenja_engine.register_action('cysparse/sparse/s_mat_matrices', '*.*', generate_following_index_and_element)
-    # Proxies
+    # Sparse matrix Proxies
     cygenja_engine.register_action('cysparse/sparse/sparse_proxies', '*.*', single_generation)
     cygenja_engine.register_action('cysparse/sparse/sparse_proxies/complex_generic', '*.*', generate_following_index_and_complex_element)
     # Sparse utils

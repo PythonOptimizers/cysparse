@@ -738,6 +738,7 @@ struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy {
   struct __pyx_vtabstruct_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *__pyx_vtab;
   int nrow;
   int ncol;
+  int nnz;
   PyObject *left_operand;
   PyObject *right_operand;
   PyObject *dtype;
@@ -750,11 +751,11 @@ struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy {
  * 
  * cdef class SumProxy(OpProxy):             # <<<<<<<<<<<<<<
  *     cdef:
- *         bint real_sum
+ *         public bint __real_sum
  */
 struct __pyx_obj_8cysparse_6sparse_16operator_proxies_9sum_proxy_SumProxy {
   struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy __pyx_base;
-  int real_sum;
+  int __real_sum;
 };
 
 
@@ -789,7 +790,7 @@ static struct __pyx_vtabstruct_8cysparse_6sparse_16operator_proxies_8op_proxy_Op
  * 
  * cdef class SumProxy(OpProxy):             # <<<<<<<<<<<<<<
  *     cdef:
- *         bint real_sum
+ *         public bint __real_sum
  */
 
 struct __pyx_vtabstruct_8cysparse_6sparse_16operator_proxies_9sum_proxy_SumProxy {

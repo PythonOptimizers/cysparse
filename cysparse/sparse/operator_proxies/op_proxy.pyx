@@ -1,4 +1,6 @@
 from cysparse.sparse.s_mat cimport PySparseMatrix_Check
+from cysparse.sparse.ll_mat import LLSparseMatrix
+
 
 cdef class OpProxy:
     def __cinit__(self, left_operand, right_operand, *args, **kwargs):
@@ -15,6 +17,7 @@ cdef class OpProxy:
 
         self.nrow = self.left_operand.nrow
         self.ncol = self.right_operand.ncol
+        self.nnz = self.left_operand.nnz
 
         self.dtype = self.left_operand.dtype
         self.itype = self.left_operand.itype
@@ -56,10 +59,16 @@ cdef class OpProxy:
         raise NotImplementedError()
 
     def to_ll(self):
-        raise NotImplementedError()
-    
+        A = LLSparseMatrix(nrow=self.nrow, ncol=self.ncol, dtype=self.dtype, itype=self.itype, store_zero=False, size_hint=self.left_operand.nnz)
+        for i in xrange(self.nrow):
+            for j in xrange(self.ncol):
+                A[i, j] = self[i, j]
+
+        return A
+
     def to_csr(self):
-        raise NotImplementedError()
+        raise NotImplementedError("Transform first to a LLSparseMatrix and than call 'to_csr()'")
 
     def to_csc(self):
-        raise NotImplementedError()
+        raise NotImplementedError("Transform first to a LLSparseMatrix and than call 'to_csr()'")
+

@@ -56,3 +56,4 @@ cdef class SumProxy(OpProxy):
                 return self.left_operand * other - self.right_operand * other
         else:
             return MulProxy(self, other)
+

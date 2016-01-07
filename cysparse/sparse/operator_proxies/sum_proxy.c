@@ -739,6 +739,7 @@ struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy {
   struct __pyx_vtabstruct_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *__pyx_vtab;
   int nrow;
   int ncol;
+  int nnz;
   PyObject *left_operand;
   PyObject *right_operand;
   PyObject *dtype;
@@ -2085,6 +2086,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16operator_proxies_9sum_proxy_8SumPr
  *                 return self.left_operand * other - self.right_operand * other
  *         else:
  *             return MulProxy(self, other)             # <<<<<<<<<<<<<<
+ * 
  */
   /*else*/ {
     __Pyx_XDECREF(__pyx_r);

@@ -618,6 +618,10 @@ cdef class LLSparseMatrix_INT64_t_FLOAT32_t(MutableSparseMatrix_INT64_t_FLOAT32_
     ####################################################################################################################
     # Matrix conversions
     ####################################################################################################################
+    def to_ll(self):
+        # TODO: allow change of dtype and itype?
+        return self
+
     def to_csr(self):
         """
         Create a corresponding CSRSparseMatrix.

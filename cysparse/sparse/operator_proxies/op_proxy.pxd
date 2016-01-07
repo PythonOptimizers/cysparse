@@ -5,6 +5,7 @@ cdef class OpProxy:
     cdef:
         public int nrow
         public int ncol
+        public int nnz
 
         public object left_operand
         public object right_operand

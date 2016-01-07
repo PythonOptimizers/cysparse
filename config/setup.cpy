@@ -293,6 +293,7 @@ sparse_ext = [
             sources=["cysparse/sparse/operator_proxies/mul_proxy.pxd",
                      "cysparse/sparse/operator_proxies/mul_proxy.pyx"],
             **sparse_ext_params),
+
 ]
 
 #-----------------------------------------------------------------------------------------------------------------------

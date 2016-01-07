@@ -677,6 +677,10 @@ YOU HAVE TO DEFINE OR CAST YOUR NEW UNRECOGNIZED COMPLEX TYPE
     ####################################################################################################################
     # Matrix conversions
     ####################################################################################################################
+    def to_ll(self):
+        # TODO: allow change of dtype and itype?
+        return self
+
     def to_csr(self):
         """
         Create a corresponding CSRSparseMatrix.
