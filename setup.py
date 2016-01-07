@@ -15,7 +15,7 @@ from distutils.extension import Extension
 
 import numpy as np
 
-import configparser 
+import configparser
 import os
 import copy
 
@@ -76,10 +76,6 @@ if use_cython:
 
 # Debug mode?
 use_debug_symbols = cysparse_config.getboolean('CODE_GENERATION', 'use_debug_symbols')
-
-# DEFAULT
-default_include_dir = get_path_option(cysparse_config, 'DEFAULT', 'include_dirs')
-default_library_dir = get_path_option(cysparse_config, 'DEFAULT', 'library_dirs')
 
 ########################################################################################################################
 # EXTENSIONS
@@ -1000,6 +996,30 @@ sparse_ext = [
             **sparse_ext_params),
   
 
+
+  ######################
+  # ### OpProxy ###
+  ######################
+  Extension(name="cysparse.sparse.operator_proxies.op_proxy",
+            sources=["cysparse/sparse/operator_proxies/op_proxy.pxd",
+                     "cysparse/sparse/operator_proxies/op_proxy.pyx"],
+            **sparse_ext_params),
+
+  ######################
+  # ### SumProxy ###
+  ######################
+  Extension(name="cysparse.sparse.operator_proxies.sum_proxy",
+            sources=["cysparse/sparse/operator_proxies/sum_proxy.pxd",
+                     "cysparse/sparse/operator_proxies/sum_proxy.pyx"],
+            **sparse_ext_params),
+
+  ######################
+  # ### MulProxy ###
+  ######################
+  Extension(name="cysparse.sparse.operator_proxies.mul_proxy",
+            sources=["cysparse/sparse/operator_proxies/mul_proxy.pxd",
+                     "cysparse/sparse/operator_proxies/mul_proxy.pyx"],
+            **sparse_ext_params),  
 ]
 
 #-----------------------------------------------------------------------------------------------------------------------
@@ -1016,6 +1036,7 @@ packages_list = ['cysparse',
             'cysparse.common_types',
             'cysparse.sparse',
             'cysparse.sparse.sparse_proxies',
+            'cysparse.sparse.operator_proxies',
             'cysparse.sparse.sparse_proxies.complex_generic',
             'cysparse.sparse.sparse_utils',
             'cysparse.sparse.sparse_utils.generic',

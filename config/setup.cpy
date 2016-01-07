@@ -269,6 +269,30 @@ sparse_ext = [
             **sparse_ext_params),
   {% endfor %}
 {% endfor %}
+
+  ######################
+  # ### OpProxy ###
+  ######################
+  Extension(name="cysparse.sparse.operator_proxies.op_proxy",
+            sources=["cysparse/sparse/operator_proxies/op_proxy.pxd",
+                     "cysparse/sparse/operator_proxies/op_proxy.pyx"],
+            **sparse_ext_params),
+
+  ######################
+  # ### SumProxy ###
+  ######################
+  Extension(name="cysparse.sparse.operator_proxies.sum_proxy",
+            sources=["cysparse/sparse/operator_proxies/sum_proxy.pxd",
+                     "cysparse/sparse/operator_proxies/sum_proxy.pyx"],
+            **sparse_ext_params),
+
+  ######################
+  # ### MulProxy ###
+  ######################
+  Extension(name="cysparse.sparse.operator_proxies.mul_proxy",
+            sources=["cysparse/sparse/operator_proxies/mul_proxy.pxd",
+                     "cysparse/sparse/operator_proxies/mul_proxy.pyx"],
+            **sparse_ext_params),
 ]
 
 #-----------------------------------------------------------------------------------------------------------------------
@@ -285,6 +309,7 @@ packages_list = ['cysparse',
             'cysparse.common_types',
             'cysparse.sparse',
             'cysparse.sparse.sparse_proxies',
+            'cysparse.sparse.operator_proxies',
             'cysparse.sparse.sparse_proxies.complex_generic',
             'cysparse.sparse.sparse_utils',
             'cysparse.sparse.sparse_utils.generic',
