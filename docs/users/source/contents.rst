@@ -26,9 +26,11 @@
    cysparse_api
    
 
-Indices and Tables
-==================
+..	only:: html
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+	Indices and Tables
+	==================
+
+	* :ref:`genindex`
+	* :ref:`modindex`
+	* :ref:`search`
