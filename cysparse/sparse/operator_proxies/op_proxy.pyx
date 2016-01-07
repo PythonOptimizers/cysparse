@@ -55,6 +55,9 @@ cdef class OpProxy:
     def to_ndarray(self):
         raise NotImplementedError()
 
+    def to_ll(self):
+        raise NotImplementedError()
+    
     def to_csr(self):
         raise NotImplementedError()
 

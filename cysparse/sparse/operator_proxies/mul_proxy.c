@@ -731,7 +731,7 @@ typedef npy_cdouble __pyx_t_5numpy_complex_t;
  * 
  * cdef class OpProxy:             # <<<<<<<<<<<<<<
  *     cdef:
- *         int nrow
+ *         public int nrow
  */
 struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy {
   PyObject_HEAD
@@ -755,7 +755,6 @@ struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy {
 struct __pyx_obj_8cysparse_6sparse_16operator_proxies_9sum_proxy_SumProxy {
   struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy __pyx_base;
   int real_sum;
-  int nonexisting;
 };
 
 
@@ -763,8 +762,7 @@ struct __pyx_obj_8cysparse_6sparse_16operator_proxies_9sum_proxy_SumProxy {
  * 
  * 
  * cdef class MulProxy(OpProxy):             # <<<<<<<<<<<<<<
- * 
- *     cdef bint operands_are_compatible(self, left, right)
+ *     pass
  */
 struct __pyx_obj_8cysparse_6sparse_16operator_proxies_9mul_proxy_MulProxy {
   struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy __pyx_base;
@@ -777,7 +775,7 @@ struct __pyx_obj_8cysparse_6sparse_16operator_proxies_9mul_proxy_MulProxy {
  * 
  * cdef class OpProxy:             # <<<<<<<<<<<<<<
  *     cdef:
- *         int nrow
+ *         public int nrow
  */
 
 struct __pyx_vtabstruct_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy {
@@ -796,7 +794,6 @@ static struct __pyx_vtabstruct_8cysparse_6sparse_16operator_proxies_8op_proxy_Op
 
 struct __pyx_vtabstruct_8cysparse_6sparse_16operator_proxies_9sum_proxy_SumProxy {
   struct __pyx_vtabstruct_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy __pyx_base;
-  int (*operands_are_compatible)(struct __pyx_obj_8cysparse_6sparse_16operator_proxies_9sum_proxy_SumProxy *, PyObject *, PyObject *);
 };
 static struct __pyx_vtabstruct_8cysparse_6sparse_16operator_proxies_9sum_proxy_SumProxy *__pyx_vtabptr_8cysparse_6sparse_16operator_proxies_9sum_proxy_SumProxy;
 
@@ -806,12 +803,11 @@ static struct __pyx_vtabstruct_8cysparse_6sparse_16operator_proxies_9sum_proxy_S
  * 
  * cdef class MulProxy(OpProxy):             # <<<<<<<<<<<<<<
  *     def __cinit__(self, left_operand, right_operand):
- *         pass
+ *         assert left_operand.ncol == right_operand.nrow, \
  */
 
 struct __pyx_vtabstruct_8cysparse_6sparse_16operator_proxies_9mul_proxy_MulProxy {
   struct __pyx_vtabstruct_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy __pyx_base;
-  int (*operands_are_compatible)(struct __pyx_obj_8cysparse_6sparse_16operator_proxies_9mul_proxy_MulProxy *, PyObject *, PyObject *);
 };
 static struct __pyx_vtabstruct_8cysparse_6sparse_16operator_proxies_9mul_proxy_MulProxy *__pyx_vtabptr_8cysparse_6sparse_16operator_proxies_9mul_proxy_MulProxy;
 
@@ -904,13 +900,6 @@ static int __Pyx_ParseOptionalKeywords(PyObject *kwds, PyObject **argnames[],\
     PyObject *kwds2, PyObject *values[], Py_ssize_t num_pos_args,\
     const char* function_name);
 
-static CYTHON_INLINE void __Pyx_ErrRestore(PyObject *type, PyObject *value, PyObject *tb);
-static CYTHON_INLINE void __Pyx_ErrFetch(PyObject **type, PyObject **value, PyObject **tb);
-
-static void __Pyx_WriteUnraisable(const char *name, int clineno,
-                                  int lineno, const char *filename,
-                                  int full_traceback, int nogil);
-
 static CYTHON_INLINE int __Pyx_ArgTypeTest(PyObject *obj, PyTypeObject *type, int none_allowed,
     const char *name, int exact);
 
@@ -919,6 +908,9 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_Call(PyObject *func, PyObject *arg
 #else
 #define __Pyx_PyObject_Call(func, arg, kw) PyObject_Call(func, arg, kw)
 #endif
+
+static CYTHON_INLINE void __Pyx_ErrRestore(PyObject *type, PyObject *value, PyObject *tb);
+static CYTHON_INLINE void __Pyx_ErrFetch(PyObject **type, PyObject **value, PyObject **tb);
 
 static void __Pyx_Raise(PyObject *type, PyObject *value, PyObject *tb, PyObject *cause);
 
@@ -1129,7 +1121,6 @@ static PyTypeObject *__Pyx_ImportType(const char *module_name, const char *class
 
 static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 
-static int __pyx_f_8cysparse_6sparse_16operator_proxies_9mul_proxy_8MulProxy_operands_are_compatible(CYTHON_UNUSED struct __pyx_obj_8cysparse_6sparse_16operator_proxies_9mul_proxy_MulProxy *__pyx_v_self, PyObject *__pyx_v_left, PyObject *__pyx_v_right); /* proto*/
 
 /* Module declarations from 'cysparse.sparse.operator_proxies.op_proxy' */
 static PyTypeObject *__pyx_ptype_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy = 0;
@@ -1211,6 +1202,7 @@ static char __pyx_k_RuntimeError[] = "RuntimeError";
 static char __pyx_k_left_operand[] = "left_operand";
 static char __pyx_k_right_operand[] = "right_operand";
 static char __pyx_k_ndarray_is_not_C_contiguous[] = "ndarray is not C contiguous";
+static char __pyx_k_Dimensions_must_be_compatible_d[] = "Dimensions must be compatible [%d, %d] * [%d, %d]";
 static char __pyx_k_Index_tuple_must_be_of_length_2[] = "Index tuple must be of length 2 (not %d)";
 static char __pyx_k_unknown_dtype_code_in_numpy_pxd[] = "unknown dtype code in numpy.pxd (%d)";
 static char __pyx_k_Format_string_allocated_too_shor[] = "Format string allocated too short, see comment in numpy.pxd";
@@ -1218,6 +1210,7 @@ static char __pyx_k_Non_native_byte_order_not_suppor[] = "Non-native byte order 
 static char __pyx_k_Only_integers_are_accepted_as_in[] = "Only integers are accepted as indices for a Sum Proxy";
 static char __pyx_k_ndarray_is_not_Fortran_contiguou[] = "ndarray is not Fortran contiguous";
 static char __pyx_k_Format_string_allocated_too_shor_2[] = "Format string allocated too short.";
+static PyObject *__pyx_kp_s_Dimensions_must_be_compatible_d;
 static PyObject *__pyx_kp_u_Format_string_allocated_too_shor;
 static PyObject *__pyx_kp_u_Format_string_allocated_too_shor_2;
 static PyObject *__pyx_n_s_IndexError;
@@ -1240,7 +1233,7 @@ static PyObject *__pyx_n_s_right_operand;
 static PyObject *__pyx_n_s_test;
 static PyObject *__pyx_kp_u_unknown_dtype_code_in_numpy_pxd;
 static PyObject *__pyx_n_s_xrange;
-static int __pyx_pf_8cysparse_6sparse_16operator_proxies_9mul_proxy_8MulProxy___cinit__(CYTHON_UNUSED struct __pyx_obj_8cysparse_6sparse_16operator_proxies_9mul_proxy_MulProxy *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v_left_operand, CYTHON_UNUSED PyObject *__pyx_v_right_operand); /* proto */
+static int __pyx_pf_8cysparse_6sparse_16operator_proxies_9mul_proxy_8MulProxy___cinit__(CYTHON_UNUSED struct __pyx_obj_8cysparse_6sparse_16operator_proxies_9mul_proxy_MulProxy *__pyx_v_self, PyObject *__pyx_v_left_operand, PyObject *__pyx_v_right_operand); /* proto */
 static PyObject *__pyx_pf_8cysparse_6sparse_16operator_proxies_9mul_proxy_8MulProxy_2__getitem__(struct __pyx_obj_8cysparse_6sparse_16operator_proxies_9mul_proxy_MulProxy *__pyx_v_self, PyObject *__pyx_v_key); /* proto */
 static PyObject *__pyx_pf_8cysparse_6sparse_16operator_proxies_9mul_proxy_8MulProxy_4__add__(PyObject *__pyx_v_self, PyObject *__pyx_v_other); /* proto */
 static PyObject *__pyx_pf_8cysparse_6sparse_16operator_proxies_9mul_proxy_8MulProxy_6__sub__(PyObject *__pyx_v_self, PyObject *__pyx_v_other); /* proto */
@@ -1262,15 +1255,15 @@ static PyObject *__pyx_tuple__7;
  * 
  * cdef class MulProxy(OpProxy):
  *     def __cinit__(self, left_operand, right_operand):             # <<<<<<<<<<<<<<
- *         pass
- * 
+ *         assert left_operand.ncol == right_operand.nrow, \
+ *             "Dimensions must be compatible [%d, %d] * [%d, %d]" % \
  */
 
 /* Python wrapper */
 static int __pyx_pw_8cysparse_6sparse_16operator_proxies_9mul_proxy_8MulProxy_1__cinit__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
 static int __pyx_pw_8cysparse_6sparse_16operator_proxies_9mul_proxy_8MulProxy_1__cinit__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
-  CYTHON_UNUSED PyObject *__pyx_v_left_operand = 0;
-  CYTHON_UNUSED PyObject *__pyx_v_right_operand = 0;
+  PyObject *__pyx_v_left_operand = 0;
+  PyObject *__pyx_v_right_operand = 0;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -1327,71 +1320,106 @@ static int __pyx_pw_8cysparse_6sparse_16operator_proxies_9mul_proxy_8MulProxy_1_
   return __pyx_r;
 }
 
-static int __pyx_pf_8cysparse_6sparse_16operator_proxies_9mul_proxy_8MulProxy___cinit__(CYTHON_UNUSED struct __pyx_obj_8cysparse_6sparse_16operator_proxies_9mul_proxy_MulProxy *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v_left_operand, CYTHON_UNUSED PyObject *__pyx_v_right_operand) {
-  int __pyx_r;
-  __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("__cinit__", 0);
-
-  /* function exit code */
-  __pyx_r = 0;
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-/* "cysparse/sparse/operator_proxies/mul_proxy.pyx":20
- *     # Helper methods
- *     ####################################################################################################################
- *     cdef bint operands_are_compatible(self, left, right):             # <<<<<<<<<<<<<<
- *         return left.ncol == right.nrow
- * 
- */
-
-static int __pyx_f_8cysparse_6sparse_16operator_proxies_9mul_proxy_8MulProxy_operands_are_compatible(CYTHON_UNUSED struct __pyx_obj_8cysparse_6sparse_16operator_proxies_9mul_proxy_MulProxy *__pyx_v_self, PyObject *__pyx_v_left, PyObject *__pyx_v_right) {
+static int __pyx_pf_8cysparse_6sparse_16operator_proxies_9mul_proxy_8MulProxy___cinit__(CYTHON_UNUSED struct __pyx_obj_8cysparse_6sparse_16operator_proxies_9mul_proxy_MulProxy *__pyx_v_self, PyObject *__pyx_v_left_operand, PyObject *__pyx_v_right_operand) {
   int __pyx_r;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   PyObject *__pyx_t_2 = NULL;
   PyObject *__pyx_t_3 = NULL;
   int __pyx_t_4;
+  PyObject *__pyx_t_5 = NULL;
+  PyObject *__pyx_t_6 = NULL;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
-  __Pyx_RefNannySetupContext("operands_are_compatible", 0);
+  __Pyx_RefNannySetupContext("__cinit__", 0);
 
-  /* "cysparse/sparse/operator_proxies/mul_proxy.pyx":21
- *     ####################################################################################################################
- *     cdef bint operands_are_compatible(self, left, right):
- *         return left.ncol == right.nrow             # <<<<<<<<<<<<<<
+  /* "cysparse/sparse/operator_proxies/mul_proxy.pyx":15
+ * cdef class MulProxy(OpProxy):
+ *     def __cinit__(self, left_operand, right_operand):
+ *         assert left_operand.ncol == right_operand.nrow, \             # <<<<<<<<<<<<<<
+ *             "Dimensions must be compatible [%d, %d] * [%d, %d]" % \
+ *             (left_operand.nrow, left_operand.ncol, right_operand.nrow, right_operand.ncol)
+ */
+  #ifndef CYTHON_WITHOUT_ASSERTIONS
+  if (unlikely(!Py_OptimizeFlag)) {
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_left_operand, __pyx_n_s_ncol); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 15; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_right_operand, __pyx_n_s_nrow); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 15; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_2);
+    __pyx_t_3 = PyObject_RichCompare(__pyx_t_1, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 15; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 15; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    if (unlikely(!__pyx_t_4)) {
+
+      /* "cysparse/sparse/operator_proxies/mul_proxy.pyx":17
+ *         assert left_operand.ncol == right_operand.nrow, \
+ *             "Dimensions must be compatible [%d, %d] * [%d, %d]" % \
+ *             (left_operand.nrow, left_operand.ncol, right_operand.nrow, right_operand.ncol)             # <<<<<<<<<<<<<<
  * 
+ *     ####################################################################################################################
+ */
+      __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_left_operand, __pyx_n_s_nrow); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 17; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __Pyx_GOTREF(__pyx_t_3);
+      __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_left_operand, __pyx_n_s_ncol); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 17; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __Pyx_GOTREF(__pyx_t_2);
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_right_operand, __pyx_n_s_nrow); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 17; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __Pyx_GOTREF(__pyx_t_1);
+      __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_right_operand, __pyx_n_s_ncol); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 17; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __Pyx_GOTREF(__pyx_t_5);
+      __pyx_t_6 = PyTuple_New(4); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 17; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __Pyx_GOTREF(__pyx_t_6);
+      __Pyx_GIVEREF(__pyx_t_3);
+      PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_3);
+      __Pyx_GIVEREF(__pyx_t_2);
+      PyTuple_SET_ITEM(__pyx_t_6, 1, __pyx_t_2);
+      __Pyx_GIVEREF(__pyx_t_1);
+      PyTuple_SET_ITEM(__pyx_t_6, 2, __pyx_t_1);
+      __Pyx_GIVEREF(__pyx_t_5);
+      PyTuple_SET_ITEM(__pyx_t_6, 3, __pyx_t_5);
+      __pyx_t_3 = 0;
+      __pyx_t_2 = 0;
+      __pyx_t_1 = 0;
+      __pyx_t_5 = 0;
+
+      /* "cysparse/sparse/operator_proxies/mul_proxy.pyx":16
+ *     def __cinit__(self, left_operand, right_operand):
+ *         assert left_operand.ncol == right_operand.nrow, \
+ *             "Dimensions must be compatible [%d, %d] * [%d, %d]" % \             # <<<<<<<<<<<<<<
+ *             (left_operand.nrow, left_operand.ncol, right_operand.nrow, right_operand.ncol)
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_left, __pyx_n_s_ncol); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 21; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_right, __pyx_n_s_nrow); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 21; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyObject_RichCompare(__pyx_t_1, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 21; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely((__pyx_t_4 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 21; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_r = __pyx_t_4;
-  goto __pyx_L0;
+      __pyx_t_5 = __Pyx_PyString_Format(__pyx_kp_s_Dimensions_must_be_compatible_d, __pyx_t_6); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 16; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __Pyx_GOTREF(__pyx_t_5);
+      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+      PyErr_SetObject(PyExc_AssertionError, __pyx_t_5);
+      __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 15; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    }
+  }
+  #endif
 
-  /* "cysparse/sparse/operator_proxies/mul_proxy.pyx":20
- *     # Helper methods
- *     ####################################################################################################################
- *     cdef bint operands_are_compatible(self, left, right):             # <<<<<<<<<<<<<<
- *         return left.ncol == right.nrow
+  /* "cysparse/sparse/operator_proxies/mul_proxy.pyx":14
  * 
+ * cdef class MulProxy(OpProxy):
+ *     def __cinit__(self, left_operand, right_operand):             # <<<<<<<<<<<<<<
+ *         assert left_operand.ncol == right_operand.nrow, \
+ *             "Dimensions must be compatible [%d, %d] * [%d, %d]" % \
  */
 
   /* function exit code */
+  __pyx_r = 0;
+  goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
-  __Pyx_WriteUnraisable("cysparse.sparse.operator_proxies.mul_proxy.MulProxy.operands_are_compatible", __pyx_clineno, __pyx_lineno, __pyx_filename, 0, 0);
-  __pyx_r = 0;
+  __Pyx_XDECREF(__pyx_t_5);
+  __Pyx_XDECREF(__pyx_t_6);
+  __Pyx_AddTraceback("cysparse.sparse.operator_proxies.mul_proxy.MulProxy.__cinit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = -1;
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
@@ -4374,6 +4402,7 @@ static struct PyModuleDef __pyx_moduledef = {
 #endif
 
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
+  {&__pyx_kp_s_Dimensions_must_be_compatible_d, __pyx_k_Dimensions_must_be_compatible_d, sizeof(__pyx_k_Dimensions_must_be_compatible_d), 0, 0, 1, 0},
   {&__pyx_kp_u_Format_string_allocated_too_shor, __pyx_k_Format_string_allocated_too_shor, sizeof(__pyx_k_Format_string_allocated_too_shor), 0, 1, 0, 0},
   {&__pyx_kp_u_Format_string_allocated_too_shor_2, __pyx_k_Format_string_allocated_too_shor_2, sizeof(__pyx_k_Format_string_allocated_too_shor_2), 0, 1, 0, 0},
   {&__pyx_n_s_IndexError, __pyx_k_IndexError, sizeof(__pyx_k_IndexError), 0, 0, 1, 1},
@@ -4599,7 +4628,6 @@ PyMODINIT_FUNC PyInit_mul_proxy(void)
   __pyx_vtabptr_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy = (struct __pyx_vtabstruct_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy*)__Pyx_GetVtable(__pyx_ptype_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy->tp_dict); if (unlikely(!__pyx_vtabptr_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_vtabptr_8cysparse_6sparse_16operator_proxies_9mul_proxy_MulProxy = &__pyx_vtable_8cysparse_6sparse_16operator_proxies_9mul_proxy_MulProxy;
   __pyx_vtable_8cysparse_6sparse_16operator_proxies_9mul_proxy_MulProxy.__pyx_base = *__pyx_vtabptr_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy;
-  __pyx_vtable_8cysparse_6sparse_16operator_proxies_9mul_proxy_MulProxy.operands_are_compatible = (int (*)(struct __pyx_obj_8cysparse_6sparse_16operator_proxies_9mul_proxy_MulProxy *, PyObject *, PyObject *))__pyx_f_8cysparse_6sparse_16operator_proxies_9mul_proxy_8MulProxy_operands_are_compatible;
   __pyx_type_8cysparse_6sparse_16operator_proxies_9mul_proxy_MulProxy.tp_base = __pyx_ptype_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy;
   if (PyType_Ready(&__pyx_type_8cysparse_6sparse_16operator_proxies_9mul_proxy_MulProxy) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_type_8cysparse_6sparse_16operator_proxies_9mul_proxy_MulProxy.tp_print = 0;
@@ -4856,73 +4884,6 @@ bad:
     return -1;
 }
 
-static CYTHON_INLINE void __Pyx_ErrRestore(PyObject *type, PyObject *value, PyObject *tb) {
-#if CYTHON_COMPILING_IN_CPYTHON
-    PyObject *tmp_type, *tmp_value, *tmp_tb;
-    PyThreadState *tstate = PyThreadState_GET();
-    tmp_type = tstate->curexc_type;
-    tmp_value = tstate->curexc_value;
-    tmp_tb = tstate->curexc_traceback;
-    tstate->curexc_type = type;
-    tstate->curexc_value = value;
-    tstate->curexc_traceback = tb;
-    Py_XDECREF(tmp_type);
-    Py_XDECREF(tmp_value);
-    Py_XDECREF(tmp_tb);
-#else
-    PyErr_Restore(type, value, tb);
-#endif
-}
-static CYTHON_INLINE void __Pyx_ErrFetch(PyObject **type, PyObject **value, PyObject **tb) {
-#if CYTHON_COMPILING_IN_CPYTHON
-    PyThreadState *tstate = PyThreadState_GET();
-    *type = tstate->curexc_type;
-    *value = tstate->curexc_value;
-    *tb = tstate->curexc_traceback;
-    tstate->curexc_type = 0;
-    tstate->curexc_value = 0;
-    tstate->curexc_traceback = 0;
-#else
-    PyErr_Fetch(type, value, tb);
-#endif
-}
-
-static void __Pyx_WriteUnraisable(const char *name, CYTHON_UNUSED int clineno,
-                                  CYTHON_UNUSED int lineno, CYTHON_UNUSED const char *filename,
-                                  int full_traceback, CYTHON_UNUSED int nogil) {
-    PyObject *old_exc, *old_val, *old_tb;
-    PyObject *ctx;
-#ifdef WITH_THREAD
-    PyGILState_STATE state;
-    if (nogil)
-        state = PyGILState_Ensure();
-#endif
-    __Pyx_ErrFetch(&old_exc, &old_val, &old_tb);
-    if (full_traceback) {
-        Py_XINCREF(old_exc);
-        Py_XINCREF(old_val);
-        Py_XINCREF(old_tb);
-        __Pyx_ErrRestore(old_exc, old_val, old_tb);
-        PyErr_PrintEx(1);
-    }
-    #if PY_MAJOR_VERSION < 3
-    ctx = PyString_FromString(name);
-    #else
-    ctx = PyUnicode_FromString(name);
-    #endif
-    __Pyx_ErrRestore(old_exc, old_val, old_tb);
-    if (!ctx) {
-        PyErr_WriteUnraisable(Py_None);
-    } else {
-        PyErr_WriteUnraisable(ctx);
-        Py_DECREF(ctx);
-    }
-#ifdef WITH_THREAD
-    if (nogil)
-        PyGILState_Release(state);
-#endif
-}
-
 static void __Pyx_RaiseArgumentTypeInvalid(const char* name, PyObject *obj, PyTypeObject *type) {
     PyErr_Format(PyExc_TypeError,
         "Argument '%.200s' has incorrect type (expected %.200s, got %.200s)",
@@ -4967,6 +4928,37 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_Call(PyObject *func, PyObject *arg
     return result;
 }
 #endif
+
+static CYTHON_INLINE void __Pyx_ErrRestore(PyObject *type, PyObject *value, PyObject *tb) {
+#if CYTHON_COMPILING_IN_CPYTHON
+    PyObject *tmp_type, *tmp_value, *tmp_tb;
+    PyThreadState *tstate = PyThreadState_GET();
+    tmp_type = tstate->curexc_type;
+    tmp_value = tstate->curexc_value;
+    tmp_tb = tstate->curexc_traceback;
+    tstate->curexc_type = type;
+    tstate->curexc_value = value;
+    tstate->curexc_traceback = tb;
+    Py_XDECREF(tmp_type);
+    Py_XDECREF(tmp_value);
+    Py_XDECREF(tmp_tb);
+#else
+    PyErr_Restore(type, value, tb);
+#endif
+}
+static CYTHON_INLINE void __Pyx_ErrFetch(PyObject **type, PyObject **value, PyObject **tb) {
+#if CYTHON_COMPILING_IN_CPYTHON
+    PyThreadState *tstate = PyThreadState_GET();
+    *type = tstate->curexc_type;
+    *value = tstate->curexc_value;
+    *tb = tstate->curexc_traceback;
+    tstate->curexc_type = 0;
+    tstate->curexc_value = 0;
+    tstate->curexc_traceback = 0;
+#else
+    PyErr_Fetch(type, value, tb);
+#endif
+}
 
 #if PY_MAJOR_VERSION < 3
 static void __Pyx_Raise(PyObject *type, PyObject *value, PyObject *tb,

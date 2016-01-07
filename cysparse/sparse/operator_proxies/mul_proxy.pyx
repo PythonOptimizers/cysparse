@@ -12,13 +12,13 @@ cnp.import_array()
 
 cdef class MulProxy(OpProxy):
     def __cinit__(self, left_operand, right_operand):
-        pass
+        assert left_operand.ncol == right_operand.nrow, \
+            "Dimensions must be compatible [%d, %d] * [%d, %d]" % \
+            (left_operand.nrow, left_operand.ncol, right_operand.nrow, right_operand.ncol)
 
     ####################################################################################################################
     # Helper methods
     ####################################################################################################################
-    cdef bint operands_are_compatible(self, left, right):
-        return left.ncol == right.nrow
 
 
     ####################################################################################################################
