@@ -26,6 +26,9 @@ from cysparse.sparse.sparse_utils.generic.find_INT32_t_INT32_t cimport find_line
 
 from cysparse.sparse.sparse_utils.generic.print_INT32_t cimport element_to_string_INT32_t, conjugated_element_to_string_INT32_t, empty_to_string_INT32_t
 
+from cysparse.sparse.operator_proxies.mul_proxy import MulProxy
+from cysparse.sparse.operator_proxies.sum_proxy import SumProxy
+
 ########################################################################################################################
 # CySparse include
 ########################################################################################################################
@@ -2040,16 +2043,6 @@ cdef class LLSparseMatrix_INT32_t_INT32_t(MutableSparseMatrix_INT32_t_INT32_t):
         else:
             return multiply_transposed_ll_mat_with_self_scaled(self, d)
 
-    def __mul__(self, B):
-        """
-        Return :math:`A * B`.
-
-        """
-        if cnp.PyArray_Check(B) and B.ndim == 1:
-            return self.matvec(B)
-
-        return self.matdot(B)
-
     #def __rmul__(self, B):
 
     def __imul__(self, sigma):
@@ -2060,6 +2053,7 @@ cdef class LLSparseMatrix_INT32_t_INT32_t(MutableSparseMatrix_INT32_t_INT32_t):
         # TODO: test if sigma is scalar or not
         self.scale(sigma)
         return self
+
 
     ####################################################################################################################
     # Scaling

@@ -1,5 +1,6 @@
 
 # TODO: forbid direct creation of OpProxy?
+# This is not absolutely necessary as an OpProxy needs two matrices to be created.
 
 cdef class OpProxy:
     cdef:

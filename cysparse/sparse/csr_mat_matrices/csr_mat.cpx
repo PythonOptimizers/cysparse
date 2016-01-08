@@ -17,6 +17,7 @@ from cysparse.sparse.sparse_utils.generic.sort_indices_@index@ cimport sort_arra
 from cysparse.sparse.sparse_utils.generic.print_@type@ cimport element_to_string_@type@, conjugated_element_to_string_@type@, empty_to_string_@type@
 from cysparse.sparse.sparse_utils.generic.matrix_translations_@index@_@type@ cimport csr_to_csc_kernel_@index@_@type@, csc_to_csr_kernel_@index@_@type@
 
+
 ########################################################################################################################
 # Cython, NumPy import/cimport
 ########################################################################################################################
@@ -792,14 +793,6 @@ YOU HAVE TO EXPLICITY CAST YOUR TYPE
 
     def matdot_transp(self, B):
         raise NotImplementedError("matdot_transp not implemented for CSR matrices")
-
-    def __mul__(self, B):
-
-        if cnp.PyArray_Check(B) and B.ndim == 1:
-            return self.matvec(B)
-
-        return self.matdot(B)
-
 
     ####################################################################################################################
     # String representations

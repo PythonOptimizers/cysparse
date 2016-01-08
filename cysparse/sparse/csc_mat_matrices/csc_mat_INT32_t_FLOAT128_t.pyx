@@ -835,15 +835,6 @@ cdef class CSCSparseMatrix_INT32_t_FLOAT128_t(ImmutableSparseMatrix_INT32_t_FLOA
     def matdot_transp(self, B):
         raise NotImplementedError("matdot_transp is not implemented for CSC matrices")
 
-    def __mul__(self, B):
-        """
-        Return :math:`A * B`.
-
-        """
-        if cnp.PyArray_Check(B) and B.ndim == 1:
-            return self.matvec(B)
-
-        return self.matdot(B)
 
     ####################################################################################################################
     # String representations
