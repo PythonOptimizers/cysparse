@@ -552,6 +552,23 @@ def ArrowheadLLSparseMatrix(**kwargs):
     if kwargs.get('store_symmetric', False):
         raise NotImplementedError('This type of matrix is not implemented for symmetric matrices')
 
+    # DOES NOT WORK... why?
+{#    # TODO: remove this hack#}
+{#    # we overwrite 'size_hint' without any check...#}
+{#    # compute number of nnz#}
+{#    nrow = -1#}
+{#    ncol = -1#}
+{#    size = kwargs.get('size', None)#}
+{#    if size is None:#}
+{#        nrow = kwargs.get('nrow', None)#}
+{#        ncol = kwargs.get('ncol', None)#}
+{#    else:#}
+{#        nrow = ncol = size#}
+{##}
+{#    size_hint = ncol + nrow - 1 + min(nrow, ncol) - 1#}
+{##}
+{#    kwargs['size_hint'] = size_hint#}
+
     ll_mat = LLSparseMatrix(**kwargs)
 
     itype = ll_mat.itype

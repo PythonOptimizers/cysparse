@@ -803,6 +803,23 @@ def ArrowheadLLSparseMatrix(**kwargs):
     if kwargs.get('store_symmetric', False):
         raise NotImplementedError('This type of matrix is not implemented for symmetric matrices')
 
+    # DOES NOT WORK... why?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     ll_mat = LLSparseMatrix(**kwargs)
 
     itype = ll_mat.itype

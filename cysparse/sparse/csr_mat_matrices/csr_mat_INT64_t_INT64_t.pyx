@@ -17,6 +17,7 @@ from cysparse.sparse.sparse_utils.generic.sort_indices_INT64_t cimport sort_arra
 from cysparse.sparse.sparse_utils.generic.print_INT64_t cimport element_to_string_INT64_t, conjugated_element_to_string_INT64_t, empty_to_string_INT64_t
 from cysparse.sparse.sparse_utils.generic.matrix_translations_INT64_t_INT64_t cimport csr_to_csc_kernel_INT64_t_INT64_t, csc_to_csr_kernel_INT64_t_INT64_t
 
+
 ########################################################################################################################
 # Cython, NumPy import/cimport
 ########################################################################################################################
@@ -769,18 +770,15 @@ cdef class CSRSparseMatrix_INT64_t_INT64_t(ImmutableSparseMatrix_INT64_t_INT64_t
 
 
     def matdot(self, B):
-        raise NotImplementedError("matdot not implemented for CSR matrices")
+
+        # CASES
+        if isinstance(B, CSCSparseMatrix_INT64_t_INT64_t):
+            return multiply_csr_mat_by_csc_mat_INT64_t_INT64_t(self, B)
+        else:
+            raise NotImplemented("Multiplication not (yet) allowed")
 
     def matdot_transp(self, B):
         raise NotImplementedError("matdot_transp not implemented for CSR matrices")
-
-    def __mul__(self, B):
-
-        if cnp.PyArray_Check(B) and B.ndim == 1:
-            return self.matvec(B)
-
-        return self.matdot(B)
-
 
     ####################################################################################################################
     # String representations

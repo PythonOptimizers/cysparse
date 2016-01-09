@@ -43,7 +43,7 @@ The following has been optimized:
 - each operation is done at :program:`C` level;
 - no factor is copied in any way: we work on the raw :program:`C` arrays;
 - strided vectors have special dedicated code;
-- we used the best loops to compute the multiplication for each type of matrix;
+- we use (what we think are) the best loops to compute the multiplication for each type of matrix;
 
 Helpers
 ========

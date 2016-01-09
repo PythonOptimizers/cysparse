@@ -829,21 +829,13 @@ cdef class CSCSparseMatrix_INT32_t_COMPLEX64_t(ImmutableSparseMatrix_INT32_t_COM
         return multiply_conjugated_csc_mat_with_numpy_vector_INT32_t_COMPLEX64_t(self, b)
 
 
-    def matdot(self, B):
-        raise NotImplementedError("matdot is not implemented for CSC matrices")
+    #def matdot(self, B):
+    #    # TODO: reintroduce the exception
+    #    raise NotImplementedError("matdot is not implemented for CSC matrices")
 
     def matdot_transp(self, B):
         raise NotImplementedError("matdot_transp is not implemented for CSC matrices")
 
-    def __mul__(self, B):
-        """
-        Return :math:`A * B`.
-
-        """
-        if cnp.PyArray_Check(B) and B.ndim == 1:
-            return self.matvec(B)
-
-        return self.matdot(B)
 
     ####################################################################################################################
     # String representations

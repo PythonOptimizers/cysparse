@@ -1,10 +1,20 @@
 from cysparse.common_types.cysparse_types cimport *
 from cysparse.common_types.cysparse_types import *
 
+from cysparse.sparse.operator_proxies.mul_proxy import MulProxy
+from cysparse.sparse.operator_proxies.sum_proxy import SumProxy
+
+# Import the C-level symbols of numpy
+cimport numpy as cnp
+
+cnp.import_array()
+
 cdef INT32_t MUTABLE_SPARSE_MAT_DEFAULT_SIZE_HINT = 40        # allocated size by default
 
 unexposed_value = object()
 
+# TODO: remove next import
+import numpy as np
 
 cdef __set_store_zero_attribute(SparseMatrix A, bint store_zero):
     """
@@ -108,6 +118,39 @@ cpdef bint PyCSRSparseMatrix_Check(object obj):
         is_csr_sparse_matrix = obj.base_type_str == 'CSRSparseMatrix'
 
     return is_csr_sparse_matrix
+
+
+cpdef bint PyTransposedSparseMatrix_Check(object obj):
+    """
+    Test if ``obj`` is a :class:`TransposedSparseMatrix`
+
+    """
+    return obj.base_type_str.startswith('Transposed of ')
+
+
+cpdef bint PyConjugatedSparseMatrix_Check(object obj):
+    """
+    Test if ``obj`` is a :class:`ConjugatedSparseMatrix`
+
+    """
+    return obj.base_type_str.startswith('Conjugated of ')
+
+
+cpdef bint PyConjugateTransposedSparseMatrix_Check(object obj):
+    """
+    Test if ``obj`` is a :class:`ConjugateTransposedSparseMatrix`
+
+    """
+    return obj.base_type_str.startswith('Conjugate Transposed of ')
+
+
+cpdef bint PyLLSparseMatrixView_Check(object obj):
+    """
+    Test if ``obj`` is a :class:`LLSparseMatrixView`
+
+    """
+    return obj.base_type_str == 'LLSparseMatrixView'
+
 
 ########################################################################################################################
 # BASE MATRIX CLASS
@@ -297,6 +340,11 @@ cdef class SparseMatrix:
             B:
 
         """
+        # TODO: erase this
+        # This is really temporary to allow to test some solvers
+
+        #return np.dot(self.to_ndarray(), B.to_ndarray())
+
         raise NotImplementedError("Operation not implemented (yet). Please report.")
 
     def matdot_transp(self, B):
@@ -328,6 +376,30 @@ cdef class SparseMatrix:
 
         """
         raise NotImplementedError("Operation not implemented (yet). Please report.")
+
+    def __mul__(self, B):
+        """
+        Return either a :program:`NumPy` vector or a :class:`MulProxy`.
+
+        Returns:
+            If ``B`` is a :program:`NumPy` vector, returns a :program:`NumPy` vector. If not, returns a :class:`MulProxy`,
+            i.e. a proxy to a matrix-like multiplication.
+
+        """
+        if cnp.PyArray_Check(B) and B.ndim == 1:
+            return self.matvec(B)
+
+        return MulProxy(self, B)
+
+    def __add__(self, B):
+        """
+        Return a :class:`SumProxy`.
+
+        Returns:
+            A :class:`SumProxy`, i.e. a proxy to a matrix-like sum.
+
+        """
+        return SumProxy(self, B)
 
     #########################
     # Internal arrays

@@ -26,6 +26,9 @@ from cysparse.sparse.sparse_utils.generic.find_INT64_t_INT64_t cimport find_line
 
 from cysparse.sparse.sparse_utils.generic.print_COMPLEX128_t cimport element_to_string_COMPLEX128_t, conjugated_element_to_string_COMPLEX128_t, empty_to_string_COMPLEX128_t
 
+from cysparse.sparse.operator_proxies.mul_proxy import MulProxy
+from cysparse.sparse.operator_proxies.sum_proxy import SumProxy
+
 ########################################################################################################################
 # CySparse include
 ########################################################################################################################
@@ -664,6 +667,10 @@ cdef class LLSparseMatrix_INT64_t_COMPLEX128_t(MutableSparseMatrix_INT64_t_COMPL
     ####################################################################################################################
     # Matrix conversions
     ####################################################################################################################
+    def to_ll(self):
+        # TODO: allow change of dtype and itype?
+        return self
+
     def to_csr(self):
         """
         Create a corresponding CSRSparseMatrix.
@@ -2098,16 +2105,6 @@ cdef class LLSparseMatrix_INT64_t_COMPLEX128_t(MutableSparseMatrix_INT64_t_COMPL
         else:
             return multiply_transposed_ll_mat_with_self_scaled(self, d)
 
-    def __mul__(self, B):
-        """
-        Return :math:`A * B`.
-
-        """
-        if cnp.PyArray_Check(B) and B.ndim == 1:
-            return self.matvec(B)
-
-        return self.matdot(B)
-
     #def __rmul__(self, B):
 
     def __imul__(self, sigma):
@@ -2118,6 +2115,7 @@ cdef class LLSparseMatrix_INT64_t_COMPLEX128_t(MutableSparseMatrix_INT64_t_COMPL
         # TODO: test if sigma is scalar or not
         self.scale(sigma)
         return self
+
 
     ####################################################################################################################
     # Scaling

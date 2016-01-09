@@ -26,7 +26,7 @@ How big is big?
 ============================
 
 :program:`CySparse` can be seen as the replacement of the :program:`PySparse` library with **lots** of improvements. Instead of improving the existing :program:`PySparse` library written in :program:`C` and :program:`CPython`, 
-we decided to rewrite it from scratch in :program:`Cython`. This allows us a shorter developement cycle and to hook existing :program:`C` and :program:`C++` libraries very easily to :program:`CySparse` 
+we decided to rewrite it from scratch in :program:`Cython`. This allows us a shorter development cycle and to hook existing :program:`C` and :program:`C++` libraries very easily to :program:`CySparse` 
 (see the `PythonOptimizers <https://github.com/PythonOptimizers>`_ project for a full list of compatible Solvers wrappers).
 
 In short, :program:`CySparse` is :program:`PySparse` but on steroids!
@@ -64,7 +64,7 @@ Compressed Sparse Row and Column Format     -                                   
 What is the maturity level of :program:`CySparse`?
 ==================================================
 
-If you don't mix matrices with different types and use vector multiplication, :program:`CySparse` has been tested quite heavily but as we only started in 2016, :program:`CySpasre` is still in its infancy. 
+If you don't mix matrices with different types and use vector multiplication, :program:`CySparse` has been tested quite heavily but as we only started in 2016, :program:`CySparse` is still in its infancy. 
 If you stick to the basics, it works.
 The rest is work in progress. We are planning to add more tests soon and to test extensively its integration with several well known solvers.
 

@@ -20,6 +20,10 @@ cdef bint PyBothSparseMatricesAreOfSameType(object obj1, object obj2)
 cpdef bint PyLLSparseMatrix_Check(object obj)
 cpdef bint PyCSCSparseMatrix_Check(object obj)
 cpdef bint PyCSRSparseMatrix_Check(object obj)
+cpdef bint PyTransposedSparseMatrix_Check(object obj)
+cpdef bint PyConjugatedSparseMatrix_Check(object obj)
+cpdef bint PyConjugateTransposedSparseMatrix_Check(object obj)
+cpdef bint PyLLSparseMatrixView_Check(object obj)
 
 cdef class SparseMatrix:
     """
