@@ -26,6 +26,9 @@ from cysparse.sparse.sparse_utils.generic.find_@index@_@index@ cimport find_line
 
 from cysparse.sparse.sparse_utils.generic.print_@type@ cimport element_to_string_@type@, conjugated_element_to_string_@type@, empty_to_string_@type@
 
+from cysparse.sparse.operator_proxies.mul_proxy import MulProxy
+from cysparse.sparse.operator_proxies.sum_proxy import SumProxy
+
 ########################################################################################################################
 # CySparse include
 ########################################################################################################################
@@ -677,6 +680,10 @@ YOU HAVE TO DEFINE OR CAST YOUR NEW UNRECOGNIZED COMPLEX TYPE
     ####################################################################################################################
     # Matrix conversions
     ####################################################################################################################
+    def to_ll(self):
+        # TODO: allow change of dtype and itype?
+        return self
+
     def to_csr(self):
         """
         Create a corresponding CSRSparseMatrix.
@@ -2181,16 +2188,6 @@ YOU HAVE TO EXPLICITY CAST YOUR TYPE
         else:
             return multiply_transposed_ll_mat_with_self_scaled(self, d)
 
-    def __mul__(self, B):
-        """
-        Return :math:`A * B`.
-
-        """
-        if cnp.PyArray_Check(B) and B.ndim == 1:
-            return self.matvec(B)
-
-        return self.matdot(B)
-
     #def __rmul__(self, B):
 
     def __imul__(self, sigma):
@@ -2201,6 +2198,7 @@ YOU HAVE TO EXPLICITY CAST YOUR TYPE
         # TODO: test if sigma is scalar or not
         self.scale(sigma)
         return self
+
 
     ####################################################################################################################
     # Scaling
