@@ -24,3 +24,7 @@ print proxy_ll
 print
 print proxy * v
 print proxy_ll * v
+
+print "+" * 80
+
+A * 2
