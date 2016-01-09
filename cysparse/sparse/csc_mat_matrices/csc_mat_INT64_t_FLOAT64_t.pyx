@@ -828,9 +828,8 @@ cdef class CSCSparseMatrix_INT64_t_FLOAT64_t(ImmutableSparseMatrix_INT64_t_FLOAT
         return self.matvec(b)
 
 
-    #def matdot(self, B):
-    #    # TODO: reintroduce the exception
-    #    raise NotImplementedError("matdot is not implemented for CSC matrices")
+    def matdot(self, B):
+        raise NotImplementedError("matdot is not implemented for CSC matrices")
 
     def matdot_transp(self, B):
         raise NotImplementedError("matdot_transp is not implemented for CSC matrices")
