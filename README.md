@@ -105,6 +105,10 @@ See [Wiki](https://github.com/Funartech/cysparse/wiki) for details!
 
 ## Release history
 
+- Version 0.5.0 released on Jan 09, 2016
+
+  Introduction of Operator Proxies (SumOp, MulOp).
+    
 - Version 0.4.0 released on Dec 30, 2015
 
   All PyXXX_Check() functions now in s_mat.
