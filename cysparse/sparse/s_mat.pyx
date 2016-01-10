@@ -401,6 +401,16 @@ cdef class SparseMatrix:
         """
         return SumProxy(self, B)
 
+    def __sub__(self, other):
+        """
+        Return a :class:`SumProxy`.
+
+        Returns:
+            A :class:`SumProxy`, i.e. a proxy to a matrix-like sum.
+
+        """
+        return SumProxy(self, B, real_sum=False)
+
     #########################
     # Internal arrays
     #########################

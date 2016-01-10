@@ -27,4 +27,4 @@ print proxy_ll * v
 
 print "+" * 80
 
-A * 2
+print (A.T + A.T) * v

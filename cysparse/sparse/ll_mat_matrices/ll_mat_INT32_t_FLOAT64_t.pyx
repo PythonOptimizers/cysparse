@@ -2045,6 +2045,7 @@ cdef class LLSparseMatrix_INT32_t_FLOAT64_t(MutableSparseMatrix_INT32_t_FLOAT64_
 
     #def __rmul__(self, B):
 
+    # TODO: change this
     def __imul__(self, sigma):
         """
         Classical in place multiplication ``A *= sigma``.
