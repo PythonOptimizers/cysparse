@@ -1146,7 +1146,7 @@ static PyTypeObject *__pyx_ptype_7cpython_4type_type = 0;
 
 /* Module declarations from 'cpython.ref' */
 
-/* Module declarations from 'python_ref' */
+/* Module declarations from 'cpython' */
 
 /* Module declarations from 'libc.stdlib' */
 

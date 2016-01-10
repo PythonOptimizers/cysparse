@@ -1,7 +1,7 @@
 from cysparse.sparse.operator_proxies.op_proxy cimport OpProxy
 from cysparse.sparse.operator_proxies.mul_proxy cimport MulProxy
 
-from python_ref cimport Py_INCREF, Py_DECREF, PyObject
+from cpython cimport Py_INCREF, Py_DECREF, PyObject
 cdef extern from "Python.h":
     # *** Types ***
     int PyInt_Check(PyObject *o)

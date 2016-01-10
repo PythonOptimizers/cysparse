@@ -1382,7 +1382,7 @@ static PyTypeObject *__pyx_ptype_5numpy_ndarray = 0;
 static PyTypeObject *__pyx_ptype_5numpy_ufunc = 0;
 static CYTHON_INLINE char *__pyx_f_5numpy__util_dtypestring(PyArray_Descr *, char *, char *, int *); /*proto*/
 
-/* Module declarations from 'python_ref' */
+/* Module declarations from 'cpython' */
 
 /* Module declarations from 'cysparse.sparse.sparse_proxies.t_mat' */
 static PyTypeObject *__pyx_ptype_8cysparse_6sparse_14sparse_proxies_5t_mat_TransposedSparseMatrix = 0;
@@ -7870,7 +7870,7 @@ PyMODINIT_FUNC PyInit_t_mat(void)
  * 
  * cnp.import_array()             # <<<<<<<<<<<<<<
  * 
- * from python_ref cimport Py_INCREF, Py_DECREF, PyObject
+ * from cpython cimport Py_INCREF, Py_DECREF, PyObject
  */
   import_array();
 
