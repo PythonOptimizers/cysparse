@@ -1387,8 +1387,6 @@ static PyTypeObject *__pyx_ptype_5numpy_ndarray = 0;
 static PyTypeObject *__pyx_ptype_5numpy_ufunc = 0;
 static CYTHON_INLINE char *__pyx_f_5numpy__util_dtypestring(PyArray_Descr *, char *, char *, int *); /*proto*/
 
-/* Module declarations from 'cpython' */
-
 /* Module declarations from 'cysparse.sparse.sparse_proxies.complex_generic.h_mat_INT32_t_COMPLEX64_t' */
 static PyTypeObject *__pyx_ptype_8cysparse_6sparse_14sparse_proxies_15complex_generic_25h_mat_INT32_t_COMPLEX64_t_ConjugateTransposedSparseMatrix_INT32_t_COMPLEX64_t = 0;
 #define __Pyx_MODULE_NAME "cysparse.sparse.sparse_proxies.complex_generic.h_mat_INT32_t_COMPLEX64_t"
