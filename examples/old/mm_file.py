@@ -14,12 +14,12 @@ print '=' * 80
 l2 = LLSparseMatrixFromMMFile('zenios.mtx')
 #l2.print_to(sys.stdout)
 print l2
-l2.debug_print()
+#l2.debug_print()
 print l2.are_column_indices_sorted()
 
 print '+' * 80
 
-l3 = LLSparseMatrix(mm_filename='conf5.0-00l4x4-1000.mtx.txt', mm_experimental=False, dtype=types.COMPLEX128_T)
+l3 = LLSparseMatrix(mm_filename='simple_complex_matrix.mm', mm_experimental=False, dtype=types.COMPLEX128_T)
 print l3.dtype_str()
 print l3
 

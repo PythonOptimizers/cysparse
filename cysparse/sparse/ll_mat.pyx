@@ -455,7 +455,7 @@ def LLSparseMatrix(**kwargs):
     if matrix is not None or from_filename:
         assert (matrix is not None) != (from_filename), "Cannot use a matrix and a file to create a LLSparseMatrix"
 
-    mm_read_file_experimental = kwargs.get('mm_experimental', None) is not None
+    mm_read_file_experimental = kwargs.get('mm_experimental', False)
 
     if mm_read_file_experimental:
         print "Try experimental reading of MM files"

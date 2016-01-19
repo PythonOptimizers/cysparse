@@ -6,7 +6,10 @@ See http://math.nist.gov/MatrixMarket/ .
 """
 
 
-cdef LLSparseMatrix_INT32_t_INT64_t MakeLLSparseMatrixFromMMFile_INT32_t_INT64_t(str mm_filename, bint store_zero=False, bint test_bounds=True):
+cdef LLSparseMatrix_INT32_t_INT64_t MakeLLSparseMatrixFromMMFile_INT32_t_INT64_t(str mm_filename,
+                                                                               bint store_zero=False,
+                                                                               bint test_bounds=True,
+                                                                               bint test_matrix=True):
     cdef:
         str line
         list token_list
@@ -110,6 +113,8 @@ cdef LLSparseMatrix_INT32_t_INT64_t MakeLLSparseMatrixFromMMFile_INT32_t_INT64_t
                 nnz_read += 1
                 token_list = line.split()
 
+                if test_matrix and len(token_list) != 3:
+                    raise IndexError("Integer MM file must have 3 elements on each row (i, j, val)")
                 A.safe_put(atoi(token_list[0])-1, atoi(token_list[1]) - 1, <INT64_t>atoi(token_list[2]))
 
                 line = f.readline()
@@ -119,6 +124,8 @@ cdef LLSparseMatrix_INT32_t_INT64_t MakeLLSparseMatrixFromMMFile_INT32_t_INT64_t
                 nnz_read += 1
                 token_list = line.split()
 
+                if test_matrix and len(token_list) != 3:
+                    raise IndexError("Integer MM file must have 3 elements on each row (i, j, val)")
                 A.put(atoi(token_list[0])-1, atoi(token_list[1]) - 1, <INT64_t>atoi(token_list[2]))
 
                 line = f.readline()
@@ -133,7 +140,8 @@ cdef LLSparseMatrix_INT32_t_INT64_t MakeLLSparseMatrixFromMMFile_INT32_t_INT64_t
 ########################################################################################################################
 # This version doesn't work yet...
 # TODO: write this!
-cdef LLSparseMatrix_INT32_t_INT64_t MakeLLSparseMatrixFromMMFile2_INT32_t_INT64_t(str mm_filename, bint store_zero=False, bint test_bounds=True):
+cdef LLSparseMatrix_INT32_t_INT64_t MakeLLSparseMatrixFromMMFile2_INT32_t_INT64_t(str mm_filename, bint store_zero=False, bint test_bounds=False, bint test_matrix=False):
+    # TODO: add more tests in the case test_matrix == True
     cdef:
         str line
         list token_list

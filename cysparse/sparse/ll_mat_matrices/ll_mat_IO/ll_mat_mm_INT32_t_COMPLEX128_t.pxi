@@ -6,7 +6,10 @@ See http://math.nist.gov/MatrixMarket/ .
 """
 
 
-cdef LLSparseMatrix_INT32_t_COMPLEX128_t MakeLLSparseMatrixFromMMFile_INT32_t_COMPLEX128_t(str mm_filename, bint store_zero=False, bint test_bounds=True):
+cdef LLSparseMatrix_INT32_t_COMPLEX128_t MakeLLSparseMatrixFromMMFile_INT32_t_COMPLEX128_t(str mm_filename,
+                                                                               bint store_zero=False,
+                                                                               bint test_bounds=True,
+                                                                               bint test_matrix=True):
     cdef:
         str line
         list token_list
@@ -110,7 +113,8 @@ cdef LLSparseMatrix_INT32_t_COMPLEX128_t MakeLLSparseMatrixFromMMFile_INT32_t_CO
                 nnz_read += 1
                 token_list = line.split()
 
-
+                if test_matrix and len(token_list) != 4:
+                    raise IndexError("Complex MM file must have 4 elements on each row (i, j, val)")
                 # BUG !!! in Cython ??
                 # I have no idea why we have to use temp variables...
                 real_part =  <FLOAT64_t> atof(token_list[2])
@@ -126,7 +130,8 @@ cdef LLSparseMatrix_INT32_t_COMPLEX128_t MakeLLSparseMatrixFromMMFile_INT32_t_CO
                 nnz_read += 1
                 token_list = line.split()
 
-
+                if test_matrix and len(token_list) != 4:
+                    raise IndexError("Complex MM file must have 4 elements on each row (i, j, val)")
                 real_part =  <FLOAT64_t> atof(token_list[2])
                 imag_part =  <FLOAT64_t> atof(token_list[3])
 
@@ -151,7 +156,8 @@ cdef LLSparseMatrix_INT32_t_COMPLEX128_t MakeLLSparseMatrixFromMMFile_INT32_t_CO
 ########################################################################################################################
 # This version doesn't work yet...
 # TODO: write this!
-cdef LLSparseMatrix_INT32_t_COMPLEX128_t MakeLLSparseMatrixFromMMFile2_INT32_t_COMPLEX128_t(str mm_filename, bint store_zero=False, bint test_bounds=True):
+cdef LLSparseMatrix_INT32_t_COMPLEX128_t MakeLLSparseMatrixFromMMFile2_INT32_t_COMPLEX128_t(str mm_filename, bint store_zero=False, bint test_bounds=False, bint test_matrix=False):
+    # TODO: add more tests in the case test_matrix == True
     cdef:
         str line
         list token_list
