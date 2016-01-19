@@ -201,9 +201,9 @@ cdef class ConjugatedSparseMatrix_INT64_t_COMPLEX128_t:
         return self.A.matvec_conj(B)
 
     def matvec_transp(self, B):
-        return self.matvec_htransp(B)
+        return self.matvec_adj(B)
 
-    def matvec_htransp(self, B):
+    def matvec_adj(self, B):
         return self.A.matvec_transp(B)
 
     def matvec_conj(self, B):

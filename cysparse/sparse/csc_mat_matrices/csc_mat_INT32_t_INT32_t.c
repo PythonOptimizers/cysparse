@@ -2517,7 +2517,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_23csc_mat_INT32_t
 static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_23csc_mat_INT32_t_INT32_t_31CSCSparseMatrix_INT32_t_INT32_t_30to_ndarray(struct __pyx_obj_8cysparse_6sparse_16csc_mat_matrices_23csc_mat_INT32_t_INT32_t_CSCSparseMatrix_INT32_t_INT32_t *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_23csc_mat_INT32_t_INT32_t_31CSCSparseMatrix_INT32_t_INT32_t_32matvec(struct __pyx_obj_8cysparse_6sparse_16csc_mat_matrices_23csc_mat_INT32_t_INT32_t_CSCSparseMatrix_INT32_t_INT32_t *__pyx_v_self, PyObject *__pyx_v_b); /* proto */
 static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_23csc_mat_INT32_t_INT32_t_31CSCSparseMatrix_INT32_t_INT32_t_34matvec_transp(struct __pyx_obj_8cysparse_6sparse_16csc_mat_matrices_23csc_mat_INT32_t_INT32_t_CSCSparseMatrix_INT32_t_INT32_t *__pyx_v_self, PyObject *__pyx_v_b); /* proto */
-static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_23csc_mat_INT32_t_INT32_t_31CSCSparseMatrix_INT32_t_INT32_t_36matvec_htransp(struct __pyx_obj_8cysparse_6sparse_16csc_mat_matrices_23csc_mat_INT32_t_INT32_t_CSCSparseMatrix_INT32_t_INT32_t *__pyx_v_self, PyObject *__pyx_v_b); /* proto */
+static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_23csc_mat_INT32_t_INT32_t_31CSCSparseMatrix_INT32_t_INT32_t_36matvec_adj(struct __pyx_obj_8cysparse_6sparse_16csc_mat_matrices_23csc_mat_INT32_t_INT32_t_CSCSparseMatrix_INT32_t_INT32_t *__pyx_v_self, PyObject *__pyx_v_b); /* proto */
 static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_23csc_mat_INT32_t_INT32_t_31CSCSparseMatrix_INT32_t_INT32_t_38matvec_conj(struct __pyx_obj_8cysparse_6sparse_16csc_mat_matrices_23csc_mat_INT32_t_INT32_t_CSCSparseMatrix_INT32_t_INT32_t *__pyx_v_self, PyObject *__pyx_v_b); /* proto */
 static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_23csc_mat_INT32_t_INT32_t_31CSCSparseMatrix_INT32_t_INT32_t_40matdot(CYTHON_UNUSED struct __pyx_obj_8cysparse_6sparse_16csc_mat_matrices_23csc_mat_INT32_t_INT32_t_CSCSparseMatrix_INT32_t_INT32_t *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v_B); /* proto */
 static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_23csc_mat_INT32_t_INT32_t_31CSCSparseMatrix_INT32_t_INT32_t_42matdot_transp(CYTHON_UNUSED struct __pyx_obj_8cysparse_6sparse_16csc_mat_matrices_23csc_mat_INT32_t_INT32_t_CSCSparseMatrix_INT32_t_INT32_t *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v_B); /* proto */
@@ -10185,26 +10185,26 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_23csc_mat_INT32_t
 /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_INT32_t.pyx":815
  * 
  * 
- *     def matvec_htransp(self, b):             # <<<<<<<<<<<<<<
+ *     def matvec_adj(self, b):             # <<<<<<<<<<<<<<
  *         """
  *         Return :math:`A^h * b`.
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_8cysparse_6sparse_16csc_mat_matrices_23csc_mat_INT32_t_INT32_t_31CSCSparseMatrix_INT32_t_INT32_t_37matvec_htransp(PyObject *__pyx_v_self, PyObject *__pyx_v_b); /*proto*/
-static char __pyx_doc_8cysparse_6sparse_16csc_mat_matrices_23csc_mat_INT32_t_INT32_t_31CSCSparseMatrix_INT32_t_INT32_t_36matvec_htransp[] = "\n        Return :math:`A^h * b`.\n        ";
-static PyObject *__pyx_pw_8cysparse_6sparse_16csc_mat_matrices_23csc_mat_INT32_t_INT32_t_31CSCSparseMatrix_INT32_t_INT32_t_37matvec_htransp(PyObject *__pyx_v_self, PyObject *__pyx_v_b) {
+static PyObject *__pyx_pw_8cysparse_6sparse_16csc_mat_matrices_23csc_mat_INT32_t_INT32_t_31CSCSparseMatrix_INT32_t_INT32_t_37matvec_adj(PyObject *__pyx_v_self, PyObject *__pyx_v_b); /*proto*/
+static char __pyx_doc_8cysparse_6sparse_16csc_mat_matrices_23csc_mat_INT32_t_INT32_t_31CSCSparseMatrix_INT32_t_INT32_t_36matvec_adj[] = "\n        Return :math:`A^h * b`.\n        ";
+static PyObject *__pyx_pw_8cysparse_6sparse_16csc_mat_matrices_23csc_mat_INT32_t_INT32_t_31CSCSparseMatrix_INT32_t_INT32_t_37matvec_adj(PyObject *__pyx_v_self, PyObject *__pyx_v_b) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("matvec_htransp (wrapper)", 0);
-  __pyx_r = __pyx_pf_8cysparse_6sparse_16csc_mat_matrices_23csc_mat_INT32_t_INT32_t_31CSCSparseMatrix_INT32_t_INT32_t_36matvec_htransp(((struct __pyx_obj_8cysparse_6sparse_16csc_mat_matrices_23csc_mat_INT32_t_INT32_t_CSCSparseMatrix_INT32_t_INT32_t *)__pyx_v_self), ((PyObject *)__pyx_v_b));
+  __Pyx_RefNannySetupContext("matvec_adj (wrapper)", 0);
+  __pyx_r = __pyx_pf_8cysparse_6sparse_16csc_mat_matrices_23csc_mat_INT32_t_INT32_t_31CSCSparseMatrix_INT32_t_INT32_t_36matvec_adj(((struct __pyx_obj_8cysparse_6sparse_16csc_mat_matrices_23csc_mat_INT32_t_INT32_t_CSCSparseMatrix_INT32_t_INT32_t *)__pyx_v_self), ((PyObject *)__pyx_v_b));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_23csc_mat_INT32_t_INT32_t_31CSCSparseMatrix_INT32_t_INT32_t_36matvec_htransp(struct __pyx_obj_8cysparse_6sparse_16csc_mat_matrices_23csc_mat_INT32_t_INT32_t_CSCSparseMatrix_INT32_t_INT32_t *__pyx_v_self, PyObject *__pyx_v_b) {
+static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_23csc_mat_INT32_t_INT32_t_31CSCSparseMatrix_INT32_t_INT32_t_36matvec_adj(struct __pyx_obj_8cysparse_6sparse_16csc_mat_matrices_23csc_mat_INT32_t_INT32_t_CSCSparseMatrix_INT32_t_INT32_t *__pyx_v_self, PyObject *__pyx_v_b) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -10214,7 +10214,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_23csc_mat_INT32_t
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
-  __Pyx_RefNannySetupContext("matvec_htransp", 0);
+  __Pyx_RefNannySetupContext("matvec_adj", 0);
 
   /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_INT32_t.pyx":820
  *         """
@@ -10258,7 +10258,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_23csc_mat_INT32_t
   /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT32_t_INT32_t.pyx":815
  * 
  * 
- *     def matvec_htransp(self, b):             # <<<<<<<<<<<<<<
+ *     def matvec_adj(self, b):             # <<<<<<<<<<<<<<
  *         """
  *         Return :math:`A^h * b`.
  */
@@ -10269,7 +10269,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_23csc_mat_INT32_t
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_4);
-  __Pyx_AddTraceback("cysparse.sparse.csc_mat_matrices.csc_mat_INT32_t_INT32_t.CSCSparseMatrix_INT32_t_INT32_t.matvec_htransp", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("cysparse.sparse.csc_mat_matrices.csc_mat_INT32_t_INT32_t.CSCSparseMatrix_INT32_t_INT32_t.matvec_adj", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -25404,7 +25404,7 @@ static PyMethodDef __pyx_methods_8cysparse_6sparse_16csc_mat_matrices_23csc_mat_
   {"to_ndarray", (PyCFunction)__pyx_pw_8cysparse_6sparse_16csc_mat_matrices_23csc_mat_INT32_t_INT32_t_31CSCSparseMatrix_INT32_t_INT32_t_31to_ndarray, METH_NOARGS, __pyx_doc_8cysparse_6sparse_16csc_mat_matrices_23csc_mat_INT32_t_INT32_t_31CSCSparseMatrix_INT32_t_INT32_t_30to_ndarray},
   {"matvec", (PyCFunction)__pyx_pw_8cysparse_6sparse_16csc_mat_matrices_23csc_mat_INT32_t_INT32_t_31CSCSparseMatrix_INT32_t_INT32_t_33matvec, METH_O, __pyx_doc_8cysparse_6sparse_16csc_mat_matrices_23csc_mat_INT32_t_INT32_t_31CSCSparseMatrix_INT32_t_INT32_t_32matvec},
   {"matvec_transp", (PyCFunction)__pyx_pw_8cysparse_6sparse_16csc_mat_matrices_23csc_mat_INT32_t_INT32_t_31CSCSparseMatrix_INT32_t_INT32_t_35matvec_transp, METH_O, __pyx_doc_8cysparse_6sparse_16csc_mat_matrices_23csc_mat_INT32_t_INT32_t_31CSCSparseMatrix_INT32_t_INT32_t_34matvec_transp},
-  {"matvec_htransp", (PyCFunction)__pyx_pw_8cysparse_6sparse_16csc_mat_matrices_23csc_mat_INT32_t_INT32_t_31CSCSparseMatrix_INT32_t_INT32_t_37matvec_htransp, METH_O, __pyx_doc_8cysparse_6sparse_16csc_mat_matrices_23csc_mat_INT32_t_INT32_t_31CSCSparseMatrix_INT32_t_INT32_t_36matvec_htransp},
+  {"matvec_adj", (PyCFunction)__pyx_pw_8cysparse_6sparse_16csc_mat_matrices_23csc_mat_INT32_t_INT32_t_31CSCSparseMatrix_INT32_t_INT32_t_37matvec_adj, METH_O, __pyx_doc_8cysparse_6sparse_16csc_mat_matrices_23csc_mat_INT32_t_INT32_t_31CSCSparseMatrix_INT32_t_INT32_t_36matvec_adj},
   {"matvec_conj", (PyCFunction)__pyx_pw_8cysparse_6sparse_16csc_mat_matrices_23csc_mat_INT32_t_INT32_t_31CSCSparseMatrix_INT32_t_INT32_t_39matvec_conj, METH_O, __pyx_doc_8cysparse_6sparse_16csc_mat_matrices_23csc_mat_INT32_t_INT32_t_31CSCSparseMatrix_INT32_t_INT32_t_38matvec_conj},
   {"matdot", (PyCFunction)__pyx_pw_8cysparse_6sparse_16csc_mat_matrices_23csc_mat_INT32_t_INT32_t_31CSCSparseMatrix_INT32_t_INT32_t_41matdot, METH_O, 0},
   {"matdot_transp", (PyCFunction)__pyx_pw_8cysparse_6sparse_16csc_mat_matrices_23csc_mat_INT32_t_INT32_t_31CSCSparseMatrix_INT32_t_INT32_t_43matdot_transp, METH_O, 0},

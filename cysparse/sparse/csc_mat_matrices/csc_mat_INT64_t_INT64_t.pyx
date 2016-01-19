@@ -812,7 +812,7 @@ cdef class CSCSparseMatrix_INT64_t_INT64_t(ImmutableSparseMatrix_INT64_t_INT64_t
         return multiply_transposed_csc_mat_with_numpy_vector_INT64_t_INT64_t(self, b)
 
 
-    def matvec_htransp(self, b):
+    def matvec_adj(self, b):
         """
         Return :math:`A^h * b`.
         """

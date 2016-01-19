@@ -216,11 +216,11 @@ cdef class TransposedSparseMatrix:
     def matvec_transp(self, B):
         return self.A.matvec(B)
 
-    def matvec_htransp(self, B):
+    def matvec_adj(self, B):
         return self.A.matvec_conj(B)
 
     def matvec_conj(self, B):
-        return self.A.matvec_htransp(B)
+        return self.A.matvec_adj(B)
 
     def copy(self):
         raise NotImplementedError('This proxy is unique')

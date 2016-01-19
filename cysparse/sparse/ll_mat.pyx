@@ -340,7 +340,7 @@ def matvec_transp(A, b):
 
     raise TypeError("Vector b must be of type SparseMatrix or NumPy ndarray")
 
-def matvec_htransp(A, b):
+def matvec_adj(A, b):
     """
     Return :math:`A^h*b`.
     """
@@ -349,7 +349,7 @@ def matvec_htransp(A, b):
         raise TypeError("Matrix A must be a sparse matrix!")
 
     if cnp.PyArray_Check(b):
-        return A.matvec_htransp(b)
+        return A.matvec_adj(b)
 
     raise TypeError("Vector b must of type NumPy ndarray")
 
@@ -455,7 +455,7 @@ def LLSparseMatrix(**kwargs):
     if matrix is not None or from_filename:
         assert (matrix is not None) != (from_filename), "Cannot use a matrix and a file to create a LLSparseMatrix"
 
-    mm_read_file_experimental = kwargs.get('mm_experimental', False)
+    mm_read_file_experimental = kwargs.get('mm_experimental', None) is not None
 
     if mm_read_file_experimental:
         print "Try experimental reading of MM files"

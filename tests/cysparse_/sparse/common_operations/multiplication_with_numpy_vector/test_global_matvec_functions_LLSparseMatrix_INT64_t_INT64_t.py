@@ -7,7 +7,7 @@ We tests:
 
 - ``matvec()``;
 - ``matvec_transp()``;
-- ``matvec_htransp()``;
+- ``matvec_adj()``;
 - ``matvec_conj()``;
 
 
@@ -125,7 +125,7 @@ class CySparseGlobalMatVecTranspFunction_LLSparseMatrix_INT64_t_INT64_t_TestCase
 
 
 ############################################
-# matvec_htransp
+# matvec_adj
 ############################################
 class CySparseGlobalMatVecHTranspFunction_LLSparseMatrix_INT64_t_INT64_t_TestCase(unittest.TestCase):
     def setUp(self):
@@ -147,10 +147,10 @@ class CySparseGlobalMatVecHTranspFunction_LLSparseMatrix_INT64_t_INT64_t_TestCas
 # ======================================================================================================================
     def test_numpy_vector_multiplication_element_by_element(self):
         """
-        Test global ``matvec_htransp`` with a :program:`NumPy` vector.
+        Test global ``matvec_adj`` with a :program:`NumPy` vector.
         """
         result_with_A = self.A.H * self.x
-        result_with_C = matvec_htransp(self.C, self.x)
+        result_with_C = matvec_adj(self.C, self.x)
 
         for i in range(self.ncol):
             self.assertTrue(result_with_A[i] == result_with_C[i])

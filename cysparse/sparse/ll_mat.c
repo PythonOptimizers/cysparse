@@ -4636,6 +4636,7 @@ static char __pyx_k_IndexError[] = "IndexError";
 static char __pyx_k_ValueError[] = "ValueError";
 static char __pyx_k_coordinate[] = "coordinate";
 static char __pyx_k_diag_coeff[] = "diag_coeff";
+static char __pyx_k_matvec_adj[] = "matvec_adj";
 static char __pyx_k_pyx_vtable[] = "__pyx_vtable__";
 static char __pyx_k_startswith[] = "startswith";
 static char __pyx_k_store_zero[] = "store_zero";
@@ -4660,7 +4661,6 @@ static char __pyx_k_matvec_transp[] = "matvec_transp";
 static char __pyx_k_IndexTypeError[] = "IndexTypeError";
 static char __pyx_k_LLSparseMatrix[] = "LLSparseMatrix";
 static char __pyx_k_control_object[] = "control_object";
-static char __pyx_k_matvec_htransp[] = "matvec_htransp";
 static char __pyx_k_storage_format[] = "storage_format";
 static char __pyx_k_type_to_string[] = "type_to_string";
 static char __pyx_k_INT32_T_INT64_T[] = "INT32_T,INT64_T";
@@ -4866,8 +4866,8 @@ static PyObject *__pyx_n_s_matrix;
 static PyObject *__pyx_n_s_matrix_object;
 static PyObject *__pyx_n_s_matrix_type;
 static PyObject *__pyx_n_s_matvec;
+static PyObject *__pyx_n_s_matvec_adj;
 static PyObject *__pyx_n_s_matvec_conj;
-static PyObject *__pyx_n_s_matvec_htransp;
 static PyObject *__pyx_n_s_matvec_transp;
 static PyObject *__pyx_n_s_mm_experimental;
 static PyObject *__pyx_n_s_mm_filename;
@@ -4920,7 +4920,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_get_mm_matrix_dimension_spec
 static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_2get_mm_matrix_type_specifications(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_mm_filename); /* proto */
 static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_4matvec(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_A, PyObject *__pyx_v_b); /* proto */
 static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_6matvec_transp(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_A, PyObject *__pyx_v_b); /* proto */
-static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_8matvec_htransp(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_A, PyObject *__pyx_v_b); /* proto */
+static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_8matvec_adj(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_A, PyObject *__pyx_v_b); /* proto */
 static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_10matvec_conj(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_A, PyObject *__pyx_v_b); /* proto */
 static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_12matdot(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_A, PyObject *__pyx_v_B); /* proto */
 static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_14matdot_transp(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_A, PyObject *__pyx_v_B); /* proto */
@@ -55634,7 +55634,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_6matvec_transp(CYTHON_UNUSED
  * 
  *     raise TypeError("Vector b must be of type SparseMatrix or NumPy ndarray")             # <<<<<<<<<<<<<<
  * 
- * def matvec_htransp(A, b):
+ * def matvec_adj(A, b):
  */
   __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__145, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 341; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
@@ -55667,16 +55667,16 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_6matvec_transp(CYTHON_UNUSED
 /* "cysparse/sparse/ll_mat.pyx":343
  *     raise TypeError("Vector b must be of type SparseMatrix or NumPy ndarray")
  * 
- * def matvec_htransp(A, b):             # <<<<<<<<<<<<<<
+ * def matvec_adj(A, b):             # <<<<<<<<<<<<<<
  *     """
  *     Return :math:`A^h*b`.
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_8cysparse_6sparse_6ll_mat_9matvec_htransp(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_8cysparse_6sparse_6ll_mat_8matvec_htransp[] = "\n    Return :math:`A^h*b`.\n    ";
-static PyMethodDef __pyx_mdef_8cysparse_6sparse_6ll_mat_9matvec_htransp = {"matvec_htransp", (PyCFunction)__pyx_pw_8cysparse_6sparse_6ll_mat_9matvec_htransp, METH_VARARGS|METH_KEYWORDS, __pyx_doc_8cysparse_6sparse_6ll_mat_8matvec_htransp};
-static PyObject *__pyx_pw_8cysparse_6sparse_6ll_mat_9matvec_htransp(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_8cysparse_6sparse_6ll_mat_9matvec_adj(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_8cysparse_6sparse_6ll_mat_8matvec_adj[] = "\n    Return :math:`A^h*b`.\n    ";
+static PyMethodDef __pyx_mdef_8cysparse_6sparse_6ll_mat_9matvec_adj = {"matvec_adj", (PyCFunction)__pyx_pw_8cysparse_6sparse_6ll_mat_9matvec_adj, METH_VARARGS|METH_KEYWORDS, __pyx_doc_8cysparse_6sparse_6ll_mat_8matvec_adj};
+static PyObject *__pyx_pw_8cysparse_6sparse_6ll_mat_9matvec_adj(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_A = 0;
   PyObject *__pyx_v_b = 0;
   int __pyx_lineno = 0;
@@ -55684,7 +55684,7 @@ static PyObject *__pyx_pw_8cysparse_6sparse_6ll_mat_9matvec_htransp(PyObject *__
   int __pyx_clineno = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("matvec_htransp (wrapper)", 0);
+  __Pyx_RefNannySetupContext("matvec_adj (wrapper)", 0);
   {
     static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_A,&__pyx_n_s_b,0};
     PyObject* values[2] = {0,0};
@@ -55705,11 +55705,11 @@ static PyObject *__pyx_pw_8cysparse_6sparse_6ll_mat_9matvec_htransp(PyObject *__
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_b)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("matvec_htransp", 1, 2, 2, 1); {__pyx_filename = __pyx_f[1]; __pyx_lineno = 343; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("matvec_adj", 1, 2, 2, 1); {__pyx_filename = __pyx_f[1]; __pyx_lineno = 343; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "matvec_htransp") < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 343; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "matvec_adj") < 0)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 343; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -55722,20 +55722,20 @@ static PyObject *__pyx_pw_8cysparse_6sparse_6ll_mat_9matvec_htransp(PyObject *__
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("matvec_htransp", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[1]; __pyx_lineno = 343; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("matvec_adj", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[1]; __pyx_lineno = 343; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
-  __Pyx_AddTraceback("cysparse.sparse.ll_mat.matvec_htransp", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("cysparse.sparse.ll_mat.matvec_adj", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_8cysparse_6sparse_6ll_mat_8matvec_htransp(__pyx_self, __pyx_v_A, __pyx_v_b);
+  __pyx_r = __pyx_pf_8cysparse_6sparse_6ll_mat_8matvec_adj(__pyx_self, __pyx_v_A, __pyx_v_b);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_8matvec_htransp(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_A, PyObject *__pyx_v_b) {
+static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_8matvec_adj(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_A, PyObject *__pyx_v_b) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   int __pyx_t_1;
@@ -55746,7 +55746,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_8matvec_htransp(CYTHON_UNUSE
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
-  __Pyx_RefNannySetupContext("matvec_htransp", 0);
+  __Pyx_RefNannySetupContext("matvec_adj", 0);
 
   /* "cysparse/sparse/ll_mat.pyx":348
  *     """
@@ -55784,7 +55784,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_8matvec_htransp(CYTHON_UNUSE
  *         raise TypeError("Matrix A must be a sparse matrix!")
  * 
  *     if cnp.PyArray_Check(b):             # <<<<<<<<<<<<<<
- *         return A.matvec_htransp(b)
+ *         return A.matvec_adj(b)
  * 
  */
   __pyx_t_1 = (PyArray_Check(__pyx_v_b) != 0);
@@ -55793,12 +55793,12 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_8matvec_htransp(CYTHON_UNUSE
     /* "cysparse/sparse/ll_mat.pyx":352
  * 
  *     if cnp.PyArray_Check(b):
- *         return A.matvec_htransp(b)             # <<<<<<<<<<<<<<
+ *         return A.matvec_adj(b)             # <<<<<<<<<<<<<<
  * 
  *     raise TypeError("Vector b must of type NumPy ndarray")
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_A, __pyx_n_s_matvec_htransp); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 352; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_A, __pyx_n_s_matvec_adj); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 352; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_t_4 = NULL;
     if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_3))) {
@@ -55833,13 +55833,13 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_8matvec_htransp(CYTHON_UNUSE
  *         raise TypeError("Matrix A must be a sparse matrix!")
  * 
  *     if cnp.PyArray_Check(b):             # <<<<<<<<<<<<<<
- *         return A.matvec_htransp(b)
+ *         return A.matvec_adj(b)
  * 
  */
   }
 
   /* "cysparse/sparse/ll_mat.pyx":354
- *         return A.matvec_htransp(b)
+ *         return A.matvec_adj(b)
  * 
  *     raise TypeError("Vector b must of type NumPy ndarray")             # <<<<<<<<<<<<<<
  * 
@@ -55854,7 +55854,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_8matvec_htransp(CYTHON_UNUSE
   /* "cysparse/sparse/ll_mat.pyx":343
  *     raise TypeError("Vector b must be of type SparseMatrix or NumPy ndarray")
  * 
- * def matvec_htransp(A, b):             # <<<<<<<<<<<<<<
+ * def matvec_adj(A, b):             # <<<<<<<<<<<<<<
  *     """
  *     Return :math:`A^h*b`.
  */
@@ -55865,7 +55865,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_8matvec_htransp(CYTHON_UNUSE
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_4);
   __Pyx_XDECREF(__pyx_t_5);
-  __Pyx_AddTraceback("cysparse.sparse.ll_mat.matvec_htransp", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("cysparse.sparse.ll_mat.matvec_adj", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -56818,7 +56818,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_16LLSparseMatrix(CYTHON_UNUS
  *     if matrix is not None or from_filename:
  *         assert (matrix is not None) != (from_filename), "Cannot use a matrix and a file to create a LLSparseMatrix"             # <<<<<<<<<<<<<<
  * 
- *     mm_read_file_experimental = kwargs.get('mm_experimental', False)
+ *     mm_read_file_experimental = kwargs.get('mm_experimental', None) is not None
  */
     #ifndef CYTHON_WITHOUT_ASSERTIONS
     if (unlikely(!Py_OptimizeFlag)) {
@@ -56842,17 +56842,21 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_16LLSparseMatrix(CYTHON_UNUS
   /* "cysparse/sparse/ll_mat.pyx":458
  *         assert (matrix is not None) != (from_filename), "Cannot use a matrix and a file to create a LLSparseMatrix"
  * 
- *     mm_read_file_experimental = kwargs.get('mm_experimental', False)             # <<<<<<<<<<<<<<
+ *     mm_read_file_experimental = kwargs.get('mm_experimental', None) is not None             # <<<<<<<<<<<<<<
  * 
  *     if mm_read_file_experimental:
  */
-  __pyx_t_2 = __Pyx_PyDict_GetItemDefault(__pyx_v_kwargs, __pyx_n_s_mm_experimental, Py_False); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 458; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyDict_GetItemDefault(__pyx_v_kwargs, __pyx_n_s_mm_experimental, Py_None); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 458; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_5 = (__pyx_t_2 != Py_None);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_2 = __Pyx_PyBool_FromLong(__pyx_t_5); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 458; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_v_mm_read_file_experimental = __pyx_t_2;
   __pyx_t_2 = 0;
 
   /* "cysparse/sparse/ll_mat.pyx":460
- *     mm_read_file_experimental = kwargs.get('mm_experimental', False)
+ *     mm_read_file_experimental = kwargs.get('mm_experimental', None) is not None
  * 
  *     if mm_read_file_experimental:             # <<<<<<<<<<<<<<
  *         print "Try experimental reading of MM files"
@@ -56871,7 +56875,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_6ll_mat_16LLSparseMatrix(CYTHON_UNUS
     if (__Pyx_PrintOne(0, __pyx_kp_s_Try_experimental_reading_of_MM_f) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 461; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
     /* "cysparse/sparse/ll_mat.pyx":460
- *     mm_read_file_experimental = kwargs.get('mm_experimental', False)
+ *     mm_read_file_experimental = kwargs.get('mm_experimental', None) is not None
  * 
  *     if mm_read_file_experimental:             # <<<<<<<<<<<<<<
  *         print "Try experimental reading of MM files"
@@ -68333,8 +68337,8 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_matrix_object, __pyx_k_matrix_object, sizeof(__pyx_k_matrix_object), 0, 0, 1, 1},
   {&__pyx_n_s_matrix_type, __pyx_k_matrix_type, sizeof(__pyx_k_matrix_type), 0, 0, 1, 1},
   {&__pyx_n_s_matvec, __pyx_k_matvec, sizeof(__pyx_k_matvec), 0, 0, 1, 1},
+  {&__pyx_n_s_matvec_adj, __pyx_k_matvec_adj, sizeof(__pyx_k_matvec_adj), 0, 0, 1, 1},
   {&__pyx_n_s_matvec_conj, __pyx_k_matvec_conj, sizeof(__pyx_k_matvec_conj), 0, 0, 1, 1},
-  {&__pyx_n_s_matvec_htransp, __pyx_k_matvec_htransp, sizeof(__pyx_k_matvec_htransp), 0, 0, 1, 1},
   {&__pyx_n_s_matvec_transp, __pyx_k_matvec_transp, sizeof(__pyx_k_matvec_transp), 0, 0, 1, 1},
   {&__pyx_n_s_mm_experimental, __pyx_k_mm_experimental, sizeof(__pyx_k_mm_experimental), 0, 0, 1, 1},
   {&__pyx_n_s_mm_filename, __pyx_k_mm_filename, sizeof(__pyx_k_mm_filename), 0, 0, 1, 1},
@@ -69974,7 +69978,7 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  *     raise TypeError("Vector b must be of type SparseMatrix or NumPy ndarray")             # <<<<<<<<<<<<<<
  * 
- * def matvec_htransp(A, b):
+ * def matvec_adj(A, b):
  */
   __pyx_tuple__145 = PyTuple_Pack(1, __pyx_kp_s_Vector_b_must_be_of_type_SparseM); if (unlikely(!__pyx_tuple__145)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 341; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__145);
@@ -69992,7 +69996,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__146);
 
   /* "cysparse/sparse/ll_mat.pyx":354
- *         return A.matvec_htransp(b)
+ *         return A.matvec_adj(b)
  * 
  *     raise TypeError("Vector b must of type NumPy ndarray")             # <<<<<<<<<<<<<<
  * 
@@ -70436,14 +70440,14 @@ static int __Pyx_InitCachedConstants(void) {
   /* "cysparse/sparse/ll_mat.pyx":343
  *     raise TypeError("Vector b must be of type SparseMatrix or NumPy ndarray")
  * 
- * def matvec_htransp(A, b):             # <<<<<<<<<<<<<<
+ * def matvec_adj(A, b):             # <<<<<<<<<<<<<<
  *     """
  *     Return :math:`A^h*b`.
  */
   __pyx_tuple__192 = PyTuple_Pack(2, __pyx_n_s_A, __pyx_n_s_b); if (unlikely(!__pyx_tuple__192)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 343; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__192);
   __Pyx_GIVEREF(__pyx_tuple__192);
-  __pyx_codeobj__193 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__192, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_nikolaj_Documents_WORK_Dom, __pyx_n_s_matvec_htransp, 343, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__193)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 343; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__193 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__192, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_nikolaj_Documents_WORK_Dom, __pyx_n_s_matvec_adj, 343, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__193)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 343; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "cysparse/sparse/ll_mat.pyx":356
  *     raise TypeError("Vector b must of type NumPy ndarray")
@@ -71178,13 +71182,13 @@ PyMODINIT_FUNC PyInit_ll_mat(void)
   /* "cysparse/sparse/ll_mat.pyx":343
  *     raise TypeError("Vector b must be of type SparseMatrix or NumPy ndarray")
  * 
- * def matvec_htransp(A, b):             # <<<<<<<<<<<<<<
+ * def matvec_adj(A, b):             # <<<<<<<<<<<<<<
  *     """
  *     Return :math:`A^h*b`.
  */
-  __pyx_t_5 = PyCFunction_NewEx(&__pyx_mdef_8cysparse_6sparse_6ll_mat_9matvec_htransp, NULL, __pyx_n_s_cysparse_sparse_ll_mat); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 343; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = PyCFunction_NewEx(&__pyx_mdef_8cysparse_6sparse_6ll_mat_9matvec_adj, NULL, __pyx_n_s_cysparse_sparse_ll_mat); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 343; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_matvec_htransp, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 343; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_matvec_adj, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 343; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
   /* "cysparse/sparse/ll_mat.pyx":356

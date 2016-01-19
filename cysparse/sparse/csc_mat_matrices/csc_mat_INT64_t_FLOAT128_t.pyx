@@ -812,7 +812,7 @@ cdef class CSCSparseMatrix_INT64_t_FLOAT128_t(ImmutableSparseMatrix_INT64_t_FLOA
         return multiply_transposed_csc_mat_with_numpy_vector_INT64_t_FLOAT128_t(self, b)
 
 
-    def matvec_htransp(self, b):
+    def matvec_adj(self, b):
         """
         Return :math:`A^h * b`.
         """

@@ -200,12 +200,12 @@ cdef class ConjugateTransposedSparseMatrix_INT64_t_COMPLEX64_t:
         return SumProxy(self, B, real_sum=False)
 
     def matvec(self, B):
-        return self.A.matvec_htransp(B)
+        return self.A.matvec_adj(B)
 
     def matvec_transp(self, B):
         return self.A.matvec_conj(B)
 
-    def matvec_htransp(self, B):
+    def matvec_adj(self, B):
         return self.A.matvec(B)
 
     def matvec_conj(self, B):

@@ -7,7 +7,7 @@ We tests:
 
 - ``matvec()``;
 - ``matvec_transp()``;
-- ``matvec_htransp()``;
+- ``matvec_adj()``;
 - ``matvec_conj()``;
 
 
@@ -145,7 +145,7 @@ YOU HAVE TO ADD YOUR NEW MATRIX TYPE HERE
 {% endif %}
 
 ############################################
-# matvec_htransp
+# matvec_adj
 ############################################
 class CySparseGlobalMatVecHTranspFunction_@class@_@index@_@type@_TestCase(unittest.TestCase):
     def setUp(self):
@@ -175,10 +175,10 @@ YOU HAVE TO ADD YOUR NEW MATRIX TYPE HERE
 # ======================================================================================================================
     def test_numpy_vector_multiplication_element_by_element(self):
         """
-        Test global ``matvec_htransp`` with a :program:`NumPy` vector.
+        Test global ``matvec_adj`` with a :program:`NumPy` vector.
         """
         result_with_A = self.A.H * self.x
-        result_with_C = matvec_htransp(self.C, self.x)
+        result_with_C = matvec_adj(self.C, self.x)
 
         for i in range(self.ncol):
             self.assertTrue(result_with_A[i] == result_with_C[i])

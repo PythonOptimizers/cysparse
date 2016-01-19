@@ -302,7 +302,7 @@ cdef class SparseMatrix:
         """
         raise NotImplementedError("Operation not implemented (yet). Please report.")
 
-    def matvec_htransp(self, b):
+    def matvec_adj(self, b):
         """
         Return ``A^h * b`` with ``b`` a :program:`NumPy` vector.
 
