@@ -812,7 +812,7 @@ cdef class CSCSparseMatrix_INT32_t_INT32_t(ImmutableSparseMatrix_INT32_t_INT32_t
         return multiply_transposed_csc_mat_with_numpy_vector_INT32_t_INT32_t(self, b)
 
 
-    def matvec_htransp(self, b):
+    def matvec_adj(self, b):
         """
         Return :math:`A^h * b`.
         """
@@ -828,9 +828,8 @@ cdef class CSCSparseMatrix_INT32_t_INT32_t(ImmutableSparseMatrix_INT32_t_INT32_t
         return self.matvec(b)
 
 
-    #def matdot(self, B):
-    #    # TODO: reintroduce the exception
-    #    raise NotImplementedError("matdot is not implemented for CSC matrices")
+    def matdot(self, B):
+        raise NotImplementedError("matdot is not implemented for CSC matrices")
 
     def matdot_transp(self, B):
         raise NotImplementedError("matdot_transp is not implemented for CSC matrices")

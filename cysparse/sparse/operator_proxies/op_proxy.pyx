@@ -44,8 +44,9 @@ cdef class OpProxy:
             is_accepted = True
         elif PyTransposedSparseMatrix_Check(operand) or PyConjugatedSparseMatrix_Check(operand) or PyConjugateTransposedSparseMatrix_Check(operand):
             is_accepted = True
-        elif PyLLSparseMatrixView_Check(operand):
-            is_accepted = True
+        # TODO: this can only be added when views will implement matvec...
+        #elif PyLLSparseMatrixView_Check(operand):
+        #    is_accepted = True
 
         return is_accepted
 

@@ -25,8 +25,8 @@ def common_matrix_like_vector_multiplication(obj):
         getattr(obj, 'matvec')
         problematic_operation = 'matvec_transp'
         getattr(obj, 'matvec_transp')
-        problematic_operation = 'matvec_htransp'
-        getattr(obj, 'matvec_htransp')
+        problematic_operation = 'matvec_adj'
+        getattr(obj, 'matvec_adj')
         problematic_operation = 'matvec_conj'
         getattr(obj, 'matvec_conj')
 

@@ -2040,7 +2040,7 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX128_t(MutableSparseMatrix_INT32_t_COMPL
         assert are_mixed_types_compatible(COMPLEX128_T, b.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(COMPLEX128_T)
         return multiply_transposed_ll_mat_with_numpy_vector_INT32_t_COMPLEX128_t(self, b)
 
-    def matvec_htransp(self, b):
+    def matvec_adj(self, b):
         """
         Return :math:`A^h * b`.
         """
@@ -2107,6 +2107,7 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX128_t(MutableSparseMatrix_INT32_t_COMPL
 
     #def __rmul__(self, B):
 
+    # TODO: change this
     def __imul__(self, sigma):
         """
         Classical in place multiplication ``A *= sigma``.

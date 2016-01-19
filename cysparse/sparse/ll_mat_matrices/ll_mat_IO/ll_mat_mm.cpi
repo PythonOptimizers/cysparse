@@ -6,7 +6,7 @@ See http://math.nist.gov/MatrixMarket/ .
 """
 
 
-cdef LLSparseMatrix_@index@_@type@ MakeLLSparseMatrixFromMMFile_@index@_@type@(str mm_filename, bint store_zero=False, bint test_bounds=True):
+cdef LLSparseMatrix_@index@_@type@ MakeLLSparseMatrixFromMMFile_@index@_@type@(str mm_filename, bint store_zero=False, bint test_bounds=True) except? -1:
     cdef:
         str line
         list token_list

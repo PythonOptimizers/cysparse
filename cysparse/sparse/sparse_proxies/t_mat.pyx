@@ -8,11 +8,14 @@ from cysparse.sparse.s_mat cimport SparseMatrix, MakeMatrixLikeString
 from cysparse.common_types.cysparse_numpy_types import are_mixed_types_compatible, cysparse_to_numpy_type
 from cysparse.sparse.s_mat cimport PyLLSparseMatrix_Check
 
+from cysparse.sparse.operator_proxies.mul_proxy import MulProxy
+from cysparse.sparse.operator_proxies.sum_proxy import SumProxy
+
 cimport numpy as cnp
 
 cnp.import_array()
 
-from python_ref cimport Py_INCREF, Py_DECREF, PyObject
+from cpython cimport Py_INCREF, Py_DECREF, PyObject
 cdef extern from "Python.h":
     # *** Types ***
     int PyInt_Check(PyObject *o)
@@ -157,27 +160,36 @@ cdef class TransposedSparseMatrix:
     # Basic operations
     ####################################################################################################################
     def __mul__(self, B):
-        # This call is needed as ``__mul__`` doesn't find self.A ...
-        return self._mul(B)
+        if cnp.PyArray_Check(B) and B.ndim == 1:
+            return self.matvec(B)
 
-    def _mul(self, B):
+        return MulProxy(self, B)
+
+    def __add__(self, B):
         """
+        Return a :class:`SumProxy`.
+
+        Returns:
+            A :class:`SumProxy`, i.e. a proxy to a matrix-like sum.
 
         """
-        if cnp.PyArray_Check(B):
-            # test type
-            assert are_mixed_types_compatible(self.dtype, B.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(self.dtype)
+        return SumProxy(self, B)
 
-            if B.ndim == 2:
-                return self.A.matdot(B)
-            elif B.ndim == 1:
-                return self.A.matvec_transp(B)
-            else:
-                raise IndexError("Matrix dimensions must agree")
-        elif PyLLSparseMatrix_Check(B):
-            return self.A.matdot_transp(B)
-        else:
-            raise NotImplementedError("Multiplication with this kind of object not implemented yet...")
+    def __sub__(self, B):
+        """
+        Return a :class:`SumProxy`.
+
+        Returns:
+            A :class:`SumProxy`, i.e. a proxy to a matrix-like sum.
+
+        """
+        return SumProxy(self, B, real_sum=False)
+
+    def matdot(self, B):
+        return self.A.matdot_transp(B)
+
+    def matdot_transp(self, B):
+        return self.A.matdot(B)
 
     def matvec(self, B):
         return self.A.matvec_transp(B)
@@ -185,11 +197,11 @@ cdef class TransposedSparseMatrix:
     def matvec_transp(self, B):
         return self.A.matvec(B)
 
-    def matvec_htransp(self, B):
+    def matvec_adj(self, B):
         return self.A.matvec_conj(B)
 
     def matvec_conj(self, B):
-        return self.A.matvec_htransp(B)
+        return self.A.matvec_adj(B)
 
     def copy(self):
         raise NotImplementedError('This proxy is unique')

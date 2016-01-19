@@ -177,7 +177,7 @@ Inconveniences
 
 - Sometimes :program:`Cython` can ask for a complete recompilation. 
   Whenever this happens, it displays the following message when trying to import the library 
-  into :program:`Python`:
+  into :program:`Python` [#another_error_msg_triggers_full_recompilation]_:
 
   ..  code-block:: bash
 
@@ -241,6 +241,9 @@ Performance testing
 ..  [#tricky_installations] Some special configurations might need a complete or partial :program:`Cython` source generation.
 
 ..  [#other_platforms] For other platforms, have a look at the file :file:`cysparse/common_types/cysparse_types.pxd`.
+
+..  [#another_error_msg_triggers_full_recompilation] Another error message is: ``SystemError: NULL result without error in PyObject_Call``. Recompiling will probably solve the problem.
+
 
 ..  [#cython_try_recompiling] The problem is interdependencies between source files that are not catched at compile time. Whenever :program:`Cython` can catch them at runtime, it throws this ``ValueError``.
 

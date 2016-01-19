@@ -3,7 +3,7 @@ import numpy as np
 
 A = LinearFillLLSparseMatrix(nrow=4, ncol=3, dtype=COMPLEX128_T, first_element=1-0.2j)
 B = LinearFillLLSparseMatrix(nrow=3, ncol=4, dtype=COMPLEX128_T)
-C = LinearFillLLSparseMatrix(size=4, dtype=COMPLEX128_T)
+C = LinearFillLLSparseMatrix(size=4, dtype=COMPLEX128_T, store_symmetric=True)
 
 print A
 print B
@@ -27,4 +27,4 @@ print proxy_ll * v
 
 print "+" * 80
 
-A * 2
+print (A.T + A.T) * v

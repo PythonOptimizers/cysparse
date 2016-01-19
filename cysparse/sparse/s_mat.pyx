@@ -302,7 +302,7 @@ cdef class SparseMatrix:
         """
         raise NotImplementedError("Operation not implemented (yet). Please report.")
 
-    def matvec_htransp(self, b):
+    def matvec_adj(self, b):
         """
         Return ``A^h * b`` with ``b`` a :program:`NumPy` vector.
 
@@ -357,7 +357,7 @@ cdef class SparseMatrix:
         """
         raise NotImplementedError("Operation not implemented (yet). Please report.")
 
-    def matdot_htransp(self, B):
+    def matdot_adj(self, B):
         """
         Return ``A^h * B``.
 
@@ -400,6 +400,16 @@ cdef class SparseMatrix:
 
         """
         return SumProxy(self, B)
+
+    def __sub__(self, other):
+        """
+        Return a :class:`SumProxy`.
+
+        Returns:
+            A :class:`SumProxy`, i.e. a proxy to a matrix-like sum.
+
+        """
+        return SumProxy(self, B, real_sum=False)
 
     #########################
     # Internal arrays

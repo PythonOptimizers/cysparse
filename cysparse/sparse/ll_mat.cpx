@@ -220,7 +220,7 @@ def matvec_transp(A, b):
 
     raise TypeError("Vector b must be of type SparseMatrix or NumPy ndarray")
 
-def matvec_htransp(A, b):
+def matvec_adj(A, b):
     """
     Return :math:`A^h*b`.
     """
@@ -229,7 +229,7 @@ def matvec_htransp(A, b):
         raise TypeError("Matrix A must be a sparse matrix!")
 
     if cnp.PyArray_Check(b):
-        return A.matvec_htransp(b)
+        return A.matvec_adj(b)
 
     raise TypeError("Vector b must of type NumPy ndarray")
 

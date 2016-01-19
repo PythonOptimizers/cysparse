@@ -238,6 +238,7 @@ static CYTHON_INLINE float __PYX_NAN() {
 #define __PYX_HAVE_API__cysparse__sparse__operator_proxies__sum_proxy
 #include "string.h"
 #include "stdio.h"
+#include "pythread.h"
 #include "stdlib.h"
 #include "numpy/arrayobject.h"
 #include "numpy/ufuncobject.h"
@@ -475,6 +476,8 @@ static const char *__pyx_f[] = {
   "__init__.pxd",
   "cysparse/sparse/operator_proxies/mul_proxy.pxd",
   "type.pxd",
+  "bool.pxd",
+  "complex.pxd",
 };
 
 /* "../local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":725
@@ -727,8 +730,8 @@ typedef npy_clongdouble __pyx_t_5numpy_clongdouble_t;
  */
 typedef npy_cdouble __pyx_t_5numpy_complex_t;
 
-/* "cysparse/sparse/operator_proxies/op_proxy.pxd":4
- * # TODO: forbid direct creation of OpProxy?
+/* "cysparse/sparse/operator_proxies/op_proxy.pxd":5
+ * # This is not absolutely necessary as an OpProxy needs two matrices to be created.
  * 
  * cdef class OpProxy:             # <<<<<<<<<<<<<<
  *     cdef:
@@ -772,8 +775,8 @@ struct __pyx_obj_8cysparse_6sparse_16operator_proxies_9sum_proxy_SumProxy {
 
 
 
-/* "cysparse/sparse/operator_proxies/op_proxy.pxd":4
- * # TODO: forbid direct creation of OpProxy?
+/* "cysparse/sparse/operator_proxies/op_proxy.pxd":5
+ * # This is not absolutely necessary as an OpProxy needs two matrices to be created.
  * 
  * cdef class OpProxy:             # <<<<<<<<<<<<<<
  *     cdef:
@@ -1129,24 +1132,88 @@ static PyTypeObject *__pyx_ptype_8cysparse_6sparse_16operator_proxies_8op_proxy_
 /* Module declarations from 'cysparse.sparse.operator_proxies.mul_proxy' */
 static PyTypeObject *__pyx_ptype_8cysparse_6sparse_16operator_proxies_9mul_proxy_MulProxy = 0;
 
-/* Module declarations from 'libc.string' */
-
-/* Module declarations from 'libc.stdio' */
+/* Module declarations from 'cpython.version' */
 
 /* Module declarations from '__builtin__' */
 
 /* Module declarations from 'cpython.type' */
 static PyTypeObject *__pyx_ptype_7cpython_4type_type = 0;
 
-/* Module declarations from 'cpython.buffer' */
+/* Module declarations from 'libc.string' */
 
-/* Module declarations from 'cpython' */
+/* Module declarations from 'libc.stdio' */
 
 /* Module declarations from 'cpython.object' */
 
 /* Module declarations from 'cpython.ref' */
 
-/* Module declarations from 'python_ref' */
+/* Module declarations from 'cpython.exc' */
+
+/* Module declarations from 'cpython.module' */
+
+/* Module declarations from 'cpython.mem' */
+
+/* Module declarations from 'cpython.tuple' */
+
+/* Module declarations from 'cpython.list' */
+
+/* Module declarations from 'cpython.sequence' */
+
+/* Module declarations from 'cpython.mapping' */
+
+/* Module declarations from 'cpython.iterator' */
+
+/* Module declarations from 'cpython.number' */
+
+/* Module declarations from 'cpython.int' */
+
+/* Module declarations from '__builtin__' */
+
+/* Module declarations from 'cpython.bool' */
+static PyTypeObject *__pyx_ptype_7cpython_4bool_bool = 0;
+
+/* Module declarations from 'cpython.long' */
+
+/* Module declarations from 'cpython.float' */
+
+/* Module declarations from '__builtin__' */
+
+/* Module declarations from 'cpython.complex' */
+static PyTypeObject *__pyx_ptype_7cpython_7complex_complex = 0;
+
+/* Module declarations from 'cpython.string' */
+
+/* Module declarations from 'cpython.unicode' */
+
+/* Module declarations from 'cpython.dict' */
+
+/* Module declarations from 'cpython.instance' */
+
+/* Module declarations from 'cpython.function' */
+
+/* Module declarations from 'cpython.method' */
+
+/* Module declarations from 'cpython.weakref' */
+
+/* Module declarations from 'cpython.getargs' */
+
+/* Module declarations from 'cpython.pythread' */
+
+/* Module declarations from 'cpython.pystate' */
+
+/* Module declarations from 'cpython.cobject' */
+
+/* Module declarations from 'cpython.oldbuffer' */
+
+/* Module declarations from 'cpython.set' */
+
+/* Module declarations from 'cpython.buffer' */
+
+/* Module declarations from 'cpython.bytes' */
+
+/* Module declarations from 'cpython.pycapsule' */
+
+/* Module declarations from 'cpython' */
 
 /* Module declarations from 'libc.stdlib' */
 
@@ -4814,6 +4881,8 @@ PyMODINIT_FUNC PyInit_sum_proxy(void)
   sizeof(PyHeapTypeObject),
   #endif
   0); if (unlikely(!__pyx_ptype_7cpython_4type_type)) {__pyx_filename = __pyx_f[4]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_ptype_7cpython_4bool_bool = __Pyx_ImportType(__Pyx_BUILTIN_MODULE_NAME, "bool", sizeof(PyBoolObject), 0); if (unlikely(!__pyx_ptype_7cpython_4bool_bool)) {__pyx_filename = __pyx_f[5]; __pyx_lineno = 8; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_ptype_7cpython_7complex_complex = __Pyx_ImportType(__Pyx_BUILTIN_MODULE_NAME, "complex", sizeof(PyComplexObject), 0); if (unlikely(!__pyx_ptype_7cpython_7complex_complex)) {__pyx_filename = __pyx_f[6]; __pyx_lineno = 15; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_ptype_5numpy_dtype = __Pyx_ImportType("numpy", "dtype", sizeof(PyArray_Descr), 0); if (unlikely(!__pyx_ptype_5numpy_dtype)) {__pyx_filename = __pyx_f[2]; __pyx_lineno = 155; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_ptype_5numpy_flatiter = __Pyx_ImportType("numpy", "flatiter", sizeof(PyArrayIterObject), 0); if (unlikely(!__pyx_ptype_5numpy_flatiter)) {__pyx_filename = __pyx_f[2]; __pyx_lineno = 168; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_ptype_5numpy_broadcast = __Pyx_ImportType("numpy", "broadcast", sizeof(PyArrayMultiIterObject), 0); if (unlikely(!__pyx_ptype_5numpy_broadcast)) {__pyx_filename = __pyx_f[2]; __pyx_lineno = 172; __pyx_clineno = __LINE__; goto __pyx_L1_error;}

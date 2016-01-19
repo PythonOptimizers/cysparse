@@ -3,11 +3,14 @@ from cysparse.sparse.s_mat cimport SparseMatrix, MakeMatrixLikeString
 from cysparse.common_types.cysparse_numpy_types import are_mixed_types_compatible, cysparse_to_numpy_type
 from cysparse.sparse.s_mat cimport PyLLSparseMatrix_Check
 
+from cysparse.sparse.operator_proxies.mul_proxy import MulProxy
+from cysparse.sparse.operator_proxies.sum_proxy import SumProxy
+
 cimport numpy as cnp
 
 cnp.import_array()
 
-from python_ref cimport Py_INCREF, Py_DECREF, PyObject
+from cpython cimport Py_INCREF, Py_DECREF, PyObject
 cdef extern from "Python.h":
     # *** Types ***
     int PyInt_Check(PyObject *o)
@@ -174,15 +177,35 @@ cdef class ConjugateTransposedSparseMatrix_INT64_t_COMPLEX64_t:
         if cnp.PyArray_Check(B) and B.ndim == 1:
             return self.matvec(B)
 
-        return self.matdot(B)
+        return MulProxy(self, B)
+
+    def __add__(self, B):
+        """
+        Return a :class:`SumProxy`.
+
+        Returns:
+            A :class:`SumProxy`, i.e. a proxy to a matrix-like sum.
+
+        """
+        return SumProxy(self, B)
+
+    def __sub__(self, B):
+        """
+        Return a :class:`SumProxy`.
+
+        Returns:
+            A :class:`SumProxy`, i.e. a proxy to a matrix-like sum.
+
+        """
+        return SumProxy(self, B, real_sum=False)
 
     def matvec(self, B):
-        return self.A.matvec_htransp(B)
+        return self.A.matvec_adj(B)
 
     def matvec_transp(self, B):
         return self.A.matvec_conj(B)
 
-    def matvec_htransp(self, B):
+    def matvec_adj(self, B):
         return self.A.matvec(B)
 
     def matvec_conj(self, B):
@@ -195,7 +218,10 @@ cdef class ConjugateTransposedSparseMatrix_INT64_t_COMPLEX64_t:
         return self.A.create_conjugate_transpose()
 
     def matdot(self, B):
-        raise NotImplementedError('Not done yet...')
+        raise NotImplementedError('Operation not implemented yet')
+
+    def matdot_transp(self, B):
+        raise NotImplementedError('Operation not implemented yet')
 
     ####################################################################################################################
     # String representations

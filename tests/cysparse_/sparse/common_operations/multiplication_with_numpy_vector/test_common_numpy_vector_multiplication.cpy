@@ -21,7 +21,7 @@ We tests:
 - Vector multiplication operations:
     * ``matvec()``;
     * ``matvec_transp()``;
-    * ``matvec_htransp()``;
+    * ``matvec_adj()``;
     * ``matvec_conj()``;
 
 and this for all combinations of indices and element types.
@@ -125,21 +125,21 @@ YOU HAVE TO ADD YOUR NEW MATRIX TYPE HERE
 {% endif %}
 
 # ======================================================================================================================
-    def test_numpy_vector_matvec_htransp_element_by_element(self):
+    def test_numpy_vector_matvec_adj_element_by_element(self):
         """
-        Test ``matvec_htransp``.
+        Test ``matvec_adj``.
         """
 {% if class == 'TransposedSparseMatrix' or class == 'ConjugateTransposedSparseMatrix' %}
         # this only works because the matrix doesn't have any imaginary term
-        result_with_A = self.A.T.matvec_htransp(self.x)
-        result_with_C = self.C.matvec_htransp(self.x)
+        result_with_A = self.A.T.matvec_adj(self.x)
+        result_with_C = self.C.matvec_adj(self.x)
 
         for i in range(self.nrow):
             self.assertTrue(result_with_A[i] == result_with_C[i])
 
 {% else %}
-        result_with_A = self.A.matvec_htransp(self.y)
-        result_with_C = self.C.matvec_htransp(self.y)
+        result_with_A = self.A.matvec_adj(self.y)
+        result_with_C = self.C.matvec_adj(self.y)
 
         for j in range(self.ncol):
             self.assertTrue(result_with_A[j] == result_with_C[j])
@@ -241,21 +241,21 @@ YOU HAVE TO ADD YOUR NEW MATRIX TYPE HERE
 {% endif %}
 
 # ======================================================================================================================
-    def test_numpy_vector_matvec_htransp_element_by_element(self):
+    def test_numpy_vector_matvec_adj_element_by_element(self):
         """
-        Test ``matvec_htransp``.
+        Test ``matvec_adj``.
         """
 {% if class == 'TransposedSparseMatrix' or class == 'ConjugateTransposedSparseMatrix' %}
         # this only works because the matrix doesn't have any imaginary term
-        result_with_A = self.A.T.matvec_htransp(self.x)
-        result_with_C = self.C.matvec_htransp(self.x)
+        result_with_A = self.A.T.matvec_adj(self.x)
+        result_with_C = self.C.matvec_adj(self.x)
 
         for i in range(self.size):
             self.assertTrue(result_with_A[i] == result_with_C[i])
 
 {% else %}
-        result_with_A = self.A.matvec_htransp(self.x)
-        result_with_C = self.C.matvec_htransp(self.x)
+        result_with_A = self.A.matvec_adj(self.x)
+        result_with_C = self.C.matvec_adj(self.x)
 
         for i in range(self.size):
             self.assertTrue(result_with_A[i] == result_with_C[i])
@@ -356,21 +356,21 @@ YOU HAVE TO ADD YOUR NEW MATRIX TYPE HERE
 {% endif %}
 
 # ======================================================================================================================
-    def test_numpy_vector_matvec_htransp_element_by_element(self):
+    def test_numpy_vector_matvec_adj_element_by_element(self):
         """
-        Test ``matvec_htransp``.
+        Test ``matvec_adj``.
         """
 {% if class == 'TransposedSparseMatrix' or class == 'ConjugateTransposedSparseMatrix' %}
         # this only works because the matrix doesn't have any imaginary term
-        result_with_A = self.A.T.matvec_htransp(self.x)
-        result_with_C = self.C.matvec_htransp(self.x)
+        result_with_A = self.A.T.matvec_adj(self.x)
+        result_with_C = self.C.matvec_adj(self.x)
 
         for i in range(self.nrow):
             self.assertTrue(result_with_A[i] == result_with_C[i])
 
 {% else %}
-        result_with_A = self.A.matvec_htransp(self.y)
-        result_with_C = self.C.matvec_htransp(self.y)
+        result_with_A = self.A.matvec_adj(self.y)
+        result_with_C = self.C.matvec_adj(self.y)
 
         for j in range(self.ncol):
             self.assertTrue(result_with_A[j] == result_with_C[j])
@@ -469,21 +469,21 @@ YOU HAVE TO ADD YOUR NEW MATRIX TYPE HERE
 {% endif %}
 
 # ======================================================================================================================
-    def test_numpy_vector_matvec_htransp_element_by_element(self):
+    def test_numpy_vector_matvec_adj_element_by_element(self):
         """
-        Test ``matvec_htransp``.
+        Test ``matvec_adj``.
         """
 {% if class == 'TransposedSparseMatrix' or class == 'ConjugateTransposedSparseMatrix' %}
         # this only works because the matrix doesn't have any imaginary term
-        result_with_A = self.A.T.matvec_htransp(self.x)
-        result_with_C = self.C.matvec_htransp(self.x)
+        result_with_A = self.A.T.matvec_adj(self.x)
+        result_with_C = self.C.matvec_adj(self.x)
 
         for i in range(self.size):
             self.assertTrue(result_with_A[i] == result_with_C[i])
 
 {% else %}
-        result_with_A = self.A.matvec_htransp(self.x)
-        result_with_C = self.C.matvec_htransp(self.x)
+        result_with_A = self.A.matvec_adj(self.x)
+        result_with_C = self.C.matvec_adj(self.x)
 
         for i in range(self.size):
             self.assertTrue(result_with_A[i] == result_with_C[i])
@@ -602,21 +602,21 @@ YOU HAVE TO ADD YOUR NEW MATRIX TYPE HERE
 {% endif %}
 
 # ======================================================================================================================
-    def test_numpy_vector_matvec_htransp_element_by_element(self):
+    def test_numpy_vector_matvec_adj_element_by_element(self):
         """
-        Test ``matvec_htransp``.
+        Test ``matvec_adj``.
         """
 {% if class == 'TransposedSparseMatrix' or class == 'ConjugateTransposedSparseMatrix' %}
         # this only works because the matrix doesn't have any imaginary term
-        result_with_A = self.A.T.matvec_htransp(self.x)
-        result_with_C = self.C.matvec_htransp(self.x_strided[::self.stride_factor])
+        result_with_A = self.A.T.matvec_adj(self.x)
+        result_with_C = self.C.matvec_adj(self.x_strided[::self.stride_factor])
 
         for i in range(self.nrow):
             self.assertTrue(result_with_A[i] == result_with_C[i])
 
 {% else %}
-        result_with_A = self.A.matvec_htransp(self.y)
-        result_with_C = self.C.matvec_htransp(self.y_strided[::self.stride_factor])
+        result_with_A = self.A.matvec_adj(self.y)
+        result_with_C = self.C.matvec_adj(self.y_strided[::self.stride_factor])
 
         for j in range(self.ncol):
             self.assertTrue(result_with_A[j] == result_with_C[j])
@@ -722,21 +722,21 @@ YOU HAVE TO ADD YOUR NEW MATRIX TYPE HERE
 {% endif %}
 
 # ======================================================================================================================
-    def test_numpy_vector_matvec_htransp_element_by_element(self):
+    def test_numpy_vector_matvec_adj_element_by_element(self):
         """
-        Test ``matvec_htransp``.
+        Test ``matvec_adj``.
         """
 {% if class == 'TransposedSparseMatrix' or class == 'ConjugateTransposedSparseMatrix' %}
         # this only works because the matrix doesn't have any imaginary term
-        result_with_A = self.A.T.matvec_htransp(self.x)
-        result_with_C = self.C.matvec_htransp(self.x_strided[::self.stride_factor])
+        result_with_A = self.A.T.matvec_adj(self.x)
+        result_with_C = self.C.matvec_adj(self.x_strided[::self.stride_factor])
 
         for i in range(self.size):
             self.assertTrue(result_with_A[i] == result_with_C[i])
 
 {% else %}
-        result_with_A = self.A.matvec_htransp(self.x)
-        result_with_C = self.C.matvec_htransp(self.x_strided[::self.stride_factor])
+        result_with_A = self.A.matvec_adj(self.x)
+        result_with_C = self.C.matvec_adj(self.x_strided[::self.stride_factor])
 
         for j in range(self.size):
             self.assertTrue(result_with_A[j] == result_with_C[j])
@@ -852,21 +852,21 @@ YOU HAVE TO ADD YOUR NEW MATRIX TYPE HERE
 {% endif %}
 
 # ======================================================================================================================
-    def test_numpy_vector_matvec_htransp_element_by_element(self):
+    def test_numpy_vector_matvec_adj_element_by_element(self):
         """
         Test ``matvec_transp``.
         """
 {% if class == 'TransposedSparseMatrix' or class == 'ConjugateTransposedSparseMatrix' %}
         # this only works because the matrix doesn't have any imaginary term
-        result_with_A = self.A.T.matvec_htransp(self.x)
-        result_with_C = self.C.matvec_htransp(self.x_strided[::self.stride_factor])
+        result_with_A = self.A.T.matvec_adj(self.x)
+        result_with_C = self.C.matvec_adj(self.x_strided[::self.stride_factor])
 
         for i in range(self.nrow):
             self.assertTrue(result_with_A[i] == result_with_C[i])
 
 {% else %}
-        result_with_A = self.A.matvec_htransp(self.y)
-        result_with_C = self.C.matvec_htransp(self.y_strided[::self.stride_factor])
+        result_with_A = self.A.matvec_adj(self.y)
+        result_with_C = self.C.matvec_adj(self.y_strided[::self.stride_factor])
 
         for j in range(self.ncol):
             self.assertTrue(result_with_A[j] == result_with_C[j])
@@ -971,21 +971,21 @@ YOU HAVE TO ADD YOUR NEW MATRIX TYPE HERE
 {% endif %}
 
 # ======================================================================================================================
-    def test_numpy_vector_matvec_htransp_element_by_element(self):
+    def test_numpy_vector_matvec_adj_element_by_element(self):
         """
         Test ``matvec_transp``.
         """
 {% if class == 'TransposedSparseMatrix' or class == 'ConjugateTransposedSparseMatrix' %}
         # this only works because the matrix doesn't have any imaginary term
-        result_with_A = self.A.T.matvec_htransp(self.x)
-        result_with_C = self.C.matvec_htransp(self.x_strided[::self.stride_factor])
+        result_with_A = self.A.T.matvec_adj(self.x)
+        result_with_C = self.C.matvec_adj(self.x_strided[::self.stride_factor])
 
         for i in range(self.size):
             self.assertTrue(result_with_A[i] == result_with_C[i])
 
 {% else %}
-        result_with_A = self.A.matvec_htransp(self.x)
-        result_with_C = self.C.matvec_htransp(self.x_strided[::self.stride_factor])
+        result_with_A = self.A.matvec_adj(self.x)
+        result_with_C = self.C.matvec_adj(self.x_strided[::self.stride_factor])
 
         for j in range(self.size):
             self.assertTrue(result_with_A[j] == result_with_C[j])

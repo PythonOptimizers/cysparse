@@ -274,11 +274,15 @@ include "ll_mat_matrices/ll_mat_IO/ll_mat_mm_INT32_t_INT64_t.pxi"
     
 include "ll_mat_matrices/ll_mat_IO/ll_mat_mm_INT32_t_FLOAT64_t.pxi"
     
+include "ll_mat_matrices/ll_mat_IO/ll_mat_mm_INT32_t_COMPLEX128_t.pxi"
+    
 
     
 include "ll_mat_matrices/ll_mat_IO/ll_mat_mm_INT64_t_INT64_t.pxi"
     
 include "ll_mat_matrices/ll_mat_IO/ll_mat_mm_INT64_t_FLOAT64_t.pxi"
+    
+include "ll_mat_matrices/ll_mat_IO/ll_mat_mm_INT64_t_COMPLEX128_t.pxi"
     
 
 
@@ -336,7 +340,7 @@ def matvec_transp(A, b):
 
     raise TypeError("Vector b must be of type SparseMatrix or NumPy ndarray")
 
-def matvec_htransp(A, b):
+def matvec_adj(A, b):
     """
     Return :math:`A^h*b`.
     """
@@ -345,7 +349,7 @@ def matvec_htransp(A, b):
         raise TypeError("Matrix A must be a sparse matrix!")
 
     if cnp.PyArray_Check(b):
-        return A.matvec_htransp(b)
+        return A.matvec_adj(b)
 
     raise TypeError("Vector b must of type NumPy ndarray")
 
@@ -676,8 +680,8 @@ def LLSparseMatrix(**kwargs):
             assert itype in [INT32_T,INT64_T], "itype is not accepted as index type for a matrix from a Matrix Market file.\n\Accepted itypes:\n\t" + \
              "INT32_T,INT64_T"
 
-            assert dtype in [INT64_T,FLOAT64_T], "dtype is not accepted as type for a matrix from a Matrix Market file.\nAccepted dtypes:\n\t" + \
-             "INT64_T,FLOAT64_T"
+            assert dtype in [INT64_T,FLOAT64_T,COMPLEX128_T], "dtype is not accepted as type for a matrix from a Matrix Market file.\nAccepted dtypes:\n\t" + \
+             "INT64_T,FLOAT64_T,COMPLEX128_T"
 
 
     
@@ -698,6 +702,13 @@ def LLSparseMatrix(**kwargs):
                         return MakeLLSparseMatrixFromMMFile2_INT32_t_FLOAT64_t(mm_filename=mm_filename, store_zero=store_zero, test_bounds=test_bounds)
                     return MakeLLSparseMatrixFromMMFile_INT32_t_FLOAT64_t(mm_filename=mm_filename, store_zero=store_zero, test_bounds=test_bounds)
     
+        
+                elif dtype == COMPLEX128_T:
+        
+                    if mm_read_file_experimental:
+                        return MakeLLSparseMatrixFromMMFile2_INT32_t_COMPLEX128_t(mm_filename=mm_filename, store_zero=store_zero, test_bounds=test_bounds)
+                    return MakeLLSparseMatrixFromMMFile_INT32_t_COMPLEX128_t(mm_filename=mm_filename, store_zero=store_zero, test_bounds=test_bounds)
+    
 
     
             elif itype == INT64_T:
@@ -716,6 +727,13 @@ def LLSparseMatrix(**kwargs):
                     if mm_read_file_experimental:
                         return MakeLLSparseMatrixFromMMFile2_INT64_t_FLOAT64_t(mm_filename=mm_filename, store_zero=store_zero, test_bounds=test_bounds)
                     return MakeLLSparseMatrixFromMMFile_INT64_t_FLOAT64_t(mm_filename=mm_filename, store_zero=store_zero, test_bounds=test_bounds)
+    
+        
+                elif dtype == COMPLEX128_T:
+        
+                    if mm_read_file_experimental:
+                        return MakeLLSparseMatrixFromMMFile2_INT64_t_COMPLEX128_t(mm_filename=mm_filename, store_zero=store_zero, test_bounds=test_bounds)
+                    return MakeLLSparseMatrixFromMMFile_INT64_t_COMPLEX128_t(mm_filename=mm_filename, store_zero=store_zero, test_bounds=test_bounds)
     
 
 
@@ -767,6 +785,11 @@ def LLSparseMatrixFromMMFile(filename, store_zero=False, test_bounds=True):
         
             return MakeLLSparseMatrixFromMMFile_INT32_t_FLOAT64_t(mm_filename=filename, store_zero=store_zero, test_bounds=test_bounds)
     
+        
+        elif dtype == COMPLEX128_T:
+        
+            return MakeLLSparseMatrixFromMMFile_INT32_t_COMPLEX128_t(mm_filename=filename, store_zero=store_zero, test_bounds=test_bounds)
+    
     
 
     
@@ -781,6 +804,11 @@ def LLSparseMatrixFromMMFile(filename, store_zero=False, test_bounds=True):
         elif dtype == FLOAT64_T:
         
             return MakeLLSparseMatrixFromMMFile_INT64_t_FLOAT64_t(mm_filename=filename, store_zero=store_zero, test_bounds=test_bounds)
+    
+        
+        elif dtype == COMPLEX128_T:
+        
+            return MakeLLSparseMatrixFromMMFile_INT64_t_COMPLEX128_t(mm_filename=filename, store_zero=store_zero, test_bounds=test_bounds)
     
     
 

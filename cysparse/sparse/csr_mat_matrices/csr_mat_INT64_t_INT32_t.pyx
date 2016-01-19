@@ -751,7 +751,7 @@ cdef class CSRSparseMatrix_INT64_t_INT32_t(ImmutableSparseMatrix_INT64_t_INT32_t
         return multiply_transposed_csr_mat_with_numpy_vector_INT64_t_INT32_t(self, b)
 
 
-    def matvec_htransp(self, b):
+    def matvec_adj(self, b):
         """
         Return :math:`A^h * b`.
         """
