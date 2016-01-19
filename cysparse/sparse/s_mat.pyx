@@ -357,7 +357,7 @@ cdef class SparseMatrix:
         """
         raise NotImplementedError("Operation not implemented (yet). Please report.")
 
-    def matdot_htransp(self, B):
+    def matdot_adj(self, B):
         """
         Return ``A^h * B``.
 
