@@ -122,7 +122,7 @@ cdef LLSparseMatrix_@index@_@type@ MakeLLSparseMatrixFromMMFile_@index@_@type@(s
                 A.safe_put(atoi(token_list[0])-1, atoi(token_list[1]) - 1, <@type@>atof(token_list[2]))
 {% elif type == 'COMPLEX128_t' %}
                 if test_matrix and len(token_list) != 4:
-                    raise IndexError("Complex MM file must have 4 elements on each row (i, j, val)")
+                    raise IndexError("Complex MM file must have 4 elements on each row (i, j, rval, ival)")
                 # BUG !!! in Cython ??
                 # I have no idea why we have to use temp variables...
                 real_part =  <FLOAT64_t> atof(token_list[2])
@@ -149,7 +149,7 @@ YOU MUST CAST YOUR TYPE HERE
                 A.put(atoi(token_list[0])-1, atoi(token_list[1]) - 1, <@type@>atof(token_list[2]))
 {% elif type == 'COMPLEX128_t' %}
                 if test_matrix and len(token_list) != 4:
-                    raise IndexError("Complex MM file must have 4 elements on each row (i, j, val)")
+                    raise IndexError("Complex MM file must have 4 elements on each row (i, j, rval, ival)")
                 real_part =  <FLOAT64_t> atof(token_list[2])
                 imag_part =  <FLOAT64_t> atof(token_list[3])
 

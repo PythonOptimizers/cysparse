@@ -114,7 +114,7 @@ cdef LLSparseMatrix_INT64_t_COMPLEX128_t MakeLLSparseMatrixFromMMFile_INT64_t_CO
                 token_list = line.split()
 
                 if test_matrix and len(token_list) != 4:
-                    raise IndexError("Complex MM file must have 4 elements on each row (i, j, val)")
+                    raise IndexError("Complex MM file must have 4 elements on each row (i, j, rval, ival)")
                 # BUG !!! in Cython ??
                 # I have no idea why we have to use temp variables...
                 real_part =  <FLOAT64_t> atof(token_list[2])
@@ -131,7 +131,7 @@ cdef LLSparseMatrix_INT64_t_COMPLEX128_t MakeLLSparseMatrixFromMMFile_INT64_t_CO
                 token_list = line.split()
 
                 if test_matrix and len(token_list) != 4:
-                    raise IndexError("Complex MM file must have 4 elements on each row (i, j, val)")
+                    raise IndexError("Complex MM file must have 4 elements on each row (i, j, rval, ival)")
                 real_part =  <FLOAT64_t> atof(token_list[2])
                 imag_part =  <FLOAT64_t> atof(token_list[3])
 
