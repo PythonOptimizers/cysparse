@@ -100,12 +100,14 @@ else:
 base_ext_params = copy.deepcopy(ext_params)
 base_ext = [
     Extension(name="cysparse.common_types.cysparse_types",
-              sources=["cysparse/common_types/cysparse_types.pxd", "cysparse/common_types/cysparse_types.pyx"]),
+              sources=["cysparse/common_types/cysparse_types.pxd", "cysparse/common_types/cysparse_types.pyx"],
+              **base_ext_params),
     Extension(name="cysparse.common_types.cysparse_numpy_types",
               sources=["cysparse/common_types/cysparse_numpy_types.pxd", "cysparse/common_types/cysparse_numpy_types.pyx"],
               **base_ext_params),
     Extension(name="cysparse.common_types.cysparse_generic_types",
-              sources=["cysparse/common_types/cysparse_generic_types.pxd", "cysparse/common_types/cysparse_generic_types.pyx"]),
+              sources=["cysparse/common_types/cysparse_generic_types.pxd", "cysparse/common_types/cysparse_generic_types.pyx"],
+              **base_ext_params),
     ]
 
 #-----------------------------------------------------------------------------------------------------------------------
