@@ -110,8 +110,10 @@ See [Wiki](https://github.com/Funartech/cysparse/wiki) for details!
   Introduction of Travis.
   create_conjugate_transpose() -> create_adjoint()
   
-- Version 0.6.0 released on Jan 09, 2016
+- Version 0.6.0 released on Jan 19, 2016
 
+  Changed matvec_htransp -> matvec_adj and matdot_htransp -> matdot_adj.
+  
 - Version 0.5.0 released on Jan 09, 2016
 
   Introduction of Operator Proxies (SumOp, MulOp).
