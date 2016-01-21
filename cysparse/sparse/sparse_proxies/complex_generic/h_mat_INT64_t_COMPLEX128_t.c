@@ -1461,7 +1461,7 @@ static char __pyx_k_This_proxy_is_unique[] = "This proxy is unique";
 static char __pyx_k_cysparse_to_numpy_type[] = "cysparse_to_numpy_type";
 static char __pyx_k_Conjugate_Transposed_of[] = "Conjugate Transposed of ";
 static char __pyx_k_are_mixed_types_compatible[] = "are_mixed_types_compatible";
-static char __pyx_k_create_conjugate_transpose[] = "create_conjugate_transpose";
+static char __pyx_k_create_adjoint[] = "create_adjoint";
 static char __pyx_k_ndarray_is_not_C_contiguous[] = "ndarray is not C contiguous";
 static char __pyx_k_Operation_not_implemented_yet[] = "Operation not implemented yet";
 static char __pyx_k_Index_tuple_must_be_of_length_2[] = "Index tuple must be of length 2 (not %d)";
@@ -1500,7 +1500,7 @@ static PyObject *__pyx_n_s_at_conj_to_string;
 static PyObject *__pyx_n_s_base_type_str;
 static PyObject *__pyx_n_s_cell_width;
 static PyObject *__pyx_n_s_conj;
-static PyObject *__pyx_n_s_create_conjugate_transpose;
+static PyObject *__pyx_n_s_create_adjoint;
 static PyObject *__pyx_n_s_cysparse_common_types_cysparse_n;
 static PyObject *__pyx_n_s_cysparse_sparse_operator_proxies;
 static PyObject *__pyx_n_s_cysparse_sparse_operator_proxies_2;
@@ -4093,7 +4093,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_14sparse_proxies_15complex_generic_2
  *         raise NotImplementedError('This proxy is unique')
  * 
  *     def matrix_copy(self):             # <<<<<<<<<<<<<<
- *         return self.A.create_conjugate_transpose()
+ *         return self.A.create_adjoint()
  * 
  */
 
@@ -4124,12 +4124,12 @@ static PyObject *__pyx_pf_8cysparse_6sparse_14sparse_proxies_15complex_generic_2
   /* "cysparse/sparse/sparse_proxies/complex_generic/h_mat_INT64_t_COMPLEX128_t.pyx":218
  * 
  *     def matrix_copy(self):
- *         return self.A.create_conjugate_transpose()             # <<<<<<<<<<<<<<
+ *         return self.A.create_adjoint()             # <<<<<<<<<<<<<<
  * 
  *     def matdot(self, B):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self->A), __pyx_n_s_create_conjugate_transpose); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 218; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self->A), __pyx_n_s_create_adjoint); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 218; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_2))) {
@@ -4157,7 +4157,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_14sparse_proxies_15complex_generic_2
  *         raise NotImplementedError('This proxy is unique')
  * 
  *     def matrix_copy(self):             # <<<<<<<<<<<<<<
- *         return self.A.create_conjugate_transpose()
+ *         return self.A.create_adjoint()
  * 
  */
 
@@ -4175,7 +4175,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_14sparse_proxies_15complex_generic_2
 }
 
 /* "cysparse/sparse/sparse_proxies/complex_generic/h_mat_INT64_t_COMPLEX128_t.pyx":220
- *         return self.A.create_conjugate_transpose()
+ *         return self.A.create_adjoint()
  * 
  *     def matdot(self, B):             # <<<<<<<<<<<<<<
  *         raise NotImplementedError('Operation not implemented yet')
@@ -4218,7 +4218,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_14sparse_proxies_15complex_generic_2
   {__pyx_filename = __pyx_f[0]; __pyx_lineno = 221; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "cysparse/sparse/sparse_proxies/complex_generic/h_mat_INT64_t_COMPLEX128_t.pyx":220
- *         return self.A.create_conjugate_transpose()
+ *         return self.A.create_adjoint()
  * 
  *     def matdot(self, B):             # <<<<<<<<<<<<<<
  *         raise NotImplementedError('Operation not implemented yet')
@@ -7194,7 +7194,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_base_type_str, __pyx_k_base_type_str, sizeof(__pyx_k_base_type_str), 0, 0, 1, 1},
   {&__pyx_n_s_cell_width, __pyx_k_cell_width, sizeof(__pyx_k_cell_width), 0, 0, 1, 1},
   {&__pyx_n_s_conj, __pyx_k_conj, sizeof(__pyx_k_conj), 0, 0, 1, 1},
-  {&__pyx_n_s_create_conjugate_transpose, __pyx_k_create_conjugate_transpose, sizeof(__pyx_k_create_conjugate_transpose), 0, 0, 1, 1},
+  {&__pyx_n_s_create_adjoint, __pyx_k_create_adjoint, sizeof(__pyx_k_create_adjoint), 0, 0, 1, 1},
   {&__pyx_n_s_cysparse_common_types_cysparse_n, __pyx_k_cysparse_common_types_cysparse_n, sizeof(__pyx_k_cysparse_common_types_cysparse_n), 0, 0, 1, 1},
   {&__pyx_n_s_cysparse_sparse_operator_proxies, __pyx_k_cysparse_sparse_operator_proxies, sizeof(__pyx_k_cysparse_sparse_operator_proxies), 0, 0, 1, 1},
   {&__pyx_n_s_cysparse_sparse_operator_proxies_2, __pyx_k_cysparse_sparse_operator_proxies_2, sizeof(__pyx_k_cysparse_sparse_operator_proxies_2), 0, 0, 1, 1},

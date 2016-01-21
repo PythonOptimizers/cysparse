@@ -4716,7 +4716,7 @@ static char __pyx_k_home_nikolaj_Documents_WORK_Dom[] = "/home/nikolaj/Documents
 static char __pyx_k_unknown_dtype_code_in_numpy_pxd[] = "unknown dtype code in numpy.pxd (%d)";
 static char __pyx_k_Cannot_create_a_LLSparseMatrix_f[] = "Cannot create a LLSparseMatrix from another matrix (yet)";
 static char __pyx_k_Cannot_use_a_matrix_and_a_file_t[] = "Cannot use a matrix and a file to create a LLSparseMatrix";
-static char __pyx_k_Complex_MM_file_must_have_4_elem[] = "Complex MM file must have 4 elements on each row (i, j, val)";
+static char __pyx_k_Complex_MM_file_must_have_4_elem[] = "Complex MM file must have 4 elements on each row (i, j, rval, ival)";
 static char __pyx_k_CySparse_only_read_sparse_matric[] = "CySparse only read sparse matrices";
 static char __pyx_k_Element_type_of_matrix_is_not_re[] = "Element type of matrix is not recognized";
 static char __pyx_k_Format_string_allocated_too_shor[] = "Format string allocated too short, see comment in numpy.pxd";
@@ -41410,7 +41410,7 @@ static struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32_t_COM
  *                 token_list = line.split()
  * 
  *                 if test_matrix and len(token_list) != 4:             # <<<<<<<<<<<<<<
- *                     raise IndexError("Complex MM file must have 4 elements on each row (i, j, val)")
+ *                     raise IndexError("Complex MM file must have 4 elements on each row (i, j, rval, ival)")
  *                 # BUG !!! in Cython ??
  */
               __pyx_t_11 = (__pyx_v_test_matrix != 0);
@@ -41432,7 +41432,7 @@ static struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32_t_COM
                 /* "cysparse/sparse/ll_mat_matrices/ll_mat_IO/ll_mat_mm_INT32_t_COMPLEX128_t.pxi":117
  * 
  *                 if test_matrix and len(token_list) != 4:
- *                     raise IndexError("Complex MM file must have 4 elements on each row (i, j, val)")             # <<<<<<<<<<<<<<
+ *                     raise IndexError("Complex MM file must have 4 elements on each row (i, j, rval, ival)")             # <<<<<<<<<<<<<<
  *                 # BUG !!! in Cython ??
  *                 # I have no idea why we have to use temp variables...
  */
@@ -41446,7 +41446,7 @@ static struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32_t_COM
  *                 token_list = line.split()
  * 
  *                 if test_matrix and len(token_list) != 4:             # <<<<<<<<<<<<<<
- *                     raise IndexError("Complex MM file must have 4 elements on each row (i, j, val)")
+ *                     raise IndexError("Complex MM file must have 4 elements on each row (i, j, rval, ival)")
  *                 # BUG !!! in Cython ??
  */
               }
@@ -41628,7 +41628,7 @@ static struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32_t_COM
  *                 token_list = line.split()
  * 
  *                 if test_matrix and len(token_list) != 4:             # <<<<<<<<<<<<<<
- *                     raise IndexError("Complex MM file must have 4 elements on each row (i, j, val)")
+ *                     raise IndexError("Complex MM file must have 4 elements on each row (i, j, rval, ival)")
  *                 real_part =  <FLOAT64_t> atof(token_list[2])
  */
               __pyx_t_11 = (__pyx_v_test_matrix != 0);
@@ -41650,7 +41650,7 @@ static struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32_t_COM
                 /* "cysparse/sparse/ll_mat_matrices/ll_mat_IO/ll_mat_mm_INT32_t_COMPLEX128_t.pxi":134
  * 
  *                 if test_matrix and len(token_list) != 4:
- *                     raise IndexError("Complex MM file must have 4 elements on each row (i, j, val)")             # <<<<<<<<<<<<<<
+ *                     raise IndexError("Complex MM file must have 4 elements on each row (i, j, rval, ival)")             # <<<<<<<<<<<<<<
  *                 real_part =  <FLOAT64_t> atof(token_list[2])
  *                 imag_part =  <FLOAT64_t> atof(token_list[3])
  */
@@ -41664,14 +41664,14 @@ static struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32_t_COM
  *                 token_list = line.split()
  * 
  *                 if test_matrix and len(token_list) != 4:             # <<<<<<<<<<<<<<
- *                     raise IndexError("Complex MM file must have 4 elements on each row (i, j, val)")
+ *                     raise IndexError("Complex MM file must have 4 elements on each row (i, j, rval, ival)")
  *                 real_part =  <FLOAT64_t> atof(token_list[2])
  */
               }
 
               /* "cysparse/sparse/ll_mat_matrices/ll_mat_IO/ll_mat_mm_INT32_t_COMPLEX128_t.pxi":135
  *                 if test_matrix and len(token_list) != 4:
- *                     raise IndexError("Complex MM file must have 4 elements on each row (i, j, val)")
+ *                     raise IndexError("Complex MM file must have 4 elements on each row (i, j, rval, ival)")
  *                 real_part =  <FLOAT64_t> atof(token_list[2])             # <<<<<<<<<<<<<<
  *                 imag_part =  <FLOAT64_t> atof(token_list[3])
  * 
@@ -41687,7 +41687,7 @@ static struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT32_t_COM
               __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
               /* "cysparse/sparse/ll_mat_matrices/ll_mat_IO/ll_mat_mm_INT32_t_COMPLEX128_t.pxi":136
- *                     raise IndexError("Complex MM file must have 4 elements on each row (i, j, val)")
+ *                     raise IndexError("Complex MM file must have 4 elements on each row (i, j, rval, ival)")
  *                 real_part =  <FLOAT64_t> atof(token_list[2])
  *                 imag_part =  <FLOAT64_t> atof(token_list[3])             # <<<<<<<<<<<<<<
  * 
@@ -53082,7 +53082,7 @@ static struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT64_t_COM
  *                 token_list = line.split()
  * 
  *                 if test_matrix and len(token_list) != 4:             # <<<<<<<<<<<<<<
- *                     raise IndexError("Complex MM file must have 4 elements on each row (i, j, val)")
+ *                     raise IndexError("Complex MM file must have 4 elements on each row (i, j, rval, ival)")
  *                 # BUG !!! in Cython ??
  */
               __pyx_t_11 = (__pyx_v_test_matrix != 0);
@@ -53104,7 +53104,7 @@ static struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT64_t_COM
                 /* "cysparse/sparse/ll_mat_matrices/ll_mat_IO/ll_mat_mm_INT64_t_COMPLEX128_t.pxi":117
  * 
  *                 if test_matrix and len(token_list) != 4:
- *                     raise IndexError("Complex MM file must have 4 elements on each row (i, j, val)")             # <<<<<<<<<<<<<<
+ *                     raise IndexError("Complex MM file must have 4 elements on each row (i, j, rval, ival)")             # <<<<<<<<<<<<<<
  *                 # BUG !!! in Cython ??
  *                 # I have no idea why we have to use temp variables...
  */
@@ -53118,7 +53118,7 @@ static struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT64_t_COM
  *                 token_list = line.split()
  * 
  *                 if test_matrix and len(token_list) != 4:             # <<<<<<<<<<<<<<
- *                     raise IndexError("Complex MM file must have 4 elements on each row (i, j, val)")
+ *                     raise IndexError("Complex MM file must have 4 elements on each row (i, j, rval, ival)")
  *                 # BUG !!! in Cython ??
  */
               }
@@ -53300,7 +53300,7 @@ static struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT64_t_COM
  *                 token_list = line.split()
  * 
  *                 if test_matrix and len(token_list) != 4:             # <<<<<<<<<<<<<<
- *                     raise IndexError("Complex MM file must have 4 elements on each row (i, j, val)")
+ *                     raise IndexError("Complex MM file must have 4 elements on each row (i, j, rval, ival)")
  *                 real_part =  <FLOAT64_t> atof(token_list[2])
  */
               __pyx_t_11 = (__pyx_v_test_matrix != 0);
@@ -53322,7 +53322,7 @@ static struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT64_t_COM
                 /* "cysparse/sparse/ll_mat_matrices/ll_mat_IO/ll_mat_mm_INT64_t_COMPLEX128_t.pxi":134
  * 
  *                 if test_matrix and len(token_list) != 4:
- *                     raise IndexError("Complex MM file must have 4 elements on each row (i, j, val)")             # <<<<<<<<<<<<<<
+ *                     raise IndexError("Complex MM file must have 4 elements on each row (i, j, rval, ival)")             # <<<<<<<<<<<<<<
  *                 real_part =  <FLOAT64_t> atof(token_list[2])
  *                 imag_part =  <FLOAT64_t> atof(token_list[3])
  */
@@ -53336,14 +53336,14 @@ static struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT64_t_COM
  *                 token_list = line.split()
  * 
  *                 if test_matrix and len(token_list) != 4:             # <<<<<<<<<<<<<<
- *                     raise IndexError("Complex MM file must have 4 elements on each row (i, j, val)")
+ *                     raise IndexError("Complex MM file must have 4 elements on each row (i, j, rval, ival)")
  *                 real_part =  <FLOAT64_t> atof(token_list[2])
  */
               }
 
               /* "cysparse/sparse/ll_mat_matrices/ll_mat_IO/ll_mat_mm_INT64_t_COMPLEX128_t.pxi":135
  *                 if test_matrix and len(token_list) != 4:
- *                     raise IndexError("Complex MM file must have 4 elements on each row (i, j, val)")
+ *                     raise IndexError("Complex MM file must have 4 elements on each row (i, j, rval, ival)")
  *                 real_part =  <FLOAT64_t> atof(token_list[2])             # <<<<<<<<<<<<<<
  *                 imag_part =  <FLOAT64_t> atof(token_list[3])
  * 
@@ -53359,7 +53359,7 @@ static struct __pyx_obj_8cysparse_6sparse_15ll_mat_matrices_27ll_mat_INT64_t_COM
               __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
               /* "cysparse/sparse/ll_mat_matrices/ll_mat_IO/ll_mat_mm_INT64_t_COMPLEX128_t.pxi":136
- *                     raise IndexError("Complex MM file must have 4 elements on each row (i, j, val)")
+ *                     raise IndexError("Complex MM file must have 4 elements on each row (i, j, rval, ival)")
  *                 real_part =  <FLOAT64_t> atof(token_list[2])
  *                 imag_part =  <FLOAT64_t> atof(token_list[3])             # <<<<<<<<<<<<<<
  * 
@@ -70306,7 +70306,7 @@ static int __Pyx_InitCachedConstants(void) {
   /* "cysparse/sparse/ll_mat_matrices/ll_mat_IO/ll_mat_mm_INT32_t_COMPLEX128_t.pxi":117
  * 
  *                 if test_matrix and len(token_list) != 4:
- *                     raise IndexError("Complex MM file must have 4 elements on each row (i, j, val)")             # <<<<<<<<<<<<<<
+ *                     raise IndexError("Complex MM file must have 4 elements on each row (i, j, rval, ival)")             # <<<<<<<<<<<<<<
  *                 # BUG !!! in Cython ??
  *                 # I have no idea why we have to use temp variables...
  */
@@ -70317,7 +70317,7 @@ static int __Pyx_InitCachedConstants(void) {
   /* "cysparse/sparse/ll_mat_matrices/ll_mat_IO/ll_mat_mm_INT32_t_COMPLEX128_t.pxi":134
  * 
  *                 if test_matrix and len(token_list) != 4:
- *                     raise IndexError("Complex MM file must have 4 elements on each row (i, j, val)")             # <<<<<<<<<<<<<<
+ *                     raise IndexError("Complex MM file must have 4 elements on each row (i, j, rval, ival)")             # <<<<<<<<<<<<<<
  *                 real_part =  <FLOAT64_t> atof(token_list[2])
  *                 imag_part =  <FLOAT64_t> atof(token_list[3])
  */
@@ -70702,7 +70702,7 @@ static int __Pyx_InitCachedConstants(void) {
   /* "cysparse/sparse/ll_mat_matrices/ll_mat_IO/ll_mat_mm_INT64_t_COMPLEX128_t.pxi":117
  * 
  *                 if test_matrix and len(token_list) != 4:
- *                     raise IndexError("Complex MM file must have 4 elements on each row (i, j, val)")             # <<<<<<<<<<<<<<
+ *                     raise IndexError("Complex MM file must have 4 elements on each row (i, j, rval, ival)")             # <<<<<<<<<<<<<<
  *                 # BUG !!! in Cython ??
  *                 # I have no idea why we have to use temp variables...
  */
@@ -70713,7 +70713,7 @@ static int __Pyx_InitCachedConstants(void) {
   /* "cysparse/sparse/ll_mat_matrices/ll_mat_IO/ll_mat_mm_INT64_t_COMPLEX128_t.pxi":134
  * 
  *                 if test_matrix and len(token_list) != 4:
- *                     raise IndexError("Complex MM file must have 4 elements on each row (i, j, val)")             # <<<<<<<<<<<<<<
+ *                     raise IndexError("Complex MM file must have 4 elements on each row (i, j, rval, ival)")             # <<<<<<<<<<<<<<
  *                 real_part =  <FLOAT64_t> atof(token_list[2])
  *                 imag_part =  <FLOAT64_t> atof(token_list[3])
  */

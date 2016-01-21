@@ -589,7 +589,7 @@ cdef class LLSparseMatrix_@index@_@type@(MutableSparseMatrix_@index@_@type@):
             return transpose
 
 {% if type in complex_list %}
-    def create_conjugate_transpose(self):
+    def create_adjoint(self):
         """
         Create a new matrix that is the conjugate transposed of this one.
         """

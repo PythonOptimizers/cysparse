@@ -1303,7 +1303,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_14s_mat_matrices_25s_mat_INT64_t_COM
 static PyObject *__pyx_pf_8cysparse_6sparse_14s_mat_matrices_25s_mat_INT64_t_COMPLEX64_t_32SparseMatrix_INT64_t_COMPLEX64_t_16conj(struct __pyx_obj_8cysparse_6sparse_14s_mat_matrices_25s_mat_INT64_t_COMPLEX64_t_SparseMatrix_INT64_t_COMPLEX64_t *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_8cysparse_6sparse_14s_mat_matrices_25s_mat_INT64_t_COMPLEX64_t_32SparseMatrix_INT64_t_COMPLEX64_t_18diags(struct __pyx_obj_8cysparse_6sparse_14s_mat_matrices_25s_mat_INT64_t_COMPLEX64_t_SparseMatrix_INT64_t_COMPLEX64_t *__pyx_v_self, PyObject *__pyx_v_diag_coeff); /* proto */
 static PyObject *__pyx_pf_8cysparse_6sparse_14s_mat_matrices_25s_mat_INT64_t_COMPLEX64_t_32SparseMatrix_INT64_t_COMPLEX64_t_20create_transpose(CYTHON_UNUSED struct __pyx_obj_8cysparse_6sparse_14s_mat_matrices_25s_mat_INT64_t_COMPLEX64_t_SparseMatrix_INT64_t_COMPLEX64_t *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_8cysparse_6sparse_14s_mat_matrices_25s_mat_INT64_t_COMPLEX64_t_32SparseMatrix_INT64_t_COMPLEX64_t_22create_conjugate_transpose(CYTHON_UNUSED struct __pyx_obj_8cysparse_6sparse_14s_mat_matrices_25s_mat_INT64_t_COMPLEX64_t_SparseMatrix_INT64_t_COMPLEX64_t *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_8cysparse_6sparse_14s_mat_matrices_25s_mat_INT64_t_COMPLEX64_t_32SparseMatrix_INT64_t_COMPLEX64_t_22create_adjoint(CYTHON_UNUSED struct __pyx_obj_8cysparse_6sparse_14s_mat_matrices_25s_mat_INT64_t_COMPLEX64_t_SparseMatrix_INT64_t_COMPLEX64_t *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_8cysparse_6sparse_14s_mat_matrices_25s_mat_INT64_t_COMPLEX64_t_32SparseMatrix_INT64_t_COMPLEX64_t_24create_conjugate(CYTHON_UNUSED struct __pyx_obj_8cysparse_6sparse_14s_mat_matrices_25s_mat_INT64_t_COMPLEX64_t_SparseMatrix_INT64_t_COMPLEX64_t *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_8cysparse_6sparse_14s_mat_matrices_25s_mat_INT64_t_COMPLEX64_t_32SparseMatrix_INT64_t_COMPLEX64_t_26memory_virtual_in_bits(struct __pyx_obj_8cysparse_6sparse_14s_mat_matrices_25s_mat_INT64_t_COMPLEX64_t_SparseMatrix_INT64_t_COMPLEX64_t *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_8cysparse_6sparse_14s_mat_matrices_25s_mat_INT64_t_COMPLEX64_t_32SparseMatrix_INT64_t_COMPLEX64_t_28memory_virtual_in_bytes(struct __pyx_obj_8cysparse_6sparse_14s_mat_matrices_25s_mat_INT64_t_COMPLEX64_t_SparseMatrix_INT64_t_COMPLEX64_t *__pyx_v_self); /* proto */
@@ -2818,36 +2818,36 @@ static PyObject *__pyx_pf_8cysparse_6sparse_14s_mat_matrices_25s_mat_INT64_t_COM
 /* "cysparse/sparse/s_mat_matrices/s_mat_INT64_t_COMPLEX64_t.pyx":229
  * 
  * 
- *     def create_conjugate_transpose(self):             # <<<<<<<<<<<<<<
+ *     def create_adjoint(self):             # <<<<<<<<<<<<<<
  *         raise NotImplementedError('Not yet implemented. Please report.')
  * 
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_8cysparse_6sparse_14s_mat_matrices_25s_mat_INT64_t_COMPLEX64_t_32SparseMatrix_INT64_t_COMPLEX64_t_23create_conjugate_transpose(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_8cysparse_6sparse_14s_mat_matrices_25s_mat_INT64_t_COMPLEX64_t_32SparseMatrix_INT64_t_COMPLEX64_t_23create_conjugate_transpose(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_8cysparse_6sparse_14s_mat_matrices_25s_mat_INT64_t_COMPLEX64_t_32SparseMatrix_INT64_t_COMPLEX64_t_23create_adjoint(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_8cysparse_6sparse_14s_mat_matrices_25s_mat_INT64_t_COMPLEX64_t_32SparseMatrix_INT64_t_COMPLEX64_t_23create_adjoint(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("create_conjugate_transpose (wrapper)", 0);
-  __pyx_r = __pyx_pf_8cysparse_6sparse_14s_mat_matrices_25s_mat_INT64_t_COMPLEX64_t_32SparseMatrix_INT64_t_COMPLEX64_t_22create_conjugate_transpose(((struct __pyx_obj_8cysparse_6sparse_14s_mat_matrices_25s_mat_INT64_t_COMPLEX64_t_SparseMatrix_INT64_t_COMPLEX64_t *)__pyx_v_self));
+  __Pyx_RefNannySetupContext("create_adjoint (wrapper)", 0);
+  __pyx_r = __pyx_pf_8cysparse_6sparse_14s_mat_matrices_25s_mat_INT64_t_COMPLEX64_t_32SparseMatrix_INT64_t_COMPLEX64_t_22create_adjoint(((struct __pyx_obj_8cysparse_6sparse_14s_mat_matrices_25s_mat_INT64_t_COMPLEX64_t_SparseMatrix_INT64_t_COMPLEX64_t *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8cysparse_6sparse_14s_mat_matrices_25s_mat_INT64_t_COMPLEX64_t_32SparseMatrix_INT64_t_COMPLEX64_t_22create_conjugate_transpose(CYTHON_UNUSED struct __pyx_obj_8cysparse_6sparse_14s_mat_matrices_25s_mat_INT64_t_COMPLEX64_t_SparseMatrix_INT64_t_COMPLEX64_t *__pyx_v_self) {
+static PyObject *__pyx_pf_8cysparse_6sparse_14s_mat_matrices_25s_mat_INT64_t_COMPLEX64_t_32SparseMatrix_INT64_t_COMPLEX64_t_22create_adjoint(CYTHON_UNUSED struct __pyx_obj_8cysparse_6sparse_14s_mat_matrices_25s_mat_INT64_t_COMPLEX64_t_SparseMatrix_INT64_t_COMPLEX64_t *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
-  __Pyx_RefNannySetupContext("create_conjugate_transpose", 0);
+  __Pyx_RefNannySetupContext("create_adjoint", 0);
 
   /* "cysparse/sparse/s_mat_matrices/s_mat_INT64_t_COMPLEX64_t.pyx":230
  * 
- *     def create_conjugate_transpose(self):
+ *     def create_adjoint(self):
  *         raise NotImplementedError('Not yet implemented. Please report.')             # <<<<<<<<<<<<<<
  * 
  *     def create_conjugate(self):
@@ -2861,7 +2861,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_14s_mat_matrices_25s_mat_INT64_t_COM
   /* "cysparse/sparse/s_mat_matrices/s_mat_INT64_t_COMPLEX64_t.pyx":229
  * 
  * 
- *     def create_conjugate_transpose(self):             # <<<<<<<<<<<<<<
+ *     def create_adjoint(self):             # <<<<<<<<<<<<<<
  *         raise NotImplementedError('Not yet implemented. Please report.')
  * 
  */
@@ -2869,7 +2869,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_14s_mat_matrices_25s_mat_INT64_t_COM
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("cysparse.sparse.s_mat_matrices.s_mat_INT64_t_COMPLEX64_t.SparseMatrix_INT64_t_COMPLEX64_t.create_conjugate_transpose", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("cysparse.sparse.s_mat_matrices.s_mat_INT64_t_COMPLEX64_t.SparseMatrix_INT64_t_COMPLEX64_t.create_adjoint", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
@@ -4444,7 +4444,7 @@ static PyMethodDef __pyx_methods_8cysparse_6sparse_14s_mat_matrices_25s_mat_INT6
   {"conj", (PyCFunction)__pyx_pw_8cysparse_6sparse_14s_mat_matrices_25s_mat_INT64_t_COMPLEX64_t_32SparseMatrix_INT64_t_COMPLEX64_t_17conj, METH_NOARGS, 0},
   {"diags", (PyCFunction)__pyx_pw_8cysparse_6sparse_14s_mat_matrices_25s_mat_INT64_t_COMPLEX64_t_32SparseMatrix_INT64_t_COMPLEX64_t_19diags, METH_O, __pyx_doc_8cysparse_6sparse_14s_mat_matrices_25s_mat_INT64_t_COMPLEX64_t_32SparseMatrix_INT64_t_COMPLEX64_t_18diags},
   {"create_transpose", (PyCFunction)__pyx_pw_8cysparse_6sparse_14s_mat_matrices_25s_mat_INT64_t_COMPLEX64_t_32SparseMatrix_INT64_t_COMPLEX64_t_21create_transpose, METH_NOARGS, 0},
-  {"create_conjugate_transpose", (PyCFunction)__pyx_pw_8cysparse_6sparse_14s_mat_matrices_25s_mat_INT64_t_COMPLEX64_t_32SparseMatrix_INT64_t_COMPLEX64_t_23create_conjugate_transpose, METH_NOARGS, 0},
+  {"create_adjoint", (PyCFunction)__pyx_pw_8cysparse_6sparse_14s_mat_matrices_25s_mat_INT64_t_COMPLEX64_t_32SparseMatrix_INT64_t_COMPLEX64_t_23create_adjoint, METH_NOARGS, 0},
   {"create_conjugate", (PyCFunction)__pyx_pw_8cysparse_6sparse_14s_mat_matrices_25s_mat_INT64_t_COMPLEX64_t_32SparseMatrix_INT64_t_COMPLEX64_t_25create_conjugate, METH_NOARGS, 0},
   {"memory_virtual_in_bits", (PyCFunction)__pyx_pw_8cysparse_6sparse_14s_mat_matrices_25s_mat_INT64_t_COMPLEX64_t_32SparseMatrix_INT64_t_COMPLEX64_t_27memory_virtual_in_bits, METH_NOARGS, __pyx_doc_8cysparse_6sparse_14s_mat_matrices_25s_mat_INT64_t_COMPLEX64_t_32SparseMatrix_INT64_t_COMPLEX64_t_26memory_virtual_in_bits},
   {"memory_virtual_in_bytes", (PyCFunction)__pyx_pw_8cysparse_6sparse_14s_mat_matrices_25s_mat_INT64_t_COMPLEX64_t_32SparseMatrix_INT64_t_COMPLEX64_t_29memory_virtual_in_bytes, METH_NOARGS, __pyx_doc_8cysparse_6sparse_14s_mat_matrices_25s_mat_INT64_t_COMPLEX64_t_32SparseMatrix_INT64_t_COMPLEX64_t_28memory_virtual_in_bytes},
@@ -4807,7 +4807,7 @@ static int __Pyx_InitCachedConstants(void) {
 
   /* "cysparse/sparse/s_mat_matrices/s_mat_INT64_t_COMPLEX64_t.pyx":230
  * 
- *     def create_conjugate_transpose(self):
+ *     def create_adjoint(self):
  *         raise NotImplementedError('Not yet implemented. Please report.')             # <<<<<<<<<<<<<<
  * 
  *     def create_conjugate(self):
