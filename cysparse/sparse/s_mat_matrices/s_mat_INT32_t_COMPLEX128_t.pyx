@@ -226,7 +226,7 @@ cdef class SparseMatrix_INT32_t_COMPLEX128_t(SparseMatrix):
         raise NotImplementedError('Not yet implemented. Please report.')
 
 
-    def create_conjugate_transpose(self):
+    def create_adjoint(self):
         raise NotImplementedError('Not yet implemented. Please report.')
 
     def create_conjugate(self):

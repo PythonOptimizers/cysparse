@@ -588,7 +588,7 @@ cdef class LLSparseMatrix_INT64_t_COMPLEX64_t(MutableSparseMatrix_INT64_t_COMPLE
             return transpose
 
 
-    def create_conjugate_transpose(self):
+    def create_adjoint(self):
         """
         Create a new matrix that is the conjugate transposed of this one.
         """

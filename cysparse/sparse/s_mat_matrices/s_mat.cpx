@@ -246,7 +246,7 @@ cdef class SparseMatrix_@index@_@type@(SparseMatrix):
         raise NotImplementedError('Not yet implemented. Please report.')
 
 {% if type in complex_list %}
-    def create_conjugate_transpose(self):
+    def create_adjoint(self):
         raise NotImplementedError('Not yet implemented. Please report.')
 
     def create_conjugate(self):

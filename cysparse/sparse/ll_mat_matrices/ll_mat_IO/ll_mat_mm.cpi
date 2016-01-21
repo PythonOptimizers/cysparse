@@ -6,7 +6,10 @@ See http://math.nist.gov/MatrixMarket/ .
 """
 
 
-cdef LLSparseMatrix_@index@_@type@ MakeLLSparseMatrixFromMMFile_@index@_@type@(str mm_filename, bint store_zero=False, bint test_bounds=True) except? -1:
+cdef LLSparseMatrix_@index@_@type@ MakeLLSparseMatrixFromMMFile_@index@_@type@(str mm_filename,
+                                                                               bint store_zero=False,
+                                                                               bint test_bounds=True,
+                                                                               bint test_matrix=True):
     cdef:
         str line
         list token_list
@@ -110,11 +113,16 @@ cdef LLSparseMatrix_@index@_@type@ MakeLLSparseMatrixFromMMFile_@index@_@type@(s
                 nnz_read += 1
                 token_list = line.split()
 {% if type == 'INT64_t' %}
+                if test_matrix and len(token_list) != 3:
+                    raise IndexError("Integer MM file must have 3 elements on each row (i, j, val)")
                 A.safe_put(atoi(token_list[0])-1, atoi(token_list[1]) - 1, <@type@>atoi(token_list[2]))
 {% elif type == 'FLOAT64_t' %}
+                if test_matrix and len(token_list) != 3:
+                    raise IndexError("Real MM file must have 3 elements on each row (i, j, val)")
                 A.safe_put(atoi(token_list[0])-1, atoi(token_list[1]) - 1, <@type@>atof(token_list[2]))
 {% elif type == 'COMPLEX128_t' %}
-
+                if test_matrix and len(token_list) != 4:
+                    raise IndexError("Complex MM file must have 4 elements on each row (i, j, rval, ival)")
                 # BUG !!! in Cython ??
                 # I have no idea why we have to use temp variables...
                 real_part =  <FLOAT64_t> atof(token_list[2])
@@ -132,11 +140,16 @@ YOU MUST CAST YOUR TYPE HERE
                 nnz_read += 1
                 token_list = line.split()
 {% if type == 'INT64_t' %}
+                if test_matrix and len(token_list) != 3:
+                    raise IndexError("Integer MM file must have 3 elements on each row (i, j, val)")
                 A.put(atoi(token_list[0])-1, atoi(token_list[1]) - 1, <@type@>atoi(token_list[2]))
 {% elif type == 'FLOAT64_t' %}
+                if test_matrix and len(token_list) != 3:
+                    raise IndexError("Real MM file must have 3 elements on each row (i, j, val)")
                 A.put(atoi(token_list[0])-1, atoi(token_list[1]) - 1, <@type@>atof(token_list[2]))
 {% elif type == 'COMPLEX128_t' %}
-
+                if test_matrix and len(token_list) != 4:
+                    raise IndexError("Complex MM file must have 4 elements on each row (i, j, rval, ival)")
                 real_part =  <FLOAT64_t> atof(token_list[2])
                 imag_part =  <FLOAT64_t> atof(token_list[3])
 
@@ -163,7 +176,8 @@ YOU MUST CAST YOUR TYPE HERE
 ########################################################################################################################
 # This version doesn't work yet...
 # TODO: write this!
-cdef LLSparseMatrix_@index@_@type@ MakeLLSparseMatrixFromMMFile2_@index@_@type@(str mm_filename, bint store_zero=False, bint test_bounds=True):
+cdef LLSparseMatrix_@index@_@type@ MakeLLSparseMatrixFromMMFile2_@index@_@type@(str mm_filename, bint store_zero=False, bint test_bounds=False, bint test_matrix=False):
+    # TODO: add more tests in the case test_matrix == True
     cdef:
         str line
         list token_list

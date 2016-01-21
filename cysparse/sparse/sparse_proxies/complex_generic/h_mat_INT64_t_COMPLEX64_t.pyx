@@ -215,7 +215,7 @@ cdef class ConjugateTransposedSparseMatrix_INT64_t_COMPLEX64_t:
         raise NotImplementedError('This proxy is unique')
 
     def matrix_copy(self):
-        return self.A.create_conjugate_transpose()
+        return self.A.create_adjoint()
 
     def matdot(self, B):
         raise NotImplementedError('Operation not implemented yet')
