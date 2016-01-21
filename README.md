@@ -105,6 +105,13 @@ See [Wiki](https://github.com/Funartech/cysparse/wiki) for details!
 
 ## Release history
 
+- Version 0.7.0 released on Jan 20, 2016
+
+  Introduction of Travis.
+  create_conjugate_transpose() -> create_adjoint()
+  
+- Version 0.6.0 released on Jan 09, 2016
+
 - Version 0.5.0 released on Jan 09, 2016
 
   Introduction of Operator Proxies (SumOp, MulOp).
