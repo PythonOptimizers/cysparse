@@ -1,0 +1,40 @@
+
+Benchmark Report
+================
+
+Simple find with 100 elements, size = 1,000
+-------------------------------------------
+
+    name | rank | runs |      mean |        sd | timesBaseline
+---------|------|------|-----------|-----------|--------------
+pysparse |    1 |  100 | 3.655e-06 | 1.337e-06 |           1.0
+cysparse |    2 |  100 | 6.361e-06 | 1.855e-06 | 1.74037834312
+
+Simple find with 1,000 elements, size = 10,000
+----------------------------------------------
+
+    name | rank | runs |      mean |        sd | timesBaseline
+---------|------|------|-----------|-----------|--------------
+pysparse |    1 |  100 | 1.643e-05 | 3.999e-06 |           1.0
+cysparse |    2 |  100 | 1.873e-05 | 1.495e-06 | 1.14005805515
+
+Simple find with 10,000 elements, size = 100,000
+------------------------------------------------
+
+    name | rank | runs |      mean |        sd | timesBaseline
+---------|------|------|-----------|-----------|--------------
+pysparse |    1 |  100 | 7.414e-05 | 3.823e-06 |           1.0
+cysparse |    2 |  100 | 8.663e-05 | 1.175e-05 | 1.16847284304
+
+Simple find with 80,000 elements, size = 100,000
+------------------------------------------------
+
+    name | rank | runs |      mean |        sd | timesBaseline
+---------|------|------|-----------|-----------|--------------
+pysparse |    1 |  100 | 0.0002281 | 7.263e-05 |           1.0
+cysparse |    2 |  100 | 0.0004132 | 9.325e-05 | 1.81184009701
+
+Each of the above 800 runs were run in random, non-consecutive order by
+`benchmark` v0.1.5 (http://jspi.es/benchmark) with Python 2.7.5+
+Linux-3.11.0-12-generic-x86_64 on 2016-01-23 15:46:01.
+

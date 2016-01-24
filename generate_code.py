@@ -124,6 +124,13 @@ else:
     # don't do anything: use platform's default
     pass
 
+## Cython compiler directives
+CYTHON_COMPILER_DIRECTIVES =""""""
+if cysparse_config.getboolean('CODE_GENERATION', 'use_cython_optimization'):
+    CYTHON_COMPILER_DIRECTIVES = """#!python
+    #cython: boundscheck=False, wraparound=False, initializedcheck=False
+    """
+
 #####################################################
 # COMMON STUFF
 #####################################################
@@ -161,6 +168,7 @@ GENERAL_CONTEXT = {
                     'complex_list' : COMPLEX_ELEMENT_TYPES,
                     'mm_index_list' : MM_INDEX_TYPES,
                     'mm_type_list' : MM_ELEMENT_TYPES,
+                    'cython_compiler_directives': CYTHON_COMPILER_DIRECTIVES,
                   }
 
 # For tests

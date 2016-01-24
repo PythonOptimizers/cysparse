@@ -742,12 +742,14 @@ cdef class CSRSparseMatrix_INT32_t_INT32_t(ImmutableSparseMatrix_INT32_t_INT32_t
         """
         Return :math:`A * b`.
         """
+        assert are_mixed_types_compatible(INT32_T, b.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(INT32_T)
         return multiply_csr_mat_with_numpy_vector_INT32_t_INT32_t(self, b)
 
     def matvec_transp(self, b):
         """
         Return :math:`A^t * b`.
         """
+        assert are_mixed_types_compatible(INT32_T, b.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(INT32_T)
         return multiply_transposed_csr_mat_with_numpy_vector_INT32_t_INT32_t(self, b)
 
 

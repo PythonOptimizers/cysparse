@@ -1181,7 +1181,6 @@ static char __pyx_k_Type_is_not_an_integer_type[] = "Type is not an integer type
 static char __pyx_k_min_precision_max_precision[] = " (min precision, max precision) = (";
 static char __pyx_k_SIGNED_INTEGER_ELEMENT_TYPES[] = "SIGNED_INTEGER_ELEMENT_TYPES";
 static char __pyx_k_UNSIGNED_INTEGER_ELEMENT_TYPES[] = "UNSIGNED_INTEGER_ELEMENT_TYPES";
-static char __pyx_k_This_file_contains_the_basic_ty[] = "\nThis file contains the basic types used in CySparse.\n\nCySparse allows you to dynamically type your matrices. This is not obvious to code in C or Cython. We do this by\ngenerating different source code files for the different types. Sometimes, we need to test at compile time what type\nwe use (for instance to generate the right type of NumPy matrices). These tests are hard-coded.\n\nYou can find such places in the template files by looking for the comment '# EXPLICIT TYPE TESTS'.\n\nTypes are given by XXX_t.\n\nFor each type XXX_t, there is a corresponding:\n\n - XXX_T : an enum constant\n - XXX_t_BIT : numbers of bits for this type\n\nAlthough we use NumPy compatible types, this will is not and should not be dependent on NumPy.\n\n";
 static char __pyx_k_home_nikolaj_Documents_WORK_Dom[] = "/home/nikolaj/Documents/WORK/Dominique/PROJECT/DECOUPLED_VERSION/SOLID/cysparse/cysparse/common_types/cysparse_types.pyx";
 static char __pyx_k_min_precision_real_imag_max_pre[] = " (min precision real/imag, max precision real/imag) = (";
 static char __pyx_k_No_type_was_found_to_cast_number[] = "No type was found to cast number";
@@ -6182,7 +6181,7 @@ static struct PyModuleDef __pyx_moduledef = {
     PyModuleDef_HEAD_INIT,
   #endif
     "cysparse_types",
-    __pyx_k_This_file_contains_the_basic_ty, /* m_doc */
+    0, /* m_doc */
     -1, /* m_size */
     __pyx_methods /* m_methods */,
     NULL, /* m_reload */
@@ -6721,7 +6720,7 @@ PyMODINIT_FUNC PyInit_cysparse_types(void)
   #endif
   /*--- Module creation code ---*/
   #if PY_MAJOR_VERSION < 3
-  __pyx_m = Py_InitModule4("cysparse_types", __pyx_methods, __pyx_k_This_file_contains_the_basic_ty, 0, PYTHON_API_VERSION); Py_XINCREF(__pyx_m);
+  __pyx_m = Py_InitModule4("cysparse_types", __pyx_methods, 0, 0, PYTHON_API_VERSION); Py_XINCREF(__pyx_m);
   #else
   __pyx_m = PyModule_Create(&__pyx_moduledef);
   #endif

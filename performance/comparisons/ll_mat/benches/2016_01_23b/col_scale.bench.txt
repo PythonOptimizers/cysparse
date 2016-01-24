@@ -1,0 +1,40 @@
+
+Benchmark Report
+================
+
+Simple col_scale with 100 elements and size = 1,000
+---------------------------------------------------
+
+    name | rank | runs |      mean |        sd | timesBaseline
+---------|------|------|-----------|-----------|--------------
+cysparse |    1 |   10 | 4.721e-06 | 4.318e-06 |           1.0
+pysparse |    2 |   10 |  6.89e-06 | 2.539e-06 |  1.4595959596
+
+Simple col_scale with 1000 elements and size = 10,000
+-----------------------------------------------------
+
+    name | rank | runs |      mean |        sd | timesBaseline
+---------|------|------|-----------|-----------|--------------
+cysparse |    1 |   10 | 1.481e-05 | 7.823e-07 |           1.0
+pysparse |    2 |   10 | 4.551e-05 | 4.401e-06 | 3.07407407407
+
+Simple col_scale with 10000 elements and size = 100,000
+-------------------------------------------------------
+
+    name | rank | runs |      mean |        sd | timesBaseline
+---------|------|------|-----------|-----------|--------------
+cysparse |    1 |   10 | 8.652e-05 |  1.12e-05 |           1.0
+pysparse |    2 |   10 | 0.0003303 | 5.217e-05 | 3.81702948471
+
+Simple col_scale with 80,000 elements and size = 100,000
+--------------------------------------------------------
+
+    name | rank | runs |      mean |        sd | timesBaseline
+---------|------|------|-----------|-----------|--------------
+cysparse |    1 |   10 | 0.0002483 | 3.262e-05 |           1.0
+pysparse |    2 |   10 | 0.0008909 | 4.961e-05 | 3.58761401824
+
+Each of the above 80 runs were run in random, non-consecutive order by
+`benchmark` v0.1.5 (http://jspi.es/benchmark) with Python 2.7.5+
+Linux-3.11.0-12-generic-x86_64 on 2016-01-23 23:34:20.
+

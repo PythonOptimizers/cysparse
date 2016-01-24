@@ -1,0 +1,40 @@
+
+Benchmark Report
+================
+
+Frobenius norm with 100 elements and size = 1,000 for a symmetrical matrix
+--------------------------------------------------------------------------
+
+    name | rank | runs |      mean |        sd | timesBaseline
+---------|------|------|-----------|-----------|--------------
+cysparse |    1 |  100 | 1.204e-06 | 5.415e-07 |           1.0
+pysparse |    2 |  100 | 1.342e-06 | 6.629e-07 | 1.11485148515
+
+Frobenius norm with 1,000 elements and size = 10,000 for a symmetrical matrix
+-----------------------------------------------------------------------------
+
+    name | rank | runs |      mean |        sd | timesBaseline
+---------|------|------|-----------|-----------|--------------
+cysparse |    1 |  100 | 7.162e-06 | 3.833e-07 |           1.0
+pysparse |    2 |  100 | 7.303e-06 | 4.988e-07 | 1.01964047936
+
+Frobenius norm with 10,000 elements and size = 100,000 for a symmetrical matrix
+-------------------------------------------------------------------------------
+
+    name | rank | runs |      mean |        sd | timesBaseline
+---------|------|------|-----------|-----------|--------------
+cysparse |    1 |  100 | 6.846e-05 | 3.147e-06 |           1.0
+pysparse |    2 |  100 | 6.849e-05 | 2.088e-06 |  1.0004178855
+
+Frobenius norm with 80,000 elements and size = 100,000 for a symmetrical matrix
+-------------------------------------------------------------------------------
+
+    name | rank | runs |      mean |        sd | timesBaseline
+---------|------|------|-----------|-----------|--------------
+pysparse |    1 |  100 | 0.0001592 | 2.529e-05 |           1.0
+cysparse |    2 |  100 | 0.0001859 | 0.0002201 |  1.1682870197
+
+Each of the above 800 runs were run in random, non-consecutive order by
+`benchmark` v0.1.5 (http://jspi.es/benchmark) with Python 2.7.5+
+Linux-3.11.0-12-generic-x86_64 on 2016-01-23 23:34:37.
+

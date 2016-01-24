@@ -6,6 +6,7 @@ Condensed Sparse Column (CSC) Format Matrices.
 from __future__ import print_function
 
 from cysparse.common_types.cysparse_types cimport *
+from cysparse.common_types.cysparse_numpy_types import are_mixed_types_compatible, cysparse_to_numpy_type
 
 from cysparse.sparse.s_mat cimport unexposed_value, SparseMatrix
 
@@ -804,12 +805,14 @@ cdef class CSCSparseMatrix_INT64_t_COMPLEX128_t(ImmutableSparseMatrix_INT64_t_CO
         """
         Return :math:`A * b`.
         """
+        assert are_mixed_types_compatible(COMPLEX128_T, b.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(COMPLEX128_T)
         return multiply_csc_mat_with_numpy_vector_INT64_t_COMPLEX128_t(self, b)
 
     def matvec_transp(self, b):
         """
         Return :math:`A^t * b`.
         """
+        assert are_mixed_types_compatible(COMPLEX128_T, b.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(COMPLEX128_T)
         return multiply_transposed_csc_mat_with_numpy_vector_INT64_t_COMPLEX128_t(self, b)
 
 
@@ -817,6 +820,7 @@ cdef class CSCSparseMatrix_INT64_t_COMPLEX128_t(ImmutableSparseMatrix_INT64_t_CO
         """
         Return :math:`A^h * b`.
         """
+        assert are_mixed_types_compatible(COMPLEX128_T, b.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(COMPLEX128_T)
 
         return multiply_conjugate_transposed_csc_mat_with_numpy_vector_INT64_t_COMPLEX128_t(self, b)
 
@@ -825,6 +829,7 @@ cdef class CSCSparseMatrix_INT64_t_COMPLEX128_t(ImmutableSparseMatrix_INT64_t_CO
         """
         Return :math:`\textrm{conj}(A) * b`.
         """
+        assert are_mixed_types_compatible(COMPLEX128_T, b.dtype), "Multiplication only allowed with a Numpy compatible type (%s)!" % cysparse_to_numpy_type(COMPLEX128_T)
 
         return multiply_conjugated_csc_mat_with_numpy_vector_INT64_t_COMPLEX128_t(self, b)
 

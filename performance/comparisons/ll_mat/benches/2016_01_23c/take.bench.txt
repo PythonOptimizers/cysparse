@@ -1,0 +1,32 @@
+
+Benchmark Report
+================
+
+Simple take_triplet with 100 elements, size = 1,000 and take_size = 1,000
+-------------------------------------------------------------------------
+
+    name | rank | runs |      mean |        sd | timesBaseline
+---------|------|------|-----------|-----------|--------------
+pysparse |    1 |  100 | 1.177e-05 | 1.725e-06 |           1.0
+cysparse |    2 |  100 | 1.283e-05 | 2.535e-06 | 1.08950992305
+
+Simple take_triplet with 1000 elements, size = 10,000 and take_size = 10,000
+----------------------------------------------------------------------------
+
+    name | rank | runs |      mean |        sd | timesBaseline
+---------|------|------|-----------|-----------|--------------
+pysparse |    1 |  100 | 7.891e-05 | 1.427e-05 |           1.0
+cysparse |    2 |  100 | 8.211e-05 | 4.096e-06 | 1.04054503157
+
+Simple take_triplet with 10000 elements, size = 100,000 and take_size = 100,000
+-------------------------------------------------------------------------------
+
+    name | rank | runs |      mean |        sd | timesBaseline
+---------|------|------|-----------|-----------|--------------
+cysparse |    1 |  100 |  0.000612 | 3.681e-05 |           1.0
+pysparse |    2 |  100 | 0.0008031 | 0.0001231 | 1.31220905093
+
+Each of the above 600 runs were run in random, non-consecutive order by
+`benchmark` v0.1.5 (http://jspi.es/benchmark) with Python 2.7.5+
+Linux-3.11.0-12-generic-x86_64 on 2016-01-23 23:56:50.
+

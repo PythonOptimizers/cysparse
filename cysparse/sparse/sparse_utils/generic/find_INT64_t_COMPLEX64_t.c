@@ -977,7 +977,7 @@ static PyObject *__pyx_kp_s_Lower_bound_must_be_smaller_than;
 static PyObject *__pyx_n_s_main;
 static PyObject *__pyx_n_s_test;
 
-/* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":15
+/* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":18
  * 
  * 
  * cdef INT32_t compare_complex_COMPLEX64_t(COMPLEX64_t a, COMPLEX64_t b):             # <<<<<<<<<<<<<<
@@ -991,7 +991,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT32_t __pyx_f_8cyspar
   int __pyx_t_1;
   __Pyx_RefNannySetupContext("compare_complex_COMPLEX64_t", 0);
 
-  /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":22
+  /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":25
  *     """
  * 
  *     if crealf(a) > crealf(b):             # <<<<<<<<<<<<<<
@@ -1001,7 +1001,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT32_t __pyx_f_8cyspar
   __pyx_t_1 = ((crealf(__pyx_v_a) > crealf(__pyx_v_b)) != 0);
   if (__pyx_t_1) {
 
-    /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":23
+    /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":26
  * 
  *     if crealf(a) > crealf(b):
  *         return 1             # <<<<<<<<<<<<<<
@@ -1011,7 +1011,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT32_t __pyx_f_8cyspar
     __pyx_r = 1;
     goto __pyx_L0;
 
-    /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":22
+    /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":25
  *     """
  * 
  *     if crealf(a) > crealf(b):             # <<<<<<<<<<<<<<
@@ -1020,7 +1020,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT32_t __pyx_f_8cyspar
  */
   }
 
-  /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":24
+  /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":27
  *     if crealf(a) > crealf(b):
  *         return 1
  *     elif crealf(a) < crealf(b):             # <<<<<<<<<<<<<<
@@ -1030,7 +1030,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT32_t __pyx_f_8cyspar
   __pyx_t_1 = ((crealf(__pyx_v_a) < crealf(__pyx_v_b)) != 0);
   if (__pyx_t_1) {
 
-    /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":25
+    /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":28
  *         return 1
  *     elif crealf(a) < crealf(b):
  *         return -1             # <<<<<<<<<<<<<<
@@ -1040,7 +1040,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT32_t __pyx_f_8cyspar
     __pyx_r = -1;
     goto __pyx_L0;
 
-    /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":24
+    /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":27
  *     if crealf(a) > crealf(b):
  *         return 1
  *     elif crealf(a) < crealf(b):             # <<<<<<<<<<<<<<
@@ -1049,7 +1049,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT32_t __pyx_f_8cyspar
  */
   }
 
-  /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":26
+  /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":29
  *     elif crealf(a) < crealf(b):
  *         return -1
  *     elif cimagf(a) > cimagf(b):             # <<<<<<<<<<<<<<
@@ -1059,7 +1059,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT32_t __pyx_f_8cyspar
   __pyx_t_1 = ((cimagf(__pyx_v_a) > cimagf(__pyx_v_b)) != 0);
   if (__pyx_t_1) {
 
-    /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":28
+    /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":31
  *     elif cimagf(a) > cimagf(b):
  *         # real parts are equal
  *         return 1             # <<<<<<<<<<<<<<
@@ -1069,7 +1069,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT32_t __pyx_f_8cyspar
     __pyx_r = 1;
     goto __pyx_L0;
 
-    /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":26
+    /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":29
  *     elif crealf(a) < crealf(b):
  *         return -1
  *     elif cimagf(a) > cimagf(b):             # <<<<<<<<<<<<<<
@@ -1078,7 +1078,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT32_t __pyx_f_8cyspar
  */
   }
 
-  /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":29
+  /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":32
  *         # real parts are equal
  *         return 1
  *     elif cimagf(a) < cimagf(b):             # <<<<<<<<<<<<<<
@@ -1088,7 +1088,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT32_t __pyx_f_8cyspar
   __pyx_t_1 = ((cimagf(__pyx_v_a) < cimagf(__pyx_v_b)) != 0);
   if (__pyx_t_1) {
 
-    /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":31
+    /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":34
  *     elif cimagf(a) < cimagf(b):
  *         # real parts are equal
  *         return -1             # <<<<<<<<<<<<<<
@@ -1098,7 +1098,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT32_t __pyx_f_8cyspar
     __pyx_r = -1;
     goto __pyx_L0;
 
-    /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":29
+    /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":32
  *         # real parts are equal
  *         return 1
  *     elif cimagf(a) < cimagf(b):             # <<<<<<<<<<<<<<
@@ -1107,7 +1107,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT32_t __pyx_f_8cyspar
  */
   }
 
-  /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":33
+  /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":36
  *         return -1
  *     else:
  *         return 0             # <<<<<<<<<<<<<<
@@ -1119,7 +1119,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT32_t __pyx_f_8cyspar
     goto __pyx_L0;
   }
 
-  /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":15
+  /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":18
  * 
  * 
  * cdef INT32_t compare_complex_COMPLEX64_t(COMPLEX64_t a, COMPLEX64_t b):             # <<<<<<<<<<<<<<
@@ -1133,7 +1133,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT32_t __pyx_f_8cyspar
   return __pyx_r;
 }
 
-/* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":38
+/* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":41
  * 
  * # EXPLICIT TYPE TESTS
  * cdef INT64_t find_bisec_INT64_t_COMPLEX64_t(COMPLEX64_t element, COMPLEX64_t * array, INT64_t lb, INT64_t ub)  except -1:             # <<<<<<<<<<<<<<
@@ -1155,7 +1155,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t __pyx_f_8cyspar
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("find_bisec_INT64_t_COMPLEX64_t", 0);
 
-  /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":52
+  /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":55
  * 
  *     """
  *     assert lb < ub, "Lower bound must be smaller than upper bound"             # <<<<<<<<<<<<<<
@@ -1166,12 +1166,12 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t __pyx_f_8cyspar
   if (unlikely(!Py_OptimizeFlag)) {
     if (unlikely(!((__pyx_v_lb < __pyx_v_ub) != 0))) {
       PyErr_SetObject(PyExc_AssertionError, __pyx_kp_s_Lower_bound_must_be_smaller_than);
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 52; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 55; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
   }
   #endif
 
-  /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":57
+  /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":60
  *         INT64_t lb_, ub_, middle_, index, i
  * 
  *     index = -1             # <<<<<<<<<<<<<<
@@ -1180,7 +1180,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t __pyx_f_8cyspar
  */
   __pyx_v_index = -1L;
 
-  /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":58
+  /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":61
  * 
  *     index = -1
  *     lb_ = lb             # <<<<<<<<<<<<<<
@@ -1189,7 +1189,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t __pyx_f_8cyspar
  */
   __pyx_v_lb_ = __pyx_v_lb;
 
-  /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":59
+  /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":62
  *     index = -1
  *     lb_ = lb
  *     ub_ = ub             # <<<<<<<<<<<<<<
@@ -1198,7 +1198,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t __pyx_f_8cyspar
  */
   __pyx_v_ub_ = __pyx_v_ub;
 
-  /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":66
+  /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":69
  *     # complex number don't support comparison
  *     # but to find complex numbers in an array, this works perfectly
  *     while index == -1:             # <<<<<<<<<<<<<<
@@ -1209,7 +1209,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t __pyx_f_8cyspar
     __pyx_t_1 = ((__pyx_v_index == -1L) != 0);
     if (!__pyx_t_1) break;
 
-    /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":67
+    /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":70
  *     # but to find complex numbers in an array, this works perfectly
  *     while index == -1:
  *         middle_ = <INT64_t> floor((lb_ + ub_) / 2)             # <<<<<<<<<<<<<<
@@ -1218,7 +1218,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t __pyx_f_8cyspar
  */
     __pyx_v_middle_ = ((__pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t)floor(__Pyx_div___pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t((__pyx_v_lb_ + __pyx_v_ub_), 2)));
 
-    /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":68
+    /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":71
  *     while index == -1:
  *         middle_ = <INT64_t> floor((lb_ + ub_) / 2)
  *         if compare_complex_COMPLEX64_t(array[middle_], element) > 0:             # <<<<<<<<<<<<<<
@@ -1228,7 +1228,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t __pyx_f_8cyspar
     __pyx_t_1 = ((__pyx_f_8cysparse_6sparse_12sparse_utils_7generic_24find_INT64_t_COMPLEX64_t_compare_complex_COMPLEX64_t((__pyx_v_array[__pyx_v_middle_]), __pyx_v_element) > 0) != 0);
     if (__pyx_t_1) {
 
-      /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":69
+      /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":72
  *         middle_ = <INT64_t> floor((lb_ + ub_) / 2)
  *         if compare_complex_COMPLEX64_t(array[middle_], element) > 0:
  *             ub_ = middle_             # <<<<<<<<<<<<<<
@@ -1237,7 +1237,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t __pyx_f_8cyspar
  */
       __pyx_v_ub_ = __pyx_v_middle_;
 
-      /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":68
+      /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":71
  *     while index == -1:
  *         middle_ = <INT64_t> floor((lb_ + ub_) / 2)
  *         if compare_complex_COMPLEX64_t(array[middle_], element) > 0:             # <<<<<<<<<<<<<<
@@ -1247,7 +1247,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t __pyx_f_8cyspar
       goto __pyx_L5;
     }
 
-    /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":70
+    /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":73
  *         if compare_complex_COMPLEX64_t(array[middle_], element) > 0:
  *             ub_ = middle_
  *         elif compare_complex_COMPLEX64_t(array[middle_], element) < 0:             # <<<<<<<<<<<<<<
@@ -1257,7 +1257,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t __pyx_f_8cyspar
     __pyx_t_1 = ((__pyx_f_8cysparse_6sparse_12sparse_utils_7generic_24find_INT64_t_COMPLEX64_t_compare_complex_COMPLEX64_t((__pyx_v_array[__pyx_v_middle_]), __pyx_v_element) < 0) != 0);
     if (__pyx_t_1) {
 
-      /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":71
+      /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":74
  *             ub_ = middle_
  *         elif compare_complex_COMPLEX64_t(array[middle_], element) < 0:
  *             lb_ = middle_             # <<<<<<<<<<<<<<
@@ -1266,7 +1266,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t __pyx_f_8cyspar
  */
       __pyx_v_lb_ = __pyx_v_middle_;
 
-      /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":70
+      /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":73
  *         if compare_complex_COMPLEX64_t(array[middle_], element) > 0:
  *             ub_ = middle_
  *         elif compare_complex_COMPLEX64_t(array[middle_], element) < 0:             # <<<<<<<<<<<<<<
@@ -1276,7 +1276,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t __pyx_f_8cyspar
       goto __pyx_L5;
     }
 
-    /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":73
+    /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":76
  *             lb_ = middle_
  *         else:
  *             index = middle_             # <<<<<<<<<<<<<<
@@ -1289,7 +1289,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t __pyx_f_8cyspar
     __pyx_L5:;
   }
 
-  /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":76
+  /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":79
  * 
  *     # test if element found is the first one
  *     if index != -1:             # <<<<<<<<<<<<<<
@@ -1299,7 +1299,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t __pyx_f_8cyspar
   __pyx_t_1 = ((__pyx_v_index != -1L) != 0);
   if (__pyx_t_1) {
 
-    /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":77
+    /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":80
  *     # test if element found is the first one
  *     if index != -1:
  *         while index > lb and array[index] == element:             # <<<<<<<<<<<<<<
@@ -1318,7 +1318,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t __pyx_f_8cyspar
       __pyx_L9_bool_binop_done:;
       if (!__pyx_t_1) break;
 
-      /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":78
+      /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":81
  *     if index != -1:
  *         while index > lb and array[index] == element:
  *             index -= 1             # <<<<<<<<<<<<<<
@@ -1328,7 +1328,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t __pyx_f_8cyspar
       __pyx_v_index = (__pyx_v_index - 1);
     }
 
-    /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":76
+    /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":79
  * 
  *     # test if element found is the first one
  *     if index != -1:             # <<<<<<<<<<<<<<
@@ -1337,7 +1337,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t __pyx_f_8cyspar
  */
   }
 
-  /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":80
+  /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":83
  *             index -= 1
  * 
  *     return index             # <<<<<<<<<<<<<<
@@ -1347,7 +1347,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t __pyx_f_8cyspar
   __pyx_r = __pyx_v_index;
   goto __pyx_L0;
 
-  /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":38
+  /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":41
  * 
  * # EXPLICIT TYPE TESTS
  * cdef INT64_t find_bisec_INT64_t_COMPLEX64_t(COMPLEX64_t element, COMPLEX64_t * array, INT64_t lb, INT64_t ub)  except -1:             # <<<<<<<<<<<<<<
@@ -1364,7 +1364,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t __pyx_f_8cyspar
   return __pyx_r;
 }
 
-/* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":82
+/* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":85
  *     return index
  * 
  * cdef INT64_t find_linear_INT64_t_COMPLEX64_t(COMPLEX64_t element, COMPLEX64_t * array, INT64_t lb, INT64_t ub) except -1:             # <<<<<<<<<<<<<<
@@ -1383,7 +1383,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t __pyx_f_8cyspar
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("find_linear_INT64_t_COMPLEX64_t", 0);
 
-  /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":99
+  /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":102
  * 
  *     """
  *     assert lb < ub, "Lower bound must be smaller than upper bound"             # <<<<<<<<<<<<<<
@@ -1394,12 +1394,12 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t __pyx_f_8cyspar
   if (unlikely(!Py_OptimizeFlag)) {
     if (unlikely(!((__pyx_v_lb < __pyx_v_ub) != 0))) {
       PyErr_SetObject(PyExc_AssertionError, __pyx_kp_s_Lower_bound_must_be_smaller_than);
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 99; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 102; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
   }
   #endif
 
-  /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":104
+  /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":107
  *         INT64_t index
  * 
  *     for index from lb <= index < ub:             # <<<<<<<<<<<<<<
@@ -1409,7 +1409,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t __pyx_f_8cyspar
   __pyx_t_1 = __pyx_v_ub;
   for (__pyx_v_index = __pyx_v_lb; __pyx_v_index < __pyx_t_1; __pyx_v_index++) {
 
-    /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":105
+    /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":108
  * 
  *     for index from lb <= index < ub:
  *         if array[index] == element:             # <<<<<<<<<<<<<<
@@ -1419,7 +1419,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t __pyx_f_8cyspar
     __pyx_t_2 = ((__Pyx_c_eqf((__pyx_v_array[__pyx_v_index]), __pyx_v_element)) != 0);
     if (__pyx_t_2) {
 
-      /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":106
+      /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":109
  *     for index from lb <= index < ub:
  *         if array[index] == element:
  *             break             # <<<<<<<<<<<<<<
@@ -1428,7 +1428,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t __pyx_f_8cyspar
  */
       goto __pyx_L4_break;
 
-      /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":105
+      /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":108
  * 
  *     for index from lb <= index < ub:
  *         if array[index] == element:             # <<<<<<<<<<<<<<
@@ -1439,7 +1439,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t __pyx_f_8cyspar
   }
   __pyx_L4_break:;
 
-  /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":108
+  /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":111
  *             break
  * 
  *     return index             # <<<<<<<<<<<<<<
@@ -1447,7 +1447,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t __pyx_f_8cyspar
   __pyx_r = __pyx_v_index;
   goto __pyx_L0;
 
-  /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":82
+  /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":85
  *     return index
  * 
  * cdef INT64_t find_linear_INT64_t_COMPLEX64_t(COMPLEX64_t element, COMPLEX64_t * array, INT64_t lb, INT64_t ub) except -1:             # <<<<<<<<<<<<<<
@@ -1617,9 +1617,9 @@ PyMODINIT_FUNC PyInit_find_INT64_t_COMPLEX64_t(void)
   #endif
 
   /* "cysparse/sparse/sparse_utils/generic/find_INT64_t_COMPLEX64_t.pyx":1
- * from cysparse.common_types.cysparse_types cimport *             # <<<<<<<<<<<<<<
+ * #!python             # <<<<<<<<<<<<<<
+ *     #cython: boundscheck=False, wraparound=False, initializedcheck=False
  * 
- * cdef extern from "math.h":
  */
   __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);

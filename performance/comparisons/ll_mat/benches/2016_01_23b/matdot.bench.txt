@@ -1,0 +1,44 @@
+
+Benchmark Report
+================
+
+Simple matdot (A^t * B) with 100 elements and size = 1,000
+----------------------------------------------------------
+
+     name | rank | runs |      mean |        sd | timesBaseline
+----------|------|------|-----------|-----------|--------------
+ pysparse |    1 |   10 | 7.868e-06 | 3.302e-06 |           1.0
+cysparse2 |    2 |   10 | 9.418e-06 | 6.873e-06 | 1.19696969697
+ cysparse |    3 |   10 | 1.318e-05 | 3.918e-06 | 1.67575757576
+
+Simple matdot (A^t * B) with 1,000 elements and size = 10,000
+-------------------------------------------------------------
+
+     name | rank | runs |      mean |        sd | timesBaseline
+----------|------|------|-----------|-----------|--------------
+cysparse2 |    1 |   10 | 7.892e-06 | 8.593e-07 |           1.0
+ pysparse |    2 |   10 | 4.742e-05 | 8.641e-06 | 6.00906344411
+ cysparse |    3 |   10 | 5.386e-05 | 9.978e-06 |  6.8247734139
+
+Simple matdot (A^t * B) with 10,000 elements and size = 100,000
+---------------------------------------------------------------
+
+     name | rank | runs |      mean |        sd | timesBaseline
+----------|------|------|-----------|-----------|--------------
+cysparse2 |    1 |   10 |  2.88e-05 | 4.697e-05 |           1.0
+ pysparse |    2 |   10 | 0.0002892 | 3.696e-05 | 10.0430463576
+ cysparse |    3 |   10 | 0.0004291 | 9.055e-05 | 14.8990066225
+
+Simple matdot (A^t * B) with 80,000 elements and size = 100,000
+---------------------------------------------------------------
+
+     name | rank | runs |     mean |        sd | timesBaseline
+----------|------|------|----------|-----------|--------------
+cysparse2 |    1 |   10 | 4.68e-05 | 7.323e-05 |           1.0
+ pysparse |    2 |   10 |  0.00101 | 0.0001024 | 21.5781966378
+ cysparse |    3 |   10 | 0.001165 | 0.0001746 | 24.8914926133
+
+Each of the above 120 runs were run in random, non-consecutive order by
+`benchmark` v0.1.5 (http://jspi.es/benchmark) with Python 2.7.5+
+Linux-3.11.0-12-generic-x86_64 on 2016-01-23 23:34:19.
+

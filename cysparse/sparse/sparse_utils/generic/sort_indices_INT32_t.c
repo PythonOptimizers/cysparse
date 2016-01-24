@@ -970,7 +970,7 @@ static char __pyx_k_test[] = "__test__";
 static PyObject *__pyx_n_s_main;
 static PyObject *__pyx_n_s_test;
 
-/* "cysparse/sparse/sparse_utils/generic/sort_indices_INT32_t.pyx":3
+/* "cysparse/sparse/sparse_utils/generic/sort_indices_INT32_t.pyx":6
  * from cysparse.common_types.cysparse_types cimport *
  * 
  * cdef sort_array_INT32_t(INT32_t * a, INT32_t start, INT32_t end):             # <<<<<<<<<<<<<<
@@ -988,7 +988,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_12sparse_utils_7generic_20sort_indice
   int __pyx_t_2;
   __Pyx_RefNannySetupContext("sort_array_INT32_t", 0);
 
-  /* "cysparse/sparse/sparse_utils/generic/sort_indices_INT32_t.pyx":12
+  /* "cysparse/sparse/sparse_utils/generic/sort_indices_INT32_t.pyx":15
  *     cdef INT32_t i, j, value;
  * 
  *     i = start             # <<<<<<<<<<<<<<
@@ -997,7 +997,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_12sparse_utils_7generic_20sort_indice
  */
   __pyx_v_i = __pyx_v_start;
 
-  /* "cysparse/sparse/sparse_utils/generic/sort_indices_INT32_t.pyx":14
+  /* "cysparse/sparse/sparse_utils/generic/sort_indices_INT32_t.pyx":17
  *     i = start
  * 
  *     while i < end:             # <<<<<<<<<<<<<<
@@ -1008,7 +1008,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_12sparse_utils_7generic_20sort_indice
     __pyx_t_1 = ((__pyx_v_i < __pyx_v_end) != 0);
     if (!__pyx_t_1) break;
 
-    /* "cysparse/sparse/sparse_utils/generic/sort_indices_INT32_t.pyx":16
+    /* "cysparse/sparse/sparse_utils/generic/sort_indices_INT32_t.pyx":19
  *     while i < end:
  * 
  *         value = a[i]             # <<<<<<<<<<<<<<
@@ -1017,7 +1017,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_12sparse_utils_7generic_20sort_indice
  */
     __pyx_v_value = (__pyx_v_a[__pyx_v_i]);
 
-    /* "cysparse/sparse/sparse_utils/generic/sort_indices_INT32_t.pyx":17
+    /* "cysparse/sparse/sparse_utils/generic/sort_indices_INT32_t.pyx":20
  * 
  *         value = a[i]
  *         j = i - 1             # <<<<<<<<<<<<<<
@@ -1026,7 +1026,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_12sparse_utils_7generic_20sort_indice
  */
     __pyx_v_j = (__pyx_v_i - 1);
 
-    /* "cysparse/sparse/sparse_utils/generic/sort_indices_INT32_t.pyx":18
+    /* "cysparse/sparse/sparse_utils/generic/sort_indices_INT32_t.pyx":21
  *         value = a[i]
  *         j = i - 1
  *         while j >= start and a[j] > value:             # <<<<<<<<<<<<<<
@@ -1045,7 +1045,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_12sparse_utils_7generic_20sort_indice
       __pyx_L7_bool_binop_done:;
       if (!__pyx_t_1) break;
 
-      /* "cysparse/sparse/sparse_utils/generic/sort_indices_INT32_t.pyx":20
+      /* "cysparse/sparse/sparse_utils/generic/sort_indices_INT32_t.pyx":23
  *         while j >= start and a[j] > value:
  *             # shift
  *             a[j+1] = a[j]             # <<<<<<<<<<<<<<
@@ -1054,7 +1054,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_12sparse_utils_7generic_20sort_indice
  */
       (__pyx_v_a[(__pyx_v_j + 1)]) = (__pyx_v_a[__pyx_v_j]);
 
-      /* "cysparse/sparse/sparse_utils/generic/sort_indices_INT32_t.pyx":22
+      /* "cysparse/sparse/sparse_utils/generic/sort_indices_INT32_t.pyx":25
  *             a[j+1] = a[j]
  * 
  *             j -= 1             # <<<<<<<<<<<<<<
@@ -1064,7 +1064,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_12sparse_utils_7generic_20sort_indice
       __pyx_v_j = (__pyx_v_j - 1);
     }
 
-    /* "cysparse/sparse/sparse_utils/generic/sort_indices_INT32_t.pyx":25
+    /* "cysparse/sparse/sparse_utils/generic/sort_indices_INT32_t.pyx":28
  * 
  *         # place key at right place
  *         a[j+1] = value             # <<<<<<<<<<<<<<
@@ -1073,7 +1073,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_12sparse_utils_7generic_20sort_indice
  */
     (__pyx_v_a[(__pyx_v_j + 1)]) = __pyx_v_value;
 
-    /* "cysparse/sparse/sparse_utils/generic/sort_indices_INT32_t.pyx":27
+    /* "cysparse/sparse/sparse_utils/generic/sort_indices_INT32_t.pyx":30
  *         a[j+1] = value
  * 
  *         i += 1             # <<<<<<<<<<<<<<
@@ -1081,7 +1081,7 @@ static PyObject *__pyx_f_8cysparse_6sparse_12sparse_utils_7generic_20sort_indice
     __pyx_v_i = (__pyx_v_i + 1);
   }
 
-  /* "cysparse/sparse/sparse_utils/generic/sort_indices_INT32_t.pyx":3
+  /* "cysparse/sparse/sparse_utils/generic/sort_indices_INT32_t.pyx":6
  * from cysparse.common_types.cysparse_types cimport *
  * 
  * cdef sort_array_INT32_t(INT32_t * a, INT32_t start, INT32_t end):             # <<<<<<<<<<<<<<
@@ -1246,9 +1246,9 @@ PyMODINIT_FUNC PyInit_sort_indices_INT32_t(void)
   #endif
 
   /* "cysparse/sparse/sparse_utils/generic/sort_indices_INT32_t.pyx":1
- * from cysparse.common_types.cysparse_types cimport *             # <<<<<<<<<<<<<<
+ * #!python             # <<<<<<<<<<<<<<
+ *     #cython: boundscheck=False, wraparound=False, initializedcheck=False
  * 
- * cdef sort_array_INT32_t(INT32_t * a, INT32_t start, INT32_t end):
  */
   __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);

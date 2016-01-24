@@ -13,8 +13,8 @@ import benchmark
 import numpy as np
 
 # CySparse
-from cysparse.sparse.ll_mat import NewLLSparseMatrix
-from cysparse.types.cysparse_types import INT32_T, INT64_T, FLOAT64_T
+from cysparse.sparse.ll_mat import LLSparseMatrix
+from cysparse.common_types.cysparse_types import INT32_T, INT64_T, FLOAT64_T
 
 # PySparse
 from pysparse.sparse import spmatrix
@@ -42,7 +42,7 @@ class LLMatFindBenchmark(benchmark.Benchmark):
         self.nbr_elements = 100
         self.size = 1000
 
-        self.A_c = NewLLSparseMatrix(size=self.size, size_hint=self.nbr_elements, dtype=FLOAT64_T)
+        self.A_c = LLSparseMatrix(size=self.size, size_hint=self.nbr_elements, dtype=FLOAT64_T)
         construct_sparse_matrix(self.A_c, self.size, self.nbr_elements)
 
         self.A_p = spmatrix.ll_mat(self.size, self.size, self.nbr_elements)
@@ -53,7 +53,7 @@ class LLMatFindBenchmark(benchmark.Benchmark):
     #    assert self.A_c.nnz == self.A_p.nnz
 
     #    # reconstruct initial matrices
-    #    self.A_c_bis = NewLLSparseMatrix(size=self.size, size_hint=self.nbr_elements, dtype=FLOAT64_T)
+    #    self.A_c_bis = LLSparseMatrix(size=self.size, size_hint=self.nbr_elements, dtype=FLOAT64_T)
     #    self.A_c_bis.put_triplet(self.A_c_rows, self.A_c_cols, self.A_c_vals)
 
     #    self.A_p_bis = spmatrix.ll_mat(self.size, self.size, self.nbr_elements)
@@ -85,7 +85,7 @@ class LLMatFindBenchmark_1(LLMatFindBenchmark):
         self.nbr_elements = 1000
         self.size = 10000
 
-        self.A_c = NewLLSparseMatrix(size=self.size, size_hint=self.nbr_elements, dtype=FLOAT64_T)
+        self.A_c = LLSparseMatrix(size=self.size, size_hint=self.nbr_elements, dtype=FLOAT64_T)
         construct_sparse_matrix(self.A_c, self.size, self.nbr_elements)
 
         self.A_p = spmatrix.ll_mat(self.size, self.size, self.nbr_elements)
@@ -104,7 +104,7 @@ class LLMatFindBenchmark_2(LLMatFindBenchmark):
         self.nbr_elements = 10000
         self.size = 100000
 
-        self.A_c = NewLLSparseMatrix(size=self.size, size_hint=self.nbr_elements, dtype=FLOAT64_T)
+        self.A_c = LLSparseMatrix(size=self.size, size_hint=self.nbr_elements, dtype=FLOAT64_T)
         construct_sparse_matrix(self.A_c, self.size, self.nbr_elements)
 
         self.A_p = spmatrix.ll_mat(self.size, self.size, self.nbr_elements)
@@ -123,7 +123,7 @@ class LLMatFindBenchmark_3(LLMatFindBenchmark):
         self.nbr_elements = 80000
         self.size = 100000
 
-        self.A_c = NewLLSparseMatrix(size=self.size, size_hint=self.nbr_elements, dtype=FLOAT64_T)
+        self.A_c = LLSparseMatrix(size=self.size, size_hint=self.nbr_elements, dtype=FLOAT64_T)
         construct_sparse_matrix(self.A_c, self.size, self.nbr_elements)
 
         self.A_p = spmatrix.ll_mat(self.size, self.size, self.nbr_elements)

@@ -1,0 +1,40 @@
+
+Benchmark Report
+================
+
+Simple row_scale with 100 elements and size = 1,000
+---------------------------------------------------
+
+    name | rank | runs |      mean |        sd | timesBaseline
+---------|------|------|-----------|-----------|--------------
+pysparse |    1 |  100 | 1.605e-06 | 6.098e-07 |           1.0
+cysparse |    2 |  100 | 1.793e-06 |  1.41e-06 | 1.11738484398
+
+Simple row_scale with 1000 elements and size = 10,000
+-----------------------------------------------------
+
+    name | rank | runs |      mean |        sd | timesBaseline
+---------|------|------|-----------|-----------|--------------
+cysparse |    1 |   10 | 8.297e-06 | 8.011e-07 |           1.0
+pysparse |    2 |   10 |  9.99e-06 | 5.083e-07 | 1.20402298851
+
+Simple row_scale with 10,000 elements and size = 100,000
+--------------------------------------------------------
+
+    name | rank | runs |      mean |        sd | timesBaseline
+---------|------|------|-----------|-----------|--------------
+cysparse |    1 |   10 | 7.772e-05 | 9.694e-06 |           1.0
+pysparse |    2 |   10 | 9.274e-05 | 3.328e-06 | 1.19325153374
+
+Simple row_scale with 80,000 elements and size = 100,000
+--------------------------------------------------------
+
+    name | rank | runs |      mean |        sd | timesBaseline
+---------|------|------|-----------|-----------|--------------
+cysparse |    1 |   10 | 0.0001593 | 3.159e-05 |           1.0
+pysparse |    2 |   10 | 0.0001662 | 1.138e-05 | 1.04325699746
+
+Each of the above 260 runs were run in random, non-consecutive order by
+`benchmark` v0.1.5 (http://jspi.es/benchmark) with Python 2.7.5+
+Linux-3.11.0-12-generic-x86_64 on 2016-01-24 03:04:59.
+

@@ -1,0 +1,44 @@
+
+Benchmark Report
+================
+
+Simple scale with 100 elements and size = 1,000 (sigma = 10.47)
+---------------------------------------------------------------
+
+     name | rank | runs |      mean |        sd | timesBaseline
+----------|------|------|-----------|-----------|--------------
+ cysparse |    1 |  100 | 1.822e-06 | 5.981e-07 |           1.0
+cysparse2 |    2 |  100 | 2.046e-06 | 3.896e-07 | 1.12303664921
+ pysparse |    3 |  100 | 2.186e-06 |  5.25e-07 |  1.2002617801
+
+Simple scale with 1,000 elements and size = 10,000 (sigma = 10.47)
+------------------------------------------------------------------
+
+     name | rank | runs |      mean |        sd | timesBaseline
+----------|------|------|-----------|-----------|--------------
+ cysparse |    1 |  100 | 1.204e-05 |  2.36e-07 |           1.0
+cysparse2 |    2 |  100 | 1.219e-05 | 5.886e-07 | 1.01267577738
+ pysparse |    3 |  100 | 1.317e-05 | 5.351e-07 | 1.09427609428
+
+Simple scale with 10,000 elements and size = 100,000 (sigma = 10.47)
+--------------------------------------------------------------------
+
+     name | rank | runs |      mean |        sd | timesBaseline
+----------|------|------|-----------|-----------|--------------
+ cysparse |    1 |  100 | 7.308e-05 | 1.983e-05 |           1.0
+cysparse2 |    2 |  100 | 7.637e-05 | 2.208e-05 | 1.04499037552
+ pysparse |    3 |  100 | 7.824e-05 | 2.229e-05 | 1.07066653617
+
+Simple scale with 80,000 elements and size = 100,000 (sigma = 10.47)
+--------------------------------------------------------------------
+
+     name | rank | runs |      mean |        sd | timesBaseline
+----------|------|------|-----------|-----------|--------------
+ pysparse |    1 |  100 | 0.0001287 | 2.578e-06 |           1.0
+cysparse2 |    2 |  100 | 0.0001353 | 2.231e-06 | 1.05138039652
+ cysparse |    3 |  100 | 0.0001357 | 4.442e-06 | 1.05445617936
+
+Each of the above 1200 runs were run in random, non-consecutive order by
+`benchmark` v0.1.5 (http://jspi.es/benchmark) with Python 2.7.5+
+Linux-3.11.0-12-generic-x86_64 on 2016-01-23 23:57:03.
+

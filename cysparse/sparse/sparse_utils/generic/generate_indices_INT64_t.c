@@ -1350,7 +1350,7 @@ static PyObject *__pyx_tuple__8;
 static PyObject *__pyx_tuple__9;
 static PyObject *__pyx_tuple__10;
 
-/* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":64
+/* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":65
  * 
  * 
  * cdef INT64_t * create_c_array_indices_from_python_object_INT64_t(INT64_t max_length, PyObject * obj, INT64_t * number_of_elements) except NULL:             # <<<<<<<<<<<<<<
@@ -1385,7 +1385,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_f_8cyspa
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("create_c_array_indices_from_python_object_INT64_t", 0);
 
-  /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":106
+  /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":107
  *     ####################################################################################################################
  *     #                                            *** Integer ***
  *     if PyInt_Check(obj):             # <<<<<<<<<<<<<<
@@ -1395,7 +1395,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_f_8cyspa
   __pyx_t_1 = (PyInt_Check(__pyx_v_obj) != 0);
   if (__pyx_t_1) {
 
-    /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":107
+    /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":108
  *     #                                            *** Integer ***
  *     if PyInt_Check(obj):
  *         i = PyInt_AS_LONG(obj)             # <<<<<<<<<<<<<<
@@ -1404,7 +1404,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_f_8cyspa
  */
     __pyx_v_i = PyInt_AS_LONG(__pyx_v_obj);
 
-    /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":109
+    /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":110
  *         i = PyInt_AS_LONG(obj)
  *         # test if index is valid
  *         if not (0 <= i < max_length):             # <<<<<<<<<<<<<<
@@ -1418,18 +1418,18 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_f_8cyspa
     __pyx_t_2 = ((!(__pyx_t_1 != 0)) != 0);
     if (__pyx_t_2) {
 
-      /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":110
+      /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":111
  *         # test if index is valid
  *         if not (0 <= i < max_length):
  *             raise IndexError("Index %d out of bounds [%d, %d[" % (i, 0, max_length))             # <<<<<<<<<<<<<<
  * 
  *         length = 1
  */
-      __pyx_t_3 = __Pyx_PyInt_From_long(__pyx_v_i); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 110; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_3 = __Pyx_PyInt_From_long(__pyx_v_i); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 111; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_3);
-      __pyx_t_4 = __Pyx_PyInt_From_long(__pyx_v_max_length); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 110; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_4 = __Pyx_PyInt_From_long(__pyx_v_max_length); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 111; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_4);
-      __pyx_t_5 = PyTuple_New(3); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 110; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_5 = PyTuple_New(3); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 111; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_GIVEREF(__pyx_t_3);
       PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_3);
@@ -1440,22 +1440,22 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_f_8cyspa
       PyTuple_SET_ITEM(__pyx_t_5, 2, __pyx_t_4);
       __pyx_t_3 = 0;
       __pyx_t_4 = 0;
-      __pyx_t_4 = __Pyx_PyString_Format(__pyx_kp_s_Index_d_out_of_bounds_d_d, __pyx_t_5); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 110; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_4 = __Pyx_PyString_Format(__pyx_kp_s_Index_d_out_of_bounds_d_d, __pyx_t_5); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 111; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 110; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 111; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_GIVEREF(__pyx_t_4);
       PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_4);
       __pyx_t_4 = 0;
-      __pyx_t_4 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_t_5, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 110; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_4 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_t_5, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 111; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_Raise(__pyx_t_4, 0, 0, 0);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 110; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 111; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-      /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":109
+      /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":110
  *         i = PyInt_AS_LONG(obj)
  *         # test if index is valid
  *         if not (0 <= i < max_length):             # <<<<<<<<<<<<<<
@@ -1464,7 +1464,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_f_8cyspa
  */
     }
 
-    /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":112
+    /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":113
  *             raise IndexError("Index %d out of bounds [%d, %d[" % (i, 0, max_length))
  * 
  *         length = 1             # <<<<<<<<<<<<<<
@@ -1473,7 +1473,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_f_8cyspa
  */
     __pyx_v_length = 1;
 
-    /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":113
+    /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":114
  * 
  *         length = 1
  *         indices = <INT64_t *> PyMem_Malloc(length * sizeof(INT64_t))             # <<<<<<<<<<<<<<
@@ -1482,7 +1482,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_f_8cyspa
  */
     __pyx_v_indices = ((__pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *)PyMem_Malloc((__pyx_v_length * (sizeof(__pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t)))));
 
-    /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":114
+    /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":115
  *         length = 1
  *         indices = <INT64_t *> PyMem_Malloc(length * sizeof(INT64_t))
  *         if not indices:             # <<<<<<<<<<<<<<
@@ -1492,16 +1492,16 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_f_8cyspa
     __pyx_t_2 = ((!(__pyx_v_indices != 0)) != 0);
     if (__pyx_t_2) {
 
-      /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":115
+      /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":116
  *         indices = <INT64_t *> PyMem_Malloc(length * sizeof(INT64_t))
  *         if not indices:
  *             raise MemoryError()             # <<<<<<<<<<<<<<
  * 
  *         indices[0] = <INT64_t> i
  */
-      PyErr_NoMemory(); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 115; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      PyErr_NoMemory(); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 116; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-      /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":114
+      /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":115
  *         length = 1
  *         indices = <INT64_t *> PyMem_Malloc(length * sizeof(INT64_t))
  *         if not indices:             # <<<<<<<<<<<<<<
@@ -1510,7 +1510,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_f_8cyspa
  */
     }
 
-    /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":117
+    /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":118
  *             raise MemoryError()
  * 
  *         indices[0] = <INT64_t> i             # <<<<<<<<<<<<<<
@@ -1519,7 +1519,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_f_8cyspa
  */
     (__pyx_v_indices[0]) = ((__pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t)__pyx_v_i);
 
-    /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":106
+    /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":107
  *     ####################################################################################################################
  *     #                                            *** Integer ***
  *     if PyInt_Check(obj):             # <<<<<<<<<<<<<<
@@ -1529,7 +1529,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_f_8cyspa
     goto __pyx_L3;
   }
 
-  /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":120
+  /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":121
  * 
  *     #                                            *** Slice ***
  *     elif PySlice_Check(obj):             # <<<<<<<<<<<<<<
@@ -1539,17 +1539,17 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_f_8cyspa
   __pyx_t_2 = (PySlice_Check(__pyx_v_obj) != 0);
   if (__pyx_t_2) {
 
-    /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":122
+    /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":123
  *     elif PySlice_Check(obj):
  *         # slice
  *         ret = PySlice_GetIndicesEx(<PySliceObject*>obj, max_length, &start, &stop, &step, &length)             # <<<<<<<<<<<<<<
  *         if ret:
  *             raise RuntimeError("Slice could not be translated")
  */
-    __pyx_t_6 = PySlice_GetIndicesEx(((PySliceObject *)__pyx_v_obj), __pyx_v_max_length, (&__pyx_v_start), (&__pyx_v_stop), (&__pyx_v_step), (&__pyx_v_length)); if (unlikely(__pyx_t_6 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 122; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_6 = PySlice_GetIndicesEx(((PySliceObject *)__pyx_v_obj), __pyx_v_max_length, (&__pyx_v_start), (&__pyx_v_stop), (&__pyx_v_step), (&__pyx_v_length)); if (unlikely(__pyx_t_6 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 123; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __pyx_v_ret = __pyx_t_6;
 
-    /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":123
+    /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":124
  *         # slice
  *         ret = PySlice_GetIndicesEx(<PySliceObject*>obj, max_length, &start, &stop, &step, &length)
  *         if ret:             # <<<<<<<<<<<<<<
@@ -1559,20 +1559,20 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_f_8cyspa
     __pyx_t_2 = (__pyx_v_ret != 0);
     if (__pyx_t_2) {
 
-      /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":124
+      /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":125
  *         ret = PySlice_GetIndicesEx(<PySliceObject*>obj, max_length, &start, &stop, &step, &length)
  *         if ret:
  *             raise RuntimeError("Slice could not be translated")             # <<<<<<<<<<<<<<
  * 
  *         #print "start, stop, step, length = (%d, %d, %d, %d)" % (start, stop, step, length)
  */
-      __pyx_t_4 = __Pyx_PyObject_Call(__pyx_builtin_RuntimeError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 124; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_4 = __Pyx_PyObject_Call(__pyx_builtin_RuntimeError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 125; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_Raise(__pyx_t_4, 0, 0, 0);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 124; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 125; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-      /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":123
+      /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":124
  *         # slice
  *         ret = PySlice_GetIndicesEx(<PySliceObject*>obj, max_length, &start, &stop, &step, &length)
  *         if ret:             # <<<<<<<<<<<<<<
@@ -1581,7 +1581,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_f_8cyspa
  */
     }
 
-    /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":128
+    /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":129
  *         #print "start, stop, step, length = (%d, %d, %d, %d)" % (start, stop, step, length)
  * 
  *         indices = <INT64_t *> PyMem_Malloc(length * sizeof(INT64_t))             # <<<<<<<<<<<<<<
@@ -1590,7 +1590,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_f_8cyspa
  */
     __pyx_v_indices = ((__pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *)PyMem_Malloc((__pyx_v_length * (sizeof(__pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t)))));
 
-    /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":129
+    /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":130
  * 
  *         indices = <INT64_t *> PyMem_Malloc(length * sizeof(INT64_t))
  *         if not indices:             # <<<<<<<<<<<<<<
@@ -1600,16 +1600,16 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_f_8cyspa
     __pyx_t_2 = ((!(__pyx_v_indices != 0)) != 0);
     if (__pyx_t_2) {
 
-      /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":130
+      /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":131
  *         indices = <INT64_t *> PyMem_Malloc(length * sizeof(INT64_t))
  *         if not indices:
  *             raise MemoryError()             # <<<<<<<<<<<<<<
  * 
  *         # populate indices
  */
-      PyErr_NoMemory(); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 130; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      PyErr_NoMemory(); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 131; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-      /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":129
+      /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":130
  * 
  *         indices = <INT64_t *> PyMem_Malloc(length * sizeof(INT64_t))
  *         if not indices:             # <<<<<<<<<<<<<<
@@ -1618,7 +1618,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_f_8cyspa
  */
     }
 
-    /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":133
+    /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":134
  * 
  *         # populate indices
  *         i = start             # <<<<<<<<<<<<<<
@@ -1627,7 +1627,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_f_8cyspa
  */
     __pyx_v_i = __pyx_v_start;
 
-    /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":134
+    /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":135
  *         # populate indices
  *         i = start
  *         for j from 0 <= j < length:             # <<<<<<<<<<<<<<
@@ -1637,7 +1637,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_f_8cyspa
     __pyx_t_7 = __pyx_v_length;
     for (__pyx_v_j = 0; __pyx_v_j < __pyx_t_7; __pyx_v_j++) {
 
-      /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":135
+      /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":136
  *         i = start
  *         for j from 0 <= j < length:
  *             indices[j] = i             # <<<<<<<<<<<<<<
@@ -1646,7 +1646,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_f_8cyspa
  */
       (__pyx_v_indices[__pyx_v_j]) = __pyx_v_i;
 
-      /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":136
+      /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":137
  *         for j from 0 <= j < length:
  *             indices[j] = i
  *             i += step             # <<<<<<<<<<<<<<
@@ -1656,7 +1656,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_f_8cyspa
       __pyx_v_i = (__pyx_v_i + __pyx_v_step);
     }
 
-    /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":120
+    /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":121
  * 
  *     #                                            *** Slice ***
  *     elif PySlice_Check(obj):             # <<<<<<<<<<<<<<
@@ -1666,7 +1666,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_f_8cyspa
     goto __pyx_L3;
   }
 
-  /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":139
+  /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":140
  * 
  *     #                                            *** List ***
  *     elif PyList_Check(obj):             # <<<<<<<<<<<<<<
@@ -1676,7 +1676,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_f_8cyspa
   __pyx_t_2 = (PyList_Check(__pyx_v_obj) != 0);
   if (__pyx_t_2) {
 
-    /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":140
+    /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":141
  *     #                                            *** List ***
  *     elif PyList_Check(obj):
  *         length = PyList_Size(obj)             # <<<<<<<<<<<<<<
@@ -1685,7 +1685,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_f_8cyspa
  */
     __pyx_v_length = PyList_Size(__pyx_v_obj);
 
-    /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":141
+    /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":142
  *     elif PyList_Check(obj):
  *         length = PyList_Size(obj)
  *         indices = <INT64_t *> PyMem_Malloc(length * sizeof(INT64_t))             # <<<<<<<<<<<<<<
@@ -1694,7 +1694,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_f_8cyspa
  */
     __pyx_v_indices = ((__pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *)PyMem_Malloc((__pyx_v_length * (sizeof(__pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t)))));
 
-    /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":142
+    /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":143
  *         length = PyList_Size(obj)
  *         indices = <INT64_t *> PyMem_Malloc(length * sizeof(INT64_t))
  *         if not indices:             # <<<<<<<<<<<<<<
@@ -1704,16 +1704,16 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_f_8cyspa
     __pyx_t_2 = ((!(__pyx_v_indices != 0)) != 0);
     if (__pyx_t_2) {
 
-      /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":143
+      /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":144
  *         indices = <INT64_t *> PyMem_Malloc(length * sizeof(INT64_t))
  *         if not indices:
  *             raise MemoryError()             # <<<<<<<<<<<<<<
  * 
  *         for i from 0 <= i < length:
  */
-      PyErr_NoMemory(); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 143; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      PyErr_NoMemory(); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 144; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-      /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":142
+      /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":143
  *         length = PyList_Size(obj)
  *         indices = <INT64_t *> PyMem_Malloc(length * sizeof(INT64_t))
  *         if not indices:             # <<<<<<<<<<<<<<
@@ -1722,7 +1722,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_f_8cyspa
  */
     }
 
-    /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":145
+    /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":146
  *             raise MemoryError()
  * 
  *         for i from 0 <= i < length:             # <<<<<<<<<<<<<<
@@ -1732,7 +1732,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_f_8cyspa
     __pyx_t_7 = __pyx_v_length;
     for (__pyx_v_i = 0; __pyx_v_i < __pyx_t_7; __pyx_v_i++) {
 
-      /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":146
+      /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":147
  * 
  *         for i from 0 <= i < length:
  *             val = PyList_GetItem(obj, <Py_ssize_t>i)             # <<<<<<<<<<<<<<
@@ -1741,7 +1741,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_f_8cyspa
  */
       __pyx_v_val = PyList_GetItem(__pyx_v_obj, ((Py_ssize_t)__pyx_v_i));
 
-      /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":147
+      /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":148
  *         for i from 0 <= i < length:
  *             val = PyList_GetItem(obj, <Py_ssize_t>i)
  *             if PyInt_Check(val):             # <<<<<<<<<<<<<<
@@ -1751,7 +1751,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_f_8cyspa
       __pyx_t_2 = (PyInt_Check(__pyx_v_val) != 0);
       if (__pyx_t_2) {
 
-        /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":148
+        /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":149
  *             val = PyList_GetItem(obj, <Py_ssize_t>i)
  *             if PyInt_Check(val):
  *                 index = PyInt_AS_LONG(val)             # <<<<<<<<<<<<<<
@@ -1760,7 +1760,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_f_8cyspa
  */
         __pyx_v_index = PyInt_AS_LONG(__pyx_v_val);
 
-        /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":150
+        /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":151
  *                 index = PyInt_AS_LONG(val)
  *                 # test if index is valid
  *                 if not (0 <= index < max_length):             # <<<<<<<<<<<<<<
@@ -1774,18 +1774,18 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_f_8cyspa
         __pyx_t_1 = ((!(__pyx_t_2 != 0)) != 0);
         if (__pyx_t_1) {
 
-          /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":151
+          /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":152
  *                 # test if index is valid
  *                 if not (0 <= index < max_length):
  *                     raise IndexError("Index %d out of bounds [%d, %d[" % (<long>index, 0, max_length))             # <<<<<<<<<<<<<<
  *                 indices[i] = <INT64_t> index
  *             else:
  */
-          __pyx_t_4 = __Pyx_PyInt_From_long(((long)__pyx_v_index)); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 151; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_4 = __Pyx_PyInt_From_long(((long)__pyx_v_index)); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 152; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_4);
-          __pyx_t_5 = __Pyx_PyInt_From_long(__pyx_v_max_length); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 151; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_5 = __Pyx_PyInt_From_long(__pyx_v_max_length); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 152; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_5);
-          __pyx_t_3 = PyTuple_New(3); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 151; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_3 = PyTuple_New(3); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 152; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_3);
           __Pyx_GIVEREF(__pyx_t_4);
           PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_4);
@@ -1796,22 +1796,22 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_f_8cyspa
           PyTuple_SET_ITEM(__pyx_t_3, 2, __pyx_t_5);
           __pyx_t_4 = 0;
           __pyx_t_5 = 0;
-          __pyx_t_5 = __Pyx_PyString_Format(__pyx_kp_s_Index_d_out_of_bounds_d_d, __pyx_t_3); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 151; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_5 = __Pyx_PyString_Format(__pyx_kp_s_Index_d_out_of_bounds_d_d, __pyx_t_3); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 152; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_5);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-          __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 151; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 152; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_3);
           __Pyx_GIVEREF(__pyx_t_5);
           PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_5);
           __pyx_t_5 = 0;
-          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_t_3, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 151; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_t_3, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 152; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_5);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
           __Pyx_Raise(__pyx_t_5, 0, 0, 0);
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 151; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 152; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-          /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":150
+          /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":151
  *                 index = PyInt_AS_LONG(val)
  *                 # test if index is valid
  *                 if not (0 <= index < max_length):             # <<<<<<<<<<<<<<
@@ -1820,7 +1820,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_f_8cyspa
  */
         }
 
-        /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":152
+        /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":153
  *                 if not (0 <= index < max_length):
  *                     raise IndexError("Index %d out of bounds [%d, %d[" % (<long>index, 0, max_length))
  *                 indices[i] = <INT64_t> index             # <<<<<<<<<<<<<<
@@ -1829,7 +1829,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_f_8cyspa
  */
         (__pyx_v_indices[__pyx_v_i]) = ((__pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t)__pyx_v_index);
 
-        /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":147
+        /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":148
  *         for i from 0 <= i < length:
  *             val = PyList_GetItem(obj, <Py_ssize_t>i)
  *             if PyInt_Check(val):             # <<<<<<<<<<<<<<
@@ -1839,7 +1839,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_f_8cyspa
         goto __pyx_L13;
       }
 
-      /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":154
+      /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":155
  *                 indices[i] = <INT64_t> index
  *             else:
  *                 PyMem_Free(indices)             # <<<<<<<<<<<<<<
@@ -1849,23 +1849,23 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_f_8cyspa
       /*else*/ {
         PyMem_Free(__pyx_v_indices);
 
-        /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":155
+        /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":156
  *             else:
  *                 PyMem_Free(indices)
  *                 raise ValueError("List must only contain integers")             # <<<<<<<<<<<<<<
  * 
  *     #                                            *** numpy array ***
  */
-        __pyx_t_5 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 155; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_5 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 156; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_5);
         __Pyx_Raise(__pyx_t_5, 0, 0, 0);
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 155; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 156; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
       __pyx_L13:;
     }
 
-    /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":139
+    /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":140
  * 
  *     #                                            *** List ***
  *     elif PyList_Check(obj):             # <<<<<<<<<<<<<<
@@ -1875,7 +1875,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_f_8cyspa
     goto __pyx_L3;
   }
 
-  /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":158
+  /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":159
  * 
  *     #                                            *** numpy array ***
  *     elif PyArray_Check(obj):             # <<<<<<<<<<<<<<
@@ -1885,7 +1885,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_f_8cyspa
   __pyx_t_1 = (PyArray_Check(__pyx_v_obj) != 0);
   if (__pyx_t_1) {
 
-    /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":159
+    /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":160
  *     #                                            *** numpy array ***
  *     elif PyArray_Check(obj):
  *         array_dim = <INT32_t> PyArray_NDIM(<PyArrayObject *>obj)             # <<<<<<<<<<<<<<
@@ -1894,7 +1894,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_f_8cyspa
  */
     __pyx_v_array_dim = ((__pyx_t_8cysparse_12common_types_14cysparse_types_INT32_t)PyArray_NDIM(((PyArrayObject *)__pyx_v_obj)));
 
-    /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":160
+    /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":161
  *     elif PyArray_Check(obj):
  *         array_dim = <INT32_t> PyArray_NDIM(<PyArrayObject *>obj)
  *         if array_dim != 1:             # <<<<<<<<<<<<<<
@@ -1904,20 +1904,20 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_f_8cyspa
     __pyx_t_1 = ((__pyx_v_array_dim != 1) != 0);
     if (__pyx_t_1) {
 
-      /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":161
+      /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":162
  *         array_dim = <INT32_t> PyArray_NDIM(<PyArrayObject *>obj)
  *         if array_dim != 1:
  *             raise IndexError("Numpy array must have only one dimension")             # <<<<<<<<<<<<<<
  * 
  *         length = <Py_ssize_t> PyArray_DIM(<PyArrayObject *>obj, 0)
  */
-      __pyx_t_5 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 161; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_5 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 162; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_Raise(__pyx_t_5, 0, 0, 0);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 161; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 162; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-      /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":160
+      /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":161
  *     elif PyArray_Check(obj):
  *         array_dim = <INT32_t> PyArray_NDIM(<PyArrayObject *>obj)
  *         if array_dim != 1:             # <<<<<<<<<<<<<<
@@ -1926,7 +1926,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_f_8cyspa
  */
     }
 
-    /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":163
+    /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":164
  *             raise IndexError("Numpy array must have only one dimension")
  * 
  *         length = <Py_ssize_t> PyArray_DIM(<PyArrayObject *>obj, 0)             # <<<<<<<<<<<<<<
@@ -1935,7 +1935,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_f_8cyspa
  */
     __pyx_v_length = ((Py_ssize_t)PyArray_DIM(((PyArrayObject *)__pyx_v_obj), 0));
 
-    /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":165
+    /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":166
  *         length = <Py_ssize_t> PyArray_DIM(<PyArrayObject *>obj, 0)
  * 
  *         indices = <INT64_t *> PyMem_Malloc(length * sizeof(INT64_t))             # <<<<<<<<<<<<<<
@@ -1944,7 +1944,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_f_8cyspa
  */
     __pyx_v_indices = ((__pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *)PyMem_Malloc((__pyx_v_length * (sizeof(__pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t)))));
 
-    /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":166
+    /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":167
  * 
  *         indices = <INT64_t *> PyMem_Malloc(length * sizeof(INT64_t))
  *         if not indices:             # <<<<<<<<<<<<<<
@@ -1954,16 +1954,16 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_f_8cyspa
     __pyx_t_1 = ((!(__pyx_v_indices != 0)) != 0);
     if (__pyx_t_1) {
 
-      /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":167
+      /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":168
  *         indices = <INT64_t *> PyMem_Malloc(length * sizeof(INT64_t))
  *         if not indices:
  *             raise MemoryError()             # <<<<<<<<<<<<<<
  * 
  *         # TODO: remove or control this is not DANGEROUS
  */
-      PyErr_NoMemory(); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 167; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      PyErr_NoMemory(); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 168; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-      /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":166
+      /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":167
  * 
  *         indices = <INT64_t *> PyMem_Malloc(length * sizeof(INT64_t))
  *         if not indices:             # <<<<<<<<<<<<<<
@@ -1972,7 +1972,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_f_8cyspa
  */
     }
 
-    /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":171
+    /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":172
  *         # TODO: remove or control this is not DANGEROUS
  *         # This is dangerous if array is NOT C-contiguous!!!
  *         array_data = <INT64_t* > PyArray_DATA(<PyArrayObject *> obj)             # <<<<<<<<<<<<<<
@@ -1981,7 +1981,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_f_8cyspa
  */
     __pyx_v_array_data = ((__pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *)PyArray_DATA(((PyArrayObject *)__pyx_v_obj)));
 
-    /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":181
+    /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":182
  * 
  *         # we cannot matrix_copy the C-array directly as we must test each element
  *         for i from 0 <= i < length:             # <<<<<<<<<<<<<<
@@ -1991,7 +1991,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_f_8cyspa
     __pyx_t_7 = __pyx_v_length;
     for (__pyx_v_i = 0; __pyx_v_i < __pyx_t_7; __pyx_v_i++) {
 
-      /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":182
+      /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":183
  *         # we cannot matrix_copy the C-array directly as we must test each element
  *         for i from 0 <= i < length:
  *             index = <INT64_t> array_data[i]             # <<<<<<<<<<<<<<
@@ -2000,7 +2000,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_f_8cyspa
  */
       __pyx_v_index = ((__pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t)(__pyx_v_array_data[__pyx_v_i]));
 
-      /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":183
+      /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":184
  *         for i from 0 <= i < length:
  *             index = <INT64_t> array_data[i]
  *             if not (0 <= index < max_length):             # <<<<<<<<<<<<<<
@@ -2014,18 +2014,18 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_f_8cyspa
       __pyx_t_2 = ((!(__pyx_t_1 != 0)) != 0);
       if (__pyx_t_2) {
 
-        /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":184
+        /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":185
  *             index = <INT64_t> array_data[i]
  *             if not (0 <= index < max_length):
  *                 raise IndexError("Index %d out of bounds [%d, %d[" % (index, 0, max_length))             # <<<<<<<<<<<<<<
  *             indices[i] = array_data[i]
  * 
  */
-        __pyx_t_5 = PyInt_FromSsize_t(__pyx_v_index); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 184; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_5 = PyInt_FromSsize_t(__pyx_v_index); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 185; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_5);
-        __pyx_t_3 = __Pyx_PyInt_From_long(__pyx_v_max_length); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 184; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_3 = __Pyx_PyInt_From_long(__pyx_v_max_length); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 185; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_3);
-        __pyx_t_4 = PyTuple_New(3); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 184; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_4 = PyTuple_New(3); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 185; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_4);
         __Pyx_GIVEREF(__pyx_t_5);
         PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_5);
@@ -2036,22 +2036,22 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_f_8cyspa
         PyTuple_SET_ITEM(__pyx_t_4, 2, __pyx_t_3);
         __pyx_t_5 = 0;
         __pyx_t_3 = 0;
-        __pyx_t_3 = __Pyx_PyString_Format(__pyx_kp_s_Index_d_out_of_bounds_d_d, __pyx_t_4); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 184; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_3 = __Pyx_PyString_Format(__pyx_kp_s_Index_d_out_of_bounds_d_d, __pyx_t_4); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 185; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_3);
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-        __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 184; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 185; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_4);
         __Pyx_GIVEREF(__pyx_t_3);
         PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_3);
         __pyx_t_3 = 0;
-        __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_t_4, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 184; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_IndexError, __pyx_t_4, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 185; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_3);
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
         __Pyx_Raise(__pyx_t_3, 0, 0, 0);
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 184; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 185; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-        /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":183
+        /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":184
  *         for i from 0 <= i < length:
  *             index = <INT64_t> array_data[i]
  *             if not (0 <= index < max_length):             # <<<<<<<<<<<<<<
@@ -2060,7 +2060,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_f_8cyspa
  */
       }
 
-      /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":185
+      /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":186
  *             if not (0 <= index < max_length):
  *                 raise IndexError("Index %d out of bounds [%d, %d[" % (index, 0, max_length))
  *             indices[i] = array_data[i]             # <<<<<<<<<<<<<<
@@ -2070,7 +2070,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_f_8cyspa
       (__pyx_v_indices[__pyx_v_i]) = (__pyx_v_array_data[__pyx_v_i]);
     }
 
-    /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":158
+    /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":159
  * 
  *     #                                            *** numpy array ***
  *     elif PyArray_Check(obj):             # <<<<<<<<<<<<<<
@@ -2080,7 +2080,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_f_8cyspa
     goto __pyx_L3;
   }
 
-  /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":188
+  /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":189
  * 
  *     else:
  *         raise TypeError("Index object is not recognized to create a LLSparseMatrixView")             # <<<<<<<<<<<<<<
@@ -2088,15 +2088,15 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_f_8cyspa
  *     number_of_elements[0] = <INT64_t> length
  */
   /*else*/ {
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 188; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 189; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 188; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 189; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __pyx_L3:;
 
-  /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":190
+  /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":191
  *         raise TypeError("Index object is not recognized to create a LLSparseMatrixView")
  * 
  *     number_of_elements[0] = <INT64_t> length             # <<<<<<<<<<<<<<
@@ -2105,7 +2105,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_f_8cyspa
  */
   (__pyx_v_number_of_elements[0]) = ((__pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t)__pyx_v_length);
 
-  /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":192
+  /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":193
  *     number_of_elements[0] = <INT64_t> length
  * 
  *     return indices             # <<<<<<<<<<<<<<
@@ -2113,7 +2113,7 @@ static __pyx_t_8cysparse_12common_types_14cysparse_types_INT64_t *__pyx_f_8cyspa
   __pyx_r = __pyx_v_indices;
   goto __pyx_L0;
 
-  /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":64
+  /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":65
  * 
  * 
  * cdef INT64_t * create_c_array_indices_from_python_object_INT64_t(INT64_t max_length, PyObject * obj, INT64_t * number_of_elements) except NULL:             # <<<<<<<<<<<<<<
@@ -4324,11 +4324,11 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, 0, 0, 0, 0, 0, 0}
 };
 static int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_IndexError = __Pyx_GetBuiltinName(__pyx_n_s_IndexError); if (!__pyx_builtin_IndexError) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 110; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_builtin_MemoryError = __Pyx_GetBuiltinName(__pyx_n_s_MemoryError); if (!__pyx_builtin_MemoryError) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 115; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_builtin_RuntimeError = __Pyx_GetBuiltinName(__pyx_n_s_RuntimeError); if (!__pyx_builtin_RuntimeError) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 124; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 155; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 188; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_builtin_IndexError = __Pyx_GetBuiltinName(__pyx_n_s_IndexError); if (!__pyx_builtin_IndexError) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 111; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_builtin_MemoryError = __Pyx_GetBuiltinName(__pyx_n_s_MemoryError); if (!__pyx_builtin_MemoryError) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 116; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_builtin_RuntimeError = __Pyx_GetBuiltinName(__pyx_n_s_RuntimeError); if (!__pyx_builtin_RuntimeError) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 125; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 156; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 189; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 231; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   return 0;
   __pyx_L1_error:;
@@ -4339,47 +4339,47 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":124
+  /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":125
  *         ret = PySlice_GetIndicesEx(<PySliceObject*>obj, max_length, &start, &stop, &step, &length)
  *         if ret:
  *             raise RuntimeError("Slice could not be translated")             # <<<<<<<<<<<<<<
  * 
  *         #print "start, stop, step, length = (%d, %d, %d, %d)" % (start, stop, step, length)
  */
-  __pyx_tuple_ = PyTuple_Pack(1, __pyx_kp_s_Slice_could_not_be_translated); if (unlikely(!__pyx_tuple_)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 124; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple_ = PyTuple_Pack(1, __pyx_kp_s_Slice_could_not_be_translated); if (unlikely(!__pyx_tuple_)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 125; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple_);
   __Pyx_GIVEREF(__pyx_tuple_);
 
-  /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":155
+  /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":156
  *             else:
  *                 PyMem_Free(indices)
  *                 raise ValueError("List must only contain integers")             # <<<<<<<<<<<<<<
  * 
  *     #                                            *** numpy array ***
  */
-  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_s_List_must_only_contain_integers); if (unlikely(!__pyx_tuple__2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 155; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_s_List_must_only_contain_integers); if (unlikely(!__pyx_tuple__2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 156; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
 
-  /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":161
+  /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":162
  *         array_dim = <INT32_t> PyArray_NDIM(<PyArrayObject *>obj)
  *         if array_dim != 1:
  *             raise IndexError("Numpy array must have only one dimension")             # <<<<<<<<<<<<<<
  * 
  *         length = <Py_ssize_t> PyArray_DIM(<PyArrayObject *>obj, 0)
  */
-  __pyx_tuple__3 = PyTuple_Pack(1, __pyx_kp_s_Numpy_array_must_have_only_one_d); if (unlikely(!__pyx_tuple__3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 161; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__3 = PyTuple_Pack(1, __pyx_kp_s_Numpy_array_must_have_only_one_d); if (unlikely(!__pyx_tuple__3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 162; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__3);
   __Pyx_GIVEREF(__pyx_tuple__3);
 
-  /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":188
+  /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":189
  * 
  *     else:
  *         raise TypeError("Index object is not recognized to create a LLSparseMatrixView")             # <<<<<<<<<<<<<<
  * 
  *     number_of_elements[0] = <INT64_t> length
  */
-  __pyx_tuple__4 = PyTuple_Pack(1, __pyx_kp_s_Index_object_is_not_recognized_t); if (unlikely(!__pyx_tuple__4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 188; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__4 = PyTuple_Pack(1, __pyx_kp_s_Index_object_is_not_recognized_t); if (unlikely(!__pyx_tuple__4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 189; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__4);
   __Pyx_GIVEREF(__pyx_tuple__4);
 
@@ -4572,16 +4572,16 @@ PyMODINIT_FUNC PyInit_generate_indices_INT64_t(void)
   if (__Pyx_patch_abc() < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   #endif
 
-  /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":23
+  /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":24
  * 
  * cimport numpy as cnp
  * import numpy as np             # <<<<<<<<<<<<<<
  * 
  * cdef extern from "Python.h":
  */
-  __pyx_t_1 = __Pyx_Import(__pyx_n_s_numpy, 0, -1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 23; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_Import(__pyx_n_s_numpy, 0, -1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 24; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_np, __pyx_t_1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 23; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_np, __pyx_t_1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 24; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "cysparse/sparse/sparse_utils/generic/generate_indices_INT64_t.pyx":1

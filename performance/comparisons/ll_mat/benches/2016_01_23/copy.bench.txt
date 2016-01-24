@@ -1,0 +1,40 @@
+
+Benchmark Report
+================
+
+Copy matrix with 100 elements and size = 1,000
+----------------------------------------------
+
+    name | rank | runs |      mean |        sd | timesBaseline
+---------|------|------|-----------|-----------|--------------
+pysparse |    1 |  100 | 5.937e-06 | 6.461e-07 |           1.0
+cysparse |    2 |  100 | 7.486e-06 | 1.099e-06 | 1.26104417671
+
+Copy matrix with 1,000 elements and size = 10,000
+-------------------------------------------------
+
+    name | rank | runs |      mean |        sd | timesBaseline
+---------|------|------|-----------|-----------|--------------
+cysparse |    1 |  100 | 1.446e-05 | 6.037e-06 |           1.0
+pysparse |    2 |  100 | 4.187e-05 | 2.996e-06 |  2.8946761167
+
+Copy matrix with 10,000 elements and size = 100,000
+---------------------------------------------------
+
+    name | rank | runs |      mean |        sd | timesBaseline
+---------|------|------|-----------|-----------|--------------
+cysparse |    1 |  100 | 0.0001043 | 5.281e-05 |           1.0
+pysparse |    2 |  100 | 0.0002593 | 3.023e-05 | 2.48647659983
+
+Copy matrix with 80,000 elements and size = 100,000
+---------------------------------------------------
+
+    name | rank | runs |      mean |        sd | timesBaseline
+---------|------|------|-----------|-----------|--------------
+cysparse |    1 |  100 |  0.000468 | 0.0001746 |           1.0
+pysparse |    2 |  100 | 0.0009242 | 0.0001029 | 1.97473268093
+
+Each of the above 800 runs were run in random, non-consecutive order by
+`benchmark` v0.1.5 (http://jspi.es/benchmark) with Python 2.7.5+
+Linux-3.11.0-12-generic-x86_64 on 2016-01-23 15:45:54.
+

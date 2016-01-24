@@ -1,0 +1,16 @@
+
+Benchmark Report
+================
+
+Simple element retrieval with 100 elements and size = 1,000
+-----------------------------------------------------------
+
+    name | rank | runs |   mean |       sd | timesBaseline
+---------|------|------|--------|----------|--------------
+cysparse |    1 |   10 | 0.1081 | 0.004387 |           1.0
+pysparse |    2 |   10 | 0.1298 | 0.005009 | 1.20152170944
+
+Each of the above 20 runs were run in random, non-consecutive order by
+`benchmark` v0.1.5 (http://jspi.es/benchmark) with Python 2.7.5+
+Linux-3.11.0-12-generic-x86_64 on 2016-01-23 23:34:36.
+

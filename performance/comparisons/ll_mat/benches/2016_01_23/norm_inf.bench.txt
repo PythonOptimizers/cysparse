@@ -1,0 +1,40 @@
+
+Benchmark Report
+================
+
+Infinite norm with 100 elements and size = 1,000
+------------------------------------------------
+
+    name | rank | runs |      mean |        sd | timesBaseline
+---------|------|------|-----------|-----------|--------------
+pysparse |    1 |  100 | 2.315e-06 | 7.442e-07 |           1.0
+cysparse |    2 |  100 | 2.434e-06 | 6.746e-07 | 1.05149330587
+
+Infinite norm with 1000 elements and size = 10,000
+--------------------------------------------------
+
+    name | rank | runs |      mean |        sd | timesBaseline
+---------|------|------|-----------|-----------|--------------
+pysparse |    1 |  100 | 1.302e-05 | 3.982e-07 |           1.0
+cysparse |    2 |  100 | 1.699e-05 | 5.944e-07 | 1.30536728339
+
+Infinite norm with 10,000 elements and size = 100,000
+-----------------------------------------------------
+
+    name | rank | runs |      mean |        sd | timesBaseline
+---------|------|------|-----------|-----------|--------------
+cysparse |    1 |  100 | 9.045e-05 | 1.779e-06 |           1.0
+pysparse |    2 |  100 | 9.575e-05 | 1.953e-06 | 1.05856770078
+
+Infinite norm with 80,000 elements and size = 100,000
+-----------------------------------------------------
+
+    name | rank | runs |      mean |        sd | timesBaseline
+---------|------|------|-----------|-----------|--------------
+pysparse |    1 |  100 | 0.0001338 | 4.922e-06 |           1.0
+cysparse |    2 |  100 | 0.0001364 | 7.337e-06 | 1.01872138798
+
+Each of the above 800 runs were run in random, non-consecutive order by
+`benchmark` v0.1.5 (http://jspi.es/benchmark) with Python 2.7.5+
+Linux-3.11.0-12-generic-x86_64 on 2016-01-23 15:45:52.
+
