@@ -12,6 +12,7 @@ cnp.import_array()
 
 cdef class MulProxy(OpProxy):
     def __cinit__(self, left_operand, right_operand):
+        # if isinstance(left_operand, OpMatrixProxy) and isinstance(right_operand, OpMatrixProxy):
         assert left_operand.ncol == right_operand.nrow, \
             "Dimensions must be compatible [%d, %d] * [%d, %d]" % \
             (left_operand.nrow, left_operand.ncol, right_operand.nrow, right_operand.ncol)
@@ -37,8 +38,11 @@ cdef class MulProxy(OpProxy):
         if not PyInt_Check(<PyObject *>key[0]) or not PyInt_Check(<PyObject *>key[1]):
             raise IndexError("Only integers are accepted as indices for a Sum Proxy")
 
+        # if isinstance(left_operand, OpMatrixProxy) and isinstance(right_operand, OpMatrixProxy):
         sum = 0
+
         p = self.left_operand.ncol
+
 
         for k in xrange(p):
             sum += self.left_operand[key[0], k] * self.right_operand[k, key[1]]
