@@ -4,7 +4,11 @@ cimport cysparse.common_types.cysparse_types as cp_types
 
 cimport cython
 
-from collections import OrderedDict
+try:
+    from collections import OrderedDict
+except ImportError:
+    from ordereddict import OrderedDict
+
 import sys
 
 from cpython cimport PyObject
