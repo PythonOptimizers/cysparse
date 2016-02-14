@@ -2,6 +2,8 @@
 
 Fast sparse matrix library for Python/Cython.
 
+[![Build Status](https://travis-ci.com/PythonOptimizers/cysparse.svg?token=ydgwcgKueSZx3k7qYsxd&branch=develop)](https://travis-ci.com/PythonOptimizers/cysparse)
+
 
 :warning: `COMPLEX256_T` is **no** longer supported :warning:
  
