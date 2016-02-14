@@ -96,6 +96,7 @@ if not use_debug_symbols:
     key_to_modify = None
     try:
         key_to_modify = 'PY_CORE_CFLAGS'
+        sysconfig._config_vars[key_to_modify]
     except:
         key_to_modify = 'PY_CFLAGS'
     cflags = sysconfig._config_vars[key_to_modify]
