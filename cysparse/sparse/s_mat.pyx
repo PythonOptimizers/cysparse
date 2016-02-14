@@ -412,7 +412,7 @@ cdef class SparseMatrix:
             raise RuntimeError("This operation is not allowed")
 
         return SumProxy(self, B)
-    
+
     def __sub__(self, other):
         """
         Return a :class:`SumProxy`.
