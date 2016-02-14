@@ -680,15 +680,13 @@ struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy {
   int nrow;
   int ncol;
   int nnz;
-  PyObject *left_operand;
-  PyObject *right_operand;
   PyObject *dtype;
   PyObject *itype;
 };
 
 
 
-/* "cysparse/sparse/operator_proxies/op_proxy.pyx":8
+/* "cysparse/sparse/operator_proxies/op_proxy.pyx":10
  * 
  * 
  * cdef class OpProxy:             # <<<<<<<<<<<<<<
@@ -698,6 +696,7 @@ struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy {
 
 struct __pyx_vtabstruct_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy {
   int (*operand_is_accepted)(struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *, PyObject *);
+  PyObject *(*scalar_is_accepted)(struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *, PyObject *);
 };
 static struct __pyx_vtabstruct_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *__pyx_vtabptr_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy;
 
@@ -781,32 +780,12 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_GetAttrStr(PyObject* obj, PyObject
 
 static PyObject *__Pyx_GetBuiltinName(PyObject *name);
 
-static void __Pyx_RaiseArgtupleInvalid(const char* func_name, int exact,
-    Py_ssize_t num_min, Py_ssize_t num_max, Py_ssize_t num_found);
-
-static void __Pyx_RaiseDoubleKeywordsError(const char* func_name, PyObject* kw_name);
-
-static int __Pyx_ParseOptionalKeywords(PyObject *kwds, PyObject **argnames[],\
-    PyObject *kwds2, PyObject *values[], Py_ssize_t num_pos_args,\
-    const char* function_name);
-
-static CYTHON_INLINE int __Pyx_ArgTypeTest(PyObject *obj, PyTypeObject *type, int none_allowed,
-    const char *name, int exact);
+static CYTHON_INLINE int __Pyx_CheckKeywordStrings(PyObject *kwdict, const char* function_name, int kw_allowed);
 
 #if CYTHON_COMPILING_IN_CPYTHON
 static CYTHON_INLINE PyObject* __Pyx_PyObject_Call(PyObject *func, PyObject *arg, PyObject *kw);
 #else
 #define __Pyx_PyObject_Call(func, arg, kw) PyObject_Call(func, arg, kw)
-#endif
-
-#if CYTHON_COMPILING_IN_CPYTHON
-static CYTHON_INLINE PyObject* __Pyx_PyObject_CallMethO(PyObject *func, PyObject *arg);
-#endif
-
-#if CYTHON_COMPILING_IN_CPYTHON
-static CYTHON_INLINE PyObject* __Pyx_PyObject_CallNoArg(PyObject *func);
-#else
-#define __Pyx_PyObject_CallNoArg(func) __Pyx_PyObject_Call(func, __pyx_empty_tuple, NULL)
 #endif
 
 static CYTHON_INLINE void __Pyx_ErrRestore(PyObject *type, PyObject *value, PyObject *tb);
@@ -817,6 +796,19 @@ static void __Pyx_Raise(PyObject *type, PyObject *value, PyObject *tb, PyObject 
 static PyObject *__Pyx_Import(PyObject *name, PyObject *from_list, int level);
 
 static PyObject* __Pyx_ImportFrom(PyObject* module, PyObject* name);
+
+static CYTHON_INLINE int __Pyx_ArgTypeTest(PyObject *obj, PyTypeObject *type, int none_allowed,
+    const char *name, int exact);
+
+#if CYTHON_COMPILING_IN_CPYTHON
+static CYTHON_INLINE PyObject* __Pyx_PyObject_CallMethO(PyObject *func, PyObject *arg);
+#endif
+
+#if CYTHON_COMPILING_IN_CPYTHON
+static CYTHON_INLINE PyObject* __Pyx_PyObject_CallNoArg(PyObject *func);
+#else
+#define __Pyx_PyObject_CallNoArg(func) __Pyx_PyObject_Call(func, __pyx_empty_tuple, NULL)
+#endif
 
 static int __Pyx_SetVtable(PyObject *dict, void *vtable);
 
@@ -837,9 +829,9 @@ static void __pyx_insert_code_object(int code_line, PyCodeObject* code_object);
 static void __Pyx_AddTraceback(const char *funcname, int c_line,
                                int py_line, const char *filename);
 
-static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *);
-
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value);
+
+static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *);
 
 #if CYTHON_CCOMPLEX
   #ifdef __cplusplus
@@ -1003,6 +995,7 @@ static int __Pyx_ImportFunction(PyObject *module, const char *funcname, void (**
 static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 
 static int __pyx_f_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_operand_is_accepted(CYTHON_UNUSED struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *__pyx_v_self, PyObject *__pyx_v_operand); /* proto*/
+static PyObject *__pyx_f_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_scalar_is_accepted(CYTHON_UNUSED struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *__pyx_v_self, PyObject *__pyx_v_scalar); /* proto*/
 
 /* Module declarations from 'cpython.version' */
 
@@ -1088,6 +1081,7 @@ static PyTypeObject *__pyx_ptype_7cpython_7complex_complex = 0;
 /* Module declarations from 'cpython' */
 
 /* Module declarations from 'cysparse.common_types.cysparse_types' */
+static PyObject *(*__pyx_f_8cysparse_12common_types_14cysparse_types_is_scalar)(PyObject *, int __pyx_skip_dispatch); /*proto*/
 
 /* Module declarations from 'cysparse.sparse.s_mat' */
 static PyTypeObject *__pyx_ptype_8cysparse_6sparse_5s_mat_SparseMatrix = 0;
@@ -1109,7 +1103,6 @@ int __pyx_module_is_main_cysparse__sparse__operator_proxies__op_proxy = 0;
 /* Implementation of 'cysparse.sparse.operator_proxies.op_proxy' */
 static PyObject *__pyx_builtin_NotImplementedError;
 static PyObject *__pyx_builtin_xrange;
-static char __pyx_k_nnz[] = "nnz";
 static char __pyx_k_main[] = "__main__";
 static char __pyx_k_ncol[] = "ncol";
 static char __pyx_k_nrow[] = "nrow";
@@ -1122,60 +1115,43 @@ static char __pyx_k_xrange[] = "xrange";
 static char __pyx_k_size_hint[] = "size_hint";
 static char __pyx_k_pyx_vtable[] = "__pyx_vtable__";
 static char __pyx_k_store_zero[] = "store_zero";
-static char __pyx_k_left_operand[] = "left_operand";
-static char __pyx_k_right_operand[] = "right_operand";
 static char __pyx_k_LLSparseMatrix[] = "LLSparseMatrix";
 static char __pyx_k_NotImplementedError[] = "NotImplementedError";
 static char __pyx_k_cysparse_sparse_ll_mat[] = "cysparse.sparse.ll_mat";
-static char __pyx_k_Both_operands_must_share_the_sam[] = "Both operands must share the same dtype";
-static char __pyx_k_Operand_s_is_not_accepted_for_th[] = "Operand %s is not accepted for this operator";
 static char __pyx_k_Transform_first_to_a_LLSparseMat[] = "Transform first to a LLSparseMatrix and then call 'to_ndarray()'";
-static char __pyx_k_Both_operands_must_share_the_sam_2[] = "Both operands must share the same itype";
 static char __pyx_k_Transform_first_to_a_LLSparseMat_2[] = "Transform first to a LLSparseMatrix and then call 'to_csr()'";
-static PyObject *__pyx_kp_s_Both_operands_must_share_the_sam;
-static PyObject *__pyx_kp_s_Both_operands_must_share_the_sam_2;
 static PyObject *__pyx_n_s_LLSparseMatrix;
 static PyObject *__pyx_n_s_NotImplementedError;
-static PyObject *__pyx_kp_s_Operand_s_is_not_accepted_for_th;
 static PyObject *__pyx_kp_s_Transform_first_to_a_LLSparseMat;
 static PyObject *__pyx_kp_s_Transform_first_to_a_LLSparseMat_2;
 static PyObject *__pyx_n_s_cysparse_sparse_ll_mat;
 static PyObject *__pyx_n_s_dtype;
 static PyObject *__pyx_n_s_import;
 static PyObject *__pyx_n_s_itype;
-static PyObject *__pyx_n_s_left_operand;
 static PyObject *__pyx_n_s_main;
 static PyObject *__pyx_n_s_ncol;
-static PyObject *__pyx_n_s_nnz;
 static PyObject *__pyx_n_s_nrow;
 static PyObject *__pyx_n_s_pyx_vtable;
 static PyObject *__pyx_n_s_range;
-static PyObject *__pyx_n_s_right_operand;
 static PyObject *__pyx_n_s_size_hint;
 static PyObject *__pyx_n_s_store_zero;
 static PyObject *__pyx_n_s_test;
 static PyObject *__pyx_n_s_xrange;
-static int __pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy___cinit__(struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *__pyx_v_self, PyObject *__pyx_v_left_operand, PyObject *__pyx_v_right_operand, CYTHON_UNUSED PyObject *__pyx_v_args, CYTHON_UNUSED PyObject *__pyx_v_kwargs); /* proto */
-static PyObject *__pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_2__getitem__(CYTHON_UNUSED struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v_key); /* proto */
-static PyObject *__pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_4__add__(CYTHON_UNUSED PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v_other); /* proto */
-static PyObject *__pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_6__sub__(CYTHON_UNUSED PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v_other); /* proto */
-static PyObject *__pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_8__mul__(CYTHON_UNUSED PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v_other); /* proto */
-static PyObject *__pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_10to_ndarray(CYTHON_UNUSED struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_12to_ll(struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_14to_csr(CYTHON_UNUSED struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_16to_csc(CYTHON_UNUSED struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *__pyx_v_self); /* proto */
+static int __pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy___cinit__(CYTHON_UNUSED struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v_args, CYTHON_UNUSED PyObject *__pyx_v_kwargs); /* proto */
+static PyObject *__pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_2to_ndarray(CYTHON_UNUSED struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_4to_ll(struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_6to_csr(CYTHON_UNUSED struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_8to_csc(CYTHON_UNUSED struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_10__getitem__(CYTHON_UNUSED struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v_key); /* proto */
+static PyObject *__pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_12__add__(CYTHON_UNUSED PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v_other); /* proto */
+static PyObject *__pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_14__sub__(CYTHON_UNUSED PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v_other); /* proto */
+static PyObject *__pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_16__mul__(CYTHON_UNUSED PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v_other); /* proto */
 static PyObject *__pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_4nrow___get__(struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *__pyx_v_self); /* proto */
 static int __pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_4nrow_2__set__(struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *__pyx_v_self, PyObject *__pyx_v_value); /* proto */
 static PyObject *__pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_4ncol___get__(struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *__pyx_v_self); /* proto */
 static int __pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_4ncol_2__set__(struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *__pyx_v_self, PyObject *__pyx_v_value); /* proto */
 static PyObject *__pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_3nnz___get__(struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *__pyx_v_self); /* proto */
 static int __pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_3nnz_2__set__(struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *__pyx_v_self, PyObject *__pyx_v_value); /* proto */
-static PyObject *__pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_12left_operand___get__(struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *__pyx_v_self); /* proto */
-static int __pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_12left_operand_2__set__(struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *__pyx_v_self, PyObject *__pyx_v_value); /* proto */
-static int __pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_12left_operand_4__del__(struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_13right_operand___get__(struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *__pyx_v_self); /* proto */
-static int __pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_13right_operand_2__set__(struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *__pyx_v_self, PyObject *__pyx_v_value); /* proto */
-static int __pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_13right_operand_4__del__(struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_5dtype___get__(struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *__pyx_v_self); /* proto */
 static int __pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_5dtype_2__set__(struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *__pyx_v_self, PyObject *__pyx_v_value); /* proto */
 static int __pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_5dtype_4__del__(struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *__pyx_v_self); /* proto */
@@ -1187,87 +1163,26 @@ static PyObject *__pyx_tuple_;
 static PyObject *__pyx_tuple__2;
 static PyObject *__pyx_tuple__3;
 
-/* "cysparse/sparse/operator_proxies/op_proxy.pyx":16
+/* "cysparse/sparse/operator_proxies/op_proxy.pyx":18
  *         ground that we use here.
  *     """
- *     def __cinit__(self, left_operand, right_operand, *args, **kwargs):             # <<<<<<<<<<<<<<
+ *     def __cinit__(self, *args, **kwargs):             # <<<<<<<<<<<<<<
+ *         pass
  * 
- *         assert self.operand_is_accepted(left_operand), "Operand %s is not accepted for this operator" % type(left_operand)
  */
 
 /* Python wrapper */
 static int __pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_1__cinit__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
 static int __pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_1__cinit__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
-  PyObject *__pyx_v_left_operand = 0;
-  PyObject *__pyx_v_right_operand = 0;
   CYTHON_UNUSED PyObject *__pyx_v_args = 0;
   CYTHON_UNUSED PyObject *__pyx_v_kwargs = 0;
-  int __pyx_lineno = 0;
-  const char *__pyx_filename = NULL;
-  int __pyx_clineno = 0;
   int __pyx_r;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__cinit__ (wrapper)", 0);
-  __pyx_v_kwargs = PyDict_New(); if (unlikely(!__pyx_v_kwargs)) return -1;
-  __Pyx_GOTREF(__pyx_v_kwargs);
-  if (PyTuple_GET_SIZE(__pyx_args) > 2) {
-    __pyx_v_args = PyTuple_GetSlice(__pyx_args, 2, PyTuple_GET_SIZE(__pyx_args));
-    if (unlikely(!__pyx_v_args)) {
-      __Pyx_DECREF(__pyx_v_kwargs); __pyx_v_kwargs = 0;
-      __Pyx_RefNannyFinishContext();
-      return -1;
-    }
-    __Pyx_GOTREF(__pyx_v_args);
-  } else {
-    __pyx_v_args = __pyx_empty_tuple; __Pyx_INCREF(__pyx_empty_tuple);
-  }
-  {
-    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_left_operand,&__pyx_n_s_right_operand,0};
-    PyObject* values[2] = {0,0};
-    if (unlikely(__pyx_kwds)) {
-      Py_ssize_t kw_args;
-      const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
-      switch (pos_args) {
-        default:
-        case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
-        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
-        case  0: break;
-      }
-      kw_args = PyDict_Size(__pyx_kwds);
-      switch (pos_args) {
-        case  0:
-        if (likely((values[0] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_left_operand)) != 0)) kw_args--;
-        else goto __pyx_L5_argtuple_error;
-        case  1:
-        if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_right_operand)) != 0)) kw_args--;
-        else {
-          __Pyx_RaiseArgtupleInvalid("__cinit__", 0, 2, 2, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 16; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
-        }
-      }
-      if (unlikely(kw_args > 0)) {
-        const Py_ssize_t used_pos_args = (pos_args < 2) ? pos_args : 2;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, __pyx_v_kwargs, values, used_pos_args, "__cinit__") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 16; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
-      }
-    } else if (PyTuple_GET_SIZE(__pyx_args) < 2) {
-      goto __pyx_L5_argtuple_error;
-    } else {
-      values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
-      values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
-    }
-    __pyx_v_left_operand = values[0];
-    __pyx_v_right_operand = values[1];
-  }
-  goto __pyx_L4_argument_unpacking_done;
-  __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__cinit__", 0, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 16; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
-  __pyx_L3_error:;
-  __Pyx_DECREF(__pyx_v_args); __pyx_v_args = 0;
-  __Pyx_DECREF(__pyx_v_kwargs); __pyx_v_kwargs = 0;
-  __Pyx_AddTraceback("cysparse.sparse.operator_proxies.op_proxy.OpProxy.__cinit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
-  __Pyx_RefNannyFinishContext();
-  return -1;
-  __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy___cinit__(((struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *)__pyx_v_self), __pyx_v_left_operand, __pyx_v_right_operand, __pyx_v_args, __pyx_v_kwargs);
+  if (unlikely(__pyx_kwds) && unlikely(!__Pyx_CheckKeywordStrings(__pyx_kwds, "__cinit__", 1))) return -1;
+  __Pyx_INCREF(__pyx_args);
+  __pyx_v_args = __pyx_args;
+  __pyx_r = __pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy___cinit__(((struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *)__pyx_v_self), __pyx_v_args, __pyx_v_kwargs);
 
   /* function exit code */
   __Pyx_XDECREF(__pyx_v_args);
@@ -1276,225 +1191,18 @@ static int __pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_1__c
   return __pyx_r;
 }
 
-static int __pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy___cinit__(struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *__pyx_v_self, PyObject *__pyx_v_left_operand, PyObject *__pyx_v_right_operand, CYTHON_UNUSED PyObject *__pyx_v_args, CYTHON_UNUSED PyObject *__pyx_v_kwargs) {
+static int __pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy___cinit__(CYTHON_UNUSED struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v_args, CYTHON_UNUSED PyObject *__pyx_v_kwargs) {
   int __pyx_r;
   __Pyx_RefNannyDeclarations
-  PyObject *__pyx_t_1 = NULL;
-  PyObject *__pyx_t_2 = NULL;
-  PyObject *__pyx_t_3 = NULL;
-  int __pyx_t_4;
-  int __pyx_t_5;
-  int __pyx_lineno = 0;
-  const char *__pyx_filename = NULL;
-  int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__cinit__", 0);
-
-  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":18
- *     def __cinit__(self, left_operand, right_operand, *args, **kwargs):
- * 
- *         assert self.operand_is_accepted(left_operand), "Operand %s is not accepted for this operator" % type(left_operand)             # <<<<<<<<<<<<<<
- *         assert self.operand_is_accepted(right_operand), "Operand %s is not accepted for this operator" % type(right_operand)
- * 
- */
-  #ifndef CYTHON_WITHOUT_ASSERTIONS
-  if (unlikely(!Py_OptimizeFlag)) {
-    if (unlikely(!(((struct __pyx_vtabstruct_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *)__pyx_v_self->__pyx_vtab)->operand_is_accepted(__pyx_v_self, __pyx_v_left_operand) != 0))) {
-      __pyx_t_1 = __Pyx_PyString_Format(__pyx_kp_s_Operand_s_is_not_accepted_for_th, ((PyObject *)Py_TYPE(__pyx_v_left_operand))); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 18; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __Pyx_GOTREF(__pyx_t_1);
-      PyErr_SetObject(PyExc_AssertionError, __pyx_t_1);
-      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 18; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    }
-  }
-  #endif
-
-  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":19
- * 
- *         assert self.operand_is_accepted(left_operand), "Operand %s is not accepted for this operator" % type(left_operand)
- *         assert self.operand_is_accepted(right_operand), "Operand %s is not accepted for this operator" % type(right_operand)             # <<<<<<<<<<<<<<
- * 
- *         # test of itype and dtype
- */
-  #ifndef CYTHON_WITHOUT_ASSERTIONS
-  if (unlikely(!Py_OptimizeFlag)) {
-    if (unlikely(!(((struct __pyx_vtabstruct_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *)__pyx_v_self->__pyx_vtab)->operand_is_accepted(__pyx_v_self, __pyx_v_right_operand) != 0))) {
-      __pyx_t_1 = __Pyx_PyString_Format(__pyx_kp_s_Operand_s_is_not_accepted_for_th, ((PyObject *)Py_TYPE(__pyx_v_right_operand))); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 19; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __Pyx_GOTREF(__pyx_t_1);
-      PyErr_SetObject(PyExc_AssertionError, __pyx_t_1);
-      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 19; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    }
-  }
-  #endif
-
-  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":22
- * 
- *         # test of itype and dtype
- *         assert left_operand.dtype == right_operand.dtype, "Both operands must share the same dtype"             # <<<<<<<<<<<<<<
- *         assert left_operand.itype == right_operand.itype, "Both operands must share the same itype"
- * 
- */
-  #ifndef CYTHON_WITHOUT_ASSERTIONS
-  if (unlikely(!Py_OptimizeFlag)) {
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_left_operand, __pyx_n_s_dtype); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 22; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_right_operand, __pyx_n_s_dtype); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 22; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = PyObject_RichCompare(__pyx_t_1, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 22; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 22; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_4)) {
-      PyErr_SetObject(PyExc_AssertionError, __pyx_kp_s_Both_operands_must_share_the_sam);
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 22; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    }
-  }
-  #endif
-
-  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":23
- *         # test of itype and dtype
- *         assert left_operand.dtype == right_operand.dtype, "Both operands must share the same dtype"
- *         assert left_operand.itype == right_operand.itype, "Both operands must share the same itype"             # <<<<<<<<<<<<<<
- * 
- *         self.left_operand = left_operand
- */
-  #ifndef CYTHON_WITHOUT_ASSERTIONS
-  if (unlikely(!Py_OptimizeFlag)) {
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_left_operand, __pyx_n_s_itype); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 23; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_right_operand, __pyx_n_s_itype); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 23; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = PyObject_RichCompare(__pyx_t_3, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 23; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 23; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    if (unlikely(!__pyx_t_4)) {
-      PyErr_SetObject(PyExc_AssertionError, __pyx_kp_s_Both_operands_must_share_the_sam_2);
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 23; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    }
-  }
-  #endif
-
-  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":25
- *         assert left_operand.itype == right_operand.itype, "Both operands must share the same itype"
- * 
- *         self.left_operand = left_operand             # <<<<<<<<<<<<<<
- *         self.right_operand = right_operand
- * 
- */
-  __Pyx_INCREF(__pyx_v_left_operand);
-  __Pyx_GIVEREF(__pyx_v_left_operand);
-  __Pyx_GOTREF(__pyx_v_self->left_operand);
-  __Pyx_DECREF(__pyx_v_self->left_operand);
-  __pyx_v_self->left_operand = __pyx_v_left_operand;
-
-  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":26
- * 
- *         self.left_operand = left_operand
- *         self.right_operand = right_operand             # <<<<<<<<<<<<<<
- * 
- *         self.nrow = self.left_operand.nrow
- */
-  __Pyx_INCREF(__pyx_v_right_operand);
-  __Pyx_GIVEREF(__pyx_v_right_operand);
-  __Pyx_GOTREF(__pyx_v_self->right_operand);
-  __Pyx_DECREF(__pyx_v_self->right_operand);
-  __pyx_v_self->right_operand = __pyx_v_right_operand;
-
-  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":28
- *         self.right_operand = right_operand
- * 
- *         self.nrow = self.left_operand.nrow             # <<<<<<<<<<<<<<
- *         self.ncol = self.right_operand.ncol
- *         self.nnz = self.left_operand.nnz
- */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self->left_operand, __pyx_n_s_nrow); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 28; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_5 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_5 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 28; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_v_self->nrow = __pyx_t_5;
-
-  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":29
- * 
- *         self.nrow = self.left_operand.nrow
- *         self.ncol = self.right_operand.ncol             # <<<<<<<<<<<<<<
- *         self.nnz = self.left_operand.nnz
- * 
- */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self->right_operand, __pyx_n_s_ncol); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 29; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_5 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_5 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 29; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_v_self->ncol = __pyx_t_5;
-
-  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":30
- *         self.nrow = self.left_operand.nrow
- *         self.ncol = self.right_operand.ncol
- *         self.nnz = self.left_operand.nnz             # <<<<<<<<<<<<<<
- * 
- *         self.dtype = self.left_operand.dtype
- */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self->left_operand, __pyx_n_s_nnz); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 30; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_5 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_5 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 30; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_v_self->nnz = __pyx_t_5;
-
-  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":32
- *         self.nnz = self.left_operand.nnz
- * 
- *         self.dtype = self.left_operand.dtype             # <<<<<<<<<<<<<<
- *         self.itype = self.left_operand.itype
- * 
- */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self->left_operand, __pyx_n_s_dtype); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 32; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_GIVEREF(__pyx_t_1);
-  __Pyx_GOTREF(__pyx_v_self->dtype);
-  __Pyx_DECREF(__pyx_v_self->dtype);
-  __pyx_v_self->dtype = __pyx_t_1;
-  __pyx_t_1 = 0;
-
-  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":33
- * 
- *         self.dtype = self.left_operand.dtype
- *         self.itype = self.left_operand.itype             # <<<<<<<<<<<<<<
- * 
- *     ####################################################################################################################
- */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self->left_operand, __pyx_n_s_itype); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 33; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_GIVEREF(__pyx_t_1);
-  __Pyx_GOTREF(__pyx_v_self->itype);
-  __Pyx_DECREF(__pyx_v_self->itype);
-  __pyx_v_self->itype = __pyx_t_1;
-  __pyx_t_1 = 0;
-
-  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":16
- *         ground that we use here.
- *     """
- *     def __cinit__(self, left_operand, right_operand, *args, **kwargs):             # <<<<<<<<<<<<<<
- * 
- *         assert self.operand_is_accepted(left_operand), "Operand %s is not accepted for this operator" % type(left_operand)
- */
 
   /* function exit code */
   __pyx_r = 0;
-  goto __pyx_L0;
-  __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_XDECREF(__pyx_t_2);
-  __Pyx_XDECREF(__pyx_t_3);
-  __Pyx_AddTraceback("cysparse.sparse.operator_proxies.op_proxy.OpProxy.__cinit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
-  __pyx_r = -1;
-  __pyx_L0:;
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-/* "cysparse/sparse/operator_proxies/op_proxy.pyx":38
+/* "cysparse/sparse/operator_proxies/op_proxy.pyx":24
  *     # Helper methods
  *     ####################################################################################################################
  *     cdef bint operand_is_accepted(self, operand):             # <<<<<<<<<<<<<<
@@ -1510,7 +1218,7 @@ static int __pyx_f_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_opera
   int __pyx_t_2;
   __Pyx_RefNannySetupContext("operand_is_accepted", 0);
 
-  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":39
+  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":25
  *     ####################################################################################################################
  *     cdef bint operand_is_accepted(self, operand):
  *         cdef bint is_accepted = False             # <<<<<<<<<<<<<<
@@ -1519,7 +1227,7 @@ static int __pyx_f_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_opera
  */
   __pyx_v_is_accepted = 0;
 
-  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":41
+  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":27
  *         cdef bint is_accepted = False
  * 
  *         if isinstance(operand, OpProxy):             # <<<<<<<<<<<<<<
@@ -1530,7 +1238,7 @@ static int __pyx_f_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_opera
   __pyx_t_2 = (__pyx_t_1 != 0);
   if (__pyx_t_2) {
 
-    /* "cysparse/sparse/operator_proxies/op_proxy.pyx":42
+    /* "cysparse/sparse/operator_proxies/op_proxy.pyx":28
  * 
  *         if isinstance(operand, OpProxy):
  *             is_accepted = True             # <<<<<<<<<<<<<<
@@ -1539,7 +1247,7 @@ static int __pyx_f_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_opera
  */
     __pyx_v_is_accepted = 1;
 
-    /* "cysparse/sparse/operator_proxies/op_proxy.pyx":41
+    /* "cysparse/sparse/operator_proxies/op_proxy.pyx":27
  *         cdef bint is_accepted = False
  * 
  *         if isinstance(operand, OpProxy):             # <<<<<<<<<<<<<<
@@ -1549,7 +1257,7 @@ static int __pyx_f_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_opera
     goto __pyx_L3;
   }
 
-  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":43
+  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":29
  *         if isinstance(operand, OpProxy):
  *             is_accepted = True
  *         elif PySparseMatrix_Check(operand):             # <<<<<<<<<<<<<<
@@ -1559,7 +1267,7 @@ static int __pyx_f_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_opera
   __pyx_t_2 = (__pyx_f_8cysparse_6sparse_5s_mat_PySparseMatrix_Check(__pyx_v_operand, 0) != 0);
   if (__pyx_t_2) {
 
-    /* "cysparse/sparse/operator_proxies/op_proxy.pyx":44
+    /* "cysparse/sparse/operator_proxies/op_proxy.pyx":30
  *             is_accepted = True
  *         elif PySparseMatrix_Check(operand):
  *             is_accepted = True             # <<<<<<<<<<<<<<
@@ -1568,7 +1276,7 @@ static int __pyx_f_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_opera
  */
     __pyx_v_is_accepted = 1;
 
-    /* "cysparse/sparse/operator_proxies/op_proxy.pyx":43
+    /* "cysparse/sparse/operator_proxies/op_proxy.pyx":29
  *         if isinstance(operand, OpProxy):
  *             is_accepted = True
  *         elif PySparseMatrix_Check(operand):             # <<<<<<<<<<<<<<
@@ -1578,7 +1286,7 @@ static int __pyx_f_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_opera
     goto __pyx_L3;
   }
 
-  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":45
+  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":31
  *         elif PySparseMatrix_Check(operand):
  *             is_accepted = True
  *         elif PyTransposedSparseMatrix_Check(operand) or PyConjugatedSparseMatrix_Check(operand) or PyConjugateTransposedSparseMatrix_Check(operand):             # <<<<<<<<<<<<<<
@@ -1602,7 +1310,7 @@ static int __pyx_f_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_opera
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_2) {
 
-    /* "cysparse/sparse/operator_proxies/op_proxy.pyx":46
+    /* "cysparse/sparse/operator_proxies/op_proxy.pyx":32
  *             is_accepted = True
  *         elif PyTransposedSparseMatrix_Check(operand) or PyConjugatedSparseMatrix_Check(operand) or PyConjugateTransposedSparseMatrix_Check(operand):
  *             is_accepted = True             # <<<<<<<<<<<<<<
@@ -1611,7 +1319,7 @@ static int __pyx_f_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_opera
  */
     __pyx_v_is_accepted = 1;
 
-    /* "cysparse/sparse/operator_proxies/op_proxy.pyx":45
+    /* "cysparse/sparse/operator_proxies/op_proxy.pyx":31
  *         elif PySparseMatrix_Check(operand):
  *             is_accepted = True
  *         elif PyTransposedSparseMatrix_Check(operand) or PyConjugatedSparseMatrix_Check(operand) or PyConjugateTransposedSparseMatrix_Check(operand):             # <<<<<<<<<<<<<<
@@ -1621,17 +1329,17 @@ static int __pyx_f_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_opera
   }
   __pyx_L3:;
 
-  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":51
+  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":37
  *         #    is_accepted = True
  * 
  *         return is_accepted             # <<<<<<<<<<<<<<
  * 
- *     ####################################################################################################################
+ *     cdef scalar_is_accepted(self, scalar):
  */
   __pyx_r = __pyx_v_is_accepted;
   goto __pyx_L0;
 
-  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":38
+  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":24
  *     # Helper methods
  *     ####################################################################################################################
  *     cdef bint operand_is_accepted(self, operand):             # <<<<<<<<<<<<<<
@@ -1645,259 +1353,57 @@ static int __pyx_f_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_opera
   return __pyx_r;
 }
 
-/* "cysparse/sparse/operator_proxies/op_proxy.pyx":56
- *     # Special methods
- *     ####################################################################################################################
- *     def __getitem__(self, tuple key):             # <<<<<<<<<<<<<<
- *         raise NotImplementedError()
+/* "cysparse/sparse/operator_proxies/op_proxy.pyx":39
+ *         return is_accepted
+ * 
+ *     cdef scalar_is_accepted(self, scalar):             # <<<<<<<<<<<<<<
+ *         return is_scalar(scalar)
  * 
  */
 
-/* Python wrapper */
-static PyObject *__pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_3__getitem__(PyObject *__pyx_v_self, PyObject *__pyx_v_key); /*proto*/
-static PyObject *__pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_3__getitem__(PyObject *__pyx_v_self, PyObject *__pyx_v_key) {
-  CYTHON_UNUSED int __pyx_lineno = 0;
-  CYTHON_UNUSED const char *__pyx_filename = NULL;
-  CYTHON_UNUSED int __pyx_clineno = 0;
-  PyObject *__pyx_r = 0;
+static PyObject *__pyx_f_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_scalar_is_accepted(CYTHON_UNUSED struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *__pyx_v_self, PyObject *__pyx_v_scalar) {
+  PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("__getitem__ (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_key), (&PyTuple_Type), 1, "key", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 56; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_r = __pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_2__getitem__(((struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *)__pyx_v_self), ((PyObject*)__pyx_v_key));
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("scalar_is_accepted", 0);
 
-  /* function exit code */
+  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":40
+ * 
+ *     cdef scalar_is_accepted(self, scalar):
+ *         return is_scalar(scalar)             # <<<<<<<<<<<<<<
+ * 
+ *     ####################################################################################################################
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = __pyx_f_8cysparse_12common_types_14cysparse_types_is_scalar(__pyx_v_scalar, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 40; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
   goto __pyx_L0;
+
+  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":39
+ *         return is_accepted
+ * 
+ *     cdef scalar_is_accepted(self, scalar):             # <<<<<<<<<<<<<<
+ *         return is_scalar(scalar)
+ * 
+ */
+
+  /* function exit code */
   __pyx_L1_error:;
-  __pyx_r = NULL;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("cysparse.sparse.operator_proxies.op_proxy.OpProxy.scalar_is_accepted", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = 0;
   __pyx_L0:;
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-static PyObject *__pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_2__getitem__(CYTHON_UNUSED struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v_key) {
-  PyObject *__pyx_r = NULL;
-  __Pyx_RefNannyDeclarations
-  PyObject *__pyx_t_1 = NULL;
-  int __pyx_lineno = 0;
-  const char *__pyx_filename = NULL;
-  int __pyx_clineno = 0;
-  __Pyx_RefNannySetupContext("__getitem__", 0);
-
-  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":57
- *     ####################################################################################################################
- *     def __getitem__(self, tuple key):
- *         raise NotImplementedError()             # <<<<<<<<<<<<<<
- * 
- *     def __add__(self, other):
- */
-  __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_builtin_NotImplementedError); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 57; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_Raise(__pyx_t_1, 0, 0, 0);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  {__pyx_filename = __pyx_f[0]; __pyx_lineno = 57; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-
-  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":56
- *     # Special methods
- *     ####################################################################################################################
- *     def __getitem__(self, tuple key):             # <<<<<<<<<<<<<<
- *         raise NotImplementedError()
- * 
- */
-
-  /* function exit code */
-  __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("cysparse.sparse.operator_proxies.op_proxy.OpProxy.__getitem__", __pyx_clineno, __pyx_lineno, __pyx_filename);
-  __pyx_r = NULL;
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-/* "cysparse/sparse/operator_proxies/op_proxy.pyx":59
- *         raise NotImplementedError()
- * 
- *     def __add__(self, other):             # <<<<<<<<<<<<<<
- *         raise NotImplementedError()
- * 
- */
-
-/* Python wrapper */
-static PyObject *__pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_5__add__(PyObject *__pyx_v_self, PyObject *__pyx_v_other); /*proto*/
-static PyObject *__pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_5__add__(PyObject *__pyx_v_self, PyObject *__pyx_v_other) {
-  PyObject *__pyx_r = 0;
-  __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("__add__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_4__add__(((PyObject *)__pyx_v_self), ((PyObject *)__pyx_v_other));
-
-  /* function exit code */
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-static PyObject *__pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_4__add__(CYTHON_UNUSED PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v_other) {
-  PyObject *__pyx_r = NULL;
-  __Pyx_RefNannyDeclarations
-  PyObject *__pyx_t_1 = NULL;
-  int __pyx_lineno = 0;
-  const char *__pyx_filename = NULL;
-  int __pyx_clineno = 0;
-  __Pyx_RefNannySetupContext("__add__", 0);
-
-  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":60
- * 
- *     def __add__(self, other):
- *         raise NotImplementedError()             # <<<<<<<<<<<<<<
- * 
- *     def __sub__(self, other):
- */
-  __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_builtin_NotImplementedError); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 60; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_Raise(__pyx_t_1, 0, 0, 0);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  {__pyx_filename = __pyx_f[0]; __pyx_lineno = 60; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-
-  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":59
- *         raise NotImplementedError()
- * 
- *     def __add__(self, other):             # <<<<<<<<<<<<<<
- *         raise NotImplementedError()
- * 
- */
-
-  /* function exit code */
-  __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("cysparse.sparse.operator_proxies.op_proxy.OpProxy.__add__", __pyx_clineno, __pyx_lineno, __pyx_filename);
-  __pyx_r = NULL;
-  __Pyx_XGIVEREF(__pyx_r);
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-/* "cysparse/sparse/operator_proxies/op_proxy.pyx":62
- *         raise NotImplementedError()
- * 
- *     def __sub__(self, other):             # <<<<<<<<<<<<<<
- *         raise NotImplementedError()
- * 
- */
-
-/* Python wrapper */
-static PyObject *__pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_7__sub__(PyObject *__pyx_v_self, PyObject *__pyx_v_other); /*proto*/
-static PyObject *__pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_7__sub__(PyObject *__pyx_v_self, PyObject *__pyx_v_other) {
-  PyObject *__pyx_r = 0;
-  __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("__sub__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_6__sub__(((PyObject *)__pyx_v_self), ((PyObject *)__pyx_v_other));
-
-  /* function exit code */
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-static PyObject *__pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_6__sub__(CYTHON_UNUSED PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v_other) {
-  PyObject *__pyx_r = NULL;
-  __Pyx_RefNannyDeclarations
-  PyObject *__pyx_t_1 = NULL;
-  int __pyx_lineno = 0;
-  const char *__pyx_filename = NULL;
-  int __pyx_clineno = 0;
-  __Pyx_RefNannySetupContext("__sub__", 0);
-
-  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":63
- * 
- *     def __sub__(self, other):
- *         raise NotImplementedError()             # <<<<<<<<<<<<<<
- * 
- *     def __mul__(self, other):
- */
-  __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_builtin_NotImplementedError); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 63; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_Raise(__pyx_t_1, 0, 0, 0);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  {__pyx_filename = __pyx_f[0]; __pyx_lineno = 63; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-
-  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":62
- *         raise NotImplementedError()
- * 
- *     def __sub__(self, other):             # <<<<<<<<<<<<<<
- *         raise NotImplementedError()
- * 
- */
-
-  /* function exit code */
-  __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("cysparse.sparse.operator_proxies.op_proxy.OpProxy.__sub__", __pyx_clineno, __pyx_lineno, __pyx_filename);
-  __pyx_r = NULL;
-  __Pyx_XGIVEREF(__pyx_r);
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-/* "cysparse/sparse/operator_proxies/op_proxy.pyx":65
- *         raise NotImplementedError()
- * 
- *     def __mul__(self, other):             # <<<<<<<<<<<<<<
- *         raise NotImplementedError()
- * 
- */
-
-/* Python wrapper */
-static PyObject *__pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_9__mul__(PyObject *__pyx_v_self, PyObject *__pyx_v_other); /*proto*/
-static PyObject *__pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_9__mul__(PyObject *__pyx_v_self, PyObject *__pyx_v_other) {
-  PyObject *__pyx_r = 0;
-  __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("__mul__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_8__mul__(((PyObject *)__pyx_v_self), ((PyObject *)__pyx_v_other));
-
-  /* function exit code */
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-static PyObject *__pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_8__mul__(CYTHON_UNUSED PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v_other) {
-  PyObject *__pyx_r = NULL;
-  __Pyx_RefNannyDeclarations
-  PyObject *__pyx_t_1 = NULL;
-  int __pyx_lineno = 0;
-  const char *__pyx_filename = NULL;
-  int __pyx_clineno = 0;
-  __Pyx_RefNannySetupContext("__mul__", 0);
-
-  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":66
- * 
- *     def __mul__(self, other):
- *         raise NotImplementedError()             # <<<<<<<<<<<<<<
- * 
- *     ####################################################################################################################
- */
-  __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_builtin_NotImplementedError); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 66; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_Raise(__pyx_t_1, 0, 0, 0);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  {__pyx_filename = __pyx_f[0]; __pyx_lineno = 66; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-
-  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":65
- *         raise NotImplementedError()
- * 
- *     def __mul__(self, other):             # <<<<<<<<<<<<<<
- *         raise NotImplementedError()
- * 
- */
-
-  /* function exit code */
-  __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("cysparse.sparse.operator_proxies.op_proxy.OpProxy.__mul__", __pyx_clineno, __pyx_lineno, __pyx_filename);
-  __pyx_r = NULL;
-  __Pyx_XGIVEREF(__pyx_r);
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-/* "cysparse/sparse/operator_proxies/op_proxy.pyx":71
+/* "cysparse/sparse/operator_proxies/op_proxy.pyx":45
  *     # Materialisation methods
  *     ####################################################################################################################
  *     def to_ndarray(self):             # <<<<<<<<<<<<<<
@@ -1906,19 +1412,19 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProx
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_11to_ndarray(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_11to_ndarray(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_3to_ndarray(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_3to_ndarray(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("to_ndarray (wrapper)", 0);
-  __pyx_r = __pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_10to_ndarray(((struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *)__pyx_v_self));
+  __pyx_r = __pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_2to_ndarray(((struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_10to_ndarray(CYTHON_UNUSED struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *__pyx_v_self) {
+static PyObject *__pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_2to_ndarray(CYTHON_UNUSED struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -1927,20 +1433,20 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProx
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("to_ndarray", 0);
 
-  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":72
+  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":46
  *     ####################################################################################################################
  *     def to_ndarray(self):
  *         raise NotImplementedError("Transform first to a LLSparseMatrix and then call 'to_ndarray()'")             # <<<<<<<<<<<<<<
  * 
  *     def to_ll(self):
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_NotImplementedError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 72; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_NotImplementedError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 46; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  {__pyx_filename = __pyx_f[0]; __pyx_lineno = 72; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  {__pyx_filename = __pyx_f[0]; __pyx_lineno = 46; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":71
+  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":45
  *     # Materialisation methods
  *     ####################################################################################################################
  *     def to_ndarray(self):             # <<<<<<<<<<<<<<
@@ -1958,28 +1464,28 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProx
   return __pyx_r;
 }
 
-/* "cysparse/sparse/operator_proxies/op_proxy.pyx":74
+/* "cysparse/sparse/operator_proxies/op_proxy.pyx":48
  *         raise NotImplementedError("Transform first to a LLSparseMatrix and then call 'to_ndarray()'")
  * 
  *     def to_ll(self):             # <<<<<<<<<<<<<<
  *         from cysparse.sparse.ll_mat import LLSparseMatrix
- *         A = LLSparseMatrix(nrow=self.nrow, ncol=self.ncol, dtype=self.dtype, itype=self.itype, store_zero=False, size_hint=self.left_operand.nnz)
+ *         A = LLSparseMatrix(nrow=self.nrow, ncol=self.ncol, dtype=self.dtype, itype=self.itype, store_zero=False, size_hint=self.nnz)
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_13to_ll(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_13to_ll(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_5to_ll(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_5to_ll(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("to_ll (wrapper)", 0);
-  __pyx_r = __pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_12to_ll(((struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *)__pyx_v_self));
+  __pyx_r = __pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_4to_ll(((struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_12to_ll(struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *__pyx_v_self) {
+static PyObject *__pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_4to_ll(struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *__pyx_v_self) {
   PyObject *__pyx_v_LLSparseMatrix = NULL;
   PyObject *__pyx_v_A = NULL;
   int __pyx_v_i;
@@ -1999,61 +1505,61 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProx
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("to_ll", 0);
 
-  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":75
+  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":49
  * 
  *     def to_ll(self):
  *         from cysparse.sparse.ll_mat import LLSparseMatrix             # <<<<<<<<<<<<<<
- *         A = LLSparseMatrix(nrow=self.nrow, ncol=self.ncol, dtype=self.dtype, itype=self.itype, store_zero=False, size_hint=self.left_operand.nnz)
+ *         A = LLSparseMatrix(nrow=self.nrow, ncol=self.ncol, dtype=self.dtype, itype=self.itype, store_zero=False, size_hint=self.nnz)
  *         for i in xrange(self.nrow):
  */
-  __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 75; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 49; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_n_s_LLSparseMatrix);
   __Pyx_GIVEREF(__pyx_n_s_LLSparseMatrix);
   PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s_LLSparseMatrix);
-  __pyx_t_2 = __Pyx_Import(__pyx_n_s_cysparse_sparse_ll_mat, __pyx_t_1, -1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 75; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_Import(__pyx_n_s_cysparse_sparse_ll_mat, __pyx_t_1, -1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 49; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_LLSparseMatrix); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 75; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_LLSparseMatrix); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 49; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_t_1);
   __pyx_v_LLSparseMatrix = __pyx_t_1;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":76
+  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":50
  *     def to_ll(self):
  *         from cysparse.sparse.ll_mat import LLSparseMatrix
- *         A = LLSparseMatrix(nrow=self.nrow, ncol=self.ncol, dtype=self.dtype, itype=self.itype, store_zero=False, size_hint=self.left_operand.nnz)             # <<<<<<<<<<<<<<
+ *         A = LLSparseMatrix(nrow=self.nrow, ncol=self.ncol, dtype=self.dtype, itype=self.itype, store_zero=False, size_hint=self.nnz)             # <<<<<<<<<<<<<<
  *         for i in xrange(self.nrow):
  *             for j in xrange(self.ncol):
  */
-  __pyx_t_2 = PyDict_New(); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 76; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyDict_New(); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 50; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->nrow); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 76; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->nrow); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 50; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_nrow, __pyx_t_1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 76; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_nrow, __pyx_t_1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 50; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->ncol); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 76; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->ncol); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 50; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_ncol, __pyx_t_1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 76; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_ncol, __pyx_t_1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 50; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_dtype, __pyx_v_self->dtype) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 76; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_itype, __pyx_v_self->itype) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 76; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_store_zero, Py_False) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 76; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self->left_operand, __pyx_n_s_nnz); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 76; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_dtype, __pyx_v_self->dtype) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 50; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_itype, __pyx_v_self->itype) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 50; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_store_zero, Py_False) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 50; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->nnz); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 50; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_size_hint, __pyx_t_1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 76; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_size_hint, __pyx_t_1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 50; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_v_LLSparseMatrix, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 76; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_v_LLSparseMatrix, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 50; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_A = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":77
+  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":51
  *         from cysparse.sparse.ll_mat import LLSparseMatrix
- *         A = LLSparseMatrix(nrow=self.nrow, ncol=self.ncol, dtype=self.dtype, itype=self.itype, store_zero=False, size_hint=self.left_operand.nnz)
+ *         A = LLSparseMatrix(nrow=self.nrow, ncol=self.ncol, dtype=self.dtype, itype=self.itype, store_zero=False, size_hint=self.nnz)
  *         for i in xrange(self.nrow):             # <<<<<<<<<<<<<<
  *             for j in xrange(self.ncol):
  *                 A[i, j] = self[i, j]
@@ -2062,8 +1568,8 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProx
   for (__pyx_t_4 = 0; __pyx_t_4 < __pyx_t_3; __pyx_t_4+=1) {
     __pyx_v_i = __pyx_t_4;
 
-    /* "cysparse/sparse/operator_proxies/op_proxy.pyx":78
- *         A = LLSparseMatrix(nrow=self.nrow, ncol=self.ncol, dtype=self.dtype, itype=self.itype, store_zero=False, size_hint=self.left_operand.nnz)
+    /* "cysparse/sparse/operator_proxies/op_proxy.pyx":52
+ *         A = LLSparseMatrix(nrow=self.nrow, ncol=self.ncol, dtype=self.dtype, itype=self.itype, store_zero=False, size_hint=self.nnz)
  *         for i in xrange(self.nrow):
  *             for j in xrange(self.ncol):             # <<<<<<<<<<<<<<
  *                 A[i, j] = self[i, j]
@@ -2073,18 +1579,18 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProx
     for (__pyx_t_6 = 0; __pyx_t_6 < __pyx_t_5; __pyx_t_6+=1) {
       __pyx_v_j = __pyx_t_6;
 
-      /* "cysparse/sparse/operator_proxies/op_proxy.pyx":79
+      /* "cysparse/sparse/operator_proxies/op_proxy.pyx":53
  *         for i in xrange(self.nrow):
  *             for j in xrange(self.ncol):
  *                 A[i, j] = self[i, j]             # <<<<<<<<<<<<<<
  * 
  *         return A
  */
-      __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_i); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 79; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_i); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 53; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_j); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 79; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_j); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 53; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_7 = PyTuple_New(2); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 79; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_7 = PyTuple_New(2); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 53; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_GIVEREF(__pyx_t_1);
       PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_1);
@@ -2092,14 +1598,14 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProx
       PyTuple_SET_ITEM(__pyx_t_7, 1, __pyx_t_2);
       __pyx_t_1 = 0;
       __pyx_t_2 = 0;
-      __pyx_t_2 = PyObject_GetItem(((PyObject *)__pyx_v_self), __pyx_t_7); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 79; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+      __pyx_t_2 = PyObject_GetItem(((PyObject *)__pyx_v_self), __pyx_t_7); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 53; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-      __pyx_t_7 = __Pyx_PyInt_From_int(__pyx_v_i); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 79; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_7 = __Pyx_PyInt_From_int(__pyx_v_i); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 53; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_7);
-      __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_j); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 79; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_j); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 53; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_8 = PyTuple_New(2); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 79; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_8 = PyTuple_New(2); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 53; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_8);
       __Pyx_GIVEREF(__pyx_t_7);
       PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_7);
@@ -2107,13 +1613,13 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProx
       PyTuple_SET_ITEM(__pyx_t_8, 1, __pyx_t_1);
       __pyx_t_7 = 0;
       __pyx_t_1 = 0;
-      if (unlikely(PyObject_SetItem(__pyx_v_A, __pyx_t_8, __pyx_t_2) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 79; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (unlikely(PyObject_SetItem(__pyx_v_A, __pyx_t_8, __pyx_t_2) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 53; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     }
   }
 
-  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":81
+  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":55
  *                 A[i, j] = self[i, j]
  * 
  *         return A             # <<<<<<<<<<<<<<
@@ -2125,12 +1631,12 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProx
   __pyx_r = __pyx_v_A;
   goto __pyx_L0;
 
-  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":74
+  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":48
  *         raise NotImplementedError("Transform first to a LLSparseMatrix and then call 'to_ndarray()'")
  * 
  *     def to_ll(self):             # <<<<<<<<<<<<<<
  *         from cysparse.sparse.ll_mat import LLSparseMatrix
- *         A = LLSparseMatrix(nrow=self.nrow, ncol=self.ncol, dtype=self.dtype, itype=self.itype, store_zero=False, size_hint=self.left_operand.nnz)
+ *         A = LLSparseMatrix(nrow=self.nrow, ncol=self.ncol, dtype=self.dtype, itype=self.itype, store_zero=False, size_hint=self.nnz)
  */
 
   /* function exit code */
@@ -2149,7 +1655,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProx
   return __pyx_r;
 }
 
-/* "cysparse/sparse/operator_proxies/op_proxy.pyx":83
+/* "cysparse/sparse/operator_proxies/op_proxy.pyx":57
  *         return A
  * 
  *     def to_csr(self):             # <<<<<<<<<<<<<<
@@ -2158,19 +1664,19 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProx
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_15to_csr(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_15to_csr(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_7to_csr(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_7to_csr(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("to_csr (wrapper)", 0);
-  __pyx_r = __pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_14to_csr(((struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *)__pyx_v_self));
+  __pyx_r = __pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_6to_csr(((struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_14to_csr(CYTHON_UNUSED struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *__pyx_v_self) {
+static PyObject *__pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_6to_csr(CYTHON_UNUSED struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -2179,20 +1685,20 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProx
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("to_csr", 0);
 
-  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":84
+  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":58
  * 
  *     def to_csr(self):
  *         raise NotImplementedError("Transform first to a LLSparseMatrix and then call 'to_csr()'")             # <<<<<<<<<<<<<<
  * 
  *     def to_csc(self):
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_NotImplementedError, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 84; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_NotImplementedError, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 58; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  {__pyx_filename = __pyx_f[0]; __pyx_lineno = 84; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  {__pyx_filename = __pyx_f[0]; __pyx_lineno = 58; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":83
+  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":57
  *         return A
  * 
  *     def to_csr(self):             # <<<<<<<<<<<<<<
@@ -2210,7 +1716,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProx
   return __pyx_r;
 }
 
-/* "cysparse/sparse/operator_proxies/op_proxy.pyx":86
+/* "cysparse/sparse/operator_proxies/op_proxy.pyx":60
  *         raise NotImplementedError("Transform first to a LLSparseMatrix and then call 'to_csr()'")
  * 
  *     def to_csc(self):             # <<<<<<<<<<<<<<
@@ -2219,19 +1725,19 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProx
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_17to_csc(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_17to_csc(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_9to_csc(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_9to_csc(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("to_csc (wrapper)", 0);
-  __pyx_r = __pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_16to_csc(((struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *)__pyx_v_self));
+  __pyx_r = __pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_8to_csc(((struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_16to_csc(CYTHON_UNUSED struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *__pyx_v_self) {
+static PyObject *__pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_8to_csc(CYTHON_UNUSED struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -2240,19 +1746,20 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProx
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("to_csc", 0);
 
-  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":87
+  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":61
  * 
  *     def to_csc(self):
  *         raise NotImplementedError("Transform first to a LLSparseMatrix and then call 'to_csr()'")             # <<<<<<<<<<<<<<
  * 
+ *     ####################################################################################################################
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_NotImplementedError, __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 87; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_NotImplementedError, __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 61; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  {__pyx_filename = __pyx_f[0]; __pyx_lineno = 87; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  {__pyx_filename = __pyx_f[0]; __pyx_lineno = 61; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":86
+  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":60
  *         raise NotImplementedError("Transform first to a LLSparseMatrix and then call 'to_csr()'")
  * 
  *     def to_csc(self):             # <<<<<<<<<<<<<<
@@ -2264,6 +1771,254 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProx
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_AddTraceback("cysparse.sparse.operator_proxies.op_proxy.OpProxy.to_csc", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "cysparse/sparse/operator_proxies/op_proxy.pyx":66
+ *     # Special methods
+ *     ####################################################################################################################
+ *     def __getitem__(self, tuple key):             # <<<<<<<<<<<<<<
+ *         raise NotImplementedError()
+ * 
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_11__getitem__(PyObject *__pyx_v_self, PyObject *__pyx_v_key); /*proto*/
+static PyObject *__pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_11__getitem__(PyObject *__pyx_v_self, PyObject *__pyx_v_key) {
+  CYTHON_UNUSED int __pyx_lineno = 0;
+  CYTHON_UNUSED const char *__pyx_filename = NULL;
+  CYTHON_UNUSED int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__getitem__ (wrapper)", 0);
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_key), (&PyTuple_Type), 1, "key", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 66; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_r = __pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_10__getitem__(((struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *)__pyx_v_self), ((PyObject*)__pyx_v_key));
+
+  /* function exit code */
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_10__getitem__(CYTHON_UNUSED struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v_key) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__getitem__", 0);
+
+  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":67
+ *     ####################################################################################################################
+ *     def __getitem__(self, tuple key):
+ *         raise NotImplementedError()             # <<<<<<<<<<<<<<
+ * 
+ *     def __add__(self, other):
+ */
+  __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_builtin_NotImplementedError); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 67; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_Raise(__pyx_t_1, 0, 0, 0);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  {__pyx_filename = __pyx_f[0]; __pyx_lineno = 67; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+
+  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":66
+ *     # Special methods
+ *     ####################################################################################################################
+ *     def __getitem__(self, tuple key):             # <<<<<<<<<<<<<<
+ *         raise NotImplementedError()
+ * 
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("cysparse.sparse.operator_proxies.op_proxy.OpProxy.__getitem__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "cysparse/sparse/operator_proxies/op_proxy.pyx":69
+ *         raise NotImplementedError()
+ * 
+ *     def __add__(self, other):             # <<<<<<<<<<<<<<
+ *         raise NotImplementedError()
+ * 
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_13__add__(PyObject *__pyx_v_self, PyObject *__pyx_v_other); /*proto*/
+static PyObject *__pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_13__add__(PyObject *__pyx_v_self, PyObject *__pyx_v_other) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__add__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_12__add__(((PyObject *)__pyx_v_self), ((PyObject *)__pyx_v_other));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_12__add__(CYTHON_UNUSED PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v_other) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__add__", 0);
+
+  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":70
+ * 
+ *     def __add__(self, other):
+ *         raise NotImplementedError()             # <<<<<<<<<<<<<<
+ * 
+ *     def __sub__(self, other):
+ */
+  __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_builtin_NotImplementedError); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 70; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_Raise(__pyx_t_1, 0, 0, 0);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  {__pyx_filename = __pyx_f[0]; __pyx_lineno = 70; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+
+  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":69
+ *         raise NotImplementedError()
+ * 
+ *     def __add__(self, other):             # <<<<<<<<<<<<<<
+ *         raise NotImplementedError()
+ * 
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("cysparse.sparse.operator_proxies.op_proxy.OpProxy.__add__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "cysparse/sparse/operator_proxies/op_proxy.pyx":72
+ *         raise NotImplementedError()
+ * 
+ *     def __sub__(self, other):             # <<<<<<<<<<<<<<
+ *         raise NotImplementedError()
+ * 
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_15__sub__(PyObject *__pyx_v_self, PyObject *__pyx_v_other); /*proto*/
+static PyObject *__pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_15__sub__(PyObject *__pyx_v_self, PyObject *__pyx_v_other) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__sub__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_14__sub__(((PyObject *)__pyx_v_self), ((PyObject *)__pyx_v_other));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_14__sub__(CYTHON_UNUSED PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v_other) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__sub__", 0);
+
+  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":73
+ * 
+ *     def __sub__(self, other):
+ *         raise NotImplementedError()             # <<<<<<<<<<<<<<
+ * 
+ *     def __mul__(self, other):
+ */
+  __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_builtin_NotImplementedError); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 73; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_Raise(__pyx_t_1, 0, 0, 0);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  {__pyx_filename = __pyx_f[0]; __pyx_lineno = 73; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+
+  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":72
+ *         raise NotImplementedError()
+ * 
+ *     def __sub__(self, other):             # <<<<<<<<<<<<<<
+ *         raise NotImplementedError()
+ * 
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("cysparse.sparse.operator_proxies.op_proxy.OpProxy.__sub__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "cysparse/sparse/operator_proxies/op_proxy.pyx":75
+ *         raise NotImplementedError()
+ * 
+ *     def __mul__(self, other):             # <<<<<<<<<<<<<<
+ *         raise NotImplementedError()
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_17__mul__(PyObject *__pyx_v_self, PyObject *__pyx_v_other); /*proto*/
+static PyObject *__pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_17__mul__(PyObject *__pyx_v_self, PyObject *__pyx_v_other) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__mul__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_16__mul__(((PyObject *)__pyx_v_self), ((PyObject *)__pyx_v_other));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_16__mul__(CYTHON_UNUSED PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v_other) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__mul__", 0);
+
+  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":76
+ * 
+ *     def __mul__(self, other):
+ *         raise NotImplementedError()             # <<<<<<<<<<<<<<
+ */
+  __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_builtin_NotImplementedError); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 76; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_Raise(__pyx_t_1, 0, 0, 0);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  {__pyx_filename = __pyx_f[0]; __pyx_lineno = 76; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+
+  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":75
+ *         raise NotImplementedError()
+ * 
+ *     def __mul__(self, other):             # <<<<<<<<<<<<<<
+ *         raise NotImplementedError()
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("cysparse.sparse.operator_proxies.op_proxy.OpProxy.__mul__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
@@ -2439,7 +2194,7 @@ static int __pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_4nco
  *         public int ncol
  *         public int nnz             # <<<<<<<<<<<<<<
  * 
- *         public object left_operand
+ *         public object dtype
  */
 
 /* Python wrapper */
@@ -2518,196 +2273,6 @@ static int __pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_3nnz
 
 /* "cysparse/sparse/operator_proxies/op_proxy.pxd":11
  *         public int nnz
- * 
- *         public object left_operand             # <<<<<<<<<<<<<<
- *         public object right_operand
- * 
- */
-
-/* Python wrapper */
-static PyObject *__pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_12left_operand_1__get__(PyObject *__pyx_v_self); /*proto*/
-static PyObject *__pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_12left_operand_1__get__(PyObject *__pyx_v_self) {
-  PyObject *__pyx_r = 0;
-  __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("__get__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_12left_operand___get__(((struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *)__pyx_v_self));
-
-  /* function exit code */
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-static PyObject *__pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_12left_operand___get__(struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *__pyx_v_self) {
-  PyObject *__pyx_r = NULL;
-  __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("__get__", 0);
-  __Pyx_XDECREF(__pyx_r);
-  __Pyx_INCREF(__pyx_v_self->left_operand);
-  __pyx_r = __pyx_v_self->left_operand;
-  goto __pyx_L0;
-
-  /* function exit code */
-  __pyx_L0:;
-  __Pyx_XGIVEREF(__pyx_r);
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-/* Python wrapper */
-static int __pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_12left_operand_3__set__(PyObject *__pyx_v_self, PyObject *__pyx_v_value); /*proto*/
-static int __pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_12left_operand_3__set__(PyObject *__pyx_v_self, PyObject *__pyx_v_value) {
-  int __pyx_r;
-  __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_12left_operand_2__set__(((struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *)__pyx_v_self), ((PyObject *)__pyx_v_value));
-
-  /* function exit code */
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-static int __pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_12left_operand_2__set__(struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *__pyx_v_self, PyObject *__pyx_v_value) {
-  int __pyx_r;
-  __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("__set__", 0);
-  __Pyx_INCREF(__pyx_v_value);
-  __Pyx_GIVEREF(__pyx_v_value);
-  __Pyx_GOTREF(__pyx_v_self->left_operand);
-  __Pyx_DECREF(__pyx_v_self->left_operand);
-  __pyx_v_self->left_operand = __pyx_v_value;
-
-  /* function exit code */
-  __pyx_r = 0;
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-/* Python wrapper */
-static int __pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_12left_operand_5__del__(PyObject *__pyx_v_self); /*proto*/
-static int __pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_12left_operand_5__del__(PyObject *__pyx_v_self) {
-  int __pyx_r;
-  __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("__del__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_12left_operand_4__del__(((struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *)__pyx_v_self));
-
-  /* function exit code */
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-static int __pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_12left_operand_4__del__(struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *__pyx_v_self) {
-  int __pyx_r;
-  __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("__del__", 0);
-  __Pyx_INCREF(Py_None);
-  __Pyx_GIVEREF(Py_None);
-  __Pyx_GOTREF(__pyx_v_self->left_operand);
-  __Pyx_DECREF(__pyx_v_self->left_operand);
-  __pyx_v_self->left_operand = Py_None;
-
-  /* function exit code */
-  __pyx_r = 0;
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-/* "cysparse/sparse/operator_proxies/op_proxy.pxd":12
- * 
- *         public object left_operand
- *         public object right_operand             # <<<<<<<<<<<<<<
- * 
- *         public object dtype
- */
-
-/* Python wrapper */
-static PyObject *__pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_13right_operand_1__get__(PyObject *__pyx_v_self); /*proto*/
-static PyObject *__pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_13right_operand_1__get__(PyObject *__pyx_v_self) {
-  PyObject *__pyx_r = 0;
-  __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("__get__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_13right_operand___get__(((struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *)__pyx_v_self));
-
-  /* function exit code */
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-static PyObject *__pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_13right_operand___get__(struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *__pyx_v_self) {
-  PyObject *__pyx_r = NULL;
-  __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("__get__", 0);
-  __Pyx_XDECREF(__pyx_r);
-  __Pyx_INCREF(__pyx_v_self->right_operand);
-  __pyx_r = __pyx_v_self->right_operand;
-  goto __pyx_L0;
-
-  /* function exit code */
-  __pyx_L0:;
-  __Pyx_XGIVEREF(__pyx_r);
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-/* Python wrapper */
-static int __pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_13right_operand_3__set__(PyObject *__pyx_v_self, PyObject *__pyx_v_value); /*proto*/
-static int __pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_13right_operand_3__set__(PyObject *__pyx_v_self, PyObject *__pyx_v_value) {
-  int __pyx_r;
-  __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_13right_operand_2__set__(((struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *)__pyx_v_self), ((PyObject *)__pyx_v_value));
-
-  /* function exit code */
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-static int __pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_13right_operand_2__set__(struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *__pyx_v_self, PyObject *__pyx_v_value) {
-  int __pyx_r;
-  __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("__set__", 0);
-  __Pyx_INCREF(__pyx_v_value);
-  __Pyx_GIVEREF(__pyx_v_value);
-  __Pyx_GOTREF(__pyx_v_self->right_operand);
-  __Pyx_DECREF(__pyx_v_self->right_operand);
-  __pyx_v_self->right_operand = __pyx_v_value;
-
-  /* function exit code */
-  __pyx_r = 0;
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-/* Python wrapper */
-static int __pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_13right_operand_5__del__(PyObject *__pyx_v_self); /*proto*/
-static int __pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_13right_operand_5__del__(PyObject *__pyx_v_self) {
-  int __pyx_r;
-  __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("__del__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_13right_operand_4__del__(((struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *)__pyx_v_self));
-
-  /* function exit code */
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-static int __pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_13right_operand_4__del__(struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *__pyx_v_self) {
-  int __pyx_r;
-  __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("__del__", 0);
-  __Pyx_INCREF(Py_None);
-  __Pyx_GIVEREF(Py_None);
-  __Pyx_GOTREF(__pyx_v_self->right_operand);
-  __Pyx_DECREF(__pyx_v_self->right_operand);
-  __pyx_v_self->right_operand = Py_None;
-
-  /* function exit code */
-  __pyx_r = 0;
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-/* "cysparse/sparse/operator_proxies/op_proxy.pxd":14
- *         public object right_operand
  * 
  *         public object dtype             # <<<<<<<<<<<<<<
  *         public object itype
@@ -2801,12 +2366,12 @@ static int __pyx_pf_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_5dty
   return __pyx_r;
 }
 
-/* "cysparse/sparse/operator_proxies/op_proxy.pxd":15
+/* "cysparse/sparse/operator_proxies/op_proxy.pxd":12
  * 
  *         public object dtype
  *         public object itype             # <<<<<<<<<<<<<<
  * 
- * 
+ *     cdef bint operand_is_accepted(self, operand)
  */
 
 /* Python wrapper */
@@ -2908,8 +2473,6 @@ static PyObject *__pyx_tp_new_8cysparse_6sparse_16operator_proxies_8op_proxy_OpP
   if (unlikely(!o)) return 0;
   p = ((struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *)o);
   p->__pyx_vtab = __pyx_vtabptr_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy;
-  p->left_operand = Py_None; Py_INCREF(Py_None);
-  p->right_operand = Py_None; Py_INCREF(Py_None);
   p->dtype = Py_None; Py_INCREF(Py_None);
   p->itype = Py_None; Py_INCREF(Py_None);
   if (unlikely(__pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_1__cinit__(o, a, k) < 0)) {
@@ -2926,8 +2489,6 @@ static void __pyx_tp_dealloc_8cysparse_6sparse_16operator_proxies_8op_proxy_OpPr
   }
   #endif
   PyObject_GC_UnTrack(o);
-  Py_CLEAR(p->left_operand);
-  Py_CLEAR(p->right_operand);
   Py_CLEAR(p->dtype);
   Py_CLEAR(p->itype);
   (*Py_TYPE(o)->tp_free)(o);
@@ -2936,12 +2497,6 @@ static void __pyx_tp_dealloc_8cysparse_6sparse_16operator_proxies_8op_proxy_OpPr
 static int __pyx_tp_traverse_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy(PyObject *o, visitproc v, void *a) {
   int e;
   struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *p = (struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *)o;
-  if (p->left_operand) {
-    e = (*v)(p->left_operand, a); if (e) return e;
-  }
-  if (p->right_operand) {
-    e = (*v)(p->right_operand, a); if (e) return e;
-  }
   if (p->dtype) {
     e = (*v)(p->dtype, a); if (e) return e;
   }
@@ -2954,12 +2509,6 @@ static int __pyx_tp_traverse_8cysparse_6sparse_16operator_proxies_8op_proxy_OpPr
 static int __pyx_tp_clear_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy(PyObject *o) {
   PyObject* tmp;
   struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *p = (struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *)o;
-  tmp = ((PyObject*)p->left_operand);
-  p->left_operand = Py_None; Py_INCREF(Py_None);
-  Py_XDECREF(tmp);
-  tmp = ((PyObject*)p->right_operand);
-  p->right_operand = Py_None; Py_INCREF(Py_None);
-  Py_XDECREF(tmp);
   tmp = ((PyObject*)p->dtype);
   p->dtype = Py_None; Py_INCREF(Py_None);
   Py_XDECREF(tmp);
@@ -3018,32 +2567,6 @@ static int __pyx_setprop_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy
   }
 }
 
-static PyObject *__pyx_getprop_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_left_operand(PyObject *o, CYTHON_UNUSED void *x) {
-  return __pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_12left_operand_1__get__(o);
-}
-
-static int __pyx_setprop_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_left_operand(PyObject *o, PyObject *v, CYTHON_UNUSED void *x) {
-  if (v) {
-    return __pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_12left_operand_3__set__(o, v);
-  }
-  else {
-    return __pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_12left_operand_5__del__(o);
-  }
-}
-
-static PyObject *__pyx_getprop_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_right_operand(PyObject *o, CYTHON_UNUSED void *x) {
-  return __pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_13right_operand_1__get__(o);
-}
-
-static int __pyx_setprop_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_right_operand(PyObject *o, PyObject *v, CYTHON_UNUSED void *x) {
-  if (v) {
-    return __pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_13right_operand_3__set__(o, v);
-  }
-  else {
-    return __pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_13right_operand_5__del__(o);
-  }
-}
-
 static PyObject *__pyx_getprop_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_dtype(PyObject *o, CYTHON_UNUSED void *x) {
   return __pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_5dtype_1__get__(o);
 }
@@ -3071,10 +2594,10 @@ static int __pyx_setprop_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy
 }
 
 static PyMethodDef __pyx_methods_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy[] = {
-  {"to_ndarray", (PyCFunction)__pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_11to_ndarray, METH_NOARGS, 0},
-  {"to_ll", (PyCFunction)__pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_13to_ll, METH_NOARGS, 0},
-  {"to_csr", (PyCFunction)__pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_15to_csr, METH_NOARGS, 0},
-  {"to_csc", (PyCFunction)__pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_17to_csc, METH_NOARGS, 0},
+  {"to_ndarray", (PyCFunction)__pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_3to_ndarray, METH_NOARGS, 0},
+  {"to_ll", (PyCFunction)__pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_5to_ll, METH_NOARGS, 0},
+  {"to_csr", (PyCFunction)__pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_7to_csr, METH_NOARGS, 0},
+  {"to_csc", (PyCFunction)__pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_9to_csc, METH_NOARGS, 0},
   {0, 0, 0, 0}
 };
 
@@ -3082,17 +2605,15 @@ static struct PyGetSetDef __pyx_getsets_8cysparse_6sparse_16operator_proxies_8op
   {(char *)"nrow", __pyx_getprop_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_nrow, __pyx_setprop_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_nrow, 0, 0},
   {(char *)"ncol", __pyx_getprop_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_ncol, __pyx_setprop_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_ncol, 0, 0},
   {(char *)"nnz", __pyx_getprop_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_nnz, __pyx_setprop_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_nnz, 0, 0},
-  {(char *)"left_operand", __pyx_getprop_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_left_operand, __pyx_setprop_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_left_operand, 0, 0},
-  {(char *)"right_operand", __pyx_getprop_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_right_operand, __pyx_setprop_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_right_operand, 0, 0},
   {(char *)"dtype", __pyx_getprop_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_dtype, __pyx_setprop_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_dtype, 0, 0},
   {(char *)"itype", __pyx_getprop_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_itype, __pyx_setprop_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_itype, 0, 0},
   {0, 0, 0, 0, 0}
 };
 
 static PyNumberMethods __pyx_tp_as_number_OpProxy = {
-  __pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_5__add__, /*nb_add*/
-  __pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_7__sub__, /*nb_subtract*/
-  __pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_9__mul__, /*nb_multiply*/
+  __pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_13__add__, /*nb_add*/
+  __pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_15__sub__, /*nb_subtract*/
+  __pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_17__mul__, /*nb_multiply*/
   #if PY_MAJOR_VERSION < 3 || CYTHON_COMPILING_IN_PYPY
   0, /*nb_divide*/
   #endif
@@ -3166,7 +2687,7 @@ static PySequenceMethods __pyx_tp_as_sequence_OpProxy = {
 
 static PyMappingMethods __pyx_tp_as_mapping_OpProxy = {
   0, /*mp_length*/
-  __pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_3__getitem__, /*mp_subscript*/
+  __pyx_pw_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_11__getitem__, /*mp_subscript*/
   0, /*mp_ass_subscript*/
 };
 
@@ -3251,25 +2772,19 @@ static struct PyModuleDef __pyx_moduledef = {
 #endif
 
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
-  {&__pyx_kp_s_Both_operands_must_share_the_sam, __pyx_k_Both_operands_must_share_the_sam, sizeof(__pyx_k_Both_operands_must_share_the_sam), 0, 0, 1, 0},
-  {&__pyx_kp_s_Both_operands_must_share_the_sam_2, __pyx_k_Both_operands_must_share_the_sam_2, sizeof(__pyx_k_Both_operands_must_share_the_sam_2), 0, 0, 1, 0},
   {&__pyx_n_s_LLSparseMatrix, __pyx_k_LLSparseMatrix, sizeof(__pyx_k_LLSparseMatrix), 0, 0, 1, 1},
   {&__pyx_n_s_NotImplementedError, __pyx_k_NotImplementedError, sizeof(__pyx_k_NotImplementedError), 0, 0, 1, 1},
-  {&__pyx_kp_s_Operand_s_is_not_accepted_for_th, __pyx_k_Operand_s_is_not_accepted_for_th, sizeof(__pyx_k_Operand_s_is_not_accepted_for_th), 0, 0, 1, 0},
   {&__pyx_kp_s_Transform_first_to_a_LLSparseMat, __pyx_k_Transform_first_to_a_LLSparseMat, sizeof(__pyx_k_Transform_first_to_a_LLSparseMat), 0, 0, 1, 0},
   {&__pyx_kp_s_Transform_first_to_a_LLSparseMat_2, __pyx_k_Transform_first_to_a_LLSparseMat_2, sizeof(__pyx_k_Transform_first_to_a_LLSparseMat_2), 0, 0, 1, 0},
   {&__pyx_n_s_cysparse_sparse_ll_mat, __pyx_k_cysparse_sparse_ll_mat, sizeof(__pyx_k_cysparse_sparse_ll_mat), 0, 0, 1, 1},
   {&__pyx_n_s_dtype, __pyx_k_dtype, sizeof(__pyx_k_dtype), 0, 0, 1, 1},
   {&__pyx_n_s_import, __pyx_k_import, sizeof(__pyx_k_import), 0, 0, 1, 1},
   {&__pyx_n_s_itype, __pyx_k_itype, sizeof(__pyx_k_itype), 0, 0, 1, 1},
-  {&__pyx_n_s_left_operand, __pyx_k_left_operand, sizeof(__pyx_k_left_operand), 0, 0, 1, 1},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
   {&__pyx_n_s_ncol, __pyx_k_ncol, sizeof(__pyx_k_ncol), 0, 0, 1, 1},
-  {&__pyx_n_s_nnz, __pyx_k_nnz, sizeof(__pyx_k_nnz), 0, 0, 1, 1},
   {&__pyx_n_s_nrow, __pyx_k_nrow, sizeof(__pyx_k_nrow), 0, 0, 1, 1},
   {&__pyx_n_s_pyx_vtable, __pyx_k_pyx_vtable, sizeof(__pyx_k_pyx_vtable), 0, 0, 1, 1},
   {&__pyx_n_s_range, __pyx_k_range, sizeof(__pyx_k_range), 0, 0, 1, 1},
-  {&__pyx_n_s_right_operand, __pyx_k_right_operand, sizeof(__pyx_k_right_operand), 0, 0, 1, 1},
   {&__pyx_n_s_size_hint, __pyx_k_size_hint, sizeof(__pyx_k_size_hint), 0, 0, 1, 1},
   {&__pyx_n_s_store_zero, __pyx_k_store_zero, sizeof(__pyx_k_store_zero), 0, 0, 1, 1},
   {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
@@ -3277,11 +2792,11 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, 0, 0, 0, 0, 0, 0}
 };
 static int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_NotImplementedError = __Pyx_GetBuiltinName(__pyx_n_s_NotImplementedError); if (!__pyx_builtin_NotImplementedError) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 57; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_builtin_NotImplementedError = __Pyx_GetBuiltinName(__pyx_n_s_NotImplementedError); if (!__pyx_builtin_NotImplementedError) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 46; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   #if PY_MAJOR_VERSION >= 3
-  __pyx_builtin_xrange = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_xrange) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 77; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_builtin_xrange = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_xrange) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 51; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   #else
-  __pyx_builtin_xrange = __Pyx_GetBuiltinName(__pyx_n_s_xrange); if (!__pyx_builtin_xrange) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 77; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_builtin_xrange = __Pyx_GetBuiltinName(__pyx_n_s_xrange); if (!__pyx_builtin_xrange) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 51; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   #endif
   return 0;
   __pyx_L1_error:;
@@ -3292,35 +2807,36 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":72
+  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":46
  *     ####################################################################################################################
  *     def to_ndarray(self):
  *         raise NotImplementedError("Transform first to a LLSparseMatrix and then call 'to_ndarray()'")             # <<<<<<<<<<<<<<
  * 
  *     def to_ll(self):
  */
-  __pyx_tuple_ = PyTuple_Pack(1, __pyx_kp_s_Transform_first_to_a_LLSparseMat); if (unlikely(!__pyx_tuple_)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 72; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple_ = PyTuple_Pack(1, __pyx_kp_s_Transform_first_to_a_LLSparseMat); if (unlikely(!__pyx_tuple_)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 46; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple_);
   __Pyx_GIVEREF(__pyx_tuple_);
 
-  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":84
+  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":58
  * 
  *     def to_csr(self):
  *         raise NotImplementedError("Transform first to a LLSparseMatrix and then call 'to_csr()'")             # <<<<<<<<<<<<<<
  * 
  *     def to_csc(self):
  */
-  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_s_Transform_first_to_a_LLSparseMat_2); if (unlikely(!__pyx_tuple__2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 84; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_s_Transform_first_to_a_LLSparseMat_2); if (unlikely(!__pyx_tuple__2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 58; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
 
-  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":87
+  /* "cysparse/sparse/operator_proxies/op_proxy.pyx":61
  * 
  *     def to_csc(self):
  *         raise NotImplementedError("Transform first to a LLSparseMatrix and then call 'to_csr()'")             # <<<<<<<<<<<<<<
  * 
+ *     ####################################################################################################################
  */
-  __pyx_tuple__3 = PyTuple_Pack(1, __pyx_kp_s_Transform_first_to_a_LLSparseMat_2); if (unlikely(!__pyx_tuple__3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 87; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__3 = PyTuple_Pack(1, __pyx_kp_s_Transform_first_to_a_LLSparseMat_2); if (unlikely(!__pyx_tuple__3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 61; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__3);
   __Pyx_GIVEREF(__pyx_tuple__3);
   __Pyx_RefNannyFinishContext();
@@ -3348,6 +2864,7 @@ PyMODINIT_FUNC PyInit_op_proxy(void)
   PyObject *__pyx_t_1 = NULL;
   PyObject *__pyx_t_2 = NULL;
   PyObject *__pyx_t_3 = NULL;
+  PyObject *__pyx_t_4 = NULL;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -3427,10 +2944,11 @@ PyMODINIT_FUNC PyInit_op_proxy(void)
   /*--- Type init code ---*/
   __pyx_vtabptr_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy = &__pyx_vtable_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy;
   __pyx_vtable_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy.operand_is_accepted = (int (*)(struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *, PyObject *))__pyx_f_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_operand_is_accepted;
-  if (PyType_Ready(&__pyx_type_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 8; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_vtable_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy.scalar_is_accepted = (PyObject *(*)(struct __pyx_obj_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy *, PyObject *))__pyx_f_8cysparse_6sparse_16operator_proxies_8op_proxy_7OpProxy_scalar_is_accepted;
+  if (PyType_Ready(&__pyx_type_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 10; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_type_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy.tp_print = 0;
-  if (__Pyx_SetVtable(__pyx_type_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy.tp_dict, __pyx_vtabptr_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 8; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (PyObject_SetAttrString(__pyx_m, "OpProxy", (PyObject *)&__pyx_type_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 8; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_SetVtable(__pyx_type_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy.tp_dict, __pyx_vtabptr_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 10; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyObject_SetAttrString(__pyx_m, "OpProxy", (PyObject *)&__pyx_type_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 10; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_ptype_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy = &__pyx_type_8cysparse_6sparse_16operator_proxies_8op_proxy_OpProxy;
   /*--- Type import code ---*/
   __pyx_ptype_7cpython_4type_type = __Pyx_ImportType(__Pyx_BUILTIN_MODULE_NAME, "type", 
@@ -3449,13 +2967,16 @@ PyMODINIT_FUNC PyInit_op_proxy(void)
   if (__Pyx_ImportVoidPtr(__pyx_t_1, "MUTABLE_SPARSE_MAT_DEFAULT_SIZE_HINT", (void **)&__pyx_vp_8cysparse_6sparse_5s_mat_MUTABLE_SPARSE_MAT_DEFAULT_SIZE_HINT, "__pyx_t_8cysparse_12common_types_14cysparse_types_INT32_t") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   Py_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   /*--- Function import code ---*/
-  __pyx_t_2 = __Pyx_ImportModule("cysparse.sparse.s_mat"); if (!__pyx_t_2) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (__Pyx_ImportFunction(__pyx_t_2, "PySparseMatrix_Check", (void (**)(void))&__pyx_f_8cysparse_6sparse_5s_mat_PySparseMatrix_Check, "int (PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (__Pyx_ImportFunction(__pyx_t_2, "PyTransposedSparseMatrix_Check", (void (**)(void))&__pyx_f_8cysparse_6sparse_5s_mat_PyTransposedSparseMatrix_Check, "int (PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (__Pyx_ImportFunction(__pyx_t_2, "PyConjugatedSparseMatrix_Check", (void (**)(void))&__pyx_f_8cysparse_6sparse_5s_mat_PyConjugatedSparseMatrix_Check, "int (PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (__Pyx_ImportFunction(__pyx_t_2, "PyConjugateTransposedSparseMatrix_Check", (void (**)(void))&__pyx_f_8cysparse_6sparse_5s_mat_PyConjugateTransposedSparseMatrix_Check, "int (PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (__Pyx_ImportFunction(__pyx_t_2, "PyLLSparseMatrixView_Check", (void (**)(void))&__pyx_f_8cysparse_6sparse_5s_mat_PyLLSparseMatrixView_Check, "int (PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_ImportModule("cysparse.common_types.cysparse_types"); if (!__pyx_t_2) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_ImportFunction(__pyx_t_2, "is_scalar", (void (**)(void))&__pyx_f_8cysparse_12common_types_14cysparse_types_is_scalar, "PyObject *(PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   Py_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_3 = __Pyx_ImportModule("cysparse.sparse.s_mat"); if (!__pyx_t_3) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_ImportFunction(__pyx_t_3, "PySparseMatrix_Check", (void (**)(void))&__pyx_f_8cysparse_6sparse_5s_mat_PySparseMatrix_Check, "int (PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_ImportFunction(__pyx_t_3, "PyTransposedSparseMatrix_Check", (void (**)(void))&__pyx_f_8cysparse_6sparse_5s_mat_PyTransposedSparseMatrix_Check, "int (PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_ImportFunction(__pyx_t_3, "PyConjugatedSparseMatrix_Check", (void (**)(void))&__pyx_f_8cysparse_6sparse_5s_mat_PyConjugatedSparseMatrix_Check, "int (PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_ImportFunction(__pyx_t_3, "PyConjugateTransposedSparseMatrix_Check", (void (**)(void))&__pyx_f_8cysparse_6sparse_5s_mat_PyConjugateTransposedSparseMatrix_Check, "int (PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_ImportFunction(__pyx_t_3, "PyLLSparseMatrixView_Check", (void (**)(void))&__pyx_f_8cysparse_6sparse_5s_mat_PyLLSparseMatrixView_Check, "int (PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  Py_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   /*--- Execution code ---*/
   #if defined(__Pyx_Generator_USED) || defined(__Pyx_Coroutine_USED)
   if (__Pyx_patch_abc() < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -3466,10 +2987,10 @@ PyMODINIT_FUNC PyInit_op_proxy(void)
  *                                    PyTransposedSparseMatrix_Check, \
  *                                    PyConjugatedSparseMatrix_Check, \
  */
-  __pyx_t_3 = PyDict_New(); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_4 = PyDict_New(); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_4);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_4) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
   /*--- Wrapped vars code ---*/
 
@@ -3478,6 +2999,7 @@ PyMODINIT_FUNC PyInit_op_proxy(void)
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_4);
   if (__pyx_m) {
     if (__pyx_d) {
       __Pyx_AddTraceback("init cysparse.sparse.operator_proxies.op_proxy", __pyx_clineno, __pyx_lineno, __pyx_filename);
@@ -3525,132 +3047,33 @@ static PyObject *__Pyx_GetBuiltinName(PyObject *name) {
     return result;
 }
 
-static void __Pyx_RaiseArgtupleInvalid(
-    const char* func_name,
-    int exact,
-    Py_ssize_t num_min,
-    Py_ssize_t num_max,
-    Py_ssize_t num_found)
+static CYTHON_INLINE int __Pyx_CheckKeywordStrings(
+    PyObject *kwdict,
+    const char* function_name,
+    int kw_allowed)
 {
-    Py_ssize_t num_expected;
-    const char *more_or_less;
-    if (num_found < num_min) {
-        num_expected = num_min;
-        more_or_less = "at least";
-    } else {
-        num_expected = num_max;
-        more_or_less = "at most";
-    }
-    if (exact) {
-        more_or_less = "exactly";
-    }
-    PyErr_Format(PyExc_TypeError,
-                 "%.200s() takes %.8s %" CYTHON_FORMAT_SSIZE_T "d positional argument%.1s (%" CYTHON_FORMAT_SSIZE_T "d given)",
-                 func_name, more_or_less, num_expected,
-                 (num_expected == 1) ? "" : "s", num_found);
-}
-
-static void __Pyx_RaiseDoubleKeywordsError(
-    const char* func_name,
-    PyObject* kw_name)
-{
-    PyErr_Format(PyExc_TypeError,
-        #if PY_MAJOR_VERSION >= 3
-        "%s() got multiple values for keyword argument '%U'", func_name, kw_name);
-        #else
-        "%s() got multiple values for keyword argument '%s'", func_name,
-        PyString_AsString(kw_name));
-        #endif
-}
-
-static int __Pyx_ParseOptionalKeywords(
-    PyObject *kwds,
-    PyObject **argnames[],
-    PyObject *kwds2,
-    PyObject *values[],
-    Py_ssize_t num_pos_args,
-    const char* function_name)
-{
-    PyObject *key = 0, *value = 0;
+    PyObject* key = 0;
     Py_ssize_t pos = 0;
-    PyObject*** name;
-    PyObject*** first_kw_arg = argnames + num_pos_args;
-    while (PyDict_Next(kwds, &pos, &key, &value)) {
-        name = first_kw_arg;
-        while (*name && (**name != key)) name++;
-        if (*name) {
-            values[name-argnames] = value;
-            continue;
-        }
-        name = first_kw_arg;
+#if CYTHON_COMPILING_IN_PYPY
+    if (!kw_allowed && PyDict_Next(kwdict, &pos, &key, 0))
+        goto invalid_keyword;
+    return 1;
+#else
+    while (PyDict_Next(kwdict, &pos, &key, 0)) {
         #if PY_MAJOR_VERSION < 3
-        if (likely(PyString_CheckExact(key)) || likely(PyString_Check(key))) {
-            while (*name) {
-                if ((CYTHON_COMPILING_IN_PYPY || PyString_GET_SIZE(**name) == PyString_GET_SIZE(key))
-                        && _PyString_Eq(**name, key)) {
-                    values[name-argnames] = value;
-                    break;
-                }
-                name++;
-            }
-            if (*name) continue;
-            else {
-                PyObject*** argname = argnames;
-                while (argname != first_kw_arg) {
-                    if ((**argname == key) || (
-                            (CYTHON_COMPILING_IN_PYPY || PyString_GET_SIZE(**argname) == PyString_GET_SIZE(key))
-                             && _PyString_Eq(**argname, key))) {
-                        goto arg_passed_twice;
-                    }
-                    argname++;
-                }
-            }
-        } else
+        if (unlikely(!PyString_CheckExact(key)) && unlikely(!PyString_Check(key)))
         #endif
-        if (likely(PyUnicode_Check(key))) {
-            while (*name) {
-                int cmp = (**name == key) ? 0 :
-                #if !CYTHON_COMPILING_IN_PYPY && PY_MAJOR_VERSION >= 3
-                    (PyUnicode_GET_SIZE(**name) != PyUnicode_GET_SIZE(key)) ? 1 :
-                #endif
-                    PyUnicode_Compare(**name, key);
-                if (cmp < 0 && unlikely(PyErr_Occurred())) goto bad;
-                if (cmp == 0) {
-                    values[name-argnames] = value;
-                    break;
-                }
-                name++;
-            }
-            if (*name) continue;
-            else {
-                PyObject*** argname = argnames;
-                while (argname != first_kw_arg) {
-                    int cmp = (**argname == key) ? 0 :
-                    #if !CYTHON_COMPILING_IN_PYPY && PY_MAJOR_VERSION >= 3
-                        (PyUnicode_GET_SIZE(**argname) != PyUnicode_GET_SIZE(key)) ? 1 :
-                    #endif
-                        PyUnicode_Compare(**argname, key);
-                    if (cmp < 0 && unlikely(PyErr_Occurred())) goto bad;
-                    if (cmp == 0) goto arg_passed_twice;
-                    argname++;
-                }
-            }
-        } else
-            goto invalid_keyword_type;
-        if (kwds2) {
-            if (unlikely(PyDict_SetItem(kwds2, key, value))) goto bad;
-        } else {
-            goto invalid_keyword;
-        }
+            if (unlikely(!PyUnicode_Check(key)))
+                goto invalid_keyword_type;
     }
-    return 0;
-arg_passed_twice:
-    __Pyx_RaiseDoubleKeywordsError(function_name, key);
-    goto bad;
+    if ((!kw_allowed) && unlikely(key))
+        goto invalid_keyword;
+    return 1;
 invalid_keyword_type:
     PyErr_Format(PyExc_TypeError,
         "%.200s() keywords must be strings", function_name);
-    goto bad;
+    return 0;
+#endif
 invalid_keyword:
     PyErr_Format(PyExc_TypeError,
     #if PY_MAJOR_VERSION < 3
@@ -3660,33 +3083,6 @@ invalid_keyword:
         "%s() got an unexpected keyword argument '%U'",
         function_name, key);
     #endif
-bad:
-    return -1;
-}
-
-static void __Pyx_RaiseArgumentTypeInvalid(const char* name, PyObject *obj, PyTypeObject *type) {
-    PyErr_Format(PyExc_TypeError,
-        "Argument '%.200s' has incorrect type (expected %.200s, got %.200s)",
-        name, type->tp_name, Py_TYPE(obj)->tp_name);
-}
-static CYTHON_INLINE int __Pyx_ArgTypeTest(PyObject *obj, PyTypeObject *type, int none_allowed,
-    const char *name, int exact)
-{
-    if (unlikely(!type)) {
-        PyErr_SetString(PyExc_SystemError, "Missing type object");
-        return 0;
-    }
-    if (none_allowed && obj == Py_None) return 1;
-    else if (exact) {
-        if (likely(Py_TYPE(obj) == type)) return 1;
-        #if PY_MAJOR_VERSION == 2
-        else if ((type == &PyBaseString_Type) && likely(__Pyx_PyBaseString_CheckExact(obj))) return 1;
-        #endif
-    }
-    else {
-        if (likely(PyObject_TypeCheck(obj, type))) return 1;
-    }
-    __Pyx_RaiseArgumentTypeInvalid(name, obj, type);
     return 0;
 }
 
@@ -3706,40 +3102,6 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_Call(PyObject *func, PyObject *arg
             "NULL result without error in PyObject_Call");
     }
     return result;
-}
-#endif
-
-#if CYTHON_COMPILING_IN_CPYTHON
-static CYTHON_INLINE PyObject* __Pyx_PyObject_CallMethO(PyObject *func, PyObject *arg) {
-    PyObject *self, *result;
-    PyCFunction cfunc;
-    cfunc = PyCFunction_GET_FUNCTION(func);
-    self = PyCFunction_GET_SELF(func);
-    if (unlikely(Py_EnterRecursiveCall((char*)" while calling a Python object")))
-        return NULL;
-    result = cfunc(self, arg);
-    Py_LeaveRecursiveCall();
-    if (unlikely(!result) && unlikely(!PyErr_Occurred())) {
-        PyErr_SetString(
-            PyExc_SystemError,
-            "NULL result without error in PyObject_Call");
-    }
-    return result;
-}
-#endif
-
-#if CYTHON_COMPILING_IN_CPYTHON
-static CYTHON_INLINE PyObject* __Pyx_PyObject_CallNoArg(PyObject *func) {
-#ifdef __Pyx_CyFunction_USED
-    if (likely(PyCFunction_Check(func) || PyObject_TypeCheck(func, __pyx_CyFunctionType))) {
-#else
-    if (likely(PyCFunction_Check(func))) {
-#endif
-        if (likely(PyCFunction_GET_FLAGS(func) & METH_NOARGS)) {
-            return __Pyx_PyObject_CallMethO(func, NULL);
-        }
-    }
-    return __Pyx_PyObject_Call(func, __pyx_empty_tuple, NULL);
 }
 #endif
 
@@ -4020,6 +3382,66 @@ static PyObject* __Pyx_ImportFrom(PyObject* module, PyObject* name) {
     return value;
 }
 
+static void __Pyx_RaiseArgumentTypeInvalid(const char* name, PyObject *obj, PyTypeObject *type) {
+    PyErr_Format(PyExc_TypeError,
+        "Argument '%.200s' has incorrect type (expected %.200s, got %.200s)",
+        name, type->tp_name, Py_TYPE(obj)->tp_name);
+}
+static CYTHON_INLINE int __Pyx_ArgTypeTest(PyObject *obj, PyTypeObject *type, int none_allowed,
+    const char *name, int exact)
+{
+    if (unlikely(!type)) {
+        PyErr_SetString(PyExc_SystemError, "Missing type object");
+        return 0;
+    }
+    if (none_allowed && obj == Py_None) return 1;
+    else if (exact) {
+        if (likely(Py_TYPE(obj) == type)) return 1;
+        #if PY_MAJOR_VERSION == 2
+        else if ((type == &PyBaseString_Type) && likely(__Pyx_PyBaseString_CheckExact(obj))) return 1;
+        #endif
+    }
+    else {
+        if (likely(PyObject_TypeCheck(obj, type))) return 1;
+    }
+    __Pyx_RaiseArgumentTypeInvalid(name, obj, type);
+    return 0;
+}
+
+#if CYTHON_COMPILING_IN_CPYTHON
+static CYTHON_INLINE PyObject* __Pyx_PyObject_CallMethO(PyObject *func, PyObject *arg) {
+    PyObject *self, *result;
+    PyCFunction cfunc;
+    cfunc = PyCFunction_GET_FUNCTION(func);
+    self = PyCFunction_GET_SELF(func);
+    if (unlikely(Py_EnterRecursiveCall((char*)" while calling a Python object")))
+        return NULL;
+    result = cfunc(self, arg);
+    Py_LeaveRecursiveCall();
+    if (unlikely(!result) && unlikely(!PyErr_Occurred())) {
+        PyErr_SetString(
+            PyExc_SystemError,
+            "NULL result without error in PyObject_Call");
+    }
+    return result;
+}
+#endif
+
+#if CYTHON_COMPILING_IN_CPYTHON
+static CYTHON_INLINE PyObject* __Pyx_PyObject_CallNoArg(PyObject *func) {
+#ifdef __Pyx_CyFunction_USED
+    if (likely(PyCFunction_Check(func) || PyObject_TypeCheck(func, __pyx_CyFunctionType))) {
+#else
+    if (likely(PyCFunction_Check(func))) {
+#endif
+        if (likely(PyCFunction_GET_FLAGS(func) & METH_NOARGS)) {
+            return __Pyx_PyObject_CallMethO(func, NULL);
+        }
+    }
+    return __Pyx_PyObject_Call(func, __pyx_empty_tuple, NULL);
+}
+#endif
+
 static int __Pyx_SetVtable(PyObject *dict, void *vtable) {
 #if PY_VERSION_HEX >= 0x02070000
     PyObject *ob = PyCapsule_New(vtable, 0, 0);
@@ -4194,6 +3616,32 @@ static void __Pyx_AddTraceback(const char *funcname, int c_line,
 bad:
     Py_XDECREF(py_code);
     Py_XDECREF(py_frame);
+}
+
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value) {
+    const int neg_one = (int) -1, const_zero = (int) 0;
+    const int is_unsigned = neg_one > const_zero;
+    if (is_unsigned) {
+        if (sizeof(int) < sizeof(long)) {
+            return PyInt_FromLong((long) value);
+        } else if (sizeof(int) <= sizeof(unsigned long)) {
+            return PyLong_FromUnsignedLong((unsigned long) value);
+        } else if (sizeof(int) <= sizeof(unsigned PY_LONG_LONG)) {
+            return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
+        }
+    } else {
+        if (sizeof(int) <= sizeof(long)) {
+            return PyInt_FromLong((long) value);
+        } else if (sizeof(int) <= sizeof(PY_LONG_LONG)) {
+            return PyLong_FromLongLong((PY_LONG_LONG) value);
+        }
+    }
+    {
+        int one = 1; int little = (int)*(unsigned char *)&one;
+        unsigned char *bytes = (unsigned char *)&value;
+        return _PyLong_FromByteArray(bytes, sizeof(int),
+                                     little, !is_unsigned);
+    }
 }
 
 #define __PYX_VERIFY_RETURN_INT(target_type, func_type, func_value)\
@@ -4403,32 +3851,6 @@ raise_neg_overflow:
     PyErr_SetString(PyExc_OverflowError,
         "can't convert negative value to int");
     return (int) -1;
-}
-
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value) {
-    const int neg_one = (int) -1, const_zero = (int) 0;
-    const int is_unsigned = neg_one > const_zero;
-    if (is_unsigned) {
-        if (sizeof(int) < sizeof(long)) {
-            return PyInt_FromLong((long) value);
-        } else if (sizeof(int) <= sizeof(unsigned long)) {
-            return PyLong_FromUnsignedLong((unsigned long) value);
-        } else if (sizeof(int) <= sizeof(unsigned PY_LONG_LONG)) {
-            return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
-        }
-    } else {
-        if (sizeof(int) <= sizeof(long)) {
-            return PyInt_FromLong((long) value);
-        } else if (sizeof(int) <= sizeof(PY_LONG_LONG)) {
-            return PyLong_FromLongLong((PY_LONG_LONG) value);
-        }
-    }
-    {
-        int one = 1; int little = (int)*(unsigned char *)&one;
-        unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(int),
-                                     little, !is_unsigned);
-    }
 }
 
 #if CYTHON_CCOMPLEX

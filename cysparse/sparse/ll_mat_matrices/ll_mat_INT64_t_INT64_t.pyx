@@ -2046,7 +2046,9 @@ cdef class LLSparseMatrix_INT64_t_INT64_t(MutableSparseMatrix_INT64_t_INT64_t):
         else:
             return multiply_transposed_ll_mat_with_self_scaled(self, d)
 
-    #def __rmul__(self, B):
+
+    def __rmul__(self, other):
+        print("rmul from ll_mat")
 
     # TODO: change this
     def __imul__(self, sigma):

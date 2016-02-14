@@ -8,11 +8,8 @@ cdef class OpProxy:
         public int ncol
         public int nnz
 
-        public object left_operand
-        public object right_operand
-
         public object dtype
         public object itype
 
-
     cdef bint operand_is_accepted(self, operand)
+    cdef scalar_is_accepted(self, scalar)

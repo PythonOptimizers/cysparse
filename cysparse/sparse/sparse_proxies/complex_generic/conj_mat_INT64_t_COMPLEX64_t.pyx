@@ -5,6 +5,9 @@ from cysparse.sparse.s_mat cimport PyLLSparseMatrix_Check
 
 from cysparse.sparse.operator_proxies.mul_proxy import MulProxy
 from cysparse.sparse.operator_proxies.sum_proxy import SumProxy
+from cysparse.sparse.operator_proxies.scalar_mul_proxy import ScalarMulProxy
+
+from cysparse.common_types.cysparse_types import is_scalar
 
 cimport numpy as cnp
 
@@ -175,6 +178,12 @@ cdef class ConjugatedSparseMatrix_INT64_t_COMPLEX64_t:
         if cnp.PyArray_Check(B) and B.ndim == 1:
             return self.matvec(B)
 
+        elif is_scalar(B):
+            return ScalarMulProxy(B, self)
+
+        elif is_scalar(self):
+            return ScalarMulProxy(self, B)
+
         return MulProxy(self, B)
 
     def __add__(self, B):
@@ -185,6 +194,9 @@ cdef class ConjugatedSparseMatrix_INT64_t_COMPLEX64_t:
             A :class:`SumProxy`, i.e. a proxy to a matrix-like sum.
 
         """
+        if is_scalar(B) or is_scalar(self):
+            raise RuntimeError("This operation is not allowed")
+
         return SumProxy(self, B)
 
     def __sub__(self, B):
@@ -195,6 +207,9 @@ cdef class ConjugatedSparseMatrix_INT64_t_COMPLEX64_t:
             A :class:`SumProxy`, i.e. a proxy to a matrix-like sum.
 
         """
+        if is_scalar(B) or is_scalar(self):
+            raise RuntimeError("This operation is not allowed")
+
         return SumProxy(self, B, real_sum=False)
 
     def matvec(self, B):

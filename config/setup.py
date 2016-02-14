@@ -1020,6 +1020,30 @@ sparse_ext = [
             **sparse_ext_params),
 
   ######################
+  # ### OpScalarProxy ###
+  ######################
+  Extension(name="cysparse.sparse.operator_proxies.op_scalar_proxy",
+            sources=["cysparse/sparse/operator_proxies/op_scalar_proxy.pxd",
+                     "cysparse/sparse/operator_proxies/op_scalar_proxy.pyx"],
+            **sparse_ext_params),
+
+  ######################
+  # ### ScalarMulProxy ###
+  ######################
+  Extension(name="cysparse.sparse.operator_proxies.scalar_mul_proxy",
+            sources=["cysparse/sparse/operator_proxies/scalar_mul_proxy.pxd",
+                     "cysparse/sparse/operator_proxies/scalar_mul_proxy.pyx"],
+            **sparse_ext_params),
+
+  ######################
+  # ### OpMatrixProxy ###
+  ######################
+  Extension(name="cysparse.sparse.operator_proxies.op_matrix_proxy",
+            sources=["cysparse/sparse/operator_proxies/op_matrix_proxy.pxd",
+                     "cysparse/sparse/operator_proxies/op_matrix_proxy.pyx"],
+            **sparse_ext_params),
+
+  ######################
   # ### SumProxy ###
   ######################
   Extension(name="cysparse.sparse.operator_proxies.sum_proxy",
