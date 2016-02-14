@@ -93,7 +93,11 @@ ext_params['extra_compile_args'] = ['-std=c99', '-Wno-unused-function']
 ext_params['extra_link_args'] = []
 
 if not use_debug_symbols:
-    key_to_modify = 'PY_CORE_CFLAGS'
+    key_to_modify = None
+    try:
+        key_to_modify = 'PY_CORE_CFLAGS'
+    except:
+        key_to_modify = 'PY_CFLAGS'
     cflags = sysconfig._config_vars[key_to_modify]
     cflags = cflags.replace(' -g ', ' ')
     sysconfig._config_vars[key_to_modify] = cflags
