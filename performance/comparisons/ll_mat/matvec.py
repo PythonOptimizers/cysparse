@@ -14,8 +14,8 @@ import benchmark
 import numpy as np
 
 # CySparse
-from cysparse.sparse.ll_mat import NewLLSparseMatrix
-from cysparse.types.cysparse_types import INT32_T, INT64_T, FLOAT64_T
+from cysparse.sparse.ll_mat import LLSparseMatrix
+from cysparse.common_types.cysparse_types import INT32_T, INT64_T, FLOAT64_T
 
 # PySparse
 from pysparse.sparse import spmatrix
@@ -29,7 +29,8 @@ from scipy.sparse import lil_matrix
 # the same function could be used for all the matrices...
 
 def construct_cysparse_matrix(n, nbr_elements):
-    A = NewLLSparseMatrix(size=n, size_hint=nbr_elements, dtype=FLOAT64_T)
+    # int is 32 bits on my machine
+    A = LLSparseMatrix(size=n, size_hint=nbr_elements, itype=INT32_T, dtype=FLOAT64_T)
 
     for i in xrange(nbr_elements):
         A[i % n, (2 * i + 1) % n] = i / 3
@@ -97,12 +98,12 @@ class LLMatMatVecBenchmark(benchmark.Benchmark):
         self.A_c.matvec(self.v)
         return
 
-    def test_cysparse3(self):
-        self.A_c.matvec2(self.v)
+    def test_scipy_sparse(self):
+        self.w_s = self.A_s * self.v
+        return
 
-    #def test_scipy_sparse(self):
-    #    self.w_s = self.A_s * self.v
-    #    return
+    def test_scipy_sparse2(self):
+        self.A_s._mul_vector(self.v)
 
 
 class LLMatMatVecBenchmark_2(LLMatMatVecBenchmark):

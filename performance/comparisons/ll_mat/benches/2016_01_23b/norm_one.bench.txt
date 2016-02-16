@@ -1,0 +1,40 @@
+
+Benchmark Report
+================
+
+1-norm with 100 elements and size = 1,000
+-----------------------------------------
+
+    name | rank | runs |      mean |        sd | timesBaseline
+---------|------|------|-----------|-----------|--------------
+cysparse |    1 |  100 | 3.512e-06 | 9.136e-07 |           1.0
+pysparse |    2 |  100 |  6.18e-06 | 6.116e-07 | 1.75967413442
+
+1-norm with 1,000 elements and size = 10,000
+--------------------------------------------
+
+    name | rank | runs |      mean |        sd | timesBaseline
+---------|------|------|-----------|-----------|--------------
+cysparse |    1 |  100 | 1.934e-05 | 2.398e-06 |           1.0
+pysparse |    2 |  100 |     3e-05 | 4.829e-06 | 1.55154130703
+
+1-norm with 10,000 elements and size = 100,000
+----------------------------------------------
+
+    name | rank | runs |      mean |        sd | timesBaseline
+---------|------|------|-----------|-----------|--------------
+cysparse |    1 |  100 | 0.0002072 | 2.102e-05 |           1.0
+pysparse |    2 |  100 |  0.000311 | 1.885e-05 |  1.5007248211
+
+1-norm with 80,000 elements and size = 100,000
+----------------------------------------------
+
+    name | rank | runs |      mean |        sd | timesBaseline
+---------|------|------|-----------|-----------|--------------
+cysparse |    1 |  100 | 0.0003072 |  1.14e-05 |           1.0
+pysparse |    2 |  100 | 0.0005476 | 3.806e-05 | 1.78245584081
+
+Each of the above 800 runs were run in random, non-consecutive order by
+`benchmark` v0.1.5 (http://jspi.es/benchmark) with Python 2.7.5+
+Linux-3.11.0-12-generic-x86_64 on 2016-01-23 23:33:26.
+

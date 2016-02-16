@@ -1,3 +1,6 @@
+#!python
+    #cython: boundscheck=False, wraparound=False, initializedcheck=False
+    
 from cysparse.common_types.cysparse_types cimport *
 from cysparse.sparse.s_mat cimport SparseMatrix, unexposed_value, MUTABLE_SPARSE_MAT_DEFAULT_SIZE_HINT, MakeMatrixLikeString
 

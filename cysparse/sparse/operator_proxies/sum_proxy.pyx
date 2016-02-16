@@ -1,4 +1,4 @@
-from cysparse.sparse.operator_proxies.op_proxy cimport OpProxy
+from cysparse.sparse.operator_proxies.op_matrix_proxy cimport OpMatrixProxy
 from cysparse.sparse.operator_proxies.mul_proxy cimport MulProxy
 
 from cpython cimport Py_INCREF, Py_DECREF, PyObject
@@ -10,7 +10,7 @@ cimport numpy as cnp
 
 cnp.import_array()
 
-cdef class SumProxy(OpProxy):
+cdef class SumProxy(OpMatrixProxy):
     def __cinit__(self, left_operand, right_operand, bint real_sum=True):
 
         assert left_operand.nrow == right_operand.nrow and left_operand.ncol == right_operand.ncol,\

@@ -1,0 +1,40 @@
+
+Benchmark Report
+================
+
+Generalize norm with 100 elements and size = 1,000 for a symmetrical matrix
+---------------------------------------------------------------------------
+
+    name | rank | runs |      mean |        sd | timesBaseline
+---------|------|------|-----------|-----------|--------------
+cysparse |    1 |  100 | 5.937e-07 | 6.662e-07 |           1.0
+pysparse |    2 |  100 | 1.018e-06 | 1.147e-06 | 1.71485943775
+
+Generalize norm with 1,000 elements and size = 10,000 for a symmetrical matrix
+------------------------------------------------------------------------------
+
+    name | rank | runs |      mean |        sd | timesBaseline
+---------|------|------|-----------|-----------|--------------
+cysparse |    1 |  100 | 6.628e-07 | 4.964e-07 |           1.0
+pysparse |    2 |  100 | 6.247e-06 | 5.341e-05 | 9.42446043165
+
+Generalize norm with 10,000 elements and size = 100,000 for a symmetrical matrix
+--------------------------------------------------------------------------------
+
+    name | rank | runs |      mean |        sd | timesBaseline
+---------|------|------|-----------|-----------|--------------
+cysparse |    1 |  100 | 3.099e-07 | 5.933e-07 |           1.0
+pysparse |    2 |  100 | 0.0004953 |  0.004949 | 1597.97692308
+
+Generalize norm with 80,000 elements and size = 100,000 for a symmetrical matrix
+--------------------------------------------------------------------------------
+
+    name | rank | runs |      mean |        sd | timesBaseline
+---------|------|------|-----------|-----------|--------------
+cysparse |    1 |  100 | 3.672e-07 | 7.079e-07 |           1.0
+pysparse |    2 |  100 |    0.0313 |     0.313 |       85250.5
+
+Each of the above 800 runs were run in random, non-consecutive order by
+`benchmark` v0.1.5 (http://jspi.es/benchmark) with Python 2.7.5+
+Linux-3.11.0-12-generic-x86_64 on 2016-01-23 23:34:41.
+

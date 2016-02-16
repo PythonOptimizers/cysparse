@@ -12,6 +12,7 @@ from config.config import get_path_option
 from distutils.core import setup
 from setuptools import find_packages
 from distutils.extension import Extension
+from distutils import sysconfig
 
 import numpy as np
 
@@ -76,6 +77,7 @@ if use_cython:
 
 # Debug mode?
 use_debug_symbols = cysparse_config.getboolean('CODE_GENERATION', 'use_debug_symbols')
+use_compiler_optimization = cysparse_config.getboolean('CODE_GENERATION', 'use_compiler_optimization')
 
 ########################################################################################################################
 # EXTENSIONS
@@ -87,25 +89,42 @@ ext_params['include_dirs'] = include_dirs
 # -Wno-unused-function is potentially dangerous... use with care!
 # '-DNPY_NO_DEPRECATED_API=NPY_1_7_API_VERSION': doesn't work with Cython... because it **does** use a deprecated version...
 
+ext_params['extra_compile_args'] = ['-std=c99', '-Wno-unused-function']
+ext_params['extra_link_args'] = []
 
 if not use_debug_symbols:
-    ext_params['extra_compile_args'] = ["-O2", '-std=c99', '-Wno-unused-function']
-    ext_params['extra_link_args'] = []
+    key_to_modify = None
+    try:
+        key_to_modify = 'PY_CORE_CFLAGS'
+        sysconfig._config_vars[key_to_modify]
+    except:
+        key_to_modify = 'PY_CFLAGS'
+    cflags = sysconfig._config_vars[key_to_modify]
+    cflags = cflags.replace(' -g ', ' ')
+    sysconfig._config_vars[key_to_modify] = cflags
 else:
-    ext_params['extra_compile_args'] = ["-g", '-std=c99', '-Wno-unused-function']
-    ext_params['extra_link_args'] = ["-g"]
+    ext_params['extra_compile_args'].append("-g")
+    ext_params['extra_link_args'].append("-g")
+
+if use_compiler_optimization:
+    ext_params['extra_compile_args'].append("-O3")
+else:
+    ext_params['extra_compile_args'].append("-O2")
+
 
 #-----------------------------------------------------------------------------------------------------------------------
 #                                                *** types ***
 base_ext_params = copy.deepcopy(ext_params)
 base_ext = [
     Extension(name="cysparse.common_types.cysparse_types",
-              sources=["cysparse/common_types/cysparse_types.pxd", "cysparse/common_types/cysparse_types.pyx"]),
+              sources=["cysparse/common_types/cysparse_types.pxd", "cysparse/common_types/cysparse_types.pyx"],
+              **base_ext_params),
     Extension(name="cysparse.common_types.cysparse_numpy_types",
               sources=["cysparse/common_types/cysparse_numpy_types.pxd", "cysparse/common_types/cysparse_numpy_types.pyx"],
               **base_ext_params),
     Extension(name="cysparse.common_types.cysparse_generic_types",
-              sources=["cysparse/common_types/cysparse_generic_types.pxd", "cysparse/common_types/cysparse_generic_types.pyx"]),
+              sources=["cysparse/common_types/cysparse_generic_types.pxd", "cysparse/common_types/cysparse_generic_types.pyx"],
+              **base_ext_params),
     ]
 
 #-----------------------------------------------------------------------------------------------------------------------
@@ -1003,6 +1022,30 @@ sparse_ext = [
   Extension(name="cysparse.sparse.operator_proxies.op_proxy",
             sources=["cysparse/sparse/operator_proxies/op_proxy.pxd",
                      "cysparse/sparse/operator_proxies/op_proxy.pyx"],
+            **sparse_ext_params),
+
+  ######################
+  # ### OpScalarProxy ###
+  ######################
+  Extension(name="cysparse.sparse.operator_proxies.op_scalar_proxy",
+            sources=["cysparse/sparse/operator_proxies/op_scalar_proxy.pxd",
+                     "cysparse/sparse/operator_proxies/op_scalar_proxy.pyx"],
+            **sparse_ext_params),
+
+  ######################
+  # ### ScalarMulProxy ###
+  ######################
+  Extension(name="cysparse.sparse.operator_proxies.scalar_mul_proxy",
+            sources=["cysparse/sparse/operator_proxies/scalar_mul_proxy.pxd",
+                     "cysparse/sparse/operator_proxies/scalar_mul_proxy.pyx"],
+            **sparse_ext_params),
+
+  ######################
+  # ### OpMatrixProxy ###
+  ######################
+  Extension(name="cysparse.sparse.operator_proxies.op_matrix_proxy",
+            sources=["cysparse/sparse/operator_proxies/op_matrix_proxy.pxd",
+                     "cysparse/sparse/operator_proxies/op_matrix_proxy.pyx"],
             **sparse_ext_params),
 
   ######################

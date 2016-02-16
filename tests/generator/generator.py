@@ -3,7 +3,10 @@ Very basic test unit generator.
 
 """
 import sys
-from collections import OrderedDict
+try:
+    from collections import OrderedDict
+except ImportError:
+    from ordereddict import OrderedDict
 
 
 # Copied from generate_code.py: any better idea?

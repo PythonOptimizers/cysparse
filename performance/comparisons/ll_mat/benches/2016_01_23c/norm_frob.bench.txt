@@ -1,0 +1,40 @@
+
+Benchmark Report
+================
+
+Frobenius norm with 100 elements and size = 1,000
+-------------------------------------------------
+
+    name | rank | runs |      mean |        sd | timesBaseline
+---------|------|------|-----------|-----------|--------------
+cysparse |    1 |  100 | 1.898e-06 |  5.74e-07 |           1.0
+pysparse |    2 |  100 | 2.446e-06 | 6.791e-07 | 1.28894472362
+
+Frobenius norm with 1,000 elements and size = 10,000
+----------------------------------------------------
+
+    name | rank | runs |      mean |        sd | timesBaseline
+---------|------|------|-----------|-----------|--------------
+cysparse |    1 |  100 |  1.17e-05 | 5.653e-07 |           1.0
+pysparse |    2 |  100 | 1.289e-05 | 4.607e-07 | 1.10169146118
+
+Frobenius norm with 10,000 elements and size = 100,000
+------------------------------------------------------
+
+    name | rank | runs |      mean |        sd | timesBaseline
+---------|------|------|-----------|-----------|--------------
+cysparse |    1 |  100 | 6.049e-05 | 2.551e-06 |           1.0
+pysparse |    2 |  100 | 6.426e-05 | 5.666e-06 | 1.06231769807
+
+Frobenius norm with 80,000 elements and size = 100,000
+------------------------------------------------------
+
+    name | rank | runs |      mean |        sd | timesBaseline
+---------|------|------|-----------|-----------|--------------
+cysparse |    1 |  100 | 0.0001387 | 2.472e-05 |           1.0
+pysparse |    2 |  100 | 0.0001589 |  2.15e-05 | 1.14564675548
+
+Each of the above 800 runs were run in random, non-consecutive order by
+`benchmark` v0.1.5 (http://jspi.es/benchmark) with Python 2.7.5+
+Linux-3.11.0-12-generic-x86_64 on 2016-01-23 23:57:02.
+

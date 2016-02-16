@@ -1,0 +1,40 @@
+
+Benchmark Report
+================
+
+Simple update_add_at with 100 elements and size = 1,000 and 100 elements to add
+-------------------------------------------------------------------------------
+
+    name | rank | runs |      mean |        sd | timesBaseline
+---------|------|------|-----------|-----------|--------------
+cysparse |    1 |   10 | 5.698e-06 | 4.656e-06 |           1.0
+pysparse |    2 |   10 | 5.841e-06 | 4.928e-06 | 1.02510460251
+
+Simple update_add_at with 1,000 elements and size = 10,000 and 1,000 elements to add
+------------------------------------------------------------------------------------
+
+    name | rank | runs |      mean |        sd | timesBaseline
+---------|------|------|-----------|-----------|--------------
+cysparse |    1 |   10 | 9.394e-06 | 1.331e-06 |           1.0
+pysparse |    2 |   10 | 1.268e-05 | 2.247e-06 | 1.35025380711
+
+Simple update_add_at with 10,000 elements and size = 100,000 and 10,000 elements to add
+---------------------------------------------------------------------------------------
+
+    name | rank | runs |      mean |        sd | timesBaseline
+---------|------|------|-----------|-----------|--------------
+cysparse |    1 |   10 | 3.924e-05 | 1.119e-06 |           1.0
+pysparse |    2 |   10 |  5.56e-05 | 1.491e-05 | 1.41676792224
+
+Simple update_add_at with 80,000 elements and size = 100,000 and 50,000 elements to add
+---------------------------------------------------------------------------------------
+
+    name | rank | runs |      mean |        sd | timesBaseline
+---------|------|------|-----------|-----------|--------------
+cysparse |    1 |   10 | 0.0001857 | 3.198e-06 |           1.0
+pysparse |    2 |   10 | 0.0004136 | 4.236e-05 | 2.22724354859
+
+Each of the above 80 runs were run in random, non-consecutive order by
+`benchmark` v0.1.5 (http://jspi.es/benchmark) with Python 2.7.5+
+Linux-3.11.0-12-generic-x86_64 on 2016-01-23 23:56:42.
+

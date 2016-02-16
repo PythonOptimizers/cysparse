@@ -3,6 +3,7 @@ from cysparse.common_types.cysparse_types import *
 
 from cysparse.sparse.operator_proxies.mul_proxy import MulProxy
 from cysparse.sparse.operator_proxies.sum_proxy import SumProxy
+from cysparse.sparse.operator_proxies.scalar_mul_proxy import ScalarMulProxy
 
 # Import the C-level symbols of numpy
 cimport numpy as cnp
@@ -386,8 +387,16 @@ cdef class SparseMatrix:
             i.e. a proxy to a matrix-like multiplication.
 
         """
+        # In Cython, there is no __rmul__ method, instead, arguments are swapped
+        # see http://docs.cython.org/src/userguide/special_methods.html#arithmetic-methods
         if cnp.PyArray_Check(B) and B.ndim == 1:
             return self.matvec(B)
+
+        elif is_scalar(B):
+            return ScalarMulProxy(B, self)
+
+        elif is_scalar(self):
+            return ScalarMulProxy(self, B)
 
         return MulProxy(self, B)
 
@@ -399,6 +408,9 @@ cdef class SparseMatrix:
             A :class:`SumProxy`, i.e. a proxy to a matrix-like sum.
 
         """
+        if is_scalar(B) or is_scalar(self):
+            raise RuntimeError("This operation is not allowed")
+
         return SumProxy(self, B)
 
     def __sub__(self, other):
@@ -409,6 +421,9 @@ cdef class SparseMatrix:
             A :class:`SumProxy`, i.e. a proxy to a matrix-like sum.
 
         """
+        if is_scalar(B) or is_scalar(self):
+            raise RuntimeError("This operation is not allowed")
+
         return SumProxy(self, B, real_sum=False)
 
     #########################

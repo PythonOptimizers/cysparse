@@ -4,6 +4,8 @@ from cysparse.sparse.s_mat cimport PySparseMatrix_Check, \
                                    PyConjugateTransposedSparseMatrix_Check, \
                                    PyLLSparseMatrixView_Check
 
+from cysparse.common_types.cysparse_types cimport is_scalar
+
 
 cdef class OpProxy:
     """
@@ -13,24 +15,8 @@ cdef class OpProxy:
         **Only** works with operation like matrix-addition, -substration and -multiplication. They all share some common
         ground that we use here.
     """
-    def __cinit__(self, left_operand, right_operand, *args, **kwargs):
-
-        assert self.operand_is_accepted(left_operand), "Operand %s is not accepted for this operator" % type(left_operand)
-        assert self.operand_is_accepted(right_operand), "Operand %s is not accepted for this operator" % type(right_operand)
-
-        # test of itype and dtype
-        assert left_operand.dtype == right_operand.dtype, "Both operands must share the same dtype"
-        assert left_operand.itype == right_operand.itype, "Both operands must share the same itype"
-
-        self.left_operand = left_operand
-        self.right_operand = right_operand
-
-        self.nrow = self.left_operand.nrow
-        self.ncol = self.right_operand.ncol
-        self.nnz = self.left_operand.nnz
-
-        self.dtype = self.left_operand.dtype
-        self.itype = self.left_operand.itype
+    def __cinit__(self, *args, **kwargs):
+        pass
 
     ####################################################################################################################
     # Helper methods
@@ -50,6 +36,30 @@ cdef class OpProxy:
 
         return is_accepted
 
+    cdef scalar_is_accepted(self, scalar):
+        return is_scalar(scalar)
+
+    ####################################################################################################################
+    # Materialisation methods
+    ####################################################################################################################
+    def to_ndarray(self):
+        raise NotImplementedError("Transform first to a LLSparseMatrix and then call 'to_ndarray()'")
+
+    def to_ll(self):
+        from cysparse.sparse.ll_mat import LLSparseMatrix
+        A = LLSparseMatrix(nrow=self.nrow, ncol=self.ncol, dtype=self.dtype, itype=self.itype, store_zero=False, size_hint=self.nnz)
+        for i in xrange(self.nrow):
+            for j in xrange(self.ncol):
+                A[i, j] = self[i, j]
+
+        return A
+
+    def to_csr(self):
+        raise NotImplementedError("Transform first to a LLSparseMatrix and then call 'to_csr()'")
+
+    def to_csc(self):
+        raise NotImplementedError("Transform first to a LLSparseMatrix and then call 'to_csr()'")
+
     ####################################################################################################################
     # Special methods
     ####################################################################################################################
@@ -64,25 +74,3 @@ cdef class OpProxy:
 
     def __mul__(self, other):
         raise NotImplementedError()
-
-    ####################################################################################################################
-    # Materialisation methods
-    ####################################################################################################################
-    def to_ndarray(self):
-        raise NotImplementedError("Transform first to a LLSparseMatrix and then call 'to_ndarray()'")
-
-    def to_ll(self):
-        from cysparse.sparse.ll_mat import LLSparseMatrix
-        A = LLSparseMatrix(nrow=self.nrow, ncol=self.ncol, dtype=self.dtype, itype=self.itype, store_zero=False, size_hint=self.left_operand.nnz)
-        for i in xrange(self.nrow):
-            for j in xrange(self.ncol):
-                A[i, j] = self[i, j]
-
-        return A
-
-    def to_csr(self):
-        raise NotImplementedError("Transform first to a LLSparseMatrix and then call 'to_csr()'")
-
-    def to_csc(self):
-        raise NotImplementedError("Transform first to a LLSparseMatrix and then call 'to_csr()'")
-

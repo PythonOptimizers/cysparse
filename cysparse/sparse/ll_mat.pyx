@@ -1,4 +1,6 @@
-
+#!python
+    #cython: boundscheck=False, wraparound=False, initializedcheck=False
+    
 from cysparse.sparse.ll_mat cimport LL_MAT_DEFAULT_SIZE_HINT
 from cysparse.sparse.s_mat cimport unexposed_value
 

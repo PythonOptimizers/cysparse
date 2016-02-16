@@ -1,0 +1,35 @@
+
+Benchmark Report
+================
+
+Simple element assignment with 1000 elements and size = 10,000
+--------------------------------------------------------------
+
+        name | rank | runs |      mean |        sd | timesBaseline
+-------------|------|------|-----------|-----------|--------------
+    cysparse |    1 |  100 | 0.0001883 | 9.283e-06 |           1.0
+    pysparse |    2 |  100 | 0.0002025 | 8.572e-06 | 1.07510411788
+scipy sparse |    3 |  100 |  0.004108 | 7.773e-05 | 21.8138536906
+
+Simple element assignment with 10,000 elements and size = 100,000
+-----------------------------------------------------------------
+
+        name | rank | runs |     mean |        sd | timesBaseline
+-------------|------|------|----------|-----------|--------------
+    cysparse |    1 |  100 | 0.001884 | 3.604e-05 |           1.0
+    pysparse |    2 |  100 | 0.002142 | 3.874e-05 | 1.13691032095
+scipy sparse |    3 |  100 |  0.04161 | 0.0008031 | 22.0874467552
+
+Simple element assignment with 100,000 elements and size = 1,000,000
+--------------------------------------------------------------------
+
+        name | rank | runs |    mean |        sd | timesBaseline
+-------------|------|------|---------|-----------|--------------
+    cysparse |    1 |  100 | 0.01906 | 0.0008431 |           1.0
+    pysparse |    2 |  100 | 0.02167 | 0.0005085 | 1.13670138896
+scipy sparse |    3 |  100 |  0.4217 |   0.01134 | 22.1222691699
+
+Each of the above 900 runs were run in random, non-consecutive order by
+`benchmark` v0.1.5 (http://jspi.es/benchmark) with Python 2.7.5+
+Linux-3.11.0-12-generic-x86_64 on 2016-01-23 23:34:19.
+

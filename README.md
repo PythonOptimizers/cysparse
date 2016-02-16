@@ -2,10 +2,15 @@
 
 Fast sparse matrix library for Python/Cython.
 
+[![Build Status](https://travis-ci.com/PythonOptimizers/cysparse.svg?token=ydgwcgKueSZx3k7qYsxd&branch=develop)](https://travis-ci.com/PythonOptimizers/cysparse)
+
 
 :warning: `COMPLEX256_T` is **no** longer supported :warning:
  
 This is the new version with a new API.
+
+**Only** Python 2.7 is supported for now. We plan to support Python 3.3 soon. The library is **only** tested on linux 64 bits. Again, we plan to test more 
+architectures later.
  
 Enjoy!
 
@@ -105,13 +110,19 @@ See [Wiki](https://github.com/Funartech/cysparse/wiki) for details!
 
 ## Release history
 
+- Version 0.7.1 released on Feb 16, 2016
+  
+  Linear combinations of Matrices/matrix-like objects are now possible.
+  
 - Version 0.7.0 released on Jan 20, 2016
 
   Introduction of Travis.
   create_conjugate_transpose() -> create_adjoint()
   
-- Version 0.6.0 released on Jan 09, 2016
+- Version 0.6.0 released on Jan 19, 2016
 
+  Changed matvec_htransp -> matvec_adj and matdot_htransp -> matdot_adj.
+  
 - Version 0.5.0 released on Jan 09, 2016
 
   Introduction of Operator Proxies (SumOp, MulOp).

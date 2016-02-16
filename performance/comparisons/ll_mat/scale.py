@@ -13,8 +13,8 @@ import benchmark
 import numpy as np
 
 # CySparse
-from cysparse.sparse.ll_mat import NewLLSparseMatrix
-from cysparse.types.cysparse_types import INT32_T, INT64_T, FLOAT64_T
+from cysparse.sparse.ll_mat import LLSparseMatrix
+from cysparse.common_types.cysparse_types import INT32_T, INT64_T, FLOAT64_T
 
 # PySparse
 from pysparse.sparse import spmatrix
@@ -44,7 +44,7 @@ class LLMatScaleBenchmark(benchmark.Benchmark):
 
         self.sigma = 10.47
 
-        self.A_c = NewLLSparseMatrix(size=self.size, size_hint=self.nbr_elements, dtype=FLOAT64_T)
+        self.A_c = LLSparseMatrix(size=self.size, size_hint=self.nbr_elements, dtype=FLOAT64_T)
         construct_sparse_matrix(self.A_c, self.size, self.nbr_elements)
 
         self.A_p = spmatrix.ll_mat(self.size, self.size, self.nbr_elements)
@@ -82,7 +82,7 @@ class LLMatScaleBenchmark_1(LLMatScaleBenchmark):
 
         self.sigma = 10.47
 
-        self.A_c = NewLLSparseMatrix(size=self.size, size_hint=self.nbr_elements, dtype=FLOAT64_T)
+        self.A_c = LLSparseMatrix(size=self.size, size_hint=self.nbr_elements, dtype=FLOAT64_T)
         construct_sparse_matrix(self.A_c, self.size, self.nbr_elements)
 
         self.A_p = spmatrix.ll_mat(self.size, self.size, self.nbr_elements)
@@ -103,7 +103,7 @@ class LLMatScaleBenchmark_2(LLMatScaleBenchmark):
 
         self.sigma = 10.47
 
-        self.A_c = NewLLSparseMatrix(size=self.size, size_hint=self.nbr_elements, dtype=FLOAT64_T)
+        self.A_c = LLSparseMatrix(size=self.size, size_hint=self.nbr_elements, dtype=FLOAT64_T)
         construct_sparse_matrix(self.A_c, self.size, self.nbr_elements)
 
         self.A_p = spmatrix.ll_mat(self.size, self.size, self.nbr_elements)
@@ -124,7 +124,7 @@ class LLMatScaleBenchmark_3(LLMatScaleBenchmark):
 
         self.sigma = 10.47
 
-        self.A_c = NewLLSparseMatrix(size=self.size, size_hint=self.nbr_elements, dtype=FLOAT64_T)
+        self.A_c = LLSparseMatrix(size=self.size, size_hint=self.nbr_elements, dtype=FLOAT64_T)
         construct_sparse_matrix(self.A_c, self.size, self.nbr_elements)
 
         self.A_p = spmatrix.ll_mat(self.size, self.size, self.nbr_elements)

@@ -6,3 +6,5 @@ fortranformat==0.2.5
 numpy==1.9.2
 sphinx-bootstrap-theme==0.4.5
 wsgiref==0.1.2
+configparser==3.3.0.post2
+ordereddict==1.1

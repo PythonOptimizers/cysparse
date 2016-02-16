@@ -1,3 +1,4 @@
+@cython_compiler_directives@
 from cysparse.common_types.cysparse_types cimport *
 
 cdef sort_array_@index@(@index@ * a, @index@ start, @index@ end):

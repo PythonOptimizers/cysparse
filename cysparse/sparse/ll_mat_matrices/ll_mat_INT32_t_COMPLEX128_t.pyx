@@ -1,3 +1,6 @@
+#!python
+    #cython: boundscheck=False, wraparound=False, initializedcheck=False
+    
 from __future__ import print_function
 
 ########################################################################################################################
@@ -2105,7 +2108,9 @@ cdef class LLSparseMatrix_INT32_t_COMPLEX128_t(MutableSparseMatrix_INT32_t_COMPL
         else:
             return multiply_transposed_ll_mat_with_self_scaled(self, d)
 
-    #def __rmul__(self, B):
+
+    def __rmul__(self, other):
+        print("rmul from ll_mat")
 
     # TODO: change this
     def __imul__(self, sigma):

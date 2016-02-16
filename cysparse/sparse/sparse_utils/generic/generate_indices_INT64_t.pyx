@@ -14,8 +14,9 @@ Indices can be given in **any** order or **repeated**.
 
 Numpy arrays can be strided or not.
 """
-#defining NPY_NO_DEPRECATED_API NPY_1_7_API_VERSION
-
+#!python
+    #cython: boundscheck=False, wraparound=False, initializedcheck=False
+    
 from cysparse.common_types.cysparse_types cimport *
 from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
 
