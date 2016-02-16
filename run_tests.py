@@ -77,9 +77,11 @@ def launch_nosetests(pattern=None, verbose=False, use_libraries=None):
 
     if verbose:
         print("launch command: '%s':" % " ".join(commands_list))
-    subprocess.call(commands_list)
+    result = subprocess.call(commands_list)
 
     os.chdir(current_dir)
+
+    return result
 
 
 def launch_unittest(pattern=None, verbose=False):
@@ -96,9 +98,11 @@ def launch_unittest(pattern=None, verbose=False):
 
     if verbose:
         print("launch command: '%s':" % " ".join(commands_list))
-    subprocess.call(commands_list)
+    result = subprocess.call(commands_list)
 
     os.chdir(current_dir)
+
+    return result
 
 if __name__ == "__main__":
 
@@ -140,8 +144,10 @@ if __name__ == "__main__":
         if arg_options.verbose:
             print("done")
 
-
+    result = -1
     if arg_options.dont_use_nose:
-        launch_unittest(arg_options.pattern, arg_options.verbose)
+        result = launch_unittest(arg_options.pattern, arg_options.verbose)
     else:
-        launch_nosetests(arg_options.pattern, arg_options.verbose)
+        result = launch_nosetests(arg_options.pattern, arg_options.verbose)
+
+    sys.exit(result)
