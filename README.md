@@ -110,6 +110,10 @@ See [Wiki](https://github.com/Funartech/cysparse/wiki) for details!
 
 ## Release history
 
+- Version 0.7.1 released on Feb 16, 2016
+  
+  Linear combinations of Matrices/matrix-like objects are now possible.
+  
 - Version 0.7.0 released on Jan 20, 2016
 
   Introduction of Travis.
