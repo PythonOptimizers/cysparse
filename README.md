@@ -8,6 +8,9 @@ Fast sparse matrix library for Python/Cython.
 :warning: `COMPLEX256_T` is **no** longer supported :warning:
  
 This is the new version with a new API.
+
+**Only** Python 2.7 is supported for now. We plan to support Python 3.3 soon. The library is **only** tested on linux 64 bits. Again, we plan to test more 
+architectures later.
  
 Enjoy!
 
