@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 """
-This script generates a template for unit tests for the :program:`CySpasre` library.
+This script generates a template for unit tests for the :program:`CySparse` library.
 
 The template can then be completed by hand.
 

@@ -9,8 +9,7 @@ Fast sparse matrix library for Python/Cython.
  
 This is the new version with a new API.
 
-**Only** Python 2.7 is supported for now. We plan to support Python 3.3 soon. The library is **only** tested on linux 64 bits. Again, we plan to test more 
-architectures later.
+**Only** Python 2.7 is supported for now. We plan to support Python 3.3 soon.
  
 Enjoy!
 
@@ -109,6 +108,10 @@ Try the ``-h`` switch to see what options are available. Note that you need to i
 See [Wiki](https://github.com/Funartech/cysparse/wiki) for details!
 
 ## Release history
+
+- Version 0.7.2 released on Feb 17, 2016
+
+  Added some tests for the operator proxies. Only for linear combinations of matrix-like objects. Now at 13859 tests.
 
 - Version 0.7.1 released on Feb 16, 2016
   
