@@ -64,7 +64,7 @@ If you intend to generate the documention:
 
 To run the tests:
 
-- nose;
+- nose or unittest;
 
 to run the performance tests:
 

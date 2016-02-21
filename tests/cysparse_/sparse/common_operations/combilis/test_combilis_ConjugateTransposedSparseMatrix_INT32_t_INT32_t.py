@@ -1,7 +1,13 @@
 #!/usr/bin/env python
 
 """
-This file tests XXX for all matrix-likes objects.
+This file tests linear combinations for all matrix-likes objects.
+
+The following expression:
+
+:math:`2 * A - 3 * B`
+
+is not computeted right away. Instead, a chain of lazy operator proxies are created.
 
 """
 
