@@ -1,3 +1,4 @@
+@cython_compiler_directives@
 ########################################################################################################################
 #
 # Several helpers that deal with generic types.

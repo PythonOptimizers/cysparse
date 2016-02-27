@@ -1,3 +1,4 @@
+@cython_compiler_directives@
 """
 Diverse utilities to translate one matrix format into another.
 

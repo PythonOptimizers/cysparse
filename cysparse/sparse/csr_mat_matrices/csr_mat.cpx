@@ -1,3 +1,4 @@
+@cython_compiler_directives@
 """
 Condensed Sparse Row (CSR) Format Matrices.
 

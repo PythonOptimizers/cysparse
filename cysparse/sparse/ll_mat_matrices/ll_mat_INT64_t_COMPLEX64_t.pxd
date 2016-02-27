@@ -1,4 +1,6 @@
-#define NPY_NO_DEPRECATED_API NPY_1_7_API_VERSION
+#!python
+#cython: boundscheck=False, wraparound=False, initializedcheck=False
+    
 
 from cysparse.common_types.cysparse_types cimport *
 

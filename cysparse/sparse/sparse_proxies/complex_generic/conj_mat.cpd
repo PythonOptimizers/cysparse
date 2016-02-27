@@ -1,3 +1,4 @@
+@cython_compiler_directives@
 """
 Syntactic sugar: we want to use the following code: ``A.conj * b`` to compute :math:`\textrm{conj}(A) * b`.
 

@@ -1,3 +1,6 @@
+#!python
+#cython: boundscheck=False, wraparound=False, initializedcheck=False
+    
 """
 Some pure C functions to deal with index objects.
 
@@ -15,7 +18,7 @@ Indices can be given in **any** order or **repeated**.
 Numpy arrays can be strided or not.
 """
 #!python
-    #cython: boundscheck=False, wraparound=False, initializedcheck=False
+#cython: boundscheck=False, wraparound=False, initializedcheck=False
     
 from cysparse.common_types.cysparse_types cimport *
 from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free

@@ -1,3 +1,6 @@
+#!python
+#cython: boundscheck=False, wraparound=False, initializedcheck=False
+    
 """
 Condensed Sparse Row (CSR) Format Matrices.
 

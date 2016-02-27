@@ -1,3 +1,4 @@
+@cython_compiler_directives@
 """
 Some pure C functions to deal with index objects.
 

@@ -128,7 +128,7 @@ else:
 CYTHON_COMPILER_DIRECTIVES =""""""
 if cysparse_config.getboolean('CODE_GENERATION', 'use_cython_optimization'):
     CYTHON_COMPILER_DIRECTIVES = """#!python
-    #cython: boundscheck=False, wraparound=False, initializedcheck=False
+#cython: boundscheck=False, wraparound=False, initializedcheck=False
     """
 
 #####################################################

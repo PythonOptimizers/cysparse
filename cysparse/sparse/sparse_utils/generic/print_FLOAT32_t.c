@@ -638,7 +638,7 @@ struct __pyx_opt_args_8cysparse_6sparse_12sparse_utils_7generic_15print_FLOAT32_
 struct __pyx_opt_args_8cysparse_6sparse_12sparse_utils_7generic_15print_FLOAT32_t_conjugated_element_to_string_FLOAT32_t;
 struct __pyx_opt_args_8cysparse_6sparse_12sparse_utils_7generic_15print_FLOAT32_t_empty_to_string_FLOAT32_t;
 
-/* "cysparse/sparse/sparse_utils/generic/print_FLOAT32_t.pxd":4
+/* "cysparse/sparse/sparse_utils/generic/print_FLOAT32_t.pxd":7
  * 
  * 
  * cdef element_to_string_FLOAT32_t(FLOAT32_t v, int cell_width=?)             # <<<<<<<<<<<<<<
@@ -650,7 +650,7 @@ struct __pyx_opt_args_8cysparse_6sparse_12sparse_utils_7generic_15print_FLOAT32_
   int cell_width;
 };
 
-/* "cysparse/sparse/sparse_utils/generic/print_FLOAT32_t.pxd":5
+/* "cysparse/sparse/sparse_utils/generic/print_FLOAT32_t.pxd":8
  * 
  * cdef element_to_string_FLOAT32_t(FLOAT32_t v, int cell_width=?)
  * cdef conjugated_element_to_string_FLOAT32_t(FLOAT32_t v, int cell_width=?)             # <<<<<<<<<<<<<<
@@ -661,7 +661,7 @@ struct __pyx_opt_args_8cysparse_6sparse_12sparse_utils_7generic_15print_FLOAT32_
   int cell_width;
 };
 
-/* "cysparse/sparse/sparse_utils/generic/print_FLOAT32_t.pxd":6
+/* "cysparse/sparse/sparse_utils/generic/print_FLOAT32_t.pxd":9
  * cdef element_to_string_FLOAT32_t(FLOAT32_t v, int cell_width=?)
  * cdef conjugated_element_to_string_FLOAT32_t(FLOAT32_t v, int cell_width=?)
  * cdef empty_to_string_FLOAT32_t(int cell_width=?)             # <<<<<<<<<<<<<<
@@ -1608,7 +1608,7 @@ PyMODINIT_FUNC PyInit_print_FLOAT32_t(void)
 
   /* "cysparse/sparse/sparse_utils/generic/print_FLOAT32_t.pyx":1
  * #!python             # <<<<<<<<<<<<<<
- *     #cython: boundscheck=False, wraparound=False, initializedcheck=False
+ * #cython: boundscheck=False, wraparound=False, initializedcheck=False
  * 
  */
   __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}

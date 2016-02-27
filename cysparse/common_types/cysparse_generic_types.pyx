@@ -1,3 +1,6 @@
+#!python
+#cython: boundscheck=False, wraparound=False, initializedcheck=False
+    
 ########################################################################################################################
 #
 # Several helpers that deal with generic types.

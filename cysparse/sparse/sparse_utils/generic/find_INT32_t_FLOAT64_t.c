@@ -1460,7 +1460,7 @@ PyMODINIT_FUNC PyInit_find_INT32_t_FLOAT64_t(void)
 
   /* "cysparse/sparse/sparse_utils/generic/find_INT32_t_FLOAT64_t.pyx":1
  * #!python             # <<<<<<<<<<<<<<
- *     #cython: boundscheck=False, wraparound=False, initializedcheck=False
+ * #cython: boundscheck=False, wraparound=False, initializedcheck=False
  * 
  */
   __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}

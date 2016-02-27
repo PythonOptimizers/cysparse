@@ -1,4 +1,4 @@
-#define NPY_NO_DEPRECATED_API NPY_1_7_API_VERSION
+@cython_compiler_directives@
 
 from cysparse.common_types.cysparse_types cimport *
 

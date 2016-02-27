@@ -1,3 +1,6 @@
+#!python
+#cython: boundscheck=False, wraparound=False, initializedcheck=False
+    
 # TODO: verify if we need to generate this file
 # For the moment I (Nikolaj) 'm leaving it as it is just in case things change...
 

@@ -1,3 +1,6 @@
+#!python
+#cython: boundscheck=False, wraparound=False, initializedcheck=False
+    
 """
 Lightweight object to view a :class:`LLSparseMatrix_INT64_t_INT64_t`.
 

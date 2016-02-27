@@ -1,3 +1,6 @@
+#!python
+#cython: boundscheck=False, wraparound=False, initializedcheck=False
+    
 """
 Syntactic sugar: we want to use the following code: ``A.H * b`` to compute :math:`A^h * b`.
 

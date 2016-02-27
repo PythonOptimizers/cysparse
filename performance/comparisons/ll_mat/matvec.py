@@ -13,6 +13,8 @@ We compare the libraries:
 import benchmark
 import numpy as np
 
+import random as rd
+
 # CySparse
 from cysparse.sparse.ll_mat import LLSparseMatrix
 from cysparse.common_types.cysparse_types import INT32_T, INT64_T, FLOAT64_T
@@ -23,10 +25,33 @@ from pysparse.sparse import spmatrix
 # SciPy
 from scipy.sparse import lil_matrix
 
+
 ########################################################################################################################
 # Helpers
 ########################################################################################################################
 # the same function could be used for all the matrices...
+
+def construct_random_matrices(list_of_matrices, n, nbr_elements):
+
+    nbr_added_elements = 0
+
+    A = list_of_matrices[0]
+
+    while nbr_added_elements != nbr_elements:
+
+        random_index1 = rd.randint(0, n - 1)
+        random_index2 = rd.randint(0, n - 1)
+        random_element = rd.uniform(0, 100)
+
+        # test if element exists
+        if A[random_index1, random_index2] != 0.0:
+            continue
+
+        for matrix in list_of_matrices:
+            matrix[random_index1, random_index2] = random_element
+
+        nbr_added_elements += 1
+
 
 def construct_cysparse_matrix(n, nbr_elements):
     # int is 32 bits on my machine
@@ -71,9 +96,16 @@ class LLMatMatVecBenchmark(benchmark.Benchmark):
         self.nbr_elements = 1000
         self.size = 10000
 
-        self.A_c = construct_cysparse_matrix(n=self.size, nbr_elements=self.nbr_elements)
-        self.A_p = construct_pysparse_matrix(n=self.size, nbr_elements=self.nbr_elements)
-        self.A_s = construct_scipy_sparse_matrix(n=self.size, nbr_elements=self.nbr_elements)
+        self.A_c = LLSparseMatrix(size=self.size, size_hint=self.nbr_elements, itype=INT32_T, dtype=FLOAT64_T)
+        self.A_p = spmatrix.ll_mat(self.size, self.size, self.nbr_elements)
+        self.A_s = lil_matrix((self.size, self.size), dtype=np.float64)
+
+        self.list_of_matrices = []
+        self.list_of_matrices.append(self.A_c)
+        self.list_of_matrices.append(self.A_p)
+        self.list_of_matrices.append(self.A_s)
+
+        construct_random_matrices(self.list_of_matrices, self.size, self.nbr_elements)
 
 
 

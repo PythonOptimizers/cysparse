@@ -1,3 +1,6 @@
+#!python
+#cython: boundscheck=False, wraparound=False, initializedcheck=False
+    
 """
 Syntactic sugar: we want to use the following code: ``A.conj * b`` to compute :math:`\textrm{conj}(A) * b`.
 
