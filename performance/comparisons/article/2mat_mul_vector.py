@@ -1,8 +1,6 @@
 """
 This file compares the multiplication of 2 matrices (CSR * CSC) multiplied by a NumPy vector.
 
-We compute (A * B) * v.
-
 We compare the libraries:
 
 - :program:`CySparse` and
@@ -110,7 +108,7 @@ class LLMatMatVecBenchmark(benchmark.Benchmark):
 class LLMatMatVecBenchmark_2(LLMatMatVecBenchmark):
 
 
-    label = "CSR * CSC * v with 10,000 elements and size = 100,000"
+    label = "matvec with 10,000 elements and size = 100,000"
     each = 100
 
 
@@ -149,7 +147,7 @@ class LLMatMatVecBenchmark_2(LLMatMatVecBenchmark):
 class LLMatMatVecBenchmark_3(LLMatMatVecBenchmark):
 
 
-    label = "CSR * CSC * v with 100,000 elements and size = 1,000,000"
+    label = "matvec with 100,000 elements and size = 1,000,000"
     each = 100
 
 
@@ -188,7 +186,7 @@ class LLMatMatVecBenchmark_3(LLMatMatVecBenchmark):
 class LLMatMatVecBenchmark_4(LLMatMatVecBenchmark):
 
 
-    label = "CSR * CSC * v with 5000 elements and size = 1,000,000"
+    label = "matvec with 5000 elements and size = 1,000,000"
     each = 100
 
 
@@ -220,7 +218,6 @@ class LLMatMatVecBenchmark_4(LLMatMatVecBenchmark):
 
         self.CSC_c = self.B_c.to_csc()
         self.CSC_s = self.B_s.tocsc()
-
         self.v = np.arange(0, self.size, dtype=np.float64)
 
 if __name__ == '__main__':
