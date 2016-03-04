@@ -1,7 +1,8 @@
 """
-This file compares different implementations of ``matvec``, i.e. :math:`A * x`.
+This file compares the multiplication of the transposed matrix multiplied by a NumPy vector.
 
 We compare the libraries:
+
 
 - :program:`CySparse` and
 - :program:`SciPy.sparse`
@@ -18,11 +19,9 @@ import random as rd
 from cysparse.sparse.ll_mat import LLSparseMatrix
 from cysparse.common_types.cysparse_types import INT32_T, INT64_T, FLOAT64_T
 
-# PySparse
-from pysparse.sparse import spmatrix
-
 # SciPy
 from scipy.sparse import lil_matrix
+
 
 ########################################################################################################################
 # Helpers
@@ -49,14 +48,13 @@ def construct_random_matrices(list_of_matrices, n, nbr_elements):
         nbr_added_elements += 1
 
 
-
 ########################################################################################################################
 # Benchmark
 ########################################################################################################################
 class LLMatMatVecBenchmark(benchmark.Benchmark):
 
 
-    label = "matvec with 1000 elements and size = 10,000"
+    label = "CSR * CSC * v with 1000 elements and size = 10,000"
     each = 100
 
 
@@ -74,30 +72,38 @@ class LLMatMatVecBenchmark(benchmark.Benchmark):
 
         construct_random_matrices(self.list_of_matrices, self.size, self.nbr_elements)
 
-        self.CSC_c = self.A_c.to_csc()
-        self.CSC_s = self.A_s.tocsc()
+        self.CSR_c = self.A_c.to_csr()
+        self.CSR_s = self.A_s.tocsr()
+
+        self.B_c = LLSparseMatrix(size=self.size, size_hint=self.nbr_elements, itype=INT32_T, dtype=FLOAT64_T)
+        self.B_s = lil_matrix((self.size, self.size), dtype=np.float64)
+
+        self.list_of_matrices = []
+        self.list_of_matrices.append(self.B_c)
+        self.list_of_matrices.append(self.B_s)
+
+        construct_random_matrices(self.list_of_matrices, self.size, self.nbr_elements)
+
+        self.CSC_c = self.B_c.to_csc()
+        self.CSC_s = self.B_s.tocsc()
+
 
         self.v = np.arange(0, self.size, dtype=np.float64)
 
     #def tearDown(self):
     #    for i in xrange(self.size):
+    #        assert self.w_c[i] == self.w_p[i]
     #        assert self.w_c[i] == self.w_s[i]
 
 
     def test_cysparse(self):
-        self.w_c = self.CSC_c * self.v
-        return
-
-    def test_cysparse2(self):
-        self.CSC_c.matvec(self.v)
+        self.w_c = self.CSR_c * self.CSC_c * self.v
         return
 
     def test_scipy_sparse(self):
-        self.w_s = self.CSC_s * self.v
+        self.w_s = self.CSR_s * self.CSC_s * self.v
         return
 
-    def test_scipy_sparse2(self):
-        self.CSC_s._mul_vector(self.v)
 
 
 class LLMatMatVecBenchmark_2(LLMatMatVecBenchmark):
@@ -121,8 +127,20 @@ class LLMatMatVecBenchmark_2(LLMatMatVecBenchmark):
 
         construct_random_matrices(self.list_of_matrices, self.size, self.nbr_elements)
 
-        self.CSC_c = self.A_c.to_csc()
-        self.CSC_s = self.A_s.tocsc()
+        self.CSR_c = self.A_c.to_csr()
+        self.CSR_s = self.A_s.tocsr()
+
+        self.B_c = LLSparseMatrix(size=self.size, size_hint=self.nbr_elements, itype=INT32_T, dtype=FLOAT64_T)
+        self.B_s = lil_matrix((self.size, self.size), dtype=np.float64)
+
+        self.list_of_matrices = []
+        self.list_of_matrices.append(self.B_c)
+        self.list_of_matrices.append(self.B_s)
+
+        construct_random_matrices(self.list_of_matrices, self.size, self.nbr_elements)
+
+        self.CSC_c = self.B_c.to_csc()
+        self.CSC_s = self.B_s.tocsc()
 
         self.v = np.arange(0, self.size, dtype=np.float64)
 
@@ -148,8 +166,20 @@ class LLMatMatVecBenchmark_3(LLMatMatVecBenchmark):
 
         construct_random_matrices(self.list_of_matrices, self.size, self.nbr_elements)
 
-        self.CSC_c = self.A_c.to_csc()
-        self.CSC_s = self.A_s.tocsc()
+        self.CSR_c = self.A_c.to_csr()
+        self.CSR_s = self.A_s.tocsr()
+
+        self.B_c = LLSparseMatrix(size=self.size, size_hint=self.nbr_elements, itype=INT32_T, dtype=FLOAT64_T)
+        self.B_s = lil_matrix((self.size, self.size), dtype=np.float64)
+
+        self.list_of_matrices = []
+        self.list_of_matrices.append(self.B_c)
+        self.list_of_matrices.append(self.B_s)
+
+        construct_random_matrices(self.list_of_matrices, self.size, self.nbr_elements)
+
+        self.CSC_c = self.B_c.to_csc()
+        self.CSC_s = self.B_s.tocsc()
 
         self.v = np.arange(0, self.size, dtype=np.float64)
 
@@ -175,8 +205,20 @@ class LLMatMatVecBenchmark_4(LLMatMatVecBenchmark):
 
         construct_random_matrices(self.list_of_matrices, self.size, self.nbr_elements)
 
-        self.CSC_c = self.A_c.to_csc()
-        self.CSC_s = self.A_s.tocsc()
+        self.CSR_c = self.A_c.to_csr()
+        self.CSR_s = self.A_s.tocsr()
+
+        self.B_c = LLSparseMatrix(size=self.size, size_hint=self.nbr_elements, itype=INT32_T, dtype=FLOAT64_T)
+        self.B_s = lil_matrix((self.size, self.size), dtype=np.float64)
+
+        self.list_of_matrices = []
+        self.list_of_matrices.append(self.B_c)
+        self.list_of_matrices.append(self.B_s)
+
+        construct_random_matrices(self.list_of_matrices, self.size, self.nbr_elements)
+
+        self.CSC_c = self.B_c.to_csc()
+        self.CSC_s = self.B_s.tocsc()
         self.v = np.arange(0, self.size, dtype=np.float64)
 
 if __name__ == '__main__':

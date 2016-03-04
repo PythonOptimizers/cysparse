@@ -22,7 +22,7 @@ Covered cases:
 - :program:`NumPy` array data not C-contiguous, ``CSCSparseMatrix`` not symmetric
 - :program:`NumPy` array data not C-contiguous, ``CSCSparseMatrix`` symmetric
 
-4. :math:`\textrm{con}(A) * b`
+4. :math:`\textrm{conj}(A) * b`
 
 - :program:`NumPy` array data C-contiguous, ``CSCSparseMatrix`` not symmetric
 - :program:`NumPy` array data C-contiguous, ``CSCSparseMatrix`` symmetric
@@ -35,6 +35,8 @@ Note:
     be used with a given strided :program:`NumPy` `y` vector.
 """
 
+#from libc.string cimport memset # TODO: get rid of this...
+
 
 
 ########################################################################################################################
@@ -45,7 +47,7 @@ Note:
 # C-contiguous, non symmetric
 ###########################################
 cdef void multiply_csc_mat_with_numpy_vector_kernel_INT32_t_INT32_t(INT32_t m, INT32_t n, INT32_t *x, INT32_t *y,
-         INT32_t *val, INT32_t *row, INT32_t *ind):
+         INT32_t *val, INT32_t *row, INT32_t *ind, bint init_y = 1):
     """
     Compute ``y = A * x``.
 
@@ -67,10 +69,15 @@ cdef void multiply_csc_mat_with_numpy_vector_kernel_INT32_t_INT32_t(INT32_t m, I
     cdef:
         INT32_t i, j, k
 
-    # init numpy array
-    for i from 0 <= i < m:
+    #if init_y:
+    #    memset(y, 0, m*sizeof(y))
 
-        y[i] = <INT32_t>0.0
+    if init_y:
+        # init numpy array
+        for i from 0 <= i < m:
+
+            y[i] = <INT32_t>0.0
+
 
 
     # multiplication, column-wise...
@@ -84,7 +91,7 @@ cdef void multiply_csc_mat_with_numpy_vector_kernel_INT32_t_INT32_t(INT32_t m, I
 # C-contiguous, symmetric
 ###########################################
 cdef void multiply_sym_csc_mat_with_numpy_vector_kernel_INT32_t_INT32_t(INT32_t m, INT32_t n, INT32_t *x, INT32_t *y,
-             INT32_t *val, INT32_t *row, INT32_t *ind):
+             INT32_t *val, INT32_t *row, INT32_t *ind, bint init_y = 1):
     """
     Compute ``y = A * x``.
 
@@ -106,10 +113,14 @@ cdef void multiply_sym_csc_mat_with_numpy_vector_kernel_INT32_t_INT32_t(INT32_t 
     cdef:
         INT32_t i, j, k
 
-    # init numpy array
-    for i from 0 <= i < m:
+    #if init_y:
+    #    memset(y, 0, m*sizeof(y))
 
-        y[i] = <INT32_t>0.0
+    if init_y:
+        # init numpy array
+        for i from 0 <= i < m:
+
+            y[i] = <INT32_t>0.0
 
 
     # multiplication, column-wise...
@@ -150,6 +161,7 @@ cdef void multiply_csc_mat_with_strided_numpy_vector_kernel_INT32_t_INT32_t(INT3
     """
     cdef:
         INT32_t i, j, k
+
 
     # init numpy array
     for i from 0 <= i < m:
