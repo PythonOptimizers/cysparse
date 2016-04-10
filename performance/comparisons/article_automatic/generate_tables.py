@@ -31,16 +31,6 @@ BENCHMARK_REPORT_TITLE = 'Benchmark Report'
 BENCHMARK_END = 'Each of the above'
 
 
-#\multicolumn{8}{c}{$w = A\cdot v$ with $A$ a LL sparse matrix}\\
-#\hline
-#\multicolumn{2}{c}{Scenario 1} & \multicolumn{2}{c}{Scenario 2} & \multicolumn{2}{c}{Scenario 3} & \multicolumn{2}{c}{Scenario 4}\\
-#\hline
-#\pysparse   &            $1.0$    &  \cysparse    &           $1.0$  & \cysparse 2  &           $1.0$  &  \cysparse 2   &              $1.0$ \\
-#\cysparse 2 &  $1.16849173554$    &  \pysparse    & $1.01144839655$  & \cysparse    & $1.00671434468$  &  \pysparse     &    $1.04245103382$ \\
-#\cysparse   &  $1.18780991736$    &  \cysparse 2  & $1.0412044374$   & \pysparse    & $1.00875086382$  &  \cysparse     &    $1.17517514888$ \\
-#\scipy 2    &  $95.5508264463$    &  \scipy 2     & $72.7128294244$  & \scipy 2     & $56.5681294727$  &  \scipy 2      &    $147.931627916$ \\
-#\scipy      &  $97.1334710744$    &  \scipy       & $73.4207209247$  & \scipy       & $57.4677389582$  &  \scipy        &    $151.740297047$ \\
-
 def generate_numbers(scenarii, filename, nbr_of_test):
     """
     Generate the numbers from the benchmark reports.
@@ -170,8 +160,11 @@ def generate_sub_table(scenarii, caption, filename, nbr_of_test, translate_dic, 
             #first the test name
             line_of_data_table.append('{name: <{fill}}'.format(name=translate_dic[table_names[test_name][scenario]], fill=field_width))
             #second the number
-            number = '$%s$' % table_numbers[test_name][scenario]
+            #number = '%s$' % table_numbers[test_name][scenario]
+            number = "${:.3f}$".format(float(table_numbers[test_name][scenario]))
             line_of_data_table.append('{name: >{fill}}'.format(name=number, fill=field_width))
+
+            #{0:.2f}
 
         table.append(' & '.join(line_of_data_table) + r'\\')
     return '\n'.join(table)
