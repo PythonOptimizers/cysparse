@@ -80,3 +80,15 @@ cdef class LLSparseMatrix_INT32_t_INT64_t(MutableSparseMatrix_INT32_t_INT64_t):
     cdef _norm_frob(self)
 
 #cdef INT32_t * create_c_array_indices_from_python_object_INT32_t(INT32_t max_length, PyObject * obj, INT32_t * number_of_elements) except NULL
+
+cdef MakeLLSparseMatrix_INT32_t_INT64_t(INT32_t nrow,
+                                        INT32_t ncol,
+                                        INT32_t nnz,
+                                        INT32_t free,
+                                        INT32_t nalloc,
+                                        INT32_t * root,
+                                        INT32_t * col,
+                                        INT32_t * link,
+                                        INT64_t * val,
+                                        bint store_symmetric,
+                                        bint store_zero)

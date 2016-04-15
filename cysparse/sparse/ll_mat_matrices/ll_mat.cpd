@@ -81,3 +81,15 @@ cdef class LLSparseMatrix_@index@_@type@(MutableSparseMatrix_@index@_@type@):
     cdef _norm_frob(self)
 
 #cdef @index@ * create_c_array_indices_from_python_object_@index@(@index@ max_length, PyObject * obj, @index@ * number_of_elements) except NULL
+
+cdef MakeLLSparseMatrix_@index@_@type@(@index@ nrow,
+                                        @index@ ncol,
+                                        @index@ nnz,
+                                        @index@ free,
+                                        @index@ nalloc,
+                                        @index@ * root,
+                                        @index@ * col,
+                                        @index@ * link,
+                                        @type@ * val,
+                                        bint store_symmetric,
+                                        bint store_zero)

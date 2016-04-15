@@ -12,3 +12,7 @@ cdef csr_to_csc_kernel_@index@_@type@(@index@ nrow, @index@ ncol, @index@ nnz,
 cdef csc_to_csr_kernel_@index@_@type@(@index@ nrow, @index@ ncol, @index@ nnz,
                                       @index@ * csc_ind, @index@ * csc_row, @type@ * csc_val,
                                       @index@ * csr_ind, @index@ * csr_col, @type@ * csr_val)
+
+cdef csc_to_ll_kernel_@index@_@type@(@index@ nrow, @index@ ncol, @index@ nnz,
+                                      @index@ * csc_ind, @index@ * csc_row, @type@ * csc_val,
+                                      @index@ * ll_root, @index@ * ll_col, @index@ * ll_link, @type@ * ll_val)

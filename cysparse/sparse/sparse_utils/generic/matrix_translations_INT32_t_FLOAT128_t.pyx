@@ -3,6 +3,8 @@
     
 from cysparse.common_types.cysparse_types cimport *
 
+from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
+from libc.string cimport memcpy
 
 cdef csr_to_csc_kernel_INT32_t_FLOAT128_t(INT32_t nrow, INT32_t ncol, INT32_t nnz,
                                       INT32_t * csr_ind, INT32_t * csr_col, FLOAT128_t * csr_val,
@@ -143,3 +145,74 @@ cdef csc_to_csr_kernel_INT32_t_FLOAT128_t(INT32_t nrow, INT32_t ncol, INT32_t nn
         temp   = csr_ind[i]
         csr_ind[i] = last
         last   = temp
+
+
+cdef csc_to_ll_kernel_INT32_t_FLOAT128_t(INT32_t nrow, INT32_t ncol, INT32_t nnz,
+                                      INT32_t * csc_ind, INT32_t * csc_row, FLOAT128_t * csc_val,
+                                      INT32_t * ll_root, INT32_t * ll_col, INT32_t * ll_link, FLOAT128_t * ll_val):
+    """
+    Translate an CSR to an LL matrix format.
+
+    Args:
+        nrow, ncol: Matrix dimension.
+        nnz: Number of non zero elements.
+        csc_ind, csc_row, csc_val: Computed CSC matrix (IN argument).
+        ll_root, ll_col, ll_link, ll_val: LL matrix (OUT argument).
+
+    Note:
+        This transformation **perserve** the column indices ordering, i.e. if the row indices of the CSC sparse matrix
+        are ordered (ascending sorted), the column indices will be ordered (ascending sorted).
+    """
+    ############
+    # first transform CSC to CSR
+    ############
+    # create CSR internal arrays: ind, col and val
+    cdef INT32_t * ind = <INT32_t *> PyMem_Malloc((nrow + 1) * sizeof(INT32_t))
+    if not ind:
+        raise MemoryError()
+
+    cdef INT32_t * col = <INT32_t *> PyMem_Malloc(nnz * sizeof(INT32_t))
+    if not col:
+        PyMem_Free(ind)
+        raise MemoryError()
+
+    cdef FLOAT128_t * val = <FLOAT128_t *> PyMem_Malloc(nnz * sizeof(FLOAT128_t))
+    if not val:
+        PyMem_Free(ind)
+        PyMem_Free(col)
+        raise MemoryError()
+
+    csc_to_csr_kernel_INT32_t_FLOAT128_t(nrow, ncol, nnz, csc_ind, csc_row, csc_val, ind, col, val)
+
+    ############
+    # copy col[] and val[]
+    ############
+    memcpy(ll_col, col, nnz * sizeof(INT32_t))
+    memcpy(ll_val, val, nnz * sizeof(FLOAT128_t))
+
+    ############
+    # then compute root[] and link[]
+    ############
+    cdef INT32_t root_index = 0
+    cdef INT32_t link_index = 0
+    cdef INT32_t nbr_of_elements_in_row = 0
+    cdef:
+        INT32_t i, j
+
+    for i from 0 <= i < nrow:
+        nbr_of_elements_in_row = ind[i+1] - ind[i]
+
+        if nbr_of_elements_in_row == 0:
+            # row i is empty
+            ll_root[i] = -1
+        else:
+            ll_root[i] = root_index
+
+            for j from 0 <= j < nbr_of_elements_in_row - 1:
+                link_index += 1
+                ll_link[link_index - 1] = link_index
+
+            ll_link[link_index] = -1
+            link_index += 1
+
+        root_index += nbr_of_elements_in_row
