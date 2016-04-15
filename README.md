@@ -65,7 +65,11 @@ See [Wiki](https://github.com/Funartech/cysparse/wiki) for details!
 
 ## Release history
 
-- Version 0.7.2 released on Feb 17, 2016
+- Version 0.7.2 released on Apr 15, 2016
+
+  Conversion from CSC and CSR to LL with `to_ll()` added. Not at 14027 tests.
+    
+- Version 0.7.1b released on Feb 17, 2016
 
   Added some tests for the operator proxies. Only for linear combinations of matrix-like objects. Now at 13859 tests.
 
