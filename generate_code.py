@@ -476,6 +476,7 @@ if __name__ == "__main__":
     # --- memory ---
     cygenja_engine.register_action('tests/cysparse_/sparse/memory', 'test_copy.cpy', generate_following_all_sparse_like_objects_class_and_index_and_type)
     cygenja_engine.register_action('tests/cysparse_/sparse/memory', 'test_to_ndarray.cpy', generate_following_matrix_class_and_index_and_type)
+    cygenja_engine.register_action('tests/cysparse_/sparse/memory', 'test_to_ll.cpy', generate_following_matrix_class_and_index_and_type)
     cygenja_engine.register_action('tests/cysparse_/sparse/memory', 'test_internalmemory.cpy', generate_following_matrix_class_and_index_and_type)
     # --- LLSparseMatrix ---
     cygenja_engine.register_action('tests/cysparse_/sparse/ll_mat', 'test_llsparsematrixfactories.cpy', generate_following_index_and_element)

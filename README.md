@@ -22,7 +22,7 @@ To run the tests:
 
 - nose or unittest;
 
-to run the performance tests:
+To run the performance tests:
 
 [TODO]
 
