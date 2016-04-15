@@ -1,4 +1,6 @@
-#define NPY_NO_DEPRECATED_API NPY_1_7_API_VERSION
+#!python
+#cython: boundscheck=False, wraparound=False, initializedcheck=False
+    
 
 from cysparse.common_types.cysparse_types cimport *
 
@@ -79,3 +81,15 @@ cdef class LLSparseMatrix_INT64_t_COMPLEX64_t(MutableSparseMatrix_INT64_t_COMPLE
     cdef _norm_frob(self)
 
 #cdef INT64_t * create_c_array_indices_from_python_object_INT64_t(INT64_t max_length, PyObject * obj, INT64_t * number_of_elements) except NULL
+
+cdef MakeLLSparseMatrix_INT64_t_COMPLEX64_t(INT64_t nrow,
+                                        INT64_t ncol,
+                                        INT64_t nnz,
+                                        INT64_t free,
+                                        INT64_t nalloc,
+                                        INT64_t * root,
+                                        INT64_t * col,
+                                        INT64_t * link,
+                                        COMPLEX64_t * val,
+                                        bint store_symmetric,
+                                        bint store_zero)

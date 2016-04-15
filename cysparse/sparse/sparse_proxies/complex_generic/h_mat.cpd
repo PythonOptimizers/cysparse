@@ -1,3 +1,4 @@
+@cython_compiler_directives@
 """
 Syntactic sugar: we want to use the following code: ``A.H * b`` to compute :math:`A^h * b`.
 

@@ -22,7 +22,7 @@ Covered cases:
 - :program:`NumPy` array data not C-contiguous, ``CSCSparseMatrix`` not symmetric
 - :program:`NumPy` array data not C-contiguous, ``CSCSparseMatrix`` symmetric
 
-4. :math:`\textrm{con}(A) * b`
+4. :math:`\textrm{conj}(A) * b`
 
 - :program:`NumPy` array data C-contiguous, ``CSCSparseMatrix`` not symmetric
 - :program:`NumPy` array data C-contiguous, ``CSCSparseMatrix`` symmetric
@@ -35,6 +35,8 @@ Note:
     be used with a given strided :program:`NumPy` `y` vector.
 """
 
+#from libc.string cimport memset # TODO: get rid of this...
+
 
 
 ########################################################################################################################
@@ -45,7 +47,7 @@ Note:
 # C-contiguous, non symmetric
 ###########################################
 cdef void multiply_csc_mat_with_numpy_vector_kernel_INT64_t_INT64_t(INT64_t m, INT64_t n, INT64_t *x, INT64_t *y,
-         INT64_t *val, INT64_t *row, INT64_t *ind):
+         INT64_t *val, INT64_t *row, INT64_t *ind, bint init_y = 1):
     """
     Compute ``y = A * x``.
 
@@ -67,10 +69,15 @@ cdef void multiply_csc_mat_with_numpy_vector_kernel_INT64_t_INT64_t(INT64_t m, I
     cdef:
         INT64_t i, j, k
 
-    # init numpy array
-    for i from 0 <= i < m:
+    #if init_y:
+    #    memset(y, 0, m*sizeof(y))
 
-        y[i] = <INT64_t>0.0
+    if init_y:
+        # init numpy array
+        for i from 0 <= i < m:
+
+            y[i] = <INT64_t>0.0
+
 
 
     # multiplication, column-wise...
@@ -84,7 +91,7 @@ cdef void multiply_csc_mat_with_numpy_vector_kernel_INT64_t_INT64_t(INT64_t m, I
 # C-contiguous, symmetric
 ###########################################
 cdef void multiply_sym_csc_mat_with_numpy_vector_kernel_INT64_t_INT64_t(INT64_t m, INT64_t n, INT64_t *x, INT64_t *y,
-             INT64_t *val, INT64_t *row, INT64_t *ind):
+             INT64_t *val, INT64_t *row, INT64_t *ind, bint init_y = 1):
     """
     Compute ``y = A * x``.
 
@@ -106,10 +113,14 @@ cdef void multiply_sym_csc_mat_with_numpy_vector_kernel_INT64_t_INT64_t(INT64_t 
     cdef:
         INT64_t i, j, k
 
-    # init numpy array
-    for i from 0 <= i < m:
+    #if init_y:
+    #    memset(y, 0, m*sizeof(y))
 
-        y[i] = <INT64_t>0.0
+    if init_y:
+        # init numpy array
+        for i from 0 <= i < m:
+
+            y[i] = <INT64_t>0.0
 
 
     # multiplication, column-wise...
@@ -150,6 +161,7 @@ cdef void multiply_csc_mat_with_strided_numpy_vector_kernel_INT64_t_INT64_t(INT6
     """
     cdef:
         INT64_t i, j, k
+
 
     # init numpy array
     for i from 0 <= i < m:

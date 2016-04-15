@@ -1,3 +1,4 @@
+@cython_compiler_directives@
 from cysparse.common_types.cysparse_types cimport *
 from cysparse.sparse.s_mat cimport SparseMatrix
 

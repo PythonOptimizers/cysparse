@@ -1,0 +1,40 @@
+
+Benchmark Report
+================
+
+CSR * (CSC * v) with 1000 elements and size = 10,000
+----------------------------------------------------
+
+        name | rank | runs |      mean |        sd | timesBaseline
+-------------|------|------|-----------|-----------|--------------
+    cysparse |    1 |  100 | 5.171e-05 | 6.128e-06 |           1.0
+scipy sparse |    2 |  100 | 5.293e-05 | 7.103e-06 |  1.0237008346
+
+CSR * (CSC * v) with 10,000 elements and size = 100,000
+-------------------------------------------------------
+
+        name | rank | runs |      mean |        sd | timesBaseline
+-------------|------|------|-----------|-----------|--------------
+    cysparse |    1 |  100 | 0.0004408 | 6.837e-05 |           1.0
+scipy sparse |    2 |  100 | 0.0004639 | 0.0001207 | 1.05236230693
+
+CSR * (CSC * v) with 100,000 elements and size = 1,000,000
+----------------------------------------------------------
+
+        name | rank | runs |     mean |        sd | timesBaseline
+-------------|------|------|----------|-----------|--------------
+    cysparse |    1 |  100 | 0.008838 | 0.0002994 |           1.0
+scipy sparse |    2 |  100 | 0.009096 | 0.0003268 | 1.02919075355
+
+CSR * (CSC * v) with 5000 elements and size = 1,000,000
+-------------------------------------------------------
+
+        name | rank | runs |     mean |        sd | timesBaseline
+-------------|------|------|----------|-----------|--------------
+    cysparse |    1 |  100 |  0.00327 | 0.0002402 |           1.0
+scipy sparse |    2 |  100 | 0.003474 | 0.0001936 | 1.06240955441
+
+Each of the above 800 runs were run in random, non-consecutive order by
+`benchmark` v0.1.5 (http://jspi.es/benchmark) with Python 2.7.5+
+Linux-3.11.0-12-generic-x86_64 on 2016-02-27 21:13:17.
+

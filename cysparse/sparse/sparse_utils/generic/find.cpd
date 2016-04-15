@@ -1,3 +1,4 @@
+@cython_compiler_directives@
 """
 Several routines to find elements in C-arrays.
 """

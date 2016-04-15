@@ -1,5 +1,5 @@
 #!python
-    #cython: boundscheck=False, wraparound=False, initializedcheck=False
+#cython: boundscheck=False, wraparound=False, initializedcheck=False
     
 from cysparse.common_types.cysparse_types cimport *
 

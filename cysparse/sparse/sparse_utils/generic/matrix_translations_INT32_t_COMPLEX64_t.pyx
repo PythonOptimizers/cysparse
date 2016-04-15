@@ -1,8 +1,10 @@
 #!python
-    #cython: boundscheck=False, wraparound=False, initializedcheck=False
+#cython: boundscheck=False, wraparound=False, initializedcheck=False
     
 from cysparse.common_types.cysparse_types cimport *
 
+from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
+from libc.string cimport memcpy
 
 cdef csr_to_csc_kernel_INT32_t_COMPLEX64_t(INT32_t nrow, INT32_t ncol, INT32_t nnz,
                                       INT32_t * csr_ind, INT32_t * csr_col, COMPLEX64_t * csr_val,
@@ -14,7 +16,7 @@ cdef csr_to_csc_kernel_INT32_t_COMPLEX64_t(INT32_t nrow, INT32_t ncol, INT32_t n
         nrow, ncol: Matrix dimension.
         nnz: Number of non zero elements.
         csr_ind, csr_col, csr_val: CSR matrix (IN argument).
-        csc_ind, csc_row, csc_val: Computed CSC matrix (OUT argument).
+        csc_ind, csc_row, csc_val: CSC matrix (OUT argument).
 
     Note:
         This transformation **perserve** the row indices ordering, i.e. if the column indices of the CSR sparse matrix
@@ -84,7 +86,7 @@ cdef csc_to_csr_kernel_INT32_t_COMPLEX64_t(INT32_t nrow, INT32_t ncol, INT32_t n
     Args:
         nrow, ncol: Matrix dimension.
         nnz: Number of non zero elements.
-        csc_ind, csc_row, csc_val: Computed CSC matrix (IN argument).
+        csc_ind, csc_row, csc_val: CSC matrix (IN argument).
         csr_ind, csr_col, csr_val: CSR matrix (OUT argument).
 
     Note:
@@ -143,3 +145,104 @@ cdef csc_to_csr_kernel_INT32_t_COMPLEX64_t(INT32_t nrow, INT32_t ncol, INT32_t n
         temp   = csr_ind[i]
         csr_ind[i] = last
         last   = temp
+
+cdef csr_to_ll_kernel_INT32_t_COMPLEX64_t(INT32_t nrow, INT32_t ncol, INT32_t nnz,
+                                      INT32_t * csr_ind, INT32_t * csr_col, COMPLEX64_t * csr_val,
+                                      INT32_t * ll_root, INT32_t * ll_col, INT32_t * ll_link, COMPLEX64_t * ll_val):
+    """
+    Translate an CSR to an LL matrix format.
+
+    Args:
+        nrow, ncol: Matrix dimension.
+        nnz: Number of non zero elements.
+        csr_ind, csr_col, csc_val: CSR matrix (IN argument).
+        ll_root, ll_col, ll_link, ll_val: LL matrix (OUT argument).
+
+    Note:
+        This transformation **perserve** the column indices ordering, i.e. if the row indices of the CSC sparse matrix
+        are ordered (ascending sorted), the column indices will be ordered (ascending sorted).
+    """
+    ############
+    # copy col[] and val[]
+    ############
+    memcpy(ll_col, csr_col, nnz * sizeof(INT32_t))
+    memcpy(ll_val, csr_val, nnz * sizeof(COMPLEX64_t))
+
+    ############
+    # then compute root[] and link[]
+    ############
+    cdef INT32_t root_index = 0
+    cdef INT32_t link_index = 0
+    cdef INT32_t nbr_of_elements_in_row = 0
+    cdef:
+        INT32_t i, j
+
+    for i from 0 <= i < nrow:
+        nbr_of_elements_in_row = csr_ind[i+1] - csr_ind[i]
+
+        if nbr_of_elements_in_row == 0:
+            # row i is empty
+            ll_root[i] = -1
+        else:
+            ll_root[i] = root_index
+
+            for j from 0 <= j < nbr_of_elements_in_row - 1:
+                link_index += 1
+                ll_link[link_index - 1] = link_index
+
+            ll_link[link_index] = -1
+            link_index += 1
+
+        root_index += nbr_of_elements_in_row
+
+cdef csc_to_ll_kernel_INT32_t_COMPLEX64_t(INT32_t nrow, INT32_t ncol, INT32_t nnz,
+                                      INT32_t * csc_ind, INT32_t * csc_row, COMPLEX64_t * csc_val,
+                                      INT32_t * ll_root, INT32_t * ll_col, INT32_t * ll_link, COMPLEX64_t * ll_val):
+    """
+    Translate an CSR to an LL matrix format.
+
+    Args:
+        nrow, ncol: Matrix dimension.
+        nnz: Number of non zero elements.
+        csc_ind, csc_row, csc_val: CSC matrix (IN argument).
+        ll_root, ll_col, ll_link, ll_val: LL matrix (OUT argument).
+
+    Note:
+        This transformation **perserve** the column indices ordering, i.e. if the row indices of the CSC sparse matrix
+        are ordered (ascending sorted), the column indices will be ordered (ascending sorted).
+    """
+    ############
+    # first transform CSC to CSR
+    ############
+    # create CSR internal arrays: ind, col and val
+    cdef INT32_t * ind = <INT32_t *> PyMem_Malloc((nrow + 1) * sizeof(INT32_t))
+    if not ind:
+        raise MemoryError()
+
+    cdef INT32_t * col = <INT32_t *> PyMem_Malloc(nnz * sizeof(INT32_t))
+    if not col:
+        PyMem_Free(ind)
+        raise MemoryError()
+
+    cdef COMPLEX64_t * val = <COMPLEX64_t *> PyMem_Malloc(nnz * sizeof(COMPLEX64_t))
+    if not val:
+        PyMem_Free(ind)
+        PyMem_Free(col)
+        raise MemoryError()
+
+    csc_to_csr_kernel_INT32_t_COMPLEX64_t(nrow, ncol, nnz, csc_ind, csc_row, csc_val, ind, col, val)
+
+    ############
+    # then transform CSR to LL
+    ############
+    csr_to_ll_kernel_INT32_t_COMPLEX64_t(nrow, ncol, nnz,
+                                    ind, col, val,
+                                    ll_root, ll_col, ll_link, ll_val)
+
+
+    ############
+    # free temp CSR arrays
+    ############
+    PyMem_Free(ind)
+    PyMem_Free(col)
+    PyMem_Free(val)

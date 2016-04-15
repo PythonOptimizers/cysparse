@@ -1,0 +1,40 @@
+
+Benchmark Report
+================
+
+CSR * CSC * v with 1000 elements and size = 10,000
+--------------------------------------------------
+
+        name | rank | runs |      mean |        sd | timesBaseline
+-------------|------|------|-----------|-----------|--------------
+    cysparse |    1 |  100 | 6.716e-05 | 1.348e-05 |           1.0
+scipy sparse |    2 |  100 | 0.0003617 | 3.332e-05 | 5.38606269303
+
+matvec with 10,000 elements and size = 100,000
+----------------------------------------------
+
+        name | rank | runs |      mean |        sd | timesBaseline
+-------------|------|------|-----------|-----------|--------------
+    cysparse |    1 |  100 | 0.0007342 | 0.0001552 |           1.0
+scipy sparse |    2 |  100 |  0.002879 | 0.0002413 | 3.92061554048
+
+matvec with 100,000 elements and size = 1,000,000
+-------------------------------------------------
+
+        name | rank | runs |    mean |       sd | timesBaseline
+-------------|------|------|---------|----------|--------------
+    cysparse |    1 |  100 |  0.0103 | 0.000798 |           1.0
+scipy sparse |    2 |  100 | 0.03967 | 0.002232 | 3.84987250211
+
+matvec with 5000 elements and size = 1,000,000
+----------------------------------------------
+
+        name | rank | runs |     mean |        sd | timesBaseline
+-------------|------|------|----------|-----------|--------------
+    cysparse |    1 |  100 | 0.004138 | 0.0008011 |           1.0
+scipy sparse |    2 |  100 |  0.02155 |   0.00162 | 5.20665420324
+
+Each of the above 800 runs were run in random, non-consecutive order by
+`benchmark` v0.1.5 (http://jspi.es/benchmark) with Python 2.7.5+
+Linux-3.11.0-12-generic-x86_64 on 2016-04-09 18:18:51.
+

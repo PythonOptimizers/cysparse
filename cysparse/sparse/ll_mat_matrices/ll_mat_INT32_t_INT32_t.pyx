@@ -1,5 +1,5 @@
 #!python
-    #cython: boundscheck=False, wraparound=False, initializedcheck=False
+#cython: boundscheck=False, wraparound=False, initializedcheck=False
     
 from __future__ import print_function
 
@@ -312,6 +312,8 @@ cdef class LLSparseMatrix_INT32_t_INT32_t(MutableSparseMatrix_INT32_t_INT32_t):
         """
         # Warning: Because we use memcpy and thus copy memory internally, we have to be careful to always update this method
         # whenever the LLSparseMatrix class changes...
+
+        # TODO: use new MakeLLSparseMatrix factory method
 
         cdef LLSparseMatrix_INT32_t_INT32_t self_copy
 
@@ -2428,3 +2430,51 @@ cdef class LLSparseMatrix_INT32_t_INT32_t(MutableSparseMatrix_INT32_t_INT32_t):
         for i from 0 <= i < self.nnz:
             print(self.link[i], end=' ', sep=' ')
         print()
+
+        print("free: %d, nalloc: %d, nnz: %d" % (self.free, self.nalloc, self.__nnz) )
+
+########################################################################################################################
+# Factory methods
+########################################################################################################################
+cdef MakeLLSparseMatrix_INT32_t_INT32_t(INT32_t nrow,
+                                        INT32_t ncol,
+                                        INT32_t nnz,
+                                        INT32_t free,
+                                        INT32_t nalloc,
+                                        INT32_t * root,
+                                        INT32_t * col,
+                                        INT32_t * link,
+                                        INT32_t * val,
+                                        bint store_symmetric,
+                                        bint store_zero):
+    """
+    Construct a CSCSparseMatrix object.
+
+    Args:
+        nrow (INT32_t): Number of rows.
+        ncol (INT32_t): Number of columns.
+        nnz (INT32_t): Number of non-zeros.
+        ind (INT32_t *): C-array with column indices pointers.
+        row  (INT32_t *): C-array with row indices.
+        val  (INT32_t *): C-array with values.
+    """
+    cdef LLSparseMatrix_INT32_t_INT32_t ll_mat
+
+    ll_mat = LLSparseMatrix_INT32_t_INT32_t(control_object=unexposed_value,
+                                           no_memory=True,
+                                           size_hint=nalloc,
+                                           nrow=nrow,
+                                           ncol=ncol,
+                                           nnz=nnz,
+                                           store_symmetric=store_symmetric,
+                                           store_zero=store_zero)
+
+    ll_mat.root = root
+    ll_mat.col = col
+    ll_mat.link = link
+    ll_mat.val = val
+
+    ll_mat.nalloc = nalloc
+    ll_mat.free = free
+
+    return ll_mat

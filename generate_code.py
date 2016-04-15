@@ -128,7 +128,7 @@ else:
 CYTHON_COMPILER_DIRECTIVES =""""""
 if cysparse_config.getboolean('CODE_GENERATION', 'use_cython_optimization'):
     CYTHON_COMPILER_DIRECTIVES = """#!python
-    #cython: boundscheck=False, wraparound=False, initializedcheck=False
+#cython: boundscheck=False, wraparound=False, initializedcheck=False
     """
 
 #####################################################
@@ -467,6 +467,8 @@ if __name__ == "__main__":
     # multiplication with a NumPy vector
     cygenja_engine.register_action('tests/cysparse_/sparse/common_operations/multiplication_with_numpy_vector', 'test_common_numpy_vector_multiplication.cpy', generate_following_matrix_like_class_and_index_and_type)
     cygenja_engine.register_action('tests/cysparse_/sparse/common_operations/multiplication_with_numpy_vector', 'test_global_matvec_functions.cpy', generate_following_matrix_class_and_index_and_type)
+    # combilis: linear combinations
+    cygenja_engine.register_action('tests/cysparse_/sparse/common_operations/combilis', 'test_combilis.cpy', generate_following_matrix_like_class_and_index_and_type)
     # diagonals
     cygenja_engine.register_action('tests/cysparse_/sparse/common_operations/diagonals', 'test_diag.cpy', generate_following_matrix_class_and_index_and_type)
     # triangular
@@ -474,6 +476,7 @@ if __name__ == "__main__":
     # --- memory ---
     cygenja_engine.register_action('tests/cysparse_/sparse/memory', 'test_copy.cpy', generate_following_all_sparse_like_objects_class_and_index_and_type)
     cygenja_engine.register_action('tests/cysparse_/sparse/memory', 'test_to_ndarray.cpy', generate_following_matrix_class_and_index_and_type)
+    cygenja_engine.register_action('tests/cysparse_/sparse/memory', 'test_to_ll.cpy', generate_following_matrix_class_and_index_and_type)
     cygenja_engine.register_action('tests/cysparse_/sparse/memory', 'test_internalmemory.cpy', generate_following_matrix_class_and_index_and_type)
     # --- LLSparseMatrix ---
     cygenja_engine.register_action('tests/cysparse_/sparse/ll_mat', 'test_llsparsematrixfactories.cpy', generate_following_index_and_element)

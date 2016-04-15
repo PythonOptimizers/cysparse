@@ -1,3 +1,6 @@
+#!python
+#cython: boundscheck=False, wraparound=False, initializedcheck=False
+    
 """
 Condensed Sparse Row (CSR) Format Matrices.
 
@@ -10,12 +13,12 @@ from cysparse.sparse.s_mat cimport unexposed_value, SparseMatrix
 from cysparse.common_types.cysparse_numpy_types import *
 
 from cysparse.sparse.s_mat_matrices.s_mat_INT32_t_FLOAT32_t cimport ImmutableSparseMatrix_INT32_t_FLOAT32_t, MutableSparseMatrix_INT32_t_FLOAT32_t
-from cysparse.sparse.ll_mat_matrices.ll_mat_INT32_t_FLOAT32_t cimport LLSparseMatrix_INT32_t_FLOAT32_t
+from cysparse.sparse.ll_mat_matrices.ll_mat_INT32_t_FLOAT32_t cimport LLSparseMatrix_INT32_t_FLOAT32_t, MakeLLSparseMatrix_INT32_t_FLOAT32_t
 from cysparse.sparse.csc_mat_matrices.csc_mat_INT32_t_FLOAT32_t cimport CSCSparseMatrix_INT32_t_FLOAT32_t, MakeCSCSparseMatrix_INT32_t_FLOAT32_t
 
 from cysparse.sparse.sparse_utils.generic.sort_indices_INT32_t cimport sort_array_INT32_t
 from cysparse.sparse.sparse_utils.generic.print_FLOAT32_t cimport element_to_string_FLOAT32_t, conjugated_element_to_string_FLOAT32_t, empty_to_string_FLOAT32_t
-from cysparse.sparse.sparse_utils.generic.matrix_translations_INT32_t_FLOAT32_t cimport csr_to_csc_kernel_INT32_t_FLOAT32_t, csc_to_csr_kernel_INT32_t_FLOAT32_t
+from cysparse.sparse.sparse_utils.generic.matrix_translations_INT32_t_FLOAT32_t cimport csr_to_csc_kernel_INT32_t_FLOAT32_t, csc_to_csr_kernel_INT32_t_FLOAT32_t, csr_to_ll_kernel_INT32_t_FLOAT32_t
 
 
 ########################################################################################################################
@@ -702,6 +705,53 @@ cdef class CSRSparseMatrix_INT32_t_FLOAT32_t(ImmutableSparseMatrix_INT32_t_FLOAT
                                                   store_symmetric=self.store_symmetric,
                                                   store_zero=self.store_zero,
                                                   row_indices_are_sorted=True)
+
+    def to_ll(self):
+        """
+        Transform this matrix into a :class:`LLSparseMatrix`.
+
+        """
+        cdef INT32_t nalloc = self.__nnz
+        cdef  free = -1
+
+        # create LL internal arrays: root, col,val and link
+        cdef INT32_t * root = <INT32_t *> PyMem_Malloc((self.__nrow) * sizeof(INT32_t))
+        if not root:
+            raise MemoryError()
+
+        cdef INT32_t * col = <INT32_t *> PyMem_Malloc(nalloc * sizeof(INT32_t))
+        if not col:
+            PyMem_Free(root)
+            raise MemoryError()
+
+        cdef FLOAT32_t * val = <FLOAT32_t *> PyMem_Malloc(nalloc * sizeof(FLOAT32_t))
+        if not val:
+            PyMem_Free(root)
+            PyMem_Free(col)
+            raise MemoryError()
+
+        cdef INT32_t * link = <INT32_t *> PyMem_Malloc(nalloc * sizeof(INT32_t))
+        if not link:
+            PyMem_Free(root)
+            PyMem_Free(col)
+            PyMem_Free(val)
+            raise MemoryError()
+
+        csr_to_ll_kernel_INT32_t_FLOAT32_t(self.__nrow, self.__ncol, self.__nnz,
+                       <INT32_t *>self.ind, <INT32_t *>self.col, <FLOAT32_t *>self.val,
+                       root, col, link, val)
+
+        return MakeLLSparseMatrix_INT32_t_FLOAT32_t(nrow=self.__nrow,
+                                                 ncol=self.__ncol,
+                                                 nnz=self.__nnz,
+                                                 free=free,
+                                                 nalloc=nalloc,
+                                                 root=root,
+                                                 col=col,
+                                                 link=link,
+                                                 val=val,
+                                                 store_symmetric=self.store_symmetric,
+                                                 store_zero=self.store_zero)
 
 
     def to_ndarray(self):
