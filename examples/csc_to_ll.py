@@ -29,6 +29,10 @@ A_bis.debug_print()
 A_bis.compress()
 
 print A_bis
+
+A_bis[2,2] = 9.88
+
+print A_bis
 #print "=" * 80
 #CSR = A.to_csr()
 #CSR.debug_print()
@@ -37,3 +41,16 @@ print A_bis
 #print CSR
 
 #print A_bis
+
+print "?" * 80
+
+B = LinearFillLLSparseMatrix(nrow=3, ncol=3, first_element=1-6j, step=2+5j, dtype=COMPLEX64_T, store_symmetric=True)
+B.compress()
+B.debug_print()
+
+print B
+B_CSC = B.to_csc()
+B_bis = B_CSC.to_ll()
+
+print B_bis
+B_bis.debug_print()
