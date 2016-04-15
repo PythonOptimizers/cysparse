@@ -20,6 +20,7 @@ TABLE_END = r"""\end{tabular}
 \end{table}"""
 
 TABLE_DOUBLE_ARGUMENT = 'lr'
+TABLE_SINGLE_ARGUMENT = 'l'
 TABLE_SEPARATOR = '|'
 
 HLINE = r'\hline'
@@ -170,14 +171,29 @@ def generate_sub_table(scenarii, caption, filename, nbr_of_test, translate_dic, 
     return '\n'.join(table)
 
 
-def generate_table(scenarii, caption, label, sub_tables, translate_dic, field_width=16):
+def generate_table(scenarii, caption, label, sub_tables, translate_dic, field_width=16, special_case=False):
+    """
+    Generate the whole LaTeX table.
 
+    Args:
+        scenarii:
+        caption:
+        label:
+        sub_tables:
+        translate_dic:
+        field_width:
+        special_case: Table 4 is a special case. Instead of |lr| * nbr_scenarii, we use |l| * 2 * nvr_scenarii. Note that you have
+            to manually change the subtitles to divide them in two rows.
+
+    """
     table = []
 
     nbr_of_scenarii = len(scenarii)
 
-
-    table.append(TABLE_BEGIN + '{' + TABLE_SEPARATOR.join([TABLE_DOUBLE_ARGUMENT] * nbr_of_scenarii) + '}')
+    if special_case:
+        table.append(TABLE_BEGIN + '{' + TABLE_SEPARATOR.join([TABLE_SINGLE_ARGUMENT] * nbr_of_scenarii * 2) + '}')
+    else:
+        table.append(TABLE_BEGIN + '{' + TABLE_SEPARATOR.join([TABLE_DOUBLE_ARGUMENT] * nbr_of_scenarii) + '}')
 
     for sub_table in sub_tables:
         filename, subtitle, nbr_of_tests = sub_table
@@ -263,4 +279,4 @@ if __name__ == "__main__":
                          caption=r'Benchmarks on a sparse matrix - dense \numpy vector multiplication where the sparse matrix is obtained by the multiplication of two sparse matrices',
                          label=r'tab:sparse_matrix2_dense_numpy_vector_multiplication',
                          sub_tables=sub_tables,
-                         translate_dic=routines_name_translation_dict, field_width=field_width)
+                         translate_dic=routines_name_translation_dict, field_width=field_width, special_case=True)
