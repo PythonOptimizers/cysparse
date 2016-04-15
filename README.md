@@ -38,7 +38,7 @@ For the Cython version, include everything needed for Python and add:
 1. Clone repository (git clone https://github.com/PythonOptimizers/cysparse.git) or copy source code.
 2. Install Python dependencies.
 3. Copy `cysparse_template.cfg` to `cysparse.cfg` and adapt it to your needs.
-4. Python setup.py install. 
+4. Type `python setup.py install`. 
 
 
 ### Cython version
@@ -67,7 +67,7 @@ See [Wiki](https://github.com/Funartech/cysparse/wiki) for details!
 
 - Version 0.7.2 released on Apr 15, 2016
 
-  Conversion from CSC and CSR to LL with `to_ll()` added. Not at 14027 tests.
+  Conversion from CSC and CSR to LL with `to_ll()` added. Now at 14027 tests.
     
 - Version 0.7.1b released on Feb 17, 2016
 
