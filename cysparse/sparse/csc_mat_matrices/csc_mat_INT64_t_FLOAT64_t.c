@@ -7396,7 +7396,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_25csc_mat_INT64_t
  *         elem = 0
  *         for j from 0 <= j < self.__ncol:             # <<<<<<<<<<<<<<
  *             for k from self.ind[j] <= k < self.ind[j+1]:
- *                 pi[ elem ] = self.row[j]
+ *                 pi[ elem ] = self.row[k]
  */
   __pyx_t_5 = __pyx_v_self->__pyx_base.__pyx_base.__pyx___ncol;
   for (__pyx_v_j = 0; __pyx_v_j < __pyx_t_5; __pyx_v_j++) {
@@ -7405,7 +7405,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_25csc_mat_INT64_t
  *         elem = 0
  *         for j from 0 <= j < self.__ncol:
  *             for k from self.ind[j] <= k < self.ind[j+1]:             # <<<<<<<<<<<<<<
- *                 pi[ elem ] = self.row[j]
+ *                 pi[ elem ] = self.row[k]
  *                 pj[ elem ] = j
  */
     __pyx_t_6 = (__pyx_v_self->ind[(__pyx_v_j + 1)]);
@@ -7414,15 +7414,15 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_25csc_mat_INT64_t
       /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT64_t_FLOAT64_t.pyx":468
  *         for j from 0 <= j < self.__ncol:
  *             for k from self.ind[j] <= k < self.ind[j+1]:
- *                 pi[ elem ] = self.row[j]             # <<<<<<<<<<<<<<
+ *                 pi[ elem ] = self.row[k]             # <<<<<<<<<<<<<<
  *                 pj[ elem ] = j
  *                 pv[ elem ] = self.val[k]
  */
-      (__pyx_v_pi[__pyx_v_elem]) = (__pyx_v_self->row[__pyx_v_j]);
+      (__pyx_v_pi[__pyx_v_elem]) = (__pyx_v_self->row[__pyx_v_k]);
 
       /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT64_t_FLOAT64_t.pyx":469
  *             for k from self.ind[j] <= k < self.ind[j+1]:
- *                 pi[ elem ] = self.row[j]
+ *                 pi[ elem ] = self.row[k]
  *                 pj[ elem ] = j             # <<<<<<<<<<<<<<
  *                 pv[ elem ] = self.val[k]
  *                 elem += 1
@@ -7430,7 +7430,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_16csc_mat_matrices_25csc_mat_INT64_t
       (__pyx_v_pj[__pyx_v_elem]) = __pyx_v_j;
 
       /* "cysparse/sparse/csc_mat_matrices/csc_mat_INT64_t_FLOAT64_t.pyx":470
- *                 pi[ elem ] = self.row[j]
+ *                 pi[ elem ] = self.row[k]
  *                 pj[ elem ] = j
  *                 pv[ elem ] = self.val[k]             # <<<<<<<<<<<<<<
  *                 elem += 1

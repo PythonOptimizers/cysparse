@@ -365,9 +365,6 @@ cdef class CSRSparseMatrix_INT32_t_COMPLEX128_t(ImmutableSparseMatrix_INT32_t_CO
         if len(key) != 2:
             raise IndexError('Index tuple must be of length 2 (not %d)' % len(key))
 
-        if not PyInt_Check(<PyObject *>key[0]) or not PyInt_Check(<PyObject *>key[1]):
-            raise IndexError("Only integer indices are allowed")
-
         cdef INT32_t i = key[0]
         cdef INT32_t j = key[1]
 

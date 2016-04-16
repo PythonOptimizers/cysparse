@@ -466,7 +466,7 @@ cdef class CSCSparseMatrix_INT32_t_COMPLEX64_t(ImmutableSparseMatrix_INT32_t_COM
         elem = 0
         for j from 0 <= j < self.__ncol:
             for k from self.ind[j] <= k < self.ind[j+1]:
-                pi[ elem ] = self.row[j]
+                pi[ elem ] = self.row[k]
                 pj[ elem ] = j
                 pv[ elem ] = self.val[k]
                 elem += 1

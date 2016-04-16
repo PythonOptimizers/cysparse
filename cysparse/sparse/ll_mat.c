@@ -68149,9 +68149,6 @@ static int __pyx_import_star_set(PyObject *o, PyObject* py_name, char *name) {
     Py_DECREF(__pyx_v_8cysparse_6sparse_5s_mat_unexposed_value);
     __pyx_v_8cysparse_6sparse_5s_mat_unexposed_value = o;
   }
-  else if (__Pyx_StrEq(name, "LL_MAT_DEFAULT_SIZE_HINT")) {
-    __pyx_v_8cysparse_6sparse_6ll_mat_LL_MAT_DEFAULT_SIZE_HINT = __Pyx_PyInt_As_int(o); if ((__pyx_v_8cysparse_6sparse_6ll_mat_LL_MAT_DEFAULT_SIZE_HINT == (int)-1) && PyErr_Occurred()) {__pyx_filename = __pyx_f[78]; __pyx_lineno = 17; __pyx_clineno = __LINE__; goto __pyx_L2_error;};
-  }
   else if (__Pyx_StrEq(name, "LL_MAT_PPRINT_ROW_THRESH")) {
     __pyx_v_8cysparse_6sparse_6ll_mat_LL_MAT_PPRINT_ROW_THRESH = __Pyx_PyInt_As_int(o); if ((__pyx_v_8cysparse_6sparse_6ll_mat_LL_MAT_PPRINT_ROW_THRESH == (int)-1) && PyErr_Occurred()) {__pyx_filename = __pyx_f[78]; __pyx_lineno = 20; __pyx_clineno = __LINE__; goto __pyx_L2_error;};
   }
@@ -68175,6 +68172,9 @@ static int __pyx_import_star_set(PyObject *o, PyObject* py_name, char *name) {
   }
   else if (__Pyx_StrEq(name, "LL_MAT_INCREASE_FACTOR")) {
     __pyx_v_8cysparse_6sparse_6ll_mat_LL_MAT_INCREASE_FACTOR = __pyx_PyFloat_AsFloat(o); if ((__pyx_v_8cysparse_6sparse_6ll_mat_LL_MAT_INCREASE_FACTOR == (float)-1) && PyErr_Occurred()) {__pyx_filename = __pyx_f[78]; __pyx_lineno = 15; __pyx_clineno = __LINE__; goto __pyx_L2_error;};
+  }
+  else if (__Pyx_StrEq(name, "LL_MAT_DEFAULT_SIZE_HINT")) {
+    __pyx_v_8cysparse_6sparse_6ll_mat_LL_MAT_DEFAULT_SIZE_HINT = __Pyx_PyInt_As_int(o); if ((__pyx_v_8cysparse_6sparse_6ll_mat_LL_MAT_DEFAULT_SIZE_HINT == (int)-1) && PyErr_Occurred()) {__pyx_filename = __pyx_f[78]; __pyx_lineno = 17; __pyx_clineno = __LINE__; goto __pyx_L2_error;};
   }
   else if (__Pyx_StrEq(name, "MM_REAL_STR")) {
     if (!(likely(PyString_CheckExact(o))||((o) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(o)->tp_name), 0))) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 205; __pyx_clineno = __LINE__; goto __pyx_L2_error;};

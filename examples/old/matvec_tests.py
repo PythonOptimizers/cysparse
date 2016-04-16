@@ -5,12 +5,12 @@ import numpy as np
 import sys
 
 
-A = NewLinearFillLLSparseMatrix(nrow=3, ncol=4, dtype=types.COMPLEX256_T, first_element=2-9.7j, step=-0.7j, row_wise=False)
+A = LinearFillLLSparseMatrix(nrow=3, ncol=4, dtype=types.COMPLEX128_T, first_element=2-9.7j, step=-0.7j, row_wise=False)
 
-A.print_to(sys.stdout)
+print A
 
-a = np.array([1-0.4j,1,1], dtype=np.complex256)
-b = np.array([-9.8j, 1.2+1.j, 0, -2], dtype=np.complex256)
+a = np.array([1-0.4j,1,1], dtype=np.complex128)
+b = np.array([-9.8j, 1.2+1.j, 0, -2], dtype=np.complex128)
 
 def are_equal(A, B):
 
@@ -62,13 +62,13 @@ print h
 
 ########################################################################################################################
 print "*" * 80
-print "matvec_htransp"
+print "matvec_adj"
 
-c = A.matvec_htransp(a)
+c = A.matvec_adj(a)
 d = A.H.matvec(a)
-e = A.to_csc().matvec_htransp(a)
+e = A.to_csc().matvec_adj(a)
 f = A.to_csc().H.matvec(a)
-g = A.to_csr().matvec_htransp(a)
+g = A.to_csr().matvec_adj(a)
 h = A.to_csr().H.matvec(a)
 
 print c

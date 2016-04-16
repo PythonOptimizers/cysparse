@@ -471,6 +471,8 @@ if __name__ == "__main__":
     cygenja_engine.register_action('tests/cysparse_/sparse/common_operations/combilis', 'test_combilis.cpy', generate_following_matrix_like_class_and_index_and_type)
     # diagonals
     cygenja_engine.register_action('tests/cysparse_/sparse/common_operations/diagonals', 'test_diag.cpy', generate_following_matrix_class_and_index_and_type)
+    # find
+    cygenja_engine.register_action('tests/cysparse_/sparse/common_operations/find', 'test_find.cpy', generate_following_matrix_class_and_index_and_type)
     # triangular
     cygenja_engine.register_action('tests/cysparse_/sparse/common_operations/triangular', 'test_triangular.cpy', generate_following_matrix_class_and_index_and_type)
     # --- memory ---
