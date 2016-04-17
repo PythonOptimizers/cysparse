@@ -9,6 +9,8 @@ A fast sparse matrix library for Python/Cython.
  
 ## Dependencies
 
+### Python version
+
 For the Python version:
 
 - [NumPy](http://www.numpy.org/);
@@ -25,6 +27,8 @@ To run the tests:
 To run the performance tests:
 
 [TODO]
+
+### Cython version
 
 For the Cython version, include everything needed for Python and add:
 
@@ -61,7 +65,7 @@ Try the ``-h`` switch to see what options are available. Note that you need to i
 
 ## Want to follow the implementation of CySparse?
 
-See [Wiki](https://github.com/Funartech/cysparse/wiki) for details!
+See the [Wiki](https://github.com/Funartech/cysparse/wiki) for details!
 
 ## Release history
 
