@@ -32,7 +32,8 @@ Here is my (Nikolaj) (non-automated and using ``git flow``) workflow:
 - ``git flow release finish v0.7.3``;
 - ``git push``;
 - ``git checkout master``;
-- ``git push --follow-tags``.
+- ``git push --follow-tags``;
+- ``git checkout develop``.
 
 Optionally, you can also update the documentation with the new tag version. Do this **only** if you skimmed through the doc and know for sure that it is up to date with the new release.
 
