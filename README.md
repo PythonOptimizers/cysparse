@@ -65,6 +65,10 @@ See [Wiki](https://github.com/Funartech/cysparse/wiki) for details!
 
 ## Release history
 
+- Version 0.7.3 released on Apr 18, 2016
+
+  Minor bugs fixes. Added tests for the `find()` method. Now at 14195 tests.
+  
 - Version 0.7.2 released on Apr 15, 2016
 
   Conversion from CSC and CSR to LL with `to_ll()` added. Now at 14027 tests.
