@@ -13,18 +13,16 @@ A.debug_print()
 
 print "T" * 80
 
-CSC = A.to_csc()
+A_CSC = A.to_csc()
 
-print CSC
+print A_CSC
 
 print '%' * 80
 
-A_bis = CSC.to_ll()
-#A_bis.debug_print()
+A_bis = A_CSC.to_ll()
+A_bis.debug_print()
 
 print A_bis
-
-A_bis.debug_print()
 
 A_bis.compress()
 
@@ -33,14 +31,6 @@ print A_bis
 A_bis[2,2] = 9.88
 
 print A_bis
-#print "=" * 80
-#CSR = A.to_csr()
-#CSR.debug_print()
-
-#print "8" * 49
-#print CSR
-
-#print A_bis
 
 print "?" * 80
 

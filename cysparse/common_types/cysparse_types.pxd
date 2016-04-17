@@ -131,5 +131,6 @@ cpdef int result_real_sum_type(CySparseType type1)
 cpdef is_python_number(object obj)
 cpdef is_cysparse_number(obj)
 cpdef is_scalar(obj)
+cpdef safe_cast_is_integer(obj)
 
 cpdef CySparseType min_integer_type(n, type_list) except? UINT64_T

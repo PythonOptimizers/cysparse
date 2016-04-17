@@ -1221,7 +1221,7 @@ cdef class LLSparseMatrix_INT64_t_FLOAT32_t(MutableSparseMatrix_INT64_t_FLOAT32_
         cdef LLSparseMatrixView_INT64_t_FLOAT32_t view
 
         # test for direct access (i.e. both elements are integers)
-        if not PyInt_Check(<PyObject *>key[0]) or not PyInt_Check(<PyObject *>key[1]):
+        if not safe_cast_is_integer(key[0]) or not safe_cast_is_integer(key[1]):
             # TODO: don't create temp object
             view = MakeLLSparseMatrixView_INT64_t_FLOAT32_t(self, <PyObject *>key[0], <PyObject *>key[1])
             self.assign(view, value)
@@ -1260,7 +1260,7 @@ cdef class LLSparseMatrix_INT64_t_FLOAT32_t(MutableSparseMatrix_INT64_t_FLOAT32_
         cdef LLSparseMatrixView_INT64_t_FLOAT32_t view
 
         # test for direct access (i.e. both elements are integers)
-        if not PyInt_Check(<PyObject *>key[0]) or not PyInt_Check(<PyObject *>key[1]):
+        if not safe_cast_is_integer(key[0]) or not safe_cast_is_integer(key[1]):
             view =  MakeLLSparseMatrixView_INT64_t_FLOAT32_t(self, <PyObject *>key[0], <PyObject *>key[1])
             return view
 

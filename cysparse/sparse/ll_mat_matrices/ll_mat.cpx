@@ -1283,7 +1283,7 @@ YOU HAVE TO DEFINE OR CAST YOUR NEW UNRECOGNIZED COMPLEX TYPE
         cdef LLSparseMatrixView_@index@_@type@ view
 
         # test for direct access (i.e. both elements are integers)
-        if not PyInt_Check(<PyObject *>key[0]) or not PyInt_Check(<PyObject *>key[1]):
+        if not safe_cast_is_integer(key[0]) or not safe_cast_is_integer(key[1]):
             # TODO: don't create temp object
             view = MakeLLSparseMatrixView_@index@_@type@(self, <PyObject *>key[0], <PyObject *>key[1])
             self.assign(view, value)
@@ -1322,7 +1322,7 @@ YOU HAVE TO DEFINE OR CAST YOUR NEW UNRECOGNIZED COMPLEX TYPE
         cdef LLSparseMatrixView_@index@_@type@ view
 
         # test for direct access (i.e. both elements are integers)
-        if not PyInt_Check(<PyObject *>key[0]) or not PyInt_Check(<PyObject *>key[1]):
+        if not safe_cast_is_integer(key[0]) or not safe_cast_is_integer(key[1]):
             view =  MakeLLSparseMatrixView_@index@_@type@(self, <PyObject *>key[0], <PyObject *>key[1])
             return view
 

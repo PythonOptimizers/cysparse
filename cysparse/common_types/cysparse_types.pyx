@@ -196,6 +196,16 @@ def is_element_type(cp_types.CySparseType type1):
 # TESTS ON NUMBERS
 ########################################################################################################################
 cpdef is_python_number(object obj):
+    """
+    Test if an `obj` is recognized as a number by CPython.
+
+    Args:
+        obj:
+
+    Warning:
+        On 64bits architecture, `int32_t` is **not** recognized as an `int` by `PyInt_Check`. Use it if you **really**
+        know what you are doing.
+    """
     return PyInt_Check(<PyObject *>obj) or PyFloat_Check(<PyObject *>obj) or PyComplex_Check(<PyObject *>obj) or PyLong_Check(<PyObject *>obj) or PyBool_Check(<PyObject *>obj)
 
 cpdef is_cysparse_number(obj):
@@ -220,6 +230,16 @@ cpdef is_cysparse_number(obj):
 cpdef is_scalar(obj):
     return is_python_number(obj) or is_cysparse_number(obj)
 
+cpdef safe_cast_is_integer(obj):
+    cdef INT64_t integer_var
+
+    try:
+        integer_var = <INT64_t> obj
+        return True
+    except:
+        pass
+
+    return False
 
 ########################################################################################################################
 # TYPE CASTS

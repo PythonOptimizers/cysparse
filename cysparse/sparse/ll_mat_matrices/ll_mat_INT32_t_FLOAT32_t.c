@@ -2127,6 +2127,7 @@ static PyTypeObject *__pyx_ptype_7cpython_7complex_complex = 0;
 /* Module declarations from 'cysparse.common_types.cysparse_types' */
 static PyObject *(*__pyx_f_8cysparse_12common_types_14cysparse_types_is_python_number)(PyObject *, int __pyx_skip_dispatch); /*proto*/
 static PyObject *(*__pyx_f_8cysparse_12common_types_14cysparse_types_is_scalar)(PyObject *, int __pyx_skip_dispatch); /*proto*/
+static PyObject *(*__pyx_f_8cysparse_12common_types_14cysparse_types_safe_cast_is_integer)(PyObject *, int __pyx_skip_dispatch); /*proto*/
 
 /* Module declarations from 'cysparse.sparse.s_mat' */
 static PyTypeObject *__pyx_ptype_8cysparse_6sparse_5s_mat_SparseMatrix = 0;
@@ -15772,8 +15773,9 @@ static int __pyx_pf_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT32
   PyObject *__pyx_t_3 = NULL;
   PyObject *__pyx_t_4 = NULL;
   int __pyx_t_5;
-  __pyx_t_8cysparse_12common_types_14cysparse_types_INT32_t __pyx_t_6;
-  __pyx_t_8cysparse_12common_types_14cysparse_types_FLOAT32_t __pyx_t_7;
+  int __pyx_t_6;
+  __pyx_t_8cysparse_12common_types_14cysparse_types_INT32_t __pyx_t_7;
+  __pyx_t_8cysparse_12common_types_14cysparse_types_FLOAT32_t __pyx_t_8;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -15835,7 +15837,7 @@ static int __pyx_pf_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT32
   /* "cysparse/sparse/ll_mat_matrices/ll_mat_INT32_t_FLOAT32_t.pyx":1224
  * 
  *         # test for direct access (i.e. both elements are integers)
- *         if not PyInt_Check(<PyObject *>key[0]) or not PyInt_Check(<PyObject *>key[1]):             # <<<<<<<<<<<<<<
+ *         if not safe_cast_is_integer(key[0]) or not safe_cast_is_integer(key[1]):             # <<<<<<<<<<<<<<
  *             # TODO: don't create temp object
  *             view = MakeLLSparseMatrixView_INT32_t_FLOAT32_t(self, <PyObject *>key[0], <PyObject *>key[1])
  */
@@ -15843,23 +15845,37 @@ static int __pyx_pf_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT32
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
     {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1224; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_5 = ((!(PyInt_Check(((PyObject *)PyTuple_GET_ITEM(__pyx_v_key, 0))) != 0)) != 0);
-  if (!__pyx_t_5) {
+  __pyx_t_4 = PyTuple_GET_ITEM(__pyx_v_key, 0);
+  __Pyx_INCREF(__pyx_t_4);
+  __pyx_t_3 = __pyx_f_8cysparse_12common_types_14cysparse_types_safe_cast_is_integer(__pyx_t_4, 0); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1224; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1224; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_6 = ((!__pyx_t_5) != 0);
+  if (!__pyx_t_6) {
   } else {
-    __pyx_t_2 = __pyx_t_5;
+    __pyx_t_2 = __pyx_t_6;
     goto __pyx_L5_bool_binop_done;
   }
   if (unlikely(__pyx_v_key == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
     {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1224; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_5 = ((!(PyInt_Check(((PyObject *)PyTuple_GET_ITEM(__pyx_v_key, 1))) != 0)) != 0);
+  __pyx_t_3 = PyTuple_GET_ITEM(__pyx_v_key, 1);
+  __Pyx_INCREF(__pyx_t_3);
+  __pyx_t_4 = __pyx_f_8cysparse_12common_types_14cysparse_types_safe_cast_is_integer(__pyx_t_3, 0); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1224; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_4); if (unlikely(__pyx_t_6 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1224; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __pyx_t_5 = ((!__pyx_t_6) != 0);
   __pyx_t_2 = __pyx_t_5;
   __pyx_L5_bool_binop_done:;
   if (__pyx_t_2) {
 
     /* "cysparse/sparse/ll_mat_matrices/ll_mat_INT32_t_FLOAT32_t.pyx":1226
- *         if not PyInt_Check(<PyObject *>key[0]) or not PyInt_Check(<PyObject *>key[1]):
+ *         if not safe_cast_is_integer(key[0]) or not safe_cast_is_integer(key[1]):
  *             # TODO: don't create temp object
  *             view = MakeLLSparseMatrixView_INT32_t_FLOAT32_t(self, <PyObject *>key[0], <PyObject *>key[1])             # <<<<<<<<<<<<<<
  *             self.assign(view, value)
@@ -15912,7 +15928,7 @@ static int __pyx_pf_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT32
     /* "cysparse/sparse/ll_mat_matrices/ll_mat_INT32_t_FLOAT32_t.pyx":1224
  * 
  *         # test for direct access (i.e. both elements are integers)
- *         if not PyInt_Check(<PyObject *>key[0]) or not PyInt_Check(<PyObject *>key[1]):             # <<<<<<<<<<<<<<
+ *         if not safe_cast_is_integer(key[0]) or not safe_cast_is_integer(key[1]):             # <<<<<<<<<<<<<<
  *             # TODO: don't create temp object
  *             view = MakeLLSparseMatrixView_INT32_t_FLOAT32_t(self, <PyObject *>key[0], <PyObject *>key[1])
  */
@@ -15929,8 +15945,8 @@ static int __pyx_pf_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT32
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
     {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1232; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_6 = __Pyx_PyInt_As_int(PyTuple_GET_ITEM(__pyx_v_key, 0)); if (unlikely((__pyx_t_6 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1232; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_v_i = __pyx_t_6;
+  __pyx_t_7 = __Pyx_PyInt_As_int(PyTuple_GET_ITEM(__pyx_v_key, 0)); if (unlikely((__pyx_t_7 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1232; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_v_i = __pyx_t_7;
 
   /* "cysparse/sparse/ll_mat_matrices/ll_mat_INT32_t_FLOAT32_t.pyx":1233
  * 
@@ -15943,8 +15959,8 @@ static int __pyx_pf_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT32
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
     {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1233; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_6 = __Pyx_PyInt_As_int(PyTuple_GET_ITEM(__pyx_v_key, 1)); if (unlikely((__pyx_t_6 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1233; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_v_j = __pyx_t_6;
+  __pyx_t_7 = __Pyx_PyInt_As_int(PyTuple_GET_ITEM(__pyx_v_key, 1)); if (unlikely((__pyx_t_7 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1233; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_v_j = __pyx_t_7;
 
   /* "cysparse/sparse/ll_mat_matrices/ll_mat_INT32_t_FLOAT32_t.pyx":1235
  *         cdef INT32_t j = key[1]
@@ -15953,8 +15969,8 @@ static int __pyx_pf_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT32
  * 
  *     def __getitem__(self, tuple key):
  */
-  __pyx_t_7 = __pyx_PyFloat_AsFloat(__pyx_v_value); if (unlikely((__pyx_t_7 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1235; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_4 = ((struct __pyx_vtabstruct_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT32_t_LLSparseMatrix_INT32_t_FLOAT32_t *)__pyx_v_self->__pyx_vtab)->safe_put(__pyx_v_self, __pyx_v_i, __pyx_v_j, __pyx_t_7); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1235; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_8 = __pyx_PyFloat_AsFloat(__pyx_v_value); if (unlikely((__pyx_t_8 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1235; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = ((struct __pyx_vtabstruct_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT32_t_LLSparseMatrix_INT32_t_FLOAT32_t *)__pyx_v_self->__pyx_vtab)->safe_put(__pyx_v_self, __pyx_v_i, __pyx_v_j, __pyx_t_8); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1235; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
@@ -16024,8 +16040,9 @@ static PyObject *__pyx_pf_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_F
   PyObject *__pyx_t_3 = NULL;
   PyObject *__pyx_t_4 = NULL;
   int __pyx_t_5;
-  __pyx_t_8cysparse_12common_types_14cysparse_types_INT32_t __pyx_t_6;
-  __pyx_t_8cysparse_12common_types_14cysparse_types_FLOAT32_t __pyx_t_7;
+  int __pyx_t_6;
+  __pyx_t_8cysparse_12common_types_14cysparse_types_INT32_t __pyx_t_7;
+  __pyx_t_8cysparse_12common_types_14cysparse_types_FLOAT32_t __pyx_t_8;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -16087,7 +16104,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_F
   /* "cysparse/sparse/ll_mat_matrices/ll_mat_INT32_t_FLOAT32_t.pyx":1263
  * 
  *         # test for direct access (i.e. both elements are integers)
- *         if not PyInt_Check(<PyObject *>key[0]) or not PyInt_Check(<PyObject *>key[1]):             # <<<<<<<<<<<<<<
+ *         if not safe_cast_is_integer(key[0]) or not safe_cast_is_integer(key[1]):             # <<<<<<<<<<<<<<
  *             view =  MakeLLSparseMatrixView_INT32_t_FLOAT32_t(self, <PyObject *>key[0], <PyObject *>key[1])
  *             return view
  */
@@ -16095,24 +16112,38 @@ static PyObject *__pyx_pf_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_F
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
     {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1263; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_5 = ((!(PyInt_Check(((PyObject *)PyTuple_GET_ITEM(__pyx_v_key, 0))) != 0)) != 0);
-  if (!__pyx_t_5) {
+  __pyx_t_4 = PyTuple_GET_ITEM(__pyx_v_key, 0);
+  __Pyx_INCREF(__pyx_t_4);
+  __pyx_t_3 = __pyx_f_8cysparse_12common_types_14cysparse_types_safe_cast_is_integer(__pyx_t_4, 0); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1263; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1263; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_6 = ((!__pyx_t_5) != 0);
+  if (!__pyx_t_6) {
   } else {
-    __pyx_t_2 = __pyx_t_5;
+    __pyx_t_2 = __pyx_t_6;
     goto __pyx_L5_bool_binop_done;
   }
   if (unlikely(__pyx_v_key == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
     {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1263; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_5 = ((!(PyInt_Check(((PyObject *)PyTuple_GET_ITEM(__pyx_v_key, 1))) != 0)) != 0);
+  __pyx_t_3 = PyTuple_GET_ITEM(__pyx_v_key, 1);
+  __Pyx_INCREF(__pyx_t_3);
+  __pyx_t_4 = __pyx_f_8cysparse_12common_types_14cysparse_types_safe_cast_is_integer(__pyx_t_3, 0); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1263; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_4); if (unlikely(__pyx_t_6 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1263; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __pyx_t_5 = ((!__pyx_t_6) != 0);
   __pyx_t_2 = __pyx_t_5;
   __pyx_L5_bool_binop_done:;
   if (__pyx_t_2) {
 
     /* "cysparse/sparse/ll_mat_matrices/ll_mat_INT32_t_FLOAT32_t.pyx":1264
  *         # test for direct access (i.e. both elements are integers)
- *         if not PyInt_Check(<PyObject *>key[0]) or not PyInt_Check(<PyObject *>key[1]):
+ *         if not safe_cast_is_integer(key[0]) or not safe_cast_is_integer(key[1]):
  *             view =  MakeLLSparseMatrixView_INT32_t_FLOAT32_t(self, <PyObject *>key[0], <PyObject *>key[1])             # <<<<<<<<<<<<<<
  *             return view
  * 
@@ -16131,7 +16162,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_F
     __pyx_t_4 = 0;
 
     /* "cysparse/sparse/ll_mat_matrices/ll_mat_INT32_t_FLOAT32_t.pyx":1265
- *         if not PyInt_Check(<PyObject *>key[0]) or not PyInt_Check(<PyObject *>key[1]):
+ *         if not safe_cast_is_integer(key[0]) or not safe_cast_is_integer(key[1]):
  *             view =  MakeLLSparseMatrixView_INT32_t_FLOAT32_t(self, <PyObject *>key[0], <PyObject *>key[1])
  *             return view             # <<<<<<<<<<<<<<
  * 
@@ -16145,7 +16176,7 @@ static PyObject *__pyx_pf_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_F
     /* "cysparse/sparse/ll_mat_matrices/ll_mat_INT32_t_FLOAT32_t.pyx":1263
  * 
  *         # test for direct access (i.e. both elements are integers)
- *         if not PyInt_Check(<PyObject *>key[0]) or not PyInt_Check(<PyObject *>key[1]):             # <<<<<<<<<<<<<<
+ *         if not safe_cast_is_integer(key[0]) or not safe_cast_is_integer(key[1]):             # <<<<<<<<<<<<<<
  *             view =  MakeLLSparseMatrixView_INT32_t_FLOAT32_t(self, <PyObject *>key[0], <PyObject *>key[1])
  *             return view
  */
@@ -16162,8 +16193,8 @@ static PyObject *__pyx_pf_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_F
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
     {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1267; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_6 = __Pyx_PyInt_As_int(PyTuple_GET_ITEM(__pyx_v_key, 0)); if (unlikely((__pyx_t_6 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1267; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_v_i = __pyx_t_6;
+  __pyx_t_7 = __Pyx_PyInt_As_int(PyTuple_GET_ITEM(__pyx_v_key, 0)); if (unlikely((__pyx_t_7 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1267; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_v_i = __pyx_t_7;
 
   /* "cysparse/sparse/ll_mat_matrices/ll_mat_INT32_t_FLOAT32_t.pyx":1268
  * 
@@ -16176,8 +16207,8 @@ static PyObject *__pyx_pf_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_F
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
     {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1268; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_6 = __Pyx_PyInt_As_int(PyTuple_GET_ITEM(__pyx_v_key, 1)); if (unlikely((__pyx_t_6 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1268; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_v_j = __pyx_t_6;
+  __pyx_t_7 = __Pyx_PyInt_As_int(PyTuple_GET_ITEM(__pyx_v_key, 1)); if (unlikely((__pyx_t_7 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1268; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_v_j = __pyx_t_7;
 
   /* "cysparse/sparse/ll_mat_matrices/ll_mat_INT32_t_FLOAT32_t.pyx":1270
  *         cdef INT32_t j = key[1]
@@ -16187,8 +16218,8 @@ static PyObject *__pyx_pf_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_F
  *     ####################################################################################################################
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_7 = ((struct __pyx_vtabstruct_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT32_t_LLSparseMatrix_INT32_t_FLOAT32_t *)__pyx_v_self->__pyx_vtab)->safe_at(__pyx_v_self, __pyx_v_i, __pyx_v_j); if (unlikely(__pyx_t_7 == 2.0 && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1270; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_4 = PyFloat_FromDouble(__pyx_t_7); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1270; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_8 = ((struct __pyx_vtabstruct_8cysparse_6sparse_15ll_mat_matrices_24ll_mat_INT32_t_FLOAT32_t_LLSparseMatrix_INT32_t_FLOAT32_t *)__pyx_v_self->__pyx_vtab)->safe_at(__pyx_v_self, __pyx_v_i, __pyx_v_j); if (unlikely(__pyx_t_8 == 2.0 && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1270; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = PyFloat_FromDouble(__pyx_t_8); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1270; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_r = __pyx_t_4;
   __pyx_t_4 = 0;
@@ -42495,6 +42526,7 @@ PyMODINIT_FUNC PyInit_ll_mat_INT32_t_FLOAT32_t(void)
   __pyx_t_3 = __Pyx_ImportModule("cysparse.common_types.cysparse_types"); if (!__pyx_t_3) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   if (__Pyx_ImportFunction(__pyx_t_3, "is_python_number", (void (**)(void))&__pyx_f_8cysparse_12common_types_14cysparse_types_is_python_number, "PyObject *(PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   if (__Pyx_ImportFunction(__pyx_t_3, "is_scalar", (void (**)(void))&__pyx_f_8cysparse_12common_types_14cysparse_types_is_scalar, "PyObject *(PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_ImportFunction(__pyx_t_3, "safe_cast_is_integer", (void (**)(void))&__pyx_f_8cysparse_12common_types_14cysparse_types_safe_cast_is_integer, "PyObject *(PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   Py_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_4 = __Pyx_ImportModule("cysparse.sparse.s_mat"); if (!__pyx_t_4) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   if (__Pyx_ImportFunction(__pyx_t_4, "PySparseMatrix_Check", (void (**)(void))&__pyx_f_8cysparse_6sparse_5s_mat_PySparseMatrix_Check, "int (PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
