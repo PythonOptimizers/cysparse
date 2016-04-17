@@ -5,22 +5,22 @@ A fast sparse matrix library for Python/Cython.
 [![Build Status](https://travis-ci.com/PythonOptimizers/cysparse.svg?token=ydgwcgKueSZx3k7qYsxd&branch=develop)](https://travis-ci.com/PythonOptimizers/cysparse)
 
 
-**Only** Python 2.7 is supported for now. We plan to support Python 3.3 soon.
+**Only** Python 2.7 is supported for now. We plan to support Python 3.3 later.
  
 ## Dependencies
 
 For the Python version:
 
-- NumPy;
+- [NumPy](http://www.numpy.org/);
 
 If you intend to generate the documention:
 
-- Sphinx;
-- sphinx_bootstrap_theme;
+- [Sphinx](http://www.sphinx-doc.org/en/stable/);
+- [sphinx_bootstrap_theme](https://ryan-roemer.github.io/sphinx-bootstrap-theme/README.html);
 
 To run the tests:
 
-- nose or unittest;
+- [nose](http://nose.readthedocs.org/en/latest/) or [unittest](https://docs.python.org/2/library/unittest.html);
 
 To run the performance tests:
 
@@ -28,17 +28,17 @@ To run the performance tests:
 
 For the Cython version, include everything needed for Python and add:
 
-- Cython;
-- cygenja;
+- [Cython](http://cython.org/);
+- [cygenja](https://github.com/PythonOptimizers/cygenja);
 
 ## Installation
 
 ### Python version
 
-1. Clone repository (git clone https://github.com/PythonOptimizers/cysparse.git) or copy source code.
+1. Clone repository (git clone [https://github.com/PythonOptimizers/cysparse.git](https://github.com/PythonOptimizers/cysparse.git)) or copy source code.
 2. Install Python dependencies.
 3. Copy `cysparse_template.cfg` to `cysparse.cfg` and adapt it to your needs.
-4. Type `python setup.py install`. 
+4. Invoke `python setup.py install`. 
 
 
 ### Cython version
@@ -107,7 +107,7 @@ See [Wiki](https://github.com/Funartech/cysparse/wiki) for details!
   
 - Version 0.2.0 released on Dec 14, 2015
 
-  Use of ``cygenja``, decoupling of ``linalg``.
+  Use of [cygenja](https://github.com/PythonOptimizers/cygenja), decoupling of ``linalg``.
   
 - Version 0.1.5 released on July 18, 2015
 
