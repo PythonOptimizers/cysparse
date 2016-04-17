@@ -22,6 +22,19 @@ The version is stored in the file ``__init__.py`` of the ``cysparse`` subdirecto
     
 The version can be anything inside the quotes but this line has to be on its own and start with ``__version__ = "`` (notice the one space before and after the equal sign). See the function ``find_version()`` in the file ``setup.cpy`` for more details.
 
+Workflow
+--------
+
+Here is my (Nikolaj) (non-automated and using ``git flow``) workflow:
+
+- ``git flow release start v0.7.3``;
+- Do whatever adjustments needed (mainly change version ``__version__`` and update ``README.md`` with ``- Version 0.7.3 released on Apr 18, 2016``), ``commit`` and ``push`` those;
+- ``git flow release finish v0.7.3``;
+- ``git push``;
+- ``git checkout master``;
+- ``git push --follow-tags``.
+
+Optionally, you can also update the documentation with the new tag version. Do this **only** if you skimmed through the doc and know for sure that it is up to date with the new release.
 
 Meta-programming aka code generation
 =====================================
