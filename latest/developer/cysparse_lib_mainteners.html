@@ -1,0 +1,574 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>CySparse for library maintainers &mdash; CySparse: A sparse matrix library for Python/Cython.</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/julia.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="CySparse: A sparse matrix library for Python/Cython." href="index.html"/>
+        <link rel="next" title="Tests" href="tests.html"/>
+        <link rel="prev" title="Code generation" href="code_generation.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="contents.html" class="icon icon-home"> CySparse: A sparse matrix library for Python/Cython.
+          
+
+          
+          </a>
+          <h1>CySparse: A sparse matrix library for Python/Cython.</h1>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+              <ul>
+<li><a class="reference internal" href="#"><strong class="program">CySparse</strong> for library maintainers</a><ul>
+<li><a class="reference internal" href="#versions">Versions</a><ul>
+<li><a class="reference internal" href="#workflow">Workflow</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#meta-programming-aka-code-generation">Meta-programming aka code generation</a><ul>
+<li><a class="reference internal" href="#justifications">Justifications</a><ul>
+<li><a class="reference internal" href="#respect-the-dry-principle">Respect the DRY principle</a></li>
+<li><a class="reference internal" href="#if-the-conventions-are-not-respected-the-code-shouldn-t-compile">If the conventions are not respected, the code shouldn&#8217;t compile</a></li>
+<li><a class="reference internal" href="#prefer-static-over-dynamic-dispatch">Prefer static over dynamic dispatch</a></li>
+<li><a class="reference internal" href="#use-typed-variables-whenever-possible">Use typed variables whenever possible</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#types">Types</a><ul>
+<li><a class="reference internal" href="#basic-types">Basic types</a></li>
+<li><a class="reference internal" href="#two-categories-of-types">Two categories of types</a></li>
+<li><a class="reference internal" href="#add-or-remove-a-new-type">Add (or remove) a new type</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#conventions">Conventions</a><ul>
+<li><a class="reference internal" href="#file-names-and-directories">File names and directories</a></li>
+<li><a class="reference internal" href="#jinja2-conventions"><strong class="program">Jinja2</strong> conventions</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#automatic-generation-scripts">Automatic generation scripts</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id5">Conventions</a><ul>
+<li><a class="reference internal" href="#names">Names</a></li>
+<li><a class="reference internal" href="#id6">Types</a></li>
+<li><a class="reference internal" href="#how-to-expose-enums-to-python">How to expose <code class="docutils literal"><span class="pre">enum</span></code>s to <strong class="program">Python</strong></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#class-hierarchy">Class hierarchy</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="contents.html">CySparse: A sparse matrix library for Python/Cython.</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="contents.html">Docs</a> &raquo;</li>
+        
+      <li><strong class="program">CySparse</strong> for library maintainers</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/PythonOptimizers/NLP.py/blob/master/doc/source/cysparse_lib_mainteners.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="cysparse-for-library-maintainers">
+<span id="cysparse-for-library-mainteners"></span><h1><strong class="program">CySparse</strong> for library maintainers<a class="headerlink" href="#cysparse-for-library-maintainers" title="Permalink to this headline">¶</a></h1>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">TO REWRITE COMPLETELY</p>
+</div>
+<p>The main difficulty to maintain the <strong class="program">CySparse</strong> library is to understand and master the automatic code generation from templated source code. We use the template engine <strong class="program">Jinja2</strong> and some hard coded
+conventions. We explain and justify these conventions in the following sections.</p>
+<p>The sparse matrix formats are detailed in the section <a class="reference internal" href="sparse_matrix_formats.html#sparse-matrix-formats"><span class="std std-ref">Sparse Matrix Formats</span></a>.</p>
+<div class="section" id="versions">
+<h2>Versions<a class="headerlink" href="#versions" title="Permalink to this headline">¶</a></h2>
+<p>The version is stored in the file <code class="docutils literal"><span class="pre">__init__.py</span></code> of the <code class="docutils literal"><span class="pre">cysparse</span></code> subdirectory:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">__version__</span> <span class="o">=</span> <span class="s2">&quot;0.1.0&quot;</span>
+</pre></div>
+</div>
+<p>The version can be anything inside the quotes but this line has to be on its own and start with <code class="docutils literal"><span class="pre">__version__</span> <span class="pre">=</span> <span class="pre">&quot;</span></code> (notice the one space before and after the equal sign). See the function <code class="docutils literal"><span class="pre">find_version()</span></code> in the file <code class="docutils literal"><span class="pre">setup.cpy</span></code> for more details.</p>
+<div class="section" id="workflow">
+<h3>Workflow<a class="headerlink" href="#workflow" title="Permalink to this headline">¶</a></h3>
+<p>Here is my (Nikolaj) (non-automated and using <code class="docutils literal"><span class="pre">git</span> <span class="pre">flow</span></code>) workflow:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">git</span> <span class="pre">flow</span> <span class="pre">release</span> <span class="pre">start</span> <span class="pre">v0.7.3</span></code>;</li>
+<li>Do whatever adjustments needed (mainly change version <code class="docutils literal"><span class="pre">__version__</span></code> and update <code class="docutils literal"><span class="pre">README.md</span></code> with <code class="docutils literal"><span class="pre">-</span> <span class="pre">Version</span> <span class="pre">0.7.3</span> <span class="pre">released</span> <span class="pre">on</span> <span class="pre">Apr</span> <span class="pre">18,</span> <span class="pre">2016</span></code>), <code class="docutils literal"><span class="pre">commit</span></code> and <code class="docutils literal"><span class="pre">push</span></code> those;</li>
+<li><code class="docutils literal"><span class="pre">git</span> <span class="pre">flow</span> <span class="pre">release</span> <span class="pre">finish</span> <span class="pre">v0.7.3</span></code>;</li>
+<li><code class="docutils literal"><span class="pre">git</span> <span class="pre">push</span></code>;</li>
+<li><code class="docutils literal"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">master</span></code>;</li>
+<li><code class="docutils literal"><span class="pre">git</span> <span class="pre">push</span> <span class="pre">--follow-tags</span></code>;</li>
+<li><code class="docutils literal"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">develop</span></code>.</li>
+</ul>
+<p>Optionally, you can also update the documentation with the new tag version. Do this <strong>only</strong> if you skimmed through the doc and know for sure that it is up to date with the new release.</p>
+</div>
+</div>
+<div class="section" id="meta-programming-aka-code-generation">
+<h2>Meta-programming aka code generation<a class="headerlink" href="#meta-programming-aka-code-generation" title="Permalink to this headline">¶</a></h2>
+<p><strong class="program">CySparse</strong> allows the use of different types at run time and most typed classes comes in different typed flavours. This feature comes with a price. Because we wanted to write the library completely
+in <strong class="program">Cython</strong>, we decided to go for the explicit template route, i.e. we write <strong>templated source code</strong> and and use <strong>explicit names</strong> in the source code.
+This automatic generation process ask for some rigour and takes some time to master. If you follow the next conventions stricly, you should be fine. If you don&#8217;t follow them then probably the code won&#8217;t even compile or
+if it does you might generate difficult to find bugs. Trust me on this one.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Follow the conventions stricly to write templated source code.</p>
+</div>
+<div class="section" id="justifications">
+<h3>Justifications<a class="headerlink" href="#justifications" title="Permalink to this headline">¶</a></h3>
+<p>Following conventions is not always easy, especially if you don&#8217;t understand them. In this sub-section we try to convince you or at least we try to explain and justify some choices I (Nikolaj) made (and try to follow).</p>
+<p>These conventions were made with the following purpose in mind:</p>
+<ul class="simple">
+<li>respect the DRY (Don&#8217;t Repear Yourself) principle;</li>
+<li>if the conventions are not followed, the code shouldn&#8217;t compile;</li>
+<li>prefer static over dynamic dispatch;</li>
+<li>use typed variables whenever possible;</li>
+<li>keep the code simple whenever it doesn&#8217;t sacrifice to efficiency even if the solutions are not Pythonesque;</li>
+</ul>
+<p>We develop these key ideas in the following sub-sections.</p>
+<div class="section" id="respect-the-dry-principle">
+<h4>Respect the DRY principle<a class="headerlink" href="#respect-the-dry-principle" title="Permalink to this headline">¶</a></h4>
+<p>Don&#8217;t write the same code twice. This means of course than whenever you can factorize some common code, you should do so but in our case, because we lack the notion of <em>templates</em> (like <strong class="program">C++</strong> templates), we
+<strong>have</strong> to repeat ourselves and rewrite the classes with different types. This is the main reason to use a template engine and templated code. That said, some code has been duplicated because I (Nikolaj) could not find
+how to make it work in <strong class="program">Cython</strong>. One example is the proxy classes: they all share common code. I wasn&#8217;t able to make them inherit from a base class <a class="footnote-reference" href="#proxies-inheriting-from-a-common-base-class" id="id1">[1]</a>.</p>
+</div>
+<div class="section" id="if-the-conventions-are-not-respected-the-code-shouldn-t-compile">
+<h4>If the conventions are not respected, the code shouldn&#8217;t compile<a class="headerlink" href="#if-the-conventions-are-not-respected-the-code-shouldn-t-compile" title="Permalink to this headline">¶</a></h4>
+<p>To enforce the use of the conventions, we try to enforce them by the compiler (whether the <strong class="program">C</strong>, the <strong class="program">Cython</strong> or <strong class="program">Python</strong> compiler). Often, you&#8217;ll find that templated code have guards to ensure that
+types are recognized and otherwise to generate garbish that won&#8217;t compile.</p>
+<p>The name convention is written explicitely: if you don&#8217;t respect it, you won&#8217;t be able to use the <strong class="program">generate_code.py</strong> script. This is on purpose.</p>
+</div>
+<div class="section" id="prefer-static-over-dynamic-dispatch">
+<h4>Prefer static over dynamic dispatch<a class="headerlink" href="#prefer-static-over-dynamic-dispatch" title="Permalink to this headline">¶</a></h4>
+<p>Even if <strong class="program">Python</strong> is a dynamic language, efficient <strong class="program">Cython</strong> code <strong>needs</strong> typing. This typing can be done dynamically with long and tedious <code class="docutils literal"><span class="pre">if/then</span></code> combinations or we can let the compiler
+do the dispatch in our place at compile time whenever possible. This is the main reason why there are as many <code class="docutils literal"><span class="pre">LLSparseMatrixView</span></code> classes as there are <code class="docutils literal"><span class="pre">LLSparseMatrix</span></code> classes. Strictly speaking, we don&#8217;t need
+more <code class="docutils literal"><span class="pre">LLSparseMatrixView</span></code> classes than the number of index types but then you need to dynamically dispatch some operations like the creation of a corresponding ``</p>
+</div>
+<div class="section" id="use-typed-variables-whenever-possible">
+<h4>Use typed variables whenever possible<a class="headerlink" href="#use-typed-variables-whenever-possible" title="Permalink to this headline">¶</a></h4>
+<p><strong class="program">Cython</strong> really shines when it can deduce some static typing, especially in numeric loops. Therefor try to type variables <strong>if</strong> you know their type in advance <a class="footnote-reference" href="#typed-variables" id="id2">[2]</a>.</p>
+<p>Our hope is to keep a nice balance between the difficulty of coding and the easiness to maintain the code. When generating automatically code, these two don&#8217;t necessarily go hand in hand.</p>
+<p>If you find some code that doesn&#8217;t follow these conventions, report it or even better change it!</p>
+</div>
+</div>
+<div class="section" id="types">
+<h3>Types<a class="headerlink" href="#types" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="basic-types">
+<h4>Basic types<a class="headerlink" href="#basic-types" title="Permalink to this headline">¶</a></h4>
+<p>For different reasons <a class="footnote-reference" href="#use-c99-quick-justification" id="id3">[3]</a> (???)</p>
+<p>We use the following basic types:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head"><strong class="program">CySparse</strong></th>
+<th class="head">C99 types</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">INT32_t</span></code></td>
+<td><code class="docutils literal"><span class="pre">int</span></code></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">UINT32_t</span></code></td>
+<td><code class="docutils literal"><span class="pre">unsigned</span> <span class="pre">int</span></code></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">INT64_t</span></code></td>
+<td><code class="docutils literal"><span class="pre">long</span></code></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">UINT64_t</span></code></td>
+<td><code class="docutils literal"><span class="pre">unsigned</span> <span class="pre">long</span></code></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">FLOAT32_t</span></code></td>
+<td><code class="docutils literal"><span class="pre">float</span></code></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">FLOAT64_t</span></code></td>
+<td><code class="docutils literal"><span class="pre">double</span></code></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">FLOAT128_t</span></code></td>
+<td><code class="docutils literal"><span class="pre">long</span> <span class="pre">double</span></code></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">COMPLEX64_t</span></code></td>
+<td><code class="docutils literal"><span class="pre">float</span> <span class="pre">complex</span></code></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">COMPLEX128_t</span></code></td>
+<td><code class="docutils literal"><span class="pre">double</span> <span class="pre">complex</span></code></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">COMPLEX256_t</span></code></td>
+<td><code class="docutils literal"><span class="pre">long</span> <span class="pre">double</span> <span class="pre">complex</span></code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="two-categories-of-types">
+<h4>Two categories of types<a class="headerlink" href="#two-categories-of-types" title="Permalink to this headline">¶</a></h4>
+<p>We allow the use of different types at two levels:</p>
+<ul class="simple">
+<li>for the indices (<code class="docutils literal"><span class="pre">INT32_t</span></code> and <code class="docutils literal"><span class="pre">INT64_t</span></code>) <a class="footnote-reference" href="#signed-vs-unsigned-integers" id="id4">[4]</a>;</li>
+<li>for the matrix elements (<strong>all</strong> the basic types).</li>
+</ul>
+</div>
+<div class="section" id="add-or-remove-a-new-type">
+<h4>Add (or remove) a new type<a class="headerlink" href="#add-or-remove-a-new-type" title="Permalink to this headline">¶</a></h4>
+</div>
+</div>
+<div class="section" id="conventions">
+<h3>Conventions<a class="headerlink" href="#conventions" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="file-names-and-directories">
+<h4>File names and directories<a class="headerlink" href="#file-names-and-directories" title="Permalink to this headline">¶</a></h4>
+<p>To keep the generation of code source files as simple as possible, we follow some conventions. This list of conventions is <strong>strict</strong>: if you depart from these conventions, the code will <strong>not</strong> compile.</p>
+<ul>
+<li><p class="first"><strong>Don&#8217;t</strong> use fused types: this feature is too <strong>experimental</strong>.</p>
+</li>
+<li><p class="first">Template files have the following extensions:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="32%" />
+<col width="32%" />
+<col width="37%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head"><strong class="program">Cython</strong></th>
+<th class="head"><strong class="program">CySparse</strong> template</th>
+<th class="head">File type</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">.pxd</span></code></td>
+<td><code class="docutils literal"><span class="pre">.cpd</span></code></td>
+<td>Definition files.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">.pyx</span></code></td>
+<td><code class="docutils literal"><span class="pre">.cpx</span></code></td>
+<td>Implementation files.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">.pxi</span></code></td>
+<td><code class="docutils literal"><span class="pre">.cpi</span></code></td>
+<td>Text files to insert verbatim.</td>
+</tr>
+</tbody>
+</table>
+<p>For python files:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="32%" />
+<col width="32%" />
+<col width="37%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head"><strong class="program">Python</strong></th>
+<th class="head"><strong class="program">CySparse</strong> template</th>
+<th class="head">File type</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">.py</span></code></td>
+<td><code class="docutils literal"><span class="pre">.cpy</span></code></td>
+<td>Python module files.</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><p class="first">Any <em>template</em> directory must <strong>only</strong> contain the template files and the generated files. This is because
+all files with the right extension are considered as templates and all the other files are considered as generated
+(and can be thus automatically erased). This clear distinction allows also to have a strict separation between
+automatically generated files and the rest of the code.</p>
+</li>
+<li><p class="first">Index types are replaced whenever the variable <code class="docutils literal"><span class="pre">&#64;index&#64;</span></code> is encountered, Element types are replaced whenever the variable <code class="docutils literal"><span class="pre">&#64;type&#64;</span></code> is encountered.</p>
+</li>
+<li><p class="first">Generated <strong>file names</strong>:</p>
+<ul class="simple">
+<li>for a file <code class="docutils literal"><span class="pre">my_file.cpx</span></code> where we only replace an index type <code class="docutils literal"><span class="pre">INT32_t</span></code>: <code class="docutils literal"><span class="pre">my_file_INT32_t.pyx</span></code>;</li>
+<li>for a file <code class="docutils literal"><span class="pre">my_file.cpx</span></code> where we replace an index type <code class="docutils literal"><span class="pre">INT32_t</span></code> <strong>and</strong> an elment type <code class="docutils literal"><span class="pre">FLOAT64_t</span></code>: <code class="docutils literal"><span class="pre">my_file_INT32_t_FLOAT_t.pyx</span></code>.</li>
+</ul>
+</li>
+<li><p class="first">Generated <strong>class/method/function names</strong>:</p>
+</li>
+</ul>
+</div>
+<div class="section" id="jinja2-conventions">
+<h4><strong class="program">Jinja2</strong> conventions<a class="headerlink" href="#jinja2-conventions" title="Permalink to this headline">¶</a></h4>
+</div>
+</div>
+<div class="section" id="automatic-generation-scripts">
+<h3>Automatic generation scripts<a class="headerlink" href="#automatic-generation-scripts" title="Permalink to this headline">¶</a></h3>
+<p><strong>All</strong> generated files can be generated by invoking a <strong>single</strong> script:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>python generate_code.py
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>Conventions<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="names">
+<h3>Names<a class="headerlink" href="#names" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="id6">
+<h3>Types<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<p><strong>All</strong> classes are typed and <em>almost</em> all algorithms used specialized typed variables. Many algorithm are specialized for <strong>one</strong> type of variable. This allows to have optimized algorithms but at the detriment of being able to mix types. For instance, most of the methods of sparse matrices only works for <strong>one</strong> <code class="docutils literal"><span class="pre">dtype</span></code> and <strong>one</strong> <code class="docutils literal"><span class="pre">itype</span></code>.</p>
+</div>
+<div class="section" id="how-to-expose-enums-to-python">
+<h3>How to expose <code class="docutils literal"><span class="pre">enum</span></code>s to <strong class="program">Python</strong><a class="headerlink" href="#how-to-expose-enums-to-python" title="Permalink to this headline">¶</a></h3>
+<p>Even if recently <strong class="program">Cyhton</strong> exposes automagically <code class="docutils literal"><span class="pre">enum</span></code>s to <strong class="program">Python</strong> (see <a class="reference external" href="https://groups.google.com/forum/#!topic/cython-users/gn1p6znjoyE">https://groups.google.com/forum/#!topic/cython-users/gn1p6znjoyE</a>), don&#8217;t count on it. The convention is
+to expose equivalent strings to the user. This string is then translated internally by the corresponding <code class="docutils literal"><span class="pre">enum</span></code>. For instance, the <code class="docutils literal"><span class="pre">enum</span></code> value <code class="docutils literal"><span class="pre">UMFPACK_A</span></code> <strong class="program">UmfPack</strong> system parameter can be
+given as the string <cite>&#8216;UMFPACK_A&#8217;</cite> by the user (as a parameter to a <cite>solve()</cite> method for instance). Internally, this string is translated:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">umfpack_sys_string</span><span class="o">=</span><span class="s1">&#39;UMFPACK_A&#39;</span><span class="p">,</span> <span class="o">...</span><span class="p">):</span>
+    <span class="n">cdef</span><span class="p">:</span>
+        <span class="nb">int</span> <span class="n">umfpack_sys</span> <span class="o">=</span> <span class="n">UMFPACK_SYS_DICT</span><span class="p">[</span><span class="n">umfpack_sys_string</span><span class="p">]</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>In <strong class="program">Cython</strong> code, you are free to directly use the <code class="docutils literal"><span class="pre">enum</span></code> itself.</p>
+</div>
+</div>
+<div class="section" id="class-hierarchy">
+<h2>Class hierarchy<a class="headerlink" href="#class-hierarchy" title="Permalink to this headline">¶</a></h2>
+<p>The class hierarchy may seems strange at first and indeed is strange. In my wildest dreams (I = Nikolaj) I would like to have a base class <code class="docutils literal"><span class="pre">MatrixLike</span></code> from which all other classes inherit.
+Something like this <a class="footnote-reference" href="#class-hierarchy-with-future-classes" id="id7">[5]</a>:</p>
+<div class="figure align-center" id="id11">
+<a class="reference internal image-reference" href="_images/ideal_class_hierarchy.png"><img alt="_images/ideal_class_hierarchy.png" src="_images/ideal_class_hierarchy.png" style="width: 600pt;" /></a>
+<p class="caption"><span class="caption-text">The ideal (?) class hierarchy</span></p>
+</div>
+<p>While this makes perfect sense at first, it is not very practical with the current situation of <strong class="program">Cython</strong> and its inability to really use <em>templates</em>. For instance, the <code class="docutils literal"><span class="pre">MatrixLike</span></code> class should have
+<code class="docutils literal"><span class="pre">nrow</span></code> and <code class="docutils literal"><span class="pre">ncol</span></code> as attributes but this cannot be done for the moment as both attributes are better typed <a class="footnote-reference" href="#untyped-attributes" id="id8">[6]</a>. Thus, <code class="docutils literal"><span class="pre">nrow</span></code> and <code class="docutils literal"><span class="pre">ncol</span></code> must be defined in <code class="docutils literal"><span class="pre">SparseMatrix_INDEX_TYPE</span></code>, and then
+again in <code class="docutils literal"><span class="pre">LLSparseMatrixView_INDEX_TYPE</span></code> and then again... We could define a base <code class="docutils literal"><span class="pre">MatrixLike_INDEX_TYPE</span></code> class and so on.But the point is that <code class="docutils literal"><span class="pre">MatrixLike</span></code> would be quite empty. Basically, I tried to keep it simple and
+without too many inheritance. The resulting class hierarchy is far from optimal (and <strong>is</strong> strange <a class="footnote-reference" href="#class-hierarchy-strange" id="id9">[7]</a>) but is - in my view - a good compromise between code complexity (maintenance), code
+duplication and ease of use but also Cython&#8217;s limitations (See <a class="footnote-reference" href="#proxies-inheriting-from-a-common-base-class" id="id10">[1]</a>).</p>
+<p>The current situation is:</p>
+<div class="figure align-center" id="id12">
+<a class="reference internal image-reference" href="_images/current_class_hierarchy.png"><img alt="_images/current_class_hierarchy.png" src="_images/current_class_hierarchy.png" style="width: 700pt;" /></a>
+<p class="caption"><span class="caption-text">Current class hierarchy</span></p>
+</div>
+<p>which involves some code duplication and the use of global functions.</p>
+<h4>Footnotes</h4><table class="docutils footnote" frame="void" id="proxies-inheriting-from-a-common-base-class" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td><em>(<a class="fn-backref" href="#id1">1</a>, <a class="fn-backref" href="#id10">2</a>)</em> See <a class="reference external" href="https://github.com/PythonOptimizers/cysparse/issues/113">https://github.com/PythonOptimizers/cysparse/issues/113</a> for more about this issue.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="typed-variables" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td>Use your intelligence and knowledge of <strong class="program">Cython</strong>. Know when it makes a difference to type a variable.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="use-c99-quick-justification" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[3]</a></td><td><p class="first">we use <strong class="program">C99</strong> for its superiority compared to <strong class="program">ANSI C</strong> (<strong class="program">C89</strong> or <strong class="program">C90</strong> which is the same). Among others:</p>
+<ul class="last simple">
+<li>the INFINITY and NAN macros;</li>
+<li>its complex types;</li>
+<li>inline functions;</li>
+</ul>
+</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="signed-vs-unsigned-integers" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id4">[4]</a></td><td>We don&#8217;t want to enter into the debate unsigned vs signed integers. Accept this as a fact. Beside, we use internally negative indices.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="class-hierarchy-with-future-classes" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id7">[5]</a></td><td>Note that some classes don&#8217;t exist yet.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="untyped-attributes" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id8">[6]</a></td><td>Of course, one could argue that we could use non typed attributes in <code class="docutils literal"><span class="pre">MatrixLike</span></code>.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="class-hierarchy-strange" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id9">[7]</a></td><td>Especially with the <code class="docutils literal"><span class="pre">SparseMatrix</span></code> class split in two (<code class="docutils literal"><span class="pre">SparseMatrix</span></code> and <code class="docutils literal"><span class="pre">SparseMatrix_INDEX_TYPE</span></code>)), <code class="docutils literal"><span class="pre">LLSparseMatrixView_INDEX_TYPE</span></code> on its own and
+non typed proxies.</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="tests.html" class="btn btn-neutral float-right" title="Tests" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="code_generation.html" class="btn btn-neutral" title="Code generation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Dominique Orban, Sylvain Arreckx and Nikolaj van Omme.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'dev',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

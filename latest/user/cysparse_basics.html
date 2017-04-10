@@ -1,0 +1,544 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Basics &mdash; CySparse: A sparse matrix library for Python/Cython.</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/julia.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="CySparse: A sparse matrix library for Python/Cython." href="index.html"/>
+        <link rel="next" title="CySparse‘s types" href="types.html"/>
+        <link rel="prev" title="Installation" href="installation.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="contents.html" class="icon icon-home"> CySparse: A sparse matrix library for Python/Cython.
+          
+
+          
+          </a>
+          <h1>CySparse: A sparse matrix library for Python/Cython.</h1>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+              <ul>
+<li><a class="reference internal" href="#">Basics</a><ul>
+<li><a class="reference internal" href="#sparse-matrices-and-other-matrix-like-objects">Sparse Matrices and other matrix-like objects</a></li>
+<li><a class="reference internal" href="#storage-schemes">Storage schemes</a><ul>
+<li><a class="reference internal" href="#common-strorage-attributes">Common strorage attributes</a><ul>
+<li><a class="reference internal" href="#store-symmetric"><code class="docutils literal"><span class="pre">store_symmetric</span></code></a></li>
+<li><a class="reference internal" href="#store-zero"><code class="docutils literal"><span class="pre">store_zero</span></code></a></li>
+<li><a class="reference internal" href="#is-mutable"><code class="docutils literal"><span class="pre">is_mutable</span></code></a></li>
+<li><a class="reference internal" href="#memory">memory</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#types">Types</a><ul>
+<li><a class="reference internal" href="#common-type-attributes">Common type attributes</a><ul>
+<li><a class="reference internal" href="#dtype-and-itype"><code class="docutils literal"><span class="pre">dtype</span></code> and <code class="docutils literal"><span class="pre">itype</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#what-to-import">What to import</a></li>
+<li><a class="reference internal" href="#factory-methods">Factory methods</a><ul>
+<li><a class="reference internal" href="#common-content-attributes">Common content attributes</a><ul>
+<li><a class="reference internal" href="#nrow-and-ncol"><code class="docutils literal"><span class="pre">nrow</span></code> and <code class="docutils literal"><span class="pre">ncol</span></code></a></li>
+<li><a class="reference internal" href="#nnz"><code class="docutils literal"><span class="pre">nnz</span></code></a></li>
+<li><a class="reference internal" href="#is-symmetric"><code class="docutils literal"><span class="pre">is_symmetric</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#common-string-attributes">Common string attributes</a><ul>
+<li><a class="reference internal" href="#base-type-str-and-full-type-str"><code class="docutils literal"><span class="pre">base_type_str</span></code> and <code class="docutils literal"><span class="pre">full_type_str</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="contents.html">CySparse: A sparse matrix library for Python/Cython.</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="contents.html">Docs</a> &raquo;</li>
+        
+      <li>Basics</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/PythonOptimizers/cysparse/blob/master/doc/source/cysparse_basics.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="basics">
+<span id="cysparse-basics"></span><h1>Basics<a class="headerlink" href="#basics" title="Permalink to this headline">¶</a></h1>
+<p>[TO BE REWRITTEN]</p>
+<p>To add: shape</p>
+<p>This page presents the basics of <strong class="program">CySparse</strong>. It covers a lot but you don&#8217;t need to understand all the details. Instead, treat it as a gentle warm up for the rest of the manual.</p>
+<div class="section" id="sparse-matrices-and-other-matrix-like-objects">
+<h2>Sparse Matrices and other matrix-like objects<a class="headerlink" href="#sparse-matrices-and-other-matrix-like-objects" title="Permalink to this headline">¶</a></h2>
+<p>The main objects of the <strong class="program">CySparse</strong> library are <em>sparse matrices</em>: matrices that typically don&#8217;t contain much elements that are different that <code class="docutils literal"><span class="pre">0</span></code>. Say otherwise, sparce matrices contain lots of <code class="docutils literal"><span class="pre">0</span></code>.
+To gain space and for efficiency reasons we don&#8217;t store these zero elements explicitly <a class="footnote-reference" href="#store-zero-elements" id="id1">[1]</a>. Sparse matrices behave like usual matrices but behind the scene, their implementation use lots of trickery to use
+partial arrays that only store non zero elements. Several implementations exists with each their pros and cons. For instance, if you want to multiply a sparse matrix with a vector, you should use a <code class="docutils literal"><span class="pre">CSR</span></code> matrix,
+i.e. a  <em>Compressed Sparse Row</em> format matrix. Don&#8217;t worry, in <strong class="program">CySparse</strong>, there are only <strong>3</strong> types of sparse matrices:</p>
+<ul class="simple">
+<li>Linked-list format (<strong>LL</strong>): a convenient format for creating and populating a sparse matrix.</li>
+<li>Compressed sparse row format (<strong>CSR</strong>): a format designed to speed up matrix-vector products.</li>
+<li>Compressed sparse column format (<strong>CSC</strong>): a format designed to speed up vector-matrix products.</li>
+</ul>
+<p>Linked-list (LL) format matrices are well suited to <strong>create</strong> and/or <strong>modify</strong> a matrix: you can easily add or delete elements for such matrices. Compressed sparse row (CSR) and Compressed sparse column (CSC) formats
+are more suited for optimized vector multiplication and are difficult to modify. In <strong class="program">CySparse</strong> we even don&#8217;t allow you to modify CSR or CSC matrices!</p>
+<p>Matrices are the big thing in <strong class="program">CySparse</strong> but these objects are still heavy and sometimes you don&#8217;t really need to create them. Enter the matrix <em>proxies</em> and matrix <em>views</em>. These object behave like matrices but
+are <strong>not</strong> matrices. A small example will clarify this. Imagine you have a matrix <span class="math">\(A\)</span> and you need to multiply its transposed with a vector. One way would be to create the transposed matrix and multiply it by this vector.
+Actually, you <strong>don&#8217;t</strong> need to create the transpose of a matrix for that! <strong class="program">CySparse</strong> let you play with a proxy transposed matrix, a fake matrix if you wish:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="o">...</span>  <span class="c1"># this is a sparse matrix</span>
+<span class="n">v</span> <span class="o">=</span> <span class="o">...</span>  <span class="c1"># this is a vector</span>
+
+<span class="n">w</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">T</span> <span class="o">*</span> <span class="n">v</span>
+</pre></div>
+</div>
+<p>To compute the vector <code class="docutils literal"><span class="pre">w</span></code>, <strong class="program">CySparse</strong> doesn&#8217;t need to actually create a transposed matrix. The <code class="docutils literal"><span class="pre">T</span></code> attribute is used for the transposed matrix of <code class="docutils literal"><span class="pre">A</span></code>. No computations are done. When the time comes to do
+some computations, like multiplying this transposed <code class="docutils literal"><span class="pre">A.T</span></code> with a vector <code class="docutils literal"><span class="pre">v</span></code>, <strong class="program">CySparse</strong> behind the scene computes this product directly from the matrix <code class="docutils literal"><span class="pre">A</span></code> and the vector <code class="docutils literal"><span class="pre">v</span></code> <strong>without</strong> creating the
+transposed matrix <code class="docutils literal"><span class="pre">A.T</span></code>. <code class="docutils literal"><span class="pre">A.T</span></code> behaves like a matrix but is not a matrix. If you want to modify the transposed, which is <strong>not</strong> allowed, like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="mi">6</span>
+</pre></div>
+</div>
+<p>it throws an exception:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>TypeError: <span class="s1">&#39;cysparse.sparse.sparse_proxies.t_mat.TransposedSparseMatrix&#39;</span> object does not support item assignment
+</pre></div>
+</div>
+<p>The type of the <code class="docutils literal"><span class="pre">A.T</span></code> object seems complicated and it is. The reason is again efficiency. However, except when dealing with such error messages, the types of the objects don&#8217;t matter for the users as <strong class="program">CySparse</strong>
+takes care of such intricacies. For instance, the product seen above of the transposed with a vector looks very much like it is mathematically written:</p>
+<div class="math">
+\[A^t * v\]</div>
+<p>There is only one more type of objects that behaves like a matrix but isn&#8217;t: views. We tried to assign a new value to an element of the <code class="docutils literal"><span class="pre">A.T</span></code> proxy matrix and this is not allowed. It can happen that sometimes, you need to have
+access to a sub-matrix and even change some elements of this sub-matrix. Enter the <strong>views</strong> that as their name implies allow to have a <em>view</em> over a matrix:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="o">...</span> <span class="c1"># this is a sparse matrix</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span><span class="mi">7</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">B</span></code> is a <em>view</em> and corresponds to the sub-matrix of <code class="docutils literal"><span class="pre">A</span></code> made by its rows 4 to 5 (<strong class="program">Python</strong> starts couting elements from <code class="docutils literal"><span class="pre">0</span></code>) and its columns 3 to 6. You probably recognized the <em>slice</em> notation and it is exactly that.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">C</span> <span class="o">=</span> <span class="n">A</span><span class="p">[:,</span> <span class="p">::</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">C</span></code> corresponds to the sub-matrix of <code class="docutils literal"><span class="pre">A</span></code> made by all its rows and every two columns. Actually, views can be much more complicated than that:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">D</span> <span class="o">=</span> <span class="n">A</span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span> <span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span> <span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
+</pre></div>
+</div>
+<p>Here we use two lists and <code class="docutils literal"><span class="pre">D</span></code> corresponds to a matrix that is no longer a sub-matrix of <code class="docutils literal"><span class="pre">A</span></code>: it is constructed by taking 3 times the second row, then adding the third one and then the first one combined with the first four columns in reversed order.
+We could also write:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">D</span> <span class="o">=</span> <span class="n">A</span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span> <span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>What about modifying an element of a view?</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">B</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="mi">42</span>
+</pre></div>
+</div>
+<p>is perfectly fine. That is, because <code class="docutils literal"><span class="pre">B</span></code> is a <span class="math">\(2 \times 5\)</span> matrix. We could have stored the value <code class="docutils literal"><span class="pre">42</span></code> in the view but that would complicate things a little bit too much and we would loose all efficiency. Instead, when
+you modify a view, you modify the original matrix! By assigning <code class="docutils literal"><span class="pre">42</span></code> to element <span class="math">\((1,4)\)</span> of <code class="docutils literal"><span class="pre">B</span></code> you are in fact assigning <code class="docutils literal"><span class="pre">42</span></code> to element <span class="math">\((4, 6)\)</span> of the original matrix <code class="docutils literal"><span class="pre">A</span></code>!</p>
+<p>Views only exist for <strong>LL</strong> format matrices but because you read carefully, you already knew that <a class="footnote-reference" href="#why-only-one-type-of-view" id="id2">[2]</a>.</p>
+<p>That&#8217;s it. You have already seen <strong>all</strong> the main objects of the library! Of course, we need to talk a little bit more about the details and the common uses.</p>
+<p>You can read more on:</p>
+<ul class="simple">
+<li>LL matrices and views: <a class="reference internal" href="mutable_ll_mat.html#mutable-ll-mat"><span class="std std-ref">Mutable matrices: LLSparseMatrix and LLSparseMatrixView</span></a>;</li>
+<li>CSC and CSR matrices: <a class="reference internal" href="immutable_mat.html#immutable-mat"><span class="std std-ref">Imutable matrices: CSR-, CSC- and CSBSparseMatrix</span></a>;</li>
+<li>proxy matrices: <a class="reference internal" href="proxies.html#sparse-matrix-proxies"><span class="std std-ref">Sparse Matrix Proxies</span></a>.</li>
+</ul>
+</div>
+<div class="section" id="storage-schemes">
+<h2>Storage schemes<a class="headerlink" href="#storage-schemes" title="Permalink to this headline">¶</a></h2>
+<p>[TO BE REWRITTEN]</p>
+<div class="section" id="common-strorage-attributes">
+<h3>Common strorage attributes<a class="headerlink" href="#common-strorage-attributes" title="Permalink to this headline">¶</a></h3>
+<p>For efficiency reasons, <strong class="program">CySparse</strong> can use different storage schemes/methods to store matrices. For instance, symmetric matrices can be stored with only half of their elements.</p>
+<div class="section" id="store-symmetric">
+<h4><code class="docutils literal"><span class="pre">store_symmetric</span></code><a class="headerlink" href="#store-symmetric" title="Permalink to this headline">¶</a></h4>
+<p>Symmetric matrices can be stored by only storing the <strong>lower</strong> triangular part and the diagonal of a matrix. To create a symmetric matrix, add the arguement <code class="docutils literal"><span class="pre">store_symmetric=True</span></code> to the call of one of the factory methods.
+The attribute <code class="docutils literal"><span class="pre">store_symmetric</span></code> returns if this storage method is used or not. Thus, if <code class="docutils literal"><span class="pre">store_symmetric</span></code> is <code class="docutils literal"><span class="pre">True</span></code>, you know that you deal with a symmetric matrix <strong>and</strong> that roughly only half of its elements are stored. If
+<code class="docutils literal"><span class="pre">store_symmetric</span></code> is <code class="docutils literal"><span class="pre">False</span></code>, it simply means that this storage scheme is not used. The matrix itself migth be symmetric or not.</p>
+</div>
+<div class="section" id="store-zero">
+<h4><code class="docutils literal"><span class="pre">store_zero</span></code><a class="headerlink" href="#store-zero" title="Permalink to this headline">¶</a></h4>
+<p>By default non specified (implicit) elements are zero (<code class="docutils literal"><span class="pre">0</span></code>, <code class="docutils literal"><span class="pre">0.0</span></code> or <code class="docutils literal"><span class="pre">0+0j</span></code>). <strong class="program">CySparse</strong> allow the user to store explicitely zeros. To explicitely store zeros, declare <code class="docutils literal"><span class="pre">store_zero=True</span></code> as an argument
+in any factory method:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">LLSparseMatrix</span><span class="p">(</span><span class="n">store_zero</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The matrix <code class="docutils literal"><span class="pre">A</span></code> will store any zero explicitely as will any matrix created from it. You can access the value of this attribute:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">.</span><span class="n">store_zero</span>
+</pre></div>
+</div>
+<p>returns <code class="docutils literal"><span class="pre">True</span></code> for our example. This attribute is read-only and cannot be changed. If you want to temporarily exclude zeros in some operations, you can use the <code class="docutils literal"><span class="pre">NonZeros</span></code> context manager:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">NonZeros</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="c1"># use some method to add entries to A but disregard zeros entries</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>This context manager temporarily set the <code class="docutils literal"><span class="pre">store_zero</span></code> attribute to <code class="docutils literal"><span class="pre">False</span></code> before restoring its inital value.</p>
+<p>By default, <code class="docutils literal"><span class="pre">store_zero</span></code> is set to <code class="docutils literal"><span class="pre">False</span></code>.</p>
+</div>
+<div class="section" id="is-mutable">
+<h4><code class="docutils literal"><span class="pre">is_mutable</span></code><a class="headerlink" href="#is-mutable" title="Permalink to this headline">¶</a></h4>
+<p><code class="docutils literal"><span class="pre">is_mutable</span></code> returns if the matrix can be modified or not. Note that for the moment, <strong>only</strong> an <code class="xref py py-class docutils literal"><span class="pre">LLSparseMatrix</span></code> matrix can be modified.</p>
+</div>
+<div class="section" id="memory">
+<h4>memory<a class="headerlink" href="#memory" title="Permalink to this headline">¶</a></h4>
+<p id="index-0">Just for fun, you can ask each matrix type (<code class="docutils literal"><span class="pre">LLSparseMatrix</span></code>, <code class="docutils literal"><span class="pre">CSCSparseMatrix</span></code> and <code class="docutils literal"><span class="pre">CSRSparseMatrix</span></code>) how much memory they actually use (<code class="docutils literal"><span class="pre">memory_real_in_bytes()</span></code>) versus the memory a corresponding full dense matrix
+would need (<code class="docutils literal"><span class="pre">memory_virtual_in_bytes()</span></code>):</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">ArrowheadLLSparseMatrix</span><span class="p">(</span><span class="n">nrow</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span> <span class="n">itype</span><span class="o">=</span><span class="n">INT64_T</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">COMPLEX128_T</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="n">A</span><span class="o">.</span><span class="n">memory_real_in_bytes</span><span class="p">()</span>
+<span class="k">print</span> <span class="n">A</span><span class="o">.</span><span class="n">memory_virtual_in_bytes</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>which returns:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="mi">25736</span>
+<span class="mi">640000</span>
+</pre></div>
+</div>
+<p>The results are in <strong>bytes</strong>. You can have the results in bits by calling the corresponding methods <code class="docutils literal"><span class="pre">XXX_in_bits()</span></code>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span> <span class="n">A</span><span class="o">.</span><span class="n">memory_real_in_bits</span><span class="p">()</span>
+<span class="k">print</span> <span class="n">A</span><span class="o">.</span><span class="n">memory_virtual_in_bits</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>which returns:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="mi">205888</span>
+<span class="mi">5120000</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">ArrowheadLLSparseMatrix</span></code> creates a sparse matrix. In this case, this sparse matrix has 898 non zero elements. The difference between the sparse and dense matrix representation is <strong>huge</strong> and this is one of the reason we do use special
+representations of sparse matrices instead of storing all the zeros.</p>
+<p id="index-1">Actually, we can do better as the creation of this sparse matrix consumes a little bit more memory than it really needs <a class="footnote-reference" href="#ll-mat-needs-more-memory-than-needed" id="id3">[3]</a>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">ArrowheadLLSparseMatrix</span><span class="p">(</span><span class="n">nrow</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span> <span class="n">itype</span><span class="o">=</span><span class="n">INT64_T</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">COMPLEX128_T</span><span class="p">)</span>
+
+<span class="n">A</span><span class="o">.</span><span class="n">compress</span><span class="p">()</span>
+
+<span class="k">print</span> <span class="n">A</span><span class="o">.</span><span class="n">memory_real_in_bytes</span><span class="p">()</span>
+<span class="k">print</span> <span class="n">A</span><span class="o">.</span><span class="n">memory_virtual_in_bytes</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>which this time returns:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="mi">21752</span>
+<span class="mi">640000</span>
+</pre></div>
+</div>
+<p>Note that this memory is <strong>only</strong> the memory needed for the internal <strong class="program">C</strong>-arrays, <strong>not</strong> the total memory needed to store the whole matrix object. <code class="docutils literal"><span class="pre">compress()</span></code> will squeeze the <code class="docutils literal"><span class="pre">LLSparseMatrix</span></code> matrix to
+its minimum. Note that <code class="docutils literal"><span class="pre">CSCSpasreMatrix</span></code> and <code class="docutils literal"><span class="pre">CSRSparseMatrix</span></code> are <strong>always</strong> squeezed to their minimum memory consumption.</p>
+<p id="index-2">You can also ask what memory <strong>one</strong> element needs to be stored internally.
+For our example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span> <span class="n">A</span><span class="o">.</span><span class="n">memory_element_in_bits</span><span class="p">()</span>
+<span class="k">print</span> <span class="n">A</span><span class="o">.</span><span class="n">memory_element_in_bytes</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>returns</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="mi">128</span>
+<span class="mi">16</span>
+</pre></div>
+</div>
+<p>What about the memory needed to store an index?</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span> <span class="n">A</span><span class="o">.</span><span class="n">memory_index_in_bits</span><span class="p">()</span>
+<span class="k">print</span> <span class="n">A</span><span class="o">.</span><span class="n">memory_index_in_bytes</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>returns:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="mi">32</span>
+<span class="mi">4</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="types">
+<span id="basics-types"></span><h2>Types<a class="headerlink" href="#types" title="Permalink to this headline">¶</a></h2>
+<p>Each library has been written with a main goal in mind. We tried to optimize <strong class="program">CySparse</strong> for speed. Its code is therefor highly optimized and we use <em>typed</em> <strong class="program">C</strong> variables internally. All elements inside
+a matrix have the same well-defined types. Even indices are typed! For efficiency reasons, we often don&#8217;t allow XXX</p>
+<p>You will not be surprised that in <strong class="program">CySparse</strong>, we <strong>strongly</strong> discourage the mixing of types. Actually, most operations require to deal with objets that have <strong>exactly</strong>
+the same types for their indices <strong>and</strong> their elements. As a rule of thumb, try not to mix objects with different types. We call this our <em>Golden Rule</em>.</p>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p>The Golden Rule:</p>
+<p class="last">Never mix matrices with different types!</p>
+</div>
+<p>If you follow this rule, you will not run into troubles in <strong class="program">CySparse</strong>.</p>
+<p><strong class="program">NumPy</strong> and <strong class="program">SciPy</strong> let you mix matrices with different types. You can even declare your own type for the elements of a matrix! This flexibility has a cost as you can see in our benchmarks. <strong class="program">CySparse</strong>
+is not as flexible but is some order of magnitude more efficient.</p>
+<p>[TO BE REWRITTEN]</p>
+<div class="section" id="common-type-attributes">
+<h3>Common type attributes<a class="headerlink" href="#common-type-attributes" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="dtype-and-itype">
+<h4><code class="docutils literal"><span class="pre">dtype</span></code> and <code class="docutils literal"><span class="pre">itype</span></code><a class="headerlink" href="#dtype-and-itype" title="Permalink to this headline">¶</a></h4>
+<p>Each matrix (matrix-like) object has an internal index <em>type</em> and stores <em>typed</em> elements. Both types (enums) can be retrieved.
+<code class="docutils literal"><span class="pre">dtype</span></code> returns the type of the elements of the matrix and <code class="docutils literal"><span class="pre">itype</span></code> returns its index type.</p>
+<p>See section <a class="reference internal" href="types.html#availabe-types"><span class="std std-ref">Available types</span></a> about the available types.</p>
+</div>
+</div>
+</div>
+<div class="section" id="what-to-import">
+<h2>What to import<a class="headerlink" href="#what-to-import" title="Permalink to this headline">¶</a></h2>
+<p>For <strong class="program">Python users</strong>, <strong>only one</strong> file needs to be imported:</p>
+<ul class="simple">
+<li><code class="file docutils literal"><span class="pre">ll_mat</span></code>: to create an <code class="docutils literal"><span class="pre">LLSparseMatrix</span></code>.</li>
+</ul>
+<p>In short, you only need this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cysparse.sparse.ll_mat</span> <span class="kn">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+<p><strong class="program">Cython</strong>&#8216;s users can import any <strong class="program">Cython</strong> file in any order.</p>
+</div>
+<div class="section" id="factory-methods">
+<h2>Factory methods<a class="headerlink" href="#factory-methods" title="Permalink to this headline">¶</a></h2>
+<p>[TO BE REWRITTEN]</p>
+<div class="section" id="common-content-attributes">
+<h3>Common content attributes<a class="headerlink" href="#common-content-attributes" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="nrow-and-ncol">
+<h4><code class="docutils literal"><span class="pre">nrow</span></code> and <code class="docutils literal"><span class="pre">ncol</span></code><a class="headerlink" href="#nrow-and-ncol" title="Permalink to this headline">¶</a></h4>
+<p><code class="docutils literal"><span class="pre">nrow</span></code> and <code class="docutils literal"><span class="pre">ncol</span></code> give respectively the number of rows and columns. You also can grab both at the same time with the <code class="docutils literal"><span class="pre">shape</span></code> attribute:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="o">...</span>
+<span class="n">A</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="n">A</span><span class="o">.</span><span class="n">nrow</span><span class="p">,</span> <span class="n">A</span><span class="o">.</span><span class="n">ncol</span>  <span class="c1"># is True</span>
+</pre></div>
+</div>
+<p>You can use <code class="docutils literal"><span class="pre">nrow</span></code> and <code class="docutils literal"><span class="pre">ncol</span></code> as arguments to construct a new matrix. Whenever the number of rows is equal to the number of columns, i.e. when the matrix is square, you can
+instead use the argument <code class="docutils literal"><span class="pre">size=...</span></code> in most factory methods.</p>
+</div>
+<div class="section" id="nnz">
+<h4><code class="docutils literal"><span class="pre">nnz</span></code><a class="headerlink" href="#nnz" title="Permalink to this headline">¶</a></h4>
+<p>The <code class="docutils literal"><span class="pre">nnz</span></code> attribute returns the number of &#8220;non zeros&#8221; stored in the matrix. Notice that <code class="docutils literal"><span class="pre">0</span></code> could be stored if <code class="docutils literal"><span class="pre">store_zero</span></code> is set to <code class="docutils literal"><span class="pre">True</span></code> and if so, it will be counted in the number of &#8220;non zero&#8221; elements.
+Whenever the symmetric storage scheme is used (<code class="docutils literal"><span class="pre">store_symmetric</span></code> is <code class="docutils literal"><span class="pre">True</span></code>), <code class="docutils literal"><span class="pre">nnz</span></code> only returns the number of &#8220;non zero&#8221; elements stored in the lower triangular part and the diagonal of the matrix, i.e. <code class="docutils literal"><span class="pre">nnz</span></code>
+returns exactly how many elements are stored internally.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last"><code class="docutils literal"><span class="pre">nnz</span></code> returns <strong>exactly</strong> the number of elements stored internally.</p>
+</div>
+<p>When using views, this attribute is <strong>costly</strong> to retrieve as it is systematically recomputed each time and we don&#8217;t make any assomption on the views (views can represent matrices with rows and columns in any order and duplicated
+rows and columns any number of times). The number returned is the number of &#8220;non zero&#8221; elements stored in the equivalent matrix using the <strong>same</strong> storage scheme than viewed matrix.</p>
+</div>
+<div class="section" id="is-symmetric">
+<h4><code class="docutils literal"><span class="pre">is_symmetric</span></code><a class="headerlink" href="#is-symmetric" title="Permalink to this headline">¶</a></h4>
+<p>[TODO in the code!!!]</p>
+<p>Returns if the matrix is symmetric or not. While matrices using the symmetric storage (<code class="docutils literal"><span class="pre">store_symmetric</span> <span class="pre">==</span> <span class="pre">True</span></code>) are symmetric by definition and <code class="docutils literal"><span class="pre">is_symmetric</span></code> returns immediatly <code class="docutils literal"><span class="pre">True</span></code>, this attribute is costly to
+compute in general.</p>
+</div>
+</div>
+<div class="section" id="common-string-attributes">
+<h3>Common string attributes<a class="headerlink" href="#common-string-attributes" title="Permalink to this headline">¶</a></h3>
+<p>Some attributes are stored as <code class="docutils literal"><span class="pre">C</span></code> struct internally and can thus not be accessed from <strong class="program">Python</strong>. We do however provide some strings for the most important ones.</p>
+<div class="section" id="base-type-str-and-full-type-str">
+<h4><code class="docutils literal"><span class="pre">base_type_str</span></code> and <code class="docutils literal"><span class="pre">full_type_str</span></code><a class="headerlink" href="#base-type-str-and-full-type-str" title="Permalink to this headline">¶</a></h4>
+<p>Each matrix or matrix-like object has its own type and type name defined as strings. For instance:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">NewLLSparseMatrix</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">COMPLEX64_T</span><span class="p">,</span> <span class="n">itype</span><span class="o">=</span><span class="n">INT32_T</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">A</span><span class="o">.</span><span class="n">base_type_str</span>
+<span class="k">print</span> <span class="n">A</span><span class="o">.</span><span class="n">full_type_str</span>
+</pre></div>
+</div>
+<p>returns</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>LLSparseMatrix
+LLSparseMatrix <span class="o">[</span>INT32_t, COMPLEX64_t<span class="o">]</span>
+</pre></div>
+</div>
+<p>The type <code class="docutils literal"><span class="pre">LLSparseMatrix</span></code> is common among <code class="docutils literal"><span class="pre">LL</span></code> sparse format matrices while the <code class="docutils literal"><span class="pre">full_type_str</span></code> gives the specific details of the index and element types.</p>
+<p class="rubric">footnotes</p>
+<table class="docutils footnote" frame="void" id="store-zero-elements" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>In some cases thought, it <strong>is</strong> worth keeping <strong>some</strong> zeros explicitly. This can be done in <strong class="program">CySparse</strong> through the use of the <code class="docutils literal"><span class="pre">store_zero</span></code> parameter. Read further.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="why-only-one-type-of-view" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td>Remember that the LL format matrices are the only ones you can modify in <strong class="program">CySparse</strong>!</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="ll-mat-needs-more-memory-than-needed" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[3]</a></td><td>You might wonder why the construction of a matrix would take more memory than it really needs. First of all, this <strong>only</strong> happens for the <code class="docutils literal"><span class="pre">LLSparseMatrix</span></code> type. Second, it
+is a tradeoff between speed, memory and simplicity of the code.</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="types.html" class="btn btn-neutral float-right" title="CySparse‘s types" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="installation.html" class="btn btn-neutral" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Dominique Orban, Sylvain Arreckx and Nikolaj van Omme.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'dev',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

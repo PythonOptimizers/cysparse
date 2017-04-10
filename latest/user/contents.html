@@ -1,0 +1,332 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>CySparse‘s Users Manual &mdash; CySparse: A sparse matrix library for Python/Cython.</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/julia.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="CySparse: A sparse matrix library for Python/Cython." href="index.html"/>
+        <link rel="next" title="Introduction" href="introduction.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="#" class="icon icon-home"> CySparse: A sparse matrix library for Python/Cython.
+          
+
+          
+          </a>
+          <h1>CySparse: A sparse matrix library for Python/Cython.</h1>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+              <ul>
+<li><a class="reference internal" href="#"><strong class="program">CySparse</strong>&#8216;s Users Manual</a><ul>
+<li><a class="reference internal" href="#indices-and-tables">Indices and Tables</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">CySparse: A sparse matrix library for Python/Cython.</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#">Docs</a> &raquo;</li>
+        
+      <li><strong class="program">CySparse</strong>&#8216;s Users Manual</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/PythonOptimizers/cysparse/blob/master/doc/source/contents.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="cysparse-s-users-manual">
+<h1><strong class="program">CySparse</strong>&#8216;s Users Manual<a class="headerlink" href="#cysparse-s-users-manual" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Release:</th><td class="field-body">dev</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Date:</th><td class="field-body">Apr 10, 2017</td>
+</tr>
+</tbody>
+</table>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#what-is-cysparse">What is <strong class="program">CySparse</strong>?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#how-fast-is-fast">How fast is fast?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#how-big-is-big">How big is big?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#pysparse-legacy"><strong class="program">PySparse</strong> legacy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#pysparse-vs-cysparse"><strong class="program">PySparse</strong> vs <strong class="program">CySparse</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#what-is-the-maturity-level-of-cysparse">What is the maturity level of <strong class="program">CySparse</strong>?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#license">License</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#python-installation"><strong class="program">Python</strong> installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#cython-installation"><strong class="program">Cython</strong> installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#further-dependencies">Further dependencies</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cysparse_basics.html">Basics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cysparse_basics.html#sparse-matrices-and-other-matrix-like-objects">Sparse Matrices and other matrix-like objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cysparse_basics.html#storage-schemes">Storage schemes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cysparse_basics.html#types">Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cysparse_basics.html#what-to-import">What to import</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cysparse_basics.html#factory-methods">Factory methods</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="types.html"><strong class="program">CySparse</strong>&#8216;s types</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="types.html#compatibility-with-numpy">Compatibility with <strong class="program">NumPy</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="types.html#available-types">Available types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="types.html#number-s-behavior-in-cysparse">Number&#8217;s behavior in <strong class="program">CySparse</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="mutable_ll_mat.html">Mutable matrices: <code class="docutils literal"><span class="pre">LLSparseMatrix</span></code> and <code class="docutils literal"><span class="pre">LLSparseMatrixView</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="mutable_ll_mat.html#the-llsparsematrix-class">The <code class="docutils literal"><span class="pre">LLSparseMatrix</span></code> class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mutable_ll_mat.html#the-llsparsematrixview-class">The <code class="docutils literal"><span class="pre">LLSparseMatrixView</span></code> class</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="immutable_mat.html">Imutable matrices: <code class="docutils literal"><span class="pre">CSR-</span></code>, <code class="docutils literal"><span class="pre">CSC-</span></code> and <code class="docutils literal"><span class="pre">CSBSparseMatrix</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="immutable_mat.html#the-csrsparsematrix-class">The <code class="docutils literal"><span class="pre">CSRSparseMatrix</span></code> class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="immutable_mat.html#the-cscsparsematrix-class">The <code class="docutils literal"><span class="pre">CSCSparseMatrix</span></code> class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="immutable_mat.html#the-csbsparsematrix-class">The <code class="docutils literal"><span class="pre">CSBSparseMatrix</span></code> class</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="matrix_creation.html">How to create a matrix?</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="matrix_creation.html#llsparsematrix-factory-methods"><code class="docutils literal"><span class="pre">LLSparseMatrix</span></code> factory methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="matrix_creation.html#other-ways-to-create-matrices-or-matrix-like-objects">Other ways to create matrices or matrix like objects</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="common_matrix_methods.html">Common matrix methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proxies.html">Sparse Matrix Proxies</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="proxies.html#available-proxies">Available proxies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="proxies.html#proxies-can-be-chained">Proxies can be chained</a></li>
+<li class="toctree-l2"><a class="reference internal" href="proxies.html#proxies-are-not-idempotent">Proxies are <strong>not</strong> idempotent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="proxies.html#basic-operations">Basic operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="proxies.html#what-if-i-need-the-full-scale-corresponding-matrix">What if I need the full scale corresponding matrix?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="multiplication_with_numpy_vector.html">Multiplication with a <strong class="program">NumPy</strong> vector</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="multiplication_with_numpy_vector.html#optimization">Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multiplication_with_numpy_vector.html#helpers">Helpers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multiplication_with_numpy_vector.html#matvec"><code class="docutils literal"><span class="pre">matvec()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="multiplication_with_numpy_vector.html#matvec-transp"><code class="docutils literal"><span class="pre">matvec_transp</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="multiplication_with_numpy_vector.html#matvec-htransp"><code class="docutils literal"><span class="pre">matvec_htransp</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="multiplication_with_numpy_vector.html#matvec-conj"><code class="docutils literal"><span class="pre">matvec_conj</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="multiplication_with_numpy_vector.html#what-about-sparse-vectors">What about sparse vectors?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="multiplication_with_matrix.html">Multiplication with a matrix</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="multiplication_with_matrix.html#multiplication-with-a-numpy-matrix">Multiplication with a <strong class="program">NumPy</strong> matrix</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="io_formats.html">IO formats</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="io_formats.html#text-formats">Text formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="io_formats.html#binary-formats">Binary formats</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cysparse_vs_other_libraries.html"><strong class="program">CySparse</strong> compared to other sparse matrix libraries</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cysparse_vs_other_libraries.html#numpy"><strong class="program">NumPy</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cysparse_vs_other_libraries.html#scipy-sparse-matrices-aka-scipy-sparses"><strong class="program">SciPy</strong> sparse matrices aka <strong class="program">scipy.sparses</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cysparse_vs_other_libraries.html#pysparse"><strong class="program">PySparse</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cysparse_cython_users.html"><strong class="program">CySparse</strong> for <strong class="program">Cython</strong> users</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cysparse_cython_users.html#how-to-compile-with-cython">How to compile with <strong class="program">Cython</strong>?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cysparse_cython_users.html#creation-of-matrices">Creation of matrices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cysparse_cython_users.html#accessing-matrix-elements">Accessing matrix elements</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cysparse_api.html"><strong class="program">CySparse</strong> API</a></li>
+</ul>
+</div>
+<div class="section" id="indices-and-tables">
+<h2>Indices and Tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
+<li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
+<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="introduction.html" class="btn btn-neutral float-right" title="Introduction" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Dominique Orban, Sylvain Arreckx and Nikolaj van Omme.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'dev',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,375 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Multiplication with a NumPy vector &mdash; CySparse: A sparse matrix library for Python/Cython.</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/julia.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="CySparse: A sparse matrix library for Python/Cython." href="index.html"/>
+        <link rel="next" title="Multiplication with a matrix" href="multiplication_with_matrix.html"/>
+        <link rel="prev" title="Sparse Matrix Proxies" href="proxies.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="contents.html" class="icon icon-home"> CySparse: A sparse matrix library for Python/Cython.
+          
+
+          
+          </a>
+          <h1>CySparse: A sparse matrix library for Python/Cython.</h1>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+              <ul>
+<li><a class="reference internal" href="#">Multiplication with a <strong class="program">NumPy</strong> vector</a><ul>
+<li><a class="reference internal" href="#optimization">Optimization</a></li>
+<li><a class="reference internal" href="#helpers">Helpers</a></li>
+<li><a class="reference internal" href="#matvec"><code class="docutils literal"><span class="pre">matvec()</span></code></a><ul>
+<li><a class="reference internal" href="#syntactic-sugar">Syntactic sugar</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#matvec-transp"><code class="docutils literal"><span class="pre">matvec_transp</span></code></a></li>
+<li><a class="reference internal" href="#matvec-htransp"><code class="docutils literal"><span class="pre">matvec_htransp</span></code></a><ul>
+<li><a class="reference internal" href="#real-matrices">Real matrices</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#matvec-conj"><code class="docutils literal"><span class="pre">matvec_conj</span></code></a><ul>
+<li><a class="reference internal" href="#id2">Real matrices</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#what-about-sparse-vectors">What about sparse vectors?</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="contents.html">CySparse: A sparse matrix library for Python/Cython.</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="contents.html">Docs</a> &raquo;</li>
+        
+      <li>Multiplication with a <strong class="program">NumPy</strong> vector</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/PythonOptimizers/cysparse/blob/master/doc/source/multiplication_with_numpy_vector.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="multiplication-with-a-numpy-vector">
+<span id="multiplication-with-numpy-vector"></span><h1>Multiplication with a <strong class="program">NumPy</strong> vector<a class="headerlink" href="#multiplication-with-a-numpy-vector" title="Permalink to this headline">¶</a></h1>
+<p>One very common matrix operation is to multiply a sparse matrix with a dense <strong class="program">NumPy</strong> vector. In fact, this operation is so common that we have written very specialized and optimized code for it.
+Because <strong class="program">NumPy</strong> vectors are dense, the multiplication of a sparse matrix by a <strong class="program">NumPy</strong> vector returns a new (dense) <strong class="program">NumPy</strong>.</p>
+<p>All <strong class="program">NumPy</strong> vector multiplication operations work accross <strong>all</strong> sparse matrix types (<code class="docutils literal"><span class="pre">LLSparseMatrix</span></code>, <code class="docutils literal"><span class="pre">CSRSparseMatrix</span></code> and <code class="docutils literal"><span class="pre">CSCSparseMatrix</span></code>),
+<strong>all</strong> proxy types (<code class="docutils literal"><span class="pre">TransposedSparseMatrix</span></code>, <code class="docutils literal"><span class="pre">ConjugateTransposedSparseMatrix</span></code> and <code class="docutils literal"><span class="pre">ConjugatedSparseMatrix</span></code>) and this for <strong>all</strong> <strong>real</strong> and <strong>complex</strong> element types.
+Views <strong>don&#8217;t</strong> implement matrix multiplication.</p>
+<p>As all multiplications are <strong>higly</strong> optimized, you really should use the corresponding method and not use a combination of them equivalent to the one you seek. For instance,</p>
+<div class="math">
+\[A^H * x = conj(A^T * conj(x))\]</div>
+<p>Because <span class="math">\(A^H * x\)</span> <strong>is</strong> implemented, it will be much faster than <span class="math">\(conj(A^T * conj(x))\)</span>.</p>
+<p>Here is the list of the available multiplications:</p>
+<ul class="simple">
+<li><span class="math">\(A * x\)</span>: <code class="docutils literal"><span class="pre">A.matvec(x)</span></code>;</li>
+<li><span class="math">\(A^T * x\)</span>: <code class="docutils literal"><span class="pre">A.matvec_transp(x)</span></code>;</li>
+<li><span class="math">\(A^H * x\)</span>: <code class="docutils literal"><span class="pre">A.matvec_htransp(x)</span></code>;</li>
+<li><span class="math">\(conj(A) * x\)</span>: <code class="docutils literal"><span class="pre">A.matvec_conj(x)</span></code>;</li>
+</ul>
+<p>These operations can also be optained throught the corresponding proxies (with the same efficiency):</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">A.matvec(x)</span></code> is the same as <code class="docutils literal"><span class="pre">A</span> <span class="pre">*</span> <span class="pre">x</span></code>;</li>
+<li><code class="docutils literal"><span class="pre">A.matvec_transp(x)</span></code> is the same as <code class="docutils literal"><span class="pre">A.T</span> <span class="pre">*</span> <span class="pre">x</span></code>;</li>
+<li><code class="docutils literal"><span class="pre">A.matvec_htransp(x)</span></code> is the same as <code class="docutils literal"><span class="pre">A.H</span> <span class="pre">*</span> <span class="pre">x</span></code>;</li>
+<li><code class="docutils literal"><span class="pre">A.matvec_conj(x)</span></code> is the same as <code class="docutils literal"><span class="pre">A.conj</span> <span class="pre">*</span> <span class="pre">x</span></code>;</li>
+</ul>
+<div class="section" id="optimization">
+<h2>Optimization<a class="headerlink" href="#optimization" title="Permalink to this headline">¶</a></h2>
+<p>The following has been optimized:</p>
+<ul class="simple">
+<li>each type is using the dedicated corresponding <strong class="program">C</strong> functions (for instance, the corresponding <cite>conj</cite> function from the standard lib);</li>
+<li>each operation is done at <strong class="program">C</strong> level;</li>
+<li>no factor is copied in any way: we work on the raw <strong class="program">C</strong> arrays;</li>
+<li>strided vectors have special dedicated code;</li>
+<li>we use (what we think are) the best loops to compute the multiplication for each type of matrix;</li>
+</ul>
+</div>
+<div class="section" id="helpers">
+<h2>Helpers<a class="headerlink" href="#helpers" title="Permalink to this headline">¶</a></h2>
+<p>We provide the following helpers for the multiplication of a sparse matrix by a vector:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">nargin</span></code>: The dimension of the vector <code class="docutils literal"><span class="pre">v</span></code> in <code class="docutils literal"><span class="pre">A</span> <span class="pre">*</span> <span class="pre">v</span></code> and</li>
+<li><code class="docutils literal"><span class="pre">nargout</span></code>: The dimension of the result vector <code class="docutils literal"><span class="pre">w</span></code> in <code class="docutils literal"><span class="pre">w</span> <span class="pre">=</span> <span class="pre">A</span> <span class="pre">*</span> <span class="pre">v</span></code>.</li>
+</ul>
+<p>Both are read-only attributes and are defined for all sparse matrices (<code class="docutils literal"><span class="pre">LLSparseMatrix</span></code>, <code class="docutils literal"><span class="pre">CSRSparseMatrix</span></code> and <code class="docutils literal"><span class="pre">CSCSparseMatrix</span></code>) and matrix proxies (<code class="docutils literal"><span class="pre">TransposedSparseMatrix</span></code>, <code class="docutils literal"><span class="pre">ConjugateTransposedSparseMatrix</span></code> and <code class="docutils literal"><span class="pre">ConjugatedSparseMatrix</span></code>)
+but all views (<code class="docutils literal"><span class="pre">LLSParseMatrixView</span></code>). Of course <code class="docutils literal"><span class="pre">nargin</span> <span class="pre">==</span> <span class="pre">ncol</span></code> and <code class="docutils literal"><span class="pre">nargout</span> <span class="pre">==</span> <span class="pre">nrow</span></code>.</p>
+<p>For compapility reasons, we also provide the following global functions:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">matvec(A,</span> <span class="pre">x)</span></code>;</li>
+<li><code class="docutils literal"><span class="pre">matvec_transp(A,</span> <span class="pre">x)</span></code>;</li>
+<li><code class="docutils literal"><span class="pre">matvec_htransp(A,</span> <span class="pre">x)</span></code>;</li>
+<li><code class="docutils literal"><span class="pre">matvec_conj(A,</span> <span class="pre">x)</span></code>.</li>
+</ul>
+<p>Matrix <code class="docutils literal"><span class="pre">A</span></code> must be a sparse matrix, aka its type must inherit from <code class="xref py py-class docutils literal"><span class="pre">SparseMatrix</span></code>. All methods accept a <strong class="program">NumPy</strong> vector but the first two methods also accepts a sparse vector (i.e. <code class="docutils literal"><span class="pre">x</span></code> can also be &#8220;one
+dimensional&#8221; sparse matrix <a class="footnote-reference" href="#one-dimensional-sparse-matrix-not-yet" id="id1">[1]</a>).</p>
+</div>
+<div class="section" id="matvec">
+<h2><code class="docutils literal"><span class="pre">matvec()</span></code><a class="headerlink" href="#matvec" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="syntactic-sugar">
+<h3>Syntactic sugar<a class="headerlink" href="#syntactic-sugar" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="matvec-transp">
+<h2><code class="docutils literal"><span class="pre">matvec_transp</span></code><a class="headerlink" href="#matvec-transp" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="matvec-htransp">
+<h2><code class="docutils literal"><span class="pre">matvec_htransp</span></code><a class="headerlink" href="#matvec-htransp" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="real-matrices">
+<h3>Real matrices<a class="headerlink" href="#real-matrices" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="matvec-conj">
+<h2><code class="docutils literal"><span class="pre">matvec_conj</span></code><a class="headerlink" href="#matvec-conj" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id2">
+<h3>Real matrices<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="what-about-sparse-vectors">
+<h2>What about sparse vectors?<a class="headerlink" href="#what-about-sparse-vectors" title="Permalink to this headline">¶</a></h2>
+<p><strong class="program">CySparse</strong> doesn&#8217;t have a special sparse vector class. However, you can use a simple <code class="docutils literal"><span class="pre">SparseMatrix</span></code> object to represent your vector:</p>
+<div class="highlight-Python"><div class="highlight"><pre><span></span><span class="n">v</span> <span class="o">=</span> <span class="n">LLSparseMatrix</span><span class="p">(</span><span class="n">nrow</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">v</span><span class="o">.</span><span class="n">put_triplet</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">])</span>
+
+<span class="n">A</span> <span class="o">=</span> <span class="n">LinearFillLLSparseMatrix</span><span class="p">(</span><span class="n">nrow</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="n">v</span>
+<span class="k">print</span> <span class="n">A</span>
+
+<span class="n">C</span> <span class="o">=</span> <span class="n">A</span> <span class="o">*</span> <span class="n">v</span>
+<span class="k">print</span> <span class="n">C</span>
+</pre></div>
+</div>
+<p>returns the expected results:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>LLSparseMatrix <span class="o">[</span>INT64_t, FLOAT64_t<span class="o">]</span> of <span class="nv">size</span><span class="o">=(</span><span class="m">4</span>, <span class="m">1</span><span class="o">)</span> with <span class="m">2</span> non zero values &lt;Storage scheme: General and without zeros&gt;
+ <span class="m">1</span>.000000
+   ---
+ <span class="m">2</span>.000000
+   ---
+
+
+LLSparseMatrix <span class="o">[</span>INT64_t, FLOAT64_t<span class="o">]</span> of <span class="nv">size</span><span class="o">=(</span><span class="m">3</span>, <span class="m">4</span><span class="o">)</span> with <span class="m">12</span> non zero values &lt;Storage scheme: General and without zeros&gt;
+ <span class="m">1</span>.000000   <span class="m">2</span>.000000   <span class="m">3</span>.000000   <span class="m">4</span>.000000
+ <span class="m">5</span>.000000   <span class="m">6</span>.000000   <span class="m">7</span>.000000   <span class="m">8</span>.000000
+ <span class="m">9</span>.000000  <span class="m">10</span>.000000  <span class="m">11</span>.000000  <span class="m">12</span>.000000
+
+
+LLSparseMatrix <span class="o">[</span>INT64_t, FLOAT64_t<span class="o">]</span> of <span class="nv">size</span><span class="o">=(</span><span class="m">3</span>, <span class="m">1</span><span class="o">)</span> with <span class="m">3</span> non zero values &lt;Storage scheme: General and without zeros&gt;
+ <span class="m">7</span>.000000
+<span class="m">19</span>.000000
+<span class="m">31</span>.000000
+</pre></div>
+</div>
+<p>Of course, the result <strong>is</strong> a sparse matrix. Contrary to <strong class="program">NumPy</strong> vectors, you need to give the right dimensions for the vector:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">v</span> <span class="o">=</span> <span class="n">LLSparseMatrix</span><span class="p">(</span><span class="n">nrow</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">LinearFillLLSparseMatrix</span><span class="p">(</span><span class="n">nrow</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="n">A</span> <span class="o">*</span> <span class="n">v</span>
+</pre></div>
+</div>
+<p>will result in</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>IndexError: Matrix dimensions must agree <span class="o">([</span><span class="m">3</span>, <span class="m">4</span><span class="o">]</span> * <span class="o">[</span><span class="m">1</span>, <span class="m">4</span><span class="o">])</span>
+</pre></div>
+</div>
+<p>and you need to use <strong>two</strong> indices to access its elements:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">v</span> <span class="o">=</span> <span class="n">LLSparseMatrix</span><span class="p">(</span><span class="n">nrow</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+    <span class="k">print</span> <span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+<p class="rubric">Footnotes</p>
+<table class="docutils footnote" frame="void" id="one-dimensional-sparse-matrix-not-yet" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Remember that there is no such thing as a &#8220;one dimensional&#8221; sparse vector in <strong class="program">CySparse</strong>. We only use a two dimensional sparse matrix with only one row or one column.</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="multiplication_with_matrix.html" class="btn btn-neutral float-right" title="Multiplication with a matrix" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="proxies.html" class="btn btn-neutral" title="Sparse Matrix Proxies" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Dominique Orban, Sylvain Arreckx and Nikolaj van Omme.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'dev',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

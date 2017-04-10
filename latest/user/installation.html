@@ -1,0 +1,460 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Installation &mdash; CySparse: A sparse matrix library for Python/Cython.</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/julia.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="CySparse: A sparse matrix library for Python/Cython." href="index.html"/>
+        <link rel="next" title="Basics" href="cysparse_basics.html"/>
+        <link rel="prev" title="Introduction" href="introduction.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="contents.html" class="icon icon-home"> CySparse: A sparse matrix library for Python/Cython.
+          
+
+          
+          </a>
+          <h1>CySparse: A sparse matrix library for Python/Cython.</h1>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+              <ul>
+<li><a class="reference internal" href="#">Installation</a><ul>
+<li><a class="reference internal" href="#python-installation"><strong class="program">Python</strong> installation</a><ul>
+<li><a class="reference internal" href="#clone-the-repository">Clone the repository</a></li>
+<li><a class="reference internal" href="#install-the-depencies">Install the depencies</a></li>
+<li><a class="reference internal" href="#compile-and-install-the-library">Compile and install the library</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cython-installation"><strong class="program">Cython</strong> installation</a><ul>
+<li><a class="reference internal" href="#id2">Clone the repository</a></li>
+<li><a class="reference internal" href="#install-the-dependencies">Install the dependencies</a><ul>
+<li><a class="reference internal" href="#cysparse"><strong class="program">CySparse</strong></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#tweak-the-configuration-file-cysparse-cfg">Tweak the configuration file <code class="file docutils literal"><span class="pre">cysparse.cfg</span></code></a><ul>
+<li><a class="reference internal" href="#logging">Logging</a></li>
+<li><a class="reference internal" href="#bits-64bits-platforms">32bits/64bits platforms</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#generate-the-source-code">Generate the source code</a></li>
+<li><a class="reference internal" href="#id4">Compile and install the library</a></li>
+<li><a class="reference internal" href="#inconveniences">Inconveniences</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#further-dependencies">Further dependencies</a><ul>
+<li><a class="reference internal" href="#documentation">Documentation</a></li>
+<li><a class="reference internal" href="#unit-testing">Unit testing</a></li>
+<li><a class="reference internal" href="#performance-testing">Performance testing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="contents.html">CySparse: A sparse matrix library for Python/Cython.</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="contents.html">Docs</a> &raquo;</li>
+        
+      <li>Installation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/PythonOptimizers/cysparse/blob/master/doc/source/installation.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<p>There are basically <a class="footnote-reference" href="#tricky-installations" id="id1">[1]</a>, two modes to install <strong class="program">CySparse</strong>:</p>
+<ul class="simple">
+<li><strong class="program">Python</strong> mode and</li>
+<li><strong class="program">Cython</strong> mode.</li>
+</ul>
+<p>In <strong class="program">Python</strong> mode, you install the library as a usual <strong class="program">Python</strong> library. In <strong class="program">Cython</strong> mode a little bit more work is involved as you also need to generate the source code from templated files.</p>
+<div class="section" id="python-installation">
+<h2><strong class="program">Python</strong> installation<a class="headerlink" href="#python-installation" title="Permalink to this headline">¶</a></h2>
+<p>The installation is done in a few simple steps:</p>
+<ol class="arabic simple">
+<li>Clone the repository;</li>
+<li>Install the dependencies;</li>
+<li>Copy <code class="file docutils literal"><span class="pre">cysparse_template.cfg</span></code> to <code class="file docutils literal"><span class="pre">cysparse.cfg</span></code>;</li>
+<li>Compile and install the library:</li>
+</ol>
+<p>We detail these steps in the next sections.</p>
+<div class="section" id="clone-the-repository">
+<h3>Clone the repository<a class="headerlink" href="#clone-the-repository" title="Permalink to this headline">¶</a></h3>
+<p>Start by cloning the <strong class="program">GitHub</strong> repository:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>git clone https://github.com/PythonOptimizers/cysparse.git
+</pre></div>
+</div>
+<p>Beware that you&#8217;ll need a good internet connexion: the code weight a little bit more than ... 200MB!</p>
+</div>
+<div class="section" id="install-the-depencies">
+<h3>Install the depencies<a class="headerlink" href="#install-the-depencies" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><strong class="program">NumPy</strong>;</li>
+<li><strong class="program">configparser</strong> (<strong>not</strong> <strong class="program">ConfigParser</strong>);</li>
+</ul>
+<p>All <strong class="program">Python</strong> dependencies are described in the <code class="file docutils literal"><span class="pre">requirements.txt</span></code> files. You can easily install them all with:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>pip install -r requirements.txt
+</pre></div>
+</div>
+<p>or a similar command.</p>
+</div>
+<div class="section" id="compile-and-install-the-library">
+<h3>Compile and install the library<a class="headerlink" href="#compile-and-install-the-library" title="Permalink to this headline">¶</a></h3>
+<p>The preferred way to install the library is to install it in its own <cite>virtualenv</cite>.</p>
+<p>Wheter using a virtual environment or not, use the traditionnal:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>python setup.py install
+</pre></div>
+</div>
+<p>to compile and install the library.</p>
+</div>
+</div>
+<div class="section" id="cython-installation">
+<h2><strong class="program">Cython</strong> installation<a class="headerlink" href="#cython-installation" title="Permalink to this headline">¶</a></h2>
+<p>The installation is done in a few simple steps:</p>
+<ol class="arabic simple">
+<li>Clone the repository;</li>
+<li>Install the dependencies;</li>
+<li>Tweak the configuration file <code class="file docutils literal"><span class="pre">cysparse.cfg</span></code>;</li>
+<li>Generate the source code;</li>
+<li>Compile and install the library:</li>
+</ol>
+<p>We detail these steps in the next sections.</p>
+<div class="section" id="id2">
+<h3>Clone the repository<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>Start by cloning the <strong class="program">GitHub</strong> repository:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>git clone https://github.com/PythonOptimizers/cysparse.git
+</pre></div>
+</div>
+<p>Beware that you&#8217;ll need a good internet connexion: the code weight a little bit more than ... 200MB!</p>
+</div>
+<div class="section" id="install-the-dependencies">
+<h3>Install the dependencies<a class="headerlink" href="#install-the-dependencies" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="cysparse">
+<h4><strong class="program">CySparse</strong><a class="headerlink" href="#cysparse" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><strong class="program">Cython</strong></li>
+<li><strong class="program">Jinja2</strong></li>
+<li>argparse</li>
+<li>fortranformat</li>
+</ul>
+</div>
+</div>
+<div class="section" id="tweak-the-configuration-file-cysparse-cfg">
+<span id="cysparse-configuration-file"></span><h3>Tweak the configuration file <code class="file docutils literal"><span class="pre">cysparse.cfg</span></code><a class="headerlink" href="#tweak-the-configuration-file-cysparse-cfg" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="file docutils literal"><span class="pre">cysparse.cfg</span></code> is written for <strong class="program">Python</strong>&#8216;s <code class="docutils literal"><span class="pre">ConfigParser</span></code> module. Section stars with <code class="docutils literal"><span class="pre">[my_section]</span></code> followed by one or several lines where a variable on the left is assigned a value on the right.
+An equal sign (<code class="docutils literal"><span class="pre">=</span></code>) between  the variable and the value defines the assignment. Here is an example:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>[CODE_GENERATION]
+# log file name **without** extension (by default, we use &#39;.log&#39;)
+log_name = cysparse_generate_code
+# DEBUG/INFO/WARNING/ERROR/CRITICAL
+log_level = INFO
+</pre></div>
+</div>
+<p>All what follows an <code class="docutils literal"><span class="pre">#</span></code> is considered as comments. In the example above, we have a section <code class="docutils literal"><span class="pre">CODE_GENERATION</span></code> and two variables <code class="docutils literal"><span class="pre">log_name</span></code> and <code class="docutils literal"><span class="pre">log_level</span></code>.</p>
+<div class="section" id="logging">
+<h4>Logging<a class="headerlink" href="#logging" title="Permalink to this headline">¶</a></h4>
+<p>By default, we log the code/tests generation process. The logging is send to a file and to the screen. You can provide a filename with the <code class="docutils literal"><span class="pre">log_name</span></code> variable (this is both used for the logging engine name and the file name) and
+the log level by defining the <code class="docutils literal"><span class="pre">log_level</span></code> variable. The file has <code class="docutils literal"><span class="pre">.log</span></code> as extension. The log level values are <code class="docutils literal"><span class="pre">DEBUG</span></code>, <code class="docutils literal"><span class="pre">INFO</span></code>, <code class="docutils literal"><span class="pre">WARNING</span></code>, <code class="docutils literal"><span class="pre">ERROR</span></code> and <code class="docutils literal"><span class="pre">CRITICAL</span></code>. You can also choose log level for the file and the console with <code class="docutils literal"><span class="pre">console_log_level</span></code>
+and <code class="docutils literal"><span class="pre">file_log_level</span></code>. For instance:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>log_name = cysparse_generate_code
+
+log_level = INFO
+console_log_level = CRITICAL
+file_log_level = WARNING
+</pre></div>
+</div>
+<p>means that you use a log file names <code class="docutils literal"><span class="pre">cysparse_generate_code.log</span></code></p>
+</div>
+<div class="section" id="bits-64bits-platforms">
+<h4>32bits/64bits platforms<a class="headerlink" href="#bits-64bits-platforms" title="Permalink to this headline">¶</a></h4>
+<p>By default, <strong class="program">CySparse</strong> tests if your platform is 32bits or 64bits <a class="footnote-reference" href="#other-platforms" id="id3">[2]</a> and use (<code class="docutils literal"><span class="pre">INT32_t</span></code>, <code class="docutils literal"><span class="pre">INT64_t</span></code>) or (<code class="docutils literal"><span class="pre">INT64_t</span></code>, <code class="docutils literal"><span class="pre">FLOAT64_t</span></code>) for the index and element types respectively.
+You can change/force this behavior by setting <code class="docutils literal"><span class="pre">DEFAULT_INDEX_TYPE</span></code> and <code class="docutils literal"><span class="pre">DEFAULT_ELEMENT_TYPE</span></code> to <code class="docutils literal"><span class="pre">32bits</span></code> or <code class="docutils literal"><span class="pre">64bits</span></code>.</p>
+</div>
+</div>
+<div class="section" id="generate-the-source-code">
+<h3>Generate the source code<a class="headerlink" href="#generate-the-source-code" title="Permalink to this headline">¶</a></h3>
+<p>Some parts of the library source code have to be generated <strong>if</strong> you use <strong class="program">Cython</strong> or wish to generate the code from scratch. We use a script:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>python generate_code.py -r cysparse
+</pre></div>
+</div>
+<p>If you need help, try the <code class="docutils literal"><span class="pre">-h</span></code> switch. If you intend to modify the source code, we invite you to read the developers manual.</p>
+</div>
+<div class="section" id="id4">
+<h3>Compile and install the library<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<p>The preferred way to install the library is to install it in its own <cite>virtualenv</cite>.</p>
+<p>Wheter using a virtual environment or not, use the traditionnal:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>python setup.py install
+</pre></div>
+</div>
+<p>to compile and install the library.</p>
+</div>
+<div class="section" id="inconveniences">
+<h3>Inconveniences<a class="headerlink" href="#inconveniences" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">Sometimes <strong class="program">Cython</strong> can ask for a complete recompilation.
+Whenever this happens, it displays the following message when trying to import the library
+into <strong class="program">Python</strong> <a class="footnote-reference" href="#another-error-msg-triggers-full-recompilation" id="id5">[3]</a>:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>ValueError: XXX has the wrong size, try recompiling
+</pre></div>
+</div>
+<p>where XXX is the first class that has the wrong size. The easiest way to deal with this is to recompile all the .pyx files again (you can force this by removing
+all the .c files) <a class="footnote-reference" href="#cython-try-recompiling" id="id6">[4]</a>.</p>
+<p>See Robert Bradshaw&#8217;s <a class="reference external" href="https://groups.google.com/forum/?hl=en#!topic/cython-users/cOAVM0whJkY">answer</a>.
+See also <a class="reference external" href="https://github.com/cython/cython/wiki/enhancements-distutils_preprocessing">enhancements distutils_preprocessing</a>.</p>
+</li>
+<li><p class="first"><strong>If</strong> you modify the templated code, some dependencies might be missing in the (generated) <code class="docutils literal"><span class="pre">setup.py</span></code> file and require manual intervention,
+i.e. recompilation. The easiest way to go is to recompile everything from scratch <a class="footnote-reference" href="#missing-dependencies-generated-templates" id="id7">[5]</a>. First delete the generated files:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>python generate_code.py -rc cysparse
+</pre></div>
+</div>
+<p>where <code class="docutils literal"><span class="pre">-rc</span></code> stands for <code class="docutils literal"><span class="pre">r</span></code>ecursive and <code class="docutils literal"><span class="pre">c</span></code>lean. This will delete <strong>all</strong> generated <code class="docutils literal"><span class="pre">.pxi</span></code>, <code class="docutils literal"><span class="pre">.pxd</span></code> and <code class="docutils literal"><span class="pre">.pyx</span></code> <strong class="program">Cython</strong> files. Then delete the generated <strong class="program">C</strong> files. To do this, invoke:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>python clean.py
+</pre></div>
+</div>
+<p>This will delete <strong>all</strong> <strong class="program">C</strong> <code class="docutils literal"><span class="pre">.c</span></code> files. You can then recompile the library from scratch.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="further-dependencies">
+<h2>Further dependencies<a class="headerlink" href="#further-dependencies" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="documentation">
+<h3>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><strong class="program">Sphinx</strong></li>
+<li>sphinx-bootstrap-theme</li>
+</ul>
+</div>
+<div class="section" id="unit-testing">
+<h3>Unit testing<a class="headerlink" href="#unit-testing" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><strong class="program">PySparse</strong></li>
+</ul>
+</div>
+<div class="section" id="performance-testing">
+<h3>Performance testing<a class="headerlink" href="#performance-testing" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><strong class="program">PySparse</strong></li>
+<li>benchmark.py (<a class="reference external" href="https://github.com/optimizers/benchmark.py">https://github.com/optimizers/benchmark.py</a>)</li>
+</ul>
+<h4>Footnotes</h4><table class="docutils footnote" frame="void" id="tricky-installations" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Some special configurations might need a complete or partial <strong class="program">Cython</strong> source generation.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="other-platforms" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[2]</a></td><td>For other platforms, have a look at the file <code class="file docutils literal"><span class="pre">cysparse/common_types/cysparse_types.pxd</span></code>.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="another-error-msg-triggers-full-recompilation" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id5">[3]</a></td><td>Another error message is: <code class="docutils literal"><span class="pre">SystemError:</span> <span class="pre">NULL</span> <span class="pre">result</span> <span class="pre">without</span> <span class="pre">error</span> <span class="pre">in</span> <span class="pre">PyObject_Call</span></code>. Recompiling will probably solve the problem.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="cython-try-recompiling" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id6">[4]</a></td><td>The problem is interdependencies between source files that are not catched at compile time. Whenever <strong class="program">Cython</strong> can catch them at runtime, it throws this <code class="docutils literal"><span class="pre">ValueError</span></code>.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="missing-dependencies-generated-templates" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id7">[5]</a></td><td>Interdependencies between generated templates are <strong>not</strong> monitored. Instead of recompiling everything from scratch, you can also simply delete the corresponding <strong class="program">Cython</strong> generated files. This will spare you some compilation time.</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="cysparse_basics.html" class="btn btn-neutral float-right" title="Basics" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="introduction.html" class="btn btn-neutral" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Dominique Orban, Sylvain Arreckx and Nikolaj van Omme.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'dev',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

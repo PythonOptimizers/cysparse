@@ -1,0 +1,251 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>CySparse for Cython users &mdash; CySparse: A sparse matrix library for Python/Cython.</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/julia.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="CySparse: A sparse matrix library for Python/Cython." href="index.html"/>
+        <link rel="next" title="CySparse API" href="cysparse_api.html"/>
+        <link rel="prev" title="CySparse compared to other sparse matrix libraries" href="cysparse_vs_other_libraries.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="contents.html" class="icon icon-home"> CySparse: A sparse matrix library for Python/Cython.
+          
+
+          
+          </a>
+          <h1>CySparse: A sparse matrix library for Python/Cython.</h1>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+              <ul>
+<li><a class="reference internal" href="#"><strong class="program">CySparse</strong> for <strong class="program">Cython</strong> users</a><ul>
+<li><a class="reference internal" href="#how-to-compile-with-cython">How to compile with <strong class="program">Cython</strong>?</a></li>
+<li><a class="reference internal" href="#creation-of-matrices">Creation of matrices</a></li>
+<li><a class="reference internal" href="#accessing-matrix-elements">Accessing matrix elements</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="contents.html">CySparse: A sparse matrix library for Python/Cython.</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="contents.html">Docs</a> &raquo;</li>
+        
+      <li><strong class="program">CySparse</strong> for <strong class="program">Cython</strong> users</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/PythonOptimizers/cysparse/blob/master/doc/source/cysparse_cython_users.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="cysparse-for-cython-users">
+<h1><strong class="program">CySparse</strong> for <strong class="program">Cython</strong> users<a class="headerlink" href="#cysparse-for-cython-users" title="Permalink to this headline">¶</a></h1>
+<p>I efficiency is a major concern to you, we strongly encourage you to use <strong class="program">Cython</strong> to
+compile your own Python extension.</p>
+<div class="section" id="how-to-compile-with-cython">
+<h2>How to compile with <strong class="program">Cython</strong>?<a class="headerlink" href="#how-to-compile-with-cython" title="Permalink to this headline">¶</a></h2>
+<p>To compile and link your project with <strong class="program">CySparse</strong>, simply download the complete source code of <strong class="program">CySparse</strong> and refer to the <code class="docutils literal"><span class="pre">.pxd</span></code> files as needed.</p>
+</div>
+<div class="section" id="creation-of-matrices">
+<h2>Creation of matrices<a class="headerlink" href="#creation-of-matrices" title="Permalink to this headline">¶</a></h2>
+<p>Matrices cannot be instantiated directly in <strong class="program">Python</strong> (see <a class="reference internal" href="matrix_creation.html#matrix-creation"><span class="std std-ref">How to create a matrix?</span></a>). In <strong class="program">Cython</strong>, the factory methods
+can be used <strong>except</strong> if this creates a <em>circular dependencies</em> between these methods. One solution is to simply invoke
+the protection mechanism for the creation of classes yourself:</p>
+<div class="highlight-cython"><div class="highlight"><pre><span></span><span class="k">from</span> <span class="nn">cysparse.cysparse.sparse_mat</span> <span class="k">cimport</span> <span class="n">unexposed_value</span>
+<span class="k">from</span> <span class="nn">cysparse.cysparse.ll_mat</span> <span class="k">cimport</span> <span class="n">LLSparseMatrix</span>
+
+<span class="n">LLSparseMatrix</span> <span class="n">ll_mat</span> <span class="o">=</span> <span class="n">LLSparseMatrix</span><span class="p">(</span><span class="n">control_object</span><span class="o">=</span><span class="n">unexposed_value</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>By adding <code class="docutils literal"><span class="pre">control_object=unexposed_value</span></code> as argument, the <code class="docutils literal"><span class="pre">ll_mat</span></code> assertion in the <code class="docutils literal"><span class="pre">__cinit__()</span></code> constructor will be not be triered. Be carreful though as you are fully responsible
+for the creation of the matrix.</p>
+</div>
+<div class="section" id="accessing-matrix-elements">
+<h2>Accessing matrix elements<a class="headerlink" href="#accessing-matrix-elements" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="cysparse_api.html" class="btn btn-neutral float-right" title="CySparse API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="cysparse_vs_other_libraries.html" class="btn btn-neutral" title="CySparse compared to other sparse matrix libraries" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Dominique Orban, Sylvain Arreckx and Nikolaj van Omme.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'dev',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

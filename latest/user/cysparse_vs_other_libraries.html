@@ -1,0 +1,269 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>CySparse compared to other sparse matrix libraries &mdash; CySparse: A sparse matrix library for Python/Cython.</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/julia.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="CySparse: A sparse matrix library for Python/Cython." href="index.html"/>
+        <link rel="next" title="CySparse for Cython users" href="cysparse_cython_users.html"/>
+        <link rel="prev" title="IO formats" href="io_formats.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="contents.html" class="icon icon-home"> CySparse: A sparse matrix library for Python/Cython.
+          
+
+          
+          </a>
+          <h1>CySparse: A sparse matrix library for Python/Cython.</h1>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+              <ul>
+<li><a class="reference internal" href="#"><strong class="program">CySparse</strong> compared to other sparse matrix libraries</a><ul>
+<li><a class="reference internal" href="#numpy"><strong class="program">NumPy</strong></a></li>
+<li><a class="reference internal" href="#scipy-sparse-matrices-aka-scipy-sparses"><strong class="program">SciPy</strong> sparse matrices aka <strong class="program">scipy.sparses</strong></a><ul>
+<li><a class="reference internal" href="#performance">Performance</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pysparse"><strong class="program">PySparse</strong></a><ul>
+<li><a class="reference internal" href="#id3">Performance</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="contents.html">CySparse: A sparse matrix library for Python/Cython.</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="contents.html">Docs</a> &raquo;</li>
+        
+      <li><strong class="program">CySparse</strong> compared to other sparse matrix libraries</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/PythonOptimizers/cysparse/blob/master/doc/source/cysparse_vs_other_libraries.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="cysparse-compared-to-other-sparse-matrix-libraries">
+<span id="cysparse-compared-to-other-sparse-libraries"></span><h1><strong class="program">CySparse</strong> compared to other sparse matrix libraries<a class="headerlink" href="#cysparse-compared-to-other-sparse-matrix-libraries" title="Permalink to this headline">¶</a></h1>
+<p>We compare briefly <strong class="program">CySparse</strong> with other existing libraries. If you are a user of one or several of these libraries, this page can also help you do the switch to <strong class="program">CySparse</strong> as we compare how things are done
+both in <strong class="program">CySparse</strong> and your preferred library.</p>
+<div class="section" id="numpy">
+<h2><strong class="program">NumPy</strong><a class="headerlink" href="#numpy" title="Permalink to this headline">¶</a></h2>
+<p><strong class="program">NumPy</strong> does <strong>not</strong> deal with sparse matrices, only dense ones but as it probably is <strong>the</strong> matrix library in <strong class="program">Python</strong> it is worth mentionning some similarities and discrepancies between the two.</p>
+</div>
+<div class="section" id="scipy-sparse-matrices-aka-scipy-sparses">
+<h2><strong class="program">SciPy</strong> sparse matrices aka <strong class="program">scipy.sparses</strong><a class="headerlink" href="#scipy-sparse-matrices-aka-scipy-sparses" title="Permalink to this headline">¶</a></h2>
+<p><strong class="program">SciPy</strong> can been seen as the little scientific brother of <strong class="program">NumPy</strong> <a class="footnote-reference" href="#scipy-defined-by-itself" id="id1">[1]</a>: <strong class="program">NumPy</strong> provides dense matrices while <strong class="program">SciPy</strong> adds scientific routines on top of it.
+Both libraries, <strong class="program">NumPy</strong> and <strong class="program">SciPy</strong> are deeply intermangled and sometimes overlapping. As <strong class="program">NumPy</strong>, <strong class="program">SciPy</strong> is huge <a class="footnote-reference" href="#scipy-huge-vs-numpy" id="id2">[2]</a> and we dont&#8217; provide as many fonctionnalities.
+It is not our goal either. So let&#8217;s compare what can be compared.</p>
+<div class="section" id="performance">
+<h3>Performance<a class="headerlink" href="#performance" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="pysparse">
+<h2><strong class="program">PySparse</strong><a class="headerlink" href="#pysparse" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id3">
+<h3>Performance<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p class="rubric">Footnotes</p>
+<table class="docutils footnote" frame="void" id="scipy-defined-by-itself" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Although on <a class="reference external" href="http://www.scipy.org/">www.scipy.org</a>, <strong class="program">SciPy</strong> is presented as <em>SciPy (pronounced “Sigh Pie”) is a Python-based ecosystem of open-source software for mathematics, science, and engineering</em>
+and <strong class="program">NumPy</strong> is described as one of its main core packages, i.e. <strong class="program">NumPy</strong> is a sub library of <strong class="program">SciPy</strong>.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="scipy-huge-vs-numpy" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td>Of course, because <strong class="program">SciPy</strong> contains <strong class="program">NumPy</strong>!</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="cysparse_cython_users.html" class="btn btn-neutral float-right" title="CySparse for Cython users" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="io_formats.html" class="btn btn-neutral" title="IO formats" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Dominique Orban, Sylvain Arreckx and Nikolaj van Omme.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'dev',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

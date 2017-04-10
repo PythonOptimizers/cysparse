@@ -1,0 +1,487 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>How to create a matrix? &mdash; CySparse: A sparse matrix library for Python/Cython.</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/julia.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="CySparse: A sparse matrix library for Python/Cython." href="index.html"/>
+        <link rel="next" title="Common matrix methods" href="common_matrix_methods.html"/>
+        <link rel="prev" title="Imutable matrices: CSR-, CSC- and CSBSparseMatrix" href="immutable_mat.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="contents.html" class="icon icon-home"> CySparse: A sparse matrix library for Python/Cython.
+          
+
+          
+          </a>
+          <h1>CySparse: A sparse matrix library for Python/Cython.</h1>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+              <ul>
+<li><a class="reference internal" href="#">How to create a matrix?</a><ul>
+<li><a class="reference internal" href="#llsparsematrix-factory-methods"><code class="docutils literal"><span class="pre">LLSparseMatrix</span></code> factory methods</a><ul>
+<li><a class="reference internal" href="#llsparsematrix"><code class="docutils literal"><span class="pre">LLSparseMatrix</span></code></a></li>
+<li><a class="reference internal" href="#llsparsematrixfrommmfile"><code class="docutils literal"><span class="pre">LLSparseMatrixFromMMFile</span></code></a></li>
+<li><a class="reference internal" href="#diagonalllsparsematrix"><code class="docutils literal"><span class="pre">DiagonalLLSparseMatrix</span></code></a></li>
+<li><a class="reference internal" href="#identityllsparsematrix"><code class="docutils literal"><span class="pre">IdentityLLSparseMatrix</span></code></a></li>
+<li><a class="reference internal" href="#bandllsparsematrix"><code class="docutils literal"><span class="pre">BandLLSparseMatrix</span></code></a></li>
+<li><a class="reference internal" href="#arrowheadllsparsematrix"><code class="docutils literal"><span class="pre">ArrowheadLLSparseMatrix</span></code></a></li>
+<li><a class="reference internal" href="#linearfillllsparsematrix"><code class="docutils literal"><span class="pre">LinearFillLLSparseMatrix</span></code></a></li>
+<li><a class="reference internal" href="#permutationllsparsematrix"><code class="docutils literal"><span class="pre">PermutationLLSparseMatrix</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#other-ways-to-create-matrices-or-matrix-like-objects">Other ways to create matrices or matrix like objects</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="contents.html">CySparse: A sparse matrix library for Python/Cython.</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="contents.html">Docs</a> &raquo;</li>
+        
+      <li>How to create a matrix?</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/PythonOptimizers/cysparse/blob/master/doc/source/matrix_creation.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="how-to-create-a-matrix">
+<span id="matrix-creation"></span><h1>How to create a matrix?<a class="headerlink" href="#how-to-create-a-matrix" title="Permalink to this headline">¶</a></h1>
+<p>To create a matrix, we use <em>factory methods</em> <a class="footnote-reference" href="#factory-method-strange-name" id="id1">[1]</a>:
+functions that return an object corresponding
+to their arguments. Different arguments make them return different kind of objects (matrices).</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">An sparse matrix can <strong>only</strong> be instantiated through a factory method.</p>
+</div>
+<p>Before you can use any type of sparse matrix, you <strong>must</strong> first instantiate an <code class="docutils literal"><span class="pre">LLSparseMatrix</span></code>. This matrix is well suited for construction but is not very optimized for most matrix operations.
+Once you have an <code class="docutils literal"><span class="pre">LLSparseMatrix</span></code>, you can create a specialized sparse matrix from it.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The first matrix you are allowed to instantiate can <strong>only</strong> be an <code class="docutils literal"><span class="pre">LLSparseMatrix</span></code>.</p>
+</div>
+<p>So basically, you create an <code class="docutils literal"><span class="pre">LLSparseMatrix</span></code>, populate it by for instance add and/or delete elements, rows, columns, sub-matrices at will. Once you have constructed your matrix, it is time to transform it into an appropriate
+matrix format that is optimized for your needs. This transformation is not done in place and a copy is made. Here is an example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="o">...</span>  <span class="c1"># A is a LLSparseMatrix</span>
+<span class="c1"># add some elements</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+        <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="o">...</span>
+
+<span class="c1"># once the matrix is constructed, transform it into suitable matrix format</span>
+<span class="c1"># here to CSC</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">to_csc</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>A <code class="docutils literal"><span class="pre">CSCSparseMatrix</span></code> can also be transformed into a <code class="docutils literal"><span class="pre">CSRSparseMatrix</span></code> for instance:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># transform a CSCSparseMatrix into a CSRSparseMatrix</span>
+<span class="n">D</span> <span class="o">=</span> <span class="n">C</span><span class="o">.</span><span class="n">to_csr</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>But the first matrix <strong>must</strong> be an <code class="docutils literal"><span class="pre">LLSparseMatrix</span></code>.</p>
+<p>Before we look how to create any matrix like object from an <code class="docutils literal"><span class="pre">LLSparseMatrix</span></code> or other sparse objects, let&#8217;s look at the different ways to create the first <code class="docutils literal"><span class="pre">LLSparseMatrix</span></code> in the next section.</p>
+<div class="section" id="llsparsematrix-factory-methods">
+<h2><code class="docutils literal"><span class="pre">LLSparseMatrix</span></code> factory methods<a class="headerlink" href="#llsparsematrix-factory-methods" title="Permalink to this headline">¶</a></h2>
+<p>The <strong class="program">CySparse</strong> library has some available factory methods to constructs some kind of matrices. These factory methods don&#8217;t test their arguments (i.e. you can pass whatever you want). This means that you <strong>must</strong>
+provide named arguments.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Factory methods use <em>named</em> arguments.</p>
+</div>
+<p>These factory methods do tests if they are provided with the needed arguments and do some internal tests to control their consistency. Whenever an internal test fails, an <code class="docutils literal"><span class="pre">Exception</span></code> is raised.</p>
+<div class="section" id="llsparsematrix">
+<h3><code class="docutils literal"><span class="pre">LLSparseMatrix</span></code><a class="headerlink" href="#llsparsematrix" title="Permalink to this headline">¶</a></h3>
+<p>This is the main basic factory method to create an <code class="xref py py-class docutils literal"><span class="pre">LLSparseMatrix</span></code>. There are basically <strong>three</strong> ways to use it:</p>
+<ul>
+<li><p class="first">From specifications. Use <code class="docutils literal"><span class="pre">nrow</span></code> and <code class="docutils literal"><span class="pre">ncol</span></code> or <code class="docutils literal"><span class="pre">size</span></code> to specify the dimension of the new matrix. You can also provide a
+<code class="docutils literal"><span class="pre">size_hint</span></code> argument to (pre)allocate some space for the elements in advance.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">LLSparseMatrix</span><span class="p">(</span><span class="n">nrow</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">3398</span><span class="p">,</span> <span class="n">size_hint</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>which returns an empty <code class="docutils literal"><span class="pre">LLSparseMatrix</span> <span class="pre">[INT64_t,</span> <span class="pre">FLOAT64_t]</span> <span class="pre">of</span> <span class="pre">size=(256,</span> <span class="pre">3398)</span> <span class="pre">with</span> <span class="pre">0</span> <span class="pre">non</span> <span class="pre">zero</span> <span class="pre">values</span> <span class="pre">&lt;Storage</span> <span class="pre">scheme:</span> <span class="pre">General</span> <span class="pre">and</span> <span class="pre">without</span> <span class="pre">zeros&gt;</span></code> matrix that is ready to hold 600 elements of type <code class="docutils literal"><span class="pre">FLOAT64_t</span></code>.
+Notice that neither <code class="docutils literal"><span class="pre">size</span></code> nor <code class="docutils literal"><span class="pre">size_hint</span></code> are attributes.</p>
+<p>You can change the index type and/or the element type:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">LLSparseMatrix</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">5578</span><span class="p">,</span> <span class="n">size_hint</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span> <span class="n">itype</span><span class="o">=</span><span class="n">INT32_T</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">COMPLEX128_T</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>which returns a corresponding <code class="docutils literal"><span class="pre">LLSparseMatrix</span> <span class="pre">[INT32_t,</span> <span class="pre">COMPLEX128_t]</span> <span class="pre">of</span> <span class="pre">size=(5578,</span> <span class="pre">5578)</span> <span class="pre">with</span> <span class="pre">0</span> <span class="pre">non</span> <span class="pre">zero</span> <span class="pre">values</span> <span class="pre">&lt;Storage</span> <span class="pre">scheme:</span> <span class="pre">General</span> <span class="pre">and</span> <span class="pre">without</span> <span class="pre">zeros&gt;</span></code> matrix.</p>
+<p>The <code class="docutils literal"><span class="pre">itype</span></code> and <code class="docutils literal"><span class="pre">dtype</span></code> arguments represent respectively the index and element types. By default, the index and element types are (<code class="docutils literal"><span class="pre">INT32_t</span></code>, <code class="docutils literal"><span class="pre">FLOAT32_T</span></code>) and (<code class="docutils literal"><span class="pre">INT64_t</span></code>, <code class="docutils literal"><span class="pre">FLOAT64_T</span></code>) on 32bits and 64bits
+platforms <a class="footnote-reference" href="#modify-default-types-in-cysparse-cfg" id="id2">[3]</a>.</p>
+</li>
+<li><p class="first">From another matrix. Use the <code class="docutils literal"><span class="pre">matrix</span></code> argument.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This is not yet implemented.</p>
+</div>
+</li>
+<li><p class="first">From a file. By default, a <code class="docutils literal"><span class="pre">test_bounds</span></code> argument is set to <code class="docutils literal"><span class="pre">True</span></code> to test if all indices are not out of bounds. You can disable this to gain
+some speed when reading a file.
+For the moment, only the <a class="reference external" href="http://math.nist.gov/MatrixMarket/">Matrix Market</a> format is available. To give a file name of a file in Matrix Market format, use the <code class="docutils literal"><span class="pre">mm_filename</span></code> argument.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">LLSparseMatrix</span><span class="p">(</span><span class="n">mm_filename</span><span class="o">=</span><span class="s1">&#39;bcsstk01.mtx&#39;</span><span class="p">,</span> <span class="n">itype</span><span class="o">=</span><span class="n">INT64_T</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">FLOAT64_T</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This will create a <code class="docutils literal"><span class="pre">LLSparseMatrix</span> <span class="pre">[INT64_t,</span> <span class="pre">FLOAT64_t]</span> <span class="pre">of</span> <span class="pre">size=(48,</span> <span class="pre">48)</span> <span class="pre">with</span> <span class="pre">224</span> <span class="pre">non</span> <span class="pre">zero</span> <span class="pre">values</span> <span class="pre">&lt;Storage</span> <span class="pre">scheme:</span> <span class="pre">Symmetric</span> <span class="pre">and</span> <span class="pre">without</span> <span class="pre">zeros&gt;</span></code> matrix.</p>
+<p>To read a matrix file, you need to already know the type of your <code class="docutils literal"><span class="pre">LLSparseMatrix</span></code>, here we choose <code class="docutils literal"><span class="pre">itype=INT64_T,</span> <span class="pre">dtype=FLOAT64_T</span></code>. If you don&#8217;t know the exact type of the matrix you need to read your file, use <code class="xref py py-func docutils literal"><span class="pre">LLSparseMatrixFromMMFile()</span></code> instead. This
+factory method will return the right <code class="docutils literal"><span class="pre">LLSparseMatrix</span></code> for you.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="llsparsematrixfrommmfile">
+<h3><code class="docutils literal"><span class="pre">LLSparseMatrixFromMMFile</span></code><a class="headerlink" href="#llsparsematrixfrommmfile" title="Permalink to this headline">¶</a></h3>
+<p>We just saw the <code class="docutils literal"><span class="pre">LLSpasreMatrix</span></code> factory method. This factory method can only be used if you know by advance the <strong>exact</strong> type of your matrix object. It might happen that you don&#8217;t know exactly what type of matrix you need.
+This is especially true when you read a file to populate a matrix. <code class="docutils literal"><span class="pre">LLSparseMatrixFromMMFile</span></code> allows you to open any Matrix Market file and create the right type of <code class="docutils literal"><span class="pre">LLSparseMatrix</span></code>, i.e. the minimal <code class="docutils literal"><span class="pre">LLSparseMatrix</span></code> type
+to hold the matrix. Let try with the same file <code class="file docutils literal"><span class="pre">bcsstk01.mtx</span></code> as above:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">LLSparseMatrixFromMMFile</span><span class="p">(</span><span class="s1">&#39;bcsstk01.mtx&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This returns a <code class="docutils literal"><span class="pre">LLSparseMatrix</span> <span class="pre">[INT32_t,</span> <span class="pre">FLOAT64_t]</span> <span class="pre">of</span> <span class="pre">size=(48,</span> <span class="pre">48)</span> <span class="pre">with</span> <span class="pre">224</span> <span class="pre">non</span> <span class="pre">zero</span> <span class="pre">values</span> <span class="pre">&lt;Storage</span> <span class="pre">scheme:</span> <span class="pre">Symmetric</span> <span class="pre">and</span> <span class="pre">without</span> <span class="pre">zeros&gt;</span></code> matrix. Indeed, we didn&#8217;t need to use <code class="docutils literal"><span class="pre">INT64_t</span></code> for the index type, <code class="docutils literal"><span class="pre">INT32_t</span></code> is
+sufficient.</p>
+<p>This factory method also accepts two more arguments:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">store_zero</span></code>: <code class="docutils literal"><span class="pre">False</span></code> by default and</li>
+<li><code class="docutils literal"><span class="pre">test_bounds</span></code>: <code class="docutils literal"><span class="pre">True</span></code> by default.</li>
+</ul>
+<p>Let try them:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">LLSparseMatrixFromMMFile</span><span class="p">(</span><span class="s1">&#39;bcsstk01.mtx&#39;</span><span class="p">,</span> <span class="n">store_zero</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">test_bounds</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">A</span></code> is now an <code class="docutils literal"><span class="pre">LLSparseMatrix</span> <span class="pre">[INT32_t,</span> <span class="pre">FLOAT64_t]</span> <span class="pre">of</span> <span class="pre">size=(48,</span> <span class="pre">48)</span> <span class="pre">with</span> <span class="pre">224</span> <span class="pre">non</span> <span class="pre">zero</span> <span class="pre">values</span> <span class="pre">&lt;Storage</span> <span class="pre">scheme:</span> <span class="pre">Symmetric</span> <span class="pre">and</span> <span class="pre">with</span> <span class="pre">zeros&gt;</span></code>. We now store explicitly zeros. We didn&#8217;t test if the elements where
+all within a <span class="math">\(48 \times 48\)</span> matrix but we already knew that this is the case, so we could speed up the reading by setting <code class="docutils literal"><span class="pre">test_bounds</span></code> to <code class="docutils literal"><span class="pre">False</span></code>.</p>
+</div>
+<div class="section" id="diagonalllsparsematrix">
+<h3><code class="docutils literal"><span class="pre">DiagonalLLSparseMatrix</span></code><a class="headerlink" href="#diagonalllsparsematrix" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal"><span class="pre">DiagonalLLSparseMatrix</span></code> constructs <a class="reference external" href="https://en.wikipedia.org/wiki/Diagonal_matrix">diagonal matrix</a>.
+You can give the diagonal element with the <code class="docutils literal"><span class="pre">element</span></code> argument:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">DiagonalLLSparseMatrix</span><span class="p">(</span><span class="n">element</span><span class="o">=</span><span class="mi">3</span><span class="o">-</span><span class="mi">5j</span><span class="p">,</span> <span class="n">nrow</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">COMPLEX128_T</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This returns:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">LLSparseMatrix</span> <span class="p">[</span><span class="n">INT64_t</span><span class="p">,</span> <span class="n">COMPLEX128_t</span><span class="p">]</span> <span class="n">of</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="k">with</span> <span class="mi">2</span> <span class="n">non</span> <span class="n">zero</span> <span class="n">values</span>
+<span class="o">&lt;</span><span class="n">Storage</span> <span class="n">scheme</span><span class="p">:</span> <span class="n">General</span> <span class="ow">and</span> <span class="n">without</span> <span class="n">zeros</span><span class="o">&gt;</span>
+ <span class="mf">3.000000</span> <span class="o">-</span> <span class="mf">5.000000j</span>    <span class="o">---</span>        <span class="o">---</span>        <span class="o">---</span>        <span class="o">---</span>
+   <span class="o">---</span>        <span class="o">---</span>      <span class="mf">3.000000</span> <span class="o">-</span> <span class="mf">5.000000j</span>    <span class="o">---</span>        <span class="o">---</span>
+</pre></div>
+</div>
+<p>If no element is given, a default of <code class="docutils literal"><span class="pre">1</span></code> is used.</p>
+</div>
+<div class="section" id="identityllsparsematrix">
+<h3><code class="docutils literal"><span class="pre">IdentityLLSparseMatrix</span></code><a class="headerlink" href="#identityllsparsematrix" title="Permalink to this headline">¶</a></h3>
+<p>This factory method creates the special diagonal matrix with only ones on its main diagonal. The <a class="reference external" href="https://en.wikipedia.org/wiki/Identity_matrix">identity matrix</a></p>
+<p>For instance:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">IdentityLLSparseMatrix</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">COMPLEX64_T</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">A</span>
+</pre></div>
+</div>
+<p>returns:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">LLSparseMatrix</span> <span class="p">[</span><span class="n">INT64_t</span><span class="p">,</span> <span class="n">COMPLEX64_t</span><span class="p">]</span> <span class="n">of</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="k">with</span> <span class="mi">3</span> <span class="n">non</span> <span class="n">zero</span> <span class="n">values</span>
+<span class="o">&lt;</span><span class="n">Storage</span> <span class="n">scheme</span><span class="p">:</span> <span class="n">General</span> <span class="ow">and</span> <span class="n">without</span> <span class="n">zeros</span><span class="o">&gt;</span>
+ <span class="mf">1.000000</span> <span class="o">+</span> <span class="mf">0.000000j</span>    <span class="o">---</span>        <span class="o">---</span>        <span class="o">---</span>        <span class="o">---</span>
+   <span class="o">---</span>        <span class="o">---</span>      <span class="mf">1.000000</span> <span class="o">+</span> <span class="mf">0.000000j</span>    <span class="o">---</span>        <span class="o">---</span>
+   <span class="o">---</span>        <span class="o">---</span>        <span class="o">---</span>        <span class="o">---</span>      <span class="mf">1.000000</span> <span class="o">+</span> <span class="mf">0.000000j</span>
+</pre></div>
+</div>
+<p>Note that this factory method is only an alias for <code class="docutils literal"><span class="pre">DiagonalLLSparseMatrix</span></code> with default arguments.</p>
+</div>
+<div class="section" id="bandllsparsematrix">
+<h3><code class="docutils literal"><span class="pre">BandLLSparseMatrix</span></code><a class="headerlink" href="#bandllsparsematrix" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal"><span class="pre">BandLLSparseMatrix</span></code> creates <a class="reference external" href="https://en.wikipedia.org/wiki/Band_matrix">band matrices</a> but not only as you can use it to create more general &#8220;band-like&#8221; matrices. In <strong class="program">CySparse</strong>, you can use this factory
+method to create matrices with principal diagonals. To do so, you create some <strong class="program">NumPy</strong> vectors and you assign them to the diagonals. Here is an example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">b1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="o">+</span><span class="mi">1j</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">complex64</span><span class="p">)</span>
+<span class="n">b2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="o">+</span><span class="mi">1j</span><span class="p">,</span> <span class="mi">12</span><span class="o">-</span><span class="mi">1j</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">complex64</span><span class="p">)</span>
+<span class="n">b3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="o">+</span><span class="mi">1j</span><span class="p">,</span> <span class="mi">1</span><span class="o">+</span><span class="mi">1j</span><span class="p">,</span> <span class="o">-</span><span class="mi">1j</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">complex64</span><span class="p">)</span>
+
+<span class="n">A</span> <span class="o">=</span> <span class="n">BandLLSparseMatrix</span><span class="p">(</span><span class="n">nrow</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">diag_coeff</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">numpy_arrays</span><span class="o">=</span><span class="p">[</span><span class="n">b1</span><span class="p">,</span> <span class="n">b2</span><span class="p">,</span> <span class="n">b3</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">COMPLEX64_T</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">A</span>
+</pre></div>
+</div>
+<p>wich prints:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">LLSparseMatrix</span> <span class="p">[</span><span class="n">INT64_t</span><span class="p">,</span> <span class="n">COMPLEX64_t</span><span class="p">]</span> <span class="n">of</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="k">with</span> <span class="mi">4</span> <span class="n">non</span> <span class="n">zero</span> <span class="n">values</span>
+<span class="o">&lt;</span><span class="n">Storage</span> <span class="n">scheme</span><span class="p">:</span> <span class="n">General</span> <span class="ow">and</span> <span class="n">without</span> <span class="n">zeros</span><span class="o">&gt;</span>
+   <span class="o">---</span>        <span class="o">---</span>      <span class="mf">1.000000</span> <span class="o">+</span> <span class="mf">1.000000j</span>  <span class="mf">1.000000</span> <span class="o">+</span> <span class="mf">1.000000j</span>
+ <span class="mf">1.000000</span> <span class="o">+</span> <span class="mf">1.000000j</span>    <span class="o">---</span>        <span class="o">---</span>     <span class="mf">12.000000</span> <span class="o">-</span> <span class="mf">1.000000j</span>
+</pre></div>
+</div>
+<p>As you can see, we didn&#8217;t create a real band matrix. The diagonals to fill in are given in list in the <code class="docutils literal"><span class="pre">diag_coeff</span></code> argument and the <strong class="program">NumPy</strong> vectors are given inside another list in the <code class="docutils literal"><span class="pre">numpy_arrays</span></code>
+argument. The diagonals can also be given by a slice.</p>
+<p>You also can notice that the <strong class="program">NumPy</strong> vectors can &#8220;overflow&#8221;: <strong class="program">CySparse</strong> only take the first elements of a given vector to populate a given diagonal.
+These vectors <strong>must</strong> be big enough to fill the diagonals.</p>
+</div>
+<div class="section" id="arrowheadllsparsematrix">
+<h3><code class="docutils literal"><span class="pre">ArrowheadLLSparseMatrix</span></code><a class="headerlink" href="#arrowheadllsparsematrix" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal"><span class="pre">ArrowheadLLSparseMatrix</span></code> creates <a class="reference external" href="https://en.wikipedia.org/wiki/Arrowhead_matrix">arrowhead matrices</a> but <strong>only</strong> with one element. This element is given to the <code class="docutils literal"><span class="pre">element</span></code> argument:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">ArrowheadLLSparseMatrix</span><span class="p">(</span><span class="n">nrow</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">element</span><span class="o">=</span><span class="mf">3.8</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">A</span>
+</pre></div>
+</div>
+<p>This shows:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">LLSparseMatrix</span> <span class="p">[</span><span class="n">INT64_t</span><span class="p">,</span> <span class="n">FLOAT64_t</span><span class="p">]</span> <span class="n">of</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="k">with</span> <span class="mi">8</span> <span class="n">non</span> <span class="n">zero</span> <span class="n">values</span>
+<span class="o">&lt;</span><span class="n">Storage</span> <span class="n">scheme</span><span class="p">:</span> <span class="n">General</span> <span class="ow">and</span> <span class="n">without</span> <span class="n">zeros</span><span class="o">&gt;</span>
+ <span class="mf">3.800000</span>   <span class="mf">3.800000</span>   <span class="mf">3.800000</span>   <span class="mf">3.800000</span>
+ <span class="mf">3.800000</span>   <span class="mf">3.800000</span>     <span class="o">---</span>        <span class="o">---</span>
+ <span class="mf">3.800000</span>     <span class="o">---</span>      <span class="mf">3.800000</span>     <span class="o">---</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="linearfillllsparsematrix">
+<h3><code class="docutils literal"><span class="pre">LinearFillLLSparseMatrix</span></code><a class="headerlink" href="#linearfillllsparsematrix" title="Permalink to this headline">¶</a></h3>
+<p>This factory method is only used for testing purpose as it constructs fully dense matrices. The idea is to construct a matrix row by row or column by column and fill <strong>all</strong> elements with numbers obtained as follows:
+we start with an initial number (argument <code class="docutils literal"><span class="pre">first_element</span></code>) and add a constant number to it (argument <code class="docutils literal"><span class="pre">step</span></code>) one by one. By default, the matrix is constructed row by row. This can be changed by setting the argument
+<code class="docutils literal"><span class="pre">row_wise</span></code> to <code class="docutils literal"><span class="pre">False</span></code>. Here is a first example row wise:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">LinearFillLLSparseMatrix</span><span class="p">(</span><span class="n">nrow</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">first_element</span><span class="o">=</span><span class="mi">1</span><span class="o">-</span><span class="mi">6j</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">2</span><span class="o">+</span><span class="mi">5j</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">COMPLEX64_T</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">A</span>
+</pre></div>
+</div>
+<p>The matrix printed is:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">LLSparseMatrix</span> <span class="p">[</span><span class="n">INT64_t</span><span class="p">,</span> <span class="n">COMPLEX64_t</span><span class="p">]</span> <span class="n">of</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="k">with</span> <span class="mi">6</span> <span class="n">non</span> <span class="n">zero</span> <span class="n">values</span>
+<span class="o">&lt;</span><span class="n">Storage</span> <span class="n">scheme</span><span class="p">:</span> <span class="n">General</span> <span class="ow">and</span> <span class="n">without</span> <span class="n">zeros</span><span class="o">&gt;</span>
+ <span class="mf">1.000000</span> <span class="o">-</span> <span class="mf">6.000000j</span>  <span class="mf">3.000000</span> <span class="o">-</span> <span class="mf">1.000000j</span>  <span class="mf">5.000000</span> <span class="o">+</span> <span class="mf">4.000000j</span>
+ <span class="mf">7.000000</span> <span class="o">+</span> <span class="mf">9.000000j</span>  <span class="mf">9.000000</span> <span class="o">+</span><span class="mf">14.000000j</span> <span class="mf">11.000000</span> <span class="o">+</span><span class="mf">19.000000j</span>
+</pre></div>
+</div>
+<p>The same factory method but this time working column by columm:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">LinearFillLLSparseMatrix</span><span class="p">(</span><span class="n">nrow</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">first_element</span><span class="o">=</span><span class="mi">1</span><span class="o">-</span><span class="mi">6j</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">2</span><span class="o">+</span><span class="mi">5j</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">COMPLEX64_T</span><span class="p">,</span> <span class="n">row_wise</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">A</span>
+</pre></div>
+</div>
+<p>and the corresponding matrix:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">LLSparseMatrix</span> <span class="p">[</span><span class="n">INT64_t</span><span class="p">,</span> <span class="n">COMPLEX64_t</span><span class="p">]</span> <span class="n">of</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="k">with</span> <span class="mi">6</span> <span class="n">non</span> <span class="n">zero</span> <span class="n">values</span>
+<span class="o">&lt;</span><span class="n">Storage</span> <span class="n">scheme</span><span class="p">:</span> <span class="n">General</span> <span class="ow">and</span> <span class="n">without</span> <span class="n">zeros</span><span class="o">&gt;</span>
+ <span class="mf">1.000000</span> <span class="o">-</span> <span class="mf">6.000000j</span>  <span class="mf">5.000000</span> <span class="o">+</span> <span class="mf">4.000000j</span>  <span class="mf">9.000000</span> <span class="o">+</span><span class="mf">14.000000j</span>
+ <span class="mf">3.000000</span> <span class="o">-</span> <span class="mf">1.000000j</span>  <span class="mf">7.000000</span> <span class="o">+</span> <span class="mf">9.000000j</span> <span class="mf">11.000000</span> <span class="o">+</span><span class="mf">19.000000j</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="permutationllsparsematrix">
+<h3><code class="docutils literal"><span class="pre">PermutationLLSparseMatrix</span></code><a class="headerlink" href="#permutationllsparsematrix" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">PermutationLLSparseMatrix</span></code> factory method creates, you guessed it, <a class="reference external" href="https://en.wikipedia.org/wiki/Permutation_matrix">permutations matrices</a>.</p>
+<p>It takes a <strong class="program">NumPy</strong> vector as argument to represent a permutation and creates the corresponding permutation matrix:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">P_mat_nd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+<span class="n">P</span> <span class="o">=</span> <span class="n">PermutationLLSparseMatrix</span><span class="p">(</span><span class="n">P</span><span class="o">=</span><span class="n">P_mat_nd</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">itype</span><span class="o">=</span><span class="n">INT32_T</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">COMPLEX64_T</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="n">P</span>
+</pre></div>
+</div>
+<p>The printed matrix is:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">LLSparseMatrix</span> <span class="p">[</span><span class="n">INT32_t</span><span class="p">,</span> <span class="n">COMPLEX64_t</span><span class="p">]</span> <span class="n">of</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="k">with</span> <span class="mi">3</span> <span class="n">non</span> <span class="n">zero</span> <span class="n">values</span>
+<span class="o">&lt;</span><span class="n">Storage</span> <span class="n">scheme</span><span class="p">:</span> <span class="n">General</span> <span class="ow">and</span> <span class="n">without</span> <span class="n">zeros</span><span class="o">&gt;</span>
+ <span class="mf">1.000000</span> <span class="o">+</span> <span class="mf">0.000000j</span>    <span class="o">---</span>        <span class="o">---</span>        <span class="o">---</span>        <span class="o">---</span>
+   <span class="o">---</span>        <span class="o">---</span>        <span class="o">---</span>        <span class="o">---</span>      <span class="mf">1.000000</span> <span class="o">+</span> <span class="mf">0.000000j</span>
+   <span class="o">---</span>        <span class="o">---</span>      <span class="mf">1.000000</span> <span class="o">+</span> <span class="mf">0.000000j</span>    <span class="o">---</span>        <span class="o">---</span>
+</pre></div>
+</div>
+<p>Note that <strong class="program">CySparse</strong> tests if the <strong class="program">NumPy</strong> vector really describes a permutation and that the <strong class="program">NumPy</strong> vector type <strong>must</strong> be compatible with the <code class="xref py py-class docutils literal"><span class="pre">LLSparseMatrix</span></code> <code class="docutils literal"><span class="pre">itype</span></code>.</p>
+</div>
+</div>
+<div class="section" id="other-ways-to-create-matrices-or-matrix-like-objects">
+<h2>Other ways to create matrices or matrix like objects<a class="headerlink" href="#other-ways-to-create-matrices-or-matrix-like-objects" title="Permalink to this headline">¶</a></h2>
+<p>[TO BE WRITEN]</p>
+<p class="rubric">Footnotes</p>
+<table class="docutils footnote" frame="void" id="factory-method-strange-name" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>The term <em>factory method</em> is coined by the Design Pattern community. The <em>method</em> in itself can be a function, method, class, ... In <strong class="program">CySparse</strong>, we use global functions.
+This not very Pythonesque approach is made necessary because <strong class="program">Cython</strong> doesn&#8217;t allow the use of pure C variables as arguments in the constructors of classes <a class="footnote-reference" href="#use-of-pure-c-variables-in-constructors" id="id3">[2]</a>.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="use-of-pure-c-variables-in-constructors" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[2]</a></td><td>This not exactly true. <strong class="program">Cython</strong> allows to pass some pure C variables that can be <em>easily</em> mapped to <strong class="program">Python</strong> arguments. The idea is that the same arguments are
+passed to <code class="docutils literal"><span class="pre">__cinit__()</span></code> <strong>and</strong> <code class="docutils literal"><span class="pre">__init__()</span></code> methods.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="modify-default-types-in-cysparse-cfg" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[3]</a></td><td>You can change this default behavior by giving other values in the <code class="file docutils literal"><span class="pre">cysparse.cfg</span></code> configuration file. See <a class="reference internal" href="installation.html#cysparse-configuration-file"><span class="std std-ref">Tweak the configuration file cysparse.cfg</span></a>.</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="common_matrix_methods.html" class="btn btn-neutral float-right" title="Common matrix methods" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="immutable_mat.html" class="btn btn-neutral" title="Imutable matrices: CSR-, CSC- and CSBSparseMatrix" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Dominique Orban, Sylvain Arreckx and Nikolaj van Omme.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'dev',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

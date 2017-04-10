@@ -1,0 +1,336 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Sparse Matrix Proxies &mdash; CySparse: A sparse matrix library for Python/Cython.</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/julia.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="CySparse: A sparse matrix library for Python/Cython." href="index.html"/>
+        <link rel="next" title="Multiplication with a NumPy vector" href="multiplication_with_numpy_vector.html"/>
+        <link rel="prev" title="Common matrix methods" href="common_matrix_methods.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="contents.html" class="icon icon-home"> CySparse: A sparse matrix library for Python/Cython.
+          
+
+          
+          </a>
+          <h1>CySparse: A sparse matrix library for Python/Cython.</h1>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+              <ul>
+<li><a class="reference internal" href="#">Sparse Matrix Proxies</a><ul>
+<li><a class="reference internal" href="#available-proxies">Available proxies</a></li>
+<li><a class="reference internal" href="#proxies-can-be-chained">Proxies can be chained</a></li>
+<li><a class="reference internal" href="#proxies-are-not-idempotent">Proxies are <strong>not</strong> idempotent</a></li>
+<li><a class="reference internal" href="#basic-operations">Basic operations</a></li>
+<li><a class="reference internal" href="#what-if-i-need-the-full-scale-corresponding-matrix">What if I need the full scale corresponding matrix?</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="contents.html">CySparse: A sparse matrix library for Python/Cython.</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="contents.html">Docs</a> &raquo;</li>
+        
+      <li>Sparse Matrix Proxies</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/PythonOptimizers/cysparse/blob/master/doc/source/proxies.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="sparse-matrix-proxies">
+<span id="id1"></span><h1>Sparse Matrix Proxies<a class="headerlink" href="#sparse-matrix-proxies" title="Permalink to this headline">¶</a></h1>
+<p>This section describes the sparse matrix proxies available in
+<strong class="program">Cysparse</strong>. Sometimes, we can use a substitute for certain types of matrices instead of creating a full scale matrix. For instance, instead of creating the transpose of a matrix <cite>A</cite>, one can use <cite>A.T</cite>. <cite>A.T</cite> is a
+proxy and is thus <strong>not</strong> a real matrix. As such, it cannot replace a matrix in all circonstances but it can be used for instance for the following operations:</p>
+<ul class="simple">
+<li>printing;</li>
+<li>accessing a value;</li>
+<li>multiplying with a <strong class="program">NumPy</strong> vector;</li>
+<li>accessing basic attributes of a matrix (<cite>shape</cite>, <cite>ncol</cite>, <cite>nrow</cite>, ...);</li>
+</ul>
+<div class="section" id="available-proxies">
+<h2>Available proxies<a class="headerlink" href="#available-proxies" title="Permalink to this headline">¶</a></h2>
+<p>Three basic proxies <a class="footnote-reference" href="#proxy-is-called-sparse-matrix" id="id2">[1]</a> are available:</p>
+<ul class="simple">
+<li>the transpose matrix proxy (<code class="xref py py-class docutils literal"><span class="pre">TransposedSparseMatrix</span></code> given by the <code class="docutils literal"><span class="pre">.T</span></code> attribute);</li>
+<li>the conjugate transpose matrix proxy (<code class="xref py py-class docutils literal"><span class="pre">ConjugateTransposedSparseMatrix</span></code> given by the <code class="docutils literal"><span class="pre">.H</span></code> attribute) and</li>
+<li>the conjugate matrix proxy (<code class="xref py py-class docutils literal"><span class="pre">ConjugatedSparseMatrix</span></code> given by the <code class="docutils literal"><span class="pre">.conj</span></code> attribute).</li>
+</ul>
+<p>Each of them is unique (i.e. the user is not supposed to copy them) and automagically updates whenever the original matrix is changed (for <code class="xref py py-class docutils literal"><span class="pre">LLSparseMatrix</span></code> matrices).</p>
+<p>These proxies are available for <strong>all</strong> sparse matrix types and can even be combined together.</p>
+</div>
+<div class="section" id="proxies-can-be-chained">
+<h2>Proxies can be chained<a class="headerlink" href="#proxies-can-be-chained" title="Permalink to this headline">¶</a></h2>
+<p>Proxies can be chained without problem:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">LLSparseMatrix</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+
+<span class="n">A</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">conj</span><span class="o">.</span><span class="n">H</span><span class="o">.</span><span class="n">conj</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">T</span>
+</pre></div>
+</div>
+<p>makes sense and <code class="docutils literal"><span class="pre">A.T.conj.H.conj.T.T.T</span></code> has to be read for left to right: we first take the transpose of the matrix, then the conjugate of the transposed matrix, etc.
+What is the type of <code class="docutils literal"><span class="pre">A.T.conj.H.conj.T.T.T</span></code>?</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">conj</span><span class="o">.</span><span class="n">H</span><span class="o">.</span><span class="n">conj</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>returns <code class="docutils literal"><span class="pre">cysparse.sparse.sparse_proxies.t_mat.TransposedSparseMatrix</span></code>, i.e. we have that <code class="docutils literal"><span class="pre">A.T.conj.H.conj.T.T.T</span></code> is nothing else than <code class="docutils literal"><span class="pre">A.T</span></code>.
+You can chain as many proxies as you whish without paying any (real) penalty: proxies are singletons and therefor are only created once.</p>
+</div>
+<div class="section" id="proxies-are-not-idempotent">
+<h2>Proxies are <strong>not</strong> idempotent<a class="headerlink" href="#proxies-are-not-idempotent" title="Permalink to this headline">¶</a></h2>
+<p>Of course, a proxy applied to itself <strong>cannot</strong> be itself because <code class="docutils literal"><span class="pre">A.T</span></code> and <code class="docutils literal"><span class="pre">A.T.T</span></code> represent different matrices in general. But it get worse than that <a class="footnote-reference" href="#worse-than-that" id="id3">[2]</a>.</p>
+<p>Remember that proxies behave like matrices but are not real matrices? What happens when you take the tranpose of a tranposed matrix?</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">LLSparseMatrix</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+
+<span class="n">B</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">T</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">B</span></code> is the orginal matrix again and this is really what happens in <strong class="program">CySparse</strong>. <code class="docutils literal"><span class="pre">B</span></code> <strong>is</strong> a real matrix <strong>not</strong> a proxy. Thus what you can do with <code class="docutils literal"><span class="pre">A.T</span></code> is not the same as what you can do with <code class="docutils literal"><span class="pre">A.T.T</span></code>.</p>
+<p>Throw in the real versus the complex cases and things get even worse. To help the user write generic code, we allow in <strong class="program">CySparse</strong> the use of <code class="docutils literal"><span class="pre">.H</span></code> and <code class="docutils literal"><span class="pre">.conj</span></code> for real matrices <a class="footnote-reference" href="#h-and-conj-in-the-real-case" id="id4">[3]</a>.
+This means that for the real case:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">A.conj</span></code> is in fact <code class="docutils literal"><span class="pre">A</span></code> and</li>
+<li><code class="docutils literal"><span class="pre">A.H</span></code> is in fact <code class="docutils literal"><span class="pre">A.T</span></code>.</li>
+</ul>
+<p>Not need to worry thought.
+All this proxy manipulation is quite natural and allow for a smooth writing, quite comparable to the real mathematical notation. There are <strong>only two</strong> rules to remember:</p>
+<ul class="simple">
+<li>Whenever a mathematical combination of operators returns the original matrix, <strong class="program">CySparse</strong> also returns the original matrix;</li>
+<li>For the real case: <code class="docutils literal"><span class="pre">A.conj</span></code> is <code class="docutils literal"><span class="pre">A</span></code> and <code class="docutils literal"><span class="pre">A.H</span></code> is <code class="docutils literal"><span class="pre">A.T</span></code>.</li>
+</ul>
+<p>This is so important that we need to frame these two rules.</p>
+<div class="topic">
+<p class="topic-title first">Rules for proxy manipulation</p>
+<p><strong>Rule 1</strong>: Whenever a mathematical combination of operators returns the original matrix, <strong class="program">CySparse</strong> also returns the original matrix;</p>
+<p><strong>Rule 2</strong>: With a real matrix <code class="docutils literal"><span class="pre">A</span></code>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal"><span class="pre">A.conj</span></code> is the same as <code class="docutils literal"><span class="pre">A</span></code> (rule 1) and</li>
+<li><code class="docutils literal"><span class="pre">A.H</span></code> is <code class="docutils literal"><span class="pre">A.T</span></code>.</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="basic-operations">
+<h2>Basic operations<a class="headerlink" href="#basic-operations" title="Permalink to this headline">¶</a></h2>
+<p>[TO BE WRITTEN]</p>
+</div>
+<div class="section" id="what-if-i-need-the-full-scale-corresponding-matrix">
+<h2>What if I need the full scale corresponding matrix?<a class="headerlink" href="#what-if-i-need-the-full-scale-corresponding-matrix" title="Permalink to this headline">¶</a></h2>
+<p>For all proxies, the method <code class="docutils literal"><span class="pre">matrix_copy()</span></code> is available:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">LLSparseMatrix</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+
+<span class="n">Transpose_proxy</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">T</span>
+
+<span class="c1"># real matrix</span>
+<span class="n">T</span> <span class="o">=</span> <span class="n">Transpose_proxy</span><span class="o">.</span><span class="n">matrix_copy</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">T</span></code> is now a real matrix of the same type as the original <code class="docutils literal"><span class="pre">A</span></code> matrix.</p>
+<h4>Footnote</h4><table class="docutils footnote" frame="void" id="proxy-is-called-sparse-matrix" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[1]</a></td><td>Despite being <em>proxies</em> and <strong>not</strong> matrices, we still give them the name <code class="docutils literal"><span class="pre">...SparseMatrix</span></code>.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="worse-than-that" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[2]</a></td><td>Don&#8217;t worry, you&#8217;ll be able to relax by the end of this paragraph. You will even understand our implementation choices.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="h-and-conj-in-the-real-case" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id4">[3]</a></td><td>This is quite standard among sparse matrices libraries.</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="multiplication_with_numpy_vector.html" class="btn btn-neutral float-right" title="Multiplication with a NumPy vector" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="common_matrix_methods.html" class="btn btn-neutral" title="Common matrix methods" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Dominique Orban, Sylvain Arreckx and Nikolaj van Omme.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'dev',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

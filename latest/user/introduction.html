@@ -1,0 +1,331 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Introduction &mdash; CySparse: A sparse matrix library for Python/Cython.</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/julia.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="CySparse: A sparse matrix library for Python/Cython." href="index.html"/>
+        <link rel="next" title="Installation" href="installation.html"/>
+        <link rel="prev" title="CySparse‘s Users Manual" href="contents.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="contents.html" class="icon icon-home"> CySparse: A sparse matrix library for Python/Cython.
+          
+
+          
+          </a>
+          <h1>CySparse: A sparse matrix library for Python/Cython.</h1>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+              <ul>
+<li><a class="reference internal" href="#">Introduction</a><ul>
+<li><a class="reference internal" href="#what-is-cysparse">What is <strong class="program">CySparse</strong>?</a></li>
+<li><a class="reference internal" href="#how-fast-is-fast">How fast is fast?</a></li>
+<li><a class="reference internal" href="#how-big-is-big">How big is big?</a></li>
+<li><a class="reference internal" href="#pysparse-legacy"><strong class="program">PySparse</strong> legacy</a></li>
+<li><a class="reference internal" href="#pysparse-vs-cysparse"><strong class="program">PySparse</strong> vs <strong class="program">CySparse</strong></a></li>
+<li><a class="reference internal" href="#what-is-the-maturity-level-of-cysparse">What is the maturity level of <strong class="program">CySparse</strong>?</a></li>
+<li><a class="reference internal" href="#license">License</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="contents.html">CySparse: A sparse matrix library for Python/Cython.</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="contents.html">Docs</a> &raquo;</li>
+        
+      <li>Introduction</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/PythonOptimizers/cysparse/blob/master/doc/source/introduction.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<p>Welcome to <strong class="program">CySparse</strong>&#8216;s users manual!</p>
+<p>We tried to keep this manual as simple and short as possible. You can find much more detailed information in the developer&#8217;s manual.
+To see <strong class="program">CySparse</strong> in action, you can try the tutorials written in <a class="reference external" href="http://ipython.org/notebook.html">IPython Notebooks</a> or run the examples in the
+<code class="docutils literal"><span class="pre">examples</span></code> directory.</p>
+<div class="section" id="what-is-cysparse">
+<h2>What is <strong class="program">CySparse</strong>?<a class="headerlink" href="#what-is-cysparse" title="Permalink to this headline">¶</a></h2>
+<p><strong class="program">CySparse</strong> is a fast sparse matrix library for <strong class="program">Python</strong>/<strong class="program">Cython</strong>.</p>
+</div>
+<div class="section" id="how-fast-is-fast">
+<h2>How fast is fast?<a class="headerlink" href="#how-fast-is-fast" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="how-big-is-big">
+<h2>How big is big?<a class="headerlink" href="#how-big-is-big" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="pysparse-legacy">
+<h2><strong class="program">PySparse</strong> legacy<a class="headerlink" href="#pysparse-legacy" title="Permalink to this headline">¶</a></h2>
+<p><strong class="program">CySparse</strong> can be seen as the replacement of the <strong class="program">PySparse</strong> library with <strong>lots</strong> of improvements. Instead of improving the existing <strong class="program">PySparse</strong> library written in <strong class="program">C</strong> and <strong class="program">CPython</strong>,
+we decided to rewrite it from scratch in <strong class="program">Cython</strong>. This allows us a shorter development cycle and to hook existing <strong class="program">C</strong> and <strong class="program">C++</strong> libraries very easily to <strong class="program">CySparse</strong>
+(see the <a class="reference external" href="https://github.com/PythonOptimizers">PythonOptimizers</a> project for a full list of compatible Solvers wrappers).</p>
+<p>In short, <strong class="program">CySparse</strong> is <strong class="program">PySparse</strong> but on steroids!</p>
+</div>
+<div class="section" id="pysparse-vs-cysparse">
+<h2><strong class="program">PySparse</strong> vs <strong class="program">CySparse</strong><a class="headerlink" href="#pysparse-vs-cysparse" title="Permalink to this headline">¶</a></h2>
+<p>Even if <strong class="program">CySparse</strong> is (strongly) inspired from <strong class="program">PySparse</strong>, there are notable differences. In short, <strong class="program">CySparse</strong>:</p>
+<ul class="simple">
+<li>allows the use of matrices with <strong>different types</strong> of indices and elements at <strong>run time</strong> (see ...);</li>
+<li>is <strong>faster</strong> than <strong class="program">PySparse</strong> (see our benchmarks);</li>
+<li>uses <strong>matrix views</strong> - a very light proxy object - that represent parts of a matrix <strong>without</strong> the need to copy any element (see...);</li>
+<li>uses <strong>matrix proxies</strong> - an even lighter proxy object - that represent some common transformation of a matrix (like the transposed of a matrix) <strong>without</strong> the need to copy any element (see  ...);</li>
+<li>has more <strong>syntactic sugar</strong>, like <code class="docutils literal"><span class="pre">A</span> <span class="pre">*</span> <span class="pre">b,</span> <span class="pre">b</span> <span class="pre">*</span> <span class="pre">A,</span> <span class="pre">A.T</span> <span class="pre">*</span> <span class="pre">b</span></code> etc.</li>
+<li>has a <strong>symmetric</strong> storage scheme for <strong>all</strong> its matrix types.</li>
+<li>doesn&#8217;t use masks.</li>
+<li>has lots of unit tests.</li>
+<li>is well integrated with some of the best solvers (<a class="reference external" href="http://faculty.cse.tamu.edu/davis/suitesparse.html">SuiteSparse</a>, <a class="reference external" href="http://mumps.enseeiht.fr/">MUMPS</a>, <a class="reference external" href="http://buttari.perso.enseeiht.fr/qr_mumps/">qr_mumps</a>, ...).</li>
+<li>is well documented.</li>
+<li>can be used in <strong class="program">Python</strong> <strong>and</strong> <strong class="program">Cython</strong>.</li>
+<li>has less dependencies.</li>
+</ul>
+<p>Both libraries define similar but also different matrix classes:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="29%" />
+<col width="39%" />
+<col width="32%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Matrix type</th>
+<th class="head"><strong class="program">PySparse</strong></th>
+<th class="head"><strong class="program">CySparse</strong></th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Linked-List Format</td>
+<td><code class="docutils literal"><span class="pre">ll_mat</span></code>, <code class="docutils literal"><span class="pre">ll_mat_sym</span></code>, <code class="docutils literal"><span class="pre">PysparseMatrix</span></code></td>
+<td><code class="docutils literal"><span class="pre">LLSparseMatrix</span></code></td>
+</tr>
+<tr class="row-odd"><td>Compressed Sparse Row Format</td>
+<td><code class="docutils literal"><span class="pre">csr_mat</span></code></td>
+<td><code class="docutils literal"><span class="pre">CSRSparseMatrix</span></code></td>
+</tr>
+<tr class="row-even"><td>Compressed Sparse Column Format</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><code class="docutils literal"><span class="pre">CSCSparseMatrix</span></code></td>
+</tr>
+<tr class="row-odd"><td>Sparse Skyline Format</td>
+<td><code class="docutils literal"><span class="pre">sss_mat</span></code></td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td>Compressed Sparse Row and Column Format</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><code class="docutils literal"><span class="pre">CSBSparseMatrix</span></code> (later)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="what-is-the-maturity-level-of-cysparse">
+<h2>What is the maturity level of <strong class="program">CySparse</strong>?<a class="headerlink" href="#what-is-the-maturity-level-of-cysparse" title="Permalink to this headline">¶</a></h2>
+<p>If you don&#8217;t mix matrices with different types and use vector multiplication, <strong class="program">CySparse</strong> has been tested quite heavily but as we only started in 2016, <strong class="program">CySparse</strong> is still in its infancy.
+If you stick to the basics, it works.
+The rest is work in progress. We are planning to add more tests soon and to test extensively its integration with several well known solvers.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Do not use this library for critical tasks!</p>
+</div>
+<p>The benchmarks also shows that the library is fast, much faster than its competitors.</p>
+</div>
+<div class="section" id="license">
+<h2>License<a class="headerlink" href="#license" title="Permalink to this headline">¶</a></h2>
+<p>The <strong class="program">CySparse</strong> library is released under the <a class="reference external" href="http://www.gnu.org/licenses/lgpl-3.0.en.html">GNU Lesser General Public License</a> (LGPL), version 3.</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="installation.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="contents.html" class="btn btn-neutral" title="CySparse‘s Users Manual" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Dominique Orban, Sylvain Arreckx and Nikolaj van Omme.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'dev',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
