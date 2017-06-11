@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Benchmarks &#8212; CySparse dev documentation</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootswatch-3.3.6/spacelab/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     'dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="CySparse API" href="cysparse_api.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body role="document">
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="contents.html">
+          CySparse</a>
+        <span class="navbar-text navbar-version pull-left"><b>dev</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="contents.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cysparse_basics.html">Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="types.html"><strong class="program">CySparse</strong>&#8216;s types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mutable_ll_mat.html">Mutable matrices: <code class="docutils literal"><span class="pre">LLSparseMatrix</span></code> and <code class="docutils literal"><span class="pre">LLSparseMatrixView</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="immutable_mat.html">Imutable matrices: <code class="docutils literal"><span class="pre">CSR-</span></code>, <code class="docutils literal"><span class="pre">CSC-</span></code> and <code class="docutils literal"><span class="pre">CSBSparseMatrix</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="matrix_creation.html">How to create a matrix?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="common_matrix_methods.html">Common matrix methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proxies.html">Sparse Matrix Proxies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multiplication_with_numpy_vector.html">Multiplication with a <strong class="program">NumPy</strong> vector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multiplication_with_matrix.html">Multiplication with a matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io_formats.html">IO formats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cysparse_vs_other_libraries.html"><strong class="program">CySparse</strong> compared to other sparse matrix libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cysparse_cython_users.html"><strong class="program">CySparse</strong> for <strong class="program">Cython</strong> users</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cysparse_api.html"><strong class="program">CySparse</strong> API</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Benchmarks</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Benchmarks</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="cysparse_api.html" title="Previous Chapter: CySparse API"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; CySparse API</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+  <div class="section" id="benchmarks">
+<h1>Benchmarks<a class="headerlink" href="#benchmarks" title="Permalink to this headline">¶</a></h1>
+<p>In the following benchmarks, we compare CySparse with
+pysparse&nbsp;<cite>cite{pysparse-web}</cite> and and we only discuss
+multiplication of a sparse matrix with a dense vector. We randomly
+generate square sparse matrices of size <span class="math">\(n \times n\)</span> with
+<span class="math">\(nnz\)</span> nonzero elements. We generate dense vectors with ’s
+<code class="docutils literal"><span class="pre">arange(0,</span> <span class="pre">n,</span> <span class="pre">dtype=np.float64)</span></code>.</p>
+<p>For each benchmark, we run the four scenarii described in
+Table&nbsp;[tab:4_benchmark_scenarii] <span class="math">\(100\)</span> times for each operation.
+For each scenario, operations are ranked by runtime. The most efficient
+implementation gets a value of 1.0. The values of the other operations
+are relative, i.e. an operation with value <span class="math">\(k\)</span> takes <span class="math">\(k\)</span>
+times as long to execute as the most efficient operation.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="32%" />
+<col width="32%" />
+<col width="35%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Scenario</td>
+<td><cite>n</cite></td>
+<td><cite>nnz</cite></td>
+</tr>
+<tr class="row-even"><td>1</td>
+<td><cite>10^4</cite></td>
+<td><cite>10^3</cite></td>
+</tr>
+<tr class="row-odd"><td>2</td>
+<td><cite>10^5</cite></td>
+<td><cite>10^4</cite></td>
+</tr>
+<tr class="row-even"><td>3</td>
+<td><cite>10^6</cite></td>
+<td><cite>10^5</cite></td>
+</tr>
+<tr class="row-odd"><td>4</td>
+<td><cite>10^6</cite></td>
+<td><cite>5 10^3</cite></td>
+</tr>
+</tbody>
+</table>
+<p>cysparse, pysparse and scipy were compiled and tested with the same flags on the same machine
+and using <code class="docutils literal"><span class="pre">int32</span></code> indices and <code class="docutils literal"><span class="pre">float64</span></code> elements.</p>
+<p>Table&nbsp;[tab:sparse_matrix_dense_numpy_vector_multiplication] reports
+benchmarks on the basic <code class="docutils literal"><span class="pre">matvec</span></code> operation, i.e. the multiplication
+<span class="math">\(A v\)</span> where <span class="math">\(A\)</span> is a <span class="math">\(n \times n\)</span> sparse matrix and
+<span class="math">\(v\)</span> is a vector of length <span class="math">\(n\)</span>.</p>
+<p>lets the user simply type <code class="docutils literal"><span class="pre">A*v</span></code> to compute the product. does not
+support the notation <code class="docutils literal"><span class="pre">A*v</span></code> and only offers <code class="docutils literal"><span class="pre">A.matvec(v,y)</span></code> where
+<code class="docutils literal"><span class="pre">y</span></code> is a preallocated vector to store the result. Because both and
+allocate such a vector transparently, we take into account the time
+required by to allocate <code class="docutils literal"><span class="pre">y</span></code>. <a class="footnote-reference" href="#id2" id="id1">[1]</a> and &nbsp;2 in
+Table&nbsp;[tab:sparse_matrix_dense_numpy_vector_multiplication]
+represent <code class="docutils literal"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">A*v</span></code> and <code class="docutils literal"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">A.matvec(v)</span></code> respectively while and &nbsp;2
+represent <code class="docutils literal"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">A*v</span></code> and <code class="docutils literal"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">A.‘_mul‘_vector(v)</span></code>, respectively. The
+“2” variants are equivalent to <code class="docutils literal"><span class="pre">A*v</span></code> minus a small convenience layer
+that permits the shorthand notation.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="13%" />
+<col width="12%" />
+<col width="12%" />
+<col width="12%" />
+<col width="13%" />
+<col width="12%" />
+<col width="12%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td colspan="8">y = A*v with texttt{A} a LL sparse matrix</td>
+</tr>
+<tr class="row-even"><td colspan="2">Scenario 1</td>
+<td colspan="2">Scenario 2</td>
+<td colspan="2">Scenario 3</td>
+<td colspan="2">Scenario 4</td>
+</tr>
+<tr class="row-odd"><td>pysparse</td>
+<td>1.000</td>
+<td>pysparse</td>
+<td>1.000</td>
+<td>cysparse 2</td>
+<td>1.000</td>
+<td>pysparse</td>
+<td>1.000</td>
+</tr>
+<tr class="row-even"><td>cysparse 2</td>
+<td>1.158</td>
+<td>cysparse 2</td>
+<td>1.023</td>
+<td>cysparse</td>
+<td>1.023</td>
+<td>cysparse</td>
+<td>1.043</td>
+</tr>
+<tr class="row-odd"><td>cysparse</td>
+<td>1.220</td>
+<td>cysparse</td>
+<td>1.032</td>
+<td>pysparse</td>
+<td>1.045</td>
+<td>cysparse 2</td>
+<td>1.064</td>
+</tr>
+<tr class="row-even"><td>scipy 2</td>
+<td>86.395</td>
+<td>scipy</td>
+<td>101.536</td>
+<td>scipy 2</td>
+<td>55.690</td>
+<td>scipy</td>
+<td>133.495</td>
+</tr>
+<tr class="row-odd"><td>scipy</td>
+<td>87.267</td>
+<td>scipy 2</td>
+<td>102.131</td>
+<td>scipy</td>
+<td>56.398</td>
+<td>scipy 2</td>
+<td>135.512</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="13%" />
+<col width="12%" />
+<col width="12%" />
+<col width="12%" />
+<col width="13%" />
+<col width="12%" />
+<col width="12%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td colspan="8">y = A*v with texttt{A} a CSR sparse matrix</td>
+</tr>
+<tr class="row-even"><td colspan="2">Scenario 1</td>
+<td colspan="2">Scenario 2</td>
+<td colspan="2">Scenario 3</td>
+<td colspan="2">Scenario 4</td>
+</tr>
+<tr class="row-odd"><td>pysparse</td>
+<td>1.000</td>
+<td>cysparse 2</td>
+<td>1.000</td>
+<td>cysparse</td>
+<td>1.000</td>
+<td>pysparse</td>
+<td>1.000</td>
+</tr>
+<tr class="row-even"><td>cysparse 2</td>
+<td>1.178</td>
+<td>cysparse</td>
+<td>1.022</td>
+<td>pysparse</td>
+<td>1.000</td>
+<td>cysparse</td>
+<td>1.018</td>
+</tr>
+<tr class="row-odd"><td>cysparse</td>
+<td>1.212</td>
+<td>pysparse</td>
+<td>1.037</td>
+<td>cysparse 2</td>
+<td>1.009</td>
+<td>cysparse 2</td>
+<td>1.061</td>
+</tr>
+<tr class="row-even"><td>scipy 2</td>
+<td>1.333</td>
+<td>scipy 2</td>
+<td>1.287</td>
+<td>scipy 2</td>
+<td>1.114</td>
+<td>scipy</td>
+<td>1.419</td>
+</tr>
+<tr class="row-odd"><td>scipy</td>
+<td>1.373</td>
+<td>scipy</td>
+<td>1.308</td>
+<td>scipy</td>
+<td>1.135</td>
+<td>scipy 2</td>
+<td>1.421</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="13%" />
+<col width="12%" />
+<col width="12%" />
+<col width="12%" />
+<col width="13%" />
+<col width="12%" />
+<col width="12%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td colspan="8">y = A*v with texttt{A} a CSC sparse matrix</td>
+</tr>
+<tr class="row-even"><td colspan="2">Scenario 1</td>
+<td colspan="2">Scenario 2</td>
+<td colspan="2">Scenario 3</td>
+<td colspan="2">Scenario 4</td>
+</tr>
+<tr class="row-odd"><td>scipy 2</td>
+<td>1.000</td>
+<td>scipy</td>
+<td>1.000</td>
+<td>scipy 2</td>
+<td>1.000</td>
+<td>scipy</td>
+<td>1.000</td>
+</tr>
+<tr class="row-even"><td>scipy</td>
+<td>1.102</td>
+<td>scipy 2</td>
+<td>1.004</td>
+<td>scipy</td>
+<td>1.002</td>
+<td>scipy 2</td>
+<td>1.000</td>
+</tr>
+<tr class="row-odd"><td>cysparse 2</td>
+<td>1.107</td>
+<td>cysparse</td>
+<td>1.084</td>
+<td>cysparse</td>
+<td>1.059</td>
+<td>cysparse</td>
+<td>1.138</td>
+</tr>
+<tr class="row-even"><td>cysparse</td>
+<td>1.146</td>
+<td>cysparse 2</td>
+<td>1.120</td>
+<td>cysparse 2</td>
+<td>1.060</td>
+<td>cysparse 2</td>
+<td>1.148</td>
+</tr>
+</tbody>
+</table>
+<p>Table&nbsp;[tab:sparse_matrix_dense_numpy_vector_multiplication] reveals
+that using LL and CSR formats, and are on par while is slightly faster
+than when using the CSC format.</p>
+<p>The second benchmark in
+Table&nbsp;[tab:csc_sparse_matrix_dense_numpy_vector_multiplication]
+investigates the case where the dense vector is not contiguous in
+memory. We can see that our specialized implementation pays off.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="13%" />
+<col width="12%" />
+<col width="12%" />
+<col width="12%" />
+<col width="13%" />
+<col width="12%" />
+<col width="12%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td colspan="8">$w = Acdot v$ with $A$ a CSC sparse matrix and $v$ is non contiguous</td>
+</tr>
+<tr class="row-even"><td colspan="2">Scenario 1</td>
+<td colspan="2">Scenario 2</td>
+<td colspan="2">Scenario 3</td>
+<td colspan="2">Scenario 4</td>
+</tr>
+<tr class="row-odd"><td>cysparse 2</td>
+<td>1.000</td>
+<td>cysparse 2</td>
+<td>1.000</td>
+<td>cysparse 2</td>
+<td>1.000</td>
+<td>cysparse</td>
+<td>1.000</td>
+</tr>
+<tr class="row-even"><td>cysparse</td>
+<td>1.011</td>
+<td>cysparse</td>
+<td>1.098</td>
+<td>cysparse</td>
+<td>1.006</td>
+<td>cysparse 2</td>
+<td>1.007</td>
+</tr>
+<tr class="row-odd"><td>scipy 2</td>
+<td>1.354</td>
+<td>scipy</td>
+<td>2.273</td>
+<td>scipy 2</td>
+<td>1.733</td>
+<td>scipy 2</td>
+<td>3.193</td>
+</tr>
+<tr class="row-even"><td>scipy</td>
+<td>1.394</td>
+<td>scipy 2</td>
+<td>2.286</td>
+<td>scipy</td>
+<td>1.742</td>
+<td>scipy</td>
+<td>3.216</td>
+</tr>
+</tbody>
+</table>
+<p>Table: CSC sparse matrix with dense non contiguous vector multiplication</p>
+<p>The third and last benchmark in
+Table&nbsp;[tab:sparse_matrix2_dense_numpy_vector_multiplication]
+compares the multiplication of two sparse matrices with a dense vector.
+computes <span class="math">\(A \cdot B \cdot v\)</span> as <span class="math">\(A \cdot (B \cdot v)\)</span> and
+clearly this is faster than first computing <span class="math">\(A \cdot B\)</span> and then
+<span class="math">\((A \cdot B) \cdot v\)</span>. Even when we force to compute
+<span class="math">\(A \cdot (B \cdot v)\)</span>, remains slightly faster.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="13%" />
+<col width="12%" />
+<col width="12%" />
+<col width="12%" />
+<col width="13%" />
+<col width="12%" />
+<col width="12%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td colspan="8">y = A*B*v with texttt{A} a CSR sparse matrix, $B$ a CSC sparse matrix and texttt{v} a dense numpy vector</td>
+</tr>
+<tr class="row-even"><td colspan="2">Scenario 1</td>
+<td colspan="2">Scenario 2</td>
+<td colspan="2">Scenario 3</td>
+<td colspan="2">Scenario 4</td>
+</tr>
+<tr class="row-odd"><td>cysparse</td>
+<td>1.000</td>
+<td>cysparse</td>
+<td>1.000</td>
+<td>cysparse</td>
+<td>1.000</td>
+<td>cysparse</td>
+<td>1.000</td>
+</tr>
+<tr class="row-even"><td>scipy</td>
+<td>5.386</td>
+<td>scipy</td>
+<td>3.921</td>
+<td>scipy</td>
+<td>3.850</td>
+<td>scipy</td>
+<td>5.207</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="13%" />
+<col width="12%" />
+<col width="12%" />
+<col width="12%" />
+<col width="13%" />
+<col width="12%" />
+<col width="12%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td colspan="8">y = A*(B*v) with texttt{A} a CSR sparse matrix, $B$ a CSC sparse matrix and texttt{v} a dense numpy vector</td>
+</tr>
+<tr class="row-even"><td colspan="2">Scenario 1</td>
+<td colspan="2">Scenario 2</td>
+<td colspan="2">Scenario 3</td>
+<td colspan="2">Scenario 4</td>
+</tr>
+<tr class="row-odd"><td>cysparse</td>
+<td>1.000</td>
+<td>cysparse</td>
+<td>1.000</td>
+<td>cysparse</td>
+<td>1.000</td>
+<td>cysparse</td>
+<td>1.000</td>
+</tr>
+<tr class="row-even"><td>scipy</td>
+<td>1.019</td>
+<td>scipy</td>
+<td>1.016</td>
+<td>scipy</td>
+<td>1.011</td>
+<td>scipy</td>
+<td>1.049</td>
+</tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Using <code class="docutils literal"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">numpy.empty(n,</span> <span class="pre">dtype=numpy.float64)</span></code>.</td></tr>
+</tbody>
+</table>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="_sources/benchmarks.rst.txt"
+     rel="nofollow">Source</a>
+</div>
+      
+    </p>
+    <p>
+        &copy; Copyright 2015, Dominique Orban, Sylvain Arreckx and Nikolaj van Omme.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.5.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

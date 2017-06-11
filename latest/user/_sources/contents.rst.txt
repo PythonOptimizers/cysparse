@@ -24,6 +24,7 @@
    cysparse_vs_other_libraries	
    cysparse_cython_users
    cysparse_api
+   benchmarks
    
 
 ..	only:: html
